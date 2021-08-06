@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 26.12.01
-# DateOfRelease: 2021-08-02
+# ReleaseNumber: 27.00.00
+# DateOfRelease: 2021-08-05
 ###############################################################################
 
 
@@ -32,12 +32,16 @@ readonly    GREEN=${BOLD}$(tput setaf 2)
 readonly    YELLOW=${BOLD}$(tput setaf 3)
 readonly    BLUE=${BOLD}$(tput setaf 4)
 
+readonly    CHECKLISTSDIR=$HOME/Documenten/Checklists
+readonly    SCRIPTSDIR=$HOME/kzscripts
 
 ###############################################################################
 # Global variables
 ###############################################################################
 
+declare LOGCMD=''
 declare LOGCMD_CHECK=''
+declare LOGCMD_DEBUG=''
 declare TERMINAL=false
 declare TEXT=''
 
@@ -161,7 +165,7 @@ $command, code: $rc ($rc_desc)"
             exit "$rc"
             ;;
         *)
-            printf "${YELLOW}%b${NORMAL}\n" "$PROGRAM_NAME is onderbroken." >&2
+            printf "${YELLOW}%S${NORMAL}\n" "$PROGRAM_NAME is onderbroken." >&2
             exit "$rc"
             ;;
     esac
@@ -208,7 +212,7 @@ gebruik de opdracht: ${BLUE}wget karelzimmer.nl/s${NORMAL}
                  of: ${BLUE}curl -L karelzimmer.nl/s | bash${NORMAL}
                  of: ${BLUE}wget karelzimmer.nl/s; bash s${NORMAL}
                  of: ${BLUE}$PROGRAM_NAME${NORMAL}"
-            printf "%s\n" "$TEXT" >&2
+            printf "%b\n" "$TEXT" >&2
             exit $SUCCESS
         fi
     fi
@@ -334,9 +338,6 @@ duren)..."
 
 
 process_input() {
-    local karel_full_name=''
-    local ubuntu_full_name=''
-
     install_scriptspackage
 
     # Ben ik een ontwikkelaar?
@@ -418,6 +419,53 @@ install_scriptspackage() {
 
 
 create_development_environment() {
+    check_dependencies
+    process_checklists
+    process_scripts
+    download_website
+}
+
+
+check_dependencies() {
+    printf '%s\n' 'Controleer afhankelijkheden...'
+    if ! command -v git 1> /dev/null; then
+        printf '%s\n' 'Installeer git...'
+        sudo apt-get install --yes git
+    fi
+    if ! command -v lftp 1> /dev/null; then
+        printf '%s\n' 'Installeer lftp...'
+        sudo apt-get install --yes lftp
+    fi
+}
+
+
+process_checklists() {
+    printf '%s\n' 'Git clone/pull Checklists...'
+    if !    git                                             \
+            clone                                           \
+            https://github.com/karelzimmer/Checklists.git   \
+            "$CHECKLISTSDIR"                                |& $LOGCMD; then
+        cd "$CHECKLISTSDIR" || exit $ERROR
+        git config credential.helper store
+        git pull
+    fi
+}
+
+
+process_scripts() {
+    printf '%s\n' 'Git clone/pull kzscripts...'
+    if !    git                                             \
+            clone                                           \
+            https://github.com/karelzimmer/kzscripts.git    \
+            "$SCRIPTSDIR"                                   |& $LOGCMD; then
+        cd "$SCRIPTSDIR" || exit $ERROR
+        git config credential.helper store
+        git pull
+    fi
+}
+
+
+download_website() {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
     local ftp_to=$HOME/uploads/karelzimmer.nl/httpdocs
@@ -426,36 +474,7 @@ create_development_environment() {
     local ftp_host=server106.hosting2go.nl
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
-    local site_tar=https://karelzimmer.nl/apps/kzscripts/kzscripts.tar.gz
-    local temp_tar=''
 
-    # Pull scriptsarchief.
-    TEXT='Download scriptsarchief...'
-    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
-                        --title     'Voortgang'     \
-                        --infobox   "$TEXT"         \
-                        7 30
-    temp_tar=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.tar")
-    wget --output-document="$temp_tar" $site_tar |& $LOGCMD
-
-    TEXT='Extract scriptsarchief...'
-    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
-                        --title     'Voortgang'     \
-                        --infobox   "$TEXT"         \
-                        7 29
-
-    # Verwijder eerst alle bestanden uit mappen die in het archief voorkomen.
-    tar --list --file="$temp_tar" | while IFS= read -r file; do
-        if [[ ${file: -1} = / ]]; then
-            rm --force --recursive "${HOME:?}/$file"*
-        fi
-    done
-
-    # Zet alles wat zonet verwijderd is weer neer uit het archief.
-    tar --extract --gzip --directory="$HOME" --file="$temp_tar" |& $LOGCMD
-    rm  "$temp_tar" |& $LOGCMD
-
-    # Pull website.
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.
         read -rsp "FTP-wachtwoord voor $ftp_host: " < /dev/tty
@@ -468,17 +487,14 @@ create_development_environment() {
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 49
-    if ! command -v lftp 1> /dev/null; then
-        sudo apt-get install --yes lftp |& $LOGCMD
-    fi
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
                 "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
-        printf  "${YELLOW}%b${NORMAL}\n"            \
+        printf  "${YELLOW}%s${NORMAL}\n"            \
                 'Downloaden website is mislukt.'    >&2
-        printf  "${YELLOW}%b${NORMAL}\n" "Controleer de log...!" >&2
+        printf  "${YELLOW}%S${NORMAL}\n" "Controleer de log...!" >&2
         return  $WARNING
     fi
 }

@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2015-2020 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 13.08.02
-# DateOfRelease: 2021-08-02
+# ReleaseNumber: 13.09.00
+# DateOfRelease: 2021-08-05
 ###############################################################################
 
 
@@ -119,7 +119,7 @@ process_input() {
             continue
         fi
         case $script in
-            CHANGELOG*)
+            LICENSE|README.md)
                 continue
                 ;;
             *.1|*.desktop|*.policy)
