@@ -1,0 +1,24 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor WebMail van Zga via Google Chrome.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2020-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 03.01.08
+# DateOfRelease: 2021-05-08
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Zga WebMail
+GenericName=Mailprogramma
+Comment=Start WebMail Zorggroep Almere met Google Chrome
+Keywords=personeel;informatie;
+Categories=KZ-Scripts;
+Exec=google-chrome https://randstad.zorggroep-almere.nl/exchange
+Icon=/usr/share/pixmaps/kz-zga-webmail.png
+NoDisplay=true
+
+# EOF

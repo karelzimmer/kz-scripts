@@ -1,0 +1,17 @@
+# shellcheck shell=bash
+###############################################################################
+# Tab-completion-script voor kzlsinstalled.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2020-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 02.00.14
+# DateOfRelease: 2021-05-08
+###############################################################################
+
+dashoptions='-d --debug -g --gui -h --help -u --usage -v --version'
+complete -o default -W "$dashoptions" kzlsinstalled
+
+# EOF

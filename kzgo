@@ -1,0 +1,64 @@
+#!/usr/bin/python3
+"""
+Updates uitvoeren.
+
+Dit script voert updates uit voor Debian pakketten en snaps.
+"""
+###############################################################################
+# Kortere weg vooor:
+#   sudo apt-get update                                         &&
+#   sudo apt-get upgrade --yes                                  &&
+#   sudo apt-get autoremove --yes                               &&
+#   sudo apt-get autoclean --yes                                &&
+#   if command -v snap 1> /dev/null; then sudo snap refresh; fi &&
+#   if [[ -f /var/run/reboot-required ]]; then echo REBOOT; fi
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Auteursrecht (c) 2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 01.02.00
+# DateOfRelease: 2021-07-10
+###############################################################################
+import sys
+import subprocess
+
+program_name = 'kzgo'
+
+# --- script ---
+
+# Geen argumenten toegestaan.
+try:
+    if sys.argv[1]:
+        print(f'{program_name}: geen opties of argumenten opgeven')
+        sys.exit(0)
+except Exception:
+    pass
+
+# Opdracht als sequence:
+subprocess.run(['sudo', 'apt-get', 'update'])
+
+# Opdracht als raw text:
+subprocess.run('sudo apt-get upgrade --yes', shell=True)
+
+# Opdracht als raw text, vang stdout en stderr op:
+subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
+subprocess.run('sudo apt-get autoclean --yes', shell=True, check=True)
+
+# Heeft dit systeem snaps?
+try:
+    subprocess.run('sudo snap refresh', shell=True)
+except Exception as ex:
+    print(ex)
+
+# Is een reboot nodig?
+try:
+    with open('/var/run/reboot-required') as fh:
+        print(f'{program_name}: REBOOT')
+except FileNotFoundError:
+    pass
+except Exception as ex:
+    print(ex)
+    sys.exit(1)
+
+# EOF

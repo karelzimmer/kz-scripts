@@ -1,0 +1,316 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Applijst maken.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2013-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 18.06.02
+# DateOfRelease: 2021-07-31
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly OUTPUTFILE_1=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-deb-bestanden
+readonly OUTPUTFILE_2=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketbronnen
+readonly OUTPUTFILE_3=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketten
+readonly OUTPUTFILE_4=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-favorieten
+readonly OUTPUTFILE_5=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-snaps
+readonly RUN_AS_SUPERUSER=true
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON
+
+Output in /etc, kzlsinstalled-$HOSTNAME-..."
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
+
+Applijst maken.
+
+Output in /etc, kzlsinstalled-$HOSTNAME-...
+
+Opties:
+$OPTIONS_HELP_COMMON"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        printf  "$PROGRAM_NAME: %s\n%s\n"   \
+                'geen argumenten opgeven'   \
+                "$USAGELINE"                >&2
+        exit $ERROR
+    fi
+
+    check_user
+}
+
+
+process_input() {
+    local text0='Opdrachten worden verwerkt'
+    local text1="[1/5]  Bepaal welke deb-bestanden (Debian-pakketten) zijn \
+geïnstalleerd"
+    local text2="[2/5]  Bepaal welke pakketbronnen (\"repositories\" of \
+\"repo's\") zijn toegevoegd"
+    local text3="[3/5]  Bepaal welke pakketten door de gebruiker zijn \
+geïnstalleerd"
+    local text4='[4/5]  Bepaal welke favorieten in gebruik zijn'
+    local text5='[5/5]  Bepaal welke snaps zijn geïnstalleerd'
+
+    TITLE='Applijst maken'
+    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+    # Voorbeeld: Unable to init server: Kon niet verbinden:
+    #            Verbinding is geweigerd
+    #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
+    #            cannot open display:
+    if $OPTION_GUI; then
+        (
+        printf '%s\n' "#$text1"
+        create_file_installed_without_repo
+        printf '%s\n' "#$text2"
+        create_file_added_repos
+        printf '%s\n' "#$text3"
+        create_file_installed_by_user
+        printf '%s\n' "#$text4"
+        create_file_favorites
+        printf '%s\n' "#$text5"
+        create_file_snaps
+        ) |&
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$TITLE"    \
+                --text      "$text0"    2> >($LOGCMD)
+    else
+        create_file_installed_without_repo  #1
+        create_file_added_repos             #2
+        create_file_installed_by_user       #3
+        create_file_favorites               #4
+        create_file_snaps                   #5
+    fi
+}
+
+
+create_file_installed_without_repo() {
+    local   -i  number_of_lines=0
+    local       header="Dit zijn gedownloade deb-bestanden geïnstalleerd via \
+Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>'."
+    local       footer=''
+
+    printf '%s\n' "$text1..."
+
+    touch "$OUTPUTFILE_1" |& $LOGCMD
+
+    printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_1"
+
+    apt-show-versions --initialize |& $LOGCMD
+    if !    apt-show-versions                       \
+            --brief                                 |
+            grep    --word-regexp                   \
+                    --regexp='No available version' |
+            cut     --delimiter=':'                 \
+                    --fields=1                      >> "$OUTPUTFILE_1"; then
+        true
+    fi
+
+    number_of_lines=$(wc --lines < "$OUTPUTFILE_1")
+    number_of_lines=$((number_of_lines - 2))
+    footer="Dit bestand bevat $number_of_lines door de gebruiker \
+geïnstalleerde deb-bestanden.
+Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
+    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_1"
+}
+
+
+create_file_added_repos() {
+    local   -i  number_of_lines=0
+    local       header="Deze pakketbronnen zijn meestal toegevoegd met de \
+opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>'."
+    local       footer=''
+
+    printf '%s\n' "$text2..."
+
+    touch "$OUTPUTFILE_2" |& $LOGCMD
+
+    printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_2"
+
+    # shellcheck disable=SC2062,SC2022
+    if !    grep    --recursive             \
+                    --no-filename           \
+                    --regexp='^deb '        \
+                    /etc/apt/sources.list*  |
+            grep    --invert-match          \
+                    --regexp='ubuntu.com'   |
+            sort    --unique                >> "$OUTPUTFILE_2"; then
+        true
+    fi
+
+    number_of_lines=$(wc --lines < "$OUTPUTFILE_2")
+    number_of_lines=$((number_of_lines - 2))
+    footer="Dit bestand bevat $number_of_lines door de gebruiker toegevoegde \
+pakketbronnen."
+    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_2"
+}
+
+
+create_file_installed_by_user() {
+    local   -i  number_of_lines=0
+    local       header="Deze pakketten zijn meestal geïnstalleerd met \
+Software of met de opdracht 'sudo apt install <pakketnaam>'."
+    local       footer=''
+
+    printf '%s\n' "$text3..."
+
+    touch "$OUTPUTFILE_3" |& $LOGCMD
+
+    printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_3"
+
+    # Tabel1 = Alle geïnstalleerde pakketten op dit moment
+    #           (dpkg-query --show --showformat='${Package}\n' | sort)
+    # Tabel2 = Alle *automatisch* geïnstalleerde pakketten op dit moment
+    #           (apt-mark showauto | sort)
+    # Tabel3 = Door gebruiker geïnstalleerd (Tabel1-Tabel2)
+    #           (comm -13 Tabel1 Tabel2)
+    (
+        comm    -23 \
+        <(dpkg-query --show --showformat='${Package}\n' | sort) \
+        <(apt-mark   showauto                           | sort) \
+    )   >> "$OUTPUTFILE_3"
+    number_of_lines=$(wc --lines < "$OUTPUTFILE_3")
+    number_of_lines=$((number_of_lines - 2))
+    footer="Dit bestand bevat $number_of_lines door de gebruiker \
+geïnstalleerde pakketten.
+Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
+--regexp='Description:'"
+    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_3"
+}
+
+
+create_file_favorites() {
+    local   -i  number_of_lines=0
+    local       header="Deze favorieten zijn de snelkoppelingen te bereiken \
+via een (soort van) (snel)menu."
+    local       footer=''
+
+    printf '%s\n' "$text4..."
+
+    touch "$OUTPUTFILE_4" |& $LOGCMD
+
+    printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_4"
+
+    if gsettings get org.gnome.shell favorite-apps &> /dev/null; then
+        favorites=$(gsettings get org.gnome.shell favorite-apps)
+    else
+        TEXT="           Niet op GNOME (e.g. Ubuntu). Geen favorieten \
+veiliggesteld."
+        printf '%s\n' "$TEXT" >> "$OUTPUTFILE_4"
+        favorites=''
+    fi
+    favorites=${favorites//,/}
+    favorites=${favorites//.desktop/}
+    favorites=${favorites//\[/}
+    favorites=${favorites//\]/}
+    for favorite in $favorites; do
+        printf '%s\n' "${favorite//"'"/}" >> "$OUTPUTFILE_4"
+    done
+    number_of_lines=$(wc --lines < "$OUTPUTFILE_4")
+    number_of_lines=$((number_of_lines - 2))
+    footer="Dit bestand bevat $number_of_lines favorieten."
+    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_4"
+}
+
+
+create_file_snaps() {
+    local   -i  number_of_lines=0
+    local       header="Deze snaps zijn geïnstalleerd met '[sudo] install \
+SNAP' of met Software."
+    local       footer=''
+
+    printf '%s\n' "$text5..."
+
+    touch "$OUTPUTFILE_5" |& $LOGCMD
+
+    printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_5"
+
+    if ! snap list 2> /dev/null >> "$OUTPUTFILE_5"; then
+        TEXT='snap is niet geïnstalleerd op dit systeem'
+        printf '%s\n' "$TEXT" >> "$OUTPUTFILE_5"
+    fi
+    number_of_lines=$(wc --lines < "$OUTPUTFILE_5")
+    number_of_lines=$((number_of_lines - 3))
+    footer="Dit bestand bevat $number_of_lines snaps."
+    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_5"
+}
+
+
+term_script() {
+    info "
+De bestanden zijn aangemaakt: /usr/local/etc/$PROGRAM_NAME-$HOSTNAME-*
+Deze bestanden kunnen gebruikt worden om de volledigheid van de
+installatie, later door kzinstall, te controleren."
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

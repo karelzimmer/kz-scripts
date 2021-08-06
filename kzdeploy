@@ -1,0 +1,643 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Scripts distribueren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2009-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 60.06.00
+# DateOfRelease: 2021-08-05
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly    THIS_YEAR=$(date +%Y)
+readonly    ARCHIVELOG=$HOME/kzscripts.arch/$THIS_YEAR/CHANGELOG_$THIS_YEAR
+readonly    ARCHIVELOG_GZ=$ARCHIVELOG.gz
+readonly    CHANGELOG=$HOME/kzscripts/CHANGELOG
+readonly    CHANGELOG_GZ=$CHANGELOG.gz
+readonly    CHECKLISTSDIR=$HOME/Documenten/Checklists
+readonly    DEBDIR=$HOME/kzscripts.deb
+readonly    DEBNAME=kzscripts_365_all.deb
+readonly    LASTRUN=$HOME/.$PROGRAM_NAME.lastrun
+readonly    LAST_YEAR=$((THIS_YEAR - 1))
+readonly    SCRIPTSARCHDIR=$HOME/kzscripts.arch/$THIS_YEAR
+readonly    SCRIPTSDIR=$HOME/kzscripts
+readonly    SITEDIR=$HOME/uploads/karelzimmer.nl/httpdocs
+readonly    TARNAME=kzscripts.tar.gz
+
+# De [TAR] en [DEB] worden door dit script gegenereerd.
+readonly -A SOURCE_UPLOADS=(
+           [TAR]=$SITEDIR/apps/kzscripts
+          [DOCS]=$HOME/Documenten/Checklists
+           [DEB]=$SITEDIR/apps/kzscripts
+          [PDFS]=$HOME/Documenten/Checklists
+       [SCRIPTS]=$SCRIPTSDIR
+    )
+readonly -A TARGET_UPLOADS=(
+     [KZSCRIPTS]=$SITEDIR/apps/kzscripts
+          [DOCS]=$SITEDIR/data/linux/documents
+          [PDFS]=$SITEDIR/data/linux/pdfs
+       [SCRIPTS]=$SITEDIR/data/linux/scripts
+    )
+
+# De [BIN] wordt gevuld door SCRIPTSDIR.
+# De [BACKGROUND_PROP] wordt door dit script gegenereerd.
+# Enkele mappen en bestanden (zoals pixmaps en control) staan al in SOURCE_DEB.
+# Te vullen mappen zijn relatief ten opzichte van $DEBDIR.
+readonly -A SOURCE_DEB=(
+       [APPLICATIONS]=/usr/share/applications
+        [BACKGROUNDS]=/usr/share/backgrounds
+    [BACKGROUND_PROP]=/usr/share/gnome-background-properties
+                [BIN]=/usr/bin
+                [DOC]=/usr/share/doc/kzscripts
+                [MAN]=/usr/share/man/man1
+           [POLICY_1]=/usr/share/polkit-1/actions
+             [README]=/usr/share/doc/kzscripts/README
+           [TABCOMPL]=/usr/share/bash-completion/completions
+    )
+readonly    TARGET_DEB=${TARGET_UPLOADS[KZSCRIPTS]}
+
+# Te synchroniseren mappen en bestanden zijn relatief ten opzichte van $HOME.
+readonly -A SOURCE_TAR=(
+          [CHECKLISTS]=Documenten/Checklists
+                 [DEB]=kzscripts.deb
+            [GEBRFOTO]=Afbeeldingen/Gebruikersfoto
+          [ONTWIKKELC]=c_work
+       [ONTWIKKELJAVA]=java_work
+     [ONTWIKKELPYTHON]=python_work
+    [ONTWIKKELSCRIPTS]=scripts_work
+      [SCRIPTSARCHIEF]=kzscripts.arch
+             [SCRIPTS]=kzscripts
+    )
+readonly    TARGET_TAR=${TARGET_UPLOADS[KZSCRIPTS]}
+
+
+readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'n'
+readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON',no-deb'
+readonly    USAGE="Gebruik: $PROGRAM_NAME [-n|--no-deb]
+                  $OPTIONS_USAGE_COMMON
+                  VRIJGAVEBERICHT"
+readonly    HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] VRIJGAVEBERICHT
+
+Scripts distribueren en uploaden.
+
+Opties:
+  -n --no-deb   geen scriptspakket genereren
+$OPTIONS_HELP_COMMON
+
+Argumenten:
+  VRIJGAVEBERICHT
+                vrijgavebericht, geef '=' op voor vorig vrijgavebericht"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare ARGUMENT_MESSAGE=false
+declare MESSAGE_ARGUMENT=''
+declare OPTION_NO_DEB=false
+declare REL_MSG=''
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    local karel_full_name=''
+    local ubuntu_full_name=''
+
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            -n|--no-deb)
+                OPTION_NO_DEB=true
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    while [[ "$*" ]]; do
+        if $ARGUMENT_MESSAGE; then
+            TEXT="argument 'VRIJGAVEBERICHT' eenmaal opgeven"
+            printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+            exit $ERROR
+        else
+            ARGUMENT_MESSAGE=true
+            MESSAGE_ARGUMENT=$1
+        fi
+        shift
+    done
+
+    karel_full_name=$(
+        getent  passwd  karel           |
+        awk     -F:     '{print $5}'    |
+        awk     -F,     '{print $1}'    || true
+        )
+    ubuntu_full_name=$(
+        getent  passwd  ubuntu          |
+        awk     -F:     '{print $5}'    |
+        awk     -F,     '{print $1}'    || true
+        )
+    debian_full_name=$(
+        getent  passwd  user            |
+        awk     -F:     '{print $5}'    |
+        awk     -F,     '{print $1}'    || true
+        )
+    if ! [[ ($USER = karel  && $karel_full_name  = 'Karel Zimmer'    )  ||
+            ($USER = ubuntu && $ubuntu_full_name = 'Live session user') ||
+            ($USER = user   && $debian_full_name = 'Debian Live user')  ]]
+    then
+            TEXT='alleen uitvoeren als ontwikkelaar'
+            printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+            exit $ERROR
+    fi
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    check_user
+}
+
+
+process_input() {
+    check_year_change
+    check_argument_message
+    check_dependencies
+    check_names
+    check_scripts
+    archive_documents
+    archive_scripts
+    create_scriptspackage
+    create_scriptsarchive
+    synchronize_website
+    upload_website
+    install_scriptspackage
+}
+
+
+check_year_change() {
+    if ! [[ -d $SCRIPTSARCHDIR ]]; then
+        info "Archiefmappen van $THIS_YEAR bestaan niet."
+        warning '
+Jaarwisseling!'
+        info "
+Voor de volgende handelingen op volgorde uit:
+"
+info "\
+Start Bestanden
+
+Ga naar Persoonlijke map > kzscripts.arch
+Rechtklik op map $LAST_YEAR en kies Inpakken
+Selecteer .tar.xz en klik op maken.
+Verwijder map $LAST_YEAR
+Maak map $THIS_YEAR aan
+
+Ga naar Persoonlijke map > kzscripts
+Open CHANGELOG.gz > CHANGELOG en maak het bestand leeg
+
+Wijzig in alle bestanden de Auteursrecht-regel van '-$LAST_YEAR' naar \
+'-$THIS_YEAR' en van ' $LAST_YEAR ' naar ' $LAST_YEAR-$THIS_YEAR ':
+~/Documenten/Checklists/
+~/kzscripts/
+~/kzscripts.deb/usr/share/doc/kzscripts/copyright"        |
+    nl  --number-width=6        \
+        --number-format=rn      \
+        --number-separator='  ' \
+        --body-numbering=t
+info "
+Voer alle handelingen hierboven uit en start daarna weer $PROGRAM_NAME."
+    exit $WARNING
+    fi
+}
+
+check_argument_message() {
+    if ! $ARGUMENT_MESSAGE; then
+        read -rp 'Vrijgavebericht, '=' voor vorig vrijgavebericht [=]: '
+        if [[ -z $REPLY ]]; then
+            REL_MSG='='
+        else
+            REL_MSG=$REPLY
+        fi
+    else
+        REL_MSG=$MESSAGE_ARGUMENT
+    fi
+
+    if ! [[ -e "$LASTRUN" ]]; then
+        touch "$LASTRUN"
+    fi
+
+    # Regel sudo maar gelijk voor verderop.
+    sudo true
+}
+
+
+check_dependencies() {
+    if ! command -v enscript 1> /dev/null; then
+        info 'Installeer enscript...'
+        sudo apt-get install --yes enscript |& $LOGCMD
+    fi
+    if ! command -v ghostscript 1> /dev/null; then
+        info 'Installeer ghostscript...'
+        sudo apt-get install --yes ghostscript |& $LOGCMD
+    fi
+    if ! command -v lftp 1> /dev/null; then
+        info 'Installeer lftp...'
+        sudo apt-get install --yes lftp |& $LOGCMD
+    fi
+    if ! command -v rsync 1> /dev/null; then
+        info 'Installeer rsync...'
+        sudo apt-get install --yes rsync |& $LOGCMD
+    fi
+}
+
+
+check_names() {
+    local -i check_rc=0
+
+    info 'Controleer bestandsnamen (kzckname)...'
+    "$SCRIPTSDIR/kzckname"  "$CHECKLISTSDIR"    \
+                            "$DEBDIR"           \
+                            "$SCRIPTSDIR"       || check_rc=$?
+    if [[ $check_rc -ne $SUCCESS ]]; then
+        warning "
+Herstel alle meldingen hierboven en start daarna weer $PROGRAM_NAME."
+        exit $check_rc
+    fi
+}
+
+
+check_scripts() {
+    local -i check_rc=0
+
+    info 'Controleer scripts (kzivp)...'
+    "$SCRIPTSDIR/kzivp" || check_rc=$?
+    if [[ $check_rc -ne $SUCCESS ]]; then
+        warning "
+Herstel alle meldingen hierboven en start daarna weer $PROGRAM_NAME."
+        exit $check_rc
+    fi
+}
+
+
+archive_documents() {
+    local txtfile=''
+    local basefile=''
+    local changes=false
+
+    info 'Archiveer documenten...'
+
+    # Vanuit gedit.
+    rm --force "$HOME"/Documenten/*.pdf
+    for txtfile in "${SOURCE_UPLOADS[PDFS]}"/*.txt; do
+        if [[ $txtfile -nt $LASTRUN ]]; then
+            basefile=$(basename "$txtfile")
+            enscript    --quiet         \
+                        --line-numbers  \
+                        --output=-      \
+                        "$txtfile"      |
+            ps2pdf      -               \
+                        "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" |& $LOGCMD
+        fi
+    done
+
+    # Vanuit LibreOffice.
+    mv  "${SOURCE_UPLOADS[PDFS]}"/*.pdf \
+        "${TARGET_UPLOADS[PDFS]}"       |& $LOGCMD || true
+
+    # Te verwerken documenten staan in CHECKLISTSDIR.
+    cd "$CHECKLISTSDIR" || exit $ERROR
+    for docfile in *; do
+        if ! diff   "$docfile"                          \
+                    "${TARGET_UPLOADS[DOCS]}/$docfile"  &> /dev/null; then
+            changes=true
+            info "    $docfile"
+        fi
+    done
+    if ! $changes; then
+        info '    Geen documenten gewijzigd'
+    fi
+}
+
+
+archive_scripts() {
+    local archivefile=''
+    local changes=false
+    local highlight=''
+    local release_date=''
+    local release_number=''
+    local scriptfile=''
+
+    info 'Archiveer scripts...'
+
+    if [[ -e $CHANGELOG_GZ ]]; then
+        gunzip --force "$CHANGELOG_GZ" |& $LOGCMD
+    fi
+
+    # Te verwerken scripts staan in SCRIPTSDIR.
+    cd "$SCRIPTSDIR" || exit $ERROR
+    for scriptfile in *; do
+
+        if [[ $scriptfile = CHANGELOG* ]]; then
+            continue
+        elif [[ -d "$scriptfile" ]]; then
+            continue
+        fi
+
+        # Archiveer het bestand als deze nieuw of gewijzigd is (deltabepaling).
+        if ! diff   "$scriptfile"                               \
+                    "${TARGET_UPLOADS[SCRIPTS]}/$scriptfile"    &> /dev/null
+        then
+            changes=true
+            info "    $scriptfile"
+            if ! [[ -d $SCRIPTSARCHDIR/$scriptfile ]]; then
+                mkdir "$SCRIPTSARCHDIR/$scriptfile" |& $LOGCMD
+            fi
+            release_number=$(
+                awk -F'ReleaseNumber: '                 \
+                    '/ReleaseNumber: /{print $2;exit}'  \
+                    "$scriptfile"
+                )
+            release_date=$(
+                awk -F'DateOfRelease: '                 \
+                    '/DateOfRelease: /{print $2;exit}'  \
+                    "$scriptfile"
+                )
+            archivefile="${scriptfile}_${release_date}V$release_number"
+            cp      --update                                    \
+                    --preserve                                  \
+                    "$scriptfile"                               \
+                    "$SCRIPTSARCHDIR/$scriptfile/$archivefile"  |& $LOGCMD
+            chmod 'a-x' "$SCRIPTSARCHDIR/$scriptfile/$archivefile" |& $LOGCMD
+            if [[ $REL_MSG = '=' ]]; then
+                REL_MSG=$(
+                    grep    --regexp="$scriptfile"  \
+                            "$CHANGELOG"            |
+                    tail    -1                      |
+                    awk     -F: '{print $NF}'
+                    )
+            fi
+            TEXT="$scriptfile:$release_number:$release_date:$REL_MSG"
+            printf '%s\n' "$TEXT" >> "$CHANGELOG"
+            if grep --quiet --regexp='^''.TH ' "$scriptfile"; then
+                man     --troff "$SCRIPTSDIR/$scriptfile"           |
+                ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
+                else
+                    if grep --quiet                         \
+                            --line-regexp                   \
+                            --regexp='#!''/usr/bin/python3' \
+                            "$scriptfile"; then
+                            highlight=python
+                    elif [[ $scriptfile = *.py ]]; then
+                            highlight=python
+                    elif [[ $scriptfile = *.policy ]]; then
+                            highlight=html
+                    else
+                            highlight=bash
+                    fi
+                    enscript    --quiet                                     \
+                                --color                                     \
+                                --line-numbers                              \
+                                --highlight=$highlight                      \
+                                --title="$scriptfile"                       \
+                                --output=-                                  \
+                                "$SCRIPTSDIR/$scriptfile"                   |
+                    ps2pdf      -                                           \
+                                "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf"   \
+                                |& $LOGCMD
+            fi
+        fi
+    done
+    if ! $changes; then
+        info '    Geen scripts gewijzigd'
+    fi
+
+    sort --version-sort --unique "$CHANGELOG" --output="$CHANGELOG" |& $LOGCMD
+    gzip --best --force "$CHANGELOG" |& $LOGCMD
+    cp "$CHANGELOG_GZ" "$ARCHIVELOG_GZ" |& $LOGCMD
+    chmod 'u=rw,g=r,o=r' -- "$CHANGELOG_GZ" "$ARCHIVELOG_GZ"
+}
+
+
+create_scriptspackage() {
+    if $OPTION_NO_DEB; then
+        info '    Aanmaken scriptspakket overslaan; optie no-deb opgegeven.'
+        return $SUCCESS
+    fi
+
+    # Te verwerken scripts staan in SCRIPTSDIR.
+    cd "$SCRIPTSDIR" || exit $ERROR
+    chmod 'u=rwx,g=rx,o=rx' -- *
+    chmod 'a-x' -- *.*
+
+    # Deze rsync is inclusief CHANGELOG.gz, *.7, *.completion, *.desktop, en
+    # *.policy.
+    rsync   --archive                   \
+            --delete                    \
+            "$SCRIPTSDIR"/              \
+            "$DEBDIR${SOURCE_DEB[BIN]}" |& $LOGCMD
+    info 'Maak scriptspakket...'
+    process_scriptspackage_files
+    create_wallpapapers_configuration_file
+
+    fakeroot dpkg-deb --build "$DEBDIR" "$TARGET_DEB/$DEBNAME" |& $LOGCMD
+}
+
+
+process_scriptspackage_files() {
+    local basename=''
+    local file=''
+    local newfile=''
+    local prefix='nl.karelzimmer.'
+
+    # Changelog (.gz)
+    mv      "$DEBDIR${SOURCE_DEB[BIN]}"/CHANGELOG.gz    \
+            "$DEBDIR${SOURCE_DEB[DOC]}"                 |& $LOGCMD
+
+    # Man-pagina's (.1)
+    rm --force "$DEBDIR${SOURCE_DEB[MAN]}"/*
+    rsync   --archive                       \
+            --delete                        \
+            --remove-source-files           \
+            "$DEBDIR${SOURCE_DEB[BIN]}"/*.1 \
+            "$DEBDIR${SOURCE_DEB[MAN]}"     |& $LOGCMD
+    gzip --best --force "$DEBDIR${SOURCE_DEB[MAN]}"/*.1 |& $LOGCMD
+
+    # Tab-completion-scripts (.completion)
+    rm --force "$DEBDIR${SOURCE_DEB[TABCOMPL]}"/*
+    for file in "$DEBDIR${SOURCE_DEB[BIN]}"/*.completion; do
+        basename=$(basename "$file" .completion)
+        mv "$file" "$DEBDIR${SOURCE_DEB[TABCOMPL]}/$basename" |& $LOGCMD
+    done
+
+    # Bureaublad-configuratiebestanden (.desktop)
+    rm --force "$DEBDIR${SOURCE_DEB[APPLICATIONS]}"/*
+    for file in "$DEBDIR${SOURCE_DEB[BIN]}"/*.desktop; do
+        basename=$(basename "$file")
+        mv "$file" "$DEBDIR${SOURCE_DEB[APPLICATIONS]}/$basename" |& $LOGCMD
+    done
+
+    # PolicyKit actiedefinitiebestanden (.policy)
+    rm --force "$DEBDIR${SOURCE_DEB[POLICY_1]}"/*
+    for file in "$DEBDIR${SOURCE_DEB[BIN]}"/*.policy; do
+        basename=$(basename "$file")
+        newfile="$DEBDIR${SOURCE_DEB[POLICY_1]}/$prefix$basename"
+        mv "$file" "$newfile" |& $LOGCMD
+    done
+}
+
+
+create_wallpapapers_configuration_file() {
+    local wallpaper=''
+    local wallpapers_config_file=kzscripts-wallpapers.xml
+
+    {
+    printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
+    printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
+    printf '%s\n' '<wallpapers>'
+    } > "$DEBDIR${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+
+    # Te verwerken bureaubladachtergronden staan in SOURCE_DEB[BACKGROUNDS].
+    cd "$DEBDIR${SOURCE_DEB[BACKGROUNDS]}" || exit $ERROR
+
+    for wallpaper in *; do
+        printf '%s\n' "    <wallpaper>
+        <name>${wallpaper%.*}</name>
+        <filename>${SOURCE_DEB[BACKGROUNDS]}/$wallpaper</filename>
+        <options>zoom</options>
+        <pcolor>#000000</pcolor>
+        <scolor>#000000</scolor>
+        <shade_type>solid</shade_type>
+    </wallpaper>"           \
+            >> "$DEBDIR${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+    done
+    printf  '%s\n' \
+            '</wallpapers>' >> "$DEBDIR${SOURCE_DEB[BACKGROUND_PROP]}/\
+$wallpapers_config_file"
+}
+
+
+create_scriptsarchive() {
+    # Te synchroniseren mappen en bestanden in SOURCE_TAR zijn relatief ten
+    # opzichte van $HOME.
+    cd "$HOME" || exit $ERROR
+
+    info 'Maak scriptsarchief...'
+
+    tar --create                        \
+        --gzip                          \
+        "${SOURCE_TAR[@]}"              \
+        --file="$TARGET_TAR/$TARNAME"   |&$LOGCMD
+}
+
+
+synchronize_website() {
+    printf "%s\n" 'Synchroniseer website...'
+
+    rsync   --archive                       \
+            --delete                        \
+            "${SOURCE_UPLOADS[DOCS]}"/      \
+            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
+    rsync   --archive                       \
+            --delete                        \
+            "${SOURCE_UPLOADS[SCRIPTS]}"/   \
+            "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
+}
+
+
+upload_website() {
+    local ftp_set='set ssl:verify-certificate no'
+    local ftp_from=$SITEDIR
+    local ftp_to=/httpdocs
+    local ftp_opts='--reverse --delete --verbose'
+    local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to"
+    local ftp_host=server106.hosting2go.nl
+    local ftp_user=kzimmer
+    local ftp_login=$HOME/.kz-$ftp_host
+
+    # Push scriptspakket, scriptsarchief, website.
+    if ! [[ -f $ftp_login ]]; then
+        read -rsp "FTP-wachtwoord voor $ftp_host: "
+        printf '%s\n' "$REPLY" > "$ftp_login"
+        printf '\n'
+        chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
+    fi
+    info 'Upload website...'
+    if ! lftp   --user      "$ftp_user"                 \
+                --password  "$(cat "$ftp_login")"       \
+                -e          "$ftp_set; $ftp_cmd; exit"  \
+                "$ftp_host"                             |& $LOGCMD; then
+        rm      "$ftp_login"
+        warning 'Uploaden website is mislukt.'
+        warning 'Controleer de log...!'
+        exit $WARNING
+    fi
+    sleep 5
+}
+
+
+install_scriptspackage() {
+    info 'Installeer scriptspakket (kzgetscripts)...'
+    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+    if ! wget -O- karelzimmer.nl/s 2> >($LOGCMD) | bash; then
+        warning 'Installeren scriptspakket is niet uitgevoerd.'
+        exit $WARNING
+    fi
+}
+
+
+term_script() {
+    touch "$LASTRUN"
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

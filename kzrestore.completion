@@ -1,0 +1,19 @@
+# shellcheck shell=bash
+###############################################################################
+# Tab-completion-script voor kzrestore.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2020-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 02.00.14
+# DateOfRelease: 2021-05-08
+###############################################################################
+
+dashoptions="-d --debug '-e UITSLUITEN' '--exclude UITSLUITEN' -g --gui -h
+    --help '-s BRONMAP' '--source BRONMAP' '-t DOELMAP' '--target DOELMAP' -u
+    --usage -v --version"
+complete -o default -W "$dashoptions" kzrestore
+
+# EOF

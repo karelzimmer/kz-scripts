@@ -1,0 +1,171 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Controlebestanden opsplitsen.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2016-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 08.02.03
+# DateOfRelease: 2021-05-30
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly SEARCHDIR=$HOME/Downloads
+readonly HASHPROG=sha256sum
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
+
+Controlebestanden opsplitsen.
+
+Opties:
+$OPTIONS_HELP_COMMON"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare ISO_FILE=''
+declare ISO_FILE_FOUND=false
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        printf  "$PROGRAM_NAME: %s\n%s\n"   \
+                'geen argumenten opgeven'   \
+                "$USAGELINE"                >&2
+        exit $ERROR
+    fi
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    check_user
+}
+
+
+process_input() {
+    cd "$SEARCHDIR" || exit $ERROR
+
+    for ISO_FILE in *.iso; do
+
+        if ! [[ -f "$ISO_FILE" ]]; then
+            continue
+        fi
+
+        ISO_FILE_FOUND=true
+
+        create_checksum_file
+
+    done
+
+    if ! $ISO_FILE_FOUND; then
+        warning "Geen beeldbestanden (.iso) gevonden in '$SEARCHDIR'."
+    fi
+}
+
+
+create_checksum_file() {
+    local -i grep_rc=0
+
+    if [[ -e $ISO_FILE.$HASHPROG ]]; then
+        info "Beeldbestand '$ISO_FILE' heeft al controlebestand \
+'$ISO_FILE.$HASHPROG'.\n"
+        return $SUCCESS
+    else
+        # shellcheck disable=SC2062,SC2063
+        grep    --word-regexp           \
+                --regexp=" $ISO_FILE"   \
+                --regexp="*$ISO_FILE"   \
+                --exclude=*.iso         \
+                --exclude=*512*         \
+                --exclude-dir=*         \
+                --no-filename           \
+                -- *                    \
+                > "$ISO_FILE.$HASHPROG" 2> >($LOGCMD) || grep_rc=$?
+        if [[ $grep_rc -ne $SUCCESS ]]; then
+            error "Geen controlesom gevonden voor '$ISO_FILE'.\n"
+        else
+            info "Controlebestand '$ISO_FILE.$HASHPROG' aangemaakt.\n"
+       fi
+    fi
+}
+
+
+term_script() {
+    if $ISO_FILE_FOUND; then
+        info "Om de beeldbestanden (.iso) te controleren voer uit:
+    ${BLUE}cd $SEARCHDIR;$HASHPROG --check *.$HASHPROG; cd -${NORMAL}
+
+
+En om vervolgens USB-sticks te maken voer uit:
+    ${BLUE}kzmkusbs${NORMAL}
+
+
+Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
+    ${BLUE}kzdliso --checksums${NORMAL}"
+    fi
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

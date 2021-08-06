@@ -1,0 +1,366 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kzinstall.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 04.06.02
+.\" DateOfRelease: 2021-07-16
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZINSTALL 1 "kzinstall" "kzscripts 365" "kzinstall"
+.\"
+.\"
+.SH NAAM
+kzinstall \- Apps installeren.
+.\"
+.\"
+.SH SAMENVATTING
+.B kzinstall
+[OPTIE...] [--] [\fIAPP\fR...] [\fIBESTAND\fR...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzinstall\fR installeert apps en wijzigt systeeminstellingen.
+.sp
+De opdrachten die standaard meegeleverd worden bij \fBkzinstall\fR zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.sp
+Standaard wordt met \fBkzinstall\fR de regels in het bestand\
+ '/usr/bin/kzinstall-<distributie>-<versie>-\fIEDITIE\fR.sh' gekopieerd
+naar een tijdelijk bestand.
+.br
+Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
+.br
+Dit bestand bevat opdrachten voor het installeren van apps en het wijzigen van
+systeeminstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
+(e.g. Ubuntu 20.04 desktop).
+.sp
+Als daarna ook bestand\
+ '/usr/bin/kzinstall-<distributie>-<versie>-\fIEDITIE\
+\fR-<computernaam>.sh'
+aanwezig is worden de regels daarin voor <computernaam> toegevoegd aan het
+eerder aangemaakte tijdelijk bestand.
+.sp
+Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB--editie\fR is
+dat aan te passen (e.g. \fIEDITIE\fR server).
+.sp
+Optie \fB--files\fR geeft een lijst van beschikbare installatiebestanden voor
+de huidige distributie, e.g. Ubuntu.
+.br
+Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
+beginnen met '\fBinstal-\fR' en te eindigen met '\fB.sh\fR'.
+.br
+Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
+.sp
+Voor de indeling van de installatiebestanden zie de sectie
+\fBBESTANDSINDELING\fR hieronder.
+.sp
+Optie \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor de
+huidige distributie en versie, e.g. Ubuntu 20.04.
+.br
+Het is mogelijk om \fIAPP\fRs op te geven.
+.sp
+Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in een
+installatiebestand en worden de regels gekopieerd naar een tijdelijk bestand.
+.br
+Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
+.sp
+Het is mogelijk dat na het uitvoeren van \fBkzinstall\fR er extra acties nodig
+zijn.
+Optie \fB--info\fR geeft dan aanvullende instructies weer.
+.br
+Alhoewel \fBkzinstall\fR gericht is op het installeren, met optie
+\fB--remove\fR worden er instructies getoond om de installatie ongedaan te
+maken.
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzinstall\fR
+worden gestart door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
+.sp
+Gebruik (hierna) \fBkzsetup\fR voor het aanpassen van de
+gebruikersinstellingen.
+.\"
+.\"
+.SH BESTANDSINDELING
+De te verwerken bestanden dienen te beginnen met '\fBkzinstal-\fR' en te
+eindigen met '\fB.sh\fR'.
+.sp
+De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+.br
+De opdrachten standaard meegeleverd bij \fBkzinstall\fR zijn zodanig opgesteld
+dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft; idempotentie.
+.sp
+Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
+regel) er zijn en hoe deze regels verwerkt worden.
+.sp
+Zie \fBTabel 2\fR voor een voorbeeld van de \fBvolgorde\fR van deze regels in
+een installatiebestand.
+Meer voorbeelden zijn te zien via de opdracht \fBkzinstall --cat\fR.
+.sp
+.sp
+.br
+.B Tabel 1. Soorten regels en hun verwerking
+.TS
+allbox tab(:);
+lb | lb.
+T{
+Regelsoort
+T}:T{
+Beschrijving
+T}
+.T&
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l.
+T{
+#1 APP
+T}:T{
+Wordt gebruikt om regels te vinden voor APP.
+T}
+T{
+#2 BESCHRIJVING
+T}:T{
+Bevat een BESCHRIJVING van de opdrachten.
+T}
+T{
+#3 INSTRUCTIE
+T}:T{
+Bevat aanvullende INSTRUCTIEs na het installeren van APP.
+T}
+T{
+#4 INSTRUCTIE
+T}:T{
+Bevat INSTRUCTIEs voor het verwijderen van APP.
+T}
+T{
+.sp
+T}:T{
+Wordt overgeslagen (is leeg).
+T}
+T{
+#
+T}:T{
+Wordt overgeslagen (is commentaar).
+T}
+T{
+*
+T}:T{
+Wordt als opdracht verwerkt (idempotent).
+T}
+.TE
+.sp
+.sp
+.br
+.B Tabel 2. Volgorde van regels in een installatiebestand
+.TS
+box tab(:);
+lb | lb.
+T{
+Regelsoort
+T}:T{
+Beschrijving
+T}
+.T&
+- | -
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l.
+T{
+# Software installeren
+T}:T{
+Commentaar.
+T}
+T{
+.sp
+T}:T{
+Lege regel.
+T}
+T{
+#1 google-chrome
+T}:T{
+Naam voor Google Chrome; voor argument APP.
+T}
+T{
+#2 Google Chrome installeren
+T}:T{
+Beschrijving.
+T}
+T{
+sudo apt-get install --yes google-chrome-stable
+T}:T{
+Opdracht.
+T}
+T{
+#3 1. Start Google Chrome.
+T}:T{
+Installatie-instructies; voor optie info.
+T}
+T{
+#3 2. Controleer de werking.
+T}:T{
+    "               "
+T}
+T{
+#4 Start Terminalvenster en voer uit:
+T}:T{
+Verwijder-instructies; voor optie remove.
+T}
+T{
+#4    sudo apt remove google-chrome-stable
+T}:T{
+    "               "
+T}
+.TE
+.\"
+.\"
+.sp
+.SH OPTIES
+.TP
+\fB-a\fR, \fB--apps\fR
+Toon een lijst van te installeren apps.
+.TP
+\fB-c\fR, \fB--cat\fR
+Toon de inhoud van de (opgegeven) installatiebestanden.
+.br
+Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
+.TP
+\fB-e\fR, \fB--edition=\fIEDITIE\fR
+Gebruik editie \fIEDITIE\fR.
+.TP
+\fB-f\fR, \fB--files\fR
+Toon een lijst van beschikbare installatiebestanden.
+.TP
+\fB-i\fR, \fB--info\fR
+Toon aanvullende instructies na het installeren van apps.
+.TP
+\fB-r\fR, \fB--remove\fR
+Toon instructies voor het verwijderen van apps.
+.TP
+\fB-s\fR, \fB--simulate\fR
+Geen actie, maar simuleer de installatie, en toon de opdrachten die uitgevoerd
+zouden worden.
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzinstall').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH BESTANDEN
+/usr/bin/kzinstall-<distributie>-<versie>-\fIEDITIE\fR.sh
+.RS
+Standaard installatiebestand als er geen \fIBESTAND\fRen zijn opgegeven, \
+\fIEDITIE\fR is standaard desktop.
+.RE
+.sp
+/usr/bin/kzinstall-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+.RS
+Standaard installatiebestand voor computernaam als er geen \fIBESTAND\fRen zijn
+opgegeven, \fIEDITIE\fR is standaard desktop.
+.RE
+.sp
+/tmp/kzinstall-XXXXXXXXXX.cmds
+.RS
+Tijdelijk installatiebestand.
+.RE
+.sp
+/tmp/kzinstall-XXXXXXXXXX.text
+.RS
+Tijdelijk tekstbestand.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+Checklist installatie
+.RS 4
+https://karelzimmer.nl
+.RE
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkzinstall\fR
+.RS
+Installeer alles wat in de standaard installatiebestenden staat.
+Hiervoor is ook starter 'Apps installeren' beschikbaar.
+.RE
+.sp
+\fBkzinstall google-chrome\fR
+.RS
+Installeer Google Chrome.
+.RE
+.sp
+\fBkzinstall google-chrome --info\fR
+.RS
+Toon aanvullende instructies na het installeren van Google Chrome.
+Rechtsklik op starter 'Apps installeren' en kies 'Info'.
+.RE
+.sp
+\fBkzinstall google-chrome --remove\fR
+.RS
+Toon instructies voor het verwijderen van Google Chrome.
+Rechtsklik op starter 'Apps installeren' en kies 'Verwijderen'.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2009-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzcommon.sh\fR(1),
+\fBkzmenu\fR(1),
+\fBkzsetup\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzinstall is onderdeel van het pakket kzscripts en is beschikbaar
+vanaf Karel Zimmer Linux Scripts
+<https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

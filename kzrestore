@@ -1,0 +1,598 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Back-up terugzetten.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2007-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 38.08.01
+# DateOfRelease: 2021-06-26
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
+readonly EXCLUDEFILE_DEFAULT_CONTENT="\
+$(find /etc/skel -type f -exec basename '{}' \; | awk '$0="/home/*/"$0')"
+# Hieboven worden de bestanden opgenomen die bij het aanmaken van een
+# gebruiker worden neergezet in $HOME.  Meestal zijn dit de bestanden
+# .bash_logout, .bashrc, examples.desktop, en .profile (bij Ubuntu).
+# Deze bestanden terugzetten bij een nieuwe versie van Linux betekent dat
+# deze bestanden worden teruggezeten naar de oude versie; niet wenselijk.
+readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
+readonly SELECTION_DEFAULT=''
+readonly RUN_AS_SUPERUSER=true
+readonly SOURCE_DEFAULT=/media/
+readonly TARGET_DEFAULT=/
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:s:t:'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:,exclude:'
+readonly USAGE="Gebruik: $PROGRAM_NAME [-e|--exclude=UITSLUITEN]... \
+[-s|--source=BRON] [-t|--target=DOEL]
+                   $OPTIONS_USAGE_COMMON
+                   [SELECTIE...]"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [SELECTIE...]
+
+Back-up terugzetten.
+
+Opties:
+  -e --exclude=UITSLUITEN
+                sluit uit bestand of map in UITSLUITEN
+  -s --source=BRONMAP
+                zoek back-up vanaf de BRONMAP
+  -t --target=DOELMAP
+                zet back-up terug in de DOELMAP
+$OPTIONS_HELP_COMMON
+
+Argumenten:
+  SELECTIE      zet opgegeven mappen en bestanden terug"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare -a  EXCLUDE_ARGUMENT=''
+declare     ARGUMENT_SELECTION=false
+declare -a  SELECTION=''
+declare -a  SELECTION_ARGUMENT=''
+declare     BACKUP=''
+declare     BACKUPSIZE_HUMAN=''
+declare -i  BACKUPSIZE_MACHINE=0
+declare -i  TAR_RC=0
+declare     OPTION_EXCLUDE=false
+declare     OPTION_SOURCE=false
+declare     OPTION_TARGET=false
+declare     SOURCE=''
+declare     SOURCE_ARGUMENT=''
+declare -i  SYNC_RC=0
+declare     TARGET=''
+declare     TARGET_ARGUMENT=''
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    local   -i  exclude_arg_num=0
+    local   -i  select_arg_num=0
+    local   -i  select_num=0
+
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            -e|--exclude)
+                OPTION_EXCLUDE=true
+                EXCLUDE_ARGUMENT[$exclude_arg_num]=$2
+                ((++exclude_arg_num))
+                shift 2
+                ;;
+            -s|--source)
+                if $OPTION_SOURCE; then
+                    TEXT="optie '$1' eenmaal opgeven"
+                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
+                else
+                    OPTION_SOURCE=true
+                    SOURCE_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
+            -t|--target)
+                if $OPTION_TARGET; then
+                    TEXT="optie '$1' eenmaal opgeven"
+                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
+                else
+                    OPTION_TARGET=true
+                    TARGET_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if $OPTION_SOURCE; then
+        SOURCE=$SOURCE_ARGUMENT
+        if ! [[ -d $SOURCE ]]; then
+            TEXT="map '$SOURCE' bestaat niet"
+            printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+            exit $ERROR
+        fi
+    else
+        SOURCE=$SOURCE_DEFAULT
+    fi
+
+    if $OPTION_TARGET; then
+        if ! [[ -d $TARGET_ARGUMENT ]]; then
+            TEXT="map '$TARGET_ARGUMENT' bestaat niet"
+            printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+            exit $ERROR
+        fi
+        TARGET=$TARGET_ARGUMENT
+    else
+        TARGET=$TARGET_DEFAULT
+    fi
+
+    while [[ "$*" ]]; do
+        ARGUMENT_SELECTION=true
+        SELECTION_ARGUMENT[$select_arg_num]=$1
+        ((++select_arg_num))
+        shift
+    done
+    if $ARGUMENT_SELECTION; then
+        for select_num in "${!SELECTION_ARGUMENT[@]}"; do
+            # Verwijder slash aan het begin en voeg * toe aan begin en einde
+            # voor optie wildcards tar extract.
+            if [[ ${SELECTION_ARGUMENT[$select_num]:0:1} = '/' ]]; then
+                SELECTION[$select_num]="*${SELECTION_ARGUMENT[$select_num]:1}*"
+            else
+                SELECTION[$select_num]="*${SELECTION_ARGUMENT[$select_num]}*"
+            fi
+        done
+    else
+        SELECTION[0]=$SELECTION_DEFAULT
+    fi
+
+    check_user
+    # Na check_user voor toegang tot media.
+    request_input
+}
+
+
+request_input() {
+    if $OPTION_GUI; then
+        request_input_gui
+    else
+        request_input_tui
+    fi
+}
+
+
+request_input_gui() {
+    local       filename="${SOURCE_ARGUMENT:-/media}"
+    local   -i  file_selected=0
+
+    TITLE='Kies de terug te zetten back-up'
+    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+    # Voorbeeld: Unable to init server: Kon niet verbinden:
+    #            Verbinding is geweigerd
+    #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
+    #            cannot open display:
+    BACKUP="$(
+        zenity  --file-selection            \
+                --width         600         \
+                --height        50          \
+                --title         "$TITLE"    \
+                --filename      "$filename" \
+                --file-filter   '*.tar'     2> >($LOGCMD)
+        )"      || file_selected=$?
+    if [[ $file_selected -ne 0 ]]; then
+        warning 'Geen back-up geselecteerd.
+
+Geen back-up teruggezet!'
+        exit $WARNING
+    fi
+}
+
+
+request_input_tui() {
+    local       range=''
+    local   -a  buparray
+    local   -i  bupnum=0
+
+    info "Er wordt naar back-ups gezocht vanaf $SOURCE.
+Het medium waarop de back-up staat dient aangekoppeld te zijn.
+Voorbeelden van een medium zijn een (externe) (netwerk)schijf,
+USB-stick, CD, of DVD.
+Zoek nu naar back-ups van deze computer (dit kan even duren)..."
+
+    show_backups "$HOSTNAME"
+
+    if [[ $bupnum -eq 0 ]]; then
+        warning "Geen back-ups gevonden van deze computer in $SOURCE."
+        REPLY='A'
+    fi
+
+    if [[ $bupnum -gt 0 ]]; then
+        printf '\n%s\n' "Kies nummer, of A om te zoeken naar alle back-ups, \
+en S om te stoppen."
+        if [[ $bupnum -eq 1 ]]; then
+            range=''
+        else
+            range="-$bupnum"
+        fi
+        while true; do
+            read -rp "Terugzetten back-up nummer [1$range, of A, of S, \
+standaard 1]: "
+            case $REPLY in
+                 '')
+                    BACKUP=${buparray[1]}
+                    break
+                    ;;
+                 a|A)
+                    break
+                    ;;
+                 s|S)
+                    exit $SUCCESS
+                    ;;
+                *[^[:digit:]]*)
+                    printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
+                    continue
+                    ;;
+                *)
+                    if [[ $REPLY -ge 1 && $REPLY -le $bupnum ]] &> /dev/null
+                    then
+                        BACKUP=${buparray[$REPLY]}
+                        break
+                    else
+                        printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
+                        continue
+                    fi
+                    ;;
+            esac
+        done
+    fi
+
+    if [[ $REPLY = [A,a] ]]; then
+        printf '\n%s\n' "Zoek nu naar back-ups van alle computers (dit kan \
+even duren)..."
+        bupnum=0
+        show_backups ''
+        if [[ $bupnum -eq 0 ]]; then
+            warning "Geen back-ups gevonden in $SOURCE."
+        info "
+Gebruik optie source om op te geven waar de back-up gevonden kan worden.
+Voorbeeld: $PROGRAM_NAME --source BRONMAP
+$USAGELINE" >&2
+            exit $WARNING
+        elif [[ $bupnum -eq 1 ]]; then
+            range=''
+        else
+            range="-$bupnum"
+        fi
+        printf '\n%s\n' "Kies nummer, of S om te stoppen."
+        while true; do
+            read -rp "Terugzetten back-up nummer [1$range, of S, \
+standaard S]: "
+            case $REPLY in
+                 s|S|'')
+                    exit $SUCCESS
+                    ;;
+                *[^[:digit:]]*)
+                    printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
+                    continue
+                    ;;
+                *)
+                    if [[ $REPLY -ge 1 && $REPLY -le $bupnum ]] &> /dev/null
+                    then
+                        BACKUP=${buparray[$REPLY]}
+                        break
+                    else
+                        printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
+                        continue
+                    fi
+                    ;;
+            esac
+        done
+    fi
+}
+
+
+show_backups() {
+    local search4=${1-search4?}
+    local backup=''
+    local -i bupnumlen=2
+    local dirname=''
+    local filename=''
+    local filesize_human=''
+
+    # Zoek vanaf bronmap ("$SOURCE") naar back-ups.  Find zoals hier gebruikt
+    # levert, gescheiden door een TAB,  back-upnaam en directory waarin de
+    # back-up zich bevindt.  De sort sorteert op back-upnaam aflopend, dat is
+    # van nieuw naar oud.
+
+    while read -r backup; do
+        filename=$(printf '%s' "$backup" | cut --fields=1)
+        dirname=$( printf '%s' "$backup" | cut --fields=2)
+        filesize_human=$(
+            du  --apparent-size         \
+                --block-size=1          \
+                --human-readable        \
+                "$dirname/$filename"    |
+            awk '{print $1}'
+            )
+
+        ((++bupnum))
+        buparray[$bupnum]=$dirname/$filename
+
+        if [[ $bupnum -eq 1 ]]; then
+            if [[ -z $search4 ]]; then
+                printf '\n%s\n' "De volgende back-ups zijn gevonden:"
+            else
+                printf '\n%s\n' "De volgende back-ups van $search4 zijn \
+gevonden, van nieuw naar oud:"
+            fi
+        fi
+
+        printf '%+*s  %s\t%s\t%s\n' $bupnumlen $bupnum "$(basename \
+"$filename" .tar)" "$filesize_human"'iB' "$dirname"
+    done < <(
+        find    "$SOURCE"                           \
+                -noleaf                             \
+                -type f                             \
+                -name 'backup*'"$search4"'*.tar'    \
+                -printf '%f\t%h\n'                  \
+                2> >($LOGCMD)                       |
+        sort    --reverse
+        )
+}
+
+
+process_input() {
+    local select=''
+    local size_num=0
+    local size_unit=''
+
+    printf '%s\n' "$EXCLUDEFILE_DEFAULT_CONTENT" > "$EXCLUDEFILE_DEFAULT"
+
+    if $OPTION_EXCLUDE; then
+        for exclude in "${EXCLUDE_ARGUMENT[@]}"; do
+            printf '%s\n' "$exclude" >> "$EXCLUDEFILE_OPTIONAL"
+        done
+    else
+        printf '\n' > "$EXCLUDEFILE_OPTIONAL"
+    fi
+
+    TITLE='Back-up terugzetten'
+    TEXT='Controleer beschikbare schijfruimte (dit kan even duren)...'
+    if $OPTION_GUI; then
+        # Met "|& zenity --progress" worden globale variabelen uit
+        # aangeroepen functies niet doorgegeven, vandaar de
+        # 'process substitution' met "> >(zenity...)".
+        controleer_space > >(
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$TITLE"    \
+                    --text      "$TEXT"     2> >($LOGCMD)
+            )
+    else
+        info "$TEXT"
+        controleer_space
+    fi
+
+    determine_file_size
+
+    if $ARGUMENT_SELECTION; then
+        select=${SELECTION[*]}
+    else
+        select='"alles"'
+    fi
+    if [[ $TARGET = '/' ]]; then
+        target='"originele plek"'
+    else
+        target=$TARGET
+    fi
+    size_num=${BACKUPSIZE_HUMAN%?}
+    size_unit=${BACKUPSIZE_HUMAN: -1}
+    TEXT="Selectie $select uit backup $(basename "$BACKUP") \
+[$size_num ${size_unit}iB] naar $target terugzetten..."
+    check_on_ac_power
+    restore_backup
+}
+
+
+controleer_space() {
+    local filesys=''
+    local free_human=''
+    local -i free_bytes=0
+    local -i need_bytes=0
+    local mounted=''
+    local need_human=''
+
+    need_bytes=$(
+        du  --apparent-size                         \
+            --block-size=1                          \
+            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
+            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
+            --summarize                             \
+            --total                                 \
+            "$BACKUP"                               |
+        awk 'END{print $1}'
+        )
+    free_bytes=$(df --block-size=1 "$TARGET" | awk 'END{print $4}')
+
+    if [[ $need_bytes -gt $free_bytes ]]; then
+        filesys=$(df "$TARGET" | awk 'END{print $1}')
+        mounted=$(df "$TARGET" | awk 'END{print $6}')
+        need_human=$(
+            du  --apparent-size                         \
+                --block-size=1                          \
+                --exclude-from="$EXCLUDEFILE_DEFAULT"   \
+                --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
+                --human-readable                        \
+                --summarize                             \
+                --total                                 \
+                "$BACKUP"                               |
+            awk 'END{print $1}'
+            )
+        free_human=$(df --human-readable "$TARGET" | awk 'END{print $4}')
+
+        if [[ ${SELECTION[0]} = "$SELECTION_DEFAULT" ]]; then
+            error "Te weinig schijfruimte op $mounted (bestandssysteem \
+$filesys)
+voor het terugzetten van ALLES in $(basename "$BACKUP") naar $TARGET.
+Overweeg het gebruik van optie SELECTIE.
+$USAGELINE"
+            exit $ERROR
+        fi
+        warning "Mogelijk te weinig schijfruimte (hangt af van de selectie)
+op $mounted (bestandssysteem $filesys)
+voor het terugzetten van ${SELECTION[*]} in $(basename "$BACKUP") naar \
+$TARGET).
+De HELE back-up is ${need_human}iB groot, beschikbaar is ${free_human}iB."
+    fi
+}
+
+
+determine_file_size() {
+    BACKUPSIZE_HUMAN=$(
+        du  --apparent-size     \
+            --block-size=1      \
+            --human-readable    \
+            "$BACKUP"           |
+        awk '{print $1}'
+        )
+
+    BACKUPSIZE_MACHINE=$(
+        du  --apparent-size     \
+            --block-size=1      \
+            "$BACKUP"           |
+        awk '{print $1}'
+        )
+}
+
+
+restore_backup() {
+    if $OPTION_GUI; then
+        (
+        pv  --size="$BACKUPSIZE_MACHINE"            \
+            --numeric                               \
+            < "$BACKUP"                             |
+        tar --extract                               \
+            --directory="$TARGET"                   \
+            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
+            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
+            --file=-                                \
+            --wildcards                             \
+            "${SELECTION[@]}"                       \
+            2> >($LOGCMD)
+        )   2>&1                                    |
+        zenity  --progress                          \
+                --auto-close                        \
+                --no-cancel                         \
+                --time-remaining                    \
+                --width     600                     \
+                --height    50                      \
+                --title     "$TITLE"                \
+                --text      "$TEXT"                 2> >($LOGCMD) || TAR_RC=$?
+    else
+        info "$TEXT"
+        pv  --size="$BACKUPSIZE_MACHINE"            \
+            < "$BACKUP"                             |
+        tar --extract                               \
+            --directory="$TARGET"                   \
+            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
+            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
+            --file=-                                \
+            --wildcards                             \
+            "${SELECTION[@]}"                       2> >($LOGCMD) || TAR_RC=$?
+    fi
+
+    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)...'
+    if $OPTION_GUI; then
+        sync                                        |
+        zenity  --progress                          \
+                --pulsate                           \
+                --auto-close                        \
+                --no-cancel                         \
+                --width     600                     \
+                --height    50                      \
+                --title     "$TITLE"                \
+                --text      "$TEXT"                 2> >($LOGCMD) || SYNC_RC=$?
+    else
+        info "$TEXT"
+        sync || SYNC_RC=$?
+    fi
+}
+
+
+term_script() {
+    TEXT=''
+    if [[ "$BACKUP" = /media/* ]]; then
+        TEXT='
+
+Koppel zelf (veilig!) het back-up-medium af.'
+    fi
+    if [[ $TAR_RC -eq $SUCCESS && $SYNC_RC -eq $SUCCESS ]]; then
+        info "De back-up is teruggezet.$TEXT"
+        exit $SUCCESS
+    else
+        warning "De back-up is niet of slechts gedeeltelijk teruggezet.
+
+Zie onderstaande meldingen:
+$(eval "$LOGCMD_CHECK")$TEXT"
+        exit $WARNING
+    fi
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

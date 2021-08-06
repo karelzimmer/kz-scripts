@@ -1,0 +1,24 @@
+###############################################################################
+# Bureaubladbestand voor starten VirtualBox VM hugowin732 op pc-van-hugo.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2017-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 04.01.08
+# DateOfRelease: 2021-05-08
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=HugoWin732 starten
+GenericName=PC-virtualisatie-oplossing
+Comment=Start VirtualBox VM hugowin732
+Keywords=vbox;virtualisatie;
+Categories=KZ-Scripts;
+Exec=VBoxManage startvm hugowin732
+Icon=virtualbox
+NoDisplay=true
+
+# EOF

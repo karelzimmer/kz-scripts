@@ -1,0 +1,33 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzrestore.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2016-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 03.05.02
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Restore backup
+Name[nl]=Back-up terugzetten
+GenericName=Restore progam
+GenericName[nl]=Herstelprogramma
+Comment=Restore files and folders from a backup
+Comment[nl]=Zet bestanden en mappen terug uit een back-up (reservekopie)
+Keywords=kzrestore;restore;copy;
+Keywords[nl]=kzrestore;restore;back-up;reservekopie;
+Categories=KZ-Scripts;
+Exec=pkexec /usr/bin/kzrestore --gui
+Icon=/usr/share/pixmaps/kzrestore.svg
+Actions=version;
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen
+Exec=/usr/bin/kzrestore --gui --version
+
+# EOF

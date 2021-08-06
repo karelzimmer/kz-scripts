@@ -1,0 +1,33 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzbackup.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2015-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 03.05.02
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Make backup
+Name[nl]=Back-up maken
+GenericName=Backup program
+GenericName[nl]=Back-upprogramma
+Comment=Back up folders and files
+Comment[nl]=Maak een back-up (reservekopie) van mappen en bestanden
+Keywords=kzbackup;copy;restore;
+Keywords[nl]=kzbackup;reservekopie;herstel;
+Categories=KZ-Scripts;
+Exec=pkexec /usr/bin/kzbackup --gui
+Icon=/usr/share/pixmaps/kzbackup.svg
+Actions=version;
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen
+Exec=/usr/bin/kzbackup --gui --version
+
+# EOF

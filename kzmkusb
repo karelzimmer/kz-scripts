@@ -1,0 +1,305 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# USB-sticks maken.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2014-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 17.06.01
+# DateOfRelease: 2021-07-22
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly DEVICE_DEFAULT=/dev/sdb
+readonly SOURCE_DEFAULT=/home/${SUDO_USER:-$USER}/Downloads
+readonly RUN_AS_SUPERUSER=true
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON's:t:'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:'
+readonly USAGE="Gebruik: $PROGRAM_NAME [-s|--source=BRON] [-t|--target=DOEL]
+                 $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--]
+
+USB-sticks maken.
+
+Apties:
+  -s --source=BRONMAP
+                gebruik beeldbestand (.iso) in de BRONMAP
+  -t --target=APPARAAT
+                gebruik de opgegeven USB-stick-device APPARAAT
+$OPTIONS_HELP_COMMON"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare DEVICE=''
+declare NO_FILES_FOUND=true
+declare OPTION_SOURCE=false
+declare OPTION_TARGET=false
+declare SOURCEDIR=''
+declare SOURCE_ARGUMENT=''
+declare TARGET_ARGUMENT=''
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            -s|--source)
+                if $OPTION_SOURCE; then
+                    TEXT="optie '$1' eenmaal opgeven"
+                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
+                else
+                    OPTION_SOURCE=true
+                    SOURCE_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
+            -t|--target)
+                if $OPTION_TARGET; then
+                    TEXT="optie '$1' eenmaal opgeven"
+                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
+                else
+                    OPTION_TARGET=true
+                    TARGET_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        printf  "$PROGRAM_NAME: %s\n%s\n"   \
+                'geen argumenten opgeven'   \
+                "$USAGELINE"                >&2
+        exit $ERROR
+    fi
+
+    if $OPTION_SOURCE; then
+        SOURCEDIR=$SOURCE_ARGUMENT
+    else
+        SOURCEDIR=$SOURCE_DEFAULT
+    fi
+    if ! [[ -d $SOURCEDIR ]]; then
+        TEXT="map '$SOURCEDIR' bestaat niet"
+        printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        exit $ERROR
+    fi
+
+    if $OPTION_TARGET; then
+        DEVICE=$TARGET_ARGUMENT
+    else
+        DEVICE=$DEVICE_DEFAULT
+    fi
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    check_user
+    request_input
+}
+
+
+request_input() {
+    warning 'De volgende /dev/sd schijven en partities zijn aanwezig:'
+    TEXT='Gebruik optie --target om een ander device op te geven.'
+    if findmnt --list --output=SOURCE,TARGET | grep --regexp='/dev/sd'; then
+        warning "
+$DEVICE wordt gebruikt als doel en OVERSCHREVEN!"
+        while true; do
+            read -rp 'Is dit OK? [j/N]: '
+            case $REPLY in
+                j*|J*)
+                    break
+                    ;;
+                n*|N*|'')
+                    printf '%s\n%s\n' "$TEXT" "$USAGELINE"
+                    exit $SUCCESS
+                    ;;
+                *)
+                    printf '%b\n' "${UP_ONE_LINE}${ERASE_LINE}"
+                    continue
+                    ;;
+            esac
+        done
+    else
+        warning "
+Geen $DEVICE gevonden om te gebruiken als doel!"
+        printf '%s\n%s\n' "$TEXT" "$USAGELINE"
+        exit $WARNING
+    fi
+}
+
+
+process_input() {
+    local -i isosize=0
+    local usbname=''
+    local file=''
+
+    NO_FILES_FOUND=true
+
+    for file in "$SOURCEDIR"/*.iso; do
+
+        if ! [[ -f "$file" ]]; then
+            continue
+        fi
+
+        NO_FILES_FOUND=false
+        usbname=$(basename "$file" .iso | tr '-' ' ')
+
+        printf "\n%s\n" "$usbname"
+
+        while true; do
+            read -rp 'maken/Overslaan/stoppen? [m/O/s]: '
+            case $REPLY in
+                m*|M*)
+                    isosize=$(
+                        du  --apparent-size \
+                            --block-size=1  \
+                            "$file"         |
+                        awk '{print $1}'
+                        )
+                    check_on_ac_power
+                    create_usb_stick "$file"
+                    while true; do
+                        read -rp "Nog een USB-stick '$usbname' maken? [j/N]: "
+                        case $REPLY in
+                            j*|J*)
+                                check_on_ac_power
+                                create_usb_stick "$file"
+                                continue
+                                ;;
+                            n*|N*|'')
+                                printf '%s\n' 'Klaar.'
+                                break
+                                ;;
+                            *)
+                                printf '%b\n' "${UP_ONE_LINE}${ERASE_LINE}"
+                                continue
+                                ;;
+                        esac
+                    done
+                    break
+                    ;;
+                o*|O*|'')
+                    printf '%s\n' 'Overgeslagen.'
+                    break
+                    ;;
+                s*|S*)
+                    exit $SUCCESS
+                    ;;
+                *)
+                    printf '%b\n' "${UP_ONE_LINE}${ERASE_LINE}"
+                    continue
+                    ;;
+            esac
+        done
+    done
+
+    if $NO_FILES_FOUND; then
+        warning "Geen beeldbestanden (.iso) gevonden in map '$SOURCEDIR'."
+        exit $WARNING
+    fi
+}
+
+
+create_usb_stick() {
+    local dd_from=${1:-dd_from?}
+
+    read -rp "Plaats USB-stick '$usbname', gevolgd door Enter [Enter]: "
+    if [[ -e $DEVICE ]]; then
+        info "USB-stick $usbname wordt gemaakt..."
+
+        dd  if="$dd_from"       \
+            status=none         |
+        pv  --size="$isosize"   |
+        dd  of=$DEVICE          \
+            bs=4M               \
+            status=none
+
+        info "Gegevens schrijven naar $usbname (dit kan even duren)..."
+        sync
+
+        info "USB-stick '$usbname' is gemaakt."
+
+        info "Ter controle is er een Kernel-based Virtuele Machine (KVM) \
+gestart."
+        if ! qemu-system-x86_64 -enable-kvm     \
+                                -m 2048         \
+                                -hda $DEVICE    |& $LOGCMD; then
+            true
+        fi
+
+        if ! umount "$DEVICE" 2> /dev/null; then
+            read -rp "Ontkoppel de USB-stick '$usbname', gevolgd door Enter \
+[Enter]: "
+        fi
+        read -rp "Verwijder de USB-stick '$usbname', gevolgd door Enter \
+[Enter]: "
+    else
+        warning "USB-stick '$usbname' is niet aanwezig op $DEVICE."
+        exit $WARNING
+    fi
+}
+
+
+term_script() {
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

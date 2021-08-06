@@ -1,0 +1,207 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kzgset.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 05.00.01
+.\" DateOfRelease: 2021-07-14
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZGSET 1 "kzgset" "kzscripts 365" "kzgset"
+.\"
+.\"
+.SH NAAM
+kzgset \- GUI wijzigen.
+.\"
+.\"
+.SH SAMENVATTING
+.B kzgset
+[OPTIE...] [--]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzgset\fR toont wijzigingen in de configuratiedatabase na aanpassingen in de
+grafische werkomgeving (GUI),
+.br
+kan een toepassingspictogram (favoriet) toevoegen aan het favorietengebied;
+de verticale strook aan de linkerkant van het scherm, en
+.br
+kan een appfolder toevoegen om starters te verzamelen (e.g. KZ-Scripts) in
+de Vaak gebruikt-weergave en Alles-weergave; na het klikken op de rasterknop
+onderaan het favorietengebied.
+.sp
+Met optie \fB--addfavbottom\fR wordt een toepassingspictogram (favoriet)
+toegevoegd onderaan het favorietengebied.
+.sp
+Met optie \fB--addfavtop\fR wordt een toepassingspictogram (favoriet)
+toegevoegd bovenaan het favorietengebied.
+.sp
+Met optie \fB--removefav\fR wordt een toepassingspictogram (favoriet)
+verwijderd uit het favorietengebied.
+.sp
+Deze opties mogen \fBeenmaal\fR worden opgegeven; dus bijvoorbeeld alleen
+\fB--addfavtop\fR of alleen \fB--removefav\fR.
+.br
+Als een van deze opties worden gebruikt dient ook optie \fB--file\fR meegegeven
+te worden met verplicht argument \fIDESKTOPFILE\fR.
+.br
+Als er al een toepassingspictogram (favoriet) van \fIDESKTOPFILE\fR bestaat
+wordt deze niet opnieuw toegevoegd.
+.br
+Als een toepassingspictogram (favoriet) bovenaan is toegevoegd die onderaan
+geplaatst moet worden, dient de bestaande eerst verwijderd te worden met optie
+\fB--removefav (\fB-r\fR).
+.sp
+Met optie \fB--addappfolder\fR wordt een appfolder toegevoegd.
+.sp
+Met optie \fB--removefavappfolder\fR wordt een appfolder verwijderd.
+.sp
+Deze opties mogen \fBeenmaal\fR worden opgegeven; dus bijvoorbeeld alleen
+\fB--addappfolder\fR of alleen \fB--removeappfolder\fR.
+.br
+Als een van deze opties worden gebruikt dient ook optie \fB--folder\fR
+meegegeven te worden met verplicht argument \fIAPPFOLDER\fR.
+.sp
+Als er geen opties zijn opgegeven toont \fBkzgset\fR wijzigingen in de
+configuratiedatabase na een wijziging in de grafische werkomgeving (GUI).
+.br
+Het volgende wordt uitgevoerd:
+.sp
+.RS
+1. Inhoud configuratiedatabase ervoor vastleggen.
+.br
+2. Gebruiker voert wijzigingen met de GUI uit.
+.br
+3. Inhoud configuratiedatabase erna vastleggen.
+.br
+4. Wijzigingen in de configuratiedatabase rapporteren.
+.RE
+.sp
+Met de opdracht \fBgsettings set \fIschema\fR\fB[:\fIpath\fR\fB] \fIkey\fR zijn
+daarna de wijzigingen op te slaan in de configuratiedatabase, en hoeven deze
+niet meer, met de hand, met de GUI te worden uitgevoerd.
+.sp
+Voor de systemen met LXDE- (e.g. Lubuntu) en Xfce-werkomgeving (e.g. Xubuntu)
+kan via het Terminalvenster met opdrachten opgezocht worden wat er gewijzigd
+dient te worden:
+.RS
+\fBxfconf-query --list\fR
+    Geeft overzicht kanalen/channels.
+.sp
+\fBxfconf-query --channel \fIkanaal\fR\fB --monitor --verbose\fR
+    Breng nu de wijzigingen via de GUI aan.
+.sp
+\fBxfconf-query --channel \fIkanaal\fR\fB --list --verbose\fR
+    Geeft overzicht eigenschappen/properties.
+.sp
+\fBxfconf-query --channel \fIkanaal\fR\fB --property \fIeigenschap\fR\fB
+--set \fIwaarde\fR
+    Vul de waarde in voor een property.
+.RE
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzgset\fR worden
+gestart door te zoeken naar \fBgui\fR, klik op \fBGUI wijzigen\fR.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB--addappfolder\fR
+voeg een appfolder toe.
+.TP
+\fB--addfavbottom\fR
+Voeg een toepassingspictogram (favoriet) toe onderaan aan het favorietengebied.
+.TP
+\fB--addfavtop\fR
+Voeg een toepassingspictogram (favoriet) toe bovenaan aan het favorietengebied.
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzgset').
+.TP
+\fB--file=\fIDESKTOPFILE\fR
+Gebruik opgegeven dsktopbestand (.desktop).
+.TP
+\fB--folder=\fIAPPFOLDER\fR
+Gebruik opgegeven appfolder.
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB--removeappfolder\fR
+Verwijder een appfolder.
+.TP
+\fB--removefav\fR
+Verwijder een toepassingspictogram (favoriet) uit het favorietengebied.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkzgset\fR
+.RS
+Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
+werkomgeving (GUI).
+Hiervoor is ook starter 'GUI wijzigen' beschikbaar.
+.RE
+.sp
+\fBkzgset --addfavtop --file='idle.desktop'\fR
+.RS
+Voeg de IDLE (Python’s Integrated Development and Learning Environment)
+toepassingspictogram (favoriet) toe bovenaan het favorietengebied.
+.RE
+.sp
+\fBkzgset --removefav --file='idle.desktop'\fR
+.RS
+Verwijder de IDLE (Python’s Integrated Development and Learning Environment)
+toepassingspictogram (favoriet) uit het favorietengebied.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2015-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBgsettings\fR(1),
+\fBkzcommon.sh\fR(1),
+\fBxfconf-query\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzgset is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

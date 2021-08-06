@@ -1,0 +1,71 @@
+#!/usr/bin/python3
+"""
+Wachtwoord genereren. Gebruik Bitwarden om wachtwoorden te beheren.
+
+Dit script genereert een wachtwoord bestaande uit 16 willekeurige tekens.
+"""
+###############################################################################
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Auteursrecht (c) 2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 02.01.11
+# DateOfRelease: 2021-05-08
+###############################################################################
+import os
+import sys
+import random
+import argparse
+import kzcommon
+
+program_name = os.path.basename(__file__)
+
+
+def generate_password():
+    lower = 'abcdefghijklmnopqrstuvwxyz'
+    upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    numbers = '0123456789'
+    symbols = '$%@#[]{}()*;/,_-'
+
+    all = lower + upper + numbers + symbols
+
+    length = 16
+
+    password = ''.join(random.sample(all, length))
+    print(f'{password}\n\nGebruik Bitwarden om wachtwoorden te beheren.')
+
+
+def process_option_usage():
+    print(f"""Gebruik: {program_name} [-g|--gui] [-h|--help] [-u|--usage] \
+[-v|--version]
+
+Typ '{program_name} --help' voor meer informatie.""")
+
+
+# --- script ---
+
+parser = argparse.ArgumentParser(description='Wachtwoord genereren.',
+                                 epilog="Typ 'man " + program_name + "' voor "
+                                        'meer informatie.')
+parser.add_argument('-g', '--gui', action='store_true',
+                    help='start in grafische modus')
+parser.add_argument('-u', '--usage', action='store_true',
+                    help='een korte gebruikssamenvatting tonen')
+parser.add_argument('-v', '--version', action='store_true',
+                    help='de versie tonen')
+args = parser.parse_args()
+
+if args.usage:
+    process_option_usage()
+elif args.version:
+    rc = kzcommon.process_option_version(program_name)
+    if rc != 0:
+        sys.exit(rc)
+else:
+    generate_password()
+
+# Een non-gui script gestart met optie gui.
+if args.gui:
+    input('Druk op de Enter-toets om verder te gaan [Enter]: ')
+
+# EOF

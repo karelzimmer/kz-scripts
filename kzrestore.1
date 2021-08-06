@@ -1,0 +1,190 @@
+.\" ---------------------------------------------------------------------------
+.\" Man-pagina voor kzrestore.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 04.03.01
+.\" DateOfRelease: 2021-07-14
+.\" ---------------------------------------------------------------------------
+.\"
+.TH KZRESTORE 1 "kzrestore" "kzscripts 365" "kzrestore"
+.\"
+.\"
+.SH NAAM
+kzrestore \- Back-up terugzetten.
+.\"
+.\"
+.SH SAMENVATTING
+.B kzrestore
+[OPTIE...] [--] [\fISELECTIE\fR...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzrestore\fR zet bestanden en mappen terug uit een back-up (reservekopie).
+.sp
+Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt alles in de back-up
+teruggezet.
+.sp
+Met \fISELECTIE\fR kan een selectie van mappen en bestanden worden teruggezet.
+.br
+Er wordt in de back-up gezocht met jokertekens (*), dus als bijvoorbeeld\
+ 'python' als \fISELECTIE\fR wordt opgegeven, dan wordt zowel\
+ '/home/USER/python' als '/home/USER/Documenten/python.odt' teruggezet.
+.sp
+Voor het terugzetten van de back-up wordt tar gebruikt.
+.br
+De inhoud van de back-up is op te vragen met opdracht:
+.RS
+\fBtar\fR tvf \fIBESTAND\fR [--wildcards \fISELECTIE\fR...]
+.RE
+.sp
+Standaard worden back-ups gezocht vanaf /media.
+Met optie \fB--source\fR (\fB-s\fR) kan een andere locatie opgegeven worden.
+.sp
+Er wordt gezocht naar een back-up met de naam "backup-<computernaam>-*.tar".
+.sp
+Standaard wordt de back-up teruggezet in map / (originele plek).
+Met optie \fB--target\fR (\fB-t\fR) kan een andere locatie opgegeven worden.
+.sp
+Standaard worden de volgende bestanden NIET teruggezet:
+.RS
+/home/*/.bash_logout
+.br
+/home/*/examples.desktop
+.br
+/home/*/.bashrc
+.br
+/home/*/.profile
+.RE
+.sp
+Met optie \fB--exclude\fR (\fB-e\fR) zijn extra bestanden en mappen uit te
+sluiten.
+.sp
+Met opdracht \fBkzbackup\fR zijn individuele -of alle- bestanden en mappen te
+bewaren in een enkel archiefbestand.
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzrestore\fR
+worden gestart door te zoeken naar \fBback\fR, klik op
+\fBBack-up terugzetten\fR.
+.br
+Dan wordt alles in de back-up teruggezet (e.g. alle Persoonlijke mappen).
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-e\fR, \fB--exclude=\fIUITSLUITEN\fR
+Sluit bestanden of mappen \fIUITSLUITEN\fR uit.
+Mag meerdere keren opgegeven worden.
+.TP
+\fB-s\fR, \fB--source=\fIBRONMAP\fR
+Zoek back-ups vanaf de \fIBRONMAP\fR.
+.TP
+\fB-t\fR, \fB--target=\fIDOELMAP\fR
+Zet bestanden en mappen terug in de \fIDOELMAP\fR.
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzrestore').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH MAPPEN
+/media/
+.RS
+Als er geen \fIBRON\fR is opegegeven worden de back-ups vanaf deze map
+opgezocht.
+.RE
+.\"
+.\"
+.SH BESTANDEN
+/usr/local/etc/kzrestore-exclude-dflt
+.RS
+Standaard uit te sluiten bestanden en mappen.
+.RE
+.sp
+/usr/local/etc/kzrestore-exclude-opt
+.RS
+Opgegeven uit te sluiten bestanden en mappen.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+Checklist installatie
+.RS 4
+https://karelzimmer.nl
+.RE
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkzrestore\fR
+.RS
+Zet alles in de back-up terug.
+Hiervoor is ook starter 'Back-up terugzetten' beschikbaar.
+.RE
+.sp
+\fBkzrestore --target /tmp /home/*/Documenten\fR
+.RS
+Zet alle documenten terug in map /tmp.
+.RE
+.sp
+\fBkzrestore --exclude '*.JPG' /home/*/Afbeeldingen\fR
+.RS
+Zet alle foto's terug, maar geen JPG's.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2007-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzbackup\fR(1),
+\fBkzcheckname\fR(1),
+\fBkzcommon.sh\fR(1),
+\fBkzmenu\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzrestore is onderdeel van het pakket kzscripts en is beschikbaar
+vanaf Karel Zimmer Linux Scripts
+<https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

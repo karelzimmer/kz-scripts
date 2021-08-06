@@ -1,0 +1,111 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kzckname.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 03.06.05
+.\" DateOfRelease: 2021-07-14
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZCKNAME 1 "kzckname" "kzscripts 365" "kzckname"
+.\"
+.\"
+.SH NAAM
+kzckname \- Bestandsnamen controleren.
+.\"
+.\"
+.SH SAMENVATTING
+.B kzckname
+[OPTIE...] [--] [\fIMAP...\fR]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzckname\fR controleert NTFS map- en bestandsnamen op toegestane tekens en
+bestandsnaamlengte.
+.br
+Er is een maximale bestandsnaamlengte lengte bij gebruik van Versleutelde
+Persoonlijke mappan (VPM, eCryptfs).
+.sp
+Standaard, tenzij \fIMAP\fR is opgegeven, wordt gezocht in Persoonlijke map.
+.sp
+Voer deze opdracht uit vóór het plaatsen van bestanden op een NTFS
+(netwerk)schijf, en vóór het maken van een back-up (reservekopie) op een
+niet-encrypted omgeving naar een encrypted omgeving (Versleutelde Persoonlijke
+Mappen, eCryptfs).
+.sp
+Bij NTFS zijn niet toegestaan de tekens ? " / \ < > * | :
+.br
+Bij ext4   is niet toegestaan het teken     /
+.br
+daarom testen we hier op de tekens      ? "   \ < > * | :
+.sp
+Bij NTFS zijn ook symbolische verwijzingen niet toegestaan.
+.sp
+Verder wordt ook de lengte van de map- en bestandsnaam gecontroleerd.
+.br
+Deze mag voor Versleutelde Persoonlijke Mappen, met eCryptfs, niet langer zijn
+dan 142 tekens.
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzckname\fR
+worden gestart door te zoeken naar \fBbest\fR, klik op
+\fBBestandsnamen controleren\fR.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzckname').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2012-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzcheckhtml\fR(1),
+\fBkzcommon.sh\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzckname is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

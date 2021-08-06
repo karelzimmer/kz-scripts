@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+
+<!--
+ PolicyKit actiedefinitiebestand voor kzbackup.
+
+ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+
+ Auteursrecht (c) 2020-2021 Karel Zimmer.
+ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+
+ ReleaseNumber: 03.03.01
+ DateOfRelease: 2021-07-16
+-->
+
+<policyconfig>
+
+    <vendor>Karel Zimmer</vendor>
+    <vendor_url>https://karelzimmer.nl</vendor_url>
+
+    <action id="nl.karelzimmer.kzbackup.make-backup">
+        <message>Authentication is required to make a backup.</message>
+        <message xml:lang="nl">Authenticatie is vereist om een back-up te maken.</message>
+        <defaults>
+            <allow_any>auth_admin</allow_any>
+            <allow_inactive>auth_admin</allow_inactive>
+            <allow_active>auth_admin</allow_active>
+        </defaults>
+        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kzbackup</annotate>
+        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+    </action>
+
+</policyconfig>
+
+<!-- EOF -->

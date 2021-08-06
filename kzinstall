@@ -1,0 +1,758 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Apps installeren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2009-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 57.01.04
+# DateOfRelease: 2021-07-31
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly EDITION_DEFAULT=desktop
+readonly RUN_AS_SUPERUSER=true
+readonly CMDSFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly TEXTFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:firs'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,\
+remove,simulate"
+readonly USAGE="Gebruik: $PROGRAM_NAME [-a|--apps] [-c|--cat] \
+[-e|--edition=EDITIE] [-f|--files]
+                   [-i|--info] [-r|--remove] [-s|--simulate]
+                   $OPTIONS_USAGE_COMMON
+                   [APP...] [BESTAND...]"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [APP...] [BESTAND...]
+
+Apps installeren.
+
+Opties:
+  -a --apps     toon lijst van te installeren apps
+  -c --cat      toon inhoud van installatiebestanden
+  -e --edition=EDITIE
+                gebruik opgegeven editie
+  -f --files    toon lijst van beschikbare installatiebestanden
+  -i --info     toon aanvullende instructies na het installeren van apps
+  -r --remove   toon instructies voor het verwijderen van apps
+  -s --simulate geen actie, simuleer installatie, en toon opdracht die
+                uitgevoerd zou worden
+$OPTIONS_HELP_COMMON
+
+Argumenten:
+  APP           opgegeven apps installeren
+  BESTAND       opgegeven installatiebestanden verwerken"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare -a  APP_ARGUMENT=''
+declare -a  FILE_ARGUMENT=''
+declare -a  FILE_TO_PROCESS=''
+declare     ARGUMENT_APP=false
+declare     ARGUMENT_FILE=false
+declare     COMMANDS_FOUND=false
+declare     EDITION=$EDITION_DEFAULT
+declare     EDITION_ARGUMENT=''
+declare     EXECUTE_COMMANDS=true
+declare -i  MAXRC=0
+declare     INFO_FOUND=false
+declare     OPTION_APPS=false
+declare     OPTION_CAT=false
+declare     OPTION_EDITION=false
+declare     OPTION_FILES=false
+declare     OPTION_INFO=false
+declare     OPTION_REMOVE=false
+declare     OPTION_SIMULATE=false
+declare     REMOVE_FOUND=false
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    local   -i  app_arg_num=0
+    local   -i  file_arg_num=0
+
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            -a|--apps)
+                OPTION_APPS=true
+                shift
+                ;;
+            -c|--cat)
+                OPTION_CAT=true
+                shift
+                ;;
+            -e|--edition)
+                if $OPTION_EDITION; then
+                    TEXT="optie '$1' eenmaal opgeven"
+                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
+                else
+                    OPTION_EDITION=true
+                    EDITION_ARGUMENT=$2
+                    EDITION=$EDITION_ARGUMENT
+                fi
+                shift 2
+                ;;
+            -f|--files)
+                OPTION_FILES=true
+                shift
+                ;;
+            -i|--info)
+                OPTION_INFO=true
+                EXECUTE_COMMANDS=false
+                shift
+                ;;
+            -r|--remove)
+                OPTION_REMOVE=true
+                EXECUTE_COMMANDS=false
+                shift
+                ;;
+            -s|--simulate)
+                OPTION_SIMULATE=true
+                EXECUTE_COMMANDS=false
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    # Verwerk argumenten.
+    while [[ "$*" ]]; do
+        if [[ "$(basename "$1")" = $PROGRAM_NAME-*.sh ]]; then
+            ARGUMENT_FILE=true
+            FILE_ARGUMENT[$file_arg_num]=$1
+            ((++file_arg_num))
+            shift
+        else
+            ARGUMENT_APP=true
+            APP_ARGUMENT[$app_arg_num]=$1
+            ((++app_arg_num))
+            shift
+        fi
+    done
+}
+
+
+process_input() {
+    local       file=''
+    local       file_notfound=false
+    local   -i  app_seq_num=0
+    local   -i  app_tot_num=0
+    local       id=''
+    local       Id=''
+    local   -i  file_num=0
+    local       release=''
+    local       skip_line=false
+
+    Id=$(lsb_release --id --short)                  # E.g. Ubuntu
+    id=$(echo "$Id" | tr '[:upper:]' '[:lower:]')   # E.g. ubuntu
+    release=$(lsb_release --release --short)        # E.g. 20.04
+
+    if $ARGUMENT_APP; then
+        process_argument_app
+    fi
+    if $ARGUMENT_FILE; then
+        process_argument_file
+    fi
+
+    # Als argument APP of FILE, of optie apps of files, is opgegeven, geen
+    # standaardbestanden verwerken.
+    if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES || $OPTION_APPS)
+    then
+        process_dfltfiles
+    fi
+    if $file_notfound; then
+        exit $WARNING
+    fi
+
+    # Verwerk opties.
+    if $OPTION_APPS; then
+        process_option_apps
+        exit $SUCCESS
+    elif $OPTION_FILES; then
+        process_option_files
+        exit $SUCCESS
+    # Optie cat is afhankelijk van argumenten APP en FILE.
+    elif $OPTION_CAT; then
+        process_option_cat
+        exit $SUCCESS
+    fi
+
+    # We gaan opdrachten uitvoeren, mogen we dat wel?
+    if $EXECUTE_COMMANDS; then
+        check_user
+        check_on_ac_power
+    fi
+
+    # We gaan opdrachten uitvoeren of simuleren.
+    for file in "${FILE_TO_PROCESS[@]}"; do
+        cat "$file" >> "$CMDSFILE"
+    done
+
+    # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
+    # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
+    app_tot_num=$(
+        grep --word-regexp --regexp='^#2' --count "$CMDSFILE" || true
+        )
+
+    if $EXECUTE_COMMANDS && $OPTION_GUI; then
+        TITLE='Apps installeren'
+        TEXT=''
+        # Met "|& zenity --progress" worden globale variabelen uit
+        # aangeroepen functies niet doorgegeven, vandaar de
+        # 'process substitution' met "> >(zenity...)".
+        process_file > >(
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     700         \
+                    --height    50          \
+                    --title     "$TITLE"    \
+                    --text      "$TEXT"     2> >($LOGCMD)
+            )
+    else
+        process_file
+    fi
+}
+
+
+process_argument_app() {
+    local app=''
+    local file=''
+
+    for app in "${APP_ARGUMENT[@]}"; do
+        # Zoek exact (line-regexp) naar app-naam in installatiebestanden.
+        # Alleen eerstgevonden installatiebestand verwerken (lines=1), want
+        # app-naam kan in meerdere installatiebestanden voorkomen.
+        # shellcheck disable=SC2062
+        file=$(
+            if ! grep       --files-with-matches                            \
+                            --line-regexp                                   \
+                            --regexp="#1 $app"                              \
+                            "$PROGRAM_PATH/$PROGRAM_NAME-$id-$release"*.sh  \
+                            2> /dev/null                                    |
+                    head    --lines=1; then
+                printf '\n'
+            fi
+            )
+        if [[ $file ]]; then
+            process_argument_app_file
+        else
+            info "App '$app' niet gevonden."
+            file_notfound=true
+        fi
+    done
+    if $file_notfound; then
+        info "Typ '$PROGRAM_NAME --apps' voor beschikbare apps."
+    fi
+}
+
+
+process_argument_app_file() {
+    local app_found=false
+    local description_found=false
+    local record=''
+    local cmdsfile=''
+
+    cmdsfile=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+    while read -r record; do
+        case $record in
+            '#1 '*)
+                if [[ $record = '#1 '$app ]]; then
+                    if $app_found; then
+                        info "Dubbele app-naam $app."
+                    else
+                        # Gezochte app-naam.
+                        # Regels doorschrijven naar tijdelijk bestand tot
+                        # eerstvolgende app-naam of beschrijving (verplicht),
+                        # of tot EOF.
+                        app_found=true
+                    fi
+                elif $app_found; then
+                    # Volgende app-naam.
+                    break
+                fi
+                ;;
+            '#2'*)
+                # Beschrijving.
+                if $description_found; then
+                    # Volgende beschrijving.
+                    break
+                elif $app_found; then
+                    TEXT="# $DASHES\n# Bron: $file\n# $DASHES\n\n\n$record"
+                    printf '%b\n' "$TEXT" >> "$cmdsfile"
+                    description_found=true
+                fi
+                ;;
+            *)
+                # Overige regels.
+                if $app_found; then
+                    printf '%s\n' "$record" >> "$cmdsfile"
+                fi
+                ;;
+        esac
+    done < "$file"
+    if ! grep --quiet --line-regexp --regexp='# EOF' "$cmdsfile"
+    then
+        printf '%s\n' '# EOF' >> "$cmdsfile"
+    fi
+    FILE_TO_PROCESS[$file_num]=$cmdsfile
+    ((++file_num))
+}
+
+
+process_argument_file() {
+    local file=''
+
+    for file in "${FILE_ARGUMENT[@]}"; do
+        if [[ -e $file ]]; then
+            FILE_TO_PROCESS[$file_num]=$file
+            ((++file_num))
+        else
+            info "Bestand $file niet gevonden."
+            file_notfound=true
+        fi
+    done
+    if $file_notfound; then
+        info "Typ '$PROGRAM_NAME --files' voor beschikbare \
+installatiebestanden."
+    fi
+}
+
+
+process_dfltfiles() {
+local dfltfile_1=''
+local dfltfile_2=''
+
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$id-$release-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$id-$release-$EDITION-$HOSTNAME.sh
+    if [[ -e $dfltfile_1 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_1
+        ((++file_num))
+    else
+        file_notfound=true
+    fi
+    # Niet verplicht aanwezig.
+    if [[ -e $dfltfile_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_2
+        ((++file_num))
+    fi
+    if $file_notfound; then
+        info "Geen installatiebestanden gevonden voor $Id $release $EDITION."
+        if ! $OPTION_GUI; then
+            info "Typ '$PROGRAM_NAME --files' voor beschikbare \
+installatiebestanden."
+        fi
+    fi
+}
+
+
+process_option_apps() {
+    # shellcheck disable=SC2062
+    printf '%s\n' "De volgende apps zijn beschikbaar:
+
+NUMMER APP
+$(
+    if !    grep    --no-messages                                   \
+                    --regexp='^#1 '                                 \
+                    "$PROGRAM_PATH/$PROGRAM_NAME-$id-$release"*.sh  |
+            awk     '{print $2}'                                    |
+            sort    --unique                                        |
+            nl      --number-width=6                                \
+                    --number-format=rn                              \
+                    --number-separator=' '                          \
+                    --body-numbering=a; then
+        printf '%s\n' "     0 Geen apps gevonden voor $Id $release.
+
+Typ '$PROGRAM_NAME --files' voor beschikbare installatiebestanden."
+    else
+        printf '%s\n' "
+Om APPs te bekijken voer uit:
+    ${BLUE}$PROGRAM_NAME --sim APP...${NORMAL}
+    ${BLUE}$PROGRAM_NAME --cat APP...${NORMAL}
+Om APPs te installeren voer uit:
+    ${BLUE}$PROGRAM_NAME APP...${NORMAL}"
+    fi
+)"
+}
+
+
+process_option_files() {
+    printf '%s\n' "De volgende installatiebestanden zijn beschikbaar:
+
+NUMMER BESTAND
+$(
+    if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-$id-$release"*.sh  \
+                    2> /dev/null                                    |
+            nl      --number-width=6                                \
+                    --number-format=rn                              \
+                    --number-separator=' '                          \
+                    --body-numbering=a; then
+        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $Id.
+
+Controleer $PROGRAM_PATH op aanwezigheid andere installatiebestanden.
+Om die BESTANDen te bekijken voer uit:
+    ${BLUE}$PROGRAM_NAME --sim $PROGRAM_PATH/BESTAND...${NORMAL}
+    ${BLUE}$PROGRAM_NAME --cat $PROGRAM_PATH/BESTAND...${NORMAL}
+Om die BESTANDen te gebruiken voer uit:
+    ${BLUE}$PROGRAM_NAME $PROGRAM_PATH/BESTAND...${NORMAL}
+Typ 'man $PROGRAM_NAME' voor meer informatie."
+    else
+        printf '%s\n' "
+Om BESTANDen te bekijken voer uit:
+    ${BLUE}$PROGRAM_NAME --sim BESTAND...${NORMAL}
+    ${BLUE}$PROGRAM_NAME --cat BESTAND...${NORMAL}
+Om BESTANDen te gebruiken voer uit:
+    ${BLUE}$PROGRAM_NAME BESTAND...${NORMAL}"
+    fi
+)"
+}
+
+
+process_option_cat() {
+    for file in "${FILE_TO_PROCESS[@]}"; do
+        {
+            printf '%s\n' "${BLUE}# $file${NORMAL}"
+            cat "$file"
+            printf '\n'
+        }   >> "$CMDSFILE"
+    done
+    if $OPTION_GUI; then
+        TITLE='Inhoud installatiebestanden'
+        if ! zenity --text-info                         \
+                    --width         850                 \
+                    --height        400                 \
+                    --title         "$TITLE"            \
+                    --filename      "$CMDSFILE"         \
+                    --font          'Ubuntu Mono 12'    \
+                    --ok-label      'Oké'               \
+                    --cancel-label  'Annuleren'         2> >($LOGCMD); then
+            true
+        fi
+    else
+        less "$LESS_OPTIONS" "$CMDSFILE"
+    fi
+}
+
+
+process_file() {
+    local       description=''
+    local   -i  cmd_seq_num=0
+    local       prev_recordtype=''
+    local       record=''
+    local       recordtype=''
+    local       write_description_line=true
+
+    if $EXECUTE_COMMANDS; then
+        printf '%b' "${CURSOR_INVISABLE}"
+    fi
+    $skip_line && printf '\n'; skip_line=true
+
+    while read -r record; do
+        recordtype=${record:0:2}
+        case $recordtype in
+            ''|'#1')
+                # Lege regel of lege app-naam.
+                continue
+                ;;
+            '#2')
+                process_description "$record"
+                ;;
+            '#3')
+                process_install_instruction "$record"
+                ;;
+            '#4')
+                process_remove_instruction "$record"
+                ;;
+            '#'*)
+                # Commentaarregel.
+                continue
+                ;;
+            *)
+                process_command "$record"
+                ;;
+        esac
+        prev_recordtype=$recordtype
+    done < "$CMDSFILE"
+
+    if $EXECUTE_COMMANDS; then
+        printf '%b' "${CURSOR_VISABLE}"
+    fi
+}
+
+
+process_description() {
+    local record=${1:-record?}
+
+    description="${record:3}"
+    if ! $OPTION_SIMULATE && ! $EXECUTE_COMMANDS; then
+        return $SUCCESS
+    fi
+
+    write_description_line=true
+    ((++app_seq_num))
+    cmd_seq_num=0
+}
+
+
+process_install_instruction() {
+    local       record=${1:-record?}
+    local -i    len=0
+
+    INFO_FOUND=true
+    if ! $OPTION_INFO; then
+        return $SUCCESS
+    fi
+    if [[ $prev_recordtype = '#3' ]]; then
+        printf '%s\n\n' "    ${record:3}" >> "$TEXTFILE"
+    else
+        ((++app_seq_num))
+        len=$((${#description} + 3))
+        printf  "\n%2s. %s\n %.${len}s\n\n    %s\n\n"   \
+                "$app_seq_num"                          \
+                "$description"                          \
+                "   $DASHES"                            \
+                "${record:3}"                           >> "$TEXTFILE"
+    fi
+}
+
+
+process_remove_instruction() {
+    local       record=${1:-record?}
+    local -i    len=0
+
+    REMOVE_FOUND=true
+    if ! $OPTION_REMOVE; then
+        return $SUCCESS
+    fi
+    if [[ $prev_recordtype = '#4' ]]; then
+        printf '%s\n\n' "    ${record:3}" >> "$TEXTFILE"
+    else
+        ((++app_seq_num))
+        len=$((${#description} + 3))
+        printf  "\n%2s. %s\n %.${len}s\n\n    %s\n\n"   \
+                "$app_seq_num"                          \
+                "$description"                          \
+                "   $DASHES"                            \
+                "${record:3}"                           >> "$TEXTFILE"
+    fi
+}
+
+
+process_command() {
+    local       cmd=${1:-cmd?}
+    local   -i  cmd_rc=0
+    local       description_line=''
+    local   -i  desc_maxlen=1000
+    local       desc_printf=''
+    local       status=''
+
+    COMMANDS_FOUND=true
+    ((++cmd_seq_num))
+
+    if $OPTION_SIMULATE; then
+        if $write_description_line; then
+            printf  '[%3d/%-3d] %s\n\n' \
+                    "$app_seq_num"      \
+                    "$app_tot_num"      \
+                    "$description"      >> "$TEXTFILE"
+            write_description_line=false
+        fi
+        printf  '%9s [%2d] %s\n\n'          \
+                " "                         \
+                "$cmd_seq_num"              \
+                "${BLUE}$record${NORMAL}"   >> "$TEXTFILE"
+    elif $EXECUTE_COMMANDS; then
+        desc_printf=$description
+        if $OPTION_GUI; then
+            TEXT="#[$app_seq_num/$app_tot_num] $description\n\n$record"
+            printf '%s\n' "$TEXT"
+        else
+            if [[ -t 1 ]]; then
+                # Afbreken in Terminalvenster moet i.v.m. updaten status van
+                # WERK naar GOED of FOUT.
+                #  <------------- tput cols ------------->
+                # '[WERK] [  1/1  ] [ 1] Te lange descr...' <=== op 1 regel
+                #  <-------- 22 -------->
+                desc_maxlen=$(($(tput cols) - 22))
+                if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
+                    desc_printf=${desc_printf:0:(($desc_maxlen - 3))}'...'
+                fi
+            fi
+        fi
+        printf  -v description_line                                 \
+                "[%3d/%-3d] [%2d] %-${desc_maxlen}.${desc_maxlen}s" \
+                "$app_seq_num"                                      \
+                "$app_tot_num"                                      \
+                "$cmd_seq_num"                                      \
+                "$desc_printf"
+        execute_command "$record"
+    fi
+}
+
+
+execute_command() {
+    local cmd=${1:-cmd?}
+    local -i cmd_rc=0
+    local status=''
+
+    check_dpkg
+    if ! $OPTION_GUI; then
+        if [[ $cmd_seq_num -eq 1 ]]; then
+            printf "$STATUS_BUSY %s$CARRIAGE_RETURN" "$description_line"
+        else
+            printf  "$STATUS_BUSY         %s$CARRIAGE_RETURN"  \
+                    "${description_line:8}"
+        fi
+    fi
+
+    log "$description_line"
+    log "${BLUE}$cmd${NORMAL}"
+    eval "$cmd" |& $LOGCMD || cmd_rc=$?
+    if [[ $cmd_rc -gt $MAXRC ]]; then
+        MAXRC=$cmd_rc
+    fi
+    if [[ $cmd_rc -eq $SUCCESS ]]; then
+        status="$STATUS_SUCCESS"
+    else
+        status="$STATUS_ERROR"
+    fi
+    log "$status rc=$cmd_rc, maxrc=$MAXRC"
+    printf '%s\n' "$status"
+}
+
+
+term_script() {
+    if $OPTION_SIMULATE; then
+        if $OPTION_GUI; then
+            TITLE='Installatie-opdrachten'
+            if ! zenity --text-info                         \
+                        --width         1200                \
+                        --height        400                 \
+                        --title         "$TITLE"            \
+                        --filename      "$TEXTFILE"         \
+                        --font          'Ubuntu Mono 12'    \
+                        --ok-label      'Oké'               \
+                        --cancel-label  'Annuleren'         2> >($LOGCMD); then
+                true
+            fi
+        else
+            less "$LESS_OPTIONS" "$TEXTFILE"
+        fi
+    elif $OPTION_INFO && $INFO_FOUND; then
+        printf '\n\n' >> "$TEXTFILE"
+        if $OPTION_GUI; then
+            TITLE='Installatie-instructies'
+            if ! zenity --text-info                         \
+                        --width         850                 \
+                        --height        400                 \
+                        --title         "$TITLE"            \
+                        --filename      "$TEXTFILE"         \
+                        --font          'Ubuntu Mono 12'    \
+                        --ok-label      'Oké'               \
+                        --cancel-label  'Annuleren'         2> >($LOGCMD); then
+                true
+            fi
+        else
+            less "$LESS_OPTIONS" "$TEXTFILE"
+        fi
+    elif $OPTION_INFO && ! $INFO_FOUND; then
+        info 'Geen installatie-instructies.'
+    elif $OPTION_REMOVE && $REMOVE_FOUND; then
+        printf '\n\n' >> "$TEXTFILE"
+        sed --in-place                                  \
+            --expression='s/installeren/verwijderen/g'  \
+            "$TEXTFILE"
+        if $OPTION_GUI; then
+            TITLE='Verwijder-instructies'
+            if ! zenity --text-info                         \
+                        --width         850                 \
+                        --height        400                 \
+                        --title         "$TITLE"            \
+                        --filename      "$TEXTFILE"         \
+                        --font          'Ubuntu Mono 12'    \
+                        --ok-label      'Oké'               \
+                        --cancel-label  'Annuleren'         2> >($LOGCMD); then
+                true
+            fi
+        else
+            less "$LESS_OPTIONS" "$TEXTFILE"
+        fi
+    elif $OPTION_REMOVE && ! $REMOVE_FOUND; then
+        info 'Geen verwijder-instructies.'
+    elif ! $COMMANDS_FOUND; then
+        info 'Geen opdrachten.'
+    fi
+
+    if  $EXECUTE_COMMANDS && [[ $MAXRC -eq $SUCCESS ]] && $INFO_FOUND &&
+        ! $OPTION_GUI; then
+        info "
+Er zijn aanvullende instructies!
+Gebruik de opdracht:
+    ${BLUE}$PROGRAM_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
+    fi
+
+    if $EXECUTE_COMMANDS && $OPTION_GUI; then
+        if [[ $MAXRC -ne $SUCCESS ]]; then
+            warning 'Installatie is geëindigd met een waarschuwing.'
+            exit $WARNING
+        else
+            info 'Installatie is voltooid.'
+            exit $SUCCESS
+        fi
+    fi
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

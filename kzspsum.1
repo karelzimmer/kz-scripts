@@ -1,0 +1,154 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kzspsum.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 03.05.02
+.\" DateOfRelease: 2021-07-14
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZSPSUM 1 "kzspsum" "kzscripts 365" "kzspsum"
+.\"
+.\"
+.SH NAAM
+kzspsum \- Controlebestanden opsplitsen.
+.\"
+.\"
+.SH SAMENVATTING
+.B kzspsum
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzspsum\fR splitst controlebestanden (SHA256SUMS) op.
+.sp
+Combineer in map ~/Downloads de controlebestanden (SHA256SUMS) en
+beeldbestanden (.iso) tot \fI\fBversie\fR\fI.iso\fR en
+\fI\fBversie\fR\fI.iso.sha256sum\fR.
+.sp
+Voor ieder beeldbestand (\fI\fBversie\fR\fI.iso\fR) wordt een controlebestand
+(\fI\fBversie\fR\fI.iso.sha256sum\fR) aangemaakt als \fI\fBversie\fR\fI.iso\fR
+wordt gevonden in de aanwezige controlebestanden (SHA256SUMS).
+.sp
+De gedownloade beeldbestanden (.iso) en door dit script aangemaakte
+controlebestanden (.iso.sha256sum) kunnen zo samen gecontroleerd worden en naar
+een (opstartbare) USB-stick gekopieerd worden zoals gemaakt met Ventoy.
+.sp
+Controleren via:
+\fBcd ~/Downloads;sha256sum --check *.sha256sum;cd -\fR
+.sp
+USB-stick aanmaken via:
+\fBmkusbs\fR
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzspsum\fR
+worden gestart door te zoeken naar \fBcontr\fR, klik op
+\fBControlebestanden opsplitsen\fR.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-c\fR, \fB--checksums\fR
+Download alleen de controlebestanden.
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzspsum').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH BESTANDEN
+~/Downloads/*.iso
+.RS
+Beeldbestanden.
+.RE
+.sp
+~/Downloads/*.iso.sha256
+.RS
+Opgesplitste controlebestanden.
+.RE
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+Gedownload is het beeldbestand:
+    \fI\fBubuntu-<VERSIE>-desktop-amd64\fR\fI.iso\fR
+.sp
+Gedownload is het SHA256SUMS-controlebestand \fISHA256SUMS\fR met als inhoud:
+        4bcec83ef856c50c6866f3b0f3942e011104b5ecc6d955d1e7061faff86070d4
+*\fI\fBubuntu-<VERSIE>-desktop-amd64\fR\fI.iso\fR
+        d2cca0bac14fa76949e3c7b846dcf7e0d17a6fc82ae8f557c8f25bc85f26ff5f
+*ubuntu-<VERSIE>-preinstalled-server-armhf+raspi2.img.xz
+        b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6
+*ubuntu-<VERSIE>-server-amd64.img
+        b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6
+*ubuntu-<VERSIE>-server-amd64.iso
+        9da175f2c637fdf9fe51eed7e49e5520b52508c11dff99eb73a69ee7b12469aa
+*ubuntu-<VERSIE>-server-ppc64el.iso
+        2c34fcef8e572d3492c30f553840458ff9bc46b9efd5b50094f43ccb9d0a3aa4
+*ubuntu-<VERSIE>-server-s390x.iso
+.sp
+Voor ieder beeldbestand wordt in \fISHA256SUMS\fR een controlesom opgezocht en
+een controlebestand gemaakt:
+.br
+Controlebestand fI\fBubuntu-<VERSIE>-desktop-amd64\fR\fI.iso.sha256sum\fR met
+als inhoud:
+        4bcec83ef856c50c6866f3b0f3942e011104b5ecc6d955d1e7061faff86070d4
+*\fI\fBubuntu-<VERSIE>-desktop-amd64\fR\fI.iso\fR
+.br
+.sp
+De controlebestanden kunnen (opnieuw) gedownload worden met opdracht
+\fBdlisos\fR en optie \fB--checksums\fR.
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2016-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzcommon.sh\fR(1),
+\fBkzdlsio\fR(1),
+\fBkzmkusbs\fR(1),
+\fBhttps://karelzimmer.nl\fR,
+\fBhttps://www.ventoy.net\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzspsum is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

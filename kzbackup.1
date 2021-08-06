@@ -1,0 +1,212 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kzbackup.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 04.04.01
+.\" DateOfRelease: 2021-07-14
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZBACKUP 1 "kzbackup" "kzscripts 365" "kzbackup"
+.\"
+.\"
+.SH NAAM
+kzbackup \- Back-up maken.
+.\"
+.\"
+.SH SAMENVATTING
+.B kzbackup
+[OPTIE...] [--] [\fISELECTIE\fR...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzbackup\fR maakt een back-up (reservekopie) van mappen en bestanden.
+.sp
+Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt er een back-up gemaakt
+van alle Persoonlijke mappen (/home), de configuratie (/usr/local/etc) en KVM
+VMs (/etc/libvirt en /var/lib/libvirt).
+.sp
+De als \fISELECTIE\fR opgegeven mappen of bestanden moeten bestaan, dit wordt
+gecontroleerd.
+.sp
+Opbouw van de back-up-bestandsnaam is\
+ 'backup-<computernaam>-jjjjmmddTuummss.tar'.
+.sp
+Standaard locatie voor het plaatsen van de back-up is een medium zoals een
+(externe) harddisk, USB-stick, of een NAS op\
+ '/media/<mediumnaam>/backups/<computernaam>'.
+.br
+Als er meer dan één medium is gevonden dient er een locatie opgegeven te
+worden.
+.sp
+Met optie \fB--target\fR (\fB-t\fR) kan een (andere) locatie opgegeven worden.
+.sp
+Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
+.RS
+/dev
+.br
+/home/*/.adobe/Flash_Player/AssetCache
+.br
+/home/*/.cache
+.br
+/home/*/.ccache
+.br
+/home/.ecryptfs
+.br
+/home/*/.gvfs
+.br
+/home/*/.recent-applications.xbel
+.br
+/home/*/.recently-used.xbel
+.br
+/home/*/snap/*/*/.cache
+.br
+/home/*/snapshots
+.br
+/home/*/.steam/root
+.br
+/home/*/.thumbnails
+.br
+/home/*/.xsession-errors
+.br
+/proc
+.br
+/run
+.br
+/sys
+.br
+/tmp
+.RE
+.sp
+Met optie \fB--exclude\fR (\fB-e\fR) zijn extra mappen en bestanden uit te
+sluiten.
+.sp
+Voor het aanmaken van de back-up wordt tar gebruikt.
+.br
+De inhoud van de back-up is op te vragen met opdracht:
+.RS
+\fBtar\fR tvf \fIBESTAND\fR [--wildcards \fISELECTIE\fR...]
+.RE
+.sp
+Met opdracht \fBkzrestore\fR zijn individuele -of alle- bestanden en mappen uit
+een back-up te herstellen.
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzbackup\fR
+worden gestart door te zoeken naar \fBback\fR, klik op \fBBack-up maken\fR.
+.br
+Dan zal een back-up worden gemaakt van alle Persoonlijke mappen en KVM VMs.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-e\fR, \fB--exclude=\fIUITSLUITEN\fR
+Sluit bestanden of mappen \fIUITSLUITEN\fR uit.
+Mag meerdere keren opgegeven worden.
+.TP
+\fB-t\fR, \fB--target=\fIDOELMAP\fR
+Plaats back-up in de \fIDOELMAP\fR.
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzbackup').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH MAPPEN
+/media/\fIaangekoppelde-media\fR/backups/<computernaam>/
+.RS
+Als er geen \fIDOEL\fR is opegegeven wordt de back-up in deze map geplaatst.
+.RE
+.\"
+.\"
+.SH BESTANDEN
+/usr/local/etc/kzbackup-exclude-dflt
+.RS
+Standaard uit te sluiten bestanden en mappen.
+.RE
+.sp
+/usr/local/etc/kzbackup-exclude-opt
+.RS
+Opgegeven uit te sluiten bestanden en mappen.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+Checklist installatie
+.RS 4
+https://karelzimmer.nl
+.RE
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkzbackup\fR
+.RS
+Maak een back-up van de Persoonlijke mappen en KVM VMs.
+Hiervoor is ook starter 'Back-up maken' beschikbaar.
+.RE
+.sp
+\fBkzbackup --target /tmp /home/*/Documenten\fR
+.RS
+Maak een back-up van alle documenten en plaats deze in map /tmp.
+.RE
+.sp
+\fBkzbackup --exclude '*.JPG' /home/*/Afbeeldingen\fR
+.RS
+Maak een back-up van alle foto's maar geen JPG's.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2007-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzcheckname\fR(1),
+\fBkzcommon.sh\fR(1),
+\fBkzmenu\fR(1),
+\fBkzrestore\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzbackup is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

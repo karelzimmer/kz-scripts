@@ -1,0 +1,274 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Scripts archiveren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2013-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 17.05.04
+# DateOfRelease: 2021-07-22
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly ARCHIVE_FROM=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux
+readonly ARCHIVE_TO=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux-archief
+readonly CHANGELOG=$HOME/kzscripts/CHANGELOG
+readonly CHANGELOG_GZ=$HOME/kzscripts/CHANGELOG.gz
+readonly DELETE_FROM_1=$HOME/kzscripts
+readonly DELETE_FROM_2=$HOME/kzscripts.deb
+readonly DELETE_FROM_3=$HOME/Documenten/Checklists
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON
+                   [SELECTIE...]"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [SELECTIE...]
+
+Scripts archiveren.
+
+Opties:
+$OPTIONS_HELP_COMMON
+
+Argumenten:
+  SELECTIE      zoek naar bestanden overeenkomend met opgegeven SELECTIEs"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare     ARCHIVED=false
+declare     ARGUMENT_SELECTION=false
+declare -a  SELECTION_ARGUMENT=''
+declare     DELETED=false
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    local -i    search4_arg_num=0
+    local       dir=''
+
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                --              "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+   while [[ "$*" ]]; do
+        ARGUMENT_SELECTION=true
+        SELECTION_ARGUMENT[$search4_arg_num]=$(basename "$1")
+        ((++search4_arg_num))
+        shift
+    done
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    for dir in  "$ARCHIVE_FROM"     \
+                "$ARCHIVE_TO"       \
+                "$DELETE_FROM_1"    \
+                "$DELETE_FROM_2"    \
+                "$DELETE_FROM_3"; do
+        if ! [[ -d $dir ]]; then
+            error "$PROGRAM_NAME: map '$dir' bestaat niet"
+            exit $ERROR
+        fi
+    done
+
+    check_user
+    request_input
+}
+
+
+request_input() {
+    if $ARGUMENT_SELECTION; then
+        return $SUCCESS
+    fi
+    read -rp 'Wat archiveren/verwijderen? [leeg=alles]: '
+    SELECTION_ARGUMENT[0]=$REPLY
+}
+
+
+process_input() {
+    local basename=''
+    local dirname=''
+    local files_found=false
+    local search4=''
+
+    for search4 in "${SELECTION_ARGUMENT[@]}"; do
+        while read -r file; do
+
+            files_found=true
+
+            dirname=$(dirname   "$file")
+            basename=$(basename "$file")
+
+            if [[ $dirname = $ARCHIVE_FROM* ]]; then
+                process_archive
+            else
+                process_remove
+            fi
+        done < <(
+            find    "$ARCHIVE_FROM"     \
+                    "$DELETE_FROM_1"    \
+                    "$DELETE_FROM_2"    \
+                    "$DELETE_FROM_3"    \
+                    -iname              \
+                    '*'"$search4"'*'    \
+                    -type f             \
+                    -print              |
+                    sort
+            )
+        if ! $files_found; then
+            warning "\nGeen bestanden gevonden met '$search4' in de naam."
+        fi
+        files_found=false
+    done
+
+}
+
+
+process_archive() {
+    printf "\n%s\n%s\n" "$basename" "$dirname"
+    while true; do
+        # < /dev/tty want FD 1 al in gebruik door for-while constructie.
+        read -rp 'archiveren/Overslaan/stoppen? [a/O/s]: ' < /dev/tty
+        case $REPLY in
+            a*|A*)
+                archive_file
+                break
+                ;;
+            o*|O*|'')
+                printf '%s\n' 'Overgeslagen.'
+                break
+                ;;
+            s*|S*)
+                exit $SUCCESS
+                ;;
+            *)
+                printf '%s' "${UP_ONE_LINE}${ERASE_LINE}"
+                continue
+                ;;
+        esac
+    done
+}
+
+
+archive_file() {
+    local olddir=''
+    local newdir=''
+
+    olddir=$dirname
+    newdir=${olddir//linux/linux-archief}
+    mv "$olddir/$basename" "$newdir" |& $LOGCMD
+    printf '%s\n' 'Gearchiveerd.'
+    warning 'Pas website aan!'
+    ARCHIVED=true
+}
+
+
+process_remove() {
+    printf "\n%s\n%s\n" "$basename" "$dirname"
+    while true; do
+        # < /dev/tty want FD 1 al in gebruik door for-while constructie.
+        read -rp 'verwijderen/Overslaan/stoppen? [v/O/s]: ' < /dev/tty
+        case $REPLY in
+            v*|V*)
+                remove_file
+                break
+                ;;
+            o*|O*|'')
+                printf '%s\n' 'Overgeslagen.'
+                break
+                ;;
+            s*|S*)
+                exit $SUCCESS
+                ;;
+            *)
+                printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
+                continue
+                ;;
+        esac
+    done
+}
+
+
+remove_file() {
+    rm "$file" |& $LOGCMD
+    if [[ $dirname = "$DELETE_FROM_1" ]]; then
+        gunzip "$CHANGELOG_GZ" |& $LOGCMD
+        sed --in-place --expression="/^$basename /d" "$CHANGELOG"
+        gzip --best --force "$CHANGELOG" |& $LOGCMD
+    fi
+    printf '%s\n' 'Verwijderd.'
+    DELETED=true
+}
+
+
+term_script() {
+    if $DELETED; then
+        TEXT='\nEr zijn bestanden verwijderd.'
+    else
+        TEXT='\nEr zijn geen bestanden verwijderd.'
+    fi
+    if $ARCHIVED; then
+        TEXT="$TEXT\nEr zijn bestanden gearchiveerd."
+    else
+        TEXT="$TEXT\nEr zijn geen bestanden gearchiveerd."
+    fi
+    info "$TEXT"
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

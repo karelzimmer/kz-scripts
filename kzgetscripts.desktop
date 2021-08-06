@@ -1,0 +1,28 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzgetscripts.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2015-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 02.03.02
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Install scripts
+Name[nl]=Scripts installeren
+GenericName=Install program
+GenericName[nl]=Installatieprogramma
+Comment=Download and install package kzscripts
+Comment[nl]=Download en installeer pakket kzscripts
+Keywords=kzgetscripts;getscripts;
+Keywords[nl]=kzgetscripts;getscripts;
+Categories=KZ-Scripts;
+Exec=/usr/bin/kzgetscripts --gui
+Icon=/usr/share/pixmaps/kzgetscripts.svg
+Terminal=true
+
+# EOF

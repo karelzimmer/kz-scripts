@@ -1,0 +1,583 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Scripts controleren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2015-2020 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 13.08.01
+# DateOfRelease: 2021-07-22
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+readonly THIS_YEAR=$(date +%Y)
+readonly LAST_YEAR=$((THIS_YEAR - 1))
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
+
+Scripts controleren.
+
+Opties:
+$OPTIONS_HELP_COMMON"
+
+
+###############################################################################
+# Globale variabelen
+###############################################################################
+
+declare -i MAXRC=0
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        printf  "$PROGRAM_NAME: %s\n%s\n"   \
+                'geen argumenten opgeven'   \
+                "$USAGELINE"                >&2
+        exit $ERROR
+    fi
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    check_user
+
+    # Regel sudo maar gelijk voor verderop.
+    sudo true
+
+    check_dependencies
+
+}
+
+
+check_dependencies() {
+    if ! command -v pep8 1> /dev/null; then
+        info 'Installeer pep8...'
+        sudo apt-get install --yes pep8 |& $LOGCMD
+    fi
+    if ! command -v shellcheck 1> /dev/null; then
+        info 'Installeer shellcheck...'
+        # Debian's pakket is oud, snap is nieuwer.
+        sudo snap install shellcheck |& $LOGCMD
+    fi
+}
+
+
+process_input() {
+    local script=''
+    local scriptsdir=$HOME/kzscripts
+
+    # Te controleren scripts staan in scriptsdir.
+    cd "$scriptsdir" || exit $ERROR
+
+    for script in *; do
+        if ! [[ -f $script ]]; then
+            continue
+        fi
+        case $script in
+            CHANGELOG*)
+                continue
+                ;;
+            *.1|*.desktop|*.policy)
+                check_tags
+                check_lines
+                check_fields
+                check_trailing_spaces
+                ;;
+            *.completion|*.sh)
+                check_tags
+                check_lines
+                check_fields
+                check_trailing_spaces
+                check_script_shellcheck
+                ;;
+            *.py)
+                check_tags
+                check_lines
+                check_fields
+                check_trailing_spaces
+                check_script_pep8
+                ;;
+            *)
+                check_tags
+                check_lines
+                check_fields
+                check_trailing_spaces
+                check_script
+                check_usage
+                ;;
+        esac
+    done
+}
+
+
+check_tags() {
+    if grep --quiet             \
+            --word-regexp       \
+            --regexp='#''XXX'   \
+            --regexp='#''TODO'  \
+            --regexp='#''FIXME' \
+            "$script"; then
+        info "
+In $script:
+    Gedit-tags gevonden.
+
+$(
+    grep    --line-number           \
+            --word-regexp           \
+            --regexp='#''XXX'       \
+            --regexp='#''TODO'      \
+            --regexp='#''FIXME'     \
+            "$script"               |
+    nl      --number-width=4        \
+            --number-separator=''   \
+            --body-numbering=n
+)
+"
+    fi
+}
+
+
+check_lines() {
+    local -i line_num=0
+    local -i max_line_length=79
+    local -i max_line_length_found=0
+
+    case $script in
+        *.sh)
+            max_line_length=465
+            ;;
+        *.policy)
+            max_line_length=106
+            ;;
+        *)
+            max_line_length=79
+            ;;
+    esac
+
+    max_line_length_found=$(wc --max-line-length < "$script")
+    if  [[ $max_line_length_found -gt $max_line_length ]]; then
+        info "
+In $script:
+    Een regel is langer dan $max_line_length ($max_line_length_found).
+"
+        if [[ $WARNING -gt $MAXRC ]]; then
+            MAXRC=$WARNING
+        fi
+    fi
+
+    line_num=$(wc --lines < "$script")
+    if [[ $line_num -gt 1000 ]]; then
+        info "
+In $script:
+    Meer dan duizend regels ($line_num).
+"
+        if [[ $WARNING -gt $MAXRC ]]; then
+            MAXRC=$WARNING
+        fi
+    fi
+
+    # '#1 foo' = ok, '#1' = ok, '#1foo' = ¬ok, hetzelfde voor #2, #3, 44n #4.
+    if [[ $script == kzinstall*.sh || $script == kzsetup*.sh ]]; then
+        wrong_record=$(
+            grep --regexp='#[1-4]' "$script" --line-number  |
+            grep --regexp='#[1-4]$' --invert-match          |
+            grep --regexp='#[1-4] ' --invert-match          || true
+        )
+    else
+        wrong_record=''
+    fi
+    if [[ -n $wrong_record ]]; then
+        info "
+In $script:
+    Foutieve regel(s) gevonden.
+$(
+        echo    "$wrong_record" |
+        nl      --number-width=8  --number-separator='' --body-numbering=n
+
+    )
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+}
+
+
+check_fields() {
+    local age=''
+    local copyright_line=''
+    local rel_dat=''
+    local releaseday=''
+    local rel_num=''
+    local today=''
+
+    copyright_line=$(
+        grep --word-regexp --regexp=' ''Auteursrecht '  "$script" || true
+        )
+    if [[ -z $copyright_line ]]; then
+        info "
+In $script:
+    Auteursrecht ontbreekt.
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    else
+        # Jaarwisseling.
+        if ! grep --quiet --regexp="$THIS_YEAR" "$script"; then
+            update_fields
+        fi
+    fi
+
+    rel_num=$(
+        awk -F'ReleaseNumber'': '                   \
+            '/''ReleaseNumber'': /{print $2;exit}'  \
+            "$script"
+        )
+    if [[ -z $rel_num ]]; then
+        info "
+In $script:
+    ReleaseNumber ontbreekt.
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+    if [[ $rel_num != ??.??.?? ]]; then
+        info "
+In $script:
+    ReleaseNumber $rel_num is niet geldig.
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+    rel_dat=$(
+        awk -F'DateOfRelease'': '                   \
+            '/''DateOfRelease'': /{print $2;exit}'  \
+            "$script"
+        )
+    if [[ -z $rel_dat ]]; then
+        info "
+In $script:
+    DateOfRelease ontbreekt.
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+    if ! date --date="$rel_dat" &> /dev/null; then
+        info "
+In $script:
+    Vrijgavedatum $rel_dat is niet geldig.
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+    today=$(date +%Y%m%d)
+    releaseday=$(date +%Y%m%d --date="$rel_dat")
+    if [[ $releaseday -gt $today ]]; then
+        info "
+In $script:
+    Vrijgavedatum $rel_dat ligt in de toekomst.
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+    age=$((today - releaseday))
+    if [[ $age -gt 10000 ]]; then
+        info "
+In $script:
+    Vrijgavedatum $rel_dat is meer dan een jaar oud.
+"
+    fi
+
+    if ! grep --quiet --word-regexp --regexp=' ''EOF' "$script"; then
+        info "
+In $script:
+    EOF ontbreekt.
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+}
+
+
+update_fields() {
+    local copyright_line_new=''
+    local copyright_line_first_part=''
+    local pgm_copyright_line=''
+    local pgm_copyright_line_new=''
+
+    # Man-pagina.
+    if [[ $copyright_line = .* ]]; then
+        # Get rid of ./" in copyright line.
+        copyright_line=${copyright_line:4}
+
+
+        # Change program's copyright year in the man page.
+
+        # Auteursrecht (c) 2020 Karel Zimmer. ->
+        # Auteursrecht (c) 2020-2021 Karel Zimmer.
+        pgm_copyright_line=" $LAST_YEAR Karel Zimmer."
+        pgm_copyright_line_new=" $LAST_YEAR-$THIS_YEAR Karel Zimmer."
+        sed --in-place                                                      \
+            --expression="s/$pgm_copyright_line/$pgm_copyright_line_new/g"  \
+            "$script"
+
+        # Auteursrecht (c) 2013-2020 Karel Zimmer. ->
+        # Auteursrecht (c) 2013-2021 Karel Zimmer.
+        pgm_copyright_line="-$LAST_YEAR Karel Zimmer."
+        pgm_copyright_line_new="-$THIS_YEAR Karel Zimmer."
+        sed --in-place                                                      \
+            --expression="s/$pgm_copyright_line/$pgm_copyright_line_new/g"  \
+            "$script"
+    else
+        info "
+In $script:
+    Auteursrechtregel is aangepast voor de jaarwisseling.
+    Maak zelf een PDF aan. Gebruik script edsha.
+"
+    fi
+    copyright_line_first_part=${copyright_line:0:23}
+    copyright_line_new=$copyright_line_first_part"-$THIS_YEAR Karel Zimmer."
+    sed --in-place                                              \
+        --expression="s/$copyright_line/$copyright_line_new/g"  \
+        "$script"
+}
+
+
+check_trailing_spaces() {
+    if grep --quiet --regexp=' ''$' "$script"; then
+        info "
+In $script:
+    Eindspaties gevonden.
+
+$(
+    grep    --line-number --regexp=' ''$' "$script" |
+    nl      --number-width=4  --number-separator='' --body-numbering=n
+
+    )
+"
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+}
+
+
+check_script() {
+    if grep --quiet --line-regexp --regexp='#!''/bin/bash' "$script"; then
+            check_script_shellcheck
+    elif grep   --quiet                         \
+                --line-regexp                   \
+                --regexp='#!''/usr/bin/python3' \
+                "$script"; then
+            check_script_pep8
+    else
+        info "
+In $script:
+    Onbekend script.  Functie check_script() kan script niet controleren."
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+}
+
+
+check_script_shellcheck() {
+    local -i    check_rc=0
+
+    shellcheck --external-sources "$script" || check_rc=$?
+    if [[ $check_rc -gt $MAXRC ]]; then
+        MAXRC=$check_rc
+    fi
+}
+
+
+check_script_pep8() {
+    local -i check_rc=0
+
+    pep8 "$script" || check_rc=$?
+    if [[ $check_rc -gt $MAXRC ]]; then
+        MAXRC=$check_rc
+    fi
+}
+
+
+check_usage() {
+    local -i check_rc=0
+
+    "$scriptsdir/$script" --version |& $LOGCMD || check_rc=$?
+    if [[ $check_rc -gt $SUCCESS ]]; then
+        info "
+In $script:
+    Uitvoeren '$script --version' gaat fout."
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+
+    case $script in
+        kzbackup)
+            "$scriptsdir/$script"   --target                            \
+                                    /tmp                                \
+                                    /home/karel/kzscripts |& $LOGCMD    ||
+            check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script --target /tmp /home/karel/kzscripts' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        kzinstall)
+            "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script bitwarden' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script --info' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --remove |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script --remove' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        kzrestore)
+            echo                    '1'             |
+            "$scriptsdir/$script"   --target        \
+                                    /tmp            \
+                                    --source /tmp   |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script --target /tmp --source /tmp' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        kzsetup)
+            "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script bitwarden' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script --info' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --reset |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+In $script:
+    Uitvoeren '$script --reset' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        *)
+            return $SUCCESS
+            ;;
+    esac
+}
+
+
+term_script() {
+    exit $MAXRC
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

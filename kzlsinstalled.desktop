@@ -1,0 +1,33 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzlsinstalled.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2016-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 04.05.02
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Create app list
+Name[nl]=Applijst maken
+GenericName=List software program
+GenericName[nl]=Softwarelijstprogramma
+Comment=Collect added repositories and installed packages
+Comment[nl]=Verzamel toegevoegde pakketbronnen en geïnstalleerde pakketten
+Keywords=kzlsinstalled;lsinstalled;softwarelist;programlist;applist;
+Keywords[nl]=kzlsinstalled;lsinstalled;softwarelijst;programmalijst;applijst;
+Categories=KZ-Scripts;
+Exec=pkexec /usr/bin/kzlsinstalled --gui
+Icon=/usr/share/pixmaps/kzlsinstalled.svg
+Actions=version;
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen
+Exec=/usr/bin/kzlsinstalled --gui --version
+
+# EOF

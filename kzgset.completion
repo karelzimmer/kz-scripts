@@ -1,0 +1,19 @@
+# shellcheck shell=bash
+###############################################################################
+# Tab-completion-script voor kzgset.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2020-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 03.02.00
+# DateOfRelease: 2021-07-12
+###############################################################################
+
+dashoptions="--addappfolder --addfavtop --addfavbottom --removeappfolder
+    --removefav '--file DESKTOPFILE' '--folder=APPFOLDER' -d --debug -g --gui
+    -h --help -u --usage -v --version"
+complete -o default -W "$dashoptions" kzgset
+
+# EOF

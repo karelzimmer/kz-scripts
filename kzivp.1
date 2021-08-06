@@ -1,0 +1,107 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kzivp.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 03.05.04
+.\" DateOfRelease: 2021-07-14
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZIVP 1 "kzivp" "kzscripts 365" "kzivp"
+.\"
+.\"
+.SH NAAM
+kzivp \- Scripts controleren.
+.\"
+.\"
+.SH SAMENVATTINGmsg
+.B kzivp
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzivp\fR voert een Installatie Verificatie Procedure (IVP) uit voor
+scripts.
+.sp
+Voert een IVP uit waarbij scripts inhoudelijk en met shellcheck worden
+gecontroleerd.
+.sp
+\fBkzivp\fR wordt ook aangeroepen vanuit \fBkzdeploy\fR.
+.sp
+Gecontroleerd wordt:
+.br
+Tags        - gedit-tags
+.br
+Regels      - aantal regels en regellengte
+.br
+Velden      - zoals ReleaseNumber en DateOfRelease
+.br
+Spaties     - eindspaties
+.br
+Shellcheck  - shellscript analyse tool
+.br
+Gebruik     - roep shellscript aan met opties zoals ook in starter aanwezig
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzivp\fR
+worden gestart door te zoeken naar \fBivp\fR, klik op\
+ \fBScripts controleren\fR.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzivp').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2015-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzcommon.sh\fR(1),
+\fBkzdeploy\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzivp is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

@@ -1,0 +1,124 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kzckhtml.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 03.04.04
+.\" DateOfRelease: 2021-07-14
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZCKHTML 1 "kzckhtml" "kzscripts 365" "kzckhtml"
+.\"
+.\"
+.SH NAAM
+kzckhtml \- Webbestanden valideren.
+.\"
+.\"
+.SH SAMENVATTING
+.B kzckhtml
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkzckhtml\fR valideert HTML- en CSS-bestanden.
+.sp
+De pagina's (.html) en opmaakbestanden (.css) worden gevalideert met de W3C
+Markup- en CSS Validatie Service.
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzckhtml\fR
+worden gestart door te zoeken naar \fBwebb\fR, klik op
+\fBWebbestanden valideren\fR.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kzckhtml').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH WEBADRESSEN
+https://karelzimmer.nl/css
+.RS
+Map met CSS op internet.
+.RE
+.sp
+https://karelzimmer.nl/html
+.RS
+Map met HTML op internet.
+.RE
+.sp
+http://jigsaw.w3.org/css-validator/validator?uri=
+.RS
+CSS-validator.
+.RE
+.sp
+http://validator.w3.org/check?uri=
+.RS
+HTM-validator.
+.RE
+.\"
+.\"
+.SH MAPPEN
+~/uploads/site/css
+.RS
+Map met CSS (Cascading Style Sheets).
+.RE
+.sp
+~/uploads/site/html
+.RS
+Map met HTML (HyperText Markup Language).
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2012-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzcommon.sh\fR(1),
+\fBkzcheckname\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kzckhtml is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

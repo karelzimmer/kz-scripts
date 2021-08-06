@@ -1,0 +1,53 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzinstall.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2016-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 06.02.01
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Install apps
+Name[nl]=Apps installeren
+GenericName=Install program
+GenericName[nl]=Installatieprogramma
+Comment=Add apps and change system settings
+Comment[nl]=Installeer apps en wijzig systeeminstellingen
+Keywords=kzinstall;install;
+Keywords[nl]=kzinstall;
+Categories=KZ-Scripts;
+Exec=pkexec /usr/bin/kzinstall --gui
+Icon=/usr/share/pixmaps/kzinstall.svg
+Actions=info;remove;cat;simulate;version;
+
+[Desktop Action info]
+Name=Show installation instructions
+Name[nl]=Installatie-instructies tonen
+Exec=/usr/bin/kzinstall --gui --info
+
+[Desktop Action remove]
+Name=Show removal instructions
+Name[nl]=Verwijder-instructies tonen
+Exec=/usr/bin/kzinstall --gui --remove
+
+[Desktop Action cat]
+Name=Show files
+Name[nl]=Bestanden tonen
+Exec=/usr/bin/kzinstall --gui --cat
+
+[Desktop Action simulate]
+Name=Show commands
+Name[nl]=Opdrachten tonen
+Exec=/usr/bin/kzinstall --gui --simulate
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen tonen
+Exec=/usr/bin/kzinstall --gui --version
+
+# EOF

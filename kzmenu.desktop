@@ -1,0 +1,33 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzmenu.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2020-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 08.05.02
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Installation menu
+Name[nl]=Installatiemenu
+GenericName=Installation helper
+GenericName[nl]=Installatiehulp
+Comment=Run installation commands through a menu
+Comment[nl]=Voer installatie-opdrachten uit via een menu
+Keywords=kzmenu;menu;
+Keywords[nl]=kzmenu;menu;
+Categories=KZ-Scripts;
+Exec=/usr/bin/kzmenu --gui
+Icon=/usr/share/pixmaps/kzmenu.svg
+Actions=version;
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen
+Exec=/usr/bin/kzmenu --gui --version
+
+# EOF

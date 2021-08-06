@@ -1,0 +1,522 @@
+#!/bin/bash
+###############################################################################
+# Scripts installeren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2016-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 26.12.00
+# DateOfRelease: 2021-07-25
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+readonly    PROGRAM_NAME='kzgetscripts'
+#eadonly    PROGRAM_PATH=None
+readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
+
+declare -ir SUCCESS=0
+declare -ir ERROR=1
+declare -ir WARNING=2
+
+# Terminalattributen ('man terminfo').  Gebruik ${<variabele_naam>}.
+readonly    NORMAL=$(tput sgr0)
+readonly    RED=$(tput setaf 1)
+readonly    GREEN=$(tput setaf 2)
+readonly    BLUE=$(tput setaf 4)
+readonly    YELLOW=$(tput setaf 3)
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare LOGCMD_CHECK=''
+declare TERMINAL=false
+declare TEXT=''
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+init_script() {
+    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
+    LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
+--identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
+    LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
+    log "started as $CALLED (from $PWD)"
+
+    # Script-hardening
+    set -o errexit
+    set -o errtrace
+    set -o nounset
+    set -o pipefail
+    # bash 5.0: trap exit: ${FUNCNAME[0]}: ongebonden variabele
+    # Enable code-stepping:
+    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
+    trap 'signal error   $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
+    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
+    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
+    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
+
+    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
+        log '(++) Met Debian heeft gebruiker root toegang nodig tot mijn'
+        log '(++) X-sessie voor het kunnen gebruiken van zenity in kzscripts'
+        log '(++) met RUN_AS_SUPERUSER=true:'
+        log '(++) xhost +si:localuser:root'
+        xhost +si:localuser:root |& $LOGCMD
+    fi
+}
+
+
+log() {
+    printf '%b' "$@" |& $LOGCMD
+}
+
+
+signal() {
+    local       signal=${1:-signal?}
+    local   -i  lineno=${2:-0}
+    local       function=${3:-funcname?}
+    local       command=${4:-command?}
+    local   -i  rc=${5:-1}
+    local       rc_desc=''
+    local   -i  rc_desc_signalno=0
+    local       status="${RED}$ERROR/ERROR${NORMAL}"
+
+    case $rc in
+        0)
+            rc_desc='successful termination'
+            status="${GREEN}$rc/SUCCESS${NORMAL}"
+            ;;
+        1)
+            rc_desc='terminated with error'
+            ;;
+        2)
+            rc_desc='terminated with warning'
+            status="${YELLOW}$rc/WARNING${NORMAL}"
+            ;;
+        6[4-9]|7[0-8])                  # 64 - 78
+            rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
+            ;;
+        126)
+            rc_desc='command cannot execute'
+            ;;
+        127)
+            rc_desc='command not found'
+            ;;
+        128)
+            rc_desc='invalid argument to exit'
+            ;;
+        129)                            # sighup (128+ 1)
+            rc_desc='hangup'
+            ;;
+        130)                            # sigint (128+ 2)
+            rc_desc='terminated by control-c'
+            ;;
+        13[1-9]|14[0-2])                # 131 (128+3) - 142 (128+14)
+            rc_desc_signalno=$((rc - 128))
+            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
+            ;;
+        143)                            # sigterm (128+15)
+            rc_desc='termination signal'
+            ;;
+        14[4-9]|1[5-8][0-9]|19[0-2])    # 144 (128+16) - 192 (128+64)
+            rc_desc_signalno=$((rc - 128))
+            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
+            ;;
+        255)
+            rc_desc='exit status out of range'
+            ;;
+        *)
+            rc_desc='unknown error'
+            ;;
+    esac
+
+    log_debug "signal: $signal, line: $lineno, function: $function, command: \
+$command, code: $rc ($rc_desc)"
+
+    case $signal in
+        error)
+            exit "$rc"
+            ;;
+        exit)
+            signal_exit
+            log "ended (code=exited, status=$status)"
+
+            # Een non-gui script gestart met optie gui.
+            if $TERMINAL; then
+                read -rp "Druk op de Enter-toets om verder te gaan [Enter]: "
+            fi
+
+            trap - ERR EXIT SIGINT SIGPIPE SIGTERM SIGHUP
+            exit "$rc"
+            ;;
+        *)
+            printf "${YELLOW}%b${NORMAL}\n" "$PROGRAM_NAME is onderbroken." >&2
+            exit "$rc"
+            ;;
+    esac
+}
+
+
+log_debug() {
+    printf '%b' "$@" |& $LOGCMD_DEBUG
+}
+
+
+signal_exit() {
+    if [[ $rc -ne $SUCCESS ]]; then
+        TEXT="${RED}Programma $PROGRAM_NAME is afgebroken.
+
+Om de log te controleren, start een Terminalvenster, en voer uit:${BLUE}
+    $LOGCMD_CHECK${NORMAL}
+
+
+Als de pakketbeheerder 'apt' foutmeldingen geeft,
+start dan een nieuw Terminalvenster, en voer uit:${BLUE}
+    sudo dpkg --configure --pending
+    sudo apt-get update --fix-missing
+    sudo apt-get install --fix-broken
+    sudo update-initramfs -u${NORMAL}"
+        printf '%b\n' "$TEXT"
+    fi
+    rm --force s s.{1..99}
+}
+
+
+check_input() {
+    # Start in grafische modus.
+    if [[ "$*" ]]; then
+        if [[ "$*" = *-g* ]]; then
+            TERMINAL=true
+        else
+            TEXT="$PROGRAM_NAME: geen opties of argumenten opgeven
+
+Voor de nieuwste versie van $PROGRAM_NAME én het scriptspakket,
+gebruik de opdracht: ${BLUE}wget karelzimmer.nl/s${NORMAL}
+                     ${BLUE}bash s${NORMAL}
+                 of: ${BLUE}wget -O- karelzimmer.nl/s | bash${NORMAL}
+                 of: ${BLUE}curl -L karelzimmer.nl/s | bash${NORMAL}
+                 of: ${BLUE}wget karelzimmer.nl/s; bash s${NORMAL}
+                 of: ${BLUE}$PROGRAM_NAME${NORMAL}"
+            printf "%s\n" "$TEXT" >&2
+            exit $SUCCESS
+        fi
+    fi
+    clear -x
+
+    check_user
+    check_on_ac_power
+}
+
+
+check_user() {
+    if ! id --name --groups "$USER" | grep --quiet --regexp='sudo'; then
+        TEXT="De huidge gebruiker is geen beheerder (is geen lid van groep \
+sudo).
+
+Dit programma heeft beheerdersrechten nodig, en kan nu niet verder.
+
+Typ 'exit' om dit venster te sluiten."
+        TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                            --title     'Fout'          \
+                            --infobox   "$TEXT"         \
+                            11 71
+        exit $SUCCESS
+    fi
+}
+
+
+check_on_ac_power() {
+    local -i on_battery=0
+
+    on_ac_power >/dev/null 2>&1 || on_battery=$?
+    if [[ $on_battery -eq 1 ]]; then
+        TEXT='De computer gebruikt nu alleen de accu voor de stroomvoorziening.
+
+Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
+        whiptail    --backtitle "$PROGRAM_NAME" \
+                    --title     'Waarschuwing'  \
+                    --msgbox    "$TEXT"         \
+                    10 71
+    fi
+}
+
+
+check_sudo_and_dpkg() {
+    check_sudo
+    check_dpkg
+}
+
+
+check_sudo() {
+    if ! sudo -n true 2> /dev/null; then
+        while true; do
+            TEXT='
+Authenticatie is vereist voor het
+installeren van pakket kzscripts.
+
+Voer uw wachtwoord in:'
+            # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
+            if printf '%s\n' "$(
+                whiptail    --backtitle     "$PROGRAM_NAME"         \
+                            --title         'Authenticatie nodig'   \
+                            --ok-button     'Verifiëren'            \
+                            --cancel-button 'Annuleren'             \
+                            --passwordbox   "$TEXT"                 \
+                            12 37                                   \
+                            3>&1 1>&2 2>&3
+                )" | sudo --stdin true 2> /dev/null; then
+                break
+            else
+                TEXT='Geen of verkeerd wachtwoord ingevoerd, of
+Annuleren gekozen.'
+                if ! whiptail   --backtitle     "$PROGRAM_NAME" \
+                                --title         'Fout'          \
+                                --yes-button    'Opnieuw'       \
+                                --no-button     'Stoppen'       \
+                                --yesno         "$TEXT"         \
+                                10 45; then
+                    TEXT='Programma is gestopt door de gebruiker'
+                    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                                        --title     'Gestopt'       \
+                                        --infobox   "$TEXT"         \
+                                        7 42
+                    exit        $SUCCESS
+                fi
+            fi
+        done
+    fi
+}
+
+
+check_dpkg() {
+    local -i wait_for_aptd=5
+
+    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+        while sudo  fuser                                                   \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
+                    /var/cache/debconf/config.dat                           \
+                    /snap/core/*/var/cache/debconf/config.dat               \
+                    &> /dev/null; do
+            TEXT="Wacht tot andere pakketbeheerder klaar is (dit kan even \
+duren)..."
+            TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                                --title     'Voortgang'     \
+                                --infobox   "$TEXT"         \
+                                7 69
+            sleep $wait_for_aptd
+        done
+    else
+        while sudo  fuser                                                   \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
+                    /var/cache/debconf/config.dat                           \
+                    &> /dev/null; do
+            TEXT="Wacht tot andere pakketbeheerder klaar is (dit kan even \
+duren)..."
+            TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                                --title     'Voortgang'     \
+                                --infobox   "$TEXT"         \
+                                7 69
+            sleep $wait_for_aptd
+        done
+    fi
+}
+
+
+process_input() {
+    local karel_full_name=''
+    local ubuntu_full_name=''
+
+    install_scriptspackage
+
+    # Ben ik een ontwikkelaar?
+    karel_full_name=$(
+        getent  passwd  karel           |
+        awk     -F:     '{print $5}'    |
+        awk     -F,     '{print $1}'    || true
+        )
+    ubuntu_full_name=$(
+        getent  passwd  ubuntu          |
+        awk     -F:     '{print $5}'    |
+        awk     -F,     '{print $1}'    || true
+        )
+    debian_full_name=$(
+        getent  passwd  user            |
+        awk     -F:     '{print $5}'    |
+        awk     -F,     '{print $1}'    || true
+        )
+    if [[   ($USER = karel  && $karel_full_name  = 'Karel Zimmer'    )  ||
+            ($USER = ubuntu && $ubuntu_full_name = 'Live session user') ||
+            ($USER = user   && $debian_full_name = 'Debian Live user')  ]]
+    then
+        create_development_environment
+    fi
+}
+
+
+install_scriptspackage() {
+    local debname=kzscripts_365_all.deb
+    local site_deb=https://karelzimmer.nl/apps/kzscripts/$debname
+    local temp_deb=''
+
+    # Bij Live-sessie de universe repo aanzetten.
+    if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
+        check_sudo_and_dpkg
+        TEXT='Voeg pakketbron toe...'
+        TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                            --title     'Voortgang'     \
+                            --infobox   "$TEXT"         \
+                            7 26
+        sudo add-apt-repository --yes universe  |& $LOGCMD
+
+        check_sudo_and_dpkg
+        TEXT='Ververs pakketlijst'
+        TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                            --title     'Voortgang'     \
+                            --infobox   "$TEXT"         \
+                            7 23
+        sudo apt-get update |& $LOGCMD
+    fi
+
+    # Installeer scriptspakket.
+    check_sudo_and_dpkg
+    TEXT='Download scriptspakket...'
+    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                        --title     'Voortgang'     \
+                        --infobox   "$TEXT"         \
+                        7 29
+
+    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    wget --output-document="$temp_deb" $site_deb |& $LOGCMD
+
+    check_sudo_and_dpkg
+    TEXT='Installeer scriptspakket (dit kan even duren)...'
+    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                        --title     'Voortgang'     \
+                        --infobox   "$TEXT"         \
+                        7 52
+
+    check_sudo_and_dpkg
+    sudo    DEBIAN_FRONTEND=noninteractive  \
+            apt-get                         \
+            install                         \
+            --yes                           \
+            --reinstall                     \
+            "$temp_deb"                     |& $LOGCMD
+    rm "$temp_deb" |& $LOGCMD
+}
+
+
+create_development_environment() {
+    local ftp_set='set ssl:verify-certificate no'
+    local ftp_from=/httpdocs
+    local ftp_to=$HOME/uploads/karelzimmer.nl/httpdocs
+    local ftp_opts='--delete --verbose'
+    local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
+    local ftp_host=server106.hosting2go.nl
+    local ftp_user=kzimmer
+    local ftp_login=$HOME/.kz-$ftp_host
+    local site_tar=https://karelzimmer.nl/apps/kzscripts/kzscripts.tar.gz
+    local temp_tar=''
+
+    # Pull scriptsarchief.
+    TEXT='Download scriptsarchief...'
+    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                        --title     'Voortgang'     \
+                        --infobox   "$TEXT"         \
+                        7 30
+    temp_tar=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.tar")
+    wget --output-document="$temp_tar" $site_tar |& $LOGCMD
+
+    TEXT='Extract scriptsarchief...'
+    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                        --title     'Voortgang'     \
+                        --infobox   "$TEXT"         \
+                        7 29
+
+    # Verwijder eerst alle bestanden uit mappen die in het archief voorkomen.
+    tar --list --file="$temp_tar" | while IFS= read -r file; do
+        if [[ ${file: -1} = / ]]; then
+            rm --force --recursive "${HOME:?}/$file"*
+        fi
+    done
+
+    # Zet alles wat zonet verwijderd is weer neer uit het archief.
+    tar --extract --gzip --directory="$HOME" --file="$temp_tar" |& $LOGCMD
+    rm  "$temp_tar" |& $LOGCMD
+
+    # Pull website.
+    if ! [[ -f $ftp_login ]]; then
+        # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.
+        read -rsp "FTP-wachtwoord voor $ftp_host: " < /dev/tty
+        printf '%s\n' "$REPLY" > "$ftp_login"
+        printf '\n'
+        chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
+    fi
+    TEXT='Download website (dit kan even duren)...'
+    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                        --title     'Voortgang'     \
+                        --infobox   "$TEXT"         \
+                        7 49
+    if ! command -v lftp 1> /dev/null; then
+        sudo apt-get install --yes lftp |& $LOGCMD
+    fi
+    if ! lftp   --user "$ftp_user"                  \
+                --password "$(cat "$ftp_login")"    \
+                -e "$ftp_set; $ftp_cmd"             \
+                "$ftp_host"                         |& $LOGCMD; then
+        rm      "$ftp_login"
+        printf  "${YELLOW}%b${NORMAL}\n"            \
+                'Downloaden website is mislukt.'    >&2
+        printf  "${YELLOW}%b${NORMAL}\n" "Controleer de log...!" >&2
+        return  $WARNING
+    fi
+}
+
+
+term_script() {
+    TEXT='Volg nu de stappen zoals beschreven in Checklist installatie.
+
+Deze Checklist is te vinden op de site https://karelzimmer.nl
+onder Linux.'
+    height=10
+
+    if ! $TERMINAL; then
+        TEXT=$TEXT"
+
+Typ 'exit' om dit venster te sluiten."
+        height=12
+    fi
+    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                        --title 'Gereed'            \
+                        --infobox "$TEXT"           \
+                        $height 65
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

@@ -1,0 +1,194 @@
+#!/bin/bash
+# shellcheck source=kzcommon.sh
+###############################################################################
+# Bestandsnamen controleren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2012-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 12.03.08
+# DateOfRelease: 2021-05-30
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+source "$(dirname "$0")"/kzcommon.sh
+
+declare -ir FILENAME_MAXLEN=142
+readonly    START_DFLT=$HOME
+
+readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly    USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON [MAP...]"
+readonly    HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [MAP...]
+
+Bestandsnamen controleren.
+
+Opties:
+$OPTIONS_HELP_COMMON
+
+Argumenten:
+  MAP           begin te controleren vanaf map MAP"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare     ARGUMENT_MAP=false
+declare -a  MAP_ARGUMENT=''
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+check_input() {
+    local -i map_arg_num=0
+
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
+                -- "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
+    fi
+    eval set -- "$PARSED"
+    process_general_options "$@"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    while [[ "$*" ]]; do
+        ARGUMENT_MAP=true
+        MAP_ARGUMENT[$map_arg_num]=$1
+        ((++map_arg_num))
+        shift
+    done
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    check_user
+}
+
+
+process_input() {
+    if ! $ARGUMENT_MAP; then
+        MAP_ARGUMENT[0]=$START_DFLT
+    fi
+
+    for dir in ${MAP_ARGUMENT[*]}; do
+        if ! [[ -d $dir ]]; then
+            error "Map '$dir' bestaat niet."
+            exit $ERROR
+        fi
+    done
+
+    check_files_and_folders
+}
+
+
+check_files_and_folders() {
+    local       dirname
+    local       file
+    local       basename
+    local       good
+    local   -i  count=0
+
+    # Het maakt niet uit of in de bestandsnaam speciale tekens voorkomen zoals
+    # tab, spatie, enz.  Hiervoor zorgt de find met print0,en de read met IFS=
+    # en als delimiter de null character die niet mag voorkomen in een
+    # bestandsnaam.  N.B.: In Linux is alles een bestand!
+    while IFS= read -r -d $'\0' file; do
+
+        dirname=$(dirname "$file")
+        basename=$(basename "$file")
+
+        # Verwijder de slechte tekens, \ is escape voor " en :
+        good=$(printf '%s'"$file" | tr --delete '?"\\<>*|:')
+
+        if ! [[ $file = "$good" ]]; then
+            ((++count))
+            if [[ -d "$file" ]]; then
+                info "BadName  DIR '$file'."
+            elif [[ -f "$file" ]]; then
+                info "BadName FILE '$basename' in map '$dirname'."
+            else
+                info "BadName SYML '$file'."
+            fi
+        fi
+
+        if [[ ${#basename} -gt $FILENAME_MAXLEN ]]; then
+            ((++count))
+            if [[ -d "$file" ]]; then
+                info "BadLen.  DIR '$basename'."
+            else
+                info "BadLen. FILE '$basename' in map '$dirname'."
+            fi
+        fi
+
+    done < <(
+        find    "${MAP_ARGUMENT[@]}"    \
+                -type f                 \
+                -print0                 \
+                -or                     \
+                -type d                 \
+                -print0                 \
+                -or                     \
+                -type l                 \
+                -print0
+        )
+
+    if [[ $count -eq 0 ]]; then
+        return $SUCCESS
+    elif [[ $count -eq 1 ]]; then
+        warning 'Er is een fout gevonden.'
+    else
+        warning "Er zijn $count fouten gevonden."
+    fi
+}
+
+
+term_script() {
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF

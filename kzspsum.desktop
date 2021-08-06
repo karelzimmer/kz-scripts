@@ -1,0 +1,34 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzspsum.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2015-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 01.05.02
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Split control files
+Name[nl]=Controlebestanden opsplitsen
+GenericName=Utility program
+GenericName[nl]=Hulpprogramma
+Comment=Split control files (SHA256SUMS)
+Comment[nl]=Splits controlebestanden (SHA256SUMS) op
+Keywords=kzspsum;spsum;
+Keywords[nl]=kzspsum;spsum;
+Categories=KZ-Scripts;
+Exec=/usr/bin/kzspsum --gui
+Icon=/usr/share/pixmaps/kzspsum.svg
+Terminal=true
+Actions=version;
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen
+Exec=/usr/bin/kzspsum --gui --version
+
+# EOF

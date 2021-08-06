@@ -1,0 +1,53 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kzsetup.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2017-2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 06.02.01
+# DateOfRelease: 2021-07-27
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Set up apps
+Name[nl]=Apps instellen
+GenericName=Setup progam
+GenericName[nl]=Instelprogramma
+Comment=Setup apps and change user settings
+Comment[nl]=Stel apps in en  en wijzig gebruikersinstellingen
+Keywords=kzsetup;setup;
+Keywords[nl]=kzsetup;setup;
+Categories=KZ-Scripts;
+Exec=/usr/bin/kzsetup --gui
+Icon=/usr/share/pixmaps/kzsetup.svg
+Actions=info;reset;cat;simulate;version;
+
+[Desktop Action info]
+Name=Show setup instructions
+Name[nl]=Instel-instructies tonen
+Exec=/usr/bin/kzsetup --gui --info
+
+[Desktop Action reset]
+Name=Show reset instructions
+Name[nl]=Reset-instructies tonen
+Exec=/usr/bin/kzsetup --gui --reset
+
+[Desktop Action cat]
+Name=Show files
+Name[nl]=Bestanden tonen
+Exec=/usr/bin/kzsetup --gui --cat
+
+[Desktop Action simulate]
+Name=Show commands
+Name[nl]=Opdrachten tonen
+Exec=/usr/bin/kzsetup --gui --simulate
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen tonen
+Exec=/usr/bin/kzsetup --gui --version
+
+# EOF
