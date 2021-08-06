@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2014-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 17.06.01
-# DateOfRelease: 2021-07-22
+# ReleaseNumber: 17.06.02
+# DateOfRelease: 2021-08-02
 ###############################################################################
 
 
@@ -186,7 +186,7 @@ process_input() {
         NO_FILES_FOUND=false
         usbname=$(basename "$file" .iso | tr '-' ' ')
 
-        printf "\n%s\n" "$usbname"
+        printf "\n${BOLD}%s${NORMAL}\n" "$usbname"
 
         while true; do
             read -rp 'maken/Overslaan/stoppen? [m/O/s]: '

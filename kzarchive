@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 17.05.04
-# DateOfRelease: 2021-07-22
+# ReleaseNumber: 17.05.05
+# DateOfRelease: 2021-08-02
 ###############################################################################
 
 
@@ -164,7 +164,7 @@ process_input() {
 
 
 process_archive() {
-    printf "\n%s\n%s\n" "$basename" "$dirname"
+    printf "\n${BOLD}%s\n%s${NORMAL}\n" "$basename" "$dirname"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
         read -rp 'archiveren/Overslaan/stoppen? [a/O/s]: ' < /dev/tty
@@ -203,7 +203,7 @@ archive_file() {
 
 
 process_remove() {
-    printf "\n%s\n%s\n" "$basename" "$dirname"
+    printf "\n${BOLD}%s\n%s${NORMAL}\n" "$basename" "$dirname"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
         read -rp 'verwijderen/Overslaan/stoppen? [v/O/s]: ' < /dev/tty

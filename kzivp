@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2015-2020 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 13.08.01
-# DateOfRelease: 2021-07-22
+# ReleaseNumber: 13.08.02
+# DateOfRelease: 2021-08-02
 ###############################################################################
 
 
@@ -163,7 +163,7 @@ check_tags() {
             --regexp='#''FIXME' \
             "$script"; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Gedit-tags gevonden.
 
 $(
@@ -202,7 +202,7 @@ check_lines() {
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Een regel is langer dan $max_line_length ($max_line_length_found).
 "
         if [[ $WARNING -gt $MAXRC ]]; then
@@ -213,7 +213,7 @@ In $script:
     line_num=$(wc --lines < "$script")
     if [[ $line_num -gt 1000 ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Meer dan duizend regels ($line_num).
 "
         if [[ $WARNING -gt $MAXRC ]]; then
@@ -233,7 +233,7 @@ In $script:
     fi
     if [[ -n $wrong_record ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Foutieve regel(s) gevonden.
 $(
         echo    "$wrong_record" |
@@ -261,7 +261,7 @@ check_fields() {
         )
     if [[ -z $copyright_line ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Auteursrecht ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
@@ -281,7 +281,7 @@ In $script:
         )
     if [[ -z $rel_num ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     ReleaseNumber ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
@@ -290,7 +290,7 @@ In $script:
     fi
     if [[ $rel_num != ??.??.?? ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     ReleaseNumber $rel_num is niet geldig.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
@@ -304,7 +304,7 @@ In $script:
         )
     if [[ -z $rel_dat ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     DateOfRelease ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
@@ -313,7 +313,7 @@ In $script:
     fi
     if ! date --date="$rel_dat" &> /dev/null; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Vrijgavedatum $rel_dat is niet geldig.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
@@ -324,7 +324,7 @@ In $script:
     releaseday=$(date +%Y%m%d --date="$rel_dat")
     if [[ $releaseday -gt $today ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Vrijgavedatum $rel_dat ligt in de toekomst.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
@@ -334,14 +334,14 @@ In $script:
     age=$((today - releaseday))
     if [[ $age -gt 10000 ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Vrijgavedatum $rel_dat is meer dan een jaar oud.
 "
     fi
 
     if ! grep --quiet --word-regexp --regexp=' ''EOF' "$script"; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     EOF ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
@@ -382,7 +382,7 @@ update_fields() {
             "$script"
     else
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Auteursrechtregel is aangepast voor de jaarwisseling.
     Maak zelf een PDF aan. Gebruik script edsha.
 "
@@ -398,7 +398,7 @@ In $script:
 check_trailing_spaces() {
     if grep --quiet --regexp=' ''$' "$script"; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Eindspaties gevonden.
 
 $(
@@ -424,7 +424,7 @@ check_script() {
             check_script_pep8
     else
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Onbekend script.  Functie check_script() kan script niet controleren."
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
@@ -459,7 +459,7 @@ check_usage() {
     "$scriptsdir/$script" --version |& $LOGCMD || check_rc=$?
     if [[ $check_rc -gt $SUCCESS ]]; then
         info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script --version' gaat fout."
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
@@ -474,7 +474,7 @@ In $script:
             check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script --target /tmp /home/karel/kzscripts' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
@@ -485,7 +485,7 @@ In $script:
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script bitwarden' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
@@ -494,7 +494,7 @@ In $script:
             "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script --info' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
@@ -503,7 +503,7 @@ In $script:
             "$scriptsdir/$script" --remove |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script --remove' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
@@ -517,7 +517,7 @@ In $script:
                                     --source /tmp   |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script --target /tmp --source /tmp' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
@@ -528,7 +528,7 @@ In $script:
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script bitwarden' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
@@ -537,7 +537,7 @@ In $script:
             "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script --info' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
@@ -546,7 +546,7 @@ In $script:
             "$scriptsdir/$script" --reset |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
-In $script:
+${BOLD}In $script:${NORMAL}
     Uitvoeren '$script --reset' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR

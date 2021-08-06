@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 26.15.14
-# DateOfRelease: 2021-07-23
+# ReleaseNumber: 26.15.15
+# DateOfRelease: 2021-08-02
 ###############################################################################
 
 
@@ -71,6 +71,7 @@ declare     USAGELINE=''
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare     CARRIAGE_RETURN=''
 declare     NORMAL=''
+declare     BOLD=''
 declare     BLINK=''
 declare     RED=''
 declare     GREEN=''
@@ -273,11 +274,12 @@ process_general_options() {
         # Tekstuitvoer non-gui naar de terminal.
         CARRIAGE_RETURN=$(tput cr)
         NORMAL=$(tput sgr0)
+        BOLD=$(tput bold)
         BLINK=$(tput blink)
-        RED=$(tput setaf 1)
-        GREEN=$(tput setaf 2)
-        YELLOW=$(tput setaf 3)
-        BLUE=$(tput setaf 4)
+        RED=${BOLD}$(tput setaf 1)
+        GREEN=${BOLD}$(tput setaf 2)
+        YELLOW=${BOLD}$(tput setaf 3)
+        BLUE=${BOLD}$(tput setaf 4)
         CURSOR_INVISABLE=$(tput civis)
         CURSOR_VISABLE=$(tput cvvis)
         ERASE_LINE="$(tput el)\c"
@@ -285,7 +287,7 @@ process_general_options() {
     fi
     STATUS_ERROR="[${RED}FOUT${NORMAL}]"
     STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
-    STATUS_BUSY="[${BLINK}WERK${NORMAL}]"
+    STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
     STATUS_WARNING="[${YELLOW}WAARSCHUWING${NORMAL}]"
 
     if $OPTION_DEBUG; then

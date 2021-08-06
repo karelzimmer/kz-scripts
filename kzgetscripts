@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 26.12.00
-# DateOfRelease: 2021-07-25
+# ReleaseNumber: 26.12.01
+# DateOfRelease: 2021-08-02
 ###############################################################################
 
 
@@ -26,10 +26,11 @@ declare -ir WARNING=2
 
 # Terminalattributen ('man terminfo').  Gebruik ${<variabele_naam>}.
 readonly    NORMAL=$(tput sgr0)
-readonly    RED=$(tput setaf 1)
-readonly    GREEN=$(tput setaf 2)
-readonly    BLUE=$(tput setaf 4)
-readonly    YELLOW=$(tput setaf 3)
+readonly    BOLD=$(tput bold)
+readonly    RED=${BOLD}$(tput setaf 1)
+readonly    GREEN=${BOLD}$(tput setaf 2)
+readonly    YELLOW=${BOLD}$(tput setaf 3)
+readonly    BLUE=${BOLD}$(tput setaf 4)
 
 
 ###############################################################################
