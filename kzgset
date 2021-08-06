@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 11.00.01
-# DateOfRelease: 2021-07-14
+# ReleaseNumber: 11.00.02
+# DateOfRelease: 2021-08-04
 ###############################################################################
 
 
@@ -393,11 +393,13 @@ report_database_changes() {
     local       output_file1=${1:-output_file1?}
     local       output_file2=${2:-output_file2?}
 
-    info 'Wijzigingen in de configuratiedatabase,
+    info '
+Wijzigingen in de configuratiedatabase,
 < is de oude   instelling (A),
 > is de nieuwe instelling (B):'
     diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
-    info "Bij wijzigingen voer uit:
+    info "
+Bij wijzigingen voer uit:
     ${BLUE}gsettings set WIJZIGING${NORMAL}"
     rm "$CONFIG_A" "$CONFIG_B"
 }
