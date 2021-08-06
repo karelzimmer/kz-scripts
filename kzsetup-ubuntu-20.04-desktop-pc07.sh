@@ -6,9 +6,40 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.02.01
-# DateOfRelease: 2021-07-23
+# ReleaseNumber: 03.02.02
+# DateOfRelease: 2021-08-04
 ###############################################################################
+
+#1
+#2 GNOME instellen
+## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-delay 300; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-enabled true; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
+#4 Start Terminalvenster en voer uit:
+#4    gsettings reset org.gnome.desktop.background picture-uri
+#4    gsettings reset org.gnome.desktop.screensaver lock-delay
+#4    gsettings reset org.gnome.desktop.screensaver lock-enabled
+#4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
+#4    gsettings reset org.gnome.nautilus.preferences show-create-link
+
+
+#1
+#2 Google Chrome instellen
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kzgset --removefav --file='firefox.desktop'; fi
+#3 1. Start Standaardtoepassingen.
+#3 2. Kies bij E-mail voor Gnome Gmail.
+
+
+#1
+#2 Vooruit zoeken in history instellen
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc; fi
+#4 Start Terminalvenster en voer uit:
+#4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
+
 
 #1 bluefish
 #2 Bluefish instellen
@@ -57,27 +88,6 @@ kzgset --addfavtop --file='org.gnome.gedit.desktop'
 #4    kzgset --removefav --file='org.gnome.gedit.desktop'
 
 
-#1
-#2 GNOME instellen
-## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-delay 300; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-enabled true; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-#4 Start Terminalvenster en voer uit:
-#4    gsettings reset org.gnome.desktop.background picture-uri
-#4    gsettings reset org.gnome.desktop.screensaver lock-delay
-#4    gsettings reset org.gnome.desktop.screensaver lock-enabled
-#4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
-
-
-#1
-#2 Google Chrome instellen
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kzgset --removefav --file='firefox.desktop'; fi
-#3 1. Start Standaardtoepassingen.
-#3 2. Kies bij E-mail voor Gnome Gmail.
-
-
 #1 kvm
 #2 KVM instellen
 ## Beeldscherm 2048 x 1152 (16:9).
@@ -114,14 +124,6 @@ kzgset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 8. Sluit Settings.
 #4 Start Terminalvenster en voer uit:
 #4    kzgset --removefav --file='code_code.desktop'
-
-
-#1
-#2 Vooruit zoeken in history instellen
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc; fi
-#4 Start Terminalvenster en voer uit:
-#4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
 # EOF

@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.01.01
-# DateOfRelease: 2021-07-23
+# ReleaseNumber: 01.01.02
+# DateOfRelease: 2021-08-04
 ###############################################################################
 
 #1
@@ -20,6 +20,7 @@ if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
 #4    gsettings reset org.gnome.desktop.screensaver picture-uri
@@ -28,6 +29,7 @@ if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.shell.e
 #4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 #4    gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
+#4    gsettings reset org.gnome.nautilus.preferences show-create-link
 
 
 #1
