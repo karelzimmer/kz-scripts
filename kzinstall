@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 57.01.04
-# DateOfRelease: 2021-07-31
+# ReleaseNumber: 57.01.05
+# DateOfRelease: 2021-08-01
 ###############################################################################
 
 
@@ -540,15 +540,15 @@ process_install_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#3' ]]; then
-        printf '%s\n\n' "    ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
     else
         ((++app_seq_num))
-        len=$((${#description} + 3))
-        printf  "\n%2s. %s\n %.${len}s\n\n    %s\n\n"   \
-                "$app_seq_num"                          \
-                "$description"                          \
-                "   $DASHES"                            \
-                "${record:3}"                           >> "$TEXTFILE"
+        len=${#description}
+        printf  "\n%3s. %s\n     %.${len}s\n\n     %s\n\n"  \
+                "$app_seq_num"                              \
+                "$description"                              \
+                "$DASHES"                                   \
+                "${record:3}"                               >> "$TEXTFILE"
     fi
 }
 
@@ -562,15 +562,15 @@ process_remove_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#4' ]]; then
-        printf '%s\n\n' "    ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
     else
         ((++app_seq_num))
-        len=$((${#description} + 3))
-        printf  "\n%2s. %s\n %.${len}s\n\n    %s\n\n"   \
-                "$app_seq_num"                          \
-                "$description"                          \
-                "   $DASHES"                            \
-                "${record:3}"                           >> "$TEXTFILE"
+        len=${#description}
+        printf  "\n%3s. %s\n     %.${len}s\n\n     %s\n\n"  \
+                "$app_seq_num"                              \
+                "$description"                              \
+                "$DASHES"                                   \
+                "${record:3}"                               >> "$TEXTFILE"
     fi
 }
 

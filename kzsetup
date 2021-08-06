@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 43.02.04
-# DateOfRelease: 2021-07-31
+# ReleaseNumber: 43.02.05
+# DateOfRelease: 2021-08-01
 ###############################################################################
 
 
@@ -537,15 +537,15 @@ process_setup_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#3' ]]; then
-        printf '%s\n\n' "    ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
     else
         ((++app_seq_num))
-        len=$((${#description} + 3))
-        printf  "\n%2s. %s\n %.${len}s\n\n    %s\n\n"   \
-                "$app_seq_num"                          \
-                "$description"                          \
-                "   $DASHES"                            \
-                "${record:3}"                           >> "$TEXTFILE"
+        len=${#description}
+        printf  "\n%3s. %s\n     %.${len}s\n\n     %s\n\n"  \
+                "$app_seq_num"                              \
+                "$description"                              \
+                "$DASHES"                                   \
+                "${record:3}"                               >> "$TEXTFILE"
     fi
 }
 
@@ -559,15 +559,15 @@ process_reset_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#4' ]]; then
-        printf '%s\n\n' "    ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
     else
         ((++app_seq_num))
-        len=$((${#description} + 3))
-        printf  "\n%2s. %s\n %.${len}s\n\n    %s\n\n"   \
-                "$app_seq_num"                          \
-                "$description"                          \
-                "   $DASHES"                            \
-                "${record:3}"                           >> "$TEXTFILE"
+        len=${#description}
+        printf  "\n%3s. %s\n     %.${len}s\n\n     %s\n\n"  \
+                "$app_seq_num"                              \
+                "$description"                              \
+                "$DASHES"                                   \
+                "${record:3}"                               >> "$TEXTFILE"
     fi
 }
 
@@ -696,7 +696,7 @@ term_script() {
             --expression='s/instellen/resetten/g'   \
             "$TEXTFILE"
         # Woord 'resetten' is 1 letter korter dan 'instellen'.
-        sed --in-place --expression='s/^    --/    -/g' "$TEXTFILE"
+        sed --in-place --expression='s/^     ==/     =/g' "$TEXTFILE"
         if $OPTION_GUI; then
             TITLE='Reset-instructies'
             if ! zenity --text-info                         \
