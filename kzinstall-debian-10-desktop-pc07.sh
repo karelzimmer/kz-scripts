@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.02.02
-# DateOfRelease: 2021-07-31
+# ReleaseNumber: 01.03.00
+# DateOfRelease: 2021-08-04
 ###############################################################################
 
 #1
@@ -73,6 +73,13 @@ sudo apt-get install --yes libimage-exiftool-perl
 sudo apt-get install --yes gedit-plugins
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gedit-plugins
+
+
+#1 git
+#2 Git installeren
+sudo apt-get install --yes git git-gui qgit
+#4 Start Terminalvenster en voer uit:
+#4    sudo apt remove --yes git git-gui qgit
 
 
 #1 kvm

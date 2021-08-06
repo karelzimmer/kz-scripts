@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.42.00
-# DateOfRelease: 2021-07-31
+# ReleaseNumber: 02.43.00
+# DateOfRelease: 2021-08-04
 ###############################################################################
 
 #1 bluefish
@@ -81,6 +81,13 @@ sudo apt-get install --yes gconf-editor
 sudo apt-get install --yes gedit-plugins
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gedit-plugins
+
+
+#1 git
+#2 Git installeren
+sudo apt-get install --yes git git-gui qgit
+#4 Start Terminalvenster en voer uit:
+#4    sudo apt remove --yes git git-gui qgit
 
 
 #1 hardinfo
