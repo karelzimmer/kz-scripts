@@ -8,16 +8,25 @@
 # Auteursrecht (c) 2014-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 12.08.01
-# DateOfRelease: 2021-06-26
+# ReleaseNumber: 12.08.02
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
-source "$(dirname "$0")"/kzcommon.sh
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
+
+Netwerkschijf aankoppelen.
+
+Opties:
+$OPTIONS_HELP_COMMON"
 
 readonly NAS_LOGIN=/usr/local/etc/${PROGRAM_NAME}login
 readonly NAS_MOUNT_POINT=/mnt/$PROGRAM_NAME
@@ -37,16 +46,6 @@ readonly RUN_AS_SUPERUSER=true
 readonly SYSTEMD_MOUNT_DIR=/etc/systemd/system
 readonly SYSTEMD_MOUNT_FILE=mnt-nas.mount
 readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
-
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
-
-Netwerkschijf aankoppelen.
-
-Opties:
-$OPTIONS_HELP_COMMON"
 
 
 ###############################################################################

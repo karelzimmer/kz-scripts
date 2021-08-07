@@ -8,19 +8,15 @@
 # Auteursrecht (c) 2015-2020 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 13.09.00
-# DateOfRelease: 2021-08-05
+# ReleaseNumber: 13.09.01
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly THIS_YEAR=$(date +%Y)
-readonly LAST_YEAR=$((THIS_YEAR - 1))
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
@@ -31,6 +27,9 @@ Scripts controleren.
 
 Opties:
 $OPTIONS_HELP_COMMON"
+
+readonly THIS_YEAR=$(date +%Y)
+readonly LAST_YEAR=$((THIS_YEAR - 1))
 
 
 ###############################################################################

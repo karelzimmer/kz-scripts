@@ -8,20 +8,15 @@
 # Auteursrecht (c) 2014-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 17.06.02
-# DateOfRelease: 2021-08-02
+# ReleaseNumber: 17.06.03
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly DEVICE_DEFAULT=/dev/sdb
-readonly SOURCE_DEFAULT=/home/${SUDO_USER:-$USER}/Downloads
-readonly RUN_AS_SUPERUSER=true
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON's:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:'
@@ -37,6 +32,10 @@ Apties:
   -t --target=APPARAAT
                 gebruik de opgegeven USB-stick-device APPARAAT
 $OPTIONS_HELP_COMMON"
+
+readonly DEVICE_DEFAULT=/dev/sdb
+readonly SOURCE_DEFAULT=/home/${SUDO_USER:-$USER}/Downloads
+readonly RUN_AS_SUPERUSER=true
 
 
 ###############################################################################

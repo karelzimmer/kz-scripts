@@ -8,24 +8,14 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 17.05.05
-# DateOfRelease: 2021-08-02
+# ReleaseNumber: 17.05.06
+# DateOfRelease: 2021-08-07
 ###############################################################################
-
+source "$(dirname "$0")"/kzcommon.sh
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly ARCHIVE_FROM=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux
-readonly ARCHIVE_TO=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux-archief
-readonly CHANGELOG=$HOME/kzscripts/CHANGELOG
-readonly CHANGELOG_GZ=$HOME/kzscripts/CHANGELOG.gz
-readonly DELETE_FROM_1=$HOME/kzscripts
-readonly DELETE_FROM_2=$HOME/kzscripts.deb
-readonly DELETE_FROM_3=$HOME/Documenten/Checklists
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
@@ -40,6 +30,14 @@ $OPTIONS_HELP_COMMON
 
 Argumenten:
   SELECTIE      zoek naar bestanden overeenkomend met opgegeven SELECTIEs"
+
+readonly ARCHIVE_FROM=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux
+readonly ARCHIVE_TO=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux-archief
+readonly CHANGELOG=$HOME/kzscripts/CHANGELOG
+readonly CHANGELOG_GZ=$HOME/kzscripts/CHANGELOG.gz
+readonly DELETE_FROM_1=$HOME/kzscripts
+readonly DELETE_FROM_2=$HOME/kzscripts.deb
+readonly DELETE_FROM_3=$HOME/Documenten/Checklists
 
 
 ###############################################################################

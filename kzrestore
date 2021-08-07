@@ -8,30 +8,15 @@
 # Auteursrecht (c) 2007-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 38.08.01
-# DateOfRelease: 2021-06-26
+# ReleaseNumber: 38.08.02
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
-readonly EXCLUDEFILE_DEFAULT_CONTENT="\
-$(find /etc/skel -type f -exec basename '{}' \; | awk '$0="/home/*/"$0')"
-# Hieboven worden de bestanden opgenomen die bij het aanmaken van een
-# gebruiker worden neergezet in $HOME.  Meestal zijn dit de bestanden
-# .bash_logout, .bashrc, examples.desktop, en .profile (bij Ubuntu).
-# Deze bestanden terugzetten bij een nieuwe versie van Linux betekent dat
-# deze bestanden worden teruggezeten naar de oude versie; niet wenselijk.
-readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
-readonly SELECTION_DEFAULT=''
-readonly RUN_AS_SUPERUSER=true
-readonly SOURCE_DEFAULT=/media/
-readonly TARGET_DEFAULT=/
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:s:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:,exclude:'
@@ -54,6 +39,20 @@ $OPTIONS_HELP_COMMON
 
 Argumenten:
   SELECTIE      zet opgegeven mappen en bestanden terug"
+
+readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
+readonly EXCLUDEFILE_DEFAULT_CONTENT="\
+$(find /etc/skel -type f -exec basename '{}' \; | awk '$0="/home/*/"$0')"
+# Hieboven worden de bestanden opgenomen die bij het aanmaken van een
+# gebruiker worden neergezet in $HOME.  Meestal zijn dit de bestanden
+# .bash_logout, .bashrc, examples.desktop, en .profile (bij Ubuntu).
+# Deze bestanden terugzetten bij een nieuwe versie van Linux betekent dat
+# deze bestanden worden teruggezeten naar de oude versie; niet wenselijk.
+readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
+readonly SELECTION_DEFAULT=''
+readonly RUN_AS_SUPERUSER=true
+readonly SOURCE_DEFAULT=/media/
+readonly TARGET_DEFAULT=/
 
 
 ###############################################################################

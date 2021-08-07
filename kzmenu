@@ -8,16 +8,25 @@
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 35.08.02
-# DateOfRelease: 2021-07-30
+# ReleaseNumber: 35.08.03
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
-source "$(dirname "$0")"/kzcommon.sh
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
+
+Installatiemenu.
+
+Opties:
+$OPTIONS_HELP_COMMON"
 
 readonly MENU1_TITLE=Installatiemenu
 readonly MENU1_HEAD="\
@@ -75,16 +84,6 @@ readonly -a COMMANDS2=(
         'Naar vorig menu'
     )
 readonly MENU2_LINES=${#ACTIONS2[@]}
-
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
-
-Installatiemenu.
-
-Opties:
-$OPTIONS_HELP_COMMON"
 
 
 ###############################################################################

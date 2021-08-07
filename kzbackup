@@ -8,16 +8,34 @@
 # Auteursrecht (c) 2007-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 35.14.01
-# DateOfRelease: 2021-07-31
+# ReleaseNumber: 35.14.02
+# DateOfRelease: 2021-08-07
 ###############################################################################
-
+source "$(dirname "$0")"/kzcommon.sh
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
-source "$(dirname "$0")"/kzcommon.sh
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:t:'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',exclude:,target:'
+readonly USAGE="Gebruik: $PROGRAM_NAME [-e|--exclude=UITSLUITEN]... \
+[-t|--target=DOELMAP]
+                  $OPTIONS_USAGE_COMMON
+                  [SELECTIE...]"
+readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [SELECTIE...]
+
+Back-up maken.
+
+Opties:
+  -e --exclude=UITSLUITEN
+                sluit opgegeven bestand of map uit
+  -t --target=DOELMAP
+                plaats back-up in de DOELMAP
+$OPTIONS_HELP_COMMON
+
+Argumenten:
+  SELECTIE      maak back-up van opgegeven mappen en bestanden"
 
 readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
@@ -47,26 +65,6 @@ readonly TARGET_DEFAULT_2=backups
 readonly TARGET_DEFAULT_3=$HOSTNAME-$ID
 # Conform ISO 8601, but ':' -> '.' for other filesystems not on Linux.
 readonly TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S)
-
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:t:'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',exclude:,target:'
-readonly USAGE="Gebruik: $PROGRAM_NAME [-e|--exclude=UITSLUITEN]... \
-[-t|--target=DOELMAP]
-                  $OPTIONS_USAGE_COMMON
-                  [SELECTIE...]"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [SELECTIE...]
-
-Back-up maken.
-
-Opties:
-  -e --exclude=UITSLUITEN
-                sluit opgegeven bestand of map uit
-  -t --target=DOELMAP
-                plaats back-up in de DOELMAP
-$OPTIONS_HELP_COMMON
-
-Argumenten:
-  SELECTIE      maak back-up van opgegeven mappen en bestanden"
 
 
 ###############################################################################

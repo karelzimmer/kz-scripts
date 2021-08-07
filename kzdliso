@@ -8,21 +8,15 @@
 # Auteursrecht (c) 2014-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 16.02.03
-# DateOfRelease: 2021-05-30
+# ReleaseNumber: 16.02.04
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly SEARCH_FOR=SHA256SUMS
-readonly SOURCE_1=http://releases.ubuntu.com
-readonly SOURCE_2=http://cdimage.ubuntu.com
-readonly TARGET=$HOME/Downloads
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'c'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',checksums'
@@ -35,6 +29,11 @@ Opties:
   -c --checksums
                 download alleen de controlebestanden
 $OPTIONS_HELP_COMMON"
+
+readonly SEARCH_FOR=SHA256SUMS
+readonly SOURCE_1=http://releases.ubuntu.com
+readonly SOURCE_2=http://cdimage.ubuntu.com
+readonly TARGET=$HOME/Downloads
 
 
 ###############################################################################

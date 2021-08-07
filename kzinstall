@@ -8,21 +8,15 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 57.01.05
-# DateOfRelease: 2021-08-01
+# ReleaseNumber: 57.01.06
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly EDITION_DEFAULT=desktop
-readonly RUN_AS_SUPERUSER=true
-readonly CMDSFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-readonly TEXTFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:firs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,\
@@ -51,6 +45,11 @@ $OPTIONS_HELP_COMMON
 Argumenten:
   APP           opgegeven apps installeren
   BESTAND       opgegeven installatiebestanden verwerken"
+
+readonly EDITION_DEFAULT=desktop
+readonly RUN_AS_SUPERUSER=true
+readonly CMDSFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly TEXTFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 
 
 ###############################################################################

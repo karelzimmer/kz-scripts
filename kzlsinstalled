@@ -8,24 +8,15 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 18.06.02
-# DateOfRelease: 2021-07-31
+# ReleaseNumber: 18.06.03
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly OUTPUTFILE_1=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-deb-bestanden
-readonly OUTPUTFILE_2=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketbronnen
-readonly OUTPUTFILE_3=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketten
-readonly OUTPUTFILE_4=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-favorieten
-readonly OUTPUTFILE_5=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-snaps
-readonly RUN_AS_SUPERUSER=true
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
@@ -40,6 +31,14 @@ Output in /etc, kzlsinstalled-$HOSTNAME-...
 
 Opties:
 $OPTIONS_HELP_COMMON"
+
+readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly OUTPUTFILE_1=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-deb-bestanden
+readonly OUTPUTFILE_2=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketbronnen
+readonly OUTPUTFILE_3=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketten
+readonly OUTPUTFILE_4=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-favorieten
+readonly OUTPUTFILE_5=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-snaps
+readonly RUN_AS_SUPERUSER=true
 
 
 ###############################################################################

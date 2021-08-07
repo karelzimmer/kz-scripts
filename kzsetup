@@ -8,20 +8,15 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 43.02.05
-# DateOfRelease: 2021-08-01
+# ReleaseNumber: 43.02.06
+# DateOfRelease: 2021-08-07
 ###############################################################################
+source "$(dirname "$0")"/kzcommon.sh
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
-
-source "$(dirname "$0")"/kzcommon.sh
-
-readonly EDITION_DEFAULT=desktop
-readonly CMDSFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-readonly TEXTFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:firs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,\
@@ -50,6 +45,10 @@ $OPTIONS_HELP_COMMON
 Argumenten:
   APP           opgegeven apps instellen
   BESTAND       opgegeven instellingsbestanden verwerken"
+
+readonly EDITION_DEFAULT=desktop
+readonly CMDSFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly TEXTFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 
 
 ###############################################################################
