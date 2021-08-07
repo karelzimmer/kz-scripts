@@ -8,7 +8,7 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 61.00.02
+# ReleaseNumber: 61.00.03
 # DateOfRelease: 2021-08-07
 ###############################################################################
 source "$(dirname "$0")"/kzcommon.sh
@@ -153,7 +153,7 @@ create_scriptspackage() {
     check_dependencies
     check_names
     check_scripts
-    process_scriptspackage_files
+    create_scriptspackage_files
     create_wallpapapers_configuration_file
     info 'Maak scriptspakket...'
     fakeroot dpkg-deb --build "$DEBDIR" "$TARGET_DEB/$DEBNAME" |& $LOGCMD
@@ -208,15 +208,14 @@ Herstel alle meldingen hierboven en start daarna weer $PROGRAM_NAME."
 }
 
 
-process_scriptspackage_files() {
+create_scriptspackage_files() {
     local basename=''
     local file=''
     local newfile=''
     local prefix='nl.karelzimmer.'
 
-    cd "$SCRIPTSDIR" || exit $ERROR
-    chmod 'u=rwx,g=rx,o=rx' -- *
-    chmod 'a-x' -- *.* LICENSE
+    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTSDIR"/*
+    chmod 'a-x' -- "$SCRIPTSDIR"/*.* "$SCRIPTSDIR"/LICENSE
 
     # De exclude en delete-excluded i.v.m. de lokale git repository.
     rsync   --archive                   \
@@ -282,9 +281,7 @@ create_wallpapapers_configuration_file() {
     printf '%s\n' '<wallpapers>'
     } > "$DEBDIR${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
 
-    # Te verwerken bureaubladachtergronden staan in SOURCE_DEB[BACKGROUNDS].
     cd "$DEBDIR${SOURCE_DEB[BACKGROUNDS]}" || exit $ERROR
-
     for wallpaper in *; do
         printf '%s\n' "    <wallpaper>
         <name>${wallpaper%.*}</name>
@@ -345,9 +342,7 @@ process_checklists() {
     # Vanuit gedit.
     rm --force "$HOME"/Documenten/*.pdf
 
-    # Te verwerken tekstbestanden staan in CHECKLISTSDIR.
     cd "$CHECKLISTSDIR" || exit $ERROR
-
     for txtfile in *.txt; do
         if ! diff   "$txtfile"                          \
                     "${TARGET_UPLOADS[DOCS]}/$txtfile"  &> /dev/null; then
