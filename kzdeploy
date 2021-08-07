@@ -221,10 +221,13 @@ process_scriptspackage_files() {
     chmod 'a-x' -- *.*
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
+    # De exclude en delete-excluded i.v.m. de lokale git repository.
     rsync   --archive                   \
             --delete                    \
             --exclude='LICENSE'         \
             --exclude='README.md'       \
+            --exclude='.git'            \
+            --delete-excluded           \
             "$SCRIPTSDIR"/              \
             "$DEBDIR${SOURCE_DEB[BIN]}" |& $LOGCMD
 
@@ -441,12 +444,16 @@ synchronize_website() {
             --delete                        \
             --exclude='LICENSE'             \
             --exclude='README.md'           \
+            --exclude='.git'                \
+            --delete-excluded               \
             "${SOURCE_UPLOADS[DOCS]}"/      \
             "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
     rsync   --archive                       \
             --delete                        \
             --exclude='LICENSE'             \
             --exclude='README.md'           \
+            --exclude='.git'                \
+            --delete-excluded               \
             "${SOURCE_UPLOADS[SCRIPTS]}"/   \
             "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
 }

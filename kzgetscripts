@@ -419,6 +419,7 @@ install_scriptspackage() {
 
 
 create_development_environment() {
+    printf '%s\n' 'Aanmaken ontwikkelomgeving...'
     check_dependencies
     process_checklists
     process_scripts
@@ -441,10 +442,9 @@ check_dependencies() {
 
 process_checklists() {
     printf '%s\n' 'Git clone/pull Checklists...'
-    if !    git                                             \
-            clone                                           \
-            https://github.com/karelzimmer/Checklists.git   \
-            "$CHECKLISTSDIR"                                |& $LOGCMD; then
+    if ! git    clone                                           \
+                https://github.com/karelzimmer/Checklists.git   \
+                "$CHECKLISTSDIR"; then
         cd "$CHECKLISTSDIR" || exit $ERROR
         git config credential.helper store
         git pull
@@ -454,10 +454,8 @@ process_checklists() {
 
 process_scripts() {
     printf '%s\n' 'Git clone/pull kzscripts...'
-    if !    git                                             \
-            clone                                           \
-            https://github.com/karelzimmer/kzscripts.git    \
-            "$SCRIPTSDIR"                                   |& $LOGCMD; then
+    if ! git clone https://github.com/karelzimmer/kzscripts.git "$SCRIPTSDIR"
+    then
         cd "$SCRIPTSDIR" || exit $ERROR
         git config credential.helper store
         git pull
@@ -480,7 +478,7 @@ download_website() {
         read -rsp "FTP-wachtwoord voor $ftp_host: " < /dev/tty
         printf '%s\n' "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
+        chmod 'u=rw,g=,o=' "$ftp_login"
     fi
     TEXT='Download website (dit kan even duren)...'
     TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
@@ -490,7 +488,7 @@ download_website() {
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
-                "$ftp_host"                         |& $LOGCMD; then
+                "$ftp_host"; then
         rm      "$ftp_login"
         printf  "${YELLOW}%s${NORMAL}\n"            \
                 'Downloaden website is mislukt.'    >&2
