@@ -356,9 +356,9 @@ process_input() {
         awk     -F:     '{print $5}'    |
         awk     -F,     '{print $1}'    || true
         )
-    if [[   ($USER = karel  && $karel_full_name  = 'Karel Zimmer'    )  ||
+    if [[   ($USER = karel  && $karel_full_name  = 'Karel Zimmer'     ) ||
             ($USER = ubuntu && $ubuntu_full_name = 'Live session user') ||
-            ($USER = user   && $debian_full_name = 'Debian Live user')  ]]
+            ($USER = user   && $debian_full_name = 'Debian Live user' ) ]]
     then
         create_development_environment
     fi
@@ -419,7 +419,11 @@ install_scriptspackage() {
 
 
 create_development_environment() {
-    printf '%s\n' 'Aanmaken ontwikkelomgeving...'
+    TEXT='Aanmaken ontwikkelomgeving...'
+    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                        --title     'Voortgang'     \
+                        --infobox   "$TEXT"         \
+                        7 33
     check_dependencies
     process_checklists
     process_scripts
@@ -428,37 +432,35 @@ create_development_environment() {
 
 
 check_dependencies() {
-    printf '%s\n' 'Controleer afhankelijkheden...'
     if ! command -v git 1> /dev/null; then
-        printf '%s\n' 'Installeer git...'
-        sudo apt-get install --yes git
+        sudo apt-get install --yes git |& $LOGCMD
     fi
     if ! command -v lftp 1> /dev/null; then
-        printf '%s\n' 'Installeer lftp...'
-        sudo apt-get install --yes lftp
+        sudo apt-get install --yes lftp |& $LOGCMD
     fi
 }
 
 
 process_checklists() {
-    printf '%s\n' 'Git clone/pull Checklists...'
     if ! git    clone                                           \
                 https://github.com/karelzimmer/Checklists.git   \
-                "$CHECKLISTSDIR"; then
+                "$CHECKLISTSDIR"                                |& $LOGCMD
+    then
         cd "$CHECKLISTSDIR" || exit $ERROR
-        git config credential.helper store
-        git pull
+        git config credential.helper store |& $LOGCMD
+        git pull |& $LOGCMD
     fi
 }
 
 
 process_scripts() {
-    printf '%s\n' 'Git clone/pull kzscripts...'
-    if ! git clone https://github.com/karelzimmer/kzscripts.git "$SCRIPTSDIR"
+    if ! git    clone                                           \
+                https://github.com/karelzimmer/kzscripts.git    \
+                "$SCRIPTSDIR"                                   |& $LOGCMD
     then
         cd "$SCRIPTSDIR" || exit $ERROR
-        git config credential.helper store
-        git pull
+        git config credential.helper store |& $LOGCMD
+        git pull |& $LOGCMD
     fi
 }
 
@@ -478,17 +480,17 @@ download_website() {
         read -rsp "FTP-wachtwoord voor $ftp_host: " < /dev/tty
         printf '%s\n' "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login"
+        chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
     TEXT='Download website (dit kan even duren)...'
     TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 49
+                        7 44
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
-                "$ftp_host"; then
+                "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
         printf  "${YELLOW}%s${NORMAL}\n"            \
                 'Downloaden website is mislukt.'    >&2

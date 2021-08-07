@@ -151,12 +151,12 @@ process_input() {
 
 
 create_scriptspackage() {
+    info 'Maak scriptspakket...'
     check_dependencies
     check_names
     check_scripts
     process_scriptspackage_files
     create_wallpapapers_configuration_file
-    info 'Maak scriptspakket...'
     fakeroot dpkg-deb --build "$DEBDIR" "$TARGET_DEB/$DEBNAME" |& $LOGCMD
 }
 
