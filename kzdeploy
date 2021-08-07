@@ -151,18 +151,17 @@ process_input() {
 
 
 create_scriptspackage() {
-    info 'Maak scriptspakket...'
     check_dependencies
     check_names
     check_scripts
     process_scriptspackage_files
     create_wallpapapers_configuration_file
-    fakeroot dpkg-deb --build "$DEBDIR" "$TARGET_DEB/$DEBNAME" |& $LOGCMD
+    info 'Maak scriptspakket...'
+    fakeroot dpkg-deb --build "$DEBDIR" "$TARGET_DEB/$DEBNAME"
 }
 
 
 check_dependencies() {
-    info 'Controleer afhankelijkheden...'
     if ! command -v enscript 1> /dev/null; then
         info 'Installeer enscript...'
         sudo apt-get install --yes enscript |& $LOGCMD
