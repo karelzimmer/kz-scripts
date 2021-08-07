@@ -216,7 +216,7 @@ process_scriptspackage_files() {
 
     cd "$SCRIPTSDIR" || exit $ERROR
     chmod 'u=rwx,g=rx,o=rx' -- *
-    chmod 'a-x' -- *.*
+    chmod 'a-x' -- *.* LICENSE
 
     # De exclude en delete-excluded i.v.m. de lokale git repository.
     rsync   --archive                   \
