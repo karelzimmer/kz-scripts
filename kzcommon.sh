@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 26.15.15
-# DateOfRelease: 2021-08-02
+# ReleaseNumber: 26.15.16
+# DateOfRelease: 2021-08-07
 ###############################################################################
 
 
@@ -225,6 +225,7 @@ init_script() {
 --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $PROGRAM_NAME ?ltregel \
 %lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q \
 voor stoppen)"
+    USAGELINE="Typ '$PROGRAM_NAME --usage' voor meer informatie."
 }
 
 
