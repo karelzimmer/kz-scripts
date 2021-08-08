@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzmkusb.
+.\" Man-pagina voor kz mkusb.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.04.05
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZMKUSB 1 "kzmkusb" "kzscripts 365" "kzmkusb"
+.TH KZ-MKUSB 1 "kz mkusb" "kz 365" "kz mkusb"
 .\"
 .\"
 .SH NAAM
-kzmkusb \- USB-sticks maken.
+kz mkusb \- USB-sticks maken.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzmkusb
+.B kz mkusb
 [OPTIE...] [MAP] [--]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzmkusb\fR maakt opstartbare USB-sticks.
+\fBkz mkusb\fR maakt opstartbare USB-sticks.
 .sp
 Alle beeldbestanden (.iso) worden gelezen uit MAP, en per beeldbestand (.iso)
 wordt er een opstartbare USB-stick aangemaakt (met \fBdd\fR).
@@ -38,7 +38,7 @@ Met optie \fB--target\fR (\fB-t\fR) kan een andere locatie opgegeven worden.
 Nadat de USB-stick is gemaakt wordt deze gecontroleerd door deze te starten als
 een (KVM) virtuele machine.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzmkusb\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz mkusb\fR
 worden gestart door te zoeken naar \fBusb\fR, klik op \fBUSB-sticks maken\fR.
 .\"
 .\"
@@ -52,7 +52,7 @@ Gebruik de opgegeven USB-stick-device.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzmkusb').
+-ab -t kz-mkusb').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -108,14 +108,18 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzdliso\fR(1),
-\fBkzspsum\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-dliso\fR(1),
+\fBkz-spsum\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzmkusb is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz mkusb' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

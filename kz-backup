@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Back-up maken.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2007-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 35.14.02
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 36.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 ###############################################################################
 # Global constants
@@ -19,11 +19,11 @@ source "$(dirname "$0")"/kzcommon.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',exclude:,target:'
-readonly USAGE="Gebruik: $PROGRAM_NAME [-e|--exclude=UITSLUITEN]... \
-[-t|--target=DOELMAP]
-                  $OPTIONS_USAGE_COMMON
-                  [SELECTIE...]"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [SELECTIE...]
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } \
+[-e|--exclude=UITSLUITEN]... [-t|--target=DOELMAP]
+                   $OPTIONS_USAGE_COMMON
+                   [SELECTIE...]"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--] [SELECTIE...]
 
 Back-up maken.
 
@@ -125,7 +125,9 @@ check_input() {
             -t|--target)
                 if $OPTION_TARGET; then
                     TEXT="optie '$1' eennmaal opgeven"
-                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    printf  "${PROGRAM_NAME//kz-/kz }: %s\n%s\n"    \
+                            "$TEXT"                                 \
+                            "$USAGELINE"                            >&2
                     exit $ERROR
                 else
                     OPTION_TARGET=true
@@ -278,11 +280,11 @@ worden."
         # Meer dan één aangekoppeld medium gevonden.
         printf '%s\n' 'Voor de nu aangekoppelde media:'
         for medium in "${!media[@]}"; do
-            printf  "    $PROGRAM_NAME --target %s\n" \
+            printf  "    ${PROGRAM_NAME//kz-/kz } --target %s\n" \
                     "${media[$medium]}/$TARGET_DEFAULT_2"
         done
     else
-        printf "%s\n" "Voorbeeld: $PROGRAM_NAME --target DOELMAP"
+        printf "%s\n" "Voorbeeld: ${PROGRAM_NAME//kz-/kz } --target DOELMAP"
     fi
     printf '%s\n' "$USAGELINE" >&2
     exit $SUCCESS

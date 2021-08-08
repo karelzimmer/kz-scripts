@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.07.00
-# DateOfRelease: 2021-07-31
+# ReleaseNumber: 02.08.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 #1 bitwarden

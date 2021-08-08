@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzckhtml.
+# Bureaublad-configuratiebestand voor kz ckhtml.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.04.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=Check program
 GenericName[nl]=Controleprogramma
 Comment=Validates HTML and CSS files
 Comment[nl]=Valideert HTML- en CSS-bestanden
-Keywords=kzckhtml;ckhtml;check;
-Keywords[nl]=kzckhtml;ckhtml;check;
+Keywords=kzckhtml;kz-ckhtml;ckhtml;check;
+Keywords[nl]=kzckhtml;kz-ckhtmlckhtml;check;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzckhtml --gui
-Icon=/usr/share/pixmaps/kzckhtml.svg
+Exec=/usr/bin/kz-ckhtml --gui
+Icon=/usr/share/pixmaps/kz-ckhtml.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzckhtml --gui --version
+Exec=/usr/bin/kz-ckhtml --gui --version
 
 # EOF

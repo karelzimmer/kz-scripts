@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzarchive.
+.\" Man-pagina voor kz archive.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.04.04
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZARCHIVE 1 "kzarchive" "kzscripts 365" "kzarchive"
+.TH KZ-ARCHIVE 1 "kz archive" "kz 365" "kz archive"
 .\"
 .\"
 .SH NAAM
-kzarchive \- Scripts archiveren.
+kz archive \- Scripts archiveren.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzarchive
+.B kz archive
 [OPTIE...] [--] [\fISELECTIE\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzarchive\fR archiveert scripts en overige bestanden.
+\fBkz archive\fR archiveert scripts en overige bestanden.
 .sp
 Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt de gebruiker gevraagd
 om op te geven wat gearchiveerd dient te worden.
@@ -35,7 +35,7 @@ worden.
 .br
 Onderscheid tussen hoofdletters en kleine letters wordt genegeerd.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzarchive\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz archive\fR
 worden gestart door te zoeken naar \fBarch\fR, klik op
 \fBScripts archiveren\fR.
 .\"
@@ -44,7 +44,7 @@ worden gestart door te zoeken naar \fBarch\fR, klik op
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzarchive').
+-ab -t kz-archive').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -106,13 +106,16 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
+\fBkz-common.sh\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzarchive is onderdeel van het pakket kzscripts en is beschikbaar
-vanaf Karel Zimmer Linux Scripts
-<https://karelzimmer.nl/html/linux.html#scripts>.
+Opdracht 'kz archive' is onderdeel van het pakket kz en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" # EOF

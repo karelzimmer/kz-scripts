@@ -1,18 +1,18 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc-van-ella.
+# Tab-completion-script voor kz.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.00.00
+# ReleaseNumber: 01.00.00
 # DateOfRelease: 2021-08-08
 ###############################################################################
 
-#1
-#2 Geen opdrachten om te installeren
-:
-
+dashoptions='archive backup ckhtml ckname deploy dliso genpwd getdeb go gset
+    install ivp lsinstalled menu mkusb nas restore setup spsum'
+complete -o default -W "$dashoptions" kz
 
 # EOF

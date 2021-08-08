@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.03.01
-# DateOfRelease: 2021-07-23
+# ReleaseNumber: 04.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 #1
@@ -27,7 +27,7 @@ if [[ $HOSTNAME = pc01 && $USER = karel ]]; then gsettings set org.gnome.gedit.p
 if [[ $HOSTNAME = pc01 && $USER = karel ]]; then gsettings set org.gnome.gedit.preferences.print print-line-numbers 1; fi
 if [[ $HOSTNAME = pc01 && $USER = karel ]]; then gsettings set org.gnome.gedit.preferences.print print-syntax-highlighting true; fi
 if [[ $HOSTNAME = pc01 && $USER = karel ]]; then gsettings set org.gnome.gedit.preferences.print print-wrap-mode 'char'; fi
-if [[ $HOSTNAME = pc01 && $USER = karel ]]; then kzgset --addfavtop --file='org.gnome.gedit.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.gedit.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.gedit.plugins active-plugins
 #4    gsettings reset org.gnome.gedit.preferences.editor auto-indent
@@ -44,14 +44,14 @@ if [[ $HOSTNAME = pc01 && $USER = karel ]]; then kzgset --addfavtop --file='org.
 #4    gsettings reset org.gnome.gedit.preferences.print print-line-numbers
 #4    gsettings reset org.gnome.gedit.preferences.print print-syntax-highlighting
 #4    gsettings reset org.gnome.gedit.preferences.print print-wrap-mode
-#4    kzgset --removefav --file='org.gnome.gedit.desktop'
+#4    kz-gset --removefav --file='org.gnome.gedit.desktop'
 
 
 #1
 #2 GNOME Gmail instellen
-if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kzgset --addfavtop --file='gnome-gmail.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kz-gset --addfavtop --file='gnome-gmail.desktop'; fi
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='gnome-gmail.desktop'
+#4    kz-gset --removefav --file='gnome-gmail.desktop'
 
 
 #1
@@ -65,23 +65,23 @@ if [[ $HOSTNAME = pc01 && $USER = monique ]]; then gsettings set org.gnome.deskt
 
 #1
 #2 Google Chrome instellen
-if [[ $HOSTNAME = pc01 && ($USER = karel || $USER = monique) ]]; then kzgset --removefav --file='firefox.desktop'; fi
+if [[ $HOSTNAME = pc01 && ($USER = karel || $USER = monique) ]]; then kz-gset --removefav --file='firefox.desktop'; fi
 #3 1. Start Standaardtoepassingen.
 #3 2. Kies bij E-mail voor Gnome Gmail.
 
 
 #1
 #2 Python instellen
-if [[ $HOSTNAME = pc01 && $USER = karel ]]; then kzgset --addfavtop --file='idle.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = karel ]]; then kz-gset --addfavtop --file='idle.desktop'; fi
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='idle.desktop'
+#4    kz-gset --removefav --file='idle.desktop'
 
 
 #1
 #2 GNOME Terminal instellen
-if [[ $HOSTNAME = pc01 && $USER = karel ]]; then kzgset --addfavtop --file='org.gnome.Terminal.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.Terminal.desktop'; fi
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='org.gnome.Terminal.desktop'
+#4    kz-gset --removefav --file='org.gnome.Terminal.desktop'
 
 
 #1
@@ -96,40 +96,40 @@ if [[ $HOSTNAME = pc01 && $USER = karel ]]; then echo 'stty -ixon  # Enable fwd 
 #2 Zga eHRM instellen
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/; fi
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-ehrm.desktop; fi
-if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kzgset --addfavtop --file='kz-zga-ehrm.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-ehrm.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
-#4    kzgset --removefav --file='kz-zga-ehrm.desktop'
+#4    kz-gset --removefav --file='kz-zga-ehrm.desktop'
 
 
 #1
 #2 Zga Intranet instellen
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then cp /usr/share/applications/kz-zga-intranet.desktop "$HOME"/.local/share/applications/; fi
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-intranet.desktop; fi
-if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kzgset --addfavtop --file='kz-zga-intranet.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-intranet.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-intranet.desktop
-#4    kzgset --removefav --file='kz-zga-intranet.desktop'
+#4    kz-gset --removefav --file='kz-zga-intranet.desktop'
 
 
 #1
 #2 Zga Monaco instellen
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then cp /usr/share/applications/kz-zga-monaco.desktop "$HOME"/.local/share/applications/; fi
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-monaco.desktop; fi
-if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kzgset --addfavtop --file='kz-zga-monaco.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-monaco.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-monaco.desktop
-#4    kzgset --removefav --file='kz-zga-monaco.desktop'
+#4    kz-gset --removefav --file='kz-zga-monaco.desktop'
 
 
 #1
 #2 Zga WebMail instellen
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/; fi
 if [[ $HOSTNAME = pc01 && $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-webmail.desktop; fi
-if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kzgset --addfavtop --file='kz-zga-webmail.desktop'; fi
+if [[ $HOSTNAME = pc01 && $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-webmail.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-webmail.desktop
-#4    kzgset --removefav --file='kz-zga-webmail.desktop'
+#4    kz-gset --removefav --file='kz-zga-webmail.desktop'
 
 
 # EOF

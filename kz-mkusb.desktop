@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzmkusb.
+# Bureaublad-configuratiebestand voor kz mkusb.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.04.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=Write program
 GenericName[nl]=Schrijfprogramma
 Comment=Create bootable USB sticks
 Comment[nl]=Maak opstartbare USB-sticks
-Keywords=kzmkusb;mkusb;
-Keywords[nl]=kzmkusb;mkusb;
+Keywords=kzmkusb;kz-mkusb;mkusb;
+Keywords[nl]=kzmkusb;kz-mkusb;mkusb;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzmkusb --gui
-Icon=/usr/share/pixmaps/kzmkusb.svg
+Exec=/usr/bin/kz-mkusb --gui
+Icon=/usr/share/pixmaps/kz-mkusb.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzmkusb --gui --version
+Exec=/usr/bin/kz-mkusb --gui --version
 
 # EOF

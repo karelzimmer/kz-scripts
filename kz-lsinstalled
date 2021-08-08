@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Applijst maken.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 18.06.03
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 19.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 
 ###############################################################################
@@ -20,14 +20,10 @@ source "$(dirname "$0")"/kzcommon.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON
-
-Output in /etc, kzlsinstalled-$HOSTNAME-..."
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...]
 
 Applijst maken.
-
-Output in /etc, kzlsinstalled-$HOSTNAME-...
 
 Opties:
 $OPTIONS_HELP_COMMON"
@@ -292,7 +288,7 @@ term_script() {
     info "
 De bestanden zijn aangemaakt: /usr/local/etc/$PROGRAM_NAME-$HOSTNAME-*
 Deze bestanden kunnen gebruikt worden om de volledigheid van de
-installatie, later door kzinstall, te controleren."
+installatie, later door kz install, te controleren."
     exit $SUCCESS
 }
 

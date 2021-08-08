@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzdliso.
+# Bureaublad-configuratiebestand voor kz dliso.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.04.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=Download program
 GenericName[nl]=Downloadprogramma
 Comment=Download Ubuntu Linux image files and control files
 Comment[nl]=Download Ubuntu Linux beeldbestanden en controlebestanden
-Keywords=kzdliso;dliso;iso;
-Keywords[nl]=kzdliso;dliso;iso;
+Keywords=kzdliso;kz-dliso;dliso;iso;
+Keywords[nl]=kzdliso;kz0dliso;dliso;iso;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzdliso --gui
-Icon=/usr/share/pixmaps/kzdliso.svg
+Exec=/usr/bin/kz-dliso --gui
+Icon=/usr/share/pixmaps/kz-dliso.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-sExec=/usr/bin/kzdliso --gui --version
+sExec=/usr/bin/kz-dliso --gui --version
 
 # EOF

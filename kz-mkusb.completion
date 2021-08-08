@@ -1,18 +1,18 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kzmkusb.
+# Tab-completion-script voor kz mkusb.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.01.08
-# DateOfRelease: 2021-07-07
+# ReleaseNumber: 03.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 dashoptions="-d --debug -g --gui -h --help '-t APPARAAT' '--target APPARAAT' -u
     --usage -v --version MAP"
-complete -o default -W "$dashoptions" kzmkusb
+complete -o default -W "$dashoptions" kz-mkusb
 
 # EOF

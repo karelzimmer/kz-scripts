@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzgetscripts.
+.\" Man-pagina voor kz getdeb.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,23 +7,23 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 05.04.00
-.\" DateOfRelease: 2021-06-24
+.\" ReleaseNumber: 06.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZGETSCRIPTS 1 "kzgetscripts" "kzscripts 365" "kzgetscripts"
+.TH KZ-GETDEB 1 "kz getdeb" "kzscripts 365" "kz getdeb"
 .\"
 .\"
 .SH NAAM
-kzgetscripts \- Scripts installeren.
+kz getdeb \- Scripts installeren.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzgetscripts
+.B kz getdeb
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzgetscripts\fR downloadt en installeert pakket kzscripts.
+\fBkz getdeb\fR downloadt en installeert pakket kzscripts.
 .sp
 Pakket kzscripts installeert scripts voor het afronden van de installatie van
 Ubuntu Linux.
@@ -31,9 +31,9 @@ Ubuntu Linux.
 Als ontwikkelaar (gebruiker 'karel' of 'ubuntu') wordt ook een
 scripts-ontwikkelomgeving ingericht, en is deze na aanpassingen te
 distribueren, 'live' te zetten (op https://karelzimmer.nl) met opdracht
-\fBkzdeploy\fR.
+\fBkz deploy\fR.
 .sp
-Voor de nieuwste versie van \fBkzgetscripts\fR én het scriptspakket, start
+Voor de nieuwste versie van \fBkz getdeb\fR én het scriptspakket, start
 Terminalvenster en voer uit:
 .br
 \fBwget karelzimmer.nl/s\fR
@@ -54,12 +54,12 @@ of, als curl is geïnstalleerd:
 .sp
 of, als het scriptspakket al eens is geïnstalleerd:
 .br
-\fBkzgetscripts\fR
+\fBkz getdeb\fR
 .sp
-N.B. /s mag vervangen worden door /kz of /kzgetscripts (deze verwijzen allen
-naar "kzscripts").
+N.B. /s mag vervangen worden door /kz of /kzgetdeb (deze verwijzen allen naar
+"pakket kz").
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzgetscripts\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz getdeb\fR
 ook worden gestart door te zoeken naar \fBget\fR, klik op
 \fBScripts installeren\fR.
 .\"
@@ -175,14 +175,17 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzdeploy\fR(1),
-\fBkzmenu\fR(1),
+\fBkz-deploy\fR(1),
+\fBkz-menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzgetscripts is onderdeel van het pakket kzscripts en is beschikbaar
-vanaf Karel Zimmer Linux Scripts
-<https://karelzimmer.nl/html/linux.html#scripts>.
+Opdracht 'kz getdeb' is onderdeel van het pakket kz en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

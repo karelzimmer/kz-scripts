@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzbackup.
+.\" Man-pagina voor kz backup.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 04.04.01
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 05.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZBACKUP 1 "kzbackup" "kzscripts 365" "kzbackup"
+.TH KZBACKUP 1 "kz backup" "kz 365" "kz backup"
 .\"
 .\"
 .SH NAAM
-kzbackup \- Back-up maken.
+kz backup \- Back-up maken.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzbackup
+.B kz backup
 [OPTIE...] [--] [\fISELECTIE\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzbackup\fR maakt een back-up (reservekopie) van mappen en bestanden.
+\fBkz backup\fR maakt een back-up (reservekopie) van mappen en bestanden.
 .sp
 Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt er een back-up gemaakt
 van alle Persoonlijke mappen (/home), de configuratie (/usr/local/etc) en KVM
@@ -92,10 +92,10 @@ De inhoud van de back-up is op te vragen met opdracht:
 \fBtar\fR tvf \fIBESTAND\fR [--wildcards \fISELECTIE\fR...]
 .RE
 .sp
-Met opdracht \fBkzrestore\fR zijn individuele -of alle- bestanden en mappen uit
-een back-up te herstellen.
+Met opdracht \fBkz restore\fR zijn individuele -of alle- bestanden en mappen
+uit een back-up te herstellen.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzbackup\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz backup\fR
 worden gestart door te zoeken naar \fBback\fR, klik op \fBBack-up maken\fR.
 .br
 Dan zal een back-up worden gemaakt van alle Persoonlijke mappen en KVM VMs.
@@ -112,7 +112,7 @@ Plaats back-up in de \fIDOELMAP\fR.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzbackup').
+-ab -t kz-backup').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -149,12 +149,12 @@ Als er geen \fIDOEL\fR is opegegeven wordt de back-up in deze map geplaatst.
 .\"
 .\"
 .SH BESTANDEN
-/usr/local/etc/kzbackup-exclude-dflt
+/usr/local/etc/kz-backup-exclude-dflt
 .RS
 Standaard uit te sluiten bestanden en mappen.
 .RE
 .sp
-/usr/local/etc/kzbackup-exclude-opt
+/usr/local/etc/kz-backup-exclude-opt
 .RS
 Opgegeven uit te sluiten bestanden en mappen.
 .RE
@@ -170,18 +170,18 @@ https://karelzimmer.nl
 .\"
 .SH VOORBEELDEN
 .sp
-\fBkzbackup\fR
+\fBkz backup\fR
 .RS
 Maak een back-up van de Persoonlijke mappen en KVM VMs.
 Hiervoor is ook starter 'Back-up maken' beschikbaar.
 .RE
 .sp
-\fBkzbackup --target /tmp /home/*/Documenten\fR
+\fBkz backup --target /tmp /home/*/Documenten\fR
 .RS
 Maak een back-up van alle documenten en plaats deze in map /tmp.
 .RE
 .sp
-\fBkzbackup --exclude '*.JPG' /home/*/Afbeeldingen\fR
+\fBkz backup --exclude '*.JPG' /home/*/Afbeeldingen\fR
 .RS
 Maak een back-up van alle foto's maar geen JPG's.
 .RE
@@ -198,15 +198,19 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcheckname\fR(1),
-\fBkzcommon.sh\fR(1),
-\fBkzmenu\fR(1),
-\fBkzrestore\fR(1),
+\fBkz-checkname\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-menu\fR(1),
+\fBkz-restore\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzbackup is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz backup' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

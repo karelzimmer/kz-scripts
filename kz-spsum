@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Controlebestanden opsplitsen.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 08.02.04
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 09.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 
 ###############################################################################
@@ -20,8 +20,8 @@ source "$(dirname "$0")"/kzcommon.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...]
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...]
 
 Controlebestanden opsplitsen.
 
@@ -142,11 +142,11 @@ term_script() {
 
 
 En om vervolgens USB-sticks te maken voer uit:
-    ${BLUE}kzmkusbs${NORMAL}
+    ${BLUE}kz mkusbs${NORMAL}
 
 
 Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
-    ${BLUE}kzdliso --checksums${NORMAL}"
+    ${BLUE}kz dliso --checksums${NORMAL}"
     fi
     exit $SUCCESS
 }

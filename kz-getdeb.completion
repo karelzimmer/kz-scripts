@@ -1,17 +1,17 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kzgetscripts.
+# Tab-completion-script voor kz getdeb.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 04.00.07
-# DateOfRelease: 2021-05-08
+# ReleaseNumber: 05.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 dashoptions='-g --gui'
-complete -o default -W "$dashoptions" kzgetscripts
+complete -o default -W "$dashoptions" kz-getdeb
 
 # EOF

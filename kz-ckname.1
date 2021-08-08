@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzckname.
+.\" Man-pagina voor kz ckname.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.06.05
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZCKNAME 1 "kzckname" "kzscripts 365" "kzckname"
+.TH KZ-CKNAME 1 "kz ckname" "kz 365" "kz ckname"
 .\"
 .\"
 .SH NAAM
-kzckname \- Bestandsnamen controleren.
+kz ckname \- Bestandsnamen controleren.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzckname
+.B kz ckname
 [OPTIE...] [--] [\fIMAP...\fR]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzckname\fR controleert NTFS map- en bestandsnamen op toegestane tekens en
+\fBkz ckname\fR controleert NTFS map- en bestandsnamen op toegestane tekens en
 bestandsnaamlengte.
 .br
 Er is een maximale bestandsnaamlengte lengte bij gebruik van Versleutelde
@@ -50,7 +50,7 @@ Verder wordt ook de lengte van de map- en bestandsnaam gecontroleerd.
 Deze mag voor Versleutelde Persoonlijke Mappen, met eCryptfs, niet langer zijn
 dan 142 tekens.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzckname\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz ckname\fR
 worden gestart door te zoeken naar \fBbest\fR, klik op
 \fBBestandsnamen controleren\fR.
 .\"
@@ -59,7 +59,7 @@ worden gestart door te zoeken naar \fBbest\fR, klik op
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzckname').
+-ab -t kz-ckname').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -99,13 +99,17 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcheckhtml\fR(1),
-\fBkzcommon.sh\fR(1),
+\fBkz-checkhtml\fR(1),
+\fBkz-common.sh\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzckname is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz ckname' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

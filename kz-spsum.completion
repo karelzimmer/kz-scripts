@@ -1,17 +1,17 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kzspsum.
+# Tab-completion-script voor kz spsum.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.01.07
-# DateOfRelease: 2021-05-08
+# ReleaseNumber: 03.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 dashoptions='-d --debug -g --gui -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kzspsum
+complete -o default -W "$dashoptions" kz-spsum
 
 # EOF

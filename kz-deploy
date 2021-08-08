@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Scripts distribueren.
 #
@@ -8,33 +8,34 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 61.00.03
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 62.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
+#TODO: wil ook .pdf in /usr/share/doc/kzscripts 
 ###############################################################################
 # Global constants
 ###############################################################################
 
 readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON"
-readonly    HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--]
+readonly    USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON"
+readonly    HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--]
 
 Scripts distribueren en uploaden.
 
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    CHECKLISTSDIR=$HOME/Documenten/Checklists
-readonly    DEBDIR=$HOME/kzscripts.deb
-readonly    DEBNAME=kzscripts_365_all.deb
-readonly    SCRIPTSDIR=$HOME/kzscripts
+readonly    DOCSDIR=$HOME/kz-docs
+readonly    DEBDIR=$HOME/kz-deb
+readonly    DEBNAME=kz_365_all.deb
+readonly    SCRIPTSDIR=$HOME/kz-scripts
 readonly    SITEDIR=$HOME/uploads/karelzimmer.nl/httpdocs
 
 # De [BIN] wordt gevuld door SCRIPTSDIR.
-# De [DOC] wordt gevuld door CHECKLISTSDIR.
+# De [DOC] wordt gevuld door DOCSDIR.
 # De [BACKGROUND_PROP] wordt door dit script gegenereerd.
 # Andere mappen en bestanden (zoals pixmaps en control) staan al in SOURCE_DEB.
 # Te vullen mappen zijn relatief ten opzichte van $DEBDIR.
@@ -183,13 +184,14 @@ check_dependencies() {
 check_names() {
     local -i check_rc=0
 
-    info 'Controleer bestandsnamen (kzckname)...'
-    "$SCRIPTSDIR/kzckname"  "$CHECKLISTSDIR"    \
-                            "$DEBDIR"           \
-                            "$SCRIPTSDIR"       || check_rc=$?
+    info 'Controleer bestandsnamen (kz ckname)...'
+    "$SCRIPTSDIR/kz ckname" "$DOCSDIR"      \
+                            "$DEBDIR"       \
+                            "$SCRIPTSDIR"   || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
-Herstel alle meldingen hierboven en start daarna weer $PROGRAM_NAME."
+Herstel alle meldingen hierboven en start daarna weer \
+${PROGRAM_NAME//kz-/kz }."
         exit $check_rc
     fi
 }
@@ -198,11 +200,12 @@ Herstel alle meldingen hierboven en start daarna weer $PROGRAM_NAME."
 check_scripts() {
     local -i check_rc=0
 
-    info 'Controleer scripts (kzivp)...'
-    "$SCRIPTSDIR/kzivp" || check_rc=$?
+    info 'Controleer scripts (kz ivp)...'
+    "$SCRIPTSDIR/kz ivp" || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
-Herstel alle meldingen hierboven en start daarna weer $PROGRAM_NAME."
+Herstel alle meldingen hierboven en start daarna weer \
+${PROGRAM_NAME//kz-/kz }."
         exit $check_rc
     fi
 }
@@ -224,7 +227,7 @@ create_scriptspackage_files() {
             --exclude='README.md'       \
             --exclude='.git*'           \
             --delete-excluded           \
-            "$CHECKLISTSDIR"/           \
+            "$DOCSDIR"/                 \
             "$DEBDIR${SOURCE_DEB[DOC]}" |& $LOGCMD
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
@@ -273,7 +276,7 @@ create_scriptspackage_files() {
 
 create_wallpapapers_configuration_file() {
     local wallpaper=''
-    local wallpapers_config_file=kzscripts-wallpapers.xml
+    local wallpapers_config_file=kz-scripts-wallpapers.xml
 
     {
     printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
@@ -342,7 +345,7 @@ process_checklists() {
     # Vanuit gedit.
     rm --force "$HOME"/Documenten/*.pdf
 
-    cd "$CHECKLISTSDIR" || exit $ERROR
+    cd "$DOCSDIR" || exit $ERROR
     for txtfile in *.txt; do
         if ! diff   "$txtfile"                          \
                     "${TARGET_UPLOADS[DOCS]}/$txtfile"  &> /dev/null; then
@@ -362,7 +365,7 @@ process_checklists() {
     # Vanuit LibreOffice.
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
-    cd "$CHECKLISTSDIR" || exit $ERROR
+    cd "$DOCSDIR" || exit $ERROR
     for docfile in *.odt; do
 
         # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
@@ -463,10 +466,10 @@ synchronize_website() {
 
 
 install_scriptspackage() {
-    info 'Installeer scriptspakket (kzgetscripts)...'
+    info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-    if ! wget -O- karelzimmer.nl/s 2> >($LOGCMD) | bash; then
-        warning 'Installeren scriptspakket is niet uitgevoerd.'
+    if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
+        warning 'Installeren pakket kz is niet uitgevoerd.'
         exit $WARNING
     fi
 }

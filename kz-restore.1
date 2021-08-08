@@ -1,5 +1,5 @@
 .\" ---------------------------------------------------------------------------
-.\" Man-pagina voor kzrestore.
+.\" Man-pagina voor kz restore.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 04.03.01
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 05.00.00
+.\" DateOfRelease: 2021-08-08
 .\" ---------------------------------------------------------------------------
 .\"
-.TH KZRESTORE 1 "kzrestore" "kzscripts 365" "kzrestore"
+.TH KZ-RESTORE 1 "kz restore" "kz 365" "kz restore"
 .\"
 .\"
 .SH NAAM
-kzrestore \- Back-up terugzetten.
+kz restore \- Back-up terugzetten.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzrestore
+.B kz restore
 [OPTIE...] [--] [\fISELECTIE\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzrestore\fR zet bestanden en mappen terug uit een back-up (reservekopie).
+\fBkz restore\fR zet bestanden en mappen terug uit een back-up (reservekopie).
 .sp
 Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt alles in de back-up
 teruggezet.
@@ -64,10 +64,10 @@ Standaard worden de volgende bestanden NIET teruggezet:
 Met optie \fB--exclude\fR (\fB-e\fR) zijn extra bestanden en mappen uit te
 sluiten.
 .sp
-Met opdracht \fBkzbackup\fR zijn individuele -of alle- bestanden en mappen te
+Met opdracht \fBkz backup\fR zijn individuele -of alle- bestanden en mappen te
 bewaren in een enkel archiefbestand.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzrestore\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz restore\fR
 worden gestart door te zoeken naar \fBback\fR, klik op
 \fBBack-up terugzetten\fR.
 .br
@@ -88,7 +88,7 @@ Zet bestanden en mappen terug in de \fIDOELMAP\fR.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzrestore').
+-ab -t kz-restore').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -126,12 +126,12 @@ opgezocht.
 .\"
 .\"
 .SH BESTANDEN
-/usr/local/etc/kzrestore-exclude-dflt
+/usr/local/etc/kz-restore-exclude-dflt
 .RS
 Standaard uit te sluiten bestanden en mappen.
 .RE
 .sp
-/usr/local/etc/kzrestore-exclude-opt
+/usr/local/etc/kz-restore-exclude-opt
 .RS
 Opgegeven uit te sluiten bestanden en mappen.
 .RE
@@ -147,18 +147,18 @@ https://karelzimmer.nl
 .\"
 .SH VOORBEELDEN
 .sp
-\fBkzrestore\fR
+\fBkz restore\fR
 .RS
 Zet alles in de back-up terug.
 Hiervoor is ook starter 'Back-up terugzetten' beschikbaar.
 .RE
 .sp
-\fBkzrestore --target /tmp /home/*/Documenten\fR
+\fBkz restore --target /tmp /home/*/Documenten\fR
 .RS
 Zet alle documenten terug in map /tmp.
 .RE
 .sp
-\fBkzrestore --exclude '*.JPG' /home/*/Afbeeldingen\fR
+\fBkz restore --exclude '*.JPG' /home/*/Afbeeldingen\fR
 .RS
 Zet alle foto's terug, maar geen JPG's.
 .RE
@@ -175,16 +175,19 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzbackup\fR(1),
-\fBkzcheckname\fR(1),
-\fBkzcommon.sh\fR(1),
-\fBkzmenu\fR(1),
+\fBkz-backup\fR(1),
+\fBkz-checkname\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzrestore is onderdeel van het pakket kzscripts en is beschikbaar
-vanaf Karel Zimmer Linux Scripts
-<https://karelzimmer.nl/html/linux.html#scripts>.
+Opdracht 'kz restore' is onderdeel van het pakket kz en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

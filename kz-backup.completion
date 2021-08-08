@@ -1,18 +1,18 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kzbackup.
+# Tab-completion-script voor kz backup.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.00.14
-# DateOfRelease: 2021-05-08
+# ReleaseNumber: 03.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 dashoptions="-d --debug '-e UITSLUITEN' '--exclude UITSLUITEN' -g --gui -h
     --help '-t DOELMAP' '--target DOELMAP' -u --usage -v --version"
-complete -o default -W "$dashoptions" kzbackup
+complete -o default -W "$dashoptions" kz-backup
 
 # EOF

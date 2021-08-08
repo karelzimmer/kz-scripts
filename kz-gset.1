@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzgset.
+.\" Man-pagina voor kz gset.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,25 +7,25 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 05.00.01
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 06.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZGSET 1 "kzgset" "kzscripts 365" "kzgset"
+.TH KZ-GSET 1 "kz gset" "kz 365" "kz gset"
 .\"
 .\"
 .SH NAAM
-kzgset \- GUI wijzigen.
+kz gset \- GUI wijzigen.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzgset
+.B kz gset
 [OPTIE...] [--]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzgset\fR toont wijzigingen in de configuratiedatabase na aanpassingen in de
-grafische werkomgeving (GUI),
+\fBkz gset\fR toont wijzigingen in de configuratiedatabase na aanpassingen in
+de grafische werkomgeving (GUI),
 .br
 kan een toepassingspictogram (favoriet) toevoegen aan het favorietengebied;
 de verticale strook aan de linkerkant van het scherm, en
@@ -66,7 +66,7 @@ Deze opties mogen \fBeenmaal\fR worden opgegeven; dus bijvoorbeeld alleen
 Als een van deze opties worden gebruikt dient ook optie \fB--folder\fR
 meegegeven te worden met verplicht argument \fIAPPFOLDER\fR.
 .sp
-Als er geen opties zijn opgegeven toont \fBkzgset\fR wijzigingen in de
+Als er geen opties zijn opgegeven toont \fBkz gset\fR wijzigingen in de
 configuratiedatabase na een wijziging in de grafische werkomgeving (GUI).
 .br
 Het volgende wordt uitgevoerd:
@@ -103,8 +103,8 @@ dient te worden:
     Vul de waarde in voor een property.
 .RE
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzgset\fR worden
-gestart door te zoeken naar \fBgui\fR, klik op \fBGUI wijzigen\fR.
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz gset\fR
+worden gestart door te zoeken naar \fBgui\fR, klik op \fBGUI wijzigen\fR.
 .\"
 .\"
 .SH OPTIES
@@ -120,7 +120,7 @@ Voeg een toepassingspictogram (favoriet) toe bovenaan aan het favorietengebied.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzgset').
+-ab -t kz-gset').
 .TP
 \fB--file=\fIDESKTOPFILE\fR
 Gebruik opgegeven dsktopbestand (.desktop).
@@ -163,20 +163,20 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .SH VOORBEELDEN
 .sp
-\fBkzgset\fR
+\fBkz-gset\fR
 .RS
 Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
 werkomgeving (GUI).
 Hiervoor is ook starter 'GUI wijzigen' beschikbaar.
 .RE
 .sp
-\fBkzgset --addfavtop --file='idle.desktop'\fR
+\fBkz-gset --addfavtop --file='idle.desktop'\fR
 .RS
 Voeg de IDLE (Python’s Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) toe bovenaan het favorietengebied.
 .RE
 .sp
-\fBkzgset --removefav --file='idle.desktop'\fR
+\fBkz-gset --removefav --file='idle.desktop'\fR
 .RS
 Verwijder de IDLE (Python’s Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) uit het favorietengebied.
@@ -195,13 +195,17 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .SH ZIE OOK
 \fBgsettings\fR(1),
-\fBkzcommon.sh\fR(1),
+\fBkz-common.sh\fR(1),
 \fBxfconf-query\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzgset is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz gset' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

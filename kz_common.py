@@ -9,10 +9,10 @@ Deze module geeft toegang tot algemene functies.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.00.11
-# DateOfRelease: 2021-05-08
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-module_name = 'kzcommon.py'
+module_name = 'kz-common.py'
 
 
 def process_option_version(program_name):

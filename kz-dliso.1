@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzdliso.
+.\" Man-pagina voor kz dliso.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.04.04
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZDLISO 1 "kzdliso" "kzscripts 365" "kzdliso"
+.TH KZ-DLISO 1 "kz dliso" "kzscripts 365" "kz dliso"
 .\"
 .\"
 .SH NAAM
-kzdliso \- Beeldbestanden downloaden.
+kz dliso \- Beeldbestanden downloaden.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzdliso
+.B kz dliso
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzdliso\fR downloadt Ubuntu beeldbestanden (.iso).
+\fBkz dliso\fR downloadt Ubuntu beeldbestanden (.iso).
 .sp
 Download parallel Ubuntu Linux beeldbestanden (.iso) en controlebestanden
 (SHA256SUMS).
@@ -35,7 +35,7 @@ uitvoering gewijzigd worden.
 Met optie \fB--checksums\fR (\fB-c\fR) worden (alleen) de controlebestanden
 (opnieuw) gedownload.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzdliso\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz dliso\fR
 worden gestart door te zoeken naar \fBdown\fR, klik op \
 \fBBeeldbestanden downloaden\fR.
 .\"
@@ -44,7 +44,7 @@ worden gestart door te zoeken naar \fBdown\fR, klik op \
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzdliso').
+-ab -t kz-dliso').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -108,14 +108,18 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzmkusb\fR(1),
-\fBkzspsum\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-mkusb\fR(1),
+\fBkz-spsum\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzdliso is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz dliso' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

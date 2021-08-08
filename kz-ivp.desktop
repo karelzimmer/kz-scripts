@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzivp.
+# Bureaublad-configuratiebestand voor kz ivp.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.03.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 03.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=Check program
 GenericName[nl]=Controleprogramma
 Comment=Installation Verification Procedure (IVP) for scripts
 Comment[nl]=Installatie Verificatie Procedure (IVP) voor scripts
-Keywords=kzivpsh;ivp;
-Keywords[nl]=kzivpsh;ivp;
+Keywords=kzivpsh;kz-ivpsh;ivp;
+Keywords[nl]=kzivpsh;kz-ivpsh;ivp;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzivp --gui
-Icon=/usr/share/pixmaps/kzivp.svg
+Exec=/usr/bin/kz-ivp --gui
+Icon=/usr/share/pixmaps/kz-ivp.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzivp --gui --version
+Exec=/usr/bin/kz-ivp --gui --version
 
 # EOF

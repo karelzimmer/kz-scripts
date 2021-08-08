@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 26.15.16
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 27.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 
@@ -127,7 +127,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 error() {
     if $OPTION_GUI; then
-        TITLE="Foutmelding $PROGRAM_NAME"
+        TITLE="Foutmelding ${PROGRAM_NAME//kz-/kz }"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd
@@ -157,7 +157,8 @@ check_user() {
         fi
     else
         if [[ $UID -eq 0 ]]; then
-            info "$PROGRAM_NAME: niet uitvoeren met 'sudo' of als root"
+            info "${PROGRAM_NAME//kz-/kz }: niet uitvoeren met 'sudo' of als \
+root"
             exit $ERROR
         fi
     fi
@@ -166,7 +167,7 @@ check_user() {
 
 info() {
     if $OPTION_GUI; then
-        TITLE="Informatie $PROGRAM_NAME"
+        TITLE="Informatie ${PROGRAM_NAME//kz-/kz }"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd
@@ -225,7 +226,7 @@ init_script() {
 --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $PROGRAM_NAME ?ltregel \
 %lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q \
 voor stoppen)"
-    USAGELINE="Typ '$PROGRAM_NAME --usage' voor meer informatie."
+    USAGELINE="Typ '${PROGRAM_NAME//kz-/kz } --usage' voor meer informatie."
 }
 
 
@@ -337,14 +338,16 @@ process_option_debug() {
 
 
 process_option_help() {
-    printf "%s\n\n%s\n" "$HELP" "Typ 'man $PROGRAM_NAME' voor meer informatie."
+    printf  "%s\n\n%s\n"    \
+            "$HELP"         \
+            "Typ 'man ${PROGRAM_NAME//kz-/kz }' voor meer informatie."
 }
 
 
 process_option_usage() {
     printf "%s\n\n%s\n" \
             "$USAGE"    \
-            "Typ '$PROGRAM_NAME --help' voor meer informatie."
+            "Typ '${PROGRAM_NAME//kz-/kz } --help' voor meer informatie."
 }
 
 
@@ -478,16 +481,16 @@ $command, code: $rc ($rc_desc)"
 
 signal_exit() {
     case $PROGRAM_NAME in
-        kzbackup)
+        kz-backup)
             if [[ -e $BACKUP_TO_DELETE ]]; then
-                info 'Programma kzbackup is onderbroken.
+                info 'Programma kz-backup is onderbroken.
 
 Opgeslagen back-up wordt verwijderd.'
                 rm "$BACKUP_TO_DELETE" |& $LOGCMD
                 info 'Opgeslagen back-up is verwijderd.'
             fi
             ;;
-        kzinstall)
+        kz-install)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
             log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
 start dan een Terminalvenster, en voer uit:
@@ -500,7 +503,7 @@ start dan een Terminalvenster, en voer uit:
                 rm --force /tmp/"$PROGRAM_NAME"-??????????.text
             fi
             ;;
-        kzsetup)
+        kz-setup)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
             if [[ $rc -eq $SUCCESS ]]; then
                 rm --force /tmp/"$PROGRAM_NAME"-??????????.cmds
@@ -516,7 +519,7 @@ start dan een Terminalvenster, en voer uit:
 
 warning() {
     if $OPTION_GUI; then
-        TITLE="Waarschuwing $PROGRAM_NAME"
+        TITLE="Waarschuwing ${PROGRAM_NAME//kz-/kz }"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd

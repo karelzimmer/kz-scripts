@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.02.01
-# DateOfRelease: 2021-07-23
+# ReleaseNumber: 04.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 #1
@@ -22,23 +22,23 @@ if [[ $HOSTNAME = pc-van-hugo && $USER = hugo ]]; then gsettings set org.gnome.s
 
 #1 telegram-desktop
 #2 Telegram Desktop instellen
-kzgset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
+kz-gset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='telegram-desktop_telegram-desktop.desktop'
+#4    kz-gset --removefav --file='telegram-desktop_telegram-desktop.desktop'
 
 
 #1 virtualbox
 #2 VirtualBox instellen
-kzgset --addfavbottom --file='virtualbox.desktop'
+kz-gset --addfavbottom --file='virtualbox.desktop'
 if [[ $HOSTNAME = pc-van-hugo && $USER = hugo ]]; then cp /usr/share/applications/kz-vm-hugowin732.desktop "$HOME"/.local/share/applications/; fi
 if [[ $HOSTNAME = pc-van-hugo && $USER = hugo ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop; fi
-if [[ $HOSTNAME = pc-van-hugo && $USER = hugo ]]; then kzgset --addfavbottom --file='kz-vm-hugowin732.desktop'; fi
+if [[ $HOSTNAME = pc-van-hugo && $USER = hugo ]]; then kz-gset --addfavbottom --file='kz-vm-hugowin732.desktop'; fi
 #3 1. Ga naar Apparaten > Installeren Guest Additions en volg de aanwijzingen op het scherm.
 #3 2. Voor optimale netwerksnelheid kies bij Netwerk voor Gekoppeld aan Netwerk bridge adapter.
 #4 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
 #4 2. Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
-#4    kzgset --removefav --file='virtualbox.desktop'
+#4    kz-gset --removefav --file='virtualbox.desktop'
 
 
 # EOF

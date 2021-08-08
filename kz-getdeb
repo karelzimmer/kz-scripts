@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 27.00.00
-# DateOfRelease: 2021-08-05
+# ReleaseNumber: 28.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 
@@ -16,7 +16,7 @@
 # Global constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kzgetscripts'
+readonly    PROGRAM_NAME='kz-getdeb'
 #eadonly    PROGRAM_PATH=None
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 
@@ -32,8 +32,8 @@ readonly    GREEN=${BOLD}$(tput setaf 2)
 readonly    YELLOW=${BOLD}$(tput setaf 3)
 readonly    BLUE=${BOLD}$(tput setaf 4)
 
-readonly    CHECKLISTSDIR=$HOME/Documenten/Checklists
-readonly    SCRIPTSDIR=$HOME/kzscripts
+readonly    DOCSDIR=$HOME/kz-docs
+readonly    SCRIPTSDIR=$HOME/kz-scripts
 
 ###############################################################################
 # Global variables
@@ -203,15 +203,15 @@ check_input() {
         if [[ "$*" = *-g* ]]; then
             TERMINAL=true
         else
-            TEXT="$PROGRAM_NAME: geen opties of argumenten opgeven
+            TEXT="${PROGRAM_NAME//kz-/kz }: geen opties of argumenten opgeven
 
-Voor de nieuwste versie van $PROGRAM_NAME én het scriptspakket,
-gebruik de opdracht: ${BLUE}wget karelzimmer.nl/s${NORMAL}
-                     ${BLUE}bash s${NORMAL}
-                 of: ${BLUE}wget -O- karelzimmer.nl/s | bash${NORMAL}
-                 of: ${BLUE}curl -L karelzimmer.nl/s | bash${NORMAL}
-                 of: ${BLUE}wget karelzimmer.nl/s; bash s${NORMAL}
-                 of: ${BLUE}$PROGRAM_NAME${NORMAL}"
+Voor de nieuwste versie van $PROGRAM_NAME én het pakket kz,
+gebruik de opdracht: ${BLUE}wget karelzimmer.nl/kz${NORMAL}
+                     ${BLUE}bash kz${NORMAL}
+                 of: ${BLUE}wget -O- karelzimmer.nl/kz | bash${NORMAL}
+                 of: ${BLUE}curl -L karelzimmer.nl/kz | bash${NORMAL}
+                 of: ${BLUE}wget karelzimmer.nl/kz; bash kz${NORMAL}
+                 of: ${BLUE}${PROGRAM_NAME//kz-/kz }${NORMAL}"
             printf "%b\n" "$TEXT" >&2
             exit $SUCCESS
         fi
@@ -370,8 +370,7 @@ process_input() {
 
 
 install_scriptspackage() {
-    local debname=kzscripts_365_all.deb
-    local site_deb=https://karelzimmer.nl/apps/kzscripts/$debname
+    local site_deb=https://karelzimmer.nl/apps/kzscripts/kz_365_all.deb
     local temp_deb=''
 
     # Bij Live-sessie de universe repo aanzetten.
@@ -446,11 +445,11 @@ check_dependencies() {
 
 
 process_checklists() {
-    if ! git    clone                                           \
-                https://github.com/karelzimmer/Checklists.git   \
-                "$CHECKLISTSDIR"                                |& $LOGCMD
+    if ! git    clone                                       \
+                https://github.com/karelzimmer/kz-docs.git  \
+                "$DOCSDIR"                                  |& $LOGCMD
     then
-        cd "$CHECKLISTSDIR" || exit $ERROR
+        cd "$DOCSDIR" || exit $ERROR
         git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
@@ -459,7 +458,7 @@ process_checklists() {
 
 process_scripts() {
     if ! git    clone                                           \
-                https://github.com/karelzimmer/kzscripts.git    \
+                https://github.com/karelzimmer/kz-scripts.git   \
                 "$SCRIPTSDIR"                                   |& $LOGCMD
     then
         cd "$SCRIPTSDIR" || exit $ERROR
@@ -508,7 +507,7 @@ term_script() {
     TEXT='Volg nu de stappen zoals beschreven in Checklist installatie.
 
 Deze Checklist is te vinden op de site https://karelzimmer.nl
-onder Linux.'
+onder Linux, en in /usr/share/doc/kzscripts/.'
     height=10
 
     if ! $TERMINAL; then

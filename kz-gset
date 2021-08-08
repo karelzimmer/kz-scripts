@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # GUI wijzigen.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 11.00.03
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 12.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 
 ###############################################################################
@@ -21,11 +21,11 @@ source "$(dirname "$0")"/kzcommon.sh
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addappfolder,addfavbottom,\
 addfavtop,removeappfolder,removefav,file:,folder:"
-readonly USAGE="Gebruik: $PROGRAM_NAME [--addappfolder|--removeappfolder \
---folder=APPFOLDER]
-                [--addfavbottom|--addfavtop|--removefav --file=DESKTOPFILE]
-                $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--]
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } \
+[--addappfolder|--removeappfolder --folder=APPFOLDER]
+                 [--addfavbottom|--addfavtop|--removefav --file=DESKTOPFILE]
+                 $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--]
 
 GUI wijzigen.
 

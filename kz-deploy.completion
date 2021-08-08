@@ -1,17 +1,17 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kzdeploy.
+# Tab-completion-script voor kz deploy.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.01.01
-# DateOfRelease: 2021-05-08
+# ReleaseNumber: 04.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 dashoptions='-d --debug -g --gui -h --help -r --reset -u --usage -v --version'
-complete -o default -W "$dashoptions" kzdeploy
+complete -o default -W "$dashoptions" kz-deploy
 
 # EOF

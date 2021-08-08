@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzdeploy.
+# Bureaublad-configuratiebestand voor kz deploy.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.04.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=CI/CD pipeline
 GenericName[nl]=CI/CD pipeline
 Comment=Distributes scripts and other files
 Comment[nl]=Distribueert scripts en overige bestanden
-Keywords=kzdeploy;deploy;
-Keywords[nl]=kzdeploy;deploy;
+Keywords=kzdeploy;kz-deploy;deploy;
+Keywords[nl]=kzdeploy;kz-deploy;deploy;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzdeploy --gui
-Icon=/usr/share/pixmaps/kzdeploy.svg
+Exec=/usr/bin/kz-deploy --gui
+Icon=/usr/share/pixmaps/kz-deploy.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzdeploy --gui --version
+Exec=/usr/bin/kz-deploy --gui --version
 
 # EOF

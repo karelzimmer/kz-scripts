@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzinstall.
+# Bureaublad-configuratiebestand voor kz install.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 06.02.01
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 07.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,36 +18,36 @@ GenericName=Install program
 GenericName[nl]=Installatieprogramma
 Comment=Add apps and change system settings
 Comment[nl]=Installeer apps en wijzig systeeminstellingen
-Keywords=kzinstall;install;
-Keywords[nl]=kzinstall;
+Keywords=kzinstall;kz-install;install;
+Keywords[nl]=kzinstall;kz-install;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kzinstall --gui
-Icon=/usr/share/pixmaps/kzinstall.svg
+Exec=pkexec /usr/bin/kz-install --gui
+Icon=/usr/share/pixmaps/kz-install.svg
 Actions=info;remove;cat;simulate;version;
 
 [Desktop Action info]
 Name=Show installation instructions
 Name[nl]=Installatie-instructies tonen
-Exec=/usr/bin/kzinstall --gui --info
+Exec=/usr/bin/kz-install --gui --info
 
 [Desktop Action remove]
 Name=Show removal instructions
 Name[nl]=Verwijder-instructies tonen
-Exec=/usr/bin/kzinstall --gui --remove
+Exec=/usr/bin/kz-install --gui --remove
 
 [Desktop Action cat]
 Name=Show files
 Name[nl]=Bestanden tonen
-Exec=/usr/bin/kzinstall --gui --cat
+Exec=/usr/bin/kz-install --gui --cat
 
 [Desktop Action simulate]
 Name=Show commands
 Name[nl]=Opdrachten tonen
-Exec=/usr/bin/kzinstall --gui --simulate
+Exec=/usr/bin/kz-install --gui --simulate
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen tonen
-Exec=/usr/bin/kzinstall --gui --version
+Exec=/usr/bin/kz-install --gui --version
 
 # EOF

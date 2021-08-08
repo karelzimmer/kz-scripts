@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Back-up terugzetten.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2007-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 38.08.02
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 39.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 
 ###############################################################################
@@ -20,11 +20,11 @@ source "$(dirname "$0")"/kzcommon.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:s:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:,exclude:'
-readonly USAGE="Gebruik: $PROGRAM_NAME [-e|--exclude=UITSLUITEN]... \
-[-s|--source=BRON] [-t|--target=DOEL]
-                   $OPTIONS_USAGE_COMMON
-                   [SELECTIE...]"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [SELECTIE...]
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } \
+[-e|--exclude=UITSLUITEN]... [-s|--source=BRON] [-t|--target=DOEL]
+                    $OPTIONS_USAGE_COMMON
+                    [SELECTIE...]"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--] [SELECTIE...]
 
 Back-up terugzetten.
 
@@ -291,7 +291,7 @@ even duren)..."
             warning "Geen back-ups gevonden in $SOURCE."
         info "
 Gebruik optie source om op te geven waar de back-up gevonden kan worden.
-Voorbeeld: $PROGRAM_NAME --source BRONMAP
+Voorbeeld: ${PROGRAM_NAME//kz-/kz } --source BRONMAP
 $USAGELINE" >&2
             exit $WARNING
         elif [[ $bupnum -eq 1 ]]; then

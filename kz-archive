@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Scripts archiveren.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 17.05.06
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 18.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 ###############################################################################
 # Global constants
@@ -19,9 +19,9 @@ source "$(dirname "$0")"/kzcommon.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $PROGRAM_NAME $OPTIONS_USAGE_COMMON
-                   [SELECTIE...]"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [SELECTIE...]
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON
+                    [SELECTIE...]"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--] [SELECTIE...]
 
 Scripts archiveren.
 
@@ -33,11 +33,9 @@ Argumenten:
 
 readonly ARCHIVE_FROM=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux
 readonly ARCHIVE_TO=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux-archief
-readonly CHANGELOG=$HOME/kzscripts/CHANGELOG
-readonly CHANGELOG_GZ=$HOME/kzscripts/CHANGELOG.gz
-readonly DELETE_FROM_1=$HOME/kzscripts
-readonly DELETE_FROM_2=$HOME/kzscripts.deb
-readonly DELETE_FROM_3=$HOME/Documenten/Checklists
+readonly DELETE_FROM_1=$HOME/kz-scripts
+readonly DELETE_FROM_2=$HOME/kz-deb
+readonly DELETE_FROM_3=$HOME/kz-docs
 
 
 ###############################################################################

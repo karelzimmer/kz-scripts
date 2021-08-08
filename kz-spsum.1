@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzspsum.
+.\" Man-pagina voor kz spsum.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.05.02
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZSPSUM 1 "kzspsum" "kzscripts 365" "kzspsum"
+.TH KZ-SPSUM 1 "kz spsum" "kz 365" "kz spsum"
 .\"
 .\"
 .SH NAAM
-kzspsum \- Controlebestanden opsplitsen.
+kz spsum \- Controlebestanden opsplitsen.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzspsum
+.B kz spsum
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzspsum\fR splitst controlebestanden (SHA256SUMS) op.
+\fBkz spsum\fR splitst controlebestanden (SHA256SUMS) op.
 .sp
 Combineer in map ~/Downloads de controlebestanden (SHA256SUMS) en
 beeldbestanden (.iso) tot \fI\fBversie\fR\fI.iso\fR en
@@ -44,7 +44,7 @@ Controleren via:
 USB-stick aanmaken via:
 \fBmkusbs\fR
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzspsum\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz spsum\fR
 worden gestart door te zoeken naar \fBcontr\fR, klik op
 \fBControlebestanden opsplitsen\fR.
 .\"
@@ -56,7 +56,7 @@ Download alleen de controlebestanden.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzspsum').
+-ab -t kz-spsum').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -140,15 +140,19 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzdlsio\fR(1),
-\fBkzmkusbs\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-dlsio\fR(1),
+\fBkz-mkusbs\fR(1),
 \fBhttps://karelzimmer.nl\fR,
 \fBhttps://www.ventoy.net\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzspsum is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz spsum' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

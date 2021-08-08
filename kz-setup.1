@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzsetup.
+.\" Man-pagina voor kz setup.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,31 +7,31 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 04.06.02
-.\" DateOfRelease: 2021-07-16
+.\" ReleaseNumber: 05.00.00
+.\" DateOfRelease: 2021-08-08
 
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZSETUP 1 "kzsetup" "kzscripts 365" "kzsetup"
+.TH KZ-SETUP 1 "kz setup" "kz 365" "kz setup"
 .\"
 .\"
 .SH NAAM
-kzsetup \- Apps instellen.
+kz setup \- Apps instellen.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzsetup
+.B kz setup
 [OPTIE...] [--] [\fIAPP\fR...] [\fIBESTAND\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzsetup\fR stelt apps in en wijzigt gebruikersinstellingen.
+\fBkz setup\fR stelt apps in en wijzigt gebruikersinstellingen.
 .sp
-De opdrachten die standaard meegeleverd worden bij \fBkzsetup\fR zijn
+De opdrachten die standaard meegeleverd worden bij \fBkz setup\fR zijn
 idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
 .sp
-Standaard wordt met \fBkzsetup\fR de regels in het bestand\
- '/usr/bin/kzsetup-<distributie>-<versie>-\fIEDITIE\fR.sh' gekopieerd
+Standaard wordt met \fBkz setup\fR de regels in het bestand\
+ '/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh' gekopieerd
 naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
@@ -41,7 +41,7 @@ gebruikersinstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
 (e.g. Ubuntu 20.04 desktop).
 .sp
 Als daarna ook bestand\
- '/usr/bin/kzsetup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh'
+ '/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh'
 aanwezig is worden de regels daarin voor computernaam toegevoegd aan het
 eerder aangemaakte tijdelijk bestand.
 .sp
@@ -69,27 +69,27 @@ instellingsbestand en worden de regels gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijke bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
-Het is mogelijk dat na het uitvoeren van \fBkzsetup\fR er extra acties nodig
+Het is mogelijk dat na het uitvoeren van \fBkz setup\fR er extra acties nodig
 zijn.
 Optie \fB--info\fR geeft dan aanvullende instructies weer.
 .br
-Alhoewel \fBkzsetup\fR gericht is op het instellen, met optie \fB--reset\fR
+Alhoewel \fBkz setup\fR gericht is op het instellen, met optie \fB--reset\fR
 worden er instructies getoond om het instellen ongedaan te maken.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzsetup\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz setup\fR
 worden gestart door te zoeken naar \fBapps\fR, klik op \fBApps instellen\fR.
 .sp
-Gebruik (eerst) \fBkzinstall\fR voor het installeren van apps en het aanpassen
+Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het aanpassen
 van systeeminstellingen.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met '\fBsetup-\fR' en te eindigen
-met '\fB.sh\fR'.
+De te verwerken bestanden dienen te beginnen met '\fBkz-setup-\fR' en te
+eindigen met '\fB.sh\fR'.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
-De opdrachten standaard meegeleverd bij \fBkzsetup\fR zijn zodanig opgesteld
+De opdrachten standaard meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld
 dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft; idempotentie.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
@@ -97,7 +97,7 @@ regel) er zijn en hoe deze regels verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een voorbeeld van de \fBvolgorde\fR van deze regels in
 een instellingsbestand.
-Meer voorbeelden zijn te zien via de opdracht \fBkzsetup --cat\fR.
+Meer voorbeelden zijn te zien via de opdracht \fBkz setup --cat\fR.
 .\"
 .\"
 .sp
@@ -254,7 +254,7 @@ zouden worden.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzsetup').
+-ab -t kz-setup').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -284,25 +284,25 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kzsetup-<distributie>-<versie>-\fIEDITIE\fR.sh
+/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh
 .RS
 Standaard instellingsbestand als er geen \fIBESTAND\fRen zijn opgegeven,
 \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
-/usr/bin/kzsetup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .RS
 Standaard instellingsbestand als er geen \fIBESTAND\fRen zijn opgegeven,\
  \fIEDITIE\fR is standaard
 desktop.
 .RE
 .sp
-/tmp/kzsetup-XXXXXXXXXX.cmds
+/tmp/kz-setup-XXXXXXXXXX.cmds
 .RS
 Tijdelijk instellingsbestand.
 .RE
 .sp
-/tmp/kzsetup-XXXXXXXXXX.text
+/tmp/kz-setup-XXXXXXXXXX.text
 .RS
 Tijdelijk tekstbestand.
 .RE
@@ -318,24 +318,24 @@ https://karelzimmer.nl
 .\"
 .SH VOORBEELDEN
 .sp
-\fBkzsetup\fR
+\fBkz setup\fR
 .RS
 Stel in alles wat in de standaard instellingsbestenden staat.
 Hiervoor is ook starter 'Apps instellen' beschikbaar.
 .RE
 .sp
-\fBkzsetup google-chrome\fR
+\fBkz setup google-chrome\fR
 .RS
 Stel in Google Chrome.
 .RE
 .sp
-\fBkzsetup google-chrome --info\fR
+\fBkz setup google-chrome --info\fR
 .RS
 Toon aanvullende instructies na het instellen van Google Chrome.
 Rechtsklik op starter 'Apps instellen' en kies 'Info'.
 .RE
 .sp
-\fBkzsetup google-chrome --reset\fR
+\fBkz setup google-chrome --reset\fR
 .RS
 Toon instructies voor het resetten van Google Chrome.
 Rechtsklik op starter 'Apps instellen' en kies 'Resetten'.
@@ -353,14 +353,18 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzinstal\fR(1),
-\fBkzmenu\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-instal\fR(1),
+\fBkz-menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzsetup is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz setup' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzckname.
+# Bureaublad-configuratiebestand voor kz ckname.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.04.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=Check program
 GenericName[nl]=Controleprogramma
 Comment=Checks NTFS folder and file names
 Comment[nl]=Controleert NTFS map- en bestandsnamen
-Keywords=kzckname;ckname;check;name;
-Keywords[nl]=kzckname;ckname;check;naam;
+Keywords=kzckname;kz-ckname;ckname;check;name;
+Keywords[nl]=kzckname;kz-ckname;ckname;check;naam;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzckname --gui
-Icon=/usr/share/pixmaps/kzckname.svg
+Exec=/usr/bin/kz-ckname --gui
+Icon=/usr/share/pixmaps/kz-ckname.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzckname --gui --version
+Exec=/usr/bin/kz-ckname --gui --version
 
 # EOF

@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzlsinstalled.
+.\" Man-pagina voor kz lsinstalled.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,66 +7,67 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.06.01
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZLSINSTALLED 1 "kzlsinstalled" "kzscripts 365" "kzlsinstalled"
+.TH KZ-LSINSTALLED 1 "kz lsinstalled" "kz 365" "kz lsinstalled"
 .\"
 .\"
 .SH NAAM
-kzlsinstalled \- Applijst maken.
+kz lsinstalled \- Applijst maken.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzlsinstalled
+.B kz lsinstalled
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzlsinstalled\fR verzamelt toegevoegde pakketbronnen en geïnstalleerde
+\fBkz lsinstalled\fR verzamelt toegevoegde pakketbronnen en geïnstalleerde
 pakketten.
 .sp
-Gebruik \fBkzlsinstalled\fR om te controleren of de installatiebestanden,
-gebruikt door \fBinstal\fR, volledig zijn.
+Gebruik \fBkz lsinstalled\fR om te controleren of de installatiebestanden,
+gebruikt door \fBkz install\fR, volledig zijn.
 .sp
 Een vijftal blokken van opdrachten worden uitgevoerd, en maakt daarmee de
 volgende bestanden:
 .IP " 1." 4
-/usr/local/etc/kzlsinstalled-<computernaam>-deb-bestanden
+/usr/local/etc/kz-lsinstalled-<computernaam>-<distr-id>-deb-bestanden
 .RS 4
 zonder repository geïnstalleerde apps
 .RE
 .IP " 2." 4
-/usr/local/etc/kzlsinstalled-<computernaam>-pakketbronnen
+/usr/local/etc/kz-lsinstalled-<computernaam>-<distr-id>-pakketbronnen
 .RS 4
 toegevoegde repositories
 .RE
 .IP " 3." 4
-/usr/local/etc/kzlsinstalled-<computernaam>-pakketten
+/usr/local/etc/kz-lsinstalled-<computernaam>-<distr-id>-pakketten
 .RS 4
 apps door de gebruiker geïnstalleerd
 .RE
 .IP " 4." 4
-/usr/local/etc/kzlsinstalled-<computernaam>-favorieten
+/usr/local/etc/kz-lsinstalled-<computernaam>-<distr-id>-favorieten
 .RS 4
 favorieten die in gebruik zijn
 .RE
 .IP " 5." 4
-/usr/local/etc/kzlsinstalled-<computernaam>-snaps
+/usr/local/etc/kz-lsinstalled-<computernaam>-<distr-id>-snaps
 .RS 4
 geïnstalleerde snaps
 .RE
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzlsinstalled\fR
-worden gestart door te zoeken naar \fBapp\fR, klik op \fBApplijst maken\fR.
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan
+\fBkz-lsinstalled\fR worden gestart door te zoeken naar \fBapp\fR, klik op
+\fBApplijst maken\fR.
 .\"
 .\"
 .SH OPTIES
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzlsinstalled').
+-ab -t kz-lsinstalled').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -114,14 +115,18 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzinstal\fR(1),
-\fBkzmenu\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-instal\fR(1),
+\fBkz-menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzlsinstalled is onderdeel van het pakket kzscripts en is beschikbaar
+Opdracht 'kz lsinstalled' is onderdeel van het pakket kz en is beschikbaar
 vanaf Karel Zimmer Linux Scripts
 <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp

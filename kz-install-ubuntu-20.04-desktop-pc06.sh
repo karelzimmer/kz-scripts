@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.43.00
-# DateOfRelease: 2021-08-04
+# ReleaseNumber: 03.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 #1 bluefish
@@ -63,7 +63,7 @@ sudo apt-get install --yes libimage-exiftool-perl
 
 #1 fakeroot
 #2 Fakeroot installeren
-## Nodig voor het aanmaken van Debian-pakketten in kzdeploy.
+## Nodig voor het aanmaken van Debian-pakketten in kz-deploy.
 sudo apt-get install --yes fakeroot
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes fakeroot

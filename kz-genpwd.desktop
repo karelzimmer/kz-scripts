@@ -1,5 +1,5 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzgenpwd.
+# Bureaublad-configuratiebestand voor kz genpwd.
 # Gebruik Bitwarden om wachtwoorden te beheren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.03.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 03.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -19,17 +19,17 @@ GenericName=Generator program
 GenericName[nl]=Generatorprogramma
 Comment=Generate save passwords
 Comment[nl]=Genereer veilige wachtwoorden
-Keywords=kzgenpwd;genpwd;password;
-Keywords[nl]=kzgenpwd;genpwd;wachtwoord;
+Keywords=kzgenpwd;kzg-enpwd;genpwd;password;
+Keywords[nl]=kzgenpwd;kz-genpwd;genpwd;wachtwoord;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzgenpwd --gui
-Icon=/usr/share/pixmaps/kzgenpwd.svg
+Exec=/usr/bin/kz-genpwd --gui
+Icon=/usr/share/pixmaps/kz-genpwd.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzgenpwd --gui --version
+Exec=/usr/bin/kz-genpwd --gui --version
 
 # EOF

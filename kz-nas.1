@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kznas.
+.\" Man-pagina voor kz nas.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.06.01
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZNAS 1 "kznas" "kzscripts 365" "kznas"
+.TH KZ-NAS 1 "kz nas" "kz 365" "kz nas"
 .\"
 .\"
 .SH NAAM
-kznas \- Netwerkschijf aankoppelen.
+kz nas \- Netwerkschijf aankoppelen.
 .\"
 .\"
 .SH SAMENVATTING
-.B kznas
+.B kz nas
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkznas\fR koppelt een NAS aan tijdens het opstarten.
+\fBkz nas\fR koppelt een NAS aan tijdens het opstarten.
 .sp
 Er wordt een systemd mount-bestand aangemaakt en geactiveerd.
 .sp
@@ -50,7 +50,7 @@ bereik van DHCP die automatisch de IP-adressen uitdeelt (vaak 192.168.0.200).
 NAS is een acroniem (letterwoord), en een afkorting, van network-attached
 storage.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkznas\fR worden
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz nas\fR worden
 gestart door te zoeken naar \fBnas\fR, klik op \fBNetwerkschijf aankoppelen\fR.
 .\"
 .\"
@@ -58,7 +58,7 @@ gestart door te zoeken naar \fBnas\fR, klik op \fBNetwerkschijf aankoppelen\fR.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kznas').
+-ab -t kz-nas').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -88,7 +88,7 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH BESTANDEN
-/etc/kznaslogin
+/etc/kz-naslogin
 .RS
 NAS-login gegevens.
 .RE
@@ -118,13 +118,17 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzmenu\fR(1),
+\fBk-zcommon.sh\fR(1),
+\fBk-zmenu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kznas is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz nas' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

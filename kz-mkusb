@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # USB-sticks maken.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2014-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 17.06.03
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 18.06.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 
 ###############################################################################
@@ -20,9 +20,10 @@ source "$(dirname "$0")"/kzcommon.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON's:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:'
-readonly USAGE="Gebruik: $PROGRAM_NAME [-s|--source=BRON] [-t|--target=DOEL]
-                 $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--]
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } [-s|--source=BRON] \
+[-t|--target=DOEL]
+                  $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--]
 
 USB-sticks maken.
 

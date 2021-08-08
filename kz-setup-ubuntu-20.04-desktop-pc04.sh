@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.01.01
-# DateOfRelease: 2021-07-23
+# ReleaseNumber: 04.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 #1
@@ -22,16 +22,16 @@ if [[ $HOSTNAME = pc04 && $USER = nina ]]; then gsettings set org.gnome.desktop.
 
 #1 calibre
 #2 Calibre instellen
-kzgset --addfavbottom --file='calibre-gui.desktop'
+kz-gset --addfavbottom --file='calibre-gui.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='calibre-gui.desktop'
+#4    kz-gset --removefav --file='calibre-gui.desktop'
 
 
 #1 google-earth
 #2 Google Earth instellen
-kzgset --addfavbottom --file='google-earth.desktop'
+kz-gset --addfavbottom --file='google-earth.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='google-earth.desktop'
+#4    kz-gset --removefav --file='google-earth.desktop'
 
 
 # EOF

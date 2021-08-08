@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzivp.
+.\" Man-pagina voor kz ivp.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,30 +7,30 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 03.05.04
-.\" DateOfRelease: 2021-07-14
+.\" ReleaseNumber: 04.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZIVP 1 "kzivp" "kzscripts 365" "kzivp"
+.TH KZ-IVP 1 "kz ivp" "kz 365" "kz ivp"
 .\"
 .\"
 .SH NAAM
-kzivp \- Scripts controleren.
+kz ivp \- Scripts controleren.
 .\"
 .\"
 .SH SAMENVATTINGmsg
-.B kzivp
+.B kz ivp
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzivp\fR voert een Installatie Verificatie Procedure (IVP) uit voor
+\fBkz ivp\fR voert een Installatie Verificatie Procedure (IVP) uit voor
 scripts.
 .sp
 Voert een IVP uit waarbij scripts inhoudelijk en met shellcheck worden
 gecontroleerd.
 .sp
-\fBkzivp\fR wordt ook aangeroepen vanuit \fBkzdeploy\fR.
+\fBkz ivp\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
 .sp
 Gecontroleerd wordt:
 .br
@@ -46,7 +46,7 @@ Shellcheck  - shellscript analyse tool
 .br
 Gebruik     - roep shellscript aan met opties zoals ook in starter aanwezig
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzivp\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz ivp\fR
 worden gestart door te zoeken naar \fBivp\fR, klik op\
  \fBScripts controleren\fR.
 .\"
@@ -55,7 +55,7 @@ worden gestart door te zoeken naar \fBivp\fR, klik op\
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzivp').
+-ab -t kz-ivp').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -95,13 +95,17 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzdeploy\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-deploy\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzivp is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz ivp' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

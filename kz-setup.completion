@@ -1,19 +1,19 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kzsetup.
+# Tab-completion-script voor kz setup.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 04.00.00
-# DateOfRelease: 2021-05-20
+# ReleaseNumber: 05.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 dashoptions="-a --apps -c --cat -d --debug '-e EDITIE' '--edition EDITIE' -f
     --files -g --gui -h --help -i --info -r --reset -s --simulate -u --usage -v
     --version"
-complete -o default -W "$dashoptions" kzsetup
+complete -o default -W "$dashoptions" kz-setup
 
 # EOF

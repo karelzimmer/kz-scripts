@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzgset.
+# Bureaublad-configuratiebestand voor kz gset.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.04.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=Config program
 GenericName[nl]=Configuratieprogramma
 Comment=Shows changes to the configuration database after GUI changes
 Comment[nl]=Toont wijzigingen in de configuratiedatabase na GUI-aanpassingen
-Keywords=kzgset;gsettings;
-Keywords[nl]=kzgset;gsettings;
+Keywords=kzgset;kz-gset;gsettings;
+Keywords[nl]=kzgset;kz-gset;gsettings;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzgset --gui
-Icon=/usr/share/pixmaps/kzgset.svg
+Exec=/usr/bin/kz-gset --gui
+Icon=/usr/share/pixmaps/kz-gset.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzgset --gui --version
+Exec=/usr/bin/kz-gset --gui --version
 
 # EOF

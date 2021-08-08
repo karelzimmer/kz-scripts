@@ -1,5 +1,5 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kzdeploy.
+.\" Man-pagina voor kz deploy.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
@@ -7,24 +7,24 @@
 .\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
 .\" <https://creativecommons.org/licenses/by-sa/4.0/>.
 .\"
-.\" ReleaseNumber: 06.00.00
-.\" DateOfRelease: 2021-08-05
+.\" ReleaseNumber: 07.00.00
+.\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZDEPLOY 1 "kzdeploy" "kzscripts 365" "kzdeploy"
+.TH KZ-DEPLOY 1 "kz deploy" "kz 365" "kz deploy"
 .\"
 .\"
 .SH NAAM
-kzdeploy \- Scripts distribueren.
+kz deploy \- Scripts distribueren.
 .\"
 .\"
 .SH SAMENVATTING
-.B kzdeploy
+.B kz deploy
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkzdeploy\fR distribueert en uploadt scripts en documenten naar
+\fBkz deploy\fR distribueert en uploadt scripts en documenten naar
 http://karelzimmer.nl.
 .br
 Dit om de scripts en documenten beschikbaar te stellen voor algemeen gebruik.
@@ -35,15 +35,15 @@ Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
 .br
 \fBgit clone https://github.com/karelzimmer/Checklists.git\fR
 .sp
-\fBkzdeploy\fR kan worden uitgevoerd als ontwikkelaar (gebruiker 'karel' of\
+\fBkz deploy\fR kan worden uitgevoerd als ontwikkelaar (gebruiker 'karel' of\
  'ubuntu').
 .sp
 Mijn eigen Continuous Integration and Delivery (CI/CD) Pipeline.
 .sp
-Als ontwikkelen en testen gereed is, kan er een 'git push' en \fBkzdeploy\fR
+Als ontwikkelen en testen gereed is, kan er een 'git push' en \fBkz deploy\fR
 uitgevoerd worden, waarbij er een nieuw scriptspakket wordt gegenereerd.
 .sp
-Met opdracht \fBkzgetscripts\fR kan de scripts-ontwikkelomgeving op een andere
+Met opdracht \fBkz-getdeb\fR kan de scripts-ontwikkelomgeving op een andere
 of dezelfde machine neergezet worden.
 .sp
 De volgende acties uitgevoerd:
@@ -52,9 +52,9 @@ De volgende acties uitgevoerd:
 .br
    1.1. Controleer afhankelijkheden.
 .br
-   1.2. Controleer scriptnamen (met \fBkzckname\fR).
+   1.2. Controleer scriptnamen (met \fBkz ckname\fR).
 .br
-   1.2. Controleer scripts (met \fBkzivp\fR).
+   1.2. Controleer scripts (met \fBkz ivp\fR).
 .br
 2. Upload website.
 .br
@@ -62,11 +62,11 @@ De volgende acties uitgevoerd:
 .br
    2.1. Verwerk scripts (pdf aanmaken).
 .br
-3. Installer scriptspakket (met \fBkzgetscripts\fR).
+3. Installer scriptspakket (met \fBkz getdeb\fR).
 .RE
 Mijn eigen CI/CD Pipeline :-).
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkzdeploy\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz deploy\fR
 worden gestart door te zoeken naar \fBdepl\fR, klik op
 \fBScripts distribueren\fR.
 .\"
@@ -75,7 +75,7 @@ worden gestart door te zoeken naar \fBdepl\fR, klik op
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kzdeploy').
+-ab -t kz-deploy').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -132,12 +132,12 @@ Website.
 .\"
 .\"
 .SH BESTANDEN
-~/uploads/karelzimmer.nl/httpdocs/apps/kzscripts/kzscripts_365_all.deb
+~/uploads/karelzimmer.nl/httpdocs/apps/kz-scripts/kz_365_all.deb
 .RS
 Scriptspakket.
 .RE
 .sp
-/usr/share/gnome-background-properties/kzscripts-wallpapers.xml
+/usr/share/gnome-background-properties/kz-scripts-wallpapers.xml
 .RS
 Bureaubladachtergronden-configuratiebestand.
 .RE
@@ -154,15 +154,19 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzckname\fR(1),
-\fBkzcommon.sh\fR(1),
-\fBkzgetscripts\fR(1),
-\fBkzivp\fR(1),
+\fBkz-ckname\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-getdeb\fR(1),
+\fBkz-ivp\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het kz(1) pakket.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kzdeploy is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Opdracht 'kz deploy' is onderdeel van het pakket kz en is beschikbaar vanaf
 Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF

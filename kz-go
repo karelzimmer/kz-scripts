@@ -17,13 +17,13 @@ Dit script voert updates uit voor Debian pakketten en snaps.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.02.00
-# DateOfRelease: 2021-07-10
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 import sys
 import subprocess
 
-program_name = 'kzgo'
+program_name = 'kz-go'
 
 # --- script ---
 

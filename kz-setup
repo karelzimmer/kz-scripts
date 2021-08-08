@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kzcommon.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Apps instellen.
 #
@@ -8,10 +8,10 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 43.02.06
-# DateOfRelease: 2021-08-07
+# ReleaseNumber: 44.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kzcommon.sh
+source "$(dirname "$0")"/kz-common.sh
 
 
 ###############################################################################
@@ -21,12 +21,13 @@ source "$(dirname "$0")"/kzcommon.sh
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:firs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,\
 reset,simulate"
-readonly USAGE="Gebruik: $PROGRAM_NAME [-a|--apps] [-c|--cat] \
+readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } [-a|--apps] [-c|--cat] \
 [-e|--edition=EDITIE] [-f|--files]
-                 [-i|--info] [-r|--reset] [-s|--simulate]
-                 $OPTIONS_USAGE_COMMON
-                 [APP...] [BESTAND...]"
-readonly HELP="Gebruik: $PROGRAM_NAME [OPTIE...] [--] [APP...] [BESTAND...]
+                  [-i|--info] [-r|--reset] [-s|--simulate]
+                  $OPTIONS_USAGE_COMMON
+                  [APP...] [BESTAND...]"
+readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--] [APP...] \
+[BESTAND...]
 
 Apps instellen.
 
@@ -276,7 +277,7 @@ process_argument_app() {
         fi
     done
     if $file_notfound; then
-        info "Typ '$PROGRAM_NAME --apps' voor beschikbare apps."
+        info "Typ '${PROGRAM_NAME//kz-/kz } --apps' voor beschikbare apps."
     fi
 }
 
@@ -346,7 +347,7 @@ process_argument_file() {
         fi
     done
     if $file_notfound; then
-        info "Typ '$PROGRAM_NAME --files' voor beschikbare \
+        info "Typ '${PROGRAM_NAME//kz-/kz } --files' voor beschikbare \
 instellingsbestanden."
     fi
 }
@@ -372,7 +373,7 @@ local dfltfile_2=''
     if $file_notfound; then
         info "Geen instellingsbestanden gevonden voor $Id $release $EDITION."
         if ! $OPTION_GUI; then
-            info "Typ '$PROGRAM_NAME --files' voor beschikbare \
+            info "Typ '${PROGRAM_NAME//kz-/kz } --files' voor beschikbare \
 instellingsbestanden."
         fi
     fi
@@ -396,14 +397,14 @@ $(
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen apps gevonden voor $Id $release.
 
-Typ '$PROGRAM_NAME --files' voor beschikbare instellingsbestanden."
+Typ '${PROGRAM_NAME//kz-/kz } --files' voor beschikbare instellingsbestanden."
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
-    ${BLUE}$PROGRAM_NAME --sim APP...${NORMAL}
-    ${BLUE}$PROGRAM_NAME --cat APP...${NORMAL}
+    ${BLUE}${PROGRAM_NAME//kz-/kz } --sim APP...${NORMAL}
+    ${BLUE}${PROGRAM_NAME//kz-/kz } --cat APP...${NORMAL}
 Om APPs in te stellen voer uit:
-    ${BLUE}$PROGRAM_NAME APP...${NORMAL}"
+    ${BLUE}${PROGRAM_NAME//kz-/kz } APP...${NORMAL}"
     fi
 )"
 }
@@ -424,18 +425,18 @@ $(
 
 Controleer $PROGRAM_PATH op aanwezigheid andere instellingsbestanden.
 Om die BESTANDen te bekijken voer uit:
-    ${BLUE}$PROGRAM_NAME --sim $PROGRAM_PATH/BESTAND...${NORMAL}
-    ${BLUE}$PROGRAM_NAME --cat $PROGRAM_PATH/BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME//kz-/kz } --sim $PROGRAM_PATH/BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME//kz-/kz } --cat $PROGRAM_PATH/BESTAND...${NORMAL}
 Om die BESTANDen te gebruiken voer uit:
-    ${BLUE}$PROGRAM_NAME $PROGRAM_PATH/BESTAND...${NORMAL}
-Typ 'man $PROGRAM_NAME' voor meer informatie."
+    ${BLUE}${PROGRAM_NAME//kz-/kz } $PROGRAM_PATH/BESTAND...${NORMAL}
+Typ 'man ${PROGRAM_NAME//kz-/kz }' voor meer informatie."
     else
         printf '%s\n' "
 Om BESTANDen te bekijken voer uit:
-    ${BLUE}$PROGRAM_NAME --sim BESTAND...${NORMAL}
-    ${BLUE}$PROGRAM_NAME --cat BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME//kz-/kz } --sim BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME//kz-/kz } --cat BESTAND...${NORMAL}
 Om BESTANDen te gebruiken voer uit:
-    ${BLUE}$PROGRAM_NAME BESTAND...${NORMAL}"
+    ${BLUE}${PROGRAM_NAME//kz-/kz } BESTAND...${NORMAL}"
     fi
 )"
 }
@@ -721,7 +722,7 @@ term_script() {
         info "
 Er zijn aanvullende instructies!
 Gebruik de opdracht:
-    ${BLUE}$PROGRAM_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
+    ${BLUE}${PROGRAM_NAME//kz-/kz } --info ${APP_ARGUMENT[*]}${NORMAL}"
     fi
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then

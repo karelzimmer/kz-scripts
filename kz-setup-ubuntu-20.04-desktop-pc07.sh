@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.02.02
-# DateOfRelease: 2021-08-04
+# ReleaseNumber: 04.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 #1
@@ -28,7 +28,7 @@ if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.nautilu
 
 #1
 #2 Google Chrome instellen
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kzgset --removefav --file='firefox.desktop'; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kz-gset --removefav --file='firefox.desktop'; fi
 #3 1. Start Standaardtoepassingen.
 #3 2. Kies bij E-mail voor Gnome Gmail.
 
@@ -43,12 +43,12 @@ if [[ $HOSTNAME = pc07 && $USER = karel ]]; then echo 'stty -ixon  # Enable fwd 
 
 #1 bluefish
 #2 Bluefish instellen
-kzgset --addfavbottom --file='bluefish.desktop'
+kz-gset --addfavbottom --file='bluefish.desktop'
 #3 1. Start Bluefish.
 #3 2. Zet via Bewerken > Voorkeuren > Initiele document instellingen de Tab breedte op 4 en
 #3    vink aan Gebruik spaties voor inspringen, geen tabs.
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='bluefish.desktop'
+#4    kz-gset --removefav --file='bluefish.desktop'
 
 
 #1 gedit
@@ -68,7 +68,7 @@ gsettings set org.gnome.gedit.preferences.print print-header true
 gsettings set org.gnome.gedit.preferences.print print-line-numbers 1
 gsettings set org.gnome.gedit.preferences.print print-syntax-highlighting true
 gsettings set org.gnome.gedit.preferences.print print-wrap-mode 'char'
-kzgset --addfavtop --file='org.gnome.gedit.desktop'
+kz-gset --addfavtop --file='org.gnome.gedit.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.gedit.plugins active-plugins
 #4    gsettings reset org.gnome.gedit.preferences.editor auto-indent
@@ -85,34 +85,34 @@ kzgset --addfavtop --file='org.gnome.gedit.desktop'
 #4    gsettings reset org.gnome.gedit.preferences.print print-line-numbers
 #4    gsettings reset org.gnome.gedit.preferences.print print-syntax-highlighting
 #4    gsettings reset org.gnome.gedit.preferences.print print-wrap-mode
-#4    kzgset --removefav --file='org.gnome.gedit.desktop'
+#4    kz-gset --removefav --file='org.gnome.gedit.desktop'
 
 
 #1 kvm
 #2 KVM instellen
 ## Beeldscherm 2048 x 1152 (16:9).
-kzgset --addfavbottom --file='virt-manager.desktop'
+kz-gset --addfavbottom --file='virt-manager.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='virt-manager.desktop'
+#4    kz-gset --removefav --file='virt-manager.desktop'
 
 
 #1 python
 #2 Python instellen
-kzgset --addfavtop --file='idle.desktop'
+kz-gset --addfavtop --file='idle.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='idle.desktop'
+#4    kz-gset --removefav --file='idle.desktop'
 
 
 #1 terminal
 #2 GNOME Terminal instellen
-kzgset --addfavtop --file='org.gnome.Terminal.desktop'
+kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='org.gnome.Terminal.desktop'
+#4    kz-gset --removefav --file='org.gnome.Terminal.desktop'
 
 
 #1 vscode
 #2 Visual Studio Code instellen
-#kzgset --addfavtop --file='code_code.desktop'
+#kz-gset --addfavtop --file='code_code.desktop'
 :
 #3 1. Start Visual Studio Code.
 #3 2. Ga naar File > Preferences > Settings (Ctrl+,).
@@ -123,7 +123,7 @@ kzgset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 7. Voeg toe tussen de { en }: "editor.rulers": [79]
 #3 8. Sluit Settings.
 #4 Start Terminalvenster en voer uit:
-#4    kzgset --removefav --file='code_code.desktop'
+#4    kz-gset --removefav --file='code_code.desktop'
 
 
 # EOF

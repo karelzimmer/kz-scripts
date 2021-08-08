@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kznas.
+# Bureaublad-configuratiebestand voor kz nas.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.05.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 04.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,16 +18,16 @@ GenericName=NAS mount
 GenericName[nl]=NAS-aankoppelen
 Comment=Mount a NAS during startup
 Comment[nl]=Koppel een NAS aan tijdens het opstarten
-Keywords=kznas;mount;network;
-Keywords[nl]=kznas;aankoppelen;netwerk;
+Keywords=kznas;kz-nas;mount;network;
+Keywords[nl]=kznas;kz-nas;aankoppelen;netwerk;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kznas --gui
-Icon=/usr/share/pixmaps/kznas.png
+Exec=pkexec /usr/bin/kz-nas --gui
+Icon=/usr/share/pixmaps/kz-nas.png
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kznas --gui --version
+Exec=/usr/bin/kz-nas --gui --version
 
 # EOF

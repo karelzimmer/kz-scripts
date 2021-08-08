@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzarchive.
+# Bureaublad-configuratiebestand voor kz archive.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.04.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 02.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,17 +18,17 @@ GenericName=Archive program
 GenericName[nl]=Archiefprogramma
 Comment=Archive scripts and other files
 Comment[nl]=Archiveer scripts en overige bestanden
-Keywords=kzarchive;
-Keywords[nl]=kzarchive;
+Keywords=kzarchive;kz-archive;
+Keywords[nl]=kzarchive;kz-archive;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kzarchive --gui
-Icon=/usr/share/pixmaps/kzarchive.svg
+Exec=/usr/bin/kz-archive --gui
+Icon=/usr/share/pixmaps/kz-archive.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzarchive --gui --version
+Exec=/usr/bin/kz-archive --gui --version
 
 # EOF

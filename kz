@@ -47,9 +47,9 @@ check_input() {
         exit $ERROR
     fi
     if ! [[ -e "kz-$1" ]]; then
-        printf "$PROGRAM_NAME: %s\n" "opdracht '$1' bestaat niet" >&2
-        printf "\n%s\n" "De volgende opdrachten zijn beschikbaar:"
-        find    $PROGRAM_PATH                   \
+        printf "$PROGRAM_NAME: %s\n" "OPDRACHT '$1' bestaat niet" >&2
+        printf "\n%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
+        find    $PROGRAM_PATH   \
                 -maxdepth 1     \
                 -type f         \
                 -executable     \

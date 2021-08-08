@@ -1,13 +1,13 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kzrestore.
+# Bureaublad-configuratiebestand voor kz restore.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.05.02
-# DateOfRelease: 2021-07-27
+# ReleaseNumber: 04.00.00
+# DateOfRelease: 2021-08-08
 ###############################################################################
 
 [Desktop Entry]
@@ -18,16 +18,16 @@ GenericName=Restore progam
 GenericName[nl]=Herstelprogramma
 Comment=Restore files and folders from a backup
 Comment[nl]=Zet bestanden en mappen terug uit een back-up (reservekopie)
-Keywords=kzrestore;restore;copy;
-Keywords[nl]=kzrestore;restore;back-up;reservekopie;
+Keywords=kzrestore;kz-restore;restore;copy;
+Keywords[nl]=kzrestore;kz-restore;restore;back-up;reservekopie;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kzrestore --gui
-Icon=/usr/share/pixmaps/kzrestore.svg
+Exec=pkexec /usr/bin/kz-restore --gui
+Icon=/usr/share/pixmaps/kz-restore.svg
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kzrestore --gui --version
+Exec=/usr/bin/kz-restore --gui --version
 
 # EOF
