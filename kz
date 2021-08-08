@@ -1,0 +1,92 @@
+#!/bin/bash
+###############################################################################
+# Script uitvoeren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 01.00.00
+# DateOfRelease: 2021-08-08
+###############################################################################
+
+###############################################################################
+# Global constants
+###############################################################################
+
+readonly    PROGRAM_NAME=$(basename "$0")
+readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
+declare -ir SUCCESS=0
+declare -ir ERROR=1
+
+###############################################################################
+# Global variables
+###############################################################################
+
+declare EXEC=''
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+init_script() {
+    # Script-hardening.
+    set -o errexit
+    set -o errtrace
+    set -o nounset
+    set -o pipefail
+}
+
+
+check_input() {
+    if ! [[ "$*" ]]; then
+        printf  "$PROGRAM_NAME: %s\n" 'argument OPDRACHT [ARG] opgeven' >&2
+        exit $ERROR
+    fi
+    if ! [[ -e "kz-$1" ]]; then
+        printf "$PROGRAM_NAME: %s\n" "opdracht '$1' bestaat niet" >&2
+        printf "\n%s\n" "De volgende opdrachten zijn beschikbaar:"
+        find    $PROGRAM_PATH                   \
+                -maxdepth 1     \
+                -type f         \
+                -executable     \
+                -readable       \
+                -not -name '*~' \
+                -not -name 'kz' \
+                -printf '%f\n'  | sort | sed 's/kz-//'
+        exit $ERROR
+    fi
+    EXEC=${CALLED//kz /kz-}
+}
+
+
+process_input() {
+    # shellcheck disable=SC2086
+    exec $EXEC
+}
+
+
+term_script() {
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Main line
+###############################################################################
+
+main() {
+    init_script
+    check_input "$@"
+    process_input
+    term_script
+}
+
+
+main "$@"
+
+
+# EOF
