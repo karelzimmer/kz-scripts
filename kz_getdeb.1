@@ -18,46 +18,55 @@
 kz getdeb \- Scripts installeren.
 .\"
 .\"
-.SH SAMENVATTING
+.SH GEBRUIK
 .B kz getdeb
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz getdeb\fR downloadt en installeert pakket kzscripts.
+\fBkz getdeb\fR downloadt en installeert pakket kz.
 .sp
-Pakket kzscripts installeert scripts voor het afronden van de installatie van
-Ubuntu Linux.
+Pakket kz installeert scripts en documenten voor het afronden en beheren van de
+installatie van Ubuntu en Debian Linux.
 .sp
-Als ontwikkelaar (gebruiker 'karel' of 'ubuntu') wordt ook een
-scripts-ontwikkelomgeving ingericht, en is deze na aanpassingen te
-distribueren, 'live' te zetten (op https://karelzimmer.nl) met opdracht
-\fBkz deploy\fR.
+Als ontwikkelaar (gebruiker 'karel',  Ubuntu Live session user 'ubuntu', of
+Debian Live user 'user').) wordt ook een ontwikkelomgeving ingericht, en is
+deze na aanpassingen te
+distribueren, 'live' te zetten (op https://karelzimmer.nl) met de opdrachten
+.br
+\fBkz deploy\fR,
+.br
+\fBgit push in ~/kz_deb\fR,
+.br
+\fBgit push in ~/kz_docs\fR, en
+.br
+\fBgit push in ~/kz_scripts\fR.
 .sp
 Voor de nieuwste versie van \fBkz getdeb\fR én het scriptspakket, start
 Terminalvenster en voer uit:
 .br
-\fBwget karelzimmer.nl/s\fR
+\fBwget karelzimmer.nl/kz\fR
 .br
-\fBbash s\fR
+\fBbash kz\fR
 .sp
 of, de twee opdrachten gecombineerd op 1 regel:
 .br
-\fBwget karelzimmer.nl/s; bash s\fR
+\fBwget karelzimmer.nl/kz; bash kz\fR
 .br
 of
 .br
-\fBwget -O- karelzimmer.nl/s | bash\fR
+\fBwget -O- karelzimmer.nl/kz | bash\fR
 .sp
 of, als curl is geïnstalleerd:
 .br
-\fBcurl -L karelzimmer.nl/s | bash\fR
+\fBcurl -L karelzimmer.nl/kz | bash\fR
 .sp
 of, als het scriptspakket al eens is geïnstalleerd:
 .br
 \fBkz getdeb\fR
 .sp
-N.B. /s mag vervangen worden door /kz of /kzgetdeb (deze verwijzen allen naar
-"pakket kz").
+N.B. /kz mag vervangen worden door /s (beide verwijzen naar "pakket kz").
+.sp
+\fBkz getdeb\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
 .sp
 In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz getdeb\fR
 ook worden gestart door te zoeken naar \fBget\fR, klik op

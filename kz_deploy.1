@@ -18,7 +18,7 @@
 kz deploy \- Scripts distribueren.
 .\"
 .\"
-.SH SAMENVATTING
+.SH GEBRUIK
 .B kz deploy
 [OPTIE...]
 .\"
@@ -31,12 +31,14 @@ Dit om de scripts en documenten beschikbaar te stellen voor algemeen gebruik.
 .sp
 Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
 .br
-\fBgit clone https://github.com/karelzimmer/kz_scripts.git\fR
+\fBgit clone https://github.com/karelzimmer/kz_deb.git\fR
 .br
 \fBgit clone https://github.com/karelzimmer/kz_docs.git\fR
+.br
+\fBgit clone https://github.com/karelzimmer/kz_scripts.git\fR
 .sp
-\fBkz deploy\fR kan worden uitgevoerd als ontwikkelaar (gebruiker 'karel' of\
- 'ubuntu').
+\fBkz deploy\fR kan worden uitgevoerd als ontwikkelaar (gebruiker 'karel',\
+ Ubuntu Live session user 'ubuntu', of Debian Live user 'user').
 .sp
 Mijn eigen Continuous Integration and Delivery (CI/CD) Pipeline.
 .sp
@@ -105,17 +107,17 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH MAPPEN
-~/kzscripts.deb/
+~/kz_deb/
 .RS
-Scriptspakket.
+Scriptspakket raamwerk.
 .RE
 .sp
-~/Documenten/Checklists/
+~/kz_docs/
 .RS
 Checklists.
 .RE
 .sp
-~/kzscripts/
+~/kz_scripts/
 .RS
 Scripts.
 .br

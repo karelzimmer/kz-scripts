@@ -20,9 +20,14 @@ readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 declare -ir SUCCESS=0
 declare -ir ERROR=1
-readonly    USAGE="Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
-            [-h|--help] [-u|--usage] [-v|--version] [--]"
-readonly    HELP="Gebruik: $PROGRAM_NAME [OPTIE...] OPDRACHT [ARG] [--]
+declare -ir WARNING=2
+
+readonly    USAGE="\
+Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
+         $PROGRAM_NAME [-h|--help] [-u|--usage] [-v|--version]"
+readonly    HELP="\
+Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
+         $PROGRAM_NAME OPTIE
 
 Opdracht uitvoeren.
 
@@ -59,8 +64,9 @@ init_script() {
 
 check_input() {
     if ! [[ "$*" ]]; then
-        printf  "$PROGRAM_NAME: %s\n" 'argument OPDRACHT [ARG] opgeven' >&2
-        exit $ERROR
+        printf  "$PROGRAM_NAME: %s\n" 'OPDRACHT [ARG] opgeven' >&2
+        show_commands
+        exit $WARNING
     fi
     if [[ $1 == *-u* ]]; then
         process_option_usage
@@ -76,6 +82,14 @@ check_input() {
     fi
     if ! [[ -e "kz-$1" ]]; then
         printf "$PROGRAM_NAME: %s\n" "OPDRACHT '$1' bestaat niet" >&2
+        show_commands
+        exit $ERROR
+    fi
+    EXEC=${CALLED//kz /kz-}
+}
+
+
+show_commands() {
         printf "\n%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
         find    $PROGRAM_PATH   \
                 -maxdepth 1     \
@@ -84,10 +98,7 @@ check_input() {
                 -readable       \
                 -not -name '*~' \
                 -not -name 'kz' \
-                -printf '%f\n'  | sort | sed 's/kz-//'
-        exit $ERROR
-    fi
-    EXEC=${CALLED//kz /kz-}
+                -printf '%f\n'  | sort | sed 's/kz_//'
 }
 
 

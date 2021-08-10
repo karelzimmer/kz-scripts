@@ -18,7 +18,7 @@
 kz install \- Apps installeren.
 .\"
 .\"
-.SH SAMENVATTING
+.SH GEBRUIK
 .B kz install
 [OPTIE...] [--] [\fIAPP\fR...] [\fIBESTAND\fR...]
 .\"
@@ -40,7 +40,7 @@ systeeminstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
 (e.g. Ubuntu 20.04 desktop).
 .sp
 Als daarna ook bestand\
- '/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\
+ '/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\
 \fR_<computernaam>.sh'
 aanwezig is worden de regels daarin voor <computernaam> toegevoegd aan het
 eerder aangemaakte tijdelijk bestand.
@@ -77,7 +77,7 @@ Alhoewel \fBkz-install\fR gericht is op het installeren, met optie
 \fB--remove\fR worden er instructies getoond om de installatie ongedaan te
 maken.
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz-install\fR
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz install\fR
 worden gestart door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
 .sp
 Gebruik (hierna) \fBkz setup\fR voor het aanpassen van de
@@ -331,13 +331,14 @@ Installeer Google Chrome.
 \fBkz install google-chrome --info\fR
 .RS
 Toon aanvullende instructies na het installeren van Google Chrome.
-Rechtsklik op starter 'Apps installeren' en kies 'Info'.
+Rechtsklik op starter 'Apps installeren' en kies
+'Installatie-instructies tonen'.
 .RE
 .sp
 \fBkz install google-chrome --remove\fR
 .RS
 Toon instructies voor het verwijderen van Google Chrome.
-Rechtsklik op starter 'Apps installeren' en kies 'Verwijderen'.
+Rechtsklik op starter 'Apps installeren' en kies 'Verwijder-instructies tonen'.
 .RE
 .\"
 .\"

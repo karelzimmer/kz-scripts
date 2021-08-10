@@ -18,8 +18,10 @@
 kz \- Opdracht uitvoeren.
 .\"
 .\"
-.SH SAMENVATTING
-.B kz \fIOPDRACHT\fR [\fIARG\fR] [--]
+.SH GEBRUIK
+.B kz \fIOPDRACHT\fR [\fIARG\fR]
+.br
+.B kz \fBOPTIE\fR
 .\"
 .\"
 .SH BESCHRIJVING
@@ -54,97 +56,97 @@ Een argument van - is gelijk aan --.
 .SH KZ OPDRACHTEN
 .PP
 \fBarchive\fR
-.RS 4
+.RS
 Scripts archiveren.
 .RE
 .PP
 \fBkzbackup\fR
-.RS 4
+.RS
 Backup maken.
 .RE
 .PP
 \fBkzckhtml\fR
-.RS 4
+.RS
 Webbestanden valideren.
 .RE
 .PP
 \fBkzckname\fR
-.RS 4
+.RS
 Bestandsnamen controleren.
 .RE
 .PP
 \fB\fBkzdeploy\fR
-.RS 4
+.RS
 Pakket distribueren.
 .RE
 .PP
 \fBkzdliso\fR
-.RS 4
+.RS
 Beeldbestanden downloaden.
 .RE
 .PP
 \fBkzgenpwd\fR
-.RS 4
+.RS
 Wachtwoord genereren. Gebruik Bitwarden om wachtwoorden te beheren.
 .RE
 .PP
 \fBkzgetdeb\fR
-.RS 4
+.RS
 Pakket installeren.
 .RE
 .PP
 \fBkzgo\fR
-.RS 4
+.RS
 Updates uitvoeren.
 .RE
 .PP
 \fBzgset\fR
-.RS 4
+.RS
 GUI wijzigen.
 .RE
 .PP
 \fBkzinstall\fR
-.RS 4
+.RS
 Apps installeren.
 .RE
 .PP
 \fBkzivp\fR
-.RS 4
+.RS
 Scripts controleren.
 .RE
 .PP
 \fBkzlsinstalled\fR
-.RS 4
+.RS
 Applijst maken.
 .RE
 .PP
 \fBkzmenu\fR
-.RS 4
+.RS
 Installatiemenu tonen.
 .RE
 .PP
 \fBkzmkusb\fR
-.RS 4
+.RS
 USB-sticks maken.
 .RE
 .PP
 \fBkznas\fR
-.RS 4
+.RS
 Netwerkschijf aankoppelen.
 .RE
 .PP
 \fBkzrestore\fR
-.RS 4
+.RS
 Backup terugzetten.
 .RE
 .PP
 \fBkzsetup\fR
-.RS 4
+.RS
 Apps instellen.
 .RE
 .PP
 \fBkzspsum\fR
-.RS 4
+.RS
 Controlebestanden opsplitsen.
 .RE
 .\"
@@ -154,6 +156,19 @@ Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
 afsluitwaarde 1.
 .br
 Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkz\fR
+.RS
+Waarschuwing en beschikbare \fIOPDRACHT\fRen tonen.
+.RE
+.sp
+\fBkz archive\fR
+.RS
+Start \fBarchive\fR uit de verzameling van \fBkz\fR scripts.
+.RE
 .\"
 .\"
 .SH AUTEUR
