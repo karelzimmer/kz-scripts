@@ -70,6 +70,10 @@ check_input() {
         process_option_help
         exit $SUCCESS
     fi
+    if [[ $1 == *-v* ]]; then
+        process_option_version
+        exit $SUCCESS
+    fi
     if ! [[ -e "kz-$1" ]]; then
         printf "$PROGRAM_NAME: %s\n" "OPDRACHT '$1' bestaat niet" >&2
         printf "\n%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
@@ -123,7 +127,7 @@ process_option_version() {
             "$PROGRAM_PATH/$PROGRAM_NAME"
         )
     release_date=${release_date:0:10}
-    info "$PROGRAM_NAME $release_number ($release_date)
+    printf "%s\n" "$PROGRAM_NAME $release_number ($release_date)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
