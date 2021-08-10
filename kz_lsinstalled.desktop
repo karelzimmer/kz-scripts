@@ -18,16 +18,16 @@ GenericName=List software program
 GenericName[nl]=Softwarelijstprogramma
 Comment=Collect added repositories and installed packages
 Comment[nl]=Verzamel toegevoegde pakketbronnen en geïnstalleerde pakketten
-Keywords=kzlsinstalled;kz-lsinstalled;lsinstalled;swlist;applist;
-Keywords[nl]=kzlsinstalled;kz-lsinstalled;softwaret;programma;app;
+Keywords=kzlsinstalled;lsinstalled;softwarelist;applicationlist;
+Keywords[nl]=kzlsinstalled;softwaret;programma;app;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kz-lsinstalled --gui
-Icon=/usr/share/pixmaps/kz-lsinstalled.svg
+Exec=pkexec /usr/bin/kz_lsinstalled --gui
+Icon=/usr/share/pixmaps/kz_lsinstalled.svg
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-lsinstalled --gui --version
+Exec=/usr/bin/kz_lsinstalled --gui --version
 
 # EOF

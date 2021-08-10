@@ -18,17 +18,17 @@ GenericName=Archive program
 GenericName[nl]=Archiefprogramma
 Comment=Archive scripts and other files
 Comment[nl]=Archiveer scripts en overige bestanden
-Keywords=kzarchive;kz-archive;
-Keywords[nl]=kzarchive;kz-archive;
+Keywords=kzarchive;
+Keywords[nl]=kzarchive;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-archive --gui
-Icon=/usr/share/pixmaps/kz-archive.svg
+Exec=/usr/bin/kz_archive --gui
+Icon=/usr/share/pixmaps/kz_archive.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-archive --gui --version
+Exec=/usr/bin/kz_archive --gui --version
 
 # EOF

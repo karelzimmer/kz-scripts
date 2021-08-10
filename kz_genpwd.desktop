@@ -19,17 +19,17 @@ GenericName=Generator program
 GenericName[nl]=Generatorprogramma
 Comment=Generate save passwords
 Comment[nl]=Genereer veilige wachtwoorden
-Keywords=kzgenpwd;kzg-enpwd;genpwd;password;
-Keywords[nl]=kzgenpwd;kz-genpwd;genpwd;wachtwoord;
+Keywords=kzgenpwd;genpwd;password;
+Keywords[nl]=kzgenpwd;genpwd;wachtwoord;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-genpwd --gui
-Icon=/usr/share/pixmaps/kz-genpwd.svg
+Exec=/usr/bin/kz_genpwd --gui
+Icon=/usr/share/pixmaps/kz_genpwd.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-genpwd --gui --version
+Exec=/usr/bin/kz_genpwd --gui --version
 
 # EOF

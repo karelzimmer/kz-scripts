@@ -18,16 +18,16 @@ GenericName=Restore progam
 GenericName[nl]=Herstelprogramma
 Comment=Restore files and folders from a backup
 Comment[nl]=Zet bestanden en mappen terug uit een back-up (reservekopie)
-Keywords=kzrestore;kz-restore;restore;copy;
-Keywords[nl]=kzrestore;kz-restore;restore;back-up;reservekopie;
+Keywords=kzrestore;restore;copy;
+Keywords[nl]=kzrestore;restore;back-up;reservekopie;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kz-restore --gui
-Icon=/usr/share/pixmaps/kz-restore.svg
+Exec=pkexec /usr/bin/kz_restore --gui
+Icon=/usr/share/pixmaps/kz_restore.svg
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-restore --gui --version
+Exec=/usr/bin/kz_restore --gui --version
 
 # EOF

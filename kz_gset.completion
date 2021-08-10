@@ -14,6 +14,6 @@
 dashoptions="--addappfolder --addfavtop --addfavbottom --removeappfolder
     --removefav '--file DESKTOPFILE' '--folder=APPFOLDER' -d --debug -g --gui
     -h --help -u --usage -v --version"
-complete -o default -W "$dashoptions" kz-gset
+complete -o default -W "$dashoptions" kz_gset
 
 # EOF

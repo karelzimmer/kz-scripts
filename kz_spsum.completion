@@ -12,6 +12,6 @@
 ###############################################################################
 
 dashoptions='-d --debug -g --gui -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-spsum
+complete -o default -W "$dashoptions" kz_spsum
 
 # EOF

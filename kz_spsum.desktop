@@ -18,17 +18,17 @@ GenericName=Utility program
 GenericName[nl]=Hulpprogramma
 Comment=Split control files (SHA256SUMS)
 Comment[nl]=Splits controlebestanden (SHA256SUMS) op
-Keywords=kzspsum;kz-spsum;spsum;
-Keywords[nl]=kzspsum;kz-spsum;spsum;
+Keywords=kzspsum;spsum;
+Keywords[nl]=kzspsum;spsum;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-spsum --gui
-Icon=/usr/share/pixmaps/kz-spsum.svg
+Exec=/usr/bin/kz_spsum --gui
+Icon=/usr/share/pixmaps/kz_spsum.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-spsum --gui --version
+Exec=/usr/bin/kz_spsum --gui --version
 
 # EOF

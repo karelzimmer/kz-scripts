@@ -18,17 +18,17 @@ GenericName=Write program
 GenericName[nl]=Schrijfprogramma
 Comment=Create bootable USB sticks
 Comment[nl]=Maak opstartbare USB-sticks
-Keywords=kzmkusb;kz-mkusb;mkusb;
-Keywords[nl]=kzmkusb;kz-mkusb;mkusb;
+Keywords=kzmkusb;mkusb;
+Keywords[nl]=kzmkusb;mkusb;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-mkusb --gui
-Icon=/usr/share/pixmaps/kz-mkusb.svg
+Exec=/usr/bin/kz_mkusb --gui
+Icon=/usr/share/pixmaps/kz_mkusb.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-mkusb --gui --version
+Exec=/usr/bin/kz_mkusb --gui --version
 
 # EOF

@@ -18,17 +18,17 @@ GenericName=Download program
 GenericName[nl]=Downloadprogramma
 Comment=Download Ubuntu Linux image files and control files
 Comment[nl]=Download Ubuntu Linux beeldbestanden en controlebestanden
-Keywords=kzdliso;kz-dliso;dliso;iso;
-Keywords[nl]=kzdliso;kz0dliso;dliso;iso;
+Keywords=kzdliso;dliso;iso;
+Keywords[nl]=kzdliso;dliso;iso;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-dliso --gui
-Icon=/usr/share/pixmaps/kz-dliso.svg
+Exec=/usr/bin/kz_dliso --gui
+Icon=/usr/share/pixmaps/kz_dliso.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-sExec=/usr/bin/kz-dliso --gui --version
+sExec=/usr/bin/kz_dliso --gui --version
 
 # EOF

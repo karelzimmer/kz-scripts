@@ -14,6 +14,6 @@
 dashoptions="-a --apps -c --cat -d --debug '-e EDITIE' '--edition EDITIE' -f
     --files -g --gui -h --help -i --info -r --reset -s --simulate -u --usage -v
     --version"
-complete -o default -W "$dashoptions" kz-setup
+complete -o default -W "$dashoptions" kz_setup
 
 # EOF

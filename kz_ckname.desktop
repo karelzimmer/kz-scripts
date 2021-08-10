@@ -18,17 +18,17 @@ GenericName=Check program
 GenericName[nl]=Controleprogramma
 Comment=Checks NTFS folder and file names
 Comment[nl]=Controleert NTFS map- en bestandsnamen
-Keywords=kzckname;kz-ckname;ckname;check;name;
-Keywords[nl]=kzckname;kz-ckname;ckname;check;naam;
+Keywords=kzckname;ckname;check;name;
+Keywords[nl]=kzckname;;ckname;check;naam;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-ckname --gui
-Icon=/usr/share/pixmaps/kz-ckname.svg
+Exec=/usr/bin/kz_ckname --gui
+Icon=/usr/share/pixmaps/kz_ckname.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-ckname --gui --version
+Exec=/usr/bin/kz_ckname --gui --version
 
 # EOF

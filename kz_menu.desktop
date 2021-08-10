@@ -16,18 +16,18 @@ Name=Installation menu
 Name[nl]=Installatiemenu
 GenericName=Installation helper
 GenericName[nl]=Installatiehulp
-Comment=Run installation commands through a menu
-Comment[nl]=Voer installatie-opdrachten uit via een menu
-Keywords=kzmenu;kz-menu;menu;
-Keywords[nl]=kzmenu;kz-menu;menu;
+Comment=Run commands through a menu
+Comment[nl]=Voer opdrachten uit via een menu
+Keywords=kzmenu;menu;
+Keywords[nl]=kzmenu;menu;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-menu --gui
-Icon=/usr/share/pixmaps/kz-menu.svg
+Exec=/usr/bin/kz_menu --gui
+Icon=/usr/share/pixmaps/kz_menu.svg
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-menu --gui --version
+Exec=/usr/bin/kz_menu --gui --version
 
 # EOF

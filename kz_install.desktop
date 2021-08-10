@@ -18,36 +18,36 @@ GenericName=Install program
 GenericName[nl]=Installatieprogramma
 Comment=Add apps and change system settings
 Comment[nl]=Installeer apps en wijzig systeeminstellingen
-Keywords=kzinstall;kz-install;install;
-Keywords[nl]=kzinstall;kz-install;
+Keywords=kzinstall;install;
+Keywords[nl]=kzinstall;installatie;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kz-install --gui
-Icon=/usr/share/pixmaps/kz-install.svg
+Exec=pkexec /usr/bin/kz_install --gui
+Icon=/usr/share/pixmaps/kz_install.svg
 Actions=info;remove;cat;simulate;version;
 
 [Desktop Action info]
 Name=Show installation instructions
 Name[nl]=Installatie-instructies tonen
-Exec=/usr/bin/kz-install --gui --info
+Exec=/usr/bin/kz_install --gui --info
 
 [Desktop Action remove]
 Name=Show removal instructions
 Name[nl]=Verwijder-instructies tonen
-Exec=/usr/bin/kz-install --gui --remove
+Exec=/usr/bin/kz_install --gui --remove
 
 [Desktop Action cat]
 Name=Show files
 Name[nl]=Bestanden tonen
-Exec=/usr/bin/kz-install --gui --cat
+Exec=/usr/bin/kz_install --gui --cat
 
 [Desktop Action simulate]
 Name=Show commands
 Name[nl]=Opdrachten tonen
-Exec=/usr/bin/kz-install --gui --simulate
+Exec=/usr/bin/kz_install --gui --simulate
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen tonen
-Exec=/usr/bin/kz-install --gui --version
+Exec=/usr/bin/kz_install --gui --version
 
 # EOF

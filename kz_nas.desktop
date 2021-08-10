@@ -18,16 +18,16 @@ GenericName=NAS mount
 GenericName[nl]=NAS-aankoppelen
 Comment=Mount a NAS during startup
 Comment[nl]=Koppel een NAS aan tijdens het opstarten
-Keywords=kznas;kz-nas;mount;network;
-Keywords[nl]=kznas;kz-nas;aankoppelen;netwerk;
+Keywords=kznas;mount;network;
+Keywords[nl]=kznas;aankoppelen;netwerk;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kz-nas --gui
-Icon=/usr/share/pixmaps/kz-nas.png
+Exec=pkexec /usr/bin/kz_nas --gui
+Icon=/usr/share/pixmaps/kz_nas.png
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-nas --gui --version
+Exec=/usr/bin/kz_nas --gui --version
 
 # EOF

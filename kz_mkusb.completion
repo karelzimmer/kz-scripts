@@ -13,6 +13,6 @@
 
 dashoptions="-d --debug -g --gui -h --help '-t APPARAAT' '--target APPARAAT' -u
     --usage -v --version MAP"
-complete -o default -W "$dashoptions" kz-mkusb
+complete -o default -W "$dashoptions" kz_mkusb
 
 # EOF

@@ -18,17 +18,17 @@ GenericName=Config program
 GenericName[nl]=Configuratieprogramma
 Comment=Shows changes to the configuration database after GUI changes
 Comment[nl]=Toont wijzigingen in de configuratiedatabase na GUI-aanpassingen
-Keywords=kzgset;kz-gset;gsettings;
-Keywords[nl]=kzgset;kz-gset;gsettings;
+Keywords=kzgset;gsettings;
+Keywords[nl]=kzgset;gsettings;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-gset --gui
-Icon=/usr/share/pixmaps/kz-gset.svg
+Exec=/usr/bin/kz_gset --gui
+Icon=/usr/share/pixmaps/kz_gset.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-gset --gui --version
+Exec=/usr/bin/kz_gset --gui --version
 
 # EOF

@@ -18,16 +18,16 @@ GenericName=Backup program
 GenericName[nl]=Back-upprogramma
 Comment=Back up folders and files
 Comment[nl]=Maak een back-up (reservekopie) van mappen en bestanden
-Keywords=kzbackup;kz-backup;copy;restore;
-Keywords[nl]=kzbackup;kz-backup;reservekopie;herstel;
+Keywords=kzbackup;copy;restore;
+Keywords[nl]=kzbackup;reservekopie;herstel;
 Categories=KZ-Scripts;
-Exec=pkexec /usr/bin/kz-backup --gui
-Icon=/usr/share/pixmaps/kz-backup.svg
+Exec=pkexec /usr/bin/kz_backup --gui
+Icon=/usr/share/pixmaps/kz_backup.svg
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-backup --gui --version
+Exec=/usr/bin/kz_backup --gui --version
 
 # EOF

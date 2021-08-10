@@ -12,6 +12,6 @@
 ###############################################################################
 
 dashoptions='-g --gui'
-complete -o default -W "$dashoptions" kz-getdeb
+complete -o default -W "$dashoptions" kz_getdeb
 
 # EOF

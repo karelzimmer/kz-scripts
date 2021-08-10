@@ -12,6 +12,6 @@
 ###############################################################################
 
 dashoptions='-d --debug -g --gui -h --help -r --reset -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-deploy
+complete -o default -W "$dashoptions" kz_deploy
 
 # EOF

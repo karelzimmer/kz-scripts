@@ -14,6 +14,6 @@
 dashoptions="-d --debug '-e UITSLUITEN' '--exclude UITSLUITEN' -g --gui -h
     --help '-s BRONMAP' '--source BRONMAP' '-t DOELMAP' '--target DOELMAP' -u
     --usage -v --version"
-complete -o default -W "$dashoptions" kz-restore
+complete -o default -W "$dashoptions" kz_restore
 
 # EOF

@@ -13,6 +13,6 @@
 
 dashoptions="-d --debug '-e UITSLUITEN' '--exclude UITSLUITEN' -g --gui -h
     --help '-t DOELMAP' '--target DOELMAP' -u --usage -v --version"
-complete -o default -W "$dashoptions" kz-backup
+complete -o default -W "$dashoptions" kz_backup
 
 # EOF

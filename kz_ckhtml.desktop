@@ -18,17 +18,17 @@ GenericName=Check program
 GenericName[nl]=Controleprogramma
 Comment=Validates HTML and CSS files
 Comment[nl]=Valideert HTML- en CSS-bestanden
-Keywords=kzckhtml;kz-ckhtml;ckhtml;check;
-Keywords[nl]=kzckhtml;kz-ckhtmlckhtml;check;
+Keywords=kzckhtml;ckhtml;check;
+Keywords[nl]=kzckhtml;ckhtml;check;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-ckhtml --gui
-Icon=/usr/share/pixmaps/kz-ckhtml.svg
+Exec=/usr/bin/kz_ckhtml --gui
+Icon=/usr/share/pixmaps/kz_ckhtml.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-ckhtml --gui --version
+Exec=/usr/bin/kz_ckhtml --gui --version
 
 # EOF

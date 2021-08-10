@@ -18,11 +18,11 @@ GenericName=Install program
 GenericName[nl]=Installatieprogramma
 Comment=Download and install package kzscripts
 Comment[nl]=Download en installeer pakket kzscripts
-Keywords=kzgetdeb;kz-getdeb;getdeb;
-Keywords[nl]=kzgetdeb;kz-getdeb;getdeb;
+Keywords=kzgetdeb;getdeb;
+Keywords[nl]=kzgetdeb;getdeb;
 Categories=KZ-Scripts;
-Exec=/usr/bin/kz-getdeb --gui
-Icon=/usr/share/pixmaps/kz-getdeb.svg
+Exec=/usr/bin/kz_getdeb --gui
+Icon=/usr/share/pixmaps/kz_getdeb.svg
 Terminal=true
 
 # EOF

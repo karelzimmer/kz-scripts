@@ -13,6 +13,6 @@
 ###############################################################################
 
 dashoptions='-g --gui -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-genpwd
+complete -o default -W "$dashoptions" kz_genpwd
 
 # EOF
