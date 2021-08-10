@@ -481,16 +481,16 @@ $command, code: $rc ($rc_desc)"
 
 signal_exit() {
     case $PROGRAM_NAME in
-        kz-backup)
+        kz_backup)
             if [[ -e $BACKUP_TO_DELETE ]]; then
-                info 'Programma kz-backup is onderbroken.
+                info 'Programma kz_backup is onderbroken.
 
 Opgeslagen back-up wordt verwijderd.'
                 rm "$BACKUP_TO_DELETE" |& $LOGCMD
                 info 'Opgeslagen back-up is verwijderd.'
             fi
             ;;
-        kz-install)
+        kz_install)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
             log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
 start dan een Terminalvenster, en voer uit:
@@ -499,15 +499,15 @@ start dan een Terminalvenster, en voer uit:
     ${BLUE}sudo apt-get install --fix-broken${NORMAL}
     ${BLUE}sudo update-initramfs -u${NORMAL}"
             if [[ $rc -eq $SUCCESS ]]; then
-                rm --force /tmp/"$PROGRAM_NAME"-??????????.cmds
-                rm --force /tmp/"$PROGRAM_NAME"-??????????.text
+                rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
+                rm --force /tmp/"$PROGRAM_NAME"_??????????.text
             fi
             ;;
-        kz-setup)
+        kz_setup)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
             if [[ $rc -eq $SUCCESS ]]; then
-                rm --force /tmp/"$PROGRAM_NAME"-??????????.cmds
-                rm --force /tmp/"$PROGRAM_NAME"-??????????.text
+                rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
+                rm --force /tmp/"$PROGRAM_NAME"_??????????.text
             fi
             ;;
         *)

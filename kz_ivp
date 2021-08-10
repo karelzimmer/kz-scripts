@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kz-common.sh
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Scripts controleren.
 #
@@ -11,7 +11,7 @@
 # ReleaseNumber: 14.00.00
 # DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kz-common.sh
+source "$(dirname "$0")"/kz_common.sh
 
 
 ###############################################################################
@@ -108,7 +108,7 @@ check_dependencies() {
 
 process_input() {
     local script=''
-    local scriptsdir=$HOME/kz-scripts
+    local scriptsdir=$HOME/kz_scripts
 
     cd "$scriptsdir" || exit $ERROR
     for script in *; do
@@ -219,7 +219,7 @@ ${BOLD}In $script:${NORMAL}
     fi
 
     # '#1 foo' = ok, '#1' = ok, '#1foo' = ¬ok, hetzelfde voor #2, #3, 44n #4.
-    if [[ $script == kz-install*.sh || $script == kz-setup*.sh ]]; then
+    if [[ $script == kz_install*.sh || $script == kz_setup*.sh ]]; then
         wrong_record=$(
             grep --regexp='#[1-4]' "$script" --line-number  |
             grep --regexp='#[1-4]$' --invert-match          |
@@ -464,21 +464,21 @@ ${BOLD}In $script:${NORMAL}
     fi
 
     case $script in
-        kz-backup)
+        kz_backup)
             "$scriptsdir/$script"   --target                            \
                                     /tmp                                \
-                                    /home/karel/kz-scripts |& $LOGCMD   ||
+                                    /home/karel/scripts |& $LOGCMD   ||
             check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
 ${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --target /tmp /home/karel/kz-scripts' gaat fout."
+    Uitvoeren '$script --target /tmp /home/karel/scripts' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
                 fi
             fi
             ;;
-        kz-install)
+        kz_install)
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
@@ -507,7 +507,7 @@ ${BOLD}In $script:${NORMAL}
                 fi
             fi
             ;;
-        kz-restore)
+        kz_restore)
             echo                    '1'             |
             "$scriptsdir/$script"   --target        \
                                     /tmp            \
@@ -521,7 +521,7 @@ ${BOLD}In $script:${NORMAL}
                 fi
             fi
             ;;
-        kz-setup)
+        kz_setup)
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "

@@ -16,7 +16,7 @@
 # Global constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-getdeb'
+readonly    PROGRAM_NAME='kz_getdeb'
 #eadonly    PROGRAM_PATH=None
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 
@@ -32,9 +32,9 @@ readonly    GREEN=${BOLD}$(tput setaf 2)
 readonly    YELLOW=${BOLD}$(tput setaf 3)
 readonly    BLUE=${BOLD}$(tput setaf 4)
 
-readonly    DEBDIR=$HOME/kz-deb
-readonly    DOCSDIR=$HOME/kz-docs
-readonly    SCRIPTSDIR=$HOME/kz-scripts
+readonly    DEBDIR=$HOME/kz_deb
+readonly    DOCSDIR=$HOME/kz_docs
+readonly    SCRIPTSDIR=$HOME/kz_scripts
 
 ###############################################################################
 # Global variables
@@ -448,7 +448,7 @@ check_dependencies() {
 
 process_deb() {
     if ! git    clone                                       \
-                https://github.com/karelzimmer/kz-deb.git   \
+                https://github.com/karelzimmer/kz_deb.git   \
                 "$DEBDIR"                                  |& $LOGCMD
     then
         cd "$DEBDIR" || exit $ERROR
@@ -460,7 +460,7 @@ process_deb() {
 
 process_documents() {
     if ! git    clone                                       \
-                https://github.com/karelzimmer/kz-docs.git  \
+                https://github.com/karelzimmer/kz_docs.git  \
                 "$DOCSDIR"                                  |& $LOGCMD
     then
         cd "$DOCSDIR" || exit $ERROR
@@ -472,7 +472,7 @@ process_documents() {
 
 process_scripts() {
     if ! git    clone                                           \
-                https://github.com/karelzimmer/kz-scripts.git   \
+                https://github.com/karelzimmer/kz_scripts.git   \
                 "$SCRIPTSDIR"                                   |& $LOGCMD
     then
         cd "$SCRIPTSDIR" || exit $ERROR
@@ -490,7 +490,7 @@ download_website() {
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
     local ftp_host=server106.hosting2go.nl
     local ftp_user=kzimmer
-    local ftp_login=$HOME/.kz-$ftp_host
+    local ftp_login=$HOME/.kz_$ftp_host
 
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.

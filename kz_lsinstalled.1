@@ -33,27 +33,27 @@ gebruikt door \fBkz install\fR, volledig zijn.
 Een vijftal blokken van opdrachten worden uitgevoerd, en maakt daarmee de
 volgende bestanden:
 .IP " 1." 4
-/usr/local/etc/kz-lsinstalled_<computernaam>_<distr-id>_deb-bestanden
+/usr/local/etc/kz_lsinstalled_<computernaam>_<distr-id>_deb-bestanden
 .RS 4
 zonder repository geïnstalleerde apps
 .RE
 .IP " 2." 4
-/usr/local/etc/kz-lsinstalled_<computernaam>_<distr-id>_pakketbronnen
+/usr/local/etc/kz_lsinstalled_<computernaam>_<distr-id>_pakketbronnen
 .RS 4
 toegevoegde repositories
 .RE
 .IP " 3." 4
-/usr/local/etc/kz-lsinstalled_<computernaam>_<distr-id>_pakketten
+/usr/local/etc/kz_lsinstalled_<computernaam>_<distr-id>_pakketten
 .RS 4
 apps door de gebruiker geïnstalleerd
 .RE
 .IP " 4." 4
-/usr/local/etc/kz-lsinstalled_<computernaam>_<distr-id>_favorieten
+/usr/local/etc/kz_lsinstalled_<computernaam>_<distr-id>_favorieten
 .RS 4
 favorieten die in gebruik zijn
 .RE
 .IP " 5." 4
-/usr/local/etc/kz-lsinstalled_<computernaam>_<distr-id>_snaps
+/usr/local/etc/kz_lsinstalled_<computernaam>_<distr-id>_snaps
 .RS 4
 geïnstalleerde snaps
 .RE
@@ -67,7 +67,7 @@ In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kz-lsinstalled').
+-ab -t kz_lsinstalled').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).

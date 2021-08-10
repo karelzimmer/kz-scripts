@@ -30,7 +30,7 @@ de grafische werkomgeving (GUI),
 kan een toepassingspictogram (favoriet) toevoegen aan het favorietengebied;
 de verticale strook aan de linkerkant van het scherm, en
 .br
-kan een appfolder toevoegen om starters te verzamelen (e.g. KZ-Scripts) in
+kan een appfolder toevoegen om starters te verzamelen (e.g. Kz Scripts) in
 de Vaak gebruikt-weergave en Alles-weergave; na het klikken op de rasterknop
 onderaan het favorietengebied.
 .sp
@@ -120,7 +120,7 @@ Voeg een toepassingspictogram (favoriet) toe bovenaan aan het favorietengebied.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kz-gset').
+-ab -t kz_gset').
 .TP
 \fB--file=\fIDESKTOPFILE\fR
 Gebruik opgegeven dsktopbestand (.desktop).
@@ -163,20 +163,20 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .SH VOORBEELDEN
 .sp
-\fBkz-gset\fR
+\fBkz gset\fR
 .RS
 Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
 werkomgeving (GUI).
 Hiervoor is ook starter 'GUI wijzigen' beschikbaar.
 .RE
 .sp
-\fBkz-gset --addfavtop --file='idle.desktop'\fR
+\fBkz gset --addfavtop --file='idle.desktop'\fR
 .RS
 Voeg de IDLE (Python’s Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) toe bovenaan het favorietengebied.
 .RE
 .sp
-\fBkz-gset --removefav --file='idle.desktop'\fR
+\fBkz gset --removefav --file='idle.desktop'\fR
 .RS
 Verwijder de IDLE (Python’s Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) uit het favorietengebied.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kz-common.sh
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Apps instellen.
 #
@@ -11,7 +11,7 @@
 # ReleaseNumber: 44.00.00
 # DateOfRelease: 2021-08-08
 ###############################################################################
-source "$(dirname "$0")"/kz-common.sh
+source "$(dirname "$0")"/kz_common.sh
 
 
 ###############################################################################
