@@ -1,0 +1,30 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kz go.
+# Gebruik Bitwarden om wachtwoorden te beheren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+#
+# Auteursrecht (c) 2021 Karel Zimmer.
+# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+#
+# ReleaseNumber: 01.00.00
+# DateOfRelease: 2021-08-08
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Execute updates
+Name[nl]=Updates uitvoeren
+GenericName=Software Updates
+GenericName[nl]=Software-updates
+Comment=Execute updates for the system
+Comment[nl]=Voer updates uit voor het systeem
+Keywords=kzgo;update;upgrade;
+Keywords[nl]=kzgo;update;upgrade;bijwerken;
+Categories=Kz Scripts;
+Exec=/usr/bin/kz_go --gui
+Icon=/usr/share/pixmaps/kz_go.svg
+Terminal=true
+Actions=version;
+
+# EOF

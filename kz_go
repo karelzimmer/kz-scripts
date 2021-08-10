@@ -23,13 +23,16 @@ Dit script voert updates uit voor Debian pakketten en snaps.
 import sys
 import subprocess
 
-program_name = 'kz-go'
+program_name = 'kz_go'
+option_gui = 0
 
 # --- script ---
 
-# Geen argumenten toegestaan.
+# Alleen optie gui toegestaan, verder geen argumenten.
 try:
-    if sys.argv[1]:
+    if sys.argv[1] == '--gui':
+        option_gui = 1
+    elif sys.argv[1]:
         print(f'{program_name}: geen opties of argumenten opgeven')
         sys.exit(0)
 except Exception:
@@ -60,5 +63,9 @@ except FileNotFoundError:
 except Exception as ex:
     print(ex)
     sys.exit(1)
+
+# Een non-gui script gestart met optie gui.
+if option_gui:
+    input('Druk op de Enter-toets om verder te gaan [Enter]: ')
 
 # EOF
