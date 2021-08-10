@@ -22,16 +22,16 @@ if [[ $HOSTNAME = pc04 && $USER = nina ]]; then gsettings set org.gnome.desktop.
 
 #1 calibre
 #2 Calibre instellen
-kz-gset --addfavbottom --file='calibre-gui.desktop'
+kz_gset --addfavbottom --file='calibre-gui.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='calibre-gui.desktop'
+#4    kz_gset --removefav --file='calibre-gui.desktop'
 
 
 #1 google-earth
 #2 Google Earth instellen
-kz-gset --addfavbottom --file='google-earth.desktop'
+kz_gset --addfavbottom --file='google-earth.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='google-earth.desktop'
+#4    kz_gset --removefav --file='google-earth.desktop'
 
 
 # EOF

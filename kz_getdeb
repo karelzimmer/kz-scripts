@@ -32,6 +32,7 @@ readonly    GREEN=${BOLD}$(tput setaf 2)
 readonly    YELLOW=${BOLD}$(tput setaf 3)
 readonly    BLUE=${BOLD}$(tput setaf 4)
 
+readonly    DEBDIR=$HOME/kz-deb
 readonly    DOCSDIR=$HOME/kz-docs
 readonly    SCRIPTSDIR=$HOME/kz-scripts
 
@@ -428,7 +429,8 @@ create_development_environment() {
                         --infobox   "$TEXT"         \
                         7 33
     check_dependencies
-    process_checklists
+    process_deb
+    process_documents
     process_scripts
     download_website
 }
@@ -444,7 +446,19 @@ check_dependencies() {
 }
 
 
-process_checklists() {
+process_deb() {
+    if ! git    clone                                       \
+                https://github.com/karelzimmer/kz-deb.git   \
+                "$DEBDIR"                                  |& $LOGCMD
+    then
+        cd "$DEBDIR" || exit $ERROR
+        git config credential.helper store |& $LOGCMD
+        git pull |& $LOGCMD
+    fi
+}
+
+
+process_documents() {
     if ! git    clone                                       \
                 https://github.com/karelzimmer/kz-docs.git  \
                 "$DOCSDIR"                                  |& $LOGCMD

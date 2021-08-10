@@ -46,7 +46,7 @@
 
 #1 bitwarden
 #2 Bitwarden instellen
-kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
+kz_gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #3 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #3 1. Start Bitwarden.
 #3 2. Maak een account aan met een sterk(!) Hoofdwachtwoord.
@@ -97,7 +97,7 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #4 3. Klik vervolgens op Meer hulpprogramma's > Extensies.
 #4 4. Bij 'Bitwarden - Gratis wachtwoordbeheer' zet schuifje op uit of klik op Verwijderen.
 #4 5. Start Terminalvenster en voer uit:
-#4       kz-gset --removefav --file='bitwarden_bitwarden.desktop'
+#4       kz_gset --removefav --file='bitwarden_bitwarden.desktop'
 #4
 #4 Voor Firefox:
 #4 ~~~~~~~~~~~~~
@@ -106,13 +106,13 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #4 3. Klik links op Extensies.
 #4 4. Bij 'Bitwarden - Gratis wachtwoordbeheer' klik op Uitschakelen of Verwijderen.
 #4 5. Start Terminalvenster en voer uit:
-#4       kz-gset --removefav --file='bitwarden_bitwarden.desktop'
+#4       kz_gset --removefav --file='bitwarden_bitwarden.desktop'
 
 
 #1 gnome
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-kz-gset --addappfolder --folder='KZ-Scripts'
+kz_gset --addappfolder --folder='Kz Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
@@ -127,7 +127,7 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removeappfolder --folder='KZ-Scripts'
+#4    kz_gset --removeappfolder --folder='Kz Scripts'
 #4    gsettings reset org.gnome.desktop.app-folders folder-children
 #4    gsettings reset org.gnome.desktop.calendar show-weekdate
 #4    gsettings reset org.gnome.desktop.interface clock-show-date
@@ -146,7 +146,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 
 #1 google-chrome
 #2 Google Chrome instellen
-kz-gset --addfavtop --file='google-chrome.desktop'
+kz_gset --addfavtop --file='google-chrome.desktop'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
 #3 1. Start Google Chrome.
@@ -165,7 +165,7 @@ kz-gset --addfavtop --file='google-chrome.desktop'
 #4 2. Ga naar chrome://extensions/
 #4 3. Bij Gnome-shell-integratie zet schuifje op uit of klik op Verwijderen.
 #4 4. Start Terminalvenster en voer uit:
-#4       kz-gset --removefav --file='google-chrome.desktop'
+#4       kz_gset --removefav --file='google-chrome.desktop'
 
 
 #1 icaclient
@@ -176,16 +176,16 @@ xdg-mime default wfica.desktop application/x-ica
 
 #1 skype
 #2 Skype instellen
-kz-gset --addfavbottom --file='skype_skypeforlinux.desktop'
+kz_gset --addfavbottom --file='skype_skypeforlinux.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='skype_skypeforlinux.desktop'
+#4    kz_gset --removefav --file='skype_skypeforlinux.desktop'
 
 
 #1 spotify
 #2 Spotify instellen
-kz-gset --addfavbottom --file='spotify_spotify.desktop'
+kz_gset --addfavbottom --file='spotify_spotify.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='spotify_spotify.desktop'
+#4    kz_gset --removefav --file='spotify_spotify.desktop'
 
 
 #1 thunderbird
@@ -207,9 +207,9 @@ kz-gset --addfavbottom --file='spotify_spotify.desktop'
 
 #1 zoom
 #2 Zoom instellen
-kz-gset --addfavbottom --file='Zoom.desktop'
+kz_gset --addfavbottom --file='Zoom.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='Zoom.desktop'
+#4    kz_gset --removefav --file='Zoom.desktop'
 
 
 # EOF

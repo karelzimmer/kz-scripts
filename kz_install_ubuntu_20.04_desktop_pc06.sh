@@ -61,14 +61,6 @@ sudo apt-get install --yes libimage-exiftool-perl
 #4    sudo apt remove --yes gedit-plugins
 
 
-#1 fakeroot
-#2 Fakeroot installeren
-## Nodig voor het aanmaken van Debian-pakketten in kz-deploy.
-sudo apt-get install --yes fakeroot
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes fakeroot
-
-
 #1 gconf-editor
 #2 GConf-editor installeren
 sudo apt-get install --yes gconf-editor

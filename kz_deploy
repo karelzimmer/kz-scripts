@@ -167,6 +167,10 @@ check_dependencies() {
         info 'Installeer enscript...'
         sudo apt-get install --yes enscript |& $LOGCMD
     fi
+    if ! command -v fakeroot 1> /dev/null; then
+        info 'Installeer fakeroot...'
+        sudo apt-get install --yes fakeroot |& $LOGCMD
+    fi
     if ! command -v ghostscript 1> /dev/null; then
         info 'Installeer ghostscript...'
         sudo apt-get install --yes ghostscript |& $LOGCMD

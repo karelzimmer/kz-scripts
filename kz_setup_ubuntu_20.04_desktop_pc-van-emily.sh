@@ -13,7 +13,7 @@
 #1
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-if [[ $HOSTNAME = pc-van-emily && $USER = emily ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-caramel.jpg'; fi
+if [[ $HOSTNAME = pc-van-emily && $USER = emily ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_caramel.jpg'; fi
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
 

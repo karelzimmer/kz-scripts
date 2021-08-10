@@ -13,10 +13,10 @@
 #1
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-delay 300; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-enabled true; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
@@ -34,8 +34,8 @@ if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.nautilu
 
 #1
 #2 Google Chrome instellen
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kz-gset --removefav --file='firefox-esr.desktop'; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kz-gset --removefav --file='org.gnome.Evolution.desktop'; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kz_gset --removefav --file='firefox-esr.desktop'; fi
+if [[ $HOSTNAME = pc07 && $USER = karel ]]; then kz_gset --removefav --file='org.gnome.Evolution.desktop'; fi
 #3 1. Start Standaardtoepassingen.
 #3 2. Kies bij E-mail voor Gnome Gmail.
 
@@ -50,12 +50,12 @@ if [[ $HOSTNAME = pc07 && $USER = karel ]]; then echo 'stty -ixon  # Enable fwd 
 
 #1 bluefish
 #2 Bluefish instellen
-kz-gset --addfavbottom --file='bluefish.desktop'
+kz_gset --addfavbottom --file='bluefish.desktop'
 #3 1. Start Bluefish.
 #3 2. Zet via Bewerken > Voorkeuren > Initiele document instellingen de Tab breedte op 4 en
 #3    vink aan Gebruik spaties voor inspringen, geen tabs.
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='bluefish.desktop'
+#4    kz_gset --removefav --file='bluefish.desktop'
 
 
 #1 gedit
@@ -75,7 +75,7 @@ gsettings set org.gnome.gedit.preferences.print print-header true
 gsettings set org.gnome.gedit.preferences.print print-line-numbers 1
 gsettings set org.gnome.gedit.preferences.print print-syntax-highlighting true
 gsettings set org.gnome.gedit.preferences.print print-wrap-mode 'char'
-kz-gset --addfavtop --file='org.gnome.gedit.desktop'
+kz_gset --addfavtop --file='org.gnome.gedit.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.gedit.plugins active-plugins
 #4    gsettings reset org.gnome.gedit.preferences.editor auto-indent
@@ -92,27 +92,27 @@ kz-gset --addfavtop --file='org.gnome.gedit.desktop'
 #4    gsettings reset org.gnome.gedit.preferences.print print-line-numbers
 #4    gsettings reset org.gnome.gedit.preferences.print print-syntax-highlighting
 #4    gsettings reset org.gnome.gedit.preferences.print print-wrap-mode
-#4    kz-gset --removefav --file='org.gnome.gedit.desktop'
+#4    kz_gset --removefav --file='org.gnome.gedit.desktop'
 
 
 #1 kvm
 #2 KVM instellen
 ## Beeldscherm 2048 x 1152 (16:9).
-kz-gset --addfavbottom --file='virt-manager.desktop'
+kz_gset --addfavbottom --file='virt-manager.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='virt-manager.desktop'
+#4    kz_gset --removefav --file='virt-manager.desktop'
 
 
 #1 python
 #2 Python instellen
-kz-gset --addfavtop --file='idle.desktop'
+kz_gset --addfavtop --file='idle.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='idle.desktop'
+#4    kz_gset --removefav --file='idle.desktop'
 
 
 #1 terminal
 #2 GNOME Terminal instellen
-kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
+kz_gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 1. Klik op Activiteiten, typ 'snel'.
 #3 2. Klik bij Instellingen op het pictogram Toetsenbord.
 #3 3. Op scherm Toetsenbord scroll naar beneden en druk op +.
@@ -121,12 +121,12 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 5. Klik op 'Sneltoets instellen' en druk toetsencombinatie: Ctrl + Alt + T
 #3 6. Sluit Toetsenbord.
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='org.gnome.Terminal.desktop'
+#4    kz_gset --removefav --file='org.gnome.Terminal.desktop'
 
 
 #1 vscode
 #2 Visual Studio Code instellen
-#kz-gset --addfavtop --file='code_code.desktop'
+#kz_gset --addfavtop --file='code_code.desktop'
 :
 #3 1. Start Visual Studio Code.
 #3 2. Ga naar File > Preferences > Settings (Ctrl+,).
@@ -137,7 +137,7 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 7. Voeg toe tussen de { en }: "editor.rulers": [79]
 #3 8. Sluit Settings.
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='code_code.desktop'
+#4    kz_gset --removefav --file='code_code.desktop'
 
 
 # EOF

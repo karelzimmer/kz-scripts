@@ -20,7 +20,7 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <action id="nl.karelzimmer.kz-backup.make-backup">
+    <action id="nl.karelzimmer.kz_backup.make-backup">
         <message>Authentication is required to make a backup.</message>
         <message xml:lang="nl">Authenticatie is vereist om een back-up te maken.</message>
         <defaults>
@@ -28,7 +28,7 @@
             <allow_inactive>auth_admin</allow_inactive>
             <allow_active>auth_admin</allow_active>
         </defaults>
-        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-backup</annotate>
+        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_backup</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
     </action>
 
