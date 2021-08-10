@@ -11,7 +11,7 @@
 .\" DateOfRelease: 2021-08-08
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\"
-.TH KZ-INSTALL 1 "kz install" "kz 365" "kz install"
+.TH KZ_INSTALL 1 "Kz Handleiding" "KZ_INSTALL(1)" "Kz Handleiding"
 .\"
 .\"
 .SH NAAM
@@ -30,7 +30,7 @@ De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
 idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
 .sp
 Standaard wordt met \fBkz install\fR de regels in het bestand\
- '/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh' gekopieerd
+ '/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\fR.sh' gekopieerd
 naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
@@ -41,7 +41,7 @@ systeeminstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
 .sp
 Als daarna ook bestand\
  '/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\
-\fR-<computernaam>.sh'
+\fR_<computernaam>.sh'
 aanwezig is worden de regels daarin voor <computernaam> toegevoegd aan het
 eerder aangemaakte tijdelijk bestand.
 .sp
@@ -85,7 +85,7 @@ gebruikersinstellingen.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met '\fBkz-install-\fR' en te
+De te verwerken bestanden dienen te beginnen met '\fBkz_install_\fR' en te
 eindigen met '\fB.sh\fR'.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
@@ -284,24 +284,24 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh
+/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\fR.sh
 .RS
 Standaard installatiebestand als er geen \fIBESTAND\fRen zijn opgegeven, \
 \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
-/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\fR_<computernaam>.sh
 .RS
 Standaard installatiebestand voor computernaam als er geen \fIBESTAND\fRen zijn
 opgegeven, \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.cmds
+/tmp/kz_install_XXXXXXXXXX.cmds
 .RS
 Tijdelijk installatiebestand.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.text
+/tmp/kz_install_XXXXXXXXXX.text
 .RS
 Tijdelijk tekstbestand.
 .RE
@@ -352,18 +352,19 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkz-common.sh\fR(1),
-\fBkz-menu\fR(1),
-\fBkz-setup\fR(1),
+\fBkz_common.sh\fR(1),
+\fBkz_menu\fR(1),
+\fBkz_setup\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
 .SH KZ
-Onderdeel van het kz(1) pakket.
+Onderdeel van het \fBkz\fR(1) pakket.
 .\"
 .\"
 .SH BESCHIKBAARHEID
-Opdracht 'kz install' is onderdeel van het pakket kz en is beschikbaar vanaf
-Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+Opdracht \fBkz install\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar vanaf Karel Zimmer Linux Scripts
+<https://karelzimmer.nl/html/linux.html#scripts>.
 .sp
 .\" EOF
