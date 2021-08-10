@@ -33,9 +33,9 @@ Argumenten:
 
 readonly ARCHIVE_FROM=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux
 readonly ARCHIVE_TO=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux-archief
-readonly DELETE_FROM_1=$HOME/kz-scripts
-readonly DELETE_FROM_2=$HOME/kz-deb
-readonly DELETE_FROM_3=$HOME/kz-docs
+readonly DELETE_FROM_1=$HOME/kz_scripts
+readonly DELETE_FROM_2=$HOME/kz_deb
+readonly DELETE_FROM_3=$HOME/kz_docs
 
 
 ###############################################################################
