@@ -91,7 +91,7 @@ check_input() {
 
 show_commands() {
         printf "\n%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
-        find    $PROGRAM_PATH   \
+        find    "$PROGRAM_PATH" \
                 -maxdepth 1     \
                 -type f         \
                 -executable     \

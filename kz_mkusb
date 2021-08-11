@@ -155,7 +155,7 @@ $DEVICE wordt gebruikt als doel en OVERSCHREVEN!"
                     break
                     ;;
                 n*|N*|'')
-                    printf '%s\n%s\n' "$TEXT" "$USAGELINE"
+                    printf '\n%s\n%s\n' "$TEXT" "$USAGELINE"
                     exit $SUCCESS
                     ;;
                 *)

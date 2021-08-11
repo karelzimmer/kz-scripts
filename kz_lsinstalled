@@ -29,11 +29,12 @@ Opties:
 $OPTIONS_HELP_COMMON"
 
 readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly OUTPUTFILE_1=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-deb-bestanden
-readonly OUTPUTFILE_2=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketbronnen
-readonly OUTPUTFILE_3=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-pakketten
-readonly OUTPUTFILE_4=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-favorieten
-readonly OUTPUTFILE_5=/usr/local/etc/$PROGRAM_NAME-$HOSTNAME-$ID-snaps
+readonly OUTPUTFILE_0=/usr/local/etc/${PROGRAM_NAME}_${HOSTNAME}_$ID
+readonly OUTPUTFILE_1=${OUTPUTFILE_0}_deb-bestanden
+readonly OUTPUTFILE_2=${OUTPUTFILE_0}_pakketbronnen
+readonly OUTPUTFILE_3=${OUTPUTFILE_0}_pakketten
+readonly OUTPUTFILE_4=${OUTPUTFILE_0}_favorieten
+readonly OUTPUTFILE_5=${OUTPUTFILE_0}_snaps
 readonly RUN_AS_SUPERUSER=true
 
 
@@ -285,7 +286,7 @@ SNAP' of met Software."
 
 term_script() {
     info "
-De bestanden zijn aangemaakt: /usr/local/etc/$PROGRAM_NAME-$HOSTNAME-*
+De bestanden zijn aangemaakt: ${OUTPUTFILE_0}_*
 Deze bestanden kunnen gebruikt worden om de volledigheid van de
 installatie, later door kz install, te controleren."
     exit $SUCCESS

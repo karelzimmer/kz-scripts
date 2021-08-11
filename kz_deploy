@@ -13,7 +13,7 @@
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
-#TODO: wil ook .pdf in /usr/share/doc/kzscripts 
+#TODO: wil ook .pdf in /usr/share/doc/kz
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -29,7 +29,7 @@ Opties:
 $OPTIONS_HELP_COMMON"
 
 readonly    DEBDIR=$HOME/kz_deb
-readonly    DEBDIRBUILD=/tmp
+#readonly    DEBBUILDDIR=/tmp
 readonly    DEBNAME=kz_365_all.deb
 readonly    DOCSDIR=$HOME/kz_docs
 readonly    SCRIPTSDIR=$HOME/kz_scripts
@@ -40,6 +40,7 @@ readonly    SITEDIR=$HOME/uploads/karelzimmer.nl/httpdocs
 # De [BACKGROUND_PROP] wordt door dit script gegenereerd.
 # Andere mappen en bestanden (zoals pixmaps en control) staan al in SOURCE_DEB.
 # Te vullen mappen zijn relatief ten opzichte van $DEBDIR.
+#FIXME: are these SOURCEs or TARGETs??
 readonly -A SOURCE_DEB=(
        [APPLICATIONS]=/usr/share/applications
         [BACKGROUNDS]=/usr/share/backgrounds
@@ -48,7 +49,6 @@ readonly -A SOURCE_DEB=(
                 [DOC]=/usr/share/doc/kz
                 [MAN]=/usr/share/man/man1
            [POLICY_1]=/usr/share/polkit-1/actions
-             [README]=/usr/share/doc/kzscripts/README
            [TABCOMPL]=/usr/share/bash-completion/completions
     )
 readonly    TARGET_DEB=$SITEDIR/apps/kz

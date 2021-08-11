@@ -30,7 +30,9 @@ $OPTIONS_HELP_COMMON"
 
 readonly NAS_LOGIN=/usr/local/etc/${PROGRAM_NAME}login
 readonly NAS_MOUNT_POINT=/mnt/$PROGRAM_NAME
-readonly NAS_FIXED_IP_ADDRESS="Zorg dat de NAS een vast IP-adres heeft.
+readonly NAS_FIXED_IP_ADDRESS="
+Zorg dat de NAS een vast IP-adres heeft.
+
 Hiervoor is nodig:
 
  -  het MAC-adres van de NAS \

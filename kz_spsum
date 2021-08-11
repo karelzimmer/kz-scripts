@@ -102,7 +102,7 @@ process_input() {
     done
 
     if ! $ISO_FILE_FOUND; then
-        warning "Geen beeldbestanden (.iso) gevonden in '$SEARCHDIR'."
+        warning "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR."
     fi
 }
 
@@ -111,8 +111,8 @@ create_checksum_file() {
     local -i grep_rc=0
 
     if [[ -e $ISO_FILE.$HASHPROG ]]; then
-        info "Beeldbestand '$ISO_FILE' heeft al controlebestand \
-'$ISO_FILE.$HASHPROG'.\n"
+        info "Beeldbestand $ISO_FILE heeft al controlebestand \
+$ISO_FILE.$HASHPROG.\n"
         return $SUCCESS
     else
         # shellcheck disable=SC2062,SC2063
@@ -126,9 +126,9 @@ create_checksum_file() {
                 -- *                    \
                 > "$ISO_FILE.$HASHPROG" 2> >($LOGCMD) || grep_rc=$?
         if [[ $grep_rc -ne $SUCCESS ]]; then
-            error "Geen controlesom gevonden voor '$ISO_FILE'.\n"
+            error "Geen controlesom gevonden voor $ISO_FILE.\n"
         else
-            info "Controlebestand '$ISO_FILE.$HASHPROG' aangemaakt.\n"
+            info "Controlebestand $ISO_FILE.$HASHPROG aangemaakt.\n"
        fi
     fi
 }
