@@ -127,9 +127,8 @@ check_input() {
     done
 
     if [[ "$*" ]]; then
-        printf  "$PROGRAM_NAME: %s\n%s\n"   \
-                'geen argumenten opgeven'   \
-                "$USAGELINE" >&2
+        TEXT='geen argumenten opgeven'
+        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
 

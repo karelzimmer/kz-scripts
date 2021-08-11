@@ -104,10 +104,11 @@ check_input() {
     done
 
     if [[ "$*" ]]; then
-        printf  "$PROGRAM_NAME: %s\n%s\n"   \
-                'geen argumenten opgeven'   \
-                "$USAGELINE"                >&2
-        exit $ERROR
+        TEXT='geen argumenten opgeven'
+        printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
+                "$TEXT"                             \
+                "$USAGELINE"                        >&2
+        exit    $ERROR
     fi
 
     karel_full_name=$(
@@ -133,7 +134,7 @@ check_input() {
             printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
                     "$TEXT"                             \
                     "$USAGELINE"                        >&2
-            exit $ERROR
+            exit    $ERROR
     fi
 
     # Een non-gui script gestart met optie gui.

@@ -114,7 +114,7 @@ check_input() {
                     printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
                             "$TEXT"                             \
                             "$USAGELINE"                        >&2
-                    exit $ERROR
+                    exit    $ERROR
                 else
                     OPTION_SOURCE=true
                     SOURCE_ARGUMENT=$2
@@ -127,7 +127,7 @@ check_input() {
                     printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
                             "$TEXT"                             \
                             "$USAGELINE"                        >&2
-                    exit $ERROR
+                    exit    $ERROR
                 else
                     OPTION_TARGET=true
                     TARGET_ARGUMENT=$2

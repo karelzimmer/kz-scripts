@@ -64,7 +64,7 @@ init_script() {
 
 check_input() {
     if ! [[ "$*" ]]; then
-        printf  "$PROGRAM_NAME: %s\n" 'OPDRACHT [ARG] opgeven' >&2
+        printf "$PROGRAM_NAME: %s\n" 'OPDRACHT [ARG] opgeven' >&2
         show_commands
         exit $WARNING
     fi
