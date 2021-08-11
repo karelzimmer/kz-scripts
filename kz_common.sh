@@ -127,7 +127,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 error() {
     if $OPTION_GUI; then
-        TITLE="Foutmelding ${PROGRAM_NAME//kz-/kz }"
+        TITLE="Foutmelding ${PROGRAM_NAME/kz_/kz }"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd
@@ -157,7 +157,7 @@ check_user() {
         fi
     else
         if [[ $UID -eq 0 ]]; then
-            info "${PROGRAM_NAME//kz-/kz }: niet uitvoeren met 'sudo' of als \
+            info "${PROGRAM_NAME/kz_/kz }: niet uitvoeren met 'sudo' of als \
 root"
             exit $ERROR
         fi
@@ -167,7 +167,7 @@ root"
 
 info() {
     if $OPTION_GUI; then
-        TITLE="Informatie ${PROGRAM_NAME//kz-/kz }"
+        TITLE="Informatie ${PROGRAM_NAME/kz_/kz }"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd
@@ -226,7 +226,7 @@ init_script() {
 --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $PROGRAM_NAME ?ltregel \
 %lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q \
 voor stoppen)"
-    USAGELINE="Typ '${PROGRAM_NAME//kz-/kz } --usage' voor meer informatie."
+    USAGELINE="Typ '${PROGRAM_NAME/kz_/kz } --usage' voor meer informatie."
 }
 
 
@@ -340,14 +340,14 @@ process_option_debug() {
 process_option_help() {
     printf  "%s\n\n%s\n"    \
             "$HELP"         \
-            "Typ 'man ${PROGRAM_NAME//kz-/kz }' voor meer informatie."
+            "Typ 'man ${PROGRAM_NAME/kz_/kz }' voor meer informatie."
 }
 
 
 process_option_usage() {
     printf "%s\n\n%s\n" \
             "$USAGE"    \
-            "Typ '${PROGRAM_NAME//kz-/kz } --help' voor meer informatie."
+            "Typ '${PROGRAM_NAME/kz_/kz } --help' voor meer informatie."
 }
 
 
@@ -519,7 +519,7 @@ start dan een Terminalvenster, en voer uit:
 
 warning() {
     if $OPTION_GUI; then
-        TITLE="Waarschuwing ${PROGRAM_NAME//kz-/kz }"
+        TITLE="Waarschuwing ${PROGRAM_NAME/kz_/kz }"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd

@@ -12,7 +12,7 @@ Deze module geeft toegang tot algemene functies.
 # ReleaseNumber: 02.00.00
 # DateOfRelease: 2021-08-08
 ###############################################################################
-module_name = 'kz-common.py'
+module_name = 'kz_common.py'
 
 
 def process_option_version(program_name):

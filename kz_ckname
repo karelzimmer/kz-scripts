@@ -19,9 +19,9 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON \
+readonly    USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } $OPTIONS_USAGE_COMMON \
 [MAP...]"
-readonly    HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--] [MAP...]
+readonly    HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [MAP...]
 
 Bestandsnamen controleren.
 
@@ -51,10 +51,10 @@ check_input() {
     local -i map_arg_num=0
 
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+        getopt  --alternative                               \
+                --options       "$OPTIONS_SHORT"            \
+                --longoptions   "$OPTIONS_LONG"             \
+                --name          "${PROGRAM_NAME/kz_/kz }"   \
                 -- "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then

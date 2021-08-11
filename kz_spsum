@@ -20,8 +20,8 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...]
+readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...]
 
 Controlebestanden opsplitsen.
 
@@ -45,10 +45,10 @@ declare ISO_FILE_FOUND=false
 
 check_input() {
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+        getopt  --alternative                               \
+                --options       "$OPTIONS_SHORT"            \
+                --longoptions   "$OPTIONS_LONG"             \
+                --name          "${PROGRAM_NAME/kz_/kz }"   \
                 -- "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then

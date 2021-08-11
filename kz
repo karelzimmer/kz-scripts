@@ -85,7 +85,7 @@ check_input() {
         show_commands
         exit $ERROR
     fi
-    EXEC=${CALLED//kz /kz_}
+    EXEC=${CALLED/kz /kz_}
 }
 
 

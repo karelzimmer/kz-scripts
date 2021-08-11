@@ -20,9 +20,9 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'c'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',checksums'
-readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } [-c|--checksums] \
+readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } [-c|--checksums] \
 $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...]
+readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...]
 
 Beeldbestanden downloaden.
 
@@ -51,10 +51,10 @@ declare OPTION_CHECKSUMS=false
 
 check_input() {
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+        getopt  --alternative                               \
+                --options       "$OPTIONS_SHORT"            \
+                --longoptions   "$OPTIONS_LONG"             \
+                --name          "${PROGRAM_NAME/kz_/kz }"   \
                 -- "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then

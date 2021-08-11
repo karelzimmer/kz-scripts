@@ -20,19 +20,19 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON"
-readonly    HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--]
+readonly    USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } $OPTIONS_USAGE_COMMON"
+readonly    HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--]
 
 Pakket distribueren.
 
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEBDIR=$HOME/kz-deb
+readonly    DEBDIR=$HOME/kz_deb
 readonly    DEBDIRBUILD=/tmp
 readonly    DEBNAME=kz_365_all.deb
-readonly    DOCSDIR=$HOME/kz-docs
-readonly    SCRIPTSDIR=$HOME/kz-scripts
+readonly    DOCSDIR=$HOME/kz_docs
+readonly    SCRIPTSDIR=$HOME/kz_scripts
 readonly    SITEDIR=$HOME/uploads/karelzimmer.nl/httpdocs
 
 # De [BIN] wordt gevuld door SCRIPTSDIR.
@@ -78,10 +78,10 @@ check_input() {
     local ubuntu_full_name=''
 
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+        getopt  --alternative                               \
+                --options       "$OPTIONS_SHORT"            \
+                --longoptions   "$OPTIONS_LONG"             \
+                --name          "${PROGRAM_NAME/kz_/kz }"   \
                 -- "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
@@ -130,7 +130,9 @@ check_input() {
             ($USER = user   && $debian_full_name = 'Debian Live user')  ]]
     then
             TEXT='alleen uitvoeren als ontwikkelaar'
-            printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+            printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
+                    "$TEXT"                             \
+                    "$USAGELINE"                        >&2
             exit $ERROR
     fi
 
@@ -196,7 +198,7 @@ check_names() {
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
 Herstel alle meldingen hierboven en start daarna weer \
-${PROGRAM_NAME//kz-/kz }."
+${PROGRAM_NAME/kz_/kz }."
         exit $check_rc
     fi
 }
@@ -210,7 +212,7 @@ check_scripts() {
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
 Herstel alle meldingen hierboven en start daarna weer \
-${PROGRAM_NAME//kz-/kz }."
+${PROGRAM_NAME/kz_/kz }."
         exit $check_rc
     fi
 }
@@ -281,7 +283,7 @@ create_package_files() {
 
 create_wallpapapers_configuration_file() {
     local wallpaper=''
-    local wallpapers_config_file=kz-wallpapers.xml
+    local wallpapers_config_file=kz_wallpapers.xml
 
     {
     printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
@@ -315,7 +317,7 @@ upload_website() {
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to"
     local ftp_host=server106.hosting2go.nl
     local ftp_user=kzimmer
-    local ftp_login=$HOME/.kz-$ftp_host
+    local ftp_login=$HOME/.kz_$ftp_host
 
     process_checklists
     process_scripts

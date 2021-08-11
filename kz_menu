@@ -20,8 +20,8 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...]
+readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...]
 
 Installatiemenu.
 
@@ -101,10 +101,10 @@ declare -i  NUMBER_OF_COMMANDS=0
 
 check_input() {
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+        getopt  --alternative                               \
+                --options       "$OPTIONS_SHORT"            \
+                --longoptions   "$OPTIONS_LONG"             \
+                --name          "${PROGRAM_NAME/kz_/kz }"   \
                 -- "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne 0 ]]; then
@@ -588,7 +588,7 @@ execute_command() {
     local -i    cmd_rc=0
 
     case $command in
-        kz-backup|kz-install|kz-lsinstalled|kz-nas|kz-restore)
+        kz_backup|kz_install|kz_lsinstalled|kz_nas|kz_restore)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 pkexec "$PROGRAM_PATH/$command" --gui -- || cmd_rc=$?
@@ -598,7 +598,7 @@ execute_command() {
                 log_rc $cmd_rc
             fi
             ;;
-        kz-setup|*--info|*--remove|*--reset)
+        kz_setup|*--info|*--remove|*--reset)
             # Zogenaamde non-sudo-scripts.
             # shellcheck disable=SC2086
             if $OPTION_GUI; then

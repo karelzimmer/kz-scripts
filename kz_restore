@@ -20,11 +20,11 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:s:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:,exclude:'
-readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } \
+readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } \
 [-e|--exclude=UITSLUITEN]... [-s|--source=BRON] [-t|--target=DOEL]
                     $OPTIONS_USAGE_COMMON
                     [SELECTIE...]"
-readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--] [SELECTIE...]
+readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [SELECTIE...]
 
 Back-up terugzetten.
 
@@ -40,7 +40,7 @@ $OPTIONS_HELP_COMMON
 Argumenten:
   SELECTIE      zet opgegeven mappen en bestanden terug"
 
-readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
+readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/${PROGRAM_NAME}_exclude_dflt
 readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 $(find /etc/skel -type f -exec basename '{}' \; | awk '$0="/home/*/"$0')"
 # Hieboven worden de bestanden opgenomen die bij het aanmaken van een
@@ -48,7 +48,7 @@ $(find /etc/skel -type f -exec basename '{}' \; | awk '$0="/home/*/"$0')"
 # .bash_logout, .bashrc, examples.desktop, en .profile (bij Ubuntu).
 # Deze bestanden terugzetten bij een nieuwe versie van Linux betekent dat
 # deze bestanden worden teruggezeten naar de oude versie; niet wenselijk.
-readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
+readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/${PROGRAM_NAME}_exclude_opt
 readonly SELECTION_DEFAULT=''
 readonly RUN_AS_SUPERUSER=true
 readonly SOURCE_DEFAULT=/media/
@@ -87,10 +87,10 @@ check_input() {
     local   -i  select_num=0
 
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+        getopt  --alternative                               \
+                --options       "$OPTIONS_SHORT"            \
+                --longoptions   "$OPTIONS_LONG"             \
+                --name          "${PROGRAM_NAME/kz_/kz }"   \
                 -- "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
@@ -111,7 +111,9 @@ check_input() {
             -s|--source)
                 if $OPTION_SOURCE; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
+                            "$TEXT"                             \
+                            "$USAGELINE"                        >&2
                     exit $ERROR
                 else
                     OPTION_SOURCE=true
@@ -122,7 +124,9 @@ check_input() {
             -t|--target)
                 if $OPTION_TARGET; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
+                            "$TEXT"                             \
+                            "$USAGELINE"                        >&2
                     exit $ERROR
                 else
                     OPTION_TARGET=true
@@ -144,7 +148,7 @@ check_input() {
         SOURCE=$SOURCE_ARGUMENT
         if ! [[ -d $SOURCE ]]; then
             TEXT="map '$SOURCE' bestaat niet"
-            printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
             exit $ERROR
         fi
     else
@@ -154,7 +158,7 @@ check_input() {
     if $OPTION_TARGET; then
         if ! [[ -d $TARGET_ARGUMENT ]]; then
             TEXT="map '$TARGET_ARGUMENT' bestaat niet"
-            printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
             exit $ERROR
         fi
         TARGET=$TARGET_ARGUMENT
@@ -291,7 +295,7 @@ even duren)..."
             warning "Geen back-ups gevonden in $SOURCE."
         info "
 Gebruik optie source om op te geven waar de back-up gevonden kan worden.
-Voorbeeld: ${PROGRAM_NAME//kz-/kz } --source BRONMAP
+Voorbeeld: ${PROGRAM_NAME/kz_/kz } --source BRONMAP
 $USAGELINE" >&2
             exit $WARNING
         elif [[ $bupnum -eq 1 ]]; then

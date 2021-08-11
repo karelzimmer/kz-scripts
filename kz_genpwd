@@ -36,17 +36,17 @@ def generate_password():
 
 
 def process_option_usage():
-    print(f"""Gebruik: {program_name.replace('kz-', 'kz ')} [-g|--gui] \
+    print(f"""Gebruik: {program_name.replace('kz_', 'kz ')} [-g|--gui] \
 [-h|--help] [-u|--usage] [-v|--version]
 
-Typ '{program_name.replace('kz-', 'kz ')} --help' voor meer informatie.""")
+Typ '{program_name.replace('kz_', 'kz ')} --help' voor meer informatie.""")
 
 
 # --- script ---
 
 parser = argparse.ArgumentParser(description='Wachtwoord genereren.',
                                  epilog="Typ 'man " +
-                                 program_name.replace('kz-', 'kz ') +
+                                 program_name.replace('kz_', 'kz ') +
                                  "' voor meer informatie.")
 parser.add_argument('-g', '--gui', action='store_true',
                     help='start in grafische modus')

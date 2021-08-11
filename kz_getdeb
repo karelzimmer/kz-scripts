@@ -204,7 +204,7 @@ check_input() {
         if [[ "$*" = *-g* ]]; then
             TERMINAL=true
         else
-            TEXT="${PROGRAM_NAME//kz-/kz }: geen opties of argumenten opgeven
+            TEXT="${PROGRAM_NAME/kz_/kz }: geen opties of argumenten opgeven
 
 Voor de nieuwste versie van $PROGRAM_NAME én het pakket kz,
 gebruik de opdracht: ${BLUE}wget karelzimmer.nl/kz${NORMAL}
@@ -212,7 +212,7 @@ gebruik de opdracht: ${BLUE}wget karelzimmer.nl/kz${NORMAL}
                  of: ${BLUE}wget -O- karelzimmer.nl/kz | bash${NORMAL}
                  of: ${BLUE}curl -L karelzimmer.nl/kz | bash${NORMAL}
                  of: ${BLUE}wget karelzimmer.nl/kz; bash kz${NORMAL}
-                 of: ${BLUE}${PROGRAM_NAME//kz-/kz }${NORMAL}"
+                 of: ${BLUE}${PROGRAM_NAME/kz_/kz }${NORMAL}"
             printf "%b\n" "$TEXT" >&2
             exit $SUCCESS
         fi

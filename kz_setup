@@ -21,12 +21,12 @@ source "$(dirname "$0")"/kz_common.sh
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:firs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,\
 reset,simulate"
-readonly USAGE="Gebruik: ${PROGRAM_NAME//kz-/kz } [-a|--apps] [-c|--cat] \
+readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } [-a|--apps] [-c|--cat] \
 [-e|--edition=EDITIE] [-f|--files]
                   [-i|--info] [-r|--reset] [-s|--simulate]
                   $OPTIONS_USAGE_COMMON
                   [APP...] [BESTAND...]"
-readonly HELP="Gebruik: ${PROGRAM_NAME//kz-/kz } [OPTIE...] [--] [APP...] \
+readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [APP...] \
 [BESTAND...]
 
 Apps instellen.
@@ -48,8 +48,8 @@ Argumenten:
   BESTAND       opgegeven instellingsbestanden verwerken"
 
 readonly EDITION_DEFAULT=desktop
-readonly CMDSFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-readonly TEXTFILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
+readonly CMDSFILE=$(mktemp -t "${PROGRAM_NAME}-XXXXXXXXXX.cmds")
+readonly TEXTFILE=$(mktemp -t "${PROGRAM_NAME}-XXXXXXXXXX.text")
 
 
 ###############################################################################
@@ -86,10 +86,10 @@ check_input() {
     local   -i  file_arg_num=0
 
     PARSED=$(
-        getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+        getopt  --alternative                               \
+                --options       "$OPTIONS_SHORT"            \
+                --longoptions   "$OPTIONS_LONG"             \
+                --name          "${PROGRAM_NAME/kz_/kz }"   \
                 -- "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
@@ -112,7 +112,9 @@ check_input() {
             -e|--edition)
                 if $OPTION_EDITION; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf "$PROGRAM_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
+                            "$TEXT"                             \
+                            "$USAGELINE"                        >&2
                     exit $ERROR
                 else
                     OPTION_EDITION=true
@@ -253,18 +255,20 @@ process_input() {
 process_argument_app() {
     local app=''
     local file=''
+    local search=''
 
+    search=${PROGRAM_NAME}_${id}_${release}
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in instellingsbestanden.
         # Alleen eerstgevonden instellingsbestand verwerken (lines=1), want
         # app-naam kan in meerdere instellingsbestanden voorkomen.
         # shellcheck disable=SC2062
         file=$(
-            if ! grep       --files-with-matches                            \
-                            --line-regexp                                   \
-                            --regexp="#1 $app"                              \
-                            "$PROGRAM_PATH/$PROGRAM_NAME-$id-$release"*.sh  \
-                            2> /dev/null                                    |
+            if ! grep       --files-with-matches        \
+                            --line-regexp               \
+                            --regexp="#1 $app"          \
+                            "$PROGRAM_PATH/$search"*.sh \
+                            2> /dev/null                |
                     head    --lines=1; then
                 printf '\n'
             fi
@@ -277,7 +281,7 @@ process_argument_app() {
         fi
     done
     if $file_notfound; then
-        info "Typ '${PROGRAM_NAME//kz-/kz } --apps' voor beschikbare apps."
+        info "Typ '${PROGRAM_NAME/kz_/kz } --apps' voor beschikbare apps."
     fi
 }
 
@@ -288,7 +292,7 @@ process_argument_app_file() {
     local cmdsfile=''
     local record=''
 
-    cmdsfile=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+    cmdsfile=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
     while read -r record; do
         case $record in
             '#1 '*)
@@ -347,7 +351,7 @@ process_argument_file() {
         fi
     done
     if $file_notfound; then
-        info "Typ '${PROGRAM_NAME//kz-/kz } --files' voor beschikbare \
+        info "Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare \
 instellingsbestanden."
     fi
 }
@@ -357,23 +361,23 @@ process_dfltfiles() {
 local dfltfile_1=''
 local dfltfile_2=''
 
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$id-$release-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$id-$release-$EDITION-$HOSTNAME.sh
-    if [[ -e $dfltfile_1 ]]; then
+    dfltfile_1=${PROGRAM_NAME}_${id}_${release}_${EDITION}.sh
+    dfltfile_2=${PROGRAM_NAME}_${id}_${release}_${EDITION}-${HOSTNAME}.sh
+    if [[ -e $PROGRAM_PATH/$dfltfile_1 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
         file_notfound=true
     fi
     # Niet verplicht aanwezig.
-    if [[ -e $dfltfile_2 ]]; then
+    if [[ -e $PROGRAM_PATH/$dfltfile_2 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     fi
     if $file_notfound; then
         info "Geen instellingsbestanden gevonden voor $Id $release $EDITION."
         if ! $OPTION_GUI; then
-            info "Typ '${PROGRAM_NAME//kz-/kz } --files' voor beschikbare \
+            info "Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare \
 instellingsbestanden."
         fi
     fi
@@ -381,62 +385,69 @@ instellingsbestanden."
 
 
 process_option_apps() {
+    local search=''
+
+    search=${PROGRAM_NAME}_${id}_${release}
+
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
 NUMMER APP
 $(
-    if !    grep    --no-messages                                   \
-                    --regexp='^#1 '                                 \
-                    "$PROGRAM_PATH/$PROGRAM_NAME-$id-$release"*.sh  |
-            awk     '{print $2}'                                    |
-            sort    --unique                                        |
-            nl      --number-width=6                                \
-                    --number-format=rn                              \
-                    --number-separator=' '                          \
+    if !    grep    --no-messages               \
+                    --regexp='^#1 '             \
+                    "$PROGRAM_PATH/$search"*.sh |
+            awk     '{print $2}'                |
+            sort    --unique                    |
+            nl      --number-width=6            \
+                    --number-format=rn          \
+                    --number-separator=' '      \
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen apps gevonden voor $Id $release.
 
-Typ '${PROGRAM_NAME//kz-/kz } --files' voor beschikbare instellingsbestanden."
+Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare instellingsbestanden."
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
-    ${BLUE}${PROGRAM_NAME//kz-/kz } --sim APP...${NORMAL}
-    ${BLUE}${PROGRAM_NAME//kz-/kz } --cat APP...${NORMAL}
+    ${BLUE}${PROGRAM_NAME/kz_/kz } --sim APP...${NORMAL}
+    ${BLUE}${PROGRAM_NAME/kz_/kz } --cat APP...${NORMAL}
 Om APPs in te stellen voer uit:
-    ${BLUE}${PROGRAM_NAME//kz-/kz } APP...${NORMAL}"
+    ${BLUE}${PROGRAM_NAME/kz_/kz } APP...${NORMAL}"
     fi
 )"
 }
 
 
 process_option_files() {
+    local search=''
+
+    search=${PROGRAM_NAME}_${id}_${release}
     printf '%s\n' "De volgende instellingsbestanden zijn beschikbaar:
 
 NUMMER BESTAND
 $(
-    if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-$id-$release"*.sh  \
-                    2> /dev/null                                    |
-            nl      --number-width=6                                \
-                    --number-format=rn                              \
-                    --number-separator=' '                          \
+    if !    find    "$PROGRAM_PATH/$search"*.sh \
+                    2> /dev/null                |
+            nl      --number-width=6            \
+                    --number-format=rn          \
+                    --number-separator=' '      \
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen instellingsbestanden gevonden voor $Id.
 
 Controleer $PROGRAM_PATH op aanwezigheid andere instellingsbestanden.
 Om die BESTANDen te bekijken voer uit:
-    ${BLUE}${PROGRAM_NAME//kz-/kz } --sim $PROGRAM_PATH/BESTAND...${NORMAL}
-    ${BLUE}${PROGRAM_NAME//kz-/kz } --cat $PROGRAM_PATH/BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME/kz_/kz } --sim $PROGRAM_PATH/BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME/kz_/kz } --cat $PROGRAM_PATH/BESTAND...${NORMAL}
 Om die BESTANDen te gebruiken voer uit:
-    ${BLUE}${PROGRAM_NAME//kz-/kz } $PROGRAM_PATH/BESTAND...${NORMAL}
-Typ 'man ${PROGRAM_NAME//kz-/kz }' voor meer informatie."
+    ${BLUE}${PROGRAM_NAME/kz_/kz } $PROGRAM_PATH/BESTAND...${NORMAL}
+Typ 'man ${PROGRAM_NAME/kz_/kz }' voor meer informatie."
     else
         printf '%s\n' "
 Om BESTANDen te bekijken voer uit:
-    ${BLUE}${PROGRAM_NAME//kz-/kz } --sim BESTAND...${NORMAL}
-    ${BLUE}${PROGRAM_NAME//kz-/kz } --cat BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME/kz_/kz } --sim BESTAND...${NORMAL}
+    ${BLUE}${PROGRAM_NAME/kz_/kz } --cat BESTAND...${NORMAL}
 Om BESTANDen te gebruiken voer uit:
-    ${BLUE}${PROGRAM_NAME//kz-/kz } BESTAND...${NORMAL}"
+    ${BLUE}${PROGRAM_NAME/kz_/kz } BESTAND...${NORMAL}"
     fi
 )"
 }
@@ -722,7 +733,7 @@ term_script() {
         info "
 Er zijn aanvullende instructies!
 Gebruik de opdracht:
-    ${BLUE}${PROGRAM_NAME//kz-/kz } --info ${APP_ARGUMENT[*]}${NORMAL}"
+    ${BLUE}${PROGRAM_NAME/kz_/kz } --info ${APP_ARGUMENT[*]}${NORMAL}"
     fi
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
