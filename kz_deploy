@@ -147,7 +147,7 @@ check_input() {
 
 process_input() {
     pre_actions
-    create_package
+    create_package_kz
 exit #XXX HANDBRAKE
     upload_website
     install_package
@@ -157,8 +157,8 @@ exit #XXX HANDBRAKE
 pre_actions() {
     check_names
     check_scripts
-    process_changed_docs
-    process_changed_scripts
+    process_changed_kz_docs
+    process_changed_kz_scripts
 }
 
 check_dependencies() {
@@ -215,7 +215,7 @@ ${PROGRAM_NAME/kz_/kz }."
 }
 
 
-process_changed_docs() {
+process_changed_kz_docs() {
     local txtfile=''
     local basefile=''
     local changes=false
@@ -264,7 +264,7 @@ process_changed_docs() {
 }
 
 
-process_changed_scripts() {
+process_changed_kz_scripts() {
     local changes=false
     local highlight=''
     local scriptfile=''
@@ -289,7 +289,7 @@ process_changed_scripts() {
                 man     --troff "$SCRIPTS_DIR/$scriptfile"           |
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
             else
-                # Scripts inclusief *.1, *.completion, *.desktop, en *.policy.
+                # Script inclusief *.1, *.completion, *.desktop, en *.policy.
                 if grep --quiet                         \
                         --line-regexp                   \
                         --regexp='#!''/usr/bin/python3' \
@@ -322,11 +322,12 @@ process_changed_scripts() {
 }
 
 
-create_package() {
-    rsync --archive --delete --exclude='README.md' "$DEB_DIR"/ $DEB_TEMP_DIR
-    process_package_files
-    create_wallpapapers_configuration_file
+create_package_kz() {
     info 'Maak scriptspakket...'
+    rsync --archive --delete --exclude='README.md' "$DEB_DIR"/ $DEB_TEMP_DIR
+    process_kz_docs
+    process_kz_scripts
+    process_wallpapapers
     fakeroot    dpkg-deb                \
                 --build                 \
                 "$DEB_TEMP_DIR"         \
@@ -335,16 +336,7 @@ create_package() {
 }
 
 
-process_package_files() {
-    local basename=''
-    local file=''
-    local newfile=''
-    local prefix='nl.karelzimmer.'
-
-    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_DIR"/*
-    chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
-
-    # DOCS
+process_kz_docs() {
     # De exclude en delete-excluded i.v.m. de lokale git repository.
     rsync   --archive               \
             --delete                \
@@ -355,12 +347,21 @@ process_package_files() {
             "$DOCS_DIR"/            \
             "${SOURCE_DEB[DOC]}" |& $LOGCMD
 
-    # PDFS
     rsync   --archive                   \
             "${TARGET_UPLOADS[PDFS]}"/  \
             "${SOURCE_DEB[DOC]}" |& $LOGCMD
+}
 
-    # SCRIPTS
+
+process_kz_scripts() {
+    local basename=''
+    local file=''
+    local newfile=''
+    local prefix='nl.karelzimmer.'
+
+    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_DIR"/*
+    chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
+
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
     # De exclude en delete-excluded i.v.m. de lokale git repository.
     rsync   --archive               \
@@ -401,7 +402,7 @@ process_package_files() {
 }
 
 
-create_wallpapapers_configuration_file() {
+process_wallpapapers() {
     local wallpaper=''
     local wallpapers_config_file=kz_wallpapers.xml
 
