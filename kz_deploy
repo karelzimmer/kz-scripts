@@ -28,39 +28,37 @@ Pakket distribueren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEBDIR=$HOME/kz_deb
-#readonly    DEBBUILDDIR=/tmp
-readonly    DEBNAME=kz_365_all.deb
-readonly    DOCSDIR=$HOME/kz_docs
-readonly    SCRIPTSDIR=$HOME/kz_scripts
-readonly    SITEDIR=$HOME/uploads/karelzimmer.nl/httpdocs
+readonly    DEB_SKEL_DIR=$HOME/kz_deb
+readonly    DEB_DIR=/tmp/kz
+readonly    DEB_NAME=kz_365_all.deb
+readonly    DOCS_DIR=$HOME/kz_docs
+readonly    SCRIPTS_DIR=$HOME/kz_scripts
+readonly    SITE_DIR=$HOME/uploads/karelzimmer.nl/httpdocs
 
-# De [BIN] wordt gevuld door SCRIPTSDIR.
-# De [DOC] wordt gevuld door DOCSDIR.
+# De [BIN] wordt gevuld door SCRIPTS_DIR.
+# De [DOC] wordt gevuld door DOCS_DIR.
 # De [BACKGROUND_PROP] wordt door dit script gegenereerd.
 # Andere mappen en bestanden (zoals pixmaps en control) staan al in SOURCE_DEB.
-# Te vullen mappen zijn relatief ten opzichte van $DEBDIR.
-#FIXME: are these SOURCEs or TARGETs??
 readonly -A SOURCE_DEB=(
-       [APPLICATIONS]=/usr/share/applications
-        [BACKGROUNDS]=/usr/share/backgrounds
-    [BACKGROUND_PROP]=/usr/share/gnome-background-properties
-                [BIN]=/usr/bin
-                [DOC]=/usr/share/doc/kz
-                [MAN]=/usr/share/man/man1
-           [POLICY_1]=/usr/share/polkit-1/actions
-           [TABCOMPL]=/usr/share/bash-completion/completions
+       [APPLICATIONS]=$DEB_DIR/usr/share/applications
+        [BACKGROUNDS]=$DEB_DIR/usr/share/backgrounds
+    [BACKGROUND_PROP]=$DEB_DIR/usr/share/gnome-background-properties
+                [BIN]=$DEB_DIR/usr/bin
+                [DOC]=$DEB_DIR/usr/share/doc/kz
+                [MAN]=$DEB_DIR/usr/share/man/man1
+           [POLICY_1]=$DEB_DIR/usr/share/polkit-1/actions
+           [TABCOMPL]=$DEB_DIR/usr/share/bash-completion/completions
     )
-readonly    TARGET_DEB=$SITEDIR/apps/kz
+readonly    TARGET_DEB=$SITE_DIR/apps/kz
 
 readonly -A SOURCE_UPLOADS=(
-       [DOCS]=$DOCSDIR
-    [SCRIPTS]=$SCRIPTSDIR
+       [DOCS]=$DOCS_DIR
+    [SCRIPTS]=$SCRIPTS_DIR
     )
 readonly -A TARGET_UPLOADS=(
-       [DOCS]=$SITEDIR/data/linux/documents
-       [PDFS]=$SITEDIR/data/linux/pdfs
-    [SCRIPTS]=$SITEDIR/data/linux/scripts
+       [DOCS]=$SITE_DIR/data/linux/documents
+       [PDFS]=$SITE_DIR/data/linux/pdfs
+    [SCRIPTS]=$SITE_DIR/data/linux/scripts
     )
 
 
@@ -155,13 +153,15 @@ process_input() {
 
 
 create_package() {
-    check_dependencies
-    check_names
-    check_scripts
+#    check_dependencies
+#    check_names
+#    check_scripts
     create_package_files
     create_wallpapapers_configuration_file
     info 'Maak scriptspakket...'
-    fakeroot dpkg-deb --build "$DEBDIR" "$TARGET_DEB/$DEBNAME" |& $LOGCMD
+    fakeroot dpkg-deb --build "$DEB_DIR" "$TARGET_DEB/$DEB_NAME" |& $LOGCMD
+    rm --force --recursive "$DEB_DIR"
+exit #XXX HANDBRAKE
 }
 
 
@@ -193,9 +193,9 @@ check_names() {
     local -i check_rc=0
 
     info 'Controleer bestandsnamen (kz ckname)...'
-    "$SCRIPTSDIR/kz ckname" "$DOCSDIR"      \
-                            "$DEBDIR"       \
-                            "$SCRIPTSDIR"   || check_rc=$?
+    "$SCRIPTS_DIR/kz ckname" "$DOCS_DIR"      \
+                            "$DEB_DIR"       \
+                            "$SCRIPTS_DIR"   || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
 Herstel alle meldingen hierboven en start daarna weer \
@@ -209,7 +209,7 @@ check_scripts() {
     local -i check_rc=0
 
     info 'Controleer scripts (kz ivp)...'
-    "$SCRIPTSDIR/kz ivp" || check_rc=$?
+    "$SCRIPTS_DIR/kz ivp" || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
 Herstel alle meldingen hierboven en start daarna weer \
@@ -225,8 +225,10 @@ create_package_files() {
     local newfile=''
     local prefix='nl.karelzimmer.'
 
-    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTSDIR"/*
-    chmod 'a-x' -- "$SCRIPTSDIR"/*.* "$SCRIPTSDIR"/LICENSE
+    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_DIR"/*
+    chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
+
+    rsync --archive --delete --exclude='README.md' "$DEB_SKEL_DIR"/ $DEB_DIR
 
     # De exclude en delete-excluded i.v.m. de lokale git repository.
     rsync   --archive                   \
@@ -235,8 +237,8 @@ create_package_files() {
             --exclude='README.md'       \
             --exclude='.git*'           \
             --delete-excluded           \
-            "$DOCSDIR"/                 \
-            "$DEBDIR${SOURCE_DEB[DOC]}" |& $LOGCMD
+            "$DOCS_DIR"/                 \
+            "${SOURCE_DEB[DOC]}" |& $LOGCMD
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
     # De exclude en delete-excluded i.v.m. de lokale git repository.
@@ -246,37 +248,33 @@ create_package_files() {
             --exclude='README.md'       \
             --exclude='.git*'           \
             --delete-excluded           \
-            "$SCRIPTSDIR"/              \
-            "$DEBDIR${SOURCE_DEB[BIN]}" |& $LOGCMD
+            "$SCRIPTS_DIR"/              \
+            "${SOURCE_DEB[BIN]}" |& $LOGCMD
 
     # Man-pagina's (.1)
-    rm --force "$DEBDIR${SOURCE_DEB[MAN]}"/*
     rsync   --archive                       \
             --delete                        \
             --remove-source-files           \
-            "$DEBDIR${SOURCE_DEB[BIN]}"/*.1 \
-            "$DEBDIR${SOURCE_DEB[MAN]}"     |& $LOGCMD
-    gzip --best --force "$DEBDIR${SOURCE_DEB[MAN]}"/*.1 |& $LOGCMD
+            "${SOURCE_DEB[BIN]}"/*.1 \
+            "${SOURCE_DEB[MAN]}"     |& $LOGCMD
+    gzip --best --force "${SOURCE_DEB[MAN]}"/*.1 |& $LOGCMD
 
     # Tab-completion-scripts (.completion)
-    rm --force "$DEBDIR${SOURCE_DEB[TABCOMPL]}"/*
-    for file in "$DEBDIR${SOURCE_DEB[BIN]}"/*.completion; do
+    for file in "${SOURCE_DEB[BIN]}"/*.completion; do
         basename=$(basename "$file" .completion)
-        mv "$file" "$DEBDIR${SOURCE_DEB[TABCOMPL]}/$basename" |& $LOGCMD
+        mv "$file" "${SOURCE_DEB[TABCOMPL]}/$basename" |& $LOGCMD
     done
 
     # Bureaublad-configuratiebestanden (.desktop)
-    rm --force "$DEBDIR${SOURCE_DEB[APPLICATIONS]}"/*
-    for file in "$DEBDIR${SOURCE_DEB[BIN]}"/*.desktop; do
+    for file in "${SOURCE_DEB[BIN]}"/*.desktop; do
         basename=$(basename "$file")
-        mv "$file" "$DEBDIR${SOURCE_DEB[APPLICATIONS]}/$basename" |& $LOGCMD
+        mv "$file" "${SOURCE_DEB[APPLICATIONS]}/$basename" |& $LOGCMD
     done
 
     # PolicyKit actiedefinitiebestanden (.policy)
-    rm --force "$DEBDIR${SOURCE_DEB[POLICY_1]}"/*
-    for file in "$DEBDIR${SOURCE_DEB[BIN]}"/*.policy; do
+    for file in "${SOURCE_DEB[BIN]}"/*.policy; do
         basename=$(basename "$file")
-        newfile="$DEBDIR${SOURCE_DEB[POLICY_1]}/$prefix$basename"
+        newfile="${SOURCE_DEB[POLICY_1]}/$prefix$basename"
         mv "$file" "$newfile" |& $LOGCMD
     done
 }
@@ -290,29 +288,32 @@ create_wallpapapers_configuration_file() {
     printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
     printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
     printf '%s\n' '<wallpapers>'
-    } > "$DEBDIR${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+    } > "${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
 
-    cd "$DEBDIR${SOURCE_DEB[BACKGROUNDS]}" || exit $ERROR
+    cd "${SOURCE_DEB[BACKGROUNDS]}" || exit $ERROR
     for wallpaper in *; do
+        # Verwijder DEB_DIR uit SOURCE_DEB[BACKGROUNDS].
+        filename=${SOURCE_DEB[BACKGROUNDS]}/$wallpaper
+        filename=${filename/$DEB_DIR/}
         printf '%s\n' "    <wallpaper>
         <name>${wallpaper%.*}</name>
-        <filename>${SOURCE_DEB[BACKGROUNDS]}/$wallpaper</filename>
+        <filename>$filename</filename>
         <options>zoom</options>
         <pcolor>#000000</pcolor>
         <scolor>#000000</scolor>
         <shade_type>solid</shade_type>
     </wallpaper>"           \
-            >> "$DEBDIR${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+            >> "${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
     done
     printf  '%s\n' \
-            '</wallpapers>' >> "$DEBDIR${SOURCE_DEB[BACKGROUND_PROP]}/\
+            '</wallpapers>' >> "${SOURCE_DEB[BACKGROUND_PROP]}/\
 $wallpapers_config_file"
 }
 
 
 upload_website() {
     local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=$SITEDIR
+    local ftp_from=$SITE_DIR
     local ftp_to=/httpdocs
     local ftp_opts='--reverse --delete --verbose'
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to"
@@ -353,7 +354,7 @@ process_checklists() {
     # Vanuit gedit.
     rm --force "$HOME"/Documenten/*.pdf
 
-    cd "$DOCSDIR" || exit $ERROR
+    cd "$DOCS_DIR" || exit $ERROR
     for txtfile in *.txt; do
         if ! diff   "$txtfile"                          \
                     "${TARGET_UPLOADS[DOCS]}/$txtfile"  &> /dev/null; then
@@ -373,7 +374,7 @@ process_checklists() {
     # Vanuit LibreOffice.
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
-    cd "$DOCSDIR" || exit $ERROR
+    cd "$DOCS_DIR" || exit $ERROR
     for docfile in *.odt; do
 
         # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
@@ -400,7 +401,7 @@ process_scripts() {
 
     info 'Verwerk scripts...'
 
-    cd "$SCRIPTSDIR" || exit $ERROR
+    cd "$SCRIPTS_DIR" || exit $ERROR
     for scriptfile in *; do
 
         if [[ $scriptfile = LICENSE || $scriptfile = README.md ]]; then
@@ -415,7 +416,7 @@ process_scripts() {
         then
             if grep --quiet --regexp='^''.TH ' "$scriptfile"; then
                 # Man-pagina.
-                man     --troff "$SCRIPTSDIR/$scriptfile"           |
+                man     --troff "$SCRIPTS_DIR/$scriptfile"           |
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
             else
                 # Script inclusief *.1, *.completion, *.desktop, en *.policy.
@@ -436,7 +437,7 @@ process_scripts() {
                             --highlight=$highlight                      \
                             --title="$scriptfile"                       \
                             --output=-                                  \
-                            "$SCRIPTSDIR/$scriptfile"                   |
+                            "$SCRIPTS_DIR/$scriptfile"                   |
                 ps2pdf      -                                           \
                             "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf"   \
                             |& $LOGCMD
