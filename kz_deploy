@@ -148,6 +148,7 @@ check_input() {
 process_input() {
     pre_actions
     create_package_kz
+    synchronize_website
 exit #XXX HANDBRAKE
     upload_website
     install_package
@@ -345,11 +346,11 @@ process_kz_docs() {
             --exclude='.git*'       \
             --delete-excluded       \
             "$DOCS_DIR"/            \
-            "${SOURCE_DEB[DOC]}" |& $LOGCMD
+            "${SOURCE_DEB[DOC]}"    |& $LOGCMD
 
     rsync   --archive                   \
             "${TARGET_UPLOADS[PDFS]}"/  \
-            "${SOURCE_DEB[DOC]}" |& $LOGCMD
+            "${SOURCE_DEB[DOC]}"        |& $LOGCMD
 }
 
 
@@ -436,6 +437,27 @@ $wallpapers_config_file"
 }
 
 
+synchronize_website() {
+    rsync   --archive                       \
+            --delete                        \
+            --exclude='LICENSE'             \
+            --exclude='README.md'           \
+            --exclude='.git*'               \
+            --delete-excluded               \
+            "${SOURCE_UPLOADS[DOCS]}"/      \
+            "${TARGET_UPLOADS[DOCS]}"
+    rsync   --archive                       \
+            --delete                        \
+            --exclude='__pycache__'         \
+            --exclude='LICENSE'             \
+            --exclude='README.md'           \
+            --exclude='.git*'               \
+            --delete-excluded               \
+            "${SOURCE_UPLOADS[SCRIPTS]}"/   \
+            "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
+}
+
+
 upload_website() {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=$SITE_DIR
@@ -446,7 +468,6 @@ upload_website() {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz_$ftp_host
 
-    synchronize_website
     info 'Upload website...'
     if ! [[ -f $ftp_login ]]; then
         read -rsp "FTP-wachtwoord voor $ftp_host: "
@@ -464,28 +485,6 @@ upload_website() {
         exit $WARNING
     fi
     sleep 5
-}
-
-
-synchronize_website() {
-    printf "%s\n" 'Synchroniseer website...'
-
-    rsync   --archive                       \
-            --delete                        \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            --delete-excluded               \
-            "${SOURCE_UPLOADS[DOCS]}"/      \
-            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
-    rsync   --archive                       \
-            --delete                        \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            --delete-excluded               \
-            "${SOURCE_UPLOADS[SCRIPTS]}"/   \
-            "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
 }
 
 
