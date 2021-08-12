@@ -445,7 +445,7 @@ synchronize_website() {
             --exclude='.git*'               \
             --delete-excluded               \
             "${SOURCE_UPLOADS[DOCS]}"/      \
-            "${TARGET_UPLOADS[DOCS]}"
+            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
     rsync   --archive                       \
             --delete                        \
             --exclude='__pycache__'         \
