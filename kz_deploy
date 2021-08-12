@@ -13,7 +13,6 @@
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
-#TODO: wil ook .pdf in /usr/share/doc/kz
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -28,26 +27,27 @@ Pakket distribueren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEB_SKEL_DIR=$HOME/kz_deb
-readonly    DEB_DIR=/tmp/kz
+readonly    DEB_DIR=$HOME/kz_deb
+readonly    DEB_TEMP_DIR=/tmp/kz
 readonly    DEB_NAME=kz_365_all.deb
 readonly    DOCS_DIR=$HOME/kz_docs
 readonly    SCRIPTS_DIR=$HOME/kz_scripts
 readonly    SITE_DIR=$HOME/uploads/karelzimmer.nl/httpdocs
 
-# De [BIN] wordt gevuld door SCRIPTS_DIR.
-# De [DOC] wordt gevuld door DOCS_DIR.
-# De [BACKGROUND_PROP] wordt door dit script gegenereerd.
+# SOURCE_DEB wordt gevuld met DEB_DIR.
+# [BIN] wordt gevuld met SCRIPTS_DIR.
+# [DOC] wordt gevuld met DOCS_DIR.
+# [BACKGROUND_PROP] wordt door dit script gegenereerd.
 # Andere mappen en bestanden (zoals pixmaps en control) staan al in SOURCE_DEB.
 readonly -A SOURCE_DEB=(
-       [APPLICATIONS]=$DEB_DIR/usr/share/applications
-        [BACKGROUNDS]=$DEB_DIR/usr/share/backgrounds
-    [BACKGROUND_PROP]=$DEB_DIR/usr/share/gnome-background-properties
-                [BIN]=$DEB_DIR/usr/bin
-                [DOC]=$DEB_DIR/usr/share/doc/kz
-                [MAN]=$DEB_DIR/usr/share/man/man1
-           [POLICY_1]=$DEB_DIR/usr/share/polkit-1/actions
-           [TABCOMPL]=$DEB_DIR/usr/share/bash-completion/completions
+       [APPLICATIONS]=$DEB_TEMP_DIR/usr/share/applications
+        [BACKGROUNDS]=$DEB_TEMP_DIR/usr/share/backgrounds
+    [BACKGROUND_PROP]=$DEB_TEMP_DIR/usr/share/gnome-background-properties
+                [BIN]=$DEB_TEMP_DIR/usr/bin
+                [DOC]=$DEB_TEMP_DIR/usr/share/doc/kz
+                [MAN]=$DEB_TEMP_DIR/usr/share/man/man1
+           [POLICY_1]=$DEB_TEMP_DIR/usr/share/polkit-1/actions
+           [TABCOMPL]=$DEB_TEMP_DIR/usr/share/bash-completion/completions
     )
 readonly    TARGET_DEB=$SITE_DIR/apps/kz
 
@@ -146,24 +146,20 @@ check_input() {
 
 
 process_input() {
+    pre_actions
     create_package
+exit #XXX HANDBRAKE
     upload_website
     install_package
 }
 
 
-create_package() {
-#    check_dependencies
-#    check_names
-#    check_scripts
-    create_package_files
-    create_wallpapapers_configuration_file
-    info 'Maak scriptspakket...'
-    fakeroot dpkg-deb --build "$DEB_DIR" "$TARGET_DEB/$DEB_NAME" |& $LOGCMD
-    rm --force --recursive "$DEB_DIR"
-exit #XXX HANDBRAKE
+pre_actions() {
+    check_names
+    check_scripts
+    process_changed_docs
+    process_changed_scripts
 }
-
 
 check_dependencies() {
     if ! command -v enscript 1> /dev/null; then
@@ -193,9 +189,9 @@ check_names() {
     local -i check_rc=0
 
     info 'Controleer bestandsnamen (kz ckname)...'
-    "$SCRIPTS_DIR/kz ckname" "$DOCS_DIR"      \
-                            "$DEB_DIR"       \
-                            "$SCRIPTS_DIR"   || check_rc=$?
+    "$SCRIPTS_DIR"/kz ckname    "$DOCS_DIR"     \
+                                "$DEB_DIR"      \
+                                "$SCRIPTS_DIR"  || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
 Herstel alle meldingen hierboven en start daarna weer \
@@ -209,7 +205,7 @@ check_scripts() {
     local -i check_rc=0
 
     info 'Controleer scripts (kz ivp)...'
-    "$SCRIPTS_DIR/kz ivp" || check_rc=$?
+    "$SCRIPTS_DIR"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
 Herstel alle meldingen hierboven en start daarna weer \
@@ -219,7 +215,127 @@ ${PROGRAM_NAME/kz_/kz }."
 }
 
 
-create_package_files() {
+process_changed_docs() {
+    local txtfile=''
+    local basefile=''
+    local changes=false
+
+    info 'Gewijzigde documenten...'
+    cd "$DOCS_DIR" || exit $ERROR
+
+    # Vanuit gedit aangemaakt.
+    rm --force "$HOME"/Documenten/*.pdf
+
+    for txtfile in *.txt; do
+        if ! diff   "$txtfile"                          \
+                    "${TARGET_UPLOADS[DOCS]}/$txtfile"  &> /dev/null; then
+            basefile=$(basename "$txtfile")
+            enscript    --quiet             \
+                        --color             \
+                        --highlight=bash    \
+                        --output=-          \
+                        "$txtfile"          |
+            ps2pdf      -                   \
+                        "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" |& $LOGCMD
+            changes=true
+            info "    $txtfile"
+        fi
+    done
+
+    # Vanuit LibreOffice aangemaakt.
+    rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
+
+    for docfile in *.odt; do
+
+        # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
+        if ! diff   "$docfile"                          \
+                    "${TARGET_UPLOADS[DOCS]}/$docfile"  &> /dev/null; then
+            lowriter    --headless                          \
+                        --convert-to pdf                    \
+                        --outdir "${TARGET_UPLOADS[PDFS]}"  \
+                        "$docfile"                          |& $LOGCMD
+            changes=true
+            info "    $docfile"
+        fi
+    done
+    if ! $changes; then
+        info '    Geen documenten gewijzigd'
+    fi
+}
+
+
+process_changed_scripts() {
+    local changes=false
+    local highlight=''
+    local scriptfile=''
+
+    info 'Gewijzigde scripts...'
+
+    cd "$SCRIPTS_DIR" || exit $ERROR
+    for scriptfile in *; do
+
+        if [[ $scriptfile = LICENSE || $scriptfile = README.md ]]; then
+            continue
+        elif [[ -d "$scriptfile" ]]; then
+            continue
+        fi
+
+        # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
+        if ! diff   "$scriptfile"                               \
+                    "${TARGET_UPLOADS[SCRIPTS]}/$scriptfile"    &> /dev/null
+        then
+            if grep --quiet --regexp='^''.TH ' "$scriptfile"; then
+                # Man-pagina.
+                man     --troff "$SCRIPTS_DIR/$scriptfile"           |
+                ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
+            else
+                # Scripts inclusief *.1, *.completion, *.desktop, en *.policy.
+                if grep --quiet                         \
+                        --line-regexp                   \
+                        --regexp='#!''/usr/bin/python3' \
+                        "$scriptfile"; then
+                        highlight=python
+                elif [[ $scriptfile = *.py ]]; then
+                        highlight=python
+                elif [[ $scriptfile = *.policy ]]; then
+                        highlight=html
+                else
+                        highlight=bash
+                fi
+                enscript    --quiet                                     \
+                            --color                                     \
+                            --highlight=$highlight                      \
+                            --title="$scriptfile"                       \
+                            --output=-                                  \
+                            "$SCRIPTS_DIR/$scriptfile"                  |
+                ps2pdf      -                                           \
+                            "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf"   \
+                            |& $LOGCMD
+            fi
+            changes=true
+            info "    $scriptfile"
+        fi
+    done
+    if ! $changes; then
+        info '    Geen scripts gewijzigd'
+    fi
+}
+
+
+create_package() {
+    rsync --archive --delete --exclude='README.md' "$DEB_DIR"/ $DEB_TEMP_DIR
+    process_package_files
+    create_wallpapapers_configuration_file
+    info 'Maak scriptspakket...'
+    fakeroot    dpkg-deb                \
+                --build                 \
+                "$DEB_TEMP_DIR"         \
+                "$TARGET_DEB/$DEB_NAME" |& $LOGCMD
+    rm --force --recursive "$DEB_TEMP_DIR"
+}
+
+
+process_package_files() {
     local basename=''
     local file=''
     local newfile=''
@@ -228,35 +344,40 @@ create_package_files() {
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_DIR"/*
     chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
 
-    rsync --archive --delete --exclude='README.md' "$DEB_SKEL_DIR"/ $DEB_DIR
-
+    # DOCS
     # De exclude en delete-excluded i.v.m. de lokale git repository.
-    rsync   --archive                   \
-            --delete                    \
-            --exclude='LICENSE'         \
-            --exclude='README.md'       \
-            --exclude='.git*'           \
-            --delete-excluded           \
-            "$DOCS_DIR"/                 \
+    rsync   --archive               \
+            --delete                \
+            --exclude='LICENSE'     \
+            --exclude='README.md'   \
+            --exclude='.git*'       \
+            --delete-excluded       \
+            "$DOCS_DIR"/            \
             "${SOURCE_DEB[DOC]}" |& $LOGCMD
 
+    # PDFS
+    rsync   --archive                   \
+            "${TARGET_UPLOADS[PDFS]}"/  \
+            "${SOURCE_DEB[DOC]}" |& $LOGCMD
+
+    # SCRIPTS
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
     # De exclude en delete-excluded i.v.m. de lokale git repository.
-    rsync   --archive                   \
-            --delete                    \
-            --exclude='LICENSE'         \
-            --exclude='README.md'       \
-            --exclude='.git*'           \
-            --delete-excluded           \
-            "$SCRIPTS_DIR"/              \
-            "${SOURCE_DEB[BIN]}" |& $LOGCMD
+    rsync   --archive               \
+            --delete                \
+            --exclude='LICENSE'     \
+            --exclude='README.md'   \
+            --exclude='.git*'       \
+            --delete-excluded       \
+            "$SCRIPTS_DIR"/         \
+            "${SOURCE_DEB[BIN]}"    |& $LOGCMD
 
     # Man-pagina's (.1)
-    rsync   --archive                       \
-            --delete                        \
-            --remove-source-files           \
-            "${SOURCE_DEB[BIN]}"/*.1 \
-            "${SOURCE_DEB[MAN]}"     |& $LOGCMD
+    rsync   --archive                   \
+            --delete                    \
+            --remove-source-files       \
+            "${SOURCE_DEB[BIN]}"/*.1    \
+            "${SOURCE_DEB[MAN]}"        |& $LOGCMD
     gzip --best --force "${SOURCE_DEB[MAN]}"/*.1 |& $LOGCMD
 
     # Tab-completion-scripts (.completion)
@@ -292,9 +413,11 @@ create_wallpapapers_configuration_file() {
 
     cd "${SOURCE_DEB[BACKGROUNDS]}" || exit $ERROR
     for wallpaper in *; do
-        # Verwijder DEB_DIR uit SOURCE_DEB[BACKGROUNDS].
+        # Verwijder DEB_TEMP_DIR uit SOURCE_DEB[BACKGROUNDS].  Voorbeeld:
+        # /tmp/kz/usr/share/backgrounds/kz_gnome.png ->
+        # /usr/share/backgrounds/kz_gnome.png
         filename=${SOURCE_DEB[BACKGROUNDS]}/$wallpaper
-        filename=${filename/$DEB_DIR/}
+        filename=${filename/$DEB_TEMP_DIR/}
         printf '%s\n' "    <wallpaper>
         <name>${wallpaper%.*}</name>
         <filename>$filename</filename>
@@ -321,8 +444,6 @@ upload_website() {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz_$ftp_host
 
-    process_checklists
-    process_scripts
     synchronize_website
     info 'Upload website...'
     if ! [[ -f $ftp_login ]]; then
@@ -341,114 +462,6 @@ upload_website() {
         exit $WARNING
     fi
     sleep 5
-}
-
-
-process_checklists() {
-    local txtfile=''
-    local basefile=''
-    local changes=false
-
-    info 'Verwerk documenten...'
-
-    # Vanuit gedit.
-    rm --force "$HOME"/Documenten/*.pdf
-
-    cd "$DOCS_DIR" || exit $ERROR
-    for txtfile in *.txt; do
-        if ! diff   "$txtfile"                          \
-                    "${TARGET_UPLOADS[DOCS]}/$txtfile"  &> /dev/null; then
-            basefile=$(basename "$txtfile")
-            enscript    --quiet             \
-                        --color             \
-                        --highlight=bash    \
-                        --output=-          \
-                        "$txtfile"          |
-            ps2pdf      -                   \
-                        "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" |& $LOGCMD
-            changes=true
-            info "    $txtfile"
-        fi
-    done
-
-    # Vanuit LibreOffice.
-    rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
-
-    cd "$DOCS_DIR" || exit $ERROR
-    for docfile in *.odt; do
-
-        # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
-        if ! diff   "$docfile"                          \
-                    "${TARGET_UPLOADS[DOCS]}/$docfile"  &> /dev/null; then
-            lowriter    --headless                          \
-                        --convert-to pdf                    \
-                        --outdir "${TARGET_UPLOADS[PDFS]}"  \
-                        "$docfile"                          |& $LOGCMD
-            changes=true
-            info "    $docfile"
-        fi
-    done
-    if ! $changes; then
-        info '    Geen documenten gewijzigd'
-    fi
-}
-
-
-process_scripts() {
-    local changes=false
-    local highlight=''
-    local scriptfile=''
-
-    info 'Verwerk scripts...'
-
-    cd "$SCRIPTS_DIR" || exit $ERROR
-    for scriptfile in *; do
-
-        if [[ $scriptfile = LICENSE || $scriptfile = README.md ]]; then
-            continue
-        elif [[ -d "$scriptfile" ]]; then
-            continue
-        fi
-
-        # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
-        if ! diff   "$scriptfile"                               \
-                    "${TARGET_UPLOADS[SCRIPTS]}/$scriptfile"    &> /dev/null
-        then
-            if grep --quiet --regexp='^''.TH ' "$scriptfile"; then
-                # Man-pagina.
-                man     --troff "$SCRIPTS_DIR/$scriptfile"           |
-                ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
-            else
-                # Script inclusief *.1, *.completion, *.desktop, en *.policy.
-                if grep --quiet                         \
-                        --line-regexp                   \
-                        --regexp='#!''/usr/bin/python3' \
-                        "$scriptfile"; then
-                        highlight=python
-                elif [[ $scriptfile = *.py ]]; then
-                        highlight=python
-                elif [[ $scriptfile = *.policy ]]; then
-                        highlight=html
-                else
-                        highlight=bash
-                fi
-                enscript    --quiet                                     \
-                            --color                                     \
-                            --highlight=$highlight                      \
-                            --title="$scriptfile"                       \
-                            --output=-                                  \
-                            "$SCRIPTS_DIR/$scriptfile"                   |
-                ps2pdf      -                                           \
-                            "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf"   \
-                            |& $LOGCMD
-            fi
-            changes=true
-            info "    $scriptfile"
-        fi
-    done
-    if ! $changes; then
-        info '    Geen scripts gewijzigd'
-    fi
 }
 
 
