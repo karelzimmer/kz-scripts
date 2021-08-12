@@ -363,7 +363,7 @@ process_kz_scripts() {
     chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
-    # De exclude en delete-excluded i.v.m. de lokale git repository en Python.
+    # De exclude en delete-excluded i.v.m. de lokale git repository en pycache.
     rsync   --archive               \
             --delete                \
             --exclude='__pycache__' \
