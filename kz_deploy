@@ -327,7 +327,7 @@ create_package_kz() {
     rsync --archive --delete --exclude='README.md' "$DEB_DIR"/ $DEB_TEMP_DIR
     process_kz_docs
     process_kz_scripts
-    process_wallpapapers
+    process_kz_deb_backgrounds
     fakeroot    dpkg-deb                \
                 --build                 \
                 "$DEB_TEMP_DIR"         \
@@ -363,9 +363,10 @@ process_kz_scripts() {
     chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
-    # De exclude en delete-excluded i.v.m. de lokale git repository.
+    # De exclude en delete-excluded i.v.m. de lokale git repository en Python.
     rsync   --archive               \
             --delete                \
+            --exclude='__pycache__' \
             --exclude='LICENSE'     \
             --exclude='README.md'   \
             --exclude='.git*'       \
@@ -402,7 +403,7 @@ process_kz_scripts() {
 }
 
 
-process_wallpapapers() {
+process_kz_deb_backgrounds() {
     local wallpaper=''
     local wallpapers_config_file=kz_wallpapers.xml
 
