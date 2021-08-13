@@ -57,7 +57,7 @@ init_script() {
         echo "Om bestanden te herstellen voer uit:"
         echo "    ${BLUE}git status${NORMAL}"
         echo "    ${BLUE}git restore <file>...${NORMAL}"
-        exit $ERROR
+        exit $SUCCESS
     fi
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
     LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
@@ -214,11 +214,11 @@ check_input() {
             TEXT="${PROGRAM_NAME/kz_/kz }: geen opties of argumenten opgeven
 
 Voor de nieuwste versie van $PROGRAM_NAME én het pakket kz,
-gebruik de opdracht: ${BLUE}wget karelzimmer.nl/s${NORMAL}
-                     ${BLUE}bash s${NORMAL}
-                 of: ${BLUE}wget karelzimmer.nl/s; bash s${NORMAL}
-                 of: ${BLUE}wget -O- karelzimmer.nl/s | bash${NORMAL}
-                 of: ${BLUE}curl -L karelzimmer.nl/s | bash${NORMAL}
+gebruik de opdracht: ${BLUE}wget karelzimmer.nl/kz${NORMAL}
+                     ${BLUE}bash kz${NORMAL}
+                 of: ${BLUE}wget karelzimmer.nl/kz; bash kz${NORMAL}
+                 of: ${BLUE}wget -O- karelzimmer.nl/kz | bash${NORMAL}
+                 of: ${BLUE}curl -L karelzimmer.nl/kz | bash${NORMAL}
                  of: ${BLUE}${PROGRAM_NAME/kz_/kz }${NORMAL}"
             printf "%b\n" "$TEXT" >&2
             exit $SUCCESS
