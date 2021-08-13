@@ -34,12 +34,11 @@ readonly    DOCS_DIR=$HOME/kz_docs
 readonly    SCRIPTS_DIR=$HOME/kz_scripts
 readonly    SITE_DIR=$HOME/uploads/karelzimmer.nl/httpdocs
 
-# SOURCE_DEB wordt gevuld met DEB_DIR.
-# [BIN] wordt gevuld met SCRIPTS_DIR.
-# [DOC] wordt gevuld met DOCS_DIR.
-# [BACKGROUND_PROP] wordt door dit script gegenereerd.
-# Andere mappen en bestanden (zoals pixmaps en control) staan al in SOURCE_DEB.
 readonly -A SOURCE_DEB=(
+               [DOCS]=$DOCS_DIR
+            [SCRIPTS]=$SCRIPTS_DIR
+    )
+readonly -A TARGET_DEB=(
        [APPLICATIONS]=$DEB_TEMP_DIR/usr/share/applications
         [BACKGROUNDS]=$DEB_TEMP_DIR/usr/share/backgrounds
     [BACKGROUND_PROP]=$DEB_TEMP_DIR/usr/share/gnome-background-properties
@@ -49,13 +48,13 @@ readonly -A SOURCE_DEB=(
            [POLICY_1]=$DEB_TEMP_DIR/usr/share/polkit-1/actions
            [TABCOMPL]=$DEB_TEMP_DIR/usr/share/bash-completion/completions
     )
-readonly    TARGET_DEB=$SITE_DIR/apps/kz
 
 readonly -A SOURCE_UPLOADS=(
        [DOCS]=$DOCS_DIR
     [SCRIPTS]=$SCRIPTS_DIR
     )
 readonly -A TARGET_UPLOADS=(
+        [DEB]=$SITE_DIR/apps/kz
        [DOCS]=$SITE_DIR/data/linux/documents
        [PDFS]=$SITE_DIR/data/linux/pdfs
     [SCRIPTS]=$SITE_DIR/data/linux/scripts
@@ -148,18 +147,21 @@ check_input() {
 process_input() {
     pre_actions
     create_package_kz
-    synchronize_website
 exit #XXX HANDBRAKE
     upload_website
-    install_package
+    install_package_kz
 }
 
 
 pre_actions() {
     check_names
     check_scripts
-    process_changed_kz_docs
-    process_changed_kz_scripts
+    rsync --archive --delete --exclude='README.md' "$DEB_DIR"/ $DEB_TEMP_DIR
+    sync_pdf_kz_docs
+    sync_all_kz_docs
+    sync_pdf_kz_scripts
+    sync_all_kz_scripts
+    sync_deb_kz_backgrounds
 }
 
 check_dependencies() {
@@ -216,7 +218,7 @@ ${PROGRAM_NAME/kz_/kz }."
 }
 
 
-process_changed_kz_docs() {
+sync_pdf_kz_docs() {
     local txtfile=''
     local basefile=''
     local changes=false
@@ -265,7 +267,33 @@ process_changed_kz_docs() {
 }
 
 
-process_changed_kz_scripts() {
+sync_all_kz_docs() {
+    # De exclude en delete-excluded i.v.m. de lokale git repository.
+    rsync   --archive               \
+            --delete                \
+            --exclude='LICENSE'     \
+            --exclude='README.md'   \
+            --exclude='.git*'       \
+            --delete-excluded       \
+            "${SOURCE_DEB[DOC]}"/   \
+            "${TARGET_DEB[DOC]}"    |& $LOGCMD
+
+    rsync   --archive                   \
+            "${TARGET_UPLOADS[PDFS]}"/  \
+            "${TARGET_DEB[DOC]}"        |& $LOGCMD
+
+    rsync   --archive                       \
+            --delete                        \
+            --exclude='LICENSE'             \
+            --exclude='README.md'           \
+            --exclude='.git*'               \
+            --delete-excluded               \
+            "${SOURCE_UPLOADS[DOCS]}"/      \
+            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
+}
+
+
+sync_pdf_kz_scripts() {
     local changes=false
     local highlight=''
     local scriptfile=''
@@ -323,38 +351,7 @@ process_changed_kz_scripts() {
 }
 
 
-create_package_kz() {
-    info 'Maak scriptspakket...'
-    rsync --archive --delete --exclude='README.md' "$DEB_DIR"/ $DEB_TEMP_DIR
-    process_kz_docs
-    process_kz_scripts
-    process_kz_deb_backgrounds
-    fakeroot    dpkg-deb                \
-                --build                 \
-                "$DEB_TEMP_DIR"         \
-                "$TARGET_DEB/$DEB_NAME" |& $LOGCMD
-    rm --force --recursive "$DEB_TEMP_DIR"
-}
-
-
-process_kz_docs() {
-    # De exclude en delete-excluded i.v.m. de lokale git repository.
-    rsync   --archive               \
-            --delete                \
-            --exclude='LICENSE'     \
-            --exclude='README.md'   \
-            --exclude='.git*'       \
-            --delete-excluded       \
-            "$DOCS_DIR"/            \
-            "${SOURCE_DEB[DOC]}"    |& $LOGCMD
-
-    rsync   --archive                   \
-            "${TARGET_UPLOADS[PDFS]}"/  \
-            "${SOURCE_DEB[DOC]}"        |& $LOGCMD
-}
-
-
-process_kz_scripts() {
+sync_all_kz_scripts() {
     local basename=''
     local file=''
     local newfile=''
@@ -372,80 +369,36 @@ process_kz_scripts() {
             --exclude='README.md'   \
             --exclude='.git*'       \
             --delete-excluded       \
-            "$SCRIPTS_DIR"/         \
-            "${SOURCE_DEB[BIN]}"    |& $LOGCMD
+            "${SOURCE_DEB[BIN]}"/   \
+            "${TARGET_DEB[BIN]}"    |& $LOGCMD
 
     # Man-pagina's (.1)
     rsync   --archive                   \
             --delete                    \
             --remove-source-files       \
-            "${SOURCE_DEB[BIN]}"/*.1    \
-            "${SOURCE_DEB[MAN]}"        |& $LOGCMD
-    gzip --best --force "${SOURCE_DEB[MAN]}"/*.1 |& $LOGCMD
+            "${TARGET_DEB[BIN]}"/*.1    \
+            "${TARGET_DEB[MAN]}"        |& $LOGCMD
+    gzip --best --force "${TARGET_DEB[MAN]}"/*.1 |& $LOGCMD
 
     # Tab-completion-scripts (.completion)
-    for file in "${SOURCE_DEB[BIN]}"/*.completion; do
+    for file in "${TARGET_DEB[BIN]}"/*.completion; do
         basename=$(basename "$file" .completion)
-        mv "$file" "${SOURCE_DEB[TABCOMPL]}/$basename" |& $LOGCMD
+        mv "$file" "${TARGET_DEB[TABCOMPL]}/$basename" |& $LOGCMD
     done
 
     # Bureaublad-configuratiebestanden (.desktop)
-    for file in "${SOURCE_DEB[BIN]}"/*.desktop; do
+    for file in "${TARGET_DEB[BIN]}"/*.desktop; do
         basename=$(basename "$file")
-        mv "$file" "${SOURCE_DEB[APPLICATIONS]}/$basename" |& $LOGCMD
+        mv "$file" "${TARGET_DEB[APPLICATIONS]}/$basename" |& $LOGCMD
     done
 
     # PolicyKit actiedefinitiebestanden (.policy)
-    for file in "${SOURCE_DEB[BIN]}"/*.policy; do
+    for file in "${TARGET_DEB[BIN]}"/*.policy; do
         basename=$(basename "$file")
-        newfile="${SOURCE_DEB[POLICY_1]}/$prefix$basename"
+        newfile="${TARGET_DEB[POLICY_1]}/$prefix$basename"
         mv "$file" "$newfile" |& $LOGCMD
     done
-}
 
-
-process_kz_deb_backgrounds() {
-    local wallpaper=''
-    local wallpapers_config_file=kz_wallpapers.xml
-
-    {
-    printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
-    printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
-    printf '%s\n' '<wallpapers>'
-    } > "${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
-
-    cd "${SOURCE_DEB[BACKGROUNDS]}" || exit $ERROR
-    for wallpaper in *; do
-        # Verwijder DEB_TEMP_DIR uit SOURCE_DEB[BACKGROUNDS].  Voorbeeld:
-        # /tmp/kz/usr/share/backgrounds/kz_gnome.png ->
-        # /usr/share/backgrounds/kz_gnome.png
-        filename=${SOURCE_DEB[BACKGROUNDS]}/$wallpaper
-        filename=${filename/$DEB_TEMP_DIR/}
-        printf '%s\n' "    <wallpaper>
-        <name>${wallpaper%.*}</name>
-        <filename>$filename</filename>
-        <options>zoom</options>
-        <pcolor>#000000</pcolor>
-        <scolor>#000000</scolor>
-        <shade_type>solid</shade_type>
-    </wallpaper>"           \
-            >> "${SOURCE_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
-    done
-    printf  '%s\n' \
-            '</wallpapers>' >> "${SOURCE_DEB[BACKGROUND_PROP]}/\
-$wallpapers_config_file"
-}
-
-
-synchronize_website() {
-    rsync   --archive                       \
-            --delete                        \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            --delete-excluded               \
-            "${SOURCE_UPLOADS[DOCS]}"/      \
-            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
     rsync   --archive                       \
             --delete                        \
             --exclude='__pycache__'         \
@@ -455,6 +408,49 @@ synchronize_website() {
             --delete-excluded               \
             "${SOURCE_UPLOADS[SCRIPTS]}"/   \
             "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
+}
+
+
+sync_deb_kz_backgrounds() {
+    local wallpaper=''
+    local wallpapers_config_file=kz_wallpapers.xml
+
+    {
+    printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
+    printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
+    printf '%s\n' '<wallpapers>'
+    } > "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+
+    cd "${TARGET_DEB[BACKGROUNDS]}" || exit $ERROR
+    for wallpaper in *; do
+        # Verwijder DEB_TEMP_DIR uit TARGET_DEB[BACKGROUNDS].  Voorbeeld:
+        # /tmp/kz/usr/share/backgrounds/kz_gnome.png ->
+        # /usr/share/backgrounds/kz_gnome.png
+        filename=${TARGET_DEB[BACKGROUNDS]}/$wallpaper
+        filename=${filename/$DEB_TEMP_DIR/}
+        printf '%s\n' "    <wallpaper>
+        <name>${wallpaper%.*}</name>
+        <filename>$filename</filename>
+        <options>zoom</options>
+        <pcolor>#000000</pcolor>
+        <scolor>#000000</scolor>
+        <shade_type>solid</shade_type>
+    </wallpaper>"           \
+            >> "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+    done
+    printf  '%s\n' \
+            '</wallpapers>' >> "${TARGET_DEB[BACKGROUND_PROP]}/\
+$wallpapers_config_file"
+}
+
+
+create_package_kz() {
+    info 'Maak scriptspakket...'
+    fakeroot    dpkg-deb                            \
+                --build                             \
+                "$DEB_TEMP_DIR"                     \
+                "${TARGET_UPLOADS[DEB]}/$DEB_NAME"  |& $LOGCMD
+    rm --force --recursive "$DEB_TEMP_DIR"
 }
 
 
@@ -484,11 +480,11 @@ upload_website() {
         warning 'Controleer de log...!'
         exit $WARNING
     fi
-    sleep 5
+    sleep 5 #XXX NODIG?
 }
 
 
-install_package() {
+install_package_kz() {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
