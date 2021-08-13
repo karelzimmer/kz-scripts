@@ -32,6 +32,7 @@ Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
 Opdracht uitvoeren.
 
 Opties:
+  -l --list     toon beschikbare OPDRACHTen
   -h --help     deze hulptekst tonen
   -u --usage    een korte gebruikssamenvatting tonen
   -v --version  de versie tonen
@@ -68,12 +69,18 @@ check_input() {
         show_commands
         exit $WARNING
     fi
-    if [[ $1 == *-u* ]]; then
-        process_option_usage
-        exit $SUCCESS
-    fi
     if [[ $1 == *-h* ]]; then
         process_option_help
+        exit $SUCCESS
+    fi
+    if [[ $1 == *-l* ]]; then
+        printf "%s\n" "Gebruik: $PROGRAM_NAME OPDRACHT [ARG]"
+
+        show_commands
+        exit $SUCCESS
+    fi
+    if [[ $1 == *-u* ]]; then
+        process_option_usage
         exit $SUCCESS
     fi
     if [[ $1 == *-v* ]]; then

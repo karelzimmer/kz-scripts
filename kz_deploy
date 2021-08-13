@@ -35,10 +35,12 @@ readonly    SCRIPTS_DIR=$HOME/kz_scripts
 readonly    SITE_DIR=$HOME/uploads/karelzimmer.nl/httpdocs
 
 readonly -A SOURCE_DEB=(
+                [DEB]=$DEB_DIR
                [DOCS]=$DOCS_DIR
             [SCRIPTS]=$SCRIPTS_DIR
     )
 readonly -A TARGET_DEB=(
+                [DEB]=$DEB_TEMP_DIR
        [APPLICATIONS]=$DEB_TEMP_DIR/usr/share/applications
         [BACKGROUNDS]=$DEB_TEMP_DIR/usr/share/backgrounds
     [BACKGROUND_PROP]=$DEB_TEMP_DIR/usr/share/gnome-background-properties
@@ -147,7 +149,6 @@ check_input() {
 process_input() {
     pre_actions
     create_package_kz
-exit #XXX HANDBRAKE
     upload_website
     install_package_kz
 }
@@ -156,7 +157,11 @@ exit #XXX HANDBRAKE
 pre_actions() {
     check_names
     check_scripts
-    rsync --archive --delete --exclude='README.md' "$DEB_DIR"/ $DEB_TEMP_DIR
+    rsync   --archive               \
+            --delete                \
+            --exclude='README.md'   \
+            "${SOURCE_DEB[DEB]}"/   \
+            "${TARGET_DEB[DEB]}"
     sync_pdf_kz_docs
     sync_all_kz_docs
     sync_pdf_kz_scripts
@@ -192,8 +197,8 @@ check_names() {
     local -i check_rc=0
 
     info 'Controleer bestandsnamen (kz ckname)...'
-    "$SCRIPTS_DIR"/kz ckname    "$DOCS_DIR"     \
-                                "$DEB_DIR"      \
+    "$SCRIPTS_DIR"/kz ckname    "$DEB_DIR"      \
+                                "$DOCS_DIR"     \
                                 "$SCRIPTS_DIR"  || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
@@ -224,7 +229,7 @@ sync_pdf_kz_docs() {
     local changes=false
 
     info 'Gewijzigde documenten...'
-    cd "$DOCS_DIR" || exit $ERROR
+    cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
 
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
@@ -275,7 +280,7 @@ sync_all_kz_docs() {
             --exclude='README.md'   \
             --exclude='.git*'       \
             --delete-excluded       \
-            "${SOURCE_DEB[DOC]}"/   \
+            "${SOURCE_DEB[DOCS]}"/  \
             "${TARGET_DEB[DOC]}"    |& $LOGCMD
 
     rsync   --archive                   \
@@ -300,7 +305,7 @@ sync_pdf_kz_scripts() {
 
     info 'Gewijzigde scripts...'
 
-    cd "$SCRIPTS_DIR" || exit $ERROR
+    cd "${SOURCE_UPLOADS[SCRIPTS]}" || exit $ERROR
     for scriptfile in *; do
 
         if [[ $scriptfile = LICENSE || $scriptfile = README.md ]]; then
@@ -315,7 +320,8 @@ sync_pdf_kz_scripts() {
         then
             if grep --quiet --regexp='^''.TH ' "$scriptfile"; then
                 # Man-pagina.
-                man     --troff "$SCRIPTS_DIR/$scriptfile"           |
+                man     --troff                                     \
+                        "${SOURCE_UPLOADS[SCRIPTS]}/$scriptfile"    |
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
             else
                 # Script inclusief *.1, *.completion, *.desktop, en *.policy.
@@ -336,7 +342,7 @@ sync_pdf_kz_scripts() {
                             --highlight=$highlight                      \
                             --title="$scriptfile"                       \
                             --output=-                                  \
-                            "$SCRIPTS_DIR/$scriptfile"                  |
+                            "$scriptfile"                               |
                 ps2pdf      -                                           \
                             "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf"   \
                             |& $LOGCMD
@@ -362,15 +368,15 @@ sync_all_kz_scripts() {
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
     # De exclude en delete-excluded i.v.m. de lokale git repository en pycache.
-    rsync   --archive               \
-            --delete                \
-            --exclude='__pycache__' \
-            --exclude='LICENSE'     \
-            --exclude='README.md'   \
-            --exclude='.git*'       \
-            --delete-excluded       \
-            "${SOURCE_DEB[BIN]}"/   \
-            "${TARGET_DEB[BIN]}"    |& $LOGCMD
+    rsync   --archive                   \
+            --delete                    \
+            --exclude='__pycache__'     \
+            --exclude='LICENSE'         \
+            --exclude='README.md'       \
+            --exclude='.git*'           \
+            --delete-excluded           \
+            "${SOURCE_DEB[SCRIPTS]}"/   \
+            "${TARGET_DEB[BIN]}"        |& $LOGCMD
 
     # Man-pagina's (.1)
     rsync   --archive                   \
