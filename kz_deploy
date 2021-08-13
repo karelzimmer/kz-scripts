@@ -489,7 +489,6 @@ upload_website() {
         warning 'Controleer de log...!'
         exit $WARNING
     fi
-    sleep 5 #XXX NODIG?
 }
 
 
