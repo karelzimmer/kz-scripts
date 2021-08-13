@@ -98,14 +98,16 @@ check_input() {
 
 show_commands() {
         printf "\n%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
-        find    "$PROGRAM_PATH" \
-                -maxdepth 1     \
-                -type f         \
-                -executable     \
-                -readable       \
-                -not -name '*~' \
-                -not -name 'kz' \
-                -printf '%f\n'  | sort | sed 's/kz_//'
+        find    "$PROGRAM_PATH"/kz_*    \
+                -maxdepth 1             \
+                -type f                 \
+                -executable             \
+                -readable               \
+                -not -name '*~'         \
+                -not -name 'kz'         \
+                -printf '%f\n'          |
+        sort                            |
+        sed     's/kz_//'
 }
 
 
