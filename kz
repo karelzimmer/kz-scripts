@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 01.00.01
+# DateOfRelease: 2021-08-13
 ###############################################################################
 
 ###############################################################################
@@ -24,7 +24,7 @@ declare -ir WARNING=2
 
 readonly    USAGE="\
 Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
-         $PROGRAM_NAME [-h|--help] [-u|--usage] [-v|--version]"
+         $PROGRAM_NAME [-l|--list] [-h|--help] [-u|--usage] [-v|--version]"
 readonly    HELP="\
 Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
          $PROGRAM_NAME OPTIE
