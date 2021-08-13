@@ -498,7 +498,7 @@ upload_website() {
 install_package_kz() {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-    if ! wget -O- karelzimmer.nl/s 2> >($LOGCMD) | bash; then
+    if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
         warning 'Installeren pakket kz is niet uitgevoerd.'
         exit $WARNING
     fi
