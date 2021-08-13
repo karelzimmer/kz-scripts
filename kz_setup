@@ -362,16 +362,16 @@ local dfltfile_1=''
 local dfltfile_2=''
 
     dfltfile_1=${PROGRAM_NAME}_${id}_${release}_${EDITION}.sh
-    dfltfile_2=${PROGRAM_NAME}_${id}_${release}_${EDITION}-${HOSTNAME}.sh
+    dfltfile_2=${PROGRAM_NAME}_${id}_${release}_${EDITION}_${HOSTNAME}.sh
     if [[ -e $PROGRAM_PATH/$dfltfile_1 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_1
+        FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$dfltfile_1
         ((++file_num))
     else
         file_notfound=true
     fi
     # Niet verplicht aanwezig.
     if [[ -e $PROGRAM_PATH/$dfltfile_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_2
+        FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$dfltfile_2
         ((++file_num))
     fi
     if $file_notfound; then
