@@ -271,7 +271,7 @@ process_menu1_choice2() {
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
 Deze Checklist is te vinden op de site karelzimmer.nl onder Linux,
-en in /usr/share/doc/kzscripts/.
+en in /usr/share/doc/kz/.
 
 Komt globaal neer op:
 1. Download een beeldbestand (.iso) vanaf nl.releases.ubuntu.com.

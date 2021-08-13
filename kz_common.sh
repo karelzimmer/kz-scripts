@@ -211,7 +211,7 @@ init_script() {
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig tot mijn'
-        log '(++) X-sessie voor het kunnen gebruiken van zenity in kzscripts'
+        log '(++) X-sessie voor het kunnen gebruiken van zenity in kz_scripts'
         log '(++) met RUN_AS_SUPERUSER=true:'
         log '(++) xhost +si:localuser:root'
         xhost +si:localuser:root |& $LOGCMD

@@ -74,7 +74,7 @@ init_script() {
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig tot mijn'
-        log '(++) X-sessie voor het kunnen gebruiken van zenity in kzscripts'
+        log '(++) X-sessie voor het kunnen gebruiken van zenity in kz_scripts'
         log '(++) met RUN_AS_SUPERUSER=true:'
         log '(++) xhost +si:localuser:root'
         xhost +si:localuser:root |& $LOGCMD
@@ -268,7 +268,7 @@ check_sudo() {
         while true; do
             TEXT='
 Authenticatie is vereist voor het
-installeren van pakket kzscripts.
+installeren van pakket kz.
 
 Voer uw wachtwoord in:'
             # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
@@ -521,7 +521,7 @@ term_script() {
     TEXT='Volg nu de stappen zoals beschreven in Checklist installatie.
 
 Deze Checklist is te vinden op de site https://karelzimmer.nl
-onder Linux, en in /usr/share/doc/kzscripts/.'
+onder Linux, en in /usr/share/doc/kz/.'
     height=10
 
     if ! $TERMINAL; then
