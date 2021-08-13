@@ -87,7 +87,7 @@ check_input() {
         process_option_version
         exit $SUCCESS
     fi
-    if ! [[ -e "kz_$1" ]]; then
+    if ! [[ -e "$PROGRAM_PATH/kz_$1" ]]; then
         printf "$PROGRAM_NAME: %s\n" "OPDRACHT '$1' bestaat niet" >&2
         show_commands
         exit $ERROR
