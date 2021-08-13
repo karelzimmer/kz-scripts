@@ -194,7 +194,7 @@ start dan een nieuw Terminalvenster, en voer uit:${BLUE}
     sudo update-initramfs -u${NORMAL}"
         printf '%b\n' "$TEXT"
     fi
-    rm --force s s.{1..99} kz kz.{1..99}
+    rm --force s s.{1..99}
 }
 
 
