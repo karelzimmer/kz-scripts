@@ -112,6 +112,7 @@ kz_gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #1 gnome
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
+kz_gset --removeappfolder --folder='Kz_Scripts'
 kz_gset --addappfolder --folder='Kz Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
