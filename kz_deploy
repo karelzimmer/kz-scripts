@@ -269,6 +269,7 @@ sync_pdf_kz_docs() {
     if ! $changes; then
         info '    Geen documenten gewijzigd'
     fi
+    cd "$HOME" || exit $ERROR
 }
 
 
@@ -354,6 +355,7 @@ sync_pdf_kz_scripts() {
     if ! $changes; then
         info '    Geen scripts gewijzigd'
     fi
+    cd "$HOME" || exit $ERROR
 }
 
 
@@ -447,6 +449,7 @@ sync_deb_kz_backgrounds() {
     printf  '%s\n' \
             '</wallpapers>' >> "${TARGET_DEB[BACKGROUND_PROP]}/\
 $wallpapers_config_file"
+    cd "$HOME" || exit $ERROR
 }
 
 

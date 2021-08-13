@@ -371,7 +371,7 @@ process_input() {
 
 
 install_scriptspackage() {
-    local site_deb=https://karelzimmer.nl/apps/kzscripts/kz_365_all.deb
+    local site_deb=https://karelzimmer.nl/apps/kz/kz_365_all.deb
     local temp_deb=''
 
     # Bij Live-sessie de universe repo aanzetten.
