@@ -7,7 +7,7 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 28.00.01
+# ReleaseNumber: 28.00.02
 # DateOfRelease: 2021-08-13
 ###############################################################################
 
@@ -17,7 +17,7 @@
 ###############################################################################
 
 readonly    PROGRAM_NAME='kz_getdeb'
-#eadonly    PROGRAM_PATH=None
+readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 
 declare -ir SUCCESS=0
@@ -52,6 +52,13 @@ declare TEXT=''
 ###############################################################################
 
 init_script() {
+    if [[ $PROGRAM_PATH = */kz_scripts ]]; then
+        echo "${RED}Niet uivoeren in lokale Git-repo kz_scripts.${NORMAL}"
+        echo "Om bestanden te herstellen voer uit:"
+        echo "    ${BLUE}git status${NORMAL}"
+        echo "    ${BLUE}git restore <file>...${NORMAL}"
+        exit $ERROR
+    fi
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
     LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
 --identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
@@ -194,7 +201,7 @@ start dan een nieuw Terminalvenster, en voer uit:${BLUE}
     sudo update-initramfs -u${NORMAL}"
         printf '%b\n' "$TEXT"
     fi
-    rm --force s s.{1..99}
+    rm --force kz kz.{1..99}
 }
 
 
