@@ -194,10 +194,10 @@ start dan een nieuw Terminalvenster, en voer uit:${BLUE}
     sudo update-initramfs -u${NORMAL}"
         printf '%b\n' "$TEXT"
     fi
-    # Niet kz en kz.1 verwijderen ivm lokale Git-repo.
+    # Niet direct kz en kz.1 verwijderen i.v.m. lokale Git-repo.
     rm --force kz.{2..99}
     # Maar wel als in HOME, zoals voorgeschreven.
-    cd "$HOME" || exit $ERROR        
+    cd "$HOME" || exit $ERROR
     rm --force kz kz.1
 }
 
