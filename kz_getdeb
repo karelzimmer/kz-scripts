@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 28.00.02
-# DateOfRelease: 2021-08-13
+# ReleaseNumber: 28.00.03
+# DateOfRelease: 2021-08-14
 ###############################################################################
 
 
@@ -54,8 +54,10 @@ declare TEXT=''
 init_script() {
     if [[ $PROGRAM_PATH = */kz_scripts ]]; then
         echo "${RED}Niet uivoeren in lokale Git-repo kz_scripts.${NORMAL}"
-        echo "Om bestanden te herstellen voer uit:"
+        echo "Controleer bestanden door het uitvoeren van:"
         echo "    ${BLUE}git status${NORMAL}"
+        echo "    ${BLUE}rm <file>...${NORMAL}"
+        echo "    ${BLUE}git rm <file>...${NORMAL}"
         echo "    ${BLUE}git restore <file>...${NORMAL}"
         exit $SUCCESS
     fi
