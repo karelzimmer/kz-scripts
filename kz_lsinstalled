@@ -242,7 +242,7 @@ via een (soort van) (snel)menu."
     if gsettings get org.gnome.shell favorite-apps &> /dev/null; then
         favorites=$(gsettings get org.gnome.shell favorite-apps)
     else
-        TEXT="           Niet op GNOME (e.g. Ubuntu). Geen favorieten \
+        TEXT="Niet op GNOME (e.g. Ubuntu). Geen favorieten \
 veiliggesteld."
         printf '%s\n' "$TEXT" >> "$OUTPUTFILE_4"
         favorites=''
