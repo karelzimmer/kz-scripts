@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 19.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 19.01.00
+# DateOfRelease: 2021-08-14
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -33,8 +33,7 @@ readonly OUTPUTFILE_0=/usr/local/etc/${PROGRAM_NAME}_${HOSTNAME}_$ID
 readonly OUTPUTFILE_1=${OUTPUTFILE_0}_deb-bestanden
 readonly OUTPUTFILE_2=${OUTPUTFILE_0}_pakketbronnen
 readonly OUTPUTFILE_3=${OUTPUTFILE_0}_pakketten
-readonly OUTPUTFILE_4=${OUTPUTFILE_0}_favorieten
-readonly OUTPUTFILE_5=${OUTPUTFILE_0}_snaps
+readonly OUTPUTFILE_4=${OUTPUTFILE_0}_snaps
 readonly RUN_AS_SUPERUSER=true
 
 
@@ -86,14 +85,13 @@ check_input() {
 
 process_input() {
     local text0='Opdrachten worden verwerkt'
-    local text1="[1/5]  Bepaal welke deb-bestanden (Debian-pakketten) zijn \
+    local text1="[1/4]  Bepaal welke deb-bestanden (Debian-pakketten) zijn \
 geïnstalleerd"
-    local text2="[2/5]  Bepaal welke pakketbronnen (\"repositories\" of \
+    local text2="[2/4]  Bepaal welke pakketbronnen (\"repositories\" of \
 \"repo's\") zijn toegevoegd"
-    local text3="[3/5]  Bepaal welke pakketten door de gebruiker zijn \
+    local text3="[3/4]  Bepaal welke pakketten door de gebruiker zijn \
 geïnstalleerd"
-    local text4='[4/5]  Bepaal welke favorieten in gebruik zijn'
-    local text5='[5/5]  Bepaal welke snaps zijn geïnstalleerd'
+    local text4='[4/4]  Bepaal welke snaps zijn geïnstalleerd'
 
     TITLE='Applijst maken'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
@@ -110,8 +108,6 @@ geïnstalleerd"
         printf '%s\n' "#$text3"
         create_file_installed_by_user
         printf '%s\n' "#$text4"
-        create_file_favorites
-        printf '%s\n' "#$text5"
         create_file_snaps
         ) |&
         zenity  --progress              \
@@ -126,17 +122,17 @@ geïnstalleerd"
         create_file_installed_without_repo  #1
         create_file_added_repos             #2
         create_file_installed_by_user       #3
-        create_file_favorites               #4
-        create_file_snaps                   #5
+        create_file_snaps                   #4
     fi
 }
 
 
 create_file_installed_without_repo() {
-    local   -i  number_of_lines=0
     local       header="Dit zijn gedownloade deb-bestanden geïnstalleerd via \
 Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>'."
     local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='geïnstalleerde deb-bestanden'
 
     printf '%s\n' "$text1..."
 
@@ -156,18 +152,21 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>'."
 
     number_of_lines=$(wc --lines < "$OUTPUTFILE_1")
     number_of_lines=$((number_of_lines - 2))
-    footer="Dit bestand bevat $number_of_lines door de gebruiker \
-geïnstalleerde deb-bestanden.
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='geïnstalleerd deb-bestand'
+    fi
+    footer="Dit bestand bevat $number_of_lines door de gebruiker $plural.
 Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
     printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_1"
 }
 
 
 create_file_added_repos() {
-    local   -i  number_of_lines=0
     local       header="Deze pakketbronnen zijn meestal toegevoegd met de \
 opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>'."
     local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='pakketbronnen'
 
     printf '%s\n' "$text2..."
 
@@ -188,17 +187,21 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>'."
 
     number_of_lines=$(wc --lines < "$OUTPUTFILE_2")
     number_of_lines=$((number_of_lines - 2))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='pakketbron'
+    fi
     footer="Dit bestand bevat $number_of_lines door de gebruiker toegevoegde \
-pakketbronnen."
+$plural."
     printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_2"
 }
 
 
 create_file_installed_by_user() {
-    local   -i  number_of_lines=0
     local       header="Deze pakketten zijn meestal geïnstalleerd met \
 Software of met de opdracht 'sudo apt install <pakketnaam>'."
     local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text3..."
 
@@ -206,32 +209,28 @@ Software of met de opdracht 'sudo apt install <pakketnaam>'."
 
     printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_3"
 
-    # Tabel1 = Alle geïnstalleerde pakketten op dit moment
-    #           (dpkg-query --show --showformat='${Package}\n' | sort)
-    # Tabel2 = Alle *automatisch* geïnstalleerde pakketten op dit moment
-    #           (apt-mark showauto | sort)
-    # Tabel3 = Door gebruiker geïnstalleerd (Tabel1-Tabel2)
-    #           (comm -13 Tabel1 Tabel2)
-    (
-        comm    -23 \
-        <(dpkg-query --show --showformat='${Package}\n' | sort) \
-        <(apt-mark   showauto                           | sort) \
-    )   >> "$OUTPUTFILE_3"
+    aptitude    search                              \
+                '~i!~M!~E!~prequired!~pimportant'   |
+    awk         '{print $2}'                        >> "$OUTPUTFILE_3"
+
     number_of_lines=$(wc --lines < "$OUTPUTFILE_3")
     number_of_lines=$((number_of_lines - 2))
-    footer="Dit bestand bevat $number_of_lines door de gebruiker \
-geïnstalleerde pakketten.
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='geïnstalleerd pakket'
+    fi
+    footer="Dit bestand bevat $number_of_lines door de gebruiker $plural.
 Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
 --regexp='Description:'"
     printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_3"
 }
 
 
-create_file_favorites() {
-    local   -i  number_of_lines=0
-    local       header="Deze favorieten zijn de snelkoppelingen te bereiken \
-via een (soort van) (snel)menu."
+create_file_snaps() {
+    local       header="Deze snaps zijn geïnstalleerd met '[sudo] install \
+SNAP' of met Software."
     local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='snaps'
 
     printf '%s\n' "$text4..."
 
@@ -239,48 +238,17 @@ via een (soort van) (snel)menu."
 
     printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_4"
 
-    if gsettings get org.gnome.shell favorite-apps &> /dev/null; then
-        favorites=$(gsettings get org.gnome.shell favorite-apps)
-    else
-        TEXT="Niet op GNOME (e.g. Ubuntu). Geen favorieten \
-veiliggesteld."
-        printf '%s\n' "$TEXT" >> "$OUTPUTFILE_4"
-        favorites=''
-    fi
-    favorites=${favorites//,/}
-    favorites=${favorites//.desktop/}
-    favorites=${favorites//\[/}
-    favorites=${favorites//\]/}
-    for favorite in $favorites; do
-        printf '%s\n' "${favorite//"'"/}" >> "$OUTPUTFILE_4"
-    done
-    number_of_lines=$(wc --lines < "$OUTPUTFILE_4")
-    number_of_lines=$((number_of_lines - 2))
-    footer="Dit bestand bevat $number_of_lines favorieten."
-    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_4"
-}
-
-
-create_file_snaps() {
-    local   -i  number_of_lines=0
-    local       header="Deze snaps zijn geïnstalleerd met '[sudo] install \
-SNAP' of met Software."
-    local       footer=''
-
-    printf '%s\n' "$text5..."
-
-    touch "$OUTPUTFILE_5" |& $LOGCMD
-
-    printf '%b\n' "$header\n$DASHES" > "$OUTPUTFILE_5"
-
-    if ! snap list 2> /dev/null >> "$OUTPUTFILE_5"; then
+    if ! snap list 2> /dev/null >> "$OUTPUTFILE_4"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
-        printf '%s\n' "$TEXT" >> "$OUTPUTFILE_5"
+        printf '%s\n' "$TEXT" >> "$OUTPUTFILE_4"
     fi
-    number_of_lines=$(wc --lines < "$OUTPUTFILE_5")
+    number_of_lines=$(wc --lines < "$OUTPUTFILE_4")
     number_of_lines=$((number_of_lines - 3))
-    footer="Dit bestand bevat $number_of_lines snaps."
-    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_5"
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='snap'
+    fi
+    footer="Dit bestand bevat $number_of_lines $plural."
+    printf '%b\n' "$DASHES\n$footer" >> "$OUTPUTFILE_4"
 }
 
 
