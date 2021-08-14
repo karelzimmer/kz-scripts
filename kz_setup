@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 44.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 44.00.01
+# DateOfRelease: 2021-08-14
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -48,8 +48,8 @@ Argumenten:
   BESTAND       opgegeven instellingsbestanden verwerken"
 
 readonly EDITION_DEFAULT=desktop
-readonly CMDSFILE=$(mktemp -t "${PROGRAM_NAME}-XXXXXXXXXX.cmds")
-readonly TEXTFILE=$(mktemp -t "${PROGRAM_NAME}-XXXXXXXXXX.text")
+readonly CMDSFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
+readonly TEXTFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
 
 
 ###############################################################################
