@@ -177,7 +177,7 @@ $command, code: $rc ($rc_desc)"
             exit "$rc"
             ;;
         *)
-            printf "${YELLOW}%S${NORMAL}\n" "$PROGRAM_NAME is onderbroken." >&2
+            printf "${YELLOW}%s${NORMAL}\n" "$PROGRAM_NAME is onderbroken." >&2
             exit "$rc"
             ;;
     esac
