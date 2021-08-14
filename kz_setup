@@ -8,7 +8,7 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 44.00.01
+# ReleaseNumber: 44.00.02
 # DateOfRelease: 2021-08-14
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
@@ -154,7 +154,7 @@ check_input() {
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
-        if [[ "$(basename "$1")" = $PROGRAM_NAME-*.sh ]]; then
+        if [[ "$(basename "$1")" = ${PROGRAM_NAME}_*.sh ]]; then
             ARGUMENT_FILE=true
             FILE_ARGUMENT[$file_arg_num]=$1
             ((++file_arg_num))
