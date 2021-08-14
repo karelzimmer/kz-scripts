@@ -6,9 +6,15 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 04.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 04.01.00
+# DateOfRelease: 2021-08-14
 ###############################################################################
+
+#1
+#2 Clean-up instellen
+kz_gset --removeappfolder --folder='Kz_Scripts'
+gsettings reset org.gnome.shell favorite-apps
+
 
 #1 adguard
 #2 Adguard instellen

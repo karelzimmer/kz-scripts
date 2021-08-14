@@ -6,9 +6,15 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 04.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 04.01.00
+# DateOfRelease: 2021-08-14
 ###############################################################################
+
+#1
+#2 Clean-up instellen
+kz_gset --removeappfolder --folder='Kz_Scripts'
+gsettings reset org.gnome.shell favorite-apps
+
 
 #1 adguard
 #2 Adguard instellen
@@ -112,7 +118,6 @@ kz_gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #1 gnome
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-kz_gset --removeappfolder --folder='Kz_Scripts'
 kz_gset --addappfolder --folder='Kz Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true

@@ -6,9 +6,15 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 03.01.00
+# DateOfRelease: 2021-08-14
 # #############################################################################
+
+#1
+#2 Clean-up instellen
+kz_gset --removeappfolder --folder='Kz_Scripts'
+gsettings reset org.gnome.shell favorite-apps
+
 
 #1 adguard
 #2 Adguard instellen
@@ -145,6 +151,7 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'inter
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removeappfolder --folder='Kz Scripts'
+#4    gsettings reset org.gnome.desktop.app-folders folder-children
 #4    gsettings reset org.gnome.desktop.calendar show-weekdate
 #4    gsettings reset org.gnome.desktop.interface clock-show-date
 #4    gsettings reset org.gnome.desktop.interface show-battery-percentage
