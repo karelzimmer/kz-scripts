@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.00.01
-# DateOfRelease: 2021-08-13
+# ReleaseNumber: 01.01.00
+# DateOfRelease: 2021-08-15
 ###############################################################################
 
 ###############################################################################
@@ -74,8 +74,6 @@ check_input() {
         exit $SUCCESS
     fi
     if [[ $1 == *-l* ]]; then
-        printf "%s\n" "Gebruik: $PROGRAM_NAME OPDRACHT [ARG]"
-
         show_commands
         exit $SUCCESS
     fi
@@ -97,17 +95,18 @@ check_input() {
 
 
 show_commands() {
-        printf "\n%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
-        find    "$PROGRAM_PATH"/kz_*    \
-                -maxdepth 1             \
-                -type f                 \
-                -executable             \
-                -readable               \
-                -not -name '*~'         \
-                -not -name 'kz'         \
-                -printf '%f\n'          |
-        sort                            |
-        sed     's/kz_//'
+    printf "%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
+    find    "$PROGRAM_PATH"/kz_*    \
+            -maxdepth 1             \
+            -type f                 \
+            -executable             \
+            -readable               \
+            -not -name '*~'         \
+            -not -name 'kz'         \
+            -printf '%f\n'          |
+    sort                            |
+    sed     's/kz_//'
+    printf "\n%s\n"  "Typ '$PROGRAM_NAME --help' voor meer informatie."
 }
 
 
