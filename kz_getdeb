@@ -17,7 +17,7 @@
 ###############################################################################
 
 readonly    PROGRAM_NAME='kz_getdeb'
-readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+#eadonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 
 declare -ir SUCCESS=0
@@ -52,17 +52,6 @@ declare TEXT=''
 ###############################################################################
 
 init_script() {
-    if [[ $PROGRAM_PATH = */kz_scripts ]]; then
-        TEXT="$PROGRAM_NAME: ${RED}niet uivoeren in lokale Git-repo kz_scripts\
-${NORMAL}
-Controleer bestanden door het uitvoeren van:
-    ${BLUE}git status${NORMAL}
-    ${BLUE}rm <file>...${NORMAL}
-    ${BLUE}git rm <file>...${NORMAL}
-    ${BLUE}git restore <file>...${NORMAL}"
-        printf "%s\n" "$TEXT" >&2
-        exit $SUCCESS
-    fi
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
     LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
 --identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
@@ -205,7 +194,11 @@ start dan een nieuw Terminalvenster, en voer uit:${BLUE}
     sudo update-initramfs -u${NORMAL}"
         printf '%b\n' "$TEXT"
     fi
-    rm --force kz kz.{1..99}
+    # Niet kz en kz.1 verwijderen ivm lokale Git-repo.
+    rm --force kz.{2..99}
+    # Maar wel als in HOME, zoals voorgeschreven.
+    cd "$HOME" || exit $ERROR        
+    rm --force kz kz.1
 }
 
 
