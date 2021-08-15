@@ -600,9 +600,11 @@ execute_command() {
         'kz nas'|'kz restore')
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
+                # shellcheck disable=SC2086
                 pkexec "$PROGRAM_PATH"/$command --gui -- || cmd_rc=$?
                 log_rc cmd_rc?
             else
+                # shellcheck disable=SC2086
                 sudo "$PROGRAM_PATH"/$command -- || cmd_rc=$?
                 log_rc $cmd_rc
             fi
