@@ -51,13 +51,9 @@ Argumenten:
 readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
 readonly RELEASE=$(lsb_release --release --short)
-readonly CMDSFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")    # CMDS_FILE
-readonly TEXTFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")    # TEXT_FILE
-#XXX NODIG?:
-readonly OUTPUT_DIR=/usr/local/etc/${PROGRAM_NAME}_${HOSTNAME}_$ID  # LIST_DIR
-readonly OUTPUT_FILE=${OUTPUT_DIR}_applist                          # LIST_FILE
-readonly TEMP_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.list")   # TEMP_LIST
-#XXX NODIG?:
+readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
+readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
+readonly LIST_DIR="$HOME/$PROGRAM_NAME"
 
 
 ###############################################################################
@@ -233,13 +229,13 @@ process_input() {
 
     # We gaan opdrachten uitvoeren of simuleren.
     for file in "${FILE_TO_PROCESS[@]}"; do
-        cat "$file" >> "$CMDSFILE"
+        cat "$file" >> "$CMDS_FILE"
     done
 
     # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
     # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
     app_tot_num=$(
-        grep --word-regexp --regexp='^#2' --count "$CMDSFILE" || true
+        grep --word-regexp --regexp='^#2' --count "$CMDS_FILE" || true
         )
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
@@ -266,11 +262,13 @@ process_input() {
 
 process_option_list() {
     local text0='Opdrachten worden verwerkt'
-#   local text1='[1/4]  Gebruikersfotobestand vastleggen' # kz install --list 
+#   local text1='[1/4]  Gebruikersfotobestand vastleggen'   # kz install --list 
     local text1='[1/4]  Gebruikersfoto vastleggen'
     local text2='[2/4]  Bureaubladachtergrond vastleggen'
     local text3='[3/4]  Favorieten vastleggen'
     local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
+
+    mkdir --parents "$LIST_DIR"
 
     TITLE='Instellijst maken'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
@@ -304,9 +302,9 @@ process_option_list() {
         save_command_history    #4
     fi
 
-    rm "$TEMP_FILE"
+    rm "$TEMP_LIST"
     info "
-De instellijst is vastgelegde in $HOME/.${PROGRAM_NAME}_* bestanden.
+De instellijst is vastgelegde in $HOME/${PROGRAM_NAME}_* bestanden.
 Deze besatnden bevatten de eerder gebruikte gebruikersfoto,
 bureaubladachtergrond, favorieten, en opdrachtgeschiedenis.
 Deze lijst kan worden gebruikt tijdens het uitvoeren van de installatie."
@@ -316,21 +314,22 @@ Deze lijst kan worden gebruikt tijdens het uitvoeren van de installatie."
 save_user_photo() {             #1
     printf '%s\n' "$text1..."
     cp  /var/lib/AccountsService/icons/"$USER"  \
-        "$HOME"/.${PROGRAM_NAME}_gebruikersfoto |& $LOGCMD
+        "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto |& $LOGCMD
 }
 
 
 save_desktop_background() {     #2
     printf '%s\n' "$text2..."
-    gsettings get   org.gnome.desktop.background picture-uri         \
-                    > "$HOME"/.${PROGRAM_NAME}_bureaubladachtergrond |& $LOGCMD
+    gsettings get   org.gnome.desktop.background picture-uri                \
+                    > "$LIST_DIR/${PROGRAM_NAME}"_bureaubladachtergrond   \
+                    |& $LOGCMD
 }
 
 
 save_favorite_apps() {          #3
     printf '%s\n' "$text3..."
     gsettings get   org.gnome.shell favorite-apps           \
-                    > "$HOME"/.${PROGRAM_NAME}_favorieten   |& $LOGCMD
+                    > "$LIST_DIR/${PROGRAM_NAME}"_favorieten   |& $LOGCMD
 }
 
 
@@ -338,7 +337,7 @@ save_command_history() {        #4
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
-    history > "$HOME"/.${PROGRAM_NAME}_opdrachtgeschiedenis |& $LOGCMD
+    history > "$LIST_DIR/${PROGRAM_NAME}"_opdrachtgeschiedenis |& $LOGCMD
 }
 
 
@@ -379,10 +378,10 @@ process_argument_app() {
 process_argument_app_file() {
     local app_found=false
     local description_found=false
-    local cmdsfile=''
+    local cmds_file=''
     local record=''
 
-    cmdsfile=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
+    cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
     while read -r record; do
         case $record in
             '#1 '*)
@@ -408,22 +407,22 @@ process_argument_app_file() {
                     break
                 elif $app_found; then
                     TEXT="# $DASHES\n# Bron: $file\n# $DASHES\n\n\n$record"
-                    printf '%b\n' "$TEXT" >> "$cmdsfile"
+                    printf '%b\n' "$TEXT" >> "$cmds_file"
                     description_found=true
                 fi
                 ;;
             *)
                 # Overige regels.
                 if $app_found; then
-                    printf '%s\n' "$record" >> "$cmdsfile"
+                    printf '%s\n' "$record" >> "$cmds_file"
                 fi
                 ;;
         esac
     done < "$file"
-    if ! grep --quiet --line-regexp --regexp='^# EOF' "$cmdsfile"; then
-        printf '%s\n' '# EOF' >> "$cmdsfile"
+    if ! grep --quiet --line-regexp --regexp='^# EOF' "$cmds_file"; then
+        printf '%s\n' '# EOF' >> "$cmds_file"
     fi
-    FILE_TO_PROCESS[$file_num]=$cmdsfile
+    FILE_TO_PROCESS[$file_num]=$cmds_file
     ((++file_num))
 }
 
@@ -549,7 +548,7 @@ process_option_cat() {
             printf '%s\n' "${BLUE}# $file${NORMAL}"
             cat "$file"
             printf '\n'
-        }   >> "$CMDSFILE"
+        }   >> "$CMDS_FILE"
     done
     if $OPTION_GUI; then
         TITLE='Inhoud instellingsbestanden'
@@ -557,14 +556,14 @@ process_option_cat() {
                     --width         850                 \
                     --height        400                 \
                     --title         "$TITLE"            \
-                    --filename      "$CMDSFILE"         \
+                    --filename      "$CMDS_FILE"        \
                     --font          'Ubuntu Mono 12'    \
                     --ok-label      'Oké'               \
                     --cancel-label  'Annuleren'         2> >($LOGCMD); then
             true
         fi
     else
-        less "$LESS_OPTIONS" "$CMDSFILE"
+        less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
 }
 
@@ -607,7 +606,7 @@ process_file() {
                 ;;
         esac
         prev_recordtype=$recordtype
-    done < "$CMDSFILE"
+    done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
         printf '%b' "${CURSOR_VISABLE}"
@@ -638,7 +637,7 @@ process_setup_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#3' ]]; then
-        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
@@ -646,7 +645,7 @@ process_setup_instruction() {
                 "$app_seq_num"                              \
                 "$description"                              \
                 "$DASHES"                                   \
-                "${record:3}"                               >> "$TEXTFILE"
+                "${record:3}"                               >> "$TEXT_FILE"
     fi
 }
 
@@ -660,7 +659,7 @@ process_reset_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#4' ]]; then
-        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
@@ -668,7 +667,7 @@ process_reset_instruction() {
                 "$app_seq_num"                              \
                 "$description"                              \
                 "$DASHES"                                   \
-                "${record:3}"                               >> "$TEXTFILE"
+                "${record:3}"                               >> "$TEXT_FILE"
     fi
 }
 
@@ -689,13 +688,13 @@ process_command() {
             printf  '[%3d/%-3d] %s\n\n' \
                     "$app_seq_num"      \
                     "$app_tot_num"      \
-                    "$description"      >> "$TEXTFILE"
+                    "$description"      >> "$TEXT_FILE"
             write_description_line=false
         fi
         printf  '%9s [%2d] %s\n\n'          \
                 " "                         \
                 "$cmd_seq_num"              \
-                "${BLUE}$record${NORMAL}"   >> "$TEXTFILE"
+                "${BLUE}$record${NORMAL}"   >> "$TEXT_FILE"
     elif $EXECUTE_COMMANDS; then
         desc_printf=$description
         if $OPTION_GUI; then
@@ -763,55 +762,55 @@ term_script() {
                         --width         1000                \
                         --height        400                 \
                         --title         "$TITLE"            \
-                        --filename      "$TEXTFILE"         \
+                        --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
                         --cancel-label  'Annuleren'         2> >($LOGCMD); then
                 true
             fi
         else
-            less "$LESS_OPTIONS" "$TEXTFILE"
+            less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
-        printf '\n\n' >> "$TEXTFILE"
+        printf '\n\n' >> "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Instel-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
                         --title         "$TITLE"            \
-                        --filename      "$TEXTFILE"         \
+                        --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
                         --cancel-label  'Annuleren'         2> >($LOGCMD); then
                 true
             fi
         else
-            less "$LESS_OPTIONS" "$TEXTFILE"
+            less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && ! $INFO_FOUND; then
         info 'Geen instel-instructies.'
     elif $OPTION_RESET && $RESET_FOUND; then
-        printf '\n\n' >> "$TEXTFILE"
+        printf '\n\n' >> "$TEXT_FILE"
         sed --in-place                              \
             --expression='s/instellen/resetten/g'   \
-            "$TEXTFILE"
+            "$TEXT_FILE"
         # Woord 'resetten' is 1 letter korter dan 'instellen'.
-        sed --in-place --expression='s/^     ==/     =/g' "$TEXTFILE"
+        sed --in-place --expression='s/^     ==/     =/g' "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Reset-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
                         --title         "$TITLE"            \
-                        --filename      "$TEXTFILE"         \
+                        --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
                         --cancel-label  'Annuleren'         2> >($LOGCMD); then
                 true
             fi
         else
-            less "$LESS_OPTIONS" "$TEXTFILE"
+            less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_RESET && ! $RESET_FOUND; then
         info 'Geen reset-instructies.'

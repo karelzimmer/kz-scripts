@@ -52,11 +52,10 @@ readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
 readonly RELEASE=$(lsb_release --release --short)
 readonly RUN_AS_SUPERUSER=true
-readonly CMDSFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")    # CMDS_FILE
-readonly TEXTFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")    # TEXT_FILE
-readonly OUTPUT_DIR=/usr/local/etc/${PROGRAM_NAME}_${HOSTNAME}_$ID  # LIST_DIR
-readonly OUTPUT_FILE=${OUTPUT_DIR}_applist                          # LIST_FILE
-readonly TEMP_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.list")   # TEMP_LIST
+readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
+readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
+readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
+readonly TEMP_LIST=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.list")   # TEMP_LIST
 
 
 ###############################################################################
@@ -233,13 +232,13 @@ process_input() {
 
     # We gaan opdrachten uitvoeren of simuleren.
     for file in "${FILE_TO_PROCESS[@]}"; do
-        cat "$file" >> "$CMDSFILE"
+        cat "$file" >> "$CMDS_FILE"
     done
 
     # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
     # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
     app_tot_num=$(
-        grep --word-regexp --regexp='^#2' --count "$CMDSFILE" || true
+        grep --word-regexp --regexp='^#2' --count "$CMDS_FILE" || true
         )
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
@@ -310,9 +309,9 @@ geïnstalleerd"
         save_user_photo_file                #5
     fi
 
-    rm "$TEMP_FILE"
+    rm "$TEMP_LIST"
     info "
-De applijst is vastgelegd in bestand $OUTPUT_FILE.
+De applijst is vastgelegd in bestand $LIST_FILE.
 Deze lijst kan worden gebruikt om de volledigheid van de
 installatie, later door ${BOLD}kz install${NORMAL}, te controleren."
 }
@@ -327,26 +326,26 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
 
     printf '%s\n' "$text1..."
 
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     apt-show-versions --initialize |& $LOGCMD
     if !    apt-show-versions                       \
             --brief                                 |
             grep    --word-regexp                   \
-                    --regexp='No available version' >> "$TEMP_FILE"; then
+                    --regexp='No available version' >> "$TEMP_LIST"; then
         true
     fi
 
-    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd deb-bestand'
     fi
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
-    cat "$TEMP_FILE" > "$OUTPUT_FILE"
+    cat "$TEMP_LIST" > "$LIST_FILE"
 }
 
 
@@ -359,7 +358,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
 
     printf '%s\n' "$text2..."
 
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     # shellcheck disable=SC2062,SC2022
     if !    grep    --recursive             \
@@ -368,20 +367,20 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
                     /etc/apt/sources.list*  |
             grep    --invert-match          \
                     --regexp='ubuntu.com'   |
-            sort    --unique                >> "$TEMP_FILE"; then
+            sort    --unique                >> "$TEMP_LIST"; then
         true
     fi
 
-    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='pakketbron'
     fi
     footer="Dit overzicht bevat $number_of_lines door de gebruiker \
 toegevoegde $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
-    cat "$TEMP_FILE" >> "$OUTPUT_FILE"
+    cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
 
@@ -394,11 +393,11 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
 
     printf '%s\n' "$text3..."
 
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
-    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_FILE"
+    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_LIST"
 
-    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd pakket'
@@ -406,9 +405,9 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
 --regexp='Description:'"
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
-    cat "$TEMP_FILE" >> "$OUTPUT_FILE"
+    cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
 
@@ -421,21 +420,21 @@ create_file_snaps() {                       #4
 
     printf '%s\n' "$text4..."
 
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
-    if ! snap list 2> /dev/null >> "$TEMP_FILE"; then
+    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
-        printf '%s\n' "$TEXT" >> "$TEMP_FILE"
+        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
     fi
-    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 3))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='snap'
     fi
     footer="Dit overzicht bevat $number_of_lines $plural."
-    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_FILE"
+    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
 
-    cat "$TEMP_FILE" >> "$OUTPUT_FILE"
+    cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
 
@@ -447,13 +446,15 @@ save_user_photo_file() {                    #5
 
     # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
     # /var/lib/AccountsService/users/ is niet toegankelijk voor gebruikers.
-    local output_dir=/home/"${SUDO_USER:-$USER}"
-    local output_file=.kz_setup_gebruikersfoto.txt
+    local output_dir=/home/"${SUDO_USER:-$USER}"/kz_setup
+    local output_file=kz_setup_gebruikersfoto.txt
+    mkdir --parents "$output_dir"
     sudo grep   --regexp='Icon='                                        \
                 /var/lib/AccountsService/users/"${SUDO_USER:-$USER}"    |
     tee         "$output_dir/$output_file" 1> /dev/null
-    sudo chown  "${SUDO_USER:-$USER}:${SUDO_USER:-$USER}" \
-                "$output_dir/$output_file"
+    sudo chown  --recursive                                 \
+                "${SUDO_USER:-$USER}:${SUDO_USER:-$USER}"   \
+                "$output_dir"
 }
 
 
@@ -495,9 +496,9 @@ process_argument_app_file() {
     local app_found=false
     local description_found=false
     local record=''
-    local cmdsfile=''
+    local cmds_file=''
 
-    cmdsfile=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
+    cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
     while read -r record; do
         case $record in
             '#1 '*)
@@ -523,23 +524,23 @@ process_argument_app_file() {
                     break
                 elif $app_found; then
                     TEXT="# $DASHES\n# Bron: $file\n# $DASHES\n\n\n$record"
-                    printf '%b\n' "$TEXT" >> "$cmdsfile"
+                    printf '%b\n' "$TEXT" >> "$cmds_file"
                     description_found=true
                 fi
                 ;;
             *)
                 # Overige regels.
                 if $app_found; then
-                    printf '%s\n' "$record" >> "$cmdsfile"
+                    printf '%s\n' "$record" >> "$cmds_file"
                 fi
                 ;;
         esac
     done < "$file"
-    if ! grep --quiet --line-regexp --regexp='# EOF' "$cmdsfile"
+    if ! grep --quiet --line-regexp --regexp='# EOF' "$cmds_file"
     then
-        printf '%s\n' '# EOF' >> "$cmdsfile"
+        printf '%s\n' '# EOF' >> "$cmds_file"
     fi
-    FILE_TO_PROCESS[$file_num]=$cmdsfile
+    FILE_TO_PROCESS[$file_num]=$cmds_file
     ((++file_num))
 }
 
@@ -665,7 +666,7 @@ process_option_cat() {
             printf '%s\n' "${BLUE}# $file${NORMAL}"
             cat "$file"
             printf '\n'
-        }   >> "$CMDSFILE"
+        }   >> "$CMDS_FILE"
     done
     if $OPTION_GUI; then
         TITLE='Inhoud installatiebestanden'
@@ -673,14 +674,14 @@ process_option_cat() {
                     --width         850                 \
                     --height        400                 \
                     --title         "$TITLE"            \
-                    --filename      "$CMDSFILE"         \
+                    --filename      "$CMDS_FILE"        \
                     --font          'Ubuntu Mono 12'    \
                     --ok-label      'Oké'               \
                     --cancel-label  'Annuleren'         2> >($LOGCMD); then
             true
         fi
     else
-        less "$LESS_OPTIONS" "$CMDSFILE"
+        less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
 }
 
@@ -723,7 +724,7 @@ process_file() {
                 ;;
         esac
         prev_recordtype=$recordtype
-    done < "$CMDSFILE"
+    done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
         printf '%b' "${CURSOR_VISABLE}"
@@ -754,7 +755,7 @@ process_install_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#3' ]]; then
-        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
@@ -762,7 +763,7 @@ process_install_instruction() {
                 "$app_seq_num"                              \
                 "$description"                              \
                 "$DASHES"                                   \
-                "${record:3}"                               >> "$TEXTFILE"
+                "${record:3}"                               >> "$TEXT_FILE"
     fi
 }
 
@@ -776,7 +777,7 @@ process_remove_instruction() {
         return $SUCCESS
     fi
     if [[ $prev_recordtype = '#4' ]]; then
-        printf '%s\n\n' "     ${record:3}" >> "$TEXTFILE"
+        printf '%s\n\n' "     ${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
@@ -784,7 +785,7 @@ process_remove_instruction() {
                 "$app_seq_num"                              \
                 "$description"                              \
                 "$DASHES"                                   \
-                "${record:3}"                               >> "$TEXTFILE"
+                "${record:3}"                               >> "$TEXT_FILE"
     fi
 }
 
@@ -805,13 +806,13 @@ process_command() {
             printf  '[%3d/%-3d] %s\n\n' \
                     "$app_seq_num"      \
                     "$app_tot_num"      \
-                    "$description"      >> "$TEXTFILE"
+                    "$description"      >> "$TEXT_FILE"
             write_description_line=false
         fi
         printf  '%9s [%2d] %s\n\n'          \
                 " "                         \
                 "$cmd_seq_num"              \
-                "${BLUE}$record${NORMAL}"   >> "$TEXTFILE"
+                "${BLUE}$record${NORMAL}"   >> "$TEXT_FILE"
     elif $EXECUTE_COMMANDS; then
         desc_printf=$description
         if $OPTION_GUI; then
@@ -880,53 +881,53 @@ term_script() {
                         --width         1200                \
                         --height        400                 \
                         --title         "$TITLE"            \
-                        --filename      "$TEXTFILE"         \
+                        --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
                         --cancel-label  'Annuleren'         2> >($LOGCMD); then
                 true
             fi
         else
-            less "$LESS_OPTIONS" "$TEXTFILE"
+            less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
-        printf '\n\n' >> "$TEXTFILE"
+        printf '\n\n' >> "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Installatie-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
                         --title         "$TITLE"            \
-                        --filename      "$TEXTFILE"         \
+                        --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
                         --cancel-label  'Annuleren'         2> >($LOGCMD); then
                 true
             fi
         else
-            less "$LESS_OPTIONS" "$TEXTFILE"
+            less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && ! $INFO_FOUND; then
         info 'Geen installatie-instructies.'
     elif $OPTION_REMOVE && $REMOVE_FOUND; then
-        printf '\n\n' >> "$TEXTFILE"
+        printf '\n\n' >> "$TEXT_FILE"
         sed --in-place                                  \
             --expression='s/installeren/verwijderen/g'  \
-            "$TEXTFILE"
+            "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Verwijder-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
                         --title         "$TITLE"            \
-                        --filename      "$TEXTFILE"         \
+                        --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
                         --cancel-label  'Annuleren'         2> >($LOGCMD); then
                 true
             fi
         else
-            less "$LESS_OPTIONS" "$TEXTFILE"
+            less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_REMOVE && ! $REMOVE_FOUND; then
         info 'Geen verwijder-instructies.'
