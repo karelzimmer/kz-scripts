@@ -262,7 +262,7 @@ process_input() {
 
 process_option_list() {
     local text0='Opdrachten worden verwerkt'
-#   local text1='[1/4]  Gebruikersfotobestand vastleggen'   # kz install --list 
+#   local text1='[1/4]  Gebruikersfotobestand vastleggen'
     local text1='[1/4]  Gebruikersfoto vastleggen'
     local text2='[2/4]  Bureaubladachtergrond vastleggen'
     local text3='[3/4]  Favorieten vastleggen'
@@ -313,23 +313,23 @@ Deze lijst kan worden gebruikt tijdens het uitvoeren van de installatie."
 
 save_user_photo() {             #1
     printf '%s\n' "$text1..."
-    cp  /var/lib/AccountsService/icons/"$USER"  \
-        "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto |& $LOGCMD
+    cp  /var/lib/AccountsService/icons/"$USER"      \
+        "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto  |& $LOGCMD
 }
 
 
 save_desktop_background() {     #2
     printf '%s\n' "$text2..."
-    gsettings get   org.gnome.desktop.background picture-uri                \
-                    > "$LIST_DIR/${PROGRAM_NAME}"_bureaubladachtergrond   \
+    gsettings get   org.gnome.desktop.background picture-uri            \
+                    > "$LIST_DIR/${PROGRAM_NAME}"_bureaubladachtergrond \
                     |& $LOGCMD
 }
 
 
 save_favorite_apps() {          #3
     printf '%s\n' "$text3..."
-    gsettings get   org.gnome.shell favorite-apps           \
-                    > "$LIST_DIR/${PROGRAM_NAME}"_favorieten   |& $LOGCMD
+    gsettings get   org.gnome.shell favorite-apps               \
+                    > "$LIST_DIR/${PROGRAM_NAME}"_favorieten    |& $LOGCMD
 }
 
 
