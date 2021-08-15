@@ -7,12 +7,12 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 01.01.00
+# DateOfRelease: 2021-08-15
 ###############################################################################
 
 dashoptions='archive backup ckhtml ckname deploy dliso genpwd getdeb go gset
-    install ivp lsinstalled menu mkusb nas restore setup spsum'
+    install ivp menu mkusb nas restore setup spsum'
 complete -o default -W "$dashoptions" kz
 
 # EOF

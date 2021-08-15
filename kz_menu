@@ -599,8 +599,7 @@ execute_command() {
 
     exec=${command/kz /kz_}
     case $exec in
-        kz_backup|kz_install|'kz_install --list'|kz_lsinstalled|\
-        kz_nas|kz_restore)
+        kz_backup|kz_install|'kz_install --list'|kz_nas|kz_restore)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 # shellcheck disable=SC2086
