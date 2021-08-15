@@ -60,25 +60,27 @@ ${DASHES:0:50}"
 readonly -a ACTIONS2=(
     [1]='Back-up maken'
         'Apps installeren'
-        'Apps installeren info'
-        'Apps verwijderen info'
         'Applijst maken'
+        'Installatie-instructies tonen'
+        'Verwijder-instructies tonen'
         'Netwerkschijf aankoppelen'
         'Back-up terugzetten'
         'Apps instellen'
-        'Apps instellen  info'
-        'Apps resetten info'
+        'Instellijst maken'
+        'Instell-instructies tonen'
+        'Reset-instructies tonen'
         'Terug'
     )
 readonly -a COMMANDS2=(
     [1]='kz backup'
         'kz install'
+        'kz install --list'
         'kz install --info'
         'kz install --remove'
-        'kz lsinstalled'
         'kz nas'
         'kz restore'
         'kz setup'
+        'kz setup --list'
         'kz setup --info'
         'kz setup --reset'
         'Naar vorig menu'
@@ -337,7 +339,7 @@ process_menu2_gui() {
         REPLY=$(
             zenity  --list                                          \
                     --radiolist                                     \
-                    --width         460                             \
+                    --width         480                             \
                     --height        370                             \
                     --title         "$TITLE"                        \
                     --text          'Selecteer een keuze:'          \
@@ -357,6 +359,7 @@ process_menu2_gui() {
                     FALSE  8 "${ACTIONS2[8]}"  "${COMMANDS2[8]}"    \
                     FALSE  9 "${ACTIONS2[9]}"  "${COMMANDS2[9]}"    \
                     FALSE 10 "${ACTIONS2[10]}" "${COMMANDS2[10]}"   \
+                    FALSE 11 "${ACTIONS2[11]}" "${COMMANDS2[11]}"   \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -377,7 +380,7 @@ process_menu2_tui() {
         clear -x
         printf "%s\n\n" "$MENU2_HEAD"
         for action2 in "${!ACTIONS2[@]}"; do
-            printf "%2s. %-25.25s - %s\n" "$action2" "${ACTIONS2[$action2]}" \
+            printf "%2s. %-29.29s - %s\n" "$action2" "${ACTIONS2[$action2]}" \
 "${COMMANDS2[$action2]}"
         done
         printf '\n'
@@ -493,6 +496,13 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             process_commands
             ;;
         11)
+            TITLE="${ACTIONS2[11]}"
+            EXEC=(
+                [1]="${ACTIONS2[11]}#${COMMANDS2[11]}"
+                )
+            process_commands
+            ;;
+        12)
             exit_menu2=true
             ;;
         *)
@@ -585,15 +595,15 @@ $prompt"
 
 execute_command() {
     local -i    cmd_rc=0
-
     case $command in
-        kz_backup|kz_install|kz_lsinstalled|kz_nas|kz_restore)
+        'kz backup'|'kz install'|'kz install --list'|'kz lsinstalled'|\
+        'kz nas'|'kz restore')
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
-                pkexec "$PROGRAM_PATH/$command" --gui -- || cmd_rc=$?
+                pkexec "$PROGRAM_PATH"/$command --gui -- || cmd_rc=$?
                 log_rc cmd_rc?
             else
-                sudo "$command" -- || cmd_rc=$?
+                sudo "$PROGRAM_PATH"/$command -- || cmd_rc=$?
                 log_rc $cmd_rc
             fi
             ;;

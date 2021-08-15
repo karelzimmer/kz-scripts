@@ -11,8 +11,8 @@
  Auteursrecht (c) 2020-2021 Karel Zimmer.
  GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 
- ReleaseNumber: 04.00.00
- DateOfRelease: 2021-08-08
+ ReleaseNumber: 05.00.00
+ DateOfRelease: 2021-08-15
 -->
 
 <policyconfig>
@@ -29,6 +29,17 @@
             <allow_active>auth_admin</allow_active>
         </defaults>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_install</annotate>
+        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+    </action>
+    <action id="nl.karelzimmer.kz_install.list-sw">
+        <message>Authentication is required to craate an applist.</message>
+        <message xml:lang="nl">Authenticatie is vereist om een applijst te maken.</message>
+        <defaults>
+            <allow_any>auth_admin</allow_any>
+            <allow_inactive>auth_admin</allow_inactive>
+            <allow_active>auth_admin</allow_active>
+        </defaults>
+        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_install --list</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
     </action>
 

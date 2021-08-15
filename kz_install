@@ -452,6 +452,11 @@ save_user_photo_file() {                    #5
     sudo grep   --regexp='Icon='                                        \
                 /var/lib/AccountsService/users/"${SUDO_USER:-$USER}"    |
     tee         "$output_dir/$output_file" 1> /dev/null
+    printf '\n%s' "Staat hierboven:
+Icon=/var/lib/AccountsService/icons/${SUDO_USER:-$USER}
+
+Gebruik dan $HOME/kz_setup__gebruikersfoto asl gebruikersfoto." \
+            >> "$output_dir/$output_file"
     sudo chown  --recursive                                 \
                 "${SUDO_USER:-$USER}:${SUDO_USER:-$USER}"   \
                 "$output_dir"

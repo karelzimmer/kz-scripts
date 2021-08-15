@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2017-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 07.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 08.00.00
+# DateOfRelease: 2021-08-15
 ###############################################################################
 
 [Desktop Entry]
@@ -23,7 +23,7 @@ Keywords[nl]=kzsetup;setup;
 Categories=Kz Scripts;
 Exec=/usr/bin/kz_setup --gui
 Icon=/usr/share/pixmaps/kz_setup.svg
-Actions=info;reset;cat;simulate;version;
+Actions=info;reset;list;cat;simulate;version;
 
 [Desktop Action info]
 Name=Show setup instructions
@@ -34,6 +34,11 @@ Exec=/usr/bin/kz_setup --gui --info
 Name=Show reset instructions
 Name[nl]=Reset-instructies tonen
 Exec=/usr/bin/kz_setup --gui --reset
+
+[Desktop Action list]
+Name=Create setup list
+Name[nl]=Instellijst aanmaken
+Exec=/usr/bin/kz_setup --gui --list
 
 [Desktop Action cat]
 Name=Show files

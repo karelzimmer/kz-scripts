@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 07.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 08.00.00
+# DateOfRelease: 2021-08-15
 ###############################################################################
 
 [Desktop Entry]
@@ -23,7 +23,7 @@ Keywords[nl]=kzinstall;installatie;
 Categories=Kz Scripts;
 Exec=pkexec /usr/bin/kz_install --gui
 Icon=/usr/share/pixmaps/kz_install.svg
-Actions=info;remove;cat;simulate;version;
+Actions=info;remove;list;cat;simulate;version;
 
 [Desktop Action info]
 Name=Show installation instructions
@@ -34,6 +34,11 @@ Exec=/usr/bin/kz_install --gui --info
 Name=Show removal instructions
 Name[nl]=Verwijder-instructies tonen
 Exec=/usr/bin/kz_install --gui --remove
+
+[Desktop Action list]
+Name=Create app list
+Name[nl]=Applijst aanmaken
+Exec=/usr/bin/kz_install --gui --list
 
 [Desktop Action cat]
 Name=Show files
