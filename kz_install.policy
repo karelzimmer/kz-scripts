@@ -21,25 +21,14 @@
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
     <action id="nl.karelzimmer.kz_install.install-sw">
-        <message>Authentication is required to install apps.</message>
-        <message xml:lang="nl">Authenticatie is vereist om apps te installeren.</message>
+        <message>Authentication is required to install/list apps.</message>
+        <message xml:lang="nl">Authenticatie is vereist om apps te installeren/uit te lijsten.</message>
         <defaults>
             <allow_any>auth_admin</allow_any>
             <allow_inactive>auth_admin</allow_inactive>
             <allow_active>auth_admin</allow_active>
         </defaults>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz_install</annotate>
-        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
-    </action>
-    <action id="nl.karelzimmer.kz_install.list-sw">
-        <message>Authentication is required to craate an applist.</message>
-        <message xml:lang="nl">Authenticatie is vereist om een applijst te maken.</message>
-        <defaults>
-            <allow_any>auth_admin</allow_any>
-            <allow_inactive>auth_admin</allow_inactive>
-            <allow_active>auth_admin</allow_active>
-        </defaults>
-        <annotate key="org.freedesktop.policykit.exec.path">'/usr/bin/kz_install --list'</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
     </action>
 

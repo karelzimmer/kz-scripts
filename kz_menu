@@ -595,17 +595,20 @@ $prompt"
 
 execute_command() {
     local -i    cmd_rc=0
-    case $command in
-        'kz backup'|'kz install'|'kz install --list'|'kz lsinstalled'|\
-        'kz nas'|'kz restore')
+    local       exec=''
+
+    exec=${command/kz /kz_}
+    case $exec in
+        kz_backup|kz_install|'kz_install --list'|kz_lsinstalled|\
+        kz_nas|kz_restore)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 # shellcheck disable=SC2086
-                pkexec "$PROGRAM_PATH"/$command --gui -- || cmd_rc=$?
+                pkexec "$PROGRAM_PATH"/$exec --gui -- || cmd_rc=$?
                 log_rc cmd_rc?
             else
                 # shellcheck disable=SC2086
-                sudo "$PROGRAM_PATH"/$command -- || cmd_rc=$?
+                sudo "$PROGRAM_PATH"/$exec -- || cmd_rc=$?
                 log_rc $cmd_rc
             fi
             ;;
@@ -613,10 +616,10 @@ execute_command() {
             # Zogenaamde non-sudo-scripts.
             # shellcheck disable=SC2086
             if $OPTION_GUI; then
-                "$PROGRAM_PATH"/$command --gui -- || cmd_rc=$?
+                "$PROGRAM_PATH"/$exec --gui -- || cmd_rc=$?
                 log_rc $cmd_rc
             else
-                "$PROGRAM_PATH"/$command -- || cmd_rc=$?
+                "$PROGRAM_PATH"/$exec -- || cmd_rc=$?
                 log_rc $cmd_rc
             fi
             ;;

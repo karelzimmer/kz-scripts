@@ -449,9 +449,11 @@ save_user_photo_file() {                    #5
     local output_dir=/home/"${SUDO_USER:-$USER}"/kz_setup
     local output_file=kz_setup_gebruikersfoto.txt
     mkdir --parents "$output_dir"
-    sudo grep   --regexp='Icon='                                        \
-                /var/lib/AccountsService/users/"${SUDO_USER:-$USER}"    |
-    tee         "$output_dir/$output_file" 1> /dev/null
+    if [[ -e /var/lib/AccountsService/users/"${SUDO_USER:-$USER}" ]]; then
+        sudo grep   --regexp='Icon='                                        \
+                    /var/lib/AccountsService/users/"${SUDO_USER:-$USER}"    |
+        tee         "$output_dir/$output_file" 1> /dev/null
+    fi
     printf '\n%s' "Staat hierboven:
 Icon=/var/lib/AccountsService/icons/${SUDO_USER:-$USER}
 
