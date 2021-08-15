@@ -306,9 +306,9 @@ process_option_list() {
 
     rm "$TEMP_FILE"
     info "
-De instellijst is aangemaakt in $HOME/.${PROGRAM_NAME}-*.
-Deze bevat de eerder gebruikte gebruikersfoto, bureaubladachtergrond,
-favorieten, en opdrachtgeschiedenis.
+De instellijst is vastgelegde in $HOME/.${PROGRAM_NAME}_* bestanden.
+Deze besatnden bevatten de eerder gebruikte gebruikersfoto,
+bureaubladachtergrond, favorieten, en opdrachtgeschiedenis.
 Deze lijst kan worden gebruikt tijdens het uitvoeren van de installatie."
 }
 

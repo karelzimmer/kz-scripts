@@ -312,7 +312,7 @@ geïnstalleerd"
 
     rm "$TEMP_FILE"
     info "
-De applijst is aangemaakt in bestand $OUTPUT_FILE.
+De applijst is vastgelegd in bestand $OUTPUT_FILE.
 Deze lijst kan worden gebruikt om de volledigheid van de
 installatie, later door ${BOLD}kz install${NORMAL}, te controleren."
 }
