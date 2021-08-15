@@ -302,7 +302,6 @@ process_option_list() {
         save_command_history    #4
     fi
 
-    rm "$TEMP_LIST"
     info "
 De instellijst is vastgelegde in $HOME/${PROGRAM_NAME}_* bestanden.
 Deze besatnden bevatten de eerder gebruikte gebruikersfoto,
