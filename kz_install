@@ -52,10 +52,10 @@ readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
 readonly RELEASE=$(lsb_release --release --short)
 readonly RUN_AS_SUPERUSER=true
+readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
 readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
-readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
-readonly TEMP_LIST=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.list")   # TEMP_LIST
+readonly TEMP_LIST=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.list")
 
 
 ###############################################################################
