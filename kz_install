@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 58.00.01
-# DateOfRelease: 2021-08-14
+# ReleaseNumber: 59.00.00
+# DateOfRelease: 2021-08-15
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -18,12 +18,12 @@ source "$(dirname "$0")"/kz_common.sh
 # Global constants
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:firs'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,\
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:filrs'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,list,\
 remove,simulate"
 readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } [-a|--apps] [-c|--cat] \
 [-e|--edition=EDITIE] [-f|--files]
-                    [-i|--info] [-r|--remove] [-s|--simulate]
+                    [-i|--info] [-l|--list] [-r|--remove] [-s|--simulate]
                     $OPTIONS_USAGE_COMMON
                     [APP...] [BESTAND...]"
 readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [APP...] \
@@ -38,6 +38,7 @@ Opties:
                 gebruik opgegeven editie
   -f --files    toon lijst van beschikbare installatiebestanden
   -i --info     toon aanvullende instructies na het installeren van apps
+  -l --list     maak applijst aan
   -r --remove   toon instructies voor het verwijderen van apps
   -s --simulate geen actie, simuleer installatie, en toon opdracht die
                 uitgevoerd zou worden
@@ -47,10 +48,15 @@ Argumenten:
   APP           opgegeven apps installeren
   BESTAND       opgegeven installatiebestanden verwerken"
 
+readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
+readonly RELEASE=$(lsb_release --release --short)
 readonly RUN_AS_SUPERUSER=true
-readonly CMDSFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-readonly TEXTFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
+readonly CMDSFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")    # CMDS_FILE
+readonly TEXTFILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")    # TEXT_FILE
+readonly OUTPUT_DIR=/usr/local/etc/${PROGRAM_NAME}_${HOSTNAME}_$ID  # LIST_DIR
+readonly OUTPUT_FILE=${OUTPUT_DIR}_applist                          # LIST_FILE
+readonly TEMP_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.list")   # TEMP_LIST
 
 
 ###############################################################################
@@ -73,6 +79,7 @@ declare     OPTION_CAT=false
 declare     OPTION_EDITION=false
 declare     OPTION_FILES=false
 declare     OPTION_INFO=false
+declare     OPTION_LIST=false
 declare     OPTION_REMOVE=false
 declare     OPTION_SIMULATE=false
 declare     REMOVE_FOUND=false
@@ -133,6 +140,11 @@ check_input() {
                 EXECUTE_COMMANDS=false
                 shift
                 ;;
+            -l|--list)
+                OPTION_LIST=true
+                EXECUTE_COMMANDS=false
+                shift
+                ;;
             -r|--remove)
                 OPTION_REMOVE=true
                 EXECUTE_COMMANDS=false
@@ -175,16 +187,14 @@ process_input() {
     local       file_notfound=false
     local   -i  app_seq_num=0
     local   -i  app_tot_num=0
-    local       id=''
-    local       Id=''
     local   -i  file_num=0
-    local       release=''
     local       skip_line=false
 
-    Id=$(lsb_release --id --short)                  # E.g. Ubuntu
-    id=$(echo "$Id" | tr '[:upper:]' '[:lower:]')   # E.g. ubuntu
-    release=$(lsb_release --release --short)        # E.g. 20.04
-
+    if $OPTION_LIST; then
+        check_user
+        process_option_list
+        exit $SUCCESS
+    fi
     if $ARGUMENT_APP; then
         process_argument_app
     fi
@@ -254,12 +264,205 @@ process_input() {
 }
 
 
+process_option_list() {
+    local text0='Opdrachten worden verwerkt'
+    local text1="[1/5]  Bepaal welke deb-bestanden (Debian-pakketten) zijn \
+geïnstalleerd"
+    local text2="[2/5]  Bepaal welke pakketbronnen (\"repositories\" of \
+\"repo's\") zijn toegevoegd"
+    local text3="[3/5]  Bepaal welke pakketten door de gebruiker zijn \
+geïnstalleerd"
+    local text4='[4/5]  Bepaal welke snaps zijn geïnstalleerd'
+    local text5='[4/5]  Gebruikersfotobestand vastleggen'
+
+    TITLE='Applijst maken'
+    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+    # Voorbeeld: Unable to init server: Kon niet verbinden:
+    #            Verbinding is geweigerd
+    #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
+    #            cannot open display:
+    if $OPTION_GUI; then
+        (
+        printf '%s\n' "#$text1"
+        create_file_installed_without_repo  #1
+        printf '%s\n' "#$text2"
+        create_file_added_repos             #2
+        printf '%s\n' "#$text3"
+        create_file_installed_by_user       #3
+        printf '%s\n' "#$text4"
+        create_file_snaps                   #4
+        printf '%s\n' "#$text5"
+        save_user_photo_file                #5
+        ) |&
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$TITLE"    \
+                --text      "$text0"    2> >($LOGCMD)
+    else
+        create_file_installed_without_repo  #1
+        create_file_added_repos             #2
+        create_file_installed_by_user       #3
+        create_file_snaps                   #4
+        save_user_photo_file                #5
+    fi
+
+    rm "$TEMP_FILE"
+    info "
+De applijst is aangemaakt in bestand $OUTPUT_FILE.
+Deze lijst kan worden gebruikt om de volledigheid van de
+installatie, later door ${BOLD}kz install${NORMAL}, te controleren."
+}
+
+
+create_file_installed_without_repo() {      #1
+    local       header="Dit zijn gedownloade deb-bestanden geïnstalleerd via \
+Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
+    local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='geïnstalleerde deb-bestanden'
+
+    printf '%s\n' "$text1..."
+
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+
+    apt-show-versions --initialize |& $LOGCMD
+    if !    apt-show-versions                       \
+            --brief                                 |
+            grep    --word-regexp                   \
+                    --regexp='No available version' >> "$TEMP_FILE"; then
+        true
+    fi
+
+    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$((number_of_lines - 2))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='geïnstalleerd deb-bestand'
+    fi
+    footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
+Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_FILE"
+
+    cat "$TEMP_FILE" > "$OUTPUT_FILE"
+}
+
+
+create_file_added_repos() {                 #2
+    local       header="Deze pakketbronnen zijn meestal toegevoegd met de \
+opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
+    local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='pakketbronnen'
+
+    printf '%s\n' "$text2..."
+
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+
+    # shellcheck disable=SC2062,SC2022
+    if !    grep    --recursive             \
+                    --no-filename           \
+                    --regexp='^deb '        \
+                    /etc/apt/sources.list*  |
+            grep    --invert-match          \
+                    --regexp='ubuntu.com'   |
+            sort    --unique                >> "$TEMP_FILE"; then
+        true
+    fi
+
+    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$((number_of_lines - 2))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='pakketbron'
+    fi
+    footer="Dit overzicht bevat $number_of_lines door de gebruiker \
+toegevoegde $plural."
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_FILE"
+
+    cat "$TEMP_FILE" >> "$OUTPUT_FILE"
+}
+
+
+create_file_installed_by_user() {           #3
+    local       header="Deze pakketten zijn meestal geïnstalleerd met \
+Software of met de opdracht 'sudo apt install <pakketnaam>':"
+    local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='geïnstalleerde pakketten'
+
+    printf '%s\n' "$text3..."
+
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+
+    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_FILE"
+
+    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$((number_of_lines - 2))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='geïnstalleerd pakket'
+    fi
+    footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
+Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
+--regexp='Description:'"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_FILE"
+
+    cat "$TEMP_FILE" >> "$OUTPUT_FILE"
+}
+
+
+create_file_snaps() {                       #4
+    local       header="Deze snaps zijn geïnstalleerd met '[sudo] install \
+<snap>' of met Software:"
+    local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='snaps'
+
+    printf '%s\n' "$text4..."
+
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_FILE"
+
+    if ! snap list 2> /dev/null >> "$TEMP_FILE"; then
+        TEXT='snap is niet geïnstalleerd op dit systeem'
+        printf '%s\n' "$TEXT" >> "$TEMP_FILE"
+    fi
+    number_of_lines=$(wc --lines < "$TEMP_FILE")
+    number_of_lines=$((number_of_lines - 3))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='snap'
+    fi
+    footer="Dit overzicht bevat $number_of_lines $plural."
+    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_FILE"
+
+    cat "$TEMP_FILE" >> "$OUTPUT_FILE"
+}
+
+
+save_user_photo_file() {                    #5
+    local output_dir=''
+    local output_file=''
+
+    printf '%s\n' "$text5..."
+
+    # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
+    # /var/lib/AccountsService/users/ is niet toegankelijk voor gebruikers.
+    local output_dir=/home/"${SUDO_USER:-$USER}"
+    local output_file=.kz_setup_gebruikersfoto.txt
+    sudo grep   --regexp='Icon='                                        \
+                /var/lib/AccountsService/users/"${SUDO_USER:-$USER}"    |
+    tee         "$output_dir/$output_file" 1> /dev/null
+    sudo chown  "${SUDO_USER:-$USER}:${SUDO_USER:-$USER}" \
+                "$output_dir/$output_file"
+}
+
+
 process_argument_app() {
     local app=''
     local file=''
     local search=''
 
-    search=${PROGRAM_NAME}_${id}_${release}
+    search=${PROGRAM_NAME}_${ID}_${RELEASE}
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in installatiebestanden.
         # Alleen eerstgevonden installatiebestand verwerken (lines=1), want
@@ -364,8 +567,8 @@ process_dfltfiles() {
 local dfltfile_1=''
 local dfltfile_2=''
 
-    dfltfile_1=${PROGRAM_NAME}_${id}_${release}_${EDITION}.sh
-    dfltfile_2=${PROGRAM_NAME}_${id}_${release}_${EDITION}-${HOSTNAME}.sh
+    dfltfile_1=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
+    dfltfile_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}-${HOSTNAME}.sh
     if [[ -e $PROGRAM_PATH/$dfltfile_1 ]]; then
         FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$dfltfile_1
         ((++file_num))
@@ -378,7 +581,7 @@ local dfltfile_2=''
         ((++file_num))
     fi
     if $file_notfound; then
-        info "Geen installatiebestanden gevonden voor $Id $release $EDITION."
+        info "Geen installatiebestanden gevonden voor $ID $RELEASE $EDITION."
         if ! $OPTION_GUI; then
             info "Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare \
 installatiebestanden."
@@ -390,7 +593,7 @@ installatiebestanden."
 process_option_apps() {
     local search=''
 
-    search=${PROGRAM_NAME}_${id}_${release}
+    search=${PROGRAM_NAME}_${ID}_${RELEASE}
 
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
@@ -406,7 +609,7 @@ $(
                     --number-format=rn          \
                     --number-separator=' '      \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen apps gevonden voor $Id $release.
+        printf '%s\n' "     0 Geen apps gevonden voor $ID $RELEASE.
 
 Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare installatiebestanden."
     else
@@ -424,7 +627,7 @@ Om APPs te installeren voer uit:
 process_option_files() {
     local search=''
 
-    search=${PROGRAM_NAME}_${id}_${release}
+    search=${PROGRAM_NAME}_${ID}_${RELEASE}
     printf '%s\n' "De volgende installatiebestanden zijn beschikbaar:
 
 NUMMER BESTAND
@@ -435,7 +638,7 @@ $(
                     --number-format=rn          \
                     --number-separator=' '      \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $Id.
+        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $ID.
 
 Controleer $PROGRAM_PATH op aanwezigheid andere installatiebestanden.
 Om die BESTANDen te bekijken voer uit:
