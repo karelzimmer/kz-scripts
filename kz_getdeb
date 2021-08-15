@@ -32,9 +32,9 @@ readonly    GREEN=${BOLD}$(tput setaf 2)
 readonly    YELLOW=${BOLD}$(tput setaf 3)
 readonly    BLUE=${BOLD}$(tput setaf 4)
 
-readonly    DEBDIR=$HOME/kz_deb
-readonly    DOCSDIR=$HOME/kz_docs
-readonly    SCRIPTSDIR=$HOME/kz_scripts
+readonly    DEB_DIR=$HOME/kz_deb
+readonly    DOCS_DIR=$HOME/kz_docs
+readonly    SCRIPTS_DIR=$HOME/kz_scripts
 
 ###############################################################################
 # Global variables
@@ -459,9 +459,9 @@ check_dependencies() {
 process_deb() {
     if ! git    clone                                       \
                 https://github.com/karelzimmer/kz_deb.git   \
-                "$DEBDIR"                                  |& $LOGCMD
+                "$DEB_DIR"                                  |& $LOGCMD
     then
-        cd "$DEBDIR" || exit $ERROR
+        cd "$DEB_DIR" || exit $ERROR
         git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
@@ -471,9 +471,9 @@ process_deb() {
 process_documents() {
     if ! git    clone                                       \
                 https://github.com/karelzimmer/kz_docs.git  \
-                "$DOCSDIR"                                  |& $LOGCMD
+                "$DOCS_DIR"                                 |& $LOGCMD
     then
-        cd "$DOCSDIR" || exit $ERROR
+        cd "$DOCS_DIR" || exit $ERROR
         git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
@@ -483,9 +483,9 @@ process_documents() {
 process_scripts() {
     if ! git    clone                                           \
                 https://github.com/karelzimmer/kz_scripts.git   \
-                "$SCRIPTSDIR"                                   |& $LOGCMD
+                "$SCRIPTS_DIR"                                  |& $LOGCMD
     then
-        cd "$SCRIPTSDIR" || exit $ERROR
+        cd "$SCRIPTS_DIR" || exit $ERROR
         git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
