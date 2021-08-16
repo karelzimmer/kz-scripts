@@ -51,7 +51,7 @@ Argumenten:
 readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
 readonly RELEASE=$(lsb_release --release --short)
-readonly LIST_DIR="$HOME/$PROGRAM_NAME"
+readonly LIST_DIR="$HOME/${PROGRAM_NAME}_lists"
 readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
 
