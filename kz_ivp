@@ -520,6 +520,7 @@ ${BOLD}In $script:${NORMAL}
                 fi
             fi
             sudo rm --force /tmp/backup_*.tar
+            sudo rm --force --recursive /tmp/home
             ;;
         kz_setup)
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?

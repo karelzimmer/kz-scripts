@@ -412,7 +412,7 @@ install_scriptspackage() {
                         --infobox   "$TEXT"         \
                         7 29
 
-    temp_deb=$(mktemp -t "$PROGRAM_NAME_XXXXXXXXXX.deb")
+    temp_deb=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.deb")
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     check_sudo_and_dpkg
