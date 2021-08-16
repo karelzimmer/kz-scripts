@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 62.01.01
-# DateOfRelease: 2021-08-13
+# ReleaseNumber: 62.01.02
+# DateOfRelease: 2021-08-15
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
