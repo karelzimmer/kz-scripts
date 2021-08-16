@@ -341,7 +341,7 @@ process_menu2_gui() {
             zenity  --list                                          \
                     --radiolist                                     \
                     --width         480                             \
-                    --height        370                             \
+                    --height        380                             \
                     --title         "$TITLE"                        \
                     --text          'Selecteer een keuze:'          \
                     --ok-label      'Verder'                        \
@@ -600,7 +600,7 @@ execute_command() {
 
     exec=${command/kz /kz_}
     case $exec in
-        kz_backup|kz_install|'kz_install --list'|kz_nas|kz_restore)
+        kz_backup|kz_install|kz_install*--list|kz_nas|kz_restore)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 # shellcheck disable=SC2086
@@ -612,7 +612,7 @@ execute_command() {
                 log_rc $cmd_rc
             fi
             ;;
-        kz_setup|*--info|*--remove|*--reset)
+        kz_setup|*--info|kz_setup*--list|*--remove|*--reset)
             # Zogenaamde non-sudo-scripts.
             # shellcheck disable=SC2086
             if $OPTION_GUI; then
