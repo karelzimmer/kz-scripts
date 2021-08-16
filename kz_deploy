@@ -510,6 +510,7 @@ upload_website() {
         warning 'Controleer de log...!'
         exit $WARNING
     fi
+    sleep 5
 }
 
 
