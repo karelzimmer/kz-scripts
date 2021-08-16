@@ -151,9 +151,9 @@ check_input() {
 
 process_input() {
     pre_actions
-    create_package_kz
+    create_package
     upload_website
-    install_package_kz
+    install_package
 }
 
 
@@ -232,15 +232,18 @@ sync_pdf_kz_docs() {
     local changes=false
 
     info 'Gewijzigde documenten...'
+
     cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
 
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
 
     for txtfile in *.txt; do
+        basefile=$(basename "$txtfile" .txt)
+
+        # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
         if ! diff   "$txtfile"                          \
                     "${TARGET_UPLOADS[DOCS]}/$txtfile"  &> /dev/null; then
-            basefile=$(basename "$txtfile")
             enscript    --quiet             \
                         --color             \
                         --highlight=bash    \
@@ -257,8 +260,9 @@ sync_pdf_kz_docs() {
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
     for docfile in *.odt; do
+        basefile=$(basename "$docfile" .odt)
 
-        # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
+        # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
         if ! diff   "$docfile"                          \
                     "${TARGET_UPLOADS[DOCS]}/$docfile"  &> /dev/null; then
             lowriter    --headless                          \
@@ -269,6 +273,7 @@ sync_pdf_kz_docs() {
             info "    $docfile"
         fi
     done
+
     if ! $changes; then
         info '    Geen documenten gewijzigd'
     fi
@@ -287,9 +292,22 @@ sync_all_kz_docs() {
             "${SOURCE_DEB[DOCS]}"/  \
             "${TARGET_DEB[DOC]}"    |& $LOGCMD
 
-    rsync   --archive                   \
-            "${TARGET_UPLOADS[PDFS]}"/  \
-            "${TARGET_DEB[DOC]}"        |& $LOGCMD
+    cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
+    for txtfile in *.txt; do
+        basefile=$(basename "$txtfile" .txt)
+        cp  --archive                               \
+            --update                                \
+            "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" \
+            "${TARGET_DEB[DOC]}"
+    done
+    for docfile in *.odt; do
+        basefile=$(basename "$docfile" .odt)
+        cp  --archive                               \
+            --update                                \
+            "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" \
+            "${TARGET_DEB[DOC]}"
+    done
+    cd "$HOME" || exit $ERROR
 
     rsync   --archive                       \
             --delete                        \
@@ -456,7 +474,7 @@ $wallpapers_config_file"
 }
 
 
-create_package_kz() {
+create_package() {
     info 'Maak scriptspakket...'
     fakeroot    dpkg-deb                            \
                 --build                             \
@@ -495,7 +513,7 @@ upload_website() {
 }
 
 
-install_package_kz() {
+install_package() {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
