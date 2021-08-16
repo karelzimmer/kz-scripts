@@ -260,7 +260,8 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 
     TITLE="${ACTIONS1[1]}"
     EXEC=(
-        [1]="${ACTIONS2[5]}#${COMMANDS2[5]}"
+        [1]="${ACTIONS2[3]}#${COMMANDS2[3]}"
+            "${ACTIONS2[9]}#${COMMANDS2[9]}"
             "${ACTIONS2[1]}#${COMMANDS2[1]}"
         )
 
