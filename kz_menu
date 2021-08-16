@@ -60,29 +60,29 @@ ${DASHES:0:50}"
 readonly -a ACTIONS2=(
     [1]='Back-up maken'
         'Apps installeren'
-        'Applijst maken'
         'Installatie-instructies tonen'
         'Verwijder-instructies tonen'
+        'Applijst maken'
         'Netwerkschijf aankoppelen'
         'Back-up terugzetten'
         'Apps instellen'
-        'Instellijst maken'
         'Instell-instructies tonen'
         'Reset-instructies tonen'
+        'Instellijst maken'
         'Terug'
     )
 readonly -a COMMANDS2=(
     [1]='kz backup'
         'kz install'
-        'kz install --list'
         'kz install --info'
         'kz install --remove'
+        'kz install --list'
         'kz nas'
         'kz restore'
         'kz setup'
-        'kz setup --list'
         'kz setup --info'
         'kz setup --reset'
+        'kz setup --list'
         'Naar vorig menu'
     )
 readonly MENU2_LINES=${#ACTIONS2[@]}
@@ -260,8 +260,8 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 
     TITLE="${ACTIONS1[1]}"
     EXEC=(
-        [1]="${ACTIONS2[3]}#${COMMANDS2[3]}"
-            "${ACTIONS2[9]}#${COMMANDS2[9]}"
+        [1]="${ACTIONS2[5]}#${COMMANDS2[5]}"
+            "${ACTIONS2[11]}#${COMMANDS2[11]}"
             "${ACTIONS2[1]}#${COMMANDS2[1]}"
         )
 
@@ -274,7 +274,7 @@ process_menu1_choice2() {
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
 Deze Checklist is te vinden op de site karelzimmer.nl onder Linux,
-en in /usr/share/doc/kz/.
+en in map /usr/share/doc/kz.
 
 Komt globaal neer op:
 1. Download een beeldbestand (.iso) vanaf nl.releases.ubuntu.com.
@@ -300,13 +300,13 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
                 "${ACTIONS2[7]}#${COMMANDS2[7]}"
                 "${ACTIONS2[2]}#${COMMANDS2[2]}"
-                "${ACTIONS2[4]}#${COMMANDS2[4]}"
+                "${ACTIONS2[3]}#${COMMANDS2[3]}"
             )
     else
         EXEC=(
             [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
                 "${ACTIONS2[2]}#${COMMANDS2[2]}"
-                "${ACTIONS2[4]}#${COMMANDS2[4]}"
+                "${ACTIONS2[3]}#${COMMANDS2[3]}"
             )
     fi
     process_commands
@@ -317,7 +317,7 @@ process_menu1_choice4() {
     TITLE="${ACTIONS1[4]}"
     EXEC=(
         [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
-            "${ACTIONS2[10]}#${COMMANDS2[10]}"
+            "${ACTIONS2[9]}#${COMMANDS2[9]}"
         )
     process_commands
 }
@@ -554,7 +554,8 @@ De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
 $exec. $action"
     done
 
-    prompt='Doorgaan en deze acties uitvoeren?'
+    prompt='
+Doorgaan en deze acties uitvoeren?'
     if $OPTION_GUI; then
         TEXT=$TEXT"
 
