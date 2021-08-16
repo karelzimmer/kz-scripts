@@ -309,7 +309,6 @@ geïnstalleerd"
         save_user_photo_file                #5
     fi
 
-    rm "$TEMP_LIST"
     info "
 De applijst is vastgelegd in bestand $LIST_FILE.
 Dit bestand bevatten de eerder geïnstalleerde apps,

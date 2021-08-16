@@ -464,9 +464,9 @@ ${BOLD}In $script:${NORMAL}
 
     case $script in
         kz_backup)
-            "$scriptsdir/$script"   --target                            \
-                                    /tmp                                \
-                                    /home/karel/scripts |& $LOGCMD   ||
+            "$scriptsdir/$script"   --target                        \
+                                    /tmp                            \
+                                    /home/karel/scripts |& $LOGCMD  ||
             check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "

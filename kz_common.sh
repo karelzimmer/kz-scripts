@@ -501,6 +501,7 @@ start dan een Terminalvenster, en voer uit:
             if [[ $rc -eq $SUCCESS ]]; then
                 rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
                 rm --force /tmp/"$PROGRAM_NAME"_??????????.text
+                rm --force /tmp/"$PROGRAM_NAME"_??????????.list
             fi
             ;;
         kz_setup)
