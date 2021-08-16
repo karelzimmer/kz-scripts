@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2015-2020 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 14.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 14.00.01
+# DateOfRelease: 2021-08-15
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -519,6 +519,7 @@ ${BOLD}In $script:${NORMAL}
                     MAXRC=$ERROR
                 fi
             fi
+            sudo rm --force /tmp/backup_*.tar
             ;;
         kz_setup)
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
