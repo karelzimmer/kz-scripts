@@ -531,7 +531,7 @@ term_script() {
     TEXT='Volg nu de stappen zoals beschreven in Checklist installatie.
 
 Deze Checklist is te vinden op de site https://karelzimmer.nl
-onder Linux, en in /usr/share/doc/kz/.'
+onder Linux, en in map /usr/share/doc/kz.'
     height=10
 
     if ! $TERMINAL; then
