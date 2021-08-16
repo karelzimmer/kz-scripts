@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 03.01.00
+# DateOfRelease: 2021-08-15
 ###############################################################################
 
 #1 stop-apport
@@ -119,20 +119,6 @@ sudo teamviewer repo default
 sudo apt-get install --yes xul-ext-lightning
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes xul-ext-lightning
-
-
-#1 tlp
-#2 TLP installeren
-if laptop-detect; then sudo apt-get install --yes tlp; fi
-#3 Check status:
-#3 ~~~~~~~~~~~~~
-#3 Start Terminalvenster en voer uit:
-#3    sudo tlp-stat --battery
-#3
-#3 Mogelijk extra te installeren (ThinkPads/zie uitvoer tlp-stat):
-#3    sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes tlp tp-smapi-dkms acpi-call-dkms
 
 
 #1 ubuntu-restricted

@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 02.01.00
+# DateOfRelease: 2021-08-15
 ###############################################################################
 
 #1
@@ -44,14 +44,6 @@ if [[ $HOSTNAME = pc07 ]] && id gast; then sudo chmod 0750 /home/gast; fi
 if [[ $HOSTNAME = pc07 ]] && id gast; then sudo passwd --delete gast; fi
 #4 Start Terminalvenster en voer uit:
 #4    sudo userdel --remove gast
-
-
-#1
-#2 TLP installeren
-## Nodig voor ThinkPads.
-if [[ $HOSTNAME = pc07 ]]; then sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms; fi
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes tlp tp-smapi-dkms acpi-call-dkms
 
 
 #1 bluefish
@@ -135,6 +127,22 @@ sudo apt-get install --yes signal-desktop
 #4    sudo apt remove --yes signal-desktop
 #4    sudo rm /etc/apt/sources.list.d/signal-xenial.list
 #4    sudo apt-get update
+
+
+#1 tlp
+#2 TLP installeren
+if laptop-detect; then sudo apt-get install --yes tlp; fi
+## Nodig voor ThinkPads.
+if [[ $HOSTNAME = pc07 ]]; then sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms; fi
+#3 Check status:
+#3 ~~~~~~~~~~~~~
+#3 Start Terminalvenster en voer uit:
+#3    sudo tlp-stat --battery
+#3
+#3 Mogelijk extra te installeren (ThinkPads/zie uitvoer tlp-stat):
+#3    sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms
+#4 Start Terminalvenster en voer uit:
+#4    sudo apt remove --yes tlp tp-smapi-dkms acpi-call-dkms
 
 
 #1 tree
