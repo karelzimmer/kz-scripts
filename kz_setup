@@ -303,11 +303,10 @@ process_option_list() {
     fi
 
     info "
-De instellijst is vastgelegd in ${PROGRAM_NAME}_* bestanden in map
-${PROGRAM_NAME} in de Persoonlijke map.
+De instellijst is vastgelegd in map ${PROGRAM_NAME} in de Persoonlijke map.
 Deze bestanden bevatten de eerder gebruikte gebruikersfoto,
 bureaubladachtergrond, favorieten, en opdrachtgeschiedenis.
-Deze bestanden kunnen worden gebruikt tijdens het afronden van de installatie."
+Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 }
 
 

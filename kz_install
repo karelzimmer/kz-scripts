@@ -312,8 +312,8 @@ geïnstalleerd"
     rm "$TEMP_LIST"
     info "
 De applijst is vastgelegd in bestand $LIST_FILE.
-Deze lijst kan worden gebruikt om de volledigheid van de
-installatie, later door ${BOLD}kz install${NORMAL}, te controleren."
+Dit bestand bevatten de eerder geïnstalleerde apps,
+Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 
