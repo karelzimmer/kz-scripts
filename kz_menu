@@ -300,13 +300,13 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
                 "${ACTIONS2[7]}#${COMMANDS2[7]}"
                 "${ACTIONS2[2]}#${COMMANDS2[2]}"
-                "${ACTIONS2[3]}#${COMMANDS2[3]}"
+                "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
     else
         EXEC=(
             [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
                 "${ACTIONS2[2]}#${COMMANDS2[2]}"
-                "${ACTIONS2[3]}#${COMMANDS2[3]}"
+                "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
     fi
     process_commands
@@ -317,7 +317,7 @@ process_menu1_choice4() {
     TITLE="${ACTIONS1[4]}"
     EXEC=(
         [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
-            "${ACTIONS2[9]}#${COMMANDS2[9]}"
+            "${ACTIONS2[10]}#${COMMANDS2[10]}"
         )
     process_commands
 }
