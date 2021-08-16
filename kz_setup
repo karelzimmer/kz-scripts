@@ -312,8 +312,11 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 
 save_user_photo() {             #1
     printf '%s\n' "$text1..."
-    cp  /var/lib/AccountsService/icons/"$USER"      \
-        "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto  |& $LOGCMD
+    if ! cp /var/lib/AccountsService/icons/"$USER"      \
+            "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto  |& $LOGCMD; then
+        rm --force "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto
+        touch "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto
+    fi
 }
 
 
