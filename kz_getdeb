@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 28.00.03
-# DateOfRelease: 2021-08-14
+# ReleaseNumber: 28.00.04
+# DateOfRelease: 2021-08-16
 ###############################################################################
 
 
@@ -195,6 +195,7 @@ start dan een nieuw Terminalvenster, en voer uit:${BLUE}
         printf '%b\n' "$TEXT"
     fi
 
+    rm --force /tmp/"$PROGRAM_NAME"_??????????.deb
     # Script kz_getdeb verwijdert niet kz en kz.1 i.v.m. lokale Git-repo.
     rm --force kz.{2..99}
     # Maar wel als in HOME, zoals voorgeschreven.
@@ -411,7 +412,7 @@ install_scriptspackage() {
                         --infobox   "$TEXT"         \
                         7 29
 
-    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    temp_deb=$(mktemp -t "$PROGRAM_NAME_XXXXXXXXXX.deb")
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     check_sudo_and_dpkg
