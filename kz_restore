@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2007-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 39.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 39.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -20,11 +20,11 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:s:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:,exclude:'
-readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } \
-[-e|--exclude=UITSLUITEN]... [-s|--source=BRON] [-t|--target=DOEL]
+readonly USAGE="Gebruik: $DISPLAY_NAME [-e|--exclude=UITSLUITEN]... \
+[-s|--source=BRON] [-t|--target=DOEL]
                     $OPTIONS_USAGE_COMMON
                     [SELECTIE...]"
-readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [SELECTIE...]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--] [SELECTIE...]
 
 Back-up terugzetten.
 
@@ -87,11 +87,11 @@ check_input() {
     local   -i  select_num=0
 
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -111,9 +111,9 @@ check_input() {
             -s|--source)
                 if $OPTION_SOURCE; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_SOURCE=true
@@ -124,9 +124,9 @@ check_input() {
             -t|--target)
                 if $OPTION_TARGET; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_TARGET=true
@@ -148,7 +148,7 @@ check_input() {
         SOURCE=$SOURCE_ARGUMENT
         if ! [[ -d $SOURCE ]]; then
             TEXT="map '$SOURCE' bestaat niet"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
             exit $ERROR
         fi
     else
@@ -158,7 +158,7 @@ check_input() {
     if $OPTION_TARGET; then
         if ! [[ -d $TARGET_ARGUMENT ]]; then
             TEXT="map '$TARGET_ARGUMENT' bestaat niet"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
             exit $ERROR
         fi
         TARGET=$TARGET_ARGUMENT
@@ -295,7 +295,7 @@ even duren)..."
             warning "Geen back-ups gevonden in $SOURCE."
         info "
 Gebruik optie source om op te geven waar de back-up gevonden kan worden.
-Voorbeeld: ${PROGRAM_NAME/kz_/kz } --source BRONMAP
+Voorbeeld: $DISPLAY_NAME --source BRONMAP
 $USAGELINE" >&2
             exit $WARNING
         elif [[ $bupnum -eq 1 ]]; then

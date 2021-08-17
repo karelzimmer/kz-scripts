@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 45.00.00
-# DateOfRelease: 2021-08-15
+# ReleaseNumber: 45.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -21,12 +21,12 @@ source "$(dirname "$0")"/kz_common.sh
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:filrs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,list,\
 reset,simulate"
-readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } [-a|--apps] [-c|--cat] \
+readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] \
 [-e|--edition=EDITIE] [-f|--files]
                   [-i|--info] [-l|--list] [-r|--reset] [-s|--simulate]
                   $OPTIONS_USAGE_COMMON
                   [APP...] [BESTAND...]"
-readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [APP...] \
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--] [APP...] \
 [BESTAND...]
 
 Apps instellen.
@@ -91,11 +91,11 @@ check_input() {
     local   -i  file_arg_num=0
 
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -117,9 +117,9 @@ check_input() {
             -e|--edition)
                 if $OPTION_EDITION; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_EDITION=true
@@ -372,7 +372,7 @@ process_argument_app() {
         fi
     done
     if $file_notfound; then
-        info "Typ '${PROGRAM_NAME/kz_/kz } --apps' voor beschikbare apps."
+        info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
     fi
 }
 
@@ -442,7 +442,7 @@ process_argument_file() {
         fi
     done
     if $file_notfound; then
-        info "Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare \
+        info "Typ '$DISPLAY_NAME --files' voor beschikbare \
 instellingsbestanden."
     fi
 }
@@ -468,7 +468,7 @@ local dfltfile_2=''
     if $file_notfound; then
         info "Geen instellingsbestanden gevonden voor $ID $RELEASE $EDITION."
         if ! $OPTION_GUI; then
-            info "Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare \
+            info "Typ '$DISPLAY_NAME --files' voor beschikbare \
 instellingsbestanden."
         fi
     fi
@@ -496,14 +496,14 @@ $(
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen apps gevonden voor $ID $RELEASE.
 
-Typ '${PROGRAM_NAME/kz_/kz } --files' voor beschikbare instellingsbestanden."
+Typ '$DISPLAY_NAME --files' voor beschikbare instellingsbestanden."
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
-    ${BLUE}${PROGRAM_NAME/kz_/kz } --sim APP...${NORMAL}
-    ${BLUE}${PROGRAM_NAME/kz_/kz } --cat APP...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --sim APP...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}
 Om APPs in te stellen voer uit:
-    ${BLUE}${PROGRAM_NAME/kz_/kz } APP...${NORMAL}"
+    ${BLUE}$DISPLAY_NAME APP...${NORMAL}"
     fi
 )"
 }
@@ -527,18 +527,18 @@ $(
 
 Controleer $PROGRAM_PATH op aanwezigheid andere instellingsbestanden.
 Om die BESTANDen te bekijken voer uit:
-    ${BLUE}${PROGRAM_NAME/kz_/kz } --sim $PROGRAM_PATH/BESTAND...${NORMAL}
-    ${BLUE}${PROGRAM_NAME/kz_/kz } --cat $PROGRAM_PATH/BESTAND...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --sim $PROGRAM_PATH/BESTAND...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --cat $PROGRAM_PATH/BESTAND...${NORMAL}
 Om die BESTANDen te gebruiken voer uit:
-    ${BLUE}${PROGRAM_NAME/kz_/kz } $PROGRAM_PATH/BESTAND...${NORMAL}
-Typ 'man ${PROGRAM_NAME/kz_/kz }' voor meer informatie."
+    ${BLUE}$DISPLAY_NAME $PROGRAM_PATH/BESTAND...${NORMAL}
+Typ 'man $DISPLAY_NAME' voor meer informatie."
     else
         printf '%s\n' "
 Om BESTANDen te bekijken voer uit:
-    ${BLUE}${PROGRAM_NAME/kz_/kz } --sim BESTAND...${NORMAL}
-    ${BLUE}${PROGRAM_NAME/kz_/kz } --cat BESTAND...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
 Om BESTANDen te gebruiken voer uit:
-    ${BLUE}${PROGRAM_NAME/kz_/kz } BESTAND...${NORMAL}"
+    ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
     fi
 )"
 }
@@ -824,7 +824,7 @@ term_script() {
         info "
 Er zijn aanvullende instructies!
 Gebruik de opdracht:
-    ${BLUE}${PROGRAM_NAME/kz_/kz } --info ${APP_ARGUMENT[*]}${NORMAL}"
+    ${BLUE}$DISPLAY_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
     fi
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then

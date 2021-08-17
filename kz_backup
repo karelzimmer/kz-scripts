@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2007-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 36.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 36.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -19,11 +19,11 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',exclude:,target:'
-readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } \
-[-e|--exclude=UITSLUITEN]... [-t|--target=DOELMAP]
+readonly USAGE="Gebruik: $DISPLAY_NAME [-e|--exclude=UITSLUITEN]... \
+[-t|--target=DOELMAP]
                    $OPTIONS_USAGE_COMMON
                    [SELECTIE...]"
-readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [SELECTIE...]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--] [SELECTIE...]
 
 Back-up maken.
 
@@ -101,11 +101,11 @@ check_input() {
     local       select=''
 
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -125,9 +125,9 @@ check_input() {
             -t|--target)
                 if $OPTION_TARGET; then
                     TEXT="optie '$1' eennmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_TARGET=true
@@ -149,9 +149,9 @@ check_input() {
         for exclude in "${EXCLUDE_ARGUMENT[@]}"; do
             if ! [[ -e $exclude ]]; then
                 TEXT="exclude bestand of map '$exclude' bestaat niet"
-                printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                        "$TEXT"                             \
-                        "$USAGELINE"                        >&2
+                printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                        "$TEXT"                     \
+                        "$USAGELINE"                >&2
                 exit    $ERROR
             fi
         done
@@ -167,9 +167,9 @@ check_input() {
         for select in "${SELECTION_ARGUMENT[@]}"; do
             if ! [[ -e $select ]]; then
                 TEXT="selectie bestand of map '$select' bestaat niet"
-                printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                        "$TEXT"                             \
-                        "$USAGELINE"                        >&2
+                printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                        "$TEXT"                     \
+                        "$USAGELINE"                >&2
                 exit    $ERROR
             fi
         done
@@ -284,11 +284,11 @@ worden."
         # Meer dan één aangekoppeld medium gevonden.
         printf '%s\n' 'Voor de nu aangekoppelde media:'
         for medium in "${!media[@]}"; do
-            printf  "    ${PROGRAM_NAME/kz_/kz } --target %s\n" \
+            printf  "    $DISPLAY_NAME --target %s\n" \
                     "${media[$medium]}/$TARGET_DEFAULT_2"
         done
     else
-        printf "%s\n" "Voorbeeld: ${PROGRAM_NAME/kz_/kz } --target DOELMAP"
+        printf "%s\n" "Voorbeeld: $DISPLAY_NAME --target DOELMAP"
     fi
     printf '%s\n' "$USAGELINE" >&2
     exit $SUCCESS

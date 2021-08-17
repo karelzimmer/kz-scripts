@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 27.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 27.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 
 
@@ -18,6 +18,7 @@
 ###############################################################################
 
 readonly    PROGRAM_NAME=$(basename "$0")
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 
@@ -127,7 +128,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 error() {
     if $OPTION_GUI; then
-        TITLE="Foutmelding ${PROGRAM_NAME/kz_/kz }"
+        TITLE="Foutmelding $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd
@@ -157,7 +158,7 @@ check_user() {
         fi
     else
         if [[ $UID -eq 0 ]]; then
-            info "${PROGRAM_NAME/kz_/kz }: niet uitvoeren met 'sudo' of als \
+            info "$DISPLAY_NAME: niet uitvoeren met 'sudo' of als \
 root"
             exit $ERROR
         fi
@@ -167,7 +168,7 @@ root"
 
 info() {
     if $OPTION_GUI; then
-        TITLE="Informatie ${PROGRAM_NAME/kz_/kz }"
+        TITLE="Informatie $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd
@@ -226,7 +227,7 @@ init_script() {
 --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $PROGRAM_NAME ?ltregel \
 %lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q \
 voor stoppen)"
-    USAGELINE="Typ '${PROGRAM_NAME/kz_/kz } --usage' voor meer informatie."
+    USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 }
 
 
@@ -340,14 +341,14 @@ process_option_debug() {
 process_option_help() {
     printf  "%s\n\n%s\n"    \
             "$HELP"         \
-            "Typ 'man ${PROGRAM_NAME/kz_/kz }' voor meer informatie."
+            "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
 process_option_usage() {
     printf "%s\n\n%s\n" \
             "$USAGE"    \
-            "Typ '${PROGRAM_NAME/kz_/kz } --help' voor meer informatie."
+            "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
@@ -373,7 +374,7 @@ process_option_version() {
             "$PROGRAM_PATH/$PROGRAM_NAME"
         )
     release_date=${release_date:0:10}
-    info "$PROGRAM_NAME $release_number ($release_date)
+    info "$DISPLAY_NAME $release_number ($release_date)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
@@ -520,7 +521,7 @@ start dan een Terminalvenster, en voer uit:
 
 warning() {
     if $OPTION_GUI; then
-        TITLE="Waarschuwing ${PROGRAM_NAME/kz_/kz }"
+        TITLE="Waarschuwing $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         # Voorbeeld: Unable to init server: Kon niet verbinden:
         #            Verbinding is geweigerd

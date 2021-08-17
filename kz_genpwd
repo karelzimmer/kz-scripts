@@ -9,8 +9,8 @@ Dit script genereert een wachtwoord bestaande uit 16 willekeurige tekens.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 03.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 import os
 import sys
@@ -19,6 +19,7 @@ import argparse
 import kz_common
 
 program_name = os.path.basename(__file__)
+display_name = program_name.replace('kz_', 'kz ')
 
 
 def generate_password():
@@ -36,17 +37,17 @@ def generate_password():
 
 
 def process_option_usage():
-    print(f"""Gebruik: {program_name.replace('kz_', 'kz ')} [-g|--gui] \
-[-h|--help] [-u|--usage] [-v|--version]
+    print(f"""Gebruik: {display_name} [-g|--gui] [-h|--help] [-u|--usage] \
+[-v|--version]
 
-Typ '{program_name.replace('kz_', 'kz ')} --help' voor meer informatie.""")
+Typ 'display_name --help' voor meer informatie.""")
 
 
 # --- script ---
 
-parser = argparse.ArgumentParser(description='Wachtwoord genereren.',
-                                 epilog="Typ 'man " +
-                                 program_name.replace('kz_', 'kz ') +
+parser = argparse.ArgumentParser(prog=display_name,
+                                 description='Wachtwoord genereren.',
+                                 epilog="Typ 'man " + display_name +
                                  "' voor meer informatie.")
 parser.add_argument('-g', '--gui', action='store_true',
                     help='start in grafische modus')

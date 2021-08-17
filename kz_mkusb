@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2014-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 18.06.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 18.06.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -20,10 +20,10 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON's:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:'
-readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } [-s|--source=BRON] \
+readonly USAGE="Gebruik: $DISPLAY_NAME [-s|--source=BRON] \
 [-t|--target=DOEL]
                   $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--]
 
 USB-sticks maken.
 
@@ -57,11 +57,11 @@ declare TARGET_ARGUMENT=''
 
 check_input() {
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -75,9 +75,9 @@ check_input() {
             -s|--source)
                 if $OPTION_SOURCE; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_SOURCE=true
@@ -88,9 +88,9 @@ check_input() {
             -t|--target)
                 if $OPTION_TARGET; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_TARGET=true
@@ -110,7 +110,7 @@ check_input() {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -121,7 +121,7 @@ check_input() {
     fi
     if ! [[ -d $SOURCEDIR ]]; then
         TEXT="map '$SOURCEDIR' bestaat niet"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
 

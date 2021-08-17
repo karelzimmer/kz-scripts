@@ -17,13 +17,14 @@ Dit script voert updates uit voor Debian pakketten en snaps.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 02.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 import sys
 import subprocess
 
 program_name = 'kz_go'
+display_name = program_name.replace('kz_', 'kz ')
 option_gui = 0
 
 # --- script ---
@@ -33,7 +34,7 @@ try:
     if sys.argv[1] == '--gui':
         option_gui = 1
     elif sys.argv[1]:
-        print(f'{program_name}: geen opties of argumenten opgeven')
+        print(f'{display_name}: geen opties of argumenten opgeven')
         sys.exit(0)
 except Exception:
     pass
@@ -57,7 +58,7 @@ except Exception as ex:
 # Is een reboot nodig?
 try:
     with open('/var/run/reboot-required') as fh:
-        print(f'{program_name}: REBOOT')
+        print(f'{display_name}: REBOOT')
 except FileNotFoundError:
     pass
 except Exception as ex:

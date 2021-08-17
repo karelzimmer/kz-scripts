@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2015-2020 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 14.00.01
-# DateOfRelease: 2021-08-15
+# ReleaseNumber: 14.00.02
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -20,8 +20,8 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...]
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Scripts controleren.
 
@@ -45,11 +45,11 @@ declare -i MAXRC=0
 
 check_input() {
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -72,7 +72,7 @@ check_input() {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
 

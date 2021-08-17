@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2015-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 12.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 12.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -21,11 +21,11 @@ source "$(dirname "$0")"/kz_common.sh
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addappfolder,addfavbottom,\
 addfavtop,removeappfolder,removefav,file:,folder:"
-readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } \
+readonly USAGE="Gebruik: $DISPLAY_NAME \
 [--addappfolder|--removeappfolder --folder=APPFOLDER]
                  [--addfavbottom|--addfavtop|--removefav --file=DESKTOPFILE]
                  $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--]
 
 GUI wijzigen.
 
@@ -74,11 +74,11 @@ declare OPTION_REMOVEFAV=false
 
 check_input() {
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -92,9 +92,9 @@ check_input() {
             --addappfolder)
                 if $OPTION_ADDAPPFOLDER; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_ADDAPPFOLDER=true
@@ -104,15 +104,15 @@ check_input() {
             --addfavtop)
                 if $OPTION_ADDFAVTOP; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit $ERROR
                 elif ($OPTION_ADDFAVBOTTOM || $OPTION_REMOVEFAV); then
                     TEXT="een optie eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_ADDFAVTOP=true
@@ -122,15 +122,15 @@ check_input() {
             --addfavbottom)
                 if $OPTION_ADDFAVBOTTOM; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit $ERROR
                 elif ($OPTION_ADDFAVTOP || $OPTION_REMOVEFAV); then
                     TEXT="een optie eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_ADDFAVBOTTOM=true
@@ -140,9 +140,9 @@ check_input() {
             --file)
                 if $OPTION_FILE; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_FILE=true
@@ -153,9 +153,9 @@ check_input() {
             --folder)
                 if $OPTION_FOLDER; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_FOLDER=true
@@ -166,9 +166,9 @@ check_input() {
             --removeappfolder)
                 if $OPTION_REMOVEAPPFOLDER; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_REMOVEAPPFOLDER=true
@@ -178,15 +178,15 @@ check_input() {
             --removefav)
                 if $OPTION_REMOVEFAV; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 elif ($OPTION_ADDFAVTOP || $OPTION_ADDFAVBOTTOM); then
                     TEXT="een optie eenmaal opgeven"
-                    printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                            "$TEXT"                             \
-                            "$USAGELINE"                        >&2
+                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                            "$TEXT"                     \
+                            "$USAGELINE"                >&2
                     exit    $ERROR
                 else
                     OPTION_REMOVEFAV=true
@@ -205,24 +205,24 @@ check_input() {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
 
     if ($OPTION_ADDFAVTOP || $OPTION_ADDFAVBOTTOM || $OPTION_REMOVEFAV) &&
         ! $OPTION_FILE; then
         TEXT="ontbrekende optie 'file'"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FILE &&
         ! ($OPTION_ADDFAVTOP || $OPTION_ADDFAVBOTTOM || $OPTION_REMOVEFAV)
         then
         TEXT="ontbrekende optie 'addfavtop', 'addfavbottom', of 'removefav'"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FILE && [[ $FILE_ARGUMENT != *.desktop ]]; then
         TEXT="bestandsnaam dient te eindigen met '.desktop'"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
     DESKTOPFILE=$FILE_ARGUMENT
@@ -230,12 +230,12 @@ check_input() {
     if ($OPTION_ADDAPPFOLDER || $OPTION_REMOVEAPPFOLDER) && ! $OPTION_FOLDER
         then
         TEXT="ontbrekende optie 'folder'"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FOLDER && ! ($OPTION_ADDAPPFOLDER || $OPTION_REMOVEAPPFOLDER)
         then
         TEXT="ontbrekende optie 'addappfolder'"
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
     APPFOLDER=$FOLDER_ARGUMENT

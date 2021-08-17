@@ -211,7 +211,7 @@ check_input() {
         if [[ "$*" = *-g* ]]; then
             TERMINAL=true
         else
-            TEXT="${PROGRAM_NAME/kz_/kz }: geen opties of argumenten opgeven
+            TEXT="$DISPLAY_NAME: geen opties of argumenten opgeven
 
 Voor de nieuwste versie van $DISPLAY_NAME én het pakket kz,
 gebruik de opdrachten:   (kopie van kz wordt opgeslagen en later verwijderd)
@@ -224,7 +224,7 @@ Of gebruik de opdracht:  (er wordt geen kopie van kz opgeslagen)
 Of gebruik de opdracht:  (als curl is geïnstalleerd, geen kopie)
     ${BLUE}curl -L karelzimmer.nl/kz | bash${NORMAL}
 Of gebruik de opdracht:  (mits pakket kz reeds is geïnstalleerd)
-    ${BLUE}${PROGRAM_NAME/kz_/kz }${NORMAL}"
+    ${BLUE}$DISPLAY_NAME${NORMAL}"
             printf "%b\n" "$TEXT" >&2
             exit $SUCCESS
         fi

@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2014-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 17.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 17.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -20,9 +20,8 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'c'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',checksums'
-readonly USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } [-c|--checksums] \
-$OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...]
+readonly USAGE="Gebruik: $DISPLAY_NAME [-c|--checksums] $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Beeldbestanden downloaden.
 
@@ -51,11 +50,11 @@ declare OPTION_CHECKSUMS=false
 
 check_input() {
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -82,7 +81,7 @@ check_input() {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     fi
 

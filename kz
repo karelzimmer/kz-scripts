@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.01.00
-# DateOfRelease: 2021-08-14
+# ReleaseNumber: 01.01.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 
 ###############################################################################
@@ -68,7 +68,7 @@ init_script() {
 
 check_input() {
     if ! [[ "$*" ]]; then
-        printf "$PROGRAM_NAME: %s\n" 'OPDRACHT [ARG] opgeven' >&2
+        printf "$PROGRAM_NAME: %s\n\n" 'OPDRACHT [ARG] opgeven' >&2
         show_commands
         exit $WARNING
     fi
@@ -89,16 +89,15 @@ check_input() {
         exit $SUCCESS
     fi
     if ! [[ -e "$PROGRAM_PATH/kz_$1" ]]; then
-        printf "$PROGRAM_NAME: %s\n" "OPDRACHT '$1' bestaat niet" >&2
+        printf "$PROGRAM_NAME: %s\n\n" "OPDRACHT '$1' bestaat niet" >&2
         show_commands
         exit $ERROR
     fi
-    EXEC=${CALLED/kz /kz_}
 }
 
 
 show_commands() {
-    printf "%s\n" "De volgende OPDRACHTen zijn beschikbaar:"
+    printf '%s\n' 'De volgende OPDRACHTen zijn beschikbaar:'
     find    "$PROGRAM_PATH"/kz_*    \
             -maxdepth 1             \
             -type f                 \
@@ -159,6 +158,7 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 
 
 process_input() {
+    EXEC=${CALLED/kz /kz_}
     # shellcheck disable=SC2086
     exec $EXEC
 }

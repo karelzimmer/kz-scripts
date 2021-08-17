@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 62.01.02
-# DateOfRelease: 2021-08-15
+# ReleaseNumber: 62.01.03
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -19,8 +19,8 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } $OPTIONS_USAGE_COMMON"
-readonly    HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--]
+readonly    USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+readonly    HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--]
 
 Pakket distribueren.
 
@@ -77,11 +77,11 @@ check_input() {
     local ubuntu_full_name=''
 
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -104,9 +104,9 @@ check_input() {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                "$TEXT"                             \
-                "$USAGELINE"                        >&2
+        printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                "$TEXT"                     \
+                "$USAGELINE"                >&2
         exit    $ERROR
     fi
 
@@ -130,9 +130,9 @@ check_input() {
             ($USER = user   && $debian_full_name = 'Debian Live user')  ]]
     then
             TEXT='alleen uitvoeren als ontwikkelaar'
-            printf  "${PROGRAM_NAME/kz_/kz }: %s\n%s\n" \
-                    "$TEXT"                             \
-                    "$USAGELINE"                        >&2
+            printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                    "$TEXT"                     \
+                    "$USAGELINE"                >&2
             exit    $ERROR
     fi
 
@@ -205,8 +205,7 @@ check_names() {
                                 "$SCRIPTS_DIR"  || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
-Herstel alle meldingen hierboven en start daarna weer \
-${PROGRAM_NAME/kz_/kz }."
+Herstel alle meldingen hierboven en start daarna weer $DISPLAY_NAME."
         exit $check_rc
     fi
 }
@@ -219,8 +218,7 @@ check_scripts() {
     "$SCRIPTS_DIR"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
-Herstel alle meldingen hierboven en start daarna weer \
-${PROGRAM_NAME/kz_/kz }."
+Herstel alle meldingen hierboven en start daarna weer $DISPLAY_NAME."
         exit $check_rc
     fi
 }

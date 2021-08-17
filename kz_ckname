@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2012-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 13.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 13.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -19,9 +19,8 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: ${PROGRAM_NAME/kz_/kz } $OPTIONS_USAGE_COMMON \
-[MAP...]"
-readonly    HELP="Gebruik: ${PROGRAM_NAME/kz_/kz } [OPTIE...] [--] [MAP...]
+readonly    USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON [MAP...]"
+readonly    HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--] [MAP...]
 
 Bestandsnamen controleren.
 
@@ -51,11 +50,11 @@ check_input() {
     local -i map_arg_num=0
 
     PARSED=$(
-        getopt  --alternative                               \
-                --options       "$OPTIONS_SHORT"            \
-                --longoptions   "$OPTIONS_LONG"             \
-                --name          "${PROGRAM_NAME/kz_/kz }"   \
-                -- "$@"
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
         )       || GETOPT_RC=$?
     if [[ $GETOPT_RC -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
@@ -82,6 +81,18 @@ check_input() {
         ((++map_arg_num))
         shift
     done
+    if ! $ARGUMENT_MAP; then
+        MAP_ARGUMENT[0]=$START_DFLT
+    fi
+    for dir in ${MAP_ARGUMENT[*]}; do
+        if ! [[ -d $dir ]]; then
+                TEXT="map '$dir' bestaat niet"
+                printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                        "$TEXT"                     \
+                        "$USAGELINE"                >&2
+            exit $ERROR
+        fi
+    done
 
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
@@ -94,17 +105,6 @@ check_input() {
 
 
 process_input() {
-    if ! $ARGUMENT_MAP; then
-        MAP_ARGUMENT[0]=$START_DFLT
-    fi
-
-    for dir in ${MAP_ARGUMENT[*]}; do
-        if ! [[ -d $dir ]]; then
-            error "Map '$dir' bestaat niet."
-            exit $ERROR
-        fi
-    done
-
     check_files_and_folders
 }
 
