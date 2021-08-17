@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 28.00.04
-# DateOfRelease: 2021-08-16
+# ReleaseNumber: 28.00.05
+# DateOfRelease: 2021-08-17
 ###############################################################################
 
 
@@ -17,6 +17,7 @@
 ###############################################################################
 
 readonly    PROGRAM_NAME='kz_getdeb'
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 #eadonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 
@@ -166,7 +167,7 @@ $command, code: $rc ($rc_desc)"
             exit "$rc"
             ;;
         *)
-            printf "${YELLOW}%s${NORMAL}\n" "$PROGRAM_NAME is onderbroken." >&2
+            printf "${YELLOW}%s${NORMAL}\n" "$DISPLAY_NAME is onderbroken." >&2
             exit "$rc"
             ;;
     esac
@@ -180,7 +181,7 @@ log_debug() {
 
 signal_exit() {
     if [[ $rc -ne $SUCCESS ]]; then
-        TEXT="${RED}Programma $PROGRAM_NAME is afgebroken.
+        TEXT="${RED}Programma $DISPLAY_NAME is afgebroken.
 
 Om de log te controleren, start een Terminalvenster, en voer uit:${BLUE}
     $LOGCMD_CHECK${NORMAL}
@@ -212,7 +213,7 @@ check_input() {
         else
             TEXT="${PROGRAM_NAME/kz_/kz }: geen opties of argumenten opgeven
 
-Voor de nieuwste versie van $PROGRAM_NAME én het pakket kz,
+Voor de nieuwste versie van $DISPLAY_NAME én het pakket kz,
 gebruik de opdrachten:   (kopie van kz wordt opgeslagen en later verwijderd)
     ${BLUE}wget karelzimmer.nl/kz${NORMAL}
     ${BLUE}bash kz${NORMAL}
@@ -243,7 +244,7 @@ sudo).
 Dit programma heeft beheerdersrechten nodig, en kan nu niet verder.
 
 Typ 'exit' om dit venster te sluiten."
-        TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+        TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                             --title     'Fout'          \
                             --infobox   "$TEXT"         \
                             11 71
@@ -260,7 +261,7 @@ check_on_ac_power() {
         TEXT='De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
-        whiptail    --backtitle "$PROGRAM_NAME" \
+        whiptail    --backtitle "$DISPLAY_NAME" \
                     --title     'Waarschuwing'  \
                     --msgbox    "$TEXT"         \
                     10 71
@@ -284,7 +285,7 @@ installeren van pakket kz.
 Voer uw wachtwoord in:'
             # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
             if printf '%s\n' "$(
-                whiptail    --backtitle     "$PROGRAM_NAME"         \
+                whiptail    --backtitle     "$DISPLAY_NAME"         \
                             --title         'Authenticatie nodig'   \
                             --ok-button     'Verifiëren'            \
                             --cancel-button 'Annuleren'             \
@@ -296,14 +297,14 @@ Voer uw wachtwoord in:'
             else
                 TEXT='Geen of verkeerd wachtwoord ingevoerd, of
 Annuleren gekozen.'
-                if ! whiptail   --backtitle     "$PROGRAM_NAME" \
+                if ! whiptail   --backtitle     "$DISPLAY_NAME" \
                                 --title         'Fout'          \
                                 --yes-button    'Opnieuw'       \
                                 --no-button     'Stoppen'       \
                                 --yesno         "$TEXT"         \
                                 10 45; then
                     TEXT='Programma is gestopt door de gebruiker'
-                    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+                    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                                         --title     'Gestopt'       \
                                         --infobox   "$TEXT"         \
                                         7 42
@@ -326,7 +327,7 @@ check_dpkg() {
                     &> /dev/null; do
             TEXT="Wacht tot andere pakketbeheerder klaar is (dit kan even \
 duren)..."
-            TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+            TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                                 --title     'Voortgang'     \
                                 --infobox   "$TEXT"         \
                                 7 69
@@ -339,7 +340,7 @@ duren)..."
                     &> /dev/null; do
             TEXT="Wacht tot andere pakketbeheerder klaar is (dit kan even \
 duren)..."
-            TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+            TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                                 --title     'Voortgang'     \
                                 --infobox   "$TEXT"         \
                                 7 69
@@ -389,7 +390,7 @@ install_scriptspackage() {
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
         check_sudo_and_dpkg
         TEXT='Voeg pakketbron toe...'
-        TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+        TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                             --title     'Voortgang'     \
                             --infobox   "$TEXT"         \
                             7 26
@@ -397,7 +398,7 @@ install_scriptspackage() {
 
         check_sudo_and_dpkg
         TEXT='Ververs pakketlijst'
-        TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+        TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                             --title     'Voortgang'     \
                             --infobox   "$TEXT"         \
                             7 23
@@ -407,7 +408,7 @@ install_scriptspackage() {
     # Installeer scriptspakket.
     check_sudo_and_dpkg
     TEXT='Download scriptspakket...'
-    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 29
@@ -417,7 +418,7 @@ install_scriptspackage() {
 
     check_sudo_and_dpkg
     TEXT='Installeer scriptspakket (dit kan even duren)...'
-    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 52
@@ -435,7 +436,7 @@ install_scriptspackage() {
 
 create_development_environment() {
     TEXT='Aanmaken ontwikkelomgeving...'
-    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 33
@@ -511,7 +512,7 @@ download_website() {
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
     TEXT='Download website (dit kan even duren)...'
-    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 44
@@ -541,7 +542,7 @@ onder Linux, en in map /usr/share/doc/kz.'
 Typ 'exit' om dit venster te sluiten."
         height=12
     fi
-    TERM=ansi whiptail  --backtitle "$PROGRAM_NAME" \
+    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title 'Gereed'            \
                         --infobox "$TEXT"           \
                         $height 65
