@@ -6,8 +6,8 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 04.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 04.00.01
+# DateOfRelease: 2021-08-17
 ###############################################################################
 
 #1
@@ -21,14 +21,10 @@ if [[ $HOSTNAME = pc06 && $USER = karel ]]; then kz_gset --removefav --file='fir
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'; fi
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-delay 300; fi
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-enabled true; fi
 if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
 if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
-#4    gsettings reset org.gnome.desktop.screensaver lock-delay
-#4    gsettings reset org.gnome.desktop.screensaver lock-enabled
 #4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 #4    gsettings reset org.gnome.nautilus.preferences show-create-link
 
