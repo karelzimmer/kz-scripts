@@ -16,6 +16,7 @@
 ###############################################################################
 
 readonly    PROGRAM_NAME=$(basename "$0")
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 declare -ir SUCCESS=0
@@ -23,11 +24,11 @@ declare -ir ERROR=1
 declare -ir WARNING=2
 
 readonly    USAGE="\
-Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
-         $PROGRAM_NAME [-l|--list] [-h|--help] [-u|--usage] [-v|--version]"
+Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
+         $DISPLAY_NAME [-l|--list] [-h|--help] [-u|--usage] [-v|--version]"
 readonly    HELP="\
-Gebruik: $PROGRAM_NAME OPDRACHT [ARG]
-         $PROGRAM_NAME OPTIE
+Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
+         $DISPLAY_NAME OPTIE
 
 Opdracht uitvoeren.
 
@@ -68,7 +69,7 @@ init_script() {
 
 check_input() {
     if ! [[ "$*" ]]; then
-        printf "$PROGRAM_NAME: %s\n\n" 'OPDRACHT [ARG] opgeven' >&2
+        printf "$DISPLAY_NAME: %s\n\n" 'OPDRACHT [ARG] opgeven' >&2
         show_commands
         exit $WARNING
     fi
@@ -89,7 +90,7 @@ check_input() {
         exit $SUCCESS
     fi
     if ! [[ -e "$PROGRAM_PATH/kz_$1" ]]; then
-        printf "$PROGRAM_NAME: %s\n\n" "OPDRACHT '$1' bestaat niet" >&2
+        printf "$DISPLAY_NAME: %s\n\n" "OPDRACHT '$1' bestaat niet" >&2
         show_commands
         exit $ERROR
     fi
@@ -108,21 +109,21 @@ show_commands() {
             -printf '%f\n'          |
     sort                            |
     sed     's/kz_//'
-    printf "\n%s\n"  "Typ '$PROGRAM_NAME --help' voor meer informatie."
+    printf "\n%s\n"  "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
 process_option_usage() {
     printf "%s\n\n%s\n" \
             "$USAGE"    \
-            "Typ '$PROGRAM_NAME --help' voor meer informatie."
+            "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
 process_option_help() {
     printf  "%s\n\n%s\n"    \
             "$HELP"         \
-            "Typ 'man $PROGRAM_NAME' voor meer informatie."
+            "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
@@ -148,7 +149,7 @@ process_option_version() {
             "$PROGRAM_PATH/$PROGRAM_NAME"
         )
     release_date=${release_date:0:10}
-    printf "%s\n" "$PROGRAM_NAME $release_number ($release_date)
+    printf "%s\n" "$DISPLAY_NAME $release_number ($release_date)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
