@@ -435,11 +435,11 @@ install_scriptspackage() {
 
 
 create_development_environment() {
-    TEXT='Aanmaken ontwikkelomgeving...'
+    TEXT='Maak ontwikkelomgeving...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 33
+                        7 29
     check_dependencies
     process_deb
     process_documents
