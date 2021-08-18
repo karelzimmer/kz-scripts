@@ -282,7 +282,8 @@ worden."
     printf "%s\n" "$TEXT" >&2
     if $media2; then
         # Meer dan één aangekoppeld medium gevonden.
-        printf '%s\n' 'Voor de nu aangekoppelde media is er keuze uit:'
+        printf '%s\n' "Voeg één van de volgende opties toe voor de nu \
+aangekoppelde media:"
         for medium in "${!media[@]}"; do
             printf  "    ${BLUE}--target %s\n${NORMAL}" \
                     "${media[$medium]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"
