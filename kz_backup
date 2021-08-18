@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2007-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 36.00.01
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 36.00.02
+# DateOfRelease: 2021-08-18
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -282,10 +282,10 @@ worden."
     printf "%s\n" "$TEXT" >&2
     if $media2; then
         # Meer dan één aangekoppeld medium gevonden.
-        printf '%s\n' 'Voor de nu aangekoppelde media:'
+        printf '%s\n' 'Voor de nu aangekoppelde media is er keuze uit:'
         for medium in "${!media[@]}"; do
-            printf  "    $DISPLAY_NAME --target %s\n" \
-                    "${media[$medium]}/$TARGET_DEFAULT_2"
+            printf  "    ${BLUE}--target %s\n${NORMAL}" \
+                    "${media[$medium]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"
         done
     else
         printf "%s\n" "Voorbeeld: $DISPLAY_NAME --target DOELMAP"
