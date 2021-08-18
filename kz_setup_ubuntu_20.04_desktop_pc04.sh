@@ -6,18 +6,16 @@
 # Auteursrecht (c) 2020-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 04.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 04.00.01
+# DateOfRelease: 2021-08-18
 ###############################################################################
 
 #1
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 if [[ $HOSTNAME = pc04 && $USER = nina ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Fleurs_de_Prunus_24_by_Jérôme_Boivin.jpg'; fi
-if [[ $HOSTNAME = pc04 && $USER = nina ]]; then gsettings set org.gnome.desktop.screensaver lock-enabled true; fi
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
-#4    gsettings set org.gnome.desktop.screensaver lock-enabled false
 
 
 #1 calibre

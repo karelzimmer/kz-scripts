@@ -6,16 +6,14 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 02.00.01
+# DateOfRelease: 2021-08-18
 ###############################################################################
 
 #1
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-delay 300; fi
-if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver lock-enabled true; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
 if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
@@ -24,8 +22,6 @@ if [[ $HOSTNAME = pc07 && $USER = karel ]]; then gsettings set org.gnome.nautilu
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
 #4    gsettings reset org.gnome.desktop.screensaver picture-uri
-#4    gsettings reset org.gnome.desktop.screensaver lock-delay
-#4    gsettings reset org.gnome.desktop.screensaver lock-enabled
 #4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 #4    gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
