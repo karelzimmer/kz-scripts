@@ -260,23 +260,14 @@ sync_pdf_kz_docs() {
 
 sync_all_kz_docs() {
     # De exclude en delete-excluded i.v.m. de lokale git repository.
-    rsync   --archive               \
-            --delete                \
-            --exclude='LICENSE'     \
-            --exclude='README.md'   \
-            --exclude='.git*'       \
-            --delete-excluded       \
-            "${SOURCE_DEB[DOCS]}"/  \
-            "${TARGET_DEB[DOC]}"    |& $LOGCMD
-
-    rsync   --archive                       \
-            --delete                        \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            --delete-excluded               \
-            "${SOURCE_UPLOADS[DOCS]}"/      \
-            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
+    rsync   --archive                   \
+            --delete                    \
+            --exclude='LICENSE'         \
+            --exclude='README.md'       \
+            --exclude='.git*'           \
+            --delete-excluded           \
+            "${SOURCE_UPLOADS[DOCS]}"/  \
+            "${TARGET_UPLOADS[DOCS]}"   |& $LOGCMD
 }
 
 
