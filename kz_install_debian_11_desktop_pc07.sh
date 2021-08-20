@@ -1,13 +1,13 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Debian 10 LST desktop op pc07.
+# Installatiebestand voor Debian 11 LST desktop op pc07.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.01.00
-# DateOfRelease: 2021-08-15
+# ReleaseNumber: 01.00.00
+# DateOfRelease: 2021-08-16
 ###############################################################################
 
 #1
