@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 62.02.00
-# DateOfRelease: 2021-08-19
+# ReleaseNumber: 62.03.00
+# DateOfRelease: 2021-08-20
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -45,7 +45,6 @@ readonly -A TARGET_DEB=(
         [BACKGROUNDS]=$DEB_TEMP_DIR/usr/share/backgrounds
     [BACKGROUND_PROP]=$DEB_TEMP_DIR/usr/share/gnome-background-properties
                 [BIN]=$DEB_TEMP_DIR/usr/bin
-                [DOC]=$DEB_TEMP_DIR/usr/share/doc/kz
                 [MAN]=$DEB_TEMP_DIR/usr/share/man/man1
            [POLICY_1]=$DEB_TEMP_DIR/usr/share/polkit-1/actions
            [TABCOMPL]=$DEB_TEMP_DIR/usr/share/bash-completion/completions
@@ -226,13 +225,10 @@ Herstel alle meldingen hierboven en start daarna weer $DISPLAY_NAME."
 
 
 sync_pdf_kz_docs() {
-    local txtfile=''
-    local basefile=''
+    local docfile=''
     local changes=false
 
     info 'Gewijzigde documenten...'
-
-    cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
 
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
@@ -240,8 +236,8 @@ sync_pdf_kz_docs() {
     # Vanuit LibreOffice aangemaakt.
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
+    cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
     for docfile in *.odt *.txt; do
-        basefile=$(basename "$docfile" .odt)
 
         # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
         if ! diff   "$docfile"                          \
@@ -254,11 +250,11 @@ sync_pdf_kz_docs() {
             info "    $docfile"
         fi
     done
+    cd "$HOME" || exit $ERROR
 
     if ! $changes; then
         info '    Geen documenten gewijzigd'
     fi
-    cd "$HOME" || exit $ERROR
 }
 
 
@@ -272,23 +268,6 @@ sync_all_kz_docs() {
             --delete-excluded       \
             "${SOURCE_DEB[DOCS]}"/  \
             "${TARGET_DEB[DOC]}"    |& $LOGCMD
-
-    cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
-    for txtfile in *.txt; do
-        basefile=$(basename "$txtfile" .txt)
-        cp  --archive                               \
-            --update                                \
-            "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" \
-            "${TARGET_DEB[DOC]}"
-    done
-    for docfile in *.odt; do
-        basefile=$(basename "$docfile" .odt)
-        cp  --archive                               \
-            --update                                \
-            "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" \
-            "${TARGET_DEB[DOC]}"
-    done
-    cd "$HOME" || exit $ERROR
 
     rsync   --archive                       \
             --delete                        \

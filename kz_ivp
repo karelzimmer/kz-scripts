@@ -148,6 +148,7 @@ process_input() {
                 ;;
         esac
     done
+    cd "$HOME" || exit $ERROR
 }
 
 
