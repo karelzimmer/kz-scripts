@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 62.01.03
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 62.02.00
+# DateOfRelease: 2021-08-19
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -151,6 +151,7 @@ check_input() {
 
 process_input() {
     pre_actions
+exit #XXX HANDBRAKE
     create_package
     upload_website
     install_package
@@ -182,6 +183,7 @@ check_dependencies() {
         sudo apt-get install --yes fakeroot |& $LOGCMD
     fi
     if ! command -v ghostscript 1> /dev/null; then
+        # Voor ps2pdf.
         info 'Installeer ghostscript...'
         sudo apt-get install --yes ghostscript |& $LOGCMD
     fi
@@ -236,28 +238,10 @@ sync_pdf_kz_docs() {
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
 
-    for txtfile in *.txt; do
-        basefile=$(basename "$txtfile" .txt)
-
-        # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
-        if ! diff   "$txtfile"                          \
-                    "${TARGET_UPLOADS[DOCS]}/$txtfile"  &> /dev/null; then
-            enscript    --quiet             \
-                        --color             \
-                        --highlight=bash    \
-                        --output=-          \
-                        "$txtfile"          |
-            ps2pdf      -                   \
-                        "${TARGET_UPLOADS[PDFS]}/$basefile.pdf" |& $LOGCMD
-            changes=true
-            info "    $txtfile"
-        fi
-    done
-
     # Vanuit LibreOffice aangemaakt.
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
-    for docfile in *.odt; do
+    for docfile in *.odt *.txt; do
         basefile=$(basename "$docfile" .odt)
 
         # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
@@ -320,7 +304,6 @@ sync_all_kz_docs() {
 
 sync_pdf_kz_scripts() {
     local changes=false
-    local highlight=''
     local scriptfile=''
 
     info 'Gewijzigde scripts...'
@@ -358,8 +341,8 @@ sync_pdf_kz_scripts() {
                         highlight=bash
                 fi
                 enscript    --quiet                                     \
-                            --color                                     \
                             --highlight=$highlight                      \
+                            --line-numbers                              \
                             --title="$scriptfile"                       \
                             --output=-                                  \
                             "$scriptfile"                               |
