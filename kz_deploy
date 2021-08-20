@@ -8,7 +8,7 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 62.04.01
+# ReleaseNumber: 62.04.02
 # DateOfRelease: 2021-08-20
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
@@ -253,10 +253,11 @@ sync_pdf_kz_docs() {
     done
     cd "$HOME" || exit $ERROR
 
-    cp  --archive                                           \
-        --update                                            \
-        "${TARGET_UPLOADS[PDFS]}"/Checklist_installatie*    \
-        "${TARGET_DEB[DOC]}"
+    cp  --archive                           \
+        --update                            \
+        "${TARGET_UPLOADS[PDFS]}"/\
+Checklist_installatie*{desktop,server}.odt  \
+        "${TARGET_DEB[DOC]}"                |& $LOGCMD || true
 
     if ! $changes; then
         info '    Geen documenten gewijzigd'
