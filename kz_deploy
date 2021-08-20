@@ -151,7 +151,6 @@ check_input() {
 
 process_input() {
     pre_actions
-exit #XXX HANDBRAKE
     create_package
     upload_website
     install_package
