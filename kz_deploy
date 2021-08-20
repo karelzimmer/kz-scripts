@@ -8,7 +8,7 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 62.04.00
+# ReleaseNumber: 62.04.01
 # DateOfRelease: 2021-08-20
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
@@ -229,7 +229,7 @@ sync_pdf_kz_docs() {
     local docfile=''
     local changes=false
 
-    info 'Gewijzigde documenten...'
+    info 'Verwerk gewijzigde documenten...'
 
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
@@ -281,7 +281,7 @@ sync_pdf_kz_scripts() {
     local changes=false
     local scriptfile=''
 
-    info 'Gewijzigde scripts...'
+    info 'Verwerk gewijzigde scripts...'
 
     cd "${SOURCE_UPLOADS[SCRIPTS]}" || exit $ERROR
     for scriptfile in *; do
