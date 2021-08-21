@@ -1,17 +1,17 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz genpwd.
+# Tab-completion-script voor kz go.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 #
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.00.00
-# DateOfRelease: 2021-08-08
+# ReleaseNumber: 01.00.00
+# DateOfRelease: 2021-08-21
 ###############################################################################
 
 dashoptions='-g --gui -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz_genpwd
+complete -o default -W "$dashoptions" kz_go
 
 # EOF
