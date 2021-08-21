@@ -17,8 +17,8 @@ Dit script voert updates uit voor Debian pakketten en snaps.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.00.01
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 02.01.00
+# DateOfRelease: 2021-08-21
 ###############################################################################
 import sys
 import subprocess
@@ -34,7 +34,7 @@ try:
     if sys.argv[1] == '--gui':
         option_gui = 1
     elif sys.argv[1]:
-        print(f'{display_name}: geen opties of argumenten opgeven')
+        print(f'Gebruik: {display_name}')
         sys.exit(0)
 except Exception:
     pass

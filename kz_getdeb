@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 28.00.05
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 28.01.00
+# DateOfRelease: 2021-08-21
 ###############################################################################
 
 
@@ -211,20 +211,13 @@ check_input() {
         if [[ "$*" = *-g* ]]; then
             TERMINAL=true
         else
-            TEXT="$DISPLAY_NAME: geen opties of argumenten opgeven
-
-Voor de nieuwste versie van $DISPLAY_NAME én het pakket kz,
-gebruik de opdrachten:   (kopie van kz wordt opgeslagen en later verwijderd)
-    ${BLUE}wget karelzimmer.nl/kz${NORMAL}
-    ${BLUE}bash kz${NORMAL}
-Of gebruik de opdracht:  (idem hiervoor, nu op 1 regel)
-    ${BLUE}wget karelzimmer.nl/kz; bash kz${NORMAL}
-Of gebruik de opdracht:  (er wordt geen kopie van kz opgeslagen)
-    ${BLUE}wget -O- karelzimmer.nl/kz | bash${NORMAL}
-Of gebruik de opdracht:  (als curl is geïnstalleerd, geen kopie)
-    ${BLUE}curl -L karelzimmer.nl/kz | bash${NORMAL}
-Of gebruik de opdracht:  (mits pakket kz reeds is geïnstalleerd)
-    ${BLUE}$DISPLAY_NAME${NORMAL}"
+            TEXT="\
+Gebruik: wget karelzimmer.nl/kz
+         bash kz
+     of: wget karelzimmer.nl/kz; bash kz
+     of: wget -O- karelzimmer.nl/kz | bash
+     of: curl -L karelzimmer.nl/kz | bash
+     of: $DISPLAY_NAME"
             printf "%b\n" "$TEXT" >&2
             exit $SUCCESS
         fi
