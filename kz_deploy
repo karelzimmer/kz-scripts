@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 62.04.02
-# DateOfRelease: 2021-08-20
+# ReleaseNumber: 62.04.03
+# DateOfRelease: 2021-08-21
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -304,20 +304,7 @@ sync_pdf_kz_scripts() {
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
             else
                 # Script inclusief *.1, *.completion, *.desktop, en *.policy.
-                if grep --quiet                         \
-                        --line-regexp                   \
-                        --regexp='#!''/usr/bin/python3' \
-                        "$scriptfile"; then
-                        highlight=python
-                elif [[ $scriptfile = *.py ]]; then
-                        highlight=python
-                elif [[ $scriptfile = *.policy ]]; then
-                        highlight=html
-                else
-                        highlight=bash
-                fi
                 enscript    --quiet                                     \
-                            --highlight=$highlight                      \
                             --line-numbers                              \
                             --title="$scriptfile"                       \
                             --output=-                                  \
