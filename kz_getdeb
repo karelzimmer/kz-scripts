@@ -16,7 +16,7 @@ if [[ -e ./kz_common.sh ]]; then
 else
     wget   --output-document=/tmp/kz_common.sh                     \
            https://karelzimmer.nl/data/linux/scripts/kz_common.sh  &> /dev/null
-source /tmp/kz_common.sh
+    source /tmp/kz_common.sh
 fi
 
 ###############################################################################
