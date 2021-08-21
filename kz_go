@@ -17,56 +17,80 @@ Dit script voert updates uit voor Debian pakketten en snaps.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 02.01.00
+# ReleaseNumber: 03.00.00
 # DateOfRelease: 2021-08-21
 ###############################################################################
+import os
 import sys
+import random
+import argparse
+import kz_common
 import subprocess
 
-program_name = 'kz_go'
+program_name = os.path.basename(__file__)
 display_name = program_name.replace('kz_', 'kz ')
-option_gui = 0
+
+
+def perform_update():
+    # Opdracht als sequence:
+    subprocess.run(['sudo', 'apt-get', 'update'])
+
+    # Opdracht als raw text:
+    subprocess.run('sudo apt-get upgrade --yes', shell=True)
+
+    # Opdracht als raw text, vang stdout en stderr op:
+    subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
+    subprocess.run('sudo apt-get autoclean --yes', shell=True, check=True)
+
+    # Heeft dit systeem snaps?
+    try:
+        subprocess.run('sudo snap refresh', shell=True)
+    except Exception as ex:
+        print(ex)
+
+    # Is een reboot nodig?
+    try:
+        with open('/var/run/reboot-required') as fh:
+            print(f'{display_name}: REBOOT')
+    except FileNotFoundError:
+        pass
+    except Exception as ex:
+        print(ex)
+        sys.exit(1)
+
+
+def process_option_usage():
+    print(f"""Gebruik: {display_name} [-g|--gui] [-h|--help] [-u|--usage] \
+[-v|--version]
+
+Typ '{display_name} --help' voor meer informatie.""")
+
 
 # --- script ---
 
-# Alleen optie gui toegestaan, verder geen argumenten.
-try:
-    if sys.argv[1] == '--gui':
-        option_gui = 1
-    elif sys.argv[1]:
-        print(f'Gebruik: {display_name}')
-        sys.exit(0)
-except Exception:
-    pass
+parser = argparse.ArgumentParser(prog=display_name,
+                                 description='Updates uitvoeren.',
+                                 epilog="Typ 'man " + display_name +
+                                 "' voor meer informatie.")
+parser.add_argument('-g', '--gui', action='store_true',
+                    help='start in grafische modus')
+parser.add_argument('-u', '--usage', action='store_true',
+                    help='een korte gebruikssamenvatting tonen')
+parser.add_argument('-v', '--version', action='store_true',
+                    help='de versie tonen')
+args = parser.parse_args()
 
-# Opdracht als sequence:
-subprocess.run(['sudo', 'apt-get', 'update'])
-
-# Opdracht als raw text:
-subprocess.run('sudo apt-get upgrade --yes', shell=True)
-
-# Opdracht als raw text, vang stdout en stderr op:
-subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
-subprocess.run('sudo apt-get autoclean --yes', shell=True, check=True)
-
-# Heeft dit systeem snaps?
-try:
-    subprocess.run('sudo snap refresh', shell=True)
-except Exception as ex:
-    print(ex)
-
-# Is een reboot nodig?
-try:
-    with open('/var/run/reboot-required') as fh:
-        print(f'{display_name}: REBOOT')
-except FileNotFoundError:
-    pass
-except Exception as ex:
-    print(ex)
-    sys.exit(1)
+if args.usage:
+    process_option_usage()
+elif args.version:
+    rc = kz_common.process_option_version(program_name)
+    if rc != 0:
+        sys.exit(rc)
+else:
+    perform_update()
 
 # Een non-gui script gestart met optie gui.
-if option_gui:
+if args.gui:
     input('Druk op de Enter-toets om verder te gaan [Enter]: ')
 
 # EOF

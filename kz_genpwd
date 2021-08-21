@@ -9,8 +9,8 @@ Dit script genereert een wachtwoord bestaande uit 16 willekeurige tekens.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 03.00.01
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 03.00.02
+# DateOfRelease: 2021-08-21
 ###############################################################################
 import os
 import sys
@@ -40,7 +40,7 @@ def process_option_usage():
     print(f"""Gebruik: {display_name} [-g|--gui] [-h|--help] [-u|--usage] \
 [-v|--version]
 
-Typ 'display_name --help' voor meer informatie.""")
+Typ '{display_name} --help' voor meer informatie.""")
 
 
 # --- script ---
