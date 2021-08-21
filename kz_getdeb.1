@@ -42,27 +42,30 @@ distribueren, 'live' te zetten (op https://karelzimmer.nl) met de opdrachten
 \fBgit push in ~/kz_scripts\fR.
 .sp
 Voor de nieuwste versie van \fBkz getdeb\fR én het scriptspakket, start
-Terminalvenster en voer uit:
+Terminalvenster en voer
 .br
-\fBwget karelzimmer.nl/kz\fR
+uit (kopie van kz wordt opgeslagen en later \
+verwijderd):
 .br
-\fBbash kz\fR
-.sp
-of, de twee opdrachten gecombineerd op 1 regel:
+    \fBwget karelzimmer.nl/kz\fR
 .br
-\fBwget karelzimmer.nl/kz; bash kz\fR
+    \fBbash kz\fR
 .br
-of
+ of (idem hiervoor, nu op 1 regel):
 .br
-\fBwget -O- karelzimmer.nl/kz | bash\fR
-.sp
-of, als curl is geïnstalleerd:
+    \fBwget karelzimmer.nl/kz; bash kz\fR
 .br
-\fBcurl -L karelzimmer.nl/kz | bash\fR
-.sp
-of, als het scriptspakket al eens is geïnstalleerd:
+ of (er wordt geen kopie van kz opgeslagen):
 .br
-\fBkz getdeb\fR
+    \fBwget -O- karelzimmer.nl/kz | bash\fR
+.br
+ of (als curl is geïnstalleerd, geen kopie):
+.br
+    \fBcurl -L karelzimmer.nl/kz | bash\fR
+.br
+ of (mits pakket kz reeds is geïnstalleerd):
+.br
+    \fBkz getdeb\fR
 .sp
 N.B. /kz mag vervangen worden door /s (beide verwijzen naar "pakket kz").
 .sp
@@ -75,8 +78,28 @@ ook worden gestart door te zoeken naar \fBget\fR, klik op
 .\"
 .SH OPTIES
 .TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kz_ckhtml').
+.TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
 .\"
 .\"
 .SH STOPSTATUS
@@ -100,33 +123,17 @@ Checklists.
 ~/kz_scripts/
 .RS
 Scripts.
-Inclusief logbestand wijzigingen (CHANGELOG.gz),
-man-pagina's (*.1),
+Inclusief man-pagina's (*.1),
 en Tab-completion-scripts (*.completion),
 bureaublad-configuratiebestanden (*.desktop),
 PolicyKit actiedefinitiebestanden (*.policy),
 .RE
-.sp
-~/scripts/
-.RS
-Ontwikkelscripts.
-.RE
-.sp
-~/uploads/
-.RS
-Website.
-.RE
 .\"
 .\"
 .SH BESTANDEN
-~/uploads/karelzimmer.nl/httpdocs/apps/kz/kz_365_all.deb
+https://karelzimmer.nl/data/linux/scripts/kz_common.sh
 .RS
-Scriptspakket.
-.RE
-.sp
-/usr/share/gnome-background-properties/kz_wallpapers.xml
-.RS
-Bureaubladachtergronden-configuratiebestand.
+Algemene module voor shell scripts.
 .RE
 .\"
 .\"
@@ -169,6 +176,7 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 .\"
 .\"
 .SH ZIE OOK
+\fBkz_common.sh\fR(1),
 \fBkz_deploy\fR(1),
 \fBkz_menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
