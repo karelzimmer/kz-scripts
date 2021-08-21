@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Pakket installeren.
 #
@@ -7,242 +8,103 @@
 # Auteursrecht (c) 2016-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 28.01.00
+# ReleaseNumber: 29.00.00
 # DateOfRelease: 2021-08-21
 ###############################################################################
-
+if [[ -e ./kz_common.sh ]]; then
+    source ./kz_common.sh
+else
+    wget   --output-document=/tmp/kz_common.sh                     \
+           https://karelzimmer.nl/data/linux/scripts/kz_common.sh  &> /dev/null
+source /tmp/kz_common.sh
+fi
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz_getdeb'
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
-#eadonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
+     of: wget karelzimmer.nl/kz
+         bash kz
+     of: wget karelzimmer.nl/kz; bash kz
+     of: wget -O- karelzimmer.nl/kz | bash
+     of: curl -L karelzimmer.nl/kz | bash"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+     of: wget karelzimmer.nl/kz
+         bash kz
+     of: wget karelzimmer.nl/kz; bash kz
+     of: wget -O- karelzimmer.nl/kz | bash
+     of: curl -L karelzimmer.nl/kz | bash
 
-declare -ir SUCCESS=0
-declare -ir ERROR=1
-declare -ir WARNING=2
+Pakket installeren.
 
-# Terminalattributen ('man terminfo').  Gebruik ${<variabele_naam>}.
-readonly    NORMAL=$(tput sgr0)
-readonly    BOLD=$(tput bold)
-readonly    RED=${BOLD}$(tput setaf 1)
-readonly    GREEN=${BOLD}$(tput setaf 2)
-readonly    YELLOW=${BOLD}$(tput setaf 3)
-readonly    BLUE=${BOLD}$(tput setaf 4)
+Opties:
+$OPTIONS_HELP_COMMON"
 
 readonly    DEB_DIR=$HOME/kz_deb
 readonly    DOCS_DIR=$HOME/kz_docs
 readonly    SCRIPTS_DIR=$HOME/kz_scripts
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
-
-declare LOGCMD=''
-declare LOGCMD_CHECK=''
-declare LOGCMD_DEBUG=''
-declare TERMINAL=false
-declare TEXT=''
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-init_script() {
-    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
-    LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
---identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
-    LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
-    log "started as $CALLED (from $PWD)"
-
-    # Script-hardening
-    set -o errexit
-    set -o errtrace
-    set -o nounset
-    set -o pipefail
-    # bash 5.0: trap exit: ${FUNCNAME[0]}: ongebonden variabele
-    # Enable code-stepping:
-    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    trap 'signal error   $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
-    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
-    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
-
-    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        log '(++) Met Debian heeft gebruiker root toegang nodig tot mijn'
-        log '(++) X-sessie voor het kunnen gebruiken van zenity in kz_scripts'
-        log '(++) met RUN_AS_SUPERUSER=true:'
-        log '(++) xhost +si:localuser:root'
-        xhost +si:localuser:root |& $LOGCMD
-    fi
-}
-
-
-log() {
-    printf '%b' "$@" |& $LOGCMD
-}
-
-
-signal() {
-    local       signal=${1:-signal?}
-    local   -i  lineno=${2:-0}
-    local       function=${3:-funcname?}
-    local       command=${4:-command?}
-    local   -i  rc=${5:-1}
-    local       rc_desc=''
-    local   -i  rc_desc_signalno=0
-    local       status="${RED}$ERROR/ERROR${NORMAL}"
-
-    case $rc in
-        0)
-            rc_desc='successful termination'
-            status="${GREEN}$rc/SUCCESS${NORMAL}"
-            ;;
-        1)
-            rc_desc='terminated with error'
-            ;;
-        2)
-            rc_desc='terminated with warning'
-            status="${YELLOW}$rc/WARNING${NORMAL}"
-            ;;
-        6[4-9]|7[0-8])                  # 64 - 78
-            rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
-            ;;
-        126)
-            rc_desc='command cannot execute'
-            ;;
-        127)
-            rc_desc='command not found'
-            ;;
-        128)
-            rc_desc='invalid argument to exit'
-            ;;
-        129)                            # sighup (128+ 1)
-            rc_desc='hangup'
-            ;;
-        130)                            # sigint (128+ 2)
-            rc_desc='terminated by control-c'
-            ;;
-        13[1-9]|14[0-2])                # 131 (128+3) - 142 (128+14)
-            rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
-            ;;
-        143)                            # sigterm (128+15)
-            rc_desc='termination signal'
-            ;;
-        14[4-9]|1[5-8][0-9]|19[0-2])    # 144 (128+16) - 192 (128+64)
-            rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
-            ;;
-        255)
-            rc_desc='exit status out of range'
-            ;;
-        *)
-            rc_desc='unknown error'
-            ;;
-    esac
-
-    log_debug "signal: $signal, line: $lineno, function: $function, command: \
-$command, code: $rc ($rc_desc)"
-
-    case $signal in
-        error)
-            exit "$rc"
-            ;;
-        exit)
-            signal_exit
-            log "ended (code=exited, status=$status)"
-
-            # Een non-gui script gestart met optie gui.
-            if $TERMINAL; then
-                read -rp "Druk op de Enter-toets om verder te gaan [Enter]: "
-            fi
-
-            trap - ERR EXIT SIGINT SIGPIPE SIGTERM SIGHUP
-            exit "$rc"
-            ;;
-        *)
-            printf "${YELLOW}%s${NORMAL}\n" "$DISPLAY_NAME is onderbroken." >&2
-            exit "$rc"
-            ;;
-    esac
-}
-
-
-log_debug() {
-    printf '%b' "$@" |& $LOGCMD_DEBUG
-}
-
-
-signal_exit() {
-    if [[ $rc -ne $SUCCESS ]]; then
-        TEXT="${RED}Programma $DISPLAY_NAME is afgebroken.
-
-Om de log te controleren, start een Terminalvenster, en voer uit:${BLUE}
-    $LOGCMD_CHECK${NORMAL}
-
-
-Als de pakketbeheerder 'apt' foutmeldingen geeft,
-start dan een nieuw Terminalvenster, en voer uit:${BLUE}
-    sudo dpkg --configure --pending
-    sudo apt-get update --fix-missing
-    sudo apt-get install --fix-broken
-    sudo update-initramfs -u${NORMAL}"
-        printf '%b\n' "$TEXT"
-    fi
-
-    rm --force /tmp/"$PROGRAM_NAME"_??????????.deb
-    # Script kz_getdeb verwijdert niet kz en kz.1 i.v.m. lokale Git-repo.
-    rm --force kz.{2..99}
-    # Maar wel als in HOME, zoals voorgeschreven.
-    cd "$HOME" || exit $ERROR
-    rm --force kz kz.1
-}
-
-
 check_input() {
-    # Start in grafische modus.
-    if [[ "$*" ]]; then
-        if [[ "$*" = *-g* ]]; then
-            TERMINAL=true
-        else
-            TEXT="\
-Gebruik: wget karelzimmer.nl/kz
-         bash kz
-     of: wget karelzimmer.nl/kz; bash kz
-     of: wget -O- karelzimmer.nl/kz | bash
-     of: curl -L karelzimmer.nl/kz | bash
-     of: $DISPLAY_NAME"
-            printf "%b\n" "$TEXT" >&2
-            exit $SUCCESS
-        fi
+    PARSED=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
+        )       || GETOPT_RC=$?
+    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        printf '%s\n' "$USAGELINE" >&2
+        exit $ERROR
     fi
-    clear -x
+    eval set -- "$PARSED"
+    process_general_options "$@"
 
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        TEXT='geen argumenten opgeven'
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        exit $ERROR
+    fi
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    # Een non-gui script gestart met optie gui.
+    if $OPTION_GUI; then
+        OPTION_GUI=false
+        TERMINAL=true
+    fi
+
+    clear -x
     check_user
     check_on_ac_power
-}
-
-
-check_user() {
-    if ! id --name --groups "$USER" | grep --quiet --regexp='sudo'; then
-        TEXT="De huidge gebruiker is geen beheerder (is geen lid van groep \
-sudo).
-
-Dit programma heeft beheerdersrechten nodig, en kan nu niet verder.
-
-Typ 'exit' om dit venster te sluiten."
-        TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                            --title     'Fout'          \
-                            --infobox   "$TEXT"         \
-                            11 71
-        exit $SUCCESS
-    fi
 }
 
 

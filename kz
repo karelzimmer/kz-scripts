@@ -68,6 +68,7 @@ init_script() {
 
 
 check_input() {
+    # Geen getopt, bij opgegeven opties zijn voor een opdracht, niet voor kz.
     if ! [[ "$*" ]]; then
         printf "%s\n\n" "$USAGE" >&2
         show_commands

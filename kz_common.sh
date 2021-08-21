@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 27.00.01
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 27.01.00
+# DateOfRelease: 2021-08-21
 ###############################################################################
 
 
@@ -491,26 +491,40 @@ Opgeslagen back-up wordt verwijderd.'
                 info 'Opgeslagen back-up is verwijderd.'
             fi
             ;;
-        kz_install)
-            printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
+        kz_getdeb)
+            rm --force /tmp/"$PROGRAM_NAME"_??????????.deb /tmp/kz_common.sh
+            # Script kz_getdeb verwijdert niet kz en kz.1 ivm lokale Git-repo.
+            rm --force kz.{2..99}
+            # Maar wel als in HOME, zoals voorgeschreven.
+            cd "$HOME" || exit $ERROR
+            rm --force kz kz.1
+            if [[ $rc -ne $SUCCESS ]]; then
+                log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
 start dan een Terminalvenster, en voer uit:
     ${BLUE}sudo dpkg --configure --pending${NORMAL}
     ${BLUE}sudo apt-get update --fix-missing${NORMAL}
     ${BLUE}sudo apt-get install --fix-broken${NORMAL}
     ${BLUE}sudo update-initramfs -u${NORMAL}"
-            if [[ $rc -eq $SUCCESS ]]; then
-                rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
-                rm --force /tmp/"$PROGRAM_NAME"_??????????.text
-                rm --force /tmp/"$PROGRAM_NAME"_??????????.list
+            fi
+            ;;
+        kz_install)
+            printf '%s' "${NORMAL}${CURSOR_VISABLE}"
+            rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
+            rm --force /tmp/"$PROGRAM_NAME"_??????????.text
+            rm --force /tmp/"$PROGRAM_NAME"_??????????.list
+            if [[ $rc -ne $SUCCESS ]]; then
+                log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
+start dan een Terminalvenster, en voer uit:
+    ${BLUE}sudo dpkg --configure --pending${NORMAL}
+    ${BLUE}sudo apt-get update --fix-missing${NORMAL}
+    ${BLUE}sudo apt-get install --fix-broken${NORMAL}
+    ${BLUE}sudo update-initramfs -u${NORMAL}"
             fi
             ;;
         kz_setup)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            if [[ $rc -eq $SUCCESS ]]; then
-                rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
-                rm --force /tmp/"$PROGRAM_NAME"_??????????.text
-            fi
+            rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
+            rm --force /tmp/"$PROGRAM_NAME"_??????????.text
             ;;
         *)
             return $SUCCESS
