@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2015-2020 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 14.00.02
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 14.01.00
+# DateOfRelease: 2021-08-21
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -181,6 +181,7 @@ $(
 
 check_lines() {
     local -i line_num=0
+    local -i max_lines=1000
     local -i max_line_length=79
     local -i max_line_length_found=0
 
@@ -208,10 +209,10 @@ ${BOLD}In $script:${NORMAL}
     fi
 
     line_num=$(wc --lines < "$script")
-    if [[ $line_num -gt 1000 ]]; then
+    if [[ $line_num -gt $max_lines ]]; then
         info "
 ${BOLD}In $script:${NORMAL}
-    Meer dan duizend regels ($line_num).
+    Meer dan $max_lines regels ($line_num).
 "
         if [[ $WARNING -gt $MAXRC ]]; then
             MAXRC=$WARNING

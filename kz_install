@@ -323,9 +323,7 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
     local       plural='geïnstalleerde deb-bestanden'
 
     printf '%s\n' "$text1..."
-
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
     apt-show-versions --initialize |& $LOGCMD
     if !    apt-show-versions                       \
             --brief                                 |
@@ -333,7 +331,6 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
                     --regexp='No available version' >> "$TEMP_LIST"; then
         true
     fi
-
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
@@ -355,9 +352,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     local       plural='pakketbronnen'
 
     printf '%s\n' "$text2..."
-
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
     # shellcheck disable=SC2062,SC2022
     if !    grep    --recursive             \
                     --no-filename           \
@@ -368,7 +363,6 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
             sort    --unique                >> "$TEMP_LIST"; then
         true
     fi
-
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
@@ -377,7 +371,6 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     footer="Dit overzicht bevat $number_of_lines door de gebruiker \
 toegevoegde $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
     cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
@@ -390,11 +383,8 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
     local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text3..."
-
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
     aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_LIST"
-
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
@@ -417,9 +407,7 @@ create_file_snaps() {                       #4
     local       plural='snaps'
 
     printf '%s\n' "$text4..."
-
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
     if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
         printf '%s\n' "$TEXT" >> "$TEMP_LIST"
@@ -441,7 +429,6 @@ save_user_photo_file() {                    #5
     local list_file=''
 
     printf '%s\n' "$text5..."
-
     # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
     # /var/lib/AccountsService/users/ is niet toegankelijk voor gebruikers.
     local list_dir=/home/"${SUDO_USER:-$USER}"/kz_setup_lists

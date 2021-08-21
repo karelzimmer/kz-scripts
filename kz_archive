@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2013-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 18.00.01
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 18.00.02
+# DateOfRelease: 2021-08-21
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -226,11 +226,6 @@ process_remove() {
 
 remove_file() {
     rm "$file" |& $LOGCMD
-    if [[ $dirname = "$DELETE_FROM_1" ]]; then
-        gunzip "$CHANGELOG_GZ" |& $LOGCMD
-        sed --in-place --expression="/^$basename /d" "$CHANGELOG"
-        gzip --best --force "$CHANGELOG" |& $LOGCMD
-    fi
     printf '%s\n' 'Verwijderd.'
     DELETED=true
 }
