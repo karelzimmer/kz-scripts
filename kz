@@ -7,8 +7,8 @@
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 01.01.02
-# DateOfRelease: 2021-08-20
+# ReleaseNumber: 01.02.00
+# DateOfRelease: 2021-08-21
 ###############################################################################
 
 ###############################################################################
@@ -69,7 +69,7 @@ init_script() {
 
 check_input() {
     if ! [[ "$*" ]]; then
-        printf "$DISPLAY_NAME: %s\n\n" 'OPDRACHT [ARG] opgeven' >&2
+        printf "%s\n\n" "$USAGE" >&2
         show_commands
         exit $WARNING
     fi
@@ -109,12 +109,12 @@ show_commands() {
             -printf '%f\n'          |
     sort                            |
     sed     's/kz_//'
-    printf "\n%s\n"  "Typ '$DISPLAY_NAME --help' voor meer informatie."
+    printf "\n%s\n"  "Typ '$DISPLAY_NAME --usage' voor meer informatie."
 }
 
 
 process_option_usage() {
-    printf "%s\n\n%s\n" \
+    printf '%s\n\n%s\n' \
             "$USAGE"    \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
