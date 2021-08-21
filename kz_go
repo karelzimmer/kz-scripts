@@ -5,14 +5,6 @@ Updates uitvoeren.
 Dit script voert updates uit voor Debian pakketten en snaps.
 """
 ###############################################################################
-# Kortere weg vooor:
-#   sudo apt-get update                                         &&
-#   sudo apt-get upgrade --yes                                  &&
-#   sudo apt-get autoremove --yes                               &&
-#   sudo apt-get autoclean --yes                                &&
-#   if command -v snap 1> /dev/null; then sudo snap refresh; fi &&
-#   if [[ -f /var/run/reboot-required ]]; then echo REBOOT; fi
-#
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 # Auteursrecht (c) 2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
