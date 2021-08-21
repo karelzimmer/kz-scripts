@@ -88,30 +88,6 @@ declare     UP_ONE_LINE=''
 # Common functions
 ###############################################################################
 
-check_dpkg() {
-    local -i wait_for_aptd=5
-
-    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        while sudo  fuser                                               \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       \
-                    /snap/core/*/var/cache/debconf/config.dat           \
-                    &> /dev/null; do
-            log 'Wacht tot andere pakketbeheerder klaar is...'
-            sleep $wait_for_aptd
-        done
-    else
-        while sudo  fuser                                               \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       \
-                    &> /dev/null; do
-            log 'Wacht tot andere pakketbeheerder klaar is...'
-            sleep $wait_for_aptd
-        done
-    fi
-}
-
-
 check_on_ac_power() {
     local -i on_battery=0
 

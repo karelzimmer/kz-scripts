@@ -8,8 +8,8 @@
 # Auteursrecht (c) 2009-2021 Karel Zimmer.
 # GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
 #
-# ReleaseNumber: 59.00.01
-# DateOfRelease: 2021-08-17
+# ReleaseNumber: 59.00.02
+# DateOfRelease: 2021-08-21
 ###############################################################################
 source "$(dirname "$0")"/kz_common.sh
 
@@ -875,6 +875,30 @@ execute_command() {
     fi
     log "$status rc=$cmd_rc, maxrc=$MAXRC"
     printf '%s\n' "$status"
+}
+
+
+check_dpkg() {
+    local -i wait_for_aptd=5
+
+    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    /snap/core/*/var/cache/debconf/config.dat           \
+                    &> /dev/null; do
+            log 'Wacht tot andere pakketbeheerder klaar is...'
+            sleep $wait_for_aptd
+        done
+    else
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    &> /dev/null; do
+            log 'Wacht tot andere pakketbeheerder klaar is...'
+            sleep $wait_for_aptd
+        done
+    fi
 }
 
 
