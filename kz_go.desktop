@@ -13,12 +13,12 @@
 
 [Desktop Entry]
 Type=Application
-Name=Execute updates
-Name[nl]=Updates uitvoeren
+Name=Execute update
+Name[nl]=Update uitvoeren
 GenericName=Software Updates
 GenericName[nl]=Software-updates
-Comment=Execute updates for the system
-Comment[nl]=Voer updates uit voor het systeem
+Comment=Execute update for the system
+Comment[nl]=Voer update uit voor het systeem
 Keywords=kzgo;update;upgrade;
 Keywords[nl]=kzgo;update;upgrade;bijwerken;
 Categories=Kz Scripts;

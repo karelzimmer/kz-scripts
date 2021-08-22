@@ -4,14 +4,15 @@
 # USB-sticks maken.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2014-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 18.06.01
-# DateOfRelease: 2021-08-17
 ###############################################################################
-source "$(dirname "$0")"/kz_common.sh
+PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+source "$PROGRAM_PATH"/kz_common.sh
+PROGRAM_NAME=kz_mkusb
+DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+FIRST_RELEASED=2014
+
+VERSION_NUMBER=18.06.02
+VERSION_DATE=2021-08-22
 
 
 ###############################################################################
@@ -56,18 +57,21 @@ declare TARGET_ARGUMENT=''
 ###############################################################################
 
 check_input() {
-    PARSED=$(
+    local -i    getopt_rc=0
+    local       parsed=''
+
+    parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        )       || GETOPT_RC=$?
-    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        )       || getopt_rc=$?
+    if [[ $getopt_rc -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
         exit $ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
     process_general_options "$@"
 
     while true; do

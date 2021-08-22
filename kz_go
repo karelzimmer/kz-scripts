@@ -1,26 +1,24 @@
 #!/usr/bin/python3
 """
-Updates uitvoeren.
+Update uitvoeren.
 
 Dit script voert updates uit voor Debian pakketten en snaps.
 """
 ###############################################################################
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-# Auteursrecht (c) 2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 03.00.00
-# DateOfRelease: 2021-08-21
 ###############################################################################
-import os
 import sys
 import random
 import argparse
 import kz_common
 import subprocess
 
-program_name = os.path.basename(__file__)
+program_name = 'kz_go'
 display_name = program_name.replace('kz_', 'kz ')
+first_released = 2021
+
+version_number = '03.00.01'
+version_date = '2021-08-22'
 
 
 def perform_update():
@@ -51,13 +49,6 @@ def perform_update():
         sys.exit(1)
 
 
-def process_option_usage():
-    print(f"""Gebruik: {display_name} [-g|--gui] [-h|--help] [-u|--usage] \
-[-v|--version]
-
-Typ '{display_name} --help' voor meer informatie.""")
-
-
 # --- script ---
 
 parser = argparse.ArgumentParser(prog=display_name,
@@ -73,11 +64,10 @@ parser.add_argument('-v', '--version', action='store_true',
 args = parser.parse_args()
 
 if args.usage:
-    process_option_usage()
+    kz_common.process_option_usage(display_name)
 elif args.version:
-    rc = kz_common.process_option_version(program_name)
-    if rc != 0:
-        sys.exit(rc)
+    kz_common.process_option_version(display_name, version_number,
+                                     version_date, first_released)
 else:
     perform_update()
 

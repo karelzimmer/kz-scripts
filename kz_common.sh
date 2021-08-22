@@ -1,38 +1,38 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034
 ###############################################################################
 # Algemene module voor shell scripts.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2009-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 27.01.00
-# DateOfRelease: 2021-08-21
 ###############################################################################
+PROGRAM_NAME=kz_common
+DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+FIRST_RELEASED=2009
+
+VERSION_NUMBER=27.02.00
+VERSION_DATE=2021-08-22
 
 
 ###############################################################################
 # Common global constants
 ###############################################################################
 
-readonly    PROGRAM_NAME=$(basename "$0")
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
-readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
+readonly CALLED=$(printf '%s' "$0 $*" | xargs --null)
 
-readonly    DASHES=$(printf '%.0s=' {1..79})
+readonly SUCCESS=0
+readonly ERROR=1
+# shellcheck disable=SC2034
+readonly WARNING=2
+readonly THIS_YEAR=$(date +%Y)
 
-declare -ir SUCCESS=0
-declare -ir ERROR=1
-declare -ir WARNING=2
-
-readonly    OPTIONS_SHORT_COMMON='dghuv'
-readonly    OPTIONS_LONG_COMMON='debug,gui,help,usage,version'
-readonly    OPTIONS_USAGE_COMMON="[-d|--debug] [-g|--gui] [-h|--help] \
+# shellcheck disable=SC2034
+readonly OPTIONS_SHORT_COMMON='dghuv'
+# shellcheck disable=SC2034
+readonly OPTIONS_LONG_COMMON='debug,gui,help,usage,version'
+# shellcheck disable=SC2034
+readonly OPTIONS_USAGE_COMMON="[-d|--debug] [-g|--gui] [-h|--help] \
 [-u|--usage] [-v|--version] [--]"
-readonly    OPTIONS_HELP_COMMON="\
+# shellcheck disable=SC2034
+readonly OPTIONS_HELP_COMMON="\
   -d --debug    geef foutopsporingsinformatie weer in het logboek
   -g --gui      start in grafische modus
   -h --help     deze hulptekst tonen
@@ -45,43 +45,36 @@ readonly    OPTIONS_HELP_COMMON="\
 # Common global variables
 ###############################################################################
 
-declare     BACKUP_TO_DELETE=''
-declare     HELP=''
-declare -i  GETOPT_RC=0
-declare     LESS_OPTIONS=''
-declare     LOGCMD=''
-declare     LOGCMD_CHECK=''
-declare     LOGCMD_DEBUG=''
-declare     OPTION_DEBUG=false
-declare     OPTION_GUI=false
-declare     OPTION_HELP=false
-declare     OPTION_USAGE=false
-declare     OPTION_VERSION=false
-declare     PARSED=''
-declare     RUN_AS_SUPERUSER=false
-declare     STATUS_BUSY=''
-declare     STATUS_ERROR=''
-declare     STATUS_SUCCESS=''
-declare     STATUS_WARNING=''
-declare     TERMINAL=false
-declare     TEXT=''
-declare     TITLE=''
-declare     USAGE=''
-declare     USAGELINE=''
+declare BACKUP_TO_DELETE=''
+declare HELP=''
+declare LOGCMD=''
+declare LOGCMD_CHECK=''
+declare LOGCMD_DEBUG=''
+declare OPTION_DEBUG=false
+declare OPTION_GUI=false
+declare OPTION_HELP=false
+declare OPTION_USAGE=false
+declare OPTION_VERSION=false
+declare RUN_AS_SUPERUSER=false
+declare TERMINAL=false
+declare TEXT=''
+declare TITLE=''
+declare USAGE=''
+declare USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     CARRIAGE_RETURN=''
-declare     NORMAL=''
-declare     BOLD=''
-declare     BLINK=''
-declare     RED=''
-declare     GREEN=''
-declare     YELLOW=''
-declare     BLUE=''
-declare     CURSOR_INVISABLE=''
-declare     CURSOR_VISABLE=''
-declare     ERASE_LINE=''
-declare     UP_ONE_LINE=''
+declare CARRIAGE_RETURN=''
+declare NORMAL=''
+declare BOLD=''
+declare BLINK=''
+declare RED=''
+declare GREEN=''
+declare YELLOW=''
+declare BLUE=''
+declare CURSOR_INVISABLE=''
+declare CURSOR_VISABLE=''
+declare ERASE_LINE=''
+declare UP_ONE_LINE=''
 
 
 ###############################################################################
@@ -194,15 +187,7 @@ init_script() {
         xhost +si:localuser:root |& $LOGCMD
     fi
 
-    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
-    # van:
-    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
-    #    ("FRSXMK")
-    # 2. man, zie 'mam man', zoek LESS
-    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $PROGRAM_NAME ?ltregel \
-%lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q \
-voor stoppen)"
+    # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 }
 
@@ -251,23 +236,24 @@ process_general_options() {
 
     if ! $OPTION_GUI && [[ -t 1 ]]; then
         # Tekstuitvoer non-gui naar de terminal.
+        # shellcheck disable=SC2034
         CARRIAGE_RETURN=$(tput cr)
         NORMAL=$(tput sgr0)
         BOLD=$(tput bold)
+        # shellcheck disable=SC2034
         BLINK=$(tput blink)
         RED=${BOLD}$(tput setaf 1)
         GREEN=${BOLD}$(tput setaf 2)
         YELLOW=${BOLD}$(tput setaf 3)
         BLUE=${BOLD}$(tput setaf 4)
+        # shellcheck disable=SC2034
         CURSOR_INVISABLE=$(tput civis)
         CURSOR_VISABLE=$(tput cvvis)
+        # shellcheck disable=SC2034
         ERASE_LINE="$(tput el)\c"
+        # shellcheck disable=SC2034
         UP_ONE_LINE=$(tput cuu1)
     fi
-    STATUS_ERROR="[${RED}FOUT${NORMAL}]"
-    STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
-    STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
-    STATUS_WARNING="[${YELLOW}WAARSCHUWING${NORMAL}]"
 
     if $OPTION_DEBUG; then
         process_option_debug
@@ -329,28 +315,14 @@ process_option_usage() {
 
 
 process_option_version() {
-    local release_number='00.00.00'
     local copyright_years='1970'
-    local release_date='1970-01-01'
 
-    copyright_years=$(
-        grep    --regexp='Auteursrecht '        \
-                "$PROGRAM_PATH/$PROGRAM_NAME"   |
-        awk     '{print $4;exit}'
-        )
-    release_number=$(
-        awk -F'ReleaseNumber: '                 \
-            '/ReleaseNumber: /{print $2;exit}'  \
-            "$PROGRAM_PATH/$PROGRAM_NAME"
-        )
-    release_number=${release_number:0:8}
-    release_date=$(
-        awk -F'DateOfRelease: '                 \
-            '/DateOfRelease: /{print $2;exit}'  \
-            "$PROGRAM_PATH/$PROGRAM_NAME"
-        )
-    release_date=${release_date:0:10}
-    info "$DISPLAY_NAME $release_number ($release_date)
+    if [[ $FIRST_RELEASED -eq $THIS_YEAR ]]; then
+        copyright_years=$FIRST_RELEASED
+    else
+        copyright_years=$FIRST_RELEASED-$THIS_YEAR
+    fi
+    info "$DISPLAY_NAME $VERSION_NUMBER ($VERSION_DATE)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

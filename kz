@@ -3,25 +3,25 @@
 # Opdracht uitvoeren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 01.02.00
-# DateOfRelease: 2021-08-21
 ###############################################################################
+PROGRAM_NAME=kz
+DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+FIRST_RELEASED=2021
+
+VERSION_NUMBER=01.02.01
+VERSION_DATE=2021-08-22
+
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
-readonly    PROGRAM_NAME=$(basename "$0")
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
-readonly    PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 declare -ir SUCCESS=0
 declare -ir ERROR=1
 declare -ir WARNING=2
+readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
+readonly    THIS_YEAR=$(date +%Y)
 
 readonly    USAGE="\
 Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
@@ -68,7 +68,7 @@ init_script() {
 
 
 check_input() {
-    # Geen getopt, bij opgegeven opties zijn voor een opdracht, niet voor kz.
+    # Geen getopt, opgegeven opties zijn voor de opdracht, niet voor kz zelf.
     if ! [[ "$*" ]]; then
         printf "%s\n\n" "$USAGE" >&2
         show_commands
@@ -129,28 +129,14 @@ process_option_help() {
 
 
 process_option_version() {
-    local release_number='00.00.00'
     local copyright_years='1970'
-    local release_date='1970-01-01'
 
-    copyright_years=$(
-        grep    --regexp='Auteursrecht '        \
-                "$PROGRAM_PATH/$PROGRAM_NAME"   |
-        awk     '{print $4;exit}'
-        )
-    release_number=$(
-        awk -F'ReleaseNumber: '                 \
-            '/ReleaseNumber: /{print $2;exit}'  \
-            "$PROGRAM_PATH/$PROGRAM_NAME"
-        )
-    release_number=${release_number:0:8}
-    release_date=$(
-        awk -F'DateOfRelease: '                 \
-            '/DateOfRelease: /{print $2;exit}'  \
-            "$PROGRAM_PATH/$PROGRAM_NAME"
-        )
-    release_date=${release_date:0:10}
-    printf "%s\n" "$DISPLAY_NAME $release_number ($release_date)
+    if [[ $FIRST_RELEASED -eq $THIS_YEAR ]]; then
+        copyright_years=$FIRST_RELEASED
+    else
+        copyright_years=$FIRST_RELEASED-$THIS_YEAR
+    fi
+    printf "%s\n" "$DISPLAY_NAME $VERSION_NUMBER ($VERSION_DATE)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

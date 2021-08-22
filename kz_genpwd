@@ -6,20 +6,18 @@ Dit script genereert een wachtwoord bestaande uit 16 willekeurige tekens.
 """
 ###############################################################################
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-# Auteursrecht (c) 2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 03.00.02
-# DateOfRelease: 2021-08-21
 ###############################################################################
-import os
 import sys
 import random
 import argparse
 import kz_common
 
-program_name = os.path.basename(__file__)
+program_name = 'kz_genpwd'
 display_name = program_name.replace('kz_', 'kz ')
+first_released = 2021
+
+version_number = '03.00.03'
+version_date = '2021-08-22'
 
 
 def generate_password():
@@ -34,13 +32,6 @@ def generate_password():
 
     password = ''.join(random.sample(all, length))
     print(f'{password}\n\nGebruik Bitwarden om wachtwoorden te beheren.')
-
-
-def process_option_usage():
-    print(f"""Gebruik: {display_name} [-g|--gui] [-h|--help] [-u|--usage] \
-[-v|--version]
-
-Typ '{display_name} --help' voor meer informatie.""")
 
 
 # --- script ---
@@ -58,11 +49,10 @@ parser.add_argument('-v', '--version', action='store_true',
 args = parser.parse_args()
 
 if args.usage:
-    process_option_usage()
+    kz_common.process_option_usage(display_name)
 elif args.version:
-    rc = kz_common.process_option_version(program_name)
-    if rc != 0:
-        sys.exit(rc)
+    kz_common.process_option_version(display_name, version_number,
+                                     version_date, first_released)
 else:
     generate_password()
 

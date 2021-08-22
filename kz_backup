@@ -4,14 +4,16 @@
 # Back-up maken.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2007-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 36.00.02
-# DateOfRelease: 2021-08-18
 ###############################################################################
-source "$(dirname "$0")"/kz_common.sh
+PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+source "$PROGRAM_PATH"/kz_common.sh
+PROGRAM_NAME=kz_backup
+DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+FIRST_RELEASED=2007
+
+VERSION_NUMBER=36.00.03
+VERSION_DATE=2021-08-22
+
 
 ###############################################################################
 # Global constants
@@ -99,19 +101,21 @@ check_input() {
     local   -i  select_arg_num=0
     local   -i  select_num=0
     local       select=''
+    local -i    getopt_rc=0
+    local       parsed=''
 
-    PARSED=$(
+    parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        )       || GETOPT_RC=$?
-    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        )       || getopt_rc=$?
+    if [[ $getopt_rc -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
         exit $ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
     process_general_options "$@"
 
     while true; do

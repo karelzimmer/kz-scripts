@@ -5,48 +5,37 @@ Deze module geeft toegang tot algemene functies.
 """
 ###############################################################################
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 02.00.01
-# DateOfRelease: 2021-08-17
 ###############################################################################
+import datetime
+
 module_name = 'kz_common.py'
+first_released = 2021
+
+version_number = '02.01.00'
+version_date = '2021-08-22'
 
 
-def process_option_version(program_name):
+def process_option_usage(display_name):
+    print(f"""Gebruik: {display_name} [-g|--gui] [-h|--help] [-u|--usage] \
+[-v|--version]
+
+Typ '{display_name} --help' voor meer informatie.""")
+
+
+def process_option_version(display_name, version_number, version_date,
+                           first_released):
     """
-    Deze functie zoekt versie-informatie in <program_name>,
-    en toont deze info samen met auteur en auteursrecht.
+    Deze functie toont versie-informatie, auteur, en auteursrecht.
     """
-    release_number = release_date = copyright_years = None
+    now = datetime.datetime.now()
+    this_year = now.year
+    copyright_years = 1970
 
-    # Find release_number, release_date, and copyright_years in filename.
-    try:
-        with open(__file__.replace(module_name, program_name)) as fh:
-            for line in fh:
-                if 'Auteursrecht (c) ' in line and copyright_years is None:
-                    data = line.split()
-                    copyright_years = data[3]
-                if '# ReleaseNumber:' in line and release_number is None:
-                    data = line.split(': ')
-                    # e.g. data = ['# RelNum', '01.00.00\n'], remove \n.
-                    release_number = data[1].rstrip('\n')
-                if '# DateOfRelease:' in line and release_date is None:
-                    data = line.split(': ')
-                    # e.g. data = ['# RelDat', '1970-01-01\n'], remove \n.
-                    release_date = data[1].rstrip('\n')
-                if (release_number is not None
-                        and release_date is not None
-                        and copyright_years is not None):
-                    break
-    except Exception as ex:
-        print(ex)
-        return 1
-
-    print(f"""{program_name.replace('kz_', 'kz ')} {release_number} \
-({release_date})
+    if first_released == this_year:
+        copyright_years = first_released
+    else:
+        copyright_years = str(first_released) + '-' + str(this_year)
+    print(f"""{display_name} {version_number} ({version_date})
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

@@ -4,14 +4,15 @@
 # GUI wijzigen.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2015-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 12.00.01
-# DateOfRelease: 2021-08-17
 ###############################################################################
-source "$(dirname "$0")"/kz_common.sh
+PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+source "$PROGRAM_PATH"/kz_common.sh
+PROGRAM_NAME=kz_gset
+DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+FIRST_RELEASED=2015
+
+VERSION_NUMBER=12.00.02
+VERSION_DATE=2021-08-22
 
 
 ###############################################################################
@@ -73,18 +74,21 @@ declare OPTION_REMOVEFAV=false
 ###############################################################################
 
 check_input() {
-    PARSED=$(
+    local -i    getopt_rc=0
+    local       parsed=''
+
+    parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        )       || GETOPT_RC=$?
-    if [[ $GETOPT_RC -ne $SUCCESS ]]; then
+        )       || getopt_rc=$?
+    if [[ $getopt_rc -ne $SUCCESS ]]; then
         printf '%s\n' "$USAGELINE" >&2
         exit $ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$parsed"
     process_general_options "$@"
 
     while true; do
