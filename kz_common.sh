@@ -6,7 +6,7 @@
 ###############################################################################
 PROGRAM_NAME=kz_common
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
-FIRST_RELEASED=2009
+RELEASE_YEAR=2009
 
 VERSION_NUMBER=27.02.00
 VERSION_DATE=2021-08-22
@@ -317,10 +317,10 @@ process_option_usage() {
 process_option_version() {
     local copyright_years='1970'
 
-    if [[ $FIRST_RELEASED -eq $THIS_YEAR ]]; then
-        copyright_years=$FIRST_RELEASED
+    if [[ $RELEASE_YEAR -eq $THIS_YEAR ]]; then
+        copyright_years=$RELEASE_YEAR
     else
-        copyright_years=$FIRST_RELEASED-$THIS_YEAR
+        copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
     info "$DISPLAY_NAME $VERSION_NUMBER ($VERSION_DATE)
 

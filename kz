@@ -4,10 +4,10 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
+PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 PROGRAM_NAME=kz
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
-PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-FIRST_RELEASED=2021
+RELEASE_YEAR=2021
 
 VERSION_NUMBER=01.02.01
 VERSION_DATE=2021-08-22
@@ -131,10 +131,10 @@ process_option_help() {
 process_option_version() {
     local copyright_years='1970'
 
-    if [[ $FIRST_RELEASED -eq $THIS_YEAR ]]; then
-        copyright_years=$FIRST_RELEASED
+    if [[ $RELEASE_YEAR -eq $THIS_YEAR ]]; then
+        copyright_years=$RELEASE_YEAR
     else
-        copyright_years=$FIRST_RELEASED-$THIS_YEAR
+        copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
     printf "%s\n" "$DISPLAY_NAME $VERSION_NUMBER ($VERSION_DATE)
 

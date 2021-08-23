@@ -9,7 +9,7 @@ PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 source "$PROGRAM_PATH"/kz_common.sh
 PROGRAM_NAME=kz_ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
-FIRST_RELEASED=2015
+RELEASE_YEAR=2015
 
 VERSION_NUMBER=14.01.01
 VERSION_DATE=2021-08-22
@@ -257,6 +257,7 @@ check_fields() {
     local rel_num=''
     local today=''
 
+#FIXME Has to chane for P.Versioning+
     copyright_line=$(
         grep --word-regexp --regexp=' ''Auteursrecht '  "$script" || true
         )
