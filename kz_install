@@ -341,6 +341,7 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
 
     printf '%s\n' "$text1..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     apt-show-versions --initialize |& $LOGCMD
     if !    apt-show-versions                       \
             --brief                                 |
@@ -353,6 +354,7 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd deb-bestand'
     fi
+
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
@@ -370,6 +372,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
 
     printf '%s\n' "$text2..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     # shellcheck disable=SC2062,SC2022
     if !    grep    --recursive             \
                     --no-filename           \
@@ -385,9 +388,11 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     if [[ $number_of_lines -eq 1 ]]; then
         plural='pakketbron'
     fi
+
     footer="Dit overzicht bevat $number_of_lines door de gebruiker \
 toegevoegde $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+
     cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
@@ -401,12 +406,14 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
 
     printf '%s\n' "$text3..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_LIST"
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd pakket'
     fi
+
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
 --regexp='Description:'"
@@ -425,6 +432,7 @@ create_file_snaps() {                       #4
 
     printf '%s\n' "$text4..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
         printf '%s\n' "$TEXT" >> "$TEMP_LIST"
@@ -434,6 +442,7 @@ create_file_snaps() {                       #4
     if [[ $number_of_lines -eq 1 ]]; then
         plural='snap'
     fi
+
     footer="Dit overzicht bevat $number_of_lines $plural."
     printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
 
@@ -445,11 +454,12 @@ save_user_photo_file() {                    #5
     local list_dir=''
     local list_file=''
 
-    printf '%s\n' "$text5..."
     # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
     # /var/lib/AccountsService/users/ is niet toegankelijk voor gebruikers.
-    local list_dir=/home/"${SUDO_USER:-$USER}"/kz_setup_lists
-    local list_file=kz_setup_gebruikersfoto.txt
+    printf '%s\n' "$text5..."
+
+    list_dir=/home/"${SUDO_USER:-$USER}"/kz_setup_lists
+    list_file=kz_setup_gebruikersfoto.txt
     mkdir --parents "$list_dir"
     if [[ -e /var/lib/AccountsService/users/"${SUDO_USER:-$USER}" ]]; then
         sudo grep   --regexp='Icon='                                        \

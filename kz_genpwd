@@ -14,7 +14,7 @@ import kz_common
 
 program_name = 'kz_genpwd'
 display_name = program_name.replace('kz_', 'kz ')
-first_released = 2021
+release_year = 2021
 
 version_number = '03.00.03'
 version_date = '2021-08-22'
@@ -52,7 +52,7 @@ if args.usage:
     kz_common.process_option_usage(display_name)
 elif args.version:
     kz_common.process_option_version(display_name, version_number,
-                                     version_date, first_released)
+                                     version_date, release_year)
 else:
     generate_password()
 

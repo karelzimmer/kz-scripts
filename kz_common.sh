@@ -4,7 +4,7 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-PROGRAM_NAME=kz_common
+PROGRAM_NAME=kz_common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 

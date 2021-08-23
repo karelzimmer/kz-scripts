@@ -11,7 +11,7 @@ PROGRAM_NAME=kz_ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.01.01
+VERSION_NUMBER=14.02.00
 VERSION_DATE=2021-08-22
 
 
@@ -28,8 +28,6 @@ Scripts controleren.
 
 Opties:
 $OPTIONS_HELP_COMMON"
-
-readonly LAST_YEAR=$((THIS_YEAR - 1))
 
 
 ###############################################################################
@@ -184,7 +182,7 @@ $(
 
 check_lines() {
     local -i line_num=0
-    local -i max_lines=1000
+    local -i max_lines=1050
     local -i max_line_length=79
     local -i max_line_length_found=0
 
@@ -250,97 +248,30 @@ $(
 
 
 check_fields() {
-    local age=''
-    local copyright_line=''
-    local rel_dat=''
-    local releaseday=''
-    local rel_num=''
-    local today=''
-
-#FIXME Has to chane for P.Versioning+
-    copyright_line=$(
-        grep --word-regexp --regexp=' ''Auteursrecht '  "$script" || true
-        )
-    if [[ -z $copyright_line ]]; then
+    if ! grep   --quiet                     \
+                --regexp='VERSION_NUMBER'   \
+                --regexp='version_number'   \
+                "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
-    Auteursrecht ontbreekt.
-"
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    else
-        # Jaarwisseling.
-        if ! grep --quiet --regexp="$THIS_YEAR" "$script"; then
-            update_fields
-        fi
-    fi
-
-    rel_num=$(
-        awk -F'ReleaseNumber'': '                   \
-            '/''ReleaseNumber'': /{print $2;exit}'  \
-            "$script"
-        )
-    if [[ -z $rel_num ]]; then
-        info "
-${BOLD}In $script:${NORMAL}
-    ReleaseNumber ontbreekt.
+    Versienummer (VERSION_NUMBER/version_number) ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
         fi
     fi
-    if [[ $rel_num != ??.??.?? ]]; then
+    if ! grep   --quiet                 \
+                --regexp='VERSION_DATE' \
+                --regexp='version_date' \
+                "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
-    ReleaseNumber $rel_num is niet geldig.
+    Versiedatum (VERSION_DATE/version_date) ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
         fi
     fi
-    rel_dat=$(
-        awk -F'DateOfRelease'': '                   \
-            '/''DateOfRelease'': /{print $2;exit}'  \
-            "$script"
-        )
-    if [[ -z $rel_dat ]]; then
-        info "
-${BOLD}In $script:${NORMAL}
-    DateOfRelease ontbreekt.
-"
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-    if ! date --date="$rel_dat" &> /dev/null; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Vrijgavedatum $rel_dat is niet geldig.
-"
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-    today=$(date +%Y%m%d)
-    releaseday=$(date +%Y%m%d --date="$rel_dat")
-    if [[ $releaseday -gt $today ]]; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Vrijgavedatum $rel_dat ligt in de toekomst.
-"
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-    age=$((today - releaseday))
-    if [[ $age -gt 10000 ]]; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Vrijgavedatum $rel_dat is meer dan een jaar oud.
-"
-    fi
-
     if ! grep --quiet --word-regexp --regexp=' ''EOF' "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
@@ -350,50 +281,6 @@ ${BOLD}In $script:${NORMAL}
             MAXRC=$ERROR
         fi
     fi
-}
-
-
-update_fields() {
-    local copyright_line_new=''
-    local copyright_line_first_part=''
-    local pgm_copyright_line=''
-    local pgm_copyright_line_new=''
-
-    # Man-pagina.
-    if [[ $copyright_line = .* ]]; then
-        # Get rid of ./" in copyright line.
-        copyright_line=${copyright_line:4}
-
-
-        # Change program's copyright year in the man page.
-
-        # Auteursrecht (c) 2020 Karel Zimmer. ->
-        # Auteursrecht (c) 2020-2021 Karel Zimmer.
-        pgm_copyright_line=" $LAST_YEAR Karel Zimmer."
-        pgm_copyright_line_new=" $LAST_YEAR-$THIS_YEAR Karel Zimmer."
-        sed --in-place                                                      \
-            --expression="s/$pgm_copyright_line/$pgm_copyright_line_new/g"  \
-            "$script"
-
-        # Auteursrecht (c) 2013-2020 Karel Zimmer. ->
-        # Auteursrecht (c) 2013-2021 Karel Zimmer.
-        pgm_copyright_line="-$LAST_YEAR Karel Zimmer."
-        pgm_copyright_line_new="-$THIS_YEAR Karel Zimmer."
-        sed --in-place                                                      \
-            --expression="s/$pgm_copyright_line/$pgm_copyright_line_new/g"  \
-            "$script"
-    else
-        info "
-${BOLD}In $script:${NORMAL}
-    Auteursrechtregel is aangepast voor de jaarwisseling.
-    Maak zelf een PDF aan. Gebruik script edsha.
-"
-    fi
-    copyright_line_first_part=${copyright_line:0:23}
-    copyright_line_new=$copyright_line_first_part"-$THIS_YEAR Karel Zimmer."
-    sed --in-place                                              \
-        --expression="s/$copyright_line/$copyright_line_new/g"  \
-        "$script"
 }
 
 

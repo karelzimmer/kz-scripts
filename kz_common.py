@@ -9,7 +9,7 @@ Deze module geeft toegang tot algemene functies.
 import datetime
 
 module_name = 'kz_common.py'
-first_released = 2021
+release_year = 2021
 
 version_number = '02.01.00'
 version_date = '2021-08-22'
@@ -23,7 +23,7 @@ Typ '{display_name} --help' voor meer informatie.""")
 
 
 def process_option_version(display_name, version_number, version_date,
-                           first_released):
+                           release_year):
     """
     Deze functie toont versie-informatie, auteur, en auteursrecht.
     """
@@ -31,10 +31,10 @@ def process_option_version(display_name, version_number, version_date,
     this_year = now.year
     copyright_years = 1970
 
-    if first_released == this_year:
-        copyright_years = first_released
+    if release_year == this_year:
+        copyright_years = release_year
     else:
-        copyright_years = str(first_released) + '-' + str(this_year)
+        copyright_years = str(release_year) + '-' + str(this_year)
     print(f"""{display_name} {version_number} ({version_date})
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
