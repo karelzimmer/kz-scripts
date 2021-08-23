@@ -3,12 +3,12 @@
 # Installatiebestand voor Ubuntu20.04 LST desktop op pc07.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-# Auteursrecht (c) 2020-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 03.01.00
-# DateOfRelease: 2021-08-15
 ###############################################################################
+# RELEASE_YEAR=2020
+
+# VERSION_NUMBER=03.01.01
+# VERSION_DATE=2021-08-22
+
 
 #1
 #2 Gastgebruiker installeren

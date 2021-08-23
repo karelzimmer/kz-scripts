@@ -3,12 +3,12 @@
 # Installatiebestand voor Debian 11 LST desktop op pc07.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-# Auteursrecht (c) 2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 01.00.00
-# DateOfRelease: 2021-08-16
 ###############################################################################
+# RELEASE_YEAR=2021
+
+# VERSION_NUMBER=01.00.01
+# VERSION_DATE=2021-08-22
+
 
 #1
 #2 Intel Wireless WiFi Link Firmware installeren

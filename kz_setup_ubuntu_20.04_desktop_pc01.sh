@@ -3,12 +3,12 @@
 # Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc01.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-# Auteursrecht (c) 2020-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 04.00.00
-# DateOfRelease: 2021-08-08
 ###############################################################################
+# RELEASE_YEAR=2020
+
+# VERSION_NUMBER=04.00.01
+# VERSION_DATE=2021-08-22
+
 
 #1
 #2 Gedit instellen
