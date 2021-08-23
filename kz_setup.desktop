@@ -2,13 +2,11 @@
 # Bureaublad-configuratiebestand voor kz setup.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2017-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 08.00.00
-# DateOfRelease: 2021-08-15
 ###############################################################################
+# RELEASE_YEAR=2017
+
+# VERSION_NUMBER=08.00.01
+# VERSION_DATE=2021-08-22
 
 [Desktop Entry]
 Type=Application

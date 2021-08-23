@@ -2,13 +2,11 @@
 # Bureaublad-configuratiebestand voor kz dliso.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2015-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 02.00.00
-# DateOfRelease: 2021-08-08
 ###############################################################################
+# RELEASE_YEAR=2015
+
+# VERSION_NUMBER=02.00.01
+# VERSION_DATE=2021-08-22
 
 [Desktop Entry]
 Type=Application

@@ -2,13 +2,11 @@
 # Bureaublad-configuratiebestand voor kz nas.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-#
-# Auteursrecht (c) 2016-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 04.00.00
-# DateOfRelease: 2021-08-08
 ###############################################################################
+# RELEASE_YEAR=2016
+
+# VERSION_NUMBER=04.00.01
+# VERSION_DATE=2021-08-22
 
 [Desktop Entry]
 Type=Application
