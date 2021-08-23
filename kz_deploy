@@ -261,7 +261,7 @@ sync_pdf_kz_docs() {
     cp  --archive                           \
         --update                            \
         "${TARGET_UPLOADS[PDFS]}"/\
-Checklist_installatie*{desktop,server}.odt  \
+Checklist_installatie*{desktop,server}.pdf  \
         "${TARGET_DEB[DOC]}"                |& $LOGCMD || true
 
     if ! $changes; then
