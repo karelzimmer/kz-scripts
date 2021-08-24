@@ -213,7 +213,7 @@ kz_gset --addfavbottom --file='spotify_spotify.desktop'
 
 #1 thunderbird
 #2 Kalender voor Thunderbird
-kz_gset --addfavbottom --file='thunderbird.desktop'
+kz_gset --addfavtop --file='thunderbird.desktop'
 #3 Voeg de extenstie voor Google Agenda toe via:
 #3 1. Start Thunderbird.
 #3 2. Ga naar Menu openen ☰ > Add-ons.
