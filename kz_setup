@@ -55,9 +55,6 @@ readonly RELEASE=$(lsb_release --release --short)
 readonly LIST_DIR="$HOME/${PROGRAM_NAME}_lists"
 readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
-readonly STATUS_ERROR="[${RED}FOUT${NORMAL}]"
-readonly STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
-readonly STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
 readonly DASHES=$(printf '%.0s=' {1..79})
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
@@ -120,6 +117,9 @@ check_input() {
     fi
     eval set -- "$parsed"
     process_general_options "$@"
+    STATUS_ERROR="[${RED}FOUT${NORMAL}]"
+    STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
+    STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
 
     while true; do
         case $1 in
