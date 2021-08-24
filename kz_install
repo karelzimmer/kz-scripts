@@ -588,7 +588,7 @@ local dfltfile_1=''
 local dfltfile_2=''
 
     dfltfile_1=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
-    dfltfile_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}-${HOSTNAME}.sh
+    dfltfile_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_${HOSTNAME}.sh
     if [[ -e $PROGRAM_PATH/$dfltfile_1 ]]; then
         FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$dfltfile_1
         ((++file_num))
