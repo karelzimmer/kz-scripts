@@ -258,11 +258,10 @@ sync_pdf_kz_docs() {
     done
     cd "$HOME" || exit $ERROR
 
-    cp  --archive                           \
-        --update                            \
-        "${TARGET_UPLOADS[PDFS]}"/\
-Checklist_installatie*{desktop,server}.pdf  \
-        "${TARGET_DEB[DOC]}"                |& $LOGCMD || true
+    cp  --archive                                               \
+        --update                                                \
+        "${TARGET_UPLOADS[PDFS]}"/Checklist_installatie*.pdf    \
+        "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
 
     if ! $changes; then
         info '    Geen documenten gewijzigd'
