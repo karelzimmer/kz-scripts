@@ -248,9 +248,9 @@ $(
 
 
 check_fields() {
-    if ! grep   --quiet                     \
-                --regexp='VERSION_NUMBER'   \
-                --regexp='version_number'   \
+    if ! grep   --quiet                         \
+                --regexp='VERSION_NUMBER='      \
+                --regexp='version_number = '    \
                 "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
@@ -260,9 +260,9 @@ ${BOLD}In $script:${NORMAL}
             MAXRC=$ERROR
         fi
     fi
-    if ! grep   --quiet                 \
-                --regexp='VERSION_DATE' \
-                --regexp='version_date' \
+    if ! grep   --quiet                     \
+                --regexp='VERSION_DATE='    \
+                --regexp='version_date = '  \
                 "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}

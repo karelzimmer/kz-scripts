@@ -2,9 +2,11 @@
 """
 Update uitvoeren.
 
-Dit script voert updates uit voor Debian pakketten en snaps.
+Dit script voert een update uit voor Debian pakketten en snaps.
 """
 ###############################################################################
+# Update uitvoeren.
+#
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 import sys
