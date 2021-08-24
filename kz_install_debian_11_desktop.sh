@@ -95,7 +95,7 @@ rm /tmp/teamviewer.deb
 #4    sudo apt update
 
 
-#1 thunderbird-calendar
+#1 thunderbird
 #2 Kalender voor Thunderbird
 sudo apt-get install --yes lightning
 #4 Start Terminalvenster en voer uit:
