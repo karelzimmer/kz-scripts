@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_install
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.00.03
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=59.00.04
+VERSION_DATE=2021-08-24
 
 
 ###############################################################################
@@ -871,8 +871,8 @@ execute_command() {
         if [[ $cmd_seq_num -eq 1 ]]; then
             printf "$STATUS_BUSY %s$CARRIAGE_RETURN" "$description_line"
         else
-            printf  "$STATUS_BUSY         %s$CARRIAGE_RETURN"  \
-                    "${description_line:8}"
+            printf  "$STATUS_BUSY          %s$CARRIAGE_RETURN"  \
+                    "${description_line:9}"
         fi
     fi
 
