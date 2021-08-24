@@ -6,8 +6,8 @@
 # #############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=01.00.02
+# VERSION_DATE=2021-08-24
 
 
 #1
@@ -122,12 +122,12 @@ kz_gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 
 #1 dashtodock
 #2 Dash to Dock instellen
-gnome-shell-extension-tool --enable-extension=dash-to-dock@micxgx.gmail.com || true
+gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 #4 Start Terminalvenster en voer uit:
 #4    gnome-shell-extension-tool --disable-extension=dash-to-dock@micxgx.gmail.com
-#4    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
+#4    gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
 
 
