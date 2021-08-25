@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_backup
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.03
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=36.00.04
+VERSION_DATE=2021-08-25
 
 
 ###############################################################################
@@ -314,7 +314,7 @@ process_input() {
         printf '\n' > "$EXCLUDEFILE_OPTIONAL"
     fi
 
-    TEXT='Bepaal grootte van de back-up (dit kan even duren)...'
+    TEXT='Bepaal grootte van de back-up (kan even duren)...'
     if $OPTION_GUI; then
         TITLE='Back-up maken'
         # Met "|& zenity --progress" worden globale variabelen uit
@@ -335,7 +335,7 @@ process_input() {
         determine_selection_size
     fi
 
-    TEXT='Controleer beschikbare schijfruimte (dit kan even duren)...'
+    TEXT='Controleer beschikbare schijfruimte (kan even duren)...'
     if $OPTION_GUI; then
         check_space > >(
             zenity  --progress              \
@@ -494,7 +494,7 @@ create_backup() {
         >   "$BACKUP" || tar_rc=$?
     fi
 
-    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)...'
+    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (kan even duren)...'
     if $OPTION_GUI; then
         sync                                        |
         zenity  --progress                          \

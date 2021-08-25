@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_restore
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=39.00.02
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=39.00.03
+VERSION_DATE=2021-08-25
 
 
 ###############################################################################
@@ -240,7 +240,7 @@ request_input_tui() {
 Het medium waarop de back-up staat dient aangekoppeld te zijn.
 Voorbeelden van een medium zijn een (externe) (netwerk)schijf,
 USB-stick, CD, of DVD.
-Zoek nu naar back-ups van deze computer (dit kan even duren)..."
+Zoek nu naar back-ups van deze computer (kan even duren)..."
 
     show_backups "$HOSTNAME"
 
@@ -400,7 +400,7 @@ process_input() {
     fi
 
     TITLE='Back-up terugzetten'
-    TEXT='Controleer beschikbare schijfruimte (dit kan even duren)...'
+    TEXT='Controleer beschikbare schijfruimte (kan even duren)...'
     if $OPTION_GUI; then
         # Met "|& zenity --progress" worden globale variabelen uit
         # aangeroepen functies niet doorgegeven, vandaar de
@@ -548,7 +548,7 @@ restore_backup() {
             "${SELECTION[@]}"                       2> >($LOGCMD) || TAR_RC=$?
     fi
 
-    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)...'
+    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (kan even duren)...'
     if $OPTION_GUI; then
         sync                                        |
         zenity  --progress                          \

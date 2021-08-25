@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_mkusb
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=18.06.02
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=18.06.03
+VERSION_DATE=2021-08-25
 
 
 ###############################################################################
@@ -263,7 +263,7 @@ create_usb_stick() {
             bs=4M               \
             status=none
 
-        info "Gegevens schrijven naar $usbname (dit kan even duren)..."
+        info "Gegevens schrijven naar $usbname (kan even duren)..."
         sync
 
         info "USB-stick '$usbname' is gemaakt."

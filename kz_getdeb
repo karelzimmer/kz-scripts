@@ -17,7 +17,7 @@ PROGRAM_NAME=kz_getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.00.02
+VERSION_NUMBER=29.00.03
 VERSION_DATE=2021-08-25
 
 
@@ -187,12 +187,12 @@ check_dpkg() {
                     /var/cache/debconf/config.dat                           \
                     /snap/core/*/var/cache/debconf/config.dat               \
                     &> /dev/null; do
-            TEXT="Wacht tot andere pakketbeheerder klaar is (dit kan even \
+            TEXT="Wacht tot andere pakketbeheerder klaar is (kan even \
 duren)..."
             TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                                 --title     'Voortgang'     \
                                 --infobox   "$TEXT"         \
-                                7 69
+                                7 65
             sleep $wait_for_aptd
         done
     else
@@ -200,12 +200,12 @@ duren)..."
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
                     /var/cache/debconf/config.dat                           \
                     &> /dev/null; do
-            TEXT="Wacht tot andere pakketbeheerder klaar is (dit kan even \
+            TEXT="Wacht tot andere pakketbeheerder klaar is (kan even \
 duren)..."
             TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                                 --title     'Voortgang'     \
                                 --infobox   "$TEXT"         \
-                                7 69
+                                7 65
             sleep $wait_for_aptd
         done
     fi
@@ -279,11 +279,11 @@ install_scriptspackage() {
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     check_sudo_and_dpkg
-    TEXT='Installeer scriptspakket (dit kan even duren)...'
+    TEXT='Installeer scriptspakket (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 52
+                        7 48
 
     check_sudo_and_dpkg
     sudo    DEBIAN_FRONTEND=noninteractive  \
@@ -373,11 +373,11 @@ download_website() {
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
-    TEXT='Download website (dit kan even duren)...'
+    TEXT='Download website (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 44
+                        7 39
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
