@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_install
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.00.04
-VERSION_DATE=2021-08-24
+VERSION_NUMBER=59.01.00
+VERSION_DATE=2021-08-25
 
 
 ###############################################################################
@@ -217,10 +217,8 @@ process_input() {
         process_argument_file
     fi
 
-    # Als argument APP of FILE, of optie apps of files, is opgegeven, geen
-    # standaardbestanden verwerken.
-    if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES || $OPTION_APPS)
-    then
+    # Als argument APP of FILE is opgegeven, geen standaardbestanden verwerken.
+    if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
         process_dfltfiles
     fi
     if $file_notfound; then
@@ -645,20 +643,18 @@ Om APPs te installeren voer uit:
 
 
 process_option_files() {
-    local search=''
-
-    search=${PROGRAM_NAME}_${ID}_${RELEASE}
     printf '%s\n' "De volgende installatiebestanden zijn beschikbaar:
 
 NUMMER BESTAND
 $(
-    if !    find    "$PROGRAM_PATH/$search"*.sh \
-                    2> /dev/null                |
-            nl      --number-width=6            \
-                    --number-format=rn          \
-                    --number-separator=' '      \
+    if !    find    "${FILE_TO_PROCESS[@]}" \
+                    2> /dev/null            |
+            nl      --number-width=6        \
+                    --number-format=rn      \
+                    --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $ID.
+        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $ID \
+$RELEASE $EDITION.
 
 Controleer $PROGRAM_PATH op aanwezigheid andere installatiebestanden.
 Om die BESTANDen te bekijken voer uit:

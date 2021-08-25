@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_setup
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.00.03
-VERSION_DATE=2021-08-24
+VERSION_NUMBER=45.01.00
+VERSION_DATE=2021-08-25
 
 
 ###############################################################################
@@ -216,10 +216,8 @@ process_input() {
         process_argument_file
     fi
 
-    # Als argument APP of FILE, of optie apps of files, is opgegeven, geen
-    # standaardbestanden verwerken.
-    if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES || $OPTION_APPS)
-    then
+    # Als argument APP of FILE is opgegeven, geen standaardbestanden verwerken.
+    if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
         process_dfltfiles
     fi
     if $file_notfound; then
@@ -529,18 +527,19 @@ Om APPs in te stellen voer uit:
 process_option_files() {
     local search=''
 
-    search=${PROGRAM_NAME}_${ID}_${RELEASE}
+    search=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}
     printf '%s\n' "De volgende instellingsbestanden zijn beschikbaar:
 
 NUMMER BESTAND
 $(
-    if !    find    "$PROGRAM_PATH/$search"*.sh \
-                    2> /dev/null                |
-            nl      --number-width=6            \
-                    --number-format=rn          \
-                    --number-separator=' '      \
+    if !    find    "${FILE_TO_PROCESS[@]}" \
+                    2> /dev/null            |
+            nl      --number-width=6        \
+                    --number-format=rn      \
+                    --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen instellingsbestanden gevonden voor $ID.
+        printf '%s\n' "     0 Geen instellingsbestanden gevonden voor $ID \
+$RELEASE $EDITION.
 
 Controleer $PROGRAM_PATH op aanwezigheid andere instellingsbestanden.
 Om die BESTANDen te bekijken voer uit:
