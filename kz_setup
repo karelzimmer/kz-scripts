@@ -525,9 +525,6 @@ Om APPs in te stellen voer uit:
 
 
 process_option_files() {
-    local search=''
-
-    search=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}
     printf '%s\n' "De volgende instellingsbestanden zijn beschikbaar:
 
 NUMMER BESTAND
