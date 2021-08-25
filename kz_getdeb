@@ -17,8 +17,8 @@ PROGRAM_NAME=kz_getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.00.01
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=29.00.02
+VERSION_DATE=2021-08-25
 
 
 ###############################################################################
@@ -32,13 +32,15 @@ readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
          bash kz
      of: wget karelzimmer.nl/kz; bash kz
      of: wget -O- karelzimmer.nl/kz | bash
-     of: curl -L karelzimmer.nl/kz | bash"
+     of: curl -L karelzimmer.nl/kz | bash
+     of: zoek naar get en klik op Scripts installeren"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
      of: wget karelzimmer.nl/kz
          bash kz
      of: wget karelzimmer.nl/kz; bash kz
      of: wget -O- karelzimmer.nl/kz | bash
      of: curl -L karelzimmer.nl/kz | bash
+     of: zoek naar get en klik op Scripts installeren
 
 Pakket installeren.
 
