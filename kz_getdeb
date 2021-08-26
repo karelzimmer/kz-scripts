@@ -377,7 +377,7 @@ download_website() {
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 39
+                        7 40
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
