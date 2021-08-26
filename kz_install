@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_install
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.00
-VERSION_DATE=2021-08-25
+VERSION_NUMBER=59.01.01
+VERSION_DATE=2021-08-26
 
 
 ###############################################################################
@@ -479,7 +479,9 @@ process_argument_app() {
     local app=''
     local file=''
     local search=''
+    local cmds_file=''
 
+    cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
     search=${PROGRAM_NAME}_${ID}_${RELEASE}
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in installatiebestanden.
@@ -505,6 +507,13 @@ process_argument_app() {
     done
     if $file_notfound; then
         info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
+    else
+        if ! grep --quiet --line-regexp --regexp='# EOF' "$cmds_file"
+        then
+            printf '%s\n' '# EOF' >> "$cmds_file"
+        fi
+        FILE_TO_PROCESS[$file_num]=$cmds_file
+        ((++file_num))
     fi
 }
 
@@ -513,9 +522,7 @@ process_argument_app_file() {
     local app_found=false
     local description_found=false
     local record=''
-    local cmds_file=''
 
-    cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
     while read -r record; do
         case $record in
             '#1 '*)
@@ -540,8 +547,7 @@ process_argument_app_file() {
                     # Volgende beschrijving.
                     break
                 elif $app_found; then
-                    TEXT="# $DASHES\n# Bron: $file\n# $DASHES\n\n\n$record"
-                    printf '%b\n' "$TEXT" >> "$cmds_file"
+                    printf '%b\n' "$record" >> "$cmds_file"
                     description_found=true
                 fi
                 ;;
@@ -553,12 +559,6 @@ process_argument_app_file() {
                 ;;
         esac
     done < "$file"
-    if ! grep --quiet --line-regexp --regexp='# EOF' "$cmds_file"
-    then
-        printf '%s\n' '# EOF' >> "$cmds_file"
-    fi
-    FILE_TO_PROCESS[$file_num]=$cmds_file
-    ((++file_num))
 }
 
 
