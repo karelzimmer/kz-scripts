@@ -11,7 +11,7 @@ PROGRAM_NAME=kz_setup
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.01.01
+VERSION_NUMBER=45.01.02
 VERSION_DATE=2021-08-26
 
 
@@ -52,7 +52,7 @@ Argumenten:
 readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
 readonly RELEASE=$(lsb_release --release --short)
-readonly LIST_DIR="$HOME/${PROGRAM_NAME}_lists"
+readonly LIST_DIR="$HOME//KZ Setup List"
 readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
 readonly DASHES=$(printf '%.0s=' {1..79})

@@ -11,7 +11,7 @@ PROGRAM_NAME=kz_install
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.01
+VERSION_NUMBER=59.01.02
 VERSION_DATE=2021-08-26
 
 
@@ -456,7 +456,7 @@ save_user_photo_file() {                    #5
     # /var/lib/AccountsService/users/ is niet toegankelijk voor gebruikers.
     printf '%s\n' "$text5..."
 
-    list_dir=/home/"${SUDO_USER:-$USER}"/kz_setup_lists
+    list_dir=/home/"${SUDO_USER:-$USER}/KZ Setup List"
     list_file=kz_setup_gebruikersfoto.txt
     mkdir --parents "$list_dir"
     if [[ -e /var/lib/AccountsService/users/"${SUDO_USER:-$USER}" ]]; then
