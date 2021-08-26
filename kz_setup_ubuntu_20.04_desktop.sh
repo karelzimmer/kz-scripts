@@ -112,8 +112,7 @@ kz_gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #1 gnome
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-kz_gset --removeappfolder --folder='Kz_Scripts'
-kz_gset --addappfolder --folder='Kz Scripts'
+kz_gset --addappfolder --folder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-light'
@@ -131,7 +130,7 @@ gsettings set org.gnome.shell.extensions.desktop-icons show-home false
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #4 Start Terminalvenster en voer uit:
-#4    kz_gset --removeappfolder --folder='Kz Scripts'
+#4    kz_gset --removeappfolder --folder='KZ Scripts'
 #4    gsettings reset org.gnome.desktop.app-folders folder-children
 #4    gsettings reset org.gnome.desktop.calendar show-weekdate
 #4    gsettings reset org.gnome.desktop.interface clock-show-date
