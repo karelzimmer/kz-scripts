@@ -6,14 +6,8 @@
 # #############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.02
-# VERSION_DATE=2021-08-24
-
-
-#1
-#2 Clean-up instellen
-kz_gset --removeappfolder --folder='Kz_Scripts'
-gsettings reset org.gnome.shell favorite-apps
+# VERSION_NUMBER=01.01.00
+# VERSION_DATE=2021-08-26
 
 
 #1 adguard
