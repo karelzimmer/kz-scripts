@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_setup
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.01.02
-VERSION_DATE=2021-08-26
+VERSION_NUMBER=45.02.00
+VERSION_DATE=2021-08-27
 
 
 ###############################################################################
@@ -361,22 +361,25 @@ save_command_history() {        #4
 process_argument_app() {
     local app=''
     local file=''
-    local search=''
+    local search_1=''
+    local search_2=''
     local cmds_file=''
 
     cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-    search=${PROGRAM_NAME}_${ID}_${RELEASE}
+    search_1=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
+    search_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_${HOSTNAME}.sh
+
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in instellingsbestanden.
         # Alleen eerstgevonden instellingsbestand verwerken (lines=1), want
         # app-naam kan in meerdere instellingsbestanden voorkomen.
         # shellcheck disable=SC2062
         file=$(
-            if ! grep       --files-with-matches        \
-                            --line-regexp               \
-                            --regexp="#1 $app"          \
-                            "$PROGRAM_PATH/$search"*.sh \
-                            2> /dev/null                |
+            if ! grep       --files-with-matches    \
+                            --line-regexp           \
+                            --regexp="#1 $app"      \
+                            "$search_1" "$search_2" \
+                            2> /dev/null            |
                     head    --lines=1; then
                 printf '\n'
             fi
@@ -491,23 +494,20 @@ instellingsbestanden."
 
 
 process_option_apps() {
-    local search=''
-
-    search=${PROGRAM_NAME}_${ID}_${RELEASE}
-
+    process_dfltfiles
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
 NUMMER APP
 $(
-    if !    grep    --no-messages               \
-                    --regexp='^#1 '             \
-                    "$PROGRAM_PATH/$search"*.sh |
-            awk     '{print $2}'                |
-            sort    --unique                    |
-            nl      --number-width=6            \
-                    --number-format=rn          \
-                    --number-separator=' '      \
+    if !    grep    --no-messages           \
+                    --regexp='^#1 '         \
+                    "${FILE_TO_PROCESS[@]}" |
+            awk     '{print $2}'            |
+            sort    --unique                |
+            nl      --number-width=6        \
+                    --number-format=rn      \
+                    --number-separator=' '  \
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen apps gevonden voor $ID $RELEASE.
 
