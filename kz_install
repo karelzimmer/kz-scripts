@@ -182,8 +182,9 @@ check_input() {
                 ;;
         esac
     done
-    DFLTFILE_1=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
-    DFLTFILE_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_${HOSTNAME}.sh
+    DFLTFILE_1=$PROGRAM_PATH/${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
+    DFLTFILE_2=$PROGRAM_PATH/${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_\
+${HOSTNAME}.sh
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -590,15 +591,15 @@ installatiebestanden."
 
 
 process_dfltfiles() {
-    if [[ -e $PROGRAM_PATH/$DFLTFILE_1 ]]; then
-        FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$DFLTFILE_1
+    if [[ -e $DFLTFILE_1 ]]; then
+        FILE_TO_PROCESS[$file_num]=$DFLTFILE_1
         ((++file_num))
     else
         file_notfound=true
     fi
     # Niet verplicht aanwezig.
-    if [[ -e $PROGRAM_PATH/$DFLTFILE_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$DFLTFILE_2
+    if [[ -e $DFLTFILE_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$DFLTFILE_2
         ((++file_num))
     fi
     if $file_notfound; then
