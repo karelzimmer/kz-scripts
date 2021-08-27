@@ -645,7 +645,6 @@ Om APPs te installeren voer uit:
 
 
 process_option_files() {
-    echo ${FILE_TO_PROCESS[@]}
     printf '%s\n' "De volgende installatiebestanden zijn beschikbaar:
 
 NUMMER BESTAND
