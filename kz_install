@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_install
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.02
-VERSION_DATE=2021-08-26
+VERSION_NUMBER=59.01.03
+VERSION_DATE=2021-08-27
 
 
 ###############################################################################
@@ -629,9 +629,7 @@ $(
                     --number-format=rn          \
                     --number-separator=' '      \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen apps gevonden voor $ID $RELEASE.
-
-Typ '$DISPLAY_NAME --files' voor beschikbare installatiebestanden."
+        printf '%s\n' "     0 Geen apps gevonden voor $ID $RELEASE."
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
@@ -657,13 +655,6 @@ $(
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen installatiebestanden gevonden voor $ID \
 $RELEASE $EDITION.
-
-Controleer $PROGRAM_PATH op aanwezigheid andere installatiebestanden.
-Om die BESTANDen te bekijken voer uit:
-    ${BLUE}$DISPLAY_NAME --sim $PROGRAM_PATH/BESTAND...${NORMAL}
-    ${BLUE}$DISPLAY_NAME --cat $PROGRAM_PATH/BESTAND...${NORMAL}
-Om die BESTANDen te gebruiken voer uit:
-    ${BLUE}$DISPLAY_NAME $PROGRAM_PATH/BESTAND...${NORMAL}
 Typ 'man $DISPLAY_NAME' voor meer informatie."
     else
         printf '%s\n' "
