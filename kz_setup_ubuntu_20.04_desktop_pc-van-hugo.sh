@@ -30,6 +30,8 @@ kz_gset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
 #1 virtualbox
 #2 VirtualBox instellen
 kz_gset --addfavbottom --file='virtualbox.desktop'
+cp /usr/bin/kz_vm_hugowin732.sh "$HOME"
+chmod u+x "$HOME"/kz_vm_hugowin732.sh
 cp /usr/share/applications/kz_vm_hugowin732.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz_vm_hugowin732.desktop
 kz_gset --addfavbottom --file='kz_vm_hugowin732.desktop'
@@ -38,7 +40,9 @@ kz_gset --addfavbottom --file='kz_vm_hugowin732.desktop'
 #4 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
 #4 2. Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz_vm_hugowin732.desktop
+#4    rm "$HOME"/kz_vm_hugowin732.sh
 #4    kz_gset --removefav --file='virtualbox.desktop'
+#4    kz_gset --removefav --file='kz_vm_hugowin732.desktop'
 
 
 # EOF

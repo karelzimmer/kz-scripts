@@ -15,7 +15,7 @@ GenericName=PC-virtualisatie-oplossing
 Comment=Start VirtualBox VM hugowin732
 Keywords=vbox;virtualisatie;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_vm_hugowin
+Exec=/home/hugo/kz_vm_hugowin732.sh
 Icon=virtualbox
 NoDisplay=true
 
