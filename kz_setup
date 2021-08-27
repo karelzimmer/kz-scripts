@@ -78,6 +78,8 @@ declare -a  FILE_TO_PROCESS=''
 declare     ARGUMENT_APP=false
 declare     ARGUMENT_FILE=false
 declare     COMMANDS_FOUND=false
+declare     DFLTFILE_1=''
+declare     DFLTFILE_2=''
 declare     EDITION=$EDITION_DEFAULT
 declare     EDITION_ARGUMENT=''
 declare     EXECUTE_COMMANDS=true
@@ -178,6 +180,8 @@ check_input() {
                 ;;
         esac
     done
+    DFLTFILE_1=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
+    DFLTFILE_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_${HOSTNAME}.sh
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -361,14 +365,12 @@ save_command_history() {        #4
 process_argument_app() {
     local app=''
     local file=''
-    local search_1=''
-    local search_2=''
     local cmds_file=''
 
     cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-    search_1=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
-    search_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_${HOSTNAME}.sh
-
+    # Zoek bij install naar apps in kz_install_<distro>_<versie>-bestanden,
+    # Zoek bij setup naar apps in kz_install_<distro>_<versie>_<edition>.sh en
+    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in instellingsbestanden.
         # Alleen eerstgevonden instellingsbestand verwerken (lines=1), want
@@ -378,7 +380,8 @@ process_argument_app() {
             if ! grep       --files-with-matches    \
                             --line-regexp           \
                             --regexp="#1 $app"      \
-                            "$search_1" "$search_2" \
+                            "$DFLTFILE_1"           \
+                            "$DFLTFILE_2"           \
                             2> /dev/null            |
                     head    --lines=1; then
                 printf '\n'
@@ -467,33 +470,27 @@ instellingsbestanden."
 
 
 process_dfltfiles() {
-local dfltfile_1=''
-local dfltfile_2=''
-
-    dfltfile_1=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
-    dfltfile_2=${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_${HOSTNAME}.sh
-    if [[ -e $PROGRAM_PATH/$dfltfile_1 ]]; then
-        FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$dfltfile_1
+    if [[ -e $PROGRAM_PATH/$DFLTFILE_1 ]]; then
+        FILE_TO_PROCESS[$file_num]=$DFLTFILE_1
         ((++file_num))
     else
         file_notfound=true
     fi
     # Niet verplicht aanwezig.
-    if [[ -e $PROGRAM_PATH/$dfltfile_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$PROGRAM_PATH/$dfltfile_2
+    if [[ -e $PROGRAM_PATH/$DFLTFILE_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$DFLTFILE_2
         ((++file_num))
     fi
     if $file_notfound; then
-        info "Geen instellingsbestanden gevonden voor $ID $RELEASE $EDITION."
-        if ! $OPTION_GUI; then
-            info "Typ '$DISPLAY_NAME --files' voor beschikbare \
-instellingsbestanden."
-        fi
+        info "Geen installatiebestanden gevonden voor $ID $RELEASE $EDITION."
     fi
 }
 
 
 process_option_apps() {
+    # Zoek bij install naar apps in kz_install_<distro>_<versie>-bestanden,
+    # Zoek bij setup naar apps in kz_install_<distro>_<versie>_<edition>.sh en
+    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
     process_dfltfiles
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
