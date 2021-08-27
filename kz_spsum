@@ -139,7 +139,7 @@ $ISO_FILE.$HASHPROG.\n"
 
 
 term_script() {
-    rm --verbose *SHA* |& $LOGCMD
+    rm --verbose -- *SHA* |& $LOGCMD
     if $ISO_FILE_FOUND; then
         info "Om de beeldbestanden (.iso) te controleren voer uit:
     ${BLUE}cd $SEARCHDIR;$HASHPROG --check *.$HASHPROG; cd -${NORMAL}
