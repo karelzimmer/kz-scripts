@@ -7,13 +7,13 @@
 # RELEASE_YEAR=2021
 
 # VERSION_NUMBER=01.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_DATE=2021-08-27
 
 [Desktop Entry]
 Type=Application
-Name=Execute update
-Name[nl]=Update uitvoeren
-GenericName=Software Updates
+Name=Update system
+Name[nl]=Systeem bijwerken
+GenericName=System Updates
 GenericName[nl]=Software-updates
 Comment=Execute update for the system
 Comment[nl]=Voer update uit voor het systeem
