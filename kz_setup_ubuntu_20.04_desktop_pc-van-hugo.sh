@@ -37,6 +37,7 @@ sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/s
 kz_gset --addfavbottom --file='kz_vm_hugowin732.desktop'
 #3 1. Ga naar Apparaten > Installeren Guest Additions en volg de aanwijzingen op het scherm.
 #3 2. Voor optimale netwerksnelheid kies bij Netwerk voor Gekoppeld aan Netwerk bridge adapter.
+#3 3. Start Opstatoepassingen en voeg /home/hugo/kz_vm_hugowin732.sh toe.
 #4 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
 #4 2. Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz_vm_hugowin732.desktop
