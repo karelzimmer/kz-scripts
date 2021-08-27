@@ -5,5 +5,6 @@
 # VERSION_DATE=2017-07-28
 
 sleep 10
+VBoxManage startvm "hugowin732"
 
 # EOF
