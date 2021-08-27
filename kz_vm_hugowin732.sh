@@ -19,7 +19,7 @@ zenity  --progress                  \
              --pulsate              \
              --auto-close           \
              --no-cancel            \
-             --width     500        \
+             --width     450        \
              --height    50         \
              --title     "$TITLE"   \
              --text      "$TEXT"
