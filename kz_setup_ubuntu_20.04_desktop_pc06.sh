@@ -57,13 +57,6 @@ kz_gset --addfavtop --file='org.gnome.gedit.desktop'
 #4    kz_gset --removefav --file='org.gnome.gedit.desktop'
 
 
-#1 google-chrome
-#2 Google Chrome instellen
-kz_gset --removefav --file='firefox.desktop'
-#3 1. Start Standaardtoepassingen.
-#3 2. Kies bij E-mail voor Gnome Gmail.
-
-
 #1 gnome
 #2 GNOME instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY

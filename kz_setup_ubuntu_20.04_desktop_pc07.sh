@@ -69,13 +69,6 @@ gsettings set org.gnome.nautilus.preferences show-create-link true
 #4    gsettings reset org.gnome.nautilus.preferences show-create-link
 
 
-#1 google-chrome
-#2 Google Chrome instellen
-kz_gset --removefav --file='firefox.desktop'
-#3 1. Start Standaardtoepassingen.
-#3 2. Kies bij E-mail voor Gnome Gmail.
-
-
 #1 kvm
 #2 KVM instellen
 ## Beeldscherm 2048 x 1152 (16:9).

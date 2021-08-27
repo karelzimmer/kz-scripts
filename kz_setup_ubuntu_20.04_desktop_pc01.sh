@@ -65,7 +65,7 @@ if [[ $USER = monique ]]; then kz_gset --addfavtop --file='gnome-gmail.desktop';
 
 #1 google-chrome
 #2 Google Chrome instellen
-kz_gset --removefav --file='firefox.desktop'
+if [[ $USER = monique ]]; then kz_gset --removefav --file='firefox.desktop'; fi
 #3 1. Start Standaardtoepassingen.
 #3 2. Kies bij E-mail voor Gnome Gmail.
 
