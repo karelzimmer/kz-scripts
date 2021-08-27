@@ -6,8 +6,15 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.00.02
+# VERSION_DATE=2021-08-27
+
+
+#1
+#2 Externe Bluetooth installeren
+echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
+#4 1. Start Terminalvenster en voer uit:
+#4    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
 
 
 #1 bluefish
@@ -15,22 +22,6 @@
 sudo apt-get install --yes bluefish
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes bluefish
-
-
-#1
-#2 Externe Bluetooth installeren
-if [[ $HOSTNAME = pc06 ]]; then echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules; fi
-#4 1. Start Terminalvenster en voer uit:
-#4    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
-
-
-#1
-#2 Gastgebruiker installeren
-if [[ $HOSTNAME = pc06 ]] && ! id gast; then sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast; fi
-if [[ $HOSTNAME = pc06 ]] && id gast; then sudo chmod 0750 /home/gast; fi
-if [[ $HOSTNAME = pc06 ]] && id gast; then sudo passwd --delete gast; fi
-#4 Start Terminalvenster en voer uit:
-#4    sudo userdel --remove gast
 
 
 #1 calibre
@@ -59,6 +50,15 @@ sudo apt-get install --yes dconf-editor
 sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gedit-plugins
+
+
+#1 gast
+#2 Gastgebruiker installeren
+sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
+sudo chmod 0750 /home/gast
+sudo passwd --delete gast
+#4 Start Terminalvenster en voer uit:
+#4    sudo userdel --remove gast
 
 
 #1 gconf-editor

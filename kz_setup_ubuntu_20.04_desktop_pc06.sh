@@ -6,35 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.00.02
-# VERSION_DATE=2021-08-22
-
-
-#1
-#2 Google Chrome instellen
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then kz_gset --removefav --file='firefox.desktop'; fi
-#3 1. Start Standaardtoepassingen.
-#3 2. Kies bij E-mail voor Gnome Gmail.
-
-
-#1
-#2 GNOME instellen
-## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'; fi
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-#4 Start Terminalvenster en voer uit:
-#4    gsettings reset org.gnome.desktop.background picture-uri
-#4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
-#4    gsettings reset org.gnome.nautilus.preferences show-create-link
-
-
-#1
-#2 Vooruit zoeken in history instellen
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc; fi
-if [[ $HOSTNAME = pc06 && $USER = karel ]]; then echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc; fi
-#4 Start Terminalvenster en voer uit:
-#4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
+# VERSION_NUMBER=04.00.03
+# VERSION_DATE=2021-08-27
 
 
 #1 bluefish
@@ -84,6 +57,25 @@ kz_gset --addfavtop --file='org.gnome.gedit.desktop'
 #4    kz_gset --removefav --file='org.gnome.gedit.desktop'
 
 
+#1 google-chrome
+#2 Google Chrome instellen
+kz_gset --removefav --file='firefox.desktop'
+#3 1. Start Standaardtoepassingen.
+#3 2. Kies bij E-mail voor Gnome Gmail.
+
+
+#1 gnome
+#2 GNOME instellen
+## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
+gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+gsettings set org.gnome.nautilus.preferences show-create-link true
+#4 Start Terminalvenster en voer uit:
+#4    gsettings reset org.gnome.desktop.background picture-uri
+#4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
+#4    gsettings reset org.gnome.nautilus.preferences show-create-link
+
+
 #1 kvm
 #2 KVM instellen
 ## Beeldscherm 2048 x 1152 (16:9).
@@ -97,6 +89,14 @@ kz_gset --addfavbottom --file='virt-manager.desktop'
 kz_gset --addfavtop --file='idle.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='idle.desktop'\
+
+
+#1 search
+#2 Vooruit zoeken in history instellen
+sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
+echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
+#4 Start Terminalvenster en voer uit:
+#4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
 #1 terminal

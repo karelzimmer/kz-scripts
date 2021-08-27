@@ -6,16 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.00.02
-# VERSION_DATE=2021-08-22
-
-
-#1
-#2 GNOME instellen
-## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-if [[ $HOSTNAME = pc04 && $USER = nina ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Fleurs_de_Prunus_24_by_Jérôme_Boivin.jpg'; fi
-#4 Start Terminalvenster en voer uit:
-#4    gsettings reset org.gnome.desktop.background picture-uri
+# VERSION_NUMBER=04.00.03
+# VERSION_DATE=2021-08-27
 
 
 #1 calibre
@@ -23,6 +15,14 @@ if [[ $HOSTNAME = pc04 && $USER = nina ]]; then gsettings set org.gnome.desktop.
 kz_gset --addfavbottom --file='calibre-gui.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='calibre-gui.desktop'
+
+
+#1 gnome
+#2 GNOME instellen
+## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
+gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Fleurs_de_Prunus_24_by_Jérôme_Boivin.jpg'
+#4 Start Terminalvenster en voer uit:
+#4    gsettings reset org.gnome.desktop.background picture-uri
 
 
 #1 google-earth

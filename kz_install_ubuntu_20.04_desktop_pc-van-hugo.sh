@@ -6,14 +6,14 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.00.02
+# VERSION_DATE=2021-08-27
 
 
 #1
 #2 Actie laptopdesksel installeren
-if [[ $HOSTNAME = pc-van-hugo ]]; then sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf; fi
-if [[ $HOSTNAME = pc-van-hugo ]]; then echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf; fi
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #4 Start Terminalvenster en voer uit:
 #4    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 

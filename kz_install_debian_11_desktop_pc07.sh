@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=01.00.02
+# VERSION_DATE=2021-08-27
 
 
 #1
@@ -30,20 +30,11 @@
 #1
 #2 Activeren eth0 uit start-up halen
 ## Anders [FAILED] Raise network interfaces
-if [[ $HOSTNAME = pc07 ]]; then sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup; fi
-if [[ $HOSTNAME = pc07 ]]; then sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup; fi
+sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
+sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup
 #4 Start Terminalvenster en voer uit:
 #4    sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
 #4    sudo sed --in-place --expression='s/^#iface eth0 net dhcp$/iface eth0 net dhcp/' /etc/network/interfaces.d/setup
-
-
-#1
-#2 Gastgebruiker installeren
-if [[ $HOSTNAME = pc07 ]] && ! id gast; then sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast; fi
-if [[ $HOSTNAME = pc07 ]] && id gast; then sudo chmod 0750 /home/gast; fi
-if [[ $HOSTNAME = pc07 ]] && id gast; then sudo passwd --delete gast; fi
-#4 Start Terminalvenster en voer uit:
-#4    sudo userdel --remove gast
 
 
 #1 bluefish
@@ -58,6 +49,15 @@ sudo apt-get install --yes bluefish
 sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libimage-exiftool-perl
+
+
+#1 gast
+#2 Gastgebruiker installeren
+sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
+sudo chmod 0750 /home/gast
+sudo passwd --delete gast
+#4 Start Terminalvenster en voer uit:
+#4    sudo userdel --remove gast
 
 
 #1 gedit
@@ -131,9 +131,9 @@ sudo apt-get install --yes signal-desktop
 
 #1 tlp
 #2 TLP installeren
-if laptop-detect; then sudo apt-get install --yes tlp; fi
+sudo apt-get install --yes tlp
 ## Nodig voor ThinkPads.
-if [[ $HOSTNAME = pc07 ]]; then sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms; fi
+sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms
 #3 Check status:
 #3 ~~~~~~~~~~~~~
 #3 Start Terminalvenster en voer uit:

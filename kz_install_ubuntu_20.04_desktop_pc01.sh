@@ -6,35 +6,24 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.00.02
+# VERSION_DATE=2021-08-27
 
 
 #1
 #2 Externe Bluetooth installeren
-if [[ $HOSTNAME = pc01 ]]; then echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="0cf3", ATTRS{idProduct}=="3004", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules; fi
+echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="0cf3", ATTRS{idProduct}=="3004", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #4 Start Terminalvenster en voer uit:
 #4    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
 
 
-#1
+#1 gast
 #2 Gastgebruiker installeren
-if [[ $HOSTNAME = pc01 ]] && ! id gast; then sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast; fi
-if [[ $HOSTNAME = pc01 ]] && id gast; then sudo chmod 0750 /home/gast; fi
-if [[ $HOSTNAME = pc01 ]] && id gast; then sudo passwd --delete gast; fi
+sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
+sudo chmod 0750 /home/gast
+sudo passwd --delete gast
 #4 Start Terminalvenster en voer uit:
 #4    sudo userdel --remove gast
-
-
-#1
-#2 Systeemgebruiker installeren
-## Voor toegang op afstand en systeembeheer.
-if [[ $HOSTNAME = pc01 ]] && ! id karel; then sudo useradd --create-home --shell=/bin/bash --comment='Karel Zimmer' --groups=sudo karel; fi
-if [[ $HOSTNAME = pc01 ]] && id karel; then sudo cp /var/lib/AccountsService/users/{gdm,karel}; fi
-#3 Start Terminalvenster en voer uit:
-#3    sudo passwd karel
-#4 Start Terminalvenster en voer uit:
-#4    sudo userdel --remove karel
 
 
 #1 exiftool
@@ -56,6 +45,17 @@ sudo apt-get install --yes gedit-plugins
 sudo apt-get install --yes git git-gui qgit
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes git git-gui qgit
+
+
+#1 karel
+#2 Systeemgebruiker installeren
+## Voor toegang op afstand en systeembeheer.
+sudo useradd --create-home --shell=/bin/bash --comment='Karel Zimmer' --groups=sudo karel || true
+sudo cp /var/lib/AccountsService/users/{gdm,karel}
+#3 Start Terminalvenster en voer uit:
+#3    sudo passwd karel
+#4 Start Terminalvenster en voer uit:
+#4    sudo userdel --remove karel
 
 
 #1 openssh
