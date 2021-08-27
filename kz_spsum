@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_spsum
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=09.00.02
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=09.00.03
+VERSION_DATE=2021-08-27
 
 
 ###############################################################################
@@ -139,6 +139,7 @@ $ISO_FILE.$HASHPROG.\n"
 
 
 term_script() {
+    rm --verbose *SHA* |& $LOGCMD
     if $ISO_FILE_FOUND; then
         info "Om de beeldbestanden (.iso) te controleren voer uit:
     ${BLUE}cd $SEARCHDIR;$HASHPROG --check *.$HASHPROG; cd -${NORMAL}
