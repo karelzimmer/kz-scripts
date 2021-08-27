@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2017
 
-# VERSION_NUMBER=04.01.09
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=04.02.00
+# VERSION_DATE=2021-08-27
 
 [Desktop Entry]
 Type=Application
@@ -15,7 +15,7 @@ GenericName=PC-virtualisatie-oplossing
 Comment=Start VirtualBox VM hugowin732
 Keywords=vbox;virtualisatie;
 Categories=KZ Scripts;
-Exec=VBoxManage startvm hugowin732
+Exec=/usr/bin/kz_vm_hugowin
 Icon=virtualbox
 NoDisplay=true
 
