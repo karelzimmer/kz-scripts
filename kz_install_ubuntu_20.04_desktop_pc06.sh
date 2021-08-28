@@ -10,7 +10,7 @@
 # VERSION_DATE=2021-08-27
 
 
-#1
+#1 bluetooth
 #2 Externe Bluetooth installeren
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #4 1. Start Terminalvenster en voer uit:

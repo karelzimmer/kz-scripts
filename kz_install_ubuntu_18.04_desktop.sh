@@ -6,11 +6,11 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=02.01.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=02.01.02
+# VERSION_DATE=2021-08-28
 
 
-#1 stop-apport
+#1 apport
 #2 Handmatig genereren van crashrapporten installeren
 ## Ubuntu-only.
 sudo systemctl stop apport.service
