@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_install
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.03
-VERSION_DATE=2021-08-27
+VERSION_NUMBER=59.01.04
+VERSION_DATE=2021-08-28
 
 
 ###############################################################################
@@ -226,9 +226,6 @@ process_input() {
     # Als argument APP of FILE is opgegeven, geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
         process_dfltfiles
-    fi
-    if $file_notfound; then
-        exit $WARNING
     fi
 
     # Verwerk opties.
@@ -604,6 +601,7 @@ process_dfltfiles() {
     fi
     if $file_notfound; then
         info "Geen installatiebestanden gevonden voor $ID $RELEASE $EDITION."
+        exit $WARNING
     fi
 }
 
