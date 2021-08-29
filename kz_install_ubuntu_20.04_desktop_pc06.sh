@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.02
-# VERSION_DATE=2021-08-27
+# VERSION_NUMBER=03.00.03
+# VERSION_DATE=2021-08-29
 
 
 #1 bluetooth
@@ -142,10 +142,10 @@ sudo apt-get install --yes pinta
 
 #1 python
 #2 Python installeren
-sudo apt-get install --yes idle pep8 python3-autopep8 python3-pip python-is-python3
+sudo apt-get install --yes idle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes idle python3-autopep8 python3-pip pep8 python-is-python3
+#4    sudo apt remove --yes idle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 #4    sudo rm --force /usr/bin/pip
 
 

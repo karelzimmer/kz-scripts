@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.00
-VERSION_DATE=2021-08-27
+VERSION_NUMBER=14.03.01
+VERSION_DATE=2021-08-29
 
 
 ###############################################################################
@@ -94,9 +94,9 @@ check_input() {
 
 
 check_dependencies() {
-    if ! command -v pep8 1> /dev/null; then
-        info 'Installeer pep8...'
-        sudo apt-get install --yes pep8 |& $LOGCMD
+    if ! command -v pycodestyle 1> /dev/null; then
+        info 'Installeer pycodestyle...'
+        sudo apt-get install --yes pycodestyle |& $LOGCMD
     fi
     if ! command -v shellcheck 1> /dev/null; then
         info 'Installeer shellcheck...'
@@ -137,7 +137,7 @@ process_input() {
                 check_lines
                 check_fields
                 check_trailing_spaces
-                check_script_pep8
+                check_script_pycodestyle
                 ;;
             *)
                 check_tags
@@ -322,7 +322,7 @@ check_script() {
                 --line-regexp                   \
                 --regexp='#!''/usr/bin/python3' \
                 "$script"; then
-            check_script_pep8
+            check_script_pycodestyle
     else
         info "
 ${BOLD}In $script:${NORMAL}
@@ -344,10 +344,10 @@ check_script_shellcheck() {
 }
 
 
-check_script_pep8() {
+check_script_pycodestyle() {
     local -i check_rc=0
 
-    pep8 "$script" || check_rc=$?
+    pycodestyle "$script" || check_rc=$?
     if [[ $check_rc -gt $MAXRC ]]; then
         MAXRC=$check_rc
     fi

@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.02
-# VERSION_DATE=2021-08-27
+# VERSION_NUMBER=01.00.03
+# VERSION_DATE=2021-08-29
 
 
 #1
@@ -109,11 +109,11 @@ sudo apt-get install --yes meld
 
 #1 python
 #2 Python installeren
-sudo apt-get install --yes idle pep8 python3-autopep8 python3-pip
+sudo apt-get install --yes idle python3-pycodestyle python3-autopep8 python3-pip
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes idle python3-pip pep8 python-is-python3
+#4    sudo apt remove --yes idle python3-pycodestyle python3-autopep8 python3-pip
 #4    sudo rm --force /usr/bin/pip /usr/bin/python
 
 
