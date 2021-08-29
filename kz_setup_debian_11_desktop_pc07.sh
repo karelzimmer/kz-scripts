@@ -6,8 +6,18 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.03
-# VERSION_DATE=2021-08-27
+# VERSION_NUMBER=01.00.04
+# VERSION_DATE=2021-08-29
+
+
+#1 bluefish
+#2 Bluefish instellen
+kz_gset --addfavbottom --file='bluefish.desktop'
+#3 1. Start Bluefish.
+#3 2. Zet via Bewerken > Voorkeuren > Initiele document instellingen de Tab breedte op 4 en
+#3    vink aan Gebruik spaties voor inspringen, geen tabs.
+#4 Start Terminalvenster en voer uit:
+#4    kz_gset --removefav --file='bluefish.desktop'
 
 
 #1 gedit
@@ -65,6 +75,19 @@ gsettings set org.gnome.nautilus.preferences show-create-link true
 #4    gsettings reset org.gnome.nautilus.preferences show-create-link
 
 
+#1 kvm
+#2 KVM instellen
+## Beeldscherm 2048 x 1152 (16:9).
+kz_gset --addfavbottom --file='virt-manager.desktop'
+#4 Start Terminalvenster en voer uit:
+#4    kz_gset --removefav --file='virt-manager.desktop'
+
+
+#1 python
+#2 Python instellen
+kz_gset --addfavtop --file='idle.desktop'
+#4 Start Terminalvenster en voer uit:
+#4    kz_gset --removefav --file='idle.desktop'
 #1 search
 #2 Vooruit zoeken in history instellen
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
