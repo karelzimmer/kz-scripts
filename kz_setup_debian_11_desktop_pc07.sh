@@ -63,9 +63,10 @@ kz_gset --addfavtop --file='org.gnome.gedit.desktop'
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'
 gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
-gsettings set org.gnome.nautilus.preferences show-create-link true
+gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
 #4    gsettings reset org.gnome.desktop.screensaver picture-uri
@@ -73,7 +74,7 @@ gsettings set org.gnome.nautilus.preferences show-create-link true
 #4    gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 #4    gsettings reset org.gnome.nautilus.preferences show-create-link
-
+#4    gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 
 #1 kvm
 #2 KVM instellen

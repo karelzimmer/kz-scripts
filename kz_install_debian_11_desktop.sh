@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=01.00.02
+# VERSION_DATE=2021-08-29
 
 
 #1 bitwarden
@@ -96,10 +96,10 @@ rm /tmp/teamviewer.deb
 
 
 #1 thunderbird
-#2 Kalender voor Thunderbird
-sudo apt-get install --yes lightning
+#2 Thunderbird installeren
+sudo apt-get install --yes lightning thunderbird-l10n-nl
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes lightning
+#4    sudo apt remove --yes lightning thunderbird-l10n-nl
 
 
 #1 zoom
