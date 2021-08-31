@@ -386,7 +386,7 @@ download_website() {
         rm      "$ftp_login"
         printf  "${YELLOW}%s${NORMAL}\n"            \
                 'Downloaden website is mislukt.'    >&2
-        printf  "${YELLOW}%S${NORMAL}\n" "Controleer de log...!" >&2
+        printf  "${YELLOW}%s${NORMAL}\n" "Controleer de log...!" >&2
         return  $WARNING
     fi
 }

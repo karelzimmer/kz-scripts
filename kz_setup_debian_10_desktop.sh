@@ -3,12 +3,12 @@
 # Instellingsbestand voor Debian 10 LTS desktop.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-# Auteursrecht (c) 2020-2021 Karel Zimmer.
-# GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-#
-# ReleaseNumber: 03.01.00
-# DateOfRelease: 2021-08-14
 # #############################################################################
+# RELEASE_YEAR=2020
+
+# VERSION_NUMBER=03.01.00
+# VERSION_DATE=2021-08-14
+
 
 #1
 #2 Clean-up instellen
