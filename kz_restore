@@ -11,14 +11,15 @@ PROGRAM_NAME=kz_restore
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=39.00.03
-VERSION_DATE=2021-08-25
+VERSION_NUMBER=39.00.04
+VERSION_DATE=2021-08-31
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
+readonly RUN_AS_SUPERUSER=true
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:s:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:,exclude:'
 readonly USAGE="Gebruik: $DISPLAY_NAME [-e|--exclude=UITSLUITEN]... \
@@ -51,7 +52,6 @@ $(find /etc/skel -type f -exec basename '{}' \; | awk '$0="/home/*/"$0')"
 # deze bestanden worden teruggezeten naar de oude versie; niet wenselijk.
 readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/${PROGRAM_NAME}_exclude_opt
 readonly SELECTION_DEFAULT=''
-readonly RUN_AS_SUPERUSER=true
 readonly SOURCE_DEFAULT=/media/
 readonly TARGET_DEFAULT=/
 

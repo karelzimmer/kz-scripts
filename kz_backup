@@ -11,14 +11,15 @@ PROGRAM_NAME=kz_backup
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.04
-VERSION_DATE=2021-08-25
+VERSION_NUMBER=36.00.05
+VERSION_DATE=2021-08-31
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
+readonly RUN_AS_SUPERUSER=true
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',exclude:,target:'
 readonly USAGE="Gebruik: $DISPLAY_NAME [-e|--exclude=UITSLUITEN]... \
@@ -61,7 +62,6 @@ readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /sys
 /tmp"
 readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/${PROGRAM_NAME}_exclude_opt
-readonly RUN_AS_SUPERUSER=true
 readonly TARGET_DEFAULT_1=/media
 readonly TARGET_DEFAULT_2=backups
 readonly TARGET_DEFAULT_3=${HOSTNAME}_${ID}
