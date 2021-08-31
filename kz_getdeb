@@ -395,7 +395,7 @@ download_website() {
 term_script() {
     local search=''
 
-    search=/usr/share/doc/kz/Checklist_installatie_$(lsb_release --short --id)
+    search=/usr/share/doc/kz/Checklist_installatie
     cp "$search"_*_{desktop,server}.pdf "$HOME" |& $LOGCMD || true
     cp "$search"_*_{desktop,server}_"$HOSTNAME".pdf "$HOME" |& $LOGCMD || true
 
