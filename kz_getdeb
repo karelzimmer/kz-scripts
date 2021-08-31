@@ -396,20 +396,22 @@ term_script() {
     local search=''
 
     search=/usr/share/doc/kz/Checklist_installatie_$(lsb_release --short --id)
-    cp "$search"_*_{desktop,server}.odt "$HOME" |& $LOGCMD || true
-    cp "$search"_*_{desktop,server}_"$HOSTNAME".odt "$HOME" |& $LOGCMD || true
+    cp "$search"_*_{desktop,server}.pdf "$HOME" |& $LOGCMD || true
+    cp "$search"_*_{desktop,server}_"$HOSTNAME".pdf "$HOME" |& $LOGCMD || true
 
     TEXT='Volg nu de stappen zoals beschreven in Checklist installatie.
 
-Deze Checklist is te vinden op de site https://karelzimmer.nl
-onder Linux, in map /usr/share/doc/kz, en in de Persoonlijke map.'
-    height=10
+Deze Checklist is te vinden:
+- in de Persoonlijke map
+- in map /usr/share/doc/kz
+- op de site https://karelzimmer.n onder Linux'
+    height=12
 
     if ! $TERMINAL; then
         TEXT=$TEXT"
 
 Typ 'exit' om dit venster te sluiten."
-        height=12
+        height=14
     fi
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title 'Gereed'            \
