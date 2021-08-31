@@ -404,7 +404,7 @@ term_script() {
 Deze Checklist is te vinden:
 - in de Persoonlijke map
 - in map /usr/share/doc/kz
-- op de site https://karelzimmer.n onder Linux'
+- op de site https://karelzimmer.nl onder Linux'
     height=12
 
     if ! $TERMINAL; then
