@@ -11,14 +11,15 @@ PROGRAM_NAME=kz_mkusb
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=18.06.03
-VERSION_DATE=2021-08-25
+VERSION_NUMBER=18.06.04
+VERSION_DATE=2021-08-31
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
+readonly RUN_AS_SUPERUSER=true
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON's:t:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:'
 readonly USAGE="Gebruik: $DISPLAY_NAME [-s|--source=BRON] \
@@ -37,7 +38,6 @@ $OPTIONS_HELP_COMMON"
 
 readonly DEVICE_DEFAULT=/dev/sdb
 readonly SOURCE_DEFAULT=/home/${SUDO_USER:-$USER}/Downloads
-readonly RUN_AS_SUPERUSER=true
 
 
 ###############################################################################

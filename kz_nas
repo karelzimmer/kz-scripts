@@ -11,14 +11,15 @@ PROGRAM_NAME=kz_nas
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=13.00.02
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=13.00.03
+VERSION_DATE=2021-08-31
 
 
 ###############################################################################
 # Global constants
 ###############################################################################
 
+readonly RUN_AS_SUPERUSER=true
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
@@ -45,7 +46,6 @@ Hiervoor is nodig:
     IP-adres buiten het bereik van DHCP die automatisch
     de IP-adressen uitdeelt (vaak 192.168.0.200).
  2. Kies in de NAS het vaste IP-adres en zet DHCP uit."
-readonly RUN_AS_SUPERUSER=true
 readonly SYSTEMD_MOUNT_DIR=/etc/systemd/system
 readonly SYSTEMD_MOUNT_FILE=mnt-nas.mount
 readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
