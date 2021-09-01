@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.02
-# VERSION_DATE=2021-08-29
+# VERSION_NUMBER=01.01.00
+# VERSION_DATE=2021-09-01
 
 
 #1 bitwarden
@@ -15,6 +15,13 @@
 sudo snap install bitwarden
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove bitwarden
+
+
+#1 cups
+#2 CUPS installeren
+sudo apt-get install --yes cups
+#4 Start Terminalvenster en voer uit:
+#4    sudo apt remove cups
 
 
 #1 dashtodock
