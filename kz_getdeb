@@ -402,20 +402,21 @@ term_script() {
         "$HOME"                                         |& $LOGCMD || true
 
     TEXT='Volg nu de stappen zoals beschreven in de
-Checklists installatie Ubuntu of Debian.
+Checklist installatie Ubuntu of
+Checklist installatie Debian.
 
 Deze Checklists zijn te vinden:
 - in de Persoonlijke map
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl
   onder Linux'
-    height=14
+    height=15
 
     if ! $TERMINAL; then
         TEXT=$TEXT"
 
 Typ 'exit' om dit venster te sluiten."
-        height=16
+        height=17
     fi
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title 'Gereed'            \
