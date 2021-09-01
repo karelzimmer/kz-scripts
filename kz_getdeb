@@ -402,7 +402,7 @@ term_script() {
         "$HOME"                                         |& $LOGCMD || true
 
     TEXT='Volg nu de stappen zoals beschreven in de
-Checklists installatie Ubuntu en Debian.
+Checklists installatie Ubuntu of Debian.
 
 Deze Checklists zijn te vinden:
 - in de Persoonlijke map
