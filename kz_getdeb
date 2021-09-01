@@ -407,19 +407,20 @@ Checklists installatie Ubuntu en Debian.
 Deze Checklists zijn te vinden:
 - in de Persoonlijke map
 - in de map /usr/share/doc/kz
-- op de site https://karelzimmer.nl onder Linux'
-    height=13
+- op de site https://karelzimmer.nl
+  onder Linux'
+    height=14
 
     if ! $TERMINAL; then
         TEXT=$TEXT"
 
 Typ 'exit' om dit venster te sluiten."
-        height=15
+        height=16
     fi
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title 'Gereed'            \
                         --infobox "$TEXT"           \
-                        $height 51
+                        $height 45
     exit $SUCCESS
 }
 
