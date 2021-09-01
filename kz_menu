@@ -196,9 +196,9 @@ process_menu1_tui() {
 
         # Toon menu.
         clear -x
-        printf "%s\n\n" "$MENU1_HEAD"
+        printf '%s\n\n' "$MENU1_HEAD"
         for action1 in "${!ACTIONS1[@]}"; do
-            printf "%2s. %-25.25s - %s\n" "$action1" "${ACTIONS1[$action1]}" \
+            printf '%2s. %-25.25s - %s\n' "$action1" "${ACTIONS1[$action1]}" \
 "${COMMANDS1[$action1]}"
         done
         printf '\n'
@@ -384,9 +384,9 @@ process_menu2_tui() {
 
         # Toon menu.
         clear -x
-        printf "%s\n\n" "$MENU2_HEAD"
+        printf '%s\n\n' "$MENU2_HEAD"
         for action2 in "${!ACTIONS2[@]}"; do
-            printf "%2s. %-29.29s - %s\n" "$action2" "${ACTIONS2[$action2]}" \
+            printf '%2s. %-29.29s - %s\n' "$action2" "${ACTIONS2[$action2]}" \
 "${COMMANDS2[$action2]}"
         done
         printf '\n'

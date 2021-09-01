@@ -71,7 +71,7 @@ init_script() {
 check_input() {
     # Geen getopt, opgegeven opties zijn voor de opdracht, niet voor kz zelf.
     if ! [[ "$*" ]]; then
-        printf "%s\n\n" "$USAGE" >&2
+        printf '%s\n\n' "$USAGE" >&2
         show_commands
         exit $WARNING
     fi
@@ -111,7 +111,7 @@ show_commands() {
             -printf '%f\n'          |
     sort                            |
     sed     's/kz_//'
-    printf "\n%s\n"  "Typ '$DISPLAY_NAME --usage' voor meer informatie."
+    printf '\n%s\n' "Typ '$DISPLAY_NAME --usage' voor meer informatie."
 }
 
 
@@ -123,7 +123,7 @@ process_option_usage() {
 
 
 process_option_help() {
-    printf  "%s\n\n%s\n"    \
+    printf  '%s\n\n%s\n'    \
             "$HELP"         \
             "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
@@ -137,7 +137,7 @@ process_option_version() {
     else
         copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
-    printf "%s\n" "$DISPLAY_NAME $VERSION_NUMBER ($VERSION_DATE)
+    printf '%s\n' "$DISPLAY_NAME $VERSION_NUMBER ($VERSION_DATE)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

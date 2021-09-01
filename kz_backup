@@ -285,7 +285,7 @@ request_input_tui() {
 
     TEXT="Gebruik optie target om op te geven waar de back-up geplaatst moet \
 worden."
-    printf "%s\n" "$TEXT" >&2
+    printf '%s\n' "$TEXT" >&2
     if $media2; then
         # Meer dan één aangekoppeld medium gevonden.
         printf '%s\n' "Voeg één van de volgende opties toe voor de nu \
@@ -295,7 +295,7 @@ aangekoppelde media:"
                     "${media[$medium]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"
         done
     else
-        printf "%s\n" "Voorbeeld: $DISPLAY_NAME --target DOELMAP"
+        printf '%s\n' "Voorbeeld: $DISPLAY_NAME --target DOELMAP"
     fi
     printf '%s\n' "$USAGELINE" >&2
     exit $SUCCESS

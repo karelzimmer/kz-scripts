@@ -301,14 +301,14 @@ process_option_debug() {
 
 
 process_option_help() {
-    printf  "%s\n\n%s\n"    \
+    printf  '%s\n\n%s\n'    \
             "$HELP"         \
             "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
 process_option_usage() {
-    printf "%s\n\n%s\n" \
+    printf '%s\n\n%s\n' \
             "$USAGE"    \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
