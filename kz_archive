@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_archive
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.00.05
-VERSION_DATE=2021-08-31
+VERSION_NUMBER=18.00.06
+VERSION_DATE=2021-09-01
 
 
 ###############################################################################
@@ -245,6 +245,7 @@ term_script() {
     fi
     if $ARCHIVED; then
         TEXT="$TEXT\nEr zijn bestanden gearchiveerd."
+        warning 'Pas website aan!'
     else
         TEXT="$TEXT\nEr zijn geen bestanden gearchiveerd."
     fi
