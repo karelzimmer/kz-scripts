@@ -146,14 +146,15 @@ process_input() {
                 process_remove
             fi
         done < <(
-            find    "$ARCHIVE_FROM"     \
-                    "$DELETE_FROM_1"    \
-                    "$DELETE_FROM_2"    \
-                    "$DELETE_FROM_3"    \
-                    -iname              \
-                    '*'"$search4"'*'    \
-                    -type f             \
-                    -print              |
+            find    "$ARCHIVE_FROM"         \
+                    "$DELETE_FROM_1"        \
+                    "$DELETE_FROM_2"        \
+                    "$DELETE_FROM_3"        \
+                    -iname                  \
+                    '*'"$search4"'*'        \
+                    -not -path '*/.git/*'   \
+                    -type f                 \
+                    -print                  |
                     sort
             )
         if ! $files_found; then
