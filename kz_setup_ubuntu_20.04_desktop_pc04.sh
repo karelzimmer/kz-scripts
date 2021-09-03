@@ -6,19 +6,19 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.00.03
-# VERSION_DATE=2021-08-27
+# VERSION_NUMBER=04.01.00
+# VERSION_DATE=2021-09-03
 
 
 #1 calibre
-#2 Calibre instellen
+#2 Calibre (e-boekmanager) instellen
 kz_gset --addfavbottom --file='calibre-gui.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='calibre-gui.desktop'
 
 
 #1 gnome
-#2 GNOME instellen
+#2 GNOME (bureaubladomgeving) instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Fleurs_de_Prunus_24_by_Jérôme_Boivin.jpg'
 #4 Start Terminalvenster en voer uit:
@@ -26,7 +26,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 
 
 #1 google-earth
-#2 Google Earth instellen
+#2 Google Earth (verken de wereld) instellen
 kz_gset --addfavbottom --file='google-earth.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='google-earth.desktop'

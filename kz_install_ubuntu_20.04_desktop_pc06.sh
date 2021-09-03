@@ -11,49 +11,49 @@
 
 
 #1 bluetooth
-#2 Externe Bluetooth installeren
+#2 Externe Bluetooth (bluetooth-adapter) installeren
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #4 1. Start Terminalvenster en voer uit:
 #4    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
 
 
 #1 bluefish
-#2 Bluefish installeren
+#2 Bluefish (editor) installeren
 sudo apt-get install --yes bluefish
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes bluefish
 
 
 #1 calibre
-#2 Calibre installeren
+#2 Calibre (e-boekmanager) installeren
 sudo apt-get install --yes calibre
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes calibre
 
 
 #1 clamav
-#2 ClamAV installeren
+#2 ClamAV (antivirus) installeren
 sudo apt-get install --yes clamtk
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes clamtk
 
 
 #1 dconf-editor
-#2 Dconf-editor installeren
+#2 Dconf-editor (editor) installeren
 sudo apt-get install --yes dconf-editor
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes dconf-editor
 
 
 #1 exiftool
-#2 ExifTool installeren
+#2 ExifTool (multimedia-metadata) installeren
 sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gedit-plugins
 
 
 #1 gast
-#2 Gastgebruiker installeren
+#2 Gastgebruiker (gast) installeren
 sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
 sudo chmod 0750 /home/gast
 sudo passwd --delete gast
@@ -62,42 +62,42 @@ sudo passwd --delete gast
 
 
 #1 gconf-editor
-#2 GConf-editor installeren
+#2 GConf-editor (editor) installeren
 sudo apt-get install --yes gconf-editor
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gconf-editor
 
 
 #1 gedit
-#2 Gedit installeren
+#2 Gedit (editor) installeren
 sudo apt-get install --yes gedit-plugins
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gedit-plugins
 
 
 #1 git
-#2 Git installeren
+#2 Git (versiebeheersysteem) installeren
 sudo apt-get install --yes git git-gui qgit
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes git git-gui qgit
 
 
 #1 hardinfo
-#2 Hardinfo installeren
+#2 Hardinfo (systeeminformatie) installeren
 sudo apt-get install --yes hardinfo
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes hardinfo
 
 
 #1 htop
-#2 Htop installeren
+#2 Htop (systeeminformatie) installeren
 sudo apt-get install --yes htop
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes htop
 
 
 #1 kvm
-#2 KVM installeren
+#2 KVM (virtualisatie) installeren
 ## Images staan in /var/lib/libvirt/images/.
 ## Dpkg::Options i.v.m. interactie a.g.v. restore /etc/libvirt configuratiebestanden.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" cpu-checker qemu-kvm bridge-utils virt-manager
@@ -113,35 +113,35 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 
 
 #1 lftp
-#2 Lftp installeren
+#2 Lftp (ftp-programma) installeren
 sudo apt-get install --yes lftp
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes lftp
 
 
 #1 locate
-#2 Locate installeren
+#2 Locate  (bestanden zoeken op naam) installeren
 sudo apt-get install --yes mlocate
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes mlocate
 
 
 #1 meld
-#2 Meld installeren
+#2 Meld (visuele diff en merge tool) installeren
 sudo apt-get install --yes meld
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes meld
 
 
 #1 pinta
-#2 Pinta installeren
+#2 Pinta (tekenprogramma) installeren
 sudo apt-get install --yes pinta
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes pinta
 
 
 #1 python
-#2 Python installeren
+#2 Python (programmeertaal) installeren
 sudo apt-get install --yes idle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #4 Start Terminalvenster en voer uit:
@@ -150,7 +150,7 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 
 
 #1 signal
-#2 Signal installeren
+#2 Signal (privéberichtenapp) installeren
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee /etc/apt/sources.list.d/signal-xenial.list
 sudo apt-get update
@@ -162,14 +162,14 @@ sudo apt-get install --yes signal-desktop
 
 
 #1 tree
-#2 Tree installeren
+#2 Tree (mappenboom weergeven) installeren
 sudo apt-get install --yes tree
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes tree
 
 
 #1 vscode
-#2 Visual Studio Code installeren
+#2 Visual Studio Code (editor) installeren
 sudo snap install --classic code
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove code

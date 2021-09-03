@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.03
-# VERSION_DATE=2021-08-29
+# VERSION_NUMBER=01.01.00
+# VERSION_DATE=2021-09-03
 
 
 #1
-#2 Intel Wireless WiFi Link Firmware installeren
+#2 Intel Wireless WiFi Link Firmware (wifi-adapter) installeren
 ## Als NIET uitgevoerd TIJDENS installatie.
 :
 #sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
@@ -28,7 +28,7 @@
 
 
 #1
-#2 Activeren eth0 uit start-up halen
+#2 Activeren eth0 uit start-up (netwerk-adapter) halen
 ## Anders [FAILED] Raise network interfaces
 sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
 sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup
@@ -38,21 +38,21 @@ sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/'
 
 
 #1 bluefish
-#2 Bluefish installeren
+#2 Bluefish (editor) installeren
 sudo apt-get install --yes bluefish
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes bluefish
 
 
 #1 exiftool
-#2 ExifTool installeren
+#2 ExifTool (multimedia-metadata) installeren
 sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libimage-exiftool-perl
 
 
 #1 gast
-#2 Gastgebruiker installeren
+#2 Gastgebruiker (gast) installeren
 sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
 sudo chmod 0750 /home/gast
 sudo passwd --delete gast
@@ -61,21 +61,21 @@ sudo passwd --delete gast
 
 
 #1 gedit
-#2 Gedit installeren
+#2 Gedit (editor) installeren
 sudo apt-get install --yes gedit-plugins
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gedit-plugins
 
 
 #1 git
-#2 Git installeren
+#2 Git (versiebeheersysteem) installeren
 sudo apt-get install --yes git git-gui qgit
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes git git-gui qgit
 
 
 #1 kvm
-#2 KVM installeren
+#2 KVM (virtualisatie) installeren
 ## Images staan in /var/lib/libvirt/images/.
 ## Dpkg::Options i.v.m. interactie a.g.v. restore /etc/libvirt configuratiebestanden.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
@@ -94,21 +94,21 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 
 
 #1 locate
-#2 Locate installeren
+#2 Locate (bestanden zoeken op naam) installeren
 sudo apt-get install --yes mlocate
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes mlocate
 
 
 #1 meld
-#2 Meld installeren
+#2 Meld (visuele diff en merge tool) installeren
 sudo apt-get install --yes meld
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes meld
 
 
 #1 python
-#2 Python installeren
+#2 Python (programmeertaal) installeren
 sudo apt-get install --yes idle python3-pycodestyle python3-autopep8 python3-pip
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
@@ -118,7 +118,7 @@ sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
 
 
 #1 signal
-#2 Signal installeren
+#2 Signal (privéberichtenapp) installeren
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee /etc/apt/sources.list.d/signal-xenial.list
 sudo apt-get update
@@ -130,7 +130,7 @@ sudo apt-get install --yes signal-desktop
 
 
 #1 tlp
-#2 TLP installeren
+#2 TLP (accubesparing) installeren
 sudo apt-get install --yes tlp
 ## Nodig voor ThinkPads.
 sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms
@@ -146,14 +146,14 @@ sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms
 
 
 #1 tree
-#2 Tree installeren
+#2 Tree (mappenboom weergeven) installeren
 sudo apt-get install --yes tree
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes tree
 
 
 #1 vscode
-#2 Visual Studio Code installeren
+#2 Visual Studio Code (editor) installeren
 sudo snap install --classic code
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove code

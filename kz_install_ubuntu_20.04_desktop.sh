@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.01.02
-# VERSION_DATE=2021-08-28
+# VERSION_NUMBER=03.02.00
+# VERSION_DATE=2021-09-03
 
 
 #1 apport
-#2 Handmatig genereren van crashrapporten installeren
+#2 Handmatig genereren van crashrapporten (apport) installeren
 ## Ubuntu-only.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
@@ -23,14 +23,14 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
 #1 bitwarden
-#2 Bitwarden installeren
+#2 Bitwarden (wachtwoordkluis) installeren
 sudo snap install bitwarden
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove bitwarden
 
 
 #1 gnome-sushi
-#2 GNOME Sushi installeren
+#2 GNOME Sushi (voorbeeld) installeren
 ## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
 sudo apt-get install --yes gnome-sushi
 #4 Start Terminalvenster en voer uit:
@@ -38,7 +38,7 @@ sudo apt-get install --yes gnome-sushi
 
 
 #1 google-chrome
-#2 Google Chrome installeren
+#2 Google Chrome (webbrowser) installeren
 ## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder
 ## zelf aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
 ## Integratie van GNOME Shell-extensies voor webbrowsers:
@@ -51,7 +51,7 @@ rm /tmp/google-chrome.deb
 
 
 #1 icaclient
-#2 Citrix Workspace app installeren
+#2 Citrix Workspace app (telewerken) installeren
 ## Citrix Receiver, ICA Client
 wget --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/apps/icaclient/LATEST'
 wget --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/apps/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
@@ -64,14 +64,14 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 
 
 #1 libreoffice
-#2 LibreOffice installeren
+#2 LibreOffice (kantoorpakket) installeren
 sudo apt-get install --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
 #1 private-home
-#2 Persoonlijke mappen beveiligen installeren
+#2 Persoonlijke mappen beveiligen (/home) installeren
 ## https://ubuntu.com//blog/private-home-directories-for-ubuntu-21-04
 ## make all existing home directories private
 ## Ubuntu-only.
@@ -88,21 +88,21 @@ echo 'HOME_MODE 0750' | sudo tee --append /etc/login.defs
 
 
 #1 skype
-#2 Skype installeren
+#2 Skype (beeldbellen) installeren
 sudo snap install --classic skype
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove skype
 
 
 #1 spotify
-#2 Spotify installeren
+#2 Spotify (muziekspeler) installeren
 sudo snap install spotify
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove spotify
 
 
 #1 teamviewer
-#2 TeamViewer installeren
+#2 TeamViewer (telewerken) installeren
 wget --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
@@ -115,14 +115,14 @@ sudo teamviewer repo default
 
 
 #1 thunderbird
-#2 Kalender voor Thunderbird
+#2 Thunderbird (e-mail) installeren
 sudo apt-get install --yes xul-ext-lightning
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes xul-ext-lightning
 
 
 #1 ubuntu-restricted
-#2 Niet-vrije pakketten voor Ubuntu installeren
+#2 Niet-vrije pakketten voor Ubuntu (restricted) installeren
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van
 ## ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 ## Ubuntu-only.
@@ -133,7 +133,7 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 
 
 #1 wallpapers
-#2 Ubuntu-achtergronden installeren
+#2 Ubuntu-achtergronden (wallpapers) installeren
 ## Ubuntu-only.
 sudo apt-get install --yes ubuntu-wallpapers-*
 #4 Start Terminalvenster en voer uit:
@@ -142,7 +142,7 @@ sudo apt-get install --yes ubuntu-wallpapers-*
 
 
 #1 zoom
-#2 Zoom installeren
+#2 Zoom (telewerken) installeren
 wget --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb

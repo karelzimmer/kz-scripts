@@ -6,12 +6,12 @@
 # #############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.01.00
-# VERSION_DATE=2021-08-26
+# VERSION_NUMBER=01.02.00
+# VERSION_DATE=2021-09-03
 
 
 #1 adguard
-#2 Adguard instellen
+#2 Adguard (adblocker) instellen
 :
 #3
 #3 Voor Chrome:
@@ -45,12 +45,12 @@
 
 
 #1 alias
-#2 Alias - Aliassen definiëren
+#2 Aliassen  (alias) instellen
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 
 
 #1 bitwarden
-#2 Bitwarden instellen
+#2 Bitwarden (wachtwoordkluis) instellen
 kz_gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #3 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #3 1. Start Bitwarden.
@@ -115,7 +115,7 @@ kz_gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 
 
 #1 dashtodock
-#2 Dash to Dock instellen
+#2 Dash to Dock (starter) instellen
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
@@ -126,7 +126,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 
 
 #1 gnome
-#2 GNOME instellen
+#2 GNOME (bureaubladomgeving) instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 kz_gset --addappfolder --folder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -161,7 +161,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 
 
 #1 google-chrome
-#2 Google Chrome instellen
+#2 Google Chrome (webbrowser) instellen
 kz_gset --addfavtop --file='google-chrome.desktop'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
@@ -185,27 +185,27 @@ kz_gset --addfavtop --file='google-chrome.desktop'
 
 
 #1 icaclient
-#2 Citrix Workspace app instellen
+#2 Citrix Workspace app (telewerken) instellen
 ## Citrix Receiver, ICA Client
 xdg-mime default wfica.desktop application/x-ica
 
 
 #1 skype
-#2 Skype instellen
+#2 Skype (beeldbellen) instellen
 kz_gset --addfavbottom --file='skype_skypeforlinux.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='skype_skypeforlinux.desktop'
 
 
 #1 spotify
-#2 Spotify instellen
+#2 Spotify (muziekspeler) instellen
 kz_gset --addfavbottom --file='spotify_spotify.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='spotify_spotify.desktop'
 
 
 #1 thunderbird
-#2 Kalender voor Thunderbird
+#2 Thunderbird (e-mail) installen
 kz_gset --addfavtop --file='thunderbird.desktop'
 #3 Voeg de extenstie voor Google Agenda toe via:
 #3 1. Start Thunderbird.
@@ -222,7 +222,7 @@ kz_gset --addfavtop --file='thunderbird.desktop'
 
 
 #1 zoom
-#2 Zoom instellen
+#2 Zoom (telewerken) instellen
 kz_gset --addfavbottom --file='Zoom.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='Zoom.desktop'

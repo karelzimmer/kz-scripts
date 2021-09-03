@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.04
-# VERSION_DATE=2021-08-29
+# VERSION_NUMBER=01.01.00
+# VERSION_DATE=2021-09-03
 
 
 #1 bluefish
-#2 Bluefish instellen
+#2 Bluefish (editor) instellen
 kz_gset --addfavbottom --file='bluefish.desktop'
 #3 1. Start Bluefish.
 #3 2. Zet via Bewerken > Voorkeuren > Initiele document instellingen de Tab breedte op 4 en
@@ -21,7 +21,7 @@ kz_gset --addfavbottom --file='bluefish.desktop'
 
 
 #1 gedit
-#2 Gedit instellen
+#2 Gedit (editor) instellen
 gsettings set org.gnome.gedit.plugins active-plugins "['sort','spell','smartspaces','changecase','zeitgeistplugin','filebrowser','docinfo','time','codecomment','modelines']"
 gsettings set org.gnome.gedit.preferences.editor auto-indent false
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
@@ -58,7 +58,7 @@ kz_gset --addfavtop --file='org.gnome.gedit.desktop'
 
 
 #1 gnome
-#2 GNOME instellen
+#2 GNOME (bureaubladomgeving) instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'
 gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'
@@ -77,7 +77,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 
 #1 kvm
-#2 KVM instellen
+#2 KVM (virtualisatie) instellen
 ## Beeldscherm 2048 x 1152 (16:9).
 kz_gset --addfavbottom --file='virt-manager.desktop'
 #4 Start Terminalvenster en voer uit:
@@ -85,12 +85,14 @@ kz_gset --addfavbottom --file='virt-manager.desktop'
 
 
 #1 python
-#2 Python instellen
+#2 Python (programmeertaal) instellen
 kz_gset --addfavtop --file='idle.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='idle.desktop'
+
+
 #1 search
-#2 Vooruit zoeken in history instellen
+#2 Vooruit zoeken in history (Ctrl-S) instellen
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #4 Start Terminalvenster en voer uit:
@@ -98,7 +100,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
 #1 terminal
-#2 GNOME Terminal instellen
+#2 GNOME Terminal (terminal) instellen
 kz_gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 1. Klik op Activiteiten, typ 'snel'.
 #3 2. Klik bij Instellingen op het pictogram Toetsenbord.
@@ -112,7 +114,7 @@ kz_gset --addfavtop --file='org.gnome.Terminal.desktop'
 
 
 #1 vscode
-#2 Visual Studio Code instellen
+#2 Visual Studio Code (editor) instellen
 #kz_gset --addfavtop --file='code_code.desktop'
 :
 #3 1. Start Visual Studio Code.

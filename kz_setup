@@ -367,9 +367,9 @@ process_argument_app() {
     local cmds_file=''
 
     cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-    # Zoek bij install naar apps in kz_install_<distro>_<versie>-bestanden,
-    # Zoek bij setup naar apps in kz_install_<distro>_<versie>_<edition>.sh en
-    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
+    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden,
+    # setup zoekt naar apps in alleen kz_install_<distro>_<versie>_<edition>.sh
+    # en kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in instellingsbestanden.
         # Alleen eerstgevonden instellingsbestand verwerken (lines=1), want

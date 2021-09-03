@@ -5,13 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
-
-
-#1
-#2 Geen opdrachten om te installeren
-:
+# VERSION_NUMBER=03.01.00
+# VERSION_DATE=2021-09-03
 
 
 # EOF

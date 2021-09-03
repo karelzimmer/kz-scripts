@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.00.02
-# VERSION_DATE=2021-08-27
+# VERSION_NUMBER=04.01.00
+# VERSION_DATE=2021-09-03
 
 
 #1 gedit
-#2 Gedit instellen
+#2 Gedit (editor) instellen
 gsettings set org.gnome.gedit.plugins active-plugins "['sort','spell','smartspaces','changecase','zeitgeistplugin','filebrowser','docinfo','time','codecomment','modelines']"
 gsettings set org.gnome.gedit.preferences.editor auto-indent false
 gsettings set org.gnome.gedit.preferences.editor bracket-matching true
@@ -48,7 +48,7 @@ kz_gset --addfavtop --file='org.gnome.gedit.desktop'
 
 
 #1 gnome
-#2 GNOME instellen
+#2 GNOME (bureaubladomgeving) instellen
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 if [[ $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_gnome.png'; fi
 if [[ $USER = monique ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz_olifanten.jpg'; fi
@@ -57,28 +57,28 @@ if [[ $USER = monique ]]; then gsettings set org.gnome.desktop.background pictur
 
 
 #1 gnome-gmail
-#2 GNOME Gmail instellen
+#2 GNOME Gmail (e-mail) instellen
 if [[ $USER = monique ]]; then kz_gset --addfavtop --file='gnome-gmail.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='gnome-gmail.desktop'
 
 
 #1 google-chrome
-#2 Google Chrome instellen
+#2 Google Chrome (webbrowser) instellen
 if [[ $USER = monique ]]; then kz_gset --removefav --file='firefox.desktop'; fi
 #3 1. Start Standaardtoepassingen.
 #3 2. Kies bij E-mail voor Gnome Gmail.
 
 
 #1 python
-#2 Python instellen
+#2 Python (programmeertaal) instellen
 if [[ $USER = karel ]]; then kz_gset --addfavtop --file='idle.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='idle.desktop'
 
 
 #1 search
-#2 Vooruit zoeken in history instellen
+#2 Vooruit zoeken in history (Ctrl-S) instellen
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #4 Start Terminalvenster en voer uit:
@@ -86,14 +86,14 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
 #1 terminal
-#2 GNOME Terminal instellen
+#2 GNOME Terminal (terminal) instellen
 if [[ $USER = karel ]]; then kz_gset --addfavtop --file='org.gnome.Terminal.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    kz_gset --removefav --file='org.gnome.Terminal.desktop'
 
 
 #1 zga-ehrm
-#2 Zga eHRM instellen
+#2 Zga eHRM (starter) instellen
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz_zga_ehrm.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz_zga_ehrm.desktop; fi
 if [[ $USER = monique ]]; then kz_gset --addfavtop --file='kz_zga_ehrm.desktop'; fi
@@ -103,7 +103,7 @@ if [[ $USER = monique ]]; then kz_gset --addfavtop --file='kz_zga_ehrm.desktop';
 
 
 #1 zga-intranet
-#2 Zga Intranet instellen
+#2 Zga Intranet (starter) instellen
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz_zga_intranet.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz_zga_intranet.desktop; fi
 if [[ $USER = monique ]]; then kz_gset --addfavtop --file='kz_zga_intranet.desktop'; fi
@@ -113,7 +113,7 @@ if [[ $USER = monique ]]; then kz_gset --addfavtop --file='kz_zga_intranet.deskt
 
 
 #1 zga-monaco
-#2 Zga Monaco instellen
+#2 Zga Monaco (starter) instellen
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz_zga_monaco.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz_zga_monaco.desktop; fi
 if [[ $USER = monique ]]; then kz_gset --addfavtop --file='kz_zga_monaco.desktop'; fi
@@ -123,7 +123,7 @@ if [[ $USER = monique ]]; then kz_gset --addfavtop --file='kz_zga_monaco.desktop
 
 
 #1 zga-webmail
-#2 Zga WebMail instellen
+#2 Zga WebMail (starter) instellen
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz_zga_webmail.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz_zga_webmail.desktop; fi
 if [[ $USER = monique ]]; then kz_gset --addfavtop --file='kz_zga_webmail.desktop'; fi
