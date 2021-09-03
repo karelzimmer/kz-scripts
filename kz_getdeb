@@ -17,8 +17,8 @@ PROGRAM_NAME=kz_getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.01.03
-VERSION_DATE=2021-09-01
+VERSION_NUMBER=29.01.04
+VERSION_DATE=2021-09-03
 
 
 ###############################################################################
@@ -396,8 +396,8 @@ term_script() {
     local search=''
 
     search=/usr/share/doc/kz/Checklist_installatie
-    cp --no-clobber "$search"_*_{desktop,server}.pdf "$HOME" |& $LOGCMD || true
-    cp  --no-clobber                                    \
+    cp --update "$search"_*_{desktop,server}.pdf "$HOME" |& $LOGCMD || true
+    cp  --update                                        \
         "$search"_*_{desktop,server}_"$HOSTNAME".pdf    \
         "$HOME"                                         |& $LOGCMD || true
 
