@@ -380,6 +380,7 @@ process_argument_app() {
         file_to_process[0]=$DFLTFILE_1
     else
         file_notfound=true
+        return
     fi
     # Niet verplicht aanwezig.
     if [[ -e $DFLTFILE_2 ]]; then
