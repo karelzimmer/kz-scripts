@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_setup
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.02.03
-VERSION_DATE=2021-08-31
+VERSION_NUMBER=45.03.00
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -234,8 +234,15 @@ process_input() {
     elif $OPTION_FILES; then
         process_option_files
         exit $SUCCESS
+    fi
+
+    # Ergens hiervoor ging het niet helemaal goed.
+    if $file_notfound; then
+        exit $SUCCESS
+    fi
+
     # Optie cat is afhankelijk van argumenten APP en FILE.
-    elif $OPTION_CAT; then
+    if $OPTION_CAT; then
         process_option_cat
         exit $SUCCESS
     fi
@@ -246,9 +253,11 @@ process_input() {
     fi
 
     # We gaan opdrachten uitvoeren of simuleren.
-    for file in "${FILE_TO_PROCESS[@]}"; do
-        cat "$file" >> "$CMDS_FILE"
-    done
+    if $EXECUTE_COMMANDS || $OPTION_SIMULATE; then
+        for file in "${FILE_TO_PROCESS[@]}"; do
+            cat "$file" >> "$CMDS_FILE"
+        done
+    fi
 
     # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
     # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
@@ -367,30 +376,25 @@ process_argument_app() {
     local cmds_file=''
 
     cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden,
-    # setup zoekt naar apps in alleen kz_install_<distro>_<versie>_<edition>.sh
-    # en kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
+    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden
+    # en stopt bij de eerstgevonden, setup zoekt naar apps in
+    # kz_install_<distro>_<versie>_<edition>.sh en
+    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in instellingsbestanden.
         # Alleen eerstgevonden instellingsbestand verwerken (lines=1), want
         # app-naam kan in meerdere instellingsbestanden voorkomen.
         # shellcheck disable=SC2062
-        file=$(
-            if ! grep       --files-with-matches    \
-                            --line-regexp           \
-                            --regexp="#1 $app"      \
-                            "$DFLTFILE_1"           \
-                            "$DFLTFILE_2"           \
-                            2> /dev/null            |
-                    head    --lines=1; then
-                printf '\n'
-            fi
-            )
-        if [[ $file ]]; then
-            process_argument_app_file
-        else
+        if ! grep   --files-with-matches    \
+                    --line-regexp           \
+                    --regexp="#1 $app"      \
+                    "$DFLTFILE_1"           \
+                    "$DFLTFILE_2"           \
+                    &> /dev/null; then
             info "App '$app' niet gevonden."
             file_notfound=true
+        else
+            process_argument_app_file
         fi
     done
     if $file_notfound; then
@@ -409,30 +413,29 @@ process_argument_app_file() {
     local app_found=false
     local description_found=false
     local record=''
+    local temp_file=''
+
+    temp_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.temp")
+    cat "$DFLTFILE_1" "$DFLTFILE_2" > "$temp_file"
 
     while read -r record; do
         case $record in
             '#1 '*)
                 if [[ $record = '#1 '$app ]]; then
-                    if $app_found; then
-                        info "Dubbele app-naam $app."
-                    else
-                        # Gezochte app-naam.
-                        # Regels doorschrijven naar tijdelijk bestand tot
-                        # eerstvolgende app-naam of beschrijving (verplicht),
-                        # of tot EOF.
-                        app_found=true
-                    fi
-                 elif $app_found; then
-                    # Volgende app-naam.
-                    break
+                    # Gezochte app-naam.
+                    # Regels doorschrijven naar tijdelijk bestand tot
+                    # eerstvolgende app-naam of beschrijving (verplicht),
+                    # of tot EOF.
+                    app_found=true
+                    description_found=false
                 fi
                 ;;
             '#2'*)
                 # Beschrijving.
                 if $description_found; then
                     # Volgende beschrijving.
-                    break
+                    app_found=false
+                    continue
                 elif $app_found; then
                     printf '%b\n' "$record" >> "$cmds_file"
                     description_found=true
@@ -445,7 +448,7 @@ process_argument_app_file() {
                 fi
                 ;;
         esac
-    done < "$file"
+    done < "$temp_file"
 }
 
 
@@ -488,8 +491,9 @@ process_dfltfiles() {
 
 
 process_option_apps() {
-    # Zoek bij install naar apps in kz_install_<distro>_<versie>-bestanden,
-    # Zoek bij setup naar apps in kz_install_<distro>_<versie>_<edition>.sh en
+    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden
+    # en stopt bij de eerstgevonden, setup zoekt naar apps in
+    # kz_install_<distro>_<versie>_<edition>.sh en
     # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
     process_dfltfiles
     # shellcheck disable=SC2062
