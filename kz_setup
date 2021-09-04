@@ -427,7 +427,7 @@ process_argument_app_file() {
     local temp_file=''
 
     temp_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.temp")
-    cat "${file_to_process[@]}" > "$temp_file"
+    cat "${file_to_process[*]}" > "$temp_file"
 
     while read -r record; do
         case $record in
