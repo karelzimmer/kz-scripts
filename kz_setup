@@ -449,6 +449,8 @@ process_argument_app_file() {
                 ;;
         esac
     done < "$temp_file"
+
+    rm "$temp_file" |& $LOGCMD
 }
 
 
