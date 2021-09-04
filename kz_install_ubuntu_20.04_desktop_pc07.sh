@@ -64,7 +64,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 
 
 #1 locate
-#2 Locate  (bestanden zoeken op naam) installeren
+#2 Locate  (bestanden snel zoeken op naam) installeren
 sudo apt-get install --yes mlocate
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes mlocate
