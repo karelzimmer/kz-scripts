@@ -29,14 +29,6 @@ sudo snap install bitwarden
 #4    sudo snap remove bitwarden
 
 
-#1 gnome-sushi
-#2 GNOME Sushi (voorbeeld) installeren
-## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
-sudo apt-get install --yes gnome-sushi
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes gnome-sushi
-
-
 #1 google-chrome
 #2 Google Chrome (webbrowser) installeren
 ## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder
@@ -99,6 +91,14 @@ sudo snap install --classic skype
 sudo snap install spotify
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove spotify
+
+
+#1 sushi
+#2 Sushi (voorbeeld tonen) installeren
+## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
+sudo apt-get install --yes gnome-sushi
+#4 Start Terminalvenster en voer uit:
+#4    sudo apt remove --yes gnome-sushi
 
 
 #1 teamviewer

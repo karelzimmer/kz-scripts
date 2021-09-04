@@ -18,7 +18,7 @@ sudo apt-get install --yes cups-backend-bjnp
 
 
 #1 exiftool
-#2 ExifTool  (multimedia-metadata) installeren
+#2 ExifTool (metadata lezen en schrijven) installeren
 sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libimage-exiftool-perl
