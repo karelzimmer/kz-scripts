@@ -11,8 +11,8 @@ PROGRAM_NAME=kz_deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.04.07
-VERSION_DATE=2021-08-31
+VERSION_NUMBER=62.04.08
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -261,7 +261,7 @@ sync_pdf_kz_docs() {
 
     cp  --archive                                               \
         --update                                                \
-        "${TARGET_UPLOADS[PDFS]}"/Checklist_installatie*.pdf    \
+        "${TARGET_UPLOADS[PDFS]}/Checklist installatie"*.pdf    \
         "${TARGET_DEB[DOC]}" |& $LOGCMD
     if ! $changes; then
         info '    Geen documenten gewijzigd'
