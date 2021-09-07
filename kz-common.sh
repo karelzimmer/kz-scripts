@@ -16,8 +16,6 @@ VERSION_DATE=2021-09-07
 # Common global constants
 ###############################################################################
 
-readonly CALLED=$(printf '%s' "$0 $*" | xargs --null)
-
 readonly SUCCESS=0
 readonly ERROR=1
 # shellcheck disable=SC2034
@@ -124,14 +122,13 @@ error() {
 check_user() {
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
-            log "restart w/ exec sudo $CALLED"
+            log "restart w/ exec sudo $0 ${CMDLINE_ARGS[*]}"
             # shellcheck disable=SC2086
             exec sudo $0 "${CMDLINE_ARGS[@]}"
         fi
     else
         if [[ $UID -eq 0 ]]; then
-            info "$DISPLAY_NAME: niet uitvoeren met 'sudo' of als \
-root"
+            info "$DISPLAY_NAME: niet uitvoeren met 'sudo' of als root"
             exit $ERROR
         fi
     fi
@@ -164,12 +161,6 @@ info() {
 init_script() {
     local arg=''
 
-    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
-    LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
---identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
-    LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
-    log "started as $CALLED (from $PWD)"
-
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -192,12 +183,17 @@ init_script() {
         xhost +si:localuser:root |& $LOGCMD
     fi
 
+    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
+    LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
+--identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
+    LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
     for arg in "$@"; do
         CMDLINE_ARGS+=("$arg")
     done
+    log "started as $0 ${CMDLINE_ARGS[*]} (from $PWD)"
 }
 
 
