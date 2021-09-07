@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.01.09
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.01.10
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -16,7 +16,7 @@ Comment=Start WebMail Zorggroep Almere met Google Chrome
 Keywords=personeel;informatie;
 Categories=KZ Scripts;
 Exec=google-chrome https://randstad.zorggroep-almere.nl/exchange
-Icon=/usr/share/pixmaps/kz_zga_webmail.png
+Icon=/usr/share/pixmaps/kz-zga-webmail.png
 NoDisplay=true
 
 # EOF

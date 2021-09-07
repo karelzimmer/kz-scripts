@@ -1,18 +1,18 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Webbestanden valideren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_ckhtml
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-ckhtml
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2012
 
-VERSION_NUMBER=12.00.03
-VERSION_DATE=2021-08-31
+VERSION_NUMBER=12.00.04
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################

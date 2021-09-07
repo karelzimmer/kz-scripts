@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2017
 
-# VERSION_NUMBER=08.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=08.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,38 +19,38 @@ Comment[nl]=Stel apps in en  en wijzig gebruikersinstellingen
 Keywords=kzsetup;setup;
 Keywords[nl]=kzsetup;setup;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_setup --gui
-Icon=/usr/share/pixmaps/kz_setup.svg
+Exec=/usr/bin/kz-setup --gui
+Icon=/usr/share/pixmaps/kz-setup.svg
 Actions=info;reset;list;cat;simulate;version;
 
 [Desktop Action info]
 Name=Show setup instructions
 Name[nl]=Instel-instructies tonen
-Exec=/usr/bin/kz_setup --gui --info
+Exec=/usr/bin/kz-setup --gui --info
 
 [Desktop Action reset]
 Name=Show reset instructions
 Name[nl]=Reset-instructies tonen
-Exec=/usr/bin/kz_setup --gui --reset
+Exec=/usr/bin/kz-setup --gui --reset
 
 [Desktop Action list]
 Name=Create setup list
 Name[nl]=Instellijst aanmaken
-Exec=/usr/bin/kz_setup --gui --list
+Exec=/usr/bin/kz-setup --gui --list
 
 [Desktop Action cat]
 Name=Show files
 Name[nl]=Bestanden tonen
-Exec=/usr/bin/kz_setup --gui --cat
+Exec=/usr/bin/kz-setup --gui --cat
 
 [Desktop Action simulate]
 Name=Show commands
 Name[nl]=Opdrachten tonen
-Exec=/usr/bin/kz_setup --gui --simulate
+Exec=/usr/bin/kz-setup --gui --simulate
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen tonen
-Exec=/usr/bin/kz_setup --gui --version
+Exec=/usr/bin/kz-setup --gui --version
 
 # EOF

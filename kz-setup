@@ -1,17 +1,17 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Apps instellen.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_setup
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-setup
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.00
+VERSION_NUMBER=45.03.01
 VERSION_DATE=2021-09-04
 
 
@@ -54,8 +54,8 @@ readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
 readonly RELEASE=$(lsb_release --release --short)
 readonly LIST_DIR="$HOME//KZ Setup List"
-readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
+readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 readonly DASHES=$(printf '%.0s=' {1..79})
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
@@ -181,13 +181,12 @@ check_input() {
                 ;;
         esac
     done
-    DFLTFILE_1=$PROGRAM_PATH/${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
-    DFLTFILE_2=$PROGRAM_PATH/${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_\
-${HOSTNAME}.sh
+    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION.sh
+    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION-$HOSTNAME.sh
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
-        if [[ "$(basename "$1")" = ${PROGRAM_NAME}_*.sh ]]; then
+        if [[ "$(basename "$1")" = $PROGRAM_NAME-*.sh ]]; then
             ARGUMENT_FILE=true
             FILE_ARGUMENT[$file_arg_num]=$1
             ((++file_arg_num))
@@ -338,9 +337,9 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 save_user_photo() {             #1
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER"      \
-            "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto  |& $LOGCMD; then
-        rm --force "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto
-        touch "$LIST_DIR/${PROGRAM_NAME}"_gebruikersfoto
+            "$LIST_DIR/$PROGRAM_NAME"-gebruikersfoto    |& $LOGCMD; then
+        rm --force "$LIST_DIR/$PROGRAM_NAME"-gebruikersfoto
+        touch "$LIST_DIR/$PROGRAM_NAME"-gebruikersfoto
     fi
 }
 
@@ -348,15 +347,15 @@ save_user_photo() {             #1
 save_desktop_background() {     #2
     printf '%s\n' "$text2..."
     gsettings get   org.gnome.desktop.background picture-uri            \
-                    > "$LIST_DIR/${PROGRAM_NAME}"_bureaubladachtergrond \
+                    > "$LIST_DIR/$PROGRAM_NAME"-bureaubladachtergrond   \
                     |& $LOGCMD
 }
 
 
 save_favorite_apps() {          #3
     printf '%s\n' "$text3..."
-    gsettings get   org.gnome.shell favorite-apps               \
-                    > "$LIST_DIR/${PROGRAM_NAME}"_favorieten    |& $LOGCMD
+    gsettings get   org.gnome.shell favorite-apps           \
+                    > "$LIST_DIR/$PROGRAM_NAME"-favorieten  |& $LOGCMD
 }
 
 
@@ -364,7 +363,7 @@ save_command_history() {        #4
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
-    history > "$LIST_DIR/${PROGRAM_NAME}"_opdrachtgeschiedenis |& $LOGCMD
+    history > "$LIST_DIR/$PROGRAM_NAME"-opdrachtgeschiedenis |& $LOGCMD
 }
 
 
@@ -385,11 +384,11 @@ process_argument_app() {
         file_to_process[1]=$DFLTFILE_2
     fi
 
-    cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden
+    cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz_install_<distro>_<versie>_<edition>.sh en
-    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
+    # kz-install-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in instellingsbestanden.
         # Alleen eerstgevonden instellingsbestand verwerken (lines=1), want
@@ -424,7 +423,7 @@ process_argument_app_file() {
     local record=''
     local temp_file=''
 
-    temp_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.temp")
+    temp_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.temp")
     cat "${file_to_process[@]}" > "$temp_file"
 
     while read -r record; do
@@ -502,10 +501,10 @@ process_dfltfiles() {
 
 
 process_option_apps() {
-    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden
+    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz_install_<distro>_<versie>_<edition>.sh en
-    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
+    # kz-install-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     process_dfltfiles
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:

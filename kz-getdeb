@@ -1,24 +1,24 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Pakket installeren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-if [[ -e "$PROGRAM_PATH"/kz_common.sh ]]; then
-    source "$PROGRAM_PATH"/kz_common.sh
+if [[ -e "$PROGRAM_PATH"/kz-common.sh ]]; then
+    source "$PROGRAM_PATH"/kz-common.sh
 else
-    wget   --output-document=/tmp/kz_common.sh                     \
-           https://karelzimmer.nl/data/linux/scripts/kz_common.sh  &> /dev/null
-    source /tmp/kz_common.sh
+    wget   --output-document=/tmp/kz-common.sh                     \
+           https://karelzimmer.nl/data/linux/scripts/kz-common.sh  &> /dev/null
+    source /tmp/kz-common.sh
 fi
-PROGRAM_NAME=kz_getdeb
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+PROGRAM_NAME=kz-getdeb
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.01.04
-VERSION_DATE=2021-09-03
+VERSION_NUMBER=29.01.05
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -48,9 +48,9 @@ Pakket installeren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEB_DIR=$HOME/kz_deb
-readonly    DOCS_DIR=$HOME/kz_docs
-readonly    SCRIPTS_DIR=$HOME/kz_scripts
+readonly    DEB_DIR=$HOME/kz-deb
+readonly    DOCS_DIR=$HOME/kz-docs
+readonly    SCRIPTS_DIR=$HOME/kz-scripts
 
 
 ###############################################################################
@@ -323,7 +323,7 @@ check_dependencies() {
 
 process_deb() {
     if ! git    clone                                       \
-                https://github.com/karelzimmer/kz_deb.git   \
+                https://github.com/karelzimmer/kz-deb.git   \
                 "$DEB_DIR"                                  |& $LOGCMD
     then
         cd "$DEB_DIR" || exit $ERROR
@@ -335,7 +335,7 @@ process_deb() {
 
 process_documents() {
     if ! git    clone                                       \
-                https://github.com/karelzimmer/kz_docs.git  \
+                https://github.com/karelzimmer/kz-docs.git  \
                 "$DOCS_DIR"                                 |& $LOGCMD
     then
         cd "$DOCS_DIR" || exit $ERROR
@@ -347,7 +347,7 @@ process_documents() {
 
 process_scripts() {
     if ! git    clone                                           \
-                https://github.com/karelzimmer/kz_scripts.git   \
+                https://github.com/karelzimmer/kz-scripts.git   \
                 "$SCRIPTS_DIR"                                  |& $LOGCMD
     then
         cd "$SCRIPTS_DIR" || exit $ERROR
@@ -365,7 +365,7 @@ download_website() {
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
     local ftp_host=server106.hosting2go.nl
     local ftp_user=kzimmer
-    local ftp_login=$HOME/.kz_$ftp_host
+    local ftp_login=$HOME/.kz-$ftp_host
 
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.

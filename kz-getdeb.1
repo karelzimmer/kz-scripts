@@ -5,11 +5,11 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=06.00.01
-.\" VERSION_DATE=2021-08-22
+.\" VERSION_NUMBER=06.00.02
+.\" VERSION_DATE=2021-09-04
 .\"
 .\"
-.TH KZ_GETDEB 1 "KZ Handleiding" "KZ_GETDEB(1)" "KZ Handleiding"
+.TH KZ-GETDEB 1 "KZ Handleiding" "KZ-GETDEB(1)" "KZ Handleiding"
 .\"
 .\"
 .SH NAAM
@@ -33,11 +33,11 @@ distribueren, 'live' te zetten (op https://karelzimmer.nl) met de opdrachten
 .br
 \fBkz deploy\fR,
 .br
-\fBgit push in ~/kz_deb\fR,
+\fBgit push in ~/kz-deb\fR,
 .br
-\fBgit push in ~/kz_docs\fR, en
+\fBgit push in ~/kz-docs\fR, en
 .br
-\fBgit push in ~/kz_scripts\fR.
+\fBgit push in ~/kz-scripts\fR.
 .sp
 Voor de nieuwste versie van \fBkz getdeb\fR én het scriptspakket, start
 Terminalvenster en voer
@@ -78,7 +78,7 @@ ook worden gestart door te zoeken naar \fBget\fR, klik op
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kz_ckhtml').
+-ab -t kz-ckhtml').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -108,17 +108,17 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH MAPPEN
-~/kz_deb/
+~/kz-deb/
 .RS
 Scriptspakket raamwerk.
 .RE
 .sp
-~/kz_docs/
+~/kz-docs/
 .RS
 Checklists.
 .RE
 .sp
-~/kz_scripts/
+~/kz-scripts/
 .RS
 Scripts.
 Inclusief man-pagina's (*.1),
@@ -129,7 +129,7 @@ PolicyKit actiedefinitiebestanden (*.policy),
 .\"
 .\"
 .SH BESTANDEN
-https://karelzimmer.nl/data/linux/scripts/kz_common.sh
+https://karelzimmer.nl/data/linux/scripts/kz-common.sh
 .RS
 Algemene module voor shell scripts.
 .RE
@@ -168,9 +168,9 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkz_common.sh\fR(1),
-\fBkz_deploy\fR(1),
-\fBkz_menu\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-deploy\fR(1),
+\fBkz-menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"

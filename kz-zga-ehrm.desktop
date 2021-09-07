@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -16,7 +16,7 @@ Comment=Start eHRM Zorggroep Almere met Google Chrome
 Keywords=personeel;informatie;pz;
 Categories=KZ Scripts;
 Exec=google-chrome https://login.youforce.biz/Aanmelden
-Icon=/usr/share/pixmaps/kz_zga_ehrm.jpeg
+Icon=/usr/share/pixmaps/kz-zga-ehrm.jpeg
 NoDisplay=true
 
 # EOF

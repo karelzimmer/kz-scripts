@@ -6,10 +6,10 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.00.02
+# VERSION_DATE=2021-09-04
 
 dashoptions='-d --debug -g --gui -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz_spsum
+complete -o default -W "$dashoptions" kz-spsum
 
 # EOF

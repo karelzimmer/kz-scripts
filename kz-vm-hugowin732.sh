@@ -1,8 +1,8 @@
 #!/bin/bash
 # RELEASE_YEAR=2017
 
-# VERSION_NUMBER=02.00.00
-# VERSION_DATE=2021-08-27
+# VERSION_NUMBER=02.00.01
+# VERSION_DATE=2021-09-04
 
 TITLE='VirtualBox'
 TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
@@ -15,13 +15,13 @@ start_vm() {
 }
 
 start_vm |
-zenity  --progress                  \
-             --pulsate              \
-             --auto-close           \
-             --no-cancel            \
-             --width     450        \
-             --height    50         \
-             --title     "$TITLE"   \
-             --text      "$TEXT"
+zenity  --progress              \
+        --pulsate               \
+        --auto-close            \
+        --no-cancel             \
+        --width     450         \
+        --height    50          \
+        --title     "$TITLE"    \
+        --text      "$TEXT"
 
 # EOF

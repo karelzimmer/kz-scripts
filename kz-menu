@@ -1,18 +1,18 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Installatiemenu.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_menu
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-menu
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.00.03
-VERSION_DATE=2021-08-31
+VERSION_NUMBER=36.00.04
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -604,9 +604,9 @@ execute_command() {
     local -i    cmd_rc=0
     local       exec=''
 
-    exec=${command/kz /kz_}
+    exec=${command/kz /kz-}
     case $exec in
-        kz_backup|kz_install|kz_install*--list|kz_nas|kz_restore)
+        kz-backup|kz-install|kz-install*--list|kz-nas|kz-restore)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 # shellcheck disable=SC2086
@@ -618,7 +618,7 @@ execute_command() {
                 log_rc $cmd_rc
             fi
             ;;
-        kz_setup|*--info|kz_setup*--list|*--remove|*--reset)
+        kz-setup|*--info|kz-setup*--list|*--remove|*--reset)
             # Zogenaamde non-sudo-scripts.
             # shellcheck disable=SC2086
             if $OPTION_GUI; then

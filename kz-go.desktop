@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.01
-# VERSION_DATE=2021-08-27
+# VERSION_NUMBER=01.01.00
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -20,9 +20,14 @@ Comment[nl]=Voer update uit voor het systeem
 Keywords=kzgo;update;upgrade;
 Keywords[nl]=kzgo;update;upgrade;bijwerken;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_go --gui
-Icon=/usr/share/pixmaps/kz_go.svg
+Exec=/usr/bin/kz-go --gui
+Icon=/usr/share/pixmaps/kz-go.svg
 Terminal=true
 Actions=version;
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen
+Exec=/usr/bin/kz-go --gui --version
 
 # EOF

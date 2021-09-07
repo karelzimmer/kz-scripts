@@ -14,12 +14,12 @@ import random
 import argparse
 import kz_common
 
-program_name = 'kz_genpwd'
-display_name = program_name.replace('kz_', 'kz ')
+program_name = 'kz-genpwd'
+display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 
-version_number = '03.00.03'
-version_date = '2021-08-22'
+version_number = '03.00.04'
+version_date = '2021-09-04'
 
 
 def generate_password():

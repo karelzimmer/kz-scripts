@@ -1,17 +1,17 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Apps installeren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_install
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-install
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.06
+VERSION_NUMBER=59.01.07
 VERSION_DATE=2021-09-04
 
 
@@ -53,9 +53,9 @@ readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
 readonly RELEASE=$(lsb_release --release --short)
 readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
-readonly CMDS_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-readonly TEXT_FILE=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.text")
-readonly TEMP_LIST=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.list")
+readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
+readonly TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
 readonly DASHES=$(printf '%.0s=' {1..79})
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
@@ -182,13 +182,12 @@ check_input() {
                 ;;
         esac
     done
-    DFLTFILE_1=$PROGRAM_PATH/${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}.sh
-    DFLTFILE_2=$PROGRAM_PATH/${PROGRAM_NAME}_${ID}_${RELEASE}_${EDITION}_\
-${HOSTNAME}.sh
+    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION.sh
+    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION-$HOSTNAME.sh
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
-        if [[ "$(basename "$1")" = ${PROGRAM_NAME}_*.sh ]]; then
+        if [[ "$(basename "$1")" = $PROGRAM_NAME-*.sh ]]; then
             ARGUMENT_FILE=true
             FILE_ARGUMENT[$file_arg_num]=$1
             ((++file_arg_num))
@@ -467,7 +466,8 @@ save_user_photo_file() {                    #5
     printf '%s\n' "$text5..."
 
     list_dir=/home/"${SUDO_USER:-$USER}/KZ Setup List"
-    list_file=kz_setup_gebruikersfoto.txt
+    list_file=kz-setup-gebruikersfoto.txt
+    rmdir --forve --recursive "$list_dir"
     mkdir --parents "$list_dir"
     if [[ -e /var/lib/AccountsService/users/"${SUDO_USER:-$USER}" ]]; then
         sudo grep   --regexp='Icon='                                        \
@@ -477,7 +477,7 @@ save_user_photo_file() {                    #5
     printf '\n%s' "Staat hierboven:
 Icon=/var/lib/AccountsService/icons/${SUDO_USER:-$USER}
 
-Gebruik dan $HOME/kz_setup__gebruikersfoto als gebruikersfoto." \
+Gebruik dan bestand $HOME/kz-setup-gebruikersfoto als gebruikersfoto." \
             >> "$list_dir/$list_file"
     sudo chown  --recursive                                 \
                 "${SUDO_USER:-$USER}:${SUDO_USER:-$USER}"   \
@@ -491,12 +491,12 @@ process_argument_app() {
     local search=''
     local cmds_file=''
 
-    cmds_file=$(mktemp -t "${PROGRAM_NAME}_XXXXXXXXXX.cmds")
-    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden
+    cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz_install_<distro>_<versie>_<edition>.sh en
-    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
-    search=${PROGRAM_NAME}_${ID}_${RELEASE}
+    # kz-install-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    search=$PROGRAM_NAME-$ID-$RELEASE
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in installatiebestanden.
         # Alleen eerstgevonden installatiebestand verwerken (lines=1), want
@@ -617,11 +617,11 @@ process_dfltfiles() {
 process_option_apps() {
     local search=''
 
-    # Install zoekt naar apps in alle kz_install_<distro>_<versie>-bestanden
+    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz_install_<distro>_<versie>_<edition>.sh en
-    # kz_install_<distro>_<versie>_<edition>_<computernaam>.sh.
-    search=${PROGRAM_NAME}_${ID}_${RELEASE}
+    # kz-install-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    search=$PROGRAM_NAME-$ID-$RELEASE
 
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:

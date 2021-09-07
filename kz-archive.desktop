@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2015
 
-# VERSION_NUMBER=02.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=02.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,14 +19,14 @@ Comment[nl]=Archiveer scripts en overige bestanden
 Keywords=kzarchive;
 Keywords[nl]=kzarchive;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_archive --gui
-Icon=/usr/share/pixmaps/kz_archive.svg
+Exec=/usr/bin/kz-archive --gui
+Icon=/usr/share/pixmaps/kz-archive.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz_archive --gui --version
+Exec=/usr/bin/kz-archive --gui --version
 
 # EOF

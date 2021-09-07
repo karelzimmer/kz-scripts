@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2015
 
-# VERSION_NUMBER=02.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=02.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,14 +19,14 @@ Comment[nl]=Maak opstartbare USB-sticks
 Keywords=kzmkusb;mkusb;
 Keywords[nl]=kzmkusb;mkusb;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_mkusb --gui
-Icon=/usr/share/pixmaps/kz_mkusb.svg
+Exec=/usr/bin/kz-mkusb --gui
+Icon=/usr/share/pixmaps/kz-mkusb.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz_mkusb --gui --version
+Exec=/usr/bin/kz-mkusb --gui --version
 
 # EOF

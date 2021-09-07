@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=09.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=09.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,13 +19,13 @@ Comment[nl]=Voer opdrachten uit via een menu
 Keywords=kzmenu;menu;
 Keywords[nl]=kzmenu;menu;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_menu --gui
-Icon=/usr/share/pixmaps/kz_menu.svg
+Exec=/usr/bin/kz-menu --gui
+Icon=/usr/share/pixmaps/kz-menu.svg
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz_menu --gui --version
+Exec=/usr/bin/kz-menu --gui --version
 
 # EOF

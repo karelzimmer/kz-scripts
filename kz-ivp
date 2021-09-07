@@ -1,18 +1,18 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Scripts controleren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_ivp
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-ivp
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.02
-VERSION_DATE=2021-08-31
+VERSION_NUMBER=14.03.03
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -109,7 +109,7 @@ check_dependencies() {
 
 process_input() {
     local script=''
-    local scriptsdir=$HOME/kz_scripts
+    local scriptsdir=$HOME/kz-scripts
 
     cd "$scriptsdir" || exit $ERROR
     for script in *; do
@@ -222,7 +222,7 @@ ${BOLD}In $script:${NORMAL}
     fi
 
     # '#1 foo' = ok, '#1' = ok, '#1foo' = ¬ok, hetzelfde voor #2, #3, 44n #4.
-    if [[ $script == kz_install*.sh || $script == kz_setup*.sh ]]; then
+    if [[ $script == kz-install*.sh || $script == kz-setup*.sh ]]; then
         wrong_record=$(
             grep --regexp='#[1-4]' "$script" --line-number  |
             grep --regexp='#[1-4]$' --invert-match          |
@@ -369,7 +369,7 @@ ${BOLD}In $script:${NORMAL}
     fi
 
     case $script in
-        kz_backup)
+        kz-backup)
             "$scriptsdir/$script"   --target                        \
                                     /tmp                            \
                                     /home/karel/scripts |& $LOGCMD  ||
@@ -383,7 +383,7 @@ ${BOLD}In $script:${NORMAL}
                 fi
             fi
             ;;
-        kz_install)
+        kz-install)
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
@@ -412,7 +412,7 @@ ${BOLD}In $script:${NORMAL}
                 fi
             fi
             ;;
-        kz_restore)
+        kz-restore)
             echo                    '1'             |
             "$scriptsdir/$script"   --target        \
                                     /tmp            \
@@ -428,7 +428,7 @@ ${BOLD}In $script:${NORMAL}
             sudo rm --force /tmp/backup_*.tar
             sudo rm --force --recursive /tmp/home
             ;;
-        kz_setup)
+        kz-setup)
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "

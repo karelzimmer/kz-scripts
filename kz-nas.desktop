@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2016
 
-# VERSION_NUMBER=04.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=04.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,13 +19,13 @@ Comment[nl]=Koppel een NAS aan tijdens het opstarten
 Keywords=kznas;mount;network;
 Keywords[nl]=kznas;aankoppelen;netwerk;
 Categories=KZ Scripts;
-Exec=pkexec /usr/bin/kz_nas --gui
-Icon=/usr/share/pixmaps/kz_nas.png
+Exec=pkexec /usr/bin/kz-nas --gui
+Icon=/usr/share/pixmaps/kz-nas.png
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz_nas --gui --version
+Exec=/usr/bin/kz-nas --gui --version
 
 # EOF

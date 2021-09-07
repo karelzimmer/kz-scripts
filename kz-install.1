@@ -9,7 +9,7 @@
 .\" VERSION_DATE=2021-09-04
 .\"
 .\"
-.TH KZ_INSTALL 1 "KZ Handleiding" "KZ_INSTALL(1)" "KZ Handleiding"
+.TH KZ-INSTALL 1 "KZ Handleiding" "KZ-INSTALL(1)" "KZ Handleiding"
 .\"
 .\"
 .SH NAAM
@@ -28,7 +28,7 @@ De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
 idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
 .sp
 Standaard wordt met \fBkz install\fR de regels in het bestand\
- '/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\fR.sh' gekopieerd
+ '/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh' gekopieerd
 naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
@@ -38,8 +38,8 @@ systeeminstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
 (e.g. Ubuntu 20.04 desktop).
 .sp
 Als daarna ook bestand\
- '/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\
-\fR_<computernaam>.sh'
+ '/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\
+\fR-<computernaam>.sh'
 aanwezig is worden de regels daarin voor <computernaam> toegevoegd aan het
 eerder aangemaakte tijdelijk bestand.
 .sp
@@ -72,7 +72,7 @@ zijn.
 Optie \fB--info\fR geeft dan aanvullende instructies weer.
 .sp
 Optie \fB--list\fR maakt een applijst aan in bestand
-/usr/local/etc/kz_install_applist.
+/usr/local/etc/kz-install-applist.
 Hierin informatie over welke deb-bestanden (Debian-pakketten) zijn
 geïnstalleerd, welke pakketbronnen ("repositories" of "repo's") zijn
 toegevoegd, welke pakketten door de gebruiker zijn geïnstalleerd, en welke
@@ -95,7 +95,7 @@ gebruikersinstellingen.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met '\fBkz_install_\fR' en te
+De te verwerken bestanden dienen te beginnen met '\fBkz-install-\fR' en te
 eindigen met '\fB.sh\fR'.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
@@ -267,7 +267,7 @@ zouden worden.
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kz_install').
+-ab -t kz-install').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -297,35 +297,35 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\fR.sh
+/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh
 .RS
 Standaard installatiebestand als er geen \fIBESTAND\fRen zijn opgegeven, \
 \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
-/usr/bin/kz_install_<distributie>_<versie>_\fIEDITIE\fR_<computernaam>.sh
+/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .RS
 Standaard installatiebestand voor computernaam als er geen \fIBESTAND\fRen zijn
 opgegeven, \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
-/tmp/kz_install_XXXXXXXXXX.cmds
+/tmp/kz-install-XXXXXXXXXX.cmds
 .RS
 Tijdelijk installatiebestand.
 .RE
 .sp
-/tmp/kz_install_XXXXXXXXXX.text
+/tmp/kz-install-XXXXXXXXXX.text
 .RS
 Tijdelijk tekstbestand.
 .RE
 .sp
-/usr/share/local/kz_install_applist
+/usr/share/local/kz-install-applist
 .RS
 Applicatielijst met geïnstalleerde apps.
 .RE
 .RE
 .sp
-$HOME/kz_setup/kz_seteup_gebruikersfoto.txt
+$HOME/kz-setup/kz-seteup-gebruikersfoto.txt
 .RS
 Verwijzing naar gebruikersfotobestand.
 .RE
@@ -371,9 +371,9 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkz_common.sh\fR(1),
-\fBkz_menu\fR(1),
-\fBkz_setup\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-menu\fR(1),
+\fBkz-setup\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"

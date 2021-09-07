@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2015
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.01.00
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,8 +19,14 @@ Comment[nl]=Download en installeer pakket kz
 Keywords=kzgetdeb;getdeb;
 Keywords[nl]=kzgetdeb;getdeb;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_getdeb --gui
-Icon=/usr/share/pixmaps/kz_getdeb.svg
+Exec=/usr/bin/kz-getdeb --gui
+Icon=/usr/share/pixmaps/kz-getdeb.svg
 Terminal=true
+Actions=version;
+
+[Desktop Action version]
+Name=Show version information
+Name[nl]=Versie-informatie tonen
+Exec=/usr/bin/kz-getdeb --gui --version
 
 # EOF

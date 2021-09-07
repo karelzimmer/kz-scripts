@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2015
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,14 +19,14 @@ Comment[nl]=Installatie Verificatie Procedure (IVP) voor scripts
 Keywords=kzivpsh;ivp;
 Keywords[nl]=kzivpsh;ivp;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_ivp --gui
-Icon=/usr/share/pixmaps/kz_ivp.svg
+Exec=/usr/bin/kz-ivp --gui
+Icon=/usr/share/pixmaps/kz-ivp.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz_ivp --gui --version
+Exec=/usr/bin/kz-ivp --gui --version
 
 # EOF

@@ -1,18 +1,18 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Back-up maken.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_backup
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-backup
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.06
-VERSION_DATE=2021-08-31
+VERSION_NUMBER=36.00.07
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -41,7 +41,7 @@ Argumenten:
   SELECTIE      maak back-up van opgegeven mappen en bestanden"
 
 readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/${PROGRAM_NAME}_exclude_dflt
+readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
 readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /dev
 /home/*/.adobe/Flash_Player/AssetCache
@@ -61,10 +61,10 @@ readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /run
 /sys
 /tmp"
-readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/${PROGRAM_NAME}_exclude_opt
+readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
 readonly TARGET_DEFAULT_1=/media
 readonly TARGET_DEFAULT_2=backups
-readonly TARGET_DEFAULT_3=${HOSTNAME}_${ID}
+readonly TARGET_DEFAULT_3=$HOSTNAME-$ID
 # Conform ISO 8601, but ':' -> '.' for other filesystems not on Linux.
 readonly TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S)
 
@@ -249,7 +249,7 @@ request_input() {
         fi
     fi
 
-    BACKUPFILE=backup_${HOSTNAME}_${ID}_${TIMESTAMP}.tar
+    BACKUPFILE=backup_$HOSTNAME-$ID-$TIMESTAMP.tar
     BACKUP=$TARGET/$BACKUPFILE
 }
 

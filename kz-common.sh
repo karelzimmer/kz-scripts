@@ -4,12 +4,12 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-PROGRAM_NAME=kz_common.sh
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+PROGRAM_NAME=kz-common.sh
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.00
-VERSION_DATE=2021-08-22
+VERSION_NUMBER=27.02.01
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -181,7 +181,7 @@ init_script() {
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig tot mijn'
-        log '(++) X-sessie voor het kunnen gebruiken van zenity in kz_scripts'
+        log '(++) X-sessie voor het kunnen gebruiken van zenity in kz-scripts'
         log '(++) met RUN_AS_SUPERUSER=true:'
         log '(++) xhost +si:localuser:root'
         xhost +si:localuser:root |& $LOGCMD
@@ -430,18 +430,18 @@ $command, code: $rc ($rc_desc)"
 
 signal_exit() {
     case $PROGRAM_NAME in
-        kz_backup)
+        kz-backup)
             if [[ -e $BACKUP_TO_DELETE ]]; then
-                info 'Programma kz_backup is onderbroken.
+                info 'Programma kz-backup is onderbroken.
 
 Opgeslagen back-up wordt verwijderd.'
                 rm "$BACKUP_TO_DELETE" |& $LOGCMD
                 info 'Opgeslagen back-up is verwijderd.'
             fi
             ;;
-        kz_getdeb)
-            rm --force /tmp/"$PROGRAM_NAME"_??????????.deb /tmp/kz_common.sh
-            # Script kz_getdeb verwijdert niet kz en kz.1 ivm lokale Git-repo.
+        kz-getdeb)
+            rm --force /tmp/"$PROGRAM_NAME"-??????????.deb /tmp/kz-common.sh
+            # Script kz-getdeb verwijdert niet kz en kz.1 ivm lokale Git-repo.
             rm --force kz.{2..99}
             # Maar wel als in HOME, zoals voorgeschreven.
             cd "$HOME" || exit $ERROR
@@ -455,11 +455,9 @@ start dan een Terminalvenster, en voer uit:
     ${BLUE}sudo update-initramfs -u${NORMAL}"
             fi
             ;;
-        kz_install)
+        kz-install)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
-            rm --force /tmp/"$PROGRAM_NAME"_??????????.text
-            rm --force /tmp/"$PROGRAM_NAME"_??????????.list
+            rm --force /tmp/"$PROGRAM_NAME"-??????????.*
             if [[ $rc -ne $SUCCESS ]]; then
                 log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
 start dan een Terminalvenster, en voer uit:
@@ -469,10 +467,9 @@ start dan een Terminalvenster, en voer uit:
     ${BLUE}sudo update-initramfs -u${NORMAL}"
             fi
             ;;
-        kz_setup)
+        kz-setup)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            rm --force /tmp/"$PROGRAM_NAME"_??????????.cmds
-            rm --force /tmp/"$PROGRAM_NAME"_??????????.text
+            rm --force /tmp/"$PROGRAM_NAME"-??????????.*
             ;;
         *)
             return $SUCCESS

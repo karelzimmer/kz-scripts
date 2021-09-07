@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2015
 
-# VERSION_NUMBER=04.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=04.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,13 +19,13 @@ Comment[nl]=Maak een back-up (reservekopie) van mappen en bestanden
 Keywords=kzbackup;copy;restore;
 Keywords[nl]=kzbackup;reservekopie;herstel;
 Categories=KZ Scripts;
-Exec=pkexec /usr/bin/kz_backup --gui
-Icon=/usr/share/pixmaps/kz_backup.svg
+Exec=pkexec /usr/bin/kz-backup --gui
+Icon=/usr/share/pixmaps/kz-backup.svg
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz_backup --gui --version
+Exec=/usr/bin/kz-backup --gui --version
 
 # EOF

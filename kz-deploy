@@ -1,17 +1,17 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Pakket distribueren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_deploy
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-deploy
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.04.08
+VERSION_NUMBER=62.04.09
 VERSION_DATE=2021-09-04
 
 
@@ -30,11 +30,11 @@ Pakket distribueren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEB_DIR=$HOME/kz_deb
+readonly    DEB_DIR=$HOME/kz-deb
 readonly    DEB_TEMP_DIR=/tmp/kz
-readonly    DEB_NAME=kz_365_all.deb
-readonly    DOCS_DIR=$HOME/kz_docs
-readonly    SCRIPTS_DIR=$HOME/kz_scripts
+readonly    DEB_NAME=kz-365_all.deb
+readonly    DOCS_DIR=$HOME/kz-docs
+readonly    SCRIPTS_DIR=$HOME/kz-scripts
 readonly    SITE_DIR=$HOME/uploads/karelzimmer.nl/httpdocs
 
 readonly -A SOURCE_DEB=(
@@ -171,11 +171,11 @@ pre_actions() {
             --exclude='README.md'   \
             "${SOURCE_DEB[DEB]}"/   \
             "${TARGET_DEB[DEB]}"
-    sync_pdf_kz_docs
-    sync_all_kz_docs
-    sync_pdf_kz_scripts
-    sync_all_kz_scripts
-    sync_deb_kz_backgrounds
+    sync_pdf_kz-docs
+    sync_all_kz-docs
+    sync_pdf_kz-scripts
+    sync_all_kz-scripts
+    sync_deb_kz-backgrounds
 }
 
 check_dependencies() {
@@ -231,7 +231,7 @@ Herstel alle meldingen hierboven en start daarna weer $DISPLAY_NAME."
 }
 
 
-sync_pdf_kz_docs() {
+sync_pdf_kz-docs() {
     local docfile=''
     local changes=false
 
@@ -269,7 +269,7 @@ sync_pdf_kz_docs() {
 }
 
 
-sync_all_kz_docs() {
+sync_all_kz-docs() {
     # De exclude en delete-excluded i.v.m. de lokale git repository.
     rsync   --archive                   \
             --delete                    \
@@ -282,7 +282,7 @@ sync_all_kz_docs() {
 }
 
 
-sync_pdf_kz_scripts() {
+sync_pdf_kz-scripts() {
     local changes=false
     local scriptfile=''
 
@@ -328,7 +328,7 @@ sync_pdf_kz_scripts() {
 }
 
 
-sync_all_kz_scripts() {
+sync_all_kz-scripts() {
     local basename=''
     local file=''
     local newfile=''
@@ -388,9 +388,9 @@ sync_all_kz_scripts() {
 }
 
 
-sync_deb_kz_backgrounds() {
+sync_deb_kz-backgrounds() {
     local wallpaper=''
-    local wallpapers_config_file=kz_wallpapers.xml
+    local wallpapers_config_file=kz-wallpapers.xml
 
     {
     printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
@@ -401,8 +401,8 @@ sync_deb_kz_backgrounds() {
     cd "${TARGET_DEB[BACKGROUNDS]}" || exit $ERROR
     for wallpaper in *; do
         # Verwijder DEB_TEMP_DIR uit TARGET_DEB[BACKGROUNDS].  Voorbeeld:
-        # /tmp/kz/usr/share/backgrounds/kz_gnome.png ->
-        # /usr/share/backgrounds/kz_gnome.png
+        # /tmp/kz/usr/share/backgrounds/kz-gnome.png ->
+        # /usr/share/backgrounds/kz-gnome.png
         filename=${TARGET_DEB[BACKGROUNDS]}/$wallpaper
         filename=${filename/$DEB_TEMP_DIR/}
         printf '%s\n' "    <wallpaper>
@@ -440,7 +440,7 @@ upload_website() {
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to"
     local ftp_host=server106.hosting2go.nl
     local ftp_user=kzimmer
-    local ftp_login=$HOME/.kz_$ftp_host
+    local ftp_login=$HOME/.kz-$ftp_host
 
     info 'Upload website...'
     if ! [[ -f $ftp_login ]]; then

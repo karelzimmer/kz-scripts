@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.01.00
-# VERSION_DATE=2021-09-03
+# VERSION_NUMBER=04.01.01
+# VERSION_DATE=2021-09-04
 
 
 #1 gnome
@@ -22,27 +22,27 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 
 #1 telegram
 #2 Telegram (privéberichtenapp) instellen
-kz_gset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
+kz-gset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz_gset --removefav --file='telegram-desktop_telegram-desktop.desktop'
+#4    kz-gset --removefav --file='telegram-desktop_telegram-desktop.desktop'
 
 
 #1 virtualbox
 #2 VirtualBox (virtualisatie) instellen
-kz_gset --addfavbottom --file='virtualbox.desktop'
-cp /usr/bin/kz_vm_hugowin732.sh "$HOME"
-chmod u+x "$HOME"/kz_vm_hugowin732.sh
-cp /usr/share/applications/kz_vm_hugowin732.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz_vm_hugowin732.desktop
-kz_gset --addfavbottom --file='kz_vm_hugowin732.desktop'
+kz-gset --addfavbottom --file='virtualbox.desktop'
+cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
+chmod u+x "$HOME"/kz-vm-hugowin732.sh
+cp /usr/share/applications/kz-vm-hugowin732.desktop "$HOME"/.local/share/applications/
+sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
+kz-gset --addfavbottom --file='kz-vm-hugowin732.desktop'
 #3 1. Ga naar Apparaten > Installeren Guest Additions en volg de aanwijzingen op het scherm.
 #3 2. Voor optimale netwerksnelheid kies bij Netwerk voor Gekoppeld aan Netwerk bridge adapter.
 #4 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
 #4 2. Start Terminalvenster en voer uit:
-#4    rm "$HOME"/.local/share/applications/kz_vm_hugowin732.desktop
-#4    rm "$HOME"/kz_vm_hugowin732.sh
-#4    kz_gset --removefav --file='virtualbox.desktop'
-#4    kz_gset --removefav --file='kz_vm_hugowin732.desktop'
+#4    rm "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
+#4    rm "$HOME"/kz-vm-hugowin732.sh
+#4    kz-gset --removefav --file='virtualbox.desktop'
+#4    kz-gset --removefav --file='kz-vm-hugowin732.desktop'
 
 
 # EOF

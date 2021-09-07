@@ -5,11 +5,11 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=07.00.01
-.\" VERSION_DATE=2021-08-22
+.\" VERSION_NUMBER=07.00.02
+.\" VERSION_DATE=2021-09-04
 .\"
 .\"
-.TH KZ_DEPLOY 1 "KZ Handleiding" "KZ_DEPLOY(1)" "KZ Handleiding"
+.TH KZ-DEPLOY 1 "KZ Handleiding" "KZ-DEPLOY(1)" "KZ Handleiding"
 .\"
 .\"
 .SH NAAM
@@ -29,11 +29,11 @@ Dit om de scripts en documenten beschikbaar te stellen voor algemeen gebruik.
 .sp
 Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
 .br
-\fBgit clone https://github.com/karelzimmer/kz_deb.git\fR
+\fBgit clone https://github.com/karelzimmer/kz-deb.git\fR
 .br
-\fBgit clone https://github.com/karelzimmer/kz_docs.git\fR
+\fBgit clone https://github.com/karelzimmer/kz-docs.git\fR
 .br
-\fBgit clone https://github.com/karelzimmer/kz_scripts.git\fR
+\fBgit clone https://github.com/karelzimmer/kz-scripts.git\fR
 .sp
 \fBkz deploy\fR kan worden uitgevoerd als ontwikkelaar (gebruiker 'karel',\
  Ubuntu Live session user 'ubuntu', of Debian Live user 'user').
@@ -75,7 +75,7 @@ worden gestart door te zoeken naar \fBdepl\fR, klik op
 .TP
 \fB-d\fR, \fB--debug\fR
 Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kz_deploy').
+-ab -t kz-deploy').
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui = graphical user interface).
@@ -105,17 +105,17 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH MAPPEN
-~/kz_deb/
+~/kz-deb/
 .RS
 Scriptspakket raamwerk.
 .RE
 .sp
-~/kz_docs/
+~/kz-docs/
 .RS
 Checklists.
 .RE
 .sp
-~/kz_scripts/
+~/kz-scripts/
 .RS
 Scripts.
 .br
@@ -137,7 +137,7 @@ Website.
 Scriptspakket.
 .RE
 .sp
-/usr/share/gnome-background-properties/kz_wallpapers.xml
+/usr/share/gnome-background-properties/kz-wallpapers.xml
 .RS
 Bureaubladachtergronden-configuratiebestand.
 .RE
@@ -148,10 +148,10 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkz_ckname\fR(1),
-\fBkz_common.sh\fR(1),
-\fBkz_getdeb\fR(1),
-\fBkz_ivp\fR(1),
+\fBkz-ckname\fR(1),
+\fBkz-common.sh\fR(1),
+\fBkz-getdeb\fR(1),
+\fBkz-ivp\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"

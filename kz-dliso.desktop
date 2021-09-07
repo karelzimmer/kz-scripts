@@ -5,8 +5,8 @@
 ###############################################################################
 # RELEASE_YEAR=2015
 
-# VERSION_NUMBER=02.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=02.00.02
+# VERSION_DATE=2021-09-04
 
 [Desktop Entry]
 Type=Application
@@ -19,14 +19,14 @@ Comment[nl]=Download Ubuntu Linux beeldbestanden en controlebestanden
 Keywords=kzdliso;dliso;iso;
 Keywords[nl]=kzdliso;dliso;iso;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz_dliso --gui
-Icon=/usr/share/pixmaps/kz_dliso.svg
+Exec=/usr/bin/kz-dliso --gui
+Icon=/usr/share/pixmaps/kz-dliso.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-sExec=/usr/bin/kz_dliso --gui --version
+sExec=/usr/bin/kz-dliso --gui --version
 
 # EOF

@@ -1,18 +1,18 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz-common.sh
 ###############################################################################
 # Scripts archiveren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz_common.sh
-PROGRAM_NAME=kz_archive
-DISPLAY_NAME=${PROGRAM_NAME/kz_/kz }
+source "$PROGRAM_PATH"/kz-common.sh
+PROGRAM_NAME=kz-archive
+DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.00.06
-VERSION_DATE=2021-09-01
+VERSION_NUMBER=18.00.07
+VERSION_DATE=2021-09-04
 
 
 ###############################################################################
@@ -36,9 +36,9 @@ Argumenten:
 
 readonly ARCHIVE_FROM=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux
 readonly ARCHIVE_TO=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux-archief
-readonly DELETE_FROM_1=$HOME/kz_scripts
-readonly DELETE_FROM_2=$HOME/kz_deb
-readonly DELETE_FROM_3=$HOME/kz_docs
+readonly DELETE_FROM_1=$HOME/kz-scripts
+readonly DELETE_FROM_2=$HOME/kz-deb
+readonly DELETE_FROM_3=$HOME/kz-docs
 
 
 ###############################################################################

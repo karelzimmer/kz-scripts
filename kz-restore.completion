@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.01
-# VERSION_DATE=2021-08-22
+# VERSION_NUMBER=03.00.02
+# VERSION_DATE=2021-09-04
 
 dashoptions="-d --debug '-e UITSLUITEN' '--exclude UITSLUITEN' -g --gui -h
     --help '-s BRONMAP' '--source BRONMAP' '-t DOELMAP' '--target DOELMAP' -u
     --usage -v --version"
-complete -o default -W "$dashoptions" kz_restore
+complete -o default -W "$dashoptions" kz-restore
 
 # EOF
