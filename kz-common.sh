@@ -43,39 +43,39 @@ readonly OPTIONS_HELP_COMMON="\
 # Common global variables
 ###############################################################################
 
-declare -a CMDLINE_ARGS=()
-declare BACKUP_TO_DELETE=''
-declare HELP='Gebruik: source kz-common.sh
+declare -a  CMDLINE_ARGS=()
+declare     BACKUP_TO_DELETE=''
+declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare LOGCMD=''
-declare LOGCMD_CHECK=''
-declare LOGCMD_DEBUG=''
-declare OPTION_DEBUG=false
-declare OPTION_GUI=false
-declare OPTION_HELP=false
-declare OPTION_USAGE=false
-declare OPTION_VERSION=false
-declare RUN_AS_SUPERUSER=false
-declare TERMINAL=false
-declare TEXT=''
-declare TITLE=''
-declare USAGE='Gebruik: source kz-common.sh
+declare     LOGCMD=''
+declare     LOGCMD_CHECK=''
+declare     LOGCMD_DEBUG=''
+declare     OPTION_DEBUG=false
+declare     OPTION_GUI=false
+declare     OPTION_HELP=false
+declare     OPTION_USAGE=false
+declare     OPTION_VERSION=false
+declare     RUN_AS_SUPERUSER=false
+declare     TERMINAL=false
+declare     TEXT=''
+declare     TITLE=''
+declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare USAGELINE=''
+declare     USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare CARRIAGE_RETURN=''
-declare NORMAL=''
-declare BOLD=''
-declare BLINK=''
-declare RED=''
-declare GREEN=''
-declare YELLOW=''
-declare BLUE=''
-declare CURSOR_INVISABLE=''
-declare CURSOR_VISABLE=''
-declare ERASE_LINE=''
-declare UP_ONE_LINE=''
+declare     CARRIAGE_RETURN=''
+declare     NORMAL=''
+declare     BOLD=''
+declare     BLINK=''
+declare     RED=''
+declare     GREEN=''
+declare     YELLOW=''
+declare     BLUE=''
+declare     CURSOR_INVISABLE=''
+declare     CURSOR_VISABLE=''
+declare     ERASE_LINE=''
+declare     UP_ONE_LINE=''
 
 
 ###############################################################################

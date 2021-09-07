@@ -60,10 +60,10 @@ readonly TARGET_DEFAULT=/
 # Global variables
 ###############################################################################
 
-declare -a  EXCLUDE_ARGUMENT=''
+declare -a  EXCLUDE_ARGUMENT=()
 declare     ARGUMENT_SELECTION=false
-declare -a  SELECTION=''
-declare -a  SELECTION_ARGUMENT=''
+declare -a  SELECTION=()
+declare -a  SELECTION_ARGUMENT=()
 declare     BACKUP=''
 declare     BACKUPSIZE_HUMAN=''
 declare -i  BACKUPSIZE_MACHINE=0
@@ -86,7 +86,7 @@ check_input() {
     local   -i  exclude_arg_num=0
     local   -i  select_arg_num=0
     local   -i  select_num=0
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -444,12 +444,12 @@ process_input() {
 
 
 controleer_space() {
-    local filesys=''
-    local free_human=''
-    local -i free_bytes=0
-    local -i need_bytes=0
-    local mounted=''
-    local need_human=''
+    local       filesys=''
+    local       free_human=''
+    local   -i  free_bytes=0
+    local   -i  need_bytes=0
+    local       mounted=''
+    local       need_human=''
 
     need_bytes=$(
         du  --apparent-size                         \

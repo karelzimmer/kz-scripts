@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.01.05
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=29.01.06
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -48,9 +48,9 @@ Pakket installeren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEB_DIR=$HOME/kz-deb
-readonly    DOCS_DIR=$HOME/kz-docs
-readonly    SCRIPTS_DIR=$HOME/kz-scripts
+readonly DEB_DIR=$HOME/kz-deb
+readonly DOCS_DIR=$HOME/kz-docs
+readonly SCRIPTS_DIR=$HOME/kz-scripts
 
 
 ###############################################################################
@@ -63,7 +63,7 @@ readonly    SCRIPTS_DIR=$HOME/kz-scripts
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -78,7 +78,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -431,7 +431,7 @@ Typ 'exit' om dit venster te sluiten."
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-gset
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=12.00.05
-VERSION_DATE=2021-09-06
+VERSION_NUMBER=12.00.06
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -75,7 +75,7 @@ declare OPTION_REMOVEFAV=false
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -90,7 +90,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -421,8 +421,8 @@ save_configuration_database() {
 
 
 report_database_changes() {
-    local       output_file1=${1:-output_file1?}
-    local       output_file2=${2:-output_file2?}
+    local output_file1=${1:-output_file1?}
+    local output_file2=${2:-output_file2?}
 
     info '
 WIJZIGINGen in de configuratiedatabase,
@@ -446,7 +446,7 @@ term_script() {
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

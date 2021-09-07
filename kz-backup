@@ -73,10 +73,10 @@ readonly TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S)
 # Global variables
 ###############################################################################
 
-declare -a  EXCLUDE_ARGUMENT=''
+declare -a  EXCLUDE_ARGUMENT=()
 declare     ARGUMENT_SELECTION=false
-declare -a  SELECTION=''
-declare -a  SELECTION_ARGUMENT=''
+declare -a  SELECTION=()
+declare -a  SELECTION_ARGUMENT=()
 declare -a  SELECTION_DEFAULT=('/home' '/usr/local/etc')
 declare     BACKUP=''
 declare     BACKUP_CREATED=false
@@ -101,7 +101,7 @@ check_input() {
     local   -i  select_arg_num=0
     local   -i  select_num=0
     local       select=''
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(

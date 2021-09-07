@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-mkusb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=18.06.05
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=18.06.06
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -57,7 +57,7 @@ declare TARGET_ARGUMENT=''
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -72,7 +72,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -178,9 +178,9 @@ Geen $DEVICE gevonden om te gebruiken als doel!"
 
 
 process_input() {
-    local -i isosize=0
-    local usbname=''
-    local file=''
+    local   -i  isosize=0
+    local       usbname=''
+    local       file=''
 
     NO_FILES_FOUND=true
 
@@ -299,7 +299,7 @@ term_script() {
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ckhtml
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2012
 
-VERSION_NUMBER=12.00.04
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=12.00.05
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -51,7 +51,7 @@ readonly HTML_VALIDATOR_URL='http://validator.w3.org/check?uri='
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -66,7 +66,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -156,7 +156,7 @@ term_script() {
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

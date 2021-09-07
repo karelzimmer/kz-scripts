@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.00.04
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=36.00.05
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -105,7 +105,7 @@ declare -i  NUMBER_OF_COMMANDS=0
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -120,7 +120,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -521,9 +521,9 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 
 
 process_commands() {
-    local -i exec=0
-    local action=''
-    local command=''
+    local   -i  exec=0
+    local       action=''
+    local       command=''
 
     NUMBER_OF_COMMANDS=${#EXEC[@]}
     if [[ $NUMBER_OF_COMMANDS -eq 1 ]]; then
@@ -545,10 +545,10 @@ process_commands() {
 
 
 show_commands_before_execution() {
-    local prompt=''
-    local -i exec=0
-    local action=''
-    local command=''
+    local       prompt=''
+    local   -i  exec=0
+    local       action=''
+    local       command=''
 
     TEXT="
 De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
@@ -602,7 +602,7 @@ $prompt"
 
 
 execute_command() {
-    local -i    cmd_rc=0
+    local   -i  cmd_rc=0
     local       exec=''
 
     exec=${command/kz /kz-}
@@ -646,11 +646,11 @@ log_rc() {
 
 
 show_commands_after_execution() {
-    local action=''
-    local command=''
-    local -i exec=0
-    local prompt=''
-    local temp_text_file=''
+    local       action=''
+    local       command=''
+    local   -i  exec=0
+    local       prompt=''
+    local       temp_text_file=''
 
     temp_text_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.txt")
     printf '\n%s\n\n' "De volgende $NUMBER_OF_COMMANDS acties zijn \
@@ -688,7 +688,7 @@ term_script() {
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.08
-VERSION_DATE=2021-09-06
+VERSION_NUMBER=59.01.09
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -73,9 +73,9 @@ hulp of q voor stoppen)"
 # Global variables
 ###############################################################################
 
-declare -a  APP_ARGUMENT=''
-declare -a  FILE_ARGUMENT=''
-declare -a  FILE_TO_PROCESS=''
+declare -a  APP_ARGUMENT=()
+declare -a  FILE_ARGUMENT=()
+declare -a  FILE_TO_PROCESS=()
 declare     ARGUMENT_APP=false
 declare     ARGUMENT_FILE=false
 declare     COMMANDS_FOUND=false
@@ -105,7 +105,7 @@ declare     REMOVE_FOUND=false
 check_input() {
     local   -i  app_arg_num=0
     local   -i  file_arg_num=0
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -120,7 +120,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
     STATUS_ERROR="[${RED}FOUT${NORMAL}]"
     STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
     STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
@@ -766,7 +766,7 @@ process_description() {
 
 process_install_instruction() {
     local       record=${1:-record?}
-    local -i    len=0
+    local   -i  len=0
 
     INFO_FOUND=true
     if ! $OPTION_INFO; then
@@ -788,7 +788,7 @@ process_install_instruction() {
 
 process_remove_instruction() {
     local       record=${1:-record?}
-    local -i    len=0
+    local   -i  len=0
 
     REMOVE_FOUND=true
     if ! $OPTION_REMOVE; then
@@ -861,9 +861,9 @@ process_command() {
 
 
 execute_command() {
-    local cmd=${1:-cmd?}
-    local -i cmd_rc=0
-    local status=''
+    local       cmd=${1:-cmd?}
+    local   -i  cmd_rc=0
+    local       status=''
 
     check_dpkg
     if ! $OPTION_GUI; then
@@ -1002,7 +1002,7 @@ Gebruik de opdracht:
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

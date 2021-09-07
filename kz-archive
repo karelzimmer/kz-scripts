@@ -47,7 +47,7 @@ readonly DELETE_FROM_3=$HOME/kz-docs
 
 declare     ARCHIVED=false
 declare     ARGUMENT_SELECTION=false
-declare -a  SELECTION_ARGUMENT=''
+declare -a  SELECTION_ARGUMENT=()
 declare     DELETED=false
 
 
@@ -56,8 +56,8 @@ declare     DELETED=false
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
-    local -i    search4_arg_num=0
+    local   -i  getopt_rc=0
+    local   -i  search4_arg_num=0
     local       dir=''
     local       parsed=''
 
@@ -73,7 +73,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -260,7 +260,7 @@ term_script() {
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

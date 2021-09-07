@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-nas
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=13.00.04
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=13.00.05
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -66,7 +66,7 @@ declare NAS_WACHTWOORD='geheim'
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -81,7 +81,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -108,15 +108,15 @@ check_input() {
 
 
 request_input() {
-    local fstab=''
-    local quest1='Deze regels verwijderen?'
-    local quest2="Heeft de NAS een vast IP-adres zoals $NAS_IP_ADRES?"
-    local quest3='IP-adres van de NAS'
-    local quest4='Gebruikersnaam op de NAS'
-    local quest5='Wachtwoord van deze gebruiker op de NAS'
-    local quest6='Share-naam van deze gebruiker op de NAS'
-    local -i zenity_rc=0
-    local warning=''
+    local       fstab=''
+    local       quest1='Deze regels verwijderen?'
+    local       quest2="Heeft de NAS een vast IP-adres zoals $NAS_IP_ADRES?"
+    local       quest3='IP-adres van de NAS'
+    local       quest4='Gebruikersnaam op de NAS'
+    local       quest5='Wachtwoord van deze gebruiker op de NAS'
+    local       quest6='Share-naam van deze gebruiker op de NAS'
+    local   -i  zenity_rc=0
+    local       warning=''
 
     fstab=$(
         if ! grep --regexp="$PROGRAM_NAME" /etc/fstab; then
@@ -347,7 +347,7 @@ De-activeer het systemd mount-besta2nd met de opdracht:
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-dliso
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=17.00.04
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=17.00.05
+VERSION_DATE=2021-09-05
 
 
 
@@ -52,7 +52,7 @@ declare OPTION_CHECKSUMS=false
 ###############################################################################
 
 check_input() {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -67,7 +67,7 @@ check_input() {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_general_options "$@"
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -165,7 +165,7 @@ Om de beeldbestanden (.iso) te controleren voer uit:
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script
