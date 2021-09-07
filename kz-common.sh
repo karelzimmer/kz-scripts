@@ -207,7 +207,7 @@ log_debug() {
 }
 
 
-process_general_options() {
+process_common_options() {
     while true; do
         case $1 in
             -d|--debug)
