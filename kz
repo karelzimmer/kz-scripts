@@ -10,8 +10,8 @@ PROGRAM_NAME=kz
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.02.03
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=01.02.04
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -21,7 +21,6 @@ VERSION_DATE=2021-09-04
 declare -ir SUCCESS=0
 declare -ir ERROR=1
 declare -ir WARNING=2
-readonly    CALLED=$(printf '%s' "$0 $*" | xargs --null)
 readonly    THIS_YEAR=$(date +%Y)
 
 readonly    USAGE="\
@@ -48,8 +47,6 @@ Argumenten:
 ###############################################################################
 # Global variables
 ###############################################################################
-
-declare EXEC=''
 
 
 ###############################################################################
@@ -142,9 +139,11 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 
 
 process_input() {
-    EXEC=${CALLED/kz /kz-}
-    # shellcheck disable=SC2086
-    exec $EXEC
+local program_name=''
+
+    program_name=$1
+    shift
+    exec "kz-$program_name" "$@"
 }
 
 
@@ -160,7 +159,7 @@ term_script() {
 main() {
     init_script
     check_input "$@"
-    process_input
+    process_input "$@"
     term_script
 }
 

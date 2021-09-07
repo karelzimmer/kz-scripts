@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.01
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=27.02.02
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -45,6 +45,7 @@ readonly OPTIONS_HELP_COMMON="\
 # Common global variables
 ###############################################################################
 
+declare -a ARGS=()
 declare BACKUP_TO_DELETE=''
 declare HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
@@ -125,7 +126,7 @@ check_user() {
         if [[ $UID -ne 0 ]]; then
             log "restart w/ exec sudo $CALLED"
             # shellcheck disable=SC2086
-            exec sudo $CALLED
+            exec sudo $0 "${ARGS[@]}"
         fi
     else
         if [[ $UID -eq 0 ]]; then
@@ -191,6 +192,10 @@ init_script() {
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
+
+    for arg in "$@"; do
+        ARGS+=("$arg")
+    done
 }
 
 

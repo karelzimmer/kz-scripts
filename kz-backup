@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.08
-VERSION_DATE=2021-09-06
+VERSION_NUMBER=36.00.09
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -554,7 +554,7 @@ Koppel zelf (veilig!) het back-up-medium af."
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script
