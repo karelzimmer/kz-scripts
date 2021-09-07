@@ -525,8 +525,9 @@ back-up en deze wijzigingen zijn niet opgenomen in de gemaakte back-up."
     if [[ ($tar_rc -ne $SUCCESS && $tar_rc -ne 1) || $sync_rc -ne $SUCCESS ]]
     then
         error "Back-up maken is mislukt.
-Zie onderstaande meldingen:
-$(eval "$LOGCMD_CHECK")
+
+Opdracht om de log uit te lezen:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}
 
 Geen back-up gemaakt!"
         exit $ERROR

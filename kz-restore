@@ -581,8 +581,9 @@ Koppel zelf (veilig!) het back-up-medium af.'
     else
         warning "De back-up is niet of slechts gedeeltelijk teruggezet.
 
-Zie onderstaande meldingen:
-$(eval "$LOGCMD_CHECK")$TEXT"
+Opdracht om de log uit te lezen:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}
+$TEXT"
         exit $WARNING
     fi
 }
