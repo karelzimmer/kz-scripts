@@ -108,6 +108,7 @@ process_input() {
 
     if ! $ISO_FILE_FOUND; then
         warning "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR."
+        exit $WARNING
     fi
 }
 

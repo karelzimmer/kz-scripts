@@ -249,7 +249,7 @@ request_input() {
         fi
     fi
 
-    BACKUPFILE=backup_$HOSTNAME-$ID-$TIMESTAMP.tar
+    BACKUPFILE=backup-$HOSTNAME-$ID-$TIMESTAMP.tar
     BACKUP=$TARGET/$BACKUPFILE
 }
 

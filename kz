@@ -74,24 +74,19 @@ check_input() {
         printf '%s\n\n' "$USAGE" >&2
         show_commands
         exit $WARNING
-    fi
-    if [[ $1 == *-h* ]]; then
-        process_option_help
-        exit $SUCCESS
-    fi
-    if [[ $1 == *-l* ]]; then
-        show_commands
-        exit $SUCCESS
-    fi
-    if [[ $1 == *-u* ]]; then
+    elif [[ $1 == *-u* ]]; then
         process_option_usage
         exit $SUCCESS
-    fi
-    if [[ $1 == *-v* ]]; then
+    elif [[ $1 == *-h* ]]; then
+        process_option_help
+        exit $SUCCESS
+    elif [[ $1 == *-v* ]]; then
         process_option_version
         exit $SUCCESS
-    fi
-    if ! [[ -e "$PROGRAM_PATH/kz-$1" ]]; then
+    elif [[ $1 == *-l* ]]; then
+        show_commands
+        exit $SUCCESS
+    elif ! [[ -e "$PROGRAM_PATH/kz-$1" ]]; then
         printf "$DISPLAY_NAME: %s\n\n" "OPDRACHT '$1' bestaat niet" >&2
         show_commands
         exit $ERROR

@@ -46,7 +46,8 @@ readonly OPTIONS_HELP_COMMON="\
 ###############################################################################
 
 declare BACKUP_TO_DELETE=''
-declare HELP=''
+declare HELP='Gebruik: source kz-common.sh
+     of: . kz-common.sh'
 declare LOGCMD=''
 declare LOGCMD_CHECK=''
 declare LOGCMD_DEBUG=''
@@ -59,7 +60,8 @@ declare RUN_AS_SUPERUSER=false
 declare TERMINAL=false
 declare TEXT=''
 declare TITLE=''
-declare USAGE=''
+declare USAGE='Gebruik: source kz-common.sh
+     of: . kz-common.sh'
 declare USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
@@ -209,20 +211,20 @@ process_general_options() {
                 OPTION_DEBUG=true
                 shift
                 ;;
-            -g|--gui)
-                OPTION_GUI=true
+            -u|--usage)
+                OPTION_USAGE=true
                 shift
                 ;;
             -h|--help)
                 OPTION_HELP=true
                 shift
                 ;;
-            -u|--usage)
-                OPTION_USAGE=true
-                shift
-                ;;
             -v|--version)
                 OPTION_VERSION=true
+                shift
+                ;;
+            -g|--gui)
+                OPTION_GUI=true
                 shift
                 ;;
             --)
