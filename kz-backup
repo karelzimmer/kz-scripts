@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.07
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=36.00.08
+VERSION_DATE=2021-09-06
 
 
 ###############################################################################
@@ -40,7 +40,7 @@ $OPTIONS_HELP_COMMON
 Argumenten:
   SELECTIE      maak back-up van opgegeven mappen en bestanden"
 
-readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
 readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /dev
@@ -64,7 +64,7 @@ readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
 readonly TARGET_DEFAULT_1=/media
 readonly TARGET_DEFAULT_2=backups
-readonly TARGET_DEFAULT_3=$HOSTNAME-$ID
+readonly TARGET_DEFAULT_3=$HOSTNAME-$DISTRO
 # Conform ISO 8601, but ':' -> '.' for other filesystems not on Linux.
 readonly TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S)
 
@@ -249,7 +249,7 @@ request_input() {
         fi
     fi
 
-    BACKUPFILE=backup-$HOSTNAME-$ID-$TIMESTAMP.tar
+    BACKUPFILE=backup-$HOSTNAME-$DISTRO-$TIMESTAMP.tar
     BACKUP=$TARGET/$BACKUPFILE
 }
 

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.01
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=45.03.02
+VERSION_DATE=2021-09-06
 
 
 ###############################################################################
@@ -50,9 +50,9 @@ Argumenten:
   APP           opgegeven apps instellen
   BESTAND       opgegeven instellingsbestanden verwerken"
 
-readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
-readonly RELEASE=$(lsb_release --release --short)
+readonly VERSION=$(lsb_release --release --short)
 readonly LIST_DIR="$HOME//KZ Setup List"
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
@@ -181,8 +181,9 @@ check_input() {
                 ;;
         esac
     done
-    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION.sh
-    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION-$HOSTNAME.sh
+    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+$HOSTNAME.sh
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -376,7 +377,8 @@ process_argument_app() {
     if [[ -e $DFLTFILE_1 ]]; then
         file_to_process[0]=$DFLTFILE_1
     else
-        info "Geen installatiebestanden gevonden voor $ID $RELEASE $EDITION."
+        info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
+$EDITION."
         exit $WARNING
     fi
     # Niet verplicht aanwezig.
@@ -494,7 +496,8 @@ process_dfltfiles() {
         ((++file_num))
     fi
     if $file_notfound; then
-        info "Geen installatiebestanden gevonden voor $ID $RELEASE $EDITION."
+        info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
+$EDITION."
         exit $WARNING
     fi
 }
@@ -520,7 +523,7 @@ $(
                     --number-format=rn      \
                     --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen apps gevonden voor $ID $RELEASE."
+        printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
@@ -544,8 +547,8 @@ $(
                     --number-format=rn      \
                     --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen instellingsbestanden gevonden voor $ID \
-$RELEASE $EDITION.
+        printf '%s\n' "     0 Geen instellingsbestanden gevonden voor $DISTRO \
+$VERSION $EDITION.
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
     else

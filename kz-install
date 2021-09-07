@@ -9,10 +9,10 @@ PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2009
+VERSION_YEAR=2009
 
-VERSION_NUMBER=59.01.07
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=59.01.08
+VERSION_DATE=2021-09-06
 
 
 ###############################################################################
@@ -49,9 +49,9 @@ Argumenten:
   APP           opgegeven apps installeren
   BESTAND       opgegeven installatiebestanden verwerken"
 
-readonly ID=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EDITION_DEFAULT=desktop
-readonly RELEASE=$(lsb_release --release --short)
+readonly VERSION=$(lsb_release --release --short)
 readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
@@ -182,8 +182,9 @@ check_input() {
                 ;;
         esac
     done
-    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION.sh
-    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$ID-$RELEASE-$EDITION-$HOSTNAME.sh
+    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+$HOSTNAME.sh
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -496,7 +497,7 @@ process_argument_app() {
     # en stopt bij de eerstgevonden, setup zoekt naar apps in
     # kz-install-<distro>-<versie>-<edition>.sh en
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
-    search=$PROGRAM_NAME-$ID-$RELEASE
+    search=$PROGRAM_NAME-$DISTRO-$VERSION
     for app in "${APP_ARGUMENT[@]}"; do
         # Zoek exact (line-regexp) naar app-naam in installatiebestanden.
         # Alleen eerstgevonden installatiebestand verwerken (lines=1), want
@@ -608,7 +609,8 @@ process_dfltfiles() {
         ((++file_num))
     fi
     if $file_notfound; then
-        info "Geen installatiebestanden gevonden voor $ID $RELEASE $EDITION."
+        info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
+$EDITION."
         exit $WARNING
     fi
 }
@@ -621,7 +623,7 @@ process_option_apps() {
     # en stopt bij de eerstgevonden, setup zoekt naar apps in
     # kz-install-<distro>-<versie>-<edition>.sh en
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
-    search=$PROGRAM_NAME-$ID-$RELEASE
+    search=$PROGRAM_NAME-$DISTRO-$VERSION
 
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
@@ -637,7 +639,7 @@ $(
                     --number-format=rn          \
                     --number-separator=' '      \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen apps gevonden voor $ID $RELEASE."
+        printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
@@ -661,8 +663,8 @@ $(
                     --number-format=rn      \
                     --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $ID \
-$RELEASE $EDITION.
+        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $DISTRO \
+$VERSION $EDITION.
 Typ 'man $DISPLAY_NAME' voor meer informatie."
     else
         printf '%s\n' "
