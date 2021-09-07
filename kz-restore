@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-restore
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=39.00.06
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=39.00.07
+VERSION_DATE=2021-09-07
 
 
 ###############################################################################
@@ -593,7 +593,7 @@ $(eval "$LOGCMD_CHECK")$TEXT"
 ###############################################################################
 
 main() {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script
