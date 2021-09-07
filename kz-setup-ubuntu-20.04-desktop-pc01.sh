@@ -86,7 +86,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
 #1 terminal
-#2 GNOME Terminal (terminal) instellen
+#2 GNOME Terminal (terminalvenster) instellen
 if [[ $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.Terminal.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='org.gnome.Terminal.desktop'

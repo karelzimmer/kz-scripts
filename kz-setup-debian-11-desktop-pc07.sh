@@ -100,7 +100,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
 #1 terminal
-#2 GNOME Terminal (terminal) instellen
+#2 GNOME Terminal (terminalvenster) instellen
 kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 1. Klik op Activiteiten, typ 'snel'.
 #3 2. Klik bij Instellingen op het pictogram Toetsenbord.
