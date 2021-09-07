@@ -8,7 +8,7 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.02
+VERSION_NUMBER=27.02.03
 VERSION_DATE=2021-09-07
 
 
@@ -175,6 +175,11 @@ init_script() {
     trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
+    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
+    LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
+--identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
+    LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
+
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig tot mijn'
         log '(++) X-sessie voor het kunnen gebruiken van zenity in kz-scripts'
@@ -183,17 +188,13 @@ init_script() {
         xhost +si:localuser:root |& $LOGCMD
     fi
 
-    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
-    LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
---identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
-    LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
-    # shellcheck disable=SC2034
-    USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
-
     for arg in "$@"; do
         CMDLINE_ARGS+=("$arg")
     done
     log "started as $0 ${CMDLINE_ARGS[*]} (from $PWD)"
+
+    # shellcheck disable=SC2034
+    USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 }
 
 
