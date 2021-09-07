@@ -582,7 +582,7 @@ Koppel zelf (veilig!) het back-up-medium af.'
 echo "$LOGCMD_CHECK" #XXX
         warning "De back-up is niet of slechts gedeeltelijk teruggezet.
 
-Zie onderstaande meldingen:
+Zie onderstaande meldingenNNNN:
 $(eval "$LOGCMD_CHECK")$TEXT"
         exit $WARNING
     fi
