@@ -19,7 +19,7 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <action id="nl.karelzimmer.kz_nas.attach-nas">
+    <action id="nl.karelzimmer.kz-nas.attach-nas">
         <message>Authentication is required to mount a network drive.</message>
         <message xml:lang="nl">Authenticatie is vereist om een netwerkschijf te koppelen.</message>
         <defaults>

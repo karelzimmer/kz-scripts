@@ -19,7 +19,7 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <action id="nl.karelzimmer.kz_install.install-sw">
+    <action id="nl.karelzimmer.kz-install.install-sw">
         <message>Authentication is required to install/list apps.</message>
         <message xml:lang="nl">Authenticatie is vereist om apps te installeren/uit te lijsten.</message>
         <defaults>

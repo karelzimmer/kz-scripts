@@ -19,7 +19,7 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <action id="nl.karelzimmer.kz_backup.make-backup">
+    <action id="nl.karelzimmer.kz-backup.make-backup">
         <message>Authentication is required to make a backup.</message>
         <message xml:lang="nl">Authenticatie is vereist om een back-up te maken.</message>
         <defaults>

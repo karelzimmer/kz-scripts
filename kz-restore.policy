@@ -19,7 +19,7 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <action id="nl.karelzimmer.kz_restore.restore-backup">
+    <action id="nl.karelzimmer.kz-restore.restore-backup">
         <message>Authentication is required to restore a backup.</message>
         <message xml:lang="nl">Authenticatie is vereist om een back-up terug te zetten.</message>
         <defaults>
