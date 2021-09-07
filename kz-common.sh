@@ -165,7 +165,7 @@ init_script() {
     local arg=''
 
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
-    LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
+    LOGCMD_CHECK="journalctl --all --no-pager \
 --identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
     LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
     log "started as $CALLED (from $PWD)"
