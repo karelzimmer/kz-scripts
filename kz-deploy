@@ -32,7 +32,7 @@ $OPTIONS_HELP_COMMON"
 
 readonly    DEB_DIR=$HOME/kz-deb
 readonly    DEB_TEMP_DIR=/tmp/kz
-readonly    DEB_NAME=kz-365_all.deb
+readonly    DEB_NAME=kz_365_all.deb
 readonly    DOCS_DIR=$HOME/kz-docs
 readonly    SCRIPTS_DIR=$HOME/kz-scripts
 readonly    SITE_DIR=$HOME/uploads/karelzimmer.nl/httpdocs

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.03
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=14.03.04
+VERSION_DATE=2021-09-06
 
 
 ###############################################################################
@@ -236,8 +236,11 @@ ${BOLD}In $script:${NORMAL}
 ${BOLD}In $script:${NORMAL}
     Foutieve regel(s) gevonden.
 $(
-        echo    "$wrong_record" |
-        nl      --number-width=8  --number-separator='' --body-numbering=n
+        printf  '%s'                    \
+                "$wrong_record"         |
+        nl      --number-width=8        \
+                --number-separator=''   \
+                --body-numbering=n
 
     )
 "
@@ -413,7 +416,8 @@ ${BOLD}In $script:${NORMAL}
             fi
             ;;
         kz-restore)
-            echo                    '1'             |
+            printf                  '%s\n'          \
+                                    '1'             |
             "$scriptsdir/$script"   --target        \
                                     /tmp            \
                                     --source /tmp   |& $LOGCMD || check_rc=$?

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-gset
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=12.00.04
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=12.00.05
+VERSION_DATE=2021-09-06
 
 
 ###############################################################################
@@ -278,7 +278,8 @@ process_option_addfavtop () {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  echo    "$favorite_apps"    |
+    elif !  printf  '%s'                \
+                    "$favorite_apps"    |
             grep    --quiet             \
                     --word-regexp       \
                     --regexp="$DESKTOPFILE"; then
@@ -286,8 +287,10 @@ process_option_addfavtop () {
                     org.gnome.shell                             \
                     favorite-apps                               \
                     "['$DESKTOPFILE', $(
-                                        echo "$favorite_apps"   |
-                                        awk -F[ '{print $2}'
+                                        printf  '%s'                \
+                                                "$favorite_apps"    |
+                                        awk     -F[                 \
+                                                '{print $2}'
                                         )"
     fi
 }
@@ -299,7 +302,8 @@ process_option_addfavbottom () {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  echo    "$favorite_apps"    |
+    elif !  printf  '%s'                \
+                    "$favorite_apps"    |
             grep    --quiet             \
                     --word-regexp       \
                     --regexp="$DESKTOPFILE"; then
@@ -307,8 +311,10 @@ process_option_addfavbottom () {
                     org.gnome.shell             \
                     favorite-apps               \
                     "$(
-                        echo "$favorite_apps"   |
-                        awk -F] '{print $1}'), '$DESKTOPFILE']"
+                        printf  '%s'                \
+                                "$favorite_apps"    |
+                        awk     -F]                 \
+                                '{print $1}'), '$DESKTOPFILE']"
     fi
 }
 
@@ -325,7 +331,8 @@ process_option_removefav () {
                     org.gnome.shell                                     \
                     favorite-apps                                       \
                     "$(
-                        echo    "$favorite_apps"                        |
+                        printf  '%s'                                    \
+                                "$favorite_apps"                        |
                         sed     --expression="s/'$DESKTOPFILE', //g"    |
                         sed     --expression="s/, '$DESKTOPFILE'//"
                     )"
@@ -342,7 +349,8 @@ process_option_addappfolder () {
 
     if [[ $app_folders = '@as []' ]]; then
         set org.gnome.desktop.app-folders folder-children "['$APPFOLDER']"
-    elif !  echo    "$app_folders"  |
+    elif !  printf  '%s'            \
+                    "$app_folders"  |
             grep    --quiet         \
                     --word-regexp   \
                     --regexp="$APPFOLDER"; then
@@ -350,7 +358,7 @@ process_option_addappfolder () {
                     org.gnome.desktop.app-folders   \
                     folder-children                 \
                     "$(
-                        echo "$app_folders"         |
+                        printf '%s' "$app_folders"  |
                         awk -F] '{print $1}'), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
@@ -376,8 +384,8 @@ process_option_removeappfolder () {
                     org.gnome.desktop.app-folders   \
                     folder-children                 \
                     "$(
-                        echo    "$app_folders"      |
-                        sed     --expression="s/, '$APPFOLDER'//"
+                        printf  '%s' "$app_folders" |
+                        sed --expression="s/, '$APPFOLDER'//"
                     )"
     fi
     schema=org.gnome.desktop.app-folders.folder
