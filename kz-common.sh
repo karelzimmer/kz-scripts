@@ -45,7 +45,7 @@ readonly OPTIONS_HELP_COMMON="\
 # Common global variables
 ###############################################################################
 
-declare -a ARGS=()
+declare -a CMDLINE_ARGS=()
 declare BACKUP_TO_DELETE=''
 declare HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
@@ -126,7 +126,7 @@ check_user() {
         if [[ $UID -ne 0 ]]; then
             log "restart w/ exec sudo $CALLED"
             # shellcheck disable=SC2086
-            exec sudo $0 "${ARGS[@]}"
+            exec sudo $0 "${CMDLINE_ARGS[@]}"
         fi
     else
         if [[ $UID -eq 0 ]]; then
@@ -162,6 +162,8 @@ info() {
 
 
 init_script() {
+    local arg=''
+
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
     LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
 --identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
@@ -194,7 +196,7 @@ init_script() {
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
     for arg in "$@"; do
-        ARGS+=("$arg")
+        CMDLINE_ARGS+=("$arg")
     done
 }
 
