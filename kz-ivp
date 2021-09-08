@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.05
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=14.03.06
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -373,6 +373,7 @@ ${BOLD}In $script:${NORMAL}
 
     case $script in
         kz-backup)
+            log "Check $script."
             "$scriptsdir/$script"   --target                        \
                                     /tmp                            \
                                     /home/karel/scripts |& $LOGCMD  ||
@@ -387,6 +388,7 @@ ${BOLD}In $script:${NORMAL}
             fi
             ;;
         kz-install)
+            log "Check $script."
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
@@ -416,6 +418,7 @@ ${BOLD}In $script:${NORMAL}
             fi
             ;;
         kz-restore)
+            log "Check $script."
             printf                  '%s\n'          \
                                     '1'             |
             "$scriptsdir/$script"   --target        \
@@ -433,6 +436,7 @@ ${BOLD}In $script:${NORMAL}
             sudo rm --force --recursive /tmp/home
             ;;
         kz-setup)
+            log "Check $script."
             "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "

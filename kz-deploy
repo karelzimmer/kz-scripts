@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.04.10
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=62.04.11
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -207,6 +207,7 @@ check_names() {
     local -i check_rc=0
 
     info 'Controleer bestandsnamen (kz ckname)...'
+    log 'Check filenames with kz ckname.'
     "$SCRIPTS_DIR"/kz ckname    "$DEB_DIR"      \
                                 "$DOCS_DIR"     \
                                 "$SCRIPTS_DIR"  || check_rc=$?
@@ -222,6 +223,7 @@ check_scripts() {
     local -i check_rc=0
 
     info 'Controleer scripts (kz ivp)...'
+    log 'Check scripts with kz ivp.'
     "$SCRIPTS_DIR"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
