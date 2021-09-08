@@ -8,7 +8,7 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.04
+VERSION_NUMBER=27.02.05
 VERSION_DATE=2021-09-08
 
 
@@ -27,15 +27,15 @@ readonly OPTIONS_SHORT_COMMON='dghuv'
 # shellcheck disable=SC2034
 readonly OPTIONS_LONG_COMMON='debug,gui,help,usage,version'
 # shellcheck disable=SC2034
-readonly OPTIONS_USAGE_COMMON="[-d|--debug] [-g|--gui] [-h|--help] \
-[-u|--usage] [-v|--version] [--]"
+readonly OPTIONS_USAGE_COMMON="[-u|--usage] [-h|--help] [-v|--version] \
+[-g|--gui] [-d|--debug] [--]"
 # shellcheck disable=SC2034
 readonly OPTIONS_HELP_COMMON="\
-  -d --debug    geef foutopsporingsinformatie weer in het logboek
-  -g --gui      start in grafische modus
-  -h --help     deze hulptekst tonen
   -u --usage    een korte gebruikssamenvatting tonen
+  -h --help     deze hulptekst tonen
   -v --version  de versie tonen
+  -g --gui      start in grafische modus
+  -d --debug    geef foutopsporingsinformatie weer in het logboek
   --            stop verwerken opdrachtregelopties"
 
 
