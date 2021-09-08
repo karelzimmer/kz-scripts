@@ -159,8 +159,6 @@ info() {
 
 
 init_script() {
-    local arg=''
-
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -188,9 +186,7 @@ init_script() {
         xhost +si:localuser:root |& $LOGCMD
     fi
 
-    for arg in "$@"; do
-        CMDLINE_ARGS+=("$arg")
-    done
+    CMDLINE_ARGS=("$@")
     log "started as $0 ${CMDLINE_ARGS[*]} (from $PWD)"
 
     # shellcheck disable=SC2034
