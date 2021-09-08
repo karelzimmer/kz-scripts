@@ -23,7 +23,8 @@ VERSION_DATE=2021-09-05
 readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'c'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',checksums'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-c|--checksums] $OPTIONS_USAGE_COMMON"
+readonly USAGE="Gebruik: $DISPLAY_NAME [-c|--checksums]
+                  $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Beeldbestanden downloaden.
