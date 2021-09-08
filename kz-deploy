@@ -207,7 +207,7 @@ check_names() {
     local -i check_rc=0
 
     info 'Controleer bestandsnamen (kz ckname)...'
-    log 'Check filenames with kz ckname.'
+    log "Check filenames with 'kz ckname'."
     "$SCRIPTS_DIR"/kz ckname    "$DEB_DIR"      \
                                 "$DOCS_DIR"     \
                                 "$SCRIPTS_DIR"  || check_rc=$?
@@ -223,7 +223,7 @@ check_scripts() {
     local -i check_rc=0
 
     info 'Controleer scripts (kz ivp)...'
-    log 'Check scripts with kz ivp.'
+    log "Check scripts with 'kz ivp'."
     "$SCRIPTS_DIR"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
