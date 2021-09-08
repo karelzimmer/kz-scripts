@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.03
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=27.02.04
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -49,7 +49,6 @@ declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD=''
 declare     LOGCMD_CHECK=''
-declare     LOGCMD_DEBUG=''
 declare     OPTION_DEBUG=false
 declare     OPTION_GUI=false
 declare     OPTION_HELP=false
@@ -122,7 +121,7 @@ error() {
 check_user() {
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
-            log "restart w/ exec sudo $0 ${CMDLINE_ARGS[*]}"
+            log "restart w/ exec sudo $0 ${CMDLINE_ARGS[*]}" --priority=debug
             # shellcheck disable=SC2086
             exec sudo $0 "${CMDLINE_ARGS[@]}"
         fi
@@ -173,21 +172,23 @@ init_script() {
     trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
-    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=info"
+    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
 --identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
-    LOGCMD_DEBUG="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        log '(++) Met Debian heeft gebruiker root toegang nodig tot mijn'
-        log '(++) X-sessie voor het kunnen gebruiken van zenity in kz-scripts'
-        log '(++) met RUN_AS_SUPERUSER=true:'
-        log '(++) xhost +si:localuser:root'
-        xhost +si:localuser:root |& $LOGCMD
+        log '(++) Met Debian heeft gebruiker root toegang nodig'    \
+            --priority=debug
+        log '(++) tot mijn X-sessie voor het kunnen gebruiken van'  \
+            --priority=debug
+        log '(++) zenity in kz-scripts met RUN_AS_SUPERUSER=true:'  \
+            --priority=debug
+        log '(++) xhost +si:localuser:root' --priority=debug
+        xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
 
     CMDLINE_ARGS=("$@")
-    log "started as $0 ${CMDLINE_ARGS[*]} (from $PWD)"
+    log "started as $0 ${CMDLINE_ARGS[*]} (from $PWD)" --priority=notice
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
@@ -195,12 +196,7 @@ init_script() {
 
 
 log() {
-    printf '%b' "$@" |& $LOGCMD
-}
-
-
-log_debug() {
-    printf '%b' "$@" |& $LOGCMD_DEBUG
+    printf '%b' "$1" |& $LOGCMD ${2:---priority=info}
 }
 
 
@@ -277,24 +273,24 @@ process_option_debug() {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
     printf "${YELLOW}%s\n${NORMAL}" '*** START DEBUG-SESSIE ***'
-    log_debug 'START DEBUG-SESSIE'
-    log_debug 'Start show current environment'
-    log_debug 'uname --all:'
-    log_debug "$(uname --all)"
-    log_debug 'lsb_release --all:'
-    log_debug "$(lsb_release --all 2> >($LOGCMD_DEBUG))"
-    log_debug 'cat /etc/os-release:'
-    log_debug "$(cat /etc/os-release)"
-    log_debug 'declare -p:'
-    log_debug "$(declare -p)"
-    log_debug 'End show current environment'
-    log_debug 'Routing bash xtrace to FD4'
-    exec 4> >($LOGCMD_DEBUG)
+    log 'START DEBUG-SESSIE' --priority=debug
+    log 'Start show current environment' --priority=debug
+    log 'uname --all:' --priority=debug
+    log "$(uname --all)" --priority=debug
+    log 'lsb_release --all:' --priority=debug
+    log "$(lsb_release --all 2> >($LOGCMD --priority=debug))"
+    log 'cat /etc/os-release:' --priority=debug
+    log "$(cat /etc/os-release)" --priority=debug
+    log 'declare -p:' --priority=debug
+    log "$(declare -p)" --priority=debug
+    log 'End show current environment' --priority=debug
+    log 'Routing bash xtrace to FD4' --priority=debug
+    exec 4> >($LOGCMD --priority=debug)
     BASH_XTRACEFD=4
     log 'Setting bash options'
     set -o verbose
     set -o xtrace
-    log_debug 'Let the fun begin...'
+    log 'Let the fun begin...' --priority=debug
     # shellcheck disable=SC2016
     ps4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
     export PS4=$ps4
@@ -392,8 +388,8 @@ signal() {
             ;;
     esac
 
-    log_debug "signal: $signal, line: $lineno, function: $function, command: \
-$command, code: $rc ($rc_desc)"
+    log "signal: $signal, line: $lineno, function: $function, command: \
+$command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
@@ -412,7 +408,7 @@ $command, code: $rc ($rc_desc)"
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
             fi
-            log "ended (code=exited, status=$status)"
+            log "ended (code=exited, status=$status)" --priority=notice
             # Een non-gui script gestart met optie gui.
             if $TERMINAL; then
                 TEXT="Druk op de Enter-toets om verder te gaan [Enter]: "
@@ -449,24 +445,24 @@ Opgeslagen back-up wordt verwijderd.'
             cd "$HOME" || exit $ERROR
             rm --force kz kz.1
             if [[ $rc -ne $SUCCESS ]]; then
-                log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
-start dan een Terminalvenster, en voer uit:
+                log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
+dan een Terminalvenster, en voer uit:
     ${BLUE}sudo dpkg --configure --pending${NORMAL}
     ${BLUE}sudo apt-get update --fix-missing${NORMAL}
     ${BLUE}sudo apt-get install --fix-broken${NORMAL}
-    ${BLUE}sudo update-initramfs -u${NORMAL}"
+    ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
             fi
             ;;
         kz-install)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
             rm --force /tmp/"$PROGRAM_NAME"-??????????.*
             if [[ $rc -ne $SUCCESS ]]; then
-                log_debug "Als de pakketbeheerder 'apt' foutmeldingen geeft, \
-start dan een Terminalvenster, en voer uit:
+                log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
+dan een Terminalvenster, en voer uit:
     ${BLUE}sudo dpkg --configure --pending${NORMAL}
     ${BLUE}sudo apt-get update --fix-missing${NORMAL}
     ${BLUE}sudo apt-get install --fix-broken${NORMAL}
-    ${BLUE}sudo update-initramfs -u${NORMAL}"
+    ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
             fi
             ;;
         kz-setup)
