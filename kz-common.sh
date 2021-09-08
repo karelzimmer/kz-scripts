@@ -196,7 +196,7 @@ init_script() {
 
 
 log() {
-    printf '%b' "$1" |& $LOGCMD ${2:---priority=info}
+    printf '%b' "$1" |& $LOGCMD "${2:---priority=info}"
 }
 
 
