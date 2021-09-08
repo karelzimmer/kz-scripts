@@ -398,7 +398,7 @@ term_script() {
     search='/usr/share/doc/kz/Checklist installatie'
     cp  --update "$search"*{desktop,server}.pdf "$HOME" |& $LOGCMD || true
     cp  --update                                    \
-        "$search"*{desktop,server}_"$HOSTNAME".pdf  \
+        "$search"*{desktop,server}" $HOSTNAME".pdf  \
         "$HOME"                                     |& $LOGCMD || true
 
     TEXT='Volg nu de stappen zoals beschreven in de
