@@ -185,7 +185,7 @@ init_script() {
     fi
 
     CMDLINE_ARGS=("$@")
-    log "Started $0 ${CMDLINE_ARGS[*]} (as $USER from $PWD)." --priority=notice
+    log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
