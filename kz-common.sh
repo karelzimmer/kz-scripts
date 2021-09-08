@@ -121,7 +121,7 @@ error() {
 check_user() {
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
-            log "restart w/ exec sudo $0 ${CMDLINE_ARGS[*]}" --priority=debug
+            log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
             # shellcheck disable=SC2086
             exec sudo $0 "${CMDLINE_ARGS[@]}"
         fi
@@ -177,18 +177,15 @@ init_script() {
 --identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        log '(++) Met Debian heeft gebruiker root toegang nodig'    \
-            --priority=debug
-        log '(++) tot mijn X-sessie voor het kunnen gebruiken van'  \
-            --priority=debug
-        log '(++) zenity in kz-scripts met RUN_AS_SUPERUSER=true:'  \
-            --priority=debug
-        log '(++) xhost +si:localuser:root' --priority=debug
+        log '(++) Met Debian heeft gebruiker root toegang nodig
+(++) tot mijn X-sessie voor het kunnen gebruiken van
+(++) zenity in kz-scripts met RUN_AS_SUPERUSER=true:
+(++) xhost +si:localuser:root' --priority=debug
         xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
 
     CMDLINE_ARGS=("$@")
-    log "started as $0 ${CMDLINE_ARGS[*]} (from $PWD)" --priority=notice
+    log "Started $0 ${CMDLINE_ARGS[*]} (as $USER from $PWD)." --priority=notice
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
@@ -408,7 +405,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
             fi
-            log "ended (code=exited, status=$status)" --priority=notice
+            log "Ended (code=exited, status=$status)." --priority=notice
             # Een non-gui script gestart met optie gui.
             if $TERMINAL; then
                 TEXT="Druk op de Enter-toets om verder te gaan [Enter]: "
