@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ckhtml
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2012
 
-VERSION_NUMBER=12.00.05
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=12.00.06
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-archive
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.00.07
-VERSION_DATE=2021-09-04
+VERSION_NUMBER=18.00.08
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -22,9 +22,8 @@ VERSION_DATE=2021-09-04
 readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
-                    [SELECTIE...]"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--] [SELECTIE...]
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON [SELECTIE...]"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [SELECTIE...]
 
 Scripts archiveren.
 

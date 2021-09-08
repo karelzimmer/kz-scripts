@@ -13,13 +13,13 @@ import datetime
 module_name = 'kz_common.py'
 release_year = 2021
 
-version_number = '02.01.00'
-version_date = '2021-08-22'
+version_number = '02.01.01'
+version_date = '2021-09-08'
 
 
 def process_option_usage(display_name):
-    print(f"""Gebruik: {display_name} [-g|--gui] [-h|--help] [-u|--usage] \
-[-v|--version]
+    print(f"""Gebruik: {display_name} [-u|--usage] [-h|--help] [-v|--version] \
+[-g|--gui]
 
 Typ '{display_name} --help' voor meer informatie.""")
 

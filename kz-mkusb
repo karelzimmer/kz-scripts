@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-mkusb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=18.06.06
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=18.06.07
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -25,7 +25,7 @@ readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,target:'
 readonly USAGE="Gebruik: $DISPLAY_NAME [-s|--source=BRON] \
 [-t|--target=DOEL]
                   $OPTIONS_USAGE_COMMON"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 USB-sticks maken.
 

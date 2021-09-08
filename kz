@@ -10,8 +10,8 @@ PROGRAM_NAME=kz
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.02.04
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=01.02.05
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -25,7 +25,7 @@ readonly    THIS_YEAR=$(date +%Y)
 
 readonly    USAGE="\
 Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
-     of: $DISPLAY_NAME [-l|--list] [-h|--help] [-u|--usage] [-v|--version]"
+     of: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
 readonly    HELP="\
 Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
          $DISPLAY_NAME OPTIE
@@ -37,7 +37,6 @@ Opties:
   -h --help     deze hulptekst tonen
   -u --usage    een korte gebruikssamenvatting tonen
   -v --version  de versie tonen
-  --            stop verwerken opdrachtregelopties
 
 Argumenten:
   OPDRACHT      uit te voeren opdracht

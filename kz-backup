@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.09
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=36.00.10
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -26,7 +26,7 @@ readonly USAGE="Gebruik: $DISPLAY_NAME [-e|--exclude=UITSLUITEN]... \
 [-t|--target=DOELMAP]
                    $OPTIONS_USAGE_COMMON
                    [SELECTIE...]"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--] [SELECTIE...]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [SELECTIE...]
 
 Back-up maken.
 

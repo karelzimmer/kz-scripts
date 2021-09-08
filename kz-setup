@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.03
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=45.03.04
+VERSION_DATE=2021-09-08
 
 
 ###############################################################################
@@ -28,8 +28,7 @@ readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] \
                   [-i|--info] [-l|--list] [-r|--reset] [-s|--simulate]
                   $OPTIONS_USAGE_COMMON
                   [APP...] [BESTAND...]"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [--] [APP...] \
-[BESTAND...]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
 
 Apps instellen.
 

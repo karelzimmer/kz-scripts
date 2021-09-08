@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.03.01
-# VERSION_DATE=2021-09-04
+# VERSION_NUMBER=04.03.02
+# VERSION_DATE=2021-09-08
 
 
 #1 adguard
@@ -55,9 +55,10 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #3 5. Verwijder de uit de oude wachtwoordbeheerder geëxporteerde wachtwoorden.
 #3 6. Verwijder de oude wachtwoordbeheerder.
 #3
-#3 -----------------------------------------------------------------------------------------------
-#3 Met het gebruik van Bitwarden wordt het opslaan van wachtwoorden in de browser sterk afgeraden.
-#3 -----------------------------------------------------------------------------------------------
+#3 -----------------------------------------------
+#3 Met het gebruik van Bitwarden wordt het opslaan
+#3 van wachtwoorden in de browser sterk afgeraden.
+#3 -----------------------------------------------
 #3
 #3 Dit betekent voor de browser:
 #3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
