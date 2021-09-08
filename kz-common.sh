@@ -176,6 +176,8 @@ init_script() {
     LOGCMD_CHECK="[sudo] journalctl --all --no-pager \
 --identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
+    CMDLINE_ARGS=("$@")
+    log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig
 (++) tot mijn X-sessie voor het kunnen gebruiken van
@@ -183,9 +185,6 @@ init_script() {
 (++) xhost +si:localuser:root' --priority=debug
         xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
-
-    CMDLINE_ARGS=("$@")
-    log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
