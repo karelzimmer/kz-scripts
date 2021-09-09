@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.10
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=36.00.11
+VERSION_DATE=2021-09-09
 
 
 ###############################################################################
@@ -40,7 +40,6 @@ $OPTIONS_HELP_COMMON
 Argumenten:
   SELECTIE      maak back-up van opgegeven mappen en bestanden"
 
-readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
 readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /dev

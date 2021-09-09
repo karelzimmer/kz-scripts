@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.06
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=27.02.07
+VERSION_DATE=2021-09-09
 
 
 ###############################################################################
@@ -21,6 +21,7 @@ readonly ERROR=1
 # shellcheck disable=SC2034
 readonly WARNING=2
 readonly THIS_YEAR=$(date +%Y)
+readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
 # shellcheck disable=SC2034
 readonly OPTIONS_SHORT_COMMON='dghuv'
@@ -177,7 +178,7 @@ init_script() {
 
     CMDLINE_ARGS=("$@")
     log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
-    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
+    if [[ $DISTRO = 'debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig
 (++) tot mijn X-sessie voor het kunnen gebruiken van
 (++) zenity in kz-scripts met RUN_AS_SUPERUSER=true:

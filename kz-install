@@ -49,9 +49,8 @@ Argumenten:
   APP           opgegeven apps installeren
   BESTAND       opgegeven installatiebestanden verwerken"
 
-readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly EDITION_DEFAULT=desktop
 readonly VERSION=$(lsb_release --release --short)
+readonly EDITION_DEFAULT=desktop
 readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
