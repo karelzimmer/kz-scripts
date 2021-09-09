@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.04.12
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=62.04.13
+VERSION_DATE=2021-09-09
 
 
 ###############################################################################
@@ -164,6 +164,8 @@ process_input() {
 
 
 pre_actions() {
+    check_dependencies
+    remove_backups
     check_names
     check_scripts
     rsync   --archive               \
@@ -177,6 +179,7 @@ pre_actions() {
     sync_all_kz-scripts
     sync_deb_kz-backgrounds
 }
+
 
 check_dependencies() {
     if ! command -v enscript 1> /dev/null; then
@@ -200,6 +203,18 @@ check_dependencies() {
         info 'Installeer rsync...'
         sudo apt-get install --yes rsync |& $LOGCMD
     fi
+}
+
+
+remove_backups() {
+    local dir=''
+
+    for dir in $UPLOADS; do
+        find    "$dir"                      \
+                -name '*~'      -delete -or \
+                -name '*.*~'    -delete -or \
+                -name '*.bak'   -delete     |& $LOGCMD
+    done
 }
 
 
