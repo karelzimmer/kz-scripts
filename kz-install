@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.10
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=59.01.11
+VERSION_DATE=2021-09-09
 
 
 ###############################################################################
@@ -380,7 +380,6 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
 
     printf '%s\n' "$text2..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
     # shellcheck disable=SC2062,SC2022
     if !    grep    --recursive             \
                     --no-filename           \
@@ -493,15 +492,9 @@ process_argument_app() {
     local cmds_file=''
 
     cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz-install-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    # Zie commentaar in kz-setup.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for app in "${APP_ARGUMENT[@]}"; do
-        # Zoek exact (line-regexp) naar app-naam in installatiebestanden.
-        # Alleen eerstgevonden installatiebestand verwerken (lines=1), want
-        # app-naam kan in meerdere installatiebestanden voorkomen.
         # shellcheck disable=SC2062
         file=$(
             if ! grep       --files-with-matches        \
@@ -619,12 +612,8 @@ $EDITION."
 process_option_apps() {
     local search=''
 
-    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz-install-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    # Zie commentaar in kz-setup.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
-
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
@@ -838,11 +827,7 @@ process_command() {
             printf '%s\n' "$TEXT"
         else
             if [[ -t 1 ]]; then
-                # Afbreken in Terminalvenster moet i.v.m. updaten status van
-                # WERK naar GOED of FOUT.
-                #  <------------- tput cols ------------->
-                # '[WERK] [  1/1  ] [ 1] Te lange descr...' <=== op 1 regel
-                #  <-------- 22 -------->
+                # Zie commentaar in kz-setup.
                 desc_maxlen=$(($(tput cols) - 22))
                 if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
                     desc_printf=${desc_printf:0:(($desc_maxlen - 3))}'...'
