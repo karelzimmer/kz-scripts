@@ -207,14 +207,10 @@ check_dependencies() {
 
 
 remove_backups() {
-    local dir=''
-
-    for dir in $UPLOADS; do
-        find    "$dir"                      \
-                -name '*~'      -delete -or \
-                -name '*.*~'    -delete -or \
-                -name '*.bak'   -delete     |& $LOGCMD
-    done
+    find    "$SITE_DIR"                 \
+            -name '*~'      -delete -or \
+            -name '*.*~'    -delete -or \
+            -name '*.bak'   -delete     |& $LOGCMD
 }
 
 
