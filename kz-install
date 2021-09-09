@@ -258,7 +258,8 @@ process_input() {
         cat "$file" >> "$CMDS_FILE"
     done
 
-    # Voor toelichting zie kz-setup (lines-of-code < 1000).
+    # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
+    # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
     app_tot_num=$(
         grep --word-regexp --regexp='^#2' --count "$CMDS_FILE" || true
         )
@@ -266,7 +267,9 @@ process_input() {
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
         TITLE='Apps installeren'
         TEXT=''
-        # Voor toelichting zie kz-setup (lines-of-code < 1000).
+        # Met "|& zenity --progress" worden globale variabelen uit
+        # aangeroepen functies niet doorgegeven, vandaar de
+        # 'process substitution' met "> >(zenity...)".
         process_file > >(
             zenity  --progress              \
                     --pulsate               \
@@ -295,7 +298,6 @@ geïnstalleerd"
     local text5='[4/5]  Gebruikersfotobestand vastleggen'
 
     TITLE='Applijst maken'
-    # Voor toelichting zie kz-setup (lines-of-code < 1000).
     if $OPTION_GUI; then
         (
         printf '%s\n' "#$text1"
@@ -484,7 +486,6 @@ process_argument_app() {
     local cmds_file=''
 
     cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-    # Voor toelichting zie kz-setup (lines-of-code < 1000).
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for app in "${APP_ARGUMENT[@]}"; do
         # shellcheck disable=SC2062
@@ -530,7 +531,6 @@ process_argument_app_file() {
                     if $app_found; then
                         info "Dubbele app-naam $app."
                     else
-                        # Voor toelichting zie kz-setup (lines-of-code < 1000).
                         app_found=true
                     fi
                 elif $app_found; then
@@ -601,7 +601,6 @@ $EDITION."
 process_option_apps() {
     local search=''
 
-    # Voor toelichting zie kz-setup (lines-of-code < 1000).
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
@@ -816,7 +815,10 @@ process_command() {
             printf '%s\n' "$TEXT"
         else
             if [[ -t 1 ]]; then
-                # Voor toelichting zie kz-setup (lines-of-code < 1000).
+                # Afbreken in Terminalvenster moet i.v.m. updaten status.
+                #  <------------- tput cols ------------->
+                # '[WERK] [  1/1  ] [ 1] Te lange descr...' <=== op 1 regel
+                #  <-------- 22 -------->
                 desc_maxlen=$(($(tput cols) - 22))
                 if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
                     desc_printf=${desc_printf:0:(($desc_maxlen - 3))}'...'

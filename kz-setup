@@ -294,11 +294,6 @@ process_option_list() {
     mkdir --parents "$LIST_DIR"
 
     TITLE='Instellijst maken'
-    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-    # Voorbeeld: Unable to init server: Kon niet verbinden:
-    #            Verbinding is geweigerd
-    #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
-    #            cannot open display:
     if $OPTION_GUI; then
         (
         printf '%s\n' "#$text1"
@@ -385,15 +380,7 @@ $EDITION."
     fi
 
     cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz-install-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
-        # Zoek exact (line-regexp) naar app-naam in instellingsbestanden.
-        # Alleen eerstgevonden instellingsbestand verwerken (lines=1), want
-        # app-naam kan in meerdere instellingsbestanden voorkomen.
-        # shellcheck disable=SC2062
         if ! grep   --files-with-matches    \
                     --line-regexp           \
                     --regexp="#1 $app"      \
@@ -430,10 +417,6 @@ process_argument_app_file() {
         case $record in
             '#1 '*)
                 if [[ $record = '#1 '$app ]]; then
-                    # Gezochte app-naam.
-                    # Regels doorschrijven naar tijdelijk bestand tot
-                    # eerstvolgende app-naam of beschrijving (verplicht),
-                    # of tot EOF.
                     app_found=true
                     description_found=false
                 fi
@@ -502,10 +485,6 @@ $EDITION."
 
 
 process_option_apps() {
-    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, setup zoekt naar apps in
-    # kz-install-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     process_dfltfiles
     # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
@@ -721,8 +700,7 @@ process_command() {
             printf '%s\n' "$TEXT"
         else
             if [[ -t 1 ]]; then
-                # Afbreken in Terminalvenster moet i.v.m. updaten status van
-                # WERK naar GOED of FOUT.
+                # Afbreken in Terminalvenster moet i.v.m. updaten status.
                 #  <------------- tput cols ------------->
                 # '[WERK] [  1/1  ] [ 1] Te lange descr...' <=== op 1 regel
                 #  <-------- 22 -------->
