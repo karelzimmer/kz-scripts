@@ -5,8 +5,8 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=04.00.02
-.\" VERSION_DATE=2021-09-04
+.\" VERSION_NUMBER=04.00.03
+.\" VERSION_DATE=2021-09-08
 .\"
 .\"
 .TH KZ-COMMON.SH 1 "KZ Handleiding" "KZ-COMMON.SH(1)" "KZ Handleiding"
@@ -22,6 +22,22 @@ kz-common.sh \- Algemene module voor shell scripts.
 .\"
 .SH BESCHRIJVING
 Dit bestand geeft toegang tot algemene variabelen en functies.
+.sp
+Algemene variabelen zoals:
+.br
+- afsluitwaarden (SUCCES, WARNING, ERROR)
+.br
+- terminalattributen (GREEN, YELLOW, RED)
+.br
+- voer script uit als root (RUN_AS_SUPERUSER)
+.sp
+Algemene functies zoals:
+.br
+- initiele acties bij starten van een script (init_script)
+.br
+- verwerk opties zoals usage en help (process_common_options)
+.br
+- controleer verplicht gebruik van root (check_user)
 .\"
 .\"
 .SH STOPSTATUS
