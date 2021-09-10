@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.07
-VERSION_DATE=2021-09-09
+VERSION_NUMBER=27.02.08
+VERSION_DATE=2021-09-10
 
 
 ###############################################################################
@@ -22,6 +22,10 @@ readonly ERROR=1
 readonly WARNING=2
 readonly THIS_YEAR=$(date +%Y)
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+# shellcheck disable=SC2034
+readonly DASHES=$(printf '%.0s=' {1..79})
+# shellcheck disable=SC2034
+readonly SPACES=$(printf '%.0s ' {1..79})
 
 # shellcheck disable=SC2034
 readonly OPTIONS_SHORT_COMMON='dghuv'

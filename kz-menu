@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.00.05
-VERSION_DATE=2021-09-07
+VERSION_NUMBER=36.00.06
+VERSION_DATE=2021-09-10
 
 
 ###############################################################################
@@ -30,12 +30,11 @@ Installatiemenu.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly DASHES=$(printf '%.0s=' {1..79})
 readonly MENU1_TITLE=Installatiemenu
 readonly MENU1_HEAD="\
-${DASHES:0:58}
-=                    $MENU1_TITLE                     =
-${DASHES:0:58}"
+${DASHES:0:57}
+=${SPACES:0:20}$MENU1_TITLE${SPACES:0:20}=
+${DASHES:0:57}"
 readonly -a ACTIONS1=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
@@ -49,7 +48,7 @@ readonly -a COMMANDS1=(
         'Checklist hoofdstuk 2'
         'Checklist hoofdstuk 3'
         'Checklist hoofdstuk 4'
-        'Opdrachten apart uitvoeren'
+        'Opdrachten uitvoeren'
         'Menu verlaten'
     )
 readonly MENU1_LINES=${#ACTIONS1[@]}
@@ -57,9 +56,9 @@ readonly MENU1_LINES=${#ACTIONS1[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
 readonly MENU2_HEAD="\
-${DASHES:0:50}
-=                 $MENU2_TITLE                 =
-${DASHES:0:50}"
+${DASHES:0:57}
+=${SPACES:0:20}$MENU2_TITLE${SPACES:0:21}=
+${DASHES:0:57}"
 readonly -a ACTIONS2=(
     [1]='Back-up maken'
         'Apps installeren'
@@ -166,7 +165,7 @@ process_menu1_gui() {
         REPLY=$(
             zenity  --list                                      \
                     --radiolist                                 \
-                    --width         510                         \
+                    --width         480                         \
                     --height        250                         \
                     --title         "$TITLE"                    \
                     --text          'Selecteer een keuze:'      \
@@ -199,7 +198,7 @@ process_menu1_tui() {
         clear -x
         printf '%s\n\n' "$MENU1_HEAD"
         for action1 in "${!ACTIONS1[@]}"; do
-            printf '%2s. %-25.25s - %s\n' "$action1" "${ACTIONS1[$action1]}" \
+            printf '%2s. %-29.29s - %s\n' "$action1" "${ACTIONS1[$action1]}" \
 "${COMMANDS1[$action1]}"
         done
         printf '\n'

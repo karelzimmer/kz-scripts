@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.05
-VERSION_DATE=2021-09-09
+VERSION_NUMBER=45.03.06
+VERSION_DATE=2021-09-10
 
 
 ###############################################################################
@@ -54,7 +54,6 @@ readonly VERSION=$(lsb_release --release --short)
 readonly LIST_DIR="$HOME//KZ Setup List"
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
-readonly DASHES=$(printf '%.0s=' {1..79})
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
 # van:
@@ -730,7 +729,7 @@ execute_command() {
         if [[ $cmd_seq_num -eq 1 ]]; then
             printf "$STATUS_BUSY %s$CARRIAGE_RETURN" "$description_line"
         else
-            printf  "$STATUS_BUSY          %s$CARRIAGE_RETURN"  \
+            printf  "$STATUS_BUSY ${SPACES:0:9}%s$CARRIAGE_RETURN"    \
                     "${description_line:9}"
         fi
     fi

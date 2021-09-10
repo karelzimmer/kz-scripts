@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.11
-VERSION_DATE=2021-09-09
+VERSION_NUMBER=59.01.12
+VERSION_DATE=2021-09-10
 
 
 ###############################################################################
@@ -55,7 +55,6 @@ readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 readonly TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
-readonly DASHES=$(printf '%.0s=' {1..79})
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
 # van:
@@ -846,7 +845,7 @@ execute_command() {
         if [[ $cmd_seq_num -eq 1 ]]; then
             printf "$STATUS_BUSY %s$CARRIAGE_RETURN" "$description_line"
         else
-            printf  "$STATUS_BUSY          %s$CARRIAGE_RETURN"  \
+            printf  "$STATUS_BUSY ${SPACES:0:9}%s$CARRIAGE_RETURN"    \
                     "${description_line:9}"
         fi
     fi
