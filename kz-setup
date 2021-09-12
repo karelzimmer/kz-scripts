@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.06
-VERSION_DATE=2021-09-10
+VERSION_NUMBER=45.03.07
+VERSION_DATE=2021-09-12
 
 
 ###############################################################################
@@ -49,7 +49,9 @@ Argumenten:
   APP           opgegeven apps instellen
   BESTAND       opgegeven instellingsbestanden verwerken"
 
+readonly DASHES=$(printf '%.0s=' {1..79})
 readonly EDITION_DEFAULT=desktop
+readonly SPACES=$(printf '%.0s ' {1..79})
 readonly VERSION=$(lsb_release --release --short)
 readonly LIST_DIR="$HOME//KZ Setup List"
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
@@ -119,7 +121,7 @@ check_input() {
     process_common_options "$@"
     STATUS_ERROR="[${RED}FOUT${NORMAL}]"
     STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
-    STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
+    STATUS_BUSY="[$(tput blink)${BOLD}WERK${NORMAL}]"
 
     while true; do
         case $1 in
@@ -574,7 +576,7 @@ process_file() {
     local write_description_line=true
 
     if $EXECUTE_COMMANDS; then
-        printf '%b' "${CURSOR_INVISABLE}"
+        printf '%b' "$(tput civis)"
     fi
     $skip_line && printf '\n'; skip_line=true
 
@@ -606,7 +608,7 @@ process_file() {
     done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
-        printf '%b' "${CURSOR_VISABLE}"
+        printf '%b' "$(tput cvvis)"
     fi
 }
 
@@ -727,9 +729,9 @@ execute_command() {
 
     if ! $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "$STATUS_BUSY %s$CARRIAGE_RETURN" "$description_line"
+            printf "$STATUS_BUSY %s$(tput cr)" "$description_line"
         else
-            printf  "$STATUS_BUSY ${SPACES:0:9}%s$CARRIAGE_RETURN"    \
+            printf  "$STATUS_BUSY ${SPACES:0:9}%s$(tput cr)"    \
                     "${description_line:9}"
         fi
     fi

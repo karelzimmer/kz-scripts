@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-mkusb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=18.06.07
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=18.06.08
+VERSION_DATE=2021-09-12
 
 
 ###############################################################################
@@ -163,7 +163,6 @@ $DEVICE wordt gebruikt als doel en OVERSCHREVEN!"
                     exit $SUCCESS
                     ;;
                 *)
-                    printf '%b\n' "${UP_ONE_LINE}${ERASE_LINE}"
                     continue
                     ;;
             esac
@@ -220,7 +219,6 @@ process_input() {
                                 break
                                 ;;
                             *)
-                                printf '%b\n' "${UP_ONE_LINE}${ERASE_LINE}"
                                 continue
                                 ;;
                         esac
@@ -235,7 +233,6 @@ process_input() {
                     exit $SUCCESS
                     ;;
                 *)
-                    printf '%b\n' "${UP_ONE_LINE}${ERASE_LINE}"
                     continue
                     ;;
             esac

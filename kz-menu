@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.00.06
-VERSION_DATE=2021-09-10
+VERSION_NUMBER=36.00.07
+VERSION_DATE=2021-09-12
 
 
 ###############################################################################
@@ -30,6 +30,7 @@ Installatiemenu.
 Opties:
 $OPTIONS_HELP_COMMON"
 
+readonly SPACES=$(printf '%.0s ' {1..79})
 readonly MENU1_TITLE=Installatiemenu
 readonly MENU1_HEAD="\
 ${DASHES:0:57}
@@ -207,7 +208,6 @@ process_menu1_tui() {
             read -rp "Voer uit nummer [1-$((MENU1_LINES-1)), $MENU1_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
                     continue
                     ;;
                 *)
@@ -215,7 +215,6 @@ process_menu1_tui() {
                         &> /dev/null; then
                         break
                     else
-                        printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
                         continue
                     fi
                     ;;
@@ -395,7 +394,6 @@ process_menu2_tui() {
             read -rp "Voer uit nummer [1-$((MENU2_LINES-1)), $MENU2_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
                     continue
                     ;;
                 *)
@@ -403,7 +401,6 @@ process_menu2_tui() {
                         2> /dev/null; then
                         break
                     else
-                        printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
                         continue
                     fi
                     ;;
@@ -591,7 +588,6 @@ $prompt"
                     break
                     ;;
                 *)
-                    printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
                     continue
                     ;;
             esac

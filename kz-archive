@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-archive
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.00.08
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=18.00.09
+VERSION_DATE=2021-09-12
 
 
 ###############################################################################
@@ -184,7 +184,6 @@ process_archive() {
                 exit $SUCCESS
                 ;;
             *)
-                printf '%s' "${UP_ONE_LINE}${ERASE_LINE}"
                 continue
                 ;;
         esac
@@ -223,7 +222,6 @@ process_remove() {
                 exit $SUCCESS
                 ;;
             *)
-                printf '%b' "${UP_ONE_LINE}${ERASE_LINE}"
                 continue
                 ;;
         esac

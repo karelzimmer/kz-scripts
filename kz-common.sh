@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.08
-VERSION_DATE=2021-09-10
+VERSION_NUMBER=27.02.09
+VERSION_DATE=2021-09-12
 
 
 ###############################################################################
@@ -22,10 +22,6 @@ readonly ERROR=1
 readonly WARNING=2
 readonly THIS_YEAR=$(date +%Y)
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-# shellcheck disable=SC2034
-readonly DASHES=$(printf '%.0s=' {1..79})
-# shellcheck disable=SC2034
-readonly SPACES=$(printf '%.0s ' {1..79})
 
 # shellcheck disable=SC2034
 readonly OPTIONS_SHORT_COMMON='dghuv'
@@ -67,18 +63,12 @@ declare     USAGE='Gebruik: source kz-common.sh
 declare     USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     CARRIAGE_RETURN=''
 declare     NORMAL=''
 declare     BOLD=''
-declare     BLINK=''
 declare     RED=''
 declare     GREEN=''
 declare     YELLOW=''
 declare     BLUE=''
-declare     CURSOR_INVISABLE=''
-declare     CURSOR_VISABLE=''
-declare     ERASE_LINE=''
-declare     UP_ONE_LINE=''
 
 
 ###############################################################################
@@ -234,23 +224,12 @@ process_common_options() {
 
     if ! $OPTION_GUI && [[ -t 1 ]]; then
         # Tekstuitvoer non-gui naar de terminal.
-        # shellcheck disable=SC2034
-        CARRIAGE_RETURN=$(tput cr)
         NORMAL=$(tput sgr0)
         BOLD=$(tput bold)
-        # shellcheck disable=SC2034
-        BLINK=$(tput blink)
         RED=${BOLD}$(tput setaf 1)
         GREEN=${BOLD}$(tput setaf 2)
         YELLOW=${BOLD}$(tput setaf 3)
         BLUE=${BOLD}$(tput setaf 4)
-        # shellcheck disable=SC2034
-        CURSOR_INVISABLE=$(tput civis)
-        CURSOR_VISABLE=$(tput cvvis)
-        # shellcheck disable=SC2034
-        ERASE_LINE="$(tput el)\c"
-        # shellcheck disable=SC2034
-        UP_ONE_LINE=$(tput cuu1)
     fi
 
     if $OPTION_DEBUG; then
@@ -454,7 +433,7 @@ dan een Terminalvenster, en voer uit:
             fi
             ;;
         kz-install)
-            printf '%s' "${NORMAL}${CURSOR_VISABLE}"
+            printf '%s' "${NORMAL}$(tput cvvis)"
             rm --force /tmp/"$PROGRAM_NAME"-??????????.*
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
@@ -466,7 +445,7 @@ dan een Terminalvenster, en voer uit:
             fi
             ;;
         kz-setup)
-            printf '%s' "${NORMAL}${CURSOR_VISABLE}"
+            printf '%s' "${NORMAL}$(tput cvvis)"
             rm --force /tmp/"$PROGRAM_NAME"-??????????.*
             ;;
         *)
