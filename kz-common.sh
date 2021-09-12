@@ -18,7 +18,6 @@ VERSION_DATE=2021-09-12
 
 readonly SUCCESS=0
 readonly ERROR=1
-# shellcheck disable=SC2034
 readonly WARNING=2
 readonly THIS_YEAR=$(date +%Y)
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
@@ -122,7 +121,7 @@ check_user() {
     else
         if [[ $UID -eq 0 ]]; then
             info "$DISPLAY_NAME: niet uitvoeren met 'sudo' of als root"
-            exit $ERROR
+            exit $WARNING
         fi
     fi
 }
