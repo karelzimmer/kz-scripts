@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.12
-VERSION_DATE=2021-09-10
+VERSION_NUMBER=59.01.13
+VERSION_DATE=2021-09-11
 
 
 ###############################################################################
@@ -54,7 +54,6 @@ readonly EDITION_DEFAULT=desktop
 readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
-readonly TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
 # van:
@@ -341,16 +340,16 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
     local       plural='geïnstalleerde deb-bestanden'
 
     printf '%s\n' "$text1..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" > "$LIST_FILE"
 
     apt-show-versions --initialize |& $LOGCMD
     if !    apt-show-versions                       \
             --brief                                 |
             grep    --word-regexp                   \
-                    --regexp='No available version' >> "$TEMP_LIST"; then
+                    --regexp='No available version' >> "$LIST_FILE"; then
         true
     fi
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$(wc --lines < "$LIST_FILE")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd deb-bestand'
@@ -358,9 +357,7 @@ Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
 
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" > "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$LIST_FILE"
 }
 
 
@@ -372,7 +369,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     local       plural='pakketbronnen'
 
     printf '%s\n' "$text2..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" >> "$LIST_FILE"
     # shellcheck disable=SC2062,SC2022
     if !    grep    --recursive             \
                     --no-filename           \
@@ -380,10 +377,10 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
                     /etc/apt/sources.list*  |
             grep    --invert-match          \
                     --regexp='ubuntu.com'   |
-            sort    --unique                >> "$TEMP_LIST"; then
+            sort    --unique                >> "$LIST_FILE"; then
         true
     fi
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$(wc --lines < "$LIST_FILE")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='pakketbron'
@@ -391,9 +388,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
 
     footer="Dit overzicht bevat $number_of_lines door de gebruiker \
 toegevoegde $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$LIST_FILE"
 }
 
 
@@ -405,10 +400,10 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
     local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text3..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" >> "$LIST_FILE"
 
-    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_LIST"
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$LIST_FILE"
+    number_of_lines=$(wc --lines < "$LIST_FILE")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd pakket'
@@ -417,9 +412,7 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
 --regexp='Description:'"
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$LIST_FILE"
 }
 
 
@@ -431,22 +424,20 @@ create_file_snaps() {                       #4
     local       plural='snaps'
 
     printf '%s\n' "$text4..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" >> "$LIST_FILE"
 
-    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
+    if ! snap list 2> /dev/null >> "$LIST_FILE"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
-        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
+        printf '%s\n' "$TEXT" >> "$LIST_FILE"
     fi
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$(wc --lines < "$LIST_FILE")
     number_of_lines=$((number_of_lines - 3))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='snap'
     fi
 
     footer="Dit overzicht bevat $number_of_lines $plural."
-    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer" >> "$LIST_FILE"
 }
 
 
@@ -455,12 +446,11 @@ save_user_photo_file() {                    #5
     local list_file=''
 
     # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
-    # /var/lib/AccountsService/users/ is niet toegankelijk voor gebruikers.
+    # /var/lib/AccountsService/users/ is alleen toegankelijk voor root.
     printf '%s\n' "$text5..."
 
     list_dir=/home/"${SUDO_USER:-$USER}/KZ Setup List"
     list_file=kz-setup-gebruikersfoto.txt
-    rmdir --forve --recursive "$list_dir"
     mkdir --parents "$list_dir"
     if [[ -e /var/lib/AccountsService/users/"${SUDO_USER:-$USER}" ]]; then
         sudo grep   --regexp='Icon='                                        \
