@@ -418,6 +418,10 @@ process_argument_app_file() {
         case $record in
             '#1 '*)
                 if [[ $record = '#1 '$app ]]; then
+                    # Gezochte app-naam.
+                    # Regels doorschrijven naar tijdelijk bestand tot
+                    # eerstvolgende app-naam of beschrijving (verplicht),
+                    # of tot EOF.
                     app_found=true
                     description_found=false
                 fi

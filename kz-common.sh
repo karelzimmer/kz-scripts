@@ -115,8 +115,7 @@ check_user() {
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
-            # shellcheck disable=SC2086
-            exec sudo $0 "${CMDLINE_ARGS[@]}"
+            exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi
     else
         if [[ $UID -eq 0 ]]; then

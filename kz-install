@@ -372,7 +372,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
 
     printf '%s\n' "$text2..."
     printf '%b\n' "$header\n$DASHES" >> "$LIST_FILE"
-    # shellcheck disable=SC2062,SC2022
+    # shellcheck disable=SC2022,SC2062
     if !    grep    --recursive             \
                     --no-filename           \
                     --regexp='^deb '        \
@@ -522,6 +522,10 @@ process_argument_app_file() {
                     if $app_found; then
                         info "Dubbele app-naam $app."
                     else
+                        # Gezochte app-naam.
+                        # Regels doorschrijven naar tijdelijk bestand tot
+                        # eerstvolgende app-naam of beschrijving (verplicht),
+                        # of tot EOF.
                         app_found=true
                     fi
                 elif $app_found; then
