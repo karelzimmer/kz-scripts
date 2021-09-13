@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.07
-VERSION_DATE=2021-09-12
+VERSION_NUMBER=45.03.08
+VERSION_DATE=2021-09-13
 
 
 ###############################################################################
@@ -491,7 +491,6 @@ $EDITION."
 
 process_option_apps() {
     process_dfltfiles
-    # shellcheck disable=SC2062
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
 NUMMER APP

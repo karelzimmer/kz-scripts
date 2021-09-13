@@ -337,7 +337,8 @@ Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 
 create_file_installed_without_repo() {      #1
     local       header="1. Dit zijn gedownloade deb-bestanden geïnstalleerd \
-via Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
+via Software, of met een opdracht zoals 'sudo apt-get --install \
+<bestand.deb>':"
     local       footer=''
     local   -i  number_of_lines=0
     local       plural='geïnstalleerde deb-bestanden'
@@ -447,7 +448,7 @@ create_file_snaps() {                       #4
 
 save_user_photo_file() {                    #"5"
     local list_dir=''
-    local temp_list=''
+    local list_file=''
     local search=''
 
     # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
@@ -484,13 +485,12 @@ process_argument_app() {
     cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for app in "${APP_ARGUMENT[@]}"; do
-        # shellcheck disable=SC2062
         file=$(
-            if ! grep       --files-with-matches        \
-                            --line-regexp               \
-                            --regexp="#1 $app"          \
-                            "$PROGRAM_PATH/$search"*.sh \
-                            2> /dev/null                |
+            if ! grep       --files-with-matches                \
+                            --line-regexp                       \
+                            --regexp="#1 $app"                  \
+                            "$(ls "$PROGRAM_PATH/$search"*.sh)" \
+                            2> /dev/null                        |
                     head    --lines=1; then
                 printf '\n'
             fi

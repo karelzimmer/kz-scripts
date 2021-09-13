@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.00.07
-VERSION_DATE=2021-09-12
+VERSION_NUMBER=36.00.08
+VERSION_DATE=2021-09-13
 
 
 ###############################################################################
@@ -602,27 +602,26 @@ execute_command() {
     local       exec=''
 
     exec=${command/kz /kz-}
+    cmd=$(echo "$exec" | cut -d' ' -f1)
+    arg=$(echo "$exec" | cut -d' ' -f2-)
     case $exec in
         kz-backup|kz-install|kz-install*--list|kz-nas|kz-restore)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
-                # shellcheck disable=SC2086
-                pkexec "$PROGRAM_PATH"/$exec --gui -- || cmd_rc=$?
+                pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
                 log_rc cmd_rc?
             else
-                # shellcheck disable=SC2086
-                sudo "$PROGRAM_PATH"/$exec -- || cmd_rc=$?
+                sudo "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
                 log_rc $cmd_rc
             fi
             ;;
         kz-setup|*--info|kz-setup*--list|*--remove|*--reset)
             # Zogenaamde non-sudo-scripts.
-            # shellcheck disable=SC2086
             if $OPTION_GUI; then
-                "$PROGRAM_PATH"/$exec --gui -- || cmd_rc=$?
+                "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
                 log_rc $cmd_rc
             else
-                "$PROGRAM_PATH"/$exec -- || cmd_rc=$?
+                "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
                 log_rc $cmd_rc
             fi
             ;;

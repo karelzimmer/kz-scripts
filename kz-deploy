@@ -224,7 +224,7 @@ check_names() {
                                 "$SCRIPTS_DIR"  || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
-Herstel alle meldingen hierboven en start daarna weer $DISPLAY_NAME."
+Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
         exit $check_rc
     fi
 }
@@ -238,7 +238,7 @@ check_scripts() {
     "$SCRIPTS_DIR"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning "
-Herstel alle meldingen hierboven en start daarna weer $DISPLAY_NAME."
+Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
         exit $check_rc
     fi
 }
