@@ -56,6 +56,7 @@ readonly VERSION=$(lsb_release --release --short)
 readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
+readonly TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
 # van:
@@ -309,7 +310,7 @@ geïnstalleerd"
         printf '%s\n' "#$text4"
         create_file_snaps                   #4
         printf '%s\n' "#$text5"
-        save_user_photo_file                #5
+        save_user_photo_file                #"5"
         ) |&
         zenity  --progress              \
                 --pulsate               \
@@ -324,7 +325,7 @@ geïnstalleerd"
         create_file_added_repos             #2
         create_file_installed_by_user       #3
         create_file_snaps                   #4
-        save_user_photo_file                #5
+        save_user_photo_file                #"5"
     fi
 
     info "
@@ -335,117 +336,118 @@ Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 
 
 create_file_installed_without_repo() {      #1
-    local       header="Dit zijn gedownloade deb-bestanden geïnstalleerd via \
-Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
+    local       header="1. Dit zijn gedownloade deb-bestanden geïnstalleerd \
+via Software, of met een opdracht zoals 'sudo apt-get --install <bestand.deb>':"
     local       footer=''
     local   -i  number_of_lines=0
     local       plural='geïnstalleerde deb-bestanden'
 
     printf '%s\n' "$text1..."
-    printf '%b\n' "$header\n$DASHES" > "$LIST_FILE"
-
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
     apt-show-versions --initialize |& $LOGCMD
     if !    apt-show-versions                       \
             --brief                                 |
             grep    --word-regexp                   \
-                    --regexp='No available version' >> "$LIST_FILE"; then
+                    --regexp='No available version' >> "$TEMP_LIST"; then
         true
     fi
-    number_of_lines=$(wc --lines < "$LIST_FILE")
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd deb-bestand'
     fi
-
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
-    printf '%b\n' "$DASHES\n$footer\n" >> "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+    cat "$TEMP_LIST" > "$LIST_FILE"
 }
 
 
 create_file_added_repos() {                 #2
-    local       header="Deze pakketbronnen zijn meestal toegevoegd met de \
+    local       header="2. Deze pakketbronnen zijn meestal toegevoegd met de \
 opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     local       footer=''
     local   -i  number_of_lines=0
     local       plural='pakketbronnen'
+    local       search=''
 
     printf '%s\n' "$text2..."
-    printf '%b\n' "$header\n$DASHES" >> "$LIST_FILE"
-    # shellcheck disable=SC2022,SC2062
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    search=/etc/apt/sources.list
+    cd  $search.d || exit $ERROR
     if !    grep    --recursive             \
                     --no-filename           \
                     --regexp='^deb '        \
-                    /etc/apt/sources.list*  |
+                    --recursive             \
+                    /etc/apt/sources.list   \
+                    /etc/apt/sources.list.d |
             grep    --invert-match          \
                     --regexp='ubuntu.com'   |
-            sort    --unique                >> "$LIST_FILE"; then
+            sort    --unique                >> "$TEMP_LIST"; then
         true
     fi
-    number_of_lines=$(wc --lines < "$LIST_FILE")
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='pakketbron'
     fi
-
     footer="Dit overzicht bevat $number_of_lines door de gebruiker \
 toegevoegde $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+    cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
 
 create_file_installed_by_user() {           #3
-    local       header="Deze pakketten zijn meestal geïnstalleerd met \
+    local       header="3. Deze pakketten zijn meestal geïnstalleerd met \
 Software of met de opdracht 'sudo apt install <pakketnaam>':"
     local       footer=''
     local   -i  number_of_lines=0
     local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text3..."
-    printf '%b\n' "$header\n$DASHES" >> "$LIST_FILE"
-
-    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$LIST_FILE"
-    number_of_lines=$(wc --lines < "$LIST_FILE")
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_LIST"
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd pakket'
     fi
-
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
 --regexp='Description:'"
-    printf '%b\n' "$DASHES\n$footer\n" >> "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+    cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
 
 create_file_snaps() {                       #4
-    local       header="Deze snaps zijn geïnstalleerd met '[sudo] install \
+    local       header="4. Deze snaps zijn geïnstalleerd met '[sudo] install \
 <snap>' of met Software:"
     local       footer=''
     local   -i  number_of_lines=0
     local       plural='snaps'
 
     printf '%s\n' "$text4..."
-    printf '%b\n' "$header\n$DASHES" >> "$LIST_FILE"
-
-    if ! snap list 2> /dev/null >> "$LIST_FILE"; then
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
-        printf '%s\n' "$TEXT" >> "$LIST_FILE"
+        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
     fi
-    number_of_lines=$(wc --lines < "$LIST_FILE")
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 3))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='snap'
     fi
-
     footer="Dit overzicht bevat $number_of_lines $plural."
-    printf '%b\n' "$DASHES\n$footer" >> "$LIST_FILE"
+    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
+    cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
 
-save_user_photo_file() {                    #5
+save_user_photo_file() {                    #"5"
     local list_dir=''
-    local list_file=''
+    local temp_list=''
     local search=''
 
     # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
