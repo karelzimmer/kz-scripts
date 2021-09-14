@@ -486,7 +486,7 @@ save_user_photo_file() {                    #"5"
             sudo grep   --regexp='Icon='            \
                         "$search/$user"             |
             tee         "$list_dir/$list_file"      1> /dev/null
-            printf      '\n%s' "Staat hierboven:
+            printf      '\n%s\n' "Staat hierboven:
 Icon=/var/lib/AccountsService/icons/$user
 
 Gebruik dan bestand 2. kz-setup-gebruikersfoto als \
