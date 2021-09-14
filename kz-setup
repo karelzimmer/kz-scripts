@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.09
+VERSION_NUMBER=45.03.10
 VERSION_DATE=2021-09-14
 
 
@@ -312,13 +312,13 @@ process_option_list() {
     if $OPTION_GUI; then
         (
         printf '%s\n' "#$text1"
-        save_user_photo         #1
+        save_user_photo         #2
         printf '%s\n' "#$text2"
-        save_desktop_background #2
+        save_desktop_background #3
         printf '%s\n' "#$text3"
-        save_favorite_apps      #3
+        save_favorite_apps      #4
         printf '%s\n' "#$text4"
-        save_command_history    #4
+        save_command_history    #5
         ) |&
         zenity  --progress              \
                 --pulsate               \
@@ -343,36 +343,36 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 }
 
 
-save_user_photo() {             #1
+save_user_photo() {             #2
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER"      \
-            "$LIST_DIR/$PROGRAM_NAME"-gebruikersfoto    |& $LOGCMD; then
-        rm --force "$LIST_DIR/$PROGRAM_NAME"-gebruikersfoto
-        touch "$LIST_DIR/$PROGRAM_NAME"-gebruikersfoto
+            "$LIST_DIR/2. $PROGRAM_NAME"-gebruikersfoto |& $LOGCMD; then
+        rm --force "2. $LIST_DIR/$PROGRAM_NAME"-gebruikersfoto
+        touch "$LIST_DIR/2. $PROGRAM_NAME"-gebruikersfoto
     fi
 }
 
 
-save_desktop_background() {     #2
+save_desktop_background() {     #3
     printf '%s\n' "$text2..."
     gsettings get   org.gnome.desktop.background picture-uri            \
-                    > "$LIST_DIR/$PROGRAM_NAME"-bureaubladachtergrond   \
+                    > "$LIST_DIR/3. $PROGRAM_NAME"-bureaubladachtergrond   \
                     |& $LOGCMD
 }
 
 
-save_favorite_apps() {          #3
+save_favorite_apps() {          #4
     printf '%s\n' "$text3..."
     gsettings get   org.gnome.shell favorite-apps           \
-                    > "$LIST_DIR/$PROGRAM_NAME"-favorieten  |& $LOGCMD
+                    > "$LIST_DIR/4. $PROGRAM_NAME"-favorieten  |& $LOGCMD
 }
 
 
-save_command_history() {        #4
+save_command_history() {        #5
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
-    history > "$LIST_DIR/$PROGRAM_NAME"-opdrachtgeschiedenis |& $LOGCMD
+    history > "$LIST_DIR/5. $PROGRAM_NAME"-opdrachtgeschiedenis |& $LOGCMD
 }
 
 

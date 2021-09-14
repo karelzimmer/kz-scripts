@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.16
+VERSION_NUMBER=59.01.17
 VERSION_DATE=2021-09-14
 
 
@@ -475,12 +475,13 @@ save_user_photo_file() {                    #"5"
     # $search is niet toegankelijk voor gewone gebruikers.
     printf '%s\n' "$text5..."
 
-    list_file=kz-setup-gebruikersfoto.txt
+    list_file='1. kz-setup-gebruikersfoto.txt'
     search=/var/lib/AccountsService/users
     cd "$search" || exit $ERROR
     for user in *; do
         if [[ -e /home/"$user" ]]; then
             list_dir=/home/"$user/KZ Setup List"
+            rm --force --recursive "$list_dir"   
             mkdir --parents "$list_dir"
             sudo grep   --regexp='Icon='            \
                         "$search/$user"             |
