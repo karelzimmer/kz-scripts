@@ -53,7 +53,7 @@ readonly DASHES=$(printf '%.0s=' {1..79})
 readonly EDITION_DEFAULT=desktop
 readonly SPACES=$(printf '%.0s ' {1..79})
 readonly VERSION=$(lsb_release --release --short)
-readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}_applist
+readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}-applist
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 readonly TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
