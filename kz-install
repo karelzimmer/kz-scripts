@@ -353,6 +353,7 @@ via Software, of met een opdracht zoals 'sudo apt-get --install \
 
     printf '%s\n' "$text1..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     apt-show-versions --initialize |& $LOGCMD
     if !    apt-show-versions                       \
             --brief                                 |
@@ -360,6 +361,7 @@ via Software, of met een opdracht zoals 'sudo apt-get --install \
                     --regexp='No available version' >> "$TEMP_LIST"; then
         true
     fi
+
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
@@ -368,6 +370,7 @@ via Software, of met een opdracht zoals 'sudo apt-get --install \
     footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
 Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+
     cat "$TEMP_LIST" > "$LIST_FILE"
 }
 
@@ -382,6 +385,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
 
     printf '%s\n' "$text2..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     search=/etc/apt/sources.list
     cd  $search.d || exit $ERROR
     if !    grep    --recursive             \
@@ -395,6 +399,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
             sort    --unique                >> "$TEMP_LIST"; then
         true
     fi
+
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
@@ -403,6 +408,7 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     footer="Dit overzicht bevat $number_of_lines door de gebruiker \
 toegevoegde $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+
     cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
@@ -416,7 +422,9 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
 
     printf '%s\n' "$text3..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_LIST"
+
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 2))
     if [[ $number_of_lines -eq 1 ]]; then
@@ -426,6 +434,7 @@ Software of met de opdracht 'sudo apt install <pakketnaam>':"
 Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
 --regexp='Description:'"
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+
     cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
@@ -439,10 +448,12 @@ create_file_snaps() {                       #4
 
     printf '%s\n' "$text4..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
     if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
         printf '%s\n' "$TEXT" >> "$TEMP_LIST"
     fi
+
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 3))
     if [[ $number_of_lines -eq 1 ]]; then
@@ -450,6 +461,7 @@ create_file_snaps() {                       #4
     fi
     footer="Dit overzicht bevat $number_of_lines $plural."
     printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
+
     cat "$TEMP_LIST" >> "$LIST_FILE"
 }
 
