@@ -489,8 +489,8 @@ save_user_photo_file() {                    #"5"
             printf      '\n%s' "Staat hierboven:
 Icon=/var/lib/AccountsService/icons/$user
 
-Gebruik dan bestand kz-setup-gebruikersfoto als gebruikersfoto."    \
-                        >> "$list_dir/$list_file"
+Gebruik dan bestand 2. kz-setup-gebruikersfoto als \
+gebruikersfoto."                                    >> "$list_dir/$list_file"
             sudo chown --recursive "$user:$user" "$list_dir"
         fi
     done
