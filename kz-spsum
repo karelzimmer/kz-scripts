@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-spsum
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=09.00.07
-VERSION_DATE=2021-09-13
+VERSION_NUMBER=09.00.08
+VERSION_DATE=2021-09-14
 
 
 ###############################################################################
@@ -114,14 +114,17 @@ process_input() {
 
 
 create_checksum_file() {
-    local -i grep_rc=0
+    local   -a  files=()
+    local   -i  grep_rc=0
 
     if [[ -e $ISO_FILE.$HASHPROG ]]; then
         info "Beeldbestand $ISO_FILE heeft al controlebestand \
 $ISO_FILE.$HASHPROG.\n"
         return $SUCCESS
     else
-        # shellcheck disable=SC2062,SC2063
+        for file in *; do
+            files+=("$file")
+        done
         grep    --word-regexp           \
                 --regexp=" $ISO_FILE"   \
                 --regexp="*$ISO_FILE"   \
@@ -129,7 +132,7 @@ $ISO_FILE.$HASHPROG.\n"
                 --exclude=*512*         \
                 --exclude-dir=*         \
                 --no-filename           \
-                -- *                    \
+                -- "${files[@]}"        \
                 > "$ISO_FILE.$HASHPROG" 2> >($LOGCMD) || grep_rc=$?
         if [[ $grep_rc -ne $SUCCESS ]]; then
             error "Geen controlesom gevonden voor $ISO_FILE.\n"

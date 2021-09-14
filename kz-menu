@@ -602,8 +602,8 @@ execute_command() {
     local       exec=''
 
     exec=${command/kz /kz-}
-    cmd=$(echo "$exec" | cut -d' ' -f1)
-    arg=$(echo "$exec" | cut -d' ' -f2-)
+    cmd=$(printf '%s' "$exec" | cut -d' ' -f1)
+    arg=$(printf '%s' "$exec" | cut -d' ' -f2-)
     case $exec in
         kz-backup|kz-install|kz-install*--list|kz-nas|kz-restore)
             # Zogenaamde sudo-scripts.

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.15
-VERSION_DATE=2021-09-13
+VERSION_NUMBER=59.01.16
+VERSION_DATE=2021-09-14
 
 
 ###############################################################################
@@ -79,8 +79,6 @@ declare -a  FILE_TO_PROCESS=()
 declare     ARGUMENT_APP=false
 declare     ARGUMENT_FILE=false
 declare     COMMANDS_FOUND=false
-declare     DFLTFILE_1=''
-declare     DFLTFILE_2=''
 declare     EDITION=$EDITION_DEFAULT
 declare     EDITION_ARGUMENT=''
 declare     EXECUTE_COMMANDS=true
@@ -96,6 +94,11 @@ declare     OPTION_REMOVE=false
 declare     OPTION_SIMULATE=false
 declare     REMOVE_FOUND=false
 
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+declare     CARRIAGE_RETURN=''
+declare     BLINK=''
+declare     CURSOR_INVISABLE=''
+declare     CURSOR_VISABLE=''
 
 
 ###############################################################################
@@ -123,7 +126,6 @@ check_input() {
     process_common_options "$@"
     STATUS_ERROR="[${RED}FOUT${NORMAL}]"
     STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
-    STATUS_BUSY="[$(tput blink)${BOLD}WERK${NORMAL}]"
 
     while true; do
         case $1 in
@@ -182,9 +184,15 @@ check_input() {
                 ;;
         esac
     done
-    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
-$HOSTNAME.sh
+
+    if ! $OPTION_GUI && [[ -t 1 ]]; then
+        # Tekstuitvoer non-gui naar de terminal.
+        CARRIAGE_RETURN=$(tput cr)
+        BLINK=$(tput blink)
+        CURSOR_INVISABLE=$(tput civis)
+        CURSOR_VISABLE=$(tput cvvis)
+    fi
+    STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -477,20 +485,24 @@ Gebruik dan bestand kz-setup-gebruikersfoto als gebruikersfoto."    \
 
 
 process_argument_app() {
-    local app=''
-    local file=''
-    local search=''
-    local cmds_file=''
+    local       app=''
+    local       file=''
+    local   -a  files=()
+    local       search=''
+    local       cmds_file=''
 
     cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
     search=$PROGRAM_NAME-$DISTRO-$VERSION
+    for file in "$PROGRAM_PATH/$search"*.sh; do
+        files+=("$file")
+    done
     for app in "${APP_ARGUMENT[@]}"; do
         file=$(
-            if ! grep       --files-with-matches                \
-                            --line-regexp                       \
-                            --regexp="#1 $app"                  \
-                            "$(ls "$PROGRAM_PATH/$search"*.sh)" \
-                            2> /dev/null                        |
+            if ! grep       --files-with-matches    \
+                            --line-regexp           \
+                            --regexp="#1 $app"      \
+                            "${files[@]}"           \
+                            2> /dev/null            |
                     head    --lines=1; then
                 printf '\n'
             fi
@@ -579,15 +591,22 @@ installatiebestanden."
 
 
 process_dfltfiles() {
-    if [[ -e $DFLTFILE_1 ]]; then
-        FILE_TO_PROCESS[$file_num]=$DFLTFILE_1
+    local dfltfile_1=''
+    local dfltfile_2=''
+
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+$HOSTNAME.sh
+
+    if [[ -e $dfltfile_1 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
         file_notfound=true
     fi
     # Niet verplicht aanwezig.
-    if [[ -e $DFLTFILE_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$DFLTFILE_2
+    if [[ -e $dfltfile_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     fi
     if $file_notfound; then
@@ -599,22 +618,25 @@ $EDITION."
 
 
 process_option_apps() {
-    local search=''
+    local   -a  files=()
+    local       search=''
 
     search=$PROGRAM_NAME-$DISTRO-$VERSION
-    # shellcheck disable=SC2062
+    for file in "$PROGRAM_PATH/$search"*.sh; do
+        files+=("$file")
+    done
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
 NUMMER APP
 $(
-    if !    grep    --no-messages               \
-                    --regexp='^#1 '             \
-                    "$PROGRAM_PATH/$search"*.sh |
-            awk     '{print $2}'                |
-            sort    --unique                    |
-            nl      --number-width=6            \
-                    --number-format=rn          \
-                    --number-separator=' '      \
+    if !    grep    --no-messages           \
+                    --regexp='^#1 '         \
+                    "${files[@]}"           |
+            awk     '{print $2}'            |
+            sort    --unique                |
+            nl      --number-width=6        \
+                    --number-format=rn      \
+                    --number-separator=' '  \
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
@@ -690,7 +712,7 @@ process_file() {
     local       write_description_line=true
 
     if $EXECUTE_COMMANDS; then
-        printf '%b' "$(tput civis)"
+        printf '%b' "${CURSOR_INVISABLE}"
     fi
     $skip_line && printf '\n'; skip_line=true
 
@@ -722,7 +744,7 @@ process_file() {
     done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
-        printf '%b' "$(tput cvvis)"
+        printf '%b' "${CURSOR_VISABLE}"
     fi
 }
 
@@ -844,9 +866,9 @@ execute_command() {
     check_dpkg
     if ! $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "$STATUS_BUSY %s$(tput cr)" "$description_line"
+            printf "$STATUS_BUSY %s${CARRIAGE_RETURN}" "$description_line"
         else
-            printf  "$STATUS_BUSY ${SPACES:0:9}%s$(tput cr)"    \
+            printf  "$STATUS_BUSY ${SPACES:0:9}%s${CARRIAGE_RETURN}"    \
                     "${description_line:9}"
         fi
     fi

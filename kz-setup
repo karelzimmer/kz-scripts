@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.08
-VERSION_DATE=2021-09-13
+VERSION_NUMBER=45.03.09
+VERSION_DATE=2021-09-14
 
 
 ###############################################################################
@@ -78,8 +78,6 @@ declare -a  FILE_TO_PROCESS=()
 declare     ARGUMENT_APP=false
 declare     ARGUMENT_FILE=false
 declare     COMMANDS_FOUND=false
-declare     DFLTFILE_1=''
-declare     DFLTFILE_2=''
 declare     EDITION=$EDITION_DEFAULT
 declare     EDITION_ARGUMENT=''
 declare     EXECUTE_COMMANDS=true
@@ -94,6 +92,12 @@ declare     OPTION_LIST=false
 declare     OPTION_RESET=false
 declare     OPTION_SIMULATE=false
 declare     RESET_FOUND=false
+
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+declare     CARRIAGE_RETURN=''
+declare     BLINK=''
+declare     CURSOR_INVISABLE=''
+declare     CURSOR_VISABLE=''
 
 
 ###############################################################################
@@ -121,7 +125,6 @@ check_input() {
     process_common_options "$@"
     STATUS_ERROR="[${RED}FOUT${NORMAL}]"
     STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
-    STATUS_BUSY="[$(tput blink)${BOLD}WERK${NORMAL}]"
 
     while true; do
         case $1 in
@@ -180,9 +183,15 @@ check_input() {
                 ;;
         esac
     done
-    DFLTFILE_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    DFLTFILE_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
-$HOSTNAME.sh
+
+    if ! $OPTION_GUI && [[ -t 1 ]]; then
+        # Tekstuitvoer non-gui naar de terminal.
+        CARRIAGE_RETURN=$(tput cr)
+        BLINK=$(tput blink)
+        CURSOR_INVISABLE=$(tput civis)
+        CURSOR_VISABLE=$(tput cvvis)
+    fi
+    STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -208,7 +217,12 @@ process_input() {
     local   -i  app_tot_num=0
     local   -i  file_num=0
     local       skip_line=false
+    local       dfltfile_1=''
+    local       dfltfile_2=''
 
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+$HOSTNAME.sh
     if $OPTION_LIST; then
         check_user
         process_option_list
@@ -368,16 +382,16 @@ process_argument_app() {
     local       cmds_file=''
     local   -a  file_to_process=()
 
-    if [[ -e $DFLTFILE_1 ]]; then
-        file_to_process[0]=$DFLTFILE_1
+    if [[ -e $dfltfile_1 ]]; then
+        file_to_process[0]=$dfltfile_1
     else
         info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
 $EDITION."
         exit $WARNING
     fi
     # Niet verplicht aanwezig.
-    if [[ -e $DFLTFILE_2 ]]; then
-        file_to_process[1]=$DFLTFILE_2
+    if [[ -e $dfltfile_2 ]]; then
+        file_to_process[1]=$dfltfile_2
     fi
 
     cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
@@ -470,15 +484,15 @@ instellingsbestanden."
 
 
 process_dfltfiles() {
-    if [[ -e $DFLTFILE_1 ]]; then
-        FILE_TO_PROCESS[$file_num]=$DFLTFILE_1
+    if [[ -e $dfltfile_1 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
         file_notfound=true
     fi
     # Niet verplicht aanwezig.
-    if [[ -e $DFLTFILE_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$DFLTFILE_2
+    if [[ -e $dfltfile_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     fi
     if $file_notfound; then
@@ -579,7 +593,7 @@ process_file() {
     local write_description_line=true
 
     if $EXECUTE_COMMANDS; then
-        printf '%b' "$(tput civis)"
+        printf '%b' "${CURSOR_INVISABLE}"
     fi
     $skip_line && printf '\n'; skip_line=true
 
@@ -611,7 +625,7 @@ process_file() {
     done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
-        printf '%b' "$(tput cvvis)"
+        printf '%b' "${CURSOR_VISABLE}"
     fi
 }
 
@@ -732,9 +746,9 @@ execute_command() {
 
     if ! $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "$STATUS_BUSY %s$(tput cr)" "$description_line"
+            printf "$STATUS_BUSY %s${CARRIAGE_RETURN}" "$description_line"
         else
-            printf  "$STATUS_BUSY ${SPACES:0:9}%s$(tput cr)"    \
+            printf  "$STATUS_BUSY ${SPACES:0:9}%s${CARRIAGE_RETURN}"    \
                     "${description_line:9}"
         fi
     fi
