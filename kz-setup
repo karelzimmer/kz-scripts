@@ -301,23 +301,35 @@ $HOSTNAME.sh
 process_option_list() {
     local text0='Opdrachten worden verwerkt'
 #   local text1='[1/4]  Gebruikersfotobestand vastleggen'
-    local text1='[1/4]  Gebruikersfoto vastleggen'
-    local text2='[2/4]  Bureaubladachtergrond vastleggen'
-    local text3='[3/4]  Favorieten vastleggen'
-    local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
+    local file1="$LIST_DIR/1. $PROGRAM_NAME-gebruikersfoto.txt"
+    local text2='[1/4]  Gebruikersfoto vastleggen'
+    local file2="$LIST_DIR/2. $PROGRAM_NAME-gebruikersfoto"
+    local text3='[2/4]  Bureaubladachtergrond vastleggen'
+    local file3="$LIST_DIR/3. $PROGRAM_NAME-bureaubladachtergrond"
+    local text4='[3/4]  Favorieten vastleggen'
+    local file4="$LIST_DIR/4. $PROGRAM_NAME-favorieten"
+    local text5='[4/4]  Opdrachtgeschiedenis vastleggen'
+    local file5="$LIST_DIR/5. $PROGRAM_NAME-opdrachtgeschiedenis"
 
-    mkdir --parents "$LIST_DIR"
+    mkdir --parents "$LIST_DIR" #1
+    file=
+    if ! [[ -e "$file1" ]]; then
+        touch "$file1"
+        printf '\n%s\n' "Staat hierboven niets, dan is er geen foto ingesteld.
+
+Negeer dan bestand '2. kz-setup-gebruikersfoto'."   >> "$file1"
+    fi
 
     TITLE='Instellijst maken'
     if $OPTION_GUI; then
         (
-        printf '%s\n' "#$text1"
-        save_user_photo         #2
         printf '%s\n' "#$text2"
-        save_desktop_background #3
+        save_user_photo         #2
         printf '%s\n' "#$text3"
-        save_favorite_apps      #4
+        save_desktop_background #3
         printf '%s\n' "#$text4"
+        save_favorite_apps      #4
+        printf '%s\n' "#$text5"
         save_command_history    #5
         ) |&
         zenity  --progress              \
@@ -344,35 +356,33 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 
 
 save_user_photo() {             #2
-    printf '%s\n' "$text1..."
-    if ! cp /var/lib/AccountsService/icons/"$USER"      \
-            "$LIST_DIR/2. $PROGRAM_NAME"-gebruikersfoto |& $LOGCMD; then
-        rm --force "2. $LIST_DIR/$PROGRAM_NAME"-gebruikersfoto
-        touch "$LIST_DIR/2. $PROGRAM_NAME"-gebruikersfoto
+    printf '%s\n' "$text2..."
+    if ! cp /var/lib/AccountsService/icons/"$USER" "$file2" |& $LOGCMD; then
+        rm --force "$file2"
+        touch "$file2"
     fi
 }
 
 
 save_desktop_background() {     #3
-    printf '%s\n' "$text2..."
-    gsettings get   org.gnome.desktop.background picture-uri            \
-                    > "$LIST_DIR/3. $PROGRAM_NAME"-bureaubladachtergrond   \
-                    |& $LOGCMD
+    printf '%s\n' "$text3..."
+    gsettings get   org.gnome.desktop.background    \
+                    picture-uri                     > "$file3" |& $LOGCMD
 }
 
 
 save_favorite_apps() {          #4
-    printf '%s\n' "$text3..."
-    gsettings get   org.gnome.shell favorite-apps           \
-                    > "$LIST_DIR/4. $PROGRAM_NAME"-favorieten  |& $LOGCMD
+    printf '%s\n' "$text4..."
+    gsettings get   org.gnome.shell \
+                    favorite-apps   > "$file4" |& $LOGCMD
 }
 
 
 save_command_history() {        #5
-    printf '%s\n' "$text4..."
+    printf '%s\n' "$text5..."
     HISTFILE=~/.bash_history
     set -o history
-    history > "$LIST_DIR/5. $PROGRAM_NAME"-opdrachtgeschiedenis |& $LOGCMD
+    history > "$file5" |& $LOGCMD
 }
 
 
