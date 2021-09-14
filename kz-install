@@ -481,7 +481,7 @@ save_user_photo_file() {                    #"5"
     for user in *; do
         if [[ -e /home/"$user" ]]; then
             list_dir=/home/"$user/KZ Setup List"
-            rm --force --recursive "$list_dir"   
+            rm --force --recursive "$list_dir"
             mkdir --parents "$list_dir"
             sudo grep   --regexp='Icon='            \
                         "$search/$user"             |
