@@ -6,13 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.02.01
-# VERSION_DATE=2021-09-14
+# VERSION_NUMBER=01.02.00
+# VERSION_DATE=2021-09-03
 
 
 #1 bitwarden
 #2 Bitwarden (wachtwoordkluis) installeren
-sudo snap wait system seed.loaded
 sudo snap install bitwarden
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove bitwarden
