@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.01.01
-# VERSION_DATE=2021-09-04
+# VERSION_NUMBER=04.01.02
+# VERSION_DATE=2021-09-15
 
 
 #1 bluefish
@@ -101,8 +101,7 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 
 #1 vscode
 #2 Visual Studio Code (editor) instellen
-:
-#kz-gset --addfavtop --file='code_code.desktop'
+kz-gset --addfavtop --file='code_code.desktop'
 #3 1. Start Visual Studio Code.
 #3 2. Ga naar File > Preferences > Settings (Ctrl+,).
 #3 3. Zoek 'ruler'
