@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.03.10
-VERSION_DATE=2021-09-14
+VERSION_NUMBER=45.03.11
+VERSION_DATE=2021-09-15
 
 
 ###############################################################################
@@ -53,7 +53,6 @@ readonly DASHES=$(printf '%.0s=' {1..79})
 readonly EDITION_DEFAULT=desktop
 readonly SPACES=$(printf '%.0s ' {1..79})
 readonly VERSION=$(lsb_release --release --short)
-readonly LIST_DIR="$HOME//KZ Setup List"
 readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 
@@ -299,26 +298,20 @@ $HOSTNAME.sh
 
 
 process_option_list() {
+    local list_dir="$HOME/KZ Setup List"
     local text0='Opdrachten worden verwerkt'
-#   local text1='[1/4]  Gebruikersfotobestand vastleggen'
-    local file1="$LIST_DIR/1. $PROGRAM_NAME-gebruikersfoto.txt"
+#   local text1='[0/4]  Gebruikersfotobestand vastleggen'       # Done by
+#   local file1="$list_dir/1. $PROGRAM_NAME-gebruikersfoto.txt" # kz-install -l
     local text2='[1/4]  Gebruikersfoto vastleggen'
-    local file2="$LIST_DIR/2. $PROGRAM_NAME-gebruikersfoto"
+    local file2="$list_dir/2. $PROGRAM_NAME-gebruikersfoto"
     local text3='[2/4]  Bureaubladachtergrond vastleggen'
-    local file3="$LIST_DIR/3. $PROGRAM_NAME-bureaubladachtergrond"
+    local file3="$list_dir/3. $PROGRAM_NAME-bureaubladachtergrond"
     local text4='[3/4]  Favorieten vastleggen'
-    local file4="$LIST_DIR/4. $PROGRAM_NAME-favorieten"
+    local file4="$list_dir/4. $PROGRAM_NAME-favorieten"
     local text5='[4/4]  Opdrachtgeschiedenis vastleggen'
-    local file5="$LIST_DIR/5. $PROGRAM_NAME-opdrachtgeschiedenis"
+    local file5="$list_dir/5. $PROGRAM_NAME-opdrachtgeschiedenis"
 
-    mkdir --parents "$LIST_DIR" #1
-    file=
-    if ! [[ -e "$file1" ]]; then
-        touch "$file1"
-        printf '\n%s\n' "Staat hierboven niets, dan is er geen foto ingesteld.
-
-Negeer dan bestand '2. kz-setup-gebruikersfoto'."   >> "$file1"
-    fi
+    mkdir --parents "$list_dir" #1
 
     TITLE='Instellijst maken'
     if $OPTION_GUI; then
@@ -348,7 +341,7 @@ Negeer dan bestand '2. kz-setup-gebruikersfoto'."   >> "$file1"
     fi
 
     info "
-De instellijst is vastgelegd in map ${PROGRAM_NAME} in de Persoonlijke map.
+De instellijst is vastgelegd in map 'KZ Setup List' in de Persoonlijke map.
 Deze bestanden bevatten de eerder gebruikte gebruikersfoto,
 bureaubladachtergrond, favorieten, en opdrachtgeschiedenis.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
