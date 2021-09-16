@@ -5,8 +5,8 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=06.01.01
-.\" VERSION_DATE=2021-09-08
+.\" VERSION_NUMBER=06.02.00
+.\" VERSION_DATE=2021-09-16
 .\"
 .\"
 .TH KZ-INSTALL 1 "KZ Handleiding" "KZ-INSTALL(1)" "KZ Handleiding"
@@ -79,10 +79,7 @@ toegevoegd, welke pakketten door de gebruiker zijn geïnstalleerd, en welke
 snaps zijn geïnstalleerd.
 .br
 Deze gevens zijn te gebruiken om de installatie te controleren op volledigheid.
-.br
-Ook wordt het gebruikersfotobestand vastlgelegd, wat eigenlijk bij \fBkz setup
---list\fR hoort, echter mag een reguliere gebruiker deze niet opzoeken.
-.sp
+\.sp
 Alhoewel \fBkz install\fR gericht is op het installeren, met optie
 \fB--remove\fR worden er instructies getoond om de installatie ongedaan te
 maken.
@@ -312,15 +309,14 @@ Tijdelijk installatiebestand.
 Tijdelijk tekstbestand.
 .RE
 .sp
+/tmp/kz-install-XXXXXXXXXX.list
+.RS
+Tijdelijk applijstbestand.
+.RE
+.sp
 /usr/share/local/kz-install-applist
 .RS
 Applicatielijst met geïnstalleerde apps.
-.RE
-.RE
-.sp
-$HOME/kz-setup/kz-seteup-gebruikersfoto.txt
-.RS
-Verwijzing naar gebruikersfotobestand.
 .RE
 .\"
 .\"

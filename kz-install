@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.01.18
-VERSION_DATE=2021-09-15
+VERSION_NUMBER=59.02.00
+VERSION_DATE=2021-09-16
 
 
 ###############################################################################
@@ -297,14 +297,13 @@ process_input() {
 
 process_option_list() {
     local text0='Opdrachten worden verwerkt'
-    local text1="[1/5]  Bepaal welke deb-bestanden (Debian-pakketten) zijn \
+    local text1="[1/4]  Bepaal welke deb-bestanden (Debian-pakketten) zijn \
 geïnstalleerd"
-    local text2="[2/5]  Bepaal welke pakketbronnen (\"repositories\" of \
+    local text2="[2/4]  Bepaal welke pakketbronnen (\"repositories\" of \
 \"repo's\") zijn toegevoegd"
-    local text3="[3/5]  Bepaal welke pakketten door de gebruiker zijn \
+    local text3="[3/4]  Bepaal welke pakketten door de gebruiker zijn \
 geïnstalleerd"
-    local text4='[4/5]  Bepaal welke snaps zijn geïnstalleerd'
-    local text5='[4/5]  Gebruikersfotobestand vastleggen'
+    local text4='[4/4]  Bepaal welke snaps zijn geïnstalleerd'
 
     TITLE='Applijst maken'
     if $OPTION_GUI; then
@@ -317,8 +316,6 @@ geïnstalleerd"
         create_file_installed_by_user       #3
         printf '%s\n' "#$text4"
         create_file_snaps                   #4
-        printf '%s\n' "#$text5"
-        save_user_photo_file                #"5"
         ) |&
         zenity  --progress              \
                 --pulsate               \
@@ -333,7 +330,6 @@ geïnstalleerd"
         create_file_added_repos             #2
         create_file_installed_by_user       #3
         create_file_snaps                   #4
-        save_user_photo_file                #"5"
     fi
 
     info "
@@ -463,34 +459,6 @@ create_file_snaps() {                       #4
     printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" >> "$LIST_FILE"
-}
-
-
-save_user_photo_file() {                    #"5"
-    local list_dir=''
-    local list_file=''
-    local search=''
-
-    # Eigenlijk meer als eerste stap (#1) voor 'kz setup --list' echter
-    # $search is niet toegankelijk voor gewone gebruikers.
-    printf '%s\n' "$text5..."
-
-    search=/home
-    cd "$search" || exit $ERROR
-    for user in *; do
-        list_dir=/home/"$user/KZ Setup List"
-        list_file='1. kz-setup-gebruikersfoto.txt'
-        rm --force --recursive "$list_dir"
-        mkdir --parents "$list_dir"
-        if [[ -e /var/lib/AccountsService/users/"$user" ]]; then
-            sudo grep   --regexp='Icon='                        \
-                        /var/lib/AccountsService/users/"$user"  |
-            tee         "$list_dir/$list_file"                  1> /dev/null
-        else
-            touch "$list_dir/$list_file"
-        fi
-        sudo chown --recursive "$user:$user" "$list_dir"
-    done
 }
 
 
