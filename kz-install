@@ -760,15 +760,17 @@ process_install_instruction() {
     fi
     filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#3' ]]; then
-        printf '%s\n\n' "$filler${record:3}" >> "$TEXT_FILE"
+        printf  '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
-        printf  "\n[%2d] %s\n$filler%.${len}s\n\n$filler%s\n\n" \
-                "$app_seq_num"                                  \
-                "$description"                                  \
-                "$DASHES"                                       \
-                "${record:3}"                                   >> "$TEXT_FILE"
+        printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
+                "$app_seq_num"                              \
+                "$description"                              \
+                "$filler"                                   \
+                "$DASHES"                                   \
+                "$filler"                                   \
+                "${record:3}"                               >> "$TEXT_FILE"
     fi
 }
 
@@ -784,15 +786,17 @@ process_remove_instruction() {
     fi
     filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#4' ]]; then
-        printf '%s\n\n' "$filler${record:3}" >> "$TEXT_FILE"
+        printf  '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
-        printf  "\n[%2d] %s\n$filler%.${len}s\n\n$filler%s\n\n" \
-                "$app_seq_num"                                  \
-                "$description"                                  \
-                "$DASHES"                                       \
-                "${record:3}"                                   >> "$TEXT_FILE"
+        printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
+                "$app_seq_num"                              \
+                "$description"                              \
+                "$filler"                                   \
+                "$DASHES"                                   \
+                "$filler"                                   \
+                "${record:3}"                               >> "$TEXT_FILE"
     fi
 }
 
@@ -924,10 +928,8 @@ term_script() {
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
         printf '\n' >> "$TEXT_FILE"
-        # 'if ! grep --regexp='] '...; then...' werkt niet; grep geeft 0
-        # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
-        app_num=$(grep --regexp='] ' --count "$TEXT_FILE")
-        sed -i "s|]|\/$(printf %-2d "$app_num")]|g" "$TEXT_FILE"
+        app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
+        sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Installatie-instructies'
             if ! zenity --text-info                         \
@@ -947,11 +949,10 @@ term_script() {
         info 'Geen installatie-instructies.'
     elif $OPTION_REMOVE && $REMOVE_FOUND; then
         printf '\n' >> "$TEXT_FILE"
+        app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
+        sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
+        # Vervang 'installeren' door 'verwijderen' (even lang).
         sed --in-place --expression='s/installeren/verwijderen/g' "$TEXT_FILE"
-        # 'if ! grep --regexp='] '...; then...' werkt niet; grep geeft 0
-        # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
-        app_num=$(grep --regexp='] ' --count "$TEXT_FILE")
-        sed -i "s|]|\/$(printf %-2d "$app_num")]|g" "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Verwijder-instructies'
             if ! zenity --text-info                         \
