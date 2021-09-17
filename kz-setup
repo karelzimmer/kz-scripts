@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.04.01
+VERSION_NUMBER=45.05.00
 VERSION_DATE=2021-09-17
 
 
@@ -656,44 +656,48 @@ process_description() {
 
 process_setup_instruction() {
     local       record=${1:-record?}
+    local       filler=''
     local   -i  len=0
 
     INFO_FOUND=true
     if ! $OPTION_INFO; then
         return $SUCCESS
     fi
+    filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#3' ]]; then
-        printf '%s\n\n' "     ${record:3}" >> "$TEXT_FILE"
+        printf '%s\n\n' "$filler${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
-        printf  "\n%3s. %s\n     %.${len}s\n\n     %s\n\n"  \
-                "$app_seq_num"                              \
-                "$description"                              \
-                "$DASHES"                                   \
-                "${record:3}"                               >> "$TEXT_FILE"
+        printf  "\n[%2d] %s\n$filler%.${len}s\n\n$filler%s\n\n"  \
+                "$app_seq_num"                                  \
+                "$description"                                  \
+                "$DASHES"                                       \
+                "${record:3}"                                   >> "$TEXT_FILE"
     fi
 }
 
 
 process_reset_instruction() {
     local       record=${1:-record?}
+    local       filler=''
     local   -i  len=0
 
     RESET_FOUND=true
     if ! $OPTION_RESET; then
         return $SUCCESS
     fi
+    filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#4' ]]; then
-        printf '%s\n\n' "     ${record:3}" >> "$TEXT_FILE"
+        printf '%s\n\n' "$filler${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
-        printf  "\n%3s. %s\n     %.${len}s\n\n     %s\n\n"  \
-                "$app_seq_num"                              \
-                "$description"                              \
-                "$DASHES"                                   \
-                "${record:3}"                               >> "$TEXT_FILE"
+        printf  "\n[%2d] %s\n$filler%.${len}s\n\n$filler%s\n\n"  \
+                "$app_seq_num"                                  \
+                "$description"                                  \
+                "$DASHES"                                       \
+                "${record:3}"                                   >> "$TEXT_FILE"
     fi
 }
 
@@ -752,6 +756,7 @@ process_command() {
 execute_command() {
     local       cmd=${1:-cmd?}
     local   -i  cmd_rc=0
+    local       filler=''
     local       status=''
 
     if ! $OPTION_GUI; then
@@ -780,6 +785,9 @@ execute_command() {
 
 
 term_script() {
+    local   -i  app_num=0
+    local       space=''
+
     if $OPTION_SIMULATE; then
         if $OPTION_GUI; then
             TITLE='Instellings-opdrachten'
@@ -797,7 +805,14 @@ term_script() {
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
-        printf '\n\n' >> "$TEXT_FILE"
+        printf '\n' >> "$TEXT_FILE"
+        # 'if ! grep --regexp='] '...; then...' werkt niet; grep geeft 0
+        # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
+        app_num=$(grep --regexp='] ' --count "$TEXT_FILE")
+        if [[ $app_num -lt 10 ]]; then
+            space=' '
+        fi
+        sed -i "s|]|\/$app_num$space]|g" "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Instel-instructies'
             if ! zenity --text-info                         \
@@ -816,12 +831,18 @@ term_script() {
     elif $OPTION_INFO && ! $INFO_FOUND; then
         info 'Geen instel-instructies.'
     elif $OPTION_RESET && $RESET_FOUND; then
-        printf '\n\n' >> "$TEXT_FILE"
-        sed --in-place                              \
-            --expression='s/instellen/resetten/g'   \
-            "$TEXT_FILE"
+        printf '\n' >> "$TEXT_FILE"
+        sed --in-place --expression='s/instellen/resetten/g' "$TEXT_FILE"
         # Woord 'resetten' is 1 letter korter dan 'instellen'.
-        sed --in-place --expression='s/^     ==/     =/g' "$TEXT_FILE"
+        filler=${SPACES:0:8}
+        sed --in-place --expression="s/^$filler==/$filler=/g" "$TEXT_FILE"
+        # 'if ! grep --regexp='] '...; then...' werkt niet; grep geeft 0
+        # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
+        app_num=$(grep --regexp='] ' --count "$TEXT_FILE")
+        if [[ $app_num -lt 10 ]]; then
+            space=' '
+        fi
+        sed -i "s|]|\/$app_num$space]|g" "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Reset-instructies'
             if ! zenity --text-info                         \

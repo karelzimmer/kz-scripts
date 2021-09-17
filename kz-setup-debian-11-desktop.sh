@@ -6,14 +6,13 @@
 # #############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.02.02
-# VERSION_DATE=2021-09-08
+# VERSION_NUMBER=01.02.03
+# VERSION_DATE=2021-09-17
 
 
 #1 adguard
 #2 Adguard (adblocker) instellen
 :
-#3
 #3 Voor Chrome:
 #3 ~~~~~~~~~~~~
 #3 1. Start Google Chrome webbrowser.
@@ -59,12 +58,10 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #3 4. Importeer de opgeslagen wachtwoorden in Bitwarden.
 #3 5. Verwijder de uit de oude wachtwoordbeheerder geëxporteerde wachtwoorden.
 #3 6. Verwijder de oude wachtwoordbeheerder.
-#3
 #3 -----------------------------------------------
 #3 Met het gebruik van Bitwarden wordt het opslaan
 #3 van wachtwoorden in de browser sterk afgeraden.
 #3 -----------------------------------------------
-#3
 #3 Dit betekent voor de browser:
 #3 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #3 1. Stop het (automatisch) opslaan van wachtwoorden.
