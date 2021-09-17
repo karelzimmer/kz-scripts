@@ -765,12 +765,9 @@ process_install_instruction() {
         ((++app_seq_num))
         len=${#description}
         printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
-                "$app_seq_num"                              \
-                "$description"                              \
-                "$filler"                                   \
-                "$DASHES"                                   \
-                "$filler"                                   \
-                "${record:3}"                               >> "$TEXT_FILE"
+                "$app_seq_num"  "$description"              \
+                "$filler"       "$DASHES"                   \
+                "$filler"       "${record:3}"               >> "$TEXT_FILE"
     fi
 }
 
@@ -791,12 +788,9 @@ process_remove_instruction() {
         ((++app_seq_num))
         len=${#description}
         printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
-                "$app_seq_num"                              \
-                "$description"                              \
-                "$filler"                                   \
-                "$DASHES"                                   \
-                "$filler"                                   \
-                "${record:3}"                               >> "$TEXT_FILE"
+                "$app_seq_num"  "$description"              \
+                "$filler"       "$DASHES"                   \
+                "$filler"       "${record:3}"               >> "$TEXT_FILE"
     fi
 }
 
