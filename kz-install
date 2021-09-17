@@ -927,7 +927,7 @@ term_script() {
         # 'if ! grep --regexp='] '...; then...' werkt niet; grep geeft 0
         # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
         app_num=$(grep --regexp='] ' --count "$TEXT_FILE")
-        sed -i "s|]|\/$(printf %-2d $app_num)]|g" "$TEXT_FILE"
+        sed -i "s|]|\/$(printf %-2d "$app_num")]|g" "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Installatie-instructies'
             if ! zenity --text-info                         \
@@ -951,7 +951,7 @@ term_script() {
         # 'if ! grep --regexp='] '...; then...' werkt niet; grep geeft 0
         # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
         app_num=$(grep --regexp='] ' --count "$TEXT_FILE")
-        sed -i "s|]|\/$(printf %-2d $app_num)]|g" "$TEXT_FILE"
+        sed -i "s|]|\/$(printf %-2d "$app_num")]|g" "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Verwijder-instructies'
             if ! zenity --text-info                         \
