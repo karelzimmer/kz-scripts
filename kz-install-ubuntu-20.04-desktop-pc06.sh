@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.00.03
-# VERSION_DATE=2021-08-29
+# VERSION_NUMBER=03.00.04
+# VERSION_DATE=2021-09-17
 
 
 #1 bluetooth
@@ -77,9 +77,9 @@ sudo apt-get install --yes gedit-plugins
 
 #1 git
 #2 Git (versiebeheersysteem) installeren
-sudo apt-get install --yes git git-gui qgit
+sudo apt-get install --yes aspell-nl git gitg
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes git git-gui qgit
+#4    sudo apt remove --yes aspell-nl git gitg
 
 
 #1 hardinfo

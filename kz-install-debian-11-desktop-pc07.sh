@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.01.00
-# VERSION_DATE=2021-09-03
+# VERSION_NUMBER=01.01.01
+# VERSION_DATE=2021-09-17
 
 
 #1
@@ -69,9 +69,9 @@ sudo apt-get install --yes gedit-plugins
 
 #1 git
 #2 Git (versiebeheersysteem) installeren
-sudo apt-get install --yes git git-gui qgit
+sudo apt-get install --yes aspell-nl git gitg
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes git git-gui qgit
+#4    sudo apt remove --yes aspell-nl git gitg
 
 
 #1 kvm
