@@ -79,7 +79,7 @@ sudo apt-get install --yes gedit-plugins
 #2 Git (versiebeheersysteem) installeren
 sudo apt-get install --yes aspell-nl git gitg
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes aspell-nl git gitg
+#4    sudo apt remove --yes git gitg
 
 
 #1 hardinfo
