@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.04.00
-VERSION_DATE=2021-09-16
+VERSION_NUMBER=45.04.01
+VERSION_DATE=2021-09-17
 
 
 ###############################################################################
@@ -397,6 +397,10 @@ $EDITION."
     fi
 
     cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
+    # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
         if ! grep   --files-with-matches    \
                     --line-regexp           \
@@ -506,6 +510,10 @@ $EDITION."
 
 
 process_option_apps() {
+    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
+    # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     process_dfltfiles
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
