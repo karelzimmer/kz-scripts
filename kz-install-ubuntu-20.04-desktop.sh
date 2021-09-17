@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.02.00
-# VERSION_DATE=2021-09-03
+# VERSION_NUMBER=03.02.01
+# VERSION_DATE=2021-09-17
 
 
 #1 apport
@@ -57,7 +57,7 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 
 #1 libreoffice
 #2 LibreOffice (kantoorpakket) installeren
-sudo apt-get install --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
+sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
