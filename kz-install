@@ -764,7 +764,7 @@ process_install_instruction() {
     else
         ((++app_seq_num))
         len=${#description}
-        # ?? wordt in term_script vervangen door aantal apps.
+        # ?? wordt in term_script vervangen door aantal te installeren apps.
         printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
                 "$app_seq_num"  "$description"              \
                 "$filler"       "$DASHES"                   \
@@ -788,7 +788,7 @@ process_remove_instruction() {
     else
         ((++app_seq_num))
         len=${#description}
-        # ?? wordt in term_script vervangen door aantal apps.
+        # ?? wordt in term_script vervangen door aantal te te verwijderen apps.
         printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
                 "$app_seq_num"  "$description"              \
                 "$filler"       "$DASHES"                   \
@@ -924,7 +924,7 @@ term_script() {
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
         printf '\n' >> "$TEXT_FILE"
-        # Vervang ?? door aantal apps.
+        # Vervang ?? door aantal te installeren apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
         if $OPTION_GUI; then
@@ -946,7 +946,7 @@ term_script() {
         info 'Geen installatie-instructies.'
     elif $OPTION_REMOVE && $REMOVE_FOUND; then
         printf '\n' >> "$TEXT_FILE"
-        # Vervang ?? door aantal apps.
+        # Vervang ?? door aantal te verwijderen apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
         # Vervang 'installeren' door 'verwijderen' (even lang).
