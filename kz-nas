@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-nas
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=13.00.06
-VERSION_DATE=2021-09-12
+VERSION_NUMBER=13.00.07
+VERSION_DATE=2021-09-21
 
 
 ###############################################################################
@@ -32,7 +32,7 @@ $OPTIONS_HELP_COMMON"
 
 readonly NAS_LOGIN=/usr/local/etc/${PROGRAM_NAME}login
 readonly NAS_MOUNT_POINT=/mnt/$PROGRAM_NAME
-readonly NAS_FIXED_IP_ADDRESS="
+NAS_FIXED_IP_ADDRESS="
 Zorg dat de NAS een vast IP-adres heeft.
 
 Hiervoor is nodig:
@@ -46,6 +46,7 @@ Hiervoor is nodig:
     IP-adres buiten het bereik van DHCP die automatisch
     de IP-adressen uitdeelt (vaak 192.168.0.200).
  2. Kies in de NAS het vaste IP-adres en zet DHCP uit."
+readonly NAS_FIXED_IP_ADDRESS
 readonly SYSTEMD_MOUNT_DIR=/etc/systemd/system
 readonly SYSTEMD_MOUNT_FILE=mnt-nas.mount
 readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE

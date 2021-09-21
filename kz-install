@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.03.00
-VERSION_DATE=2021-09-17
+VERSION_NUMBER=59.03.01
+VERSION_DATE=2021-09-21
 
 
 ###############################################################################
@@ -49,14 +49,14 @@ Argumenten:
   APP           opgegeven apps installeren
   BESTAND       opgegeven installatiebestanden verwerken"
 
-readonly DASHES=$(printf '%.0s=' {1..79})
+DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
 readonly EDITION_DEFAULT=desktop
-readonly SPACES=$(printf '%.0s ' {1..79})
-readonly VERSION=$(lsb_release --release --short)
+SPACES=$(printf '%.0s ' {1..79}); readonly SPACES
+VERSION=$(lsb_release --release --short); readonly VERSION
 readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}-applist
-readonly CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-readonly TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
-readonly TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
+CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE
+TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text"); readonly TEXT_FILE
+TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list"); readonly TEMP_LIST
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
 # van:

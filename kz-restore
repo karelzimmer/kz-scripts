@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-restore
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=39.00.09
-VERSION_DATE=2021-09-12
+VERSION_NUMBER=39.00.10
+VERSION_DATE=2021-09-21
 
 
 ###############################################################################
@@ -43,8 +43,12 @@ Argumenten:
   SELECTIE      zet opgegeven mappen en bestanden terug"
 
 readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
-readonly EXCLUDEFILE_DEFAULT_CONTENT="\
-$(find /etc/skel -type f -exec basename '{}' \; | awk '$0="/home/*/"$0')"
+EXCLUDEFILE_DEFAULT_CONTENT="$(
+    find    /etc/skel               \
+            -type f                 \
+            -exec basename '{}' \;  |
+    awk     '$0="/home/*/"$0'
+    )"; readonly EXCLUDEFILE_DEFAULT_CONTENT
 # Hieboven worden de bestanden opgenomen die bij het aanmaken van een
 # gebruiker worden neergezet in $HOME.  Meestal zijn dit de bestanden
 # .bash_logout, .bashrc, examples.desktop, en .profile (bij Ubuntu).
@@ -368,7 +372,7 @@ gevonden, van nieuw naar oud:"
             fi
         fi
 
-        printf '%+*s  %s\t%s\t%s\n' $bupnumlen $bupnum "$(basename \
+        printf '%+*s  %s\t%s\t%s\n' $bupnumlen "$bupnum" "$(basename \
 "$filename" .tar)" "$filesize_human"'iB' "$dirname"
     done < <(
         find    "$SOURCE"                           \

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.11
-VERSION_DATE=2021-09-09
+VERSION_NUMBER=36.00.12
+VERSION_DATE=2021-09-21
 
 
 ###############################################################################
@@ -65,7 +65,7 @@ readonly TARGET_DEFAULT_1=/media
 readonly TARGET_DEFAULT_2=backups
 readonly TARGET_DEFAULT_3=$HOSTNAME-$DISTRO
 # Conform ISO 8601, but ':' -> '.' for other filesystems not on Linux.
-readonly TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S)
+TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S); readonly TIMESTAMP
 
 
 ###############################################################################
