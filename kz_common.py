@@ -15,7 +15,7 @@ import datetime
 module_name = 'kz_common.py'
 release_year = 2021
 
-version_number = '02.02.00'
+version_number = '02.02.01'
 version_date = '2021-09-21'
 
 
@@ -28,9 +28,9 @@ def process_common_options(desc, display_name):
                                      epilog="Typ 'man " + display_name +
                                      "' voor meer informatie.")
     parser.add_argument('-u', '--usage', action='store_true',
-                        help='een korte gebruikssamenvatting tonen')
+                        help='toon een korte gebruikssamenvatting')
     parser.add_argument('-v', '--version', action='store_true',
-                        help='de versie tonen')
+                        help='toon programmaversie')
     parser.add_argument('-g', '--gui', action='store_true',
                         help='start in grafische modus')
     args = parser.parse_args()
