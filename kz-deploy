@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.04.13
-VERSION_DATE=2021-09-09
+VERSION_NUMBER=62.04.14
+VERSION_DATE=2021-09-21
 
 
 ###############################################################################
@@ -343,12 +343,17 @@ sync_pdf_kz-scripts() {
 
 sync_all_kz-scripts() {
     local basename=''
+    local dir=''
     local file=''
     local newfile=''
     local prefix='nl.karelzimmer.'
 
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_DIR"/*
     chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
+    # Ensure all nedeed dirs are available (git does not add empty dirs).
+    for dir in "${TARGET_DEB[@]}"; do
+        mkdir --parents "$dir"
+    done
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
     # De exclude en delete-excluded i.v.m. de lokale git repository en pycache.
