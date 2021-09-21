@@ -19,8 +19,11 @@ program_name = 'kz-go'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 
-version_number = '03.00.04'
-version_date = '2021-09-08'
+version_number = '03.01.00'
+version_date = '2021-09-21'
+
+desc = 'Updates uitvoeren.'
+option_gui = False
 
 
 def perform_update():
@@ -53,28 +56,12 @@ def perform_update():
 
 # --- script ---
 
-parser = argparse.ArgumentParser(prog=display_name,
-                                 description='Updates uitvoeren.',
-                                 epilog="Typ 'man " + display_name +
-                                 "' voor meer informatie.")
-parser.add_argument('-u', '--usage', action='store_true',
-                    help='een korte gebruikssamenvatting tonen')
-parser.add_argument('-v', '--version', action='store_true',
-                    help='de versie tonen')
-parser.add_argument('-g', '--gui', action='store_true',
-                    help='start in grafische modus')
-args = parser.parse_args()
+option_gui = kz_common.process_common_options(desc, display_name)
 
-if args.usage:
-    kz_common.process_option_usage(display_name)
-elif args.version:
-    kz_common.process_option_version(display_name, version_number,
-                                     version_date, release_year)
-else:
-    perform_update()
+perform_update()
 
 # Een non-gui script gestart met optie gui.
-if args.gui:
+if option_gui:
     input('Druk op de Enter-toets om verder te gaan [Enter]: ')
 
 # EOF
