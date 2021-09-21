@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.11
+VERSION_NUMBER=14.03.12
 VERSION_DATE=2021-09-21
 
 
@@ -341,7 +341,7 @@ ${BOLD}In $script:${NORMAL}
 check_script_shellcheck() {
     local -i    check_rc=0
 
-    shellcheck --external-sources "$script" || check_rc=$?
+    shellcheck --external-sources "$script" 2> >($LOGCMD) || check_rc=$?
     if [[ $check_rc -gt $MAXRC ]]; then
         MAXRC=$check_rc
     fi
