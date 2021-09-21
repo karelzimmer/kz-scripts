@@ -19,8 +19,6 @@ VERSION_DATE=2021-09-14
 readonly SUCCESS=0
 readonly ERROR=1
 readonly WARNING=2
-readonly THIS_YEAR=$(date +%Y)
-readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
 # shellcheck disable=SC2034
 readonly OPTIONS_SHORT_COMMON='dghuv'
@@ -36,6 +34,10 @@ readonly OPTIONS_HELP_COMMON="\
   -v --version  de versie tonen
   -g --gui      start in grafische modus
   -d --debug    geef foutopsporingsinformatie weer in het logboek"
+
+DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO
+THIS_YEAR=$(date +%Y); readonly THIS_YEAR
 
 
 ###############################################################################

@@ -21,7 +21,6 @@ VERSION_DATE=2021-09-08
 declare -ir SUCCESS=0
 declare -ir ERROR=1
 declare -ir WARNING=2
-readonly    THIS_YEAR=$(date +%Y)
 
 readonly    USAGE="\
 Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
@@ -41,6 +40,8 @@ Opties:
 Argumenten:
   OPDRACHT      uit te voeren opdracht
   ARG           argumenten behorend bij OPDRACHT"
+
+THIS_YEAR=$(date +%Y); readonly THIS_YEAR
 
 
 ###############################################################################
