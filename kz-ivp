@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.10
-VERSION_DATE=2021-09-17
+VERSION_NUMBER=14.03.11
+VERSION_DATE=2021-09-21
 
 
 ###############################################################################
@@ -374,14 +374,14 @@ ${BOLD}In $script:${NORMAL}
     case $script in
         kz-backup)
             log "Check $script."
-            "$scriptsdir/$script"   --target                        \
-                                    /tmp                            \
-                                    /home/karel/scripts |& $LOGCMD  ||
+            "$scriptsdir/$script"   --target                \
+                                    /tmp                    \
+                                    /home/karel/kz-scripts  |& $LOGCMD  ||
             check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
 ${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --target /tmp /home/karel/scripts' gaat fout."
+    Uitvoeren '$script --target /tmp /home/karel/kz-scripts' gaat fout."
                 if [[ $ERROR -gt $MAXRC ]]; then
                     MAXRC=$ERROR
                 fi
