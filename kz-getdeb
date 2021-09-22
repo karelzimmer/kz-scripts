@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.01.07
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=29.01.08
+VERSION_DATE=2021-09-22
 
 
 ###############################################################################
@@ -401,7 +401,9 @@ term_script() {
         "$search"*{desktop,server}" $HOSTNAME".pdf  \
         "$HOME"                                     |& $LOGCMD || true
 
-    TEXT='Volg nu de stappen zoals beschreven in de
+    TEXT='Pakket kz is succesvol geïnstalleerd.
+
+Volg nu de stappen zoals beschreven in de
 Checklist installatie Ubuntu, of
 Checklist installatie Debian.
 
@@ -410,13 +412,13 @@ Deze checklists zijn te vinden:
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
   onder Linux'
-    height=15
+    height=17
 
     if ! $TERMINAL; then
         TEXT=$TEXT"
 
 Typ 'exit' om dit venster te sluiten."
-        height=17
+        height=19
     fi
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title 'Gereed'            \
