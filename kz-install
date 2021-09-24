@@ -338,7 +338,7 @@ Software of
    met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
     local       footer=''
     local   -i  number_of_lines=0
-    local       plural='pakketten'
+    local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text1..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
@@ -348,9 +348,9 @@ Software of
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 4))
     if [[ $number_of_lines -eq 1 ]]; then
-        plural='pakket'
+        plural='geïnstalleerd pakket'
     fi
-    footer="Dit overzicht bevat $number_of_lines $plural."
+    footer="Dit overzicht bevat $number_of_lines handmatig $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" > "$LIST_FILE"
@@ -415,8 +415,7 @@ installatie van een pakket of
     if [[ $number_of_lines -eq 1 ]]; then
         plural='pakketbron'
     fi
-    footer="Dit overzicht bevat $number_of_lines door de gebruiker \
-toegevoegde $plural."
+    footer="Dit overzicht bevat $number_of_lines toegevoegde $plural."
     printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" >> "$LIST_FILE"
