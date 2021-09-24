@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.12
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=14.03.13
+VERSION_DATE=2021-09-22
 
 
 ###############################################################################
@@ -183,7 +183,7 @@ $(
 
 check_lines() {
     local -i line_num=0
-    local -i max_lines=1050
+    local -i max_lines=1000
     local -i max_line_length=79
     local -i max_line_length_found=0
 

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.03.01
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=59.04.00
+VERSION_DATE=2021-09-22
 
 
 ###############################################################################
@@ -297,25 +297,19 @@ process_input() {
 
 process_option_list() {
     local text0='Opdrachten worden verwerkt'
-    local text1="[1/4]  Bepaal welke deb-bestanden (Debian-pakketten) zijn \
-geïnstalleerd"
-    local text2="[2/4]  Bepaal welke pakketbronnen (\"repositories\" of \
-\"repo's\") zijn toegevoegd"
-    local text3="[3/4]  Bepaal welke pakketten door de gebruiker zijn \
-geïnstalleerd"
-    local text4='[4/4]  Bepaal welke snaps zijn geïnstalleerd'
+    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
+    local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
+    local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
 
     TITLE='Applijst maken'
     if $OPTION_GUI; then
         (
         printf '%s\n' "#$text1"
-        create_file_installed_without_repo  #1
+        create_list_manual_installed    #1
         printf '%s\n' "#$text2"
-        create_file_added_repos             #2
+        create_list_snaps               #2
         printf '%s\n' "#$text3"
-        create_file_installed_by_user       #3
-        printf '%s\n' "#$text4"
-        create_file_snaps                   #4
+        create_list_added_repos         #3
         ) |&
         zenity  --progress              \
                 --pulsate               \
@@ -326,10 +320,9 @@ geïnstalleerd"
                 --title     "$TITLE"    \
                 --text      "$text0"    2> >($LOGCMD)
     else
-        create_file_installed_without_repo  #1
-        create_file_added_repos             #2
-        create_file_installed_by_user       #3
-        create_file_snaps                   #4
+        create_list_manual_installed    #1
+        create_list_snaps               #2
+        create_list_added_repos         #3
     fi
 
     info "
@@ -339,41 +332,62 @@ Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 
-create_file_installed_without_repo() {      #1
-    local       header="1. Dit zijn gedownloade deb-bestanden geïnstalleerd \
-via Software, of met een opdracht zoals 'sudo apt-get --install \
-<bestand.deb>':"
+create_list_manual_installed() {        #1
+    local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
+Software of
+   met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
     local       footer=''
     local   -i  number_of_lines=0
-    local       plural='geïnstalleerde deb-bestanden'
+    local       plural='pakketten'
 
     printf '%s\n' "$text1..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
-    apt-show-versions --initialize |& $LOGCMD
-    if !    apt-show-versions                       \
-            --brief                                 |
-            grep    --word-regexp                   \
-                    --regexp='No available version' >> "$TEMP_LIST"; then
-        true
-    fi
+    apt list --manual-installed 2> >($LOGCMD) >> "$TEMP_LIST"
 
     number_of_lines=$(wc --lines < "$TEMP_LIST")
-    number_of_lines=$((number_of_lines - 2))
+    number_of_lines=$((number_of_lines - 4))
     if [[ $number_of_lines -eq 1 ]]; then
-        plural='geïnstalleerd deb-bestand'
+        plural='pakket'
     fi
-    footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
-Meer via de opdracht: apt-cache show <bestand> | grep --regexp='Description:'"
+    footer="Dit overzicht bevat $number_of_lines $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" > "$LIST_FILE"
 }
 
 
-create_file_added_repos() {                 #2
-    local       header="2. Deze pakketbronnen zijn meestal toegevoegd met de \
-opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
+create_list_snaps() {                   #2
+    local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
+<snap>' of met Software:"
+    local       footer=''
+    local   -i  number_of_lines=0
+    local       plural='snaps'
+
+    printf '%s\n' "$text3..."
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
+    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
+        TEXT='snap is niet geïnstalleerd op dit systeem'
+        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
+    fi
+
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$((number_of_lines - 3))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='snap'
+    fi
+    footer="Dit overzicht bevat $number_of_lines $plural."
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+
+    cat "$TEMP_LIST" >> "$LIST_FILE"
+}
+
+
+create_list_added_repos() {                 #3
+    local       header="3. Deze pakketbronnen zijn toegevoegd met de \
+installatie van een pakket of
+   met de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     local       footer=''
     local   -i  number_of_lines=0
     local       plural='pakketbronnen'
@@ -397,65 +411,12 @@ opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     fi
 
     number_of_lines=$(wc --lines < "$TEMP_LIST")
-    number_of_lines=$((number_of_lines - 2))
+    number_of_lines=$((number_of_lines - 3))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='pakketbron'
     fi
     footer="Dit overzicht bevat $number_of_lines door de gebruiker \
 toegevoegde $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$LIST_FILE"
-}
-
-
-create_file_installed_by_user() {           #3
-    local       header="3. Deze pakketten zijn meestal geïnstalleerd met \
-Software of met de opdracht 'sudo apt install <pakketnaam>':"
-    local       footer=''
-    local   -i  number_of_lines=0
-    local       plural='geïnstalleerde pakketten'
-
-    printf '%s\n' "$text3..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
-    aptitude search '~i!~M!~E!~prequired!~pimportant' >> "$TEMP_LIST"
-
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
-    number_of_lines=$((number_of_lines - 2))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='geïnstalleerd pakket'
-    fi
-    footer="Dit overzicht bevat $number_of_lines door de gebruiker $plural.
-Meer info via de opdracht: apt-cache show <pakketnaam> | grep \
---regexp='Description:'"
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$LIST_FILE"
-}
-
-
-create_file_snaps() {                       #4
-    local       header="4. Deze snaps zijn geïnstalleerd met '[sudo] install \
-<snap>' of met Software:"
-    local       footer=''
-    local   -i  number_of_lines=0
-    local       plural='snaps'
-
-    printf '%s\n' "$text4..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
-    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
-        TEXT='snap is niet geïnstalleerd op dit systeem'
-        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
-    fi
-
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
-    number_of_lines=$((number_of_lines - 3))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='snap'
-    fi
-    footer="Dit overzicht bevat $number_of_lines $plural."
     printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" >> "$LIST_FILE"
