@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.01.01
-# VERSION_DATE=2021-09-04
+# VERSION_NUMBER=04.02.00
+# VERSION_DATE=2021-09-24
 
 
 #1 gedit
@@ -90,6 +90,13 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 if [[ $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.Terminal.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='org.gnome.Terminal.desktop'
+
+
+#1 thunderbird
+#2 Thunderbird (e-mail) instellen
+kz-gset --removefav --file='thunderbird.desktop'
+#4 Start Terminalvenster en voer uit:
+#4    kz-gset --addfavtop --file='thunderbird.desktop'
 
 
 #1 zga-ehrm

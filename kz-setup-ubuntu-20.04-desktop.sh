@@ -193,7 +193,7 @@ kz-gset --addfavbottom --file='spotify_spotify.desktop'
 
 
 #1 thunderbird
-#2 Thunderbird (e-mail) installen
+#2 Thunderbird (e-mail) instellen
 :
 #3 Voeg de extenstie voor Google Agenda toe via:
 #3 1. Start Thunderbird.
