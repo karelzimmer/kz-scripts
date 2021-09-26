@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.04.14
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=62.05.00
+VERSION_DATE=2021-09-24
 
 
 ###############################################################################
@@ -441,7 +441,7 @@ $wallpapers_config_file"
 
 
 create_package() {
-    info 'Maak scriptspakket...'
+    info 'Maak pakket kz...'
     fakeroot    dpkg-deb                            \
                 --build                             \
                 "$DEB_TEMP_DIR"                     \

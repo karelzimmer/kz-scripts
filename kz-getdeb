@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Pakket installeren.
+# Pakket kz installeren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.01.08
-VERSION_DATE=2021-09-22
+VERSION_NUMBER=29.02.00
+VERSION_DATE=2021-09-24
 
 
 ###############################################################################
@@ -43,7 +43,7 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
      of: curl -L karelzimmer.nl/kz | bash
      of: zoek naar get en klik op Scripts installeren
 
-Pakket installeren.
+Pakket kz installeren.
 
 Opties:
 $OPTIONS_HELP_COMMON"
@@ -268,23 +268,23 @@ install_scriptspackage() {
         sudo apt-get update |& $LOGCMD
     fi
 
-    # Installeer scriptspakket.
+    # Installeer pakket kz.
     check_sudo_and_dpkg
-    TEXT='Download scriptspakket...'
+    TEXT='Download pakket kz...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 29
+                        7 25
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     check_sudo_and_dpkg
-    TEXT='Installeer scriptspakket (kan even duren)...'
+    TEXT='Installeer pakket kz (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 48
+                        7 44
 
     check_sudo_and_dpkg
     sudo    DEBIAN_FRONTEND=noninteractive  \

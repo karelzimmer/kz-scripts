@@ -5,8 +5,8 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=07.00.04
-.\" VERSION_DATE=2021-09-21
+.\" VERSION_NUMBER=07.00.05
+.\" VERSION_DATE=2021-09-24
 .\"
 .\"
 .TH KZ-DEPLOY 1 "KZ Handleiding" "KZ-DEPLOY(1)" "KZ Handleiding"
@@ -41,14 +41,14 @@ Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
 Mijn eigen Continuous Integration and Delivery (CI/CD) Pipeline.
 .sp
 Als ontwikkelen en testen gereed is, kan er een 'git push' en \fBkz deploy\fR
-uitgevoerd worden, waarbij er een nieuw scriptspakket wordt gegenereerd.
+uitgevoerd worden, waarbij er een nieuw pakket kz wordt gebouwd.
 .sp
 Met opdracht \fBkz getdeb\fR kan de scripts-ontwikkelomgeving op een andere
 of dezelfde machine neergezet worden.
 .sp
 De volgende acties uitgevoerd:
 .RS
-1. Aanmaken scriptspakket.
+1. Aanmaken pakket kz.
 .br
    1.1. Controleer afhankelijkheden.
 .br
@@ -62,7 +62,7 @@ De volgende acties uitgevoerd:
 .br
    2.1. Verwerk scripts (pdf aanmaken).
 .br
-3. Installer scriptspakket (met \fBkz getdeb\fR).
+3. Installer pakket kz (met \fBkz getdeb\fR).
 .RE
 Mijn eigen CI/CD Pipeline :-).
 .sp
@@ -101,7 +101,7 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .SH MAPPEN
 ~/kz-deb/
 .RS
-Scriptspakket raamwerk.
+Basis-bestanden pakket kz.
 .RE
 .sp
 ~/kz-docs/
@@ -128,7 +128,7 @@ Website.
 .SH BESTANDEN
 ~/uploads/karelzimmer.nl/httpdocs/apps/kz/kz_365_all.deb
 .RS
-Scriptspakket.
+Pakket kz.
 .RE
 .sp
 /usr/share/gnome-background-properties/kz-wallpapers.xml
