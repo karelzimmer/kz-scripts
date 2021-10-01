@@ -307,8 +307,6 @@ create_development_environment() {
                         7 29
     check_dependencies
     process_repos
-    process_documents
-    process_scripts
     download_website
 }
 
