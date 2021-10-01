@@ -235,11 +235,11 @@ build_uploads() {
                         --outdir "${TARGET_UPLOADS[PDFS]}"  \
                         "$file"                          |& $LOGCMD
             changes=true
-            info "$file"
+            info "  $file"
         fi
     done
     if ! $changes; then
-        info 'Geen documenten gewijzigd.'
+        info '  Geen documenten gewijzigd.'
     fi
     cd "$HOME" || exit $ERROR
 
@@ -281,11 +281,11 @@ build_uploads() {
                             "${TARGET_UPLOADS[PDFS]}/$file.pdf" |& $LOGCMD
             fi
             changes=true
-            info "$file"
+            info "  $file"
         fi
     done
     if ! $changes; then
-        info 'Geen scripts gewijzigd.'
+        info '  Geen scripts gewijzigd.'
     fi
     cd "$HOME" || exit $ERROR
 
