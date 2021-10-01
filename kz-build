@@ -217,7 +217,7 @@ build_uploads() {
         mkdir --parents "$dir"
     done
 
-    info 'Verwerk gewijzigde documenten...'
+    info 'Gewijzigde documenten:'
 
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
@@ -252,7 +252,7 @@ build_uploads() {
             "${SOURCE_UPLOADS[DOCS]}"/      \
             "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
 
-    info 'Verwerk gewijzigde scripts...'
+    info 'Gewijzigde scripts:'
 
     cd "${SOURCE_UPLOADS[SCRIPTS]}" || exit $ERROR
     for file in *; do
