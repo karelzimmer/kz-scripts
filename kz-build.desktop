@@ -20,7 +20,7 @@ Keywords=kzbuild;build;
 Keywords[nl]=kzbuild;build;
 Categories=KZ Scripts;
 Exec=/usr/bin/kz-build --gui
-Icon=/usr/share/pixmaps/kz-build.svg
+Icon=/usr/share/pixmaps/kz-build.png
 Terminal=true
 Actions=version;
 

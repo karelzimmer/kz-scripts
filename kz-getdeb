@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Pakket kz installeren.
+# Pakket installeren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
@@ -43,14 +43,16 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
      of: curl -L karelzimmer.nl/kz | bash
      of: zoek naar get en klik op Scripts installeren
 
-Pakket kz installeren.
+Pakket installeren.
 
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly DEB_DIR=$HOME/kz-deb
-readonly DOCS_DIR=$HOME/kz-docs
-readonly SCRIPTS_DIR=$HOME/kz-scripts
+readonly DEB_REPO=$HOME/kz-deb
+readonly DOCS_REPO=$HOME/kz-docs
+readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly UPLOADS_REPO=$HOME/uploads
+readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
 
 ###############################################################################
@@ -304,7 +306,7 @@ create_development_environment() {
                         --infobox   "$TEXT"         \
                         7 29
     check_dependencies
-    process_deb
+    process_repos
     process_documents
     process_scripts
     download_website
@@ -313,44 +315,46 @@ create_development_environment() {
 
 check_dependencies() {
     if ! command -v git 1> /dev/null; then
+        # Voor versiebeheersysteem.
         sudo apt-get install --yes git |& $LOGCMD
     fi
     if ! command -v lftp 1> /dev/null; then
+        # Voor upload website.
         sudo apt-get install --yes lftp |& $LOGCMD
     fi
 }
 
 
-process_deb() {
+process_repos() {
     if ! git    clone                                       \
                 https://github.com/karelzimmer/kz-deb.git   \
-                "$DEB_DIR"                                  |& $LOGCMD
+                "$DEB_REPO"                                 |& $LOGCMD
     then
-        cd "$DEB_DIR" || exit $ERROR
+        cd "$DEB_REPO" || exit $ERROR
         git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
-}
-
-
-process_documents() {
     if ! git    clone                                       \
                 https://github.com/karelzimmer/kz-docs.git  \
-                "$DOCS_DIR"                                 |& $LOGCMD
+                "$DOCS_REPO"                                |& $LOGCMD
     then
-        cd "$DOCS_DIR" || exit $ERROR
+        cd "$DOCS_REPO" || exit $ERROR
         git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
-}
-
-
-process_scripts() {
     if ! git    clone                                           \
                 https://github.com/karelzimmer/kz-scripts.git   \
-                "$SCRIPTS_DIR"                                  |& $LOGCMD
+                "$SCRIPTS_REPO"                                 |& $LOGCMD
     then
-        cd "$SCRIPTS_DIR" || exit $ERROR
+        cd "$SCRIPTS_REPO" || exit $ERROR
+        git config credential.helper store |& $LOGCMD
+        git pull |& $LOGCMD
+    fi
+    if ! git    clone                                           \
+                https://github.com/karelzimmer/kz-uploads.git   \
+                "$UPLOADS_REPO"                                 |& $LOGCMD
+    then
+        cd "$UPLOADS_REPO" || exit $ERROR
         git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
@@ -360,7 +364,7 @@ process_scripts() {
 download_website() {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
-    local ftp_to=$HOME/uploads
+    local ftp_to=$UPLOADS_DISTDIR
     local ftp_opts='--delete --verbose'
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
     local ftp_host=server106.hosting2go.nl

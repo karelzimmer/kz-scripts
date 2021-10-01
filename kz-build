@@ -25,7 +25,7 @@ readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly    USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
 readonly    HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
-Pakket distribueren.
+Pakket bouwen.
 
 Opties:
 $OPTIONS_HELP_COMMON"
