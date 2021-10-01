@@ -161,6 +161,7 @@ check_input() {
 
 process_input() {
     check_dependencies
+    remove_backups
     # Er is een afhankelijkheid t.a.v. aanmaken .pdf, vandaar uploads eerst.
     build_uploads
     build_deb
@@ -188,6 +189,14 @@ check_dependencies() {
         info 'Installeer rsync...'
         sudo apt-get install --yes rsync |& $LOGCMD
     fi
+}
+
+
+remove_backups() {
+    find    "$UPLOADS_REPO"             \
+            -name '*~'      -delete -or \
+            -name '*.*~'    -delete -or \
+            -name '*.bak'   -delete     |& $LOGCMD
 }
 
 

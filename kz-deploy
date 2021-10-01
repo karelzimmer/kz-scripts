@@ -128,7 +128,6 @@ check_input() {
 
 process_input() {
     check_dependencies
-    remove_backups
     check_names
     check_scripts
     build_package
@@ -143,14 +142,6 @@ check_dependencies() {
         info 'Installeer lftp...'
         sudo apt-get install --yes lftp |& $LOGCMD
     fi
-}
-
-
-remove_backups() {
-    find    "$UPLOADS_REPO"             \
-            -name '*~'      -delete -or \
-            -name '*.*~'    -delete -or \
-            -name '*.bak'   -delete     |& $LOGCMD
 }
 
 
