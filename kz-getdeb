@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.02.00
-VERSION_DATE=2021-09-24
+VERSION_NUMBER=29.03.00
+VERSION_DATE=2021-09-27
 
 
 ###############################################################################
@@ -360,7 +360,7 @@ process_scripts() {
 download_website() {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
-    local ftp_to=$HOME/uploads/karelzimmer.nl/httpdocs
+    local ftp_to=$HOME/uploads
     local ftp_opts='--delete --verbose'
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
     local ftp_host=server106.hosting2go.nl

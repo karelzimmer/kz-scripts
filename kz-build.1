@@ -1,74 +1,67 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kz deploy.
+.\" Man-pagina voor kz build.
 .\"
 .\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" RELEASE_YEAR=2019
+.\" RELEASE_YEAR=2021
 .\"
-.\" VERSION_NUMBER=07.01.00
+.\" VERSION_NUMBER=01.00.00
 .\" VERSION_DATE=2021-09-27
 .\"
 .\"
-.TH KZ-DEPLOY 1 "KZ Handleiding" "KZ-DEPLOY(1)" "KZ Handleiding"
+.TH KZ-DEPLOY 1 "KZ Handleiding" "KZ-BUILD(1)" "KZ Handleiding"
 .\"
 .\"
 .SH NAAM
-kz deploy \- Scripts distribueren.
+kz deploy \- Pakket bouwen.
 .\"
 .\"
 .SH SAMENVATTING
-.B kz deploy
+.B kz build
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz deploy\fR distribueert en uploadt scripts en documenten naar
-https://karelzimmer.nl.
+\fBkz build\fR bouwt het pakket kz én de website https://karelzimmer.nl.
 .br
-Dit om de scripts en documenten beschikbaar te stellen voor algemeen gebruik.
+Dit om het pakket en de website te kunnen testen, en later te distribueren met
+\fBkz deploy\fR.
 .sp
-Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
-.br
-\fBgit clone https://github.com/karelzimmer/kz-deb.git\fR
-.br
-\fBgit clone https://github.com/karelzimmer/kz-docs.git\fR
-.br
-\fBgit clone https://github.com/karelzimmer/kz-scripts.git\fR
+Als invoer worden diverse repositories gebruikt zoals kz-docs en kz-scripts.
 .sp
-Opdracht \fBkz deploy\fR kan worden uitgevoerd als ontwikkelaar (gebruiker \
+Opdracht \fBkz build\fR kan worden uitgevoerd als ontwikkelaar (gebruiker \
 'karel', Ubuntu Live session user 'ubuntu', of Debian Live user 'user').
 .sp
-Mijn eigen Continuous Integration and Delivery (CI/CD) Pipeline.
-.sp
 Als ontwikkelen en testen gereed is, kan er een 'git push' en \fBkz deploy\fR
-uitgevoerd worden, waarbij er een nieuw pakket kz wordt gebouwd.
-.sp
-Met opdracht \fBkz getdeb\fR kan de scripts-ontwikkelomgeving op een andere
-of dezelfde machine neergezet worden.
+uitgevoerd worden.
 .sp
 De volgende acties worden uitgevoerd:
 .RS
-1. Aanmaken pakket kz.
+1. Controleer afhankelijkheden.
 .br
-   1.1. Controleer afhankelijkheden.
+   1.1. Benodigde programma's worden geïnstalleerd.
 .br
-   1.2. Controleer scriptnamen (met \fBkz ckname\fR).
+2. Aanmaken website.
 .br
-   1.2. Controleer scripts (met \fBkz ivp\fR).
+   2.1. Maak dist/ gelijk aan app/.
 .br
-2. Upload website.
+   2.2. Voeg documenten uit kz-doc toe aan dist/.
 .br
-   2.1. Verwerk documenten (pdf aanmaken).
+   2.3. Voeg scripts uit kz-scripts toe aan dist/.
 .br
-   2.1. Verwerk scripts (pdf aanmaken).
+3. Aanmaken pakket.
 .br
-3. Installer pakket kz (met \fBkz getdeb\fR).
+   3.1. Maak dist/ gelijk aan app/.
+.br
+   3.2. Voeg scripts uit kz-scripts toe aan dist/.
+.br
+   3.2. Voeg installatiechecklists uit kz-doc toe aan dist/.
+.br
+   3.4. Maak pakket kz aan in kz-uploads/dist/.
 .RE
-Mijn eigen CI/CD Pipeline :-).
 .sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz deploy\fR
-worden gestart door te zoeken naar \fBdepl\fR, klik op
-\fBScripts distribueren\fR.
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz build\fR
+worden gestart door te zoeken naar \fBbuild\fR, klik op \fBPakket bouwen\fR.
 .\"
 .\"
 .SH OPTIES
@@ -88,7 +81,7 @@ Start in grafische modus (gui = graphical user interface).
 \fB-d\fR, \fB--debug\fR
 Neem foutopsporingsinformatie op in het logboek.
 .br
-Bekijk het logboek met '[sudo] journalctl -ab -t kz-deploy'.
+Bekijk het logboek met '[sudo] journalctl -ab -t kz-build'.
 .\"
 .\"
 .SH STOPSTATUS
@@ -101,17 +94,17 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .SH MAPPEN
 ~/kz-deb/
 .RS
-Basis-bestanden pakket kz.
+Basis-bestanden pakket kz (git repo).
 .RE
 .sp
 ~/kz-docs/
 .RS
-Checklists.
+Checklists (git repo).
 .RE
 .sp
 ~/kz-scripts/
 .RS
-Scripts.
+Scripts (git repo).
 .br
 Inclusief man-pagina's (*.1),
 Tab-completion-scripts (*.completion),
@@ -119,16 +112,16 @@ bureaublad-configuratiebestanden (*.desktop), en
 PolicyKit actiedefinitiebestanden (*.policy).
 .RE
 .sp
-~/uploads/
+~/kz-uploads/
 .RS
-Website.
+Website (git repo).
 .RE
 .\"
 .\"
 .SH BESTANDEN
-~/uploads/karelzimmer.nl/httpdocs/apps/kz/kz_365_all.deb
+~/kz-uploads/apps/kz/kz_365_all.deb
 .RS
-Pakket kz.
+Debian-pakket kz.
 .RE
 .sp
 /usr/share/gnome-background-properties/kz-wallpapers.xml
@@ -142,11 +135,8 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
 .\"
 .SH ZIE OOK
-\fBkz-build\fR(1),
-\fBkz-ckname\fR(1),
 \fBkz-common.sh\fR(1),
-\fBkz-getdeb\fR(1),
-\fBkz-ivp\fR(1),
+\fBkz-deploy\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
@@ -155,7 +145,7 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
 .\"
 .\"
 .SH BESCHIKBAARHEID
-Opdracht \fBkz deploy\fR is onderdeel van het pakket \fBkz\fR en is
+Opdracht \fBkz build\fR is onderdeel van het pakket \fBkz\fR en is
 beschikbaar vanaf Karel Zimmer Linux Scripts
 <https://karelzimmer.nl/html/linux.html#scripts>.
 .sp

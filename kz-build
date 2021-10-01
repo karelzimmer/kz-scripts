@@ -1,17 +1,17 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Pakket kz distribueren.
+# Pakket bouwen.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-deploy
+PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2009
+RELEASE_YEAR=2021
 
-VERSION_NUMBER=62.06.00
+VERSION_NUMBER=61.00.00
 VERSION_DATE=2021-09-27
 
 
@@ -30,39 +30,46 @@ Pakket distribueren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEB_DIR=$HOME/kz-deb
-readonly    DEB_TEMP_DIR=/tmp/kz
-readonly    DEB_NAME=kz_365_all.deb
-readonly    DOCS_DIR=$HOME/kz-docs
-readonly    SCRIPTS_DIR=$HOME/kz-scripts
-readonly    SITE_DIR=$HOME/uploads/karelzimmer.nl/httpdocs
+readonly    DOCS_REPO=$HOME/kz-docs
+readonly    SCRIPTS_REPO=$HOME/kz-scripts
 
-readonly -A SOURCE_DEB=(
-                [DEB]=$DEB_DIR
-               [DOCS]=$DOCS_DIR
-            [SCRIPTS]=$SCRIPTS_DIR
-    )
-readonly -A TARGET_DEB=(
-                [DEB]=$DEB_TEMP_DIR
-       [APPLICATIONS]=$DEB_TEMP_DIR/usr/share/applications
-        [BACKGROUNDS]=$DEB_TEMP_DIR/usr/share/backgrounds
-    [BACKGROUND_PROP]=$DEB_TEMP_DIR/usr/share/gnome-background-properties
-                [BIN]=$DEB_TEMP_DIR/usr/bin
-                [DOC]=$DEB_TEMP_DIR/usr/share/doc/kz
-                [MAN]=$DEB_TEMP_DIR/usr/share/man/man1
-           [POLICY_1]=$DEB_TEMP_DIR/usr/share/polkit-1/actions
-           [TABCOMPL]=$DEB_TEMP_DIR/usr/share/bash-completion/completions
-    )
+readonly    DEB_REPO=$HOME/kz-deb
+readonly    DEB_APPDIR=$DEB_REPO/app
+readonly    DEB_DISTDIR=$DEB_REPO/dist
+readonly    DEB_NAME=kz_365_all.deb
+
+readonly    UPLOADS_REPO=$HOME/kz-uploads
+readonly    UPLOADS_APPDIR=$UPLOADS_REPO/app
+readonly    UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
 readonly -A SOURCE_UPLOADS=(
-       [DOCS]=$DOCS_DIR
-    [SCRIPTS]=$SCRIPTS_DIR
-    )
+                [APP]=$UPLOADS_APPDIR
+               [DOCS]=$DOCS_REPO
+            [SCRIPTS]=$SCRIPTS_REPO
+            )
 readonly -A TARGET_UPLOADS=(
-        [DEB]=$SITE_DIR/apps/kz
-       [DOCS]=$SITE_DIR/data/linux/documents
-       [PDFS]=$SITE_DIR/data/linux/pdfs
-    [SCRIPTS]=$SITE_DIR/data/linux/scripts
+              [BUILD]=$UPLOADS_DISTDIR
+                [DEB]=$UPLOADS_DISTDIR/apps/kz
+               [DOCS]=$UPLOADS_DISTDIR/data/linux/documents
+               [PDFS]=$UPLOADS_DISTDIR/data/linux/pdfs
+            [SCRIPTS]=$UPLOADS_DISTDIR/data/linux/scripts
+            )
+
+readonly -A SOURCE_DEB=(
+                [APP]=$DEB_APPDIR
+               [DOCS]=$DOCS_REPO
+            [SCRIPTS]=$SCRIPTS_REPO
+            )
+readonly -A TARGET_DEB=(
+              [BUILD]=$DEB_DISTDIR
+       [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
+        [BACKGROUNDS]=$DEB_DISTDIR/usr/share/backgrounds
+    [BACKGROUND_PROP]=$DEB_DISTDIR/usr/share/gnome-background-properties
+                [BIN]=$DEB_DISTDIR/usr/bin
+                [DOC]=$DEB_DISTDIR/usr/share/doc/kz
+                [MAN]=$DEB_DISTDIR/usr/share/man/man1
+           [POLICY_1]=$DEB_DISTDIR/usr/share/polkit-1/actions
+           [TABCOMPL]=$DEB_DISTDIR/usr/share/bash-completion/completions
     )
 
 
@@ -149,104 +156,57 @@ check_input() {
     fi
 
     check_user
-
-    # Regel sudo maar gelijk voor verderop.
-    sudo true
 }
 
 
 process_input() {
-    pre_actions
-    create_package
-    upload_website
-    install_package
-}
-
-
-pre_actions() {
     check_dependencies
-    remove_backups
-    check_names
-    check_scripts
-    rsync   --archive               \
-            --delete                \
-            --exclude='README.md'   \
-            "${SOURCE_DEB[DEB]}"/   \
-            "${TARGET_DEB[DEB]}"
-    sync_pdf_kz-docs
-    sync_all_kz-docs
-    sync_pdf_kz-scripts
-    sync_all_kz-scripts
-    sync_deb_kz-backgrounds
+    # Er is een afhankelijkheid t.a.v. aanmaken .pdf, vandaar uploads eerst.
+    build_uploads
+    build_deb
 }
 
 
 check_dependencies() {
     if ! command -v enscript 1> /dev/null; then
+        # Voor <man-pag>.pdf.
         info 'Installeer enscript...'
         sudo apt-get install --yes enscript |& $LOGCMD
     fi
     if ! command -v fakeroot 1> /dev/null; then
+        # Voor build .deb.
         info 'Installeer fakeroot...'
         sudo apt-get install --yes fakeroot |& $LOGCMD
     fi
     if ! command -v ghostscript 1> /dev/null; then
-        # Voor ps2pdf.
+        # Voor <man-pag>.pdf (ps2pdf).
         info 'Installeer ghostscript...'
         sudo apt-get install --yes ghostscript |& $LOGCMD
     fi
-    if ! command -v lftp 1> /dev/null; then
-        info 'Installeer lftp...'
-        sudo apt-get install --yes lftp |& $LOGCMD
-    fi
     if ! command -v rsync 1> /dev/null; then
+        # Voor build kz-deb en kz-uploads.
         info 'Installeer rsync...'
         sudo apt-get install --yes rsync |& $LOGCMD
     fi
 }
 
 
-remove_backups() {
-    find    "$SITE_DIR"                 \
-            -name '*~'      -delete -or \
-            -name '*.*~'    -delete -or \
-            -name '*.bak'   -delete     |& $LOGCMD
-}
-
-
-check_names() {
-    local -i check_rc=0
-
-    info 'Controleer bestandsnamen (kz ckname)...'
-    log "Check filenames with 'kz ckname'."
-    "$SCRIPTS_DIR"/kz ckname    "$DEB_DIR"      \
-                                "$DOCS_DIR"     \
-                                "$SCRIPTS_DIR"  || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        warning "
-Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
-        exit $check_rc
-    fi
-}
-
-
-check_scripts() {
-    local -i check_rc=0
-
-    info 'Controleer scripts (kz ivp)...'
-    log "Check scripts with 'kz ivp'."
-    "$SCRIPTS_DIR"/kz ivp || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        warning "
-Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
-        exit $check_rc
-    fi
-}
-
-
-sync_pdf_kz-docs() {
-    local docfile=''
+build_uploads() {
+    local file=''
     local changes=false
+
+    info 'Bouw website...'
+
+    rsync   --archive                   \
+            --exclude='README.md'       \
+            --exclude='.git*'           \
+            "${SOURCE_UPLOADS[APP]}"/   \
+            "${TARGET_UPLOADS[BUILD]}"
+
+    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn vóór de rsync.
+    for dir in "${TARGET_UPLOADS[@]}"; do
+        mkdir --parents "$dir"
+    done
 
     info 'Verwerk gewijzigde documenten...'
 
@@ -257,106 +217,108 @@ sync_pdf_kz-docs() {
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
     cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
-    for docfile in *.odt *.txt; do
-
+    for file in *.odt *.txt; do
         # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
-        if ! diff   "$docfile"                          \
-                    "${TARGET_UPLOADS[DOCS]}/$docfile"  &> /dev/null; then
+        if ! diff   "$file"                          \
+                    "${TARGET_UPLOADS[DOCS]}/$file"  &> /dev/null; then
             lowriter    --headless                          \
                         --convert-to pdf                    \
                         --outdir "${TARGET_UPLOADS[PDFS]}"  \
-                        "$docfile"                          |& $LOGCMD
+                        "$file"                          |& $LOGCMD
             changes=true
-            info "    $docfile"
+            info "$file"
         fi
     done
+    if ! $changes; then
+        info 'Geen documenten gewijzigd.'
+    fi
     cd "$HOME" || exit $ERROR
 
-    cp  --archive                                               \
-        --update                                                \
-        "${TARGET_UPLOADS[PDFS]}/Checklist installatie"*.pdf    \
-        "${TARGET_DEB[DOC]}" |& $LOGCMD
-    if ! $changes; then
-        info '    Geen documenten gewijzigd'
-    fi
-}
-
-
-sync_all_kz-docs() {
-    # De exclude en delete-excluded i.v.m. de lokale git repository.
-    rsync   --archive                   \
-            --delete                    \
-            --exclude='LICENSE'         \
-            --exclude='README.md'       \
-            --exclude='.git*'           \
-            --delete-excluded           \
-            "${SOURCE_UPLOADS[DOCS]}"/  \
-            "${TARGET_UPLOADS[DOCS]}"   |& $LOGCMD
-}
-
-
-sync_pdf_kz-scripts() {
-    local changes=false
-    local scriptfile=''
+    rsync   --archive                       \
+            --delete                        \
+            --exclude='LICENSE'             \
+            --exclude='README.md'           \
+            --exclude='.git*'               \
+            --delete-excluded               \
+            "${SOURCE_UPLOADS[DOCS]}"/      \
+            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
 
     info 'Verwerk gewijzigde scripts...'
 
     cd "${SOURCE_UPLOADS[SCRIPTS]}" || exit $ERROR
-    for scriptfile in *; do
-
-        if [[ $scriptfile = LICENSE || $scriptfile = README.md ]]; then
+    for file in *; do
+        if [[ $file = LICENSE || $file = README.md ]]; then
             continue
-        elif [[ -d "$scriptfile" ]]; then
+        elif [[ -d "$file" ]]; then
             continue
         fi
-
-        # Verwerk het bestand als deze nieuw of gewijzigd is (deltabepaling).
-        if ! diff   "$scriptfile"                               \
-                    "${TARGET_UPLOADS[SCRIPTS]}/$scriptfile"    &> /dev/null
+        # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
+        if ! diff   "$file"                             \
+                    "${TARGET_UPLOADS[SCRIPTS]}/$file"  &> /dev/null
         then
-            if grep --quiet --regexp='^''.TH ' "$scriptfile"; then
+            if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-pagina.
-                man     --troff                                     \
-                        "${SOURCE_UPLOADS[SCRIPTS]}/$scriptfile"    |
-                ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf" |& $LOGCMD
+                man     --troff                                 \
+                        "${SOURCE_UPLOADS[SCRIPTS]}/$file"      |
+                ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$file.pdf"   |& $LOGCMD
             else
                 # Script inclusief *.1, *.completion, *.desktop, en *.policy.
-                enscript    --quiet                                     \
-                            --line-numbers                              \
-                            --title="$scriptfile"                       \
-                            --output=-                                  \
-                            "$scriptfile"                               |
-                ps2pdf      -                                           \
-                            "${TARGET_UPLOADS[PDFS]}/$scriptfile.pdf"   \
-                            |& $LOGCMD
+                enscript    --quiet                             \
+                            --line-numbers                      \
+                            --title="$file"                     \
+                            --output=-                          \
+                            "$file"                             |
+                ps2pdf      -                                   \
+                            "${TARGET_UPLOADS[PDFS]}/$file.pdf" |& $LOGCMD
             fi
             changes=true
-            info "    $scriptfile"
+            info "$file"
         fi
     done
     if ! $changes; then
-        info '    Geen scripts gewijzigd'
+        info 'Geen scripts gewijzigd.'
     fi
     cd "$HOME" || exit $ERROR
+
+    rsync   --archive                       \
+            --delete                        \
+            --exclude='__pycache__'         \
+            --exclude='LICENSE'             \
+            --exclude='README.md'           \
+            --exclude='.git*'               \
+            --delete-excluded               \
+            "${SOURCE_UPLOADS[SCRIPTS]}"/   \
+            "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
 }
 
 
-sync_all_kz-scripts() {
+build_deb() {
     local basename=''
     local dir=''
     local file=''
     local newfile=''
     local prefix='nl.karelzimmer.'
 
-    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_DIR"/*
-    chmod 'a-x' -- "$SCRIPTS_DIR"/*.* "$SCRIPTS_DIR"/LICENSE
-    # Ensure all nedeed dirs are available (git does not add empty dirs).
+    info 'Bouw pakket...'
+
+    rsync   --archive                   \
+            --delete                    \
+            --exclude='LICENSE'         \
+            --exclude='README.md'       \
+            --exclude='.git*'           \
+            "${SOURCE_DEB[APP]}"/   \
+            "${TARGET_DEB[BUILD]}"
+
+    # Zorg dat de rechten goed staan vóór de rsync.
+    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/*
+    chmod 'a-x' -- "$SCRIPTS_REPO"/*.* "$SCRIPTS_REPO"/LICENSE
+
+    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn vóór de rsync.
     for dir in "${TARGET_DEB[@]}"; do
         mkdir --parents "$dir"
     done
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
-    # De exclude en delete-excluded i.v.m. de lokale git repository en pycache.
     rsync   --archive                   \
             --delete                    \
             --exclude='__pycache__'     \
@@ -394,19 +356,22 @@ sync_all_kz-scripts() {
         mv "$file" "$newfile" |& $LOGCMD
     done
 
-    rsync   --archive                       \
-            --delete                        \
-            --exclude='__pycache__'         \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            --delete-excluded               \
-            "${SOURCE_UPLOADS[SCRIPTS]}"/   \
-            "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
+    build_background_properties_file
+
+    cp      --archive                                               \
+            --update                                                \
+            "${TARGET_UPLOADS[PDFS]}/Checklist installatie"*.pdf    \
+            "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
+
+    fakeroot    dpkg-deb                            \
+                --build                             \
+                "$DEB_DISTDIR"                      \
+                "${TARGET_UPLOADS[DEB]}/$DEB_NAME"  |& $LOGCMD
+
 }
 
 
-sync_deb_kz-backgrounds() {
+build_background_properties_file() {
     local wallpaper=''
     local wallpapers_config_file=kz-wallpapers.xml
 
@@ -418,11 +383,11 @@ sync_deb_kz-backgrounds() {
 
     cd "${TARGET_DEB[BACKGROUNDS]}" || exit $ERROR
     for wallpaper in *; do
-        # Verwijder DEB_TEMP_DIR uit TARGET_DEB[BACKGROUNDS].  Voorbeeld:
+        # Verwijder DEB_DISTDIR uit TARGET_DEB[BACKGROUNDS].  Voorbeeld:
         # /tmp/kz/usr/share/backgrounds/kz-gnome.png ->
         # /usr/share/backgrounds/kz-gnome.png
         filename=${TARGET_DEB[BACKGROUNDS]}/$wallpaper
-        filename=${filename/$DEB_TEMP_DIR/}
+        filename=${filename/$DEB_DISTDIR/}
         printf '%s\n' "    <wallpaper>
         <name>${wallpaper%.*}</name>
         <filename>$filename</filename>
@@ -437,56 +402,6 @@ sync_deb_kz-backgrounds() {
             '</wallpapers>' >> "${TARGET_DEB[BACKGROUND_PROP]}/\
 $wallpapers_config_file"
     cd "$HOME" || exit $ERROR
-}
-
-
-create_package() {
-    info 'Maak pakket kz...'
-    fakeroot    dpkg-deb                            \
-                --build                             \
-                "$DEB_TEMP_DIR"                     \
-                "${TARGET_UPLOADS[DEB]}/$DEB_NAME"  |& $LOGCMD
-    rm --force --recursive "$DEB_TEMP_DIR"
-}
-
-
-upload_website() {
-    local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=$SITE_DIR
-    local ftp_to=/httpdocs
-    local ftp_opts='--reverse --delete --verbose'
-    local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to"
-    local ftp_host=server106.hosting2go.nl
-    local ftp_user=kzimmer
-    local ftp_login=$HOME/.kz-$ftp_host
-
-    info 'Upload website...'
-    if ! [[ -f $ftp_login ]]; then
-        read -rsp "FTP-wachtwoord voor $ftp_host: "
-        printf '%s\n' "$REPLY" > "$ftp_login"
-        printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
-    fi
-    if ! lftp   --user      "$ftp_user"                 \
-                --password  "$(cat "$ftp_login")"       \
-                -e          "$ftp_set; $ftp_cmd; exit"  \
-                "$ftp_host"                             |& $LOGCMD; then
-        rm      "$ftp_login"
-        warning 'Uploaden website is mislukt.'
-        warning 'Controleer de log...!'
-        exit $WARNING
-    fi
-    sleep 5
-}
-
-
-install_package() {
-    info 'Installeer pakket kz (kz getdeb)...'
-    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-    if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
-        warning 'Installeren pakket kz is niet uitgevoerd.'
-        exit $WARNING
-    fi
 }
 
 
