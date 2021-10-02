@@ -48,7 +48,7 @@ readonly -A SOURCE_UPLOADS=(
             [SCRIPTS]=$SCRIPTS_REPO
             )
 readonly -A TARGET_UPLOADS=(
-              [DIST]=$UPLOADS_DISTDIR
+               [DIST]=$UPLOADS_DISTDIR
                 [DEB]=$UPLOADS_DISTDIR/apps/kz
                [DOCS]=$UPLOADS_DISTDIR/data/linux/documents
                [PDFS]=$UPLOADS_DISTDIR/data/linux/pdfs
@@ -61,7 +61,7 @@ readonly -A SOURCE_DEB=(
             [SCRIPTS]=$SCRIPTS_REPO
             )
 readonly -A TARGET_DEB=(
-              [DIST]=$DEB_DISTDIR
+               [DIST]=$DEB_DISTDIR
        [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
         [BACKGROUNDS]=$DEB_DISTDIR/usr/share/backgrounds
     [BACKGROUND_PROP]=$DEB_DISTDIR/usr/share/gnome-background-properties
