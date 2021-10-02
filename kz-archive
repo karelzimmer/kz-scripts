@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-archive
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.00.09
-VERSION_DATE=2021-09-12
+VERSION_NUMBER=18.01.00
+VERSION_DATE=2021-09-27
 
 
 ###############################################################################
@@ -34,8 +34,8 @@ $OPTIONS_HELP_COMMON
 Argumenten:
   SELECTIE      zoek naar bestanden overeenkomend met opgegeven SELECTIEs"
 
-readonly ARCHIVE_FROM=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux
-readonly ARCHIVE_TO=$HOME/uploads/karelzimmer.nl/httpdocs/data/linux-archief
+readonly ARCHIVE_FROM=$HOME/kz-uploads/dist/data/linux
+readonly ARCHIVE_TO=$HOME/kz-uploads/app/data/linux-archief
 readonly DELETE_FROM_1=$HOME/kz-scripts
 readonly DELETE_FROM_2=$HOME/kz-deb
 readonly DELETE_FROM_3=$HOME/kz-docs

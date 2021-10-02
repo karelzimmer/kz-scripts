@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ckhtml
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2012
 
-VERSION_NUMBER=12.00.06
-VERSION_DATE=2021-09-08
+VERSION_NUMBER=12.01.00
+VERSION_DATE=2021-09-27
 
 
 ###############################################################################
@@ -30,8 +30,8 @@ Webbestanden valideren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly CSS_DIR=$HOME/uploads/karelzimmer.nl/httpdocs/css
-readonly HTML_DIR=$HOME/uploads/karelzimmer.nl/httpdocs/html
+readonly CSS_DIR=$HOME/kz-uploads/dist/css
+readonly HTML_DIR=$HOME/kz-uploads/dist/html
 
 readonly HOME_URL=https://karelzimmer.nl
 readonly CSS_URL=$HOME_URL/css
