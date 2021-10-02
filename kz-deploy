@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.06.00
-VERSION_DATE=2021-09-27
+VERSION_NUMBER=62.06.01
+VERSION_DATE=2021-10-01
 
 
 ###############################################################################
@@ -194,7 +194,7 @@ upload_website() {
     local ftp_from=$UPLOADS_DISTDIR
     local ftp_to=/httpdocs
     local ftp_opts='--reverse --delete --verbose'
-    local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to"
+    local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
     local ftp_host=server106.hosting2go.nl
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
@@ -206,10 +206,10 @@ upload_website() {
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
-    if ! lftp   --user      "$ftp_user"                 \
-                --password  "$(cat "$ftp_login")"       \
-                -e          "$ftp_set; $ftp_cmd; exit"  \
-                "$ftp_host"                             |& $LOGCMD; then
+    if ! lftp   --user      "$ftp_user"             \
+                --password  "$(cat "$ftp_login")"   \
+                -e          "$ftp_set; $ftp_cmd"    \
+                "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
         warning 'Uploaden website is mislukt.'
         warning 'Controleer de log...!'

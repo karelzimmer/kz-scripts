@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.03.00
-VERSION_DATE=2021-09-27
+VERSION_NUMBER=29.03.01
+VERSION_DATE=2021-10-01
 
 
 ###############################################################################
@@ -403,7 +403,7 @@ term_script() {
         "$search"*{desktop,server}" $HOSTNAME".pdf  \
         "$HOME"                                     |& $LOGCMD || true
 
-    TEXT='Pakket kz is succesvol geïnstalleerd.
+    TEXT='Pakket kz is succesvol geinstalleerd.
 
 Volg nu de stappen zoals beschreven in de
 Checklist installatie Ubuntu, of

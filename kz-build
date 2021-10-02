@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=61.00.00
-VERSION_DATE=2021-09-27
+VERSION_NUMBER=01.00.01
+VERSION_DATE=2021-10-01
 
 
 ###############################################################################
@@ -48,7 +48,7 @@ readonly -A SOURCE_UPLOADS=(
             [SCRIPTS]=$SCRIPTS_REPO
             )
 readonly -A TARGET_UPLOADS=(
-              [BUILD]=$UPLOADS_DISTDIR
+              [DIST]=$UPLOADS_DISTDIR
                 [DEB]=$UPLOADS_DISTDIR/apps/kz
                [DOCS]=$UPLOADS_DISTDIR/data/linux/documents
                [PDFS]=$UPLOADS_DISTDIR/data/linux/pdfs
@@ -61,7 +61,7 @@ readonly -A SOURCE_DEB=(
             [SCRIPTS]=$SCRIPTS_REPO
             )
 readonly -A TARGET_DEB=(
-              [BUILD]=$DEB_DISTDIR
+              [DIST]=$DEB_DISTDIR
        [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
         [BACKGROUNDS]=$DEB_DISTDIR/usr/share/backgrounds
     [BACKGROUND_PROP]=$DEB_DISTDIR/usr/share/gnome-background-properties
@@ -210,9 +210,9 @@ build_uploads() {
             --exclude='README.md'       \
             --exclude='.git*'           \
             "${SOURCE_UPLOADS[APP]}"/   \
-            "${TARGET_UPLOADS[BUILD]}"
+            "${TARGET_UPLOADS[DIST]}"
 
-    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn vóór de rsync.
+    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
     for dir in "${TARGET_UPLOADS[@]}"; do
         mkdir --parents "$dir"
     done
@@ -310,19 +310,19 @@ build_deb() {
 
     info 'Bouw pakket...'
 
-    rsync   --archive                   \
-            --delete                    \
-            --exclude='LICENSE'         \
-            --exclude='README.md'       \
-            --exclude='.git*'           \
+    rsync   --archive               \
+            --delete                \
+            --exclude='LICENSE'     \
+            --exclude='README.md'   \
+            --exclude='.git*'       \
             "${SOURCE_DEB[APP]}"/   \
-            "${TARGET_DEB[BUILD]}"
+            "${TARGET_DEB[DIST]}"
 
-    # Zorg dat de rechten goed staan vóór de rsync.
+    # Zorg dat de rechten goed staan voor de rsync.
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/*
     chmod 'a-x' -- "$SCRIPTS_REPO"/*.* "$SCRIPTS_REPO"/LICENSE
 
-    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn vóór de rsync.
+    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
     for dir in "${TARGET_DEB[@]}"; do
         mkdir --parents "$dir"
     done

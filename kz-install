@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.04.00
-VERSION_DATE=2021-09-22
+VERSION_NUMBER=59.04.01
+VERSION_DATE=2021-10-01
 
 
 ###############################################################################
@@ -297,8 +297,8 @@ process_input() {
 
 process_option_list() {
     local text0='Opdrachten worden verwerkt'
-    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
-    local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
+    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geinstalleerd"
+    local text3='[2/3]  Bepaal welke snaps zijn geinstalleerd'
     local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
 
     TITLE='Applijst maken'
@@ -327,18 +327,18 @@ process_option_list() {
 
     info "
 De applijst is vastgelegd in bestand $LIST_FILE.
-Dit bestand bevatten de eerder geïnstalleerde apps,
+Dit bestand bevatten de eerder geinstalleerde apps,
 Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 
 create_list_manual_installed() {        #1
-    local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
+    local       header="1. Deze pakketten zijn handmatig geinstalleerd via \
 Software of
    met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
     local       footer=''
     local   -i  number_of_lines=0
-    local       plural='geïnstalleerde pakketten'
+    local       plural='geinstalleerde pakketten'
 
     printf '%s\n' "$text1..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
@@ -348,7 +348,7 @@ Software of
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 4))
     if [[ $number_of_lines -eq 1 ]]; then
-        plural='geïnstalleerd pakket'
+        plural='geinstalleerd pakket'
     fi
     footer="Dit overzicht bevat $number_of_lines handmatig $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
@@ -358,7 +358,7 @@ Software of
 
 
 create_list_snaps() {                   #2
-    local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
+    local       header="2. Deze snaps zijn geinstalleerd met '[sudo] install \
 <snap>' of met Software:"
     local       footer=''
     local   -i  number_of_lines=0
@@ -368,7 +368,7 @@ create_list_snaps() {                   #2
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
-        TEXT='snap is niet geïnstalleerd op dit systeem'
+        TEXT='snap is niet geinstalleerd op dit systeem'
         printf '%s\n' "$TEXT" >> "$TEMP_LIST"
     fi
 
