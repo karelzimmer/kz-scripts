@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.06.01
-VERSION_DATE=2021-10-01
+VERSION_NUMBER=62.07.00
+VERSION_DATE=2021-10-03
 
 
 ###############################################################################
@@ -52,6 +52,7 @@ check_input() {
     local       debian_full_name=''
     local   -i  getopt_rc=0
     local       parsed=''
+    local       prompt=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -122,7 +123,9 @@ check_input() {
     check_user
 
     # Regel sudo maar gelijk voor verderop.
-    sudo true
+    prompt="Authenticatie is vereist om delen van $DISPLAY_NAME uit te voeren.
+[sudo] wachtwoord voor %p: "
+    sudo --prompt="$prompt" true
 }
 
 

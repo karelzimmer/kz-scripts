@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.03.13
-VERSION_DATE=2021-09-22
+VERSION_NUMBER=14.04.00
+VERSION_DATE=2021-10-03
 
 
 ###############################################################################
@@ -45,6 +45,7 @@ declare -i MAXRC=0
 check_input() {
     local   -i  getopt_rc=0
     local       parsed=''
+    local       prompt=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -87,7 +88,9 @@ check_input() {
     check_user
 
     # Regel sudo maar gelijk voor verderop.
-    sudo true
+    prompt="Authenticatie is vereist om delen van $DISPLAY_NAME uit te voeren.
+[sudo] wachtwoord voor %p: "
+    sudo --prompt="$prompt" true
 
     check_dependencies
 

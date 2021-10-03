@@ -114,11 +114,14 @@ error() {
 
 
 check_user() {
+    local prompt=''
+
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
-            info "Authenticatie is vereist om $DISPLAY_NAME uit te voeren."
-            exec sudo "$0" "${CMDLINE_ARGS[@]}"
+            prompt="Authenticatie is vereist om $DISPLAY_NAME uit te voeren.
+[sudo] wachtwoord voor %p: "
+            exec sudo --prompt="$prompt" "$0" "${CMDLINE_ARGS[@]}"
         fi
     else
         if [[ $UID -eq 0 ]]; then
