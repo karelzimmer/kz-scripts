@@ -15,8 +15,8 @@ import datetime
 module_name = 'kz_common.py'
 release_year = 2021
 
-version_number = '02.02.01'
-version_date = '2021-09-21'
+version_number = '02.02.02'
+version_date = '2021-10-03'
 
 
 def process_common_options(desc, display_name):
@@ -41,6 +41,9 @@ def process_common_options(desc, display_name):
     elif args.version:
         process_option_version(display_name, version_number,
                                version_date, release_year)
+        # Een non-gui script gestart met optie gui.
+        if args.gui:
+            input('Druk op de Enter-toets om verder te gaan [Enter]: ')
         sys.exit(0)
     elif args.gui:
         return True
