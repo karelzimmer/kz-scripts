@@ -5,8 +5,8 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2021
 .\"
-.\" VERSION_NUMBER=01.02.00
-.\" VERSION_DATE=2021-09-27
+.\" VERSION_NUMBER=01.03.00
+.\" VERSION_DATE=2021-10-03
 .\"
 .\"
 .TH KZ 1 "KZ Handleiding" "KZ(1)" "KZ Handleiding"
@@ -28,11 +28,14 @@ installatie van Ubuntu en Debian Linux.
 .sp
 \fBkz\fR voert \fIOPDRACHT\fR uit, eventueel met het opgegeven \fIARG\fR.
 .sp
-Zie \fBKZ OPDRACHTEN\fR voor welke \fIOPDRACHT\fRen worden ondersteund door
-\fBkz\fR.
+Gebruik optie \fB--list\fR (\fB-t\fR) voor een lijst van beschikbare
+\fIOPDRACHT\fRen.
 .\"
 .\"
 .SH OPTIES
+.TP
+\fB-l\fR, \fB--list\fR
+Toon de beschikbare opdrachten.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -42,104 +45,6 @@ Toon een een korte omschrijving van de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur, en het auteursrecht.
-.\"
-.\"
-.SH KZ OPDRACHTEN
-.PP
-\fBarchive\fR
-.RS
-Scripts archiveren.
-.RE
-.PP
-\fBbackup\fR
-.RS
-Backup maken.
-.RE
-.PP
-\fBckhtml\fR
-.RS
-Webbestanden valideren.
-.RE
-.PP
-\fBckname\fR
-.RS
-Bestandsnamen controleren.
-.RE
-.PP
-\fBbuild\fR
-.RS
-Pakket bouwen.
-.RE
-.PP
-\fBdeploy\fR
-.RS
-Pakket distribueren.
-.RE
-.PP
-\fBdliso\fR
-.RS
-Beeldbestanden downloaden.
-.RE
-.PP
-\fBgenpwd\fR
-.RS
-Wachtwoord genereren. Gebruik Bitwarden om wachtwoorden te beheren.
-.RE
-.PP
-\fBgetdeb\fR
-.RS
-Pakket installeren.
-.RE
-.PP
-\fBgo\fR
-.RS
-Updates uitvoeren.
-.RE
-.PP
-\fBzgset\fR
-.RS
-GUI wijzigen.
-.RE
-.PP
-\fBinstall\fR
-.RS
-Apps installeren.
-.RE
-.PP
-\fBivp\fR
-.RS
-Scripts controleren.
-.RE
-.PP
-\fBmenu\fR
-.RS
-Installatiemenu tonen.
-.RE
-.PP
-\fBmkusb\fR
-.RS
-USB-sticks maken.
-.RE
-.PP
-\fBnas\fR
-.RS
-Netwerkschijf aankoppelen.
-.RE
-.PP
-\fBrestore\fR
-.RS
-Backup terugzetten.
-.RE
-.PP
-\fBsetup\fR
-.RS
-Apps instellen.
-.RE
-.PP
-\fBspsum\fR
-.RS
-Controlebestanden opsplitsen.
-.RE
 .\"
 .\"
 .SH STOPSTATUS
