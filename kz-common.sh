@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.02.11
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=27.03.00
+VERSION_DATE=2021-10-03
 
 
 ###############################################################################
@@ -117,6 +117,7 @@ check_user() {
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
+            info "Authenticatie is vereist om $DISPLAY_NAME uit te voeren."
             exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi
     else
