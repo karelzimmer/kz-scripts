@@ -1,15 +1,15 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz go.
+# Tab-completion-script voor kz update.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.00.02
-# VERSION_DATE=2021-09-04
+# VERSION_NUMBER=01.00.03
+# VERSION_DATE=2021-10-04
 
 dashoptions='-g --gui -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-go
+complete -o default -W "$dashoptions" kz-update
 
 # EOF

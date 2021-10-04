@@ -1,5 +1,5 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kz go.
+# Bureaublad-configuratiebestand voor kz update.
 # Gebruik Bitwarden om wachtwoorden te beheren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
@@ -17,17 +17,17 @@ GenericName=System Updates
 GenericName[nl]=Software-updates
 Comment=Execute update for the system
 Comment[nl]=Voer update uit voor het systeem
-Keywords=kzgo;update;upgrade;
-Keywords[nl]=kzgo;update;upgrade;bijwerken;
+Keywords=kzupdate;update;upgrade;
+Keywords[nl]=kzupdate;update;upgrade;bijwerken;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz-go --gui
-Icon=/usr/share/pixmaps/kz-go.svg
+Exec=/usr/bin/kz-update --gui
+Icon=/usr/share/pixmaps/kz-update.svg
 Terminal=true
 Actions=version;
 
 [Desktop Action version]
 Name=Show version information
 Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-go --gui --version
+Exec=/usr/bin/kz-update --gui --version
 
 # EOF

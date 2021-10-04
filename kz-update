@@ -15,12 +15,12 @@ import argparse
 import kz_common
 import subprocess
 
-program_name = 'kz-go'
+program_name = 'kz-update'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 
-version_number = '03.01.00'
-version_date = '2021-09-21'
+version_number = '03.01.01'
+version_date = '2021-10-04'
 
 desc = 'Updates uitvoeren.'
 option_gui = False
