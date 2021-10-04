@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-archive
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.01.00
-VERSION_DATE=2021-09-27
+VERSION_NUMBER=18.01.01
+VERSION_DATE=2021-10-03
 
 
 ###############################################################################
@@ -143,7 +143,7 @@ process_input() {
             if [[ $dirname = $ARCHIVE_FROM* ]]; then
                 process_archive
             else
-                process_remove
+                process_delete
             fi
         done < <(
             find    "$ARCHIVE_FROM"         \
@@ -199,19 +199,18 @@ archive_file() {
     newdir=${olddir//linux/linux-archief}
     mv "$olddir/$basename" "$newdir" |& $LOGCMD
     printf '%s\n' 'Gearchiveerd.'
-    warning 'Pas website aan!'
     ARCHIVED=true
 }
 
 
-process_remove() {
+process_delete() {
     printf "\n${BOLD}%s\n%s${NORMAL}\n" "$basename" "$dirname"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
         read -rp 'verwijderen/Overslaan/stoppen? [v/O/s]: ' < /dev/tty
         case $REPLY in
             v*|V*)
-                remove_file
+                delete_file
                 break
                 ;;
             o*|O*|'')
@@ -229,7 +228,7 @@ process_remove() {
 }
 
 
-remove_file() {
+delete_file() {
     rm "$file" |& $LOGCMD
     printf '%s\n' 'Verwijderd.'
     DELETED=true
@@ -244,7 +243,7 @@ term_script() {
     fi
     if $ARCHIVED; then
         TEXT="$TEXT\nEr zijn bestanden gearchiveerd."
-        warning 'Pas website aan!'
+        warning 'Pas website aan en commit de wijzigingen!'
     else
         TEXT="$TEXT\nEr zijn geen bestanden gearchiveerd."
     fi
