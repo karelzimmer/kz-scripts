@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ckhtml
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2012
 
-VERSION_NUMBER=12.01.00
-VERSION_DATE=2021-09-27
+VERSION_NUMBER=12.01.01
+VERSION_DATE=2021-10-04
 
 
 ###############################################################################
@@ -89,7 +89,7 @@ check_input() {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        TERMINAL=true
+        TERMINAL=false
     fi
 
     check_user

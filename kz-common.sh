@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.03.00
-VERSION_DATE=2021-10-03
+VERSION_NUMBER=27.03.01
+VERSION_DATE=2021-10-04
 
 
 ###############################################################################
@@ -32,7 +32,7 @@ readonly OPTIONS_HELP_COMMON="\
   -h --help     toon deze hulptekst
   -u --usage    toon een korte gebruikssamenvatting
   -v --version  toon programmaversie
-  -g --gui      start in grafische modus
+  -g --gui      start in grafische modus indien van toepassing
   -d --debug    neem foutopsporingsinformatie op in het logboek"
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')

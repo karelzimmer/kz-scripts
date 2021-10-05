@@ -16,11 +16,10 @@ program_name = 'kz-genpwd'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 
-version_number = '03.01.00'
-version_date = '2021-09-21'
+version_number = '03.01.01'
+version_date = '2021-10-04'
 
 desc = 'Wachtwoord genereren.'
-option_gui = False
 
 
 def generate_password():
@@ -39,12 +38,8 @@ def generate_password():
 
 # --- script ---
 
-option_gui = kz_common.process_common_options(desc, display_name)
+kz_common.process_common_options(desc, display_name)
 
 generate_password()
-
-# Een non-gui script gestart met optie gui.
-if option_gui:
-    input('Druk op de Enter-toets om verder te gaan [Enter]: ')
 
 # EOF

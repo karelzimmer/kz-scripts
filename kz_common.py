@@ -15,8 +15,8 @@ import datetime
 module_name = 'kz_common.py'
 release_year = 2021
 
-version_number = '02.02.02'
-version_date = '2021-10-03'
+version_number = '02.02.03'
+version_date = '2021-10-04'
 
 
 def process_common_options(desc, display_name):
@@ -31,8 +31,6 @@ def process_common_options(desc, display_name):
                         help='toon een korte gebruikssamenvatting')
     parser.add_argument('-v', '--version', action='store_true',
                         help='toon programmaversie')
-    parser.add_argument('-g', '--gui', action='store_true',
-                        help='start in grafische modus')
     args = parser.parse_args()
 
     if args.usage:
@@ -41,20 +39,14 @@ def process_common_options(desc, display_name):
     elif args.version:
         process_option_version(display_name, version_number,
                                version_date, release_year)
-        # Een non-gui script gestart met optie gui.
-        if args.gui:
-            input('Druk op de Enter-toets om verder te gaan [Enter]: ')
         sys.exit(0)
-    elif args.gui:
-        return True
 
 
 def process_option_usage(display_name):
     """
     Deze functie toont de beschikbare opties.
     """
-    print(f"""Gebruik: {display_name} [-u|--usage] [-h|--help] [-v|--version] \
-[-g|--gui]
+    print(f"""Gebruik: {display_name} [-u|--usage] [-h|--help] [-v|--version]
 
 Typ '{display_name} --help' voor meer informatie.""")
 
