@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-archive
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.02.01
+VERSION_NUMBER=18.02.02
 VERSION_DATE=2021-10-04
 
 
@@ -97,7 +97,7 @@ check_input() {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        TERMINAL=false
+        DESKTOP_TERMINAL=false
     fi
 
     check_user

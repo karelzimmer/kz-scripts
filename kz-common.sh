@@ -8,7 +8,7 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.03.01
+VERSION_NUMBER=27.03.02
 VERSION_DATE=2021-10-04
 
 
@@ -56,7 +56,7 @@ declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
 declare     RUN_AS_SUPERUSER=false
-declare     TERMINAL=false
+declare     DESKTOP_TERMINAL=false
 declare     TEXT=''
 declare     TITLE=''
 declare     USAGE='Gebruik: source kz-common.sh
@@ -393,7 +393,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
             # Een non-gui script gestart met optie gui.
-            if $TERMINAL; then
+            if $DESKTOP_TERMINAL; then
                 TEXT="Druk op de Enter-toets om verder te gaan [Enter]: "
                 # < /dev/tty voor als FD 1 al in gebruik is.
                 read -rp "$TEXT" < /dev/tty

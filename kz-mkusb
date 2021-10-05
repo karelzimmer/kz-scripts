@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-mkusb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=18.06.09
+VERSION_NUMBER=18.06.10
 VERSION_DATE=2021-10-04
 
 
@@ -138,7 +138,7 @@ check_input() {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        TERMINAL=false
+        DESKTOP_TERMINAL=false
     fi
 
     check_user

@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.07.01
+VERSION_NUMBER=62.07.02
 VERSION_DATE=2021-10-04
 
 
@@ -117,7 +117,7 @@ check_input() {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        TERMINAL=false
+        DESKTOP_TERMINAL=false
     fi
 
     check_user
