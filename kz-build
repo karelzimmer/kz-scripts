@@ -211,7 +211,7 @@ build_uploads() {
             --exclude='README.md'       \
             --exclude='.git*'           \
             "${SOURCE_UPLOADS[APP]}"/   \
-            "${TARGET_UPLOADS[DIST]}"
+            "${TARGET_UPLOADS[DIST]}"   |& $LOGCMD
 
     # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
     for dir in "${TARGET_UPLOADS[@]}"; do
@@ -334,7 +334,7 @@ build_deb() {
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
     rsync   --archive                   \
             --delete                    \
-            --verbose               \
+            --verbose                   \
             --exclude='__pycache__'     \
             --exclude='LICENSE'         \
             --exclude='README.md'       \
