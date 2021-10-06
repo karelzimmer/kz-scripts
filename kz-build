@@ -373,16 +373,15 @@ build_deb() {
 
     build_background_properties_file
 
-    cp      --archive                                               \
-            --update                                                \
-            "${TARGET_UPLOADS[PDFS]}/Checklist installatie"*.pdf    \
-            "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
+    cp  --archive                                               \
+        --update                                                \
+        "${TARGET_UPLOADS[PDFS]}/Checklist installatie"*.pdf    \
+        "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
 
     fakeroot    dpkg-deb                            \
                 --build                             \
                 "$DEB_DISTDIR"                      \
                 "${TARGET_UPLOADS[DEB]}/$DEB_NAME"  |& $LOGCMD
-
 }
 
 
