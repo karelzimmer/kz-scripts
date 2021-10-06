@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.03.02
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=29.03.03
+VERSION_DATE=2021-10-06
 
 
 ###############################################################################
@@ -139,7 +139,7 @@ check_sudo() {
         while true; do
             TEXT='
 Authenticatie is vereist voor het
-installeren van pakket kz.
+installeren van een pakket.
 
 Voer uw wachtwoord in:'
             # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
@@ -264,23 +264,23 @@ install_scriptspackage() {
         sudo apt-get update |& $LOGCMD
     fi
 
-    # Installeer pakket kz.
+    # Installeer pakket.
     check_sudo_and_dpkg
-    TEXT='Download pakket kz...'
+    TEXT='Download pakket...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 25
+                        7 22
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     check_sudo_and_dpkg
-    TEXT='Installeer pakket kz (kan even duren)...'
+    TEXT='Installeer pakket (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 44
+                        7 41
 
     check_sudo_and_dpkg
     sudo    DEBIAN_FRONTEND=noninteractive  \
@@ -397,7 +397,7 @@ term_script() {
         "$search"*{desktop,server}" $HOSTNAME".pdf  \
         "$HOME"                                     |& $LOGCMD || true
 
-    TEXT='Pakket kz is succesvol geinstalleerd.
+    TEXT='Pakket is succesvol geinstalleerd.
 
 Volg nu de stappen zoals beschreven in de
 Checklist installatie Ubuntu, of
