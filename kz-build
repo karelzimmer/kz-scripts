@@ -320,7 +320,7 @@ build_deb() {
             --exclude='README.md'   \
             --exclude='.git*'       \
             "${SOURCE_DEB[APP]}"/   \
-            "${TARGET_DEB[DIST]}"
+            "${TARGET_DEB[DIST]}"   |& $LOGCMD
 
     # Zorg dat de rechten goed staan voor de rsync.
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/*
