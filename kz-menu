@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.00.09
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=36.00.10
+VERSION_DATE=2021-10-06
 
 
 ###############################################################################
@@ -600,6 +600,7 @@ $prompt"
 execute_command() {
     local   -i  cmd_rc=0
     local       exec=''
+    local       prompt=''
 
     exec=${command/kz /kz-}
     cmd=$(printf '%s' "$exec" | cut -d' ' -f1)
@@ -611,7 +612,10 @@ execute_command() {
                 pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
                 log_rc cmd_rc?
             else
-                sudo "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
+                prompt="Authenticatie is vereist om $command uit te voeren.
+[sudo] wachtwoord voor %p: "
+                sudo    --prompt="$prompt"              \
+                        "$PROGRAM_PATH/$cmd" "$arg" --  || cmd_rc=$?
                 log_rc $cmd_rc
             fi
             ;;
