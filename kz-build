@@ -207,6 +207,7 @@ build_uploads() {
     info 'Bouw website...'
 
     rsync   --archive                   \
+            --verbose                   \
             --exclude='README.md'       \
             --exclude='.git*'           \
             "${SOURCE_UPLOADS[APP]}"/   \
@@ -245,6 +246,7 @@ build_uploads() {
 
     rsync   --archive                       \
             --delete                        \
+            --verbose                       \
             --exclude='LICENSE'             \
             --exclude='README.md'           \
             --exclude='.git*'               \
@@ -291,6 +293,7 @@ build_uploads() {
 
     rsync   --archive                       \
             --delete                        \
+            --verbose                       \
             --exclude='__pycache__'         \
             --exclude='LICENSE'             \
             --exclude='README.md'           \
@@ -312,6 +315,7 @@ build_deb() {
 
     rsync   --archive               \
             --delete                \
+            --verbose               \
             --exclude='LICENSE'     \
             --exclude='README.md'   \
             --exclude='.git*'       \
@@ -330,6 +334,7 @@ build_deb() {
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
     rsync   --archive                   \
             --delete                    \
+            --verbose               \
             --exclude='__pycache__'     \
             --exclude='LICENSE'         \
             --exclude='README.md'       \
@@ -341,6 +346,7 @@ build_deb() {
     # Man-pagina's (.1)
     rsync   --archive                   \
             --delete                    \
+            --verbose                   \
             --remove-source-files       \
             "${TARGET_DEB[BIN]}"/*.1    \
             "${TARGET_DEB[MAN]}"        |& $LOGCMD
