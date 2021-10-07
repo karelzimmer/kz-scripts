@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.01.00
+VERSION_NUMBER=36.01.01
 VERSION_DATE=2021-10-07
 
 
@@ -46,17 +46,15 @@ readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /home/*/.adobe/Flash_Player/AssetCache
 /home/*/.cache
 /home/*/.ccache
-/home/.ecryptfs
-/home/gast
 /home/*/.gvfs
+/home/*/.Private
 /home/*/.recent-applications.xbel
 /home/*/.recently-used.xbel
 /home/*/snap/*/*/.cache
-/home/*/snapshots
 /home/*/.steam/root
 /home/*/.thumbnails
-/home/*/.xsession-errors
-/proc
+/home/*/.var/app/*/cache
+/home/*/.xsession-errors/proc
 /run
 /sys
 /tmp"
