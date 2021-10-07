@@ -5,8 +5,8 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=05.00.04
-.\" VERSION_DATE=2021-09-21
+.\" VERSION_NUMBER=05.01.00
+.\" VERSION_DATE=2021-10-07
 .\"
 .\"
 .TH KZ-RESTORE 1 "KZ Handleiding" "KZ-RESTORE(1)" "KZ Handleiding"
@@ -43,7 +43,8 @@ De inhoud van de back-up is op te vragen met opdracht:
 Standaard worden back-ups gezocht vanaf /media.
 Met optie \fB--source\fR (\fB-s\fR) kan een andere locatie opgegeven worden.
 .sp
-Er wordt gezocht naar een back-up met de naam "backup-<computernaam>-*.tar".
+Er wordt gezocht naar een back-up met de naam "kz-backup-<computernaam>-*.tar",
+en als niet gevonden naar "kz-backup-*.tar".
 .sp
 Standaard wordt de back-up teruggezet in map / (originele plek).
 Met optie \fB--target\fR (\fB-t\fR) kan een andere locatie opgegeven worden.

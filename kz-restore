@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-restore
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=39.00.10
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=39.01.00
+VERSION_DATE=2021-10-07
 
 
 ###############################################################################
@@ -378,7 +378,7 @@ gevonden, van nieuw naar oud:"
         find    "$SOURCE"                           \
                 -noleaf                             \
                 -type f                             \
-                -name 'backup*'"$search4"'*.tar'    \
+                -name 'kz-backup*'"$search4"'*.tar' \
                 -printf '%f\t%h\n'                  \
                 2> >($LOGCMD)                       |
         sort    --reverse
