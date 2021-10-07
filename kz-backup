@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.00.12
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=36.01.00
+VERSION_DATE=2021-10-07
 
 
 ###############################################################################
@@ -62,8 +62,8 @@ readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /tmp"
 readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
 readonly TARGET_DEFAULT_1=/media
-readonly TARGET_DEFAULT_2=backups
-readonly TARGET_DEFAULT_3=$HOSTNAME-$DISTRO
+readonly TARGET_DEFAULT_2=$PROGRAM_NAME
+readonly TARGET_DEFAULT_3=$PROGRAM_NAME-$HOSTNAME-$DISTRO
 # Conform ISO 8601, but ':' -> '.' for other filesystems not on Linux.
 TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S); readonly TIMESTAMP
 
@@ -76,9 +76,9 @@ declare -a  EXCLUDE_ARGUMENT=()
 declare     ARGUMENT_SELECTION=false
 declare -a  SELECTION=()
 declare -a  SELECTION_ARGUMENT=()
-declare -a  SELECTION_DEFAULT=('/home' '/usr/local/etc')
+declare -a  SELECTION_DEFAULT=('/home')
 declare     BACKUP=''
-declare     BACKUP_CREATED=false
+declare     BACKUP_CREATED=falfse
 declare     BACKUPFILE=''
 declare     BACKUP_TO_DELETE=''
 declare -i  SELECTIONSIZE_MACHINE=0
@@ -186,9 +186,6 @@ check_input() {
                 )
         done
     else
-        if [[ -d /etc/libvirt ]]; then
-            SELECTION_DEFAULT+=('/etc/libvirt' '/var/lib/libvirt')
-        fi
         for select_num in "${!SELECTION_DEFAULT[@]}"; do
             SELECTION[$select_num]="${SELECTION_DEFAULT[$select_num]}"
         done
@@ -248,7 +245,7 @@ request_input() {
         fi
     fi
 
-    BACKUPFILE=backup-$HOSTNAME-$DISTRO-$TIMESTAMP.tar
+    BACKUPFILE=$PROGRAM_NAME-$HOSTNAME-$DISTRO-$TIMESTAMP.tar
     BACKUP=$TARGET/$BACKUPFILE
 }
 

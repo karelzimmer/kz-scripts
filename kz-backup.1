@@ -5,8 +5,8 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=05.00.04
-.\" VERSION_DATE=2021-09-21
+.\" VERSION_NUMBER=05.01.00
+.\" VERSION_DATE=2021-10-07
 .\"
 .\"
 .TH KZ-KZBACKUP 1 "KZ Handleiding" "KZ-KZBACKUP(1)" "KZ Handleiding"
@@ -25,18 +25,18 @@ kz backup \- Back-up maken.
 \fBkz backup\fR maakt een back-up (reservekopie) van mappen en bestanden.
 .sp
 Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt er een back-up gemaakt
-van alle Persoonlijke mappen (/home), de configuratie (/usr/local/etc) en KVM
-VMs (/etc/libvirt en /var/lib/libvirt).
+van alle Persoonlijke mappen (/home).
 .sp
 De als \fISELECTIE\fR opgegeven mappen of bestanden moeten bestaan, dit wordt
 gecontroleerd.
 .sp
 Opbouw van de back-up-bestandsnaam is\
- 'backup-<computernaam>-<distributie>-jjjj-mm-ddTuu.mm.ss.tar'.
+ 'kz-backup-<computernaam>-<distributie>-jjjj-mm-ddTuu.mm.ss.tar'.
 .sp
 Standaard locatie voor het plaatsen van de back-up is een medium zoals een
 (externe) harddisk, USB-stick, of een NAS op\
- '/media/<mediumnaam>/backups/<computernaam>'.
+ '/media/<mediumnaam>/kz-backup/kz-backup-<computernaam>-<distributie>' (e.g.
+/media/charlie/kz-backup/kz-backup-pc-van-charlie-ubuntu).
 .br
 Als er meer dan één medium is gevonden dient er een locatie opgegeven te
 worden.
@@ -96,7 +96,7 @@ uit een back-up te herstellen.
 In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz backup\fR
 worden gestart door te zoeken naar \fBback\fR, klik op \fBBack-up maken\fR.
 .br
-Dan zal een back-up worden gemaakt van alle Persoonlijke mappen en KVM VMs.
+Dan zal een back-up worden gemaakt van alle Persoonlijke mappen.
 .\"
 .\"
 .SH OPTIES
@@ -134,7 +134,8 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH MAPPEN
-/media/\fIaangekoppelde-media\fR/backups/<computernaam>/
+/media/\fIaangekoppelde-media\fR/kz-backup/kz-backup-<computernaam>-\
+<distributie>/
 .RS
 Als er geen \fIDOEL\fR is opegegeven wordt de back-up in deze map geplaatst.
 .RE
@@ -164,7 +165,7 @@ https://karelzimmer.nl
 .sp
 \fBkz backup\fR
 .RS
-Maak een back-up van de Persoonlijke mappen en KVM VMs.
+Maak een back-up van de Persoonlijke mappen.
 Hiervoor is ook starter 'Back-up maken' beschikbaar.
 .RE
 .sp

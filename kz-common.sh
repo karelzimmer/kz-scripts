@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.03.02
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=27.03.03
+VERSION_DATE=2021-10-07
 
 
 ###############################################################################
@@ -415,7 +415,7 @@ signal_exit() {
             if [[ -e $BACKUP_TO_DELETE ]]; then
                 info 'Programma kz-backup is onderbroken.
 
-Opgeslagen back-up wordt verwijderd.'
+Opgeslagen back-up wordt verwijderd...'
                 rm "$BACKUP_TO_DELETE" |& $LOGCMD
                 info 'Opgeslagen back-up is verwijderd.'
             fi
