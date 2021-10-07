@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.00.03
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=01.00.04
+VERSION_DATE=2021-10-07
 
 
 ###############################################################################
@@ -210,6 +210,7 @@ build_uploads() {
             --verbose                   \
             --exclude='README.md'       \
             --exclude='.git*'           \
+            --delete-excluded           \
             "${SOURCE_UPLOADS[APP]}"/   \
             "${TARGET_UPLOADS[DIST]}"   |& $LOGCMD
 
@@ -319,6 +320,7 @@ build_deb() {
             --exclude='LICENSE'     \
             --exclude='README.md'   \
             --exclude='.git*'       \
+            --delete-excluded       \
             "${SOURCE_DEB[APP]}"/   \
             "${TARGET_DEB[DIST]}"   |& $LOGCMD
 
