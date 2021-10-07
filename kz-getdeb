@@ -396,7 +396,7 @@ term_script() {
         "$search"*{desktop,server}" $HOSTNAME".pdf  \
         "$HOME"                                     |& $LOGCMD || true
 
-    TEXT='Pakket is succesvol geinstalleerd.
+    TEXT='Het pakket is succesvol geinstalleerd.
 
 Volg nu de stappen zoals beschreven in de
 Checklist installatie Ubuntu, of
