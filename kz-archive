@@ -196,7 +196,8 @@ archive_file() {
     local newdir=''
 
     olddir=$dirname
-    newdir=${olddir//linux/linux-archief}
+    newdir=${olddir//dist/app}
+    newdir=${newdir//linux/linux-archief}
     mv "$olddir/$basename" "$newdir" |& $LOGCMD
     printf '%s\n' 'Gearchiveerd.'
     ARCHIVED=true
