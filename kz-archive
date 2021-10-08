@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-archive
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=18.02.02
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=18.03.00
+VERSION_DATE=2021-10-08
 
 
 ###############################################################################
@@ -37,8 +37,8 @@ Argumenten:
 readonly ARCHIVE_FROM=$HOME/kz-uploads/dist/data/linux
 readonly ARCHIVE_TO=$HOME/kz-uploads/app/data/linux-archief
 readonly DELETE_FROM_1=$HOME/kz-scripts
-readonly DELETE_FROM_2=$HOME/kz-deb
-readonly DELETE_FROM_3=$HOME/kz-docs
+readonly DELETE_FROM_2=$HOME/kz-docs
+readonly DELETE_FROM_3=$HOME/kz-deb
 
 
 ###############################################################################
@@ -243,11 +243,13 @@ term_script() {
     fi
     if $ARCHIVED; then
         TEXT="$TEXT\nEr zijn bestanden gearchiveerd."
-        warning 'Pas website aan en commit de wijzigingen!'
     else
         TEXT="$TEXT\nEr zijn geen bestanden gearchiveerd."
     fi
     info "$TEXT"
+    if  $DELETED || $ARCHIVED; then
+        warning 'Pas website aan en commit de wijzigingen!'
+    fi
     exit $SUCCESS
 }
 
