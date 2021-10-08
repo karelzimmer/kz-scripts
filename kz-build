@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.00.04
-VERSION_DATE=2021-10-07
+VERSION_NUMBER=01.00.05
+VERSION_DATE=2021-10-08
 
 
 ###############################################################################
@@ -206,14 +206,13 @@ build_uploads() {
 
     info 'Bouw website...'
 
+    echo "${SOURCE_UPLOADS[DOCS]}";echo "${TARGET_UPLOADS[DOCS]}"
     rsync   --archive                   \
             --verbose                   \
             --exclude='README.md'       \
             --exclude='.git*'           \
-            --delete-excluded           \
             "${SOURCE_UPLOADS[APP]}"/   \
             "${TARGET_UPLOADS[DIST]}"   |& $LOGCMD
-
     # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
     for dir in "${TARGET_UPLOADS[@]}"; do
         mkdir --parents "$dir"
@@ -251,7 +250,6 @@ build_uploads() {
             --exclude='LICENSE'             \
             --exclude='README.md'           \
             --exclude='.git*'               \
-            --delete-excluded               \
             "${SOURCE_UPLOADS[DOCS]}"/      \
             "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
 
