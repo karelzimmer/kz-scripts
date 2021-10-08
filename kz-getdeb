@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.03.03
-VERSION_DATE=2021-10-06
+VERSION_NUMBER=29.04.00
+VERSION_DATE=2021-10-08
 
 
 ###############################################################################
@@ -48,6 +48,8 @@ Pakket installeren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
+readonly BIN_REPO=$HOME/bin
+readonly WORK_REPO=$HOME/work
 readonly DEB_REPO=$HOME/kz-deb
 readonly DOCS_REPO=$HOME/kz-docs
 readonly SCRIPTS_REPO=$HOME/kz-scripts
@@ -318,6 +320,22 @@ check_dependencies() {
 
 
 process_repos() {
+    if ! git    clone                                       \
+                https://github.com/karelzimmer/bin.git      \
+                "$BIN_REPO"                                 |& $LOGCMD
+    then
+        cd "$BIN_REPO" || exit $ERROR
+        git config credential.helper store |& $LOGCMD
+        git pull |& $LOGCMD
+    fi
+    if ! git    clone                                       \
+                https://github.com/karelzimmer/work.git     \
+                "$WORK_REPO"                                |& $LOGCMD
+    then
+        cd "$WORK_REPO" || exit $ERROR
+        git config credential.helper store |& $LOGCMD
+        git pull |& $LOGCMD
+    fi
     if ! git    clone                                       \
                 https://github.com/karelzimmer/kz-deb.git   \
                 "$DEB_REPO"                                 |& $LOGCMD
