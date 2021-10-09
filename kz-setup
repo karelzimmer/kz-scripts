@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.05.01
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=45.05.02
+VERSION_DATE=2021-10-09
 
 
 ###############################################################################
@@ -298,7 +298,7 @@ $HOSTNAME.sh
 
 
 process_option_list() {
-    local list_dir="$HOME/KZ Setup List"
+    local list_dir="$HOME/KZ/Setup List"
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
     local file1="$list_dir/1. $PROGRAM_NAME-gebruikersfoto"
@@ -340,7 +340,7 @@ process_option_list() {
     fi
 
     info "
-De instellijst is vastgelegd in map 'KZ Setup List' in de Persoonlijke map.
+De instellijst is vastgelegd in map KZ in de Persoonlijke map.
 Deze bestanden bevatten de eerder gebruikte gebruikersfoto,
 bureaubladachtergrond, favorieten, en opdrachtgeschiedenis.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
