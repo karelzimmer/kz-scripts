@@ -407,15 +407,12 @@ download_website() {
 
 term_script() {
     local search=''
-    local cldest=''
 
-    cldest="$HOME"/KZ
-    mkdir --parents "cldest"
     search='/usr/share/doc/kz/Checklist installatie'
-    cp  --update "$search"*{desktop,server}.pdf "cldest" |& $LOGCMD || true
+    cp  --update "$search"*{desktop,server}.pdf "$HOME" |& $LOGCMD || true
     cp  --update                                    \
         "$search"*{desktop,server}" $HOSTNAME".pdf  \
-        "cldest"                                    |& $LOGCMD || true
+        "$HOME"                                     |& $LOGCMD || true
 
     TEXT='Het pakket is succesvol geinstalleerd.
 
@@ -424,7 +421,7 @@ Checklist installatie Ubuntu, of
 Checklist installatie Debian.
 
 Deze checklists zijn te vinden:
-- in de map KZ in de Persoonlijke map
+- in de Persoonlijke map
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
   onder Linux'

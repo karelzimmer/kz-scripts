@@ -298,7 +298,7 @@ $HOSTNAME.sh
 
 
 process_option_list() {
-    local list_dir="$HOME/KZ/Setup List"
+    local list_dir="$HOME/KZ Setup List"
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
     local file1="$list_dir/1. $PROGRAM_NAME-gebruikersfoto"
@@ -340,7 +340,7 @@ process_option_list() {
     fi
 
     info "
-De instellijst is vastgelegd in map KZ in de Persoonlijke map.
+De instellijst is vastgelegd in de Persoonlijke map, map KZ Setup List.
 Deze bestanden bevatten de eerder gebruikte gebruikersfoto,
 bureaubladachtergrond, favorieten, en opdrachtgeschiedenis.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
