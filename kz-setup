@@ -298,19 +298,15 @@ $HOSTNAME.sh
 
 
 process_option_list() {
-    local list_dir="$HOME/KZ Setup List"
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
-    local file1="$list_dir/1. $PROGRAM_NAME-gebruikersfoto"
+    local file1="$HOME/1. $PROGRAM_NAME-gebruikersfoto"
     local text2='[2/4]  Bureaubladachtergrond vastleggen'
-    local file2="$list_dir/2. $PROGRAM_NAME-bureaubladachtergrond"
+    local file2="$HOME/2. $PROGRAM_NAME-bureaubladachtergrond"
     local text3='[3/4]  Favorieten vastleggen'
-    local file3="$list_dir/3. $PROGRAM_NAME-favorieten"
+    local file3="$HOME/3. $PROGRAM_NAME-favorieten"
     local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
-    local file4="$list_dir/4. $PROGRAM_NAME-opdrachtgeschiedenis"
-
-    rm --force --recursive "$list_dir"
-    mkdir --parents "$list_dir"
+    local file4="$HOME/4. $PROGRAM_NAME-opdrachtgeschiedenis"
 
     TITLE='Instellijst maken'
     if $OPTION_GUI; then
@@ -340,9 +336,12 @@ process_option_list() {
     fi
 
     info "
-De instellijst is vastgelegd in de Persoonlijke map, map KZ Setup List.
-Deze bestanden bevatten de eerder gebruikte gebruikersfoto,
-bureaubladachtergrond, favorieten, en opdrachtgeschiedenis.
+De instellingen zijn vastgelegd in bestanden in de Persoonlijke map.
+Deze bestanden bevatten de eerder gebruikte:
+1. gebruikersfoto,
+2. bureaubladachtergrond,
+3. favorieten, en
+4. opdrachtgeschiedenis.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 }
 

@@ -327,7 +327,7 @@ process_option_list() {
 
     info "
 De applijst is vastgelegd in bestand $LIST_FILE.
-Dit bestand bevatten de eerder geinstalleerde apps,
+Dit bestand bevatten de eerder geinstalleerde apps.
 Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
