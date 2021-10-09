@@ -181,7 +181,7 @@ Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
 build_package() {
     local -i check_rc=0
 
-    info 'Bouw pakket (kz build)...'
+    info 'Bouw website en pakket (kz build)...'
     log "Build package with 'kz build'."
     "$SCRIPTS_REPO"/kz build || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
