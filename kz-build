@@ -207,6 +207,7 @@ build_uploads() {
     info 'Bouw website...'
 
     echo "${SOURCE_UPLOADS[DOCS]}";echo "${TARGET_UPLOADS[DOCS]}"
+    # Geen --delete, want dat doet kz-archive.
     rsync   --archive                   \
             --verbose                   \
             --exclude='README.md'       \
