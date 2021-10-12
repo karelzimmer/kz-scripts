@@ -17,7 +17,7 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.04.02
+VERSION_NUMBER=29.04.03
 VERSION_DATE=2021-10-12
 
 
@@ -397,9 +397,8 @@ download_website() {
                 -e "$ftp_set; $ftp_cmd"             \
                 "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
-        printf  "${YELLOW}%s${NORMAL}\n"            \
-                'Downloaden website is mislukt.'    >&2
-        printf  "${YELLOW}%s${NORMAL}\n" "Controleer de log...!" >&2
+        warning 'Downloaden website is mislukt.'
+        warning 'Controleer de log...!'
         return  $WARNING
     fi
 }
