@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Pakket installeren.
+# Pakket kz installeren.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.04.01
-VERSION_DATE=2021-10-09
+VERSION_NUMBER=29.04.02
+VERSION_DATE=2021-10-12
 
 
 ###############################################################################
@@ -43,7 +43,7 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
      of: curl -L karelzimmer.nl/kz | bash
      of: zoek naar get en klik op Scripts installeren
 
-Pakket installeren.
+Pakket kz installeren.
 
 Opties:
 $OPTIONS_HELP_COMMON"
@@ -141,7 +141,7 @@ check_sudo() {
         while true; do
             TEXT='
 Authenticatie is vereist voor het
-installeren van een pakket.
+installeren van pakket kz.
 
 Voer uw wachtwoord in:'
             # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
@@ -414,7 +414,7 @@ term_script() {
         "$search"*{desktop,server}" $HOSTNAME".pdf  \
         "$HOME"                                     |& $LOGCMD || true
 
-    TEXT='Het pakket is succesvol geinstalleerd.
+    TEXT='Pakket kz is succesvol geinstalleerd.
 
 Volg nu de stappen zoals beschreven in de
 Checklist installatie Ubuntu, of

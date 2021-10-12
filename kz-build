@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Pakket bouwen.
+# Pakket kz bouwen.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.00.05
-VERSION_DATE=2021-10-08
+VERSION_NUMBER=01.00.06
+VERSION_DATE=2021-10-09
 
 
 ###############################################################################
@@ -25,7 +25,7 @@ readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly    USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
 readonly    HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
-Pakket bouwen.
+Pakket kz bouwen.
 
 Opties:
 $OPTIONS_HELP_COMMON"
