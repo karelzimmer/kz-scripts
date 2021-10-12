@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.00.10
-VERSION_DATE=2021-10-06
+VERSION_NUMBER=36.01.00
+VERSION_DATE=2021-10-12
 
 
 ###############################################################################
@@ -63,6 +63,7 @@ ${DASHES:0:57}
 ${DASHES:0:57}"
 readonly -a ACTIONS2=(
     [1]='Back-up maken'
+        'Pakket installeren'
         'Apps installeren'
         'Installatie-instructies tonen'
         'Verwijder-instructies tonen'
@@ -77,6 +78,7 @@ readonly -a ACTIONS2=(
     )
 readonly -a COMMANDS2=(
     [1]='kz backup'
+        'kz getdeb'
         'kz install'
         'kz install --info'
         'kz install --remove'
@@ -346,7 +348,7 @@ process_menu2_gui() {
             zenity  --list                                          \
                     --radiolist                                     \
                     --width         480                             \
-                    --height        380                             \
+                    --height        400                             \
                     --title         "$TITLE"                        \
                     --text          'Selecteer een keuze:'          \
                     --ok-label      'Verder'                        \
@@ -366,6 +368,7 @@ process_menu2_gui() {
                     FALSE  9 "${ACTIONS2[9]}"  "${COMMANDS2[9]}"    \
                     FALSE 10 "${ACTIONS2[10]}" "${COMMANDS2[10]}"   \
                     FALSE 11 "${ACTIONS2[11]}" "${COMMANDS2[11]}"   \
+                    FALSE 12 "${ACTIONS2[12]}" "${COMMANDS2[12]}"   \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -448,7 +451,7 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
             process_commands
             ;;
         4)
-            TITLE="${ACTIONS2[4]}"
+            TITLE="${ACTIONS2[3]}"
             EXEC=(
                 [1]="${ACTIONS2[4]}#${COMMANDS2[4]}"
                 )
@@ -470,9 +473,6 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
             ;;
         7)
             TITLE="${ACTIONS2[7]}"
-            TEXT='
-Zorg dat het medium is aangekoppeld waarop de back-up staat.'
-            warning "$TEXT"
             EXEC=(
                 [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
                 )
@@ -480,6 +480,9 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             ;;
         8)
             TITLE="${ACTIONS2[8]}"
+            TEXT='
+Zorg dat het medium is aangekoppeld waarop de back-up staat.'
+            warning "$TEXT"
             EXEC=(
                 [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
                 )
@@ -507,6 +510,13 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             process_commands
             ;;
         12)
+            TITLE="${ACTIONS2[12]}"
+            EXEC=(
+                [1]="${ACTIONS2[12]}#${COMMANDS2[12]}"
+                )
+            process_commands
+            ;;
+        13)
             exit_menu2=true
             ;;
         *)
@@ -603,8 +613,13 @@ execute_command() {
     local       prompt=''
 
     exec=${command/kz /kz-}
-    cmd=$(printf '%s' "$exec" | cut -d' ' -f1)
-    arg=$(printf '%s' "$exec" | cut -d' ' -f2-)
+    cmd=$(printf '%s' "$exec" | cut --delimiter=' ' --fields=1)
+    arg=$(
+            printf  '%s' "$exec"    |
+            cut     --delimiter=' ' \
+            --fields=2-             \
+            --only-delimited
+        )
     case $exec in
         kz-backup|kz-install|kz-install*--list|kz-nas|kz-restore)
             # Zogenaamde sudo-scripts.
@@ -619,7 +634,7 @@ execute_command() {
                 log_rc $cmd_rc
             fi
             ;;
-        kz-setup|*--info|kz-setup*--list|*--remove|*--reset)
+        kz-getdeb|kz-setup|*--info|kz-setup*--list|*--remove|*--reset)
             # Zogenaamde non-sudo-scripts.
             if $OPTION_GUI; then
                 "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
