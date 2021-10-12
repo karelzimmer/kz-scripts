@@ -340,7 +340,7 @@ process_option_list() {
     fi
 
     info "
-De instellingen zijn vastgelegd in bestanden in de Persoonlijke map > \
+De instellingen zijn vastgelegd in bestanden in de Persoonlijke map -> \
 $PROGRAM_NAME.
 Deze bestanden bevatten de eerder gebruikte:
 1. gebruikersfoto,
