@@ -206,7 +206,6 @@ build_uploads() {
 
     info 'Bouw website...'
 
-    echo "${SOURCE_UPLOADS[DOCS]}";echo "${TARGET_UPLOADS[DOCS]}"
     rsync   --archive                   \
             --verbose                   \
             --exclude='README.md'       \
@@ -234,7 +233,7 @@ build_uploads() {
             lowriter    --headless                          \
                         --convert-to pdf                    \
                         --outdir "${TARGET_UPLOADS[PDFS]}"  \
-                        "$file"                          |& $LOGCMD
+                        "$file"                             |& $LOGCMD
             changes=true
             info "  $file"
         fi
