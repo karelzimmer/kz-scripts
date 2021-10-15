@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-spsum
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=09.00.10
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=09.00.11
+VERSION_DATE=2021-10-15
 
 
 ###############################################################################
@@ -147,7 +147,8 @@ term_script() {
     rm --force --verbose -- *SHA* |& $LOGCMD
     if $ISO_FILE_FOUND; then
         info "Om de beeldbestanden (.iso) te controleren voer uit:
-    ${BLUE}cd $SEARCHDIR;$HASHPROG --check *.$HASHPROG; cd -${NORMAL}
+    ${BLUE}cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd \
+-${NORMAL}
 
 
 En om vervolgens USB-sticks te maken voer uit:

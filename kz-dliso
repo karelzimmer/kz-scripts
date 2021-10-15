@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-dliso
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=17.00.07
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=17.00.08
+VERSION_DATE=2021-10-15
 
 
 
@@ -155,7 +155,8 @@ term_script() {
 
 
 Om de beeldbestanden (.iso) te controleren voer uit:
-    ${BLUE}cd $TARGET;$SEARCH_FOR --check *.$SEARCH_FOR; cd -${NORMAL}"
+    ${BLUE}cd $TARGET;$SEARCH_FOR --check --ignore-missing *.$SEARCH_FOR; cd \
+-${NORMAL}"
 
     exit $SUCCESS
 }
