@@ -222,11 +222,6 @@ build_uploads() {
     done < <(find . -type f -print)
     cd "$HOME" || exit $ERROR
 
-    # Zorg ervoor dat alle benodigde mappen beschikbaar in dist/.
-    for dir in "${TARGET_UPLOADS[@]}"; do
-        mkdir --parents "$dir"
-    done
-
     # ---------------------
     # Vul dist/ met kz-docs
     # ---------------------
