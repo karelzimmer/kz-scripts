@@ -219,7 +219,7 @@ build_uploads() {
                 "$file"             \
                 "$UPLOADS_DISTDIR"  |& $LOGCMD
         fi
-    done < <(find * -type f -print)
+    done < <(find . -type f -print)
     cd "$HOME" || exit $ERROR
 
     # Zorg ervoor dat alle benodigde mappen beschikbaar in dist/.
