@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.00.06
-VERSION_DATE=2021-10-09
+VERSION_NUMBER=01.01.00
+VERSION_DATE=2021-10-15
 
 
 ###############################################################################
@@ -202,22 +202,36 @@ remove_backups() {
 
 build_uploads() {
     local file=''
-    local changes=false
+    local changes=''
 
     info 'Bouw website...'
 
-    rsync   --archive                   \
-            --verbose                   \
-            --exclude='README.md'       \
-            --exclude='.git*'           \
-            "${SOURCE_UPLOADS[APP]}"/   \
-            "${TARGET_UPLOADS[DIST]}"   |& $LOGCMD
-    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
+    # ------------------
+    # Vul dist/ met app/
+    # ------------------
+    cd "$UPLOADS_APPDIR" || exit $ERROR
+    while read -r file; do
+        # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
+        if ! diff "$file" "$UPLOADS_DISTDIR/$file" &> /dev/null; then
+            cp  --parents           \
+                --preserve          \
+                --verbose           \
+                "$file"             \
+                "$UPLOADS_DISTDIR"  |& $LOGCMD
+        fi
+    done < <(find * -type f -print)
+    cd "$HOME" || exit $ERROR
+
+    # Zorg ervoor dat alle benodigde mappen beschikbaar in dist/.
     for dir in "${TARGET_UPLOADS[@]}"; do
         mkdir --parents "$dir"
     done
 
+    # ---------------------
+    # Vul dist/ met kz-docs
+    # ---------------------
     info 'Gewijzigde documenten:'
+    changes=false
 
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
@@ -227,9 +241,13 @@ build_uploads() {
 
     cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
     for file in *.odt *.txt; do
-        # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
-        if ! diff   "$file"                          \
-                    "${TARGET_UPLOADS[DOCS]}/$file"  &> /dev/null; then
+        # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
+        # (deltabepaling).
+        if ! diff "$file" "${TARGET_UPLOADS[DOCS]}/$file" &> /dev/null; then
+            cp  --preserve                  \
+                --verbose                   \
+                "$file"                     \
+                "${TARGET_UPLOADS[DOCS]}"   |& $LOGCMD
             lowriter    --headless                          \
                         --convert-to pdf                    \
                         --outdir "${TARGET_UPLOADS[PDFS]}"  \
@@ -243,16 +261,11 @@ build_uploads() {
     fi
     cd "$HOME" || exit $ERROR
 
-    rsync   --archive                       \
-            --delete                        \
-            --verbose                       \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            "${SOURCE_UPLOADS[DOCS]}"/      \
-            "${TARGET_UPLOADS[DOCS]}"       |& $LOGCMD
-
+    # ------------------------
+    # Vul dist/ met kz-scripts
+    # ------------------------
     info 'Gewijzigde scripts:'
+    changes=false
 
     cd "${SOURCE_UPLOADS[SCRIPTS]}" || exit $ERROR
     for file in *; do
@@ -261,10 +274,13 @@ build_uploads() {
         elif [[ -d "$file" ]]; then
             continue
         fi
-        # Maak pdf aan als het bestand nieuw of gewijzigd is (deltabepaling).
-        if ! diff   "$file"                             \
-                    "${TARGET_UPLOADS[SCRIPTS]}/$file"  &> /dev/null
-        then
+        # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
+        # (deltabepaling).
+        if ! diff "$file" "${TARGET_UPLOADS[SCRIPTS]}/$file" &> /dev/null; then
+            cp  --preserve                      \
+                --verbose                       \
+                "$file"                         \
+                "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-pagina.
                 man     --troff                                 \
@@ -288,17 +304,6 @@ build_uploads() {
         info '  Geen scripts gewijzigd.'
     fi
     cd "$HOME" || exit $ERROR
-
-    rsync   --archive                       \
-            --delete                        \
-            --verbose                       \
-            --exclude='__pycache__'         \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            --delete-excluded               \
-            "${SOURCE_UPLOADS[SCRIPTS]}"/   \
-            "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
 }
 
 
