@@ -6,14 +6,14 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.01.02
-# VERSION_DATE=2021-09-21
+# VERSION_NUMBER=03.01.03
+# VERSION_DATE=2021-10-17
 
 
 #1 bluetooth
 #2 Externe Bluetooth (bluetooth-adapter) installeren
-echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="0cf3", ATTRS{idProduct}=="3004", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
-#4 Start Terminalvenster en voer uit:
+echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
+#4 1. Start Terminalvenster en voer uit:
 #4    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
 
 
