@@ -564,7 +564,7 @@ De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
         action=$( printf '%s' "${EXEC[$exec]}" | awk -F# '{print $1}')
         command=$(printf '%s' "${EXEC[$exec]}" | awk -F# '{print $2}')
         TEXT=$TEXT"
-$exec. $action"
+$exec. $action ($command)"
     done
 
     prompt='
@@ -672,7 +672,7 @@ uitgevoerd:" > "$temp_text_file"
     for exec in "${!EXEC[@]}"; do
         action=$( printf '%s' "${EXEC[$exec]}" | awk -F# '{print $1}')
         command=$(printf '%s' "${EXEC[$exec]}" | awk -F# '{print $2}')
-        printf '%2d. %-25s\n' "$exec" "$action" >> "$temp_text_file"
+        printf '%2d. %-25s\n' "$exec" "$action ($command)" >> "$temp_text_file"
     done
     if $OPTION_GUI; then
         if ! zenity --text-info                         \
