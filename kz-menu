@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.01.00
-VERSION_DATE=2021-10-12
+VERSION_NUMBER=36.01.01
+VERSION_DATE=2021-10-17
 
 
 ###############################################################################
@@ -71,7 +71,7 @@ readonly -a ACTIONS2=(
         'Netwerkschijf aankoppelen'
         'Back-up terugzetten'
         'Apps instellen'
-        'Instell-instructies tonen'
+        'Instel-instructies tonen'
         'Reset-instructies tonen'
         'Instellijst maken'
         'Terug'
@@ -267,8 +267,8 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 
     TITLE="${ACTIONS1[1]}"
     EXEC=(
-        [1]="${ACTIONS2[5]}#${COMMANDS2[5]}"
-            "${ACTIONS2[11]}#${COMMANDS2[11]}"
+        [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
+            "${ACTIONS2[12]}#${COMMANDS2[12]}"
             "${ACTIONS2[1]}#${COMMANDS2[1]}"
         )
 
@@ -304,16 +304,16 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
     if [[   ($HOSTNAME = pc-van-soe  && $USER = soe )   ||
             ($HOSTNAME = pc-van-hugo && $USER = hugo)   ]]; then
         EXEC=(
-            [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
-                "${ACTIONS2[7]}#${COMMANDS2[7]}"
-                "${ACTIONS2[2]}#${COMMANDS2[2]}"
+            [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
+                "${ACTIONS2[8]}#${COMMANDS2[8]}"
                 "${ACTIONS2[3]}#${COMMANDS2[3]}"
+                "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
     else
         EXEC=(
-            [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
-                "${ACTIONS2[2]}#${COMMANDS2[2]}"
+            [1]="${ACTIONS2[8]}#${COMMANDS2[7]}"
                 "${ACTIONS2[3]}#${COMMANDS2[3]}"
+                "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
     fi
     process_commands
