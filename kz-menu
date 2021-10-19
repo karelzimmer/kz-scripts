@@ -311,7 +311,7 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             )
     else
         EXEC=(
-            [1]="${ACTIONS2[8]}#${COMMANDS2[7]}"
+            [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
                 "${ACTIONS2[3]}#${COMMANDS2[3]}"
                 "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
