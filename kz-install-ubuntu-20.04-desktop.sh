@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.02.01
-# VERSION_DATE=2021-09-17
+# VERSION_NUMBER=03.02.02
+# VERSION_DATE=2021-10-18
 
 
 #1 apport
@@ -45,12 +45,27 @@ rm /tmp/google-chrome.deb
 #1 icaclient
 #2 Citrix Workspace app (telewerken) installeren
 ## Citrix Receiver, ICA Client
+## Voegt gebruiker citrixlog toe!
 wget --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/apps/icaclient/LATEST'
 wget --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/apps/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
+#3 Start Terminalvenster en voer uit:
+#3    id gast
+#3    id citrixlog
+#3 Als UID=1002(<2e gebruiker>) GID=1002(<2e gebruiker>) en UID=1001(citrixlog) GID=1001(citrixlog),
+#3 dan is gebruiker citrixlog eerder aangemaakt dan een eventuele 2e gebruiker, corrigeer met:
+#3    sudo nano /etc/passwd
+#3    - citrixlog:x:1001:1001::/var/log/citrix:/bin/sh ->
+#3      citrixlog:x:1002:1002::/var/log/citrix:/bin/sh
+#3    - <2e gebruiker>:x:1002:1002::/var/log/citrix:/bin/sh ->
+#3      <2e gebruiker>:x:1001:1001::/var/log/citrix:/bin/sh
+#3    sudo nano /etc/group
+#3    - citrixlog:x:1001: -> citrixlog:x:1002:
+#3    - <2e gebruiker>:x:1002: -> <2e gebruiker>:x:1001:
+#3    reboot
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes icaclient
 
