@@ -5,8 +5,8 @@
 .\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 .\" RELEASE_YEAR=2019
 .\"
-.\" VERSION_NUMBER=06.03.01
-.\" VERSION_DATE=2021-09-21
+.\" VERSION_NUMBER=06.04.00
+.\" VERSION_DATE=2021-10-20
 .\"
 .\"
 .TH KZ-SETUP 1 "KZ Handleiding" "KZ-SETUP(1)" "KZ Handleiding"
@@ -27,20 +27,20 @@ kz setup \- Apps instellen.
 De opdrachten die standaard meegeleverd worden bij \fBkz setup\fR zijn
 idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
 .sp
-Standaard wordt met \fBkz setup\fR de regels in het bestand\
- '/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh' gekopieerd
-naar een tijdelijk bestand.
+.sp
+Standaard verwerkt \fBkz setup\fR de volgende bestanden:
 .br
-Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
+- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .br
-Dit bestand bevat opdrachten voor het instellen van apps en het wijzigen van
-gebruikersinstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
+- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh
+.br
+Deze bestanden bevatten opdrachten voor het instellen van apps en het wijzigen
+van gebruikersinstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
 (e.g. Ubuntu 20.04 desktop).
 .sp
-Als daarna ook bestand\
- '/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh'
-aanwezig is worden de regels daarin voor computernaam toegevoegd aan het
-eerder aangemaakte tijdelijk bestand.
+De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
+.br
+Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB--editie\fR is
 dat aan te passen (e.g. \fIEDITIE\fR server).

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.04.01
-VERSION_DATE=2021-10-01
+VERSION_NUMBER=59.05.00
+VERSION_DATE=2021-10-20
 
 
 ###############################################################################
@@ -536,22 +536,20 @@ process_dfltfiles() {
     local dfltfile_1=''
     local dfltfile_2=''
 
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+    # Specifiek bestand eerst i.v.m. volgorde in het aanmaken van gebruikers.
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
 $HOSTNAME.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
 
+    # Niet verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
-    else
-        file_notfound=true
     fi
-    # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
-    fi
-    if $file_notfound; then
+    else
         info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
 $EDITION."
         exit $WARNING
