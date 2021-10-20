@@ -52,7 +52,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
-#3 Mocht de <2e gebruiker> problemen hebben met het aanmelden of het gebruik 
+#3 Mocht de <2e gebruiker> problemen hebben met het aanmelden of het gebruik
 ## van /home, start dan het Terminalvenster en voer uit:
 #3    id <2e gebruiker>
 #3    id citrixlog
@@ -117,8 +117,8 @@ sudo apt-get install --yes gnome-sushi
 
 
 #1 taalondersteuning
-#2 Taalondersteuning (check-language-support) installeren
-sudo apt-get install --yes $(check-language-support)
+#2 Taalondersteuning (language-support) installeren
+sudo apt-get install --yes "$(check-language-support)"
 
 
 #1 teamviewer
