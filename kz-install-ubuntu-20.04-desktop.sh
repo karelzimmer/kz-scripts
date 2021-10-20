@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.02.02
-# VERSION_DATE=2021-10-18
+# VERSION_NUMBER=03.03.00
+# VERSION_DATE=2021-10-20
 
 
 #1 apport
@@ -52,20 +52,20 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
-#3 Start Terminalvenster en voer uit:
-#3    id gast
+#3 Mocht de <2e gebruiker> problemen hebben met het aanmelden of het gebruik 
+## van /home, start dan het Terminalvenster en voer uit:
+#3    id <2e gebruiker>
 #3    id citrixlog
-#3 Als UID=1002(<2e gebruiker>) GID=1002(<2e gebruiker>) en UID=1001(citrixlog) GID=1001(citrixlog),
-#3 dan is gebruiker citrixlog eerder aangemaakt dan een eventuele 2e gebruiker, corrigeer met:
-#3    sudo nano /etc/passwd
-#3    - citrixlog:x:1001:1001::/var/log/citrix:/bin/sh ->
-#3      citrixlog:x:1002:1002::/var/log/citrix:/bin/sh
-#3    - <2e gebruiker>:x:1002:1002::/var/log/citrix:/bin/sh ->
-#3      <2e gebruiker>:x:1001:1001::/var/log/citrix:/bin/sh
-#3    sudo nano /etc/group
-#3    - citrixlog:x:1001: -> citrixlog:x:1002:
-#3    - <2e gebruiker>:x:1002: -> <2e gebruiker>:x:1001:
-#3    reboot
+#3 Als gebruiker <2e gebruiker> UID 1002 heeft en gebruiker citrixlog UID=1001,
+## dan is gebruiker citrixlog (met de installatie van icaclient) eerder
+## aangemaakt dan gebruiker <2e gebruiker>.
+## Dit is op te lossen met:
+#3    sudo usermod  --uid 1003 citrixlog
+#3    sudo groupmod --gid 1003 citrixlog
+#3    sudo usermod  --uid 1001 <2e gebruiker>
+#3    sudo groupmod --gid 1001 <2e gebruiker>
+#3    sudo usermod  --uid 1002 citrixlog
+#3    sudo groupmod --gid 1002 citrixlog
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes icaclient
 
@@ -114,6 +114,11 @@ sudo snap install spotify
 sudo apt-get install --yes gnome-sushi
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gnome-sushi
+
+
+#1 taalondersteuning
+#2 Taalondersteuning (check-language-support) installeren
+sudo apt-get install --yes $(check-language-support)
 
 
 #1 teamviewer
