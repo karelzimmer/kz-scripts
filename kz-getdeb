@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.04.04
-VERSION_DATE=2021-10-19
+VERSION_NUMBER=29.04.05
+VERSION_DATE=2021-10-20
 
 
 ###############################################################################
@@ -415,10 +415,10 @@ term_script() {
 
     TEXT='Pakket kz is succesvol geinstalleerd.
 
-Volg nu de stappen zoals beschreven in de
-Checklist installatie.
+Volg nu de stappen zoals beschreven
+in de Checklist installatie.
 
-Deze checklists zijn te vinden:
+Deze checklist is te vinden:
 - in de Persoonlijke map
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
@@ -434,7 +434,7 @@ Typ 'exit' om dit venster te sluiten."
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title 'Gereed'            \
                         --infobox "$TEXT"           \
-                        $height 45
+                        $height 41
     exit $SUCCESS
 }
 
