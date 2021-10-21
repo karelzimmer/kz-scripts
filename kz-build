@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.01.01
+VERSION_NUMBER=01.02.00
 VERSION_DATE=2021-10-21
 
 
@@ -202,7 +202,6 @@ remove_backups() {
 
 build_uploads() {
     local file=''
-    local changes=''
 
     info 'Bouw website...'
 
@@ -225,12 +224,8 @@ build_uploads() {
     # ---------------------
     # Vul dist/ met kz-docs
     # ---------------------
-    info 'Gewijzigde documenten:'
-    changes=false
-
     # Vanuit gedit aangemaakt.
     rm --force "$HOME"/Documenten/*.pdf
-
     # Vanuit LibreOffice aangemaakt.
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
@@ -247,21 +242,13 @@ build_uploads() {
                         --convert-to pdf                    \
                         --outdir "${TARGET_UPLOADS[PDFS]}"  \
                         "$file"                             |& $LOGCMD
-            changes=true
-            info "  $file"
         fi
     done
-    if ! $changes; then
-        info '  Geen documenten gewijzigd.'
-    fi
     cd "$HOME" || exit $ERROR
 
     # ------------------------
     # Vul dist/ met kz-scripts
     # ------------------------
-    info 'Gewijzigde scripts:'
-    changes=false
-
     cd "${SOURCE_UPLOADS[SCRIPTS]}" || exit $ERROR
     for file in *; do
         if [[ $file = LICENSE || $file = README.md ]]; then
@@ -291,13 +278,8 @@ build_uploads() {
                 ps2pdf      -                                   \
                             "${TARGET_UPLOADS[PDFS]}/$file.pdf" |& $LOGCMD
             fi
-            changes=true
-            info "  $file"
         fi
     done
-    if ! $changes; then
-        info '  Geen scripts gewijzigd.'
-    fi
     cd "$HOME" || exit $ERROR
 }
 
