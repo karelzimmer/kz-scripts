@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.03.00
-# VERSION_DATE=2021-10-20
+# VERSION_NUMBER=03.03.01
+# VERSION_DATE=2021-10-21
 
 
 #1 apport
@@ -46,8 +46,8 @@ rm /tmp/google-chrome.deb
 #2 Citrix Workspace app (telewerken) installeren
 ## Citrix Receiver, ICA Client
 ## Voegt gebruiker citrixlog toe!
-wget --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/apps/icaclient/LATEST'
-wget --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/apps/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
+wget --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/downloads/icaclient/LATEST'
+wget --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts

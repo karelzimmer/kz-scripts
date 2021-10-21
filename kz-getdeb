@@ -17,8 +17,8 @@ PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
 
-VERSION_NUMBER=29.04.05
-VERSION_DATE=2021-10-20
+VERSION_NUMBER=29.04.06
+VERSION_DATE=2021-10-21
 
 
 ###############################################################################
@@ -244,7 +244,7 @@ process_input() {
 
 
 install_scriptspackage() {
-    local site_deb=https://karelzimmer.nl/apps/kz/kz_365_all.deb
+    local site_deb=https://karelzimmer.nl/downloads/kz/kz_365_all.deb
     local temp_deb=''
 
     # Bij Live-sessie de universe repo aanzetten.

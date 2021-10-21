@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.01.00
-VERSION_DATE=2021-10-15
+VERSION_NUMBER=01.01.01
+VERSION_DATE=2021-10-21
 
 
 ###############################################################################
@@ -49,7 +49,7 @@ readonly -A SOURCE_UPLOADS=(
             )
 readonly -A TARGET_UPLOADS=(
                [DIST]=$UPLOADS_DISTDIR
-                [DEB]=$UPLOADS_DISTDIR/apps/kz
+                [DEB]=$UPLOADS_DISTDIR/downloads/kz
                [DOCS]=$UPLOADS_DISTDIR/data/linux/documents
                [PDFS]=$UPLOADS_DISTDIR/data/linux/pdfs
             [SCRIPTS]=$UPLOADS_DISTDIR/data/linux/scripts
