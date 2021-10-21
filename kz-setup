@@ -393,6 +393,7 @@ process_argument_app() {
     if [[ -e $dfltfile_1 ]]; then
         file_to_process[0]=$dfltfile_1
     fi
+    # Verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
         file_to_process[1]=$dfltfile_2
     else

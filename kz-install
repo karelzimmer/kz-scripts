@@ -546,6 +546,7 @@ $HOSTNAME.sh
         FILE_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     fi
+    # Verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
