@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-restore
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=39.01.01
-VERSION_DATE=2021-10-08
+VERSION_NUMBER=39.01.02
+VERSION_DATE=2021-10-23
 
 
 ###############################################################################
@@ -278,6 +278,7 @@ standaard 1]: "
                     exit $SUCCESS
                     ;;
                 *[^[:digit:]]*)
+                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
                 *)
@@ -286,6 +287,7 @@ standaard 1]: "
                         BACKUP=${buparray[$REPLY]}
                         break
                     else
+                        printf '%s' "${REWRITE_LINE}"
                         continue
                     fi
                     ;;
@@ -319,6 +321,7 @@ standaard S]: "
                     exit $SUCCESS
                     ;;
                 *[^[:digit:]]*)
+                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
                 *)
@@ -327,6 +330,7 @@ standaard S]: "
                         BACKUP=${buparray[$REPLY]}
                         break
                     else
+                        printf '%s' "${REWRITE_LINE}"
                         continue
                     fi
                     ;;

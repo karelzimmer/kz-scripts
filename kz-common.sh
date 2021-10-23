@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.03.03
-VERSION_DATE=2021-10-07
+VERSION_NUMBER=27.03.04
+VERSION_DATE=2021-10-23
 
 
 ###############################################################################
@@ -70,6 +70,7 @@ declare     RED=''
 declare     GREEN=''
 declare     YELLOW=''
 declare     BLUE=''
+declare     REWRITE_LINE=''
 
 
 ###############################################################################
@@ -234,6 +235,7 @@ process_common_options() {
         GREEN=${BOLD}$(tput setaf 2)
         YELLOW=${BOLD}$(tput setaf 3)
         BLUE=${BOLD}$(tput setaf 4)
+        REWRITE_LINE="$(tput cuu1 ;tput el)"
     fi
 
     if $OPTION_DEBUG; then

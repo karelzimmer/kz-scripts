@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-menu
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=36.01.01
-VERSION_DATE=2021-10-17
+VERSION_NUMBER=36.01.02
+VERSION_DATE=2021-10-23
 
 
 ###############################################################################
@@ -211,6 +211,7 @@ process_menu1_tui() {
             read -rp "Voer uit nummer [1-$((MENU1_LINES-1)), $MENU1_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
+                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
                 *)
@@ -218,6 +219,7 @@ process_menu1_tui() {
                         &> /dev/null; then
                         break
                     else
+                        printf '%s' "${REWRITE_LINE}"
                         continue
                     fi
                     ;;
@@ -398,6 +400,7 @@ process_menu2_tui() {
             read -rp "Voer uit nummer [1-$((MENU2_LINES-1)), $MENU2_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
+                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
                 *)
@@ -405,6 +408,7 @@ process_menu2_tui() {
                         2> /dev/null; then
                         break
                     else
+                        printf '%s' "${REWRITE_LINE}"
                         continue
                     fi
                     ;;
@@ -567,8 +571,7 @@ De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
 $exec. $action ($command)"
     done
 
-    prompt='
-Doorgaan en deze acties uitvoeren?'
+    prompt='Doorgaan en deze acties uitvoeren?'
     if $OPTION_GUI; then
         TEXT=$TEXT"
 
@@ -586,7 +589,7 @@ $prompt"
             COMMANDS_EXECUTED=false
         fi
     else
-        printf '%b\n' "$TEXT"
+        printf '%b\n\n' "$TEXT"
         while true; do
             read -rp "$prompt [J/n]: "
             case $REPLY in
@@ -599,6 +602,7 @@ $prompt"
                     break
                     ;;
                 *)
+                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
             esac

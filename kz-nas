@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-nas
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2014
 
-VERSION_NUMBER=13.00.07
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=13.00.08
+VERSION_DATE=2021-10-23
 
 
 ###############################################################################
@@ -157,6 +157,7 @@ $fstab"
                         break
                         ;;
                     *)
+                        printf '%s' "${REWRITE_LINE}"
                         continue
                         ;;
                 esac
@@ -192,6 +193,7 @@ $fstab"
                     exit $SUCCESS
                     ;;
                 *)
+                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
             esac
