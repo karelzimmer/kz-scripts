@@ -396,9 +396,10 @@ $command, code: $rc ($rc_desc)" --priority=debug
             log "Ended (code=exited, status=$status)." --priority=notice
             # Een non-gui script gestart met optie gui.
             if $DESKTOP_TERMINAL; then
-                TEXT="Druk op de Enter-toets om verder te gaan [Enter]: "
+                TEXT='Druk op de Enter-toets om verder te gaan [Enter]: '
                 # < /dev/tty voor als FD 1 al in gebruik is.
                 read -rp "$TEXT" < /dev/tty
+                printf '%s' "${REWRITE_LINE}"
             fi
             trap - ERR EXIT SIGINT SIGPIPE SIGTERM SIGHUP
             exit "$rc"
