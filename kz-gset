@@ -114,7 +114,7 @@ check_input() {
                             "$USAGELINE"                >&2
                     exit $ERROR
                 elif ($OPTION_ADDFAVBOTTOM || $OPTION_REMOVEFAV); then
-                    TEXT="een optie eenmaal opgeven"
+                    TEXT='een optie eenmaal opgeven'
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
@@ -132,7 +132,7 @@ check_input() {
                             "$USAGELINE"                >&2
                     exit $ERROR
                 elif ($OPTION_ADDFAVTOP || $OPTION_REMOVEFAV); then
-                    TEXT="een optie eenmaal opgeven"
+                    TEXT='een optie eenmaal opgeven'
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
@@ -188,7 +188,7 @@ check_input() {
                             "$USAGELINE"                >&2
                     exit    $ERROR
                 elif ($OPTION_ADDFAVTOP || $OPTION_ADDFAVBOTTOM); then
-                    TEXT="een optie eenmaal opgeven"
+                    TEXT='een optie eenmaal opgeven'
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
