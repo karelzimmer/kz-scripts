@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.01.00
-# VERSION_DATE=2021-10-18
+# VERSION_NUMBER=03.02.00
+# VERSION_DATE=2021-10-24
 
 
 #1 bluefish
@@ -73,6 +73,14 @@ sudo apt-get install --yes gedit-plugins
 sudo apt-get install --yes aspell-nl git gitg
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes git gitg
+
+
+#1 handlelidswitch
+#2 Actie laptopdesksel (negeer sluiten) installeren
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+#4 Start Terminalvenster en voer uit:
+#4    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
 #1 hardinfo

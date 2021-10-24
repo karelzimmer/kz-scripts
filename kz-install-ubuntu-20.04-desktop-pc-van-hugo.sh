@@ -6,11 +6,11 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.01.00
-# VERSION_DATE=2021-09-03
+# VERSION_NUMBER=03.01.01
+# VERSION_DATE=2021-10-24
 
 
-#1
+#1 handlelidswitch
 #2 Actie laptopdesksel (negeer sluiten) installeren
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
