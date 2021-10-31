@@ -116,7 +116,7 @@ kz-gset --addfavtop --file='code_code.desktop'
 #3 4. Klik op 'Text Editor'.
 #3 5. Klik op 'Edit in settings.json'
 #3 6. Klik op 'User' (tab).
-#3 7. Voeg toe tussen de { en }: "editor.rulers": [79]
+#3 7. Voeg toe, of wijzig, tussen de { en }: "editor.rulers": [79]
 #3 8. Sluit Settings.
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='code_code.desktop'
