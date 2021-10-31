@@ -100,7 +100,7 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #4 Voor Firefox:
 #4 ~~~~~~~~~~~~~
 #4 1. Start Firefox webbrowser.
-#4 2. Ga naar Menu openen ☰ > Add-ons (Ctrl+Shift+A).
+#4 2. Ga naar Menu openen ☰  > Add-ons (Ctrl+Shift+A).
 #4 3. Klik links op Extensies.
 #4 4. Bij 'Bitwarden - Gratis wachtwoordbeheer' klik op Uitschakelen of Verwijderen.
 #4 5. Start Terminalvenster en voer uit:
@@ -197,13 +197,13 @@ kz-gset --addfavbottom --file='spotify_spotify.desktop'
 :
 #3 Voeg de extenstie voor Google Agenda toe via:
 #3 1. Start Thunderbird.
-#3 2. Ga naar Menu openen ☰ > Add-ons.
+#3 2. Ga naar Menu openen ☰  > Add-ons.
 #3 3. Zoek 'Google Agenda'
 #3 4. Klik achter 'Provider for Google Calendar' op '+ Toevoegen...'.
 #3 5. Volg de aanwijzingen op het scherm.
 #4 Verwijder de extenstie voor Google Agenda via:
 #4 1. Start Thunderbird.
-#4 2. Ga naar Menu openen ☰ > Add-ons.
+#4 2. Ga naar Menu openen ☰  > Add-ons.
 #4 3. Klik links op Extensies.
 #4 4. Bij 'Provider voor Google Agenda' zet schuifje op uit of klik ... en kies
 #4    Verwijderen.

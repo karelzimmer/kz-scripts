@@ -99,7 +99,7 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 2. Maximaliseer het Terminalvenster.
 #3 3. Voer de volgende opdracht uit:
 #3    echo "Terminalgrootte: $COLUMNS kolommen $LINES rijen"
-#3 4. Ga naar Bewerken > Voorkeuren.
+#3 4. Ga naar ☰  > Voorkeuren.
 #3 5. Onder Profielen klik op Naamloos.
 #3 6. Vul in achter Oorspronkelijke afmeting van de terminal:
 #3    COLUMNS kolommen en LINES rijen, en sluit Voorkeuren.
