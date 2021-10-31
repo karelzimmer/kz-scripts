@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.01.02
-# VERSION_DATE=2021-09-15
+# VERSION_NUMBER=04.01.03
+# VERSION_DATE=2021-10-31
 
 
 #1 bluefish
@@ -95,6 +95,14 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #1 terminal
 #2 GNOME Terminal (terminalvenster) instellen
 kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
+#3 1. Start Terminalvenster.
+#3 2. Maximaliseer het Terminalvenster.
+#3 3. Voer de volgende opdracht uit:
+#3    echo "Terminalgrootte: $COLUMNS kolommen $LINES rijen"
+#3 4. Ga naar Bewerken > Voorkeuren.
+#3 5. Onder Profielen klik op Naamloos.
+#3 6. Vul in achter Oorspronkelijke afmeting van de terminal:
+#3    COLUMNS kolommen en LINES rijen, en sluit Voorkeuren.
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='org.gnome.Terminal.desktop'\
 
