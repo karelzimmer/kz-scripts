@@ -63,27 +63,6 @@ if [[ $USER = monique ]]; then gsettings set org.gnome.desktop.background pictur
 #4    gsettings reset org.gnome.desktop.background picture-uri
 
 
-#1 gnome-gmail
-#2 GNOME Gmail (e-mail) instellen
-if [[ $USER = monique ]]; then kz-gset --addfavtop --file='gnome-gmail.desktop'; fi
-#4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='gnome-gmail.desktop'
-
-
-#1 google-chrome
-#2 Google Chrome (webbrowser) instellen
-if [[ $USER = monique ]]; then kz-gset --removefav --file='firefox.desktop'; fi
-#3 1. Start Standaardtoepassingen.
-#3 2. Kies bij E-mail voor Gnome Gmail.
-
-
-#1 python
-#2 Python (programmeertaal) instellen
-if [[ $USER = karel ]]; then kz-gset --addfavtop --file='idle.desktop'; fi
-#4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='idle.desktop'
-
-
 #1 search
 #2 Vooruit zoeken in history (Ctrl-S) instellen
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc

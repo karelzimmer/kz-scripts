@@ -84,13 +84,6 @@ kz-gset --addfavbottom --file='virt-manager.desktop'
 #4    kz-gset --removefav --file='virt-manager.desktop'
 
 
-#1 python
-#2 Python (programmeertaal) instellen
-kz-gset --addfavtop --file='idle.desktop'
-#4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='idle.desktop'\
-
-
 #1 search
 #2 Vooruit zoeken in history (Ctrl-S) instellen
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
