@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.01.03
-# VERSION_DATE=2021-10-31
+# VERSION_NUMBER=04.02.00
+# VERSION_DATE=2021-11-07
 
 
 #1 bluefish
@@ -18,6 +18,13 @@ kz-gset --addfavbottom --file='bluefish.desktop'
 #3    vink aan Gebruik spaties voor inspringen, geen tabs.
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='bluefish.desktop'
+
+
+#1 firefox
+#2 Firefox (webbrowser) instellen
+kz-gset --removefav --file='firefox.desktop'
+#4 Start Terminalvenster en voer uit:
+#4    kz-gset --addfavtop --file='firefox.desktop'
 
 
 #1 gedit
@@ -37,7 +44,7 @@ gsettings set org.gnome.gedit.preferences.print print-header true
 gsettings set org.gnome.gedit.preferences.print print-line-numbers 1
 gsettings set org.gnome.gedit.preferences.print print-syntax-highlighting true
 gsettings set org.gnome.gedit.preferences.print print-wrap-mode 'char'
-kz-gset --addfavtop --file='org.gnome.gedit.desktop'
+kz-gset --removefav --file='org.gnome.gedit.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.gedit.plugins active-plugins
 #4    gsettings reset org.gnome.gedit.preferences.editor auto-indent
@@ -54,7 +61,7 @@ kz-gset --addfavtop --file='org.gnome.gedit.desktop'
 #4    gsettings reset org.gnome.gedit.preferences.print print-line-numbers
 #4    gsettings reset org.gnome.gedit.preferences.print print-syntax-highlighting
 #4    gsettings reset org.gnome.gedit.preferences.print print-wrap-mode
-#4    kz-gset --removefav --file='org.gnome.gedit.desktop'
+#4    kz-gset --addfavtop --file='org.gnome.gedit.desktop'
 
 
 #1 gnome
@@ -105,6 +112,13 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3    COLUMNS kolommen en LINES rijen, en sluit Voorkeuren.
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='org.gnome.Terminal.desktop'\
+
+
+#1 thunderbird
+#2 Thunderbird (e-mail) instellen
+kz-gset --removefav --file='thunderbird.desktop'
+#4 Start Terminalvenster en voer uit:
+#4    kz-gset --addfavtop --file='thunderbird.desktop'
 
 
 #1 vscode
