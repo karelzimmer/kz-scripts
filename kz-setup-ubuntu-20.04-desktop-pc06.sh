@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.02.00
-# VERSION_DATE=2021-11-07
+# VERSION_NUMBER=04.02.01
+# VERSION_DATE=2021-11-13
 
 
 #1 bluefish
@@ -117,6 +117,12 @@ kz-gset --removefav --file='thunderbird.desktop'
 #1 vscode
 #2 Visual Studio Code (editor) instellen
 kz-gset --addfavtop --file='code_code.desktop'
+xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
+xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
+xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand
+xdg-mime default code_code.desktop text/markdown                # Markdown document
+xdg-mime default code_code.desktop text/troff                   # Man-pagina
+xdg-mime default code_code.desktop text/html                    # Web-pagina
 #3 1. Start Visual Studio Code.
 #3 2. Ga naar File > Preferences > Settings (Ctrl+,).
 #3 3. Zoek 'ruler'
