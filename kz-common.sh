@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.03.04
-VERSION_DATE=2021-10-23
+VERSION_NUMBER=27.03.05
+VERSION_DATE=2021-11-18
 
 
 ###############################################################################

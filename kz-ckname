@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ckname
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2012
 
-VERSION_NUMBER=13.00.08
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=13.00.09
+VERSION_DATE=2021-11-18
 
 
 ###############################################################################
@@ -90,7 +90,7 @@ check_input() {
     if ! $ARGUMENT_MAP; then
         MAP_ARGUMENT[0]=$START_DFLT
     fi
-    for dir in ${MAP_ARGUMENT[*]}; do
+    for dir in "${MAP_ARGUMENT[*]}"; do
         if ! [[ -d $dir ]]; then
                 TEXT="map '$dir' bestaat niet"
                 printf  "$DISPLAY_NAME: %s\n%s\n"   \
