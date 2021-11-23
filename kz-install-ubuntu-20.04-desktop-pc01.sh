@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.01.03
-# VERSION_DATE=2021-10-17
+# VERSION_NUMBER=03.02.00
+# VERSION_DATE=2021-11-18
 
 
 #1 bluetooth
@@ -31,13 +31,6 @@ sudo passwd --delete gast
 sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libimage-exiftool-perl
-
-
-#1 gedit
-#2 Gedit (editor) installeren
-sudo apt-get install --yes gedit-plugins
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes gedit-plugins
 
 
 #1 git
@@ -71,11 +64,18 @@ sudo systemctl restart ssh.service
 
 #1 python
 #2 Python (programmeertaal) installeren
-sudo apt-get install --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+#4    sudo apt remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 #4    sudo rm --force /usr/bin/pip
+
+
+#1 vscode
+#2 Visual Studio Code (editor) installeren
+sudo snap install --classic code
+#4 Start Terminalvenster en voer uit:
+#4    sudo snap remove code
 
 
 # EOF

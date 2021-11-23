@@ -6,15 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.02.00
-# VERSION_DATE=2021-10-24
-
-
-#1 bluefish
-#2 Bluefish (editor) installeren
-sudo apt-get install --yes bluefish
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes bluefish
+# VERSION_NUMBER=03.03.00
+# VERSION_DATE=2021-11-18
 
 
 #1 calibre
@@ -42,7 +35,7 @@ sudo apt-get install --yes dconf-editor
 #2 ExifTool (metadata lezen en schrijven) installeren
 sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes gedit-plugins
+#4    sudo apt remove --yes libimage-exiftool-perl
 
 
 #1 gast
@@ -59,13 +52,6 @@ sudo passwd --delete gast
 sudo apt-get install --yes gconf-editor
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gconf-editor
-
-
-#1 gedit
-#2 Gedit (editor) installeren
-sudo apt-get install --yes gedit-plugins
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes gedit-plugins
 
 
 #1 git
@@ -143,10 +129,10 @@ sudo apt-get install --yes pinta
 
 #1 python
 #2 Python (programmeertaal) installeren
-sudo apt-get install --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+#4    sudo apt remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 #4    sudo rm --force /usr/bin/pip
 
 

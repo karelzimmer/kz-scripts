@@ -6,8 +6,8 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.03.00
-# VERSION_DATE=2021-11-07
+# VERSION_NUMBER=04.04.00
+# VERSION_DATE=2021-11-18
 
 
 #1 firefox
@@ -15,43 +15,6 @@
 kz-gset --removefav --file='firefox.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='firefox.desktop'
-
-
-#1 gedit
-#2 Gedit (editor) instellen
-gsettings set org.gnome.gedit.plugins active-plugins "['sort','spell','smartspaces','changecase','zeitgeistplugin','filebrowser','docinfo','time','codecomment','modelines']"
-gsettings set org.gnome.gedit.preferences.editor auto-indent false
-gsettings set org.gnome.gedit.preferences.editor bracket-matching true
-gsettings set org.gnome.gedit.preferences.editor display-line-numbers true
-gsettings set org.gnome.gedit.preferences.editor display-right-margin true
-gsettings set org.gnome.gedit.preferences.editor highlight-current-line true
-gsettings set org.gnome.gedit.preferences.editor insert-spaces true
-gsettings set org.gnome.gedit.preferences.editor right-margin-position 79
-gsettings set org.gnome.gedit.preferences.editor tabs-size 4
-gsettings set org.gnome.gedit.preferences.editor wrap-last-split-mode 'char'
-gsettings set org.gnome.gedit.preferences.editor wrap-mode 'char'
-gsettings set org.gnome.gedit.preferences.print print-header true
-gsettings set org.gnome.gedit.preferences.print print-line-numbers 1
-gsettings set org.gnome.gedit.preferences.print print-syntax-highlighting true
-gsettings set org.gnome.gedit.preferences.print print-wrap-mode 'char'
-kz-gset --removefav --file='org.gnome.gedit.desktop'
-#4 Start Terminalvenster en voer uit:
-#4    gsettings reset org.gnome.gedit.plugins active-plugins
-#4    gsettings reset org.gnome.gedit.preferences.editor auto-indent
-#4    gsettings reset org.gnome.gedit.preferences.editor bracket-matching
-#4    gsettings reset org.gnome.gedit.preferences.editor display-line-numbers
-#4    gsettings reset org.gnome.gedit.preferences.editor display-right-margin
-#4    gsettings reset org.gnome.gedit.preferences.editor highlight-current-line
-#4    gsettings reset org.gnome.gedit.preferences.editor insert-spaces
-#4    gsettings reset org.gnome.gedit.preferences.editor right-margin-position
-#4    gsettings reset org.gnome.gedit.preferences.editor tabs-size
-#4    gsettings reset org.gnome.gedit.preferences.editor wrap-last-split-mode
-#4    gsettings reset org.gnome.gedit.preferences.editor wrap-mode
-#4    gsettings reset org.gnome.gedit.preferences.print print-header
-#4    gsettings reset org.gnome.gedit.preferences.print print-line-numbers
-#4    gsettings reset org.gnome.gedit.preferences.print print-syntax-highlighting
-#4    gsettings reset org.gnome.gedit.preferences.print print-wrap-mode
-#4    kz-gset --addfavtop --file='org.gnome.gedit.desktop'
 
 
 #1 gnome
@@ -83,6 +46,27 @@ if [[ $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.Terminal.desk
 kz-gset --removefav --file='thunderbird.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='thunderbird.desktop'
+
+
+#1 vscode
+#2 Visual Studio Code (editor) instellen
+kz-gset --addfavtop --file='code_code.desktop'
+xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
+xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
+xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand
+xdg-mime default code_code.desktop text/markdown                # Markdown document
+xdg-mime default code_code.desktop text/troff                   # Man-pagina
+xdg-mime default code_code.desktop text/html                    # Web-pagina
+#3 1. Start Visual Studio Code.
+#3 2. Ga naar File > Preferences > Settings (Ctrl+,).
+#3 3. Zoek 'ruler'
+#3 4. Klik op 'Text Editor'.
+#3 5. Klik op 'Edit in settings.json'
+#3 6. Klik op 'User' (tab).
+#3 7. Voeg toe, of wijzig, tussen de { en }: "editor.rulers": [79]
+#3 8. Sluit Settings.
+#4 Start Terminalvenster en voer uit:
+#4    kz-gset --removefav --file='code_code.desktop'
 
 
 #1 zga-ehrm
