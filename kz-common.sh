@@ -424,8 +424,8 @@ Opgeslagen back-up wordt verwijderd...'
             fi
             ;;
         kz-getdeb)
-            rm --force /tmp/"$PROGRAM_NAME"-??????????.deb || true
-            rm --force /tmp/kz-common.sh || true
+            rm --force /tmp/"$PROGRAM_NAME"-??????????.deb |& $LOGCMD || true
+            rm --force /tmp/kz-common.sh |& $LOGCMD || true
             # Script kz-getdeb verwijdert niet kz en kz.1 ivm lokale Git-repo.
             rm --force kz.{2..99}
             # Maar wel als in HOME, zoals voorgeschreven.
@@ -442,7 +442,7 @@ dan een Terminalvenster, en voer uit:
             ;;
         kz-install)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            rm --force /tmp/"$PROGRAM_NAME"-??????????.* || true
+            rm --force /tmp/"$PROGRAM_NAME"-??????????.* |& $LOGCMD || true
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 dan een Terminalvenster, en voer uit:
@@ -454,7 +454,7 @@ dan een Terminalvenster, en voer uit:
             ;;
         kz-setup)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            rm --force /tmp/"$PROGRAM_NAME"-??????????.* || true
+            rm --force /tmp/"$PROGRAM_NAME"-??????????.* |& $LOGCMD || true
             ;;
         *)
             return $SUCCESS
