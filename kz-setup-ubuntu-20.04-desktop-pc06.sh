@@ -10,16 +10,6 @@
 # VERSION_DATE=2021-11-18
 
 
-#1 bluefish
-#2 Bluefish (editor) instellen
-kz-gset --addfavbottom --file='bluefish.desktop'
-#3 1. Start Bluefish.
-#3 2. Zet via Bewerken > Voorkeuren > Initiele document instellingen de Tab breedte op 4 en
-#3    vink aan Gebruik spaties voor inspringen, geen tabs.
-#4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='bluefish.desktop'
-
-
 #1 firefox
 #2 Firefox (webbrowser) instellen
 kz-gset --removefav --file='firefox.desktop'
