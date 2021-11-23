@@ -100,7 +100,7 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 
 
 #1 zga-webmail
-#2 Zga WebMail - Starter 
+#2 Zga WebMail - Starter
 [[ $USER = monique ]] && cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/
 [[ $USER = monique ]] && sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-webmail.desktop
 [[ $USER = monique ]] && kz-gset --addfavtop --file='kz-zga-webmail.desktop'
