@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.03.03
-# VERSION_DATE=2021-09-17
+# VERSION_NUMBER=04.04.00
+# VERSION_DATE=2021-11-19
 
 
 #1 adguard
-#2 Adguard (adblocker) instellen
+#2 Adguard - Adblocker
 :
 #3 Voor Chrome:
 #3 ~~~~~~~~~~~~
@@ -44,7 +44,7 @@
 
 
 #1 bitwarden
-#2 Bitwarden (wachtwoordkluis) instellen
+#2 Bitwarden - Wachtwoordkluis
 kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #3 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #3 1. Start Bitwarden.
@@ -108,7 +108,7 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 
 
 #1 gnome
-#2 GNOME (bureaubladomgeving) instellen
+#2 GNOME - Bureaubladomgeving
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 kz-gset --addappfolder --folder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -149,7 +149,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 
 
 #1 google-chrome
-#2 Google Chrome (webbrowser) instellen
+#2 Google Chrome - Webbrowser
 kz-gset --addfavtop --file='google-chrome.desktop'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
@@ -173,27 +173,27 @@ kz-gset --addfavtop --file='google-chrome.desktop'
 
 
 #1 icaclient
-#2 Citrix Workspace app (telewerken) instellen
+#2 Citrix Workspace app - Telewerken
 ## Citrix Receiver, ICA Client
 xdg-mime default wfica.desktop application/x-ica
 
 
 #1 skype
-#2 Skype (beeldbellen) instellen
+#2 Skype - Beeldbellen
 kz-gset --addfavbottom --file='skype_skypeforlinux.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='skype_skypeforlinux.desktop'
 
 
 #1 spotify
-#2 Spotify (muziekspeler) instellen
+#2 Spotify - Muziekspeler
 kz-gset --addfavbottom --file='spotify_spotify.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='spotify_spotify.desktop'
 
 
 #1 thunderbird
-#2 Thunderbird (e-mail) instellen
+#2 Thunderbird - E-mail
 :
 #3 Voeg de extenstie voor Google Agenda toe via:
 #3 1. Start Thunderbird.
@@ -210,7 +210,7 @@ kz-gset --addfavbottom --file='spotify_spotify.desktop'
 
 
 #1 zoom
-#2 Zoom (telewerken) instellen
+#2 Zoom - Telewerken
 kz-gset --addfavbottom --file='Zoom.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='Zoom.desktop'

@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=04.01.01
-# VERSION_DATE=2021-09-04
+# VERSION_NUMBER=04.02.00
+# VERSION_DATE=2021-11-19
 
 
 #1 gnome
-#2 GNOME (bureaubladomgeving) instellen
+#2 GNOME - Bureaubladomgeving
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Cairn_by_Sylvain_Naudin.jpg'
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
@@ -21,14 +21,14 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 
 
 #1 telegram
-#2 Telegram (privéberichtenapp) instellen
+#2 Telegram - Privéberichtenapp
 kz-gset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='telegram-desktop_telegram-desktop.desktop'
 
 
 #1 virtualbox
-#2 VirtualBox (virtualisatie) instellen
+#2 VirtualBox - Virtualisatie
 kz-gset --addfavbottom --file='virtualbox.desktop'
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
 chmod u+x "$HOME"/kz-vm-hugowin732.sh

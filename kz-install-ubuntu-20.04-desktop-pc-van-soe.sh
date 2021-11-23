@@ -6,19 +6,19 @@
 ###############################################################################
 # RELEASE_YEAR=2021
 
-# VERSION_NUMBER=01.02.00
-# VERSION_DATE=2021-09-03
+# VERSION_NUMBER=01.03.00
+# VERSION_DATE=2021-11-19
 
 
 #1 calibre
-#2 Calibre (e-boekmanager) installeren
+#2 Calibre - E-boekmanager
 sudo apt-get install --yes calibre
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes calibre
 
 
 #1 clamav
-#1 ClamAV (antivirus) installeren
+#1 ClamAV - Antivirus
 sudo apt-get install --yes clamtk-gnome
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove clamtk-gnome

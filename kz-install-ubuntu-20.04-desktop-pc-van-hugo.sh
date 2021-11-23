@@ -6,12 +6,12 @@
 ###############################################################################
 # RELEASE_YEAR=2020
 
-# VERSION_NUMBER=03.01.01
-# VERSION_DATE=2021-10-24
+# VERSION_NUMBER=03.02.00
+# VERSION_DATE=2021-11-19
 
 
 #1 handlelidswitch
-#2 Actie laptopdesksel (negeer sluiten) installeren
+#2 HandleLidSwitch - Negeer sluiten laptopdesksel
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #4 Start Terminalvenster en voer uit:
@@ -19,21 +19,21 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 
 #1 pinta
-#2 Pinta (tekenprogramma) installeren
+#2 Pinta - Tekenprogramma
 sudo apt-get install --yes pinta
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes pinta
 
 
 #1 telegram
-#2 Telegram (privéberichtenapp) installeren
+#2 Telegram - Privéberichtenapp
 sudo snap install telegram-desktop
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove telegram-desktop
 
 
 #1 virtualbox
-#2 VirtualBox (virtualisatie) installeren
+#2 VirtualBox - Virtualisatie
 ## Images staan in ~/VirtualBox VMs/.
 echo "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget --output-document=- 'https://www.virtualbox.org/download/oracle_vbox_2016.asc' | sudo apt-key add -

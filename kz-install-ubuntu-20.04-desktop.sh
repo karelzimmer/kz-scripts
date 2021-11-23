@@ -11,8 +11,7 @@
 
 
 #1 apport
-#2 Handmatig genereren van crashrapporten (apport) installeren
-## Ubuntu-only.
+#2 Apport - Handmatig genereren van crashrapporten
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
@@ -23,14 +22,14 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
 #1 bitwarden
-#2 Bitwarden (wachtwoordkluis) installeren
+#2 Bitwarden - Wachtwoordkluis
 sudo snap install bitwarden
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove bitwarden
 
 
 #1 google-chrome
-#2 Google Chrome (webbrowser) installeren
+#2 Google Chrome - Webbrowser
 ## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder
 ## zelf aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
 ## Integratie van GNOME Shell-extensies voor webbrowsers:
@@ -43,7 +42,7 @@ rm /tmp/google-chrome.deb
 
 
 #1 icaclient
-#2 Citrix Workspace app (telewerken) installeren
+#2 Citrix Workspace app - Telewerken
 ## Citrix Receiver, ICA Client
 ## Voegt gebruiker citrixlog toe!
 wget --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/downloads/icaclient/LATEST'
@@ -70,18 +69,21 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #4    sudo apt remove --yes icaclient
 
 
-#1 libreoffice
-#2 LibreOffice (kantoorpakket) installeren
+
+
+#1 language-support
+#2 Language support - Taalondersteuning
+sudo apt-get install --yes "$(check-language-support)"#1 libreoffice
+#2 LibreOffice - Kantoorpakket
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
 #1 private-home
-#2 Persoonlijke mappen beveiligen (/home) installeren
+#2 Private home - Persoonlijke mappen beveiligen
 ## https://ubuntu.com//blog/private-home-directories-for-ubuntu-21-04
 ## make all existing home directories private
-## Ubuntu-only.
 sudo chmod 0750 /home/*
 ## ensure any users created by either the adduser(8) or useradd(8)
 ## commands have their home directories private by default
@@ -95,34 +97,30 @@ echo 'HOME_MODE 0750' | sudo tee --append /etc/login.defs
 
 
 #1 skype
-#2 Skype (beeldbellen) installeren
+#2 Skype - Beeldbellen
 sudo snap install --classic skype
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove skype
 
 
 #1 spotify
-#2 Spotify (muziekspeler) installeren
+#2 Spotify - Muziekspeler
 sudo snap install spotify
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove spotify
 
 
 #1 sushi
-#2 Sushi (voorbeeld tonen) installeren
+#2 Sushi - Voorbeeld tonen
 ## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
 sudo apt-get install --yes gnome-sushi
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gnome-sushi
 
 
-#1 taalondersteuning
-#2 Taalondersteuning (language-support) installeren
-sudo apt-get install --yes "$(check-language-support)"
-
 
 #1 teamviewer
-#2 TeamViewer (telewerken) installeren
+#2 TeamViewer - Telewerken
 wget --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
@@ -135,26 +133,24 @@ sudo teamviewer repo default
 
 
 #1 thunderbird
-#2 Thunderbird (e-mail) installeren
+#2 Thunderbird - E-mail
 sudo apt-get install --yes xul-ext-lightning
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes xul-ext-lightning
 
 
 #1 ubuntu-restricted
-#2 Niet-vrije pakketten voor Ubuntu (restricted) installeren
+#2 Ubuntu restricted - Niet-vrije pakketten voor Ubuntu
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van
 ## ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
-## Ubuntu-only.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes ubuntu-restricted-addons libavcodec-extra
 #4    sudo apt autoremove --yes
 
 
-#1 wallpapers
-#2 Ubuntu-achtergronden (wallpapers) installeren
-## Ubuntu-only.
+#1 ubuntu-wallpapers
+#2 Ubuntu wallpapers - Bureaubladachtergronden
 sudo apt-get install --yes ubuntu-wallpapers-*
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes ubuntu-wallpapers-*
@@ -162,7 +158,7 @@ sudo apt-get install --yes ubuntu-wallpapers-*
 
 
 #1 zoom
-#2 Zoom (telewerken) installeren
+#2 Zoom - Telewerken
 wget --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb

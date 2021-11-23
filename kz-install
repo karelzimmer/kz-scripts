@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-install
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=59.05.00
-VERSION_DATE=2021-10-20
+VERSION_NUMBER=59.06.00
+VERSION_DATE=2021-11-19
 
 
 ###############################################################################
@@ -908,8 +908,6 @@ term_script() {
         # Vervang ?? door aantal te verwijderen apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        # Vervang 'installeren' door 'verwijderen' (even lang).
-        sed --in-place --expression='s/installeren/verwijderen/g' "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Verwijder-instructies'
             if ! zenity --text-info                         \

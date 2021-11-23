@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.06.00
-VERSION_DATE=2021-10-20
+VERSION_NUMBER=45.07.00
+VERSION_DATE=2021-11-19
 
 
 ###############################################################################
@@ -833,10 +833,6 @@ term_script() {
         # Vervang ?? door aantal te resetten apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        # Vervang 'instellen' door 'resetten' (1 letter korter).
-        filler=${SPACES:0:8}
-        sed --in-place --expression='s/instellen/resetten/g' "$TEXT_FILE"
-        sed --in-place --expression="s/^$filler==/$filler=/g" "$TEXT_FILE"
         if $OPTION_GUI; then
             TITLE='Reset-instructies'
             if ! zenity --text-info                         \

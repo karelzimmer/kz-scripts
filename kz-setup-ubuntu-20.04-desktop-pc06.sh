@@ -11,14 +11,14 @@
 
 
 #1 firefox
-#2 Firefox (webbrowser) instellen
+#2 Firefox - Webbrowser
 kz-gset --removefav --file='firefox.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='firefox.desktop'
 
 
 #1 gnome
-#2 GNOME (bureaubladomgeving) instellen
+#2 GNOME - Bureaubladomgeving
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
@@ -30,7 +30,7 @@ gsettings set org.gnome.nautilus.preferences show-create-link true
 
 
 #1 kvm
-#2 KVM (virtualisatie) instellen
+#2 KVM - Virtualisatie
 ## Beeldscherm 2048 x 1152 (16:9).
 kz-gset --addfavbottom --file='virt-manager.desktop'
 #4 Start Terminalvenster en voer uit:
@@ -38,7 +38,7 @@ kz-gset --addfavbottom --file='virt-manager.desktop'
 
 
 #1 search
-#2 Vooruit zoeken in history (Ctrl-S) instellen
+#2 Search - Vooruit zoeken in history met Ctrl-S
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #4 Start Terminalvenster en voer uit:
@@ -46,7 +46,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
 #1 terminal
-#2 GNOME Terminal (terminalvenster) instellen
+#2 GNOME Terminal - Terminalvenster
 kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #3 1. Start Terminalvenster.
 #3 2. Maximaliseer het Terminalvenster.
@@ -61,14 +61,14 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 
 
 #1 thunderbird
-#2 Thunderbird (e-mail) instellen
+#2 Thunderbird - E-mail
 kz-gset --removefav --file='thunderbird.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='thunderbird.desktop'
 
 
 #1 vscode
-#2 Visual Studio Code (editor) instellen
+#2 Visual Studio Code - Editor
 kz-gset --addfavtop --file='code_code.desktop'
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
 xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
