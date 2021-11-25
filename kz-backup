@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.01.01
-VERSION_DATE=2021-10-07
+VERSION_NUMBER=36.01.02
+VERSION_DATE=2021-11-25
 
 
 ###############################################################################
@@ -54,7 +54,8 @@ readonly EXCLUDEFILE_DEFAULT_CONTENT="\
 /home/*/.steam/root
 /home/*/.thumbnails
 /home/*/.var/app/*/cache
-/home/*/.xsession-errors/proc
+/home/*/.xsession-errors
+/proc
 /run
 /sys
 /tmp"
