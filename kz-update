@@ -1,0 +1,63 @@
+#!/usr/bin/python3
+"""
+Systeem bijwerken.
+
+Dit script voert een update uit voor Debian gebaseerde systemen.
+"""
+###############################################################################
+# Systeem bijwerken.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
+import sys
+import random
+import argparse
+import kz_common
+import subprocess
+
+program_name = 'kz-update'
+display_name = program_name.replace('kz-', 'kz ')
+release_year = 2021
+
+version_number = '03.01.02'
+version_date = '2021-10-04'
+
+desc = 'Updates uitvoeren.'
+
+
+def perform_update():
+    # Opdracht als sequence:
+    subprocess.run(['sudo', 'apt-get', 'update'])
+
+    # Opdracht als raw text:
+    subprocess.run('sudo apt-get upgrade --yes', shell=True)
+
+    # Opdracht als raw text, vang stdout en stderr op:
+    subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
+    subprocess.run('sudo apt-get autoclean --yes', shell=True, check=True)
+
+    # Heeft dit systeem snaps?
+    try:
+        subprocess.run('sudo snap refresh', shell=True)
+    except Exception as ex:
+        print(ex)
+
+    # Is een reboot nodig?
+    try:
+        with open('/var/run/reboot-required') as fh:
+            print(f'{display_name}: REBOOT')
+    except FileNotFoundError:
+        pass
+    except Exception as ex:
+        print(ex)
+        sys.exit(1)
+
+
+# --- script ---
+
+kz_common.process_common_options(desc, display_name)
+
+perform_update()
+
+
+# EOF

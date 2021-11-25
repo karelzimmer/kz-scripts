@@ -1,0 +1,15 @@
+# shellcheck shell=bash
+###############################################################################
+# Tab-completion-script voor kz update.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
+# RELEASE_YEAR=2021
+
+# VERSION_NUMBER=01.00.04
+# VERSION_DATE=2021-10-04
+
+dashoptions='-h --help -u --usage -v --version'
+complete -o default -W "$dashoptions" kz-update
+
+# EOF

@@ -1,0 +1,45 @@
+#!/usr/bin/python3
+"""
+Wachtwoord genereren. Gebruik Bitwarden om wachtwoorden te beheren.
+
+Dit script genereert een wachtwoord bestaande uit 16 willekeurige tekens.
+"""
+###############################################################################
+# Wachtwoord genereren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
+import random
+import kz_common
+
+program_name = 'kz-genpwd'
+display_name = program_name.replace('kz-', 'kz ')
+release_year = 2021
+
+version_number = '03.01.01'
+version_date = '2021-10-04'
+
+desc = 'Wachtwoord genereren.'
+
+
+def generate_password():
+    lower = 'abcdefghijklmnopqrstuvwxyz'
+    upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    numbers = '0123456789'
+    symbols = '$%@#[]{}()*;/,_-'
+
+    all = lower + upper + numbers + symbols
+
+    length = 16
+
+    password = ''.join(random.sample(all, length))
+    print(f'{password}\n\nGebruik Bitwarden om wachtwoorden te beheren.')
+
+
+# --- script ---
+
+kz_common.process_common_options(desc, display_name)
+
+generate_password()
+
+# EOF
