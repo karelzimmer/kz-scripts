@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
 
-VERSION_NUMBER=01.02.00
-VERSION_DATE=2021-10-21
+VERSION_NUMBER=01.02.01
+VERSION_DATE=2021-11-27
 
 
 ###############################################################################
@@ -171,22 +171,22 @@ process_input() {
 check_dependencies() {
     if ! command -v enscript 1> /dev/null; then
         # Voor <man-pag>.pdf.
-        info 'Installeer enscript...'
+        log 'Installeer enscript...'
         sudo apt-get install --yes enscript |& $LOGCMD
     fi
     if ! command -v fakeroot 1> /dev/null; then
         # Voor build .deb.
-        info 'Installeer fakeroot...'
+        log 'Installeer fakeroot...'
         sudo apt-get install --yes fakeroot |& $LOGCMD
     fi
     if ! command -v ghostscript 1> /dev/null; then
         # Voor <man-pag>.pdf (ps2pdf).
-        info 'Installeer ghostscript...'
+        log 'Installeer ghostscript...'
         sudo apt-get install --yes ghostscript |& $LOGCMD
     fi
     if ! command -v rsync 1> /dev/null; then
         # Voor build kz-deb en kz-uploads.
-        info 'Installeer rsync...'
+        log 'Installeer rsync...'
         sudo apt-get install --yes rsync |& $LOGCMD
     fi
 }
@@ -203,7 +203,7 @@ remove_backups() {
 build_uploads() {
     local file=''
 
-    info 'Bouw website...'
+    log 'Bouw website...'
 
     # ------------------
     # Vul dist/ met app/
@@ -291,7 +291,7 @@ build_deb() {
     local newfile=''
     local prefix='nl.karelzimmer.'
 
-    info 'Bouw pakket...'
+    log 'Bouw pakket...'
 
     rsync   --archive               \
             --delete                \

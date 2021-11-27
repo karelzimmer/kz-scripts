@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.04.02
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=14.04.03
+VERSION_DATE=2021-11-27
 
 
 ###############################################################################
@@ -99,11 +99,11 @@ check_input() {
 
 check_dependencies() {
     if ! command -v pycodestyle 1> /dev/null; then
-        info 'Installeer pycodestyle...'
+        log 'Installeer pycodestyle...'
         sudo apt-get install --yes pycodestyle |& $LOGCMD
     fi
     if ! command -v shellcheck 1> /dev/null; then
-        info 'Installeer shellcheck...'
+        log 'Installeer shellcheck...'
         # Debian's pakket is oud, snap is nieuwer.
         sudo snap install shellcheck |& $LOGCMD
     fi

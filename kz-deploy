@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=62.07.03
-VERSION_DATE=2021-10-12
+VERSION_NUMBER=62.07.04
+VERSION_DATE=2021-11-27
 
 
 ###############################################################################
@@ -142,7 +142,7 @@ process_input() {
 check_dependencies() {
     if ! command -v lftp 1> /dev/null; then
         # Voor upload website.
-        info 'Installeer lftp...'
+        log 'Installeer lftp...'
         sudo apt-get install --yes lftp |& $LOGCMD
     fi
 }
