@@ -11,7 +11,7 @@ PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
 
-VERSION_NUMBER=14.04.03
+VERSION_NUMBER=14.04.04
 VERSION_DATE=2021-11-27
 
 
@@ -377,9 +377,9 @@ ${BOLD}In $script:${NORMAL}
     case $script in
         kz-backup)
             log "Check $script."
-            "$scriptsdir/$script"   --target                \
-                                    /tmp                    \
-                                    /home/karel/kz-scripts  |& $LOGCMD  ||
+            sudo "$scriptsdir/$script"  --target                \
+                                        /tmp                    \
+                                        /home/karel/kz-scripts  |& $LOGCMD  ||
             check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
@@ -392,7 +392,7 @@ ${BOLD}In $script:${NORMAL}
             ;;
         kz-install)
             log "Check $script."
-            "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
+            sudo "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
 ${BOLD}In $script:${NORMAL}
@@ -422,11 +422,12 @@ ${BOLD}In $script:${NORMAL}
             ;;
         kz-restore)
             log "Check $script."
-            printf                  '%s\n'          \
-                                    '1'             |
-            "$scriptsdir/$script"   --target        \
-                                    /tmp            \
-                                    --source /tmp   |& $LOGCMD || check_rc=$?
+            printf                  '%s\n'              \
+                                    '1'                 |
+            sudo "$scriptsdir/$script"  --target        \
+                                        /tmp            \
+                                        --source /tmp   |& $LOGCMD  ||
+            check_rc=$?
             if [[ $check_rc -gt $SUCCESS ]]; then
                 info "
 ${BOLD}In $script:${NORMAL}
@@ -435,8 +436,6 @@ ${BOLD}In $script:${NORMAL}
                     MAXRC=$ERROR
                 fi
             fi
-            sudo rm --force /tmp/backup_*.tar
-            sudo rm --force --recursive /tmp/home
             ;;
         kz-setup)
             log "Check $script."
