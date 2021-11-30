@@ -8,8 +8,8 @@ PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
 
-VERSION_NUMBER=27.03.06
-VERSION_DATE=2021-11-27
+VERSION_NUMBER=27.03.07
+VERSION_DATE=2021-11-28
 
 
 ###############################################################################
@@ -440,6 +440,7 @@ dan een Terminalvenster, en voer uit:
             ;;
         kz-install)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
+            rm $CMDS_FILE $CMDS_FILE2 $TEXT_FILE $TEMP_LIST
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 dan een Terminalvenster, en voer uit:
@@ -451,6 +452,7 @@ dan een Terminalvenster, en voer uit:
             ;;
         kz-setup)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
+            rm $CMDS_FILE $CMDS_FILE2 $TEXT_FILE
             ;;
         *)
             return $SUCCESS

@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-setup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
 
-VERSION_NUMBER=45.07.00
-VERSION_DATE=2021-11-19
+VERSION_NUMBER=45.07.01
+VERSION_DATE=2021-11-28
 
 
 ###############################################################################
@@ -54,6 +54,7 @@ DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
 SPACES=$(printf '%.0s ' {1..79}); readonly SPACES
 VERSION=$(lsb_release --release --short); readonly VERSION
 CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE
+CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE2
 TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text"); readonly TEXT_FILE
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
@@ -386,7 +387,6 @@ save_command_history() {        #4
 process_argument_app() {
     local       app=''
     local       file=''
-    local       cmds_file=''
     local   -a  file_to_process=()
 
     # Niet verplicht aanwezig.
@@ -402,7 +402,6 @@ $EDITION."
         exit $WARNING
     fi
 
-    cmds_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
     # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
@@ -422,10 +421,10 @@ $EDITION."
     if $file_notfound; then
         info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
     else
-        if ! grep --quiet --line-regexp --regexp='^# EOF' "$cmds_file"; then
-            printf '%s\n' '# EOF' >> "$cmds_file"
+        if ! grep --quiet --line-regexp --regexp='^# EOF' "$CMDS_FILE2"; then
+            printf '%s\n' '# EOF' >> "$CMDS_FILE2"
         fi
-        FILE_TO_PROCESS[$file_num]=$cmds_file
+        FILE_TO_PROCESS[$file_num]=$CMDS_FILE2
         ((++file_num))
     fi
 }
@@ -459,14 +458,14 @@ process_argument_app_file() {
                     app_found=false
                     continue
                 elif $app_found; then
-                    printf '%b\n' "$record" >> "$cmds_file"
+                    printf '%b\n' "$record" >> "$CMDS_FILE2"
                     description_found=true
                 fi
                 ;;
             *)
                 # Overige regels.
                 if $app_found; then
-                    printf '%s\n' "$record" >> "$cmds_file"
+                    printf '%s\n' "$record" >> "$CMDS_FILE2"
                 fi
                 ;;
         esac
