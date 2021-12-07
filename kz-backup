@@ -11,8 +11,8 @@ PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
 
-VERSION_NUMBER=36.01.02
-VERSION_DATE=2021-11-25
+VERSION_NUMBER=36.01.03
+VERSION_DATE=2021-12-02
 
 
 ###############################################################################
@@ -233,8 +233,12 @@ request_input() {
         if ! [[ -e $TARGET ]]; then
             mkdir   --parents   \
                     "$TARGET"   |& $LOGCMD
-            chown   1000:1000   \
-                    "$TARGET"   |& $LOGCMD
+            chown   1000:1000                                       \
+                    "$medium/$TARGET_DEFAULT_2"                     \
+                    "$medium/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   |& $LOGCMD
+            chmod   a=rwx       \
+                    "$medium/$TARGET_DEFAULT_2"                     \
+                    "$medium/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   |& $LOGCMD
         fi
     else
         if $OPTION_GUI; then
