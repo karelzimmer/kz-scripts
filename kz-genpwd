@@ -15,10 +15,7 @@ import kz_common
 program_name = 'kz-genpwd'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
-
-version_number = '03.01.01'
-version_date = '2021-10-04'
-
+version_number = '003'
 desc = 'Wachtwoord genereren.'
 
 

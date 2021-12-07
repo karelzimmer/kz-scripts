@@ -4,18 +4,12 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-
-# VERSION_NUMBER=04.03.00
-# VERSION_DATE=2021-11-18
-
 
 #1 firefox
 #2 Firefox - Webbrowser
 kz-gset --removefav --file='firefox.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='firefox.desktop'
-
 
 #1 gnome
 #2 GNOME - Bureaubladomgeving
@@ -28,7 +22,6 @@ gsettings set org.gnome.nautilus.preferences show-create-link true
 #4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 #4    gsettings reset org.gnome.nautilus.preferences show-create-link
 
-
 #1 kvm
 #2 KVM - Virtualisatie
 ## Beeldscherm 2048 x 1152 (16:9).
@@ -36,14 +29,12 @@ kz-gset --addfavbottom --file='virt-manager.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='virt-manager.desktop'
 
-
 #1 search
 #2 Search - Vooruit zoeken in history met Ctrl-S
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #4 Start Terminalvenster en voer uit:
 #4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-
 
 #1 terminal
 #2 GNOME Terminal - Terminalvenster
@@ -59,13 +50,11 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='org.gnome.Terminal.desktop'\
 
-
 #1 thunderbird
 #2 Thunderbird - E-mail
 kz-gset --removefav --file='thunderbird.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='thunderbird.desktop'
-
 
 #1 vscode
 #2 Visual Studio Code - Editor
@@ -86,6 +75,5 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #3 8. Sluit Settings.
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='code_code.desktop'
-
 
 # EOF

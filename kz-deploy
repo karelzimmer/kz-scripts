@@ -10,9 +10,7 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-deploy
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
-
-VERSION_NUMBER=62.07.04
-VERSION_DATE=2021-11-27
+VERSION_NUMBER=062
 
 
 ###############################################################################

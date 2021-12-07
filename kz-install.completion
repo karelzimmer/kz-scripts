@@ -4,10 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-
-# VERSION_NUMBER=06.00.02
-# VERSION_DATE=2021-09-04
 
 dashoptions="-a --apps -c --cat -d --debug '-e EDITIE' '--edition EDITIE' -f
     --files -g --gui -h --help -i --info -l --list -r --remove -s --simulate -u

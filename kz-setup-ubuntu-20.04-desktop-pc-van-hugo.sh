@@ -4,11 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-
-# VERSION_NUMBER=04.02.00
-# VERSION_DATE=2021-11-19
-
 
 #1 gnome
 #2 GNOME - Bureaubladomgeving
@@ -19,13 +14,11 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 #4    gsettings reset org.gnome.desktop.background picture-uri
 #4    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
-
 #1 telegram
 #2 Telegram - Privéberichtenapp
 kz-gset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='telegram-desktop_telegram-desktop.desktop'
-
 
 #1 virtualbox
 #2 VirtualBox - Virtualisatie
@@ -43,6 +36,5 @@ kz-gset --addfavbottom --file='kz-vm-hugowin732.desktop'
 #4    rm "$HOME"/kz-vm-hugowin732.sh
 #4    kz-gset --removefav --file='virtualbox.desktop'
 #4    kz-gset --removefav --file='kz-vm-hugowin732.desktop'
-
 
 # EOF

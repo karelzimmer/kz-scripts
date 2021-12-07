@@ -4,11 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-
-# VERSION_NUMBER=03.02.00
-# VERSION_DATE=2021-11-19
-
 
 #1 calibre
 #2 Calibre - E-boekmanager
@@ -16,13 +11,11 @@ sudo apt-get install --yes calibre
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes calibre
 
-
 #1 dropbox
 #2 Dropbox - Cloudopslag
 sudo apt-get install --yes nautilus-dropbox
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes nautilus-dropbox
-
 
 #1 google-earth
 #2 Google Earth - Verken de wereld
@@ -34,12 +27,10 @@ rm /tmp/google-earth-pro-stable_current_amd64.deb
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes google-earth-pro-stable
 
-
 #1 wine
 #2 Wine - Windowsapps op Linux
 sudo apt-get install --yes wine winetricks playonlinux
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes wine winetricks playonlinux
-
 
 # EOF

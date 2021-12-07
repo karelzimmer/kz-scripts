@@ -4,11 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-
-# VERSION_NUMBER=03.02.00
-# VERSION_DATE=2021-11-19
-
 
 #1 handlelidswitch
 #2 HandleLidSwitch - Negeer sluiten laptopdesksel
@@ -17,20 +12,17 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #4 Start Terminalvenster en voer uit:
 #4    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-
 #1 pinta
 #2 Pinta - Tekenprogramma
 sudo apt-get install --yes pinta
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes pinta
 
-
 #1 telegram
 #2 Telegram - Privéberichtenapp
 sudo snap install telegram-desktop
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove telegram-desktop
-
 
 #1 virtualbox
 #2 VirtualBox - Virtualisatie
@@ -54,6 +46,5 @@ sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 #4    sudo apt-get update
 #4    sudo deluser "${SUDO_USER:-$USER}" vboxusers
 #4    sudo delgroup vboxusers
-
 
 # EOF

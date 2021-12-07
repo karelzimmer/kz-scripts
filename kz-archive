@@ -10,9 +10,7 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-archive
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2013
-
-VERSION_NUMBER=18.03.01
-VERSION_DATE=2021-10-23
+VERSION_NUMBER=01
 
 
 ###############################################################################

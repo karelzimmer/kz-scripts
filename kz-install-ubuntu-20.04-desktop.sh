@@ -4,11 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-
-# VERSION_NUMBER=03.03.01
-# VERSION_DATE=2021-10-21
-
 
 #1 apport
 #2 Apport - Handmatig genereren van crashrapporten
@@ -20,13 +15,11 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #4    sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 #4    sudo systemctl enable --now apport.service
 
-
 #1 bitwarden
 #2 Bitwarden - Wachtwoordkluis
 sudo snap install bitwarden
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove bitwarden
-
 
 #1 google-chrome
 #2 Google Chrome - Webbrowser
@@ -39,7 +32,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb
 rm /tmp/google-chrome.deb
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes google-chrome-stable chrome-gnome-shell gnome-contacts gnome-gmail
-
 
 #1 icaclient
 #2 Citrix Workspace app - Telewerken
@@ -68,9 +60,6 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes icaclient
 
-
-
-
 #1 language-support
 #2 Language support - Taalondersteuning
 sudo apt-get install --yes "$(check-language-support)"#1 libreoffice
@@ -78,7 +67,6 @@ sudo apt-get install --yes "$(check-language-support)"#1 libreoffice
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
-
 
 #1 private-home
 #2 Private home - Persoonlijke mappen beveiligen
@@ -95,13 +83,11 @@ echo 'HOME_MODE 0750' | sudo tee --append /etc/login.defs
 #4    sudo dpkg-reconfigure adduser
 #4    sudo sed --in-place --expression='s/^\(HOME_MODE\s\+0750\)/#\1/' /etc/login.defs
 
-
 #1 skype
 #2 Skype - Beeldbellen
 sudo snap install --classic skype
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove skype
-
 
 #1 spotify
 #2 Spotify - Muziekspeler
@@ -109,15 +95,12 @@ sudo snap install spotify
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove spotify
 
-
 #1 sushi
 #2 Sushi - Voorbeeld tonen
 ## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
 sudo apt-get install --yes gnome-sushi
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes gnome-sushi
-
-
 
 #1 teamviewer
 #2 TeamViewer - Telewerken
@@ -131,13 +114,11 @@ sudo teamviewer repo default
 #4    sudo rm /etc/apt/sources.list.d/teamviewer.list*
 #4    sudo apt update
 
-
 #1 thunderbird
 #2 Thunderbird - E-mail
 sudo apt-get install --yes xul-ext-lightning
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes xul-ext-lightning
-
 
 #1 ubuntu-restricted
 #2 Ubuntu restricted - Niet-vrije pakketten voor Ubuntu
@@ -148,14 +129,12 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #4    sudo apt remove --yes ubuntu-restricted-addons libavcodec-extra
 #4    sudo apt autoremove --yes
 
-
 #1 ubuntu-wallpapers
 #2 Ubuntu wallpapers - Bureaubladachtergronden
 sudo apt-get install --yes ubuntu-wallpapers-*
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes ubuntu-wallpapers-*
 #4    sudo apt autoremove --yes
-
 
 #1 zoom
 #2 Zoom - Telewerken
@@ -164,6 +143,5 @@ sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes zoom
-
 
 # EOF

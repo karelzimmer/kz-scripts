@@ -4,18 +4,12 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-
-# VERSION_NUMBER=04.05.01
-# VERSION_DATE=2021-11-27
-
 
 #1 firefox
 #2 Firefox - Webbrowser
 kz-gset --removefav --file='firefox.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='firefox.desktop'
-
 
 #1 gnome
 #2 GNOME - Bureaubladomgeving
@@ -25,7 +19,6 @@ if [[ $USER = monique ]]; then gsettings set org.gnome.desktop.background pictur
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
 
-
 #1 search
 #2 Search - Vooruit zoeken in history met Ctrl-S
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
@@ -33,20 +26,17 @@ echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #4 Start Terminalvenster en voer uit:
 #4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-
 #1 terminal
 #2 GNOME Terminal - Terminalvenster
 if [[ $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.Terminal.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='org.gnome.Terminal.desktop'
 
-
 #1 thunderbird
 #2 Thunderbird - E-mail
 kz-gset --removefav --file='thunderbird.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --addfavtop --file='thunderbird.desktop'
-
 
 #1 vscode
 #2 Visual Studio Code - Editor
@@ -68,7 +58,6 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='code_code.desktop'
 
-
 #1 zga-ehrm
 #2 Zga eHRM - Starter eHRM Zorggroep Almere
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/; fi
@@ -77,7 +66,6 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-ehrm.desktop';
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
 #4    kz-gset --removefav --file='kz-zga-ehrm.desktop'
-
 
 #1 zga-intranet
 #2 Zga Intranet - Starter Intranet Zorggroep Almere
@@ -88,7 +76,6 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-intranet.deskt
 #4    rm "$HOME"/.local/share/applications/kz-zga-intranet.desktop
 #4    kz-gset --removefav --file='kz-zga-intranet.desktop'
 
-
 #1 zga-monaco
 #2 Zga Monaco - Starter Monaco Zorggroep Almere
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz-zga-monaco.desktop "$HOME"/.local/share/applications/; fi
@@ -98,7 +85,6 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-monaco.desktop
 #4    rm "$HOME"/.local/share/applications/kz-zga-monaco.desktop
 #4    kz-gset --removefav --file='kz-zga-monaco.desktop'
 
-
 #1 zga-webmail
 #2 Zga WebMail - Starter
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/; fi
@@ -107,6 +93,5 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-webmail.deskto
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-webmail.desktop
 #4    kz-gset --removefav --file='kz-zga-webmail.desktop'
-
 
 # EOF

@@ -10,9 +10,7 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
-
-VERSION_NUMBER=14.04.04
-VERSION_DATE=2021-11-27
+VERSION_NUMBER=014
 
 
 ###############################################################################
@@ -274,18 +272,6 @@ ${BOLD}In $script:${NORMAL}
         info "
 ${BOLD}In $script:${NORMAL}
     Versienummer (VERSION_NUMBER/version_number) ontbreekt.
-"
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-    if ! grep   --quiet                     \
-                --regexp='VERSION_DATE='    \
-                --regexp='version_date = '  \
-                "$script"; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Versiedatum (VERSION_DATE/version_date) ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR

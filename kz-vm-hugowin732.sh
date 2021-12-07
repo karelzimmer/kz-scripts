@@ -1,8 +1,6 @@
 #!/bin/bash
 # RELEASE_YEAR=2017
-
-# VERSION_NUMBER=02.00.01
-# VERSION_DATE=2021-09-04
+# VERSION_NUMBER=002
 
 TITLE='VirtualBox'
 TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'

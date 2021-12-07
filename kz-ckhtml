@@ -10,9 +10,7 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-ckhtml
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2012
-
-VERSION_NUMBER=12.01.02
-VERSION_DATE=2021-10-04
+VERSION_NUMBER=012
 
 
 ###############################################################################

@@ -9,9 +9,7 @@ PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 PROGRAM_NAME=kz
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
-
-VERSION_NUMBER=01.02.06
-VERSION_DATE=2021-09-21
+VERSION_NUMBER=001
 
 
 ###############################################################################

@@ -10,9 +10,7 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-backup
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2007
-
-VERSION_NUMBER=36.01.03
-VERSION_DATE=2021-12-02
+VERSION_NUMBER=036
 
 
 ###############################################################################
