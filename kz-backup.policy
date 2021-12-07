@@ -7,7 +7,10 @@
  PolicyKit actiedefinitiebestand voor kz backup.
 
  Geschreven door Karel Zimmer <info@karelzimmer.nl>.
--->
+
+ RELEASE_YEAR=2020
+ VERSION_NUMBER=004
+ -->
 
 <policyconfig>
 

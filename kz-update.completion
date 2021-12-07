@@ -4,6 +4,8 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
+# RELEASE_YEAR=2021
+# VERSION_NUMBER=001
 
 dashoptions='-h --help -u --usage -v --version'
 complete -o default -W "$dashoptions" kz-update

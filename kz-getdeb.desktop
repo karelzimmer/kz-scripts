@@ -3,6 +3,8 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
+# RELEASE_YEAR=2015
+# VERSION_NUMBER=003
 
 [Desktop Entry]
 Type=Application
