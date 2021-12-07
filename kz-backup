@@ -230,16 +230,14 @@ request_input() {
         media_found=false
     fi
     if $media_found; then
-        if ! [[ -e $TARGET ]]; then
-            mkdir   --parents   \
-                    "$TARGET"   |& $LOGCMD
-            chown   1000:1000                                       \
-                    "$medium/$TARGET_DEFAULT_2"                     \
-                    "$medium/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   |& $LOGCMD
-            chmod   a=rwx       \
-                    "$medium/$TARGET_DEFAULT_2"                     \
-                    "$medium/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   |& $LOGCMD
-        fi
+        mkdir   --parents   \
+                "$TARGET"   |& $LOGCMD
+        chown   1000:1000                                           \
+                "${media[*]}/$TARGET_DEFAULT_2"                     \
+                "${media[*]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   |& $LOGCMD
+        chmod   a=rwx                                               \
+                "${media[*]}/$TARGET_DEFAULT_2"                     \
+                "${media[*]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   |& $LOGCMD
     else
         if $OPTION_GUI; then
             request_input_gui
