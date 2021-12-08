@@ -4,8 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2021
-# VERSION_NUMBER=002
 
 dashoptions='archive backup ckhtml ckname build deploy dliso genpwd getdeb go
     gset install ivp menu mkusb nas restore setup spsum'

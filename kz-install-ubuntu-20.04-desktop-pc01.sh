@@ -4,8 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-# VERSION_NUMBER=003
 
 #1 bluetooth
 #2 Bluetooth - Externe bluetooth-adapter

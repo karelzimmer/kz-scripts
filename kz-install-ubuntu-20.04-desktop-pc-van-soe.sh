@@ -4,8 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2021
-# VERSION_NUMBER=001
 
 #1 calibre
 #2 Calibre - E-boekmanager

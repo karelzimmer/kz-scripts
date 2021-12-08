@@ -4,8 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-# VERSION_NUMBER=004
 
 #1 firefox
 #2 Firefox - Webbrowser

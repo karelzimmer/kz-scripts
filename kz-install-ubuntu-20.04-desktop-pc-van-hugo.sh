@@ -4,8 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2020
-# VERSION_NUMBER=003
 
 #1 handlelidswitch
 #2 HandleLidSwitch - Negeer sluiten laptopdesksel

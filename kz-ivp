@@ -10,7 +10,7 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
-VERSION_NUMBER=014
+VERSION_NUMBER=015
 
 
 ###############################################################################
@@ -121,31 +121,28 @@ process_input() {
             LICENSE|README.md)
                 continue
                 ;;
+        esac
+        check_eof
+        check_lines
+        check_tags
+        check_trailing_spaces
+        case $script in
             *.1|*.desktop|*.policy)
-                check_tags
-                check_lines
-                check_fields
-                check_trailing_spaces
+                continue
                 ;;
-            *.completion|*.sh)
-                check_tags
-                check_lines
-                check_fields
-                check_trailing_spaces
-                check_script_shellcheck
-                ;;
-            *.py)
-                check_tags
-                check_lines
-                check_fields
-                check_trailing_spaces
+            kz_common.py|kz-genpwd|kz-update)
+                check_check_release_version
                 check_script_pycodestyle
                 ;;
+            kz-common.sh)
+                check_check_release_version
+                check_script_shellcheck
+                ;;
+            *.completion|*.sh)
+                check_script_shellcheck
+                ;;
             *)
-                check_tags
-                check_lines
-                check_fields
-                check_trailing_spaces
+                check_check_release_version
                 check_script
                 check_usage
                 ;;
@@ -155,29 +152,15 @@ process_input() {
 }
 
 
-check_tags() {
-    if grep --quiet             \
-            --word-regexp       \
-            --regexp='#''XXX'   \
-            --regexp='#''TODO'  \
-            --regexp='#''FIXME' \
-            "$script"; then
+check_eof() {
+    if ! grep --quiet --word-regexp --regexp=' ''EOF' "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
-    Gedit-tags gevonden.
-
-$(
-    grep    --line-number           \
-            --word-regexp           \
-            --regexp='#''XXX'       \
-            --regexp='#''TODO'      \
-            --regexp='#''FIXME'     \
-            "$script"               |
-    nl      --number-width=4        \
-            --number-separator=''   \
-            --body-numbering=n
-)
+    EOF ontbreekt.
 "
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
     fi
 }
 
@@ -252,7 +235,7 @@ $(
 }
 
 
-check_fields() {
+check_release_version() {
     if ! grep   --quiet                     \
                 --regexp='RELEASE_YEAR='    \
                 --regexp='release_year = '  \
@@ -277,14 +260,32 @@ ${BOLD}In $script:${NORMAL}
             MAXRC=$ERROR
         fi
     fi
-    if ! grep --quiet --word-regexp --regexp=' ''EOF' "$script"; then
+}
+
+
+check_tags() {
+    if grep --quiet             \
+            --word-regexp       \
+            --regexp='#''XXX'   \
+            --regexp='#''TODO'  \
+            --regexp='#''FIXME' \
+            "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
-    EOF ontbreekt.
+    Gedit-tags gevonden.
+
+$(
+    grep    --line-number           \
+            --word-regexp           \
+            --regexp='#''XXX'       \
+            --regexp='#''TODO'      \
+            --regexp='#''FIXME'     \
+            "$script"               |
+    nl      --number-width=4        \
+            --number-separator=''   \
+            --body-numbering=n
+)
 "
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
     fi
 }
 
