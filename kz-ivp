@@ -131,18 +131,18 @@ process_input() {
                 continue
                 ;;
             kz_common.py|kz-genpwd|kz-update)
-                check_check_release_version
+                check_release_version
                 check_script_pycodestyle
                 ;;
             kz-common.sh)
-                check_check_release_version
+                check_release_version
                 check_script_shellcheck
                 ;;
             *.completion|*.sh)
                 check_script_shellcheck
                 ;;
             *)
-                check_check_release_version
+                check_release_version
                 check_script
                 check_usage
                 ;;
