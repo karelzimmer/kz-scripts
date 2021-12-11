@@ -56,18 +56,6 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #4 Start Terminalvenster en voer uit:
 #4    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-#1 hardinfo
-#2 Hardinfo - Systeeminformatie
-sudo apt-get install --yes hardinfo
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes hardinfo
-
-#1 htop
-#2 Htop - Systeeminformatie
-sudo apt-get install --yes htop
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes htop
-
 #1 kvm
 #2 KVM - Virtualisatie
 ## Images staan in /var/lib/libvirt/images/.
