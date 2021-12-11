@@ -54,6 +54,7 @@ sudo systemctl restart ssh.service
 #1 python
 #2 Python - Programmeertaal
 sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
