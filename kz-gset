@@ -287,7 +287,7 @@ process_option_addfavtop () {
                     "['$DESKTOPFILE', $(
                                         printf  '%s'                \
                                                 "$favorite_apps"    |
-                                        awk     -F[                 \
+                                        awk     -F'['               \
                                                 '{print $2}'
                                         )"
     fi
@@ -311,7 +311,7 @@ process_option_addfavbottom () {
                     "$(
                         printf  '%s'                \
                                 "$favorite_apps"    |
-                        awk     -F]                 \
+                        awk     -F']'               \
                                 '{print $1}'), '$DESKTOPFILE']"
     fi
 }
