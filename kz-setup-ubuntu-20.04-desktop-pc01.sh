@@ -55,6 +55,14 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #3 6. Klik op 'User' - tab).
 #3 7. Voeg toe, of wijzig, tussen de { en }: "editor.rulers": [79]
 #3 8. Sluit Settings.
+#3 9. Installeer de volgende extensies:
+#3    Code Runner
+#3    HTML Preview
+#3    Linux Desktop File Support
+#3    Live Server
+#3    Markdown Preview Enahnced
+#3    ShellCheck
+#3    TROFF Syntax
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='code_code.desktop'
 
