@@ -14,7 +14,6 @@ import datetime
 
 module_name = 'kz_common.py'
 release_year = 2021
-version_number = '002'
 
 
 def process_common_options(desc, display_name):
@@ -35,7 +34,7 @@ def process_common_options(desc, display_name):
         process_option_usage(display_name)
         sys.exit(0)
     elif args.version:
-        process_option_version(display_name, version_number, release_year)
+        process_option_version(display_name, release_year)
         sys.exit(0)
 
 
@@ -48,7 +47,7 @@ def process_option_usage(display_name):
 Typ '{display_name} --help' voor meer informatie.""")
 
 
-def process_option_version(display_name, version_number, release_year):
+def process_option_version(display_name, release_year):
     """
     Deze functie toont versie-informatie, auteur, en auteursrecht.
     """
@@ -60,7 +59,7 @@ def process_option_version(display_name, version_number, release_year):
         copyright_years = release_year
     else:
         copyright_years = str(release_year) + '-' + str(this_year)
-    print(f"""{display_name} {version_number} (kz 365)
+    print(f"""{display_name} 365 (kz 365)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

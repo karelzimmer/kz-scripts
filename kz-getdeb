@@ -16,7 +16,6 @@ fi
 PROGRAM_NAME=kz-getdeb
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2016
-VERSION_NUMBER=029
 
 
 ###############################################################################

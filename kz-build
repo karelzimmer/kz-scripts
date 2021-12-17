@@ -10,7 +10,6 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-build
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2021
-VERSION_NUMBER=001
 
 
 ###############################################################################

@@ -7,7 +7,6 @@
 PROGRAM_NAME=kz-common.sh
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2009
-VERSION_NUMBER=027
 
 
 ###############################################################################
@@ -303,7 +302,7 @@ process_option_version() {
     else
         copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
-    info "$DISPLAY_NAME $VERSION_NUMBER (kz 365)
+    info "$DISPLAY_NAME 365 (kz 365)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

@@ -10,7 +10,6 @@ source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-ivp
 DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 RELEASE_YEAR=2015
-VERSION_NUMBER=015
 
 
 ###############################################################################
@@ -131,18 +130,18 @@ process_input() {
                 continue
                 ;;
             kz_common.py|kz-genpwd|kz-update)
-                check_release_version
+                check_release_year
                 check_script_pycodestyle
                 ;;
             kz-common.sh)
-                check_release_version
+                check_release_year
                 check_script_shellcheck
                 ;;
             *.completion|*.sh)
                 check_script_shellcheck
                 ;;
             *)
-                check_release_version
+                check_release_year
                 check_script
                 check_usage
                 ;;
@@ -235,7 +234,7 @@ $(
 }
 
 
-check_release_version() {
+check_release_year() {
     if ! grep   --quiet                     \
                 --regexp='RELEASE_YEAR='    \
                 --regexp='release_year = '  \
@@ -243,18 +242,6 @@ check_release_version() {
         info "
 ${BOLD}In $script:${NORMAL}
     Vrijgavejaar (RELEASE_YEAR/release_year) ontbreekt.
-"
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-    if ! grep   --quiet                         \
-                --regexp='VERSION_NUMBER='      \
-                --regexp='version_number = '    \
-                "$script"; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Versienummer (VERSION_NUMBER/version_number) ontbreekt.
 "
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
