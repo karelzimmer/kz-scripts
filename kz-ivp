@@ -86,7 +86,7 @@ check_input() {
     check_user
 
     # Regel sudo maar gelijk voor verderop.
-    prompt="Authenticatie is vereist om delen van $DISPLAY_NAME uit te voeren.
+    prompt="Authenticatie is vereist voor onderdelen van '$DISPLAY_NAME'.
 [sudo] wachtwoord voor %p: "
     sudo --prompt="$prompt" true
 

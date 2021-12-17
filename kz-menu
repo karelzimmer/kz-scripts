@@ -629,7 +629,7 @@ execute_command() {
                 pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
                 log_rc cmd_rc?
             else
-                prompt="Authenticatie is vereist om $command uit te voeren.
+                prompt="Authenticatie is vereist om '$command' uit te voeren.
 [sudo] wachtwoord voor %p: "
                 sudo    --prompt="$prompt"              \
                         "$PROGRAM_PATH/$cmd" "$arg" --  || cmd_rc=$?
