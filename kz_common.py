@@ -54,7 +54,7 @@ def process_option_version(display_name, version_number, release_year):
     """
     now = datetime.datetime.now()
     this_year = now.year
-    copyright_years = 1970
+    copyright_years = '1970'
 
     if release_year == this_year:
         copyright_years = release_year
