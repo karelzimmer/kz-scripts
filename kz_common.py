@@ -59,7 +59,7 @@ def process_option_version(display_name, release_year):
         copyright_years = release_year
     else:
         copyright_years = str(release_year) + '-' + str(this_year)
-    print(f"""{display_name} 365 (kz 365)
+    print(f"""{display_name} versie 365 (kz 365)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
