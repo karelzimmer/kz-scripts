@@ -357,7 +357,7 @@ process_option_addappfolder () {
                     folder-children                 \
                     "$(
                         printf '%s' "$app_folders"  |
-                        awk -F] '{print $1}'), '$APPFOLDER']"
+                        awk -F']' '{print $1}'), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
     path=/org/gnome/desktop/app-folders/folders/$APPFOLDER/

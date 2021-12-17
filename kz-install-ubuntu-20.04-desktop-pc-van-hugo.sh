@@ -33,7 +33,7 @@ wget --output-document=- 'https://www.virtualbox.org/download/oracle_vbox.asc' |
 sudo apt-get update
 wget --output-document=/tmp/virtualbox-LATEST.TXT 'http://download.virtualbox.org/virtualbox/LATEST.TXT'
 ## VirtualBox Guest Additions ISO staat in /usr/share/virtualbox/.
-sudo apt-get install --yes virtualbox-"$(awk -F. '{print $1"."$2}' < /tmp/virtualbox-LATEST.TXT)"
+sudo apt-get install --yes virtualbox-"$(awk -F'.' '{print $1"."$2}' < /tmp/virtualbox-LATEST.TXT)"
 wget --output-document="/tmp/Oracle_VM_VirtualBox_Extension_Pack" "http://download.virtualbox.org/virtualbox/$(cat /tmp/virtualbox-LATEST.TXT)/Oracle_VM_VirtualBox_Extension_Pack-$(cat /tmp/virtualbox-LATEST.TXT).vbox-extpack"
 echo 'y' | sudo VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack
 sudo adduser "${SUDO_USER:-$USER}" vboxusers

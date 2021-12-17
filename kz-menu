@@ -542,8 +542,8 @@ process_commands() {
     fi
     if $COMMANDS_EXECUTED; then
         for exec in "${!EXEC[@]}"; do
-            action=$( printf '%s' "${EXEC[$exec]}" | awk -F# '{print $1}')
-            command=$(printf '%s' "${EXEC[$exec]}" | awk -F# '{print $2}')
+            action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
+            command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')
             execute_command
         done
     fi
@@ -563,8 +563,8 @@ show_commands_before_execution() {
 De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
 "
     for exec in "${!EXEC[@]}"; do
-        action=$( printf '%s' "${EXEC[$exec]}" | awk -F# '{print $1}')
-        command=$(printf '%s' "${EXEC[$exec]}" | awk -F# '{print $2}')
+        action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
+        command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')
         TEXT=$TEXT"
 $exec. $action ($command)"
     done
@@ -672,8 +672,8 @@ show_commands_after_execution() {
     printf '\n%s\n\n' "De volgende $NUMBER_OF_COMMANDS acties zijn \
 uitgevoerd:" > "$temp_text_file"
     for exec in "${!EXEC[@]}"; do
-        action=$( printf '%s' "${EXEC[$exec]}" | awk -F# '{print $1}')
-        command=$(printf '%s' "${EXEC[$exec]}" | awk -F# '{print $2}')
+        action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
+        command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')
         printf '%2d. %-25s\n' "$exec" "$action ($command)" >> "$temp_text_file"
     done
     if $OPTION_GUI; then
