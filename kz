@@ -119,14 +119,17 @@ process_option_help() {
 
 
 process_option_version() {
+    local build=''
     local copyright_years='1970'
+
+    build=$(cat /usr/local/etc/kz-build 2> /dev/null || echo 'unknown')
 
     if [[ $RELEASE_YEAR -eq $THIS_YEAR ]]; then
         copyright_years=$RELEASE_YEAR
     else
         copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
-    printf '%s\n' "$DISPLAY_NAME versie 365 (kz 365)
+    printf '%s\n' "$DISPLAY_NAME versie 365 (kz build 365-$build)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

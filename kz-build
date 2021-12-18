@@ -39,6 +39,9 @@ readonly    UPLOADS_REPO=$HOME/kz-uploads
 readonly    UPLOADS_APPDIR=$UPLOADS_REPO/app
 readonly    UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
+# Conform ISO 8601.
+TIMESTAMP=$(date +%Y-%m-%dT%H:%M); readonly TIMESTAMP
+
 readonly -A SOURCE_UPLOADS=(
                 [APP]=$UPLOADS_APPDIR
                [DOCS]=$DOCS_REPO
@@ -59,6 +62,7 @@ readonly -A SOURCE_DEB=(
             )
 readonly -A TARGET_DEB=(
                [DIST]=$DEB_DISTDIR
+              [BUILD]=$DEB_DISTDIR/usr/local/etc
        [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
         [BACKGROUNDS]=$DEB_DISTDIR/usr/share/backgrounds
     [BACKGROUND_PROP]=$DEB_DISTDIR/usr/share/gnome-background-properties
@@ -356,6 +360,8 @@ build_deb() {
         --update                                                \
         "${TARGET_UPLOADS[PDFS]}/Checklist installatie"*.pdf    \
         "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
+
+    printf '%s\n' "$TIMESTAMP" > "${TARGET_DEB[BUILD]}/$PROGRAM_NAME"
 
     fakeroot    dpkg-deb                            \
                 --build                             \
