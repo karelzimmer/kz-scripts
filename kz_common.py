@@ -51,7 +51,7 @@ def process_option_version(display_name, release_year):
     """
     Deze functie toont versie-informatie, auteur, en auteursrecht.
     """
-    build=''
+    build = ''
     copyright_years = '1970'
     now = datetime.datetime.now()
     this_year = now.year
@@ -59,8 +59,10 @@ def process_option_version(display_name, release_year):
     try:
         with open('/usr/local/etc/kz-build') as fh:
             build = fh.read()
-    except:
+    except FileNotFoundError:
         build = 'unknown'
+    except OSError as ex:
+        print(ex)
 
     if release_year == this_year:
         copyright_years = release_year
