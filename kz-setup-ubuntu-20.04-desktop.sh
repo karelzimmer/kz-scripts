@@ -106,7 +106,6 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 kz-gset --addappfolder --folder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
-gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-light'
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
@@ -125,7 +124,6 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #4    gsettings reset org.gnome.desktop.app-folders folder-children
 #4    gsettings reset org.gnome.desktop.calendar show-weekdate
 #4    gsettings reset org.gnome.desktop.interface clock-show-date
-#4    gsettings reset org.gnome.desktop.interface gtk-theme
 #4    gsettings reset org.gnome.desktop.interface show-battery-percentage
 #4    gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
 #4    gsettings reset org.gnome.desktop.screensaver lock-enabled
