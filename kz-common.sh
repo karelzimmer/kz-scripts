@@ -306,7 +306,7 @@ process_option_version() {
         copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
 
-    info "$DISPLAY_NAME versie 365 (kz build 365_$build)
+    info "$DISPLAY_NAME versie 365 (kz build $build)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
