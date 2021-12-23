@@ -280,9 +280,9 @@ process_option_addfavtop () {
             grep    --quiet             \
                     --word-regexp       \
                     --regexp="$DESKTOPFILE"; then
-        gsettings   set                                         \
-                    org.gnome.shell                             \
-                    favorite-apps                               \
+        gsettings   set                                             \
+                    org.gnome.shell                                 \
+                    favorite-apps                                   \
                     "['$DESKTOPFILE', $(
                                         printf  '%s'                \
                                                 "$favorite_apps"    |
@@ -304,9 +304,9 @@ process_option_addfavbottom () {
             grep    --quiet             \
                     --word-regexp       \
                     --regexp="$DESKTOPFILE"; then
-        gsettings   set                         \
-                    org.gnome.shell             \
-                    favorite-apps               \
+        gsettings   set                             \
+                    org.gnome.shell                 \
+                    favorite-apps                   \
                     "$(
                         printf  '%s'                \
                                 "$favorite_apps"    |
