@@ -15,7 +15,7 @@ kz-gset --removefav --file='firefox.desktop'
 #2 GNOME - Bureaubladomgeving
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'
-gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-dark'
+gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-light'
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 #4 Start Terminalvenster en voer uit:
