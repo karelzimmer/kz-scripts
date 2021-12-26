@@ -1,8 +1,8 @@
 #!/bin/bash
 ###############################################################################
-# Start VM hugowin732.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Start VM hugowin732.                                                        #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 TITLE='VirtualBox'
@@ -24,4 +24,3 @@ zenity  --progress              \
         --height    50          \
         --title     "$TITLE"    \
         --text      "$TEXT"
-

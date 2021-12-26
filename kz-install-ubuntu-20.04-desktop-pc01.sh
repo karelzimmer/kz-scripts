@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc01.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc01.                   #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 bluetooth
@@ -65,4 +65,3 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 sudo snap install --classic code
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove code
-

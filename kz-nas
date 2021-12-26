@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Netwerkschijf aankoppelen.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Netwerkschijf aankoppelen.                                                  #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ RELEASE_YEAR=2014
 
 
 ###############################################################################
-# Global constants
+# Global constants                                                            #
 ###############################################################################
 
 readonly RUN_AS_SUPERUSER=true
@@ -51,7 +51,7 @@ readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 
 
 ###############################################################################
-# Global variables
+# Global variables                                                            #
 ###############################################################################
 
 declare NAS_GEBRUIKERSNAAM=${SUDO_USER:-$USER}
@@ -61,7 +61,7 @@ declare NAS_WACHTWOORD='geheim'
 
 
 ###############################################################################
-# Functions
+# Functions                                                                   #
 ###############################################################################
 
 check_input() {
@@ -342,7 +342,7 @@ De-activeer het systemd mount-besta2nd met de opdracht:
 
 
 ###############################################################################
-# Main line
+# Main line                                                                   #
 ###############################################################################
 
 main() {

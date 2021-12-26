@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 LTS desktop.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Installatiebestand voor Ubuntu 20.04 LTS desktop.                           #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 apport
@@ -143,4 +143,3 @@ sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes zoom
-

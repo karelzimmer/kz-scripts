@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc-van-hugo.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc-van-hugo.            #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 handlelidswitch
@@ -46,4 +46,3 @@ sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 #4    sudo apt-get update
 #4    sudo deluser "${SUDO_USER:-$USER}" vboxusers
 #4    sudo delgroup vboxusers
-

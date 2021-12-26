@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc04.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc04.                   #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 calibre
@@ -23,4 +23,3 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 kz-gset --addfavbottom --file='google-earth.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='google-earth.desktop'
-

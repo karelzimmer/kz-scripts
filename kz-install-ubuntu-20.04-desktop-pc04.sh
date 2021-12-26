@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc04.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc04.                   #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 calibre
@@ -32,4 +32,3 @@ rm /tmp/google-earth-pro-stable_current_amd64.deb
 sudo apt-get install --yes wine winetricks playonlinux
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes wine winetricks playonlinux
-

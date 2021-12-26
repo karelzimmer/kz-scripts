@@ -1,7 +1,7 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor kz install.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Bureaublad-configuratiebestand voor kz install.                             #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 [Desktop Entry]
@@ -48,4 +48,3 @@ Exec=/usr/bin/kz-install --gui --simulate
 Name=Show version information
 Name[nl]=Versie-informatie tonen tonen
 Exec=/usr/bin/kz-install --gui --version
-

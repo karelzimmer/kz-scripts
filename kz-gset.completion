@@ -1,12 +1,11 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz gset.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Tab-completion-script voor kz gset.                                         #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 dashoptions="--addappfolder --addfavtop --addfavbottom --removeappfolder
     --removefav '--file DESKTOPFILE' '--folder=APPFOLDER' -d --debug -g --gui
     -h --help -u --usage -v --version"
 complete -o default -W "$dashoptions" kz-gset
-

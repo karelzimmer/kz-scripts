@@ -4,9 +4,9 @@ Algemene module voor Python scripts.
 Deze module geeft toegang tot algemene functies.
 """
 ###############################################################################
-# Algemene module voor Python scripts.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Algemene module voor Python scripts.                                        #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 import sys
@@ -81,4 +81,3 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.""")
 
 if __name__ == '__main__':
     print(f'{module_name}: ik ben een module')
-

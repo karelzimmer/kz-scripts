@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Beeldbestanden downloaden.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Beeldbestanden downloaden.                                                  #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ RELEASE_YEAR=2014
 
 
 ###############################################################################
-# Global constants
+# Global constants                                                            #
 ###############################################################################
 
 readonly RUN_AS_SUPERUSER=false
@@ -46,7 +46,7 @@ declare OPTION_CHECKSUMS=false
 
 
 ###############################################################################
-# Functions
+# Functions                                                                   #
 ###############################################################################
 
 check_input() {
@@ -160,7 +160,7 @@ Om de beeldbestanden (.iso) te controleren voer uit:
 
 
 ###############################################################################
-# Main line
+# Main line                                                                   #
 ###############################################################################
 
 main() {

@@ -1,11 +1,10 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Tab-completion-script voor kz.                                              #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 dashoptions='archive backup ckhtml ckname build deploy dliso genpwd getdeb go
     gset install ivp menu mkusb nas restore setup spsum'
 complete -o default -W "$dashoptions" kz
-

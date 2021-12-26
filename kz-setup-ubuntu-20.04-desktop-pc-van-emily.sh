@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc-van-emily.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc-van-emily.           #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 gnome
@@ -11,4 +11,3 @@
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-caramel.jpg'
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
-

@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LST desktop op pc-van-hugo.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Instellingsbestand voor Ubuntu 20.04 LST desktop op pc-van-hugo.            #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 gnome
@@ -36,4 +36,3 @@ kz-gset --addfavbottom --file='kz-vm-hugowin732.desktop'
 #4    rm "$HOME"/kz-vm-hugowin732.sh
 #4    kz-gset --removefav --file='virtualbox.desktop'
 #4    kz-gset --removefav --file='kz-vm-hugowin732.desktop'
-

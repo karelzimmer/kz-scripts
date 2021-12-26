@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc06.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc06.                   #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 calibre
@@ -126,4 +126,3 @@ sudo apt-get install --yes tree
 sudo snap install --classic code
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove code
-

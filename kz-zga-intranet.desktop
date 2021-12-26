@@ -1,7 +1,7 @@
 ###############################################################################
-# Bureaublad-configuratiebestand voor Intranet van Zga via Google Chrome.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Bureaublad-configuratiebestand voor Intranet van Zga via Google Chrome.     #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 [Desktop Entry]
@@ -14,4 +14,3 @@ Categories=KZ Scripts;
 Exec=google-chrome https://iza.zorggroep-almere.nl/
 Icon=/usr/share/pixmaps/kz-zga-intranet.jpeg
 NoDisplay=true
-

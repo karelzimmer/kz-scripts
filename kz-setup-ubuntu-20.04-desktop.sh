@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LTS desktop.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Instellingsbestand voor Ubuntu 20.04 LTS desktop.                           #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 adguard
@@ -199,4 +199,3 @@ kz-gset --addfavbottom --file='spotify_spotify.desktop'
 kz-gset --addfavbottom --file='Zoom.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='Zoom.desktop'
-

@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc01.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc01.                   #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 #1 firefox
@@ -101,4 +101,3 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-webmail.deskto
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-webmail.desktop
 #4    kz-gset --removefav --file='kz-zga-webmail.desktop'
-

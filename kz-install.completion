@@ -1,12 +1,11 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz install.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Tab-completion-script voor kz install.                                      #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 dashoptions="-a --apps -c --cat -d --debug '-e EDITIE' '--edition EDITIE' -f
     --files -g --gui -h --help -i --info -l --list -r --remove -s --simulate -u
     --usage -v --version"
 complete -o default -W "$dashoptions" kz-install
-

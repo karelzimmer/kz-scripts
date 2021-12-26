@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Controlebestanden opsplitsen.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Controlebestanden opsplitsen.                                               #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ RELEASE_YEAR=2016
 
 
 ###############################################################################
-# Global constants
+# Global constants                                                            #
 ###############################################################################
 
 readonly RUN_AS_SUPERUSER=false
@@ -33,14 +33,14 @@ readonly HASHPROG=sha256sum
 
 
 ###############################################################################
-# Global variables
+# Global variables                                                            #
 ###############################################################################
 
 declare ISO_FILE=''
 declare ISO_FILE_FOUND=false
 
 ###############################################################################
-# Functions
+# Functions                                                                   #
 ###############################################################################
 
 check_input() {
@@ -161,7 +161,7 @@ Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
 
 
 ###############################################################################
-# Main line
+# Main line                                                                   #
 ###############################################################################
 
 main() {
