@@ -8,9 +8,11 @@ Deze module geeft toegang tot algemene functies.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
+
 import sys
 import argparse
 import datetime
+
 
 module_name = 'kz_common.py'
 release_year = 2021

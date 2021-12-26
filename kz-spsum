@@ -5,6 +5,7 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 source "$PROGRAM_PATH"/kz-common.sh
 PROGRAM_NAME=kz-spsum

@@ -9,11 +9,13 @@ Dit script voert een update uit voor Debian gebaseerde systemen.
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
+
 import sys
 import random
 import argparse
 import kz_common
 import subprocess
+
 
 program_name = 'kz-update'
 display_name = program_name.replace('kz-', 'kz ')

@@ -4,7 +4,6 @@
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
-# RELEASE_YEAR=2017
 
 TITLE='VirtualBox'
 TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
