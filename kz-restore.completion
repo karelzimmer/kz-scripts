@@ -10,4 +10,3 @@ dashoptions="-d --debug '-e UITSLUITEN' '--exclude UITSLUITEN' -g --gui -h
     --usage -v --version"
 complete -o default -W "$dashoptions" kz-restore
 
-# EOF

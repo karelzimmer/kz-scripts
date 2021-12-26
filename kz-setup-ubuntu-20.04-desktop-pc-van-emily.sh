@@ -12,4 +12,3 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
 
-# EOF

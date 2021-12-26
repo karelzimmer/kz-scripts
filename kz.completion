@@ -9,4 +9,3 @@ dashoptions='archive backup ckhtml ckname build deploy dliso genpwd getdeb go
     gset install ivp menu mkusb nas restore setup spsum'
 complete -o default -W "$dashoptions" kz
 
-# EOF

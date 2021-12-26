@@ -66,4 +66,3 @@ sudo snap install --classic code
 #4 Start Terminalvenster en voer uit:
 #4    sudo snap remove code
 
-# EOF

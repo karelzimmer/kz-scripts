@@ -200,4 +200,3 @@ kz-gset --addfavbottom --file='Zoom.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='Zoom.desktop'
 
-# EOF

@@ -25,4 +25,3 @@ Name=Show version information
 Name[nl]=Versie-informatie tonen
 Exec=/usr/bin/kz-getdeb --gui --version
 
-# EOF

@@ -24,4 +24,3 @@ kz-gset --addfavbottom --file='google-earth.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='google-earth.desktop'
 
-# EOF

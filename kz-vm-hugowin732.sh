@@ -25,4 +25,3 @@ zenity  --progress              \
         --title     "$TITLE"    \
         --text      "$TEXT"
 
-# EOF

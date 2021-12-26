@@ -41,4 +41,3 @@ kz_common.process_common_options(desc, display_name)
 
 generate_password()
 
-# EOF

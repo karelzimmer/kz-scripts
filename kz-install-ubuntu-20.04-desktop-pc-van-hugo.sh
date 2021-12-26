@@ -47,4 +47,3 @@ sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 #4    sudo deluser "${SUDO_USER:-$USER}" vboxusers
 #4    sudo delgroup vboxusers
 
-# EOF

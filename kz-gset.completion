@@ -10,4 +10,3 @@ dashoptions="--addappfolder --addfavtop --addfavbottom --removeappfolder
     -h --help -u --usage -v --version"
 complete -o default -W "$dashoptions" kz-gset
 
-# EOF

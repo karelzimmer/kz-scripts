@@ -17,4 +17,3 @@ sudo apt-get install --yes clamtk-gnome
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove clamtk-gnome
 
-# EOF

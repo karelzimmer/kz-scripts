@@ -419,9 +419,6 @@ $EDITION."
     if $file_notfound; then
         info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
     else
-        if ! grep --quiet --line-regexp --regexp='^# EOF' "$CMDS_FILE2"; then
-            printf '%s\n' '# EOF' >> "$CMDS_FILE2"
-        fi
         FILE_TO_PROCESS[$file_num]=$CMDS_FILE2
         ((++file_num))
     fi
@@ -444,7 +441,7 @@ process_argument_app_file() {
                     # Gezochte app-naam.
                     # Regels doorschrijven naar tijdelijk bestand tot
                     # eerstvolgende app-naam of beschrijving (verplicht),
-                    # of tot EOF.
+                    # of tot eof.
                     app_found=true
                     description_found=false
                 fi
@@ -883,6 +880,3 @@ main() {
 
 
 main "$@"
-
-
-# EOF

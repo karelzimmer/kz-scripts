@@ -37,4 +37,3 @@ kz-gset --addfavbottom --file='kz-vm-hugowin732.desktop'
 #4    kz-gset --removefav --file='virtualbox.desktop'
 #4    kz-gset --removefav --file='kz-vm-hugowin732.desktop'
 
-# EOF

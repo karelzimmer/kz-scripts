@@ -33,4 +33,3 @@ sudo apt-get install --yes wine winetricks playonlinux
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes wine winetricks playonlinux
 
-# EOF

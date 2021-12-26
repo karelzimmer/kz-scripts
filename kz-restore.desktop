@@ -24,4 +24,3 @@ Name=Show version information
 Name[nl]=Versie-informatie tonen
 Exec=/usr/bin/kz-restore --gui --version
 
-# EOF

@@ -10,4 +10,3 @@ dashoptions="-a --apps -c --cat -d --debug '-e EDITIE' '--edition EDITIE' -f
     --usage -v --version"
 complete -o default -W "$dashoptions" kz-install
 
-# EOF

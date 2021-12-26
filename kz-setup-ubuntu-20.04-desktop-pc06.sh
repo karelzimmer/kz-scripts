@@ -88,4 +88,3 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='code_code.desktop'
 
-# EOF

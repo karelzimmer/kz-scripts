@@ -483,6 +483,3 @@ warning() {
         printf "${YELLOW}%b${NORMAL}\n" "$@" >&2
     fi
 }
-
-
-# EOF

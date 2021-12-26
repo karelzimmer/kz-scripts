@@ -9,4 +9,3 @@ dashoptions='-c  --checksums -d --debug -g --gui -h --help -u --usage -v
     --version'
 complete -o default -W "$dashoptions" kz-dliso
 
-# EOF

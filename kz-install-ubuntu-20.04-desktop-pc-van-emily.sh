@@ -17,4 +17,3 @@ sudo apt-get install --yes libimage-exiftool-perl
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes libimage-exiftool-perl
 
-# EOF

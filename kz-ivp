@@ -122,7 +122,6 @@ process_input() {
                 continue
                 ;;
         esac
-        check_eof
         check_lines
         check_tags
         check_trailing_spaces
@@ -149,19 +148,6 @@ process_input() {
         esac
     done
     cd "$HOME" || exit $ERROR
-}
-
-
-check_eof() {
-    if ! grep --quiet --word-regexp --regexp=' ''EOF' "$script"; then
-        info "
-${BOLD}In $script:${NORMAL}
-    EOF ontbreekt.
-"
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
 }
 
 
@@ -467,6 +453,3 @@ main() {
 
 
 main "$@"
-
-
-# EOF

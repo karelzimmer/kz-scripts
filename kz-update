@@ -57,6 +57,3 @@ def perform_update():
 kz_common.process_common_options(desc, display_name)
 
 perform_update()
-
-
-# EOF

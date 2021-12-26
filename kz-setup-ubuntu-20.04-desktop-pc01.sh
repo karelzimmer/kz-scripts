@@ -102,4 +102,3 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-webmail.deskto
 #4    rm "$HOME"/.local/share/applications/kz-zga-webmail.desktop
 #4    kz-gset --removefav --file='kz-zga-webmail.desktop'
 
-# EOF
