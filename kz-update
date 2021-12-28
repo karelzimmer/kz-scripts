@@ -11,8 +11,6 @@ Dit script voert een update uit voor Debian gebaseerde systemen.
 ###############################################################################
 
 import sys
-import random
-import argparse
 import kz_common
 import subprocess
 
