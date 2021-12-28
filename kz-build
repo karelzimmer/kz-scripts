@@ -69,7 +69,7 @@ readonly -A TARGET_DEB=(
     [BACKGROUND_PROP]=$DEB_DISTDIR/usr/share/gnome-background-properties
                 [BIN]=$DEB_DISTDIR/usr/bin
                 [DOC]=$DEB_DISTDIR/usr/share/doc/kz
-                [MAN]=$DEB_DISTDIR/usr/share/man/nl/man1
+                [MAN]=$DEB_DISTDIR/usr/share/man/man1
            [POLICY_1]=$DEB_DISTDIR/usr/share/polkit-1/actions
            [TABCOMPL]=$DEB_DISTDIR/usr/share/bash-completion/completions
     )
