@@ -4,18 +4,20 @@
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 
 <!--
- PolicyKit actiedefinitiebestand voor kz nas.
-
- Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
+# PolicyKit actiedefinitiebestand voor kz nas.                                #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+###############################################################################
 -->
-
-<policyconfig>
 
 <policyconfig>
 
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
+    <!-- Deze actie wordt gebruikt voor de ontwikkel-omgeving.
+         This action is used for the development environment. -->
     <action id="nl.karelzimmer.kz-nas.attach-nas">
         <message>Authentication is required to mount a network drive.</message>
         <message xml:lang="nl">Authenticatie is vereist om een netwerkschijf te koppelen.</message>
@@ -28,6 +30,8 @@
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
     </action>
 
+    <!-- Deze actie wordt gebruikt voor de productie-omgeving.
+         This action is used for the production environment. -->
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 

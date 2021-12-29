@@ -4,16 +4,20 @@
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 
 <!--
- PolicyKit actiedefinitiebestand voor kz install.
-
- Geschreven door Karel Zimmer <info@karelzimmer.nl>.
- -->
+###############################################################################
+# PolicyKit actiedefinitiebestand voor kz install.                            #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+###############################################################################
+-->
 
 <policyconfig>
 
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
+    <!-- Deze actie wordt gebruikt voor de ontwikkel-omgeving.
+         This action is used for the development environment. -->
     <action id="kz-install.install-sw">
         <message>Authentication is required to install/list apps.</message>
         <message xml:lang="nl">Authenticatie is vereist om apps te installeren/uit te lijsten.</message>
@@ -28,6 +32,8 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
+    <!-- Deze actie wordt gebruikt voor de productie-omgeving.
+         This action is used for the production environment. -->
     <action id="nl.karelzimmer.kz-install.install-sw">
         <message>Authentication is required to install/list apps.</message>
         <message xml:lang="nl">Authenticatie is vereist om apps te installeren/uit te lijsten.</message>
