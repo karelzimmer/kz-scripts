@@ -405,7 +405,7 @@ download_website() {
 term_script() {
     local search=''
 
-    search='/usr/share/doc/kz/Checklist installatie'
+    search='/usr/share/doc/kz/Checklist-installatie'
     cp  --update "$search"*{desktop,server}.pdf "$HOME" |& $LOGCMD || true
     cp  --update                                    \
         "$search"*{desktop,server}" $HOSTNAME".pdf  \

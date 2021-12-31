@@ -359,7 +359,7 @@ build_deb() {
 
     cp  --archive                                               \
         --update                                                \
-        "${TARGET_UPLOADS[PDFS]}/Checklist installatie"*.pdf    \
+        "${TARGET_UPLOADS[PDFS]}"/Checklist-installatie*.pdf    \
         "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
 
     printf '%s' "365_$TIMESTAMP" > "${TARGET_DEB[BUILD]}/$PROGRAM_NAME"
