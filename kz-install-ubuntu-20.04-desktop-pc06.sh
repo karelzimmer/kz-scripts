@@ -11,24 +11,6 @@ sudo apt-get install --yes calibre
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes calibre
 
-#1 clamav
-#2 ClamAV - Antivirus
-sudo apt-get install --yes clamtk
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes clamtk
-
-#1 dconf-editor
-#2 Dconf-editor - Editor
-sudo apt-get install --yes dconf-editor
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes dconf-editor
-
-#1 exiftool
-#2 ExifTool - Metadata lezen en schrijven
-sudo apt-get install --yes libimage-exiftool-perl
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes libimage-exiftool-perl
-
 #1 gast
 #2 Gast - Gastgebruiker
 sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
@@ -37,24 +19,11 @@ sudo passwd --delete gast
 #4 Start Terminalvenster en voer uit:
 #4    sudo userdel --remove gast
 
-#1 gconf-editor
-#2 GConf-editor - Editor
-sudo apt-get install --yes gconf-editor
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes gconf-editor
-
 #1 git
 #2 Git - Versiebeheersysteem
 sudo apt-get install --yes aspell-nl git gitg
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes git gitg
-
-#1 handlelidswitch
-#2 HandleLidSwitch - Negeer sluiten laptopdesksel
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
-#4 Start Terminalvenster en voer uit:
-#4    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 #1 kvm
 #2 KVM - Virtualisatie
