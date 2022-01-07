@@ -61,8 +61,8 @@ readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
 readonly TARGET_DEFAULT_1=/media
 readonly TARGET_DEFAULT_2=$PROGRAM_NAME
 readonly TARGET_DEFAULT_3=$PROGRAM_NAME-$HOSTNAME-$DISTRO
-# Conform ISO 8601, but ':' -> '.' for other filesystems not on Linux.
-TIMESTAMP=$(date +%Y-%m-%dT%H.%M.%S); readonly TIMESTAMP
+# Conform ISO 8601.
+TIMESTAMP=$(date +%Y-%m-%dT%H:%M); readonly TIMESTAMP
 
 
 ###############################################################################
