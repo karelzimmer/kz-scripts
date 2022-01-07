@@ -13,7 +13,7 @@ echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{
 
 #1 gast
 #2 Gast - Gastgebruiker
-sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Gast' gast || true
 sudo chmod 0750 /home/gast
 sudo passwd --delete gast
 #4 Start Terminalvenster en voer uit:
@@ -34,7 +34,7 @@ sudo apt-get install --yes aspell-nl git gitg
 #1 karel
 #2 Karel - Systeemgebruiker
 ## Voor toegang op afstand en systeembeheer.
-sudo useradd --create-home --shell=/bin/bash --comment='Karel Zimmer' --groups=sudo karel || true
+sudo useradd --create-home --shell=/usr/bin/bash --comment='Karel Zimmer' --groups=sudo karel || true
 sudo cp /var/lib/AccountsService/users/{gdm,karel}
 #3 Start Terminalvenster en voer uit:
 #3    sudo passwd karel
