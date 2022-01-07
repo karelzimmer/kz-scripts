@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
 # Controlebestanden opsplitsen.                                               #
