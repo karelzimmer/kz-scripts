@@ -40,7 +40,7 @@ kz-gset --removefav --file='thunderbird.desktop'
 
 #1 vscode
 #2 Visual Studio Code - Editor
-kz-gset --addfavtop --file='code_code.desktop'
+if [[ $USER = karel ]]; then kz-gset --addfavtop --file='code_code.desktop'; fi
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
 xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
 xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand
