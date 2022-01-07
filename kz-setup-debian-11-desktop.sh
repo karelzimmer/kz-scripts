@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# #############################################################################
+###############################################################################
 # Instellingsbestand voor Debian 11 LTS desktop.                              #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
