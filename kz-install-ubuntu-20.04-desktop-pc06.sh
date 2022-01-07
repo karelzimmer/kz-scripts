@@ -11,14 +11,6 @@ sudo apt-get install --yes calibre
 #4 Start Terminalvenster en voer uit:
 #4    sudo apt remove --yes calibre
 
-#1 gast
-#2 Gast - Gastgebruiker
-sudo useradd --create-home --shell /usr/bin/bash --comment 'Gast' gast || true
-sudo chmod 0750 /home/gast
-sudo passwd --delete gast
-#4 Start Terminalvenster en voer uit:
-#4    sudo userdel --remove gast
-
 #1 git
 #2 Git - Versiebeheersysteem
 sudo apt-get install --yes aspell-nl git gitg

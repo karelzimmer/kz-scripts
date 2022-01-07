@@ -11,14 +11,6 @@ echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{
 #4 1. Start Terminalvenster en voer uit:
 #4    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
 
-#1 gast
-#2 Gast - Gastgebruiker
-sudo useradd --create-home --shell /usr/bin/bash --comment 'Gast' gast || true
-sudo chmod 0750 /home/gast
-sudo passwd --delete gast
-#4 Start Terminalvenster en voer uit:
-#4    sudo userdel --remove gast
-
 #1 exiftool
 #2 ExifTool - Metadata lezen en schrijven
 sudo apt-get install --yes libimage-exiftool-perl
