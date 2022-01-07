@@ -1,14 +1,9 @@
 # shellcheck shell=bash
 # #############################################################################
-# Instellingsbestand voor Debian 11 LTS desktop.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-# #############################################################################
-# RELEASE_YEAR=2021
-
-# VERSION_NUMBER=01.02.03
-# VERSION_DATE=2021-09-17
-
+# Instellingsbestand voor Debian 11 LTS desktop.                              #
+#                                                                             #
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+###############################################################################
 
 #1 adguard
 #2 Adguard (adblocker) instellen
@@ -42,11 +37,9 @@
 #4 3. Klik links op Extensies.
 #4 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
 
-
 #1 alias
 #2 Aliassen  (alias) instellen
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
-
 
 #1 bitwarden
 #2 Bitwarden (wachtwoordkluis) instellen
@@ -111,7 +104,6 @@ kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
 #4 5. Start Terminalvenster en voer uit:
 #4       kz-gset --removefav --file='bitwarden_bitwarden.desktop'
 
-
 #1 dashtodock
 #2 Dash to Dock (starter) instellen
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
@@ -121,7 +113,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 #4    gnome-shell-extension-tool --disable-extension=dash-to-dock@micxgx.gmail.com
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
-
 
 #1 gnome
 #2 GNOME (bureaubladomgeving) instellen
@@ -157,7 +148,6 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #4    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 #4    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
-
 #1 google-chrome
 #2 Google Chrome (webbrowser) instellen
 kz-gset --addfavtop --file='google-chrome.desktop'
@@ -181,12 +171,10 @@ kz-gset --addfavtop --file='google-chrome.desktop'
 #4 4. Start Terminalvenster en voer uit:
 #4       kz-gset --removefav --file='google-chrome.desktop'
 
-
 #1 icaclient
 #2 Citrix Workspace app (telewerken) instellen
 ## Citrix Receiver, ICA Client
 xdg-mime default wfica.desktop application/x-ica
-
 
 #1 skype
 #2 Skype (beeldbellen) instellen
@@ -194,13 +182,11 @@ kz-gset --addfavbottom --file='skype_skypeforlinux.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='skype_skypeforlinux.desktop'
 
-
 #1 spotify
 #2 Spotify (muziekspeler) instellen
 kz-gset --addfavbottom --file='spotify_spotify.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='spotify_spotify.desktop'
-
 
 #1 thunderbird
 #2 Thunderbird (e-mail) installen
@@ -218,12 +204,8 @@ kz-gset --addfavtop --file='thunderbird.desktop'
 #4 4. Bij 'Provider voor Google Agenda' zet schuifje op uit of klik ... en kies
 #4    Verwijderen.
 
-
 #1 zoom
 #2 Zoom (telewerken) instellen
 kz-gset --addfavbottom --file='Zoom.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='Zoom.desktop'
-
-
-# EOF
