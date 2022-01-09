@@ -205,6 +205,7 @@ remove_backups() {
 
 build_uploads() {
     local file=''
+    local suffix=''
 
     log 'Bouw website...'
 
@@ -268,18 +269,20 @@ build_uploads() {
                 "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-pagina.
+                echo "$file" #XXX
                 man     --troff                                 \
                         "${SOURCE_UPLOADS[SCRIPTS]}/$file"      |
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$file.pdf"   |& $LOGCMD
             else
-                # Script inclusief *.1, *.completion, *.desktop, en *.policy.
-                enscript    --quiet                             \
-                            --line-numbers                      \
-                            --title="$file"                     \
-                            --output=-                          \
-                            "$file"                             |
-                ps2pdf      -                                   \
-                            "${TARGET_UPLOADS[PDFS]}/$file.pdf" |& $LOGCMD
+                # Script, *.completion, *.desktop, *.policy, en *.sh.
+                suffix='pdf'
+                if [[ $file = *.* ]]; then
+                    suffix="${file##*.}.pdf"
+                fi
+                lowriter    --headless                          \
+                            --convert-to "$suffix"              \
+                            --outdir "${TARGET_UPLOADS[PDFS]}"  \
+                            "$file"                             |& $LOGCMD
             fi
         fi
     done
