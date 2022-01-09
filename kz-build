@@ -269,7 +269,6 @@ build_uploads() {
                 "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-pagina.
-                echo "$file" #XXX
                 man     --troff                                 \
                         "${SOURCE_UPLOADS[SCRIPTS]}/$file"      |
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$file.pdf"   |& $LOGCMD
