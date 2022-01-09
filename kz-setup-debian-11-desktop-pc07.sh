@@ -27,15 +27,9 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #1 kvm
 #2 KVM (virtualisatie) instellen
 ## Beeldscherm 2048 x 1152 (16:9).
-kz-gset --addfavbottom --file='virt-manager.desktop'
+kz-gset --addfavend --file='virt-manager.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='virt-manager.desktop'
-
-#1 python
-#2 Python (programmeertaal) instellen
-kz-gset --addfavtop --file='idle.desktop'
-#4 Start Terminalvenster en voer uit:
-#4    kz-gset --removefav --file='idle.desktop'
 
 #1 search
 #2 Vooruit zoeken in history (Ctrl-S) instellen
@@ -46,7 +40,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 #1 terminal
 #2 GNOME Terminal (terminalvenster) instellen
-kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
+kz-gset --addfavbegin --file='org.gnome.Terminal.desktop'
 #3 1. Klik op Activiteiten, typ 'snel'.
 #3 2. Klik bij Instellingen op het pictogram Toetsenbord.
 #3 3. Op scherm Toetsenbord scroll naar beneden en druk op +.
@@ -59,7 +53,7 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 
 #1 vscode
 #2 Visual Studio Code (editor) instellen
-kz-gset --addfavtop --file='code_code.desktop'
+kz-gset --addfavbegin --file='code_code.desktop'
 #3 1. Start Visual Studio Code.
 #3 2. Ga naar File > Preferences > Settings (Ctrl+,).
 #3 3. Zoek 'ruler'

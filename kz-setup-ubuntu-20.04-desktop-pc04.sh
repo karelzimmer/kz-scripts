@@ -7,7 +7,7 @@
 
 #1 calibre
 #2 Calibre - E-boekmanager
-kz-gset --addfavbottom --file='calibre-gui.desktop'
+kz-gset --addfavend --file='calibre-gui.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='calibre-gui.desktop'
 
@@ -20,6 +20,6 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 
 #1 google-earth
 #2 Google Earth - Verken de wereld
-kz-gset --addfavbottom --file='google-earth.desktop'
+kz-gset --addfavend --file='google-earth.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='google-earth.desktop'

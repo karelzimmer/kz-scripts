@@ -9,7 +9,7 @@
 #2 Firefox - Webbrowser
 kz-gset --removefav --file='firefox.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --addfavtop --file='firefox.desktop'
+#4    kz-gset --addfavbegin --file='firefox.desktop'
 
 #1 gnome
 #2 GNOME - Bureaubladomgeving
@@ -31,7 +31,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 #1 kvm
 #2 KVM - Virtualisatie
 ## Beeldscherm 2048 x 1152 (16:9).
-kz-gset --addfavbottom --file='virt-manager.desktop'
+kz-gset --addfavend --file='virt-manager.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='virt-manager.desktop'
 
@@ -44,7 +44,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 #1 terminal
 #2 GNOME Terminal - Terminalvenster
-kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
+kz-gset --addfavbegin --file='org.gnome.Terminal.desktop'
 #3 1. Start Terminalvenster.
 #3 2. Maximaliseer het Terminalvenster.
 #3 3. Voer de volgende opdracht uit:
@@ -60,11 +60,11 @@ kz-gset --addfavtop --file='org.gnome.Terminal.desktop'
 #2 Thunderbird - E-mail
 kz-gset --removefav --file='thunderbird.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --addfavtop --file='thunderbird.desktop'
+#4    kz-gset --addfavbegin --file='thunderbird.desktop'
 
 #1 vscode
 #2 Visual Studio Code - Editor
-kz-gset --addfavtop --file='code_code.desktop'
+kz-gset --addfavbegin --file='code_code.desktop'
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
 xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
 xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand

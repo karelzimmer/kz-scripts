@@ -19,11 +19,11 @@ RELEASE_YEAR=2015
 
 readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addappfolder,addfavbottom,\
-addfavtop,removeappfolder,removefav,file:,folder:"
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addappfolder,addfavbegin,\
+addfavend,,removeappfolder,removefav,file:,folder:"
 readonly USAGE="Gebruik: $DISPLAY_NAME \
 [--addappfolder|--removeappfolder --folder=APPFOLDER]
-                 [--addfavbottom|--addfavtop|--removefav --file=DESKTOPFILE]
+                 [--addfavbegin|--addfavend|--removefav --file=DESKTOPFILE]
                  $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
@@ -32,12 +32,10 @@ GUI wijzigen.
 Opties:
      --addappfolder
                 voeg een appfolder toe
-     --addfavbottom
-                voeg een toepassingspictogram (favoriet) toe onderaan aan het \
-favorietengebied
-     --addfavtop
-                voeg een toepassingspictogram (favoriet) toe bovenaan aan het \
-favorietengebied
+     --addfavbegin
+                voeg een favoriet toe aan het begin van het favorietengebied
+     --addfavend
+                voeg een favoriet toe aan het einde van het favorietengebied
      --file=DESKTOPFILE
                 opgegeven desktopbestand (.desktop) verwerken
      --folder=APPFOLDER
@@ -45,8 +43,7 @@ favorietengebied
      --removeappfolder
                 verwijder een appfolder
      --removefav
-                verwijder een toepassingspictogrammen (favoriet) uit het \
-favorietengebied
+                verwijder een favoriet uit het favorietengebied
 $OPTIONS_HELP_COMMON"
 
 
@@ -60,8 +57,8 @@ declare DESKTOPFILE=''
 declare FILE_ARGUMENT=''
 declare FOLDER_ARGUMENT=''
 declare OPTION_ADDAPPFOLDER=false
-declare OPTION_ADDFAVBOTTOM=false
-declare OPTION_ADDFAVTOP=false
+declare OPTION_addfavend=false
+declare OPTION_addfavbegin=false
 declare OPTION_FILE=false
 declare OPTION_FOLDER=false
 declare OPTION_REMOVEAPPFOLDER=false
@@ -104,39 +101,39 @@ check_input() {
                 fi
                 shift
                 ;;
-            --addfavtop)
-                if $OPTION_ADDFAVTOP; then
+            --addfavbegin)
+                if $OPTION_addfavbegin; then
                     TEXT="optie '$1' eenmaal opgeven"
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
                     exit $ERROR
-                elif ($OPTION_ADDFAVBOTTOM || $OPTION_REMOVEFAV); then
+                elif ($OPTION_addfavend || $OPTION_REMOVEFAV); then
                     TEXT='een optie eenmaal opgeven'
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
                     exit    $ERROR
                 else
-                    OPTION_ADDFAVTOP=true
+                    OPTION_addfavbegin=true
                 fi
                 shift
                 ;;
-            --addfavbottom)
-                if $OPTION_ADDFAVBOTTOM; then
+            --addfavend)
+                if $OPTION_addfavend; then
                     TEXT="optie '$1' eenmaal opgeven"
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
                     exit $ERROR
-                elif ($OPTION_ADDFAVTOP || $OPTION_REMOVEFAV); then
+                elif ($OPTION_addfavbegin || $OPTION_REMOVEFAV); then
                     TEXT='een optie eenmaal opgeven'
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
                     exit    $ERROR
                 else
-                    OPTION_ADDFAVBOTTOM=true
+                    OPTION_addfavend=true
                 fi
                 shift
                 ;;
@@ -185,7 +182,7 @@ check_input() {
                             "$TEXT"                     \
                             "$USAGELINE"                >&2
                     exit    $ERROR
-                elif ($OPTION_ADDFAVTOP || $OPTION_ADDFAVBOTTOM); then
+                elif ($OPTION_addfavbegin || $OPTION_addfavend); then
                     TEXT='een optie eenmaal opgeven'
                     printf  "$DISPLAY_NAME: %s\n%s\n"   \
                             "$TEXT"                     \
@@ -212,15 +209,15 @@ check_input() {
         exit $ERROR
     fi
 
-    if ($OPTION_ADDFAVTOP || $OPTION_ADDFAVBOTTOM || $OPTION_REMOVEFAV) &&
+    if ($OPTION_addfavbegin || $OPTION_addfavend || $OPTION_REMOVEFAV) &&
         ! $OPTION_FILE; then
         TEXT="ontbrekende optie 'file'"
         printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FILE &&
-        ! ($OPTION_ADDFAVTOP || $OPTION_ADDFAVBOTTOM || $OPTION_REMOVEFAV)
+        ! ($OPTION_addfavbegin || $OPTION_addfavend || $OPTION_REMOVEFAV)
         then
-        TEXT="ontbrekende optie 'addfavtop', 'addfavbottom', of 'removefav'"
+        TEXT="ontbrekende optie 'addfavbegin', 'addfavend', of 'removefav'"
         printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FILE && [[ $FILE_ARGUMENT != *.desktop ]]; then
@@ -254,10 +251,10 @@ check_input() {
 
 
 process_input() {
-    if $OPTION_ADDFAVTOP; then
-        process_option_addfavtop
-    elif $OPTION_ADDFAVBOTTOM; then
-        process_option_addfavbottom
+    if $OPTION_addfavbegin; then
+        process_option_addfavbegin
+    elif $OPTION_addfavend; then
+        process_option_addfavend
     elif $OPTION_REMOVEFAV; then
         process_option_removefav
     elif $OPTION_ADDAPPFOLDER; then
@@ -270,7 +267,7 @@ process_input() {
 }
 
 
-process_option_addfavtop () {
+process_option_addfavbegin () {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -294,7 +291,7 @@ process_option_addfavtop () {
 }
 
 
-process_option_addfavbottom () {
+process_option_addfavend () {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)

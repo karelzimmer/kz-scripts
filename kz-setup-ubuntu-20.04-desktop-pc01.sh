@@ -9,7 +9,7 @@
 #2 Firefox - Webbrowser
 kz-gset --removefav --file='firefox.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --addfavtop --file='firefox.desktop'
+#4    kz-gset --addfavbegin --file='firefox.desktop'
 
 #1 gnome
 #2 GNOME - Bureaubladomgeving
@@ -30,7 +30,7 @@ echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 
 #1 terminal
 #2 GNOME Terminal - Terminalvenster
-if [[ $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.Terminal.desktop'; fi
+if [[ $USER = karel ]]; then kz-gset --addfavbegin --file='org.gnome.Terminal.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='org.gnome.Terminal.desktop'
 
@@ -38,11 +38,11 @@ if [[ $USER = karel ]]; then kz-gset --addfavtop --file='org.gnome.Terminal.desk
 #2 Thunderbird - E-mail
 kz-gset --removefav --file='thunderbird.desktop'
 #4 Start Terminalvenster en voer uit:
-#4    kz-gset --addfavtop --file='thunderbird.desktop'
+#4    kz-gset --addfavbegin --file='thunderbird.desktop'
 
 #1 vscode
 #2 Visual Studio Code - Editor
-if [[ $USER = karel ]]; then kz-gset --addfavtop --file='code_code.desktop'; fi
+if [[ $USER = karel ]]; then kz-gset --addfavbegin --file='code_code.desktop'; fi
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
 xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
 xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand
@@ -72,7 +72,7 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #2 Zga eHRM - Starter eHRM Zorggroep Almere
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-ehrm.desktop; fi
-if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-ehrm.desktop'; fi
+if [[ $USER = monique ]]; then kz-gset --addfavbegin --file='kz-zga-ehrm.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
 #4    kz-gset --removefav --file='kz-zga-ehrm.desktop'
@@ -81,7 +81,7 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-ehrm.desktop';
 #2 Zga Intranet - Starter Intranet Zorggroep Almere
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz-zga-intranet.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-intranet.desktop; fi
-if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-intranet.desktop'; fi
+if [[ $USER = monique ]]; then kz-gset --addfavbegin --file='kz-zga-intranet.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-intranet.desktop
 #4    kz-gset --removefav --file='kz-zga-intranet.desktop'
@@ -90,7 +90,7 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-intranet.deskt
 #2 Zga Monaco - Starter Monaco Zorggroep Almere
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz-zga-monaco.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-monaco.desktop; fi
-if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-monaco.desktop'; fi
+if [[ $USER = monique ]]; then kz-gset --addfavbegin --file='kz-zga-monaco.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-monaco.desktop
 #4    kz-gset --removefav --file='kz-zga-monaco.desktop'
@@ -99,7 +99,7 @@ if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-monaco.desktop
 #2 Zga WebMail - Starter
 if [[ $USER = monique ]]; then cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/; fi
 if [[ $USER = monique ]]; then sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-webmail.desktop; fi
-if [[ $USER = monique ]]; then kz-gset --addfavtop --file='kz-zga-webmail.desktop'; fi
+if [[ $USER = monique ]]; then kz-gset --addfavbegin --file='kz-zga-webmail.desktop'; fi
 #4 Start Terminalvenster en voer uit:
 #4    rm "$HOME"/.local/share/applications/kz-zga-webmail.desktop
 #4    kz-gset --removefav --file='kz-zga-webmail.desktop'

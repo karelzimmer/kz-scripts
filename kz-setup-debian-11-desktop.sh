@@ -43,7 +43,7 @@ sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 
 #1 bitwarden
 #2 Bitwarden (wachtwoordkluis) instellen
-kz-gset --addfavbottom --file='bitwarden_bitwarden.desktop'
+kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
 #3 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #3 1. Start Bitwarden.
 #3 2. Maak een account aan met een sterk(!) Hoofdwachtwoord.
@@ -150,7 +150,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 
 #1 google-chrome
 #2 Google Chrome (webbrowser) instellen
-kz-gset --addfavtop --file='google-chrome.desktop'
+kz-gset --addfavbegin --file='google-chrome.desktop'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
 #3 1. Start Google Chrome.
@@ -178,19 +178,19 @@ xdg-mime default wfica.desktop application/x-ica
 
 #1 skype
 #2 Skype (beeldbellen) instellen
-kz-gset --addfavbottom --file='skype_skypeforlinux.desktop'
+kz-gset --addfavend --file='skype_skypeforlinux.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='skype_skypeforlinux.desktop'
 
 #1 spotify
 #2 Spotify (muziekspeler) instellen
-kz-gset --addfavbottom --file='spotify_spotify.desktop'
+kz-gset --addfavend --file='spotify_spotify.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='spotify_spotify.desktop'
 
 #1 thunderbird
 #2 Thunderbird (e-mail) installen
-kz-gset --addfavtop --file='thunderbird.desktop'
+kz-gset --addfavbegin --file='thunderbird.desktop'
 #3 Voeg de extenstie voor Google Agenda toe via:
 #3 1. Start Thunderbird.
 #3 2. Ga naar Menu openen ☰ > Add-ons.
@@ -206,6 +206,6 @@ kz-gset --addfavtop --file='thunderbird.desktop'
 
 #1 zoom
 #2 Zoom (telewerken) instellen
-kz-gset --addfavbottom --file='Zoom.desktop'
+kz-gset --addfavend --file='Zoom.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='Zoom.desktop'

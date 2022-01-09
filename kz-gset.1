@@ -20,24 +20,25 @@ kz gset \- GUI wijzigen.
 \fBkz gset\fR toont wijzigingen in de configuratiedatabase na aanpassingen in
 de grafische werkomgeving (GUI),
 .br
-kan een toepassingspictogram (favoriet) toevoegen aan het favorietengebied;
-de verticale strook aan de linkerkant van het scherm, en
+kan een toepassingspictogram (favoriet) toevoegen aan het favorietengebied (aka
+dash of dock), en
 .br
 kan een appfolder toevoegen om starters te verzamelen (e.g. KZ Scripts) in
-de Vaak gebruikt-weergave en Alles-weergave; na het klikken op de rasterknop
-onderaan het favorietengebied.
+de Vaak gebruikt-weergave en Alles-weergave;
+.br
+na het klikken op de rasterknop in het favorietengebied (dash/dock).
 .sp
-Met optie \fB--addfavbottom\fR wordt een toepassingspictogram (favoriet)
-toegevoegd onderaan het favorietengebied.
+Met optie \fB--addfavbegin\fR wordt een toepassingspictogram (favoriet)
+toegevoegd aan het begin van het favorietengebied (dash/dock).
 .sp
-Met optie \fB--addfavtop\fR wordt een toepassingspictogram (favoriet)
-toegevoegd bovenaan het favorietengebied.
+Met optie \fB--addfavend\fR wordt een toepassingspictogram (favoriet)
+toegevoegd aan het einde van het favorietengebied (dash/dock).
 .sp
 Met optie \fB--removefav\fR wordt een toepassingspictogram (favoriet)
-verwijderd uit het favorietengebied.
+verwijderd uit het favorietengebied (dash/dock).
 .sp
 Deze opties mogen \fBeenmaal\fR worden opgegeven; dus bijvoorbeeld alleen
-\fB--addfavtop\fR of alleen \fB--removefav\fR.
+\fB--addfavbegin\fR of alleen \fB--removefav\fR.
 .br
 Als een van deze opties worden gebruikt dient ook optie \fB--file\fR meegegeven
 te worden met verplicht argument \fIDESKTOPFILE\fR.
@@ -102,10 +103,10 @@ dient te worden:
 \fB--addappfolder\fR
 voeg een appfolder toe.
 .TP
-\fB--addfavbottom\fR
+\fB--addfavend\fR
 Voeg een toepassingspictogram (favoriet) toe onderaan aan het favorietengebied.
 .TP
-\fB--addfavtop\fR
+\fB--addfavbegin\fR
 Voeg een toepassingspictogram (favoriet) toe bovenaan aan het favorietengebied.
 .TP
 \fB--file=\fIDESKTOPFILE\fR
@@ -154,7 +155,7 @@ werkomgeving (GUI).
 Hiervoor is ook starter 'GUI wijzigen' beschikbaar.
 .RE
 .sp
-\fBkz gset --addfavtop --file='idle.desktop'\fR
+\fBkz gset --addfavbegin --file='idle.desktop'\fR
 .RS
 Voeg de IDLE (Python’s Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) toe bovenaan het favorietengebied.

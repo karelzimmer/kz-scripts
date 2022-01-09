@@ -16,18 +16,18 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 
 #1 telegram
 #2 Telegram - Privéberichtenapp
-kz-gset --addfavbottom --file='telegram-desktop_telegram-desktop.desktop'
+kz-gset --addfavend --file='telegram-desktop_telegram-desktop.desktop'
 #4 Start Terminalvenster en voer uit:
 #4    kz-gset --removefav --file='telegram-desktop_telegram-desktop.desktop'
 
 #1 virtualbox
 #2 VirtualBox - Virtualisatie
-kz-gset --addfavbottom --file='virtualbox.desktop'
+kz-gset --addfavend --file='virtualbox.desktop'
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
 chmod u+x "$HOME"/kz-vm-hugowin732.sh
 cp /usr/share/applications/kz-vm-hugowin732.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
-kz-gset --addfavbottom --file='kz-vm-hugowin732.desktop'
+kz-gset --addfavend --file='kz-vm-hugowin732.desktop'
 #3 1. Ga naar Apparaten > Installeren Guest Additions en volg de aanwijzingen op het scherm.
 #3 2. Voor optimale netwerksnelheid kies bij Netwerk voor Gekoppeld aan Netwerk bridge adapter.
 #4 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
