@@ -205,7 +205,6 @@ remove_backups() {
 
 build_uploads() {
     local file=''
-    local suffix=''
 
     log 'Bouw website...'
 
