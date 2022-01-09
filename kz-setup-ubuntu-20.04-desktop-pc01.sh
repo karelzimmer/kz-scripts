@@ -17,11 +17,9 @@ kz-gset --removefav --file='firefox.desktop'
 if [[ $USER = karel ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'; fi
 if [[ $USER = monique ]]; then gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-olifanten.jpg'; fi
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
-#4    gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position
 
 #1 search
 #2 Search - Vooruit zoeken in history met Ctrl-S

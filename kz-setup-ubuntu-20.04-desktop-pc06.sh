@@ -19,7 +19,6 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-light'
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
-gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 #4 Start Terminalvenster en voer uit:
 #4    gsettings reset org.gnome.desktop.background picture-uri
@@ -27,7 +26,6 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 #4    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 #4    gsettings reset org.gnome.nautilus.preferences show-create-link
 #4    gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
-#4    gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position
 #4    gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #1 kvm
