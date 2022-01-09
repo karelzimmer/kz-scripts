@@ -274,14 +274,13 @@ build_uploads() {
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$file.pdf"   |& $LOGCMD
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
-                suffix='pdf'
-                if [[ $file = *.* ]]; then
-                    suffix="${file##*.}.pdf"
-                fi
-                lowriter    --headless                          \
-                            --convert-to "$suffix"              \
-                            --outdir "${TARGET_UPLOADS[PDFS]}"  \
-                            "$file"                             |& $LOGCMD
+                enscript    --quiet                             \
+                            --line-numbers                      \
+                            --title="$file"                     \
+                            --output=-                          \
+                            "$file"                             |
+                ps2pdf      -                                   \
+                            "${TARGET_UPLOADS[PDFS]}/$file.pdf" |& $LOGCMD
             fi
         fi
     done
