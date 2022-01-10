@@ -172,11 +172,6 @@ process_input() {
 
 
 check_dependencies() {
-    if ! command -v enscript 1> /dev/null; then
-        # Voor <man-pag>.pdf.
-        log 'Installeer enscript...'
-        sudo apt-get install --yes enscript |& $LOGCMD
-    fi
     if ! command -v fakeroot 1> /dev/null; then
         # Voor build .deb.
         log 'Installeer fakeroot...'
@@ -211,7 +206,7 @@ build_uploads() {
     # ------------------
     # Vul dist/ met app/
     # ------------------
-    cd "$UPLOADS_APPDIR" || exit $ERROR
+    cd "$UPLOADS_APPDIR"
     while read -r file; do
         # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
         if ! diff "$file" "$UPLOADS_DISTDIR/$file" &> /dev/null; then
@@ -222,7 +217,7 @@ build_uploads() {
                 "$UPLOADS_DISTDIR"  |& $LOGCMD
         fi
     done < <(find . -type f -print)
-    cd "$HOME" || exit $ERROR
+    cd "$HOME"
 
     # ---------------------
     # Vul dist/ met kz-docs
@@ -232,7 +227,7 @@ build_uploads() {
     # Vanuit LibreOffice aangemaakt.
     rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
 
-    cd "${SOURCE_UPLOADS[DOCS]}" || exit $ERROR
+    cd "${SOURCE_UPLOADS[DOCS]}"
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
@@ -247,12 +242,12 @@ build_uploads() {
                         "$file"                             |& $LOGCMD
         fi
     done
-    cd "$HOME" || exit $ERROR
+    cd "$HOME"
 
     # ------------------------
     # Vul dist/ met kz-scripts
     # ------------------------
-    cd "${SOURCE_UPLOADS[SCRIPTS]}" || exit $ERROR
+    cd "${SOURCE_UPLOADS[SCRIPTS]}"
     for file in *; do
         if [[ $file = LICENSE || $file = README.md ]]; then
             continue
@@ -273,17 +268,23 @@ build_uploads() {
                 ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$file.pdf"   |& $LOGCMD
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
-                enscript    --quiet                             \
-                            --line-numbers                      \
-                            --title="$file"                     \
-                            --output=-                          \
-                            "$file"                             |
-                ps2pdf      -                                   \
-                            "${TARGET_UPLOADS[PDFS]}/$file.pdf" |& $LOGCMD
+                #
+                # Have to copy each file with suffix 'txt' added before
+                # converting because:
+                # 1. desktop-files have XML inside which gets interpreted by
+                #    Libre Office,
+                # 2. lowriter convert-to pdf replaces last suffix (if any) by
+                #    pdf.
+                cp "$file" /tmp/"$file.txt"
+                lowriter    --headless                          \
+                            --convert-to pdf                    \
+                            --outdir "${TARGET_UPLOADS[PDFS]}"  \
+                            /tmp/"$file.txt"                    |& $LOGCMD
+                rm /tmp/"$file.txt"
             fi
         fi
     done
-    cd "$HOME" || exit $ERROR
+    cd "$HOME"
 }
 
 
@@ -381,7 +382,7 @@ build_background_properties_file() {
     printf '%s\n' '<wallpapers>'
     } > "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
 
-    cd "${TARGET_DEB[BACKGROUNDS]}" || exit $ERROR
+    cd "${TARGET_DEB[BACKGROUNDS]}"
     for wallpaper in *; do
         # Verwijder DEB_DISTDIR uit TARGET_DEB[BACKGROUNDS].  Voorbeeld:
         # /tmp/kz/usr/share/backgrounds/kz-gnome.png ->
@@ -401,7 +402,7 @@ build_background_properties_file() {
     printf  '%s\n' \
             '</wallpapers>' >> "${TARGET_DEB[BACKGROUND_PROP]}/\
 $wallpapers_config_file"
-    cd "$HOME" || exit $ERROR
+    cd "$HOME"
 }
 
 
