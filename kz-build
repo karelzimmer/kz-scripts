@@ -200,8 +200,13 @@ remove_backups() {
 
 build_uploads() {
     local file=''
+    local temptextfile=''
+
 
     log 'Bouw website...'
+    # Gebruik diff voor deltabepaling i.p.v. rsync omdat na 'git pull' en
+    # 'lftp mirror' in script kz-getdeb de timestamps van de bestanden
+    # verschillen en dit met rsync tot vals positief leidt.
 
     # ------------------
     # Vul dist/ met app/
@@ -269,18 +274,19 @@ build_uploads() {
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
                 #
-                # Have to copy each file with suffix 'txt' added before
-                # converting because:
+                # Have to copy each file with suffix 'txt' added (temptextfile)
+                # before converting because:
                 # 1. desktop-files have XML inside which gets interpreted by
                 #    Libre Office,
-                # 2. lowriter convert-to pdf replaces last suffix (if any) by
+                # 2. 'lowriter convert-to pdf' replaces last suffix (if any) by
                 #    pdf.
-                cp "$file" /tmp/"$file.txt"
+                temptextfile=/tmp/$file.txt
+                cp "$file" "$temptextfile"
                 lowriter    --headless                          \
                             --convert-to pdf                    \
                             --outdir "${TARGET_UPLOADS[PDFS]}"  \
-                            /tmp/"$file.txt"                    |& $LOGCMD
-                rm /tmp/"$file.txt"
+                            "$temptextfile"                     |& $LOGCMD
+                rm "$temptextfile"
             fi
         fi
     done
