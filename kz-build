@@ -204,9 +204,10 @@ build_uploads() {
 
 
     log 'Bouw website...'
-    # Gebruik diff voor deltabepaling i.p.v. rsync omdat na 'git pull' en
+    # Gebruik diff voor deltabepaling (i.p.v. rsync) omdat na 'git pull' en
     # 'lftp mirror' in script kz-getdeb de timestamps van de bestanden
-    # verschillen en dit met rsync tot vals positief leidt.
+    # verschillen en dit met rsync tot vals positief leidt (aka false positive,
+    # alleen timestamp is verschillend, niet de inhoud).
 
     # ------------------
     # Vul dist/ met app/
