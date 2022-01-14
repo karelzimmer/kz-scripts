@@ -201,7 +201,7 @@ upload_website() {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info 'Upload website...'
+    info 'Upload website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         read -rsp "FTP-wachtwoord voor $ftp_host: "
         printf '%s\n' "$REPLY" > "$ftp_login"
