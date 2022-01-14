@@ -86,21 +86,6 @@ sudo apt-get install --yes signal-desktop
 #4    sudo rm /etc/apt/sources.list.d/signal-xenial.list
 #4    sudo apt-get update
 
-#1 tlp
-#2 TLP (accubesparing) installeren
-sudo apt-get install --yes tlp
-## Nodig voor ThinkPads.
-sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms
-#3 Check status:
-#3 ~~~~~~~~~~~~~
-#3 Start Terminalvenster en voer uit:
-#3    sudo tlp-stat --battery
-#3
-#3 Mogelijk extra te installeren (ThinkPads/zie uitvoer tlp-stat):
-#3    sudo apt-get install --yes tp-smapi-dkms acpi-call-dkms
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes tlp tp-smapi-dkms acpi-call-dkms
-
 #1 vscode
 #2 Visual Studio Code (editor) installeren
 sudo snap install --classic code
