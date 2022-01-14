@@ -210,35 +210,19 @@ duren)..."
 
 
 process_input() {
-    local debian_full_name=''
-    local karel_full_name=''
-    local ubuntu_full_name=''
+    local full_name=''
 
     install_scriptspackage
 
-    if [[ $HOSTNAME = pc0* ]]; then
-        # Aangemeld als ontwikkelaar?
-        karel_full_name=$(
-            getent  passwd  karel           |
-            awk     -F':'   '{print $5}'    |
-            awk     -F','   '{print $1}'    || true
-            )
-        ubuntu_full_name=$(
-            getent  passwd  ubuntu          |
-            awk     -F':'   '{print $5}'    |
-            awk     -F','   '{print $1}'    || true
-            )
-        debian_full_name=$(
-            getent  passwd  user            |
-            awk     -F':'   '{print $5}'    |
-            awk     -F','   '{print $1}'    || true
-            )
-        if [[   ($USER = user   && $debian_full_name = 'Debian Live user')  ||
-                ($USER = karel  && $karel_full_name  = 'Karel Zimmer')      ||
-                ($USER = ubuntu && $ubuntu_full_name = 'Live session user') ]]
-        then
-            create_development_environment
-        fi
+    # Aangemeld als ontwikkelaar?
+    full_name=$(
+        getent  passwd  karel           |
+        awk     -F':'   '{print $5}'    |
+        awk     -F','   '{print $1}'    || true
+        )
+    if [[ ($USER = karel && $full_name = 'Karel Zimmer') && $HOSTNAME = pc?? ]]
+    then
+        create_development_environment
     fi
 }
 
