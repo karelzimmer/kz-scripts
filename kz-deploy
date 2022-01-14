@@ -28,8 +28,6 @@ Pakket kz distribueren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DEB_REPO=$HOME/kz-deb
-readonly    DOCS_REPO=$HOME/kz-docs
 readonly    SCRIPTS_REPO=$HOME/kz-scripts
 readonly    UPLOADS_REPO=$HOME/kz-uploads
 readonly    UPLOADS_DISTDIR=$UPLOADS_REPO/dist
@@ -118,7 +116,6 @@ check_input() {
 
 process_input() {
     check_dependencies
-    check_names
     check_scripts
     build_package
     upload_website
@@ -131,22 +128,6 @@ check_dependencies() {
         # Voor upload website.
         log 'Installeer lftp...'
         sudo apt-get install --yes lftp |& $LOGCMD
-    fi
-}
-
-
-check_names() {
-    local -i check_rc=0
-
-    info 'Controleer bestandsnamen (kz ckname)...'
-    log "Check filenames with 'kz ckname'."
-    "$SCRIPTS_REPO"/kz ckname   "$DEB_REPO"     \
-                                "$DOCS_REPO"    \
-                                "$SCRIPTS_REPO" || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        warning "
-Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
-        exit $check_rc
     fi
 }
 
