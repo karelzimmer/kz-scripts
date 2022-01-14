@@ -62,7 +62,7 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 
 #1 language-support
 #2 Language support - Taalondersteuning
-sudo apt-get install --yes "$(check-language-support)" --language=nl
+sudo apt-get install --yes "$(check-language-support --language=nl)"
 
 #1 libreoffice
 #2 LibreOffice - Kantoorpakket
