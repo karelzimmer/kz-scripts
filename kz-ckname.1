@@ -17,18 +17,13 @@ kz ckname \- Bestandsnamen controleren.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz ckname\fR controleert NTFS map- en bestandsnamen op toegestane tekens en
-bestandsnaamlengte.
-.br
-Er is een maximale bestandsnaamlengte lengte bij gebruik van Versleutelde
-Persoonlijke mappan (VPM, eCryptfs).
+\fBkz ckname\fR controleert map- en bestandsnamen op toegestane tekens voor
+NTFS en ext4 bestandssystemen.
 .sp
 Standaard, tenzij \fIMAP\fR is opgegeven, wordt gezocht in Persoonlijke map.
 .sp
 Voer deze opdracht uit voor het plaatsen van bestanden op een NTFS
-(netwerk)schijf, en voor het maken van een back-up (reservekopie) op een
-niet-encrypted omgeving naar een encrypted omgeving (Versleutelde Persoonlijke
-Mappen, eCryptfs).
+(netwerk)schijf.
 .sp
 Bij NTFS zijn niet toegestaan de tekens ? " / \ < > * | :
 .br
@@ -42,8 +37,6 @@ Verder wordt ook de lengte van de map- en bestandsnaam gecontroleerd.
 .br
 Deze mag voor Versleutelde Persoonlijke Mappen, met eCryptfs, niet langer zijn
 dan 142 tekens.
-.sp
-\fBkz ckname\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
 .\"
 .\"
 .SH OPTIES
@@ -79,9 +72,8 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
 .SH ZIE OOK
 \fBdetox\fR(1),
-\fBkz-checkhtml\fR(1),
+\fBkz-ckhtml\fR(1),
 \fBkz-common.sh\fR(1),
-\fBkz-deploy\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
