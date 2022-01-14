@@ -236,7 +236,9 @@ process_input() {
             ($USER = karel  && $karel_full_name  = 'Karel Zimmer'     ) ||
             ($USER = ubuntu && $ubuntu_full_name = 'Live session user') ]]
     then
-        create_development_environment
+        if [[ $HOSTNAME = pc0* ]]; then
+            create_development_environment
+        fi
     fi
 }
 
