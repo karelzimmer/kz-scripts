@@ -276,6 +276,18 @@ install_scriptspackage() {
             --reinstall                     \
             "$temp_deb"                     |& $LOGCMD
     rm "$temp_deb" |& $LOGCMD
+
+    if ! command -v git 1> /dev/null; then
+        sudo apt-get install --yes git |& $LOGCMD
+    fi
+    if ! git    clone                                       \
+                https://github.com/karelzimmer/bin.git      \
+                "$BIN_REPO"                                 |& $LOGCMD
+    then
+        cd "$BIN_REPO" || exit $ERROR
+        git config credential.helper store |& $LOGCMD
+        git pull |& $LOGCMD
+    fi
 }
 
 
@@ -285,33 +297,12 @@ create_development_environment() {
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 29
-    check_dependencies
     process_repos
     download_website
 }
 
 
-check_dependencies() {
-    if ! command -v git 1> /dev/null; then
-        # Voor versiebeheersysteem.
-        sudo apt-get install --yes git |& $LOGCMD
-    fi
-    if ! command -v lftp 1> /dev/null; then
-        # Voor upload website.
-        sudo apt-get install --yes lftp |& $LOGCMD
-    fi
-}
-
-
 process_repos() {
-    if ! git    clone                                       \
-                https://github.com/karelzimmer/bin.git      \
-                "$BIN_REPO"                                 |& $LOGCMD
-    then
-        cd "$BIN_REPO" || exit $ERROR
-        git config credential.helper store |& $LOGCMD
-        git pull |& $LOGCMD
-    fi
     if ! git    clone                                       \
                 https://github.com/karelzimmer/work.git     \
                 "$WORK_REPO"                                |& $LOGCMD
@@ -364,6 +355,9 @@ download_website() {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
+    if ! command -v lftp 1> /dev/null; then
+        sudo apt-get install --yes lftp |& $LOGCMD
+    fi
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.
         read -rsp "FTP-wachtwoord voor $ftp_host: " < /dev/tty
