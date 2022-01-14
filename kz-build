@@ -85,9 +85,7 @@ readonly -A TARGET_DEB=(
 ###############################################################################
 
 check_input() {
-    local       karel_full_name=''
-    local       ubuntu_full_name=''
-    local       debian_full_name=''
+    local       full_name=''
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -125,31 +123,21 @@ check_input() {
         exit    $ERROR
     fi
 
-    # Ben ik een ontwikkelaar?
-    karel_full_name=$(
+    # Aangemeld als ontwikkelaar?
+    full_name=$(
         getent  passwd  karel           |
         awk     -F':'   '{print $5}'    |
         awk     -F','   '{print $1}'    || true
         )
-    ubuntu_full_name=$(
-        getent  passwd  ubuntu          |
-        awk     -F':'   '{print $5}'    |
-        awk     -F','   '{print $1}'    || true
-        )
-    debian_full_name=$(
-        getent  passwd  user            |
-        awk     -F':'   '{print $5}'    |
-        awk     -F','   '{print $1}'    || true
-        )
-    if ! [[ ($USER = karel  && $karel_full_name  = 'Karel Zimmer'    )  ||
-            ($USER = ubuntu && $ubuntu_full_name = 'Live session user') ||
-            ($USER = user   && $debian_full_name = 'Debian Live user')  ]]
+    if [[ ($USER = karel && $full_name = 'Karel Zimmer') && $HOSTNAME = pc?? ]]
     then
-            TEXT='alleen uitvoeren als ontwikkelaar'
-            printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                    "$TEXT"                     \
-                    "$USAGELINE"                >&2
-            exit    $ERROR
+        :
+    else
+        TEXT='alleen uitvoeren als ontwikkelaar'
+        printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                "$TEXT"                     \
+                "$USAGELINE"                >&2
+        exit    $ERROR
     fi
 
     # Een non-gui script gestart met optie gui.
