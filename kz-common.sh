@@ -379,7 +379,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
-            error "$PROGRAM_NAME is afgebroken."
+            error "Programma $PROGRAM_NAME is afgebroken."
             printf  '%s\n%s\n'                                              \
                     'Controleer de meldingen in de log met de opdracht:'    \
                     "${BLUE}$LOGCMD_CHECK${NORMAL}"
@@ -409,7 +409,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             exit "$rc"
             ;;
         *)
-            warning "$PROGRAM_NAME is onderbroken."
+            warning "Programma $PROGRAM_NAME is onderbroken."
             printf  '%s\n    %s\n'                                          \
                     'Controleer de meldingen in de log met de opdracht:'    \
                     "${BLUE}$LOGCMD_CHECK${NORMAL}"
