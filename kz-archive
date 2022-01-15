@@ -138,7 +138,7 @@ process_input() {
             dirname=$(dirname   "$file")
             basename=$(basename "$file")
 
-            if [[ $dirname = $ARCHIVE_FROM* ]]; then
+            if [[ $dirname == $ARCHIVE_FROM* ]]; then
                 process_archive
             else
                 process_delete

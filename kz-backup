@@ -229,7 +229,7 @@ request_input() {
     fi
     if $media_found; then
         mkdir --parents "$TARGET" |& $LOGCMD
-        if [[ "$TARGET" = /media/* ]]; then
+        if [[ "$TARGET" == /media/* ]]; then
             chown   1000:1000                                           \
                     "${media[*]}/$TARGET_DEFAULT_2"                     \
                     "${media[*]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   \
@@ -538,7 +538,7 @@ Geen back-up gemaakt!"
 
 term_script() {
     TEXT='De back-up is gemaakt.'
-    if [[ "$TARGET" = /media/* ]]; then
+    if [[ "$TARGET" == /media/* ]]; then
         TEXT="$TEXT
 
 Koppel zelf (veilig!) het back-up-medium af."

@@ -88,7 +88,9 @@ check_input() {
         awk     -F':'   '{print $5}'    |
         awk     -F','   '{print $1}'    || true
         )
-    if [[ ($USER = karel && $full_name = 'Karel Zimmer') && $HOSTNAME = pc?? ]]
+    if [[
+        ($USER = karel && $full_name = 'Karel Zimmer') && $HOSTNAME == pc??
+        ]]
     then
         :
     else

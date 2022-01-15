@@ -151,6 +151,25 @@ process_input() {
 }
 
 
+check_functional() {
+    if grep --quiet --line-regexp --regexp='#!''/usr/bin/bash' "$script"; then
+            check_shellcheck
+    elif grep   --quiet                         \
+                --line-regexp                   \
+                --regexp='#!''/usr/bin/python3' \
+                "$script"; then
+            check_pycodestyle
+    else
+        info "
+${BOLD}In $script:${NORMAL}
+    Onbekend script.  Functie check_functional() kan script niet controleren."
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+}
+
+
 check_lines() {
     local -i line_num=0
     local -i max_lines=1000
@@ -191,7 +210,7 @@ ${BOLD}In $script:${NORMAL}
         fi
     fi
 
-    # '#1 foo' = ok, '#1' = ok, '#1foo' = ¬ok, hetzelfde voor #2, #3, 44n #4.
+    # '#1 foo' = ok, '#1' = ok, '#1foo' = ¬ok, hetzelfde voor #2, #3, en #4.
     if [[ $script == kz-install*.sh || $script == kz-setup*.sh ]]; then
         wrong_record=$(
             grep --regexp='#[1-4]' "$script" --line-number  |
@@ -276,25 +295,6 @@ $(
 
     )
 "
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-}
-
-
-check_functional() {
-    if grep --quiet --line-regexp --regexp='#!''/usr/bin/bash' "$script"; then
-            check_shellcheck
-    elif grep   --quiet                         \
-                --line-regexp                   \
-                --regexp='#!''/usr/bin/python3' \
-                "$script"; then
-            check_pycodestyle
-    else
-        info "
-${BOLD}In $script:${NORMAL}
-    Onbekend script.  Functie check_functional() kan script niet controleren."
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
         fi
