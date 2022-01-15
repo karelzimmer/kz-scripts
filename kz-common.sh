@@ -423,9 +423,7 @@ signal_exit() {
     case $PROGRAM_NAME in
         kz-backup)
             if [[ -e $BACKUP_TO_DELETE ]]; then
-                info 'Programma kz-backup is onderbroken.
-
-Opgeslagen back-up wordt verwijderd...'
+                info 'Opgeslagen back-up wordt verwijderd...'
                 rm "$BACKUP_TO_DELETE" |& $LOGCMD
                 info 'Opgeslagen back-up is verwijderd.'
             fi
