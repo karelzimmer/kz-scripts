@@ -131,18 +131,18 @@ process_input() {
                 ;;
             kz_common.py|kz-genpwd|kz-update)
                 check_release_year
-                check_script_pycodestyle
+                check_pycodestyle
                 ;;
             kz-common.sh)
                 check_release_year
-                check_script_shellcheck
+                check_shellcheck
                 ;;
             *.completion|*.sh)
-                check_script_shellcheck
+                check_shellcheck
                 ;;
             *)
                 check_release_year
-                check_script
+                check_functional
                 check_usage
                 ;;
         esac
@@ -283,18 +283,18 @@ $(
 }
 
 
-check_script() {
+check_functional() {
     if grep --quiet --line-regexp --regexp='#!''/usr/bin/bash' "$script"; then
-            check_script_shellcheck
+            check_shellcheck
     elif grep   --quiet                         \
                 --line-regexp                   \
                 --regexp='#!''/usr/bin/python3' \
                 "$script"; then
-            check_script_pycodestyle
+            check_pycodestyle
     else
         info "
 ${BOLD}In $script:${NORMAL}
-    Onbekend script.  Functie check_script() kan script niet controleren."
+    Onbekend script.  Functie check_functional() kan script niet controleren."
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
         fi
@@ -302,7 +302,7 @@ ${BOLD}In $script:${NORMAL}
 }
 
 
-check_script_shellcheck() {
+check_shellcheck() {
     local -i    check_rc=0
 
     shellcheck --external-sources "$script" 2> >($LOGCMD) || check_rc=$?
@@ -312,7 +312,7 @@ check_script_shellcheck() {
 }
 
 
-check_script_pycodestyle() {
+check_pycodestyle() {
     local -i check_rc=0
 
     pycodestyle "$script" || check_rc=$?
