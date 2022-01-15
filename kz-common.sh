@@ -379,7 +379,10 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
-            error "Opdracht is afgebroken."
+            error "$PROGRAM_NAME is afgebroken."
+            printf  '%s\n%s\n'                                              \
+                    'Controleer de meldingen in de log met de opdracht:'    \
+                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
         exit)
@@ -406,7 +409,10 @@ $command, code: $rc ($rc_desc)" --priority=debug
             exit "$rc"
             ;;
         *)
-            warning "Opdracht is onderbroken."
+            warning "$PROGRAM_NAME is onderbroken."
+            printf  '%s\n%s\n'                                              \
+                    'Controleer de meldingen in de log met de opdracht:'    \
+                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
     esac
