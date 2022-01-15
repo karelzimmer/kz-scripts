@@ -524,7 +524,7 @@ back-up en deze wijzigingen zijn niet opgenomen in de gemaakte back-up."
     then
         error "Back-up maken is mislukt.
 
-Opdracht om de log uit te lezen:
+Controleer de meldingen in de log met de opdracht:
     ${BLUE}$LOGCMD_CHECK${NORMAL}
 
 Geen back-up gemaakt!"

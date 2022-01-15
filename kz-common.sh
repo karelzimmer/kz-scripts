@@ -410,7 +410,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             ;;
         *)
             warning "$PROGRAM_NAME is onderbroken."
-            printf  '%s\n%s\n'                                              \
+            printf  '%s\n    %s\n'                                          \
                     'Controleer de meldingen in de log met de opdracht:'    \
                     "${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"

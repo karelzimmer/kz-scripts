@@ -583,7 +583,7 @@ Koppel zelf (veilig!) het back-up-medium af.'
     else
         warning "De back-up is niet of slechts gedeeltelijk teruggezet.
 
-Opdracht om de log uit te lezen:
+Controleer de meldingen in de log met de opdracht:
     ${BLUE}$LOGCMD_CHECK${NORMAL}
 $TEXT"
         exit $WARNING
