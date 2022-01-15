@@ -10,8 +10,9 @@ PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 if [[ -e "$PROGRAM_PATH"/kz-common.sh ]]; then
     source "$PROGRAM_PATH"/kz-common.sh
 else
-    wget   --output-document=/tmp/kz-common.sh                     \
-           https://karelzimmer.nl/data/linux/scripts/kz-common.sh  &> /dev/null
+    wget    --no-verbose                                            \
+            --output-document=/tmp/kz-common.sh                     \
+            https://karelzimmer.nl/data/linux/scripts/kz-common.sh  &>/dev/null
     source /tmp/kz-common.sh
 fi
 PROGRAM_NAME=kz-getdeb
@@ -259,7 +260,7 @@ install_scriptspackage() {
                         7 22
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    wget --output-document="$temp_deb" $site_deb |& $LOGCMD
+    wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     check_sudo_and_dpkg
     TEXT='Installeer pakket (kan even duren)...'
