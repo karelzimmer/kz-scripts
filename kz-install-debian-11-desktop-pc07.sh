@@ -77,7 +77,7 @@ sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
 
 #1 signal
 #2 Signal (privéberichtenapp) installeren
-wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo apt-key add -
+wget --no-verbose --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee /etc/apt/sources.list.d/signal-xenial.list
 sudo apt-get update
 sudo apt-get install --yes signal-desktop

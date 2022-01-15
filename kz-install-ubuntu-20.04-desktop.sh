@@ -27,7 +27,7 @@ sudo snap install bitwarden
 ## zelf aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
 ## Integratie van GNOME Shell-extensies voor webbrowsers:
 ## https://extensions.gnome.org
-wget --output-document=/tmp/google-chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+wget --no-verbose --output-document=/tmp/google-chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb chrome-gnome-shell gnome-contacts gnome-gmail
 rm /tmp/google-chrome.deb
 #4 Start Terminalvenster en voer uit:
@@ -37,8 +37,8 @@ rm /tmp/google-chrome.deb
 #2 Citrix Workspace app - Telewerken
 ## Citrix Receiver, ICA Client
 ## Voegt gebruiker citrixlog toe!
-wget --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/downloads/icaclient/LATEST'
-wget --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
+wget --no-verbose --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/downloads/icaclient/LATEST'
+wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
@@ -106,7 +106,7 @@ sudo apt-get install --yes gnome-sushi
 
 #1 teamviewer
 #2 TeamViewer - Telewerken
-wget --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
+wget --no-verbose --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
 ## Zorg ervoor dat /etc/apt/sources.list.d/teamviewer.list is aangemaakt.
@@ -140,7 +140,7 @@ sudo apt-get install --yes ubuntu-wallpapers-*
 
 #1 zoom
 #2 Zoom - Telewerken
-wget --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
+wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #4 Start Terminalvenster en voer uit:
