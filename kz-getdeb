@@ -280,12 +280,12 @@ install_scriptspackage() {
     if ! command -v git 1> /dev/null; then
         sudo apt-get install --yes git |& $LOGCMD
     fi
-    if ! git    clone                                       \
-                https://github.com/karelzimmer/bin.git      \
-                "$BIN_REPO"                                 |& $LOGCMD
+    git config --global credential.helper store |& $LOGCMD
+    if ! git    clone                                   \
+                https://github.com/karelzimmer/bin.git  \
+                "$BIN_REPO"                             |& $LOGCMD
     then
         cd "$BIN_REPO" || exit $ERROR
-        git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
 }
@@ -308,7 +308,6 @@ process_repos() {
                 "$WORK_REPO"                                |& $LOGCMD
     then
         cd "$WORK_REPO" || exit $ERROR
-        git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
     if ! git    clone                                       \
@@ -316,7 +315,6 @@ process_repos() {
                 "$DEB_REPO"                                 |& $LOGCMD
     then
         cd "$DEB_REPO" || exit $ERROR
-        git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
     if ! git    clone                                       \
@@ -324,7 +322,6 @@ process_repos() {
                 "$DOCS_REPO"                                |& $LOGCMD
     then
         cd "$DOCS_REPO" || exit $ERROR
-        git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
     if ! git    clone                                           \
@@ -339,7 +336,6 @@ process_repos() {
                 "$UPLOADS_REPO"                                 |& $LOGCMD
     then
         cd "$UPLOADS_REPO" || exit $ERROR
-        git config credential.helper store |& $LOGCMD
         git pull |& $LOGCMD
     fi
 }
