@@ -218,7 +218,6 @@ process_input() {
     local       dfltfile_1=''
     local       dfltfile_2=''
 
-    # Specifiek bestand eerst i.v.m. volgorde in het aanmaken van gebruikers.
     dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
 $HOSTNAME.sh
     dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh

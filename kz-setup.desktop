@@ -31,7 +31,7 @@ Exec=/usr/bin/kz-setup --gui --reset
 
 [Desktop Action list]
 Name=Create setup list
-Name[nl]=Instellijst aanmaken
+Name[nl]=Instellijst maken
 Exec=/usr/bin/kz-setup --gui --list
 
 [Desktop Action cat]
