@@ -162,7 +162,7 @@ function check_functional {
     else
         info "
 ${BOLD}In $script:${NORMAL}
-    Onbekend script.  Functie check_functional() kan script niet controleren."
+    Onbekend script.  Functie 'check_functional' kan script niet controleren."
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
         fi
