@@ -48,7 +48,7 @@ declare -a  MAP_ARGUMENT=()
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  map_arg_num=0
     local   -i  getopt_rc=0
     local       parsed=''
@@ -108,12 +108,12 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     check_files_and_folders
 }
 
 
-check_files_and_folders() {
+function check_files_and_folders {
     local       dirname
     local       file
     local       basename
@@ -174,7 +174,7 @@ check_files_and_folders() {
 }
 
 
-term_script() {
+function term_script {
     exit $SUCCESS
 }
 
@@ -183,7 +183,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

@@ -65,7 +65,7 @@ readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -113,7 +113,7 @@ check_input() {
 }
 
 
-check_on_ac_power() {
+function check_on_ac_power {
     local -i on_battery=0
 
     on_ac_power &> /dev/null || on_battery=$?
@@ -129,13 +129,13 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 }
 
 
-check_sudo_and_dpkg() {
+function check_sudo_and_dpkg {
     check_sudo
     check_dpkg
 }
 
 
-check_sudo() {
+function check_sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TEXT='
@@ -176,7 +176,7 @@ Annuleren gekozen.'
 }
 
 
-check_dpkg() {
+function check_dpkg {
     local -i wait_for_aptd=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
@@ -210,7 +210,7 @@ duren)..."
 }
 
 
-process_input() {
+function process_input {
     local full_name=''
 
     install_scriptspackage
@@ -228,7 +228,7 @@ process_input() {
 }
 
 
-install_scriptspackage() {
+function install_scriptspackage {
     local site_deb=https://karelzimmer.nl/downloads/kz/kz_365_all.deb
     local temp_deb=''
 
@@ -292,7 +292,7 @@ install_scriptspackage() {
 }
 
 
-create_development_environment() {
+function create_development_environment {
     TEXT='Maak ontwikkelomgeving...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
@@ -303,7 +303,7 @@ create_development_environment() {
 }
 
 
-process_repos() {
+function process_repos {
     if ! git    clone                                       \
                 https://github.com/karelzimmer/work.git     \
                 "$WORK_REPO"                                |& $LOGCMD
@@ -342,7 +342,7 @@ process_repos() {
 }
 
 
-download_website() {
+function download_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
     local ftp_to=$UPLOADS_DISTDIR
@@ -379,7 +379,7 @@ download_website() {
 }
 
 
-term_script() {
+function term_script {
     local search=''
 
     search="/usr/share/doc/kz/Checklist-installatie-$(
@@ -421,7 +421,7 @@ Typ 'exit' om dit venster te sluiten."
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

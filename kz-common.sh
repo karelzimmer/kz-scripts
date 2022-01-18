@@ -74,7 +74,7 @@ declare     REWRITE_LINE=''
 # Common functions
 ###############################################################################
 
-check_on_ac_power() {
+function check_on_ac_power {
     local -i on_battery=0
 
     on_ac_power >/dev/null 2>&1 || on_battery=$?
@@ -88,7 +88,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 }
 
 
-error() {
+function error {
     if $OPTION_GUI; then
         TITLE="Foutmelding $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
@@ -111,7 +111,7 @@ error() {
 }
 
 
-check_user() {
+function check_user {
     local prompt=''
 
     if $RUN_AS_SUPERUSER; then
@@ -130,7 +130,7 @@ check_user() {
 }
 
 
-info() {
+function info {
     if $OPTION_GUI; then
         TITLE="Informatie $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
@@ -153,7 +153,7 @@ info() {
 }
 
 
-init_script() {
+function init_script {
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -187,12 +187,12 @@ init_script() {
 }
 
 
-log() {
+function log {
     printf '%b' "$1" |& $LOGCMD "${2:---priority=info}"
 }
 
 
-process_common_options() {
+function process_common_options {
     while true; do
         case $1 in
             -d|--debug)
@@ -251,7 +251,7 @@ process_common_options() {
 }
 
 
-process_option_debug() {
+function process_option_debug {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
     printf "${YELLOW}%s\n${NORMAL}" '*** START DEBUG-SESSIE ***'
@@ -280,21 +280,21 @@ process_option_debug() {
 }
 
 
-process_option_help() {
+function process_option_help {
     printf  '%s\n\n%s\n'    \
             "$HELP"         \
             "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
-process_option_usage() {
+function process_option_usage {
     printf '%s\n\n%s\n' \
             "$USAGE"    \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
-process_option_version() {
+function process_option_version {
     local build=''
     local copyright_years='1970'
 
@@ -315,7 +315,7 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 }
 
 
-signal() {
+function signal {
     local       signal=${1:-signal?}
     local   -i  lineno=${2:-0}
     local       function=${3:-funcname?}
@@ -419,7 +419,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 }
 
 
-signal_exit() {
+function signal_exit {
     case $PROGRAM_NAME in
         kz-backup)
             if [[ -e $BACKUP_TO_DELETE ]]; then
@@ -466,7 +466,7 @@ dan een Terminalvenster, en voer uit:
 }
 
 
-warning() {
+function warning {
     if $OPTION_GUI; then
         TITLE="Waarschuwing $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.

@@ -48,7 +48,7 @@ readonly HTML_VALIDATOR_URL='http://validator.w3.org/check?uri='
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -94,7 +94,7 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     local dir=''
 
     for dir in "$CSS_DIR" "$HTML_DIR"; do
@@ -121,7 +121,7 @@ start nu eerst de Google Chrome webrowser.'
 }
 
 
-validate_css() {
+function validate_css {
     local filename=''
 
     cd "$CSS_DIR" || exit $ERROR
@@ -132,7 +132,7 @@ validate_css() {
 }
 
 
-validate_html() {
+function validate_html {
     local filename=''
 
     cd "$HTML_DIR" || exit $ERROR
@@ -143,7 +143,7 @@ validate_html() {
 }
 
 
-term_script() {
+function term_script {
     info 'Controleer de tabbladen in Google Chrome.'
     exit $SUCCESS
 }
@@ -153,7 +153,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

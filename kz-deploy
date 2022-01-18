@@ -42,7 +42,7 @@ readonly    UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local       full_name=''
     local   -i  getopt_rc=0
     local       parsed=''
@@ -114,7 +114,7 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     check_dependencies
     check_scripts
     build_package
@@ -123,7 +123,7 @@ process_input() {
 }
 
 
-check_dependencies() {
+function check_dependencies {
     if ! command -v lftp 1> /dev/null; then
         # Voor upload website.
         log 'Installeer lftp...'
@@ -132,7 +132,7 @@ check_dependencies() {
 }
 
 
-check_scripts() {
+function check_scripts {
     local -i check_rc=0
 
     info 'Controleer scripts (kz ivp)...'
@@ -146,7 +146,7 @@ Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
 }
 
 
-build_package() {
+function build_package {
     local -i check_rc=0
 
     info 'Bouw website en pakket (kz build)...'
@@ -160,7 +160,7 @@ Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
 }
 
 
-upload_website() {
+function upload_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=$UPLOADS_DISTDIR
     local ftp_to=/httpdocs
@@ -190,7 +190,7 @@ upload_website() {
 }
 
 
-install_package() {
+function install_package {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
@@ -200,7 +200,7 @@ install_package() {
 }
 
 
-term_script() {
+function term_script {
     exit $SUCCESS
 }
 
@@ -209,7 +209,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

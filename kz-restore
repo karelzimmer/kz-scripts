@@ -84,7 +84,7 @@ declare     TARGET_ARGUMENT=''
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  exclude_arg_num=0
     local   -i  select_arg_num=0
     local   -i  select_num=0
@@ -199,7 +199,7 @@ check_input() {
 }
 
 
-request_input() {
+function request_input {
     if $OPTION_GUI; then
         request_input_gui
     else
@@ -208,7 +208,7 @@ request_input() {
 }
 
 
-request_input_gui() {
+function request_input_gui {
     local       filename="${SOURCE_ARGUMENT:-/media}"
     local   -i  file_selected=0
 
@@ -235,7 +235,7 @@ Geen back-up teruggezet!'
 }
 
 
-request_input_tui() {
+function request_input_tui {
     local       range=''
     local   -a  buparray
     local   -i  bupnum=0
@@ -338,7 +338,7 @@ standaard S]: "
 }
 
 
-show_backups() {
+function show_backups {
     local search4=${1-search4?}
     local backup=''
     local -i bupnumlen=2
@@ -388,7 +388,7 @@ gevonden, van nieuw naar oud:"
 }
 
 
-process_input() {
+function process_input {
     local select=''
     local size_num=0
     local size_unit=''
@@ -445,7 +445,7 @@ process_input() {
 }
 
 
-controleer_space() {
+function controleer_space {
     local       filesys=''
     local       free_human=''
     local   -i  free_bytes=0
@@ -498,7 +498,7 @@ De HELE back-up is ${need_human}iB groot, beschikbaar is ${free_human}iB."
 }
 
 
-determine_file_size() {
+function determine_file_size {
     BACKUPSIZE_HUMAN=$(
         du  --apparent-size     \
             --block-size=1      \
@@ -516,7 +516,7 @@ determine_file_size() {
 }
 
 
-restore_backup() {
+function restore_backup {
     if $OPTION_GUI; then
         (
         pv  --size="$BACKUPSIZE_MACHINE"            \
@@ -570,7 +570,7 @@ restore_backup() {
 }
 
 
-term_script() {
+function term_script {
     TEXT=''
     if [[ "$BACKUP" = /media/* ]]; then
         TEXT='
@@ -595,7 +595,7 @@ $TEXT"
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

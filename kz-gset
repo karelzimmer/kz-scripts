@@ -69,7 +69,7 @@ declare OPTION_REMOVEFAV=false
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -250,7 +250,7 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     if $OPTION_addfavbegin; then
         process_option_addfavbegin
     elif $OPTION_addfavend; then
@@ -267,7 +267,7 @@ process_input() {
 }
 
 
-process_option_addfavbegin () {
+function process_option_addfavbegin  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -291,7 +291,7 @@ process_option_addfavbegin () {
 }
 
 
-process_option_addfavend () {
+function process_option_addfavend  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -314,7 +314,7 @@ process_option_addfavend () {
 }
 
 
-process_option_removefav () {
+function process_option_removefav  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -335,7 +335,7 @@ process_option_removefav () {
 }
 
 
-process_option_addappfolder () {
+function process_option_addappfolder  {
     local app_folders=''
     local schema=''
     local path=''
@@ -364,7 +364,7 @@ process_option_addappfolder () {
 }
 
 
-process_option_removeappfolder () {
+function process_option_removeappfolder  {
     local app_folders=''
     local schema=''
     local path=''
@@ -389,7 +389,7 @@ process_option_removeappfolder () {
 }
 
 
-capture_gui_changes() {
+function capture_gui_changes {
     CONFIG_A=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
     save_configuration_database A "$CONFIG_A"
     info 'Voer nu de wijziging uit in de grafische werkomgeving.'
@@ -400,7 +400,7 @@ capture_gui_changes() {
 }
 
 
-save_configuration_database() {
+function save_configuration_database {
     local fase=${1:-fase?}
     local output_file=${2:-output_file?}
 
@@ -415,7 +415,7 @@ save_configuration_database() {
 }
 
 
-report_database_changes() {
+function report_database_changes {
     local output_file1=${1:-output_file1?}
     local output_file2=${2:-output_file2?}
 
@@ -431,7 +431,7 @@ Bij WIJZIGINGen voer uit:
 }
 
 
-term_script() {
+function term_script {
     exit $SUCCESS
 }
 
@@ -440,7 +440,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

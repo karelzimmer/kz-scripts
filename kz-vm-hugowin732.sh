@@ -8,7 +8,7 @@
 TITLE='VirtualBox'
 TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
 
-start_vm() {
+function start_vm {
      while ! lsmod | grep vbox; do
          sleep 5
      done

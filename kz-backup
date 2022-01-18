@@ -91,7 +91,7 @@ declare     TARGET='/mnt'
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local       exclude=''
     local   -i  exclude_arg_num=0
     local   -i  select_arg_num=0
@@ -192,7 +192,7 @@ check_input() {
 }
 
 
-request_input() {
+function request_input {
     local   -A  media=()
     local       media2=false
     local       media_found=false
@@ -252,7 +252,7 @@ request_input() {
 }
 
 
-request_input_gui() {
+function request_input_gui {
     local -i dir_selected=0
 
     TITLE='Kies een map om de back-up in te plaatsen'
@@ -278,7 +278,7 @@ Geen back-up gemaakt!'
 }
 
 
-request_input_tui() {
+function request_input_tui {
     declare medium=''
 
     TEXT="Gebruik optie target om op te geven waar de back-up geplaatst moet \
@@ -300,7 +300,7 @@ aangekoppelde media:"
 }
 
 
-process_input() {
+function process_input {
     local size_num=0
     local size_unit=''
 
@@ -368,7 +368,7 @@ $TARGET/$BACKUPFILE maken..."
 }
 
 
-determine_selection_size() {
+function determine_selection_size {
     SELECTIONSIZE_HUMAN=$(
         du  --apparent-size                         \
             --block-size=1                          \
@@ -396,7 +396,7 @@ determine_selection_size() {
 }
 
 
-check_space() {
+function check_space {
     local       filesys=''
     local       free_human=''
     local   -i  free_bytes=0
@@ -452,7 +452,7 @@ zoals een USB-stick of externe harddisk."
 }
 
 
-create_backup() {
+function create_backup {
     local   -i  size_num=0
     local   -i  tar_rc=0
     local   -i  sync_rc=0
@@ -536,7 +536,7 @@ Geen back-up gemaakt!"
 }
 
 
-term_script() {
+function term_script {
     TEXT='De back-up is gemaakt.'
     if [[ "$TARGET" == /media/* ]]; then
         TEXT="$TEXT
@@ -552,7 +552,7 @@ Koppel zelf (veilig!) het back-up-medium af."
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

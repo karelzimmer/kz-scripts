@@ -102,7 +102,7 @@ declare     CURSOR_VISABLE=''
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  app_arg_num=0
     local   -i  file_arg_num=0
     local   -i  getopt_rc=0
@@ -208,7 +208,7 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     local       file=''
     local       file_notfound=false
     local   -i  app_seq_num=0
@@ -296,7 +296,7 @@ $HOSTNAME.sh
 }
 
 
-process_option_list() {
+function process_option_list {
     local list_dir="$HOME/$PROGRAM_NAME"
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
@@ -350,7 +350,7 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 }
 
 
-save_user_photo() {             #1
+function save_user_photo {             #1
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
         rm --force "$file1"
@@ -359,21 +359,21 @@ save_user_photo() {             #1
 }
 
 
-save_desktop_background() {     #2
+function save_desktop_background {     #2
     printf '%s\n' "$text2..."
     gsettings get   org.gnome.desktop.background    \
                     picture-uri                     > "$file2" |& $LOGCMD
 }
 
 
-save_favorite_apps() {          #3
+function save_favorite_apps {          #3
     printf '%s\n' "$text3..."
     gsettings get   org.gnome.shell \
                     favorite-apps   > "$file3" |& $LOGCMD
 }
 
 
-save_command_history() {        #4
+function save_command_history {        #4
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
@@ -381,7 +381,7 @@ save_command_history() {        #4
 }
 
 
-process_argument_app() {
+function process_argument_app {
     local       app=''
     local       file=''
     local   -a  file_to_process=()
@@ -424,7 +424,7 @@ $EDITION."
 }
 
 
-process_argument_app_file() {
+function process_argument_app_file {
     local app_found=false
     local description_found=false
     local record=''
@@ -469,7 +469,7 @@ process_argument_app_file() {
 }
 
 
-process_argument_file() {
+function process_argument_file {
     local file=''
 
     for file in "${FILE_ARGUMENT[@]}"; do
@@ -488,7 +488,7 @@ instellingsbestanden."
 }
 
 
-process_dfltfiles() {
+function process_dfltfiles {
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_1
@@ -505,7 +505,7 @@ $EDITION."
 }
 
 
-process_option_apps() {
+function process_option_apps {
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
     # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
@@ -537,7 +537,7 @@ Om APPs in te stellen voer uit:
 }
 
 
-process_option_files() {
+function process_option_files {
     printf '%s\n' "De volgende instellingsbestanden zijn beschikbaar:
 
 NUMMER BESTAND
@@ -564,7 +564,7 @@ Om BESTANDen te gebruiken voer uit:
 }
 
 
-process_option_cat() {
+function process_option_cat {
     for file in "${FILE_TO_PROCESS[@]}"; do
         {
             printf '%s\n' "${BLUE}# $file${NORMAL}"
@@ -590,7 +590,7 @@ process_option_cat() {
 }
 
 
-process_file() {
+function process_file {
     local description=''
     local -i cmd_seq_num=0
     local prev_recordtype=''
@@ -636,7 +636,7 @@ process_file() {
 }
 
 
-process_description() {
+function process_description {
     local record=${1:-record?}
 
     description="${record:3}"
@@ -650,7 +650,7 @@ process_description() {
 }
 
 
-process_setup_instruction() {
+function process_setup_instruction {
     local       record=${1:-record?}
     local       filler=''
     local   -i  len=0
@@ -674,7 +674,7 @@ process_setup_instruction() {
 }
 
 
-process_reset_instruction() {
+function process_reset_instruction {
     local       record=${1:-record?}
     local       filler=''
     local   -i  len=0
@@ -698,7 +698,7 @@ process_reset_instruction() {
 }
 
 
-process_command() {
+function process_command {
     local       record=${1:-record?}
     local   -i  cmd_rc=0
     local       description_line=''
@@ -749,7 +749,7 @@ process_command() {
 }
 
 
-execute_command() {
+function execute_command {
     local       cmd=${1:-cmd?}
     local   -i  cmd_rc=0
     local       filler=''
@@ -780,7 +780,7 @@ execute_command() {
 }
 
 
-term_script() {
+function term_script {
     local   -i  app_num=0
 
     if $OPTION_SIMULATE; then
@@ -870,7 +870,7 @@ Gebruik de opdracht:
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

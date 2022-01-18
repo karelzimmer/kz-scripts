@@ -104,7 +104,7 @@ declare     CURSOR_VISABLE=''
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  app_arg_num=0
     local   -i  file_arg_num=0
     local   -i  getopt_rc=0
@@ -210,7 +210,7 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     local       file=''
     local       file_notfound=false
     local   -i  app_seq_num=0
@@ -294,7 +294,7 @@ process_input() {
 }
 
 
-process_option_list() {
+function process_option_list {
     local text0='Opdrachten worden verwerkt'
     local text1="[1/3]  Bepaal welke pakketten handmatig zijn geinstalleerd"
     local text3='[2/3]  Bepaal welke snaps zijn geinstalleerd'
@@ -331,7 +331,7 @@ Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 
-create_list_manual_installed() {        #1
+function create_list_manual_installed {        #1
     local       header="1. Deze pakketten zijn handmatig geinstalleerd via \
 Software of
    met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
@@ -356,7 +356,7 @@ Software of
 }
 
 
-create_list_snaps() {                   #2
+function create_list_snaps {                   #2
     local       header="2. Deze snaps zijn geinstalleerd met '[sudo] install \
 <snap>' of met Software:"
     local       footer=''
@@ -383,7 +383,7 @@ create_list_snaps() {                   #2
 }
 
 
-create_list_added_repos() {                 #3
+function create_list_added_repos {                 #3
     local       header="3. Deze pakketbronnen zijn toegevoegd met de \
 installatie van een pakket of
    met de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
@@ -421,7 +421,7 @@ installatie van een pakket of
 }
 
 
-process_argument_app() {
+function process_argument_app {
     local       app=''
     local       file=''
     local   -a  files=()
@@ -462,7 +462,7 @@ process_argument_app() {
 }
 
 
-process_argument_app_file() {
+function process_argument_app_file {
     local app_found=false
     local description_found=false
     local record=''
@@ -506,7 +506,7 @@ process_argument_app_file() {
 }
 
 
-process_argument_file() {
+function process_argument_file {
     local file=''
 
     for file in "${FILE_ARGUMENT[@]}"; do
@@ -525,7 +525,7 @@ installatiebestanden."
 }
 
 
-process_dfltfiles() {
+function process_dfltfiles {
     local dfltfile_1=''
     local dfltfile_2=''
 
@@ -550,7 +550,7 @@ $EDITION."
 }
 
 
-process_option_apps() {
+function process_option_apps {
     local   -a  files=()
     local       search=''
 
@@ -588,7 +588,7 @@ Om APPs te installeren voer uit:
 }
 
 
-process_option_files() {
+function process_option_files {
     printf '%s\n' "De volgende installatiebestanden zijn beschikbaar:
 
 NUMMER BESTAND
@@ -614,7 +614,7 @@ Om BESTANDen te gebruiken voer uit:
 }
 
 
-process_option_cat() {
+function process_option_cat {
     for file in "${FILE_TO_PROCESS[@]}"; do
         {
             printf '%s\n' "${BLUE}# $file${NORMAL}"
@@ -640,7 +640,7 @@ process_option_cat() {
 }
 
 
-process_file() {
+function process_file {
     local       description=''
     local   -i  cmd_seq_num=0
     local       prev_recordtype=''
@@ -686,7 +686,7 @@ process_file() {
 }
 
 
-process_description() {
+function process_description {
     local record=${1:-record?}
 
     description="${record:3}"
@@ -700,7 +700,7 @@ process_description() {
 }
 
 
-process_install_instruction() {
+function process_install_instruction {
     local       record=${1:-record?}
     local       filler=''
     local   -i  len=0
@@ -724,7 +724,7 @@ process_install_instruction() {
 }
 
 
-process_remove_instruction() {
+function process_remove_instruction {
     local       record=${1:-record?}
     local       filler=''
     local   -i  len=0
@@ -748,7 +748,7 @@ process_remove_instruction() {
 }
 
 
-process_command() {
+function process_command {
     local       cmd=${1:-cmd?}
     local   -i  cmd_rc=0
     local       description_line=''
@@ -799,7 +799,7 @@ process_command() {
 }
 
 
-execute_command() {
+function execute_command {
     local       cmd=${1:-cmd?}
     local   -i  cmd_rc=0
     local       status=''
@@ -830,7 +830,7 @@ execute_command() {
 }
 
 
-check_dpkg() {
+function check_dpkg {
     local -i wait_for_aptd=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
@@ -854,7 +854,7 @@ check_dpkg() {
 }
 
 
-term_script() {
+function term_script {
     local   -i  app_num=0
 
     if $OPTION_SIMULATE; then
@@ -945,7 +945,7 @@ Gebruik de opdracht:
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

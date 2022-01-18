@@ -105,7 +105,7 @@ declare -i  NUMBER_OF_COMMANDS=0
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -145,7 +145,7 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     if $OPTION_GUI; then
         process_menu1_gui
     else
@@ -154,7 +154,7 @@ process_input() {
 }
 
 
-process_menu1_gui() {
+function process_menu1_gui {
     local -i zenity_rc=0
 
     while true; do
@@ -191,7 +191,7 @@ process_menu1_gui() {
 }
 
 
-process_menu1_tui() {
+function process_menu1_tui {
     local action1=''
 
     while true; do
@@ -233,7 +233,7 @@ Druk op de Enter-toets voor het menu [Enter]: '
 }
 
 
-process_menu1_choice() {
+function process_menu1_choice {
     case $REPLY in
         1)
             process_menu1_choice1
@@ -261,7 +261,7 @@ process_menu1_choice() {
 }
 
 
-process_menu1_choice1() {
+function process_menu1_choice1 {
     warning '
 Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 
@@ -276,7 +276,7 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 }
 
 
-process_menu1_choice2() {
+function process_menu1_choice2 {
     TITLE="${ACTIONS1[2]}"
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
@@ -296,7 +296,7 @@ Druk op de Enter-toets voor het menu [Enter]: '
 }
 
 
-process_menu1_choice3() {
+function process_menu1_choice3 {
     warning '
 Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 
@@ -320,7 +320,7 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 }
 
 
-process_menu1_choice4() {
+function process_menu1_choice4 {
     TITLE="${ACTIONS1[4]}"
     EXEC=(
         [1]="${ACTIONS2[9]}#${COMMANDS2[9]}"
@@ -330,7 +330,7 @@ process_menu1_choice4() {
 }
 
 
-process_menu2() {
+function process_menu2 {
     if $OPTION_GUI; then
         process_menu2_gui
     else
@@ -339,7 +339,7 @@ process_menu2() {
 }
 
 
-process_menu2_gui() {
+function process_menu2_gui {
     local -i zenity_rc=0
 
     while true; do
@@ -379,7 +379,7 @@ process_menu2_gui() {
 }
 
 
-process_menu2_tui() {
+function process_menu2_tui {
     local action2=''
     local exit_menu2=false
 
@@ -426,7 +426,7 @@ Druk op de Enter-toets voor het menu [Enter]: '
 
 
 
-process_menu2_choice() {
+function process_menu2_choice {
     case $REPLY in
         1)
             TEXT='
@@ -529,7 +529,7 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 }
 
 
-process_commands() {
+function process_commands {
     local   -i  exec=0
     local       action=''
     local       command=''
@@ -553,7 +553,7 @@ process_commands() {
 }
 
 
-show_commands_before_execution() {
+function show_commands_before_execution {
     local       prompt=''
     local   -i  exec=0
     local       action=''
@@ -609,7 +609,7 @@ $prompt"
 }
 
 
-execute_command() {
+function execute_command {
     local   -i  cmd_rc=0
     local       exec=''
     local       prompt=''
@@ -654,14 +654,14 @@ execute_command() {
 }
 
 
-log_rc() {
+function log_rc {
     local rc=${1:-rc?}
 
     log "$command: rc=$rc"
 }
 
 
-show_commands_after_execution() {
+function show_commands_after_execution {
     local       action=''
     local       command=''
     local   -i  exec=0
@@ -694,7 +694,7 @@ uitgevoerd:" > "$temp_text_file"
 }
 
 
-term_script() {
+function term_script {
     exit $SUCCESS
 }
 
@@ -703,7 +703,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

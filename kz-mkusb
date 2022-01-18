@@ -54,7 +54,7 @@ declare TARGET_ARGUMENT=''
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -144,7 +144,7 @@ check_input() {
 }
 
 
-request_input() {
+function request_input {
     warning 'De volgende /dev/sd schijven en partities zijn aanwezig:'
     TEXT='Gebruik optie --target om een ander device op te geven.'
     if findmnt --list --output=SOURCE,TARGET | grep --regexp='/dev/sd'; then
@@ -175,7 +175,7 @@ Geen $DEVICE gevonden om te gebruiken als doel!"
 }
 
 
-process_input() {
+function process_input {
     local   -i  isosize=0
     local       usbname=''
     local       file=''
@@ -247,7 +247,7 @@ process_input() {
 }
 
 
-create_usb_stick() {
+function create_usb_stick {
     local dd_from=${1:-dd_from?}
 
     read -rp "Plaats USB-stick '$usbname', gevolgd door Enter [Enter]: "
@@ -287,7 +287,7 @@ gestart."
 }
 
 
-term_script() {
+function term_script {
     exit $SUCCESS
 }
 
@@ -296,7 +296,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

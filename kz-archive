@@ -53,7 +53,7 @@ declare     DELETED=false
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local   -i  search4_arg_num=0
     local       dir=''
@@ -115,7 +115,7 @@ check_input() {
 }
 
 
-request_input() {
+function request_input {
     if $ARGUMENT_SELECTION; then
         return $SUCCESS
     fi
@@ -124,7 +124,7 @@ request_input() {
 }
 
 
-process_input() {
+function process_input {
     local basename=''
     local dirname=''
     local files_found=false
@@ -164,7 +164,7 @@ process_input() {
 }
 
 
-process_archive() {
+function process_archive {
     printf "\n${BOLD}%s\n%s${NORMAL}\n" "$basename" "$dirname"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
@@ -190,7 +190,7 @@ process_archive() {
 }
 
 
-archive_file() {
+function archive_file {
     local olddir=''
     local newdir=''
 
@@ -203,7 +203,7 @@ archive_file() {
 }
 
 
-process_delete() {
+function process_delete {
     printf "\n${BOLD}%s\n%s${NORMAL}\n" "$basename" "$dirname"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
@@ -229,14 +229,14 @@ process_delete() {
 }
 
 
-delete_file() {
+function delete_file {
     rm "$file" |& $LOGCMD
     printf '%s\n' 'Verwijderd.'
     DELETED=true
 }
 
 
-term_script() {
+function term_script {
     if $DELETED; then
         TEXT='\nEr zijn bestanden verwijderd.'
     else
@@ -259,7 +259,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

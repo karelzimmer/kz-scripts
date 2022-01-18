@@ -40,7 +40,7 @@ declare -i MAXRC=0
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local       parsed=''
     local       prompt=''
@@ -95,7 +95,7 @@ check_input() {
 }
 
 
-check_dependencies() {
+function check_dependencies {
     if ! command -v pycodestyle 1> /dev/null; then
         log 'Installeer pycodestyle...'
         sudo apt-get install --yes pycodestyle |& $LOGCMD
@@ -108,7 +108,7 @@ check_dependencies() {
 }
 
 
-process_input() {
+function process_input {
     local script=''
     local scriptsdir=$HOME/kz-scripts
 
@@ -151,7 +151,7 @@ process_input() {
 }
 
 
-check_functional() {
+function check_functional {
     if grep --quiet --line-regexp --regexp='#!''/usr/bin/bash' "$script"; then
             check_shellcheck
     elif grep   --quiet                         \
@@ -170,7 +170,7 @@ ${BOLD}In $script:${NORMAL}
 }
 
 
-check_lines() {
+function check_lines {
     local -i line_num=0
     local -i max_lines=1000
     local -i max_line_length=79
@@ -240,7 +240,7 @@ $(
 }
 
 
-check_release_year() {
+function check_release_year {
     if ! grep   --quiet                     \
                 --regexp='RELEASE_YEAR='    \
                 --regexp='release_year = '  \
@@ -256,7 +256,7 @@ ${BOLD}In $script:${NORMAL}
 }
 
 
-check_tags() {
+function check_tags {
     if grep --quiet             \
             --word-regexp       \
             --regexp='#''XXX'   \
@@ -283,7 +283,7 @@ $(
 }
 
 
-check_trailing_spaces() {
+function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
@@ -302,7 +302,7 @@ $(
 }
 
 
-check_shellcheck() {
+function check_shellcheck {
     local -i    check_rc=0
 
     shellcheck --external-sources "$script" 2> >($LOGCMD) || check_rc=$?
@@ -312,7 +312,7 @@ check_shellcheck() {
 }
 
 
-check_pycodestyle() {
+function check_pycodestyle {
     local -i check_rc=0
 
     pycodestyle "$script" || check_rc=$?
@@ -322,7 +322,7 @@ check_pycodestyle() {
 }
 
 
-check_usage() {
+function check_usage {
     local -i check_rc=0
 
     "$scriptsdir/$script" --version |& $LOGCMD || check_rc=$?
@@ -435,7 +435,7 @@ ${BOLD}In $script:${NORMAL}
 }
 
 
-term_script() {
+function term_script {
     exit $MAXRC
 }
 
@@ -444,7 +444,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

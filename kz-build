@@ -84,7 +84,7 @@ readonly -A TARGET_DEB=(
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local       full_name=''
     local   -i  getopt_rc=0
     local       parsed=''
@@ -150,7 +150,7 @@ check_input() {
 }
 
 
-process_input() {
+function process_input {
     check_dependencies
     remove_backups
     # Er is een afhankelijkheid met het maken van pdf's, vandaar uploads eerst.
@@ -159,7 +159,7 @@ process_input() {
 }
 
 
-check_dependencies() {
+function check_dependencies {
     if ! command -v fakeroot 1> /dev/null; then
         # Voor build .deb.
         log 'Installeer fakeroot...'
@@ -178,7 +178,7 @@ check_dependencies() {
 }
 
 
-remove_backups() {
+function remove_backups {
     find    "$UPLOADS_REPO"             \
             -name '*~'      -delete -or \
             -name '*.*~'    -delete -or \
@@ -186,7 +186,7 @@ remove_backups() {
 }
 
 
-build_uploads() {
+function build_uploads {
     local file=''
     local temptextfile=''
 
@@ -283,7 +283,7 @@ build_uploads() {
 }
 
 
-build_deb() {
+function build_deb {
     local basename=''
     local dir=''
     local file=''
@@ -367,7 +367,7 @@ build_deb() {
 }
 
 
-build_background_properties_file() {
+function build_background_properties_file {
     local wallpaper=''
     local wallpapers_config_file=kz-wallpapers.xml
 
@@ -401,7 +401,7 @@ $wallpapers_config_file"
 }
 
 
-term_script() {
+function term_script {
     exit $SUCCESS
 }
 
@@ -410,7 +410,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

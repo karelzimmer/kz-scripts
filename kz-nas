@@ -64,7 +64,7 @@ declare NAS_WACHTWOORD='geheim'
 # Functions                                                                   #
 ###############################################################################
 
-check_input() {
+function check_input {
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -106,7 +106,7 @@ check_input() {
 }
 
 
-request_input() {
+function request_input {
     local       fstab=''
     local       quest1='Deze regels verwijderen?'
     local       quest2="Heeft de NAS een vast IP-adres zoals $NAS_IP_ADRES?"
@@ -245,7 +245,7 @@ $quest6? [$NAS_SHARENAAM]: "
 }
 
 
-process_input() {
+function process_input {
     local text0='Opdrachten worden verwerkt'
     local text1='Maak koppelpunt...'
     local text2='Maak NAS login...'
@@ -281,7 +281,7 @@ process_input() {
 }
 
 
-create_mountpoint() {
+function create_mountpoint {
     if [[ -d $NAS_MOUNT_POINT ]]; then
         return $SUCCESS
     fi
@@ -293,7 +293,7 @@ create_mountpoint() {
 }
 
 
-create_nas_login() {
+function create_nas_login {
     printf '%s\n' 'Maak NAS login...'
     TEXT="username=$NAS_GEBRUIKERSNAAM\npassword=$NAS_WACHTWOORD"
     printf '%b\n' "$TEXT" > "$NAS_LOGIN"
@@ -301,7 +301,7 @@ create_nas_login() {
 }
 
 
-create_systemd_unit_file() {
+function create_systemd_unit_file {
     printf '%s\n' 'Maak systemd mount-bestand...'
     printf '%s\n' "[Unit]
 Description=Mount NAS Directory
@@ -318,7 +318,7 @@ WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 }
 
 
-mount_nas() {
+function mount_nas {
     printf '%s\n' 'Koppel NAS aan...'
     systemctl enable "$SYSTEMD_MOUNT_FILE" |& $LOGCMD
     if ! systemctl start "$SYSTEMD_MOUNT_FILE" |& $LOGCMD; then
@@ -328,7 +328,7 @@ mount_nas() {
 }
 
 
-term_script() {
+function term_script {
     if ! systemctl status "$SYSTEMD_MOUNT_FILE"; then
         true
     fi
@@ -345,7 +345,7 @@ De-activeer het systemd mount-besta2nd met de opdracht:
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script "$@"
     check_input "$@"
     process_input

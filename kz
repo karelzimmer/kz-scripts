@@ -51,7 +51,7 @@ THIS_YEAR=$(date +%Y); readonly THIS_YEAR
 # Functions                                                                   #
 ###############################################################################
 
-init_script() {
+function init_script {
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -63,7 +63,7 @@ init_script() {
 }
 
 
-check_input() {
+function check_input {
     # Geen getopt, opgegeven opties zijn voor de opdracht, niet voor kz zelf.
     if ! [[ "$*" ]]; then
         printf '%s\n\n' "$USAGE" >&2
@@ -89,7 +89,7 @@ check_input() {
 }
 
 
-show_commands() {
+function show_commands {
     printf '%s\n' 'De volgende OPDRACHTen zijn beschikbaar:'
     find    "$PROGRAM_PATH"/kz-*    \
             -maxdepth 1             \
@@ -105,21 +105,21 @@ show_commands() {
 }
 
 
-process_option_usage() {
+function process_option_usage {
     printf '%s\n\n%s\n' \
             "$USAGE"    \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
-process_option_help() {
+function process_option_help {
     printf  '%s\n\n%s\n'    \
             "$HELP"         \
             "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
-process_option_version() {
+function process_option_version {
     local build=''
     local copyright_years='1970'
 
@@ -139,7 +139,7 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 }
 
 
-process_input() {
+function process_input {
 local program_name=''
 
     program_name=$1
@@ -148,7 +148,7 @@ local program_name=''
 }
 
 
-term_script() {
+function term_script {
     exit $SUCCESS
 }
 
@@ -157,7 +157,7 @@ term_script() {
 # Main line                                                                   #
 ###############################################################################
 
-main() {
+function main {
     init_script
     check_input "$@"
     process_input "$@"
