@@ -142,8 +142,8 @@ function process_input {
                 ;;
             *)
                 check_release_year
+                check_code
                 check_functional
-                check_usage
                 ;;
         esac
     done
@@ -152,6 +152,119 @@ function process_input {
 
 
 function check_functional {
+    local -i check_rc=0
+
+    "$scriptsdir/$script" --version |& $LOGCMD || check_rc=$?
+    if [[ $check_rc -gt $SUCCESS ]]; then
+        info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --version' gaat fout."
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
+    fi
+
+    case $script in
+        kz-backup)
+            log "Check $script."
+            sudo "$scriptsdir/$script"  --target                \
+                                        /tmp                    \
+                                        /home/karel/kz-scripts  |& $LOGCMD  ||
+            check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --target /tmp /home/karel/kz-scripts' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        kz-install)
+            log "Check $script."
+            sudo "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script bitwarden' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --info' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --remove |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --remove' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        kz-restore)
+            log "Check $script."
+            printf                  '%s\n'              \
+                                    '1'                 |
+            sudo "$scriptsdir/$script"  --target        \
+                                        /tmp            \
+                                        --source /tmp   |& $LOGCMD  ||
+            check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --target /tmp --source /tmp' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        kz-setup)
+            log "Check $script."
+            "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script bitwarden' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --info' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            "$scriptsdir/$script" --reset |& $LOGCMD || check_rc=$?
+            if [[ $check_rc -gt $SUCCESS ]]; then
+                info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --reset' gaat fout."
+                if [[ $ERROR -gt $MAXRC ]]; then
+                    MAXRC=$ERROR
+                fi
+            fi
+            ;;
+        *)
+            return $SUCCESS
+            ;;
+    esac
+}
+
+
+function check_code {
     if grep --quiet --line-regexp --regexp='#!''/usr/bin/bash' "$script"; then
             check_shellcheck
     elif grep   --quiet                         \
@@ -162,7 +275,7 @@ function check_functional {
     else
         info "
 ${BOLD}In $script:${NORMAL}
-    Onbekend script.  Functie 'check_functional' kan script niet controleren."
+    Onbekend script.  Functie 'check_code' kan scriptcode niet controleren."
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
         fi
@@ -319,119 +432,6 @@ function check_pycodestyle {
     if [[ $check_rc -gt $MAXRC ]]; then
         MAXRC=$check_rc
     fi
-}
-
-
-function check_usage {
-    local -i check_rc=0
-
-    "$scriptsdir/$script" --version |& $LOGCMD || check_rc=$?
-    if [[ $check_rc -gt $SUCCESS ]]; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --version' gaat fout."
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-
-    case $script in
-        kz-backup)
-            log "Check $script."
-            sudo "$scriptsdir/$script"  --target                \
-                                        /tmp                    \
-                                        /home/karel/kz-scripts  |& $LOGCMD  ||
-            check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --target /tmp /home/karel/kz-scripts' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        kz-install)
-            log "Check $script."
-            sudo "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script bitwarden' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --info' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --remove |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --remove' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        kz-restore)
-            log "Check $script."
-            printf                  '%s\n'              \
-                                    '1'                 |
-            sudo "$scriptsdir/$script"  --target        \
-                                        /tmp            \
-                                        --source /tmp   |& $LOGCMD  ||
-            check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --target /tmp --source /tmp' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        kz-setup)
-            log "Check $script."
-            "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script bitwarden' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --info' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --reset |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --reset' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        *)
-            return $SUCCESS
-            ;;
-    esac
 }
 
 
