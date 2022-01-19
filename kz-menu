@@ -623,7 +623,7 @@ function execute_command {
             --only-delimited
         )
     case $exec in
-        kz-backup|kz-install|kz-install*--list|kz-nas|kz-restore)
+        kz-backup|kz-install|kz-nas|kz-restore)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
@@ -636,7 +636,7 @@ function execute_command {
                 log_rc $cmd_rc
             fi
             ;;
-        kz-getdeb|kz-setup|*--info|kz-setup*--list|*--remove|*--reset)
+        kz-getdeb|kz-setup|*--info|*--list|*--remove|*--reset)
             # Zogenaamde non-sudo-scripts.
             if $OPTION_GUI; then
                 "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
