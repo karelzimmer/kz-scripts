@@ -17,7 +17,7 @@ RELEASE_YEAR=2009
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=yes
+readonly RUN_AS_SUPERUSER=true
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:filrs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,list,\
 remove,simulate"
