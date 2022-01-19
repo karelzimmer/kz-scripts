@@ -300,8 +300,8 @@ function process_option_list {
     local text3='[2/3]  Bepaal welke snaps zijn geinstalleerd'
     local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
 
-    mkdir --parents "$LIST_DIR" |& $LOGCMD 
-    
+    mkdir --parents "$LIST_DIR" |& $LOGCMD
+
     TITLE='Applijst maken'
     if $OPTION_GUI; then
         (
