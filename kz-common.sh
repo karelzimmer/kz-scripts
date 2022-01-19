@@ -169,8 +169,8 @@ function init_script {
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-    LOGCMD_CHECK="journalctl --all --no-pager \
---identifier=$PROGRAM_NAME --since='$(date '+%Y-%m-%d %H:%M:%S')'"
+    LOGCMD_CHECK="journalctl --all --identifier=$PROGRAM_NAME \
+    --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     CMDLINE_ARGS=("$@")
     log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
