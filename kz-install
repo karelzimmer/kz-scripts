@@ -17,7 +17,7 @@ RELEASE_YEAR=2009
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=true
+readonly RUN_AS_SUPERUSER=yes
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:filrs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,list,\
 remove,simulate"
@@ -51,7 +51,8 @@ DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
 readonly EDITION_DEFAULT=desktop
 SPACES=$(printf '%.0s ' {1..79}); readonly SPACES
 VERSION=$(lsb_release --release --short); readonly VERSION
-readonly LIST_FILE=/usr/local/etc/${PROGRAM_NAME}-applist
+readonly LIST_DIR=$HOME/$PROGRAM_NAME
+readonly LIST_FILE=$LIST_DIR/${PROGRAM_NAME}-applist
 CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE
 CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE2
 TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text"); readonly TEXT_FILE
@@ -219,7 +220,6 @@ function process_input {
     local       skip_line=false
 
     if $OPTION_LIST; then
-        check_user
         process_option_list
         exit $SUCCESS
     fi
@@ -300,6 +300,8 @@ function process_option_list {
     local text3='[2/3]  Bepaal welke snaps zijn geinstalleerd'
     local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
 
+    mkdir --parents "$LIST_DIR" |& $LOGCMD 
+    
     TITLE='Applijst maken'
     if $OPTION_GUI; then
         (
