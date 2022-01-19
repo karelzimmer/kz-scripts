@@ -155,14 +155,15 @@ Voer uw wachtwoord in:'
                 )" | sudo --stdin true 2> /dev/null; then
                 break
             else
-                TEXT='Geen of verkeerd wachtwoord ingevoerd, of
-Annuleren gekozen.'
+                TEXT='Geen of verkeerd wachtwoord ingevoerd,
+geen beheerder (sla dan deze stap over),
+of Annuleren gekozen.'
                 if ! whiptail   --backtitle     "$DISPLAY_NAME" \
                                 --title         'Fout'          \
                                 --yes-button    'Opnieuw'       \
                                 --no-button     'Stoppen'       \
                                 --yesno         "$TEXT"         \
-                                10 45; then
+                                11 44; then
                     TEXT='Programma is gestopt door de gebruiker'
                     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                                         --title     'Gestopt'       \
