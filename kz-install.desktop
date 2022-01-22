@@ -32,7 +32,7 @@ Exec=/usr/bin/kz-install --gui --remove
 [Desktop Action list]
 Name=Create app list
 Name[nl]=Applijst maken
-Exec=pkexec /usr/bin/kz-install --gui --list
+Exec=/usr/bin/kz-install --gui --list
 
 [Desktop Action cat]
 Name=Show files

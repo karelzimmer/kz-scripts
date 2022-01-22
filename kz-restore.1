@@ -13,72 +13,26 @@ kz restore \- Back-up terugzetten.
 .\"
 .SH SAMENVATTING
 .B kz restore
-[OPTIE...] [\fISELECTIE\fR...]
+[OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz restore\fR zet bestanden en mappen terug uit een back-up (reservekopie).
+\fBkz restore\fR zet een back-up (reservekopie) van de Persoonlijke map terug.
 .sp
-Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt alles in de back-up
-teruggezet.
+De back-up wordt verwacht op een medium zoals een externe USB-harddisk in map\
+ '\fIaangekoppeld-medium\fR/kz-backup-<computernaam>-<gebruikersnaam>/'
+(e.g. /media/charlie/backupdisk/kz-backup-pc01-charlie/).
 .sp
-Met \fISELECTIE\fR kan een selectie van mappen en bestanden worden teruggezet.
-.br
-Er wordt in de back-up gezocht met jokertekens (*), dus als bijvoorbeeld\
- 'python' als \fISELECTIE\fR wordt opgegeven, dan wordt zowel\
- '/home/USER/python' als '/home/USER/Documenten/python.odt' teruggezet.
+Voor het terugzetten van de back-up wordt rsync gebruikt.
 .sp
-Voor het terugzetten van de back-up wordt tar gebruikt.
-.br
-De inhoud van de back-up is op te vragen met opdracht:
-.RS
-\fBtar\fR tvf \fIBESTAND\fR [--wildcards \fISELECTIE\fR...]
-.RE
-.sp
-Standaard worden back-ups gezocht vanaf /media.
-Met optie \fB--source\fR (\fB-s\fR) kan een andere locatie opgegeven worden.
-.sp
-Er wordt gezocht naar een back-up met de naam "kz-backup-<computernaam>-*.tar",
-en als niet gevonden naar "kz-backup-*.tar".
-.sp
-Standaard wordt de back-up teruggezet in map / (originele plek).
-Met optie \fB--target\fR (\fB-t\fR) kan een andere locatie opgegeven worden.
-.sp
-Standaard worden de volgende bestanden NIET teruggezet:
-.RS
-/home/*/.bash_logout
-.br
-/home/*/examples.desktop
-.br
-/home/*/.bashrc
-.br
-/home/*/.profile
-.RE
-.sp
-Met optie \fB--exclude\fR (\fB-e\fR) zijn extra bestanden en mappen uit te
-sluiten.
-.sp
-Met opdracht \fBkz backup\fR zijn individuele -of alle- bestanden en mappen te
-bewaren in een enkel archiefbestand.
+Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
 .sp
 In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz restore\fR
 worden gestart door te zoeken naar \fBback\fR, klik op
 \fBBack-up terugzetten\fR.
-.br
-Dan wordt alles in de back-up teruggezet (e.g. alle Persoonlijke mappen).
 .\"
 .\"
 .SH OPTIES
-.TP
-\fB-e\fR, \fB--exclude=\fIUITSLUITEN\fR
-Sluit bestanden of mappen \fIUITSLUITEN\fR uit.
-Mag meerdere keren opgegeven worden.
-.TP
-\fB-s\fR, \fB--source=\fIBRONMAP\fR
-Zoek back-ups vanaf de \fIBRONMAP\fR.
-.TP
-\fB-t\fR, \fB--target=\fIDOELMAP\fR
-Zet bestanden en mappen terug in de \fIDOELMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -95,7 +49,7 @@ Start in grafische modus (gui = graphical user interface).
 \fB-d\fR, \fB--debug\fR
 Neem foutopsporingsinformatie op in het logboek.
 .br
-Bekijk het logboek met 'journalctl -ab -t kz-restore'.
+Bekijk het logboek met opdracht: \fBjournalctl -ab -t kz-restore\fR
 .\"
 .\"
 .SH STOPSTATUS
@@ -106,23 +60,7 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH MAPPEN
-/media/
-.RS
-Als er geen \fIBRON\fR is opegegeven worden de back-ups vanaf deze map
-opgezocht.
-.RE
-.\"
-.\"
-.SH BESTANDEN
-/usr/local/etc/kz-restore-exclude-dflt
-.RS
-Standaard uit te sluiten bestanden en mappen.
-.RE
-.sp
-/usr/local/etc/kz-restore-exclude-opt
-.RS
-Opgegeven uit te sluiten bestanden en mappen.
-.RE
+\fIaangekoppeld-medium\fR/kz-backup-<computernaam>-<gebruikersnaam>/
 .\"
 .\"
 .SH NOTITIES
@@ -138,17 +76,8 @@ https://karelzimmer.nl
 \fBkz restore\fR
 .RS
 Zet alles in de back-up terug.
-Hiervoor is ook starter 'Back-up terugzetten' beschikbaar.
-.RE
-.sp
-\fBkz restore --target /tmp /home/*/Documenten\fR
-.RS
-Zet alle documenten terug in map /tmp.
-.RE
-.sp
-\fBkz restore --exclude '*.JPG' /home/*/Afbeeldingen\fR
-.RS
-Zet alle foto's terug, maar geen JPG's.
+.br
+Hiervoor is ook starter \fBBack-up terugzetten\fR beschikbaar.
 .RE
 .\"
 .\"

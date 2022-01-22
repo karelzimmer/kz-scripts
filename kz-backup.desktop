@@ -15,7 +15,7 @@ Comment[nl]=Maak een back-up (reservekopie) van mappen en bestanden
 Keywords=kzbackup;copy;restore;
 Keywords[nl]=kzbackup;reservekopie;herstel;
 Categories=KZ Scripts;
-Exec=pkexec /usr/bin/kz-backup --gui
+Exec=/usr/bin/kz-backup --gui
 Icon=/usr/share/pixmaps/kz-backup.svg
 Actions=version;
 

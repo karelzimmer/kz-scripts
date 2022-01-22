@@ -23,10 +23,10 @@ Alle beeldbestanden (.iso) worden gelezen uit MAP, en per beeldbestand (.iso)
 wordt er een opstartbare USB-stick aangemaakt (met \fBdd\fR).
 .sp
 De beeldbestanden worden verwacht in map ~/Downloads.
-Met optie \fB--source\fR (\fB-s\fR) kan een andere locatie opgegeven worden.
+Met optie \fB-s\fR, \fB--source\fR kan een andere locatie opgegeven worden.
 .sp
 De USB-sticks worden verwacht in map /dev/sdb.
-Met optie \fB--target\fR (\fB-t\fR) kan een andere locatie opgegeven worden.
+Met optie \fB-t\fR, \fB--target\fR kan een andere locatie opgegeven worden.
 .sp
 Nadat de USB-stick is gemaakt wordt deze gecontroleerd door deze te starten als
 een (KVM) virtuele machine.
@@ -55,7 +55,7 @@ Wordt genegeerd.
 .TP
 \fB-d\fR, \fB--debug\fR
 Neem foutopsporingsinformatie op in het logboek.
-Bekijk het logboek met 'journalctl -ab -t kz-mkusb'.
+Bekijk het logboek met opdracht: \fBjournalctl -ab -t kz-mkusb\fR
 .\"
 .\"
 .SH STOPSTATUS

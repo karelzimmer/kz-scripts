@@ -17,7 +17,6 @@ RELEASE_YEAR=2015
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
@@ -300,22 +299,17 @@ Druk op de Enter-toets voor het menu [Enter]: '
 
 
 function process_menu1_choice3 {
-    warning '
-Zorg dat het medium is aangekoppeld waarop de back-up staat.'
-
     TITLE="${ACTIONS1[3]}"
     if [[   ($HOSTNAME = pc-van-soe  && $USER = soe )   ||
             ($HOSTNAME = pc-van-hugo && $USER = hugo)   ]]; then
         EXEC=(
             [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
-                "${ACTIONS2[8]}#${COMMANDS2[8]}"
                 "${ACTIONS2[3]}#${COMMANDS2[3]}"
                 "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
     else
         EXEC=(
-            [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
-                "${ACTIONS2[3]}#${COMMANDS2[3]}"
+            [1]="${ACTIONS2[3]}#${COMMANDS2[3]}"
                 "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
     fi
@@ -324,9 +318,13 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 
 
 function process_menu1_choice4 {
+    warning '
+Zorg dat het medium is aangekoppeld waarop de back-up staat.'
+
     TITLE="${ACTIONS1[4]}"
     EXEC=(
-        [1]="${ACTIONS2[9]}#${COMMANDS2[9]}"
+        [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
+            "${ACTIONS2[9]}#${COMMANDS2[9]}"
             "${ACTIONS2[10]}#${COMMANDS2[10]}"
         )
     process_commands
@@ -626,7 +624,7 @@ function execute_command {
             --only-delimited
         )
     case $exec in
-        kz-backup|kz-install|kz-nas|kz-restore)
+        kz-install|kz-nas)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
@@ -639,7 +637,7 @@ function execute_command {
                 log_rc $cmd_rc
             fi
             ;;
-        kz-getdeb|kz-setup|*--info|*--list|*--remove|*--reset)
+        *)
             # Zogenaamde non-sudo-scripts.
             if $OPTION_GUI; then
                 "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
@@ -648,10 +646,6 @@ function execute_command {
                 "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
                 log_rc $cmd_rc
             fi
-            ;;
-        *)
-            warning "Niet af te handelen opdracht: $command"
-            log_rc $ERROR
             ;;
     esac
 }

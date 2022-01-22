@@ -17,28 +17,28 @@ RELEASE_YEAR=2021
 # Global constants                                                            #
 ###############################################################################
 
-readonly    RUN_AS_SUPERUSER=false
-readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
-readonly    HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+readonly RUN_AS_SUPERUSER=false
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Pakket kz bouwen.
 
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    DOCS_REPO=$HOME/kz-docs
-readonly    SCRIPTS_REPO=$HOME/kz-scripts
+readonly DOCS_REPO=$HOME/kz-docs
+readonly SCRIPTS_REPO=$HOME/kz-scripts
 
-readonly    DEB_REPO=$HOME/kz-deb
-readonly    DEB_APPDIR=$DEB_REPO/app
-readonly    DEB_DISTDIR=$DEB_REPO/dist
-readonly    DEB_NAME=kz_365_all.deb
+readonly DEB_REPO=$HOME/kz-deb
+readonly DEB_APPDIR=$DEB_REPO/app
+readonly DEB_DISTDIR=$DEB_REPO/dist
+readonly DEB_NAME=kz_365_all.deb
 
-readonly    UPLOADS_REPO=$HOME/kz-uploads
-readonly    UPLOADS_APPDIR=$UPLOADS_REPO/app
-readonly    UPLOADS_DISTDIR=$UPLOADS_REPO/dist
+readonly UPLOADS_REPO=$HOME/kz-uploads
+readonly UPLOADS_APPDIR=$UPLOADS_REPO/app
+readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
 # Conform ISO 8601.
 TIMESTAMP=$(date +%Y-%m-%dT%H:%M); readonly TIMESTAMP
@@ -143,7 +143,6 @@ function check_input {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        DESKTOP_TERMINAL=false
     fi
 
     check_user

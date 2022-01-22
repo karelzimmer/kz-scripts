@@ -17,7 +17,6 @@ RELEASE_YEAR=2014
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'c'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',checksums'
 readonly USAGE="Gebruik: $DISPLAY_NAME [-c|--checksums]
@@ -92,7 +91,6 @@ function check_input {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        DESKTOP_TERMINAL=false
     fi
 
     check_user

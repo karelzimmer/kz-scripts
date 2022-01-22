@@ -17,20 +17,19 @@ RELEASE_YEAR=2009
 # Global constants                                                            #
 ###############################################################################
 
-readonly    RUN_AS_SUPERUSER=false
-readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
-readonly    HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Pakket kz distribueren.
 
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly    SCRIPTS_REPO=$HOME/kz-scripts
-readonly    UPLOADS_REPO=$HOME/kz-uploads
-readonly    UPLOADS_DISTDIR=$UPLOADS_REPO/dist
+readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly UPLOADS_REPO=$HOME/kz-uploads
+readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
 
 ###############################################################################
@@ -102,15 +101,9 @@ function check_input {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        DESKTOP_TERMINAL=false
     fi
 
     check_user
-
-    # Regel sudo maar gelijk voor verderop.
-    prompt="Authenticatie is vereist voor onderdelen van '$DISPLAY_NAME'.
-[sudo] wachtwoord voor %p: "
-    sudo --prompt="$prompt" true
 }
 
 

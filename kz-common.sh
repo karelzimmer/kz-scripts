@@ -29,7 +29,7 @@ readonly OPTIONS_HELP_COMMON="\
   -h --help     toon deze hulptekst
   -u --usage    toon een korte gebruikssamenvatting
   -v --version  toon programmaversie
-  -g --gui      start in grafische modus indien van toepassing
+  -g --gui      start in grafische modus (indien van toepassing)
   -d --debug    neem foutopsporingsinformatie op in het logboek"
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
@@ -42,7 +42,6 @@ THIS_YEAR=$(date +%Y); readonly THIS_YEAR
 ###############################################################################
 
 declare -a  CMDLINE_ARGS=()
-declare     BACKUP_TO_DELETE=''
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD=''
@@ -53,8 +52,6 @@ declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
 declare     RUN_AS_SUPERUSER=false
-declare     DESKTOP_TERMINAL=false
-declare     TEXT=''
 declare     TITLE=''
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
@@ -170,7 +167,7 @@ function init_script {
 
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     LOGCMD_CHECK="journalctl --all --identifier=$PROGRAM_NAME \
-    --since='$(date '+%Y-%m-%d %H:%M:%S')'"
+--since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     CMDLINE_ARGS=("$@")
     log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
@@ -232,7 +229,8 @@ function process_common_options {
         GREEN=${BOLD}$(tput setaf 2)
         YELLOW=${BOLD}$(tput setaf 3)
         BLUE=${BOLD}$(tput setaf 4)
-        REWRITE_LINE="$(tput cuu1 ;tput el)"
+        # shellcheck disable=SC2034
+        REWRITE_LINE="$(tput cuu1;tput el)"
     fi
 
     if $OPTION_DEBUG; then
@@ -380,9 +378,9 @@ $command, code: $rc ($rc_desc)" --priority=debug
     case $signal in
         error)
             error "Programma $PROGRAM_NAME is afgebroken."
-            printf  '%s\n%s\n'                                              \
-                    'Controleer de meldingen in de log met de opdracht:'    \
-                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
+            printf  '%s\n%s\n'                                      \
+                    'Controleer in het Terminalvenster de log met:' \
+                    "    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
         exit)
@@ -393,26 +391,20 @@ $command, code: $rc ($rc_desc)" --priority=debug
                 BASH_XTRACEFD=''
                 exec 4>&-
                 printf "${YELLOW}%s\n${NORMAL}" '*** EINDE DEBUG-SESSIE ***'
-                printf '%s\n' "Opdracht om de log uit te lezen:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+                printf '%s\n%s\n'                                       \
+                        'Controleer in het Terminalvenster de log met:' \
+                        "   ${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
-            # Een non-gui script gestart met optie gui.
-            if $DESKTOP_TERMINAL; then
-                TEXT='Druk op de Enter-toets om verder te gaan [Enter]: '
-                # < /dev/tty voor als FD 1 al in gebruik is.
-                read -rp "$TEXT" < /dev/tty
-                printf '%s' "${REWRITE_LINE}"
-            fi
             trap - ERR EXIT SIGINT SIGPIPE SIGTERM SIGHUP
             exit "$rc"
             ;;
         *)
             warning "Programma $PROGRAM_NAME is onderbroken."
-            printf  '%s\n    %s\n'                                          \
-                    'Controleer de meldingen in de log met de opdracht:'    \
-                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
+            printf  '%s\n    %s\n'                                  \
+                    'Controleer in het Terminalvenster de log met:' \
+                    "    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
     esac
@@ -421,13 +413,6 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
 function signal_exit {
     case $PROGRAM_NAME in
-        kz-backup)
-            if [[ -e $BACKUP_TO_DELETE ]]; then
-                info 'Opgeslagen back-up wordt verwijderd...'
-                rm "$BACKUP_TO_DELETE" |& $LOGCMD
-                info 'Opgeslagen back-up is verwijderd.'
-            fi
-            ;;
         kz-getdeb)
             # Script kz-getdeb verwijdert niet kz en kz.1 ivm lokale Git-repo.
             rm --force kz.{2..99}

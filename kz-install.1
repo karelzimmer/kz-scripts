@@ -38,11 +38,11 @@ De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
-Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB--editie\fR is
-dat aan te passen (e.g. \fIEDITIE\fR server).
+Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
+\fB--editie\fR is dat aan te passen (e.g. \fIEDITIE\fR server).
 .sp
-Optie \fB--files\fR geeft een lijst van beschikbare installatiebestanden voor
-de huidige distributie, e.g. Ubuntu.
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare
+installatiebestanden voor de huidige distributie, e.g. Ubuntu.
 .br
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBinstal-\fR' en te eindigen met '\fB.sh\fR'.
@@ -52,8 +52,8 @@ Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
 Voor de indeling van de installatiebestanden zie de sectie
 \fBBESTANDSINDELING\fR hieronder.
 .sp
-Optie \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor de
-huidige distributie en versie, e.g. Ubuntu 20.04.
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor
+de huidige distributie en versie, e.g. Ubuntu 20.04.
 .br
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
@@ -64,17 +64,17 @@ Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
 Het is mogelijk dat na het uitvoeren van \fBkz install\fR er extra acties nodig
 zijn.
-Optie \fB--info\fR geeft dan aanvullende instructies weer.
+Optie \fB-i\fR, \fB--info\fR geeft dan aanvullende instructies weer.
 .sp
-Optie \fB--list\fR maakt een applijst aan in bestand
-/usr/local/etc/kz-install-applist.
-Hierin informatie over welke pakketten handmatig zijn geinstalleerd, welke
-snaps zijn geinstalleerd, en welke pakketbronnen ("repositories" of "repo's")
+Optie \fB-l\fR, \fB--list\fR maakt een applijst aan in bestand
+kz-install-applist in map Documenten.
+Hierin informatie over welke pakketten handmatig zijn geïnstalleerd, welke
+snaps zijn geïnstalleerd, en welke pakketbronnen ("repositories" of "repo's")
 zijn toegevoegd.
 .br
 Deze gevens zijn te gebruiken om de installatie te controleren op volledigheid.
 \.sp
-Alhoewel \fBkz install\fR gericht is op het installeren, met optie
+Alhoewel \fBkz install\fR gericht is op het installeren, met optie\fB-r\fR,
 \fB--remove\fR worden er instructies getoond om de installatie ongedaan te
 maken.
 .sp
@@ -271,7 +271,7 @@ Start in grafische modus (gui = graphical user interface).
 \fB-d\fR, \fB--debug\fR
 Neem foutopsporingsinformatie op in het logboek.
 .br
-Bekijk het logboek met 'journalctl -ab -t kz-install'.
+Bekijk het logboek met opdracht: \fBjournalctl -ab -t kz-install\fR
 .\"
 .\"
 .SH STOPSTATUS
@@ -309,9 +309,9 @@ Tijdelijk tekstbestand.
 Tijdelijk applijstbestand.
 .RE
 .sp
-/usr/share/local/kz-install-applist
+~/Documenten/kz-install/kz-install-applist
 .RS
-Applijst met geinstalleerde apps.
+Applijst met geïnstalleerde apps.
 .RE
 .\"
 .\"
@@ -328,7 +328,7 @@ https://karelzimmer.nl
 \fBkz install\fR
 .RS
 Installeer alles wat in de standaard installatiebestenden staat.
-Hiervoor is ook starter 'Apps installeren' beschikbaar.
+Hiervoor is ook starter \fBApps installeren\fR beschikbaar.
 .RE
 .sp
 \fBkz install google-chrome\fR

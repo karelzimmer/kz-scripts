@@ -17,7 +17,6 @@ RELEASE_YEAR=2013
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:filrs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,list,\
 reset,simulate"
@@ -297,19 +296,20 @@ $HOSTNAME.sh
 
 
 function process_option_list {
-    local list_dir="$HOME/$PROGRAM_NAME"
+    test -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs &&
+        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/$PROGRAM_NAME
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
-    local file1="$list_dir/1-$PROGRAM_NAME-gebruikersfoto"
+    local file1="$docs_dir/1-$PROGRAM_NAME-gebruikersfoto"
     local text2='[2/4]  Bureaubladachtergrond vastleggen'
-    local file2="$list_dir/2-$PROGRAM_NAME-bureaubladachtergrond"
+    local file2="$docs_dir/2-$PROGRAM_NAME-bureaubladachtergrond"
     local text3='[3/4]  Favorieten vastleggen'
-    local file3="$list_dir/3-$PROGRAM_NAME-favorieten"
+    local file3="$docs_dir/3-$PROGRAM_NAME-favorieten"
     local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
-    local file4="$list_dir/4-$PROGRAM_NAME-opdrachtgeschiedenis"
+    local file4="$docs_dir/4-$PROGRAM_NAME-opdrachtgeschiedenis"
 
-    rm --force --recursive "$list_dir"
-    mkdir --parents "$list_dir"
+    mkdir --parents "$docs_dir"
 
     TITLE='Instellijst maken'
     if $OPTION_GUI; then

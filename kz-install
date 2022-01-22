@@ -51,8 +51,6 @@ DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
 readonly EDITION_DEFAULT=desktop
 SPACES=$(printf '%.0s ' {1..79}); readonly SPACES
 VERSION=$(lsb_release --release --short); readonly VERSION
-readonly LIST_DIR=$HOME/$PROGRAM_NAME
-readonly LIST_FILE=$LIST_DIR/${PROGRAM_NAME}-applist
 CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE
 CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE2
 TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text"); readonly TEXT_FILE
@@ -296,11 +294,15 @@ function process_input {
 
 function process_option_list {
     local text0='Opdrachten worden verwerkt'
-    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geinstalleerd"
-    local text3='[2/3]  Bepaal welke snaps zijn geinstalleerd'
+    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
+    local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
     local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
+    test -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs &&
+        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/$PROGRAM_NAME
+    local app_list=$docs_dir/${PROGRAM_NAME}-applist
 
-    mkdir --parents "$LIST_DIR" |& $LOGCMD
+    mkdir --parents "$docs_dir" |& $LOGCMD
 
     TITLE='Applijst maken'
     if $OPTION_GUI; then
@@ -327,19 +329,19 @@ function process_option_list {
     fi
 
     info "
-De applijst is vastgelegd in bestand $LIST_FILE.
-Dit bestand bevatten de eerder geinstalleerde apps.
+De applijst is vastgelegd in bestand $app_list.
+Dit bestand bevatten de eerder geïnstalleerde apps.
 Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 
 function create_list_manual_installed {        #1
-    local       header="1. Deze pakketten zijn handmatig geinstalleerd via \
+    local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
 Software of
    met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
     local       footer=''
     local   -i  number_of_lines=0
-    local       plural='geinstalleerde pakketten'
+    local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text1..."
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
@@ -349,17 +351,17 @@ Software of
     number_of_lines=$(wc --lines < "$TEMP_LIST")
     number_of_lines=$((number_of_lines - 4))
     if [[ $number_of_lines -eq 1 ]]; then
-        plural='geinstalleerd pakket'
+        plural='geïnstalleerd pakket'
     fi
     footer="Dit overzicht bevat $number_of_lines handmatig $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
-    cat "$TEMP_LIST" > "$LIST_FILE"
+    cat "$TEMP_LIST" > "$app_list"
 }
 
 
 function create_list_snaps {                   #2
-    local       header="2. Deze snaps zijn geinstalleerd met '[sudo] install \
+    local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
 <snap>' of met Software:"
     local       footer=''
     local   -i  number_of_lines=0
@@ -369,7 +371,7 @@ function create_list_snaps {                   #2
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
-        TEXT='snap is niet geinstalleerd op dit systeem'
+        TEXT='snap is niet geïnstalleerd op dit systeem'
         printf '%s\n' "$TEXT" >> "$TEMP_LIST"
     fi
 
@@ -381,7 +383,7 @@ function create_list_snaps {                   #2
     footer="Dit overzicht bevat $number_of_lines $plural."
     printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
-    cat "$TEMP_LIST" >> "$LIST_FILE"
+    cat "$TEMP_LIST" >> "$app_list"
 }
 
 
@@ -419,7 +421,7 @@ installatie van een pakket of
     footer="Dit overzicht bevat $number_of_lines toegevoegde $plural."
     printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
 
-    cat "$TEMP_LIST" >> "$LIST_FILE"
+    cat "$TEMP_LIST" >> "$app_list"
 }
 
 

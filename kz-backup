@@ -17,74 +17,31 @@ RELEASE_YEAR=2007
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=true
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'e:t:'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',exclude:,target:'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-e|--exclude=UITSLUITEN]... \
-[-t|--target=DOELMAP]
-                   $OPTIONS_USAGE_COMMON
-                   [SELECTIE...]"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [SELECTIE...]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'nx'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',dry-run,delete'
+readonly USAGE="Gebruik: $DISPLAY_NAME [-n|--dry-run] [-x|--delete]
+                   $OPTIONS_USAGE_COMMON"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Back-up maken.
 
 Opties:
-  -e --exclude=UITSLUITEN
-                sluit opgegeven bestand of map uit
-  -t --target=DOELMAP
-                plaats back-up in de DOELMAP
-$OPTIONS_HELP_COMMON
+  -n --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
+  -x --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
+                back-up verwijderen (standaard bij optie --gui)
+$OPTIONS_HELP_COMMON"
 
-Argumenten:
-  SELECTIE      maak back-up van opgegeven mappen en bestanden"
-
-readonly EXCLUDEFILE_DEFAULT=/usr/local/etc/$PROGRAM_NAME-exclude-dflt
-readonly EXCLUDEFILE_DEFAULT_CONTENT="\
-/dev
-/home/*/.adobe/Flash_Player/AssetCache
-/home/*/.cache
-/home/*/.ccache
-/home/*/.gvfs
-/home/*/.Private
-/home/*/.recent-applications.xbel
-/home/*/.recently-used.xbel
-/home/*/snap/*/*/.cache
-/home/*/.steam/root
-/home/*/.thumbnails
-/home/*/.var/app/*/cache
-/home/*/.xsession-errors
-/proc
-/run
-/sys
-/tmp"
-readonly EXCLUDEFILE_OPTIONAL=/usr/local/etc/$PROGRAM_NAME-exclude-opt
-readonly TARGET_DEFAULT_1=/media
-readonly TARGET_DEFAULT_2=$PROGRAM_NAME
-readonly TARGET_DEFAULT_3=$PROGRAM_NAME-$HOSTNAME-$DISTRO
-# Conform ISO 8601.
-TIMESTAMP=$(date +%Y-%m-%dT%H:%M); readonly TIMESTAMP
-
+readonly SOURCE=$HOME
+TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null); readonly TARGET
 
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
 
-declare -a  EXCLUDE_ARGUMENT=()
-declare     ARGUMENT_SELECTION=false
-declare -a  SELECTION=()
-declare -a  SELECTION_ARGUMENT=()
-declare -a  SELECTION_DEFAULT=('/home')
-declare     BACKUP=''
-declare     BACKUP_CREATED=false
-declare     BACKUPFILE=''
-declare     BACKUP_TO_DELETE=''
-declare -i  SELECTIONSIZE_MACHINE=0
-declare     OPTION_EXCLUDE=false
-declare     OPTION_TARGET=false
-declare     SELECTIONSIZE_HUMAN=''
-declare     SPACE_OK=true
-declare     TARGET_ARGUMENT=''
-declare     TARGET='/mnt'
+declare BACKUP_CREATED=false
+declare OPTION_DELETE=''
+declare OPTION_DRY_RUN=''
+declare SPACE_OK=false
 
 
 ###############################################################################
@@ -92,11 +49,6 @@ declare     TARGET='/mnt'
 ###############################################################################
 
 function check_input {
-    local       exclude=''
-    local   -i  exclude_arg_num=0
-    local   -i  select_arg_num=0
-    local   -i  select_num=0
-    local       select=''
     local   -i  getopt_rc=0
     local       parsed=''
 
@@ -116,24 +68,13 @@ function check_input {
 
     while true; do
         case $1 in
-            -e|--exclude)
-                OPTION_EXCLUDE=true
-                EXCLUDE_ARGUMENT[$exclude_arg_num]=$2
-                ((++exclude_arg_num))
-                shift 2
+            -n|--dry-run)
+                OPTION_DRY_RUN='--dry-run'
+                shift
                 ;;
-            -t|--target)
-                if $OPTION_TARGET; then
-                    TEXT="optie '$1' eennmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
-                else
-                    OPTION_TARGET=true
-                    TARGET_ARGUMENT=$2
-                fi
-                shift 2
+            -x|--delete)
+                OPTION_DELETE='--delete'
+                shift
                 ;;
             --)
                 shift
@@ -145,196 +86,29 @@ function check_input {
         esac
     done
 
-    if $OPTION_EXCLUDE; then
-        for exclude in "${EXCLUDE_ARGUMENT[@]}"; do
-            if ! [[ -e $exclude ]]; then
-                TEXT="exclude bestand of map '$exclude' bestaat niet"
-                printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                        "$TEXT"                     \
-                        "$USAGELINE"                >&2
-                exit    $ERROR
-            fi
-        done
+    if [[ "$*" ]]; then
+        TEXT='geen argumenten opgeven'
+        printf  "$DISPLAY_NAME: %s\n%s\n"   \
+                "$TEXT"                     \
+                "$USAGELINE"                >&2
+        exit    $ERROR
     fi
-
-    while [[ "$*" ]]; do
-        ARGUMENT_SELECTION=true
-        SELECTION_ARGUMENT[$select_arg_num]=$1
-        ((++select_arg_num))
-        shift
-    done
 
     check_user
-
-    # Na check_user voor toegang tot media.
-    if $ARGUMENT_SELECTION; then
-        for select in "${SELECTION_ARGUMENT[@]}"; do
-            if ! [[ -e $select ]]; then
-                TEXT="selectie bestand of map '$select' bestaat niet"
-                printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                        "$TEXT"                     \
-                        "$USAGELINE"                >&2
-                exit    $ERROR
-            fi
-        done
-        for select_num in "${!SELECTION_ARGUMENT[@]}"; do
-            SELECTION[$select_num]=$(
-                readlink --canonicalize "${SELECTION_ARGUMENT[$select_num]}"
-                )
-        done
-    else
-        for select_num in "${!SELECTION_DEFAULT[@]}"; do
-            SELECTION[$select_num]="${SELECTION_DEFAULT[$select_num]}"
-        done
-    fi
-
-    request_input
-}
-
-
-function request_input {
-    local   -A  media=()
-    local       media2=false
-    local       media_found=false
-    local       medium=''
-
-    if $OPTION_TARGET; then
-        TARGET=$TARGET_ARGUMENT
-        media_found=true
-    else
-        # Vul associatief array met aangekoppelde media-namen.
-        while read -r medium; do
-            if $media_found; then
-                # Meer dan één aangekoppeld medium gevonden.
-                media2=true
-            fi
-            media_found=true
-            media[$medium]=$medium
-            TARGET=$medium/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3
-        done < <(
-            # findmnt wordt door mount aangeraden, speciaal voor in scripts, en
-            # options=rw om alleen beschrijfbare bestandssystemen gebruiken (en
-            # bijvoorbeeld geen iso9660; d.i. een CD of DVD).
-            findmnt --list          \
-                    --noheadings    \
-                    --options=rw    \
-                    --output=TARGET |
-            grep    --word-regexp   \
-                    --regexp=$TARGET_DEFAULT_1 || true
-            )
-    fi
-    if $media2; then
-        # Meer dan één aangekoppeld medium gevonden.
-        media_found=false
-    fi
-    if $media_found; then
-        mkdir --parents "$TARGET" |& $LOGCMD
-        if [[ "$TARGET" == /media/* ]]; then
-            chown   1000:1000                                           \
-                    "${media[*]}/$TARGET_DEFAULT_2"                     \
-                    "${media[*]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   \
-                    |& $LOGCMD
-            chmod   a=rwx                                               \
-                    "${media[*]}/$TARGET_DEFAULT_2"                     \
-                    "${media[*]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"   \
-                    |& $LOGCMD
-        fi
-    else
-        if $OPTION_GUI; then
-            request_input_gui
-        else
-            request_input_tui
-        fi
-    fi
-
-    BACKUPFILE=$PROGRAM_NAME-$HOSTNAME-$DISTRO-$TIMESTAMP.tar
-    BACKUP=$TARGET/$BACKUPFILE
-}
-
-
-function request_input_gui {
-    local -i dir_selected=0
-
-    TITLE='Kies een map om de back-up in te plaatsen'
-    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-    # Voorbeeld: Unable to init server: Kon niet verbinden:
-    #            Verbinding is geweigerd
-    #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
-    #            cannot open display:
-    TARGET="$(
-        zenity  --file-selection            \
-                --width     600             \
-                --height    50              \
-                --title     "$TITLE"        \
-                --filename  "$TARGET"       \
-                --directory                 2> >($LOGCMD)
-        )"      || dir_selected=$?
-    if [[ $dir_selected -ne $SUCCESS ]]; then
-        warning 'Geen map geselecteerd.
-
-Geen back-up gemaakt!'
-        exit $WARNING
-    fi
-}
-
-
-function request_input_tui {
-    declare medium=''
-
-    TEXT="Gebruik optie target om op te geven waar de back-up geplaatst moet \
-worden."
-    printf '%s\n' "$TEXT" >&2
-    if $media2; then
-        # Meer dan één aangekoppeld medium gevonden.
-        printf '%s\n' "Voeg één van de volgende opties toe voor de nu \
-aangekoppelde media:"
-        for medium in "${!media[@]}"; do
-            printf  "    ${BLUE}--target %s\n${NORMAL}" \
-                    "${media[$medium]}/$TARGET_DEFAULT_2/$TARGET_DEFAULT_3"
-        done
-    else
-        printf '%s\n' "Voorbeeld: $DISPLAY_NAME --target DOELMAP"
-    fi
-    printf '%s\n' "$USAGELINE" >&2
-    exit $SUCCESS
 }
 
 
 function process_input {
-    local size_num=0
-    local size_unit=''
 
-    printf '%s\n' "$EXCLUDEFILE_DEFAULT_CONTENT" > "$EXCLUDEFILE_DEFAULT"
-
-    if $OPTION_EXCLUDE; then
-        for exclude in "${EXCLUDE_ARGUMENT[@]}"; do
-            printf '%s\n' "$exclude" >> "$EXCLUDEFILE_OPTIONAL"
-        done
-    else
-        printf '\n' > "$EXCLUDEFILE_OPTIONAL"
+    if [[ -z $TARGET ]]; then
+        error 'Sluit een USB-medium aan.'
+        exit $WARNING
+    elif [[ $(echo "$TARGET" | wc --lines) -gt 1 ]]; then
+        error "Sluit niet meer dan één USB-medium aan, nu:\n$TARGET"
+        exit $WARNING
     fi
 
-    TEXT='Bepaal grootte van de back-up (kan even duren)...'
-    if $OPTION_GUI; then
-        TITLE='Back-up maken'
-        # Met "|& zenity --progress" worden globale variabelen uit
-        # aangeroepen functies niet doorgegeven, vandaar de
-        # 'process substitution' met "> >(zenity...)".
-        determine_selection_size > >(
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$TITLE"    \
-                    --text      "$TEXT"     2> >($LOGCMD)
-            )
-    else
-        info "$TEXT"
-        determine_selection_size
-    fi
-
+    TITLE='Back-up maken'
     TEXT='Controleer beschikbare schijfruimte (kan even duren)...'
     if $OPTION_GUI; then
         check_space > >(
@@ -353,10 +127,7 @@ function process_input {
     fi
 
     if $SPACE_OK; then
-        size_num=${SELECTIONSIZE_HUMAN%?}
-        size_unit=${SELECTIONSIZE_HUMAN: -1}
-        TEXT="Backup van ${SELECTION[*]} [$size_num ${size_unit}iB] naar \
-$TARGET/$BACKUPFILE maken..."
+        TEXT='Backup maken...'
         check_on_ac_power
         create_backup
     fi
@@ -368,50 +139,31 @@ $TARGET/$BACKUPFILE maken..."
 }
 
 
-function determine_selection_size {
-    SELECTIONSIZE_HUMAN=$(
-        du  --apparent-size                         \
-            --block-size=1                          \
-            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
-            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
-            --human-readable                        \
-            --summarize                             \
-            --total                                 \
-            "${SELECTION[@]}"                       \
-            2> >($LOGCMD)                           |
-        awk 'END{print $1}'
-        )
-
-    SELECTIONSIZE_MACHINE=$(
-        du  --apparent-size                         \
-            --block-size=1                          \
-            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
-            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
-            --summarize                             \
-            --total                                 \
-            "${SELECTION[@]}"                       \
-            2> >($LOGCMD)                           |
-        awk 'END{print $1}'
-        )
-}
-
-
 function check_space {
     local       filesys=''
     local       free_human=''
-    local   -i  free_bytes=0
-    local   -i  sourcedir_size_bytes=0
     local       mounted=''
+    local       need_human=''
+    local   -i  free_bytes=0
+    local   -i  need_bytes=0
 
-    sourcedir_size_bytes=$(
-        du  --apparent-size                         \
-            --block-size=1                          \
-            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
-            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
-            --summarize                             \
-            --total                                 \
-            "${SELECTION[@]}"                       \
-            2> >($LOGCMD)                           |
+    need_human=$(
+        du  --apparent-size     \
+            --block-size=1      \
+            --human-readable    \
+            --summarize         \
+            --total             \
+            "$SOURCE"           \
+            2> >($LOGCMD)       |
+        awk 'END{print $1}'
+        )
+    need_bytes=$(
+        du  --apparent-size \
+            --block-size=1  \
+            --summarize     \
+            --total         \
+            "$SOURCE"       \
+            2> >($LOGCMD)   |
         awk 'END{print $1}'
         )
     free_bytes=$(
@@ -420,7 +172,7 @@ function check_space {
             awk 'END{print $4}'
         )
 
-    if [[ $sourcedir_size_bytes -gt $free_bytes ]]; then
+    if [[ $need_bytes -gt $free_bytes ]]; then
         free_human=$(
             df  --human-readable \
                 "$TARGET"        |
@@ -434,17 +186,17 @@ function check_space {
             df  "$TARGET"        |
             awk 'END{print $6}'
             )
-        warning "
-Kan geen back-up plaatsen.
+        error "
+Kan geen back-up maken.
 
-Te weinig schijfruimte op $mounted (bestandssysteem $filesys)
-voor het plaatsen van back-up $BACKUPFILE.
+Te weinig ruimte op $mounted
+(bestandssysteem $filesys).
 
-Benodigd is ${SELECTIONSIZE_HUMAN}iB, beschikbaar is ${free_human}iB.
+Benodigd is ${need_human}iB, beschikbaar is ${free_human}iB.
 
-Maak ruimte vrij op $mounted (bestandssysteem $filesys),
-of gebruik een ander medium met minimaal ${SELECTIONSIZE_HUMAN}iB beschikbaar
-zoals een USB-stick of externe harddisk."
+Gebruik een ander medium met minimaal ${need_human}iB beschikbaar,
+zoals een USB-stick of externe harddisk.
+"
         SPACE_OK=false
     else
         SPACE_OK=true
@@ -453,97 +205,84 @@ zoals een USB-stick of externe harddisk."
 
 
 function create_backup {
-    local   -i  size_num=0
-    local   -i  tar_rc=0
-    local   -i  sync_rc=0
-    local       size_unit=''
+    local       backup=backup-$HOSTNAME-$USER
+    local   -i  rsync_rc=0
+    local       exclude=''
 
-    BACKUP_TO_DELETE=$BACKUP
+    exclude=$(mktemp -t 'kz-backup-XXXXXXXXXX')
+
+    # Backup solution Déjà Dup exclude these files by default.
+    cat << EOF > "$exclude"
+.adobe/Flash_Player/AssetCache
+.cache
+.ccache
+.gvfs
+.Private
+.recent-applications.xbel
+.recently-used.xbel
+snap/*/*/.cache
+.steam/root
+.thumbnails
+.var/app/*/cache
+.xsession-errors
+EOF
 
     if $OPTION_GUI; then
-        tar --create                                \
-            --directory=/                           \
-            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
-            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
-            --file=-                                \
-            "${SELECTION[@]}"                       \
-            2> >($LOGCMD)                           |
-        (
-        pv  --numeric                               \
-            --size="$SELECTIONSIZE_MACHINE"         \
-            > "$BACKUP"
-        )   2>&1                                    |
-        zenity  --progress                          \
-                --auto-close                        \
-                --no-cancel                         \
-                --time-remaining                    \
-                --width     600                     \
-                --height    50                      \
-                --title     "$TITLE"                \
-                --text      "$TEXT"                 2> >($LOGCMD) || tar_rc=$?
+        rsync   --archive                   \
+                --verbose                   \
+                --delete                    \
+                --exclude-from="$exclude"   \
+                --delete-excluded           \
+                "$SOURCE"/                  \
+                "$TARGET/$backup"           \
+                2> >($LOGCMD)               |
+        awk     '{print "#"$0}'             |
+        zenity  --progress                  \
+                --auto-close                \
+                --no-cancel                 \
+                --pulsate                   \
+                --width 600                 \
+                --height 50                 \
+                --title "$TITLE"            \
+                --text "$TEXT"              2> >($LOGCMD) || rsync_rc=$?
     else
-        info "$TEXT"
-        tar --create                                \
-            --directory=/                           \
-            --exclude-from="$EXCLUDEFILE_DEFAULT"   \
-            --exclude-from="$EXCLUDEFILE_OPTIONAL"  \
-            --file=-                                \
-            "${SELECTION[@]}"                       \
-            2> >($LOGCMD)                           |
-        pv  --size="$SELECTIONSIZE_MACHINE"         \
-        >   "$BACKUP" || tar_rc=$?
+        rsync   --archive                   \
+                --verbose                   \
+                --human-readable            \
+                $OPTION_DRY_RUN             \
+                $OPTION_DELETE              \
+                --exclude-from="$exclude"   \
+                "$SOURCE"/                  \
+                "$TARGET/$backup"           2> >($LOGCMD) || rsync_rc=$?
     fi
+    rm "$exclude"
 
-    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (kan even duren)...'
-    if $OPTION_GUI; then
-        sync                                        |
-        zenity  --progress                          \
-                --pulsate                           \
-                --auto-close                        \
-                --no-cancel                         \
-                --width     600                     \
-                --height    50                      \
-                --title     "$TITLE"                \
-                --text      "$TEXT"                 2> >($LOGCMD) || sync_rc=$?
-    else
-        info "$TEXT"
-        sync || sync_rc=$?
+    if [[ $rsync_rc -eq 11 ]]; then
+        log 'Te weinig ruimte.'
+    elif [[ $rsync_rc -eq 23 ]]; then
+        log 'Niet alle bestanden waren leesbaar.'
+        rsync_rc=0
     fi
+    if [[ $rsync_rc -ne $SUCCESS ]]; then
+        error "
+Back-up maken is mislukt.
 
-    # tar_rc=0 Succesvolle beëindiging.
-    # tar_rc=1 Sommige bestanden verschillen.  Deze afsluitcode betekent dat
-    #   sommige bestanden zijn gewijzigd tijdens het archiveren en dus bevat
-    # het resulterende archief niet de exacte kopie van de bestandsset.
-    # tar_rc=2 Fatale fout.  Dit betekent dat er een fatale, onherstelbare fout
-    #   is opgetreden.
-    if [[ $tar_rc -eq 1 ]]; then
-        log "Sommige bestanden zijn gewijzigd tijdens het maken van de \
-back-up en deze wijzigingen zijn niet opgenomen in de gemaakte back-up."
-    fi
-    if [[ ($tar_rc -ne $SUCCESS && $tar_rc -ne 1) || $sync_rc -ne $SUCCESS ]]
-    then
-        error "Back-up maken is mislukt.
-
-Controleer de meldingen in de log met de opdracht:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}
+Controleer in het Terminalvenster de log met:
+    ${BLUE}$LOGCMD_CHECK${RED}
 
 Geen back-up gemaakt!"
         exit $ERROR
     fi
 
-    BACKUP_TO_DELETE=''
     BACKUP_CREATED=true
 }
 
 
 function term_script {
-    TEXT='De back-up is gemaakt.'
-    if [[ "$TARGET" == /media/* ]]; then
-        TEXT="$TEXT
+    info '
+De back-up is gemaakt.
 
-Koppel zelf (veilig!) het back-up-medium af."
-    fi
-    info "$TEXT"
+Koppel zelf (veilig!) het back-up-medium af.'
     exit $SUCCESS
 }
 

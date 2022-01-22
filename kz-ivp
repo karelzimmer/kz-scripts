@@ -17,7 +17,6 @@ RELEASE_YEAR=2015
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
@@ -80,18 +79,10 @@ function check_input {
     # Een non-gui script gestart met optie gui.
     if $OPTION_GUI; then
         OPTION_GUI=false
-        DESKTOP_TERMINAL=false
     fi
 
     check_user
-
-    # Regel sudo maar gelijk voor verderop.
-    prompt="Authenticatie is vereist voor onderdelen van '$DISPLAY_NAME'.
-[sudo] wachtwoord voor %p: "
-    sudo --prompt="$prompt" true
-
     check_dependencies
-
 }
 
 
@@ -143,124 +134,11 @@ function process_input {
             *)
                 check_release_year
                 check_code
-                check_functional
+                check_version
                 ;;
         esac
     done
     cd "$HOME" || exit $ERROR
-}
-
-
-function check_functional {
-    local -i check_rc=0
-
-    "$scriptsdir/$script" --version |& $LOGCMD || check_rc=$?
-    if [[ $check_rc -gt $SUCCESS ]]; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --version' gaat fout."
-        if [[ $ERROR -gt $MAXRC ]]; then
-            MAXRC=$ERROR
-        fi
-    fi
-
-    case $script in
-        kz-backup)
-            log "Check $script."
-            sudo "$scriptsdir/$script"  --target                \
-                                        /tmp                    \
-                                        /home/karel/kz-scripts  |& $LOGCMD  ||
-            check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --target /tmp /home/karel/kz-scripts' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        kz-install)
-            log "Check $script."
-            sudo "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script bitwarden' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --info' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --remove |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --remove' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        kz-restore)
-            log "Check $script."
-            printf                  '%s\n'              \
-                                    '1'                 |
-            sudo "$scriptsdir/$script"  --target        \
-                                        /tmp            \
-                                        --source /tmp   |& $LOGCMD  ||
-            check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --target /tmp --source /tmp' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        kz-setup)
-            log "Check $script."
-            "$scriptsdir/$script" bitwarden |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script bitwarden' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --info |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --info' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            "$scriptsdir/$script" --reset |& $LOGCMD || check_rc=$?
-            if [[ $check_rc -gt $SUCCESS ]]; then
-                info "
-${BOLD}In $script:${NORMAL}
-    Uitvoeren '$script --reset' gaat fout."
-                if [[ $ERROR -gt $MAXRC ]]; then
-                    MAXRC=$ERROR
-                fi
-            fi
-            ;;
-        *)
-            return $SUCCESS
-            ;;
-    esac
 }
 
 
@@ -353,6 +231,16 @@ $(
 }
 
 
+function check_shellcheck {
+    local -i    check_rc=0
+
+    shellcheck --external-sources "$script" 2> >($LOGCMD) || check_rc=$?
+    if [[ $check_rc -gt $MAXRC ]]; then
+        MAXRC=$check_rc
+    fi
+}
+
+
 function check_release_year {
     if ! grep   --quiet                     \
                 --regexp='RELEASE_YEAR='    \
@@ -372,20 +260,18 @@ ${BOLD}In $script:${NORMAL}
 function check_tags {
     if grep --quiet             \
             --word-regexp       \
-            --regexp='#''XXX'   \
-            --regexp='#''TODO'  \
-            --regexp='#''FIXME' \
+            --regexp='FIXME'':' \
+            --regexp='TODO'':'  \
             "$script"; then
         info "
 ${BOLD}In $script:${NORMAL}
-    Gedit-tags gevonden.
+    TODO-label gevonden.
 
 $(
     grep    --line-number           \
             --word-regexp           \
-            --regexp='#''XXX'       \
-            --regexp='#''TODO'      \
-            --regexp='#''FIXME'     \
+            --regexp='FIXME'':'     \
+            --regexp='TODO'':'      \
             "$script"               |
     nl      --number-width=4        \
             --number-separator=''   \
@@ -415,22 +301,27 @@ $(
 }
 
 
-function check_shellcheck {
-    local -i    check_rc=0
-
-    shellcheck --external-sources "$script" 2> >($LOGCMD) || check_rc=$?
-    if [[ $check_rc -gt $MAXRC ]]; then
-        MAXRC=$check_rc
-    fi
-}
-
-
 function check_pycodestyle {
     local -i check_rc=0
 
     pycodestyle "$script" || check_rc=$?
     if [[ $check_rc -gt $MAXRC ]]; then
         MAXRC=$check_rc
+    fi
+}
+
+
+function check_version {
+    local -i check_rc=0
+
+    "$scriptsdir/$script" --version |& $LOGCMD || check_rc=$?
+    if [[ $check_rc -gt $SUCCESS ]]; then
+        info "
+${BOLD}In $script:${NORMAL}
+    Uitvoeren '$script --version' gaat fout."
+        if [[ $ERROR -gt $MAXRC ]]; then
+            MAXRC=$ERROR
+        fi
     fi
 }
 

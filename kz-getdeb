@@ -24,7 +24,6 @@ RELEASE_YEAR=2016
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
@@ -59,6 +58,7 @@ readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
+declare DESKTOP_TERMINAL=false
 
 
 ###############################################################################
@@ -281,18 +281,6 @@ function install_scriptspackage {
             --reinstall                     \
             "$temp_deb"                     |& $LOGCMD
     rm "$temp_deb" |& $LOGCMD
-
-    if ! command -v git 1> /dev/null; then
-        sudo apt-get install --yes git |& $LOGCMD
-    fi
-    git config --global credential.helper store |& $LOGCMD
-    if ! git    clone                                   \
-                https://github.com/karelzimmer/bin.git  \
-                "$BIN_REPO"                             |& $LOGCMD
-    then
-        cd "$BIN_REPO" || exit $ERROR
-        git pull |& $LOGCMD
-    fi
 }
 
 
@@ -308,6 +296,17 @@ function create_development_environment {
 
 
 function process_repos {
+    if ! command -v git 1> /dev/null; then
+        sudo apt-get install --yes git |& $LOGCMD
+    fi
+    git config --global credential.helper store |& $LOGCMD
+    if ! git    clone                                   \
+                https://github.com/karelzimmer/bin.git  \
+                "$BIN_REPO"                             |& $LOGCMD
+    then
+        cd "$BIN_REPO" || exit $ERROR
+        git pull |& $LOGCMD
+    fi
     if ! git    clone                                       \
                 https://github.com/karelzimmer/work.git     \
                 "$WORK_REPO"                                |& $LOGCMD
@@ -384,24 +383,27 @@ function download_website {
 
 
 function term_script {
+    test -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs &&
+        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}
     local search=''
 
     search="/usr/share/doc/kz/Checklist-installatie-$(
             lsb_release --id    \
                         --short
             )"
-    cp  --update "$search"*{desktop,server}.pdf "$HOME" |& $LOGCMD || true
+    cp  --update "$search"*{desktop,server}.pdf "$docs_dir" |& $LOGCMD || true
     cp  --update                                    \
         "$search"*{desktop,server}"-$HOSTNAME".pdf  \
-        "$HOME"                                     |& $LOGCMD || true
+        "$docs_dir"                                 |& $LOGCMD || true
 
-    TEXT='Pakket kz is succesvol geinstalleerd.
+    TEXT='Pakket kz is succesvol geïnstalleerd.
 
 Volg nu de stappen zoals beschreven
 in de Checklist installatie.
 
 Deze checklist is te vinden:
-- in de Persoonlijke map
+- in de map Documenten
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
   onder Linux'

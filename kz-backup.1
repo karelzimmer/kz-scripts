@@ -13,95 +13,57 @@ kz backup \- Back-up maken.
 .\"
 .SH SAMENVATTING
 .B kz backup
-[OPTIE...] [\fISELECTIE\fR...]
+[OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz backup\fR maakt een back-up (reservekopie) van mappen en bestanden.
+\fBkz backup\fR maakt een back-up (reservekopie) van de Persoonlijke map.
 .sp
-Standaard, tenzij \fISELECTIE\fRs zijn opgegeven, wordt er een back-up gemaakt
-van alle Persoonlijke mappen (/home).
-.sp
-De als \fISELECTIE\fR opgegeven mappen of bestanden moeten bestaan, dit wordt
-gecontroleerd.
-.sp
-Opbouw van de back-up-bestandsnaam is\
- 'kz-backup-<computernaam>-<distributie>-jjjj-mm-ddTuu.mm.ss.tar'.
-.sp
-Standaard locatie voor het plaatsen van de back-up is een medium zoals een
-(externe) harddisk, USB-stick, of een NAS op\
- '/media/<mediumnaam>/kz-backup/kz-backup-<computernaam>-<distributie>' (e.g.
-/media/charlie/kz-backup/kz-backup-pc-van-charlie-ubuntu).
-.br
-Als er meer dan één medium is gevonden dient er een locatie opgegeven te
-worden.
-.sp
-Met optie \fB--target\fR (\fB-t\fR) kan een (andere) locatie opgegeven worden.
+De back-up wordt geplaatst op een USB-medium zoals een externe harddisk in map\
+ '\fIaangekoppeld-medium\fR/kz-backup-<computernaam>-<gebruikersnaam>/'
+(e.g. /media/charlie/backupdisk/kz-backup-pc01-charlie/).
 .sp
 Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
 .RS
-/dev
-.br
-/home/*/.adobe/Flash_Player/AssetCache
-.br
-/home/*/.cache
-.br
-/home/*/.ccache
-.br
-/home/.ecryptfs
-.br
-/home/*/.gvfs
-.br
-/home/*/.recent-applications.xbel
-.br
-/home/*/.recently-used.xbel
-.br
-/home/*/snap/*/*/.cache
-.br
-/home/*/snapshots
-.br
-/home/*/.steam/root
-.br
-/home/*/.thumbnails
-.br
-/home/*/.xsession-errors
-.br
-/proc
-.br
-/run
-.br
-/sys
-.br
-/tmp
+ .adobe/Flash_Player/AssetCache
+ .cache
+ .ccache
+ .git
+ .gvfs
+ .Private
+ .recent-applications.xbel
+ .recently-used.xbel
+ snap/*/*/.cache
+ .steam/root
+ .thumbnails
+ .var/app/*/cache
+ .xsession-errors
 .RE
 .sp
-Met optie \fB--exclude\fR (\fB-e\fR) zijn extra mappen en bestanden uit te
-sluiten.
+Optie \fB-n\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
+te brengen. Het wordt meestal gebruikt in combinatie met de \fB-x\fR,
+\fB--delete\fR optie om te zien wat een rsync-commando gaat doen voordat men
+het daadwerkelijk uitvoert.
 .sp
-Voor het maken van de back-up wordt tar gebruikt.
-.br
-De inhoud van de back-up is op te vragen met opdracht:
-.RS
-\fBtar\fR tvf \fIBESTAND\fR [--wildcards \fISELECTIE\fR...]
-.RE
+Optie \fB-d\fR, \fB--delete\fR verwijdert bestanden uit de back-up die niet
+meer voorkomen in de Persoonlijke map.
 .sp
-Met opdracht \fBkz restore\fR zijn individuele -of alle- bestanden en mappen
-uit een back-up te herstellen.
+Voor het maken van de back-up wordt rsync gebruikt.
+.sp
+Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .sp
 In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz backup\fR
 worden gestart door te zoeken naar \fBback\fR, klik op \fBBack-up maken\fR.
-.br
-Dan zal een back-up worden gemaakt van alle Persoonlijke mappen.
 .\"
 .\"
 .SH OPTIES
 .TP
-\fB-e\fR, \fB--exclude=\fIUITSLUITEN\fR
-Sluit bestanden of mappen \fIUITSLUITEN\fR uit.
-Mag meerdere keren opgegeven worden.
+\fB-n\fR, \fB--dry-run\fR
+Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
-\fB-t\fR, \fB--target=\fIDOELMAP\fR
-Plaats back-up in de \fIDOELMAP\fR.
+\fB-x\fR, \fB--delete\fR
+Uit de Persoonlijke map verwijderde bestanden ook uit de back-up verwijderen
+(standaard bij optie \fB-g\fR, \fB--gui\fR).
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -118,7 +80,7 @@ Start in grafische modus (gui = graphical user interface).
 \fB-d\fR, \fB--debug\fR
 Neem foutopsporingsinformatie op in het logboek.
 .br
-Bekijk het logboek met 'journalctl -ab -t kz-backup'.
+Bekijk het logboek met opdracht: \fBjournalctl -ab -t kz-backup\fR
 .\"
 .\"
 .SH STOPSTATUS
@@ -129,23 +91,7 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH MAPPEN
-/media/\fIaangekoppelde-media\fR/kz-backup/kz-backup-<computernaam>-\
-<distributie>/
-.RS
-Als er geen \fIDOEL\fR is opegegeven wordt de back-up in deze map geplaatst.
-.RE
-.\"
-.\"
-.SH BESTANDEN
-/usr/local/etc/kz-backup-exclude-dflt
-.RS
-Standaard uit te sluiten bestanden en mappen.
-.RE
-.sp
-/usr/local/etc/kz-backup-exclude-opt
-.RS
-Opgegeven uit te sluiten bestanden en mappen.
-.RE
+\fIaangekoppeld-medium\fR/kz-backup-<computernaam>-<gebruikersnaam>/
 .\"
 .\"
 .SH NOTITIES
@@ -160,18 +106,9 @@ https://karelzimmer.nl
 .sp
 \fBkz backup\fR
 .RS
-Maak een back-up van de Persoonlijke mappen.
-Hiervoor is ook starter 'Back-up maken' beschikbaar.
-.RE
-.sp
-\fBkz backup --target /tmp /home/*/Documenten\fR
-.RS
-Maak een back-up van alle documenten en plaats deze in map /tmp.
-.RE
-.sp
-\fBkz backup --exclude '*.JPG' /home/*/Afbeeldingen\fR
-.RS
-Maak een back-up van alle foto's maar geen JPG's.
+Maak een back-up van de Persoonlijke map.
+.br
+Hiervoor is ook starter \fBBack-up maken\fR beschikbaar.
 .RE
 .\"
 .\"

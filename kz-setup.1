@@ -38,11 +38,11 @@ De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
-Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB--editie\fR is
-dat aan te passen (e.g. \fIEDITIE\fR server).
+Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
+\fB--editie\fR is dat aan te passen (e.g. \fIEDITIE\fR server).
 .sp
-Optie \fB--files\fR geeft een lijst van beschikbare instellingsbestanden voor
-de huidige distributie, e.g. Ubuntu.
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare
+instellingsbestanden voor de huidige distributie, e.g. Ubuntu.
 .br
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBsetup-\fR' en te eindigen met '\fB.sh\fR'.
@@ -52,8 +52,8 @@ Iets anders wordt beschouwd als een app, zie hierna.
 Voor de indeling van de instellingsbestanden zie sectie \fBBESTANDSINDELING\fR
 hieronder.
 .sp
-Optie \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor de
-huidige distributie, versie, editie, en <computernaam>, e.g. Ubuntu 20.04
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor
+de huidige distributie, versie, editie, en <computernaam>, e.g. Ubuntu 20.04
 desktop, en Ubuntu 20.04 desktop en pc-van-karel.
 .br
 Het is mogelijk om \fIAPP\fRs op te geven.
@@ -66,17 +66,17 @@ Het tijdelijke bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
 Het is mogelijk dat na het uitvoeren van \fBkz setup\fR er extra acties nodig
 zijn.
-Optie \fB--info\fR geeft dan aanvullende instructies weer.
+Optie \fB-i\fR, \fB--info\fR geeft dan aanvullende instructies weer.
 .sp
-Optie \fB--list\fR legt instellingen vast in map \fBkz-setup\fR in de
+Optie \fB-l\fR, \fB--list\fR legt instellingen vast in map \fBkz-setup\fR in de
 Persoonlijke map.
 In deze map bestanden met gegevens over eerder gekozen gebruikersfoto,
 bureaubladachtergrond, en favorieten, en geschiedenis van gebruikte opdrachten.
 .br
 Deze gevens zijn te gebruiken om het instellen te controleren op volledigheid.
 .sp
-Alhoewel \fBkz setup\fR gericht is op het instellen, met optie \fB--reset\fR
-worden er instructies getoond om het instellen ongedaan te maken.
+Alhoewel \fBkz setup\fR gericht is op het instellen, met optie \fB-r\fR,
+\fB--reset\fR worden er instructies getoond om het instellen ongedaan te maken.
 .sp
 In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz setup\fR
 worden gestart door te zoeken naar \fBapps\fR, klik op \fBApps instellen\fR.
@@ -272,7 +272,7 @@ Start in grafische modus (gui = graphical user interface).
 \fB-d\fR, \fB--debug\fR
 Neem foutopsporingsinformatie op in het logboek.
 .br
-Bekijk het logboek met 'journalctl -ab -t kz-setup'.
+Bekijk het logboek met opdracht: \fBjournalctl -ab -t kz-setup\fR
 .\"
 .\"
 .SH STOPSTATUS
@@ -306,22 +306,22 @@ Tijdelijk instellingsbestand.
 Tijdelijk tekstbestand.
 .RE
 .sp
-~/KZ Setup List/1. kz-setup-gebruikersfoto
+~/Documenten/kz-setup/1. kz-setup-gebruikersfoto
 .RS
 Ingestelde gebruikersfoto.
 .RE
 .sp
-~/KZ Setup List/2. kz-setup-bureaubladachtergrond
+~/Documenten/kz-setup/2. kz-setup-bureaubladachtergrond
 .RS
 Ingestelde bureaubladachtergrond.
 .RE
 .sp
-~/KZ Setup List/3. kz-setup-favorieten
+~/Documenten/kz-setup/3. kz-setup-favorieten
 .RS
 Ingestelde favorieten in de Dash.
 .RE
 .sp
-~/KZ Setup List/4. kz-setup-opdrachtgeschiedenis
+~/Documenten/kz-setup/4. kz-setup-opdrachtgeschiedenis
 .RS
 Geschiedenis van gebruikte opdrachten in het Terminalvenster.
 .RE
@@ -340,7 +340,7 @@ https://karelzimmer.nl
 \fBkz setup\fR
 .RS
 Stel in alles wat in de standaard instellingsbestenden staat.
-Hiervoor is ook starter 'Apps instellen' beschikbaar.
+Hiervoor is ook starter \fBApps instellen\fR beschikbaar.
 .RE
 .sp
 \fBkz setup google-chrome\fR
