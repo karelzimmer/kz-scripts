@@ -19,9 +19,14 @@ kz restore \- Back-up terugzetten.
 .SH BESCHRIJVING
 \fBkz restore\fR zet een back-up (reservekopie) van de Persoonlijke map terug.
 .sp
-De back-up wordt verwacht op een medium zoals een externe USB-harddisk in map\
- '\fIaangekoppeld-medium\fR/kz-backup-<computernaam>-<gebruikersnaam>/'
+De back-up wordt verwacht op een aangekoppeld back-up-medium zoals een USB
+externe harddisk in map '\fIaangekoppeld-back-up-medium\fR/kz-backup-\
+<computernaam>-<gebruikersnaam>/'
 (e.g. /media/charlie/backupdisk/kz-backup-pc01-charlie/).
+.sp
+Optie \fB-n\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
+te brengen. Het wordt meestal gebruikt in om te zien wat een rsync-commando
+gaat doen voordat men het daadwerkelijk uitvoert.
 .sp
 Voor het terugzetten van de back-up wordt rsync gebruikt.
 .sp
@@ -33,6 +38,9 @@ worden gestart door te zoeken naar \fBback\fR, klik op
 .\"
 .\"
 .SH OPTIES
+.TP
+\fB-n\fR, \fB--dry-run\fR
+Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -60,7 +68,7 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .\"
 .\"
 .SH MAPPEN
-\fIaangekoppeld-medium\fR/kz-backup-<computernaam>-<gebruikersnaam>/
+\fIaangekoppeld-back-up-medium\fR/kz-backup-<computernaam>-<gebruikersnaam>/
 .\"
 .\"
 .SH NOTITIES

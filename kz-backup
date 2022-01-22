@@ -101,10 +101,15 @@ function check_input {
 function process_input {
 
     if [[ -z $TARGET ]]; then
-        error 'Sluit een USB-medium aan.'
+        warning 'Koppel een back-up-medium aan.'
         exit $WARNING
     elif [[ $(echo "$TARGET" | wc --lines) -gt 1 ]]; then
-        error "Sluit niet meer dan één USB-medium aan, nu:\n$TARGET"
+        warning "Koppel slechts één back-up-medium aan.
+
+Nu aangekoppeld zijn:
+$TARGET
+
+Koppel media af via Bestanden."
         exit $WARNING
     fi
 
@@ -141,22 +146,12 @@ function process_input {
 
 function check_space {
     local       filesys=''
-    local       free_human=''
+    local       capacity_human=''
     local       mounted=''
     local       need_human=''
-    local   -i  free_bytes=0
+    local   -i  capacity_bytes=0
     local   -i  need_bytes=0
 
-    need_human=$(
-        du  --apparent-size     \
-            --block-size=1      \
-            --human-readable    \
-            --summarize         \
-            --total             \
-            "$SOURCE"           \
-            2> >($LOGCMD)       |
-        awk 'END{print $1}'
-        )
     need_bytes=$(
         du  --apparent-size \
             --block-size=1  \
@@ -166,35 +161,30 @@ function check_space {
             2> >($LOGCMD)   |
         awk 'END{print $1}'
         )
-    free_bytes=$(
-        df  --block-size=1  \
-            "$TARGET"       |
-            awk 'END{print $4}'
-        )
+    capacity_bytes=$(df --block-size=1 "$TARGET" | awk 'END{print $2}')
 
-    if [[ $need_bytes -gt $free_bytes ]]; then
-        free_human=$(
-            df  --human-readable \
-                "$TARGET"        |
-                awk 'END{print $4}'
-            )
-        filesys=$(
-            df  "$TARGET"        |
+    if [[ $need_bytes -gt $capacity_bytes ]]; then
+        need_human=$(
+            du  --apparent-size     \
+                --block-size=1      \
+                --human-readable    \
+                --summarize         \
+                --total             \
+                "$SOURCE"           \
+                2> >($LOGCMD)       |
             awk 'END{print $1}'
             )
-        mounted=$(
-            df  "$TARGET"        |
-            awk 'END{print $6}'
-            )
+        capacity_human=$(df --human-readable "$TARGET" | awk 'END{print $2}')
+        filesys=$(df "$TARGET" | awk 'END{print $1}')
+        mounted=$(df "$TARGET" | awk 'END{print $6}')
         error "
 Kan geen back-up maken.
 
-Te weinig ruimte op $mounted
-(bestandssysteem $filesys).
+Te weinig ruimte op $mounted (bestandssysteem $filesys).
 
-Benodigd is ${need_human}iB, beschikbaar is ${free_human}iB.
+Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
 
-Gebruik een ander medium met minimaal ${need_human}iB beschikbaar,
+Gebruik een ander back-up-medium met minimaal ${need_human}iB beschikbaar,
 zoals een USB-stick of externe harddisk.
 "
         SPACE_OK=false
@@ -279,10 +269,10 @@ Geen back-up gemaakt!"
 
 
 function term_script {
-    info '
-De back-up is gemaakt.
+    info "
+De back-up is gemaakt. $OPTION_DRY_RUN $OPTION_DELETE
 
-Koppel zelf (veilig!) het back-up-medium af.'
+Koppel zelf (veilig!) het back-up-medium af."
     exit $SUCCESS
 }
 
