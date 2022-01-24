@@ -378,9 +378,9 @@ $command, code: $rc ($rc_desc)" --priority=debug
     case $signal in
         error)
             error "Programma $PROGRAM_NAME is afgebroken."
-            printf  '%s\n%s\n'                                      \
+            printf  '%s\n    %s\n'                                  \
                     'Controleer in het Terminalvenster de log met:' \
-                    "    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
         exit)
@@ -391,9 +391,9 @@ $command, code: $rc ($rc_desc)" --priority=debug
                 BASH_XTRACEFD=''
                 exec 4>&-
                 printf "${YELLOW}%s\n${NORMAL}" '*** EINDE DEBUG-SESSIE ***'
-                printf '%s\n%s\n'                                       \
+                printf '%s\n    %s\n'                                   \
                         'Controleer in het Terminalvenster de log met:' \
-                        "   ${BLUE}$LOGCMD_CHECK${NORMAL}"
+                        "${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
@@ -404,7 +404,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             warning "Programma $PROGRAM_NAME is onderbroken."
             printf  '%s\n    %s\n'                                  \
                     'Controleer in het Terminalvenster de log met:' \
-                    "    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
     esac
