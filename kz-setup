@@ -579,7 +579,7 @@ function process_option_cat {
                     --filename      "$CMDS_FILE"        \
                     --font          'Ubuntu Mono 12'    \
                     --ok-label      'Oké'               \
-                    --cancel-label  'Annuleren'         2> >($LOGCMD); then
+                    --cancel-label  'Afsluiten'         2> >($LOGCMD); then
             true
         fi
     else
@@ -791,7 +791,7 @@ function term_script {
                         --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
-                        --cancel-label  'Annuleren'         2> >($LOGCMD); then
+                        --cancel-label  'Afsluiten'         2> >($LOGCMD); then
                 true
             fi
         else
@@ -811,7 +811,7 @@ function term_script {
                         --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
-                        --cancel-label  'Annuleren'         2> >($LOGCMD); then
+                        --cancel-label  'Afsluiten'         2> >($LOGCMD); then
                 true
             fi
         else
@@ -833,7 +833,7 @@ function term_script {
                         --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
                         --ok-label      'Oké'               \
-                        --cancel-label  'Annuleren'         2> >($LOGCMD); then
+                        --cancel-label  'Afsluiten'         2> >($LOGCMD); then
                 true
             fi
         else
