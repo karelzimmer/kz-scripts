@@ -213,7 +213,7 @@ function process_input {
                                 continue
                                 ;;
                             n*|N*|'')
-                                printf '%s\n' 'Klaar.'
+                                info 'Klaar.'
                                 break
                                 ;;
                             *)
@@ -225,10 +225,11 @@ function process_input {
                     break
                     ;;
                 o*|O*|'')
-                    printf '%s\n' 'Overgeslagen.'
+                    info 'Overgeslagen.'
                     break
                     ;;
                 s*|S*)
+                    info 'Gestopt.'
                     exit $SUCCESS
                     ;;
                 *)

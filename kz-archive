@@ -173,10 +173,11 @@ function process_archive {
                 break
                 ;;
             o*|O*|'')
-                printf '%s\n' 'Overgeslagen.'
+                info 'Overgeslagen.'
                 break
                 ;;
             s*|S*)
+                info 'Gestopt.'
                 exit $SUCCESS
                 ;;
             *)
@@ -196,7 +197,7 @@ function archive_file {
     newdir=${olddir//dist/app}
     newdir=${newdir//linux/linux-archief}
     mv "$olddir/$basename" "$newdir" |& $LOGCMD
-    printf '%s\n' 'Gearchiveerd.'
+    info 'Gearchiveerd.'
     ARCHIVED=true
 }
 
@@ -212,10 +213,11 @@ function process_delete {
                 break
                 ;;
             o*|O*|'')
-                printf '%s\n' 'Overgeslagen.'
+                info 'Overgeslagen.'
                 break
                 ;;
             s*|S*)
+                info 'Gestopt.'
                 exit $SUCCESS
                 ;;
             *)
@@ -229,7 +231,7 @@ function process_delete {
 
 function delete_file {
     rm "$file" |& $LOGCMD
-    printf '%s\n' 'Verwijderd.'
+    info 'Verwijderd.'
     DELETED=true
 }
 

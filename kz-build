@@ -393,9 +393,9 @@ function build_background_properties_file {
     </wallpaper>"           \
             >> "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
     done
-    printf  '%s\n' \
-            '</wallpapers>' >> "${TARGET_DEB[BACKGROUND_PROP]}/\
-$wallpapers_config_file"
+    printf  '%s\n'          \
+            '</wallpapers>' \
+            >> "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
     cd "$HOME"
 }
 
