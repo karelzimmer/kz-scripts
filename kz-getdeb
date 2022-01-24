@@ -172,7 +172,7 @@ Mogelijke oorzaak:
                                         --title     'Gestopt'       \
                                         --infobox   "$TEXT"         \
                                         7 42
-                    exit        $SUCCESS
+                    exit $SUCCESS
                 fi
             fi
         done

@@ -117,10 +117,8 @@ function check_input {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                "$TEXT"                     \
-                "$USAGELINE"                >&2
-        exit    $ERROR
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        exit $ERROR
     fi
 
     # Aangemeld als ontwikkelaar?
@@ -134,10 +132,8 @@ function check_input {
         :
     else
         TEXT='alleen uitvoeren als ontwikkelaar'
-        printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                "$TEXT"                     \
-                "$USAGELINE"                >&2
-        exit    $ERROR
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        exit $ERROR
     fi
 
     # Een non-gui script gestart met optie gui.
@@ -256,9 +252,8 @@ function build_uploads {
                 "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-pagina.
-                man     --troff                                 \
-                        "${SOURCE_UPLOADS[SCRIPTS]}/$file"      |
-                ps2pdf  - "${TARGET_UPLOADS[PDFS]}/$file.pdf"   |& $LOGCMD
+                man --troff "${SOURCE_UPLOADS[SCRIPTS]}/$file"  |
+                ps2pdf - "${TARGET_UPLOADS[PDFS]}/$file.pdf"    |& $LOGCMD
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
                 #
@@ -383,18 +378,17 @@ function build_background_properties_file {
         # /usr/share/backgrounds/kz-gnome.png
         filename=${TARGET_DEB[BACKGROUNDS]}/$wallpaper
         filename=${filename/$DEB_DISTDIR/}
-        printf '%s\n' "    <wallpaper>
+        printf '    %s\n' "<wallpaper>
         <name>${wallpaper%.*}</name>
         <filename>$filename</filename>
         <options>zoom</options>
         <pcolor>#000000</pcolor>
         <scolor>#000000</scolor>
         <shade_type>solid</shade_type>
-    </wallpaper>"           \
+    </wallpaper>" \
             >> "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
     done
-    printf  '%s\n'          \
-            '</wallpapers>' \
+    printf '%s\n' '</wallpapers>' \
             >> "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
     cd "$HOME"
 }

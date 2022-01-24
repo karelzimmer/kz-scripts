@@ -216,8 +216,7 @@ ${BOLD}In $script:${NORMAL}
 ${BOLD}In $script:${NORMAL}
     Foutieve regel(s) gevonden.
 $(
-        printf  '%s'                    \
-                "$wrong_record"         |
+        printf  '%s' "$wrong_record"    |
         nl      --number-width=8        \
                 --number-separator=''   \
                 --body-numbering=n

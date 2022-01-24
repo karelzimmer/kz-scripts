@@ -91,10 +91,8 @@ function check_input {
             --addappfolder)
                 if $OPTION_ADDAPPFOLDER; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_ADDAPPFOLDER=true
                 fi
@@ -103,16 +101,12 @@ function check_input {
             --addfavbegin)
                 if $OPTION_addfavbegin; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
                     exit $ERROR
                 elif ($OPTION_addfavend || $OPTION_REMOVEFAV); then
                     TEXT='een optie eenmaal opgeven'
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_addfavbegin=true
                 fi
@@ -121,16 +115,12 @@ function check_input {
             --addfavend)
                 if $OPTION_addfavend; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
                     exit $ERROR
                 elif ($OPTION_addfavbegin || $OPTION_REMOVEFAV); then
                     TEXT='een optie eenmaal opgeven'
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_addfavend=true
                 fi
@@ -139,10 +129,8 @@ function check_input {
             --file)
                 if $OPTION_FILE; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_FILE=true
                     FILE_ARGUMENT=$2
@@ -152,10 +140,8 @@ function check_input {
             --folder)
                 if $OPTION_FOLDER; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_FOLDER=true
                     FOLDER_ARGUMENT=$2
@@ -165,10 +151,8 @@ function check_input {
             --removeappfolder)
                 if $OPTION_REMOVEAPPFOLDER; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_REMOVEAPPFOLDER=true
                 fi
@@ -177,16 +161,12 @@ function check_input {
             --removefav)
                 if $OPTION_REMOVEFAV; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 elif ($OPTION_addfavbegin || $OPTION_addfavend); then
                     TEXT='een optie eenmaal opgeven'
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_REMOVEFAV=true
                 fi
@@ -271,20 +251,13 @@ function process_option_addfavbegin  {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  printf  '%s'                \
-                    "$favorite_apps"    |
-            grep    --quiet             \
-                    --word-regexp       \
-                    --regexp="$DESKTOPFILE"; then
-        gsettings   set                                             \
-                    org.gnome.shell                                 \
-                    favorite-apps                                   \
-                    "['$DESKTOPFILE', $(
-                                        printf  '%s'                \
-                                                "$favorite_apps"    |
-                                        awk     -F'['               \
-                                                '{print $2}'
-                                        )"
+    elif !  printf '%s' "$favorite_apps" |
+            grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
+        gsettings set org.gnome.shell favorite-apps \
+            "['$DESKTOPFILE', $(
+                                printf '%s' "$favorite_apps"   |
+                                awk -F'[' '{print $2}'
+                                )"
     fi
 }
 
@@ -295,19 +268,12 @@ function process_option_addfavend  {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  printf  '%s'                \
-                    "$favorite_apps"    |
-            grep    --quiet             \
-                    --word-regexp       \
-                    --regexp="$DESKTOPFILE"; then
-        gsettings   set                             \
-                    org.gnome.shell                 \
-                    favorite-apps                   \
-                    "$(
-                        printf  '%s'                \
-                                "$favorite_apps"    |
-                        awk     -F']'               \
-                                '{print $1}'), '$DESKTOPFILE']"
+    elif !  printf '%s' "$favorite_apps" |
+            grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
+        gsettings set org.gnome.shell favorite-apps \
+            "$(
+                printf '%s' "$favorite_apps" |
+                awk -F']' '{print $1}'), '$DESKTOPFILE']"
     fi
 }
 
@@ -320,12 +286,9 @@ function process_option_removefav  {
         :
     elif [[ $favorite_apps = "['$DESKTOPFILE']" ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
-    else gsettings  set                                                 \
-                    org.gnome.shell                                     \
-                    favorite-apps                                       \
+    else gsettings set org.gnome.shell favorite-apps \
                     "$(
-                        printf  '%s'                                    \
-                                "$favorite_apps"                        |
+                        printf  '%s' "$favorite_apps"                   |
                         sed     --expression="s/'$DESKTOPFILE', //g"    |
                         sed     --expression="s/, '$DESKTOPFILE'//"
                     )"
@@ -342,16 +305,13 @@ function process_option_addappfolder  {
 
     if [[ $app_folders = '@as []' ]]; then
         set org.gnome.desktop.app-folders folder-children "['$APPFOLDER']"
-    elif !  printf  '%s'            \
-                    "$app_folders"  |
-            grep    --quiet         \
-                    --word-regexp   \
+    elif !  printf  '%s' "$app_folders" |
+            grep    --quiet             \
+                    --word-regexp       \
                     --regexp="$APPFOLDER"; then
-        gsettings   set                             \
-                    org.gnome.desktop.app-folders   \
-                    folder-children                 \
+        gsettings set org.gnome.desktop.app-folders folder-children \
                     "$(
-                        printf '%s' "$app_folders"  |
+                        printf '%s' "$app_folders" |
                         awk -F']' '{print $1}'), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
@@ -377,7 +337,7 @@ function process_option_removeappfolder  {
                     org.gnome.desktop.app-folders   \
                     folder-children                 \
                     "$(
-                        printf  '%s' "$app_folders" |
+                        printf '%s' "$app_folders" |
                         sed --expression="s/, '$APPFOLDER'//"
                     )"
     fi

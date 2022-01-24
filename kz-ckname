@@ -91,9 +91,7 @@ function check_input {
     for dir in "${MAP_ARGUMENT[@]}"; do
         if ! [[ -d $dir ]]; then
                 TEXT="map '$dir' bestaat niet"
-                printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                        "$TEXT"                     \
-                        "$USAGELINE"                >&2
+                printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
             exit $ERROR
         fi
     done

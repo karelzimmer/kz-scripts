@@ -138,10 +138,8 @@ function check_input {
             -e|--edition)
                 if $OPTION_EDITION; then
                     TEXT="optie '$1' eenmaal opgeven"
-                    printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                            "$TEXT"                     \
-                            "$USAGELINE"                >&2
-                    exit    $ERROR
+                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    exit $ERROR
                 else
                     OPTION_EDITION=true
                     EDITION_ARGUMENT=$2
@@ -715,7 +713,7 @@ function process_install_instruction {
     fi
     filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#3' ]]; then
-        printf  '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
+        printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
@@ -739,7 +737,7 @@ function process_remove_instruction {
     fi
     filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#4' ]]; then
-        printf  '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
+        printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
         len=${#description}
@@ -813,7 +811,7 @@ function execute_command {
         if [[ $cmd_seq_num -eq 1 ]]; then
             printf "$STATUS_BUSY %s${CARRIAGE_RETURN}" "$description_line"
         else
-            printf  "$STATUS_BUSY ${SPACES:0:9}%s${CARRIAGE_RETURN}"    \
+            printf  "$STATUS_BUSY ${SPACES:0:9}%s${CARRIAGE_RETURN}" \
                     "${description_line:9}"
         fi
     fi

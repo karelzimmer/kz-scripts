@@ -279,14 +279,12 @@ function process_option_debug {
 
 
 function process_option_help {
-    printf  '%s\n\n%s\n'    \
-            "$HELP"         \
-            "Typ 'man $DISPLAY_NAME' voor meer informatie."
+    printf '%s\n\n%s\n' "$HELP" "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
 function process_option_usage {
-    printf '%s\n\n%s\n' \
+    printf  '%s\n\n%s\n' \
             "$USAGE"    \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
@@ -296,7 +294,7 @@ function process_option_version {
     local build=''
     local copyright_years='1970'
 
-    build=$(cat /usr/local/etc/kz-build 2> /dev/null || echo 'unknown')
+    build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
 
     if [[ $RELEASE_YEAR -eq $THIS_YEAR ]]; then
         copyright_years=$RELEASE_YEAR

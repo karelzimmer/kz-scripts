@@ -235,7 +235,7 @@ $quest5? [$NAS_WACHTWOORD]: "
         if [[ $REPLY ]]; then
             NAS_WACHTWOORD=$REPLY
         fi
-        printf '\n'
+        info
         read -rp "
 $quest6? [$NAS_SHARENAAM]: "
         if [[ $REPLY ]]; then

@@ -7,7 +7,7 @@
 
 #1 bluetooth
 #2 Bluetooth - Externe bluetooth-adapter
-echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
+printf '%s\n' 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #4 1. Start Terminalvenster en voer uit:
 #4    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
 

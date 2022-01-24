@@ -38,7 +38,7 @@ kz-gset --addfavend --file='virt-manager.desktop'
 #1 search
 #2 Search - Vooruit zoeken in history met Ctrl-S
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
+printf '%s\n' 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #4 Start Terminalvenster en voer uit:
 #4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
@@ -48,7 +48,7 @@ kz-gset --addfavbegin --file='org.gnome.Terminal.desktop'
 #3 1. Start Terminalvenster.
 #3 2. Maximaliseer het Terminalvenster.
 #3 3. Voer de volgende opdracht uit:
-#3    echo "Terminalgrootte: $COLUMNS kolommen $LINES rijen"
+#3    printf '%s\n' "Terminalgrootte: $COLUMNS kolommen $LINES rijen"
 #3 4. Ga naar ☰  > Voorkeuren.
 #3 5. Onder Profielen klik op Naamloos.
 #3 6. Vul in achter Oorspronkelijke afmeting van de terminal:

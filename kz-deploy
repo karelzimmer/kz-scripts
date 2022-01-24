@@ -75,10 +75,8 @@ function check_input {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                "$TEXT"                     \
-                "$USAGELINE"                >&2
-        exit    $ERROR
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        exit $ERROR
     fi
 
     # Aangemeld als ontwikkelaar?
@@ -92,10 +90,8 @@ function check_input {
         :
     else
         TEXT='alleen uitvoeren als ontwikkelaar'
-        printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                "$TEXT"                     \
-                "$USAGELINE"                >&2
-        exit    $ERROR
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        exit $ERROR
     fi
 
     # Een non-gui script gestart met optie gui.
@@ -167,7 +163,7 @@ function upload_website {
     if ! [[ -f $ftp_login ]]; then
         read -rsp "FTP-wachtwoord voor $ftp_host: "
         printf '%s\n' "$REPLY" > "$ftp_login"
-        printf '\n'
+        info
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
     if ! lftp   --user      "$ftp_user"             \

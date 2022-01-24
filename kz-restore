@@ -83,10 +83,8 @@ function check_input {
 
     if [[ "$*" ]]; then
         TEXT='geen argumenten opgeven'
-        printf  "$DISPLAY_NAME: %s\n%s\n"   \
-                "$TEXT"                     \
-                "$USAGELINE"                >&2
-        exit    $ERROR
+        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        exit $ERROR
     fi
 
     check_user
@@ -99,7 +97,7 @@ function process_input {
         warning "Koppel een back-up-medium aan met map \
 'backup-$HOSTNAME-$USER'."
         exit $WARNING
-    elif [[ $(echo "$SOURCE" | wc --lines) -gt 1 ]]; then
+    elif [[ $(printf '%s\n' "$SOURCE" | wc --lines) -gt 1 ]]; then
         warning "Koppel slechts één back-up-medium aan met map \
 'backup-$HOSTNAME-$USER'.
 

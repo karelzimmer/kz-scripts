@@ -68,7 +68,7 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #1 signal
 #2 Signal - Privéberichtenapp
 wget --no-verbose --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo apt-key add -
-echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee /etc/apt/sources.list.d/signal-xenial.list
+printf '%s\n' "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee /etc/apt/sources.list.d/signal-xenial.list
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 #4 Start Terminalvenster en voer uit:

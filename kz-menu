@@ -199,10 +199,12 @@ function process_menu1_tui {
         clear -x
         printf '%s\n\n' "$MENU1_HEAD"
         for action1 in "${!ACTIONS1[@]}"; do
-            printf '%2s. %-29.29s - %s\n' "$action1" "${ACTIONS1[$action1]}" \
-"${COMMANDS1[$action1]}"
+            printf  '%2s. %-29.29s - %s\n'  \
+                    "$action1"              \
+                    "${ACTIONS1[$action1]}" \
+                    "${COMMANDS1[$action1]}"
         done
-        printf '\n'
+        info
 
         while true; do
             read -rp "Voer uit nummer [1-$((MENU1_LINES-1)), $MENU1_LINES]: "
@@ -393,7 +395,7 @@ function process_menu2_tui {
             printf '%2s. %-29.29s - %s\n' "$action2" "${ACTIONS2[$action2]}" \
 "${COMMANDS2[$action2]}"
         done
-        printf '\n'
+        info
 
         while true; do
             read -rp "Voer uit nummer [1-$((MENU2_LINES-1)), $MENU2_LINES]: "
@@ -620,8 +622,8 @@ function execute_command {
     arg=$(
             printf  '%s' "$exec"    |
             cut     --delimiter=' ' \
-            --fields=2-             \
-            --only-delimited
+                    --fields=2-     \
+                    --only-delimited
         )
     case $exec in
         kz-install|kz-nas)
@@ -666,8 +668,9 @@ function show_commands_after_execution {
     local       temp_text_file=''
 
     temp_text_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.txt")
-    printf '\n%s\n\n' "De volgende $NUMBER_OF_COMMANDS acties zijn \
-uitgevoerd:" > "$temp_text_file"
+    printf  '\n%s\n\n'                                                  \
+            "De volgende $NUMBER_OF_COMMANDS acties zijn uitgevoerd:"   \
+            > "$temp_text_file"
     for exec in "${!EXEC[@]}"; do
         action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
         command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')

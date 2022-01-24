@@ -32,7 +32,7 @@ kz-gset --addfavtop --file='idle.desktop'
 #1 search
 #2 Vooruit zoeken in history (Ctrl-S) instellen
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
+printf '%s\n' 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #4 Start Terminalvenster en voer uit:
 #4    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
