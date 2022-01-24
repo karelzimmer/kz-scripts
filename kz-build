@@ -211,11 +211,6 @@ function build_uploads {
     # ---------------------
     # Vul dist/ met kz-docs
     # ---------------------
-    # Vanuit gedit aangemaakt.
-    rm --force "$HOME"/Documenten/*.pdf
-    # Vanuit LibreOffice aangemaakt.
-    rm --force "$HOME"/Documenten/Checklists/*.pdf |& $LOGCMD
-
     cd "${SOURCE_UPLOADS[DOCS]}"
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
