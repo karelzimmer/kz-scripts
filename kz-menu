@@ -683,7 +683,7 @@ function show_commands_after_execution {
                     --title         "$TITLE"            \
                     --filename      "$temp_text_file"   \
                     --font          'Ubuntu Mono 12'    \
-                    --checkbox      'Gelezen'           \
+                    --checkbox      'Gezien'            \
                     --ok-label      'Oké'               \
                     --cancel-label  'Afsluiten'         2> >($LOGCMD); then
             true

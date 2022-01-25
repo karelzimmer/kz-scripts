@@ -632,7 +632,7 @@ function process_option_cat {
                     --title         "$TITLE"            \
                     --filename      "$CMDS_FILE"        \
                     --font          'Ubuntu Mono 12'    \
-                    --checkbox      'Gelezen'           \
+                    --checkbox      'Gezien'            \
                     --ok-label      'Oké'               \
                     --cancel-label  'Afsluiten'         2> >($LOGCMD); then
             true
@@ -869,7 +869,7 @@ function term_script {
                         --title         "$TITLE"            \
                         --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
-                        --checkbox      'Gelezen'           \
+                        --checkbox      'Gezien'            \
                         --ok-label      'Oké'               \
                         --cancel-label  'Afsluiten'         2> >($LOGCMD); then
                 true
@@ -890,7 +890,7 @@ function term_script {
                         --title         "$TITLE"            \
                         --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
-                        --checkbox      'Gelezen'           \
+                        --checkbox      'Gezien'            \
                         --ok-label      'Oké'               \
                         --cancel-label  'Afsluiten'         2> >($LOGCMD); then
                 true
@@ -913,7 +913,7 @@ function term_script {
                         --title         "$TITLE"            \
                         --filename      "$TEXT_FILE"        \
                         --font          'Ubuntu Mono 12'    \
-                        --checkbox      'Gelezen'           \
+                        --checkbox      'Gezien'            \
                         --ok-label      'Oké'               \
                         --cancel-label  'Afsluiten'         2> >($LOGCMD); then
                 true
