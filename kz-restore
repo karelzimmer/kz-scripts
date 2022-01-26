@@ -168,8 +168,7 @@ Te weinig ruimte op $mounted.
 
 Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
 
-Gebruik een andere harddisk met minimaal ${need_human}iB beschikbaar.
-"
+Gebruik een andere harddisk met minimaal ${need_human}iB beschikbaar."
         exit $ERROR
     fi
 }

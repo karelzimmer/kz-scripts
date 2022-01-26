@@ -172,8 +172,7 @@ Te weinig ruimte op $mounted.
 Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
 
 Gebruik een ander back-up-medium met minimaal ${need_human}iB beschikbaar,
-zoals een USB-stick of externe harddisk.
-"
+zoals een USB-stick of externe harddisk."
         exit $ERROR
     fi
 }
