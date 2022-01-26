@@ -40,7 +40,6 @@ TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null); readonly TARGET
 
 declare OPTION_DELETE=''
 declare OPTION_DRY_RUN=''
-declare SPACE_OK=false
 
 
 ###############################################################################
@@ -128,19 +127,13 @@ Koppel media af via Bestanden."
         check_space
     fi
 
-    if $SPACE_OK; then
-        TEXT='Backup maken...'
-        check_on_ac_power
-        create_backup
-    else
-        warning 'Geen back-up gemaakt!'
-        exit $WARNING
-    fi
+    TEXT='Backup maken...'
+    check_on_ac_power
+    create_backup
 }
 
 
 function check_space {
-    local       filesys=''
     local       capacity_human=''
     local       mounted=''
     local       need_human=''
@@ -170,22 +163,18 @@ function check_space {
             awk 'END{print $1}'
             )
         capacity_human=$(df --human-readable "$TARGET" | awk 'END{print $2}')
-        filesys=$(df "$TARGET" | awk 'END{print $1}')
         mounted=$(df "$TARGET" | awk 'END{print $6}')
         error "
-Kan geen back-up maken.
+Back-up maken is mislukt.
 
-Te weinig ruimte op $mounted
-(bestandssysteem $filesys).
+Te weinig ruimte op $mounted.
 
 Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
 
 Gebruik een ander back-up-medium met minimaal ${need_human}iB beschikbaar,
 zoals een USB-stick of externe harddisk.
 "
-        SPACE_OK=false
-    else
-        SPACE_OK=true
+        exit $ERROR
     fi
 }
 
@@ -243,31 +232,50 @@ EOF
     fi
     rm "$exclude"
 
-    if [[ $rsync_rc -eq 11 ]]; then
-        log 'Te weinig ruimte voor de back-up.'
-        error 'Te weinig ruimte.'
-    elif [[ $rsync_rc -eq 23 ]]; then
-        log 'Niet alle bestanden waren leesbaar.'
-        rsync_rc=0
-    fi
-    if [[ $rsync_rc -ne $SUCCESS ]]; then
-        error "
+    case $rsync_rc in
+        0)
+            return
+            ;;
+        11)
+            log 'Te weinig ruimte.'
+            error "
 Back-up maken is mislukt.
 
-Controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${RED}
+Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
 
-Geen back-up gemaakt!"
-        error "$TEXT"
-        exit $ERROR
-    fi
+Controleer in het Terminalvenster de log met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+            exit $ERROR
+            ;;
+        23)
+            log 'Niet alle bestanden waren leesbaar?'
+            warning "
+Back-up maken is deels gelukt.
+
+Enkele bestanden waren niet veilig te stellen.
+
+Controleer in het Terminalvenster de log met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+            exit $WARNING
+            ;;
+        *)
+            error "
+Back-up maken is mislukt.
+
+Foutcode rsync is $rsync_rc.
+
+Controleer in het Terminalvenster de log met:
+    ${BLUE}$LOGCMD_CHECK${RED}"
+            exit $ERROR
+            ;;
+    esac
 }
 
 
 function term_script {
     info "
 De back-up is gemaakt.
-${YELLOW}$OPTION_DRY_RUN $OPTION_DELETE${NORMAL}
+${BOLD}$OPTION_DRY_RUN $OPTION_DELETE${NORMAL}
 Koppel zelf (veilig!) het back-up-medium af."
     exit $SUCCESS
 }

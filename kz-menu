@@ -630,33 +630,26 @@ function execute_command {
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
-                log_rc cmd_rc?
+                log "$command: rc=$cmd_rc"
             else
                 prompt="Authenticatie is vereist om '$command' uit te voeren.
 [sudo] wachtwoord voor %p: "
                 sudo    --prompt="$prompt"              \
                         "$PROGRAM_PATH/$cmd" "$arg" --  || cmd_rc=$?
-                log_rc $cmd_rc
+                log "$command: rc=$cmd_rc"
             fi
             ;;
         *)
             # Zogenaamde non-sudo-scripts.
             if $OPTION_GUI; then
                 "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
-                log_rc $cmd_rc
+                log "$command: rc=$cmd_rc"
             else
                 "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
-                log_rc $cmd_rc
+                log "$command: rc=$cmd_rc"
             fi
             ;;
     esac
-}
-
-
-function log_rc {
-    local rc=${1:-rc?}
-
-    log "$command: rc=$rc"
 }
 
 

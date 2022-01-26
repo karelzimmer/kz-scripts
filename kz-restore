@@ -39,7 +39,6 @@ TARGET=$HOME
 ###############################################################################
 
 declare OPTION_DRY_RUN=''
-declare SPACE_OK=false
 
 
 ###############################################################################
@@ -125,19 +124,13 @@ Koppel media af via Bestanden."
         check_space
     fi
 
-    if $SPACE_OK; then
-        TEXT="Backup terugzetten..."
-        check_on_ac_power
-        restore_backup
-    else
-        warning 'Geen back-up teruggezet!'
-        exit $WARNING
-    fi
+    TEXT="Backup terugzetten..."
+    check_on_ac_power
+    restore_backup
 }
 
 
 function check_space {
-    local       filesys=''
     local       capacity_human=''
     local       mounted=''
     local       need_human=''
@@ -167,20 +160,17 @@ function check_space {
             awk 'END{print $1}'
             )
         capacity_human=$(df --human-readable "$TARGET" | awk 'END{print $2}')
-        filesys=$(df "$TARGET" | awk 'END{print $1}')
         mounted=$(df "$TARGET" | awk 'END{print $6}')
         error "
-Kan back-up niet terugzetten.
+Back-up terugzetten is mislukt.
 
-Te weinig ruimte op $mounted (bestandssysteem $filesys).
+Te weinig ruimte op $mounted.
 
 Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
 
 Gebruik een andere harddisk met minimaal ${need_human}iB beschikbaar.
 "
-        SPACE_OK=false
-    else
-        SPACE_OK=true
+        exit $ERROR
     fi
 }
 
@@ -212,29 +202,50 @@ function restore_backup {
                 "$TARGET"                   2> >($LOGCMD) || rsync_rc=$?
     fi
 
-    if [[ $rsync_rc -eq 11 ]]; then
-        log 'Te weinig ruimte.'
-        error 'Te weinig ruimte voor de restore.'
-    elif [[ $rsync_rc -eq 23 ]]; then
-        log 'Niet alle bestanden waren leesbaar.'
-    fi
-    if [[ $rsync_rc -ne $SUCCESS ]]; then
-        error "
+    case $rsync_rc in
+        0)
+            return
+            ;;
+        11)
+            log 'Te weinig ruimte.'
+            error "
 Back-up terugzetten is mislukt.
 
-Controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${RED}
+Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
 
-Back-up is niet teruggezet!"
-        exit $ERROR
-    fi
+Controleer in het Terminalvenster de log met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+            exit $ERROR
+            ;;
+        23)
+            log 'Niet alle bestanden waren leesbaar?'
+            warning "
+Back-up terugzetten is deels gelukt.
+
+Enkele bestanden waren niet terug te zetten.
+
+Controleer in het Terminalvenster de log met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+            exit $WARNING
+            ;;
+        *)
+            error "
+Back-up terugzetten is mislukt.
+
+Foutcode rsync is $rsync_rc.
+
+Controleer in het Terminalvenster de log met:
+    ${BLUE}$LOGCMD_CHECK${RED}"
+            exit $ERROR
+            ;;
+    esac
 }
 
 
 function term_script {
     info "
 De back-up is teruggezet.
-${YELLOW}$OPTION_DRY_RUN${NORMAL}
+${BOLD}$OPTION_DRY_RUN${NORMAL}
 Koppel zelf (veilig!) het back-up-medium af."
     exit $SUCCESS
 }
