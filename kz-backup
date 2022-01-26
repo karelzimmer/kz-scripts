@@ -266,8 +266,8 @@ Geen back-up gemaakt!"
 
 function term_script {
     info "
-De back-up is gemaakt. $OPTION_DRY_RUN $OPTION_DELETE
-
+De back-up is gemaakt.
+${YELLOW}$OPTION_DRY_RUN $OPTION_DELETE${NORMAL}
 Koppel zelf (veilig!) het back-up-medium af."
     exit $SUCCESS
 }

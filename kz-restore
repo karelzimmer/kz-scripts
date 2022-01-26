@@ -233,8 +233,8 @@ Back-up is niet teruggezet!"
 
 function term_script {
     info "
-De back-up is teruggezet. $OPTION_DRY_RUN
-
+De back-up is teruggezet.
+${YELLOW}$OPTION_DRY_RUN${NORMAL}
 Koppel zelf (veilig!) het back-up-medium af."
     exit $SUCCESS
 }
