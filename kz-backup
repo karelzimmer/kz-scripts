@@ -38,7 +38,6 @@ TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null); readonly TARGET
 # Global variables                                                            #
 ###############################################################################
 
-declare BACKUP_CREATED=false
 declare OPTION_DELETE=''
 declare OPTION_DRY_RUN=''
 declare SPACE_OK=false
@@ -133,9 +132,7 @@ Koppel media af via Bestanden."
         TEXT='Backup maken...'
         check_on_ac_power
         create_backup
-    fi
-
-    if ! $BACKUP_CREATED; then
+    else
         warning 'Geen back-up gemaakt!'
         exit $WARNING
     fi
@@ -178,7 +175,8 @@ function check_space {
         error "
 Kan geen back-up maken.
 
-Te weinig ruimte op $mounted (bestandssysteem $filesys).
+Te weinig ruimte op $mounted
+(bestandssysteem $filesys).
 
 Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
 
@@ -246,7 +244,8 @@ EOF
     rm "$exclude"
 
     if [[ $rsync_rc -eq 11 ]]; then
-        log 'Te weinig ruimte.'
+        log 'Te weinig ruimte voor de back-up.'
+        error 'Te weinig ruimte.'
     elif [[ $rsync_rc -eq 23 ]]; then
         log 'Niet alle bestanden waren leesbaar.'
         rsync_rc=0
@@ -259,10 +258,9 @@ Controleer in het Terminalvenster de log met:
     ${BLUE}$LOGCMD_CHECK${RED}
 
 Geen back-up gemaakt!"
+        error "$TEXT"
         exit $ERROR
     fi
-
-    BACKUP_CREATED=true
 }
 
 

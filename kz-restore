@@ -38,7 +38,6 @@ TARGET=$HOME
 # Global variables                                                            #
 ###############################################################################
 
-declare BACKUP_RESTORED=false
 declare OPTION_DRY_RUN=''
 declare SPACE_OK=false
 
@@ -130,9 +129,7 @@ Koppel media af via Bestanden."
         TEXT="Backup terugzetten..."
         check_on_ac_power
         restore_backup
-    fi
-
-    if ! $BACKUP_RESTORED; then
+    else
         warning 'Geen back-up teruggezet!'
         exit $WARNING
     fi
@@ -217,6 +214,7 @@ function restore_backup {
 
     if [[ $rsync_rc -eq 11 ]]; then
         log 'Te weinig ruimte.'
+        error 'Te weinig ruimte voor de restore.'
     elif [[ $rsync_rc -eq 23 ]]; then
         log 'Niet alle bestanden waren leesbaar.'
     fi
@@ -225,13 +223,11 @@ function restore_backup {
 Back-up terugzetten is mislukt.
 
 Controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}
+    ${BLUE}$LOGCMD_CHECK${RED}
 
 Back-up is niet teruggezet!"
         exit $ERROR
     fi
-
-    BACKUP_RESTORED=true
 }
 
 
