@@ -243,9 +243,9 @@ function term_script {
         TEXT='\nEr zijn geen bestanden verwijderd.'
     fi
     if $ARCHIVED; then
-        TEXT="$TEXT\nEr zijn bestanden gearchiveerd."
+        TEXT+='\nEr zijn bestanden gearchiveerd.'
     else
-        TEXT="$TEXT\nEr zijn geen bestanden gearchiveerd."
+        TEXT+='\nEr zijn geen bestanden gearchiveerd.'
     fi
     info "$TEXT"
     if  $DELETED || $ARCHIVED; then
