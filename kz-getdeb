@@ -410,7 +410,7 @@ Deze checklist is te vinden:
     height=16
 
     if ! $DESKTOP_TERMINAL; then
-        TEXT=$TEXT"
+        TEXT+="
 
 Typ 'exit' om dit venster te sluiten."
         height=18

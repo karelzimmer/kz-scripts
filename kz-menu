@@ -568,13 +568,13 @@ De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
     for exec in "${!EXEC[@]}"; do
         action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
         command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')
-        TEXT=$TEXT"
+        TEXT+="
 $exec. $action ($command)"
     done
 
     prompt='Doorgaan en deze acties uitvoeren?'
     if $OPTION_GUI; then
-        TEXT=$TEXT"
+        TEXT+="
 
 $prompt"
         if zenity   --question                  \
