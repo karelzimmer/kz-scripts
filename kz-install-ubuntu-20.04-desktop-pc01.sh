@@ -19,9 +19,9 @@ sudo apt-get install --yes libimage-exiftool-perl
 
 #1 git
 #2 Git - Versiebeheersysteem
-sudo apt-get install --yes aspell-nl git gitg
+sudo apt-get install --yes aspell-nl git
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes git gitg
+#4    sudo apt remove --yes git
 
 #1 python
 #2 Python - Programmeertaal

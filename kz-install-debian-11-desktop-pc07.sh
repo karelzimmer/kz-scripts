@@ -32,9 +32,9 @@ sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/'
 
 #1 git
 #2 Git (versiebeheersysteem) installeren
-sudo apt-get install --yes aspell-nl git gitg
+sudo apt-get install --yes aspell-nl git
 #4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes git gitg
+#4    sudo apt remove --yes git
 
 #1 kvm
 #2 KVM (virtualisatie) installeren
