@@ -110,7 +110,7 @@ Koppel media af via app Bestanden."
     fi
 
     TITLE='Back-up maken'
-    TEXT='Controleer beschikbare schijfruimte (kan even duren)...'
+    TEXT='Controleer beschikbare ruimte (kan even duren)...'
     if $OPTION_GUI; then
         check_space > >(
             zenity  --progress              \
