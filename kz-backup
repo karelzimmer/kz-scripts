@@ -105,7 +105,7 @@ function process_input {
 Nu aangekoppeld zijn:
 $TARGET
 
-Koppel media af via Bestanden."
+Koppel media af via app Bestanden."
         exit $WARNING
     fi
 
@@ -242,18 +242,18 @@ Back-up maken is mislukt.
 
 Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
 
-Controleer in het Terminalvenster de log met:
+Voor details controleer in het Terminalvenster de log met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $ERROR
             ;;
         23)
             log 'Niet alle bestanden waren leesbaar?'
             warning "
-Back-up maken is deels gelukt.
+Back-up maken is gedeeltelijk gelukt.
 
-Enkele bestanden waren niet veilig te stellen.
+Enkele bestanden waren niet te leesbaar.
 
-Controleer in het Terminalvenster de log met:
+Voor details controleer in het Terminalvenster de log met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
             ;;
@@ -263,7 +263,7 @@ Back-up maken is mislukt.
 
 Foutcode rsync is $rsync_rc.
 
-Controleer in het Terminalvenster de log met:
+Voor details controleer in het Terminalvenster de log met:
     ${BLUE}$LOGCMD_CHECK${RED}"
             exit $ERROR
             ;;
