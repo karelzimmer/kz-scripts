@@ -131,13 +131,6 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #4    sudo apt remove --yes ubuntu-restricted-addons libavcodec-extra
 #4    sudo apt autoremove --yes
 
-#1 ubuntu-wallpapers
-#2 Ubuntu wallpapers - Bureaubladachtergronden
-sudo apt-get install --yes ubuntu-wallpapers-*
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes ubuntu-wallpapers-*
-#4    sudo apt autoremove --yes
-
 #1 zoom
 #2 Zoom - Telewerken
 wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
