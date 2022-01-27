@@ -124,8 +124,8 @@ Koppel media af via app Bestanden."
         check_space
     fi
 
-    TEXT="Backup terugzetten..."
     check_on_ac_power
+    TEXT="Restore voorbereiden..."
     restore_backup
 }
 

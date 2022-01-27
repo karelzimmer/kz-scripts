@@ -127,8 +127,8 @@ Koppel media af via app Bestanden."
         check_space
     fi
 
-    TEXT='Backup maken...'
     check_on_ac_power
+    TEXT='Backup voorbereiden...'
     create_backup
 }
 
