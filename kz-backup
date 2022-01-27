@@ -109,72 +109,8 @@ Koppel media af via app Bestanden."
         exit $WARNING
     fi
 
-    TITLE='Back-up maken'
-    TEXT='Controleer beschikbare ruimte (kan even duren)...'
-    if $OPTION_GUI; then
-        check_space > >(
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$TITLE"    \
-                    --text      "$TEXT"     2> >($LOGCMD)
-            )
-    else
-        info "$TEXT"
-        check_space
-    fi
-
     check_on_ac_power
-    TEXT='Backup voorbereiden...'
     create_backup
-}
-
-
-function check_space {
-    local       capacity_human=''
-    local       mounted=''
-    local       need_human=''
-    local   -i  capacity_bytes=0
-    local   -i  need_bytes=0
-
-    need_bytes=$(
-        du  --apparent-size \
-            --block-size=1  \
-            --summarize     \
-            --total         \
-            "$SOURCE"       \
-            2> >($LOGCMD)   |
-        awk 'END{print $1}'
-        )
-    capacity_bytes=$(df --block-size=1 "$TARGET" | awk 'END{print $2}')
-
-    if [[ $need_bytes -gt $capacity_bytes ]]; then
-        need_human=$(
-            du  --apparent-size     \
-                --block-size=1      \
-                --human-readable    \
-                --summarize         \
-                --total             \
-                "$SOURCE"           \
-                2> >($LOGCMD)       |
-            awk 'END{print $1}'
-            )
-        capacity_human=$(df --human-readable "$TARGET" | awk 'END{print $2}')
-        mounted=$(df "$TARGET" | awk 'END{print $6}')
-        error "
-Back-up maken is mislukt.
-
-Te weinig ruimte op $mounted.
-
-Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
-
-Gebruik een ander back-up-medium met minimaal ${need_human}iB beschikbaar,
-zoals een USB-stick of externe harddisk."
-        exit $ERROR
-    fi
 }
 
 
@@ -201,6 +137,8 @@ snap/*/*/.cache
 .xsession-errors
 EOF
 
+    TITLE='Back-up maken'
+    TEXT='Backup voorbereiden...'
     if $OPTION_GUI; then
         rsync   --archive                   \
                 --verbose                   \

@@ -671,8 +671,8 @@ function show_commands_after_execution {
     done
     if $OPTION_GUI; then
         if ! zenity --text-info                         \
-                    --width         400                 \
-                    --height        200                 \
+                    --width         500                 \
+                    --height        300                 \
                     --title         "$TITLE"            \
                     --filename      "$temp_text_file"   \
                     --font          'Ubuntu Mono 12'    \
