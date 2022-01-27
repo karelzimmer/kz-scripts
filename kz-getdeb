@@ -255,23 +255,23 @@ function install_scriptspackage {
         sudo apt-get update |& $LOGCMD
     fi
 
-    # Installeer pakket.
+    # Installeer pakket kz.
     check_sudo_and_dpkg
-    TEXT='Download pakket...'
+    TEXT='Download pakket kz...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 22
+                        7 25
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     check_sudo_and_dpkg
-    TEXT='Installeer pakket (kan even duren)...'
+    TEXT='Installeer pakket kz (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
-                        7 41
+                        7 44
 
     check_sudo_and_dpkg
     sudo    DEBIAN_FRONTEND=noninteractive  \
