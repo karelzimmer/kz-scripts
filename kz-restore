@@ -93,7 +93,7 @@ function process_input {
 
     if [[ -z $SOURCE ]]; then
         warning "Koppel een back-up-medium aan met map \
-'backup-$HOSTNAME-$USER'."
+'backup-$HOSTNAME-$USER', en start daarna opnieuw."
         exit $WARNING
     elif [[ $(printf '%s\n' "$SOURCE" | wc --lines) -gt 1 ]]; then
         warning "Koppel slechts één back-up-medium aan met map \
