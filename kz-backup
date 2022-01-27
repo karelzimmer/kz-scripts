@@ -233,17 +233,14 @@ EOF
 
     case $rsync_rc in
         0)
-            return
+            return $SUCCESS
             ;;
         11)
             log 'Te weinig ruimte.'
             error "
 Back-up maken is mislukt.
 
-Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
-
-Voor details controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}')."
             exit $ERROR
             ;;
         23)
@@ -251,10 +248,9 @@ Voor details controleer in het Terminalvenster de log met:
             warning "
 Back-up maken is gedeeltelijk gelukt.
 
-Enkele bestanden waren niet te leesbaar.
+Mogelijk zijn enkele bestanden niet leesbaar.
 
-Voor details controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+Voor details: start app Logboeken en zoek in Alles op rsync"
             exit $WARNING
             ;;
         *)
@@ -263,8 +259,7 @@ Back-up maken is mislukt.
 
 Foutcode rsync is $rsync_rc.
 
-Voor details controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${RED}"
+Voor details: start app Logboeken en zoek in Alles op rsync"
             exit $ERROR
             ;;
     esac

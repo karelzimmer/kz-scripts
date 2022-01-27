@@ -168,7 +168,7 @@ Te weinig ruimte op $mounted.
 
 Benodigd is ${need_human}iB, beschikbaar is ${capacity_human}iB.
 
-Gebruik een andere harddisk met minimaal ${need_human}iB beschikbaar."
+Gebruik een ander restore-medium met minimaal ${need_human}iB beschikbaar."
         exit $ERROR
     fi
 }
@@ -203,17 +203,14 @@ function restore_backup {
 
     case $rsync_rc in
         0)
-            return
+            return $SUCCESS
             ;;
         11)
             log 'Te weinig ruimte.'
             error "
 Back-up terugzetten is mislukt.
 
-Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
-
-Voor details controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}')."
             exit $ERROR
             ;;
         23)
@@ -221,10 +218,9 @@ Voor details controleer in het Terminalvenster de log met:
             warning "
 Back-up terugzetten is gedeeltelijk gelukt.
 
-Enkele bestanden waren niet leesbaar.
+Mogelijk zijn enkele bestanden niet leesbaar.
 
-Voor details controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+Voor details: start app Logboeken en zoek in Alles op rsync"
             exit $WARNING
             ;;
         *)
@@ -233,8 +229,7 @@ Back-up terugzetten is mislukt.
 
 Foutcode rsync is $rsync_rc.
 
-Voor details controleer in het Terminalvenster de log met:
-    ${BLUE}$LOGCMD_CHECK${RED}"
+Voor details: start app Logboeken en zoek in Alles op rsync"
             exit $ERROR
             ;;
     esac
