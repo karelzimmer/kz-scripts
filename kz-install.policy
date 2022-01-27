@@ -19,8 +19,8 @@
     <!-- Deze actie wordt gebruikt voor de ontwikkel-omgeving.
          This action is used for the development environment. -->
     <action id="kz-install.install-sw">
-        <message>Authentication is required to install/list apps.</message>
-        <message xml:lang="nl">Authenticatie is vereist om apps te installeren/uit te lijsten.</message>
+        <message>Authentication is required to install apps.</message>
+        <message xml:lang="nl">Authenticatie is vereist om apps te installeren.</message>
         <defaults>
             <allow_any>auth_admin</allow_any>
             <allow_inactive>auth_admin</allow_inactive>
@@ -35,8 +35,8 @@
     <!-- Deze actie wordt gebruikt voor de productie-omgeving.
          This action is used for the production environment. -->
     <action id="nl.karelzimmer.kz-install.install-sw">
-        <message>Authentication is required to install/list apps.</message>
-        <message xml:lang="nl">Authenticatie is vereist om apps te installeren/uit te lijsten.</message>
+        <message>Authentication is required to install apps.</message>
+        <message xml:lang="nl">Authenticatie is vereist om apps te installeren.</message>
         <defaults>
             <allow_any>auth_admin</allow_any>
             <allow_inactive>auth_admin</allow_inactive>
