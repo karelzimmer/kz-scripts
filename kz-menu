@@ -626,7 +626,7 @@ function execute_command {
                     --only-delimited
         )
     case $exec in
-        kz-install|kz-nas)
+        kz-install|kz-nas|kz-mkusb)
             # Zogenaamde sudo-scripts.
             if $OPTION_GUI; then
                 pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
