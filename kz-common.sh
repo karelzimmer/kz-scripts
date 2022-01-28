@@ -156,17 +156,9 @@ function init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
-    # bash 5.0: trap exit: ${FUNCNAME[0]}: ongebonden variabele
-    # Enable code-stepping:
-    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    trap 'signal error   $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
-    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
-    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
-
+    trap_on
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-    LOGCMD_CHECK="journalctl --all --identifier=$PROGRAM_NAME \
+    LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     CMDLINE_ARGS=("$@")
@@ -333,7 +325,7 @@ function signal {
             rc_desc='terminated with warning'
             status="${YELLOW}$rc/WARNING${NORMAL}"
             ;;
-        6[4-9]|7[0-8])                  # 64 - 78
+        6[4-9]|7[0-8])                  # 64--78
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
             ;;
         126)
@@ -345,20 +337,26 @@ function signal {
         128)
             rc_desc='invalid argument to exit'
             ;;
-        129)                            # sighup (128+ 1)
+        129)                            # SIGHUP (128+ 1)
             rc_desc='hangup'
             ;;
-        130)                            # sigint (128+ 2)
+        130)                            # SIGINT (128+ 2)
             rc_desc='terminated by control-c'
             ;;
-        13[1-9]|14[0-2])                # 131 (128+3) - 142 (128+14)
+        13[1-9]|140)                    # 140 (128+12)
             rc_desc_signalno=$((rc - 128))
             rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
             ;;
-        143)                            # sigterm (128+15)
+        141)                           # SIGPIPE (128+13)
+            rc_desc='broken pipe: write to pipe with no readers'
+            ;;
+        142)                            # SIGALRM (128+14)
+            rc_desc='timer signal from alarm'
+            ;;
+        143)                            # SIGTERM (128+15)
             rc_desc='termination signal'
             ;;
-        14[4-9]|1[5-8][0-9]|19[0-2])    # 144 (128+16) - 192 (128+64)
+        14[4-9]|1[5-8][0-9]|19[0-2])    # 144 (128+16)--192 (128+64)
             rc_desc_signalno=$((rc - 128))
             rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
             ;;
@@ -375,10 +373,10 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
-            error "Programma $PROGRAM_NAME is afgebroken."
-            printf  '%s\n    %s\n'                                  \
-                    'Controleer in het Terminalvenster de log met:' \
-                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
+            error "Programma $PROGRAM_NAME is afgebroken.
+
+Controleer de log in het Terminalvenster met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
         exit)
@@ -388,21 +386,20 @@ $command, code: $rc ($rc_desc)" --priority=debug
                 set +o xtrace
                 BASH_XTRACEFD=''
                 exec 4>&-
-                printf "${YELLOW}%s\n${NORMAL}" '*** EINDE DEBUG-SESSIE ***'
-                printf '%s\n    %s\n'                                   \
-                        'Controleer in het Terminalvenster de log met:' \
-                        "${BLUE}$LOGCMD_CHECK${NORMAL}"
+                warning '*** EINDE DEBUG-SESSIE ***'
+                info "Controleer de log in het Terminalvenster met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
-            trap - ERR EXIT SIGINT SIGPIPE SIGTERM SIGHUP
+            trap_off
             exit "$rc"
             ;;
         *)
-            warning "Programma $PROGRAM_NAME is onderbroken."
-            printf  '%s\n    %s\n'                                  \
-                    'Controleer in het Terminalvenster de log met:' \
-                    "${BLUE}$LOGCMD_CHECK${NORMAL}"
+            warning "Programma $PROGRAM_NAME is onderbroken.
+
+Controleer de log in het Terminalvenster met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
     esac
@@ -446,6 +443,23 @@ dan een Terminalvenster, en voer uit:
             return $SUCCESS
             ;;
     esac
+}
+
+
+function trap_off {
+    trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+}
+
+
+function trap_on {
+    trap 'signal error   $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
+    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
+    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
+    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
+    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
+    # Enable code-stepping:
+    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
 }
 
 

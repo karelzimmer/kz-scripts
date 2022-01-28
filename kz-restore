@@ -102,7 +102,7 @@ function process_input {
 Nu aangekoppeld zijn:
 $SOURCE
 
-Koppel media af via app Bestanden."
+Koppel media af via Bestanden."
         exit $WARNING
     fi
 
@@ -159,7 +159,8 @@ Back-up terugzetten is gedeeltelijk gelukt.
 
 Mogelijk zijn enkele bestanden niet leesbaar.
 
-Voor details: start app Logboeken en zoek in Alles op rsync"
+Controleer de log in het Terminalvenster met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
             ;;
         *)
@@ -168,7 +169,8 @@ Back-up terugzetten is mislukt.
 
 Foutcode rsync is $rsync_rc.
 
-Voor details: start app Logboeken en zoek in Alles op rsync"
+Controleer de log in het Terminalvenster met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $ERROR
             ;;
     esac

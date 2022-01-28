@@ -819,7 +819,9 @@ function execute_command {
 
     log "$description_line"
     log "${BLUE}$cmd${NORMAL}"
+    trap_off
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
+    trap_on
     if [[ $cmd_rc -gt $MAXRC ]]; then
         MAXRC=$cmd_rc
     fi
@@ -927,17 +929,21 @@ function term_script {
         info 'Geen opdrachten.'
     fi
 
-    if  $EXECUTE_COMMANDS && [[ $MAXRC -eq $SUCCESS ]] && $INFO_FOUND &&
-        ! $OPTION_GUI; then
+    if  $EXECUTE_COMMANDS && $INFO_FOUND && ! $OPTION_GUI; then
         info "
-Er zijn aanvullende instructies!
+Er zijn aanvullende instructies.
+
 Gebruik de opdracht:
     ${BLUE}$DISPLAY_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
     fi
 
-    if $EXECUTE_COMMANDS && $OPTION_GUI; then
+    if $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
-            warning 'Installatie is geëindigd met een waarschuwing.'
+            warning "
+Installatie is geëindigd met een waarschuwing.
+
+Controleer de log in het Terminalvenster met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else
             info 'Installatie is voltooid.'
