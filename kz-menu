@@ -282,16 +282,16 @@ function process_menu1_choice2 {
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
 Deze checklist is te vinden:
-- in de Persoonlijke map
+- in de map Documenten
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
   onder Linux
 
 Komt globaal neer op:
-1. Download een beeldbestand (.iso) vanaf nl.releases.ubuntu.com.
-2. Maak een opstartbare Ubuntu Live USB-stick of DVD aan.
+1. Download een beeldbestand (.iso).
+2. Maak een opstartbare Live USB-stick of DVD aan.
 3. Start de computer op vanaf deze USB-stick of DVD.
-4. Installeer Ubuntu.'
+4. Installeer Linux.'
     info "$TEXT"
     if ! $OPTION_GUI; then
         read -rp '
