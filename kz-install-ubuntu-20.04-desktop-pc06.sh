@@ -65,6 +65,12 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #4    sudo apt remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 #4    sudo rm --force /usr/bin/pip
 
+#1 samba
+#2 Samba - Communiceren met andere machines
+sudo apt-get install --yes samba cifs-utils
+#4 Start Terminalvenster en voer uit:
+#4    sudo apt remove --yes samba cifs-utils
+
 #1 signal
 #2 Signal - Privéberichtenapp
 wget --no-verbose --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo apt-key add -
