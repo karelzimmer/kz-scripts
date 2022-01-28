@@ -128,8 +128,8 @@ function check_scripts {
     log "Check scripts with 'kz ivp'."
     "$SCRIPTS_REPO"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
-        warning "
-Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
+        warning '
+Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
 }
@@ -142,8 +142,8 @@ function build_package {
     log "Build package with 'kz build'."
     "$SCRIPTS_REPO"/kz build || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
-        warning "
-Herstel alle meldingen hierboven en start daarna weer '$DISPLAY_NAME'."
+        warning '
+Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
 }
