@@ -5,14 +5,12 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 calibre
-#2 Calibre - E-boekmanager
+#1 calibre (E-boekmanager)
 sudo apt-get install --yes calibre
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove --yes calibre
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes calibre
 
-#1 clamav
-#1 ClamAV - Antivirus
+#1 clamav (Antivirus)
 sudo apt-get install --yes clamtk-gnome
-#4 Start Terminalvenster en voer uit:
-#4    sudo apt remove clamtk-gnome
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove clamtk-gnome

@@ -5,6 +5,5 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1
-#2 Geen opdrachten om te installeren
+#1(Geen opdrachten om te installeren)
 :

@@ -201,12 +201,13 @@ ${BOLD}In $script:${NORMAL}
         fi
     fi
 
-    # '#1 foo' = ok, '#1' = ok, '#1foo' = ¬ok, hetzelfde voor #2, #3, en #4.
+    #  '#1'=ok, '#1 foo'=ok,'#1(foo'=ok, '#1foo'=¬ok, hetzelfde voor #2 en #3.
     if [[ $script == kz-install*.sh || $script == kz-setup*.sh ]]; then
         wrong_record=$(
-            grep --regexp='#[1-4]' "$script" --line-number  |
-            grep --regexp='#[1-4]$' --invert-match          |
-            grep --regexp='#[1-4] ' --invert-match          || true
+            grep --regexp='#[1-3]' "$script" --line-number  |
+            grep --regexp='#[1-3]$' --invert-match          |
+            grep --regexp='#[1-3] ' --invert-match          |
+            grep --regexp='#[1-3](' --invert-match          || true
         )
     else
         wrong_record=''

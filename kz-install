@@ -265,7 +265,7 @@ function process_input {
     # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
     # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
     app_tot_num=$(
-        grep --word-regexp --regexp='^#2' --count "$CMDS_FILE" || true
+        grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
         )
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
@@ -440,7 +440,7 @@ function process_argument_app {
     for app in "${APP_ARGUMENT[@]}"; do
         file=$(
             if ! grep       --files-with-matches    \
-                            --line-regexp           \
+                            --word-regexp           \
                             --regexp="#1 $app"      \
                             "${files[@]}"           \
                             2> /dev/null            |
@@ -466,35 +466,20 @@ function process_argument_app {
 
 function process_argument_app_file {
     local app_found=false
-    local description_found=false
     local record=''
 
     while read -r record; do
         case $record in
             '#1 '*)
-                if [[ $record = '#1 '$app ]]; then
-                    if $app_found; then
-                        info "Dubbele app-naam $app."
-                    else
-                        # Gezochte app-naam.
-                        # Regels doorschrijven naar tijdelijk bestand tot
-                        # eerstvolgende app-naam of beschrijving (verplicht),
-                        # of tot eof.
-                        app_found=true
-                    fi
+                if [[ $record == '#1 '$app* ]]; then
+                    # Gezochte app-naam.
+                    # Regels doorschrijven naar tijdelijk bestand tot
+                    # eerstvolgende app-naam of tot eof.
+                    printf '%s\n' "$record" >> "$CMDS_FILE2"
+                    app_found=true
                 elif $app_found; then
                     # Volgende app-naam.
                     break
-                fi
-                ;;
-            '#2'*)
-                # Beschrijving.
-                if $description_found; then
-                    # Volgende beschrijving.
-                    break
-                elif $app_found; then
-                    printf '%b\n' "$record" >> "$CMDS_FILE2"
-                    description_found=true
                 fi
                 ;;
             *)
@@ -566,12 +551,13 @@ function process_option_apps {
     done
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
-NUMMER APP
+NUMMER APP (BESCHRIJVING)
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
                     "${files[@]}"           |
-            awk     '{print $2}'            |
+            cut     --delimiter=' '         \
+                    --fields=2-             |
             sort    --unique                |
             nl      --number-width=6        \
                     --number-format=rn      \
@@ -659,17 +645,17 @@ function process_file {
     while read -r record; do
         recordtype=${record:0:2}
         case $recordtype in
-            ''|'#1')
-                # Lege regel of lege app-naam.
+            '')
+                # Lege regel.
                 continue
                 ;;
-            '#2')
+            '#1')
                 process_description "$record"
                 ;;
-            '#3')
+            '#2')
                 process_install_instruction "$record"
                 ;;
-            '#4')
+            '#3')
                 process_remove_instruction "$record"
                 ;;
             '#'*)
@@ -713,7 +699,7 @@ function process_install_instruction {
         return $SUCCESS
     fi
     filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#3' ]]; then
+    if [[ $prev_recordtype = '#2' ]]; then
         printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
@@ -737,7 +723,7 @@ function process_remove_instruction {
         return $SUCCESS
     fi
     filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#4' ]]; then
+    if [[ $prev_recordtype = '#3' ]]; then
         printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))

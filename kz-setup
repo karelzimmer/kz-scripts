@@ -268,7 +268,7 @@ $HOSTNAME.sh
     # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
     # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
     app_tot_num=$(
-        grep --word-regexp --regexp='^#2' --count "$CMDS_FILE" || true
+        grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
         )
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
@@ -313,13 +313,13 @@ function process_option_list {
     if $OPTION_GUI; then
         (
         printf '%s\n' "#$text1"
-        save_user_photo         #1
+        save_user_photo             #1
         printf '%s\n' "#$text2"
-        save_desktop_background #2
+        save_desktop_background     #2
         printf '%s\n' "#$text3"
-        save_favorite_apps      #3
+        save_favorite_apps          #3
         printf '%s\n' "#$text4"
-        save_command_history    #4
+        save_command_history        #4
         ) |&
         zenity  --progress              \
                 --pulsate               \
@@ -330,10 +330,10 @@ function process_option_list {
                 --title     "$TITLE"    \
                 --text      "$text0"    2> >($LOGCMD)
     else
-        save_user_photo         #1
-        save_desktop_background #2
-        save_favorite_apps      #3
-        save_command_history    #4
+        save_user_photo             #1
+        save_desktop_background     #2
+        save_favorite_apps          #3
+        save_command_history        #4
     fi
 
     info "
@@ -348,7 +348,7 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 }
 
 
-function save_user_photo {             #1
+function save_user_photo {          #1
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
         rm --force "$file1"
@@ -357,21 +357,21 @@ function save_user_photo {             #1
 }
 
 
-function save_desktop_background {     #2
+function save_desktop_background {  #2
     printf '%s\n' "$text2..."
     gsettings get   org.gnome.desktop.background    \
                     picture-uri                     > "$file2" |& $LOGCMD
 }
 
 
-function save_favorite_apps {          #3
+function save_favorite_apps {       #3
     printf '%s\n' "$text3..."
     gsettings get   org.gnome.shell \
                     favorite-apps   > "$file3" |& $LOGCMD
 }
 
 
-function save_command_history {        #4
+function save_command_history {     #4
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
@@ -403,7 +403,7 @@ $EDITION."
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
         if ! grep   --files-with-matches    \
-                    --line-regexp           \
+                    --word-regexp           \
                     --regexp="#1 $app"      \
                     "${file_to_process[@]}" \
                     &> /dev/null; then
@@ -424,7 +424,6 @@ $EDITION."
 
 function process_argument_app_file {
     local app_found=false
-    local description_found=false
     local record=''
     local temp_file=''
 
@@ -434,24 +433,15 @@ function process_argument_app_file {
     while read -r record; do
         case $record in
             '#1 '*)
-                if [[ $record = '#1 '$app ]]; then
+                if [[ $record == '#1 '$app* ]]; then
                     # Gezochte app-naam.
                     # Regels doorschrijven naar tijdelijk bestand tot
-                    # eerstvolgende app-naam of beschrijving (verplicht),
-                    # of tot eof.
+                    # eerstvolgende app-naam of tot eof.
                     app_found=true
-                    description_found=false
-                fi
-                ;;
-            '#2'*)
-                # Beschrijving.
-                if $description_found; then
-                    # Volgende beschrijving.
-                    app_found=false
-                    continue
-                elif $app_found; then
                     printf '%b\n' "$record" >> "$CMDS_FILE2"
-                    description_found=true
+                elif $app_found; then
+                    # Volgende app-naam.
+                    break
                 fi
                 ;;
             *)
@@ -511,12 +501,13 @@ function process_option_apps {
     process_dfltfiles
     printf '%s\n' "De volgende apps zijn beschikbaar:
 
-NUMMER APP
+NUMMER APP (BESCHRIJVING)
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
                     "${FILE_TO_PROCESS[@]}" |
-            awk     '{print $2}'            |
+            cut     --delimiter=' '         \
+                    --fields=2-             |
             sort    --unique                |
             nl      --number-width=6        \
                     --number-format=rn      \
@@ -605,17 +596,17 @@ function process_file {
     while read -r record; do
         recordtype=${record:0:2}
         case $recordtype in
-            ''|'#1')
+            '')
                 # Lege regel of lege app-naam.
                 continue
                 ;;
-            '#2')
+            '#1')
                 process_description "$record"
                 ;;
-            '#3')
+            '#2')
                 process_setup_instruction "$record"
                 ;;
-            '#4')
+            '#3')
                 process_reset_instruction "$record"
                 ;;
             '#'*)
@@ -659,7 +650,7 @@ function process_setup_instruction {
         return $SUCCESS
     fi
     filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#3' ]]; then
+    if [[ $prev_recordtype = '#2' ]]; then
         printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
@@ -683,7 +674,7 @@ function process_reset_instruction {
         return $SUCCESS
     fi
     filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#4' ]]; then
+    if [[ $prev_recordtype = '#3' ]]; then
         printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
