@@ -389,9 +389,8 @@ function term_script {
     local search=''
 
     search="/usr/share/doc/kz/Checklist-installatie-$(
-            lsb_release --id    \
-                        --short
-            )"
+        lsb_release --id --short
+        )"
     cp  --update "$search"*{desktop,server}.pdf "$docs_dir" |& $LOGCMD || true
     cp  --update                                    \
         "$search"*{desktop,server}"-$HOSTNAME".pdf  \

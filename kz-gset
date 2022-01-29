@@ -269,11 +269,10 @@ function process_option_addfavend  {
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
     elif !  printf '%s' "$favorite_apps" |
             grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
-        gsettings set org.gnome.shell favorite-apps \
-            "$(
-                printf '%s' "$favorite_apps" |
-                cut --delimiter=']' --fields=1
-                ), '$DESKTOPFILE']"
+        gsettings set org.gnome.shell favorite-apps "$(
+            printf '%s' "$favorite_apps" |
+            cut --delimiter=']' --fields=1
+            ), '$DESKTOPFILE']"
     fi
 }
 
@@ -286,11 +285,10 @@ function process_option_removefav  {
         :
     elif [[ $favorite_apps = "['$DESKTOPFILE']" ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
-    else gsettings set org.gnome.shell favorite-apps \
-        "$(
-            printf  '%s' "$favorite_apps"                   |
-            sed     --expression="s/'$DESKTOPFILE', //g"    |
-            sed     --expression="s/, '$DESKTOPFILE'//"
+    else gsettings set org.gnome.shell favorite-apps "$(
+        printf  '%s' "$favorite_apps"                   |
+        sed     --expression="s/'$DESKTOPFILE', //g"    |
+        sed     --expression="s/, '$DESKTOPFILE'//"
         )"
     fi
 }
@@ -309,9 +307,8 @@ function process_option_addappfolder  {
             grep    --quiet             \
                     --word-regexp       \
                     --regexp="$APPFOLDER"; then
-        gsettings set org.gnome.desktop.app-folders folder-children \
-            "$(
-                printf '%s' "$app_folders" | cut --delimiter=']' --fields=1
+        gsettings set org.gnome.desktop.app-folders folder-children "$(
+            printf '%s' "$app_folders" | cut --delimiter=']' --fields=1
             ), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
@@ -333,13 +330,9 @@ function process_option_removeappfolder  {
         :
     elif [[ $app_folders = "['$APPFOLDER']" ]]; then
         gsettings set org.gnome.desktop.app-folders folder-children "[]"
-    else gsettings  set                             \
-                    org.gnome.desktop.app-folders   \
-                    folder-children                 \
-                    "$(
-                        printf '%s' "$app_folders" |
-                        sed --expression="s/, '$APPFOLDER'//"
-                    )"
+    else gsettings set org.gnome.desktop.app-folders folder-children "$(
+            printf '%s' "$app_folders" | sed --expression="s/, '$APPFOLDER'//"
+            )"
     fi
     schema=org.gnome.desktop.app-folders.folder
     path=/org/gnome/desktop/app-folders/folders/$APPFOLDER/

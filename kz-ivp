@@ -204,11 +204,11 @@ ${BOLD}In $script:${NORMAL}
     #  '#1'=ok, '#1 foo'=ok,'#1(foo'=ok, '#1foo'=¬ok, hetzelfde voor #2 en #3.
     if [[ $script == kz-install*.sh || $script == kz-setup*.sh ]]; then
         wrong_record=$(
-            grep --regexp='#[1-3]' "$script" --line-number  |
+            grep --regexp='#[1-9]' "$script" --line-number  |
             grep --regexp='#[1-3]$' --invert-match          |
             grep --regexp='#[1-3] ' --invert-match          |
             grep --regexp='#[1-3](' --invert-match          || true
-        )
+            )
     else
         wrong_record=''
     fi
@@ -217,12 +217,9 @@ ${BOLD}In $script:${NORMAL}
 ${BOLD}In $script:${NORMAL}
     Foutieve regel(s) gevonden.
 $(
-        printf  '%s' "$wrong_record"    |
-        nl      --number-width=8        \
-                --number-separator=''   \
-                --body-numbering=n
-
-    )
+    printf '%s' "$wrong_record" |
+                nl --number-width=8 --number-separator='' --body-numbering=n
+)
 "
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
@@ -287,12 +284,10 @@ function check_trailing_spaces {
         info "
 ${BOLD}In $script:${NORMAL}
     Eindspaties gevonden.
-
 $(
     grep    --line-number --regexp=' ''$' "$script" |
     nl      --number-width=4  --number-separator='' --body-numbering=n
-
-    )
+)
 "
         if [[ $ERROR -gt $MAXRC ]]; then
             MAXRC=$ERROR
