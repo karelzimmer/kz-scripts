@@ -81,9 +81,9 @@ function check_input {
 
     # Aangemeld als ontwikkelaar?
     full_name=$(
-        getent  passwd  karel           |
-        awk     -F':'   '{print $5}'    |
-        awk     -F','   '{print $1}'    || true
+        getent passwd karel             |
+        cut --delimiter=':' --fields=5  |
+        cut --delimiter=',' --fields=1  || true
         )
     if [[   $HOSTNAME == pc??                               &&
             ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then

@@ -256,7 +256,7 @@ function process_option_addfavbegin  {
         gsettings set org.gnome.shell favorite-apps \
             "['$DESKTOPFILE', $(
                                 printf '%s' "$favorite_apps"   |
-                                awk -F'[' '{print $2}'
+                                cut --delimiter='[' --fields=2
                                 )"
     fi
 }
@@ -273,7 +273,7 @@ function process_option_addfavend  {
         gsettings set org.gnome.shell favorite-apps \
             "$(
                 printf '%s' "$favorite_apps" |
-                awk -F']' '{print $1}'), '$DESKTOPFILE']"
+                cut --delimiter=']' --fields=1), '$DESKTOPFILE']"
     fi
 }
 
@@ -312,7 +312,7 @@ function process_option_addappfolder  {
         gsettings set org.gnome.desktop.app-folders folder-children \
                     "$(
                         printf '%s' "$app_folders" |
-                        awk -F']' '{print $1}'), '$APPFOLDER']"
+                        cut --delimiter=']' --fields=1), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
     path=/org/gnome/desktop/app-folders/folders/$APPFOLDER/

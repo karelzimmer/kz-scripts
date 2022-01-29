@@ -196,7 +196,7 @@ function process_input {
                         du  --apparent-size \
                             --block-size=1  \
                             "$file"         |
-                        awk '{print $1}'
+                        cut --fields=1
                         )
                     check_on_ac_power
                     create_usb_stick "$file"
