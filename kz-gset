@@ -255,9 +255,8 @@ function process_option_addfavbegin  {
             grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
         gsettings set org.gnome.shell favorite-apps \
             "['$DESKTOPFILE', $(
-                                printf '%s' "$favorite_apps"   |
-                                cut --delimiter='[' --fields=2
-                                )"
+                printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
+                )"
     fi
 }
 
@@ -273,7 +272,8 @@ function process_option_addfavend  {
         gsettings set org.gnome.shell favorite-apps \
             "$(
                 printf '%s' "$favorite_apps" |
-                cut --delimiter=']' --fields=1), '$DESKTOPFILE']"
+                cut --delimiter=']' --fields=1
+                ), '$DESKTOPFILE']"
     fi
 }
 
@@ -287,11 +287,11 @@ function process_option_removefav  {
     elif [[ $favorite_apps = "['$DESKTOPFILE']" ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
     else gsettings set org.gnome.shell favorite-apps \
-                    "$(
-                        printf  '%s' "$favorite_apps"                   |
-                        sed     --expression="s/'$DESKTOPFILE', //g"    |
-                        sed     --expression="s/, '$DESKTOPFILE'//"
-                    )"
+        "$(
+            printf  '%s' "$favorite_apps"                   |
+            sed     --expression="s/'$DESKTOPFILE', //g"    |
+            sed     --expression="s/, '$DESKTOPFILE'//"
+        )"
     fi
 }
 
@@ -310,9 +310,9 @@ function process_option_addappfolder  {
                     --word-regexp       \
                     --regexp="$APPFOLDER"; then
         gsettings set org.gnome.desktop.app-folders folder-children \
-                    "$(
-                        printf '%s' "$app_folders" |
-                        cut --delimiter=']' --fields=1), '$APPFOLDER']"
+            "$(
+                printf '%s' "$app_folders" | cut --delimiter=']' --fields=1
+            ), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
     path=/org/gnome/desktop/app-folders/folders/$APPFOLDER/

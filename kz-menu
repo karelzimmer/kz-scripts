@@ -546,11 +546,10 @@ function process_commands {
     if $COMMANDS_EXECUTED; then
         for exec in "${!EXEC[@]}"; do
             action=$(
-                printf '%s' "${EXEC[$exec]}" |
-                cut --delimiter='#' --fields=1
+                printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
                 )
-            command=$(printf '%s' "${EXEC[$exec]}" |
-                cut --delimiter='#' --fields=2
+            command=$(
+                printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
                 )
             execute_command
         done
@@ -572,11 +571,10 @@ De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
 "
     for exec in "${!EXEC[@]}"; do
         action=$(
-            printf '%s' "${EXEC[$exec]}" |
-            cut --delimiter='#' --fields=1
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
             )
-        command=$(printf '%s' "${EXEC[$exec]}" |
-            cut --delimiter='#' --fields=2
+        command=$(
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
             )
         TEXT+="
 $exec. $action ($command)"
