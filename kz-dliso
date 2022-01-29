@@ -98,7 +98,9 @@ function check_input {
 
 
 function process_input {
-    FULL_VS="$(lsb_release --description --short | awk '{print $2}')"
+    FULL_VS="$(
+        lsb_release --description --short | cut --delimiter=' ' --fields=2
+        )"
     read -rp  "Wat is de Ubuntu-versie? [$FULL_VS]: "
     if [[ $REPLY ]]; then
         FULL_VS="$REPLY"

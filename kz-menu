@@ -545,8 +545,13 @@ function process_commands {
     fi
     if $COMMANDS_EXECUTED; then
         for exec in "${!EXEC[@]}"; do
-            action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
-            command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')
+            action=$(
+                printf '%s' "${EXEC[$exec]}" |
+                cut --delimiter='#' --fields=1
+                )
+            command=$(printf '%s' "${EXEC[$exec]}" |
+                cut --delimiter='#' --fields=2
+                )
             execute_command
         done
     fi
@@ -566,8 +571,13 @@ function show_commands_before_execution {
 De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
 "
     for exec in "${!EXEC[@]}"; do
-        action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
-        command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')
+        action=$(
+            printf '%s' "${EXEC[$exec]}" |
+            cut --delimiter='#' --fields=1
+            )
+        command=$(printf '%s' "${EXEC[$exec]}" |
+            cut --delimiter='#' --fields=2
+            )
         TEXT+="
 $exec. $action ($command)"
     done
@@ -618,12 +628,11 @@ function execute_command {
     local       prompt=''
 
     exec=${command/kz /kz-}
-    cmd=$(printf '%s' "$exec" | cut --delimiter=' ' --fields=1)
+    cmd=$(
+        printf '%s' "$exec" | cut --delimiter=' ' --fields=1
+        )
     arg=$(
-            printf  '%s' "$exec"    |
-            cut     --delimiter=' ' \
-                    --fields=2-     \
-                    --only-delimited
+        printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
         )
     case $exec in
         kz-install|kz-nas)
@@ -665,8 +674,12 @@ function show_commands_after_execution {
             "De volgende $NUMBER_OF_COMMANDS acties zijn uitgevoerd:"   \
             > "$temp_text_file"
     for exec in "${!EXEC[@]}"; do
-        action=$( printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $1}')
-        command=$(printf '%s' "${EXEC[$exec]}" | awk -F'#' '{print $2}')
+        action=$(
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
+            )
+        command=$(
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
+            )
         printf '%2d. %-25s\n' "$exec" "$action ($command)" >> "$temp_text_file"
     done
     if $OPTION_GUI; then

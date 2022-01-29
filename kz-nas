@@ -213,10 +213,18 @@ $fstab"
         if [[ $zenity_rc -ne $SUCCESS ]]; then
             exit $SUCCESS
         fi
-        NAS_IP_ADRES=$(      printf '%s' "$REPLY" | awk -F',' '{print $1}')
-        NAS_GEBRUIKERSNAAM=$(printf '%s' "$REPLY" | awk -F',' '{print $2}')
-        NAS_WACHTWOORD=$(    printf '%s' "$REPLY" | awk -F',' '{print $3}')
-        NAS_SHARENAAM=$(     printf '%s' "$REPLY" | awk -F',' '{print $4}')
+        NAS_IP_ADRES=$(
+            printf '%s' "$REPLY" | cut --delimiter=',' --fields=1
+            )
+        NAS_GEBRUIKERSNAAM=$(
+            printf '%s' "$REPLY" | cut --delimiter=',' --fields=2
+            )
+        NAS_WACHTWOORD=$(
+            printf '%s' "$REPLY" | cut --delimiter=',' --fields=3
+            )
+        NAS_SHARENAAM=$(
+            printf '%s' "$REPLY" | cut --delimiter=',' --fields=4
+            )
     else
         printf '%s\n%s\n' "$TEXT." "Als u niets opgeeft, wordt de waarde \
 tussen [] gebruikt als antwoord."
