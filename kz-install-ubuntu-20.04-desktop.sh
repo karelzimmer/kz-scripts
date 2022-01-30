@@ -93,7 +93,7 @@ sudo apt-get install --yes gnome-sushi
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes gnome-sushi
 
-#1 teamviewer (Telewerken)
+#1 teamviewer (Afstandsbediening)
 wget --no-verbose --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
