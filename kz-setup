@@ -756,9 +756,7 @@ function execute_command {
 
     log "$description_line"
     log "${BLUE}$cmd${NORMAL}"
-    trap_off
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
-    trap_on
     if [[ $cmd_rc -gt $MAXRC ]]; then
         MAXRC=$cmd_rc
     fi

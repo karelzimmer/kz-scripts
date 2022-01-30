@@ -156,8 +156,15 @@ function init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
-    trap_on
-    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    trap 'signal error   $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
+    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
+    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
+    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
+    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
+    # Enable code-stepping:
+    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
+LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
@@ -392,7 +399,7 @@ Controleer de log in het Terminalvenster met:
                 log 'EINDE DEBUG-SESSIE'
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
-            trap_off
+            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
         *)
@@ -443,23 +450,6 @@ dan een Terminalvenster, en voer uit:
             return $SUCCESS
             ;;
     esac
-}
-
-
-function trap_off {
-    trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-}
-
-
-function trap_on {
-    trap 'signal error   $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
-    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
-    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
-    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
-    # Enable code-stepping:
-    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
 }
 
 
