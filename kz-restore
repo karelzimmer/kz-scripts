@@ -102,7 +102,7 @@ function process_input {
 Nu aangekoppeld zijn:
 $SOURCE
 
-Koppel media af via Bestanden."
+Koppel media af via Bestanden, en start daarna opnieuw."
         exit $WARNING
     fi
 
@@ -149,7 +149,9 @@ function restore_backup {
             error "
 Back-up terugzetten is mislukt.
 
-Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}')."
+Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
+
+Gebruik een medium met meer ruimte, en start daarna opnieuw."
             exit $ERROR
             ;;
         23)

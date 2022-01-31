@@ -105,7 +105,7 @@ function process_input {
 Nu aangekoppeld zijn:
 $TARGET
 
-Koppel media af via Bestanden."
+Koppel media af via Bestanden, en start daarna opnieuw."
         exit $WARNING
     fi
 
@@ -178,7 +178,9 @@ EOF
             error "
 Back-up maken is mislukt.
 
-Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}')."
+Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
+
+Koppel een medium aan met meer ruimte, en start daarna opnieuw."
             exit $ERROR
             ;;
         23)
