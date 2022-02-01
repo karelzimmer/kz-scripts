@@ -28,6 +28,7 @@ def perform_update():
 
     # Opdracht als raw text:
     subprocess.run('sudo apt-get upgrade --yes', shell=True)
+    subprocess.run('sudo apt-get dist-upgrade --yes', shell=True)
 
     # Opdracht als raw text, vang stdout en stderr op:
     subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
