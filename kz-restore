@@ -26,7 +26,7 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 Back-up terugzetten.
 
 Opties:
-  -n --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
+  -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
 $OPTIONS_HELP_COMMON"
 
 SOURCE=$(ls --directory /media/"$USER"/*/backup-"$HOSTNAME-$USER" 2> /dev/null)

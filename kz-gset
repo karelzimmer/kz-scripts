@@ -29,20 +29,20 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 GUI wijzigen.
 
 Opties:
-     --addappfolder
-                voeg een appfolder toe
-     --addfavbegin
-                voeg een favoriet toe aan het begin van het favorietengebied
-     --addfavend
-                voeg een favoriet toe aan het einde van het favorietengebied
-     --file=DESKTOPFILE
-                opgegeven desktopbestand (.desktop) verwerken
-     --folder=APPFOLDER
-                opgegeven appfolder verwerken
-     --removeappfolder
-                verwijder een appfolder
-     --removefav
-                verwijder een favoriet uit het favorietengebied
+      --addappfolder
+                 voeg een appfolder toe
+      --addfavbegin
+                 voeg een favoriet toe aan het begin van het favorietengebied
+      --addfavend
+                 voeg een favoriet toe aan het einde van het favorietengebied
+      --file=DESKTOPFILE
+                 opgegeven desktopbestand (.desktop) verwerken
+      --folder=APPFOLDER
+                 opgegeven appfolder verwerken
+      --removeappfolder
+                 verwijder een appfolder
+      --removefav
+                 verwijder een favoriet uit het favorietengebied
 $OPTIONS_HELP_COMMON"
 
 

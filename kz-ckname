@@ -30,7 +30,7 @@ Opties:
 $OPTIONS_HELP_COMMON
 
 Argumenten:
-  MAP           begin te controleren vanaf map MAP"
+  MAP            begin te controleren vanaf map MAP"
 
 declare -ir FILENAME_MAXLEN=142
 readonly    START_DFLT=$HOME

@@ -30,21 +30,21 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
 Apps instellen.
 
 Opties:
-  -a --apps     toon lijst van in te stellen apps
-  -c --cat      toon inhoud van instellingsbestanden
-  -e --edition=EDITIE
-                gebruik opgegeven editie
-  -f --files    toon lijst van beschikbare instellingsbestanden
-  -i --info     toon aanvullende instructies na het instellen van apps
-  -l --list     maak instellijst aan
-  -r --reset    toon instructies voor het resetten van apps
-  -s --simulate geen actie, simuleer wijzigingen, en toon opdracht die
-                uitgevoerd zou worden
+  -a, --apps     toon lijst van in te stellen apps
+  -c, --cat      toon inhoud van instellingsbestanden
+  -e, --edition=EDITIE
+                 gebruik opgegeven editie
+  -f, --files    toon lijst van beschikbare instellingsbestanden
+  -i, --info     toon aanvullende instructies na het instellen van apps
+  -l, --list     maak instellijst aan
+  -r, --reset    toon instructies voor het resetten van apps
+  -s, --simulate geen actie, simuleer wijzigingen, en toon opdracht die
+                 uitgevoerd zou worden
 $OPTIONS_HELP_COMMON
 
 Argumenten:
-  APP           opgegeven apps instellen
-  BESTAND       opgegeven instellingsbestanden verwerken"
+  APP            opgegeven apps instellen
+  BESTAND        opgegeven instellingsbestanden verwerken"
 
 readonly EDITION_DEFAULT=desktop
 DASHES=$(printf '%.0s=' {1..79}); readonly DASHES

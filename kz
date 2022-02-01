@@ -30,14 +30,14 @@ Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
 Opdracht uitvoeren.
 
 Opties:
-  -l --list     toon beschikbare OPDRACHTen
-  -h --help     toon deze hulptekst
-  -u --usage    toon een korte gebruikssamenvatting
-  -v --version  toon programmaversie
+  -l, --list     toon beschikbare OPDRACHTen
+  -h, --help     toon deze hulptekst
+  -u, --usage    toon een korte gebruikssamenvatting
+  -v, --version  toon programmaversie
 
 Argumenten:
-  OPDRACHT      uit te voeren opdracht
-  ARG           argumenten behorend bij OPDRACHT"
+  OPDRACHT       uit te voeren opdracht
+  ARG            argumenten behorend bij OPDRACHT"
 
 THIS_YEAR=$(date +%Y); readonly THIS_YEAR
 

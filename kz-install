@@ -31,21 +31,21 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
 Apps installeren.
 
 Opties:
-  -a --apps     toon lijst van te installeren apps
-  -c --cat      toon inhoud van installatiebestanden
-  -e --edition=EDITIE
-                gebruik opgegeven editie
-  -f --files    toon lijst van beschikbare installatiebestanden
-  -i --info     toon aanvullende instructies na het installeren van apps
-  -l --list     maak applijst aan
-  -r --remove   toon instructies voor het verwijderen van apps
-  -s --simulate geen actie, simuleer installatie, en toon opdracht die
-                uitgevoerd zou worden
+  -a, --apps     toon lijst van te installeren apps
+  -c, --cat      toon inhoud van installatiebestanden
+  -e, --edition=EDITIE
+                 gebruik opgegeven editie
+  -f, --files    toon lijst van beschikbare installatiebestanden
+  -i, --info     toon aanvullende instructies na het installeren van apps
+  -l, --list     maak applijst aan
+  -r, --remove   toon instructies voor het verwijderen van apps
+  -s, --simulate geen actie, simuleer installatie, en toon opdracht die
+                 uitgevoerd zou worden
 $OPTIONS_HELP_COMMON
 
 Argumenten:
-  APP           opgegeven apps installeren
-  BESTAND       opgegeven installatiebestanden verwerken"
+  APP            opgegeven apps installeren
+  BESTAND        opgegeven installatiebestanden verwerken"
 
 DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
 readonly EDITION_DEFAULT=desktop

@@ -26,11 +26,11 @@ readonly OPTIONS_USAGE_COMMON="[-u|--usage] [-h|--help] [-v|--version] \
 [-g|--gui] [-d|--debug]"
 # shellcheck disable=SC2034
 readonly OPTIONS_HELP_COMMON="\
-  -h --help     toon deze hulptekst
-  -u --usage    toon een korte gebruikssamenvatting
-  -v --version  toon programmaversie
-  -g --gui      start in grafische modus (indien van toepassing)
-  -d --debug    neem foutopsporingsinformatie op in het logboek"
+  -h, --help     toon deze hulptekst
+  -u, --usage    toon een korte gebruikssamenvatting
+  -v, --version  toon programmaversie
+  -g, --gui      start in grafische modus (indien van toepassing)
+  -d, --debug    neem foutopsporingsinformatie op in het logboek"
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO

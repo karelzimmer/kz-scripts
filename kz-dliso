@@ -26,8 +26,8 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 Beeldbestanden downloaden.
 
 Opties:
-  -c --checksums
-                download alleen de controlebestanden
+  -c, --checksums
+                 download alleen de controlebestanden
 $OPTIONS_HELP_COMMON"
 
 readonly SEARCH_FOR=SHA256SUMS

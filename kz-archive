@@ -29,7 +29,7 @@ Opties:
 $OPTIONS_HELP_COMMON
 
 Argumenten:
-  SELECTIE      zoek naar bestanden overeenkomend met opgegeven SELECTIEs"
+  SELECTIE       zoek naar bestanden overeenkomend met opgegeven SELECTIEs"
 
 readonly ARCHIVE_FROM=$HOME/kz-uploads/dist/data/linux
 readonly ARCHIVE_TO=$HOME/kz-uploads/app/data/linux-archief
