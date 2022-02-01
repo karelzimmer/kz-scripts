@@ -581,12 +581,12 @@ function process_option_cat {
 
 
 function process_file {
-    local description=''
+    local app_description=''
     local -i cmd_seq_num=0
     local prev_recordtype=''
     local record=''
     local recordtype=''
-    local write_description_line=true
+    local write_app_description_line=true
 
     if $EXECUTE_COMMANDS; then
         printf '%b' "${CURSOR_INVISABLE}"
@@ -601,7 +601,7 @@ function process_file {
                 continue
                 ;;
             '#1')
-                process_description "$record"
+                process_app_description "$record"
                 ;;
             '#2')
                 process_setup_instruction "$record"
@@ -626,15 +626,15 @@ function process_file {
 }
 
 
-function process_description {
+function process_app_description {
     local record=${1:-record?}
 
-    description="${record:3}"
+    app_description="${record:3}"
     if ! $OPTION_SIMULATE && ! $EXECUTE_COMMANDS; then
         return $SUCCESS
     fi
 
-    write_description_line=true
+    write_app_description_line=true
     ((++app_seq_num))
     cmd_seq_num=0
 }
@@ -654,10 +654,10 @@ function process_setup_instruction {
         printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
-        len=${#description}
+        len=${#app_description}
         # ?? wordt in term_script vervangen door aantal in te stellen apps.
         printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
-                "$app_seq_num"  "$description"              \
+                "$app_seq_num"  "$app_description"          \
                 "$filler"       "$DASHES"                   \
                 "$filler"       "${record:3}"               >> "$TEXT_FILE"
     fi
@@ -678,10 +678,10 @@ function process_reset_instruction {
         printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
-        len=${#description}
+        len=${#app_description}
         # ?? wordt in term_script vervangen door aantal te resetten apps.
         printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
-                "$app_seq_num"  "$description"              \
+                "$app_seq_num"  "$app_description"          \
                 "$filler"       "$DASHES"                   \
                 "$filler"       "${record:3}"               >> "$TEXT_FILE"
     fi
@@ -691,7 +691,7 @@ function process_reset_instruction {
 function process_command {
     local       record=${1:-record?}
     local   -i  cmd_rc=0
-    local       description_line=''
+    local       app_description_line=''
     local   -i  desc_maxlen=1000
     local       desc_printf=''
     local       status=''
@@ -700,21 +700,21 @@ function process_command {
     ((++cmd_seq_num))
 
     if $OPTION_SIMULATE; then
-        if $write_description_line; then
+        if $write_app_description_line; then
             printf  '[%3d/%-3d] %s\n\n' \
                     "$app_seq_num"      \
                     "$app_tot_num"      \
-                    "$description"      >> "$TEXT_FILE"
-            write_description_line=false
+                    "$app_description"  >> "$TEXT_FILE"
+            write_app_description_line=false
         fi
         printf  '%9s [%2d] %s\n\n'          \
                 " "                         \
                 "$cmd_seq_num"              \
                 "${BLUE}$record${NORMAL}"   >> "$TEXT_FILE"
     elif $EXECUTE_COMMANDS; then
-        desc_printf=$description
+        desc_printf=$app_description
         if $OPTION_GUI; then
-            TEXT="#[$app_seq_num/$app_tot_num] $description...\n\n$record"
+            TEXT="#[$app_seq_num/$app_tot_num] $app_description...\n\n$record"
             printf '%s\n' "$TEXT"
         else
             if [[ -t 1 ]]; then
@@ -728,7 +728,7 @@ function process_command {
                 fi
             fi
         fi
-        printf  -v description_line                                 \
+        printf  -v app_description_line                             \
                 "[%3d/%-3d] [%2d] %-${desc_maxlen}.${desc_maxlen}s" \
                 "$app_seq_num"                                      \
                 "$app_tot_num"                                      \
@@ -747,14 +747,14 @@ function execute_command {
 
     if ! $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "$STATUS_BUSY %s${CARRIAGE_RETURN}" "$description_line"
+            printf "$STATUS_BUSY %s${CARRIAGE_RETURN}" "$app_description_line"
         else
             printf  "$STATUS_BUSY ${SPACES:0:9}%s${CARRIAGE_RETURN}" \
-                    "${description_line:9}"
+                    "${app_description_line:9}"
         fi
     fi
 
-    log "$description_line"
+    log "$app_description_line"
     log "${BLUE}$cmd${NORMAL}"
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
     if [[ $cmd_rc -gt $MAXRC ]]; then
