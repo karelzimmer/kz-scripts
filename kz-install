@@ -72,28 +72,28 @@ hulp of q voor stoppen)"
 # Global variables                                                            #
 ###############################################################################
 
-declare -a  APP_ARGUMENT=()
-declare -a  FILE_ARGUMENT=()
-declare -a  FILE_TO_PROCESS=()
-declare     ARGUMENT_APP=false
-declare     ARGUMENT_FILE=false
-declare     COMMANDS_FOUND=false
-declare     EDITION=$EDITION_DEFAULT
-declare     EDITION_ARGUMENT=''
-declare     EXECUTE_COMMANDS=true
-declare -i  MAXRC=0
-declare     INFO_FOUND=false
-declare     OPTION_APPS=false
-declare     OPTION_CAT=false
-declare     OPTION_EDITION=false
-declare     OPTION_FILES=false
-declare     OPTION_GUI=false
-declare     OPTION_INFO=false
-declare     OPTION_LIST=false
-declare     OPTION_REMOVE=false
-declare     OPTION_SIMULATE=false
-declare     REMOVE_FOUND=false
-declare     STATUS_BUSY=''
+declare -a APP_ARGUMENT=()
+declare -a FILE_ARGUMENT=()
+declare -a FILE_TO_PROCESS=()
+declare -i MAXRC=0
+ARGUMENT_APP=false
+ARGUMENT_FILE=false
+COMMANDS_FOUND=false
+EDITION=$EDITION_DEFAULT
+EDITION_ARGUMENT=''
+EXECUTE_COMMANDS=true
+INFO_FOUND=false
+OPTION_APPS=false
+OPTION_CAT=false
+OPTION_EDITION=false
+OPTION_FILES=false
+OPTION_GUI=false
+OPTION_INFO=false
+OPTION_LIST=false
+OPTION_REMOVE=false
+OPTION_SIMULATE=false
+REMOVE_FOUND=false
+STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 BLINK=$(tput blink)

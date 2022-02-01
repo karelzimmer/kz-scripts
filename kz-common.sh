@@ -40,21 +40,21 @@ THIS_YEAR=$(date +%Y); readonly THIS_YEAR
 # Common global variables
 ###############################################################################
 
-declare -a  CMDLINE_ARGS=()
-declare     HELP='Gebruik: source kz-common.sh
+declare -a CMDLINE_ARGS=()
+HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     LOGCMD=''
-declare     LOGCMD_CHECK=''
-declare     OPTION_DEBUG=false
-declare     OPTION_GUI=false
-declare     OPTION_HELP=false
-declare     OPTION_USAGE=false
-declare     OPTION_VERSION=false
-declare     RUN_AS_SUPERUSER=false
-declare     TITLE=''
-declare     USAGE='Gebruik: source kz-common.sh
+LOGCMD=''
+LOGCMD_CHECK=''
+OPTION_DEBUG=false
+OPTION_GUI=false
+OPTION_HELP=false
+OPTION_USAGE=false
+OPTION_VERSION=false
+RUN_AS_SUPERUSER=false
+TITLE=''
+USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     USAGELINE=''
+USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 NORMAL=$(tput sgr0)
@@ -162,7 +162,7 @@ function init_script {
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
     # Enable code-stepping:
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 

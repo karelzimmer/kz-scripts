@@ -40,8 +40,8 @@ readonly TARGET=$HOME/Downloads
 # Gobal variables
 ###############################################################################
 
-declare FULL_VS=''
-declare OPTION_CHECKSUMS=false
+FULL_VS=$(lsb_release --description --short | cut --delimiter=' ' --fields=2)
+OPTION_CHECKSUMS=false
 
 
 ###############################################################################
@@ -93,9 +93,6 @@ function check_input {
 
 
 function process_input {
-    FULL_VS="$(
-        lsb_release --description --short | cut --delimiter=' ' --fields=2
-        )"
     read -rp  "Wat is de Ubuntu-versie? [$FULL_VS]: "
     if [[ $REPLY ]]; then
         FULL_VS="$REPLY"

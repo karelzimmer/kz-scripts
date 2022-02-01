@@ -39,8 +39,8 @@ TARGET=$HOME
 # Global variables                                                            #
 ###############################################################################
 
-declare OPTION_DRY_RUN=''
-declare OPTION_GUI=false
+OPTION_DRY_RUN=''
+OPTION_GUI=false
 
 
 ###############################################################################

@@ -95,10 +95,10 @@ readonly MENU2_LINES=${#ACTIONS2[@]}
 # Global variables                                                            #
 ###############################################################################
 
-declare -a  EXEC=''
-declare     COMMANDS_EXECUTED=false
-declare -i  NUMBER_OF_COMMANDS=0
-declare     OPTION_GUI=false
+declare -a EXEC=''
+declare -i NUMBER_OF_COMMANDS=0
+COMMANDS_EXECUTED=false
+OPTION_GUI=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 REWRITE_LINE="$(tput cuu1;tput el)"

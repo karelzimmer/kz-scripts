@@ -42,10 +42,10 @@ readonly DELETE_FROM_3=$HOME/kz-deb
 # Global variables                                                            #
 ###############################################################################
 
-declare     ARCHIVED=false
-declare     ARGUMENT_SELECTION=false
-declare -a  SELECTION_ARGUMENT=()
-declare     DELETED=false
+declare -a SELECTION_ARGUMENT=()
+ARCHIVED=false
+ARGUMENT_SELECTION=false
+DELETED=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 REWRITE_LINE="$(tput cuu1;tput el)"
