@@ -17,18 +17,19 @@ RELEASE_YEAR=2007
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'nx'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',dry-run,delete'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-n|--dry-run] [-x|--delete]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gnx'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui,dry-run,delete'
+readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui] [-n|--dry-run] [-x|--delete]
                    $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Back-up maken.
 
 Opties:
+  -g, --gui      start in grafische modus
   -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -x, --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
-                back-up verwijderen (standaard bij optie --gui)
+                 back-up verwijderen (standaard bij optie --gui)
 $OPTIONS_HELP_COMMON"
 
 readonly SOURCE=$HOME
@@ -40,6 +41,7 @@ TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null); readonly TARGET
 
 declare OPTION_DELETE=''
 declare OPTION_DRY_RUN=''
+declare OPTION_GUI=false
 
 
 ###############################################################################
@@ -66,6 +68,11 @@ function check_input {
 
     while true; do
         case $1 in
+            -g|--gui)
+                OPTION_GUI=true
+                reset_terminal_attribs
+                shift
+                ;;
             -n|--dry-run)
                 OPTION_DRY_RUN='--dry-run'
                 shift

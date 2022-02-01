@@ -5,6 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-dashoptions="-d --debug -g --gui -h --help '-t APPARAAT' '--target APPARAAT' -u
-    --usage -v --version MAP"
+dashoptions="-d --debug -h --help '-t APPARAAT' '--target APPARAAT' -u --usage
+    -v --version MAP"
 complete -o default -W "$dashoptions" kz-mkusb

@@ -58,7 +58,6 @@ readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
-declare DESKTOP_TERMINAL=false
 
 
 ###############################################################################
@@ -99,12 +98,6 @@ function check_input {
         TEXT='geen argumenten opgeven'
         printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
         exit $ERROR
-    fi
-
-    # Een non-gui script gestart met optie gui.
-    if $OPTION_GUI; then
-        OPTION_GUI=false
-        DESKTOP_TERMINAL=true
     fi
 
     clear -x
@@ -394,7 +387,7 @@ function term_script {
         "$search"*{desktop,server}"-$HOSTNAME".pdf  \
         "$docs_dir"                                 |& $LOGCMD || true
 
-    TEXT='Pakket kz is succesvol geïnstalleerd.
+    TEXT="Pakket kz is succesvol geïnstalleerd.
 
 Volg nu de stappen zoals beschreven
 in de Checklist installatie.
@@ -403,19 +396,13 @@ Deze checklist is te vinden:
 - in de map Documenten
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
-  onder Linux'
-    height=16
-
-    if ! $DESKTOP_TERMINAL; then
-        TEXT+="
+  onder Linux
 
 Typ 'exit' om dit venster te sluiten."
-        height=18
-    fi
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title 'Gereed'            \
                         --infobox "$TEXT"           \
-                        $height 41
+                        18 41
     exit $SUCCESS
 }
 

@@ -18,18 +18,17 @@ readonly ERROR=1
 readonly WARNING=2
 
 # shellcheck disable=SC2034
-readonly OPTIONS_SHORT_COMMON='dghuv'
+readonly OPTIONS_SHORT_COMMON='dhuv'
 # shellcheck disable=SC2034
-readonly OPTIONS_LONG_COMMON='debug,gui,help,usage,version'
+readonly OPTIONS_LONG_COMMON='debug,help,usage,version'
 # shellcheck disable=SC2034
 readonly OPTIONS_USAGE_COMMON="[-u|--usage] [-h|--help] [-v|--version] \
-[-g|--gui] [-d|--debug]"
+[-d|--debug]"
 # shellcheck disable=SC2034
 readonly OPTIONS_HELP_COMMON="\
   -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
   -v, --version  toon programmaversie
-  -g, --gui      start in grafische modus (indien van toepassing)
   -d, --debug    neem foutopsporingsinformatie op in het logboek"
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
@@ -58,13 +57,12 @@ declare     USAGE='Gebruik: source kz-common.sh
 declare     USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     NORMAL=''
-declare     BOLD=''
-declare     RED=''
-declare     GREEN=''
-declare     YELLOW=''
-declare     BLUE=''
-declare     REWRITE_LINE=''
+NORMAL=$(tput sgr0)
+BOLD=$(tput bold)
+BLUE=${BOLD}$(tput setaf 4)
+GREEN=${BOLD}$(tput setaf 2)
+RED=${BOLD}$(tput setaf 1)
+YELLOW=${BOLD}$(tput setaf 3)
 
 
 ###############################################################################
@@ -207,10 +205,6 @@ function process_common_options {
                 OPTION_VERSION=true
                 shift
                 ;;
-            -g|--gui)
-                OPTION_GUI=true
-                shift
-                ;;
             --)
                 break
                 ;;
@@ -219,18 +213,6 @@ function process_common_options {
                 ;;
         esac
     done
-
-    if ! $OPTION_GUI && [[ -t 1 ]]; then
-        # Tekstuitvoer non-gui naar de terminal.
-        NORMAL=$(tput sgr0)
-        BOLD=$(tput bold)
-        RED=${BOLD}$(tput setaf 1)
-        GREEN=${BOLD}$(tput setaf 2)
-        YELLOW=${BOLD}$(tput setaf 3)
-        BLUE=${BOLD}$(tput setaf 4)
-        # shellcheck disable=SC2034
-        REWRITE_LINE="$(tput cuu1;tput el)"
-    fi
 
     if $OPTION_DEBUG; then
         process_option_debug
@@ -307,6 +289,16 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
 Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
+}
+
+
+function reset_terminal_attribs {
+    NORMAL=''
+    BOLD=''
+    BLUE=''
+    GREEN=''
+    RED=''
+    YELLOW=''
 }
 
 

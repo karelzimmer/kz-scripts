@@ -47,6 +47,9 @@ declare     ARGUMENT_SELECTION=false
 declare -a  SELECTION_ARGUMENT=()
 declare     DELETED=false
 
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+REWRITE_LINE="$(tput cuu1;tput el)"
+
 
 ###############################################################################
 # Functions                                                                   #
@@ -90,11 +93,6 @@ function check_input {
         ((++search4_arg_num))
         shift
     done
-
-    # Een non-gui script gestart met optie gui.
-    if $OPTION_GUI; then
-        OPTION_GUI=false
-    fi
 
     check_user
 

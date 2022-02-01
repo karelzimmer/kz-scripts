@@ -17,15 +17,16 @@ RELEASE_YEAR=2007
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'en'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',dry-run'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-n|--dry-run]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gn'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui,dry-run'
+readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui] [-n|--dry-run]
                     $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Back-up terugzetten.
 
 Opties:
+  -g, --gui      start in grafische modus
   -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
 $OPTIONS_HELP_COMMON"
 
@@ -39,6 +40,7 @@ TARGET=$HOME
 ###############################################################################
 
 declare OPTION_DRY_RUN=''
+declare OPTION_GUI=false
 
 
 ###############################################################################
@@ -65,6 +67,11 @@ function check_input {
 
     while true; do
         case $1 in
+            -g|--gui)
+                OPTION_GUI=true
+                reset_terminal_attribs
+                shift
+                ;;
             -n|--dry-run)
                 OPTION_DRY_RUN='--dry-run'
                 shift

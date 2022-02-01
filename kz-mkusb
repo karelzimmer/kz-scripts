@@ -50,6 +50,10 @@ declare SOURCEDIR=''
 declare SOURCE_ARGUMENT=''
 declare TARGET_ARGUMENT=''
 
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+REWRITE_LINE="$(tput cuu1;tput el)"
+
+
 ###############################################################################
 # Functions                                                                   #
 ###############################################################################
@@ -127,11 +131,6 @@ function check_input {
         DEVICE=$TARGET_ARGUMENT
     else
         DEVICE=$DEVICE_DEFAULT
-    fi
-
-    # Een non-gui script gestart met optie gui.
-    if $OPTION_GUI; then
-        OPTION_GUI=false
     fi
 
     check_user

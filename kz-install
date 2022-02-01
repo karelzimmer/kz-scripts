@@ -18,11 +18,11 @@ RELEASE_YEAR=2009
 ###############################################################################
 
 readonly RUN_AS_SUPERUSER=true
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:filrs'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,info,list,\
-remove,simulate"
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fgilrs'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,gui,info,\
+list,remove,simulate"
 readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] \
-[-e|--edition=EDITIE] [-f|--files]
+[-e|--edition=EDITIE] [-f|--files] [-g|--gui]
                     [-i|--info] [-l|--list] [-r|--remove] [-s|--simulate]
                     $OPTIONS_USAGE_COMMON
                     [APP...] [BESTAND...]"
@@ -36,6 +36,7 @@ Opties:
   -e, --edition=EDITIE
                  gebruik opgegeven editie
   -f, --files    toon lijst van beschikbare installatiebestanden
+  -g, --gui      start in grafische modus
   -i, --info     toon aanvullende instructies na het installeren van apps
   -l, --list     maak applijst aan
   -r, --remove   toon instructies voor het verwijderen van apps
@@ -86,17 +87,19 @@ declare     OPTION_APPS=false
 declare     OPTION_CAT=false
 declare     OPTION_EDITION=false
 declare     OPTION_FILES=false
+declare     OPTION_GUI=false
 declare     OPTION_INFO=false
 declare     OPTION_LIST=false
 declare     OPTION_REMOVE=false
 declare     OPTION_SIMULATE=false
 declare     REMOVE_FOUND=false
+declare     STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     CARRIAGE_RETURN=''
-declare     BLINK=''
-declare     CURSOR_INVISABLE=''
-declare     CURSOR_VISABLE=''
+BLINK=$(tput blink)
+CARRIAGE_RETURN=$(tput cr)
+CURSOR_INVISABLE=$(tput civis)
+CURSOR_VISABLE=$(tput cvvis)
 
 
 ###############################################################################
@@ -151,6 +154,11 @@ function check_input {
                 OPTION_FILES=true
                 shift
                 ;;
+            -g|--gui)
+                OPTION_GUI=true
+                reset_terminal_attribs
+                shift
+                ;;
             -i|--info)
                 OPTION_INFO=true
                 EXECUTE_COMMANDS=false
@@ -180,15 +188,6 @@ function check_input {
                 ;;
         esac
     done
-
-    if ! $OPTION_GUI && [[ -t 1 ]]; then
-        # Tekstuitvoer non-gui naar de terminal.
-        CARRIAGE_RETURN=$(tput cr)
-        BLINK=$(tput blink)
-        CURSOR_INVISABLE=$(tput civis)
-        CURSOR_VISABLE=$(tput cvvis)
-    fi
-    STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -638,6 +637,7 @@ function process_file {
     local       write_app_description_line=true
 
     if $EXECUTE_COMMANDS; then
+        STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
         printf '%b' "${CURSOR_INVISABLE}"
     fi
     $skip_line && printf '\n'; skip_line=true

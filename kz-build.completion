@@ -5,5 +5,5 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-dashoptions='-d --debug -g --gui -h --help -u --usage -v --version'
+dashoptions='-d --debug -h --help -u --usage -v --version'
 complete -o default -W "$dashoptions" kz-build

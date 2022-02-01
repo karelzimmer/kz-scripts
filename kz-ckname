@@ -96,11 +96,6 @@ function check_input {
         fi
     done
 
-    # Een non-gui script gestart met optie gui.
-    if $OPTION_GUI; then
-        OPTION_GUI=false
-    fi
-
     check_user
 }
 

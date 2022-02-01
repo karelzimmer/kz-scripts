@@ -17,14 +17,16 @@ RELEASE_YEAR=2015
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'g'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui'
+readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui]
+                 $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Installatiemenu.
 
 Opties:
+  -g, --gui      start in grafische modus
 $OPTIONS_HELP_COMMON"
 
 DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
@@ -60,7 +62,6 @@ ${DASHES:0:57}
 ${DASHES:0:57}"
 readonly -a ACTIONS2=(
     [1]='Back-up maken'
-        'Pakket installeren'
         'Apps installeren'
         'Installatie-instructies tonen'
         'Verwijder-instructies tonen'
@@ -75,7 +76,6 @@ readonly -a ACTIONS2=(
     )
 readonly -a COMMANDS2=(
     [1]='kz backup'
-        'kz getdeb'
         'kz install'
         'kz install --info'
         'kz install --remove'
@@ -98,6 +98,10 @@ readonly MENU2_LINES=${#ACTIONS2[@]}
 declare -a  EXEC=''
 declare     COMMANDS_EXECUTED=false
 declare -i  NUMBER_OF_COMMANDS=0
+declare     OPTION_GUI=false
+
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+REWRITE_LINE="$(tput cuu1;tput el)"
 
 
 ###############################################################################
@@ -124,6 +128,11 @@ function check_input {
 
     while true; do
         case $1 in
+            -g|--gui)
+                OPTION_GUI=true
+                reset_terminal_attribs
+                shift
+                ;;
             --)
                 shift
                 break
@@ -268,8 +277,8 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 
     TITLE="${ACTIONS1[1]}"
     EXEC=(
-        [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
-            "${ACTIONS2[12]}#${COMMANDS2[12]}"
+        [1]="${ACTIONS2[5]}#${COMMANDS2[5]}"
+            "${ACTIONS2[11]}#${COMMANDS2[11]}"
             "${ACTIONS2[1]}#${COMMANDS2[1]}"
         )
 
@@ -305,14 +314,14 @@ function process_menu1_choice3 {
     if [[   ($HOSTNAME = pc-van-soe  && $USER = soe )   ||
             ($HOSTNAME = pc-van-hugo && $USER = hugo)   ]]; then
         EXEC=(
-            [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
+            [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
+                "${ACTIONS2[2]}#${COMMANDS2[2]}"
                 "${ACTIONS2[3]}#${COMMANDS2[3]}"
-                "${ACTIONS2[4]}#${COMMANDS2[4]}"
             )
     else
         EXEC=(
-            [1]="${ACTIONS2[3]}#${COMMANDS2[3]}"
-                "${ACTIONS2[4]}#${COMMANDS2[4]}"
+            [1]="${ACTIONS2[2]}#${COMMANDS2[2]}"
+                "${ACTIONS2[3]}#${COMMANDS2[3]}"
             )
     fi
     process_commands
@@ -325,9 +334,9 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 
     TITLE="${ACTIONS1[4]}"
     EXEC=(
-        [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
+        [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
+            "${ACTIONS2[8]}#${COMMANDS2[8]}"
             "${ACTIONS2[9]}#${COMMANDS2[9]}"
-            "${ACTIONS2[10]}#${COMMANDS2[10]}"
         )
     process_commands
 }
@@ -351,7 +360,7 @@ function process_menu2_gui {
             zenity  --list                                          \
                     --radiolist                                     \
                     --width         480                             \
-                    --height        420                             \
+                    --height        380                             \
                     --title         "$TITLE"                        \
                     --text          'Selecteer een keuze:'          \
                     --ok-label      'Verder'                        \
@@ -371,7 +380,6 @@ function process_menu2_gui {
                     FALSE  9 "${ACTIONS2[9]}"  "${COMMANDS2[9]}"    \
                     FALSE 10 "${ACTIONS2[10]}" "${COMMANDS2[10]}"   \
                     FALSE 11 "${ACTIONS2[11]}" "${COMMANDS2[11]}"   \
-                    FALSE 12 "${ACTIONS2[12]}" "${COMMANDS2[12]}"   \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -515,13 +523,6 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             process_commands
             ;;
         12)
-            TITLE="${ACTIONS2[12]}"
-            EXEC=(
-                [1]="${ACTIONS2[12]}#${COMMANDS2[12]}"
-                )
-            process_commands
-            ;;
-        13)
             exit_menu2=true
             ;;
         *)

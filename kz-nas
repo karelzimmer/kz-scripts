@@ -18,14 +18,16 @@ RELEASE_YEAR=2014
 ###############################################################################
 
 readonly RUN_AS_SUPERUSER=true
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'g'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui'
+readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui]
+                $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Netwerkschijf aankoppelen.
 
 Opties:
+  -g, --gui      start in grafische modus
 $OPTIONS_HELP_COMMON"
 
 readonly NAS_LOGIN=/usr/local/etc/${PROGRAM_NAME}login
@@ -58,6 +60,10 @@ declare NAS_GEBRUIKERSNAAM=${SUDO_USER:-$USER}
 declare NAS_IP_ADRES=192.168.0.200
 declare NAS_SHARENAAM=${SUDO_USER:-$USER}
 declare NAS_WACHTWOORD='geheim'
+declare OPTION_GUI=false
+
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+REWRITE_LINE="$(tput cuu1;tput el)"
 
 
 ###############################################################################
@@ -84,6 +90,11 @@ function check_input {
 
     while true; do
         case $1 in
+            -g|--gui)
+                OPTION_GUI=true
+                reset_terminal_attribs
+                shift
+                ;;
             --)
                 shift
                 break
