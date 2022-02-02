@@ -17,7 +17,6 @@ RELEASE_YEAR=2021
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=false
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
