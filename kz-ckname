@@ -40,8 +40,8 @@ readonly    START_DFLT=$HOME
 # Global variables                                                            #
 ###############################################################################
 
-declare -a MAP_ARGUMENT=()
-ARGUMENT_MAP=false
+declare     ARGUMENT_MAP=false
+declare -a  MAP_ARGUMENT=()
 
 
 ###############################################################################

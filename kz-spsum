@@ -35,8 +35,9 @@ readonly HASHPROG=sha256sum
 # Global variables                                                            #
 ###############################################################################
 
-ISO_FILE=''
-ISO_FILE_FOUND=false
+declare ISO_FILE=''
+declare ISO_FILE_FOUND=false
+
 
 ###############################################################################
 # Functions                                                                   #

@@ -33,7 +33,8 @@ Opties:
 $OPTIONS_HELP_COMMON"
 
 readonly SOURCE=$HOME
-TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null); readonly TARGET
+         TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null)
+readonly TARGET
 
 ###############################################################################
 # Global variables                                                            #

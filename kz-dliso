@@ -40,8 +40,11 @@ readonly TARGET=$HOME/Downloads
 # Gobal variables
 ###############################################################################
 
-FULL_VS=$(lsb_release --description --short | cut --delimiter=' ' --fields=2)
-OPTION_CHECKSUMS=false
+declare FULL_VS=''
+        FULL_VS=$(
+            lsb_release --description --short | cut --delimiter=' ' --fields=2
+            )
+declare OPTION_CHECKSUMS=false
 
 
 ###############################################################################

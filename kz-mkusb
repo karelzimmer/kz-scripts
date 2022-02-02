@@ -42,16 +42,17 @@ readonly SOURCE_DEFAULT=/home/${SUDO_USER:-$USER}/Downloads
 # Global variables                                                            #
 ###############################################################################
 
-DEVICE=''
-NO_FILES_FOUND=true
-OPTION_SOURCE=false
-OPTION_TARGET=false
-SOURCEDIR=''
-SOURCE_ARGUMENT=''
-TARGET_ARGUMENT=''
+declare DEVICE=''
+declare NO_FILES_FOUND=true
+declare OPTION_SOURCE=false
+declare OPTION_TARGET=false
+declare SOURCEDIR=''
+declare SOURCE_ARGUMENT=''
+declare TARGET_ARGUMENT=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-REWRITE_LINE="$(tput cuu1;tput el)"
+declare REWRITE_LINE=''
+        REWRITE_LINE=$(tput cuu1;tput el)
 
 
 ###############################################################################

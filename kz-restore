@@ -30,7 +30,10 @@ Opties:
   -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
 $OPTIONS_HELP_COMMON"
 
-SOURCE=$(ls --directory /media/"$USER"/*/backup-"$HOSTNAME-$USER" 2> /dev/null)
+         SOURCE=$(
+             ls --directory                                 \
+                /media/"$USER"/*/backup-"$HOSTNAME-$USER"   2> /dev/null
+             )
 readonly SOURCE
 TARGET=$HOME
 
@@ -39,8 +42,8 @@ TARGET=$HOME
 # Global variables                                                            #
 ###############################################################################
 
-OPTION_DRY_RUN=''
-OPTION_GUI=false
+declare OPTION_DRY_RUN=''
+declare OPTION_GUI=false
 
 
 ###############################################################################
