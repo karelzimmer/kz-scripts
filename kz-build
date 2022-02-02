@@ -41,7 +41,8 @@ readonly UPLOADS_APPDIR=$UPLOADS_REPO/app
 readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
 # Conform ISO 8601.
-TIMESTAMP=$(date +%Y-%m-%dT%H:%M); readonly TIMESTAMP
+         TIMESTAMP=$(date +%Y-%m-%dT%H:%M)
+readonly TIMESTAMP
 
 readonly -A SOURCE_UPLOADS=(
                 [APP]=$UPLOADS_APPDIR

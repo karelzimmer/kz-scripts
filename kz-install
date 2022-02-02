@@ -48,14 +48,21 @@ Argumenten:
   APP            opgegeven apps installeren
   BESTAND        opgegeven installatiebestanden verwerken"
 
-DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
+         DASHES=$(printf '%.0s=' {1..79})
+readonly DASHES
 readonly EDITION_DEFAULT=desktop
-SPACES=$(printf '%.0s ' {1..79}); readonly SPACES
-VERSION=$(lsb_release --release --short); readonly VERSION
-CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE
-CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE2
-TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text"); readonly TEXT_FILE
-TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list"); readonly TEMP_LIST
+         SPACES=$(printf '%.0s ' {1..79})
+readonly SPACES
+         VERSION=$(lsb_release --release --short)
+readonly VERSION
+         CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly CMDS_FILE
+         CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly CMDS_FILE2
+         TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
+readonly TEXT_FILE
+         TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
+readonly TEMP_LIST
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
 # van:

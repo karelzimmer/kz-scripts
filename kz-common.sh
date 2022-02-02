@@ -31,9 +31,10 @@ readonly OPTIONS_HELP_COMMON="\
   -v, --version  toon programmaversie
   -d, --debug    neem foutopsporingsinformatie op in het logboek"
 
-DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+         DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
-THIS_YEAR=$(date +%Y); readonly THIS_YEAR
+         THIS_YEAR=$(date +%Y)
+readonly THIS_YEAR
 
 
 ###############################################################################

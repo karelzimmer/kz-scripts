@@ -39,7 +39,8 @@ Argumenten:
   OPDRACHT       uit te voeren opdracht
   ARG            argumenten behorend bij OPDRACHT"
 
-THIS_YEAR=$(date +%Y); readonly THIS_YEAR
+         THIS_YEAR=$(date +%Y)
+readonly THIS_YEAR
 
 
 ###############################################################################

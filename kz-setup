@@ -47,13 +47,19 @@ Argumenten:
   APP            opgegeven apps instellen
   BESTAND        opgegeven instellingsbestanden verwerken"
 
+         DASHES=$(printf '%.0s=' {1..79})
+readonly DASHES
 readonly EDITION_DEFAULT=desktop
-DASHES=$(printf '%.0s=' {1..79}); readonly DASHES
-SPACES=$(printf '%.0s ' {1..79}); readonly SPACES
-VERSION=$(lsb_release --release --short); readonly VERSION
-CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE
-CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds"); readonly CMDS_FILE2
-TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text"); readonly TEXT_FILE
+         SPACES=$(printf '%.0s ' {1..79})
+readonly SPACES
+         VERSION=$(lsb_release --release --short)
+readonly VERSION
+         CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly CMDS_FILE
+         CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly CMDS_FILE2
+         TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
+readonly TEXT_FILE
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
 # van:
