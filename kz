@@ -20,11 +20,9 @@ declare -ir SUCCESS=0
 declare -ir ERROR=1
 declare -ir WARNING=2
 
-readonly    USAGE="\
-Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
+readonly    USAGE="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
      of: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
-readonly    HELP="\
-Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
+readonly    HELP="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
          $DISPLAY_NAME OPTIE
 
 Opdracht uitvoeren.
