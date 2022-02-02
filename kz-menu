@@ -95,7 +95,7 @@ readonly MENU2_LINES=${#ACTIONS2[@]}
 # Global variables                                                            #
 ###############################################################################
 
-declare -a  EXEC=''
+declare -a  EXEC=()
 declare     COMMANDS_EXECUTED=false
 declare -i  NUMBER_OF_COMMANDS=0
 declare     OPTION_GUI=false
