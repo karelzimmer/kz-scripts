@@ -191,8 +191,8 @@ Controleer de log in het Terminalvenster met:
 
 function term_script {
     info "
-De back-up is teruggezet.
-${BOLD}$OPTION_DRY_RUN${NORMAL}
+De back-up is teruggezet.${BOLD}$OPTION_DRY_RUN${NORMAL}
+
 Koppel zelf (veilig!) het back-up-medium af."
     exit $SUCCESS
 }
