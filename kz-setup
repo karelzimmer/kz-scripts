@@ -47,18 +47,18 @@ Argumenten:
   APP            opgegeven apps instellen
   BESTAND        opgegeven instellingsbestanden verwerken"
 
-         DASHES=$(printf '%.0s=' {1..79})
+DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
 readonly EDITION_DEFAULT=desktop
-         SPACES=$(printf '%.0s ' {1..79})
+SPACES=$(printf '%.0s ' {1..79})
 readonly SPACES
-         VERSION=$(lsb_release --release --short)
+VERSION=$(lsb_release --release --short)
 readonly VERSION
-         CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly CMDS_FILE
-         CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly CMDS_FILE2
-         TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
+TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 readonly TEXT_FILE
 
 # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
@@ -76,38 +76,34 @@ hulp of q voor stoppen)"
 # Global variables                                                            #
 ###############################################################################
 
-declare -a  APP_ARGUMENT=()
-declare -a  FILE_ARGUMENT=()
-declare -a  FILE_TO_PROCESS=()
-declare     ARGUMENT_APP=false
-declare     ARGUMENT_FILE=false
-declare     COMMANDS_FOUND=false
-declare     EDITION=$EDITION_DEFAULT
-declare     EDITION_ARGUMENT=''
-declare     EXECUTE_COMMANDS=true
-declare -i  MAXRC=0
-declare     INFO_FOUND=false
-declare     OPTION_APPS=false
-declare     OPTION_CAT=false
-declare     OPTION_EDITION=false
-declare     OPTION_FILES=false
-declare     OPTION_GUI=false
-declare     OPTION_INFO=false
-declare     OPTION_LIST=false
-declare     OPTION_RESET=false
-declare     OPTION_SIMULATE=false
-declare     RESET_FOUND=false
-declare     STATUS_BUSY=''
+declare -a APP_ARGUMENT=()
+declare -a FILE_ARGUMENT=()
+declare -a FILE_TO_PROCESS=()
+declare -i MAXRC=0
+ARGUMENT_APP=false
+ARGUMENT_FILE=false
+COMMANDS_FOUND=false
+EDITION=$EDITION_DEFAULT
+EDITION_ARGUMENT=''
+EXECUTE_COMMANDS=true
+INFO_FOUND=false
+OPTION_APPS=false
+OPTION_CAT=false
+OPTION_EDITION=false
+OPTION_FILES=false
+OPTION_GUI=false
+OPTION_INFO=false
+OPTION_LIST=false
+OPTION_RESET=false
+OPTION_SIMULATE=false
+RESET_FOUND=false
+STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     BLINK=''
-            BLINK=$(tput blink)
-declare     CARRIAGE_RETURN=''
-            CARRIAGE_RETURN=$(tput cr)
-declare     CURSOR_INVISABLE=''
-            CURSOR_INVISABLE=$(tput civis)
-declare     CURSOR_VISABLE=''
-            CURSOR_VISABLE=$(tput cvvis)
+BLINK=$(tput blink)
+CARRIAGE_RETURN=$(tput cr)
+CURSOR_INVISABLE=$(tput civis)
+CURSOR_VISABLE=$(tput cvvis)
 
 
 ###############################################################################

@@ -33,16 +33,16 @@ Opties:
 $OPTIONS_HELP_COMMON"
 
 readonly SOURCE=$HOME
-         TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null)
+TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null)
 readonly TARGET
 
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
 
-declare OPTION_DELETE=''
-declare OPTION_DRY_RUN=''
-declare OPTION_GUI=false
+OPTION_DELETE=''
+OPTION_DRY_RUN=''
+OPTION_GUI=false
 
 
 ###############################################################################

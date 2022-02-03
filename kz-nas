@@ -56,15 +56,14 @@ readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 # Global variables                                                            #
 ###############################################################################
 
-declare NAS_GEBRUIKERSNAAM=${SUDO_USER:-$USER}
-declare NAS_IP_ADRES=192.168.0.200
-declare NAS_SHARENAAM=${SUDO_USER:-$USER}
-declare NAS_WACHTWOORD='geheim'
-declare OPTION_GUI=false
+NAS_GEBRUIKERSNAAM=${SUDO_USER:-$USER}
+NAS_IP_ADRES=192.168.0.200
+NAS_SHARENAAM=${SUDO_USER:-$USER}
+NAS_WACHTWOORD='geheim'
+OPTION_GUI=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare REWRITE_LINE=
-        REWRITE_LINE=$(tput cuu1;tput el)
+REWRITE_LINE=$(tput cuu1;tput el)
 
 
 ###############################################################################

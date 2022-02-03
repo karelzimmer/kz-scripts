@@ -31,9 +31,9 @@ readonly OPTIONS_HELP_COMMON="\
   -v, --version  toon programmaversie
   -d, --debug    neem foutopsporingsinformatie op in het logboek"
 
-         DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
-         THIS_YEAR=$(date +%Y)
+THIS_YEAR=$(date +%Y)
 readonly THIS_YEAR
 
 
@@ -41,35 +41,29 @@ readonly THIS_YEAR
 # Common global variables
 ###############################################################################
 
-declare -a  CMDLINE_ARGS=()
-declare     HELP='Gebruik: source kz-common.sh
+declare -a CMDLINE_ARGS=()
+HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     LOGCMD=''
-declare     LOGCMD_CHECK=''
-declare     OPTION_DEBUG=false
-declare     OPTION_GUI=false
-declare     OPTION_HELP=false
-declare     OPTION_USAGE=false
-declare     OPTION_VERSION=false
-declare     RUN_AS_SUPERUSER=false
-declare     TITLE=''
-declare     USAGE='Gebruik: source kz-common.sh
+LOGCMD=''
+LOGCMD_CHECK=''
+OPTION_DEBUG=false
+OPTION_GUI=false
+OPTION_HELP=false
+OPTION_USAGE=false
+OPTION_VERSION=false
+RUN_AS_SUPERUSER=false
+TITLE=''
+USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     USAGELINE=''
+USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     NORMAL=''
-            NORMAL=$(tput sgr0)
-declare     BOLD=''
-            BOLD=$(tput bold)
-declare     BLUE=''
-            BLUE=${BOLD}$(tput setaf 4)
-declare     GREEN=''
-            GREEN=${BOLD}$(tput setaf 2)
-declare     RED=''
-            RED=${BOLD}$(tput setaf 1)
-declare     YELLOW=''
-            YELLOW=${BOLD}$(tput setaf 3)
+NORMAL=$(tput sgr0)
+BOLD=$(tput bold)
+BLUE=${BOLD}$(tput setaf 4)
+GREEN=${BOLD}$(tput setaf 2)
+RED=${BOLD}$(tput setaf 1)
+YELLOW=${BOLD}$(tput setaf 3)
 
 
 ###############################################################################
