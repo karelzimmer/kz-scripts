@@ -17,9 +17,3 @@ Keywords[nl]=kznas;aankoppelen;netwerk;
 Categories=KZ Scripts;
 Exec=pkexec /usr/bin/kz-nas --gui
 Icon=/usr/share/pixmaps/kz-nas.png
-Actions=version;
-
-[Desktop Action version]
-Name=Show version information
-Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-nas --gui --version

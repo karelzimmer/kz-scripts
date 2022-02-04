@@ -17,7 +17,7 @@ Keywords[nl]=kzinstall;installatie;
 Categories=KZ Scripts;
 Exec=pkexec /usr/bin/kz-install --gui
 Icon=/usr/share/pixmaps/kz-install.svg
-Actions=info;remove;list;cat;simulate;version;
+Actions=info;remove;list;cat;simulate;
 
 [Desktop Action info]
 Name=Show installation instructions
@@ -43,8 +43,3 @@ Exec=/usr/bin/kz-install --gui --cat
 Name=Show commands
 Name[nl]=Opdrachten tonen
 Exec=/usr/bin/kz-install --gui --simulate
-
-[Desktop Action version]
-Name=Show version information
-Name[nl]=Versie-informatie tonen tonen
-Exec=/usr/bin/kz-install --gui --version

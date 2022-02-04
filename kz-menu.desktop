@@ -17,9 +17,3 @@ Keywords[nl]=kzmenu;menu;
 Categories=KZ Scripts;
 Exec=/usr/bin/kz-menu --gui
 Icon=/usr/share/pixmaps/kz-menu.svg
-Actions=version;
-
-[Desktop Action version]
-Name=Show version information
-Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-menu --gui --version

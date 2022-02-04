@@ -17,9 +17,3 @@ Keywords[nl]=kz-restore;restore;reservekopie;
 Categories=KZ Scripts;
 Exec=/usr/bin/kz-restore --gui
 Icon=/usr/share/pixmaps/kz-restore.svg
-Actions=version;
-
-[Desktop Action version]
-Name=Show version information
-Name[nl]=Versie-informatie tonen
-Exec=/usr/bin/kz-restore --gui --version

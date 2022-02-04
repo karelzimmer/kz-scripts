@@ -28,7 +28,7 @@ readonly OPTIONS_USAGE_COMMON="[-u|--usage] [-h|--help] [-v|--version] \
 readonly OPTIONS_HELP_COMMON="\
   -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon programmaversie
+  -v, --version  toon de programmaversie
   -d, --debug    neem foutopsporingsinformatie op in het logboek"
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
@@ -284,7 +284,7 @@ function process_option_version {
         copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
 
-    info "$DISPLAY_NAME versie 365 (kz build $build)
+    printf '%s\n' "$DISPLAY_NAME versie 365 (kz build $build)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
