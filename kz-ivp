@@ -108,25 +108,26 @@ function process_input {
                 continue
                 ;;
         esac
-        check_lines
-        check_tags
         check_trailing_spaces
         case $script in
-            *.1|*.desktop|*.policy)
+            *.policy)
                 continue
                 ;;
-            kz_common.py|kz-genpwd|kz-update)
-                check_release_year
-                check_pycodestyle
+            *.1|*.desktop)
+                check_record_length
                 ;;
-            kz-common.sh)
-                check_release_year
+            *.completion)
+                check_record_length
                 check_shellcheck
                 ;;
-            *.completion|*.sh)
+            *.sh)
+                check_tags
+                check_record_types
                 check_shellcheck
                 ;;
             *)
+                check_tags
+                check_record_length
                 check_release_year
                 check_code
                 ;;
@@ -142,7 +143,8 @@ function check_code {
     elif grep   --quiet                         \
                 --line-regexp                   \
                 --regexp='#!''/usr/bin/python3' \
-                "$script"; then
+                "$script"                       || [[ $script = kz_common.py ]]
+    then
             check_pycodestyle
     else
         info "
@@ -153,23 +155,19 @@ ${BOLD}In $script:${NORMAL}
 }
 
 
-function check_lines {
-    local -i line_num=0
-    local -i max_lines=1000
-    local -i max_line_length=0
-    local -i max_line_length_found=0
+function check_pycodestyle {
+    local -i check_rc=0
 
-    case $script in
-        *.sh)
-            max_line_length=249
-            ;;
-        *.policy)
-            max_line_length=104
-            ;;
-        *)
-            max_line_length=79
-            ;;
-    esac
+    pycodestyle "$script" || check_rc=$?
+    if [[ $check_rc -ne $SUCCESS ]]; then
+        MAXRC=$ERROR
+    fi
+}
+
+
+function check_record_length {
+    local -i max_line_length=79
+    local -i max_line_length_found=0
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
@@ -179,27 +177,23 @@ ${BOLD}In $script:${NORMAL}
 "
         MAXRC=$ERROR
     fi
+}
 
-    line_num=$(wc --lines < "$script")
-    if [[ $line_num -gt $max_lines ]]; then
-        info "
-${BOLD}In $script:${NORMAL}
-    Meer dan $max_lines regels ($line_num).
-"
-        MAXRC=$ERROR
+
+function check_record_types {
+    local wrong_record=''
+
+    if [[ $script = kz-common.sh ]]; then
+        return 0
     fi
 
     #  '#1'=ok, '#1 foo'=ok,'#1(foo'=ok, '#1foo'=¬ok, hetzelfde voor #2 en #3.
-    if [[ $script == kz-install*.sh || $script == kz-setup*.sh ]]; then
-        wrong_record=$(
-            grep --regexp='#[1-9]' "$script" --line-number  |
-            grep --regexp='#[1-3]$' --invert-match          |
-            grep --regexp='#[1-3] ' --invert-match          |
-            grep --regexp='#[1-3](' --invert-match          || true
-            )
-    else
-        wrong_record=''
-    fi
+    wrong_record=$(
+        grep --regexp='#[1-9]' "$script" --line-number  |
+        grep --regexp='#[1-3]$' --invert-match          |
+        grep --regexp='#[1-3] ' --invert-match          |
+        grep --regexp='#[1-3](' --invert-match          || true
+        )
     if [[ $wrong_record ]]; then
         info "
 ${BOLD}In $script:${NORMAL}
@@ -214,16 +208,6 @@ $(
 }
 
 
-function check_shellcheck {
-    local -i    check_rc=0
-
-    shellcheck --external-sources "$script" || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        MAXRC=$ERROR
-    fi
-}
-
-
 function check_release_year {
     if ! grep   --quiet                     \
                 --regexp='RELEASE_YEAR='    \
@@ -233,6 +217,16 @@ function check_release_year {
 ${BOLD}In $script:${NORMAL}
     Vrijgavejaar (RELEASE_YEAR/release_year) ontbreekt.
 "
+        MAXRC=$ERROR
+    fi
+}
+
+
+function check_shellcheck {
+    local -i check_rc=0
+
+    shellcheck --external-sources "$script" || check_rc=$?
+    if [[ $check_rc -ne $SUCCESS ]]; then
         MAXRC=$ERROR
     fi
 }
@@ -273,16 +267,6 @@ $(
     nl      --number-width=4  --number-separator='' --body-numbering=n
 )
 "
-        MAXRC=$ERROR
-    fi
-}
-
-
-function check_pycodestyle {
-    local -i check_rc=0
-
-    pycodestyle "$script" || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
         MAXRC=$ERROR
     fi
 }
