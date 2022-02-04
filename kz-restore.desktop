@@ -7,13 +7,13 @@
 [Desktop Entry]
 Type=Application
 Name=Restore backup
-Name[nl]=Back-up terugzetten
+Name[nl]=Reservekopie terugzetten
 GenericName=Restore progam
 GenericName[nl]=Herstelprogramma
 Comment=Restore files and folders from a backup
-Comment[nl]=Zet bestanden en mappen terug uit een back-up (reservekopie)
-Keywords=kzrestore;restore;copy;
-Keywords[nl]=kzrestore;restore;reservekopie;
+Comment[nl]=Zet bestanden en mappen terug uit een reservekopie
+Keywords=kz-restore;restore;copy;
+Keywords[nl]=kz-restore;restore;reservekopie;
 Categories=KZ Scripts;
 Exec=/usr/bin/kz-restore --gui
 Icon=/usr/share/pixmaps/kz-restore.svg
