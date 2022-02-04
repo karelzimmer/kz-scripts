@@ -6,8 +6,8 @@
 
 [Desktop Entry]
 Type=Application
-Name=Mount network drive
-Name[nl]=Netwerkschijf aankoppelen
+Name=Mount NAS
+Name[nl]=NAS aankoppelen
 GenericName=NAS mount
 GenericName[nl]=NAS-aankoppelen
 Comment=Mount a NAS during startup
