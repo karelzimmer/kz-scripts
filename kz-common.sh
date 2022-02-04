@@ -102,7 +102,7 @@ function error {
             true
         fi
     else
-        printf "${RED}%b${NORMAL}\n" "$@"
+        printf "${RED}%b${NORMAL}\n" "$@" >&2
     fi
 }
 
