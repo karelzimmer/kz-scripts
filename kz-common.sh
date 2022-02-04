@@ -305,12 +305,12 @@ function reset_terminal_attribs {
 
 function signal {
     local       signal=${1:-signal?}
-    local   -i  lineno=${2:-0}
+    local -i    lineno=${2:-0}
     local       function=${3:-funcname?}
     local       command=${4:-command?}
-    local   -i  rc=${5:-1}
+    local -i    rc=${5:-1}
     local       rc_desc=''
-    local   -i  rc_desc_signalno=0
+    local -i    rc_desc_signalno=0
     local       status="${RED}$ERROR/ERROR${NORMAL}"
 
     case $rc in

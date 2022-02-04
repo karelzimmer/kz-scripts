@@ -111,7 +111,7 @@ REWRITE_LINE=$(tput cuu1;tput el)
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -536,7 +536,7 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 
 
 function process_commands {
-    local   -i  exec=0
+    local -i    exec=0
     local       action=''
     local       command=''
 
@@ -565,7 +565,7 @@ function process_commands {
 
 function show_commands_before_execution {
     local       prompt=''
-    local   -i  exec=0
+    local -i    exec=0
     local       action=''
     local       command=''
 
@@ -624,7 +624,7 @@ $prompt"
 
 
 function execute_command {
-    local   -i  cmd_rc=0
+    local -i    cmd_rc=0
     local       exec=''
     local       prompt=''
 
@@ -666,7 +666,7 @@ function execute_command {
 function show_commands_after_execution {
     local       action=''
     local       command=''
-    local   -i  exec=0
+    local -i    exec=0
     local       prompt=''
     local       temp_text_file=''
 

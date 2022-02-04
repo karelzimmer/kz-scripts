@@ -111,9 +111,9 @@ CURSOR_VISABLE=$(tput cvvis)
 ###############################################################################
 
 function check_input {
-    local   -i  app_arg_num=0
-    local   -i  file_arg_num=0
-    local   -i  getopt_rc=0
+    local -i    app_arg_num=0
+    local -i    file_arg_num=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -213,9 +213,9 @@ function check_input {
 function process_input {
     local       file=''
     local       file_notfound=false
-    local   -i  app_seq_num=0
-    local   -i  app_tot_num=0
-    local   -i  file_num=0
+    local -i    app_seq_num=0
+    local -i    app_tot_num=0
+    local -i    file_num=0
     local       skip_line=false
     local       dfltfile_1=''
     local       dfltfile_2=''
@@ -387,7 +387,7 @@ function save_command_history {     #4
 function process_argument_app {
     local       app=''
     local       file=''
-    local   -a  file_to_process=()
+    local -a    file_to_process=()
 
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
@@ -649,7 +649,7 @@ function process_app_description {
 function process_setup_instruction {
     local       record=${1:-record?}
     local       filler=''
-    local   -i  len=0
+    local -i    len=0
 
     INFO_FOUND=true
     if ! $OPTION_INFO; then
@@ -673,7 +673,7 @@ function process_setup_instruction {
 function process_reset_instruction {
     local       record=${1:-record?}
     local       filler=''
-    local   -i  len=0
+    local -i    len=0
 
     RESET_FOUND=true
     if ! $OPTION_RESET; then
@@ -696,9 +696,9 @@ function process_reset_instruction {
 
 function process_command {
     local       record=${1:-record?}
-    local   -i  cmd_rc=0
+    local -i    cmd_rc=0
     local       app_description_line=''
-    local   -i  desc_maxlen=1000
+    local -i    desc_maxlen=1000
     local       desc_printf=''
     local       status=''
 
@@ -747,7 +747,7 @@ function process_command {
 
 function execute_command {
     local       cmd=${1:-cmd?}
-    local   -i  cmd_rc=0
+    local -i    cmd_rc=0
     local       filler=''
     local       status=''
 
@@ -777,7 +777,7 @@ function execute_command {
 
 
 function term_script {
-    local   -i  app_num=0
+    local -i    app_num=0
 
     if $OPTION_SIMULATE; then
         if $OPTION_GUI; then

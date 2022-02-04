@@ -50,7 +50,7 @@ OPTION_GUI=false
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -124,7 +124,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 
 function create_backup {
     local       backup=backup-$HOSTNAME-$USER
-    local   -i  rsync_rc=0
+    local -i    rsync_rc=0
     local       exclude=''
 
     exclude=$(mktemp -t 'kz-backup-XXXXXXXXXX')

@@ -44,7 +44,7 @@ ISO_FILE_FOUND=false
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -106,8 +106,8 @@ function process_input {
 
 
 function create_checksum_file {
-    local   -a  files=()
-    local   -i  grep_rc=0
+    local -a    files=()
+    local -i    grep_rc=0
 
     if [[ -e $ISO_FILE.$HASHPROG ]]; then
         info "Beeldbestand $ISO_FILE heeft al controlebestand \

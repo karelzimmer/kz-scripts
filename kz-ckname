@@ -48,8 +48,8 @@ ARGUMENT_MAP=false
 ###############################################################################
 
 function check_input {
-    local   -i  map_arg_num=0
-    local   -i  getopt_rc=0
+    local -i    map_arg_num=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -109,7 +109,7 @@ function check_files_and_folders {
     local       file
     local       basename
     local       good
-    local   -i  count=0
+    local -i    count=0
 
     # Het maakt niet uit of in de bestandsnaam speciale tekens voorkomen zoals
     # tab, spatie, enz.  Hiervoor zorgt de find met print0,en de read met IFS=

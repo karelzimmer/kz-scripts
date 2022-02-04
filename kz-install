@@ -114,9 +114,9 @@ CURSOR_VISABLE=$(tput cvvis)
 ###############################################################################
 
 function check_input {
-    local   -i  app_arg_num=0
-    local   -i  file_arg_num=0
-    local   -i  getopt_rc=0
+    local -i    app_arg_num=0
+    local -i    file_arg_num=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -216,9 +216,9 @@ function check_input {
 function process_input {
     local       file=''
     local       file_notfound=false
-    local   -i  app_seq_num=0
-    local   -i  app_tot_num=0
-    local   -i  file_num=0
+    local -i    app_seq_num=0
+    local -i    app_tot_num=0
+    local -i    file_num=0
     local       skip_line=false
 
     if $OPTION_LIST; then
@@ -344,7 +344,7 @@ function create_list_manual_installed {        #1
 Software of
    met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
     local       footer=''
-    local   -i  number_of_lines=0
+    local -i    number_of_lines=0
     local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text1..."
@@ -368,7 +368,7 @@ function create_list_snaps {                   #2
     local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
 <snap>' of met Software:"
     local       footer=''
-    local   -i  number_of_lines=0
+    local -i    number_of_lines=0
     local       plural='snaps'
 
     printf '%s\n' "$text3..."
@@ -396,7 +396,7 @@ function create_list_added_repos {                 #3
 installatie van een pakket of
    met de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
     local       footer=''
-    local   -i  number_of_lines=0
+    local -i    number_of_lines=0
     local       plural='pakketbronnen'
     local       search=''
 
@@ -432,7 +432,7 @@ installatie van een pakket of
 function process_argument_app {
     local       app=''
     local       file=''
-    local   -a  files=()
+    local -a    files=()
     local       search=''
 
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
@@ -544,7 +544,7 @@ $EDITION."
 
 
 function process_option_apps {
-    local   -a  files=()
+    local -a    files=()
     local       search=''
 
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
@@ -637,7 +637,7 @@ function process_option_cat {
 
 function process_file {
     local       app_description=''
-    local   -i  cmd_seq_num=0
+    local -i    cmd_seq_num=0
     local       prev_recordtype=''
     local       record=''
     local       recordtype=''
@@ -699,7 +699,7 @@ function process_app_description {
 function process_install_instruction {
     local       record=${1:-record?}
     local       filler=''
-    local   -i  len=0
+    local -i    len=0
 
     INFO_FOUND=true
     if ! $OPTION_INFO; then
@@ -723,7 +723,7 @@ function process_install_instruction {
 function process_remove_instruction {
     local       record=${1:-record?}
     local       filler=''
-    local   -i  len=0
+    local -i    len=0
 
     REMOVE_FOUND=true
     if ! $OPTION_REMOVE; then
@@ -746,9 +746,9 @@ function process_remove_instruction {
 
 function process_command {
     local       cmd=${1:-cmd?}
-    local   -i  cmd_rc=0
+    local -i    cmd_rc=0
     local       app_description_line=''
-    local   -i  desc_maxlen=1000
+    local -i    desc_maxlen=1000
     local       desc_printf=''
     local       status=''
 
@@ -797,7 +797,7 @@ function process_command {
 
 function execute_command {
     local       cmd=${1:-cmd?}
-    local   -i  cmd_rc=0
+    local -i    cmd_rc=0
     local       status=''
 
     check_dpkg
@@ -851,7 +851,7 @@ function check_dpkg {
 
 
 function term_script {
-    local   -i  app_num=0
+    local -i    app_num=0
 
     if $OPTION_SIMULATE; then
         if $OPTION_GUI; then

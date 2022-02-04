@@ -71,7 +71,7 @@ REWRITE_LINE=$(tput cuu1;tput el)
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -125,7 +125,7 @@ function request_input {
     local       quest4='Gebruikersnaam op de NAS'
     local       quest5='Wachtwoord van deze gebruiker op de NAS'
     local       quest6='Share-naam van deze gebruiker op de NAS'
-    local   -i  zenity_rc=0
+    local -i    zenity_rc=0
     local       warning=''
 
     fstab=$(

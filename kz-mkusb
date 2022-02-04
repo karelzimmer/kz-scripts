@@ -59,7 +59,7 @@ REWRITE_LINE=$(tput cuu1;tput el)
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
+    local -i    getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -170,7 +170,7 @@ Geen $DEVICE gevonden om te gebruiken als doel!"
 
 
 function process_input {
-    local   -i  isosize=0
+    local -i    isosize=0
     local       usbname=''
     local       file=''
 
