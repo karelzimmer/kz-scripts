@@ -863,7 +863,8 @@ Controleer de log in het Terminalvenster met:
     ${BOLD}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else
-        info 'Instellen is voltooid.'
+            info '
+Instellen is voltooid.'
             exit $SUCCESS
         fi
     fi
