@@ -311,7 +311,7 @@ function signal {
     local -i    rc=${5:-1}
     local       rc_desc=''
     local -i    rc_desc_signalno=0
-    local       status="${RED}$ERROR/ERROR${NORMAL}"
+    local       status=''
 
     case $rc in
         0)
@@ -320,6 +320,7 @@ function signal {
             ;;
         1)
             rc_desc='terminated with error'
+            status="${RED}$rc/ERROR${NORMAL}"
             ;;
         2)
             rc_desc='terminated with warning'
