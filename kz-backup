@@ -29,7 +29,7 @@ Opties:
   -g, --gui      start in grafische modus
   -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -x, --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
-                 back-up verwijderen (standaard bij optie --gui)
+                 back-up verwijderen (standaard bij optie -g, --gui)
 $OPTIONS_HELP_COMMON"
 
 readonly SOURCE=$HOME
