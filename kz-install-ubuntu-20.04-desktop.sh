@@ -32,9 +32,9 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #2    id <2e gebruiker>
 #2    id citrixlog
 #2 Als gebruiker <2e gebruiker> UID 1002 heeft en gebruiker citrixlog UID=1001,
-## dan is gebruiker citrixlog (met de installatie van icaclient) eerder
-## aangemaakt dan gebruiker <2e gebruiker>.
-## Dit is op te lossen met:
+#2 dan is gebruiker citrixlog (met de installatie van icaclient) eerder
+#2 aangemaakt dan gebruiker <2e gebruiker>.
+#2 Dit is op te lossen met:
 #2    sudo usermod  --uid 1003 citrixlog
 #2    sudo groupmod --gid 1003 citrixlog
 #2    sudo usermod  --uid 1001 <2e gebruiker>
