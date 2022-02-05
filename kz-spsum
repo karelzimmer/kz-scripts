@@ -74,8 +74,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        TEXT='geen argumenten opgeven'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf '%s\n%s\n' 'Teveel argumenten.' "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -99,7 +98,7 @@ function process_input {
     done
 
     if ! $ISO_FILE_FOUND; then
-        warning "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR."
+        printf '%s\n' "Geen beeldbestanden (.iso) gevonden in $SEARCHDIR." >&2
         exit $WARNING
     fi
 }
@@ -110,8 +109,8 @@ function create_checksum_file {
     local -i    grep_rc=0
 
     if [[ -e $ISO_FILE.$HASHPROG ]]; then
-        info "Beeldbestand $ISO_FILE heeft al controlebestand \
-$ISO_FILE.$HASHPROG.\n"
+        printf '%s\n\n' "Beeldbestand $ISO_FILE heeft al controlebestand \
+$ISO_FILE.$HASHPROG."
         return $SUCCESS
     else
         for file in *; do
@@ -127,9 +126,9 @@ $ISO_FILE.$HASHPROG.\n"
                 -- "${files[@]}"        \
                 > "$ISO_FILE.$HASHPROG" 2> >($LOGCMD) || grep_rc=$?
         if [[ $grep_rc -ne $SUCCESS ]]; then
-            error "Geen controlesom gevonden voor $ISO_FILE.\n"
+            printf '%s\n\n' "Geen controlesom gevonden voor $ISO_FILE." >&2
         else
-            info "Controlebestand $ISO_FILE.$HASHPROG aangemaakt.\n"
+            printf '%s\n\n' "Controlebestand $ISO_FILE.$HASHPROG aangemaakt."
        fi
     fi
 }
@@ -138,17 +137,15 @@ $ISO_FILE.$HASHPROG.\n"
 function term_script {
     rm --force --verbose -- *SHA* |& $LOGCMD
     if $ISO_FILE_FOUND; then
-        info "Om de beeldbestanden (.iso) te controleren voer uit:
-    ${BLUE}cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd \
+        printf '%s\n' "Om de beeldbestanden (.iso) te controleren voer uit:
+    ${BOLD}cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd \
 -${NORMAL}
 
-
 En om vervolgens USB-sticks te maken voer uit:
-    ${BLUE}kz mkusbs${NORMAL}
-
+    ${BOLD}kz mkusbs${NORMAL}
 
 Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
-    ${BLUE}kz dliso --checksums${NORMAL}"
+    ${BOLD}kz dliso --checksums${NORMAL}"
     fi
     exit $SUCCESS
 }

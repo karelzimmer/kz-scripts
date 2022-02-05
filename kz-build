@@ -116,8 +116,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        TEXT='geen argumenten opgeven'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf '%s\n%s\n' 'Teveel argumenten.' "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -131,8 +130,7 @@ function check_input {
             ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
         :
     else
-        TEXT='alleen uitvoeren als ontwikkelaar'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf '%s\n' 'Uitvoeren als ontwikkelaar.' >&2
         exit $ERROR
     fi
 

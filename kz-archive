@@ -102,7 +102,7 @@ function check_input {
                 "$DELETE_FROM_2"    \
                 "$DELETE_FROM_3"; do
         if ! [[ -d $dir ]]; then
-            error "$DISPLAY_NAME: map '$dir' bestaat niet"
+            printf '%s\n' "Map '$dir' bestaat niet." >&2
             exit $ERROR
         fi
     done
@@ -152,7 +152,7 @@ function process_input {
                     sort
             )
         if ! $files_found; then
-            warning "\nGeen bestanden gevonden met '$search4' in de naam."
+            printf '%s\n' "Geen bestanden gevonden met '$search4' in de naam."
         fi
         files_found=false
     done
@@ -171,11 +171,11 @@ function process_archive {
                 break
                 ;;
             o*|O*|'')
-                info 'Overgeslagen.'
+                printf '%s\n' 'Overgeslagen.'
                 break
                 ;;
             s*|S*)
-                info 'Gestopt.'
+                printf '%s\n' 'Gestopt.'
                 exit $SUCCESS
                 ;;
             *)
@@ -195,7 +195,7 @@ function archive_file {
     newdir=${olddir//dist/app}
     newdir=${newdir//linux/linux-archief}
     mv "$olddir/$basename" "$newdir" |& $LOGCMD
-    info 'Gearchiveerd.'
+    printf '%s\n' 'Gearchiveerd.'
     ARCHIVED=true
 }
 
@@ -211,11 +211,11 @@ function process_delete {
                 break
                 ;;
             o*|O*|'')
-                info 'Overgeslagen.'
+                printf '%s\n' 'Overgeslagen.'
                 break
                 ;;
             s*|S*)
-                info 'Gestopt.'
+                printf '%s\n' 'Gestopt.'
                 exit $SUCCESS
                 ;;
             *)
@@ -229,7 +229,7 @@ function process_delete {
 
 function delete_file {
     rm "$file" |& $LOGCMD
-    info 'Verwijderd.'
+    printf '%s\n' 'Verwijderd.'
     DELETED=true
 }
 
@@ -245,9 +245,9 @@ function term_script {
     else
         TEXT+='\nEr zijn geen bestanden gearchiveerd.'
     fi
-    info "$TEXT"
+    printf '%b\n' "$TEXT"
     if  $DELETED || $ARCHIVED; then
-        warning 'Pas website aan en commit de wijzigingen!'
+        printf '%s\n' 'Pas website aan en commit de wijzigingen!'
     fi
     exit $SUCCESS
 }

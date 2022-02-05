@@ -102,7 +102,7 @@ function error {
             true
         fi
     else
-        printf "${RED}%b${NORMAL}\n" "$@" >&2
+        printf '%b\n' "$@" >&2
     fi
 }
 
@@ -119,7 +119,7 @@ function check_user {
         fi
     else
         if [[ $UID -eq 0 ]]; then
-            info "$DISPLAY_NAME: niet uitvoeren met 'sudo' of als root"
+            warning "Niet uitvoeren met 'sudo' of als root."
             exit $WARNING
         fi
     fi
@@ -234,7 +234,7 @@ function process_common_options {
 function process_option_debug {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    printf "${YELLOW}%s\n${NORMAL}" '*** START DEBUG-SESSIE ***'
+    printf '%s\n' '*** START DEBUG-SESSIE ***'
     log 'START DEBUG-SESSIE' --priority=debug
     log 'Start show current environment' --priority=debug
     log 'uname --all:' --priority=debug
@@ -266,7 +266,7 @@ function process_option_help {
 
 
 function process_option_usage {
-    printf  '%s\n\n%s\n' \
+    printf  '%s\n%s\n'  \
             "$USAGE"    \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
@@ -376,7 +376,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             error "Programma $PROGRAM_NAME is afgebroken.
 
 Controleer de log in het Terminalvenster met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+    ${BOLD}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
         exit)
@@ -386,9 +386,10 @@ Controleer de log in het Terminalvenster met:
                 set +o xtrace
                 BASH_XTRACEFD=''
                 exec 4>&-
-                warning '*** EINDE DEBUG-SESSIE ***'
-                info "Controleer de log in het Terminalvenster met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+                printf '%s\n' "*** EINDE DEBUG-SESSIE ***
+
+Controleer de log in het Terminalvenster met:
+    ${BOLD}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
@@ -399,7 +400,7 @@ Controleer de log in het Terminalvenster met:
             warning "Programma $PROGRAM_NAME is onderbroken.
 
 Controleer de log in het Terminalvenster met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+    ${BOLD}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
     esac
@@ -464,6 +465,6 @@ function warning {
             true
         fi
     else
-        printf "${YELLOW}%b${NORMAL}\n" "$@" >&2
+        printf '%b\n' "$@" >&2
     fi
 }

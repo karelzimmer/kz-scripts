@@ -61,7 +61,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        error "$USAGELINE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -93,8 +93,8 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        TEXT='geen argumenten opgeven'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        error "Teveel argumenten.
+$USAGELINE"
         exit $ERROR
     fi
 
@@ -200,7 +200,7 @@ Mogelijk zijn enkele bestanden niet leesbaar.
 
 Controleer de log in het Terminalvenster met:
 
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+    ${BOLD}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
             ;;
         *)
@@ -210,7 +210,7 @@ Back-up maken is mislukt.
 Foutcode rsync is $rsync_rc.
 
 Controleer de log in het Terminalvenster met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+    ${BOLD}$LOGCMD_CHECK${NORMAL}"
             exit $ERROR
             ;;
     esac

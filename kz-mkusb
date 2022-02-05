@@ -80,8 +80,8 @@ function check_input {
         case $1 in
             -s|--source)
                 if $OPTION_SOURCE; then
-                    TEXT="optie '$1' eenmaal opgeven"
-                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    TEXT="Optie '$1' eenmaal opgeven."
+                    printf '%s\n%s\n' "$TEXT" "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_SOURCE=true
@@ -91,8 +91,8 @@ function check_input {
                 ;;
             -t|--target)
                 if $OPTION_TARGET; then
-                    TEXT="optie '$1' eenmaal opgeven"
-                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    TEXT="Optie '$1' eenmaal opgeven."
+                    printf '%s\n%s\n' "$TEXT" "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_TARGET=true
@@ -111,8 +111,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        TEXT='geen argumenten opgeven'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf '%s\n%s\n' 'Teveel argumenten.' "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -122,8 +121,8 @@ function check_input {
         SOURCEDIR=$SOURCE_DEFAULT
     fi
     if ! [[ -d $SOURCEDIR ]]; then
-        TEXT="map '$SOURCEDIR' bestaat niet"
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        TEXT=""
+        printf '%s\n%s\n' "Map '$SOURCEDIR' bestaat niet." "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -139,10 +138,9 @@ function check_input {
 
 
 function request_input {
-    warning 'De volgende /dev/sd schijven en partities zijn aanwezig:'
-    TEXT='Gebruik optie --target om een ander device op te geven.'
+    printf '%s\n' 'De volgende /dev/sd schijven en partities zijn aanwezig:'
     if findmnt --list --output=SOURCE,TARGET | grep --regexp='/dev/sd'; then
-        warning "
+        printf '%s\n' "
 $DEVICE wordt gebruikt als doel en OVERSCHREVEN!"
         while true; do
             read -rp 'Is dit OK? [j/N]: '
@@ -161,9 +159,10 @@ $DEVICE wordt gebruikt als doel en OVERSCHREVEN!"
             esac
         done
     else
-        warning "
-Geen $DEVICE gevonden om te gebruiken als doel!"
-        printf '%s\n%s\n' "$TEXT" "$USAGELINE"
+        printf '%s\n' "
+Geen $DEVICE gevonden om te gebruiken als doel!
+
+Gebruik optie --target om een ander device op te geven."
         exit $WARNING
     fi
 }
@@ -208,7 +207,7 @@ function process_input {
                                 continue
                                 ;;
                             n*|N*|'')
-                                info 'Klaar.'
+                                printf '%s\n' 'Klaar.'
                                 break
                                 ;;
                             *)
@@ -220,11 +219,11 @@ function process_input {
                     break
                     ;;
                 o*|O*|'')
-                    info 'Overgeslagen.'
+                    printf '%s\n' 'Overgeslagen.'
                     break
                     ;;
                 s*|S*)
-                    info 'Gestopt.'
+                    printf '%s\n' 'Gestopt.'
                     exit $SUCCESS
                     ;;
                 *)
@@ -236,7 +235,8 @@ function process_input {
     done
 
     if $NO_FILES_FOUND; then
-        warning "Geen beeldbestanden (.iso) gevonden in map '$SOURCEDIR'."
+        TEXT="Geen beeldbestanden (.iso) gevonden in map '$SOURCEDIR'."
+        printf '%s\n' "$TEXT" >&2
         exit $WARNING
     fi
 }
@@ -247,7 +247,7 @@ function create_usb_stick {
 
     read -rp "Plaats USB-stick '$usbname', gevolgd door Enter [Enter]: "
     if [[ -e $DEVICE ]]; then
-        info "USB-stick $usbname wordt gemaakt..."
+        printf '%s\n' "USB-stick $usbname wordt gemaakt..."
 
         dd  if="$dd_from"       \
             status=none         |
@@ -256,13 +256,13 @@ function create_usb_stick {
             bs=4M               \
             status=none
 
-        info "Gegevens schrijven naar $usbname (kan even duren)..."
+        printf '%s\n' "Gegevens schrijven naar $usbname (kan even duren)..."
         sync
 
-        info "USB-stick '$usbname' is gemaakt."
+        printf '%s\n' "USB-stick '$usbname' is gemaakt."
 
-        info "Ter controle is er een Kernel-based Virtuele Machine (KVM) \
-gestart."
+        printf '%s\n' "Ter controle is er een Kernel-based Virtuele Machine \
+(KVM) gestart."
         if ! qemu-system-x86_64 -enable-kvm     \
                                 -m 2048         \
                                 -hda $DEVICE    |& $LOGCMD; then
@@ -276,7 +276,7 @@ gestart."
         read -rp "Verwijder de USB-stick '$usbname', gevolgd door Enter \
 [Enter]: "
     else
-        warning "USB-stick '$usbname' is niet aanwezig op $DEVICE."
+        printf '%s\n' "USB-stick '$usbname' is niet aanwezig op $DEVICE." >&2
         exit $WARNING
     fi
 }

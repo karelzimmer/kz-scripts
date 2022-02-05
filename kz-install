@@ -127,7 +127,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        error "$USAGELINE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -147,8 +147,8 @@ function check_input {
                 ;;
             -e|--edition)
                 if $OPTION_EDITION; then
-                    TEXT="optie '$1' eenmaal opgeven"
-                    printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+                    error "Teveel opties.
+$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_EDITION=true
@@ -457,12 +457,12 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
-            info "App '$app' niet gevonden."
+            warning "App '$app' niet gevonden." >&2
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
+        info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps." >&2
     else
         FILE_TO_PROCESS[$file_num]=$CMDS_FILE2
         ((++file_num))
@@ -507,13 +507,13 @@ function process_argument_file {
             FILE_TO_PROCESS[$file_num]=$file
             ((++file_num))
         else
-            info "Bestand $file niet gevonden."
+            warning "Bestand $file niet gevonden." >&2
             file_notfound=true
         fi
     done
     if $file_notfound; then
         info "Typ '$DISPLAY_NAME --files' voor beschikbare \
-installatiebestanden."
+installatiebestanden." >&2
     fi
 }
 
@@ -536,7 +536,7 @@ $HOSTNAME.sh
         FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     else
-        info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
+        warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
 $EDITION."
         exit $WARNING
     fi
@@ -573,10 +573,10 @@ $(
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
-    ${BLUE}$DISPLAY_NAME --sim APP...${NORMAL}
-    ${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}
+    ${BOLD}$DISPLAY_NAME --sim APP...${NORMAL}
+    ${BOLD}$DISPLAY_NAME --cat APP...${NORMAL}
 Om APPs te installeren voer uit:
-    ${BLUE}$DISPLAY_NAME APP...${NORMAL}"
+    ${BOLD}$DISPLAY_NAME APP...${NORMAL}"
     fi
 )"
 }
@@ -599,10 +599,10 @@ Typ 'man $DISPLAY_NAME' voor meer informatie."
     else
         printf '%s\n' "
 Om BESTANDen te bekijken voer uit:
-    ${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
-    ${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
+    ${BOLD}$DISPLAY_NAME --sim BESTAND...${NORMAL}
+    ${BOLD}$DISPLAY_NAME --cat BESTAND...${NORMAL}
 Om BESTANDen te gebruiken voer uit:
-    ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
+    ${BOLD}$DISPLAY_NAME BESTAND...${NORMAL}"
     fi
 )"
 }
@@ -925,7 +925,7 @@ function term_script {
 Er zijn aanvullende instructies.
 
 Gebruik de opdracht:
-    ${BLUE}$DISPLAY_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
+    ${BOLD}$DISPLAY_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
     fi
 
     if $EXECUTE_COMMANDS; then
@@ -934,7 +934,7 @@ Gebruik de opdracht:
 Installatie is geëindigd met een waarschuwing.
 
 Controleer de log in het Terminalvenster met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+    ${BOLD}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else
             info 'Installatie is voltooid.'

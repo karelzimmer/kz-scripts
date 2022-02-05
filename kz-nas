@@ -82,7 +82,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        error "$USAGELINE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -106,8 +106,8 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        TEXT='geen argumenten opgeven'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        error "Teveel argumenten.
+$USAGELINE"
         exit $ERROR
     fi
 
@@ -198,7 +198,7 @@ $fstab"
                     break
                     ;;
                 n*|N*|'')
-                    printf '%s\n' "$NAS_FIXED_IP_ADDRESS"
+                    info "$NAS_FIXED_IP_ADDRESS"
                     exit $SUCCESS
                     ;;
                 *)
@@ -365,7 +365,7 @@ function term_script {
 De NAS zou beschikbaar moetn zijn op '$NAS_MOUNT_POINT'.
 
 De-activeer het systemd mount-besta2nd met de opdracht:
-    ${BLUE}sudo systemctl disable mnt-nas.mount${NORMAL}"
+    ${BOLD}sudo systemctl disable mnt-nas.mount${NORMAL}"
     exit $SUCCESS
 }
 

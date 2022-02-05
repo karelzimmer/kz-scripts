@@ -78,8 +78,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        TEXT='geen argumenten opgeven'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf '%s\n%s\n' 'Teveel argumenten.' "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -92,19 +91,18 @@ function process_input {
 
     for dir in "$CSS_DIR" "$HTML_DIR"; do
         if ! [[ -d $dir ]]; then
-            error "Map '$dir' bestaat niet."
+            printf '%s\n' "Map '$dir' bestaat niet." >&2
             exit $ERROR
         fi
     done
 
     if ! pgrep 'chrome' &> /dev/null; then
-        warning 'Google Chrome webrowser is nog niet gestart,
+        printf '%s\n' 'Google Chrome webrowser is nog niet gestart,
 start nu eerst de Google Chrome webrowser.'
-        TEXT="Druk op Enter-toets wanneer Google Chrome webrowser is gestart \
-[Enter]: "
-        read -rp "$TEXT"
+        read -rp "Druk op Enter-toets wanneer Google Chrome webrowser is \
+gestart [Enter]: "
         if ! pgrep 'chrome' &> /dev/null; then
-            error 'Google Chrome webrowser is niet gestart.'
+            printf '%s\n' 'Google Chrome webrowser is niet gestart.' >&2
             exit $ERROR
         fi
     fi
@@ -137,7 +135,7 @@ function validate_html {
 
 
 function term_script {
-    info 'Controleer de tabbladen in Google Chrome.'
+    printf '%s\n' 'Controleer de tabbladen in Google Chrome.'
     exit $SUCCESS
 }
 

@@ -89,8 +89,7 @@ function check_input {
     fi
     for dir in "${MAP_ARGUMENT[@]}"; do
         if ! [[ -d $dir ]]; then
-                TEXT="map '$dir' bestaat niet"
-                printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+            printf '%s\n%s\n' "Map '$dir' bestaat niet" "$USAGELINE" >&2
             exit $ERROR
         fi
     done
@@ -126,20 +125,20 @@ function check_files_and_folders {
         if ! [[ $file = "$good" ]]; then
             ((++count))
             if [[ -d "$file" ]]; then
-                info "BadName  DIR '$file'."
+                printf '%s\n' "BadName  DIR '$file'." >&2
             elif [[ -f "$file" ]]; then
-                info "BadName FILE '$basename' in map '$dirname'."
+                printf '%s\n' "BadName FILE '$basename' in map '$dirname'." >&2
             else
-                info "BadName SYML '$file'."
+                printf '%s\n' "BadName SYML '$file'." >&2
             fi
         fi
 
         if [[ ${#basename} -gt $FILENAME_MAXLEN ]]; then
             ((++count))
             if [[ -d "$file" ]]; then
-                info "BadLen.  DIR '$basename'."
+                printf '%s\n' "BadLen.  DIR '$basename'." >&2
             else
-                info "BadLen. FILE '$basename' in map '$dirname'."
+                printf '%s\n' "BadLen. FILE '$basename' in map '$dirname'." >&2
             fi
         fi
 
@@ -158,9 +157,9 @@ function check_files_and_folders {
     if [[ $count -eq 0 ]]; then
         return $SUCCESS
     elif [[ $count -eq 1 ]]; then
-        warning 'Er is een fout gevonden.'
+        printf '%s\n' 'Er is een fout gevonden.' >&2
     else
-        warning "Er zijn $count fouten gevonden."
+        printf '%s\n' "Er zijn $count fouten gevonden." >&2
     fi
 }
 

@@ -74,8 +74,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        TEXT='geen argumenten opgeven'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf '%s\n%s\n' 'Teveel argumenten.' "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -89,8 +88,7 @@ function check_input {
             ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
         :
     else
-        TEXT='alleen uitvoeren als ontwikkelaar'
-        printf "$DISPLAY_NAME: %s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        printf '%s\n' 'Uitvoeren als ontwikkelaar.' >&2
         exit $ERROR
     fi
 
@@ -119,11 +117,11 @@ function check_dependencies {
 function check_scripts {
     local -i check_rc=0
 
-    info 'Controleer scripts (kz ivp)...'
+    printf '%s\n' 'Controleer scripts (kz ivp)...'
     log "Check scripts with 'kz ivp'."
     "$SCRIPTS_REPO"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
-        warning '
+        printf '%s\n' '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
@@ -133,11 +131,11 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
 function build_package {
     local -i check_rc=0
 
-    info 'Bouw website en pakket (kz build)...'
+    printf '%s\n' 'Bouw website en pakket (kz build)...'
     log "Build package with 'kz build'."
     "$SCRIPTS_REPO"/kz build || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
-        warning '
+        printf '%s\n' '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
@@ -154,11 +152,11 @@ function upload_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info 'Upload website (lftp)...'
+    printf '%s\n' 'Upload website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         read -rsp "FTP-wachtwoord voor $ftp_host: "
         printf '%s\n' "$REPLY" > "$ftp_login"
-        info
+        printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
     if ! lftp   --user      "$ftp_user"             \
@@ -166,8 +164,8 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
-        warning 'Uploaden website is mislukt.'
-        warning 'Controleer de log...!'
+        printf '%s\n' 'Uploaden website is mislukt.
+Controleer de log...!' >&2
         exit $WARNING
     fi
     sleep 5
@@ -175,10 +173,11 @@ function upload_website {
 
 
 function install_package {
-    info 'Installeer pakket kz (kz getdeb)...'
+    printf '%s\n' 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
-        warning 'Installeren pakket kz is niet uitgevoerd.'
+        printf '%s\n' 'Installeren pakket kz is niet uitgevoerd.
+Controleer de log...!' >&2
         exit $WARNING
     fi
 }
