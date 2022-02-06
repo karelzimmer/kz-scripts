@@ -90,7 +90,7 @@ function check_input {
         case $1 in
             --addappfolder)
                 if $OPTION_ADDAPPFOLDER; then
-                    printf '%s\n%s\n' 'Teveel opties.' "$USAGELINE" >&2
+                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_ADDAPPFOLDER=true
@@ -100,7 +100,7 @@ function check_input {
             --addfavbegin)
                 if $OPTION_addfavbegin ||
                     ($OPTION_addfavend || $OPTION_REMOVEFAV); then
-                    printf '%s\n%s\n' 'Teveel opties.' "$USAGELINE" >&2
+                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_addfavbegin=true
@@ -110,7 +110,7 @@ function check_input {
             --addfavend)
                 if $OPTION_addfavend ||
                     ($OPTION_addfavbegin || $OPTION_REMOVEFAV); then
-                    printf '%s\n%s\n' 'Teveel opties.' "$USAGELINE" >&2
+                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_addfavend=true
@@ -119,7 +119,7 @@ function check_input {
                 ;;
             --file)
                 if $OPTION_FILE; then
-                    printf '%s\n%s\n' 'Teveel opties.' "$USAGELINE" >&2
+                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_FILE=true
@@ -129,7 +129,7 @@ function check_input {
                 ;;
             --folder)
                 if $OPTION_FOLDER; then
-                    printf '%s\n%s\n' 'Teveel opties.' "$USAGELINE" >&2
+                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_FOLDER=true
@@ -139,7 +139,7 @@ function check_input {
                 ;;
             --removeappfolder)
                 if $OPTION_REMOVEAPPFOLDER; then
-                    printf '%s\n%s\n' 'Teveel opties.' "$USAGELINE" >&2
+                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_REMOVEAPPFOLDER=true
@@ -149,7 +149,7 @@ function check_input {
             --removefav)
                 if $OPTION_REMOVEFAV ||
                     ($OPTION_addfavbegin || $OPTION_addfavend); then
-                    printf '%s\n%s\n' 'Teveel opties.' "$USAGELINE" >&2
+                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_REMOVEFAV=true
@@ -167,7 +167,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf '%s\n%s\n' 'Teveel argumenten.' "$USAGELINE" >&2
+        printf '%s\n%s\n' 'Te veel argumenten.' "$USAGELINE" >&2
         exit $ERROR
     fi
 

@@ -93,7 +93,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        error "Teveel argumenten.
+        error "Te veel argumenten.
 $USAGELINE"
         exit $ERROR
     fi
