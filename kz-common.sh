@@ -92,15 +92,13 @@ function error {
         #            Verbinding is geweigerd
         #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
         #            cannot open display:
-        if ! zenity --error                 \
-                    --no-markup             \
-                    --width     500         \
-                    --height    100         \
-                    --title     "$TITLE"    \
-                    --text      "$@"        \
-                    --ok-label  'Oké'       2> >($LOGCMD); then
-            true
-        fi
+        zenity  --error                 \
+                --no-markup             \
+                --width     500         \
+                --height    100         \
+                --title     "$TITLE"    \
+                --text      "$@"        \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
     else
         printf '%b\n' "$@" >&2
     fi
@@ -134,15 +132,13 @@ function info {
         #            Verbinding is geweigerd
         #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
         #            cannot open display:
-        if ! zenity --info                  \
-                    --no-markup             \
-                    --width     600         \
-                    --height    100         \
-                    --title     "$TITLE"    \
-                    --text      "$@"        \
-                    --ok-label  'Oké'       2> >($LOGCMD); then
-            true
-        fi
+        zenity  --info                  \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$TITLE"    \
+                --text      "$@"        \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
     else
         printf '%b\n' "$@"
     fi
@@ -456,15 +452,13 @@ function warning {
         #            Verbinding is geweigerd
         #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
         #            cannot open display:
-        if ! zenity --warning               \
-                    --no-markup             \
-                    --width     500         \
-                    --height    100         \
-                    --title     "$TITLE"    \
-                    --text      "$@"        \
-                    --ok-label  'Oké'       2> >($LOGCMD); then
-            true
-        fi
+        zenity  --warning               \
+                --no-markup             \
+                --width     500         \
+                --height    100         \
+                --title     "$TITLE"    \
+                --text      "$@"        \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
     else
         printf '%b\n' "$@" >&2
     fi
