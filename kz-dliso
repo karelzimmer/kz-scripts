@@ -139,10 +139,10 @@ function download_checksums {
 
 function term_script {
     printf '%s\n' "Om de $SEARCH_FOR-controlebestanden op te splitsen voer uit:
-    ${BOLD}kzspsum${NORMAL}
+    ${BLUE}kzspsum${NORMAL}
 
 Om de beeldbestanden (.iso) te controleren voer uit:
-    ${BOLD}cd $TARGET;$SEARCH_FOR --check --ignore-missing *.$SEARCH_FOR; cd \
+    ${BLUE}cd $TARGET;$SEARCH_FOR --check --ignore-missing *.$SEARCH_FOR; cd \
 -"
     exit $SUCCESS
 }

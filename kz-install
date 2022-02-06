@@ -573,10 +573,10 @@ $(
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
-    ${BOLD}$DISPLAY_NAME --sim APP...${NORMAL}
-    ${BOLD}$DISPLAY_NAME --cat APP...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --sim APP...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}
 Om APPs te installeren voer uit:
-    ${BOLD}$DISPLAY_NAME APP...${NORMAL}"
+    ${BLUE}$DISPLAY_NAME APP...${NORMAL}"
     fi
 )"
 }
@@ -599,10 +599,10 @@ Typ 'man $DISPLAY_NAME' voor meer informatie."
     else
         printf '%s\n' "
 Om BESTANDen te bekijken voer uit:
-    ${BOLD}$DISPLAY_NAME --sim BESTAND...${NORMAL}
-    ${BOLD}$DISPLAY_NAME --cat BESTAND...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
 Om BESTANDen te gebruiken voer uit:
-    ${BOLD}$DISPLAY_NAME BESTAND...${NORMAL}"
+    ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
     fi
 )"
 }
@@ -925,7 +925,7 @@ function term_script {
 Er zijn aanvullende instructies.
 
 Gebruik de opdracht:
-    ${BOLD}$DISPLAY_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
+    ${BLUE}$DISPLAY_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
     fi
 
     if $EXECUTE_COMMANDS; then
@@ -934,7 +934,7 @@ Gebruik de opdracht:
 Installatie is geëindigd met een waarschuwing.
 
 Controleer de log in het Terminalvenster met:
-    ${BOLD}$LOGCMD_CHECK${NORMAL}"
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else
             info '

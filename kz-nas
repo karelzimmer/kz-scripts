@@ -365,7 +365,7 @@ function term_script {
 De NAS zou beschikbaar moetn zijn op '$NAS_MOUNT_POINT'.
 
 De-activeer het systemd mount-besta2nd met de opdracht:
-    ${BOLD}sudo systemctl disable mnt-nas.mount${NORMAL}"
+    ${BLUE}sudo systemctl disable mnt-nas.mount${NORMAL}"
     exit $SUCCESS
 }
 

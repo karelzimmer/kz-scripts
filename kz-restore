@@ -169,7 +169,7 @@ Back-up terugzetten is gedeeltelijk gelukt.
 Mogelijk zijn enkele bestanden niet leesbaar.
 
 Controleer de log in het Terminalvenster met:
-    ${BOLD}$LOGCMD_CHECK${NORMAL}"
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
             ;;
         *)
@@ -179,7 +179,7 @@ Back-up terugzetten is mislukt.
 Foutcode rsync is $rsync_rc.
 
 Controleer de log in het Terminalvenster met:
-    ${BOLD}$LOGCMD_CHECK${NORMAL}"
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $ERROR
             ;;
     esac

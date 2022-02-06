@@ -138,14 +138,14 @@ function term_script {
     rm --force --verbose -- *SHA* |& $LOGCMD
     if $ISO_FILE_FOUND; then
         printf '%s\n' "Om de beeldbestanden (.iso) te controleren voer uit:
-    ${BOLD}cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd \
+    ${BLUE}cd $SEARCHDIR;$HASHPROG --check --ignore-missing *.$HASHPROG; cd \
 -${NORMAL}
 
 En om vervolgens USB-sticks te maken voer uit:
-    ${BOLD}kz mkusbs${NORMAL}
+    ${BLUE}kz mkusbs${NORMAL}
 
 Om de controlebestanden (.${HASHPROG}s) opnieuw te downloaden voer uit:
-    ${BOLD}kz dliso --checksums${NORMAL}"
+    ${BLUE}kz dliso --checksums${NORMAL}"
     fi
     exit $SUCCESS
 }

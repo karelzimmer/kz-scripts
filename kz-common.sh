@@ -377,7 +377,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             error "Programma $PROGRAM_NAME is afgebroken.
 
 Controleer de log in het Terminalvenster met:
-    ${BOLD}$LOGCMD_CHECK${NORMAL}"
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
         exit)
@@ -390,7 +390,7 @@ Controleer de log in het Terminalvenster met:
                 printf '%s\n' "*** EINDE DEBUG-SESSIE ***
 
 Controleer de log in het Terminalvenster met:
-    ${BOLD}$LOGCMD_CHECK${NORMAL}"
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
@@ -401,7 +401,7 @@ Controleer de log in het Terminalvenster met:
             warning "Programma $PROGRAM_NAME is onderbroken.
 
 Controleer de log in het Terminalvenster met:
-    ${BOLD}$LOGCMD_CHECK${NORMAL}"
+    ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
     esac
