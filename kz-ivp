@@ -52,7 +52,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        info "$USAGELINE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -71,7 +71,8 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf '%s\n%s\n' 'Te veel argumenten.' "$USAGELINE" >&2
+        error 'Te veel argumenten.'
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -138,16 +139,16 @@ function process_input {
 
 function check_code {
     if grep --quiet --line-regexp --regexp='#!''/usr/bin/bash' "$script"; then
-            check_shellcheck
+        check_shellcheck
     elif grep   --quiet                         \
                 --line-regexp                   \
                 --regexp='#!''/usr/bin/python3' \
                 "$script"                       || [[ $script = kz_common.py ]]
     then
-            check_pycodestyle
+        check_pycodestyle
     else
-        printf '%s\n' "
-${BOLD}In $script:${NORMAL}
+        error "
+In $script:
     Onbekend script.  Functie 'check_code' kan scriptcode niet controleren."
         MAXRC=$ERROR
     fi
@@ -170,8 +171,8 @@ function check_record_length {
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
-        printf '%s\n' "
-${BOLD}In $script:${NORMAL}
+        error "
+In $script:
     Een regel is langer dan $max_line_length ($max_line_length_found).
 "
         MAXRC=$ERROR
@@ -194,8 +195,8 @@ function check_record_types {
         grep --regexp='#[1-3](' --invert-match          || true
         )
     if [[ $wrong_record ]]; then
-        printf '%s\n' "
-${BOLD}In $script:${NORMAL}
+        error "
+In $script:
     Foutieve regel(s) gevonden.
 $(
     printf '%s' "$wrong_record" |
@@ -212,8 +213,8 @@ function check_release_year {
                 --regexp='RELEASE_YEAR='    \
                 --regexp='release_year = '  \
                 "$script"; then
-        printf '%s\n' "
-${BOLD}In $script:${NORMAL}
+        error "
+In $script:
     Vrijgavejaar (RELEASE_YEAR/release_year) ontbreekt.
 "
         MAXRC=$ERROR
@@ -237,8 +238,8 @@ function check_tags {
             --regexp='FIXME'':' \
             --regexp='TODO'':'  \
             "$script"; then
-        printf '%s\n' "
-${BOLD}In $script:${NORMAL}
+        warning "
+In $script:
     Gemarkeerde annotatie gevonden.
 
 $(
@@ -258,8 +259,8 @@ $(
 
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
-        printf '%s\n' "
-${BOLD}In $script:${NORMAL}
+        error "
+In $script:
     Eindspaties gevonden.
 $(
     grep    --line-number --regexp=' ''$' "$script" |

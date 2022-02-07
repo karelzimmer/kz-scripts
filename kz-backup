@@ -219,9 +219,9 @@ Controleer de log in het Terminalvenster met:
 
 function term_script {
     info "
-De back-up is gemaakt.${BOLD}$OPTION_DRY_RUN $OPTION_DELETE${NORMAL}
-
-Koppel zelf (veilig!) het back-up-medium af."
+${GREEN}De back-up is gemaakt.${NORMAL}
+${BLUE}$OPTION_DRY_RUN $OPTION_DELETE${NORMAL}
+${YELLOW}Koppel zelf (veilig!) het back-up-medium af.${NORMAL}"
     exit $SUCCESS
 }
 

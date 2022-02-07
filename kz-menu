@@ -208,7 +208,8 @@ function process_menu1_tui {
 
         # Toon menu.
         clear -x
-        printf '%s\n\n' "$MENU1_HEAD"
+        info "$MENU1_HEAD
+"
         for action1 in "${!ACTIONS1[@]}"; do
             printf  '%2s. %-29.29s - %s\n'  \
                     "$action1"              \
@@ -400,7 +401,8 @@ function process_menu2_tui {
 
         # Toon menu.
         clear -x
-        printf '%s\n\n' "$MENU2_HEAD"
+        info "$MENU2_HEAD
+"
         for action2 in "${!ACTIONS2[@]}"; do
             printf '%2s. %-29.29s - %s\n' "$action2" "${ACTIONS2[$action2]}" \
 "${COMMANDS2[$action2]}"
@@ -601,7 +603,8 @@ $prompt"
             COMMANDS_EXECUTED=false
         fi
     else
-        printf '%b\n\n' "$TEXT"
+        info "
+$TEXT"
         while true; do
             read -rp "$prompt [J/n]: "
             case $REPLY in

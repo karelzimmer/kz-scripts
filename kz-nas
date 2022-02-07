@@ -153,7 +153,7 @@ $fstab"
                 verwijder_regels
             fi
         else
-            printf '%s\n' "$warning"
+            warning "$warning"
             read -rp "$quest1 [j/N]: "
             while true; do
                 case $REPLY in
@@ -304,7 +304,7 @@ function process_input {
 
 function check_dependencies {
     if ! command -v samba 1> /dev/null; then
-        log 'Installeer SAMBA en SMB/CIFS...'
+        log 'Installeer SAMBA en CIFS-utils...'
         sudo apt-get install --yes samba cifs-utils |& $LOGCMD
     fi
 }
@@ -316,7 +316,6 @@ function create_mountpoint {
     fi
 
     printf '%s\n' 'Maak NAS koppelpunt...'
-
     mkdir "$NAS_MOUNT_POINT" |& $LOGCMD
     chmod '777' "$NAS_MOUNT_POINT" |& $LOGCMD
 }

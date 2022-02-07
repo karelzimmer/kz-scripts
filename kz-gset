@@ -80,7 +80,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        info "$USAGELINE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -90,7 +90,8 @@ function check_input {
         case $1 in
             --addappfolder)
                 if $OPTION_ADDAPPFOLDER; then
-                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_ADDAPPFOLDER=true
@@ -100,7 +101,8 @@ function check_input {
             --addfavbegin)
                 if $OPTION_addfavbegin ||
                     ($OPTION_addfavend || $OPTION_REMOVEFAV); then
-                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_addfavbegin=true
@@ -110,7 +112,8 @@ function check_input {
             --addfavend)
                 if $OPTION_addfavend ||
                     ($OPTION_addfavbegin || $OPTION_REMOVEFAV); then
-                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_addfavend=true
@@ -119,7 +122,8 @@ function check_input {
                 ;;
             --file)
                 if $OPTION_FILE; then
-                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_FILE=true
@@ -129,7 +133,8 @@ function check_input {
                 ;;
             --folder)
                 if $OPTION_FOLDER; then
-                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_FOLDER=true
@@ -139,7 +144,8 @@ function check_input {
                 ;;
             --removeappfolder)
                 if $OPTION_REMOVEAPPFOLDER; then
-                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_REMOVEAPPFOLDER=true
@@ -149,7 +155,8 @@ function check_input {
             --removefav)
                 if $OPTION_REMOVEFAV ||
                     ($OPTION_addfavbegin || $OPTION_addfavend); then
-                    printf '%s\n%s\n' 'Te veel opties.' "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE"
                     exit $ERROR
                 else
                     OPTION_REMOVEFAV=true
@@ -167,33 +174,39 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf '%s\n%s\n' 'Te veel argumenten.' "$USAGELINE" >&2
+        error 'Te veel argumenten.'
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
 
     if ($OPTION_addfavbegin || $OPTION_addfavend || $OPTION_REMOVEFAV) &&
         ! $OPTION_FILE; then
-        printf '%s\n%s\n' 'Ontbrekende optie.' "$USAGELINE" >&2
+        error 'Ontbrekende optie.'
+        info "$USAGELINE"
         exit $ERROR
     elif $OPTION_FILE &&
         ! ($OPTION_addfavbegin || $OPTION_addfavend || $OPTION_REMOVEFAV)
         then
-        printf '%s\n%s\n' 'Ontbrekende optie.' "$USAGELINE" >&2
+        error 'Ontbrekende optie.'
+        info "$USAGELINE"
         exit $ERROR
     elif $OPTION_FILE && [[ $FILE_ARGUMENT != *.desktop ]]; then
         TEXT="Bestandsnaam dient te eindigen met '.desktop'."
-        printf "%s\n%s\n" "$TEXT" "$USAGELINE" >&2
+        error "$TEXT"
+        info "$USAGELINE"
         exit $ERROR
     fi
     DESKTOPFILE=$FILE_ARGUMENT
 
     if ($OPTION_ADDAPPFOLDER || $OPTION_REMOVEAPPFOLDER) && ! $OPTION_FOLDER
         then
-        printf '%s\n%s\n' 'Ontbrekende optie.' "$USAGELINE" >&2
+        error 'Ontbrekende optie.'
+        info "$USAGELINE"
         exit $ERROR
     elif $OPTION_FOLDER && ! ($OPTION_ADDAPPFOLDER || $OPTION_REMOVEAPPFOLDER)
         then
-        printf '%s\n%s\n' 'Ontbrekende optie.' "$USAGELINE" >&2
+        error 'Ontbrekende optie.'
+        info "$USAGELINE"
         exit $ERROR
     fi
     APPFOLDER=$FOLDER_ARGUMENT
@@ -317,7 +330,7 @@ function process_option_removeappfolder  {
 function capture_gui_changes {
     CONFIG_A=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
     save_configuration_database A "$CONFIG_A"
-    printf '%s\n' 'Voer nu de wijziging uit in de grafische werkomgeving.'
+    info 'Voer nu de wijziging uit in de grafische werkomgeving.'
     read -rp 'Druk op de Enter-toets wanneer gereed [Enter]: '
     CONFIG_B=$(mktemp -t "$PROGRAM_NAME-B-XXXXXXXXXX.lst")
     save_configuration_database B "$CONFIG_B"
@@ -336,7 +349,7 @@ function save_configuration_database {
             --output="$output_file" \
             "$output_file"
 
-    printf '%s\n' "Inhoud configuratiedatabase vastgelegd ($fase)."
+    info "Inhoud configuratiedatabase vastgelegd ($fase)."
 }
 
 
@@ -344,13 +357,15 @@ function report_database_changes {
     local output_file1=${1:-output_file1?}
     local output_file2=${2:-output_file2?}
 
-    printf '%s\n' '
+    info '
 WIJZIGINGen in de configuratiedatabase,
 < is de oude   instelling (A),
 > is de nieuwe instelling (B):'
     diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
-    printf '\n%s\n' "Bij WIJZIGINGen voer uit:
-    ${BLUE}gsettings set WIJZIGING${NORMAL}"
+    info "
+Bij WIJZIGINGen voer uit:
+    ${BLUE}gsettings set WIJZIGING${NORMAL}
+    ${BLUE}...${NORMAL}"
     rm "$CONFIG_A" "$CONFIG_B"
 }
 

@@ -100,7 +100,7 @@ function error {
                 --text      "$@"        \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else
-        printf '%b\n' "$@" >&2
+        printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
 }
 
@@ -230,7 +230,7 @@ function process_common_options {
 function process_option_debug {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    printf '%s\n' '*** START DEBUG-SESSIE ***'
+    warning '*** START DEBUG-SESSIE ***'
     log 'START DEBUG-SESSIE' --priority=debug
     log 'Start show current environment' --priority=debug
     log 'uname --all:' --priority=debug
@@ -257,14 +257,16 @@ function process_option_debug {
 
 
 function process_option_help {
-    printf '%s\n\n%s\n' "$HELP" "Typ 'man $DISPLAY_NAME' voor meer informatie."
+    info "$HELP
+
+Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
 function process_option_usage {
-    printf  '%s\n%s\n'  \
-            "$USAGE"    \
-            "Typ '$DISPLAY_NAME --help' voor meer informatie."
+    info "$USAGE
+
+Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
@@ -280,7 +282,7 @@ function process_option_version {
         copyright_years=$RELEASE_YEAR-$THIS_YEAR
     fi
 
-    printf '%s\n' "$DISPLAY_NAME versie 365 (kz build $build)
+    info "$DISPLAY_NAME versie 365 (kz build $build)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
@@ -370,8 +372,8 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
-            error "Programma $PROGRAM_NAME is afgebroken.
-
+            error "Programma $PROGRAM_NAME is afgebroken."
+            info "
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
@@ -383,8 +385,8 @@ Controleer de log in het Terminalvenster met:
                 set +o xtrace
                 BASH_XTRACEFD=''
                 exec 4>&-
-                printf '%s\n' "*** EINDE DEBUG-SESSIE ***
-
+                warning "*** EINDE DEBUG-SESSIE ***"
+                info "
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
@@ -394,8 +396,8 @@ Controleer de log in het Terminalvenster met:
             exit "$rc"
             ;;
         *)
-            warning "Programma $PROGRAM_NAME is onderbroken.
-
+            warning "Programma $PROGRAM_NAME is onderbroken."
+            info "
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
@@ -460,6 +462,6 @@ function warning {
                 --text      "$@"        \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else
-        printf '%b\n' "$@" >&2
+        printf "${YELLOW}%b\n${NORMAL}" "$@" >&2
     fi
 }

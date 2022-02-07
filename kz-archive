@@ -69,7 +69,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -102,7 +102,7 @@ function check_input {
                 "$DELETE_FROM_2"    \
                 "$DELETE_FROM_3"; do
         if ! [[ -d $dir ]]; then
-            printf '%s\n' "Map '$dir' bestaat niet." >&2
+            error "Map '$dir' bestaat niet."
             exit $ERROR
         fi
     done
@@ -152,7 +152,7 @@ function process_input {
                     sort
             )
         if ! $files_found; then
-            printf '%s\n' "Geen bestanden gevonden met '$search4' in de naam."
+            warning "Geen bestanden gevonden met '$search4' in de naam."
         fi
         files_found=false
     done
@@ -161,7 +161,9 @@ function process_input {
 
 
 function process_archive {
-    printf "\n${BOLD}%s\n%s${NORMAL}\n" "$basename" "$dirname"
+    info "${BOLD}
+$basename
+$dirname${NORMAL}"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
         read -rp 'archiveren/Overslaan/stoppen? [a/O/s]: ' < /dev/tty
@@ -171,11 +173,11 @@ function process_archive {
                 break
                 ;;
             o*|O*|'')
-                printf '%s\n' 'Overgeslagen.'
+               info 'Overgeslagen.'
                 break
                 ;;
             s*|S*)
-                printf '%s\n' 'Gestopt.'
+                info 'Gestopt.'
                 exit $SUCCESS
                 ;;
             *)
@@ -195,13 +197,15 @@ function archive_file {
     newdir=${olddir//dist/app}
     newdir=${newdir//linux/linux-archief}
     mv "$olddir/$basename" "$newdir" |& $LOGCMD
-    printf '%s\n' 'Gearchiveerd.'
+    info 'Gearchiveerd.'
     ARCHIVED=true
 }
 
 
 function process_delete {
-    printf "\n${BOLD}%s\n%s${NORMAL}\n" "$basename" "$dirname"
+    info "${BOLD}
+$basename
+$dirname${NORMAL}"
     while true; do
         # < /dev/tty want FD 1 al in gebruik door for-while constructie.
         read -rp 'verwijderen/Overslaan/stoppen? [v/O/s]: ' < /dev/tty
@@ -211,11 +215,11 @@ function process_delete {
                 break
                 ;;
             o*|O*|'')
-                printf '%s\n' 'Overgeslagen.'
+                info 'Overgeslagen.'
                 break
                 ;;
             s*|S*)
-                printf '%s\n' 'Gestopt.'
+                info 'Gestopt.'
                 exit $SUCCESS
                 ;;
             *)
@@ -229,25 +233,25 @@ function process_delete {
 
 function delete_file {
     rm "$file" |& $LOGCMD
-    printf '%s\n' 'Verwijderd.'
+    info 'Verwijderd.'
     DELETED=true
 }
 
 
 function term_script {
     if $DELETED; then
-        TEXT='\nEr zijn bestanden verwijderd.'
+        TEXT="\n${YELLOW}Er zijn bestanden verwijderd.${NORMAL}"
     else
-        TEXT='\nEr zijn geen bestanden verwijderd.'
+        TEXT="\n${GREEN}Er zijn geen bestanden verwijderd.${NORMAL}"
     fi
     if $ARCHIVED; then
-        TEXT+='\nEr zijn bestanden gearchiveerd.'
+        TEXT+="\n${YELLOW}Er zijn bestanden gearchiveerd.${NORMAL}"
     else
-        TEXT+='\nEr zijn geen bestanden gearchiveerd.'
+        TEXT+="\n${GREEN}Er zijn geen bestanden gearchiveerd.${NORMAL}"
     fi
-    printf '%b\n' "$TEXT"
+    info "$TEXT"
     if  $DELETED || $ARCHIVED; then
-        printf '%s\n' 'Pas website aan en commit de wijzigingen!'
+        warning 'Pas website aan en commit de wijzigingen!'
     fi
     exit $SUCCESS
 }

@@ -445,14 +445,12 @@ function process_argument_app {
     done
     for app in "${APP_ARGUMENT[@]}"; do
         file=$(
-            if ! grep       --files-with-matches    \
-                            --word-regexp           \
-                            --regexp="#1 $app"      \
-                            "${files[@]}"           \
-                            2> /dev/null            |
-                    head    --lines=1; then
-                printf '\n'
-            fi
+            grep    --files-with-matches    \
+                    --word-regexp           \
+                    --regexp="#1 $app"      \
+                    "${files[@]}"           \
+                    2> /dev/null            |
+            head    --lines=1               || printf '\n'
             )
         if [[ $file ]]; then
             process_argument_app_file
@@ -555,7 +553,7 @@ function process_option_apps {
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
     done
-    printf '%s\n' "De volgende apps zijn beschikbaar:
+    TEXT="De volgende apps zijn beschikbaar:
 
 NUMMER APP (BESCHRIJVING)
 $(
@@ -579,11 +577,12 @@ Om APPs te installeren voer uit:
     ${BLUE}$DISPLAY_NAME APP...${NORMAL}"
     fi
 )"
+    info "$TEXT"
 }
 
 
 function process_option_files {
-    printf '%s\n' "De volgende installatiebestanden zijn beschikbaar:
+    TEXT="De volgende installatiebestanden zijn beschikbaar:
 
 NUMMER BESTAND
 $(
@@ -595,6 +594,7 @@ $(
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen installatiebestanden gevonden voor $DISTRO \
 $VERSION $EDITION.
+
 Typ 'man $DISPLAY_NAME' voor meer informatie."
     else
         printf '%s\n' "
@@ -605,6 +605,7 @@ Om BESTANDen te gebruiken voer uit:
     ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
     fi
 )"
+    info "$TEXT"
 }
 
 
@@ -937,8 +938,8 @@ Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else
-            info '
-Installatie is voltooid.'
+            info "
+${GREEN}Installatie is voltooid.${NORMAL}"
             exit $SUCCESS
         fi
     fi

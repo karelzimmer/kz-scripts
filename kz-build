@@ -97,7 +97,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        printf '%s\n' "$USAGELINE" >&2
+        info "$USAGELINE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -116,7 +116,8 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf '%s\n%s\n' 'Te veel argumenten.' "$USAGELINE" >&2
+        error 'Te veel argumenten.'
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -130,7 +131,7 @@ function check_input {
             ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
         :
     else
-        printf '%s\n' 'Uitvoeren als ontwikkelaar.' >&2
+        error 'Uitvoeren als ontwikkelaar.'
         exit $ERROR
     fi
 
@@ -345,9 +346,9 @@ function build_background_properties_file {
     local wallpapers_config_file=kz-wallpapers.xml
 
     {
-    printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
-    printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
-    printf '%s\n' '<wallpapers>'
+        printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
+        printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
+        printf '%s\n' '<wallpapers>'
     } > "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
 
     cd "${TARGET_DEB[BACKGROUNDS]}"
