@@ -470,7 +470,7 @@ function process_argument_file {
             FILE_TO_PROCESS[$file_num]=$file
             ((++file_num))
         else
-            warning "Bestand $file niet gevonden." >&2
+            warning "Bestand $file niet gevonden."
             file_notfound=true
         fi
     done
