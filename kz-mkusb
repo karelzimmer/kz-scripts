@@ -70,7 +70,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        info "$USAGELINE"
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -80,8 +80,8 @@ function check_input {
         case $1 in
             -s|--source)
                 if $OPTION_SOURCE; then
-                    TEXT="Optie '$1' eenmaal opgeven."
-                    printf '%s\n%s\n' "$TEXT" "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_SOURCE=true
@@ -91,8 +91,8 @@ function check_input {
                 ;;
             -t|--target)
                 if $OPTION_TARGET; then
-                    TEXT="Optie '$1' eenmaal opgeven."
-                    printf '%s\n%s\n' "$TEXT" "$USAGELINE" >&2
+                    error 'Te veel opties.'
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_TARGET=true
@@ -122,8 +122,8 @@ function check_input {
         SOURCEDIR=$SOURCE_DEFAULT
     fi
     if ! [[ -d $SOURCEDIR ]]; then
-        TEXT=""
-        printf '%s\n%s\n' "Map '$SOURCEDIR' bestaat niet." "$USAGELINE" >&2
+        error "Map '$SOURCEDIR' bestaat niet."
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
 
@@ -150,7 +150,7 @@ $DEVICE wordt gebruikt als doel en OVERSCHREVEN!"
                     break
                     ;;
                 n*|N*|'')
-                    printf '\n%s\n%s\n' "$TEXT" "$USAGELINE"
+                    info "$USAGELINE"
                     exit $SUCCESS
                     ;;
                 *)

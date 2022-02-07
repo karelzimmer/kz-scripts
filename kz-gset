@@ -80,7 +80,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        info "$USAGELINE"
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -91,7 +91,7 @@ function check_input {
             --addappfolder)
                 if $OPTION_ADDAPPFOLDER; then
                     error 'Te veel opties.'
-                    info "$USAGELINE"
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_ADDAPPFOLDER=true
@@ -102,7 +102,7 @@ function check_input {
                 if $OPTION_addfavbegin ||
                     ($OPTION_addfavend || $OPTION_REMOVEFAV); then
                     error 'Te veel opties.'
-                    info "$USAGELINE"
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_addfavbegin=true
@@ -113,7 +113,7 @@ function check_input {
                 if $OPTION_addfavend ||
                     ($OPTION_addfavbegin || $OPTION_REMOVEFAV); then
                     error 'Te veel opties.'
-                    info "$USAGELINE"
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_addfavend=true
@@ -123,7 +123,7 @@ function check_input {
             --file)
                 if $OPTION_FILE; then
                     error 'Te veel opties.'
-                    info "$USAGELINE"
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_FILE=true
@@ -134,7 +134,7 @@ function check_input {
             --folder)
                 if $OPTION_FOLDER; then
                     error 'Te veel opties.'
-                    info "$USAGELINE"
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_FOLDER=true
@@ -145,7 +145,7 @@ function check_input {
             --removeappfolder)
                 if $OPTION_REMOVEAPPFOLDER; then
                     error 'Te veel opties.'
-                    info "$USAGELINE"
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_REMOVEAPPFOLDER=true
@@ -156,7 +156,7 @@ function check_input {
                 if $OPTION_REMOVEFAV ||
                     ($OPTION_addfavbegin || $OPTION_addfavend); then
                     error 'Te veel opties.'
-                    info "$USAGELINE"
+                    info "$USAGELINE" >&2
                     exit $ERROR
                 else
                     OPTION_REMOVEFAV=true
@@ -182,18 +182,18 @@ function check_input {
     if ($OPTION_addfavbegin || $OPTION_addfavend || $OPTION_REMOVEFAV) &&
         ! $OPTION_FILE; then
         error 'Ontbrekende optie.'
-        info "$USAGELINE"
+        info "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FILE &&
         ! ($OPTION_addfavbegin || $OPTION_addfavend || $OPTION_REMOVEFAV)
         then
         error 'Ontbrekende optie.'
-        info "$USAGELINE"
+        info "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FILE && [[ $FILE_ARGUMENT != *.desktop ]]; then
         TEXT="Bestandsnaam dient te eindigen met '.desktop'."
         error "$TEXT"
-        info "$USAGELINE"
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
     DESKTOPFILE=$FILE_ARGUMENT
@@ -201,12 +201,12 @@ function check_input {
     if ($OPTION_ADDAPPFOLDER || $OPTION_REMOVEAPPFOLDER) && ! $OPTION_FOLDER
         then
         error 'Ontbrekende optie.'
-        info "$USAGELINE"
+        info "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FOLDER && ! ($OPTION_ADDAPPFOLDER || $OPTION_REMOVEAPPFOLDER)
         then
         error 'Ontbrekende optie.'
-        info "$USAGELINE"
+        info "$USAGELINE" >&2
         exit $ERROR
     fi
     APPFOLDER=$FOLDER_ARGUMENT
