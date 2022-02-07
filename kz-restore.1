@@ -24,6 +24,8 @@ externe harddisk in map '\fIaangekoppeld-back-up-medium\fR/kz-backup-\
 <computernaam>-<gebruikersnaam>/'
 (e.g. /media/charlie/backupdisk/kz-backup-pc01-charlie/).
 .sp
+Met optie \fB-s\fR, \fB--source\fR kan een andere locatie opgegeven worden.
+.sp
 Optie \fB-n\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
 te brengen. Het wordt meestal gebruikt in om te zien wat een rsync-commando
 gaat doen voordat men het daadwerkelijk uitvoert.
@@ -34,13 +36,16 @@ Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
 .sp
 In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkz restore\fR
 worden gestart door te zoeken naar \fBback\fR, klik op
-\fBBack-up terugzetten\fR.
+\fBReservekopie terugzetten\fR.
 .\"
 .\"
 .SH OPTIES
 .TP
 \fB-n\fR, \fB--dry-run\fR
 Een proefrun uitvoeren zonder wijzigingen aan te brengen.
+.TP
+\fB-s\fR, \fB--source=\fIBRONMAP\fR
+Gebruik back-ups in de \fIBRONMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -86,6 +91,12 @@ https://karelzimmer.nl
 Zet alles in de back-up terug.
 .br
 Hiervoor is ook starter \fBBack-up terugzetten\fR beschikbaar.
+.RE
+.sp
+\fBkz restore --source=/dev/sdb/kz-backup-<computernaam>-<gebruikersnaam>\fR
+.RS
+Zet alles in de back-up terug vanaf
+/dev/sdb/kz-backup-<computernaam>-<gebruikersnaam>/.
 .RE
 .\"
 .\"

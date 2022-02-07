@@ -24,6 +24,16 @@ externe harddisk in map '\fIaangekoppeld-back-up-medium\fR/kz-backup-\
 <computernaam>-<gebruikersnaam>/'
 (e.g. /media/charlie/backupdisk/kz-backup-pc01-charlie/).
 .sp
+Met optie \fB-t\fR, \fB--target\fR kan een andere locatie opgegeven worden.
+.sp
+Optie \fB-n\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
+te brengen. Het wordt meestal gebruikt in combinatie met de \fB-x\fR,
+\fB--delete\fR optie om te zien wat een rsync-commando gaat doen voordat men
+het daadwerkelijk uitvoert.
+.sp
+Optie \fB-d\fR, \fB--delete\fR verwijdert bestanden uit de back-up die niet
+meer voorkomen in de Persoonlijke map.
+.sp
 Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
 .RS
  .adobe/Flash_Player/AssetCache
@@ -41,14 +51,6 @@ Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
  .xsession-errors
 .RE
 .sp
-Optie \fB-n\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
-te brengen. Het wordt meestal gebruikt in combinatie met de \fB-x\fR,
-\fB--delete\fR optie om te zien wat een rsync-commando gaat doen voordat men
-het daadwerkelijk uitvoert.
-.sp
-Optie \fB-d\fR, \fB--delete\fR verwijdert bestanden uit de back-up die niet
-meer voorkomen in de Persoonlijke map.
-.sp
 Voor het maken van de back-up wordt rsync gebruikt.
 .sp
 Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
@@ -65,6 +67,9 @@ Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 \fB-x\fR, \fB--delete\fR
 Uit de Persoonlijke map verwijderde bestanden ook uit de back-up verwijderen
 (standaard bij optie \fB-g\fR, \fB--gui\fR).
+.TP
+\fB-t\fR, \fB--target=\fIDOELMAP\fR
+Plaats back-up in de \fIDOELMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -110,6 +115,12 @@ https://karelzimmer.nl
 Maak een back-up van de Persoonlijke map.
 .br
 Hiervoor is ook starter \fBBack-up maken\fR beschikbaar.
+.RE
+.sp
+\fBkz backup --target=/dev/sdb\fR
+.RS
+Maak een back-up van de Persoonlijke map naar
+/dev/sdb/kz-backup-<computernaam>-<gebruikersnaam>/.
 .RE
 .\"
 .\"

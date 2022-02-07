@@ -17,9 +17,10 @@ RELEASE_YEAR=2007
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gn'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui,dry-run'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui] [-n|--dry-run]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON's:gn'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,gui,dry-run'
+readonly USAGE="Gebruik: $DISPLAY_NAME [-s|--source=BRONMAP] [-g|--gui]
+                    [-n|--dry-run]
                     $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
@@ -28,10 +29,14 @@ Back-up terugzetten.
 Opties:
   -g, --gui      start in grafische modus
   -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
+  -s, --source=BRONMAP
+                 gebruik back-up in de BRONMAP
 $OPTIONS_HELP_COMMON"
 
-SOURCE=$(ls --directory /media/"$USER"/*/backup-"$HOSTNAME-$USER" 2> /dev/null)
-readonly SOURCE
+SOURCE_DEFAULT=$(
+    ls --directory /media/"$USER"/*/backup-"$HOSTNAME-$USER" 2> /dev/null
+    )
+readonly SOURCE_DEFAULT
 TARGET=$HOME
 
 
@@ -41,6 +46,9 @@ TARGET=$HOME
 
 OPTION_DRY_RUN=''
 OPTION_GUI=false
+OPTION_SOURCE=false
+SOURCE_ARGUMENT=''
+SOURCE=''
 
 
 ###############################################################################
@@ -76,6 +84,17 @@ function check_input {
                 OPTION_DRY_RUN='--dry-run'
                 shift
                 ;;
+            -s|--source)
+                if $OPTION_SOURCE; then
+                    error 'Te veel opties.'
+                    info "$USAGELINE" >&2
+                    exit    $ERROR
+                else
+                    OPTION_SOURCE=true
+                    SOURCE_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
             --)
                 shift
                 break
@@ -97,20 +116,24 @@ function check_input {
 
 
 function process_input {
-
-    if [[ -z $SOURCE ]]; then
-        warning "Koppel een back-up-medium aan met map \
+    if $OPTION_SOURCE; then
+        SOURCE=$SOURCE_ARGUMENT
+    else
+        SOURCE=$SOURCE_DEFAULT
+        if [[ -z $SOURCE ]]; then
+            warning "Koppel een back-up-medium aan met map \
 'backup-$HOSTNAME-$USER', en start daarna opnieuw."
-        exit $WARNING
-    elif [[ $(printf '%s\n' "$SOURCE" | wc --lines) -gt 1 ]]; then
-        warning "Koppel slechts één back-up-medium aan met map \
+            exit $WARNING
+        elif [[ $(printf '%s\n' "$SOURCE" | wc --lines) -gt 1 ]]; then
+            warning "Koppel slechts één back-up-medium aan met map \
 'backup-$HOSTNAME-$USER'.
 
 Nu aangekoppeld zijn:
 $SOURCE
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-        exit $WARNING
+            exit $WARNING
+        fi
     fi
 
     check_on_ac_power

@@ -17,9 +17,10 @@ RELEASE_YEAR=2007
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gnx'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui,dry-run,delete'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui] [-n|--dry-run] [-x|--delete]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gnt:x'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui,delete,dry-run,target:'
+readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui] [-n|--dry-run]
+                   [-t|--target=DOELMAP][-x|--delete]
                    $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
@@ -30,11 +31,13 @@ Opties:
   -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -x, --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
                  back-up verwijderen (standaard bij optie -g, --gui)
+  -t, --target=DOELMAP
+                 plaats back-up in de DOELMAP
 $OPTIONS_HELP_COMMON"
 
 readonly SOURCE=$HOME
-TARGET=$(ls --directory /media/"$USER"/* 2> /dev/null)
-readonly TARGET
+TARGET_DEFAULT=$(ls --directory /media/"$USER"/* 2> /dev/null)
+readonly TARGET_DEFAULT
 
 ###############################################################################
 # Global variables                                                            #
@@ -43,7 +46,9 @@ readonly TARGET
 OPTION_DELETE=''
 OPTION_DRY_RUN=''
 OPTION_GUI=false
-
+OPTION_TARGET=false
+TARGET_ARGUMENT=''
+TARGET=''
 
 ###############################################################################
 # Functions                                                                   #
@@ -78,6 +83,17 @@ function check_input {
                 OPTION_DRY_RUN='--dry-run'
                 shift
                 ;;
+            -t|--target)
+                if $OPTION_TARGET; then
+                    error 'Te veel opties.'
+                    info "$USAGELINE" >&2
+                    exit    $ERROR
+                else
+                    OPTION_TARGET=true
+                    TARGET_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
             -x|--delete)
                 OPTION_DELETE='--delete'
                 shift
@@ -103,18 +119,22 @@ function check_input {
 
 
 function process_input {
-
-    if [[ -z $TARGET ]]; then
-        warning 'Koppel een back-up-medium aan, en start daarna opnieuw.'
-        exit $WARNING
-    elif [[ $(printf '%s\n' "$TARGET" | wc --lines) -gt 1 ]]; then
-        warning "Koppel slechts één back-up-medium aan.
+    if $OPTION_TARGET; then
+        TARGET=$TARGET_ARGUMENT
+    else
+        TARGET=$TARGET_DEFAULT
+        if [[ -z $TARGET ]]; then
+            warning 'Koppel een back-up-medium aan, en start daarna opnieuw.'
+            exit $WARNING
+        elif [[ $(printf '%s\n' "$TARGET" | wc --lines) -gt 1 ]]; then
+            warning "Koppel slechts één back-up-medium aan.
 
 Nu aangekoppeld zijn:
 $TARGET
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-        exit $WARNING
+            exit $WARNING
+        fi
     fi
 
     check_on_ac_power
