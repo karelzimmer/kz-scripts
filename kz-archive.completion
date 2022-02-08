@@ -1,9 +1,0 @@
-# shellcheck shell=bash
-###############################################################################
-# Tab-completion-script voor kz archive.                                      #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
-###############################################################################
-
-dashoptions='-d --debug -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-archive
