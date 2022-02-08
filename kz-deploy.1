@@ -40,13 +40,15 @@ of dezelfde machine neergezet worden.
 .sp
 De volgende acties worden uitgevoerd:
 .RS
-1. Controleer scripts (met \fBkz ivp\fR).
+1. Controleer scriptnamen (met \fBkz ckname\fR).
 .br
-2. Bouw pakket (met \fBkz build\fR).
+2. Controleer scripts (met \fBkz ivp\fR).
 .br
-3. Upload website (met \fBlftp\fR).
+3. Bouw pakket (met \fBkz build\fR).
 .br
-4. Installer pakket kz (met \fBkz getdeb\fR).
+4. Upload website (met \fBlftp\fR).
+.br
+5. Installer pakket kz (met \fBkz getdeb\fR).
 .RE
 Mijn eigen CI/CD Pipeline :-).
 .\"
@@ -94,6 +96,7 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 .\"
 .SH ZIE OOK
 \fBkz-build\fR(1),
+\fBkz-ckname\fR(1),
 \fBkz-common.sh\fR(1),
 \fBkz-getdeb\fR(1),
 \fBkz-ivp\fR(1),
