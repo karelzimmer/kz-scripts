@@ -121,7 +121,7 @@ function check_names {
 
     info 'Controleer bestandsnamen (kz ckname)...'
     log "Check filenames with 'kz ckname'."
-    "$SCRIPTS_REPO"/kz ckname "$UPLOADS_REPO" || check_rc=$?
+    "$SCRIPTS_REPO"/kz ckname "$UPLOADS_DISTDIR" || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
