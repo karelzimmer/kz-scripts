@@ -1,9 +1,0 @@
-# shellcheck shell=bash
-###############################################################################
-# Tab-completion-script voor kz dliso.                                        #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
-###############################################################################
-
-dashoptions='-c  --checksums -d --debug -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-dliso
