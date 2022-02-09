@@ -145,16 +145,18 @@ function check_files_and_folders {
 
     done < <(
         find    "${MAP_ARGUMENT[@]}"    \
-                -not -name '*.git*'     \
-                -not -path '*.git*'     \
+                -not -name '.*'         \
+                -not -path '*/.*'       \
                 -type f                 \
                 -print0                 \
                 -or                     \
-                -not -name '*.git*'     \
-                -not -path '*.git*'     \
+                -not -name '.*'         \
+                -not -path '*/.*'       \
                 -type d                 \
                 -print0                 \
                 -or                     \
+                -not -name '.*'         \
+                -not -path '*/.*'       \
                 -type l                 \
                 -print0
         )
