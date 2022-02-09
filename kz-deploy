@@ -117,11 +117,17 @@ function check_dependencies {
 
 
 function check_names {
-    local -i check_rc=0
+    local -i    check_rc=0
+    local       docs_repo=$HOME/kz-docs
+    local       deb_repo=$HOME/kz-deb
+    local       uploads_repo=$HOME/kz-uploads/app
 
     info 'Controleer bestandsnamen (kz ckname)...'
     log "Check filenames with 'kz ckname'."
-    "$SCRIPTS_REPO"/kz ckname "$UPLOADS_DISTDIR" || check_rc=$?
+    "$SCRIPTS_REPO"/kz ckname   "$SCRIPTS_REPO" \
+                                "$docs_repo"    \
+                                "$deb_repo"     \
+                                "$uploads_repo" || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         warning '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
