@@ -117,12 +117,9 @@ function check_files_and_folders {
     # bestandsnaam.  N.B.: In Linux is alles een bestand!
     while IFS= read -r -d $'\0' file; do
 
-#FIXME:
-echo $file
         dirname=$(dirname "$file")
         basename=$(basename "$file")
-echo $dirname
-echo $basename
+
         # Verwijder de slechte tekens, \ is escape voor " en :
         good=$(printf '%s'"$file" | tr --delete '?"\\<>*|:')
 
