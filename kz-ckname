@@ -120,7 +120,7 @@ function check_files_and_folders {
         dirname=$(dirname "$file")
         basename=$(basename "$file")
 
-        # Verwijder de slechte tekens, \ is escape voor " en :
+        # Verwijder de slechte tekens, \ is escape voor \.
         good=$(printf '%s'"$file" | tr --delete '?"\\<>*|:')
 
         if ! [[ $file = "$good" ]]; then
