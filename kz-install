@@ -520,23 +520,23 @@ function process_dfltfiles {
     local dfltfile_1=''
     local dfltfile_2=''
 
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
 $HOSTNAME.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
 
-    # Niet verplicht aanwezig.
+    # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_1
-        ((++file_num))
-    fi
-    # Verplicht aanwezig.
-    if [[ -e $dfltfile_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     else
         warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
 $EDITION."
         exit $WARNING
+    fi
+    # Niet verplicht aanwezig.
+    if [[ -e $dfltfile_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_2
+        ((++file_num))
     fi
 }
 
