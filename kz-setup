@@ -220,9 +220,9 @@ function process_input {
     local       dfltfile_1=''
     local       dfltfile_2=''
 
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
 $HOSTNAME.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
     if $OPTION_LIST; then
         check_user
         process_option_list
@@ -482,18 +482,19 @@ instellingsbestanden." >&2
 
 
 function process_dfltfiles {
-    # Niet verplicht aanwezig.
+    # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         FILE_TO_PROCESS[$file_num]=$dfltfile_1
-        ((++file_num))
-    fi
-    if [[ -e $dfltfile_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     else
         warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
 $EDITION." >&2
         exit $WARNING
+    fi
+    # Niet verplicht aanwezig.
+    if [[ -e $dfltfile_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_2
+        ((++file_num))
     fi
 }
 
