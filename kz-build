@@ -158,11 +158,6 @@ function check_dependencies {
         log 'Installeer ghostscript...'
         sudo apt-get install --yes ghostscript |& $LOGCMD
     fi
-    if ! command -v rsync 1> /dev/null; then
-        # Voor build kz-deb en kz-uploads.
-        log 'Installeer rsync...'
-        sudo apt-get install --yes rsync |& $LOGCMD
-    fi
 }
 
 
