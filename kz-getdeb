@@ -231,39 +231,21 @@ function install_scriptspackage {
 
     check_sudo_and_dpkg
 
-    # Bij Live-sessie de universe repo aanzetten.
-    if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        TEXT='Voeg pakketbron toe...'
-        TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                            --title     'Voortgang'     \
-                            --infobox   "$TEXT"         \
-                            7 26
-        sudo add-apt-repository --yes universe  |& $LOGCMD
-
-        TEXT='Ververs pakketlijst'
-        TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                            --title     'Voortgang'     \
-                            --infobox   "$TEXT"         \
-                            7 23
-        sudo apt-get update |& $LOGCMD
-    fi
-
-    # Installeer pakket kz.
-    TEXT='Download pakket kz...'
-    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                        --title     'Voortgang'     \
-                        --infobox   "$TEXT"         \
-                        7 25
-
-    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
-
     TEXT='Installeer pakket kz (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 44
 
+    # Bij Live-sessie de universe repo aanzetten.
+    if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
+        sudo add-apt-repository --yes universe  |& $LOGCMD
+        sudo apt-get update |& $LOGCMD
+    fi
+
+    # Installeer pakket kz.
+    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
