@@ -38,6 +38,13 @@
 
 #1 alias (Aliassen)
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
+#2 Ingebruikname van sneltoets voor Terminalvenster:
+#2 1. Zoek snel en klik achter Instellingen op Sneltoetsen.
+#2 2. Scroll naar beneden en klik op +.
+#2 3. Vul in voor Naam: Terminalvenster, voor Opdracht: gnome-terminal, en klik
+#2    op Sneltoets instellen.
+#2 4. Druk tegelijk op Ctrl+Alt+T en daarna op Toevoegen.
+#2 5. Sluit Sneltoetsen.
 
 #1 bitwarden (Wachtwoordkluis)
 kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
@@ -180,7 +187,7 @@ kz-gset --addfavend --file='spotify_spotify.desktop'
 #3    kz-gset --removefav --file='spotify_spotify.desktop'
 
 #1 thunderbird (E-mail)
-kz-gset --addfavbegin --file='thunderbird.desktop'
+:
 #2 Voeg de extenstie voor Google Agenda toe via:
 #2 1. Start Thunderbird.
 #2 2. Ga naar Menu openen ☰ > Add-ons.

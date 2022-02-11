@@ -5,7 +5,17 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 bluetooth (Externe bluetooth-adapter)
+#1(NVIDIA eigen beeldschermstuurprogramma)
+## Na activeren non-free en nvidia-detect kwam nvidia-legacy-390xx-driver eruit.
+sudo sed --in-place --expression='s/main$/main non-free/g' /etc/apt/sources.list
+sudo apt-get update
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes nvidia-legacy-390xx-driver
+#3 Start Terminalvenster en voer uit:
+#3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
+#3    sudo apt-get update
+#3    sudo DEBIAN_FRONTEND=noninteractive apt-get remove --yes nvidia-legacy-390xx-driver
+
+#1(Externe bluetooth-adapter)
 printf '%s\n' 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #3 1. Start Terminalvenster en voer uit:
 #3    sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
