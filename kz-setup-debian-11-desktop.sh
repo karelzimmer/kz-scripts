@@ -136,6 +136,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removeappfolder --folder='KZ Scripts'
@@ -152,6 +153,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3    gsettings reset org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 #3    gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #3    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
+#3    gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
 #1 google-chrome (Webbrowser)
@@ -187,7 +189,8 @@ kz-gset --addfavend --file='spotify_spotify.desktop'
 #3    kz-gset --removefav --file='spotify_spotify.desktop'
 
 #1 thunderbird (E-mail)
-:
+kz-gset --removefav --file='org.gnome.Evolution.desktop'
+kz-gset --addfavbegin --file='thunderbird.desktop'
 #2 Voeg de extenstie voor Google Agenda toe via:
 #2 1. Start Thunderbird.
 #2 2. Ga naar Menu openen ☰ > Add-ons.

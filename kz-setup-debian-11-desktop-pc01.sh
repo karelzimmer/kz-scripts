@@ -6,9 +6,9 @@
 ###############################################################################
 
 #1 firefox (Webbrowser)
-kz-gset --removefav --file='firefox.desktop'
+kz-gset --removefav --file='firefox-esr.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --addfavbegin --file='firefox.desktop'
+#3    kz-gset --addfavbegin --file='firefox-esr.desktop'
 
 #1 gnome (Bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
