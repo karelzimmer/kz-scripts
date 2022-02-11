@@ -25,10 +25,10 @@ idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
 .sp
 Standaard verwerkt \fBkz setup\fR de volgende bestanden:
 .br
+- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh (verplicht aanwezig)
+.br
 - /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 (niet verplicht aanwezig)
-.br
-- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh (verplicht aanwezig)
 .br
 Deze bestanden bevatten opdrachten voor het instellen van apps en het wijzigen
 van gebruikersinstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
@@ -281,8 +281,8 @@ Standaard instellingsbestand als er geen \fIBESTAND\fRen zijn opgegeven,
 .sp
 /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .RS
-Standaard instellingsbestand als er geen \fIBESTAND\fRen zijn opgegeven,\
- \fIEDITIE\fR is standaard
+Instellingsbestand voor <computernaam> als er geen \fIBESTAND\fRen zijn \
+opgegeven, \fIEDITIE\fR is standaard
 desktop.
 .RE
 .sp

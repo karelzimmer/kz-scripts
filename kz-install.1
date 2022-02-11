@@ -24,11 +24,11 @@ idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
 .sp
 Standaard verwerkt \fBkz install\fR de volgende bestanden:
 .br
-- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
-(niet verplicht aanwezig)
-.br
 - /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh (verplicht
 aanwezig)
+.br
+- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+(niet verplicht aanwezig)
 .br
 Deze bestanden bevatten opdrachten voor het installeren van apps en het
 wijzigen van systeeminstellingen voor de huidige distributie, versie, en
@@ -280,7 +280,7 @@ Standaard installatiebestand als er geen \fIBESTAND\fRen zijn opgegeven, \
 .sp
 /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .RS
-Standaard installatiebestand voor computernaam als er geen \fIBESTAND\fRen zijn
+Installatiebestand voor <computernaam> als er geen \fIBESTAND\fRen zijn
 opgegeven, \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
