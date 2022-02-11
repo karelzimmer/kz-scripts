@@ -145,7 +145,7 @@ Voer uw wachtwoord in:'
                             --passwordbox   "$TEXT"                 \
                             12 38                                   \
                             3>&1 1>&2 2>&3
-                )" | sudo --stdin true 2> /dev/null; then
+                )" | sudo --stdin true &> /dev/null; then
                 break
             else
                 TEXT='Er is een fout opgetreden.
@@ -229,6 +229,8 @@ function install_scriptspackage {
     local site_deb=https://karelzimmer.nl/downloads/kz/kz_365_all.deb
     local temp_deb=''
 
+    check_sudo_and_dpkg
+
     # Bij Live-sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
         TEXT='Voeg pakketbron toe...'
@@ -236,7 +238,6 @@ function install_scriptspackage {
                             --title     'Voortgang'     \
                             --infobox   "$TEXT"         \
                             7 26
-        check_sudo_and_dpkg
         sudo add-apt-repository --yes universe  |& $LOGCMD
 
         TEXT='Ververs pakketlijst'
@@ -244,7 +245,6 @@ function install_scriptspackage {
                             --title     'Voortgang'     \
                             --infobox   "$TEXT"         \
                             7 23
-        check_sudo_and_dpkg
         sudo apt-get update |& $LOGCMD
     fi
 
@@ -264,7 +264,6 @@ function install_scriptspackage {
                         --infobox   "$TEXT"         \
                         7 44
 
-    check_sudo_and_dpkg
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
