@@ -7,10 +7,13 @@
 
 #1(NVIDIA eigen beeldschermstuurprogramma)
 ## Na activeren non-free en nvidia-detect kwam nvidia-legacy-390xx-driver eruit.
-sudo sed --in-place --expression='s/main$/main non-free/g' /etc/apt/sources.list
+sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
+sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
+sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes nvidia-legacy-390xx-driver
 #3 Start Terminalvenster en voer uit:
+#3    sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 #3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 #3    sudo apt-get update
 #3    sudo DEBIAN_FRONTEND=noninteractive apt-get remove --yes nvidia-legacy-390xx-driver
