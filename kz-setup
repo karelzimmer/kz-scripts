@@ -511,7 +511,6 @@ NUMMER APP (BESCHRIJVING)
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
-                    --exclude='^#1 ('       \
                     "${FILE_TO_PROCESS[@]}" |
             cut     --delimiter=' '         \
                     --fields=2-             |

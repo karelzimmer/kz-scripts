@@ -559,7 +559,6 @@ NUMMER APP (BESCHRIJVING)
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
-                    --exclude='^#1 ('       \
                     "${files[@]}"           |
             cut     --delimiter=' '         \
                     --fields=2-             |
