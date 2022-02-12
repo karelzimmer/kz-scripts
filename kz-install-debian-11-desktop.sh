@@ -5,6 +5,16 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1 repos (Alle repositories inschakelen)
+sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
+sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
+sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
+sudo apt-get update
+#3 Start Terminalvenster en voer uit:
+#3    sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
+#3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
+#3    sudo apt-get update
+
 #1 bitwarden (Wachtwoordkluis)
 sudo snap install bitwarden
 #3 Start Terminalvenster en voer uit:
