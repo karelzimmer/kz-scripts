@@ -110,7 +110,7 @@ function process_input {
 function check_dependencies {
     if ! command -v lftp 1> /dev/null; then
         # Voor upload website.
-        log 'Installeer lftp...'
+        info 'Installeer lftp...'
         sudo apt-get install --yes lftp |& $LOGCMD
     fi
 }

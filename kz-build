@@ -150,12 +150,12 @@ function process_input {
 function check_dependencies {
     if ! command -v fakeroot 1> /dev/null; then
         # Voor build .deb.
-        log 'Installeer fakeroot...'
+        info 'Installeer fakeroot...'
         sudo apt-get install --yes fakeroot |& $LOGCMD
     fi
     if ! command -v ghostscript 1> /dev/null; then
         # Voor <man-pag>.pdf (ps2pdf).
-        log 'Installeer ghostscript...'
+        info 'Installeer ghostscript...'
         sudo apt-get install --yes ghostscript |& $LOGCMD
     fi
 }

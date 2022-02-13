@@ -304,7 +304,7 @@ function process_input {
 
 function check_dependencies {
     if ! command -v samba 1> /dev/null; then
-        log 'Installeer SAMBA en CIFS-utils...'
+        info 'Installeer SAMBA en CIFS-utils...'
         sudo apt-get install --yes samba cifs-utils |& $LOGCMD
     fi
 }
