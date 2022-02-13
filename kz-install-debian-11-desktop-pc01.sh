@@ -11,6 +11,13 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes nvidia-legacy-390xx-dr
 #3 Start Terminalvenster en voer uit:
 #3    sudo DEBIAN_FRONTEND=noninteractive apt-get remove --yes nvidia-legacy-390xx-driver
 
+#1-(Intel Wireless WiFi)
+sudo apt-get install --yes firmware-iwlwifi
+sudo modprobe -r iwlwifi
+sudo modprobe iwlwifi
+#3 Start Terminalvenster en voer uit:
+#3    sudo DEBIAN_FRONTEND=noninteractive apt-get remove --yes nvidia-legacy-390xx-driver
+
 #1-(Externe bluetooth-adapter)
 printf '%s\n' 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #3 1. Start Terminalvenster en voer uit:
