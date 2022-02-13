@@ -5,12 +5,12 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 firefox (Webbrowser)
+#1 firefox (webbrowser)
 kz-gset --removefav --file='firefox-esr.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --addfavbegin --file='firefox-esr.desktop'
 
-#1 gnome (Bureaubladomgeving)
+#1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-olifanten.jpg'
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
@@ -18,13 +18,13 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #3    gsettings reset org.gnome.desktop.background picture-uri
 #3    gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 
-#1 search (Vooruit zoeken in history met Ctrl-S)
+#1 search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 printf '%s\n' 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #3 Start Terminalvenster en voer uit:
 #3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-#1 thunderbird (E-mail)
+#1 thunderbird (e-mail)
 kz-gset --removefav --file='thunderbird.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --addfavbegin --file='thunderbird.desktop'
@@ -55,7 +55,7 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='code_code.desktop'
 
-#1 zga-ehrm (Starter eHRM Zorggroep Almere)
+#1 zga-ehrm (starter eHRM Zorggroep Almere)
 cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
 kz-gset --addfavbegin --file='kz-zga-ehrm.desktop'
@@ -63,7 +63,7 @@ kz-gset --addfavbegin --file='kz-zga-ehrm.desktop'
 #3    rm "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
 #3    kz-gset --removefav --file='kz-zga-ehrm.desktop'
 
-#1 zga-intranet (Starter Intranet Zorggroep Almere)
+#1 zga-intranet (starter Intranet Zorggroep Almere)
 cp /usr/share/applications/kz-zga-intranet.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-intranet.desktop
 kz-gset --addfavbegin --file='kz-zga-intranet.desktop'
@@ -71,7 +71,7 @@ kz-gset --addfavbegin --file='kz-zga-intranet.desktop'
 #3    rm "$HOME"/.local/share/applications/kz-zga-intranet.desktop
 #3    kz-gset --removefav --file='kz-zga-intranet.desktop'
 
-#1 zga-monaco (Starter Monaco Zorggroep Almere)
+#1 zga-monaco (starter Monaco Zorggroep Almere)
 cp /usr/share/applications/kz-zga-monaco.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-monaco.desktop
 kz-gset --addfavbegin --file='kz-zga-monaco.desktop'
@@ -79,7 +79,7 @@ kz-gset --addfavbegin --file='kz-zga-monaco.desktop'
 #3    rm "$HOME"/.local/share/applications/kz-zga-monaco.desktop
 #3    kz-gset --removefav --file='kz-zga-monaco.desktop'
 
-#1 zga-webmail (Starter WebMail Zorggroep Almere)
+#1 zga-webmail (starter WebMail Zorggroep Almere)
 cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-webmail.desktop
 kz-gset --addfavbegin --file='kz-zga-webmail.desktop'

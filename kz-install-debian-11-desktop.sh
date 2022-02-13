@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 repos (Alle repositories inschakelen)
+#1 repos (alle repositories inschakelen)
 sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
@@ -15,12 +15,12 @@ sudo apt-get update
 #3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 #3    sudo apt-get update
 
-#1 bitwarden (Wachtwoordkluis)
+#1 bitwarden (wachtwoordkluis)
 sudo snap install bitwarden
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove bitwarden
 
-#1 citrix (Telewerken)
+#1 citrix (telewerken)
 ## Voegt gebruiker citrixlog toe!
 wget --no-verbose --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/downloads/icaclient/LATEST'
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
@@ -45,17 +45,17 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes icaclient
 
-#1 cups (Printsysteem)
+#1 cups (printsysteem)
 sudo apt-get install --yes cups
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove cups
 
-#1 dashtodock (Dash to Dock starter)
+#1 dashtodock (dash to Dock starter)
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove gnome-shell-extension-dashtodock
 
-#1 google-chrome (Webbrowser)
+#1 google-chrome (webbrowser)
 ## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder zelf
 ## aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
 ## GNOME Shell integration - Integratie van GNOME Shell-extensies voor
@@ -66,32 +66,32 @@ rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell gnome-contacts gnome-gmail
 
-#1 libreoffice (Kantoorpakket)
+#1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
-#1 skype (Beeldbellen)
+#1 skype (beeldbellen)
 sudo snap install --classic skype
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove skype
 
-#1 systemd-journal (Journaal bekijken met journalctl)
+#1 systemd-journal (journaal bekijken met journalctl)
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 #3 Start Terminalvenster en voer uit:
 #3    sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
-#1 spotify (Muziekspeler)
+#1 spotify (muziekspeler)
 sudo snap install spotify
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove spotify
 
-#1 tab-completion (Programmeerbare completion voor de bash-shell)
+#1 tab-completion (programmeerbare completion voor de bash-shell)
 sudo apt-get install --yes bash-completion
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes bash-completion
 
-#1 teamviewer (Afstandsbediening)
+#1 teamviewer (afstandsbediening)
 wget --no-verbose --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
@@ -100,12 +100,12 @@ rm /tmp/teamviewer.deb
 #3    sudo rm /etc/apt/sources.list.d/teamviewer.list*
 #3    sudo apt update
 
-#1 thunderbird (E-mail)
+#1 thunderbird (e-mail)
 sudo apt-get install --yes lightning thunderbird-l10n-nl
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes lightning thunderbird-l10n-nl
 
-#1 zoom (Telewerken)
+#1 zoom (telewerken)
 wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb
 sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/zoom.deb

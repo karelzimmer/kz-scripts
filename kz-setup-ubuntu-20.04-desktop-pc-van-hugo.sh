@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 gnome (Bureaubladomgeving)
+#1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Cairn_by_Sylvain_Naudin.jpg'
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
@@ -13,12 +13,12 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 #3    gsettings reset org.gnome.desktop.background picture-uri
 #3    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
-#1 telegram (Privéberichtenapp)
+#1 telegram (privéberichtenapp)
 kz-gset --addfavend --file='telegram-desktop_telegram-desktop.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='telegram-desktop_telegram-desktop.desktop'
 
-#1 virtualbox (Virtualisatie)
+#1 virtualbox (virtualisatie)
 kz-gset --addfavend --file='virtualbox.desktop'
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
 chmod u+x "$HOME"/kz-vm-hugowin732.sh

@@ -5,23 +5,23 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 handlelidswitch (Negeer sluiten laptopdesksel)
+#1 handlelidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 printf '%s\n' 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #3 Start Terminalvenster en voer uit:
 #3    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-#1 pinta (Tekenprogramma)
+#1 pinta (tekenprogramma)
 sudo apt-get install --yes pinta
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes pinta
 
-#1 telegram (Privéberichtenapp)
+#1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove telegram-desktop
 
-#1 virtualbox (Virtualisatie)
+#1 virtualbox (virtualisatie)
 ## Images staan in ~/VirtualBox VMs/.
 printf '%s\n' "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget --no-verbose --output-document=- 'https://www.virtualbox.org/download/oracle_vbox_2016.asc' | sudo apt-key add -
