@@ -1,19 +1,18 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Debian 11 LTS desktop.                              #
+# Installatiebestand voor Ubuntu 20.04 LTS desktop.                           #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 repos (alle repositories inschakelen)
-sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
-sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
-sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
-sudo apt-get update
+#1 apport (handmatig genereren van crashrapporten)
+sudo systemctl stop apport.service
+sudo systemctl disable apport.service
+sudo rm --force /var/crash/*
+sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #3 Start Terminalvenster en voer uit:
-#3    sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
-#3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
-#3    sudo apt-get update
+#3    sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
+#3    sudo systemctl enable --now apport.service
 
 #1 bitwarden (wachtwoordkluis)
 sudo snap install bitwarden
@@ -45,69 +44,82 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes icaclient
 
-#1 cups (printsysteem)
-sudo apt-get install --yes cups
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove cups
-
-#1 dashtodock (dash to Dock starter)
-sudo apt-get install --yes gnome-shell-extension-dashtodock
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove gnome-shell-extension-dashtodock
-
 #1 google-chrome (webbrowser)
-## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder zelf
-## aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
-## GNOME Shell integration - Integratie van GNOME Shell-extensies voor
-## webbrowsers: https://extensions.gnome.org
+## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder
+## zelf aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
+## Integratie van GNOME Shell-extensies voor webbrowsers:
+## https://extensions.gnome.org
 wget --no-verbose --output-document=/tmp/google-chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb chrome-gnome-shell gnome-contacts gnome-gmail
 rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell gnome-contacts gnome-gmail
 
+#1 language-support (taalondersteuning)
+sudo apt-get install --yes "$(check-language-support --language=nl)"
+
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt remove libreoffice libreoffice-help-nl libreoffice-l10n-nl
+#3    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
+
+#1 private-home (persoonlijke mappen beveiligen
+## https://ubuntu.com//blog/private-home-directories-for-ubuntu-21-04
+## make all existing home directories private
+sudo chmod 0750 /home/*
+## ensure any users created by either the adduser(8) or useradd(8)
+## commands have their home directories private by default
+sudo sed --in-place --expression='s/DIR_MODE=0755/DIR_MODE=0750/' /etc/adduser.conf
+sudo sed --in-place --expression='/^HOME_MODE 0750/d' /etc/login.defs
+printf '%s\n' 'HOME_MODE 0750' | sudo tee --append /etc/login.defs
+#3 Start Terminalvenster en voer uit:
+#3    sudo chmod 0755 /home/*
+#3    sudo dpkg-reconfigure adduser
+#3    sudo sed --in-place --expression='s/^\(HOME_MODE\s\+0750\)/#\1/' /etc/login.defs
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove skype
 
-#1 systemd-journal (journaal bekijken met journalctl)
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
-#3 Start Terminalvenster en voer uit:
-#3    sudo deluser "${SUDO_USER:-$USER}" systemd-journal
-
 #1 spotify (muziekspeler)
 sudo snap install spotify
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove spotify
 
-#1 tab-completion (programmeerbare completion voor de bash-shell)
-sudo apt-get install --yes bash-completion
+#1 sushi (voorbeeld tonen)
+## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
+sudo apt-get install --yes gnome-sushi
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes bash-completion
+#3    sudo apt remove --yes gnome-sushi
 
 #1 teamviewer (afstandsbediening)
 wget --no-verbose --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
+## Zorg ervoor dat /etc/apt/sources.list.d/teamviewer.list is aangemaakt.
+sudo teamviewer repo default
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt-get remove --yes teamviewer
 #3    sudo rm /etc/apt/sources.list.d/teamviewer.list*
 #3    sudo apt update
 
 #1 thunderbird (e-mail)
-sudo apt-get install --yes lightning thunderbird-l10n-nl
+sudo apt-get install --yes xul-ext-lightning
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes lightning thunderbird-l10n-nl
+#3    sudo apt remove --yes xul-ext-lightning
+
+#1 ubuntu-restricted (niet-vrije pakketten voor Ubuntu)
+## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van
+## ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
+sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes ubuntu-restricted-addons libavcodec-extra
+#3    sudo apt autoremove --yes
 
 #1 zoom (telewerken)
-wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb
-sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
+wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
+sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt-get remove --yes zoom
+#3    sudo apt remove --yes zoom
