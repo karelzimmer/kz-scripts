@@ -13,7 +13,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes nvidia-legacy-390xx-dr
 
 #1-(Intel Wireless WiFi)
 sudo apt-get install --yes firmware-iwlwifi
-sudo modprobe -r iwlwifi
+sudo modprobe --remove iwlwifi
 sudo modprobe iwlwifi
 #3 Start Terminalvenster en voer uit:
 #3    sudo DEBIAN_FRONTEND=noninteractive apt-get remove --yes nvidia-legacy-390xx-driver

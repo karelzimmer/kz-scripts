@@ -5,21 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1-(Intel Wireless WiFi Link Firmware wifi-adapter)
-## Als NIET uitgevoerd TIJDENS installatie.
-:
-#sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
-#sudo apt-get update
-#sudo apt-get install firmware-iwlwifi
-#sudo modprobe --remove iwlwifi
-#sudo modprobe iwlwifi
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes firmware-iwlwifi
-#3    sudo sed --in-place --expression='s/main contrib non-free$/main/g' /etc/apt/sources.list
-#3    sudo apt-get update
-#3    sudo modprobe --remove iwlwifi
-#3    sudo modprobe iwlwifi
-
 #1-(activeren eth0 netwerk-adapter uit start-up halen)
 ## Anders [FAILED] Raise network interfaces
 sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
