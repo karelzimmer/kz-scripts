@@ -5,14 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1-(activeren eth0 netwerk-adapter uit start-up halen)
-## Anders [FAILED] Raise network interfaces
-sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
-sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup
-#3 Start Terminalvenster en voer uit:
-#3    sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
-#3    sudo sed --in-place --expression='s/^#iface eth0 net dhcp$/iface eth0 net dhcp/' /etc/network/interfaces.d/setup
-
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes aspell-nl git
 #3 Start Terminalvenster en voer uit:
