@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LTS desktop.                           #
+# Instellingsbestand voor Debian 11 LTS desktop.                              #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
