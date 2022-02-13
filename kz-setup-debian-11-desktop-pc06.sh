@@ -52,6 +52,11 @@ kz-gset --addfavbegin --file='org.gnome.Terminal.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='org.gnome.Terminal.desktop'
 
+#1 thunderbird (E-mail)
+kz-gset --removefav --file='thunderbird.desktop'
+#3 Start Terminalvenster en voer uit:
+#3    kz-gset --addfavbegin --file='thunderbird.desktop'
+
 #1 vscode (Visual Studio Code editor)
 kz-gset --addfavbegin --file='code_code.desktop'
 #2 1. Start Visual Studio Code.

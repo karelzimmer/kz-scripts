@@ -203,6 +203,9 @@ kz-gset --addfavbegin --file='thunderbird.desktop'
 #3 3. Klik links op Extensies.
 #3 4. Bij 'Provider voor Google Agenda' zet schuifje op uit of klik ... en kies
 #3    Verwijderen.
+#3 5. Start Terminalvenster en voer uit:
+#3    kz-gset --addfavbegin --file='org.gnome.Evolution.desktop'
+#3    kz-gset --removefav --file='thunderbird.desktop'
 
 #1 zoom (Telewerken)
 kz-gset --addfavend --file='Zoom.desktop'
