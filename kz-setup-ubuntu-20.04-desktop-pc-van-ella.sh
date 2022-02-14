@@ -1,16 +1,12 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Debian 11 LTS desktop op pc-van-soe.                #
+# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc-van-ella.            #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 calibre (e-boekmanager)
-sudo apt-get install --yes calibre
+#1 gnome (bureaubladomgeving)
+## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
+gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Fleurs_de_Prunus_24_by_Jérôme_Boivin.jpg'
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes calibre
-
-#1 clamav (antivirus)
-sudo apt-get install --yes clamtk-gnome
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove clamtk-gnome
+#3    gsettings reset org.gnome.desktop.background picture-uri
