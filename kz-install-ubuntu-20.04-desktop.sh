@@ -56,7 +56,7 @@ rm /tmp/google-chrome.deb
 #3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell gnome-contacts gnome-gmail
 
 #1 language-support (taalondersteuning)
-sudo apt-get install --yes "$(check-language-support --language=nl)"
+check-language-support | xargs sudo apt-get install --yes
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
