@@ -77,20 +77,6 @@ function check_input {
     fi
 
     check_user
-    check_dependencies
-}
-
-
-function check_dependencies {
-    if ! command -v pycodestyle 1> /dev/null; then
-        info 'Installeer pycodestyle...'
-        sudo apt-get install --yes pycodestyle
-    fi
-    if ! command -v shellcheck 1> /dev/null; then
-        info 'Installeer shellcheck...'
-        # Debian's pakket is oud, snap is nieuwer.
-        sudo snap install shellcheck
-    fi
 }
 
 

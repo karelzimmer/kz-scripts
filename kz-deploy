@@ -98,21 +98,11 @@ function check_input {
 
 
 function process_input {
-    check_dependencies
     check_names
     check_scripts
     build_package
     upload_website
     install_package
-}
-
-
-function check_dependencies {
-    if ! command -v lftp 1> /dev/null; then
-        # Voor upload website.
-        info 'Installeer lftp...'
-        sudo apt-get install --yes lftp |& $LOGCMD
-    fi
 }
 
 

@@ -140,24 +140,9 @@ function check_input {
 
 
 function process_input {
-    check_dependencies
     # Er is een afhankelijkheid met het maken van pdf's, vandaar uploads eerst.
     build_uploads
     build_deb
-}
-
-
-function check_dependencies {
-    if ! command -v fakeroot 1> /dev/null; then
-        # Voor build .deb.
-        info 'Installeer fakeroot...'
-        sudo apt-get install --yes fakeroot |& $LOGCMD
-    fi
-    if ! command -v ghostscript 1> /dev/null; then
-        # Voor <man-pag>.pdf (ps2pdf).
-        info 'Installeer ghostscript...'
-        sudo apt-get install --yes ghostscript |& $LOGCMD
-    fi
 }
 
 
