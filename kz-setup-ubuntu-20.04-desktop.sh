@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 adguard (Adblocker)
+#1 adguard (adblocker)
 :
 #2 Voor Chrome:
 #2 ~~~~~~~~~~~~
@@ -36,7 +36,7 @@
 #3 3. Klik links op Extensies.
 #3 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
 
-#1 bitwarden (Wachtwoordkluis)
+#1 bitwarden (wachtwoordkluis)
 kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
 #2 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #2 1. Start Bitwarden.
@@ -98,11 +98,11 @@ kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
 #3 5. Start Terminalvenster en voer uit:
 #3       kz-gset --removefav --file='bitwarden_bitwarden.desktop'
 
-#1 citrix (Telewerken)
+#1 citrix (telewerken)
 ## Citrix Receiver, ICA Client
 xdg-mime default wfica.desktop application/x-ica
 
-#1 gnome (Bureaubladomgeving)
+#1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 kz-gset --addappfolder --folder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -141,7 +141,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3    gsettings reset org.gnome.shell.extensions.desktop-icons show-trash
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
-#1 google-chrome (Webbrowser)
+#1 google-chrome (webbrowser)
 kz-gset --addfavbegin --file='google-chrome.desktop'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
@@ -163,17 +163,17 @@ kz-gset --addfavbegin --file='google-chrome.desktop'
 #3 4. Start Terminalvenster en voer uit:
 #3       kz-gset --removefav --file='google-chrome.desktop'
 
-#1 skype (Beeldbellen)
+#1 skype (beeldbellen)
 kz-gset --addfavend --file='skype_skypeforlinux.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='skype_skypeforlinux.desktop'
 
-#1 spotify (Muziekspeler)
+#1 spotify (muziekspeler)
 kz-gset --addfavend --file='spotify_spotify.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='spotify_spotify.desktop'
 
-#1 thunderbird (E-mail)
+#1 thunderbird (e-mail)
 :
 #2 Voeg de extenstie voor Google Agenda toe via:
 #2 1. Start Thunderbird.
@@ -188,7 +188,7 @@ kz-gset --addfavend --file='spotify_spotify.desktop'
 #3 4. Bij 'Provider voor Google Agenda' zet schuifje op uit of klik ... en kies
 #3    Verwijderen.
 
-#1 zoom (Telewerken)
+#1 zoom (telewerken)
 kz-gset --addfavend --file='Zoom.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='Zoom.desktop'

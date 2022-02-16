@@ -5,12 +5,12 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 firefox (Webbrowser)
+#1 firefox (webbrowser)
 kz-gset --removefav --file='firefox.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --addfavbegin --file='firefox.desktop'
 
-#1 gnome (Bureaubladomgeving)
+#1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'
 gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-light'
@@ -26,19 +26,19 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 #3    gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
-#1 kvm (Virtualisatie)
+#1 kvm (virtualisatie)
 ## Beeldscherm 2048 x 1152 (16:9).
 kz-gset --addfavend --file='virt-manager.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='virt-manager.desktop'
 
-#1 search (Vooruit zoeken in history met Ctrl-S)
+#1 search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 printf '%s\n' 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #3 Start Terminalvenster en voer uit:
 #3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-#1 terminal (Terminalvenster)
+#1 terminal (terminalvenster)
 kz-gset --addfavbegin --file='org.gnome.Terminal.desktop'
 #2 1. Start Terminalvenster.
 #2 2. Maximaliseer het Terminalvenster.
@@ -51,7 +51,7 @@ kz-gset --addfavbegin --file='org.gnome.Terminal.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='org.gnome.Terminal.desktop'\
 
-#1 thunderbird (E-mail)
+#1 thunderbird (e-mail)
 kz-gset --removefav --file='thunderbird.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --addfavbegin --file='thunderbird.desktop'
