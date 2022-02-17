@@ -78,7 +78,8 @@ kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
 #2       1. Klik in Bitwarden-extensie op Instellingen en klik onder BEVEILIGING op
 #2          'Time-out van de kluis' en selecteer Nooit.
 #2       2. Klik in Bitwarden-extensie op Instellingen en klik onder OVERIG op
-#2          Opties en vink aan Automatisch invullen bij laden van pagina.
+#2          Opties en vink aan Automatisch invullen bij laden van pagina en
+#2          selecteer Automatisch invullen bij laden van pagina.
 #3
 #3 Voor Chrome:
 #3 ~~~~~~~~~~~~
