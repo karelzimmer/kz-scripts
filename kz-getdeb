@@ -383,10 +383,13 @@ function download_website {
 
 
 function term_script {
-    test -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs &&
+    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
         source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}
+    fi
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
     local search=''
+
+    mkdir --parents "$docs_dir" |& $LOGCMD
 
     search="/usr/share/doc/kz/Checklist-installatie-$(
         lsb_release --id --short
@@ -402,7 +405,7 @@ Volg nu de stappen zoals beschreven
 in de Checklist installatie.
 
 Deze checklist is te vinden:
-- in de map Documenten
+- in de map kz in Documenten
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
   onder Linux

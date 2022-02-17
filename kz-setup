@@ -299,18 +299,19 @@ $HOSTNAME.sh
 
 
 function process_option_list {
-    test -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs &&
+    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
         source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/$PROGRAM_NAME
+    fi
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
-    local file1="$docs_dir/1-$PROGRAM_NAME-gebruikersfoto"
+    local file1="$docs_dir/Gebruikersfoto"
     local text2='[2/4]  Bureaubladachtergrond vastleggen'
-    local file2="$docs_dir/2-$PROGRAM_NAME-bureaubladachtergrond"
+    local file2="$docs_dir/Bureaubladachtergrond"
     local text3='[3/4]  Favorieten vastleggen'
-    local file3="$docs_dir/3-$PROGRAM_NAME-favorieten"
+    local file3="$docs_dir/Favorieten"
     local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
-    local file4="$docs_dir/4-$PROGRAM_NAME-opdrachtgeschiedenis"
+    local file4="$docs_dir/Opdrachtgeschiedenis"
 
     mkdir --parents "$docs_dir"
 
@@ -318,13 +319,13 @@ function process_option_list {
     if $OPTION_GUI; then
         (
         printf '%s\n' "#$text1"
-        save_user_photo             #1
+        save_user_photo
         printf '%s\n' "#$text2"
-        save_desktop_background     #2
+        save_desktop_background
         printf '%s\n' "#$text3"
-        save_favorite_apps          #3
+        save_favorite_apps
         printf '%s\n' "#$text4"
-        save_command_history        #4
+        save_command_history
         ) |&
         zenity  --progress              \
                 --pulsate               \
@@ -335,25 +336,21 @@ function process_option_list {
                 --title     "$TITLE"    \
                 --text      "$text0"    2> >($LOGCMD)
     else
-        save_user_photo             #1
-        save_desktop_background     #2
-        save_favorite_apps          #3
-        save_command_history        #4
+        save_user_photo
+        save_desktop_background
+        save_favorite_apps
+        save_command_history
     fi
 
     info "
-De instellingen zijn vastgelegd in bestanden in de Persoonlijke map -> \
-$PROGRAM_NAME.
-Deze bestanden bevatten de eerder gebruikte:
-1-gebruikersfoto,
-2-bureaubladachtergrond,
-3-favorieten, en
-4-opdrachtgeschiedenis.
+De instellingen zijn vastgelegd in de map kz in Documenten.
+In map kz de bestanden met de eerder gebruikte Gebruikersfoto,
+Bureaubladachtergrond, Favorieten, en Opdrachtgeschiedenis.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 }
 
 
-function save_user_photo {          #1
+function save_user_photo {
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
         rm --force "$file1"
@@ -362,21 +359,21 @@ function save_user_photo {          #1
 }
 
 
-function save_desktop_background {  #2
+function save_desktop_background {
     printf '%s\n' "$text2..."
     gsettings get   org.gnome.desktop.background    \
                     picture-uri                     > "$file2" |& $LOGCMD
 }
 
 
-function save_favorite_apps {       #3
+function save_favorite_apps {
     printf '%s\n' "$text3..."
     gsettings get   org.gnome.shell \
                     favorite-apps   > "$file3" |& $LOGCMD
 }
 
 
-function save_command_history {     #4
+function save_command_history {
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
