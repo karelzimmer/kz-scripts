@@ -93,6 +93,18 @@ sudo apt-get install --yes gnome-sushi
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes gnome-sushi
 
+#1 teams (telewerken)
+## Download:
+## https://www.microsoft.com/nl-nl/microsoft-teams/download-app
+## Webbrowser:
+## https://www.microsoft.com/en-in/microsoft-teams/log-in
+wget --no-verbose --output-document=/tmp/teams-LATEST 'https://karelzimmer.nl/downloads/teams/LATEST'
+wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/teams/teams_$(cat /tmp/icaclient-LATEST)_amd64.deb"
+sudo apt-get install --yes /tmp/teams.deb
+rm /tmp/teams-LATEST /tmp/teams.deb
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes teams
+
 #1 teamviewer (afstandsbediening)
 wget --no-verbose --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
