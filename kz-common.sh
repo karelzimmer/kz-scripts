@@ -346,7 +346,7 @@ function signal {
             rc_desc_signalno=$((rc - 128))
             rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
             ;;
-        141)                           # SIGPIPE (128+13)
+        141)                            # SIGPIPE (128+13)
             rc_desc='broken pipe: write to pipe with no readers'
             ;;
         142)                            # SIGALRM (128+14)
