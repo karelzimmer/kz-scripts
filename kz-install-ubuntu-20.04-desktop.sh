@@ -99,7 +99,7 @@ sudo apt-get install --yes gnome-sushi
 ## Webbrowser:
 ## https://www.microsoft.com/en-in/microsoft-teams/log-in
 wget --no-verbose --output-document=/tmp/teams-LATEST 'https://karelzimmer.nl/downloads/teams/LATEST'
-wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/teams/teams_$(cat /tmp/icaclient-LATEST)_amd64.deb"
+wget --no-verbose --output-document=/tmp/teams.deb "https://karelzimmer.nl/downloads/teams/teams_$(cat /tmp/teams-LATEST)_amd64.deb"
 sudo apt-get install --yes /tmp/teams.deb
 rm /tmp/teams-LATEST /tmp/teams.deb
 #3 Start Terminalvenster en voer uit:
