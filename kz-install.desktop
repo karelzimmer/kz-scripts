@@ -16,7 +16,7 @@ Keywords=kzinstall;install;
 Keywords[nl]=kzinstall;installatie;
 Categories=KZ Scripts;
 Exec=pkexec kz-install --gui
-Icon=/usr/share/pixmaps/kz-install.svg
+Icon=kz-install.svg
 Actions=info;remove;list;cat;simulate;
 
 [Desktop Action info]

@@ -16,4 +16,4 @@ Keywords=kzmenu;menu;
 Keywords[nl]=kzmenu;menu;
 Categories=KZ Scripts;
 Exec=kz-menu --gui
-Icon=/usr/share/pixmaps/kz-menu.svg
+Icon=kz-menu.svg

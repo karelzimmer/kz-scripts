@@ -16,7 +16,7 @@ Keywords=kzsetup;setup;
 Keywords[nl]=kzsetup;setup;
 Categories=KZ Scripts;
 Exec=kz-setup --gui
-Icon=/usr/share/pixmaps/kz-setup.svg
+Icon=kz-setup.svg
 Actions=info;reset;list;cat;simulate;
 
 [Desktop Action info]

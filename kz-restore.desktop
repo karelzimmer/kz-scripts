@@ -16,4 +16,4 @@ Keywords=kz-restore;restore;copy;
 Keywords[nl]=kz-restore;restore;reservekopie;
 Categories=KZ Scripts;
 Exec=kz-restore --gui
-Icon=/usr/share/pixmaps/kz-restore.svg
+Icon=kz-restore.svg
