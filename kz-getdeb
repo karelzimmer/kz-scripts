@@ -146,9 +146,10 @@ Voer uw wachtwoord in:'
                             --passwordbox   "$TEXT"                 \
                             12 44                                   \
                             3>&1 1>&2 2>&3
-                )" | sudo --stdin true &> /dev/null; then
+                )" | sudo --stdin true 2> /dev/null; then
                 break
             else
+                clear
                 TEXT='Er is een fout opgetreden.
 
 Mogelijke oorzaak:
