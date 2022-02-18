@@ -7,10 +7,11 @@
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-backup
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2007
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+readonly PROGRAM_NAME=kz-backup
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly RELEASE_YEAR=2007
 
 
 ###############################################################################
@@ -43,12 +44,12 @@ readonly TARGET_DEFAULT
 # Global variables                                                            #
 ###############################################################################
 
-OPTION_DELETE=''
-OPTION_DRY_RUN=''
-OPTION_GUI=false
-OPTION_TARGET=false
-TARGET_ARGUMENT=''
-TARGET=''
+declare OPTION_DELETE=''
+declare OPTION_DRY_RUN=''
+declare OPTION_GUI=false
+declare OPTION_TARGET=false
+declare TARGET_ARGUMENT=''
+declare TARGET=''
 
 ###############################################################################
 # Functions                                                                   #

@@ -7,10 +7,11 @@
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-gset
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2015
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+readonly PROGRAM_NAME=kz-gset
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly RELEASE_YEAR=2015
 
 
 ###############################################################################
@@ -50,18 +51,18 @@ $OPTIONS_HELP_COMMON"
 # Global variables                                                            #
 ###############################################################################
 
-CONFIG_A=''
-CONFIG_B=''
-DESKTOPFILE=''
-FILE_ARGUMENT=''
-FOLDER_ARGUMENT=''
-OPTION_ADDAPPFOLDER=false
-OPTION_addfavend=false
-OPTION_addfavbegin=false
-OPTION_FILE=false
-OPTION_FOLDER=false
-OPTION_REMOVEAPPFOLDER=false
-OPTION_REMOVEFAV=false
+declare CONFIG_A=''
+declare CONFIG_B=''
+declare DESKTOPFILE=''
+declare FILE_ARGUMENT=''
+declare FOLDER_ARGUMENT=''
+declare OPTION_ADDAPPFOLDER=false
+declare OPTION_addfavend=false
+declare OPTION_addfavbegin=false
+declare OPTION_FILE=false
+declare OPTION_FOLDER=false
+declare OPTION_REMOVEAPPFOLDER=false
+declare OPTION_REMOVEFAV=false
 
 
 ###############################################################################

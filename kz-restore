@@ -7,10 +7,11 @@
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-restore
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2007
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+readonly PROGRAM_NAME=kz-restore
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly RELEASE_YEAR=2007
 
 
 ###############################################################################
@@ -44,11 +45,11 @@ TARGET=$HOME
 # Global variables                                                            #
 ###############################################################################
 
-OPTION_DRY_RUN=''
-OPTION_GUI=false
-OPTION_SOURCE=false
-SOURCE_ARGUMENT=''
-SOURCE=''
+declare OPTION_DRY_RUN=''
+declare OPTION_GUI=false
+declare OPTION_SOURCE=false
+declare SOURCE_ARGUMENT=''
+declare SOURCE=''
 
 
 ###############################################################################

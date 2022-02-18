@@ -5,8 +5,8 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-TITLE='VirtualBox'
-TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
+readonly TITLE='VirtualBox'
+readonly TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
 
 function start_vm {
      while ! lsmod | grep vbox; do

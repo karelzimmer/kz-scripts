@@ -7,10 +7,11 @@
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-menu
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2015
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+readonly PROGRAM_NAME=kz-menu
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly RELEASE_YEAR=2015
 
 
 ###############################################################################
@@ -97,13 +98,13 @@ readonly MENU2_LINES=${#ACTIONS2[@]}
 # Global variables                                                            #
 ###############################################################################
 
+declare COMMANDS_EXECUTED=false
+declare OPTION_GUI=false
 declare -a EXEC=()
 declare -i NUMBER_OF_COMMANDS=0
-COMMANDS_EXECUTED=false
-OPTION_GUI=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-REWRITE_LINE=$(tput cuu1;tput el)
+declare REWRITE_LINE=''
 
 
 ###############################################################################
@@ -148,6 +149,10 @@ function check_input {
         error 'Te veel argumenten.'
         info "$USAGELINE" >&2
         exit $ERROR
+    fi
+
+    if [[ -t 1 ]]; then
+        REWRITE_LINE=$(tput cuu1;tput el)
     fi
 
     check_user

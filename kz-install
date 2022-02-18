@@ -7,10 +7,11 @@
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-install
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2009
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+readonly PROGRAM_NAME=kz-install
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly RELEASE_YEAR=2009
 
 
 ###############################################################################
@@ -79,34 +80,34 @@ hulp of q voor stoppen)"
 # Global variables                                                            #
 ###############################################################################
 
+declare ARGUMENT_APP=false
+declare ARGUMENT_FILE=false
+declare COMMANDS_FOUND=false
+declare EDITION=$EDITION_DEFAULT
+declare EDITION_ARGUMENT=''
+declare EXECUTE_COMMANDS=true
+declare INFO_FOUND=false
+declare OPTION_APPS=false
+declare OPTION_CAT=false
+declare OPTION_EDITION=false
+declare OPTION_FILES=false
+declare OPTION_GUI=false
+declare OPTION_INFO=false
+declare OPTION_LIST=false
+declare OPTION_REMOVE=false
+declare OPTION_SIMULATE=false
+declare REMOVE_FOUND=false
+declare STATUS_BUSY=''
 declare -a APP_ARGUMENT=()
 declare -a FILE_ARGUMENT=()
 declare -a FILE_TO_PROCESS=()
 declare -i MAXRC=0
-ARGUMENT_APP=false
-ARGUMENT_FILE=false
-COMMANDS_FOUND=false
-EDITION=$EDITION_DEFAULT
-EDITION_ARGUMENT=''
-EXECUTE_COMMANDS=true
-INFO_FOUND=false
-OPTION_APPS=false
-OPTION_CAT=false
-OPTION_EDITION=false
-OPTION_FILES=false
-OPTION_GUI=false
-OPTION_INFO=false
-OPTION_LIST=false
-OPTION_REMOVE=false
-OPTION_SIMULATE=false
-REMOVE_FOUND=false
-STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-BLINK=$(tput blink)
-CARRIAGE_RETURN=$(tput cr)
-CURSOR_INVISABLE=$(tput civis)
-CURSOR_VISABLE=$(tput cvvis)
+declare BLINK=''
+declare CARRIAGE_RETURN=''
+declare CURSOR_INVISABLE=''
+declare CURSOR_VISABLE=''
 
 
 ###############################################################################
@@ -209,6 +210,13 @@ function check_input {
             shift
         fi
     done
+
+    if [[ -t 1 ]]; then
+        BLINK=$(tput blink)
+        CARRIAGE_RETURN=$(tput cr)
+        CURSOR_INVISABLE=$(tput civis)
+        CURSOR_VISABLE=$(tput cvvis)
+    fi
 }
 
 

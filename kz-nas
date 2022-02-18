@@ -7,10 +7,11 @@
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-nas
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2014
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+readonly PROGRAM_NAME=kz-nas
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly RELEASE_YEAR=2014
 
 
 ###############################################################################
@@ -56,14 +57,14 @@ readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 # Global variables                                                            #
 ###############################################################################
 
-NAS_GEBRUIKERSNAAM=${SUDO_USER:-$USER}
-NAS_IP_ADRES=192.168.0.200
-NAS_SHARENAAM=${SUDO_USER:-$USER}
-NAS_WACHTWOORD='geheim'
-OPTION_GUI=false
+declare NAS_GEBRUIKERSNAAM=${SUDO_USER:-$USER}
+declare NAS_IP_ADRES=192.168.0.200
+declare NAS_SHARENAAM=${SUDO_USER:-$USER}
+declare NAS_WACHTWOORD='geheim'
+declare OPTION_GUI=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-REWRITE_LINE=$(tput cuu1;tput el)
+declare REWRITE_LINE=''
 
 
 ###############################################################################
@@ -108,6 +109,10 @@ function check_input {
         error 'Te veel argumenten.'
         info "$USAGELINE" >&2
         exit $ERROR
+    fi
+
+    if [[ -t 1 ]]; then
+        REWRITE_LINE=$(tput cuu1;tput el)
     fi
 
     check_user

@@ -4,9 +4,9 @@
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
-PROGRAM_NAME=kz-common.sh
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2009
+declare PROGRAM_NAME=kz-common.sh
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare RELEASE_YEAR=2009
 
 
 ###############################################################################
@@ -41,29 +41,29 @@ readonly THIS_YEAR
 # Common global variables
 ###############################################################################
 
+declare HELP='Gebruik: source kz-common.sh
+     of: . kz-common.sh'
+declare LOGCMD=''
+declare LOGCMD_CHECK=''
+declare OPTION_DEBUG=false
+declare OPTION_GUI=false
+declare OPTION_HELP=false
+declare OPTION_USAGE=false
+declare OPTION_VERSION=false
+declare RUN_AS_SUPERUSER=false
+declare TITLE=''
+declare USAGE='Gebruik: source kz-common.sh
+     of: . kz-common.sh'
+declare USAGELINE=''
 declare -a CMDLINE_ARGS=()
-HELP='Gebruik: source kz-common.sh
-     of: . kz-common.sh'
-LOGCMD=''
-LOGCMD_CHECK=''
-OPTION_DEBUG=false
-OPTION_GUI=false
-OPTION_HELP=false
-OPTION_USAGE=false
-OPTION_VERSION=false
-RUN_AS_SUPERUSER=false
-TITLE=''
-USAGE='Gebruik: source kz-common.sh
-     of: . kz-common.sh'
-USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-NORMAL=''
-BOLD=''
-BLUE=''
-GREEN=''
-RED=''
-YELLOW=''
+declare NORMAL=''
+declare BOLD=''
+declare BLUE=''
+declare GREEN=''
+declare RED=''
+declare YELLOW=''
 
 
 ###############################################################################

@@ -7,10 +7,11 @@
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
-source "$PROGRAM_PATH"/kz-common.sh
-PROGRAM_NAME=kz-ckname
-DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-RELEASE_YEAR=2012
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+readonly PROGRAM_NAME=kz-ckname
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly RELEASE_YEAR=2012
 
 
 ###############################################################################
@@ -39,8 +40,8 @@ readonly    START_DFLT=$HOME
 # Global variables                                                            #
 ###############################################################################
 
+declare ARGUMENT_MAP=false
 declare -a MAP_ARGUMENT=()
-ARGUMENT_MAP=false
 
 
 ###############################################################################
