@@ -93,7 +93,7 @@ sudo apt-get install --yes gnome-sushi
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes gnome-sushi
 
-#1 teams (telewerken)
+#1 teams (samenwerken)
 ## Download:
 ## https://www.microsoft.com/nl-nl/microsoft-teams/download-app
 ## Webbrowser:
@@ -102,6 +102,10 @@ wget --no-verbose --output-document=/tmp/teams-LATEST 'https://karelzimmer.nl/do
 wget --no-verbose --output-document=/tmp/teams.deb "https://karelzimmer.nl/downloads/teams/teams_$(cat /tmp/teams-LATEST)_amd64.deb"
 sudo apt-get install --yes /tmp/teams.deb
 rm /tmp/teams-LATEST /tmp/teams.deb
+#2 1. Start Teams
+#2 2. Ga naar Instellingen.
+#2 3. Vink uit 'Toepassing automatisch starten' en
+#2    'Toepassing actief houden na sluiten'.
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes teams
 
@@ -129,7 +133,7 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #3    sudo apt remove --yes ubuntu-restricted-addons libavcodec-extra
 #3    sudo apt autoremove --yes
 
-#1 zoom (telewerken)
+#1 zoom (samenwerken)
 wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
