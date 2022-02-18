@@ -133,8 +133,8 @@ function check_sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TEXT='
-Authenticatie is vereist om
-pakket kz te installeren.
+Authenticatie is vereist om pakket kz te
+installeren.
 
 Voer uw wachtwoord in:'
             # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
@@ -144,7 +144,7 @@ Voer uw wachtwoord in:'
                             --ok-button     'Verifiëren'            \
                             --cancel-button 'Annuleren'             \
                             --passwordbox   "$TEXT"                 \
-                            12 38                                   \
+                            12 44                                   \
                             3>&1 1>&2 2>&3
                 )" | sudo --stdin true &> /dev/null; then
                 break
