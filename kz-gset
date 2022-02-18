@@ -211,7 +211,6 @@ function check_input {
     fi
     APPFOLDER=$FOLDER_ARGUMENT
 
-    TERM=ansi
     check_user
 }
 

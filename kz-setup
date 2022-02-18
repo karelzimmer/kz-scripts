@@ -160,7 +160,6 @@ function check_input {
                 ;;
             -g|--gui)
                 OPTION_GUI=true
-                reset_terminal_attribs
                 shift
                 ;;
             -i|--info)

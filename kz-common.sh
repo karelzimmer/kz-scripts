@@ -58,12 +58,12 @@ USAGE='Gebruik: source kz-common.sh
 USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-NORMAL=$(tput sgr0)
-BOLD=$(tput bold)
-BLUE=${BOLD}$(tput setaf 4)
-GREEN=${BOLD}$(tput setaf 2)
-RED=${BOLD}$(tput setaf 1)
-YELLOW=${BOLD}$(tput setaf 3)
+NORMAL=''
+BOLD=''
+BLUE=''
+GREEN=''
+RED=''
+YELLOW=''
 
 
 ###############################################################################
@@ -175,6 +175,15 @@ function init_script {
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
+
+    if [[ -t 1 ]]; then
+        NORMAL=$(tput sgr0)
+        BOLD=$(tput bold)
+        BLUE=${BOLD}$(tput setaf 4)
+        GREEN=${BOLD}$(tput setaf 2)
+        RED=${BOLD}$(tput setaf 1)
+        YELLOW=${BOLD}$(tput setaf 3)
+    fi
 }
 
 
@@ -288,16 +297,6 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
 Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
-}
-
-
-function reset_terminal_attribs {
-    NORMAL=''
-    BOLD=''
-    BLUE=''
-    GREEN=''
-    RED=''
-    YELLOW=''
 }
 
 

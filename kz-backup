@@ -76,7 +76,6 @@ function check_input {
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                reset_terminal_attribs
                 shift
                 ;;
             -n|--dry-run)
