@@ -44,7 +44,7 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes icaclient
 
-#1 google-chrome (webbrowser)
+#1 chrome (webbrowser)
 ## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder
 ## zelf aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
 ## Integratie van GNOME Shell-extensies voor webbrowsers:
@@ -55,7 +55,7 @@ rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell gnome-contacts gnome-gmail
 
-#1 language-support (taalondersteuning)
+#1 languagesupport (taalondersteuning)
 check-language-support | xargs sudo apt-get install --yes
 
 #1 libreoffice (kantoorpakket)
@@ -63,7 +63,7 @@ sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
-#1 private-home (persoonlijke mappen beveiligen
+#1 privatehome (persoonlijke mappen beveiligen
 ## https://ubuntu.com//blog/private-home-directories-for-ubuntu-21-04
 ## make all existing home directories private
 sudo chmod 0750 /home/*
@@ -125,7 +125,7 @@ sudo apt-get install --yes xul-ext-lightning
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes xul-ext-lightning
 
-#1 ubuntu-restricted (niet-vrije pakketten voor Ubuntu)
+#1 ubunturestricted (niet-vrije pakketten voor Ubuntu)
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van
 ## ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra

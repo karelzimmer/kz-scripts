@@ -55,7 +55,7 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='code_code.desktop'
 
-#1 zga-ehrm (starter eHRM Zorggroep Almere)
+#1 zgaehrm (starter eHRM Zorggroep Almere)
 cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
 kz-gset --addfavbegin --file='kz-zga-ehrm.desktop'
@@ -63,7 +63,7 @@ kz-gset --addfavbegin --file='kz-zga-ehrm.desktop'
 #3    rm "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
 #3    kz-gset --removefav --file='kz-zga-ehrm.desktop'
 
-#1 zga-intranet (starter Intranet Zorggroep Almere)
+#1 zgaintranet (starter Intranet Zorggroep Almere)
 cp /usr/share/applications/kz-zga-intranet.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-intranet.desktop
 kz-gset --addfavbegin --file='kz-zga-intranet.desktop'
@@ -71,7 +71,7 @@ kz-gset --addfavbegin --file='kz-zga-intranet.desktop'
 #3    rm "$HOME"/.local/share/applications/kz-zga-intranet.desktop
 #3    kz-gset --removefav --file='kz-zga-intranet.desktop'
 
-#1 zga-monaco (starter Monaco Zorggroep Almere)
+#1 zgamonaco (starter Monaco Zorggroep Almere)
 cp /usr/share/applications/kz-zga-monaco.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-monaco.desktop
 kz-gset --addfavbegin --file='kz-zga-monaco.desktop'
@@ -79,7 +79,7 @@ kz-gset --addfavbegin --file='kz-zga-monaco.desktop'
 #3    rm "$HOME"/.local/share/applications/kz-zga-monaco.desktop
 #3    kz-gset --removefav --file='kz-zga-monaco.desktop'
 
-#1 zga-webmail (starter WebMail Zorggroep Almere)
+#1 zgawebmail (starter WebMail Zorggroep Almere)
 cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-webmail.desktop
 kz-gset --addfavbegin --file='kz-zga-webmail.desktop'

@@ -142,7 +142,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3    gsettings reset org.gnome.shell.extensions.desktop-icons show-trash
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
-#1 google-chrome (webbrowser)
+#1 chrome (webbrowser)
 kz-gset --addfavbegin --file='google-chrome.desktop'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org

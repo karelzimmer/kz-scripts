@@ -16,7 +16,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 #3 Start Terminalvenster en voer uit:
 #3    gsettings reset org.gnome.desktop.background picture-uri
 
-#1 google-earth (verken de wereld)
+#1 earth (verken de wereld)
 kz-gset --addfavend --file='google-earth.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='google-earth.desktop'
