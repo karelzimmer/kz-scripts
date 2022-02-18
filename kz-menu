@@ -182,7 +182,7 @@ function process_menu1_gui {
             zenity  --list                                      \
                     --radiolist                                 \
                     --width         480                         \
-                    --height        225                         \
+                    --height        230                         \
                     --title         "$TITLE"                    \
                     --text          'Selecteer een keuze:'      \
                     --ok-label      'Verder'                    \
@@ -367,7 +367,7 @@ function process_menu2_gui {
             zenity  --list                                          \
                     --radiolist                                     \
                     --width         480                             \
-                    --height        365                             \
+                    --height        370                             \
                     --title         "$TITLE"                        \
                     --text          'Selecteer een keuze:'          \
                     --ok-label      'Verder'                        \
