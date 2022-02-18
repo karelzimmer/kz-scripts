@@ -300,6 +300,16 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 }
 
 
+function reset_terminal_attribs {
+    NORMAL=''
+    BOLD=''
+    BLUE=''
+    GREEN=''
+    RED=''
+    YELLOW=''
+}
+
+
 function signal {
     local       signal=${1:-signal?}
     local -i    lineno=${2:-0}
