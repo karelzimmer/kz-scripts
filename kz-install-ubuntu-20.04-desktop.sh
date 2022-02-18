@@ -102,7 +102,7 @@ wget --no-verbose --output-document=/tmp/teams-LATEST 'https://karelzimmer.nl/do
 wget --no-verbose --output-document=/tmp/teams.deb "https://karelzimmer.nl/downloads/teams/teams_$(cat /tmp/teams-LATEST)_amd64.deb"
 sudo apt-get install --yes /tmp/teams.deb
 rm /tmp/teams-LATEST /tmp/teams.deb
-#2 1. Start Teams
+#2 1. Start Microsoft Teams
 #2 2. Ga naar Instellingen.
 #2 3. Vink uit 'Toepassing automatisch starten' en
 #2    'Toepassing actief houden na sluiten'.
