@@ -15,5 +15,5 @@ Comment[nl]=Voer opdrachten uit via een menu
 Keywords=kzmenu;menu;
 Keywords[nl]=kzmenu;menu;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz-menu --gui
+Exec=kz-menu --gui
 Icon=/usr/share/pixmaps/kz-menu.svg

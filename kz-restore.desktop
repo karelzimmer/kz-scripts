@@ -15,5 +15,5 @@ Comment[nl]=Zet bestanden en mappen terug uit een reservekopie
 Keywords=kz-restore;restore;copy;
 Keywords[nl]=kz-restore;restore;reservekopie;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz-restore --gui
+Exec=kz-restore --gui
 Icon=/usr/share/pixmaps/kz-restore.svg

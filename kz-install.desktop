@@ -15,31 +15,31 @@ Comment[nl]=Installeer apps en wijzig systeeminstellingen
 Keywords=kzinstall;install;
 Keywords[nl]=kzinstall;installatie;
 Categories=KZ Scripts;
-Exec=pkexec /usr/bin/kz-install --gui
+Exec=pkexec kz-install --gui
 Icon=/usr/share/pixmaps/kz-install.svg
 Actions=info;remove;list;cat;simulate;
 
 [Desktop Action info]
 Name=Show installation instructions
 Name[nl]=Installatie-instructies tonen
-Exec=/usr/bin/kz-install --gui --info
+Exec=kz-install --gui --info
 
 [Desktop Action remove]
 Name=Show removal instructions
 Name[nl]=Verwijder-instructies tonen
-Exec=/usr/bin/kz-install --gui --remove
+Exec=kz-install --gui --remove
 
 [Desktop Action list]
 Name=Create app list
 Name[nl]=Applijst maken
-Exec=/usr/bin/kz-install --gui --list
+Exec=kz-install --gui --list
 
 [Desktop Action cat]
 Name=Show files
 Name[nl]=Bestanden tonen
-Exec=/usr/bin/kz-install --gui --cat
+Exec=kz-install --gui --cat
 
 [Desktop Action simulate]
 Name=Show commands
 Name[nl]=Opdrachten tonen
-Exec=/usr/bin/kz-install --gui --simulate
+Exec=kz-install --gui --simulate

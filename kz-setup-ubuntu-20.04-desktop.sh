@@ -174,6 +174,11 @@ kz-gset --addfavend --file='spotify_spotify.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --removefav --file='spotify_spotify.desktop'
 
+#1 teams (samenwerken)
+kz-gset --addfavend --file='teams.desktop'
+#3 Start Terminalvenster en voer uit:
+#3    kz-gset --removefav --file='teams.desktop'
+
 #1 thunderbird (e-mail)
 :
 #2 Voeg de extenstie voor Google Agenda toe via:

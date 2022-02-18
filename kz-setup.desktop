@@ -15,31 +15,31 @@ Comment[nl]=Stel apps in en  en wijzig gebruikersinstellingen
 Keywords=kzsetup;setup;
 Keywords[nl]=kzsetup;setup;
 Categories=KZ Scripts;
-Exec=/usr/bin/kz-setup --gui
+Exec=kz-setup --gui
 Icon=/usr/share/pixmaps/kz-setup.svg
 Actions=info;reset;list;cat;simulate;
 
 [Desktop Action info]
 Name=Show setup instructions
 Name[nl]=Instel-instructies tonen
-Exec=/usr/bin/kz-setup --gui --info
+Exec=kz-setup --gui --info
 
 [Desktop Action reset]
 Name=Show reset instructions
 Name[nl]=Reset-instructies tonen
-Exec=/usr/bin/kz-setup --gui --reset
+Exec=kz-setup --gui --reset
 
 [Desktop Action list]
 Name=Create setup list
 Name[nl]=Instellijst maken
-Exec=/usr/bin/kz-setup --gui --list
+Exec=kz-setup --gui --list
 
 [Desktop Action cat]
 Name=Show files
 Name[nl]=Bestanden tonen
-Exec=/usr/bin/kz-setup --gui --cat
+Exec=kz-setup --gui --cat
 
 [Desktop Action simulate]
 Name=Show commands
 Name[nl]=Opdrachten tonen
-Exec=/usr/bin/kz-setup --gui --simulate
+Exec=kz-setup --gui --simulate
