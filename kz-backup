@@ -77,7 +77,9 @@ function check_input {
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                reset_terminal_attribs
+                if [[ -t 1 ]]; then
+                    reset_terminal_attribs
+                fi
                 shift
                 ;;
             -n|--dry-run)

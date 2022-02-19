@@ -177,12 +177,7 @@ function init_script {
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
     if [[ -t 1 ]]; then
-        NORMAL=$(tput sgr0)
-        BOLD=$(tput bold)
-        BLUE=${BOLD}$(tput setaf 4)
-        GREEN=${BOLD}$(tput setaf 2)
-        RED=${BOLD}$(tput setaf 1)
-        YELLOW=${BOLD}$(tput setaf 3)
+        set_terminal_attribs
     fi
 }
 
@@ -307,6 +302,16 @@ function reset_terminal_attribs {
     GREEN=''
     RED=''
     YELLOW=''
+}
+
+
+function set_terminal_attribs {
+    NORMAL=$(tput sgr0)
+    BOLD=$(tput bold)
+    BLUE=${BOLD}$(tput setaf 4)
+    GREEN=${BOLD}$(tput setaf 2)
+    RED=${BOLD}$(tput setaf 1)
+    YELLOW=${BOLD}$(tput setaf 3)
 }
 
 
