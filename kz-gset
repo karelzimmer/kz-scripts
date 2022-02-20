@@ -18,29 +18,30 @@ readonly RELEASE_YEAR=2015
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'a:b:f:r:x:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addappfolder:,addfavbegin:,\
-addfavend:,removeappfolder:,removefav:"
-readonly USAGE="Gebruik: $DISPLAY_NAME \
-[--addappfolder=APPFOLDER|--removeappfolder=APPFOLDER|
-                  --addfavbegin=DESKTOPFILE|--addfavend=DESKTOPFILE|
-                  --removefav=DESKTOPFILE]
+addfavend:,removefav:,removeappfolder:"
+readonly USAGE="Gebruik: $DISPLAY_NAME [-b|--addfavbegin=DESKTOPFILE|
+                  -a|--addfavend=DESKTOPFILE|
+                  -r|--removefav=DESKTOPFILE|
+                  -f|--addappfolder=APPFOLDER|
+                  -x|--removeappfolder=APPFOLDER]
                  $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 GUI wijzigen.
 
 Opties:
-      --addappfolder=APPFOLDER
-                 voeg APPFOLDER toe
-      --removeappfolder=APPFOLDER
-                 verwijder APPFOLDER
-      --addfavbegin=DESKTOPFILE
+  -b, --addfavbegin=DESKTOPFILE
                  voeg favoriet DESKTOPFILE toe aan het begin
-      --addfavend=DESKTOPFILE
+  -a, --addfavend=DESKTOPFILE
                  voeg favoriet DESKTOPFILE toe aan het einde
-      --removefav=DESKTOPFILE
+  -r, --removefav=DESKTOPFILE
                  verwijder favoriet DESKTOPFILE
+  -f, --addappfolder=APPFOLDER
+                 voeg APPFOLDER toe
+  -x, --removeappfolder=APPFOLDER
+                 verwijder APPFOLDER
 $OPTIONS_HELP_COMMON"
 
 
@@ -85,29 +86,7 @@ function check_input {
 
     while true; do
         case $1 in
-            --addappfolder)
-                if $OPTION_ADDAPPFOLDER; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_ADDAPPFOLDER=true
-                    FOLDER_ARGUMENT=$2
-                fi
-                shift 2
-                ;;
-            --removeappfolder)
-                if $OPTION_REMOVEAPPFOLDER; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_REMOVEAPPFOLDER=true
-                    FOLDER_ARGUMENT=$2
-                fi
-                shift 2
-                ;;
-            --addfavbegin)
+            -b|--addfavbegin)
                 if $OPTION_ADDFAVBEGIN; then
                     error "Optie '$1' eenmaal opgeven."
                     info "$USAGELINE" >&2
@@ -118,7 +97,7 @@ function check_input {
                 fi
                 shift 2
                 ;;
-            --addfavend)
+            -a|--addfavend)
                 if $OPTION_ADDFAVEND; then
                     error "Optie '$1' eenmaal opgeven."
                     info "$USAGELINE" >&2
@@ -129,7 +108,7 @@ function check_input {
                 fi
                 shift 2
                 ;;
-            --removefav)
+            -r|--removefav)
                 if $OPTION_REMOVEFAV; then
                     error "Optie '$1' eenmaal opgeven."
                     info "$USAGELINE" >&2
@@ -137,6 +116,28 @@ function check_input {
                 else
                     OPTION_REMOVEFAV=true
                     FILE_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
+            -f|--addappfolder)
+                if $OPTION_ADDAPPFOLDER; then
+                    error "Optie '$1' eenmaal opgeven."
+                    info "$USAGELINE" >&2
+                    exit $ERROR
+                else
+                    OPTION_ADDAPPFOLDER=true
+                    FOLDER_ARGUMENT=$2
+                fi
+                shift 2
+                ;;
+            -x|--removeappfolder)
+                if $OPTION_REMOVEAPPFOLDER; then
+                    error "Optie '$1' eenmaal opgeven."
+                    info "$USAGELINE" >&2
+                    exit $ERROR
+                else
+                    OPTION_REMOVEAPPFOLDER=true
+                    FOLDER_ARGUMENT=$2
                 fi
                 shift 2
                 ;;
@@ -170,16 +171,16 @@ function check_input {
 
 
 function process_input {
-    if $OPTION_ADDAPPFOLDER; then
-        process_option_addappfolder
-    elif $OPTION_REMOVEAPPFOLDER; then
-        process_option_removeappfolder
-    elif $OPTION_ADDFAVBEGIN; then
+    if $OPTION_ADDFAVBEGIN; then
         process_option_addfavbegin
     elif $OPTION_ADDFAVEND; then
         process_option_addfavend
     elif $OPTION_REMOVEFAV; then
         process_option_removefav
+    elif $OPTION_ADDAPPFOLDER; then
+        process_option_addappfolder
+    elif $OPTION_REMOVEAPPFOLDER; then
+        process_option_removeappfolder
     else
         capture_gui_changes
     fi
