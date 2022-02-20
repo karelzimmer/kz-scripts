@@ -20,7 +20,7 @@ readonly RELEASE_YEAR=2015
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addappfolder,addfavbegin,\
-addfavend,,removeappfolder,removefav,file:,folder:"
+addfavend,removeappfolder,removefav,file:,folder:"
 readonly USAGE="Gebruik: $DISPLAY_NAME \
 [--addappfolder|--removeappfolder --folder=APPFOLDER]
                  [--addfavbegin|--addfavend|--removefav --file=DESKTOPFILE]
@@ -192,7 +192,7 @@ function check_input {
         info "$USAGELINE" >&2
         exit $ERROR
     elif $OPTION_FILE && [[ $FILE_ARGUMENT != *.desktop ]]; then
-        TEXT="Bestandsnaam dient te eindigen met '.desktop'."
+        TEXT="Bestandsnaam moet eindigen met '.desktop'."
         error "$TEXT"
         info "$USAGELINE" >&2
         exit $ERROR
