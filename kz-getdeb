@@ -149,7 +149,7 @@ Voer uw wachtwoord in:'
                 )" | sudo --stdin true 2> /dev/null; then
                 break
             else
-                clear
+                clear -x
                 TEXT='Er is een fout opgetreden.
 
 Mogelijke oorzaak:
