@@ -28,28 +28,28 @@ de Vaak gebruikt-weergave en Alles-weergave;
 .br
 na het klikken op de rasterknop in de favorietenbalk (dash/dock).
 .sp
-Met optie \fB-b\fR, \fB--addfavbegin\fR wordt een toepassingspictogram
-(favoriet) toegevoegd aan het begin van de favorietenbalk (dash/dock).
-.sp
-Met optie \fB-a\fR, \fB--addfavend\fR wordt een toepassingspictogram (favoriet)
+Met optie \fB-a\fR, \fB--addfavaft\fR wordt een toepassingspictogram (favoriet)
 toegevoegd aan het einde van de favorietenbalk (dash/dock).
 .sp
-Met optie \fB-r\fR, \fB--removefav\fR wordt een toepassingspictogram (favoriet)
+Met optie \fB-b\fR, \fB--addfavbef\fR wordt een toepassingspictogram
+(favoriet) toegevoegd aan het begin van de favorietenbalk (dash/dock).
+.sp
+Met optie \fB-d\fR, \fB--delfav\fR wordt een toepassingspictogram (favoriet)
 verwijderd uit de favorietenbalk (dash/dock).
 .sp
-Als een van deze opties wordt gebruikt moet ook argument \fIDESKTOPFILE\fR
-(e.g. google-chrome.desktop) meegegeven worden.
+Als een van deze opties wordt gebruikt moet ook argument \fIFAVORITE\fR (e.g.
+google-chrome) meegegeven worden.
 .br
-Als er al een toepassingspictogram (favoriet) van \fIDESKTOPFILE\fR bestaat
+Als er al een toepassingspictogram (favoriet) van \fIFAVORITE\fR bestaat
 wordt deze niet opnieuw toegevoegd.
 .br
 Als een toepassingspictogram (favoriet) bovenaan is toegevoegd die onderaan
 geplaatst moet worden, moet de bestaande eerst verwijderd te worden met optie
-\fB-r\fR, \fB--removefav\fR.
+\fB-d\fR, \fB--delfav\fR.
 .sp
 Met optie \fB-f\fR, \fB--addappfolder\fR wordt een appfolder toegevoegd.
 .sp
-Met optie \fB-x\fR, \fB--removefavappfolder\fR wordt een appfolder verwijderd.
+Met optie \fB-x\fR, \fB--delfavappfolder\fR wordt een appfolder verwijderd.
 .sp
 Als een van deze opties wordt gebruikt moet ook argument \fIAPPFOLDER\fR
 meegegeven worden.
@@ -94,16 +94,16 @@ worden wat er gewijzigd moet worden:
 .\"
 .SH OPTIES
 .TP
-\fB-b\fR, \fB--addfavbegin=\fIDESKTOPFILE\fR
-Voeg toepassingspictogram (favoriet) \fIDESKTOPFILE\fR toe vooraan de
+\fB-a\fR, \fB--addfavaft=\fIFAVORITE\fR
+Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe achteraan de
 favorietenbalk (dash/dock).
 .TP
-\fB-a\fR, \fB--addfavend=\fIDESKTOPFILE\fR
-Voeg toepassingspictogram (favoriet) \fIDESKTOPFILE\fR toe achteraan de
+\fB-b\fR, \fB--addfavbef=\fIFAVORITE\fR
+Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe vooraan de
 favorietenbalk (dash/dock).
 .TP
-\fB-r\fR, \fB--removefav=\fIDESKTOPFILE\fR
-Verwijder toepassingspictogram (favoriet) \fIDESKTOPFILE\fR uit de
+\fB-d\fR, \fB--delfav=\fIFAVORITE\fR
+Verwijder toepassingspictogram (favoriet) \fIFAVORITE\fR uit de
 favorietenbalk (dash/dock).
 .TP
 \fB-f\fR, \fB--addappfolder=\fIAPPFOLDER\fR
@@ -141,16 +141,18 @@ Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
 werkomgeving (GUI).
 .RE
 .sp
-\fBkz gset --addfavbegin='idle.desktop'\fR
+\fBkz gset --addfavbef=idle\fR
 .RS
 Voeg de IDLE (Python’s Integrated Development and Learning Environment)
-toepassingspictogram (favoriet) toe vooraan de favorietenbalk.
+toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
+/usr/share/applications/idle.desktop moet bestaan.
 .RE
 .sp
-\fBkz gset --removefav='idle.desktop'\fR
+\fBkz gset --delfav=idle\fR
 .RS
 Verwijder de IDLE (Python’s Integrated Development and Learning Environment)
-toepassingspictogram (favoriet) uit de favorietenbalk.
+toepassingspictogram (favoriet) uit de favorietenbalk. Bestand
+/usr/share/applications/idle.desktop moet bestaan.
 .RE
 .\"
 .\"

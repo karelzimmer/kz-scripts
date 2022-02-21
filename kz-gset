@@ -18,29 +18,29 @@ readonly RELEASE_YEAR=2015
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'a:b:f:r:x:'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addappfolder:,addfavbegin:,\
-addfavend:,removefav:,removeappfolder:"
-readonly USAGE="Gebruik: $DISPLAY_NAME [-b|--addfavbegin=DESKTOPFILE|
-                  -a|--addfavend=DESKTOPFILE|
-                  -r|--removefav=DESKTOPFILE|
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'a:b:d:f:x:'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addfavaft:,addfavbef:,delfav:,\
+addappfolder:,delappfolder:"
+readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--addfavaft=FAVORITE|
+                  -b|--addfavbef=FAVORITE|
+                  -d|--delfav=FAVORITE|
                   -f|--addappfolder=APPFOLDER|
-                  -x|--removeappfolder=APPFOLDER]
+                  -x|--delappfolder=APPFOLDER]
                  $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 GUI wijzigen.
 
 Opties:
-  -b, --addfavbegin=DESKTOPFILE
-                 voeg favoriet DESKTOPFILE toe aan het begin
-  -a, --addfavend=DESKTOPFILE
-                 voeg favoriet DESKTOPFILE toe aan het einde
-  -r, --removefav=DESKTOPFILE
-                 verwijder favoriet DESKTOPFILE
+  -a, --addfavaft=FAVORITE
+                 voeg FAVORITE toe aan het einde
+  -b, --addfavbef=FAVORITE
+                 voeg FAVORITE toe aan het begin
+  -d, --delfav=FAVORITE
+                 verwijder FAVORITE
   -f, --addappfolder=APPFOLDER
                  voeg APPFOLDER toe
-  -x, --removeappfolder=APPFOLDER
+  -x, --delappfolder=APPFOLDER
                  verwijder APPFOLDER
 $OPTIONS_HELP_COMMON"
 
@@ -53,13 +53,13 @@ declare APPFOLDER=''
 declare CONFIG_A=''
 declare CONFIG_B=''
 declare DESKTOPFILE=''
-declare FILE_ARGUMENT=''
+declare FAVORITE_ARGUMENT=''
 declare FOLDER_ARGUMENT=''
 declare OPTION_ADDAPPFOLDER=false
-declare OPTION_ADDFAVBEGIN=false
-declare OPTION_ADDFAVEND=false
-declare OPTION_REMOVEAPPFOLDER=false
-declare OPTION_REMOVEFAV=false
+declare OPTION_ADDFAVBEF=false
+declare OPTION_ADDFAVAFT=false
+declare OPTION_DELAPPFOLDER=false
+declare OPTION_DELFAV=false
 
 
 ###############################################################################
@@ -86,36 +86,36 @@ function check_input {
 
     while true; do
         case $1 in
-            -b|--addfavbegin)
-                if $OPTION_ADDFAVBEGIN; then
+            -a|--addfavaft)
+                if $OPTION_ADDFAVAFT; then
                     error "Optie '$1' eenmaal opgeven."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 else
-                    OPTION_ADDFAVBEGIN=true
-                    FILE_ARGUMENT=$2
+                    OPTION_ADDFAVAFT=true
+                    FAVORITE_ARGUMENT=$2
                 fi
                 shift 2
                 ;;
-            -a|--addfavend)
-                if $OPTION_ADDFAVEND; then
+            -b|--addfavbef)
+                if $OPTION_ADDFAVBEF; then
                     error "Optie '$1' eenmaal opgeven."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 else
-                    OPTION_ADDFAVEND=true
-                    FILE_ARGUMENT=$2
+                    OPTION_ADDFAVBEF=true
+                    FAVORITE_ARGUMENT=$2
                 fi
                 shift 2
                 ;;
-            -r|--removefav)
-                if $OPTION_REMOVEFAV; then
+            -d|--delfav)
+                if $OPTION_DELFAV; then
                     error "Optie '$1' eenmaal opgeven."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 else
-                    OPTION_REMOVEFAV=true
-                    FILE_ARGUMENT=$2
+                    OPTION_DELFAV=true
+                    FAVORITE_ARGUMENT=$2
                 fi
                 shift 2
                 ;;
@@ -130,13 +130,13 @@ function check_input {
                 fi
                 shift 2
                 ;;
-            -x|--removeappfolder)
-                if $OPTION_REMOVEAPPFOLDER; then
+            -x|--delappfolder)
+                if $OPTION_DELAPPFOLDER; then
                     error "Optie '$1' eenmaal opgeven."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 else
-                    OPTION_REMOVEAPPFOLDER=true
+                    OPTION_DELAPPFOLDER=true
                     FOLDER_ARGUMENT=$2
                 fi
                 shift 2
@@ -157,53 +157,39 @@ function check_input {
         exit $ERROR
     fi
 
-    APPFOLDER=$FOLDER_ARGUMENT
-    if ($OPTION_ADDFAVBEGIN || $OPTION_ADDFAVEND || $OPTION_REMOVEFAV) &&
-        [[ $FILE_ARGUMENT != *.desktop ]]; then
-        error "Bestandsnaam moet eindigen met '.desktop'."
-        info "$USAGELINE" >&2
-        exit $ERROR
+    if ($OPTION_ADDFAVBEF || $OPTION_ADDFAVAFT || $OPTION_DELFAV); then
+        DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
+        if ! [[ -f /usr/share/applications/$DESKTOPFILE ]]; then
+            error "Bureaubladbestand $DESKTOPFILE niet gevonden."
+            info "$USAGELINE" >&2
+            exit $ERROR
+        fi
+    elif ($OPTION_ADDAPPFOLDER || $OPTION_DELAPPFOLDER); then
+        APPFOLDER=$FOLDER_ARGUMENT
     fi
-    DESKTOPFILE=$FILE_ARGUMENT
 
     check_user
 }
 
 
 function process_input {
-    if $OPTION_ADDFAVBEGIN; then
-        process_option_addfavbegin
-    elif $OPTION_ADDFAVEND; then
-        process_option_addfavend
-    elif $OPTION_REMOVEFAV; then
-        process_option_removefav
+    if $OPTION_ADDFAVAFT; then
+        process_option_addfavaft
+    elif $OPTION_ADDFAVBEF; then
+        process_option_addfavbef
+    elif $OPTION_DELFAV; then
+        process_option_delfav
     elif $OPTION_ADDAPPFOLDER; then
         process_option_addappfolder
-    elif $OPTION_REMOVEAPPFOLDER; then
-        process_option_removeappfolder
+    elif $OPTION_DELAPPFOLDER; then
+        process_option_delappfolder
     else
         capture_gui_changes
     fi
 }
 
 
-function process_option_addfavbegin  {
-    local favorite_apps=''
-
-    favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
-    if [[ $favorite_apps = '@as []' ]]; then
-        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  printf '%s' "$favorite_apps" |
-            grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
-        gsettings set org.gnome.shell favorite-apps \
-            "['$DESKTOPFILE', $(
-                printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
-                )"
-    fi
-}
-
-
-function process_option_addfavend  {
+function process_option_addfavaft  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -219,7 +205,23 @@ function process_option_addfavend  {
 }
 
 
-function process_option_removefav  {
+function process_option_addfavbef  {
+    local favorite_apps=''
+
+    favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
+    if [[ $favorite_apps = '@as []' ]]; then
+        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
+    elif !  printf '%s' "$favorite_apps" |
+            grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
+        gsettings set org.gnome.shell favorite-apps \
+            "['$DESKTOPFILE', $(
+                printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
+                )"
+    fi
+}
+
+
+function process_option_delfav  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -261,7 +263,7 @@ function process_option_addappfolder  {
 }
 
 
-function process_option_removeappfolder  {
+function process_option_delappfolder  {
     local app_folders=''
     local schema=''
     local path=''

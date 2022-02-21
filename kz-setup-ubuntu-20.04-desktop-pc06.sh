@@ -6,9 +6,9 @@
 ###############################################################################
 
 #1 firefox (webbrowser)
-kz-gset --removefav='firefox.desktop'
+kz-gset --delfav='firefox'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --addfavbegin='firefox.desktop'
+#3    kz-gset --addfavbef='firefox'
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
@@ -28,9 +28,9 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
 #1 kvm (virtualisatie)
 ## Beeldscherm 2048 x 1152 (16:9).
-kz-gset --addfavend='virt-manager.desktop'
+kz-gset --addfavaft='virt-manager'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav='virt-manager.desktop'
+#3    kz-gset --delfav='virt-manager'
 
 #1 search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
@@ -39,7 +39,7 @@ printf '%s\n' 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.b
 #3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #1 terminal (terminalvenster)
-kz-gset --addfavbegin='org.gnome.Terminal.desktop'
+kz-gset --addfavbef='org.gnome.Terminal'
 #2 1. Start Terminalvenster.
 #2 2. Maximaliseer het Terminalvenster.
 #2 3. Voer de volgende opdracht uit:
@@ -49,15 +49,15 @@ kz-gset --addfavbegin='org.gnome.Terminal.desktop'
 #2 6. Vul in achter Oorspronkelijke afmeting van de terminal:
 #2    COLUMNS kolommen en LINES rijen, en sluit Voorkeuren.
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav='org.gnome.Terminal.desktop'\
+#3    kz-gset --delfav='org.gnome.Terminal'\
 
 #1 thunderbird (e-mail)
-kz-gset --removefav='thunderbird.desktop'
+kz-gset --delfav='thunderbird'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --addfavbegin='thunderbird.desktop'
+#3    kz-gset --addfavbef='thunderbird'
 
 #1 vscode (Visual Studio Code editor)
-kz-gset --addfavbegin='code_code.desktop'
+kz-gset --addfavbef='code_code'
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
 xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
 xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand
@@ -81,4 +81,4 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #2    ShellCheck
 #2    TROFF Syntax
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav='code_code.desktop'
+#3    kz-gset --delfav='code_code'

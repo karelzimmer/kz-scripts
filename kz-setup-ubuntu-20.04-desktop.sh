@@ -37,7 +37,7 @@
 #3 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
 
 #1 bitwarden (wachtwoordkluis)
-kz-gset --addfavend='bitwarden_bitwarden.desktop'
+kz-gset --addfavaft='bitwarden_bitwarden'
 #2 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #2 1. Start Bitwarden.
 #2 2. Maak een account aan met een sterk(!) Hoofdwachtwoord.
@@ -88,7 +88,7 @@ kz-gset --addfavend='bitwarden_bitwarden.desktop'
 #3 3. Klik vervolgens op Meer hulpprogramma's > Extensies.
 #3 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' zet schuifje op uit of klik op Verwijderen.
 #3 5. Start Terminalvenster en voer uit:
-#3       kz-gset --removefav='bitwarden_bitwarden.desktop'
+#3       kz-gset --delfav='bitwarden_bitwarden'
 #3
 #3 Voor Firefox:
 #3 ~~~~~~~~~~~~~
@@ -97,7 +97,7 @@ kz-gset --addfavend='bitwarden_bitwarden.desktop'
 #3 3. Klik links op Extensies.
 #3 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' klik op Uitschakelen of Verwijderen.
 #3 5. Start Terminalvenster en voer uit:
-#3       kz-gset --removefav='bitwarden_bitwarden.desktop'
+#3       kz-gset --delfav='bitwarden_bitwarden'
 
 #1 citrix (telewerken)
 ## Citrix Receiver, ICA Client
@@ -105,7 +105,7 @@ xdg-mime default wfica.desktop application/x-ica
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-kz-gset --addappfolder --folder='KZ Scripts'
+kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
@@ -123,7 +123,7 @@ gsettings set org.gnome.shell.extensions.desktop-icons show-home false
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removeappfolder --folder='KZ Scripts'
+#3    kz-gset --delappfolder='KZ Scripts'
 #3    gsettings reset org.gnome.desktop.app-folders folder-children
 #3    gsettings reset org.gnome.desktop.calendar show-weekdate
 #3    gsettings reset org.gnome.desktop.interface clock-show-date
@@ -143,7 +143,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
 #1 chrome (webbrowser)
-kz-gset --addfavbegin='google-chrome.desktop'
+kz-gset --addfavbef='google-chrome'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
 #2 1. Start Google Chrome.
@@ -162,22 +162,22 @@ kz-gset --addfavbegin='google-chrome.desktop'
 #3 2. Ga naar chrome://extensions/
 #3 3. Bij Gnome-shell-integratie zet schuifje op uit of klik op Verwijderen.
 #3 4. Start Terminalvenster en voer uit:
-#3       kz-gset --removefav='google-chrome.desktop'
+#3       kz-gset --delfav='google-chrome'
 
 #1 skype (beeldbellen)
-kz-gset --addfavend='skype_skypeforlinux.desktop'
+kz-gset --addfavaft='skype_skypeforlinux'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav='skype_skypeforlinux.desktop'
+#3    kz-gset --delfav='skype_skypeforlinux'
 
 #1 spotify (muziekspeler)
-kz-gset --addfavend='spotify_spotify.desktop'
+kz-gset --addfavaft='spotify_spotify'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav='spotify_spotify.desktop'
+#3    kz-gset --delfav='spotify_spotify'
 
 #1 teams (samenwerken)
-kz-gset --addfavend='teams.desktop'
+kz-gset --addfavaft='teams'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav='teams.desktop'
+#3    kz-gset --delfav='teams'
 
 #1 thunderbird (e-mail)
 :
@@ -195,6 +195,6 @@ kz-gset --addfavend='teams.desktop'
 #3    Verwijderen.
 
 #1 zoom (telewerken)
-kz-gset --addfavend='Zoom.desktop'
+kz-gset --addfavaft='Zoom'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav='Zoom.desktop'
+#3    kz-gset --delfav='Zoom'
