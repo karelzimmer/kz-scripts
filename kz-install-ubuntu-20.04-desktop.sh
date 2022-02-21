@@ -63,7 +63,7 @@ sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
-#1 privatehome (persoonlijke mappen beveiligen
+#1 privatehome (persoonlijke mappen beveiligen)
 ## https://ubuntu.com//blog/private-home-directories-for-ubuntu-21-04
 ## make all existing home directories private
 sudo chmod 0750 /home/*
@@ -127,7 +127,7 @@ sudo apt-get install --yes xul-ext-lightning
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes xul-ext-lightning
 
-#1 ubunturestricted (niet-vrije pakketten voor Ubuntu)
+#1 restricted (niet-vrije pakketten)
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van
 ## ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
