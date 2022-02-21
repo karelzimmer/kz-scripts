@@ -46,6 +46,9 @@ wordt deze niet opnieuw toegevoegd.
 Als een toepassingspictogram (favoriet) bovenaan is toegevoegd die onderaan
 geplaatst moet worden, moet de bestaande eerst verwijderd te worden met optie
 \fB-d\fR, \fB--delfav\fR.
+.br
+Bestand \fIFAVORITE\fR.desktop moet bestaan in een van de applicatiemappen
+zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .sp
 Met optie \fB-f\fR, \fB--addappfolder\fR wordt een appfolder toegevoegd.
 .sp
@@ -141,13 +144,15 @@ Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
 werkomgeving (GUI).
 .RE
 .sp
-\fBkz gset --addfavbef=idle\fR
+\fBkz gset --addfavbef='idle'\fR
 .RS
 Voeg de IDLE (Python’s Integrated Development and Learning Environment)
-toepassingspictogram (favoriet) toe vooraan de favorietenbalk.
+toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
+idle.desktop moet bestaan in een van de applicatiemappen
+zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gset --delfav=idle\fR
+\fBkz gset --delfav='idle'\fR
 .RS
 Verwijder de IDLE (Python’s Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) uit de favorietenbalk.
