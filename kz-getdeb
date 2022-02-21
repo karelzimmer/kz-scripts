@@ -16,7 +16,7 @@ else
             https://karelzimmer.nl/data/linux/scripts/kz-common.sh  &>/dev/null
     source /tmp/kz-common.sh
 fi
-readonly PROGRAM_NAME=kz-getdeb
+readonly PROGRAM_NAME='kz-getdeb'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2016
 
@@ -228,7 +228,7 @@ function process_input {
 
 
 function install_scriptspackage {
-    local site_deb=https://karelzimmer.nl/downloads/kz/kz_365_all.deb
+    local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
     check_sudo_and_dpkg

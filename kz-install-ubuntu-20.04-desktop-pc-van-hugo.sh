@@ -24,10 +24,10 @@ sudo snap install telegram-desktop
 #1 virtualbox (virtualisatie)
 ## Images staan in ~/VirtualBox VMs/.
 printf '%s\n' "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-wget --no-verbose --output-document=- 'https://www.virtualbox.org/download/oracle_vbox_2016.asc' | sudo apt-key add -
-wget --no-verbose --output-document=- 'https://www.virtualbox.org/download/oracle_vbox.asc' | sudo apt-key add -
+wget --no-verbose --output-document=- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo apt-key add -
+wget --no-verbose --output-document=- https://www.virtualbox.org/download/oracle_vbox.asc | sudo apt-key add -
 sudo apt-get update
-wget --no-verbose --output-document=/tmp/virtualbox-LATEST.TXT 'http://download.virtualbox.org/virtualbox/LATEST.TXT'
+wget --no-verbose --output-document=/tmp/virtualbox-LATEST.TXT http://download.virtualbox.org/virtualbox/LATEST.TXT
 ## VirtualBox Guest Additions ISO staat in /usr/share/virtualbox/.
 sudo apt-get install --yes virtualbox-"$(awk -F'.' '{print $1"."$2}' < /tmp/virtualbox-LATEST.TXT)"
 ## Downloadbestand moet zo heten, anders mslukt de installatie.

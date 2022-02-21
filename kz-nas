@@ -9,7 +9,7 @@
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME=kz-nas
+readonly PROGRAM_NAME='kz-nas'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2014
 

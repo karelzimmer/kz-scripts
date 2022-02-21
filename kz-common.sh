@@ -4,7 +4,7 @@
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
-declare PROGRAM_NAME=kz-common.sh
+declare PROGRAM_NAME='kz-common.sh'
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 declare RELEASE_YEAR=2009
 

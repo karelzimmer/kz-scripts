@@ -18,7 +18,7 @@ sudo apt-get install --yes nautilus-dropbox
 #1 earth (verken de wereld)
 ## Maakt zelf /etc/apt/sources.list.d/google-earth-pro.list aan, tenzij eerder
 ## zelf aangemaakt, dan /etc/default/google-earth-pro:repo_add_once="false".
-wget --no-verbose --output-document=/tmp/google-earth.deb 'https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb'
+wget --no-verbose --output-document=/tmp/google-earth.deb https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb
 sudo apt-get install --yes /tmp/google-earth.deb
 rm /tmp/google-earth.deb
 #3 Start Terminalvenster en voer uit:

@@ -21,7 +21,7 @@ sudo snap install bitwarden
 
 #1 citrix (telewerken)
 ## Voegt gebruiker citrixlog toe!
-wget --no-verbose --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/downloads/icaclient/LATEST'
+wget --no-verbose --output-document=/tmp/icaclient-LATEST https://karelzimmer.nl/downloads/icaclient/LATEST
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
@@ -49,7 +49,7 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 ## zelf aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
 ## Integratie van GNOME Shell-extensies voor webbrowsers:
 ## https://extensions.gnome.org
-wget --no-verbose --output-document=/tmp/google-chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb chrome-gnome-shell gnome-contacts gnome-gmail
 rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
@@ -98,7 +98,7 @@ sudo apt-get install --yes gnome-sushi
 ## https://www.microsoft.com/nl-nl/microsoft-teams/download-app
 ## Webbrowser:
 ## https://www.microsoft.com/nl-nl/microsoft-teams/log-in
-wget --no-verbose --output-document=/tmp/teams-LATEST 'https://karelzimmer.nl/downloads/teams/LATEST'
+wget --no-verbose --output-document=/tmp/teams-LATEST https://karelzimmer.nl/downloads/teams/LATEST
 wget --no-verbose --output-document=/tmp/teams.deb "https://karelzimmer.nl/downloads/teams/teams_$(cat /tmp/teams-LATEST)_amd64.deb"
 sudo apt-get install --yes /tmp/teams.deb
 rm /tmp/teams-LATEST /tmp/teams.deb
@@ -112,7 +112,7 @@ sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/p
 #3    sudo apt remove --yes teams
 
 #1 teamviewer (afstandsbediening)
-wget --no-verbose --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
+wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
 ## Zorg ervoor dat /etc/apt/sources.list.d/teamviewer.list is aangemaakt.
@@ -136,7 +136,7 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #3    sudo apt autoremove --yes
 
 #1 zoom (samenwerken)
-wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
+wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #3 Start Terminalvenster en voer uit:

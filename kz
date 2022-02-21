@@ -8,7 +8,7 @@
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 #source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME=kz
+readonly PROGRAM_NAME='kz'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
 
@@ -106,8 +106,8 @@ function show_commands {
 
 
 function process_option_usage {
-    printf '%s\n\n%s\n' \
-            "$USAGE"    \
+    printf  '%s\n\n%s\n'    \
+            "$USAGE"        \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
