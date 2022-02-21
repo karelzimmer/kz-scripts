@@ -157,16 +157,8 @@ function check_input {
         exit $ERROR
     fi
 
-    if ($OPTION_ADDFAVBEF || $OPTION_ADDFAVAFT || $OPTION_DELFAV); then
-        DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
-        if ! [[ -f /usr/share/applications/$DESKTOPFILE ]]; then
-            error "Bureaubladbestand $DESKTOPFILE niet gevonden."
-            info "$USAGELINE" >&2
-            exit $ERROR
-        fi
-    elif ($OPTION_ADDAPPFOLDER || $OPTION_DELAPPFOLDER); then
-        APPFOLDER=$FOLDER_ARGUMENT
-    fi
+    APPFOLDER=$FOLDER_ARGUMENT
+    DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
 
     check_user
 }
