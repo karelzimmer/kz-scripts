@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 handlelidswitch (negeer sluiten laptopdesksel)
+#1 lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 printf '%s\n' 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #3 Start Terminalvenster en voer uit:

@@ -55,7 +55,7 @@ rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell gnome-contacts gnome-gmail
 
-#1 languagesupport (taalondersteuning)
+#1 language (taalondersteuning)
 check-language-support | xargs sudo apt-get install --yes
 
 #1 libreoffice (kantoorpakket)
@@ -63,7 +63,7 @@ sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
-#1 privatehome (persoonlijke mappen beveiligen)
+#1 private (persoonlijke mappen beveiligen)
 ## https://ubuntu.com//blog/private-home-directories-for-ubuntu-21-04
 ## make all existing home directories private
 sudo chmod 0750 /home/*
