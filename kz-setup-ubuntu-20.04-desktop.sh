@@ -37,7 +37,7 @@
 #3 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
 
 #1 bitwarden (wachtwoordkluis)
-kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
+kz-gset --addfavend='bitwarden_bitwarden.desktop'
 #2 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #2 1. Start Bitwarden.
 #2 2. Maak een account aan met een sterk(!) Hoofdwachtwoord.
@@ -88,7 +88,7 @@ kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
 #3 3. Klik vervolgens op Meer hulpprogramma's > Extensies.
 #3 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' zet schuifje op uit of klik op Verwijderen.
 #3 5. Start Terminalvenster en voer uit:
-#3       kz-gset --removefav --file='bitwarden_bitwarden.desktop'
+#3       kz-gset --removefav='bitwarden_bitwarden.desktop'
 #3
 #3 Voor Firefox:
 #3 ~~~~~~~~~~~~~
@@ -97,7 +97,7 @@ kz-gset --addfavend --file='bitwarden_bitwarden.desktop'
 #3 3. Klik links op Extensies.
 #3 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' klik op Uitschakelen of Verwijderen.
 #3 5. Start Terminalvenster en voer uit:
-#3       kz-gset --removefav --file='bitwarden_bitwarden.desktop'
+#3       kz-gset --removefav='bitwarden_bitwarden.desktop'
 
 #1 citrix (telewerken)
 ## Citrix Receiver, ICA Client
@@ -143,7 +143,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
 #1 chrome (webbrowser)
-kz-gset --addfavbegin --file='google-chrome.desktop'
+kz-gset --addfavbegin='google-chrome.desktop'
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
 #2 1. Start Google Chrome.
@@ -162,22 +162,22 @@ kz-gset --addfavbegin --file='google-chrome.desktop'
 #3 2. Ga naar chrome://extensions/
 #3 3. Bij Gnome-shell-integratie zet schuifje op uit of klik op Verwijderen.
 #3 4. Start Terminalvenster en voer uit:
-#3       kz-gset --removefav --file='google-chrome.desktop'
+#3       kz-gset --removefav='google-chrome.desktop'
 
 #1 skype (beeldbellen)
-kz-gset --addfavend --file='skype_skypeforlinux.desktop'
+kz-gset --addfavend='skype_skypeforlinux.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav --file='skype_skypeforlinux.desktop'
+#3    kz-gset --removefav='skype_skypeforlinux.desktop'
 
 #1 spotify (muziekspeler)
-kz-gset --addfavend --file='spotify_spotify.desktop'
+kz-gset --addfavend='spotify_spotify.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav --file='spotify_spotify.desktop'
+#3    kz-gset --removefav='spotify_spotify.desktop'
 
 #1 teams (samenwerken)
-kz-gset --addfavend --file='teams.desktop'
+kz-gset --addfavend='teams.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav --file='teams.desktop'
+#3    kz-gset --removefav='teams.desktop'
 
 #1 thunderbird (e-mail)
 :
@@ -195,6 +195,6 @@ kz-gset --addfavend --file='teams.desktop'
 #3    Verwijderen.
 
 #1 zoom (telewerken)
-kz-gset --addfavend --file='Zoom.desktop'
+kz-gset --addfavend='Zoom.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav --file='Zoom.desktop'
+#3    kz-gset --removefav='Zoom.desktop'

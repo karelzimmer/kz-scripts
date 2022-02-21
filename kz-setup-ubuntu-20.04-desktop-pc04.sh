@@ -6,9 +6,9 @@
 ###############################################################################
 
 #1 calibre (e-boekmanager)
-kz-gset --addfavend --file='calibre-gui.desktop'
+kz-gset --addfavend='calibre-gui.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav --file='calibre-gui.desktop'
+#3    kz-gset --removefav='calibre-gui.desktop'
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
@@ -17,6 +17,6 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgr
 #3    gsettings reset org.gnome.desktop.background picture-uri
 
 #1 earth (verken de wereld)
-kz-gset --addfavend --file='google-earth.desktop'
+kz-gset --addfavend='google-earth.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav --file='google-earth.desktop'
+#3    kz-gset --removefav='google-earth.desktop'

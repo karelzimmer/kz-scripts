@@ -6,9 +6,9 @@
 ###############################################################################
 
 #1 firefox (webbrowser)
-kz-gset --removefav --file='firefox.desktop'
+kz-gset --removefav='firefox.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --addfavbegin --file='firefox.desktop'
+#3    kz-gset --addfavbegin='firefox.desktop'
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
@@ -25,9 +25,9 @@ printf '%s\n' 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.
 #3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #1 thunderbird (e-mail)
-kz-gset --removefav --file='thunderbird.desktop'
+kz-gset --removefav='thunderbird.desktop'
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --addfavbegin --file='thunderbird.desktop'
+#3    kz-gset --addfavbegin='thunderbird.desktop'
 
 #1 vscode (Visual Studio Code editor)
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
@@ -53,36 +53,36 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #2    ShellCheck
 #2    TROFF Syntax
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --removefav --file='code_code.desktop'
+#3    kz-gset --removefav='code_code.desktop'
 
 #1 zgaehrm (starter eHRM Zorggroep Almere)
 cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
-kz-gset --addfavbegin --file='kz-zga-ehrm.desktop'
+kz-gset --addfavbegin='kz-zga-ehrm.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    rm "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
-#3    kz-gset --removefav --file='kz-zga-ehrm.desktop'
+#3    kz-gset --removefav='kz-zga-ehrm.desktop'
 
 #1 zgaintranet (starter Intranet Zorggroep Almere)
 cp /usr/share/applications/kz-zga-intranet.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-intranet.desktop
-kz-gset --addfavbegin --file='kz-zga-intranet.desktop'
+kz-gset --addfavbegin='kz-zga-intranet.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    rm "$HOME"/.local/share/applications/kz-zga-intranet.desktop
-#3    kz-gset --removefav --file='kz-zga-intranet.desktop'
+#3    kz-gset --removefav='kz-zga-intranet.desktop'
 
 #1 zgamonaco (starter Monaco Zorggroep Almere)
 cp /usr/share/applications/kz-zga-monaco.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-monaco.desktop
-kz-gset --addfavbegin --file='kz-zga-monaco.desktop'
+kz-gset --addfavbegin='kz-zga-monaco.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    rm "$HOME"/.local/share/applications/kz-zga-monaco.desktop
-#3    kz-gset --removefav --file='kz-zga-monaco.desktop'
+#3    kz-gset --removefav='kz-zga-monaco.desktop'
 
 #1 zgawebmail (starter WebMail Zorggroep Almere)
 cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-webmail.desktop
-kz-gset --addfavbegin --file='kz-zga-webmail.desktop'
+kz-gset --addfavbegin='kz-zga-webmail.desktop'
 #3 Start Terminalvenster en voer uit:
 #3    rm "$HOME"/.local/share/applications/kz-zga-webmail.desktop
-#3    kz-gset --removefav --file='kz-zga-webmail.desktop'
+#3    kz-gset --removefav='kz-zga-webmail.desktop'
