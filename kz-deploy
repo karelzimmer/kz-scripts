@@ -13,7 +13,6 @@ readonly PROGRAM_NAME='kz-deploy'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2009
 
-
 ###############################################################################
 # Global constants                                                            #
 ###############################################################################
@@ -32,11 +31,9 @@ readonly SCRIPTS_REPO=$HOME/kz-scripts
 readonly UPLOADS_REPO=$HOME/kz-uploads
 readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
-
 
 ###############################################################################
 # Functions                                                                   #
@@ -97,7 +94,6 @@ function check_input {
     check_user
 }
 
-
 function process_input {
     check_names
     check_scripts
@@ -105,7 +101,6 @@ function process_input {
     upload_website
     install_package
 }
-
 
 function check_names {
     local -i    check_rc=0
@@ -126,7 +121,6 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
     fi
 }
 
-
 function check_scripts {
     local -i check_rc=0
 
@@ -140,7 +134,6 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
     fi
 }
 
-
 function build_package {
     local -i check_rc=0
 
@@ -153,7 +146,6 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
 }
-
 
 function upload_website {
     local ftp_set='set ssl:verify-certificate no'
@@ -184,7 +176,6 @@ function upload_website {
     sleep 5
 }
 
-
 function install_package {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
@@ -195,11 +186,9 @@ function install_package {
     fi
 }
 
-
 function term_script {
     exit $SUCCESS
 }
-
 
 ###############################################################################
 # Main line                                                                   #
@@ -211,6 +200,5 @@ function main {
     process_input
     term_script
 }
-
 
 main "$@"

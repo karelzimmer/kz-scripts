@@ -13,7 +13,6 @@ readonly PROGRAM_NAME='kz-nas'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2014
 
-
 ###############################################################################
 # Global constants                                                            #
 ###############################################################################
@@ -52,7 +51,6 @@ readonly SYSTEMD_MOUNT_DIR=/etc/systemd/system
 readonly SYSTEMD_MOUNT_FILE=mnt-nas.mount
 readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -65,7 +63,6 @@ declare OPTION_GUI=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare REWRITE_LINE=''
-
 
 ###############################################################################
 # Functions                                                                   #
@@ -122,7 +119,6 @@ function check_input {
     # Na check_user voor toegang tot media.
     request_input
 }
-
 
 function request_input {
     local       fstab=''
@@ -270,14 +266,12 @@ $quest6? [$NAS_SHARENAAM]: "
     fi
 }
 
-
 function process_input {
     local text0='Opdrachten worden verwerkt'
     local text1='Maak koppelpunt...'
     local text2='Maak NAS login...'
     local text3='Maak systemd...'
     local text4='Koppel NAS aan...'
-
 
     check_dependencies
     TITLE='Netwerkschijf aankoppelen'
@@ -308,14 +302,12 @@ function process_input {
     fi
 }
 
-
 function check_dependencies {
     if ! command -v samba 1> /dev/null; then
         info 'Installeer SAMBA en CIFS-utils...'
         sudo apt-get install --yes samba cifs-utils |& $LOGCMD
     fi
 }
-
 
 function create_mountpoint {
     if [[ -d $NAS_MOUNT_POINT ]]; then
@@ -327,14 +319,12 @@ function create_mountpoint {
     chmod '777' "$NAS_MOUNT_POINT" |& $LOGCMD
 }
 
-
 function create_nas_login {
     printf '%s\n' 'Maak NAS login...'
     TEXT="username=$NAS_GEBRUIKERSNAAM\npassword=$NAS_WACHTWOORD"
     printf '%b\n' "$TEXT" > "$NAS_LOGIN"
     chmod '600' "$NAS_LOGIN" |& $LOGCMD
 }
-
 
 function create_systemd_unit_file {
     printf '%s\n' 'Maak systemd mount-bestand...'
@@ -352,7 +342,6 @@ dir_mode=0777,file_mode=0777
 WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 }
 
-
 function mount_nas {
     printf '%s\n' 'Koppel NAS aan...'
     systemctl enable "$SYSTEMD_MOUNT_FILE" |& $LOGCMD
@@ -361,7 +350,6 @@ function mount_nas {
     fi
     systemctl daemon-reload |& $LOGCMD
 }
-
 
 function term_script {
     if ! systemctl status "$SYSTEMD_MOUNT_FILE"; then
@@ -375,7 +363,6 @@ De-activeer het systemd mount-besta2nd met de opdracht:
     exit $SUCCESS
 }
 
-
 ###############################################################################
 # Main line                                                                   #
 ###############################################################################
@@ -386,7 +373,6 @@ function main {
     process_input
     term_script
 }
-
 
 
 main "$@"

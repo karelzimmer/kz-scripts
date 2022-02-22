@@ -13,7 +13,6 @@ readonly PROGRAM_NAME='kz-setup'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2013
 
-
 ###############################################################################
 # Global constants                                                            #
 ###############################################################################
@@ -72,7 +71,6 @@ readonly LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
 ?ltregel %lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor \
 hulp of q voor stoppen)"
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -105,7 +103,6 @@ declare BLINK=''
 declare CARRIAGE_RETURN=''
 declare CURSOR_INVISABLE=''
 declare CURSOR_VISABLE=''
-
 
 ###############################################################################
 # Functions                                                                   #
@@ -219,7 +216,6 @@ function check_input {
     fi
 }
 
-
 function process_input {
     local       file=''
     local       file_notfound=false
@@ -307,7 +303,6 @@ $HOSTNAME.sh
     fi
 }
 
-
 function process_option_list {
     if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
         source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
@@ -359,7 +354,6 @@ Bureaubladachtergrond, Favorieten, en Opdrachtgeschiedenis.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
 }
 
-
 function save_user_photo {
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
@@ -368,13 +362,11 @@ function save_user_photo {
     fi
 }
 
-
 function save_desktop_background {
     printf '%s\n' "$text2..."
     gsettings get   org.gnome.desktop.background    \
                     picture-uri                     > "$file2" |& $LOGCMD
 }
-
 
 function save_favorite_apps {
     printf '%s\n' "$text3..."
@@ -382,14 +374,12 @@ function save_favorite_apps {
                     favorite-apps   > "$file3" |& $LOGCMD
 }
 
-
 function save_command_history {
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
     history > "$file4" |& $LOGCMD
 }
-
 
 function process_argument_app {
     local       app=''
@@ -433,7 +423,6 @@ $EDITION."
     fi
 }
 
-
 function process_argument_app_file {
     local app_found=false
     local record=''
@@ -468,7 +457,6 @@ function process_argument_app_file {
     rm "$temp_file" |& $LOGCMD
 }
 
-
 function process_argument_file {
     local file=''
 
@@ -487,7 +475,6 @@ instellingsbestanden." >&2
     fi
 }
 
-
 function process_dfltfiles {
     # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
@@ -504,7 +491,6 @@ $EDITION." >&2
         ((++file_num))
     fi
 }
-
 
 function process_option_apps {
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
@@ -539,7 +525,6 @@ Om APPs in te stellen voer uit:
     info "$TEXT"
 }
 
-
 function process_option_files {
     TEXT="De volgende instellingsbestanden zijn beschikbaar:
 
@@ -567,7 +552,6 @@ Om BESTANDen te gebruiken voer uit:
     info "$TEXT"
 }
 
-
 function process_option_cat {
     for file in "${FILE_TO_PROCESS[@]}"; do
         {
@@ -593,7 +577,6 @@ function process_option_cat {
         less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
 }
-
 
 function process_file {
     local app_description=''
@@ -641,7 +624,6 @@ function process_file {
     fi
 }
 
-
 function process_app_description {
     local record=${1:-record?}
 
@@ -654,7 +636,6 @@ function process_app_description {
     ((++app_seq_num))
     cmd_seq_num=0
 }
-
 
 function process_setup_instruction {
     local       record=${1:-record?}
@@ -679,7 +660,6 @@ function process_setup_instruction {
     fi
 }
 
-
 function process_reset_instruction {
     local       record=${1:-record?}
     local       filler=''
@@ -702,7 +682,6 @@ function process_reset_instruction {
                 "$filler"       "${record:3}"               >> "$TEXT_FILE"
     fi
 }
-
 
 function process_command {
     local       record=${1:-record?}
@@ -754,7 +733,6 @@ function process_command {
     fi
 }
 
-
 function execute_command {
     local       cmd=${1:-cmd?}
     local -i    cmd_rc=0
@@ -784,7 +762,6 @@ function execute_command {
     log "$status rc=$cmd_rc, maxrc=$MAXRC"
     printf '%s\n' "$status"
 }
-
 
 function term_script {
     local -i    app_num=0
@@ -880,7 +857,6 @@ Instellen is voltooid.'
     fi
 }
 
-
 ###############################################################################
 # Main line                                                                   #
 ###############################################################################
@@ -891,6 +867,5 @@ function main {
     process_input
     term_script
 }
-
 
 main "$@"

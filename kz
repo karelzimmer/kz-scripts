@@ -12,7 +12,6 @@ readonly PROGRAM_NAME='kz'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
 
-
 ###############################################################################
 # Global constants                                                            #
 ###############################################################################
@@ -41,11 +40,9 @@ Argumenten:
 THIS_YEAR=$(date +%Y)
 readonly THIS_YEAR
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
-
 
 ###############################################################################
 # Functions                                                                   #
@@ -61,7 +58,6 @@ function init_script {
     # Script kz-getdeb verwijdert niet kz en kz.1 i.v.m. lokale Git-repo.
     rm --force kz.{2..99}
 }
-
 
 function check_input {
     # Geen getopt, opgegeven opties zijn voor de opdracht, niet voor kz zelf.
@@ -88,7 +84,6 @@ function check_input {
     fi
 }
 
-
 function show_commands {
     printf '%s\n' 'De volgende OPDRACHTen zijn beschikbaar:'
     find    "$PROGRAM_PATH"/kz-*    \
@@ -104,18 +99,15 @@ function show_commands {
     printf '\n%s\n' "Typ '$DISPLAY_NAME --usage' voor meer informatie."
 }
 
-
 function process_option_usage {
     printf  '%s\n\n%s\n'    \
             "$USAGE"        \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
-
 function process_option_help {
     printf '%s\n\n%s\n' "$HELP" "Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
-
 
 function process_option_version {
     local build=''
@@ -136,7 +128,6 @@ Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 }
 
-
 function process_input {
 local program_name=''
 
@@ -145,11 +136,9 @@ local program_name=''
     exec "$PROGRAM_PATH/kz-$program_name" "$@"
 }
 
-
 function term_script {
     exit $SUCCESS
 }
-
 
 ###############################################################################
 # Main line                                                                   #
@@ -161,6 +150,5 @@ function main {
     process_input "$@"
     term_script
 }
-
 
 main "$@"

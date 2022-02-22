@@ -13,7 +13,6 @@ readonly PROGRAM_NAME='kz-gset'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2015
 
-
 ###############################################################################
 # Global constants                                                            #
 ###############################################################################
@@ -44,7 +43,6 @@ Opties:
                  verwijder APPFOLDER
 $OPTIONS_HELP_COMMON"
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -60,7 +58,6 @@ declare OPTION_ADDFAVBEF=false
 declare OPTION_ADDFAVAFT=false
 declare OPTION_DELAPPFOLDER=false
 declare OPTION_DELFAV=false
-
 
 ###############################################################################
 # Functions                                                                   #
@@ -163,7 +160,6 @@ function check_input {
     check_user
 }
 
-
 function process_input {
     if $OPTION_ADDFAVAFT; then
         process_option_addfavaft
@@ -180,7 +176,6 @@ function process_input {
     fi
 }
 
-
 function process_option_addfavaft  {
     local favorite_apps=''
 
@@ -195,7 +190,6 @@ function process_option_addfavaft  {
             ), '$DESKTOPFILE']"
     fi
 }
-
 
 function process_option_addfavbef  {
     local favorite_apps=''
@@ -212,7 +206,6 @@ function process_option_addfavbef  {
     fi
 }
 
-
 function process_option_delfav  {
     local favorite_apps=''
 
@@ -228,7 +221,6 @@ function process_option_delfav  {
         )"
     fi
 }
-
 
 function process_option_addappfolder  {
     local app_folders=''
@@ -254,7 +246,6 @@ function process_option_addappfolder  {
     gsettings set "$schema":"$path" categories  "['$APPFOLDER']"
 }
 
-
 function process_option_delappfolder  {
     local app_folders=''
     local schema=''
@@ -275,7 +266,6 @@ function process_option_delappfolder  {
     gsettings reset-recursively "$schema":"$path"
 }
 
-
 function capture_gui_changes {
     CONFIG_A=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
     save_configuration_database A "$CONFIG_A"
@@ -286,11 +276,9 @@ function capture_gui_changes {
     report_database_changes "$CONFIG_A" "$CONFIG_B"
 }
 
-
 function save_configuration_database {
     local fase=${1:-fase?}
     local output_file=${2:-output_file?}
-
 
     gsettings list-recursively > "$output_file" 2> >($LOGCMD)
 
@@ -300,7 +288,6 @@ function save_configuration_database {
 
     info "Inhoud configuratiedatabase vastgelegd ($fase)."
 }
-
 
 function report_database_changes {
     local output_file1=${1:-output_file1?}
@@ -318,11 +305,9 @@ Bij WIJZIGINGen voer uit:
     rm "$CONFIG_A" "$CONFIG_B"
 }
 
-
 function term_script {
     exit $SUCCESS
 }
-
 
 ###############################################################################
 # Main line                                                                   #
@@ -334,6 +319,5 @@ function main {
     process_input
     term_script
 }
-
 
 main "$@"

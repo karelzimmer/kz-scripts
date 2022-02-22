@@ -8,7 +8,6 @@ declare PROGRAM_NAME='kz-common.sh'
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 declare RELEASE_YEAR=2009
 
-
 ###############################################################################
 # Common global constants
 ###############################################################################
@@ -35,7 +34,6 @@ DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
 THIS_YEAR=$(date +%Y)
 readonly THIS_YEAR
-
 
 ###############################################################################
 # Common global variables
@@ -65,7 +63,6 @@ declare GREEN=''
 declare RED=''
 declare YELLOW=''
 
-
 ###############################################################################
 # Common functions
 ###############################################################################
@@ -82,7 +79,6 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 '
     fi
 }
-
 
 function error {
     if $OPTION_GUI; then
@@ -104,7 +100,6 @@ function error {
     fi
 }
 
-
 function check_user {
     local prompt=''
 
@@ -122,7 +117,6 @@ function check_user {
         fi
     fi
 }
-
 
 function info {
     if $OPTION_GUI; then
@@ -143,7 +137,6 @@ function info {
         printf '%b\n' "$@"
     fi
 }
-
 
 function init_script {
     # Script-hardening.
@@ -181,11 +174,9 @@ function init_script {
     fi
 }
 
-
 function log {
     printf '%b' "$1" |& $LOGCMD "${2:---priority=info}"
 }
-
 
 function process_common_options {
     while true; do
@@ -230,7 +221,6 @@ function process_common_options {
     fi
 }
 
-
 function process_option_debug {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
@@ -259,20 +249,17 @@ function process_option_debug {
     unset ps4
 }
 
-
 function process_option_help {
     info "$HELP
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
-
 function process_option_usage {
     info "$USAGE
 
 Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
-
 
 function process_option_version {
     local build=''
@@ -294,7 +281,6 @@ Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 }
 
-
 function reset_terminal_attribs {
     NORMAL=''
     BOLD=''
@@ -304,7 +290,6 @@ function reset_terminal_attribs {
     YELLOW=''
 }
 
-
 function set_terminal_attribs {
     NORMAL=$(tput sgr0)
     BOLD=$(tput bold)
@@ -313,7 +298,6 @@ function set_terminal_attribs {
     RED=${BOLD}$(tput setaf 1)
     YELLOW=${BOLD}$(tput setaf 3)
 }
-
 
 function signal {
     local       signal=${1:-signal?}
@@ -419,7 +403,6 @@ Controleer de log in het Terminalvenster met:
     esac
 }
 
-
 function signal_exit {
     case $PROGRAM_NAME in
         kz-getdeb)
@@ -458,7 +441,6 @@ dan een Terminalvenster, en voer uit:
             ;;
     esac
 }
-
 
 function warning {
     if $OPTION_GUI; then

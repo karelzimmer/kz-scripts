@@ -20,7 +20,6 @@ readonly PROGRAM_NAME='kz-getdeb'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2016
 
-
 ###############################################################################
 # Global constants                                                            #
 ###############################################################################
@@ -55,11 +54,9 @@ readonly SCRIPTS_REPO=$HOME/kz-scripts
 readonly UPLOADS_REPO=$HOME/kz-uploads
 readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
-
 
 ###############################################################################
 # Functions                                                                   #
@@ -106,7 +103,6 @@ function check_input {
     check_on_ac_power
 }
 
-
 function check_on_ac_power {
     local -i on_battery=0
 
@@ -122,12 +118,10 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
     fi
 }
 
-
 function check_sudo_and_dpkg {
     check_sudo
     check_dpkg
 }
-
 
 function check_sudo {
     if ! sudo -n true 2> /dev/null; then
@@ -174,7 +168,6 @@ Mogelijke oorzaak:
     fi
 }
 
-
 function check_dpkg {
     local -i wait_for_aptd=5
 
@@ -208,7 +201,6 @@ duren)..."
     fi
 }
 
-
 function process_input {
     local full_name=''
 
@@ -225,7 +217,6 @@ function process_input {
         create_development_environment
     fi
 }
-
 
 function install_scriptspackage {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
@@ -257,7 +248,6 @@ function install_scriptspackage {
     rm "$temp_deb" |& $LOGCMD
 }
 
-
 function create_development_environment {
     TEXT='Maak ontwikkelomgeving...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
@@ -268,7 +258,6 @@ function create_development_environment {
     process_repos
     download_website
 }
-
 
 function check_dependencies {
     if ! command -v fakeroot 1> /dev/null; then
@@ -303,7 +292,6 @@ function check_dependencies {
         sudo snap install shellcheck
     fi
 }
-
 
 function process_repos {
     git config --global credential.helper store |& $LOGCMD
@@ -351,7 +339,6 @@ function process_repos {
     fi
 }
 
-
 function download_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
@@ -382,7 +369,6 @@ function download_website {
         return  $ERROR
     fi
 }
-
 
 function term_script {
     if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
@@ -420,7 +406,6 @@ Typ 'exit' om dit venster te sluiten."
     exit $SUCCESS
 }
 
-
 ###############################################################################
 # Main line                                                                   #
 ###############################################################################
@@ -431,6 +416,5 @@ function main {
     process_input
     term_script
 }
-
 
 main "$@"

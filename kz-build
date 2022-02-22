@@ -13,7 +13,6 @@ readonly PROGRAM_NAME='kz-build'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
 
-
 ###############################################################################
 # Global constants                                                            #
 ###############################################################################
@@ -75,11 +74,9 @@ readonly -A TARGET_DEB=(
            [TABCOMPL]=$DEB_DISTDIR/usr/share/bash-completion/completions
     )
 
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
-
 
 ###############################################################################
 # Functions                                                                   #
@@ -139,18 +136,15 @@ function check_input {
     check_user
 }
 
-
 function process_input {
     # Er is een afhankelijkheid met het maken van pdf's, vandaar uploads eerst.
     build_uploads
     build_deb
 }
 
-
 function build_uploads {
     local file=''
     local temptextfile=''
-
 
     log 'Bouw website...'
     # Gebruik diff voor deltabepaling (i.p.v. rsync) omdat na 'git pull' en
@@ -237,7 +231,6 @@ function build_uploads {
     cd "$HOME"
 }
 
-
 function build_deb {
     local basename=''
     local dir=''
@@ -321,7 +314,6 @@ function build_deb {
                 "${TARGET_UPLOADS[DEB]}/$DEB_NAME"  |& $LOGCMD
 }
 
-
 function build_background_properties_file {
     local wallpaper=''
     local wallpapers_config_file=kz-wallpapers.xml
@@ -354,11 +346,9 @@ function build_background_properties_file {
     cd "$HOME"
 }
 
-
 function term_script {
     exit $SUCCESS
 }
-
 
 ###############################################################################
 # Main line                                                                   #
@@ -370,6 +360,5 @@ function main {
     process_input
     term_script
 }
-
 
 main "$@"
