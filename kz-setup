@@ -68,8 +68,8 @@ readonly TEXT_FILE
 # 2. man, zie 'man man', zoek LESS
 readonly LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
 --quit-on-intr --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $DISPLAY_NAME \
-?ltregel %lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor \
-hulp of q voor stoppen)"
+?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
+voor hulp of q voor stoppen)"
 
 ###############################################################################
 # Global variables                                                            #
