@@ -128,8 +128,8 @@ function request_input {
     local       quest4='Gebruikersnaam op de NAS'
     local       quest5='Wachtwoord van deze gebruiker op de NAS'
     local       quest6='Share-naam van deze gebruiker op de NAS'
-    local -i    zenity_rc=0
     local       warning=''
+    local -i    zenity_rc=0
 
     fstab=$(
         if ! grep --regexp="$PROGRAM_NAME" /etc/fstab; then

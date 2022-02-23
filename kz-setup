@@ -75,28 +75,28 @@ hulp of q voor stoppen)"
 # Global variables                                                            #
 ###############################################################################
 
-declare ARGUMENT_APP=false
-declare ARGUMENT_FILE=false
-declare COMMANDS_FOUND=false
-declare EDITION=$EDITION_DEFAULT
-declare EDITION_ARGUMENT=''
-declare EXECUTE_COMMANDS=true
-declare INFO_FOUND=false
-declare OPTION_APPS=false
-declare OPTION_CAT=false
-declare OPTION_EDITION=false
-declare OPTION_FILES=false
-declare OPTION_GUI=false
-declare OPTION_INFO=false
-declare OPTION_LIST=false
-declare OPTION_RESET=false
-declare OPTION_SIMULATE=false
-declare RESET_FOUND=false
-declare STATUS_BUSY=''
-declare -a APP_ARGUMENT=()
-declare -a FILE_ARGUMENT=()
-declare -a FILE_TO_PROCESS=()
-declare -i MAXRC=0
+declare -a  APP_ARGUMENT=()
+declare     ARGUMENT_APP=false
+declare     ARGUMENT_FILE=false
+declare     COMMANDS_FOUND=false
+declare     EDITION=$EDITION_DEFAULT
+declare     EDITION_ARGUMENT=''
+declare     EXECUTE_COMMANDS=true
+declare -a  FILE_ARGUMENT=()
+declare -a  FILE_TO_PROCESS=()
+declare     INFO_FOUND=false
+declare -i  MAXRC=0
+declare     OPTION_APPS=false
+declare     OPTION_CAT=false
+declare     OPTION_EDITION=false
+declare     OPTION_FILES=false
+declare     OPTION_GUI=false
+declare     OPTION_INFO=false
+declare     OPTION_LIST=false
+declare     OPTION_RESET=false
+declare     OPTION_SIMULATE=false
+declare     RESET_FOUND=false
+declare     STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare BLINK=''
@@ -217,14 +217,14 @@ function check_input {
 }
 
 function process_input {
-    local       file=''
-    local       file_notfound=false
     local -i    app_seq_num=0
     local -i    app_tot_num=0
-    local -i    file_num=0
-    local       skip_line=false
     local       dfltfile_1=''
     local       dfltfile_2=''
+    local       file_notfound=false
+    local -i    file_num=0
+    local       file=''
+    local       skip_line=false
 
     dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
     dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
@@ -586,6 +586,7 @@ function process_option_cat {
 
 function process_file {
     local       app_description=''
+    local -i    cmd_seq_num=0
     local       first_description_line=true
     local       first_reset_instruction=true
     local       first_setup_instruction=true
@@ -593,7 +594,6 @@ function process_file {
     local       record=''
     local       recordtype=''
     local       write_app_description_line=true
-    local -i    cmd_seq_num=0
 
     if $EXECUTE_COMMANDS; then
         STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
@@ -704,8 +704,8 @@ function process_reset_instruction {
 
 function process_command {
     local       record=${1:-record?}
-    local -i    cmd_rc=0
     local       app_description_line=''
+    local -i    cmd_rc=0
     local -i    desc_maxlen=1000
     local       desc_printf=''
     local       status=''
@@ -788,7 +788,7 @@ function execute_command {
 }
 
 function term_script {
-    local -i    app_num=0
+    local -i app_num=0
 
     if $OPTION_SIMULATE; then
         if $OPTION_GUI; then

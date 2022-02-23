@@ -78,28 +78,28 @@ hulp of q voor stoppen)"
 # Global variables                                                            #
 ###############################################################################
 
-declare ARGUMENT_APP=false
-declare ARGUMENT_FILE=false
-declare COMMANDS_FOUND=false
-declare EDITION=$EDITION_DEFAULT
-declare EDITION_ARGUMENT=''
-declare EXECUTE_COMMANDS=true
-declare INFO_FOUND=false
-declare OPTION_APPS=false
-declare OPTION_CAT=false
-declare OPTION_EDITION=false
-declare OPTION_FILES=false
-declare OPTION_GUI=false
-declare OPTION_INFO=false
-declare OPTION_LIST=false
-declare OPTION_REMOVE=false
-declare OPTION_SIMULATE=false
-declare REMOVE_FOUND=false
-declare STATUS_BUSY=''
-declare -a APP_ARGUMENT=()
-declare -a FILE_ARGUMENT=()
-declare -a FILE_TO_PROCESS=()
-declare -i MAXRC=0
+declare -a  APP_ARGUMENT=()
+declare     ARGUMENT_APP=false
+declare     ARGUMENT_FILE=false
+declare     COMMANDS_FOUND=false
+declare     EDITION=$EDITION_DEFAULT
+declare     EDITION_ARGUMENT=''
+declare     EXECUTE_COMMANDS=true
+declare -a  FILE_ARGUMENT=()
+declare -a  FILE_TO_PROCESS=()
+declare     INFO_FOUND=false
+declare -i  MAXRC=0
+declare     OPTION_APPS=false
+declare     OPTION_CAT=false
+declare     OPTION_EDITION=false
+declare     OPTION_FILES=false
+declare     OPTION_GUI=false
+declare     OPTION_INFO=false
+declare     OPTION_LIST=false
+declare     OPTION_REMOVE=false
+declare     OPTION_SIMULATE=false
+declare     REMOVE_FOUND=false
+declare     STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare BLINK=''
@@ -220,11 +220,11 @@ function check_input {
 }
 
 function process_input {
-    local       file=''
-    local       file_notfound=false
     local -i    app_seq_num=0
     local -i    app_tot_num=0
+    local       file_notfound=false
     local -i    file_num=0
+    local       file=''
     local       skip_line=false
 
     if $OPTION_LIST; then
@@ -345,10 +345,10 @@ Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 function create_list_manual_installed {
+    local       footer=''
     local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
 Software of
    met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
-    local       footer=''
     local -i    number_of_lines=0
     local       plural='geïnstalleerde pakketten'
 
@@ -369,9 +369,9 @@ Software of
 }
 
 function create_list_snaps {
+    local       footer=''
     local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
 <snap>' of met Software:"
-    local       footer=''
     local -i    number_of_lines=0
     local       plural='snaps'
 
@@ -395,10 +395,10 @@ function create_list_snaps {
 }
 
 function create_list_added_repos {
+    local       footer=''
     local       header="3. Deze pakketbronnen zijn toegevoegd met de \
 installatie van een pakket of
    met de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
-    local       footer=''
     local -i    number_of_lines=0
     local       plural='pakketbronnen'
     local       search=''
@@ -639,6 +639,7 @@ function process_option_cat {
 
 function process_file {
     local       app_description=''
+    local -i    cmd_seq_num=0
     local       first_description_line=true
     local       first_install_instruction=true
     local       first_remove_instruction=true
@@ -646,7 +647,6 @@ function process_file {
     local       record=''
     local       recordtype=''
     local       write_app_description_line=true
-    local -i    cmd_seq_num=0
 
     if $EXECUTE_COMMANDS; then
         STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
@@ -757,8 +757,8 @@ function process_remove_instruction {
 
 function process_command {
     local       cmd=${1:-cmd?}
-    local -i    cmd_rc=0
     local       app_description_line=''
+    local -i    cmd_rc=0
     local -i    desc_maxlen=1000
     local       desc_printf=''
     local       status=''
@@ -864,7 +864,7 @@ function check_dpkg {
 }
 
 function term_script {
-    local -i    app_num=0
+    local -i app_num=0
 
     if $OPTION_SIMULATE; then
         if $OPTION_GUI; then

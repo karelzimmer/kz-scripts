@@ -33,6 +33,7 @@ DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
 SPACES=$(printf '%.0s ' {1..79})
 readonly SPACES
+
 readonly MENU1_TITLE=Installatiemenu
 readonly MENU1_HEAD="\
 ${DASHES:0:57}
@@ -95,10 +96,10 @@ readonly MENU2_LINES=${#ACTIONS2[@]}
 # Global variables                                                            #
 ###############################################################################
 
-declare COMMANDS_EXECUTED=false
-declare OPTION_GUI=false
-declare -a EXEC=()
-declare -i NUMBER_OF_COMMANDS=0
+declare     COMMANDS_EXECUTED=false
+declare -a  EXEC=()
+declare -i  NUMBER_OF_COMMANDS=0
+declare     OPTION_GUI=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare REWRITE_LINE=''
@@ -528,9 +529,9 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 }
 
 function process_commands {
-    local -i    exec=0
     local       action=''
     local       command=''
+    local -i    exec=0
 
     NUMBER_OF_COMMANDS=${#EXEC[@]}
     if [[ $NUMBER_OF_COMMANDS -eq 1 ]]; then
@@ -555,10 +556,10 @@ function process_commands {
 }
 
 function show_commands_before_execution {
-    local       prompt=''
-    local -i    exec=0
     local       action=''
     local       command=''
+    local -i    exec=0
+    local       prompt=''
 
     TEXT="
 De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:

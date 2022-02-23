@@ -144,8 +144,8 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 
 function create_backup {
     local       backup=backup-$HOSTNAME-$USER
-    local -i    rsync_rc=0
     local       exclude=''
+    local -i    rsync_rc=0
 
     exclude=$(mktemp -t 'kz-backup-XXXXXXXXXX')
 

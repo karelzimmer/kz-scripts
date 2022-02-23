@@ -17,11 +17,11 @@ readonly RELEASE_YEAR=2012
 # Global constants                                                            #
 ###############################################################################
 
-readonly    OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
-readonly    OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly    USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
                    [MAP...]"
-readonly    HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [MAP...]
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [MAP...]
 
 Bestandsnamen controleren.
 
@@ -38,16 +38,16 @@ readonly    START_DFLT=$HOME
 # Global variables                                                            #
 ###############################################################################
 
-declare ARGUMENT_MAP=false
-declare -a MAP_ARGUMENT=()
+declare     ARGUMENT_MAP=false
+declare -a  MAP_ARGUMENT=()
 
 ###############################################################################
 # Functions                                                                   #
 ###############################################################################
 
 function check_input {
-    local -i    map_arg_num=0
     local -i    getopt_rc=0
+    local -i    map_arg_num=0
     local       parsed=''
 
     parsed=$(
@@ -101,11 +101,11 @@ function process_input {
 }
 
 function check_files_and_folders {
+    local       basename
+    local -i    count=0
     local       dirname
     local       file
-    local       basename
     local       good
-    local -i    count=0
 
     # Het maakt niet uit of in de bestandsnaam speciale tekens voorkomen zoals
     # tab, spatie, enz.  Hiervoor zorgt de find met print0,en de read met IFS=

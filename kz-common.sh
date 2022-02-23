@@ -39,27 +39,27 @@ readonly THIS_YEAR
 # Common global variables
 ###############################################################################
 
-declare HELP='Gebruik: source kz-common.sh
+declare -a  CMDLINE_ARGS=()
+declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare LOGCMD=''
-declare LOGCMD_CHECK=''
-declare OPTION_DEBUG=false
-declare OPTION_GUI=false
-declare OPTION_HELP=false
-declare OPTION_USAGE=false
-declare OPTION_VERSION=false
-declare RUN_AS_SUPERUSER=false
-declare TITLE=''
-declare USAGE='Gebruik: source kz-common.sh
+declare     LOGCMD_CHECK=''
+declare     LOGCMD=''
+declare     OPTION_DEBUG=false
+declare     OPTION_GUI=false
+declare     OPTION_HELP=false
+declare     OPTION_USAGE=false
+declare     OPTION_VERSION=false
+declare     RUN_AS_SUPERUSER=false
+declare     TITLE=''
+declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare USAGELINE=''
-declare -a CMDLINE_ARGS=()
+declare     USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare NORMAL=''
-declare BOLD=''
 declare BLUE=''
+declare BOLD=''
 declare GREEN=''
+declare NORMAL=''
 declare RED=''
 declare YELLOW=''
 
