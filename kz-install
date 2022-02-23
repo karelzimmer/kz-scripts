@@ -68,7 +68,7 @@ readonly TEMP_LIST
 # van:
 # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
 #    ("FRSXMK")
-# 2. man, zie 'mam man', zoek LESS
+# 2. man, zie 'man man', zoek LESS
 readonly LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
 --quit-on-intr --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $PROGRAM_NAME \
 ?ltregel %lt?L/%L.:byte %bB?s/%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor \
