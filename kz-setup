@@ -99,10 +99,10 @@ declare     RESET_FOUND=false
 declare     STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare BLINK=''
-declare CARRIAGE_RETURN=''
-declare CURSOR_INVISABLE=''
-declare CURSOR_VISABLE=''
+declare     BLINK=''
+declare     CARRIAGE_RETURN=''
+declare     CURSOR_INVISABLE=''
+declare     CURSOR_VISABLE=''
 
 ###############################################################################
 # Functions                                                                   #

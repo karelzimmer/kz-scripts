@@ -56,12 +56,12 @@ declare     USAGE='Gebruik: source kz-common.sh
 declare     USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare BLUE=''
-declare BOLD=''
-declare GREEN=''
-declare NORMAL=''
-declare RED=''
-declare YELLOW=''
+declare     BLUE=''
+declare     BOLD=''
+declare     GREEN=''
+declare     NORMAL=''
+declare     RED=''
+declare     YELLOW=''
 
 ###############################################################################
 # Common functions
