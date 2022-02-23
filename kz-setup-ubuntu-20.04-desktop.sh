@@ -21,7 +21,6 @@
 #2 3. Klik op Toevoegen aan Firefox.
 #2 4. Klik op Toevoegen.
 #2 5. Klik op Oké, begrepen.
-#3
 #3 Voor Chrome:
 #3 ~~~~~~~~~~~~
 #3 1. Start Google Chrome webbrowser.
@@ -80,7 +79,6 @@ kz-gset --addfavaft=bitwarden_bitwarden
 #2       2. Klik in Bitwarden-extensie op Instellingen en klik onder OVERIG op
 #2          Opties en vink aan Automatisch invullen bij laden van pagina en
 #2          selecteer Automatisch invullen bij laden van pagina.
-#3
 #3 Voor Chrome:
 #3 ~~~~~~~~~~~~
 #3 1. Start Google Chrome webbrowser.

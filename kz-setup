@@ -553,11 +553,17 @@ Om BESTANDen te gebruiken voer uit:
 }
 
 function process_option_cat {
+    local first_file=true
+
     for file in "${FILE_TO_PROCESS[@]}"; do
         {
+            if $first_file; then
+                first_file=false
+            else
+                printf '\n'
+            fi
             printf '%s\n' "${BLUE}# $file${NORMAL}"
             cat "$file"
-            printf '\n'
         }   >> "$CMDS_FILE"
     done
     if $OPTION_GUI; then
@@ -579,12 +585,15 @@ function process_option_cat {
 }
 
 function process_file {
-    local app_description=''
-    local -i cmd_seq_num=0
-    local prev_recordtype=''
-    local record=''
-    local recordtype=''
-    local write_app_description_line=true
+    local       app_description=''
+    local       first_description_line=true
+    local       first_reset_instruction=true
+    local       first_setup_instruction=true
+    local       prev_recordtype=''
+    local       record=''
+    local       recordtype=''
+    local       write_app_description_line=true
+    local -i    cmd_seq_num=0
 
     if $EXECUTE_COMMANDS; then
         STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
@@ -648,15 +657,20 @@ function process_setup_instruction {
     fi
     filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#2' ]]; then
-        printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
+        printf '%s%s\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
+        if $first_setup_instruction; then
+            first_setup_instruction=false
+        else
+            printf '\n' >> "$TEXT_FILE"
+        fi
         len=${#app_description}
         # ?? wordt in term_script vervangen door aantal in te stellen apps.
-        printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
-                "$app_seq_num"  "$app_description"          \
-                "$filler"       "$DASHES"                   \
-                "$filler"       "${record:3}"               >> "$TEXT_FILE"
+        printf  "[%2d/??] %s\n%s%.${len}s\n%s%s\n"  \
+                "$app_seq_num"  "$app_description"  \
+                "$filler"       "$DASHES"           \
+                "$filler"       "${record:3}"       >> "$TEXT_FILE"
     fi
 }
 
@@ -671,15 +685,20 @@ function process_reset_instruction {
     fi
     filler=${SPACES:0:8}
     if [[ $prev_recordtype = '#3' ]]; then
-        printf '%s%s\n\n' "$filler" "${record:3}" >> "$TEXT_FILE"
+        printf '%s%s\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
+        if $first_reset_instruction; then
+            first_reset_instruction=false
+        else
+            printf '\n' >> "$TEXT_FILE"
+        fi
         len=${#app_description}
         # ?? wordt in term_script vervangen door aantal te resetten apps.
-        printf  "\n[%2d/??] %s\n%s%.${len}s\n\n%s%s\n\n"    \
-                "$app_seq_num"  "$app_description"          \
-                "$filler"       "$DASHES"                   \
-                "$filler"       "${record:3}"               >> "$TEXT_FILE"
+        printf  "[%2d/??] %s\n%s%.${len}s\n%s%s\n"  \
+                "$app_seq_num"  "$app_description"  \
+                "$filler"       "$DASHES"           \
+                "$filler"       "${record:3}"       >> "$TEXT_FILE"
     fi
 }
 
@@ -696,13 +715,18 @@ function process_command {
 
     if $OPTION_SIMULATE; then
         if $write_app_description_line; then
-            printf  '[%3d/%-3d] %s\n\n' \
+            if $first_description_line; then
+                first_description_line=false
+            else
+                printf '\n' >> "$TEXT_FILE"
+            fi
+            printf  '[%3d/%-3d] %s\n'   \
                     "$app_seq_num"      \
                     "$app_tot_num"      \
                     "$app_description"  >> "$TEXT_FILE"
             write_app_description_line=false
         fi
-        printf  '%9s [%2d] %s\n\n'          \
+        printf  '%9s [%2d] %s\n'            \
                 " "                         \
                 "$cmd_seq_num"              \
                 "${BLUE}$record${NORMAL}"   >> "$TEXT_FILE"
@@ -784,7 +808,6 @@ function term_script {
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
-        printf '\n' >> "$TEXT_FILE"
         # Vervang ?? door aantal in te stellen apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
@@ -807,7 +830,6 @@ function term_script {
     elif $OPTION_INFO && ! $INFO_FOUND; then
         info 'Geen instel-instructies.'
     elif $OPTION_RESET && $RESET_FOUND; then
-        printf '\n' >> "$TEXT_FILE"
         # Vervang ?? door aantal te resetten apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
