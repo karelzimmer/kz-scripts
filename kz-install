@@ -304,8 +304,8 @@ function less_options {
     #    ("FRSXMK")
     # 2. man, zie 'man man', zoek LESS
     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
-.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
+--RAW-CONTROL-CHARS --prompt=M$1 - ?ltregel %lt?L van %L.:byte %bB?s van \
+%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
 }
 
 function process_argument_app {
@@ -621,7 +621,7 @@ function process_option_cat {
             cat "$file"
         }   >> "$CMDS_FILE"
     done
-    TITLE="Inhoud installatiebestanden $DISPLAY_NAME"
+    TITLE="Inhoud installatiebestanden - $DISPLAY_NAME"
     if $OPTION_GUI; then
         if ! zenity --text-info                         \
                     --width         850                 \
@@ -870,7 +870,7 @@ function term_script {
     local -i app_num=0
 
     if $OPTION_SIMULATE; then
-        TITLE="Installatie-opdrachten $DISPLAY_NAME"
+        TITLE="Installatie-opdrachten - $DISPLAY_NAME"
         if $OPTION_GUI; then
             if ! zenity --text-info                         \
                         --width         1200                \
@@ -891,7 +891,7 @@ function term_script {
         # Vervang ?? door aantal te installeren apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        TITLE="Installatie-instructies $DISPLAY_NAME"
+        TITLE="Installatie-instructies - $DISPLAY_NAME"
         if $OPTION_GUI; then
             if ! zenity --text-info                         \
                         --width         850                 \
@@ -914,7 +914,7 @@ function term_script {
         # Vervang ?? door aantal te verwijderen apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        TITLE="Verwijder-instructies $DISPLAY_NAME"
+        TITLE="Verwijder-instructies - $DISPLAY_NAME"
         if $OPTION_GUI; then
             if ! zenity --text-info                         \
                         --width         850                 \
