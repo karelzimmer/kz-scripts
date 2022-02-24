@@ -249,7 +249,7 @@ function install_scriptspackage {
 }
 
 function create_development_environment {
-    TEXT='Maak ontwikkelomgeving...'
+    TEXT='Bouw ontwikkelomgeving...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
