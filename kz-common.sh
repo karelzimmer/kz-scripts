@@ -175,7 +175,7 @@ function init_script {
 }
 
 function log {
-    printf '%b' "$1" |& $LOGCMD "${2:---priority=info}"
+    printf '%b\n' "$1" |& $LOGCMD "${2:---priority=info}"
 }
 
 function process_common_options {
@@ -224,7 +224,7 @@ function process_common_options {
 function process_option_debug {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    warning '*** START DEBUG-SESSIE ***'
+    printf '%s\n' "${YELLOW}*** START DEBUG-SESSIE ***${NORMAL}"
     log 'START DEBUG-SESSIE' --priority=debug
     log 'Start show current environment' --priority=debug
     log 'uname --all:' --priority=debug
@@ -383,8 +383,8 @@ Controleer de log in het Terminalvenster met:
                 set +o xtrace
                 BASH_XTRACEFD=''
                 exec 4>&-
-                warning "*** EINDE DEBUG-SESSIE ***"
-                info "
+                printf '%s\n' "${YELLOW}*** EINDE DEBUG-SESSIE ***${NORMAL}
+
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
                 log 'EINDE DEBUG-SESSIE'
