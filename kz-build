@@ -347,8 +347,6 @@ function build_background_properties_file {
 }
 
 function term_script {
-    info "${GREEN}Build kz $(cat "${TARGET_DEB[BUILD]}/$PROGRAM_NAME") \
-voltooid.${NORMAL}"
     exit $SUCCESS
 }
 

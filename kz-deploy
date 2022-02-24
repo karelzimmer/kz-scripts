@@ -187,8 +187,8 @@ function install_package {
 }
 
 function term_script {
-    info "${GREEN}Deploy kz $(cat "${TARGET_DEB[BUILD]}/$PROGRAM_NAME") \
-voltooid.${NORMAL}"
+    info "${GREEN}Deploy kz $(cat /usr/local/etc/kz-build 2> /dev/null ||
+printf '%s' 'unknown') voltooid.${NORMAL}"
     exit $SUCCESS
 }
 
