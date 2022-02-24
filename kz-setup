@@ -61,16 +61,6 @@ readonly CMDS_FILE2
 TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 readonly TEXT_FILE
 
-# Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
-# van:
-# 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
-#    ("FRSXMK")
-# 2. man, zie 'man man', zoek LESS
-readonly LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
---quit-on-intr --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $DISPLAY_NAME \
-?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
-voor hulp of q voor stoppen)"
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -85,6 +75,7 @@ declare     EXECUTE_COMMANDS=true
 declare -a  FILE_ARGUMENT=()
 declare -a  FILE_TO_PROCESS=()
 declare     INFO_FOUND=false
+declare     LESS_OPTIONS=''
 declare -i  MAXRC=0
 declare     OPTION_APPS=false
 declare     OPTION_CAT=false
@@ -214,6 +205,17 @@ function check_input {
         CURSOR_INVISABLE=$(tput civis)
         CURSOR_VISABLE=$(tput cvvis)
     fi
+}
+
+function less_options {
+    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
+    # van:
+    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
+    #    ("FRSXMK")
+    # 2. man, zie 'man man', zoek LESS
+    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+--RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
+.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
 }
 
 function process_input {
@@ -566,8 +568,8 @@ function process_option_cat {
             cat "$file"
         }   >> "$CMDS_FILE"
     done
+    TITLE="Inhoud instellingsbestanden $DISPLAY_NAME"
     if $OPTION_GUI; then
-        TITLE='Inhoud instellingsbestanden'
         if ! zenity --text-info                         \
                     --width         850                 \
                     --height        400                 \
@@ -580,6 +582,7 @@ function process_option_cat {
             true
         fi
     else
+        less_options "$TITLE"
         less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
 }
@@ -791,8 +794,8 @@ function term_script {
     local -i app_num=0
 
     if $OPTION_SIMULATE; then
+        TITLE="Instellings-opdrachten $DISPLAY_NAME"
         if $OPTION_GUI; then
-            TITLE='Instellings-opdrachten'
             if ! zenity --text-info                         \
                         --width         1000                \
                         --height        400                 \
@@ -805,14 +808,15 @@ function term_script {
                 true
             fi
         else
+            less_options "$TITLE"
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
         # Vervang ?? door aantal in te stellen apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
+        TITLE="Instel-instructies $DISPLAY_NAME"
         if $OPTION_GUI; then
-            TITLE='Instel-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
@@ -825,6 +829,7 @@ function term_script {
                 true
             fi
         else
+            less_options "$TITLE"
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && ! $INFO_FOUND; then
@@ -833,8 +838,8 @@ function term_script {
         # Vervang ?? door aantal te resetten apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
+        TITLE="Reset-instructies $DISPLAY_NAME"
         if $OPTION_GUI; then
-            TITLE='Reset-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
@@ -847,6 +852,7 @@ function term_script {
                 true
             fi
         else
+            less_options "$TITLE"
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_RESET && ! $RESET_FOUND; then

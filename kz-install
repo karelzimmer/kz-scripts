@@ -64,16 +64,6 @@ readonly TEXT_FILE
 TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
 readonly TEMP_LIST
 
-# Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
-# van:
-# 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
-#    ("FRSXMK")
-# 2. man, zie 'man man', zoek LESS
-readonly LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
---quit-on-intr --RAW-CONTROL-CHARS --prompt=M Tekstuitvoer $DISPLAY_NAME \
-?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
-voor hulp of q voor stoppen)"
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -88,6 +78,7 @@ declare     EXECUTE_COMMANDS=true
 declare -a  FILE_ARGUMENT=()
 declare -a  FILE_TO_PROCESS=()
 declare     INFO_FOUND=false
+declare     LESS_OPTIONS=''
 declare -i  MAXRC=0
 declare     OPTION_APPS=false
 declare     OPTION_CAT=false
@@ -219,6 +210,142 @@ function check_input {
     fi
 }
 
+function create_list_manual_installed {
+    local       footer=''
+    local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
+Software of
+   met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
+    local -i    number_of_lines=0
+    local       plural='geïnstalleerde pakketten'
+
+    printf '%s\n' "$text1..."
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
+    apt list --manual-installed 2> >($LOGCMD) >> "$TEMP_LIST"
+
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$((number_of_lines - 4))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='geïnstalleerd pakket'
+    fi
+    footer="Dit overzicht bevat $number_of_lines handmatig $plural."
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+
+    cat "$TEMP_LIST" > "$app_list"
+}
+
+function create_list_snaps {
+    local       footer=''
+    local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
+<snap>' of met Software:"
+    local -i    number_of_lines=0
+    local       plural='snaps'
+
+    printf '%s\n' "$text3..."
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
+    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
+        TEXT='snap is niet geïnstalleerd op dit systeem'
+        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
+    fi
+
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$((number_of_lines - 3))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='snap'
+    fi
+    footer="Dit overzicht bevat $number_of_lines $plural."
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
+
+    cat "$TEMP_LIST" >> "$app_list"
+}
+
+function create_list_added_repos {
+    local       footer=''
+    local       header="3. Deze pakketbronnen zijn toegevoegd met de \
+installatie van een pakket of
+   met de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
+    local -i    number_of_lines=0
+    local       plural='pakketbronnen'
+    local       search=''
+
+    printf '%s\n' "$text2..."
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+
+    search=/etc/apt/sources.list
+    cd  $search.d || exit $ERROR
+    if !    grep    --recursive             \
+                    --no-filename           \
+                    --regexp='^deb '        \
+                    --recursive             \
+                    /etc/apt/sources.list   \
+                    /etc/apt/sources.list.d |
+            grep    --invert-match          \
+                    --regexp='ubuntu.com'   |
+            sort    --unique                >> "$TEMP_LIST"; then
+        true
+    fi
+
+    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$((number_of_lines - 3))
+    if [[ $number_of_lines -eq 1 ]]; then
+        plural='pakketbron'
+    fi
+    footer="Dit overzicht bevat $number_of_lines toegevoegde $plural."
+    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
+
+    cat "$TEMP_LIST" >> "$app_list"
+}
+
+function less_options {
+    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
+    # van:
+    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
+    #    ("FRSXMK")
+    # 2. man, zie 'man man', zoek LESS
+    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+--RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
+.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
+}
+
+function process_argument_app {
+    local       app=''
+    local       file=''
+    local -a    files=()
+    local       search=''
+
+    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
+    # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    search=$PROGRAM_NAME-$DISTRO-$VERSION
+    for file in "$PROGRAM_PATH/$search"*.sh; do
+        files+=("$file")
+    done
+    for app in "${APP_ARGUMENT[@]}"; do
+        file=$(
+            grep    --files-with-matches    \
+                    --word-regexp           \
+                    --regexp="#1 $app"      \
+                    "${files[@]}"           \
+                    2> /dev/null            |
+            head    --lines=1               || printf '\n'
+            )
+        if [[ $file ]]; then
+            process_argument_app_file
+        else
+            warning "App '$app' niet gevonden."
+            file_notfound=true
+        fi
+    done
+    if $file_notfound; then
+        info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps." >&2
+    else
+        FILE_TO_PROCESS[$file_num]=$CMDS_FILE2
+        ((++file_num))
+    fi
+}
+
 function process_input {
     local -i    app_seq_num=0
     local -i    app_tot_num=0
@@ -342,131 +469,6 @@ function process_option_list {
 De instellingen zijn vastgelegd in de map kz in Documenten.
 In map kz het bestand Applijst met de eerder geïnstalleerde apps.
 Dit bestand kan worden gebruikt voor het nalopen van de installatie."
-}
-
-function create_list_manual_installed {
-    local       footer=''
-    local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
-Software of
-   met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
-    local -i    number_of_lines=0
-    local       plural='geïnstalleerde pakketten'
-
-    printf '%s\n' "$text1..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
-    apt list --manual-installed 2> >($LOGCMD) >> "$TEMP_LIST"
-
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
-    number_of_lines=$((number_of_lines - 4))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='geïnstalleerd pakket'
-    fi
-    footer="Dit overzicht bevat $number_of_lines handmatig $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" > "$app_list"
-}
-
-function create_list_snaps {
-    local       footer=''
-    local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
-<snap>' of met Software:"
-    local -i    number_of_lines=0
-    local       plural='snaps'
-
-    printf '%s\n' "$text3..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
-    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
-        TEXT='snap is niet geïnstalleerd op dit systeem'
-        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
-    fi
-
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
-    number_of_lines=$((number_of_lines - 3))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='snap'
-    fi
-    footer="Dit overzicht bevat $number_of_lines $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$app_list"
-}
-
-function create_list_added_repos {
-    local       footer=''
-    local       header="3. Deze pakketbronnen zijn toegevoegd met de \
-installatie van een pakket of
-   met de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
-    local -i    number_of_lines=0
-    local       plural='pakketbronnen'
-    local       search=''
-
-    printf '%s\n' "$text2..."
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
-
-    search=/etc/apt/sources.list
-    cd  $search.d || exit $ERROR
-    if !    grep    --recursive             \
-                    --no-filename           \
-                    --regexp='^deb '        \
-                    --recursive             \
-                    /etc/apt/sources.list   \
-                    /etc/apt/sources.list.d |
-            grep    --invert-match          \
-                    --regexp='ubuntu.com'   |
-            sort    --unique                >> "$TEMP_LIST"; then
-        true
-    fi
-
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
-    number_of_lines=$((number_of_lines - 3))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='pakketbron'
-    fi
-    footer="Dit overzicht bevat $number_of_lines toegevoegde $plural."
-    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$app_list"
-}
-
-function process_argument_app {
-    local       app=''
-    local       file=''
-    local -a    files=()
-    local       search=''
-
-    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
-    search=$PROGRAM_NAME-$DISTRO-$VERSION
-    for file in "$PROGRAM_PATH/$search"*.sh; do
-        files+=("$file")
-    done
-    for app in "${APP_ARGUMENT[@]}"; do
-        file=$(
-            grep    --files-with-matches    \
-                    --word-regexp           \
-                    --regexp="#1 $app"      \
-                    "${files[@]}"           \
-                    2> /dev/null            |
-            head    --lines=1               || printf '\n'
-            )
-        if [[ $file ]]; then
-            process_argument_app_file
-        else
-            warning "App '$app' niet gevonden."
-            file_notfound=true
-        fi
-    done
-    if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps." >&2
-    else
-        FILE_TO_PROCESS[$file_num]=$CMDS_FILE2
-        ((++file_num))
-    fi
 }
 
 function process_argument_app_file {
@@ -619,8 +621,8 @@ function process_option_cat {
             cat "$file"
         }   >> "$CMDS_FILE"
     done
+    TITLE="Inhoud installatiebestanden $DISPLAY_NAME"
     if $OPTION_GUI; then
-        TITLE='Inhoud installatiebestanden'
         if ! zenity --text-info                         \
                     --width         850                 \
                     --height        400                 \
@@ -633,6 +635,7 @@ function process_option_cat {
             true
         fi
     else
+        less_options "$TITLE"
         less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
 }
@@ -867,8 +870,8 @@ function term_script {
     local -i app_num=0
 
     if $OPTION_SIMULATE; then
+        TITLE="Installatie-opdrachten $DISPLAY_NAME"
         if $OPTION_GUI; then
-            TITLE='Installatie-opdrachten'
             if ! zenity --text-info                         \
                         --width         1200                \
                         --height        400                 \
@@ -881,14 +884,15 @@ function term_script {
                 true
             fi
         else
+            less_options "$TITLE"
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && $INFO_FOUND; then
         # Vervang ?? door aantal te installeren apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
+        TITLE="Installatie-instructies $DISPLAY_NAME"
         if $OPTION_GUI; then
-            TITLE='Installatie-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
@@ -901,6 +905,7 @@ function term_script {
                 true
             fi
         else
+            less_options "$TITLE"
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_INFO && ! $INFO_FOUND; then
@@ -909,8 +914,8 @@ function term_script {
         # Vervang ?? door aantal te verwijderen apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
+        TITLE="Verwijder-instructies $DISPLAY_NAME"
         if $OPTION_GUI; then
-            TITLE='Verwijder-instructies'
             if ! zenity --text-info                         \
                         --width         850                 \
                         --height        400                 \
@@ -923,6 +928,7 @@ function term_script {
                 true
             fi
         else
+            less_options "$TITLE"
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
     elif $OPTION_REMOVE && ! $REMOVE_FOUND; then
