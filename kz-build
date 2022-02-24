@@ -306,7 +306,7 @@ function build_deb {
         "${TARGET_UPLOADS[PDFS]}"/Checklist-installatie*.pdf    \
         "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
 
-    printf '%s' "$TIMESTAMP" > "${TARGET_DEB[BUILD]}/$PROGRAM_NAME"
+    printf '%s\n' "$TIMESTAMP" > "${TARGET_DEB[BUILD]}/$PROGRAM_NAME"
 
     fakeroot    dpkg-deb                            \
                 --build                             \
@@ -347,6 +347,8 @@ function build_background_properties_file {
 }
 
 function term_script {
+    info "${GREEN}Build kz $(cat "${TARGET_DEB[BUILD]}/$PROGRAM_NAME") \
+voltooid.${NORMAL}"
     exit $SUCCESS
 }
 

@@ -187,6 +187,8 @@ function install_package {
 }
 
 function term_script {
+    info "${GREEN}Deploy kz $(cat "${TARGET_DEB[BUILD]}/$PROGRAM_NAME") \
+voltooid.${NORMAL}"
     exit $SUCCESS
 }
 
