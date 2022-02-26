@@ -17,7 +17,12 @@ Keywords[nl]=kzinstall;installatie;
 Categories=KZ Scripts;
 Exec=pkexec kz-install --gui
 Icon=kz-install.svg
-Actions=info;remove;list;cat;simulate;
+Actions=list;info;remove;simulate;cat;
+
+[Desktop Action list]
+Name=Create app list
+Name[nl]=Applijst maken
+Exec=kz-install --gui --list
 
 [Desktop Action info]
 Name=Show installation instructions
@@ -29,17 +34,12 @@ Name=Show removal instructions
 Name[nl]=Verwijder-instructies tonen
 Exec=kz-install --gui --remove
 
-[Desktop Action list]
-Name=Create app list
-Name[nl]=Applijst maken
-Exec=kz-install --gui --list
+[Desktop Action simulate]
+Name=Show commands
+Name[nl]=Installatie-opdrachten tonen
+Exec=kz-install --gui --simulate
 
 [Desktop Action cat]
 Name=Show files
 Name[nl]=Installatie-bestanden tonen
 Exec=kz-install --gui --cat
-
-[Desktop Action simulate]
-Name=Show commands
-Name[nl]=Installatie-opdrachten tonen
-Exec=kz-install --gui --simulate

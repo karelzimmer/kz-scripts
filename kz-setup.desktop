@@ -17,7 +17,12 @@ Keywords[nl]=kzsetup;setup;
 Categories=KZ Scripts;
 Exec=kz-setup --gui
 Icon=kz-setup.svg
-Actions=info;reset;list;cat;simulate;
+Actions=list;info;reset;simulate;cat;
+
+[Desktop Action list]
+Name=Create setup list
+Name[nl]=Instellijst maken
+Exec=kz-setup --gui --list
 
 [Desktop Action info]
 Name=Show setup instructions
@@ -29,17 +34,12 @@ Name=Show reset instructions
 Name[nl]=Reset-instructies tonen
 Exec=kz-setup --gui --reset
 
-[Desktop Action list]
-Name=Create setup list
-Name[nl]=Instellijst maken
-Exec=kz-setup --gui --list
+[Desktop Action simulate]
+Name=Show commands
+Name[nl]=Instel-opdrachten tonen
+Exec=kz-setup --gui --simulate
 
 [Desktop Action cat]
 Name=Show files
 Name[nl]=Instel-bestanden tonen
 Exec=kz-setup --gui --cat
-
-[Desktop Action simulate]
-Name=Show commands
-Name[nl]=Instel-opdrachten tonen
-Exec=kz-setup --gui --simulate

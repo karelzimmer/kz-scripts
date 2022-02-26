@@ -568,7 +568,7 @@ function process_option_cat {
             cat "$file"
         }   >> "$CMDS_FILE"
     done
-    TITLE='Instellings-bestanden'
+    TITLE='Instel-bestanden'
     if $OPTION_GUI; then
         if ! zenity --text-info                         \
                     --width         850                 \
@@ -794,7 +794,7 @@ function term_script {
     local -i app_num=0
 
     if $OPTION_SIMULATE; then
-        TITLE='Instellings-opdrachten'
+        TITLE='Instel-opdrachten'
         if $OPTION_GUI; then
             if ! zenity --text-info                         \
                         --width         1000                \
