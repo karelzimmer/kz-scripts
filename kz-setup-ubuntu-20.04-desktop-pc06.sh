@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LST desktop op pc06.                   #
+# Instelbestand voor Ubuntu 20.04 LST desktop op pc06.                        #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################

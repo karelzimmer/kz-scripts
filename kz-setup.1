@@ -41,15 +41,15 @@ Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
 \fB--editie\fR is dat aan te passen (bijv. \fIEDITIE\fR server).
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare
-instellingsbestanden voor de huidige distributie, bijv. Ubuntu.
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare instelbestanden
+voor de huidige distributie, bijv. Ubuntu.
 .br
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBsetup-\fR' en te eindigen met '\fB.sh\fR'.
 .br
 Iets anders wordt beschouwd als een app, zie hierna.
 .sp
-Voor de indeling van de instellingsbestanden zie sectie \fBBESTANDSINDELING\fR
+Voor de indeling van de instelbestanden zie sectie \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor
@@ -60,8 +60,8 @@ desktop of Ubuntu 20.04 desktop, en Debian 11 desktop pc-van-charlie of Ubuntu
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
 Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in de
-standaard instellingsbestanden en worden de regels gekopieerd naar een
-tijdelijk bestand.
+standaard instelbestanden en worden de regels gekopieerd naar een tijdelijk
+bestand.
 .br
 Het tijdelijke bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
@@ -100,7 +100,7 @@ Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
 regel) er zijn en hoe deze regels verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een voorbeeld van de \fBvolgorde\fR van deze regels in
-een instellingsbestand.
+een instelbestand.
 Meer voorbeelden zijn te zien via de opdracht \fBkz setup --cat\fR.
 .\"
 .\"
@@ -156,7 +156,7 @@ T}
 .sp
 .sp
 .br
-.B Tabel 2. Volgorde van regels in een instellingsbestand
+.B Tabel 2. Volgorde van regels in een instelbestand
 .TS
 box tab(:);
 lb | lb.
@@ -226,7 +226,7 @@ T}
 Toon een lijst van in te stellen apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van de (opgegeven) instellingsbestanden.
+Toon de inhoud van de (opgegeven) instelbestanden.
 .br
 Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 .TP
@@ -234,7 +234,7 @@ Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 Gebruik editie \fIEDITIE\fR.
 .TP
 \fB-f\fR, \fB--files\fR
-Toon een lijst van beschikbare instellingsbestanden.
+Toon een lijst van beschikbare instelbestanden.
 .TP
 \fB-i\fR, \fB--info\fR
 Toon aanvullende instructies na het instellen van apps.
@@ -277,20 +277,20 @@ Als er een waarschuwing optreedt, is de afsluitwaarde 2.
 .SH BESTANDEN
 /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh
 .RS
-Standaard instellingsbestand als er geen \fIBESTAND\fRen zijn opgegeven,
+Standaard instelbestand als er geen \fIBESTAND\fRen zijn opgegeven,
 \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
 /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .RS
-Instellingsbestand voor <computernaam> als er geen \fIBESTAND\fRen zijn \
+Instelbestand voor <computernaam> als er geen \fIBESTAND\fRen zijn \
 opgegeven, \fIEDITIE\fR is standaard
 desktop.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.cmds
 .RS
-Tijdelijk instellingsbestand.
+Tijdelijk instelbestand.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.text
@@ -331,7 +331,7 @@ https://karelzimmer.nl
 .sp
 \fBkz setup\fR
 .RS
-Stel in alles wat in de standaard instellingsbestenden staat.
+Stel in alles wat in de standaard instelbestanden staat.
 Hiervoor is ook starter \fBApps instellen\fR beschikbaar.
 .RE
 .sp

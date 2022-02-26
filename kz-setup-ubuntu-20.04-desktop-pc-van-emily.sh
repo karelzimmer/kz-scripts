@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instellingsbestand voor Ubuntu 20.04 LTS desktop op pc-van-emily.           #
+# Instelbestand voor Ubuntu 20.04 LTS desktop op pc-van-emily.                #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################

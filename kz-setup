@@ -31,10 +31,10 @@ Apps instellen.
 
 Opties:
   -a, --apps     toon lijst van in te stellen apps
-  -c, --cat      toon inhoud van instellingsbestanden
+  -c, --cat      toon inhoud van instelbestanden
   -e, --edition=EDITIE
                  gebruik opgegeven editie
-  -f, --files    toon lijst van beschikbare instellingsbestanden
+  -f, --files    toon lijst van beschikbare instelbestanden
   -g, --gui      start in grafische modus
   -i, --info     toon aanvullende instructies na het instellen van apps
   -l, --list     maak instellijst aan
@@ -45,7 +45,7 @@ $OPTIONS_HELP_COMMON
 
 Argumenten:
   APP            opgegeven apps instellen
-  BESTAND        opgegeven instellingsbestanden verwerken"
+  BESTAND        opgegeven instelbestanden verwerken"
 
 DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
@@ -472,8 +472,8 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --files' voor beschikbare \
-instellingsbestanden." >&2
+        info "Typ '$DISPLAY_NAME --files' voor beschikbare instelbestanden." \
+>&2
     fi
 }
 
@@ -528,7 +528,7 @@ Om APPs in te stellen voer uit:
 }
 
 function process_option_files {
-    TEXT="De volgende instellingsbestanden zijn beschikbaar:
+    TEXT="De volgende instelbestanden zijn beschikbaar:
 
 NUMMER BESTAND
 $(
@@ -538,7 +538,7 @@ $(
                     --number-format=rn      \
                     --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen instellingsbestanden gevonden voor $DISTRO \
+        printf '%s\n' "     0 Geen instelbestanden gevonden voor $DISTRO \
 $VERSION $EDITION.
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
