@@ -36,10 +36,10 @@ Exec=kz-setup --gui --list
 
 [Desktop Action cat]
 Name=Show files
-Name[nl]=Bestanden tonen
+Name[nl]=Instel-bestanden tonen
 Exec=kz-setup --gui --cat
 
 [Desktop Action simulate]
 Name=Show commands
-Name[nl]=Opdrachten tonen
+Name[nl]=Instel-opdrachten tonen
 Exec=kz-setup --gui --simulate

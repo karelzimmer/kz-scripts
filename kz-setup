@@ -214,8 +214,8 @@ function less_options {
     #    ("FRSXMK")
     # 2. man, zie 'man man', zoek LESS
     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M$1 - ?ltregel %lt?L van %L.:byte %bB?s van \
-%s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
+--RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
+.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
 }
 
 function process_input {
@@ -568,7 +568,7 @@ function process_option_cat {
             cat "$file"
         }   >> "$CMDS_FILE"
     done
-    TITLE="Inhoud instellingsbestanden - $DISPLAY_NAME"
+    TITLE='Instellings-bestanden'
     if $OPTION_GUI; then
         if ! zenity --text-info                         \
                     --width         850                 \
@@ -794,7 +794,7 @@ function term_script {
     local -i app_num=0
 
     if $OPTION_SIMULATE; then
-        TITLE="Instellings-opdrachten - $DISPLAY_NAME"
+        TITLE='Instellings-opdrachten'
         if $OPTION_GUI; then
             if ! zenity --text-info                         \
                         --width         1000                \
@@ -815,7 +815,7 @@ function term_script {
         # Vervang ?? door aantal in te stellen apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        TITLE="Instel-instructies - $DISPLAY_NAME"
+        TITLE='Instel-instructies'
         if $OPTION_GUI; then
             if ! zenity --text-info                         \
                         --width         850                 \
@@ -838,7 +838,7 @@ function term_script {
         # Vervang ?? door aantal te resetten apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
         sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        TITLE="Reset-instructies - $DISPLAY_NAME"
+        TITLE='Reset-instructies'
         if $OPTION_GUI; then
             if ! zenity --text-info                         \
                         --width         850                 \
