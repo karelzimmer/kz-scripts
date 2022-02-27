@@ -7,6 +7,6 @@
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-caramel.jpg'
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-caramel.jpg
 #3 Start Terminalvenster en voer uit:
 #3    gsettings reset org.gnome.desktop.background picture-uri

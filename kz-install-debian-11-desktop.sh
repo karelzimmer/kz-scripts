@@ -22,7 +22,7 @@ sudo snap install bitwarden
 
 #1 citrix (telewerken)
 ## Voegt gebruiker citrixlog toe!
-wget --no-verbose --output-document=/tmp/icaclient-LATEST 'https://karelzimmer.nl/downloads/icaclient/LATEST'
+wget --no-verbose --output-document=/tmp/icaclient-LATEST https://karelzimmer.nl/downloads/icaclient/LATEST
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
@@ -60,7 +60,7 @@ sudo apt-get install --yes gnome-shell-extension-dashtodock
 ## aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
 ## GNOME Shell integration - Integratie van GNOME Shell-extensies voor
 ## webbrowsers: https://extensions.gnome.org
-wget --no-verbose --output-document=/tmp/google-chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb chrome-gnome-shell gnome-contacts gnome-gmail
 rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
@@ -92,7 +92,7 @@ sudo apt-get install --yes bash-completion
 #3    sudo apt remove --yes bash-completion
 
 #1 teamviewer (afstandsbediening)
-wget --no-verbose --output-document=/tmp/teamviewer.deb 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
+wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
 #3 Start Terminalvenster en voer uit:

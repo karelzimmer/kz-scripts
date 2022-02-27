@@ -12,7 +12,7 @@ kz-gset --delfav=firefox
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-olifanten.jpg'
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-olifanten.jpg
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #3 Start Terminalvenster en voer uit:
 #3    gsettings reset org.gnome.desktop.background picture-uri

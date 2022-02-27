@@ -7,7 +7,7 @@
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Cairn_by_Sylvain_Naudin.jpg'
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cairn_by_Sylvain_Naudin.jpg
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 #3 Start Terminalvenster en voer uit:
 #3    gsettings reset org.gnome.desktop.background picture-uri

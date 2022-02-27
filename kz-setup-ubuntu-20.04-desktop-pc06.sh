@@ -12,12 +12,12 @@ kz-gset --delfav=firefox
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'
-gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-light'
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-gnome.png
+gsettings set org.gnome.desktop.interface gtk-theme Yaru-light
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
-gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
+gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #3 Start Terminalvenster en voer uit:
 #3    gsettings reset org.gnome.desktop.background picture-uri
 #3    gsettings reset org.gnome.desktop.interface gtk-theme
