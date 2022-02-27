@@ -132,7 +132,7 @@ $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
             exit $WARNING
-        elif ! [[ -d SOURCE ]]; then
+        elif ! [[ -d $SOURCE ]]; then
             warning "Koppel een back-up-medium aan met hierop de map \
 backup-$HOSTNAME-$USER, en start daarna opnieuw."
             exit $WARNING
