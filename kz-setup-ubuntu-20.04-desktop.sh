@@ -103,7 +103,7 @@ xdg-mime default wfica.desktop application/x-ica
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-kz-gset --addappfolder=KZ Scripts
+kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
