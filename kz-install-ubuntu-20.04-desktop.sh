@@ -27,20 +27,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
-#2 Mocht de <2e gebruiker> problemen hebben met het aanmelden of het gebruik
-## van /home, start dan het Terminalvenster en voer uit:
-#2    id <2e gebruiker>
-#2    id citrixlog
-#2 Als gebruiker <2e gebruiker> UID 1002 heeft en gebruiker citrixlog UID=1001,
-#2 dan is gebruiker citrixlog (met de installatie van icaclient) eerder
-#2 aangemaakt dan gebruiker <2e gebruiker>.
-#2 Dit is op te lossen met:
-#2    sudo usermod  --uid 1003 citrixlog
-#2    sudo groupmod --gid 1003 citrixlog
-#2    sudo usermod  --uid 1001 <2e gebruiker>
-#2    sudo groupmod --gid 1001 <2e gebruiker>
-#2    sudo usermod  --uid 1002 citrixlog
-#2    sudo groupmod --gid 1002 citrixlog
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes icaclient
 
