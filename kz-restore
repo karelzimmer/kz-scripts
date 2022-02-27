@@ -117,6 +117,7 @@ function process_input {
         SOURCE=$SOURCE_ARGUMENT
         if ! [[ -d SOURCE ]]; then
             error "Map $SOURCE bestaat niet."
+            exit $ERROR
         fi
     else
         SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
@@ -134,6 +135,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
         elif ! [[ -d SOURCE ]]; then
             warning "Koppel een back-up-medium aan met hierop de map \
 backup-$HOSTNAME-$USER, en start daarna opnieuw."
+            exit $WARNING
         fi
     fi
 
