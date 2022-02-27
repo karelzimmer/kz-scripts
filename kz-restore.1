@@ -19,9 +19,10 @@ kz restore \- Back-up terugzetten.
 .SH BESCHRIJVING
 \fBkz restore\fR zet een back-up (reservekopie) van de Persoonlijke map terug.
 .sp
-De back-up, \fBbackup-<computernaam>-<gebruikersnaam>\fR, wordt verwacht op een
-aangekoppeld back-up-medium zoals een USB externe harddisk
-(bijv. /media/charlie/backupdisk).
+De back-up wordt verwacht op een aangekoppeld back-up-medium zoals een USB
+externe harddisk (bijv. /media/charlie/backupdisk) in map
+\fBbackup-<computernaam>-<gebruikersnaam>\fR (bijv.
+backup-pc-van-charlie-charlie, deze map moet aanwezig zijn).
 .sp
 Met optie \fB-s\fR, \fB--source\fR kan een andere locatie opgegeven worden.
 .sp
@@ -93,9 +94,11 @@ Hiervoor is ook starter \fBBack-up terugzetten\fR beschikbaar.
 Toon bestanden die teruggezet zouden worden uit de back-up.
 .RE
 .sp
-\fBkz restore --source=smb://fileserver/backups\fR
+\fBkz restore\
+ --source=smb://fileserver/backups/backup-pc-van-charlie-charlie\fR
 .RS
-Zet de back-up terug vanaf SMB-share backups op fileserver.
+Zet de back-up terug vanaf SMB-share backups op fileserver uit de map
+backup-pc-van-charlie-charlie.
 .RE
 .\"
 .\"
