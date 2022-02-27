@@ -5,6 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-dashoptions='-d --debug -g --gui -h --help -n --dry-run -u --usage -v --version
-    -x --delete'
+dashoptions="-d --debug -g --gui -h --help -n --dry-run '-t DOELMAP'
+    '--target DOELMAP' -u --usage -v --version -x --delete"
 complete -o default -W "$dashoptions" kz-backup
