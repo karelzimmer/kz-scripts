@@ -263,9 +263,9 @@ function check_dependencies {
     if ! command -v snap 1> /dev/null; then
         # Voor Debian nodig.
         sudo apt-get install --yes snapd |& $LOGCMD
-        printf '%s\n' 'Pakket snap is zojuist geïnstalleerd.
-Om verder te gaan is afmelden nodig.
-Daarna weer aanmelden en deze procedure herhalen.'
+        printf '%s\n' 'Pakket snapd is zojuist geïnstalleerd.
+Om verder te gaan is eerst afmelden nodig.
+Daarna weer aanmelden en de stappen, wget & bash, herhalen.'
         read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
         gnome-session-quit --no-prompt
     fi
