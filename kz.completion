@@ -5,6 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-dashoptions='archive backup ckhtml ckname build deploy dliso genpwd getdeb go
-    gset install ivp menu mkusb nas restore setup spsum'
+dashoptions='backup build ckname deploy genpwd getdeb gset install ivp menu nas
+    restore setup update'
 complete -o default -W "$dashoptions" kz
