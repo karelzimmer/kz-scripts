@@ -288,12 +288,16 @@ function check_dependencies {
     if ! snap list shellcheck &> /dev/null; then
         # Voor kz-ivp check Bash shell scripts.
         info 'Installeer shellcheck...'
-        # Voor Debian extra nodig; snap is geïnstalleerd met pakket kz.
-        if [[ $DISTRO = 'debian' ]]; then
-            sudo systemctl enable --now snapd.socket
-        fi
         # Debian's pakket is oud, snap is nieuwer.
         sudo snap install shellcheck
+        # Voor Debian extra nodig; snapd is geïnstalleerd met pakket kz.
+        if [[ $DISTRO = 'debian' ]]; then
+            sudo snap install core
+            # sudo systemctl enable --now snapd.socket
+            printf '%s\n' 'U wordt afgemeld.'
+            printf '%s\n' 'Daarna weer aanmelden en deze procedure herhalen.'
+            read -rp 'Druk op de Enter-toets wanneer gereed [Enter]: '
+        fi
     fi
 }
 
