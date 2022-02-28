@@ -297,6 +297,7 @@ function check_dependencies {
             printf '%s\n' 'U wordt afgemeld.'
             printf '%s\n' 'Daarna weer aanmelden en deze procedure herhalen.'
             read -rp 'Druk op de Enter-toets wanneer gereed [Enter]: '
+            gnome-session-quit --no-prompt
         fi
     fi
 }
