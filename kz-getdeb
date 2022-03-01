@@ -260,15 +260,6 @@ function create_development_environment {
 }
 
 function check_dependencies {
-    if ! command -v snap 1> /dev/null; then
-        # Voor Debian nodig.
-        sudo apt-get install --yes snapd |& $LOGCMD
-        printf '%s\n' 'Pakket snapd is zojuist geïnstalleerd.
-Om verder te gaan is eerst afmelden nodig.
-Daarna weer aanmelden en de stappen, wget kz & bash kz, herhalen.'
-        read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
-        gnome-session-quit --no-prompt
-    fi
     if ! command -v fakeroot 1> /dev/null; then
         # Voor lz-build .deb.
         info 'Installeer fakeroot...'
@@ -294,9 +285,17 @@ Daarna weer aanmelden en de stappen, wget kz & bash kz, herhalen.'
         info 'Installeer pycodestyle...'
         sudo apt-get install --yes pycodestyle
     fi
+    if ! snap list core &> /dev/null; then
+        # Voor Debian nodig.
+        sudo snap install core |& $LOGCMD
+        printf '%s\n' 'Snap runtime environment is zojuist geïnstalleerd.
+Om verder te gaan is eerst afmelden nodig.
+Daarna weer aanmelden en de stappen, wget kz & bash kz, herhalen.'
+        read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
+        gnome-session-quit --no-prompt
+    fi
     if ! command -v shellcheck &> /dev/null; then
         info 'Installeer shellcheck...'
-        sudo snap install core
         # Debian's pakket is oud, snap is nieuwer.
         sudo snap install shellcheck
     fi
