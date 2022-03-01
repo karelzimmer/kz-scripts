@@ -16,7 +16,7 @@ Keywords=kzsetup;setup;
 Keywords[nl]=kzsetup;setup;
 Categories=KZ Scripts;
 Exec=kz-setup --gui
-Icon=kz-setup.svg
+Icon=kz-setup
 Actions=list;info;reset;simulate;cat;
 
 [Desktop Action list]

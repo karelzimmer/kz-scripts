@@ -16,4 +16,4 @@ Keywords=kz-backup;copy;restore;
 Keywords[nl]=kz-backup;reservekopie;herstel;
 Categories=KZ Scripts;
 Exec=kz-backup --gui
-Icon=kz-backup.svg
+Icon=kz-backup
