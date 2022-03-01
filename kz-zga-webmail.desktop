@@ -12,5 +12,5 @@ Comment=Start WebMail Zorggroep Almere met Google Chrome
 Keywords=personeel;informatie;
 Categories=KZ Scripts;
 Exec=google-chrome https://outlook.com/owa/zorggroep-almere.nl
-Icon=kz-zga-webmail.png
+Icon=kz-zga-webmail
 NoDisplay=true
