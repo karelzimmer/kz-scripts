@@ -12,6 +12,5 @@ Comment=Start Monaco Zorggroep Almere met Google Chrome
 Keywords=personeel;informatie;
 Categories=KZ Scripts;
 Exec=google-chrome http://www.portaalzga.nl/
-# Not-supported image file format needs absolute path.
-Icon=/usr/share/pixmaps/kz-zga-monaco.ico
+Icon=kz-zga-monaco.png
 NoDisplay=true
