@@ -12,5 +12,6 @@ Comment=Start eHRM Zorggroep Almere met Google Chrome
 Keywords=personeel;informatie;pz;
 Categories=KZ Scripts;
 Exec=google-chrome https://login.youforce.biz/Aanmelden
-Icon=kz-zga-ehrm.jpeg
+# Not-supported image file format needs absolute path.
+Icon=/usr/share/pixmaps/kz-zga-ehrm.jpeg
 NoDisplay=true

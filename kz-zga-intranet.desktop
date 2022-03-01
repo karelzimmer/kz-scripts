@@ -12,5 +12,6 @@ Comment=Start Intranet Zorggroep Almere met Google Chrome
 Keywords=personeel;informatie;
 Categories=KZ Scripts;
 Exec=google-chrome https://iza.zorggroep-almere.nl/
-Icon=kz-zga-intranet.jpeg
+# Not-supported image file format needs absolute path.
+Icon=/usr/share/pixmaps/kz-zga-intranet.jpeg
 NoDisplay=true
