@@ -265,7 +265,7 @@ function check_dependencies {
         sudo apt-get install --yes snapd |& $LOGCMD
         printf '%s\n' 'Pakket snapd is zojuist geïnstalleerd.
 Om verder te gaan is eerst afmelden nodig.
-Daarna weer aanmelden en de stappen, wget & bash, herhalen.'
+Daarna weer aanmelden en de stappen, wget kz & bash kz, herhalen.'
         read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
         gnome-session-quit --no-prompt
     fi
