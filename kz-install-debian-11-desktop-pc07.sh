@@ -5,6 +5,12 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1 gdm (inlogscherm dual-monitor)
+sudo cp ~/.config/monitors.xml ~gdm/.config/monitors.xml
+sudo chown gdm:gdm ~gdm/.config/monitors.xml
+#3 Start Terminalvenster en voer uit:
+#3    sudo rm ~gdm/.config/monitors.xml
+
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes aspell-nl git
 #3 Start Terminalvenster en voer uit:
