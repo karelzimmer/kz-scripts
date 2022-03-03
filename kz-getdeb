@@ -295,6 +295,7 @@ Om verder te gaan is eerst afmelden nodig.
 Daarna weer aanmelden en de stappen, wget kz & bash kz, herhalen.'
         read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
         gnome-session-quit --no-prompt
+        exit
     fi
     if ! command -v shellcheck &> /dev/null; then
         info 'Installeer shellcheck...'
