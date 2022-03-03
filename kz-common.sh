@@ -406,9 +406,10 @@ Controleer de log in het Terminalvenster met:
 function signal_exit {
     case $PROGRAM_NAME in
         kz-getdeb)
-            # Script kz-getdeb verwijdert niet kz en kz.1 ivm lokale Git-repo.
+            rm --force /tmp/kz-common.sh
+            # Verwijder niet kz en kz.1 i.v.m. lokale Git-repo.
             rm --force kz.{2..99}
-            # Maar wel als in HOME, zoals voorgeschreven.
+            # Maar wel als in HOME, zoals voorgeschreven in Checklist install.
             cd "$HOME" || exit $ERROR
             rm --force kz kz.1
             if [[ $rc -ne $SUCCESS ]]; then
