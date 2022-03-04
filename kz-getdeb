@@ -292,7 +292,10 @@ function check_dependencies {
         clear -x
         printf '%s\n' 'De runtime-omgeving voor snapd is zojuist geïnstalleerd.
 Om verder te gaan is eerst afmelden nodig.
-Daarna weer aanmelden en de stappen, wget kz & bash kz, herhalen.'
+Daarna weer aanmelden en opnieuw uitvoeren:
+wget karelzimmer.nl/kz
+bash kz
+'
         read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
         gnome-session-quit --no-prompt
         exit
