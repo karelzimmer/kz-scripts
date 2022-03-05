@@ -315,8 +315,8 @@ function process_argument_app {
     local       search=''
 
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
+    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk).
+    # Setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
@@ -342,6 +342,76 @@ function process_argument_app {
         info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps." >&2
     else
         FILE_TO_PROCESS[$file_num]=$CMDS_FILE2
+        ((++file_num))
+    fi
+}
+
+function process_argument_app_file {
+    local app_found=false
+    local record=''
+
+    while read -r record; do
+        case $record in
+            '#1 '*)
+                if [[ $record == '#1 '$app* ]]; then
+                    # Gezochte app-naam.
+                    # Regels doorschrijven naar tijdelijk bestand tot
+                    # eerstvolgende app-naam of tot eof.
+                    printf '%s\n' "$record" >> "$CMDS_FILE2"
+                    app_found=true
+                elif $app_found; then
+                    # Volgende app.
+                    break
+                fi
+                ;;
+            *)
+                # Overige regels.
+                if $app_found; then
+                    printf '%s\n' "$record" >> "$CMDS_FILE2"
+                fi
+                ;;
+        esac
+    done < "$file"
+}
+
+function process_argument_file {
+    local file=''
+
+    for file in "${FILE_ARGUMENT[@]}"; do
+        if [[ -e $file ]]; then
+            FILE_TO_PROCESS[$file_num]=$file
+            ((++file_num))
+        else
+            warning "Bestand $file niet gevonden."
+            file_notfound=true
+        fi
+    done
+    if $file_notfound; then
+        info "Typ '$DISPLAY_NAME --files' voor beschikbare \
+installatiebestanden." >&2
+    fi
+}
+
+function process_dfltfiles {
+    local dfltfile_1=''
+    local dfltfile_2=''
+
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
+$HOSTNAME.sh
+
+    # Verplicht aanwezig.
+    if [[ -e $dfltfile_1 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_1
+        ((++file_num))
+    else
+        warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
+$EDITION."
+        exit $WARNING
+    fi
+    # Niet verplicht aanwezig.
+    if [[ -e $dfltfile_2 ]]; then
+        FILE_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     fi
 }
@@ -425,119 +495,6 @@ function process_input {
             )
     else
         process_file
-    fi
-}
-
-function process_option_list {
-    local text0='Opdrachten worden verwerkt'
-    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
-    local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
-    local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
-    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
-        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    fi
-    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
-    local app_list=$docs_dir/Applijst
-
-    mkdir --parents "$docs_dir" |& $LOGCMD
-
-    TITLE='Applijst maken'
-    if $OPTION_GUI; then
-        (
-        printf '%s\n' "#$text1"
-        create_list_manual_installed
-        printf '%s\n' "#$text2"
-        create_list_snaps
-        printf '%s\n' "#$text3"
-        create_list_added_repos
-        ) |&
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$TITLE"    \
-                --text      "$text0"    2> >($LOGCMD)
-    else
-        create_list_manual_installed
-        create_list_snaps
-        create_list_added_repos
-    fi
-
-    info "
-De instellingen zijn vastgelegd in de map kz in Documenten.
-In map kz het bestand Applijst met de eerder geïnstalleerde apps.
-Dit bestand kan worden gebruikt voor het nalopen van de installatie."
-}
-
-function process_argument_app_file {
-    local app_found=false
-    local record=''
-
-    while read -r record; do
-        case $record in
-            '#1 '*)
-                if [[ $record == '#1 '$app* ]]; then
-                    # Gezochte app-naam.
-                    # Regels doorschrijven naar tijdelijk bestand tot
-                    # eerstvolgende app-naam of tot eof.
-                    printf '%s\n' "$record" >> "$CMDS_FILE2"
-                    app_found=true
-                elif $app_found; then
-                    # Volgende app-naam.
-                    break
-                fi
-                ;;
-            *)
-                # Overige regels.
-                if $app_found; then
-                    printf '%s\n' "$record" >> "$CMDS_FILE2"
-                fi
-                ;;
-        esac
-    done < "$file"
-}
-
-function process_argument_file {
-    local file=''
-
-    for file in "${FILE_ARGUMENT[@]}"; do
-        if [[ -e $file ]]; then
-            FILE_TO_PROCESS[$file_num]=$file
-            ((++file_num))
-        else
-            warning "Bestand $file niet gevonden."
-            file_notfound=true
-        fi
-    done
-    if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --files' voor beschikbare \
-installatiebestanden." >&2
-    fi
-}
-
-function process_dfltfiles {
-    local dfltfile_1=''
-    local dfltfile_2=''
-
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
-$HOSTNAME.sh
-
-    # Verplicht aanwezig.
-    if [[ -e $dfltfile_1 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_1
-        ((++file_num))
-    else
-        warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
-$EDITION."
-        exit $WARNING
-    fi
-    # Niet verplicht aanwezig.
-    if [[ -e $dfltfile_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_2
-        ((++file_num))
     fi
 }
 
@@ -638,6 +595,49 @@ function process_option_cat {
         less_options "$TITLE"
         less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
+}
+
+function process_option_list {
+    local text0='Opdrachten worden verwerkt'
+    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
+    local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
+    local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
+    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
+        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
+    fi
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
+    local app_list=$docs_dir/Applijst
+
+    mkdir --parents "$docs_dir" |& $LOGCMD
+
+    TITLE='Applijst maken'
+    if $OPTION_GUI; then
+        (
+        printf '%s\n' "#$text1"
+        create_list_manual_installed
+        printf '%s\n' "#$text2"
+        create_list_snaps
+        printf '%s\n' "#$text3"
+        create_list_added_repos
+        ) |&
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$TITLE"    \
+                --text      "$text0"    2> >($LOGCMD)
+    else
+        create_list_manual_installed
+        create_list_snaps
+        create_list_added_repos
+    fi
+
+    info "
+De instellingen zijn vastgelegd in de map kz in Documenten.
+In map kz het bestand Applijst met de eerder geïnstalleerde apps.
+Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 function process_file {

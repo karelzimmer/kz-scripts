@@ -388,22 +388,22 @@ function process_argument_app {
     local       file=''
     local -a    file_to_process=()
 
-    # Niet verplicht aanwezig.
+    # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         file_to_process[0]=$dfltfile_1
-    fi
-    # Verplicht aanwezig.
-    if [[ -e $dfltfile_2 ]]; then
-        file_to_process[1]=$dfltfile_2
     else
         info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
 $EDITION."
         exit $WARNING
     fi
+    # Niet verplicht aanwezig.
+    if [[ -e $dfltfile_2 ]]; then
+        file_to_process[1]=$dfltfile_2
+    fi
 
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
+    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk).
+    # Setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     for app in "${APP_ARGUMENT[@]}"; do
         if ! grep   --files-with-matches    \
@@ -443,8 +443,9 @@ function process_argument_app_file {
                     app_found=true
                     printf '%b\n' "$record" >> "$CMDS_FILE2"
                 elif $app_found; then
-                    # Volgende app-naam.
-                    break
+                    # Volgende app.
+                    app_found=false
+                    continue
                 fi
                 ;;
             *)
