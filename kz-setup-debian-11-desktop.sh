@@ -37,7 +37,7 @@
 #3 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
 
 #1 bitwarden (Wachtwoordkluis)
-kz-gset --addfavaft=bitwarden_bitwarden.desktop
+kz-gset --addfavaft=bitwarden_bitwarden
 #2 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #2 1. Start Bitwarden.
 #2 2. Maak een account aan met een sterk(!) Hoofdwachtwoord.
@@ -87,7 +87,7 @@ kz-gset --addfavaft=bitwarden_bitwarden.desktop
 #3 3. Klik vervolgens op Meer hulpprogramma's > Extensies.
 #3 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' zet schuifje op uit of klik op Verwijderen.
 #3 5. Start Terminalvenster en voer uit:
-#3       kz-gset --delfav=bitwarden_bitwarden.desktop
+#3       kz-gset --delfav=bitwarden_bitwarden
 #3
 #3 Voor Firefox:
 #3 ~~~~~~~~~~~~~
@@ -96,20 +96,20 @@ kz-gset --addfavaft=bitwarden_bitwarden.desktop
 #3 3. Klik links op Extensies.
 #3 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' klik op Uitschakelen of Verwijderen.
 #3 5. Start Terminalvenster en voer uit:
-#3       kz-gset --delfav=bitwarden_bitwarden.desktop
+#3       kz-gset --delfav=bitwarden_bitwarden
 
 #1 citrix (Telewerken)
 ## Citrix Receiver, ICA Client
-xdg-mime default wfica.desktop application/x-ica
+xdg-mime default wfica application/x-ica
 
 #1 gnome (Bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
-gsettings set org.gnome.desktop.calendar show-weekdate true
-gsettings set org.gnome.desktop.interface clock-show-date true
-gsettings set org.gnome.desktop.interface show-battery-percentage true
-gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
-gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.calendar show-weekdate true
+gsettings set org.gnome.interface clock-show-date true
+gsettings set org.gnome.interface show-battery-percentage true
+gsettings set org.gnome.peripherals.touchpad tap-to-click true
+gsettings set org.gnome.screensaver lock-enabled false
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
@@ -125,12 +125,12 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 kz-gset --addappfolder --folder='KZ Scripts'
 #3 Start Terminalvenster en voer uit:
 #3    gnome-extensions disable dash-to-dock@micxgx.gmail.com
-#3    gsettings reset org.gnome.desktop.app-folders folder-children
-#3    gsettings reset org.gnome.desktop.calendar show-weekdate
-#3    gsettings reset org.gnome.desktop.interface clock-show-date
-#3    gsettings reset org.gnome.desktop.interface show-battery-percentage
-#3    gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
-#3    gsettings reset org.gnome.desktop.screensaver lock-enabled
+#3    gsettings reset org.gnome.app-folders folder-children
+#3    gsettings reset org.gnome.calendar show-weekdate
+#3    gsettings reset org.gnome.interface clock-show-date
+#3    gsettings reset org.gnome.interface show-battery-percentage
+#3    gsettings reset org.gnome.peripherals.touchpad tap-to-click
+#3    gsettings reset org.gnome.screensaver lock-enabled
 #3    gsettings reset org.gnome.nautilus.icon-view default-zoom-level
 #3    gsettings reset org.gnome.nautilus.preferences click-policy
 #3    gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
@@ -146,7 +146,7 @@ kz-gset --addappfolder --folder='KZ Scripts'
 #3    kz-gset --removeappfolder --folder='KZ Scripts'
 
 #1 google-chrome (Webbrowser)
-kz-gset --addfavbef=google-chrome.desktop
+kz-gset --addfavbef=google-chrome
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
 #2 1. Start Google Chrome.
@@ -165,17 +165,17 @@ kz-gset --addfavbef=google-chrome.desktop
 #3 2. Ga naar chrome://extensions/
 #3 3. Bij Gnome-shell-integratie zet schuifje op uit of klik op Verwijderen.
 #3 4. Start Terminalvenster en voer uit:
-#3       kz-gset --delfav=google-chrome.desktop
+#3       kz-gset --delfav=google-chrome
 
 #1 skype (Beeldbellen)
-kz-gset --addfavaft=skype_skypeforlinux.desktop
+kz-gset --addfavaft=skype_skypeforlinux
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --delfav=skype_skypeforlinux.desktop
+#3    kz-gset --delfav=skype_skypeforlinux
 
 #1 spotify (Muziekspeler)
-kz-gset --addfavaft=spotify_spotify.desktop
+kz-gset --addfavaft=spotify_spotify
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --delfav=spotify_spotify.desktop
+#3    kz-gset --delfav=spotify_spotify
 
 #1 thunderbird (E-mail)
 :
@@ -193,6 +193,6 @@ kz-gset --addfavaft=spotify_spotify.desktop
 #3    Verwijderen.
 
 #1 zoom (Telewerken)
-kz-gset --addfavaft=Zoom.desktop
+kz-gset --addfavaft=Zoom
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --delfav=Zoom.desktop
+#3    kz-gset --delfav=Zoom
