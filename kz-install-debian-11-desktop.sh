@@ -61,10 +61,10 @@ sudo apt-get install --yes gnome-shell-extension-dashtodock
 ## GNOME Shell integration - Integratie van GNOME Shell-extensies voor
 ## webbrowsers: https://extensions.gnome.org
 wget --no-verbose --output-document=/tmp/google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb chrome-gnome-shell gnome-contacts gnome-gmail
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb chrome-gnome-shell
 rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell gnome-contacts gnome-gmail
+#3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
