@@ -5,6 +5,11 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1 evolution (e-mail)
+kz-gset --delfav=org.gnome.Evolution.desktop
+#3 Start Terminalvenster en voer uit:
+#3    kz-gset --addfavbef=org.gnome.Evolution.desktop
+
 #1 firefox (webbrowser)
 kz-gset --delfav=firefox-esr.desktop
 #3 Start Terminalvenster en voer uit:
@@ -38,6 +43,11 @@ printf '%s\n' 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.b
 
 #1 terminal (terminalvenster)
 kz-gset --addfavbef=org.gnome.Terminal.desktop
+## Aliassen aanzetten
+sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
+## search (vooruit zoeken in history met Ctrl-S)
+sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
+printf '%s\n' 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #2 1. Klik op Activiteiten, typ 'snel'.
 #2 2. Klik bij Instellingen op het pictogram Toetsenbord.
 #2 3. Op scherm Toetsenbord scroll naar beneden en druk op +.
@@ -47,11 +57,8 @@ kz-gset --addfavbef=org.gnome.Terminal.desktop
 #2 6. Sluit Toetsenbord.
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=org.gnome.Terminal.desktop
-
-#1 thunderbird (e-mail)
-kz-gset --delfav=thunderbird.desktop
-#3 Start Terminalvenster en voer uit:
-#3    kz-gset --addfavbef=thunderbird.desktop
+#3    sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
+#3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #1 vscode (Visual Studio Code editor)
 kz-gset --addfavbef=code_code.desktop
