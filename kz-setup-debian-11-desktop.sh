@@ -100,16 +100,18 @@ kz-gset --addfavaft=bitwarden_bitwarden
 
 #1 citrix (Telewerken)
 ## Citrix Receiver, ICA Client
-xdg-mime default wfica application/x-ica
+xdg-mime default wfica.desktop application/x-ica
 
 #1 gnome (Bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
-gsettings set org.gnome.calendar show-weekdate true
-gsettings set org.gnome.interface clock-show-date true
-gsettings set org.gnome.interface show-battery-percentage true
-gsettings set org.gnome.peripherals.touchpad tap-to-click true
-gsettings set org.gnome.screensaver lock-enabled false
+
+gsettings set org.gnome.desktop.calendar show-weekdate true
+gsettings set org.gnome.desktop.interface clock-show-date true
+gsettings set org.gnome.desktop.interface show-battery-percentage true
+gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
+gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.session idle-delay 600
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true

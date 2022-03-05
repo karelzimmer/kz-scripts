@@ -17,9 +17,9 @@ kz-gset --delfav=firefox-esr
 
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-gsettings set org.gnome.background picture-uri file:///usr/share/backgrounds/kz-gnome.png
-gsettings set org.gnome.screensaver picture-uri file:///usr/share/backgrounds/kz-gnome.png
-gsettings set org.gnome.sound allow-volume-above-100-percent true
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-gnome.png
+gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/kz-gnome.png
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
 #3 Start Terminalvenster en voer uit:
