@@ -104,7 +104,7 @@ xdg-mime default wfica.desktop application/x-ica
 
 #1 gnome (Bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
-gnome-shell-extension-tool --enable-extension=dash-to-dock@micxgx.gmail.com || true
+gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
@@ -117,12 +117,14 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
+gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
+gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 kz-gset --addappfolder --folder='KZ Scripts'
 #3 Start Terminalvenster en voer uit:
-#3    gnome-shell-extension-tool --disable-extension=dash-to-dock@micxgx.gmail.com
+#3    gnome-extensions disable dash-to-dock@micxgx.gmail.com
 #3    gsettings reset org.gnome.desktop.app-folders folder-children
 #3    gsettings reset org.gnome.desktop.calendar show-weekdate
 #3    gsettings reset org.gnome.desktop.interface clock-show-date
@@ -136,7 +138,9 @@ kz-gset --addappfolder --folder='KZ Scripts'
 #3    gsettings reset org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 #3    gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #3    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
+#3    gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 #3    gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
+#3    gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 #3    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
 #3    kz-gset --removeappfolder --folder='KZ Scripts'

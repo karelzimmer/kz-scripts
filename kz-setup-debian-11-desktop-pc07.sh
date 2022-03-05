@@ -17,16 +17,12 @@ gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgr
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
-gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
-gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #3 Start Terminalvenster en voer uit:
 #3    gsettings reset org.gnome.desktop.background picture-uri
 #3    gsettings reset org.gnome.desktop.screensaver picture-uri
 #3    gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
-#3    gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
-#3    gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 #3    gsettings reset org.gnome.nautilus.preferences show-create-link
-#3    gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
+#3    gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
 #1 kvm (virtualisatie)
 ## Beeldscherm 2048 x 1152 (16:9).
