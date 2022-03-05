@@ -364,6 +364,10 @@ function process_argument_app_file {
                     break
                 fi
                 ;;
+            '')
+                # Lege regel.
+                continue
+                ;;
             *)
                 # Overige regels.
                 if $app_found; then

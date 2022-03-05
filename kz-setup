@@ -427,6 +427,7 @@ $EDITION."
 
 function process_argument_app_file {
     local app_found=false
+    local first_app=true
     local record=''
     local temp_file=''
 
@@ -441,12 +442,21 @@ function process_argument_app_file {
                     # Regels doorschrijven naar tijdelijk bestand tot
                     # eerstvolgende app-naam of tot eof.
                     app_found=true
+                    if $first_app; then
+                        first_app=false
+                    else
+                        printf '\n' >> "$CMDS_FILE2"
+                    fi
                     printf '%b\n' "$record" >> "$CMDS_FILE2"
                 elif $app_found; then
                     # Volgende app.
                     app_found=false
                     continue
                 fi
+                ;;
+            '')
+                # Lege regel.
+                continue
                 ;;
             *)
                 # Overige regels.
