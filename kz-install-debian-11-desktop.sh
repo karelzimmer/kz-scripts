@@ -50,7 +50,7 @@ sudo apt-get install --yes cups
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove cups
 
-#1 dashtodock (dash to Dock starter)
+#1 dashtodock (favorietenbalk)
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove gnome-shell-extension-dashtodock
