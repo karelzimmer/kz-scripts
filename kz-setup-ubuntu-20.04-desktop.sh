@@ -192,7 +192,7 @@ kz-gset --addfavaft=teams
 #3 4. Bij 'Provider voor Google Agenda' zet schuifje op uit of klik ... en kies
 #3    Verwijderen.
 
-#1 zoom (telewerken)
+#1 zoom (samenwerken)
 kz-gset --addfavaft=Zoom
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=Zoom

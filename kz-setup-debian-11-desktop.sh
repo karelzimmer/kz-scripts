@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 adguard (Adblocker)
+#1 adguard (adblocker)
 :
 #2 Voor Chrome:
 #2 ~~~~~~~~~~~~
@@ -36,7 +36,7 @@
 #3 3. Klik links op Extensies.
 #3 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
 
-#1 bitwarden (Wachtwoordkluis)
+#1 bitwarden (wachtwoordkluis)
 kz-gset --addfavaft=bitwarden_bitwarden
 #2 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #2 1. Start Bitwarden.
@@ -98,11 +98,11 @@ kz-gset --addfavaft=bitwarden_bitwarden
 #3 5. Start Terminalvenster en voer uit:
 #3       kz-gset --delfav=bitwarden_bitwarden
 
-#1 citrix (Telewerken)
+#1 citrix (telewerken)
 ## Citrix Receiver, ICA Client
 xdg-mime default wfica.desktop application/x-ica
 
-#1 gnome (Bureaubladomgeving)
+#1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 
@@ -147,7 +147,7 @@ kz-gset --addappfolder --folder='KZ Scripts'
 #3    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
 #3    kz-gset --removeappfolder --folder='KZ Scripts'
 
-#1 google-chrome (Webbrowser)
+#1 chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
 ## Integratie van GNOME Shell-extensies voor webbrowsers;
 ## https://extensions.gnome.org
@@ -169,17 +169,22 @@ kz-gset --addfavbef=google-chrome
 #3 4. Start Terminalvenster en voer uit:
 #3       kz-gset --delfav=google-chrome
 
-#1 skype (Beeldbellen)
+#1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=skype_skypeforlinux
 
-#1 spotify (Muziekspeler)
+#1 spotify (muziekspeler)
 kz-gset --addfavaft=spotify_spotify
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=spotify_spotify
 
-#1 thunderbird (E-mail)
+#1 teams (samenwerken)
+kz-gset --addfavaft=teams
+#3 Start Terminalvenster en voer uit:
+#3    kz-gset --delfav=teams
+
+#1 thunderbird (e-mail)
 :
 #2 Voeg de extenstie voor Google Agenda toe via:
 #2 1. Start Thunderbird.
@@ -194,7 +199,7 @@ kz-gset --addfavaft=spotify_spotify
 #3 4. Bij 'Provider voor Google Agenda' zet schuifje op uit of klik ... en kies
 #3    Verwijderen.
 
-#1 zoom (Telewerken)
+#1 zoom (samenwerken)
 kz-gset --addfavaft=Zoom
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=Zoom

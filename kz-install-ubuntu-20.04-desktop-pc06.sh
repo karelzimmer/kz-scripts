@@ -88,7 +88,7 @@ sudo apt-get install --yes tree
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes tree
 
-#1 vscode (Visual Studio Code editor)
+#1 vscode (editor)
 sudo snap install --classic code
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove code

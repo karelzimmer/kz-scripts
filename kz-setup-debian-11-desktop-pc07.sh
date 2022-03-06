@@ -60,7 +60,7 @@ printf '%s\n' 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.
 #3    sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 #3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-#1 vscode (Visual Studio Code editor)
+#1 vscode (editor)
 kz-gset --addfavbef=code_code
 #2 1. Start Visual Studio Code.
 #2 2. Ga naar File > Preferences > Settings (Ctrl+,).

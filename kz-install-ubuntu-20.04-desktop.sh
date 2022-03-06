@@ -19,17 +19,6 @@ sudo snap install bitwarden
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove bitwarden
 
-#1 citrix (telewerken)
-## Voegt gebruiker citrixlog toe!
-wget --no-verbose --output-document=/tmp/icaclient-LATEST https://karelzimmer.nl/downloads/icaclient/LATEST
-wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
-sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
-sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
-rm /tmp/icaclient-LATEST /tmp/icaclient.deb
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes icaclient
-
 #1 chrome (webbrowser)
 ## Maakt zelf /etc/apt/sources.list.d/google-chrome.list aan, tenzij eerder
 ## zelf aangemaakt, dan /etc/default/google-chrome:repo_add_once="false".
@@ -40,6 +29,17 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/google-chrome.deb
 rm /tmp/google-chrome.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes google-chrome-stable chrome-gnome-shell
+
+#1 citrix (telewerken)
+## Voegt gebruiker citrixlog toe!
+wget --no-verbose --output-document=/tmp/icaclient-LATEST https://karelzimmer.nl/downloads/icaclient/LATEST
+wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
+sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
+sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
+rm /tmp/icaclient-LATEST /tmp/icaclient.deb
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes icaclient
 
 #1 language (taalondersteuning)
 check-language-support | xargs sudo apt-get install --yes

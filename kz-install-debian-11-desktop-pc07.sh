@@ -55,7 +55,7 @@ sudo apt-get install --yes signal-desktop
 #3    sudo rm /etc/apt/sources.list.d/signal-xenial.list
 #3    sudo apt-get update
 
-#1 vscode (Visual Studio Code editor)
+#1 vscode (editor)
 sudo snap install --classic code
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove code

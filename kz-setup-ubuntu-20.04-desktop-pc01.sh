@@ -29,7 +29,7 @@ kz-gset --delfav=thunderbird
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --addfavbef=thunderbird
 
-#1 vscode (Visual Studio Code editor)
+#1 vscode (editor)
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
 xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
 xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand

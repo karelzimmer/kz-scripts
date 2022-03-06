@@ -28,7 +28,7 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #3    sudo apt remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 #3    sudo rm --force /usr/bin/pip
 
-#1 vscode (Visual Studio Code editor)
+#1 vscode (editor)
 sudo snap install --classic code
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove code
