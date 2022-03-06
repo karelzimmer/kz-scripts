@@ -57,8 +57,8 @@ VERSION=$(lsb_release --release --short)
 readonly VERSION
 CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly CMDS_FILE
-CMDS_FILE2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-readonly CMDS_FILE2
+APPS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.apps")
+readonly APPS_FILE
 TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 readonly TEXT_FILE
 TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
@@ -76,7 +76,7 @@ declare     EDITION=$EDITION_DEFAULT
 declare     EDITION_ARGUMENT=''
 declare     EXECUTE_COMMANDS=true
 declare -a  FILE_ARGUMENT=()
-declare -a  FILE_TO_PROCESS=()
+declare -a  FILES_TO_PROCESS=()
 declare     INFO_FOUND=false
 declare     LESS_OPTIONS=''
 declare -i  MAXRC=0
@@ -341,7 +341,7 @@ function process_argument_app {
     if $file_notfound; then
         info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps." >&2
     else
-        FILE_TO_PROCESS[$file_num]=$CMDS_FILE2
+        FILES_TO_PROCESS[$file_num]=$APPS_FILE
         ((++file_num))
     fi
 }
@@ -357,21 +357,17 @@ function process_argument_app_file {
                     # Gezochte app-naam.
                     # Regels doorschrijven naar tijdelijk bestand tot
                     # eerstvolgende app-naam of tot eof.
-                    printf '%s\n' "$record" >> "$CMDS_FILE2"
+                    printf '%s\n' "$record" >> "$APPS_FILE"
                     app_found=true
                 elif $app_found; then
                     # Volgende app.
                     break
                 fi
                 ;;
-            '')
-                # Lege regel.
-                continue
-                ;;
             *)
                 # Overige regels.
                 if $app_found; then
-                    printf '%s\n' "$record" >> "$CMDS_FILE2"
+                    printf '%s\n' "$record" >> "$APPS_FILE"
                 fi
                 ;;
         esac
@@ -383,7 +379,7 @@ function process_argument_file {
 
     for file in "${FILE_ARGUMENT[@]}"; do
         if [[ -e $file ]]; then
-            FILE_TO_PROCESS[$file_num]=$file
+            FILES_TO_PROCESS[$file_num]=$file
             ((++file_num))
         else
             warning "Bestand $file niet gevonden."
@@ -406,7 +402,7 @@ $HOSTNAME.sh
 
     # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_1
+        FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
         warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
@@ -415,7 +411,7 @@ $EDITION."
     fi
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
-        FILE_TO_PROCESS[$file_num]=$dfltfile_2
+        FILES_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
     fi
 }
@@ -471,7 +467,7 @@ function process_input {
     fi
 
     # We gaan opdrachten uitvoeren of simuleren.
-    for file in "${FILE_TO_PROCESS[@]}"; do
+    for file in "${FILES_TO_PROCESS[@]}"; do
         cat "$file" >> "$CMDS_FILE"
     done
 
@@ -546,7 +542,7 @@ function process_option_files {
 
 NUMMER BESTAND
 $(
-    if !    find    "${FILE_TO_PROCESS[@]}" \
+    if !    find    "${FILES_TO_PROCESS[@]}" \
                     2> /dev/null            |
             nl      --number-width=6        \
                     --number-format=rn      \
@@ -571,7 +567,7 @@ Om BESTANDen te gebruiken voer uit:
 function process_option_cat {
     local first_file=true
 
-    for file in "${FILE_TO_PROCESS[@]}"; do
+    for file in "${FILES_TO_PROCESS[@]}"; do
         {
             if $first_file; then
                 first_file=false

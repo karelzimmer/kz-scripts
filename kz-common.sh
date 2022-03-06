@@ -423,7 +423,7 @@ dan een Terminalvenster, en voer uit:
             ;;
         kz-install)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            rm "$CMDS_FILE" "$CMDS_FILE2" "$TEXT_FILE" "$TEMP_LIST"
+            rm "$CMDS_FILE" "$APPS_FILE" "$TEXT_FILE" "$TEMP_LIST"
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 dan een Terminalvenster, en voer uit:
@@ -435,7 +435,7 @@ dan een Terminalvenster, en voer uit:
             ;;
         kz-setup)
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
-            rm "$CMDS_FILE" "$CMDS_FILE2" "$TEXT_FILE"
+            rm "$CMDS_FILE" "$APPS_FILE" "$TEXT_FILE"
             ;;
         *)
             return $SUCCESS
