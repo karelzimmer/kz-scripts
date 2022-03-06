@@ -207,17 +207,6 @@ function check_input {
     fi
 }
 
-function less_options {
-    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
-    # van:
-    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
-    #    ("FRSXMK")
-    # 2. man, zie 'man man', zoek LESS
-    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
-.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
-}
-
 function process_input {
     local -i    app_seq_num=0
     local -i    app_tot_num=0
@@ -229,21 +218,21 @@ function process_input {
     local       skip_line=false
 
     dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
-$HOSTNAME.sh
-    if $OPTION_LIST; then
-        check_user
-        process_option_list
-        exit $SUCCESS
-    fi
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION
+    dfltfile_2+=-$HOSTNAME.sh
+
+    # Verwerk argumenten.
     if $ARGUMENT_APP; then
         process_argument_app
     fi
     if $ARGUMENT_FILE; then
         process_argument_file
     fi
-
-    # Als argument APP of FILE is opgegeven, geen standaardbestanden verwerken.
+    # Ergens hiervoor ging het niet helemaal goed.
+    if $file_notfound; then
+        exit $SUCCESS
+    fi
+    # Als argument APP of FILE is opgegeven geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
         process_dfltfiles
     fi
@@ -252,34 +241,27 @@ $HOSTNAME.sh
     if $OPTION_APPS; then
         process_option_apps
         exit $SUCCESS
+    elif $OPTION_CAT; then
+        process_option_cat
+        exit $SUCCESS
     elif $OPTION_FILES; then
         process_option_files
         exit $SUCCESS
-    fi
-
-    # Ergens hiervoor ging het niet helemaal goed.
-    if $file_notfound; then
+    elif $OPTION_LIST; then
+        check_user
+        process_option_list
         exit $SUCCESS
     fi
 
-    # Optie cat is afhankelijk van argumenten APP en FILE.
-    if $OPTION_CAT; then
-        process_option_cat
-        exit $SUCCESS
-    fi
-
-    # We gaan opdrachten uitvoeren, mogen we dat wel?
+    # Opdrachten uitvoeren of simuleren.
     if $EXECUTE_COMMANDS; then
         check_user
     fi
 
-    # We gaan opdrachten uitvoeren of simuleren.
     for file in "${FILES_TO_PROCESS[@]}"; do
         cat "$file" >> "$CMDS_FILE"
     done
 
-    # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
-    # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
     app_tot_num=$(
         grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
         )
@@ -287,9 +269,9 @@ $HOSTNAME.sh
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
         TITLE='Apps instellen'
         TEXT=''
-        # Met "|& zenity --progress" worden globale variabelen uit
-        # aangeroepen functies niet doorgegeven, vandaar de
-        # 'process substitution' met "> >(zenity...)".
+        # Met "|& zenity --progress" worden globale variabelen uit aangeroepen
+        # functies niet doorgegeven, vandaar de 'process substitution' met
+        # "> >(zenity...)".
         process_file > >(
             zenity  --progress              \
                     --pulsate               \
@@ -303,6 +285,19 @@ $HOSTNAME.sh
     else
         process_file
     fi
+}
+
+#FIXME:
+function less_options {
+    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
+    # van:
+    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
+    #    ("FRSXMK")
+    # 2. man, zie 'man man', zoek LESS
+    LESS_OPTIONS='--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr '
+    LESS_OPTIONS+="--RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van "
+    LESS_OPTIONS+='%L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h '
+    LESS_OPTIONS+='voor hulp of q voor stoppen)'
 }
 
 function process_option_list {

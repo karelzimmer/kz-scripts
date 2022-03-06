@@ -17,7 +17,6 @@ readonly RELEASE_YEAR=2009
 # Global constants                                                            #
 ###############################################################################
 
-readonly RUN_AS_SUPERUSER=true
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fgilrs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,gui,info,\
 list,remove,simulate"
@@ -90,6 +89,7 @@ declare     OPTION_LIST=false
 declare     OPTION_REMOVE=false
 declare     OPTION_SIMULATE=false
 declare     REMOVE_FOUND=false
+declare     RUN_AS_SUPERUSER=true
 declare     STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
@@ -210,6 +210,131 @@ function check_input {
     fi
 }
 
+function process_input {
+    local -i    app_seq_num=0
+    local -i    app_tot_num=0
+    local       dfltfile_1=''
+    local       dfltfile_2=''
+    local       file_notfound=false
+    local -i    file_num=0
+    local       file=''
+    local       skip_line=false
+
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION
+    dfltfile_2+=-$HOSTNAME.sh
+
+    # Verwerk argumenten.
+    if $ARGUMENT_APP; then
+        process_argument_app
+    fi
+    if $ARGUMENT_FILE; then
+        process_argument_file
+    fi
+    # Ergens hiervoor ging het niet helemaal goed.
+    if $file_notfound; then
+        exit $SUCCESS
+    fi
+    # Als argument APP of FILE is opgegeven geen standaardbestanden verwerken.
+    if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
+        process_dfltfiles
+    fi
+
+    # Verwerk opties.
+    if $OPTION_APPS; then
+        process_option_apps
+        exit $SUCCESS
+    elif $OPTION_CAT; then
+        process_option_cat
+        exit $SUCCESS
+    elif $OPTION_FILES; then
+        process_option_files
+        exit $SUCCESS
+    elif $OPTION_LIST; then
+        RUN_AS_SUPERUSER=false
+        check_user
+        process_option_list
+        exit $SUCCESS
+    fi
+
+    # Opdrachten uitvoeren of simuleren.
+    if $EXECUTE_COMMANDS; then
+        check_user
+        check_on_ac_power
+    fi
+
+    for file in "${FILES_TO_PROCESS[@]}"; do
+        cat "$file" >> "$CMDS_FILE"
+    done
+
+    app_tot_num=$(
+        grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
+        )
+
+    if $EXECUTE_COMMANDS && $OPTION_GUI; then
+        TITLE='Apps installeren'
+        TEXT=''
+        # Met "|& zenity --progress" worden globale variabelen uit aangeroepen
+        # functies niet doorgegeven, vandaar de 'process substitution' met
+        # "> >(zenity...)".
+        process_file > >(
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     700         \
+                    --height    50          \
+                    --title     "$TITLE"    \
+                    --text      "$TEXT"     2> >($LOGCMD)
+            )
+    else
+        process_file
+    fi
+}
+
+function process_option_list {
+    local text0='Opdrachten worden verwerkt'
+    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
+    local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
+    local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
+    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
+        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
+    fi
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
+    local app_list=$docs_dir/Applijst
+
+    mkdir --parents "$docs_dir" |& $LOGCMD
+
+    TITLE='Applijst maken'
+    if $OPTION_GUI; then
+        (
+        printf '%s\n' "#$text1"
+        create_list_manual_installed
+        printf '%s\n' "#$text2"
+        create_list_snaps
+        printf '%s\n' "#$text3"
+        create_list_added_repos
+        ) |&
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$TITLE"    \
+                --text      "$text0"    2> >($LOGCMD)
+    else
+        create_list_manual_installed
+        create_list_snaps
+        create_list_added_repos
+    fi
+
+    info "
+De instellingen zijn vastgelegd in de map kz in Documenten.
+In map kz het bestand Applijst met de eerder geïnstalleerde apps.
+Dit bestand kan worden gebruikt voor het nalopen van de installatie."
+}
+
 function create_list_manual_installed {
     local       footer=''
     local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
@@ -297,15 +422,17 @@ installatie van een pakket of
     cat "$TEMP_LIST" >> "$app_list"
 }
 
+#FIXME:
 function less_options {
     # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
     # van:
     # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
     #    ("FRSXMK")
     # 2. man, zie 'man man', zoek LESS
-    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
-.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
+    LESS_OPTIONS='--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr '
+    LESS_OPTIONS+="--RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van "
+    LESS_OPTIONS+='%L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h '
+    LESS_OPTIONS+='voor hulp of q voor stoppen)'
 }
 
 function process_argument_app {
@@ -393,13 +520,6 @@ installatiebestanden." >&2
 }
 
 function process_dfltfiles {
-    local dfltfile_1=''
-    local dfltfile_2=''
-
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION-\
-$HOSTNAME.sh
-
     # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
@@ -413,88 +533,6 @@ $EDITION."
     if [[ -e $dfltfile_2 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
-    fi
-}
-
-function process_input {
-    local -i    app_seq_num=0
-    local -i    app_tot_num=0
-    local       file_notfound=false
-    local -i    file_num=0
-    local       file=''
-    local       skip_line=false
-
-    if $OPTION_LIST; then
-        process_option_list
-        exit $SUCCESS
-    fi
-    if $ARGUMENT_APP; then
-        process_argument_app
-    fi
-    if $ARGUMENT_FILE; then
-        process_argument_file
-    fi
-
-    # Als argument APP of FILE is opgegeven, geen standaardbestanden verwerken.
-    if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
-        process_dfltfiles
-    fi
-
-    # Verwerk opties.
-    if $OPTION_APPS; then
-        process_option_apps
-        exit $SUCCESS
-    elif $OPTION_FILES; then
-        process_option_files
-        exit $SUCCESS
-    fi
-
-    # Ergens hiervoor ging het niet helemaal goed.
-    if $file_notfound; then
-        exit $SUCCESS
-    fi
-
-    # Optie cat is afhankelijk van argumenten APP en FILE.
-    if $OPTION_CAT; then
-        process_option_cat
-        exit $SUCCESS
-    fi
-
-    # We gaan opdrachten uitvoeren, mogen we dat wel?
-    if $EXECUTE_COMMANDS; then
-        check_user
-        check_on_ac_power
-    fi
-
-    # We gaan opdrachten uitvoeren of simuleren.
-    for file in "${FILES_TO_PROCESS[@]}"; do
-        cat "$file" >> "$CMDS_FILE"
-    done
-
-    # 'if ! grep --regexp='^#2'...; then...' werkt niet; grep geeft 0
-    # terug als niets gevonden, is OK, maar dan ook rc=1, is niet OK.
-    app_tot_num=$(
-        grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
-        )
-
-    if $EXECUTE_COMMANDS && $OPTION_GUI; then
-        TITLE='Apps installeren'
-        TEXT=''
-        # Met "|& zenity --progress" worden globale variabelen uit
-        # aangeroepen functies niet doorgegeven, vandaar de
-        # 'process substitution' met "> >(zenity...)".
-        process_file > >(
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     700         \
-                    --height    50          \
-                    --title     "$TITLE"    \
-                    --text      "$TEXT"     2> >($LOGCMD)
-            )
-    else
-        process_file
     fi
 }
 
@@ -595,49 +633,6 @@ function process_option_cat {
         less_options "$TITLE"
         less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
-}
-
-function process_option_list {
-    local text0='Opdrachten worden verwerkt'
-    local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
-    local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
-    local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
-    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
-        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    fi
-    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
-    local app_list=$docs_dir/Applijst
-
-    mkdir --parents "$docs_dir" |& $LOGCMD
-
-    TITLE='Applijst maken'
-    if $OPTION_GUI; then
-        (
-        printf '%s\n' "#$text1"
-        create_list_manual_installed
-        printf '%s\n' "#$text2"
-        create_list_snaps
-        printf '%s\n' "#$text3"
-        create_list_added_repos
-        ) |&
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$TITLE"    \
-                --text      "$text0"    2> >($LOGCMD)
-    else
-        create_list_manual_installed
-        create_list_snaps
-        create_list_added_repos
-    fi
-
-    info "
-De instellingen zijn vastgelegd in de map kz in Documenten.
-In map kz het bestand Applijst met de eerder geïnstalleerde apps.
-Dit bestand kan worden gebruikt voor het nalopen van de installatie."
 }
 
 function process_file {
