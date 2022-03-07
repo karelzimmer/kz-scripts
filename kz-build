@@ -200,7 +200,8 @@ function build_uploads {
         fi
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
-        if ! diff "$file" "${UPLOADS_TARGETS[SCRIPTS]}/$file" &> /dev/null; then
+        if ! diff "$file" "${UPLOADS_TARGETS[SCRIPTS]}/$file" &> /dev/null
+            then
             cp  --preserve                      \
                 --verbose                       \
                 "$file"                         \
