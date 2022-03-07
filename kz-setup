@@ -56,7 +56,7 @@ VERSION=$(lsb_release --release --short)
 readonly VERSION
 CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly CMDS_FILE
-APPS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.apps")
+APPS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
 readonly APPS_FILE
 TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
 readonly TEXT_FILE
