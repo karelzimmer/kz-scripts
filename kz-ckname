@@ -39,7 +39,7 @@ readonly    START_DFLT=$HOME
 ###############################################################################
 
 declare     ARGUMENT_MAP=false
-declare -a  MAP_ARGUMENT=()
+declare -a  MAP_ARGUMENTS=()
 
 ###############################################################################
 # Functions                                                                   #
@@ -78,14 +78,14 @@ function check_input {
 
     while [[ "$*" ]]; do
         ARGUMENT_MAP=true
-        MAP_ARGUMENT[$map_arg_num]=$1
+        MAP_ARGUMENTS[$map_arg_num]=$1
         ((++map_arg_num))
         shift
     done
     if ! $ARGUMENT_MAP; then
-        MAP_ARGUMENT[0]=$START_DFLT
+        MAP_ARGUMENTS[0]=$START_DFLT
     fi
-    for dir in "${MAP_ARGUMENT[@]}"; do
+    for dir in "${MAP_ARGUMENTS[@]}"; do
         if ! [[ -d $dir ]]; then
             error "Map '$dir' bestaat niet"
             info "$USAGELINE" >&2
@@ -140,7 +140,7 @@ function check_files_and_folders {
         fi
 
     done < <(
-        find    "${MAP_ARGUMENT[@]}"    \
+        find    "${MAP_ARGUMENTS[@]}"   \
                 -not -name '.*'         \
                 -not -path '*/.*'       \
                 -type f                 \

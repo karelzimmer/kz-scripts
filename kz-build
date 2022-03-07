@@ -43,12 +43,12 @@ readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 TIMESTAMP=$(date +%Y-%m-%dT%H:%M)
 readonly TIMESTAMP
 
-readonly -A SOURCE_UPLOADS=(
+readonly -A UPLOADS_SOURCES=(
                 [APP]=$UPLOADS_APPDIR
                [DOCS]=$DOCS_REPO
             [SCRIPTS]=$SCRIPTS_REPO
             )
-readonly -A TARGET_UPLOADS=(
+readonly -A UPLOADS_TARGETS=(
                [DIST]=$UPLOADS_DISTDIR
                 [DEB]=$UPLOADS_DISTDIR/downloads/kz
                [DOCS]=$UPLOADS_DISTDIR/data/linux/documents
@@ -56,12 +56,12 @@ readonly -A TARGET_UPLOADS=(
             [SCRIPTS]=$UPLOADS_DISTDIR/data/linux/scripts
             )
 
-readonly -A SOURCE_DEB=(
+readonly -A DEB_SOURCES=(
                 [APP]=$DEB_APPDIR
                [DOCS]=$DOCS_REPO
             [SCRIPTS]=$SCRIPTS_REPO
             )
-readonly -A TARGET_DEB=(
+readonly -A DEB_TARGETS=(
                [DIST]=$DEB_DISTDIR
               [BUILD]=$DEB_DISTDIR/usr/local/etc
        [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
@@ -171,18 +171,18 @@ function build_uploads {
     #-----------------------#
     # Vul dist/ met kz-docs #
     #-----------------------#
-    cd "${SOURCE_UPLOADS[DOCS]}"
+    cd "${UPLOADS_SOURCES[DOCS]}"
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
-        if ! diff "$file" "${TARGET_UPLOADS[DOCS]}/$file" &> /dev/null; then
+        if ! diff "$file" "${UPLOADS_TARGETS[DOCS]}/$file" &> /dev/null; then
             cp  --preserve                  \
                 --verbose                   \
                 "$file"                     \
-                "${TARGET_UPLOADS[DOCS]}"   |& $LOGCMD
+                "${UPLOADS_TARGETS[DOCS]}"   |& $LOGCMD
             lowriter    --headless                          \
                         --convert-to pdf                    \
-                        --outdir "${TARGET_UPLOADS[PDFS]}"  \
+                        --outdir "${UPLOADS_TARGETS[PDFS]}" \
                         "$file"                             |& $LOGCMD
         fi
     done
@@ -191,7 +191,7 @@ function build_uploads {
     #--------------------------#
     # Vul dist/ met kz-scripts #
     #--------------------------#
-    cd "${SOURCE_UPLOADS[SCRIPTS]}"
+    cd "${UPLOADS_SOURCES[SCRIPTS]}"
     for file in *; do
         if [[ $file = LICENSE || $file = README.md ]]; then
             continue
@@ -200,15 +200,15 @@ function build_uploads {
         fi
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
-        if ! diff "$file" "${TARGET_UPLOADS[SCRIPTS]}/$file" &> /dev/null; then
+        if ! diff "$file" "${UPLOADS_TARGETS[SCRIPTS]}/$file" &> /dev/null; then
             cp  --preserve                      \
                 --verbose                       \
                 "$file"                         \
-                "${TARGET_UPLOADS[SCRIPTS]}"    |& $LOGCMD
+                "${UPLOADS_TARGETS[SCRIPTS]}"   |& $LOGCMD
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-pagina.
-                man --troff "${SOURCE_UPLOADS[SCRIPTS]}/$file"  |
-                ps2pdf - "${TARGET_UPLOADS[PDFS]}/$file.pdf"    |& $LOGCMD
+                man --troff "${UPLOADS_SOURCES[SCRIPTS]}/$file"  |
+                ps2pdf - "${UPLOADS_TARGETS[PDFS]}/$file.pdf"    |& $LOGCMD
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
                 #
@@ -222,7 +222,7 @@ function build_uploads {
                 cp "$file" "$temptextfile"
                 lowriter    --headless                          \
                             --convert-to pdf                    \
-                            --outdir "${TARGET_UPLOADS[PDFS]}"  \
+                            --outdir "${UPLOADS_TARGETS[PDFS]}" \
                             "$temptextfile"                     |& $LOGCMD
                 rm "$temptextfile"
             fi
@@ -247,15 +247,15 @@ function build_deb {
             --exclude='README.md'   \
             --exclude='.git*'       \
             --delete-excluded       \
-            "${SOURCE_DEB[APP]}"/   \
-            "${TARGET_DEB[DIST]}"   |& $LOGCMD
+            "${DEB_SOURCES[APP]}"/  \
+            "${DEB_TARGETS[DIST]}"  |& $LOGCMD
 
     # Zorg dat de rechten goed staan voor de rsync.
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/*
     chmod 'a-x' -- "$SCRIPTS_REPO"/*.* "$SCRIPTS_REPO"/LICENSE
 
     # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
-    for dir in "${TARGET_DEB[@]}"; do
+    for dir in "${DEB_TARGETS[@]}"; do
         mkdir --parents "$dir"
     done
 
@@ -268,34 +268,34 @@ function build_deb {
             --exclude='README.md'       \
             --exclude='.git*'           \
             --delete-excluded           \
-            "${SOURCE_DEB[SCRIPTS]}"/   \
-            "${TARGET_DEB[BIN]}"        |& $LOGCMD
+            "${DEB_SOURCES[SCRIPTS]}"/  \
+            "${DEB_TARGETS[BIN]}"       |& $LOGCMD
 
     # Man-pagina's (.1)
     rsync   --archive                   \
             --delete                    \
             --verbose                   \
             --remove-source-files       \
-            "${TARGET_DEB[BIN]}"/*.1    \
-            "${TARGET_DEB[MAN]}"        |& $LOGCMD
-    gzip --best --force "${TARGET_DEB[MAN]}"/*.1 |& $LOGCMD
+            "${DEB_TARGETS[BIN]}"/*.1   \
+            "${DEB_TARGETS[MAN]}"       |& $LOGCMD
+    gzip --best --force "${DEB_TARGETS[MAN]}"/*.1 |& $LOGCMD
 
     # Tab-completion-scripts (.completion)
-    for file in "${TARGET_DEB[BIN]}"/*.completion; do
+    for file in "${DEB_TARGETS[BIN]}"/*.completion; do
         basename=$(basename "$file" .completion)
-        mv "$file" "${TARGET_DEB[TABCOMPL]}/$basename" |& $LOGCMD
+        mv "$file" "${DEB_TARGETS[TABCOMPL]}/$basename" |& $LOGCMD
     done
 
     # Bureaublad-configuratiebestanden (.desktop)
-    for file in "${TARGET_DEB[BIN]}"/*.desktop; do
+    for file in "${DEB_TARGETS[BIN]}"/*.desktop; do
         basename=$(basename "$file")
-        mv "$file" "${TARGET_DEB[APPLICATIONS]}/$basename" |& $LOGCMD
+        mv "$file" "${DEB_TARGETS[APPLICATIONS]}/$basename" |& $LOGCMD
     done
 
     # PolicyKit actiedefinitiebestanden (.policy)
-    for file in "${TARGET_DEB[BIN]}"/*.policy; do
+    for file in "${DEB_TARGETS[BIN]}"/*.policy; do
         basename=$(basename "$file")
-        newfile="${TARGET_DEB[POLICY_1]}/$prefix$basename"
+        newfile="${DEB_TARGETS[POLICY_1]}/$prefix$basename"
         mv "$file" "$newfile" |& $LOGCMD
     done
 
@@ -303,15 +303,15 @@ function build_deb {
 
     cp  --archive                                               \
         --update                                                \
-        "${TARGET_UPLOADS[PDFS]}"/Checklist-installatie*.pdf    \
-        "${TARGET_DEB[DOC]}"                                    |& $LOGCMD
+        "${UPLOADS_TARGETS[PDFS]}"/Checklist-installatie*.pdf   \
+        "${DEB_TARGETS[DOC]}"                                   |& $LOGCMD
 
-    printf '%s\n' "$TIMESTAMP" > "${TARGET_DEB[BUILD]}/$PROGRAM_NAME"
+    printf '%s\n' "$TIMESTAMP" > "${DEB_TARGETS[BUILD]}/$PROGRAM_NAME"
 
     fakeroot    dpkg-deb                            \
                 --build                             \
                 "$DEB_DISTDIR"                      \
-                "${TARGET_UPLOADS[DEB]}/$DEB_NAME"  |& $LOGCMD
+                "${UPLOADS_TARGETS[DEB]}/$DEB_NAME" |& $LOGCMD
 }
 
 function build_background_properties_file {
@@ -322,14 +322,14 @@ function build_background_properties_file {
         printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
         printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
         printf '%s\n' '<wallpapers>'
-    } > "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+    } > "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
 
-    cd "${TARGET_DEB[BACKGROUNDS]}"
+    cd "${DEB_TARGETS[BACKGROUNDS]}"
     for wallpaper in *; do
-        # Verwijder DEB_DISTDIR uit TARGET_DEB[BACKGROUNDS].  Voorbeeld:
+        # Verwijder DEB_DISTDIR uit DEB_TARGETS[BACKGROUNDS].  Voorbeeld:
         # /tmp/kz/usr/share/backgrounds/kz-gnome.png ->
         # /usr/share/backgrounds/kz-gnome.png
-        filename=${TARGET_DEB[BACKGROUNDS]}/$wallpaper
+        filename=${DEB_TARGETS[BACKGROUNDS]}/$wallpaper
         filename=${filename/$DEB_DISTDIR/}
         printf '    %s\n' "<wallpaper>
         <name>${wallpaper%.*}</name>
@@ -339,10 +339,10 @@ function build_background_properties_file {
         <scolor>#000000</scolor>
         <shade_type>solid</shade_type>
     </wallpaper>" \
-            >> "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+            >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
     done
     printf '%s\n' '</wallpapers>' \
-            >> "${TARGET_DEB[BACKGROUND_PROP]}/$wallpapers_config_file"
+            >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
     cd "$HOME"
 }
 

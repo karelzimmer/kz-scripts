@@ -39,7 +39,7 @@ readonly MENU1_HEAD="\
 ${DASHES:0:57}
 =${SPACES:0:20}$MENU1_TITLE${SPACES:0:20}=
 ${DASHES:0:57}"
-readonly -a ACTIONS1=(
+readonly -a MENU1_ACTIONS=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
         'Installatie afronden'
@@ -47,7 +47,7 @@ readonly -a ACTIONS1=(
         'Opdrachtenmenu'
         'Stoppen'
     )
-readonly -a COMMANDS1=(
+readonly -a MENU1_COMMANDS=(
     [1]='Checklist hoofdstuk 1'
         'Checklist hoofdstuk 2'
         'Checklist hoofdstuk 3'
@@ -55,14 +55,14 @@ readonly -a COMMANDS1=(
         'Opdrachten uitvoeren'
         'Menu verlaten'
     )
-readonly MENU1_LINES=${#ACTIONS1[@]}
+readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
 readonly MENU2_HEAD="\
 ${DASHES:0:57}
 =${SPACES:0:20}$MENU2_TITLE${SPACES:0:21}=
 ${DASHES:0:57}"
-readonly -a ACTIONS2=(
+readonly -a MENU2_ACTIONS=(
     [1]='Back-up maken'
         'Apps installeren'
         'Installatie-instructies tonen'
@@ -76,7 +76,7 @@ readonly -a ACTIONS2=(
         'Instellijst maken'
         'Terug'
     )
-readonly -a COMMANDS2=(
+readonly -a MENU2_COMMANDS=(
     [1]='kz backup'
         'kz install'
         'kz install --info'
@@ -90,7 +90,7 @@ readonly -a COMMANDS2=(
         'kz setup --list'
         'Naar vorig menu'
     )
-readonly MENU2_LINES=${#ACTIONS2[@]}
+readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
 ###############################################################################
 # Global variables                                                            #
@@ -173,23 +173,24 @@ function process_menu1_gui {
         TITLE=$MENU1_TITLE
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         REPLY=$(
-            zenity  --list                                      \
-                    --radiolist                                 \
-                    --width         480                         \
-                    --height        230                         \
-                    --title         "$TITLE"                    \
-                    --text          'Selecteer een keuze:'      \
-                    --ok-label      'Verder'                    \
-                    --cancel-label  'Afsluiten'                 \
-                    --column        'Keuze'                     \
-                    --column        'Nr.'                       \
-                    --column        'Actie'                     \
-                    --column        'Toelichting'               \
-                    TRUE  1 "${ACTIONS1[1]}" "${COMMANDS1[1]}"  \
-                    FALSE 2 "${ACTIONS1[2]}" "${COMMANDS1[2]}"  \
-                    FALSE 3 "${ACTIONS1[3]}" "${COMMANDS1[3]}"  \
-                    FALSE 4 "${ACTIONS1[4]}" "${COMMANDS1[4]}"  \
-                    FALSE 5 "${ACTIONS1[5]}" "${COMMANDS1[5]}"  2> >($LOGCMD)
+            zenity  --list                                                  \
+                    --radiolist                                             \
+                    --width         480                                     \
+                    --height        230                                     \
+                    --title         "$TITLE"                                \
+                    --text          'Selecteer een keuze:'                  \
+                    --ok-label      'Verder'                                \
+                    --cancel-label  'Afsluiten'                             \
+                    --column        'Keuze'                                 \
+                    --column        'Nr.'                                   \
+                    --column        'Actie'                                 \
+                    --column        'Toelichting'                           \
+                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_COMMANDS[1]}"    \
+                    FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_COMMANDS[2]}"    \
+                    FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_COMMANDS[3]}"    \
+                    FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_COMMANDS[4]}"    \
+                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_COMMANDS[5]}"    \
+                    2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
             exit $SUCCESS
@@ -207,11 +208,11 @@ function process_menu1_tui {
         clear -x
         info "$MENU1_HEAD
 "
-        for action1 in "${!ACTIONS1[@]}"; do
-            printf  '%2s. %-29.29s - %s\n'  \
-                    "$action1"              \
-                    "${ACTIONS1[$action1]}" \
-                    "${COMMANDS1[$action1]}"
+        for action1 in "${!MENU1_ACTIONS[@]}"; do
+            printf  '%2s. %-29.29s - %s\n'          \
+                    "$action1"                      \
+                    "${MENU1_ACTIONS[$action1]}"    \
+                    "${MENU1_COMMANDS[$action1]}"
         done
         info
 
@@ -273,18 +274,18 @@ function process_menu1_choice1 {
     warning '
 Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 
-    TITLE="${ACTIONS1[1]}"
+    TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
-        [1]="${ACTIONS2[5]}#${COMMANDS2[5]}"
-            "${ACTIONS2[11]}#${COMMANDS2[11]}"
-            "${ACTIONS2[1]}#${COMMANDS2[1]}"
+        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+            "${MENU2_ACTIONS[11]}#${MENU2_COMMANDS[11]}"
+            "${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
         )
 
     process_commands
 }
 
 function process_menu1_choice2 {
-    TITLE="${ACTIONS1[2]}"
+    TITLE="${MENU1_ACTIONS[2]}"
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
 Deze checklist is te vinden:
@@ -306,18 +307,18 @@ Druk op de Enter-toets voor het menu [Enter]: '
 }
 
 function process_menu1_choice3 {
-    TITLE="${ACTIONS1[3]}"
+    TITLE="${MENU1_ACTIONS[3]}"
     if [[   ($HOSTNAME = pc-van-soe  && $USER = soe )   ||
             ($HOSTNAME = pc-van-hugo && $USER = hugo)   ]]; then
         EXEC=(
-            [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
-                "${ACTIONS2[2]}#${COMMANDS2[2]}"
-                "${ACTIONS2[3]}#${COMMANDS2[3]}"
+            [1]="${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
+                "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+                "${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
             )
     else
         EXEC=(
-            [1]="${ACTIONS2[2]}#${COMMANDS2[2]}"
-                "${ACTIONS2[3]}#${COMMANDS2[3]}"
+            [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+                "${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
             )
     fi
     process_commands
@@ -327,11 +328,11 @@ function process_menu1_choice4 {
     warning '
 Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 
-    TITLE="${ACTIONS1[4]}"
+    TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
-        [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
-            "${ACTIONS2[8]}#${COMMANDS2[8]}"
-            "${ACTIONS2[9]}#${COMMANDS2[9]}"
+        [1]="${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
+            "${MENU2_ACTIONS[8]}#${MENU2_COMMANDS[8]}"
+            "${MENU2_ACTIONS[9]}#${MENU2_COMMANDS[9]}"
         )
     process_commands
 }
@@ -350,29 +351,29 @@ function process_menu2_gui {
     while true; do
         TITLE=$MENU2_TITLE
         REPLY=$(
-            zenity  --list                                          \
-                    --radiolist                                     \
-                    --width         480                             \
-                    --height        370                             \
-                    --title         "$TITLE"                        \
-                    --text          'Selecteer een keuze:'          \
-                    --ok-label      'Verder'                        \
-                    --cancel-label  'Terug'                         \
-                    --column        'Keuze'                         \
-                    --column        'Nr.'                           \
-                    --column        'Actie'                         \
-                    --column        'Opdracht'                      \
-                    TRUE   1 "${ACTIONS2[1]}"  "${COMMANDS2[1]}"    \
-                    FALSE  2 "${ACTIONS2[2]}"  "${COMMANDS2[2]}"    \
-                    FALSE  3 "${ACTIONS2[3]}"  "${COMMANDS2[3]}"    \
-                    FALSE  4 "${ACTIONS2[4]}"  "${COMMANDS2[4]}"    \
-                    FALSE  5 "${ACTIONS2[5]}"  "${COMMANDS2[5]}"    \
-                    FALSE  6 "${ACTIONS2[6]}"  "${COMMANDS2[6]}"    \
-                    FALSE  7 "${ACTIONS2[7]}"  "${COMMANDS2[7]}"    \
-                    FALSE  8 "${ACTIONS2[8]}"  "${COMMANDS2[8]}"    \
-                    FALSE  9 "${ACTIONS2[9]}"  "${COMMANDS2[9]}"    \
-                    FALSE 10 "${ACTIONS2[10]}" "${COMMANDS2[10]}"   \
-                    FALSE 11 "${ACTIONS2[11]}" "${COMMANDS2[11]}"   \
+            zenity  --list                                                  \
+                    --radiolist                                             \
+                    --width         480                                     \
+                    --height        370                                     \
+                    --title         "$TITLE"                                \
+                    --text          'Selecteer een keuze:'                  \
+                    --ok-label      'Verder'                                \
+                    --cancel-label  'Terug'                                 \
+                    --column        'Keuze'                                 \
+                    --column        'Nr.'                                   \
+                    --column        'Actie'                                 \
+                    --column        'Opdracht'                              \
+                    TRUE   1 "${MENU2_ACTIONS[1]}"  "${MENU2_COMMANDS[1]}"  \
+                    FALSE  2 "${MENU2_ACTIONS[2]}"  "${MENU2_COMMANDS[2]}"  \
+                    FALSE  3 "${MENU2_ACTIONS[3]}"  "${MENU2_COMMANDS[3]}"  \
+                    FALSE  4 "${MENU2_ACTIONS[4]}"  "${MENU2_COMMANDS[4]}"  \
+                    FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
+                    FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
+                    FALSE  7 "${MENU2_ACTIONS[7]}"  "${MENU2_COMMANDS[7]}"  \
+                    FALSE  8 "${MENU2_ACTIONS[8]}"  "${MENU2_COMMANDS[8]}"  \
+                    FALSE  9 "${MENU2_ACTIONS[9]}"  "${MENU2_COMMANDS[9]}"  \
+                    FALSE 10 "${MENU2_ACTIONS[10]}" "${MENU2_COMMANDS[10]}" \
+                    FALSE 11 "${MENU2_ACTIONS[11]}" "${MENU2_COMMANDS[11]}" \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -392,9 +393,11 @@ function process_menu2_tui {
         clear -x
         info "$MENU2_HEAD
 "
-        for action2 in "${!ACTIONS2[@]}"; do
-            printf '%2s. %-29.29s - %s\n' "$action2" "${ACTIONS2[$action2]}" \
-"${COMMANDS2[$action2]}"
+        for action2 in "${!MENU2_ACTIONS[@]}"; do
+            printf  '%2s. %-29.29s - %s\n'          \
+                    "$action2"                      \
+                    "${MENU2_ACTIONS[$action2]}"    \
+                    "${MENU2_COMMANDS[$action2]}"
         done
         info
 
@@ -435,82 +438,82 @@ function process_menu2_choice {
             TEXT='
 Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
             warning "$TEXT"
-            TITLE="${ACTIONS2[1]}"
+            TITLE="${MENU2_ACTIONS[1]}"
             EXEC=(
-                [1]="${ACTIONS2[1]}#${COMMANDS2[1]}"
+                [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
                 )
             process_commands
             ;;
         2)
-            TITLE="${ACTIONS2[2]}"
+            TITLE="${MENU2_ACTIONS[2]}"
             EXEC=(
-                [1]="${ACTIONS2[2]}#${COMMANDS2[2]}"
+                [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
                 )
             process_commands
             ;;
         3)
-            TITLE="${ACTIONS2[3]}"
+            TITLE="${MENU2_ACTIONS[3]}"
             EXEC=(
-                [1]="${ACTIONS2[3]}#${COMMANDS2[3]}"
+                [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
                 )
             process_commands
             ;;
         4)
-            TITLE="${ACTIONS2[3]}"
+            TITLE="${MENU2_ACTIONS[3]}"
             EXEC=(
-                [1]="${ACTIONS2[4]}#${COMMANDS2[4]}"
+                [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
                 )
             process_commands
             ;;
         5)
-            TITLE="${ACTIONS2[5]}"
+            TITLE="${MENU2_ACTIONS[5]}"
             EXEC=(
-                [1]="${ACTIONS2[5]}#${COMMANDS2[5]}"
+                [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
                 )
             process_commands
             ;;
         6)
-            TITLE="${ACTIONS2[6]}"
+            TITLE="${MENU2_ACTIONS[6]}"
             EXEC=(
-                [1]="${ACTIONS2[6]}#${COMMANDS2[6]}"
+                [1]="${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
                 )
             process_commands
             ;;
         7)
-            TITLE="${ACTIONS2[7]}"
+            TITLE="${MENU2_ACTIONS[7]}"
             EXEC=(
-                [1]="${ACTIONS2[7]}#${COMMANDS2[7]}"
+                [1]="${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
                 )
             process_commands
             ;;
         8)
-            TITLE="${ACTIONS2[8]}"
+            TITLE="${MENU2_ACTIONS[8]}"
             TEXT='
 Zorg dat het medium is aangekoppeld waarop de back-up staat.'
             warning "$TEXT"
             EXEC=(
-                [1]="${ACTIONS2[8]}#${COMMANDS2[8]}"
+                [1]="${MENU2_ACTIONS[8]}#${MENU2_COMMANDS[8]}"
                 )
             process_commands
             ;;
         9)
-            TITLE="${ACTIONS2[9]}"
+            TITLE="${MENU2_ACTIONS[9]}"
             EXEC=(
-                [1]="${ACTIONS2[9]}#${COMMANDS2[9]}"
+                [1]="${MENU2_ACTIONS[9]}#${MENU2_COMMANDS[9]}"
                 )
             process_commands
             ;;
         10)
-            TITLE="${ACTIONS2[10]}"
+            TITLE="${MENU2_ACTIONS[10]}"
             EXEC=(
-                [1]="${ACTIONS2[10]}#${COMMANDS2[10]}"
+                [1]="${MENU2_ACTIONS[10]}#${MENU2_COMMANDS[10]}"
                 )
             process_commands
             ;;
         11)
-            TITLE="${ACTIONS2[11]}"
+            TITLE="${MENU2_ACTIONS[11]}"
             EXEC=(
-                [1]="${ACTIONS2[11]}#${COMMANDS2[11]}"
+                [1]="${MENU2_ACTIONS[11]}#${MENU2_COMMANDS[11]}"
                 )
             process_commands
             ;;

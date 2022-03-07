@@ -290,12 +290,12 @@ function process_input {
 function process_argument_app {
     local       app=''
     local       file=''
-    local -a    file_to_process=()
+    local -a    files=()
     local       temp_file=''
 
     # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
-        file_to_process[0]=$dfltfile_1
+        files[0]=$dfltfile_1
     else
         info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
 $EDITION."
@@ -303,7 +303,7 @@ $EDITION."
     fi
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
-        file_to_process[1]=$dfltfile_2
+        files[1]=$dfltfile_2
     fi
 
     # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
@@ -311,12 +311,12 @@ $EDITION."
     # Setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     temp_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.temp")
-    cat "${file_to_process[@]}" > "$temp_file"
+    cat "${files[@]}" > "$temp_file"
     for app in "${APP_ARGUMENTS[@]}"; do
         if ! grep   --files-with-matches    \
                     --word-regexp           \
                     --regexp="#1 $app"      \
-                    "${file_to_process[@]}" \
+                    "${files[@]}"           \
                     &> /dev/null; then
             warning "App '$app' niet gevonden."
             file_notfound=true
