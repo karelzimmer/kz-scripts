@@ -65,14 +65,14 @@ readonly TEXT_FILE
 # Global variables                                                            #
 ###############################################################################
 
-declare -a  APP_ARGUMENT=()
+declare -a  APP_ARGUMENTS=()
 declare     ARGUMENT_APP=false
 declare     ARGUMENT_FILE=false
 declare     COMMANDS_FOUND=false
 declare     EDITION=$EDITION_DEFAULT
 declare     EDITION_ARGUMENT=''
 declare     EXECUTE_COMMANDS=true
-declare -a  FILE_ARGUMENT=()
+declare -a  FILE_ARGUMENTS=()
 declare -a  FILES_TO_PROCESS=()
 declare     INFO_FOUND=false
 declare     LESS_OPTIONS=''
@@ -188,12 +188,12 @@ function check_input {
     while [[ "$*" ]]; do
         if [[ "$(basename "$1")" == $PROGRAM_NAME-*.sh ]]; then
             ARGUMENT_FILE=true
-            FILE_ARGUMENT[$file_arg_num]=$1
+            FILE_ARGUMENTS[$file_arg_num]=$1
             ((++file_arg_num))
             shift
         else
             ARGUMENT_APP=true
-            APP_ARGUMENT[$app_arg_num]=$1
+            APP_ARGUMENTS[$app_arg_num]=$1
             ((++app_arg_num))
             shift
         fi
@@ -218,8 +218,8 @@ function process_input {
     local       skip_line=false
 
     dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION
-    dfltfile_2+=-$HOSTNAME.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION\
+-$HOSTNAME.sh
 
     # Verwerk argumenten.
     if $ARGUMENT_APP; then
@@ -287,97 +287,6 @@ function process_input {
     fi
 }
 
-#FIXME:
-function less_options {
-    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
-    # van:
-    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
-    #    ("FRSXMK")
-    # 2. man, zie 'man man', zoek LESS
-    LESS_OPTIONS='--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr '
-    LESS_OPTIONS+="--RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van "
-    LESS_OPTIONS+='%L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h '
-    LESS_OPTIONS+='voor hulp of q voor stoppen)'
-}
-
-function process_option_list {
-    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
-        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    fi
-    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
-    local text0='Opdrachten worden verwerkt'
-    local text1='[1/4]  Gebruikersfoto vastleggen'
-    local file1="$docs_dir/Gebruikersfoto"
-    local text2='[2/4]  Bureaubladachtergrond vastleggen'
-    local file2="$docs_dir/Bureaubladachtergrond"
-    local text3='[3/4]  Favorieten vastleggen'
-    local file3="$docs_dir/Favorieten"
-    local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
-    local file4="$docs_dir/Opdrachtgeschiedenis"
-
-    mkdir --parents "$docs_dir"
-
-    TITLE='Instellijst maken'
-    if $OPTION_GUI; then
-        (
-        printf '%s\n' "#$text1"
-        save_user_photo
-        printf '%s\n' "#$text2"
-        save_desktop_background
-        printf '%s\n' "#$text3"
-        save_favorite_apps
-        printf '%s\n' "#$text4"
-        save_command_history
-        ) |&
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$TITLE"    \
-                --text      "$text0"    2> >($LOGCMD)
-    else
-        save_user_photo
-        save_desktop_background
-        save_favorite_apps
-        save_command_history
-    fi
-
-    info "
-De instellingen zijn vastgelegd in de map kz in Documenten.
-In map kz de bestanden met de eerder gebruikte Gebruikersfoto,
-Bureaubladachtergrond, Favorieten, en Opdrachtgeschiedenis.
-Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen."
-}
-
-function save_user_photo {
-    printf '%s\n' "$text1..."
-    if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
-        rm --force "$file1"
-        touch "$file1"
-    fi
-}
-
-function save_desktop_background {
-    printf '%s\n' "$text2..."
-    gsettings get   org.gnome.desktop.background    \
-                    picture-uri                     > "$file2" |& $LOGCMD
-}
-
-function save_favorite_apps {
-    printf '%s\n' "$text3..."
-    gsettings get   org.gnome.shell \
-                    favorite-apps   > "$file3" |& $LOGCMD
-}
-
-function save_command_history {
-    printf '%s\n' "$text4..."
-    HISTFILE=~/.bash_history
-    set -o history
-    history > "$file4" |& $LOGCMD
-}
-
 function process_argument_app {
     local       app=''
     local       file=''
@@ -403,7 +312,7 @@ $EDITION."
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     temp_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.temp")
     cat "${file_to_process[@]}" > "$temp_file"
-    for app in "${APP_ARGUMENT[@]}"; do
+    for app in "${APP_ARGUMENTS[@]}"; do
         if ! grep   --files-with-matches    \
                     --word-regexp           \
                     --regexp="#1 $app"      \
@@ -456,7 +365,7 @@ function process_argument_app_file {
 function process_argument_file {
     local file=''
 
-    for file in "${FILE_ARGUMENT[@]}"; do
+    for file in "${FILE_ARGUMENTS[@]}"; do
         if [[ -e $file ]]; then
             FILES_TO_PROCESS[$file_num]=$file
             ((++file_num))
@@ -521,33 +430,6 @@ Om APPs in te stellen voer uit:
     info "$TEXT"
 }
 
-function process_option_files {
-    TEXT="De volgende instelbestanden zijn beschikbaar:
-
-NUMMER BESTAND
-$(
-    if !    find    "${FILES_TO_PROCESS[@]}" \
-                    2> /dev/null            |
-            nl      --number-width=6        \
-                    --number-format=rn      \
-                    --number-separator=' '  \
-                    --body-numbering=a; then
-        printf '%s\n' "     0 Geen instelbestanden gevonden voor $DISTRO \
-$VERSION $EDITION.
-
-Typ 'man $DISPLAY_NAME' voor meer informatie."
-    else
-        printf '%s\n' "
-Om BESTANDen te bekijken voer uit:
-    ${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
-    ${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
-Om BESTANDen te gebruiken voer uit:
-    ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
-    fi
-)"
-    info "$TEXT"
-}
-
 function process_option_cat {
     local first_file=true
 
@@ -579,6 +461,122 @@ function process_option_cat {
         less_options "$TITLE"
         less "$LESS_OPTIONS" "$CMDS_FILE"
     fi
+}
+
+function less_options {
+    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
+    # van:
+    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
+    #    ("FRSXMK")
+    # 2. man, zie 'man man', zoek LESS
+    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+--RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
+.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
+}
+
+function process_option_files {
+    TEXT="De volgende instelbestanden zijn beschikbaar:
+
+NUMMER BESTAND
+$(
+    if !    find    "${FILES_TO_PROCESS[@]}" \
+                    2> /dev/null            |
+            nl      --number-width=6        \
+                    --number-format=rn      \
+                    --number-separator=' '  \
+                    --body-numbering=a; then
+        printf '%s\n' "     0 Geen instelbestanden gevonden voor $DISTRO \
+$VERSION $EDITION.
+
+Typ 'man $DISPLAY_NAME' voor meer informatie."
+    else
+        printf '%s\n' "
+Om BESTANDen te bekijken voer uit:
+    ${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
+    ${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
+Om BESTANDen te gebruiken voer uit:
+    ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
+    fi
+)"
+    info "$TEXT"
+}
+
+function process_option_list {
+    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
+        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
+    fi
+    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
+    local text0='Opdrachten worden verwerkt'
+    local text1='[1/4]  Gebruikersfoto vastleggen'
+    local file1="$docs_dir/Gebruikersfoto"
+    local text2='[2/4]  Bureaubladachtergrond vastleggen'
+    local file2="$docs_dir/Bureaubladachtergrond"
+    local text3='[3/4]  Favorieten vastleggen'
+    local file3="$docs_dir/Favorieten"
+    local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
+    local file4="$docs_dir/Opdrachtgeschiedenis"
+
+    mkdir --parents "$docs_dir"
+
+    TITLE='Instellijst maken'
+    if $OPTION_GUI; then
+        (
+        printf '%s\n' "#$text1"
+        process_option_list_user_photo
+        printf '%s\n' "#$text2"
+        process_option_list_desktop_background
+        printf '%s\n' "#$text3"
+        process_option_list_favorite_apps
+        printf '%s\n' "#$text4"
+        process_option_list_command_history
+        ) |&
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$TITLE"    \
+                --text      "$text0"    2> >($LOGCMD)
+    else
+        process_option_list_user_photo
+        process_option_list_desktop_background
+        process_option_list_favorite_apps
+        process_option_list_command_history
+    fi
+
+    info '
+De instellingen zijn vastgelegd in de map kz in Documenten.
+In map kz de bestanden met de eerder gebruikte Gebruikersfoto,
+Bureaubladachtergrond, Favorieten, en Opdrachtgeschiedenis.
+Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
+}
+
+function process_option_list_user_photo {
+    printf '%s\n' "$text1..."
+    if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
+        rm --force "$file1"
+        touch "$file1"
+    fi
+}
+
+function process_option_list_desktop_background {
+    printf '%s\n' "$text2..."
+    gsettings get   org.gnome.desktop.background    \
+                    picture-uri                     > "$file2" |& $LOGCMD
+}
+
+function process_option_list_favorite_apps {
+    printf '%s\n' "$text3..."
+    gsettings get   org.gnome.shell \
+                    favorite-apps   > "$file3" |& $LOGCMD
+}
+
+function process_option_list_command_history {
+    printf '%s\n' "$text4..."
+    HISTFILE=~/.bash_history
+    set -o history
+    history > "$file4" |& $LOGCMD
 }
 
 function process_file {
@@ -860,7 +858,7 @@ function term_script {
 Er zijn aanvullende instructies.
 
 Gebruik de opdracht:
-    ${BLUE}$DISPLAY_NAME --info ${APP_ARGUMENT[*]}${NORMAL}"
+    ${BLUE}$DISPLAY_NAME --info ${APP_ARGUMENTS[*]}${NORMAL}"
     fi
 
     if $EXECUTE_COMMANDS; then

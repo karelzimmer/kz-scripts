@@ -84,10 +84,6 @@ function error {
     if $OPTION_GUI; then
         TITLE="Foutmelding $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        # Voorbeeld: Unable to init server: Kon niet verbinden:
-        #            Verbinding is geweigerd
-        #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
-        #            cannot open display:
         zenity  --error                 \
                 --no-markup             \
                 --width     500         \
@@ -122,10 +118,6 @@ function info {
     if $OPTION_GUI; then
         TITLE="Informatie $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        # Voorbeeld: Unable to init server: Kon niet verbinden:
-        #            Verbinding is geweigerd
-        #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
-        #            cannot open display:
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
@@ -447,10 +439,6 @@ function warning {
     if $OPTION_GUI; then
         TITLE="Waarschuwing $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        # Voorbeeld: Unable to init server: Kon niet verbinden:
-        #            Verbinding is geweigerd
-        #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
-        #            cannot open display:
         zenity  --warning               \
                 --no-markup             \
                 --width     500         \

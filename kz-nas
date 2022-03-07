@@ -141,10 +141,6 @@ function request_input {
 $fstab"
         if $OPTION_GUI; then
             # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-            # Voorbeeld: Unable to init server: Kon niet verbinden:
-            #            Verbinding is geweigerd
-            #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
-            #            cannot open display:
             zenity  --question                          \
                     --no-markup                         \
                     --width     400                     \

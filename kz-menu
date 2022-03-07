@@ -172,10 +172,6 @@ function process_menu1_gui {
     while true; do
         TITLE=$MENU1_TITLE
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        # Voorbeeld: Unable to init server: Kon niet verbinden:
-        #            Verbinding is geweigerd
-        #        en: (zenity:47712): Gtk-WARNING **: 10:35:49.339:
-        #            cannot open display:
         REPLY=$(
             zenity  --list                                      \
                     --radiolist                                 \
