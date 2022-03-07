@@ -31,21 +31,20 @@ Apps instellen.
 
 Opties:
   -a, --apps     toon lijst van in te stellen apps
-  -c, --cat      toon inhoud van instelbestanden
+  -c, --cat      toon inhoud van bestanden
   -e, --edition=EDITIE
-                 gebruik opgegeven editie
-  -f, --files    toon lijst van beschikbare instelbestanden
+                 gebruik opgegeven EDITIE
+  -f, --files    toon lijst van beschikbare bestanden
   -g, --gui      start in grafische modus
   -i, --info     toon aanvullende instructies na het instellen van apps
   -l, --list     maak instellijst aan
   -r, --reset    toon instructies voor het resetten van apps
-  -s, --simulate geen actie, simuleer wijzigingen, en toon opdracht die
-                 uitgevoerd zou worden
+  -s, --simulate toon opdrachten die uitgevoerd zou worden
 $OPTIONS_HELP_COMMON
 
 Argumenten:
-  APP            opgegeven apps instellen
-  BESTAND        opgegeven instelbestanden verwerken"
+  APP            opgegeven APPs instellen
+  BESTAND        opgegeven BESTANDen verwerken"
 
 DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
@@ -297,8 +296,7 @@ function process_argument_app {
     if [[ -e $dfltfile_1 ]]; then
         files[0]=$dfltfile_1
     else
-        info "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
-$EDITION."
+        info "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
         exit $WARNING
     fi
     # Niet verplicht aanwezig.
@@ -375,8 +373,7 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --files' voor beschikbare instelbestanden." \
->&2
+        info "Typ '$DISPLAY_NAME --files' voor beschikbare bestanden." >&2
     fi
 }
 
@@ -386,8 +383,7 @@ function process_dfltfiles {
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
-        warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
-$EDITION." >&2
+        warning "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION." >&2
         exit $WARNING
     fi
     # Niet verplicht aanwezig.
@@ -475,7 +471,7 @@ function less_options {
 }
 
 function process_option_files {
-    TEXT="De volgende instelbestanden zijn beschikbaar:
+    TEXT="De volgende bestanden zijn beschikbaar:
 
 NUMMER BESTAND
 $(
@@ -485,8 +481,8 @@ $(
                     --number-format=rn      \
                     --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen instelbestanden gevonden voor $DISTRO \
-$VERSION $EDITION.
+        printf '%s\n' "     0 Geen bestanden gevonden voor $DISTRO $VERSION \
+$EDITION.
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
     else

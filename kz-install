@@ -31,21 +31,20 @@ Apps installeren.
 
 Opties:
   -a, --apps     toon lijst van te installeren apps
-  -c, --cat      toon inhoud van installatiebestanden
+  -c, --cat      toon inhoud van bestanden
   -e, --edition=EDITIE
-                 gebruik opgegeven editie
-  -f, --files    toon lijst van beschikbare installatiebestanden
+                 gebruik opgegeven EDITIE
+  -f, --files    toon lijst van beschikbare bestanden
   -g, --gui      start in grafische modus
   -i, --info     toon aanvullende instructies na het installeren van apps
   -l, --list     maak applijst aan
   -r, --remove   toon instructies voor het verwijderen van apps
-  -s, --simulate geen actie, simuleer installatie, en toon opdracht die
-                 uitgevoerd zou worden
+  -s, --simulate toon opdrachten die uitgevoerd zou worden
 $OPTIONS_HELP_COMMON
 
 Argumenten:
-  APP            opgegeven apps installeren
-  BESTAND        opgegeven installatiebestanden verwerken"
+  APP            opgegeven APPs installeren
+  BESTAND        opgegeven BESTANDen verwerken"
 
 DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
@@ -371,8 +370,7 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --files' voor beschikbare \
-installatiebestanden." >&2
+        info "Typ '$DISPLAY_NAME --files' voor beschikbare bestanden." >&2
     fi
 }
 
@@ -382,8 +380,7 @@ function process_dfltfiles {
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
-        warning "Geen installatiebestanden gevonden voor $DISTRO $VERSION \
-$EDITION."
+        warning "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
         exit $WARNING
     fi
     # Niet verplicht aanwezig.
@@ -477,7 +474,7 @@ function less_options {
 }
 
 function process_option_files {
-    TEXT="De volgende installatiebestanden zijn beschikbaar:
+    TEXT="De volgende bestanden zijn beschikbaar:
 
 NUMMER BESTAND
 $(
@@ -487,8 +484,8 @@ $(
                     --number-format=rn      \
                     --number-separator=' '  \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen installatiebestanden gevonden voor $DISTRO \
-$VERSION $EDITION.
+        printf '%s\n' "     0 Geen bestanden gevonden voor $DISTRO $VERSION \
+$EDITION.
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
     else

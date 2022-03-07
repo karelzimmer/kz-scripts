@@ -34,23 +34,24 @@ Deze bestanden bevatten opdrachten voor het installeren van apps en het
 wijzigen van systeeminstellingen voor de huidige distributie, versie, en
 \fIEDITIE\fR (bijv. Debian 11 desktop of Ubuntu 20.04 desktop).
 .sp
-De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
+De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand
+(/tmp/kz-install-XXXXXXXXXX.cmds).
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
 \fB--editie\fR is dat aan te passen (bijv. \fIEDITIE\fR server).
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare
-installatiebestanden voor de huidige distributie, bijv. Ubuntu.
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare bestanden voor de
+huidige distributie, bijv. Ubuntu.
 .br
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBinstal-\fR' en te eindigen met '\fB.sh\fR'.
 .br
 Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
 .sp
-Voor de indeling van de installatiebestanden zie de sectie
-\fBBESTANDSINDELING\fR hieronder.
+Voor de indeling van de bestanden zie de sectie \fBBESTANDSINDELING\fR
+hieronder.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor
 de huidige distributie en versie, bijv. Debian 11 of Ubuntu 20.04.
@@ -58,9 +59,12 @@ de huidige distributie en versie, bijv. Debian 11 of Ubuntu 20.04.
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
 Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in alle
-installatiebestanden en worden de regels gekopieerd naar een tijdelijk bestand.
+bestanden en worden de regels gekopieerd naar een tijdelijk bestand
+(/tmp/kz-install-XXXXXXXXXX.sh).
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
+.sp
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de bestanden.
 .sp
 Het is mogelijk dat na het uitvoeren van \fBkz install\fR er extra acties nodig
 zijn.
@@ -224,7 +228,7 @@ T}
 Toon een lijst van te installeren apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van de (opgegeven) installatiebestanden.
+Toon de inhoud van bestanden.
 .br
 Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 .TP
@@ -232,7 +236,7 @@ Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 Gebruik editie \fIEDITIE\fR.
 .TP
 \fB-f\fR, \fB--files\fR
-Toon een lijst van beschikbare installatiebestanden.
+Toon een lijst van beschikbare bestanden.
 .TP
 \fB-i\fR, \fB--info\fR
 Toon aanvullende instructies na het installeren van apps.
@@ -283,6 +287,11 @@ Standaard installatiebestand als er geen \fIBESTAND\fRen zijn opgegeven, \
 .RS
 Installatiebestand voor <computernaam> als er geen \fIBESTAND\fRen zijn
 opgegeven, \fIEDITIE\fR is standaard desktop.
+.RE
+.sp
+/tmp/kz-install-XXXXXXXXXX.sh
+.RS
+Tijdelijk installatiebestand van opgegeven apps.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.cmds
@@ -338,6 +347,11 @@ Rechtsklik op starter 'Apps installeren' en kies
 .RS
 Toon instructies voor het verwijderen van Google Chrome.
 Rechtsklik op starter 'Apps installeren' en kies 'Verwijder-instructies tonen'.
+.RE
+.sp
+\fBkz install --cat bitwarden\fR
+.RS
+Toon installatie-opdrachten voor bitwarden.
 .RE
 .\"
 .\"

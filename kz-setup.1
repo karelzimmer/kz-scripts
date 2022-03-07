@@ -34,23 +34,23 @@ Deze bestanden bevatten opdrachten voor het instellen van apps en het wijzigen
 van gebruikersinstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
 (bijv. Debian 11 desktop of Ubuntu 20.04 desktop).
 .sp
-De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
+De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand
+(/tmp/kz-setup-XXXXXXXXXX.cmds).
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
 \fB--editie\fR is dat aan te passen (bijv. \fIEDITIE\fR server).
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare instelbestanden
-voor de huidige distributie, bijv. Ubuntu.
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare bestanden voor de
+huidige distributie, bijv. Ubuntu.
 .br
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBsetup-\fR' en te eindigen met '\fB.sh\fR'.
 .br
 Iets anders wordt beschouwd als een app, zie hierna.
 .sp
-Voor de indeling van de instelbestanden zie sectie \fBBESTANDSINDELING\fR
-hieronder.
+Voor de indeling van de bestanden zie sectie \fBBESTANDSINDELING\fR hieronder.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor
 de huidige distributie, versie, editie, en <computernaam>, bijv. Debian 11
@@ -60,10 +60,12 @@ desktop of Ubuntu 20.04 desktop, en Debian 11 desktop pc-van-charlie of Ubuntu
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
 Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in de
-standaard instelbestanden en worden de regels gekopieerd naar een tijdelijk
-bestand.
+standaard bestanden en worden de regels gekopieerd naar een tijdelijk
+bestand (/tmp/kz-setup-XXXXXXXXXX.sh).
 .br
-Het tijdelijke bestand wordt opgenomen in de lijst van te verwerken bestanden.
+Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
+.sp
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de bestanden.
 .sp
 Het is mogelijk dat na het uitvoeren van \fBkz setup\fR er extra acties nodig
 zijn.
@@ -226,7 +228,7 @@ T}
 Toon een lijst van in te stellen apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van de (opgegeven) instelbestanden.
+Toon de inhoud van bestanden.
 .br
 Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 .TP
@@ -234,7 +236,7 @@ Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 Gebruik editie \fIEDITIE\fR.
 .TP
 \fB-f\fR, \fB--files\fR
-Toon een lijst van beschikbare instelbestanden.
+Toon een lijst van beschikbare bestanden.
 .TP
 \fB-i\fR, \fB--info\fR
 Toon aanvullende instructies na het instellen van apps.
@@ -288,6 +290,11 @@ opgegeven, \fIEDITIE\fR is standaard
 desktop.
 .RE
 .sp
+/tmp/kz-setup-XXXXXXXXXX.sh
+.RS
+Tijdelijk instelbestand van opgegeven apps.
+.RE
+.sp
 /tmp/kz-setup-XXXXXXXXXX.cmds
 .RS
 Tijdelijk instelbestand.
@@ -331,7 +338,7 @@ https://karelzimmer.nl
 .sp
 \fBkz setup\fR
 .RS
-Stel in alles wat in de standaard instelbestanden staat.
+Stel in alles wat in de standaard bestanden staat.
 Hiervoor is ook starter \fBApps instellen\fR beschikbaar.
 .RE
 .sp
@@ -350,6 +357,11 @@ Rechtsklik op starter 'Apps instellen' en kies 'Instal-instructies tonen'.
 .RS
 Toon instructies voor het resetten van Google Chrome.
 Rechtsklik op starter 'Apps instellen' en kies 'Reset-instructies tonen'.
+.RE
+.sp
+\fBkz setup --cat bitwarden\fR
+.RS
+Toon instel-opdrachten voor bitwarden.
 .RE
 .\"
 .\"
