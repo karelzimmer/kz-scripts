@@ -200,7 +200,7 @@ function process_menu1_gui {
 }
 
 function process_menu1_tui {
-    local action1=''
+    local action=''
 
     while true; do
 
@@ -208,16 +208,16 @@ function process_menu1_tui {
         clear -x
         info "$MENU1_HEAD
 "
-        for action1 in "${!MENU1_ACTIONS[@]}"; do
-            printf  '%2s. %-29.29s - %s\n'          \
-                    "$action1"                      \
-                    "${MENU1_ACTIONS[$action1]}"    \
-                    "${MENU1_COMMANDS[$action1]}"
+        for action in "${!MENU1_ACTIONS[@]}"; do
+            printf  '%2s. %-29.29s - %s\n'      \
+                    "$action"                   \
+                    "${MENU1_ACTIONS[$action]}" \
+                    "${MENU1_COMMANDS[$action]}"
         done
         info
 
         while true; do
-            read -rp "Voer uit nummer [1-$((MENU1_LINES-1)), $MENU1_LINES]: "
+            read -rp "Voer uit nummer [1-$MENU1_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
                     printf '%s' "${REWRITE_LINE}"
@@ -384,7 +384,7 @@ function process_menu2_gui {
 }
 
 function process_menu2_tui {
-    local action2=''
+    local action=''
     local exit_menu2=false
 
     while true; do
@@ -393,16 +393,16 @@ function process_menu2_tui {
         clear -x
         info "$MENU2_HEAD
 "
-        for action2 in "${!MENU2_ACTIONS[@]}"; do
-            printf  '%2s. %-29.29s - %s\n'          \
-                    "$action2"                      \
-                    "${MENU2_ACTIONS[$action2]}"    \
-                    "${MENU2_COMMANDS[$action2]}"
+        for action in "${!MENU2_ACTIONS[@]}"; do
+            printf  '%2s. %-29.29s - %s\n'      \
+                    "$action"                   \
+                    "${MENU2_ACTIONS[$action]}" \
+                    "${MENU2_COMMANDS[$action]}"
         done
         info
 
         while true; do
-            read -rp "Voer uit nummer [1-$((MENU2_LINES-1)), $MENU2_LINES]: "
+            read -rp "Voer uit nummer [1-$MENU2_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
                     printf '%s' "${REWRITE_LINE}"
