@@ -39,7 +39,7 @@ Opties:
   -i, --info     toon aanvullende instructies na het installeren van apps
   -l, --list     maak applijst aan
   -r, --remove   toon instructies voor het verwijderen van apps
-  -s, --simulate toon opdrachten die uitgevoerd zou worden
+  -s, --simulate toon opdrachten die uitgevoerd zouden worden
 $OPTIONS_HELP_COMMON
 
 Argumenten:

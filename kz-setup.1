@@ -30,9 +30,9 @@ Standaard verwerkt \fBkz setup\fR de volgende bestanden:
 - /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 (niet verplicht aanwezig)
 .br
-Deze bestanden bevatten opdrachten voor het instellen van apps en het wijzigen
-van gebruikersinstellingen voor de huidige distributie, versie, en \fIEDITIE\fR
-(bijv. Debian 11 desktop of Ubuntu 20.04 desktop).
+Deze bestanden ("instelbestanden") bevatten opdrachten voor het instellen van
+apps en het wijzigen van gebruikersinstellingen voor de huidige distributie,
+versie, en \fIEDITIE\fR (bijv. Debian 11 desktop of Ubuntu 20.04 desktop).
 .sp
 De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand
 (/tmp/kz-setup-XXXXXXXXXX.cmds).
@@ -90,8 +90,8 @@ van systeeminstellingen.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met '\fBkz-setup-\fR' en te
-eindigen met '\fB.sh\fR'.
+De te verwerken bestanden ("instelbestanden") dienen te beginnen met\
+ '\fBkz-setup-\fR' en te eindigen met '\fB.sh\fR'.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br

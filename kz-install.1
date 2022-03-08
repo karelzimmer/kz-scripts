@@ -30,9 +30,10 @@ aanwezig)
 - /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 (niet verplicht aanwezig)
 .br
-Deze bestanden bevatten opdrachten voor het installeren van apps en het
-wijzigen van systeeminstellingen voor de huidige distributie, versie, en
-\fIEDITIE\fR (bijv. Debian 11 desktop of Ubuntu 20.04 desktop).
+Deze bestanden ("installatiebestanden") bevatten opdrachten voor het
+installeren van apps en het wijzigen van systeeminstellingen voor de huidige
+distributie, versie, en \fIEDITIE\fR (bijv. Debian 11 desktop of Ubuntu 20.04
+desktop).
 .sp
 De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand
 (/tmp/kz-install-XXXXXXXXXX.cmds).
@@ -86,13 +87,13 @@ In een grafische werkomgeving zoals GNOME (bijv. Ubuntu) kan
 \fBkz install\fR worden gestart door te zoeken naar \fBapps\fR, klik op
 \fBApps installeren\fR.
 .sp
-Gebruik (hierna) \fBkz setup\fR voor het aanpassen van de
+Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
 gebruikersinstellingen.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met '\fBkz-install-\fR' en te
-eindigen met '\fB.sh\fR'.
+De te verwerken bestanden ("installatiebestanden") dienen te beginnen met\
+ '\fBkz-install-\fR' en te eindigen met '\fB.sh\fR'.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br

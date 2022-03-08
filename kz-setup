@@ -39,7 +39,7 @@ Opties:
   -i, --info     toon aanvullende instructies na het instellen van apps
   -l, --list     maak instellijst aan
   -r, --reset    toon instructies voor het resetten van apps
-  -s, --simulate toon opdrachten die uitgevoerd zou worden
+  -s, --simulate toon opdrachten die uitgevoerd zouden worden
 $OPTIONS_HELP_COMMON
 
 Argumenten:
