@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1-(spice guest agent)
+#1-(klembord delen)
 sudo apt-get install --yes spice-vdagent
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes spice-vdagent
