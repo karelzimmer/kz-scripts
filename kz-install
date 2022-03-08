@@ -30,7 +30,7 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
 Apps installeren.
 
 Opties:
-  -a, --apps     toon lijst van te installeren apps
+  -a, --apps     toon lijst van beschikbare apps
   -c, --cat      toon inhoud van bestanden
   -e, --edition=EDITIE
                  gebruik opgegeven EDITIE
