@@ -9,7 +9,7 @@
 :
 #3 Start een browser en ga naar: http://localhost:9090/system
 #3 Klik op Limited access en geef het wachtwoord
-#3 Ga naar Session > Display language, selecteer Nederlands, en klik op Selext.
+#3 Ga naar Session > Display language, selecteer Nederlands, en klik op Select.
 
 #1 firefox (webbrowser)
 kz-gset --delfav=firefox
