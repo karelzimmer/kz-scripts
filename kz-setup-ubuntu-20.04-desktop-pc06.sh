@@ -5,6 +5,12 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1 cockpit (browsergebaseerd beheer)
+:
+#3 Start een browser en ga naar: http://localhost:9090/system
+#3 Klik op Limited access en geef het wachtwoord
+#3 Ga naar Session > Display language, selecteer Nederlands, en klik op Selext.
+
 #1 firefox (webbrowser)
 kz-gset --delfav=firefox
 #3 Start Terminalvenster en voer uit:

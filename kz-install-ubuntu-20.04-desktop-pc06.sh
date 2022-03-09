@@ -10,6 +10,11 @@ sudo apt-get install --yes calibre
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes calibre
 
+#1 cockpit (browsergebaseerd beheer)
+sudo apt-get install --yes --target-release=focal-backports cockpit
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes cockpit
+
 #1 gdm (inlogscherm dual-monitor)
 sudo cp ~/.config/monitors.xml ~gdm/.config/monitors.xml
 sudo chown gdm:gdm ~gdm/.config/monitors.xml
