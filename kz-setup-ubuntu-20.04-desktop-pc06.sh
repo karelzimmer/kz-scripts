@@ -6,10 +6,17 @@
 ###############################################################################
 
 #1 cockpit (browsergebaseerd beheer)
-:
-#3 Start een browser en ga naar: http://localhost:9090/system
-#3 Klik op Limited access en geef het wachtwoord
-#3 Ga naar Session > Display language, selecteer Nederlands, en klik op Select.
+cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
+sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
+kz-gset --addfavbef=kz-cockpit
+#3 Start Terminalvenster en voer uit:
+#3    rm "$HOME"/.local/share/applications/kz-cockpit.desktop
+#3    kz-gset --delfav=kz-cockpit
+
+#2 1. Start een browser en ga naar: https://localhost:9090 en log in.
+#2 2. Klik op Limited access (Beperkte toegang) en geef het wachtwoord
+#2 3. Ga naar Session > Display language (Sessie > Schemtaal), selecteer
+#2    Nederlands, en klik op Select (Selecteren).
 
 #1 firefox (webbrowser)
 kz-gset --delfav=firefox
@@ -88,3 +95,13 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #2    TROFF Syntax
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=code_code
+
+#1 webmin (browsergebaseerd beheer)
+cp /usr/share/applications/kz-webmin.desktop "$HOME"/.local/share/applications/
+sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-webmin.desktop
+kz-gset --addfavbef=kz-webmin
+#2 1. Start een browser en ga naar: https://localhost:10000 en log in
+#2 2. Ga naar Webmin > Change Language and Theme (Wijzigen van Taal en Thema).
+#2 3. Klik op Personal choice (Persoonlijke keuze) en selecteer
+#2    Nederlands.
+#3 4. Klik op Make Changes (Wijzigingen Toepassen).

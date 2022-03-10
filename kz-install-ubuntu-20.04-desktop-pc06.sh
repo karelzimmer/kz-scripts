@@ -97,3 +97,13 @@ sudo apt-get install --yes tree
 sudo snap install --classic code
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove code
+
+#1 webmin (browsergebaseerd beheer)
+echo 'deb http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
+wget --output-document=- 'http://www.webmin.com/jcameron-key.asc' | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install --yes webmin
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes webmin
+#3    sudo rm /etc/apt/sources.list.d/webmin.list
+#3    sudo apt update
