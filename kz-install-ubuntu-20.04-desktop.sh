@@ -104,6 +104,8 @@ sudo apt-get install --yes /tmp/teams.deb
 rm /tmp/teams-LATEST /tmp/teams.deb
 ## Verwijder PREVIEW in afbeelding:
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
+## Verwijder Preview in starter:
+sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
 #2 1. Start Microsoft Teams
 #2 2. Ga naar Instellingen.
 #2 3. Vink uit 'Toepassing automatisch starten' en
