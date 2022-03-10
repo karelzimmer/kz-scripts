@@ -8,7 +8,7 @@
 #1 cockpit (browsergebaseerd beheer)
 cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
-kz-gset --addfavbef=kz-cockpit
+kz-gset --addfavaft=kz-cockpit
 #3 Start Terminalvenster en voer uit:
 #3    rm "$HOME"/.local/share/applications/kz-cockpit.desktop
 #3    kz-gset --delfav=kz-cockpit
@@ -99,7 +99,7 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 #1 webmin (browsergebaseerd beheer)
 cp /usr/share/applications/kz-webmin.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-webmin.desktop
-kz-gset --addfavbef=kz-webmin
+kz-gset --addfavaft=kz-webmin
 #2 1. Start een browser en ga naar: https://localhost:10000 en log in
 #2 2. Ga naar Webmin > Change Language and Theme (Wijzigen van Taal en Thema).
 #2 3. Klik op Personal choice (Persoonlijke keuze) en selecteer
