@@ -11,7 +11,7 @@ sudo apt-get install --yes calibre
 #3    sudo apt remove --yes calibre
 
 #1 cockpit (browsergebaseerd beheer)
-sudo apt-get install --yes --target-release=focal-backports cockpit
+sudo apt-get install --yes --target-release=focal-backports cockpit cockpit-pcp
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes cockpit
 
