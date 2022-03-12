@@ -5,6 +5,14 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1 cockpit (browsergebaseerd beheer)
+cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
+sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
+kz-gset --addfavaft=kz-cockpit
+#3 Start Terminalvenster en voer uit:
+#3    rm "$HOME"/.local/share/applications/kz-cockpit.desktop
+#3    kz-gset --delfav=kz-cockpit
+
 #1 evolution (e-mail)
 kz-gset --delfav=org.gnome.Evolution
 #3 Start Terminalvenster en voer uit:
@@ -72,3 +80,13 @@ kz-gset --addfavbef=code_code
 #2 8. Sluit Settings.
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=code_code
+
+#1 webmin (browsergebaseerd beheer)
+cp /usr/share/applications/kz-webmin.desktop "$HOME"/.local/share/applications/
+sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-webmin.desktop
+kz-gset --addfavaft=kz-webmin
+#2 1. Start een browser en ga naar: https://localhost:10000 en log in
+#2 2. Ga naar Webmin > Change Language and Theme (Wijzigen van Taal en Thema).
+#2 3. Klik op Personal choice (Persoonlijke keuze) en selecteer
+#2    Nederlands.
+#3 4. Klik op Make Changes (Wijzigingen Toepassen).

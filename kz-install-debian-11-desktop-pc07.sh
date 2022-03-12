@@ -5,10 +5,27 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1-(activeren eth0 uit start-up halen)
+## ifup -a --read-environement:
+## Cannot find device "eth0"
+## [FAILED] Raise network interfaces
+sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
+sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup
+#3 Start Terminalvenster en voer uit:
+#3    sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
+#3    sudo sed --in-place --expression='s/^#iface eth0 net dhcp$/iface eth0 net dhcp/' /etc/network/interfaces.d/setup
+
 #1-(klembord delen tussen gastheer en gast)
 sudo apt-get install --yes spice-vdagent
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes spice-vdagent
+
+#1 cockpit (browsergebaseerd beheer)
+echo 'deb http://deb.debian.org/debian bullseye-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
+sudo apt-get update
+sudo apt-get install --yes --target-release=bullseye-backports cockpit cockpit-pcp
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes cockpit
 
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes aspell-nl git
