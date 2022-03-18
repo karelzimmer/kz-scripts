@@ -123,7 +123,7 @@ rm /tmp/teamviewer.deb
 ## Zorg ervoor dat /etc/apt/sources.list.d/teamviewer.list is aangemaakt.
 sudo teamviewer repo default
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt-get remove --yes teamviewer
+#3    sudo apt remove --yes teamviewer
 #3    sudo rm /etc/apt/sources.list.d/teamviewer.list*
 #3    sudo apt update
 

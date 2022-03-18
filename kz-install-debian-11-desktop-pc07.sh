@@ -68,16 +68,26 @@ sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
 #3    sudo rm --force /usr/bin/pip /usr/bin/python
 
 #1 signal (privéberichtenapp)
-echo 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal-xenial.list
-wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+echo 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
+wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo tee /etc/apt/trusted.gpg.d/signal.asc
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes signal-desktop
-#3    sudo rm /etc/apt/sources.list.d/signal-xenial.list
-#3    sudo apt-get update
+#3    sudo rm /etc/apt/sources.list.d/signal.list* /etc/apt/trusted.gpg.d/signal.asc*
+#3    sudo apt update
 
 #1 vscode (editor)
 sudo snap install --classic code
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove code
+
+#1 webmin (browsergebaseerd beheer)
+echo 'deb http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
+wget --output-document=- 'http://www.webmin.com/jcameron-key.asc' | sudo tee /etc/apt/trusted.gpg.d/webmin.asc
+sudo apt-get update
+sudo apt-get install --yes webmin
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes webmin
+#3    sudo rm /etc/apt/sources.list.d/webmin.list* /etc/apt/trusted.gpg.d/webmin.asc*
+#3    sudo apt update

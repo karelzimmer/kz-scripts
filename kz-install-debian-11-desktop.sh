@@ -13,7 +13,7 @@ sudo apt-get update
 #3 Start Terminalvenster en voer uit:
 #3    sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 #3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
-#3    sudo apt-get update
+#3    sudo apt update
 
 #1 bitwarden (wachtwoordkluis)
 sudo snap install bitwarden
@@ -99,7 +99,7 @@ sudo snap install spotify
 ## Repository:
 ## https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software
 echo 'deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
-wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
 sudo apt-get update
 sudo apt-get install --yes teams
 ## Verwijder PREVIEW in afbeelding:
@@ -119,7 +119,7 @@ wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamvie
 sudo dpkg --install /tmp/teamviewer.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/teamviewer.deb
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt-get remove --yes teamviewer
+#3    sudo apt remove --yes teamviewer
 #3    sudo rm /etc/apt/sources.list.d/teamviewer.list*
 #3    sudo apt update
 
@@ -133,4 +133,4 @@ wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/5.4.533
 sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/zoom.deb
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt-get remove --yes zoom
+#3    sudo apt remove --yes zoom
