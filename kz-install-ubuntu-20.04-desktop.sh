@@ -98,10 +98,12 @@ sudo apt-get install --yes gnome-sushi
 ## https://www.microsoft.com/nl-nl/microsoft-teams/download-app
 ## Webbrowser:
 ## https://www.microsoft.com/nl-nl/microsoft-teams/log-in
-wget --no-verbose --output-document=/tmp/teams-LATEST https://karelzimmer.nl/downloads/teams/LATEST
-wget --no-verbose --output-document=/tmp/teams.deb "https://karelzimmer.nl/downloads/teams/teams_$(cat /tmp/teams-LATEST)_amd64.deb"
-sudo apt-get install --yes /tmp/teams.deb
-rm /tmp/teams-LATEST /tmp/teams.deb
+## Repository:
+## https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software
+echo 'deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
+wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+sudo apt-get update
+sudo apt-get install --yes teams
 ## Verwijder PREVIEW in afbeelding:
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter:
@@ -112,6 +114,7 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 #2    'Toepassing actief houden na sluiten'.
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes teams
+#3    sudo rm /etc/apt/sources.list.d/teams.list* /etc/apt/trusted.gpg.d/microsoft.asc*
 
 #1 teamviewer (afstandsbediening)
 wget --no-verbose --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
