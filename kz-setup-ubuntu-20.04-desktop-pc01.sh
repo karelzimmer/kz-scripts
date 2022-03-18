@@ -20,7 +20,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 
 #1 search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-printf '%s\n' 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
+echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #3 Start Terminalvenster en voer uit:
 #3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 

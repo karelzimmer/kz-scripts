@@ -71,7 +71,7 @@ sudo chmod 0750 /home/*
 ## commands have their home directories private by default
 sudo sed --in-place --expression='s/DIR_MODE=0755/DIR_MODE=0750/' /etc/adduser.conf
 sudo sed --in-place --expression='/^HOME_MODE 0750/d' /etc/login.defs
-printf '%s\n' 'HOME_MODE 0750' | sudo tee --append /etc/login.defs
+echo 'HOME_MODE 0750' | sudo tee --append /etc/login.defs
 #3 Start Terminalvenster en voer uit:
 #3    sudo chmod 0755 /home/*
 #3    sudo dpkg-reconfigure adduser

@@ -45,7 +45,7 @@ kz-gset --addfavaft=virt-manager
 
 #1 search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-printf '%s\n' 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
+echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #3 Start Terminalvenster en voer uit:
 #3    sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
@@ -55,7 +55,7 @@ kz-gset --addfavbef=org.gnome.Terminal
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 ## search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-printf '%s\n' 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
+echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #2 1. Klik op Activiteiten, typ 'snel'.
 #2 2. Klik bij Instellingen op het pictogram Toetsenbord.
 #2 3. Op scherm Toetsenbord scroll naar beneden en druk op +.

@@ -96,8 +96,8 @@ sudo snap install spotify
 ## https://www.microsoft.com/nl-nl/microsoft-teams/download-app
 ## Webbrowser:
 ## https://www.microsoft.com/nl-nl/microsoft-teams/log-in
+echo 'deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
 wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo apt-add-repository https://packages.microsoft.com/debian/11/prod
 sudo apt-get update
 sudo apt-get install --yes teams
 ## Verwijder PREVIEW in afbeelding:
