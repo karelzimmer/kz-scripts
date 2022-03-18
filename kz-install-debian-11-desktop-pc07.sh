@@ -21,9 +21,9 @@ sudo apt-get install --yes spice-vdagent
 #3    sudo apt remove --yes spice-vdagent
 
 #1 cockpit (browsergebaseerd beheer)
-echo 'deb http://deb.debian.org/debian bullseye-backports main' | sudo tee /etc/apt/sources.list.d/backports.list
+echo "deb http://deb.debian.org/debian $(lsb_release --codename --short)-backports main" | sudo tee /etc/apt/sources.list.d/backports.list
 sudo apt-get update
-sudo apt-get install --yes --target-release=bullseye-backports cockpit cockpit-pcp
+sudo apt-get install --yes --target-release="$(lsb_release --codename --short)"-backports cockpit cockpit-pcp
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes cockpit
 
