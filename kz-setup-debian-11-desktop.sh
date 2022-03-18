@@ -105,7 +105,6 @@ xdg-mime default wfica.desktop application/x-ica
 #1 gnome (bureaubladomgeving)
 ## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
-
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
@@ -120,6 +119,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
@@ -140,9 +140,10 @@ kz-gset --addappfolder --folder='KZ Scripts'
 #3    gsettings reset org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 #3    gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #3    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
-#3    gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
-#3    gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
-#3    gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
+#3    gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
+#3    gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed true
+#3    gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height true
+#3    gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 #3    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
 #3    kz-gset --removeappfolder --folder='KZ Scripts'
