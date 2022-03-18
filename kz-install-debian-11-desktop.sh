@@ -96,6 +96,8 @@ sudo snap install spotify
 ## https://www.microsoft.com/nl-nl/microsoft-teams/download-app
 ## Webbrowser:
 ## https://www.microsoft.com/nl-nl/microsoft-teams/log-in
+## Repository:
+## https://docs.microsoft.com/en-us/windows-server/administration/linux-package-repository-for-microsoft-software
 echo 'deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
 wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 sudo apt-get update
