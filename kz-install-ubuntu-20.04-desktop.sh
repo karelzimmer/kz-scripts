@@ -103,7 +103,7 @@ wget --no-verbose --output-document=- https://packages.microsoft.com/keys/micros
 sudo apt-get update
 sudo apt-get install --yes teams
 sudo apt-key del BE1229CF
-sudo rm --force /etc/apt/trusted.gpg.d/microsoft-teams*
+sudo rm --force /etc/apt/trusted.gpg.d/microsoft*
 ## Verwijder PREVIEW in afbeelding:
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter:
