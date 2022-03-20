@@ -14,7 +14,7 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #1 pinta (tekenprogramma)
 sudo apt-get install --yes pinta
 #3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes pinta
+#3    sudo apt remove pinta
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop
@@ -23,9 +23,8 @@ sudo snap install telegram-desktop
 
 #1 virtualbox (virtualisatie)
 ## Images staan in ~/VirtualBox VMs/.
-echo "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-wget --no-verbose --output-document=- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo tee /etc/apt/trusted.gpg.d/oracle_vbox_2016.asc
-wget --no-verbose --output-document=- https://www.virtualbox.org/download/oracle_vbox.asc | sudo tee /etc/apt/trusted.gpg.d/oracle_vbox.asc
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+wget --no-verbose --output-document=- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/oracle_vbox_2016.gpg
 sudo apt-get update
 wget --no-verbose --output-document=/tmp/virtualbox-LATEST.TXT http://download.virtualbox.org/virtualbox/LATEST.TXT
 ## VirtualBox Guest Additions ISO staat in /usr/share/virtualbox/.
@@ -35,11 +34,13 @@ wget --no-verbose --output-document=/tmp/Oracle_VM_VirtualBox_Extension_Pack "ht
 echo 'y' | sudo VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack
 sudo adduser "${SUDO_USER:-$USER}" vboxusers
 sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
+sudo apt-key del 98AB5139 2980AECF
+sudo rm --force /etc/apt/trusted.gpg.d/oracle_vbox*
 #2 Met een AMD-processor zal AMD-V wel aanstaan, maar bij Intel moet vaak VT-x
 #2 aangezet worden in het BIOS of UEFI-firmware!
 #3 Start Terminalvenster en typ, of kopieer en plak:
 #3    sudo apt remove --yes virtualbox-*
-#3    sudo rm /etc/apt/sources.list.d/virtualbox.list* /etc/apt/trusted.gpg.d/oracle_vbox*
+#3    sudo rm /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
 #3    sudo apt update
 #3    sudo deluser "${SUDO_USER:-$USER}" vboxusers
 #3    sudo delgroup vboxusers

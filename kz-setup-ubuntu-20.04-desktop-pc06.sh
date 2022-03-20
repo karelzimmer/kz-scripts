@@ -9,14 +9,18 @@
 cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
 kz-gset --addfavaft=kz-cockpit
-#3 Start Terminalvenster en voer uit:
-#3    rm "$HOME"/.local/share/applications/kz-cockpit.desktop
-#3    kz-gset --delfav=kz-cockpit
-
 #2 1. Start een browser en ga naar: https://localhost:9090 en log in.
 #2 2. Klik op Limited access (Beperkte toegang) en geef het wachtwoord
 #2 3. Ga naar Session > Display language (Sessie > Schemtaal), selecteer
 #2    Nederlands, en klik op Select (Selecteren).
+#3 Start Terminalvenster en voer uit:
+#3    rm "$HOME"/.local/share/applications/kz-cockpit.desktop
+#3    kz-gset --delfav=kz-cockpit
+
+#1 earth (verken de wereld)
+kz-gset --addfavaft=google-earth-pro
+#3 Start Terminalvenster en voer uit:
+#3    kz-gset --delfav=google-earth
 
 #1 firefox (webbrowser)
 kz-gset --delfav=firefox
@@ -68,6 +72,15 @@ kz-gset --addfavbef=org.gnome.Terminal
 kz-gset --delfav=thunderbird
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --addfavbef=thunderbird
+
+#1 virtualbox (virtualisatie)
+kz-gset --addfavaft=virtualbox
+#2 1. Ga naar Apparaten > Installeren Guest Additions en volg de aanwijzingen op het scherm.
+#2 2. Voor optimale netwerksnelheid kies bij Netwerk voor Gekoppeld aan Netwerk bridge adapter.
+#3 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
+#3 2. Start Terminalvenster en voer uit:
+#3    rm "$HOME"/kz-vm-hugowin732.sh
+#3    kz-gset --delfav=virtualbox
 
 #1 vscode (editor)
 kz-gset --addfavbef=code_code

@@ -98,6 +98,28 @@ kz-gset --addfavaft=bitwarden_bitwarden
 #3 5. Start Terminalvenster en voer uit:
 #3       kz-gset --delfav=bitwarden_bitwarden
 
+#1 chrome (webbrowser)
+kz-gset --addfavbef=google-chrome
+## Integratie van GNOME Shell-extensies voor webbrowsers;
+## https://extensions.gnome.org
+#2 1. Start Google Chrome.
+#2 2. Indien nodig importeer Firefox bladwijzers via klik op Meer⋮.
+#2 3. Kies Bladwijzers en dan Bladwijzers en instellingen importeren.
+#2 4. Ga naar https://chrome.google.com/webstore/category/extensions
+#2 5. Zoek naar gnome en klik op gnome-shell integration
+#2 6. Klik op Gnome-shell-integratie
+#2 7. Klik op Toev. aan Chrome.
+#2 8. Klik op Extensie toevoegen.
+#2
+#2 Om standaard te mailen met Gmail en Google Chrome voer uit:
+#2 1. Start Standaardtoepassingen.
+#2 2. Kies bij E-mail voor Gnome Gmail.
+#3 1. Start Google Chrome
+#3 2. Ga naar chrome://extensions/
+#3 3. Bij Gnome-shell-integratie zet schuifje op uit of klik op Verwijderen.
+#3 4. Start Terminalvenster en voer uit:
+#3       kz-gset --delfav=google-chrome
+
 #1 citrix (telewerken)
 ## Citrix Receiver, ICA Client
 xdg-mime default wfica.desktop application/x-ica
@@ -147,28 +169,6 @@ kz-gset --addappfolder --folder='KZ Scripts'
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 #3    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
 #3    kz-gset --removeappfolder --folder='KZ Scripts'
-
-#1 chrome (webbrowser)
-kz-gset --addfavbef=google-chrome
-## Integratie van GNOME Shell-extensies voor webbrowsers;
-## https://extensions.gnome.org
-#2 1. Start Google Chrome.
-#2 2. Indien nodig importeer Firefox bladwijzers via klik op Meer⋮.
-#2 3. Kies Bladwijzers en dan Bladwijzers en instellingen importeren.
-#2 4. Ga naar https://chrome.google.com/webstore/category/extensions
-#2 5. Zoek naar gnome en klik op gnome-shell integration
-#2 6. Klik op Gnome-shell-integratie
-#2 7. Klik op Toev. aan Chrome.
-#2 8. Klik op Extensie toevoegen.
-#2
-#2 Om standaard te mailen met Gmail en Google Chrome voer uit:
-#2 1. Start Standaardtoepassingen.
-#2 2. Kies bij E-mail voor Gnome Gmail.
-#3 1. Start Google Chrome
-#3 2. Ga naar chrome://extensions/
-#3 3. Bij Gnome-shell-integratie zet schuifje op uit of klik op Verwijderen.
-#3 4. Start Terminalvenster en voer uit:
-#3       kz-gset --delfav=google-chrome
 
 #1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux
