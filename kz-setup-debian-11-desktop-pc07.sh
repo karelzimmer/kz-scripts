@@ -38,7 +38,7 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type not
 #3    gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
 #1 kvm (virtualisatie)
-## Beeldscherm 1680 x 1050 (16:10).
+## Beeldscherm 1280 x 768 (16:10).
 kz-gset --addfavaft=virt-manager
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=virt-manager
