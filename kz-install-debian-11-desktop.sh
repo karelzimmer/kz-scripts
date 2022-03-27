@@ -15,7 +15,7 @@ sudo apt-get update
 #3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 #3    sudo apt update
 
-#1 bitwarden (wachtwoordkluis)
+#1 bitwarden (wachtwoordbeheer)
 sudo snap install bitwarden
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove bitwarden

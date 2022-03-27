@@ -36,7 +36,7 @@
 #3 3. Klik links op Extensies.
 #3 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
 
-#1 bitwarden (wachtwoordkluis)
+#1 bitwarden (wachtwoordbeheer)
 kz-gset --addfavaft=bitwarden_bitwarden
 #2 Ingebruikname van Bitwarden bestaat uit de volgende stappen:
 #2 1. Start Bitwarden.
