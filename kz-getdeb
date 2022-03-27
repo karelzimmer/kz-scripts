@@ -47,7 +47,6 @@ Opties:
 $OPTIONS_HELP_COMMON"
 
 readonly BIN_REPO=$HOME/bin
-readonly WORK_REPO=$HOME/work
 readonly DEB_REPO=$HOME/kz-deb
 readonly DOCS_REPO=$HOME/kz-docs
 readonly SCRIPTS_REPO=$HOME/kz-scripts
@@ -314,13 +313,6 @@ function process_repos {
                 "$BIN_REPO"                             |& $LOGCMD
     then
         cd "$BIN_REPO" || exit $ERROR
-        git pull |& $LOGCMD
-    fi
-    if ! git    clone                                       \
-                https://github.com/karelzimmer/work.git     \
-                "$WORK_REPO"                                |& $LOGCMD
-    then
-        cd "$WORK_REPO" || exit $ERROR
         git pull |& $LOGCMD
     fi
     if ! git    clone                                       \
