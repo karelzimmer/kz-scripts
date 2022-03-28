@@ -18,7 +18,6 @@ import subprocess
 program_name = 'kz-update'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
-version_number = '003'
 desc = 'Systeem bijwerken.'
 
 
@@ -31,6 +30,8 @@ def perform_update():
     subprocess.run('sudo apt-get dist-upgrade --yes', shell=True)
 
     # Opdracht als raw text, vang stdout en stderr op:
+    subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*',
+                   shell=True, check=True)
     subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
     subprocess.run('sudo apt-get autoclean --yes', shell=True, check=True)
 
