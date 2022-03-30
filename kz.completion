@@ -1,10 +1,10 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz backup.                                       #
+# Tab-completion-script voor kz.                                              #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-dashoptions="-d --debug -g --gui -h --help -n --dry-run '-t DOELMAP'
-    '--target DOELMAP' -u --usage -v --version -x --delete"
-complete -o default -W "$dashoptions" kz-backup
+dashoptions='backup build ckname deploy genpwd getdeb gset install ivp menu nas
+    restore setup update'
+complete -o default -W "$dashoptions" kz
