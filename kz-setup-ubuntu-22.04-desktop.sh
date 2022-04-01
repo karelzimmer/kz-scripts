@@ -134,11 +134,9 @@ gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
-gsettings set org.gnome.shell.extensions.desktop-icons show-home false
-gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
+gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delappfolder=KZ Scripts
@@ -147,17 +145,15 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3    gsettings reset org.gnome.desktop.interface clock-show-date
 #3    gsettings reset org.gnome.desktop.interface show-battery-percentage
 #3    gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
-#3    gsettings reset org.gnome.desktop.session idle-delay
 #3    gsettings reset org.gnome.desktop.screensaver lock-enabled
+#3    gsettings reset org.gnome.desktop.session idle-delay
 #3    gsettings reset org.gnome.nautilus.icon-view default-zoom-level
 #3    gsettings reset org.gnome.nautilus.preferences click-policy
 #3    gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 #3    gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
-#3    gsettings reset org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 #3    gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #3    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
-#3    gsettings reset org.gnome.shell.extensions.desktop-icons show-home
-#3    gsettings reset org.gnome.shell.extensions.desktop-icons show-trash
+#3    gsettings reset org.gnome.shell.extensions.ding show-home false
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
 #1 skype (beeldbellen)
