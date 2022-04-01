@@ -24,7 +24,6 @@ kz-gset --delfav=firefox-esr
 #3    kz-gset --addfavbef=firefox-esr
 
 #1 gnome (bureaubladomgeving)
-## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-gnome.png
 gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/kz-gnome.png
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
@@ -51,9 +50,9 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 #1 terminal (terminalvenster)
 kz-gset --addfavbef=org.gnome.Terminal
-## Aliassen aanzetten
+## Aliassen aanzetten.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
-## search (vooruit zoeken in history met Ctrl-S)
+## Search (vooruit zoeken in history met Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #2 1. Klik op Activiteiten, typ 'snel'.

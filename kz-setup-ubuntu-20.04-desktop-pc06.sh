@@ -28,7 +28,6 @@ kz-gset --delfav=firefox
 #3    kz-gset --addfavbef=firefox
 
 #1 gnome (bureaubladomgeving)
-## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-gnome.png
 gsettings set org.gnome.desktop.interface gtk-theme Yaru-light
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true

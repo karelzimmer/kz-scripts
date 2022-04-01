@@ -99,8 +99,7 @@ kz-gset --addfavaft=bitwarden_bitwarden
 
 #1 chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
-## Integratie van GNOME Shell-extensies voor webbrowsers;
-## https://extensions.gnome.org
+## Integratie van GNOME Shell-extensies voor webbrowsers https://extensions.gnome.org.
 #2 1. Start Google Chrome.
 #2 2. Indien nodig importeer Firefox bladwijzers via klik op Meer⋮.
 #2 3. Kies Bladwijzers en dan Bladwijzers en instellingen importeren.
@@ -120,11 +119,10 @@ kz-gset --addfavbef=google-chrome
 #3       kz-gset --delfav=google-chrome
 
 #1 citrix (telewerken)
-## Citrix Receiver, ICA Client
+## Aka Citrix Receiver, ICA Client
 xdg-mime default wfica.desktop application/x-ica
 
 #1 gnome (bureaubladomgeving)
-## Voor een beschrijving voer uit: gsettings describe SCHEMA KEY
 kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
