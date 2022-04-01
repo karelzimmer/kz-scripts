@@ -162,7 +162,7 @@ function init_script {
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
     if [[ -t 1 ]]; then
-        set_terminal_attribs
+        set_terminal_attributes
     fi
 }
 
@@ -273,7 +273,7 @@ Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 }
 
-function reset_terminal_attribs {
+function reset_terminal_attributes {
     NORMAL=''
     BOLD=''
     BLUE=''
@@ -282,7 +282,7 @@ function reset_terminal_attribs {
     YELLOW=''
 }
 
-function set_terminal_attribs {
+function set_terminal_attributes {
     NORMAL=$(tput sgr0)
     BOLD=$(tput bold)
     BLUE=${BOLD}$(tput setaf 4)

@@ -152,7 +152,7 @@ function check_input {
             -g|--gui)
                 OPTION_GUI=true
                 if [[ -t 1 ]]; then
-                    reset_terminal_attribs
+                    reset_terminal_attributes
                 fi
                 shift
                 ;;
