@@ -15,29 +15,15 @@ sudo apt-get update
 #3    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 #3    sudo apt update
 
+#1 bash-completion (tab-completion)
+sudo apt-get install --yes bash-completion
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove bash-completion
+
 #1 bitwarden (wachtwoordbeheer)
 sudo snap install bitwarden
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove bitwarden
-
-#1 chrome (webbrowser)
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
-sudo apt-get update
-sudo apt-get install --yes google-chrome-stable
-sudo apt-key del 7FAC5991 D38B4796
-sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
-## GNOME Shell integration - Integratie van GNOME Shell-extensies voor webbrowsers: https://extensions.gnome.org
-sudo apt-get install --yes chrome-gnome-shell
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove google-chrome-stable chrome-gnome-shell
-#3    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
-#3    sudo apt update
-
-#1 completion (tab-completion)
-sudo apt-get install --yes bash-completion
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove bash-completion
 
 #1 citrix (telewerken)
 ## Voegt gebruiker citrixlog toe!
@@ -73,6 +59,22 @@ sudo apt-get install --yes cups
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove gnome-shell-extension-dashtodock
+
+#1 google-chrome (webbrowser)
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
+sudo apt-get update
+sudo apt-get install --yes google-chrome-stable
+sudo apt-key del 7FAC5991 D38B4796
+sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
+## Extra needed after 1st install.
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+## GNOME Shell integration - Integratie van GNOME Shell-extensies voor webbrowsers: https://extensions.gnome.org
+sudo apt-get install --yes chrome-gnome-shell
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove google-chrome-stable chrome-gnome-shell
+#3    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
+#3    sudo apt update
 
 #1 journalctl (log bekijken)
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal

@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 apport (handmatig genereren van crashrapporten)
+#1 apport-disable (handmatig genereren van crashrapporten)
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
@@ -18,20 +18,6 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 sudo snap install bitwarden
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove bitwarden
-
-#1 chrome (webbrowser)
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
-sudo apt-get update
-sudo apt-get install --yes google-chrome-stable
-sudo apt-key del 7FAC5991 D38B4796
-sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
-## GNOME Shell integration - Integratie van GNOME Shell-extensies voor webbrowsers: https://extensions.gnome.org
-sudo apt-get install --yes chrome-gnome-shell
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove google-chrome-stable chrome-gnome-shell
-#3    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
-#3    sudo apt update
 
 #1 citrix (telewerken)
 ## Voegt gebruiker citrixlog toe!
@@ -58,26 +44,29 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove icaclient
 
-#1 language (taalondersteuning)
+#1 google-chrome (webbrowser)
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
+sudo apt-get update
+sudo apt-get install --yes google-chrome-stable
+sudo apt-key del 7FAC5991 D38B4796
+sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
+## Extra needed after 1st install.
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+## GNOME Shell integration - Integratie van GNOME Shell-extensies voor webbrowsers: https://extensions.gnome.org
+sudo apt-get install --yes chrome-gnome-shell
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove google-chrome-stable chrome-gnome-shell
+#3    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
+#3    sudo apt update
+
+#1 language-support (taalondersteuning)
 check-language-support | xargs sudo apt-get install --yes
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove libreoffice libreoffice-help-nl libreoffice-l10n-nl
-
-#1 private (persoonlijke mappen beveiligen)
-## https://ubuntu.com/blog/private-home-directories-for-ubuntu-21-04
-## Make all existing home directories private.
-sudo chmod 0750 /home/*
-## Ensure any users created by either the adduser(8) or useradd(8) commands have their home directories private by default.
-sudo sed --in-place --expression='s/DIR_MODE=0755/DIR_MODE=0750/' /etc/adduser.conf
-sudo sed --in-place --expression='/^HOME_MODE 0750/d' /etc/login.defs
-echo 'HOME_MODE 0750' | sudo tee --append /etc/login.defs
-#3 Start Terminalvenster en voer uit:
-#3    sudo chmod 0755 /home/*
-#3    sudo dpkg-reconfigure adduser
-#3    sudo sed --in-place --expression='s/^\(HOME_MODE\s\+0750\)/#\1/' /etc/login.defs
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype
@@ -132,7 +121,7 @@ sudo apt-get install --yes xul-ext-lightning
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove xul-ext-lightning
 
-#1 restricted (niet-vrije pakketten)
+#1 restricted-addons (niet-vrije pakketten)
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #3 Start Terminalvenster en voer uit:

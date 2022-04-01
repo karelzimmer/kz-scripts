@@ -15,18 +15,6 @@ sudo apt-get install --yes --target-release="$(lsb_release --codename --short)"-
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove cockpit
 
-#1 earth (verken de wereld)
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
-wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
-sudo apt-get update
-sudo apt-get install --yes google-earth-pro-stable
-sudo apt-key del 7FAC5991 D38B4796
-sudo rm --force /etc/apt/trusted.gpg.d/google-earth*
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes google-earth-pro-stable
-#3    sudo rm /etc/apt/sources.list.d/google-earth.list* /usr/share/keyrings/google-earth.gpg*
-#3    sudo apt update
-
 #1 gdm (inlogscherm dual-monitor)
 sudo cp ~/.config/monitors.xml ~gdm/.config/monitors.xml
 sudo chown gdm:gdm ~gdm/.config/monitors.xml
@@ -37,6 +25,20 @@ sudo chown gdm:gdm ~gdm/.config/monitors.xml
 sudo apt-get install --yes aspell-nl git
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove git
+
+#1 google-earth (verken de wereld)
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
+wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
+sudo apt-get update
+sudo apt-get install --yes google-earth-pro-stable
+sudo apt-key del 7FAC5991 D38B4796
+sudo rm --force /etc/apt/trusted.gpg.d/google-earth*
+## Extra needed after 1st install.
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
+#3 Start Terminalvenster en voer uit:
+#3    sudo apt remove --yes google-earth-pro-stable
+#3    sudo rm /etc/apt/sources.list.d/google-earth.list* /usr/share/keyrings/google-earth.gpg*
+#3    sudo apt update
 
 #1 kvm (virtualisatie)
 ## Images staan in /var/lib/libvirt/images/.

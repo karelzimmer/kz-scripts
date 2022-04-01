@@ -17,7 +17,7 @@ kz-gset --addfavaft=kz-cockpit
 #3    rm "$HOME"/.local/share/applications/kz-cockpit.desktop
 #3    kz-gset --delfav=kz-cockpit
 
-#1 earth (verken de wereld)
+#1 google-earth (verken de wereld)
 kz-gset --addfavaft=google-earth-pro
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=google-earth
