@@ -26,37 +26,44 @@ def perform_cleanup():
     print(f'Verwijder sleutels uit /etc/apt/trusted.gpg...')
     # Chrome
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
-                   shell=True, check=True, stdout=subprocess.DEVNULL)
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*',
                    shell=True, check=True)
     # Earth
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
-                   shell=True, check=True, stdout=subprocess.DEVNULL)
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-earth*',
                    shell=True, check=True)
     # Signal
     subprocess.run('sudo apt-key del 57F6FB06',
-                   shell=True, check=True, stdout=subprocess.DEVNULL)
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/signal*',
                    shell=True, check=True)
     # Teams
     subprocess.run('sudo apt-key del BE1229CF',
-                   shell=True, check=True, stdout=subprocess.DEVNULL)
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/microsoft*',
                    shell=True, check=True)
     # TeamViewer
     subprocess.run('sudo apt-key del 0C1289C0 DEB49217',
-                   shell=True, check=True, stdout=subprocess.DEVNULL)
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/teamviewer*',
                    shell=True, check=True)
     # VirtualBox
     subprocess.run('sudo apt-key del 98AB5139 2980AECF',
-                   shell=True, check=True, stdout=subprocess.DEVNULL)
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/oracle_vbox*',
                    shell=True, check=True)
     # Webmin
     subprocess.run('sudo apt-key del 11F63C51',
-                   shell=True, check=True, stdout=subprocess.DEVNULL)
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/webmin*',
                    shell=True, check=True)
 
