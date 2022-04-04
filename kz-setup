@@ -304,11 +304,10 @@ function process_argument_app {
         files[1]=$dfltfile_2
     fi
 
-    # kz-install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # kz-setup zoekt naar apps in kz-setup-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh (setup is
-    # computer-afhankelijk).
+    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
+    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en 
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     temp_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.temp")
     cat "${files[@]}" > "$temp_file"
     for app in "${APP_ARGUMENTS[@]}"; do
@@ -396,11 +395,10 @@ function process_dfltfiles {
 }
 
 function process_option_apps {
-    # kz-install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # kz-setup zoekt naar apps in kz-setup-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh (setup is
-    # computer-afhankelijk).
+    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
+    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en 
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     process_dfltfiles
     TEXT="De volgende apps zijn beschikbaar:
 

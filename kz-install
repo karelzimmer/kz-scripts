@@ -297,11 +297,10 @@ function process_argument_app {
     local -a    files=()
     local       search=''
 
-    # kz-install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # kz-setup zoekt naar apps in kz-setup-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh (setup is
-    # computer-afhankelijk).
+    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
+    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en 
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
@@ -396,11 +395,10 @@ function process_option_apps {
     local -a    files=()
     local       search=''
 
-    # kz-install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # kz-setup zoekt naar apps in kz-setup-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh (setup is
-    # computer-afhankelijk).
+    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
+    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en 
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
