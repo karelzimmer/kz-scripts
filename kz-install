@@ -299,7 +299,7 @@ function process_argument_app {
 
     # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
-    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en 
+    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
@@ -397,7 +397,7 @@ function process_option_apps {
 
     # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
-    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en 
+    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en
     # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
