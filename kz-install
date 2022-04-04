@@ -234,8 +234,8 @@ function process_input {
     if $file_notfound; then
         exit $SUCCESS
     fi
-    # Als argument APP of FILE is opgegeven geen standaardbestanden verwerken.
-    if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
+    # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
+    if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
         process_dfltfiles
     fi
 
@@ -297,10 +297,11 @@ function process_argument_app {
     local -a    files=()
     local       search=''
 
-    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk).
-    # Setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    # kz-install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
+    # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
+    # kz-setup zoekt naar apps in kz-setup-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh (setup is
+    # computer-afhankelijk).
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
@@ -381,6 +382,7 @@ function process_dfltfiles {
         ((++file_num))
     else
         warning "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
+        info "$USAGELINE" >&2
         exit $WARNING
     fi
     # Niet verplicht aanwezig.
@@ -394,10 +396,11 @@ function process_option_apps {
     local -a    files=()
     local       search=''
 
-    # Install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
+    # kz-install zoekt naar apps in alle kz-install-<distro>-<versie>-bestanden
     # en stopt bij de eerstgevonden (installatie is computer-onafhankelijk),
-    # setup zoekt naar apps in kz-install-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    # kz-setup zoekt naar apps in kz-setup-<distro>-<versie>-<edition>.sh en
+    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh (setup is
+    # computer-afhankelijk).
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
@@ -474,20 +477,19 @@ function less_options {
 }
 
 function process_option_files {
-    TEXT="De volgende bestanden zijn beschikbaar:
+    TEXT="De volgende bestanden staan op het systeem:
 
 NUMMER BESTAND
 $(
-    if !    find    "${FILES_TO_PROCESS[@]}" \
-                    2> /dev/null            |
-            nl      --number-width=6        \
-                    --number-format=rn      \
-                    --number-separator=' '  \
+    if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"* \
+                    2> /dev/null                    |
+            nl      --number-width=6                \
+                    --number-format=rn              \
+                    --number-separator=' '          \
                     --body-numbering=a; then
-        printf '%s\n' "     0 Geen bestanden gevonden voor $DISTRO $VERSION \
-$EDITION.
+        printf '%s\n' "     0 Geen bestanden aanwezig op het systeem.
 
-Typ 'man $DISPLAY_NAME' voor meer informatie."
+$USAGELINE"
     else
         printf '%s\n' "
 Om BESTANDen te bekijken voer uit:

@@ -32,7 +32,7 @@ aanwezig)
 .br
 Deze bestanden ("installatiebestanden") bevatten opdrachten voor het
 installeren van apps en het wijzigen van systeeminstellingen voor de huidige
-distributie, versie, en \fIEDITIE\fR (bijv. Debian 11 desktop of Ubuntu 20.04
+distributie, versie, en \fIEDITIE\fR (bijv. Ubuntu 20.04 desktop of Debian 11
 desktop).
 .sp
 De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand
@@ -43,8 +43,8 @@ Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
 \fB--editie\fR is dat aan te passen (bijv. \fIEDITIE\fR server).
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare bestanden voor de
-huidige distributie, bijv. Ubuntu.
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
+systeem.
 .br
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBinstal-\fR' en te eindigen met '\fB.sh\fR'.
@@ -54,14 +54,16 @@ Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
 Voor de indeling van de bestanden zie de sectie \fBBESTANDSINDELING\fR
 hieronder.
 .sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor
-de huidige distributie en versie, bijv. Debian 11 of Ubuntu 20.04.
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
+alle bestanden voor de huidige <distributie> en <versie>, bijv. Ubuntu 20.04 of
+Debian 11.
 .br
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
 Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in alle
-bestanden en worden de regels gekopieerd naar een tijdelijk bestand
-(/tmp/kz-install-XXXXXXXXXX.sh).
+bestanden die beschikbaar zijn voor de huidige <distributie> en <versie>, bijv.
+Ubuntu 20.04 of Debian 11, en worden de regels gekopieerd naar een tijdelijk
+bestand (/tmp/kz-install-XXXXXXXXXX.sh).
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp

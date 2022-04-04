@@ -42,8 +42,8 @@ Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
 \fB--editie\fR is dat aan te passen (bijv. \fIEDITIE\fR server).
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van beschikbare bestanden voor de
-huidige distributie, bijv. Ubuntu.
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
+systeem.
 .br
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBsetup-\fR' en te eindigen met '\fB.sh\fR'.
@@ -52,16 +52,16 @@ Iets anders wordt beschouwd als een app, zie hierna.
 .sp
 Voor de indeling van de bestanden zie sectie \fBBESTANDSINDELING\fR hieronder.
 .sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn voor
-de huidige distributie, versie, editie, en <computernaam>, bijv. Debian 11
-desktop of Ubuntu 20.04 desktop, en Debian 11 desktop pc-van-charlie of Ubuntu
-20.04 desktop pc-van-charlie.
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
+de standaard bestanden voor de huidige <distributie> en <versie>, bijv. Ubuntu
+20.04 of Debian 11.
 .br
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
 Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in de
-standaard bestanden en worden de regels gekopieerd naar een tijdelijk
-bestand (/tmp/kz-setup-XXXXXXXXXX.sh).
+standaard bestanden voor de huidige <distributie> en <versie>, bijv. Ubuntu
+20.04 of Debian 11, en worden de regels gekopieerd naar een tijdelijk bestand
+(/tmp/kz-setup-XXXXXXXXXX.sh).
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
