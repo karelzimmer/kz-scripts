@@ -20,9 +20,8 @@ kz backup \- Back-up maken.
 \fBkz backup\fR maakt een back-up (reservekopie) van de Persoonlijke map.
 .sp
 De back-up wordt geplaatst op een aangekoppeld back-up-medium zoals een USB
-externe harddisk (bijv. /media/charlie/backupdisk) in map
-\fBbackup-<computernaam>-<gebruikersnaam>\fR (bijv.
-backup-pc01-john, deze map wordt aangemaakt als nodig).
+externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, deze map
+wordt aangemaakt als nodig, bijvoorbeeld /media/jan/backupdisk/backup-pc01-jan.
 .sp
 Met optie \fB-t\fR, \fB--target\fR kan een andere locatie opgegeven worden.
 .sp
@@ -55,7 +54,7 @@ Voor het maken van de back-up wordt rsync gebruikt.
 .sp
 Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .sp
-In een grafische werkomgeving zoals GNOME (bijv. Ubuntu) kan
+In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan
 \fBkz backup\fR worden gestart door te zoeken naar \fBback\fR, klik op
 \fBBack-up maken\fR.
 .\"
@@ -119,10 +118,10 @@ Hiervoor is ook starter \fBBack-up maken\fR beschikbaar.
 Toon bestanden die anders toegevoegd en verwijderd zouden worden in de back-up.
 .RE
 .sp
-\fBkz backup --target=smb://fileserver/backups/backup-pc01-john\fR
+\fBkz backup --target=smb://fileserver/backups/backup-pc01-jan\fR
 .RS
 Maak een back-up van de Persoonlijke map naar SMB-share backups op fileserver
-in de map backup-pc01-john (deze map wordt aangemaakt als nodig).
+in de map backup-pc01-jan (deze map wordt aangemaakt als nodig).
 .RE
 .\"
 .\"

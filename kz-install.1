@@ -29,19 +29,20 @@ aanwezig)
 .br
 - /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 (niet verplicht aanwezig)
-.br
+.sp
+Bijvoorbeeld kz-install-ubuntu-20.04-desktop.sh en
+kz-install-ubuntu-20.04-desktop-pc01.sh.
+.sp
 Deze bestanden ("installatiebestanden") bevatten opdrachten voor het
 installeren van apps en het wijzigen van systeeminstellingen voor de huidige
-distributie, versie, en \fIEDITIE\fR (bijv. Ubuntu 20.04 desktop of Debian 11
-desktop).
+distributie, versie, en \fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
 .sp
-De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand
-(/tmp/kz-install-XXXXXXXXXX.cmds).
+De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
-\fB--editie\fR is dat aan te passen (bijv. \fIEDITIE\fR server).
+\fB--editie\fR is dat aan te passen, bijvoorbeeld \fIEDITIE\fR server.
 .sp
 Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
 systeem.
@@ -55,15 +56,15 @@ Voor de indeling van de bestanden zie de sectie \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle bestanden voor de huidige <distributie> en <versie>, bijv. Ubuntu 20.04 of
-Debian 11.
+alle bestanden voor de huidige <distributie> en <versie>, bijvoorbeeld ubuntu
+20.04.
 .br
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
 Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in alle
-bestanden die beschikbaar zijn voor de huidige <distributie> en <versie>, bijv.
-Ubuntu 20.04 of Debian 11, en worden de regels gekopieerd naar een tijdelijk
-bestand (/tmp/kz-install-XXXXXXXXXX.sh).
+bestanden die beschikbaar zijn voor de huidige <distributie> en <versie>,
+bijvoorbeeld ubuntu 20.04, en worden de regels gekopieerd naar een tijdelijk
+bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
@@ -85,7 +86,7 @@ Alhoewel \fBkz install\fR gericht is op het installeren, met optie\fB-r\fR,
 \fB--remove\fR worden er instructies getoond om de installatie ongedaan te
 maken.
 .sp
-In een grafische werkomgeving zoals GNOME (bijv. Ubuntu) kan
+In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan
 \fBkz install\fR worden gestart door te zoeken naar \fBapps\fR, klik op
 \fBApps installeren\fR.
 .sp
@@ -239,7 +240,7 @@ Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 Gebruik editie \fIEDITIE\fR.
 .TP
 \fB-f\fR, \fB--files\fR
-Toon een lijst van beschikbare bestanden.
+Toon een lijst van bestanden aanwezig op het systeem.
 .TP
 \fB-i\fR, \fB--info\fR
 Toon aanvullende instructies na het installeren van apps.

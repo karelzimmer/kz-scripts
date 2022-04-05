@@ -34,12 +34,12 @@ Opties:
   -c, --cat      toon inhoud van bestanden
   -e, --edition=EDITIE
                  gebruik opgegeven EDITIE
-  -f, --files    toon lijst van beschikbare bestanden
+  -f, --files    toon lijst van bestanden
   -g, --gui      start in grafische modus
-  -i, --info     toon aanvullende instructies na het installeren van apps
+  -i, --info     toon installatie-instructies
   -l, --list     maak applijst aan
-  -r, --remove   toon instructies voor het verwijderen van apps
-  -s, --simulate toon opdrachten die uitgevoerd zouden worden
+  -r, --remove   toon verwijder-instructies
+  -s, --simulate toon opdrachten
 $OPTIONS_HELP_COMMON
 
 Argumenten:
@@ -298,9 +298,9 @@ function process_argument_app {
     local       search=''
 
     # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
-    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps ALLEEN in de
+    # staandaard bestanden kz-setup-<distro>-<versie>-<editie>.sh en
+    # kz-install-<distro>-<versie>-<editie>-<computernaam>.sh.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
@@ -370,7 +370,7 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --files' voor beschikbare bestanden." >&2
+        info "$USAGELINE" >&2
     fi
 }
 
@@ -396,9 +396,9 @@ function process_option_apps {
     local       search=''
 
     # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps in de STANDAARD
-    # bestanden kz-setup-<distro>-<versie>-<edition>.sh en
-    # kz-install-<distro>-<versie>-<edition>-<computernaam>.sh.
+    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps ALLEEN in de
+    # staandaard bestanden kz-setup-<distro>-<versie>-<editie>.sh en
+    # kz-install-<distro>-<versie>-<editie>-<computernaam>.sh.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
@@ -466,7 +466,7 @@ function process_option_cat {
 function less_options {
     # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
     # van:
-    # 1. systemctl en journalctl, zie bijv. 'man systemctl', zoek LESS
+    # 1. systemctl en journalctl, zie bijvoorbeeld 'man systemctl', zoek LESS
     #    ("FRSXMK")
     # 2. man, zie 'man man', zoek LESS
     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \

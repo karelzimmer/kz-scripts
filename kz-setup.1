@@ -29,18 +29,20 @@ Standaard verwerkt \fBkz setup\fR de volgende bestanden:
 .br
 - /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 (niet verplicht aanwezig)
-.br
+.sp
+Bijvoorbeeld kz-setup-ubuntu-20.04-desktop.sh en
+kz-setup-ubuntu-20.04-desktop-pc01.sh.
+.sp
 Deze bestanden ("instelbestanden") bevatten opdrachten voor het instellen van
 apps en het wijzigen van gebruikersinstellingen voor de huidige distributie,
-versie, en \fIEDITIE\fR (bijv. Debian 11 desktop of Ubuntu 20.04 desktop).
+versie, en \fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
 .sp
-De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand
-(/tmp/kz-setup-XXXXXXXXXX.cmds).
+De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
 Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
-\fB--editie\fR is dat aan te passen (bijv. \fIEDITIE\fR server).
+\fB--editie\fR is dat aan te passen, bijvoorbeeld \fIEDITIE\fR server.
 .sp
 Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
 systeem.
@@ -53,15 +55,14 @@ Iets anders wordt beschouwd als een app, zie hierna.
 Voor de indeling van de bestanden zie sectie \fBBESTANDSINDELING\fR hieronder.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-de standaard bestanden voor de huidige <distributie> en <versie>, bijv. Ubuntu
-20.04 of Debian 11.
+de standaard bestanden voor de huidige <distributie> en <versie>, bijvoorbeeld
+ubuntu 20.04.
 .br
 Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
 Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in de
-standaard bestanden voor de huidige <distributie> en <versie>, bijv. Ubuntu
-20.04 of Debian 11, en worden de regels gekopieerd naar een tijdelijk bestand
-(/tmp/kz-setup-XXXXXXXXXX.sh).
+standaard bestanden voor de huidige <distributie> en <versie>, bijvoorbeeld
+ubuntu 20.04, en worden de regels gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
@@ -81,7 +82,7 @@ Deze gevens zijn te gebruiken om het instellen te controleren op volledigheid.
 Alhoewel \fBkz setup\fR gericht is op het instellen, met optie \fB-r\fR,
 \fB--reset\fR worden er instructies getoond om het instellen ongedaan te maken.
 .sp
-In een grafische werkomgeving zoals GNOME (bijv. Ubuntu) kan
+In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan
 \fBkz setup\fR worden gestart door te zoeken naar \fBapps\fR, klik op
 \fBApps instellen\fR.
 .sp
@@ -236,7 +237,7 @@ Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 Gebruik editie \fIEDITIE\fR.
 .TP
 \fB-f\fR, \fB--files\fR
-Toon een lijst van beschikbare bestanden.
+Toon een lijst van bestanden aanwezig op het systeem.
 .TP
 \fB-i\fR, \fB--info\fR
 Toon aanvullende instructies na het instellen van apps.
