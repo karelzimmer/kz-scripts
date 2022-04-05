@@ -23,7 +23,7 @@ desc = 'Systeem bijwerken.'
 
 def perform_cleanup():
     subprocess.run('sudo true', shell=True, check=True)
-    print(f'Verwijder sleutels uit /etc/apt/trusted.gpg...')
+    print(f'Opschonen sleutels in /etc/apt/trusted.gpg...')
     # Chrome
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
                    shell=True, check=True,
