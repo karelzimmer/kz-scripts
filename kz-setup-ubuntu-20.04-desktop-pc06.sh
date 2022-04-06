@@ -48,7 +48,7 @@ kz-gset --addfavaft=virt-manager
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=virt-manager
 
-#1 search (vooruit zoeken in history met Ctrl-S)
+#1-search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #3 Start Terminalvenster en voer uit:

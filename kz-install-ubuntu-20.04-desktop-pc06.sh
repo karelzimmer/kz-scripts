@@ -15,7 +15,7 @@ sudo apt-get install --yes --target-release="$(lsb_release --codename --short)"-
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove cockpit
 
-#1 gdm (inlogscherm dual-monitor)
+#1-gdm (inlogscherm dual-monitor)
 sudo cp ~/.config/monitors.xml ~gdm/.config/monitors.xml
 sudo chown gdm:gdm ~gdm/.config/monitors.xml
 #3 Start Terminalvenster en voer uit:

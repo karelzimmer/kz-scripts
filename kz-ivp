@@ -169,7 +169,7 @@ function check_record_types {
     # Kijk naar regels die beginnen met #1 t/m #9.
     # #1, #2, #3
     # #1 foo, #2 foo, #3 foo (kz-install/kz-setup toont als foo, en verwerken)
-    # #1-foo (kz-install/kz-setup toont deze niet als foo, wel verwerken)
+    # #1-foo (kz-install/kz-setup toont deze niet als app foo, wel verwerken)
     # Fout:
     # De rest :-)
     wrong_record=$(

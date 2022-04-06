@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 repos (alle repositories inschakelen)
+#1-repos (alle repositories inschakelen)
 sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
@@ -76,7 +76,7 @@ sudo apt-get install --yes chrome-gnome-shell
 #3    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #3    sudo apt update
 
-#1 journalctl (log bekijken)
+#1-journalctl (log bekijken)
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 #3 Start Terminalvenster en voer uit:
 #3    sudo deluser "${SUDO_USER:-$USER}" systemd-journal
