@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 desktop op pc06.                       #
+# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc06.                   #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################

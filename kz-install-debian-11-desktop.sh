@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Debian 11 desktop.                                  #
+# Installatiebestand voor Debian 11 LTS desktop.                              #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
