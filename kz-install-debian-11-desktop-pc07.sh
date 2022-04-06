@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1-(activeren eth0 uit start-up halen)
+#1-deact-eth0 (activeren eth0 uit start-up halen)
 ## ifup -a --read-environement:
 ## Cannot find device "eth0"
 ## [FAILED] Raise network interfaces
@@ -15,7 +15,7 @@ sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/'
 #3    sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
 #3    sudo sed --in-place --expression='s/^#iface eth0 net dhcp$/iface eth0 net dhcp/' /etc/network/interfaces.d/setup
 
-#1-(klembord delen tussen gastheer en gast)
+#1-spice-vdagent (klembord delen tussen gastheer en gast)
 sudo apt-get install --yes spice-vdagent
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove spice-vdagent

@@ -5,5 +5,5 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1-(geen opdrachten om te installeren)
+#1-no-apps (geen app om te installeren)
 :
