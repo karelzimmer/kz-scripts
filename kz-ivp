@@ -166,13 +166,17 @@ function check_record_types {
         return 0
     fi
 
-    # #1=ok, #1 foo=ok, #1-foo=ok, #1foo=not-ok, hetzelfde voor #2 en #3.
-    # #1-foo wordt gebruik om regel niet te tonen als app, maar wel uitvoeren.
+    # Kijk naar regels die beginnen met #1 t/m #9.
+    # #1, #2, #3
+    # #1 foo, #2 foo, #3 foo (kz-install/kz-setup toont als foo, en verwerken)
+    # #1-foo (kz-install/kz-setup toont deze niet als foo, wel verwerken)
+    # Fout:
+    # De rest :-)
     wrong_record=$(
         grep --regexp='#[1-9]' "$script" --line-number  |
         grep --regexp='#[1-3]$' --invert-match          |
         grep --regexp='#[1-3] ' --invert-match          |
-        grep --regexp='#[1-3]-' --invert-match          || true
+        grep --regexp='#1-'     --invert-match          || true
         )
     if [[ $wrong_record ]]; then
         error "
