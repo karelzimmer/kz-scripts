@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1-apport (handmatig genereren van crashrapporten)
+#1 apport (handmatig genereren van crashrapporten)
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
@@ -60,7 +60,7 @@ sudo apt-get install --yes chrome-gnome-shell
 #3    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #3    sudo apt update
 
-#1-language-support (taalondersteuning)
+#1 language-support (taalondersteuning)
 check-language-support | xargs sudo apt-get install --yes
 
 #1 libreoffice (kantoorpakket)

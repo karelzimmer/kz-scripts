@@ -17,7 +17,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #3    gsettings reset org.gnome.desktop.background picture-uri
 #3    gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 
-#1-search (vooruit zoeken in history met Ctrl-S)
+#1 search (vooruit zoeken in history met Ctrl-S)
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #3 Start Terminalvenster en voer uit:
