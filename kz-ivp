@@ -167,9 +167,12 @@ function check_record_types {
     fi
 
     # Kijk naar regels die beginnen met #1 t/m #9.
+    # Goed:
     # #1, #2, #3
-    # #1 foo, #2 foo, #3 foo (kz-install/kz-setup toont als foo, en verwerken)
-    # #1-foo (kz-install/kz-setup toont deze niet als app foo, wel verwerken)
+    # #1 foo (bar)              (met optie -a, --app tonen en verwerken)
+    # #1-foo (bar)              (met optie -a, --app niet tonen, wel verwerken)
+    # #2 Inst.instructie
+    # #3 Verwijd./reset instructie
     # Fout:
     # De rest :-)
     wrong_record=$(
