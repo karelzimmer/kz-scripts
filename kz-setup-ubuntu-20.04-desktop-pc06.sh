@@ -43,8 +43,9 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #1 kvm (virtualisatie)
-## Beeldscherm 2048 x 1152 (16:9).
 kz-gset --addfavaft=virt-manager
+#2 1. Start KVM.
+#2 2. Zet beeldscherm op: 2048 x 1152 (16:9).
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=virt-manager
 
