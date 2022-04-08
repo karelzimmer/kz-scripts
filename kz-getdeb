@@ -248,7 +248,7 @@ function install_scriptspackage {
 }
 
 function create_development_environment {
-    TEXT='Bouw ontwikkelomgeving...'
+    TEXT='Maak ontwikkelomgeving...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
@@ -387,6 +387,8 @@ function term_script {
 
     search="/usr/share/doc/kz/Checklist-installatie-$(
         lsb_release --id --short
+        )-$(
+        lsb_release --release --short
         )"
     cp  --update "$search"*{desktop,server}.pdf "$docs_dir" |& $LOGCMD || true
     cp  --update                                    \
