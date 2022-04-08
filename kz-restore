@@ -133,6 +133,7 @@ Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
+            info "$USAGELINE" >&2
             exit $WARNING
         elif ! [[ -d $SOURCE ]]; then
             warning "Koppel een USB-medium aan met hierop de map \
