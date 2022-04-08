@@ -79,15 +79,3 @@ sudo rm --force /etc/apt/trusted.gpg.d/signal*
 sudo snap install --classic code
 #3 Start Terminalvenster en voer uit:
 #3    sudo snap remove code
-
-#1 webmin (browsergebaseerd beheer)
-echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
-wget --no-verbose --output-document=- http://www.webmin.com/jcameron-key.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
-sudo apt-get update
-sudo apt-get install --yes webmin
-sudo apt-key del 11F63C51
-sudo rm --force /etc/apt/trusted.gpg.d/webmin*
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes webmin
-#3    sudo rm /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
-#3    sudo apt update

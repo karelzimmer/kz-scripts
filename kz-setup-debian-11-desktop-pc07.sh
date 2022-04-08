@@ -89,4 +89,6 @@ kz-gset --addfavaft=kz-webmin
 #2 2. Ga naar Webmin > Change Language and Theme (Wijzigen van Taal en Thema).
 #2 3. Klik op Personal choice (Persoonlijke keuze) en selecteer
 #2    Nederlands.
-#3 4. Klik op Make Changes (Wijzigingen Toepassen).
+#2 4. Klik op Make Changes (Wijzigingen Toepassen).
+#3 Start Terminalvenster en voer uit:
+#3    kz-gset --delfav=kz-webmin
