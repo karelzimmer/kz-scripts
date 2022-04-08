@@ -62,7 +62,6 @@ def perform_cleanup():
                    shell=True, check=True)
 
 
-
 def perform_update():
     # Opdracht als sequence.
     subprocess.run(['sudo', 'apt-get', 'update'])
