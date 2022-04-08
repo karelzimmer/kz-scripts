@@ -131,7 +131,9 @@ function process_input {
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
             warning 'Koppel een USB-medium aan, en start daarna opnieuw.'
-            info "$USAGELINE" >&2
+            if [[ -t 1 ]]; then
+                info "$USAGELINE" >&2
+            fi
             exit $WARNING
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             warning "Koppel slechts één USB-medium aan.
@@ -140,7 +142,9 @@ Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-            info "$USAGELINE" >&2
+            if [[ -t 1 ]]; then
+                info "$USAGELINE" >&2
+            fi
             exit $WARNING
         fi
     fi
