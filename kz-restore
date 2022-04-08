@@ -122,10 +122,10 @@ function process_input {
     else
         SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
-            warning 'Koppel een back-up-medium aan, en start daarna opnieuw.'
+            warning 'Koppel een USB-medium aan, en start daarna opnieuw.'
             exit $WARNING
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-            warning "Koppel slechts één back-up-medium aan.
+            warning "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
 $MEDIUM
@@ -133,7 +133,7 @@ $MEDIUM
 Koppel media af via Bestanden, en start daarna opnieuw."
             exit $WARNING
         elif ! [[ -d $SOURCE ]]; then
-            warning "Koppel een back-up-medium aan met hierop de map \
+            warning "Koppel een USB-medium aan met hierop de map \
 backup-$HOSTNAME-$USER, en start daarna opnieuw."
             exit $WARNING
         fi
@@ -214,7 +214,7 @@ function term_script {
     info "
 ${GREEN}De back-up is teruggezet.${NORMAL}
 ${BLUE}$OPTION_DRY_RUN${NORMAL}
-${YELLOW}Koppel zelf (veilig!) het back-up-medium af.${NORMAL}"
+${YELLOW}Koppel zelf (veilig!) het USB-medium af.${NORMAL}"
     exit $SUCCESS
 }
 
