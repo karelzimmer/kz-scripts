@@ -73,15 +73,6 @@ kz-gset --delfav=thunderbird
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --addfavbef=thunderbird
 
-#1 virtualbox (virtualisatie)
-kz-gset --addfavaft=virtualbox
-#2 1. Ga naar Apparaten > Installeren Guest Additions en volg de aanwijzingen op het scherm.
-#2 2. Voor optimale netwerksnelheid kies bij Netwerk voor Gekoppeld aan Netwerk bridge adapter.
-#3 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
-#3 2. Start Terminalvenster en voer uit:
-#3    rm "$HOME"/kz-vm-hugowin732.sh
-#3    kz-gset --delfav=virtualbox
-
 #1 vscode (editor)
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/x-shellscript    # Bash-script

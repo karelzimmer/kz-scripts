@@ -16,7 +16,7 @@ sudo apt-get install --yes --target-release="$(lsb_release --codename --short)"-
 #3    sudo apt remove cockpit
 
 #1-gdm (inlogscherm dual-monitor)
-sudo cp ~/.config/monitors.xml ~gdm/.config/monitors.xml
+sudo cp /home/karel/.config/monitors.xml ~gdm/.config/monitors.xml
 sudo chown gdm:gdm ~gdm/.config/monitors.xml
 #3 Start Terminalvenster en voer uit:
 #3    sudo rm ~gdm/.config/monitors.xml
@@ -109,29 +109,6 @@ sudo apt-get install --yes tree
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove tree
 
-#1 virtualbox (virtualisatie)
-## Images staan in ~/VirtualBox VMs/.
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-wget --no-verbose --output-document=- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/oracle_vbox_2016.gpg
-sudo apt-get update
-wget --no-verbose --output-document=/tmp/virtualbox-LATEST.TXT http://download.virtualbox.org/virtualbox/LATEST.TXT
-## VirtualBox Guest Additions ISO staat in /usr/share/virtualbox/.
-sudo apt-get install --yes virtualbox-"$(awk -F'.' '{print $1"."$2}' < /tmp/virtualbox-LATEST.TXT)"
-## Downloadbestand moet zo heten, anders mslukt de installatie.
-wget --no-verbose --output-document=/tmp/Oracle_VM_VirtualBox_Extension_Pack "http://download.virtualbox.org/virtualbox/$(cat /tmp/virtualbox-LATEST.TXT)/Oracle_VM_VirtualBox_Extension_Pack-$(cat /tmp/virtualbox-LATEST.TXT).vbox-extpack"
-echo 'y' | sudo VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack
-sudo adduser "${SUDO_USER:-$USER}" vboxusers
-sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
-sudo apt-key del 98AB5139 2980AECF
-sudo rm --force /etc/apt/trusted.gpg.d/oracle_vbox*
-#2 Met een AMD-processor zal AMD-V wel aanstaan, maar bij Intel moet vaak VT-x
-#2 aangezet worden in het BIOS of UEFI-firmware!
-#3 Start Terminalvenster en typ, of kopieer en plak:
-#3    sudo apt remove --yes virtualbox-*
-#3    sudo rm /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
-#3    sudo apt update
-#3    sudo deluser "${SUDO_USER:-$USER}" vboxusers
-#3    sudo delgroup vboxusers
 #1 vscode (editor)
 sudo snap install --classic code
 #3 Start Terminalvenster en voer uit:

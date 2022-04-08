@@ -39,8 +39,8 @@ sudo rm --force /etc/apt/trusted.gpg.d/oracle_vbox*
 #2 Met een AMD-processor zal AMD-V wel aanstaan, maar bij Intel moet vaak VT-x
 #2 aangezet worden in het BIOS of UEFI-firmware!
 #3 Start Terminalvenster en typ, of kopieer en plak:
+#3    sudo deluser "${SUDO_USER:-$USER}" vboxusers
+#3    sudo delgroup vboxusers
 #3    sudo apt remove --yes virtualbox-*
 #3    sudo rm /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
 #3    sudo apt update
-#3    sudo deluser "${SUDO_USER:-$USER}" vboxusers
-#3    sudo delgroup vboxusers
