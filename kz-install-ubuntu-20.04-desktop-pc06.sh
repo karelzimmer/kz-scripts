@@ -5,11 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 calibre (e-boekmanager)
-sudo apt-get install --yes calibre
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove calibre
-
 #1 cockpit (browsergebaseerd beheer)
 sudo apt-get install --yes --target-release="$(lsb_release --codename --short)"-backports cockpit cockpit-pcp
 #3 Start Terminalvenster en voer uit:
@@ -54,20 +49,10 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 #3    sudo deluser ${SUDO_USER:-${SUDO_USER:-$USER}} libvirtd
 #3    sudo delgroup libvirtd
 
-#1 lftp (FTP-programma)
-sudo apt-get install --yes lftp
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove lftp
-
 #1 locate (bestanden snel zoeken op naam)
 sudo apt-get install --yes mlocate
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove mlocate
-
-#1 neofetch (systeeminformatie in het terminalvenster)
-sudo apt-get install --yes neofetch
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove neofetch
 
 #1 meld (visuele diff en merge tool)
 sudo apt-get install --yes meld
@@ -103,11 +88,6 @@ sudo rm --force /etc/apt/trusted.gpg.d/signal*
 #3    sudo apt remove signal-desktop
 #3    sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #3    sudo apt update
-
-#1 tree (mappenboom weergeven)
-sudo apt-get install --yes tree
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove tree
 
 #1 vscode (editor)
 sudo snap install --classic code
