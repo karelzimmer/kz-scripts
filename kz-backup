@@ -124,12 +124,14 @@ function process_input {
         TARGET=$TARGET_ARGUMENT
         if ! [[ -d $TARGET ]]; then
             error "Map $TARGET bestaat niet."
+            info "$USAGELINE" >&2
             exit $ERROR
         fi
     else
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
             warning 'Koppel een USB-medium aan, en start daarna opnieuw.'
+            info "$USAGELINE" >&2
             exit $WARNING
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             warning "Koppel slechts één USB-medium aan.
@@ -138,6 +140,7 @@ Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
+            info "$USAGELINE" >&2
             exit $WARNING
         fi
     fi

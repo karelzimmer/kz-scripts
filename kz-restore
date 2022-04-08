@@ -117,12 +117,14 @@ function process_input {
         SOURCE=$SOURCE_ARGUMENT
         if ! [[ -d $SOURCE ]]; then
             error "Map $SOURCE bestaat niet."
+            info "$USAGELINE" >&2
             exit $ERROR
         fi
     else
         SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
             warning 'Koppel een USB-medium aan, en start daarna opnieuw.'
+            info "$USAGELINE" >&2
             exit $WARNING
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             warning "Koppel slechts één USB-medium aan.
@@ -135,6 +137,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
         elif ! [[ -d $SOURCE ]]; then
             warning "Koppel een USB-medium aan met hierop de map \
 backup-$HOSTNAME-$USER, en start daarna opnieuw."
+            info "$USAGELINE" >&2
             exit $WARNING
         fi
     fi
