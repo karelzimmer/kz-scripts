@@ -373,7 +373,7 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        info "$USAGELINE" >&2
+        info "Typ '$DISPLAY_NAME --files' voor bestanden op dit systeem." >&2
     fi
 }
 
