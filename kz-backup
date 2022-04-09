@@ -207,7 +207,7 @@ EOF
             ;;
         11)
             log 'Te weinig ruimte.'
-            error "
+            warning "
 Back-up maken is mislukt.
 
 Te weinig ruimte op $TARGET.
@@ -228,7 +228,7 @@ Controleer de log in het Terminalvenster met:
             exit $WARNING
             ;;
         *)
-            error "
+            warning "
 Back-up maken is mislukt.
 
 Foutcode rsync is $rsync_rc.

@@ -179,7 +179,7 @@ function restore_backup {
             ;;
         11)
             log 'Te weinig ruimte.'
-            error "
+            warning "
 Back-up terugzetten is mislukt.
 
 Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
@@ -199,7 +199,7 @@ Controleer de log in het Terminalvenster met:
             exit $WARNING
             ;;
         *)
-            error "
+            warning "
 Back-up terugzetten is mislukt.
 
 Foutcode rsync is $rsync_rc.
