@@ -379,7 +379,7 @@ Controleer de log in het Terminalvenster met:
             exit "$rc"
             ;;
         *)
-            warning "${YELLOW}Programma $PROGRAM_NAME is onderbroken.${NORMAL}"
+            warning "Programma $PROGRAM_NAME is onderbroken."
             exit "$rc"
             ;;
     esac
