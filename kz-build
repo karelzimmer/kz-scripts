@@ -152,9 +152,7 @@ function build_uploads {
     # verschillen en dit met rsync tot vals positief leidt (aka false positive,
     # alleen timestamp is verschillend, niet de inhoud).
 
-    # ------------------
     # Vul dist/ met app/
-    # ------------------
     cd "$UPLOADS_APPDIR"
     while read -r file; do
         # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
@@ -168,9 +166,7 @@ function build_uploads {
     done < <(find . -type f -print)
     cd "$HOME"
 
-    #-----------------------#
-    # Vul dist/ met kz-docs #
-    #-----------------------#
+    # Vul dist/ met kz-docs.
     cd "${UPLOADS_SOURCES[DOCS]}"
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
@@ -188,9 +184,7 @@ function build_uploads {
     done
     cd "$HOME"
 
-    #--------------------------#
-    # Vul dist/ met kz-scripts #
-    #--------------------------#
+    # Vul dist/ met kz-scripts.
     cd "${UPLOADS_SOURCES[SCRIPTS]}"
     for file in *; do
         if [[ $file = LICENSE || $file = README.md ]]; then
