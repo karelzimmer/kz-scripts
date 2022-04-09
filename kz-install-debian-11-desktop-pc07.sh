@@ -20,13 +20,6 @@ sudo apt-get install --yes spice-vdagent
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove spice-vdagent
 
-#1 cockpit (browsergebaseerd beheer)
-echo "deb http://deb.debian.org/debian $(lsb_release --codename --short)-backports main" | sudo tee /etc/apt/sources.list.d/backports.list
-sudo apt-get update
-sudo apt-get install --yes --target-release="$(lsb_release --codename --short)"-backports cockpit cockpit-pcp
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove cockpit
-
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes aspell-nl git
 #3 Start Terminalvenster en voer uit:

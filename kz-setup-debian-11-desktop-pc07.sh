@@ -5,14 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 cockpit (browsergebaseerd beheer)
-cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
-kz-gset --addfavaft=kz-cockpit
-#3 Start Terminalvenster en voer uit:
-#3    rm "$HOME"/.local/share/applications/kz-cockpit.desktop
-#3    kz-gset --delfav=kz-cockpit
-
 #1 evolution (e-mail)
 kz-gset --delfav=org.gnome.Evolution
 #3 Start Terminalvenster en voer uit:

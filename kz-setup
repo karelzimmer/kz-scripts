@@ -724,7 +724,8 @@ function process_command {
     elif $EXECUTE_COMMANDS; then
         desc_printf=$app_description
         if $OPTION_GUI; then
-            TEXT="#[$app_seq_num/$app_tot_num] $app_description...\n\n$record"
+            TEXT="#[$app_seq_num/$app_tot_num] $app_description...\n\n"
+            TEXT+="[$cmd_seq_num] $record"
             printf '%s\n' "$TEXT"
         else
             if [[ -t 1 ]]; then
