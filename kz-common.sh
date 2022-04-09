@@ -209,10 +209,7 @@ function process_common_options {
 function process_option_debug {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    TEXT='*** START DEBUG-SESSIE ***'
-    warning "$TEXT"
-    log "$TEXT"
-    log 'Start Show Current Environment'
+    warning 'START DEBUG-SESSIE'
     log 'uname --all'
     log "$(uname --all)" --priority=debug
     log 'lsb_release --all'
@@ -221,7 +218,6 @@ function process_option_debug {
     log "$(cat /etc/os-release)" --priority=debug
     log 'declare -p'
     log "$(declare -p)" --priority=debug
-    log 'End Show Current Environment'
     log 'Routing bash xtrace to FD4'
     exec 4> >($LOGCMD --priority=debug)
     BASH_XTRACEFD=4
@@ -370,12 +366,10 @@ Controleer de log in het Terminalvenster met:
                 set +o xtrace
                 BASH_XTRACEFD=''
                 exec 4>&-
-                TEXT='*** END DEBUG-SESSIE ***'
-                warning "$TEXT${NORMAL}
+                warning "END DEBUG SESSION${NORMAL}
 
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
-                log "$TEXT"
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
