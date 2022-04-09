@@ -290,13 +290,18 @@ function check_dependencies {
         sudo snap install core |& $LOGCMD
         clear -x
         printf '%s\n' 'De runtime-omgeving voor snapd is zojuist geïnstalleerd.
-Om verder te gaan is eerst afmelden nodig.
-Daarna weer aanmelden en opnieuw uitvoeren:
+Om verder te gaan is eerst een herstart nodig.
+Daarna de installatie van pakket kz vervolgen via een druk op de Super-toets,
+typ term, en klik op het pictogram van Terminalvenster.
+Typ, of kopieer en plak, deze twee opdrachten, ieder gevolgd door de
+Enter-toets:
 wget karelzimmer.nl/kz
 bash kz
+
+Volg de aanwijzingen op het scherm.
 '
         read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
-        gnome-session-quit --no-prompt
+        sudo reboot
         exit
     fi
     if ! command -v shellcheck &> /dev/null; then
