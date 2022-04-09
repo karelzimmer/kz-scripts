@@ -242,7 +242,7 @@ Controleer de log in het Terminalvenster met:
 
 function term_script {
     info "
-${GREEN}De back-up is gemaakt. ${BLUE}$OPTION_DELETE $OPTION_DRY_RUN${NORMAL}
+${GREEN}De back-up is gemaakt. ${BLUE}$OPTION_DELETE${NORMAL}
 
 ${YELLOW}Koppel zelf (veilig!) het USB-medium af.${NORMAL}"
     exit $SUCCESS
