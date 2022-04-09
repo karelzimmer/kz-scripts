@@ -82,6 +82,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 function error {
     if $OPTION_GUI; then
+        # Do not inform user via zenity.
         log "$@"
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
