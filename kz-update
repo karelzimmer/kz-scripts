@@ -74,6 +74,7 @@ def perform_cleanup():
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/webmin*',
                    shell=True, check=True)
 
+
 def perform_update():
     # Opdracht als sequence.
     print(f'\nUitvoeren apt update...')
