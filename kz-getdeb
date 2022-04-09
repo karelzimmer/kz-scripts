@@ -300,7 +300,7 @@ bash kz
         exit
     fi
     if ! command -v shellcheck &> /dev/null; then
-        info 'Installeer shellcheck...'
+        info 'Installeer snap shellcheck...'
         # Debian's pakket is oud, snap is nieuwer.
         sudo snap install shellcheck |& $LOGCMD
     fi
