@@ -25,59 +25,77 @@ def perform_cleanup():
     subprocess.run('sudo true', shell=True, check=True)
     print(f'Opschonen sleutels in /etc/apt/trusted.gpg...')
     # Chrome
+    print(f'\tGoogle Chrome...')
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*',
                    shell=True, check=True)
     # Earth
+    print(f'\tGoogle Earth...')
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-earth*',
                    shell=True, check=True)
     # Signal
+    print(f'\tSignal...')
     subprocess.run('sudo apt-key del 57F6FB06',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/signal*',
                    shell=True, check=True)
     # Teams
+    print(f'\tMicrosoft Teams...')
     subprocess.run('sudo apt-key del BE1229CF',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/microsoft*',
                    shell=True, check=True)
     # TeamViewer
+    print(f'\tTeamviewer...')
     subprocess.run('sudo apt-key del 0C1289C0 DEB49217',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/teamviewer*',
                    shell=True, check=True)
     # VirtualBox
+    print(f'\tVirtualBox...')
     subprocess.run('sudo apt-key del 98AB5139 2980AECF',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/oracle_vbox*',
                    shell=True, check=True)
-
+    # Webmin
+    print(f'\tWebmin...')
+    subprocess.run('sudo apt-key del 11F63C51',
+                   shell=True, check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/webmin*',
+                   shell=True, check=True)
 
 def perform_update():
     # Opdracht als sequence.
+    print(f'\nUitvoeren apt update...')
     subprocess.run(['sudo', 'apt-get', 'update'])
 
     # Opdracht als raw text.
+    print(f'\nUitvoeren apt upgrade...')
     subprocess.run('sudo apt-get upgrade --yes', shell=True)
+    print(f'\nUitvoeren apt dist-upgrade...')
     subprocess.run('sudo apt-get dist-upgrade --yes', shell=True)
 
     # Opdracht als raw text, vang afsluitwaarde op.
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*',
                    shell=True, check=True)
+    print(f'\nUitvoeren apt autoremove...')
     subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
+    print(f'\nUitvoeren apt autoclean...')
     subprocess.run('sudo apt-get autoclean --yes', shell=True, check=True)
 
     # Heeft dit systeem snaps?
     try:
+        print(f'\nUitvoeren snap refresh...')
         subprocess.run('sudo snap refresh', shell=True)
     except Exception as ex:
         print(ex)
