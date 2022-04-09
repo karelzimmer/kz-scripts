@@ -17,18 +17,18 @@ readonly RELEASE_YEAR=2007
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON's:gn'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',source:,gui,dry-run'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-s|--source=BRONMAP] [-g|--gui]
-                    [-n|--dry-run]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gs:'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',dry-run,gui,source:'
+readonly USAGE="Gebruik: $DISPLAY_NAME [--dry-run] [-g|--gui] \
+[-s|--source=BRONMAP]
                     $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Back-up terugzetten.
 
 Opties:
+      --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -g, --gui      start in grafische modus
-  -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -s, --source=BRONMAP
                  gebruik back-up in de BRONMAP
 $OPTIONS_HELP_COMMON"
@@ -78,7 +78,7 @@ function check_input {
                 fi
                 shift
                 ;;
-            -n|--dry-run)
+            --dry-run)
                 OPTION_DRY_RUN='--dry-run'
                 shift
                 ;;

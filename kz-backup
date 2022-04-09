@@ -17,20 +17,20 @@ readonly RELEASE_YEAR=2007
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gnt:x'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui,delete,dry-run,target:'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui] [-n|--dry-run]
-                   [-t|--target=DOELMAP][-x|--delete]
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gt:'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',delete,dry-run,gui,target:'
+readonly USAGE="Gebruik: $DISPLAY_NAME [--delete] [--dry-run] [-g|--gui] \
+[-t|--target=DOELMAP]
                    $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 Back-up maken.
 
 Opties:
-  -g, --gui      start in grafische modus
-  -n, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
-  -x, --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
+      --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
                  back-up verwijderen (standaard bij optie -g, --gui)
+      --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
+  -g, --gui      start in grafische modus
   -t, --target=DOELMAP
                  plaats back-up in de DOELMAP
 $OPTIONS_HELP_COMMON"
@@ -81,7 +81,11 @@ function check_input {
                 fi
                 shift
                 ;;
-            -n|--dry-run)
+            --delete)
+                OPTION_DELETE='--delete'
+                shift
+                ;;
+            --dry-run)
                 OPTION_DRY_RUN='--dry-run'
                 shift
                 ;;
@@ -95,10 +99,6 @@ function check_input {
                     TARGET_ARGUMENT=$2
                 fi
                 shift 2
-                ;;
-            -x|--delete)
-                OPTION_DELETE='--delete'
-                shift
                 ;;
             --)
                 shift

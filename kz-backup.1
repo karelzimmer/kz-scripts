@@ -25,13 +25,13 @@ wordt aangemaakt als nodig, bijvoorbeeld /media/jan/backupdisk/backup-pc01-jan.
 .sp
 Met optie \fB-t\fR, \fB--target\fR kan een andere locatie opgegeven worden.
 .sp
-Optie \fB-n\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
-te brengen. Het wordt meestal gebruikt in combinatie met de \fB-x\fR,
-\fB--delete\fR optie om te zien wat een rsync-commando gaat doen voordat men
-het daadwerkelijk uitvoert.
+Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
+Het wordt meestal gebruikt in combinatie met de \fB--delete\fR optie om te zien
+wat een rsync-commando gaat doen voordat men het daadwerkelijk uitvoert.
 .sp
-Optie \fB-d\fR, \fB--delete\fR verwijdert bestanden uit de back-up die niet
-meer voorkomen in de Persoonlijke map.
+Optie \fB--delete\fR verwijdert bestanden uit de back-up die niet meer
+voorkomen in de Persoonlijke map. Deze optie is standaard bij optie \fB-g\fR,
+\fB--gui\fR.
 .sp
 Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
 .RS
@@ -61,12 +61,12 @@ In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan
 .\"
 .SH OPTIES
 .TP
-\fB-n\fR, \fB--dry-run\fR
-Een proefrun uitvoeren zonder wijzigingen aan te brengen.
-.TP
-\fB-x\fR, \fB--delete\fR
+\fB--delete\fR
 Uit de Persoonlijke map verwijderde bestanden ook uit de back-up verwijderen
 (standaard bij optie \fB-g\fR, \fB--gui\fR).
+.TP
+\fB--dry-run\fR
+Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
 \fB-t\fR, \fB--target=\fIDOELMAP\fR
 Plaats back-up in de \fIDOELMAP\fR.
