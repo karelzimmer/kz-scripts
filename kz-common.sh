@@ -209,29 +209,31 @@ function process_common_options {
 function process_option_debug {
     # Enable code-stepping.
     #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    printf '%s\n' "${YELLOW}*** START DEBUG-SESSIE ***${NORMAL}"
-    log 'START DEBUG-SESSIE' --priority=debug
-    log 'Start show current environment' --priority=debug
-    log 'uname --all:' --priority=debug
+    TEXT='*** START DEBUG-SESSIE ***'
+    warning "$TEXT"
+    log "$TEXT"
+    log 'Start Show Current Environment'
+    log 'uname --all'
     log "$(uname --all)" --priority=debug
-    log 'lsb_release --all:' --priority=debug
-    log "$(lsb_release --all 2> >($LOGCMD --priority=debug))"
-    log 'cat /etc/os-release:' --priority=debug
+    log 'lsb_release --all'
+    log "$(lsb_release --all &> >($LOGCMD --priority=debug))"
+    log 'cat /etc/os-release'
     log "$(cat /etc/os-release)" --priority=debug
-    log 'declare -p:' --priority=debug
+    log 'declare -p'
     log "$(declare -p)" --priority=debug
-    log 'End show current environment' --priority=debug
-    log 'Routing bash xtrace to FD4' --priority=debug
+    log 'End Show Current Environment'
+    log 'Routing bash xtrace to FD4'
     exec 4> >($LOGCMD --priority=debug)
     BASH_XTRACEFD=4
     log 'Setting bash options'
     set -o verbose
     set -o xtrace
-    log 'Let the fun begin...' --priority=debug
+    log 'Setting PS4 debug prompt string'
     # shellcheck disable=SC2016
     ps4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
     export PS4=$ps4
     unset ps4
+    log 'Let the fun begin...'
 }
 
 function process_option_help {
@@ -368,11 +370,12 @@ Controleer de log in het Terminalvenster met:
                 set +o xtrace
                 BASH_XTRACEFD=''
                 exec 4>&-
-                printf '%s\n' "${YELLOW}*** EINDE DEBUG-SESSIE ***${NORMAL}
+                TEXT='*** END DEBUG-SESSIE ***'
+                warning "$TEXT${NORMAL}
 
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
-                log 'EINDE DEBUG-SESSIE'
+                log "$TEXT"
             fi
             log "Ended (code=exited, status=$status)." --priority=notice
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
