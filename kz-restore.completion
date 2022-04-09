@@ -5,6 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-dashoptions="-d --debug -g --gui -h --help -n --dry-run  '-s BRONMAP'
-    '--source BRONMAP' -u --usage -v --version"
+dashoptions="-g --gui -h --help -n --dry-run  '-s BRONMAP' '--source BRONMAP'
+    -u --usage -v --version"
 complete -o default -W "$dashoptions" kz-restore

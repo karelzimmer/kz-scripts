@@ -17,18 +17,16 @@ readonly ERROR=1
 readonly WARNING=2
 
 # shellcheck disable=SC2034
-readonly OPTIONS_SHORT_COMMON='dhuv'
+readonly OPTIONS_SHORT_COMMON='huv'
 # shellcheck disable=SC2034
-readonly OPTIONS_LONG_COMMON='debug,help,usage,version'
+readonly OPTIONS_LONG_COMMON='help,usage,version'
 # shellcheck disable=SC2034
-readonly OPTIONS_USAGE_COMMON="[-u|--usage] [-h|--help] [-v|--version] \
-[-d|--debug]"
+readonly OPTIONS_USAGE_COMMON='[-u|--usage] [-h|--help] [-v|--version]'
 # shellcheck disable=SC2034
 readonly OPTIONS_HELP_COMMON="\
   -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon de programmaversie
-  -d, --debug    neem foutopsporingsinformatie op in het logboek"
+  -v, --version  toon de programmaversie"
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
@@ -44,7 +42,6 @@ declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD_CHECK=''
 declare     LOGCMD=''
-declare     OPTION_DEBUG=false
 declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
@@ -166,10 +163,6 @@ function log {
 function process_common_options {
     while true; do
         case $1 in
-            -d|--debug)
-                OPTION_DEBUG=true
-                shift
-                ;;
             -u|--usage)
                 OPTION_USAGE=true
                 shift
@@ -191,9 +184,6 @@ function process_common_options {
         esac
     done
 
-    if $OPTION_DEBUG; then
-        process_option_debug
-    fi
     if $OPTION_HELP; then
         process_option_help
         exit $SUCCESS
@@ -204,32 +194,6 @@ function process_common_options {
         process_option_version
         exit $SUCCESS
     fi
-}
-
-function process_option_debug {
-    # Enable code-stepping.
-    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    warning 'START DEBUG-SESSIE'
-    log 'uname --all'
-    log "$(uname --all)" --priority=debug
-    log 'lsb_release --all'
-    log "$(lsb_release --all &> >($LOGCMD --priority=debug))"
-    log 'cat /etc/os-release'
-    log "$(cat /etc/os-release)" --priority=debug
-    log 'declare -p'
-    log "$(declare -p)" --priority=debug
-    log 'Routing bash xtrace to FD4'
-    exec 4> >($LOGCMD --priority=debug)
-    BASH_XTRACEFD=4
-    log 'Setting bash options'
-    set -o verbose
-    set -o xtrace
-    log 'Setting PS4 debug prompt string'
-    # shellcheck disable=SC2016
-    ps4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
-    export PS4=$ps4
-    unset ps4
-    log 'Let the fun begin...'
 }
 
 function process_option_help {
@@ -361,16 +325,6 @@ Controleer de log in het Terminalvenster met:
             ;;
         exit)
             signal_exit
-            if $OPTION_DEBUG; then
-                set +o verbose
-                set +o xtrace
-                BASH_XTRACEFD=''
-                exec 4>&-
-                warning "END DEBUG SESSION${NORMAL}
-
-Controleer de log in het Terminalvenster met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
-            fi
             log "Ended (code=exited, status=$status)." --priority=notice
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"

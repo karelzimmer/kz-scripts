@@ -6,6 +6,6 @@
 ###############################################################################
 
 dashoptions="--addappfolder --addfavbegin --addfavend --removeappfolder
-    --removefav '--file DESKTOPFILE' '--folder=APPFOLDER' -d --debug -h --help
-    -u --usage -v --version"
+    --removefav '--file DESKTOPFILE' '--folder=APPFOLDER' -h --help -u --usage
+    -v --version"
 complete -o default -W "$dashoptions" kz-gset
