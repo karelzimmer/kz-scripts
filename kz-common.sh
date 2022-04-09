@@ -82,15 +82,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 function error {
     if $OPTION_GUI; then
-        TITLE="Foutmelding $DISPLAY_NAME"
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        zenity  --error                 \
-                --no-markup             \
-                --width     500         \
-                --height    100         \
-                --title     "$TITLE"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
+        log "$@"
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
@@ -362,8 +354,8 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
-            error "Programma $PROGRAM_NAME is afgebroken."
-            info "
+            error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}
+
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
@@ -386,10 +378,7 @@ Controleer de log in het Terminalvenster met:
             exit "$rc"
             ;;
         *)
-            warning "Programma $PROGRAM_NAME is onderbroken."
-            info "
-Controleer de log in het Terminalvenster met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+            warning "${YELLOW}Programma $PROGRAM_NAME is onderbroken.${NORMAL}"
             exit "$rc"
             ;;
     esac

@@ -776,7 +776,9 @@ function execute_command {
         status="$STATUS_ERROR"
     fi
     log "$status rc=$cmd_rc, maxrc=$MAXRC"
-    printf '%s\n' "$status"
+    if ! $OPTION_GUI; then
+        printf '%s\n' "$status"
+    fi
 }
 
 function term_script {
