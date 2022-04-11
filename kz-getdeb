@@ -319,7 +319,7 @@ function process_repos {
                 "$BIN_REPO"                             |& $LOGCMD
     then
         cd "$BIN_REPO" || exit $ERROR
-        git clean -d  -f .
+        # git clean -d  -f .
         git pull |& $LOGCMD
     fi
     if ! git    clone                                       \
@@ -327,7 +327,7 @@ function process_repos {
                 "$DEB_REPO"                                 |& $LOGCMD
     then
         cd "$DEB_REPO" || exit $ERROR
-        git clean -d  -f .
+        # git clean -d  -f .
         git pull |& $LOGCMD
     fi
     if ! git    clone                                       \
@@ -336,14 +336,14 @@ function process_repos {
     then
         cd "$DOCS_REPO" || exit $ERROR
         git clean -d  -f .
-        git pull |& $LOGCMD
+        # git pull |& $LOGCMD
     fi
     if ! git    clone                                           \
                 https://github.com/karelzimmer/kz-scripts.git   \
                 "$SCRIPTS_REPO"                                 |& $LOGCMD
     then
         cd "$SCRIPTS_REPO" || exit $ERROR
-        git clean -d  -f .
+        # git clean -d  -f .
         git pull |& $LOGCMD
     fi
     if ! git    clone                                           \
@@ -351,7 +351,7 @@ function process_repos {
                 "$UPLOADS_REPO"                                 |& $LOGCMD
     then
         cd "$UPLOADS_REPO" || exit $ERROR
-        git clean -d  -f .
+        # git clean -d  -f .
         git pull |& $LOGCMD
     fi
 }
