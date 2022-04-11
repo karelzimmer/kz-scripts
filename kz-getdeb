@@ -312,6 +312,7 @@ Volg de aanwijzingen op het scherm.
 }
 
 function process_repos {
+    git config --global pull.ff only |& $LOGCMD
     git config --global credential.helper store |& $LOGCMD
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
