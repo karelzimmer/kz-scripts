@@ -42,6 +42,7 @@ declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD_CHECK=''
 declare     LOGCMD=''
+declare     ERROR_MSG_TO_LOG=true
 declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
@@ -79,8 +80,20 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 function error {
     if $OPTION_GUI; then
-        # Just log, at program end the user will be informed via zenity.
-        log "$@"
+        if $ERROR_MSG_TO_LOG; then
+            log 'ERROR_MSG_TO_LOG is set, no zenity error msg' --priority=debug
+            log "$@"
+        else
+            TITLE="Foutmelding $DISPLAY_NAME"
+            # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+            zenity  --error                 \
+                    --no-markup             \
+                    --width     500         \
+                    --height    100         \
+                    --title     "$TITLE"    \
+                    --text      "$@"        \
+                    --ok-label  'Oké'       2> >($LOGCMD) || true
+        fi
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
