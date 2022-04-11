@@ -289,7 +289,7 @@ function process_menu1_choice2 {
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
 Deze checklist is te vinden:
-- in de map Documenten
+- in de map kz in Documenten
 - in de map /usr/share/doc/kz
 - op de site https://karelzimmer.nl,
   onder Linux
