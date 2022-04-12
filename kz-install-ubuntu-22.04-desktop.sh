@@ -21,6 +21,10 @@ sudo snap install bitwarden
 
 #1 citrix (telewerken)
 ## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
+## Tijdelijk ivm ontbrekende libidn11 (op Ubuntu 22.04 is libidn12 geïnstalleerd)
+wget --no-verbose --output-document=/tmp/libidn11 https://karelzimmer.nl/downloads/icaclient/libidn11
+wget --no-verbose --output-document=/tmp/libidn11.deb "https://karelzimmer.nl/downloads/icaclient/libidn11_$(cat /tmp/libidn11)_amd64.deb"
+sudo apt-get install --yes /tmp/libidn11.deb
 ## Voegt gebruiker citrixlog toe!
 wget --no-verbose --output-document=/tmp/icaclient-LATEST https://karelzimmer.nl/downloads/icaclient/LATEST
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
