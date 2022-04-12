@@ -25,14 +25,14 @@ def perform_cleanup():
     subprocess.run('sudo true', shell=True, check=True)
     print(f'Opschonen sleutels in /etc/apt/trusted.gpg...')
     # Chrome
-    print(f'\tGoogle Chrome...')
+    print(f'\tChrome...')
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*',
                    shell=True, check=True)
     # Earth
-    print(f'\tGoogle Earth...')
+    print(f'\tEarth...')
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -46,7 +46,7 @@ def perform_cleanup():
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/signal*',
                    shell=True, check=True)
     # Teams
-    print(f'\tMicrosoft Teams...')
+    print(f'\tTeams...')
     subprocess.run('sudo apt-key del BE1229CF',
                    shell=True, check=True,
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
