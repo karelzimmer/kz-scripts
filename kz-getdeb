@@ -46,6 +46,8 @@ Pakket kz installeren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
+readonly UPLOADS_DISTDIR=$HOME/kz-uploads/dist
+
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -316,7 +318,7 @@ function process_repos {
         cd "$bin_repo" || exit $ERROR
         git pull |& $LOGCMD
     fi
-    /home/karel/bin/gitpull
+    /home/karel/bin/gitpull |& $LOGCMD
 }
 
 function download_website {
