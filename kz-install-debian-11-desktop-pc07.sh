@@ -47,11 +47,6 @@ sudo apt-get install --yes mlocate
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove mlocate
 
-#1 meld (visuele diff en merge tool)
-sudo apt-get install --yes meld
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove meld
-
 #1 python (programmeertaal)
 sudo apt-get install --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip

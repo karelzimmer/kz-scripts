@@ -40,11 +40,6 @@ sudo apt-get install --yes mlocate
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove mlocate
 
-#1 meld (visuele diff en merge tool)
-sudo apt-get install --yes meld
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove meld
-
 #1 pinta (tekenprogramma)
 sudo apt-get install --yes pinta
 #3 Start Terminalvenster en voer uit:
