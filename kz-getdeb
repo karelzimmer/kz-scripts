@@ -46,13 +46,6 @@ Pakket kz installeren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly BIN_REPO=$HOME/bin
-readonly DEB_REPO=$HOME/kz-deb
-readonly DOCS_REPO=$HOME/kz-docs
-readonly SCRIPTS_REPO=$HOME/kz-scripts
-readonly UPLOADS_REPO=$HOME/kz-uploads
-readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -312,48 +305,18 @@ Volg de aanwijzingen op het scherm.
 }
 
 function process_repos {
+    local bin_repo=/home/karel/bin
+
     git config --global pull.ff only |& $LOGCMD
     git config --global credential.helper store |& $LOGCMD
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
-                "$BIN_REPO"                             |& $LOGCMD
+                "$bin_repo"                             |& $LOGCMD
     then
-        cd "$BIN_REPO" || exit $ERROR
-        # git clean -d  -f .
+        cd "$bin_repo" || exit $ERROR
         git pull |& $LOGCMD
     fi
-    if ! git    clone                                       \
-                https://github.com/karelzimmer/kz-deb.git   \
-                "$DEB_REPO"                                 |& $LOGCMD
-    then
-        cd "$DEB_REPO" || exit $ERROR
-        # git clean -d  -f .
-        git pull |& $LOGCMD
-    fi
-    if ! git    clone                                       \
-                https://github.com/karelzimmer/kz-docs.git  \
-                "$DOCS_REPO"                                |& $LOGCMD
-    then
-        cd "$DOCS_REPO" || exit $ERROR
-        git clean -d  -f .
-        # git pull |& $LOGCMD
-    fi
-    if ! git    clone                                           \
-                https://github.com/karelzimmer/kz-scripts.git   \
-                "$SCRIPTS_REPO"                                 |& $LOGCMD
-    then
-        cd "$SCRIPTS_REPO" || exit $ERROR
-        # git clean -d  -f .
-        git pull |& $LOGCMD
-    fi
-    if ! git    clone                                           \
-                https://github.com/karelzimmer/kz-uploads.git   \
-                "$UPLOADS_REPO"                                 |& $LOGCMD
-    then
-        cd "$UPLOADS_REPO" || exit $ERROR
-        # git clean -d  -f .
-        git pull |& $LOGCMD
-    fi
+    /home/karel/bin/gitpull
 }
 
 function download_website {
