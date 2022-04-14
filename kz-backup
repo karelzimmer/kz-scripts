@@ -216,13 +216,15 @@ Koppel een medium aan met meer ruimte, en start daarna opnieuw."
             exit $ERROR
             ;;
         23)
-            log 'Niet alle bestanden waren leesbaar?'
+            log 'Niet alle bestanden waren leesbaar.'
             warning "
 Back-up maken is gedeeltelijk gelukt.
 
-Mogelijk zijn enkele bestanden niet leesbaar.
+Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
+verwijderd of toegevoegd tijdens het maken van de back-up.
 
-Controleer de log in het Terminalvenster met:
+Probeer opnieuw een back-up te maken.
+Als dat niet lukt, controleer de log in het Terminalvenster met:
 
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
@@ -233,7 +235,8 @@ Back-up maken is mislukt.
 
 Foutcode rsync is $rsync_rc.
 
-Controleer de log in het Terminalvenster met:
+Probeer opnieuw een back-up te maken.
+Als dat niet lukt, controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $ERROR
             ;;

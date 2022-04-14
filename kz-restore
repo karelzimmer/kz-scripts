@@ -192,9 +192,11 @@ Gebruik een medium met meer ruimte, en start daarna opnieuw."
             warning "
 Back-up terugzetten is gedeeltelijk gelukt.
 
-Mogelijk zijn enkele bestanden niet leesbaar.
+Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
+verwijderd of toegevoegd tijdens het terugzetten van de back-up.
 
-Controleer de log in het Terminalvenster met:
+Probeer opnieuw de back-up terug te zetten.
+Als dat niet lukt, controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
             ;;
@@ -204,7 +206,8 @@ Back-up terugzetten is mislukt.
 
 Foutcode rsync is $rsync_rc.
 
-Controleer de log in het Terminalvenster met:
+Probeer opnieuw de back-up terug te zetten.
+Als dat niet lukt, controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $ERROR
             ;;
