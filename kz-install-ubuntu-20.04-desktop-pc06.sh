@@ -53,11 +53,6 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #3    sudo apt remove pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 #3    sudo rm /usr/bin/pip
 
-#1 samba (communiceren met andere machines)
-sudo apt-get install --yes samba cifs-utils
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove samba cifs-utils
-
 #1 signal (privéberichtenapp)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
 wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
