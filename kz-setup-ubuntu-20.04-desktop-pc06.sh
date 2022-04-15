@@ -18,9 +18,9 @@ kz-gset --addfavaft=kz-cockpit
 #3    kz-gset --delfav=kz-cockpit
 
 #1 firefox (webbrowser)
-kz-gset --delfav=firefox
+kz-gset --delfav=firefox_firefox
 #3 Start Terminalvenster en voer uit:
-#3    kz-gset --addfavbef=firefox
+#3    kz-gset --addfavbef=firefox_firefox
 
 #1 gnome (bureaubladomgeving)
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-gnome.png
