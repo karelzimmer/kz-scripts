@@ -17,12 +17,12 @@ readonly RELEASE_YEAR=2013
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fgilrs'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,gui,info,\
-list,reset,simulate"
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fglrs'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,gui,list,\
+reset,simulate"
 readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] \
-[-e|--edition=EDITIE] [-f|--files] [-g|--gui]
-                  [-i|--info] [-l|--list] [-r|--reset] [-s|--simulate]
+[-e|--edition=EDITIE] [-f|--files]
+                  [-g|--gui] [-l|--list] [-r|--reset] [-s|--simulate]
                   $OPTIONS_USAGE_COMMON
                   [APP...] [BESTAND...]"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
@@ -36,7 +36,6 @@ Opties:
                  gebruik opgegeven EDITIE
   -f, --files    toon lijst van bestanden
   -g, --gui      start in grafische modus
-  -i, --info     toon instel-instructies
   -l, --list     maak instellijst aan
   -r, --reset    toon reset-instructies
   -s, --simulate toon opdrachten
@@ -73,7 +72,6 @@ declare     EDITION_ARGUMENT=''
 declare     EXECUTE_COMMANDS=true
 declare -a  FILE_ARGUMENTS=()
 declare -a  FILES_TO_PROCESS=()
-declare     INFO_FOUND=false
 declare     LESS_OPTIONS=''
 declare -i  MAXRC=0
 declare     OPTION_APPS=false
@@ -81,7 +79,6 @@ declare     OPTION_CAT=false
 declare     OPTION_EDITION=false
 declare     OPTION_FILES=false
 declare     OPTION_GUI=false
-declare     OPTION_INFO=false
 declare     OPTION_LIST=false
 declare     OPTION_RESET=false
 declare     OPTION_SIMULATE=false
@@ -151,11 +148,6 @@ function check_input {
                 if [[ -t 1 ]]; then
                     reset_terminal_attributes
                 fi
-                shift
-                ;;
-            -i|--info)
-                OPTION_INFO=true
-                EXECUTE_COMMANDS=false
                 shift
                 ;;
             -l|--list)
@@ -580,7 +572,6 @@ function process_file {
     local -i    cmd_seq_num=0
     local       first_description_line=true
     local       first_reset_instruction=true
-    local       first_setup_instruction=true
     local       prev_recordtype=''
     local       record=''
     local       recordtype=''
@@ -603,9 +594,6 @@ function process_file {
                 process_app_description "$record"
                 ;;
             '#2')
-                process_setup_instruction "$record"
-                ;;
-            '#3')
                 process_reset_instruction "$record"
                 ;;
             '#'*)
@@ -637,34 +625,6 @@ function process_app_description {
     cmd_seq_num=0
 }
 
-function process_setup_instruction {
-    local       record=${1:-record?}
-    local       filler=''
-    local -i    len=0
-
-    INFO_FOUND=true
-    if ! $OPTION_INFO; then
-        return $SUCCESS
-    fi
-    filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#2' ]]; then
-        printf '%s%s\n' "$filler" "${record:3}" >> "$TEXT_FILE"
-    else
-        ((++app_seq_num))
-        if $first_setup_instruction; then
-            first_setup_instruction=false
-        else
-            printf '\n' >> "$TEXT_FILE"
-        fi
-        len=${#app_description}
-        # ?? wordt in term_script vervangen door aantal in te stellen apps.
-        printf  "[%2d/??] %s\n%s%.${len}s\n%s%s\n"  \
-                "$app_seq_num"  "$app_description"  \
-                "$filler"       "$DASHES"           \
-                "$filler"       "${record:3}"       >> "$TEXT_FILE"
-    fi
-}
-
 function process_reset_instruction {
     local       record=${1:-record?}
     local       filler=''
@@ -675,7 +635,7 @@ function process_reset_instruction {
         return $SUCCESS
     fi
     filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#3' ]]; then
+    if [[ $prev_recordtype = '#2' ]]; then
         printf '%s%s\n' "$filler" "${record:3}" >> "$TEXT_FILE"
     else
         ((++app_seq_num))
@@ -803,29 +763,6 @@ function term_script {
             less_options "$TITLE"
             less "$LESS_OPTIONS" "$TEXT_FILE"
         fi
-    elif $OPTION_INFO && $INFO_FOUND; then
-        # Vervang ?? door aantal in te stellen apps.
-        app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
-        sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        TITLE='Instel-instructies'
-        if $OPTION_GUI; then
-            if ! zenity --text-info                         \
-                        --width         850                 \
-                        --height        400                 \
-                        --title         "$TITLE"            \
-                        --filename      "$TEXT_FILE"        \
-                        --font          'Ubuntu Mono 12'    \
-                        --checkbox      'Gezien'            \
-                        --ok-label      'Oké'               \
-                        --cancel-label  'Afsluiten'         2> >($LOGCMD); then
-                true
-            fi
-        else
-            less_options "$TITLE"
-            less "$LESS_OPTIONS" "$TEXT_FILE"
-        fi
-    elif $OPTION_INFO && ! $INFO_FOUND; then
-        info 'Geen instel-instructies.'
     elif $OPTION_RESET && $RESET_FOUND; then
         # Vervang ?? door aantal te resetten apps.
         app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
@@ -851,14 +788,6 @@ function term_script {
         info 'Geen reset-instructies.'
     elif ! $COMMANDS_FOUND; then
         info 'Geen opdrachten.'
-    fi
-
-    if  $EXECUTE_COMMANDS && $INFO_FOUND && ! $OPTION_GUI; then
-        info "
-Er zijn aanvullende instructies.
-
-Gebruik de opdracht:
-    ${BLUE}$DISPLAY_NAME --info ${APP_ARGUMENTS[*]}${NORMAL}"
     fi
 
     if $EXECUTE_COMMANDS; then

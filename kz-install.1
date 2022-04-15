@@ -76,13 +76,9 @@ kz-install-ubuntu-20.04-desktop-pc04.sh.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de bestanden.
 .sp
-Het is mogelijk dat na het uitvoeren van \fBkz install\fR er extra acties nodig
-zijn.
-Optie \fB-i\fR, \fB--info\fR geeft dan aanvullende instructies weer.
-.sp
 Optie \fB-l\fR, \fB--list\fR maakt bestand Applijst aan in map \fBkz\fR in
 Documenten.
-Hierin informatie over welke pakketten handmatig zijn geïnstalleerd, welke
+Hierin overzichten van welke pakketten handmatig zijn geïnstalleerd, welke
 snaps zijn geïnstalleerd, en welke pakketbronnen ("repositories" of "repo's")
 zijn toegevoegd.
 .br
@@ -147,11 +143,6 @@ T}
 T{
 #2 INSTRUCTIE
 T}:T{
-Bevat aanvullende INSTRUCTIEs na het installeren van APP.
-T}
-T{
-#3 INSTRUCTIE
-T}:T{
 Bevat INSTRUCTIEs voor het verwijderen van APP.
 T}
 T{
@@ -214,22 +205,12 @@ T}:T{
 Opdracht.
 T}
 T{
-#2 1. Start Google Chrome.
-T}:T{
-Installatie-INSTRUCTIEs; voor optie info.
-T}
-T{
-#2 2. Controleer de werking.
-T}:T{
-    "               "
-T}
-T{
-#3 Start Terminalvenster en voer uit:
+#2 Start Terminalvenster en voer uit:
 T}:T{
 Verwijder-INSTRUCTIEs; voor optie remove.
 T}
 T{
-#3    sudo apt remove google-chrome-stable
+#2    sudo apt remove google-chrome-stable
 T}:T{
     "               "
 T}
@@ -253,11 +234,8 @@ Gebruik editie \fIEDITIE\fR.
 \fB-f\fR, \fB--files\fR
 Toon een lijst van bestanden aanwezig op het systeem.
 .TP
-\fB-i\fR, \fB--info\fR
-Toon aanvullende instructies na het installeren van apps.
-.TP
 \fB-l\fR, \fB--list\fR
-Maak Applijst aan in map kz in Documenten met hierin informatie over pakketten.
+Maak Applijst aan in map kz in Documenten met pakketoverzichten.
 .TP
 \fB-r\fR, \fB--remove\fR
 Toon instructies voor het verwijderen van apps.
@@ -344,13 +322,6 @@ Hiervoor is ook starter \fBApps installeren\fR beschikbaar.
 \fBkz install google-chrome\fR
 .RS
 Installeer Google Chrome.
-.RE
-.sp
-\fBkz install google-chrome --info\fR
-.RS
-Toon aanvullende instructies na het installeren van Google Chrome.
-Rechtsklik op starter 'Apps installeren' en kies
-'Installatie-instructies tonen'.
 .RE
 .sp
 \fBkz install google-chrome --remove\fR

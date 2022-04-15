@@ -8,18 +8,18 @@
 #1-lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
-#3 Start Terminalvenster en voer uit:
-#3    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+#2 Start Terminalvenster en voer uit:
+#2    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 #1 pinta (tekenprogramma)
 sudo apt-get install --yes pinta
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove pinta
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove pinta
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop
-#3 Start Terminalvenster en voer uit:
-#3    sudo snap remove telegram-desktop
+#2 Start Terminalvenster en voer uit:
+#2    sudo snap remove telegram-desktop
 
 #1 virtualbox (virtualisatie)
 ## Images staan in ~/VirtualBox VMs/.
@@ -36,11 +36,9 @@ sudo adduser "${SUDO_USER:-$USER}" vboxusers
 sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 sudo apt-key del 98AB5139 2980AECF
 sudo rm --force /etc/apt/trusted.gpg.d/oracle_vbox*
-#2 Met een AMD-processor zal AMD-V wel aanstaan, maar bij Intel moet vaak VT-x
-#2 aangezet worden in het BIOS of UEFI-firmware!
-#3 Start Terminalvenster en typ, of kopieer en plak:
-#3    sudo deluser "${SUDO_USER:-$USER}" vboxusers
-#3    sudo delgroup vboxusers
-#3    sudo apt remove --yes virtualbox-*
-#3    sudo rm /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
-#3    sudo apt update
+#2 Start Terminalvenster en typ, of kopieer en plak:
+#2    sudo deluser "${SUDO_USER:-$USER}" vboxusers
+#2    sudo delgroup vboxusers
+#2    sudo apt remove --yes virtualbox-*
+#2    sudo rm /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
+#2    sudo apt update

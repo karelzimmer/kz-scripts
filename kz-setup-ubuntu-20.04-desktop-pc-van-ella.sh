@@ -7,5 +7,5 @@
 
 #1 gnome (bureaubladomgeving)
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Fleurs_de_Prunus_24_by_Jérôme_Boivin.jpg
-#3 Start Terminalvenster en voer uit:
-#3    gsettings reset org.gnome.desktop.background picture-uri
+#2 Start Terminalvenster en voer uit:
+#2    gsettings reset org.gnome.desktop.background picture-uri

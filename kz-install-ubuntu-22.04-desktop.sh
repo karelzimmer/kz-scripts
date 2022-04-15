@@ -10,45 +10,30 @@ sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
-#3 Start Terminalvenster en voer uit:
-#3    sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
-#3    sudo systemctl enable --now apport.service
+#2 Start Terminalvenster en voer uit:
+#2    sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
+#2    sudo systemctl enable --now apport.service
 
 #1 bitwarden (wachtwoordbeheer)
 sudo snap install bitwarden
-#3 Start Terminalvenster en voer uit:
-#3    sudo snap remove bitwarden
+#2 Start Terminalvenster en voer uit:
+#2    sudo snap remove bitwarden
 
 #1 citrix (telewerken)
-## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
 ## Tijdelijk, icaclient_22.3.0.24_amd64.deb is afhankelijk van libidn11 (Ubuntu 22.04 LTS levert libidn12).
 wget --no-verbose --output-document=/tmp/libidn11 https://karelzimmer.nl/downloads/icaclient/libidn11
 wget --no-verbose --output-document=/tmp/libidn11.deb "https://karelzimmer.nl/downloads/icaclient/libidn11_$(cat /tmp/libidn11)_amd64.deb"
 sudo apt-get install --yes /tmp/libidn11.deb
 rm /tmp/libidn11 /tmp/libidn11.deb
-## Voegt gebruiker citrixlog toe!
+## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
 wget --no-verbose --output-document=/tmp/icaclient-LATEST https://karelzimmer.nl/downloads/icaclient/LATEST
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
-#2 Mocht de <2e gebruiker> problemen hebben met het aanmelden of het gebruik
-#2 van /home, start dan het Terminalvenster en voer uit:
-#2    id <2e gebruiker>
-#2    id citrixlog
-#2 Als gebruiker <2e gebruiker> UID 1002 heeft en gebruiker citrixlog UID=1001,
-#2 dan is gebruiker citrixlog (met de installatie van citrix) eerder aangemaakt
-#2 dan gebruiker <2e gebruiker>.
-#2 Dit is op te lossen met:
-#2    sudo usermod  --uid 1003 citrixlog
-#2    sudo groupmod --gid 1003 citrixlog
-#2    sudo usermod  --uid 1001 <2e gebruiker>
-#2    sudo groupmod --gid 1001 <2e gebruiker>
-#2    sudo usermod  --uid 1002 citrixlog
-#2    sudo groupmod --gid 1002 citrixlog
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove icaclient
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove icaclient
 
 #1 google-chrome (webbrowser)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -61,34 +46,34 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 ## GNOME Shell integration - Integratie van GNOME Shell-extensies voor webbrowsers: https://extensions.gnome.org
 sudo apt-get install --yes chrome-gnome-shell
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove google-chrome-stable chrome-gnome-shell
-#3    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
-#3    sudo apt update
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove google-chrome-stable chrome-gnome-shell
+#2    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
+#2    sudo apt update
 
 #1 language-support (taalondersteuning)
 check-language-support | xargs sudo apt-get install --yes
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove libreoffice libreoffice-help-nl libreoffice-l10n-nl
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype
-#3 Start Terminalvenster en voer uit:
-#3    sudo snap remove skype
+#2 Start Terminalvenster en voer uit:
+#2    sudo snap remove skype
 
 #1 spotify (muziekspeler)
 sudo snap install spotify
-#3 Start Terminalvenster en voer uit:
-#3    sudo snap remove spotify
+#2 Start Terminalvenster en voer uit:
+#2    sudo snap remove spotify
 
 #1 sushi (voorbeeld tonen)
 ## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
 sudo apt-get install --yes gnome-sushi
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove gnome-sushi
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove gnome-sushi
 
 #1 teams (samenwerken)
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
@@ -102,9 +87,9 @@ sudo rm --force /etc/apt/trusted.gpg.d/microsoft*
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter:
 sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove --yes teams
-#3    sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove --yes teams
+#2    sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
 
 #1 teamviewer (afstandsbediening)
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
@@ -113,26 +98,26 @@ sudo apt-get update
 sudo apt-get install --yes teamviewer
 sudo apt-key del 0C1289C0 DEB49217
 sudo rm --force /etc/apt/trusted.gpg.d/teamviewer*
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove teamviewer
-#3    sudo rm /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
-#3    sudo apt update
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove teamviewer
+#2    sudo rm /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
+#2    sudo apt update
 
 #1 thunderbird (e-mail)
 sudo apt-get install --yes xul-ext-lightning
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove xul-ext-lightning
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove xul-ext-lightning
 
 #1 restricted-addons (niet-vrije pakketten)
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove ubuntu-restricted-addons libavcodec-extra
-#3    sudo apt autoremove --yes
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove ubuntu-restricted-addons libavcodec-extra
+#2    sudo apt autoremove --yes
 
 #1 zoom (samenwerken)
 wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
-#3 Start Terminalvenster en voer uit:
-#3    sudo apt remove zoom
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove zoom

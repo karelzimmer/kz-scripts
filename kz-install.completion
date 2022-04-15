@@ -6,6 +6,6 @@
 ###############################################################################
 
 dashoptions="-a --apps -c --cat '-e EDITIE' '--edition EDITIE' -f --files -g
-    --gui -h --help -i --info -l --list -r --remove -s --simulate -u --usage -v
+    --gui -h --help -l --list -r --remove -s --simulate -u --usage -v
     --version"
 complete -o default -W "$dashoptions" kz-install
