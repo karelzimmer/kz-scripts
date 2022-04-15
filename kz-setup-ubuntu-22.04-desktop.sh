@@ -136,6 +136,7 @@ gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3 Start Terminalvenster en voer uit:
@@ -153,6 +154,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #3    gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 #3    gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #3    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
+#3    gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 #3    gsettings reset org.gnome.shell.extensions.ding show-home false
 #3    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
