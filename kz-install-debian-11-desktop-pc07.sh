@@ -31,10 +31,6 @@ sudo apt-get install --yes aspell-nl git
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo adduser "${SUDO_USER:-$USER}" libvirt
 sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
-#2 Deel klembord voor kopiëren en plakken tussen gastheer en gast.
-#2 1. Start een gast.
-#2 2. Start Terminalvenster en voer uit:
-#2    sudo apt install spice-vdagent
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 #3    sudo delgroup libvirtd-dnsmasq

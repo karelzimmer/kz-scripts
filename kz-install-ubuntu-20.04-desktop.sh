@@ -110,9 +110,6 @@ sudo rm --force /etc/apt/trusted.gpg.d/microsoft*
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter:
 sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
-#2 1. Start Microsoft Teams
-#2 2. Ga naar Instellingen.
-#2 3. Vink uit 'Toepassing automatisch starten' en
 #2    'Toepassing actief houden na sluiten'.
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove --yes teams

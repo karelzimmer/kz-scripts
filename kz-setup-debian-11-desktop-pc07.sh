@@ -32,6 +32,8 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type not
 kz-gset --addfavaft=virt-manager
 #2 1. Start KVM.
 #2 2. Zet beeldscherm op: 2048 x 1152 (16:9).
+#2 3. Start Terminalvenster en voer uit:
+#2    sudo apt install spice-vdagent
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=virt-manager
 

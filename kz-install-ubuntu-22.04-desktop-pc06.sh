@@ -25,10 +25,6 @@ sudo apt-get install --yes aspell-nl git
 ## Images staan in /var/lib/libvirt/images/.
 ## Dpkg::Options i.v.m. interactie a.g.v. restore /etc/libvirt configuratiebestanden.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" cpu-checker qemu-kvm bridge-utils virt-manager
-#2 Deel klembord voor kopiëren en plakken tussen gastheer en gast.
-#2 1. Start een gast.
-#2 2. Start Terminalvenster en voer uit:
-#2    sudo apt install spice-vdagent
 #3 Start Terminalvenster en voer uit:
 #3    sudo apt remove cpu-checker qemu-kvm bridge-utils virt-manager
 #3    sudo delgroup libvirtd-dnsmasq

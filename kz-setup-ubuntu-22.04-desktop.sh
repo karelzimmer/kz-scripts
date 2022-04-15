@@ -168,6 +168,10 @@ kz-gset --addfavaft=spotify_spotify
 
 #1 teams (samenwerken)
 kz-gset --addfavaft=teams
+#2 1. Start Microsoft Teams
+#2 2. Ga naar Instellingen.
+#2 3. Vink uit 'Toepassing automatisch starten' en
+#2    'Toepassing actief houden na sluiten'.
 #3 Start Terminalvenster en voer uit:
 #3    kz-gset --delfav=teams
 
