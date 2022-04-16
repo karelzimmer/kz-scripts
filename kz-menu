@@ -167,7 +167,7 @@ function process_menu1_gui {
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         480                                     \
-                    --height        230                                     \
+                    --height        240                                     \
                     --title         "$TITLE"                                \
                     --text          'Selecteer een keuze:'                  \
                     --ok-label      'Verder'                                \
@@ -342,7 +342,7 @@ function process_menu2_gui {
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         480                                     \
-                    --height        370                                     \
+                    --height        280                                     \
                     --title         "$TITLE"                                \
                     --text          'Selecteer een keuze:'                  \
                     --ok-label      'Verder'                                \
@@ -358,7 +358,6 @@ function process_menu2_gui {
                     FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
                     FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
                     FALSE  7 "${MENU2_ACTIONS[7]}"  "${MENU2_COMMANDS[7]}"  \
-                    FALSE  8 "${MENU2_ACTIONS[8]}"  "${MENU2_COMMANDS[8]}"  \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
