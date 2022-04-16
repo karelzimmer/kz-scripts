@@ -65,28 +65,20 @@ ${DASHES:0:57}"
 readonly -a MENU2_ACTIONS=(
     [1]='Back-up maken'
         'Apps installeren'
-        'Installatie-instructies tonen'
-        'Verwijder-instructies tonen'
         'Applijst maken'
         'Netwerkschijf aankoppelen'
         'Back-up terugzetten'
         'Apps instellen'
-        'Instel-instructies tonen'
-        'Reset-instructies tonen'
         'Instellijst maken'
         'Terug'
     )
 readonly -a MENU2_COMMANDS=(
     [1]='kz backup'
         'kz install'
-        'kz install --info'
-        'kz install --remove'
         'kz install --list'
         'kz nas'
         'kz restore'
         'kz setup'
-        'kz setup --info'
-        'kz setup --reset'
         'kz setup --list'
         'Naar vorig menu'
     )
@@ -96,9 +88,8 @@ readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 # Global variables                                                            #
 ###############################################################################
 
-declare     COMMANDS_EXECUTED=false
+declare     EXECUTE_COMMAND=false
 declare -a  EXEC=()
-declare -i  NUMBER_OF_COMMANDS=0
 declare     OPTION_GUI=false
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
@@ -235,11 +226,11 @@ function process_menu1_tui {
             esac
         done
         process_menu1_choice
-        if $COMMANDS_EXECUTED; then
+        if $EXECUTE_COMMAND; then
             read -rp '
 Druk op de Enter-toets voor het menu [Enter]: '
         fi
-        COMMANDS_EXECUTED=false
+        EXECUTE_COMMAND=false
     done
 }
 
@@ -276,8 +267,8 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
 
     TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
-            "${MENU2_ACTIONS[11]}#${MENU2_COMMANDS[11]}"
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+            "${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
             "${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
         )
 
@@ -311,14 +302,12 @@ function process_menu1_choice3 {
     if [[   ($HOSTNAME = pc-van-soe  && $USER = soe )   ||
             ($HOSTNAME = pc-van-hugo && $USER = hugo)   ]]; then
         EXEC=(
-            [1]="${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
+            [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
                 "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
-                "${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
             )
     else
         EXEC=(
             [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
-                "${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
             )
     fi
     process_commands
@@ -330,9 +319,8 @@ Zorg dat het medium is aangekoppeld waarop de back-up staat.'
 
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
-            "${MENU2_ACTIONS[8]}#${MENU2_COMMANDS[8]}"
-            "${MENU2_ACTIONS[9]}#${MENU2_COMMANDS[9]}"
+        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+            "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
         )
     process_commands
 }
@@ -371,9 +359,6 @@ function process_menu2_gui {
                     FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
                     FALSE  7 "${MENU2_ACTIONS[7]}"  "${MENU2_COMMANDS[7]}"  \
                     FALSE  8 "${MENU2_ACTIONS[8]}"  "${MENU2_COMMANDS[8]}"  \
-                    FALSE  9 "${MENU2_ACTIONS[9]}"  "${MENU2_COMMANDS[9]}"  \
-                    FALSE 10 "${MENU2_ACTIONS[10]}" "${MENU2_COMMANDS[10]}" \
-                    FALSE 11 "${MENU2_ACTIONS[11]}" "${MENU2_COMMANDS[11]}" \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -423,11 +408,11 @@ function process_menu2_tui {
         if $exit_menu2; then
             break
         fi
-        if $COMMANDS_EXECUTED; then
+        if $EXECUTE_COMMAND; then
             read -rp '
 Druk op de Enter-toets voor het menu [Enter]: '
         fi
-        COMMANDS_EXECUTED=false
+        EXECUTE_COMMAND=false
     done
 }
 
@@ -467,6 +452,9 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
             ;;
         5)
             TITLE="${MENU2_ACTIONS[5]}"
+            TEXT='
+Zorg dat het medium is aangekoppeld waarop de back-up staat.'
+            warning "$TEXT"
             EXEC=(
                 [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
                 )
@@ -487,37 +475,6 @@ Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
             process_commands
             ;;
         8)
-            TITLE="${MENU2_ACTIONS[8]}"
-            TEXT='
-Zorg dat het medium is aangekoppeld waarop de back-up staat.'
-            warning "$TEXT"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[8]}#${MENU2_COMMANDS[8]}"
-                )
-            process_commands
-            ;;
-        9)
-            TITLE="${MENU2_ACTIONS[9]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[9]}#${MENU2_COMMANDS[9]}"
-                )
-            process_commands
-            ;;
-        10)
-            TITLE="${MENU2_ACTIONS[10]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[10]}#${MENU2_COMMANDS[10]}"
-                )
-            process_commands
-            ;;
-        11)
-            TITLE="${MENU2_ACTIONS[11]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[11]}#${MENU2_COMMANDS[11]}"
-                )
-            process_commands
-            ;;
-        12)
             exit_menu2=true
             ;;
         *)
@@ -532,13 +489,8 @@ function process_commands {
     local       command=''
     local -i    exec=0
 
-    NUMBER_OF_COMMANDS=${#EXEC[@]}
-    if [[ $NUMBER_OF_COMMANDS -eq 1 ]]; then
-        COMMANDS_EXECUTED=true
-    else
-        show_commands_before_execution
-    fi
-    if $COMMANDS_EXECUTED; then
+    show_commands_before_execution
+    if $EXECUTE_COMMAND; then
         for exec in "${!EXEC[@]}"; do
             action=$(
                 printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -549,7 +501,7 @@ function process_commands {
             execute_command
         done
     fi
-    if $COMMANDS_EXECUTED && [[ $NUMBER_OF_COMMANDS -gt 1 ]]; then
+    if $EXECUTE_COMMAND; then
         show_commands_after_execution
     fi
 }
@@ -561,7 +513,7 @@ function show_commands_before_execution {
     local       prompt=''
 
     TEXT="
-De volgende $NUMBER_OF_COMMANDS acties worden achter elkaar uitgevoerd:
+Het volgende wordt uitgevoerd:
 "
     for exec in "${!EXEC[@]}"; do
         action=$(
@@ -575,7 +527,7 @@ $exec. $action ($command)"
     done
 
     prompt='
-Doorgaan en deze acties uitvoeren?'
+Doorgaan?'
     if $OPTION_GUI; then
         TEXT+="
 $prompt"
@@ -587,9 +539,9 @@ $prompt"
                     --text          "$TEXT"     \
                     --ok-label      'Ja'        \
                     --cancel-label  'Nee'       2> >($LOGCMD); then
-            COMMANDS_EXECUTED=true
+            EXECUTE_COMMAND=true
         else
-            COMMANDS_EXECUTED=false
+            EXECUTE_COMMAND=false
         fi
     else
         info "
@@ -598,11 +550,11 @@ $TEXT"
             read -rp "$prompt [J/n]: "
             case $REPLY in
                 j*|J*|'')
-                    COMMANDS_EXECUTED=true
+                    EXECUTE_COMMAND=true
                     break
                     ;;
                 n*|N*)
-                    COMMANDS_EXECUTED=false
+                    EXECUTE_COMMAND=false
                     break
                     ;;
                 *)
@@ -661,9 +613,8 @@ function show_commands_after_execution {
     local       temp_text_file=''
 
     temp_text_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.txt")
-    printf  '\n%s\n\n'                                                  \
-            "De volgende $NUMBER_OF_COMMANDS acties zijn uitgevoerd:"   \
-            > "$temp_text_file"
+    printf  '\n%s\n\n'                      \
+            "Het volgende is uitgevoerd:"   > "$temp_text_file"
     for exec in "${!EXEC[@]}"; do
         action=$(
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
