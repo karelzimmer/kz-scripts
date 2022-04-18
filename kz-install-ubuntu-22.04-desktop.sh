@@ -44,8 +44,16 @@ sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 ## Extra needed after first install.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-## Dit pakket biedt de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken.
+## De connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken.
 sudo apt-get install --yes chrome-gnome-shell
+## Extensies.
+sudo mkdir --parents /opt/google/chrome/extensions
+## AdGuard extensie.
+printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
+## Bitwarden extensie.
+printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
+## Gnome-shell-integratie extensie.
+printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
 #2 Start Terminalvenster en voer uit:
 #2    sudo apt remove google-chrome-stable chrome-gnome-shell
 #2    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*

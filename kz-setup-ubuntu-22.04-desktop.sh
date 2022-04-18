@@ -11,7 +11,6 @@ kz-gset --addfavaft=bitwarden_bitwarden
 #2    kz-gset --delfav=bitwarden_bitwarden
 
 #1 google-chrome (webbrowser)
-## Integratie van GNOME Shell-extensies voor webbrowsers https://extensions.gnome.org.
 kz-gset --addfavbef=google-chrome
 #2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=google-chrome
