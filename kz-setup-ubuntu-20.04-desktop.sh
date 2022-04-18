@@ -5,50 +5,16 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 adguard (adblocker)
-:
-#2 Voor Chrome:
-#2 ~~~~~~~~~~~~
-#2 1. Start Google Chrome webbrowser.
-#2 2. Klik rechtsboven op Meer⋮.
-#2 3. Klik vervolgens op Meer hulpprogramma's > Extensies.
-#2 4. Bij AdGuard-advertentieblokkeerder zet schuifje op uit of klik op Verwijderen.
-#2
-#2 Voor Firefox:
-#2 ~~~~~~~~~~~~~
-#2 1. Start Firefox webbrowser.
-#2 2. Ga naar Menu openen ☰ > Add-ons (Ctrl+Shift+A).
-#2 3. Klik links op Extensies.
-#2 4. Bij AdGuard-advertentieblokkeerder klik op Uitschakelen of Verwijderen.
-
 #1 bitwarden (wachtwoordbeheer)
 kz-gset --addfavaft=bitwarden_bitwarden
-#2 Voor Chrome:
-#2 ~~~~~~~~~~~~
-#2 1. Start Google Chrome webbrowser.
-#2 2. Klik rechtsboven op Meer⋮.
-#2 3. Klik vervolgens op Meer hulpprogramma's > Extensies.
-#2 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' zet schuifje op uit of klik op Verwijderen.
-#2 5. Start Terminalvenster en voer uit:
-#2       kz-gset --delfav=bitwarden_bitwarden
-#2
-#2 Voor Firefox:
-#2 ~~~~~~~~~~~~~
-#2 1. Start Firefox webbrowser.
-#2 2. Ga naar Menu openen ☰  > Add-ons (Ctrl+Shift+A).
-#2 3. Klik links op Extensies.
-#2 4. Bij 'Bitwarden (Gratis wachtwoordbeheer' klik op Uitschakelen of Verwijderen.
-#2 5. Start Terminalvenster en voer uit:
-#2       kz-gset --delfav=bitwarden_bitwarden
+#2 Start Terminalvenster en voer uit:
+#2    kz-gset --delfav=bitwarden_bitwarden
 
 #1 google-chrome (webbrowser)
 ## Integratie van GNOME Shell-extensies voor webbrowsers https://extensions.gnome.org.
 kz-gset --addfavbef=google-chrome
-#2 1. Start Google Chrome
-#2 2. Ga naar chrome://extensions/
-#2 3. Bij Gnome-shell-integratie zet schuifje op uit of klik op Verwijderen.
-#2 4. Start Terminalvenster en voer uit:
-#2       kz-gset --delfav=google-chrome
+#2 Start Terminalvenster en voer uit:
+#2    kz-gset --delfav=google-chrome
 
 #1 citrix (telewerken)
 ## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
@@ -106,15 +72,6 @@ kz-gset --addfavaft=spotify_spotify
 kz-gset --addfavaft=teams
 #2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=teams
-
-#1 thunderbird (e-mail)
-:
-#2 Verwijder de extenstie voor Google Agenda via:
-#2 1. Start Thunderbird.
-#2 2. Ga naar Menu openen ☰  > Add-ons.
-#2 3. Klik links op Extensies.
-#2 4. Bij 'Provider voor Google Agenda' zet schuifje op uit of klik ... en kies
-#2    Verwijderen.
 
 #1 zoom (samenwerken)
 kz-gset --addfavaft=Zoom
