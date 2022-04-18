@@ -50,7 +50,7 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #2    sudo rm /usr/bin/pip
 
 #1 signal (privéberichtenapp)
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
+printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
 wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
