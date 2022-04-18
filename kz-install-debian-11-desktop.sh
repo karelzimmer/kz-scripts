@@ -55,7 +55,7 @@ sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 ## Extra needed after first install.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-## GNOME Shell integration - Integratie van GNOME Shell-extensies voor webbrowsers: https://extensions.gnome.org
+## This package provides the connector that talks with the browser extension for https://extensions.gnome.org to work.
 sudo apt-get install --yes chrome-gnome-shell
 #2 Start Terminalvenster en voer uit:
 #2    sudo apt remove google-chrome-stable chrome-gnome-shell
