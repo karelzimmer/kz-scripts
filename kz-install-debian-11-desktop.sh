@@ -98,10 +98,6 @@ sudo apt-get update
 sudo apt-get install --yes teams
 sudo apt-key del BE1229CF
 sudo rm --force /etc/apt/trusted.gpg.d/microsoft*
-## Verwijder PREVIEW in afbeelding:
-sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
-## Verwijder Preview in starter:
-sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
 #2 Start Terminalvenster en voer uit:
 #2    sudo apt remove --yes teams
 #2    sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
