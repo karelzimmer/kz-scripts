@@ -36,7 +36,6 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.shell.extensions.desktop-icons show-home false
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
-gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #2 Start Terminalvenster en voer uit:
 #2    kz-gset --delappfolder=KZ Scripts
 #2    gsettings reset org.gnome.desktop.app-folders folder-children
@@ -55,7 +54,6 @@ gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 #2    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 #2    gsettings reset org.gnome.shell.extensions.desktop-icons show-home
 #2    gsettings reset org.gnome.shell.extensions.desktop-icons show-trash
-#2    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 
 #1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux

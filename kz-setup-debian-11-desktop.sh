@@ -39,7 +39,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
-gsettings set org.gnome.Terminal.Legacy.Settings new-terminal-mode 'tab'
 kz-gset --addappfolder --folder='KZ Scripts'
 #2 Start Terminalvenster en voer uit:
 #2    gnome-extensions disable dash-to-dock@micxgx.gmail.com
@@ -60,7 +59,6 @@ kz-gset --addappfolder --folder='KZ Scripts'
 #2    gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed true
 #2    gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height true
 #2    gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
-#2    gsettings reset org.gnome.Terminal.Legacy.Settings new-terminal-mode
 #2    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
 #2    kz-gset --removeappfolder --folder='KZ Scripts'
 
