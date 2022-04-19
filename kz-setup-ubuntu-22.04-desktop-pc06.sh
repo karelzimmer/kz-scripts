@@ -63,6 +63,5 @@ xdg-mime default code_code.desktop application/xml              # PolicyKit acti
 xdg-mime default code_code.desktop text/markdown                # Markdown document
 xdg-mime default code_code.desktop text/troff                   # Man-pagina
 xdg-mime default code_code.desktop text/html                    # Web-pagina
-
 #2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=code_code
