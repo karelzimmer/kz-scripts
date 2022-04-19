@@ -130,7 +130,11 @@ function process_input {
     else
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
-            warning 'Koppel een USB-medium aan, en start daarna opnieuw.'
+            warning 'Geen back-up gemaakt.
+
+Geen USB-medium gevonden.
+
+Koppel een USB-medium aan, en start daarna opnieuw.'
             exit $WARNING
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             warning "Koppel slechts één USB-medium aan.

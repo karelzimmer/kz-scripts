@@ -262,9 +262,6 @@ function process_menu1_choice {
 }
 
 function process_menu1_choice1 {
-    warning '
-Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
-
     TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
@@ -314,9 +311,6 @@ function process_menu1_choice3 {
 }
 
 function process_menu1_choice4 {
-    warning '
-Zorg dat het medium is aangekoppeld waarop de back-up staat.'
-
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
         [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
@@ -417,70 +411,18 @@ Druk op de Enter-toets voor het menu [Enter]: '
 
 
 function process_menu2_choice {
-    case $REPLY in
-        1)
-            TEXT='
-Zorg dat het medium is aangekoppeld waarop de back-up wordt geplaatst.'
-            warning "$TEXT"
-            TITLE="${MENU2_ACTIONS[1]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
-                )
-            process_commands
-            ;;
-        2)
-            TITLE="${MENU2_ACTIONS[2]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
-                )
-            process_commands
-            ;;
-        3)
-            TITLE="${MENU2_ACTIONS[3]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
-                )
-            process_commands
-            ;;
-        4)
-            TITLE="${MENU2_ACTIONS[3]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
-                )
-            process_commands
-            ;;
-        5)
-            TITLE="${MENU2_ACTIONS[5]}"
-            TEXT='
-Zorg dat het medium is aangekoppeld waarop de back-up staat.'
-            warning "$TEXT"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
-                )
-            process_commands
-            ;;
-        6)
-            TITLE="${MENU2_ACTIONS[6]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
-                )
-            process_commands
-            ;;
-        7)
-            TITLE="${MENU2_ACTIONS[7]}"
-            EXEC=(
-                [1]="${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
-                )
-            process_commands
-            ;;
-        8)
-            exit_menu2=true
-            ;;
-        *)
-            error 'Niet afgehandelde keuze.'
-            exit $ERROR
-            ;;
-    esac
+    if [[ $REPLY -ge 1 && $REPLY -le 7 ]]; then
+        TITLE="${MENU2_ACTIONS[$REPLY]}"
+        EXEC=(
+            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
+            )
+        process_commands
+    elif [[ $REPLY -eq 8 ]]; then
+        exit_menu2=true
+    else
+        error 'Niet afgehandelde keuze.'
+        exit $ERROR
+    fi
 }
 
 function process_commands {
@@ -490,6 +432,7 @@ function process_commands {
 
     show_commands_before_execution
     if $EXECUTE_COMMAND; then
+        check_backup_restore
         for exec in "${!EXEC[@]}"; do
             action=$(
                 printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -565,6 +508,19 @@ $TEXT"
     fi
 }
 
+function check_backup_restore {
+    if [[ $TITLE = "${MENU1_ACTIONS[1]}" || $TITLE = "${MENU2_ACTIONS[1]}" ]]
+    then
+        TEXT='
+Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
+        warning "$TEXT"
+    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
+    then
+        TEXT='
+Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
+        warning "$TEXT"
+    fi
+}
 function execute_command {
     local -i    cmd_rc=0
     local       exec=''
@@ -609,11 +565,10 @@ function show_commands_after_execution {
     local       command=''
     local -i    exec=0
     local       prompt=''
-    local       temp_text_file=''
 
-    temp_text_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.txt")
-    printf  '\n%s\n\n'                      \
-            "Het volgende is uitgevoerd:"   > "$temp_text_file"
+    TEXT="
+Het volgende is uitgevoerd:
+"
     for exec in "${!EXEC[@]}"; do
         action=$(
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -621,24 +576,11 @@ function show_commands_after_execution {
         command=$(
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
             )
-        printf '%2d. %-25s\n' "$exec" "$action ($command)" >> "$temp_text_file"
+        TEXT+="
+$exec. $action ($command)"
     done
-    if $OPTION_GUI; then
-        if ! zenity --text-info                         \
-                    --width         500                 \
-                    --height        300                 \
-                    --title         "$TITLE"            \
-                    --filename      "$temp_text_file"   \
-                    --font          'Ubuntu Mono 12'    \
-                    --checkbox      'Gezien'            \
-                    --ok-label      'Oké'               \
-                    --cancel-label  'Afsluiten'         2> >($LOGCMD); then
-            true
-        fi
-    else
-        cat "$temp_text_file"
-    fi
-    rm "$temp_text_file"
+    info "
+$TEXT"
 }
 
 function term_script {
