@@ -46,7 +46,6 @@ sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 ## Extra needed after first install.
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-sudo apt-get install --yes 
 ## Extensies.
 sudo mkdir --parents /opt/google/chrome/extensions
 ## AdGuard extensie.
