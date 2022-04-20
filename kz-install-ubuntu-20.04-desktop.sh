@@ -34,15 +34,13 @@ rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
-sudo apt-get install --yes google-chrome-stable
+## gnome-gmail: ondersteuning voor Gmail als de favoriete e-mailtoepassing in GNOME
+## chrome-gnome-shell; de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken
+sudo apt-get install --yes google-chrome-stable gnome-gmail chrome-gnome-shell
 sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 ## Extra needed after first install.
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-## Ondersteuning voor Gmail als de favoriete e-mailtoepassing in GNOME.
-sudo apt-get install --yes gnome-gmail
-## De connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken.
-sudo apt-get install --yes chrome-gnome-shell
 ## Extensies.
 sudo mkdir --parents /opt/google/chrome/extensions
 ## AdGuard extensie.
