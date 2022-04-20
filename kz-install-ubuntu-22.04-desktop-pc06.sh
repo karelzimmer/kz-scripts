@@ -6,7 +6,7 @@
 ###############################################################################
 
 #1 cockpit (browsergebaseerd beheer)
-sudo apt-get install --yes --target-release="$(lsb_release --codename --short)"-backports cockpit cockpit-pcp
+sudo apt-get install --yes cockpit cockpit-pcp
 #2 Start Terminalvenster en voer uit:
 #2    sudo apt remove cockpit
 
