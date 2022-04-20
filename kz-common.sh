@@ -100,14 +100,10 @@ function error {
 }
 
 function check_user {
-    local prompt=''
-
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
-            prompt="Authenticatie is vereist om '$DISPLAY_NAME' uit te voeren.
-[sudo] wachtwoord voor %p: "
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
-            exec sudo --prompt="$prompt" "$0" "${CMDLINE_ARGS[@]}"
+            exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi
     else
         if [[ $UID -eq 0 ]]; then
