@@ -339,6 +339,12 @@ function process_argument_app_file {
                     break
                 fi
                 ;;
+            '#1-'*)
+                if $app_found; then
+                    # Volgende (hidden) app.
+                    break
+                fi
+                ;;
             *)
                 # Overige regels.
                 if $app_found; then
