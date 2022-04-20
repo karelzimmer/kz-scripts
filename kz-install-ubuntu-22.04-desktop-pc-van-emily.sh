@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 desktop LTS op pc-van-emily.           #
+# Installatiebestand voor Ubuntu 22.04 desktop LTS op pc-van-emily.           #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################

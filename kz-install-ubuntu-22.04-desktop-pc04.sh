@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 20.04 LTS desktop op pc04.                   #
+# Installatiebestand voor Ubuntu 22.04 LTS desktop op pc04.                   #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################

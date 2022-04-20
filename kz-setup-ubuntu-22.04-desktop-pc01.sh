@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu 20.04 LTS desktop op pc01.                        #
+# Instelbestand voor Ubuntu 22.04 LTS desktop op pc01.                        #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
