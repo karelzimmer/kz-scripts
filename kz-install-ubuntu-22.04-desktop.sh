@@ -44,6 +44,8 @@ sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 ## Extra needed after first install.
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+## Ondersteuning voor Gmail als de favoriete e-mailtoepassing in GNOME.
+sudo apt-get install --yes gnome-contacts gnome-gmail
 ## De connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken.
 sudo apt-get install --yes chrome-gnome-shell
 ## Extensies.
