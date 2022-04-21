@@ -160,7 +160,7 @@ function check_input {
                 ;;
             -r|--remove)
                 if $OPTION_SIMULATE; then
-                    error "Optie -s (--simulate) en $1 sluiten elkaar uit."
+                    error "Optie $1 kan niet samen met opie -s, --simulate."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 fi
@@ -170,7 +170,7 @@ function check_input {
                 ;;
             -s|--simulate)
                 if $OPTION_REMOVE; then
-                    error "Optie -r (--remove) en $1 sluiten elkaar uit."
+                    error "Optie $1 kan niet samen met optie -r, --remove."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 fi
