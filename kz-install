@@ -159,11 +159,21 @@ function check_input {
                 shift
                 ;;
             -r|--remove)
+                if $OPTION_SIMULATE; then
+                    error "Optie -s (--simulate) en $1 sluiten elkaar uit."
+                    info "$USAGELINE" >&2
+                    exit $ERROR
+                fi
                 OPTION_REMOVE=true
                 EXECUTE_COMMANDS=false
                 shift
                 ;;
             -s|--simulate)
+                if $OPTION_REMOVE; then
+                    error "Optie -r (--remove) en $1 sluiten elkaar uit."
+                    info "$USAGELINE" >&2
+                    exit $ERROR
+                fi
                 OPTION_SIMULATE=true
                 EXECUTE_COMMANDS=false
                 shift
@@ -177,12 +187,6 @@ function check_input {
                 ;;
         esac
     done
-
-    if $OPTION_SIMULATE && $OPTION_REMOVE; then
-        error 'Optie -s, --simulate en -r, --remove sluiten elkaar uit.'
-        info "$USAGELINE" >&2
-        exit $ERROR
-    fi
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
