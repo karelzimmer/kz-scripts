@@ -8,13 +8,13 @@
 #1 gnome (bureaubladomgeving)
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/Cairn_by_Sylvain_Naudin.jpg
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    gsettings reset org.gnome.desktop.background picture-uri
 #2    gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
 #1 telegram (privéberichtenapp)
 kz-gset --addfavaft=telegram-desktop_telegram-desktop
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delfav=telegram-desktop_telegram-desktop
 
 #1 virtualbox (virtualisatie)

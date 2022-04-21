@@ -7,5 +7,5 @@
 
 #1-cups-backend-bjnp (printerbackend voor Canon BJNP-protocol printerdriver)
 sudo apt-get install --yes cups-backend-bjnp
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove cups-backend-bjnp

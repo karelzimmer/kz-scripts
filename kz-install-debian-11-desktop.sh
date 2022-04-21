@@ -10,19 +10,19 @@ sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
 sudo apt-get update
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 #2    sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 #2    sudo apt update
 
 #1 bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove bash-completion
 
 #1 bitwarden (wachtwoordbeheer)
 sudo snap install bitwarden
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo snap remove bitwarden
 
 #1 citrix (telewerken)
@@ -33,17 +33,17 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove icaclient
 
 #1 cups (printsysteem)
 sudo apt-get install --yes cups
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove cups
 
 #1 dashtodock (favorietenbalk)
 sudo apt-get install --yes gnome-shell-extension-dashtodock
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove gnome-shell-extension-dashtodock
 
 #1 google-chrome (webbrowser)
@@ -65,29 +65,29 @@ printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com
 printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
 ## Gnome-shell-integratie extensie.
 printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
-#2 Start Terminalvenster en voer uit:
-#2    sudo apt remove google-chrome-stable chrome-gnome-shell
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
+#2    sudo apt remove google-chrome-stable gnome-gmail chrome-gnome-shell
 #2    sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2    sudo apt update
 
 #1 journalctl (log bekijken)
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo snap remove skype
 
 #1 spotify (muziekspeler)
 sudo snap install spotify
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo snap remove spotify
 
 #1 teams (samenwerken)
@@ -102,7 +102,7 @@ sudo rm --force /etc/apt/trusted.gpg.d/microsoft*
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter:
 sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove --yes teams
 #2    sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
 
@@ -113,19 +113,19 @@ sudo apt-get update
 sudo apt-get install --yes teamviewer
 sudo apt-key del 0C1289C0 DEB49217
 sudo rm --force /etc/apt/trusted.gpg.d/teamviewer*
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove teamviewer
 #2    sudo rm /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2    sudo apt update
 
 #1 thunderbird (e-mail)
 sudo apt-get install --yes lightning thunderbird-l10n-nl
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove lightning thunderbird-l10n-nl
 
 #1 zoom (samenwerken)
 wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb
 sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/zoom.deb
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove zoom

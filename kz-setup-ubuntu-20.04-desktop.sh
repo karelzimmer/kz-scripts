@@ -7,12 +7,12 @@
 
 #1 bitwarden (wachtwoordbeheer)
 kz-gset --addfavaft=bitwarden_bitwarden
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delfav=bitwarden_bitwarden
 
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delfav=google-chrome
 
 #1 citrix (telewerken)
@@ -36,7 +36,7 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.shell.extensions.desktop-icons show-home false
 gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delappfolder=KZ Scripts
 #2    gsettings reset org.gnome.desktop.app-folders folder-children
 #2    gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -57,20 +57,20 @@ gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
 
 #1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delfav=skype_skypeforlinux
 
 #1 spotify (muziekspeler)
 kz-gset --addfavaft=spotify_spotify
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delfav=spotify_spotify
 
 #1 teams (samenwerken)
 kz-gset --addfavaft=teams
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delfav=teams
 
 #1 zoom (samenwerken)
 kz-gset --addfavaft=Zoom
-#2 Start Terminalvenster en voer uit:
+#2 Om te resetten Terminalvenster starten en uitvoeren:
 #2    kz-gset --delfav=Zoom

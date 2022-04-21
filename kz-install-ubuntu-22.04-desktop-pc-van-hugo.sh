@@ -8,17 +8,17 @@
 #1-lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 printf '%s\n' 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 #1 pinta (tekenprogramma)
 sudo apt-get install --yes pinta
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo apt remove pinta
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop
-#2 Start Terminalvenster en voer uit:
+#2 Om te verwijderen Terminalvenster starten en uitvoeren:
 #2    sudo snap remove telegram-desktop
 
 #1 virtualbox (virtualisatie)
