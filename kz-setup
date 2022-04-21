@@ -608,6 +608,8 @@ function process_app_description {
 
     if $OPTION_RESET; then
         app_description="${record:3}"' resetten'
+    elif $OPTION_SIMULATE; then
+        app_description="${record:3}"' instellen simuleren'
     else
         app_description="${record:3}"' instellen'
     fi
