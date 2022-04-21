@@ -661,11 +661,14 @@ function process_file {
 function process_app_description {
     local record=${1:-record?}
 
-    app_description="${record:3}"
+    if $OPTION_REMOVE; then
+        app_description="${record:3}"' verwijderen'
+    else
+        app_description="${record:3}"' installeren'
+    fi
     if ! $OPTION_SIMULATE && ! $EXECUTE_COMMANDS; then
         return $SUCCESS
     fi
-
     write_app_description_line=true
     ((++app_seq_num))
     cmd_seq_num=0

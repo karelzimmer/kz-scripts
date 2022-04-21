@@ -7,10 +7,10 @@
 
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
-#2 Om te verwijderen Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    sudo apt remove calibre
 
 #1 clamav (antivirus)
 sudo apt-get install --yes clamtk-gnome
-#2 Om te verwijderen Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    sudo apt remove clamtk-gnome

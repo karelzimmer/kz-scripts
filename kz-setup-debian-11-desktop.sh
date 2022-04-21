@@ -7,12 +7,12 @@
 
 #1 bitwarden (wachtwoordbeheer)
 kz-gset --addfavaft=bitwarden_bitwarden
-#2 Om te resetten Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=bitwarden_bitwarden
 
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
-#2 Om te resetten Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=google-chrome
 
 #1 citrix (telewerken)
@@ -40,7 +40,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 kz-gset --addappfolder --folder='KZ Scripts'
-#2 Om te resetten Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    gnome-extensions disable dash-to-dock@micxgx.gmail.com
 #2    gsettings reset org.gnome.app-folders folder-children
 #2    gsettings reset org.gnome.calendar show-weekdate
@@ -64,20 +64,20 @@ kz-gset --addappfolder --folder='KZ Scripts'
 
 #1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux
-#2 Om te resetten Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=skype_skypeforlinux
 
 #1 spotify (muziekspeler)
 kz-gset --addfavaft=spotify_spotify
-#2 Om te resetten Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=spotify_spotify
 
 #1 teams (samenwerken)
 kz-gset --addfavaft=teams
-#2 Om te resetten Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=teams
 
 #1 zoom (samenwerken)
 kz-gset --addfavaft=Zoom
-#2 Om te resetten Terminalvenster starten en uitvoeren:
+#2 Start Terminalvenster en voer uit:
 #2    kz-gset --delfav=Zoom
