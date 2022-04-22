@@ -6,7 +6,7 @@
 ###############################################################################
 
 #1 firefox (webbrowser)
-kz-gset --delfav=firefox
+kz-gset --delfav=firefox_firefox
 #2 Start Terminalvenster en voer uit:
 #2    kz-gset --addfavbef=firefox_firefox
 
