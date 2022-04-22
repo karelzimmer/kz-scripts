@@ -99,6 +99,7 @@ function check_input {
     local -i    app_arg_num=0
     local -i    file_arg_num=0
     local -i    getopt_rc=0
+    local       other_option=''
     local       parsed=''
 
     parsed=$(
@@ -157,20 +158,22 @@ function check_input {
                 ;;
             -r|--reset)
                 if $OPTION_SIMULATE; then
-                    error "Optie $1 kan niet samen met opie -s, --simulate."
+                    error "Optie $1 kan niet samen met opie $other_option."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 fi
+                other_option=$1
                 OPTION_RESET=true
                 EXECUTE_COMMANDS=false
                 shift
                 ;;
             -s|--simulate)
                 if $OPTION_RESET; then
-                    error "Optie $1 kan niet samen met optie -r, --reset."
+                    error "Optie $1 kan niet samen met optie $other_option."
                     info "$USAGELINE" >&2
                     exit $ERROR
                 fi
+                other_option=$1
                 OPTION_SIMULATE=true
                 EXECUTE_COMMANDS=false
                 shift
