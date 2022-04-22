@@ -225,6 +225,13 @@ function process_input {
     dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION\
 -$HOSTNAME.sh
 
+    # Verwerk optie list.
+    if $OPTION_LIST; then
+        check_user
+        process_option_list
+        exit $SUCCESS
+    fi
+
     # Verwerk argumenten.
     if $ARGUMENT_APP; then
         process_argument_app
@@ -241,7 +248,7 @@ function process_input {
         process_dfltfiles
     fi
 
-    # Verwerk opties.
+    # Verwerk overige opties.
     if $OPTION_APPS; then
         process_option_apps
         exit $SUCCESS
@@ -250,10 +257,6 @@ function process_input {
         exit $SUCCESS
     elif $OPTION_FILES; then
         process_option_files
-        exit $SUCCESS
-    elif $OPTION_LIST; then
-        check_user
-        process_option_list
         exit $SUCCESS
     fi
 
