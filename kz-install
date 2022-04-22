@@ -251,7 +251,7 @@ function process_input {
         process_dfltfiles
     fi
 
-    # Verwerk overige opties.
+    # Verwerk overige opties; afhankelijk van bestanden en argumenten.
     if $OPTION_APPS; then
         process_option_apps
         exit $SUCCESS

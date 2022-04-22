@@ -21,6 +21,11 @@ sudo apt-get install --yes aspell-nl git
 #2 Start Terminalvenster en voer uit:
 #2    sudo apt remove git
 
+#1 gnome-gmail (Gmail als de favoriete e-mailtoepassing in GNOME)
+sudo apt-get install --yes gnome-gmail
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove gnome-gmail
+
 #1 kvm (virtualisatie)
 ## Images staan in /var/lib/libvirt/images/.
 ## Dpkg::Options i.v.m. interactie a.g.v. restore /etc/libvirt configuratiebestanden.

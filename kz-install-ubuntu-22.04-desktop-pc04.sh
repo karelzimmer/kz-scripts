@@ -15,6 +15,11 @@ sudo apt-get install --yes nautilus-dropbox
 #2 Start Terminalvenster en voer uit:
 #2    sudo apt remove nautilus-dropbox
 
+#1 gnome-gmail (Gmail als de favoriete e-mailtoepassing in GNOME)
+sudo apt-get install --yes gnome-gmail
+#2 Start Terminalvenster en voer uit:
+#2    sudo apt remove gnome-gmail
+
 #1 google-earth (verken de wereld)
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth.list
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
