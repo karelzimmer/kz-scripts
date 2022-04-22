@@ -360,16 +360,12 @@ function term_script {
     local search=''
 
     mkdir --parents "$docs_dir" |& $LOGCMD
-
+    rm --force "$docs_dir/Checklist-installatie-"*
     search="/usr/share/doc/kz/Checklist-installatie-$(
         lsb_release --id --short
-        )-$(
-        lsb_release --release --short
         )"
-    cp  --update "$search"*{desktop,server}.pdf "$docs_dir" |& $LOGCMD || true
-    cp  --update                                    \
-        "$search"*{desktop,server}"-$HOSTNAME".pdf  \
-        "$docs_dir"                                 |& $LOGCMD || true
+    cp "$search"*.pdf "$docs_dir" |& $LOGCMD || true
+    cp "$search"*-"$HOSTNAME".pdf "$docs_dir" |& $LOGCMD || true
 
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
