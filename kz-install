@@ -224,10 +224,6 @@ function process_input {
     local       file=''
     local       skip_line=false
 
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION\
--$HOSTNAME.sh
-
     # Verwerk optie list.
     if $OPTION_LIST; then
         RUN_AS_SUPERUSER=false
@@ -237,6 +233,9 @@ function process_input {
     fi
 
     # Verwerk argumenten.
+    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
+    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION\
+-$HOSTNAME.sh
     if $ARGUMENT_APP; then
         process_argument_app
     fi
