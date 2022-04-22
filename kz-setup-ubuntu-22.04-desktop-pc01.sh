@@ -8,7 +8,7 @@
 #1 firefox (webbrowser)
 kz-gset --delfav=firefox
 #2 Start Terminalvenster en voer uit:
-#2    kz-gset --addfavbef=firefox
+#2    kz-gset --addfavbef=firefox_firefox
 
 #1 gnome (bureaubladomgeving)
 gsettings set org.gnome.desktop.background picture-uri file:///usr/share/backgrounds/kz-olifanten.jpg
