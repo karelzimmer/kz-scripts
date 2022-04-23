@@ -119,7 +119,7 @@ function process_input {
 }
 
 function check_code {
-    if grep --quiet --line-regexp --regexp='#!''/usr/bin/bash' "$script"; then
+    if grep --quiet --line-regexp --regexp='#!''/bin/bash' "$script"; then
         check_shellcheck
     elif grep   --quiet                         \
                 --line-regexp                   \
