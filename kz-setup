@@ -45,8 +45,6 @@ Argumenten:
   APP            opgegeven APPs instellen
   BESTAND        opgegeven BESTANDen verwerken"
 
-DASHES=$(printf '%.0s=' {1..79})
-readonly DASHES
 readonly EDITION_DEFAULT=desktop
 SPACES=$(printf '%.0s ' {1..79})
 readonly SPACES
@@ -82,7 +80,6 @@ declare     OPTION_GUI=false
 declare     OPTION_LIST=false
 declare     OPTION_RESET=false
 declare     OPTION_SIMULATE=false
-declare     RESET_FOUND=false
 declare     STATUS_BUSY=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
@@ -99,7 +96,6 @@ function check_input {
     local -i    app_arg_num=0
     local -i    file_arg_num=0
     local -i    getopt_rc=0
-    local       other_option=''
     local       parsed=''
 
     parsed=$(
@@ -153,27 +149,13 @@ function check_input {
                 ;;
             -l|--list)
                 OPTION_LIST=true
-                EXECUTE_COMMANDS=false
                 shift
                 ;;
             -r|--reset)
-                if $OPTION_SIMULATE; then
-                    error "Optie $1 kan niet samen met opie $other_option."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                fi
-                other_option=$1
                 OPTION_RESET=true
-                EXECUTE_COMMANDS=false
                 shift
                 ;;
             -s|--simulate)
-                if $OPTION_RESET; then
-                    error "Optie $1 kan niet samen met optie $other_option."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                fi
-                other_option=$1
                 OPTION_SIMULATE=true
                 EXECUTE_COMMANDS=false
                 shift
@@ -577,8 +559,6 @@ function process_file {
     local       app_description=''
     local -i    cmd_seq_num=0
     local       first_description_line=true
-    local       first_reset_instruction=true
-    local       prev_recordtype=''
     local       record=''
     local       recordtype=''
     local       write_app_description_line=true
@@ -600,17 +580,20 @@ function process_file {
                 process_app_description "$record"
                 ;;
             '#2')
-                process_reset_instruction "$record"
+                if $OPTION_RESET; then
+                    process_command "${record:3}"
+                fi
                 ;;
             '#'*)
                 # Commentaarregel.
                 continue
                 ;;
             *)
-                process_command "$record"
+                if ! $OPTION_RESET; then
+                    process_command "$record"
+                fi
                 ;;
         esac
-        prev_recordtype=$recordtype
     done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
@@ -621,7 +604,9 @@ function process_file {
 function process_app_description {
     local record=${1:-record?}
 
-    if $OPTION_RESET; then
+    if $OPTION_SIMULATE && $OPTION_RESET; then
+        app_description="${record:3}"' resetten simuleren'
+    elif $OPTION_RESET; then
         app_description="${record:3}"' resetten'
     elif $OPTION_SIMULATE; then
         app_description="${record:3}"' instellen simuleren'
@@ -634,34 +619,6 @@ function process_app_description {
     write_app_description_line=true
     ((++app_seq_num))
     cmd_seq_num=0
-}
-
-function process_reset_instruction {
-    local       record=${1:-record?}
-    local       filler=''
-    local -i    len=0
-
-    RESET_FOUND=true
-    if ! $OPTION_RESET; then
-        return $SUCCESS
-    fi
-    filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#2' ]]; then
-        printf '%s%s\n' "$filler" "${record:3}" >> "$TEXT_FILE"
-    else
-        ((++app_seq_num))
-        if $first_reset_instruction; then
-            first_reset_instruction=false
-        else
-            printf '\n' >> "$TEXT_FILE"
-        fi
-        len=${#app_description}
-        # ?? wordt in term_script vervangen door aantal te resetten apps.
-        printf  "[%2d/??] %s\n%s%.${len}s\n%s%s\n"  \
-                "$app_seq_num"  "$app_description"  \
-                "$filler"       "$DASHES"           \
-                "$filler"       "${record:3}"       >> "$TEXT_FILE"
-    fi
 }
 
 function process_command {
@@ -753,34 +710,29 @@ function execute_command {
 }
 
 function term_script {
-    local -i app_num=0
+    local action='Instellen'
 
     if $OPTION_SIMULATE; then
         less_options "$TITLE"
         less "$LESS_OPTIONS" "$TEXT_FILE"
-    elif $OPTION_RESET && $RESET_FOUND; then
-        # Vervang ?? door aantal te resetten apps.
-        app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
-        sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        less_options "$TITLE"
-        less "$LESS_OPTIONS" "$TEXT_FILE"
-    elif $OPTION_RESET && ! $RESET_FOUND; then
-        info 'Geen reset-instructies.'
     elif ! $COMMANDS_FOUND; then
         info 'Geen opdrachten.'
     fi
 
+    if $OPTION_RESET; then
+        action='Resetten'
+    fi
     if $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
             warning "
-Instellen is geëindigd met een waarschuwing.
+$action is geëindigd met een waarschuwing.
 
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else
-            info '
-Instellen is voltooid.'
+            info "
+${GREEN}$action is voltooid.${NORMAL}"
             exit $SUCCESS
         fi
     fi

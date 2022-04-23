@@ -84,7 +84,6 @@ declare     OPTION_GUI=false
 declare     OPTION_LIST=false
 declare     OPTION_REMOVE=false
 declare     OPTION_SIMULATE=false
-declare     REMOVE_FOUND=false
 declare     RUN_AS_SUPERUSER=true
 declare     STATUS_BUSY=''
 
@@ -102,7 +101,6 @@ function check_input {
     local -i    app_arg_num=0
     local -i    file_arg_num=0
     local -i    getopt_rc=0
-    local       other_option=''
     local       parsed=''
 
     parsed=$(
@@ -156,27 +154,13 @@ function check_input {
                 ;;
             -l|--list)
                 OPTION_LIST=true
-                EXECUTE_COMMANDS=false
                 shift
                 ;;
             -r|--remove)
-                if $OPTION_SIMULATE; then
-                    error "Optie $1 kan niet samen met opie $other_option."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                fi
-                other_option=$1
                 OPTION_REMOVE=true
-                EXECUTE_COMMANDS=false
                 shift
                 ;;
             -s|--simulate)
-                if $OPTION_REMOVE; then
-                    error "Optie $1 kan niet samen met opie $other_option."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                fi
-                other_option=$1
                 OPTION_SIMULATE=true
                 EXECUTE_COMMANDS=false
                 shift
@@ -632,8 +616,6 @@ function process_file {
     local       app_description=''
     local -i    cmd_seq_num=0
     local       first_description_line=true
-    local       first_remove_instruction=true
-    local       prev_recordtype=''
     local       record=''
     local       recordtype=''
     local       write_app_description_line=true
@@ -655,17 +637,20 @@ function process_file {
                 process_app_description "$record"
                 ;;
             '#2')
-                process_remove_instruction "$record"
+                if $OPTION_REMOVE; then
+                    process_command "${record:3}"
+                fi
                 ;;
             '#'*)
                 # Commentaarregel.
                 continue
                 ;;
             *)
-                process_command "$record"
+                if ! $OPTION_REMOVE; then
+                    process_command "$record"
+                fi
                 ;;
         esac
-        prev_recordtype=$recordtype
     done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
@@ -676,7 +661,9 @@ function process_file {
 function process_app_description {
     local record=${1:-record?}
 
-    if $OPTION_REMOVE; then
+    if $OPTION_SIMULATE && $OPTION_REMOVE; then
+        app_description="${record:3}"' verwijderen simuleren'
+    elif $OPTION_REMOVE; then
         app_description="${record:3}"' verwijderen'
     elif $OPTION_SIMULATE; then
         app_description="${record:3}"' installeren simuleren'
@@ -689,34 +676,6 @@ function process_app_description {
     write_app_description_line=true
     ((++app_seq_num))
     cmd_seq_num=0
-}
-
-function process_remove_instruction {
-    local       record=${1:-record?}
-    local       filler=''
-    local -i    len=0
-
-    REMOVE_FOUND=true
-    if ! $OPTION_REMOVE; then
-        return $SUCCESS
-    fi
-    filler=${SPACES:0:8}
-    if [[ $prev_recordtype = '#2' ]]; then
-        printf '%s%s\n' "$filler" "${record:3}" >> "$TEXT_FILE"
-    else
-        ((++app_seq_num))
-        if $first_remove_instruction; then
-            first_remove_instruction=false
-        else
-            printf '\n' >> "$TEXT_FILE"
-        fi
-        len=${#app_description}
-        # ?? wordt in term_script vervangen door aantal te te verwijderen apps.
-        printf  "[%2d/??] %s\n%s%.${len}s\n%s%s\n"  \
-                "$app_seq_num"  "$app_description"  \
-                "$filler"       "$DASHES"           \
-                "$filler"       "${record:3}"       >> "$TEXT_FILE"
-    fi
 }
 
 function process_command {
@@ -832,34 +791,29 @@ function check_dpkg {
 }
 
 function term_script {
-    local -i app_num=0
+    local action='Installeren'
 
     if $OPTION_SIMULATE; then
         less_options "$TITLE"
         less "$LESS_OPTIONS" "$TEXT_FILE"
-    elif $OPTION_REMOVE && $REMOVE_FOUND; then
-        # Vervang ?? door aantal te verwijderen apps.
-        app_num=$(grep --regexp='\??] ' --count "$TEXT_FILE")
-        sed -i "s|/??] |/$(printf %-2d "$app_num")] |g" "$TEXT_FILE"
-        less_options "$TITLE"
-        less "$LESS_OPTIONS" "$TEXT_FILE"
-    elif $OPTION_REMOVE && ! $REMOVE_FOUND; then
-        info 'Geen verwijder-instructies.'
     elif ! $COMMANDS_FOUND; then
         info 'Geen opdrachten.'
     fi
 
+    if $OPTION_REMOVE; then
+        action='Verwijderen'
+    fi
     if $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
             warning "
-Installatie is geëindigd met een waarschuwing.
+$action is geëindigd met een waarschuwing.
 
 Controleer de log in het Terminalvenster met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else
             info "
-${GREEN}Installatie is voltooid.${NORMAL}"
+${GREEN}$action is voltooid.${NORMAL}"
             exit $SUCCESS
         fi
     fi

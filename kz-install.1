@@ -41,8 +41,17 @@ De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
-Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
-\fB--editie\fR is dat aan te passen, bijvoorbeeld \fIEDITIE\fR server.
+Standaard wordt als \fIEDITIE\fR desktop gebruikt.
+.sp
+In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
+\fBkz install\fR worden uitgevoerd door te zoeken naar \fBapps\fR, klik op
+\fBApps installeren\fR.
+.sp
+Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
+gebruikersinstellingen.
+.sp
+Met optie \fB-e\fR, \fB--editie\fR is de \fIEDITIE\fR aan te passen,
+bijvoorbeeld \fIEDITIE\fR server.
 .sp
 Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
 systeem.
@@ -83,17 +92,8 @@ snaps zijn geïnstalleerd, en welke pakketbronnen ("repositories" of "repo's")
 zijn toegevoegd.
 .br
 Deze gevens zijn te gebruiken om de installatie te controleren op volledigheid.
-\.sp
-Alhoewel \fBkz install\fR gericht is op het installeren, met optie\fB-r\fR,
-\fB--remove\fR worden er instructies getoond om de installatie ongedaan te
-maken.
 .sp
-In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan
-\fBkz install\fR worden gestart door te zoeken naar \fBapps\fR, klik op
-\fBApps installeren\fR.
-.sp
-Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
-gebruikersinstellingen.
+Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .\"
 .\"
 .SH BESTANDSINDELING
@@ -142,9 +142,9 @@ T}:T{
 Idem, wordt niet getoond bij optie -a, --apps.
 T}
 T{
-#2 INSTRUCTIE
+#2 VERWIJDER-opdracht
 T}:T{
-Bevat INSTRUCTIEs voor het verwijderen van APP.
+Opdracht voor het VERWIJDERen van APPs.
 T}
 T{
 .sp
@@ -180,7 +180,6 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
 # Software installeren
@@ -200,17 +199,12 @@ T}
 T{
 sudo apt-get install --yes google-chrome-stable
 T}:T{
-Opdracht.
+Installeer-opdracht.
 T}
 T{
-#2 Start Terminalvenster en voer uit:
+#2 sudo apt remove google-chrome-stable
 T}:T{
-Verwijder-INSTRUCTIEs; voor optie remove.
-T}
-T{
-#2    sudo apt remove google-chrome-stable
-T}:T{
-    "               "
+VERWIJDER-opdracht; voor optie -r, --remove.
 T}
 .TE
 .\"
@@ -322,10 +316,9 @@ Hiervoor is ook starter \fBApps installeren\fR beschikbaar.
 Installeer Google Chrome.
 .RE
 .sp
-\fBkz install google-chrome --remove\fR
+\fBkz install --remove google-chrome\fR
 .RS
-Toon instructies voor het verwijderen van Google Chrome.
-Rechtsklik op starter 'Apps installeren' en kies 'Verwijder-instructies tonen'.
+Verwijder Google Chrome.
 .RE
 .sp
 \fBkz install --cat bitwarden\fR

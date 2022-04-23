@@ -37,12 +37,21 @@ Deze bestanden ("instelbestanden") bevatten opdrachten voor het instellen van
 apps en het wijzigen van gebruikersinstellingen voor de huidige distributie,
 versie, en \fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
 .sp
+Standaard wordt als \fIEDITIE\fR desktop gebruikt.
+.sp
 De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
-Standaard wordt als \fIEDITIE\fR desktop gebruikt, met optie \fB-e\fR,
-\fB--editie\fR is dat aan te passen, bijvoorbeeld \fIEDITIE\fR server.
+In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
+\fBkz setup\fR worden uitgevoerd door te zoeken naar \fBapps\fR, klik op
+\fBApps instellen\fR.
+.sp
+Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het aanpassen
+van systeeminstellingen.
+.sp
+Met optie \fB-e\fR, \fB--editie\fR is de \fIEDITIE\fR aan te passen,
+bijvoorbeeld \fIEDITIE\fR server.
 .sp
 Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
 systeem.
@@ -78,15 +87,8 @@ bureaubladachtergrond, en favorieten, en geschiedenis van gebruikte opdrachten.
 .br
 Deze gevens zijn te gebruiken om het instellen te controleren op volledigheid.
 .sp
-Alhoewel \fBkz setup\fR gericht is op het instellen, met optie \fB-r\fR,
-\fB--reset\fR worden er instructies getoond om het instellen ongedaan te maken.
 .sp
-In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan
-\fBkz setup\fR worden gestart door te zoeken naar \fBapps\fR, klik op
-\fBApps instellen\fR.
-.sp
-Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het aanpassen
-van systeeminstellingen.
+Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 .\"
 .\"
 .SH BESTANDSINDELING
@@ -136,9 +138,9 @@ T}:T{
 Idem, wordt niet getoond bij optie -a, --apps.
 T}
 T{
-#2 INSTRUCTIE
+#2 RESET-opdracht
 T}:T{
-Bevat INSTRUCTIEs voor het resetten van APP.
+Bevat opdrachten voor het RESETten van APPs.
 T}
 T{
 .sp
@@ -174,7 +176,6 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
 # Software instellen
@@ -194,17 +195,12 @@ T}
 T{
 :
 T}:T{
-Opdracht.
+Instel-opdracht.
 T}
 T{
-#2 Start Terminalvenster en voer uit:
+#2 kz-gset --delfav=google-chrome
 T}:T{
-Reset-INSTRUCTIEs; voor optie reset.
-T}
-T{
-#2    kz-gset --delfav=google-chrome
-T}:T{
-    "               "
+RESET-opdracht; voor optie -r, --reset.
 T}
 .TE
 .\"
@@ -328,10 +324,9 @@ Hiervoor is ook starter \fBApps instellen\fR beschikbaar.
 Stel in Google Chrome.
 .RE
 .sp
-\fBkz setup google-chrome --reset\fR
+\fBkz setup --reset google-chrome\fR
 .RS
-Toon instructies voor het resetten van Google Chrome.
-Rechtsklik op starter 'Apps instellen' en kies 'Reset-instructies tonen'.
+Reset Google Chrome.
 .RE
 .sp
 \fBkz setup --cat bitwarden\fR
