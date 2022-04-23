@@ -12,7 +12,7 @@ printf '%s\n' 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.c
 
 #1 pinta (tekenprogramma)
 sudo apt-get install --yes pinta
-#2 sudo apt remove pinta
+#2 sudo apt remove --yes pinta
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop

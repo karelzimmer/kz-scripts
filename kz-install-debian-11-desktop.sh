@@ -16,7 +16,7 @@ sudo apt-get update
 
 #1 bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion
-#2 sudo apt remove bash-completion
+#2 sudo apt remove --yes bash-completion
 
 #1 bitwarden (wachtwoordbeheer)
 sudo snap install bitwarden
@@ -30,15 +30,15 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
-#2 sudo apt remove icaclient
+#2 sudo apt remove --yes icaclient
 
 #1 cups (printsysteem)
 sudo apt-get install --yes cups
-#2 sudo apt remove cups
+#2 sudo apt remove --yes cups
 
 #1 dashtodock (favorietenbalk)
 sudo apt-get install --yes gnome-shell-extension-dashtodock
-#2 sudo apt remove gnome-shell-extension-dashtodock
+#2 sudo apt remove --yes gnome-shell-extension-dashtodock
 
 #1 google-chrome (webbrowser)
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -58,7 +58,7 @@ printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com
 printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
 ## Gnome-shell-integratie extensie.
 printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
-#2 sudo apt remove google-chrome-stable chrome-gnome-shell
+#2 sudo apt remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo apt update
 
@@ -68,7 +68,7 @@ sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
-#2 sudo apt remove libreoffice libreoffice-help-nl libreoffice-l10n-nl
+#2 sudo apt remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype
@@ -100,16 +100,16 @@ sudo apt-get update
 sudo apt-get install --yes teamviewer
 sudo apt-key del 0C1289C0 DEB49217
 sudo rm --force /etc/apt/trusted.gpg.d/teamviewer*
-#2 sudo apt remove teamviewer
+#2 sudo apt remove --yes teamviewer
 #2 sudo rm /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt update
 
 #1 thunderbird (e-mail)
 sudo apt-get install --yes lightning thunderbird-l10n-nl
-#2 sudo apt remove lightning thunderbird-l10n-nl
+#2 sudo apt remove --yes lightning thunderbird-l10n-nl
 
 #1 zoom (samenwerken)
 wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb
 sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/zoom.deb
-#2 sudo apt remove zoom
+#2 sudo apt remove --yes zoom

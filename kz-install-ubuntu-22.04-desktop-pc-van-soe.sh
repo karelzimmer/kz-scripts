@@ -7,8 +7,8 @@
 
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
-#2 sudo apt remove calibre
+#2 sudo apt remove --yes calibre
 
 #1 clamav (antivirus)
 sudo apt-get install --yes clamtk-gnome
-#2 sudo apt remove clamtk-gnome
+#2 sudo apt remove --yes clamtk-gnome

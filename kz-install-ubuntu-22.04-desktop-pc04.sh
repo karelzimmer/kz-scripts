@@ -7,15 +7,15 @@
 
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
-#2 sudo apt remove calibre
+#2 sudo apt remove --yes calibre
 
 #1 dropbox (cloudopslag)
 sudo apt-get install --yes nautilus-dropbox
-#2 sudo apt remove nautilus-dropbox
+#2 sudo apt remove --yes nautilus-dropbox
 
 #1 gnome-gmail (Gmail als de favoriete e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
-#2 sudo apt remove gnome-gmail
+#2 sudo apt remove --yes gnome-gmail
 
 #1 google-earth (verken de wereld)
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth.list
@@ -32,4 +32,4 @@ printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] h
 
 #1 wine (windowsapps op Linux)
 sudo apt-get install --yes wine winetricks playonlinux
-#2 sudo apt remove wine winetricks playonlinux
+#2 sudo apt remove --yes wine winetricks playonlinux
