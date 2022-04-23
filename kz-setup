@@ -722,7 +722,6 @@ function process_command {
 function execute_command {
     local       cmd=${1:-cmd?}
     local -i    cmd_rc=0
-    local       filler=''
     local       status=''
 
     if ! $OPTION_GUI; then
