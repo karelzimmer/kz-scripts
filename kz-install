@@ -746,11 +746,11 @@ function process_command {
         printf  '%9s [%2d] %s\n'            \
                 " "                         \
                 "$cmd_seq_num"              \
-                "${BLUE}$record${NORMAL}"   >> "$TEXT_FILE"
+                "${BLUE}$cmd${NORMAL}"   >> "$TEXT_FILE"
     elif $EXECUTE_COMMANDS; then
         desc_printf=$app_description
         if $OPTION_GUI; then
-            TEXT="#[$app_seq_num/$app_tot_num] $app_description\n\n$record"
+            TEXT="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
             printf '%s\n' "$TEXT"
         else
             if [[ -t 1 ]]; then
@@ -770,7 +770,7 @@ function process_command {
                 "$app_tot_num"                                      \
                 "$cmd_seq_num"                                      \
                 "$desc_printf"
-        execute_command "$record"
+        execute_command "$cmd"
     fi
 }
 
