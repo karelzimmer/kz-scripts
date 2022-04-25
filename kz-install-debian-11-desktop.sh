@@ -41,7 +41,7 @@ sudo apt-get install --yes gnome-shell-extension-dashtodock
 #2 sudo apt remove --yes gnome-shell-extension-dashtodock
 
 #1 google-chrome (webbrowser)
-printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
 ## chrome-gnome-shell; de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken
@@ -49,15 +49,21 @@ sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 ## Extra needed after first install.
-printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 ## Extensies.
 sudo mkdir --parents /opt/google/chrome/extensions
 ## AdGuard extensie.
-printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
+echo '{' | sudo tee /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
+echo '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee --append /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
+echo '}' | sudo tee --append /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
 ## Bitwarden extensie.
-printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
+echo '{' | sudo tee /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
+echo '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee --append /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
+echo '}' | sudo tee --append /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
 ## Gnome-shell-integratie extensie.
-printf '%s\n%s\n%s\n' '{' '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
+echo '{' | sudo tee /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
+echo '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee --append /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
+echo '}' | sudo tee --append /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
 #2 sudo apt remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo apt update
@@ -80,7 +86,7 @@ sudo snap install spotify
 
 #1 teams (samenwerken)
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
-printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-teams.gpg] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-teams.gpg] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
 wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft-teams.gpg
 sudo apt-get update
 sudo apt-get install --yes teams
@@ -94,7 +100,7 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 #2 sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
 
 #1 teamviewer (afstandsbediening)
-printf '%s\n' 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
+echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
