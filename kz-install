@@ -548,7 +548,7 @@ Software of
     {
         echo "$DASHES"
         echo "$footer"
-        echo 
+        echo
     } >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" > "$app_list"
@@ -579,7 +579,7 @@ function process_option_list_snaps {
     {
         echo "$DASHES"
         echo "$footer"
-        echo 
+        echo
     } >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" >> "$app_list"
