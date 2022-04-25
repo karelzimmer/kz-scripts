@@ -170,7 +170,7 @@ function check_record_types {
     # #1 en #2
     # #1 foo (bar)              (met optie -a, --app tonen en verwerken)
     # #1-foo (bar)              (met optie -a, --app niet tonen, wel verwerken)
-    # #2 Verwijd./reset instructie
+    # #2 Verwijd./reset opdracht
     # Fout:
     # De rest :-)
     wrong_record=$(
@@ -184,7 +184,7 @@ function check_record_types {
 In $script:
     Foutieve regel(s) gevonden.
 $(
-    printf '%s' "$wrong_record" |
+    echo "$wrong_record" |
                 nl --number-width=8 --number-separator='' --body-numbering=n
 )
 "

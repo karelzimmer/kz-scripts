@@ -182,10 +182,10 @@ function process_option_addfavaft  {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  printf '%s' "$favorite_apps" |
+    elif !  echo "$favorite_apps" |
             grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
         gsettings set org.gnome.shell favorite-apps "$(
-            printf '%s' "$favorite_apps" |
+            echo "$favorite_apps" |
             cut --delimiter=']' --fields=1
             ), '$DESKTOPFILE']"
     fi
@@ -197,11 +197,11 @@ function process_option_addfavbef  {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  printf '%s' "$favorite_apps" |
+    elif !  echo "$favorite_apps" |
             grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
         gsettings set org.gnome.shell favorite-apps \
             "['$DESKTOPFILE', $(
-                printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
+                echo "$favorite_apps" | cut --delimiter='[' --fields=2
                 )"
     fi
 }
@@ -236,7 +236,7 @@ function process_option_addappfolder  {
                     --word-regexp       \
                     --regexp="$APPFOLDER"; then
         gsettings set org.gnome.desktop.app-folders folder-children "$(
-            printf '%s' "$app_folders" | cut --delimiter=']' --fields=1
+            echo "$app_folders" | cut --delimiter=']' --fields=1
             ), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
@@ -258,7 +258,7 @@ function process_option_delappfolder  {
     elif [[ $app_folders = "['$APPFOLDER']" ]]; then
         gsettings set org.gnome.desktop.app-folders folder-children "[]"
     else gsettings set org.gnome.desktop.app-folders folder-children "$(
-            printf '%s' "$app_folders" | sed --expression="s/, '$APPFOLDER'//"
+            echo "$app_folders" | sed --expression="s/, '$APPFOLDER'//"
             )"
     fi
     schema=org.gnome.desktop.app-folders.folder

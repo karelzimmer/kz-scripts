@@ -223,18 +223,10 @@ $fstab"
         if [[ $zenity_rc -ne $SUCCESS ]]; then
             exit $SUCCESS
         fi
-        NAS_IP_ADRES=$(
-            printf '%s' "$REPLY" | cut --delimiter=',' --fields=1
-            )
-        NAS_GEBRUIKERSNAAM=$(
-            printf '%s' "$REPLY" | cut --delimiter=',' --fields=2
-            )
-        NAS_WACHTWOORD=$(
-            printf '%s' "$REPLY" | cut --delimiter=',' --fields=3
-            )
-        NAS_SHARENAAM=$(
-            printf '%s' "$REPLY" | cut --delimiter=',' --fields=4
-            )
+        NAS_IP_ADRES=$(echo       "$REPLY" | cut --delimiter=',' --fields=1)
+        NAS_GEBRUIKERSNAAM=$(echo "$REPLY" | cut --delimiter=',' --fields=2)
+        NAS_WACHTWOORD=$(echo     "$REPLY" | cut --delimiter=',' --fields=3)
+        NAS_SHARENAAM=$(echo      "$REPLY" | cut --delimiter=',' --fields=4)
     else
         printf '%s\n%s\n' "$TEXT." "Als u niets opgeeft, wordt de waarde \
 tussen [] gebruikt als antwoord."
@@ -324,7 +316,7 @@ function create_nas_login {
 
 function create_systemd_unit_file {
     printf '%s\n' 'Maak systemd mount-bestand...'
-    printf '%s\n' "[Unit]
+    echo "[Unit]
 Description=Mount NAS Directory
 
 [Mount]

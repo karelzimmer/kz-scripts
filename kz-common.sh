@@ -221,7 +221,7 @@ function process_option_version {
     local build=''
     local copyright_years='1970'
 
-    build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
+    build=$(cat /usr/local/etc/kz-build 2> /dev/null || echo 'unknown')
 
     if [[ $RELEASE_YEAR -eq $THIS_YEAR ]]; then
         copyright_years=$RELEASE_YEAR
