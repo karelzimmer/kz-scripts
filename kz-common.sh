@@ -328,7 +328,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
         error)
             error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}
 
-Controleer de log in het Terminalvenster met:
+Start een Terminalvenster en controleer de log met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
@@ -356,7 +356,7 @@ function signal_exit {
             rm --force kz kz.1
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
-dan een Terminalvenster, en voer uit:
+een Terminalvenster en voer uit:
     ${BLUE}sudo dpkg --configure --pending${NORMAL}
     ${BLUE}sudo apt-get update --fix-missing${NORMAL}
     ${BLUE}sudo apt-get install --fix-broken${NORMAL}
@@ -367,7 +367,7 @@ dan een Terminalvenster, en voer uit:
             printf '%s' "${NORMAL}${CURSOR_VISABLE}"
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
-dan een Terminalvenster, en voer uit:
+een Terminalvenster en voer uit:
     ${BLUE}sudo dpkg --configure --pending${NORMAL}
     ${BLUE}sudo apt-get update --fix-missing${NORMAL}
     ${BLUE}sudo apt-get install --fix-broken${NORMAL}

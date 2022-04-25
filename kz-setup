@@ -656,7 +656,7 @@ function process_command {
             printf '%s\n' "$TEXT"
         else
             if [[ -t 1 ]]; then
-                # Afbreken in Terminalvenster moet i.v.m. updaten status.
+                # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
                 #  <------------- tput cols ------------->
                 # '[WERK] [  1/1  ] [ 1] Te lange descr...' <=== op 1 regel
                 #  <-------- 22 -------->
@@ -727,7 +727,7 @@ function term_script {
             warning "
 $action is geëindigd met een waarschuwing.
 
-Controleer de log in het Terminalvenster met:
+Start een Terminalvenster en controleer de log met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
         else

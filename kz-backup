@@ -228,7 +228,7 @@ Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
 verwijderd of toegevoegd tijdens het maken van de back-up.
 
 Probeer opnieuw een back-up te maken.
-Als dat niet lukt, controleer de log in het Terminalvenster met:
+Als dat niet lukt, start een Terminalvenster en controleer de log met:
 
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $WARNING
@@ -240,7 +240,7 @@ Back-up maken is mislukt.
 Foutcode rsync is $rsync_rc.
 
 Probeer opnieuw een back-up te maken.
-Als dat niet lukt, controleer de log in het Terminalvenster met:
+Als dat niet lukt, start een Terminalvenster en controleer de log met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $ERROR
             ;;
