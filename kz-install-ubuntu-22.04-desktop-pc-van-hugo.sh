@@ -33,7 +33,6 @@ sudo adduser "${SUDO_USER:-$USER}" vboxusers
 sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 sudo apt-key del 98AB5139 2980AECF
 sudo rm --force /etc/apt/trusted.gpg.d/oracle_vbox*
-#2 Start Terminalvenster en typ, of kopieer en plak:
 #2 sudo deluser "${SUDO_USER:-$USER}" vboxusers
 #2 sudo delgroup vboxusers
 #2 sudo apt remove --yes virtualbox-*

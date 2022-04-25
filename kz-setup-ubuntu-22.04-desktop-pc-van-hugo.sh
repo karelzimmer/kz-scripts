@@ -22,8 +22,6 @@ chmod u+x "$HOME"/kz-vm-hugowin732.sh
 cp /usr/share/applications/kz-vm-hugowin732.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
 kz-gset --addfavaft=kz-vm-hugowin732
-#2 1. Verwijder map 'VirtualBox VMs' in de Persoonlijke map.
-#2 2. Start Terminalvenster en voer uit:
 #2 rm "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
 #2 rm "$HOME"/kz-vm-hugowin732.sh
 #2 kz-gset --delfav=virtualbox
