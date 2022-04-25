@@ -136,7 +136,7 @@ Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
             exit $WARNING
-        elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+        elif [[ $(echo "$MEDIUM" | wc --lines) -gt 1 ]]; then
             warning "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
