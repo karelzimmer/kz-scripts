@@ -184,7 +184,7 @@ function check_record_types {
 In $script:
     Foutieve regel(s) gevonden.
 $(
-    echo "$wrong_record" |
+    printf '%s' "$wrong_record" |
                 nl --number-width=8 --number-separator='' --body-numbering=n
 )
 "

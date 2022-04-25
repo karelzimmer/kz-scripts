@@ -332,7 +332,7 @@ function process_argument_app_file {
                     # Regels doorschrijven naar tijdelijk bestand tot
                     # eerstvolgende app-naam of tot eof.
                     app_found=true
-                    echo "$record" >> "$APPS_FILE"
+                    printf '%b\n' "$record" >> "$APPS_FILE"
                 elif $app_found; then
                     # Volgende app.
                     app_found=false
@@ -348,7 +348,7 @@ function process_argument_app_file {
             *)
                 # Overige regels.
                 if $app_found; then
-                    echo "$record" >> "$APPS_FILE"
+                    printf '%s\n' "$record" >> "$APPS_FILE"
                 fi
                 ;;
         esac
@@ -430,9 +430,9 @@ function process_option_cat {
             if $first_file; then
                 first_file=false
             else
-                echo
+                printf '\n'
             fi
-            echo "${BLUE}# $file${NORMAL}"
+            printf '%s\n' "${BLUE}# $file${NORMAL}"
             cat "$file"
         }   >> "$CMDS_FILE"
     done
@@ -637,7 +637,7 @@ function process_command {
             if $first_description_line; then
                 first_description_line=false
             else
-                echo >> "$TEXT_FILE"
+                printf '\n' >> "$TEXT_FILE"
             fi
             printf  '[%3d/%-3d] %s\n'   \
                     "$app_seq_num"      \

@@ -303,7 +303,7 @@ function process_argument_app {
                     --regexp="#1 $app"      \
                     "${files[@]}"           \
                     2> /dev/null            |
-            head    --lines=1               || echo
+            head    --lines=1               || printf '\n'
             )
         if [[ $file ]]; then
             process_argument_app_file
@@ -331,7 +331,7 @@ function process_argument_app_file {
                     # Gezochte app-naam.
                     # Regels doorschrijven naar tijdelijk bestand tot
                     # eerstvolgende app-naam of tot eof.
-                    echo "$record" >> "$APPS_FILE"
+                    printf '%s\n' "$record" >> "$APPS_FILE"
                     app_found=true
                 elif $app_found; then
                     # Volgende app.
@@ -347,7 +347,7 @@ function process_argument_app_file {
             *)
                 # Overige regels.
                 if $app_found; then
-                    echo "$record" >> "$APPS_FILE"
+                    printf '%s\n' "$record" >> "$APPS_FILE"
                 fi
                 ;;
         esac
@@ -435,9 +435,9 @@ function process_option_cat {
             if $first_file; then
                 first_file=false
             else
-                echo
+                printf '\n'
             fi
-            echo "${BLUE}# $file${NORMAL}"
+            printf '%s\n' "${BLUE}# $file${NORMAL}"
             cat "$file"
         }   >> "$CMDS_FILE"
     done
@@ -534,8 +534,7 @@ Software of
     local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text1..."
-    echo "$header" > "$TEMP_LIST"
-    echo "$DASHES" >> "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     apt list --manual-installed 2> >($LOGCMD) >> "$TEMP_LIST"
 
@@ -545,11 +544,7 @@ Software of
         plural='geïnstalleerd pakket'
     fi
     footer="Dit overzicht bevat $number_of_lines handmatig $plural."
-    {
-        echo "$DASHES"
-        echo "$footer"
-        echo
-    } >> "$TEMP_LIST"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" > "$app_list"
 }
@@ -562,12 +557,11 @@ function process_option_list_snaps {
     local       plural='snaps'
 
     printf '%s\n' "$text3..."
-    echo "$header" > "$TEMP_LIST"
-    echo "$DASHES" >> "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
-        echo "$TEXT" >> "$TEMP_LIST"
+        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
     fi
 
     number_of_lines=$(wc --lines < "$TEMP_LIST")
@@ -576,11 +570,7 @@ function process_option_list_snaps {
         plural='snap'
     fi
     footer="Dit overzicht bevat $number_of_lines $plural."
-    {
-        echo "$DASHES"
-        echo "$footer"
-        echo
-    } >> "$TEMP_LIST"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" >> "$app_list"
 }
@@ -595,8 +585,7 @@ installatie van een pakket of
     local       search=''
 
     printf '%s\n' "$text2..."
-    echo "$header" > "$TEMP_LIST"
-    echo "$DASHES" >> "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     search=/etc/apt/sources.list
     cd  $search.d || exit $ERROR
@@ -618,10 +607,7 @@ installatie van een pakket of
         plural='pakketbron'
     fi
     footer="Dit overzicht bevat $number_of_lines toegevoegde $plural."
-    {
-        echo "$DASHES"
-        echo "$footer"
-    } >> "$TEMP_LIST"
+    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
 
     cat "$TEMP_LIST" >> "$app_list"
 }
@@ -708,7 +694,7 @@ function process_command {
             if $first_description_line; then
                 first_description_line=false
             else
-                echo >> "$TEXT_FILE"
+                printf '\n' >> "$TEXT_FILE"
             fi
             printf  '[%3d/%-3d] %s\n'   \
                     "$app_seq_num"      \

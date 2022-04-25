@@ -182,10 +182,10 @@ function process_option_addfavaft  {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  echo "$favorite_apps" |
+    elif !  printf '%s' "$favorite_apps" |
             grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
         gsettings set org.gnome.shell favorite-apps "$(
-            echo "$favorite_apps" |
+            printf '%s' "$favorite_apps" |
             cut --delimiter=']' --fields=1
             ), '$DESKTOPFILE']"
     fi
@@ -197,11 +197,11 @@ function process_option_addfavbef  {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif !  echo "$favorite_apps" |
+    elif !  printf '%s' "$favorite_apps" |
             grep --quiet --word-regexp --regexp="$DESKTOPFILE"; then
         gsettings set org.gnome.shell favorite-apps \
             "['$DESKTOPFILE', $(
-                echo "$favorite_apps" | cut --delimiter='[' --fields=2
+                printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
                 )"
     fi
 }
@@ -215,7 +215,7 @@ function process_option_delfav  {
     elif [[ $favorite_apps = "['$DESKTOPFILE']" ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
     else gsettings set org.gnome.shell favorite-apps "$(
-        echo    "$favorite_apps"                   |
+        printf  '%s' "$favorite_apps"                   |
         sed     --expression="s/'$DESKTOPFILE', //g"    |
         sed     --expression="s/, '$DESKTOPFILE'//"
         )"
@@ -231,12 +231,12 @@ function process_option_addappfolder  {
 
     if [[ $app_folders = '@as []' ]]; then
         set org.gnome.desktop.app-folders folder-children "['$APPFOLDER']"
-    elif !  echo    "$app_folders"  |
-            grep    --quiet         \
-                    --word-regexp   \
+    elif !  printf  '%s' "$app_folders" |
+            grep    --quiet             \
+                    --word-regexp       \
                     --regexp="$APPFOLDER"; then
         gsettings set org.gnome.desktop.app-folders folder-children "$(
-            echo "$app_folders" | cut --delimiter=']' --fields=1
+            printf '%s' "$app_folders" | cut --delimiter=']' --fields=1
             ), '$APPFOLDER']"
     fi
     schema=org.gnome.desktop.app-folders.folder
@@ -258,7 +258,7 @@ function process_option_delappfolder  {
     elif [[ $app_folders = "['$APPFOLDER']" ]]; then
         gsettings set org.gnome.desktop.app-folders folder-children "[]"
     else gsettings set org.gnome.desktop.app-folders folder-children "$(
-            echo "$app_folders" | sed --expression="s/, '$APPFOLDER'//"
+            printf '%s' "$app_folders" | sed --expression="s/, '$APPFOLDER'//"
             )"
     fi
     schema=org.gnome.desktop.app-folders.folder

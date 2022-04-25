@@ -337,7 +337,7 @@ function download_website {
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.
         read -rsp "Password for 'ftp://$ftp_host': " < /dev/tty
-        echo "$REPLY" > "$ftp_login"
+        printf '%s\n' "$REPLY" > "$ftp_login"
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi

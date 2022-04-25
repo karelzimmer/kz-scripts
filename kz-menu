@@ -434,8 +434,12 @@ function process_commands {
     if $EXECUTE_COMMAND; then
         check_backup_restore
         for exec in "${!EXEC[@]}"; do
-            action=$(echo  "${EXEC[$exec]}" | cut --delimiter='#' --fields=1)
-            command=$(echo "${EXEC[$exec]}" | cut --delimiter='#' --fields=2)
+            action=$(
+                printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
+                )
+            command=$(
+                printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
+                )
             execute_command
         done
     fi
@@ -454,8 +458,12 @@ function show_commands_before_execution {
 Het volgende wordt uitgevoerd:
 "
     for exec in "${!EXEC[@]}"; do
-        action=$(echo  "${EXEC[$exec]}" | cut --delimiter='#' --fields=1)
-        command=$(echo "${EXEC[$exec]}" | cut --delimiter='#' --fields=2)
+        action=$(
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
+            )
+        command=$(
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
+            )
         TEXT+="
 $exec. $action ($command)"
     done
@@ -519,8 +527,12 @@ function execute_command {
     local       prompt=''
 
     exec=${command/kz /kz-}
-    cmd=$(echo "$exec" | cut --delimiter=' ' --fields=1)
-    arg=$(echo "$exec" | cut --delimiter=' ' --fields=2- --only-delimited)
+    cmd=$(
+        printf '%s' "$exec" | cut --delimiter=' ' --fields=1
+        )
+    arg=$(
+        printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
+        )
     case $exec in
         kz-install|kz-nas)
             # Zogenaamde sudo-scripts.
@@ -558,8 +570,12 @@ function show_commands_after_execution {
 Het volgende is uitgevoerd:
 "
     for exec in "${!EXEC[@]}"; do
-        action=$(echo  "${EXEC[$exec]}" | cut --delimiter='#' --fields=1)
-        command=$(echo "${EXEC[$exec]}" | cut --delimiter='#' --fields=2)
+        action=$(
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
+            )
+        command=$(
+            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
+            )
         TEXT+="
 $exec. $action ($command)"
     done

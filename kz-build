@@ -301,7 +301,7 @@ function build_deb {
         "${UPLOADS_TARGETS[PDFS]}"/Checklist-installatie*.pdf   \
         "${DEB_TARGETS[DOC]}"                                   |& $LOGCMD
 
-    echo "$TIMESTAMP" > "${DEB_TARGETS[BUILD]}/$PROGRAM_NAME"
+    printf '%s' "$TIMESTAMP" > "${DEB_TARGETS[BUILD]}/$PROGRAM_NAME"
 
     fakeroot    dpkg-deb                            \
                 --build                             \
@@ -314,9 +314,9 @@ function build_background_properties_file {
     local wallpapers_config_file=kz-wallpapers.xml
 
     {
-        echo '<?xml version="1.0" encoding="UTF-8"?>'
-        echo '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
-        echo '<wallpapers>'
+        printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
+        printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
+        printf '%s\n' '<wallpapers>'
     } > "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
 
     cd "${DEB_TARGETS[BACKGROUNDS]}"
@@ -326,17 +326,18 @@ function build_background_properties_file {
         # /usr/share/backgrounds/kz-gnome.png
         filename=${DEB_TARGETS[BACKGROUNDS]}/$wallpaper
         filename=${filename/$DEB_DISTDIR/}
-        echo "    <wallpaper>
+        printf '    %s\n' "<wallpaper>
         <name>${wallpaper%.*}</name>
         <filename>$filename</filename>
         <options>zoom</options>
         <pcolor>#000000</pcolor>
         <scolor>#000000</scolor>
         <shade_type>solid</shade_type>
-    </wallpaper>" >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
+    </wallpaper>" \
+            >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
     done
-    echo '</wallpapers>' \
-        >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
+    printf '%s\n' '</wallpapers>' \
+            >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
     cd "$HOME"
 }
 
