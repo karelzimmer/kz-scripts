@@ -32,6 +32,10 @@ sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient-LATEST /tmp/icaclient.deb
 #2 sudo apt remove --yes icaclient
 
+#1 gnome-tweaks (GNOME afstellingen)
+sudo apt-get install --yes gnome-tweaks
+#2 sudo apt remove --yes gnome-tweaks
+
 #1 google-chrome (webbrowser)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
