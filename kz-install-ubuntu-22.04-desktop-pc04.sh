@@ -9,10 +9,6 @@
 sudo apt-get install --yes calibre
 #2 sudo apt remove --yes calibre
 
-#1 dropbox (cloudopslag)
-sudo apt-get install --yes nautilus-dropbox
-#2 sudo apt remove --yes nautilus-dropbox
-
 #1 gnome-gmail (Gmail als de favoriete e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt remove --yes gnome-gmail
