@@ -115,7 +115,7 @@ sudo apt-get install --yes lightning thunderbird-l10n-nl
 #2 sudo apt remove --yes lightning thunderbird-l10n-nl
 
 #1 wallpapers (bureabladachtergronden)
-sudo apt-get install --yes *wallpapers
+sudo apt-get install --yes -- *-wallpapers
 #2 sudo apt remove --yes *wallpapers
 
 #1 zoom (samenwerken)
