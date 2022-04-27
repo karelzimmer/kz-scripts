@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#1 repos (alle repositories inschakelen)
+#1 all-repos (alle repositories inschakelen)
 sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
