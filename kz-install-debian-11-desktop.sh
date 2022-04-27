@@ -114,6 +114,10 @@ sudo rm --force /etc/apt/trusted.gpg.d/teamviewer*
 sudo apt-get install --yes lightning thunderbird-l10n-nl
 #2 sudo apt remove --yes lightning thunderbird-l10n-nl
 
+#1 wallpapers (bureabladachtergronden)
+sudo apt-get install --yes *wallpapers
+#2 sudo apt remove --yes *wallpapers
+
 #1 zoom (samenwerken)
 wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb
 sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
