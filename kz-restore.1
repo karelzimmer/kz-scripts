@@ -24,6 +24,8 @@ harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, bijvoorbeeld
 /media/jan/backupdisk/backup-pc01-jan.
 .sp
 Met optie \fB-s\fR, \fB--source\fR kan een andere locatie opgegeven worden.
+Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk (onverstandig want /tmp
+wordt leeggegooid na een herstart).
 .sp
 Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
 Het wordt meestal gebruikt in om te zien wat een rsync-commando gaat doen
@@ -89,10 +91,10 @@ Toon bestanden die teruggezet zouden worden uit de back-up.
 .RE
 .sp
 \fBkz restore\
- --source=smb://fileserver/backups/backup-pc01-jan\fR
+ --source=smb://fileserver/backups\fR
 .RS
-Zet de back-up terug vanaf SMB-share backups op fileserver uit de map
-backup-pc01-jan.
+Zet de back-up terug vanaf SMB-share 'backups' op 'fileserver' uit de map\
+ 'backup-pc01-jan'.
 .RE
 .\"
 .\"

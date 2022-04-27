@@ -28,6 +28,8 @@ In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
 \fBBack-up maken\fR.
 .sp
 Met optie \fB-t\fR, \fB--target\fR kan een andere locatie opgegeven worden.
+Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk (onverstandig want /tmp
+wordt leeggegooid na een herstart).
 .sp
 Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
 Het wordt meestal gebruikt in combinatie met de \fB--delete\fR optie om te zien
@@ -113,10 +115,10 @@ Hiervoor is ook starter \fBBack-up maken\fR beschikbaar.
 Toon bestanden die anders toegevoegd en verwijderd zouden worden in de back-up.
 .RE
 .sp
-\fBkz backup --target=smb://fileserver/backups/backup-pc01-jan\fR
+\fBkz backup --target=smb://fileserver/backups\fR
 .RS
-Maak een back-up van de Persoonlijke map naar SMB-share backups op fileserver
-in de map backup-pc01-jan (deze map wordt aangemaakt als nodig).
+Maak een back-up van de Persoonlijke map naar SMB-share 'backups' op\
+ 'fileserver' in de map 'backup-pc01-jan' (deze map wordt aangemaakt als nodig).
 .RE
 .\"
 .\"
