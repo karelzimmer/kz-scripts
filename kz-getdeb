@@ -316,7 +316,7 @@ function process_repos {
                 "$bin_repo"                             |& $LOGCMD; then
         cd "$bin_repo" || exit $ERROR
         if ! git pull |& $LOGCMD; then
-            git clean -fd |& $LOGCMD
+            git clean -d --force |& $LOGCMD
             git pull |& $LOGCMD
         fi
 
