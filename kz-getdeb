@@ -313,10 +313,13 @@ function process_repos {
     git config --global credential.helper store |& $LOGCMD
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
-                "$bin_repo"                             |& $LOGCMD
-    then
+                "$bin_repo"                             |& $LOGCMD; then
         cd "$bin_repo" || exit $ERROR
-        git pull |& $LOGCMD
+        if ! git pull |& $LOGCMD; then
+            git clean -fd |& $LOGCMD
+            git pull |& $LOGCMD
+        fi
+
     fi
     /home/karel/bin/gitpull |& $LOGCMD
 }
