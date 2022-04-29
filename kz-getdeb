@@ -315,11 +315,7 @@ function process_repos {
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             |& $LOGCMD; then
         cd "$bin_repo" || exit $ERROR
-        if ! git pull |& $LOGCMD; then
-            git clean -d --force |& $LOGCMD
-            git pull |& $LOGCMD
-        fi
-
+        git pull |& $LOGCMD
     fi
     /home/karel/bin/gitpull |& $LOGCMD
 }
