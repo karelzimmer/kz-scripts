@@ -93,9 +93,13 @@ function check_input {
                 shift 2
                 ;;
             -d|--delfav)
+                OPTION_DELFAV=true
+                FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -f|--addappfolder)
+                OPTION_ADDAPPFOLDER=true
+                FOLDER_ARGUMENT=$2
                 shift 2
                 ;;
             -x|--delappfolder)
