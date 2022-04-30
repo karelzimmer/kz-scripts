@@ -26,6 +26,11 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.
 #2 sudo rm /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
 #2 sudo apt update
 
+#1 lidswitch (negeer sluiten laptopdesksel)
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+#2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
 #1 wine (windowsapps op Linux)
 sudo apt-get install --yes wine winetricks playonlinux
 #2 sudo apt remove --yes wine winetricks playonlinux
