@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-dashoptions="--addappfolder --addfavbegin --addfavend --removeappfolder
-    --removefav '--file DESKTOPFILE' '--folder=APPFOLDER' -h --help -u --usage
-    -v --version"
+dashoptions="'--addfavbegin FAVORITE' '--addfavend FAVORITE'
+    '--removefav FAVORITE' -r --resetfavs '--addappfolder APPFOLDER'
+    '--removeappfolder  APPFOLDER' -h --help -u --usage -v --version"
 complete -o default -W "$dashoptions" kz-gset
