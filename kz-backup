@@ -90,14 +90,8 @@ function check_input {
                 shift
                 ;;
             -t|--target)
-                if $OPTION_TARGET; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_TARGET=true
-                    TARGET_ARGUMENT=$2
-                fi
+                OPTION_TARGET=true
+                TARGET_ARGUMENT=$2
                 shift 2
                 ;;
             --)

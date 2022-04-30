@@ -70,7 +70,6 @@ declare     ARGUMENT_APP=false
 declare     ARGUMENT_FILE=false
 declare     COMMANDS_FOUND=false
 declare     EDITION=$EDITION_DEFAULT
-declare     EDITION_ARGUMENT=''
 declare     EXECUTE_COMMANDS=true
 declare -a  FILE_ARGUMENTS=()
 declare -a  FILES_TO_PROCESS=()
@@ -78,7 +77,6 @@ declare     LESS_OPTIONS=''
 declare -i  MAXRC=0
 declare     OPTION_APPS=false
 declare     OPTION_CAT=false
-declare     OPTION_EDITION=false
 declare     OPTION_FILES=false
 declare     OPTION_GUI=false
 declare     OPTION_LIST=false
@@ -130,15 +128,7 @@ function check_input {
                 shift
                 ;;
             -e|--edition)
-                if $OPTION_EDITION; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_EDITION=true
-                    EDITION_ARGUMENT=$2
-                    EDITION=$EDITION_ARGUMENT
-                fi
+                EDITION=$2
                 shift 2
                 ;;
             -f|--files)
