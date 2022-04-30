@@ -20,11 +20,10 @@ readonly RELEASE_YEAR=2015
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'a:b:d:f:x:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addfavaft:,addfavbef:,delfav:,\
 addappfolder:,delappfolder:"
-readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--addfavaft=FAVORITE|
-                  -b|--addfavbef=FAVORITE|
-                  -d|--delfav=FAVORITE|
-                  -f|--addappfolder=APPFOLDER|
-                  -x|--delappfolder=APPFOLDER]
+readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--addfavaft=FAVORITE] \
+[-b|--addfavbef=FAVORITE]
+                 [-d|--delfav=FAVORITE] [-f|--addappfolder=APPFOLDER]
+                 [-x|--delappfolder=APPFOLDER]
                  $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
@@ -84,58 +83,24 @@ function check_input {
     while true; do
         case $1 in
             -a|--addfavaft)
-                if $OPTION_ADDFAVAFT; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_ADDFAVAFT=true
-                    FAVORITE_ARGUMENT=$2
-                fi
+                OPTION_ADDFAVAFT=true
+                FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -b|--addfavbef)
-                if $OPTION_ADDFAVBEF; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_ADDFAVBEF=true
-                    FAVORITE_ARGUMENT=$2
-                fi
+                OPTION_ADDFAVBEF=true
+                FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -d|--delfav)
-                if $OPTION_DELFAV; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_DELFAV=true
-                    FAVORITE_ARGUMENT=$2
-                fi
                 shift 2
                 ;;
             -f|--addappfolder)
-                if $OPTION_ADDAPPFOLDER; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_ADDAPPFOLDER=true
-                    FOLDER_ARGUMENT=$2
-                fi
                 shift 2
                 ;;
             -x|--delappfolder)
-                if $OPTION_DELAPPFOLDER; then
-                    error "Optie '$1' eenmaal opgeven."
-                    info "$USAGELINE" >&2
-                    exit $ERROR
-                else
-                    OPTION_DELAPPFOLDER=true
-                    FOLDER_ARGUMENT=$2
-                fi
+                OPTION_DELAPPFOLDER=true
+                FOLDER_ARGUMENT=$2
                 shift 2
                 ;;
             --)
