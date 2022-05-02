@@ -162,10 +162,10 @@ function restore_backup {
                 --auto-close                \
                 --no-cancel                 \
                 --pulsate                   \
-                --width 600                 \
-                --height 50                 \
-                --title "$TITLE"            \
-                --text "$TEXT"              2> >($LOGCMD) || rsync_rc=$?
+                --width     600             \
+                --height    50              \
+                --title     "$TITLE"        \
+                --text      "$TEXT"         2> >($LOGCMD) || rsync_rc=$?
     else
         rsync   --archive                   \
                 --verbose                   \
@@ -179,38 +179,20 @@ function restore_backup {
         0)
             return $SUCCESS
             ;;
-        11)
-            log 'Te weinig ruimte.'
-            warning "
-Back-up terugzetten is mislukt.
-
-Te weinig ruimte op $(df "$TARGET" | awk 'END{print $6}').
-
-Gebruik een medium met meer ruimte, en start daarna opnieuw."
-            exit $ERROR
-            ;;
-        23)
-            log 'Niet alle bestanden waren leesbaar?'
-            warning "
-Back-up terugzetten is gedeeltelijk gelukt.
-
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
-verwijderd of toegevoegd tijdens het terugzetten van de back-up.
-
-Probeer opnieuw de back-up terug te zetten.
-Als dat niet lukt, start een Terminalvenster en controleer de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
-            exit $WARNING
-            ;;
         *)
-            warning "
-Back-up terugzetten is mislukt.
+            error "
+Back-up terugzetten is geeindigd met fouten.
 
 Foutcode rsync is $rsync_rc.
 
-Probeer opnieuw de back-up terug te zetten.
-Als dat niet lukt, start een Terminalvenster en controleer de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
+verwijderd of toegevoegd tijdens het terugzetten van de back-up, of is er
+te weinig ruimte op $TARGET.
+
+Controleer de log in het andere venster,
+of start een Terminalvenster en controleer de log met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}" &
+            logcmd_check
             exit $ERROR
             ;;
     esac

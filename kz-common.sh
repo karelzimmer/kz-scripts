@@ -42,7 +42,7 @@ declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD_CHECK=''
 declare     LOGCMD=''
-declare     ERROR_MSG_TO_LOG=true
+declare     ERROR_MSG_TO_LOG=false
 declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
@@ -167,6 +167,18 @@ function init_script {
 
 function log {
     printf '%b\n' "$1" |& $LOGCMD "${2:---priority=info}"
+}
+
+function logcmd_check {
+    temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
+    eval "$LOGCMD_CHECK" > "$temp_log"
+    zenity  --text-info             \
+            --width     1200        \
+            --height    600         \
+            --title     "$TITLE"    \
+            --filename  "$temp_log" \
+            --ok-label  'Oké'       2> >($LOGCMD) || true
+    rm "$temp_log"
 }
 
 function process_common_options {
@@ -328,7 +340,8 @@ $command, code: $rc ($rc_desc)" --priority=debug
         error)
             error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}
 
-Start een Terminalvenster en controleer de log met:
+Controleer de log in het andere venster,
+of start een Terminalvenster en controleer de log met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;

@@ -147,6 +147,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 
 function create_backup {
     local       exclude=''
+    local       temp_log=''
     local -i    rsync_rc=0
 
     exclude=$(mktemp -t 'kz-backup-XXXXXXXXXX')
@@ -183,10 +184,10 @@ EOF
                 --auto-close                \
                 --no-cancel                 \
                 --pulsate                   \
-                --width 600                 \
-                --height 50                 \
-                --title "$TITLE"            \
-                --text "$TEXT"              2> >($LOGCMD) || rsync_rc=$?
+                --width     600             \
+                --height    50              \
+                --title     "$TITLE"        \
+                --text      "$TEXT"         2> >($LOGCMD) || rsync_rc=$?
     else
         rsync   --archive                   \
                 --verbose                   \
@@ -203,39 +204,20 @@ EOF
         0)
             return $SUCCESS
             ;;
-        11)
-            log 'Te weinig ruimte.'
-            warning "
-Back-up maken is mislukt.
-
-Te weinig ruimte op $TARGET.
-
-Koppel een medium aan met meer ruimte, en start daarna opnieuw."
-            exit $ERROR
-            ;;
-        23)
-            log 'Niet alle bestanden waren leesbaar.'
-            warning "
-Back-up maken is gedeeltelijk gelukt.
-
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
-verwijderd of toegevoegd tijdens het maken van de back-up.
-
-Probeer opnieuw een back-up te maken.
-Als dat niet lukt, start een Terminalvenster en controleer de log met:
-
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
-            exit $WARNING
-            ;;
         *)
-            warning "
-Back-up maken is mislukt.
+            error "
+Back-up maken is geeindigd met fouten.
 
 Foutcode rsync is $rsync_rc.
 
-Probeer opnieuw een back-up te maken.
-Als dat niet lukt, start een Terminalvenster en controleer de log met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
+verwijderd of toegevoegd tijdens het maken van de back-up, of is er
+te weinig ruimte op $TARGET.
+
+Controleer de log in het andere venster,
+of start een Terminalvenster en controleer de log met:
+    ${BLUE}$LOGCMD_CHECK${NORMAL}" &
+            logcmd_check
             exit $ERROR
             ;;
     esac
