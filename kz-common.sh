@@ -60,11 +60,7 @@ declare     GREEN=''
 declare     NORMAL=''
 declare     RED=''
 declare     YELLOW=''
-declare     BLINK=''
-declare     CARRIAGE_RETURN=''
-declare     CURSOR_INVISABLE=''
 declare     CURSOR_VISABLE=''
-declare     REWRITE_LINE=''
 
 ###############################################################################
 # Common functions
@@ -265,11 +261,6 @@ function reset_terminal_attributes {
     GREEN=''
     RED=''
     YELLOW=''
-    BLINK=''
-    CARRIAGE_RETURN=''
-    CURSOR_INVISABLE=''
-    CURSOR_VISABLE=''
-    REWRITE_LINE=''
 }
 
 function set_terminal_attributes {
@@ -279,15 +270,6 @@ function set_terminal_attributes {
     GREEN=${BOLD}$(tput setaf 2)
     RED=${BOLD}$(tput setaf 1)
     YELLOW=${BOLD}$(tput setaf 3)
-    # shellcheck disable=SC2034
-    BLINK=$(tput blink)
-    # shellcheck disable=SC2034
-    CARRIAGE_RETURN=$(tput cr)
-    # shellcheck disable=SC2034
-    CURSOR_INVISABLE=$(tput civis)
-    CURSOR_VISABLE=$(tput cvvis)
-    # shellcheck disable=SC2034
-    REWRITE_LINE=$(tput cuu1;tput el)
 }
 
 function signal {

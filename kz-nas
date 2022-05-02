@@ -61,6 +61,9 @@ declare NAS_SHARENAAM=${SUDO_USER:-$USER}
 declare NAS_WACHTWOORD='geheim'
 declare OPTION_GUI=false
 
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+declare     REWRITE_LINE=''
+
 ###############################################################################
 # Functions                                                                   #
 ###############################################################################
@@ -68,6 +71,10 @@ declare OPTION_GUI=false
 function check_input {
     local -i    getopt_rc=0
     local       parsed=''
+
+    if [[ -t 1 ]]; then
+        REWRITE_LINE=$(tput cuu1;tput el)
+    fi
 
     parsed=$(
         getopt  --alternative                       \
@@ -89,6 +96,7 @@ function check_input {
                 OPTION_GUI=true
                 if [[ -t 1 ]]; then
                     reset_terminal_attributes
+                    REWRITE_LINE=''
                 fi
                 shift
                 ;;
