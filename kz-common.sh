@@ -172,12 +172,16 @@ function log {
 function logcmd_check {
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     eval "$LOGCMD_CHECK" > "$temp_log"
-    zenity  --text-info             \
-            --width     1200        \
-            --height    600         \
-            --title     "$TITLE"    \
-            --filename  "$temp_log" \
-            --ok-label  'Oké'       2> >($LOGCMD) || true
+    if $OPTION_GUI; then
+        zenity  --text-info             \
+                --width     1200        \
+                --height    600         \
+                --title     "$TITLE"    \
+                --filename  "$temp_log" \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
+    else
+        cat "$temp_log"
+    fi
     rm "$temp_log"
 }
 
@@ -340,8 +344,8 @@ $command, code: $rc ($rc_desc)" --priority=debug
         error)
             error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}
 
-Controleer de log in het andere venster,
-of start een Terminalvenster en controleer de log met:
+Controleer de log hier getoond, of start een Terminalvenster en controleer de \
+log met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
