@@ -270,7 +270,6 @@ function reset_terminal_attributes {
     CURSOR_INVISABLE=''
     CURSOR_VISABLE=''
     REWRITE_LINE=''
-
 }
 
 function set_terminal_attributes {
