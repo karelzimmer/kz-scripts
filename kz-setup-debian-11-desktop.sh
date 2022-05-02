@@ -18,9 +18,11 @@ kz-gset --addfavbef=google-chrome
 xdg-mime default wfica.desktop application/x-ica
 
 #1 gnome (bureaubladomgeving)
+kz-gset --addappfolder --folder='KZ Scripts'
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
+gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
@@ -37,13 +39,13 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
-kz-gset --addappfolder --folder='KZ Scripts'
 #2 kz-gset --delappfolder --folder='KZ Scripts'
 #2 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 #2 gsettings reset org.gnome.app-folders folder-children
 #2 gsettings reset org.gnome.calendar show-weekdate
-#2 gsettings reset org.gnome.interface clock-show-date
-#2 gsettings reset org.gnome.interface show-battery-percentage
+#2 gsettings reset org.gnome.desktop.interface clock-show-date
+#2 gsettings reset org.gnome.desktop.interface clock-show-weekday
+#2 gsettings reset org.gnome.desktop.interface show-battery-percentage
 #2 gsettings reset org.gnome.peripherals.touchpad tap-to-click
 #2 gsettings reset org.gnome.screensaver lock-enabled
 #2 gsettings reset org.gnome.nautilus.icon-view default-zoom-level

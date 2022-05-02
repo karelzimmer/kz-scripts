@@ -21,6 +21,7 @@ xdg-mime default wfica.desktop application/x-ica
 kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
+gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
@@ -38,6 +39,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.desktop.app-folders folder-children
 #2 gsettings reset org.gnome.desktop.calendar show-weekdate
 #2 gsettings reset org.gnome.desktop.interface clock-show-date
+#2 gsettings reset org.gnome.desktop.interface clock-show-weekday
 #2 gsettings reset org.gnome.desktop.interface show-battery-percentage
 #2 gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
 #2 gsettings reset org.gnome.desktop.screensaver lock-enabled
