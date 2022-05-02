@@ -61,9 +61,6 @@ declare NAS_SHARENAAM=${SUDO_USER:-$USER}
 declare NAS_WACHTWOORD='geheim'
 declare OPTION_GUI=false
 
-# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare REWRITE_LINE=''
-
 ###############################################################################
 # Functions                                                                   #
 ###############################################################################
@@ -109,10 +106,6 @@ function check_input {
         error 'Geen argumenten toegestaan.'
         info "$USAGELINE" >&2
         exit $ERROR
-    fi
-
-    if [[ -t 1 ]]; then
-        REWRITE_LINE=$(tput cuu1;tput el)
     fi
 
     check_user

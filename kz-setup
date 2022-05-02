@@ -80,12 +80,6 @@ declare     OPTION_RESET=false
 declare     OPTION_SIMULATE=false
 declare     STATUS_BUSY=''
 
-# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     BLINK=''
-declare     CARRIAGE_RETURN=''
-declare     CURSOR_INVISABLE=''
-declare     CURSOR_VISABLE=''
-
 ###############################################################################
 # Functions                                                                   #
 ###############################################################################
@@ -174,13 +168,6 @@ function check_input {
             shift
         fi
     done
-
-    if [[ -t 1 ]]; then
-        BLINK=$(tput blink)
-        CARRIAGE_RETURN=$(tput cr)
-        CURSOR_INVISABLE=$(tput civis)
-        CURSOR_VISABLE=$(tput cvvis)
-    fi
 }
 
 function process_input {
@@ -717,8 +704,8 @@ function term_script {
             warning "
 $action is geëindigd met een waarschuwing.
 
-Controleer de log hier getoond, of start een Terminalvenster en controleer de \
-log met:
+Controleer de getoonde log, of start een Terminalvenster en controleer de log \
+met:
     ${BLUE}$LOGCMD_CHECK${NORMAL}" &
             logcmd_check
             exit $WARNING
