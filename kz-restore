@@ -106,6 +106,7 @@ function check_input {
     check_user
 }
 
+
 function process_input {
     if $OPTION_SOURCE; then
         if ! [[ -d $SOURCE_ARGUMENT ]]; then
@@ -141,6 +142,7 @@ daarna opnieuw."
     check_on_ac_power
     restore_backup
 }
+
 
 function restore_backup {
     local -i rsync_rc=0
@@ -193,6 +195,7 @@ met:
             ;;
     esac
 }
+
 
 function term_script {
     info "

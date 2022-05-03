@@ -136,6 +136,7 @@ function check_input {
     check_user
 }
 
+
 function process_input {
     if $OPTION_ADDFAVAFT; then
         process_option_addfavaft
@@ -154,6 +155,7 @@ function process_input {
     fi
 }
 
+
 function process_option_addfavaft  {
     local favorite_apps=''
 
@@ -169,6 +171,7 @@ function process_option_addfavaft  {
     fi
 }
 
+
 function process_option_addfavbef  {
     local favorite_apps=''
 
@@ -183,6 +186,7 @@ function process_option_addfavbef  {
                 )"
     fi
 }
+
 
 function process_option_delfav  {
     local favorite_apps=''
@@ -200,9 +204,11 @@ function process_option_delfav  {
     fi
 }
 
+
 function process_option_resetfavs  {
     gsettings reset org.gnome.shell favorite-apps
 }
+
 
 function process_option_addappfolder  {
     local app_folders=''
@@ -228,6 +234,7 @@ function process_option_addappfolder  {
     gsettings set "$schema":"$path" categories  "['$APPFOLDER']"
 }
 
+
 function process_option_delappfolder  {
     local app_folders=''
     local schema=''
@@ -248,6 +255,7 @@ function process_option_delappfolder  {
     gsettings reset-recursively "$schema":"$path"
 }
 
+
 function capture_gui_changes {
     CONFIG_A=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
     save_configuration_database A "$CONFIG_A"
@@ -257,6 +265,7 @@ function capture_gui_changes {
     save_configuration_database B "$CONFIG_B"
     report_database_changes "$CONFIG_A" "$CONFIG_B"
 }
+
 
 function save_configuration_database {
     local fase=${1:-fase?}
@@ -270,6 +279,7 @@ function save_configuration_database {
 
     info "Inhoud configuratiedatabase vastgelegd ($fase)."
 }
+
 
 function report_database_changes {
     local output_file1=${1:-output_file1?}
@@ -286,6 +296,7 @@ Bij WIJZIGINGen voer uit:
     ${BLUE}...${NORMAL}"
     rm "$CONFIG_A" "$CONFIG_B"
 }
+
 
 function term_script {
     exit $SUCCESS

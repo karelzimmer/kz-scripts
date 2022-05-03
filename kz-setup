@@ -187,6 +187,7 @@ function check_input {
     done
 }
 
+
 function process_input {
     local -i    app_seq_num=0
     local -i    app_tot_num=0
@@ -269,6 +270,7 @@ function process_input {
     fi
 }
 
+
 function process_argument_app {
     local       app=''
     local       file=''
@@ -314,6 +316,7 @@ function process_argument_app {
     fi
 }
 
+
 function process_argument_app_file {
     local app_found=false
     local record=''
@@ -349,6 +352,7 @@ function process_argument_app_file {
     done < "$temp_file"
 }
 
+
 function process_argument_file {
     local file=''
 
@@ -366,6 +370,7 @@ function process_argument_file {
     fi
 }
 
+
 function process_dfltfiles {
     # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
@@ -382,6 +387,7 @@ function process_dfltfiles {
         ((++file_num))
     fi
 }
+
 
 function process_option_apps {
     # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
@@ -416,6 +422,7 @@ Om APPs in te stellen voer uit:
     info "$TEXT"
 }
 
+
 function process_option_cat {
     local first_file=true
 
@@ -434,6 +441,7 @@ function process_option_cat {
     less "$LESS_OPTIONS" "$CMDS_FILE"
 }
 
+
 function less_options {
     # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
     # van:
@@ -444,6 +452,7 @@ function less_options {
 --RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
 .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
 }
+
 
 function process_option_files {
     TEXT="De volgende bestanden staan op het systeem:
@@ -470,6 +479,7 @@ Om BESTANDen te gebruiken voer uit:
 )"
     info "$TEXT"
 }
+
 
 function process_option_list {
     if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
@@ -522,6 +532,7 @@ Bureaubladachtergrond, Favorieten, en Opdrachtgeschiedenis.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
 }
 
+
 function process_option_list_user_photo {
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
@@ -530,11 +541,13 @@ function process_option_list_user_photo {
     fi
 }
 
+
 function process_option_list_desktop_background {
     printf '%s\n' "$text2..."
     gsettings get   org.gnome.desktop.background    \
                     picture-uri                     > "$file2" |& $LOGCMD
 }
+
 
 function process_option_list_favorite_apps {
     printf '%s\n' "$text3..."
@@ -542,12 +555,14 @@ function process_option_list_favorite_apps {
                     favorite-apps   > "$file3" |& $LOGCMD
 }
 
+
 function process_option_list_command_history {
     printf '%s\n' "$text4..."
     HISTFILE=~/.bash_history
     set -o history
     history > "$file4" |& $LOGCMD
 }
+
 
 function process_file {
     local       app_description=''
@@ -595,6 +610,7 @@ function process_file {
     fi
 }
 
+
 function process_app_description {
     local record=${1:-record?}
 
@@ -614,6 +630,7 @@ function process_app_description {
     ((++app_seq_num))
     cmd_seq_num=0
 }
+
 
 function process_command {
     local       cmd=${1:-cmd?}
@@ -670,6 +687,7 @@ function process_command {
     fi
 }
 
+
 function execute_command {
     local       cmd=${1:-cmd?}
     local -i    cmd_rc=0
@@ -702,6 +720,7 @@ function execute_command {
         printf '%s\n' "$status"
     fi
 }
+
 
 function term_script {
     local action='Instellen'

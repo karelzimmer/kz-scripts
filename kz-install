@@ -192,6 +192,7 @@ function check_input {
     done
 }
 
+
 function process_input {
     local -i    app_seq_num=0
     local -i    app_tot_num=0
@@ -276,6 +277,7 @@ function process_input {
     fi
 }
 
+
 function process_argument_app {
     local       app=''
     local       file=''
@@ -314,6 +316,7 @@ function process_argument_app {
     fi
 }
 
+
 function process_argument_app_file {
     local app_found=false
     local record=''
@@ -348,6 +351,7 @@ function process_argument_app_file {
     done < "$file"
 }
 
+
 function process_argument_file {
     local file=''
 
@@ -365,6 +369,7 @@ function process_argument_file {
     fi
 }
 
+
 function process_dfltfiles {
     # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
@@ -381,6 +386,7 @@ function process_dfltfiles {
         ((++file_num))
     fi
 }
+
 
 function process_option_apps {
     local -a    files=()
@@ -421,6 +427,7 @@ Om APPs te installeren voer uit:
     info "$TEXT"
 }
 
+
 function process_option_cat {
     local first_file=true
 
@@ -439,6 +446,7 @@ function process_option_cat {
     less "$LESS_OPTIONS" "$CMDS_FILE"
 }
 
+
 function less_options {
     # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
     # van:
@@ -449,6 +457,7 @@ function less_options {
 --RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
 .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
 }
+
 
 function process_option_files {
     TEXT="De volgende bestanden staan op het systeem:
@@ -475,6 +484,7 @@ Om BESTANDen te gebruiken voer uit:
 )"
     info "$TEXT"
 }
+
 
 function process_option_list {
     local text0='Opdrachten worden verwerkt'
@@ -519,6 +529,7 @@ In map kz het bestand Applijst met de eerder geïnstalleerde apps.
 Dit bestand kan worden gebruikt voor het nalopen van de installatie.'
 }
 
+
 function process_option_list_manual_installed {
     local       footer=''
     local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
@@ -542,6 +553,7 @@ Software of
 
     cat "$TEMP_LIST" > "$app_list"
 }
+
 
 function process_option_list_snaps {
     local       footer=''
@@ -568,6 +580,7 @@ function process_option_list_snaps {
 
     cat "$TEMP_LIST" >> "$app_list"
 }
+
 
 function process_option_list_added_repos {
     local       footer=''
@@ -605,6 +618,7 @@ installatie van een pakket of
 
     cat "$TEMP_LIST" >> "$app_list"
 }
+
 
 function process_file {
     local       app_description=''
@@ -652,6 +666,7 @@ function process_file {
     fi
 }
 
+
 function process_app_description {
     local record=${1:-record?}
 
@@ -671,6 +686,7 @@ function process_app_description {
     ((++app_seq_num))
     cmd_seq_num=0
 }
+
 
 function process_command {
     local       cmd=${1:-cmd?}
@@ -727,6 +743,7 @@ function process_command {
     fi
 }
 
+
 function execute_command {
     local       cmd=${1:-cmd?}
     local -i    cmd_rc=0
@@ -761,6 +778,7 @@ function execute_command {
     fi
 }
 
+
 function check_dpkg {
     local -i wait_for_aptd=5
 
@@ -783,6 +801,7 @@ function check_dpkg {
         done
     fi
 }
+
 
 function term_script {
     local action='Installeren'

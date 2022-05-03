@@ -76,6 +76,7 @@ function check_input {
     check_user
 }
 
+
 function process_input {
     local script=''
     local scriptsdir=$HOME/kz-scripts
@@ -118,6 +119,7 @@ function process_input {
     cd "$HOME" || exit $ERROR
 }
 
+
 function check_code {
     if grep --quiet --line-regexp --regexp='#!''/bin/bash' "$script"; then
         check_shellcheck
@@ -135,6 +137,7 @@ In $script:
     fi
 }
 
+
 function check_pycodestyle {
     local -i check_rc=0
 
@@ -143,6 +146,7 @@ function check_pycodestyle {
         MAXRC=$ERROR
     fi
 }
+
 
 function check_record_length {
     local -i max_line_length=79
@@ -157,6 +161,7 @@ In $script:
         MAXRC=$ERROR
     fi
 }
+
 
 function check_record_types {
     local wrong_record=''
@@ -192,6 +197,7 @@ $(
     fi
 }
 
+
 function check_release_year {
     if ! grep   --quiet                     \
                 --regexp='RELEASE_YEAR='    \
@@ -205,6 +211,7 @@ In $script:
     fi
 }
 
+
 function check_shellcheck {
     local -i check_rc=0
 
@@ -213,6 +220,7 @@ function check_shellcheck {
         MAXRC=$ERROR
     fi
 }
+
 
 function check_tags {
     if grep --quiet             \
@@ -238,6 +246,7 @@ $(
     fi
 }
 
+
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
         error "
@@ -251,6 +260,7 @@ $(
         MAXRC=$ERROR
     fi
 }
+
 
 function term_script {
     exit $MAXRC

@@ -93,6 +93,7 @@ function check_input {
     check_user
 }
 
+
 function process_input {
     check_names
     check_scripts
@@ -100,6 +101,7 @@ function process_input {
     upload_website
     install_package
 }
+
 
 function check_names {
     local -i    check_rc=0
@@ -120,6 +122,7 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
     fi
 }
 
+
 function check_scripts {
     local -i check_rc=0
 
@@ -133,6 +136,7 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
     fi
 }
 
+
 function build_package {
     local -i check_rc=0
 
@@ -145,6 +149,7 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
 }
+
 
 function upload_website {
     local ftp_set='set ssl:verify-certificate no'
@@ -175,6 +180,7 @@ function upload_website {
     sleep 5
 }
 
+
 function install_package {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
@@ -184,6 +190,7 @@ function install_package {
         exit $WARNING
     fi
 }
+
 
 function term_script {
     exit $SUCCESS
