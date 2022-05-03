@@ -23,7 +23,7 @@ declare -ir WARNING=2
 readonly USAGE="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
      of: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
 readonly HELP="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
-         $DISPLAY_NAME OPTIE
+     of: $DISPLAY_NAME OPTIE
 
 Opdracht uitvoeren.
 
