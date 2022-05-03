@@ -124,9 +124,7 @@ function process_input {
     else
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
-            warning 'Geen back-up gemaakt.
-
-Geen USB-medium gevonden.
+            warning 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
             exit $WARNING

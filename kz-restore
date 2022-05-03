@@ -117,9 +117,7 @@ function process_input {
     else
         SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
-            warning 'Geen back-up teruggezet.
-
-Geen USB-medium gevonden.
+            warning 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
             exit $WARNING
@@ -132,12 +130,10 @@ $MEDIUM
 Koppel media af via Bestanden, en start daarna opnieuw."
             exit $WARNING
         elif ! [[ -d $SOURCE ]]; then
-            warning "Geen back-up teruggezet.
+            warning "Geen back-up gevonden op aangekoppeld USB-medium.
 
-Geen correct USB-medium gevonden.
-
-Koppel een USB-medium aan met hierop de map \
-backup-$HOSTNAME-$USER, en start daarna opnieuw."
+Koppel een USB-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
+daarna opnieuw."
             exit $WARNING
         fi
     fi
