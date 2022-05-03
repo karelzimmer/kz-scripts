@@ -538,6 +538,7 @@ Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
     fi
 }
 
+
 function execute_command {
     local -i    cmd_rc=0
     local       exec=''

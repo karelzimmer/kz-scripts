@@ -79,6 +79,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
     fi
 }
 
+
 function error {
     if $OPTION_GUI; then
         if $ERROR_MSG_TO_LOG; then
@@ -100,6 +101,7 @@ function error {
     fi
 }
 
+
 function check_user {
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
@@ -113,6 +115,7 @@ function check_user {
         fi
     fi
 }
+
 
 function info {
     if $OPTION_GUI; then
@@ -129,6 +132,7 @@ function info {
         printf '%b\n' "$@"
     fi
 }
+
 
 function init_script {
     # Script-hardening.
@@ -166,9 +170,11 @@ function init_script {
     fi
 }
 
+
 function log {
     printf '%b\n' "$1" |& $LOGCMD "${2:---priority=info}"
 }
+
 
 function logcmd_check {
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
@@ -185,6 +191,7 @@ function logcmd_check {
     fi
     rm "$temp_log"
 }
+
 
 function process_common_options {
     while true; do
@@ -222,17 +229,20 @@ function process_common_options {
     fi
 }
 
+
 function process_option_help {
     info "$HELP
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
+
 function process_option_usage {
     info "$USAGE
 
 Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
+
 
 function process_option_version {
     local build=''
@@ -254,6 +264,7 @@ Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 }
 
+
 function reset_terminal_attributes {
     NORMAL=''
     BOLD=''
@@ -263,6 +274,7 @@ function reset_terminal_attributes {
     YELLOW=''
 }
 
+
 function set_terminal_attributes {
     NORMAL=$(tput sgr0)
     BOLD=$(tput bold)
@@ -271,6 +283,7 @@ function set_terminal_attributes {
     RED=${BOLD}$(tput setaf 1)
     YELLOW=${BOLD}$(tput setaf 3)
 }
+
 
 function signal {
     local       signal=${1:-signal?}
@@ -363,6 +376,7 @@ met:
     esac
 }
 
+
 function signal_exit {
     case $PROGRAM_NAME in
         kz-getdeb)
@@ -400,6 +414,7 @@ een Terminalvenster en voer uit:
             ;;
     esac
 }
+
 
 function warning {
     if $OPTION_GUI; then
