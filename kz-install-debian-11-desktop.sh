@@ -24,12 +24,11 @@ sudo snap install bitwarden
 
 #1 citrix (telewerken)
 ## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
-wget --no-verbose --output-document=/tmp/icaclient-LATEST https://karelzimmer.nl/downloads/icaclient/LATEST
-wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_$(cat /tmp/icaclient-LATEST)_amd64.deb"
+wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_20.04.0.21_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
-rm /tmp/icaclient-LATEST /tmp/icaclient.deb
+rm /tmp/icaclient.deb
 #2 sudo apt remove --yes icaclient
 
 #1 cups (printsysteem)
