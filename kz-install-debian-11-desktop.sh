@@ -49,20 +49,6 @@ sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
 ## Extra needed after first install.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-## Extensies.
-sudo mkdir --parents /opt/google/chrome/extensions
-## AdGuard extensie.
-echo '{' | sudo tee /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
-echo '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee --append /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
-echo '}' | sudo tee --append /opt/google/chrome/extensions/bgnkhhnnamicmpeenaelnjfhikgbkllg.json
-## Bitwarden extensie.
-echo '{' | sudo tee /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
-echo '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee --append /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
-echo '}' | sudo tee --append /opt/google/chrome/extensions/nngceckbapebfimnlniiiahkandclblb.json
-## Gnome-shell-integratie extensie.
-echo '{' | sudo tee /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
-echo '  "external_update_url": "https://clients2.google.com/service/update2/crx"' '}' | sudo tee --append /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
-echo '}' | sudo tee --append /opt/google/chrome/extensions/gphhapmejobijbbhgpjhcjognlahblep.json
 #2 sudo apt remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo apt update
