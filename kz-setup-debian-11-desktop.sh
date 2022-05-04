@@ -13,10 +13,6 @@ kz-gset --addfavaft=bitwarden_bitwarden
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
 
-#1 citrix (telewerken)
-## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
-xdg-mime default wfica.desktop application/x-ica
-
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder --folder='KZ Scripts'
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
