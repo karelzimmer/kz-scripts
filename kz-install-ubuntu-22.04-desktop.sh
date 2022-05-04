@@ -22,7 +22,7 @@ sudo snap install bitwarden
 ## Tijdelijk?, icaclient_VERSION_amd64.deb is afhankelijk van libidn11 (Ubuntu 22.04 LTS levert libidn12).
 wget --no-verbose --output-document=/tmp/libidn11.deb "https://karelzimmer.nl/downloads/icaclient/libidn11_1.33-2.2ubuntu2_amd64.deb"
 sudo apt-get install --yes /tmp/libidn11.deb
-rm /tmp/libidn11 /tmp/libidn11.deb
+rm /tmp/libidn11.deb
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_20.04.0.21_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
