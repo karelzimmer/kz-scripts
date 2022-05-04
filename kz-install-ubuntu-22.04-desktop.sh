@@ -17,18 +17,6 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 sudo snap install bitwarden
 #2 sudo snap remove bitwarden
 
-#1 citrix (telewerken)
-## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
-## Tijdelijk?, icaclient_VERSION_amd64.deb is afhankelijk van libidn11 (Ubuntu 22.04 LTS levert libidn12).
-wget --no-verbose --output-document=/tmp/libidn11.deb "https://karelzimmer.nl/downloads/icaclient/libidn11_1.33-2.2ubuntu2_amd64.deb"
-sudo apt-get install --yes /tmp/libidn11.deb
-wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/icaclient/icaclient_20.04.0.21_amd64.deb"
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
-sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
-sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
-rm /tmp/libidn11.deb /tmp/icaclient.deb
-#2 sudo apt remove --yes icaclient
-
 #1 force-x11 (Gebruik X11 i.p.v. Wayland)
 ## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
