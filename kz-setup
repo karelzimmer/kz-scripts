@@ -488,13 +488,13 @@ function process_option_list {
     local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
-    local file1="$docs_dir/Gebruikersfoto"
+    local file1="$docs_dir"/Gebruikersfoto
     local text2='[2/4]  Bureaubladachtergrond vastleggen'
-    local file2="$docs_dir/Bureaubladachtergrond"
+    local file2="$docs_dir"/Bureaubladachtergrond
     local text3='[3/4]  Favorieten vastleggen'
-    local file3="$docs_dir/Favorieten"
+    local file3="$docs_dir"/Favorieten
     local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
-    local file4="$docs_dir/Opdrachtgeschiedenis"
+    local file4="$docs_dir"/Opdrachtgeschiedenis
 
     mkdir --parents "$docs_dir"
 
@@ -536,16 +536,16 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
 function process_option_list_user_photo {
     printf '%s\n' "$text1..."
     if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
-        rm --force "$file1"
         touch "$file1"
+        echo 'Geen gebruikersfoto gevonden of ingesteld.' > "$file1"
     fi
 }
 
 
 function process_option_list_desktop_background {
     printf '%s\n' "$text2..."
-    gsettings get   org.gnome.desktop.background    \
-                    picture-uri                     > "$file2" |& $LOGCMD
+    gsettings get org.gnome.desktop.background picture-uri | sed 's|%20| |g' \
+    > "$file2" |& $LOGCMD
 }
 
 
