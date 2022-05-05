@@ -489,12 +489,12 @@ function process_option_list {
     local text0='Opdrachten worden verwerkt'
     local text1='[1/4]  Gebruikersfoto vastleggen'
     local file1="$docs_dir"/Gebruikersfoto
-    local text2='[2/4]  Bureaubladachtergrond vastleggen'
-    local file2="$docs_dir"/Bureaubladachtergrond
+    local text2='[2/4]  Achtergrond vastleggen'
+    local file2="$docs_dir"/Adachtergrond
     local text3='[3/4]  Favorieten vastleggen'
     local file3="$docs_dir"/Favorieten
-    local text4='[4/4]  Opdrachtgeschiedenis vastleggen'
-    local file4="$docs_dir"/Opdrachtgeschiedenis
+    local text4='[4/4]  Opdrachten vastleggen'
+    local file4="$docs_dir"/Opdrachten
 
     mkdir --parents "$docs_dir"
 
@@ -527,8 +527,8 @@ function process_option_list {
 
     info '
 De instellingen zijn vastgelegd in de map kz in Documenten.
-In map kz de bestanden met de eerder gebruikte Gebruikersfoto,
-Bureaubladachtergrond, Favorieten, en Opdrachtgeschiedenis.
+In map kz de bestanden met de eerder gebruikte Gebruikersfoto, Adachtergrond,
+Favorieten, en Opdrachten.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
 }
 
