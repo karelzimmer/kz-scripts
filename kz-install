@@ -495,7 +495,7 @@ function process_option_list {
         source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
     fi
     local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
-    local app_list=$docs_dir/Applijst
+    local app_list=$docs_dir/Apps
 
     mkdir --parents "$docs_dir" |& $LOGCMD
 
@@ -525,7 +525,7 @@ function process_option_list {
 
     info '
 De instellingen zijn vastgelegd in de map kz in Documenten.
-In map kz het bestand Applijst met de eerder geïnstalleerde apps.
+In map kz het bestand Apps met de eerder geïnstalleerde apps.
 Dit bestand kan worden gebruikt voor het nalopen van de installatie.'
 }
 
