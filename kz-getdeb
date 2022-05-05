@@ -374,7 +374,7 @@ function term_script {
     search="/usr/share/doc/kz/Checklist-installatie-$(
         lsb_release --id --short
         )"
-    cp "$search"*{desktop,server}.pdf "$docs_dir" |& $LOGCMD || true
+    cp "$search"*desktop.pdf "$docs_dir" |& $LOGCMD || true
 
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
