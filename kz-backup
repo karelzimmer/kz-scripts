@@ -48,6 +48,7 @@ declare OPTION_DRY_RUN=''
 declare OPTION_GUI=false
 declare OPTION_TARGET=false
 declare TARGET_ARGUMENT=''
+declare TARGET_MEDIUM=''
 declare TARGET=''
 
 ###############################################################################
@@ -122,6 +123,7 @@ function process_input {
             exit $ERROR
         fi
         TARGET=$TARGET_ARGUMENT/backup-$HOSTNAME-$USER
+        TARGET_MEDIUM=$TARGET_ARGUMENT
     else
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
@@ -138,6 +140,7 @@ $MEDIUM
 Koppel media af via Bestanden, en start daarna opnieuw."
             exit $WARNING
         fi
+        TARGET_MEDIUM=$MEDIUM
     fi
 
     check_on_ac_power
@@ -178,7 +181,8 @@ EOF
                 --delete-excluded           \
                 "$SOURCE"/                  \
                 "$TARGET"                   \
-                2> >($LOGCMD)               |
+                2> >($LOGCMD)               ;
+        sync                                |
         awk     '{print "#"$0}'             |
         zenity  --progress                  \
                 --auto-close                \
@@ -225,10 +229,14 @@ met:
 
 
 function term_script {
-    info "
-${GREEN}De back-up is gemaakt. ${BLUE}$OPTION_DELETE${NORMAL}
+    if [[ $TARGET_MEDIUM == /media/* ]]; then
+        umount "$TARGET_MEDIUM" |& $LOGCMD
+        TEXT="
 
-${YELLOW}Koppel zelf (veilig!) het USB-medium af.${NORMAL}"
+Het USB-medium kan verwijderd worden."
+    fi
+    info "
+${GREEN}De back-up is gemaakt.$TEXT ${BLUE}$OPTION_DELETE${NORMAL}"
     exit $SUCCESS
 }
 
