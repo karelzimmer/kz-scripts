@@ -490,7 +490,7 @@ function process_option_list {
     local text1='[1/4]  Gebruikersfoto vastleggen'
     local file1="$docs_dir"/Gebruikersfoto
     local text2='[2/4]  Achtergrond vastleggen'
-    local file2="$docs_dir"/Adachtergrond
+    local file2="$docs_dir"/Achtergrond
     local text3='[3/4]  Favorieten vastleggen'
     local file3="$docs_dir"/Favorieten
     local text4='[4/4]  Opdrachten vastleggen'
@@ -527,7 +527,7 @@ function process_option_list {
 
     info '
 De instellingen zijn vastgelegd in de map kz in Documenten.
-In map kz de bestanden met de eerder gebruikte Gebruikersfoto, Adachtergrond,
+In map kz de bestanden met de eerder gebruikte Gebruikersfoto, Achtergrond,
 Favorieten, en Opdrachten.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
 }
@@ -552,7 +552,10 @@ function process_option_list_desktop_background {
 function process_option_list_favorite_apps {
     printf '%s\n' "$text3..."
     gsettings get   org.gnome.shell \
-                    favorite-apps   > "$file3" |& $LOGCMD
+                    favorite-apps   | tr , '\n' > "$file3" |& $LOGCMD
+    sed --in-place "s|\[| |" "$file3" |& $LOGCMD
+    sed --in-place "s|\]| |" "$file3" |& $LOGCMD
+    sed --in-place "s|'||g"  "$file3" |& $LOGCMD
 }
 
 
