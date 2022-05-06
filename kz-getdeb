@@ -370,10 +370,7 @@ function term_script {
 
     mkdir --parents "$docs_dir" |& $LOGCMD
     rm --force "$docs_dir"/Checklist-{installatie,instellen}-*
-    cp  "/usr/share/doc/kz/Checklist-installatie-$(
-            lsb_release --id --short
-            )"*desktop.pdf "$docs_dir" |& $LOGCMD || true
-    cp  "/usr/share/doc/kz/Checklist-instellen-"*desktop.pdf \
+    cp  /usr/share/doc/kz/Checklist*"$(lsb_release --id --short)"*.pdf  \
         "$docs_dir" |& $LOGCMD || true
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
