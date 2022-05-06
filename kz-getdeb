@@ -367,15 +367,15 @@ function term_script {
         source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
     fi
     local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
-    local search=''
 
     mkdir --parents "$docs_dir" |& $LOGCMD
-    rm --force "$docs_dir/Checklist-installatie-"*
-    search="/usr/share/doc/kz/Checklist-installatie-$(
+    rm --force "$docs_dir"/Checklist-{installatie,instellen}-*
+    cp "/usr/share/doc/kz/Checklist-installatie-$(
         lsb_release --id --short
-        )"
-    cp "$search"*desktop.pdf "$docs_dir" |& $LOGCMD || true
-
+        )"*desktop.pdf "$docs_dir" |& $LOGCMD || true
+    cp "/usr/share/doc/kz/Checklist-instellen-$(
+        lsb_release --id --short
+        )"*desktop.pdf "$docs_dir" |& $LOGCMD || true
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
 Volg nu de stappen zoals beschreven
