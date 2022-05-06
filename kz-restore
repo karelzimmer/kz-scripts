@@ -201,6 +201,7 @@ met:
 
 
 function term_script {
+    sync |& $LOGCMD
     if [[ $SOURCE_MEDIUM == /media/* ]]; then
         umount "$SOURCE_MEDIUM" |& $LOGCMD
         TEXT='
