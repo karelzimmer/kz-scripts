@@ -85,12 +85,6 @@ declare     OPTION_SIMULATE=false
 declare     RUN_AS_SUPERUSER=true
 declare     STATUS_BUSY=''
 
-# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     BLINK=''
-declare     CARRIAGE_RETURN=''
-declare     CURSOR_INVISABLE=''
-declare     CURSOR_VISABLE=''
-
 ###############################################################################
 # Functions                                                                   #
 ###############################################################################
@@ -100,13 +94,6 @@ function check_input {
     local -i    file_arg_num=0
     local -i    getopt_rc=0
     local       parsed=''
-
-    if [[ -t 1 ]]; then
-        BLINK=$(tput blink)
-        CARRIAGE_RETURN=$(tput cr)
-        CURSOR_INVISABLE=$(tput civis)
-        CURSOR_VISABLE=$(tput cvvis)
-    fi
 
     parsed=$(
         getopt  --alternative                       \
@@ -144,10 +131,6 @@ function check_input {
                 OPTION_GUI=true
                 if [[ -t 1 ]]; then
                     reset_terminal_attributes
-                    BLINK=''
-                    CARRIAGE_RETURN=''
-                    CURSOR_INVISABLE=''
-                    CURSOR_VISABLE=''
                 fi
                 shift
                 ;;

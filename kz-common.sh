@@ -54,13 +54,17 @@ declare     USAGE='Gebruik: source kz-common.sh
 declare     USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+declare     BLINK=''
 declare     BLUE=''
 declare     BOLD=''
+declare     CARRIAGE_RETURN=''
+declare     CURSOR_INVISABLE=''
+declare     CURSOR_VISABLE=''
 declare     GREEN=''
 declare     NORMAL=''
 declare     RED=''
+declare     REWRITE_LINE=''
 declare     YELLOW=''
-declare     CURSOR_VISABLE=''
 
 ###############################################################################
 # Common functions
@@ -266,21 +270,35 @@ GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
 
 
 function reset_terminal_attributes {
-    NORMAL=''
-    BOLD=''
+    BLINK=''
     BLUE=''
+    BOLD=''
+    CARRIAGE_RETURN=''
+    CURSOR_INVISABLE=''
+    CURSOR_VISABLE=''
     GREEN=''
+    NORMAL=''
     RED=''
+    REWRITE_LINE=''
     YELLOW=''
 }
 
 
 function set_terminal_attributes {
-    NORMAL=$(tput sgr0)
     BOLD=$(tput bold)
+    # shellcheck disable=SC2034
+    BLINK=$(tput blink)
     BLUE=${BOLD}$(tput setaf 4)
+    # shellcheck disable=SC2034
+    CARRIAGE_RETURN=$(tput cr)
+    # shellcheck disable=SC2034
+    CURSOR_INVISABLE=$(tput civis)
+    CURSOR_VISABLE=$(tput cvvis)
     GREEN=${BOLD}$(tput setaf 2)
+    NORMAL=$(tput sgr0)
     RED=${BOLD}$(tput setaf 1)
+    # shellcheck disable=SC2034
+    REWRITE_LINE=$(tput cuu1;tput el)
     YELLOW=${BOLD}$(tput setaf 3)
 }
 
