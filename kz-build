@@ -303,6 +303,10 @@ function build_deb {
         --update                                                \
         "${UPLOADS_TARGETS[PDFS]}"/Checklist-installatie*.pdf   \
         "${DEB_TARGETS[DOC]}"                                   |& $LOGCMD
+    cp  --archive                                               \
+        --update                                                \
+        "${UPLOADS_TARGETS[PDFS]}"/Checklist-instellen*.pdf     \
+        "${DEB_TARGETS[DOC]}"                                   |& $LOGCMD
 
     printf '%s' "$TIMESTAMP" > "${DEB_TARGETS[BUILD]}/$PROGRAM_NAME"
 
