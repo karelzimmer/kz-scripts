@@ -98,7 +98,7 @@ function error {
                     --height    100         \
                     --title     "$TITLE"    \
                     --text      "$@"        \
-                    --ok-label  'Oké'       2> >($LOGCMD) || true
+                    --ok-label  'Oké'       2> >($LOGCMD) || true &
             logcmd_check
         fi
     else
