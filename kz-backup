@@ -181,8 +181,7 @@ EOF
                 --delete-excluded           \
                 "$SOURCE"/                  \
                 "$TARGET"                   \
-                2> >($LOGCMD)               ;
-        sync                                |
+                2> >($LOGCMD)               |
         awk     '{print "#"$0}'             |
         zenity  --progress                  \
                 --auto-close                \
