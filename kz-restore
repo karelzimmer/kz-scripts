@@ -203,9 +203,9 @@ met:
 function term_script {
     if [[ $SOURCE_MEDIUM == /media/* ]]; then
         umount "$SOURCE_MEDIUM" |& $LOGCMD
-        TEXT="
+        TEXT='
 
-Het USB-medium kan verwijderd worden."
+Het USB-medium kan verwijderd worden.'
     else
         TEXT=''
     fi
