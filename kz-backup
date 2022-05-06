@@ -233,6 +233,8 @@ function term_script {
         TEXT="
 
 Het USB-medium kan verwijderd worden."
+    else
+        TEXT=''
     fi
     info "
 ${GREEN}De back-up is gemaakt.$TEXT ${BLUE}$OPTION_DELETE${NORMAL}"
