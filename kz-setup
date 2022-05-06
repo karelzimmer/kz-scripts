@@ -487,14 +487,12 @@ function process_option_list {
     fi
     local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
     local text0='Opdrachten worden verwerkt'
-    local text1='[1/4]  Gebruikersfoto vastleggen'
+    local text1='[1/3]  Gebruikersfoto vastleggen'
     local file1="$docs_dir"/Gebruikersfoto
-    local text2='[2/4]  Achtergrond vastleggen'
+    local text2='[2/3]  Achtergrond vastleggen'
     local file2="$docs_dir"/Achtergrond
-    local text3='[3/4]  Favorieten vastleggen'
+    local text3='[3/3]  Favorieten vastleggen'
     local file3="$docs_dir"/Favorieten
-    local text4='[4/4]  Opdrachten vastleggen'
-    local file4="$docs_dir"/Opdrachten
 
     mkdir --parents "$docs_dir"
 
@@ -507,8 +505,6 @@ function process_option_list {
         process_option_list_desktop_background
         printf '%s\n' "#$text3"
         process_option_list_favorite_apps
-        printf '%s\n' "#$text4"
-        process_option_list_command_history
         ) |&
         zenity  --progress              \
                 --pulsate               \
@@ -522,7 +518,6 @@ function process_option_list {
         process_option_list_user_photo
         process_option_list_desktop_background
         process_option_list_favorite_apps
-        process_option_list_command_history
     fi
 
     info '
@@ -556,14 +551,6 @@ function process_option_list_favorite_apps {
     sed --in-place "s|\[| |" "$file3" |& $LOGCMD
     sed --in-place "s|\]| |" "$file3" |& $LOGCMD
     sed --in-place "s|'||g"  "$file3" |& $LOGCMD
-}
-
-
-function process_option_list_command_history {
-    printf '%s\n' "$text4..."
-    HISTFILE=~/.bash_history
-    set -o history
-    history > "$file4" |& $LOGCMD
 }
 
 
