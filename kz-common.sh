@@ -99,9 +99,11 @@ function error {
                     --title     "$TITLE"    \
                     --text      "$@"        \
                     --ok-label  'Oké'       2> >($LOGCMD) || true
+            logcmd_check
         fi
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
+        logcmd_check
     fi
 }
 
