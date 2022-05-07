@@ -529,12 +529,13 @@ function process_option_list_desktop_background {
 
 function process_option_list_favorite_apps {
     printf '%s\n' "$text3..."
-    gsettings get   org.gnome.shell \
-                    favorite-apps   | tr , '\n' > "$file3" |& $LOGCMD
-    sed --in-place "s|\[| |"        "$file3" |& $LOGCMD
-    sed --in-place "s|\]| |"        "$file3" |& $LOGCMD
-    sed --in-place "s|'||g"         "$file3" |& $LOGCMD
-    sed --in-place "s|.desktop||"   "$file3" |& $LOGCMD
+    gsettings get org.gnome.shell favorite-apps | tr , '\n' |
+    awk -F_ '{print $1}' > "$file3" |& $LOGCMD
+    sed --in-place 's|\[| |'        "$file3" |& $LOGCMD
+    sed --in-place 's|\]| |'        "$file3" |& $LOGCMD
+    sed --in-place "s/'//g"         "$file3" |& $LOGCMD
+    sed --in-place 's/org.gnome.//' "$file3" |& $LOGCMD
+    sed --in-place 's/.desktop//'   "$file3" |& $LOGCMD
 }
 
 
