@@ -38,7 +38,7 @@ sudo apt-get update
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 sudo apt-key del 7FAC5991 D38B4796
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*
-## Extra needed after first install.
+## Extra nodig na eerste installatie.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 #2 sudo apt remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
@@ -68,9 +68,9 @@ sudo apt-get update
 sudo apt-get install --yes teams
 sudo apt-key del BE1229CF
 sudo rm --force /etc/apt/trusted.gpg.d/microsoft*
-## Verwijder PREVIEW in afbeelding:
+## Verwijder PREVIEW in afbeelding.
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
-## Verwijder Preview in starter:
+## Verwijder Preview in starter.
 sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
 #2 sudo apt remove --yes teams
 #2 sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*

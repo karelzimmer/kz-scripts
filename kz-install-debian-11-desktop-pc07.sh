@@ -6,9 +6,7 @@
 ###############################################################################
 
 #1-deact-eth0 (activeren eth0 uit start-up halen)
-## ifup -a --read-environement:
-## Cannot find device "eth0"
-## [FAILED] Raise network interfaces
+## ifup -a --read-environement: Cannot find device "eth0"/ [FAILED] Raise network interfaces
 sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
 sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup
 #2 sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
