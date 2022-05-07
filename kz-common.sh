@@ -103,7 +103,6 @@ function error {
         fi
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
-        logcmd_check
     fi
 }
 
