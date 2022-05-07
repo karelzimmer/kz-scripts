@@ -539,7 +539,7 @@ function process_option_list_favorite_apps {
     {
         printf '\n %s\n' 'N.B.'
         printf ' %s\n'   'yelp = Hulp'
-        printf ' %s\n'   'snap-store = Ubuntu Software'
+        printf ' %s\n'   'snap-store = Software'
      } >>  "$file3"
 }
 
