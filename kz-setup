@@ -536,7 +536,8 @@ function process_option_list_favorite_apps {
     sed --in-place "s/'//g"         "$file3" |& $LOGCMD
     sed --in-place 's/org.gnome.//' "$file3" |& $LOGCMD
     sed --in-place 's/.desktop//'   "$file3" |& $LOGCMD
-    printf '\n %s\n' 'N.B. snap-store = Ubuntu Software' >>  "$file3"
+    printf '\n %s\n' 'N.B. yelp = Hulp' >>  "$file3"
+    printf '\n %s\n' '     snap-store = Ubuntu Software' >>  "$file3"
 }
 
 
