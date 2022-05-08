@@ -5,6 +5,14 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1 calibre (e-boekmanager)
+sudo apt-get install --yes calibre
+#2 sudo apt remove --yes calibre
+
+#1 clamav (antivirus)
+sudo apt-get install --yes clamtk-gnome
+#2 sudo apt remove --yes clamtk-gnome
+
 #1 lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
