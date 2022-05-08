@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu 22.04 LTS desktop op pc-van-hugo.                 #
+# Instelbestand voor Ubuntu 22.04 LTS desktop op pc-van-hugo voor hugo.       #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################

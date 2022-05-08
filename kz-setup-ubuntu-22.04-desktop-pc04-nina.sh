@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu 22.04 LTS desktop op pc04.                        #
+# Instelbestand voor Ubuntu 22.04 LTS desktop op pc04 voor nina.              #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################

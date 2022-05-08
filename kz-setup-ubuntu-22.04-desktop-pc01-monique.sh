@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu 22.04 LTS desktop op pc01.                        #
+# Instelbestand voor Ubuntu 22.04 LTS desktop op pc01 voor monique.           #
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
@@ -15,22 +15,9 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #2 gsettings reset org.gnome.desktop.background picture-uri
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 
-#1 search (vooruit zoeken in history met Ctrl-S)
-sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
-#2 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-
 #1 thunderbird (e-mail)
 kz-gset --delfav=thunderbird
 #2 kz-gset --addfavbef=thunderbird
-
-#1 vscode (editor)
-xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
-xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
-xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand
-xdg-mime default code_code.desktop text/markdown                # Markdown document
-xdg-mime default code_code.desktop text/troff                   # Man-pagina
-xdg-mime default code_code.desktop text/html                    # Web-pagina
 
 #1 zgaehrm (starter eHRM Zorggroep Almere)
 cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/

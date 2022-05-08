@@ -191,7 +191,7 @@ function process_input {
     # Verwerk argumenten.
     dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
     dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION\
--$HOSTNAME.sh
+-$HOSTNAME-$USER.sh
     if $ARGUMENT_APP; then
         process_argument_app
     fi
