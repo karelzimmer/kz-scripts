@@ -291,8 +291,7 @@ WIJZIGINGen in de configuratiedatabase,
 > is de nieuwe instelling (B):'
     diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
     info "
-Bij WIJZIGINGen voer uit:
-${BLUE}gsettings set WIJZIGING${NORMAL}"
+Bij WIJZIGINGen voer uit: ${BLUE}gsettings set WIJZIGING${NORMAL}"
     rm "$CONFIG_A" "$CONFIG_B"
 }
 
