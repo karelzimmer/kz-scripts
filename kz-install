@@ -401,10 +401,10 @@ $(
     else
         printf '%s\n' "
 Om APPs te bekijken voer uit:
-    ${BLUE}$DISPLAY_NAME --sim APP...${NORMAL}
-    ${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}
+${BLUE}$DISPLAY_NAME --sim APP...${NORMAL}
+${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}
 Om APPs te installeren voer uit:
-    ${BLUE}$DISPLAY_NAME APP...${NORMAL}"
+${BLUE}$DISPLAY_NAME APP...${NORMAL}"
     fi
 )"
     info "$TEXT"
@@ -459,10 +459,10 @@ $USAGELINE"
     else
         printf '%s\n' "
 Om BESTANDen te bekijken voer uit:
-    ${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
-    ${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
+${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
+${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
 Om BESTANDen te gebruiken voer uit:
-    ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
+${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
     fi
 )"
     info "$TEXT"

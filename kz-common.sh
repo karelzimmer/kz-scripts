@@ -406,10 +406,10 @@ function signal_exit {
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
-    ${BLUE}sudo dpkg --configure --pending${NORMAL}
-    ${BLUE}sudo apt-get update --fix-missing${NORMAL}
-    ${BLUE}sudo apt-get install --fix-broken${NORMAL}
-    ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
+${BLUE}sudo dpkg --configure --pending${NORMAL}
+${BLUE}sudo apt-get update --fix-missing${NORMAL}
+${BLUE}sudo apt-get install --fix-broken${NORMAL}
+${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
             fi
             ;;
         kz-install)
@@ -417,10 +417,10 @@ een Terminalvenster en voer uit:
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
-    ${BLUE}sudo dpkg --configure --pending${NORMAL}
-    ${BLUE}sudo apt-get update --fix-missing${NORMAL}
-    ${BLUE}sudo apt-get install --fix-broken${NORMAL}
-    ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
+${BLUE}sudo dpkg --configure --pending${NORMAL}
+${BLUE}sudo apt-get update --fix-missing${NORMAL}
+${BLUE}sudo apt-get install --fix-broken${NORMAL}
+${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
             fi
             ;;
         kz-setup)
