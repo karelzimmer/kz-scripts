@@ -376,9 +376,8 @@ $command, code: $rc ($rc_desc)" --priority=debug
         error)
             error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}
 
-Controleer de getoonde log, of start een Terminalvenster en controleer de log \
-met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}"
+Controleer de hier getoonde log.
+Of met Terminalvenster-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit "$rc"
             ;;
         exit)

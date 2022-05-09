@@ -720,9 +720,8 @@ function term_script {
             warning "
 $action is geëindigd met een waarschuwing.
 
-Controleer de getoonde log, of start een Terminalvenster en controleer de log \
-met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}" &
+Controleer de hier getoonde log.
+Of met Terminalvenster-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}" &
             logcmd_check
             exit $WARNING
         else

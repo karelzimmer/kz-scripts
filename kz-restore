@@ -190,9 +190,8 @@ Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
 verwijderd of toegevoegd tijdens het terugzetten van de back-up, of is er
 te weinig ruimte op $TARGET.
 
-Controleer de getoonde log, of start een Terminalvenster en controleer de log \
-met:
-    ${BLUE}$LOGCMD_CHECK${NORMAL}" &
+Controleer de hier getoonde log.
+Of met Terminalvenster-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}" &
             logcmd_check
             exit $ERROR
             ;;
