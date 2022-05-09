@@ -521,7 +521,7 @@ Software of
     local -i    number_of_lines=0
     local       plural='geïnstalleerde pakketten'
 
-    printf '%s\n' "$text1..."
+    printf '%s\n' "$text1"
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     apt list --manual-installed 2> >($LOGCMD) >> "$TEMP_LIST"
@@ -545,7 +545,7 @@ function process_option_list_snaps {
     local -i    number_of_lines=0
     local       plural='snaps'
 
-    printf '%s\n' "$text3..."
+    printf '%s\n' "$text3"
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
@@ -574,7 +574,7 @@ installatie van een pakket of
     local       plural='pakketbronnen'
     local       search=''
 
-    printf '%s\n' "$text2..."
+    printf '%s\n' "$text2"
     printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
 
     search=/etc/apt/sources.list
