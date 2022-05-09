@@ -458,10 +458,11 @@ $(
 $USAGELINE"
     else
         printf '%s\n' "
-Om BESTANDen te bekijken voer uit:
-${BLUE}$DISPLAY_NAME --sim BESTAND...${NORMAL}
+Om inhoud BESTANDen te bekijken voer uit:
 ${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
-Om BESTANDen te gebruiken voer uit:
+Om verwerking van BESTANDen te simuleren voer uit:
+${BLUE}$DISPLAY_NAME --simulate BESTAND...${NORMAL}
+Om BESTANDen te verwerken voer uit:
 ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
     fi
 )"
