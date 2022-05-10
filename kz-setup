@@ -395,11 +395,12 @@ $(
         printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
         printf '%s\n' "
-Om APPs te bekijken voer uit:
-${BLUE}$DISPLAY_NAME --sim APP...${NORMAL}
-${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}
-Om APPs in te stellen voer uit:
-${BLUE}$DISPLAY_NAME APP...${NORMAL}"
+Om de inhoud van APPs te bekijken voer uit:      ${BLUE}$DISPLAY_NAME \
+--cat APP...${NORMAL}
+Om de verwerking van APPs te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
+--simulate APP...${NORMAL}
+Om de APPs in te stellen voer uit:               ${BLUE}$DISPLAY_NAME \
+APP...${NORMAL}"
     fi
 )"
     info "$TEXT"
@@ -453,12 +454,12 @@ $(
 $USAGELINE"
     else
         printf '%s\n' "
-Om inhoud BESTANDen te bekijken voer uit:
-${BLUE}$DISPLAY_NAME --cat BESTAND...${NORMAL}
-Om verwerking van BESTANDen te simuleren voer uit:
-${BLUE}$DISPLAY_NAME --simulate BESTAND...${NORMAL}
-Om BESTANDen te verwerken voer uit:
-${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}"
+Om de inhoud van BESTANDen te bekijken voer uit:      ${BLUE}$DISPLAY_NAME \
+--cat BESTAND...${NORMAL}
+Om de verwerking van BESTANDen te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
+--simulate BESTAND...${NORMAL}
+Om de BESTANDen te verwerken voer uit:                ${BLUE}$DISPLAY_NAME \
+BESTAND...${NORMAL}"
     fi
 )"
     info "$TEXT"
@@ -721,8 +722,8 @@ function term_script {
             warning "
 $action is geëindigd met een waarschuwing.
 
-Controleer de hier getoonde log.
-Of met Terminalvenster-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}" &
+Controleer de hier getoonde log, of met Terminalvenster-opdracht: \
+${BLUE}$LOGCMD_CHECK${NORMAL}" &
             logcmd_check
             exit $WARNING
         else

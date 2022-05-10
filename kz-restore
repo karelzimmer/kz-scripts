@@ -186,12 +186,12 @@ Back-up terugzetten is geeindigd met fouten.
 
 Foutcode rsync is $rsync_rc.
 
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden
-verwijderd of toegevoegd tijdens het terugzetten van de back-up, of is er
-te weinig ruimte op $TARGET.
+Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
+of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig ruimte
+op $TARGET.
 
-Controleer de hier getoonde log.
-Of met Terminalvenster-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}" &
+Controleer de hier getoonde log, of met Terminalvenster-opdracht: \
+${BLUE}$LOGCMD_CHECK${NORMAL}" &
             logcmd_check
             exit $ERROR
             ;;
