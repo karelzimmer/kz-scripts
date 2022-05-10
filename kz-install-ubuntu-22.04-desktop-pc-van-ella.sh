@@ -4,6 +4,3 @@
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
-
-#1-no-apps (geen apps specifiek voor deze computer)
-:
