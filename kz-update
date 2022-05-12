@@ -76,6 +76,7 @@ def perform_cleanup():
 
 def perform_update():
     subprocess.run('sudo true', shell=True, check=True)
+
     # Opdracht als sequence.
     print(f'Uitvoeren apt update...')
     subprocess.run(['sudo', 'apt-get', 'update'])
@@ -86,9 +87,9 @@ def perform_update():
     print(f'\nUitvoeren apt dist-upgrade...')
     subprocess.run('sudo apt-get dist-upgrade --yes', shell=True)
 
+    perform_cleanup()
+
     # Opdracht als raw text, vang afsluitwaarde op.
-    subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/google-chrome*',
-                   shell=True, check=True)
     print(f'\nUitvoeren apt autoremove...')
     subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
     print(f'\nUitvoeren apt autoclean...')
@@ -117,4 +118,3 @@ def perform_update():
 kz_common.process_common_options(desc, display_name)
 
 perform_update()
-perform_cleanup()
