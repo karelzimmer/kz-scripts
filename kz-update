@@ -22,8 +22,7 @@ desc = 'Systeem bijwerken.'
 
 
 def perform_cleanup():
-    subprocess.run('sudo true', shell=True, check=True)
-    print(f'Opschonen sleutels in /etc/apt/trusted.gpg...')
+    print(f'\nOpschonen sleutels in /etc/apt/trusted.gpg...')
     # Google Chrome
     print(f'Google Chrome...')
     subprocess.run('sudo apt-key del 7FAC5991 D38B4796',
@@ -76,8 +75,9 @@ def perform_cleanup():
 
 
 def perform_update():
+    subprocess.run('sudo true', shell=True, check=True)
     # Opdracht als sequence.
-    print(f'\nUitvoeren apt update...')
+    print(f'Uitvoeren apt update...')
     subprocess.run(['sudo', 'apt-get', 'update'])
 
     # Opdracht als raw text.
