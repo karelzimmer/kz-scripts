@@ -5,6 +5,10 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#1 ansible (automatiseringsplatform)
+sudo apt-get install --yes ansible
+#2 sudo apt remove --yes ansible
+
 #1 cockpit (browsergebaseerd beheer)
 sudo apt-get install --yes cockpit cockpit-pcp
 #2 sudo apt remove --yes cockpit
