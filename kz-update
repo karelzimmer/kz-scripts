@@ -58,6 +58,9 @@ def perform_cleanup():
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run('sudo rm --force /etc/apt/trusted.gpg.d/teamviewer*',
                    shell=True, check=True)
+    subprocess.run('sudo rm --force \
+                   /etc/apt/sources.list.d/teamviewer.list.dpkg-dist',
+                   shell=True, check=True)
     # VirtualBox
     print(f'VirtualBox...')
     subprocess.run('sudo apt-key del 98AB5139 2980AECF',
@@ -105,7 +108,7 @@ def perform_update():
     # Is een reboot nodig?
     try:
         with open('/var/run/reboot-required') as fh:
-            print(f'{display_name}: REBOOT')
+            print(f'\nREBOOT')
     except FileNotFoundError:
         pass
     except Exception as ex:
