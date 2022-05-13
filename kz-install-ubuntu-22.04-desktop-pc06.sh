@@ -6,8 +6,13 @@
 ###############################################################################
 
 #1 ansible (automatiseringsplatform)
+echo 'deb [signed-by=/usr/share/keyrings/ansible.gpg] https://ppa.launchpadcontent.net/ansible/ansible/ubuntu/ jammy main' | sudo tee /etc/apt/sources.list.d/ansible.list
+sudo apt-key --keyring /usr/share/keyrings/ansible.gpg adv --no-default-keyring --keyserver keyserver.ubuntu.com --recv 93C4A3FD7BB9C367
+sudo apt-get update
 sudo apt-get install --yes ansible
 #2 sudo apt remove --yes ansible
+#2 sudo rm /etc/apt/sources.list.d/ansible.list* /usr/share/keyrings/ansible.gpg*
+#2 sudo apt update
 
 #1 cockpit (browsergebaseerd beheer)
 sudo apt-get install --yes cockpit cockpit-pcp
@@ -60,6 +65,10 @@ sudo rm --force /etc/apt/trusted.gpg.d/signal*
 #2 sudo apt remove --yes signal-desktop
 #2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
+
+#1 ssh (secure shell)
+sudo apt-get install --yes ssh
+#2 sudo apt remove --yes ssh
 
 #1 vscode (editor)
 sudo snap install --classic code
