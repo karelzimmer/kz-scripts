@@ -227,7 +227,22 @@ ${BLUE}$LOGCMD_CHECK${NORMAL}" &
 
 
 function term_script {
-    sync |& $LOGCMD
+    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
+    if $OPTION_GUI; then
+        sync                                        |
+        zenity  --progress                          \
+                --pulsate                           \
+                --auto-close                        \
+                --no-cancel                         \
+                --width     600                     \
+                --height    50                      \
+                --title     "$TITLE"                \
+                --text      "$TEXT"                 2> >($LOGCMD)
+    else
+        info "
+$TEXT..."
+        sync |& $LOGCMD
+    fi
     if [[ $TARGET_MEDIUM == /media/* ]]; then
         umount "$TARGET_MEDIUM" |& $LOGCMD
         TEXT='
