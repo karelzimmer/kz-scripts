@@ -184,6 +184,7 @@ function logcmd_check {
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     eval "$LOGCMD_CHECK" > "$temp_log"
     if $OPTION_GUI; then
+        TITLE="Log $DISPLAY_NAME"
         zenity  --text-info             \
                 --width     1200        \
                 --height    600         \
