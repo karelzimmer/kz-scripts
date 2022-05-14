@@ -189,7 +189,7 @@ function build_uploads {
     # Vul dist/ met kz-scripts.
     cd "${UPLOADS_SOURCES[SCRIPTS]}"
     for file in *; do
-        if [[ $file = LICENSE || $file = README.md ]]; then
+        if [[ $file = README.md ]]; then
             continue
         elif [[ -d "$file" ]]; then
             continue
@@ -241,7 +241,6 @@ function build_deb {
     rsync   --archive               \
             --delete                \
             --verbose               \
-            --exclude='LICENSE'     \
             --exclude='README.md'   \
             --exclude='.git*'       \
             --delete-excluded       \
@@ -250,7 +249,7 @@ function build_deb {
 
     # Zorg dat de rechten goed staan voor de rsync.
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/*
-    chmod 'a-x' -- "$SCRIPTS_REPO"/*.* "$SCRIPTS_REPO"/LICENSE
+    chmod 'a-x' -- "$SCRIPTS_REPO"/*.*
 
     # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
     for dir in "${DEB_TARGETS[@]}"; do
@@ -262,7 +261,6 @@ function build_deb {
             --delete                    \
             --verbose                   \
             --exclude='__pycache__'     \
-            --exclude='LICENSE'         \
             --exclude='README.md'       \
             --exclude='.git*'           \
             --delete-excluded           \
