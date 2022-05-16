@@ -17,12 +17,12 @@ readonly RELEASE_YEAR=2015
 # Global constants                                                            #
 ###############################################################################
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'a:b:d:rf:x:'
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'a:b:d:lrf:x:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addfavaft:,addfavbef:,delfav:,\
-resetfavs,addappfolder:,delappfolder:"
+list,resetfavs,addappfolder:,delappfolder:"
 readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--addfavaft=FAVORITE] \
 [-b|--addfavbef=FAVORITE]
-                 [-d|--delfav=FAVORITE] [-r|--resetfavs]
+                 [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
                  [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]
                  $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
@@ -36,6 +36,7 @@ Opties:
                  voeg FAVORITE toe aan het begin
   -d, --delfav=FAVORITE
                  verwijder FAVORITE
+  -l, --list     list favorits en appfolders
   -r, --resetfavs
                  reset favorites
   -f, --addappfolder=APPFOLDER
@@ -59,6 +60,7 @@ declare OPTION_ADDFAVAFT=false
 declare OPTION_ADDFAVBEF=false
 declare OPTION_DELAPPFOLDER=false
 declare OPTION_DELFAV=false
+declare OPTION_LIST=false
 declare OPTION_RESETFAVS=false
 
 ###############################################################################
@@ -99,6 +101,10 @@ function check_input {
                 OPTION_DELFAV=true
                 FAVORITE_ARGUMENT=$2
                 shift 2
+                ;;
+            -l|--list)
+                OPTION_LIST=true
+                shift
                 ;;
             -r|--resetfavs)
                 OPTION_RESETFAVS=true
@@ -144,6 +150,8 @@ function process_input {
         process_option_addfavbef
     elif $OPTION_DELFAV; then
         process_option_delfav
+    elif $OPTION_LIST; then
+        process_option_list
     elif $OPTION_RESETFAVS; then
         process_option_resetfavs
     elif $OPTION_ADDAPPFOLDER; then
@@ -202,6 +210,12 @@ function process_option_delfav  {
         sed     --expression="s/, '$DESKTOPFILE'//"
         )"
     fi
+}
+
+
+function process_option_list  {
+    gsettings get org.gnome.shell favorite-apps
+    gsettings get org.gnome.desktop.app-folders folder-children
 }
 
 
