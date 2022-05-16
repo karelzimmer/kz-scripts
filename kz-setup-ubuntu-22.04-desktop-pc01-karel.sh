@@ -20,6 +20,10 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history - i-search)' >> "$HOME"/.bashrc
 #2 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
+#1 terminal (terminalvenster)
+kz-gset --addfavbef=org.gnome.Terminal
+#2 kz-gset --delfav=org.gnome.Terminal
+
 #1 thunderbird (e-mail)
 kz-gset --delfav=thunderbird
 #2 kz-gset --addfavbef=thunderbird
