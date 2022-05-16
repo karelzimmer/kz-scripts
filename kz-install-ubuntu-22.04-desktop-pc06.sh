@@ -6,13 +6,10 @@
 ###############################################################################
 
 #1 ansible (automatiseringsplatform)
-echo "deb [signed-by=/usr/share/keyrings/ansible.gpg] https://ppa.launchpadcontent.net/ansible/ansible/ubuntu/ $(lsb_release --codename --short) main" | sudo tee /etc/apt/sources.list.d/ansible.list
-sudo apt-key --keyring /usr/share/keyrings/ansible.gpg adv --no-default-keyring --keyserver keyserver.ubuntu.com --recv 93C4A3FD7BB9C367
-sudo apt-get update
+sudo apt-add-repository --yes ppa:ansible/ansible
 sudo apt-get install --yes ansible
 #2 sudo apt remove --yes ansible
-#2 sudo rm /etc/apt/sources.list.d/ansible.list* /usr/share/keyrings/ansible.gpg*
-#2 sudo apt update
+#2 sudo apt-add-repository --remove --yes ppa:ansible/ansible
 
 #1 cockpit (browsergebaseerd beheer)
 sudo apt-get install --yes cockpit cockpit-pcp
@@ -56,12 +53,10 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #2 sudo rm /usr/bin/pip
 
 #1 signal (privéberichtenapp)
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
-wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
+echo 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
+wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo sudo tee /etc/apt/trusted.gpg.d/signal.asc
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
-sudo apt-key del 57F6FB06
-sudo rm --force /etc/apt/trusted.gpg.d/signal*
 #2 sudo apt remove --yes signal-desktop
 #2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
