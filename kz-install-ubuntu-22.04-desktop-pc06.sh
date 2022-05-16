@@ -61,8 +61,13 @@ sudo apt-get install --yes signal-desktop
 #2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
 
-#1 ssh (secure shell)
+#1 ssh (veilige shell-client en server)
 sudo apt-get install --yes ssh
+sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+## Check op remote root-toegang.
+grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
+sudo systemctl restart ssh.service
+#2 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 #2 sudo apt remove --yes ssh
 
 #1 vscode (editor)

@@ -28,6 +28,15 @@ sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #2 sudo apt remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 #2 sudo rm /usr/bin/pip
 
+#1 ssh (veilige shell-client en server)
+sudo apt-get install --yes ssh
+sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+## Check op remote root-toegang.
+grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
+sudo systemctl restart ssh.service
+#2 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+#2 sudo apt remove --yes ssh
+
 #1 vscode (editor)
 sudo snap install --classic code
 #2 sudo snap remove code
