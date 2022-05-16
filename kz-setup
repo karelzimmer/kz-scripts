@@ -720,10 +720,7 @@ function term_script {
     if $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
             warning "
-$action is geëindigd met een waarschuwing.
-
-Controleer de hier getoonde log, of met Terminalvenster-opdracht: \
-${BLUE}$LOGCMD_CHECK${NORMAL}" &
+$action is geëindigd met een waarschuwing."
             logcmd_check
             exit $WARNING
         else

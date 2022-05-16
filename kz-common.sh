@@ -98,7 +98,7 @@ function error {
                     --height    100         \
                     --title     "$TITLE"    \
                     --text      "$@"        \
-                    --ok-label  'Oké'       2> >($LOGCMD) || true &
+                    --ok-label  'Oké'       2> >($LOGCMD) || true
         fi
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
@@ -182,7 +182,9 @@ function log {
 
 function logcmd_check {
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-    eval "$LOGCMD_CHECK" > "$temp_log"
+    printf '%s\n' "Controleer de hieronder getoonde log \
+(terminalvenster-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}):" > "$temp_log"
+    eval "$LOGCMD_CHECK" >> "$temp_log"
     if $OPTION_GUI; then
         TITLE="Log $DISPLAY_NAME"
         zenity  --text-info             \
@@ -375,10 +377,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
-            error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}
-
-Controleer de hier getoonde log, of met Terminalvenster-opdracht: \
-${BLUE}$LOGCMD_CHECK${NORMAL}"
+            error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}"
             exit "$rc"
             ;;
         exit)
