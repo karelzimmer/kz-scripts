@@ -202,8 +202,7 @@ EOF
                 "$TARGET"                   2> >($LOGCMD) || rsync_rc=$?
     fi
     rm "$exclude"
-#FIXME:
-rsync_rc=99
+
     case $rsync_rc in
         0)
             return $SUCCESS

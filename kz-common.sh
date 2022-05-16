@@ -182,11 +182,11 @@ function log {
 
 function logcmd_check {
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-    printf '%s\n' "Controleer de hieronder getoonde log \
-(terminalvenster-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}):" > "$temp_log"
+    printf '%s\n' 'Logberichten met mogelijk een verklaring:' > "$temp_log"
     eval "$LOGCMD_CHECK" >> "$temp_log"
+    printf '%s\n' "Logberichten-opdracht: $LOGCMD_CHECK" >> "$temp_log"
     if $OPTION_GUI; then
-        TITLE="Log $DISPLAY_NAME"
+        TITLE="Logberichten $DISPLAY_NAME"
         zenity  --text-info             \
                 --width     1200        \
                 --height    600         \
