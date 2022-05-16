@@ -243,6 +243,22 @@ $(
             --body-numbering=n
 )
 "
+    while true; do
+        read -rp 'Doorgaan? [J/n]: '
+        case $REPLY in
+            j*|J*|'')
+                break
+                ;;
+            n*|N*)
+                exit $WARNING
+                break
+                ;;
+            *)
+                printf '%s' "${REWRITE_LINE}"
+                continue
+                ;;
+        esac
+    done
     fi
 }
 
