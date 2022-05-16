@@ -7,18 +7,18 @@
 
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
-#2 sudo apt remove --yes calibre
+#2 sudo apt-get remove --yes calibre
 
 #1 gnome-gmail (Gmail als de favoriete e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
-#2 sudo apt remove --yes gnome-gmail
+#2 sudo apt-get remove --yes gnome-gmail
 
 #1 google-earth (verken de wereld)
 echo 'deb [arch=amd64] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo sudo tee /etc/apt/trusted.gpg.d/google-earth.asc
 sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
-#2 sudo apt remove --yes google-earth-pro-stable
+#2 sudo apt-get remove --yes google-earth-pro-stable
 #2 sudo rm /etc/apt/sources.list.d/google-earth-pro.list* /etc/apt/trusted.gpg.d/google-earth.asc*
 #2 sudo apt update
 
@@ -32,4 +32,4 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 #1 wine (windowsapps op Linux)
 sudo apt-get install --yes wine winetricks playonlinux
-#2 sudo apt remove --yes wine winetricks playonlinux
+#2 sudo apt-get remove --yes wine winetricks playonlinux

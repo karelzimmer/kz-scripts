@@ -7,11 +7,11 @@
 
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
-#2 sudo apt remove --yes calibre
+#2 sudo apt-get remove --yes calibre
 
 #1 clamav (antivirus)
 sudo apt-get install --yes clamtk-gnome
-#2 sudo apt remove --yes clamtk-gnome
+#2 sudo apt-get remove --yes clamtk-gnome
 
 #1 lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
@@ -20,7 +20,7 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 #1 pinta (tekenprogramma)
 sudo apt-get install --yes pinta
-#2 sudo apt remove --yes pinta
+#2 sudo apt-get remove --yes pinta
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop
@@ -41,6 +41,6 @@ sudo adduser "${SUDO_USER:-$USER}" vboxusers
 sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 #2 sudo deluser "${SUDO_USER:-$USER}" vboxusers
 #2 sudo delgroup vboxusers
-#2 sudo apt remove --yes virtualbox-*
+#2 sudo apt-get remove --yes virtualbox-*
 #2 sudo rm /etc/apt/sources.list.d/virtualbox.list* /etc/apt/trusted.gpg.d/oracle_vbox_2016.asc*
 #2 sudo apt update
