@@ -32,10 +32,12 @@ wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_
 sudo apt-get update
 ## chrome-gnome-shell; de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
-## Extra nodig na eerste installatie.
+## Extra nodig na installatie.
+sudo rm /etc/apt/trusted.gpg.d/google-chrome.gpg
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
+#2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt update
 
 #1 language-support (taalondersteuning)
@@ -64,12 +66,16 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-teams.gpg] https:/
 wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft-teams.gpg
 sudo apt-get update
 sudo apt-get install --yes teams
+## Extra nodig na installatie.
+sudo rm /etc/apt/trusted.gpg.d/microsoft.gpg
 ## Verwijder PREVIEW in afbeelding.
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter.
 sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
 #2 sudo apt-get remove --yes teams
 #2 sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
+#2 sudo rm --force /etc/apt/trusted.gpg.d/microsoft.gpg
+#2 sudo apt update
 
 #1 teamviewer (afstandsbediening)
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
