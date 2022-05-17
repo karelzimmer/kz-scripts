@@ -36,7 +36,7 @@ sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 sudo rm /etc/apt/trusted.gpg.d/google-chrome.gpg
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
-#2 sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
+#2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt update
 
@@ -73,7 +73,7 @@ sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/p
 ## Verwijder Preview in starter.
 sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
 #2 sudo apt-get remove --yes teams
-#2 sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
+#2 sudo rm --force /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
 #2 sudo rm --force /etc/apt/trusted.gpg.d/microsoft.gpg
 #2 sudo apt update
 
@@ -84,9 +84,9 @@ sudo apt-get update
 sudo apt-get install --yes teamviewer
 ## Extra nodig na installatie.
 sudo apt-key del 0C1289C0 DEB49217
-sudo rm /etc/apt/sources.list.d/teamviewer.list.dpkg-dist
+sudo rm --force /etc/apt/sources.list.d/teamviewer.list.dpkg-dist
 #2 sudo apt-get remove --yes teamviewer
-#2 sudo rm /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
+#2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt update
 

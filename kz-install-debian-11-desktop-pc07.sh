@@ -53,7 +53,7 @@ wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/key
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 #2 sudo apt-get remove --yes signal-desktop
-#2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
+#2 sudo rm --force /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
 
 #1 vscode (editor)
@@ -66,5 +66,5 @@ wget --no-verbose --output-document=- http://www.webmin.com/jcameron-key.asc | s
 sudo apt-get update
 sudo apt-get install --yes webmin
 #2 sudo apt-get remove --yes webmin
-#2 sudo rm /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
+#2 sudo rm --force /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 #2 sudo apt update

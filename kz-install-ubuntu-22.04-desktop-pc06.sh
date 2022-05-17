@@ -11,7 +11,7 @@ sudo apt-key --keyring /usr/share/keyrings/ansible.gpg adv --no-default-keyring 
 sudo apt-get update
 sudo apt-get install --yes ansible
 #2 sudo apt-get remove --yes ansible
-#2 sudo rm /etc/apt/sources.list.d/ansible.list* /usr/share/keyrings/ansible.gpg*
+#2 sudo rm --force /etc/apt/sources.list.d/ansible.list* /usr/share/keyrings/ansible.gpg*
 #2 sudo apt update
 
 #1 cockpit (browsergebaseerd beheer)
@@ -61,7 +61,7 @@ wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/key
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 #2 sudo apt-get remove --yes signal-desktop
-#2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
+#2 sudo rm --force /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
 
 #1 ssh (veilige shell-client en server)
