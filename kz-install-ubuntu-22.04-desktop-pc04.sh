@@ -29,7 +29,7 @@ sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-#1 ros (Robot Operating System)
+#1-ros (Robot Operating System)
 :
 
 #1 wine (windowsapps op Linux)
