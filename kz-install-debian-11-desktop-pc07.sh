@@ -48,11 +48,11 @@ sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
 #2 sudo rm /usr/bin/pip /usr/bin/python
 
 #1 signal (privéberichtenapp)
-echo 'deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
-wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo sudo tee /etc/apt/trusted.gpg.d/signal.asc
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
+wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
-#2 sudo apt-get remove --yes signal-desktop
+#2 sudo apt remove --yes signal-desktop
 #2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
 
@@ -61,9 +61,10 @@ sudo snap install --classic code
 #2 sudo snap remove code
 
 #1 webmin (browsergebaseerd beheer)
-echo 'deb http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
-wget --no-verbose --output-document=- http://www.webmin.com/jcameron-key.asc | sudo sudo tee /etc/apt/trusted.gpg.d/webmin.asc
+echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
+wget --no-verbose --output-document=- http://www.webmin.com/jcameron-key.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update
-#2 sudo apt-get remove --yes webmin
-#2 sudo rm /etc/apt/sources.list.d/webmin.list* /etc/apt/trusted.gpg.d/webmin.asc*
+sudo apt-get install --yes webmin
+#2 sudo apt remove --yes webmin
+#2 sudo rm /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 #2 sudo apt update
