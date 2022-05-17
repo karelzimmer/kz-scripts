@@ -81,7 +81,7 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
-sudo apt-get install --yes teamviewer
+sudo DEBIAN_FRONTEND=noninteractive sudo apt-get install --yes teamviewer
 #2 sudo apt-get remove --yes teamviewer
 #2 sudo rm /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt update
