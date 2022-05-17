@@ -52,7 +52,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.
 wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
-#2 sudo apt remove --yes signal-desktop
+#2 sudo apt-get remove --yes signal-desktop
 #2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
 
@@ -65,6 +65,6 @@ echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/
 wget --no-verbose --output-document=- http://www.webmin.com/jcameron-key.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update
 sudo apt-get install --yes webmin
-#2 sudo apt remove --yes webmin
+#2 sudo apt-get remove --yes webmin
 #2 sudo rm /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 #2 sudo apt update

@@ -20,7 +20,7 @@ sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
 ## Extra nodig na eerste installatie.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
-#2 sudo apt remove --yes google-earth-pro-stable
+#2 sudo apt-get remove --yes google-earth-pro-stable
 #2 sudo rm /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
 #2 sudo apt update
 

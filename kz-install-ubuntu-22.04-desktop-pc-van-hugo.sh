@@ -41,6 +41,6 @@ sudo adduser "${SUDO_USER:-$USER}" vboxusers
 sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 #2 sudo deluser "${SUDO_USER:-$USER}" vboxusers
 #2 sudo delgroup vboxusers
-#2 sudo apt remove --yes virtualbox-*
+#2 sudo apt-get remove --yes virtualbox-*
 #2 sudo rm /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
 #2 sudo apt update

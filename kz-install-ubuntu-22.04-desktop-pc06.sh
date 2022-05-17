@@ -10,7 +10,7 @@ echo "deb [signed-by=/usr/share/keyrings/ansible.gpg] https://ppa.launchpadconte
 sudo apt-key --keyring /usr/share/keyrings/ansible.gpg adv --no-default-keyring --keyserver keyserver.ubuntu.com --recv 93C4A3FD7BB9C367
 sudo apt-get update
 sudo apt-get install --yes ansible
-#2 sudo apt remove --yes ansible
+#2 sudo apt-get remove --yes ansible
 #2 sudo rm /etc/apt/sources.list.d/ansible.list* /usr/share/keyrings/ansible.gpg*
 #2 sudo apt update
 
@@ -60,7 +60,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.
 wget --no-verbose --output-document=- https://updates.signal.org/desktop/apt/keys.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
-#2 sudo apt remove --yes signal-desktop
+#2 sudo apt-get remove --yes signal-desktop
 #2 sudo rm /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
 #2 sudo apt update
 

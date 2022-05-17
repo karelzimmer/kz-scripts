@@ -38,7 +38,7 @@ sudo apt-get update
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 ## Extra nodig na eerste installatie.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-#2 sudo apt remove --yes google-chrome-stable chrome-gnome-shell
+#2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo apt update
 
@@ -68,7 +68,7 @@ sudo apt-get install --yes teams
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter.
 sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
-#2 sudo apt remove --yes teams
+#2 sudo apt-get remove --yes teams
 #2 sudo rm /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
 
 #1 teamviewer (afstandsbediening)
@@ -76,7 +76,7 @@ echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewe
 wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
-#2 sudo apt remove --yes teamviewer
+#2 sudo apt-get remove --yes teamviewer
 #2 sudo rm /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt update
 
