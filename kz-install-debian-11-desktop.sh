@@ -37,7 +37,7 @@ sudo apt-get update
 ## chrome-gnome-shell; de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 ## Extra nodig na installatie.
-sudo rm /etc/apt/trusted.gpg.d/google-chrome.gpg
+sudo rm --force /etc/apt/sources.list.d/google-chrome.gpg
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
@@ -67,7 +67,7 @@ wget --no-verbose --output-document=- https://packages.microsoft.com/keys/micros
 sudo apt-get update
 sudo apt-get install --yes teams
 ## Extra nodig na installatie.
-sudo rm /etc/apt/trusted.gpg.d/microsoft.gpg
+sudo rm --force /etc/apt/sources.list.d/microsoft.gpg
 ## Verwijder PREVIEW in afbeelding.
 sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
 ## Verwijder Preview in starter.
