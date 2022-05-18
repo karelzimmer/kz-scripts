@@ -78,13 +78,14 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 #2 sudo apt update
 
 #1 teamviewer (afstandsbediening)
-echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
+## Als /etc/apt/sources.list.d/teamviewer.list al bestaat wordt de installatie interactief, vandaar teamviewer-tmp.list.
+echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer-tmp.list
 wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
 ## Extra nodig na installatie.
+sudo mv /etc/apt/sources.list.d/teamviewer-tmp.list /etc/apt/sources.list.d/teamviewer.list
 sudo apt-key del 0C1289C0 DEB49217
-sudo rm --force /etc/apt/sources.list.d/teamviewer.list.dpkg-dist
 #2 sudo apt-get remove --yes teamviewer
 #2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt-key del 0C1289C0 DEB49217
