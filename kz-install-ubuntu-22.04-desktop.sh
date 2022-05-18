@@ -18,6 +18,7 @@ sudo snap install bitwarden
 #2 sudo snap remove bitwarden
 
 #1 force-x11 (Gebruik X11 i.p.v. Wayland)
+## Met wayland issues met afspelen video en TeamViewer.
 ## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
