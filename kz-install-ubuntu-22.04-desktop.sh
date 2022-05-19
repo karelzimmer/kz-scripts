@@ -31,7 +31,7 @@ sudo apt-get install --yes gnome-tweaks
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
-## chrome-gnome-shell; de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken.
+## Installeer ook chrome-gnome-shell om extensions.gnome.org te laten werken.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 ## Extra nodig na installatie.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -79,11 +79,12 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 #2 sudo apt update
 
 #1 teamviewer (afstandsbediening)
-## Als /etc/apt/sources.list.d/teamviewer.list al bestaat wordt de installatie interactief, vandaar teamviewer-tmp.list.
+## Eerst teamviewer-tmp.list anders wordt de installatie interactief.
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer-tmp.list
 wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
+## Naar teamviewer.list.
 sudo mv /etc/apt/sources.list.d/teamviewer-tmp.list /etc/apt/sources.list.d/teamviewer.list
 ## Extra nodig na installatie.
 sudo apt-key del 0C1289C0 DEB49217
