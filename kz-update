@@ -2,7 +2,7 @@
 """
 Systeem bijwerken.
 
-Dit script voert een update uit voor Debian gebaseerde systemen.
+Dit script voert een update uit voor op Debian gebaseerde systemen.
 """
 ###############################################################################
 # Systeem bijwerken.                                                          #
@@ -24,17 +24,12 @@ desc = 'Systeem bijwerken.'
 def perform_update():
     subprocess.run('sudo true', shell=True, check=True)
 
-    # Opdracht als sequence.
     print(f'Uitvoeren apt update...')
-    subprocess.run(['sudo', 'apt-get', 'update'])
-
-    # Opdracht als raw text.
+    subprocess.run('sudo apt-get update', shell=True, check=True)
     print(f'\nUitvoeren apt upgrade...')
-    subprocess.run('sudo apt-get upgrade --yes', shell=True)
+    subprocess.run('sudo apt-get upgrade --yes', shell=True, check=True)
     print(f'\nUitvoeren apt dist-upgrade...')
-    subprocess.run('sudo apt-get dist-upgrade --yes', shell=True)
-
-    # Opdracht als raw text, vang afsluitwaarde op.
+    subprocess.run('sudo apt-get dist-upgrade --yes', shell=True, check=True)
     print(f'\nUitvoeren apt autoremove...')
     subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
     print(f'\nUitvoeren apt autoclean...')
