@@ -31,11 +31,11 @@ sudo apt-get install --yes gnome-tweaks
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
-## chrome-gnome-shell; de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken
+## chrome-gnome-shell; de connector die communiceert met de browserextensie om https://extensions.gnome.org te laten werken.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 ## Extra nodig na installatie.
-sudo rm --force /etc/apt/sources.list.d/google-chrome.gpg
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo rm --force /etc/apt/sources.list.d/google-chrome.gpg
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
@@ -84,8 +84,8 @@ echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewe
 wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
-## Extra nodig na installatie.
 sudo mv /etc/apt/sources.list.d/teamviewer-tmp.list /etc/apt/sources.list.d/teamviewer.list
+## Extra nodig na installatie.
 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get remove --yes teamviewer
 #2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
