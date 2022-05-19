@@ -222,12 +222,31 @@ function build_uploads {
                             --outdir "${UPLOADS_TARGETS[PDFS]}" \
                             "$temptextfile"                     |& $LOGCMD
                 rm "$temptextfile"
+                if [[ $file == kz-install*.sh || $file == kz-setup*.sh ]]; then
+                    # Als een installatie- of instelbestand is gewijzigd,
+                    # maak dan voor de *site* een nieuwe "all" aan.
+                    build_uploads_all
+                fi
             fi
         fi
     done
     cd "$HOME"
 }
 
+
+function build_uploads_all {
+    local filename=''
+    
+    filename=$(echo "$file" | awk -F- '{print $1"-"$2}')
+    cat "$filename"*.sh > "${UPLOADS_TARGETS[SCRIPTS]}/$filename"-all.sh
+    temptextfile=/tmp/$filename-all.sh.txt
+    cp "${UPLOADS_TARGETS[SCRIPTS]}/$filename"-all.sh "$temptextfile"
+    lowriter    --headless                          \
+                --convert-to pdf                    \
+                --outdir "${UPLOADS_TARGETS[PDFS]}" \
+                "$temptextfile"                     |& $LOGCMD
+    rm "$temptextfile"
+}
 
 function build_deb {
     local basename=''
