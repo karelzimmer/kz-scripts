@@ -83,7 +83,7 @@ echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewe
 wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
-## Naar teamviewer.list.
+## Van teamviewer-tmp.list naar teamviewer.list.
 sudo mv /etc/apt/sources.list.d/teamviewer-tmp.list /etc/apt/sources.list.d/teamviewer.list
 ## Extra nodig na installatie.
 sudo apt-key del 0C1289C0 DEB49217
