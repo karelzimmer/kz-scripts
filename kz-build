@@ -235,12 +235,12 @@ function build_uploads {
 
 
 function build_uploads_all {
-    local filename=''
+    local tempname=''
 
-    filename=$(echo "$file" | awk -F- '{print $1"-"$2}')
-    cat "$filename"*.sh > "${UPLOADS_TARGETS[SCRIPTS]}/$filename"-all.sh
-    temptextfile=/tmp/$filename-all.sh.txt
-    cp "${UPLOADS_TARGETS[SCRIPTS]}/$filename"-all.sh "$temptextfile"
+    tempname=$(echo "$file" | awk -F- '{print $1"-"$2}')
+    cat "$tempname"*.sh > "${UPLOADS_TARGETS[SCRIPTS]}/$tempname"-all.sh
+    temptextfile=/tmp/$tempname-all.sh.txt
+    cp "${UPLOADS_TARGETS[SCRIPTS]}/$tempname"-all.sh "$temptextfile"
     lowriter    --headless                          \
                 --convert-to pdf                    \
                 --outdir "${UPLOADS_TARGETS[PDFS]}" \
@@ -338,6 +338,7 @@ function build_deb {
 
 
 function build_background_properties_file {
+    local filename=''
     local wallpaper=''
     local wallpapers_config_file=kz-wallpapers.xml
 
