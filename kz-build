@@ -236,7 +236,7 @@ function build_uploads {
 
 function build_uploads_all {
     local filename=''
-    
+
     filename=$(echo "$file" | awk -F- '{print $1"-"$2}')
     cat "$filename"*.sh > "${UPLOADS_TARGETS[SCRIPTS]}/$filename"-all.sh
     temptextfile=/tmp/$filename-all.sh.txt
