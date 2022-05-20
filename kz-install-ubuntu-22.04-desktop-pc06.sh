@@ -73,6 +73,10 @@ sudo systemctl restart ssh.service
 #2 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 #2 sudo apt-get remove --yes ssh
 
+#1 tree (mappenboom)
+sudo apt-get install --yes tree
+#2 sudo apt-get remove --yes tree
+
 #1 vscode (editor)
 sudo snap install --classic code
 #2 sudo snap remove code
