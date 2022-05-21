@@ -17,6 +17,19 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 sudo snap install bitwarden
 #2 sudo snap remove bitwarden
 
+#1 chrome-remote-desktop (afstandsbediening)
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-remote-desktop.gpg] http://dl.google.com/linux/chrome-remote-desktop/deb/ stable main' | sudo tee /etc/apt/sources.list.d/chrome-remote-desktop.list
+wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/chrome-remote-desktop.gpg
+sudo apt-get update
+sudo apt-get install --yes chrome-remote-desktop
+## Extra nodig na installatie.
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-remote-desktop.gpg] http://dl.google.com/linux/chrome-remote-desktop/deb/ stable main' | sudo tee /etc/apt/sources.list.d/chrome-remote-desktop.list
+sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
+#2 sudo apt-get remove --yes chrome-remote-desktop
+#2 sudo rm --force /etc/apt/sources.list.d/chrome-remote-desktop.list* /usr/share/keyrings/chrome-remote-desktop.gpg*
+#2 sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
+#2 sudo apt update
+
 #1 citrix (telewerken)
 ## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/citrix/icaclient_20.04.0.21_amd64.deb"
