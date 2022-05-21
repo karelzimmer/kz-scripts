@@ -18,7 +18,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.
 wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
 sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
-## Extra nodig na installatie.
+## De installatie overschrijft de zojuist toegevoegde source-list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 #2 sudo apt-get remove --yes google-earth-pro-stable
 #2 sudo rm --force /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
