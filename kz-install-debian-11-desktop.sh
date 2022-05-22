@@ -43,7 +43,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient.deb
-#2 sudo apt remove --yes icaclient
+#2 sudo apt-get remove --yes icaclient
 
 #1 cups (printsysteem)
 sudo apt-get install --yes cups
