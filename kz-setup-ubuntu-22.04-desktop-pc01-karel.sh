@@ -29,9 +29,10 @@ kz-gset --delfav=thunderbird
 #2 kz-gset --addfavbef=thunderbird
 
 #1 vscode (editor)
-xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
+xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Bureaublad-configuratiebestand
+xdg-mime default code_code.desktop application/x-shellscript    # Bash-script
 xdg-mime default code_code.desktop application/xml              # PolicyKit actiedefinitiebestand
+xdg-mime default code_code.desktop text/html                    # Web-pagina
 xdg-mime default code_code.desktop text/markdown                # Markdown document
 xdg-mime default code_code.desktop text/troff                   # Man-pagina
-xdg-mime default code_code.desktop text/html                    # Web-pagina
