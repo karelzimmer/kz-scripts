@@ -208,7 +208,7 @@ EOF
             return $SUCCESS
             ;;
         *)
-            error "
+            logcmd_check "
 Back-up maken is geeindigd met fouten.
 
 Foutcode rsync is $rsync_rc.
@@ -216,7 +216,6 @@ Foutcode rsync is $rsync_rc.
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het maken van de back-up, of is er te weinig ruimte op
 $TARGET."
-            logcmd_check
             exit $ERROR
             ;;
     esac

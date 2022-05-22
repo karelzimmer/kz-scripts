@@ -41,8 +41,9 @@ declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD_CHECK=''
-declare     LOGCMD=''
 declare     ERROR_MSG_TO_LOG=false
+declare     LESS_OPTIONS=''
+declare     LOGCMD=''
 declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
@@ -169,6 +170,16 @@ function init_script {
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
+    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
+    # van:
+    # 1. systemctl en journalctl, zie bijvoorbeeld 'man systemctl', zoek LESS
+    #    ("FRSXMK")
+    # 2. man, zie 'man man', zoek LESS
+    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+--RAW-CONTROL-CHARS --prompt=MTekstuitvoer $DISPLAY_NAME ?ltregel %lt?L van \
+%L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor \
+stoppen)"
+
     if [[ -t 1 ]]; then
         set_terminal_attributes
     fi
@@ -181,10 +192,15 @@ function log {
 
 
 function logcmd_check {
+    local temp_log=''
+
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-    printf '%s\n' 'Logberichten met mogelijk een verklaring:' > "$temp_log"
-    eval "$LOGCMD_CHECK" >> "$temp_log"
-    printf '%s\n' "Logberichten-opdracht: $LOGCMD_CHECK" >> "$temp_log"
+    {
+        printf '%s\n' "${YELLOW}$*${NORMAL}"
+        printf '%s\n' "${BOLD}Logberichten:${NORMAL}"
+        eval "$LOGCMD_CHECK"
+        printf '%s\n' "${BOLD}Log-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}"
+    } > "$temp_log"
     if $OPTION_GUI; then
         TITLE="Logberichten $DISPLAY_NAME"
         zenity  --text-info             \
@@ -194,7 +210,7 @@ function logcmd_check {
                 --filename  "$temp_log" \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else
-        cat "$temp_log"
+        less "$LESS_OPTIONS" "$temp_log"
     fi
     rm "$temp_log"
 }

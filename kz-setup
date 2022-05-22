@@ -69,7 +69,6 @@ declare     EDITION=$EDITION_DEFAULT
 declare     EXECUTE_COMMANDS=true
 declare -a  FILE_ARGUMENTS=()
 declare -a  FILES_TO_PROCESS=()
-declare     LESS_OPTIONS=''
 declare -i  MAXRC=0
 declare     OPTION_APPS=false
 declare     OPTION_CAT=false
@@ -421,20 +420,7 @@ function process_option_cat {
             cat "$file"
         }   >> "$CMDS_FILE"
     done
-    less_options "$TITLE"
     less "$LESS_OPTIONS" "$CMDS_FILE"
-}
-
-
-function less_options {
-    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
-    # van:
-    # 1. systemctl en journalctl, zie bijvoorbeeld 'man systemctl', zoek LESS
-    #    ("FRSXMK")
-    # 2. man, zie 'man man', zoek LESS
-    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M$1 ?ltregel %lt?L van %L.:byte %bB?s van %s..? \
-.?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor stoppen)"
 }
 
 
@@ -708,7 +694,6 @@ function term_script {
     local action='Instellen'
 
     if $OPTION_SIMULATE; then
-        less_options "$TITLE"
         less "$LESS_OPTIONS" "$TEXT_FILE"
     elif ! $COMMANDS_FOUND; then
         info 'Geen opdrachten.'
@@ -719,10 +704,8 @@ function term_script {
     fi
     if $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
-            warning "
-$action is geëindigd met een waarschuwing."
-            logcmd_check
-            exit $WARNING
+            logcmd_check "Eén of meerdere opdrachten zijn fout gegaan."
+            exit $ERROR
         else
             info "
 ${GREEN}$action is voltooid.${NORMAL}"
