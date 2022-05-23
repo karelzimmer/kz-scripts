@@ -788,7 +788,7 @@ function term_script {
     fi
     if $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
-            logcmd_check "Eén of meerdere opdrachten zijn fout gegaan."
+            logcmd_check 'Eén of meerdere opdrachten zijn fout gegaan.'
             exit $ERROR
         else
             info "
