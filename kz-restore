@@ -181,9 +181,10 @@ function restore_backup {
             return $SUCCESS
             ;;
         *)
-            logcmd_check "Back-up terugzetten is geëindigd met fouten. \
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd \
-of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig \
+            logcmd_check "Back-up terugzetten is geëindigd met fouten.
+
+Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
+of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig
 ruimte op $TARGET."
             exit $ERROR
             ;;

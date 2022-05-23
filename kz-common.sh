@@ -187,7 +187,7 @@ stoppen)"
 
 
 function log {
-    printf '%b\n' "$1" |& $LOGCMD "${2:---priority=info}"
+    printf '%b\n' "$@" |& $LOGCMD "${2:---priority=info}"
 }
 
 
@@ -196,7 +196,7 @@ function logcmd_check {
 
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     {
-        printf '%s\n' "${YELLOW}$*${NORMAL}"
+        printf "${YELLOW}%s\n${NORMAL}" "$@"
         printf '%s\n' "${BOLD}Logberichten:${NORMAL}"
         eval "$LOGCMD_CHECK"
         printf '%s\n' "${BOLD}Log-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}"
