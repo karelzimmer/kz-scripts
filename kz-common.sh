@@ -197,9 +197,9 @@ function logcmd_check {
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     {
         printf "${YELLOW}%s\n${NORMAL}" "$@"
-        printf '%s\n' "${BOLD}Logberichten:${NORMAL}"
+        printf "${BOLD}%s\n${NORMAL}" 'Logberichten:'
         eval "$LOGCMD_CHECK"
-        printf '%s\n' "${BOLD}Log-opdracht: ${BLUE}$LOGCMD_CHECK${NORMAL}"
+        printf "${BOLD}%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
     } > "$temp_log"
     if $OPTION_GUI; then
         TITLE="Logberichten $DISPLAY_NAME"
@@ -429,7 +429,7 @@ ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
             fi
             ;;
         kz-install)
-            printf '%s' "${NORMAL}${CURSOR_VISABLE}"
+            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
@@ -440,7 +440,7 @@ ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
             fi
             ;;
         kz-setup)
-            printf '%s' "${NORMAL}${CURSOR_VISABLE}"
+            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
             ;;
         *)
             return $SUCCESS

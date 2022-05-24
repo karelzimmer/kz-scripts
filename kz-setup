@@ -542,7 +542,7 @@ function process_file {
 
     if $EXECUTE_COMMANDS; then
         STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
-        printf '%b' "${CURSOR_INVISABLE}"
+        printf '%s' "${CURSOR_INVISABLE}"
     fi
     $skip_line && printf '\n'; skip_line=true
 
@@ -574,7 +574,7 @@ function process_file {
     done < "$CMDS_FILE"
 
     if $EXECUTE_COMMANDS; then
-        printf '%b' "${CURSOR_VISABLE}"
+        printf '%s' "${CURSOR_VISABLE}"
     fi
 }
 
