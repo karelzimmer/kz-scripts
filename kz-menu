@@ -207,7 +207,6 @@ function process_menu1_tui {
             read -rp "Voer uit nummer [1-$MENU1_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
                 *)
@@ -215,7 +214,6 @@ function process_menu1_tui {
                         &> /dev/null; then
                         break
                     else
-                        printf '%s' "${REWRITE_LINE}"
                         continue
                     fi
                     ;;
@@ -387,7 +385,6 @@ function process_menu2_tui {
             read -rp "Voer uit nummer [1-$MENU2_LINES]: "
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
                 *)
@@ -395,7 +392,6 @@ function process_menu2_tui {
                         2> /dev/null; then
                         break
                     else
-                        printf '%s' "${REWRITE_LINE}"
                         continue
                     fi
                     ;;
@@ -507,7 +503,6 @@ $TEXT"
                     break
                     ;;
                 *)
-                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
             esac

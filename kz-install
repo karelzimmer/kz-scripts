@@ -723,10 +723,9 @@ function execute_command {
     check_dpkg
     if ! $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "$STATUS_BUSY %s${CARRIAGE_RETURN}" "$app_description_line"
+            printf "$STATUS_BUSY %b" "$app_description_line\r"
         else
-            printf  "$STATUS_BUSY ${SPACES:0:9}%s${CARRIAGE_RETURN}" \
-                    "${app_description_line:9}"
+            printf "$STATUS_BUSY ${SPACES:0:9}%b" "${app_description_line:9}\r"
         fi
     fi
 

@@ -159,7 +159,6 @@ $fstab"
                         break
                         ;;
                     *)
-                        printf '%s' "${REWRITE_LINE}"
                         continue
                         ;;
                 esac
@@ -195,7 +194,6 @@ $fstab"
                     exit $SUCCESS
                     ;;
                 *)
-                    printf '%s' "${REWRITE_LINE}"
                     continue
                     ;;
             esac

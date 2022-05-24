@@ -58,13 +58,11 @@ declare     USAGELINE=''
 declare     BLINK=''
 declare     BLUE=''
 declare     BOLD=''
-declare     CARRIAGE_RETURN=''
 declare     CURSOR_INVISABLE=''
 declare     CURSOR_VISABLE=''
 declare     GREEN=''
 declare     NORMAL=''
 declare     RED=''
-declare     REWRITE_LINE=''
 declare     YELLOW=''
 
 ###############################################################################
@@ -292,13 +290,11 @@ function reset_terminal_attributes {
     BLINK=''
     BLUE=''
     BOLD=''
-    CARRIAGE_RETURN=''
     CURSOR_INVISABLE=''
     CURSOR_VISABLE=''
     GREEN=''
     NORMAL=''
     RED=''
-    REWRITE_LINE=''
     YELLOW=''
 }
 
@@ -309,15 +305,11 @@ function set_terminal_attributes {
     BLINK=$(tput blink)
     BLUE=${BOLD}$(tput setaf 4)
     # shellcheck disable=SC2034
-    CARRIAGE_RETURN=$(tput cr)
-    # shellcheck disable=SC2034
     CURSOR_INVISABLE=$(tput civis)
     CURSOR_VISABLE=$(tput cvvis)
     GREEN=${BOLD}$(tput setaf 2)
     NORMAL=$(tput sgr0)
     RED=${BOLD}$(tput setaf 1)
-    # shellcheck disable=SC2034
-    REWRITE_LINE=$(tput cuu1;tput el)
     YELLOW=${BOLD}$(tput setaf 3)
 }
 
