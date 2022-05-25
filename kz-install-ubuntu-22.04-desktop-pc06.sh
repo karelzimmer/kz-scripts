@@ -43,6 +43,10 @@ sudo apt-get install --yes mlocate
 sudo apt-get install --yes pinta
 #2 sudo apt-get remove --yes pinta
 
+#1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
+sudo apt-get install --yes pinfo
+#2 sudo apt-get remove --yes pinfo
+
 #1 python (programmeertaal)
 sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8

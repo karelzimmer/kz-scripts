@@ -40,6 +40,10 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
 
+#1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
+sudo apt-get install --yes pinfo
+#2 sudo apt-get remove --yes pinfo
+
 #1 python (programmeertaal)
 sudo apt-get install --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
