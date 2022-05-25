@@ -45,7 +45,7 @@ def perform_update():
     # Is een reboot nodig?
     try:
         with open('/var/run/reboot-required') as fh:
-            print(f'\nREBOOT')
+            print(f'\nHerstarten is nodig vanwege kernel-updates.')
     except FileNotFoundError:
         pass
     except Exception as ex:
