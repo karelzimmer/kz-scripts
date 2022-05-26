@@ -97,8 +97,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -123,9 +122,7 @@ function check_input {
                 ;;
             -g|--gui)
                 OPTION_GUI=true
-                if [[ -t 1 ]]; then
-                    reset_terminal_attributes
-                fi
+                reset_terminal_attributes
                 shift
                 ;;
             -l|--list)
@@ -199,7 +196,7 @@ function process_input {
     fi
     # Ergens hiervoor ging het niet helemaal goed.
     if $file_notfound; then
-        exit $SUCCESS
+        exit $ERROR
     fi
     # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
@@ -264,7 +261,7 @@ function process_argument_app {
         files[0]=$dfltfile_1
     else
         info "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
-        exit $WARNING
+        exit $ERROR
     fi
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
@@ -283,7 +280,7 @@ function process_argument_app {
                     --regexp="#1 $app"      \
                     "${files[@]}"           \
                     &> /dev/null; then
-            warning "App '$app' niet gevonden."
+            error "App '$app' niet gevonden."
             file_notfound=true
         else
             process_argument_app_file
@@ -343,7 +340,7 @@ function process_argument_file {
             FILES_TO_PROCESS[$file_num]=$file
             ((++file_num))
         else
-            warning "Bestand $file niet gevonden."
+            error "Bestand $file niet gevonden."
             file_notfound=true
         fi
     done
@@ -359,9 +356,8 @@ function process_dfltfiles {
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
-        warning "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION." >&2
-        info "$USAGELINE" >&2
-        exit $WARNING
+        error "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION." >&2
+        process_usage
     fi
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then

@@ -58,8 +58,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -124,20 +123,20 @@ function check_files_and_folders {
         if ! [[ $file = "$good" ]]; then
             ((++count))
             if [[ -d "$file" ]]; then
-                warning "BadName  DIR '$file'."
+                info "BadName  DIR '$file'."
             elif [[ -f "$file" ]]; then
-                warning "BadName FILE '$basename' in map '$dirname'."
+                info "BadName FILE '$basename' in map '$dirname'."
             else
-                warning "BadName SYML '$file'."
+                info "BadName SYML '$file'."
             fi
         fi
 
         if [[ ${#basename} -gt $FILENAME_MAXLEN ]]; then
             ((++count))
             if [[ -d "$file" ]]; then
-                warning "BadLen.  DIR '$basename'."
+                info "BadLen.  DIR '$basename'."
             else
-                warning "BadLen. FILE '$basename' in map '$dirname'."
+                info "BadLen. FILE '$basename' in map '$dirname'."
             fi
         fi
 
@@ -162,9 +161,9 @@ function check_files_and_folders {
     if [[ $count -eq 0 ]]; then
         return $SUCCESS
     elif [[ $count -eq 1 ]]; then
-        warning 'Er is een fout gevonden.'
+        info 'Er is een fout gevonden.'
     else
-        warning "Er zijn $count fouten gevonden."
+        info "Er zijn $count fouten gevonden."
     fi
 }
 

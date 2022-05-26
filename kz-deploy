@@ -52,8 +52,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -72,8 +71,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         error 'Geen argumenten toegestaan.'
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
 
     # Aangemeld als ontwikkelaar?
@@ -116,7 +114,7 @@ function check_names {
                                 "$deb_repo"     \
                                 "$uploads_repo" || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
-        warning '
+        error '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
@@ -130,7 +128,7 @@ function check_scripts {
     log "Check scripts with 'kz ivp'."
     "$SCRIPTS_REPO"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
-        warning '
+        error '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
@@ -144,7 +142,7 @@ function build_package {
     log "Build package with 'kz build'."
     "$SCRIPTS_REPO"/kz build || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
-        warning '
+        error '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
         exit $check_rc
     fi
@@ -173,9 +171,9 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
-        warning 'Uploaden website is mislukt.'
+        error 'Uploaden website is mislukt.'
         info 'Controleer de log...!'
-        exit $WARNING
+        exit $ERROR
     fi
     sleep 5
 }
@@ -185,9 +183,9 @@ function install_package {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
-        warning 'Installeren pakket kz is niet uitgevoerd.'
+        error 'Installeren pakket kz is niet uitgevoerd.'
         info 'Controleer de log...!'
-        exit $WARNING
+        exit $ERROR
     fi
 }
 

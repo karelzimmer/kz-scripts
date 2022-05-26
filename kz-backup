@@ -67,8 +67,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -77,9 +76,7 @@ function check_input {
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                if [[ -t 1 ]]; then
-                    reset_terminal_attributes
-                fi
+                reset_terminal_attributes
                 shift
                 ;;
             --delete)
@@ -107,8 +104,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         error 'Geen argumenten toegestaan.'
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
 
     check_user
@@ -127,18 +123,18 @@ function process_input {
     else
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         if [[ -z $MEDIUM ]]; then
-            warning 'Geen USB-medium gevonden.
+            error 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
-            exit $WARNING
+            exit $ERROR
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-            warning "Koppel slechts één USB-medium aan.
+            error "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-            exit $WARNING
+            exit $ERROR
         fi
         TARGET_MEDIUM=$MEDIUM
     fi

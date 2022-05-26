@@ -14,7 +14,6 @@ declare RELEASE_YEAR=2009
 
 readonly SUCCESS=0
 readonly ERROR=1
-readonly WARNING=2
 
 # shellcheck disable=SC2034
 readonly OPTIONS_SHORT_COMMON='huv'
@@ -52,7 +51,6 @@ declare     RUN_AS_SUPERUSER=false
 declare     TITLE=''
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     USAGELINE=''
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare     BLINK=''
@@ -113,8 +111,8 @@ function check_user {
         fi
     else
         if [[ $UID -eq 0 ]]; then
-            warning "Niet uitvoeren met 'sudo' of als root."
-            exit $WARNING
+            info "Niet uitvoeren met 'sudo' of als root."
+            exit $ERROR
         fi
     fi
 }
@@ -165,9 +163,6 @@ function init_script {
         xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
 
-    # shellcheck disable=SC2034
-    USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
-
     # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
     # van:
     # 1. systemctl en journalctl, zie bijvoorbeeld 'man systemctl', zoek LESS
@@ -194,7 +189,7 @@ function logcmd_check {
 
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     {
-        printf "${YELLOW}%s\n${NORMAL}" "$@"
+        printf "${RED}%s\n${NORMAL}" "$@"
         printf "${BOLD}%s\n${NORMAL}" 'Logberichten:'
         eval "$LOGCMD_CHECK"
         printf "${BOLD}%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
@@ -240,13 +235,10 @@ function process_common_options {
 
     if $OPTION_HELP; then
         process_option_help
-        exit $SUCCESS
     elif $OPTION_USAGE; then
         process_option_usage
-        exit $SUCCESS
     elif $OPTION_VERSION; then
         process_option_version
-        exit $SUCCESS
     fi
 }
 
@@ -255,6 +247,7 @@ function process_option_help {
     info "$HELP
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
+    exit $SUCCESS
 }
 
 
@@ -262,6 +255,7 @@ function process_option_usage {
     info "$USAGE
 
 Typ '$DISPLAY_NAME --help' voor meer informatie."
+    exit $SUCCESS
 }
 
 
@@ -283,8 +277,13 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
 Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
+    exit $SUCCESS
 }
 
+function process_usage {
+    info "Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
+    exit $ERROR
+}
 
 function reset_terminal_attributes {
     BLINK=''
@@ -385,7 +384,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         error)
-            error "${RED}Programma $PROGRAM_NAME is afgebroken.${NORMAL}"
+            error "Programma $PROGRAM_NAME is afgebroken."
             exit "$rc"
             ;;
         exit)
@@ -395,7 +394,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             exit "$rc"
             ;;
         *)
-            warning "Programma $PROGRAM_NAME is onderbroken."
+            error "Programma $PROGRAM_NAME is onderbroken."
             exit "$rc"
             ;;
     esac

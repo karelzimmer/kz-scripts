@@ -77,8 +77,7 @@ function check_input {
                 --              "$@"
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -87,9 +86,7 @@ function check_input {
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                if [[ -t 1 ]]; then
-                    reset_terminal_attributes
-                fi
+                reset_terminal_attributes
                 shift
                 ;;
             --)
@@ -104,8 +101,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         error 'Geen argumenten toegestaan.'
-        info "$USAGELINE" >&2
-        exit $ERROR
+        process_usage
     fi
 
     check_user
