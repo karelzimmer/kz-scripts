@@ -36,9 +36,6 @@ Argumenten:
   OPDRACHT       uit te voeren opdracht
   ARG            argumenten behorend bij OPDRACHT"
 
-THIS_YEAR=$(date +%Y)
-readonly THIS_YEAR
-
 ###############################################################################
 # Global variables                                                            #
 ###############################################################################
@@ -116,10 +113,10 @@ function process_option_version {
 
     build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
 
-    if [[ $RELEASE_YEAR -eq $THIS_YEAR ]]; then
+    if [[ $RELEASE_YEAR -eq $(date +%Y) ]]; then
         copyright_years=$RELEASE_YEAR
     else
-        copyright_years=$RELEASE_YEAR-$THIS_YEAR
+        copyright_years=$RELEASE_YEAR-$(date +%Y)
     fi
     printf '%s\n' "$DISPLAY_NAME versie 365 (kz build $build)
 

@@ -44,7 +44,7 @@ def process_option_usage(display_name):
     """
     Deze functie toont de beschikbare opties.
     """
-    print(f"""Gebruik: {display_name} [-u|--usage] [-h|--help] [-v|--version]
+    print(f"""Gebruik: {display_name} [-h|--help] [-u|--usage] [-v|--version]
 
 Typ '{display_name} --help' voor meer informatie.""")
 

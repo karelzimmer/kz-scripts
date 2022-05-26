@@ -20,7 +20,7 @@ readonly OPTIONS_SHORT_COMMON='huv'
 # shellcheck disable=SC2034
 readonly OPTIONS_LONG_COMMON='help,usage,version'
 # shellcheck disable=SC2034
-readonly OPTIONS_USAGE_COMMON='[-u|--usage] [-h|--help] [-v|--version]'
+readonly OPTIONS_USAGE_COMMON='[-h|--help] [-u|--usage] [-v|--version]'
 # shellcheck disable=SC2034
 readonly OPTIONS_HELP_COMMON="\
   -h, --help     toon deze hulptekst
@@ -29,8 +29,6 @@ readonly OPTIONS_HELP_COMMON="\
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
-THIS_YEAR=$(date +%Y)
-readonly THIS_YEAR
 
 ###############################################################################
 # Common global variables
@@ -265,10 +263,10 @@ function process_option_version {
 
     build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
 
-    if [[ $RELEASE_YEAR -eq $THIS_YEAR ]]; then
+    if [[ $RELEASE_YEAR -eq $(date +%Y) ]]; then
         copyright_years=$RELEASE_YEAR
     else
-        copyright_years=$RELEASE_YEAR-$THIS_YEAR
+        copyright_years=$RELEASE_YEAR-$(date +%Y)
     fi
 
     info "$DISPLAY_NAME versie 365 (kz build $build)
