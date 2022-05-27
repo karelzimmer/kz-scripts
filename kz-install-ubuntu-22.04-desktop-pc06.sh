@@ -49,7 +49,7 @@ sudo apt-get install --yes pinfo
 
 #1 plex (mediaspeler)
 ## Snap plex-htpc is de mediaspeler voor de Linux-computer die is aangesloten op het grote scherm.
-## Een Home Theater PC (HTPC) is een computer die fungeert als multimediacentrum in huis. 
+## Een Home Theater PC (HTPC) is een computer die fungeert als multimediacentrum in huis.
 sudo snap install plex-desktop
 #2 sudo snap remove plex-desktop
 

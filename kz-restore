@@ -196,13 +196,13 @@ function term_script {
     TEXT=''
     if [[ $SOURCE_MEDIUM == /media/* ]]; then
         device='/dev/'$(
-            lsblk   --ascii                 |
-            grep    --before-context=1      \
-                    "$SOURCE_MEDIUM"        |
-            head    -1                      |
-            awk     --field-separator='-'   \
-                    '{print $2}'            |
-            awk     --field-separator=' '   \
+            lsblk   --ascii             |
+            grep    --before-context=1  \
+                    "$SOURCE_MEDIUM"    |
+            head    -1                  |
+            awk     -F'-'               \
+                    '{print $2}'        |
+            awk     -F' '               \
                     '{print $1}'
         )
         umount "$SOURCE_MEDIUM" |& $LOGCMD  || rc+=$?

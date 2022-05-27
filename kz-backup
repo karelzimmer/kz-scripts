@@ -238,13 +238,13 @@ $TEXT..."
     TEXT=''
     if [[ $TARGET_MEDIUM == /media/* ]]; then
         device='/dev/'$(
-            lsblk   --ascii                 |
-            grep    --before-context=1      \
-                    "$TARGET_MEDIUM"        |
-            head    -1                      |
-            awk     --field-separator='-'   \
-                    '{print $2}'            |
-            awk     --field-separator=' '   \
+            lsblk   --ascii             |
+            grep    --before-context=1  \
+                    "$TARGET_MEDIUM"    |
+            head    -1                  |
+            awk     -F'-'               \
+                    '{print $2}'        |
+            awk     -F' '               \
                     '{print $1}'
         )
         umount "$TARGET_MEDIUM" |& $LOGCMD  || rc+=$?
