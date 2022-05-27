@@ -47,6 +47,12 @@ sudo apt-get install --yes pinta
 sudo apt-get install --yes pinfo
 #2 sudo apt-get remove --yes pinfo
 
+#1 plex (mediaspeler)
+## Snap plex-htpc is de mediaspeler voor de Linux-computer die is aangesloten op het grote scherm.
+## Een Home Theater PC (HTPC) is een computer die fungeert als multimediacentrum in huis. 
+sudo snap install plex-desktop
+#2 sudo snap remove plex-desktop
+
 #1 python (programmeertaal)
 sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
@@ -75,6 +81,10 @@ sudo systemctl restart ssh.service
 #1 tree (mappenboom)
 sudo apt-get install --yes tree
 #2 sudo apt-get remove --yes tree
+
+#1 vlc (mediaspeler)
+sudo snap install vlc
+#2 sudo snap remove vlc
 
 #1 vscode (editor)
 sudo snap install --classic code
