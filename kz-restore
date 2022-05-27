@@ -189,14 +189,34 @@ ruimte op $TARGET."
 
 
 function term_script {
-    sync |& $LOGCMD
+    local       device=''
+    local   -i  rc=0
+
+    sync |& $LOGCMD || rc+=$?
+    TEXT=''
     if [[ $SOURCE_MEDIUM == /media/* ]]; then
-        umount "$SOURCE_MEDIUM" |& $LOGCMD
-        TEXT='
+        device='/dev/'$(
+            lsblk   --ascii                 |
+            grep    --before-context=1      \
+                    "$SOURCE_MEDIUM"        |
+            head    -1                      |
+            awk     --field-separator='-'   \
+                    '{print $2}'            |
+            awk     --field-separator=' '   \
+                    '{print $1}'
+        )
+        umount "$SOURCE_MEDIUM" |& $LOGCMD  || rc+=$?
+        udisksctl lock --block-device "$device" |& $LOGCMD  || rc+=$?
+        udisksctl power-off --block-device "$device" |& $LOGCMD  || rc+=$?
+        if [[ $rc -eq $SUCCESS ]]; then
+            TEXT='
 
 Het USB-medium kan verwijderd worden.'
-    else
-        TEXT=''
+        else
+            TEXT="
+
+${YELLOW}Koppel zelf (veilig!) het USB-medium af."
+        fi
     fi
     info "
 ${GREEN}De back-up is teruggezet.$TEXT${NORMAL}"
