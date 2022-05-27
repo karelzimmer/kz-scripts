@@ -32,6 +32,7 @@ gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
@@ -50,6 +51,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 #2 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 #2 gsettings reset org.gnome.shell.extensions.ding show-home
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant

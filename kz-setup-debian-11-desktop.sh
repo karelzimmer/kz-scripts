@@ -35,6 +35,7 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
@@ -46,16 +47,18 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings reset org.gnome.desktop.interface clock-show-date
 #2 gsettings reset org.gnome.desktop.interface clock-show-weekday
 #2 gsettings reset org.gnome.desktop.interface show-battery-percentage
-#2 gsettings reset org.gnome.peripherals.touchpad tap-to-click
-#2 gsettings reset org.gnome.screensaver lock-enabled
 #2 gsettings reset org.gnome.nautilus.icon-view default-zoom-level
 #2 gsettings reset org.gnome.nautilus.preferences click-policy
+#2 gsettings reset org.gnome.peripherals.touchpad tap-to-click
+#2 gsettings reset org.gnome.screensaver lock-enabled
 #2 gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 #2 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 #2 gsettings reset org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 #2 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed true
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height true
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
