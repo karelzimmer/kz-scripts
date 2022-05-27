@@ -229,7 +229,7 @@ function term_script {
                 --width     600                     \
                 --height    50                      \
                 --title     "$TITLE"                \
-                --text      "$TEXT"                 2> >($LOGCMD)
+                --text      "$TEXT"                 2> >($LOGCMD) || rc+=$?
     else
         info "
 $TEXT..."
