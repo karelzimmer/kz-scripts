@@ -367,7 +367,7 @@ function term_script {
     local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
 
     mkdir --parents "$docs_dir" |& $LOGCMD
-    rm --force "$docs_dir"/Checklist-{installatie,instellen}*
+    rm --force "$docs_dir"/Checklist*
     cp  /usr/share/doc/kz/Checklist*"$(lsb_release --id --short)"*  \
         "$docs_dir" |& $LOGCMD || true
     TEXT="Pakket kz is succesvol geïnstalleerd.
