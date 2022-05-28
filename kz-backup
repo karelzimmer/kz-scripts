@@ -178,7 +178,7 @@ EOF
                 "$SOURCE"/                  \
                 "$TARGET"                   \
                 2> >($LOGCMD)               |
-        awk     '{print "#"$0}'             |
+        sed     's/^/#/'                    |
         zenity  --progress                  \
                 --auto-close                \
                 --no-cancel                 \
@@ -242,10 +242,10 @@ $TEXT..."
             grep    --before-context=1  \
                     "$TARGET_MEDIUM"    |
             head    -1                  |
-            awk     -F'-'               \
-                    '{print $2}'        |
-            awk     -F' '               \
-                    '{print $1}'
+            cut     --delimiter='-'     \
+                    --fields=2          |
+            cut     --delimiter=' '     \
+                    --fields=1
         )
         umount "$TARGET_MEDIUM" |& $LOGCMD  || rc+=$?
         udisksctl lock --block-device "$device" |& $LOGCMD  || rc+=$?

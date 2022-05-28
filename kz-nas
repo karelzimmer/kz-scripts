@@ -38,7 +38,9 @@ Zorg dat de NAS een vast IP-adres heeft.
 Hiervoor is nodig:
 
  -  het MAC-adres van de NAS \
-(zoals $(ip -oneline link | awk '/ UP /{print $17}' | head -1))
+(zoals $(
+    ip -oneline link | grep ' UP '|cut --delimiter=' ' --fields=20 | head -1
+    ))
  -  toegang tot de NAS via een webbrowser
  -  toegang tot de router via een webbrowser
 
