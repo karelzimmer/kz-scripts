@@ -18,31 +18,3 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #1 thunderbird (e-mail)
 kz-gset --delfav=thunderbird
 #2 kz-gset --addfavbef=thunderbird
-
-#1 zgaehrm (starter eHRM Zorggroep Almere)
-cp /usr/share/applications/kz-zga-ehrm.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
-kz-gset --addfavbef=kz-zga-ehrm
-#2 rm "$HOME"/.local/share/applications/kz-zga-ehrm.desktop
-#2 kz-gset --delfav=kz-zga-ehrm
-
-#1 zgaintranet (starter Intranet Zorggroep Almere)
-cp /usr/share/applications/kz-zga-intranet.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-intranet.desktop
-kz-gset --addfavbef=kz-zga-intranet
-#2 rm "$HOME"/.local/share/applications/kz-zga-intranet.desktop
-#2 kz-gset --delfav=kz-zga-intranet
-
-#1 zgamonaco (starter Monaco Zorggroep Almere)
-cp /usr/share/applications/kz-zga-monaco.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-monaco.desktop
-kz-gset --addfavbef=kz-zga-monaco
-#2 rm "$HOME"/.local/share/applications/kz-zga-monaco.desktop
-#2 kz-gset --delfav=kz-zga-monaco
-
-#1 zgawebmail (starter WebMail Zorggroep Almere)
-cp /usr/share/applications/kz-zga-webmail.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-zga-webmail.desktop
-kz-gset --addfavbef=kz-zga-webmail
-#2 rm "$HOME"/.local/share/applications/kz-zga-webmail.desktop
-#2 kz-gset --delfav=kz-zga-webmail
