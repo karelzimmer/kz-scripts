@@ -673,13 +673,13 @@ function process_command {
             else
                 printf '\n' >> "$TEXT_FILE"
             fi
-            printf  '[%3d/%-3d] %s\n'   \
+            printf  '[%2d/%-2d] %s\n'   \
                     "$app_seq_num"      \
                     "$app_tot_num"      \
                     "$app_description"  >> "$TEXT_FILE"
             write_app_description_line=false
         fi
-        printf  '%9s [%2d] %s\n'            \
+        printf  '%7s [%2d] %s\n'            \
                 " "                         \
                 "$cmd_seq_num"              \
                 "${BLUE}$cmd${NORMAL}"   >> "$TEXT_FILE"
@@ -691,17 +691,17 @@ function process_command {
         else
             if [[ -t 1 ]]; then
                 # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
-                #  <------------- tput cols ------------->
-                # '[WERK] [  1/1  ] [ 1] Te lange descr...' <=== op 1 regel
-                #  <-------- 22 -------->
-                desc_maxlen=$(($(tput cols) - 22))
+                #  <--------------- tput cols --------------->
+                # '[WERK] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
+                #  <------- 20 ------->
+                desc_maxlen=$(($(tput cols) - 20))
                 if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
                     desc_printf=${desc_printf:0:(($desc_maxlen - 3))}'...'
                 fi
             fi
         fi
         printf  -v app_description_line                             \
-                "[%3d/%-3d] [%2d] %-${desc_maxlen}.${desc_maxlen}s" \
+                "[%2d/%-2d] [%2d] %-${desc_maxlen}.${desc_maxlen}s" \
                 "$app_seq_num"                                      \
                 "$app_tot_num"                                      \
                 "$cmd_seq_num"                                      \
@@ -721,7 +721,7 @@ function execute_command {
         if [[ $cmd_seq_num -eq 1 ]]; then
             printf "$STATUS_BUSY %b" "$app_description_line\r"
         else
-            printf "$STATUS_BUSY ${SPACES:0:9}%b" "${app_description_line:9}\r"
+            printf "$STATUS_BUSY ${SPACES:0:7}%b" "${app_description_line:7}\r"
         fi
     fi
 
