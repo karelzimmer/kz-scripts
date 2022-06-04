@@ -67,7 +67,7 @@ sudo apt-get update
 sudo apt-get install --yes signal-desktop
 #2 sudo apt-get remove --yes signal-desktop
 #2 sudo rm --force /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 ssh (veilige shell-client en server)
 sudo apt-get install --yes ssh

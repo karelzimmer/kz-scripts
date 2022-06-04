@@ -58,7 +58,7 @@ sudo apt-get update
 sudo apt-get install --yes signal-desktop
 #2 sudo apt-get remove --yes signal-desktop
 #2 sudo rm --force /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 vscode (editor)
 sudo snap install --classic code
@@ -71,4 +71,4 @@ sudo apt-get update
 sudo apt-get install --yes webmin
 #2 sudo apt-get remove --yes webmin
 #2 sudo rm --force /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
-#2 sudo apt update
+#2 sudo apt-get update

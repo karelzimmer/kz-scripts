@@ -22,7 +22,7 @@ sudo apt-get install --yes google-earth-pro-stable
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 #2 sudo apt-get remove --yes google-earth-pro-stable
 #2 sudo rm --force /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf

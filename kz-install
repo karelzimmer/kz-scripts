@@ -37,7 +37,7 @@ Opties:
   -f, --files    toon lijst van bestanden
   -g, --gui      start in grafische modus
   -l, --list     maak applijst aan
-  -r, --remove   toon verwijder-instructies
+  -r, --remove   verwijder apps
   -s, --simulate toon opdrachten
 $OPTIONS_HELP_COMMON
 
@@ -54,12 +54,10 @@ VERSION=$(lsb_release --release --short)
 readonly VERSION
 CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
 readonly CMDS_FILE
-APPS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
+APPS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.apps")
 readonly APPS_FILE
-TEXT_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.text")
-readonly TEXT_FILE
-TEMP_LIST=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.list")
-readonly TEMP_LIST
+SIM_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sim")
+readonly SIM_FILE
 
 ###############################################################################
 # Global variables                                                            #
@@ -83,6 +81,8 @@ declare     OPTION_REMOVE=false
 declare     OPTION_SIMULATE=false
 declare     RUN_AS_SUPERUSER=true
 declare     STATUS_BUSY=''
+declare     STATUS_ERROR=''
+declare     STATUS_SUCCESS=''
 
 ###############################################################################
 # Functions                                                                   #
@@ -103,6 +103,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -152,8 +153,6 @@ function check_input {
                 ;;
         esac
     done
-    STATUS_ERROR="[${RED}FOUT${NORMAL}]"
-    STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
@@ -173,14 +172,11 @@ function check_input {
 
 
 function process_input {
-    local -i    app_seq_num=0
-    local -i    app_tot_num=0
     local       dfltfile_1=''
     local       dfltfile_2=''
     local       file_notfound=false
     local -i    file_num=0
     local       file=''
-    local       skip_line=false
 
     # Verwerk optie list.
     if $OPTION_LIST; then
@@ -231,17 +227,13 @@ function process_input {
         cat "$file" >> "$CMDS_FILE"
     done
 
-    app_tot_num=$(
-        grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
-        )
-
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
         TITLE='Apps installeren'
         TEXT=''
         # Met "|& zenity --progress" worden globale variabelen uit aangeroepen
         # functies niet doorgegeven, vandaar de 'process substitution' met
         # "> >(zenity...)".
-        process_file > >(
+        process_cmds_file > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -252,7 +244,7 @@ function process_input {
                     --text      "$TEXT"     2> >($LOGCMD)
             )
     else
-        process_file
+        process_cmds_file
     fi
 }
 
@@ -357,6 +349,7 @@ function process_dfltfiles {
     else
         error "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
         process_usage
+        exit $ERROR
     fi
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
@@ -462,7 +455,7 @@ function process_option_list {
         source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
     fi
     local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
-    local app_list=$docs_dir/Apps
+    local file=$docs_dir/Apps
 
     mkdir --parents "$docs_dir" |& $LOGCMD
 
@@ -506,19 +499,17 @@ Software of
     local       plural='geïnstalleerde pakketten'
 
     printf '%s\n' "$text1"
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" > "$file"
 
-    apt list --manual-installed 2> >($LOGCMD) >> "$TEMP_LIST"
+    apt list --manual-installed 2> >($LOGCMD) >> "$file"
 
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$(wc --lines < "$file")
     number_of_lines=$((number_of_lines - 4))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='geïnstalleerd pakket'
     fi
     footer="Dit overzicht bevat $number_of_lines handmatig $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" > "$app_list"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$file"
 }
 
 
@@ -530,22 +521,20 @@ function process_option_list_snaps {
     local       plural='snaps'
 
     printf '%s\n' "$text3"
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" >> "$file"
 
-    if ! snap list 2> /dev/null >> "$TEMP_LIST"; then
+    if ! snap list 2> /dev/null >> "$file"; then
         TEXT='snap is niet geïnstalleerd op dit systeem'
-        printf '%s\n' "$TEXT" >> "$TEMP_LIST"
+        printf '%s\n' "$TEXT" >> "$file"
     fi
 
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$(wc --lines < "$file")
     number_of_lines=$((number_of_lines - 3))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='snap'
     fi
     footer="Dit overzicht bevat $number_of_lines $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$app_list"
+    printf '%b\n' "$DASHES\n$footer\n" >> "$file"
 }
 
 
@@ -559,7 +548,7 @@ installatie van een pakket of
     local       search=''
 
     printf '%s\n' "$text2"
-    printf '%b\n' "$header\n$DASHES" > "$TEMP_LIST"
+    printf '%b\n' "$header\n$DASHES" >> "$file"
 
     search=/etc/apt/sources.list
     cd  $search.d || exit $ERROR
@@ -571,35 +560,53 @@ installatie van een pakket of
                     /etc/apt/sources.list.d |
             grep    --invert-match          \
                     --regexp='ubuntu.com'   |
-            sort    --unique                >> "$TEMP_LIST"; then
+            sort    --unique                >> "$file"; then
         true
     fi
 
-    number_of_lines=$(wc --lines < "$TEMP_LIST")
+    number_of_lines=$(wc --lines < "$file")
     number_of_lines=$((number_of_lines - 3))
     if [[ $number_of_lines -eq 1 ]]; then
         plural='pakketbron'
     fi
     footer="Dit overzicht bevat $number_of_lines toegevoegde $plural."
-    printf '%b\n' "$DASHES\n$footer" >> "$TEMP_LIST"
-
-    cat "$TEMP_LIST" >> "$app_list"
+    printf '%b\n' "$DASHES\n$footer" >> "$file"
 }
 
 
-function process_file {
+function process_cmds_file {
     local       app_description=''
-    local -i    cmd_seq_num=0
     local       first_description_line=true
+    local       operation='installeren'
     local       record=''
     local       recordtype=''
     local       write_app_description_line=true
+    local -i    app_seq_num=0
+    local -i    app_tot_num=0
+    local -i    cmd_seq_num=0
 
     if $EXECUTE_COMMANDS; then
-        STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
         printf '%s' "${CURSOR_INVISABLE}"
     fi
-    $skip_line && printf '\n'; skip_line=true
+
+    app_tot_num=$(
+        grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
+        )
+    if [[ $app_tot_num -gt 99 ]]; then
+        app_tot_num=99
+    fi
+
+    if $OPTION_REMOVE; then
+        operation='verwijderen'
+    fi
+    if $OPTION_SIMULATE; then
+        operation+=' simuleren'
+    else
+        STATUS_BUSY="[${BLINK}${BOLD}WERK${NORMAL}]"
+        STATUS_ERROR="[${RED}FOUT${NORMAL}]"
+        STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
+        printf '%s' "${CURSOR_INVISABLE}"
+    fi
 
     while read -r record; do
         recordtype=${record:0:2}
@@ -609,11 +616,13 @@ function process_file {
                 continue
                 ;;
             '#1')
-                process_app_description "$record"
+                # Appnaam en -beschrijving.
+                process_app_description_record "$record"
                 ;;
             '#2')
+                # Verwijderopdracht.
                 if $OPTION_REMOVE; then
-                    process_command "${record:3}"
+                    process_command_record "${record:3}"
                 fi
                 ;;
             '#'*)
@@ -621,41 +630,33 @@ function process_file {
                 continue
                 ;;
             *)
+                # Installatieopdracht.
                 if ! $OPTION_REMOVE; then
-                    process_command "$record"
+                    process_command_record "$record"
                 fi
                 ;;
         esac
     done < "$CMDS_FILE"
 
-    if $EXECUTE_COMMANDS; then
-        printf '%s' "${CURSOR_VISABLE}"
-    fi
+    printf '%s' "${CURSOR_VISABLE}"
 }
 
 
-function process_app_description {
+function process_app_description_record {
     local record=${1:-record?}
 
-    if $OPTION_SIMULATE && $OPTION_REMOVE; then
-        app_description="${record:3}"' verwijderen simuleren'
-    elif $OPTION_REMOVE; then
-        app_description="${record:3}"' verwijderen'
-    elif $OPTION_SIMULATE; then
-        app_description="${record:3}"' installeren simuleren'
-    else
-        app_description="${record:3}"' installeren'
-    fi
-    if ! $OPTION_SIMULATE && ! $EXECUTE_COMMANDS; then
-        return $SUCCESS
-    fi
+    app_description="${record:3} $operation"
     write_app_description_line=true
     ((++app_seq_num))
+    if [[ $app_seq_num -gt 99 ]]; then
+        app_seq_num=99
+    fi
+
     cmd_seq_num=0
 }
 
 
-function process_command {
+function process_command_record {
     local       cmd=${1:-cmd?}
     local       app_description_line=''
     local -i    cmd_rc=0
@@ -665,39 +666,23 @@ function process_command {
 
     COMMANDS_FOUND=true
     ((++cmd_seq_num))
+    if [[ $cmd_seq_num -gt 99 ]]; then
+        cmd_seq_num=99
+    fi
 
-    if $OPTION_SIMULATE; then
-        if $write_app_description_line; then
-            if $first_description_line; then
-                first_description_line=false
-            else
-                printf '\n' >> "$TEXT_FILE"
-            fi
-            printf  '[%2d/%-2d] %s\n'   \
-                    "$app_seq_num"      \
-                    "$app_tot_num"      \
-                    "$app_description"  >> "$TEXT_FILE"
-            write_app_description_line=false
-        fi
-        printf  '%7s [%2d] %s\n'            \
-                " "                         \
-                "$cmd_seq_num"              \
-                "${BLUE}$cmd${NORMAL}"   >> "$TEXT_FILE"
-    elif $EXECUTE_COMMANDS; then
+    if $EXECUTE_COMMANDS; then
         desc_printf=$app_description
         if $OPTION_GUI; then
             TEXT="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
             printf '%s\n' "$TEXT"
         else
-            if [[ -t 1 ]]; then
-                # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
-                #  <--------------- tput cols --------------->
-                # '[WERK] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
-                #  <------- 20 ------->
-                desc_maxlen=$(($(tput cols) - 20))
-                if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
-                    desc_printf=${desc_printf:0:(($desc_maxlen - 3))}'...'
-                fi
+            # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
+            #  <--------------- tput cols --------------->
+            # '[WERK] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
+            #  <------- 20 ------->                    <3>
+            desc_maxlen=$(($(tput cols) - 20))
+            if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
+                desc_printf=${desc_printf:0:(($desc_maxlen - 3))}'...'
             fi
         fi
         printf  -v app_description_line                             \
@@ -707,6 +692,24 @@ function process_command {
                 "$cmd_seq_num"                                      \
                 "$desc_printf"
         execute_command "$cmd"
+    else
+        # OPTION_SIMULATE
+        if $write_app_description_line; then
+            if $first_description_line; then
+                first_description_line=false
+            else
+                printf '\n' >> "$SIM_FILE"
+            fi
+            printf  '[%2d/%-2d] %s\n'   \
+                    "$app_seq_num"      \
+                    "$app_tot_num"      \
+                    "$app_description"  >> "$SIM_FILE"
+            write_app_description_line=false
+        fi
+        printf  '%7s [%2d] %s\n'        \
+                " "                     \
+                "$cmd_seq_num"          \
+                "${BLUE}$cmd${NORMAL}"  >> "$SIM_FILE"
     fi
 }
 
@@ -772,25 +775,23 @@ function check_dpkg {
 function term_script {
     local action='Installeren'
 
-    if $OPTION_SIMULATE; then
-        less "$LESS_OPTIONS" "$TEXT_FILE"
-    elif ! $COMMANDS_FOUND; then
-        info 'Geen opdrachten.'
-    fi
-
-    if $OPTION_REMOVE; then
-        action='Verwijderen'
-    fi
-    if $EXECUTE_COMMANDS; then
+    if ! $COMMANDS_FOUND; then
+        info 'Geen opdrachten om uit te voeren.'
+    elif $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
             logcmd_check 'Eén of meerdere opdrachten zijn fout gegaan.'
             exit $ERROR
         else
+            if $OPTION_REMOVE; then
+                action='Verwijderen'
+            fi
             info "
 ${GREEN}$action is voltooid.${NORMAL}"
-            exit $SUCCESS
         fi
+    else
+        less "$LESS_OPTIONS" "$SIM_FILE"
     fi
+    exit $SUCCESS
 }
 
 ###############################################################################

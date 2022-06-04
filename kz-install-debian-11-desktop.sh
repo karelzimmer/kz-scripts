@@ -12,7 +12,7 @@ sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sour
 sudo apt-get update
 #2 sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
 #2 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion
@@ -34,7 +34,7 @@ sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
 #2 sudo apt-get remove --yes chrome-remote-desktop
 #2 sudo rm --force /etc/apt/sources.list.d/chrome-remote-desktop.list* /usr/share/keyrings/chrome-remote-desktop.gpg*
 #2 sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 citrix (telewerken)
 ## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
@@ -67,7 +67,7 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 journalctl (log bekijken)
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
@@ -100,7 +100,7 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 #2 sudo apt-get remove --yes teams
 #2 sudo rm --force /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
 #2 sudo rm --force /etc/apt/trusted.gpg.d/microsoft.gpg
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 teamviewer (afstandsbediening)
 ## Eerst teamviewer-tmp.list anders wordt de installatie interactief.
@@ -115,7 +115,7 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get remove --yes teamviewer
 #2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt-key del 0C1289C0 DEB49217
-#2 sudo apt update
+#2 sudo apt-get update
 
 #1 thunderbird (e-mail)
 sudo apt-get install --yes lightning thunderbird-l10n-nl

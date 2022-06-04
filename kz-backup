@@ -68,6 +68,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -105,6 +106,7 @@ function check_input {
     if [[ "$*" ]]; then
         error 'Geen argumenten toegestaan.'
         process_usage
+        exit $ERROR
     fi
 
     check_user

@@ -233,10 +233,13 @@ function process_common_options {
 
     if $OPTION_HELP; then
         process_option_help
+        exit $SUCCESS
     elif $OPTION_USAGE; then
         process_option_usage
+        exit $SUCCESS
     elif $OPTION_VERSION; then
         process_option_version
+        exit $SUCCESS
     fi
 }
 
@@ -245,7 +248,6 @@ function process_option_help {
     info "$HELP
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
-    exit $SUCCESS
 }
 
 
@@ -253,7 +255,6 @@ function process_option_usage {
     info "$USAGE
 
 Typ '$DISPLAY_NAME --help' voor meer informatie."
-    exit $SUCCESS
 }
 
 
@@ -275,12 +276,10 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
 Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
-    exit $SUCCESS
 }
 
 function process_usage {
     info "Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
-    exit $ERROR
 }
 
 function reset_terminal_attributes {

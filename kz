@@ -60,18 +60,23 @@ function check_input {
     # Geen getopt, opgegeven opties zijn voor de opdracht, niet voor kz zelf.
     if ! [[ "$*" ]]; then
         show_commands
+        exit $ERROR
     elif [[ $1 == *-u* ]]; then
         process_option_usage
+        exit $SUCCESS
     elif [[ $1 == *-h* ]]; then
         process_option_help
+        exit $SUCCESS
     elif [[ $1 == *-v* ]]; then
         process_option_version
         exit $SUCCESS
     elif [[ $1 == *-l* ]]; then
         show_commands
+        exit $ERROR
     elif ! [[ -e "$PROGRAM_PATH/kz-$1" ]]; then
         printf "$DISPLAY_NAME: %s\n\n" "OPDRACHT '$1' bestaat niet" >&2
         show_commands
+        exit $ERROR
     fi
 }
 
@@ -89,7 +94,6 @@ function show_commands {
     sort                            |
     sed     's/kz-//'
     printf '\n%s\n' "Typ '$DISPLAY_NAME --usage' voor meer informatie."
-    exit $ERROR
 }
 
 
@@ -97,13 +101,11 @@ function process_option_usage {
     printf  '%s\n\n%s\n'    \
             "$USAGE"        \
             "Typ '$DISPLAY_NAME --help' voor meer informatie."
-    exit $SUCCESS
 }
 
 
 function process_option_help {
     printf '%s\n\n%s\n' "$HELP" "Typ 'man $DISPLAY_NAME' voor meer informatie."
-    exit $SUCCESS
 }
 
 
@@ -124,7 +126,6 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
 Auteursrecht (c) $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
-    exit $SUCCESS
 }
 
 
