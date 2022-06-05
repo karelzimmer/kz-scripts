@@ -26,14 +26,6 @@ sudo apt-get install --yes aspell-nl git
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
 
-#1-iwlwifi-conf (fix slow wifi)
-## Ref: https://easylinuxtipsproject.blogspot.com/p/intel-wifi.html
-## bt_coex_active=0: disable the Bluetooth feature of the WiFi chipset,
-## swcrypto=1: shift signal encryption from hardware (WiFi chipset) to software,
-## 11n_disable=8: enable antenna aggregation (Tx AMPDU).
-echo 'options iwlwifi bt_coex_active=0 swcrypto=1 11n_disable=8' | sudo tee /etc/modprobe.d/iwlwifi-3options.conf
-#2 sudo rm --force /etc/modprobe.d/iwlwifi-3options.conf
-
 #1 kvm (virtualisatie)
 ## Images staan in /var/lib/libvirt/images/.
 ## Dpkg::Options i.v.m. interactie a.g.v. restore /etc/libvirt configuratiebestanden.
