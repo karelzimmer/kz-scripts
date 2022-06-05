@@ -9,10 +9,14 @@
 sudo apt-get install --yes cups-backend-bjnp
 #2 sudo apt-get remove --yes cups-backend-bjnp
 
+#1 handbrake (dvd-ripper)
+sudo apt-get install --yes handbrake
+#2 sudo apt-get remove --yes handbrake
+
 #1 sound-juicer (cd-ripper)
 sudo apt-get install --yes sound-juicer
 #2 sudo apt-get remove --yes sound-juicer
 
-#1 vlc (mediaspeler en dvd-ripper)
+#1 vlc (mediaspeler)
 sudo snap install vlc
 #2 sudo snap remove vlc

@@ -82,7 +82,7 @@ sudo systemctl restart ssh.service
 sudo apt-get install --yes tree
 #2 sudo apt-get remove --yes tree
 
-#1 vlc (mediaspeler en dvd-ripper)
+#1 vlc (mediaspeler)
 sudo snap install vlc
 #2 sudo snap remove vlc
 
