@@ -8,3 +8,11 @@
 #1-cups-backend-bjnp (printerbackend voor Canon BJNP-protocol printerdriver)
 sudo apt-get install --yes cups-backend-bjnp
 #2 sudo apt-get remove --yes cups-backend-bjnp
+
+#1 sound-juicer (cd-ripper)
+sudo apt-get install --yes sound-juicer
+#2 sudo apt-get remove --yes sound-juicer
+
+#1 vlc (mediaspeler en dvd-ripper)
+sudo snap install vlc
+#2 sudo snap remove vlc
