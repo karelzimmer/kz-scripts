@@ -147,8 +147,10 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 
 
 function create_backup {
+    local       dev=''
     local       exclude=''
     local       temp_log=''
+    local   -i  rc=0
     local -i    rsync_rc=0
 
     exclude=$(mktemp -t 'kz-backup-XXXXXXXXXX')
@@ -170,7 +172,7 @@ snap/*/*/.cache
 EOF
 
     TITLE='Back-up maken'
-    TEXT='Backup voorbereiden...'
+    TEXT='Backup voorbereiden'
     if $OPTION_GUI; then
         rsync   --archive                   \
                 --verbose                   \
@@ -190,6 +192,7 @@ EOF
                 --title     "$TITLE"        \
                 --text      "$TEXT"         2> >($LOGCMD) || rsync_rc=$?
     else
+        info "$TEXT..."
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
@@ -214,12 +217,6 @@ $TARGET."
             exit $ERROR
             ;;
     esac
-}
-
-
-function term_script {
-    local       device=''
-    local   -i  rc=0
 
     TEXT='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
     if $OPTION_GUI; then
@@ -237,9 +234,10 @@ function term_script {
 $TEXT..."
         sync |& $LOGCMD || rc+=$?
     fi
-    TEXT=''
+
     if [[ $TARGET_MEDIUM == /media/* ]]; then
-        device='/dev/'$(
+        TEXT='USB-medium afkoppelen'
+        dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
                     "$TARGET_MEDIUM"    |
@@ -249,9 +247,25 @@ $TEXT..."
             cut     --delimiter=' '     \
                     --fields=1
         )
-        umount "$TARGET_MEDIUM" |& $LOGCMD  || rc+=$?
-        udisksctl lock --block-device "$device" |& $LOGCMD  || rc+=$?
-        udisksctl power-off --block-device "$device" |& $LOGCMD  || rc+=$?
+        if $OPTION_GUI; then
+            umount "$TARGET_MEDIUM";                    \
+            udisksctl lock --block-device "$dev";       \
+            udisksctl power-off --block-device "$dev"   |
+            zenity  --progress                          \
+                    --pulsate                           \
+                    --auto-close                        \
+                    --no-cancel                         \
+                    --width     600                     \
+                    --height    50                      \
+                    --title     "$TITLE"                \
+                    --text      "$TEXT"                 2> >($LOGCMD) || rc+=$?
+        else
+            info "
+    $TEXT..."
+            umount "$TARGET_MEDIUM" |& $LOGCMD || rc+=$?
+            udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
+            udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
+        fi
         if [[ $rc -eq $SUCCESS ]]; then
             TEXT='
 
@@ -262,6 +276,10 @@ Het USB-medium kan verwijderd worden.'
 ${YELLOW}Koppel zelf (veilig!) het USB-medium af."
         fi
     fi
+}
+
+
+function term_script {
     info "
 ${GREEN}De back-up is gemaakt.$TEXT${NORMAL}"
     exit $SUCCESS
