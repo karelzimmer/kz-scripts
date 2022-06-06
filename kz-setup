@@ -370,7 +370,7 @@ function process_option_apps {
     process_dfltfiles
     TEXT="De volgende APPs zijn beschikbaar:
 
-NUMMER APP (BESCHRIJVING)
+     APP (BESCHRIJVING)
 $(
     if !    grep    --no-messages               \
                     --regexp='^#1 '             \
@@ -378,10 +378,11 @@ $(
             cut     --delimiter=' '             \
                     --fields=2-                 |
             sort    --unique                    |
-            nl      --number-width=6            \
+            nl      --number-width=2            \
                     --number-format=rn          \
-                    --number-separator=' '      \
-                    --body-numbering=a; then
+                    --number-separator='] '     \
+                    --body-numbering=a          |
+            sed     's/^/[/'; then
         printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
         printf '%s\n' "
@@ -418,14 +419,15 @@ function process_option_cat {
 function process_option_files {
     TEXT="De volgende BESTANDen staan op het systeem:
 
-NUMMER BESTAND
+     BESTAND
 $(
     if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"* \
                     2> /dev/null                    |
-            nl      --number-width=6                \
+            nl      --number-width=2                \
                     --number-format=rn              \
-                    --number-separator=' '          \
-                    --body-numbering=a; then
+                    --number-separator='] '         \
+                    --body-numbering=a              |
+            sed     's/^/[/'; then
         printf '%s\n' "     0 Geen bestanden aanwezig op het systeem.
 
 $USAGELINE"
