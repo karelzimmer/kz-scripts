@@ -178,7 +178,7 @@ stoppen)"
 
 
 function log {
-    printf '%b\n' "$@" |& $LOGCMD "${2:---priority=info}"
+    printf '%b\n' "$1" |& $LOGCMD "${2:---priority=info}"
 }
 
 
