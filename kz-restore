@@ -149,7 +149,7 @@ function restore_backup {
     local -i rsync_rc=0
 
     TITLE='Back-up terugzetten'
-    TEXT="Restore voorbereiden..."
+    TEXT='Back-up terugzetten voorbereiden (dit kan even duren)'
     if $OPTION_GUI; then
         rsync   --archive                   \
                 --verbose                   \
@@ -166,6 +166,7 @@ function restore_backup {
                 --title     "$TITLE"        \
                 --text      "$TEXT"         2> >($LOGCMD) || rsync_rc=$?
     else
+        info "$TEXT..."
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
@@ -191,25 +192,41 @@ ruimte op $TARGET."
 
 
 function term_script {
-    local       device=''
+    local       dev=''
     local   -i  rc=0
 
     sync |& $LOGCMD || rc+=$?
     TEXT=''
     if [[ $SOURCE_MEDIUM == /media/* ]]; then
-        device='/dev/'$(
+        TEXT='Het USB-medium afkoppelen'
+        dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
-                    "$TARGET_MEDIUM"    |
+                    "$SOURCE_MEDIUM"    |
             head    -1                  |
             cut     --delimiter='-'     \
                     --fields=2          |
             cut     --delimiter=' '     \
                     --fields=1
         )
-        umount "$SOURCE_MEDIUM" |& $LOGCMD  || rc+=$?
-        udisksctl lock --block-device "$device" |& $LOGCMD  || rc+=$?
-        udisksctl power-off --block-device "$device" |& $LOGCMD  || rc+=$?
+        if $OPTION_GUI; then
+            umount "$SOURCE_MEDIUM";                    \
+            udisksctl lock --block-device "$dev";       \
+            udisksctl power-off --block-device "$dev"   |
+            zenity  --progress                          \
+                    --pulsate                           \
+                    --auto-close                        \
+                    --no-cancel                         \
+                    --width     600                     \
+                    --height    50                      \
+                    --title     "$TITLE"                \
+                    --text      "$TEXT"                 2> >($LOGCMD) || rc+=$?
+        else
+            info "$TEXT..."
+            umount "$SOURCE_MEDIUM" |& $LOGCMD || rc+=$?
+            udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
+            udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
+        fi
         if [[ $rc -eq $SUCCESS ]]; then
             TEXT='
 

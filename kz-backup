@@ -170,7 +170,7 @@ snap/*/*/.cache
 EOF
 
     TITLE='Back-up maken'
-    TEXT='Backup voorbereiden (dit kan even duren)'
+    TEXT='Back-up maken voorbereiden (dit kan even duren)'
     if $OPTION_GUI; then
         rsync   --archive                   \
                 --verbose                   \
