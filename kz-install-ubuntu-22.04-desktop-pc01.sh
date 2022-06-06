@@ -41,6 +41,15 @@ sudo systemctl restart ssh.service
 #2 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 #2 sudo apt-get remove --yes ssh
 
+#1 ufw (firewall)
+sudo apt-get install --yes gufw
+sudo ufw allow ssh
+# Allow X11 connections for tcp and udp.
+sudo ufw allow 6000:6007/tcp
+sudo ufw allow 6000:6007/udp
+sudo ufw enable
+#2 sudo ufw disable
+
 #1 vscode (editor)
 sudo snap install --classic code
 #2 sudo snap remove code
