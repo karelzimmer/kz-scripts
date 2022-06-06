@@ -147,11 +147,9 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 
 
 function create_backup {
-    local       dev=''
     local       exclude=''
     local       temp_log=''
-    local   -i  rc=0
-    local -i    rsync_rc=0
+    local   -i  rsync_rc=0
 
     exclude=$(mktemp -t 'kz-backup-XXXXXXXXXX')
 
@@ -172,7 +170,7 @@ snap/*/*/.cache
 EOF
 
     TITLE='Back-up maken'
-    TEXT='Backup voorbereiden'
+    TEXT='Backup voorbereiden (dit kan even duren)'
     if $OPTION_GUI; then
         rsync   --archive                   \
                 --verbose                   \
@@ -218,6 +216,13 @@ $TARGET."
             ;;
     esac
 
+}
+
+
+function term_script {
+    local       dev=''
+    local   -i  rc=0
+
     TEXT='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
     if $OPTION_GUI; then
         sync                                        |
@@ -235,8 +240,9 @@ $TEXT..."
         sync |& $LOGCMD || rc+=$?
     fi
 
+    TEXT=''
     if [[ $TARGET_MEDIUM == /media/* ]]; then
-        TEXT='USB-medium afkoppelen'
+        TEXT='Het USB-medium afkoppelen'
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
@@ -260,8 +266,7 @@ $TEXT..."
                     --title     "$TITLE"                \
                     --text      "$TEXT"                 2> >($LOGCMD) || rc+=$?
         else
-            info "
-    $TEXT..."
+            info "$TEXT..."
             umount "$TARGET_MEDIUM" |& $LOGCMD || rc+=$?
             udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
             udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
@@ -276,10 +281,7 @@ Het USB-medium kan verwijderd worden.'
 ${YELLOW}Koppel zelf (veilig!) het USB-medium af."
         fi
     fi
-}
 
-
-function term_script {
     info "
 ${GREEN}De back-up is gemaakt.$TEXT${NORMAL}"
     exit $SUCCESS
