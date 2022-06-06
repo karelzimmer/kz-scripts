@@ -85,9 +85,6 @@ sudo apt-get install --yes tree
 #1 ufw (firewall)
 sudo apt-get install --yes gufw
 sudo ufw allow ssh
-# Allow X11 connections for tcp and udp.
-sudo ufw allow 6000:6007/tcp
-sudo ufw allow 6000:6007/udp
 sudo ufw enable
 #2 sudo ufw disable
 
