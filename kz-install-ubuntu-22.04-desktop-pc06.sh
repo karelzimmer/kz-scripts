@@ -82,6 +82,14 @@ sudo systemctl restart ssh.service
 sudo apt-get install --yes tree
 #2 sudo apt-get remove --yes tree
 
+#1 ufw (firewall)
+sudo apt-get install --yes gufw
+sudo ufw allow ssh
+sudo ufw allow 6000:6007/tcp
+sudo ufw allow 6000:6007/udp
+sudo ufw enable
+#2 sudo ufw disable
+
 #1 vlc (mediaspeler)
 sudo snap install vlc
 #2 sudo snap remove vlc
