@@ -371,7 +371,7 @@ function process_option_apps {
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
     done
-    TEXT="De volgende apps zijn beschikbaar:
+    TEXT="De volgende APPs zijn beschikbaar:
 
 NUMMER APP (BESCHRIJVING)
 $(
@@ -419,7 +419,7 @@ function process_option_cat {
 
 
 function process_option_files {
-    TEXT="De volgende bestanden staan op het systeem:
+    TEXT="De volgende BESTANDen staan op het systeem:
 
 NUMMER BESTAND
 $(

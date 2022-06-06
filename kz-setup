@@ -368,19 +368,19 @@ function process_option_apps {
     # staandaard bestanden kz-setup-<distro>-<versie>-<editie>.sh en
     # kz-install-<distro>-<versie>-<editie>-<computernaam>.sh.
     process_dfltfiles
-    TEXT="De volgende apps zijn beschikbaar:
+    TEXT="De volgende APPs zijn beschikbaar:
 
 NUMMER APP (BESCHRIJVING)
 $(
-    if !    grep    --no-messages           \
-                    --regexp='^#1 '         \
-                    "${FILES_TO_PROCESS[@]}" |
-            cut     --delimiter=' '         \
-                    --fields=2-             |
-            sort    --unique                |
-            nl      --number-width=6        \
-                    --number-format=rn      \
-                    --number-separator=' '  \
+    if !    grep    --no-messages               \
+                    --regexp='^#1 '             \
+                    "${FILES_TO_PROCESS[@]}"    |
+            cut     --delimiter=' '             \
+                    --fields=2-                 |
+            sort    --unique                    |
+            nl      --number-width=6            \
+                    --number-format=rn          \
+                    --number-separator=' '      \
                     --body-numbering=a; then
         printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
@@ -416,7 +416,7 @@ function process_option_cat {
 
 
 function process_option_files {
-    TEXT="De volgende bestanden staan op het systeem:
+    TEXT="De volgende BESTANDen staan op het systeem:
 
 NUMMER BESTAND
 $(
