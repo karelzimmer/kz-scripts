@@ -53,12 +53,12 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 #2 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
+#2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 #2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 #2 gsettings reset org.gnome.shell.extensions.ding show-home
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
-#3 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
 #1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux
