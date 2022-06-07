@@ -254,6 +254,7 @@ $(
                 break
                 ;;
             *)
+                printf '%s' "${REWRITE_LINE}"
                 continue
                 ;;
         esac

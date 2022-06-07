@@ -59,6 +59,7 @@ declare     CURSOR_VISABLE=''
 declare     GREEN=''
 declare     NORMAL=''
 declare     RED=''
+declare     REWRITE_LINE=''
 declare     YELLOW=''
 
 ###############################################################################
@@ -291,6 +292,7 @@ function reset_terminal_attributes {
     GREEN=''
     NORMAL=''
     RED=''
+    REWRITE_LINE=''
     YELLOW=''
 }
 
@@ -306,6 +308,8 @@ function set_terminal_attributes {
     GREEN=${BOLD}$(tput setaf 2)
     NORMAL=$(tput sgr0)
     RED=${BOLD}$(tput setaf 1)
+    # shellcheck disable=SC2034
+    REWRITE_LINE=$(tput cuu1;tput el)
     YELLOW=${BOLD}$(tput setaf 3)
 }
 
