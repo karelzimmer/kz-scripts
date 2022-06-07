@@ -45,6 +45,8 @@ Argumenten:
   APP            opgegeven APPs instellen
   BESTAND        opgegeven BESTANDen verwerken"
 
+DASHES=$(printf '%.0s=' {1..79})
+readonly DASHES
 readonly EDITION_DEFAULT=desktop
 SPACES=$(printf '%.0s ' {1..79})
 readonly SPACES
