@@ -396,7 +396,9 @@ $command, code: $rc ($rc_desc)" --priority=debug
             log "Ended (code=exited, status=$status)." --priority=notice
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            logcmd_check 'Eén of meerdere opdrachten zijn fout gegaan.'
+            if [[ $rc -gt $SUCCESS ]]; then
+                logcmd_check 'Eén of meerdere opdrachten zijn fout gegaan.'
+            fi
             exit "$rc"
             ;;
         *)
