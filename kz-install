@@ -45,6 +45,8 @@ Argumenten:
   APP            opgegeven APPs installeren
   BESTAND        opgegeven BESTANDen verwerken"
 
+DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO
 readonly EDITION_DEFAULT=desktop
 VERSION=$(lsb_release --release --short)
 readonly VERSION

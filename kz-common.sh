@@ -29,8 +29,6 @@ readonly OPTIONS_HELP_COMMON="\
 
 DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
-DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly DISTRO
 
 ###############################################################################
 # Common global variables
@@ -157,7 +155,7 @@ function init_script {
     CMDLINE_ARGS=("$@")
     log "$DASHES"
     log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
-    if [[ $DISTRO = 'debian' && $UID -ne 0 ]]; then
+    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig
 (++) tot mijn X-sessie voor het kunnen gebruiken van
 (++) zenity in kz-scripts met RUN_AS_SUPERUSER=true:
