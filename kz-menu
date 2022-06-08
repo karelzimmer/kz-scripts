@@ -29,15 +29,10 @@ Opties:
   -g, --gui      start in grafische modus
 $OPTIONS_HELP_COMMON"
 
-DASHES=$(printf '%.0s=' {1..79})
-readonly DASHES
-SPACES=$(printf '%.0s ' {1..79})
-readonly SPACES
-
 readonly MENU1_TITLE=Installatiemenu
 readonly MENU1_HEAD="\
 ${DASHES:0:57}
-=${SPACES:0:20}$MENU1_TITLE${SPACES:0:20}=
+=                    $MENU1_TITLE                    =
 ${DASHES:0:57}"
 readonly -a MENU1_ACTIONS=(
     [1]='Installatie voorbereiden'
@@ -60,7 +55,7 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 readonly MENU2_TITLE=Opdrachtenmenu
 readonly MENU2_HEAD="\
 ${DASHES:0:57}
-=${SPACES:0:20}$MENU2_TITLE${SPACES:0:21}=
+=                    $MENU2_TITLE                    =
 ${DASHES:0:57}"
 readonly -a MENU2_ACTIONS=(
     [1]='Back-up maken'

@@ -45,11 +45,7 @@ Argumenten:
   APP            opgegeven APPs installeren
   BESTAND        opgegeven BESTANDen verwerken"
 
-DASHES=$(printf '%.0s=' {1..79})
-readonly DASHES
 readonly EDITION_DEFAULT=desktop
-SPACES=$(printf '%.0s ' {1..79})
-readonly SPACES
 VERSION=$(lsb_release --release --short)
 readonly VERSION
 CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
@@ -727,7 +723,7 @@ function execute_command {
         if [[ $cmd_seq_num -eq 1 ]]; then
             printf "$STATUS_BUSY %b" "$app_description_line\r"
         else
-            printf "$STATUS_BUSY ${SPACES:0:7}%b" "${app_description_line:7}\r"
+            printf "$STATUS_BUSY        %b" "${app_description_line:7}\r"
         fi
     fi
 

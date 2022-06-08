@@ -27,6 +27,8 @@ readonly OPTIONS_HELP_COMMON="\
   -u, --usage    toon een korte gebruikssamenvatting
   -v, --version  toon de programmaversie"
 
+DASHES=$(printf '%.0s=' {1..79})
+readonly DASHES
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
 
@@ -83,7 +85,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 function error {
     if $OPTION_GUI; then
         if $ERROR_MSG_TO_LOG; then
-            log 'ERROR_MSG_TO_LOG is set, no zenity error msg' --priority=debug
+            log 'ERROR_MSG_TO_LOG is set: msg to log not user' --priority=debug
             log "$@"
         else
             TITLE="Foutmelding $DISPLAY_NAME"
@@ -147,12 +149,13 @@ function init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
     # Enable code-stepping:
-    #     trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
+    # trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     CMDLINE_ARGS=("$@")
+    log "$DASHES"
     log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
     if [[ $DISTRO = 'debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig
@@ -190,7 +193,9 @@ function logcmd_check {
     {
         printf "${RED}%s\n${NORMAL}" "$@"
         printf "${BOLD}%s\n${NORMAL}" 'Logberichten:'
+        log "$DASHES"
         eval "$LOGCMD_CHECK"
+        log "$DASHES"
         printf "${BOLD}%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
     } > "$temp_log"
     if $OPTION_GUI; then
@@ -391,6 +396,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
         exit)
             signal_exit
             log "Ended (code=exited, status=$status)." --priority=notice
+            log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
