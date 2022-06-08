@@ -40,7 +40,7 @@ declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD_CHECK=''
-declare     ERROR_MSG_TO_LOG=false
+declare     LOG_ERROR=false
 declare     LESS_OPTIONS=''
 declare     LOGCMD=''
 declare     OPTION_GUI=false
@@ -84,8 +84,8 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 function error {
     if $OPTION_GUI; then
-        if $ERROR_MSG_TO_LOG; then
-            log 'ERROR_MSG_TO_LOG is set: msg to log not user' --priority=debug
+        if $LOG_ERROR; then
+            log 'LOG_ERROR is set: error to log, not to user' --priority=debug
             log "$@"
         else
             TITLE="Foutmelding $DISPLAY_NAME"
