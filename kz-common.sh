@@ -186,31 +186,6 @@ function log {
 }
 
 
-function logcmd_check {
-    local temp_log=''
-
-    temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-    {
-        printf "${RED}%s\n${NORMAL}" "$@"
-        printf "${BOLD}%s\n${NORMAL}" 'Logberichten:'
-        eval "$LOGCMD_CHECK"
-        printf "${BOLD}%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
-    } > "$temp_log"
-    if $OPTION_GUI; then
-        TITLE="Logberichten $DISPLAY_NAME"
-        zenity  --text-info             \
-                --width     1200        \
-                --height    600         \
-                --title     "$TITLE"    \
-                --filename  "$temp_log" \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
-    else
-        less "$LESS_OPTIONS" "$temp_log"
-    fi
-    rm "$temp_log"
-}
-
-
 function process_common_options {
     while true; do
         case $1 in
@@ -397,7 +372,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             if [[ $rc -gt $SUCCESS ]]; then
-                logcmd_check 'Eén of meerdere opdrachten zijn fout gegaan.'
+                signal_exit_log 'Eén of meerdere opdrachten zijn fout gegaan.'
             fi
             exit "$rc"
             ;;
@@ -445,6 +420,31 @@ ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
             return $SUCCESS
             ;;
     esac
+}
+
+
+function signal_exit_log {
+    local temp_log=''
+
+    temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
+    {
+        printf "${RED}%s\n${NORMAL}" "$@"
+        printf "${BOLD}%s\n${NORMAL}" 'Logberichten:'
+        eval "$LOGCMD_CHECK"
+        printf "${BOLD}%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
+    } > "$temp_log"
+    if $OPTION_GUI; then
+        TITLE="Logberichten $DISPLAY_NAME"
+        zenity  --text-info             \
+                --width     1200        \
+                --height    600         \
+                --title     "$TITLE"    \
+                --filename  "$temp_log" \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
+    else
+        less "$LESS_OPTIONS" "$temp_log"
+    fi
+    rm "$temp_log"
 }
 
 
