@@ -193,9 +193,7 @@ function logcmd_check {
     {
         printf "${RED}%s\n${NORMAL}" "$@"
         printf "${BOLD}%s\n${NORMAL}" 'Logberichten:'
-        log "$DASHES"
         eval "$LOGCMD_CHECK"
-        log "$DASHES"
         printf "${BOLD}%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
     } > "$temp_log"
     if $OPTION_GUI; then
@@ -398,6 +396,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             log "Ended (code=exited, status=$status)." --priority=notice
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+            logcmd_check 'Eén of meerdere opdrachten zijn fout gegaan.'
             exit "$rc"
             ;;
         *)
