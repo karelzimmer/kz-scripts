@@ -731,9 +731,9 @@ function execute_command {
 
     log "$app_description_line"
     log "${BLUE}$cmd${NORMAL}"
-    LOG_ERROR=true
+    ERRORS_LOGONLY=true
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
-    LOG_ERROR=false
+    ERRORS_LOGONLY=false
     if [[ $cmd_rc -gt $MAXRC ]]; then
         MAXRC=$cmd_rc
     fi
