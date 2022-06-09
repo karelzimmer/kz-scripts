@@ -5,6 +5,14 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
+#-add-hosts (koppel IP-adressen aan hostnamen)
+sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
+echo '192.168.1.112 pc06' | sudo tee --append /etc/hosts
+echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
+
 #1-bluetooth (externe bluetooth-adapter)
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #2 sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
