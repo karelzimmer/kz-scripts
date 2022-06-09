@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
 
-#-add-hosts (koppel IP-adressen aan hostnamen)
+#1-add-hosts (koppel IP-adressen aan hostnamen)
 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 echo '192.168.1.112 pc06' | sudo tee --append /etc/hosts
