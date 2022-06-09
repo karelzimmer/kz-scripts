@@ -50,10 +50,11 @@ readonly DISTRO
 readonly EDITION_DEFAULT=desktop
 VERSION=$(lsb_release --release --short)
 readonly VERSION
-CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-readonly CMDS_FILE
+
 APPS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.apps")
 readonly APPS_FILE
+CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
+readonly CMDS_FILE
 SIM_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sim")
 readonly SIM_FILE
 
