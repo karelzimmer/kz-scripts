@@ -13,6 +13,11 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 
+#1-gdm (inlogscherm dual-monitor)
+sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml
+sudo chown gdm:gdm ~gdm/.config/monitors.xml
+#2 sudo rm ~gdm/.config/monitors.xml
+
 #1 ansible (automatiseringsplatform)
 sudo apt-get install --yes ansible
 #2 sudo apt-get remove --yes ansible
@@ -20,11 +25,6 @@ sudo apt-get install --yes ansible
 #1 cockpit (browsergebaseerd beheer)
 sudo apt-get install --yes cockpit cockpit-pcp
 #2 sudo apt-get remove --yes cockpit
-
-#1-gdm (inlogscherm dual-monitor)
-sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml
-sudo chown gdm:gdm ~gdm/.config/monitors.xml
-#2 sudo rm ~gdm/.config/monitors.xml
 
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes aspell-nl git
