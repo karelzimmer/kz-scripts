@@ -19,30 +19,6 @@ kz setup \- Apps instellen.
 .SH BESCHRIJVING
 \fBkz setup\fR stelt apps in en wijzigt gebruikersinstellingen.
 .sp
-De opdrachten die standaard meegeleverd worden bij \fBkz setup\fR zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
-.sp
-.sp
-Standaard verwerkt \fBkz setup\fR de volgende twee bestanden:
-.br
-- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh (verplicht aanwezig)
-.br
-- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>-\
-<gebruikersnaam>.sh (niet verplicht aanwezig)
-.sp
-Bijvoorbeeld kz-setup-ubuntu-20.04-desktop.sh en
-kz-setup-ubuntu-20.04-desktop-pc02-jan.sh.
-.sp
-Deze bestanden ("instelbestanden") bevatten opdrachten voor het instellen van
-apps en het wijzigen van gebruikersinstellingen voor de huidige distributie,
-versie, en \fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
-.sp
-Standaard wordt als \fIEDITIE\fR desktop gebruikt.
-.sp
-De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
-.br
-Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
-.sp
 In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
 \fBkz setup\fR worden uitgevoerd door te zoeken naar \fBapps\fR, klik op
 \fBApps instellen\fR.
@@ -50,41 +26,68 @@ In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
 Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het aanpassen
 van systeeminstellingen.
 .sp
+De opdrachten die standaard meegeleverd worden bij \fBkz setup\fR zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.sp
+Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
+.br
+- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh
+.br
+- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>-\
+<gebruikersnaam>.sh
+.sp
+Bijvoorbeeld kz-setup-ubuntu-20.04-desktop.sh en
+kz-setup-ubuntu-20.04-desktop-pc02-jan.sh.
+.sp
+Deze instelbestanden bevatten opdrachten voor het instellen van apps en het
+wijzigen van gebruikersinstellingen voor de huidige distributie, versie, en
+\fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
+Standaard wordt als \fIEDITIE\fR desktop gebruikt.
+.sp
+Voor de indeling van de instellbestanden zie de sectie \fBBESTANDSINDELING\fR
+hieronder.
+.sp
+Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
+aanwezige standaard instellbestanden opgenomen in de lijst van te verwerken
+bestanden.
+.sp
 Met optie \fB-e\fR, \fB--editie\fR is de \fIEDITIE\fR aan te passen,
 bijvoorbeeld \fIEDITIE\fR server.
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
-systeem.
-.br
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van instelbestanden aanwezig op
+het systeem.
+.sp
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBkz-setup-\fR' en te eindigen met '\fB.sh\fR'.
 .br
-Iets anders wordt beschouwd als een app, zie hierna.
-.sp
-Voor de indeling van de bestanden zie sectie \fBBESTANDSINDELING\fR hieronder.
+Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
+.br
+De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
+bestanden.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-de twee standaard bestanden voor de huidige distributie en versie, bijvoorbeeld
+de twee standaard-bestanden voor de huidige distributie en versie, bijvoorbeeld
 ubuntu 20.04.
-.br
-Het is mogelijk om \fIAPP\fRs op te geven.
 .sp
-Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in beide
-standaard bestanden voor de huidige distributie en versie, bijvoorbeeld ubuntu
-20.04, en worden de regels gekopieerd naar een tijdelijk bestand.
+Het is mogelijk om \fIAPP\fRs op te geven.
+.br
+Per opgegeven \fIAPP\fR worden de bijbehorende opdrachten opgezocht in beide
+standaard instelbestanden en worden de opdrachten gekopieerd naar een tijdelijk
+bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
-Voor bijvoorbeeld ubuntu 20.04 op laptop voor jan worden de apps opgezocht in
+Voor bijvoorbeeld ubuntu 20.04 op pc02 voor jan worden de apps opgezocht in
 kz-setup-ubuntu-20.04-desktop.sh en
 kz-setup-ubuntu-20.04-desktop-pc02-jan.sh.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de bestanden.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de instelbestanden.
 .sp
-Optie \fB-l\fR, \fB--list\fR legt instellingen vast in map \fBkz\fR in
-Documenten.
-In deze map bestanden met gegevens over eerder gekozen gebruikersfoto,
-bureaubladachtergrond, en favorieten, en geschiedenis van gebruikte opdrachten.
+Optie \fB-l\fR, \fB--list\fR legt instellingen vast in Persoonlijke map /
+Documenten / kz.
+.br
+In map kz staan bestanden met gegevens over eerder gekozen gebruikersfoto,
+bureaubladachtergrond, en favorieten.
 .br
 Deze gevens zijn te gebruiken om het instellen te controleren op volledigheid.
 .sp
@@ -93,8 +96,8 @@ Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden ("instelbestanden") dienen te beginnen met\
- '\fBkz-setup-\fR' en te eindigen met '\fB.sh\fR'.
+De te verwerken bestanden dienen te beginnen met '\fBkz-setup-\fR' en te
+eindigen met '\fB.sh\fR'.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
@@ -245,7 +248,7 @@ Toon de versie, de auteur, en het auteursrecht.
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus
-(gui=graphical user interface;grafische gebruikersinterface).
+(gui=graphical user interface; grafische gebruikersinterface).
 .\"
 .\"
 .SH STOPSTATUS
@@ -256,25 +259,24 @@ afsluitwaarde 1.
 .SH BESTANDEN
 /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh
 .RS
-Standaard instelbestand als er geen \fIBESTAND\fRen zijn opgegeven,
-\fIEDITIE\fR is standaard desktop.
+Standaard instelbestand, \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
 /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .RS
-Instelbestand voor <computernaam> als er geen \fIBESTAND\fRen zijn \
-opgegeven, \fIEDITIE\fR is standaard
+Standaard instelbestand voor <computernaam>, \fIEDITIE\fR is standaard
 desktop.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.apps
 .RS
-Tijdelijk instelbestand van opgegeven apps.
+Tijdelijk instelbestand met opdrachten behorend bij opgegeven apps.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.cmds
 .RS
-Tijdelijk instelbestand.
+Tijdelijk instelbestand met alle uit te voeren opdrachten.
+.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.sim
@@ -315,7 +317,7 @@ https://karelzimmer.nl
 .sp
 \fBkz setup\fR
 .RS
-Stel in alles wat in de standaard bestanden staat.
+Stel in alles wat in de standaard instellbestanden staat.
 Hiervoor is ook starter \fBApps instellen\fR beschikbaar.
 .RE
 .sp

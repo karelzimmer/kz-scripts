@@ -19,75 +19,75 @@ kz install \- Apps installeren.
 .SH BESCHRIJVING
 \fBkz install\fR installeert apps en wijzigt systeeminstellingen.
 .sp
-De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
-.sp
-Standaard verwerkt \fBkz install\fR de volgende twee bestanden:
-.br
-- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh (verplicht
-aanwezig)
-.br
-- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
-(niet verplicht aanwezig)
-.sp
-Bijvoorbeeld kz-install-ubuntu-20.04-desktop.sh en
-kz-install-ubuntu-20.04-desktop-pc02.sh.
-.sp
-Deze bestanden ("installatiebestanden") bevatten opdrachten voor het
-installeren van apps en het wijzigen van systeeminstellingen voor de huidige
-distributie, versie, en \fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
-.sp
-De regels in deze bestanden worden gekopieerd naar een tijdelijk bestand.
-.br
-Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
-.sp
-Standaard wordt als \fIEDITIE\fR desktop gebruikt.
-.sp
-In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
-\fBkz install\fR worden uitgevoerd door te zoeken naar \fBapps\fR, klik op
-\fBApps installeren\fR.
+In een grafische werkomgeving kan opdracht \fBkz install\fR worden uitgevoerd
+door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
 .sp
 Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
 gebruikersinstellingen.
 .sp
+De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.sp
+Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
+.br
+- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh
+.br
+- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+.sp
+Bijvoorbeeld kz-install-ubuntu-20.04-desktop.sh en
+kz-install-ubuntu-20.04-desktop-pc02.sh.
+.sp
+Deze installatiebestanden bevatten opdrachten voor het installeren van apps en
+het wijzigen van systeeminstellingen voor de huidige distributie, versie, en
+\fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
+Standaard wordt als \fIEDITIE\fR desktop gebruikt.
+.sp
+Voor de indeling van de installatiebestanden zie de sectie
+\fBBESTANDSINDELING\fR hieronder.
+.sp
+Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
+aanwezige standaard installatiebestanden opgenomen in de lijst van te verwerken
+bestanden.
+.sp
 Met optie \fB-e\fR, \fB--editie\fR is de \fIEDITIE\fR aan te passen,
 bijvoorbeeld \fIEDITIE\fR server.
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van bestanden aanwezig op het
-systeem.
-.br
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van installatiebestanden aanwezig
+op het systeem.
+.sp
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
 beginnen met '\fBkz-install-\fR' en te eindigen met '\fB.sh\fR'.
 .br
 Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
-.sp
-Voor de indeling van de bestanden zie de sectie \fBBESTANDSINDELING\fR
-hieronder.
+.br
+De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
+bestanden.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle bestanden voor de huidige distributie en versie, bijvoorbeeld ubuntu
-20.04.
-.br
+alle installatiebestanden voor de huidige distributie en versie, bijvoorbeeld
+ubuntu 20.04.
+.sp
 Het is mogelijk om \fIAPP\fRs op te geven.
-.sp
-Als \fIAPP\fRs zijn opgegeven worden de regels van deze app opgezocht in alle
-bestanden die beschikbaar zijn voor de huidige distributie en versie,
-bijvoorbeeld ubuntu 20.04, en worden de eerstgevonden regels gekopieerd naar
-een tijdelijk bestand.
 .br
-Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
+Per opgegeven \fIAPP\fR worden de bijbehorende opdrachten opgezocht in alle
+standaard installatiebestanden en worden de eerstgevonden opdrachten gekopieerd
+naar een tijdelijk bestand.
+.br
+De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
+bestanden.
 .sp
-Bijvoorbeeld voor ubuntu 20.04 op laptop worden de apps opgezocht in
-kz-install-ubuntu-20.04-desktop.sh, kz-install-ubuntu-20.04-desktop-pc02.sh,
+Bijvoorbeeld voor ubuntu 20.04 op pc02 worden de apps opgezocht in
+kz-install-ubuntu-20.04-desktop.sh, kz-install-ubuntu-20.04-desktop-pc01.sh,
 kz-install-ubuntu-20.04-desktop-pc02.sh,
 kz-install-ubuntu-20.04-desktop-pc03.sh, en
 kz-install-ubuntu-20.04-desktop-pc04.sh.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de bestanden.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de installatiebestanden.
 .sp
-Optie \fB-l\fR, \fB--list\fR maakt bestand Applijst aan in map \fBkz\fR in
-Documenten.
-Hierin overzichten van welke pakketten handmatig zijn geïnstalleerd, welke
+Optie \fB-l\fR, \fB--list\fR maakt bestand Applijst aan in Persoonlijke map /
+Documenten / kz.
+.br
+In bestand Applijst staat welke pakketten handmatig zijn geïnstalleerd, welke
 snaps zijn geïnstalleerd, en welke pakketbronnen ("repositories" of "repo's")
 zijn toegevoegd.
 .br
@@ -97,8 +97,8 @@ Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden ("installatiebestanden") dienen te beginnen met\
- '\fBkz-install-\fR' en te eindigen met '\fB.sh\fR'.
+De te verwerken bestanden dienen te beginnen met '\fBkz-install-\fR' en te
+eindigen met '\fB.sh\fR'.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
@@ -247,7 +247,7 @@ Toon de versie, de auteur, en het auteursrecht.
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus
-(gui=graphical user interface;grafische gebruikersinterface).
+(gui=graphical user interface; grafische gebruikersinterface).
 .\"
 .\"
 .SH STOPSTATUS
@@ -258,24 +258,23 @@ afsluitwaarde 1.
 .SH BESTANDEN
 /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh
 .RS
-Standaard installatiebestand als er geen \fIBESTAND\fRen zijn opgegeven, \
-\fIEDITIE\fR is standaard desktop.
+Standaard installatiebestand, \fIEDITIE\fR is standaard desktop.
 .RE
 .sp
 /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .RS
-Installatiebestand voor <computernaam> als er geen \fIBESTAND\fRen zijn
-opgegeven, \fIEDITIE\fR is standaard desktop.
+Standaard installatiebestand voor <computernaam>, \fIEDITIE\fR is standaard
+desktop.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.apps
 .RS
-Tijdelijk installatiebestand van opgegeven apps.
+Tijdelijk installatiebestand met opdrachten behorend bij opgegeven apps.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.cmds
 .RS
-Tijdelijk installatiebestand.
+Tijdelijk installatiebestand met alle uit te voeren opdrachten.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.sim
@@ -301,7 +300,7 @@ https://karelzimmer.nl
 .sp
 \fBkz install\fR
 .RS
-Installeer alles wat in de standaard installatiebestenden staat.
+Installeer alles wat in de standaard installatiebestanden staat.
 Hiervoor is ook starter \fBApps installeren\fR beschikbaar.
 .RE
 .sp

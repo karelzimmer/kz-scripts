@@ -19,6 +19,10 @@ kz restore \- Back-up terugzetten.
 .SH BESCHRIJVING
 \fBkz restore\fR zet een back-up (reservekopie) van de Persoonlijke map terug.
 .sp
+In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
+\fBkz restore\fR worden uitgevoerd door te zoeken naar \fBback\fR, klik op
+\fBReservekopie terugzetten\fR.
+.sp
 De back-up wordt verwacht op een aangekoppeld USB-medium zoals een USB externe
 harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, bijvoorbeeld
 /media/jan/backupdisk/backup-pc02-jan.
@@ -34,10 +38,6 @@ voordat men het daadwerkelijk uitvoert.
 Voor het terugzetten van de back-up wordt rsync gebruikt.
 .sp
 Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
-.sp
-In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
-\fBkz restore\fR worden uitgevoerd door te zoeken naar \fBback\fR, klik op
-\fBReservekopie terugzetten\fR.
 .\"
 .\"
 .SH OPTIES
@@ -59,7 +59,7 @@ Toon de versie, de auteur, en het auteursrecht.
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus
-(gui=graphical user interface;grafische gebruikersinterface).
+(gui=graphical user interface; grafische gebruikersinterface).
 .\"
 .\"
 .SH STOPSTATUS

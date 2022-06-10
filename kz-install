@@ -485,7 +485,7 @@ function process_option_list {
     fi
 
     info '
-De instellingen zijn vastgelegd in de map kz in Documenten.
+De instellingen zijn vastgelegd in Persoonlijke map / Documenten / kz.
 In map kz het bestand Apps met de eerder geïnstalleerde apps.
 Dit bestand kan worden gebruikt voor het nalopen van de installatie.'
 }
