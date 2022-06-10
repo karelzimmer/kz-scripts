@@ -486,7 +486,7 @@ function process_option_list {
     fi
 
     info '
-De instellingen zijn vastgelegd in Persoonlijke map / Documenten / kz.
+De instellingen zijn vastgelegd in map kz in Documenten.
 In map kz de bestanden met de eerder gebruikte Gebruikersfoto, Achtergrond, en
 Favorieten.
 Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
