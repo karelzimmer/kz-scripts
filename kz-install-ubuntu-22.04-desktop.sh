@@ -32,6 +32,9 @@ sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
 #2 sudo apt-get update
 
 #1 citrix (telewerken)
+## Afhankelijkheid sinds Ubuntu 22.04.
+wget --no-verbose --output-document=/tmp/libidn11.deb "https://karelzimmer.nl/downloads/citrix/libidn11_1.33-3_amd64.deb"
+sudo apt-get install --yes /tmp/libidn11.deb
 ## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
 wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/citrix/icaclient_20.04.0.21_amd64.deb"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
