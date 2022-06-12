@@ -456,7 +456,7 @@ function process_option_list {
     local text3='[3/3]  Favorieten vastleggen'
     local file3="$tgtdir"/Favorieten
 
-    mkdir --parents "$tgtdir"
+    mkdir --parents "$tgtdir" |& $LOGCMD
 
     TITLE='Instellijst maken'
     if $OPTION_GUI; then

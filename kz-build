@@ -272,7 +272,7 @@ function build_deb {
 
     # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
     for dir in "${DEB_TARGETS[@]}"; do
-        mkdir --parents "$dir"
+        mkdir --parents "$dir" |& $LOGCMD
     done
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
