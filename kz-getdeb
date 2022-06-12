@@ -371,7 +371,7 @@ function download_website {
 
 function term_script {
     local srcdir=/usr/share/doc/kz
-    local tgtdir=$HOME/kz
+    local tgtdir=$HOME/kz-data
 
     mkdir --parents "$tgtdir" |& $LOGCMD
     # Clean-up.

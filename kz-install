@@ -452,7 +452,7 @@ function process_option_list {
     local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
     local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
     local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
-    local tgtdir=$HOME/kz
+    local tgtdir=$HOME/kz-data
     local file=$tgtdir/Apps
 
     mkdir --parents "$tgtdir" |& $LOGCMD

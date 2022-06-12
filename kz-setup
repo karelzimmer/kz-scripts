@@ -447,7 +447,7 @@ BESTAND...${NORMAL}"
 
 
 function process_option_list {
-    local tgtdir=$HOME/kz
+    local tgtdir=$HOME/kz-data
     local text0='Opdrachten worden verwerkt'
     local text1='[1/3]  Gebruikersfoto vastleggen'
     local file1="$tgtdir"/Gebruikersfoto
