@@ -452,13 +452,10 @@ function process_option_list {
     local text1="[1/3]  Bepaal welke pakketten handmatig zijn geïnstalleerd"
     local text3='[2/3]  Bepaal welke snaps zijn geïnstalleerd'
     local text2="[3/3]  Bepaal welke pakketbronnen zijn toegevoegd"
-    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
-        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    fi
-    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
-    local file=$docs_dir/Apps
+    local tgtdir=$HOME/kz
+    local file=$tgtdir/Apps
 
-    mkdir --parents "$docs_dir" |& $LOGCMD
+    mkdir --parents "$tgtdir" |& $LOGCMD
 
     TITLE='Applijst maken'
     if $OPTION_GUI; then

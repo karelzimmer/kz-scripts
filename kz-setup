@@ -447,19 +447,16 @@ BESTAND...${NORMAL}"
 
 
 function process_option_list {
-    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
-        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    fi
-    local docs_dir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
+    local tgtdir=$HOME/kz
     local text0='Opdrachten worden verwerkt'
     local text1='[1/3]  Gebruikersfoto vastleggen'
-    local file1="$docs_dir"/Gebruikersfoto
+    local file1="$tgtdir"/Gebruikersfoto
     local text2='[2/3]  Achtergrond vastleggen'
-    local file2="$docs_dir"/Achtergrond
+    local file2="$tgtdir"/Achtergrond
     local text3='[3/3]  Favorieten vastleggen'
-    local file3="$docs_dir"/Favorieten
+    local file3="$tgtdir"/Favorieten
 
-    mkdir --parents "$docs_dir"
+    mkdir --parents "$tgtdir"
 
     TITLE='Instellijst maken'
     if $OPTION_GUI; then

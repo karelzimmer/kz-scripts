@@ -370,25 +370,23 @@ function download_website {
 
 
 function term_script {
-    if [[ -f "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs ]]; then
-        source "${XDG_CONFIG_HOME:-~/.config}"/user-dirs.dirs
-    fi
     local srcdir=/usr/share/doc/kz
-    local tgtdir=${XDG_DOCUMENTS_DIR:-$HOME/Documenten}/kz
+    local tgtdir=$HOME/kz
 
     mkdir --parents "$tgtdir" |& $LOGCMD
     # Clean-up.
     rm --force "$tgtdir"/*
-    # Populate with checklist, and 'kz-install --list', and 'kz-setup --list'.
+    # Populate with checklist.
+    # Also 'kz-install --list' and 'kz-setup --list' will use this location.
     cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
-        "$tgtdir" |& $LOGCMD                                || true
+        "$tgtdir"                                           |& $LOGCMD || true
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
 Volg nu de stappen zoals beschreven
 in de Checklist installatie.
 
 Checklist installatie is te vinden:
-- in de map kz in Documenten
+- in de map $tgtdir
 - in de map $srcdir
 - op de site https://karelzimmer.nl,
   onder Linux
