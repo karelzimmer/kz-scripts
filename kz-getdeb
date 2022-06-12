@@ -373,7 +373,7 @@ function term_script {
     local srcdir=/usr/share/doc/kz
     local tgtdir=$HOME/kz
 
-    mkdir --parents "$tgtdir"
+    mkdir --parents "$tgtdir" |& $LOGCMD
     # Clean-up.
     rm --force "$tgtdir"/*
     # Populate with checklist.
