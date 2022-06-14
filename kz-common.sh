@@ -108,6 +108,7 @@ function check_user {
         if [[ $UID -ne 0 ]]; then
             if ! groups "$USER" | grep --quiet  --regexp='sudo'; then
                 info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
+                exit $SUCCESS
             fi
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
             exec sudo "$0" "${CMDLINE_ARGS[@]}"
