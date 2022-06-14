@@ -169,15 +169,14 @@ Voer uw wachtwoord in:'
                 TEXT='Er is een fout opgetreden.
 
 Mogelijke oorzaak:
-1. Geen beheerder (kies <Stoppen>)
-2. Geen of verkeerd wachtwoord ingevoerd
-3. Op vorig scherm is <Annuleren> gekozen'
+1. Geen of verkeerd wachtwoord ingevoerd
+2. Op vorig scherm is <Annuleren> gekozen'
                 if ! whiptail   --backtitle     "$DISPLAY_NAME" \
                                 --title         'Fout'          \
                                 --yes-button    'Opnieuw'       \
                                 --no-button     'Stoppen'       \
                                 --yesno         "$TEXT"         \
-                                12 45; then
+                                11 45; then
                     TEXT='Programma is gestopt door de gebruiker'
                     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                                         --title     'Gestopt'       \
