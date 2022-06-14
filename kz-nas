@@ -308,7 +308,7 @@ function create_mountpoint {
     fi
 
     printf '%s\n' 'Maak NAS koppelpunt...'
-    mkdir "$NAS_MOUNT_POINT" |& $LOGCMD
+    mkdir --parents "$NAS_MOUNT_POINT" |& $LOGCMD
     chmod '777' "$NAS_MOUNT_POINT" |& $LOGCMD
 }
 
