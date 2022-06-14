@@ -107,7 +107,7 @@ function check_user {
     if $RUN_AS_SUPERUSER; then
         if [[ $UID -ne 0 ]]; then
             if ! groups "$USER" | grep --quiet  --regexp='sudo'; then
-                info 'Alleen uit te voeren door de beheerder.'
+                info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
             fi
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
             exec sudo "$0" "${CMDLINE_ARGS[@]}"
