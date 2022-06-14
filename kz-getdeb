@@ -95,8 +95,16 @@ function check_input {
 
     clear -x
     check_user
+    check_group
     check_developer
     check_on_ac_power
+}
+
+
+function check_group {
+    if ! groups "$USER" | grep --quiet  --regexp='sudo'; then
+        term_script
+    fi
 }
 
 
