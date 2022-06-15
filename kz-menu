@@ -540,7 +540,8 @@ function execute_command {
         kz-install|kz-nas)
             # Zogenaamde root/sudo-scripts.
             if ! check_user_sudo; then
-                info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
+                info '
+Reeds uitgevoerd door de beheerder, geen actie vereist.'
                 return $SUCCESS
             fi
             if $OPTION_GUI; then
