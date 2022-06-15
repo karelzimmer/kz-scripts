@@ -538,7 +538,11 @@ function execute_command {
         )
     case $exec in
         kz-install|kz-nas)
-            # Zogenaamde sudo-scripts.
+            # Zogenaamde root/sudo-scripts.
+            if ! groups "$USER" | grep --quiet  --regexp='sudo'; then
+                info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
+                return $SUCCESS
+            fi
             if $OPTION_GUI; then
                 pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
                 log "$command: rc=$cmd_rc"
@@ -551,7 +555,7 @@ function execute_command {
             fi
             ;;
         *)
-            # Zogenaamde non-sudo-scripts.
+            # Zogenaamde non-root/sudo-scripts.
             if $OPTION_GUI; then
                 "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
                 log "$command: rc=$cmd_rc"
