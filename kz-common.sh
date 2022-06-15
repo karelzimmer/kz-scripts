@@ -106,7 +106,7 @@ function error {
 function check_user_root {
     if $RUN_AS_SUPERUSER; then
         if ! check_user_sudo; then
-            info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
+            info 'Reeds uitgevoerd door de beheerder.'
             exit $SUCCESS
         fi
         if [[ $UID -ne 0 ]]; then
