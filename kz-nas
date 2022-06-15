@@ -108,8 +108,8 @@ function check_input {
         exit $ERROR
     fi
 
-    check_user
-    # Na check_user voor toegang tot media.
+    check_user_root
+    # Na check_user_root voor toegang tot media.
     request_input
 }
 

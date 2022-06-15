@@ -103,13 +103,25 @@ function error {
 }
 
 
-function check_user {
+function check_group_sudo {
+    if [[ $UID -eq 0 ]]; then
+        return $SUCCESS
+    elif groups "$USER" | grep --quiet  --regexp='sudo'; then
+        return $SUCCESS
+    else
+        return $ERROR
+    fi
+}
+
+
+function check_user_root {
     if $RUN_AS_SUPERUSER; then
+        check_group_sudo
+        if [[ $? -ne $SUCCESS ]]; then
+            info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
+            exit $SUCCESS
+        fi
         if [[ $UID -ne 0 ]]; then
-            if ! groups "$USER" | grep --quiet  --regexp='sudo'; then
-                info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
-                exit $SUCCESS
-            fi
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
             exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi

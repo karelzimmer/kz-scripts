@@ -94,17 +94,13 @@ function check_input {
     fi
 
     clear -x
-    check_user
-    check_group
-    check_developer
-    check_on_ac_power
-}
-
-
-function check_group {
-    if ! groups "$USER" | grep --quiet  --regexp='sudo'; then
+    check_user_root
+    check_group_sudo
+    if [[ $? -ne $SUCCESS ]]; then
         term_script
     fi
+    check_developer
+    check_on_ac_power
 }
 
 
