@@ -13,6 +13,11 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 
+#1-gast (gastgebruiker toevoegen)
+sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
+sudo passwd --delete gast
+#2 sudo userdel --remove gast
+
 #1-gdm (inlogscherm dual-monitor)
 sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml
 sudo chown gdm:gdm ~gdm/.config/monitors.xml
