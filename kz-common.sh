@@ -103,20 +103,9 @@ function error {
 }
 
 
-function check_group_sudo {
-    if [[ $UID -eq 0 ]]; then
-        return $SUCCESS
-    elif groups "$USER" | grep --quiet  --regexp='sudo'; then
-        return $SUCCESS
-    else
-        return $ERROR
-    fi
-}
-
-
 function check_user_root {
     if $RUN_AS_SUPERUSER; then
-        if ! check_group_sudo; then
+        if ! check_user_sudo; then
             info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
             exit $SUCCESS
         fi
@@ -129,6 +118,17 @@ function check_user_root {
             info "Niet uitvoeren met 'sudo' of als root."
             exit $ERROR
         fi
+    fi
+}
+
+
+function check_user_sudo {
+    if [[ $UID -eq 0 ]]; then
+        return $SUCCESS
+    elif groups "$USER" | grep --quiet  --regexp='sudo'; then
+        return $SUCCESS
+    else
+        return $ERROR
     fi
 }
 
