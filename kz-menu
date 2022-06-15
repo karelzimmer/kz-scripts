@@ -539,8 +539,7 @@ function execute_command {
     case $exec in
         kz-install|kz-nas)
             # Zogenaamde root/sudo-scripts.
-            check_group_sudo
-            if [[ $? -ne $SUCCESS ]]; then
+            if ! check_group_sudo; then
                 info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
                 return $SUCCESS
             fi

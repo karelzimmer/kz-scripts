@@ -95,8 +95,7 @@ function check_input {
 
     clear -x
     check_user_root
-    check_group_sudo
-    if [[ $? -ne $SUCCESS ]]; then
+    if ! check_group_sudo; then
         term_script
     fi
     check_developer

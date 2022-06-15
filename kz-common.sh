@@ -116,8 +116,7 @@ function check_group_sudo {
 
 function check_user_root {
     if $RUN_AS_SUPERUSER; then
-        check_group_sudo
-        if [[ $? -ne $SUCCESS ]]; then
+        if ! check_group_sudo; then
             info 'Reeds uitgevoerd door de beheerder, geen actie vereist.'
             exit $SUCCESS
         fi
