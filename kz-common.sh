@@ -115,8 +115,7 @@ function check_user_root {
                 log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
                     --priority=debug
                 pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
-                NOABEND=true
-                exit $pkexec_rc
+                NOABEND=true exit $pkexec_rc
             else
                 log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
                     --priority=debug
