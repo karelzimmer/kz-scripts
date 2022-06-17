@@ -18,7 +18,7 @@
 
     <!-- Deze actie wordt gebruikt voor de ontwikkel-omgeving.
          This action is used for the development environment. -->
-    <action id="nl.karelzimmer.kz-nas.attach-nas">
+    <action id="kz-nas.attach-nas">
         <message>Authentication is required to mount a network drive.</message>
         <message xml:lang="nl">Authenticatie is vereist om een netwerkschijf te koppelen.</message>
         <defaults>

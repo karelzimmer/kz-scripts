@@ -15,5 +15,5 @@ Comment[nl]=Koppel een NAS aan tijdens het opstarten
 Keywords=kznas;mount;network;
 Keywords[nl]=kznas;aankoppelen;netwerk;
 Categories=KZ Scripts;
-Exec=pkexec kz-nas --gui
+Exec=kz-nas --gui
 Icon=kz-nas

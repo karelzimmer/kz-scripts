@@ -536,36 +536,13 @@ function execute_command {
     arg=$(
         printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
         )
-    case $exec in
-        kz-install|kz-nas)
-            # Zogenaamde root/sudo-scripts.
-            if ! check_user_sudo; then
-                info '
-Reeds uitgevoerd door de beheerder.'
-                return $SUCCESS
-            fi
-            if $OPTION_GUI; then
-                pkexec "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
-                log "$command: rc=$cmd_rc"
-            else
-                prompt="Authenticatie is vereist om '$command' uit te voeren.
-[sudo] wachtwoord voor %p: "
-                sudo    --prompt="$prompt"              \
-                        "$PROGRAM_PATH/$cmd" "$arg" --  || cmd_rc=$?
-                log "$command: rc=$cmd_rc"
-            fi
-            ;;
-        *)
-            # Zogenaamde non-root/sudo-scripts.
-            if $OPTION_GUI; then
-                "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
-                log "$command: rc=$cmd_rc"
-            else
-                "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
-                log "$command: rc=$cmd_rc"
-            fi
-            ;;
-    esac
+    if $OPTION_GUI; then
+        "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
+        log "$command: rc=$cmd_rc"
+    else
+        "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
+        log "$command: rc=$cmd_rc"
+    fi
 }
 
 

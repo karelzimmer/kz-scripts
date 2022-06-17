@@ -15,7 +15,7 @@ Comment[nl]=Installeer apps en wijzig systeeminstellingen
 Keywords=kzinstall;install;
 Keywords[nl]=kzinstall;installatie;
 Categories=KZ Scripts;
-Exec=pkexec kz-install --gui
+Exec=kz-install --gui
 Icon=kz-install
 Actions=list;
 

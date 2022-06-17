@@ -4,6 +4,7 @@
 #                                                                             #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
 ###############################################################################
+
 declare PROGRAM_NAME='kz-common.sh'
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 declare RELEASE_YEAR=2009
@@ -38,13 +39,14 @@ declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD_CHECK=''
-declare     ERRORS_LOGONLY=false
+declare     NO_ABEND=false
 declare     LESS_OPTIONS=''
 declare     LOGCMD=''
 declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
+declare     PROGRAM=''
 declare     RUN_AS_SUPERUSER=false
 declare     TITLE=''
 declare     USAGE='Gebruik: source kz-common.sh
@@ -81,22 +83,19 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 
 function error {
+    if $NO_ABEND; then
+        return $SUCCESS
+    fi
     if $OPTION_GUI; then
-        if $ERRORS_LOGONLY; then
-            log 'ERRORS_LOGONLY is set: errors not to user, only to log' \
-                --priority=debug
-            log "$@"
-        else
-            TITLE="Foutmelding $DISPLAY_NAME"
-            # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-            zenity  --error                 \
-                    --no-markup             \
-                    --width     500         \
-                    --height    100         \
-                    --title     "$TITLE"    \
-                    --text      "$@"        \
-                    --ok-label  'Oké'       2> >($LOGCMD) || true
-        fi
+        TITLE="Foutmelding $DISPLAY_NAME"
+        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+        zenity  --error                 \
+                --no-markup             \
+                --width     500         \
+                --height    100         \
+                --title     "$TITLE"    \
+                --text      "$@"        \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
@@ -104,14 +103,25 @@ function error {
 
 
 function check_user_root {
+    local -i pkexec_rc=0
+
     if $RUN_AS_SUPERUSER; then
         if ! check_user_sudo; then
             info 'Reeds uitgevoerd door de beheerder.'
             exit $SUCCESS
         fi
         if [[ $UID -ne 0 ]]; then
-            log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
-            exec sudo "$0" "${CMDLINE_ARGS[@]}"
+            if $OPTION_GUI; then
+                log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
+                    --priority=debug
+                pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
+                NO_ABEND=true
+                exit $pkexec_rc
+            else
+                log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
+                    --priority=debug
+                exec sudo "$0" "${CMDLINE_ARGS[@]}"
+            fi
         fi
     else
         if [[ $UID -eq 0 ]]; then
@@ -168,9 +178,13 @@ function init_script {
     LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
+    # For pkexec to work with policy file we need to replace e.g.
+    # './kz-install' by '/home/karel/kz-scripts/kz-install'.
+    PROGRAM=${0/./$PROGRAM_PATH}
     CMDLINE_ARGS=("$@")
+
     log "$DASHES"
-    log "Started (as $USER $0 ${CMDLINE_ARGS[*]} from $PWD)." --priority=notice
+    log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         log '(++) Met Debian heeft gebruiker root toegang nodig
 (++) tot mijn X-sessie voor het kunnen gebruiken van
@@ -314,7 +328,7 @@ function signal {
     local -i    rc=${5:-1}
     local       rc_desc=''
     local -i    rc_desc_signalno=0
-    local       status=''
+    local       status="${RED}$rc/ERROR${NORMAL}"
 
     case $rc in
         0)
@@ -341,10 +355,10 @@ function signal {
         128)
             rc_desc='invalid argument to exit'
             ;;
-        129)                            # SIGHUP (128+ 1)
+        129)                            # SIGHUP (128+1)
             rc_desc='hangup'
             ;;
-        130)                            # SIGINT (128+ 2)
+        130)                            # SIGINT (128+2)
             rc_desc='terminated by control-c'
             ;;
         13[1-9]|140)                    # 140 (128+12)
@@ -440,6 +454,9 @@ ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
 function signal_exit_log {
     local temp_log=''
 
+    if $NO_ABEND; then
+        return $SUCCESS
+    fi
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     {
         printf "${RED}%s\n${NORMAL}" "$@"
