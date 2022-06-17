@@ -65,7 +65,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
-        noabend; exit $ERROR
+        NOABEND=true exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -99,7 +99,7 @@ function check_input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         process_usage
-        noabend; exit $ERROR
+        NOABEND=true exit $ERROR
     fi
 
     check_user_root
@@ -111,7 +111,7 @@ function process_input {
         if ! [[ -d $SOURCE_ARGUMENT ]]; then
             info "Map $SOURCE_ARGUMENT bestaat niet."
             process_usage
-            noabend; exit $ERROR
+            NOABEND=true exit $ERROR
         fi
         SOURCE=$SOURCE_ARGUMENT/backup-$HOSTNAME-$USER
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
@@ -121,7 +121,7 @@ function process_input {
             error 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
-            noabend; exit $ERROR
+            NOABEND=true exit $ERROR
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             error "Koppel slechts één USB-medium aan.
 
@@ -129,13 +129,13 @@ Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-            noabend; exit $ERROR
+            NOABEND=true exit $ERROR
         elif ! [[ -d $SOURCE ]]; then
             error "Geen back-up gevonden op aangekoppeld USB-medium.
 
 Koppel een USB-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
 daarna opnieuw."
-            noabend; exit $ERROR
+            NOABEND=true exit $ERROR
         fi
         SOURCE_MEDIUM=$MEDIUM
     fi
@@ -185,7 +185,7 @@ function restore_backup {
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig
 ruimte op $TARGET."
-            noabend; exit $ERROR
+            NOABEND=true exit $ERROR
             ;;
     esac
 }
