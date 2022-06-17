@@ -527,6 +527,7 @@ Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
 function execute_command {
     local -i    cmd_rc=0
     local       exec=''
+    local       gui_option=''
     local       prompt=''
 
     exec=${command/kz /kz-}
@@ -537,12 +538,10 @@ function execute_command {
         printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
         )
     if $OPTION_GUI; then
-        "$PROGRAM_PATH/$cmd" "$arg" --gui -- || cmd_rc=$?
-        log "$command: rc=$cmd_rc"
-    else
-        "$PROGRAM_PATH/$cmd" "$arg" -- || cmd_rc=$?
-        log "$command: rc=$cmd_rc"
+        gui_option='--gui'
     fi
+    "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
+    log "$command: rc=$cmd_rc"
 }
 
 
