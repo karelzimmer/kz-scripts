@@ -16,8 +16,7 @@ readonly RELEASE_YEAR=2021
 # Global constants                                                            #
 ###############################################################################
 
-declare -ir SUCCESS=0
-declare -ir ERROR=1
+readonly SUCCESS=0
 
 readonly USAGE="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
      of: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
@@ -60,7 +59,7 @@ function check_input {
     # Geen getopt, opgegeven opties zijn voor de opdracht, niet voor kz zelf.
     if ! [[ "$*" ]]; then
         show_commands
-        exit $ERROR
+        exit $SUCCESS
     elif [[ $1 == *-u* ]]; then
         process_option_usage
         exit $SUCCESS
@@ -72,11 +71,11 @@ function check_input {
         exit $SUCCESS
     elif [[ $1 == *-l* ]]; then
         show_commands
-        exit $ERROR
+        exit $SUCCESS
     elif ! [[ -e "$PROGRAM_PATH/kz-$1" ]]; then
         printf "$DISPLAY_NAME: %s\n\n" "OPDRACHT '$1' bestaat niet" >&2
         show_commands
-        exit $ERROR
+        exit $SUCCESS
     fi
 }
 

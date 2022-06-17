@@ -126,7 +126,7 @@ function check_user_root {
     else
         if [[ $UID -eq 0 ]]; then
             info "Niet uitvoeren met 'sudo' of als root."
-            exit $ERROR
+            exit $SUCCESS
         fi
     fi
 }
@@ -192,6 +192,9 @@ function init_script {
 (++) xhost +si:localuser:root' --priority=debug
         xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
+
+    # shellcheck disable=SC2034
+    USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
     # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
     # van:
