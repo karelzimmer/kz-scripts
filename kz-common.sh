@@ -39,7 +39,7 @@ declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     LOGCMD_CHECK=''
-declare     NOABEND=false
+declare     NOERROR=false
 declare     LESS_OPTIONS=''
 declare     LOGCMD=''
 declare     OPTION_GUI=false
@@ -83,7 +83,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 
 
 function error {
-    if $NOABEND; then
+    if $NOERROR; then
         return $SUCCESS
     fi
     if $OPTION_GUI; then
@@ -115,7 +115,7 @@ function check_user_root {
                 log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
                     --priority=debug
                 pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
-                NOABEND=true exit $pkexec_rc
+                NOERROR=true exit $pkexec_rc
             else
                 log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
                     --priority=debug
@@ -125,7 +125,7 @@ function check_user_root {
     else
         if [[ $UID -eq 0 ]]; then
             info "Niet uitvoeren met 'sudo' of als root."
-            NOABEND=true exit $ERROR
+            NOERROR=true exit $ERROR
         fi
     fi
 }
@@ -456,7 +456,7 @@ ${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
 function signal_exit_log {
     local temp_log=''
 
-    if $NOABEND; then
+    if $NOERROR; then
         return $SUCCESS
     fi
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
