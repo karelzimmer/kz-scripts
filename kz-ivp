@@ -81,7 +81,7 @@ function process_input {
     local script=''
     local scriptsdir=$HOME/kz-scripts
 
-    cd "$scriptsdir" || exit $ERROR
+    cd "$scriptsdir" || NOABEND=false exit $ERROR
     for script in *; do
         if ! [[ -f $script ]]; then
             continue
@@ -116,7 +116,7 @@ function process_input {
                 ;;
         esac
     done
-    cd "$HOME" || exit $ERROR
+    cd "$HOME" || NOABEND=false exit $ERROR
 }
 
 

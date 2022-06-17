@@ -175,7 +175,7 @@ function upload_website {
         rm      "$ftp_login"
         error 'Uploaden website is mislukt.'
         info 'Controleer de log...!'
-        exit $ERROR
+        NOABEND=false exit $ERROR
     fi
     sleep 5
 }
@@ -187,7 +187,7 @@ function install_package {
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
         error 'Installeren pakket kz is niet uitgevoerd.'
         info 'Controleer de log...!'
-        exit $ERROR
+        NOABEND=false exit $ERROR
     fi
 }
 

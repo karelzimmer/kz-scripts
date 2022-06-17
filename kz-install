@@ -549,7 +549,7 @@ installatie van een pakket of
     printf '%b\n' "$header\n$DASHES" >> "$file"
 
     search=/etc/apt/sources.list
-    cd  $search.d || exit $ERROR
+    cd  $search.d || NOABEND=false exit $ERROR
     if !    grep    --recursive             \
                     --no-filename           \
                     --regexp='^deb '        \
@@ -778,7 +778,7 @@ function term_script {
         info 'Geen opdrachten om uit te voeren.'
     elif $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
-            exit $ERROR
+            NOABEND=false exit $ERROR
         else
             if $OPTION_REMOVE; then
                 action='Verwijderen'
