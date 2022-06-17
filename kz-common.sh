@@ -125,7 +125,7 @@ function check_user_root {
     else
         if [[ $UID -eq 0 ]]; then
             info "Niet uitvoeren met 'sudo' of als root."
-            NOABEND=true exit $ERROR
+            noabend exit $ERROR
         fi
     fi
 }
@@ -213,6 +213,11 @@ stoppen)"
 
 function log {
     printf '%b\n' "$1" |& $LOGCMD "${2:---priority=info}"
+}
+
+
+function noabend {
+    NOABEND=true
 }
 
 

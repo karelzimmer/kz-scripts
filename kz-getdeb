@@ -70,7 +70,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
-        NOABEND=true exit $ERROR
+        noabend exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -90,7 +90,7 @@ function check_input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         process_usage
-        NOABEND=true exit $ERROR
+        noabend exit $ERROR
     fi
 
     clear -x
@@ -177,7 +177,7 @@ Mogelijke oorzaak:
                                         --title     'Gestopt'       \
                                         --infobox   "$TEXT"         \
                                         7 42
-                    NOABEND=true exit $ERROR
+                    noabend exit $ERROR
                 fi
             fi
         done
@@ -332,7 +332,7 @@ function process_repos {
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             |& $LOGCMD; then
-        cd "$bin_repo" || NOABEND=false exit $ERROR
+        cd "$bin_repo" || exit $ERROR
         git pull |& $LOGCMD
     fi
     /home/karel/bin/gitpull |& $LOGCMD

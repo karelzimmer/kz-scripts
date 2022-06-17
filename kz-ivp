@@ -50,7 +50,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
-        NOABEND=true exit $ERROR
+        noabend exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -70,7 +70,7 @@ function check_input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         process_usage
-        NOABEND=true exit $ERROR
+        noabend exit $ERROR
     fi
 
     check_user_root
@@ -81,7 +81,7 @@ function process_input {
     local script=''
     local scriptsdir=$HOME/kz-scripts
 
-    cd "$scriptsdir" || NOABEND=false exit $ERROR
+    cd "$scriptsdir" || exit $ERROR
     for script in *; do
         if ! [[ -f $script ]]; then
             continue
@@ -116,7 +116,7 @@ function process_input {
                 ;;
         esac
     done
-    cd "$HOME" || NOABEND=false exit $ERROR
+    cd "$HOME" || exit $ERROR
 }
 
 

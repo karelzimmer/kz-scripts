@@ -102,7 +102,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
-        NOABEND=true exit $ERROR
+        noabend exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -197,7 +197,7 @@ function process_input {
     fi
     # Ergens hiervoor ging het niet helemaal goed.
     if $file_notfound; then
-        NOABEND=true exit $ERROR
+        noabend exit $ERROR
     fi
     # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
@@ -348,7 +348,7 @@ function process_dfltfiles {
     else
         error "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
         process_usage
-        NOABEND=true exit $ERROR
+        noabend exit $ERROR
     fi
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
@@ -549,7 +549,7 @@ installatie van een pakket of
     printf '%b\n' "$header\n$DASHES" >> "$file"
 
     search=/etc/apt/sources.list
-    cd  $search.d || NOABEND=false exit $ERROR
+    cd  $search.d || exit $ERROR
     if !    grep    --recursive             \
                     --no-filename           \
                     --regexp='^deb '        \
@@ -778,7 +778,7 @@ function term_script {
         info 'Geen opdrachten om uit te voeren.'
     elif $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $SUCCESS ]]; then
-            NOABEND=false exit $ERROR
+            exit $ERROR
         else
             if $OPTION_REMOVE; then
                 action='Verwijderen'
