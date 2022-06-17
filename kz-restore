@@ -149,7 +149,7 @@ function restore_backup {
     local -i rsync_rc=0
 
     TITLE='Back-up terugzetten'
-    TEXT='Back-up terugzetten voorbereiden (dit kan even duren)'
+    TEXT='Restore voorbereiden (dit kan even duren)'
     if $OPTION_GUI; then
         rsync   --archive                   \
                 --verbose                   \
