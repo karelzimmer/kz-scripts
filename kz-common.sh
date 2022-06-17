@@ -126,7 +126,7 @@ function check_user_root {
     else
         if [[ $UID -eq 0 ]]; then
             info "Niet uitvoeren met 'sudo' of als root."
-            exit $SUCCESS
+            NOABEND=true exit $ERROR
         fi
     fi
 }

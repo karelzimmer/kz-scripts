@@ -53,7 +53,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
-        exit $SUCCESS
+        NOABEND=true exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -71,9 +71,9 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        error 'Geen argumenten toegestaan.'
+        info 'Geen argumenten toegestaan.'
         process_usage
-        exit $SUCCESS
+        NOABEND=true exit $ERROR
     fi
 
     # Aangemeld als ontwikkelaar?
@@ -86,8 +86,8 @@ function check_input {
             ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
         :
     else
-        error 'Uitvoeren als ontwikkelaar.'
-        exit $SUCCESS
+        info 'Uitvoeren als ontwikkelaar.'
+        NOABEND=true exit $ERROR
     fi
 
     check_user_root

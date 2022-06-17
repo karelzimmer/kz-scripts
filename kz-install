@@ -102,7 +102,7 @@ function check_input {
         )       || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
-        exit $SUCCESS
+        NOABEND=true exit $ERROR
     fi
     eval set -- "$parsed"
     process_common_options "$@"
@@ -197,7 +197,7 @@ function process_input {
     fi
     # Ergens hiervoor ging het niet helemaal goed.
     if $file_notfound; then
-        exit $SUCCESS
+        NOABEND=true exit $ERROR
     fi
     # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
@@ -274,7 +274,7 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
-            error "App $app niet gevonden."
+            info "App $app niet gevonden."
             file_notfound=true
         fi
     done
@@ -330,7 +330,7 @@ function process_argument_file {
             FILES_TO_PROCESS[$file_num]=$file
             ((++file_num))
         else
-            error "Bestand $file niet gevonden."
+            info "Bestand $file niet gevonden."
             file_notfound=true
         fi
     done
@@ -348,7 +348,7 @@ function process_dfltfiles {
     else
         error "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
         process_usage
-        exit $SUCCESS
+        NOABEND=true exit $ERROR
     fi
     # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
