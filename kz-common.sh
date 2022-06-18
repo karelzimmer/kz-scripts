@@ -345,7 +345,6 @@ function signal {
             ;;
         1)
             rc_desc='terminated with error'
-            status="${RED}$rc/ERROR${NORMAL}"
             ;;
         6[4-9]|7[0-8])                  # 64--78
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
