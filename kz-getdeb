@@ -145,7 +145,8 @@ function check_sudo {
         while true; do
             TEXT='
 Authenticatie is vereist om pakket
-kz te installeren.
+kz met scripts en documenten van
+Karel Zimmer te installeren.
 
 Voer uw wachtwoord in:'
             # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
@@ -155,7 +156,7 @@ Voer uw wachtwoord in:'
                             --ok-button     'Verifiëren'            \
                             --cancel-button 'Annuleren'             \
                             --passwordbox   "$TEXT"                 \
-                            12 38                                   \
+                            13 38                                   \
                             3>&1 1>&2 2>&3
                 )" | sudo --stdin true 2> /dev/null; then
                 break
