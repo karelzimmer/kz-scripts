@@ -155,7 +155,6 @@ $fstab"
                         break
                         ;;
                     n*|N*|'')
-                        info 'Ok, we gaan verder.'
                         break
                         ;;
                     *)
@@ -187,7 +186,6 @@ $fstab"
             read -rp "$quest2 [j/N]: "
             case $REPLY in
                 j*|J*)
-                    info 'Ok, we gaan verder.'
                     break
                     ;;
                 n*|N*|'')

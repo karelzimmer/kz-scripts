@@ -138,7 +138,7 @@ function check_user_root {
 
 function check_user_sudo {
     if [[ $UID -eq 0 ]]; then
-        # Voor als we in de "grace"-periode van een eerdere sudo zitten.
+        # Voor de "grace"-periode van sudo.
         return $SUCCESS
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $SUCCESS
@@ -183,7 +183,7 @@ function init_script {
     LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
-    # For pkexec to work with policy file we need to replace e.g.
+    # For pkexec to work with policy file it is needed to replace e.g.
     # './kz-install' by '/home/karel/kz-scripts/kz-install'.
     PROGRAM=${0/./$PROGRAM_PATH}
     CMDLINE_ARGS=("$@")
@@ -347,10 +347,6 @@ function signal {
             rc_desc='terminated with error'
             status="${RED}$rc/ERROR${NORMAL}"
             ;;
-        2)
-            rc_desc='terminated with warning'
-            status="${YELLOW}$rc/WARNING${NORMAL}"
-            ;;
         6[4-9]|7[0-8])                  # 64--78
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
             ;;
@@ -407,7 +403,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             log "Ended (code=exited, status=$status)." --priority=notice
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            if [[ $rc -gt $SUCCESS ]]; then
+            if [[ $rc -ne $SUCCESS ]]; then
                 signal_exit_log 'Eén of meerdere opdrachten zijn fout gegaan.'
             fi
             exit "$rc"
@@ -421,6 +417,13 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
 
 function signal_exit {
+    local apt_error="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
+een Terminalvenster en voer uit:
+${BLUE}sudo dpkg --configure --pending${NORMAL}
+${BLUE}sudo apt-get update --fix-missing${NORMAL}
+${BLUE}sudo apt-get install --fix-broken${NORMAL}
+${BLUE}sudo update-initramfs -u${NORMAL}"
+
     case $PROGRAM_NAME in
         kz-getdeb)
             rm --force /tmp/kz-common.sh
@@ -430,23 +433,13 @@ function signal_exit {
             cd "$HOME"
             rm --force kz kz.1
             if [[ $rc -ne $SUCCESS ]]; then
-                log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
-een Terminalvenster en voer uit:
-${BLUE}sudo dpkg --configure --pending${NORMAL}
-${BLUE}sudo apt-get update --fix-missing${NORMAL}
-${BLUE}sudo apt-get install --fix-broken${NORMAL}
-${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
+                log "$apt_error" --priority=debug
             fi
             ;;
         kz-install)
             printf "${NORMAL}%s" "${CURSOR_VISABLE}"
             if [[ $rc -ne $SUCCESS ]]; then
-                log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
-een Terminalvenster en voer uit:
-${BLUE}sudo dpkg --configure --pending${NORMAL}
-${BLUE}sudo apt-get update --fix-missing${NORMAL}
-${BLUE}sudo apt-get install --fix-broken${NORMAL}
-${BLUE}sudo update-initramfs -u${NORMAL}" --priority=debug
+                log "$apt_error" --priority=debug
             fi
             ;;
         kz-setup)
