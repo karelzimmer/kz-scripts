@@ -55,7 +55,6 @@ declare     USAGE='Gebruik: source kz-common.sh
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare     BLINK=''
 declare     BLUE=''
-declare     BOLD=''
 declare     CURSOR_INVISABLE=''
 declare     CURSOR_VISABLE=''
 declare     GREEN=''
@@ -300,7 +299,6 @@ function process_usage {
 function reset_terminal_attributes {
     BLINK=''
     BLUE=''
-    BOLD=''
     CURSOR_INVISABLE=''
     CURSOR_VISABLE=''
     GREEN=''
@@ -312,19 +310,18 @@ function reset_terminal_attributes {
 
 
 function set_terminal_attributes {
-    BOLD=$(tput bold)
     # shellcheck disable=SC2034
-    BLINK=$(tput blink)
-    BLUE=${BOLD}$(tput setaf 4)
+    BLINK=$(tput bold;tput blink)
+    BLUE=$(tput bold;tput setaf 4)
     # shellcheck disable=SC2034
     CURSOR_INVISABLE=$(tput civis)
     CURSOR_VISABLE=$(tput cvvis)
-    GREEN=${BOLD}$(tput setaf 2)
+    GREEN=$(tput bold;tput setaf 2)
     NORMAL=$(tput sgr0)
-    RED=${BOLD}$(tput setaf 1)
+    RED=$(tput bold;tput setaf 1)
     # shellcheck disable=SC2034
     REWRITE_LINE=$(tput cuu1;tput el)
-    YELLOW=${BOLD}$(tput setaf 3)
+    YELLOW=$(tput bold;tput setaf 3)
 }
 
 
@@ -460,9 +457,9 @@ function signal_exit_log {
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     {
         printf "${RED}%s\n${NORMAL}" "$@"
-        printf "${BOLD}%s\n${NORMAL}" 'Logberichten:'
+        printf "%s\n" 'Logberichten:'
         eval "$LOGCMD_CHECK"
-        printf "${BOLD}%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
+        printf "%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
     } > "$temp_log"
     if $OPTION_GUI; then
         TITLE="Logberichten $DISPLAY_NAME"

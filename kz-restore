@@ -228,17 +228,17 @@ function term_script {
             udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
         fi
         if [[ $rc -eq $SUCCESS ]]; then
-            TEXT='
+            info "
+De back-up is teruggezet.
 
-Het USB-medium kan verwijderd worden.'
+Het USB-medium kan verwijderd worden."
         else
-            TEXT="
+            warning "
+De back-up is teruggezet.
 
-${YELLOW}Koppel zelf (veilig!) het USB-medium af."
+Koppel zelf (veilig!) het USB-medium af."
         fi
     fi
-    info "
-${GREEN}De back-up is teruggezet.$TEXT${NORMAL}"
     exit $SUCCESS
 }
 
