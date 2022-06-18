@@ -332,7 +332,7 @@ function process_repos {
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             |& $LOGCMD; then
-        cd "$bin_repo" || exit $ERROR
+        cd "$bin_repo"
         git pull |& $LOGCMD
     fi
     /home/karel/bin/gitpull |& $LOGCMD

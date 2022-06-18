@@ -81,7 +81,7 @@ function process_input {
     local script=''
     local scriptsdir=$HOME/kz-scripts
 
-    cd "$scriptsdir" || exit $ERROR
+    cd "$scriptsdir"
     for script in *; do
         if ! [[ -f $script ]]; then
             continue
@@ -116,7 +116,7 @@ function process_input {
                 ;;
         esac
     done
-    cd "$HOME" || exit $ERROR
+    cd "$HOME"
 }
 
 
@@ -167,7 +167,7 @@ function check_record_types {
     local wrong_record=''
 
     if [[ $script = kz-common.sh ]]; then
-        return 0
+        return $SUCCESS
     fi
 
     # Kijk naar regels die beginnen met #1 t/m #9.

@@ -105,6 +105,11 @@ function error {
 function check_user_root {
     local -i pkexec_rc=0
 
+    if [[ $UID -eq 0 && ${SUDO_USER:-'root'} = 'root' ]]; then
+        info "Niet uitvoeren als root."
+        NOERROR=true exit $ERROR
+    fi
+
     if $RUN_AS_SUPERUSER; then
         if ! check_user_sudo; then
             info 'Reeds uitgevoerd door de beheerder.'
@@ -124,7 +129,7 @@ function check_user_root {
         fi
     else
         if [[ $UID -eq 0 ]]; then
-            info "Niet uitvoeren met 'sudo' of als root."
+            info "Niet uitvoeren met 'sudo'."
             NOERROR=true exit $ERROR
         fi
     fi
@@ -133,8 +138,9 @@ function check_user_root {
 
 function check_user_sudo {
     if [[ $UID -eq 0 ]]; then
+        # Voor als we in de "grace"-periode van een eerdere sudo zitten.
         return $SUCCESS
-    elif groups "$USER" | grep --quiet  --regexp='sudo'; then
+    elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $SUCCESS
     else
         return $ERROR
@@ -421,7 +427,7 @@ function signal_exit {
             # Verwijder niet kz en kz.1 i.v.m. lokale Git-repo.
             rm --force kz.{2..99}
             # Maar wel als in HOME, zoals voorgeschreven in Checklist install.
-            cd "$HOME" || exit $ERROR
+            cd "$HOME"
             rm --force kz kz.1
             if [[ $rc -ne $SUCCESS ]]; then
                 log "Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
