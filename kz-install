@@ -583,10 +583,6 @@ function process_cmds_file {
     local -i    app_tot_num=0
     local -i    cmd_seq_num=0
 
-    if $EXECUTE_COMMANDS; then
-        printf '%s' "${CURSOR_INVISABLE}"
-    fi
-
     app_tot_num=$(
         grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
         )
@@ -784,7 +780,7 @@ function term_script {
                 action='Verwijderen'
             fi
             info "
-${GREEN}$action is voltooid.${NORMAL}"
+$action is voltooid."
         fi
     else
         less "$LESS_OPTIONS" "$SIM_FILE"

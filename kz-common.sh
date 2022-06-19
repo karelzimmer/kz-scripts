@@ -311,17 +311,17 @@ function reset_terminal_attributes {
 
 function set_terminal_attributes {
     # shellcheck disable=SC2034
-    BLINK=$(tput bold;tput blink)
-    BLUE=$(tput bold;tput setaf 4)
+    BLINK=$(tput bold; tput blink)
+    BLUE=$(tput bold; tput setaf 4)
     # shellcheck disable=SC2034
     CURSOR_INVISABLE=$(tput civis)
     CURSOR_VISABLE=$(tput cvvis)
-    GREEN=$(tput bold;tput setaf 2)
+    GREEN=$(tput bold; tput setaf 2)
     NORMAL=$(tput sgr0)
-    RED=$(tput bold;tput setaf 1)
+    RED=$(tput bold; tput setaf 1)
     # shellcheck disable=SC2034
-    REWRITE_LINE=$(tput cuu1;tput el)
-    YELLOW=$(tput bold;tput setaf 3)
+    REWRITE_LINE=$(tput cuu1; tput el)
+    YELLOW=$(tput bold; tput setaf 3)
 }
 
 

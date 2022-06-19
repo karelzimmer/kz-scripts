@@ -704,7 +704,7 @@ function term_script {
                 action='Resetten'
             fi
             info "
-${GREEN}$action is voltooid.${NORMAL}"
+$action is voltooid."
         fi
     else
         less "$LESS_OPTIONS" "$SIM_FILE"
