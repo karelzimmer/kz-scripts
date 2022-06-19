@@ -422,18 +422,15 @@ ${BLUE}sudo update-initramfs -u${NORMAL}"
 
     case $PROGRAM_NAME in
         kz-getdeb)
-            rm --force /tmp/kz-common.sh
-            # Verwijder niet kz en kz.1 i.v.m. lokale Git-repo.
-            rm --force kz.{2..99}
-            # Maar wel als in HOME, zoals voorgeschreven in Checklist install.
-            cd "$HOME"
-            rm --force kz kz.1
+            rm --force /tmp/kz-common.sh kz kz.{1..99}
+
             if [[ $rc -ne $SUCCESS ]]; then
                 log "$apt_error" --priority=debug
             fi
             ;;
         kz-install)
             printf "${NORMAL}%s" "${CURSOR_VISABLE}"
+
             if [[ $rc -ne $SUCCESS ]]; then
                 log "$apt_error" --priority=debug
             fi

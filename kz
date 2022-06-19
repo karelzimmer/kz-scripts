@@ -50,9 +50,6 @@ function init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
-
-    # Script kz-getdeb verwijdert niet kz en kz.1 i.v.m. lokale Git-repo.
-    rm --force kz.{2..99}
 }
 
 

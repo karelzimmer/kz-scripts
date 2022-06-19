@@ -364,7 +364,7 @@ function download_website {
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
                 "$ftp_host"                         |& $LOGCMD; then
-        rm      "$ftp_login"
+        rm  "$ftp_login"
         info 'Downloaden website is mislukt.'
         info 'Controleer de log...!'
         return  $ERROR
