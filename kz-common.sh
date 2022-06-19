@@ -415,10 +415,10 @@ $command, code: $rc ($rc_desc)" --priority=debug
 function signal_exit {
     local apt_error="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
-${BLUE}sudo dpkg --configure --pending${NORMAL}
-${BLUE}sudo apt-get update --fix-missing${NORMAL}
-${BLUE}sudo apt-get install --fix-broken${NORMAL}
-${BLUE}sudo update-initramfs -u${NORMAL}"
+[1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
+[2] ${BLUE}sudo apt-get update --fix-missing${NORMAL}
+[3] ${BLUE}sudo apt-get install --fix-broken${NORMAL}
+[4] ${BLUE}sudo update-initramfs -u${NORMAL}"
 
     case $PROGRAM_NAME in
         kz-getdeb)
