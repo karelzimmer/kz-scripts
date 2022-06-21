@@ -40,6 +40,10 @@ Argumenten:
 # Global variables                                                            #
 ###############################################################################
 
+# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+declare BLUE=''
+declare NORMAL=''
+
 ###############################################################################
 # Functions                                                                   #
 ###############################################################################
@@ -50,14 +54,20 @@ function init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
+
+    BLUE=$(tput bold; tput setaf 4)
+    NORMAL=$(tput sgr0)
 }
 
 
 function check_input {
-    # Geen getopt, opgegeven opties zijn voor de opdracht, niet voor kz zelf.
+    # Geen getopt want opgegeven opties zijn voor 'OPDRACHT', niet voor kz.
     if ! [[ "$*" ]]; then
-        show_commands
-        exit $SUCCESS
+        printf  "$DISPLAY_NAME: %s\n%s %s\n"                    \
+                "verplicht argument 'OPDRACHT' ontreekt" >&2    \
+                "Typ '$DISPLAY_NAME --usage' of '$DISPLAY_NAME" \
+                "--help' voor meer informatie."
+        exit $ERROR
     elif [[ $1 == *-u* ]]; then
         process_option_usage
         exit $SUCCESS
@@ -71,26 +81,36 @@ function check_input {
         show_commands
         exit $SUCCESS
     elif ! [[ -e "$PROGRAM_PATH/kz-$1" ]]; then
-        printf "$DISPLAY_NAME: %s\n\n" "OPDRACHT '$1' bestaat niet" >&2
-        show_commands
+        printf  "$DISPLAY_NAME: %s\n%s\n"           \
+                "opdracht '$1' bestaat niet" >&2    \
+                "Typ '$DISPLAY_NAME --usage' voor meer informatie."
         exit $ERROR
     fi
 }
 
 
 function show_commands {
-    printf '%s\n' 'De volgende OPDRACHTen zijn beschikbaar:'
-    find    "$PROGRAM_PATH"/kz-*    \
-            -maxdepth 1             \
-            -type f                 \
-            -executable             \
-            -readable               \
-            -not -name '*~'         \
-            -not -name 'kz'         \
-            -printf '%f\n'          |
-    sort                            |
-    sed     's/kz-//'
-    printf '\n%s\n' "Typ '$DISPLAY_NAME --usage' voor meer informatie."
+    printf  '%s\n\n     %s\n'                           \
+            'De volgende OPDRACHTen zijn beschikbaar:'  \
+            'OPDRACHT'
+    find    "$PROGRAM_PATH"/kz-*            \
+            -maxdepth 1                     \
+            -type f                         \
+            -executable                     \
+            -readable                       \
+            -not -name '*~'                 \
+            -not -name 'kz'                 \
+            -printf '%f\n'                  |
+    sort                                    |
+    sed     's/kz-//'                       |
+            nl      --number-width=2        \
+                    --number-format=rn      \
+                    --number-separator='] ' \
+                    --body-numbering=a      |
+            sed     's/^/[/'
+    printf  '\n%s %s\n'                         \
+            "Om een OPDRACHT uit te voeren:"    \
+            "${BLUE}$DISPLAY_NAME OPDRACHT${NORMAL}"
 }
 
 
@@ -108,14 +128,16 @@ function process_option_help {
 
 function process_option_version {
     local build=''
-    local copyright_years='1970'
+    local copyright_years=1970
+    local this_year=1970
 
     build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
 
-    if [[ $RELEASE_YEAR -eq $(date +%Y) ]]; then
-        copyright_years=$RELEASE_YEAR
+    this_year=$(date +%Y)
+    if [[ $RELEASE_YEAR -eq $this_year ]]; then
+        copyright_years=$this_year
     else
-        copyright_years=$RELEASE_YEAR-$(date +%Y)
+        copyright_years=$RELEASE_YEAR-$this_year
     fi
     printf '%s\n' "$DISPLAY_NAME versie 365 (kz build $build)
 

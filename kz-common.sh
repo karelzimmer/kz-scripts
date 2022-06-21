@@ -274,14 +274,16 @@ Typ '$DISPLAY_NAME --help' voor meer informatie."
 
 function process_option_version {
     local build=''
-    local copyright_years='1970'
+    local copyright_years=1970
+    local this_year=1970
 
     build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
 
-    if [[ $RELEASE_YEAR -eq $(date +%Y) ]]; then
-        copyright_years=$RELEASE_YEAR
+    this_year=$(date +%Y)
+    if [[ $RELEASE_YEAR -eq $this_year ]]; then
+        copyright_years=$this_year
     else
-        copyright_years=$RELEASE_YEAR-$(date +%Y)
+        copyright_years=$RELEASE_YEAR-$this_year
     fi
 
     info "$DISPLAY_NAME versie 365 (kz build $build)
