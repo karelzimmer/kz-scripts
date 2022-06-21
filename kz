@@ -89,7 +89,7 @@ Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
 
 function show_commands {
     printf '%s\n' 'De volgende OPDRACHTen zijn beschikbaar:
-            
+
      OPDRACHT'
     find    "$PROGRAM_PATH"/kz-*            \
             -maxdepth 1                     \
