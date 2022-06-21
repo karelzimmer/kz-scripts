@@ -63,10 +63,9 @@ function init_script {
 function check_input {
     # Geen getopt want opgegeven opties zijn voor 'OPDRACHT', niet voor kz.
     if ! [[ "$*" ]]; then
-        printf  "$DISPLAY_NAME: %s\n%s %s\n"                    \
-                "verplicht argument 'OPDRACHT' ontreekt" >&2    \
-                "Typ '$DISPLAY_NAME --usage' of '$DISPLAY_NAME" \
-                "--help' voor meer informatie."
+        printf "$DISPLAY_NAME: %s\n" "verplicht argument 'OPDRACHT' ontbreekt
+Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
+
         exit $ERROR
     elif [[ $1 == *-u* ]]; then
         process_option_usage
@@ -81,18 +80,17 @@ function check_input {
         show_commands
         exit $SUCCESS
     elif ! [[ -e "$PROGRAM_PATH/kz-$1" ]]; then
-        printf  "$DISPLAY_NAME: %s\n%s\n"           \
-                "opdracht '$1' bestaat niet" >&2    \
-                "Typ '$DISPLAY_NAME --usage' voor meer informatie."
+        printf  "$DISPLAY_NAME: %s\n" "opdracht '$1' bestaat niet
+Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
         exit $ERROR
     fi
 }
 
 
 function show_commands {
-    printf  '%s\n\n     %s\n'                           \
-            'De volgende OPDRACHTen zijn beschikbaar:'  \
-            'OPDRACHT'
+    printf '%s\n' 'De volgende OPDRACHTen zijn beschikbaar:
+            
+     OPDRACHT'
     find    "$PROGRAM_PATH"/kz-*            \
             -maxdepth 1                     \
             -type f                         \
