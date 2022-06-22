@@ -4,9 +4,11 @@
  "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
 
 <!--
-PolicyKit actiedefinitiebestand voor kz install.
-
-Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
+# PolicyKit actiedefinitiebestand voor kz install.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
 -->
 
 <policyconfig>
