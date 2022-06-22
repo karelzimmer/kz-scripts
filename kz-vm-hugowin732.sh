@@ -1,8 +1,8 @@
 #!/bin/bash
 ###############################################################################
-# Start VM hugowin732.                                                        #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Start VM hugowin732.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 readonly TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'

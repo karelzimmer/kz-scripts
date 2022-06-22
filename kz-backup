@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Back-up maken.                                                              #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Back-up maken.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2007
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gt:'
@@ -40,7 +40,7 @@ MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null)
 readonly MEDIUM
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 declare OPTION_DELETE=''
@@ -52,7 +52,7 @@ declare TARGET_MEDIUM=''
 declare TARGET=''
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -287,7 +287,7 @@ Koppel zelf (veilig!) het USB-medium af."
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

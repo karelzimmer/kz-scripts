@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 22.04 LTS desktop.                           #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Installatiebestand voor Ubuntu 22.04 LTS desktop.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 apport (handmatig genereren van crashrapporten)

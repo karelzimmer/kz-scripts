@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Debian 11 LTS desktop op pc07.                      #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Installatiebestand voor Debian 11 LTS desktop op pc07.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1-deact-eth0 (activeren eth0 uit start-up halen)

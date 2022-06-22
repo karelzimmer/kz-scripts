@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Debian 11 LTS desktop.                              #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Installatiebestand voor Debian 11 LTS desktop.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 all-repos (alle repositories inschakelen)

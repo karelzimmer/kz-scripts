@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Debian 11 LTS desktop.                                   #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Instelbestand voor Debian 11 LTS desktop.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 bitwarden (wachtwoordbeheer)

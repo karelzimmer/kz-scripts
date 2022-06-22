@@ -4,9 +4,9 @@ Algemene module voor Python scripts.
 Deze module geeft toegang tot algemene functies.
 """
 ###############################################################################
-# Algemene module voor Python scripts.                                        #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Algemene module voor Python scripts.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 import sys

@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Pakket kz installeren.                                                      #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Pakket kz installeren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -21,7 +21,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2016
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
@@ -49,12 +49,12 @@ $OPTIONS_HELP_COMMON"
 readonly UPLOADS_DISTDIR=$HOME/kz-uploads/dist
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 declare DEVELOPER=false
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -406,7 +406,7 @@ Typ 'exit' om dit venster te sluiten."
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

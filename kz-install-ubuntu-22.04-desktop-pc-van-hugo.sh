@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 22.04 LTS desktop op pc-van-hugo.            #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Installatiebestand voor Ubuntu 22.04 LTS desktop op pc-van-hugo.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 calibre (e-boekmanager)

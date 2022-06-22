@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz ckname.                                       #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Tab-completion-script voor kz ckname.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 dashoptions='-h --help -u --usage -v --version'

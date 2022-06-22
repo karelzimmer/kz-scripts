@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Debian 11 LTS desktop op pc07 voor karel.                #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Instelbestand voor Debian 11 LTS desktop op pc07 voor karel.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 evolution (e-mail)

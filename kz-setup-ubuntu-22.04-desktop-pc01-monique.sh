@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu 22.04 LTS desktop op pc01 voor monique.           #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Instelbestand voor Ubuntu 22.04 LTS desktop op pc01 voor monique.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 firefox (webbrowser)

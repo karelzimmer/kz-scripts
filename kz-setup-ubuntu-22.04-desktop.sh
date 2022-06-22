@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu 22.04 LTS desktop.                                #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Instelbestand voor Ubuntu 22.04 LTS desktop.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 bitwarden (wachtwoordbeheer)

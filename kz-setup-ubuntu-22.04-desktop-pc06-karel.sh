@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu 22.04 LTS desktop op pc06 voor karel.             #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Instelbestand voor Ubuntu 22.04 LTS desktop op pc06 voor karel.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1 cockpit (browsergebaseerd beheer)

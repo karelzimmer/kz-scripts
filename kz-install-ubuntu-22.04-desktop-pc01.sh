@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 22.04 LTS desktop op pc01.                   #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Installatiebestand voor Ubuntu 22.04 LTS desktop op pc01.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 #1-add-hosts (koppel IP-adressen aan hostnamen)

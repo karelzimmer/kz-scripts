@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Scripts controleren.                                                        #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Scripts controleren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2015
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
@@ -34,7 +34,7 @@ $OPTIONS_HELP_COMMON"
 declare -i MAXRC=0
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -283,7 +283,7 @@ function term_script {
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

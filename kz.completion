@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz.                                              #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Tab-completion-script voor kz.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 dashoptions='backup build ckname deploy genpwd getdeb gset install ivp menu nas

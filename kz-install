@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Apps installeren.                                                           #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Apps installeren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2009
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fglrs'
@@ -59,7 +59,7 @@ SIM_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sim")
 readonly SIM_FILE
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 declare -a  APP_ARGUMENTS=()
@@ -84,7 +84,7 @@ declare     STATUS_ERROR=''
 declare     STATUS_SUCCESS=''
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -789,7 +789,7 @@ $action is voltooid."
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

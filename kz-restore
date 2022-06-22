@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Back-up terugzetten.                                                        #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Back-up terugzetten.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2007
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gs:'
@@ -38,7 +38,7 @@ readonly MEDIUM
 TARGET=$HOME
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 declare OPTION_DRY_RUN=''
@@ -49,7 +49,7 @@ declare SOURCE_MEDIUM=''
 declare SOURCE=''
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -243,7 +243,7 @@ Koppel zelf (veilig!) het USB-medium af."
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

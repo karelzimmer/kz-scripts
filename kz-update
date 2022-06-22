@@ -5,9 +5,9 @@ Systeem bijwerken.
 Dit script voert een update uit voor op Debian gebaseerde systemen.
 """
 ###############################################################################
-# Systeem bijwerken.                                                          #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Systeem bijwerken.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 import sys

@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz setup.                                        #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Tab-completion-script voor kz setup.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 dashoptions="-a --apps -c --cat '-e EDITIE' '--edition EDITIE' -f --files -g

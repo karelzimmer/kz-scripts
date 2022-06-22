@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz restore.                                      #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Tab-completion-script voor kz restore.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 dashoptions="--dry-run  -g --gui '-s BRONMAP' '--source BRONMAP' -h --help -u

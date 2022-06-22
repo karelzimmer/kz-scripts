@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 ###############################################################################
-# Algemene module voor shell scripts.                                         #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Algemene module voor shell scripts.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 declare PROGRAM_NAME='kz-common.sh'

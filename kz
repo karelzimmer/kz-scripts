@@ -1,8 +1,8 @@
 #!/bin/bash
 ###############################################################################
-# Opdracht uitvoeren.                                                         #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Opdracht uitvoeren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -13,7 +13,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly SUCCESS=0
@@ -37,7 +37,7 @@ Argumenten:
   ARG            argumenten behorend bij OPDRACHT"
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
@@ -45,7 +45,7 @@ declare BLUE=''
 declare NORMAL=''
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function init_script {
@@ -160,7 +160,7 @@ function term_script {
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

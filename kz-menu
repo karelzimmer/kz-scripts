@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Installatiemenu.                                                            #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Installatiemenu.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2015
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'g'
@@ -80,7 +80,7 @@ readonly -a MENU2_COMMANDS=(
 readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 declare     EXECUTE_COMMAND=false
@@ -88,7 +88,7 @@ declare -a  EXEC=()
 declare     OPTION_GUI=false
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -574,7 +574,7 @@ function term_script {
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

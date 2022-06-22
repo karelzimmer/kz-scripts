@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck source=kz-common.sh
 ###############################################################################
-# Pakket kz bouwen.                                                           #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Pakket kz bouwen.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -14,7 +14,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
 
 ###############################################################################
-# Global constants                                                            #
+# Global constants
 ###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
@@ -75,11 +75,11 @@ readonly -A DEB_TARGETS=(
     )
 
 ###############################################################################
-# Global variables                                                            #
+# Global variables
 ###############################################################################
 
 ###############################################################################
-# Functions                                                                   #
+# Functions
 ###############################################################################
 
 function check_input {
@@ -208,7 +208,6 @@ function build_uploads {
                 ps2pdf - "${UPLOADS_TARGETS[PDFS]}/$file.pdf"    |& $LOGCMD
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
-                #
                 # Must copy each file with suffix '.txt' added (temptextfile)
                 # before converting because:
                 # 1. desktop-files have XML inside which gets interpreted by
@@ -372,7 +371,7 @@ function term_script {
 }
 
 ###############################################################################
-# Main line                                                                   #
+# Script
 ###############################################################################
 
 function main {

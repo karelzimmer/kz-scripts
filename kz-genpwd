@@ -5,9 +5,9 @@ Wachtwoord genereren. Gebruik Bitwarden om wachtwoorden te beheren.
 Dit script genereert een wachtwoord bestaande uit 16 willekeurige tekens.
 """
 ###############################################################################
-# Wachtwoord genereren.                                                       #
-#                                                                             #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.                         #
+# Wachtwoord genereren.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
 import random
