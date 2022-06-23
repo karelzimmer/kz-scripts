@@ -19,7 +19,7 @@ sudo snap install bitwarden
 
 #1 chrome-remote-desktop (afstandsbediening)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-remote-desktop.gpg] http://dl.google.com/linux/chrome-remote-desktop/deb/ stable main' | sudo tee /etc/apt/sources.list.d/chrome-remote-desktop.list
-wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/chrome-remote-desktop.gpg
+wget --no-verbose --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/chrome-remote-desktop.gpg
 sudo apt-get update
 sudo apt-get install --yes chrome-remote-desktop
 ## De installatie overschrijft de zojuist toegevoegde source-list.
@@ -33,10 +33,10 @@ sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
 
 #1 citrix (telewerken)
 ## Afhankelijkheid sinds Ubuntu 22.04.
-wget --no-verbose --output-document=/tmp/libidn11.deb "https://karelzimmer.nl/downloads/citrix/libidn11_1.33-3_amd64.deb"
+wget --no-verbose --output-document=/tmp/libidn11.deb 'https://karelzimmer.nl/downloads/citrix/libidn11_1.33-3_amd64.deb'
 sudo apt-get install --yes /tmp/libidn11.deb
 ## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
-wget --no-verbose --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/citrix/icaclient_20.04.0.21_amd64.deb"
+wget --no-verbose --output-document=/tmp/icaclient.deb 'https://karelzimmer.nl/downloads/citrix/icaclient_20.04.0.21_amd64.deb'
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
 sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
@@ -56,7 +56,7 @@ sudo apt-get install --yes gnome-tweaks
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
+wget --no-verbose --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
 ## Installeer ook chrome-gnome-shell om extensions.gnome.org te laten werken.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
@@ -92,7 +92,7 @@ sudo apt-get install --yes gnome-sushi
 #1 teams (samenwerken)
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-teams.gpg] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
-wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft-teams.gpg
+wget --no-verbose --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft-teams.gpg
 sudo apt-get update
 sudo apt-get install --yes teams
 ## De installatie voegt een apt-key toe die niet meer nodig is.
@@ -109,7 +109,7 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 #1 teamviewer (afstandsbediening)
 ## Eerst teamviewer-tmp.list anders wordt de installatie interactief.
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer-tmp.list
-wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
+wget --no-verbose --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
 ## Van teamviewer-tmp.list naar teamviewer.list.
@@ -136,7 +136,7 @@ sudo apt-get install --yes ubuntu-wallpapers*
 #2 sudo apt-get remove --yes ubuntu-wallpapers*
 
 #1 zoom (samenwerken)
-wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/latest/zoom_amd64.deb
+wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #2 sudo apt-get remove --yes zoom

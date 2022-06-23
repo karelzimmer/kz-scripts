@@ -24,7 +24,7 @@ sudo snap install bitwarden
 
 #1 chrome-remote-desktop (afstandsbediening)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-remote-desktop.gpg] http://dl.google.com/linux/chrome-remote-desktop/deb/ stable main' | sudo tee /etc/apt/sources.list.d/chrome-remote-desktop.list
-wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/chrome-remote-desktop.gpg
+wget --no-verbose --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/chrome-remote-desktop.gpg
 sudo apt-get update
 sudo apt-get install --yes chrome-remote-desktop
 ## De installatie overschrijft de zojuist toegevoegde source-list.
@@ -56,7 +56,7 @@ sudo apt-get install --yes gnome-shell-extension-dashtodock
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-wget --no-verbose --output-document=- https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
+wget --no-verbose --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
 ## Installeer ook chrome-gnome-shell om extensions.gnome.org te laten werken.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
@@ -88,7 +88,7 @@ sudo snap install spotify
 #1 teams (samenwerken)
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-teams.gpg] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
-wget --no-verbose --output-document=- https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft-teams.gpg
+wget --no-verbose --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft-teams.gpg
 sudo apt-get update
 sudo apt-get install --yes teams
 ## De installatie voegt een apt-key toe die niet meer nodig is.
@@ -105,7 +105,7 @@ sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g'
 #1 teamviewer (afstandsbediening)
 ## Eerst teamviewer-tmp.list anders wordt de installatie interactief.
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer-tmp.list
-wget --no-verbose --output-document=- https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
+wget --no-verbose --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo apt-get install --yes teamviewer
 ## Van teamviewer-tmp.list naar teamviewer.list.
@@ -126,7 +126,7 @@ sudo apt-get install --yes -- *-wallpapers
 #2 sudo apt-get remove --yes *wallpapers
 
 #1 zoom (samenwerken)
-wget --no-verbose --output-document=/tmp/zoom.deb https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb
+wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb'
 sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
 rm /tmp/zoom.deb
 #2 sudo apt-get remove --yes zoom
