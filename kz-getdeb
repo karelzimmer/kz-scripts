@@ -57,7 +57,6 @@ readonly UPLOADS_DISTDIR=$HOME/kz-uploads/dist
 ###############################################################################
 # Global variables
 ###############################################################################
-declare DEVELOPER=false
 
 
 ###############################################################################
@@ -105,25 +104,9 @@ function check_input {
     if ! check_user_sudo; then
         term_script
     fi
-    check_developer
     check_on_ac_power
 }
 
-
-function check_developer {
-    local full_name=''
-
-    # Aangemeld als ontwikkelaar?
-    full_name=$(
-        getent passwd karel             |
-        cut --delimiter=':' --fields=5  |
-        cut --delimiter=',' --fields=1  || true
-        )
-    if [[   $HOSTNAME == pc??                               &&
-            ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
-        DEVELOPER=true
-    fi
-}
 
 function check_on_ac_power {
     local -i on_battery=0
@@ -229,9 +212,6 @@ duren)..."
 
 function process_input {
     install_scriptspackage
-    if $DEVELOPER; then
-        create_development_environment
-    fi
 }
 
 
@@ -266,15 +246,60 @@ function install_scriptspackage {
 }
 
 
-function create_development_environment {
-    TEXT='Maak ontwikkelomgeving...'
+function term_script {
+    local srcdir=/usr/share/doc/kz
+    local tgtdir=$HOME/kz-data
+
+    mkdir --parents "$tgtdir" |& $LOGCMD
+    # Clean-up.
+    rm --force "$tgtdir"/*
+    # Populate with checklist.
+    # Also 'kz-install --list' and 'kz-setup --list' will use this location.
+    cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
+        "$tgtdir"                                           |& $LOGCMD || true
+    TEXT="Pakket kz is succesvol geïnstalleerd.
+
+Volg nu de stappen zoals beschreven
+in de Checklist installatie.
+
+Checklist installatie is te vinden:
+- in de Persoonlijke map / kz-data
+- in de map $srcdir
+- op de site https://karelzimmer.nl,
+  onder Linux
+
+Typ 'exit' om dit venster te sluiten."
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                        --title     'Voortgang'     \
-                        --infobox   "$TEXT"         \
-                        7 29
-    check_dependencies
-    process_repos
-    download_website
+                        --title 'Gereed'            \
+                        --infobox "$TEXT"           \
+                        18 41
+    
+    if developer; then
+        check_dependencies
+        pull_repos
+        download_website
+        info 'Git stat:'
+        gitstat
+    fi
+    exit $SUCCESS
+}
+
+
+function developer {
+    local full_name=''
+
+    # Aangemeld als ontwikkelaar?
+    full_name=$(
+        getent passwd karel             |
+        cut --delimiter=':' --fields=5  |
+        cut --delimiter=',' --fields=1  || true
+        )
+    if [[   $HOSTNAME == pc??                               &&
+            ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
+        return $SUCCESS
+    else
+        return $ERROR
+    fi
 }
 
 
@@ -332,9 +357,10 @@ Volg de aanwijzingen op het scherm.
 }
 
 
-function process_repos {
+function pull_repos {
     local bin_repo=/home/karel/bin
 
+    info 'Pull repos...'
     git config --global pull.ff only |& $LOGCMD
     git config --global credential.helper store |& $LOGCMD
     if ! git    clone                                   \
@@ -357,6 +383,7 @@ function download_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
+    info 'Download website...'
     if ! command -v lftp 1> /dev/null; then
         sudo apt-get install --yes lftp |& $LOGCMD
     fi
@@ -376,40 +403,6 @@ function download_website {
         info 'Controleer de log...!'
         return  $ERROR
     fi
-}
-
-
-function term_script {
-    local srcdir=/usr/share/doc/kz
-    local tgtdir=$HOME/kz-data
-
-    mkdir --parents "$tgtdir" |& $LOGCMD
-    # Clean-up.
-    rm --force "$tgtdir"/*
-    # Populate with checklist.
-    # Also 'kz-install --list' and 'kz-setup --list' will use this location.
-    cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
-        "$tgtdir"                                           |& $LOGCMD || true
-    TEXT="Pakket kz is succesvol geïnstalleerd.
-
-Volg nu de stappen zoals beschreven
-in de Checklist installatie.
-
-Checklist installatie is te vinden:
-- in de Persoonlijke map / kz-data
-- in de map $srcdir
-- op de site https://karelzimmer.nl,
-  onder Linux
-
-Typ 'exit' om dit venster te sluiten."
-    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                        --title 'Gereed'            \
-                        --infobox "$TEXT"           \
-                        18 41
-    if $DEVELOPER; then
-        gitstat
-    fi
-    exit $SUCCESS
 }
 
 
