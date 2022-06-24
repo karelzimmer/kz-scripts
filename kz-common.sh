@@ -63,6 +63,7 @@ declare     RED=''
 declare     REWRITE_LINE=''
 declare     YELLOW=''
 
+
 ###############################################################################
 # Common functions
 ###############################################################################
@@ -424,7 +425,11 @@ een Terminalvenster en voer uit:
 
     case $PROGRAM_NAME in
         kz-getdeb)
-            rm --force /tmp/kz-common.sh kz kz.{1..99}
+            # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
+            rm --force kz.{2..99}
+            # Maar wel als in HOME, zoals beschreven in Checklist installatie.
+            cd "$HOME"
+            rm --force kz kz.1
 
             if [[ $rc -ne $SUCCESS ]]; then
                 log "$apt_error" --priority=debug
@@ -490,3 +495,5 @@ function warning {
         printf "${YELLOW}%b\n${NORMAL}" "$@" >&2
     fi
 }
+
+true
