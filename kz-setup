@@ -503,9 +503,18 @@ function process_option_list_user_photo {
 
 
 function process_option_list_desktop_background {
+    local picture_file=''
+
     printf '%s\n' "$text2"
-    gsettings get org.gnome.desktop.background picture-uri | sed 's|%20| |g' \
-    > "$file2" |& $LOGCMD
+    picture_file=$(
+        gsettings   get org.gnome.desktop.background picture-uri |
+        sed --expression='s|%20| |g'    |
+        sed --expression="s/'//g"       |
+        sed --expression='s|file://||'
+        )
+    if ! [[ $picture_file = $file2 ]]; then
+        cp $picture_file $file2 |& $LOGCMD
+    fi
 }
 
 
