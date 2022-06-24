@@ -507,13 +507,17 @@ function process_option_list_desktop_background {
 
     printf '%s\n' "$text2"
     picture_file=$(
-        gsettings   get org.gnome.desktop.background picture-uri |
+        gsettings get org.gnome.desktop.background picture-uri |
         sed --expression='s|%20| |g'    |
         sed --expression="s/'//g"       |
         sed --expression='s|file://||'
         )
+    # Niet cp-en als huidige Achtergrond al gelijk is aan ~/kz-data/Achtergond.
     if ! [[ $picture_file = "$file2" ]]; then
-        cp "$picture_file" "$file2" |& $LOGCMD
+        # Als Achtergrond niet bestaat een vraagteken als ~/kz-data/Achtergond.
+        if ! cp "$picture_file" "$file2" |& $LOGCMD; then
+            cp '/usr/share/pixmaps/kz-achtergrond.png' "$file2"
+        fi
     fi
 }
 
