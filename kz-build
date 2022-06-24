@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-build'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -74,9 +75,11 @@ readonly -A DEB_TARGETS=(
            [TABCOMPL]=$DEB_DISTDIR/usr/share/bash-completion/completions
     )
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
+
 
 ###############################################################################
 # Functions
@@ -369,6 +372,7 @@ function build_background_properties_file {
 function term_script {
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

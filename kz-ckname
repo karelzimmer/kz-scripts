@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-ckname'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2012
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -34,12 +35,14 @@ Argumenten:
 declare -ir FILENAME_MAXLEN=142
 readonly    START_DFLT=$HOME
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
 
 declare     ARGUMENT_MAP=false
 declare -a  MAP_ARGUMENTS=()
+
 
 ###############################################################################
 # Functions
@@ -172,6 +175,7 @@ function check_files_and_folders {
 function term_script {
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

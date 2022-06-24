@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-deploy'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2009
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -31,9 +32,11 @@ readonly SCRIPTS_REPO=$HOME/kz-scripts
 readonly UPLOADS_REPO=$HOME/kz-uploads
 readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
+
 
 ###############################################################################
 # Functions
@@ -195,6 +198,7 @@ function install_package {
 function term_script {
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

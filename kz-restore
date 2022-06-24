@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-restore'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2007
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -37,6 +38,7 @@ MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null)
 readonly MEDIUM
 TARGET=$HOME
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -47,6 +49,7 @@ declare OPTION_SOURCE=false
 declare SOURCE_ARGUMENT=''
 declare SOURCE_MEDIUM=''
 declare SOURCE=''
+
 
 ###############################################################################
 # Functions
@@ -241,6 +244,7 @@ Koppel zelf (veilig!) het USB-medium af."
     fi
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

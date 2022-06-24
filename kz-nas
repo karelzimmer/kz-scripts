@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-nas'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2014
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -53,6 +54,7 @@ readonly SYSTEMD_MOUNT_DIR=/etc/systemd/system
 readonly SYSTEMD_MOUNT_FILE=mnt-nas.mount
 readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -62,6 +64,7 @@ declare NAS_IP_ADRES=192.168.0.200
 declare NAS_SHARENAAM=${SUDO_USER:-$USER}
 declare NAS_WACHTWOORD='geheim'
 declare OPTION_GUI=false
+
 
 ###############################################################################
 # Functions
@@ -357,6 +360,7 @@ De-activeer het systemd mount-besta2nd met de opdracht:
 [1] ${BLUE}sudo systemctl disable mnt-nas.mount${NORMAL}"
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-gset'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2015
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -45,6 +46,7 @@ Opties:
                  verwijder APPFOLDER
 $OPTIONS_HELP_COMMON"
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -62,6 +64,7 @@ declare OPTION_DELAPPFOLDER=false
 declare OPTION_DELFAV=false
 declare OPTION_LIST=false
 declare OPTION_RESETFAVS=false
+
 
 ###############################################################################
 # Functions
@@ -313,6 +316,7 @@ Bij WIJZIGINGen voer uit: ${BLUE}gsettings set WIJZIGING${NORMAL}"
 function term_script {
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

@@ -12,6 +12,7 @@ readonly PROGRAM_NAME='kz'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -36,6 +37,7 @@ Argumenten:
   OPDRACHT       uit te voeren opdracht
   ARG            argumenten behorend bij OPDRACHT"
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -43,6 +45,7 @@ Argumenten:
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare BLUE=''
 declare NORMAL=''
+
 
 ###############################################################################
 # Functions
@@ -158,6 +161,7 @@ function process_input {
 function term_script {
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

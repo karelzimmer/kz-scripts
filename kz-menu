@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-menu'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2015
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -79,6 +80,7 @@ readonly -a MENU2_COMMANDS=(
     )
 readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -86,6 +88,7 @@ readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 declare     EXECUTE_COMMAND=false
 declare -a  EXEC=()
 declare     OPTION_GUI=false
+
 
 ###############################################################################
 # Functions
@@ -572,6 +575,7 @@ $TEXT"
 function term_script {
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

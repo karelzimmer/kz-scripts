@@ -20,6 +20,7 @@ readonly PROGRAM_NAME='kz-getdeb'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2016
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -48,10 +49,12 @@ $OPTIONS_HELP_COMMON"
 
 readonly UPLOADS_DISTDIR=$HOME/kz-uploads/dist
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
 declare DEVELOPER=false
+
 
 ###############################################################################
 # Functions
@@ -404,6 +407,7 @@ Typ 'exit' om dit venster te sluiten."
     fi
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

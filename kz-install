@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-install'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2009
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -58,6 +59,7 @@ readonly CMDS_FILE
 SIM_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sim")
 readonly SIM_FILE
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -82,6 +84,7 @@ declare     RUN_AS_SUPERUSER=true
 declare     STATUS_BUSY=''
 declare     STATUS_ERROR=''
 declare     STATUS_SUCCESS=''
+
 
 ###############################################################################
 # Functions
@@ -787,6 +790,7 @@ $action is voltooid."
     fi
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script

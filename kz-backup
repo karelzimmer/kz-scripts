@@ -13,6 +13,7 @@ readonly PROGRAM_NAME='kz-backup'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2007
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
@@ -39,6 +40,7 @@ readonly SOURCE=$HOME
 MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null)
 readonly MEDIUM
 
+
 ###############################################################################
 # Global variables
 ###############################################################################
@@ -50,6 +52,7 @@ declare OPTION_TARGET=false
 declare TARGET_ARGUMENT=''
 declare TARGET_MEDIUM=''
 declare TARGET=''
+
 
 ###############################################################################
 # Functions
@@ -285,6 +288,7 @@ Koppel zelf (veilig!) het USB-medium af."
     fi
     exit $SUCCESS
 }
+
 
 ###############################################################################
 # Script
