@@ -17,7 +17,10 @@ else
         printf '%s\n' 'Downloaden kz-common.sh is mislukt.'
         exit 1
     fi
-    source /tmp/kz-common.sh
+    if ! source /tmp/kz-common.sh; then
+        printf '%s\n' 'Inlezen kz-common.sh is mislukt.'
+        exit 1
+    fi
 fi
 readonly PROGRAM_NAME='kz-getdeb'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
