@@ -512,13 +512,7 @@ function process_option_list_desktop_background {
         sed --expression="s/'//g"       |
         sed --expression='s|file://||'
         )
-    # Niet cp-en als huidige Achtergrond al gelijk is aan ~/kz-data/Achtergond.
-    if ! [[ $picture_file = "$file2" ]]; then
-        # Als Achtergrond niet bestaat leeg bestand.
-        if ! cp "$picture_file" "$file2" |& $LOGCMD; then
-            touch "$file2"
-        fi
-    fi
+    cp "$picture_file" "$file2" |& $LOGCMD || true
 }
 
 
