@@ -495,10 +495,7 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
 
 function process_option_list_user_photo {
     printf '%s\n' "$text1"
-    if ! cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD; then
-        touch "$file1"
-        echo 'Geen gebruikersfoto gevonden of ingesteld.' > "$file1"
-    fi
+    cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD || true
 }
 
 
