@@ -426,7 +426,7 @@ een Terminalvenster en voer uit:
     case $PROGRAM_NAME in
         kz-getdeb)
             # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
-            rm --force kz.{2..99}
+            rm --force kz.{2..99} /tmp/kz-common.sh
             # Maar wel als in HOME, zoals beschreven in Checklist installatie.
             cd "$HOME"
             rm --force kz kz.1
