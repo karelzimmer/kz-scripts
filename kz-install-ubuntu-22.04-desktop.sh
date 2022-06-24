@@ -131,10 +131,6 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt autoremove --yes
 
-#1 wallpapers (bureabladachtergronden)
-sudo apt-get install --yes ubuntu-wallpapers*
-#2 sudo apt-get remove --yes ubuntu-wallpapers*
-
 #1 zoom (samenwerken)
 wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
 sudo apt-get install --yes /tmp/zoom.deb

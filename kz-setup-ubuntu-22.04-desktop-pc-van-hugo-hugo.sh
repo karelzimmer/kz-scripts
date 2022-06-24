@@ -6,7 +6,7 @@
 ###############################################################################
 
 #1 gnome (bureaubladomgeving)
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Cairn_by_Sylvain_Naudin.jpg'
+gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-steenhoop.jpg'
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 #2 gsettings reset org.gnome.desktop.background picture-uri
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
