@@ -277,7 +277,7 @@ Typ 'exit' om dit venster te sluiten."
         check_dependencies
         pull_repos
         download_website
-        info 'Git stat:'
+        info 'Status repos (gitstat)...'
         gitstat
     fi
     exit $SUCCESS
@@ -303,6 +303,7 @@ function developer {
 
 
 function check_dependencies {
+    info 'Check dependencies (command -v)...'
     if ! command -v fakeroot 1> /dev/null; then
         # Voor lz-build .deb.
         info 'Installeer fakeroot...'
@@ -359,7 +360,7 @@ Volg de aanwijzingen op het scherm.
 function pull_repos {
     local bin_repo=/home/karel/bin
 
-    info 'Pull repos...'
+    info 'Pull repos (gitpull)...'
     git config --global pull.ff only |& $LOGCMD
     git config --global credential.helper store |& $LOGCMD
     if ! git    clone                                   \
@@ -382,7 +383,7 @@ function download_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info 'Download website...'
+    info 'Download website (lftp)...'
     if ! command -v lftp 1> /dev/null; then
         sudo apt-get install --yes lftp |& $LOGCMD
     fi
