@@ -66,8 +66,6 @@ readonly -A DEB_TARGETS=(
                [DIST]=$DEB_DISTDIR
               [BUILD]=$DEB_DISTDIR/usr/local/etc
        [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
-        [BACKGROUNDS]=$DEB_DISTDIR/usr/share/backgrounds
-    [BACKGROUND_PROP]=$DEB_DISTDIR/usr/share/gnome-background-properties
                 [BIN]=$DEB_DISTDIR/usr/bin
                 [DOC]=$DEB_DISTDIR/usr/share/doc/kz
                 [MAN]=$DEB_DISTDIR/usr/share/man/man1
@@ -316,8 +314,6 @@ function build_deb {
         mv "$file" "$newfile" |& $LOGCMD
     done
 
-    build_background_properties_file
-
     cp  --archive                                               \
         --update                                                \
         "${UPLOADS_TARGETS[PDFS]}"/Checklist-installatie*.pdf   \
@@ -332,40 +328,6 @@ function build_deb {
                 -Zgzip                              \
                 "$DEB_DISTDIR"                      \
                 "${UPLOADS_TARGETS[DEB]}/$DEB_NAME" |& $LOGCMD
-}
-
-
-function build_background_properties_file {
-    local filename=''
-    local wallpaper=''
-    local wallpapers_config_file=kz-wallpapers.xml
-
-    {
-        printf '%s\n' '<?xml version="1.0" encoding="UTF-8"?>'
-        printf '%s\n' '<!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">'
-        printf '%s\n' '<wallpapers>'
-    } > "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
-
-    cd "${DEB_TARGETS[BACKGROUNDS]}"
-    for wallpaper in *; do
-        # Verwijder DEB_DISTDIR uit DEB_TARGETS[BACKGROUNDS].  Voorbeeld:
-        # /tmp/kz/usr/share/backgrounds/kz-gnome.png ->
-        # /usr/share/backgrounds/kz-gnome.png
-        filename=${DEB_TARGETS[BACKGROUNDS]}/$wallpaper
-        filename=${filename/$DEB_DISTDIR/}
-        printf '    %s\n' "<wallpaper>
-        <name>${wallpaper%.*}</name>
-        <filename>$filename</filename>
-        <options>zoom</options>
-        <pcolor>#000000</pcolor>
-        <scolor>#000000</scolor>
-        <shade_type>solid</shade_type>
-    </wallpaper>" \
-            >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
-    done
-    printf '%s\n' '</wallpapers>' \
-            >> "${DEB_TARGETS[BACKGROUND_PROP]}/$wallpapers_config_file"
-    cd "$HOME"
 }
 
 
