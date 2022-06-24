@@ -512,8 +512,8 @@ function process_option_list_desktop_background {
         sed --expression="s/'//g"       |
         sed --expression='s|file://||'
         )
-    if ! [[ $picture_file = $file2 ]]; then
-        cp $picture_file $file2 |& $LOGCMD
+    if ! [[ $picture_file = "$file2" ]]; then
+        cp "$picture_file" "$file2" |& $LOGCMD
     fi
 }
 
