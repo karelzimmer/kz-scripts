@@ -251,8 +251,7 @@ function term_script {
     local tgtdir=$HOME/kz-data
 
     mkdir --parents "$tgtdir" |& $LOGCMD
-    # Clean-up.
-    rm --force "$tgtdir"/*
+
     # Populate with checklist.
     # Also 'kz-install --list' and 'kz-setup --list' will use this location.
     cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
