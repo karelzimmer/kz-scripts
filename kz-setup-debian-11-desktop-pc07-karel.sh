@@ -14,8 +14,8 @@ kz-gset --delfav=firefox-esr
 #2 kz-gset --addfavbef=firefox-esr
 
 #1 gnome (bureaubladomgeving)
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'
-gsettings set org.gnome.desktop.screensaver picture-uri 'file:///usr/share/backgrounds/kz-gnome.png'
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/karel/kz-data/Achtergrond'
+gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/karel/kz-data/Achtergrond'
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing

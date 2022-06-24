@@ -6,5 +6,5 @@
 ###############################################################################
 
 #1 gnome (bureaubladomgeving)
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/kz-caramel.jpg'
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/emily/kz-data/Achtergrond'
 #2 gsettings reset org.gnome.desktop.background picture-uri
