@@ -387,7 +387,7 @@ $(
                     --number-format=rn      \
                     --number-separator='] ' \
                     --body-numbering=a      |
-            sed     's/^/[/'; then
+            sed     --expression='s/^/[/'; then
         printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
         printf '%s\n' "
@@ -432,7 +432,7 @@ $(
                     --number-format=rn              \
                     --number-separator='] '         \
                     --body-numbering=a              |
-            sed     's/^/[/'; then
+            sed     --expression='s/^/[/'; then
         printf '%s\n' "     0 Geen bestanden aanwezig op het systeem.
 
 $USAGELINE"

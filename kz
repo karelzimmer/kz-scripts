@@ -103,12 +103,12 @@ function show_commands {
             -not -name 'kz'                 \
             -printf '%f\n'                  |
     sort                                    |
-    sed     's/kz-//'                       |
+    sed     --expression='s/kz-//'          |
             nl      --number-width=2        \
                     --number-format=rn      \
                     --number-separator='] ' \
                     --body-numbering=a      |
-            sed     's/^/[/'
+            sed     --expression='s/^/[/'
     printf  '\n%s %s\n'                         \
             "Om een OPDRACHT uit te voeren:"    \
             "${BLUE}$DISPLAY_NAME OPDRACHT${NORMAL}"

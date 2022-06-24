@@ -159,7 +159,7 @@ function restore_backup {
                 "$SOURCE"/                  \
                 "$TARGET"                   \
                 2> >($LOGCMD)               |
-        sed     's/^/#/'                    |
+        sed     --expression='s/^/#/'       |
         zenity  --progress                  \
                 --auto-close                \
                 --no-cancel                 \
