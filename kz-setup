@@ -514,9 +514,9 @@ function process_option_list_desktop_background {
         )
     # Niet cp-en als huidige Achtergrond al gelijk is aan ~/kz-data/Achtergond.
     if ! [[ $picture_file = "$file2" ]]; then
-        # Een vraagteken als Achtergrond niet bestaat.
+        # Als Achtergrond niet bestaat leeg bestand.
         if ! cp "$picture_file" "$file2" |& $LOGCMD; then
-            cp '/usr/share/pixmaps/kz-achtergrond.png' "$file2"
+            touch "$file2"
         fi
     fi
 }
