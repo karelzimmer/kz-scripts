@@ -15,11 +15,19 @@ import kz_common
 import subprocess
 
 
+###############################################################################
+# Variables
+###############################################################################
+
 program_name = 'kz-update'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 desc = 'Systeem bijwerken.'
 
+
+###############################################################################
+# Functions
+###############################################################################
 
 def perform_update():
     subprocess.run('sudo true', shell=True, check=True)
@@ -54,7 +62,9 @@ updates af te ronden.')
         sys.exit(1)
 
 
-# --- script ---
+###############################################################################
+# Script
+###############################################################################
 
 kz_common.process_common_options(desc, display_name)
 

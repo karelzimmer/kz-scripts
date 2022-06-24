@@ -14,9 +14,17 @@ import argparse
 import datetime
 
 
+###############################################################################
+# Variables
+###############################################################################
+
 module_name = 'kz_common.py'
 release_year = 2021
 
+
+###############################################################################
+# Functions
+###############################################################################
 
 def process_common_options(desc, display_name):
     """
@@ -78,6 +86,10 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 Auteursrecht (c) {copyright_years} Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.""")
 
+
+###############################################################################
+# Script
+###############################################################################
 
 if __name__ == '__main__':
     print(f'{module_name}: ik ben een module')
