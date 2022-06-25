@@ -15,7 +15,7 @@ kz-gset --addfavbef=firefox_firefox
 #2 kz-gset --delfav=firefox_firefox
 
 #1 gnome (bureaubladomgeving)
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/ella/kz-data/Achtergrond'
+gsettings set org.gnome.desktop.background picture-uri "file:///$HOME/kz-data/Achtergrond"
 #2 gsettings reset org.gnome.desktop.background picture-uri
 
 #1 google-chrome (webbrowser)

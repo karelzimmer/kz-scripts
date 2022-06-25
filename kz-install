@@ -552,7 +552,7 @@ installatie van een pakket of
     printf '%b\n' "$header\n$DASHES" >> "$file"
 
     search=/etc/apt/sources.list
-    cd  $search.d
+    cd  $search.d |& $LOGCMD
     if !    grep    --recursive             \
                     --no-filename           \
                     --regexp='^deb '        \

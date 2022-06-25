@@ -365,7 +365,7 @@ function pull_repos {
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             |& $LOGCMD; then
-        cd "$bin_repo"
+        cd "$bin_repo" |& $LOGCMD
         git pull |& $LOGCMD
     fi
     /home/karel/bin/gitpull |& $LOGCMD
