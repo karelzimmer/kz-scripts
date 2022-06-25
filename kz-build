@@ -189,16 +189,7 @@ function build_uploads {
 
     # Vul dist/ met kz-scripts.
     cd "${UPLOADS_SOURCES[SCRIPTS]}"
-    for file in *; do
-        if [[ $file = README.md ]]; then
-            continue
-        elif [[ $file == *.git* ]]; then
-            continue
-        elif [[ $file == *_pychache_* ]]; then
-            continue
-        elif [[ -d "$file" ]]; then
-            continue
-        fi
+    for file in kz*; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
         if ! diff "$file" "${UPLOADS_TARGETS[SCRIPTS]}/$file" &> /dev/null
