@@ -302,7 +302,6 @@ function developer {
 
 
 function check_dependencies {
-    info 'Check dependencies (command -v)...'
     if ! command -v fakeroot 1> /dev/null; then
         # Voor lz-build .deb.
         info 'Installeer fakeroot...'
