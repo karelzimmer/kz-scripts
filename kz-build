@@ -156,7 +156,7 @@ function build_uploads {
     # alleen timestamp is verschillend, niet de inhoud).
 
     # Vul dist/ met app/
-    cd "$UPLOADS_APPDIR" |& $LOGCMD
+    cd "$UPLOADS_APPDIR"
     while read -r file; do
         # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
         if ! diff "$file" "$UPLOADS_DISTDIR/$file" &> /dev/null; then
@@ -167,10 +167,10 @@ function build_uploads {
                 "$UPLOADS_DISTDIR"  |& $LOGCMD
         fi
     done < <(find . -type f -print)
-    cd "$HOME" |& $LOGCMD
+    cd "$HOME"
 
     # Vul dist/ met kz-docs.
-    cd "${UPLOADS_SOURCES[DOCS]}" |& $LOGCMD
+    cd "${UPLOADS_SOURCES[DOCS]}"
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
@@ -185,12 +185,16 @@ function build_uploads {
                         "$file"                             |& $LOGCMD
         fi
     done
-    cd "$HOME" |& $LOGCMD
+    cd "$HOME"
 
     # Vul dist/ met kz-scripts.
-    cd "${UPLOADS_SOURCES[SCRIPTS]}" |& $LOGCMD
+    cd "${UPLOADS_SOURCES[SCRIPTS]}"
     for file in *; do
         if [[ $file = README.md ]]; then
+            continue
+        elif [[ $file = *.git* ]]; then
+            continue
+        elif [[ $file = *_pychache_* ]]; then
             continue
         elif [[ -d "$file" ]]; then
             continue
@@ -230,7 +234,7 @@ function build_uploads {
             fi
         fi
     done
-    cd "$HOME" |& $LOGCMD
+    cd "$HOME"
 }
 
 

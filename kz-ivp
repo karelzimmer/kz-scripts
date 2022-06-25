@@ -83,7 +83,7 @@ function process_input {
     local script=''
     local scriptsdir=$HOME/kz-scripts
 
-    cd "$scriptsdir" |& $LOGCMD
+    cd "$scriptsdir"
     for script in *; do
         if ! [[ -f $script ]]; then
             continue
@@ -118,7 +118,7 @@ function process_input {
                 ;;
         esac
     done
-    cd "$HOME" |& $LOGCMD
+    cd "$HOME"
 }
 
 
