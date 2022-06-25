@@ -141,7 +141,6 @@ function check_input {
 function process_input {
     # Er is een afhankelijkheid met het maken van pdf's, vandaar uploads eerst.
     build_uploads
-    exit 
     build_deb
 }
 
