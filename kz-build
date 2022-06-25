@@ -141,6 +141,7 @@ function check_input {
 function process_input {
     # Er is een afhankelijkheid met het maken van pdf's, vandaar uploads eerst.
     build_uploads
+    exit 
     build_deb
 }
 
@@ -192,9 +193,9 @@ function build_uploads {
     for file in *; do
         if [[ $file = README.md ]]; then
             continue
-        elif [[ $file = *.git* ]]; then
+        elif [[ $file == *.git* ]]; then
             continue
-        elif [[ $file = *_pychache_* ]]; then
+        elif [[ $file == *_pychache_* ]]; then
             continue
         elif [[ -d "$file" ]]; then
             continue
