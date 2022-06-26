@@ -243,6 +243,24 @@ function install_scriptspackage {
             --reinstall                     \
             "$temp_deb"                     |& $LOGCMD
     rm "$temp_deb" |& $LOGCMD
+    if ! snap list core &> /dev/null; then
+        # Voor Debian nodig.
+        clear -x
+        printf '%s\n' 'De runtime-omgeving voor snapd is zojuist geïnstalleerd.
+Om verder te gaan is eerst een herstart nodig.
+Daarna de installatie van pakket kz met scripts en documenten van Karel Zimmer
+vervolgen via het starten van Terminalvenster met toetscombinatie Ctrl-Alt-T.
+Typ, of kopieer en plak, deze twee opdrachten, ieder gevolgd door de
+Enter-toets:
+wget karelzimmer.nl/kz
+bash kz
+
+Volg de aanwijzingen op het scherm.
+'
+        read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
+        sudo reboot
+        exit $SUCCESS
+    fi
 }
 
 
@@ -326,26 +344,6 @@ function check_dependencies {
         # Voor kz-ivp check Python scripts.
         info 'Installeer pycodestyle...'
         sudo apt-get install --yes pycodestyle |& $LOGCMD
-    fi
-    if ! snap list core &> /dev/null; then
-        # Voor Debian nodig.
-        info 'Installeer snap core...'
-        sudo snap install core |& $LOGCMD
-        clear -x
-        printf '%s\n' 'De runtime-omgeving voor snapd is zojuist geïnstalleerd.
-Om verder te gaan is eerst een herstart nodig.
-Daarna de installatie van pakket kz met scripts en documenten van Karel Zimmer
-vervolgen via het starten van Terminalvenster met toetscombinatie Ctrl-Alt-T.
-Typ, of kopieer en plak, deze twee opdrachten, ieder gevolgd door de
-Enter-toets:
-wget karelzimmer.nl/kz
-bash kz
-
-Volg de aanwijzingen op het scherm.
-'
-        read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
-        sudo reboot
-        exit $SUCCESS
     fi
     if ! command -v shellcheck &> /dev/null; then
         info 'Installeer shellcheck...'
