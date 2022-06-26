@@ -246,8 +246,8 @@ function install_scriptspackage {
     if ! snap list core &> /dev/null; then
         # Voor Debian nodig.
         clear -x
-        printf '%s\n' 'De runtime-omgeving voor snapd is zojuist geïnstalleerd.
-Om verder te gaan is eerst een herstart nodig.
+        printf '%s\n' "De runtime-omgeving voor snapd is zojuist geïnstalleerd.
+Om verder te gaan is eerst een herstart nodig, dan aanmelden als $USER.
 Daarna de installatie van pakket kz vervolgen via een druk op de Super-toets,
 typ term, en klik op het pictogram van Terminalvenster.
 Typ, of kopieer en plak, deze twee opdrachten, ieder gevolgd door de
@@ -256,7 +256,7 @@ wget karelzimmer.nl/kz
 bash kz
 
 Volg de aanwijzingen op het scherm.
-'
+"
         read -rp 'Druk op de Enter-toets om verder te gaan [Enter]: '
         sudo reboot
         exit $SUCCESS
