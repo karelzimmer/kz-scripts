@@ -185,7 +185,9 @@ function init_script {
 
     log "$DASHES"
     log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
-    xhost +si:localuser:root |& $LOGCMD --priority=debug
+    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
+        xhost +si:localuser:root |& $LOGCMD --priority=debug
+    fi
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
