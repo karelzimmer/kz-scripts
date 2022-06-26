@@ -110,17 +110,16 @@ function check_user_root {
             info 'Reeds uitgevoerd door de beheerder.'
             exit $SUCCESS
         fi
+        if $OPTION_GUI; then
+            log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
+                --priority=debug
+            pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
+            NOERROR=true exit $pkexec_rc
+        fi
         if [[ $UID -ne 0 ]]; then
-            if $OPTION_GUI; then
-                log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
-                    --priority=debug
-                pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
-                NOERROR=true exit $pkexec_rc
-            else
-                log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
-                    --priority=debug
-                exec sudo "$0" "${CMDLINE_ARGS[@]}"
-            fi
+            log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
+                --priority=debug
+            exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi
     else
         if [[ $UID -eq 0 ]]; then
