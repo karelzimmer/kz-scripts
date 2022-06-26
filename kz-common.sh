@@ -105,11 +105,6 @@ function error {
 function check_user_root {
     local -i pkexec_rc=0
 
-    if [[ $UID -eq 0 && ${SUDO_USER:-'root'} = 'root' ]]; then
-        info "Niet uitvoeren als root."
-        NOERROR=true exit $ERROR
-    fi
-
     if $RUN_AS_SUPERUSER; then
         if ! check_user_sudo; then
             info 'Reeds uitgevoerd door de beheerder.'
