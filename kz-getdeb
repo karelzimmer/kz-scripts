@@ -334,8 +334,8 @@ function check_dependencies {
         clear -x
         printf '%s\n' 'De runtime-omgeving voor snapd is zojuist geïnstalleerd.
 Om verder te gaan is eerst een herstart nodig.
-Daarna de installatie van pakket kz vervolgen via een druk op de Super-toets,
-typ term, en klik op het pictogram van Terminalvenster.
+Daarna de installatie van pakket kz met scripts en documenten van Karel Zimmer
+vervolgen via het starten van Terminalvenster met toetscombinatie Ctrl-Alt-T.
 Typ, of kopieer en plak, deze twee opdrachten, ieder gevolgd door de
 Enter-toets:
 wget karelzimmer.nl/kz
