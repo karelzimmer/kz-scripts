@@ -310,8 +310,8 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+            "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
         )
     process_commands
 }

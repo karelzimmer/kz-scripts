@@ -39,7 +39,7 @@ sudo apt-get install --yes gimp
 sudo apt-get install --yes aspell-nl git
 #2 sudo apt-get remove --yes git
 
-#1 gnome-gmail (Gmail als de favoriete e-mailtoepassing in GNOME)
+#1 gnome-gmail (Gmail als e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
 

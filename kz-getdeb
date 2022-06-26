@@ -348,7 +348,7 @@ Volg de aanwijzingen op het scherm.
         exit $SUCCESS
     fi
     if ! command -v shellcheck &> /dev/null; then
-        info 'Installeer snap shellcheck...'
+        info 'Installeer shellcheck...'
         # Debian's pakket is oud, snap is nieuwer.
         sudo snap install shellcheck |& $LOGCMD
     fi
