@@ -31,6 +31,10 @@ sudo apt-get install --yes ansible
 sudo apt-get install --yes cockpit cockpit-pcp
 #2 sudo apt-get remove --yes cockpit
 
+#1 gimp (GNU-beeldmanipulatieprogramma)
+sudo apt-get install --yes gimp
+#2 sudo apt-get remove --yes gimp
+
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes aspell-nl git
 #2 sudo apt-get remove --yes git
@@ -51,10 +55,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 #1 locate (bestanden snel zoeken op naam)
 sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
-
-#1 pinta (tekenprogramma)
-sudo apt-get install --yes pinta
-#2 sudo apt-get remove --yes pinta
 
 #1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
 sudo apt-get install --yes pinfo

@@ -13,14 +13,14 @@ sudo apt-get install --yes calibre
 sudo apt-get install --yes clamtk-gnome
 #2 sudo apt-get remove --yes clamtk-gnome
 
+#1 gimp (GNU-beeldmanipulatieprogramma)
+sudo apt-get install --yes gimp
+#2 sudo apt-get remove --yes gimp
+
 #1 lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-
-#1 pinta (tekenprogramma)
-sudo apt-get install --yes pinta
-#2 sudo apt-get remove --yes pinta
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop
