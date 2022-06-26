@@ -295,7 +295,7 @@ Typ 'exit' om dit venster te sluiten."
         pull_repos
         download_website
         info 'Status repos (gitstat)...'
-        gitstat
+        /home/karel/bin/gitstat
     fi
     exit $SUCCESS
 }
