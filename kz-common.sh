@@ -185,13 +185,7 @@ function init_script {
 
     log "$DASHES"
     log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
-    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        log '(++) Met Debian heeft gebruiker root toegang nodig
-(++) tot mijn X-sessie voor het kunnen gebruiken van
-(++) zenity in kz-scripts met RUN_AS_SUPERUSER=true:
-(++) xhost +si:localuser:root' --priority=debug
-        xhost +si:localuser:root |& $LOGCMD --priority=debug
-    fi
+    xhost +si:localuser:root |& $LOGCMD --priority=debug
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
