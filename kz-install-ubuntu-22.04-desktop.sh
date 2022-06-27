@@ -69,9 +69,6 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
 
-#1 language-support (taalondersteuning)
-check-language-support | xargs sudo apt-get install --yes
-
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #2 sudo apt-get remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
@@ -136,3 +133,6 @@ wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest
 sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #2 sudo apt-get remove --yes zoom
+
+#1 language-support (taalondersteuning)
+check-language-support | xargs sudo apt-get install --yes
