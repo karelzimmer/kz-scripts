@@ -32,8 +32,8 @@ sudo apt-get install --yes cockpit cockpit-pcp
 #2 sudo apt-get remove --yes cockpit
 
 #1 gimp (beeldmanipulatieprogramma)
-sudo apt-get install --yes gimp
-#2 sudo apt-get remove --yes gimp
+sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
+#2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes aspell-nl git

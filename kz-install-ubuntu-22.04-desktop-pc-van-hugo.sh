@@ -14,8 +14,8 @@ sudo apt-get install --yes clamtk-gnome
 #2 sudo apt-get remove --yes clamtk-gnome
 
 #1 gimp (beeldmanipulatieprogramma)
-sudo apt-get install --yes gimp
-#2 sudo apt-get remove --yes gimp
+sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
+#2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
 #1 lidswitch (negeer sluiten laptopdesksel)
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
