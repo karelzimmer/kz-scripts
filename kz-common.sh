@@ -185,7 +185,8 @@ function init_script {
 
     log "$DASHES"
     log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
-    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
+    if $RUN_AS_SUPERUSER && [[ $UID -ne 0 ]]; then
+        # Needed for e.g. Debian.
         xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
 
