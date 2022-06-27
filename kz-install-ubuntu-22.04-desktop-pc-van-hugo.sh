@@ -13,7 +13,7 @@ sudo apt-get install --yes calibre
 sudo apt-get install --yes clamtk-gnome
 #2 sudo apt-get remove --yes clamtk-gnome
 
-#1 gimp (GNU-beeldmanipulatieprogramma)
+#1 gimp (beeldmanipulatieprogramma)
 sudo apt-get install --yes gimp
 #2 sudo apt-get remove --yes gimp
 

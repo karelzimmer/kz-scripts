@@ -31,7 +31,7 @@ sudo apt-get install --yes ansible
 sudo apt-get install --yes cockpit cockpit-pcp
 #2 sudo apt-get remove --yes cockpit
 
-#1 gimp (GNU-beeldmanipulatieprogramma)
+#1 gimp (beeldmanipulatieprogramma)
 sudo apt-get install --yes gimp
 #2 sudo apt-get remove --yes gimp
 
