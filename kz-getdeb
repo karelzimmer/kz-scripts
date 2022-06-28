@@ -238,9 +238,8 @@ function install_scriptspackage {
     wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
-            install                         \
+            reinstall                       \
             --yes                           \
-            --reinstall                     \
             "$temp_deb"                     |& $LOGCMD
     rm "$temp_deb" |& $LOGCMD
 }
