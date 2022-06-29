@@ -452,11 +452,11 @@ BESTAND...${NORMAL}"
 function process_option_list {
     local tgtdir=$HOME/kz-data
     local text0='Opdrachten worden verwerkt'
-    local text1='[1/3]  Gebruikersfoto vastleggen'
-    local file1="$tgtdir"/Gebruikersfoto
-    local text2='[2/3]  Achtergrond vastleggen'
-    local file2="$tgtdir"/Achtergrond
-    local text3='[3/3]  Favorieten vastleggen'
+    local text1='[1/3] Achtergrond vastleggen'
+    local file1="$tgtdir"/Achtergrond
+    local text2='[2/3] Gebruikersfoto vastleggen'
+    local file2="$tgtdir"/Gebruikersfoto
+    local text3='[3/3] Favorieten vastleggen'
     local file3="$tgtdir"/Favorieten
 
     mkdir --parents "$tgtdir" |& $LOGCMD
@@ -465,9 +465,9 @@ function process_option_list {
     if $OPTION_GUI; then
         (
         printf '%s\n' "#$text1"
-        process_option_list_user_photo
-        printf '%s\n' "#$text2"
         process_option_list_desktop_background
+        printf '%s\n' "#$text2"
+        process_option_list_user_photo
         printf '%s\n' "#$text3"
         process_option_list_favorite_apps
         ) |&
@@ -480,8 +480,8 @@ function process_option_list {
                 --title     "$TITLE"    \
                 --text      "$text0"    2> >($LOGCMD)
     else
-        process_option_list_user_photo
         process_option_list_desktop_background
+        process_option_list_user_photo
         process_option_list_favorite_apps
     fi
 
@@ -493,23 +493,23 @@ Deze bestanden kunnen worden gebruikt voor het nalopen van het instellen.'
 }
 
 
-function process_option_list_user_photo {
-    printf '%s\n' "$text1"
-    cp /var/lib/AccountsService/icons/"$USER" "$file1" |& $LOGCMD || true
-}
-
-
 function process_option_list_desktop_background {
     local picture_file=''
 
-    printf '%s\n' "$text2"
+    printf '%s\n' "$text1"
     picture_file=$(
         gsettings get org.gnome.desktop.background picture-uri |
         sed --expression='s|%20| |g'    |
         sed --expression="s/'//g"       |
         sed --expression='s|file://||'
         )
-    cp "$picture_file" "$file2" |& $LOGCMD || true
+    cp "$picture_file" "$file1" |& $LOGCMD || true
+}
+
+
+function process_option_list_user_photo {
+    printf '%s\n' "$text2"
+    cp /var/lib/AccountsService/icons/"$USER" "$file2" |& $LOGCMD || true
 }
 
 
