@@ -485,41 +485,30 @@ function process_option_list {
     fi
 
     info '
-De gegevens zijn vastgelegd in bestand Persoonlijke map / kz-data / Apps.
+De gegevens zijn vastgelegd in Persoonlijke map / kz-data / Apps.
 In bestand Apps staan de eerder geïnstalleerde apps.
 Dit bestand kan worden gebruikt voor het nalopen van de installatie.'
 }
 
 
 function process_option_list_manual_installed {
-    local       footer=''
-    local       header="1. Deze pakketten zijn handmatig geïnstalleerd via \
-Software of
-   met een opdracht zoals 'sudo apt-get --install <pakket|bestand>':"
-    local -i    number_of_lines=0
-    local       plural='geïnstalleerde pakketten'
+    local       header="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
+met een opdracht zoals
+      'sudo apt --install <pakket|bestand>', of met kz install:"
 
     printf '%s\n' "$text1"
     printf '%b\n' "$header\n$DASHES" > "$file"
 
     apt list --manual-installed 2> >($LOGCMD) >> "$file"
 
-    number_of_lines=$(wc --lines < "$file")
-    number_of_lines=$((number_of_lines - 4))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='geïnstalleerd pakket'
-    fi
-    footer="Dit overzicht bevat $number_of_lines handmatig $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$file"
+    printf '%b\n' "$DASHES\n" >> "$file"
 }
 
 
 function process_option_list_snaps {
-    local       footer=''
-    local       header="2. Deze snaps zijn geïnstalleerd met '[sudo] install \
-<snap>' of met Software:"
-    local -i    number_of_lines=0
-    local       plural='snaps'
+    local       header="[2/3] Deze snaps zijn geïnstalleerd via Software, \
+met '[sudo] install <snap>',
+      of met kz install:"
 
     printf '%s\n' "$text3"
     printf '%b\n' "$header\n$DASHES" >> "$file"
@@ -529,23 +518,15 @@ function process_option_list_snaps {
         printf '%s\n' "$TEXT" >> "$file"
     fi
 
-    number_of_lines=$(wc --lines < "$file")
-    number_of_lines=$((number_of_lines - 3))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='snap'
-    fi
-    footer="Dit overzicht bevat $number_of_lines $plural."
-    printf '%b\n' "$DASHES\n$footer\n" >> "$file"
+    printf '%b\n' "$DASHES\n" >> "$file"
 }
 
 
 function process_option_list_added_repos {
-    local       footer=''
-    local       header="3. Deze pakketbronnen zijn toegevoegd met de \
-installatie van een pakket of
-   met de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>':"
-    local -i    number_of_lines=0
-    local       plural='pakketbronnen'
+    local       header="[3/3] Deze pakketbronnen zijn toegevoegd met de \
+installatie van een pakket, met
+      de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>', of
+      met kz install:"
     local       search=''
 
     printf '%s\n' "$text2"
@@ -565,13 +546,7 @@ installatie van een pakket of
         true
     fi
 
-    number_of_lines=$(wc --lines < "$file")
-    number_of_lines=$((number_of_lines - 3))
-    if [[ $number_of_lines -eq 1 ]]; then
-        plural='pakketbron'
-    fi
-    footer="Dit overzicht bevat $number_of_lines toegevoegde $plural."
-    printf '%b\n' "$DASHES\n$footer" >> "$file"
+    printf '%b\n' "$DASHES" >> "$file"
 }
 
 
