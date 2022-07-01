@@ -487,7 +487,8 @@ function process_option_list {
     info '
 De gegevens zijn vastgelegd in Persoonlijke map / kz-data / Apps.
 In bestand Apps staan de eerder geïnstalleerde apps.
-Dit bestand kan worden gebruikt voor het nalopen van de installatie.'
+Dit bestand kan worden gebruikt voor het controleren van
+de volledigheid van de installatie.'
 }
 
 
