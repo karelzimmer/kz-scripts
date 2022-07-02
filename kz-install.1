@@ -25,8 +25,8 @@ door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
 Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
 gebruikersinstellingen.
 .sp
-De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+\fBkz install\fR verwerkt zogenaamde installatiebestanden die opdrachten
+bevatten voor het installeren van apps en het wijzigen van systeeminstellingen.
 .sp
 Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
 .br
@@ -34,13 +34,23 @@ Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
 .br
 - /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .sp
+<distributie>, <versie>, en <computernaam> worden ingevuld met waarden die
+gelden voor de huidige computer.
+.br
+Voor \fIEDITIE\fR wordt standaard 'desktop' gebruikt.
+.sp
 Bijvoorbeeld kz-install-ubuntu-20.04-desktop.sh en
 kz-install-ubuntu-20.04-desktop-pc02.sh.
+.br
+Deze installatiebestanden bevatten opdrachten voor ubuntu 20.04 desktop op
+pc02.
 .sp
-Deze installatiebestanden bevatten opdrachten voor het installeren van apps en
-het wijzigen van systeeminstellingen voor de huidige distributie, versie, en
-\fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
-Standaard wordt als \fIEDITIE\fR desktop gebruikt.
+De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.sp
+Wat geïnstalleerd wordt met \fBkz install\fR vastleggen in installatiebestanden
+wordt ook wel Infrastructure as Code (IaC) genoemd; het definiëren en beheren
+van infrastructuur door middel van code.
 .sp
 Voor de indeling van de installatiebestanden zie de sectie
 \fBBESTANDSINDELING\fR hieronder.

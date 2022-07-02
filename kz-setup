@@ -499,9 +499,9 @@ function process_option_list_desktop_background {
 
     printf '%s\n' "$text1"
     picture_file=$(
-        gsettings get org.gnome.desktop.background picture-uri |
-        sed --expression='s|%20| |g'    |
-        sed --expression="s/'//g"       |
+        gsettings get org.gnome.desktop.background picture-uri  |
+        sed --expression='s|%20| |g'                            |
+        sed --expression="s/'//g"                               |
         sed --expression='s|file://||'
         )
     cp "$picture_file" "$file1" |& $LOGCMD || true

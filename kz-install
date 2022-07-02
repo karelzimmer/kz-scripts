@@ -493,7 +493,7 @@ de volledigheid van de installatie.'
 
 
 function process_option_list_manual_installed {
-    local       header="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
+    local header="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
       'sudo apt --install <pakket|bestand>', of met kz install:"
 
@@ -507,7 +507,7 @@ met een opdracht zoals
 
 
 function process_option_list_snaps {
-    local       header="[2/3] Deze snaps zijn geïnstalleerd via Software, \
+    local header="[2/3] Deze snaps zijn geïnstalleerd via Software, \
 met '[sudo] install <snap>',
       of met kz install:"
 
@@ -524,11 +524,11 @@ met '[sudo] install <snap>',
 
 
 function process_option_list_added_repos {
-    local       header="[3/3] Deze pakketbronnen zijn toegevoegd met de \
+    local header="[3/3] Deze pakketbronnen zijn toegevoegd met de \
 installatie van een pakket, met
       de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>', of
       met kz install:"
-    local       search=''
+    local search=''
 
     printf '%s\n' "$text3"
     printf '%b\n' "$header\n$DASHES" >> "$file"

@@ -23,11 +23,11 @@ In een grafische werkomgeving zoals GNOME, bijvoorbeeld Ubuntu, kan opdracht
 \fBkz setup\fR worden uitgevoerd door te zoeken naar \fBapps\fR, klik op
 \fBApps instellen\fR.
 .sp
-Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het aanpassen
+Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het wijzigen
 van systeeminstellingen.
 .sp
-De opdrachten die standaard meegeleverd worden bij \fBkz setup\fR zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+\fBkz setup\fR verwerkt zogenaamde instelbestanden die opdrachten bevatten voor
+het instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
 Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
 .br
@@ -36,19 +36,29 @@ Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
 - /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>-\
 <gebruikersnaam>.sh
 .sp
+<distributie>, <versie>, <computernaam>, en <gebruikersnaam> worden ingevuld
+met waarden die gelden voor de huidige computer en gebruiker.
+.br
+Voor \fIEDITIE\fR wordt standaard 'desktop' gebruikt.
+.sp
 Bijvoorbeeld kz-setup-ubuntu-20.04-desktop.sh en
 kz-setup-ubuntu-20.04-desktop-pc02-jan.sh.
+.br
+Deze instelbestanden bevatten opdrachten voor ubuntu 20.04 desktop op
+pc02 voor jan.
 .sp
-Deze instelbestanden bevatten opdrachten voor het instellen van apps en het
-wijzigen van gebruikersinstellingen voor de huidige distributie, versie, en
-\fIEDITIE\fR, bijvoorbeeld ubuntu 20.04 desktop.
-Standaard wordt als \fIEDITIE\fR desktop gebruikt.
+De opdrachten die standaard meegeleverd worden bij \fBkz setup\fR zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
 .sp
-Voor de indeling van de instellbestanden zie de sectie \fBBESTANDSINDELING\fR
+Wat ingesteld wordt met \fBkz setup\fR vastleggen in instelbestanden wordt ook
+wel Infrastructure as Code (IaC) genoemd; het definiëren en beheren van
+infrastructuur door middel van code.
+.sp
+Voor de indeling van de instelbestanden zie de sectie \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
-aanwezige standaard instellbestanden opgenomen in de lijst van te verwerken
+aanwezige standaard instelbestanden opgenomen in de lijst van te verwerken
 bestanden.
 .sp
 Met optie \fB-e\fR, \fB--editie\fR is de \fIEDITIE\fR aan te passen,
@@ -316,7 +326,7 @@ https://karelzimmer.nl
 .sp
 \fBkz setup\fR
 .RS
-Stel in alles wat in de standaard instellbestanden staat.
+Stel in alles wat in de standaard instelbestanden staat.
 Hiervoor is ook starter \fBApps instellen\fR beschikbaar.
 .RE
 .sp
