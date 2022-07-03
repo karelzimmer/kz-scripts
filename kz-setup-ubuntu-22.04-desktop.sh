@@ -60,6 +60,10 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.shell.extensions.ding show-home
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
+#1 snap (snap verbergen in Persoonlijke map)
+printf '%s\n' 'snap' > "$HOME"/.hidden
+#2 rm --force "$HOME"/.hidden
+
 #1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux
 #2 kz-gset --delfav=skype_skypeforlinux

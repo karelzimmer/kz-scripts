@@ -64,6 +64,10 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
 
+#1 snap (snap verbergen in Persoonlijke map)
+printf '%s\n' 'snap' > "$HOME"/.hidden
+#2 rm --force "$HOME"/.hidden
+
 #1 skype (beeldbellen)
 kz-gset --addfavaft=skype_skypeforlinux
 #2 kz-gset --delfav=skype_skypeforlinux
