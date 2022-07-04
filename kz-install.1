@@ -34,8 +34,8 @@ Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
 .br
 - /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
 .sp
-<distributie>, <versie>, en <computernaam> worden ingevuld met waarden die
-gelden voor de huidige computer.
+<distributie>, <versie>, en <computernaam> worden ingevuld met waarden van de
+huidige computer.
 .br
 Voor \fIEDITIE\fR wordt standaard 'desktop' gebruikt.
 .sp
@@ -45,12 +45,15 @@ kz-install-ubuntu-20.04-desktop-pc02.sh.
 Deze installatiebestanden bevatten opdrachten voor ubuntu 20.04 desktop op
 pc02.
 .sp
+Wat geïnstalleerd wordt met \fBkz install\fR vastleggen in installatiebestanden
+wordt ook wel Infrastructure as Code (IaC) of programmeerbare infrastructuur
+genoemd; het definiëren en beheren van infrastructuur door middel van code.
+.sp
 De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
 idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
-.sp
-Wat geïnstalleerd wordt met \fBkz install\fR vastleggen in installatiebestanden
-wordt ook wel Infrastructure as Code (IaC) genoemd; het definiëren en beheren
-van infrastructuur door middel van code.
+Herhaalbaarheid (idempotentie) is een van de principes van IaC.
+De opdrachten zijn vastgelegd in versiebeheer (GitHub), een ander principe van
+IaC.
 .sp
 Voor de indeling van de installatiebestanden zie de sectie
 \fBBESTANDSINDELING\fR hieronder.

@@ -37,7 +37,7 @@ Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
 <gebruikersnaam>.sh
 .sp
 <distributie>, <versie>, <computernaam>, en <gebruikersnaam> worden ingevuld
-met waarden die gelden voor de huidige computer en gebruiker.
+met waarden van de huidige computer en gebruiker.
 .br
 Voor \fIEDITIE\fR wordt standaard 'desktop' gebruikt.
 .sp
@@ -47,12 +47,18 @@ kz-setup-ubuntu-20.04-desktop-pc02-jan.sh.
 Deze instelbestanden bevatten opdrachten voor ubuntu 20.04 desktop op
 pc02 voor jan.
 .sp
+Wat ingesteld wordt met \fBkz setup\fR vastleggen in instelbestanden wordt ook
+wel Infrastructure as Code (IaC) of programmeerbare infrastructuur genoemd; het
+definiëren en beheren van infrastructuur door middel van code.
+Herhaalbaarheid is een van de principes van IaC.
+De opdrachten zijn vastgelegd in versiebeheer (GitHub), een ander principe van
+IaC.
+.sp
 De opdrachten die standaard meegeleverd worden bij \fBkz setup\fR zijn
 idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
-.sp
-Wat ingesteld wordt met \fBkz setup\fR vastleggen in instelbestanden wordt ook
-wel Infrastructure as Code (IaC) genoemd; het definiëren en beheren van
-infrastructuur door middel van code.
+Herhaalbaarheid (idempotentie) is een van de principes van IaC.
+De opdrachten zijn vastgelegd in versiebeheer (GitHub), een ander principe van
+IaC.
 .sp
 Voor de indeling van de instelbestanden zie de sectie \fBBESTANDSINDELING\fR
 hieronder.
