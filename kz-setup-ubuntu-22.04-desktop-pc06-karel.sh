@@ -6,7 +6,7 @@
 ###############################################################################
 
 #1 cockpit (browsergebaseerd beheer)
-#2 https://localhost:9090
+## https://localhost:9090
 cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
 kz-gset --addfavaft=kz-cockpit
