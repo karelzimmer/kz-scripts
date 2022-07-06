@@ -56,6 +56,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
+gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)" || true
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
@@ -80,6 +81,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings reset org.gnome.settings-daemon.plugins.media-keys max-screencast-length
 #2 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
+#2 gsettings reset org.gnome.shell favorite-apps
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size

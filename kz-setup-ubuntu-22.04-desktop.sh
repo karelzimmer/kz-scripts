@@ -55,7 +55,7 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)"
+gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)" || true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
