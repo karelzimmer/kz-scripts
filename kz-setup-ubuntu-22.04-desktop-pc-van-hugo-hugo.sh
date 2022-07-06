@@ -6,9 +6,7 @@
 ###############################################################################
 
 #1 gnome (bureaubladomgeving)
-gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond"
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
-#2 gsettings reset org.gnome.desktop.background picture-uri
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
 #1 telegram (privéberichtenapp)

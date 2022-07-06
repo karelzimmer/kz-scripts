@@ -20,12 +20,14 @@ kz-gset --addfavbef=google-chrome
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder --folder='KZ Scripts'
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
+gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond"
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
+gsettings set org.gnome.desktop.screensaver picture-uri "file://$HOME/kz-data/Achtergrond"
 gsettings set org.gnome.desktop.session idle-delay 600
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
@@ -43,6 +45,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 kz-gset --delappfolder --folder='KZ Scripts'
 #2 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 #2 gsettings reset org.gnome.app-folders folder-children
+#2 gsettings reset org.gnome.background picture-uri
 #2 gsettings reset org.gnome.calendar show-weekdate
 #2 gsettings reset org.gnome.desktop.interface clock-show-date
 #2 gsettings reset org.gnome.desktop.interface clock-show-weekday
@@ -51,6 +54,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings reset org.gnome.nautilus.preferences click-policy
 #2 gsettings reset org.gnome.peripherals.touchpad tap-to-click
 #2 gsettings reset org.gnome.screensaver lock-enabled
+#2 gsettings reset org.gnome.screensaver picture-uri
 #2 gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 #2 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 #2 gsettings reset org.gnome.settings-daemon.plugins.media-keys max-screencast-length

@@ -14,10 +14,6 @@ kz-gset --delfav=bitwarden_bitwarden
 kz-gset --addfavbef=firefox_firefox
 #2 kz-gset --delfav=firefox_firefox
 
-#1 gnome (bureaubladomgeving)
-gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond"
-#2 gsettings reset org.gnome.desktop.background picture-uri
-
 #1 google-chrome (webbrowser)
 kz-gset --delfav=google-chrome
 #2 kz-gset --addfavbef=google-chrome
