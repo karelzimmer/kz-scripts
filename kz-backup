@@ -133,7 +133,7 @@ function process_input {
 Koppel een USB-medium aan, en start daarna opnieuw.'
             NOERROR=true exit $ERROR
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-            error "Koppel slechts één USB-medium aan.
+            error "Koppel slechts een USB-medium aan.
 
 Nu aangekoppeld zijn:
 $MEDIUM
@@ -210,7 +210,7 @@ EOF
             return $SUCCESS
             ;;
         *)
-            error "Back-up maken is geëindigd met fouten.
+            error "Back-up maken is geeindigd met fouten.
 
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het maken van de back-up, of is er te weinig ruimte op

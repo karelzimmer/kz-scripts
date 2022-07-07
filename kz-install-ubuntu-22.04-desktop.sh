@@ -54,7 +54,7 @@ sudo apt-get install --yes gnome-tweaks
 #2 sudo apt-get remove --yes gnome-tweaks
 
 #1 google-chrome (webbrowser)
-## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
+## Extensies en apps worden automatisch geinstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --no-verbose --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update

@@ -444,8 +444,8 @@ BESTAND...${NORMAL}"
 
 function process_option_list {
     local text0='Opdrachten worden verwerkt'
-    local text1="[1/3] Bepaal welke pakketten handmatig zijn geïnstalleerd"
-    local text2='[2/3] Bepaal welke snaps zijn geïnstalleerd'
+    local text1="[1/3] Bepaal welke pakketten handmatig zijn geinstalleerd"
+    local text2='[2/3] Bepaal welke snaps zijn geinstalleerd'
     local text3="[3/3] Bepaal welke pakketbronnen zijn toegevoegd"
     local tgtdir=$HOME/kz-data
     local file=$tgtdir/Apps
@@ -478,14 +478,14 @@ function process_option_list {
 
     info '
 De gegevens zijn vastgelegd in Persoonlijke map / kz-data / Apps.
-In bestand Apps staan de eerder geïnstalleerde apps.
+In bestand Apps staan de eerder geinstalleerde apps.
 Dit bestand kan worden gebruikt voor het controleren van
 de volledigheid van de installatie.'
 }
 
 
 function process_option_list_manual_installed {
-    local header="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
+    local header="[1/3] Deze pakketten zijn geinstalleerd via Software, \
 met een opdracht zoals
       'sudo apt --install <pakket|bestand>', of met kz install:"
 
@@ -499,7 +499,7 @@ met een opdracht zoals
 
 
 function process_option_list_snaps {
-    local header="[2/3] Deze snaps zijn geïnstalleerd via Software, \
+    local header="[2/3] Deze snaps zijn geinstalleerd via Software, \
 met '[sudo] install <snap>',
       of met kz install:"
 
@@ -507,7 +507,7 @@ met '[sudo] install <snap>',
     printf '%b\n' "$header\n$DASHES" >> "$file"
 
     if ! snap list 2> /dev/null >> "$file"; then
-        TEXT='snap is niet geïnstalleerd op dit systeem'
+        TEXT='snap is niet geinstalleerd op dit systeem'
         printf '%s\n' "$TEXT" >> "$file"
     fi
 

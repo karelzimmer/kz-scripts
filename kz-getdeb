@@ -143,7 +143,7 @@ Voer uw wachtwoord in:'
             if printf '%s\n' "$(
                 whiptail    --backtitle     "$DISPLAY_NAME"         \
                             --title         'Authenticatie nodig'   \
-                            --ok-button     'Verifiëren'            \
+                            --ok-button     'Verifieren'            \
                             --cancel-button 'Annuleren'             \
                             --passwordbox   "$TEXT"                 \
                             13 38                                   \
@@ -255,7 +255,7 @@ function term_script {
     # Also 'kz-install --list' and 'kz-setup --list' will use this location.
     cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
         "$tgtdir"                                           |& $LOGCMD || true
-    TEXT="Pakket kz is succesvol geïnstalleerd.
+    TEXT="Pakket kz is succesvol geinstalleerd.
 
 Volg nu de stappen zoals beschreven
 in de Checklist installatie.
