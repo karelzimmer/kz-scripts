@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1 gnome (bureaubladomgeving)
+#1-gnome (bureaubladomgeving)
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 

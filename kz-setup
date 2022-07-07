@@ -252,26 +252,13 @@ function process_argument_app {
     local       app=''
     local       file=''
     local -a    files=()
-    local       temp_file=''
+    local       search=''
 
-    # Verplicht aanwezig.
-    if [[ -e $dfltfile_1 ]]; then
-        files[0]=$dfltfile_1
-    else
-        info "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
-        NOERROR=true exit $ERROR
-    fi
-    # Niet verplicht aanwezig.
-    if [[ -e $dfltfile_2 ]]; then
-        files[1]=$dfltfile_2
-    fi
-
-    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps ALLEEN in de
-    # staandaard bestanden kz-setup-<distro>-<versie>-<editie>.sh en
-    # kz-install-<distro>-<versie>-<editie>-<computernaam>.sh.
-    temp_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.temp")
-    cat "${files[@]}" > "$temp_file"
+    # Zoek naar apps in alle kz-setup-<distro>-<versie>-bestanden.
+    search=$PROGRAM_NAME-$DISTRO-$VERSION
+    for file in "$PROGRAM_PATH/$search"*.sh; do
+        files+=("$file")
+    done
     for app in "${APP_ARGUMENTS[@]}"; do
         if ! grep   --files-with-matches    \
                     --word-regexp           \
@@ -284,7 +271,6 @@ function process_argument_app {
             process_argument_app_file
         fi
     done
-    rm "$temp_file" |& $LOGCMD
     if $file_notfound; then
         info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps." >&2
     else
@@ -326,7 +312,7 @@ function process_argument_app_file {
                 fi
                 ;;
         esac
-    done < "$temp_file"
+    done < "$file"
 }
 
 
@@ -349,7 +335,6 @@ function process_argument_file {
 
 
 function process_dfltfiles {
-    # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
@@ -358,7 +343,6 @@ function process_dfltfiles {
         process_usage
         NOERROR=true exit $ERROR
     fi
-    # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
@@ -367,25 +351,28 @@ function process_dfltfiles {
 
 
 function process_option_apps {
-    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps ALLEEN in de
-    # staandaard bestanden kz-setup-<distro>-<versie>-<editie>.sh en
-    # kz-install-<distro>-<versie>-<editie>-<computernaam>.sh.
-    process_dfltfiles
+    local -a    files=()
+    local       search=''
+
+    # Zoek naar apps in alle kz-setup-<distro>-<versie>-bestanden.
+    search=$PROGRAM_NAME-$DISTRO-$VERSION
+    for file in "$PROGRAM_PATH/$search"*.sh; do
+        files+=("$file")
+    done
     TEXT="De volgende APPs zijn beschikbaar:
 
      APP (BESCHRIJVING)
 $(
-    if !    grep    --no-messages               \
-                    --regexp='^#1 '             \
-                    "${FILES_TO_PROCESS[@]}"    |
-            cut     --delimiter=' '             \
-                    --fields=2-                 |
-            sort    --unique                    |
-            nl      --number-width=2            \
-                    --number-format=rn          \
-                    --number-separator='] '     \
-                    --body-numbering=a          |
+    if !    grep    --no-messages           \
+                    --regexp='^#1 '         \
+                    "${files[@]}"           |
+            cut     --delimiter=' '         \
+                    --fields=2-             |
+            sort    --unique                |
+            nl      --number-width=2        \
+                    --number-format=rn      \
+                    --number-separator='] ' \
+                    --body-numbering=a      |
             sed     --expression='s/^/[/'; then
         printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else

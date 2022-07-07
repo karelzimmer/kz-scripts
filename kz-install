@@ -257,10 +257,7 @@ function process_argument_app {
     local -a    files=()
     local       search=''
 
-    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps ALLEEN in de
-    # staandaard bestanden kz-setup-<distro>-<versie>-<editie>.sh en
-    # kz-install-<distro>-<versie>-<editie>-<computernaam>.sh.
+    # Zoek naar apps in alle kz-install-<distro>-<versie>-bestanden.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
@@ -344,7 +341,6 @@ function process_argument_file {
 
 
 function process_dfltfiles {
-    # Verplicht aanwezig.
     if [[ -e $dfltfile_1 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
@@ -353,7 +349,6 @@ function process_dfltfiles {
         process_usage
         NOERROR=true exit $ERROR
     fi
-    # Niet verplicht aanwezig.
     if [[ -e $dfltfile_2 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_2
         ((++file_num))
@@ -365,10 +360,7 @@ function process_option_apps {
     local -a    files=()
     local       search=''
 
-    # kz-install zoekt naar apps in ALLE kz-install-<distro>-<versie>-bestanden
-    # en stopt bij de eerstgevonden, kz-setup zoekt naar apps ALLEEN in de
-    # staandaard bestanden kz-setup-<distro>-<versie>-<editie>.sh en
-    # kz-install-<distro>-<versie>-<editie>-<computernaam>.sh.
+    # Zoek naar apps in alle kz-install-<distro>-<versie>-bestanden.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")

@@ -85,20 +85,22 @@ De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
 bestanden.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-de twee standaard-bestanden voor de huidige distributie en versie, bijvoorbeeld
-ubuntu 20.04.
+alle instelbestanden voor de huidige distributie en versie, bijvoorbeeld ubuntu
+20.04.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
 Per opgegeven \fIAPP\fR worden de bijbehorende regels met opdrachten opgezocht
-in beide standaard instelbestanden en worden de opdrachten gekopieerd naar een
-tijdelijk bestand.
+alle instelbestanden voor de huidige distributie en versie, bijvoorbeeldubuntu
+20.04, en worden de eerstgevonden opdrachten gekopieerd naar een tijdelijk
+bestand.
 .br
 Het tijdelijk bestand wordt opgenomen in de lijst van te verwerken bestanden.
 .sp
-Voor bijvoorbeeld ubuntu 20.04 op pc02 voor jan worden de apps opgezocht in
-kz-setup-ubuntu-20.04-desktop.sh en
-kz-setup-ubuntu-20.04-desktop-pc02-jan.sh.
+Bijvoorbeeld voor ubuntu 20.04 op pc02 worden de apps opgezocht in
+kz-setup-ubuntu-20.04-desktop.sh, kz-setup-ubuntu-20.04-desktop-pc01.sh,
+kz-setup-ubuntu-20.04-desktop-pc02.sh, kz-setup-ubuntu-20.04-desktop-pc03.sh,
+en kz-setup-ubuntu-20.04-desktop-pc04.sh.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de instelbestanden.
 .sp
@@ -181,6 +183,11 @@ T}:T{
 Wordt als opdracht verwerkt (idempotent).
 T}
 .TE
+.sp
+.sp
+.br
+N.B. Regelsoort '#1-APP (BESCHRIJVING)' is bedoeld voor opdrachten die
+     specifiek zijn voor deze computer, bijvoorbeeld voor pc02.
 .sp
 .sp
 .br

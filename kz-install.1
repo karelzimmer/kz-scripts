@@ -86,8 +86,9 @@ ubuntu 20.04.
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
 Per opgegeven \fIAPP\fR worden de bijbehorende regels met opdrachten opgezocht
-in alle standaard installatiebestanden en worden de eerstgevonden opdrachten
-gekopieerd naar een tijdelijk bestand.
+alle installatiebestanden voor de huidige distributie en versie, bijvoorbeeld
+ubuntu 20.04, en worden de eerstgevonden opdrachten gekopieerd naar een
+tijdelijk bestand.
 .br
 De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
 bestanden.
@@ -176,6 +177,11 @@ T}:T{
 Wordt als opdracht verwerkt (idempotent).
 T}
 .TE
+.sp
+.sp
+.br
+N.B. Regelsoort '#1-APP (BESCHRIJVING)' is bedoeld voor opdrachten die
+     specifiek zijn voor deze computer, bijvoorbeeld voor pc02.
 .sp
 .sp
 .br

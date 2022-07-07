@@ -9,7 +9,7 @@
 kz-gset --delfav=firefox_firefox
 #2 kz-gset --addfavbef=firefox_firefox
 
-#1 gnome (bureaubladomgeving)
+#1-gnome (bureaubladomgeving)
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 
