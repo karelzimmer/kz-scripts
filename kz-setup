@@ -474,10 +474,9 @@ function process_option_list {
 
     info '
 De gegevens zijn vastgelegd in Persoonlijke map / kz-data.
-In map kz-data de bestanden met de eerder gebruikte Achtergrond,
-Gebruikersfoto, en Favorieten.
-Deze bestanden kunnen worden gebruikt voor controleren van
-de volledigheid van het instellen.'
+In map kz-data de bestanden met de eerder gebruikte Achtergrond en Favorieten
+die worden gebruikt om deze automatisch terug te zetten.
+Bestand Gebruikersfoto kan worden gebruikt om deze handmatig terug te zetten.'
 }
 
 
