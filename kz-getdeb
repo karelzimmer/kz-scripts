@@ -143,7 +143,7 @@ Voer uw wachtwoord in:'
             if printf '%s\n' "$(
                 whiptail    --backtitle     "$DISPLAY_NAME"         \
                             --title         'Authenticatie nodig'   \
-                            --ok-button     'Verifieren'            \
+                            --ok-button     'Verifiëren'            \
                             --cancel-button 'Annuleren'             \
                             --passwordbox   "$TEXT"                 \
                             13 38                                   \

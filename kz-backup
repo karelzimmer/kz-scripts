@@ -133,7 +133,7 @@ function process_input {
 Koppel een USB-medium aan, en start daarna opnieuw.'
             NOERROR=true exit $ERROR
         elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-            error "Koppel slechts een USB-medium aan.
+            error "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
 $MEDIUM
