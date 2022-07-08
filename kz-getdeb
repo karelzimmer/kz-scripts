@@ -255,7 +255,7 @@ function term_script {
     # Also 'kz-install --list' and 'kz-setup --list' will use this location.
     cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
         "$tgtdir"                                           |& $LOGCMD || true
-    TEXT="Pakket kz is succesvol geinstalleerd.
+    TEXT="Pakket kz is succesvol geïnstalleerd.
 
 Volg nu de stappen zoals beschreven
 in de Checklist installatie.
