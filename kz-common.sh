@@ -105,26 +105,6 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.
 }
 
 
-function error {
-    if $NOERROR; then
-        return $SUCCESS
-    fi
-    if $OPTION_GUI; then
-        TITLE="Foutmelding $DISPLAY_NAME"
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        zenity  --error                 \
-                --no-markup             \
-                --width     500         \
-                --height    100         \
-                --title     "$TITLE"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
-    else
-        printf "${RED}%b\n${NORMAL}" "$@" >&2
-    fi
-}
-
-
 function check_user_root {
     local -i pkexec_rc=0
 
@@ -155,6 +135,26 @@ function check_user_sudo {
         return $SUCCESS
     else
         return $ERROR
+    fi
+}
+
+
+function error {
+    if $NOERROR; then
+        return $SUCCESS
+    fi
+    if $OPTION_GUI; then
+        TITLE="Foutmelding $DISPLAY_NAME"
+        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+        zenity  --error                 \
+                --no-markup             \
+                --width     500         \
+                --height    100         \
+                --title     "$TITLE"    \
+                --text      "$@"        \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
+    else
+        printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
 }
 
@@ -201,8 +201,7 @@ function init_script {
 
     log "$DASHES"
     log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
-    if [[ $UID -ne 0 ]]; then
-        # Needed for e.g. Debian.
+    if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
 
