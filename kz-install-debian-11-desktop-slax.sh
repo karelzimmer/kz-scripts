@@ -9,7 +9,7 @@
 sudo kz-update
 
 #1 git (versiebeheersysteem)
-sudo apt-get install --yes aspell-nl git
+sudo apt-get install --yes git
 #2 sudo apt-get remove --yes git
 
 #1 lsb-release (rapportagehulpprogramma voor Linux Standard Base)

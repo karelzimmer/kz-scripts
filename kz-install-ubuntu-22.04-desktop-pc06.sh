@@ -36,7 +36,7 @@ sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 #2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
 #1 git (versiebeheersysteem)
-sudo apt-get install --yes aspell-nl git
+sudo apt-get install --yes git
 #2 sudo apt-get remove --yes git
 
 #1 gnome-gmail (Gmail als e-mailtoepassing in GNOME)
