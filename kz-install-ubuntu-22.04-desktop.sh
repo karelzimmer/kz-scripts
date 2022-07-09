@@ -13,6 +13,9 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #2 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 #2 sudo systemctl enable --now apport.service
 
+#1 update (updatebeheer)
+sudo kz-update
+
 #1 bitwarden (wachtwoordbeheer)
 sudo snap install bitwarden
 #2 sudo snap remove bitwarden

@@ -124,12 +124,6 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 }
 
 
-function check_sudo_and_dpkg {
-    check_sudo
-    check_dpkg
-}
-
-
 function check_sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
@@ -176,40 +170,6 @@ Mogelijke oorzaak:
 }
 
 
-function check_dpkg {
-    local -i wait_for_aptd=5
-
-    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        while sudo  fuser                                                   \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
-                    /var/cache/debconf/config.dat                           \
-                    /snap/core/*/var/cache/debconf/config.dat               \
-                    &> /dev/null; do
-            TEXT="Wacht tot andere pakketbeheerder klaar is (kan even \
-duren)..."
-            TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                                --title     'Voortgang'     \
-                                --infobox   "$TEXT"         \
-                                7 65
-            sleep $wait_for_aptd
-        done
-    else
-        while sudo  fuser                                                   \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
-                    /var/cache/debconf/config.dat                           \
-                    &> /dev/null; do
-            TEXT="Wacht tot andere pakketbeheerder klaar is (kan even \
-duren)..."
-            TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                                --title     'Voortgang'     \
-                                --infobox   "$TEXT"         \
-                                7 65
-            sleep $wait_for_aptd
-        done
-    fi
-}
-
-
 function process_input {
     install_scriptspackage
 }
@@ -219,13 +179,15 @@ function install_scriptspackage {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    check_sudo_and_dpkg
+    check_sudo
 
     TEXT='Installeer pakket kz (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     'Voortgang'     \
                         --infobox   "$TEXT"         \
                         7 44
+
+    check_dpkg
 
     # Bij Live-sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then

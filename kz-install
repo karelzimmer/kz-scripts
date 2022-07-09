@@ -685,7 +685,6 @@ function execute_command {
     local -i    cmd_rc=0
     local       status=''
 
-    check_dpkg
     if ! $OPTION_GUI; then
         if [[ $cmd_seq_num -eq 1 ]]; then
             printf "$STATUS_BUSY %b" "$app_description_line\r"
@@ -696,6 +695,7 @@ function execute_command {
 
     log "$app_description_line"
     log "${BLUE}$cmd${NORMAL}"
+    check_dpkg
     NOERROR=true
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
     NOERROR=false
@@ -710,30 +710,6 @@ function execute_command {
     log "$status rc=$cmd_rc, maxrc=$MAXRC"
     if ! $OPTION_GUI; then
         printf '%s\n' "$status"
-    fi
-}
-
-
-function check_dpkg {
-    local -i wait_for_aptd=5
-
-    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        while sudo  fuser                                               \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       \
-                    /snap/core/*/var/cache/debconf/config.dat           \
-                    &> /dev/null; do
-            log 'Wacht tot andere pakketbeheerder klaar is...'
-            sleep $wait_for_aptd
-        done
-    else
-        while sudo  fuser                                               \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       \
-                    &> /dev/null; do
-            log 'Wacht tot andere pakketbeheerder klaar is...'
-            sleep $wait_for_aptd
-        done
     fi
 }
 

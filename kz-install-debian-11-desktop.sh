@@ -14,6 +14,9 @@ sudo apt-get update
 #2 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 #2 sudo apt-get update
 
+#1 update (updatebeheer)
+sudo kz-update
+
 #1 bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion
 #2 sudo apt-get remove --yes bash-completion
