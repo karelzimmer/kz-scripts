@@ -14,7 +14,7 @@ sudo apt-get update
 #2 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
 #2 sudo apt-get update
 
-#1 updates (updates)
+#1 updates (bijgewerkte apps en systeembestanden)
 sudo kz-update
 
 #1 bash-completion (tab-completion)
