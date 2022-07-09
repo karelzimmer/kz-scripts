@@ -134,8 +134,6 @@ function check_input {
         process_usage
         NOERROR=true exit $ERROR
     fi
-
-    check_user_root
 }
 
 

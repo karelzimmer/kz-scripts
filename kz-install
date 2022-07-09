@@ -80,7 +80,6 @@ declare     OPTION_GUI=false
 declare     OPTION_LIST=false
 declare     OPTION_REMOVE=false
 declare     OPTION_SIMULATE=false
-declare     RUN_AS_SUPERUSER=true
 declare     STATUS_BUSY=''
 declare     STATUS_ERROR=''
 declare     STATUS_SUCCESS=''
@@ -182,8 +181,6 @@ function process_input {
 
     # Verwerk optie list.
     if $OPTION_LIST; then
-        RUN_AS_SUPERUSER=false
-        check_user_root
         process_option_list
         exit $SUCCESS
     fi

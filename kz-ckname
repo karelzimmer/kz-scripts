@@ -95,8 +95,6 @@ function check_input {
             NOERROR=true exit $ERROR
         fi
     done
-
-    check_user_root
 }
 
 

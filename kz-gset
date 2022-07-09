@@ -141,8 +141,6 @@ function check_input {
 
     APPFOLDER=$FOLDER_ARGUMENT
     DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
-
-    check_user_root
 }
 
 

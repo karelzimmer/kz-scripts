@@ -47,7 +47,6 @@ declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
 declare     PROGRAM=''
-declare     RUN_AS_SUPERUSER=false
 declare     TITLE=''
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
@@ -129,27 +128,20 @@ function error {
 function check_user_root {
     local -i pkexec_rc=0
 
-    if $RUN_AS_SUPERUSER; then
-        if ! check_user_sudo; then
-            info 'Reeds uitgevoerd door de beheerder.'
-            exit $SUCCESS
-        fi
-        if [[ $UID -ne 0 ]]; then
-            if $OPTION_GUI; then
-                log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
-                    --priority=debug
-                pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
-                NOERROR=true exit $pkexec_rc
-            else
-                log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
-                    --priority=debug
-                exec sudo "$0" "${CMDLINE_ARGS[@]}"
-            fi
-        fi
-    else
-        if [[ $UID -eq 0 ]]; then
-            info "Niet uitvoeren met 'sudo' of als root."
-            NOERROR=true exit $ERROR
+    if ! check_user_sudo; then
+        info 'Reeds uitgevoerd door de beheerder.'
+        exit $SUCCESS
+    fi
+    if [[ $UID -ne 0 ]]; then
+        if $OPTION_GUI; then
+            log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
+                --priority=debug
+            pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
+            NOERROR=true exit $pkexec_rc
+        else
+            log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
+                --priority=debug
+            exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi
     fi
 }
@@ -209,10 +201,8 @@ function init_script {
 
     log "$DASHES"
     log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
-    if $RUN_AS_SUPERUSER && [[ $UID -ne 0 ]]; then
-        # Needed for e.g. Debian.
-        xhost +si:localuser:root |& $LOGCMD --priority=debug
-    fi
+    # Needed for e.g. Debian.
+    xhost +si:localuser:root |& $LOGCMD --priority=debug
 
     # shellcheck disable=SC2034
     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."

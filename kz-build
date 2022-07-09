@@ -133,8 +133,6 @@ function check_input {
         info 'Uitvoeren als ontwikkelaar.'
         NOERROR=true exit $ERROR
     fi
-
-    check_user_root
 }
 
 

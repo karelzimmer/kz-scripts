@@ -181,7 +181,6 @@ function process_input {
 
     # Verwerk optie list.
     if $OPTION_LIST; then
-        check_user_root
         process_option_list
         exit $SUCCESS
     fi
@@ -215,11 +214,6 @@ function process_input {
     elif $OPTION_FILES; then
         process_option_files
         exit $SUCCESS
-    fi
-
-    # Opdrachten uitvoeren of simuleren.
-    if $EXECUTE_COMMANDS; then
-        check_user_root
     fi
 
     for file in "${FILES_TO_PROCESS[@]}"; do
