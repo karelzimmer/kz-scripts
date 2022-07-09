@@ -40,14 +40,14 @@ kz-gset --addfavaft=Zoom
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder --folder='KZ Scripts'
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
-gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond"
+[[ -e $HOME/kz-data/Achtergrond ]] && gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond" || true
+[[ -e $HOME/kz-data/Favorieten ]] && gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)" || true
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
-gsettings set org.gnome.desktop.screensaver picture-uri "file://$HOME/kz-data/Achtergrond"
 gsettings set org.gnome.desktop.session idle-delay 600
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
