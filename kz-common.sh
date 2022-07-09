@@ -157,7 +157,7 @@ function check_user_root {
 
 function check_user_sudo {
     if [[ $UID -eq 0 ]]; then
-        # Voor de "grace"-periode van sudo.
+        # Voor de "grace"-periode van sudo, of als root.
         return $SUCCESS
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $SUCCESS

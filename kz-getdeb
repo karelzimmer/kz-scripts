@@ -100,7 +100,6 @@ function check_input {
     fi
 
     clear -x
-    check_user_root
     if ! check_user_sudo; then
         term_script
     fi
