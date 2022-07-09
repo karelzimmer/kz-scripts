@@ -40,9 +40,8 @@ kz-gset --addfavaft=Zoom
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder --folder='KZ Scripts'
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
-[[ -e $HOME/kz-data/Achtergrond ]] && gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond" && true
-[[ -e $HOME/kz-data/Favorieten ]] && gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)" && true
 gsettings set org.gnome.desktop.calendar show-weekdate true
+if [[ -e $HOME/kz-data/Achtergrond ]]; then gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond"; fi
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
@@ -56,7 +55,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
-gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)" || true
+if [[ -e $HOME/kz-data/Favorieten ]]; then gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)"; fi
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
@@ -68,6 +67,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings reset org.gnome.app-folders folder-children
 #2 gsettings reset org.gnome.background picture-uri
 #2 gsettings reset org.gnome.calendar show-weekdate
+#2 gsettings reset org.gnome.desktop.background picture-uri
 #2 gsettings reset org.gnome.desktop.interface clock-show-date
 #2 gsettings reset org.gnome.desktop.interface clock-show-weekday
 #2 gsettings reset org.gnome.desktop.interface show-battery-percentage
