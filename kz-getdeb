@@ -123,7 +123,58 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 }
 
 
+function process_input {
+    install_scriptspackage
+}
+
+
+function install_scriptspackage {
+    local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
+    local temp_deb=''
+
+    check_sudo
+
+    TEXT='Installeer pakket kz (kan even duren)...'
+    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
+                        --title     'Voortgang'     \
+                        --infobox   "$TEXT"         \
+                        7 44
+
+    check_dpkg
+    check_dependencies_slax
+
+    # Bij Live-sessie de universe repo aanzetten.
+    if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
+        sudo add-apt-repository --yes universe  |& $LOGCMD
+        sudo apt-get update |& $LOGCMD
+    fi
+
+    # Installeer pakket kz.
+    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
+    sudo    DEBIAN_FRONTEND=noninteractive  \
+            apt-get                         \
+            reinstall                       \
+            --yes                           \
+            "$temp_deb"                     |& $LOGCMD
+    rm "$temp_deb" |& $LOGCMD
+}
+
+
+function check_dependencies_slax {
+    if ! command -v lsb-release 1> /dev/null; then
+        sudo apt-get install --yes lsb-release |& $LOGCMD
+    fi
+    if ! command -v vim 1> /dev/null; then
+        sudo apt-get install --yes vim |& $LOGCMD
+    fi
+}
+
+
 function check_sudo {
+    # Voor slax.
+    sudo apt-get install --yes sudo |& $LOGCMD
+
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TEXT='
@@ -169,43 +220,6 @@ Mogelijke oorzaak:
 }
 
 
-function process_input {
-    install_scriptspackage
-}
-
-
-function install_scriptspackage {
-    local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
-    local temp_deb=''
-
-    check_sudo
-
-    TEXT='Installeer pakket kz (kan even duren)...'
-    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                        --title     'Voortgang'     \
-                        --infobox   "$TEXT"         \
-                        7 44
-
-    check_dpkg
-
-    # Bij Live-sessie de universe repo aanzetten.
-    if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        sudo add-apt-repository --yes universe  |& $LOGCMD
-        sudo apt-get update |& $LOGCMD
-    fi
-
-    # Installeer pakket kz.
-    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
-    sudo    DEBIAN_FRONTEND=noninteractive  \
-            apt-get                         \
-            reinstall                       \
-            --yes                           \
-            "$temp_deb"                     |& $LOGCMD
-    rm "$temp_deb" |& $LOGCMD
-}
-
-
 function term_script {
     local srcdir=/usr/share/doc/kz
     local tgtdir=$HOME/kz-data
@@ -233,7 +247,7 @@ Typ 'exit' om dit venster te sluiten."
                         --infobox "$TEXT"           \
                         18 41
     if developer; then
-        check_dependencies
+        check_dependencies_developer
         pull_repos
         download_website
         info 'Status repos (gitstat)...'
@@ -247,21 +261,24 @@ function developer {
     local full_name=''
 
     # Aangemeld als ontwikkelaar?
-    full_name=$(
-        getent passwd karel             |
-        cut --delimiter=':' --fields=5  |
-        cut --delimiter=',' --fields=1  || true
-        )
-    if [[   $HOSTNAME == pc??                               &&
-            ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
+    if [[ $HOSTNAME = 'slax' && $USER = root ]]; then
         return $SUCCESS
+    elif [[ $HOSTNAME == pc?? ]]; then
+        full_name=$(
+            getent passwd karel             |
+            cut --delimiter=':' --fields=5  |
+            cut --delimiter=',' --fields=1  || true
+            )
+        if [[ $USER = karel && $full_name = 'Karel Zimmer' ]]; then
+            return $SUCCESS
+        fi
     else
         return $ERROR
     fi
 }
 
 
-function check_dependencies {
+function check_dependencies_developer {
     if ! command -v fakeroot 1> /dev/null; then
         # Voor lz-build .deb.
         info 'Installeer fakeroot...'
