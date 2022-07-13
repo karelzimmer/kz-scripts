@@ -124,7 +124,19 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 
 
 function process_input {
+    if slax; then
+        sudo apt-get install lsb-release sudo vim
+    fi
     install_scriptspackage
+}
+
+
+function slax {
+    if [[ $HOSTNAME = slax && $USER = root ]]; then
+            return $SUCCESS
+        else
+            return $ERROR
+        fi
 }
 
 
@@ -233,6 +245,7 @@ Typ 'exit' om dit venster te sluiten."
                         --infobox "$TEXT"           \
                         18 41
     if developer; then
+        info 'Aangemeld als Ontwikkelaar'
         check_dependencies
         pull_repos
         download_website
