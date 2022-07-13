@@ -141,7 +141,6 @@ function install_scriptspackage {
                         7 44
 
     check_dpkg
-    check_dependencies_slax
 
     # Bij Live-sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
@@ -161,20 +160,7 @@ function install_scriptspackage {
 }
 
 
-function check_dependencies_slax {
-    if ! command -v lsb-release 1> /dev/null; then
-        sudo apt-get install --yes lsb-release |& $LOGCMD
-    fi
-    if ! command -v vim 1> /dev/null; then
-        sudo apt-get install --yes vim |& $LOGCMD
-    fi
-}
-
-
 function check_sudo {
-    # Voor slax.
-    sudo apt-get install --yes sudo |& $LOGCMD
-
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TEXT='
@@ -247,7 +233,7 @@ Typ 'exit' om dit venster te sluiten."
                         --infobox "$TEXT"           \
                         18 41
     if developer; then
-        check_dependencies_developer
+        check_dependencies
         pull_repos
         download_website
         info 'Status repos (gitstat)...'
@@ -278,7 +264,7 @@ function developer {
 }
 
 
-function check_dependencies_developer {
+function check_dependencies {
     if ! command -v fakeroot 1> /dev/null; then
         # Voor lz-build .deb.
         info 'Installeer fakeroot...'
