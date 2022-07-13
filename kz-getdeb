@@ -247,9 +247,7 @@ function developer {
     local full_name=''
 
     # Aangemeld als ontwikkelaar?
-    if [[ $HOSTNAME = 'slax' && $USER = root ]]; then
-        return $SUCCESS
-    elif [[ $HOSTNAME == pc?? ]]; then
+    if [[ $HOSTNAME == pc?? ]]; then
         full_name=$(
             getent passwd karel             |
             cut --delimiter=':' --fields=5  |
@@ -257,6 +255,8 @@ function developer {
             )
         if [[ $USER = karel && $full_name = 'Karel Zimmer' ]]; then
             return $SUCCESS
+        else
+            return $ERROR
         fi
     else
         return $ERROR
