@@ -125,7 +125,8 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 
 function process_input {
     if slax; then
-        sudo apt-get install lsb-release sudo vim
+        # Vervang script sudo door pakket sudo.
+        sudo apt-get install lsb-release sudo
     fi
     install_scriptspackage
 }
@@ -134,9 +135,9 @@ function process_input {
 function slax {
     if [[ $HOSTNAME = slax && $USER = root ]]; then
             return $SUCCESS
-        else
-            return $ERROR
-        fi
+    else
+        return $ERROR
+    fi
 }
 
 
@@ -307,6 +308,11 @@ function check_dependencies {
         info 'Installeer shellcheck...'
         # Debian's pakket is oud, snap is nieuwer.
         sudo snap install shellcheck |& $LOGCMD
+    fi
+    if ! command -v vim &> /dev/null; then
+        info 'Installeer vim...'
+        # Voor Slax.
+        sudo snap install vim |& $LOGCMD
     fi
 }
 
