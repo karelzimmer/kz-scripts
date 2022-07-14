@@ -126,9 +126,18 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 function process_input {
     if slax; then
         info 'Uitvoeren op Slax.'
-        info 'Installeer lsb_release,'
-        info '   vervang script sudo door pakket sudo...'
-        sudo apt-get install lsb-release sudo
+        if [[ $(file /usr/bin/sudo) == *'Bourne-Again shell script'* ]]; then
+            info 'Vervang script sudo door pakket sudo...'
+            sudo apt-get install --yes sudo |& $LOGCMD
+        fi
+        if ! command -v gpg 1> /dev/null; then
+            info 'Installeer gpg...'
+            sudo apt-get install --yes gpg |& $LOGCMD
+        fi
+        if ! command -v lsb_release 1> /dev/null; then
+            info 'Installeer lsb-release...'
+            sudo apt-get install --yes lsb-release |& $LOGCMD
+        fi
     fi
     install_scriptspackage
 }
