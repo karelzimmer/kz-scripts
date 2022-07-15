@@ -51,8 +51,6 @@ Pakket kz installeren.
 Opties:
 $OPTIONS_HELP_COMMON"
 
-readonly UPLOADS_DISTDIR=$HOME/kz-uploads/dist
-
 
 ###############################################################################
 # Global variables
@@ -318,7 +316,7 @@ function pull_repos {
 function download_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
-    local ftp_to=$UPLOADS_DISTDIR
+    local ftp_to=$HOME/kz-uploads/dist
     local ftp_opts='--delete --verbose'
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
     local ftp_host=server106.hosting2go.nl
