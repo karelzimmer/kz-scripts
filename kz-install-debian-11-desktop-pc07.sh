@@ -16,10 +16,6 @@ sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/'
 sudo apt-get install --yes spice-vdagent
 #2 sudo apt-get remove --yes spice-vdagent
 
-#1 git (versiebeheersysteem)
-sudo apt-get install --yes git
-#2 sudo apt-get remove --yes git
-
 #1 gnome-gmail (Gmail als e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
