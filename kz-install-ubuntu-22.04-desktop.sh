@@ -121,10 +121,6 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get update
 
-#1 thunderbird (e-mail)
-sudo apt-get install --yes xul-ext-lightning
-#2 sudo apt-get remove --yes xul-ext-lightning
-
 #1 restricted-addons (niet-vrije pakketten)
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
