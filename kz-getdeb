@@ -36,15 +36,13 @@ readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
          bash kz
      of: wget karelzimmer.nl/kz; bash kz
      of: wget -O- karelzimmer.nl/kz | bash
-     of: curl -L karelzimmer.nl/kz | bash
-     of: zoek naar get en klik op Scripts installeren"
+     of: curl -L karelzimmer.nl/kz | bash"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
      of: wget karelzimmer.nl/kz
          bash kz
      of: wget karelzimmer.nl/kz; bash kz
      of: wget -O- karelzimmer.nl/kz | bash
      of: curl -L karelzimmer.nl/kz | bash
-     of: zoek naar get en klik op Scripts installeren
 
 Pakket kz installeren.
 
