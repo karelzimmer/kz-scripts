@@ -52,10 +52,6 @@ rm /tmp/icaclient.deb /tmp/libidn11.deb
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
-#1 gnome-tweaks (GNOME afstellingen)
-sudo apt-get install --yes gnome-tweaks
-#2 sudo apt-get remove --yes gnome-tweaks
-
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -83,11 +79,6 @@ sudo snap install --classic skype
 #1 spotify (muziekspeler)
 sudo snap install spotify
 #2 sudo snap remove spotify
-
-#1 sushi (voorbeeld tonen)
-## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
-sudo apt-get install --yes gnome-sushi
-#2 sudo apt-get remove --yes gnome-sushi
 
 #1 teams (samenwerken)
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in

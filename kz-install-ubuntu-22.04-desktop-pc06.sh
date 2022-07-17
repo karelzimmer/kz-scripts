@@ -39,6 +39,10 @@ sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
 
+#1 gnome-tweaks (GNOME afstellingen)
+sudo apt-get install --yes gnome-tweaks
+#2 sudo apt-get remove --yes gnome-tweaks
+
 #1 kvm (virtualisatie)
 ## Images staan in /var/lib/libvirt/images/.
 ## Dpkg::Options i.v.m. interactie a.g.v. restore /etc/libvirt configuratiebestanden.
@@ -86,6 +90,11 @@ grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 #2 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 #2 sudo apt-get remove --yes ssh
+
+#1 sushi (voorbeeld tonen)
+## Selecteer een bestand, druk op de spatiebalk, en een preview verschijnt.
+sudo apt-get install --yes gnome-sushi
+#2 sudo apt-get remove --yes gnome-sushi
 
 #1 tree (mappenboom)
 sudo apt-get install --yes tree

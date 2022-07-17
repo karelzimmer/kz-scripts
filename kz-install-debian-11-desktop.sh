@@ -78,7 +78,7 @@ sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
-#2 sudo apt-get remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
+#2 sudo apt-get remove --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype
