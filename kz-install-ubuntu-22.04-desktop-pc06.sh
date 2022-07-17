@@ -31,6 +31,10 @@ sudo apt-get install --yes ansible
 sudo apt-get install --yes cockpit cockpit-pcp
 #2 sudo apt-get remove --yes cockpit
 
+#1 exiftool (metadata lezen en schrijven)
+sudo apt-get install --yes libimage-exiftool-perl
+#2 sudo apt-get remove --yes libimage-exiftool-perl
+
 #1 gimp (beeldmanipulatieprogramma)
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 #2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
