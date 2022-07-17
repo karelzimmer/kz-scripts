@@ -138,7 +138,7 @@ function install_scriptspackage {
 
     check_dpkg
 
-    # Bij Live-sessie de universe repo aanzetten.
+    # Bij Ubuntu Live de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
         sudo add-apt-repository --yes universe  |& $LOGCMD
         sudo apt-get update |& $LOGCMD
@@ -241,20 +241,15 @@ Typ 'exit' om dit venster te sluiten."
 
 
 function developer {
-    local full_name=''
-
     # Aangemeld als ontwikkelaar?
-    if [[ $HOSTNAME == pc?? ]]; then
-        full_name=$(
-            getent passwd karel             |
-            cut --delimiter=':' --fields=5  |
-            cut --delimiter=',' --fields=1  || true
-            )
-        if [[ $USER = karel && $full_name = 'Karel Zimmer' ]]; then
-            return $SUCCESS
-        else
-            return $ERROR
-        fi
+    if [[ $HOSTNAME == pc?? && $USER = 'karel' ]]; then
+        return $SUCCESS
+    elif [[ $HOSTNAME = 'debian' && $USER = 'user' ]]; then
+        # Debian Live.
+        return $SUCCESS
+    elif [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
+        # Ubuntu Live.
+        return $SUCCESS
     else
         return $ERROR
     fi
