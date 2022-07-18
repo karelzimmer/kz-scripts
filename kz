@@ -7,7 +7,7 @@
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
-#source  "$PROGRAM_PATH"/kz-common.sh
+source  "$PROGRAM_PATH"/kz-common.sh
 readonly PROGRAM_NAME='kz'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
@@ -17,8 +17,8 @@ readonly RELEASE_YEAR=2021
 # Global constants
 ###############################################################################
 
-readonly SUCCESS=0
-readonly ERROR=1
+# readonly SUCCESS=0
+# readonly ERROR=1
 
 readonly USAGE="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
      of: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
@@ -51,25 +51,12 @@ declare NORMAL=''
 # Functions
 ###############################################################################
 
-function init_script {
-    # Script-hardening.
-    set -o errexit
-    set -o errtrace
-    set -o nounset
-    set -o pipefail
-
-    BLUE=$(tput bold; tput setaf 4)
-    NORMAL=$(tput sgr0)
-}
-
-
 function check_input {
     # Geen getopt want opgegeven opties zijn voor 'OPDRACHT', niet voor kz.
     if ! [[ "$*" ]]; then
-        printf "$DISPLAY_NAME: %s\n" "verplicht argument 'OPDRACHT' ontbreekt
-Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
-
-        exit $ERROR
+        info "Verplicht argument 'OPDRACHT' ontbreekt."
+        process_usage
+        NOERROR=true exit $ERROR
     elif [[ $1 == *-u* ]]; then
         process_option_usage
         exit $SUCCESS
@@ -83,15 +70,15 @@ Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
         show_commands
         exit $SUCCESS
     elif ! [[ -e "$PROGRAM_PATH/kz-$1" ]]; then
-        printf  "$DISPLAY_NAME: %s\n" "opdracht '$1' bestaat niet
-Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
-        exit $ERROR
+        info "Opdracht '$1' bestaat niet."
+        process_usage
+        NOERROR=true exit $ERROR
     fi
 }
 
 
 function show_commands {
-    printf '%s\n' 'De volgende OPDRACHTen zijn beschikbaar:
+    info 'De volgende OPDRACHTen zijn beschikbaar:
 
      OPDRACHT'
     find    "$PROGRAM_PATH"/kz-*            \
@@ -109,43 +96,9 @@ function show_commands {
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'
-    printf  '\n%s %s\n'                         \
-            "Om een OPDRACHT uit te voeren:"    \
-            "${BLUE}$DISPLAY_NAME OPDRACHT${NORMAL}"
-}
-
-
-function process_option_usage {
-    printf  '%s\n\n%s\n'    \
-            "$USAGE"        \
-            "Typ '$DISPLAY_NAME --help' voor meer informatie."
-}
-
-
-function process_option_help {
-    printf '%s\n\n%s\n' "$HELP" "Typ 'man $DISPLAY_NAME' voor meer informatie."
-}
-
-
-function process_option_version {
-    local build=''
-    local copyright_years=1970
-    local this_year=1970
-
-    build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
-
-    this_year=$(date +%Y)
-    if [[ $RELEASE_YEAR -eq $this_year ]]; then
-        copyright_years=$this_year
-    else
-        copyright_years=$RELEASE_YEAR-$this_year
-    fi
-    printf '%s\n' "$DISPLAY_NAME versie 365 (kz build $build)
-
-Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-
-Auteursrecht (c) $copyright_years Karel Zimmer.
-GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
+    info "
+Om een OPDRACHT uit te voeren:
+${BLUE}$DISPLAY_NAME OPDRACHT${NORMAL}"
 }
 
 
@@ -168,7 +121,7 @@ function term_script {
 ###############################################################################
 
 function main {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input "$@"
     term_script
