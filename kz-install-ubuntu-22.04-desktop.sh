@@ -69,8 +69,8 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
 
 #1 libreoffice (kantoorpakket)
-sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
-#2 sudo apt-get remove --yes libreoffice libreoffice-help-nl libreoffice-l10n-nl
+sudo apt-get install --yes aspell-nl libreoffice
+#2 sudo apt-get remove --yes aspell-nl libreoffice
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype
