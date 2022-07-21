@@ -242,7 +242,7 @@ Typ 'exit' om dit venster te sluiten."
 
 function developer {
     # Aangemeld als ontwikkelaar?
-    if [[ $HOSTNAME == pc?? && $USER = 'Karel' ]]; then
+    if [[ $HOSTNAME == pc?? && $USER = 'karel' ]]; then
         return $SUCCESS
     elif [[ $HOSTNAME = 'debian' && $USER = 'user' ]]; then
         # Debian Live sessie.
