@@ -6,12 +6,11 @@
 ###############################################################################
 
 #1 all-repos (alle repositories inschakelen)
-sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
-sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
-sudo sed --in-place --expression='s/main$/main contrib non-free/g' /etc/apt/sources.list
+sudo apt-add-repository contrib
+sudo apt-add-repository non-free
 sudo apt-get update
-#2 sudo sed --in-place --expression='s/ contrib//g' /etc/apt/sources.list
-#2 sudo sed --in-place --expression='s/ non-free//g' /etc/apt/sources.list
+#2 sudo apt-add-repository --remove contrib
+#2 sudo apt-add-repository --remove non-free
 #2 sudo apt-get update
 
 #1 updates (bijgewerkte apps en systeembestanden)

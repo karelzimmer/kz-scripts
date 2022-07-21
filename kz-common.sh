@@ -140,6 +140,33 @@ function check_user_sudo {
 }
 
 
+function developer {
+    local action=${1:-check}
+
+    if [[ $action = 'check' ]]; then
+        # Aangemeld als ontwikkelaar?
+        if [[ $HOSTNAME == pc?? && $USER = 'karel' ]]; then
+            return $SUCCESS
+        elif [[ $HOSTNAME = 'debian' && $USER = 'user' ]]; then
+            # Debian Live sessie.
+            return $SUCCESS
+        elif [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
+            # Ubuntu Live sessie.
+            return $SUCCESS
+        else
+            return $ERROR
+        fi
+    else
+        printf '%s\n' "Ontwikkelaar is een combinatie van HOSTNAME en USERNAME:
+
+    HOSTNAME USERNAME
+[1] pc%%     karel
+[2] debian   user
+[3] ubuntu   ubuntu"
+    fi
+}
+
+
 function error {
     if $NOERROR; then
         return $SUCCESS

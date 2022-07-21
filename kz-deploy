@@ -43,7 +43,6 @@ readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 ###############################################################################
 
 function check_input {
-    local       full_name=''
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -80,16 +79,9 @@ function check_input {
     fi
 
     # Aangemeld als ontwikkelaar?
-    full_name=$(
-        getent passwd karel             |
-        cut --delimiter=':' --fields=5  |
-        cut --delimiter=',' --fields=1  || true
-        )
-    if [[   $HOSTNAME == pc??                               &&
-            ($USER = karel && $full_name = 'Karel Zimmer')  ]]; then
-        :
-    else
+    if ! developer check; then
         info 'Uitvoeren als ontwikkelaar.'
+        developer report
         NOERROR=true exit $ERROR
     fi
 }

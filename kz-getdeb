@@ -228,7 +228,7 @@ Typ 'exit' om dit venster te sluiten."
                         --title 'Gereed'            \
                         --infobox "$TEXT"           \
                         18 41
-    if developer; then
+    if developer check; then
         info 'Aangemeld als Ontwikkelaar.'
         check_dependencies
         pull_repos
@@ -237,22 +237,6 @@ Typ 'exit' om dit venster te sluiten."
         /home/"$USER"/bin/gitstat
     fi
     exit $SUCCESS
-}
-
-
-function developer {
-    # Aangemeld als ontwikkelaar?
-    if [[ $HOSTNAME == pc?? && $USER = 'karel' ]]; then
-        return $SUCCESS
-    elif [[ $HOSTNAME = 'debian' && $USER = 'user' ]]; then
-        # Debian Live sessie.
-        return $SUCCESS
-    elif [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        # Ubuntu Live sessie.
-        return $SUCCESS
-    else
-        return $ERROR
-    fi
 }
 
 
