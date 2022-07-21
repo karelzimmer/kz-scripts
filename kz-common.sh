@@ -157,12 +157,12 @@ function developer {
             return $ERROR
         fi
     else
-        printf '%s\n' "Ontwikkelaar is een combinatie van HOSTNAME en USERNAME:
+        printf '%s\n' "Ontwikkelaar is een combinatie van USER en HOST:
 
-    HOSTNAME USERNAME
-[1] pc%%     karel
-[2] debian   user
-[3] ubuntu   ubuntu"
+    USER   HOST
+[1] karel  pc%%
+[2] user   debian
+[3] ubuntu ubuntu"
     fi
 }
 
