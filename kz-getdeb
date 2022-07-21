@@ -138,7 +138,7 @@ function install_scriptspackage {
 
     check_dpkg
 
-    # Bij Ubuntu Live de universe repo aanzetten.
+    # Bij Ubuntu Live sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
         sudo add-apt-repository --yes universe  |& $LOGCMD
         sudo apt-get update |& $LOGCMD
@@ -234,7 +234,7 @@ Typ 'exit' om dit venster te sluiten."
         pull_repos
         download_website
         info 'Status repos (gitstat)...'
-        /home/karel/bin/gitstat
+        /home/"$USER"/bin/gitstat
     fi
     exit $SUCCESS
 }
@@ -242,13 +242,13 @@ Typ 'exit' om dit venster te sluiten."
 
 function developer {
     # Aangemeld als ontwikkelaar?
-    if [[ $HOSTNAME == pc?? && $USER = 'karel' ]]; then
+    if [[ $HOSTNAME == pc?? && $USER = 'Karel' ]]; then
         return $SUCCESS
     elif [[ $HOSTNAME = 'debian' && $USER = 'user' ]]; then
-        # Debian Live.
+        # Debian Live sessie.
         return $SUCCESS
     elif [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        # Ubuntu Live.
+        # Ubuntu Live sessie.
         return $SUCCESS
     else
         return $ERROR
@@ -291,7 +291,7 @@ function check_dependencies {
 
 
 function pull_repos {
-    local bin_repo=/home/karel/bin
+    local bin_repo=/home/"$USER"/bin
 
     info 'Pull repos (gitpull)...'
     git config --global pull.ff only |& $LOGCMD
@@ -302,7 +302,7 @@ function pull_repos {
         cd "$bin_repo"
         git pull |& $LOGCMD
     fi
-    /home/karel/bin/gitpull |& $LOGCMD
+    /home/"$USER"/bin/gitpull |& $LOGCMD
 }
 
 
