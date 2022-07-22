@@ -140,7 +140,7 @@ function install_scriptspackage {
 
     # Bij Ubuntu Live sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        sudo add-apt-repository --yes universe  |& $LOGCMD
+        sudo apt-add-repository --yes universe  |& $LOGCMD
         sudo apt-get update |& $LOGCMD
     fi
 
