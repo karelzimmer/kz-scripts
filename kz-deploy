@@ -111,7 +111,7 @@ function check_names {
     if [[ $check_rc -ne $SUCCESS ]]; then
         error '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        exit $check_rc
+        NOERROR=true exit $check_rc
     fi
 }
 
@@ -125,7 +125,7 @@ function check_scripts {
     if [[ $check_rc -ne $SUCCESS ]]; then
         error '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        exit $check_rc
+        NOERROR=true exit $check_rc
     fi
 }
 
@@ -139,7 +139,7 @@ function build_package {
     if [[ $check_rc -ne $SUCCESS ]]; then
         error '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        exit $check_rc
+        NOERROR=true exit $check_rc
     fi
 }
 
@@ -168,7 +168,7 @@ function upload_website {
         rm      "$ftp_login"
         error 'Uploaden website is mislukt.'
         info 'Controleer de log...!'
-        exit $ERROR
+        NOERROR=true exit $ERROR
     fi
     sleep 5
 }
@@ -180,7 +180,7 @@ function install_package {
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
         error 'Installeren pakket kz is niet uitgevoerd.'
         info 'Controleer de log...!'
-        exit $ERROR
+        NOERROR=true exit $ERROR
     fi
 }
 
