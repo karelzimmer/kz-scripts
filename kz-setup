@@ -254,15 +254,19 @@ function process_argument_app {
         files+=("$file")
     done
     for app in "${APP_ARGUMENTS[@]}"; do
-        if ! grep   --files-with-matches    \
+        file=$(
+            grep    --files-with-matches    \
                     --word-regexp           \
                     --regexp="#1 $app"      \
                     "${files[@]}"           \
-                    &> /dev/null; then
-            info "App '$app' niet gevonden."
-            file_notfound=true
-        else
+                    2> /dev/null            |
+            head    --lines=1               || printf '\n'
+            )
+        if [[ $file ]]; then
             process_argument_app_file
+        else
+            info "App $app niet gevonden."
+            file_notfound=true
         fi
     done
     if $file_notfound; then
@@ -353,7 +357,7 @@ function process_option_apps {
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
     done
-    TEXT="De volgende APPs zijn beschikbaar:
+    TEXT="De volgende APPs zijn beschikbaar om in te stellen:
 
      APP (BESCHRIJVING)
 $(
@@ -371,12 +375,11 @@ $(
         printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
     else
         printf '%s\n' "
-Om de inhoud van APPs te bekijken voer uit:      ${BLUE}$DISPLAY_NAME \
---cat APP...${NORMAL}
-Om de verwerking van APPs te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
+Om de APPs in te stellen voer uit: ${BLUE}$DISPLAY_NAME APP...${NORMAL}
+Om het instellen van APPs te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
 --simulate APP...${NORMAL}
-Om de APPs in te stellen voer uit:               ${BLUE}$DISPLAY_NAME \
-APP...${NORMAL}"
+Om de inhoud van het instelbestand voor APPs te bekijken voer uit: \
+${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}"
     fi
 )"
     info "$TEXT"
@@ -402,7 +405,7 @@ function process_option_cat {
 
 
 function process_option_files {
-    TEXT="De volgende BESTANDen staan op het systeem:
+    TEXT="De volgende instelBESTANDen staan op het systeem:
 
      BESTAND
 $(
@@ -418,12 +421,11 @@ $(
 $USAGELINE"
     else
         printf '%s\n' "
-Om de inhoud van BESTANDen te bekijken voer uit:      ${BLUE}$DISPLAY_NAME \
---cat BESTAND...${NORMAL}
+Om de BESTANDen te verwerken voer uit: ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}
+Om de inhoud van BESTANDen te bekijken voer uit: ${BLUE}$DISPLAY_NAME --cat \
+BESTAND...${NORMAL}
 Om de verwerking van BESTANDen te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
---simulate BESTAND...${NORMAL}
-Om de BESTANDen te verwerken voer uit:                ${BLUE}$DISPLAY_NAME \
-BESTAND...${NORMAL}"
+--simulate BESTAND...${NORMAL}"
     fi
 )"
     info "$TEXT"
