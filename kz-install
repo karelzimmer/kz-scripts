@@ -332,7 +332,7 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --files' voor bestanden op dit systeem." >&2
+        info "Typ '$DISPLAY_NAME --files' voor beschikbare bestanden." >&2
     fi
 }
 
@@ -410,7 +410,7 @@ function process_option_cat {
 
 
 function process_option_files {
-    TEXT="De volgende installatieBESTANDen staan op het systeem:
+    TEXT="De volgende installatieBESTANDen zijn aanwezig:
 
      BESTAND
 $(
@@ -421,7 +421,7 @@ $(
                     --number-separator='] '         \
                     --body-numbering=a              |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen bestanden aanwezig op het systeem.
+        printf '%s\n' "     0 Geen bestanden aanwezig.
 
 $USAGELINE"
     else
@@ -502,7 +502,7 @@ met '[sudo] install <snap>',
     printf '%b\n' "$header\n$DASHES" >> "$file"
 
     if ! snap list 2> /dev/null >> "$file"; then
-        TEXT='snap is niet geïnstalleerd op dit systeem'
+        TEXT='snap is niet geïnstalleerd'
         printf '%s\n' "$TEXT" >> "$file"
     fi
 
