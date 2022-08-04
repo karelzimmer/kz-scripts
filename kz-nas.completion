@@ -1,9 +1,0 @@
-# shellcheck shell=bash
-###############################################################################
-# Tab-completion-script voor kz nas.
-#
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-###############################################################################
-
-dashoptions='-g --gui -h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-nas
