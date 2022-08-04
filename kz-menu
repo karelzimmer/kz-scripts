@@ -62,7 +62,6 @@ readonly -a MENU2_ACTIONS=(
     [1]='Back-up maken'
         'Apps installeren'
         'Applijst maken'
-        'Netwerkschijf aankoppelen'
         'Back-up terugzetten'
         'Apps instellen'
         'Instellijst maken'
@@ -72,7 +71,6 @@ readonly -a MENU2_COMMANDS=(
     [1]='kz backup'
         'kz install'
         'kz install --list'
-        'kz nas'
         'kz restore'
         'kz setup'
         'kz setup --list'
@@ -290,17 +288,9 @@ Druk op de Enter-toets voor het menu [Enter]: '
 
 function process_menu1_choice3 {
     TITLE="${MENU1_ACTIONS[3]}"
-    if [[   ($HOSTNAME = pc-van-soe  && $USER = soe )   ||
-            ($HOSTNAME = pc-van-hugo && $USER = hugo)   ]]; then
-        EXEC=(
-            [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
-                "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
-            )
-    else
-        EXEC=(
-            [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
-            )
-    fi
+    EXEC=(
+        [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+        )
     process_commands
 }
 
@@ -308,8 +298,8 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
-            "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
+        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
+            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
         )
     process_commands
 }
@@ -348,7 +338,6 @@ function process_menu2_gui {
                     FALSE  4 "${MENU2_ACTIONS[4]}"  "${MENU2_COMMANDS[4]}"  \
                     FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
                     FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
-                    FALSE  7 "${MENU2_ACTIONS[7]}"  "${MENU2_COMMANDS[7]}"  \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -410,13 +399,13 @@ Druk op de Enter-toets voor het menu [Enter]: '
 
 
 function process_menu2_choice {
-    if [[ $REPLY -ge 1 && $REPLY -le 7 ]]; then
+    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
         TITLE="${MENU2_ACTIONS[$REPLY]}"
         EXEC=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
         process_commands
-    elif [[ $REPLY -eq 8 ]]; then
+    elif [[ $REPLY -eq $MENU2_LINES ]]; then
         exit_menu2=true
     else
         error 'Niet afgehandelde keuze.'
@@ -516,7 +505,7 @@ function check_backup_restore {
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
         warning "$TEXT"
-    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
+    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
