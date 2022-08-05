@@ -206,14 +206,14 @@ Mogelijke oorzaak:
 function populate_kz_data {
     local srcdir=/usr/share/doc/kz
     local tgtdir=$HOME/kz-data
-    
+
     mkdir --parents "$tgtdir" |& $LOGCMD
 
     # Populate kz-data with checklist installation.
     cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
         "$tgtdir"                                           |& $LOGCMD || true
 }
-    
+
 
 function term_script {
     TEXT="Pakket kz is succesvol geïnstalleerd.
