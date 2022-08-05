@@ -55,9 +55,9 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
 readonly MENU2_HEAD="\
-${DASHES:0:41}
-=            $MENU2_TITLE             =
-${DASHES:0:41}"
+${DASHES:0:36}
+=          $MENU2_TITLE          =
+${DASHES:0:36}"
 readonly -a MENU2_ACTIONS=(
     [1]='Back-up maken'
         'Apps installeren'
@@ -70,7 +70,7 @@ readonly -a MENU2_COMMANDS=(
         'kz install'
         'kz restore'
         'kz setup'
-        'Naar vorig menu'
+        'Vorig menu'
     )
 readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
