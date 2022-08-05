@@ -36,7 +36,7 @@ Opties:
                  plaats back-up in de DOELMAP
 $OPTIONS_HELP_COMMON"
 
-readonly SOURCE=$HOME/kz-data
+readonly SOURCE=$HOME
 MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null)
 readonly MEDIUM
 
