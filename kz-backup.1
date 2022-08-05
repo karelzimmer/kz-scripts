@@ -23,6 +23,10 @@ In een grafische werkomgeving zoals Ubuntu met GNOME kan opdracht
 \fBkz backup\fR worden uitgevoerd door te zoeken naar \fBback\fR, klik op
 \fBBack-up maken\fR.
 .sp
+Er wordt gebruikersdata veiliggesteld voordat er een back-up wordt gemaakt in
+de Persoonlijke map / kzdata. In deze map kz-data staan bestanden met
+geïnstalleerde apps en gekozen Achtergrond, Gebruikersfoto, en Favorieten.
+.sp
 De back-up wordt geplaatst op een aangekoppeld USB-medium zoals een USB externe
 harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, deze map
 wordt aangemaakt als nodig, bijvoorbeeld
@@ -91,6 +95,28 @@ Start in grafische modus
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
 afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH BESTANDEN
+~/kz-data/Adachtergrond
+.RS
+Ingestelde bureaubladachtergrond.
+.RE
+.sp
+~/kz-data/Apps
+.RS
+Lijst met geïnstalleerde apps.
+.RE
+.sp
+~/kz-data/Favorieten
+.RS
+Ingestelde favorieten in de favorietenbalk (dash/dock).
+.RE
+.sp
+~/kz-data/Gebruikersfoto
+.RS
+Ingestelde gebruikersfoto.
+.RE
 .\"
 .\"
 .SH NOTITIES

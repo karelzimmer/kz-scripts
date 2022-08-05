@@ -121,6 +121,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 
 function process_input {
     install_scriptspackage
+    populate_kz_data
 }
 
 
@@ -202,16 +203,19 @@ Mogelijke oorzaak:
 }
 
 
-function term_script {
+function populate_kz_data {
     local srcdir=/usr/share/doc/kz
     local tgtdir=$HOME/kz-data
-
+    
     mkdir --parents "$tgtdir" |& $LOGCMD
 
-    # Populate with checklist.
-    # Also 'kz-install --list' and 'kz-setup --list' will use this location.
+    # Populate kz-data with checklist installation.
     cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
         "$tgtdir"                                           |& $LOGCMD || true
+}
+    
+
+function term_script {
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
 Volg nu de stappen zoals beschreven

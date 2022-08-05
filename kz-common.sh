@@ -176,7 +176,7 @@ function error {
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         zenity  --error                 \
                 --no-markup             \
-                --width     500         \
+                --width     600         \
                 --height    100         \
                 --title     "$TITLE"    \
                 --text      "$@"        \
@@ -521,7 +521,7 @@ function warning {
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         zenity  --warning               \
                 --no-markup             \
-                --width     500         \
+                --width     600         \
                 --height    100         \
                 --title     "$TITLE"    \
                 --text      "$@"        \

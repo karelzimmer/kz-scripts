@@ -32,9 +32,9 @@ $OPTIONS_HELP_COMMON"
 
 readonly MENU1_TITLE=Installatiemenu
 readonly MENU1_HEAD="\
-${DASHES:0:57}
-=                    $MENU1_TITLE                    =
-${DASHES:0:57}"
+${DASHES:0:52}
+=                 $MENU1_TITLE                  =
+${DASHES:0:52}"
 readonly -a MENU1_ACTIONS=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
@@ -55,25 +55,21 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
 readonly MENU2_HEAD="\
-${DASHES:0:57}
-=                    $MENU2_TITLE                    =
-${DASHES:0:57}"
+${DASHES:0:41}
+=            $MENU2_TITLE             =
+${DASHES:0:41}"
 readonly -a MENU2_ACTIONS=(
     [1]='Back-up maken'
         'Apps installeren'
-        'Applijst maken'
         'Back-up terugzetten'
         'Apps instellen'
-        'Instellijst maken'
         'Terug'
     )
 readonly -a MENU2_COMMANDS=(
     [1]='kz backup'
         'kz install'
-        'kz install --list'
         'kz restore'
         'kz setup'
-        'kz setup --list'
         'Naar vorig menu'
     )
 readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
@@ -188,7 +184,7 @@ function process_menu1_tui {
         info "$MENU1_HEAD
 "
         for action in "${!MENU1_ACTIONS[@]}"; do
-            printf  '%2s. %-29.29s - %s\n'      \
+            printf  '%2s. %-24.24s - %s\n'      \
                     "$action"                   \
                     "${MENU1_ACTIONS[$action]}" \
                     "${MENU1_COMMANDS[$action]}"
@@ -254,9 +250,7 @@ function process_menu1_choice {
 function process_menu1_choice1 {
     TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
-            "${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
-            "${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
+        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
         )
 
     process_commands
@@ -298,8 +292,8 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+            "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
         )
     process_commands
 }
@@ -322,8 +316,8 @@ function process_menu2_gui {
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
-                    --width         480                                     \
-                    --height        260                                     \
+                    --width         400                                     \
+                    --height        210                                     \
                     --title         "$TITLE"                                \
                     --text          'Selecteer een keuze:'                  \
                     --ok-label      'Verder'                                \
@@ -336,8 +330,6 @@ function process_menu2_gui {
                     FALSE  2 "${MENU2_ACTIONS[2]}"  "${MENU2_COMMANDS[2]}"  \
                     FALSE  3 "${MENU2_ACTIONS[3]}"  "${MENU2_COMMANDS[3]}"  \
                     FALSE  4 "${MENU2_ACTIONS[4]}"  "${MENU2_COMMANDS[4]}"  \
-                    FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
-                    FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
                     2> >($LOGCMD)
             )       || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -359,7 +351,7 @@ function process_menu2_tui {
         info "$MENU2_HEAD
 "
         for action in "${!MENU2_ACTIONS[@]}"; do
-            printf  '%2s. %-29.29s - %s\n'      \
+            printf  '%2s. %-19.19s - %s\n'      \
                     "$action"                   \
                     "${MENU2_ACTIONS[$action]}" \
                     "${MENU2_COMMANDS[$action]}"
@@ -465,7 +457,7 @@ Doorgaan?'
 $prompt"
         if zenity   --question                  \
                     --no-markup                 \
-                    --width         400         \
+                    --width         600         \
                     --height        100         \
                     --title         "$TITLE"    \
                     --text          "$TEXT"     \
@@ -505,7 +497,7 @@ function check_backup_restore {
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
         warning "$TEXT"
-    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+    elif [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'

@@ -143,7 +143,108 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     fi
 
     check_on_ac_power
+    TITLE='Gebruikersdata vastleggen'
+    TEXT='Persoonlijke map / kz-data vullen'
+    if $OPTION_GUI; then
+        populate_kz_data                |
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     700         \
+                --height    50          \
+                --title     "$TITLE"    \
+                --text      "$TEXT"     2> >($LOGCMD)
+    else
+        info "$TEXT..."
+        populate_kz_data
+    fi
     create_backup
+}
+
+
+function populate_kz_data {
+    local tgtdir=$HOME/kz-data
+
+    mkdir --parents "$tgtdir" |& $LOGCMD
+    # Populate kz-data with installed apps and user data.
+    populate_kz_data_installed_apps
+    populate_kz_data_desktop_background
+    populate_kz_data_user_photo
+    populate_kz_data_favorite_apps
+}
+
+
+function populate_kz_data_installed_apps {
+    local file=$tgtdir/Apps
+    local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
+met een opdracht zoals
+      'sudo apt --install <pakket|bestand>', of met kz install:"
+    local header2="[2/3] Deze snaps zijn geïnstalleerd via Software, \
+met '[sudo] install <snap>',
+      of met kz install:"
+    local header3="[3/3] Deze pakketbronnen zijn toegevoegd met de \
+installatie van een pakket, met
+      de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>', of
+      met kz install:"
+    local search=/etc/apt/sources.list
+
+    printf '%b\n' "$DASHES\n$(date)\n$DASHES" > "$file"
+
+    printf '%b\n' "$header1\n$DASHES" >> "$file"
+    if ! apt list --manual-installed 2> >($LOGCMD) >> "$file"; then
+        true
+    fi
+    printf '%b\n' "$DASHES\n" >> "$file"
+
+    printf '%b\n' "$header2\n$DASHES" >> "$file"
+    if ! snap list 2> /dev/null >> "$file"; then
+        printf '%s\n' 'snap is niet geïnstalleerd' >> "$file"
+    fi
+    printf '%b\n' "$DASHES\n" >> "$file"
+
+    printf '%b\n' "$header3\n$DASHES" >> "$file"
+    cd  $search.d
+    if !    grep    --recursive             \
+                    --no-filename           \
+                    --regexp='^deb '        \
+                    --recursive             \
+                    /etc/apt/sources.list   \
+                    /etc/apt/sources.list.d |
+            grep    --invert-match          \
+                    --regexp='ubuntu.com'   |
+            sort    --unique                >> "$file"; then
+        true
+    fi
+    printf '%b\n' "$DASHES" >> "$file"
+}
+
+
+function populate_kz_data_desktop_background {
+    local file=$tgtdir/Achtergrond
+    local picture_file=''
+
+    picture_file=$(
+        gsettings get org.gnome.desktop.background picture-uri  |
+        sed --expression='s|%20| |g'                            |
+        sed --expression="s/'//g"                               |
+        sed --expression='s|file://||'                          || true
+        )
+    cp "$picture_file" "$file" |& $LOGCMD || true
+}
+
+
+function populate_kz_data_user_photo {
+    local file=$tgtdir/Gebruikersfoto
+
+    cp /var/lib/AccountsService/icons/"$USER" "$file" |& $LOGCMD || true
+}
+
+
+function populate_kz_data_favorite_apps {
+    local file=$tgtdir/Favorieten
+
+    gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
 }
 
 
