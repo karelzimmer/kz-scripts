@@ -36,7 +36,7 @@ Opties:
                  plaats back-up in de DOELMAP
 $OPTIONS_HELP_COMMON"
 
-readonly SOURCE=$HOME
+readonly SOURCE=$HOME/kz-data
 MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null)
 readonly MEDIUM
 
@@ -68,7 +68,7 @@ function check_input {
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        )       || getopt_rc=$?
+        ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
         NOERROR=true exit $ERROR
@@ -230,14 +230,15 @@ function populate_kz_data_desktop_background {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp "$picture_file" "$file" |& $LOGCMD || true
+    cp --update "$picture_file" "$file" |& $LOGCMD || true
 }
 
 
 function populate_kz_data_user_photo {
+    local srcdir=/var/lib/AccountsService/icons
     local file=$tgtdir/Gebruikersfoto
 
-    cp /var/lib/AccountsService/icons/"$USER" "$file" |& $LOGCMD || true
+    cp --update $srcdir/"$USER" "$file" |& $LOGCMD || true
 }
 
 

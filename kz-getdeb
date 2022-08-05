@@ -69,7 +69,7 @@ function check_input {
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        )       || getopt_rc=$?
+        ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
         process_usage
         NOERROR=true exit $ERROR
@@ -162,7 +162,7 @@ function check_sudo {
         while true; do
             TEXT='
 Authenticatie is vereist om pakket
-kz met scripts en documenten van
+kz met documenten en scripts van
 Karel Zimmer te installeren.
 
 Voer uw wachtwoord in:'
