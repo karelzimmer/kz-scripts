@@ -83,7 +83,7 @@ def process_option_version(display_name, release_year):
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
-Auteursrecht (c) {copyright_years} Karel Zimmer.
+Auteursrecht © {copyright_years} Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.""")
 
 
