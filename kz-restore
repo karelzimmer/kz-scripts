@@ -108,6 +108,8 @@ function check_input {
 
 
 function process_input {
+    local restore=false
+
     if $OPTION_SOURCE; then
         if ! [[ -d $SOURCE_ARGUMENT ]]; then
             info "Map $SOURCE_ARGUMENT bestaat niet."
@@ -142,7 +144,51 @@ daarna opnieuw."
     fi
 
     check_on_ac_power
-    restore_backup
+
+    TITLE='Back-up terugzetten'
+    TEXT='Back-up wordt TERUGGEZET naar de Persoonlijke map.
+'
+    prompt='Doorgaan?'
+    if $OPTION_GUI; then
+        TEXT+="
+$prompt"
+        if zenity   --question                  \
+                    --no-markup                 \
+                    --width         600         \
+                    --height        100         \
+                    --title         "$TITLE"    \
+                    --text          "$TEXT"     \
+                    --ok-label      'Ja'        \
+                    --cancel-label  'Nee'       2> >($LOGCMD); then
+            restore=true
+        else
+            restore=false
+        fi
+    else
+        info "$TEXT"
+        while true; do
+            read -rp "$prompt [j/N]: "
+            case $REPLY in
+                j*|J*)
+                    restore=true
+                    break
+                    ;;
+                n*|N*|'')
+                    restore=false
+                    break
+                    ;;
+                *)
+                    printf '%s' "${REWRITE_LINE}"
+                    continue
+                    ;;
+            esac
+        done
+    fi
+    if $restore; then
+        restore_backup
+    else
+        exit $SUCCESS
+    fi
 }
 
 

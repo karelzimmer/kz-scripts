@@ -6,8 +6,8 @@
 
 [Desktop Entry]
 Type=Application
-Name=Restore copy
-Name[nl]=Terugzetten reservekopie
+Name=Restore backup
+Name[nl]=Back-up terugzetten
 GenericName=Restore program
 GenericName[nl]=Herstelprogramma
 Comment=Restore files and folders from a backup
