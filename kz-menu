@@ -447,11 +447,11 @@ Het volgende wordt uitgevoerd:
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
             )
         TEXT+="
-$exec. $action ($command)"
+$exec. $action ($command)
+"
     done
 
-    prompt='
-Doorgaan?'
+    prompt='Doorgaan?'
     if $OPTION_GUI; then
         TEXT+="
 $prompt"
@@ -468,8 +468,7 @@ $prompt"
             EXECUTE_COMMAND=false
         fi
     else
-        info "
-$TEXT"
+        info "$TEXT"
         while true; do
             read -rp "$prompt [J/n]: "
             case $REPLY in
@@ -510,7 +509,6 @@ function execute_command {
     local -i    cmd_rc=0
     local       exec=''
     local       gui_option=''
-    local       prompt=''
 
     exec=${command/kz /kz-}
     cmd=$(
@@ -531,7 +529,6 @@ function show_commands_after_execution {
     local       action=''
     local       command=''
     local -i    exec=0
-    local       prompt=''
 
     TEXT="
 Het volgende is uitgevoerd:
