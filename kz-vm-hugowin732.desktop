@@ -10,7 +10,6 @@ Name=HugoWin732 starten
 GenericName=PC-virtualisatie-oplossing
 Comment=Start VirtualBox VM hugowin732
 Keywords=vbox;virtualisatie;
-Categories=KZ Scripts;
 Exec=/home/hugo/kz-vm-hugowin732.sh
 Icon=virtualbox-vbox
 NoDisplay=true

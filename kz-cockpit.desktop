@@ -14,7 +14,6 @@ Comment=Browser-based system management
 Comment[nl]=Browsergebaseerd beheer
 Keywords=system;management;
 Keywords[nl]=systeem;beheer;
-Categories=KZ Scripts;
 Exec=google-chrome https://localhost:9090
 Icon=kz-cockpit
 NoDisplay=true
