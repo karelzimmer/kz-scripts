@@ -8,15 +8,20 @@
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
-if ! source "$PROGRAM_PATH"/kz-common.sh 2> /dev/null; then
-    if ! wget   --no-verbose                        \
-                --output-document=/tmp/kz-common.sh \
-                'https://karelzimmer.nl/data/linux/scripts/kz-common.sh'; then
-        printf '%s\n' 'Downloaden kz-common.sh is mislukt.'
+if ! source "$PROGRAM_PATH"/kz-common.sh &> /tmp/kz-getdeb.log; then
+    if ! wget   --no-verbose                                                \
+                --output-document=/tmp/kz-common.sh                         \
+                'https://karelzimmer.nl/data/linux/scripts/kz-common.sh'    \
+                 &> /tmp/kz-getdeb.log; then
+        printf  '%s\n%s\n'                              \
+                'Downloaden kz-common.sh is mislukt.'   \
+                'Controleer /tmp/kz-getdeb.log'
         exit 1
     fi
-    if ! source /tmp/kz-common.sh; then
-        printf '%s\n' 'Inlezen kz-common.sh is mislukt.'
+    if ! source /tmp/kz-common.sh &> /tmp/kz-getdeb.log; then
+        printf  '%s\n%s\n'                          \
+                'Inlezen kz-common.sh is mislukt.'  \
+                'Controleer /tmp/kz-getdeb.log'
         exit 1
     fi
 fi
