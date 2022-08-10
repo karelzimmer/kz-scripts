@@ -146,7 +146,7 @@ daarna opnieuw."
     check_on_ac_power
 
     TITLE='Back-up terugzetten'
-    TEXT='Back-up wordt TERUGGEZET naar de Persoonlijke map.
+    TEXT='Back-up wordt TERUGGEZET.
 '
     prompt='Doorgaan?'
     if $OPTION_GUI; then
