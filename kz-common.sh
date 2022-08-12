@@ -68,7 +68,7 @@ declare     YELLOW=''
 ###############################################################################
 
 function check_dpkg {
-    local -i wait_for_aptd=5
+    local -i aptd_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         while sudo  fuser                                               \
@@ -76,16 +76,16 @@ function check_dpkg {
                     /var/cache/debconf/config.dat                       \
                     /snap/core/*/var/cache/debconf/config.dat           \
                     &> /dev/null; do
-            log 'Wacht tot andere pakketbeheerder klaar is...'
-            sleep $wait_for_aptd
+            log "Wacht ${aptd_wait}s tot andere pakketbeheerder klaar is..."
+            sleep $aptd_wait
         done
     else
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     &> /dev/null; do
-            log 'Wacht tot andere pakketbeheerder klaar is...'
-            sleep $wait_for_aptd
+            log "Wacht ${aptd_wait}s tot andere pakketbeheerder klaar is..."
+            sleep $aptd_wait
         done
     fi
 }
