@@ -26,6 +26,7 @@ if ! source "$PROGRAM_PATH"/kz-common.sh &>> /tmp/kz-getdeb.log; then
         exit 1
     fi
 fi
+rm /tmp/kz-getdeb.log
 readonly PROGRAM_NAME='kz-getdeb'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2016
