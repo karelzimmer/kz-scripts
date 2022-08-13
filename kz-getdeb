@@ -52,6 +52,8 @@ $OPTIONS_HELP_COMMON"
 ###############################################################################
 # Global variables
 ###############################################################################
+declare TEXT=''
+declare TITLE=''
 
 
 ###############################################################################
@@ -107,11 +109,12 @@ function check_on_ac_power {
 
     on_ac_power &> /dev/null || on_battery=$?
     if [[ $on_battery -eq 1 ]]; then
+        TITLE='Waarschuwing'
         TEXT='De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
         whiptail    --backtitle "$DISPLAY_NAME" \
-                    --title     'Waarschuwing'  \
+                    --title     "$TITLE"        \
                     --msgbox    "$TEXT"         \
                     10 71
     fi
@@ -130,9 +133,10 @@ function install_scriptspackage {
 
     check_sudo
 
+    TITLE='Voortgang'
     TEXT='Installeer pakket kz (kan even duren)...'
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                        --title     'Voortgang'     \
+                        --title     "$TITLE"        \
                         --infobox   "$TEXT"         \
                         7 44
 
@@ -159,6 +163,7 @@ function install_scriptspackage {
 function check_sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
+            TITLE='Authenticatie nodig'
             TEXT='
 Authenticatie is vereist om pakket
 kz met documenten en scripts van
@@ -167,31 +172,33 @@ Karel Zimmer te installeren.
 Voer uw wachtwoord in:'
             # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
             if printf '%s\n' "$(
-                whiptail    --backtitle     "$DISPLAY_NAME"         \
-                            --title         'Authenticatie nodig'   \
-                            --ok-button     'Verifiëren'            \
-                            --cancel-button 'Annuleren'             \
-                            --passwordbox   "$TEXT"                 \
-                            13 38                                   \
+                whiptail    --backtitle     "$DISPLAY_NAME" \
+                            --title         "$TITLE"        \
+                            --ok-button     'Verifiëren'    \
+                            --cancel-button 'Annuleren'     \
+                            --passwordbox   "$TEXT"         \
+                            13 38                           \
                             3>&1 1>&2 2>&3
                 )" | sudo --stdin true 2> /dev/null; then
                 break
             else
                 clear -x
+                TITLE='Fout'
                 TEXT='Er is een fout opgetreden.
 
 Mogelijke oorzaak:
 1. Geen of verkeerd wachtwoord ingevoerd
 2. Op vorig scherm is <Annuleren> gekozen'
                 if ! whiptail   --backtitle     "$DISPLAY_NAME" \
-                                --title         'Fout'          \
+                                --title         "$TITLE"        \
                                 --yes-button    'Opnieuw'       \
                                 --no-button     'Stoppen'       \
                                 --yesno         "$TEXT"         \
                                 11 45; then
+                    TITLE='Gestopt'
                     TEXT='Programma is gestopt door de gebruiker'
                     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                                        --title     'Gestopt'       \
+                                        --title     "$TITLE"        \
                                         --infobox   "$TEXT"         \
                                         7 42
                     NOERROR=true exit $ERROR
@@ -215,6 +222,7 @@ function populate_kz_data {
 
 
 function term_script {
+    TITLE='Gereed'
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
 Volg nu de stappen zoals beschreven
@@ -228,8 +236,8 @@ Checklist installatie is te vinden:
 
 Typ 'exit' om dit venster te sluiten."
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                        --title 'Gereed'            \
-                        --infobox "$TEXT"           \
+                        --title     "$TITLE"        \
+                        --infobox   "$TEXT"         \
                         18 41
     if developer check; then
         info 'Ontwikkelaar-acties uitvoeren.'

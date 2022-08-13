@@ -52,6 +52,8 @@ declare OPTION_TARGET=false
 declare TARGET_ARGUMENT=''
 declare TARGET_MEDIUM=''
 declare TARGET=''
+declare TEXT=''
+declare TITLE=''
 
 
 ###############################################################################

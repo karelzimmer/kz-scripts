@@ -81,6 +81,8 @@ declare     OPTION_SIMULATE=false
 declare     STATUS_BUSY=''
 declare     STATUS_ERROR=''
 declare     STATUS_SUCCESS=''
+declare     TEXT=''
+declare     TITLE=''
 
 
 ###############################################################################
@@ -210,7 +212,7 @@ function process_input {
 
     if $EXECUTE_COMMANDS && $OPTION_GUI; then
         TITLE='Apps instellen'
-        TEXT=''
+        TEXT='Instellen voorbereiden'
         # Met "|& zenity --progress" worden globale variabelen uit aangeroepen
         # functies niet doorgegeven, vandaar de 'process substitution' met
         # "> >(zenity...)".

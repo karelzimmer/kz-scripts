@@ -47,7 +47,6 @@ declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
 declare     PROGRAM=''
-declare     TITLE=''
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 
@@ -168,17 +167,18 @@ function developer {
 
 
 function error {
+    local title="Foutmelding $DISPLAY_NAME"
+
     if $NOERROR; then
         return $SUCCESS
     fi
     if $OPTION_GUI; then
-        TITLE="Foutmelding $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
-                --title     "$TITLE"    \
+                --title     "$title"    \
                 --text      "$@"        \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else
@@ -188,14 +188,15 @@ function error {
 
 
 function info {
+    local title="Informatie $DISPLAY_NAME"
+
     if $OPTION_GUI; then
-        TITLE="Informatie $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
-                --title     "$TITLE"    \
+                --title     "$title"    \
                 --text      "$@"        \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else
@@ -489,6 +490,7 @@ een Terminalvenster en voer uit:
 
 function signal_exit_log {
     local temp_log=''
+    local title="Logberichten $DISPLAY_NAME"
 
     if $NOERROR; then
         return $SUCCESS
@@ -501,11 +503,10 @@ function signal_exit_log {
         printf "%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
     } > "$temp_log"
     if $OPTION_GUI; then
-        TITLE="Logberichten $DISPLAY_NAME"
         zenity  --text-info             \
                 --width     1200        \
                 --height    600         \
-                --title     "$TITLE"    \
+                --title     "$title"    \
                 --filename  "$temp_log" \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else
@@ -516,14 +517,15 @@ function signal_exit_log {
 
 
 function warning {
+    local title="Waarschuwing $DISPLAY_NAME"
+
     if $OPTION_GUI; then
-        TITLE="Waarschuwing $DISPLAY_NAME"
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
-                --title     "$TITLE"    \
+                --title     "$title"    \
                 --text      "$@"        \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else

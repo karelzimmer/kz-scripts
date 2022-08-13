@@ -49,6 +49,8 @@ declare OPTION_SOURCE=false
 declare SOURCE_ARGUMENT=''
 declare SOURCE_MEDIUM=''
 declare SOURCE=''
+declare TEXT=''
+declare TITLE=''
 
 
 ###############################################################################
