@@ -427,6 +427,7 @@ function process_commands {
     if $EXECUTE_COMMAND; then
         show_commands_after_execution
     fi
+    # check_reboot
 }
 
 
@@ -501,6 +502,23 @@ Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
         warning "$TEXT"
+    fi
+}
+
+
+function check_reboot {
+    # if [[ $TITLE = "${MENU1_ACTIONS[3]}" ]]; then
+    echo $TITLE
+    if [[ $TITLE = "${MENU1_ACTIONS[1]}" ]]; then
+        TEXT="
+De computer gaat nu herstarten om het installeren van updates en apps af te \
+ronden."
+        warning "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets om verder te gaan [Enter]: '
+        fi
+        reboot
     fi
 }
 
