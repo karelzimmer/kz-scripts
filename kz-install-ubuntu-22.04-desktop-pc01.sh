@@ -15,7 +15,7 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 
 #1-bluetooth (externe bluetooth-adapter)
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
-#2 sudo rm /etc/udev/rules.d/81-bluetooth-hci.rules
+#2 sudo rm --force /etc/udev/rules.d/81-bluetooth-hci.rules
 
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes git
@@ -34,7 +34,7 @@ sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 pyth
 sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #2 sudo apt-get remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
-#2 sudo rm /usr/bin/pip
+#2 sudo rm --force /usr/bin/pip
 
 #1 ssh (veilige shell-client en server)
 sudo apt-get install --yes ssh

@@ -14,9 +14,9 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 
 #1-gdm (inlogscherm dual-monitor)
-sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml
-sudo chown gdm:gdm ~gdm/.config/monitors.xml
-#2 sudo rm ~gdm/.config/monitors.xml
+if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
+#2 sudo rm --force ~gdm/.config/monitors.xml
 
 #1 ansible (automatiseringsplatform)
 sudo apt-get install --yes ansible
@@ -75,7 +75,7 @@ sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 pyth
 sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 #2 sudo apt-get remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
-#2 sudo rm /usr/bin/pip
+#2 sudo rm --force /usr/bin/pip
 
 #1 signal (privéberichtenapp)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
