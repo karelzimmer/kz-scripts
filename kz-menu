@@ -496,7 +496,7 @@ function check_backup_restore {
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
         warning "$TEXT"
-    elif [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
+    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
