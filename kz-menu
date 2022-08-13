@@ -82,6 +82,8 @@ readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 declare     EXECUTE_COMMAND=false
 declare -a  EXEC=()
 declare     OPTION_GUI=false
+declare     TEXT=''
+declare     TITLE=''
 
 
 ###############################################################################
@@ -427,7 +429,7 @@ function process_commands {
     if $EXECUTE_COMMAND; then
         show_commands_after_execution
     fi
-    # check_reboot
+    check_reboot
 }
 
 
@@ -507,9 +509,7 @@ Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
 
 
 function check_reboot {
-    # if [[ $TITLE = "${MENU1_ACTIONS[3]}" ]]; then
-    echo $TITLE
-    if [[ $TITLE = "${MENU1_ACTIONS[1]}" ]]; then
+    if [[ $TITLE = "${MENU1_ACTIONS[3]}" ]]; then
         TEXT="
 De computer gaat nu herstarten om het installeren van updates en apps af te \
 ronden."
