@@ -428,8 +428,9 @@ function process_commands {
     fi
     if $EXECUTE_COMMAND; then
         show_commands_after_execution
+        check_logout
+        check_reboot
     fi
-    check_reboot
 }
 
 
@@ -518,7 +519,21 @@ ronden."
             read -rp '
 Druk op de Enter-toets om verder te gaan [Enter]: '
         fi
-        reboot
+        systemctl reboot
+    fi
+}
+
+
+function check_logout {
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" ]]; then
+        TEXT='
+De computer gaat nu afmelden om het instellen van apps af te ronden.'
+        warning "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets om verder te gaan [Enter]: '
+        fi
+        gnome-session-quit --logout --no-prompt
     fi
 }
 
