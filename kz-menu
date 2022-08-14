@@ -510,7 +510,8 @@ Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
 
 
 function check_reboot {
-    if [[ $TITLE = "${MENU1_ACTIONS[3]}" ]]; then
+    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[2]}" ]]
+        then
         TEXT="
 De computer gaat nu herstarten om het installeren van updates en apps af te \
 ronden."
@@ -525,7 +526,8 @@ Druk op de Enter-toets om verder te gaan [Enter]: '
 
 
 function check_logout {
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" ]]; then
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+        then
         TEXT='
 De computer gaat nu afmelden om het instellen van apps af te ronden.'
         warning "$TEXT"
