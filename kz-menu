@@ -428,8 +428,9 @@ function process_commands {
     fi
     if $EXECUTE_COMMAND; then
         show_commands_after_execution
-        check_logout
-        check_reboot
+        check_install_reboot
+        check_setup_user_photo
+        check_setup_logout
     fi
 }
 
@@ -509,7 +510,7 @@ Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
 }
 
 
-function check_reboot {
+function check_install_reboot {
     if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[2]}" ]]
         then
         TEXT="
@@ -518,14 +519,37 @@ ronden."
         warning "$TEXT"
         if ! $OPTION_GUI; then
             read -rp '
-Druk op de Enter-toets om verder te gaan [Enter]: '
+Druk op de Enter-toets voor herstarten [Enter]: '
         fi
         systemctl reboot
     fi
 }
 
 
-function check_logout {
+function check_setup_user_photo {
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+        then
+        if [[ -f $HOME/kz-data/Gebruikersfoto ]]; then
+            TEXT='
+Gebruikersfoto instellen:
+Wijzig de gebruikersfoto via een druk op de Super-toets,
+zoek gebr en klik achter Instellingen op Gebruikers.
+Klik op Ontgrendelen.
+Klik op de afbeelding voor de gebruiker.
+Klik op Selecteer een bestand.
+Selecteer Gebruikersfoto in Persoonlijke map / kz-data.
+Sluit het scherm Gebruikers'
+            info "$TEXT"
+            if ! $OPTION_GUI; then
+                read -rp '
+Druk op de Enter-toets wanneer instellen is uitgevoerd [Enter]: '
+            fi
+        fi
+    fi
+}
+
+
+function check_setup_logout {
     if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
         then
         TEXT='
@@ -533,9 +557,10 @@ De computer gaat nu afmelden om het instellen van apps af te ronden.'
         warning "$TEXT"
         if ! $OPTION_GUI; then
             read -rp '
-Druk op de Enter-toets om verder te gaan [Enter]: '
+Druk op de Enter-toets voor afmelden [Enter]: '
         fi
         gnome-session-quit --logout --no-prompt
+        exit $SUCCESS
     fi
 }
 
