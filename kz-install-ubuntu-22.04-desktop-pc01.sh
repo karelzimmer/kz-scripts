@@ -17,6 +17,11 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #2 sudo rm --force /etc/udev/rules.d/81-bluetooth-hci.rules
 
+#1 gast (gastgebruiker toevoegen)
+sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
+sudo passwd --delete gast
+#2 sudo userdel --remove gast
+
 #1 git (versiebeheersysteem)
 sudo apt-get install --yes git
 #2 sudo apt-get remove --yes git
