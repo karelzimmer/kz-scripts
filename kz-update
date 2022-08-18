@@ -13,6 +13,7 @@ Dit script voert een update uit voor op Debian gebaseerde systemen.
 import sys
 import kz_common
 import subprocess
+import time
 
 
 ###############################################################################
@@ -23,29 +24,44 @@ program_name = 'kz-update'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 desc = 'Systeem bijwerken.'
+apt_cmd = ''
+apt_call_num = 0
+apt_call_max = 60
+aptd_wait = 5
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-def perform_update():
+def check_sudo():
     subprocess.run('sudo true', shell=True, check=True)
 
-    print(f'Uitvoeren apt update...')
-    subprocess.run('sudo apt-get update', shell=True, check=True)
-    print(f'\nUitvoeren apt upgrade...')
-    subprocess.run('sudo apt-get upgrade --yes', shell=True, check=True)
-    print(f'\nUitvoeren apt autoremove...')
-    subprocess.run('sudo apt-get autoremove --yes', shell=True, check=True)
 
-    # Heeft dit systeem snaps?
+def perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait):
+    try:
+        apt_call_num += 1
+        subprocess.run(f'sudo apt-get {apt_cmd}', shell=True, check=True)
+    except Exception as ex:
+        if apt_call_num == apt_call_max:
+            print(f'Maximaal aantal calls ({apt_call_max}) naar APT bereikt.')
+            sys.exit(1)
+
+        # Attempt to overcome concurreny errors like /var/lib/apt/lists/lock.
+        print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar is...')
+        time.sleep(aptd_wait)
+        perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+
+
+def snap_refresh():
     try:
         print(f'\nUitvoeren snap refresh...')
         subprocess.run('sudo snap refresh', shell=True)
     except Exception as ex:
         print(ex)
 
+
+def check_reboot():
     # Is een reboot nodig?
     try:
         with open('/var/run/reboot-required') as fh:
@@ -64,4 +80,22 @@ updates af te ronden.')
 
 kz_common.process_common_options(desc, display_name)
 
-perform_update()
+check_sudo()
+
+apt_call_num = 0
+apt_cmd = 'update'
+print(f'Uitvoeren apt update...')
+perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+
+apt_call_num = 0
+apt_cmd = 'upgrade --yes'
+print(f'\nUitvoeren apt upgrade...')
+perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+
+apt_call_num = 0
+apt_cmd = 'autoremove --yes'
+print(f'\nUitvoeren apt autoremove...')
+perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+
+snap_refresh()
+check_reboot()
