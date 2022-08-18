@@ -14,12 +14,20 @@ import random
 import kz_common
 
 
+###############################################################################
+# Variables
+###############################################################################
+
 program_name = 'kz-genpwd'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 version_number = '003'
 desc = 'Wachtwoord genereren.'
 
+
+###############################################################################
+# Functions
+###############################################################################
 
 def generate_password():
     lower = 'abcdefghijklmnopqrstuvwxyz'
@@ -35,7 +43,9 @@ def generate_password():
     print(f'{password}\n\nGebruik Bitwarden om wachtwoorden te beheren.')
 
 
-# --- script ---
+###############################################################################
+# Script
+###############################################################################
 
 kz_common.process_common_options(desc, display_name)
 
