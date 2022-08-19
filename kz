@@ -5,20 +5,17 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
+
+###############################################################################
+# Global constants
+###############################################################################
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
 readonly PROGRAM_NAME='kz'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2021
-
-
-###############################################################################
-# Global constants
-###############################################################################
-
-# readonly SUCCESS=0
-# readonly ERROR=1
 
 readonly USAGE="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
      of: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"

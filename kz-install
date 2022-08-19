@@ -6,17 +6,17 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
+
+###############################################################################
+# Global constants
+###############################################################################
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
 readonly PROGRAM_NAME='kz-install'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2009
-
-
-###############################################################################
-# Global constants
-###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fgrs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,gui,\

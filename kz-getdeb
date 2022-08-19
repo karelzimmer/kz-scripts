@@ -6,6 +6,11 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
+
+###############################################################################
+# Global constants
+###############################################################################
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 temp_log=$(mktemp -t "kz-getdeb-XXXXXXXXXX.log")
@@ -29,11 +34,6 @@ fi
 readonly PROGRAM_NAME='kz-getdeb'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly RELEASE_YEAR=2016
-
-
-###############################################################################
-# Global constants
-###############################################################################
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON

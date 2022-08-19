@@ -5,9 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-declare PROGRAM_NAME='kz-common.sh'
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-declare RELEASE_YEAR=2009
 
 ###############################################################################
 # Common global constants
@@ -34,6 +31,10 @@ readonly DASHES
 ###############################################################################
 # Common global variables
 ###############################################################################
+
+declare PROGRAM_NAME='kz-common.sh'
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare RELEASE_YEAR=2009
 
 declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
