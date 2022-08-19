@@ -39,10 +39,6 @@ Argumenten:
 # Global variables
 ###############################################################################
 
-# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare BLUE=''
-declare NORMAL=''
-
 
 ###############################################################################
 # Functions
