@@ -49,7 +49,6 @@ def snap_refresh():
 
 
 def check_reboot():
-    # Is een reboot nodig?
     try:
         with open('/var/run/reboot-required') as fh:
             print(f'\nDe computer moet herstarten om het installeren van '
