@@ -43,7 +43,7 @@ def check_dpkg():
         subprocess.run('ls /snap/core/*/var/cache/debconf/config.dat',
                        shell=True, check=True, stdout=subprocess.DEVNULL,
                        stderr=subprocess.DEVNULL)
-    except Exception as ex:
+    except Exception:
         snaps = False
 
     while True:
@@ -59,7 +59,7 @@ def check_dpkg():
                 print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar '
                       'is...')
                 time.sleep(aptd_wait)
-            except Exception as ex:
+            except Exception:
                 break
         else:
             try:
@@ -72,7 +72,7 @@ def check_dpkg():
                 print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar '
                       'is...')
                 time.sleep(aptd_wait)
-            except Exception as ex:
+            except Exception:
                 break
 
 
