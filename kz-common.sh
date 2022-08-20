@@ -68,7 +68,7 @@ declare     YELLOW=''
 ###############################################################################
 
 function check_dpkg {
-    local -i aptd_wait=5
+    local -i dpkg_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # Systeem met snaps.
@@ -77,8 +77,8 @@ function check_dpkg {
                     /var/cache/debconf/config.dat                       \
                     /snap/core/*/var/cache/debconf/config.dat           \
                     &> /dev/null; do
-            log "Wacht ${aptd_wait}s tot andere pakketbeheerder klaar is..."
-            sleep $aptd_wait
+            log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
+            sleep $dpkg_wait
         done
     else
         # Systeem zonder snaps.
@@ -86,8 +86,8 @@ function check_dpkg {
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     &> /dev/null; do
-            log "Wacht ${aptd_wait}s tot andere pakketbeheerder klaar is..."
-            sleep $aptd_wait
+            log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
+            sleep $dpkg_wait
         done
     fi
 }

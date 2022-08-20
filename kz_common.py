@@ -36,7 +36,7 @@ def check_dpkg():
     """
     Deze functie controleert op al een lopende Debian pakketbeheerder.
     """
-    aptd_wait = 5
+    dpkg_wait = 5
     snaps = True
 
     try:
@@ -56,9 +56,9 @@ def check_dpkg():
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
-                print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar '
+                print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
                       'is...')
-                time.sleep(aptd_wait)
+                time.sleep(dpkg_wait)
             except Exception:
                 break
         else:
@@ -69,9 +69,9 @@ def check_dpkg():
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
-                print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar '
+                print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
                       'is...')
-                time.sleep(aptd_wait)
+                time.sleep(dpkg_wait)
             except Exception:
                 break
 
