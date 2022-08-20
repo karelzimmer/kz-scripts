@@ -76,6 +76,10 @@ def check_dpkg():
                 break
 
 
+def check_sudo():
+    subprocess.run('sudo true', shell=True, check=True)
+
+
 def process_common_options(display_name, program_desc):
     """
     Deze functie verwerkt de algemene opties.

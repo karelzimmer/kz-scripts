@@ -19,8 +19,8 @@ import kz_common
 ###############################################################################
 
 program_name = 'kz-genpwd'
-display_name = program_name.replace('kz-', 'kz ')
 program_desc = 'Wachtwoord genereren.'
+display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 
 

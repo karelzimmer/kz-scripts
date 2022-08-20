@@ -19,8 +19,8 @@ import sys
 ###############################################################################
 
 program_name = 'kz-update'
-display_name = program_name.replace('kz-', 'kz ')
 program_desc = 'Systeem bijwerken.'
+display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 
 
@@ -34,10 +34,6 @@ apt_cmd = ''
 ###############################################################################
 # Functions
 ###############################################################################
-
-def check_sudo():
-    subprocess.run('sudo true', shell=True, check=True)
-
 
 def perform_apt_cmd(apt_cmd):
     subprocess.run(f'sudo apt-get {apt_cmd}', shell=True, check=True)
@@ -65,7 +61,7 @@ def check_reboot():
 
 kz_common.process_common_options(display_name, program_desc)
 
-check_sudo()
+kz_common.check_sudo()
 
 print('Uitvoeren apt update...')
 kz_common.check_dpkg()
