@@ -44,14 +44,13 @@ def perform_apt_cmd(apt_cmd):
 
 
 def snap_refresh():
-    print(f'\nUitvoeren snap refresh...')
     subprocess.run('sudo snap refresh', shell=True)
 
 
 def check_reboot():
     try:
         with open('/var/run/reboot-required') as fh:
-            print(f'\nDe computer moet herstarten om het installeren van '
+            print('\nDe computer moet herstarten om het installeren van '
                   'updates af te ronden.')
     except FileNotFoundError:
         pass
@@ -68,20 +67,22 @@ kz_common.process_common_options(desc, display_name)
 
 check_sudo()
 
-print(f'Uitvoeren apt update...')
+print('Uitvoeren apt update...')
 kz_common.check_dpkg()
 apt_cmd = 'update'
 perform_apt_cmd(apt_cmd)
 
-print(f'\nUitvoeren apt upgrade...')
+print('\nUitvoeren apt upgrade...')
 kz_common.check_dpkg()
 apt_cmd = 'upgrade --yes'
 perform_apt_cmd(apt_cmd)
 
-print(f'\nUitvoeren apt autoremove...')
+print('\nUitvoeren apt autoremove...')
 kz_common.check_dpkg()
 apt_cmd = 'autoremove --yes'
 perform_apt_cmd(apt_cmd)
 
+print('\nUitvoeren snap refresh...')
 snap_refresh()
+
 check_reboot()
