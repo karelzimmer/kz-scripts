@@ -49,10 +49,10 @@ def check_dpkg():
     while True:
         if snaps:
             try:
-                subprocess.run('sudo fuser /var/cache/apt/archives/lock  \
-                               /var/lib/apt/lists/lock  /var/lib/dpkg/lock \
-                               /var/cache/debconf/config.dat \
-                               /snap/core/*/var/cache/debconf/config.dat',
+                subprocess.run('sudo fuser /var/cache/apt/archives/lock '
+                               '/var/lib/apt/lists/lock  /var/lib/dpkg/lock '
+                               '/var/cache/debconf/config.dat '
+                               '/snap/core/*/var/cache/debconf/config.dat',
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
@@ -63,9 +63,9 @@ def check_dpkg():
                 break
         else:
             try:
-                subprocess.run('sudo fuser /var/cache/apt/archives/lock  \
-                               /var/lib/apt/lists/lock  /var/lib/dpkg/lock \
-                               /var/cache/debconf/config.dat',
+                subprocess.run('sudo fuser /var/cache/apt/archives/lock '
+                               '/var/lib/apt/lists/lock  /var/lib/dpkg/lock '
+                               '/var/cache/debconf/config.dat',
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
