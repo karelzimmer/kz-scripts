@@ -71,6 +71,7 @@ function check_dpkg {
     local -i aptd_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+        # Systeem met snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
@@ -80,6 +81,7 @@ function check_dpkg {
             sleep $aptd_wait
         done
     else
+        # Systeem zonder snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
