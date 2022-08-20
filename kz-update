@@ -10,11 +10,9 @@ Dit script voert een update uit voor op Debian gebaseerde systemen.
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-import sys
 import kz_common
 import subprocess
-import time
-
+import sys
 
 ###############################################################################
 # Global constants
@@ -24,8 +22,6 @@ program_name = 'kz-update'
 display_name = program_name.replace('kz-', 'kz ')
 release_year = 2021
 desc = 'Systeem bijwerken.'
-apt_call_max = 60
-aptd_wait = 5
 
 
 ###############################################################################
@@ -33,7 +29,6 @@ aptd_wait = 5
 ###############################################################################
 
 apt_cmd = ''
-apt_call_num = 0
 
 
 ###############################################################################
@@ -44,35 +39,21 @@ def check_sudo():
     subprocess.run('sudo true', shell=True, check=True)
 
 
-def perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait):
-    try:
-        apt_call_num += 1
-        subprocess.run(f'sudo apt-get {apt_cmd}', shell=True, check=True)
-    except Exception as ex:
-        if apt_call_num == apt_call_max:
-            print(f'Maximaal aantal calls ({apt_call_max}) naar APT bereikt.')
-            sys.exit(1)
-
-        # Attempt to overcome concurreny errors like /var/lib/apt/lists/lock.
-        print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar is...')
-        time.sleep(aptd_wait)
-        perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+def perform_apt_cmd(apt_cmd):
+    subprocess.run(f'sudo apt-get {apt_cmd}', shell=True, check=True)
 
 
 def snap_refresh():
-    try:
-        print(f'\nUitvoeren snap refresh...')
-        subprocess.run('sudo snap refresh', shell=True)
-    except Exception as ex:
-        print(ex)
+    print(f'\nUitvoeren snap refresh...')
+    subprocess.run('sudo snap refresh', shell=True)
 
 
 def check_reboot():
     # Is een reboot nodig?
     try:
         with open('/var/run/reboot-required') as fh:
-            print(f'\nDe computer moet herstarten om het installeren van \
-updates af te ronden.')
+            print(f'\nDe computer moet herstarten om het installeren van '
+                  'updates af te ronden.')
     except FileNotFoundError:
         pass
     except Exception as ex:
@@ -88,20 +69,20 @@ kz_common.process_common_options(desc, display_name)
 
 check_sudo()
 
-apt_call_num = 0
-apt_cmd = 'update'
 print(f'Uitvoeren apt update...')
-perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+kz_common.check_dpkg()
+apt_cmd = 'update'
+perform_apt_cmd(apt_cmd)
 
-apt_call_num = 0
-apt_cmd = 'upgrade --yes'
 print(f'\nUitvoeren apt upgrade...')
-perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+kz_common.check_dpkg()
+apt_cmd = 'upgrade --yes'
+perform_apt_cmd(apt_cmd)
 
-apt_call_num = 0
-apt_cmd = 'autoremove --yes'
 print(f'\nUitvoeren apt autoremove...')
-perform_apt_cmd(apt_cmd, apt_call_num, apt_call_max, aptd_wait)
+kz_common.check_dpkg()
+apt_cmd = 'autoremove --yes'
+perform_apt_cmd(apt_cmd)
 
 snap_refresh()
 check_reboot()

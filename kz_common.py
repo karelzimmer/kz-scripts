@@ -9,9 +9,11 @@ Deze module geeft toegang tot algemene functies.
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-import sys
 import argparse
 import datetime
+import subprocess
+import sys
+import time
 
 
 ###############################################################################
@@ -26,10 +28,53 @@ release_year = 2021
 # Common global variables
 ###############################################################################
 
-
 ###############################################################################
 # Functions
 ###############################################################################
+
+def check_dpkg():
+    """
+    Deze functie controleert op al een lopende Debian pakketbeheerder.
+    """
+    aptd_wait = 5
+    snaps = True
+
+    try:
+        subprocess.run('ls /snap/core/*/var/cache/debconf/config.dat',
+                       shell=True, check=True, stdout=subprocess.DEVNULL,
+                       stderr=subprocess.DEVNULL)
+    except Exception as ex:
+        snaps = False
+
+    while True:
+        if snaps:
+            try:
+                subprocess.run('sudo fuser /var/cache/apt/archives/lock  \
+                               /var/lib/apt/lists/lock  /var/lib/dpkg/lock \
+                               /var/cache/debconf/config.dat \
+                               /snap/core/*/var/cache/debconf/config.dat',
+                               shell=True, check=True,
+                               stdout=subprocess.DEVNULL,
+                               stderr=subprocess.DEVNULL)
+                print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar '
+                      'is...')
+                time.sleep(aptd_wait)
+            except Exception as ex:
+                break
+        else:
+            try:
+                subprocess.run('sudo fuser /var/cache/apt/archives/lock  \
+                               /var/lib/apt/lists/lock  /var/lib/dpkg/lock \
+                               /var/cache/debconf/config.dat',
+                               shell=True, check=True,
+                               stdout=subprocess.DEVNULL,
+                               stderr=subprocess.DEVNULL)
+                print(f'Wacht {aptd_wait}s tot andere pakketbeheerder klaar '
+                      'is...')
+                time.sleep(aptd_wait)
+            except Exception as ex:
+                break
+
 
 def process_common_options(desc, display_name):
     """
