@@ -76,12 +76,12 @@ def check_dpkg():
                 break
 
 
-def process_common_options(desc, display_name):
+def process_common_options(display_name, program_desc):
     """
     Deze functie verwerkt de algemene opties.
     """
     parser = argparse.ArgumentParser(prog=display_name,
-                                     description=desc,
+                                     description=program_desc,
                                      epilog="Typ 'man " + display_name +
                                      "' voor meer informatie.")
     parser.add_argument('-u', '--usage', action='store_true',

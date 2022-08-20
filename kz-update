@@ -20,8 +20,8 @@ import sys
 
 program_name = 'kz-update'
 display_name = program_name.replace('kz-', 'kz ')
+program_desc = 'Systeem bijwerken.'
 release_year = 2021
-desc = 'Systeem bijwerken.'
 
 
 ###############################################################################
@@ -63,7 +63,7 @@ def check_reboot():
 # Main
 ###############################################################################
 
-kz_common.process_common_options(desc, display_name)
+kz_common.process_common_options(display_name, program_desc)
 
 check_sudo()
 
