@@ -49,7 +49,7 @@ declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
-declare     PROGRAM=${0/./$PROGRAM_PATH}
+declare     PROGRAM_PKEXEC=${0/./$PROGRAM_PATH}
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
@@ -119,9 +119,9 @@ function check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $OPTION_GUI; then
-            log "Restarted (pkexec $PROGRAM ${CMDLINE_ARGS[*]})." \
+            log "Restarted (pkexec $PROGRAM_PKEXEC ${CMDLINE_ARGS[*]})." \
                 --priority=debug
-            pkexec "$PROGRAM" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
+            pkexec "$PROGRAM_PKEXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
             NOERROR=true exit $pkexec_rc
         else
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
@@ -227,7 +227,8 @@ function init_script {
     CMDLINE_ARGS=("$@")
 
     log "$DASHES"
-    log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
+    log "Started ($PROGRAM_PKEXEC ${CMDLINE_ARGS[*]} as $USER)." \
+        --priority=notice
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $LOGCMD --priority=debug
