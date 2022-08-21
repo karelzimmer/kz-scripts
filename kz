@@ -10,19 +10,21 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz'
+readonly PROGRAM_DESC='Opdracht uitvoeren'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2021
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME='kz'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2021
 
 readonly USAGE="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
      of: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
 readonly HELP="Gebruik: $DISPLAY_NAME OPDRACHT [ARG]
      of: $DISPLAY_NAME OPTIE
 
-Opdracht uitvoeren.
+$PROGRAM_DESC.
 
 Opties:
   -l, --list     toon beschikbare OPDRACHTen
@@ -48,7 +50,7 @@ function check_input {
     # Geen getopt want opgegeven opties zijn voor 'OPDRACHT', niet voor kz.
     if ! [[ "$*" ]]; then
         info "Verplicht argument 'OPDRACHT' ontbreekt."
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     elif [[ $1 == *-u* ]]; then
         process_option_usage
@@ -64,7 +66,7 @@ function check_input {
         exit $SUCCESS
     elif ! [[ -f "$PROGRAM_PATH/kz-$1" ]]; then
         info "Opdracht '$1' bestaat niet."
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
 }

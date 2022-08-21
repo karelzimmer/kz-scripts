@@ -21,12 +21,16 @@ import time
 ###############################################################################
 
 module_name = 'kz_common.py'
-release_year = 2021
+module_desc = 'Algemene module voor Python scripts'
+module_year = 2021
 
 
 ###############################################################################
 # Common global variables
 ###############################################################################
+
+program_year = 1970
+
 
 ###############################################################################
 # Functions
@@ -85,7 +89,7 @@ def process_common_options(display_name, program_desc):
     Deze functie verwerkt de algemene opties.
     """
     parser = argparse.ArgumentParser(prog=display_name,
-                                     description=program_desc,
+                                     description=program_desc + '.',
                                      epilog="Typ 'man " + display_name +
                                      "' voor meer informatie.")
     parser.add_argument('-u', '--usage', action='store_true',
@@ -98,7 +102,7 @@ def process_common_options(display_name, program_desc):
         process_option_usage(display_name)
         sys.exit(0)
     elif args.version:
-        process_option_version(display_name, release_year)
+        process_option_version(display_name, program_year)
         sys.exit(0)
 
 
@@ -111,7 +115,7 @@ def process_option_usage(display_name):
 Typ '{display_name} --help' voor meer informatie.""")
 
 
-def process_option_version(display_name, release_year):
+def process_option_version(display_name, program_year):
     """
     Deze functie toont versie-informatie, auteur, en auteursrecht.
     """
@@ -128,10 +132,10 @@ def process_option_version(display_name, release_year):
     except OSError as ex:
         print(ex)
 
-    if release_year == this_year:
-        copyright_years = release_year
+    if program_year == this_year:
+        copyright_years = program_year
     else:
-        copyright_years = str(release_year) + '-' + str(this_year)
+        copyright_years = str(program_year) + '-' + str(this_year)
 
     print(f"""{display_name} versie 365 (kz build {build})
 

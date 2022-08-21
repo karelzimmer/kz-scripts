@@ -1,4 +1,5 @@
 # shellcheck shell=bash
+# shellcheck disable=SC2034 # Ignore foo appears unused.
 ###############################################################################
 # Algemene module voor shell scripts.
 #
@@ -13,13 +14,9 @@
 readonly SUCCESS=0
 readonly ERROR=1
 
-# shellcheck disable=SC2034
 readonly OPTIONS_SHORT_COMMON='huv'
-# shellcheck disable=SC2034
 readonly OPTIONS_LONG_COMMON='help,usage,version'
-# shellcheck disable=SC2034
 readonly OPTIONS_USAGE_COMMON='[-h|--help] [-u|--usage] [-v|--version]'
-# shellcheck disable=SC2034
 readonly OPTIONS_HELP_COMMON="\
   -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
@@ -32,17 +29,22 @@ readonly DASHES
 # Common global variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-common.sh'
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-declare RELEASE_YEAR=2009
+declare    MODULE_NAME='kz-common.sh'
+declare    MODULE_DESC='Algemene module voor shell scripts'
+declare    MODULE_YEAR=2009
 
 declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     LOGCMD_CHECK=''
 declare     NOERROR=false
-declare     LESS_OPTIONS=''
-declare     LOGCMD=''
+declare     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
+--quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $DISPLAY_NAME \
+?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
+voor hulp of q voor stoppen)"
+declare     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
+--since='$(date '+%Y-%m-%d %H:%M:%S')'"
+declare     LOGCMD_CHECK
 declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
@@ -50,6 +52,7 @@ declare     OPTION_VERSION=false
 declare     PROGRAM=''
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
+declare     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
 declare     BLINK=''
@@ -222,33 +225,19 @@ function init_script {
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
     # Enable code-stepping:
     # trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-    LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-    LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
---since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     # For pkexec to work with policy file it is needed to replace e.g.
     # './kz-install' by '/home/karel/kz-scripts/kz-install'.
     PROGRAM=${0/./$PROGRAM_PATH}
+
     CMDLINE_ARGS=("$@")
 
     log "$DASHES"
     log "Started ($PROGRAM ${CMDLINE_ARGS[*]} as $USER)." --priority=notice
+
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $LOGCMD --priority=debug
     fi
-
-    # shellcheck disable=SC2034
-    USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
-
-    # Less-opties, overgenomen (en aangepast, zie 'man less', zoek PROMPTS)
-    # van:
-    # 1. systemctl en journalctl, zie bijvoorbeeld 'man systemctl', zoek LESS
-    #    ("FRSXMK")
-    # 2. man, zie 'man man', zoek LESS
-    LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=MTekstuitvoer $DISPLAY_NAME ?ltregel %lt?L van \
-%L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h voor hulp of q voor \
-stoppen)"
 
     if [[ -t 1 ]]; then
         set_terminal_attributes
@@ -320,10 +309,10 @@ function process_option_version {
     build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
 
     this_year=$(date +%Y)
-    if [[ $RELEASE_YEAR -eq $this_year ]]; then
+    if [[ $PROGRAM_YEAR -eq $this_year ]]; then
         copyright_years=$this_year
     else
-        copyright_years=$RELEASE_YEAR-$this_year
+        copyright_years=$PROGRAM_YEAR-$this_year
     fi
 
     info "$DISPLAY_NAME versie 365 (kz build $build)
@@ -332,10 +321,6 @@ Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 
 Auteursrecht © $copyright_years Karel Zimmer.
 GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
-}
-
-function process_usage {
-    info "Typ '$DISPLAY_NAME --usage' voor meer informatie." >&2
 }
 
 function reset_terminal_attributes {
@@ -352,16 +337,13 @@ function reset_terminal_attributes {
 
 
 function set_terminal_attributes {
-    # shellcheck disable=SC2034
     BLINK=$(tput bold; tput blink)
     BLUE=$(tput bold; tput setaf 4)
-    # shellcheck disable=SC2034
     CURSOR_INVISABLE=$(tput civis)
     CURSOR_VISABLE=$(tput cvvis)
     GREEN=$(tput bold; tput setaf 2)
     NORMAL=$(tput sgr0)
     RED=$(tput bold; tput setaf 1)
-    # shellcheck disable=SC2034
     REWRITE_LINE=$(tput cuu1; tput el)
     YELLOW=$(tput bold; tput setaf 3)
 }

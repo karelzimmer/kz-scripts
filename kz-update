@@ -14,14 +14,15 @@ import kz_common
 import subprocess
 import sys
 
+
 ###############################################################################
 # Global constants
 ###############################################################################
 
 program_name = 'kz-update'
-program_desc = 'Systeem bijwerken.'
+program_desc = 'Systeem bijwerken'
 display_name = program_name.replace('kz-', 'kz ')
-release_year = 2021
+program_year = 2021
 
 
 ###############################################################################

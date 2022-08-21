@@ -11,12 +11,14 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-install'
+readonly PROGRAM_DESC='Apps installeren'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2009
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME='kz-install'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2009
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fgrs'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,gui,\
@@ -28,7 +30,7 @@ readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] \
                     [APP...] [BESTAND...]"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
 
-Apps installeren.
+$PROGRAM_DESC.
 
 Opties:
   -a, --apps     toon lijst van beschikbare apps
@@ -103,7 +105,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
@@ -333,7 +335,7 @@ function process_dfltfiles {
         ((++file_num))
     else
         error "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     if [[ -f $dfltfile_2 ]]; then

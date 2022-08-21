@@ -11,12 +11,14 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-ckname'
+readonly PROGRAM_DESC='Bestandsnamen controleren'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2012
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME='kz-ckname'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2012
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
@@ -24,7 +26,7 @@ readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
                    [MAP...]"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [MAP...]
 
-Bestandsnamen controleren.
+$PROGRAM_DESC.
 
 Opties:
 $OPTIONS_HELP_COMMON
@@ -61,7 +63,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
@@ -91,7 +93,7 @@ function check_input {
     for dir in "${MAP_ARGUMENTS[@]}"; do
         if ! [[ -d $dir ]]; then
             info "Map '$dir' bestaat niet"
-            process_usage
+            info "$USAGELINE"
             NOERROR=true exit $ERROR
         fi
     done

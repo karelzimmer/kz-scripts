@@ -11,12 +11,14 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-gset'
+readonly PROGRAM_DESC='GUI wijzigen'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2015
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME='kz-gset'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2015
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'a:b:d:lrf:x:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",addfavaft:,addfavbef:,delfav:,\
@@ -28,7 +30,7 @@ readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--addfavaft=FAVORITE] \
                  $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
-GUI wijzigen.
+$PROGRAM_DESC.
 
 Opties:
   -a, --addfavaft=FAVORITE
@@ -82,7 +84,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
@@ -135,7 +137,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
 

@@ -11,22 +11,25 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-ivp'
+readonly PROGRAM_DESC='Scripts controleren'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2015
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME='kz-ivp'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2015
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
 readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
-Scripts controleren.
+$PROGRAM_DESC.
 
 Opties:
 $OPTIONS_HELP_COMMON"
+
 
 ###############################################################################
 # Globale variabelen
@@ -51,7 +54,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
@@ -71,7 +74,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
 
@@ -118,7 +121,7 @@ function process_input {
             *)
                 check_tags
                 check_record_length
-                check_release_year
+                check_program_year
                 check_code
                 ;;
         esac
@@ -205,14 +208,14 @@ $(
 }
 
 
-function check_release_year {
+function check_program_year {
     if ! grep   --quiet                     \
                 --regexp='RELEASE_YEAR='    \
-                --regexp='release_year = '  \
+                --regexp='program_year = '  \
                 "$script"; then
         error "
 In $script:
-    Vrijgavejaar (RELEASE_YEAR/release_year) ontbreekt.
+    Vrijgavejaar (RELEASE_YEAR/program_year) ontbreekt.
 "
         MAXRC=$ERROR
     fi

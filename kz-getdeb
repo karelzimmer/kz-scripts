@@ -11,6 +11,11 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-getdeb'
+readonly PROGRAM_DESC='Pakket kz installeren'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2016
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 temp_log=$(mktemp -t "kz-getdeb-XXXXXXXXXX.log")
@@ -31,9 +36,6 @@ if ! source "$PROGRAM_PATH"/kz-common.sh &>> "$temp_log"; then
         exit 1
     fi
 fi
-readonly PROGRAM_NAME='kz-getdeb'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2016
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
@@ -50,7 +52,7 @@ readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
      of: wget -O- karelzimmer.nl/kz | bash
      of: curl -L karelzimmer.nl/kz | bash
 
-Pakket kz installeren.
+$PROGRAM_DESC.
 
 Opties:
 $OPTIONS_HELP_COMMON"
@@ -79,7 +81,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
@@ -99,7 +101,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
 

@@ -11,12 +11,14 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-restore'
+readonly PROGRAM_DESC='Back-up terugzetten'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2007
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME='kz-restore'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2007
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gs:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',dry-run,gui,source:'
@@ -25,7 +27,7 @@ readonly USAGE="Gebruik: $DISPLAY_NAME [--dry-run] [-g|--gui] \
                     $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
-Back-up terugzetten.
+$PROGRAM_DESC.
 
 Opties:
       --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
@@ -69,7 +71,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
@@ -103,7 +105,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
 }
@@ -115,7 +117,7 @@ function process_input {
     if $OPTION_SOURCE; then
         if ! [[ -d $SOURCE_ARGUMENT ]]; then
             info "Map $SOURCE_ARGUMENT bestaat niet."
-            process_usage
+            info "$USAGELINE"
             NOERROR=true exit $ERROR
         fi
         SOURCE=$SOURCE_ARGUMENT/backup-$HOSTNAME-$USER

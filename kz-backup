@@ -11,12 +11,14 @@
 # Global constants
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-backup'
+readonly PROGRAM_DESC='Back-up maken'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2007
+
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
-readonly PROGRAM_NAME='kz-backup'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
-readonly RELEASE_YEAR=2007
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gt:'
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',delete,dry-run,gui,target:'
@@ -25,7 +27,7 @@ readonly USAGE="Gebruik: $DISPLAY_NAME [--delete] [--dry-run] [-g|--gui] \
                    $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
-Back-up maken.
+$PROGRAM_DESC.
 
 Opties:
       --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
@@ -72,7 +74,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $SUCCESS ]]; then
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
@@ -110,7 +112,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        process_usage
+        info "$USAGELINE"
         NOERROR=true exit $ERROR
     fi
 }
@@ -120,7 +122,7 @@ function process_input {
     if $OPTION_TARGET; then
         if ! [[ -d $TARGET_ARGUMENT ]]; then
             info "Map $TARGET_ARGUMENT bestaat niet."
-            process_usage
+            info "$USAGELINE"
             NOERROR=true exit $ERROR
         fi
         TARGET=$TARGET_ARGUMENT/backup-$HOSTNAME-$USER
