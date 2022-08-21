@@ -49,7 +49,7 @@ declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
-declare     PROGRAM=''
+declare     PROGRAM=${0/./$PROGRAM_PATH}
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
@@ -223,12 +223,6 @@ function init_script {
     trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
-    # Enable code-stepping:
-    # trap '(read -p "[$BASH_SOURCE:$LINENO] $BASH_COMMAND?")' DEBUG
-
-    # For pkexec to work with policy file it is needed to replace e.g.
-    # './kz-install' by '/home/karel/kz-scripts/kz-install'.
-    PROGRAM=${0/./$PROGRAM_PATH}
 
     CMDLINE_ARGS=("$@")
 
