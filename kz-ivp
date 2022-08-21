@@ -210,12 +210,12 @@ $(
 
 function check_program_year {
     if ! grep   --quiet                     \
-                --regexp='RELEASE_YEAR='    \
+                --regexp='PROGRAM_YEAR='    \
                 --regexp='program_year = '  \
                 "$script"; then
         error "
 In $script:
-    Vrijgavejaar (RELEASE_YEAR/program_year) ontbreekt.
+    Vrijgavejaar (PROGRAM_YEAR/program_year) ontbreekt.
 "
         MAXRC=$ERROR
     fi
