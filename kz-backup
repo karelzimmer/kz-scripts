@@ -258,7 +258,7 @@ function create_backup {
     local       temp_log=''
     local   -i  rsync_rc=0
 
-    exclude=$(mktemp -t 'kz-backup-XXXXXXXXXX')
+    exclude=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX")
 
     # Backup solution Déjà Dup exclude these files by default.
     cat << EOF > "$exclude"

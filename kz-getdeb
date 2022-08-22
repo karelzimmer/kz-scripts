@@ -18,7 +18,7 @@ readonly PROGRAM_YEAR=2016
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
-temp_log=$(mktemp -t "kz-getdeb-XXXXXXXXXX.log")
+temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
 if ! source "$PROGRAM_PATH"/kz-common.sh &>> "$temp_log"; then
     if ! wget   --no-verbose                                                \
                 --output-document=/tmp/kz-common.sh                         \
