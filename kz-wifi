@@ -1,0 +1,109 @@
+#!/bin/bash
+# shellcheck source=kz-common.sh
+###############################################################################
+# Wifi-gegevens tonen.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
+
+
+###############################################################################
+# Global constants
+###############################################################################
+
+readonly PROGRAM_NAME='kz-wifi'
+readonly PROGRAM_DESC='Wifi-informatie tonen'
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_YEAR=2022
+
+PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+readonly PROGRAM_PATH
+source  "$PROGRAM_PATH"/kz-common.sh
+
+readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'g'
+readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',gui'
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON [-g|--gui]"
+readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+
+$PROGRAM_DESC.
+
+Opties:
+$OPTIONS_HELP_COMMON
+  -g, --gui      start in grafische modus"
+
+
+###############################################################################
+# Global variables
+###############################################################################
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+function check_input {
+    local -i    getopt_rc=0
+    local       parsed=''
+
+    parsed=$(
+        getopt  --alternative                       \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
+                --              "$@"
+        ) || getopt_rc=$?
+    if [[ $getopt_rc -ne $SUCCESS ]]; then
+        info "$USAGELINE"
+        NOERROR=true exit $ERROR
+    fi
+    eval set -- "$parsed"
+    process_common_options "$@"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        info 'Geen argumenten toegestaan.'
+        info "$USAGELINE"
+        NOERROR=true exit $ERROR
+    fi
+}
+
+
+function process_input {
+    gnome-terminal  --                                  \
+                    bash                                \
+                    -c                                  \
+                    "nmcli device wifi show-password;   \
+                    echo 'Noteer SSID en Wachtwoord.';  \
+                    read    -rp                         \
+                           'Druk op de Enter-toets wanneer gereed [Enter]: '"
+}
+
+
+function term_script {
+    exit $SUCCESS
+}
+
+
+###############################################################################
+# Script
+###############################################################################
+
+function main {
+    init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
+}
+
+main "$@"

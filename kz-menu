@@ -61,14 +61,16 @@ ${DASHES:0:36}
 =          $MENU2_TITLE          =
 ${DASHES:0:36}"
 readonly -a MENU2_ACTIONS=(
-    [1]='Back-up maken'
+    [1]='Wifi-gegevens tonen'
+        'Back-up maken'
         'Apps installeren'
         'Back-up terugzetten'
         'Apps instellen'
         'Terug'
     )
 readonly -a MENU2_COMMANDS=(
-    [1]='kz backup'
+    [1]='kz wifi'
+        'kz backup'
         'kz install'
         'kz restore'
         'kz setup'
@@ -255,6 +257,7 @@ function process_menu1_choice1 {
     TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
+            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
         )
 
     process_commands
@@ -287,7 +290,7 @@ Druk op de Enter-toets voor het menu [Enter]: '
 function process_menu1_choice3 {
     TITLE="${MENU1_ACTIONS[3]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
         )
     process_commands
 }
@@ -296,8 +299,8 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
-            "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
+        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
+            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
         )
     process_commands
 }
@@ -321,7 +324,7 @@ function process_menu2_gui {
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         400                                     \
-                    --height        210                                     \
+                    --height        240                                     \
                     --title         "$TITLE"                                \
                     --text          'Selecteer een keuze:'                  \
                     --ok-label      'Verder'                                \
@@ -334,6 +337,7 @@ function process_menu2_gui {
                     FALSE  2 "${MENU2_ACTIONS[2]}"  "${MENU2_COMMANDS[2]}"  \
                     FALSE  3 "${MENU2_ACTIONS[3]}"  "${MENU2_COMMANDS[3]}"  \
                     FALSE  4 "${MENU2_ACTIONS[4]}"  "${MENU2_COMMANDS[4]}"  \
+                    FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
                     2> >($LOGCMD)
             ) || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -416,8 +420,8 @@ function process_commands {
     local -i    exec=0
 
     show_commands_before_execution
+    check_backup_restore
     if $EXECUTE_COMMAND; then
-        check_backup_restore
         for exec in "${!EXEC[@]}"; do
             action=$(
                 printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -498,22 +502,30 @@ $prompt"
 
 
 function check_backup_restore {
-    if [[ $TITLE = "${MENU1_ACTIONS[1]}" || $TITLE = "${MENU2_ACTIONS[1]}" ]]
+    if [[ $TITLE = "${MENU1_ACTIONS[1]}" || $TITLE = "${MENU2_ACTIONS[2]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
         warning "$TEXT"
-    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
+        fi
+    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
         warning "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
+        fi
     fi
 }
 
 
 function check_install_reboot {
-    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[2]}" ]]
+    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
         then
         TEXT="
 De computer gaat nu herstarten om het installeren van updates en apps af te \
@@ -529,7 +541,7 @@ Druk op de Enter-toets voor herstarten [Enter]: '
 
 
 function check_setup_user_photo {
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
         then
         if [[ -f $HOME/kz-data/Gebruikersfoto ]]; then
             TEXT='
@@ -552,7 +564,7 @@ Druk op de Enter-toets wanneer instellen is uitgevoerd [Enter]: '
 
 
 function check_setup_logout {
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
         then
         TEXT='
 De computer gaat nu afmelden om het instellen van apps af te ronden.'

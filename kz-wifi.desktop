@@ -1,0 +1,20 @@
+###############################################################################
+# Bureaublad-configuratiebestand voor kz wifi.
+#
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Show Wifi data
+Name[nl]=Wifi-gegevens tonen
+GenericName=Utility program
+GenericName[nl]=Hulpprogramma
+Comment=Show wifi data in terminal
+Comment[nl]=Toon wifi-gegevens in een terminalvenster
+Keywords=wifi;network;
+Keywords[nl]=wifi;netwerk;
+Categories=KZ Scripts;
+Exec=kz-wifi
+Icon=kz-wifi
+Terminal=true
