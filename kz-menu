@@ -507,19 +507,11 @@ function check_backup_restore {
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
         warning "$TEXT"
-        if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
-        fi
     elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
         warning "$TEXT"
-        if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
-        fi
     fi
 }
 

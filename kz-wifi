@@ -36,6 +36,8 @@ $OPTIONS_HELP_COMMON
 # Global variables
 ###############################################################################
 
+declare OPTION_GUI=false
+
 
 ###############################################################################
 # Functions
@@ -61,6 +63,11 @@ function check_input {
 
     while true; do
         case $1 in
+            -g|--gui)
+                OPTION_GUI=true
+                reset_terminal_attributes
+                shift
+                ;;
             --)
                 shift
                 break
@@ -80,13 +87,11 @@ function check_input {
 
 
 function process_input {
-    gnome-terminal  --                                  \
-                    bash                                \
-                    -c                                  \
-                    "nmcli device wifi show-password;   \
-                    echo 'Noteer SSID en Wachtwoord.';  \
-                    read    -rp                         \
-                           'Druk op de Enter-toets wanneer gereed [Enter]: '"
+    if TEXT=$(nmcli device wifi show-password 2> /dev/null); then
+        info "$TEXT"
+    else
+        info 'Geen wifi-apparaat gevonden.'
+    fi
 }
 
 
