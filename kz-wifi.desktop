@@ -17,4 +17,3 @@ Keywords[nl]=wifi;netwerk;
 Categories=KZ Scripts;
 Exec=kz-wifi
 Icon=kz-wifi
-Terminal=true
