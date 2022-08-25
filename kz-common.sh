@@ -29,9 +29,9 @@ readonly DASHES
 # Common global variables
 ###############################################################################
 
-declare    MODULE_NAME='kz-common.sh'
-declare    MODULE_DESC='Algemene module voor shell scripts'
-declare    MODULE_YEAR=2009
+declare     MODULE_NAME='kz-common.sh'
+declare     MODULE_DESC='Algemene module voor shell scripts'
+declare     MODULE_YEAR=2009
 
 declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
