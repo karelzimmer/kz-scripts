@@ -256,8 +256,8 @@ function process_menu1_choice {
 function process_menu1_choice1 {
     TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
-            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+        [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+            "${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
         )
 
     process_commands
@@ -290,7 +290,8 @@ Druk op de Enter-toets voor het menu [Enter]: '
 function process_menu1_choice3 {
     TITLE="${MENU1_ACTIONS[3]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+        [1]="Gebruikers toevoegen#handje"
+            "${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
         )
     process_commands
 }
@@ -301,6 +302,7 @@ function process_menu1_choice4 {
     EXEC=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
             "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+            "Gebruikersfoto instellen#handje"
         )
     process_commands
 }
@@ -420,8 +422,10 @@ function process_commands {
     local -i    exec=0
 
     show_commands_before_execution
-    check_backup_restore
     if $EXECUTE_COMMAND; then
+        check_extra_users
+        check_backup_medium
+        check_restore_medium
         for exec in "${!EXEC[@]}"; do
             action=$(
                 printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -431,12 +435,10 @@ function process_commands {
                 )
             execute_command
         done
-    fi
-    if $EXECUTE_COMMAND; then
-        show_commands_after_execution
-        check_install_reboot
         check_setup_user_photo
+        show_commands_after_execution
         check_setup_logout
+        check_install_reboot
     fi
 }
 
@@ -458,11 +460,11 @@ Het volgende wordt uitgevoerd:
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
             )
         TEXT+="
-$exec. $action ($command)
-"
+$exec. $action ($command)"
     done
 
-    prompt='Doorgaan?'
+    prompt='
+Doorgaan?'
     if $OPTION_GUI; then
         TEXT+="
 $prompt"
@@ -501,72 +503,55 @@ $prompt"
 }
 
 
-function check_backup_restore {
+function check_extra_users {
+    # Uitvoeren bij 'Installatie afronden'.
+    if [[ $TITLE = "${MENU1_ACTIONS[3]}" ]]
+    then
+        TEXT="
+Gebruiks toevoegen:
+Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op de \
+Super-toets[1],
+typ 'gebr' en klik achter Instellingen op Gebruikers.
+Klik op Ontgrendelen en daarna op Gebruiker toevoegen.
+
+[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets.
+"
+        info "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp "
+Druk op de Enter-toets wanneer eventuele extra gebruikers zijn toegevoegd \
+[Enter]: "
+        fi
+    fi
+}
+
+
+function check_backup_medium {
+    # Uitvoeren bij 'Installatie voorbereiden' of 'Back-up maken'.
     if [[ $TITLE = "${MENU1_ACTIONS[1]}" || $TITLE = "${MENU2_ACTIONS[2]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
         warning "$TEXT"
-    elif [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
+        fi
+    fi
+}
+
+
+function check_restore_medium {
+    # Uitvoeren bij 'Gebruiker inrichten' of 'Back-up terugzetten'.
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
     then
         TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
         warning "$TEXT"
-    fi
-}
-
-
-function check_install_reboot {
-    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
-        then
-        TEXT="
-De computer gaat nu herstarten om het installeren van updates en apps af te \
-ronden."
-        warning "$TEXT"
         if ! $OPTION_GUI; then
             read -rp '
-Druk op de Enter-toets voor herstarten [Enter]: '
+Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
         fi
-        systemctl reboot
-    fi
-}
-
-
-function check_setup_user_photo {
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
-        then
-        if [[ -f $HOME/kz-data/Gebruikersfoto ]]; then
-            TEXT='
-Gebruikersfoto instellen:
-Wijzig de gebruikersfoto via een druk op de Super-toets,
-zoek gebr en klik achter Instellingen op Gebruikers.
-Klik op Ontgrendelen.
-Klik op de afbeelding voor de gebruiker.
-Klik op Selecteer een bestand.
-Selecteer Gebruikersfoto in Persoonlijke map / kz-data.
-Sluit het scherm Gebruikers'
-            info "$TEXT"
-            if ! $OPTION_GUI; then
-                read -rp '
-Druk op de Enter-toets wanneer instellen is uitgevoerd [Enter]: '
-            fi
-        fi
-    fi
-}
-
-
-function check_setup_logout {
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
-        then
-        TEXT='
-De computer gaat nu afmelden om het instellen van apps af te ronden.'
-        warning "$TEXT"
-        if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets voor afmelden [Enter]: '
-        fi
-        gnome-session-quit --logout --no-prompt
-        exit $SUCCESS
     fi
 }
 
@@ -576,6 +561,9 @@ function execute_command {
     local       exec=''
     local       gui_option=''
 
+    if [[ $command = 'handje' ]]; then
+        return $SUCCESS
+    fi
     exec=${command/kz /kz-}
     cmd=$(
         printf '%s' "$exec" | cut --delimiter=' ' --fields=1
@@ -588,6 +576,34 @@ function execute_command {
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
     log "$command: rc=$cmd_rc"
+}
+
+
+function check_setup_user_photo {
+    # Uitvoeren bij 'Gebruiker inrichten'.
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" ]]
+        then
+        if [[ -f $HOME/kz-data/Gebruikersfoto ]]; then
+            TEXT='
+Gebruikersfoto instellen:
+Wijzig de gebruikersfoto via een druk op de Super-toets[1],
+zoek gebr en klik achter Instellingen op Gebruikers.
+Klik op Ontgrendelen.
+Klik op de afbeelding voor de gebruiker.
+Klik op Selecteer een bestand.
+Selecteer Gebruikersfoto in Persoonlijke map / kz-data.
+Sluit het scherm Gebruikers
+
+[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets.
+'
+            info "$TEXT"
+            if ! $OPTION_GUI; then
+                read -rp "
+Druk op de Enter-toets wanneer instellen gebruikersfoto is uitgevoerd \
+[Enter]: "
+            fi
+        fi
+    fi
 }
 
 
@@ -611,6 +627,40 @@ $exec. $action ($command)"
     done
     info "
 $TEXT"
+}
+
+
+function check_setup_logout {
+    # Uitvoeren bij 'Gebruiker inrichten' of 'Apps instellen'.
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
+        then
+        TEXT='
+De computer gaat nu afmelden om het instellen van apps af te ronden.'
+        warning "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets voor afmelden [Enter]: '
+        fi
+        gnome-session-quit --logout --no-prompt
+        exit $SUCCESS
+    fi
+}
+
+
+function check_install_reboot {
+    # Uitvoeren bij 'Installatie afronden' of 'Apps installeren'.
+    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
+        then
+        TEXT="
+De computer gaat nu herstarten om het installeren van updates en apps af te \
+ronden."
+        warning "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
+        fi
+        systemctl reboot
+    fi
 }
 
 
