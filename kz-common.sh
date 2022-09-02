@@ -105,11 +105,11 @@ function check_on_ac_power {
 De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
-    fi
-    if ! $OPTION_GUI; then
-        read -rp '
+        if ! $OPTION_GUI; then
+            read -rp '
 Druk op de Enter-toets om door te gaan [Enter]: '
-            fi
+        fi
+    fi
 
 }
 
