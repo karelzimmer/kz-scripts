@@ -544,10 +544,10 @@ function manual_actions {
 Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op de \
 Super-toets[1],
 typ 'gebr' en klik achter Instellingen op Gebruikers.
-Klik op Ontgrendelen en daarna op Gebruiker toevoegen.
+Klik op Ontgrendelen.
+Klik op Gebruiker toevoegen.
 
-[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets.
-"
+[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$TEXT"
         if ! $OPTION_GUI; then
             read -rp "
@@ -556,17 +556,16 @@ Druk op de Enter-toets wanneer eventuele extra gebruikers zijn toegevoegd \
         fi
     elif [[ $TITLE = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/kz-data/Gebruikersfoto ]]; then
-            TEXT='Gebruikersfoto instellen:
+            TEXT="Gebruikersfoto instellen:
 Wijzig de gebruikersfoto via een druk op de Super-toets[1],
-zoek gebr en klik achter Instellingen op Gebruikers.
+typ 'gebr' en klik achter Instellingen op Gebruikers.
 Klik op Ontgrendelen.
 Klik op de afbeelding voor de gebruiker.
 Klik op Selecteer een bestand.
 Selecteer Gebruikersfoto in Persoonlijke map / kz-data.
 Sluit het scherm Gebruikers
 
-[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets.
-'
+[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
             info "$TEXT"
             if ! $OPTION_GUI; then
                 read -rp "
