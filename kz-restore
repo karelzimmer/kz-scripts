@@ -36,8 +36,6 @@ Opties:
                  gebruik back-up in de BRONMAP
 $OPTIONS_HELP_COMMON"
 
-MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null)
-readonly MEDIUM
 TARGET=$HOME
 
 
@@ -45,6 +43,7 @@ TARGET=$HOME
 # Global variables
 ###############################################################################
 
+declare MEDIUM=''
 declare OPTION_DRY_RUN=''
 declare OPTION_GUI=false
 declare OPTION_SOURCE=false
@@ -123,13 +122,24 @@ function process_input {
         SOURCE=$SOURCE_ARGUMENT/backup-$HOSTNAME-$USER
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
     else
-        SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
+        MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
         if [[ -z $MEDIUM ]]; then
-            error 'Geen USB-medium gevonden.
+            TEXT='
+Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
+            warning "$TEXT"
+            if ! $OPTION_GUI; then
+                read -rp '
+Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
+            fi
+            MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+            if [[ -z $MEDIUM ]]; then
+                error 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
             NOERROR=true exit $ERROR
-        elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+            fi
+        fi
+        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             error "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
@@ -137,14 +147,16 @@ $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
             NOERROR=true exit $ERROR
-        elif ! [[ -d $SOURCE ]]; then
+        fi
+        SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
+        SOURCE_MEDIUM=$MEDIUM
+        if ! [[ -d $SOURCE ]]; then
             error "Geen back-up gevonden op aangekoppeld USB-medium.
 
 Koppel een USB-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
 daarna opnieuw."
             NOERROR=true exit $ERROR
         fi
-        SOURCE_MEDIUM=$MEDIUM
     fi
 
     check_on_ac_power

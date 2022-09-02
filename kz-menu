@@ -57,22 +57,26 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
 readonly MENU2_HEAD="\
-${DASHES:0:36}
-=          $MENU2_TITLE          =
-${DASHES:0:36}"
+${DASHES:0:41}
+=            $MENU2_TITLE             =
+${DASHES:0:41}"
 readonly -a MENU2_ACTIONS=(
     [1]='Wifi-gegevens tonen'
         'Back-up maken'
+        'Gebruikers toevoegen'
         'Apps installeren'
         'Back-up terugzetten'
+        'Gebruikersfoto instellen'
         'Apps instellen'
         'Terug'
     )
 readonly -a MENU2_COMMANDS=(
     [1]='kz wifi'
         'kz backup'
+        'Handmatig'
         'kz install'
         'kz restore'
+        'Handmatig'
         'kz setup'
         'Vorig menu'
     )
@@ -256,10 +260,9 @@ function process_menu1_choice {
 function process_menu1_choice1 {
     TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
-            "${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
+        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
+            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
         )
-
     process_commands
 }
 
@@ -290,8 +293,8 @@ Druk op de Enter-toets voor het menu [Enter]: '
 function process_menu1_choice3 {
     TITLE="${MENU1_ACTIONS[3]}"
     EXEC=(
-        [1]="Gebruikers toevoegen#handje"
-            "${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+            "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
         )
     process_commands
 }
@@ -300,9 +303,9 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
-        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
-            "Gebruikersfoto instellen#handje"
+        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+            "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
+            "${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
         )
     process_commands
 }
@@ -326,7 +329,7 @@ function process_menu2_gui {
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         400                                     \
-                    --height        240                                     \
+                    --height        280                                     \
                     --title         "$TITLE"                                \
                     --text          'Selecteer een keuze:'                  \
                     --ok-label      'Verder'                                \
@@ -340,6 +343,8 @@ function process_menu2_gui {
                     FALSE  3 "${MENU2_ACTIONS[3]}"  "${MENU2_COMMANDS[3]}"  \
                     FALSE  4 "${MENU2_ACTIONS[4]}"  "${MENU2_COMMANDS[4]}"  \
                     FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
+                    FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
+                    FALSE  7 "${MENU2_ACTIONS[7]}"  "${MENU2_COMMANDS[7]}"  \
                     2> >($LOGCMD)
             ) || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
@@ -361,7 +366,7 @@ function process_menu2_tui {
         info "$MENU2_HEAD
 "
         for action in "${!MENU2_ACTIONS[@]}"; do
-            printf  '%2s. %-19.19s - %s\n'      \
+            printf  '%2s. %-24.24s - %s\n'      \
                     "$action"                   \
                     "${MENU2_ACTIONS[$action]}" \
                     "${MENU2_COMMANDS[$action]}"
@@ -399,7 +404,6 @@ Druk op de Enter-toets voor het menu [Enter]: '
 }
 
 
-
 function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
         TITLE="${MENU2_ACTIONS[$REPLY]}"
@@ -423,9 +427,6 @@ function process_commands {
 
     show_commands_before_execution
     if $EXECUTE_COMMAND; then
-        check_extra_users
-        check_backup_medium
-        check_restore_medium
         for exec in "${!EXEC[@]}"; do
             action=$(
                 printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -433,12 +434,10 @@ function process_commands {
             command=$(
                 printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
                 )
+            TITLE=$action
             execute_command
         done
-        check_setup_user_photo
         show_commands_after_execution
-        check_setup_logout
-        check_install_reboot
     fi
 }
 
@@ -449,9 +448,10 @@ function show_commands_before_execution {
     local -i    exec=0
     local       prompt=''
 
-    TEXT="
-Het volgende wordt uitgevoerd:
-"
+    if ! $OPTION_GUI; then
+        clear -x
+    fi
+    TEXT='Het volgende wordt uitgevoerd:'
     for exec in "${!EXEC[@]}"; do
         action=$(
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -503,12 +503,44 @@ $prompt"
 }
 
 
-function check_extra_users {
-    # Uitvoeren bij 'Installatie afronden'.
-    if [[ $TITLE = "${MENU1_ACTIONS[3]}" ]]
-    then
-        TEXT="
-Gebruiks toevoegen:
+function execute_command {
+    local -i    cmd_rc=0
+    local       exec=''
+    local       gui_option=''
+
+    if ! $OPTION_GUI; then
+        clear -x
+    fi
+
+    # Verwerk handmatige acties.
+    if [[ $command = 'Handmatig' ]]; then
+        manual_actions
+        return $SUCCESS
+    fi
+
+    # Verwerk (automatische) opdrachten.
+    exec=${command/kz /kz-}
+    cmd=$(
+        printf '%s' "$exec" | cut --delimiter=' ' --fields=1
+        )
+    arg=$(
+        printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
+        )
+    if $OPTION_GUI; then
+        gui_option='--gui'
+    fi
+    "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
+    log "$command: rc=$cmd_rc"
+    if ! $OPTION_GUI; then
+        read -rp "
+Druk op de Enter-toets om verder te gaan [Enter]: "
+    fi
+}
+
+
+function manual_actions {
+    if [[ $TITLE = 'Gebruikers toevoegen' ]]; then
+        TEXT="Gebruikers toevoegen:
 Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op de \
 Super-toets[1],
 typ 'gebr' en klik achter Instellingen op Gebruikers.
@@ -522,70 +554,9 @@ Klik op Ontgrendelen en daarna op Gebruiker toevoegen.
 Druk op de Enter-toets wanneer eventuele extra gebruikers zijn toegevoegd \
 [Enter]: "
         fi
-    fi
-}
-
-
-function check_backup_medium {
-    # Uitvoeren bij 'Installatie voorbereiden' of 'Back-up maken'.
-    if [[ $TITLE = "${MENU1_ACTIONS[1]}" || $TITLE = "${MENU2_ACTIONS[2]}" ]]
-    then
-        TEXT='
-Zorg dat het USB-medium is aangekoppeld waarop de back-up wordt geplaatst.'
-        warning "$TEXT"
-        if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
-        fi
-    fi
-}
-
-
-function check_restore_medium {
-    # Uitvoeren bij 'Gebruiker inrichten' of 'Back-up terugzetten'.
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
-    then
-        TEXT='
-Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
-        warning "$TEXT"
-        if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
-        fi
-    fi
-}
-
-
-function execute_command {
-    local -i    cmd_rc=0
-    local       exec=''
-    local       gui_option=''
-
-    if [[ $command = 'handje' ]]; then
-        return $SUCCESS
-    fi
-    exec=${command/kz /kz-}
-    cmd=$(
-        printf '%s' "$exec" | cut --delimiter=' ' --fields=1
-        )
-    arg=$(
-        printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
-        )
-    if $OPTION_GUI; then
-        gui_option='--gui'
-    fi
-    "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
-    log "$command: rc=$cmd_rc"
-}
-
-
-function check_setup_user_photo {
-    # Uitvoeren bij 'Gebruiker inrichten'.
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" ]]
-        then
+    elif [[ $TITLE = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/kz-data/Gebruikersfoto ]]; then
-            TEXT='
-Gebruikersfoto instellen:
+            TEXT='Gebruikersfoto instellen:
 Wijzig de gebruikersfoto via een druk op de Super-toets[1],
 zoek gebr en klik achter Instellingen op Gebruikers.
 Klik op Ontgrendelen.
@@ -612,9 +583,10 @@ function show_commands_after_execution {
     local       command=''
     local -i    exec=0
 
-    TEXT="
-Het volgende is uitgevoerd:
-"
+    if ! $OPTION_GUI; then
+        clear -x
+    fi
+    TEXT='Het volgende is uitgevoerd:'
     for exec in "${!EXEC[@]}"; do
         action=$(
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -625,42 +597,7 @@ Het volgende is uitgevoerd:
         TEXT+="
 $exec. $action ($command)"
     done
-    info "
-$TEXT"
-}
-
-
-function check_setup_logout {
-    # Uitvoeren bij 'Gebruiker inrichten' of 'Apps instellen'.
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[5]}" ]]
-        then
-        TEXT='
-De computer gaat nu afmelden om het instellen van apps af te ronden.'
-        warning "$TEXT"
-        if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets voor afmelden [Enter]: '
-        fi
-        gnome-session-quit --logout --no-prompt
-        exit $SUCCESS
-    fi
-}
-
-
-function check_install_reboot {
-    # Uitvoeren bij 'Installatie afronden' of 'Apps installeren'.
-    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[3]}" ]]
-        then
-        TEXT="
-De computer gaat nu herstarten om het installeren van updates en apps af te \
-ronden."
-        warning "$TEXT"
-        if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
-        fi
-        systemctl reboot
-    fi
+    info "$TEXT"
 }
 
 

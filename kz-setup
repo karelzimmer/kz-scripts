@@ -604,8 +604,21 @@ function term_script {
             if $OPTION_RESET; then
                 action='Resetten'
             fi
-            info "
+            if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
+                info "
+$action is voltooid.
+
+De computer gaat nu afmelden om het instellen van apps af te ronden."
+                if ! $OPTION_GUI; then
+                    read -rp '
+Druk op de Enter-toets voor afmelden [Enter]: '
+                fi
+                gnome-session-quit --logout --no-prompt
+                exit $SUCCESS
+            else
+                info "
 $action is voltooid."
+            fi
         fi
     else
         less "$LESS_OPTIONS" "$SIM_FILE"

@@ -39,14 +39,13 @@ Opties:
 $OPTIONS_HELP_COMMON"
 
 readonly SOURCE=$HOME
-MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null)
-readonly MEDIUM
 
 
 ###############################################################################
 # Global variables
 ###############################################################################
 
+declare MEDIUM=''
 declare OPTION_DELETE=''
 declare OPTION_DRY_RUN=''
 declare OPTION_GUI=false
@@ -128,13 +127,24 @@ function process_input {
         TARGET=$TARGET_ARGUMENT/backup-$HOSTNAME-$USER
         TARGET_MEDIUM=$TARGET_ARGUMENT
     else
-        TARGET=$MEDIUM/backup-$HOSTNAME-$USER
+        MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
         if [[ -z $MEDIUM ]]; then
-            error 'Geen USB-medium gevonden.
+            TEXT="Zorg dat het USB-medium is aangekoppeld waarop de back-up \
+wordt geplaatst."
+            warning "$TEXT"
+            if ! $OPTION_GUI; then
+                read -rp '
+Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
+            fi
+            MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+            if [[ -z $MEDIUM ]]; then
+                error 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
-            NOERROR=true exit $ERROR
-        elif [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+                NOERROR=true exit $ERROR
+            fi
+        fi
+        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             error "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
@@ -143,6 +153,7 @@ $MEDIUM
 Koppel media af via Bestanden, en start daarna opnieuw."
             NOERROR=true exit $ERROR
         fi
+        TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         TARGET_MEDIUM=$MEDIUM
     fi
 
