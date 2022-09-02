@@ -47,6 +47,7 @@ readonly SOURCE=$HOME
 
 declare MEDIUM=''
 declare OPTION_DELETE=''
+declare OPTION_DELETE_EXCLUDED=''
 declare OPTION_DRY_RUN=''
 declare OPTION_GUI=false
 declare OPTION_TARGET=false
@@ -87,7 +88,8 @@ function check_input {
                 shift
                 ;;
             --delete)
-                OPTION_DELETE='--delete --delete-excluded'
+                OPTION_DELETE='--delete'
+                OPTION_DELETE_EXCLUDED='--delete-excluded'
                 shift
                 ;;
             --dry-run)
@@ -129,8 +131,7 @@ function process_input {
     else
         MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
         if [[ -z $MEDIUM ]]; then
-            TEXT="Zorg dat het USB-medium is aangekoppeld waarop de back-up \
-wordt geplaatst."
+            TEXT="Koppel het USB-medium aan waarop de back-up wordt geplaatst."
             warning "$TEXT"
             if ! $OPTION_GUI; then
                 read -rp '
@@ -327,12 +328,13 @@ EOF
                 --verbose                   \
                 --human-readable            \
                 $OPTION_DRY_RUN             \
-                "$OPTION_DELETE"            \
+                $OPTION_DELETE              \
+                $OPTION_DELETE_EXCLUDED     \
                 --exclude-from="$exclude"   \
                 "$SOURCE"/                  \
                 "$TARGET"                   2> >($LOGCMD) || rsync_rc=$?
     fi
-#    rm "$exclude"
+   rm "$exclude"
 
     case $rsync_rc in
         0)
