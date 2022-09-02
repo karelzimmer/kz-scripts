@@ -87,7 +87,7 @@ function check_input {
                 shift
                 ;;
             --delete)
-                OPTION_DELETE='--delete'
+                OPTION_DELETE='--delete --delete-excluded'
                 shift
                 ;;
             --dry-run)
@@ -287,6 +287,20 @@ snap/*/*/.cache
 .xsession-errors
 EOF
 
+    # Skip git-controlled directories.
+    cat << EOF >> "$exclude"
+$(
+    find    "$HOME"         \
+            -maxdepth 2     \
+            -name .git      \
+            -type d         \
+            -print          |
+    cut     --delimiter='/' \
+            --fields=4      |
+    sort
+    )
+EOF
+
     TITLE='Back-up maken'
     TEXT='Backup voorbereiden (dit kan even duren)'
     if $OPTION_GUI; then
@@ -313,12 +327,12 @@ EOF
                 --verbose                   \
                 --human-readable            \
                 $OPTION_DRY_RUN             \
-                $OPTION_DELETE              \
+                "$OPTION_DELETE"            \
                 --exclude-from="$exclude"   \
                 "$SOURCE"/                  \
                 "$TARGET"                   2> >($LOGCMD) || rsync_rc=$?
     fi
-    rm "$exclude"
+#    rm "$exclude"
 
     case $rsync_rc in
         0)
