@@ -15,5 +15,5 @@ Comment[nl]=Communicatie- en samenwerkingsplatform
 Keywords=kzteams;teams;
 Keywords[nl]=kzteams;teams;
 Categories=KZ Scripts;
-Exec=google-chrome https://www.microsoft.com/nl-nl/microsoft-teams/log-in
+Exec=google-chrome --new-window https://www.microsoft.com/nl-nl/microsoft-teams/log-in
 Icon=kz-teams
