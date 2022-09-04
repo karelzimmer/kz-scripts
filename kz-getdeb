@@ -261,6 +261,7 @@ Typ 'exit' om dit venster te sluiten."
 
 
 function install_dependencies {
+    info 'Installeer afhankelijkheden...'
     sudo    apt-get             \
             install             \
             --yes               \
