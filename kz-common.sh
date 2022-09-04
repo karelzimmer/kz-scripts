@@ -170,10 +170,8 @@ function developer {
             return $ERROR
         fi
     else
-        printf '%s\n' "Ontwikkelaar is een combinatie van USER, USER-NAME, en \
-HOST:
-    USER  USER-NAME    HOST
-[1] karel Karel Zimmer pc%%"
+        printf '%s\n' "Ontwikkelaar is aangemeld als karel met gebruikersnaam \
+'Karel Zimmer' op 'pc??'."
     fi
 }
 
