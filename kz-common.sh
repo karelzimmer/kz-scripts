@@ -11,6 +11,10 @@
 # Common global constants
 ###############################################################################
 
+readonly MODULE_NAME='kz-common.sh'
+readonly MODULE_DESC='Algemene module voor shell scripts'
+readonly MODULE_YEAR=2009
+
 readonly SUCCESS=0
 readonly ERROR=1
 
@@ -28,10 +32,6 @@ readonly DASHES
 ###############################################################################
 # Common global variables
 ###############################################################################
-
-declare     MODULE_NAME='kz-common.sh'
-declare     MODULE_DESC='Algemene module voor shell scripts'
-declare     MODULE_YEAR=2009
 
 declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
@@ -151,27 +151,29 @@ function check_user_sudo {
 
 function developer {
     local action=${1:-check}
+    local user_name=''
 
     if [[ $action = 'check' ]]; then
         # Aangemeld als ontwikkelaar?
-        if [[ $HOSTNAME == pc?? && $USER = 'karel' ]]; then
-            return $SUCCESS
-        elif [[ $HOSTNAME = 'debian' && $USER = 'user' ]]; then
-            # Debian Live sessie.
-            return $SUCCESS
-        elif [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-            # Ubuntu Live sessie.
+        user_name=$(
+            getent passwd karel             |
+            cut --delimiter=':' --fields=5  |
+            cut --delimiter=',' --fields=1  || true
+            )
+        if  [[
+            $HOSTNAME == pc??       &&
+            $USER      = 'karel'    &&
+            $user_name = 'Karel Zimmer'
+            ]]; then
             return $SUCCESS
         else
             return $ERROR
         fi
     else
-        printf '%s\n' "Ontwikkelaar is een combinatie van USER en HOST:
-
-    USER   HOST
-[1] karel  pc%%
-[2] user   debian
-[3] ubuntu ubuntu"
+        printf '%s\n' "Ontwikkelaar is een combinatie van USER, USER-NAME, en \
+HOST:
+    USER  USER-NAME    HOST
+[1] karel Karel Zimmer pc%%"
     fi
 }
 
