@@ -61,6 +61,9 @@ Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
  .xsession-errors
 .RE
 .sp
+Tevens worden "git-controlled" mappen niet in de back-up opgenomen. Voorbeeld:
+~/bin wordt overgeslagen vanwege de aanwezigheid van ~/bin/.git.
+.sp
 Voor het maken van de back-up wordt rsync gebruikt.
 .sp
 Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
