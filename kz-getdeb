@@ -250,7 +250,7 @@ Typ 'exit' om dit venster te sluiten."
                         18 41
     if developer check; then
         info 'Ontwikkelaar-acties uitvoeren.'
-        check_dependencies
+        install_dependencies
         pull_repos
         download_website
         info 'Status repos (gitstat)...'
@@ -260,37 +260,23 @@ Typ 'exit' om dit venster te sluiten."
 }
 
 
-function check_dependencies {
-    if ! command -v fakeroot 1> /dev/null; then
-        # Voor kz-build .deb.
-        info 'Installeer fakeroot...'
-        sudo apt-get install --yes fakeroot |& $LOGCMD
-    fi
-    if ! command -v ghostscript 1> /dev/null; then
-        # Voor kz-build <man-pag>.pdf (ps2pdf).
-        info 'Installeer ghostscript...'
-        sudo apt-get install --yes ghostscript |& $LOGCMD
-    fi
-    if ! command -v git 1> /dev/null; then
-        # Voor kz-getdeb eigen repo's.
-        info 'Installeer git...'
-        sudo apt-get install --yes git |& $LOGCMD
-    fi
-    if ! command -v lftp 1> /dev/null; then
-        # Voor kz-getdeb/kz-deploy download/upload website.
-        info 'Installeer lftp...'
-        sudo apt-get install --yes lftp |& $LOGCMD
-    fi
-    if ! command -v pycodestyle 1> /dev/null; then
-        # Voor kz-ivp check Python scripts.
-        info 'Installeer pycodestyle...'
-        sudo apt-get install --yes pycodestyle |& $LOGCMD
-    fi
-    if ! command -v shellcheck &> /dev/null; then
-        info 'Installeer shellcheck...'
-        # Debian pakket is oud, snap is nieuwer.
-        sudo snap install shellcheck |& $LOGCMD
-    fi
+function install_dependencies {
+    sudo    apt-get             \
+            install             \
+            --yes               \
+            fakeroot            \
+            ghostscript         \
+            git                 \
+            lftp                \
+            pycodestyle         \
+            python3-pycodestyle \
+            python3-autopep8    \
+            python3-pip         \
+            python-is-python3   |& $LOGCMD
+    sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
+    sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
+    # Debian pakket is oud, snap is nieuwer.
+    sudo snap install shellcheck |& $LOGCMD
 }
 
 

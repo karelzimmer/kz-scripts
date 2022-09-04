@@ -70,13 +70,6 @@ sudo apt-get install --yes pinfo
 sudo snap install plex-desktop
 #2 sudo snap remove plex-desktop
 
-#1 python (programmeertaal)
-sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
-sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
-sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-#2 sudo apt-get remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
-#2 sudo rm --force /usr/bin/pip
-
 #1 signal (privéberichtenapp)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
 wget --no-verbose --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
