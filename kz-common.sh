@@ -170,7 +170,7 @@ function developer {
             return $ERROR
         fi
     else
-        printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als
+        printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
 karel met gebruikersnaam 'Karel Zimmer' op 'pc??'."
     fi
 }
