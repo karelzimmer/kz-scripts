@@ -123,7 +123,6 @@ function check_input {
 
     # Aangemeld als ontwikkelaar?
     if ! developer check; then
-        info 'Uitvoeren als ontwikkelaar.'
         developer report
         NOERROR=true exit $ERROR
     fi
