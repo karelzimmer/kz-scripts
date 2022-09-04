@@ -262,7 +262,7 @@ Typ 'exit' om dit venster te sluiten."
 
 function check_dependencies {
     if ! command -v fakeroot 1> /dev/null; then
-        # Voor lz-build .deb.
+        # Voor kz-build .deb.
         info 'Installeer fakeroot...'
         sudo apt-get install --yes fakeroot |& $LOGCMD
     fi
