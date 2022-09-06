@@ -160,7 +160,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 
     check_on_ac_power
     TITLE='Gebruikersdata vastleggen'
-    TEXT='Persoonlijke map / kz-data bijwerken'
+    TEXT='Gebruikersdata vastleggen'
     if $OPTION_GUI; then
         populate_kz_data                |
         zenity  --progress              \
