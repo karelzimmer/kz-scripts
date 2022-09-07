@@ -2,7 +2,7 @@
 """
 Systeem bijwerken.
 
-Dit script voert een update uit voor op Debian gebaseerde systemen.
+Dit script voert een repair en update uit voor op Debian gebaseerde systemen.
 """
 ###############################################################################
 # Systeem bijwerken.
@@ -29,19 +29,52 @@ program_year = 2021
 # Global variables
 ###############################################################################
 
-apt_cmd = ''
+command = ''
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-def perform_apt_cmd(apt_cmd):
-    subprocess.run(f'sudo apt-get {apt_cmd}', shell=True, check=True)
+def perform_repair():
+    command = 'dpkg --configure --pending'
+    perform_command(command)
+
+    command = 'apt-get update --fix-missing'
+    perform_command(command)
+
+    command = 'apt-get install --fix-broken'
+    perform_command(command)
+
+
+def perform_update():
+    command = 'apt-get update'
+    perform_command(command)
+
+    command = 'apt-get upgrade --yes'
+    perform_command(command)
+
+    command = 'apt-get autoremove --yes'
+    perform_command(command)
+
+
+def perform_command(command):
+    print(f'Uitvoeren {command}...')
+    kz_common.check_dpkg()
+    try:
+        subprocess.run(f'sudo {command}', shell=True, check=True)
+    except Exception as ex:
+        print(ex)
+    print()
 
 
 def snap_refresh():
-    subprocess.run('sudo snap refresh', shell=True)
+    print('Uitvoeren snap refresh...')
+    kz_common.check_dpkg()
+    try:
+        subprocess.run('sudo snap refresh', shell=True)
+    except Exception as ex:
+        print(ex)
 
 
 def check_reboot():
@@ -64,22 +97,10 @@ kz_common.process_common_options(display_name, program_desc)
 
 kz_common.check_sudo()
 
-print('Uitvoeren apt update...')
-kz_common.check_dpkg()
-apt_cmd = 'update'
-perform_apt_cmd(apt_cmd)
+perform_repair()
 
-print('\nUitvoeren apt upgrade...')
-kz_common.check_dpkg()
-apt_cmd = 'upgrade --yes'
-perform_apt_cmd(apt_cmd)
+perform_update()
 
-print('\nUitvoeren apt autoremove...')
-kz_common.check_dpkg()
-apt_cmd = 'autoremove --yes'
-perform_apt_cmd(apt_cmd)
-
-print('\nUitvoeren snap refresh...')
 snap_refresh()
 
 check_reboot()

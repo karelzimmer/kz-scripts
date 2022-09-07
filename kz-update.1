@@ -16,19 +16,30 @@ kz update \- Systeem bijwerken.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz update\fR voert een update uit voor op Debian gebaseerde systemen.
+\fBkz update\fR voert een repair en update uit voor op Debian gebaseerde
+systemen.
 .sp
 Achtereenvolgens wordt uitgevoerd:
 .br
-- sudo apt-get update
+- Als repair:
 .br
-- sudo apt-get upgrade --yes
+  - sudo dpkg --configure --pending
 .br
-- sudo apt-get autoremove --yes
+  - sudo apt-get update --fix-missing
 .br
-- sudo snap refresh (als snaps aanwezig zijn)
+  - sudo apt-get install --fix-broken
 .br
-- melding "reboot" geven als bestand /var/run/reboot-required bestaat
+- De eigenlijke update:
+.br
+  - sudo apt-get update
+.br
+  - sudo apt-get upgrade --yes
+.br
+  - sudo apt-get autoremove --yes
+.br
+  - sudo snap refresh (als snaps aanwezig zijn)
+.br
+- Melding "reboot" geven als bestand /var/run/reboot-required bestaat.
 .\"
 .\"
 .SH OPTIES
