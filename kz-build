@@ -208,25 +208,30 @@ function build_uploads {
                             --outdir "${UPLOADS_TARGETS[PDFS]}" \
                             "$temptextfile"                     |& $LOGCMD
                 rm "$temptextfile"
-                if [[ $file == kz-install*.sh || $file == kz-setup*.sh ]]; then
-                    # Als een installatie- of instelbestand is gewijzigd,
-                    # maak dan voor de *site* een nieuwe "all" aan.
-                    build_uploads_all
-                fi
             fi
         fi
     done
+    build_uploads_all
     cd "$HOME"
 }
 
 
 function build_uploads_all {
-    local tempname=''
+    local temptextfile=''
 
-    tempname=$(echo "$file" | cut --delimiter='-' --fields=1-2)
-    cat "$tempname"*.sh > "${UPLOADS_TARGETS[SCRIPTS]}/$tempname"-all.sh
-    temptextfile=/tmp/$tempname-all.sh.txt
-    cp "${UPLOADS_TARGETS[SCRIPTS]}/$tempname"-all.sh "$temptextfile"
+    # Maak voor de *site* een nieuwe "all" aan.
+    more 'kz-install-'*.sh > "${UPLOADS_TARGETS[SCRIPTS]}"/kz-install-all.sh
+    temptextfile=/tmp/kz-install-all.sh.txt
+    cp "${UPLOADS_TARGETS[SCRIPTS]}"/kz-install-all.sh "$temptextfile"
+    lowriter    --headless                          \
+                --convert-to pdf                    \
+                --outdir "${UPLOADS_TARGETS[PDFS]}" \
+                "$temptextfile"                     |& $LOGCMD
+    rm "$temptextfile"
+
+    more 'kz-setup-'*.sh > "${UPLOADS_TARGETS[SCRIPTS]}"/kz-setup-all.sh
+    temptextfile=/tmp/kz-setup-all.sh.txt
+    cp "${UPLOADS_TARGETS[SCRIPTS]}"/kz-setup-all.sh "$temptextfile"
     lowriter    --headless                          \
                 --convert-to pdf                    \
                 --outdir "${UPLOADS_TARGETS[PDFS]}" \
