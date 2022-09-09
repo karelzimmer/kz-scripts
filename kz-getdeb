@@ -254,24 +254,11 @@ Typ 'exit' om dit venster te sluiten."
 
 function check_dependencies {
     info 'Controleer afhankelijkheden...'
-    check_dpkgd_snapd
     # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
-    sudo    apt-get             \
-            install             \
-            --yes               \
-            fakeroot            \
-            git                 \
-            ghostscript         \
-            git                 \
-            lftp                \
-            pycodestyle         \
-            python3-pycodestyle \
-            python3-autopep8    \
-            python3-pip         \
-            python-is-python3   |& $LOGCMD
-    sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
-    sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
+    check_dpkgd_snapd
+    sudo apt-get install --yes fakeroot ghostscript lftp |& $LOGCMD
     # Debian pakket is oud, snap is nieuwer.
+    check_dpkgd_snapd
     sudo snap install shellcheck |& $LOGCMD
 }
 
