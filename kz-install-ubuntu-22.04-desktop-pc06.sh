@@ -39,10 +39,6 @@ sudo passwd --delete gast
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 #2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
-#1 git (versiebeheersysteem)
-sudo apt-get install --yes git
-#2 sudo apt-get remove --yes git
-
 #1 gnome-gmail (Gmail als e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
@@ -73,13 +69,6 @@ sudo apt-get install --yes pinfo
 ## Een Home Theater PC (HTPC) is een computer die fungeert als multimediacentrum in huis.
 sudo snap install plex-desktop
 #2 sudo snap remove plex-desktop
-
-#1 python (programmeertaal)
-sudo apt-get install --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip
-sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
-#2 sudo apt-get remove --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip
-#2 sudo rm /usr/bin/pip /usr/bin/python
 
 #1 signal (privéberichtenapp)
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
@@ -117,7 +106,3 @@ sudo ufw enable
 #1 vlc (mediaspeler)
 sudo snap install vlc
 #2 sudo snap remove vlc
-
-#1 vscode (editor)
-sudo snap install --classic code
-#2 sudo snap remove code

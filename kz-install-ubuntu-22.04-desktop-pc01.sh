@@ -22,10 +22,6 @@ sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
 sudo passwd --delete gast
 #2 sudo userdel --remove gast
 
-#1 git (versiebeheersysteem)
-sudo apt-get install --yes git
-#2 sudo apt-get remove --yes git
-
 #1 gnome-gmail (Gmail als e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
@@ -33,13 +29,6 @@ sudo apt-get install --yes gnome-gmail
 #1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
 sudo apt-get install --yes pinfo
 #2 sudo apt-get remove --yes pinfo
-
-#1 python (programmeertaal)
-sudo apt-get install --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip
-sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-sudo ln --force --relative --symbolic /usr/bin/python3 /usr/bin/python
-#2 sudo apt-get remove --yes idle pycodestyle python3-pycodestyle python3-autopep8 python3-pip
-#2 sudo rm /usr/bin/pip /usr/bin/python
 
 #1 ssh (veilige shell-client en server)
 sudo apt-get install --yes ssh
@@ -55,7 +44,3 @@ sudo apt-get install --yes gufw
 sudo ufw allow ssh
 sudo ufw enable
 #2 sudo ufw disable
-
-#1 vscode (editor)
-sudo snap install --classic code
-#2 sudo snap remove code
