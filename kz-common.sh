@@ -70,7 +70,7 @@ declare     YELLOW=''
 # Common functions
 ###############################################################################
 
-function check_dpkg {
+function check_dpkgd_snapd {
     local -i dpkg_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then

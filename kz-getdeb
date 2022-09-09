@@ -39,18 +39,8 @@ fi
 
 readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON
 readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON
-readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON
-     of: wget karelzimmer.nl/kz
-         bash kz
-     of: wget karelzimmer.nl/kz; bash kz
-     of: wget -O- karelzimmer.nl/kz | bash
-     of: curl -L karelzimmer.nl/kz | bash"
+readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE_COMMON"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
-     of: wget karelzimmer.nl/kz
-         bash kz
-     of: wget karelzimmer.nl/kz; bash kz
-     of: wget -O- karelzimmer.nl/kz | bash
-     of: curl -L karelzimmer.nl/kz | bash
 
 $PROGRAM_DESC.
 
@@ -61,6 +51,7 @@ $OPTIONS_HELP_COMMON"
 ###############################################################################
 # Global variables
 ###############################################################################
+
 declare TEXT=''
 declare TITLE=''
 
@@ -149,17 +140,18 @@ function install_scriptspackage {
                         --infobox   "$TEXT"         \
                         7 44
 
-    check_dpkg
-
     # Bij Ubuntu Live sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
+        check_dpkgd_snapd
         sudo apt-add-repository --yes universe  |& $LOGCMD
+        check_dpkgd_snapd
         sudo apt-get update |& $LOGCMD
     fi
 
     # Installeer pakket kz.
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
+    check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
@@ -250,7 +242,7 @@ Typ 'exit' om dit venster te sluiten."
                         18 41
     if developer check; then
         info 'Ontwikkelaar-acties uitvoeren.'
-        install_dependencies
+        check_dependencies
         pull_repos
         download_website
         info 'Status repos (gitstat)...'
@@ -260,12 +252,15 @@ Typ 'exit' om dit venster te sluiten."
 }
 
 
-function install_dependencies {
-    info 'Installeer afhankelijkheden...'
+function check_dependencies {
+    info 'Controleer afhankelijkheden...'
+    check_dpkgd_snapd
+    # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
     sudo    apt-get             \
             install             \
             --yes               \
             fakeroot            \
+            git                 \
             ghostscript         \
             git                 \
             lftp                \
@@ -308,9 +303,6 @@ function download_website {
     local ftp_login=$HOME/.kz-$ftp_host
 
     info 'Download website (lftp)...'
-    if ! command -v lftp 1> /dev/null; then
-        sudo apt-get install --yes lftp |& $LOGCMD
-    fi
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.
         read -rsp "Wachtwoord voor 'ftp://$ftp_host': " < /dev/tty

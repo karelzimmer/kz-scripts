@@ -36,7 +36,7 @@ program_year = 1970
 # Functions
 ###############################################################################
 
-def check_dpkg():
+def check_dpkgd_snapd():
     """
     Deze functie controleert op al een lopende Debian pakketbeheerder.
     """
