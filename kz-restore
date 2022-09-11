@@ -202,6 +202,7 @@ $prompt"
     fi
     if $restore; then
         restore_backup
+        restore_userdata
     else
         exit $SUCCESS
     fi
@@ -250,6 +251,34 @@ ruimte op $TARGET."
             NOERROR=true exit $ERROR
             ;;
     esac
+}
+
+
+function restore_userdata {
+    local tgtdir=$HOME/kz-data
+
+    mkdir --parents "$tgtdir" |& $LOGCMD
+    # Use kz-data for restoring desktop_background and favorite apps.
+    restore_userdata_desktop_background
+    restore_userdata_favorite_apps
+}
+
+
+function restore_userdata_desktop_background {
+    if [[ -f $HOME/kz-data/Achtergrond ]]; then
+        gsettings   set                                         \
+                    org.gnome.desktop.background picture-uri    \
+                    "file://$HOME/kz-data/Achtergrond"
+    fi
+}
+
+
+function restore_userdata_favorite_apps {
+    if [[ -f $HOME/kz-data/Favorieten ]]; then
+        gsettings   set                             \
+                    org.gnome.shell favorite-apps   \
+                    "$(cat "$HOME"/kz-data/Favorieten)"
+    fi
 }
 
 
