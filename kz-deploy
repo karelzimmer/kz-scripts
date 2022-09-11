@@ -134,8 +134,8 @@ Herstel alle meldingen hierboven en start daarna opnieuw.'
 function build_package {
     local -i check_rc=0
 
-    info 'Bouw website en pakket (kz build)...'
-    log "Build package with 'kz build'."
+    info 'Bouw pakket en website (kz build)...'
+    log "Build package and website with 'kz build'."
     "$SCRIPTS_REPO"/kz build || check_rc=$?
     if [[ $check_rc -ne $SUCCESS ]]; then
         error '
