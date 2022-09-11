@@ -240,7 +240,7 @@ function process_argument_app {
     local -a    files=()
     local       search=''
 
-    # Zoek naar apps in alle kz-setup-<distro>-<versie>-bestanden.
+    # Zoek naar beschikbare APPs in alle instelbestanden.
     search=$PROGRAM_NAME-$DISTRO-$VERSION
     for file in "$PROGRAM_PATH/$search"*.sh; do
         files+=("$file")
@@ -342,11 +342,9 @@ function process_dfltfiles {
 
 function process_option_apps {
     local -a    files=()
-    local       search=''
 
-    # Zoek naar apps in alle kz-setup-<distro>-<versie>-bestanden.
-    search=$PROGRAM_NAME-$DISTRO-$VERSION
-    for file in "$PROGRAM_PATH/$search"*.sh; do
+    # Zoek naar beschikbare APPs in alle instelbestanden.
+    for file in "$PROGRAM_PATH/$PROGRAM_NAME-"*.sh; do
         files+=("$file")
     done
     TEXT="De volgende APPs zijn beschikbaar om in te stellen:

@@ -5,11 +5,11 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1 evolution (e-mail)
+#1-evolution (e-mail)
 kz-gset --delfav=org.gnome.Evolution
 #2 kz-gset --addfavbef=org.gnome.Evolution
 
-#1 firefox (webbrowser)
+#1-firefox (webbrowser)
 kz-gset --delfav=firefox-esr
 #2 kz-gset --addfavbef=firefox-esr
 

@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1 firefox (webbrowser)
+#1-firefox (webbrowser)
 kz-gset --delfav=firefox_firefox
 #2 kz-gset --addfavbef=firefox_firefox
 
@@ -13,6 +13,6 @@ kz-gset --delfav=firefox_firefox
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 
-#1 thunderbird (e-mail)
+#1-thunderbird (e-mail)
 kz-gset --delfav=thunderbird
 #2 kz-gset --addfavbef=thunderbird

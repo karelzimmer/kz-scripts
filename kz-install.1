@@ -17,7 +17,8 @@ kz install \- Apps installeren.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz install\fR installeert apps en wijzigt systeeminstellingen.
+\fBkz install\fR installeert apps en wijzigt systeeminstellingen op een Debian
+GNU/Linux systeem en op een op Debian GNU/Linux gebaseerd systeem zoals Ubuntu.
 .sp
 In een grafische werkomgeving kan opdracht \fBkz install\fR worden uitgevoerd
 door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
@@ -36,31 +37,18 @@ Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
 - /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh
 .br
 - /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+(indien aanwezig)
 .sp
 <distributie>, <versie>, en <computernaam> worden ingevuld met waarden van de
 huidige computer.
 .br
 Voor \fIEDITIE\fR wordt standaard 'desktop' gebruikt.
 .sp
-Bijvoorbeeld kz-install-ubuntu-20.04-desktop.sh en
-kz-install-ubuntu-20.04-desktop-pc02.sh.
+Bijvoorbeeld 'kz-install-ubuntu-20.04-desktop.sh' en\
+ 'kz-install-ubuntu-20.04-desktop-pc02.sh'.
 .br
-Deze installatiebestanden bevatten opdrachten voor ubuntu 20.04 desktop op
-pc02.
-.sp
-Het vastleggen in installatiebestanden van wat geïnstalleerd wordt met
-\fBkz install\fR wordt ook wel Infrastructuur als Code (IaC) of programmeerbare
-infrastructuurgenoemd; het definiëren en beheren van infrastructuur door middel
-van code.
-.sp
-De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
-Herhaalbaarheid (idempotentie) is één van de principes van IaC.
-.br
-Ook de voospelbaarheid, wat wordt er geïnstalleerd, hoort bij IaC.
-.br
-De opdrachten zijn vastgelegd, en worden onderhouden, in versiebeheer (GitHub),
-een ander principe van IaC.
+Deze installatiebestanden bevatten opdrachten voor ubuntu 20.04 desktop en
+ubuntu 20.04 desktop op pc02.
 .sp
 Voor de indeling van de installatiebestanden zie de sectie
 \fBBESTANDSINDELING\fR hieronder.
@@ -83,30 +71,19 @@ De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
 bestanden.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle installatiebestanden voor de huidige distributie en versie, bijvoorbeeld
-ubuntu 20.04.
+alle installatiebestanden (bestanden die beginnen met '\fBkz-install-\fR' en
+eindigen met '\fB.sh\fR').
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
-Per opgegeven \fIAPP\fR worden de bijbehorende regels met opdrachten opgezocht
-alle installatiebestanden voor de huidige distributie en versie, bijvoorbeeld
-ubuntu 20.04, en worden de eerstgevonden opdrachten gekopieerd naar een
-tijdelijk bestand.
+Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
+installatiebestanden en wordt deze samen met de bijbehorende opdrachten
+gekopieerd naar een tijdelijk bestand.
 .br
 De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
 installatiebestanden.
 .sp
-Bijvoorbeeld voor ubuntu 20.04 op pc02 worden de apps opgezocht in
-kz-install-ubuntu-20.04-desktop.sh, kz-install-ubuntu-20.04-desktop-pc01.sh,
-kz-install-ubuntu-20.04-desktop-pc02.sh,
-kz-install-ubuntu-20.04-desktop-pc03.sh, en
-kz-install-ubuntu-20.04-desktop-pc04.sh.
-.sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de installatiebestanden.
-.br
-In bestand Apps staan gegevens over eerder geïnstalleerde pakketten.
-.br
-Deze gevens zijn te gebruiken om de installatie te controleren op volledigheid.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .\"
@@ -134,7 +111,7 @@ Meer voorbeelden zijn te zien via de opdracht \fBkz install --cat\fR.
 allbox tab(:);
 lb | lb.
 T{
-Regelsoort
+Regel
 T}:T{
 Beschrijving
 T}
@@ -147,19 +124,19 @@ l | l
 l | l
 l | l.
 T{
-#1 APP (BESCHRIJVING)
+#1 APP (beschrijving)
 T}:T{
-Bevat APP naam en een BESCHRIJVING van de app.
+Bevat de APP naam en een beschrijving van APP.
 T}
 T{
-#1-APP (BESCHRIJVING)
+#1-APP (beschrijving)
 T}:T{
-Idem, wordt niet getoond bij optie -a, --apps.
+Idem, wordt niet altijd gebruikt, zie [1].
 T}
 T{
-#2 VERWIJDER-opdracht
+#2 Opdracht
 T}:T{
-Opdracht voor het VERWIJDERen van APPs.
+Opdracht voor het verwijderen van APP.
 T}
 T{
 .sp
@@ -167,21 +144,28 @@ T}:T{
 Wordt overgeslagen (is leeg).
 T}
 T{
-#
+#...
 T}:T{
 Wordt overgeslagen (is commentaar).
 T}
 T{
-*
+Opdracht
 T}:T{
-Wordt als opdracht verwerkt (idempotent).
+Opdracht voor het installeren van APP
 T}
 .TE
 .sp
 .sp
 .br
-N.B. Regelsoort '#1-APP (BESCHRIJVING)' is bedoeld voor opdrachten die
-     specifiek zijn voor een computer, bijvoorbeeld voor pc02.
+[1]
+.br
+Regelsoort '#1-APP (beschrijving)' is bedoeld voor opdrachten die specifiek
+zijn voor een distributie of een computer.
+.br
+Deze regels worden niet getoond bij optie \fB-a\fR, \fB--apps\fR, en worden
+niet gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
+.br
+Deze regels worden wél gebruikt bij het verwerken van het installatiebestand.
 .sp
 .sp
 .br
@@ -190,7 +174,7 @@ N.B. Regelsoort '#1-APP (BESCHRIJVING)' is bedoeld voor opdrachten die
 box tab(:);
 lb | lb.
 T{
-Regelsoort
+Regel
 T}:T{
 Beschrijving
 T}
@@ -214,7 +198,7 @@ T}
 T{
 #1 google-chrome (webbrowser)
 T}:T{
-Naam APP met BESCHRIJVING tussen haakjes.
+Naam APP met beschrijving tussen haakjes.
 T}
 T{
 sudo apt-get install --yes google-chrome-stable
@@ -224,7 +208,7 @@ T}
 T{
 #2 sudo apt-get remove --yes google-chrome-stable
 T}:T{
-VERWIJDER-opdracht; voor optie -r, --remove.
+Verwijder-opdracht; voor optie -r, --remove.
 T}
 .TE
 .\"
@@ -305,6 +289,32 @@ Tijdelijk simulatiebestand.
 Checklist installatie
 .RS 4
 https://karelzimmer.nl
+.RE
+.IP " 2." 4
+Infrastructuur als Code (IaC)
+.RS 4
+Het vastleggen in installatiebestanden van wat geïnstalleerd wordt met
+\fBkz install\fR wordt ook wel Infrastructuur als Code (IaC) of programmeerbare
+infrastructuurgenoemd; het definiëren en beheren van infrastructuur door middel
+van code.
+.br
+De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.br
+Herhaalbaarheid (idempotentie) is één van de principes van IaC.
+.br
+Ook de voorspelbaarheid, wat wordt er geïnstalleerd, hoort bij IaC.
+.br
+De opdrachten worden vastgelegd en onderhouden in versiebeheer (GitHub), een
+ander principe van IaC.
+.RE
+.IP " 3." 4
+Persoonlijke map / Apps
+.RS 4
+In bestand Persoonlijke map / Apps staan gegevens over eerder geïnstalleerde
+pakketten.
+.br
+Deze gevens zijn te gebruiken om de installatie te controleren op volledigheid.
 .RE
 .\"
 .\"

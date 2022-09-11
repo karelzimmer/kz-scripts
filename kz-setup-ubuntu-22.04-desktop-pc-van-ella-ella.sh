@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1 bitwarden (wachtwoordbeheer)
+#1-bitwarden (wachtwoordbeheer)
 kz-gset --delfav=bitwarden_bitwarden
 #2 kz-gset --addfavaft=bitwarden_bitwarden
 
@@ -14,22 +14,22 @@ kz-gset --delfav=bitwarden_bitwarden
 kz-gset --addfavbef=firefox_firefox
 #2 kz-gset --delfav=firefox_firefox
 
-#1 google-chrome (webbrowser)
+#1-google-chrome (webbrowser)
 kz-gset --delfav=google-chrome
 #2 kz-gset --addfavbef=google-chrome
 
-#1 skype (beeldbellen)
+#1-skype (beeldbellen)
 kz-gset --delfav=skype_skypeforlinux
 #2 kz-gset --addfavaft=skype_skypeforlinux
 
-#1 spotify (muziekspeler)
+#1-spotify (muziekspeler)
 kz-gset --delfav=spotify_spotify
 #2 kz-gset --addfavaft=spotify_spotify
 
-#1 teams (samenwerken)
+#1-teams (samenwerken)
 kz-gset --delfav=teams
 #2 kz-gset --addfavaft=teams
 
-#1 zoom (samenwerken)
+#1-zoom (samenwerken)
 kz-gset --delfav=Zoom
 #2 kz-gset --addfavaft=Zoom

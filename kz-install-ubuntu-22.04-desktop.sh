@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1 apport (handmatig genereren van crashrapporten)
+#1-apport (handmatig genereren van crashrapporten)
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
@@ -46,7 +46,7 @@ sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient.deb /tmp/libidn11.deb
 #2 sudo apt-get remove --yes icaclient libidn11
 
-#1 force-x11 (Gebruik X11 i.p.v. Wayland)
+#1-force-x11 (gebruik X11 i.p.v. Wayland)
 ## Met wayland issues met afspelen video en TeamViewer.
 ## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
@@ -112,7 +112,7 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get update
 
-#1 restricted-addons (niet-vrije pakketten)
+#1-restricted-addons (niet-vrije pakketten)
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
@@ -124,5 +124,5 @@ sudo apt-get install --yes /tmp/zoom.deb
 rm /tmp/zoom.deb
 #2 sudo apt-get remove --yes zoom
 
-#1 language-support (taalondersteuning)
+#1-language-support (taalondersteuning)
 check-language-support | xargs sudo apt-get install --yes

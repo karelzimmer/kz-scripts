@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1 all-repos (alle repositories inschakelen)
+#1-all-repos (alle repositories inschakelen)
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-get update
@@ -51,7 +51,7 @@ rm /tmp/icaclient.deb
 sudo apt-get install --yes cups
 #2 sudo apt-get remove --yes cups
 
-#1 dashtodock (favorietenbalk)
+#1-dashtodock (favorietenbalk)
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 #2 sudo apt-get remove --yes gnome-shell-extension-dashtodock
 
@@ -71,7 +71,7 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
 
-#1 journalctl (log bekijken)
+#1-journalctl (log bekijken)
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 #2 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 

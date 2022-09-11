@@ -1,6 +1,7 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Debian 11 LTS desktop op debian voor user (Live-sessie).
+# Instelbestand voor Debian 11 LTS desktop op debian voor user (Live
+# Persistent).
 #
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
@@ -9,11 +10,11 @@
 kz-gset --delfav=install-debian
 #2 kz-gset --addfavbef=install-debian
 
-#1 evolution (e-mail)
+#1-evolution (e-mail)
 kz-gset --delfav=org.gnome.Evolution
 #2 kz-gset --addfavbef=org.gnome.Evolution
 
-#1 firefox (webbrowser)
+#1-firefox (webbrowser)
 kz-gset --delfav=firefox-esr
 #2 kz-gset --addfavbef=firefox-esr
 

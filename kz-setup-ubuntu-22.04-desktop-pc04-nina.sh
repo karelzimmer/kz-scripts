@@ -13,6 +13,6 @@ kz-gset --addfavaft=calibre-gui
 kz-gset --addfavaft=libreoffice-calc
 #2 kz-gset --delfav=libreoffice-calc
 
-#1 thunderbird (e-mail)
+#1-thunderbird (e-mail)
 kz-gset --delfav=thunderbird
 #2 kz-gset --addfavbef=thunderbird

@@ -13,7 +13,7 @@ kz-gset --addfavaft=kz-cockpit
 #2 rm "$HOME"/.local/share/applications/kz-cockpit.desktop
 #2 kz-gset --delfav=kz-cockpit
 
-#1 firefox (webbrowser)
+#1-firefox (webbrowser)
 kz-gset --delfav=firefox_firefox
 #2 kz-gset --addfavbef=firefox_firefox
 
@@ -41,7 +41,7 @@ echo 'alias info=pinfo # Gebruiksvriendelijke viewer voor Info-documenten' >> "$
 #2 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 #2 sed --in-place --expression='/^alias info=/d' "$HOME"/.bashrc
 
-#1 thunderbird (e-mail)
+#1-thunderbird (e-mail)
 kz-gset --delfav=thunderbird
 #2 kz-gset --addfavbef=thunderbird
 

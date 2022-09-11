@@ -13,7 +13,7 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 kz-gset --addfavaft=telegram-desktop_telegram-desktop
 #2 kz-gset --delfav=telegram-desktop_telegram-desktop
 
-#1 virtualbox (virtualisatie)
+#1-virtualbox (virtualisatie)
 kz-gset --addfavaft=virtualbox
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
 chmod u+x "$HOME"/kz-vm-hugowin732.sh
