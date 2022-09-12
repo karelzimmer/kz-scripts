@@ -80,6 +80,24 @@ def check_dpkgd_snapd():
                 break
 
 
+def check_on_ac_power():
+    """
+    Deze functie controleert de stroomvoorziening.
+    """
+    on_battery = 0
+
+    try:
+        subprocess.run('on_ac_power', shell=True, check=True)
+    except Exception:
+        on_battery = 1
+    if on_battery == 1:
+        print('De computer gebruikt nu alleen de accu voor de '
+              'stroomvoorziening.'
+              '\nGeadviseerd wordt om de computer aan te sluiten op het '
+              'stopcontact.')
+        input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
+
+
 def check_sudo():
     subprocess.run('sudo true', shell=True, check=True)
 

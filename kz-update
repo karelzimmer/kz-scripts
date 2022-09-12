@@ -96,6 +96,8 @@ def check_reboot():
 
 kz_common.process_common_options(display_name, program_desc)
 
+kz_common.check_on_ac_power()
+
 kz_common.check_sudo()
 
 perform_repair()
