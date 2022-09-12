@@ -2,8 +2,8 @@
 """
 Systeem bijwerken.
 
-Dit script voert een repair en update uit op Debian of Debian-gebaseerd systeem
-zoals Ubuntu.
+Dit script voert een repair en update uit op Debian en op Debian gebaseerd
+systeem zoals Ubuntu.
 """
 ###############################################################################
 # Systeem bijwerken.
