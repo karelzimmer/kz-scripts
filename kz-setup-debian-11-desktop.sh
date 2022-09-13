@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1-install-debian (installeer Debian)
+#1-install-debian (installatie Debian starten)
 kz-gset --delfav=install-debian
 #2 kz-gset --addfavbef=install-debian
 

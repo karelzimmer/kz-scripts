@@ -5,7 +5,7 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1-install-ubuntu (installeer Ubuntu)
+#1-install-ubuntu (installatie Ubuntu starten)
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
 #2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
 
