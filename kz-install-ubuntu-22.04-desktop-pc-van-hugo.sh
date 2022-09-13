@@ -5,6 +5,11 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
+#1-lidswitch (negeer sluiten laptopdesksel)
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+#2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
 #2 sudo apt-get remove --yes calibre
@@ -16,11 +21,6 @@ sudo apt-get install --yes clamtk-gnome
 #1 gimp (beeldmanipulatieprogramma)
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 #2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
-
-#1-lidswitch (negeer sluiten laptopdesksel)
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
-#2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop

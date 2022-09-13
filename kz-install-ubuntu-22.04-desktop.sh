@@ -5,6 +5,9 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
+#1 updates (bijgewerkte apps en systeembestanden)
+sudo kz-update
+
 #1-apport (handmatig genereren van crashrapporten)
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
@@ -13,8 +16,17 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #2 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 #2 sudo systemctl enable --now apport.service
 
-#1 updates (bijgewerkte apps en systeembestanden)
-sudo kz-update
+#1-force-x11 (gebruik X11 i.p.v. Wayland)
+## Met wayland issues met afspelen video en TeamViewer.
+## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
+sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+#2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+
+#1-restricted-addons (niet-vrije pakketten)
+## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
+sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
+#2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
+#2 sudo apt autoremove --yes
 
 #1 bitwarden (wachtwoordbeheer)
 sudo snap install bitwarden
@@ -45,12 +57,6 @@ sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAC
 sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
 rm /tmp/icaclient.deb /tmp/libidn11.deb
 #2 sudo apt-get remove --yes icaclient libidn11
-
-#1-force-x11 (gebruik X11 i.p.v. Wayland)
-## Met wayland issues met afspelen video en TeamViewer.
-## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
-sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
-#2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
@@ -111,12 +117,6 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get update
-
-#1-restricted-addons (niet-vrije pakketten)
-## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
-sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
-#2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
-#2 sudo apt autoremove --yes
 
 #1 zoom (samenwerken)
 wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/latest/zoom_amd64.deb'
