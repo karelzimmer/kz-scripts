@@ -5,6 +5,10 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
+#1-install-debian (installeer Debian)
+kz-gset --delfav=install-debian
+#2 kz-gset --addfavbef=install-debian
+
 #1 bitwarden (wachtwoordbeheer)
 kz-gset --addfavaft=bitwarden_bitwarden
 #2 kz-gset --delfav=bitwarden_bitwarden

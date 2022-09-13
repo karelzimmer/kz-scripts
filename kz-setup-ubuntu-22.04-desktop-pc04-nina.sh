@@ -12,7 +12,3 @@ kz-gset --addfavaft=calibre-gui
 #1 libreoffice-calc (spreadsheet van LibreOffice)
 kz-gset --addfavaft=libreoffice-calc
 #2 kz-gset --delfav=libreoffice-calc
-
-#1-thunderbird (e-mail)
-kz-gset --delfav=thunderbird
-#2 kz-gset --addfavbef=thunderbird

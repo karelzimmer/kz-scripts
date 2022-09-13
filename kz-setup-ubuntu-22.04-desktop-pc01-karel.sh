@@ -5,10 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1-firefox (webbrowser)
-kz-gset --delfav=firefox_firefox
-#2 kz-gset --addfavbef=firefox_firefox
-
 #1-gnome (bureaubladomgeving)
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
@@ -24,10 +20,6 @@ echo 'alias info=pinfo # Gebruiksvriendelijke viewer voor Info-documenten' >> "$
 #2 kz-gset --delfav=org.gnome.Terminal
 #2 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 #2 sed --in-place --expression='/^alias info=/d' "$HOME"/.bashrc
-
-#1-thunderbird (e-mail)
-kz-gset --delfav=thunderbird
-#2 kz-gset --addfavbef=thunderbird
 
 #1 vscode (editor)
 kz-gset --addfavbef=code_code

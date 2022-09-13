@@ -13,10 +13,6 @@ kz-gset --addfavaft=kz-cockpit
 #2 rm "$HOME"/.local/share/applications/kz-cockpit.desktop
 #2 kz-gset --delfav=kz-cockpit
 
-#1-firefox (webbrowser)
-kz-gset --delfav=firefox_firefox
-#2 kz-gset --addfavbef=firefox_firefox
-
 #1-gnome (bureaubladomgeving)
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
@@ -40,10 +36,6 @@ echo 'alias info=pinfo # Gebruiksvriendelijke viewer voor Info-documenten' >> "$
 #2 kz-gset --delfav=org.gnome.Terminal
 #2 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 #2 sed --in-place --expression='/^alias info=/d' "$HOME"/.bashrc
-
-#1-thunderbird (e-mail)
-kz-gset --delfav=thunderbird
-#2 kz-gset --addfavbef=thunderbird
 
 #1 vscode (editor)
 kz-gset --addfavbef=code_code

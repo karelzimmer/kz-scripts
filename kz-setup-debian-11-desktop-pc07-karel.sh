@@ -5,14 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1-evolution (e-mail)
-kz-gset --delfav=org.gnome.Evolution
-#2 kz-gset --addfavbef=org.gnome.Evolution
-
-#1-firefox (webbrowser)
-kz-gset --delfav=firefox-esr
-#2 kz-gset --addfavbef=firefox-esr
-
 #1-gnome (bureaubladomgeving)
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
