@@ -13,11 +13,6 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 
-#1-gdm (inlogscherm dual-monitor)
-if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
-#2 sudo rm --force ~gdm/.config/monitors.xml
-
 #1 ansible (automatiseringsplatform)
 sudo apt-get install --yes ansible
 #2 sudo apt-get remove --yes ansible
@@ -34,6 +29,11 @@ sudo apt-get install --yes libimage-exiftool-perl
 sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
 sudo passwd --delete gast
 #2 sudo userdel --remove gast
+
+#1-gdm (inlogscherm dual-monitor)
+if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
+#2 sudo rm --force ~gdm/.config/monitors.xml
 
 #1 gimp (beeldmanipulatieprogramma)
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl

@@ -16,14 +16,6 @@ sudo apt-get update
 #2 sudo apt-add-repository --remove non-free
 #2 sudo apt-get update
 
-#1-dashtodock (favorietenbalk)
-sudo apt-get install --yes gnome-shell-extension-dashtodock
-#2 sudo apt-get remove --yes gnome-shell-extension-dashtodock
-
-#1-journalctl (log bekijken)
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
-#2 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
-
 #1 bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion
 #2 sudo apt-get remove --yes bash-completion
@@ -59,6 +51,10 @@ rm /tmp/icaclient.deb
 sudo apt-get install --yes cups
 #2 sudo apt-get remove --yes cups
 
+#1-dashtodock (favorietenbalk)
+sudo apt-get install --yes gnome-shell-extension-dashtodock
+#2 sudo apt-get remove --yes gnome-shell-extension-dashtodock
+
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -74,6 +70,10 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
 #2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
+
+#1-journalctl (log bekijken)
+sudo adduser "${SUDO_USER:-$USER}" systemd-journal
+#2 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl

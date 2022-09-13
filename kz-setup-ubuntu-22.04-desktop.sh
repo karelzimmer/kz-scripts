@@ -5,10 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1-install-ubuntu (installatie Ubuntu starten)
-kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
-#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
-
 #1 bitwarden (wachtwoordbeheer)
 kz-gset --addfavaft=bitwarden_bitwarden
 #2 kz-gset --delfav=bitwarden_bitwarden
@@ -20,6 +16,10 @@ xdg-mime default wfica.desktop application/x-ica
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
+
+#1-install-ubuntu (installatie Ubuntu starten)
+kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
+#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
 
 #1 snap (snap verbergen in Persoonlijke map)
 printf '%s\n' 'snap' > "$HOME"/.hidden

@@ -5,10 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-#1-install-debian (installatie Debian starten)
-kz-gset --delfav=install-debian
-#2 kz-gset --addfavbef=install-debian
-
 #1 bitwarden (wachtwoordbeheer)
 kz-gset --addfavaft=bitwarden_bitwarden
 #2 kz-gset --delfav=bitwarden_bitwarden
@@ -20,6 +16,10 @@ xdg-mime default wfica.desktop application/x-ica
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
+
+#1-install-debian (installatie Debian starten)
+kz-gset --delfav=install-debian
+#2 kz-gset --addfavbef=install-debian
 
 #1 snap (snap verbergen in Persoonlijke map)
 printf '%s\n' 'snap' > "$HOME"/.hidden
