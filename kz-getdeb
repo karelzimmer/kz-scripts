@@ -123,7 +123,7 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 
 function process_input {
     install_scriptspackage
-    populate_kz_data
+    checklist_to_kz_data
 }
 
 
@@ -210,7 +210,7 @@ Mogelijke oorzaak:
 }
 
 
-function populate_kz_data {
+function checklist_to_kz_data {
     local srcdir=/usr/share/doc/kz
     local tgtdir=$HOME/kz-data
 
