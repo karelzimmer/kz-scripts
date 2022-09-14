@@ -312,7 +312,7 @@ EOF
                 --exclude-from="$exclude"   \
                 --delete-excluded           \
                 "$SOURCE"/                  \
-                "$TARGET"                   \
+                "$TARGET"/                  \
                 2> >($LOGCMD)               |
         sed     --expression='s/^/#/'       |
         zenity  --progress                  \
@@ -333,7 +333,7 @@ EOF
                 $OPTION_DELETE_EXCLUDED     \
                 --exclude-from="$exclude"   \
                 "$SOURCE"/                  \
-                "$TARGET"                   2> >($LOGCMD) || rsync_rc=$?
+                "$TARGET"/                  2> >($LOGCMD) || rsync_rc=$?
     fi
    rm "$exclude"
 

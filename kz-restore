@@ -216,7 +216,7 @@ function restore_backup {
         rsync   --archive                   \
                 --verbose                   \
                 "$SOURCE"/                  \
-                "$TARGET"                   \
+                "$TARGET"/                  \
                 2> >($LOGCMD)               |
         sed     --expression='s/^/#/'       |
         zenity  --progress                  \
@@ -234,7 +234,7 @@ function restore_backup {
                 --human-readable            \
                 $OPTION_DRY_RUN             \
                 "$SOURCE"/                  \
-                "$TARGET"                   2> >($LOGCMD) || rsync_rc=$?
+                "$TARGET"/                  2> >($LOGCMD) || rsync_rc=$?
     fi
 
     case $rsync_rc in
