@@ -162,7 +162,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     TITLE='Gebruikersdata veiligstellen'
     TEXT='Gebruikersdata verzamelen'
     if $OPTION_GUI; then
-        secure_userdata                 |
+        collect_user_setup              |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -173,26 +173,26 @@ Koppel media af via Bestanden, en start daarna opnieuw."
                 --text      "$TEXT"     2> >($LOGCMD)
     else
         info "$TEXT..."
-        secure_userdata
+        collect_user_setup
     fi
     create_backup
 }
 
 
-function secure_userdata {
+function collect_user_setup {
     local tgtdir=$HOME/kz-data
 
     mkdir --parents "$tgtdir" |& $LOGCMD
     # Populate kz-data with installed apps and user data.
     # Part of the user data is restored with kz-setup and setup file.
-    secure_userdata_installed_apps
-    secure_userdata_desktop_background
-    secure_userdata_user_photo
-    secure_userdata_favorite_apps
+    collect_user_setup_installed_apps
+    collect_user_setup_desktop_background
+    collect_user_setup_user_photo
+    collect_user_setup_favorite_apps
 }
 
 
-function secure_userdata_installed_apps {
+function collect_user_setup_installed_apps {
     local file=$tgtdir/Apps
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
@@ -237,7 +237,7 @@ installatie van een pakket, met
 }
 
 
-function secure_userdata_desktop_background {
+function collect_user_setup_desktop_background {
     local file=$tgtdir/Achtergrond
     local picture_file=''
 
@@ -251,7 +251,7 @@ function secure_userdata_desktop_background {
 }
 
 
-function secure_userdata_user_photo {
+function collect_user_setup_user_photo {
     local srcdir=/var/lib/AccountsService/icons
     local file=$tgtdir/Gebruikersfoto
 
@@ -259,7 +259,7 @@ function secure_userdata_user_photo {
 }
 
 
-function secure_userdata_favorite_apps {
+function collect_user_setup_favorite_apps {
     local file=$tgtdir/Favorieten
 
     gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
