@@ -45,6 +45,7 @@ kz-gset --addfavaft=Zoom
 kz-gset --addappfolder --folder='KZ Scripts'
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.desktop.calendar show-weekdate true
+# Achtergrond vastgelegd door kz-backup.
 if [[ -f $HOME/kz-data/Achtergrond ]]; then gsettings set org.gnome.desktop.background picture-uri "file://$HOME/kz-data/Achtergrond"; fi
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -59,6 +60,7 @@ gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.media-keys max-screencast-length 0
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
+# Favorieten vastgelegd door kz-backup.
 if [[ -f $HOME/kz-data/Favorieten ]]; then gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/kz-data/Favorieten)"; fi
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
