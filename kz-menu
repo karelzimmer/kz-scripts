@@ -271,11 +271,8 @@ function process_menu1_choice2 {
     TITLE="${MENU1_ACTIONS[2]}"
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
-Deze checklist is te vinden:
-- in de Persoonlijke map / kz-data
-- in de map /usr/share/doc/kz
-- op de site https://karelzimmer.nl,
-  onder Linux
+Checklist installatie is te vinden op de site https://karelzimmer.nl,
+onder Linux.
 
 Komt globaal neer op:
 1. Download een beeldbestand (.iso).

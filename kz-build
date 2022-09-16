@@ -69,7 +69,6 @@ readonly -A DEB_TARGETS=(
               [BUILD]=$DEB_DISTDIR/usr/local/etc
        [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
                 [BIN]=$DEB_DISTDIR/usr/bin
-                [DOC]=$DEB_DISTDIR/usr/share/doc/kz
                 [MAN]=$DEB_DISTDIR/usr/share/man/man1
            [POLICY_1]=$DEB_DISTDIR/usr/share/polkit-1/actions
            [TABCOMPL]=$DEB_DISTDIR/usr/share/bash-completion/completions
@@ -304,14 +303,6 @@ function build_deb {
         newfile="${DEB_TARGETS[POLICY_1]}/$prefix$basename"
         mv "$file" "$newfile" |& $LOGCMD
     done
-
-    # Documenten PDFs.
-    cp  --archive                                   \
-        --update                                    \
-        "${UPLOADS_TARGETS[PDFS]}"/Checklist*.pdf   \
-        "${UPLOADS_TARGETS[PDFS]}"/Inname*.pdf      \
-        "${UPLOADS_TARGETS[PDFS]}"/Linux*.pdf       \
-        "${DEB_TARGETS[DOC]}"                       |& $LOGCMD
 
     printf '%s' "$TIMESTAMP" > "${DEB_TARGETS[BUILD]}/$PROGRAM_NAME"
 

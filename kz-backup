@@ -180,10 +180,13 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 
 
 function collect_user_setup {
-    local tgtdir=$HOME/kz-data
+    local tgtdir=$HOME/Instellingen
+
+    # Old folder, lagacy.
+    rm --force --recursive "$HOME"/kz-data
 
     mkdir --parents "$tgtdir" |& $LOGCMD
-    # Populate kz-data with installed apps and user data.
+    # Populate ~/Instellingen with installed apps and user data.
     # Part of the user data is restored with kz-setup and setup file.
     collect_user_setup_installed_apps
     collect_user_setup_desktop_background

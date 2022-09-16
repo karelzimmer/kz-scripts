@@ -123,7 +123,6 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 
 function process_input {
     install_scriptspackage
-    checklist_user_setup
 }
 
 
@@ -210,18 +209,6 @@ Mogelijke oorzaak:
 }
 
 
-function checklist_user_setup {
-    local srcdir=/usr/share/doc/kz
-    local tgtdir=$HOME/kz-data
-
-    mkdir --parents "$tgtdir" |& $LOGCMD
-
-    # Populate kz-data with checklist installation.
-    cp  $srcdir/Checklist*"$(lsb_release --id --short)"*    \
-        "$tgtdir"                                           |& $LOGCMD || true
-}
-
-
 function term_script {
     TITLE='Gereed'
     TEXT="Pakket kz is succesvol geïnstalleerd.
@@ -229,17 +216,15 @@ function term_script {
 Volg nu de stappen zoals beschreven
 in de Checklist installatie.
 
-Checklist installatie is te vinden:
-- in de Persoonlijke map / kz-data
-- in de map /usr/share/doc/kz
-- op de site https://karelzimmer.nl,
-  onder Linux
+Checklist installatie is te vinden
+op de site https://karelzimmer.nl,
+onder Linux.
 
 Typ 'exit' om dit venster te sluiten."
     TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     "$TITLE"        \
                         --infobox   "$TEXT"         \
-                        18 41
+                        16 41
     if developer check; then
         info 'Ontwikkelaar-acties uitvoeren.'
         check_dependencies
