@@ -159,8 +159,8 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     fi
 
     check_on_ac_power
-    TITLE='Gebruikersdata veiligstellen'
-    TEXT='Gebruikersdata verzamelen'
+    TITLE='Gebruikersinstellingen veiligstellen'
+    TEXT='Gebruikersinstellingen verzamelen'
     if $OPTION_GUI; then
         collect_user_setup              |
         zenity  --progress              \
