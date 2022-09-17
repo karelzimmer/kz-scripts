@@ -26,14 +26,38 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 sudo snap install telegram-desktop
 #2 sudo snap remove telegram-desktop
 
-#1 virtualbox (virtualisatie, comment. Secure boot)
-## Als installatie hangt, heeft de computer UEFI Secure Boot aan staan.
+#1 virtualbox (virtualisatie, check Secure Boot)
+
+## Als installatie hangt, heeft de computer UEFI Secure Boot, zie de log:
+## --------------------------------------------------------------------------------
+## Configuring Secure Boot
+## -----------------------
+##
+## Your system has UEFI Secure Boot enabled.
+##
+## UEFI Secure Boot requires additional configuration to work with third-party
+## drivers.
+##
+## The system will assist you in configuring UEFI Secure Boot. To permit the use of
+## third-party drivers, a new Machine-Owner Key (MOK) has been generated. This key
+## now needs to be enrolled in your system's firmware.
+##
+## To ensure that this change is being made by you as an authorized user, and not
+## by an attacker, you must choose a password now and then confirm the change after
+## reboot using the same password, in both the "Enroll MOK" and "Change Secure Boot
+## state" menus that will be presented to you when this system reboots.
+##
+## If you proceed but do not confirm the password upon reboot, Ubuntu will still be
+## able to boot on your system but any hardware that requires third-party drivers
+## to work correctly may not be usable.
+## --------------------------------------------------------------------------------
 ## Te nemen stappen:
 ## 1. Reboot.
-## 2. Voer kz-update uit.
-## 3. Geef Secure Boot-wachtwoord en onthou deze.
+## 2. Voer kz-update uit (die doet o.a. een repair).
+## 3. Geef een Secure Boot-wachtwoord en onthoud deze.
 ## 4. Reboot.
-## 5. Enroll MOK en geef het Secure Boot-wachtwoord uit stap 3.
+## 5. Enroll MOK en geef het Secure Boot-wachtwoord op uit stap 3.
+
 ## Images staan in ~/VirtualBox VMs/.
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget --no-verbose --output-document=- 'https://www.virtualbox.org/download/oracle_vbox_2016.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/oracle_vbox_2016.gpg
