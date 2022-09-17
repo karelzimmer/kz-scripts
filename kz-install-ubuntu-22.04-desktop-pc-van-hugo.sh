@@ -26,7 +26,14 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 sudo snap install telegram-desktop
 #2 sudo snap remove telegram-desktop
 
-#1 virtualbox (virtualisatie)
+#1 virtualbox (virtualisatie, comment. Secure boot)
+## Als installatie hangt, heeft de computer UEFI Secure Boot aan staan.
+## Te nemen stappen:
+## 1. Reboot.
+## 2. Voer kz-update uit.
+## 3. Geef Secure Boot-wachtwoord en onthou deze.
+## 4. Reboot.
+## 5. Enroll MOK en geef het Secure Boot-wachtwoord uit stap 3.
 ## Images staan in ~/VirtualBox VMs/.
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 wget --no-verbose --output-document=- 'https://www.virtualbox.org/download/oracle_vbox_2016.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/oracle_vbox_2016.gpg
