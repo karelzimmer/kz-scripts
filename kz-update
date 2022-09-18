@@ -58,6 +58,9 @@ def perform_update():
     command = 'apt-get autoremove --yes'
     perform_command(command)
 
+    command = 'apt-get autoclean --yes'
+    perform_command(command)
+
 
 def perform_command(command):
     print(f'Uitvoeren {command}...')
