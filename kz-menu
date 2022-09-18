@@ -537,7 +537,7 @@ function manual_actions {
         TEXT="Gebruikers toevoegen:
 Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op de \
 Super-toets[1],
-typ 'gebr' en klik achter Instellingen op Gebruikers.
+    typ 'gebr' en klik achter Instellingen op Gebruikers.
 Klik op Ontgrendelen.
 Klik op Gebruiker toevoegen.
 
@@ -550,7 +550,7 @@ Klik op Gebruiker toevoegen.
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
             TEXT="Gebruikersfoto instellen:
 Wijzig de gebruikersfoto via een druk op de Super-toets[1],
-typ 'gebr' en klik achter Instellingen op Gebruikers.
+    typ 'gebr' en klik achter Instellingen op Gebruikers.
 Klik op Ontgrendelen.
 Klik op de afbeelding voor de gebruiker.
 Klik op Selecteer een bestand.
