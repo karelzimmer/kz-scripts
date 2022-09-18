@@ -615,8 +615,7 @@ $action is voltooid.
 De computer gaat nu herstarten om het installeren van updates en apps af te \
 ronden."
                 if ! $OPTION_GUI; then
-                    read -rp '
-Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
+                    wait_for_enter
                 fi
                 systemctl reboot
             else

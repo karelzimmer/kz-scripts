@@ -608,8 +608,7 @@ $action is voltooid.
 
 De computer gaat nu afmelden om het instellen van apps af te ronden."
                 if ! $OPTION_GUI; then
-                    read -rp '
-Druk op de Enter-toets voor afmelden [Enter]: '
+                    wait_for_enter
                 fi
                 gnome-session-quit --logout --no-prompt
                 exit $SUCCESS

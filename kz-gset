@@ -277,7 +277,7 @@ function capture_gui_changes {
     CONFIG_A=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
     save_configuration_database A "$CONFIG_A"
     info 'Voer nu de wijziging uit in de grafische werkomgeving.'
-    read -rp 'Druk op de Enter-toets wanneer gereed [Enter]: '
+    wait_for_enter
     CONFIG_B=$(mktemp -t "$PROGRAM_NAME-B-XXXXXXXXXX.lst")
     save_configuration_database B "$CONFIG_B"
     report_database_changes "$CONFIG_A" "$CONFIG_B"

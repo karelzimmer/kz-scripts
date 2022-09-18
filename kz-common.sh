@@ -106,8 +106,7 @@ De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
         if ! $OPTION_GUI; then
-            read -rp '
-Druk op de Enter-toets om door te gaan [Enter]: '
+            wait_for_enter
         fi
     fi
 
@@ -497,6 +496,12 @@ function signal_exit_log {
         less "$LESS_OPTIONS" "$temp_log"
     fi
     rm "$temp_log"
+}
+
+
+function wait_for_enter {
+    read -rp '
+Druk op de Enter-toets om door te gaan [Enter]: '
 }
 
 

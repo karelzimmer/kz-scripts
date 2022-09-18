@@ -221,8 +221,7 @@ function process_menu1_tui {
         done
         process_menu1_choice
         if $EXECUTE_COMMAND; then
-            read -rp '
-Druk op de Enter-toets voor het menu [Enter]: '
+            wait_for_enter
         fi
         EXECUTE_COMMAND=false
     done
@@ -281,8 +280,8 @@ Komt globaal neer op:
 4. Installeer Linux.'
     info "$TEXT"
     if ! $OPTION_GUI; then
-        read -rp '
-Druk op de Enter-toets voor het menu [Enter]: '
+            wait_for_enter
+
     fi
 }
 
@@ -393,8 +392,7 @@ function process_menu2_tui {
             break
         fi
         if $EXECUTE_COMMAND; then
-            read -rp '
-Druk op de Enter-toets voor het menu [Enter]: '
+            wait_for_enter
         fi
         EXECUTE_COMMAND=false
     done
@@ -529,8 +527,7 @@ function execute_command {
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
     log "$command: rc=$cmd_rc"
     if ! $OPTION_GUI; then
-        read -rp "
-Druk op de Enter-toets om verder te gaan [Enter]: "
+        wait_for_enter
     fi
 }
 
@@ -547,29 +544,29 @@ Klik op Gebruiker toevoegen.
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$TEXT"
         if ! $OPTION_GUI; then
-            read -rp "
-Druk op de Enter-toets wanneer eventuele extra gebruikers zijn toegevoegd \
-[Enter]: "
+            wait_for_enter
         fi
     elif [[ $TITLE = 'Gebruikersfoto instellen' ]]; then
-        if [[ -f $HOME/kz-data/Gebruikersfoto ]]; then
+        if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
             TEXT="Gebruikersfoto instellen:
 Wijzig de gebruikersfoto via een druk op de Super-toets[1],
 typ 'gebr' en klik achter Instellingen op Gebruikers.
 Klik op Ontgrendelen.
 Klik op de afbeelding voor de gebruiker.
 Klik op Selecteer een bestand.
-Selecteer Gebruikersfoto in Persoonlijke map / kz-data.
+Selecteer Gebruikersfoto in Persoonlijke map / Instellingen.
 Sluit het scherm Gebruikers
 
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
             info "$TEXT"
-            if ! $OPTION_GUI; then
-                read -rp "
-Druk op de Enter-toets wanneer instellen gebruikersfoto is uitgevoerd \
-[Enter]: "
-            fi
+        else
+            TEXT="Gebruikersfoto instellen:
+Er is bij het maken van de back-up geen gebruikersfoto gevonden."
+            info "$TEXT"
         fi
+        if ! $OPTION_GUI; then
+            wait_for_enter
+            fi
     fi
 }
 

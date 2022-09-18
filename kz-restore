@@ -128,8 +128,7 @@ function process_input {
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
             warning "$TEXT"
             if ! $OPTION_GUI; then
-                read -rp '
-Druk op de Enter-toets wanneer het USB-medium is aangekoppeld [Enter]: '
+                wait_for_enter
             fi
             MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $MEDIUM ]]; then
