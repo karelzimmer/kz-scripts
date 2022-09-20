@@ -5,6 +5,10 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
+#1 bleachbit (overbodige bestanden verwijderen)
+sudo apt-get install --yes bleachbit
+#2 sudo apt-get remove --yes bleachbit
+
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
 #2 sudo apt-get remove --yes calibre
