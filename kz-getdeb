@@ -227,6 +227,7 @@ Typ 'exit' om dit venster te sluiten."
                         16 41
     if developer check; then
         info 'Ontwikkelaar-acties uitvoeren.'
+        info 'Output naar systemd journal m.u.v. gitstat'
         check_dependencies
         download_website
         pull_repos
