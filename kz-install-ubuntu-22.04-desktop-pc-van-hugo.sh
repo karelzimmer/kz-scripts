@@ -80,6 +80,10 @@ sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 #2 sudo rm --force /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
 #2 sudo apt-get update
 
+#1 whatsapp (privéberichtenapp)
+sudo snap install whatsapp-for-linux
+#2 sudo snap remove whatsapp-for-linux
+
 #1 youtube-downloader (download videos)
 sudo apt-get install --yes youtubedl-gui
 #2 sudo apt-get remove --yes youtubedl-gui
