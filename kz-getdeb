@@ -228,8 +228,8 @@ Typ 'exit' om dit venster te sluiten."
     if developer check; then
         info 'Ontwikkelaar-acties uitvoeren.'
         check_dependencies
-        pull_repos
         download_website
+        pull_repos
         info 'Status repos (gitstat)...'
         /home/"$USER"/bin/gitstat
     fi
@@ -263,22 +263,6 @@ function check_dependencies {
 }
 
 
-function pull_repos {
-    local bin_repo=/home/"$USER"/bin
-
-    info 'Pull repos (gitpull)...'
-    git config --global pull.ff only |& $LOGCMD
-    git config --global credential.helper store |& $LOGCMD
-    if ! git    clone                                   \
-                https://github.com/karelzimmer/bin.git  \
-                "$bin_repo"                             |& $LOGCMD; then
-        cd "$bin_repo"
-        git pull |& $LOGCMD
-    fi
-    /home/"$USER"/bin/gitpull |& $LOGCMD
-}
-
-
 function download_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
@@ -306,6 +290,22 @@ function download_website {
         info 'Controleer de log...!'
         return  $ERROR
     fi
+}
+
+
+function pull_repos {
+    local bin_repo=/home/"$USER"/bin
+
+    info 'Pull repos (gitpull)...'
+    git config --global pull.ff only |& $LOGCMD
+    git config --global credential.helper store |& $LOGCMD
+    if ! git    clone                                   \
+                https://github.com/karelzimmer/bin.git  \
+                "$bin_repo"                             |& $LOGCMD; then
+        cd "$bin_repo"
+        git pull |& $LOGCMD
+    fi
+    /home/"$USER"/bin/gitpull |& $LOGCMD
 }
 
 
