@@ -84,7 +84,6 @@ def check_on_ac_power():
     """
     Deze functie controleert de stroomvoorziening.
     """
-    on_battery = 0
     returned_value = ''
 
     returned_value = subprocess.run('on_ac_power', shell=True)
