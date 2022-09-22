@@ -189,7 +189,7 @@ function collect_user_settings {
     collect_user_settings_favorite_apps
 
     # Old folder/file, lagacy.
-    rm --force --recursive "$HOME"/kz-data "$HOME"/Instellingen/Apps
+    rm --force --recursive "$HOME"/kz-data/ "$HOME"/Instellingen/Apps
 }
 
 
