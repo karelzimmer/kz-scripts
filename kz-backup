@@ -161,7 +161,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     TITLE='Gebruikersinstellingen veiligstellen'
     TEXT='Gebruikersinstellingen verzamelen'
     if $OPTION_GUI; then
-        collect_user_setup              |
+        collect_user_settings              |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -172,29 +172,28 @@ Koppel media af via Bestanden, en start daarna opnieuw."
                 --text      "$TEXT"     2> >($LOGCMD)
     else
         info "$TEXT..."
-        collect_user_setup
+        collect_user_settings
     fi
     create_backup
 }
 
 
-function collect_user_setup {
+function collect_user_settings {
     local tgtdir=$HOME/Instellingen
 
     mkdir --parents "$tgtdir" |& $LOGCMD
-    # Populate ~/Instellingen with installed apps and user data.
-    # Part of the user data is restored with kz-setup and setup file.
-    collect_user_setup_installed_apps
-    collect_user_setup_desktop_background
-    collect_user_setup_user_photo
-    collect_user_setup_favorite_apps
+    # Populate ~/Instellingen with user settings.
+    # Part of these user settings are restored with kz-setup and setup file.
+    collect_user_settings_desktop_background
+    collect_user_settings_user_photo
+    collect_user_settings_favorite_apps
 
-    # Old folder, lagacy.
-    rm --force --recursive "$HOME"/kz-data
+    # Old folder/file, lagacy.
+    rm --force --recursive "$HOME"/kz-data "$HOME"/kz-data/Apps
 }
 
 
-function collect_user_setup_installed_apps {
+function collect_user_settings_installed_apps {
     local file=$tgtdir/Apps
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
@@ -239,7 +238,7 @@ installatie van een pakket, met
 }
 
 
-function collect_user_setup_desktop_background {
+function collect_user_settings_desktop_background {
     local file=$tgtdir/Achtergrond
     local picture_file=''
 
@@ -253,7 +252,7 @@ function collect_user_setup_desktop_background {
 }
 
 
-function collect_user_setup_user_photo {
+function collect_user_settings_user_photo {
     local srcdir=/var/lib/AccountsService/icons
     local file=$tgtdir/Gebruikersfoto
 
@@ -261,7 +260,7 @@ function collect_user_setup_user_photo {
 }
 
 
-function collect_user_setup_favorite_apps {
+function collect_user_settings_favorite_apps {
     local file=$tgtdir/Favorieten
 
     gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
