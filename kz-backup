@@ -158,10 +158,26 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     fi
 
     check_on_ac_power
+    TITLE='Geïnstalleerde apps veiligstellen'
+    TEXT='Geïnstalleerde apps verzamelen'
+    if $OPTION_GUI; then
+        collect_installed_apps          |
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$TITLE"    \
+                --text      "$TEXT"     2> >($LOGCMD)
+    else
+        info "$TEXT..."
+        collect_installed_apps
+    fi
     TITLE='Gebruikersinstellingen veiligstellen'
     TEXT='Gebruikersinstellingen verzamelen'
     if $OPTION_GUI; then
-        collect_user_settings              |
+        collect_user_settings           |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -178,23 +194,8 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 }
 
 
-function collect_user_settings {
-    local tgtdir=$HOME/Instellingen
-
-    mkdir --parents "$tgtdir" |& $LOGCMD
-    # Populate ~/Instellingen with user settings.
-    # Part of these user settings are restored with kz-setup and setup file.
-    collect_user_settings_desktop_background
-    collect_user_settings_user_photo
-    collect_user_settings_favorite_apps
-
-    # Old folder/file, lagacy.
-    rm --force --recursive "$HOME"/kz-data/ "$HOME"/Instellingen/Apps
-}
-
-
-function collect_user_settings_installed_apps {
-    local file=$tgtdir/Apps
+function collect_installed_apps {
+    local file=$TARGET_MEDIUM/Apps-$HOSTNAME
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
       'sudo apt --install <pakket|bestand>', of met kz install:"
@@ -235,6 +236,22 @@ installatie van een pakket, met
         true
     fi
     printf '%b\n' "$DASHES" >> "$file"
+    chmod 755 "$file"
+}
+
+
+function collect_user_settings {
+    local tgtdir=$HOME/Instellingen
+
+    mkdir --parents "$tgtdir" |& $LOGCMD
+    # Populate ~/Instellingen with user settings.
+    # Part of these user settings are restored with kz-setup and setup file.
+    collect_user_settings_desktop_background
+    collect_user_settings_user_photo
+    collect_user_settings_favorite_apps
+
+    # Old folder/file, lagacy.
+    rm --force --recursive "$HOME"/kz-data/ "$HOME"/Instellingen/Apps
 }
 
 
