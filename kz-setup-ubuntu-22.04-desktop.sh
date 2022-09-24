@@ -43,7 +43,7 @@ kz-gset --addfavaft=Zoom
 
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder='KZ Scripts'
-# Achtergrond vastgelegd door kz-backup.
+## Achtergrond vastgelegd door kz-backup.
 if [[ -f $HOME/Instellingen/Achtergrond ]]; then gsettings set org.gnome.desktop.background picture-uri "file://$HOME/Instellingen/Achtergrond"; fi
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -60,7 +60,7 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-# Favorieten vastgelegd door kz-backup.
+## Favorieten vastgelegd door kz-backup.
 if [[ -f $HOME/Instellingen/Favorieten ]]; then gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/Instellingen/Favorieten)"; fi
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
