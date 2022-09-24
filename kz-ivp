@@ -96,7 +96,7 @@ function process_input {
             continue
         fi
         case $script in
-            README.md)
+            README.md|LICENSE)
                 continue
                 ;;
         esac
