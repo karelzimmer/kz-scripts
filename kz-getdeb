@@ -248,6 +248,7 @@ function check_dependencies {
             fakeroot            \
             ghostscript         \
             git                 \
+            jq                  \
             lftp                \
             pycodestyle         \
             python3-pycodestyle \
