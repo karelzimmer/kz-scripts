@@ -226,7 +226,7 @@ Typ 'exit' om dit venster te sluiten."
                         --infobox   "$TEXT"         \
                         16 41
     if developer check; then
-        info '*Ontwikkelaar-acties uitvoeren*'
+        info '* ONTWIKKELAAR *'
         check_dependencies
         download_website
         pull_repos

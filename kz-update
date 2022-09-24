@@ -38,7 +38,7 @@ command = ''
 ###############################################################################
 
 def perform_repair():
-    print('*Repair*')
+    print('* REPAIR *')
     command = 'dpkg --configure --pending'
     perform_command(command)
 
@@ -50,7 +50,7 @@ def perform_repair():
 
 
 def perform_update():
-    print('*Update*')
+    print('* UPDATE *')
     command = 'apt-get update'
     perform_command(command)
 
@@ -86,8 +86,8 @@ def snap_refresh():
 def check_reboot():
     try:
         with open('/var/run/reboot-required') as fh:
-            print('\nDe computer moet herstarten om het installeren van '
-                  'updates af te ronden.')
+            print('\n* De computer moet herstarten om het installeren van '
+                  'updates af te ronden *')
     except FileNotFoundError:
         pass
     except Exception as ex:
