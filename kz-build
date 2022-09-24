@@ -261,7 +261,7 @@ function build_deb {
 
     # Zorg dat de rechten goed staan voor de rsync.
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/*
-    chmod 'a-x' -- "$SCRIPTS_REPO"/*.*
+    chmod 'a-x' -- "$SCRIPTS_REPO"/*.* "$SCRIPTS_REPO"/LICENSE
 
     # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
     for dir in "${DEB_TARGETS[@]}"; do
