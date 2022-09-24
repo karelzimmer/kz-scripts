@@ -38,6 +38,7 @@ command = ''
 ###############################################################################
 
 def perform_repair():
+    print('*Repair*')
     command = 'dpkg --configure --pending'
     perform_command(command)
 
@@ -49,6 +50,7 @@ def perform_repair():
 
 
 def perform_update():
+    print('*Update*')
     command = 'apt-get update'
     perform_command(command)
 
