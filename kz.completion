@@ -5,6 +5,6 @@
 # Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 ###############################################################################
 
-dashoptions='backup build ckname deploy genpwd getdeb gset install ivp menu nas
-    restore setup update'
+dashoptions='backup build ckname deploy genpwd getdeb gset install ivp menu
+    restore setup update wifi'
 complete -o default -W "$dashoptions" kz
