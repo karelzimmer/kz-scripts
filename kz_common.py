@@ -99,7 +99,8 @@ def check_sudo():
     subprocess.run('sudo true', shell=True, check=True)
 
 
-def process_common_options(display_name, program_desc):
+def process_common_options(program_name, program_desc, program_year,
+                           display_name):
     """
     Deze functie verwerkt de algemene opties.
     """
@@ -117,7 +118,7 @@ def process_common_options(display_name, program_desc):
         process_option_usage(display_name)
         sys.exit(0)
     elif args.version:
-        process_option_version(display_name, program_year)
+        process_option_version(program_name, program_year)
         sys.exit(0)
 
 
@@ -130,7 +131,7 @@ def process_option_usage(display_name):
 Typ '{display_name} --help' voor meer informatie.""")
 
 
-def process_option_version(display_name, program_year):
+def process_option_version(program_name, program_year):
     """
     Deze functie toont versie-informatie, auteur, en auteursrecht.
     """
@@ -140,7 +141,7 @@ def process_option_version(display_name, program_year):
     this_year = now.year
 
     try:
-        with open('/usr/local/etc/kz-build') as fh:
+        with open('/usr/local/etc/kz-build-id') as fh:
             build = fh.read()
     except FileNotFoundError:
         build = 'unknown'
@@ -152,7 +153,7 @@ def process_option_version(display_name, program_year):
     else:
         copyright_years = str(program_year) + '-' + str(this_year)
 
-    print(f"""{display_name} versie 365 (kz build {build})
+    print(f"""{program_name} (kz) 365 ({build})
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

@@ -304,7 +304,10 @@ function process_option_version {
     local copyright_years=1970
     local this_year=1970
 
-    build=$(cat /usr/local/etc/kz-build 2> /dev/null || printf '%s' 'unknown')
+    build=$(
+        cat /usr/local/etc/kz-build-id 2> /dev/null ||
+        printf '%s' 'unknown'
+        )
 
     this_year=$(date +%Y)
     if [[ $PROGRAM_YEAR -eq $this_year ]]; then
@@ -313,7 +316,7 @@ function process_option_version {
         copyright_years=$PROGRAM_YEAR-$this_year
     fi
 
-    info "$DISPLAY_NAME versie 365 (kz build $build)
+    info "$PROGRAM_NAME (kz) 365 ($build)
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>.
 

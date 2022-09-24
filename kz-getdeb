@@ -13,8 +13,8 @@
 
 readonly PROGRAM_NAME='kz-getdeb'
 readonly PROGRAM_DESC='Pakket kz installeren'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly PROGRAM_YEAR=2016
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH

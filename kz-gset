@@ -13,8 +13,8 @@
 
 readonly PROGRAM_NAME='kz-gset'
 readonly PROGRAM_DESC='GUI wijzigen'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly PROGRAM_YEAR=2015
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH

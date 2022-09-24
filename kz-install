@@ -13,8 +13,8 @@
 
 readonly PROGRAM_NAME='kz-install'
 readonly PROGRAM_DESC='Apps installeren'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly PROGRAM_YEAR=2009
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
 readonly PROGRAM_PATH
