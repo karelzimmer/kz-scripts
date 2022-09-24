@@ -193,6 +193,7 @@ function error {
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
+    log "$@" --priority=err
 }
 
 
@@ -211,6 +212,7 @@ function info {
     else
         printf '%b\n' "$@"
     fi
+    log "$@" --priority=info
 }
 
 
@@ -523,6 +525,7 @@ function warning {
     else
         printf "${YELLOW}%b\n${NORMAL}" "$@" >&2
     fi
+    log "$@" --priority=warn
 }
 
 true

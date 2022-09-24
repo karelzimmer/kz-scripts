@@ -199,7 +199,7 @@ function process_menu1_tui {
                     "${MENU1_ACTIONS[$action]}" \
                     "${MENU1_COMMANDS[$action]}"
         done
-        info
+        info ''
 
         while true; do
             read -rp "Voer uit nummer [1-$MENU1_LINES]: "
@@ -367,7 +367,7 @@ function process_menu2_tui {
                     "${MENU2_ACTIONS[$action]}" \
                     "${MENU2_COMMANDS[$action]}"
         done
-        info
+        info ''
 
         while true; do
             read -rp "Voer uit nummer [1-$MENU2_LINES]: "
