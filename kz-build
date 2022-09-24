@@ -147,6 +147,7 @@ function build_uploads {
 
     # Vul dist/ met app/
     cd "$UPLOADS_APPDIR"
+    mkdir --parents "$UPLOADS_DISTDIR"
     while read -r file; do
         # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
         if ! diff "$file" "$UPLOADS_DISTDIR/$file" &> /dev/null; then
@@ -161,6 +162,7 @@ function build_uploads {
 
     # Vul dist/ met kz-docs.
     cd "${UPLOADS_SOURCES[DOCS]}"
+    mkdir --parents "${UPLOADS_TARGETS[DOCS]}"
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
@@ -179,6 +181,7 @@ function build_uploads {
 
     # Vul dist/ met kz-scripts.
     cd "${UPLOADS_SOURCES[SCRIPTS]}"
+    mkdir --parents "${UPLOADS_TARGETS[SCRIPTS]}" "${UPLOADS_TARGETS[PDFS]}"
     for file in kz*; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
