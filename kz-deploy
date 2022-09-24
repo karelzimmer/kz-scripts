@@ -157,7 +157,7 @@ function upload_website {
 
     info 'Upload website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
-        read -rsp "FTP-wachtwoord voor $ftp_host: "
+        read -rsp "Wachtwoord voor 'ftp://$ftp_host': "
         info "$REPLY" > "$ftp_login"
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
