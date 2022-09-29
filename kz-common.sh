@@ -14,7 +14,6 @@
 
 readonly MODULE_NAME='kz-common.sh'
 readonly MODULE_DESC='Algemene module voor shell scripts'
-readonly MODULE_YEAR=2009
 
 readonly SUCCESS=0
 readonly ERROR=1
@@ -304,27 +303,16 @@ Typ '$DISPLAY_NAME --help' voor meer informatie."
 
 function process_option_version {
     local build=''
-    local copyright_years=1970
-    local this_year=1970
 
     build=$(
         cat /usr/local/etc/kz-build-id 2> /dev/null ||
         printf '%s' 'unknown'
         )
 
-    this_year=$(date +%Y)
-    if [[ $PROGRAM_YEAR -eq $this_year ]]; then
-        copyright_years=$this_year
-    else
-        copyright_years=$PROGRAM_YEAR-$this_year
-    fi
-
     info "$PROGRAM_NAME (kz) 365 ($build)
 
-Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-
-Auteursrecht © $copyright_years Karel Zimmer.
-GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>."
+Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd
+onder CC0 <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 }
 
 function reset_terminal_attributes {

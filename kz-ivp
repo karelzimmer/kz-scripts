@@ -14,7 +14,6 @@
 
 readonly PROGRAM_NAME='kz-ivp'
 readonly PROGRAM_DESC='Scripts controleren'
-readonly PROGRAM_YEAR=2015
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
@@ -121,7 +120,6 @@ function process_input {
             *)
                 check_tags
                 check_record_length
-                check_program_year
                 check_code
                 ;;
         esac
@@ -202,20 +200,6 @@ $(
     printf '%s' "$wrong_record" |
                 nl --number-width=8 --number-separator='' --body-numbering=n
 )
-"
-        MAXRC=$ERROR
-    fi
-}
-
-
-function check_program_year {
-    if ! grep   --quiet                     \
-                --regexp='PROGRAM_YEAR='    \
-                --regexp='program_year = '  \
-                "$script"; then
-        error "
-In $script:
-    Vrijgavejaar (PROGRAM_YEAR/program_year) ontbreekt.
 "
         MAXRC=$ERROR
     fi

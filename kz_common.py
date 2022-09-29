@@ -11,7 +11,6 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 
 import argparse
-import datetime
 import subprocess
 import sys
 import time
@@ -23,14 +22,11 @@ import time
 
 module_name = 'kz_common.py'
 module_desc = 'Algemene module voor Python scripts'
-module_year = 2021
 
 
 ###############################################################################
 # Common global variables
 ###############################################################################
-
-program_year = 1970
 
 
 ###############################################################################
@@ -100,8 +96,7 @@ def check_sudo():
     subprocess.run('sudo true', shell=True, check=True)
 
 
-def process_common_options(program_name, program_desc, program_year,
-                           display_name):
+def process_common_options(program_name, program_desc, display_name):
     """
     Deze functie verwerkt de algemene opties.
     """
@@ -119,7 +114,7 @@ def process_common_options(program_name, program_desc, program_year,
         process_option_usage(display_name)
         sys.exit(0)
     elif args.version:
-        process_option_version(program_name, program_year)
+        process_option_version(program_name)
         sys.exit(0)
 
 
@@ -132,14 +127,11 @@ def process_option_usage(display_name):
 Typ '{display_name} --help' voor meer informatie.""")
 
 
-def process_option_version(program_name, program_year):
+def process_option_version(program_name):
     """
     Deze functie toont versie-informatie, auteur, en auteursrecht.
     """
     build = ''
-    copyright_years = '1970'
-    now = datetime.datetime.now()
-    this_year = now.year
 
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
@@ -149,17 +141,10 @@ def process_option_version(program_name, program_year):
     except OSError as ex:
         print(ex)
 
-    if program_year == this_year:
-        copyright_years = program_year
-    else:
-        copyright_years = str(program_year) + '-' + str(this_year)
-
     print(f"""{program_name} (kz) 365 ({build})
 
-Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-
-Auteursrecht © {copyright_years} Karel Zimmer.
-GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.""")
+Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd
+onder CC0 <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.""")
 
 
 ###############################################################################

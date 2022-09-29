@@ -14,7 +14,6 @@
 
 readonly PROGRAM_NAME='kz-build'
 readonly PROGRAM_DESC='Pakket kz bouwen'
-readonly PROGRAM_YEAR=2021
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")

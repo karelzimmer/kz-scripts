@@ -21,7 +21,6 @@ import kz_common
 
 program_name = 'kz-genpwd'
 program_desc = 'Wachtwoord genereren'
-program_year = 2021
 display_name = program_name.replace('kz-', 'kz ')
 
 
@@ -52,7 +51,6 @@ def generate_password():
 # Script
 ###############################################################################
 
-kz_common.process_common_options(program_name, program_desc, program_year,
-                                 display_name)
+kz_common.process_common_options(program_name, program_desc, display_name)
 
 generate_password()

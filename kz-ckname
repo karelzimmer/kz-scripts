@@ -14,7 +14,6 @@
 
 readonly PROGRAM_NAME='kz-ckname'
 readonly PROGRAM_DESC='Bestandsnamen controleren'
-readonly PROGRAM_YEAR=2012
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")

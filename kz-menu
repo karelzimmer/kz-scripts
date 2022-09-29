@@ -14,7 +14,6 @@
 
 readonly PROGRAM_NAME='kz-menu'
 readonly PROGRAM_DESC='Installatiemenu'
-readonly PROGRAM_YEAR=2015
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 PROGRAM_PATH=$(realpath "$(dirname  "$0")")
