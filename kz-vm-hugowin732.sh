@@ -2,7 +2,8 @@
 ###############################################################################
 # Start VM hugowin732.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 readonly TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'

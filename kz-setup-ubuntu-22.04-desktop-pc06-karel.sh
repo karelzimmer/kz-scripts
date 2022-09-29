@@ -2,7 +2,8 @@
 ###############################################################################
 # Instelbestand voor Ubuntu 22.04 LTS desktop op pc06 voor karel.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 #1 cockpit (browsergebaseerd beheer)

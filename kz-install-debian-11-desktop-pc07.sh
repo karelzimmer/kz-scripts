@@ -2,7 +2,8 @@
 ###############################################################################
 # Installatiebestand voor Debian 11 LTS desktop op pc07.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 #1-deact-eth0 (activeren eth0 uit start-up halen)

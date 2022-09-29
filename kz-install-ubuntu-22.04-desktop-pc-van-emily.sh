@@ -2,7 +2,8 @@
 ###############################################################################
 # Installatiebestand voor Ubuntu 22.04 desktop LTS op pc-van-emily.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 #1-cups-backend-bjnp (printerbackend voor Canon BJNP-protocol printerdriver)

@@ -2,7 +2,8 @@
 ###############################################################################
 # Instelbestand voor Debian 11 LTS desktop op pc07 voor karel.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 #1-gnome (bureaubladomgeving)

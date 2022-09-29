@@ -2,7 +2,8 @@
 ###############################################################################
 # Installatiebestand voor Debian 11 LTS desktop.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 #1 updates (bijgewerkte apps en systeembestanden)
