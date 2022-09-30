@@ -2,7 +2,7 @@
 ###############################################################################
 # Instelbestand voor Ubuntu 22.04 LTS desktop op pc01 voor monique.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Publiek Domein Verklaring
 # <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 

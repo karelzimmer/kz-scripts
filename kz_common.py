@@ -6,7 +6,7 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 # Algemene module voor Python scripts.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd onder CC0
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Publiek Domein Verklaring
 # <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
