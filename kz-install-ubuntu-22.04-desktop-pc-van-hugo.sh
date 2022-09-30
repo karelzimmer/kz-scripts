@@ -2,8 +2,8 @@
 ###############################################################################
 # Installatiebestand voor Ubuntu 22.04 LTS desktop op pc-van-hugo.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Publiek Domein Verklaring
-# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
+# Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 #1 bleachbit (overbodige bestanden verwijderen)

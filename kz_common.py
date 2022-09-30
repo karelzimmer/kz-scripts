@@ -6,8 +6,8 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 # Algemene module voor Python scripts.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Publiek Domein Verklaring
-# <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
+# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
+# Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
 ###############################################################################
 
 import argparse
