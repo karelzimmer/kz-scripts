@@ -144,7 +144,8 @@ def process_option_version(program_name):
     print(f"""{program_name} (kz) 365 ({build})
 
 Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
-Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.""")
+Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.\
+""")
 
 
 ###############################################################################
