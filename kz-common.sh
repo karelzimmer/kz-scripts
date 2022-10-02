@@ -311,8 +311,8 @@ function process_option_version {
 
     info "$PROGRAM_NAME (kz) 365 ($build)
 
-Geschreven door Karel Zimmer <info@karelzimmer.nl> en gelicentieerd
-onder CC0 <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
+Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
+Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 }
 
 function reset_terminal_attributes {
