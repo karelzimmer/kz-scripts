@@ -158,22 +158,6 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     fi
 
     check_on_ac_power
-    TITLE='Geïnstalleerde apps veiligstellen'
-    TEXT='Geïnstalleerde apps verzamelen'
-    if $OPTION_GUI; then
-        collect_installed_apps          |
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$TITLE"    \
-                --text      "$TEXT"     2> >($LOGCMD)
-    else
-        info "$TEXT..."
-        collect_installed_apps
-    fi
     TITLE='Gebruikersinstellingen veiligstellen'
     TEXT='Gebruikersinstellingen verzamelen'
     if $OPTION_GUI; then
@@ -194,8 +178,45 @@ Koppel media af via Bestanden, en start daarna opnieuw."
 }
 
 
-function collect_installed_apps {
-    local file=$TARGET_MEDIUM/Apps-$HOSTNAME
+function collect_user_settings {
+    local tgtdir=$HOME/Instellingen
+
+    mkdir --parents "$tgtdir" |& $LOGCMD
+    # Populate ~/Instellingen with user settings.
+    # Part of these user settings are restored with kz-setup and setup file.
+    collect_user_settings_desktop_background
+    collect_user_settings_favorite_apps
+    collect_user_settings_installed_apps
+    collect_user_settings_user_photo
+
+    # Old folder, lagacy.
+    rm --force --recursive "$HOME"/kz-data/
+}
+
+
+function collect_user_settings_desktop_background {
+    local file=$tgtdir/Achtergrond
+    local picture_file=''
+
+    picture_file=$(
+        gsettings get org.gnome.desktop.background picture-uri  |
+        sed --expression='s|%20| |g'                            |
+        sed --expression="s/'//g"                               |
+        sed --expression='s|file://||'                          || true
+        )
+    cp --update "$picture_file" "$file" |& $LOGCMD || true
+}
+
+
+function collect_user_settings_favorite_apps {
+    local file=$tgtdir/Favorieten
+
+    gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
+}
+
+
+function collect_user_settings_installed_apps {
+    local file=$tgtdir/Apps
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
       'sudo apt --install <pakket|bestand>', of met kz install:"
@@ -236,36 +257,6 @@ installatie van een pakket, met
         true
     fi
     printf '%b\n' "$DASHES" >> "$file"
-    chmod 777 "$file" |& $LOGCMD || true
-}
-
-
-function collect_user_settings {
-    local tgtdir=$HOME/Instellingen
-
-    mkdir --parents "$tgtdir" |& $LOGCMD
-    # Populate ~/Instellingen with user settings.
-    # Part of these user settings are restored with kz-setup and setup file.
-    collect_user_settings_desktop_background
-    collect_user_settings_user_photo
-    collect_user_settings_favorite_apps
-
-    # Old folder/file, lagacy.
-    rm --force --recursive "$HOME"/kz-data/ "$HOME"/Instellingen/Apps
-}
-
-
-function collect_user_settings_desktop_background {
-    local file=$tgtdir/Achtergrond
-    local picture_file=''
-
-    picture_file=$(
-        gsettings get org.gnome.desktop.background picture-uri  |
-        sed --expression='s|%20| |g'                            |
-        sed --expression="s/'//g"                               |
-        sed --expression='s|file://||'                          || true
-        )
-    cp --update "$picture_file" "$file" |& $LOGCMD || true
 }
 
 
@@ -274,13 +265,6 @@ function collect_user_settings_user_photo {
     local file=$tgtdir/Gebruikersfoto
 
     cp --update $srcdir/"$USER" "$file" |& $LOGCMD || true
-}
-
-
-function collect_user_settings_favorite_apps {
-    local file=$tgtdir/Favorieten
-
-    gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
 }
 
 
