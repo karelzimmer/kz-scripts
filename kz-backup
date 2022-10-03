@@ -236,7 +236,7 @@ installatie van een pakket, met
         true
     fi
     printf '%b\n' "$DASHES" >> "$file"
-    chmod 777 "$file"
+    chmod 777 "$file" |& $LOGCMD || true
 }
 
 
