@@ -236,7 +236,7 @@ function init_script {
         --priority=notice
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        xhost +si:localuser:root |& $LOGCMD --priority=debug
+        xhost +si:localuser:root |& $LOGCMD
     fi
 
     if [[ -t 1 ]]; then
@@ -246,7 +246,7 @@ function init_script {
 
 
 function log {
-    printf '%b\n' "$1" |& $LOGCMD "${2:---priority=info}"
+    printf '%b\n' "$1" |& $LOGCMD
 }
 
 

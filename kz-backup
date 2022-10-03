@@ -421,7 +421,7 @@ $TEXT..."
         else
             info "$TEXT..."
             umount "$TARGET_MEDIUM" |& $LOGCMD || rc+=$?
-            udisksctl lock --block-device "$dev" |& $LOGCMD || true
+            udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
             udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
         fi
         if [[ $rc -eq $SUCCESS ]]; then
