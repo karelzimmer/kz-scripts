@@ -2,8 +2,8 @@
 ###############################################################################
 # Installatiebestand voor Ubuntu 22.04 LTS desktop op pc06.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
-# Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
+# Geschreven in 2022 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 #1-add-hosts (koppel IP-adressen aan hostnamen)

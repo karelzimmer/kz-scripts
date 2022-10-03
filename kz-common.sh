@@ -3,8 +3,8 @@
 ###############################################################################
 # Algemene module voor shell scripts.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
-# Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
+# Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 
@@ -303,16 +303,18 @@ Typ '$DISPLAY_NAME --help' voor meer informatie."
 
 function process_option_version {
     local build=''
+    local year=1970
 
     build=$(
         cat /usr/local/etc/kz-build-id 2> /dev/null ||
         printf '%s' 'unknown'
         )
+    year=$(date +%Y)
 
     info "$PROGRAM_NAME (kz) 365 ($build)
 
-Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
-Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
+Geschreven in $year door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
 
 function reset_terminal_attributes {

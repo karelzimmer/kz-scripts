@@ -3,8 +3,8 @@
 # Instelbestand voor Debian 11 LTS desktop op debian voor user (Live
 # Persistent).
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
-# Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
+# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 #1-gnome (bureaubladomgeving)

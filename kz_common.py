@@ -6,11 +6,12 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 # Algemene module voor Python scripts.
 #
-# Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
-# Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.
+# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 import argparse
+import datetime
 import subprocess
 import sys
 import time
@@ -129,9 +130,10 @@ Typ '{display_name} --help' voor meer informatie.""")
 
 def process_option_version(program_name):
     """
-    Deze functie toont versie-informatie, auteur, en auteursrecht.
+    Deze functie toont informatie over de versie, auteur, en licentie.
     """
     build = ''
+    year = datetime.datetime.now().year
 
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
@@ -143,8 +145,8 @@ def process_option_version(program_name):
 
     print(f"""{program_name} (kz) 365 ({build})
 
-Geschreven door Karel Zimmer <info@karelzimmer.nl>, Creative Commons Publiek
-Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0/deed.nl>.\
+Geschreven in {year} door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.\
 """)
 
 
