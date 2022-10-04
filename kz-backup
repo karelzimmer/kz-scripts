@@ -158,10 +158,10 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     fi
 
     check_on_ac_power
-    TITLE='Gebruikersinstellingen veiligstellen'
-    TEXT='Gebruikersinstellingen verzamelen'
+    TITLE='Instellingen veiligstellen'
+    TEXT='Instellingen verzamelen'
     if $OPTION_GUI; then
-        collect_user_settings           |
+        collect_settings           |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -172,29 +172,29 @@ Koppel media af via Bestanden, en start daarna opnieuw."
                 --text      "$TEXT"     2> >($LOGCMD)
     else
         info "$TEXT..."
-        collect_user_settings
+        collect_settings
     fi
     create_backup
 }
 
 
-function collect_user_settings {
+function collect_settings {
     local tgtdir=$HOME/Instellingen
 
     mkdir --parents "$tgtdir" |& $LOGCMD
     # Populate ~/Instellingen with user settings.
     # Part of these user settings are restored with kz-setup and setup file.
-    collect_user_settings_desktop_background
-    collect_user_settings_favorite_apps
-    collect_user_settings_installed_apps
-    collect_user_settings_user_photo
+    collect_settings_desktop_background
+    collect_settings_favorite_apps
+    collect_settings_installed_apps
+    collect_settings_user_photo
 
     # Old folder, lagacy.
     rm --force --recursive "$HOME"/kz-data/
 }
 
 
-function collect_user_settings_desktop_background {
+function collect_settings_desktop_background {
     local file=$tgtdir/Achtergrond
     local picture_file=''
 
@@ -208,14 +208,14 @@ function collect_user_settings_desktop_background {
 }
 
 
-function collect_user_settings_favorite_apps {
+function collect_settings_favorite_apps {
     local file=$tgtdir/Favorieten
 
     gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
 }
 
 
-function collect_user_settings_installed_apps {
+function collect_settings_installed_apps {
     local file=$tgtdir/Apps
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
@@ -260,7 +260,7 @@ installatie van een pakket, met
 }
 
 
-function collect_user_settings_user_photo {
+function collect_settings_user_photo {
     local srcdir=/var/lib/AccountsService/icons
     local file=$tgtdir/Gebruikersfoto
 
