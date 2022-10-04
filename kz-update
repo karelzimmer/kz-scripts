@@ -86,8 +86,8 @@ def snap_refresh():
 def check_reboot():
     try:
         with open('/var/run/reboot-required') as fh:
-            print('\n* De computer moet herstarten om het installeren van '
-                  'updates af te ronden *')
+            print('\n*** De computer moet herstarten om het installeren van '
+                  'updates af te ronden ***')
     except FileNotFoundError:
         pass
     except Exception as ex:
