@@ -133,11 +133,12 @@ def process_option_version(program_name):
     Deze functie toont informatie over de versie, auteur, en licentie.
     """
     build = ''
-    year = datetime.datetime.now().year
+    year = 1970
 
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
             build = fh.read()
+            year = build.partition('-')[0]
     except FileNotFoundError:
         build = 'unknown'
     except OSError as ex:

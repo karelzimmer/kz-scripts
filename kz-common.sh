@@ -306,10 +306,12 @@ function process_option_version {
     local year=1970
 
     build=$(
-        cat /usr/local/etc/kz-build-id 2> /dev/null ||
-        printf '%s' 'unknown'
+        cat /usr/local/etc/kz-build-id 2> /dev/null || printf '%s' 'unknown'
         )
-    year=$(date +%Y)
+    year=$(
+        cut --delimiter='-'             \
+            --fields=1                  \
+            /usr/local/etc/kz-build-id  2> /dev/null || echo 1970)
 
     info "$PROGRAM_NAME (kz) 365 ($build)
 
