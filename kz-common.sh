@@ -302,16 +302,13 @@ Typ '$DISPLAY_NAME --help' voor meer informatie."
 
 
 function process_option_version {
-    local build=''
+    local build='unknown'
     local year=1970
 
-    build=$(
-        cat /usr/local/etc/kz-build-id 2> /dev/null || printf '%s' 'unknown'
-        )
-    year=$(
-        cut --delimiter='-'             \
-            --fields=1                  \
-            /usr/local/etc/kz-build-id  2> /dev/null || echo 1970)
+    if [[ -e /usr/local/etc/kz-build-id ]]; then
+        build=$(cat /usr/local/etc/kz-build-id)
+        year=$(cut --delimiter='-' --fields=1 /usr/local/etc/kz-build-id)
+    fi
 
     info "$PROGRAM_NAME (kz) 365 ($build)
 
