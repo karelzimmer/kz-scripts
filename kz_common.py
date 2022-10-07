@@ -141,7 +141,7 @@ def process_option_version(program_name):
             year = build.partition('-')[0]
     except FileNotFoundError:
         pass
-    except OSError as ex:
+    except Exception as ex:
         print(ex)
 
     print(f"""{program_name} (kz) 365 ({build})
