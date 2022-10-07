@@ -57,9 +57,9 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
 readonly MENU2_HEAD="\
-${DASHES:0:41}
-=            $MENU2_TITLE             =
-${DASHES:0:41}"
+${DASHES:0:52}
+=                 $MENU2_TITLE                   =
+${DASHES:0:52}"
 readonly -a MENU2_ACTIONS=(
     [1]='Wifi-gegevens tonen'
         'Back-up maken'
@@ -324,7 +324,7 @@ function process_menu2_gui {
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
-                    --width         400                                     \
+                    --width         480                                     \
                     --height        280                                     \
                     --title         "$TITLE"                                \
                     --text          'Selecteer een keuze:'                  \
