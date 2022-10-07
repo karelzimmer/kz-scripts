@@ -49,6 +49,7 @@ declare     OPTION_GUI=false
 declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
+# pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
 declare     PROGRAM_PKEXEC=${0/./$PROGRAM_PATH}
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'

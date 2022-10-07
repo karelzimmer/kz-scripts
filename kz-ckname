@@ -16,7 +16,8 @@ readonly PROGRAM_NAME='kz-ckname'
 readonly PROGRAM_DESC='Bestandsnamen controleren'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+# Redhat reports $0 as '-bash'.
+PROGRAM_PATH=$(realpath "$(dirname  "${0/-/}")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
 

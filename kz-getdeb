@@ -16,7 +16,8 @@ readonly PROGRAM_NAME='kz-getdeb'
 readonly PROGRAM_DESC='Pakket kz installeren'
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-PROGRAM_PATH=$(realpath "$(dirname  "$0")")
+# Redhat reports $0 as '-bash'.
+PROGRAM_PATH=$(realpath "$(dirname  "${0/-/}")")
 readonly PROGRAM_PATH
 temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
 if ! source "$PROGRAM_PATH"/kz-common.sh &>> "$temp_log"; then
