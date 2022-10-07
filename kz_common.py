@@ -132,7 +132,7 @@ def process_option_version(program_name):
     """
     Deze functie toont informatie over de versie, auteur, en licentie.
     """
-    build = ''
+    build = 'unknown'
     year = 1970
 
     try:
@@ -140,7 +140,7 @@ def process_option_version(program_name):
             build = fh.read()
             year = build.partition('-')[0]
     except FileNotFoundError:
-        build = 'unknown'
+        pass
     except OSError as ex:
         print(ex)
 
