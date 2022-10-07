@@ -169,7 +169,6 @@ function upload_website {
                 "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
         error 'Uploaden website is mislukt.'
-        info 'Controleer de log...!'
         NOERROR=true exit $ERROR
     fi
     sleep 5
@@ -181,7 +180,6 @@ function install_package {
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
         error 'Installeren pakket kz is niet uitgevoerd.'
-        info 'Controleer de log...!'
         NOERROR=true exit $ERROR
     fi
 }

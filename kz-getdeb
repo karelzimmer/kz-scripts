@@ -21,19 +21,20 @@ PROGRAM_PATH=$(realpath "$(dirname  "${0/-/}")")
 readonly PROGRAM_PATH
 temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
 if ! source "$PROGRAM_PATH"/kz-common.sh &>> "$temp_log"; then
+    temp_src=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.src")
     if ! wget   --no-verbose                                                \
-                --output-document=/tmp/kz-common.sh                         \
+                --output-document="$temp_src"                               \
                 'https://karelzimmer.nl/data/linux/scripts/kz-common.sh'    \
                 &>> "$temp_log"; then
         printf  '%s\n%s\n'                              \
                 'Downloaden kz-common.sh is mislukt.'   \
-                "Controleer $temp_log"
+                "Controleer $temp_log."
         exit 1
     fi
-    if ! source /tmp/kz-common.sh &>> "$temp_log"; then
+    if ! source "$temp_src" &>> "$temp_log"; then
         printf  '%s\n%s\n'                          \
                 'Inlezen kz-common.sh is mislukt.'  \
-                "Controleer $temp_log"
+                "Controleer $temp_log."
         exit 1
     fi
 fi
@@ -290,7 +291,6 @@ function download_website {
                 "$ftp_host"                         |& $LOGCMD; then
         rm  "$ftp_login"
         info 'Downloaden website is mislukt.'
-        info 'Controleer de log...!'
         return  $ERROR
     fi
 }
