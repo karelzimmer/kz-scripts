@@ -90,11 +90,13 @@ def check_on_ac_power():
         input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
 
 
-def check_sudo(program_name):
+def check_user_sudo(program_name):
     """
     Deze functie controleert of de gebruiker al sudo-rechten heeft.
     """
-    if subprocess.run('sudo -n true', shell=True).returncode == 1:
+    if subprocess.run(
+        'sudo -n true', shell=True, stderr=subprocess.DEVNULL
+        ).returncode == 1:
         print(f"Authenticatie is vereist om {program_name} uit te voeren.")
         subprocess.run('sudo true', shell=True, check=True)
 

@@ -132,7 +132,7 @@ function install_scriptspackage {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    check_sudo
+    check_user_sudo
 
     TITLE='Voortgang'
     TEXT='Installeer pakket kz (kan even duren)...'
@@ -162,7 +162,7 @@ function install_scriptspackage {
 }
 
 
-function check_sudo {
+function check_user_sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TITLE='Authenticatie nodig'
