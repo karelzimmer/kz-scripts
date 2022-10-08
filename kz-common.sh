@@ -131,7 +131,7 @@ function check_user_root {
             log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
             if ! sudo -n true 2> /dev/null; then
                 printf '%s\n' "Authenticatie is vereist om $PROGRAM_NAME uit \
-te voeren." 
+te voeren."
             fi
             exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi
