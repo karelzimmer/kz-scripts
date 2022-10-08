@@ -97,9 +97,8 @@ def check_sudo(program_name):
     """
     Deze functie controleert of de gebruiker al sudo-rechten heeft.
     """
-    try:
-        subprocess.run('sudo -n true', check=True, stderr=subprocess.DEVNULL)
-    except Exception:
+    check_user_sudo=subprocess.run('sudo -n true', shell=True)
+    if check_user_sudo.returncode == 1:
         print(f"Authenticatie is vereist om {program_name} uit te voeren.")
         subprocess.run('sudo true', shell=True, check=True)
 
