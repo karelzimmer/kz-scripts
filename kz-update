@@ -103,7 +103,7 @@ kz_common.process_common_options(program_name, program_desc, display_name)
 
 kz_common.check_on_ac_power()
 
-kz_common.check_sudo()
+kz_common.check_sudo(program_name)
 
 perform_repair()
 

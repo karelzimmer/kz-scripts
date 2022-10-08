@@ -11,10 +11,10 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 
 import argparse
-import datetime
 import subprocess
 import sys
 import time
+import os
 
 
 ###############################################################################
@@ -93,8 +93,15 @@ def check_on_ac_power():
         input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
 
 
-def check_sudo():
-    subprocess.run('sudo true', shell=True, check=True)
+def check_sudo(program_name):
+    """
+    Deze functie controleert of de gebruiker al sudo-rechten heeft.
+    """
+    try:
+        subprocess.run('sudo -n true', check=True, stderr=subprocess.DEVNULL)
+    except Exception:
+        print(f"Authenticatie is vereist om {program_name} uit te voeren.")
+        subprocess.run('sudo true', shell=True, check=True)
 
 
 def process_common_options(program_name, program_desc, display_name):

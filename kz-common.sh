@@ -50,7 +50,7 @@ declare     OPTION_HELP=false
 declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-declare     PROGRAM_PKEXEC=${0/#./$PROGRAM_PATH}
+declare     PROGRAM_EXEC=${0/#./$PROGRAM_PATH}
 declare     USAGE='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
@@ -123,13 +123,16 @@ function check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $OPTION_GUI; then
-            log "Restarted (pkexec $PROGRAM_PKEXEC ${CMDLINE_ARGS[*]})." \
+            log "Restarted (pkexec $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
                 --priority=debug
-            pkexec "$PROGRAM_PKEXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
+            pkexec "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
             NOERROR=true exit $pkexec_rc
         else
-            log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." \
-                --priority=debug
+            log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
+            if ! sudo -n true 2> /dev/null; then
+                printf '%s\n' "Authenticatie is vereist om $PROGRAM_NAME uit \
+te voeren." 
+            fi
             exec sudo "$0" "${CMDLINE_ARGS[@]}"
         fi
     fi
@@ -233,7 +236,7 @@ function init_script {
     CMDLINE_ARGS=("$@")
 
     log "$DASHES"
-    log "Started ($PROGRAM_PKEXEC ${CMDLINE_ARGS[*]} as $USER)." \
+    log "Started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)." \
         --priority=notice
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
