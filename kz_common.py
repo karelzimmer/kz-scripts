@@ -82,8 +82,6 @@ def check_on_ac_power():
     """
     Deze functie controleert de stroomvoorziening.
     """
-    on_ac_power = ''
-
     on_ac_power = subprocess.run('on_ac_power', shell=True)
     if on_ac_power.returncode == 1:
         print('De computer gebruikt nu alleen de accu voor de '
