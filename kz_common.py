@@ -82,8 +82,7 @@ def check_on_ac_power():
     """
     Deze functie controleert de stroomvoorziening.
     """
-    on_ac_power = subprocess.run('on_ac_power', shell=True)
-    if on_ac_power.returncode == 1:
+    if subprocess.run('on_ac_power', shell=True).returncode == 1:
         print('De computer gebruikt nu alleen de accu voor de '
               'stroomvoorziening.'
               '\nGeadviseerd wordt om de computer aan te sluiten op het '
@@ -95,8 +94,7 @@ def check_sudo(program_name):
     """
     Deze functie controleert of de gebruiker al sudo-rechten heeft.
     """
-    check_user_sudo = subprocess.run('sudo -n true', shell=True)
-    if check_user_sudo.returncode == 1:
+    if subprocess.run('sudo -n true', shell=True).returncode == 1:
         print(f"Authenticatie is vereist om {program_name} uit te voeren.")
         subprocess.run('sudo true', shell=True, check=True)
 
