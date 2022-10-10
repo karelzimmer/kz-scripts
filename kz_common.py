@@ -100,18 +100,27 @@ def check_on_ac_power(program_name):
 
 def check_user_sudo(program_name):
     """
-    Deze functie controleert of de gebruiker al sudo-rechten heeft.
+    Deze functie controleert of de gebruiker sudo-rechten heeft.
     """
     try:
-        subprocess.run('sudo -n true', shell=True, check=True,
+        subprocess.run('groups $USER | grep --quiet --regexp=sudo',
+                       shell=True, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
-        print(f"Authenticatie is vereist om {program_name} uit te voeren.")
+        print(f'Reeds uitgevoerd door de beheerder.')
+        sys.exit(0)
+    else:
         try:
-            subprocess.run('sudo true', shell=True, check=True)
-        except KeyboardInterrupt:
-            print(f"\nProgramma {program_name} is afgebroken.")
-            sys.exit(1)
+            subprocess.run('sudo -n true', shell=True, check=True,
+                           stdout=subprocess.DEVNULL,
+                           stderr=subprocess.DEVNULL)
+        except Exception:
+            print(f"Authenticatie is vereist om {program_name} uit te voeren.")
+            try:
+                subprocess.run('sudo true', shell=True, check=True)
+            except KeyboardInterrupt:
+                print(f"\nProgramma {program_name} is afgebroken.")
+                sys.exit(1)
 
 
 def process_common_options(program_name, program_desc, display_name):
