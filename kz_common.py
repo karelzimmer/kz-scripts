@@ -11,6 +11,7 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 
 import argparse
+from logging import exception
 import subprocess
 import sys
 import time
@@ -39,7 +40,6 @@ def check_dpkgd_snapd():
     Deze functie controleert op al een lopende Debian pakketbeheerder.
     """
     dpkg_wait = 5
-    snaps = True
 
     try:
         subprocess.run('ls /snap/core/*/var/cache/debconf/config.dat',
@@ -47,6 +47,8 @@ def check_dpkgd_snapd():
                        stderr=subprocess.DEVNULL)
     except Exception:
         snaps = False
+    else:
+        snaps = True
 
     while True:
         if snaps:
@@ -58,11 +60,12 @@ def check_dpkgd_snapd():
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
+            except Exception:
+                break
+            else:
                 print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
                       'is...')
                 time.sleep(dpkg_wait)
-            except Exception:
-                break
         else:
             try:
                 subprocess.run('sudo fuser /var/cache/apt/archives/lock '
@@ -71,14 +74,15 @@ def check_dpkgd_snapd():
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
+            except Exception:
+                break
+            else:
                 print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
                       'is...')
                 time.sleep(dpkg_wait)
-            except Exception:
-                break
 
 
-def check_on_ac_power():
+def check_on_ac_power(program_name):
     """
     Deze functie controleert de stroomvoorziening.
     """
@@ -87,18 +91,26 @@ def check_on_ac_power():
               'stroomvoorziening.'
               '\nGeadviseerd wordt om de computer aan te sluiten op het '
               'stopcontact.')
-        input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
+        try:
+            input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
+        except KeyboardInterrupt:
+            print(f"\nProgramma {program_name} is afgebroken.")
+            sys.exit(1)
 
 
 def check_user_sudo(program_name):
     """
     Deze functie controleert of de gebruiker al sudo-rechten heeft.
     """
-    if subprocess.run(
-            'sudo -n true', shell=True, stderr=subprocess.DEVNULL
-            ).returncode == 1:
+    try:
+        subprocess.run('sudo -n true', stderr=subprocess.DEVNULL)
+    except Exception:
         print(f"Authenticatie is vereist om {program_name} uit te voeren.")
-        subprocess.run('sudo true', shell=True, check=True)
+        try:
+            subprocess.run('sudo true', shell=True, check=True)
+        except KeyboardInterrupt:
+            print(f"\nProgramma {program_name} is afgebroken.")
+            sys.exit(1)
 
 
 def process_common_options(program_name, program_desc, display_name):
@@ -136,15 +148,13 @@ def process_option_version(program_name):
     """
     Deze functie toont informatie over de versie, auteur, en licentie.
     """
-    build = 'unknown'
-    year = 1970
-
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
             build = fh.read()
             year = build.partition('-')[0]
     except FileNotFoundError:
-        pass
+        build = 'unknown'
+        year = 1970
     except Exception as ex:
         print(ex)
 

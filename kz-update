@@ -69,9 +69,11 @@ def perform_command(command):
     kz_common.check_dpkgd_snapd()
     try:
         subprocess.run(f'sudo {command}', shell=True, check=True)
-    except Exception as ex:
-        print(ex)
-    print()
+    except Exception:
+        print(f"\nProgramma {program_name} is afgebroken.")
+        sys.exit(1)
+    else:
+        print()
 
 
 def snap_refresh():
@@ -79,8 +81,9 @@ def snap_refresh():
     kz_common.check_dpkgd_snapd()
     try:
         subprocess.run('sudo snap refresh', shell=True)
-    except Exception as ex:
-        print(ex)
+    except Exception:
+        print(f"\nProgramma {program_name} is afgebroken.")
+        sys.exit(1)
 
 
 def check_reboot():
@@ -101,7 +104,7 @@ def check_reboot():
 
 kz_common.process_common_options(program_name, program_desc, display_name)
 
-kz_common.check_on_ac_power()
+kz_common.check_on_ac_power(program_name)
 
 kz_common.check_user_sudo(program_name)
 
