@@ -103,7 +103,8 @@ def check_user_sudo(program_name):
     Deze functie controleert of de gebruiker al sudo-rechten heeft.
     """
     try:
-        subprocess.run('sudo -n true', stderr=subprocess.DEVNULL)
+        subprocess.run('sudo -n true', shell=True, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         print(f"Authenticatie is vereist om {program_name} uit te voeren.")
         try:
@@ -157,6 +158,7 @@ def process_option_version(program_name):
         year = 1970
     except Exception as ex:
         print(ex)
+        sys.exit(1)
 
     print(f"""{program_name} (kz) 365 ({build})
 
