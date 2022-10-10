@@ -163,11 +163,9 @@ function developer {
             cut --delimiter=':' --fields=5  |
             cut --delimiter=',' --fields=1  || true
             )
-        if  [[
-            $HOSTNAME == pc??       &&
-            $USER      = 'karel'    &&
-            $user_name = 'Karel Zimmer'
-            ]]; then
+        if  [[  $HOSTNAME == pc??       &&
+                $USER      = 'karel'    &&
+                $user_name = 'Karel Zimmer' ]]; then
             return $SUCCESS
         else
             return $ERROR
