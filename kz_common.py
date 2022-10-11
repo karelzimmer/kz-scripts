@@ -11,11 +11,10 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 
 import argparse
-from logging import exception
 import subprocess
 import sys
 import time
-import os
+# import os
 
 
 ###############################################################################
