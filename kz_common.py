@@ -118,7 +118,11 @@ def check_user_sudo(program_name):
             print(f"Authenticatie is vereist om {program_name} uit te voeren.")
             try:
                 subprocess.run('sudo true', shell=True, check=True)
-            except:
+            except KeyboardInterrupt:
+                print(f"Programma {program_name} is afgebroken.")
+                sys.exit(1)
+            except Exception as ex:
+                print(ex)
                 print(f"Programma {program_name} is afgebroken.")
                 sys.exit(1)
 
