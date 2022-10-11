@@ -168,8 +168,8 @@ def process_option_version(program_name):
     except Exception as ex:
         print(ex)
         sys.exit(1)
-
-    print(f"""{program_name} (kz) 365 ({build})
+    finally:
+        print(f"""{program_name} (kz) 365 ({build})
 
 Geschreven in {year} door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.\
