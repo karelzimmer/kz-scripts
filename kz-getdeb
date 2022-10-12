@@ -76,7 +76,7 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    process_options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -97,14 +97,14 @@ function check_input {
     fi
 
     clear -x
-    if ! check_user_sudo; then
+    if ! kz_common.check_user_sudo; then
         term_script
     fi
-    check_on_ac_power
+    kz_common.check_on_ac_power
 }
 
 
-function check_on_ac_power {
+function kz_common.check_on_ac_power {
     local -i on_battery=0
 
     on_ac_power &> /dev/null || on_battery=$?
@@ -130,7 +130,7 @@ function install_scriptspackage {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    check_user_sudo
+    kz_common.check_user_sudo
 
     TITLE='Voortgang'
     TEXT='Installeer pakket kz (kan even duren)...'
@@ -141,16 +141,16 @@ function install_scriptspackage {
 
     # Bij Ubuntu Live sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        check_dpkgd_snapd
+        kz_common.check_dpkgd_snapd
         sudo apt-add-repository --yes universe  |& $LOGCMD
-        check_dpkgd_snapd
+        kz_common.check_dpkgd_snapd
         sudo apt-get update |& $LOGCMD
     fi
 
     # Installeer pakket kz.
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
-    check_dpkgd_snapd
+    kz_common.check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
@@ -160,7 +160,7 @@ function install_scriptspackage {
 }
 
 
-function check_user_sudo {
+function kz_common.check_user_sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TITLE='Authenticatie nodig'
@@ -225,7 +225,7 @@ Typ 'exit' om dit venster te sluiten."
                         --title     "$TITLE"        \
                         --infobox   "$TEXT"         \
                         16 41
-    if developer check; then
+    if kz_common.developer check; then
         info '* ONTWIKKELAAR *'
         check_dependencies
         download_website
@@ -240,7 +240,7 @@ Typ 'exit' om dit venster te sluiten."
 function check_dependencies {
     info 'Controleer afhankelijkheden...'
     # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
-    check_dpkgd_snapd
+    kz_common.check_dpkgd_snapd
     sudo    apt-get             \
             install             \
             --yes               \
@@ -258,9 +258,9 @@ function check_dependencies {
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian pakket is oud, snap is nieuwer.
-    check_dpkgd_snapd
+    kz_common.check_dpkgd_snapd
     sudo snap install shellcheck |& $LOGCMD
-    check_dpkgd_snapd
+    kz_common.check_dpkgd_snapd
     sudo snap install --classic code |& $LOGCMD
 }
 
@@ -315,7 +315,7 @@ function pull_repos {
 ###############################################################################
 
 function main {
-    init_script "$@"
+    kz_common.init_script "$@"
     check_input "$@"
     process_input
     term_script

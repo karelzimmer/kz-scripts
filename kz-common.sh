@@ -70,7 +70,7 @@ declare     YELLOW=''
 # Common functions
 ###############################################################################
 
-function check_dpkgd_snapd {
+function kz_common.check_dpkgd_snapd {
     local -i dpkg_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
@@ -96,7 +96,7 @@ function check_dpkgd_snapd {
 }
 
 
-function check_on_ac_power {
+function kz_common.check_on_ac_power {
     local -i on_battery=0
 
     on_ac_power >/dev/null 2>&1 || on_battery=$?
@@ -106,17 +106,17 @@ De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
         if ! $OPTION_GUI; then
-            wait_for_enter
+            kz_common.wait_for_enter
         fi
     fi
 
 }
 
 
-function check_user_root {
+function kz_common.check_user_root {
     local -i pkexec_rc=0
 
-    if ! check_user_sudo; then
+    if ! kz_common.check_user_sudo; then
         info 'Reeds uitgevoerd door de beheerder.'
         exit $SUCCESS
     fi
@@ -138,7 +138,7 @@ te voeren."
 }
 
 
-function check_user_sudo {
+function kz_common.check_user_sudo {
     # Mag gebruiker sudo uitvoeren?
     if [[ $UID -eq 0 ]]; then
         # Voor de "grace"-periode van sudo, of als root.
@@ -151,7 +151,7 @@ function check_user_sudo {
 }
 
 
-function developer {
+function kz_common.developer {
     local action=${1:-check}
     local user_name=''
 
@@ -217,7 +217,7 @@ function info {
 }
 
 
-function init_script {
+function kz_common.init_script {
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -251,7 +251,7 @@ function log {
 }
 
 
-function process_options {
+function kz_common.process_options {
     while true; do
         case $1 in
             -u|--usage)
@@ -317,7 +317,7 @@ Geschreven in $year door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
 
-function reset_terminal_attributes {
+function kz_common.reset_terminal_attributes {
     BLINK=''
     BLUE=''
     CURSOR_INVISABLE=''
@@ -495,7 +495,7 @@ function signal_exit_log {
 }
 
 
-function wait_for_enter {
+function kz_common.wait_for_enter {
     read -rp '
 Druk op de Enter-toets om door te gaan [Enter]: '
 }

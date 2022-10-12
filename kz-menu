@@ -113,13 +113,13 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    process_options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                reset_terminal_attributes
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             --)
@@ -219,7 +219,7 @@ function process_menu1_tui {
         done
         process_menu1_choice
         if $EXECUTE_COMMAND; then
-            wait_for_enter
+            kz_common.wait_for_enter
         fi
         EXECUTE_COMMAND=false
     done
@@ -278,7 +278,7 @@ Komt globaal neer op:
 4. Installeer Linux.'
     info "$TEXT"
     if ! $OPTION_GUI; then
-            wait_for_enter
+            kz_common.wait_for_enter
 
     fi
 }
@@ -389,7 +389,7 @@ function process_menu2_tui {
             break
         fi
         if $EXECUTE_COMMAND; then
-            wait_for_enter
+            kz_common.wait_for_enter
         fi
         EXECUTE_COMMAND=false
     done
@@ -524,7 +524,7 @@ function execute_command {
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
     log "$command: rc=$cmd_rc"
     if ! $OPTION_GUI; then
-        wait_for_enter
+        kz_common.wait_for_enter
     fi
 }
 
@@ -541,7 +541,7 @@ Klik op Gebruiker toevoegen.
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$TEXT"
         if ! $OPTION_GUI; then
-            wait_for_enter
+            kz_common.wait_for_enter
         fi
     elif [[ $TITLE = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
@@ -562,7 +562,7 @@ Er is bij het maken van de back-up geen gebruikersfoto gevonden."
             info "$TEXT"
         fi
         if ! $OPTION_GUI; then
-            wait_for_enter
+            kz_common.wait_for_enter
             fi
     fi
 }
@@ -601,7 +601,7 @@ function term_script {
 ###############################################################################
 
 function main {
-    init_script "$@"
+    kz_common.init_script "$@"
     check_input "$@"
     process_input
     term_script

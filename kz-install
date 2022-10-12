@@ -110,7 +110,7 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    process_options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -132,7 +132,7 @@ function check_input {
                 ;;
             -g|--gui)
                 OPTION_GUI=true
-                reset_terminal_attributes
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             -r|--remove)
@@ -211,8 +211,8 @@ function process_input {
 
     # Opdrachten uitvoeren of simuleren.
     if $EXECUTE_COMMANDS; then
-        check_user_root
-        check_on_ac_power
+        kz_common.check_user_root
+        kz_common.check_on_ac_power
     fi
 
     for file in "${FILES_TO_PROCESS[@]}"; do
@@ -578,7 +578,7 @@ function execute_command {
 
     log "$app_description_line"
     log "${BLUE}$cmd${NORMAL}"
-    check_dpkgd_snapd
+    kz_common.check_dpkgd_snapd
     NOERROR=true
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
     NOERROR=false
@@ -616,7 +616,7 @@ $action is voltooid.
 De computer gaat nu herstarten om het installeren van updates en apps af te \
 ronden."
                 if ! $OPTION_GUI; then
-                    wait_for_enter
+                    kz_common.wait_for_enter
                 fi
                 systemctl reboot
             else
@@ -636,7 +636,7 @@ $action is voltooid."
 ###############################################################################
 
 function main {
-    init_script "$@"
+    kz_common.init_script "$@"
     check_input "$@"
     process_input
     term_script

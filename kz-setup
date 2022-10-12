@@ -110,7 +110,7 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    process_options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -132,7 +132,7 @@ function check_input {
                 ;;
             -g|--gui)
                 OPTION_GUI=true
-                reset_terminal_attributes
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             -r|--reset)
@@ -609,7 +609,7 @@ $action is voltooid.
 
 De computer gaat nu afmelden om het instellen van apps af te ronden."
                 if ! $OPTION_GUI; then
-                    wait_for_enter
+                    kz_common.wait_for_enter
                 fi
                 gnome-session-quit --logout --no-prompt
                 exit $SUCCESS
@@ -630,7 +630,7 @@ $action is voltooid."
 ###############################################################################
 
 function main {
-    init_script "$@"
+    kz_common.init_script "$@"
     check_input "$@"
     process_input
     term_script

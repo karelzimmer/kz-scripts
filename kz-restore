@@ -75,13 +75,13 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    process_options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                reset_terminal_attributes
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             --dry-run)
@@ -130,7 +130,7 @@ function process_input {
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
             warning "$TEXT"
             if ! $OPTION_GUI; then
-                wait_for_enter
+                kz_common.wait_for_enter
             fi
             MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $MEDIUM ]]; then
@@ -160,7 +160,7 @@ daarna opnieuw."
         fi
     fi
 
-    check_on_ac_power
+    kz_common.check_on_ac_power
 
     TITLE='Back-up terugzetten'
     TEXT='Back-up wordt TERUGGEZET.
@@ -311,7 +311,7 @@ Koppel zelf (veilig!) het USB-medium af."
 ###############################################################################
 
 function main {
-    init_script "$@"
+    kz_common.init_script "$@"
     check_input "$@"
     process_input
     term_script
