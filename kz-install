@@ -21,13 +21,13 @@ PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'ace:fgrs'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON",apps,cat,edition:,files,gui,\
+readonly OPTIONS_SHORT+='ace:fgrs'
+readonly OPTIONS_LONG+=",apps,cat,edition:,files,gui,\
 remove,simulate"
 readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] \
 [-e|--edition=EDITIE] [-f|--files]
                     [-g|--gui] [-r|--remove] [-s|--simulate]
-                    $OPTIONS_USAGE_COMMON
+                    $OPTIONS_USAGE
                     [APP...] [BESTAND...]"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
 
@@ -42,7 +42,7 @@ Opties:
   -g, --gui      start in grafische modus
   -r, --remove   verwijder apps
   -s, --simulate toon opdrachten
-$OPTIONS_HELP_COMMON
+$OPTIONS_HELP
 
 Argumenten:
   APP            opgegeven APPs installeren
@@ -110,7 +110,7 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    process_common_options "$@"
+    process_options "$@"
 
     while true; do
         case $1 in

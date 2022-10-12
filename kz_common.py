@@ -125,7 +125,7 @@ def check_user_sudo(program_name):
                 sys.exit(1)
 
 
-def process_common_options(program_name, program_desc, display_name):
+def process_options(program_name, program_desc, display_name):
     """
     Deze functie verwerkt de algemene opties.
     """

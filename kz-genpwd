@@ -51,6 +51,6 @@ def generate_password():
 # Script
 ###############################################################################
 
-kz_common.process_common_options(program_name, program_desc, display_name)
+kz_common.process_options(program_name, program_desc, display_name)
 
 generate_password()

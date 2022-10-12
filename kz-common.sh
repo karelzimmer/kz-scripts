@@ -18,20 +18,19 @@ readonly MODULE_DESC='Algemene module voor shell scripts'
 readonly SUCCESS=0
 readonly ERROR=1
 
-readonly OPTIONS_SHORT_COMMON='huv'
-readonly OPTIONS_LONG_COMMON='help,usage,version'
-readonly OPTIONS_USAGE_COMMON='[-h|--help] [-u|--usage] [-v|--version]'
-readonly OPTIONS_HELP_COMMON="\
-  -h, --help     toon deze hulptekst
-  -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon de programmaversie"
-
 DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
 
 ###############################################################################
 # Common global variables
 ###############################################################################
+
+declare     OPTIONS_SHORT='huv'
+declare     OPTIONS_LONG='help,usage,version'
+declare     OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
+declare     OPTIONS_HELP="  -h, --help     toon deze hulptekst
+  -u, --usage    toon een korte gebruikssamenvatting
+  -v, --version  toon de programmaversie"
 
 declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
@@ -252,7 +251,7 @@ function log {
 }
 
 
-function process_common_options {
+function process_options {
     while true; do
         case $1 in
             -u|--usage)

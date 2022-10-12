@@ -21,11 +21,11 @@ PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
 readonly PROGRAM_PATH
 source  "$PROGRAM_PATH"/kz-common.sh
 
-readonly OPTIONS_SHORT=$OPTIONS_SHORT_COMMON'gt:'
-readonly OPTIONS_LONG=$OPTIONS_LONG_COMMON',delete,dry-run,gui,target:'
+readonly OPTIONS_SHORT+='gt:'
+readonly OPTIONS_LONG+=',delete,dry-run,gui,target:'
 readonly USAGE="Gebruik: $DISPLAY_NAME [--delete] [--dry-run] [-g|--gui] \
 [-t|--target=DOELMAP]
-                   $OPTIONS_USAGE_COMMON"
+                   $OPTIONS_USAGE"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
 
 $PROGRAM_DESC.
@@ -37,7 +37,7 @@ Opties:
   -g, --gui      start in grafische modus
   -t, --target=DOELMAP
                  plaats back-up in de DOELMAP
-$OPTIONS_HELP_COMMON"
+$OPTIONS_HELP"
 
 readonly SOURCE=$HOME
 
@@ -79,7 +79,7 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    process_common_options "$@"
+    process_options "$@"
 
     while true; do
         case $1 in
