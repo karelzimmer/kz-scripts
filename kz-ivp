@@ -133,7 +133,7 @@ function check-code {
     elif grep   --quiet                         \
                 --line-regexp                   \
                 --regexp='#!''/usr/bin/python3' \
-                "$script"                       || [[ $script = kz-common.py ]]
+                "$script"                       || [[ $script = kz_common.py ]]
     then
         check-pycodestyle
     else
