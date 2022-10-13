@@ -63,7 +63,7 @@ declare TITLE=''
 # Functions
 ###############################################################################
 
-function check_input {
+function check-input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -79,13 +79,13 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    kz_common.process_options "$@"
+    kz-common.process-options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                kz_common.reset_terminal_attributes
+                kz-common.reset-terminal-attributes
                 shift
                 ;;
             --delete)
@@ -120,7 +120,7 @@ function check_input {
 }
 
 
-function process_input {
+function process-input {
     if $OPTION_TARGET; then
         if ! [[ -d $TARGET_ARGUMENT ]]; then
             info "Map $TARGET_ARGUMENT bestaat niet."
@@ -135,7 +135,7 @@ function process_input {
             TEXT="Koppel het USB-medium aan waarop de back-up wordt geplaatst."
             warning "$TEXT"
             if ! $OPTION_GUI; then
-                kz_common.wait_for_enter
+                kz-common.wait-for-enter
             fi
             MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $MEDIUM ]]; then
@@ -158,11 +158,11 @@ Koppel media af via Bestanden, en start daarna opnieuw."
         TARGET_MEDIUM=$MEDIUM
     fi
 
-    kz_common.check_on_ac_power
+    kz-common.check-on-ac-power
     TITLE='Instellingen veiligstellen'
     TEXT='Instellingen verzamelen'
     if $OPTION_GUI; then
-        collect_settings           |
+        collect-settings           |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -173,29 +173,29 @@ Koppel media af via Bestanden, en start daarna opnieuw."
                 --text      "$TEXT"     2> >($LOGCMD)
     else
         info "$TEXT..."
-        collect_settings
+        collect-settings
     fi
-    create_backup
+    create-backup
 }
 
 
-function collect_settings {
+function collect-settings {
     local tgtdir=$HOME/Instellingen
 
     mkdir --parents "$tgtdir" |& $LOGCMD
     # Populate ~/Instellingen with user settings.
     # Part of these user settings are restored with kz-setup and setup file.
-    collect_settings_desktop_background
-    collect_settings_favorite_apps
-    collect_settings_installed_apps
-    collect_settings_user_photo
+    collect-settings-desktop-background
+    collect-settings-favorite-apps
+    collect-settings-installed-apps
+    collect-settings-user-photo
 
     # Old folder, lagacy.
     rm --force --recursive "$HOME"/kz-data/
 }
 
 
-function collect_settings_desktop_background {
+function collect-settings-desktop-background {
     local file=$tgtdir/Achtergrond
     local picture_file=''
 
@@ -209,14 +209,14 @@ function collect_settings_desktop_background {
 }
 
 
-function collect_settings_favorite_apps {
+function collect-settings-favorite-apps {
     local file=$tgtdir/Favorieten
 
     gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
 }
 
 
-function collect_settings_installed_apps {
+function collect-settings-installed-apps {
     local file=$tgtdir/Apps
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
@@ -261,7 +261,7 @@ installatie van een pakket, met
 }
 
 
-function collect_settings_user_photo {
+function collect-settings-user-photo {
     local srcdir=/var/lib/AccountsService/icons
     local file=$tgtdir/Gebruikersfoto
 
@@ -269,7 +269,7 @@ function collect_settings_user_photo {
 }
 
 
-function create_backup {
+function create-backup {
     local       exclude=''
     local       temp_log=''
     local   -i  rsync_rc=0
@@ -357,7 +357,7 @@ $TARGET."
 }
 
 
-function term_script {
+function term-script {
     local       dev=''
     local   -i  rc=0
 
@@ -430,10 +430,10 @@ Koppel zelf (veilig!) het USB-medium af."
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    kz-common.init-script "$@"
+    check-input "$@"
+    process-input
+    term-script
 }
 
 main "$@"

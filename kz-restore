@@ -59,7 +59,7 @@ declare TITLE=''
 # Functions
 ###############################################################################
 
-function check_input {
+function check-input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -75,13 +75,13 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    kz_common.process_options "$@"
+    kz-common.process-options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                kz_common.reset_terminal_attributes
+                kz-common.reset-terminal-attributes
                 shift
                 ;;
             --dry-run)
@@ -111,7 +111,7 @@ function check_input {
 }
 
 
-function process_input {
+function process-input {
     local prompt=''
     local restore=false
 
@@ -130,7 +130,7 @@ function process_input {
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
             warning "$TEXT"
             if ! $OPTION_GUI; then
-                kz_common.wait_for_enter
+                kz-common.wait-for-enter
             fi
             MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $MEDIUM ]]; then
@@ -160,7 +160,7 @@ daarna opnieuw."
         fi
     fi
 
-    kz_common.check_on_ac_power
+    kz-common.check-on-ac-power
 
     TITLE='Back-up terugzetten'
     TEXT='Back-up wordt TERUGGEZET.
@@ -202,14 +202,14 @@ $prompt"
         done
     fi
     if $restore; then
-        restore_backup
+        restore-backup
     else
         exit $SUCCESS
     fi
 }
 
 
-function restore_backup {
+function restore-backup {
     local -i rsync_rc=0
 
     TEXT='Restore voorbereiden (dit kan even duren)'
@@ -254,7 +254,7 @@ ruimte op $TARGET."
 }
 
 
-function term_script {
+function term-script {
     local       dev=''
     local   -i  rc=0
 
@@ -311,10 +311,10 @@ Koppel zelf (veilig!) het USB-medium af."
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    kz-common.init-script "$@"
+    check-input "$@"
+    process-input
+    term-script
 }
 
 main "$@"

@@ -79,7 +79,7 @@ readonly -A DEB_TARGETS=(
 # Functions
 ###############################################################################
 
-function check_input {
+function check-input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -95,7 +95,7 @@ function check_input {
         NOERROR=true exit $ERROR
     fi
     eval set -- "$parsed"
-    kz_common.process_options "$@"
+    kz-common.process-options "$@"
 
     while true; do
         case $1 in
@@ -116,21 +116,21 @@ function check_input {
     fi
 
     # Aangemeld als ontwikkelaar?
-    if ! kz_common.developer check; then
-        kz_common.developer report
+    if ! kz-common.developer check; then
+        kz-common.developer report
         NOERROR=true exit $ERROR
     fi
 }
 
 
-function process_input {
+function process-input {
     # Er is een afhankelijkheid met het maken van pdf's, vandaar uploads eerst.
-    build_uploads
-    build_deb
+    build-uploads
+    build-deb
 }
 
 
-function build_uploads {
+function build-uploads {
     local file=''
     local temptextfile=''
 
@@ -208,12 +208,12 @@ function build_uploads {
             fi
         fi
     done
-    build_uploads_all
+    build-uploads-all
     cd "$HOME"
 }
 
 
-function build_uploads_all {
+function build-uploads-all {
     local temptextfile=''
 
     # Maak voor de *site* een nieuwe "all" aan.
@@ -236,7 +236,7 @@ function build_uploads_all {
     rm "$temptextfile"
 }
 
-function build_deb {
+function build-deb {
     local basename=''
     local dir=''
     local file=''
@@ -314,7 +314,7 @@ function build_deb {
 }
 
 
-function term_script {
+function term-script {
     exit $SUCCESS
 }
 
@@ -324,10 +324,10 @@ function term_script {
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
+    kz-common.init-script "$@"
+    check-input "$@"
+    process-input
+    term-script
 }
 
 main "$@"

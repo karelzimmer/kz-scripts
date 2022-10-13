@@ -70,7 +70,7 @@ declare     YELLOW=''
 # Common functions
 ###############################################################################
 
-function kz_common.check_dpkgd_snapd {
+function kz-common.check-dpkgd-snapd {
     local -i dpkg_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
@@ -96,7 +96,7 @@ function kz_common.check_dpkgd_snapd {
 }
 
 
-function kz_common.check_on_ac_power {
+function kz-common.check-on-ac-power {
     local -i on_battery=0
 
     on_ac_power >/dev/null 2>&1 || on_battery=$?
@@ -106,17 +106,17 @@ De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
         if ! $OPTION_GUI; then
-            kz_common.wait_for_enter
+            kz-common.wait-for-enter
         fi
     fi
 
 }
 
 
-function kz_common.check_user_root {
+function kz-common.check-user-root {
     local -i pkexec_rc=0
 
-    if ! kz_common.check_user_sudo; then
+    if ! kz-common.check-user-sudo; then
         info 'Reeds uitgevoerd door de beheerder.'
         exit $SUCCESS
     fi
@@ -138,7 +138,7 @@ te voeren."
 }
 
 
-function kz_common.check_user_sudo {
+function kz-common.check-user-sudo {
     # Mag gebruiker sudo uitvoeren?
     if [[ $UID -eq 0 ]]; then
         # Voor de "grace"-periode van sudo, of als root.
@@ -151,7 +151,7 @@ function kz_common.check_user_sudo {
 }
 
 
-function kz_common.developer {
+function kz-common.developer {
     local action=${1:-check}
     local user_name=''
 
@@ -217,7 +217,7 @@ function info {
 }
 
 
-function kz_common.init_script {
+function kz-common.init-script {
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -241,7 +241,7 @@ function kz_common.init_script {
     fi
 
     if [[ -t 1 ]]; then
-        set_terminal_attributes
+        set-terminal-attributes
     fi
 }
 
@@ -251,7 +251,7 @@ function log {
 }
 
 
-function kz_common.process_options {
+function kz-common.process-options {
     while true; do
         case $1 in
             -u|--usage)
@@ -276,33 +276,33 @@ function kz_common.process_options {
     done
 
     if $OPTION_HELP; then
-        process_option_help
+        kz-common.process-option-help
         exit $SUCCESS
     elif $OPTION_USAGE; then
-        process_option_usage
+        kz-common.process-option-usage
         exit $SUCCESS
     elif $OPTION_VERSION; then
-        process_option_version
+        kz-common.process-option-version
         exit $SUCCESS
     fi
 }
 
 
-function process_option_help {
+function kz-common.process-option-help {
     info "$HELP
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
-function process_option_usage {
+function kz-common.process-option-usage {
     info "$USAGE
 
 Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
-function process_option_version {
+function kz-common.process-option-version {
     local build='unknown'
     local year=1970
 
@@ -317,7 +317,7 @@ Geschreven in $year door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
 
-function kz_common.reset_terminal_attributes {
+function kz-common.reset-terminal-attributes {
     BLINK=''
     BLUE=''
     CURSOR_INVISABLE=''
@@ -330,7 +330,7 @@ function kz_common.reset_terminal_attributes {
 }
 
 
-function set_terminal_attributes {
+function set-terminal-attributes {
     BLINK=$(tput bold; tput blink)
     BLUE=$(tput bold; tput setaf 4)
     CURSOR_INVISABLE=$(tput civis)
@@ -413,12 +413,12 @@ $command, code: $rc ($rc_desc)" --priority=debug
             exit "$rc"
             ;;
         exit)
-            signal_exit
+            signal-exit
             log "Ended (code=exited, status=$status)." --priority=notice
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             if [[ $rc -ne $SUCCESS ]]; then
-                signal_exit_log 'Eén of meerdere opdrachten zijn fout gegaan.'
+                signal-exit-log 'Eén of meerdere opdrachten zijn fout gegaan.'
             fi
             exit "$rc"
             ;;
@@ -430,7 +430,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 }
 
 
-function signal_exit {
+function signal-exit {
     local apt_error="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
 [1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
@@ -467,7 +467,7 @@ een Terminalvenster en voer uit:
 }
 
 
-function signal_exit_log {
+function signal-exit-log {
     local temp_log=''
     local title="Logberichten $DISPLAY_NAME"
 
@@ -495,7 +495,7 @@ function signal_exit_log {
 }
 
 
-function kz_common.wait_for_enter {
+function kz-common.wait-for-enter {
     read -rp '
 Druk op de Enter-toets om door te gaan [Enter]: '
 }
