@@ -447,7 +447,7 @@ function process-cmds-file {
     if $OPTION_SIMULATE; then
         operation+=' simuleren'
     else
-        STATUS_BUSY="[${BLINK}WERK${NORMAL}]"
+        STATUS_BUSY="[${BLINK}${YELLOW}WERK${NORMAL}]"
         STATUS_ERROR="[${RED}FOUT${NORMAL}]"
         STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
         printf '%s' "${CURSOR_INVISABLE}"
