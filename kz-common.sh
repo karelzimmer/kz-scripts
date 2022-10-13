@@ -345,10 +345,10 @@ function set-terminal-attributes {
 
 function signal {
     local       signal=${1:-unknown}
-    local -i    lineno=${2:-0}
+    local -i    lineno=${2:-unknown}
     local       function=${3:-unknown}
     local       command=${4:-unknown}
-    local -i    rc=${5:-1}
+    local -i    rc=${5:-$ERROR}
     local       rc_desc=''
     local -i    rc_desc_signalno=0
     local       status="${RED}$rc/ERROR${NORMAL}"
