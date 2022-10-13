@@ -488,7 +488,7 @@ function process-cmds-file {
 
 
 function process-app-description-record {
-    local record=${1:-record?}
+    local record=${1:-unknown}
 
     app_description="${record:3} $operation"
     write_app_description_line=true
@@ -501,7 +501,7 @@ function process-app-description-record {
 
 
 function process-command-record {
-    local       cmd=${1:-cmd?}
+    local       cmd=${1:-unknown}
     local       app_description_line=''
     local -i    cmd_rc=0
     local -i    desc_maxlen=1000
@@ -559,7 +559,7 @@ function process-command-record {
 
 
 function execute-command {
-    local       cmd=${1:-cmd?}
+    local       cmd=${1:-unknown}
     local -i    cmd_rc=0
     local       status=''
 

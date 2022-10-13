@@ -344,10 +344,10 @@ function set-terminal-attributes {
 
 
 function signal {
-    local       signal=${1:-signal?}
+    local       signal=${1:-unknown}
     local -i    lineno=${2:-0}
-    local       function=${3:-funcname?}
-    local       command=${4:-command?}
+    local       function=${3:-unknown}
+    local       command=${4:-unknown}
     local -i    rc=${5:-1}
     local       rc_desc=''
     local -i    rc_desc_signalno=0
