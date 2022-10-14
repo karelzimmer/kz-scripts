@@ -111,6 +111,11 @@ function process-input {
                 check-record-length
                 check-shellcheck
                 ;;
+            kz-common.sh)
+                check-tags
+                check-record-length
+                check-shellcheck
+                ;;
             *.sh)
                 check-tags
                 check-record-types
@@ -172,10 +177,6 @@ In $script:
 
 function check-record-types {
     local wrong_record=''
-
-    if [[ $script = kz-common.sh ]]; then
-        return $SUCCESS
-    fi
 
     # Kijk naar regels die beginnen met #1 t/m #9.
     # Goed:

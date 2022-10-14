@@ -176,59 +176,18 @@ karel met gebruikersnaam 'Karel Zimmer' op 'pc??'."
 }
 
 
-function error {
-    local title="Foutmelding $DISPLAY_NAME"
-
-    if $NOERROR; then
-        return $SUCCESS
-    fi
-    if $OPTION_GUI; then
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        zenity  --error                 \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
-    else
-        printf "${RED}%b\n${NORMAL}" "$@" >&2
-    fi
-    log "$@" --priority=err
-}
-
-
-function info {
-    local title="Informatie $DISPLAY_NAME"
-
-    if $OPTION_GUI; then
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        zenity  --info                  \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
-    else
-        printf '%b\n' "$@"
-    fi
-    log "$@" --priority=info
-}
-
-
 function kz-common.init-script {
     # Script-hardening.
     set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
-    trap 'signal error   $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
-    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
-    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
-    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
+    trap 'kz-common.trap err     $LINENO $FUNCNAME "$BASH_COMMAND" $?' ERR
+    trap 'kz-common.trap exit    $LINENO $FUNCNAME "$BASH_COMMAND" $?' EXIT
+    trap 'kz-common.trap sighup  $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGHUP
+    trap 'kz-common.trap sigint  $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGINT
+    trap 'kz-common.trap sigpipe $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGPIPE
+    trap 'kz-common.trap sigterm $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGTERM
 
     CMDLINE_ARGS=("$@")
 
@@ -241,13 +200,8 @@ function kz-common.init-script {
     fi
 
     if [[ -t 1 ]]; then
-        set-terminal-attributes
+        kz-common.set-terminal-attributes
     fi
-}
-
-
-function log {
-    printf '%b\n' "$1" |& $LOGCMD
 }
 
 
@@ -330,20 +284,20 @@ function kz-common.reset-terminal-attributes {
 }
 
 
-function set-terminal-attributes {
+function kz-common.set-terminal-attributes {
     BLINK=$(tput bold; tput blink)
+    NORMAL=$(tput sgr0)
     BLUE=$(tput bold; tput setaf 4)
     CURSOR_INVISABLE=$(tput civis)
     CURSOR_VISABLE=$(tput cvvis)
     GREEN=$(tput bold; tput setaf 2)
-    NORMAL=$(tput sgr0)
     RED=$(tput bold; tput setaf 1)
     REWRITE_LINE=$(tput cuu1; tput el)
     YELLOW=$(tput bold; tput setaf 3)
 }
 
 
-function signal {
+function kz-common.trap {
     local       signal=${1:-unknown}
     local -i    lineno=${2:-unknown}
     local       function=${3:-unknown}
@@ -408,17 +362,17 @@ function signal {
 $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
-        error)
+        err)
             error "Programma $PROGRAM_NAME is afgebroken."
             exit "$rc"
             ;;
         exit)
-            signal-exit
+            kz-common.trap-exit
             log "Ended (code=exited, status=$status)." --priority=notice
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             if [[ $rc -ne $SUCCESS ]]; then
-                signal-exit-log 'Eén of meerdere opdrachten zijn fout gegaan.'
+                kz-common.trap-exit-log 'Eén of meerdere opdrachten zijn fout gegaan.'
             fi
             exit "$rc"
             ;;
@@ -430,7 +384,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 }
 
 
-function signal-exit {
+function kz-common.trap-exit {
     local apt_error="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
 [1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
@@ -467,7 +421,7 @@ een Terminalvenster en voer uit:
 }
 
 
-function signal-exit-log {
+function kz-common.trap-exit-log {
     local temp_log=''
     local title="Logberichten $DISPLAY_NAME"
 
@@ -518,5 +472,51 @@ function warning {
     fi
     log "$@" --priority=warn
 }
+
+function error {
+    local title="Foutmelding $DISPLAY_NAME"
+
+    if $NOERROR; then
+        return $SUCCESS
+    fi
+    if $OPTION_GUI; then
+        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+        zenity  --error                 \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
+    else
+        printf "${RED}%b\n${NORMAL}" "$@" >&2
+    fi
+    log "$@" --priority=err
+}
+
+
+function info {
+    local title="Informatie $DISPLAY_NAME"
+
+    if $OPTION_GUI; then
+        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+        zenity  --info                  \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
+    else
+        printf '%b\n' "$@"
+    fi
+    log "$@" --priority=info
+}
+
+
+function log {
+    printf '%b\n' "$1" |& $LOGCMD
+}
+
 
 true
