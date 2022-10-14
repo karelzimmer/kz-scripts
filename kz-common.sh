@@ -133,12 +133,13 @@ function kz-common.check-user-root {
             pkexec "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
             NOERROR=true exit $pkexec_rc
         else
-            log "Restarted (exec sudo $0 ${CMDLINE_ARGS[*]})." --priority=debug
+            log "Restarted (exec sudo $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
+                --priority=debug
             if ! sudo -n true 2> /dev/null; then
                 printf '%s\n' "Authenticatie is vereist om $PROGRAM_NAME uit \
 te voeren."
             fi
-            exec sudo "$0" "${CMDLINE_ARGS[@]}"
+            exec sudo "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}"
         fi
     fi
 }
@@ -476,7 +477,7 @@ function info {
     else
         printf '%b\n' "$@"
     fi
-    # log "$@" --priority=info
+    log "$@" --priority=info
 }
 
 
@@ -495,7 +496,7 @@ function warning {
     else
         printf "${YELLOW}%b\n${NORMAL}" "$@" >&2
     fi
-    # log "$@" --priority=warn
+    log "$@" --priority=warn
 }
 
 function error {
@@ -516,7 +517,7 @@ function error {
     else
         printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
-    # log "$@" --priority=err
+    log "$@" --priority=err
 }
 
 
