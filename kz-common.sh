@@ -113,6 +113,12 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 }
 
 
+function kz-common.wait-for-enter {
+    read -rp '
+Druk op de Enter-toets om door te gaan [Enter]: '
+}
+
+
 function kz-common.check-user-root {
     local -i pkexec_rc=0
 
@@ -182,12 +188,12 @@ function kz-common.init-script {
     set -o errtrace
     set -o nounset
     set -o pipefail
-    trap 'kz-common.trap err     $LINENO $FUNCNAME "$BASH_COMMAND" $?' ERR
-    trap 'kz-common.trap exit    $LINENO $FUNCNAME "$BASH_COMMAND" $?' EXIT
-    trap 'kz-common.trap sighup  $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGHUP
-    trap 'kz-common.trap sigint  $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGINT
-    trap 'kz-common.trap sigpipe $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGPIPE
-    trap 'kz-common.trap sigterm $LINENO $FUNCNAME "$BASH_COMMAND" $?' SIGTERM
+    trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
+    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
+    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
+    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
+    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
     CMDLINE_ARGS=("$@")
 
@@ -200,8 +206,174 @@ function kz-common.init-script {
     fi
 
     if [[ -t 1 ]]; then
-        kz-common.set-terminal-attributes
+        set-terminal-attributes
     fi
+}
+
+
+function signal {
+    local       signal=${1:-unknown}
+    local -i    lineno=${2:-unknown}
+    local       function=${3:-unknown}
+    local       command=${4:-unknown}
+    local -i    rc=${5:-$ERROR}
+    local       rc_desc=''
+    local -i    rc_desc_signalno=0
+    local       status="${RED}$rc/ERROR${NORMAL}"
+
+    case $rc in
+        0)
+            rc_desc='successful termination'
+            status="${GREEN}$rc/SUCCESS${NORMAL}"
+            ;;
+        1)
+            rc_desc='terminated with error'
+            ;;
+        6[4-9]|7[0-8])                  # 64--78
+            rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
+            ;;
+        126)
+            rc_desc='command cannot execute'
+            ;;
+        127)
+            rc_desc='command not found'
+            ;;
+        128)
+            rc_desc='invalid argument to exit'
+            ;;
+        129)                            # SIGHUP (128+1)
+            rc_desc='hangup'
+            ;;
+        130)                            # SIGINT (128+2)
+            rc_desc='terminated by control-c'
+            ;;
+        13[1-9]|140)                    # 140 (128+12)
+            rc_desc_signalno=$((rc - 128))
+            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
+            ;;
+        141)                            # SIGPIPE (128+13)
+            rc_desc='broken pipe: write to pipe with no readers'
+            ;;
+        142)                            # SIGALRM (128+14)
+            rc_desc='timer signal from alarm'
+            ;;
+        143)                            # SIGTERM (128+15)
+            rc_desc='termination signal'
+            ;;
+        14[4-9]|1[5-8][0-9]|19[0-2])    # 144 (128+16)--192 (128+64)
+            rc_desc_signalno=$((rc - 128))
+            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
+            ;;
+        255)
+            rc_desc='exit status out of range'
+            ;;
+        *)
+            rc_desc='unknown error'
+            ;;
+    esac
+
+    log "signal: $signal, line: $lineno, function: $function, command: \
+$command, code: $rc ($rc_desc)" --priority=debug
+
+    case $signal in
+        err)
+            error "Programma $PROGRAM_NAME is afgebroken."
+            exit "$rc"
+            ;;
+        exit)
+            signal-exit
+            log "Ended (code=exited, status=$status)." --priority=notice
+            log "$DASHES"
+            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+            if [[ $rc -ne $SUCCESS ]]; then
+                signal-exit-log
+            fi
+            exit "$rc"
+            ;;
+        *)
+            error "Programma $PROGRAM_NAME is onderbroken."
+            exit "$rc"
+            ;;
+    esac
+}
+
+
+function signal-exit {
+    local apt_error="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
+een Terminalvenster en voer uit:
+[1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
+[2] ${BLUE}sudo apt-get update --fix-missing${NORMAL}
+[3] ${BLUE}sudo apt-get install --fix-broken${NORMAL}
+[4] ${BLUE}sudo update-initramfs -u${NORMAL}"
+
+    case $PROGRAM_NAME in
+        kz-getdeb)
+            # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
+            rm --force kz.{2..99} /tmp/kz-common.sh
+            # Maar wel als in HOME, zoals beschreven in Checklist installatie.
+            cd "$HOME"
+            rm --force kz kz.1
+
+            if [[ $rc -ne $SUCCESS ]]; then
+                log "$apt_error" --priority=debug
+            fi
+            ;;
+        kz-install)
+            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
+
+            if [[ $rc -ne $SUCCESS ]]; then
+                log "$apt_error" --priority=debug
+            fi
+            ;;
+        kz-setup)
+            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
+            ;;
+        *)
+            return $SUCCESS
+            ;;
+    esac
+}
+
+
+function signal-exit-log {
+    local temp_log=''
+    local title="Logberichten $DISPLAY_NAME"
+
+    if $NOERROR; then
+        return $SUCCESS
+    fi
+    temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
+    {
+        printf  "${RED}%s\n${NORMAL}" \
+                'Eén of meerdere opdrachten zijn fout gegaan.'
+        printf "%s\n" 'Logberichten:'
+        eval "$LOGCMD_CHECK"
+        printf "%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
+    } > "$temp_log"
+    if $OPTION_GUI; then
+        zenity  --text-info             \
+                --width     1200        \
+                --height    600         \
+                --title     "$title"    \
+                --filename  "$temp_log" \
+                --ok-label  'Oké'       2> >($LOGCMD) || true
+    else
+        less "$LESS_OPTIONS" "$temp_log"
+    fi
+    rm "$temp_log"
+}
+
+
+function set-terminal-attributes {
+    BLINK=$(tput bold; tput blink)
+    NORMAL=$(tput sgr0)
+    BLUE=$(tput bold; tput setaf 4)
+    CURSOR_INVISABLE=$(tput civis)
+    CURSOR_VISABLE=$(tput cvvis)
+    GREEN=$(tput bold; tput setaf 2)
+    RED=$(tput bold; tput setaf 1)
+    REWRITE_LINE=$(tput cuu1; tput el)
+    YELLOW=$(tput bold; tput setaf 3)
 }
 
 
@@ -284,174 +456,27 @@ function kz-common.reset-terminal-attributes {
 }
 
 
-function kz-common.set-terminal-attributes {
-    BLINK=$(tput bold; tput blink)
-    NORMAL=$(tput sgr0)
-    BLUE=$(tput bold; tput setaf 4)
-    CURSOR_INVISABLE=$(tput civis)
-    CURSOR_VISABLE=$(tput cvvis)
-    GREEN=$(tput bold; tput setaf 2)
-    RED=$(tput bold; tput setaf 1)
-    REWRITE_LINE=$(tput cuu1; tput el)
-    YELLOW=$(tput bold; tput setaf 3)
+function log {
+    printf '%b\n' "$1" |& $LOGCMD
 }
 
 
-function kz-common.trap {
-    local       signal=${1:-unknown}
-    local -i    lineno=${2:-unknown}
-    local       function=${3:-unknown}
-    local       command=${4:-unknown}
-    local -i    rc=${5:-$ERROR}
-    local       rc_desc=''
-    local -i    rc_desc_signalno=0
-    local       status="${RED}$rc/ERROR${NORMAL}"
+function info {
+    local title="Informatie $DISPLAY_NAME"
 
-    case $rc in
-        0)
-            rc_desc='successful termination'
-            status="${GREEN}$rc/SUCCESS${NORMAL}"
-            ;;
-        1)
-            rc_desc='terminated with error'
-            ;;
-        6[4-9]|7[0-8])                  # 64--78
-            rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
-            ;;
-        126)
-            rc_desc='command cannot execute'
-            ;;
-        127)
-            rc_desc='command not found'
-            ;;
-        128)
-            rc_desc='invalid argument to exit'
-            ;;
-        129)                            # SIGHUP (128+1)
-            rc_desc='hangup'
-            ;;
-        130)                            # SIGINT (128+2)
-            rc_desc='terminated by control-c'
-            ;;
-        13[1-9]|140)                    # 140 (128+12)
-            rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
-            ;;
-        141)                            # SIGPIPE (128+13)
-            rc_desc='broken pipe: write to pipe with no readers'
-            ;;
-        142)                            # SIGALRM (128+14)
-            rc_desc='timer signal from alarm'
-            ;;
-        143)                            # SIGTERM (128+15)
-            rc_desc='termination signal'
-            ;;
-        14[4-9]|1[5-8][0-9]|19[0-2])    # 144 (128+16)--192 (128+64)
-            rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
-            ;;
-        255)
-            rc_desc='exit status out of range'
-            ;;
-        *)
-            rc_desc='unknown error'
-            ;;
-    esac
-
-    log "signal: $signal, line: $lineno, function: $function, command: \
-$command, code: $rc ($rc_desc)" --priority=debug
-
-    case $signal in
-        err)
-            error "Programma $PROGRAM_NAME is afgebroken."
-            exit "$rc"
-            ;;
-        exit)
-            kz-common.trap-exit
-            log "Ended (code=exited, status=$status)." --priority=notice
-            log "$DASHES"
-            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            if [[ $rc -ne $SUCCESS ]]; then
-                kz-common.trap-exit-log 'Eén of meerdere opdrachten zijn fout gegaan.'
-            fi
-            exit "$rc"
-            ;;
-        *)
-            error "Programma $PROGRAM_NAME is onderbroken."
-            exit "$rc"
-            ;;
-    esac
-}
-
-
-function kz-common.trap-exit {
-    local apt_error="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
-een Terminalvenster en voer uit:
-[1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
-[2] ${BLUE}sudo apt-get update --fix-missing${NORMAL}
-[3] ${BLUE}sudo apt-get install --fix-broken${NORMAL}
-[4] ${BLUE}sudo update-initramfs -u${NORMAL}"
-
-    case $PROGRAM_NAME in
-        kz-getdeb)
-            # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
-            rm --force kz.{2..99} /tmp/kz-common.sh
-            # Maar wel als in HOME, zoals beschreven in Checklist installatie.
-            cd "$HOME"
-            rm --force kz kz.1
-
-            if [[ $rc -ne $SUCCESS ]]; then
-                log "$apt_error" --priority=debug
-            fi
-            ;;
-        kz-install)
-            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
-
-            if [[ $rc -ne $SUCCESS ]]; then
-                log "$apt_error" --priority=debug
-            fi
-            ;;
-        kz-setup)
-            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
-            ;;
-        *)
-            return $SUCCESS
-            ;;
-    esac
-}
-
-
-function kz-common.trap-exit-log {
-    local temp_log=''
-    local title="Logberichten $DISPLAY_NAME"
-
-    if $NOERROR; then
-        return $SUCCESS
-    fi
-    temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-    {
-        printf "${RED}%s\n${NORMAL}" "$@"
-        printf "%s\n" 'Logberichten:'
-        eval "$LOGCMD_CHECK"
-        printf "%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
-    } > "$temp_log"
     if $OPTION_GUI; then
-        zenity  --text-info             \
-                --width     1200        \
-                --height    600         \
+        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+        zenity  --info                  \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
                 --title     "$title"    \
-                --filename  "$temp_log" \
+                --text      "$@"        \
                 --ok-label  'Oké'       2> >($LOGCMD) || true
     else
-        less "$LESS_OPTIONS" "$temp_log"
+        printf '%b\n' "$@"
     fi
-    rm "$temp_log"
-}
-
-
-function kz-common.wait-for-enter {
-    read -rp '
-Druk op de Enter-toets om door te gaan [Enter]: '
+    log "$@" --priority=info
 }
 
 
@@ -492,30 +517,6 @@ function error {
         printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
     log "$@" --priority=err
-}
-
-
-function info {
-    local title="Informatie $DISPLAY_NAME"
-
-    if $OPTION_GUI; then
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-        zenity  --info                  \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
-    else
-        printf '%b\n' "$@"
-    fi
-    log "$@" --priority=info
-}
-
-
-function log {
-    printf '%b\n' "$1" |& $LOGCMD
 }
 
 
