@@ -31,6 +31,8 @@ declare     OPTIONS_HELP="  -h, --help     toon deze hulptekst
   -v, --version  toon de programmaversie"
 
 declare -a  CMDLINE_ARGS=()
+DASHES=$(printf '%.0s=' {1..120})
+declare -r  DASHES
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
 declare     NOERR=false
@@ -196,7 +198,7 @@ function kz-common.init-script {
 
     CMDLINE_ARGS=("$@")
 
-    log "$(printf '%.0s=' {1..120})"
+    log "$DASHES"
     log "Started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)." \
         --priority=notice
 
@@ -282,7 +284,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
         exit)
             signal-exit
             log "Ended (code=exited, status=$status)." --priority=notice
-            log "$(printf '%.0s=' {1..120})"
+            log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             if [[ $rc -ne $OK ]]; then
                 signal-exit-log
