@@ -231,7 +231,7 @@ installatie van een pakket, met
       met kz install:"
     local search=/etc/apt/sources.list
 
-    dashes=$(printf '%.0s=' {1..100})
+    dashes=$(printf '%.0s=' {1..120})
     printf '%b\n' "$dashes\n$(date)\n$dashes" > "$file"
 
     printf '%b\n' "$header1\n$dashes" >> "$file"
