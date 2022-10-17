@@ -329,10 +329,10 @@ een Terminalvenster en voer uit:
         kz-setup)
             printf "${NORMAL}%s" "${CURSOR_VISABLE}"
             ;;
-        *)
-            return $SUCCESS
-            ;;
     esac
+    if $NOERROR; then
+        log 'signal-exit: NOERROR in effect' --priority=debug
+    fi
 }
 
 
@@ -341,7 +341,6 @@ function signal-exit-log {
     local title="Logberichten $DISPLAY_NAME"
 
     if $NOERROR; then
-        log 'signal-exit-log: NOERROR in effect' --priority=debug
         return $SUCCESS
     fi
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
