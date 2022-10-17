@@ -341,6 +341,7 @@ function signal-exit-log {
     local title="Logberichten $DISPLAY_NAME"
 
     if $NOERROR; then
+        log 'signal-exit-log: NOERROR in effect' --priority=debug
         return $SUCCESS
     fi
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
