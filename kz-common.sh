@@ -18,8 +18,6 @@ readonly MODULE_DESC='Algemene module voor shell scripts'
 readonly OK=0
 readonly ERR=1
 
-DASHES=$(printf '%.0s=' {1..79})
-readonly DASHES
 
 ###############################################################################
 # Common global variables
@@ -198,7 +196,7 @@ function kz-common.init-script {
 
     CMDLINE_ARGS=("$@")
 
-    log "$DASHES"
+    log "$(printf '%.0s=' {1..79})"
     log "Started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)." \
         --priority=notice
 
@@ -284,7 +282,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
         exit)
             signal-exit
             log "Ended (code=exited, status=$status)." --priority=notice
-            log "$DASHES"
+            log "$(printf '%.0s=' {1..79})"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             if [[ $rc -ne $OK ]]; then
                 signal-exit-log

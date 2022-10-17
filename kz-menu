@@ -33,10 +33,12 @@ Opties:
   -g, --gui      start in grafische modus
 $OPTIONS_HELP"
 
+DASHES=$(printf '%.0s=' {1..52})
+readonly DASHES
 readonly MENU1_TITLE=Installatiemenu
-readonly MENU1_HEAD="${DASHES:0:52}
+readonly MENU1_HEAD="$DASHES
 =                 $MENU1_TITLE                  =
-${DASHES:0:52}"
+$DASHES"
 readonly -a MENU1_ACTIONS=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
@@ -56,9 +58,9 @@ readonly -a MENU1_COMMANDS=(
 readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
-readonly MENU2_HEAD="${DASHES:0:52}
+readonly MENU2_HEAD="$DASHES
 =                 $MENU2_TITLE                   =
-${DASHES:0:52}"
+$DASHES"
 readonly -a MENU2_ACTIONS=(
     [1]='Wifi-gegevens tonen'
         'Back-up maken'

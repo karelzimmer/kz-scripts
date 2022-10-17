@@ -217,6 +217,7 @@ function collect-settings-favorite-apps {
 
 
 function collect-settings-installed-apps {
+    local dashes=''
     local file=$tgtdir/Apps
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
@@ -230,21 +231,22 @@ installatie van een pakket, met
       met kz install:"
     local search=/etc/apt/sources.list
 
-    printf '%b\n' "$DASHES\n$(date)\n$DASHES" > "$file"
+    dashes=$(printf '%.0s=' {1..100})
+    printf '%b\n' "$dashes\n$(date)\n$dashes" > "$file"
 
-    printf '%b\n' "$header1\n$DASHES" >> "$file"
+    printf '%b\n' "$header1\n$dashes" >> "$file"
     if ! apt list --manual-installed 2> >($LOGCMD) >> "$file"; then
         true
     fi
-    printf '%b\n' "$DASHES\n" >> "$file"
+    printf '%b\n' "$dashes\n" >> "$file"
 
-    printf '%b\n' "$header2\n$DASHES" >> "$file"
+    printf '%b\n' "$header2\n$dashes" >> "$file"
     if ! snap list 2> /dev/null >> "$file"; then
         printf '%s\n' 'snap is niet geïnstalleerd' >> "$file"
     fi
-    printf '%b\n' "$DASHES\n" >> "$file"
+    printf '%b\n' "$dashes\n" >> "$file"
 
-    printf '%b\n' "$header3\n$DASHES" >> "$file"
+    printf '%b\n' "$header3\n$dashes" >> "$file"
     cd  $search.d
     if !    grep    --recursive             \
                     --no-filename           \
@@ -257,7 +259,7 @@ installatie van een pakket, met
             sort    --unique                >> "$file"; then
         true
     fi
-    printf '%b\n' "$DASHES" >> "$file"
+    printf '%b\n' "$dashes" >> "$file"
 }
 
 
