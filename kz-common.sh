@@ -196,7 +196,7 @@ function kz-common.init-script {
 
     CMDLINE_ARGS=("$@")
 
-    log "$(printf '%.0s=' {1..79})"
+    log "$(printf '%.0s=' {1..120})"
     log "Started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)." \
         --priority=notice
 
@@ -282,7 +282,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
         exit)
             signal-exit
             log "Ended (code=exited, status=$status)." --priority=notice
-            log "$(printf '%.0s=' {1..79})"
+            log "$(printf '%.0s=' {1..120})"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             if [[ $rc -ne $OK ]]; then
                 signal-exit-log

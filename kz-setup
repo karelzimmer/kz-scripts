@@ -515,7 +515,7 @@ function process-command-record {
     fi
 
     if $EXECUTE_COMMANDS; then
-        log "$(printf '%.0s=' {1..100})"
+        log "$(printf '%.0s=' {1..120})"
         desc_printf=$app_description
         if $OPTION_GUI; then
             TEXT="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
