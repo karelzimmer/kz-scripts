@@ -28,6 +28,9 @@ module_desc = 'Algemene module voor Python scripts'
 # Common global variables
 ###############################################################################
 
+ok = 0
+err = 1
+
 
 ###############################################################################
 # Functions
@@ -93,7 +96,7 @@ def check_on_ac_power(program_name):
             input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
         except KeyboardInterrupt:
             print(f"\nProgramma {program_name} is afgebroken.")
-            sys.exit(1)
+            sys.exit(err)
 
 
 def check_user_sudo(program_name):
@@ -106,7 +109,7 @@ def check_user_sudo(program_name):
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         print(f'Reeds uitgevoerd door de beheerder.')
-        sys.exit(0)
+        sys.exit(ok)
     else:
         try:
             subprocess.run('sudo -n true', shell=True, check=True,
@@ -117,11 +120,11 @@ def check_user_sudo(program_name):
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
-                sys.exit(1)
+                sys.exit(err)
             except Exception as ex:
                 print(ex)
                 print(f"\nProgramma {program_name} is afgebroken.")
-                sys.exit(1)
+                sys.exit(err)
 
 
 def process_options(program_name, program_desc, display_name):
@@ -140,10 +143,10 @@ def process_options(program_name, program_desc, display_name):
 
     if args.usage:
         process_option_usage(display_name)
-        sys.exit(0)
+        sys.exit(ok)
     elif args.version:
         process_option_version(program_name)
-        sys.exit(0)
+        sys.exit(ok)
 
 
 def process_option_usage(display_name):
@@ -168,7 +171,7 @@ def process_option_version(program_name):
         year = 1970
     except Exception as ex:
         print(ex)
-        sys.exit(1)
+        sys.exit(err)
     finally:
         print(f"""{program_name} (kz) 365 ({build})
 

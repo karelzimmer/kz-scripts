@@ -52,9 +52,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -74,13 +74,13 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 
     # Aangemeld als ontwikkelaar?
     if ! kz-common.developer check; then
         kz-common.developer report
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 }
 
@@ -142,10 +142,10 @@ function check-code {
     then
         check-pycodestyle
     else
-        error "
+        err "
 In $script:
     Onbekend script.  Functie 'check-code' kan scriptcode niet controleren."
-        MAXRC=$ERROR
+        MAXRC=$ERR
     fi
 }
 
@@ -154,8 +154,8 @@ function check-pycodestyle {
     local -i check_rc=0
 
     pycodestyle "$script" || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        MAXRC=$ERROR
+    if [[ $check_rc -ne $OK ]]; then
+        MAXRC=$ERR
     fi
 }
 
@@ -166,11 +166,11 @@ function check-record-length {
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
-        error "
+        err "
 In $script:
     Één regel is langer dan $max_line_length ($max_line_length_found).
 "
-        MAXRC=$ERROR
+        MAXRC=$ERR
     fi
 }
 
@@ -193,7 +193,7 @@ function check-record-types {
         grep --regexp='#1-'     --invert-match          || true
         )
     if [[ $wrong_record ]]; then
-        error "
+        err "
 In $script:
     Foutieve regel(s) gevonden.
 $(
@@ -201,7 +201,7 @@ $(
                 nl --number-width=8 --number-separator='' --body-numbering=n
 )
 "
-        MAXRC=$ERROR
+        MAXRC=$ERR
     fi
 }
 
@@ -210,8 +210,8 @@ function check-shellcheck {
     local -i check_rc=0
 
     shellcheck --external-sources "$script" || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        MAXRC=$ERROR
+    if [[ $check_rc -ne $OK ]]; then
+        MAXRC=$ERR
     fi
 }
 
@@ -222,7 +222,7 @@ function check-tags {
             --regexp='FIXME'':' \
             --regexp='TODO'':'  \
             "$script"; then
-        warning "
+        warn "
 In $script:
     Gemarkeerde annotatie gevonden.
 
@@ -244,7 +244,7 @@ $(
                 break
                 ;;
             n*|N*)
-                exit $SUCCESS
+                exit $OK
                 break
                 ;;
             *)
@@ -259,7 +259,7 @@ $(
 
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
-        error "
+        err "
 In $script:
     Eindspaties gevonden.
 $(
@@ -267,13 +267,13 @@ $(
     nl      --number-width=4  --number-separator='' --body-numbering=n
 )
 "
-        MAXRC=$ERROR
+        MAXRC=$ERR
     fi
 }
 
 
 function term-script {
-    NOERROR=true exit $MAXRC
+    NOERR=true exit $MAXRC
 }
 
 

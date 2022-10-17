@@ -108,9 +108,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -135,7 +135,7 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 }
 
@@ -176,7 +176,7 @@ function process-menu1-gui {
                     2> >($LOGCMD)
             ) || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
-            exit $SUCCESS
+            exit $OK
         fi
         process-menu1-choice
     done
@@ -244,11 +244,11 @@ function process-menu1-choice {
             process-menu2
             ;;
         6)
-            exit $SUCCESS
+            exit $OK
             ;;
         *)
-            error 'Niet afgehandelde keuze.'
-            NOERROR=true exit $ERROR
+            err 'Niet afgehandelde keuze.'
+            NOERR=true exit $ERR
             ;;
     esac
 }
@@ -406,8 +406,8 @@ function process-menu2-choice {
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         exit_menu2=true
     else
-        error 'Niet afgehandelde keuze.'
-        NOERROR=true exit $ERROR
+        err 'Niet afgehandelde keuze.'
+        NOERR=true exit $ERR
     fi
 }
 
@@ -507,7 +507,7 @@ function execute-command {
     # Verwerk handmatige acties.
     if [[ $command = 'Handmatig' ]]; then
         manual-actions
-        return $SUCCESS
+        return $OK
     fi
 
     # Verwerk (automatische) opdrachten.
@@ -592,7 +592,7 @@ $exec. $action ($command)"
 
 
 function term-script {
-    exit $SUCCESS
+    exit $OK
 }
 
 

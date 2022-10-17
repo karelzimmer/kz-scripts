@@ -82,8 +82,8 @@ declare     OPTION_GUI=false
 declare     OPTION_RESET=false
 declare     OPTION_SIMULATE=false
 declare     STATUS_BUSY=''
-declare     STATUS_ERROR=''
-declare     STATUS_SUCCESS=''
+declare     STATUS_ERR=''
+declare     STATUS_OK=''
 declare     TEXT=''
 declare     TITLE=''
 
@@ -105,9 +105,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -190,7 +190,7 @@ function process-input {
     fi
     # Ergens hiervoor ging het niet helemaal goed.
     if $file_notfound; then
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
@@ -200,13 +200,13 @@ function process-input {
     # Verwerk overige opties; afhankelijk van bestanden en argumenten.
     if $OPTION_APPS; then
         process-option-apps
-        exit $SUCCESS
+        exit $OK
     elif $OPTION_CAT; then
         process-option-cat
-        exit $SUCCESS
+        exit $OK
     elif $OPTION_FILES; then
         process-option-files
-        exit $SUCCESS
+        exit $OK
     fi
 
     for file in "${FILES_TO_PROCESS[@]}"; do
@@ -330,9 +330,9 @@ function process-dfltfiles {
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
     else
-        error "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION." >&2
+        err "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION." >&2
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     if [[ -f $dfltfile_2 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_2
@@ -448,8 +448,8 @@ function process-cmds-file {
         operation+=' simuleren'
     else
         STATUS_BUSY="[${BLINK}${YELLOW}WERK${NORMAL}]"
-        STATUS_ERROR="[${RED}FOUT${NORMAL}]"
-        STATUS_SUCCESS="[${GREEN}GOED${NORMAL}]"
+        STATUS_ERR="[${RED}FOUT${NORMAL}]"
+        STATUS_OK="[${GREEN}GOED${NORMAL}]"
         printf '%s' "${CURSOR_INVISABLE}"
     fi
 
@@ -573,16 +573,16 @@ function execute-command {
 
     log "$app_description_line"
     log "${BLUE}$cmd${NORMAL}"
-    NOERROR=true
+    NOERR=true
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
-    NOERROR=false
+    NOERR=false
     if [[ $cmd_rc -gt $MAXRC ]]; then
         MAXRC=$cmd_rc
     fi
-    if [[ $cmd_rc -eq $SUCCESS ]]; then
-        status="$STATUS_SUCCESS"
+    if [[ $cmd_rc -eq $OK ]]; then
+        status="$STATUS_OK"
     else
-        status="$STATUS_ERROR"
+        status="$STATUS_ERR"
     fi
     log "$status rc=$cmd_rc, maxrc=$MAXRC"
     if ! $OPTION_GUI; then
@@ -597,8 +597,8 @@ function term-script {
     if ! $COMMANDS_FOUND; then
         info 'Geen opdrachten om uit te voeren.'
     elif $EXECUTE_COMMANDS; then
-        if [[ $MAXRC -ne $SUCCESS ]]; then
-            exit $ERROR
+        if [[ $MAXRC -ne $OK ]]; then
+            exit $ERR
         else
             if $OPTION_RESET; then
                 action='Resetten'
@@ -612,7 +612,7 @@ De computer gaat nu afmelden om het instellen van apps af te ronden."
                     kz-common.wait-for-enter
                 fi
                 gnome-session-quit --logout --no-prompt
-                exit $SUCCESS
+                exit $OK
             else
                 info "
 $action is voltooid."
@@ -621,7 +621,7 @@ $action is voltooid."
     else
         less "$LESS_OPTIONS" "$SIM_FILE"
     fi
-    exit $SUCCESS
+    exit $OK
 }
 
 

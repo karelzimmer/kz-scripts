@@ -71,9 +71,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -93,7 +93,7 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 
     clear -x
@@ -201,7 +201,7 @@ Mogelijke oorzaak:
                                         --title     "$TITLE"        \
                                         --infobox   "$TEXT"         \
                                         7 42
-                    NOERROR=true exit $ERROR
+                    NOERR=true exit $ERR
                 fi
             fi
         done
@@ -233,7 +233,7 @@ Typ 'exit' om dit venster te sluiten."
         info 'Status repos (gitstat)...'
         /home/"$USER"/bin/gitstat
     fi
-    exit $SUCCESS
+    exit $OK
 }
 
 
@@ -289,7 +289,7 @@ function download-website {
                 "$ftp_host"                         |& $LOGCMD; then
         rm  "$ftp_login"
         info 'Downloaden website is mislukt.'
-        return  $ERROR
+        return  $ERR
     fi
 }
 

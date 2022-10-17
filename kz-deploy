@@ -54,9 +54,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -76,13 +76,13 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 
     # Aangemeld als ontwikkelaar?
     if ! kz-common.developer check; then
         kz-common.developer report
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 }
 
@@ -108,10 +108,10 @@ function check-names {
                                 "$docs_repo"    \
                                 "$deb_repo"     \
                                 "$uploads_repo" || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        error '
+    if [[ $check_rc -ne $OK ]]; then
+        err '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        NOERROR=true exit $check_rc
+        NOERR=true exit $check_rc
     fi
 }
 
@@ -122,10 +122,10 @@ function check-scripts {
     info 'Controleer scripts (kz ivp)...'
     log "Check scripts with 'kz ivp'."
     "$SCRIPTS_REPO"/kz ivp || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        error '
+    if [[ $check_rc -ne $OK ]]; then
+        err '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        NOERROR=true exit $check_rc
+        NOERR=true exit $check_rc
     fi
 }
 
@@ -136,10 +136,10 @@ function build-package {
     info 'Bouw pakket en website (kz build)...'
     log "Build package and website with 'kz build'."
     "$SCRIPTS_REPO"/kz build || check_rc=$?
-    if [[ $check_rc -ne $SUCCESS ]]; then
-        error '
+    if [[ $check_rc -ne $OK ]]; then
+        err '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        NOERROR=true exit $check_rc
+        NOERR=true exit $check_rc
     fi
 }
 
@@ -166,8 +166,8 @@ function upload-website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
-        error 'Uploaden website is mislukt.'
-        NOERROR=true exit $ERROR
+        err 'Uploaden website is mislukt.'
+        NOERR=true exit $ERR
     fi
     sleep 5
 }
@@ -177,14 +177,14 @@ function install-package {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
-        error 'Installeren pakket kz is niet uitgevoerd.'
-        NOERROR=true exit $ERROR
+        err 'Installeren pakket kz is niet uitgevoerd.'
+        NOERR=true exit $ERR
     fi
 }
 
 
 function term-script {
-    exit $SUCCESS
+    exit $OK
 }
 
 

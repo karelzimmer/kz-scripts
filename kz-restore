@@ -70,9 +70,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -106,7 +106,7 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 }
 
@@ -119,7 +119,7 @@ function process-input {
         if ! [[ -d $SOURCE_ARGUMENT ]]; then
             info "Map $SOURCE_ARGUMENT bestaat niet."
             info "$USAGELINE"
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
         fi
         SOURCE=$SOURCE_ARGUMENT/backup-$HOSTNAME-$USER
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
@@ -128,35 +128,35 @@ function process-input {
         if [[ -z $MEDIUM ]]; then
             TEXT='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
-            warning "$TEXT"
+            warn "$TEXT"
             if ! $OPTION_GUI; then
                 kz-common.wait-for-enter
             fi
             MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $MEDIUM ]]; then
-                error 'Geen USB-medium gevonden.
+                err 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
             fi
         fi
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-            error "Koppel slechts één USB-medium aan.
+            err "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
         fi
         SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
         SOURCE_MEDIUM=$MEDIUM
         if ! [[ -d $SOURCE ]]; then
-            error "Geen back-up gevonden op aangekoppeld USB-medium.
+            err "Geen back-up gevonden op aangekoppeld USB-medium.
 
 Koppel een USB-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
 daarna opnieuw."
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
         fi
     fi
 
@@ -204,7 +204,7 @@ $prompt"
     if $restore; then
         restore-backup
     else
-        exit $SUCCESS
+        exit $OK
     fi
 }
 
@@ -240,15 +240,15 @@ function restore-backup {
 
     case $rsync_rc in
         0)
-            return $SUCCESS
+            return $OK
             ;;
         *)
-            error "Back-up terugzetten is geëindigd met fouten.
+            err "Back-up terugzetten is geëindigd met fouten.
 
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig
 ruimte op $TARGET."
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
             ;;
     esac
 }
@@ -290,19 +290,19 @@ function term-script {
             udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
             udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
         fi
-        if [[ $rc -eq $SUCCESS ]]; then
+        if [[ $rc -eq $OK ]]; then
             info "
 De back-up is teruggezet.
 
 Het USB-medium kan verwijderd worden."
         else
-            warning "
+            warn "
 De back-up is teruggezet.
 
 Koppel zelf (veilig!) het USB-medium af."
         fi
     fi
-    exit $SUCCESS
+    exit $OK
 }
 
 

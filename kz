@@ -52,23 +52,23 @@ function check-input {
     if ! [[ "$*" ]]; then
         info "Verplicht argument 'OPDRACHT' ontbreekt."
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     elif [[ $1 == *-u* ]]; then
         kz-common.process-option-usage
-        exit $SUCCESS
+        exit $OK
     elif [[ $1 == *-h* ]]; then
         kz-common.process-option-help
-        exit $SUCCESS
+        exit $OK
     elif [[ $1 == *-v* ]]; then
         kz-common.process-option-version
-        exit $SUCCESS
+        exit $OK
     elif [[ $1 == *-l* ]]; then
         show-commands
-        exit $SUCCESS
+        exit $OK
     elif ! [[ -f "$PROGRAM_PATH/kz-$1" ]]; then
         info "Opdracht '$1' bestaat niet."
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 }
 
@@ -108,7 +108,7 @@ function process-input {
 
 
 function term-script {
-    exit $SUCCESS
+    exit $OK
 }
 
 

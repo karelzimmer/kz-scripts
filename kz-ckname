@@ -61,9 +61,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -93,7 +93,7 @@ function check-input {
         if ! [[ -d $dir ]]; then
             info "Map '$dir' bestaat niet"
             info "$USAGELINE"
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
         fi
     done
 }
@@ -162,7 +162,7 @@ function check-files-and-folders {
         )
 
     if [[ $count -eq 0 ]]; then
-        return $SUCCESS
+        return $OK
     elif [[ $count -eq 1 ]]; then
         info 'Er is een fout gevonden.'
     else
@@ -172,7 +172,7 @@ function check-files-and-folders {
 
 
 function term-script {
-    exit $SUCCESS
+    exit $OK
 }
 
 

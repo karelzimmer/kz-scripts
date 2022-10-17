@@ -15,8 +15,8 @@
 readonly MODULE_NAME='kz-common.sh'
 readonly MODULE_DESC='Algemene module voor shell scripts'
 
-readonly SUCCESS=0
-readonly ERROR=1
+readonly OK=0
+readonly ERR=1
 
 DASHES=$(printf '%.0s=' {1..79})
 readonly DASHES
@@ -35,7 +35,7 @@ declare     OPTIONS_HELP="  -h, --help     toon deze hulptekst
 declare -a  CMDLINE_ARGS=()
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     NOERROR=false
+declare     NOERR=false
 declare     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
 --quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $DISPLAY_NAME \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
@@ -101,7 +101,7 @@ function kz-common.check-on-ac-power {
 
     on_ac_power >/dev/null 2>&1 || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        warning '
+        warn '
 De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
@@ -124,14 +124,14 @@ function kz-common.check-user-root {
 
     if ! kz-common.check-user-sudo; then
         info 'Reeds uitgevoerd door de beheerder.'
-        exit $SUCCESS
+        exit $OK
     fi
     if [[ $UID -ne 0 ]]; then
         if $OPTION_GUI; then
             log "Restarted (pkexec $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
                 --priority=debug
             pkexec "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
-            NOERROR=true exit $pkexec_rc
+            NOERR=true exit $pkexec_rc
         else
             log "Restarted (exec sudo $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
                 --priority=debug
@@ -149,11 +149,11 @@ function kz-common.check-user-sudo {
     # Mag gebruiker sudo uitvoeren?
     if [[ $UID -eq 0 ]]; then
         # Voor de "grace"-periode van sudo, of als root.
-        return $SUCCESS
+        return $OK
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
-        return $SUCCESS
+        return $OK
     else
-        return $ERROR
+        return $ERR
     fi
 }
 
@@ -172,9 +172,9 @@ function kz-common.developer {
         if  [[  $HOSTNAME == pc??       &&
                 $USER      = 'karel'    &&
                 $user_name = 'Karel Zimmer' ]]; then
-            return $SUCCESS
+            return $OK
         else
-            return $ERROR
+            return $ERR
         fi
     else
         printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
@@ -217,15 +217,15 @@ function signal {
     local -i    lineno=${2:-unknown}
     local       function=${3:-unknown}
     local       command=${4:-unknown}
-    local -i    rc=${5:-$ERROR}
+    local -i    rc=${5:-$ERR}
     local       rc_desc=''
     local -i    rc_desc_signalno=0
-    local       status="${RED}$rc/ERROR${NORMAL}"
+    local       status="${RED}$rc/ERR${NORMAL}"
 
     case $rc in
         0)
             rc_desc='successful termination'
-            status="${GREEN}$rc/SUCCESS${NORMAL}"
+            status="${GREEN}$rc/OK${NORMAL}"
             ;;
         1)
             rc_desc='terminated with error'
@@ -278,7 +278,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         err)
-            error "\nProgramma $PROGRAM_NAME is afgebroken."
+            err "\nProgramma $PROGRAM_NAME is afgebroken."
             exit "$rc"
             ;;
         exit)
@@ -286,13 +286,13 @@ $command, code: $rc ($rc_desc)" --priority=debug
             log "Ended (code=exited, status=$status)." --priority=notice
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            if [[ $rc -ne $SUCCESS ]]; then
+            if [[ $rc -ne $OK ]]; then
                 signal-exit-log
             fi
             exit "$rc"
             ;;
         *)
-            error "\nProgramma $PROGRAM_NAME is onderbroken."
+            err "\nProgramma $PROGRAM_NAME is onderbroken."
             exit "$rc"
             ;;
     esac
@@ -300,7 +300,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
 
 function signal-exit {
-    local apt_error="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
+    local apt_err="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
 [1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
 [2] ${BLUE}sudo apt-get update --fix-missing${NORMAL}
@@ -315,23 +315,23 @@ een Terminalvenster en voer uit:
             cd "$HOME"
             rm --force kz kz.1
 
-            if [[ $rc -ne $SUCCESS ]]; then
-                log "$apt_error" --priority=debug
+            if [[ $rc -ne $OK ]]; then
+                log "$apt_err" --priority=debug
             fi
             ;;
         kz-install)
             printf "${NORMAL}%s" "${CURSOR_VISABLE}"
 
-            if [[ $rc -ne $SUCCESS ]]; then
-                log "$apt_error" --priority=debug
+            if [[ $rc -ne $OK ]]; then
+                log "$apt_err" --priority=debug
             fi
             ;;
         kz-setup)
             printf "${NORMAL}%s" "${CURSOR_VISABLE}"
             ;;
     esac
-    if $NOERROR; then
-        log 'signal-exit: NOERROR in effect' --priority=debug
+    if $NOERR; then
+        log 'signal-exit: NOERR in effect' --priority=debug
     fi
 }
 
@@ -340,8 +340,8 @@ function signal-exit-log {
     local temp_log=''
     local title="Logberichten $DISPLAY_NAME"
 
-    if $NOERROR; then
-        return $SUCCESS
+    if $NOERR; then
+        return $OK
     fi
     temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
     {
@@ -404,13 +404,13 @@ function kz-common.process-options {
 
     if $OPTION_HELP; then
         kz-common.process-option-help
-        exit $SUCCESS
+        exit $OK
     elif $OPTION_USAGE; then
         kz-common.process-option-usage
-        exit $SUCCESS
+        exit $OK
     elif $OPTION_VERSION; then
         kz-common.process-option-version
-        exit $SUCCESS
+        exit $OK
     fi
 }
 
@@ -481,7 +481,7 @@ function info {
 }
 
 
-function warning {
+function warn {
     local title="Waarschuwing $DISPLAY_NAME"
 
     if $OPTION_GUI; then
@@ -499,11 +499,11 @@ function warning {
     log "$@" --priority=warn
 }
 
-function error {
+function err {
     local title="Foutmelding $DISPLAY_NAME"
 
-    if $NOERROR; then
-        return $SUCCESS
+    if $NOERR; then
+        return $OK
     fi
     if $OPTION_GUI; then
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.

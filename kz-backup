@@ -74,9 +74,9 @@ function check-input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $SUCCESS ]]; then
+    if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -115,7 +115,7 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERROR=true exit $ERROR
+        NOERR=true exit $ERR
     fi
 }
 
@@ -125,7 +125,7 @@ function process-input {
         if ! [[ -d $TARGET_ARGUMENT ]]; then
             info "Map $TARGET_ARGUMENT bestaat niet."
             info "$USAGELINE"
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
         fi
         TARGET=$TARGET_ARGUMENT/backup-$HOSTNAME-$USER
         TARGET_MEDIUM=$TARGET_ARGUMENT
@@ -133,26 +133,26 @@ function process-input {
         MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
         if [[ -z $MEDIUM ]]; then
             TEXT="Koppel het USB-medium aan waarop de back-up wordt geplaatst."
-            warning "$TEXT"
+            warn "$TEXT"
             if ! $OPTION_GUI; then
                 kz-common.wait-for-enter
             fi
             MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $MEDIUM ]]; then
-                error 'Geen USB-medium gevonden.
+                err 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
-                NOERROR=true exit $ERROR
+                NOERR=true exit $ERR
             fi
         fi
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-            error "Koppel slechts één USB-medium aan.
+            err "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
         fi
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         TARGET_MEDIUM=$MEDIUM
@@ -342,15 +342,15 @@ EOF
 
     case $rsync_rc in
         0)
-            return $SUCCESS
+            return $OK
             ;;
         *)
-            error "Back-up maken is geeindigd met fouten.
+            err "Back-up maken is geeindigd met fouten.
 
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het maken van de back-up, of is er te weinig ruimte op
 $TARGET."
-            NOERROR=true exit $ERROR
+            NOERR=true exit $ERR
             ;;
     esac
 
@@ -409,19 +409,19 @@ $TEXT..."
             udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
             udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
         fi
-        if [[ $rc -eq $SUCCESS ]]; then
+        if [[ $rc -eq $OK ]]; then
             info "
 De back-up is gemaakt.
 
 Het USB-medium kan verwijderd worden."
         else
-            warning "
+            warn "
 De back-up is gemaakt.
 
 Koppel zelf (veilig!) het USB-medium af."
         fi
     fi
-    exit $SUCCESS
+    exit $OK
 }
 
 
