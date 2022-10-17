@@ -278,7 +278,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         err)
-            error "Programma $PROGRAM_NAME is afgebroken."
+            error "\nProgramma $PROGRAM_NAME is afgebroken."
             exit "$rc"
             ;;
         exit)
@@ -292,7 +292,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
             exit "$rc"
             ;;
         *)
-            error "Programma $PROGRAM_NAME is onderbroken."
+            error "\nProgramma $PROGRAM_NAME is onderbroken."
             exit "$rc"
             ;;
     esac

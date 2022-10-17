@@ -71,7 +71,7 @@ def perform_command(command):
         subprocess.run(f'sudo {command}', shell=True, check=True)
     except Exception as ex:
         print(ex)
-        print(f"Programma {program_name} is afgebroken.")
+        print(f"\nProgramma {program_name} is afgebroken.")
         sys.exit(1)
     else:
         print()
@@ -84,7 +84,7 @@ def snap_refresh():
         subprocess.run('sudo snap refresh', shell=True, check=True)
     except Exception as ex:
         print(ex)
-        print(f"Programma {program_name} is afgebroken.")
+        print(f"\nProgramma {program_name} is afgebroken.")
         sys.exit(1)
 
 
