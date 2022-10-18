@@ -56,7 +56,7 @@ function check-input {
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -76,13 +76,13 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
 
     # Aangemeld als ontwikkelaar?
     if ! kz-common.developer check; then
         kz-common.developer report
-        NOERR=true exit $ERR
+        exit $ERR
     fi
 }
 
@@ -111,7 +111,7 @@ function check-names {
     if [[ $check_rc -ne $OK ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        NOERR=true exit $check_rc
+        exit $check_rc
     fi
 }
 
@@ -125,7 +125,7 @@ function check-scripts {
     if [[ $check_rc -ne $OK ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        NOERR=true exit $check_rc
+        exit $check_rc
     fi
 }
 
@@ -139,7 +139,7 @@ function build-package {
     if [[ $check_rc -ne $OK ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna opnieuw.'
-        NOERR=true exit $check_rc
+        exit $check_rc
     fi
 }
 
@@ -167,7 +167,7 @@ function upload-website {
                 "$ftp_host"                         |& $LOGCMD; then
         rm      "$ftp_login"
         err 'Uploaden website is mislukt.'
-        NOERR=true exit $ERR
+        exit $ERR
     fi
     sleep 5
 }
@@ -178,7 +178,7 @@ function install-package {
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
         err 'Installeren pakket kz is niet uitgevoerd.'
-        NOERR=true exit $ERR
+        exit $ERR
     fi
 }
 

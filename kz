@@ -52,7 +52,7 @@ function check-input {
     if ! [[ "$*" ]]; then
         info "Verplicht argument 'OPDRACHT' ontbreekt."
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     elif [[ $1 == *-u* ]]; then
         kz-common.process-option-usage
         exit $OK
@@ -68,7 +68,7 @@ function check-input {
     elif ! [[ -f "$PROGRAM_PATH/kz-$1" ]]; then
         info "Opdracht '$1' bestaat niet."
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
 }
 

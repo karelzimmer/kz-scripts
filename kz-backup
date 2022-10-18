@@ -76,7 +76,7 @@ function check-input {
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -115,7 +115,7 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
 }
 
@@ -125,7 +125,7 @@ function process-input {
         if ! [[ -d $TARGET_ARGUMENT ]]; then
             info "Map $TARGET_ARGUMENT bestaat niet."
             info "$USAGELINE"
-            NOERR=true exit $ERR
+            exit $ERR
         fi
         TARGET=$TARGET_ARGUMENT/backup-$HOSTNAME-$USER
         TARGET_MEDIUM=$TARGET_ARGUMENT
@@ -142,7 +142,7 @@ function process-input {
                 err 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna opnieuw.'
-                NOERR=true exit $ERR
+                exit $ERR
             fi
         fi
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
@@ -152,7 +152,7 @@ Nu aangekoppeld zijn:
 $MEDIUM
 
 Koppel media af via Bestanden, en start daarna opnieuw."
-            NOERR=true exit $ERR
+            exit $ERR
         fi
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER
         TARGET_MEDIUM=$MEDIUM
@@ -271,7 +271,6 @@ function collect-settings-user-photo {
 
 function create-backup {
     local       exclude=''
-    local       temp_log=''
     local   -i  rsync_rc=0
 
     exclude=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX")
@@ -350,7 +349,7 @@ EOF
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het maken van de back-up, of is er te weinig ruimte op
 $TARGET."
-            NOERR=true exit $ERR
+            exit $ERR
             ;;
     esac
 

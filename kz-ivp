@@ -54,7 +54,7 @@ function check-input {
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -74,13 +74,13 @@ function check-input {
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
 
     # Aangemeld als ontwikkelaar?
     if ! kz-common.developer check; then
         kz-common.developer report
-        NOERR=true exit $ERR
+        exit $ERR
     fi
 }
 
@@ -273,7 +273,7 @@ $(
 
 
 function term-script {
-    NOERR=true exit $MAXRC
+    exit $MAXRC
 }
 
 

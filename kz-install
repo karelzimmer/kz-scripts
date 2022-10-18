@@ -107,7 +107,7 @@ function check-input {
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $OK ]]; then
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
     eval set -- "$parsed"
     kz-common.process-options "$@"
@@ -190,7 +190,7 @@ function process-input {
     fi
     # Ergens hiervoor ging het niet helemaal goed.
     if $file_notfound; then
-        NOERR=true exit $ERR
+        exit $ERR
     fi
     # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
@@ -335,7 +335,7 @@ function process-dfltfiles {
     else
         err "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
         info "$USAGELINE"
-        NOERR=true exit $ERR
+        exit $ERR
     fi
     if [[ -f $dfltfile_2 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_2
@@ -579,9 +579,7 @@ function execute-command {
     log "$app_description_line"
     log "${BLUE}$cmd${NORMAL}"
     kz-common.check-dpkgd-snapd
-    NOERR=true
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
-    NOERR=false
     if [[ $cmd_rc -gt $MAXRC ]]; then
         MAXRC=$cmd_rc
     fi

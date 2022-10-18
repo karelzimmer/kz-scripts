@@ -35,7 +35,6 @@ DASHES=$(printf '%.0s=' {1..120})
 declare -r  DASHES
 declare     HELP='Gebruik: source kz-common.sh
      of: . kz-common.sh'
-declare     NOERR=false
 declare     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
 --quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $DISPLAY_NAME \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
@@ -131,7 +130,7 @@ function kz-common.check-user-root {
             log "Restarted (pkexec $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
                 --priority=debug
             pkexec "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
-            NOERR=true exit $pkexec_rc
+            exit $pkexec_rc
         else
             log "Restarted (exec sudo $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
                 --priority=debug
@@ -272,30 +271,18 @@ function signal {
             rc_desc='unknown error'
             ;;
     esac
-
     log "signal: $signal, line: $lineno, function: $function, command: \
 $command, code: $rc ($rc_desc)" --priority=debug
 
-    case $signal in
-        err)
-            err "\nProgramma $PROGRAM_NAME is afgebroken."
-            exit "$rc"
-            ;;
-        exit)
-            signal-exit
-            log "Ended (code=exited, status=$status)." --priority=notice
-            log "$DASHES"
-            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            if [[ $rc -ne $OK ]]; then
-                signal-exit-log
-            fi
-            exit "$rc"
-            ;;
-        *)
-            err "\nProgramma $PROGRAM_NAME is onderbroken."
-            exit "$rc"
-            ;;
-    esac
+    if [[ $signal = exit ]]; then
+        signal-exit
+        log "Ended (code=exited, status=$status)." --priority=notice
+        log "$DASHES"
+        trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+        exit "$rc"
+    else
+        exit "$rc"
+    fi
 }
 
 
@@ -330,38 +317,6 @@ een Terminalvenster en voer uit:
             printf "${NORMAL}%s" "${CURSOR_VISABLE}"
             ;;
     esac
-    if $NOERR; then
-        log 'signal-exit: NOERR in effect' --priority=debug
-    fi
-}
-
-
-function signal-exit-log {
-    local temp_log=''
-    local title="Logberichten $DISPLAY_NAME"
-
-    if $NOERR; then
-        return $OK
-    fi
-    temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-    {
-        printf  "${RED}%s\n${NORMAL}" \
-                'Eén of meerdere opdrachten zijn fout gegaan.'
-        printf "%s\n" 'Logberichten:'
-        eval "$LOGCMD_CHECK"
-        printf "%s ${BLUE}%s${NORMAL}\n" 'Log-opdracht:' "$LOGCMD_CHECK"
-    } > "$temp_log"
-    if $OPTION_GUI; then
-        zenity  --text-info             \
-                --width     1200        \
-                --height    600         \
-                --title     "$title"    \
-                --filename  "$temp_log" \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
-    else
-        less "$LESS_OPTIONS" "$temp_log"
-    fi
-    rm "$temp_log"
 }
 
 
@@ -444,6 +399,7 @@ Geschreven in $year door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
 
+
 function kz-common.reset-terminal-attributes {
     BLINK=''
     BLUE=''
@@ -499,12 +455,10 @@ function warn {
     log "$@" --priority=warn
 }
 
+
 function err {
     local title="Foutmelding $DISPLAY_NAME"
 
-    if $NOERR; then
-        return $OK
-    fi
     if $OPTION_GUI; then
         # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
         zenity  --error                 \
