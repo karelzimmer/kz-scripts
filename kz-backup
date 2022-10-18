@@ -161,7 +161,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     kz-common.check-on-ac-power
 
     TITLE='Instellingen veiligstellen'
-    TEXT='Instellingen verzamelen'
+    TEXT='Instellingen veiligstellen'
     if $OPTION_GUI; then
         collect-settings                |
         zenity  --progress              \
