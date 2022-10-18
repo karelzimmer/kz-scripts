@@ -185,8 +185,6 @@ function backup-settings {
     local tgtdir=$HOME/Instellingen
 
     mkdir --parents "$tgtdir" |& $LOGCMD
-    # Populate ~/Instellingen with user settings.
-    # Part of these user settings are restored with kz-setup and setup file.
     backup-settings-desktop-background
     backup-settings-favorite-apps
     backup-settings-installed-apps
