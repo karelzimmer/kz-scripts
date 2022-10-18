@@ -82,8 +82,8 @@ sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
 #2 sudo apt-get update
 
 #1 whatsapp (privéberichtenapp)
-sudo snap install whatsapp-for-linux
-#2 sudo snap remove whatsapp-for-linux
+sudo snap install whatsie
+#2 sudo snap remove whatsie
 
 #1 youtube-downloader (download videos)
 sudo apt-get install --yes youtubedl-gui
