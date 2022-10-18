@@ -163,7 +163,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     TITLE='Instellingen veiligstellen'
     TEXT='Instellingen veiligstellen'
     if $OPTION_GUI; then
-        collect-settings                |
+        backup-settings                |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -174,30 +174,30 @@ Koppel media af via Bestanden, en start daarna opnieuw."
                 --text      "$TEXT"     2> >($LOGCMD)
     else
         info "$TEXT..."
-        collect-settings
+        backup-settings
     fi
 
     create-backup
 }
 
 
-function collect-settings {
+function backup-settings {
     local tgtdir=$HOME/Instellingen
 
     mkdir --parents "$tgtdir" |& $LOGCMD
     # Populate ~/Instellingen with user settings.
     # Part of these user settings are restored with kz-setup and setup file.
-    collect-settings-desktop-background
-    collect-settings-favorite-apps
-    collect-settings-installed-apps
-    collect-settings-user-photo
+    backup-settings-desktop-background
+    backup-settings-favorite-apps
+    backup-settings-installed-apps
+    backup-settings-user-photo
 
     # Old folder, lagacy.
     rm --force --recursive "$HOME"/kz-data/
 }
 
 
-function collect-settings-desktop-background {
+function backup-settings-desktop-background {
     local file=$tgtdir/Achtergrond
     local picture_file=''
 
@@ -211,14 +211,14 @@ function collect-settings-desktop-background {
 }
 
 
-function collect-settings-favorite-apps {
+function backup-settings-favorite-apps {
     local file=$tgtdir/Favorieten
 
     gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
 }
 
 
-function collect-settings-installed-apps {
+function backup-settings-installed-apps {
     local file=$tgtdir/Apps
     local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
 met een opdracht zoals
@@ -263,7 +263,7 @@ installatie van een pakket, met
 }
 
 
-function collect-settings-user-photo {
+function backup-settings-user-photo {
     local srcdir=/var/lib/AccountsService/icons
     local file=$tgtdir/Gebruikersfoto
 
