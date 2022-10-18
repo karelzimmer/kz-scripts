@@ -48,8 +48,6 @@ kz-gset --addfavaft=zoom-client_zoom-client
 
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder='KZ Scripts'
-## Achtergrond vastgelegd door kz-backup.
-if [[ -f $HOME/Instellingen/Achtergrond ]]; then gsettings set org.gnome.desktop.background picture-uri "file://$HOME/Instellingen/Achtergrond"; fi
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -65,15 +63,12 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-## Favorieten vastgelegd door kz-backup.
-if [[ -f $HOME/Instellingen/Favorieten ]]; then gsettings set org.gnome.shell favorite-apps "$(cat "$HOME"/Instellingen/Favorieten)"; fi
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 kz-gset --delappfolder='KZ Scripts'
 #2 gsettings reset org.gnome.desktop.app-folders folder-children
-#2 gsettings reset org.gnome.desktop.background picture-uri
 #2 gsettings reset org.gnome.desktop.calendar show-weekdate
 #2 gsettings reset org.gnome.desktop.interface clock-show-date
 #2 gsettings reset org.gnome.desktop.interface clock-show-weekday
@@ -89,7 +84,6 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 #2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 #2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
-#2 gsettings reset org.gnome.shell favorite-apps
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 #2 gsettings reset org.gnome.shell.extensions.ding show-home

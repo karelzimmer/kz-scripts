@@ -159,10 +159,11 @@ Koppel media af via Bestanden, en start daarna opnieuw."
     fi
 
     kz-common.check-on-ac-power
+
     TITLE='Instellingen veiligstellen'
     TEXT='Instellingen verzamelen'
     if $OPTION_GUI; then
-        collect-settings           |
+        collect-settings                |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -175,6 +176,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
         info "$TEXT..."
         collect-settings
     fi
+
     create-backup
 }
 

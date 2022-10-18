@@ -203,6 +203,23 @@ $prompt"
     fi
     if $restore; then
         restore-backup
+
+        TITLE='Instellingen terugzetten'
+        TEXT='Instellingen terugzetten'
+        if $OPTION_GUI; then
+            restore-settings                |
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$TITLE"    \
+                    --text      "$TEXT"     2> >($LOGCMD)
+        else
+            info "$TEXT..."
+            restore-settings
+        fi
     else
         exit $OK
     fi
@@ -251,6 +268,35 @@ ruimte op $TARGET."
             exit $ERR
             ;;
     esac
+}
+
+
+function restore-settings {
+    local tgtdir=$HOME/Instellingen
+
+    restore-settings-desktop-background
+    restore-settings-favorite-apps
+
+    # Old folder, lagacy.
+    rm --force --recursive "$HOME"/kz-data/
+}
+
+
+function restore-settings-desktop-background {
+    local file=$tgtdir/Achtergrond
+
+    if [[ -f $file ]]; then
+        gsettings set org.gnome.desktop.background picture-uri "file://$file"
+    fi
+}
+
+
+function restore-settings-favorite-apps {
+    local file=$tgtdir/Favorieten
+
+    if [[ -f $file ]]; then
+        gsettings set org.gnome.shell favorite-apps "$(cat "$file")"
+    fi
 }
 
 
