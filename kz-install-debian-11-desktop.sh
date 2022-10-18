@@ -35,8 +35,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-remote-desktop.gpg] h
 ## De installatie voegt een apt-key toe die niet meer nodig is.
 sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
 #2 sudo apt-get remove --yes chrome-remote-desktop
-#2 sudo rm --force /etc/apt/sources.list.d/chrome-remote-desktop.list* /usr/share/keyrings/chrome-remote-desktop.gpg*
-#2 sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
+#2 sudo rm --force /etc/apt/sources.list.d/chrome-remote-desktop.list* /usr/share/keyrings/chrome-remote-desktop.gpg* /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
 #2 sudo apt-get update
 
 #1 citrix (telewerken)
@@ -68,8 +67,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl
 ## De installatie voegt een apt-key toe die niet meer nodig is.
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
-#2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg*
-#2 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
+#2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
 
 #1-journalctl (log bekijken)
@@ -90,20 +88,14 @@ sudo snap install spotify
 
 #1 teams (samenwerken)
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-teams.gpg] https://packages.microsoft.com/repos/ms-teams stable main' | sudo tee /etc/apt/sources.list.d/teams.list
-wget --no-verbose --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/microsoft-teams.gpg
-sudo apt-get update
-sudo apt-get install --yes teams
-## De installatie voegt een apt-key toe die niet meer nodig is.
-sudo rm --force /etc/apt/sources.list.d/microsoft.gpg
-## Verwijder PREVIEW in afbeelding.
-sudo cp /usr/share/teams/resources/assets/MicrosoftTeams-static.png /usr/share/pixmaps/teams.png
-## Verwijder Preview in starter.
-sudo sed --in-place --expression='s/Microsoft Teams - Preview/Microsoft Teams/g' /usr/share/applications/teams.desktop
-#2 sudo apt-get remove --yes teams
-#2 sudo rm --force /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg*
-#2 sudo rm --force /etc/apt/trusted.gpg.d/microsoft.gpg
-#2 sudo apt-get update
+sudo apt-get remove --yes teams # Old package.
+sudo rm --force /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg* /etc/apt/trusted.gpg.d/microsoft.gpg # Old package.
+sudo apt-get update # Old package.
+sudo snap install teams
+#2 sudo apt-get remove --yes teams # Old package.
+#2 sudo rm --force /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg* /etc/apt/trusted.gpg.d/microsoft.gpg # Old package.
+#2 sudo apt-get update # Old package.
+#2 sudo snap remove teams
 
 #1 teamviewer (afstandsbediening)
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
@@ -122,7 +114,7 @@ sudo apt-get install --yes thunderbird-l10n-nl
 #2 sudo apt-get remove --yes thunderbird-l10n-nl
 
 #1 zoom (samenwerken)
-wget --no-verbose --output-document=/tmp/zoom.deb 'https://zoom.us/client/5.4.53391.1108/zoom-1_amd64.deb'
-sudo dpkg --install /tmp/zoom.deb || sudo apt-get --fix-broken --yes install
-rm /tmp/zoom.deb
-#2 sudo apt-get remove --yes zoom
+sudo apt-get remove --yes zoom # Old package.
+sudo snap install zoom-client
+#2 sudo apt-get remove --yes zoom # Old package.
+#2 sudo snap remove zoom-client
