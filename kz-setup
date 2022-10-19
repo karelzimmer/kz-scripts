@@ -595,20 +595,16 @@ function term-script {
     if ! $COMMANDS_FOUND; then
         info 'Geen opdrachten om uit te voeren.'
     elif $EXECUTE_COMMANDS; then
-        if $OPTION_RESET; then
-            action='Resetten'
-        fi
-        if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
-            info "
-$action is voltooid.
-
-De computer gaat nu afmelden om het instellen van apps af te ronden."
-            if ! $OPTION_GUI; then
-                kz-common.wait-for-enter
-            fi
-            gnome-session-quit --logout --no-prompt
-            exit $OK
+        if [[ $MAXRC -ne $OK ]]; then
+            err "Eén of meer opdrachten zijn fout gegegaan.
+De maximale afsluitwaarde is $MAXRC.
+Controleer de log in het Terminalvenster met de opdracht:
+${BLUE}$LOGCMD_CHECK${NORMAL}"
+            exit $ERR
         else
+            if $OPTION_RESET; then
+                action='Resetten'
+            fi
             info "
 $action is voltooid."
         fi

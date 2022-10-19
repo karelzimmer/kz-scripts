@@ -602,25 +602,17 @@ function term-script {
         info 'Geen opdrachten om uit te voeren.'
     elif $EXECUTE_COMMANDS; then
         if [[ $MAXRC -ne $OK ]]; then
+            err "Eén of meer opdrachten zijn fout gegegaan.
+De maximale afsluitwaarde is $MAXRC.
+Controleer de log in het Terminalvenster met de opdracht:
+${BLUE}$LOGCMD_CHECK${NORMAL}"
             exit $ERR
         else
             if $OPTION_REMOVE; then
                 action='Verwijderen'
             fi
-            if ! ($ARGUMENT_APP || $ARGUMENT_FILE); then
-                info "
-$action is voltooid.
-
-De computer gaat nu herstarten om het installeren van updates en apps af te \
-ronden."
-                if ! $OPTION_GUI; then
-                    kz-common.wait-for-enter
-                fi
-                systemctl reboot
-            else
-                info "
+            info "
 $action is voltooid."
-            fi
         fi
     else
         less "$LESS_OPTIONS" "$SIM_FILE"

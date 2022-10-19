@@ -430,6 +430,8 @@ function process-commands {
             execute-command
         done
         show-commands-after-execution
+        check_setup_logout
+        check_install_reboot
     fi
 }
 
@@ -588,6 +590,40 @@ function show-commands-after-execution {
 $exec. $action ($command)"
     done
     info "$TEXT"
+}
+
+
+function check_setup_logout {
+    # Uitvoeren bij 'Gebruiker inrichten' of 'Apps instellen'.
+    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[7]}" ]]
+        then
+        TEXT='
+De computer gaat nu afmelden om het instellen van apps af te ronden.'
+        warn "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets voor afmelden [Enter]: '
+        fi
+        gnome-session-quit --logout --no-prompt
+        exit $OK
+    fi
+}
+
+
+function check_install_reboot {
+    # Uitvoeren bij 'Installatie afronden' of 'Apps installeren'.
+    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+        then
+        TEXT="
+De computer gaat nu herstarten om het installeren van updates en apps af te \
+ronden."
+        warn "$TEXT"
+        if ! $OPTION_GUI; then
+            read -rp '
+Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
+        fi
+        systemctl reboot
+    fi
 }
 
 

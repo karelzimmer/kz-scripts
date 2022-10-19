@@ -274,15 +274,25 @@ function signal {
     log "signal: $signal, line: $lineno, function: $function, command: \
 $command, code: $rc ($rc_desc)" --priority=debug
 
-    if [[ $signal = exit ]]; then
-        signal-exit
-        log "Ended (code=exited, status=$status)." --priority=notice
-        log "$DASHES"
-        trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-        exit "$rc"
-    else
-        exit "$rc"
-    fi
+    case $signal in
+        err)
+            err "
+In programma $PROGRAM_NAME is een fout opgetreden."
+            exit "$rc"
+            ;;
+        exit)
+            signal-exit
+            log "Ended (code=exited, status=$status)." --priority=notice
+            log "$DASHES"
+            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+            exit "$rc"
+            ;;
+        *)
+            err "
+Programma $PROGRAM_NAME is onderbroken."
+            exit "$rc"
+            ;;
+    esac
 }
 
 

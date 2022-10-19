@@ -95,6 +95,7 @@ def check_on_ac_power(program_name):
         try:
             input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
         except KeyboardInterrupt:
+            print(f"\nProgramma {program_name} is afgebroken.")
             sys.exit(err)
 
 
@@ -119,6 +120,7 @@ def check_user_sudo(program_name):
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
+                print(f"\nProgramma {program_name} is afgebroken.")
                 sys.exit(err)
             except Exception as ex:
                 print(ex)
