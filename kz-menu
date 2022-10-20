@@ -34,9 +34,9 @@ Opties:
 $OPTIONS_HELP"
 
 readonly MENU1_TITLE=Installatiemenu
-readonly MENU1_HEAD="${DASHES:0:52}
-=                 $MENU1_TITLE                  =
-${DASHES:0:52}"
+readonly MENU1_HEAD="${DASHES:0:54}
+=                  $MENU1_TITLE                   =
+${DASHES:0:54}"
 readonly -a MENU1_ACTIONS=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
@@ -46,19 +46,19 @@ readonly -a MENU1_ACTIONS=(
         'Stoppen'
     )
 readonly -a MENU1_COMMANDS=(
-    [1]='Checklist hoofdstuk 1'
-        'Checklist hoofdstuk 2'
-        'Checklist hoofdstuk 3'
-        'Checklist hoofdstuk 4'
-        'Opdrachten nummer 1-4'
+    [1]='Checklist installatie 1'
+        'Checklist installatie 2'
+        'Checklist installatie 3'
+        'Checklist installatie 4'
+        'Gebruikte opdrachten'
         'Menu verlaten'
     )
 readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
 readonly MENU2_TITLE=Opdrachtenmenu
-readonly MENU2_HEAD="${DASHES:0:52}
-=                 $MENU2_TITLE                   =
-${DASHES:0:52}"
+readonly MENU2_HEAD="${DASHES:0:41}
+=            $MENU2_TITLE             =
+${DASHES:0:41}"
 readonly -a MENU2_ACTIONS=(
     [1]='Wifi-gegevens tonen'
         'Back-up maken'
@@ -445,7 +445,8 @@ function show-commands-before-execution {
     if ! $OPTION_GUI; then
         clear -x
     fi
-    TEXT='Het volgende wordt uitgevoerd:'
+    TEXT='Het volgende wordt uitgevoerd:
+'
     for exec in "${!EXEC[@]}"; do
         action=$(
             printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
@@ -456,9 +457,9 @@ function show-commands-before-execution {
         TEXT+="
 $exec. $action ($command)"
     done
-
-    prompt='
-Doorgaan?'
+    TEXT+='
+'
+    prompt='Doorgaan?'
     if $OPTION_GUI; then
         TEXT+="
 $prompt"
