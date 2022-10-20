@@ -141,7 +141,7 @@ function process-input {
             if [[ -z $MEDIUM ]]; then
                 err 'Geen USB-medium gevonden.
 
-Koppel een USB-medium aan, en start daarna opnieuw.'
+Koppel een USB-medium aan, en start daarna backup opnieuw.'
                 exit $ERR
             fi
         fi
@@ -151,7 +151,7 @@ Koppel een USB-medium aan, en start daarna opnieuw.'
 Nu aangekoppeld zijn:
 $MEDIUM
 
-Koppel media af via Bestanden, en start daarna opnieuw."
+Koppel media af via Bestanden, en start daarna backup opnieuw."
             exit $ERR
         fi
         TARGET=$MEDIUM/backup-$HOSTNAME-$USER

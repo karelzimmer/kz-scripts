@@ -136,7 +136,7 @@ Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
             if [[ -z $MEDIUM ]]; then
                 err 'Geen USB-medium gevonden.
 
-Koppel een USB-medium aan, en start daarna opnieuw.'
+Koppel een USB-medium aan, en start daarna restore opnieuw.'
             exit $ERR
             fi
         fi
@@ -146,7 +146,7 @@ Koppel een USB-medium aan, en start daarna opnieuw.'
 Nu aangekoppeld zijn:
 $MEDIUM
 
-Koppel media af via Bestanden, en start daarna opnieuw."
+Koppel media af via Bestanden, en start daarna restore opnieuw."
             exit $ERR
         fi
         SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
@@ -155,7 +155,7 @@ Koppel media af via Bestanden, en start daarna opnieuw."
             err "Geen back-up gevonden op aangekoppeld USB-medium.
 
 Koppel een USB-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
-daarna opnieuw."
+daarna restore opnieuw."
             exit $ERR
         fi
     fi
