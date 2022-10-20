@@ -50,7 +50,7 @@ readonly -a MENU1_COMMANDS=(
         'Checklist hoofdstuk 2'
         'Checklist hoofdstuk 3'
         'Checklist hoofdstuk 4'
-        'Opdrachten uitvoeren'
+        'Opdrachten 1, 3, en 4'
         'Menu verlaten'
     )
 readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
