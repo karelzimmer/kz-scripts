@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kz-common.sh
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Scripts controleren.
 #
@@ -19,7 +19,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
 PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
 readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz-common.sh
+source  "$PROGRAM_PATH"/kz_common.sh
 
 readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
 readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
@@ -57,7 +57,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz-common.process-options "$@"
+    kz_common.process-options "$@"
 
     while true; do
         case $1 in
@@ -78,8 +78,8 @@ function check-input {
     fi
 
     # Aangemeld als ontwikkelaar?
-    if ! kz-common.developer check; then
-        kz-common.developer report
+    if ! kz_common.developer check; then
+        kz_common.developer report
         exit $ERR
     fi
 }
@@ -111,7 +111,7 @@ function process-input {
                 check-record-length
                 check-shellcheck
                 ;;
-            kz-common.sh)
+            kz_common.sh)
                 check-tags
                 check-record-length
                 check-shellcheck
@@ -282,7 +282,7 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz-common.init-script "$@"
+    kz_common.init-script "$@"
     check-input "$@"
     process-input
     term-script

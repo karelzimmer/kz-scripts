@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kz-common.sh
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Back-up maken.
 #
@@ -19,7 +19,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
 PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
 readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz-common.sh
+source  "$PROGRAM_PATH"/kz_common.sh
 
 readonly OPTIONS_SHORT+='gt:'
 readonly OPTIONS_LONG+=',delete,dry-run,gui,target:'
@@ -79,13 +79,13 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz-common.process-options "$@"
+    kz_common.process-options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                kz-common.reset-terminal-attributes
+                kz_common.reset-terminal-attributes
                 shift
                 ;;
             --delete)
@@ -135,7 +135,7 @@ function process-input {
             TEXT="Koppel het USB-medium aan waarop de back-up wordt geplaatst."
             warn "$TEXT"
             if ! $OPTION_GUI; then
-                kz-common.wait-for-enter
+                kz_common.wait-for-enter
             fi
             MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $MEDIUM ]]; then
@@ -158,7 +158,7 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
         TARGET_MEDIUM=$MEDIUM
     fi
 
-    kz-common.check-on-ac-power
+    kz_common.check-on-ac-power
 
     TITLE='Instellingen veiligstellen'
     TEXT='Instellingen veiligstellen'
@@ -429,7 +429,7 @@ Koppel zelf (veilig!) het USB-medium af."
 ###############################################################################
 
 function main {
-    kz-common.init-script "$@"
+    kz_common.init-script "$@"
     check-input "$@"
     process-input
     term-script

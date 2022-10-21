@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kz-common.sh
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Wifi-gegevens tonen.
 #
@@ -19,7 +19,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
 PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
 readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz-common.sh
+source  "$PROGRAM_PATH"/kz_common.sh
 
 readonly OPTIONS_SHORT+='g'
 readonly OPTIONS_LONG+=',gui'
@@ -60,13 +60,13 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz-common.process-options "$@"
+    kz_common.process-options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                kz-common.reset-terminal-attributes
+                kz_common.reset-terminal-attributes
                 shift
                 ;;
             --)
@@ -111,7 +111,7 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz-common.init-script "$@"
+    kz_common.init-script "$@"
     check-input "$@"
     process-input
     term-script

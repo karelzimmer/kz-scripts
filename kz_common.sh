@@ -12,7 +12,7 @@
 # Common global constants
 ###############################################################################
 
-readonly MODULE_NAME='kz-common.sh'
+readonly MODULE_NAME='kz_common.sh'
 readonly MODULE_DESC='Algemene module voor shell scripts'
 
 readonly OK=0
@@ -33,8 +33,8 @@ declare     OPTIONS_HELP="  -h, --help     toon deze hulptekst
 declare -a  CMDLINE_ARGS=()
 DASHES=$(printf '%.0s=' {1..120})
 declare -r  DASHES
-declare     HELP='Gebruik: source kz-common.sh
-     of: . kz-common.sh'
+declare     HELP='Gebruik: source kz_common.sh
+     of: . kz_common.sh'
 declare     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
 --quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $DISPLAY_NAME \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
@@ -49,8 +49,8 @@ declare     OPTION_USAGE=false
 declare     OPTION_VERSION=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
 declare     PROGRAM_EXEC=${0/#./$PROGRAM_PATH}
-declare     USAGE='Gebruik: source kz-common.sh
-     of: . kz-common.sh'
+declare     USAGE='Gebruik: source kz_common.sh
+     of: . kz_common.sh'
 declare     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
@@ -69,7 +69,7 @@ declare     YELLOW=''
 # Common functions
 ###############################################################################
 
-function kz-common.check-dpkgd-snapd {
+function kz_common.check-dpkgd-snapd {
     local -i dpkg_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
@@ -95,7 +95,7 @@ function kz-common.check-dpkgd-snapd {
 }
 
 
-function kz-common.check-on-ac-power {
+function kz_common.check-on-ac-power {
     local -i on_battery=0
 
     on_ac_power >/dev/null 2>&1 || on_battery=$?
@@ -105,23 +105,23 @@ De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
         if ! $OPTION_GUI; then
-            kz-common.wait-for-enter
+            kz_common.wait-for-enter
         fi
     fi
 
 }
 
 
-function kz-common.wait-for-enter {
+function kz_common.wait-for-enter {
     read -rp '
 Druk op de Enter-toets om door te gaan [Enter]: '
 }
 
 
-function kz-common.check-user-root {
+function kz_common.check-user-root {
     local -i pkexec_rc=0
 
-    if ! kz-common.check-user-sudo; then
+    if ! kz_common.check-user-sudo; then
         info 'Reeds uitgevoerd door de beheerder.'
         exit $OK
     fi
@@ -144,7 +144,7 @@ te voeren."
 }
 
 
-function kz-common.check-user-sudo {
+function kz_common.check-user-sudo {
     # Mag gebruiker sudo uitvoeren?
     if [[ $UID -eq 0 ]]; then
         # Voor de "grace"-periode van sudo, of als root.
@@ -157,7 +157,7 @@ function kz-common.check-user-sudo {
 }
 
 
-function kz-common.developer {
+function kz_common.developer {
     local action=${1:-check}
     local user_name=''
 
@@ -182,7 +182,7 @@ karel met gebruikersnaam 'Karel Zimmer' op 'pc??'."
 }
 
 
-function kz-common.init-script {
+function kz_common.init-script {
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -307,7 +307,7 @@ een Terminalvenster en voer uit:
     case $PROGRAM_NAME in
         kz-getdeb)
             # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
-            rm --force kz.{2..99} /tmp/kz-common.sh
+            rm --force kz.{2..99} /tmp/kz_common.sh
             # Maar wel als in HOME, zoals beschreven in Checklist installatie.
             cd "$HOME"
             rm --force kz kz.1
@@ -343,7 +343,7 @@ function set-terminal-attributes {
 }
 
 
-function kz-common.process-options {
+function kz_common.process-options {
     while true; do
         case $1 in
             -u|--usage)
@@ -368,33 +368,33 @@ function kz-common.process-options {
     done
 
     if $OPTION_HELP; then
-        kz-common.process-option-help
+        kz_common.process-option-help
         exit $OK
     elif $OPTION_USAGE; then
-        kz-common.process-option-usage
+        kz_common.process-option-usage
         exit $OK
     elif $OPTION_VERSION; then
-        kz-common.process-option-version
+        kz_common.process-option-version
         exit $OK
     fi
 }
 
 
-function kz-common.process-option-help {
+function kz_common.process-option-help {
     info "$HELP
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
-function kz-common.process-option-usage {
+function kz_common.process-option-usage {
     info "$USAGE
 
 Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
-function kz-common.process-option-version {
+function kz_common.process-option-version {
     local build='unknown'
     local year=1970
 
@@ -410,7 +410,7 @@ Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
 
 
-function kz-common.reset-terminal-attributes {
+function kz_common.reset-terminal-attributes {
     BLINK=''
     BLUE=''
     CURSOR_INVISABLE=''

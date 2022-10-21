@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck source=kz-common.sh
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Pakket kz installeren.
 #
@@ -20,20 +20,20 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
 readonly PROGRAM_PATH
 temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-if ! source "$PROGRAM_PATH"/kz-common.sh &>> "$temp_log"; then
+if ! source "$PROGRAM_PATH"/kz_common.sh &>> "$temp_log"; then
     temp_src=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.src")
     if ! wget   --no-verbose                                                \
                 --output-document="$temp_src"                               \
-                'https://karelzimmer.nl/data/linux/scripts/kz-common.sh'    \
+                'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'    \
                 &>> "$temp_log"; then
         printf  '%s\n%s\n'                              \
-                'Downloaden kz-common.sh is mislukt.'   \
+                'Downloaden kz_common.sh is mislukt.'   \
                 "Controleer $temp_log."
         exit 1
     fi
     if ! source "$temp_src" &>> "$temp_log"; then
         printf  '%s\n%s\n'                          \
-                'Inlezen kz-common.sh is mislukt.'  \
+                'Inlezen kz_common.sh is mislukt.'  \
                 "Controleer $temp_log."
         exit 1
     fi
@@ -76,7 +76,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz-common.process-options "$@"
+    kz_common.process-options "$@"
 
     while true; do
         case $1 in
@@ -97,14 +97,14 @@ function check-input {
     fi
 
     clear -x
-    if ! kz-common.check-user-sudo; then
+    if ! kz_common.check-user-sudo; then
         term-script
     fi
-    kz-common.check-on-ac-power
+    kz_common.check-on-ac-power
 }
 
 
-function kz-common.check-on-ac-power {
+function kz_common.check-on-ac-power {
     local -i on_battery=0
 
     on_ac_power &> /dev/null || on_battery=$?
@@ -130,7 +130,7 @@ function install-scriptspackage {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    kz-common.check-user-sudo
+    kz_common.check-user-sudo
 
     TITLE='Voortgang'
     TEXT='Installeer pakket kz (kan even duren)...'
@@ -141,16 +141,16 @@ function install-scriptspackage {
 
     # Bij Ubuntu Live sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        kz-common.check-dpkgd-snapd
+        kz_common.check-dpkgd-snapd
         sudo apt-add-repository --yes universe  |& $LOGCMD
-        kz-common.check-dpkgd-snapd
+        kz_common.check-dpkgd-snapd
         sudo apt-get update |& $LOGCMD
     fi
 
     # Installeer pakket kz.
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
-    kz-common.check-dpkgd-snapd
+    kz_common.check-dpkgd-snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
@@ -160,7 +160,7 @@ function install-scriptspackage {
 }
 
 
-function kz-common.check-user-sudo {
+function kz_common.check-user-sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TITLE='Authenticatie nodig'
@@ -225,7 +225,7 @@ Typ 'exit' om dit venster te sluiten."
                         --title     "$TITLE"        \
                         --infobox   "$TEXT"         \
                         16 41
-    if kz-common.developer check; then
+    if kz_common.developer check; then
         info '* ONTWIKKELAAR *'
         check-dependencies
         download-website
@@ -240,7 +240,7 @@ Typ 'exit' om dit venster te sluiten."
 function check-dependencies {
     info 'Controleer afhankelijkheden...'
     # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
-    kz-common.check-dpkgd-snapd
+    kz_common.check-dpkgd-snapd
     sudo    apt-get             \
             install             \
             --yes               \
@@ -258,9 +258,9 @@ function check-dependencies {
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian pakket is oud, snap is nieuwer.
-    kz-common.check-dpkgd-snapd
+    kz_common.check-dpkgd-snapd
     sudo snap install shellcheck |& $LOGCMD
-    kz-common.check-dpkgd-snapd
+    kz_common.check-dpkgd-snapd
     sudo snap install --classic code |& $LOGCMD
 }
 
@@ -315,7 +315,7 @@ function pull-repos {
 ###############################################################################
 
 function main {
-    kz-common.init-script "$@"
+    kz_common.init-script "$@"
     check-input "$@"
     process-input
     term-script
