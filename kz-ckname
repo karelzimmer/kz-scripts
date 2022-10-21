@@ -49,7 +49,7 @@ declare -a  MAP_ARGUMENTS=()
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    getopt_rc=0
     local -i    map_arg_num=0
     local       parsed=''
@@ -66,7 +66,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -99,12 +99,12 @@ function check-input {
 }
 
 
-function process-input {
-    check-files-and-folders
+function process_input {
+    check_files
 }
 
 
-function check-files-and-folders {
+function check_files {
     local       basename
     local -i    count=0
     local       dirname
@@ -171,7 +171,7 @@ function check-files-and-folders {
 }
 
 
-function term-script {
+function term_script {
     exit $OK
 }
 
@@ -181,10 +181,10 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

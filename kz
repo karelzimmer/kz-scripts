@@ -47,23 +47,23 @@ Argumenten:
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     # Geen getopt want opgegeven opties zijn voor 'OPDRACHT', niet voor kz.
     if ! [[ "$*" ]]; then
         info "Verplicht argument 'OPDRACHT' ontbreekt."
         info "$USAGELINE"
         exit $ERR
-    elif [[ $1 == *-u* ]]; then
-        kz_common.process-option-usage
+    elif [[ $1 == -u* || $1 == --u* ]]; then
+        kz_common.process_option_usage
         exit $OK
-    elif [[ $1 == *-h* ]]; then
-        kz_common.process-option-help
+    elif [[ $1 == -h* || $1 == --h* ]]; then
+        kz_common.process_option_help
         exit $OK
-    elif [[ $1 == *-v* ]]; then
-        kz_common.process-option-version
+    elif [[ $1 == -v* || $1 == --v* ]]; then
+        kz_common.process_option_version
         exit $OK
-    elif [[ $1 == *-l* ]]; then
-        show-commands
+    elif [[ $1 == -l* || $1 == --l* ]]; then
+        show_commands
         exit $OK
     elif ! [[ -f "$PROGRAM_PATH/kz-$1" ]]; then
         info "Opdracht '$1' bestaat niet."
@@ -73,7 +73,7 @@ function check-input {
 }
 
 
-function show-commands {
+function show_commands {
     info 'De volgende OPDRACHTen zijn beschikbaar:
 
      OPDRACHT'
@@ -98,7 +98,7 @@ ${BLUE}$DISPLAY_NAME OPDRACHT${NORMAL}"
 }
 
 
-function process-input {
+function process_input {
     local program_name=''
 
     program_name=$1
@@ -107,7 +107,7 @@ function process-input {
 }
 
 
-function term-script {
+function term_script {
     exit $OK
 }
 
@@ -117,10 +117,10 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input "$@"
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input "$@"
+    term_script
 }
 
 main "$@"

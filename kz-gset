@@ -73,7 +73,7 @@ declare OPTION_RESETFAVS=false
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -89,7 +89,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -147,28 +147,28 @@ function check-input {
 }
 
 
-function process-input {
+function process_input {
     if $OPTION_ADDFAVAFT; then
-        process-option-addfavaft
+        process_option_addfavaft
     elif $OPTION_ADDFAVBEF; then
-        process-option-addfavbef
+        process_option_addfavbef
     elif $OPTION_DELFAV; then
-        process-option-delfav
+        process_option_delfav
     elif $OPTION_LIST; then
-        process-option-list
+        process_option_list
     elif $OPTION_RESETFAVS; then
-        process-option-resetfavs
+        process_option_resetfavs
     elif $OPTION_ADDAPPFOLDER; then
-        process-option-addappfolder
+        process_option_addappfolder
     elif $OPTION_DELAPPFOLDER; then
-        process-option-delappfolder
+        process_option_delappfolder
     else
-        capture-gui-changes
+        capture_gui_changes
     fi
 }
 
 
-function process-option-addfavaft  {
+function process_option_addfavaft  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -184,7 +184,7 @@ function process-option-addfavaft  {
 }
 
 
-function process-option-addfavbef  {
+function process_option_addfavbef  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -200,7 +200,7 @@ function process-option-addfavbef  {
 }
 
 
-function process-option-delfav  {
+function process_option_delfav  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -217,18 +217,18 @@ function process-option-delfav  {
 }
 
 
-function process-option-list  {
+function process_option_list  {
     gsettings get org.gnome.shell favorite-apps
     gsettings get org.gnome.desktop.app-folders folder-children
 }
 
 
-function process-option-resetfavs  {
+function process_option_resetfavs  {
     gsettings reset org.gnome.shell favorite-apps
 }
 
 
-function process-option-addappfolder  {
+function process_option_addappfolder  {
     local app_folders=''
     local schema=''
     local path=''
@@ -253,7 +253,7 @@ function process-option-addappfolder  {
 }
 
 
-function process-option-delappfolder  {
+function process_option_delappfolder  {
     local app_folders=''
     local schema=''
     local path=''
@@ -274,18 +274,18 @@ function process-option-delappfolder  {
 }
 
 
-function capture-gui-changes {
+function capture_gui_changes {
     CONFIG_A=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
-    save-configuration-database A "$CONFIG_A"
+    save_configuration_database A "$CONFIG_A"
     info 'Voer nu de wijziging uit in de grafische werkomgeving.'
-    kz_common.wait-for-enter
+    kz_common.wait_for_enter
     CONFIG_B=$(mktemp -t "$PROGRAM_NAME-B-XXXXXXXXXX.lst")
-    save-configuration-database B "$CONFIG_B"
-    report-database-changes "$CONFIG_A" "$CONFIG_B"
+    save_configuration_database B "$CONFIG_B"
+    report_database_changes "$CONFIG_A" "$CONFIG_B"
 }
 
 
-function save-configuration-database {
+function save_configuration_database {
     local fase=${1:-unknown}
     local output_file=${2:-/dev/null}
 
@@ -299,7 +299,7 @@ function save-configuration-database {
 }
 
 
-function report-database-changes {
+function report_database_changes {
     local output_file1=${1:-/dev/null}
     local output_file2=${2:-/dev/null}
 
@@ -314,7 +314,7 @@ Bij WIJZIGINGen voer uit: ${BLUE}gsettings set WIJZIGING${NORMAL}"
 }
 
 
-function term-script {
+function term_script {
     exit $OK
 }
 
@@ -324,10 +324,10 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

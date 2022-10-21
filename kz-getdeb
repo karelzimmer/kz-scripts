@@ -60,7 +60,7 @@ declare TITLE=''
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -76,7 +76,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -97,14 +97,14 @@ function check-input {
     fi
 
     clear -x
-    if ! kz_common.check-user-sudo; then
-        term-script
+    if ! kz_common.check_user_sudo; then
+        term_script
     fi
-    kz_common.check-on-ac-power
+    kz_common.check_on_ac_power
 }
 
 
-function kz_common.check-on-ac-power {
+function kz_common.check_on_ac_power {
     local -i on_battery=0
 
     on_ac_power &> /dev/null || on_battery=$?
@@ -121,16 +121,16 @@ Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
 }
 
 
-function process-input {
-    install-scriptspackage
+function process_input {
+    install_package
 }
 
 
-function install-scriptspackage {
+function install_package {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    kz_common.check-user-sudo
+    kz_common.check_user_sudo
 
     TITLE='Voortgang'
     TEXT='Installeer pakket kz (kan even duren)...'
@@ -141,16 +141,16 @@ function install-scriptspackage {
 
     # Bij Ubuntu Live sessie de universe repo aanzetten.
     if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        kz_common.check-dpkgd-snapd
+        kz_common.check_dpkgd_snapd
         sudo apt-add-repository --yes universe  |& $LOGCMD
-        kz_common.check-dpkgd-snapd
+        kz_common.check_dpkgd_snapd
         sudo apt-get update |& $LOGCMD
     fi
 
     # Installeer pakket kz.
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --no-verbose --output-document="$temp_deb" $site_deb |& $LOGCMD
-    kz_common.check-dpkgd-snapd
+    kz_common.check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
@@ -160,7 +160,7 @@ function install-scriptspackage {
 }
 
 
-function kz_common.check-user-sudo {
+function kz_common.check_user_sudo {
     if ! sudo -n true 2> /dev/null; then
         while true; do
             TITLE='Authenticatie nodig'
@@ -209,7 +209,7 @@ Mogelijke oorzaak:
 }
 
 
-function term-script {
+function term_script {
     TITLE='Gereed'
     TEXT="Pakket kz is succesvol geïnstalleerd.
 
@@ -227,9 +227,9 @@ Typ 'exit' om dit venster te sluiten."
                         16 41
     if kz_common.developer check; then
         info '* ONTWIKKELAAR *'
-        check-dependencies
-        download-website
-        pull-repos
+        check_dependencies
+        download_website
+        pull_repos
         info 'Status repos (gitstat)...'
         /home/"$USER"/bin/gitstat
     fi
@@ -237,10 +237,10 @@ Typ 'exit' om dit venster te sluiten."
 }
 
 
-function check-dependencies {
+function check_dependencies {
     info 'Controleer afhankelijkheden...'
     # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
-    kz_common.check-dpkgd-snapd
+    kz_common.check_dpkgd_snapd
     sudo    apt-get             \
             install             \
             --yes               \
@@ -258,14 +258,14 @@ function check-dependencies {
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian pakket is oud, snap is nieuwer.
-    kz_common.check-dpkgd-snapd
+    kz_common.check_dpkgd_snapd
     sudo snap install shellcheck |& $LOGCMD
-    kz_common.check-dpkgd-snapd
+    kz_common.check_dpkgd_snapd
     sudo snap install --classic code |& $LOGCMD
 }
 
 
-function download-website {
+function download_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
     local ftp_to=$HOME/kz-uploads/dist
@@ -294,7 +294,7 @@ function download-website {
 }
 
 
-function pull-repos {
+function pull_repos {
     local bin_repo=/home/"$USER"/bin
 
     info 'Pull repos (gitpull)...'
@@ -315,10 +315,10 @@ function pull-repos {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

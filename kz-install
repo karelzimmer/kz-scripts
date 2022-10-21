@@ -92,7 +92,7 @@ declare     TITLE=''
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    app_arg_num=0
     local -i    file_arg_num=0
     local -i    getopt_rc=0
@@ -110,7 +110,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -132,7 +132,7 @@ function check-input {
                 ;;
             -g|--gui)
                 OPTION_GUI=true
-                kz_common.reset-terminal-attributes
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             -r|--remove)
@@ -171,7 +171,7 @@ function check-input {
 }
 
 
-function process-input {
+function process_input {
     local       dfltfile_1=''
     local       dfltfile_2=''
     local       file_notfound=false
@@ -183,10 +183,10 @@ function process-input {
     dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION\
 -$HOSTNAME.sh
     if $ARGUMENT_APP; then
-        process-argument-app
+        process_argument_app
     fi
     if $ARGUMENT_FILE; then
-        process-argument-file
+        process_argument_file
     fi
     # Ergens hiervoor ging het niet helemaal goed.
     if $file_notfound; then
@@ -194,25 +194,25 @@ function process-input {
     fi
     # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
     if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
-        process-dfltfiles
+        process_dfltfiles
     fi
 
     # Verwerk overige opties; afhankelijk van bestanden en argumenten.
     if $OPTION_APPS; then
-        process-option-apps
+        process_option_apps
         exit $OK
     elif $OPTION_CAT; then
-        process-option-cat
+        process_option_cat
         exit $OK
     elif $OPTION_FILES; then
-        process-option-files
+        process_option_files
         exit $OK
     fi
 
     # Opdrachten uitvoeren of simuleren.
     if $EXECUTE_COMMANDS; then
-        kz_common.check-user-root
-        kz_common.check-on-ac-power
+        kz_common.check_user_root
+        kz_common.check_on_ac_power
     fi
 
     for file in "${FILES_TO_PROCESS[@]}"; do
@@ -225,7 +225,7 @@ function process-input {
         # Met "|& zenity --progress" worden globale variabelen uit aangeroepen
         # functies niet doorgegeven, vandaar de 'process substitution' met
         # "> >(zenity...)".
-        process-cmds-file > >(
+        process_cmds_file > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -236,12 +236,12 @@ function process-input {
                     --text      "$TEXT"     2> >($LOGCMD)
             )
     else
-        process-cmds-file
+        process_cmds_file
     fi
 }
 
 
-function process-argument-app {
+function process_argument_app {
     local       app=''
     local       file=''
     local -a    files=()
@@ -260,7 +260,7 @@ function process-argument-app {
             head    --lines=1               || printf '\n'
             )
         if [[ $file ]]; then
-            process-argument-app-file
+            process_argument_app_file
         else
             info "App $app niet gevonden."
             file_notfound=true
@@ -275,7 +275,7 @@ function process-argument-app {
 }
 
 
-function process-argument-app-file {
+function process_argument_app_file {
     local app_found=false
     local record=''
 
@@ -310,7 +310,7 @@ function process-argument-app-file {
 }
 
 
-function process-argument-file {
+function process_argument_file {
     local file=''
 
     for file in "${FILE_ARGUMENTS[@]}"; do
@@ -328,7 +328,7 @@ function process-argument-file {
 }
 
 
-function process-dfltfiles {
+function process_dfltfiles {
     if [[ -f $dfltfile_1 ]]; then
         FILES_TO_PROCESS[$file_num]=$dfltfile_1
         ((++file_num))
@@ -344,7 +344,7 @@ function process-dfltfiles {
 }
 
 
-function process-option-apps {
+function process_option_apps {
     local -a    files=()
 
     # Zoek naar beschikbare APPs in alle installatiebestanden.
@@ -380,7 +380,7 @@ ${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}"
 }
 
 
-function process-option-cat {
+function process_option_cat {
     local first_file=true
 
     for file in "${FILES_TO_PROCESS[@]}"; do
@@ -398,7 +398,7 @@ function process-option-cat {
 }
 
 
-function process-option-files {
+function process_option_files {
     TEXT="De volgende installatieBESTANDen zijn aanwezig:
 
      BESTAND
@@ -426,7 +426,7 @@ Om de verwerking van BESTANDen te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
 }
 
 
-function process-cmds-file {
+function process_cmds_file {
     local       app_description=''
     local       first_description_line=true
     local       operation='installeren'
@@ -465,12 +465,12 @@ function process-cmds-file {
                 ;;
             '#1')
                 # Appnaam en -beschrijving.
-                process-app-description-record "$record"
+                process_app_description_record "$record"
                 ;;
             '#2')
                 # Verwijderopdracht.
                 if $OPTION_REMOVE; then
-                    process-command-record "${record:3}"
+                    process_command_record "${record:3}"
                 fi
                 ;;
             '#'*)
@@ -480,7 +480,7 @@ function process-cmds-file {
             *)
                 # Installatieopdracht.
                 if ! $OPTION_REMOVE; then
-                    process-command-record "$record"
+                    process_command_record "$record"
                 fi
                 ;;
         esac
@@ -490,7 +490,7 @@ function process-cmds-file {
 }
 
 
-function process-app-description-record {
+function process_app_description_record {
     local record=${1:-unknown}
 
     app_description="${record:3} $operation"
@@ -504,7 +504,7 @@ function process-app-description-record {
 }
 
 
-function process-command-record {
+function process_command_record {
     local       cmd=${1:-unknown}
     local       app_description_line=''
     local -i    cmd_rc=0
@@ -540,7 +540,7 @@ function process-command-record {
                 "$app_tot_num"                                      \
                 "$cmd_seq_num"                                      \
                 "$desc_printf"
-        execute-command "$cmd"
+        execute_command "$cmd"
     else
         # OPTION_SIMULATE
         if $write_app_description_line; then
@@ -563,7 +563,7 @@ function process-command-record {
 }
 
 
-function execute-command {
+function execute_command {
     local       cmd=${1:-unknown}
     local -i    cmd_rc=0
     local       status=''
@@ -578,7 +578,7 @@ function execute-command {
 
     log "$app_description_line"
     log "${BLUE}$cmd${NORMAL}"
-    kz_common.check-dpkgd-snapd
+    kz_common.check_dpkgd_snapd
     eval "$cmd" |& $LOGCMD || cmd_rc=$?
     if [[ $cmd_rc -gt $MAXRC ]]; then
         MAXRC=$cmd_rc
@@ -595,7 +595,7 @@ function execute-command {
 }
 
 
-function term-script {
+function term_script {
     local action='Installeren'
 
     if ! $COMMANDS_FOUND; then
@@ -626,10 +626,10 @@ $action is voltooid."
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

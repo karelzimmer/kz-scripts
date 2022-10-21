@@ -9,14 +9,14 @@
 readonly TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
 readonly TITLE='VirtualBox'
 
-function start-vm {
+function start_vm {
      while ! lsmod | grep --quiet --regexp='vbox'; do
          sleep 5
      done
     VBoxManage startvm 'hugowin732'
 }
 
-start-vm                        |
+start_vm                        |
 zenity  --progress              \
         --pulsate               \
         --auto-close            \

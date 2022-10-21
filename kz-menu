@@ -97,7 +97,7 @@ declare     TITLE=''
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -113,13 +113,13 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                kz_common.reset-terminal-attributes
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             --)
@@ -140,16 +140,16 @@ function check-input {
 }
 
 
-function process-input {
+function process_input {
     if $OPTION_GUI; then
-        process-menu1-gui
+        process_menu1_gui
     else
-        process-menu1-tui
+        process_menu1_tui
     fi
 }
 
 
-function process-menu1-gui {
+function process_menu1_gui {
     local -i zenity_rc=0
 
     while true; do
@@ -178,12 +178,12 @@ function process-menu1-gui {
         if [[ $zenity_rc -ne 0 ]]; then
             exit $OK
         fi
-        process-menu1-choice
+        process_menu1_choice
     done
 }
 
 
-function process-menu1-tui {
+function process_menu1_tui {
     local action=''
 
     while true; do
@@ -217,31 +217,31 @@ function process-menu1-tui {
                     ;;
             esac
         done
-        process-menu1-choice
+        process_menu1_choice
         if $EXECUTE_COMMAND; then
-            kz_common.wait-for-enter
+            kz_common.wait_for_enter
         fi
         EXECUTE_COMMAND=false
     done
 }
 
 
-function process-menu1-choice {
+function process_menu1_choice {
     case $REPLY in
         1)
-            process-menu1-choice1
+            process_menu1_choice1
             ;;
         2)
-            process-menu1-choice2
+            process_menu1_choice2
             ;;
         3)
-            process-menu1-choice3
+            process_menu1_choice3
             ;;
         4)
-            process-menu1-choice4
+            process_menu1_choice4
             ;;
         5)
-            process-menu2
+            process_menu2
             ;;
         6)
             exit $OK
@@ -254,17 +254,17 @@ function process-menu1-choice {
 }
 
 
-function process-menu1-choice1 {
+function process_menu1_choice1 {
     TITLE="${MENU1_ACTIONS[1]}"
     EXEC=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
             "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
         )
-    process-commands
+    process_commands
 }
 
 
-function process-menu1-choice2 {
+function process_menu1_choice2 {
     TITLE="${MENU1_ACTIONS[2]}"
     TEXT='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
@@ -278,43 +278,43 @@ Komt globaal neer op:
 4. Installeer Linux.'
     info "$TEXT"
     if ! $OPTION_GUI; then
-            kz_common.wait-for-enter
+            kz_common.wait_for_enter
 
     fi
 }
 
 
-function process-menu1-choice3 {
+function process_menu1_choice3 {
     TITLE="${MENU1_ACTIONS[3]}"
     EXEC=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
             "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
         )
-    process-commands
+    process_commands
 }
 
 
-function process-menu1-choice4 {
+function process_menu1_choice4 {
     TITLE="${MENU1_ACTIONS[4]}"
     EXEC=(
         [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
             "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
             "${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
         )
-    process-commands
+    process_commands
 }
 
 
-function process-menu2 {
+function process_menu2 {
     if $OPTION_GUI; then
-        process-menu2-gui
+        process_menu2_gui
     else
-        process-menu2-tui
+        process_menu2_tui
     fi
 }
 
 
-function process-menu2-gui {
+function process_menu2_gui {
     local -i zenity_rc=0
 
     while true; do
@@ -344,12 +344,12 @@ function process-menu2-gui {
         if [[ $zenity_rc -ne 0 ]]; then
             break
         fi
-        process-menu2-choice
+        process_menu2_choice
     done
 }
 
 
-function process-menu2-tui {
+function process_menu2_tui {
     local action=''
     local exit_menu2=false
 
@@ -384,25 +384,25 @@ function process-menu2-tui {
                     ;;
             esac
         done
-        process-menu2-choice
+        process_menu2_choice
         if $exit_menu2; then
             break
         fi
         if $EXECUTE_COMMAND; then
-            kz_common.wait-for-enter
+            kz_common.wait_for_enter
         fi
         EXECUTE_COMMAND=false
     done
 }
 
 
-function process-menu2-choice {
+function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
         TITLE="${MENU2_ACTIONS[$REPLY]}"
         EXEC=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
-        process-commands
+        process_commands
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         exit_menu2=true
     else
@@ -412,12 +412,12 @@ function process-menu2-choice {
 }
 
 
-function process-commands {
+function process_commands {
     local       action=''
     local       command=''
     local -i    exec=0
 
-    show-commands-before-execution
+    show_commands_before_execution
     if $EXECUTE_COMMAND; then
         for exec in "${!EXEC[@]}"; do
             action=$(
@@ -427,16 +427,16 @@ function process-commands {
                 printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
                 )
             TITLE=$action
-            execute-command
+            execute_command
         done
-        show-commands-after-execution
+        show_commands_after_execution
         check_setup_logout
         check_install_reboot
     fi
 }
 
 
-function show-commands-before-execution {
+function show_commands_before_execution {
     local       action=''
     local       command=''
     local -i    exec=0
@@ -498,7 +498,7 @@ $prompt"
 }
 
 
-function execute-command {
+function execute_command {
     local -i    cmd_rc=0
     local       exec=''
     local       gui_option=''
@@ -509,7 +509,7 @@ function execute-command {
 
     # Verwerk handmatige acties.
     if [[ $command = 'Handmatig' ]]; then
-        manual-actions
+        manual_actions
         return $OK
     fi
 
@@ -527,12 +527,12 @@ function execute-command {
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
     log "$command: rc=$cmd_rc"
     if ! $OPTION_GUI; then
-        kz_common.wait-for-enter
+        kz_common.wait_for_enter
     fi
 }
 
 
-function manual-actions {
+function manual_actions {
     if [[ $TITLE = 'Gebruikers toevoegen' ]]; then
         TEXT="Gebruikers toevoegen:
 Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op de \
@@ -544,7 +544,7 @@ Klik op Gebruiker toevoegen.
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$TEXT"
         if ! $OPTION_GUI; then
-            kz_common.wait-for-enter
+            kz_common.wait_for_enter
         fi
     elif [[ $TITLE = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
@@ -565,13 +565,13 @@ Er is bij het maken van de back-up geen gebruikersfoto gevonden."
             info "$TEXT"
         fi
         if ! $OPTION_GUI; then
-            kz_common.wait-for-enter
+            kz_common.wait_for_enter
             fi
     fi
 }
 
 
-function show-commands-after-execution {
+function show_commands_after_execution {
     local       action=''
     local       command=''
     local -i    exec=0
@@ -628,7 +628,7 @@ Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
 }
 
 
-function term-script {
+function term_script {
     exit $OK
 }
 
@@ -638,10 +638,10 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

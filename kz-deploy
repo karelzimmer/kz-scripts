@@ -43,7 +43,7 @@ readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -59,7 +59,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -87,16 +87,16 @@ function check-input {
 }
 
 
-function process-input {
-    check-names
-    check-scripts
-    build-package
-    upload-website
-    install-package
+function process_input {
+    check_names
+    check_scripts
+    build_package
+    upload_website
+    install_package
 }
 
 
-function check-names {
+function check_names {
     local -i    check_rc=0
     local       deb_repo=$HOME/kz-deb
     local       docs_repo=$HOME/kz-docs
@@ -116,7 +116,7 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 }
 
 
-function check-scripts {
+function check_scripts {
     local -i check_rc=0
 
     info 'Controleer scripts (kz ivp)...'
@@ -130,7 +130,7 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 }
 
 
-function build-package {
+function build_package {
     local -i check_rc=0
 
     info 'Bouw pakket en website (kz build)...'
@@ -144,7 +144,7 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 }
 
 
-function upload-website {
+function upload_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=$UPLOADS_DISTDIR
     local ftp_to=/httpdocs
@@ -173,7 +173,7 @@ function upload-website {
 }
 
 
-function install-package {
+function install_package {
     info 'Installeer pakket kz (kz getdeb)...'
     # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
     if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
@@ -183,7 +183,7 @@ function install-package {
 }
 
 
-function term-script {
+function term_script {
     exit $OK
 }
 
@@ -193,10 +193,10 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

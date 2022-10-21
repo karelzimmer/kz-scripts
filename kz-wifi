@@ -44,7 +44,7 @@ declare OPTION_GUI=false
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -60,13 +60,13 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 OPTION_GUI=true
-                kz_common.reset-terminal-attributes
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             --)
@@ -87,7 +87,7 @@ function check-input {
 }
 
 
-function process-input {
+function process_input {
     if TEXT=$(nmcli device wifi show-password 2> /dev/null); then
         info "Wifi-gegevens:
 
@@ -101,7 +101,7 @@ verbinding te maken met het draadloze netwerk."
 }
 
 
-function term-script {
+function term_script {
     exit $OK
 }
 
@@ -111,10 +111,10 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

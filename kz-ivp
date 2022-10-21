@@ -41,7 +41,7 @@ declare -i MAXRC=0
 # Functions
 ###############################################################################
 
-function check-input {
+function check_input {
     local -i    getopt_rc=0
     local       parsed=''
 
@@ -57,7 +57,7 @@ function check-input {
         exit $ERR
     fi
     eval set -- "$parsed"
-    kz_common.process-options "$@"
+    kz_common.process_options "$@"
 
     while true; do
         case $1 in
@@ -85,7 +85,7 @@ function check-input {
 }
 
 
-function process-input {
+function process_input {
     local script=''
     local scriptsdir=$HOME/kz-scripts
 
@@ -105,26 +105,26 @@ function process-input {
                 continue
                 ;;
             *.1|*.desktop)
-                check-record-length
+                check_record_length
                 ;;
             *.completion)
-                check-record-length
-                check-shellcheck
+                check_record_length
+                check_shellcheck
                 ;;
             kz_common.sh)
-                check-tags
-                check-record-length
-                check-shellcheck
+                check_tags
+                check_record_length
+                check_shellcheck
                 ;;
             *.sh)
-                check-tags
-                check-record-types
-                check-shellcheck
+                check_tags
+                check_record_types
+                check_shellcheck
                 ;;
             *)
-                check-tags
-                check-record-length
-                check-code
+                check_tags
+                check_record_length
+                check_code
                 ;;
         esac
     done
@@ -132,25 +132,25 @@ function process-input {
 }
 
 
-function check-code {
+function check_code {
     if grep --quiet --line-regexp --regexp='#!''/bin/bash' "$script"; then
-        check-shellcheck
+        check_shellcheck
     elif grep   --quiet                         \
                 --line-regexp                   \
                 --regexp='#!''/usr/bin/python3' \
                 "$script"                       || [[ $script = kz_common.py ]]
     then
-        check-pycodestyle
+        check_pycodestyle
     else
         err "
 In $script:
-    Onbekend script.  Functie 'check-code' kan scriptcode niet controleren."
+    Onbekend script.  Functie 'check_code' kan scriptcode niet controleren."
         MAXRC=$ERR
     fi
 }
 
 
-function check-pycodestyle {
+function check_pycodestyle {
     local -i check_rc=0
 
     pycodestyle "$script" || check_rc=$?
@@ -160,7 +160,7 @@ function check-pycodestyle {
 }
 
 
-function check-record-length {
+function check_record_length {
     local -i max_line_length=79
     local -i max_line_length_found=0
 
@@ -175,7 +175,7 @@ In $script:
 }
 
 
-function check-record-types {
+function check_record_types {
     local wrong_record=''
 
     # Kijk naar regels die beginnen met #1 t/m #9.
@@ -206,7 +206,7 @@ $(
 }
 
 
-function check-shellcheck {
+function check_shellcheck {
     local -i check_rc=0
 
     shellcheck --external-sources "$script" || check_rc=$?
@@ -216,7 +216,7 @@ function check-shellcheck {
 }
 
 
-function check-tags {
+function check_tags {
     if grep --quiet             \
             --word-regexp       \
             --regexp='FIXME'':' \
@@ -272,7 +272,7 @@ $(
 }
 
 
-function term-script {
+function term_script {
     exit $MAXRC
 }
 
@@ -282,10 +282,10 @@ function term-script {
 ###############################################################################
 
 function main {
-    kz_common.init-script "$@"
-    check-input "$@"
-    process-input
-    term-script
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
 }
 
 main "$@"

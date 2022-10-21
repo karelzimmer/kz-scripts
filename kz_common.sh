@@ -69,7 +69,7 @@ declare     YELLOW=''
 # Common functions
 ###############################################################################
 
-function kz_common.check-dpkgd-snapd {
+function kz_common.check_dpkgd_snapd {
     local -i dpkg_wait=5
 
     if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
@@ -95,7 +95,7 @@ function kz_common.check-dpkgd-snapd {
 }
 
 
-function kz_common.check-on-ac-power {
+function kz_common.check_on_ac_power {
     local -i on_battery=0
 
     on_ac_power >/dev/null 2>&1 || on_battery=$?
@@ -105,23 +105,23 @@ De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
         if ! $OPTION_GUI; then
-            kz_common.wait-for-enter
+            kz_common.wait_for_enter
         fi
     fi
 
 }
 
 
-function kz_common.wait-for-enter {
+function kz_common.wait_for_enter {
     read -rp '
 Druk op de Enter-toets om door te gaan [Enter]: '
 }
 
 
-function kz_common.check-user-root {
+function kz_common.check_user_root {
     local -i pkexec_rc=0
 
-    if ! kz_common.check-user-sudo; then
+    if ! kz_common.check_user_sudo; then
         info 'Reeds uitgevoerd door de beheerder.'
         exit $OK
     fi
@@ -144,7 +144,7 @@ te voeren."
 }
 
 
-function kz_common.check-user-sudo {
+function kz_common.check_user_sudo {
     # Mag gebruiker sudo uitvoeren?
     if [[ $UID -eq 0 ]]; then
         # Voor de "grace"-periode van sudo, of als root.
@@ -182,7 +182,7 @@ karel met gebruikersnaam 'Karel Zimmer' op 'pc??'."
 }
 
 
-function kz_common.init-script {
+function kz_common.init_script {
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -206,7 +206,7 @@ function kz_common.init-script {
     fi
 
     if [[ -t 1 ]]; then
-        set-terminal-attributes
+        set_terminal_attributes
     fi
 }
 
@@ -281,7 +281,7 @@ In programma $PROGRAM_NAME is een fout opgetreden."
             exit "$rc"
             ;;
         exit)
-            signal-exit
+            signal_exit
             log "Ended (code=exited, status=$status)." --priority=notice
             log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
@@ -296,7 +296,7 @@ Programma $PROGRAM_NAME is onderbroken."
 }
 
 
-function signal-exit {
+function signal_exit {
     local apt_err="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
 [1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
@@ -330,7 +330,7 @@ een Terminalvenster en voer uit:
 }
 
 
-function set-terminal-attributes {
+function set_terminal_attributes {
     BLINK=$(tput bold; tput blink)
     NORMAL=$(tput sgr0)
     BLUE=$(tput bold; tput setaf 4)
@@ -343,7 +343,7 @@ function set-terminal-attributes {
 }
 
 
-function kz_common.process-options {
+function kz_common.process_options {
     while true; do
         case $1 in
             -u|--usage)
@@ -368,33 +368,33 @@ function kz_common.process-options {
     done
 
     if $OPTION_HELP; then
-        kz_common.process-option-help
+        kz_common.process_option_help
         exit $OK
     elif $OPTION_USAGE; then
-        kz_common.process-option-usage
+        kz_common.process_option_usage
         exit $OK
     elif $OPTION_VERSION; then
-        kz_common.process-option-version
+        kz_common.process_option_version
         exit $OK
     fi
 }
 
 
-function kz_common.process-option-help {
+function kz_common.process_option_help {
     info "$HELP
 
 Typ 'man $DISPLAY_NAME' voor meer informatie."
 }
 
 
-function kz_common.process-option-usage {
+function kz_common.process_option_usage {
     info "$USAGE
 
 Typ '$DISPLAY_NAME --help' voor meer informatie."
 }
 
 
-function kz_common.process-option-version {
+function kz_common.process_option_version {
     local build='unknown'
     local year=1970
 
@@ -410,7 +410,7 @@ Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
 
 
-function kz_common.reset-terminal-attributes {
+function kz_common.reset_terminal_attributes {
     BLINK=''
     BLUE=''
     CURSOR_INVISABLE=''
