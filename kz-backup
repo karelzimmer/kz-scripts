@@ -230,21 +230,17 @@ installatie van een pakket, met
       met kz install:"
     local search=/etc/apt/sources.list
 
-    printf '%b\n' "$DASHES\n$(date)\n$DASHES" > "$file"
-
-    printf '%b\n' "$header1\n$DASHES" >> "$file"
+    printf '%b\n' "$header1" > "$file"
     if ! apt list --manual-installed 2> >($LOGCMD) >> "$file"; then
         true
     fi
-    printf '%b\n' "$DASHES\n" >> "$file"
 
-    printf '%b\n' "$header2\n$DASHES" >> "$file"
+    printf '\n%b\n' "$header2" >> "$file"
     if ! snap list 2> /dev/null >> "$file"; then
         printf '%s\n' 'snap is niet geïnstalleerd' >> "$file"
     fi
-    printf '%b\n' "$DASHES\n" >> "$file"
 
-    printf '%b\n' "$header3\n$DASHES" >> "$file"
+    printf '\n%b\n' "$header3" >> "$file"
     cd  $search.d
     if !    grep    --recursive             \
                     --no-filename           \
@@ -257,7 +253,6 @@ installatie van een pakket, met
             sort    --unique                >> "$file"; then
         true
     fi
-    printf '%b\n' "$DASHES" >> "$file"
 }
 
 

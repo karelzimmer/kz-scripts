@@ -31,8 +31,6 @@ declare     OPTIONS_HELP="  -h, --help     toon deze hulptekst
   -v, --version  toon de programmaversie"
 
 declare -a  CMDLINE_ARGS=()
-DASHES=$(printf '%.0s=' {1..120})
-declare -r  DASHES
 declare     HELP='Gebruik: source kz_common.sh
      of: . kz_common.sh'
 declare     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
@@ -197,7 +195,6 @@ function kz_common.init_script {
 
     CMDLINE_ARGS=("$@")
 
-    log "$DASHES"
     log "Started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)." \
         --priority=notice
 
@@ -283,7 +280,6 @@ In programma $PROGRAM_NAME is een fout opgetreden."
         exit)
             signal_exit
             log "Ended (code=exited, status=$status)." --priority=notice
-            log "$DASHES"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
