@@ -125,12 +125,12 @@ function kz_common.check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $OPTION_GUI; then
-            log "Restarted (pkexec $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
+            log "restarted (pkexec $PROGRAM_EXEC ${CMDLINE_ARGS[*]})" \
                 --priority=debug
             pkexec "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            log "Restarted (exec sudo $PROGRAM_EXEC ${CMDLINE_ARGS[*]})." \
+            log "restarted (exec sudo $PROGRAM_EXEC ${CMDLINE_ARGS[*]})" \
                 --priority=debug
             if ! sudo -n true 2> /dev/null; then
                 printf '%s\n' "Authenticatie is vereist om $PROGRAM_NAME uit \
@@ -195,8 +195,7 @@ function kz_common.init_script {
 
     CMDLINE_ARGS=("$@")
 
-    log "Started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)." \
-        --priority=notice
+    log "started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)" --priority=notice
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $LOGCMD
@@ -279,7 +278,7 @@ In programma $PROGRAM_NAME is een fout opgetreden."
             ;;
         exit)
             signal_exit
-            log "Ended (code=exited, status=$status)." --priority=notice
+            log "ended (code=exited, status=$status)" --priority=notice
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
