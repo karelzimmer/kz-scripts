@@ -575,7 +575,8 @@ function show_commands_after_execution {
     if ! $option_gui; then
         clear -x
     fi
-    text='Het volgende is uitgevoerd:'
+    text='Het volgende is uitgevoerd:
+'
     for exec in "${!execs[@]}"; do
         action=$(
             printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=1
