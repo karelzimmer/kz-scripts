@@ -99,11 +99,11 @@ ${blue}$display_name OPDRACHT${normal}"
 
 
 function process_input {
-    local program_name=''
+    local exec_program_name=''
 
-    program_name=$1
+    exec_program_name=$1
     shift
-    exec "$program_path/kz-$program_name" "$@"
+    exec "$program_path/kz-$exec_program_name" "$@"
 }
 
 

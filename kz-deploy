@@ -100,14 +100,14 @@ function check_names {
     local -i    check_rc=0
     local       deb_repo=$HOME/kz-deb
     local       docs_repo=$HOME/kz-docs
-    local       uploads_repo=$HOME/kz-uploads/app
+    local       app_uploads_repo=$HOME/kz-uploads/app
 
     info 'Controleer bestandsnamen (kz ckname)...'
     log "Check filenames with 'kz ckname'."
-    "$scripts_repo"/kz ckname   "$scripts_repo" \
-                                "$docs_repo"    \
-                                "$deb_repo"     \
-                                "$uploads_repo" || check_rc=$?
+    "$scripts_repo"/kz ckname   "$scripts_repo"     \
+                                "$docs_repo"        \
+                                "$deb_repo"         \
+                                "$app_uploads_repo" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
