@@ -12,26 +12,26 @@
 # Global constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-deploy'
-readonly PROGRAM_DESC='Pakket kz distribueren'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly program_name='kz-deploy'
+readonly program_desc='Pakket kz distribueren'
+readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
-PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
-readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz_common.sh
+program_path=$(realpath "$(dirname  "${0/#-/}")")
+readonly program_path
+source  "$program_path"/kz_common.sh
 
-readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+readonly usage="Gebruik: $display_name $options_usage"
+readonly help="Gebruik: $display_name [OPTIE...]
 
-$PROGRAM_DESC.
+$program_desc.
 
 Opties:
-$OPTIONS_HELP"
+$options_help"
 
-readonly SCRIPTS_REPO=$HOME/kz-scripts
-readonly UPLOADS_REPO=$HOME/kz-uploads
-readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
+readonly scripts_repo=$HOME/kz-scripts
+readonly uploads_repo=$HOME/kz-uploads
+readonly uploads_distdir=$uploads_repo/dist
 
 
 ###############################################################################
@@ -49,14 +49,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$display_name"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $OK ]]; then
-        info "$USAGELINE"
-        exit $ERR
+    if [[ $getopt_rc -ne $ok ]]; then
+        info "$usageline"
+        exit $err
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -75,14 +75,14 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        info "$USAGELINE"
-        exit $ERR
+        info "$usageline"
+        exit $err
     fi
 
     # Aangemeld als ontwikkelaar?
     if ! kz_common.developer check; then
         kz_common.developer report
-        exit $ERR
+        exit $err
     fi
 }
 
@@ -104,11 +104,11 @@ function check_names {
 
     info 'Controleer bestandsnamen (kz ckname)...'
     log "Check filenames with 'kz ckname'."
-    "$SCRIPTS_REPO"/kz ckname   "$SCRIPTS_REPO" \
+    "$scripts_repo"/kz ckname   "$scripts_repo" \
                                 "$docs_repo"    \
                                 "$deb_repo"     \
                                 "$uploads_repo" || check_rc=$?
-    if [[ $check_rc -ne $OK ]]; then
+    if [[ $check_rc -ne $ok ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
         exit $check_rc
@@ -121,8 +121,8 @@ function check_scripts {
 
     info 'Controleer scripts (kz ivp)...'
     log "Check scripts with 'kz ivp'."
-    "$SCRIPTS_REPO"/kz ivp || check_rc=$?
-    if [[ $check_rc -ne $OK ]]; then
+    "$scripts_repo"/kz ivp || check_rc=$?
+    if [[ $check_rc -ne $ok ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
         exit $check_rc
@@ -135,8 +135,8 @@ function build_package {
 
     info 'Bouw pakket en website (kz build)...'
     log "Build package and website with 'kz build'."
-    "$SCRIPTS_REPO"/kz build || check_rc=$?
-    if [[ $check_rc -ne $OK ]]; then
+    "$scripts_repo"/kz build || check_rc=$?
+    if [[ $check_rc -ne $ok ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
         exit $check_rc
@@ -146,7 +146,7 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 
 function upload_website {
     local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=$UPLOADS_DISTDIR
+    local ftp_from=$uploads_distdir
     local ftp_to=/httpdocs
     local ftp_opts='--reverse --delete --verbose'
     local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
@@ -159,15 +159,15 @@ function upload_website {
         read -rsp "Wachtwoord voor 'ftp://$ftp_host': "
         info "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
+        chmod 'u=rw,g=,o=' "$ftp_login" |& $logcmd
     fi
     if ! lftp   --user      "$ftp_user"             \
                 --password  "$(cat "$ftp_login")"   \
                 -e          "$ftp_set; $ftp_cmd"    \
-                "$ftp_host"                         |& $LOGCMD; then
+                "$ftp_host"                         |& $logcmd; then
         rm      "$ftp_login"
         err 'Uploaden website is mislukt.'
-        exit $ERR
+        exit $err
     fi
     sleep 5
 }
@@ -175,16 +175,16 @@ function upload_website {
 
 function install_package {
     info 'Installeer pakket kz (kz getdeb)...'
-    # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
-    if ! wget -O- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
+    # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
+    if ! wget -O- karelzimmer.nl/kz 2> >($logcmd) | bash; then
         err 'Installeren pakket kz is niet uitgevoerd.'
-        exit $ERR
+        exit $err
     fi
 }
 
 
 function term_script {
-    exit $OK
+    exit $ok
 }
 
 

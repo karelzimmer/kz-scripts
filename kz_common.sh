@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034 # Ignore foo appears unused.
+# shellcheck disable=SC2034,SC2154
 ###############################################################################
 # Algemene module voor shell scripts.
 #
@@ -12,55 +12,55 @@
 # Common global constants
 ###############################################################################
 
-readonly MODULE_NAME='kz_common.sh'
-readonly MODULE_DESC='Algemene module voor shell scripts'
+readonly module_name='kz_common.sh'
+readonly module_desc='Algemene module voor shell scripts'
 
-readonly OK=0
-readonly ERR=1
+readonly ok=0
+readonly err=1
 
 
 ###############################################################################
 # Common global variables
 ###############################################################################
 
-declare     OPTIONS_SHORT='huv'
-declare     OPTIONS_LONG='help,usage,version'
-declare     OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
-declare     OPTIONS_HELP="  -h, --help     toon deze hulptekst
+declare     options_short='huv'
+declare     options_long='help,usage,version'
+declare     options_usage='[-h|--help] [-u|--usage] [-v|--version]'
+declare     options_help="  -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
   -v, --version  toon de programmaversie"
 
-declare -a  CMDLINE_ARGS=()
-declare     HELP='Gebruik: source kz_common.sh
+declare -a  cmdline_args=()
+declare     help='Gebruik: source kz_common.sh
      of: . kz_common.sh'
-declare     LESS_OPTIONS="--LONG-PROMPT --no-init --quit-if-one-screen \
---quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $DISPLAY_NAME \
+declare     less_options="--LONG-PROMPT --no-init --quit-if-one-screen \
+--quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $display_name \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
 voor hulp of q voor stoppen)"
-declare     LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-LOGCMD_CHECK="journalctl --all --boot --identifier=$PROGRAM_NAME \
+declare     logcmd="systemd-cat --identifier=$program_name"
+logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
-declare     LOGCMD_CHECK
-declare     OPTION_GUI=false
-declare     OPTION_HELP=false
-declare     OPTION_USAGE=false
-declare     OPTION_VERSION=false
+declare     logcmd_check
+declare     option_gui=false
+declare     option_help=false
+declare     option_usage=false
+declare     option_version=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-declare     PROGRAM_EXEC=${0/#./$PROGRAM_PATH}
-declare     USAGE='Gebruik: source kz_common.sh
+declare     program_exec=${0/#./$program_path}
+declare     usage='Gebruik: source kz_common.sh
      of: . kz_common.sh'
-declare     USAGELINE="Typ '$DISPLAY_NAME --usage' voor meer informatie."
+declare     usageline="Typ '$display_name --usage' voor meer informatie."
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
-declare     BLINK=''
-declare     BLUE=''
-declare     CURSOR_INVISABLE=''
-declare     CURSOR_VISABLE=''
-declare     GREEN=''
-declare     NORMAL=''
-declare     RED=''
-declare     REWRITE_LINE=''
-declare     YELLOW=''
+declare     blink=''
+declare     blue=''
+declare     cursor_invisable=''
+declare     cursor_visable=''
+declare     green=''
+declare     normal=''
+declare     red=''
+declare     rewrite_line=''
+declare     yellow=''
 
 
 ###############################################################################
@@ -102,7 +102,7 @@ function kz_common.check_on_ac_power {
 De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
-        if ! $OPTION_GUI; then
+        if ! $option_gui; then
             kz_common.wait_for_enter
         fi
     fi
@@ -121,22 +121,22 @@ function kz_common.check_user_root {
 
     if ! kz_common.check_user_sudo; then
         info 'Reeds uitgevoerd door de beheerder.'
-        exit $OK
+        exit $ok
     fi
     if [[ $UID -ne 0 ]]; then
-        if $OPTION_GUI; then
-            log "restarted (pkexec $PROGRAM_EXEC ${CMDLINE_ARGS[*]})" \
+        if $option_gui; then
+            log "restarted (pkexec $program_exec ${cmdline_args[*]})" \
                 --priority=debug
-            pkexec "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}" || pkexec_rc=$?
+            pkexec "$program_exec" "${cmdline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            log "restarted (exec sudo $PROGRAM_EXEC ${CMDLINE_ARGS[*]})" \
+            log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
             if ! sudo -n true 2> /dev/null; then
-                printf '%s\n' "Authenticatie is vereist om $PROGRAM_NAME uit \
+                printf '%s\n' "Authenticatie is vereist om $program_name uit \
 te voeren."
             fi
-            exec sudo "$PROGRAM_EXEC" "${CMDLINE_ARGS[@]}"
+            exec sudo "$program_exec" "${cmdline_args[@]}"
         fi
     fi
 }
@@ -146,11 +146,11 @@ function kz_common.check_user_sudo {
     # Mag gebruiker sudo uitvoeren?
     if [[ $UID -eq 0 ]]; then
         # Voor de "grace"-periode van sudo, of als root.
-        return $OK
+        return $ok
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
-        return $OK
+        return $ok
     else
-        return $ERR
+        return $err
     fi
 }
 
@@ -169,9 +169,9 @@ function kz_common.developer {
         if  [[  $HOSTNAME == pc??       &&
                 $USER      = 'karel'    &&
                 $user_name = 'Karel Zimmer' ]]; then
-            return $OK
+            return $ok
         else
-            return $ERR
+            return $err
         fi
     else
         printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
@@ -186,19 +186,19 @@ function kz_common.init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
-    trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' err
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
     trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
     trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
-    CMDLINE_ARGS=("$@")
+    cmdline_args=("$@")
 
-    log "started ($PROGRAM_EXEC ${CMDLINE_ARGS[*]} as $USER)" --priority=notice
+    log "started ($program_exec ${cmdline_args[*]} as $USER)" --priority=notice
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        xhost +si:localuser:root |& $LOGCMD
+        xhost +si:localuser:root |& $logcmd
     fi
 
     if [[ -t 1 ]]; then
@@ -212,15 +212,15 @@ function signal {
     local -i    lineno=${2:-unknown}
     local       function=${3:-unknown}
     local       command=${4:-unknown}
-    local -i    rc=${5:-$ERR}
+    local -i    rc=${5:-$err}
     local       rc_desc=''
     local -i    rc_desc_signalno=0
-    local       status="${RED}$rc/ERR${NORMAL}"
+    local       status="${red}$rc/err${normal}"
 
     case $rc in
         0)
             rc_desc='successful termination'
-            status="${GREEN}$rc/OK${NORMAL}"
+            status="${green}$rc/ok${normal}"
             ;;
         1)
             rc_desc='terminated with error'
@@ -273,18 +273,18 @@ $command, code: $rc ($rc_desc)" --priority=debug
     case $signal in
         err)
             err "
-In programma $PROGRAM_NAME is een fout opgetreden."
+In programma $program_name is een fout opgetreden."
             exit "$rc"
             ;;
         exit)
             signal_exit
             log "ended (code=exited, status=$status)" --priority=notice
-            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+            trap - err EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
         *)
             err "
-Programma $PROGRAM_NAME is onderbroken."
+Programma $program_name is onderbroken."
             exit "$rc"
             ;;
     esac
@@ -294,12 +294,12 @@ Programma $PROGRAM_NAME is onderbroken."
 function signal_exit {
     local apt_err="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
-[1] ${BLUE}sudo dpkg --configure --pending${NORMAL}
-[2] ${BLUE}sudo apt-get update --fix-missing${NORMAL}
-[3] ${BLUE}sudo apt-get install --fix-broken${NORMAL}
-[4] ${BLUE}sudo update-initramfs -u${NORMAL}"
+[1] ${blue}sudo dpkg --configure --pending${normal}
+[2] ${blue}sudo apt-get update --fix-missing${normal}
+[3] ${blue}sudo apt-get install --fix-broken${normal}
+[4] ${blue}sudo update-initramfs -u${normal}"
 
-    case $PROGRAM_NAME in
+    case $program_name in
         kz-getdeb)
             # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
             rm --force kz.{2..99} /tmp/kz_common.sh
@@ -307,34 +307,34 @@ een Terminalvenster en voer uit:
             cd "$HOME"
             rm --force kz kz.1
 
-            if [[ $rc -ne $OK ]]; then
+            if [[ $rc -ne $ok ]]; then
                 log "$apt_err" --priority=debug
             fi
             ;;
         kz-install)
-            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
+            printf "${normal}%s" "${cursor_visable}"
 
-            if [[ $rc -ne $OK ]]; then
+            if [[ $rc -ne $ok ]]; then
                 log "$apt_err" --priority=debug
             fi
             ;;
         kz-setup)
-            printf "${NORMAL}%s" "${CURSOR_VISABLE}"
+            printf "${normal}%s" "${cursor_visable}"
             ;;
     esac
 }
 
 
 function set_terminal_attributes {
-    BLINK=$(tput bold; tput blink)
-    NORMAL=$(tput sgr0)
-    BLUE=$(tput bold; tput setaf 4)
-    CURSOR_INVISABLE=$(tput civis)
-    CURSOR_VISABLE=$(tput cvvis)
-    GREEN=$(tput bold; tput setaf 2)
-    RED=$(tput bold; tput setaf 1)
-    REWRITE_LINE=$(tput cuu1; tput el)
-    YELLOW=$(tput bold; tput setaf 3)
+    blink=$(tput bold; tput blink)
+    normal=$(tput sgr0)
+    blue=$(tput bold; tput setaf 4)
+    cursor_invisable=$(tput civis)
+    cursor_visable=$(tput cvvis)
+    green=$(tput bold; tput setaf 2)
+    red=$(tput bold; tput setaf 1)
+    rewrite_line=$(tput cuu1; tput el)
+    yellow=$(tput bold; tput setaf 3)
 }
 
 
@@ -342,15 +342,15 @@ function kz_common.process_options {
     while true; do
         case $1 in
             -u|--usage)
-                OPTION_USAGE=true
+                option_usage=true
                 shift
                 ;;
             -h|--help)
-                OPTION_HELP=true
+                option_help=true
                 shift
                 ;;
             -v|--version)
-                OPTION_VERSION=true
+                option_version=true
                 shift
                 ;;
             --)
@@ -362,30 +362,30 @@ function kz_common.process_options {
         esac
     done
 
-    if $OPTION_HELP; then
+    if $option_help; then
         kz_common.process_option_help
-        exit $OK
-    elif $OPTION_USAGE; then
+        exit $ok
+    elif $option_usage; then
         kz_common.process_option_usage
-        exit $OK
-    elif $OPTION_VERSION; then
+        exit $ok
+    elif $option_version; then
         kz_common.process_option_version
-        exit $OK
+        exit $ok
     fi
 }
 
 
 function kz_common.process_option_help {
-    info "$HELP
+    info "$help
 
-Typ 'man $DISPLAY_NAME' voor meer informatie."
+Typ 'man $display_name' voor meer informatie."
 }
 
 
 function kz_common.process_option_usage {
-    info "$USAGE
+    info "$usage
 
-Typ '$DISPLAY_NAME --help' voor meer informatie."
+Typ '$display_name --help' voor meer informatie."
 }
 
 
@@ -398,7 +398,7 @@ function kz_common.process_option_version {
         year=$(cut --delimiter='-' --fields=1 /usr/local/etc/kz-build-id)
     fi
 
-    info "$PROGRAM_NAME (kz) 365 ($build)
+    info "$program_name (kz) 365 ($build)
 
 Geschreven in $year door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
@@ -406,35 +406,35 @@ Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 
 
 function kz_common.reset_terminal_attributes {
-    BLINK=''
-    BLUE=''
-    CURSOR_INVISABLE=''
-    CURSOR_VISABLE=''
-    GREEN=''
-    NORMAL=''
-    RED=''
-    REWRITE_LINE=''
-    YELLOW=''
+    blink=''
+    blue=''
+    cursor_invisable=''
+    cursor_visable=''
+    green=''
+    normal=''
+    red=''
+    rewrite_line=''
+    yellow=''
 }
 
 
 function log {
-    printf '%b\n' "$1" |& $LOGCMD
+    printf '%b\n' "$1" |& $logcmd
 }
 
 
 function info {
-    local title="Informatie $DISPLAY_NAME"
+    local title="Informatie $display_name"
 
-    if $OPTION_GUI; then
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+    if $option_gui; then
+        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
+                --ok-label  'Oké'       2> >($logcmd) || true
     else
         printf '%b\n' "$@"
     fi
@@ -443,38 +443,38 @@ function info {
 
 
 function warn {
-    local title="Waarschuwing $DISPLAY_NAME"
+    local title="Waarschuwing $display_name"
 
-    if $OPTION_GUI; then
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+    if $option_gui; then
+        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
+                --ok-label  'Oké'       2> >($logcmd) || true
     else
-        printf "${YELLOW}%b\n${NORMAL}" "$@" >&2
+        printf "${yellow}%b\n${normal}" "$@" >&2
     fi
     log "$@" --priority=warn
 }
 
 
 function err {
-    local title="Foutmelding $DISPLAY_NAME"
+    local title="Foutmelding $display_name"
 
-    if $OPTION_GUI; then
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+    if $option_gui; then
+        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        \
-                --ok-label  'Oké'       2> >($LOGCMD) || true
+                --ok-label  'Oké'       2> >($logcmd) || true
     else
-        printf "${RED}%b\n${NORMAL}" "$@" >&2
+        printf "${red}%b\n${normal}" "$@" >&2
     fi
     log "$@" --priority=err
 }

@@ -12,30 +12,30 @@
 # Global constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-menu'
-readonly PROGRAM_DESC='Installatiemenu'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly program_name='kz-menu'
+readonly program_desc='Installatiemenu'
+readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
-PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
-readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz_common.sh
+program_path=$(realpath "$(dirname  "${0/#-/}")")
+readonly program_path
+source  "$program_path"/kz_common.sh
 
-readonly OPTIONS_SHORT+='g'
-readonly OPTIONS_LONG+=',gui'
-readonly USAGE="Gebruik: $DISPLAY_NAME [-g|--gui]
-                 $OPTIONS_USAGE"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+readonly options_short+='g'
+readonly options_long+=',gui'
+readonly usage="Gebruik: $display_name [-g|--gui]
+                 $options_usage"
+readonly help="Gebruik: $display_name [OPTIE...]
 
-$PROGRAM_DESC.
+$program_desc.
 
 Opties:
   -g, --gui      start in grafische modus
-$OPTIONS_HELP"
+$options_help"
 
-readonly MENU1_TITLE=Installatiemenu
-readonly MENU1_HEAD="                  $MENU1_TITLE"
-readonly -a MENU1_ACTIONS=(
+readonly menu1_title=Installatiemenu
+readonly menu1_head="                  $menu1_title"
+readonly -a menu1_actions=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
         'Installatie afronden'
@@ -43,7 +43,7 @@ readonly -a MENU1_ACTIONS=(
         'Opdrachtenmenu'
         'Stoppen'
     )
-readonly -a MENU1_COMMANDS=(
+readonly -a menu1_commands=(
     [1]='Checklist hoofdstuk 1'
         'Checklist hoofdstuk 2'
         'Checklist hoofdstuk 3'
@@ -51,11 +51,11 @@ readonly -a MENU1_COMMANDS=(
         'Gebruikte opdrachten'
         'Menu verlaten'
     )
-readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
+readonly menu1_lines=${#menu1_actions[@]}
 
-readonly MENU2_TITLE=Opdrachtenmenu
-readonly MENU2_HEAD="             $MENU2_TITLE"
-readonly -a MENU2_ACTIONS=(
+readonly menu2_title=Opdrachtenmenu
+readonly menu2_head="             $menu2_title"
+readonly -a menu2_actions=(
     [1]='Wifi-gegevens tonen'
         'Back-up maken'
         'Gebruikers toevoegen'
@@ -65,7 +65,7 @@ readonly -a MENU2_ACTIONS=(
         'Apps instellen'
         'Terug'
     )
-readonly -a MENU2_COMMANDS=(
+readonly -a menu2_commands=(
     [1]='kz wifi'
         'kz backup'
         'Handmatig'
@@ -75,18 +75,18 @@ readonly -a MENU2_COMMANDS=(
         'kz setup'
         'Vorig menu'
     )
-readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
+readonly menu2_lines=${#menu2_actions[@]}
 
 
 ###############################################################################
 # Global variables
 ###############################################################################
 
-declare     EXECUTE_COMMAND=false
-declare -a  EXEC=()
-declare     OPTION_GUI=false
-declare     TEXT=''
-declare     TITLE=''
+declare     execute_command=false
+declare -a  execs=()
+declare     option_gui=false
+declare     text=''
+declare     title=''
 
 
 ###############################################################################
@@ -99,14 +99,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$display_name"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $OK ]]; then
-        info "$USAGELINE"
-        exit $ERR
+    if [[ $getopt_rc -ne $ok ]]; then
+        info "$usageline"
+        exit $err
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -114,7 +114,7 @@ function check_input {
     while true; do
         case $1 in
             -g|--gui)
-                OPTION_GUI=true
+                option_gui=true
                 kz_common.reset_terminal_attributes
                 shift
                 ;;
@@ -130,14 +130,14 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        info "$USAGELINE"
-        exit $ERR
+        info "$usageline"
+        exit $err
     fi
 }
 
 
 function process_input {
-    if $OPTION_GUI; then
+    if $option_gui; then
         process_menu1_gui
     else
         process_menu1_tui
@@ -149,14 +149,14 @@ function process_menu1_gui {
     local -i zenity_rc=0
 
     while true; do
-        TITLE=$MENU1_TITLE
-        # Constructie '2> >($LOGCMD)' om stderr naar de log te krijgen.
+        title=$menu1_title
+        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         480                                     \
                     --height        240                                     \
-                    --title         "$TITLE"                                \
+                    --title         "$title"                                \
                     --text          'Selecteer een keuze:'                  \
                     --ok-label      'Verder'                                \
                     --cancel-label  'Afsluiten'                             \
@@ -164,15 +164,15 @@ function process_menu1_gui {
                     --column        'Nr.'                                   \
                     --column        'Actie'                                 \
                     --column        'Toelichting'                           \
-                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_COMMANDS[1]}"    \
-                    FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_COMMANDS[2]}"    \
-                    FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_COMMANDS[3]}"    \
-                    FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_COMMANDS[4]}"    \
-                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_COMMANDS[5]}"    \
-                    2> >($LOGCMD)
+                    TRUE  1 "${menu1_actions[1]}" "${menu1_commands[1]}"    \
+                    FALSE 2 "${menu1_actions[2]}" "${menu1_commands[2]}"    \
+                    FALSE 3 "${menu1_actions[3]}" "${menu1_commands[3]}"    \
+                    FALSE 4 "${menu1_actions[4]}" "${menu1_commands[4]}"    \
+                    FALSE 5 "${menu1_actions[5]}" "${menu1_commands[5]}"    \
+                    2> >($logcmd)
             ) || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
-            exit $OK
+            exit $ok
         fi
         process_menu1_choice
     done
@@ -186,38 +186,38 @@ function process_menu1_tui {
 
         # Toon menu.
         clear -x
-        info "$MENU1_HEAD
+        info "$menu1_head
 "
-        for action in "${!MENU1_ACTIONS[@]}"; do
+        for action in "${!menu1_actions[@]}"; do
             printf  '%2s. %-24.24s - %s\n'      \
                     "$action"                   \
-                    "${MENU1_ACTIONS[$action]}" \
-                    "${MENU1_COMMANDS[$action]}"
+                    "${menu1_actions[$action]}" \
+                    "${menu1_commands[$action]}"
         done
         info ''
 
         while true; do
-            read -rp "Voer uit nummer [1-$MENU1_LINES]: "
+            read -rp "Voer uit nummer [1-$menu1_lines]: "
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%s' "${REWRITE_LINE}"
+                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
                 *)
-                    if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
+                    if [[ $REPLY -ge 1 && $REPLY -le $menu1_lines ]]; then
                         break
                     else
-                        printf '%s' "${REWRITE_LINE}"
+                        printf '%s' "${rewrite_line}"
                         continue
                     fi
                     ;;
             esac
         done
         process_menu1_choice
-        if $EXECUTE_COMMAND; then
+        if $execute_command; then
             kz_common.wait_for_enter
         fi
-        EXECUTE_COMMAND=false
+        execute_command=false
     done
 }
 
@@ -240,29 +240,29 @@ function process_menu1_choice {
             process_menu2
             ;;
         6)
-            exit $OK
+            exit $ok
             ;;
         *)
             err 'Niet afgehandelde keuze.'
-            exit $ERR
+            exit $err
             ;;
     esac
 }
 
 
 function process_menu1_choice1 {
-    TITLE="${MENU1_ACTIONS[1]}"
-    EXEC=(
-        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
-            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+    title="${menu1_actions[1]}"
+    execs=(
+        [1]="${menu2_actions[1]}#${menu2_commands[1]}"
+            "${menu2_actions[2]}#${menu2_commands[2]}"
         )
     process_commands
 }
 
 
 function process_menu1_choice2 {
-    TITLE="${MENU1_ACTIONS[2]}"
-    TEXT='
+    title="${menu1_actions[2]}"
+    text='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
 Checklist installatie is te vinden op de site https://karelzimmer.nl,
 onder Linux.
@@ -272,8 +272,8 @@ Komt globaal neer op:
 2. Maak een opstartbare Live USB-stick of DVD aan.
 3. Start de computer op vanaf deze USB-stick of DVD.
 4. Installeer Linux.'
-    info "$TEXT"
-    if ! $OPTION_GUI; then
+    info "$text"
+    if ! $option_gui; then
             kz_common.wait_for_enter
 
     fi
@@ -281,28 +281,28 @@ Komt globaal neer op:
 
 
 function process_menu1_choice3 {
-    TITLE="${MENU1_ACTIONS[3]}"
-    EXEC=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
-            "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
+    title="${menu1_actions[3]}"
+    execs=(
+        [1]="${menu2_actions[3]}#${menu2_commands[3]}"
+            "${menu2_actions[4]}#${menu2_commands[4]}"
         )
     process_commands
 }
 
 
 function process_menu1_choice4 {
-    TITLE="${MENU1_ACTIONS[4]}"
-    EXEC=(
-        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
-            "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
-            "${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
+    title="${menu1_actions[4]}"
+    execs=(
+        [1]="${menu2_actions[5]}#${menu2_commands[5]}"
+            "${menu2_actions[6]}#${menu2_commands[6]}"
+            "${menu2_actions[7]}#${menu2_commands[7]}"
         )
     process_commands
 }
 
 
 function process_menu2 {
-    if $OPTION_GUI; then
+    if $option_gui; then
         process_menu2_gui
     else
         process_menu2_tui
@@ -314,13 +314,13 @@ function process_menu2_gui {
     local -i zenity_rc=0
 
     while true; do
-        TITLE=$MENU2_TITLE
+        title=$menu2_title
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         480                                     \
                     --height        280                                     \
-                    --title         "$TITLE"                                \
+                    --title         "$title"                                \
                     --text          'Selecteer een keuze:'                  \
                     --ok-label      'Verder'                                \
                     --cancel-label  'Terug'                                 \
@@ -328,14 +328,14 @@ function process_menu2_gui {
                     --column        'Nr.'                                   \
                     --column        'Actie'                                 \
                     --column        'Opdracht'                              \
-                    TRUE   1 "${MENU2_ACTIONS[1]}"  "${MENU2_COMMANDS[1]}"  \
-                    FALSE  2 "${MENU2_ACTIONS[2]}"  "${MENU2_COMMANDS[2]}"  \
-                    FALSE  3 "${MENU2_ACTIONS[3]}"  "${MENU2_COMMANDS[3]}"  \
-                    FALSE  4 "${MENU2_ACTIONS[4]}"  "${MENU2_COMMANDS[4]}"  \
-                    FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
-                    FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
-                    FALSE  7 "${MENU2_ACTIONS[7]}"  "${MENU2_COMMANDS[7]}"  \
-                    2> >($LOGCMD)
+                    TRUE   1 "${menu2_actions[1]}"  "${menu2_commands[1]}"  \
+                    FALSE  2 "${menu2_actions[2]}"  "${menu2_commands[2]}"  \
+                    FALSE  3 "${menu2_actions[3]}"  "${menu2_commands[3]}"  \
+                    FALSE  4 "${menu2_actions[4]}"  "${menu2_commands[4]}"  \
+                    FALSE  5 "${menu2_actions[5]}"  "${menu2_commands[5]}"  \
+                    FALSE  6 "${menu2_actions[6]}"  "${menu2_commands[6]}"  \
+                    FALSE  7 "${menu2_actions[7]}"  "${menu2_commands[7]}"  \
+                    2> >($logcmd)
             ) || zenity_rc=$?
         if [[ $zenity_rc -ne 0 ]]; then
             break
@@ -353,28 +353,28 @@ function process_menu2_tui {
 
         # Toon menu.
         clear -x
-        info "$MENU2_HEAD
+        info "$menu2_head
 "
-        for action in "${!MENU2_ACTIONS[@]}"; do
+        for action in "${!menu2_actions[@]}"; do
             printf  '%2s. %-24.24s - %s\n'      \
                     "$action"                   \
-                    "${MENU2_ACTIONS[$action]}" \
-                    "${MENU2_COMMANDS[$action]}"
+                    "${menu2_actions[$action]}" \
+                    "${menu2_commands[$action]}"
         done
         info ''
 
         while true; do
-            read -rp "Voer uit nummer [1-$MENU2_LINES]: "
+            read -rp "Voer uit nummer [1-$menu2_lines]: "
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%s' "${REWRITE_LINE}"
+                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
                 *)
-                    if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
+                    if [[ $REPLY -ge 1 && $REPLY -le $menu2_lines ]]; then
                         break
                     else
-                        printf '%s' "${REWRITE_LINE}"
+                        printf '%s' "${rewrite_line}"
                         continue
                     fi
                     ;;
@@ -384,26 +384,26 @@ function process_menu2_tui {
         if $exit_menu2; then
             break
         fi
-        if $EXECUTE_COMMAND; then
+        if $execute_command; then
             kz_common.wait_for_enter
         fi
-        EXECUTE_COMMAND=false
+        execute_command=false
     done
 }
 
 
 function process_menu2_choice {
-    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        TITLE="${MENU2_ACTIONS[$REPLY]}"
-        EXEC=(
-            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
+    if [[ $REPLY -ge 1 && $REPLY -le $((menu2_lines -1)) ]]; then
+        title="${menu2_actions[$REPLY]}"
+        execs=(
+            [1]="${menu2_actions[$REPLY]}#${menu2_commands[$REPLY]}"
             )
         process_commands
-    elif [[ $REPLY -eq $MENU2_LINES ]]; then
+    elif [[ $REPLY -eq $menu2_lines ]]; then
         exit_menu2=true
     else
         err 'Niet afgehandelde keuze.'
-        exit $ERR
+        exit $err
     fi
 }
 
@@ -414,15 +414,15 @@ function process_commands {
     local -i    exec=0
 
     show_commands_before_execution
-    if $EXECUTE_COMMAND; then
-        for exec in "${!EXEC[@]}"; do
+    if $execute_command; then
+        for exec in "${!execs[@]}"; do
             action=$(
-                printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
+                printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=1
                 )
             command=$(
-                printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
+                printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=2
                 )
-            TITLE=$action
+            title=$action
             execute_command
         done
         show_commands_after_execution
@@ -438,54 +438,54 @@ function show_commands_before_execution {
     local -i    exec=0
     local       prompt=''
 
-    if ! $OPTION_GUI; then
+    if ! $option_gui; then
         clear -x
     fi
-    TEXT='Het volgende wordt uitgevoerd:
+    text='Het volgende wordt uitgevoerd:
 '
-    for exec in "${!EXEC[@]}"; do
+    for exec in "${!execs[@]}"; do
         action=$(
-            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
+            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=1
             )
         command=$(
-            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
+            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=2
             )
-        TEXT+="
+        text+="
 $exec. $action ($command)"
     done
-    TEXT+='
+    text+='
 '
     prompt='Doorgaan?'
-    if $OPTION_GUI; then
-        TEXT+="
+    if $option_gui; then
+        text+="
 $prompt"
         if zenity   --question                  \
                     --no-markup                 \
                     --width         600         \
                     --height        100         \
-                    --title         "$TITLE"    \
-                    --text          "$TEXT"     \
+                    --title         "$title"    \
+                    --text          "$text"     \
                     --ok-label      'Ja'        \
-                    --cancel-label  'Nee'       2> >($LOGCMD); then
-            EXECUTE_COMMAND=true
+                    --cancel-label  'Nee'       2> >($logcmd); then
+            execute_command=true
         else
-            EXECUTE_COMMAND=false
+            execute_command=false
         fi
     else
-        info "$TEXT"
+        info "$text"
         while true; do
             read -rp "$prompt [J/n]: "
             case $REPLY in
                 j*|J*|'')
-                    EXECUTE_COMMAND=true
+                    execute_command=true
                     break
                     ;;
                 n*|N*)
-                    EXECUTE_COMMAND=false
+                    execute_command=false
                     break
                     ;;
                 *)
-                    printf '%s' "${REWRITE_LINE}"
+                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
             esac
@@ -499,14 +499,14 @@ function execute_command {
     local       exec=''
     local       gui_option=''
 
-    if ! $OPTION_GUI; then
+    if ! $option_gui; then
         clear -x
     fi
 
     # Verwerk handmatige acties.
     if [[ $command = 'Handmatig' ]]; then
         manual_actions
-        return $OK
+        return $ok
     fi
 
     # Verwerk (automatische) opdrachten.
@@ -517,20 +517,20 @@ function execute_command {
     arg=$(
         printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
         )
-    if $OPTION_GUI; then
+    if $option_gui; then
         gui_option='--gui'
     fi
-    "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || cmd_rc=$?
+    "$program_path/$cmd" "$arg" $gui_option -- || cmd_rc=$?
     log "$command: rc=$cmd_rc"
-    if ! $OPTION_GUI; then
+    if ! $option_gui; then
         kz_common.wait_for_enter
     fi
 }
 
 
 function manual_actions {
-    if [[ $TITLE = 'Gebruikers toevoegen' ]]; then
-        TEXT="Gebruikers toevoegen:
+    if [[ $title = 'Gebruikers toevoegen' ]]; then
+        text="Gebruikers toevoegen:
 Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op de \
 Super-toets[1],
 typ 'gebr' en klik achter Instellingen op Gebruikers.
@@ -538,13 +538,13 @@ Klik op Ontgrendelen.
 Klik op Gebruiker toevoegen.
 
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
-        info "$TEXT"
-        if ! $OPTION_GUI; then
+        info "$text"
+        if ! $option_gui; then
             kz_common.wait_for_enter
         fi
-    elif [[ $TITLE = 'Gebruikersfoto instellen' ]]; then
+    elif [[ $title = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
-            TEXT="Gebruikersfoto instellen:
+            text="Gebruikersfoto instellen:
 Wijzig de gebruikersfoto via een druk op de Super-toets[1],
 typ 'gebr' en klik achter Instellingen op Gebruikers.
 Klik op Ontgrendelen.
@@ -554,13 +554,13 @@ Selecteer Gebruikersfoto in Persoonlijke map / Instellingen.
 Sluit het scherm Gebruikers
 
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
-            info "$TEXT"
+            info "$text"
         else
-            TEXT="Gebruikersfoto instellen:
+            text="Gebruikersfoto instellen:
 Er is bij het maken van de back-up geen gebruikersfoto gevonden."
-            info "$TEXT"
+            info "$text"
         fi
-        if ! $OPTION_GUI; then
+        if ! $option_gui; then
             kz_common.wait_for_enter
             fi
     fi
@@ -572,50 +572,50 @@ function show_commands_after_execution {
     local       command=''
     local -i    exec=0
 
-    if ! $OPTION_GUI; then
+    if ! $option_gui; then
         clear -x
     fi
-    TEXT='Het volgende is uitgevoerd:'
-    for exec in "${!EXEC[@]}"; do
+    text='Het volgende is uitgevoerd:'
+    for exec in "${!execs[@]}"; do
         action=$(
-            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=1
+            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=1
             )
         command=$(
-            printf '%s' "${EXEC[$exec]}" | cut --delimiter='#' --fields=2
+            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=2
             )
-        TEXT+="
+        text+="
 $exec. $action ($command)"
     done
-    info "$TEXT"
+    info "$text"
 }
 
 
 function check_setup_logout {
     # Uitvoeren bij 'Gebruiker inrichten' of 'Apps instellen'.
-    if [[ $TITLE = "${MENU1_ACTIONS[4]}" || $TITLE = "${MENU2_ACTIONS[7]}" ]]
+    if [[ $title = "${menu1_actions[4]}" || $title = "${menu2_actions[7]}" ]]
         then
-        TEXT='
+        text='
 De computer gaat nu afmelden om het instellen van apps af te ronden.'
-        warn "$TEXT"
-        if ! $OPTION_GUI; then
+        warn "$text"
+        if ! $option_gui; then
             read -rp '
 Druk op de Enter-toets voor afmelden [Enter]: '
         fi
         gnome-session-quit --logout --no-prompt
-        exit $OK
+        exit $ok
     fi
 }
 
 
 function check_install_reboot {
     # Uitvoeren bij 'Installatie afronden' of 'Apps installeren'.
-    if [[ $TITLE = "${MENU1_ACTIONS[3]}" || $TITLE = "${MENU2_ACTIONS[4]}" ]]
+    if [[ $title = "${menu1_actions[3]}" || $title = "${menu2_actions[4]}" ]]
         then
-        TEXT="
+        text="
 De computer gaat nu herstarten om het installeren van updates en apps af te \
 ronden."
-        warn "$TEXT"
-        if ! $OPTION_GUI; then
+        warn "$text"
+        if ! $option_gui; then
             read -rp '
 Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
         fi
@@ -625,7 +625,7 @@ Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
 
 
 function term_script {
-    exit $OK
+    exit $ok
 }
 
 

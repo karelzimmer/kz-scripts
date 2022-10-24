@@ -12,61 +12,61 @@
 # Global constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-build'
-readonly PROGRAM_DESC='Pakket kz bouwen'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly program_name='kz-build'
+readonly program_desc='Pakket kz bouwen'
+readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
-PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
-readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz_common.sh
+program_path=$(realpath "$(dirname  "${0/#-/}")")
+readonly program_path
+source  "$program_path"/kz_common.sh
 
-readonly USAGE="Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+readonly usage="Gebruik: $display_name $options_usage"
+readonly help="Gebruik: $display_name [OPTIE...]
 
-$PROGRAM_DESC.
+$program_desc.
 
 Opties:
-$OPTIONS_HELP"
+$options_help"
 
-readonly DOCS_REPO=$HOME/kz-docs
-readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly docs_repo=$HOME/kz-docs
+readonly scripts_repo=$HOME/kz-scripts
 
-readonly DEB_REPO=$HOME/kz-deb
-readonly DEB_APPDIR=$DEB_REPO/app
-readonly DEB_DISTDIR=$DEB_REPO/dist
-readonly DEB_NAME=kz_365_all.deb
+readonly deb_repo=$HOME/kz-deb
+readonly deb_appdir=$deb_repo/app
+readonly deb_distdir=$deb_repo/dist
+readonly deb_name=kz_365_all.deb
 
-readonly UPLOADS_REPO=$HOME/kz-uploads
-readonly UPLOADS_APPDIR=$UPLOADS_REPO/app
-readonly UPLOADS_DISTDIR=$UPLOADS_REPO/dist
+readonly uploads_repo=$HOME/kz-uploads
+readonly uploads_appdir=$uploads_repo/app
+readonly uploads_distdir=$uploads_repo/dist
 
-readonly -A UPLOADS_SOURCES=(
-                [APP]=$UPLOADS_APPDIR
-               [DOCS]=$DOCS_REPO
-            [SCRIPTS]=$SCRIPTS_REPO
+readonly -A uploads_sources=(
+                [app]=$uploads_appdir
+               [docs]=$docs_repo
+            [scripts]=$scripts_repo
             )
-readonly -A UPLOADS_TARGETS=(
-               [DIST]=$UPLOADS_DISTDIR
-                [DEB]=$UPLOADS_DISTDIR/downloads/kz
-               [DOCS]=$UPLOADS_DISTDIR/data/linux/documents
-               [PDFS]=$UPLOADS_DISTDIR/data/linux/pdfs
-            [SCRIPTS]=$UPLOADS_DISTDIR/data/linux/scripts
+readonly -A uploads_targets=(
+               [dist]=$uploads_distdir
+                [deb]=$uploads_distdir/downloads/kz
+               [docs]=$uploads_distdir/data/linux/documents
+               [pdfs]=$uploads_distdir/data/linux/pdfs
+            [scripts]=$uploads_distdir/data/linux/scripts
             )
 
-readonly -A DEB_SOURCES=(
-                [APP]=$DEB_APPDIR
-               [DOCS]=$DOCS_REPO
-            [SCRIPTS]=$SCRIPTS_REPO
+readonly -A deb_sources=(
+                [app]=$deb_appdir
+               [docs]=$docs_repo
+            [scripts]=$scripts_repo
             )
-readonly -A DEB_TARGETS=(
-               [DIST]=$DEB_DISTDIR
-              [BUILD]=$DEB_DISTDIR/usr/local/etc
-       [APPLICATIONS]=$DEB_DISTDIR/usr/share/applications
-                [BIN]=$DEB_DISTDIR/usr/bin
-                [MAN]=$DEB_DISTDIR/usr/share/man/man1
-           [POLICY_1]=$DEB_DISTDIR/usr/share/polkit-1/actions
-           [TABCOMPL]=$DEB_DISTDIR/usr/share/bash-completion/completions
+readonly -A deb_targets=(
+               [dist]=$deb_distdir
+              [build]=$deb_distdir/usr/local/etc
+       [applications]=$deb_distdir/usr/share/applications
+                [bin]=$deb_distdir/usr/bin
+                [man]=$deb_distdir/usr/share/man/man1
+           [policy_1]=$deb_distdir/usr/share/polkit-1/actions
+           [tabcompl]=$deb_distdir/usr/share/bash-completion/completions
     )
 
 
@@ -85,14 +85,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$display_name"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $OK ]]; then
-        info "$USAGELINE"
-        exit $ERR
+    if [[ $getopt_rc -ne $ok ]]; then
+        info "$usageline"
+        exit $err
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -111,14 +111,14 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        info "$USAGELINE"
-        exit $ERR
+        info "$usageline"
+        exit $err
     fi
 
     # Aangemeld als ontwikkelaar?
     if ! kz_common.developer check; then
         kz_common.developer report
-        exit $ERR
+        exit $err
     fi
 }
 
@@ -141,55 +141,55 @@ function build_uploads {
     # alleen timestamp is verschillend, niet de inhoud).
 
     # Vul dist/ met app/
-    cd "$UPLOADS_APPDIR"
-    mkdir --parents "$UPLOADS_DISTDIR"
+    cd "$uploads_appdir"
+    mkdir --parents "$uploads_distdir"
     while read -r file; do
         # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
-        if ! diff "$file" "$UPLOADS_DISTDIR/$file" &> /dev/null; then
+        if ! diff "$file" "$uploads_distdir/$file" &> /dev/null; then
             cp  --parents           \
                 --preserve          \
                 --verbose           \
                 "$file"             \
-                "$UPLOADS_DISTDIR"  |& $LOGCMD
+                "$uploads_distdir"  |& $logcmd
         fi
     done < <(find . -type f -print)
     cd "$HOME"
 
     # Vul dist/ met kz-docs.
-    cd "${UPLOADS_SOURCES[DOCS]}"
-    mkdir --parents "${UPLOADS_TARGETS[DOCS]}"
+    cd "${uploads_sources[docs]}"
+    mkdir --parents "${uploads_targets[docs]}"
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
-        if ! diff "$file" "${UPLOADS_TARGETS[DOCS]}/$file" &> /dev/null; then
+        if ! diff "$file" "${uploads_targets[docs]}/$file" &> /dev/null; then
             cp  --preserve                  \
                 --verbose                   \
                 "$file"                     \
-                "${UPLOADS_TARGETS[DOCS]}"   |& $LOGCMD
+                "${uploads_targets[docs]}"   |& $logcmd
             lowriter    --headless                          \
                         --convert-to pdf                    \
-                        --outdir "${UPLOADS_TARGETS[PDFS]}" \
-                        "$file"                             |& $LOGCMD
+                        --outdir "${uploads_targets[pdfs]}" \
+                        "$file"                             |& $logcmd
         fi
     done
     cd "$HOME"
 
     # Vul dist/ met kz-scripts.
-    cd "${UPLOADS_SOURCES[SCRIPTS]}"
-    mkdir --parents "${UPLOADS_TARGETS[SCRIPTS]}" "${UPLOADS_TARGETS[PDFS]}"
+    cd "${uploads_sources[scripts]}"
+    mkdir --parents "${uploads_targets[scripts]}" "${uploads_targets[pdfs]}"
     for file in kz*; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
-        if ! diff "$file" "${UPLOADS_TARGETS[SCRIPTS]}/$file" &> /dev/null
+        if ! diff "$file" "${uploads_targets[scripts]}/$file" &> /dev/null
             then
             cp  --preserve                      \
                 --verbose                       \
                 "$file"                         \
-                "${UPLOADS_TARGETS[SCRIPTS]}"   |& $LOGCMD
+                "${uploads_targets[scripts]}"   |& $logcmd
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-pagina.
-                man --troff "${UPLOADS_SOURCES[SCRIPTS]}/$file"  |
-                ps2pdf - "${UPLOADS_TARGETS[PDFS]}/$file.pdf"    |& $LOGCMD
+                man --troff "${uploads_sources[scripts]}/$file"  |
+                ps2pdf - "${uploads_targets[pdfs]}/$file.pdf"    |& $logcmd
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
                 # Must copy each file with suffix '.txt' added (temptextfile)
@@ -202,8 +202,8 @@ function build_uploads {
                 cp "$file" "$temptextfile"
                 lowriter    --headless                          \
                             --convert-to pdf                    \
-                            --outdir "${UPLOADS_TARGETS[PDFS]}" \
-                            "$temptextfile"                     |& $LOGCMD
+                            --outdir "${uploads_targets[pdfs]}" \
+                            "$temptextfile"                     |& $logcmd
                 rm "$temptextfile"
             fi
         fi
@@ -217,22 +217,22 @@ function build_uploads_all {
     local temptextfile=''
 
     # Maak voor de *site* een nieuwe "all" aan.
-    more 'kz-install-'*.sh > "${UPLOADS_TARGETS[SCRIPTS]}"/kz-install-all.sh
+    more 'kz-install-'*.sh > "${uploads_targets[scripts]}"/kz-install-all.sh
     temptextfile=/tmp/kz-install-all.sh.txt
-    cp "${UPLOADS_TARGETS[SCRIPTS]}"/kz-install-all.sh "$temptextfile"
+    cp "${uploads_targets[scripts]}"/kz-install-all.sh "$temptextfile"
     lowriter    --headless                          \
                 --convert-to pdf                    \
-                --outdir "${UPLOADS_TARGETS[PDFS]}" \
-                "$temptextfile"                     |& $LOGCMD
+                --outdir "${uploads_targets[pdfs]}" \
+                "$temptextfile"                     |& $logcmd
     rm "$temptextfile"
 
-    more 'kz-setup-'*.sh > "${UPLOADS_TARGETS[SCRIPTS]}"/kz-setup-all.sh
+    more 'kz-setup-'*.sh > "${uploads_targets[scripts]}"/kz-setup-all.sh
     temptextfile=/tmp/kz-setup-all.sh.txt
-    cp "${UPLOADS_TARGETS[SCRIPTS]}"/kz-setup-all.sh "$temptextfile"
+    cp "${uploads_targets[scripts]}"/kz-setup-all.sh "$temptextfile"
     lowriter    --headless                          \
                 --convert-to pdf                    \
-                --outdir "${UPLOADS_TARGETS[PDFS]}" \
-                "$temptextfile"                     |& $LOGCMD
+                --outdir "${uploads_targets[pdfs]}" \
+                "$temptextfile"                     |& $logcmd
     rm "$temptextfile"
 }
 
@@ -252,16 +252,16 @@ function build_deb {
             --exclude='README.md'   \
             --exclude='.git*'       \
             --delete-excluded       \
-            "${DEB_SOURCES[APP]}"/  \
-            "${DEB_TARGETS[DIST]}"  |& $LOGCMD
+            "${deb_sources[app]}"/  \
+            "${deb_targets[dist]}"  |& $logcmd
 
     # Zorg dat de rechten goed staan voor de rsync.
-    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/*
-    chmod 'a-x' -- "$SCRIPTS_REPO"/*.* "$SCRIPTS_REPO"/LICENSE
+    chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
+    chmod 'a-x' -- "$scripts_repo"/*.* "$scripts_repo"/LICENSE
 
     # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
-    for dir in "${DEB_TARGETS[@]}"; do
-        mkdir --parents "$dir" |& $LOGCMD
+    for dir in "${deb_targets[@]}"; do
+        mkdir --parents "$dir" |& $logcmd
     done
 
     # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
@@ -272,51 +272,51 @@ function build_deb {
             --exclude='README.md'       \
             --exclude='.git*'           \
             --delete-excluded           \
-            "${DEB_SOURCES[SCRIPTS]}"/  \
-            "${DEB_TARGETS[BIN]}"       |& $LOGCMD
+            "${deb_sources[scripts]}"/  \
+            "${deb_targets[bin]}"       |& $logcmd
 
     # Man-pagina's (.1)
     rsync   --archive                   \
             --delete                    \
             --verbose                   \
             --remove-source-files       \
-            "${DEB_TARGETS[BIN]}"/*.1   \
-            "${DEB_TARGETS[MAN]}"       |& $LOGCMD
-    gzip --best --force "${DEB_TARGETS[MAN]}"/*.1 |& $LOGCMD
+            "${deb_targets[bin]}"/*.1   \
+            "${deb_targets[man]}"       |& $logcmd
+    gzip --best --force "${deb_targets[man]}"/*.1 |& $logcmd
 
     # Tab-completion-scripts (.completion)
-    for file in "${DEB_TARGETS[BIN]}"/*.completion; do
+    for file in "${deb_targets[bin]}"/*.completion; do
         basename=$(basename "$file" .completion)
-        mv "$file" "${DEB_TARGETS[TABCOMPL]}/$basename" |& $LOGCMD
+        mv "$file" "${deb_targets[tabcompl]}/$basename" |& $logcmd
     done
 
     # Bureaublad-configuratiebestanden (.desktop)
-    for file in "${DEB_TARGETS[BIN]}"/*.desktop; do
+    for file in "${deb_targets[bin]}"/*.desktop; do
         basename=$(basename "$file")
-        mv "$file" "${DEB_TARGETS[APPLICATIONS]}/$basename" |& $LOGCMD
+        mv "$file" "${deb_targets[applications]}/$basename" |& $logcmd
     done
 
     # PolicyKit actiedefinitiebestanden (.policy)
-    for file in "${DEB_TARGETS[BIN]}"/*.policy; do
+    for file in "${deb_targets[bin]}"/*.policy; do
         basename=$(basename "$file")
-        newfile="${DEB_TARGETS[POLICY_1]}/$prefix$basename"
-        mv "$file" "$newfile" |& $LOGCMD
+        newfile="${deb_targets[policy_1]}/$prefix$basename"
+        mv "$file" "$newfile" |& $logcmd
     done
 
-    printf '%s' "$(date +%Y-%m-%d)" > "${DEB_TARGETS[BUILD]}/$PROGRAM_NAME"-id
+    printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
 
-    mkdir --parents "${UPLOADS_TARGETS[DEB]}" |& $LOGCMD
+    mkdir --parents "${uploads_targets[deb]}" |& $logcmd
     # Debian 11 does not support xz compression (default), hence the -Zgzip.
     fakeroot    dpkg-deb                            \
                 --build                             \
                 -Zgzip                              \
-                "$DEB_DISTDIR"                      \
-                "${UPLOADS_TARGETS[DEB]}/$DEB_NAME" |& $LOGCMD
+                "$deb_distdir"                      \
+                "${uploads_targets[deb]}/$deb_name" |& $logcmd
 }
 
 
 function term_script {
-    exit $OK
+    exit $ok
 }
 
 

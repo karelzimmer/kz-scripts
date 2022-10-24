@@ -6,8 +6,8 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-readonly TEXT='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
-readonly TITLE='VirtualBox'
+readonly text='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
+readonly title='VirtualBox'
 
 function start_vm {
      while ! lsmod | grep --quiet --regexp='vbox'; do
@@ -23,5 +23,5 @@ zenity  --progress              \
         --no-cancel             \
         --width     450         \
         --height    50          \
-        --title     "$TITLE"    \
-        --text      "$TEXT"
+        --title     "$title"    \
+        --text      "$text"

@@ -12,26 +12,26 @@
 # Global constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-install'
-readonly PROGRAM_DESC='Apps installeren'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly program_name='kz-install'
+readonly program_desc='Apps installeren'
+readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
-PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
-readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz_common.sh
+program_path=$(realpath "$(dirname  "${0/#-/}")")
+readonly program_path
+source  "$program_path"/kz_common.sh
 
-readonly OPTIONS_SHORT+='ace:fgrs'
-readonly OPTIONS_LONG+=",apps,cat,edition:,files,gui,\
+readonly options_short+='ace:fgrs'
+readonly options_long+=",apps,cat,edition:,files,gui,\
 remove,simulate"
-readonly USAGE="Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] \
+readonly usage="Gebruik: $display_name [-a|--apps] [-c|--cat] \
 [-e|--edition=EDITIE] [-f|--files]
                     [-g|--gui] [-r|--remove] [-s|--simulate]
-                    $OPTIONS_USAGE
+                    $options_usage
                     [APP...] [BESTAND...]"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...] [APP...] [BESTAND...]
+readonly help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
 
-$PROGRAM_DESC.
+$program_desc.
 
 Opties:
   -a, --apps     toon lijst van beschikbare apps
@@ -42,50 +42,50 @@ Opties:
   -g, --gui      start in grafische modus
   -r, --remove   verwijder apps
   -s, --simulate toon opdrachten
-$OPTIONS_HELP
+$options_help
 
 Argumenten:
   APP            opgegeven APPs installeren
   BESTAND        opgegeven BESTANDen verwerken"
 
-DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly DISTRO
-readonly EDITION_DEFAULT=desktop
-VERSION=$(lsb_release --release --short)
-readonly VERSION
+distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly distro
+readonly edition_default=desktop
+version=$(lsb_release --release --short)
+readonly version
 
-APPS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.apps")
-readonly APPS_FILE
-CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.cmds")
-readonly CMDS_FILE
-SIM_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sim")
-readonly SIM_FILE
+apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
+readonly apps_file
+cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
+readonly cmds_file
+sim_file=$(mktemp -t "$program_name-XXXXXXXXXX.sim")
+readonly sim_file
 
 
 ###############################################################################
 # Global variables
 ###############################################################################
 
-declare -a  APP_ARGUMENTS=()
-declare     ARGUMENT_APP=false
-declare     ARGUMENT_FILE=false
-declare     COMMANDS_FOUND=false
-declare     EDITION=$EDITION_DEFAULT
-declare     EXECUTE_COMMANDS=true
-declare -a  FILE_ARGUMENTS=()
-declare -a  FILES_TO_PROCESS=()
-declare -i  MAXRC=0
-declare     OPTION_APPS=false
-declare     OPTION_CAT=false
-declare     OPTION_FILES=false
-declare     OPTION_GUI=false
-declare     OPTION_REMOVE=false
-declare     OPTION_SIMULATE=false
-declare     STATUS_BUSY=''
-declare     STATUS_ERR=''
-declare     STATUS_OK=''
-declare     TEXT=''
-declare     TITLE=''
+declare -a  app_arguments=()
+declare     argument_app=false
+declare     argument_file=false
+declare     commands_found=false
+declare     edition=$edition_default
+declare     execute_commands=true
+declare -a  file_arguments=()
+declare -a  files_to_process=()
+declare -i  maxrc=0
+declare     option_apps=false
+declare     option_cat=false
+declare     option_files=false
+declare     option_gui=false
+declare     option_remove=false
+declare     option_simulate=false
+declare     status_busy=''
+declare     status_err=''
+declare     status_ok=''
+declare     text=''
+declare     title=''
 
 
 ###############################################################################
@@ -100,14 +100,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$display_name"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $OK ]]; then
-        info "$USAGELINE"
-        exit $ERR
+    if [[ $getopt_rc -ne $ok ]]; then
+        info "$usageline"
+        exit $err
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -115,33 +115,33 @@ function check_input {
     while true; do
         case $1 in
             -a|--apps)
-                OPTION_APPS=true
+                option_apps=true
                 shift
                 ;;
             -c|--cat)
-                OPTION_CAT=true
+                option_cat=true
                 shift
                 ;;
             -e|--edition)
-                EDITION=$2
+                edition=$2
                 shift 2
                 ;;
             -f|--files)
-                OPTION_FILES=true
+                option_files=true
                 shift
                 ;;
             -g|--gui)
-                OPTION_GUI=true
+                option_gui=true
                 kz_common.reset_terminal_attributes
                 shift
                 ;;
             -r|--remove)
-                OPTION_REMOVE=true
+                option_remove=true
                 shift
                 ;;
             -s|--simulate)
-                OPTION_SIMULATE=true
-                EXECUTE_COMMANDS=false
+                option_simulate=true
+                execute_commands=false
                 shift
                 ;;
             --)
@@ -156,14 +156,14 @@ function check_input {
 
     # Verwerk argumenten.
     while [[ "$*" ]]; do
-        if [[ "$(basename "$1")" == $PROGRAM_NAME-*.sh ]]; then
-            ARGUMENT_FILE=true
-            FILE_ARGUMENTS[$file_arg_num]=$1
+        if [[ "$(basename "$1")" == $program_name-*.sh ]]; then
+            argument_file=true
+            file_arguments[$file_arg_num]=$1
             ((++file_arg_num))
             shift
         else
-            ARGUMENT_APP=true
-            APP_ARGUMENTS[$app_arg_num]=$1
+            argument_app=true
+            app_arguments[$app_arg_num]=$1
             ((++app_arg_num))
             shift
         fi
@@ -179,49 +179,49 @@ function process_input {
     local       file=''
 
     # Verwerk argumenten.
-    dfltfile_1=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION.sh
-    dfltfile_2=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$VERSION-$EDITION\
+    dfltfile_1=$program_path/$program_name-$distro-$version-$edition.sh
+    dfltfile_2=$program_path/$program_name-$distro-$version-$edition\
 -$HOSTNAME.sh
-    if $ARGUMENT_APP; then
+    if $argument_app; then
         process_argument_app
     fi
-    if $ARGUMENT_FILE; then
+    if $argument_file; then
         process_argument_file
     fi
     # Ergens hiervoor ging het niet helemaal goed.
     if $file_notfound; then
-        exit $ERR
+        exit $err
     fi
     # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
-    if ! ($ARGUMENT_APP || $ARGUMENT_FILE || $OPTION_FILES); then
+    if ! ($argument_app || $argument_file || $option_files); then
         process_dfltfiles
     fi
 
     # Verwerk overige opties; afhankelijk van bestanden en argumenten.
-    if $OPTION_APPS; then
+    if $option_apps; then
         process_option_apps
-        exit $OK
-    elif $OPTION_CAT; then
+        exit $ok
+    elif $option_cat; then
         process_option_cat
-        exit $OK
-    elif $OPTION_FILES; then
+        exit $ok
+    elif $option_files; then
         process_option_files
-        exit $OK
+        exit $ok
     fi
 
     # Opdrachten uitvoeren of simuleren.
-    if $EXECUTE_COMMANDS; then
+    if $execute_commands; then
         kz_common.check_user_root
         kz_common.check_on_ac_power
     fi
 
-    for file in "${FILES_TO_PROCESS[@]}"; do
-        cat "$file" >> "$CMDS_FILE"
+    for file in "${files_to_process[@]}"; do
+        cat "$file" >> "$cmds_file"
     done
 
-    if $EXECUTE_COMMANDS && $OPTION_GUI; then
-        TITLE='Apps installeren'
-        TEXT='Installeren voorbereiden'
+    if $execute_commands && $option_gui; then
+        title='Apps installeren'
+        text='Installeren voorbereiden'
         # Met "|& zenity --progress" worden globale variabelen uit aangeroepen
         # functies niet doorgegeven, vandaar de 'process substitution' met
         # "> >(zenity...)".
@@ -232,8 +232,8 @@ function process_input {
                     --no-cancel             \
                     --width     700         \
                     --height    50          \
-                    --title     "$TITLE"    \
-                    --text      "$TEXT"     2> >($LOGCMD)
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd)
             )
     else
         process_cmds_file
@@ -247,10 +247,10 @@ function process_argument_app {
     local -a    files=()
 
     # Zoek naar beschikbare APPs in alle installatiebestanden.
-    for file in "$PROGRAM_PATH/$PROGRAM_NAME-"*.sh; do
+    for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
-    for app in "${APP_ARGUMENTS[@]}"; do
+    for app in "${app_arguments[@]}"; do
         file=$(
             grep    --files-with-matches    \
                     --word-regexp           \
@@ -267,9 +267,9 @@ function process_argument_app {
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --apps' voor beschikbare apps." >&2
+        info "Typ '$display_name --apps' voor beschikbare apps." >&2
     else
-        FILES_TO_PROCESS[$file_num]=$APPS_FILE
+        files_to_process[$file_num]=$apps_file
         ((++file_num))
     fi
 }
@@ -286,7 +286,7 @@ function process_argument_app_file {
                     # Gezochte app-naam.
                     # Regels doorschrijven naar tijdelijk bestand tot
                     # eerstvolgende app-naam of tot eof.
-                    printf '%s\n' "$record" >> "$APPS_FILE"
+                    printf '%s\n' "$record" >> "$apps_file"
                     app_found=true
                 elif $app_found; then
                     # Volgende app.
@@ -302,7 +302,7 @@ function process_argument_app_file {
             *)
                 # Overige regels.
                 if $app_found; then
-                    printf '%s\n' "$record" >> "$APPS_FILE"
+                    printf '%s\n' "$record" >> "$apps_file"
                 fi
                 ;;
         esac
@@ -313,9 +313,9 @@ function process_argument_app_file {
 function process_argument_file {
     local file=''
 
-    for file in "${FILE_ARGUMENTS[@]}"; do
+    for file in "${file_arguments[@]}"; do
         if [[ -f $file ]]; then
-            FILES_TO_PROCESS[$file_num]=$file
+            files_to_process[$file_num]=$file
             ((++file_num))
         else
             info "Bestand $file niet gevonden."
@@ -323,22 +323,22 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        info "Typ '$DISPLAY_NAME --files' voor beschikbare bestanden." >&2
+        info "Typ '$display_name --files' voor beschikbare bestanden." >&2
     fi
 }
 
 
 function process_dfltfiles {
     if [[ -f $dfltfile_1 ]]; then
-        FILES_TO_PROCESS[$file_num]=$dfltfile_1
+        files_to_process[$file_num]=$dfltfile_1
         ((++file_num))
     else
-        err "Geen bestanden gevonden voor $DISTRO $VERSION $EDITION."
-        info "$USAGELINE"
-        exit $ERR
+        err "Geen bestanden gevonden voor $distro $version $edition."
+        info "$usageline"
+        exit $err
     fi
     if [[ -f $dfltfile_2 ]]; then
-        FILES_TO_PROCESS[$file_num]=$dfltfile_2
+        files_to_process[$file_num]=$dfltfile_2
         ((++file_num))
     fi
 }
@@ -348,10 +348,10 @@ function process_option_apps {
     local -a    files=()
 
     # Zoek naar beschikbare APPs in alle installatiebestanden.
-    for file in "$PROGRAM_PATH/$PROGRAM_NAME-"*.sh; do
+    for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
-    TEXT="De volgende APPs zijn beschikbaar om te installeren:
+    text="De volgende APPs zijn beschikbaar om te installeren:
 
      APP (BESCHRIJVING)
 $(
@@ -366,44 +366,44 @@ $(
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen apps gevonden voor $DISTRO $VERSION."
+        printf '%s\n' "     0 Geen apps gevonden voor $distro $version."
     else
         printf '%s\n' "
-Om de APPs te installeren voer uit: ${BLUE}$DISPLAY_NAME APP...${NORMAL}
-Om het installeren van APPs te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
---simulate APP...${NORMAL}
+Om de APPs te installeren voer uit: ${blue}$display_name APP...${normal}
+Om het installeren van APPs te simuleren voer uit: ${blue}$display_name \
+--simulate APP...${normal}
 Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: \
-${BLUE}$DISPLAY_NAME --cat APP...${NORMAL}"
+${blue}$display_name --cat APP...${normal}"
     fi
 )"
-    info "$TEXT"
+    info "$text"
 }
 
 
 function process_option_cat {
     local first_file=true
 
-    for file in "${FILES_TO_PROCESS[@]}"; do
+    for file in "${files_to_process[@]}"; do
         {
             if $first_file; then
                 first_file=false
             else
                 printf '\n'
             fi
-            printf "${BLUE}%s\n${NORMAL}" "# $file"
+            printf "${blue}%s\n${normal}" "# $file"
             cat "$file"
-        }   >> "$CMDS_FILE"
+        }   >> "$cmds_file"
     done
-    less "$LESS_OPTIONS" "$CMDS_FILE"
+    less "$less_options" "$cmds_file"
 }
 
 
 function process_option_files {
-    TEXT="De volgende installatieBESTANDen zijn aanwezig:
+    text="De volgende installatieBESTANDen zijn aanwezig:
 
      BESTAND
 $(
-    if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"* \
+    if !    find    "$program_path/$program_name-"* \
                     2> /dev/null                    |
             nl      --number-width=2                \
                     --number-format=rn              \
@@ -412,17 +412,17 @@ $(
             sed     --expression='s/^/[/'; then
         printf '%s\n' "     0 Geen bestanden aanwezig.
 
-$USAGELINE"
+$usageline"
     else
         printf '%s\n' "
-Om de BESTANDen te verwerken voer uit: ${BLUE}$DISPLAY_NAME BESTAND...${NORMAL}
-Om de inhoud van BESTANDen te bekijken voer uit: ${BLUE}$DISPLAY_NAME --cat \
-BESTAND...${NORMAL}
-Om de verwerking van BESTANDen te simuleren voer uit: ${BLUE}$DISPLAY_NAME \
---simulate BESTAND...${NORMAL}"
+Om de BESTANDen te verwerken voer uit: ${blue}$display_name BESTAND...${normal}
+Om de inhoud van BESTANDen te bekijken voer uit: ${blue}$display_name --cat \
+BESTAND...${normal}
+Om de verwerking van BESTANDen te simuleren voer uit: ${blue}$display_name \
+--simulate BESTAND...${normal}"
     fi
 )"
-    info "$TEXT"
+    info "$text"
 }
 
 
@@ -438,22 +438,22 @@ function process_cmds_file {
     local -i    cmd_seq_num=0
 
     app_tot_num=$(
-        grep --word-regexp --regexp='^#1' --count "$CMDS_FILE" || true
+        grep --word-regexp --regexp='^#1' --count "$cmds_file" || true
         )
     if [[ $app_tot_num -gt 99 ]]; then
         app_tot_num=99
     fi
 
-    if $OPTION_REMOVE; then
+    if $option_remove; then
         operation='verwijderen'
     fi
-    if $OPTION_SIMULATE; then
+    if $option_simulate; then
         operation+=' simuleren'
     else
-        STATUS_BUSY="[${BLINK}${YELLOW}WERK${NORMAL}]"
-        STATUS_ERR="[${RED}FOUT${NORMAL}]"
-        STATUS_OK="[${GREEN}GOED${NORMAL}]"
-        printf '%s' "${CURSOR_INVISABLE}"
+        status_busy="[${blink}${yellow}WERK${normal}]"
+        status_err="[${red}FOUT${normal}]"
+        status_ok="[${green}GOED${normal}]"
+        printf '%s' "${cursor_invisable}"
     fi
 
     while read -r record; do
@@ -469,7 +469,7 @@ function process_cmds_file {
                 ;;
             '#2')
                 # Verwijderopdracht.
-                if $OPTION_REMOVE; then
+                if $option_remove; then
                     process_command_record "${record:3}"
                 fi
                 ;;
@@ -479,14 +479,14 @@ function process_cmds_file {
                 ;;
             *)
                 # Installatieopdracht.
-                if ! $OPTION_REMOVE; then
+                if ! $option_remove; then
                     process_command_record "$record"
                 fi
                 ;;
         esac
-    done < "$CMDS_FILE"
+    done < "$cmds_file"
 
-    printf '%s' "${CURSOR_VISABLE}"
+    printf '%s' "${cursor_visable}"
 }
 
 
@@ -512,17 +512,17 @@ function process_command_record {
     local       desc_printf=''
     local       status=''
 
-    COMMANDS_FOUND=true
+    commands_found=true
     ((++cmd_seq_num))
     if [[ $cmd_seq_num -gt 99 ]]; then
         cmd_seq_num=99
     fi
 
-    if $EXECUTE_COMMANDS; then
+    if $execute_commands; then
         desc_printf=$app_description
-        if $OPTION_GUI; then
-            TEXT="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
-            printf '%s\n' "$TEXT"
+        if $option_gui; then
+            text="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
+            printf '%s\n' "$text"
         else
             # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
             #  <--------------- tput cols --------------->
@@ -541,23 +541,23 @@ function process_command_record {
                 "$desc_printf"
         execute_command "$cmd"
     else
-        # OPTION_SIMULATE
+        # option_simulate
         if $write_app_description_line; then
             if $first_description_line; then
                 first_description_line=false
             else
-                printf '\n' >> "$SIM_FILE"
+                printf '\n' >> "$sim_file"
             fi
             printf  '[%2d/%-2d] %s\n'   \
                     "$app_seq_num"      \
                     "$app_tot_num"      \
-                    "$app_description"  >> "$SIM_FILE"
+                    "$app_description"  >> "$sim_file"
             write_app_description_line=false
         fi
         printf  '%7s [%2d] %s\n'        \
                 " "                     \
                 "$cmd_seq_num"          \
-                "${BLUE}$cmd${NORMAL}"  >> "$SIM_FILE"
+                "${blue}$cmd${normal}"  >> "$sim_file"
     fi
 }
 
@@ -567,28 +567,28 @@ function execute_command {
     local -i    cmd_rc=0
     local       status=''
 
-    if ! $OPTION_GUI; then
+    if ! $option_gui; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "$STATUS_BUSY %b" "$app_description_line\r"
+            printf "$status_busy %b" "$app_description_line\r"
         else
-            printf "$STATUS_BUSY        %b" "${app_description_line:7}\r"
+            printf "$status_busy        %b" "${app_description_line:7}\r"
         fi
     fi
 
     log "$app_description_line"
-    log "${BLUE}$cmd${NORMAL}"
+    log "${blue}$cmd${normal}"
     kz_common.check_dpkgd_snapd
-    eval "$cmd" |& $LOGCMD || cmd_rc=$?
-    if [[ $cmd_rc -gt $MAXRC ]]; then
-        MAXRC=$cmd_rc
+    eval "$cmd" |& $logcmd || cmd_rc=$?
+    if [[ $cmd_rc -gt $maxrc ]]; then
+        maxrc=$cmd_rc
     fi
-    if [[ $cmd_rc -eq $OK ]]; then
-        status="$STATUS_OK"
+    if [[ $cmd_rc -eq $ok ]]; then
+        status="$status_ok"
     else
-        status="$STATUS_ERR"
+        status="$status_err"
     fi
-    log "$status rc=$cmd_rc, maxrc=$MAXRC"
-    if ! $OPTION_GUI; then
+    log "$status rc=$cmd_rc, maxrc=$maxrc"
+    if ! $option_gui; then
         printf '%s\n' "$status"
     fi
 }
@@ -597,26 +597,26 @@ function execute_command {
 function term_script {
     local action='Installeren'
 
-    if ! $COMMANDS_FOUND; then
+    if ! $commands_found; then
         info 'Geen opdrachten om uit te voeren.'
-    elif $EXECUTE_COMMANDS; then
-        if [[ $MAXRC -ne $OK ]]; then
+    elif $execute_commands; then
+        if [[ $maxrc -ne $ok ]]; then
             err "Eén of meer opdrachten zijn fout gegegaan.
-De maximale afsluitwaarde is $MAXRC.
+De maximale afsluitwaarde is $maxrc.
 Controleer de log in het Terminalvenster met de opdracht:
-${BLUE}$LOGCMD_CHECK${NORMAL}"
-            exit $ERR
+${blue}$logcmd_check${normal}"
+            exit $err
         else
-            if $OPTION_REMOVE; then
+            if $option_remove; then
                 action='Verwijderen'
             fi
             info "
 $action is voltooid."
         fi
     else
-        less "$LESS_OPTIONS" "$SIM_FILE"
+        less "$less_options" "$sim_file"
     fi
-    exit $OK
+    exit $ok
 }
 
 

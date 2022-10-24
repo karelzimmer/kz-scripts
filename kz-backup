@@ -12,23 +12,23 @@
 # Global constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-backup'
-readonly PROGRAM_DESC='Back-up maken'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly program_name='kz-backup'
+readonly program_desc='Back-up maken'
+readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
-PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
-readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz_common.sh
+program_path=$(realpath "$(dirname  "${0/#-/}")")
+readonly program_path
+source  "$program_path"/kz_common.sh
 
-readonly OPTIONS_SHORT+='gt:'
-readonly OPTIONS_LONG+=',delete,dry-run,gui,target:'
-readonly USAGE="Gebruik: $DISPLAY_NAME [--delete] [--dry-run] [-g|--gui] \
+readonly options_short+='gt:'
+readonly options_long+=',delete,dry-run,gui,target:'
+readonly usage="Gebruik: $display_name [--delete] [--dry-run] [-g|--gui] \
 [-t|--target=DOELMAP]
-                   $OPTIONS_USAGE"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+                   $options_usage"
+readonly help="Gebruik: $display_name [OPTIE...]
 
-$PROGRAM_DESC.
+$program_desc.
 
 Opties:
       --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
@@ -37,26 +37,26 @@ Opties:
   -g, --gui      start in grafische modus
   -t, --target=DOELMAP
                  plaats back-up in de DOELMAP
-$OPTIONS_HELP"
+$options_help"
 
-readonly SOURCE=$HOME
+readonly source=$HOME
 
 
 ###############################################################################
 # Global variables
 ###############################################################################
 
-declare MEDIUM=''
-declare OPTION_DELETE=''
-declare OPTION_DELETE_EXCLUDED=''
-declare OPTION_DRY_RUN=''
-declare OPTION_GUI=false
-declare OPTION_TARGET=false
-declare TARGET_ARGUMENT=''
-declare TARGET_MEDIUM=''
-declare TARGET=''
-declare TEXT=''
-declare TITLE=''
+declare medium=''
+declare option_delete=''
+declare option_delete_excluded=''
+declare option_dry_run=''
+declare option_gui=false
+declare option_target=false
+declare target_argument=''
+declare target_medium=''
+declare target=''
+declare text=''
+declare title=''
 
 
 ###############################################################################
@@ -69,14 +69,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$display_name"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $OK ]]; then
-        info "$USAGELINE"
-        exit $ERR
+    if [[ $getopt_rc -ne $ok ]]; then
+        info "$usageline"
+        exit $err
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -84,22 +84,22 @@ function check_input {
     while true; do
         case $1 in
             -g|--gui)
-                OPTION_GUI=true
+                option_gui=true
                 kz_common.reset_terminal_attributes
                 shift
                 ;;
             --delete)
-                OPTION_DELETE='--delete'
-                OPTION_DELETE_EXCLUDED='--delete-excluded'
+                option_delete='--delete'
+                option_delete_excluded='--delete-excluded'
                 shift
                 ;;
             --dry-run)
-                OPTION_DRY_RUN='--dry-run'
+                option_dry_run='--dry-run'
                 shift
                 ;;
             -t|--target)
-                OPTION_TARGET=true
-                TARGET_ARGUMENT=$2
+                option_target=true
+                target_argument=$2
                 shift 2
                 ;;
             --)
@@ -114,55 +114,55 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        info "$USAGELINE"
-        exit $ERR
+        info "$usageline"
+        exit $err
     fi
 }
 
 
 function process_input {
-    if $OPTION_TARGET; then
-        if ! [[ -d $TARGET_ARGUMENT ]]; then
-            info "Map $TARGET_ARGUMENT bestaat niet."
-            info "$USAGELINE"
-            exit $ERR
+    if $option_target; then
+        if ! [[ -d $target_argument ]]; then
+            info "Map $target_argument bestaat niet."
+            info "$usageline"
+            exit $err
         fi
-        TARGET=$TARGET_ARGUMENT/backup-$HOSTNAME-$USER
-        TARGET_MEDIUM=$TARGET_ARGUMENT
+        target=$target_argument/backup-$HOSTNAME-$USER
+        target_medium=$target_argument
     else
-        MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
-        if [[ -z $MEDIUM ]]; then
-            TEXT="Koppel het USB-medium aan waarop de back-up wordt geplaatst."
-            warn "$TEXT"
-            if ! $OPTION_GUI; then
+        medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+        if [[ -z $medium ]]; then
+            text="Koppel het USB-medium aan waarop de back-up wordt geplaatst."
+            warn "$text"
+            if ! $option_gui; then
                 kz_common.wait_for_enter
             fi
-            MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
-            if [[ -z $MEDIUM ]]; then
+            medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+            if [[ -z $medium ]]; then
                 err 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna backup opnieuw.'
-                exit $ERR
+                exit $err
             fi
         fi
-        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             err "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
-$MEDIUM
+$medium
 
 Koppel media af via Bestanden, en start daarna backup opnieuw."
-            exit $ERR
+            exit $err
         fi
-        TARGET=$MEDIUM/backup-$HOSTNAME-$USER
-        TARGET_MEDIUM=$MEDIUM
+        target=$medium/backup-$HOSTNAME-$USER
+        target_medium=$medium
     fi
 
     kz_common.check_on_ac_power
 
-    TITLE='Instellingen veiligstellen'
-    TEXT='Instellingen veiligstellen'
-    if $OPTION_GUI; then
+    title='Instellingen veiligstellen'
+    text='Instellingen veiligstellen'
+    if $option_gui; then
         backup_settings                |
         zenity  --progress              \
                 --pulsate               \
@@ -170,10 +170,10 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
                 --no-cancel             \
                 --width     600         \
                 --height    50          \
-                --title     "$TITLE"    \
-                --text      "$TEXT"     2> >($LOGCMD)
+                --title     "$title"    \
+                --text      "$text"     2> >($logcmd)
     else
-        info "$TEXT..."
+        info "$text..."
         backup_settings
     fi
 
@@ -184,7 +184,7 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
 function backup_settings {
     local tgtdir=$HOME/Instellingen
 
-    mkdir --parents "$tgtdir" |& $LOGCMD
+    mkdir --parents "$tgtdir" |& $logcmd
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
@@ -205,14 +205,14 @@ function backup_settings_desktop_background {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp --update "$picture_file" "$file" |& $LOGCMD || true
+    cp --update "$picture_file" "$file" |& $logcmd || true
 }
 
 
 function backup_settings_favorite_apps {
     local file=$tgtdir/Favorieten
 
-    gsettings get org.gnome.shell favorite-apps  > "$file" |& $LOGCMD || true
+    gsettings get org.gnome.shell favorite-apps  > "$file" |& $logcmd || true
 }
 
 
@@ -231,7 +231,7 @@ installatie van een pakket, met
     local search=/etc/apt/sources.list
 
     printf '%b\n' "$header1" > "$file"
-    if ! apt list --manual-installed 2> >($LOGCMD) >> "$file"; then
+    if ! apt list --manual-installed 2> >($logcmd) >> "$file"; then
         true
     fi
 
@@ -260,7 +260,7 @@ function backup_settings_user_photo {
     local srcdir=/var/lib/AccountsService/icons
     local file=$tgtdir/Gebruikersfoto
 
-    cp --update $srcdir/"$USER" "$file" |& $LOGCMD || true
+    cp --update $srcdir/"$USER" "$file" |& $logcmd || true
 }
 
 
@@ -268,7 +268,7 @@ function create_backup {
     local       exclude=''
     local   -i  rsync_rc=0
 
-    exclude=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX")
+    exclude=$(mktemp -t "$program_name-XXXXXXXXXX")
 
     # Backup solution Déjà Dup exclude these files by default.
     cat << EOF > "$exclude"
@@ -300,17 +300,17 @@ $(
     )
 EOF
 
-    TITLE='Back-up maken'
-    TEXT='Backup voorbereiden (dit kan even duren)'
-    if $OPTION_GUI; then
+    title='Back-up maken'
+    text='Backup voorbereiden (dit kan even duren)'
+    if $option_gui; then
         rsync   --archive                   \
                 --verbose                   \
                 --delete                    \
                 --exclude-from="$exclude"   \
                 --delete-excluded           \
-                "$SOURCE"/                  \
-                "$TARGET"/                  \
-                2> >($LOGCMD)               |
+                "$source"/                  \
+                "$target"/                  \
+                2> >($logcmd)               |
         sed     --expression='s/^/#/'       |
         zenity  --progress                  \
                 --auto-close                \
@@ -318,33 +318,33 @@ EOF
                 --pulsate                   \
                 --width     600             \
                 --height    50              \
-                --title     "$TITLE"        \
-                --text      "$TEXT"         2> >($LOGCMD) || rsync_rc=$?
+                --title     "$title"        \
+                --text      "$text"         2> >($logcmd) || rsync_rc=$?
     else
-        info "$TEXT..."
+        info "$text..."
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
-                $OPTION_DRY_RUN             \
-                $OPTION_DELETE              \
-                $OPTION_DELETE_EXCLUDED     \
+                $option_dry_run             \
+                $option_delete              \
+                $option_delete_excluded     \
                 --exclude-from="$exclude"   \
-                "$SOURCE"/                  \
-                "$TARGET"/                  2> >($LOGCMD) || rsync_rc=$?
+                "$source"/                  \
+                "$target"/                  2> >($logcmd) || rsync_rc=$?
     fi
    rm "$exclude"
 
     case $rsync_rc in
         0)
-            return $OK
+            return $ok
             ;;
         *)
             err "Back-up maken is geeindigd met fouten.
 
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het maken van de back-up, of is er te weinig ruimte op
-$TARGET."
-            exit $ERR
+$target."
+            exit $err
             ;;
     esac
 
@@ -355,8 +355,8 @@ function term_script {
     local       dev=''
     local   -i  rc=0
 
-    TEXT='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
-    if $OPTION_GUI; then
+    text='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
+    if $option_gui; then
         sync                                        |
         zenity  --progress                          \
                 --pulsate                           \
@@ -364,29 +364,29 @@ function term_script {
                 --no-cancel                         \
                 --width     600                     \
                 --height    50                      \
-                --title     "$TITLE"                \
-                --text      "$TEXT"                 2> >($LOGCMD) || rc+=$?
+                --title     "$title"                \
+                --text      "$text"                 2> >($logcmd) || rc+=$?
     else
         info "
-$TEXT..."
-        sync |& $LOGCMD || rc+=$?
+$text..."
+        sync |& $logcmd || rc+=$?
     fi
 
-    TEXT=''
-    if [[ $TARGET_MEDIUM == /media/* ]]; then
-        TEXT='Het USB-medium afkoppelen'
+    text=''
+    if [[ $target_medium == /media/* ]]; then
+        text='Het USB-medium afkoppelen'
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
-                    "$TARGET_MEDIUM"    |
+                    "$target_medium"    |
             head    -1                  |
             cut     --delimiter='-'     \
                     --fields=2          |
             cut     --delimiter=' '     \
                     --fields=1
         )
-        if $OPTION_GUI; then
-            umount "$TARGET_MEDIUM";                    \
+        if $option_gui; then
+            umount "$target_medium";                    \
             udisksctl lock --block-device "$dev";       \
             udisksctl power-off --block-device "$dev"   |
             zenity  --progress                          \
@@ -395,15 +395,15 @@ $TEXT..."
                     --no-cancel                         \
                     --width     600                     \
                     --height    50                      \
-                    --title     "$TITLE"                \
-                    --text      "$TEXT"                 2> >($LOGCMD) || rc+=$?
+                    --title     "$title"                \
+                    --text      "$text"                 2> >($logcmd) || rc+=$?
         else
-            info "$TEXT..."
-            umount "$TARGET_MEDIUM" |& $LOGCMD || rc+=$?
-            udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
-            udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
+            info "$text..."
+            umount "$target_medium" |& $logcmd || rc+=$?
+            udisksctl lock --block-device "$dev" |& $logcmd || rc+=$?
+            udisksctl power-off --block-device "$dev" |& $logcmd || rc+=$?
         fi
-        if [[ $rc -eq $OK ]]; then
+        if [[ $rc -eq $ok ]]; then
             info "
 De back-up is gemaakt.
 
@@ -415,7 +415,7 @@ De back-up is gemaakt.
 Koppel zelf (veilig!) het USB-medium af."
         fi
     fi
-    exit $OK
+    exit $ok
 }
 
 

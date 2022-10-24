@@ -12,47 +12,47 @@
 # Global constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-restore'
-readonly PROGRAM_DESC='Back-up terugzetten'
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly program_name='kz-restore'
+readonly program_desc='Back-up terugzetten'
+readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
-PROGRAM_PATH=$(realpath "$(dirname  "${0/#-/}")")
-readonly PROGRAM_PATH
-source  "$PROGRAM_PATH"/kz_common.sh
+program_path=$(realpath "$(dirname  "${0/#-/}")")
+readonly program_path
+source  "$program_path"/kz_common.sh
 
-readonly OPTIONS_SHORT+='gs:'
-readonly OPTIONS_LONG+=',dry-run,gui,source:'
-readonly USAGE="Gebruik: $DISPLAY_NAME [--dry-run] [-g|--gui] \
+readonly options_short+='gs:'
+readonly options_long+=',dry-run,gui,source:'
+readonly usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
 [-s|--source=BRONMAP]
-                    $OPTIONS_USAGE"
-readonly HELP="Gebruik: $DISPLAY_NAME [OPTIE...]
+                    $options_usage"
+readonly help="Gebruik: $display_name [OPTIE...]
 
-$PROGRAM_DESC.
+$program_desc.
 
 Opties:
       --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -g, --gui      start in grafische modus
   -s, --source=BRONMAP
                  gebruik back-up in de BRONMAP
-$OPTIONS_HELP"
+$options_help"
 
-TARGET=$HOME
+target=$HOME
 
 
 ###############################################################################
 # Global variables
 ###############################################################################
 
-declare MEDIUM=''
-declare OPTION_DRY_RUN=''
-declare OPTION_GUI=false
-declare OPTION_SOURCE=false
-declare SOURCE_ARGUMENT=''
-declare SOURCE_MEDIUM=''
-declare SOURCE=''
-declare TEXT=''
-declare TITLE=''
+declare medium=''
+declare option_dry_run=''
+declare option_gui=false
+declare option_source=false
+declare source_argument=''
+declare source_medium=''
+declare source=''
+declare text=''
+declare title=''
 
 
 ###############################################################################
@@ -65,14 +65,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$display_name"     \
                 --              "$@"
         ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $OK ]]; then
-        info "$USAGELINE"
-        exit $ERR
+    if [[ $getopt_rc -ne $ok ]]; then
+        info "$usageline"
+        exit $err
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -80,17 +80,17 @@ function check_input {
     while true; do
         case $1 in
             -g|--gui)
-                OPTION_GUI=true
+                option_gui=true
                 kz_common.reset_terminal_attributes
                 shift
                 ;;
             --dry-run)
-                OPTION_DRY_RUN='--dry-run'
+                option_dry_run='--dry-run'
                 shift
                 ;;
             -s|--source)
-                OPTION_SOURCE=true
-                SOURCE_ARGUMENT=$2
+                option_source=true
+                source_argument=$2
                 shift 2
                 ;;
             --)
@@ -105,8 +105,8 @@ function check_input {
 
     if [[ "$*" ]]; then
         info 'Geen argumenten toegestaan.'
-        info "$USAGELINE"
-        exit $ERR
+        info "$usageline"
+        exit $err
     fi
 }
 
@@ -115,74 +115,74 @@ function process_input {
     local prompt=''
     local restore=false
 
-    if $OPTION_SOURCE; then
-        if ! [[ -d $SOURCE_ARGUMENT ]]; then
-            info "Map $SOURCE_ARGUMENT bestaat niet."
-            info "$USAGELINE"
-            exit $ERR
+    if $option_source; then
+        if ! [[ -d $source_argument ]]; then
+            info "Map $source_argument bestaat niet."
+            info "$usageline"
+            exit $err
         fi
-        SOURCE=$SOURCE_ARGUMENT/backup-$HOSTNAME-$USER
-        SOURCE_MEDIUM=$SOURCE_ARGUMENT
+        source=$source_argument/backup-$HOSTNAME-$USER
+        source_medium=$source_argument
     else
-        MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
-        if [[ -z $MEDIUM ]]; then
-            TEXT='
+        medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+        if [[ -z $medium ]]; then
+            text='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
-            warn "$TEXT"
-            if ! $OPTION_GUI; then
+            warn "$text"
+            if ! $option_gui; then
                 kz_common.wait_for_enter
             fi
-            MEDIUM=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
-            if [[ -z $MEDIUM ]]; then
+            medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+            if [[ -z $medium ]]; then
                 err 'Geen USB-medium gevonden.
 
 Koppel een USB-medium aan, en start daarna restore opnieuw.'
-            exit $ERR
+            exit $err
             fi
         fi
-        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             err "Koppel slechts één USB-medium aan.
 
 Nu aangekoppeld zijn:
-$MEDIUM
+$medium
 
 Koppel media af via Bestanden, en start daarna restore opnieuw."
-            exit $ERR
+            exit $err
         fi
-        SOURCE=$MEDIUM/backup-$HOSTNAME-$USER
-        SOURCE_MEDIUM=$MEDIUM
-        if ! [[ -d $SOURCE ]]; then
+        source=$medium/backup-$HOSTNAME-$USER
+        source_medium=$medium
+        if ! [[ -d $source ]]; then
             err "Geen back-up gevonden op aangekoppeld USB-medium.
 
 Koppel een USB-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
 daarna restore opnieuw."
-            exit $ERR
+            exit $err
         fi
     fi
 
     kz_common.check_on_ac_power
 
-    TITLE='Back-up terugzetten'
-    TEXT='Back-up wordt TERUGGEZET.
+    title='Back-up terugzetten'
+    text='Back-up wordt TERUGGEZET.
 '
     prompt='Doorgaan?'
-    if $OPTION_GUI; then
-        TEXT+="
+    if $option_gui; then
+        text+="
 $prompt"
         if zenity   --question                  \
                     --no-markup                 \
                     --width         600         \
                     --height        50          \
-                    --title         "$TITLE"    \
-                    --text          "$TEXT"     \
+                    --title         "$title"    \
+                    --text          "$text"     \
                     --ok-label      'Ja'        \
-                    --cancel-label  'Nee'       2> >($LOGCMD); then
+                    --cancel-label  'Nee'       2> >($logcmd); then
             restore=true
         else
             restore=false
         fi
     else
-        info "$TEXT"
+        info "$text"
         while true; do
             read -rp "$prompt [j/N]: "
             case $REPLY in
@@ -195,7 +195,7 @@ $prompt"
                     break
                     ;;
                 *)
-                    printf '%s' "${REWRITE_LINE}"
+                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
             esac
@@ -204,9 +204,9 @@ $prompt"
     if $restore; then
         restore_backup
 
-        TITLE='Instellingen terugzetten'
-        TEXT='Instellingen terugzetten'
-        if $OPTION_GUI; then
+        title='Instellingen terugzetten'
+        text='Instellingen terugzetten'
+        if $option_gui; then
             restore_settings                |
             zenity  --progress              \
                     --pulsate               \
@@ -214,14 +214,14 @@ $prompt"
                     --no-cancel             \
                     --width     600         \
                     --height    50          \
-                    --title     "$TITLE"    \
-                    --text      "$TEXT"     2> >($LOGCMD)
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd)
         else
-            info "$TEXT..."
+            info "$text..."
             restore_settings
         fi
     else
-        exit $OK
+        exit $ok
     fi
 }
 
@@ -229,13 +229,13 @@ $prompt"
 function restore_backup {
     local -i rsync_rc=0
 
-    TEXT='Restore voorbereiden (dit kan even duren)'
-    if $OPTION_GUI; then
+    text='Restore voorbereiden (dit kan even duren)'
+    if $option_gui; then
         rsync   --archive                   \
                 --verbose                   \
-                "$SOURCE"/                  \
-                "$TARGET"/                  \
-                2> >($LOGCMD)               |
+                "$source"/                  \
+                "$target"/                  \
+                2> >($logcmd)               |
         sed     --expression='s/^/#/'       |
         zenity  --progress                  \
                 --auto-close                \
@@ -243,29 +243,29 @@ function restore_backup {
                 --pulsate                   \
                 --width     600             \
                 --height    50              \
-                --title     "$TITLE"        \
-                --text      "$TEXT"         2> >($LOGCMD) || rsync_rc=$?
+                --title     "$title"        \
+                --text      "$text"         2> >($logcmd) || rsync_rc=$?
     else
-        info "$TEXT..."
+        info "$text..."
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
-                $OPTION_DRY_RUN             \
-                "$SOURCE"/                  \
-                "$TARGET"/                  2> >($LOGCMD) || rsync_rc=$?
+                $option_dry_run             \
+                "$source"/                  \
+                "$target"/                  2> >($logcmd) || rsync_rc=$?
     fi
 
     case $rsync_rc in
         0)
-            return $OK
+            return $ok
             ;;
         *)
             err "Back-up terugzetten is geëindigd met fouten.
 
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
 of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig
-ruimte op $TARGET."
-            exit $ERR
+ruimte op $target."
+            exit $err
             ;;
     esac
 }
@@ -304,22 +304,22 @@ function term_script {
     local       dev=''
     local   -i  rc=0
 
-    sync |& $LOGCMD || rc+=$?
-    TEXT=''
-    if [[ $SOURCE_MEDIUM == /media/* ]]; then
-        TEXT='Het USB-medium afkoppelen'
+    sync |& $logcmd || rc+=$?
+    text=''
+    if [[ $source_medium == /media/* ]]; then
+        text='Het USB-medium afkoppelen'
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
-                    "$SOURCE_MEDIUM"    |
+                    "$source_medium"    |
             head    -1                  |
             cut     --delimiter='-'     \
                     --fields=2          |
             cut     --delimiter=' '     \
                     --fields=1
         )
-        if $OPTION_GUI; then
-            umount "$SOURCE_MEDIUM";                    \
+        if $option_gui; then
+            umount "$source_medium";                    \
             udisksctl lock --block-device "$dev";       \
             udisksctl power-off --block-device "$dev"   |
             zenity  --progress                          \
@@ -328,15 +328,15 @@ function term_script {
                     --no-cancel                         \
                     --width     600                     \
                     --height    50                      \
-                    --title     "$TITLE"                \
-                    --text      "$TEXT"                 2> >($LOGCMD) || rc+=$?
+                    --title     "$title"                \
+                    --text      "$text"                 2> >($logcmd) || rc+=$?
         else
-            info "$TEXT..."
-            umount "$SOURCE_MEDIUM" |& $LOGCMD || rc+=$?
-            udisksctl lock --block-device "$dev" |& $LOGCMD || rc+=$?
-            udisksctl power-off --block-device "$dev" |& $LOGCMD || rc+=$?
+            info "$text..."
+            umount "$source_medium" |& $logcmd || rc+=$?
+            udisksctl lock --block-device "$dev" |& $logcmd || rc+=$?
+            udisksctl power-off --block-device "$dev" |& $logcmd || rc+=$?
         fi
-        if [[ $rc -eq $OK ]]; then
+        if [[ $rc -eq $ok ]]; then
             info "
 De back-up is teruggezet.
 
@@ -348,7 +348,7 @@ De back-up is teruggezet.
 Koppel zelf (veilig!) het USB-medium af."
         fi
     fi
-    exit $OK
+    exit $ok
 }
 
 
