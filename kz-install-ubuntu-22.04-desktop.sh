@@ -87,13 +87,7 @@ sudo snap install spotify
 
 #1 teams (samenwerken)
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
-sudo apt-get remove --yes teams # Old package.
-sudo rm --force /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg* /etc/apt/trusted.gpg.d/microsoft.gpg # Old package.
-sudo apt-get update # Old package.
 sudo snap install teams
-#2 sudo apt-get remove --yes teams # Old package.
-#2 sudo rm --force /etc/apt/sources.list.d/teams.list* /usr/share/keyrings/microsoft-teams.gpg* /etc/apt/trusted.gpg.d/microsoft.gpg # Old package.
-#2 sudo apt-get update # Old package.
 #2 sudo snap remove teams
 
 #1 teamviewer (afstandsbediening)
@@ -109,9 +103,7 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get update
 
 #1 zoom (samenwerken)
-sudo apt-get remove --yes zoom # Old package.
 sudo snap install zoom-client
-#2 sudo apt-get remove --yes zoom # Old package.
 #2 sudo snap remove zoom-client
 
 #1-language-support (taalondersteuning)

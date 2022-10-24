@@ -35,15 +35,11 @@ kz-gset --addfavaft=spotify_spotify
 #2 kz-gset --delfav=spotify_spotify
 
 #1 teams (samenwerken)
-kz-gset --addfavaft=teams # Old package.
 kz-gset --addfavaft=teams_teams
-#2 kz-gset --delfav=teams # Old package.
 #2 kz-gset --delfav=teams_teams
 
 #1 zoom (samenwerken)
-kz-gset --delfav=Zoom # Old package.
 kz-gset --addfavaft=zoom-client_zoom-client
-#2 kz-gset --delfav=Zoom # Old package.
 #2 kz-gset --delfav=zoom-client_zoom-client
 
 #1 gnome (bureaubladomgeving)
