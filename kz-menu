@@ -83,7 +83,7 @@ readonly menu2_lines=${#menu2_actions[@]}
 ###############################################################################
 
 declare     execute_command=false
-declare -a  execs=()
+declare -a  rows=()
 declare     option_gui=false
 declare     text=''
 declare     title=''
@@ -252,7 +252,7 @@ function process_menu1_choice {
 
 function process_menu1_choice1 {
     title="${menu1_actions[1]}"
-    execs=(
+    rows=(
         [1]="${menu2_actions[1]}#${menu2_commands[1]}"
             "${menu2_actions[2]}#${menu2_commands[2]}"
         )
@@ -282,7 +282,7 @@ Komt globaal neer op:
 
 function process_menu1_choice3 {
     title="${menu1_actions[3]}"
-    execs=(
+    rows=(
         [1]="${menu2_actions[3]}#${menu2_commands[3]}"
             "${menu2_actions[4]}#${menu2_commands[4]}"
         )
@@ -292,7 +292,7 @@ function process_menu1_choice3 {
 
 function process_menu1_choice4 {
     title="${menu1_actions[4]}"
-    execs=(
+    rows=(
         [1]="${menu2_actions[5]}#${menu2_commands[5]}"
             "${menu2_actions[6]}#${menu2_commands[6]}"
             "${menu2_actions[7]}#${menu2_commands[7]}"
@@ -395,7 +395,7 @@ function process_menu2_tui {
 function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((menu2_lines -1)) ]]; then
         title="${menu2_actions[$REPLY]}"
-        execs=(
+        rows=(
             [1]="${menu2_actions[$REPLY]}#${menu2_commands[$REPLY]}"
             )
         process_commands
@@ -411,16 +411,16 @@ function process_menu2_choice {
 function process_commands {
     local       action=''
     local       command=''
-    local -i    exec=0
+    local -i    row=0
 
     show_commands_before_execution
     if $execute_command; then
-        for exec in "${!execs[@]}"; do
+        for row in "${!rows[@]}"; do
             action=$(
-                printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=1
+                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
                 )
             command=$(
-                printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=2
+                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
                 )
             title=$action
             execute_command
@@ -435,7 +435,7 @@ function process_commands {
 function show_commands_before_execution {
     local       action=''
     local       command=''
-    local -i    exec=0
+    local -i    row=0
     local       prompt=''
 
     if ! $option_gui; then
@@ -443,15 +443,15 @@ function show_commands_before_execution {
     fi
     text='Het volgende wordt uitgevoerd:
 '
-    for exec in "${!execs[@]}"; do
+    for row in "${!rows[@]}"; do
         action=$(
-            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=1
+            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
             )
         command=$(
-            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=2
+            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         text+="
-$exec. $action ($command)"
+$row. $action ($command)"
     done
     text+='
 '
@@ -496,7 +496,7 @@ $prompt"
 
 function execute_command {
     local -i    cmd_rc=0
-    local       exec=''
+    local       row=''
     local       gui_option=''
 
     if ! $option_gui; then
@@ -510,12 +510,12 @@ function execute_command {
     fi
 
     # Verwerk (automatische) opdrachten.
-    exec=${command/kz /kz-}
+    row=${command/kz /kz-}
     cmd=$(
-        printf '%s' "$exec" | cut --delimiter=' ' --fields=1
+        printf '%s' "$row" | cut --delimiter=' ' --fields=1
         )
     arg=$(
-        printf '%s' "$exec" | cut --delimiter=' ' --fields=2- --only-delimited
+        printf '%s' "$row" | cut --delimiter=' ' --fields=2- --only-delimited
         )
     if $option_gui; then
         gui_option='--gui'
@@ -531,11 +531,12 @@ function execute_command {
 function manual_actions {
     if [[ $title = 'Gebruikers toevoegen' ]]; then
         text="Gebruikers toevoegen:
-Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op de \
-Super-toets[1],
-typ 'gebr' en klik achter Instellingen op Gebruikers.
-Klik op Ontgrendelen.
-Klik op Gebruiker toevoegen.
+
+1. Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op \
+de Super-toets[1], typ 'gebr' en klik achter Instellingen op Gebruikers.
+2. Klik op Ontgrendelen en geef wachtwoord.
+3. Klik op Gebruiker toevoegen.
+4. Sluit het scherm Gebruikers.
 
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$text"
@@ -545,13 +546,14 @@ Klik op Gebruiker toevoegen.
     elif [[ $title = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
             text="Gebruikersfoto instellen:
-Wijzig de gebruikersfoto via een druk op de Super-toets[1],
-typ 'gebr' en klik achter Instellingen op Gebruikers.
-Klik op Ontgrendelen.
-Klik op de afbeelding voor de gebruiker.
-Klik op Selecteer een bestand.
-Selecteer Gebruikersfoto in Persoonlijke map / Instellingen.
-Sluit het scherm Gebruikers
+
+1. Wijzig de gebruikersfoto via een druk op de Super-toets[1], typ 'gebr' en \
+klik achter Instellingen op Gebruikers.
+2. Klik op Ontgrendelen.
+3. Klik op de afbeelding voor de gebruiker.
+4. Klik op Selecteer een bestand.
+5. Selecteer Gebruikersfoto in Persoonlijke map / Instellingen.
+6. Sluit het scherm Gebruikers.
 
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
             info "$text"
@@ -570,22 +572,22 @@ Er is bij het maken van de back-up geen gebruikersfoto gevonden."
 function show_commands_after_execution {
     local       action=''
     local       command=''
-    local -i    exec=0
+    local -i    row=0
 
     if ! $option_gui; then
         clear -x
     fi
     text='Het volgende is uitgevoerd:
 '
-    for exec in "${!execs[@]}"; do
+    for row in "${!rows[@]}"; do
         action=$(
-            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=1
+            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
             )
         command=$(
-            printf '%s' "${execs[$exec]}" | cut --delimiter='#' --fields=2
+            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         text+="
-$exec. $action ($command)"
+$row. $action ($command)"
     done
     info "$text"
 }
