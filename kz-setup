@@ -84,8 +84,6 @@ declare     option_simulate=false
 declare     status_busy=''
 declare     status_err=''
 declare     status_ok=''
-declare     text=''
-declare     title=''
 
 
 ###############################################################################

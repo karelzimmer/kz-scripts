@@ -55,8 +55,6 @@ declare option_target=false
 declare target_argument=''
 declare target_medium=''
 declare target=''
-declare text=''
-declare title=''
 
 
 ###############################################################################

@@ -45,6 +45,8 @@ declare     option_usage=false
 declare     option_version=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
 declare     program_exec=${0/#./$program_path}
+declare     text=''
+declare     title=''
 declare     usageline="Typ '$display_name --usage' voor meer informatie."
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.

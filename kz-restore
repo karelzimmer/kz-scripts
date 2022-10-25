@@ -51,8 +51,6 @@ declare option_source=false
 declare source_argument=''
 declare source_medium=''
 declare source=''
-declare text=''
-declare title=''
 
 
 ###############################################################################
