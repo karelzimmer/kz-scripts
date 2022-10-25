@@ -129,9 +129,7 @@ function process_input {
             text='
 Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
             warn "$text"
-            if ! $option_gui; then
-                kz_common.wait_for_enter
-            fi
+            kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 err 'Geen USB-medium gevonden.

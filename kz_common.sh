@@ -102,15 +102,16 @@ function kz_common.check_on_ac_power {
 De computer gebruikt nu alleen de accu voor de stroomvoorziening.
 
 Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
-        if ! $option_gui; then
-            kz_common.wait_for_enter
-        fi
+        kz_common.wait_for_enter
     fi
 
 }
 
 
 function kz_common.wait_for_enter {
+    if $option_gui; then
+        return
+    fi
     read -rp '
 Druk op de Enter-toets om door te gaan [Enter]: '
 }

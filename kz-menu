@@ -273,10 +273,7 @@ Komt globaal neer op:
 3. Start de computer op vanaf deze USB-stick of DVD.
 4. Installeer Linux.'
     info "$text"
-    if ! $option_gui; then
-            kz_common.wait_for_enter
-
-    fi
+    kz_common.wait_for_enter
 }
 
 
@@ -522,9 +519,7 @@ function execute_command {
     fi
     "$program_path/$cmd" "$arg" $gui_option -- || cmd_rc=$?
     log "$command: rc=$cmd_rc"
-    if ! $option_gui; then
-        kz_common.wait_for_enter
-    fi
+    kz_common.wait_for_enter
 }
 
 
@@ -540,9 +535,7 @@ de Super-toets[1], typ 'gebr' en klik achter Instellingen op Gebruikers.
 
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$text"
-        if ! $option_gui; then
-            kz_common.wait_for_enter
-        fi
+        kz_common.wait_for_enter
     elif [[ $title = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
             text="Gebruikersfoto instellen:
@@ -562,9 +555,7 @@ klik achter Instellingen op Gebruikers.
 Er is bij het maken van de back-up geen gebruikersfoto gevonden."
             info "$text"
         fi
-        if ! $option_gui; then
-            kz_common.wait_for_enter
-            fi
+        kz_common.wait_for_enter
     fi
 }
 
