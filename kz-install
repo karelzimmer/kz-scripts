@@ -58,8 +58,8 @@ apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
 readonly apps_file
 cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
 readonly cmds_file
-sim_file=$(mktemp -t "$program_name-XXXXXXXXXX.sim")
-readonly sim_file
+sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
+readonly sims_file
 
 
 ###############################################################################
@@ -546,18 +546,18 @@ function process_command_record {
             if $first_description_line; then
                 first_description_line=false
             else
-                printf '\n' >> "$sim_file"
+                printf '\n' >> "$sims_file"
             fi
             printf  '[%2d/%-2d] %s\n'   \
                     "$app_seq_num"      \
                     "$app_tot_num"      \
-                    "$app_description"  >> "$sim_file"
+                    "$app_description"  >> "$sims_file"
             write_app_description_line=false
         fi
         printf  '%7s [%2d] %s\n'        \
                 " "                     \
                 "$cmd_seq_num"          \
-                "${blue}$cmd${normal}"  >> "$sim_file"
+                "${blue}$cmd${normal}"  >> "$sims_file"
     fi
 }
 
@@ -603,7 +603,7 @@ function term_script {
         if [[ $maxrc -ne $ok ]]; then
             err "Eén of meer opdrachten zijn fout gegegaan.
 De maximale afsluitwaarde is $maxrc.
-Controleer de log in het Terminalvenster met de opdracht:
+Controleer de log in het Terminalvenster met de opdracht: \
 ${blue}$logcmd_check${normal}"
             exit $err
         else
@@ -614,7 +614,7 @@ ${blue}$logcmd_check${normal}"
 $action is voltooid."
         fi
     else
-        less "$less_options" "$sim_file"
+        less "$less_options" "$sims_file"
     fi
     exit $ok
 }
