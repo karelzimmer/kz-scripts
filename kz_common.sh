@@ -31,8 +31,6 @@ declare     options_help="  -h, --help     toon deze hulptekst
   -v, --version  toon de programmaversie"
 
 declare -a  cmdline_args=()
-declare     help='Gebruik: source kz_common.sh
-     of: . kz_common.sh'
 declare     less_options="--LONG-PROMPT --no-init --quit-if-one-screen \
 --quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $display_name \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
@@ -47,8 +45,6 @@ declare     option_usage=false
 declare     option_version=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
 declare     program_exec=${0/#./$program_path}
-declare     usage='Gebruik: source kz_common.sh
-     of: . kz_common.sh'
 declare     usageline="Typ '$display_name --usage' voor meer informatie."
 
 # Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
