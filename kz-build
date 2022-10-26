@@ -306,10 +306,10 @@ function build_deb {
     printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
 
     mkdir --parents "${uploads_targets[deb]}" |& $logcmd
-    # Debian 11 does not support xz compression (default), hence the -Zgzip.
+    # Debian 11 does not support zst compression (default), hence the -Zxz.
     fakeroot    dpkg-deb                            \
                 --build                             \
-                -Zgzip                              \
+                -Zxz                                \
                 "$deb_distdir"                      \
                 "${uploads_targets[deb]}/$deb_name" |& $logcmd
 }
