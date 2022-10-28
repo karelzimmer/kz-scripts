@@ -94,10 +94,10 @@ function check_input {
     fi
 
     clear -x
+    kz_common.check_on_ac_power
     if ! kz_common.check_user_sudo; then
         term_script
     fi
-    kz_common.check_on_ac_power
 }
 
 
