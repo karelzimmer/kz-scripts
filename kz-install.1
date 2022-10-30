@@ -24,23 +24,21 @@ op Debian gebaseerd systeem zoals Ubuntu.
 In een grafische werkomgeving kan opdracht \fBkz install\fR worden uitgevoerd
 door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
 .sp
-Gebruik (hierna) \fBkz setup\fR voor het instellen en installeren van apps en
-het wijzigen van instellingen.
+Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
+gebruikersinstellingen.
 .sp
 \fBkz install\fR verwerkt zogenaamde installatiebestanden die opdrachten
 bevatten voor het installeren van apps en het wijzigen van systeeminstellingen.
 .sp
 Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
 .br
-- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh
+- /usr/bin/kz-install-<distributie>-<versie>-desktop.sh
 .br
-- /usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+- /usr/bin/kz-install-<distributie>-<versie>-desktop-<computernaam>.sh
 (indien aanwezig)
 .sp
 <distributie>, <versie>, en <computernaam> worden ingevuld met waarden van de
 huidige computer.
-.br
-Voor \fIEDITIE\fR wordt standaard 'desktop' gebruikt.
 .sp
 Bijvoorbeeld 'kz-install-ubuntu-20.04-desktop.sh' en\
  'kz-install-ubuntu-20.04-desktop-pc02.sh'.
@@ -52,11 +50,10 @@ Voor de indeling van de installatiebestanden zie de sectie
 \fBBESTANDSINDELING\fR hieronder.
 .sp
 Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
-aanwezige standaard installatiebestanden opgenomen in de lijst van te verwerken
+standaard installatiebestanden opgenomen in de lijst van te verwerken
 bestanden.
 .sp
-Met optie \fB-e\fR, \fB--editie\fR is de \fIEDITIE\fR aan te passen,
-bijvoorbeeld \fIEDITIE\fR server.
+Met optie \fB--server\fR wordt niet 'desktop' maar 'server' gebruikt.
 .sp
 Optie \fB-f\fR, \fB--files\fR geeft een lijst van installatiebestanden.
 .sp
@@ -222,14 +219,14 @@ Toon de inhoud van installatiebestanden.
 .br
 Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 .TP
-\fB-e\fR, \fB--edition=\fIEDITIE\fR
-Gebruik editie \fIEDITIE\fR.
-.TP
 \fB-f\fR, \fB--files\fR
 Toon een lijst van installatiebestanden.
 .TP
 \fB-r\fR, \fB--remove\fR
 Toon instructies voor het verwijderen van apps.
+.TP
+\fB--server\fR
+Apps installeren en systeeminstellingen wijzigen voor een server.
 .TP
 \fB-s\fR, \fB--simulate\fR
 Geen actie, maar simuleer de installatie, en toon de opdrachten die uitgevoerd
@@ -255,15 +252,14 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR.sh
+/usr/bin/kz-install-<distributie>-<versie>-desktop.sh
 .RS
-Standaard installatiebestand, \fIEDITIE\fR is standaard desktop.
+Standaard installatiebestand.
 .RE
 .sp
-/usr/bin/kz-install-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+/usr/bin/kz-install-<distributie>-<versie>-desktop-<computernaam>.sh
 .RS
-Standaard installatiebestand voor <computernaam>, \fIEDITIE\fR is standaard
-desktop.
+Standaard installatiebestand voor <computernaam>.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.apps

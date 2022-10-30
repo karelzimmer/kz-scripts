@@ -6,6 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-dashoptions="-a --apps -c --cat '-e EDITIE' '--edition EDITIE' -f --files -g
-    --gui -h --help -r --remove -s --simulate -u --usage -v --version"
+dashoptions='-a --apps -c --cat -f --files -g --gui -h --help -r --remove
+    --server -s --simulate -u --usage -v --version'
 complete -o default -W "$dashoptions" kz-install

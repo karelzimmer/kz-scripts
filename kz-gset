@@ -22,8 +22,8 @@ readonly program_path
 source  "$program_path"/kz_common.sh
 
 readonly options_short+='a:b:d:lrf:x:'
-readonly options_long+=",addfavaft:,addfavbef:,delfav:,\
-list,resetfavs,addappfolder:,delappfolder:"
+readonly options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
+addappfolder:,delappfolder:"
 readonly usage="Gebruik: $display_name [-a|--addfavaft=FAVORITE] \
 [-b|--addfavbef=FAVORITE]
                  [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]

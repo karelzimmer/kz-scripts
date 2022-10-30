@@ -18,8 +18,8 @@ kz setup \- Apps instellen.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz setup\fR stelt apps in en wijzigt instellingen op Debian en op Debian
-gebaseerd systeem zoals Ubuntu.
+\fBkz setup\fR stelt apps in en wijzigt gebruikersinstellingen op Debian en op
+Debian gebaseerd systeem zoals Ubuntu.
 .sp
 In een grafische werkomgeving zoals Ubuntu met GNOME kan opdracht
 \fBkz setup\fR worden uitgevoerd door te zoeken naar \fBapps\fR, klik op
@@ -33,15 +33,13 @@ het instellen van apps en het wijzigen van instellingen.
 .sp
 Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
 .br
-- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh
+- /usr/bin/kz-setup-<distributie>-<versie>-desktop.sh
 .br
-- /usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>-\
+- /usr/bin/kz-setup-<distributie>-<versie>-desktop-<computernaam>-\
 <gebruikersnaam>.sh (indien aanwezig)
 .sp
 <distributie>, <versie>, <computernaam>, en <gebruikersnaam> worden ingevuld
 met waarden van de huidige computer en gebruiker.
-.br
-Voor \fIEDITIE\fR wordt standaard 'desktop' gebruikt.
 .sp
 Bijvoorbeeld 'kz-setup-ubuntu-20.04-desktop.sh' en\
  'kz-setup-ubuntu-20.04-desktop-pc02-jan.sh'.
@@ -56,8 +54,7 @@ Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
 aanwezige standaard instelbestanden opgenomen in de lijst van te verwerken
 bestanden.
 .sp
-Met optie \fB-e\fR, \fB--editie\fR is de \fIEDITIE\fR aan te passen,
-bijvoorbeeld \fIEDITIE\fR server.
+Met optie \fB--server\fR wordt niet 'desktop' maar 'server' gebruikt.
 .sp
 Optie \fB-f\fR, \fB--files\fR geeft een lijst van instelbestanden.
 .sp
@@ -224,14 +221,14 @@ Toon de inhoud van instelbestanden.
 .br
 Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
 .TP
-\fB-e\fR, \fB--edition=\fIEDITIE\fR
-Gebruik editie \fIEDITIE\fR.
-.TP
 \fB-f\fR, \fB--files\fR
 Toon een lijst van instelbestanden.
 .TP
 \fB-r\fR, \fB--reset\fR
 Toon instructies voor het resetten van apps.
+.TP
+\fB--server\fR
+Apps instellen en gebruikersinstellingen wijzigen voor een server.
 .TP
 \fB-s\fR, \fB--simulate\fR
 Geen actie, maar simuleer het instellen, en toon de opdrachten die uitgevoerd
@@ -257,15 +254,15 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR.sh
+/usr/bin/kz-setup-<distributie>-<versie>-desktop.sh
 .RS
-Standaard instelbestand, \fIEDITIE\fR is standaard desktop.
+Standaard instelbestand.
 .RE
 .sp
-/usr/bin/kz-setup-<distributie>-<versie>-\fIEDITIE\fR-<computernaam>.sh
+/usr/bin/kz-setup-<distributie>-<versie>-desktop-<computernaam>-\
+<gebruikersnaam>.sh
 .RS
-Standaard instelbestand voor <computernaam>, \fIEDITIE\fR is standaard
-desktop.
+Standaard instelbestand voor <computernaam> en <gebruikersnaam>.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.apps
