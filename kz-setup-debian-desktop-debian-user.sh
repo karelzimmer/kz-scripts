@@ -1,7 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Debian 11 LTS desktop op debian voor user (Live
-# Persistent).
+# Instelbestand voor Debian desktop op debian voor user (Live Persistent).
 #
 # Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.

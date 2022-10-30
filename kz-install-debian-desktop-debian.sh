@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Debian 11 LTS desktop op debian (Live Persistent).
+# Installatiebestand voor Debian desktop op debian (Live Persistent).
 #
 # Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.

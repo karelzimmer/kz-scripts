@@ -32,19 +32,18 @@ bevatten voor het installeren van apps en het wijzigen van systeeminstellingen.
 .sp
 Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
 .br
-- /usr/bin/kz-install-<distributie>-<versie>-desktop.sh
+- /usr/bin/kz-install-<distributie>-desktop.sh
 .br
-- /usr/bin/kz-install-<distributie>-<versie>-desktop-<computernaam>.sh
-(indien aanwezig)
+- /usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh (indien aanwezig)
 .sp
-<distributie>, <versie>, en <computernaam> worden ingevuld met waarden van de
-huidige computer.
+<distributie> en <computernaam> worden ingevuld met waarden van de huidige
+computer.
 .sp
-Bijvoorbeeld 'kz-install-ubuntu-20.04-desktop.sh' en\
- 'kz-install-ubuntu-20.04-desktop-pc02.sh'.
+Bijvoorbeeld 'kz-install-ubuntu-desktop.sh' en\
+ 'kz-install-ubuntu-desktop-pc02.sh'.
 .br
-Deze installatiebestanden bevatten opdrachten voor ubuntu 20.04 desktop en
-ubuntu 20.04 desktop op pc02.
+Deze installatiebestanden bevatten opdrachten voor ubuntu desktop algemeen en
+ubuntu desktop op pc02.
 .sp
 Voor de indeling van de installatiebestanden zie de sectie
 \fBBESTANDSINDELING\fR hieronder.
@@ -252,12 +251,12 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-install-<distributie>-<versie>-desktop.sh
+/usr/bin/kz-install-<distributie>-desktop.sh
 .RS
 Standaard installatiebestand.
 .RE
 .sp
-/usr/bin/kz-install-<distributie>-<versie>-desktop-<computernaam>.sh
+/usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh
 .RS
 Standaard installatiebestand voor <computernaam>.
 .RE

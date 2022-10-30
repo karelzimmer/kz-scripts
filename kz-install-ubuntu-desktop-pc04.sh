@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu 22.04 LTS desktop op pc04.
+# Installatiebestand voor Ubuntu desktop op pc04.
 #
 # Geschreven in 2022 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.

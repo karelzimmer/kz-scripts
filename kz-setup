@@ -48,8 +48,6 @@ Argumenten:
 
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly distro
-version=$(lsb_release --release --short)
-readonly version
 
 apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
 readonly apps_file
@@ -174,9 +172,8 @@ function process_input {
     local       file=''
 
     # Verwerk argumenten.
-    dfltfile_1=$program_path/$program_name-$distro-$version-$edition.sh
-    dfltfile_2=$program_path/$program_name-$distro-$version-$edition\
--$HOSTNAME-$USER.sh
+    dfltfile_1=$program_path/$program_name-$distro-$edition.sh
+    dfltfile_2=$program_path/$program_name-$distro-$edition-$HOSTNAME-$USER.sh
     if $argument_app; then
         process_argument_app
     fi
@@ -234,11 +231,9 @@ function process_argument_app {
     local       app=''
     local       file=''
     local -a    files=()
-    local       search=''
 
     # Zoek naar beschikbare APPs in alle instelbestanden.
-    search=$program_name-$distro-$version
-    for file in "$program_path/$search"*.sh; do
+    for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
     for app in "${app_arguments[@]}"; do
@@ -325,7 +320,7 @@ function process_dfltfiles {
         files_to_process[$file_num]=$dfltfile_1
         ((++file_num))
     else
-        err "Geen bestanden gevonden voor $distro $version $edition." >&2
+        err "Geen bestanden gevonden voor $distro $edition." >&2
         info "$usageline"
         exit $err
     fi
@@ -358,7 +353,7 @@ $(
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen apps gevonden voor $distro $version."
+        printf '%s\n' "     0 Geen apps gevonden voor $distro."
     else
         printf '%s\n' "
 Om de APPs in te stellen voer uit: ${blue}$display_name APP...${normal}

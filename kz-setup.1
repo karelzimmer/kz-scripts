@@ -33,19 +33,19 @@ het instellen van apps en het wijzigen van instellingen.
 .sp
 Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
 .br
-- /usr/bin/kz-setup-<distributie>-<versie>-desktop.sh
+- /usr/bin/kz-setup-<distributie>-desktop.sh
 .br
-- /usr/bin/kz-setup-<distributie>-<versie>-desktop-<computernaam>-\
-<gebruikersnaam>.sh (indien aanwezig)
+- /usr/bin/kz-setup-<distributie>-desktop-<computernaam>-<gebruikersnaam>.sh
+(indien aanwezig)
 .sp
-<distributie>, <versie>, <computernaam>, en <gebruikersnaam> worden ingevuld
-met waarden van de huidige computer en gebruiker.
+<distributie>, <computernaam>, en <gebruikersnaam> worden ingevuld met waarden
+van de huidige computer en gebruiker.
 .sp
-Bijvoorbeeld 'kz-setup-ubuntu-20.04-desktop.sh' en\
- 'kz-setup-ubuntu-20.04-desktop-pc02-jan.sh'.
+Bijvoorbeeld 'kz-setup-ubuntu-desktop.sh' en \
+ 'kz-setup-ubuntu-desktop-pc02-jan.sh'.
 .br
-Deze instelbestanden bevatten opdrachten voor ubuntu 20.04 desktop en ubuntu
-20.04 desktop op pc02 voor jan.
+Deze instelbestanden bevatten opdrachten voor ubuntu desktop algemeen en ubuntu
+desktop op pc02 voor jan.
 .sp
 Voor de indeling van de instelbestanden zie de sectie \fBBESTANDSINDELING\fR
 hieronder.
@@ -254,13 +254,12 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-setup-<distributie>-<versie>-desktop.sh
+/usr/bin/kz-setup-<distributie>-desktop.sh
 .RS
 Standaard instelbestand.
 .RE
 .sp
-/usr/bin/kz-setup-<distributie>-<versie>-desktop-<computernaam>-\
-<gebruikersnaam>.sh
+/usr/bin/kz-setup-<distributie>-desktop-<computernaam>-<gebruikersnaam>.sh
 .RS
 Standaard instelbestand voor <computernaam> en <gebruikersnaam>.
 .RE
