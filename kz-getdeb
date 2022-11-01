@@ -267,7 +267,8 @@ function download_website {
     local ftp_from=/httpdocs
     local ftp_to=$HOME/kz-uploads/dist
     local ftp_opts='--delete --verbose'
-    local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
+    local ftp_exclude='--exclude icaclient_20.04.0.21_amd64.deb'
+    local ftp_cmd="mirror $ftp_exclude $ftp_opts $ftp_from $ftp_to; exit"
     local ftp_host=server106.hosting2go.nl
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
