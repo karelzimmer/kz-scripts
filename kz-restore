@@ -125,19 +125,19 @@ function process_input {
         medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
         if [[ -z $medium ]]; then
             text='
-Zorg dat het USB-medium is aangekoppeld waarop de back-up staat.'
+Zorg dat het usb-medium is aangekoppeld waarop de back-up staat.'
             warn "$text"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $medium ]]; then
-                err 'Geen USB-medium gevonden.
+                err 'Geen usb-medium gevonden.
 
-Koppel een USB-medium aan, en start daarna restore opnieuw.'
+Koppel een usb-medium aan, en start daarna restore opnieuw.'
             exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            err "Koppel slechts één USB-medium aan.
+            err "Koppel slechts één usb-medium aan.
 
 Nu aangekoppeld zijn:
 $medium
@@ -148,9 +148,9 @@ Koppel media af via Bestanden, en start daarna restore opnieuw."
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
-            err "Geen back-up gevonden op aangekoppeld USB-medium.
+            err "Geen back-up gevonden op aangekoppeld usb-medium.
 
-Koppel een USB-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
+Koppel een usb-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
 daarna restore opnieuw."
             exit $err
         fi
@@ -303,7 +303,7 @@ function term_script {
     sync |& $logcmd || rc+=$?
     text=''
     if [[ $source_medium == /media/* ]]; then
-        text='Het USB-medium afkoppelen'
+        text='Het usb-medium afkoppelen'
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
@@ -336,12 +336,12 @@ function term_script {
             info "
 De back-up is teruggezet.
 
-Het USB-medium kan verwijderd worden."
+Het usb-medium kan verwijderd worden."
         else
             warn "
 De back-up is teruggezet.
 
-Koppel zelf (veilig!) het USB-medium af."
+Koppel zelf (veilig!) het usb-medium af."
         fi
     fi
     exit $ok

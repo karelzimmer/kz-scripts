@@ -267,8 +267,8 @@ onder Linux.
 
 Komt globaal neer op:
 1. Download een beeldbestand (.iso).
-2. Maak een opstartbare Live USB-stick of DVD aan.
-3. Start de computer op vanaf deze USB-stick of DVD.
+2. Maak een opstartbare Live usb-stick of dvd aan.
+3. Start de computer op vanaf deze usb-stick of dvd.
 4. Installeer Linux.'
     info "$text"
     kz_common.wait_for_enter
