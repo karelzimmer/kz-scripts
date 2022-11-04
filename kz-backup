@@ -410,6 +410,9 @@ De back-up is gemaakt.
 
 Koppel zelf (veilig!) het usb-medium af."
         fi
+    else
+        info "
+De back-up is gemaakt."
     fi
     exit $ok
 }
