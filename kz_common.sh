@@ -169,6 +169,10 @@ function kz_common.developer {
                 $USER      = 'karel'    &&
                 $user_name = 'Karel Zimmer' ]]; then
             return $ok
+        elif  [[    $HOSTNAME   = 'debian'  &&
+                    $USER       = 'user'    &&
+                    $user_name  = 'Debian Live user' ]]; then
+            return $ok
         else
             return $err
         fi
