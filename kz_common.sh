@@ -160,18 +160,23 @@ function kz_common.developer {
 
     if [[ $action = 'check' ]]; then
         # Aangemeld als ontwikkelaar?
-        user_name=$(
+        user_name_karel=$(
             getent passwd karel             |
             cut --delimiter=':' --fields=5  |
             cut --delimiter=',' --fields=1  || true
             )
-        if  [[  $HOSTNAME == pc??       &&
-                $USER      = 'karel'    &&
-                $user_name = 'Karel Zimmer' ]]; then
+        user_name_live=$(
+            getent passwd user              |
+            cut --delimiter=':' --fields=5  |
+            cut --delimiter=',' --fields=1  || true
+            )
+        if  [[  $HOSTNAME           == pc??     &&
+                $USER               = 'karel'   &&
+                $user_name_karel    = 'Karel Zimmer' ]]; then
             return $ok
-        elif  [[    $HOSTNAME   = 'debian'  &&
-                    $USER       = 'user'    &&
-                    $user_name  = 'Debian Live user' ]]; then
+        elif  [[    $HOSTNAME       = 'debian'  &&
+                    $USER           = 'user'    &&
+                    $user_name_live = 'Debian Live user' ]]; then
             return $ok
         else
             return $err
