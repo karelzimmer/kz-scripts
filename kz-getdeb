@@ -23,9 +23,9 @@ logcmd="systemd-cat --identifier=$program_name"
 if ! source "$program_path"/kz_common.sh &> >($logcmd); then
     logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
-    kz_common=$(mktemp -t "kz_common.sh-XXXXXXXXXX")
+    temp_kz_common=$(mktemp -t 'kz_common-XXXXXXXXXX.sh')
     if ! wget   --no-verbose                                                \
-                --output-document="$kz_common"                              \
+                --output-document="$temp_kz_common"                         \
                 'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'    \
                 &> >($logcmd); then
         printf  '%s\n%s\n'                              \
@@ -34,7 +34,7 @@ if ! source "$program_path"/kz_common.sh &> >($logcmd); then
 $logcmd_check"
         exit 1
     fi
-    if ! source "$kz_common" &> >($logcmd); then
+    if ! source "$temp_kz_common" &> >($logcmd); then
         printf  '%s\n%s\n'                          \
                 'Inlezen kz_common.sh is mislukt.'  \
                 "Controleer de log in het Terminalvenster met de opdracht: \
