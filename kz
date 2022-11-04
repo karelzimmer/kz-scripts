@@ -50,7 +50,7 @@ Argumenten:
 function check_input {
     # Geen getopt want opgegeven opties zijn voor 'OPDRACHT', niet voor kz.
     if ! [[ "$*" ]]; then
-        info "Verplicht argument 'OPDRACHT' ontbreekt."
+        info "$display_name: verplicht argument ontbreekt"
         info "$usageline"
         exit $err
     elif [[ $1 == -u* || $1 == --u* ]]; then
@@ -66,7 +66,7 @@ function check_input {
         show_commands
         exit $ok
     elif ! [[ -f "$program_path/kz-$1" ]]; then
-        info "Opdracht '$1' bestaat niet."
+        info "$display_name: opdracht '$1' bestaat niet"
         info "$usageline"
         exit $err
     fi
