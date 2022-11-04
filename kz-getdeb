@@ -300,8 +300,10 @@ function pull_repos {
     local bin_repo=/home/"$USER"/bin
 
     info 'Pull repos (gitpull)...'
-    git config --global pull.ff only |& $logcmd
-    git config --global credential.helper store |& $logcmd
+    git config --global user.name 'Karel Zimmer'
+    git config --global user.email 'info@karelzimmer.nl'
+    git config --global pull.ff only
+    git config --global credential.helper store
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             |& $logcmd; then
