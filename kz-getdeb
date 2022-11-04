@@ -31,14 +31,14 @@ if ! source "$program_path"/kz_common.sh &> >($logcmd); then
         printf  '%s\n%s\n'                              \
                 'Downloaden kz_common.sh is mislukt.'   \
                 "Controleer de log in het Terminalvenster met de opdracht: \
-${blue}$logcmd_check${normal}"
+$logcmd_check"
         exit 1
     fi
     if ! source "$kz_common" &> >($logcmd); then
         printf  '%s\n%s\n'                          \
-                "Inlezen kz_common.sh is mislukt."  \
+                'Inlezen kz_common.sh is mislukt.'  \
                 "Controleer de log in het Terminalvenster met de opdracht: \
-${blue}$logcmd_check${normal}"
+$logcmd_check"
         exit 1
     fi
 fi
