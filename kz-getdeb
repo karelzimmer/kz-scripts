@@ -19,22 +19,26 @@ readonly display_name=${program_name/kz-/kz }
 # Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
 program_path=$(realpath "$(dirname  "${0/#-/}")")
 readonly program_path
-temp_log=$(mktemp -t "$program_name-XXXXXXXXXX.log")
-if ! source "$program_path"/kz_common.sh &>> "$temp_log"; then
-    temp_src=$(mktemp -t "$program_name-XXXXXXXXXX.src")
+logcmd="systemd-cat --identifier=$program_name"
+if ! source "$program_path"/kz_common.sh &> >($logcmd); then
+    logcmd_check="journalctl --all --boot --identifier=$program_name \
+--since='$(date '+%Y-%m-%d %H:%M:%S')'"
+    kz_common=$(mktemp -t "kz_common.sh-XXXXXXXXXX")
     if ! wget   --no-verbose                                                \
-                --output-document="$temp_src"                               \
+                --output-document="$kz_common"                              \
                 'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'    \
-                &>> "$temp_log"; then
+                &> >($logcmd); then
         printf  '%s\n%s\n'                              \
                 'Downloaden kz_common.sh is mislukt.'   \
-                "Controleer $temp_log."
+                "Controleer de log in het Terminalvenster met de opdracht: \
+${blue}$logcmd_check${normal}"
         exit 1
     fi
-    if ! source "$temp_src" &>> "$temp_log"; then
+    if ! source "$kz_common" &> >($logcmd); then
         printf  '%s\n%s\n'                          \
-                'Inlezen kz_common.sh is mislukt.'  \
-                "Controleer $temp_log."
+                "Inlezen kz_common.sh is mislukt."  \
+                "Controleer de log in het Terminalvenster met de opdracht: \
+${blue}$logcmd_check${normal}"
         exit 1
     fi
 fi
