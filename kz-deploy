@@ -165,7 +165,7 @@ function upload_website {
     if ! lftp   --user      "$ftp_user"             \
                 --password  "$(cat "$ftp_login")"   \
                 -e          "$ftp_set; $ftp_cmd"    \
-                "$ftp_host"                         |& $logcmd; then
+                "$ftp_host"; then
         rm      "$ftp_login"
         err 'Uploaden website is mislukt.'
         exit $err
