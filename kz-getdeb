@@ -255,7 +255,7 @@ function check_dependencies {
             python3-pycodestyle \
             python3-autopep8    \
             python3-pip         \
-            python-is-python3   |& $logcmd
+            python-is-python3
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian pakket is oud, snap is nieuwer.
@@ -283,12 +283,12 @@ function download_website {
         read -rsp "Wachtwoord voor 'ftp://$ftp_host': " < /dev/tty
         printf '%s\n' "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login" |& $logcmd
+        chmod 'u=rw,g=,o=' "$ftp_login"
     fi
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
-                "$ftp_host"                         |& $logcmd; then
+                "$ftp_host"; then
         rm  "$ftp_login"
         info 'Downloaden website is mislukt.'
         return  $err
@@ -306,11 +306,12 @@ function pull_repos {
     git config --global credential.helper store
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
-                "$bin_repo"                             |& $logcmd; then
+                "$bin_repo"                             2> /dev/null; then
         cd "$bin_repo"
-        git pull |& $logcmd
+        printf "$(tput bold)%s$(tput sgr0)\n" "$bin_repo"
+        git pull
     fi
-    /home/"$USER"/bin/gitpull |& $logcmd
+    /home/"$USER"/bin/gitpull
 }
 
 
