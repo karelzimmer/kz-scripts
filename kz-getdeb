@@ -105,23 +105,6 @@ function check_input {
 }
 
 
-function kz_common.check_on_ac_power {
-    local -i on_battery=0
-
-    on_ac_power &> /dev/null || on_battery=$?
-    if [[ $on_battery -eq 1 ]]; then
-        title='Waarschuwing'
-        text='De computer gebruikt nu alleen de accu voor de stroomvoorziening.
-
-Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
-        whiptail    --backtitle "$display_name" \
-                    --title     "$title"        \
-                    --msgbox    "$text"         \
-                    10 71
-    fi
-}
-
-
 function process_input {
     install_package
 }

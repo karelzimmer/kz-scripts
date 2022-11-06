@@ -94,7 +94,7 @@ function kz_common.check_dpkgd_snapd {
 function kz_common.check_on_ac_power {
     local -i on_battery=0
 
-    on_ac_power >/dev/null 2>&1 || on_battery=$?
+    on_ac_power &> /dev/null || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
         warn '
 De computer gebruikt nu alleen de accu voor de stroomvoorziening.
