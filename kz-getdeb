@@ -234,11 +234,13 @@ function check_dependencies {
             git                 \
             jq                  \
             lftp                \
+            nmap                \
             pycodestyle         \
             python3-pycodestyle \
             python3-autopep8    \
             python3-pip         \
-            python-is-python3
+            python-is-python3   \
+            w3c-linkchecker
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian pakket is oud, snap is nieuwer.
