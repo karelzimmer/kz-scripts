@@ -248,7 +248,7 @@ function process_argument_app {
                     --word-regexp           \
                     --regexp="#1 $app"      \
                     "${files[@]}"           \
-                    2> >($logcmd)           |
+                    2> /dev/null            |
             head    --lines=1               || printf '\n'
             )
         if [[ $file ]]; then
@@ -396,7 +396,7 @@ function process_option_files {
      BESTAND
 $(
     if !    find    "$program_path/$program_name-"* \
-                    2> >($logcmd)                   |
+                    2> /dev/null                    |
             nl      --number-width=2                \
                     --number-format=rn              \
                     --number-separator='] '         \

@@ -68,7 +68,7 @@ declare     yellow=''
 function kz_common.check_dpkgd_snapd {
     local -i dpkg_wait=10
 
-    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # Systeem met snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
@@ -131,7 +131,7 @@ function kz_common.check_user_root {
         else
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
-            if ! sudo -n true 2> >($logcmd); then
+            if ! sudo -n true &> /dev/null; then
                 printf '%s\n' "Authenticatie is vereist om $program_name uit \
 te voeren."
             fi
@@ -435,7 +435,6 @@ function info {
     local title="Informatie $display_name"
 
     if $option_gui; then
-        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
@@ -454,7 +453,6 @@ function warn {
     local title="Waarschuwing $display_name"
 
     if $option_gui; then
-        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \
@@ -473,7 +471,6 @@ function err {
     local title="Foutmelding $display_name"
 
     if $option_gui; then
-        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \

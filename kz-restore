@@ -122,13 +122,13 @@ function process_input {
         source=$source_argument/backup-$HOSTNAME-$USER
         source_medium=$source_argument
     else
-        medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+        medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
         if [[ -z $medium ]]; then
             text='
 Zorg dat het usb-medium is aangekoppeld waarop de back-up staat.'
             warn "$text"
             kz_common.wait_for_enter
-            medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+            medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
             if [[ -z $medium ]]; then
                 err 'Geen usb-medium gevonden.
 

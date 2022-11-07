@@ -148,7 +148,6 @@ function process_menu1_gui {
 
     while true; do
         title=$menu1_title
-        # Constructie '2> >($logcmd)' om stderr naar de log te krijgen.
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
