@@ -68,13 +68,13 @@ declare     yellow=''
 function kz_common.check_dpkgd_snapd {
     local -i dpkg_wait=10
 
-    if ls /snap/core/*/var/cache/debconf/config.dat 2> >($logcmd); then
+    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # Systeem met snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     /snap/core/*/var/cache/debconf/config.dat           \
-                    |& $logcmd; do
+                    &> /dev/null; do
             log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
             sleep $dpkg_wait
         done
@@ -83,7 +83,7 @@ function kz_common.check_dpkgd_snapd {
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
-                    |& $logcmd; do
+                    &> /dev/null; do
             log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
             sleep $dpkg_wait
         done
