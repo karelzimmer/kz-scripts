@@ -159,7 +159,7 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
     title='Instellingen veiligstellen'
     text='Instellingen veiligstellen'
     if $option_gui; then
-        backup_settings                |
+        backup_settings                 |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
