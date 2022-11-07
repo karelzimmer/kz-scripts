@@ -145,7 +145,7 @@ function install_package {
 
 
 function kz_common.check_user_sudo {
-    if ! sudo -n true 2> /dev/null; then
+    if ! sudo -n true 2> >($logcmd); then
         while true; do
             title='Authenticatie nodig'
             text='
@@ -163,7 +163,7 @@ Voer uw wachtwoord in:'
                             --passwordbox   "$text"         \
                             13 38                           \
                             3>&1 1>&2 2>&3
-                )" | sudo --stdin true 2> /dev/null; then
+                )" | sudo --stdin true 2> >($logcmd); then
                 break
             else
                 clear -x
@@ -291,7 +291,7 @@ function pull_repos {
     git config --global credential.helper store
     if ! git    clone                                   \
                 https://github.com/karelzimmer/bin.git  \
-                "$bin_repo"                             2> /dev/null; then
+                "$bin_repo"                             2> >($logcmd); then
         cd "$bin_repo"
         printf "$(tput bold)%s$(tput sgr0)\n" "$bin_repo"
         git pull

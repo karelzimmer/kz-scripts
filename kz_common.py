@@ -40,7 +40,7 @@ def check_dpkgd_snapd():
     """
     Deze functie controleert op al een lopende Debian pakketbeheerder.
     """
-    dpkg_wait = 5
+    dpkg_wait = 10
 
     try:
         subprocess.run('ls /snap/core/*/var/cache/debconf/config.dat',

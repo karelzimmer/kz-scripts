@@ -128,12 +128,12 @@ function process_input {
         target=$target_argument/backup-$HOSTNAME-$USER
         target_medium=$target_argument
     else
-        medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+        medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
             text="Koppel het usb-medium aan waarop de back-up wordt geplaatst."
             warn "$text"
             kz_common.wait_for_enter
-            medium=$(ls --directory /media/"$USER"/* 2> /dev/null || true)
+            medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
                 err 'Geen usb-medium gevonden.
 
@@ -232,7 +232,7 @@ installatie van een pakket, met
     fi
 
     printf '\n%b\n' "$header2" >> "$file"
-    if ! snap list 2> /dev/null >> "$file"; then
+    if ! snap list 2> >($logcmd) >> "$file"; then
         printf '%s\n' 'snap is niet geïnstalleerd' >> "$file"
     fi
 

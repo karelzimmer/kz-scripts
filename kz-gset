@@ -287,7 +287,7 @@ function capture_gui_changes {
 
 function save_configuration_database {
     local fase=${1:-unknown}
-    local output_file=${2:-/dev/null}
+    local output_file=${2:-unknown}
 
     gsettings list-recursively > "$output_file" 2> >($logcmd)
 
@@ -300,8 +300,8 @@ function save_configuration_database {
 
 
 function report_database_changes {
-    local output_file1=${1:-/dev/null}
-    local output_file2=${2:-/dev/null}
+    local output_file1=${1:-unknown}
+    local output_file2=${2:-unknown}
 
     info '
 WIJZIGINGen in de configuratiedatabase,

@@ -66,15 +66,15 @@ declare     yellow=''
 ###############################################################################
 
 function kz_common.check_dpkgd_snapd {
-    local -i dpkg_wait=5
+    local -i dpkg_wait=10
 
-    if ls /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+    if ls /snap/core/*/var/cache/debconf/config.dat 2> >($logcmd); then
         # Systeem met snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     /snap/core/*/var/cache/debconf/config.dat           \
-                    &> /dev/null; do
+                    |& $logcmd; do
             log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
             sleep $dpkg_wait
         done
@@ -83,7 +83,7 @@ function kz_common.check_dpkgd_snapd {
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
-                    &> /dev/null; do
+                    |& $logcmd; do
             log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
             sleep $dpkg_wait
         done
@@ -94,7 +94,7 @@ function kz_common.check_dpkgd_snapd {
 function kz_common.check_on_ac_power {
     local -i on_battery=0
 
-    on_ac_power &> /dev/null || on_battery=$?
+    on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
         warn '
 De computer gebruikt nu alleen de accu voor de stroomvoorziening.
@@ -131,7 +131,7 @@ function kz_common.check_user_root {
         else
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
-            if ! sudo -n true 2> /dev/null; then
+            if ! sudo -n true 2> >($logcmd); then
                 printf '%s\n' "Authenticatie is vereist om $program_name uit \
 te voeren."
             fi

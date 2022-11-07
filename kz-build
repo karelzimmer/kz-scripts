@@ -145,7 +145,7 @@ function build_uploads {
     mkdir --parents "$uploads_distdir"
     while read -r file; do
         # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
-        if ! diff "$file" "$uploads_distdir/$file" &> /dev/null; then
+        if ! diff "$file" "$uploads_distdir/$file" |& $logcmd; then
             cp  --parents           \
                 --preserve          \
                 --verbose           \
@@ -161,7 +161,7 @@ function build_uploads {
     for file in *.odt *.txt; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
-        if ! diff "$file" "${uploads_targets[docs]}/$file" &> /dev/null; then
+        if ! diff "$file" "${uploads_targets[docs]}/$file" |& $logcmd; then
             cp  --preserve                  \
                 --verbose                   \
                 "$file"                     \
@@ -180,8 +180,7 @@ function build_uploads {
     for file in kz*; do
         # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
         # (deltabepaling).
-        if ! diff "$file" "${uploads_targets[scripts]}/$file" &> /dev/null
-            then
+        if ! diff "$file" "${uploads_targets[scripts]}/$file" |& $logcmd; then
             cp  --preserve                      \
                 --verbose                       \
                 "$file"                         \
