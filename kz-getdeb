@@ -286,7 +286,7 @@ function pull_repos {
 
     info 'Pull repos (gitpull)...'
     git config --global user.name 'Karel Zimmer'
-    git config --global user.email 'info@karelzimmer.nl'
+    git config --global user.email 'karel.zimmer@gmail.com'
     git config --global pull.ff only
     git config --global credential.helper store
     if ! git    clone                                   \
