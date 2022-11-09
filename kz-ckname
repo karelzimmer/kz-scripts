@@ -58,7 +58,7 @@ function check_input {
         getopt  --alternative                       \
                 --options       "$options_short"    \
                 --longoptions   "$options_long"     \
-                --name          "$display_name"     \
+                --name          "$program_name"     \
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
@@ -91,7 +91,7 @@ function check_input {
     fi
     for dir in "${map_arguments[@]}"; do
         if ! [[ -d $dir ]]; then
-            info "$display_name: map '$dir' bestaat niet"
+            info "$program_name: map '$dir' bestaat niet"
             info "$usageline"
             exit $err
         fi
