@@ -79,13 +79,8 @@ sudo snap install plex-desktop
 #2 sudo snap remove plex-desktop
 
 #1 signal (privéberichtenapp)
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal.list
-wget --no-verbose --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal.gpg
-sudo apt-get update
-sudo apt-get install --yes signal-desktop
-#2 sudo apt-get remove --yes signal-desktop
-#2 sudo rm --force /etc/apt/sources.list.d/signal.list* /usr/share/keyrings/signal.asc*
-#2 sudo apt-get update
+sudo snap install signal-desktop
+#2 sudo snap remove signal-desktop
 
 #1 ssh (veilige shell-client en server)
 sudo apt-get install --yes ssh
