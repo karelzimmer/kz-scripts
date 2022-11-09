@@ -31,8 +31,7 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 sudo snap install telegram-desktop
 #2 sudo snap remove telegram-desktop
 
-#1 virtualbox (virtualisatie, check Secure Boot)
-
+#1 virtualbox (virtualisatie)
 ## Als installatie hangt, heeft de computer UEFI Secure Boot, zie de log:
 ## --------------------------------------------------------------------------------
 ## Configuring Secure Boot
@@ -64,9 +63,8 @@ sudo snap install telegram-desktop
 ## 5. Enroll MOK en geef het Secure Boot-wachtwoord op uit stap 3.
 ##
 ## Met een AMD-processor zal AMD-V wel aanstaan, maar bij Intel moet vaak VT-x
-## aangezet worden in het BIOS of UEFI-firmware!
+## aangezet worden in het UEFI-BIOS-scherm !
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
-## Images staan in ~/VirtualBox VMs/.
 ## VirtualBox Guest Additions ISO staat in /usr/share/virtualbox/.
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 #2 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
