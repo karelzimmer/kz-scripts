@@ -52,7 +52,7 @@ function check_input {
         getopt  --alternative                       \
                 --options       "$options_short"    \
                 --longoptions   "$options_long"     \
-                --name          "$program_name"     \
+                --name          "$display_name"     \
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
@@ -80,7 +80,7 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        info "$program_name: geen argumenten toegestaan"
+        info "$display_name:geen argumenten toegestaan"
         info "$usageline"
         exit $err
     fi
