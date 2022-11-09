@@ -62,24 +62,14 @@ sudo snap install telegram-desktop
 ## 3. Geef een Secure Boot-wachtwoord en onthoud deze.
 ## 4. Reboot.
 ## 5. Enroll MOK en geef het Secure Boot-wachtwoord op uit stap 3.
-
+##
+## Met een AMD-processor zal AMD-V wel aanstaan, maar bij Intel moet vaak VT-x
+## aangezet worden in het BIOS of UEFI-firmware!
+echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
 ## Images staan in ~/VirtualBox VMs/.
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] https://download.virtualbox.org/virtualbox/debian $(lsb_release --codename --short) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-wget --no-verbose --output-document=- 'https://www.virtualbox.org/download/oracle_vbox_2016.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/oracle_vbox_2016.gpg
-sudo apt-get update
-wget --no-verbose --output-document=/tmp/virtualbox-LATEST.TXT 'http://download.virtualbox.org/virtualbox/LATEST.TXT'
 ## VirtualBox Guest Additions ISO staat in /usr/share/virtualbox/.
-sudo apt-get install --yes virtualbox-"$(cut --delimiter='.' --fields='1-2' < /tmp/virtualbox-LATEST.TXT)"
-## Downloadbestand moet zo heten, anders mslukt de installatie.
-wget --no-verbose --output-document=/tmp/Oracle_VM_VirtualBox_Extension_Pack "http://download.virtualbox.org/virtualbox/$(cat /tmp/virtualbox-LATEST.TXT)/Oracle_VM_VirtualBox_Extension_Pack-$(cat /tmp/virtualbox-LATEST.TXT).vbox-extpack"
-echo 'y' | sudo VBoxManage extpack install --replace /tmp/Oracle_VM_VirtualBox_Extension_Pack
-sudo adduser "${SUDO_USER:-$USER}" vboxusers
-sudo rm /tmp/Oracle_VM_VirtualBox_Extension_Pack /tmp/virtualbox-LATEST.TXT
-#2 sudo deluser "${SUDO_USER:-$USER}" vboxusers
-#2 sudo delgroup vboxusers
-#2 sudo apt-get remove --yes virtualbox-*
-#2 sudo rm --force /etc/apt/sources.list.d/virtualbox.list* /usr/share/keyrings/oracle_vbox_2016*
-#2 sudo apt-get update
+sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
+#2 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 #1 whatsapp (privéberichtenapp)
 sudo snap install whatsie
