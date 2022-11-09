@@ -21,19 +21,6 @@ sudo kz-update
 sudo snap install bitwarden
 #2 sudo snap remove bitwarden
 
-#1 chrome-remote-desktop (afstandsbediening)
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-remote-desktop.gpg] http://dl.google.com/linux/chrome-remote-desktop/deb/ stable main' | sudo tee /etc/apt/sources.list.d/chrome-remote-desktop.list
-wget --no-verbose --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/chrome-remote-desktop.gpg
-sudo apt-get update
-sudo apt-get install --yes chrome-remote-desktop
-## De installatie overschrijft de zojuist toegevoegde source-list.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-remote-desktop.gpg] http://dl.google.com/linux/chrome-remote-desktop/deb/ stable main' | sudo tee /etc/apt/sources.list.d/chrome-remote-desktop.list
-## De installatie voegt een apt-key toe die niet meer nodig is.
-sudo rm --force /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
-#2 sudo apt-get remove --yes chrome-remote-desktop
-#2 sudo rm --force /etc/apt/sources.list.d/chrome-remote-desktop.list* /usr/share/keyrings/chrome-remote-desktop.gpg* /etc/apt/trusted.gpg.d/chrome-remote-desktop.gpg
-#2 sudo apt-get update
-
 #1 citrix (telewerken)
 ## Afhankelijkheid sinds Ubuntu 22.04.
 wget --no-verbose --output-document=/tmp/libidn11.deb 'https://karelzimmer.nl/downloads/citrix/libidn11_1.33-3_amd64.deb'
