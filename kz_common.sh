@@ -111,7 +111,7 @@ function kz_common.wait_for_enter {
         return
     fi
     read -rp '
-Druk op de Enter-toets om door te gaan [Enter]: '
+Druk op de Enter-toets om door te gaan [Enter]: ' < /dev/tty
 }
 
 
