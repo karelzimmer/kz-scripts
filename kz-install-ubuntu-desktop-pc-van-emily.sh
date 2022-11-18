@@ -17,7 +17,3 @@ sudo apt-get install --yes handbrake
 #1 sound-juicer (cd-ripper)
 sudo apt-get install --yes sound-juicer
 #2 sudo apt-get remove --yes sound-juicer
-
-#1 vlc (mediaspeler)
-sudo snap install vlc
-#2 sudo snap remove vlc

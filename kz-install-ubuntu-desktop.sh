@@ -89,6 +89,10 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get update
 
+#1 vlc (mediaspeler)
+sudo snap install vlc
+#2 sudo snap remove vlc
+
 #1 zoom (samenwerken)
 sudo snap install zoom-client
 #2 sudo snap remove zoom-client
