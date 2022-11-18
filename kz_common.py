@@ -99,7 +99,7 @@ def check_on_ac_power(program_name):
             sys.exit(err)
 
 
-def check_user_sudo(program_name):
+def check_user_sudo(display_name):
     """
     Deze functie controleert of de gebruiker sudo-rechten heeft.
     """
@@ -116,11 +116,12 @@ def check_user_sudo(program_name):
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
         except Exception:
-            print(f"Authenticatie is vereist om {program_name} uit te voeren.")
+            print(f"Authenticatie is vereist om '{display_name}' uit te "
+                  ' voeren.')
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
-                print(f"\nProgramma {program_name} is afgebroken.")
+                print(f"\nProgramma {display_name} is afgebroken.")
                 sys.exit(err)
             except Exception as ex:
                 print(ex)

@@ -106,7 +106,7 @@ kz_common.process_options(program_name, program_desc, display_name)
 
 kz_common.check_on_ac_power(program_name)
 
-kz_common.check_user_sudo(program_name)
+kz_common.check_user_sudo(display_name)
 
 perform_repair()
 
