@@ -68,6 +68,10 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
 
+#1 nautilus-admin (open map/bestand als beheerder)
+sudo apt-get install --yes nautilus-admin
+#2 sudo apt-get remove --yes nautilus-admin
+
 #1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
 sudo apt-get install --yes pinfo
 #2 sudo apt-get remove --yes pinfo
