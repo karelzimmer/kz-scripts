@@ -44,7 +44,7 @@ readonly uploads_distdir=$uploads_repo/dist
 ###############################################################################
 
 function check_input {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -97,7 +97,7 @@ function process_input {
 
 
 function check_names {
-    local -i    check_rc=0
+    local   -i  check_rc=0
     local       deb_repo=$HOME/kz-deb
     local       docs_repo=$HOME/kz-docs
     local       app_uploads_repo=$HOME/kz-uploads/app

@@ -86,9 +86,9 @@ declare     status_ok=''
 ###############################################################################
 
 function check_input {
-    local -i    app_arg_num=0
-    local -i    file_arg_num=0
-    local -i    getopt_rc=0
+    local   -i  app_arg_num=0
+    local   -i  file_arg_num=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(
@@ -168,7 +168,7 @@ function process_input {
     local       dfltfile_1=''
     local       dfltfile_2=''
     local       file_notfound=false
-    local -i    file_num=0
+    local   -i  file_num=0
     local       file=''
 
     # Verwerk argumenten.
@@ -236,7 +236,7 @@ function process_input {
 function process_argument_app {
     local       app=''
     local       file=''
-    local -a    files=()
+    local   -a  files=()
 
     # Zoek naar beschikbare APPs in alle installatiebestanden.
     for file in "$program_path/$program_name-"*.sh; do
@@ -337,7 +337,7 @@ function process_dfltfiles {
 
 
 function process_option_apps {
-    local -a    files=()
+    local -a files=()
 
     # Zoek naar beschikbare APPs in alle installatiebestanden.
     for file in "$program_path/$program_name-"*.sh; do
@@ -425,9 +425,9 @@ function process_cmds_file {
     local       record=''
     local       recordtype=''
     local       write_app_description_line=true
-    local -i    app_seq_num=0
-    local -i    app_tot_num=0
-    local -i    cmd_seq_num=0
+    local   -i    app_seq_num=0
+    local   -i    app_tot_num=0
+    local   -i  cmd_seq_num=0
 
     app_tot_num=$(
         grep --word-regexp --regexp='^#1' --count "$cmds_file" || true
@@ -499,8 +499,8 @@ function process_app_description_record {
 function process_command_record {
     local       cmd=${1:-unknown}
     local       app_description_line=''
-    local -i    cmd_rc=0
-    local -i    desc_maxlen=1000
+    local   -i  cmd_rc=0
+    local   -i  desc_maxlen=1000
     local       desc_printf=''
     local       status=''
 
@@ -556,7 +556,7 @@ function process_command_record {
 
 function execute_command {
     local       cmd=${1:-unknown}
-    local -i    cmd_rc=0
+    local   -i  cmd_rc=0
     local       status=''
 
     if ! $option_gui; then

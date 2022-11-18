@@ -45,7 +45,7 @@ declare option_gui=false
 ###############################################################################
 
 function check_input {
-    local -i    getopt_rc=0
+    local   -i  getopt_rc=0
     local       parsed=''
 
     parsed=$(

@@ -217,12 +217,12 @@ function kz_common.init_script {
 
 function signal {
     local       signal=${1:-unknown}
-    local -i    lineno=${2:-unknown}
+    local   -i  lineno=${2:-unknown}
     local       function=${3:-unknown}
     local       command=${4:-unknown}
-    local -i    rc=${5:-$err}
+    local   -i  rc=${5:-$err}
     local       rc_desc=''
-    local -i    rc_desc_signalno=0
+    local   -i  rc_desc_signalno=0
     local       status="${red}$rc/err${normal}"
 
     case $rc in
