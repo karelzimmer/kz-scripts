@@ -293,7 +293,9 @@ function pull_repos {
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             2> >($logcmd); then
         cd "$bin_repo"
-        printf "$(tput bold)%s$(tput sgr0)\n" "$bin_repo"
+        printf  "$(tput bold)%s$(tput sgr0) %s\n"   \
+                "$(basename "$bin_repo")"           \
+                '(first pull)'
         git pull
     fi
     /home/"$USER"/bin/gitpull
