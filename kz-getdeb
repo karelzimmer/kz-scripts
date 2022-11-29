@@ -295,7 +295,7 @@ function pull_repos {
         cd "$bin_repo"
         printf  "$(tput bold)%s$(tput sgr0) %s\n"   \
                 "$(basename "$bin_repo")"           \
-                '(first pull)'
+                '(initial pull)'
         git pull
     fi
     /home/"$USER"/bin/gitpull
