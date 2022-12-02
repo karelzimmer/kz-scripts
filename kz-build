@@ -207,32 +207,7 @@ function build_uploads {
             fi
         fi
     done
-    build_uploads_all
     cd "$HOME"
-}
-
-
-function build_uploads_all {
-    local temptextfile=''
-
-    # Maak voor de *site* een nieuwe "all" aan.
-    more 'kz-install-'*.sh > "${uploads_targets[scripts]}"/kz-install-all.sh
-    temptextfile=/tmp/kz-install-all.sh.txt
-    cp "${uploads_targets[scripts]}"/kz-install-all.sh "$temptextfile"
-    lowriter    --headless                          \
-                --convert-to pdf                    \
-                --outdir "${uploads_targets[pdfs]}" \
-                "$temptextfile"                     |& $logcmd
-    rm "$temptextfile"
-
-    more 'kz-setup-'*.sh > "${uploads_targets[scripts]}"/kz-setup-all.sh
-    temptextfile=/tmp/kz-setup-all.sh.txt
-    cp "${uploads_targets[scripts]}"/kz-setup-all.sh "$temptextfile"
-    lowriter    --headless                          \
-                --convert-to pdf                    \
-                --outdir "${uploads_targets[pdfs]}" \
-                "$temptextfile"                     |& $logcmd
-    rm "$temptextfile"
 }
 
 
