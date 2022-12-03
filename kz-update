@@ -54,7 +54,7 @@ def perform_update():
     command = 'apt-get update'
     perform_command(command)
 
-    command = 'apt-get upgrade --yes'
+    command = 'apt-get dist-upgrade --yes'
     perform_command(command)
 
     command = 'apt-get autoremove --yes'
