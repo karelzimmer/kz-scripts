@@ -587,7 +587,7 @@ function execute_command {
 
 
 function term_script {
-    local action='Installeren'
+    local action='installeren'
 
     if ! $commands_found; then
         info 'Geen opdrachten om uit te voeren.'
@@ -600,10 +600,10 @@ ${blue}$logcmd_check${normal}"
             exit $err
         else
             if $option_remove; then
-                action='Verwijderen'
+                action='verwijderen'
             fi
             info "
-$action is voltooid."
+Apps $action is voltooid."
         fi
     else
         less "$less_options" "$sims_file"

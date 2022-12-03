@@ -579,7 +579,7 @@ function execute_command {
 
 
 function term_script {
-    local action='Instellen'
+    local action='instellen'
 
     if ! $commands_found; then
         info 'Geen opdrachten om uit te voeren.'
@@ -592,10 +592,10 @@ ${blue}$logcmd_check${normal}"
             exit $err
         else
             if $OPTION_RESET; then
-                action='Resetten'
+                action='resetten'
             fi
             info "
-$action is voltooid."
+Apps $action is voltooid."
         fi
     else
         less "$less_options" "$sims_file"
