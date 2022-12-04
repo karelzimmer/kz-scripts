@@ -36,9 +36,15 @@ Achtereenvolgens wordt uitgevoerd:
 .br
   - sudo apt-get dist-upgrade --yes
 .br
+  - sudo snap refresh
+.br
+- Opschonen:
+.br
+  - sudo apt-get autoclean --yes
+.br
   - sudo apt-get autoremove --yes
 .br
-  - sudo snap refresh (als snaps aanwezig zijn)
+  - sudo snap "cleanup"
 .br
 - Melding "reboot" geven als bestand /var/run/reboot-required bestaat.
 .\"
