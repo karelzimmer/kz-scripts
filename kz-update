@@ -79,7 +79,6 @@ def snap_refresh():
         subprocess.run('sudo snap refresh', shell=True, check=True)
     except Exception as ex:
         print(ex)
-        print('Geen snaps op dit systeem aanwezig.')
     else:
         print()
 
@@ -96,14 +95,13 @@ def perform_cleanup():
 
 
 def snap_cleanup():
-    cmd_en = "LANG=en_US.UTF-8   \
-                snaps list --all | awk '/disabled/{print $1, $3}' | \
+    cmd_en = "LANG=en_US.UTF-8 \
+                snap list --all | awk '/disabled/{print $1, $3}' | \
                 while read snapname revision; do \
                     sudo snap remove $snapname --revision=$revision; \
                 done"
-
-    cmd_nl = "LANG=en_US.UTF-8   \
-                snaps list --all | awk '/uitgeschakeld/{print $1, $3}' | \
+    cmd_nl = "LANG=en_US.UTF-8 \
+                snap list --all | awk '/uitgeschakeld/{print $1, $3}' | \
                 while read snapname revision; do \
                     sudo snap remove $snapname --revision=$revision; \
                 done"
@@ -113,12 +111,10 @@ def snap_cleanup():
         subprocess.run({cmd_en}, shell=True, check=True)
     except Exception as ex:
         print(ex)
-        print('Geen snaps op dit systeem aanwezig.')
     try:
         subprocess.run({cmd_nl}, shell=True, check=True)
     except Exception as ex:
         print(ex)
-        print('Geen snaps op dit systeem aanwezig.')
 
 
 def check_reboot():
@@ -143,9 +139,9 @@ kz_common.check_on_ac_power(program_name)
 
 kz_common.check_user_sudo(display_name)
 
-perform_repair()
+# perform_repair()
 
-perform_update()
+# perform_update()
 
 perform_cleanup()
 
