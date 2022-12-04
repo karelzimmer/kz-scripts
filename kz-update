@@ -139,9 +139,9 @@ kz_common.check_on_ac_power(program_name)
 
 kz_common.check_user_sudo(display_name)
 
-# perform_repair()
+perform_repair()
 
-# perform_update()
+perform_update()
 
 perform_cleanup()
 
