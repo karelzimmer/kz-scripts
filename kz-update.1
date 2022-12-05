@@ -24,27 +24,27 @@ Achtereenvolgens wordt uitgevoerd:
 .br
 - Als repair:
 .br
-  - sudo dpkg --configure --pending
+  - dpkg --configure --pending
 .br
-  - sudo apt-get update --fix-missing
+  - apt-get update --fix-missing
 .br
-  - sudo apt-get install --fix-broken
+  - apt-get install --fix-broken
 .br
 - De eigenlijke update:
 .br
-  - sudo apt-get update
+  - apt-get update
 .br
-  - sudo apt-get dist-upgrade --yes
+  - apt-get dist-upgrade --yes
 .br
-  - sudo snap refresh
+  - snap refresh
 .br
 - Opschonen:
 .br
-  - sudo apt-get autoclean --yes
+  - apt-get autoclean --yes
 .br
-  - sudo apt-get autoremove --yes
+  - apt-get autoremove --yes
 .br
-  - sudo snap "cleanup"
+  - snap cleanup
 .br
 - Melding "reboot" geven als bestand /var/run/reboot-required bestaat.
 .\"
