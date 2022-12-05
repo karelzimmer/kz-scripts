@@ -302,10 +302,8 @@ Programma $program_name is onderbroken."
 function signal_exit {
     local apt_err="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
 een Terminalvenster en voer uit:
-[1] ${blue}sudo dpkg --configure --pending${normal}
-[2] ${blue}sudo apt-get update --fix-missing${normal}
-[3] ${blue}sudo apt-get install --fix-broken${normal}
-[4] ${blue}sudo update-initramfs -u${normal}"
+[1] ${blue}kz update${normal}
+[2] ${blue}sudo update-initramfs -u${normal}"
 
     case $program_name in
         kz-getdeb)
