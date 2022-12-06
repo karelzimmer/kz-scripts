@@ -95,12 +95,13 @@ def perform_cleanup():
 
 
 def snap_cleanup():
-    cmd = 'LANG=en_US.UTF-8 snap list --all | \
-            while read name ver rev trk pub notes; do \
-                if [[ $notes == *disabled* ]]; then \
-                    sudo snap remove "$name" --revision="$rev"; \
-                fi \
-            done'
+    cmd = '\
+LANG=en_US.UTF-8 snap list --all | \
+while read name ver rev trk pub notes; do \
+    if [[ $notes == *disabled* ]]; then \
+        sudo snap remove "$name" --revision="$rev"; \
+    fi \
+done'
 
     print('Uitvoeren snap cleanup...')
     try:
