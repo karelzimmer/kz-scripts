@@ -18,26 +18,20 @@ kz-deploy \- Pakket kz distribueren.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz deploy\fR distribueert en uploadt scripts en documenten naar
-https://karelzimmer.nl op Debian en op Debian gebaseerd systeem zoals Ubuntu.
+\fBkz deploy\fR distribueert pakket kz op Debian en op Debian gebaseerd systeem
+zoals Ubuntu.
 .br
 Dit om de scripts en documenten beschikbaar te stellen voor algemeen gebruik.
 .sp
 Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
-.br
-\fBgit clone https://github.com/karelzimmer/kz-deb.git\fR
 .br
 \fBgit clone https://github.com/karelzimmer/kz-docs.git\fR
 .br
 \fBgit clone https://github.com/karelzimmer/kz-scripts.git\fR
 .sp
 Opdracht \fBkz deploy\fR kan alleen worden uitgevoerd als Ontwikkelaar, d.i.
-aangemeld als karel met gebruikersnaam 'Karel Zimmer' op 'pc??'.
-.sp
-Mijn eigen Continuous Integration and Delivery (CI/CD) Pipeline.
-.sp
-Met opdracht \fBkz getdeb\fR kan de scripts-ontwikkelomgeving op een andere
-of dezelfde machine neergezet worden.
+aangemeld als 'karel' met gebruikersnaam 'Karel Zimmer' op 'pc??', of
+aangemeld als 'user' met gebruikersnaam 'Debian Live user' op 'debian'.
 .sp
 De volgende acties worden uitgevoerd:
 .RS
@@ -51,7 +45,12 @@ De volgende acties worden uitgevoerd:
 .br
 5. Installer pakket kz (met \fBkz getdeb\fR).
 .RE
-Mijn eigen CI/CD Pipeline :-).
+.sp
+Met opdracht \fBkz getdeb\fR kan de scripts-ontwikkelomgeving op een andere of
+dezelfde machine neergezet worden.
+.sp
+\fBkz deploy\fR is onderdeel van mijn CI/CD Pipeline. Zie \fBkz\fR(1) voor een
+uitleg.
 .\"
 .\"
 .SH OPTIES
@@ -82,6 +81,14 @@ Website.
 ~/kz-uploads/downloads/kz/kz_365_all.deb
 .RS
 Debian-pakket kz.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+CI/CD
+.RS 4
+Zie \fBkz\fR(1) voor een uitleg.
 .RE
 .\"
 .\"

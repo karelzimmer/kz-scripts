@@ -22,13 +22,20 @@ kz \- Opdracht uitvoeren.
 \fBkz\fR voert opdrachten uit op Debian en op Debian gebaseerd systeem zoals
 Ubuntu.
 .sp
-Pakket \fBkz\fR is een verzameling scripts voor het afronden en beheren van de
-installatie en de instellingen van bijvoorbeeld Ubuntu Linux.
+Pakket \fBkz\fR is een verzameling scripts, en checklists, voor het afronden en
+beheren van de installatie en de instellingen van bijvoorbeeld Ubuntu Linux.
 .sp
 \fBkz\fR voert \fIOPDRACHT\fR uit, eventueel met het opgegeven \fIARG\fR.
 .sp
 Gebruik optie \fB-l\fR, \fB--list\fR voor een lijst van beschikbare
 \fIOPDRACHT\fRen.
+.sp
+Pakket \fBkz\fR geeft met de checklists en scripts invulling aan en
+ondersteuning voor Day 0/Day 1/Day 2 Operations, IaC, en CI/CD.
+.br
+Zie het deel \fBNOTITIES\fR voor een toelichting, en het deel \fBVOORBEELDEN\fR
+voor voorbeelden.
+.
 .\"
 .\"
 .SH OPTIES
@@ -51,16 +58,102 @@ Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
 afsluitwaarde ongelijk 0.
 .\"
 .\"
-.SH VOORBEELDEN
+.SH NOTITIES
 .sp
+Pakket kz geeft met de checklists en scripts invulling aan en ondersteuning
+voor:
+.br
+\fB1. Day 0/Day 1/Day 2 Operations\fR
+.br
+\fB2. IaC\fR
+.br
+\fB3. CI/CD\fR
+.br
+Begrippen uit de moderne wereld van softwarelevenscyclus.
+.sp
+\fB1. Day 0/Day 1/Day 2 Operations\fR
+.sp
+Day 0 Operations (Dag 0 Activiteiten)
+.br
+Dit is de ontwerpfase (design), waarin projectvereisten worden gespecificeerd
+en de architectuur van de oplossing wordt bepaald.
+.sp
+Day 1 Operations (Dag 1 Activiteiten)
+.br
+Omvat het ontwikkelen en implementeren (development and deploy) van software
+die is ontworpen in de dag 0-fase.
+.sp
+Day 2 Operations (Dag 2 Activiteiten)
+.br
+Hier gaat de meeste aandacht uit naar het onderhouden, bewaken en optimaliseren
+(maintaining, monitoring, and optimizing) van het systeem.
+.sp
+\fB2. IaC (Infrastructure as Code) (Infrastructuur als Code, of programmeerbare
+infrastructuur)\fR
+.br
+Het definiëren en beheren van infrastructuur door middel van code.
+.br
+De opdrachten die standaard meegeleverd worden bij pakket kz zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.br
+Herhaalbaarheid (idempotentie) is één van de principes van IaC.
+.br
+De checklists en scripts worden vastgelegd en onderhouden in versiebeheer
+(GitHub), een ander principe van IaC.
+.sp
+\fB3. CI/CD (Continuous Integration and Delivery) (Continue integratie en
+levering)\fR
+.br
+CI/CD is de gecombineerde praktijk van continuous integration (CI) en (vaker)
+continuous delivery of (minder vaak) continuous deployment (CD).
+.sp
+CI (continuous integration) is het meerdere keren per dag de werkkopieën van
+alle ontwikkelaars samenvoegen tot een gedeelde hoofdlijn.
+.sp
+CD (continuous delivery) is software produceren in korte cycli, ervoor zorgen
+dat de software op elk moment betrouwbaar kan worden vrijgegeven en, bij het
+vrijgeven van de software, zonder dit handmatig te doen.
+.sp
+CD (continuous deployment) is een aanpak waarbij softwarefunctionaliteiten vaak
+en via geautomatiseerde implementaties worden geleverd.
+.sp
+Voor voorbeelden zie het deel \fBVOORBEELDEN\fR
+.\"
+.\"
+.SH VOORBEELDEN
 \fBkz\fR
 .RS
 Waarschuwing en beschikbare \fIOPDRACHT\fRen tonen.
 .RE
 .sp
-\fBkz archive\fR
+\fBkz update\fR
 .RS
-Start \fBarchive\fR uit de verzameling van \fBkz\fR scripts.
+Start \fBupdate\fR uit de verzameling van \fBkz\fR scripts.
+.RE
+.sp
+\fBDay 0 Operations\fR
+.RS
+Visual Studio Code, Git, GitHub.
+.RE
+.sp
+\fBDay 1 Operations\fR
+.RS
+Checklist installatie, kz install, kz setup.
+.RE
+.sp
+\fBDay 2 Operations\fR
+.RS
+kz update, kz backup, kz restore.
+.RE
+.sp
+\fBIaC\fR
+.RS
+kz-install-ubuntu-desktop.sh, kz-setup-ubuntu-desktop.sh.
+.RE
+.sp
+\fBCI/CD\fR
+.RS
+kz deploy, kz build, kz ivp.
 .RE
 .\"
 .\"

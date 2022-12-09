@@ -43,9 +43,9 @@ Bijvoorbeeld 'kz-install-ubuntu-desktop.sh' en\
  'kz-install-ubuntu-desktop-pc02.sh'.
 .br
 Deze installatiebestanden bevatten opdrachten voor ubuntu desktop algemeen en
-ubuntu desktop op pc02.
+ubuntu desktop op pc02 (een voorbeeld van IaC).
 .sp
-Voor de indeling van de installatiebestanden zie de sectie
+Voor de indeling van de installatiebestanden zie het deel
 \fBBESTANDSINDELING\fR hieronder.
 .sp
 Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
@@ -80,6 +80,9 @@ installatiebestanden.
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de installatiebestanden.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
+.sp
+\fBkz install\fR geeft invulling aan en ondersteuning voor Day 1 Operations, en
+IaC met de installatiebestanden. Zie \fBkz\fR(1) voor een uitleg.
 .\"
 .\"
 .SH BESTANDSINDELING
@@ -89,7 +92,8 @@ eindigen met '\fB.sh\fR'.
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
 De opdrachten standaard meegeleverd bij \fBkz install\fR zijn zodanig opgesteld
-dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft; idempotentie.
+dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotentie,
+één van de principes van IaC).
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
 regel) er zijn en hoe deze regels verwerkt worden.
@@ -286,33 +290,24 @@ Lijst van geïnstalleerde apps. Ter controle. Aangemaakt door kz-backup.
 .IP " 1." 4
 Checklist installatie
 .RS 4
-https://karelzimmer.nl
+https://karelzimmer.nl/html/linux.html#documenten
 .RE
 .IP " 2." 4
-Infrastructuur als Code (IaC)
+Day 1 Operations
 .RS 4
-Het vastleggen in installatiebestanden van wat geïnstalleerd wordt met
-\fBkz install\fR wordt ook wel Infrastructuur als Code (IaC) of programmeerbare
-infrastructuurgenoemd; het definiëren en beheren van infrastructuur door middel
-van code.
-.br
-De opdrachten die standaard meegeleverd worden bij \fBkz install\fR zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
-.br
-Herhaalbaarheid (idempotentie) is één van de principes van IaC.
-.br
-Ook de voorspelbaarheid, wat wordt er geïnstalleerd, hoort bij IaC.
-.br
-De opdrachten worden vastgelegd en onderhouden in versiebeheer (GitHub), een
-ander principe van IaC.
+Zie \fBkz\fR(1) voor een uitleg.
 .RE
 .IP " 3." 4
-Persoonlijke map / Apps
+IaC
 .RS 4
-In bestand Persoonlijke map / Apps staan gegevens over eerder geïnstalleerde
-pakketten.
+Zie \fBkz\fR(1) voor een uitleg.
+.RE
+.IP " 4." 4
+Persoonlijke map / Instellingen / Apps
+.RS 4
+In bestand Apps staan namen van eerder geïnstalleerde pakketten.
 .br
-Deze gevens zijn te gebruiken om de installatie te controleren op volledigheid.
+Is te gebruiken om de installatie te controleren op volledigheid.
 .RE
 .\"
 .\"

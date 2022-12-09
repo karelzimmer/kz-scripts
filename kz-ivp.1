@@ -39,9 +39,13 @@ Shellcheck  - shellscript analyse tool
 Gebruik     - roep shellscript aan met opties zoals ook in starter aanwezig
 .sp
 Opdracht \fBkz ivp\fR kan alleen worden uitgevoerd als Ontwikkelaar, d.i.
-aangemeld als karel met gebruikersnaam 'Karel Zimmer' op 'pc??'.
+aangemeld als 'karel' met gebruikersnaam 'Karel Zimmer' op 'pc??', of
+aangemeld als 'user' met gebruikersnaam 'Debian Live user' op 'debian'.
 .sp
 Opdracht \fBkz ivp\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
+.sp
+\fBkz ivp\fR is onderdeel van mijn CI/CD Pipeline. Zie \fBkz\fR(1) voor een
+uitleg.
 .\"
 .\"
 .SH OPTIES
@@ -59,6 +63,14 @@ Toon de versie, de auteur, en het auteursrecht.
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
 afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+CI/CD
+.RS 4
+Zie \fBkz\fR(1) voor een uitleg.
+.RE
 .\"
 .\"
 .SH AUTEUR
