@@ -22,19 +22,13 @@ kz \- Opdracht uitvoeren.
 \fBkz\fR voert opdrachten uit op Debian en op Debian gebaseerd systeem zoals
 Ubuntu.
 .sp
-Pakket \fBkz\fR is een verzameling scripts, en checklists, voor het afronden en
+Pakket \fBkz\fR is een verzameling scripts en checklists voor het afronden en
 beheren van de installatie en de instellingen van bijvoorbeeld Ubuntu Linux.
 .sp
 \fBkz\fR voert \fIOPDRACHT\fR uit, eventueel met het opgegeven \fIARG\fR.
 .sp
 Gebruik optie \fB-l\fR, \fB--list\fR voor een lijst van beschikbare
 \fIOPDRACHT\fRen.
-.sp
-Pakket \fBkz\fR geeft met de checklists en scripts invulling aan en
-ondersteuning voor Day 0/Day 1/Day 2 Operations, IaC, en CI/CD.
-.br
-Zie het deel \fBNOTITIES\fR voor een toelichting, en het deel \fBVOORBEELDEN\fR
-voor voorbeelden.
 .
 .\"
 .\"
@@ -60,8 +54,8 @@ afsluitwaarde ongelijk 0.
 .\"
 .SH NOTITIES
 .sp
-Pakket kz geeft met de checklists en scripts invulling aan en ondersteuning
-voor:
+Pakket \fBkz\fR geeft met de checklists en scripts invulling aan en
+ondersteuning voor:
 .br
 \fB1. Day 0/Day 1/Day 2 Operations\fR
 .br
@@ -73,23 +67,34 @@ Begrippen uit de moderne wereld van softwarelevenscyclus.
 .sp
 \fB1. Day 0/Day 1/Day 2 Operations\fR
 .sp
-Day 0 Operations (Dag 0 Activiteiten)
+\fBDay 0 Operations\fR (Dag 0 Activiteiten)
 .br
 Dit is de ontwerpfase (design), waarin projectvereisten worden gespecificeerd
 en de architectuur van de oplossing wordt bepaald.
+.br
+Hierbij gebruik ik Visual Studio Code, Git, en GitHub.
 .sp
-Day 1 Operations (Dag 1 Activiteiten)
+\fBDay 1 Operations\fR (Dag 1 Activiteiten)
 .br
 Omvat het ontwikkelen en implementeren (development and deploy) van software
 die is ontworpen in de dag 0-fase.
+.br
+Hierbij wordt onder andere gebruik gemaakt van \fBIaC\fR en
+\fBCI/CD Pipelines\fR (voor uitleg zie zie verderop).
+.br
+Voorbeelden zijn Checklist installatie, \fBkz getdeb\fR, \fBkz install\fR,
+\fBkz restore\fR, en \fBkz setup\fR.
 .sp
-Day 2 Operations (Dag 2 Activiteiten)
+\fBDay 2 Operations\fR (Dag 2 Activiteiten)
 .br
 Hier gaat de meeste aandacht uit naar het onderhouden, bewaken en optimaliseren
 (maintaining, monitoring, and optimizing) van het systeem.
+.br
+Voorbeelden zijn \fBkz update\fR en \fBkz backup\fR.
+
 .sp
-\fB2. IaC (Infrastructure as Code) (Infrastructuur als Code, of programmeerbare
-infrastructuur)\fR
+\fB2. IaC\fR (Infrastructure as Code) (Infrastructuur als Code, of
+programmeerbare infrastructuur)
 .br
 Het definiëren en beheren van infrastructuur door middel van code.
 .br
@@ -100,24 +105,30 @@ Herhaalbaarheid (idempotentie) is één van de principes van IaC.
 .br
 De checklists en scripts worden vastgelegd en onderhouden in versiebeheer
 (GitHub), een ander principe van IaC.
+.br
+Voorbeelden zijn \fBkz-install-ubuntu-desktop.sh\fR en
+\fBkz-setup-ubuntu-desktop.sh\fR.
 .sp
-\fB3. CI/CD (Continuous Integration and Delivery) (Continue integratie en
-levering)\fR
+\fB3. CI/CD\fR (Continuous Integration and Delivery) (Continue integratie en
+levering)
 .br
 CI/CD is de gecombineerde praktijk van continuous integration (CI) en (vaker)
 continuous delivery of (minder vaak) continuous deployment (CD).
-.sp
+.br
 CI (continuous integration) is het meerdere keren per dag de werkkopieën van
 alle ontwikkelaars samenvoegen tot een gedeelde hoofdlijn.
-.sp
+.br
 CD (continuous delivery) is software produceren in korte cycli, ervoor zorgen
 dat de software op elk moment betrouwbaar kan worden vrijgegeven en, bij het
 vrijgeven van de software, zonder dit handmatig te doen.
-.sp
+.br
 CD (continuous deployment) is een aanpak waarbij softwarefunctionaliteiten vaak
 en via geautomatiseerde implementaties worden geleverd.
-.sp
-Voor voorbeelden zie het deel \fBVOORBEELDEN\fR
+.br
+Een \fBCI/CD Pipeline\fR is een reeks stappen die moet worden uitgevoerd om
+geautomatiseerd een nieuwe softwareversie te leveren.
+.br
+Voorbeelden zijn \fBkz deploy\fR, \fBkz build\fR, en \fBkz ivp\fR.
 .\"
 .\"
 .SH VOORBEELDEN
@@ -129,31 +140,6 @@ Waarschuwing en beschikbare \fIOPDRACHT\fRen tonen.
 \fBkz update\fR
 .RS
 Start \fBupdate\fR uit de verzameling van \fBkz\fR scripts.
-.RE
-.sp
-\fBDay 0 Operations\fR
-.RS
-Visual Studio Code, Git, GitHub.
-.RE
-.sp
-\fBDay 1 Operations\fR
-.RS
-Checklist installatie, kz install, kz setup.
-.RE
-.sp
-\fBDay 2 Operations\fR
-.RS
-kz update, kz backup, kz restore.
-.RE
-.sp
-\fBIaC\fR
-.RS
-kz-install-ubuntu-desktop.sh, kz-setup-ubuntu-desktop.sh.
-.RE
-.sp
-\fBCI/CD\fR
-.RS
-kz deploy, kz build, kz ivp.
 .RE
 .\"
 .\"

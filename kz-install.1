@@ -43,7 +43,7 @@ Bijvoorbeeld 'kz-install-ubuntu-desktop.sh' en\
  'kz-install-ubuntu-desktop-pc02.sh'.
 .br
 Deze installatiebestanden bevatten opdrachten voor ubuntu desktop algemeen en
-ubuntu desktop op pc02 (een voorbeeld van IaC).
+ubuntu desktop op pc02.
 .sp
 Voor de indeling van de installatiebestanden zie het deel
 \fBBESTANDSINDELING\fR hieronder.
@@ -80,9 +80,6 @@ installatiebestanden.
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de installatiebestanden.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
-.sp
-\fBkz install\fR geeft invulling aan en ondersteuning voor Day 1 Operations, en
-IaC met de installatiebestanden. Zie \fBkz\fR(1) voor een uitleg.
 .\"
 .\"
 .SH BESTANDSINDELING
@@ -92,8 +89,7 @@ eindigen met '\fB.sh\fR'.
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
 De opdrachten standaard meegeleverd bij \fBkz install\fR zijn zodanig opgesteld
-dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotentie,
-één van de principes van IaC).
+dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
 regel) er zijn en hoe deze regels verwerkt worden.
@@ -293,21 +289,17 @@ Checklist installatie
 https://karelzimmer.nl/html/linux.html#documenten
 .RE
 .IP " 2." 4
-Day 1 Operations
-.RS 4
-Zie \fBkz\fR(1) voor een uitleg.
-.RE
-.IP " 3." 4
-IaC
-.RS 4
-Zie \fBkz\fR(1) voor een uitleg.
-.RE
-.IP " 4." 4
 Persoonlijke map / Instellingen / Apps
 .RS 4
 In bestand Apps staan namen van eerder geïnstalleerde pakketten.
 .br
 Is te gebruiken om de installatie te controleren op volledigheid.
+.RE
+.IP " 3." 4
+Day 1 Operations en IaC
+.RS 4
+\fBkz install\fR geeft invulling aan en ondersteuning voor
+\fBDay 1 Operations\fR en \fBIaC\fR. Zie \fBkz\fR(1) voor een uitleg.
 .RE
 .\"
 .\"
