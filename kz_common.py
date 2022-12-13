@@ -11,6 +11,7 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 
 import argparse
+import os
 import subprocess
 import sys
 import time
@@ -103,6 +104,8 @@ def check_user_sudo(display_name):
     """
     Deze functie controleert of de gebruiker sudo-rechten heeft.
     """
+    if os.getuid() == 0:
+        return(ok)
     try:
         subprocess.run('groups $USER | grep --quiet --regexp=sudo',
                        shell=True, check=True,
