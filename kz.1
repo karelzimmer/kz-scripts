@@ -63,7 +63,8 @@ ondersteuning voor:
 .br
 \fB3. CI/CD\fR
 .br
-Begrippen uit de moderne wereld van softwarelevenscyclus.
+Begrippen uit de moderne wereld van software-ontwikkeling, -distributie, en
+beheer.
 .sp
 \fB1. Day 0/Day 1/Day 2 Operations\fR
 .sp
@@ -72,7 +73,8 @@ Begrippen uit de moderne wereld van softwarelevenscyclus.
 Dit is de ontwerpfase (design), waarin projectvereisten worden gespecificeerd
 en de architectuur van de oplossing wordt bepaald.
 .br
-Hierbij gebruik ik Visual Studio Code, Git, en GitHub.
+Hierbij gebruik ik Visual Studio Code en GitHub, en programmeer ik in Bash en
+Python.
 .sp
 \fBDay 1 Operations\fR (Dag 1 Activiteiten)
 .br
@@ -80,10 +82,10 @@ Omvat het ontwikkelen en implementeren (development and deploy) van software
 die is ontworpen in de dag 0-fase.
 .br
 Hierbij wordt onder andere gebruik gemaakt van \fBIaC\fR en
-\fBCI/CD Pipelines\fR (voor uitleg zie zie verderop).
+\fBCI/CD Pipelines\fR (voor uitleg zie zie verderop), en het uitvoeren van
+Ansible Playbooks.
 .br
-Voorbeelden zijn Checklist installatie, \fBkz getdeb\fR, \fBkz install\fR,
-\fBkz restore\fR, en \fBkz setup\fR.
+Voorbeelden zijn Checklist installatie, en \fBkz getdeb\fR en \fBkz menu\fR.
 .sp
 \fBDay 2 Operations\fR (Dag 2 Activiteiten)
 .br
@@ -106,8 +108,9 @@ Herhaalbaarheid (idempotentie) is één van de principes van IaC.
 De checklists en scripts worden vastgelegd en onderhouden in versiebeheer
 (GitHub), een ander principe van IaC.
 .br
-Voorbeelden zijn \fBkz-install-ubuntu-desktop.sh\fR en
-\fBkz-setup-ubuntu-desktop.sh\fR.
+Voorbeelden zijn \fBkz-install-ubuntu-desktop.sh\fR (installatiebestand
+gebruikt door \fBkz install\fB) en \fBkz-setup-ubuntu-desktop.sh\fR
+(instelbestand gebruikt door \fBkz setup\fR).
 .sp
 \fB3. CI/CD\fR (Continuous Integration and Delivery) (Continue integratie en
 levering)
@@ -128,7 +131,7 @@ en via geautomatiseerde implementaties worden geleverd.
 Een \fBCI/CD Pipeline\fR is een reeks stappen die moet worden uitgevoerd om
 geautomatiseerd een nieuwe softwareversie te leveren.
 .br
-Voorbeelden zijn \fBkz deploy\fR, \fBkz build\fR, en \fBkz ivp\fR.
+Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
 .\"
 .\"
 .SH VOORBEELDEN
@@ -139,7 +142,7 @@ Waarschuwing en beschikbare \fIOPDRACHT\fRen tonen.
 .sp
 \fBkz update\fR
 .RS
-Start \fBupdate\fR uit de verzameling van \fBkz\fR scripts.
+Systeem bijwerken.
 .RE
 .\"
 .\"
