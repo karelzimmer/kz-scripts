@@ -245,7 +245,6 @@ $(
                 ;;
             n*|N*)
                 exit $ok
-                break
                 ;;
             *)
                 printf '%s' "${rewrite_line}"
