@@ -284,7 +284,6 @@ function download_website {
 function pull_repos {
     local bin_repo=/home/"$USER"/bin
 
-    info 'Pull repos (gitpull)...'
     git config --global user.name 'Karel Zimmer'
     git config --global user.email 'karel.zimmer@gmail.com'
     git config --global pull.ff only
@@ -293,12 +292,11 @@ function pull_repos {
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             2> >($logcmd); then
         cd "$bin_repo"
-        printf  "$(tput bold)%s$(tput sgr0) %s\n"   \
-                "$(basename "$bin_repo")"           \
-                '(initial pull)'
+        printf  "%s\n" "Initial pull $(basename "$bin_repo")..."
         # Remove well known line from output.
         git pull | sed '/Already up to date./d'
     fi
+    info 'Pull repos (gitpull)...'
     /home/"$USER"/bin/gitpull
 }
 
