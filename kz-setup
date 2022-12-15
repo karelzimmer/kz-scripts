@@ -437,9 +437,9 @@ function process_cmds_file {
     if $option_simulate; then
         operation+=' simuleren'
     else
-        status_busy="[${blink}${yellow}WERK${normal}]"
-        status_err="[${red}FOUT${normal}]"
-        status_ok="[${green}GOED${normal}]"
+        status_busy="[${blink}${yellow}Werk${normal}]"
+        status_err="[${red}Fout${normal}]"
+        status_ok="[${green}Goed${normal}]"
         printf '%s' "${cursor_invisable}"
     fi
 
