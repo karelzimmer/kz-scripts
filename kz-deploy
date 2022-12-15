@@ -103,7 +103,7 @@ function check_names {
     local       app_uploads_repo=$HOME/kz-uploads/app
 
     info 'Controleer bestandsnamen (kz ckname)...'
-    log "Check filenames with 'kz ckname'."
+    log "Check filenames with kz ckname."
     "$scripts_repo"/kz ckname   "$scripts_repo"     \
                                 "$docs_repo"        \
                                 "$deb_repo"         \
@@ -120,7 +120,7 @@ function check_scripts {
     local -i check_rc=0
 
     info 'Controleer scripts (kz ivp)...'
-    log "Check scripts with 'kz ivp'."
+    log "Check scripts with kz ivp."
     "$scripts_repo"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err '
@@ -134,7 +134,7 @@ function build_package {
     local -i check_rc=0
 
     info 'Bouw pakket en website (kz build)...'
-    log "Build package and website with 'kz build'."
+    log "Build package and website with kz build."
     "$scripts_repo"/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err '
