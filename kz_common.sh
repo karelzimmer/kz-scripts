@@ -132,8 +132,8 @@ function kz_common.check_user_root {
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
             if ! sudo -n true &> /dev/null; then
-                printf '%s\n' "Authenticatie is vereist om '$display_name' \
-uit te voeren."
+                printf '%s\n' "Authenticatie is vereist om $display_name uit \
+te voeren."
             fi
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi

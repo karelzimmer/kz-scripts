@@ -119,8 +119,7 @@ def check_user_sudo(display_name):
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
         except Exception:
-            print(f"Authenticatie is vereist om '{display_name}' uit te "
-                  ' voeren.')
+            print(f'Authenticatie is vereist om {display_name} uit te voeren.')
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
