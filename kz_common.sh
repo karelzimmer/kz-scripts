@@ -33,8 +33,8 @@ declare     options_help="  -h, --help     toon deze hulptekst
 declare -a  cmdline_args=()
 declare     less_options="--LONG-PROMPT --no-init --quit-if-one-screen \
 --quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $display_name \
-?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk h \
-voor hulp of q voor stoppen)"
+?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
+h voor hulp of q om te stoppen)"
 declare     logcmd="systemd-cat --identifier=$program_name"
 logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
