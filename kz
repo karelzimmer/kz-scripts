@@ -15,7 +15,7 @@ readonly program_name='kz'
 readonly program_desc='Opdracht uitvoeren'
 readonly display_name=${program_name/kz-/kz }
 
-# Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
+# Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
 program_path=$(realpath "$(dirname  "${0/#-/}")")
 readonly program_path
 source  "$program_path"/kz_common.sh
@@ -48,7 +48,7 @@ Argumenten:
 ###############################################################################
 
 function check_input {
-    # Geen getopt want opgegeven opties zijn voor 'OPDRACHT', niet voor kz.
+    # Geen getopt want opgegeven opties zijn voor OPDRACHT, niet voor kz.
     if ! [[ "$*" ]]; then
         info "$display_name:verplicht argument ontbreekt"
         info "$usageline"

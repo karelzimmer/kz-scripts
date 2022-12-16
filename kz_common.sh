@@ -49,7 +49,7 @@ declare     text=''
 declare     title=''
 declare     usageline="Typ '$display_name --usage' voor meer informatie."
 
-# Terminalattributen, zie 'man terminfo'.  Gebruik ${<variabele-naam>}.
+# Terminalattributen, zie man terminfo.  Gebruik ${<variabele-naam>}.
 declare     blink=''
 declare     blue=''
 declare     cursor_invisable=''
@@ -183,7 +183,8 @@ function kz_common.developer {
         fi
     else
         printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
-karel met gebruikersnaam 'Karel Zimmer' op 'pc??'."
+karel met gebruikersnaam 'Karel Zimmer' op pc??, of aangemeld als user met \
+gebruikersnaam 'Debian Live user' op debian."
     fi
 }
 
@@ -253,7 +254,7 @@ function signal {
             ;;
         13[1-9]|140)                    # 140 (128+12)
             rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
+            rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
             ;;
         141)                            # SIGPIPE (128+13)
             rc_desc='broken pipe: write to pipe with no readers'
@@ -266,7 +267,7 @@ function signal {
             ;;
         14[4-9]|1[5-8][0-9]|19[0-2])    # 144 (128+16)--192 (128+64)
             rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for '$rc_desc_signalno)'"
+            rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
             ;;
         255)
             rc_desc='exit status out of range'
@@ -300,8 +301,8 @@ Programma $program_name is onderbroken."
 
 
 function signal_exit {
-    local apt_err="Als de pakketbeheerder 'apt' foutmeldingen geeft, start \
-een Terminalvenster en voer uit:
+    local apt_err="Als de pakketbeheerder apt foutmeldingen geeft, start een \
+Terminalvenster en voer uit:
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
 

@@ -16,7 +16,7 @@ readonly program_name='kz-ivp'
 readonly program_desc='Scripts controleren'
 readonly display_name=${program_name/kz-/kz }
 
-# Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
+# Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
 program_path=$(realpath "$(dirname  "${0/#-/}")")
 readonly program_path
 source  "$program_path"/kz_common.sh
@@ -144,7 +144,7 @@ function check_code {
     else
         err "
 In $script:
-    Onbekend script.  Functie 'check_code' kan scriptcode niet controleren."
+    Onbekend script.  Functie check_code kan scriptcode niet controleren."
         maxrc=$err
     fi
 }

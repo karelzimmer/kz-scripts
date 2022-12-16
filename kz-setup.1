@@ -41,8 +41,7 @@ Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
 <distributie>, <computernaam>, en <gebruikersnaam> worden ingevuld met waarden
 van de huidige computer en gebruiker.
 .sp
-Bijvoorbeeld 'kz-setup-ubuntu-desktop.sh' en \
- 'kz-setup-ubuntu-desktop-pc02-jan.sh'.
+Bijvoorbeeld kz-setup-ubuntu-desktop.sh en kz-setup-ubuntu-desktop-pc02-jan.sh.
 .br
 Deze instelbestanden bevatten opdrachten voor ubuntu desktop algemeen en ubuntu
 desktop op pc02 voor jan.
@@ -54,12 +53,12 @@ Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
 aanwezige standaard instelbestanden opgenomen in de lijst van te verwerken
 bestanden.
 .sp
-Met optie \fB--server\fR wordt niet 'desktop' maar 'server' gebruikt.
+Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
 .sp
 Optie \fB-f\fR, \fB--files\fR geeft een lijst van instelbestanden.
 .sp
 Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
-beginnen met '\fBkz-setup-\fR' en te eindigen met '\fB.sh\fR'.
+beginnen met \fBkz-setup-\fR en te eindigen met \fB.sh\fR.
 .br
 Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
 .br
@@ -67,8 +66,8 @@ De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
 bestanden.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle instelbestanden (bestanden die beginnen met '\fBkz-setup-\fR' en eindigen
-met '\fB.sh\fR').
+alle instelbestanden (bestanden die beginnen met \fBkz-setup-\fR en eindigen
+met \fB.sh\fR).
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
@@ -85,8 +84,8 @@ Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met '\fBkz-setup-\fR' en te
-eindigen met '\fB.sh\fR'.
+De te verwerken bestanden dienen te beginnen met \fBkz-setup-\fR en te
+eindigen met \fB.sh\fR.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
@@ -156,13 +155,13 @@ T}
 .br
 [1]
 .br
-Regelsoort '#1-APP (beschrijving)' is bedoeld voor opdrachten die specifiek
-zijn voor een distributie, een computer, of een gebruiker.
+Regel '#1-APP (beschrijving)' is bedoeld voor een opdracht die specifiek is
+voor een distributie, een computer, of een gebruiker.
 .br
-Deze regels worden niet getoond bij optie \fB-a\fR, \fB--apps\fR, en worden
-niet gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
+Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
+gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
 .br
-Deze regels worden wél gebruikt bij het verwerken van het instelbestand.
+Deze regel worden wél gebruikt bij het verwerken van het instelbestand.
 .sp
 .sp
 .br

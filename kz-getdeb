@@ -16,7 +16,7 @@ readonly program_name='kz-getdeb'
 readonly program_desc='Pakket kz installeren'
 readonly display_name=${program_name/kz-/kz }
 
-# Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
+# Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
 program_path=$(realpath "$(dirname  "${0/#-/}")")
 readonly program_path
 logcmd="systemd-cat --identifier=$program_name"

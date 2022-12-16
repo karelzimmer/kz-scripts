@@ -16,7 +16,7 @@ readonly program_name='kz-build'
 readonly program_desc='Pakket kz bouwen'
 readonly display_name=${program_name/kz-/kz }
 
-# Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
+# Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
 program_path=$(realpath "$(dirname  "${0/#-/}")")
 readonly program_path
 source  "$program_path"/kz_common.sh
@@ -135,10 +135,10 @@ function build_uploads {
     local temptextfile=''
 
     log 'Bouw website...'
-    # Gebruik diff voor deltabepaling (i.p.v. rsync) omdat na 'git pull' en
-    # 'lftp mirror' in script kz-getdeb de timestamps van de bestanden
-    # verschillen en dit met rsync tot vals positief leidt (aka false positive,
-    # alleen timestamp is verschillend, niet de inhoud).
+    # Gebruik diff voor deltabepaling (i.p.v. rsync) omdat na git pull en lft
+    # mirror in script kz-getdeb de timestamps van de bestanden verschillen en
+    # dit met rsync tot vals positief leidt (aka false positive, alleen
+    # timestamp is verschillend, niet de inhoud).
 
     # Vul dist/ met app/
     cd "$uploads_appdir"
@@ -191,12 +191,12 @@ function build_uploads {
                 ps2pdf - "${uploads_targets[pdfs]}/$file.pdf"    |& $logcmd
             else
                 # Script, *.completion, *.desktop, *.policy, en *.sh.
-                # Must copy each file with suffix '.txt' added (temptextfile)
+                # Must copy each file with suffix .txt added (temptextfile)
                 # before converting because:
                 # 1. desktop-files have XML inside which gets interpreted by
                 #    Libre Office,
                 # 2. 'lowriter convert-to pdf' replaces last suffix (if any) by
-                #    '.pdf'.
+                #    .pdf.
                 temptextfile=/tmp/$file.txt
                 cp "$file" "$temptextfile"
                 lowriter    --headless                          \

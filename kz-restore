@@ -16,7 +16,7 @@ readonly program_name='kz-restore'
 readonly program_desc='Back-up terugzetten'
 readonly display_name=${program_name/kz-/kz }
 
-# Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
+# Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
 program_path=$(realpath "$(dirname  "${0/#-/}")")
 readonly program_path
 source  "$program_path"/kz_common.sh

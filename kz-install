@@ -16,7 +16,7 @@ readonly program_name='kz-install'
 readonly program_desc='Apps installeren'
 readonly display_name=${program_name/kz-/kz }
 
-# Redhat reports $0 as '-bash', dirname "$0" -> dirname: invalid option -- 'b'.
+# Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
 program_path=$(realpath "$(dirname  "${0/#-/}")")
 readonly program_path
 source  "$program_path"/kz_common.sh
@@ -214,9 +214,9 @@ function process_input {
     if $execute_commands && $option_gui; then
         title='Apps installeren'
         text='Installeren voorbereiden'
-        # Met "|& zenity --progress" worden globale variabelen uit aangeroepen
-        # functies niet doorgegeven, vandaar de 'process substitution' met
-        # "> >(zenity...)".
+        # Met '|& zenity --progress' worden globale variabelen uit aangeroepen
+        # functies niet doorgegeven, vandaar de process substitution met
+        # '> >(zenity...)'.
         process_cmds_file > >(
             zenity  --progress              \
                     --pulsate               \
@@ -254,7 +254,7 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
-            info "App '$app' niet gevonden."
+            info "App $app niet gevonden."
             file_notfound=true
         fi
     done
@@ -310,7 +310,7 @@ function process_argument_file {
             files_to_process[file_num]=$file
             ((++file_num))
         else
-            info "Bestand '$file' niet gevonden."
+            info "Bestand $file niet gevonden."
             file_notfound=true
         fi
     done

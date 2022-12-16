@@ -95,7 +95,7 @@ def perform_cleanup():
 
 
 def snap_cleanup():
-    # Start w/LANG=en_US.UTF-8 & only check for 'disabled' doesn't always work.
+    # Start with LANG=en_US.UTF-8 and check for disabled does not always work.
     cmd = '\
 snap list --all | \
 while read name ver rev trk pub notes; do \
