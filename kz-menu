@@ -211,9 +211,6 @@ function process_menu1_tui {
             esac
         done
         process_menu1_choice
-        if $execute_command; then
-            kz_common.wait_for_enter
-        fi
         execute_command=false
     done
 }
@@ -378,9 +375,6 @@ function process_menu2_tui {
         if $exit_menu2; then
             break
         fi
-        if $execute_command; then
-            kz_common.wait_for_enter
-        fi
         execute_command=false
     done
 }
@@ -450,40 +444,44 @@ $row. $action ($command)"
     text+='
 '
     prompt='Doorgaan?'
-    if $option_gui; then
-        text+="
-$prompt"
-        if zenity   --question                  \
-                    --no-markup                 \
-                    --width         600         \
-                    --height        100         \
-                    --title         "$title"    \
-                    --text          "$text"     \
-                    --ok-label      'Ja'        \
-                    --cancel-label  'Nee'       2> >($logcmd); then
-            execute_command=true
-        else
-            execute_command=false
-        fi
+    if [[ ${#rows[@]} -eq 1 ]]; then
+        execute_command=true
     else
-        info "$text"
-        while true; do
-            read -rp "$prompt [J/n]: "
-            case $REPLY in
-                j*|J*|'')
-                    execute_command=true
-                    break
-                    ;;
-                n*|N*)
-                    execute_command=false
-                    break
-                    ;;
-                *)
-                    printf '%s' "${rewrite_line}"
-                    continue
-                    ;;
-            esac
-        done
+        if $option_gui; then
+            text+="
+$prompt"
+            if zenity   --question                  \
+                        --no-markup                 \
+                        --width         600         \
+                        --height        100         \
+                        --title         "$title"    \
+                        --text          "$text"     \
+                        --ok-label      'Ja'        \
+                        --cancel-label  'Nee'       2> >($logcmd); then
+                execute_command=true
+            else
+                execute_command=false
+            fi
+        else
+            info "$text"
+            while true; do
+                read -rp "$prompt [J/n]: "
+                case $REPLY in
+                    j*|J*|'')
+                        execute_command=true
+                        break
+                        ;;
+                    n*|N*)
+                        execute_command=false
+                        break
+                        ;;
+                    *)
+                        printf '%s' "${rewrite_line}"
+                        continue
+                        ;;
+                esac
+            done
+        fi
     fi
 }
 
@@ -524,8 +522,8 @@ function manual_actions {
     if [[ $title = 'Gebruikers toevoegen' ]]; then
         text="Gebruikers toevoegen:
 
-1. Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op \
-de Super-toets[1], typ 'gebr' en klik achter Instellingen op Gebruikers.
+1. Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op
+   de Super-toets[1], typ 'gebr' en klik achter Instellingen op Gebruikers.
 2. Klik op Ontgrendelen en geef wachtwoord.
 3. Klik op Gebruiker toevoegen.
 4. Sluit het scherm Gebruikers.
@@ -565,19 +563,22 @@ function show_commands_after_execution {
     if ! $option_gui; then
         clear -x
     fi
-    text='Het volgende is uitgevoerd:
+    if [[ ${#rows[@]} -gt 1 ]]; then
+        text='Het volgende is uitgevoerd:
 '
-    for row in "${!rows[@]}"; do
-        action=$(
-            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
-            )
-        command=$(
-            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
-            )
-        text+="
+        for row in "${!rows[@]}"; do
+            action=$(
+                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
+                )
+            command=$(
+                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
+                )
+            text+="
 $row. $action ($command)"
-    done
-    info "$text"
+        done
+        info "$text"
+        kz_common.wait_for_enter
+    fi
 }
 
 
