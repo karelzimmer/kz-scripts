@@ -91,7 +91,7 @@ function process_input {
     local       nmcli_output=''
     local   -i  nmcli_rc=''
     local       text='Leg deze gegevens vast, en gebruik die om (later)
-verbinding te maken met het draadloze netwerk'
+verbinding te maken met het draadloze netwerk.'
 
     if $option_gui; then
         if nmcli_output=$(nmcli device wifi show-password 2> >($logcmd)); then
