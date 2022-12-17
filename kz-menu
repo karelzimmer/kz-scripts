@@ -429,6 +429,10 @@ function show_commands_before_execution {
     if ! $option_gui; then
         clear -x
     fi
+    if [[ ${#rows[@]} -eq 1 ]]; then
+        execute_command=true
+        return $ok
+    fi
     text='Het volgende wordt uitgevoerd:
 '
     for row in "${!rows[@]}"; do
@@ -444,44 +448,40 @@ $row. $action ($command)"
     text+='
 '
     prompt='Doorgaan?'
-    if [[ ${#rows[@]} -eq 1 ]]; then
-        execute_command=true
-    else
-        if $option_gui; then
-            text+="
+    if $option_gui; then
+        text+="
 $prompt"
-            if zenity   --question                  \
-                        --no-markup                 \
-                        --width         600         \
-                        --height        100         \
-                        --title         "$title"    \
-                        --text          "$text"     \
-                        --ok-label      'Ja'        \
-                        --cancel-label  'Nee'       2> >($logcmd); then
-                execute_command=true
-            else
-                execute_command=false
-            fi
+        if zenity   --question                  \
+                    --no-markup                 \
+                    --width         600         \
+                    --height        100         \
+                    --title         "$title"    \
+                    --text          "$text"     \
+                    --ok-label      'Ja'        \
+                    --cancel-label  'Nee'       2> >($logcmd); then
+            execute_command=true
         else
-            info "$text"
-            while true; do
-                read -rp "$prompt [J/n]: "
-                case $REPLY in
-                    j*|J*|'')
-                        execute_command=true
-                        break
-                        ;;
-                    n*|N*)
-                        execute_command=false
-                        break
-                        ;;
-                    *)
-                        printf '%s' "${rewrite_line}"
-                        continue
-                        ;;
-                esac
-            done
+            execute_command=false
         fi
+    else
+        info "$text"
+        while true; do
+            read -rp "$prompt [J/n]: "
+            case $REPLY in
+                j*|J*|'')
+                    execute_command=true
+                    break
+                    ;;
+                n*|N*)
+                    execute_command=false
+                    break
+                    ;;
+                *)
+                    printf '%s' "${rewrite_line}"
+                    continue
+                    ;;
+            esac
+        done
     fi
 }
 
