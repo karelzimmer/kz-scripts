@@ -2,7 +2,7 @@
 ###############################################################################
 # Installatiebestand voor Ubuntu desktop op pc04.
 #
-# Geschreven in 2022 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 

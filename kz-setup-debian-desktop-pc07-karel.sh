@@ -2,7 +2,7 @@
 ###############################################################################
 # Instelbestand voor Debian desktop op pc07 voor karel.
 #
-# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
