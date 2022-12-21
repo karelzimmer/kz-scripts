@@ -57,17 +57,59 @@ afsluitwaarde ongelijk 0.
 Pakket \fBkz\fR geeft met de checklists en scripts invulling aan en
 ondersteuning voor:
 .br
-\fB1. Day 0/Day 1/Day 2 Operations\fR
+\fB1. IaC\fR
 .br
-\fB2. IaC\fR
+\fB2. CI/CD\fR
 .br
-\fB3. CI/CD\fR
+\fB3. Day 0/Day 1/Day 2 Operations\fR
 .br
 Begrippen uit de moderne wereld van software-ontwikkeling, -distributie, en
 beheer.
 .sp
-\fB1. Day 0/Day 1/Day 2 Operations\fR
+\fB1. IaC\fR (Infrastructure as Code) (Infrastructuur als Code, of
+programmeerbare infrastructuur)
+.br
+Het definiëren en beheren van infrastructuur door middel van code.
+.br
+De opdrachten die standaard meegeleverd worden bij pakket kz zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.br
+Herhaalbaarheid (idempotentie) is één van de principes van IaC.
+.br
+De checklists en scripts worden vastgelegd en onderhouden in versiebeheer
+(GitHub), een ander principe van IaC.
+.br
+Voorbeelden zijn \fBkz-install-ubuntu-desktop.sh\fR (installatiebestand
+gebruikt door \fBkz install\fB) en \fBkz-setup-ubuntu-desktop.sh\fR
+(instelbestand gebruikt door \fBkz setup\fR).
 .sp
+\fB2. CI/CD\fR (Continuous Integration and Delivery) (Continue integratie en
+levering)
+.br
+CI/CD is de gecombineerde praktijk van continuous integration (CI) en (vaker)
+continuous delivery of (minder vaak) continuous deployment (CD).
+.br
+CI (continuous integration) is het meerdere keren per dag de werkkopieën van
+alle ontwikkelaars samenvoegen tot een gedeelde hoofdlijn.
+.br
+CD (continuous delivery) is software produceren in korte cycli, ervoor zorgen
+dat de software op elk moment betrouwbaar kan worden vrijgegeven en, bij het
+vrijgeven van de software, zonder dit handmatig te doen.
+.br
+CD (continuous deployment) is een aanpak waarbij softwarefunctionaliteiten vaak
+en via geautomatiseerde implementaties worden geleverd.
+.br
+Een \fBCI/CD Pipeline\fR is een reeks stappen die moet worden uitgevoerd om
+geautomatiseerd een nieuwe softwareversie te leveren.
+.br
+Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
+.sp
+\fB3. Day 0/Day 1/Day 2 Operations\fR
+.br
+In IT verwijzen de termen Day 0/Day 1/Day 2 Operations naar verschillende fasen
+van de softwarelevenscyclus.
+.sp
+.RS 3
 \fBDay 0 Operations\fR (Dag 0 Activiteiten)
 .br
 Dit is de ontwerpfase (design), waarin projectvereisten worden gespecificeerd
@@ -93,45 +135,7 @@ Hier gaat de meeste aandacht uit naar het onderhouden, bewaken en optimaliseren
 (maintaining, monitoring, and optimizing) van het systeem.
 .br
 Voorbeelden zijn \fBkz update\fR en \fBkz backup\fR.
-
-.sp
-\fB2. IaC\fR (Infrastructure as Code) (Infrastructuur als Code, of
-programmeerbare infrastructuur)
-.br
-Het definiëren en beheren van infrastructuur door middel van code.
-.br
-De opdrachten die standaard meegeleverd worden bij pakket kz zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
-.br
-Herhaalbaarheid (idempotentie) is één van de principes van IaC.
-.br
-De checklists en scripts worden vastgelegd en onderhouden in versiebeheer
-(GitHub), een ander principe van IaC.
-.br
-Voorbeelden zijn \fBkz-install-ubuntu-desktop.sh\fR (installatiebestand
-gebruikt door \fBkz install\fB) en \fBkz-setup-ubuntu-desktop.sh\fR
-(instelbestand gebruikt door \fBkz setup\fR).
-.sp
-\fB3. CI/CD\fR (Continuous Integration and Delivery) (Continue integratie en
-levering)
-.br
-CI/CD is de gecombineerde praktijk van continuous integration (CI) en (vaker)
-continuous delivery of (minder vaak) continuous deployment (CD).
-.br
-CI (continuous integration) is het meerdere keren per dag de werkkopieën van
-alle ontwikkelaars samenvoegen tot een gedeelde hoofdlijn.
-.br
-CD (continuous delivery) is software produceren in korte cycli, ervoor zorgen
-dat de software op elk moment betrouwbaar kan worden vrijgegeven en, bij het
-vrijgeven van de software, zonder dit handmatig te doen.
-.br
-CD (continuous deployment) is een aanpak waarbij softwarefunctionaliteiten vaak
-en via geautomatiseerde implementaties worden geleverd.
-.br
-Een \fBCI/CD Pipeline\fR is een reeks stappen die moet worden uitgevoerd om
-geautomatiseerd een nieuwe softwareversie te leveren.
-.br
-Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
+.RE
 .\"
 .\"
 .SH VOORBEELDEN
