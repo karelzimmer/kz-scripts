@@ -14,7 +14,6 @@
 
 readonly program_name='kz-gset'
 readonly program_desc='GUI wijzigen'
-readonly program_year=2015
 readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.

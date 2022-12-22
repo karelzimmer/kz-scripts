@@ -14,7 +14,6 @@
 
 readonly program_name='kz-setup'
 readonly program_desc='Apps instellen'
-readonly program_year=2013
 readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.

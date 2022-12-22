@@ -23,7 +23,6 @@ import time
 
 module_name = 'kz_common.py'
 module_desc = 'Algemene module voor Python scripts'
-module_year = 2021
 
 ok = 0
 err = 1
@@ -131,7 +130,7 @@ def check_user_sudo(display_name):
                 sys.exit(err)
 
 
-def process_options(program_name, program_desc, program_year, display_name):
+def process_options(program_name, program_desc, display_name):
     """
     Deze functie verwerkt de algemene opties.
     """
@@ -149,7 +148,7 @@ def process_options(program_name, program_desc, program_year, display_name):
         process_option_usage(display_name)
         sys.exit(ok)
     elif args.version:
-        process_option_version(program_name, program_year)
+        process_option_version(program_name)
         sys.exit(ok)
 
 
@@ -162,7 +161,7 @@ def process_option_usage(display_name):
 Typ '{display_name} --help' voor meer informatie.""")
 
 
-def process_option_version(program_name, program_year):
+def process_option_version(program_name):
     """
     Deze functie toont informatie over de versie, auteur, en licentie.
     """
@@ -175,6 +174,10 @@ def process_option_version(program_name, program_year):
         print(ex)
         sys.exit(err)
     finally:
+        cmd = "grep '# Geschreven in ' " + program_name
+        cmd = cmd + " | cut --delimiter=' ' --fields=4"        
+        program_year = subprocess.check_output(cmd, shell=True)
+        program_year = program_year.decode('utf-8').strip()
         print(f"""{program_name} (kz) 365 ({build})
 
 Geschreven in {program_year} door Karel Zimmer <info@karelzimmer.nl>, \

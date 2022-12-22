@@ -13,7 +13,6 @@
 
 readonly module_name='kz_common.sh'
 readonly module_desc='Algemene module voor shell scripts'
-readonly module_year=2009
 
 readonly ok=0
 readonly err=1
@@ -399,11 +398,15 @@ Typ '$display_name --help' voor meer informatie."
 
 function kz_common.process_option_version {
     local build_id='1970-01-01'
+    local program_year='1970'
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=$(cat /usr/local/etc/kz-build-id)
     fi
-
+    program_year=$(
+        grep '# Geschreven in ' "$program_name" |
+        cut --delimiter=' ' --fields=4
+        )
     info "$program_name (kz) 365 ($build_id)
 
 Geschreven in ${program_year:-1970} door Karel Zimmer <info@karelzimmer.nl>, \
