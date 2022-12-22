@@ -13,6 +13,7 @@
 
 readonly module_name='kz_common.sh'
 readonly module_desc='Algemene module voor shell scripts'
+readonly module_year=2009
 
 readonly ok=0
 readonly err=1
@@ -397,15 +398,15 @@ Typ '$display_name --help' voor meer informatie."
 
 
 function kz_common.process_option_version {
-    local build_id=''
+    local build_id='1970-01-01'
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=$(cat /usr/local/etc/kz-build-id)
     fi
 
-    info "$program_name (kz) 365 (${build_id:-unknown})
+    info "$program_name (kz) 365 ($build_id)
 
-Geschreven in ${year:-1970} door Karel Zimmer <info@karelzimmer.nl>, \
+Geschreven in ${program_year:-1970} door Karel Zimmer <info@karelzimmer.nl>, \
 Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
@@ -486,11 +487,12 @@ function err {
 {
     # Anonymous function to avoid using the shellcheck directive
     # disable=SC2034.
-    echo "$module_desc"
     echo "$blink"
     echo "$cursor_invisable"
     echo "$less_options"
     echo "$logcmd_check"
+    echo "$module_desc"
+    echo "$module_year"
     echo "$options_help"
     echo "$options_long"
     echo "$options_short"

@@ -14,6 +14,7 @@
 
 readonly program_name='kz-build'
 readonly program_desc='Pakket kz bouwen'
+readonly program_year=2021
 readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.

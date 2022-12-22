@@ -23,6 +23,7 @@ import sys
 
 program_name = 'kz-update'
 program_desc = 'Systeem bijwerken'
+program_year = 2021
 display_name = program_name.replace('kz-', 'kz ')
 
 
@@ -127,7 +128,8 @@ def check_reboot():
 # Main
 ###############################################################################
 
-kz_common.process_options(program_name, program_desc, display_name)
+kz_common.process_options(program_name, program_desc, program_year,
+                          display_name)
 
 kz_common.check_on_ac_power(program_name)
 

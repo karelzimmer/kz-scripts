@@ -14,6 +14,7 @@
 
 readonly program_name='kz-ivp'
 readonly program_desc='Scripts controleren'
+readonly program_year=2015
 readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
@@ -94,14 +95,9 @@ function process_input {
         if ! [[ -f $script ]]; then
             continue
         fi
-        case $script in
-            README.md|LICENSE)
-                continue
-                ;;
-        esac
         check_trailing_spaces
         case $script in
-            *.policy)
+            *.policy|README.md|LICENSE)
                 continue
                 ;;
             *.1|*.desktop)

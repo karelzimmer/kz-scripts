@@ -14,6 +14,7 @@
 
 readonly program_name='kz-restore'
 readonly program_desc='Back-up terugzetten'
+readonly program_year=2007
 readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.

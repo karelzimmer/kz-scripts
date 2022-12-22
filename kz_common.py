@@ -23,6 +23,7 @@ import time
 
 module_name = 'kz_common.py'
 module_desc = 'Algemene module voor Python scripts'
+module_year = 2021
 
 ok = 0
 err = 1
@@ -130,7 +131,7 @@ def check_user_sudo(display_name):
                 sys.exit(err)
 
 
-def process_options(program_name, program_desc, display_name):
+def process_options(program_name, program_desc, program_year, display_name):
     """
     Deze functie verwerkt de algemene opties.
     """
@@ -148,7 +149,7 @@ def process_options(program_name, program_desc, display_name):
         process_option_usage(display_name)
         sys.exit(ok)
     elif args.version:
-        process_option_version(program_name)
+        process_option_version(program_name, program_year)
         sys.exit(ok)
 
 
@@ -161,24 +162,23 @@ def process_option_usage(display_name):
 Typ '{display_name} --help' voor meer informatie.""")
 
 
-def process_option_version(program_name):
+def process_option_version(program_name, program_year):
     """
     Deze functie toont informatie over de versie, auteur, en licentie.
     """
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
             build = fh.read()
-            year = build.partition('-')[0]
     except FileNotFoundError:
-        build = 'unknown'
-        year = 1970
+        build = '1970-01-01'
     except Exception as ex:
         print(ex)
         sys.exit(err)
     finally:
         print(f"""{program_name} (kz) 365 ({build})
 
-Geschreven in {year} door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Geschreven in {program_year} door Karel Zimmer <info@karelzimmer.nl>, \
+Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.\
 """)
 

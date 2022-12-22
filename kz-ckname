@@ -14,6 +14,7 @@
 
 readonly program_name='kz-ckname'
 readonly program_desc='Bestandsnamen controleren'
+readonly program_year=2012
 readonly display_name=${program_name/kz-/kz }
 
 # Redhat reports $0 as '-bash': dirname "$0" -> dirname: invalid option -- 'b'.
