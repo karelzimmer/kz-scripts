@@ -168,7 +168,7 @@ function check_record_length {
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
         err "
 In $script:
-    Één regel is langer dan $max_line_length ($max_line_length_found).
+    Een regel is langer dan $max_line_length ($max_line_length_found).
 "
         maxrc=$err
     fi
