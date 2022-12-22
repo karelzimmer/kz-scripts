@@ -1,5 +1,4 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034,SC2154
 ###############################################################################
 # Algemene module voor shell scripts.
 #
@@ -32,11 +31,12 @@ declare     options_help="  -h, --help     toon deze hulptekst
 
 declare -a  cmdline_args=()
 declare     less_options="--LONG-PROMPT --no-init --quit-if-one-screen \
---quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer $display_name \
-?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
-h voor hulp of q om te stoppen)"
-declare     logcmd="systemd-cat --identifier=$program_name"
-logcmd_check="journalctl --all --boot --identifier=$program_name \
+--quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer \
+${display_name:-$module_name} ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e \
+(EINDE) :?pB %pB\%. .(druk op h voor hulp of q om te stoppen)"
+declare     logcmd="systemd-cat --identifier=${program_name:-$module_name}"
+logcmd_check="journalctl --all --boot \
+--identifier=${program_name:-$module_name} \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 declare     logcmd_check
 declare     option_gui=false
@@ -383,31 +383,30 @@ function kz_common.process_options {
 
 
 function kz_common.process_option_help {
-    info "$help
+    info "${help:-Variable help not set}
 
 Typ 'man $display_name' voor meer informatie."
 }
 
 
 function kz_common.process_option_usage {
-    info "$usage
+    info "${usage:-Variable usage not set}
 
 Typ '$display_name --help' voor meer informatie."
 }
 
 
 function kz_common.process_option_version {
-    local build='unknown'
-    local year=1970
+    local build_id=''
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
-        build=$(cat /usr/local/etc/kz-build-id)
-        year=$(cut --delimiter='-' --fields=1 /usr/local/etc/kz-build-id)
+        build_id=$(cat /usr/local/etc/kz-build-id)
     fi
 
-    info "$program_name (kz) 365 ($build)
+    info "$program_name (kz) 365 (${build_id:-unknown})
 
-Geschreven in $year door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Geschreven in ${year:-1970} door Karel Zimmer <info@karelzimmer.nl>, \
+Creative Commons
 Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
 }
 
@@ -483,5 +482,24 @@ function err {
     log "$@" --priority=err
 }
 
+{
+    # Anonymous function to avoid using the shellcheck directive disable=SC2034.
+
+    {
+        echo "$module_desc"
+        echo "$blink"
+        echo "$cursor_invisable"
+        echo "$less_options"
+        echo "$logcmd_check"
+        echo "$options_help"
+        echo "$options_long"
+        echo "$options_short"
+        echo "$options_usage"
+        echo "$rewrite_line"
+        echo "$text"
+        echo "$usageline"
+        echo "$user_name"
+    } > /dev/null
+}
 
 true
