@@ -482,24 +482,24 @@ function err {
     log "$@" --priority=err
 }
 
-{
-    # Anonymous function to avoid using the shellcheck directive disable=SC2034.
 
-    {
-        echo "$module_desc"
-        echo "$blink"
-        echo "$cursor_invisable"
-        echo "$less_options"
-        echo "$logcmd_check"
-        echo "$options_help"
-        echo "$options_long"
-        echo "$options_short"
-        echo "$options_usage"
-        echo "$rewrite_line"
-        echo "$text"
-        echo "$usageline"
-        echo "$user_name"
-    } > /dev/null
-}
+{
+    # Anonymous function to avoid using the shellcheck directive
+    # disable=SC2034.
+    echo "$module_desc"
+    echo "$blink"
+    echo "$cursor_invisable"
+    echo "$less_options"
+    echo "$logcmd_check"
+    echo "$options_help"
+    echo "$options_long"
+    echo "$options_short"
+    echo "$options_usage"
+    echo "$rewrite_line"
+    echo "$text"
+    echo "$usageline"
+    echo "$user_name"
+} > /dev/null
+
 
 true
