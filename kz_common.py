@@ -175,7 +175,7 @@ def process_option_version(program_name):
         sys.exit(err)
     finally:
         cmd = "grep '# Geschreven in ' " + program_name
-        cmd = cmd + " | cut --delimiter=' ' --fields=4"        
+        cmd = cmd + " | cut --delimiter=' ' --fields=4"
         program_year = subprocess.check_output(cmd, shell=True)
         program_year = program_year.decode('utf-8').strip()
         print(f"""{program_name} (kz) 365 ({build})

@@ -495,7 +495,6 @@ function err {
     echo "$less_options"
     echo "$logcmd_check"
     echo "$module_desc"
-    echo "$module_year"
     echo "$options_help"
     echo "$options_long"
     echo "$options_short"
