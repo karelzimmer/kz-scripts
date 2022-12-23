@@ -166,14 +166,15 @@ def process_option_version(program_name):
     """
     Deze functie toont informatie over de versie, auteur, en licentie.
     """
+    build_id = '1970-01-01'
     cmd = ''
     program_year = 1970
 
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
-            build = fh.read()
+            build_id = fh.read()
     except FileNotFoundError:
-        build = '1970-01-01'
+        build_id = '1970-01-01'
     except Exception as ex:
         print(ex)
         sys.exit(err)
@@ -185,7 +186,7 @@ def process_option_version(program_name):
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
             program_year = 1970
-        print(f"""{program_name} (kz) 365 ({build})
+        print(f"""{program_name} (kz) 365 ({build_id})
 
 Geschreven in {program_year} door Karel Zimmer <info@karelzimmer.nl>, \
 Creative Commons
