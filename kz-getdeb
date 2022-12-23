@@ -114,7 +114,7 @@ function install_package {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    check_user_sudo
+    check_user_root
 
     title='Voortgang'
     text='Installeer pakket kz (kan even duren)...'
@@ -144,7 +144,7 @@ function install_package {
 }
 
 
-function check_user_sudo {
+function check_user_root {
     if ! sudo -n true 2> >($logcmd); then
         while true; do
             title='Authenticatie nodig'
