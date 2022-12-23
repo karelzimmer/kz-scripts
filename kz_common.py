@@ -101,17 +101,11 @@ def check_on_ac_power(program_name):
             sys.exit(err)
 
 
-def check_user_sudo(display_name):
+def check_user_root(display_name):
     """
-    Deze functie controleert of de gebruiker sudo-rechten heeft.
+    Deze functie controleert of de gebruiker root is.
     """
-    if os.getuid() == 0:
-        return(ok)
-    try:
-        subprocess.run('groups $USER | grep --quiet --regexp=sudo',
-                       shell=True, check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    except Exception:
+    if check_user_sudo() != ok:
         print(f'Reeds uitgevoerd door de beheerder.')
         sys.exit(ok)
     else:
@@ -129,6 +123,23 @@ def check_user_sudo(display_name):
             except Exception as ex:
                 print(ex)
                 sys.exit(err)
+
+
+
+def check_user_sudo():
+    """
+    Deze functie controleert of de gebruiker sudo mag gebruiken.
+    """
+    if os.getuid() == 0:
+        return(ok)
+    try:
+        subprocess.run('groups $USER | grep --quiet --regexp=sudo',
+                       shell=True, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        return(err)
+    else:
+        return(ok)
 
 
 def process_options(program_name, program_desc, display_name):

@@ -156,7 +156,8 @@ function kz_common.check_user_sudo {
 
 function kz_common.developer {
     local action=${1:-check}
-    local user_name=''
+    local user_name_karel=''
+    local user_name_live=''
 
     if [[ $action = 'check' ]]; then
         # Aangemeld als ontwikkelaar?
@@ -505,7 +506,6 @@ function err {
     echo "$rewrite_line"
     echo "$text"
     echo "$usageline"
-    echo "$user_name"
 } > /dev/null
 
 
