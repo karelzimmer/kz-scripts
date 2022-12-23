@@ -189,8 +189,8 @@ def process_option_version(program_name):
 
 Geschreven in {program_year} door Karel Zimmer <info@karelzimmer.nl>, \
 Creative Commons
-Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.\
-""")
+Publiek Domein Verklaring \
+<http://creativecommons.org/publicdomain/zero/1.0>.""")
 
 
 ###############################################################################
