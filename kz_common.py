@@ -23,6 +23,7 @@ import time
 
 module_name = 'kz_common.py'
 module_desc = 'Algemene module voor Python scripts'
+module_path = f"{os.path.realpath(os.path.dirname(__file__))}"
 
 ok = 0
 err = 1
@@ -165,6 +166,9 @@ def process_option_version(program_name):
     """
     Deze functie toont informatie over de versie, auteur, en licentie.
     """
+    cmd = ''
+    program_year = 1970
+
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
             build = fh.read()
@@ -174,10 +178,13 @@ def process_option_version(program_name):
         print(ex)
         sys.exit(err)
     finally:
-        cmd = "grep '# Geschreven in ' " + program_name
-        cmd = cmd + " | cut --delimiter=' ' --fields=4"
-        program_year = subprocess.check_output(cmd, shell=True)
+        cmd = f"grep '# Geschreven in ' {module_path}/{program_name}"
+        cmd = f"{cmd} | cut --delimiter=' ' --fields=4"
+        program_year = subprocess.check_output(cmd, shell=True,
+                                               stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
+        if program_year == '':
+            program_year = 1970
         print(f"""{program_name} (kz) 365 ({build})
 
 Geschreven in {program_year} door Karel Zimmer <info@karelzimmer.nl>, \

@@ -404,9 +404,12 @@ function kz_common.process_option_version {
         build_id=$(cat /usr/local/etc/kz-build-id)
     fi
     program_year=$(
-        grep '# Geschreven in ' "$program_name" |
+        grep '# Geschreven in ' "$program_path/$program_name" |
         cut --delimiter=' ' --fields=4
-        )
+        ) || true
+    if [[ $program_year = '' ]]; then
+        program_year='1970'
+    fi
     info "$program_name (kz) 365 ($build_id)
 
 Geschreven in ${program_year:-1970} door Karel Zimmer <info@karelzimmer.nl>, \
