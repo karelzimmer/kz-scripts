@@ -125,7 +125,6 @@ def check_user_root(display_name):
                 sys.exit(err)
 
 
-
 def check_user_sudo():
     """
     Deze functie controleert of de gebruiker sudo mag gebruiken.
