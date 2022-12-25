@@ -19,8 +19,6 @@ program_name='kz-backup'
 program_desc='Back-up maken'
 display_name=${program_name/kz-/kz }
 
-options_short+='gt:'
-options_long+=',delete,dry-run,gui,target:'
 usage="Gebruik: $display_name [--delete] [--dry-run] [-g|--gui] \
 [-t|--target=DOELMAP]
                    $options_usage"
@@ -36,6 +34,9 @@ Opties:
   -t, --target=DOELMAP
                  plaats back-up in de DOELMAP
 $options_help"
+options_short+='gt:'
+options_long+=',delete,dry-run,gui,target:'
+
 source=$HOME
 
 

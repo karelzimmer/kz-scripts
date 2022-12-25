@@ -19,8 +19,6 @@ program_name='kz-setup'
 program_desc='Apps instellen'
 display_name=${program_name/kz-/kz }
 
-options_short+='ace:fgrs'
-options_long+=',apps,cat,files,gui,reset,server,simulate'
 usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]
                   [-r|--reset] {--server] [-s|--simulate]
                   $options_usage
@@ -42,6 +40,8 @@ $options_help
 Argumenten:
   APP            opgegeven APPs instellen
   BESTAND        opgegeven BESTANDen verwerken"
+options_short+='ace:fgrs'
+options_long+=',apps,cat,files,gui,reset,server,simulate'
 
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
@@ -54,24 +54,24 @@ sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
 # Variables
 ###############################################################################
 
-declare -a  app_arguments=()
-declare     argument_app=false
-declare     argument_file=false
-declare     commands_found=false
-declare     edition=desktop
-declare     execute_commands=true
-declare -a  file_arguments=()
-declare -a  files_to_process=()
-declare -i  maxrc=0
-declare     option_apps=false
-declare     option_cat=false
-declare     option_files=false
-declare     option_gui=false
-declare     OPTION_RESET=false
-declare     option_simulate=false
-declare     status_busy=''
-declare     status_err=''
-declare     status_ok=''
+declare -a app_arguments=()
+argument_app=false
+argument_file=false
+commands_found=false
+edition=desktop
+execute_commands=true
+declare -a file_arguments=()
+declare -a files_to_process=()
+declare -i maxrc=0
+option_apps=false
+option_cat=false
+option_files=false
+option_gui=false
+OPTION_RESET=false
+option_simulate=false
+status_busy=''
+status_err=''
+status_ok=''
 
 
 ###############################################################################

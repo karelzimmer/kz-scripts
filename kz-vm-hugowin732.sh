@@ -6,8 +6,8 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-readonly text='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
-readonly title='VirtualBox'
+text='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
+title='VirtualBox'
 
 function start_vm {
      while ! lsmod | grep --quiet --regexp='vbox'; do

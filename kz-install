@@ -19,8 +19,6 @@ program_name='kz-install'
 program_desc='Apps installeren'
 display_name=${program_name/kz-/kz }
 
-options_short+='acfgrs'
-options_long+=',apps,cat,files,gui,remove,server,simulate'
 usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] \
 [-g|--gui]
                     [-r|--remove] [--server] [-s|--simulate]
@@ -43,6 +41,8 @@ $options_help
 Argumenten:
   APP            opgegeven APPs installeren
   BESTAND        opgegeven BESTANDen verwerken"
+options_short+='acfgrs'
+options_long+=',apps,cat,files,gui,remove,server,simulate'
 
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
@@ -55,15 +55,15 @@ sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
 # Variables
 ###############################################################################
 
-declare -a  app_arguments=()
+declare -a app_arguments=()
 argument_app=false
 argument_file=false
 commands_found=false
 edition=desktop
 execute_commands=true
-declare -a  file_arguments=()
-declare -a  files_to_process=()
-declare -i  maxrc=0
+declare -a file_arguments=()
+declare -a files_to_process=()
+declare -i maxrc=0
 option_apps=false
 option_cat=false
 option_files=false

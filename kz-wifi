@@ -19,8 +19,6 @@ program_name='kz-wifi'
 program_desc='Wifi-informatie tonen'
 display_name=${program_name/kz-/kz }
 
-options_short+='g'
-options_long+=',gui'
 usage="Gebruik: $display_name $options_usage [-g|--gui]"
 help="Gebruik: $display_name [OPTIE...]
 
@@ -29,6 +27,8 @@ $program_desc.
 Opties:
 $options_help
   -g, --gui      start in grafische modus"
+options_short+='g'
+options_long+=',gui'
 
 
 ###############################################################################

@@ -19,8 +19,6 @@ program_name='kz-menu'
 program_desc='Installatiemenu'
 display_name=${program_name/kz-/kz }
 
-options_short+='g'
-options_long+=',gui'
 usage="Gebruik: $display_name [-g|--gui]
                  $options_usage"
 help="Gebruik: $display_name [OPTIE...]
@@ -30,6 +28,8 @@ $program_desc.
 Opties:
   -g, --gui      start in grafische modus
 $options_help"
+options_short+='g'
+options_long+=',gui'
 
 menu1_title=Installatiemenu
 menu1_head="                  $menu1_title"
@@ -80,9 +80,9 @@ menu2_lines=${#menu2_actions[@]}
 # Variables
 ###############################################################################
 
-declare     execute_command=false
-declare -a  rows=()
-declare     option_gui=false
+execute_command=false
+declare -a rows=()
+option_gui=false
 
 
 ###############################################################################

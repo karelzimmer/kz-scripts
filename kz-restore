@@ -7,25 +7,22 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-restore'
-readonly program_desc='Back-up terugzetten'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-restore'
+program_desc='Back-up terugzetten'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly options_short+='gs:'
-readonly options_long+=',dry-run,gui,source:'
-readonly usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
+usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
 [-s|--source=BRONMAP]
                     $options_usage"
-readonly help="Gebruik: $display_name [OPTIE...]
+help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -35,6 +32,8 @@ Opties:
   -s, --source=BRONMAP
                  gebruik back-up in de BRONMAP
 $options_help"
+options_short+='gs:'
+options_long+=',dry-run,gui,source:'
 
 target=$HOME
 
@@ -43,13 +42,13 @@ target=$HOME
 # Variables
 ###############################################################################
 
-declare medium=''
-declare option_dry_run=''
-declare option_gui=false
-declare option_source=false
-declare source_argument=''
-declare source_medium=''
-declare source=''
+medium=''
+option_dry_run=''
+option_gui=false
+option_source=false
+source_argument=''
+source_medium=''
+source=''
 
 
 ###############################################################################

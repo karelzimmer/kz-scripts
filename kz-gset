@@ -19,9 +19,6 @@ program_name='kz-gset'
 program_desc='GUI wijzigen'
 display_name=${program_name/kz-/kz }
 
-options_short+='a:b:d:lrf:x:'
-options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
-addappfolder:,delappfolder:"
 usage="Gebruik: $display_name [-a|--addfavaft=FAVORITE] \
 [-b|--addfavbef=FAVORITE]
                  [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
@@ -46,6 +43,9 @@ Opties:
   -x, --delappfolder=appfolder
                  verwijder appfolder
 $options_help"
+options_short+='a:b:d:lrf:x:'
+options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,addappfolder:,\
+delappfolder:"
 
 
 ###############################################################################
