@@ -11,54 +11,47 @@
 # Constants
 ###############################################################################
 
-readonly module_name='kz_common.sh'
-readonly module_desc='Algemene module voor shell scripts'
+module_name='kz_common.sh'
+module_desc='Algemene module voor shell scripts'
 
-readonly ok=0
-readonly err=1
+ok=0
+err=1
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare     options_short='huv'
-declare     options_long='help,usage,version'
-declare     options_usage='[-h|--help] [-u|--usage] [-v|--version]'
-declare     options_help="  -h, --help     toon deze hulptekst
+options_short='huv'
+options_long='help,usage,version'
+options_usage='[-h|--help] [-u|--usage] [-v|--version]'
+options_help="  -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
   -v, --version  toon de programmaversie"
 
-declare -a  cmdline_args=()
-declare     less_options="--LONG-PROMPT --no-init --quit-if-one-screen \
---quit-on-intr --RAW-CONTROL-CHARS --prompt=MTekstuitvoer \
-${display_name:-$module_name} ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e \
-(EINDE) :?pB %pB\%. .(druk op h voor hulp of q om te stoppen)"
-declare     logcmd="systemd-cat --identifier=${program_name:-$module_name}"
-logcmd_check="journalctl --all --boot \
---identifier=${program_name:-$module_name} \
---since='$(date '+%Y-%m-%d %H:%M:%S')'"
-declare     logcmd_check
-declare     option_gui=false
-declare     option_help=false
-declare     option_usage=false
-declare     option_version=false
+less_options=''
+logcmd_check=''
+logcmd=''
+option_gui=false
+option_help=false
+option_usage=false
+option_version=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-declare     program_exec=${0/#./$program_path}
-declare     text=''
-declare     title=''
-declare     usageline="Typ '$display_name --usage' voor meer informatie."
+program_exec=${0/#./$program_path}
+text=''
+title=''
+declare -a cmdline_args=()
 
 # Terminalattributen, zie man terminfo.  Gebruik ${<variabele-naam>}.
-declare     blink=''
-declare     blue=''
-declare     cursor_invisable=''
-declare     cursor_visable=''
-declare     green=''
-declare     normal=''
-declare     red=''
-declare     rewrite_line=''
-declare     yellow=''
+blink=''
+blue=''
+cursor_invisable=''
+cursor_visable=''
+green=''
+normal=''
+red=''
+rewrite_line=''
+yellow=''
 
 
 ###############################################################################
@@ -132,8 +125,8 @@ function kz_common.check_user_root {
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
             if ! sudo -n true &> /dev/null; then
-                printf '%s\n' "Authenticatie is vereist om $display_name uit \
-te voeren."
+                printf '%s\n' "Authenticatie is vereist om \
+${display_name:-$module_name} uit te voeren."
             fi
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi
@@ -214,6 +207,16 @@ function kz_common.init_script {
     if [[ -t 1 ]]; then
         set_terminal_attributes
     fi
+    less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+--RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
+?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
+h voor hulp of q om te stoppen)"
+    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
+    logcmd_check="journalctl --all --boot \
+--identifier=${program_name:-$module_name} \
+--since='$(date '+%Y-%m-%d %H:%M:%S')'"
+    usageline="Typ '${display_name:-$module_name} --usage' voor meer \
+informatie."
 }
 
 

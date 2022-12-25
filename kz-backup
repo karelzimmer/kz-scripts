@@ -7,25 +7,24 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-backup'
-readonly program_desc='Back-up maken'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-backup'
+program_desc='Back-up maken'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly options_short+='gt:'
-readonly options_long+=',delete,dry-run,gui,target:'
-readonly usage="Gebruik: $display_name [--delete] [--dry-run] [-g|--gui] \
+options_short+='gt:'
+options_long+=',delete,dry-run,gui,target:'
+usage="Gebruik: $display_name [--delete] [--dry-run] [-g|--gui] \
 [-t|--target=DOELMAP]
                    $options_usage"
-readonly help="Gebruik: $display_name [OPTIE...]
+help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -37,23 +36,22 @@ Opties:
   -t, --target=DOELMAP
                  plaats back-up in de DOELMAP
 $options_help"
-
-readonly source=$HOME
+source=$HOME
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare medium=''
-declare option_delete=''
-declare option_delete_excluded=''
-declare option_dry_run=''
-declare option_gui=false
-declare option_target=false
-declare target_argument=''
-declare target_medium=''
-declare target=''
+medium=''
+option_delete=''
+option_delete_excluded=''
+option_dry_run=''
+option_gui=false
+option_target=false
+target_argument=''
+target_medium=''
+target=''
 
 
 ###############################################################################

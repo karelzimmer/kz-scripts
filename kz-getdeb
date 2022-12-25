@@ -7,17 +7,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-
-###############################################################################
-# Constants
-###############################################################################
-
-readonly program_name='kz-getdeb'
-readonly program_desc='Pakket kz installeren'
-readonly display_name=${program_name/kz-/kz }
-
 program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
 logcmd="systemd-cat --identifier=$program_name"
 logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
@@ -40,8 +30,17 @@ $logcmd_check"
     exit 1
 fi
 
-readonly usage="Gebruik: $display_name $options_usage"
-readonly help="Gebruik: $display_name [OPTIE...]
+
+###############################################################################
+# Constants
+###############################################################################
+
+program_name='kz-getdeb'
+program_desc='Pakket kz installeren'
+display_name=${program_name/kz-/kz }
+
+usage="Gebruik: $display_name $options_usage"
+help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 

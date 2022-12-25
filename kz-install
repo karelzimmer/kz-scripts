@@ -7,27 +7,26 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-install'
-readonly program_desc='Apps installeren'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-install'
+program_desc='Apps installeren'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly options_short+='acfgrs'
-readonly options_long+=',apps,cat,files,gui,remove,server,simulate'
-readonly usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] \
+options_short+='acfgrs'
+options_long+=',apps,cat,files,gui,remove,server,simulate'
+usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] \
 [-g|--gui]
                     [-r|--remove] [--server] [-s|--simulate]
                     $options_usage
                     [APP...] [BESTAND...]"
-readonly help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
+help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
 
 $program_desc.
 
@@ -46,14 +45,10 @@ Argumenten:
   BESTAND        opgegeven BESTANDen verwerken"
 
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly distro
 
 apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
-readonly apps_file
 cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
-readonly cmds_file
 sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
-readonly sims_file
 
 
 ###############################################################################
@@ -61,23 +56,23 @@ readonly sims_file
 ###############################################################################
 
 declare -a  app_arguments=()
-declare     argument_app=false
-declare     argument_file=false
-declare     commands_found=false
-declare     edition=desktop
-declare     execute_commands=true
+argument_app=false
+argument_file=false
+commands_found=false
+edition=desktop
+execute_commands=true
 declare -a  file_arguments=()
 declare -a  files_to_process=()
 declare -i  maxrc=0
-declare     option_apps=false
-declare     option_cat=false
-declare     option_files=false
-declare     option_gui=false
-declare     option_remove=false
-declare     option_simulate=false
-declare     status_busy=''
-declare     status_err=''
-declare     status_ok=''
+option_apps=false
+option_cat=false
+option_files=false
+option_gui=false
+option_remove=false
+option_simulate=false
+status_busy=''
+status_err=''
+status_ok=''
 
 
 ###############################################################################

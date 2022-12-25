@@ -7,45 +7,44 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-build'
-readonly program_desc='Pakket kz bouwen'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-build'
+program_desc='Pakket kz bouwen'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly usage="Gebruik: $display_name $options_usage"
-readonly help="Gebruik: $display_name [OPTIE...]
+usage="Gebruik: $display_name $options_usage"
+help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
 Opties:
 $options_help"
 
-readonly docs_repo=$HOME/kz-docs
-readonly scripts_repo=$HOME/kz-scripts
+docs_repo=$HOME/kz-docs
+scripts_repo=$HOME/kz-scripts
 
-readonly deb_repo=$HOME/kz-deb
-readonly deb_appdir=$deb_repo/app
-readonly deb_distdir=$deb_repo/dist
-readonly deb_name=kz_365_all.deb
+deb_repo=$HOME/kz-deb
+deb_appdir=$deb_repo/app
+deb_distdir=$deb_repo/dist
+deb_name=kz_365_all.deb
 
-readonly uploads_repo=$HOME/kz-uploads
-readonly uploads_appdir=$uploads_repo/app
-readonly uploads_distdir=$uploads_repo/dist
+uploads_repo=$HOME/kz-uploads
+uploads_appdir=$uploads_repo/app
+uploads_distdir=$uploads_repo/dist
 
-readonly -A uploads_sources=(
+declare -A uploads_sources=(
                 [app]=$uploads_appdir
                [docs]=$docs_repo
             [scripts]=$scripts_repo
             )
-readonly -A uploads_targets=(
+declare -A uploads_targets=(
                [dist]=$uploads_distdir
                 [deb]=$uploads_distdir/downloads/kz
                [docs]=$uploads_distdir/data/linux/documents
@@ -53,12 +52,12 @@ readonly -A uploads_targets=(
             [scripts]=$uploads_distdir/data/linux/scripts
             )
 
-readonly -A deb_sources=(
+declare -A deb_sources=(
                 [app]=$deb_appdir
                [docs]=$docs_repo
             [scripts]=$scripts_repo
             )
-readonly -A deb_targets=(
+declare -A deb_targets=(
                [dist]=$deb_distdir
               [build]=$deb_distdir/usr/local/etc
        [applications]=$deb_distdir/usr/share/applications

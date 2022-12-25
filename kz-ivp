@@ -7,21 +7,20 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-ivp'
-readonly program_desc='Scripts controleren'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-ivp'
+program_desc='Scripts controleren'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly usage="Gebruik: $display_name $options_usage"
-readonly help="Gebruik: $display_name [OPTIE...]
+usage="Gebruik: $display_name $options_usage"
+help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 

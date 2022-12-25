@@ -7,22 +7,21 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-ckname'
-readonly program_desc='Bestandsnamen controleren'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-ckname'
+program_desc='Bestandsnamen controleren'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly usage="Gebruik: $display_name $options_usage
+usage="Gebruik: $display_name $options_usage
                    [MAP...]"
-readonly help="Gebruik: $display_name [OPTIE...] [MAP...]
+help="Gebruik: $display_name [OPTIE...] [MAP...]
 
 $program_desc.
 
@@ -32,16 +31,16 @@ $options_help
 Argumenten:
   MAP            begin te controleren vanaf map MAP"
 
-declare -ir filename_maxlen=142
-readonly    start_dflt=$HOME
+start_dflt=$HOME
+declare -i filename_maxlen=142
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare     argument_map=false
-declare -a  map_arguments=()
+argument_map=false
+declare -a map_arguments=()
 
 
 ###############################################################################

@@ -7,24 +7,23 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-menu'
-readonly program_desc='Installatiemenu'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-menu'
+program_desc='Installatiemenu'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly options_short+='g'
-readonly options_long+=',gui'
-readonly usage="Gebruik: $display_name [-g|--gui]
+options_short+='g'
+options_long+=',gui'
+usage="Gebruik: $display_name [-g|--gui]
                  $options_usage"
-readonly help="Gebruik: $display_name [OPTIE...]
+help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -32,9 +31,9 @@ Opties:
   -g, --gui      start in grafische modus
 $options_help"
 
-readonly menu1_title=Installatiemenu
-readonly menu1_head="                  $menu1_title"
-readonly -a menu1_actions=(
+menu1_title=Installatiemenu
+menu1_head="                  $menu1_title"
+declare -a menu1_actions=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
         'Installatie afronden'
@@ -42,7 +41,7 @@ readonly -a menu1_actions=(
         'Opdrachtenmenu'
         'Stoppen'
     )
-readonly -a menu1_commands=(
+declare -a menu1_commands=(
     [1]='Checklist hoofdstuk 1'
         'Checklist hoofdstuk 2'
         'Checklist hoofdstuk 3'
@@ -50,11 +49,11 @@ readonly -a menu1_commands=(
         'Gebruikte opdrachten'
         'Menu verlaten'
     )
-readonly menu1_lines=${#menu1_actions[@]}
+menu1_lines=${#menu1_actions[@]}
 
-readonly menu2_title=Opdrachtenmenu
-readonly menu2_head="             $menu2_title"
-readonly -a menu2_actions=(
+menu2_title=Opdrachtenmenu
+menu2_head="             $menu2_title"
+declare -a menu2_actions=(
     [1]='Wifi-gegevens tonen'
         'Back-up maken'
         'Gebruikers toevoegen'
@@ -64,7 +63,7 @@ readonly -a menu2_actions=(
         'Apps instellen'
         'Terug'
     )
-readonly -a menu2_commands=(
+declare -a menu2_commands=(
     [1]='kz wifi'
         'kz backup'
         'Handmatig'
@@ -74,7 +73,7 @@ readonly -a menu2_commands=(
         'kz setup'
         'Vorig menu'
     )
-readonly menu2_lines=${#menu2_actions[@]}
+menu2_lines=${#menu2_actions[@]}
 
 
 ###############################################################################

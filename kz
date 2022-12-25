@@ -6,22 +6,21 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
+source "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz'
-readonly program_desc='Opdracht uitvoeren'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz'
+program_desc='Opdracht uitvoeren'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source "$program_path"/kz_common.sh
-
-readonly usage="Gebruik: $display_name OPDRACHT [ARG]
+usage="Gebruik: $display_name OPDRACHT [ARG]
      of: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
-readonly help="Gebruik: $display_name OPDRACHT [ARG]
+help="Gebruik: $display_name OPDRACHT [ARG]
      of: $display_name OPTIE
 
 $program_desc.

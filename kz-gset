@@ -7,28 +7,27 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+source  "$program_path"/kz_common.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly program_name='kz-gset'
-readonly program_desc='GUI wijzigen'
-readonly display_name=${program_name/kz-/kz }
+program_name='kz-gset'
+program_desc='GUI wijzigen'
+display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-readonly program_path
-source  "$program_path"/kz_common.sh
-
-readonly options_short+='a:b:d:lrf:x:'
-readonly options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
+options_short+='a:b:d:lrf:x:'
+options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
 addappfolder:,delappfolder:"
-readonly usage="Gebruik: $display_name [-a|--addfavaft=FAVORITE] \
+usage="Gebruik: $display_name [-a|--addfavaft=FAVORITE] \
 [-b|--addfavbef=FAVORITE]
                  [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
                  [-f|--addappfolder=appfolder] [-x|--delappfolder=appfolder]
                  $options_usage"
-readonly help="Gebruik: $display_name [OPTIE...]
+help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -53,19 +52,19 @@ $options_help"
 # Variables
 ###############################################################################
 
-declare appfolder=''
-declare config_a=''
-declare config_b=''
-declare desktopfile=''
-declare favorite_argument=''
-declare folder_argument=''
-declare option_addappfolder=false
-declare option_addfavaft=false
-declare option_addfavbef=false
-declare option_delappfolder=false
-declare option_delfav=false
-declare option_list=false
-declare option_resetfavs=false
+appfolder=''
+config_a=''
+config_b=''
+desktopfile=''
+favorite_argument=''
+folder_argument=''
+option_addappfolder=false
+option_addfavaft=false
+option_addfavbef=false
+option_delappfolder=false
+option_delfav=false
+option_list=false
+option_resetfavs=false
 
 
 ###############################################################################
