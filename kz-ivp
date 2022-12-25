@@ -16,7 +16,7 @@ readonly program_name='kz-ivp'
 readonly program_desc='Scripts controleren'
 readonly display_name=${program_name/kz-/kz }
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}:-program_path=$(realpath "$(dirname  "${0/#-/}")")}")")" && pwd)
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}:-$0}")")" && pwd)
 readonly program_path
 source  "$program_path"/kz_common.sh
 
