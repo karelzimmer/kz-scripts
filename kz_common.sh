@@ -207,6 +207,7 @@ function kz_common.init_script {
     if [[ -t 1 ]]; then
         set_terminal_attributes
     fi
+
     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
 --RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
