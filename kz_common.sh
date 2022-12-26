@@ -199,6 +199,10 @@ function kz_common.init_script {
     cmdline_args=("$@")
 
     log "started ($program_exec ${cmdline_args[*]} as $USER)" --priority=notice
+    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
+    logcmd_check="journalctl --all --boot \
+--identifier=${program_name:-$module_name} \
+--since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $logcmd
@@ -212,10 +216,6 @@ function kz_common.init_script {
 --RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
 h voor hulp of q om te stoppen)"
-    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
-    logcmd_check="journalctl --all --boot \
---identifier=${program_name:-$module_name} \
---since='$(date '+%Y-%m-%d %H:%M:%S')'"
     usageline="Typ '${display_name:-$module_name} --usage' voor meer \
 informatie."
 }
