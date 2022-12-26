@@ -104,6 +104,11 @@ function process_input {
                 check_record_length
                 check_shellcheck
                 ;;
+            kz_common.py)
+                check_tags
+                check_record_length
+                check_pycodestyle
+                ;;
             kz_common.sh)
                 check_tags
                 check_record_length
@@ -118,10 +123,16 @@ function process_input {
                 check_tags
                 check_record_length
                 check_code
+                run_code
                 ;;
         esac
     done
     cd "$HOME"
+}
+
+
+function run_code {
+    "$program_path/$script" --usage |& $logcmd
 }
 
 
@@ -131,8 +142,7 @@ function check_code {
     elif grep   --quiet                         \
                 --line-regexp                   \
                 --regexp='#!''/usr/bin/python3' \
-                "$script"                       || [[ $script = kz_common.py ]]
-    then
+                "$script"; then
         check_pycodestyle
     else
         err "
