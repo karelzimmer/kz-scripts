@@ -19,8 +19,8 @@ declare program_name='kz-setup'
 declare program_desc='Apps instellen'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]
-                  [-r|--reset] {--server] [-s|--simulate]
+declare usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files]
+                  [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
                   $options_usage
                   [APP...] [BESTAND...]"
 declare help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
