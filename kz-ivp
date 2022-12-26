@@ -8,19 +8,19 @@
 ###############################################################################
 
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source  "$program_path"/kz_common.sh
+source "$program_path"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-program_name='kz-ivp'
-program_desc='Scripts controleren'
-display_name=${program_name/kz-/kz }
+declare program_name='kz-ivp'
+declare program_desc='Scripts controleren'
+declare display_name=${program_name/kz-/kz }
 
-usage="Gebruik: $display_name $options_usage"
-help="Gebruik: $display_name [OPTIE...]
+declare usage="Gebruik: $display_name $options_usage"
+declare help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -40,8 +40,8 @@ declare -i maxrc=0
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
-    local       parsed=''
+    local -i getopt_rc=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \

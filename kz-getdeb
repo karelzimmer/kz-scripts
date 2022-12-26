@@ -7,7 +7,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
 logcmd="systemd-cat --identifier=$program_name"
 logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
@@ -35,12 +35,12 @@ fi
 # Constants
 ###############################################################################
 
-program_name='kz-getdeb'
-program_desc='Pakket kz installeren'
-display_name=${program_name/kz-/kz }
+declare program_name='kz-getdeb'
+declare program_desc='Pakket kz installeren'
+declare display_name=${program_name/kz-/kz }
 
-usage="Gebruik: $display_name $options_usage"
-help="Gebruik: $display_name [OPTIE...]
+declare usage="Gebruik: $display_name $options_usage"
+declare help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -58,8 +58,8 @@ $options_help"
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
-    local       parsed=''
+    local -i getopt_rc=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \

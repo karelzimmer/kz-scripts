@@ -8,21 +8,21 @@
 ###############################################################################
 
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source  "$program_path"/kz_common.sh
+source "$program_path"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-program_name='kz-restore'
-program_desc='Back-up terugzetten'
-display_name=${program_name/kz-/kz }
+declare program_name='kz-restore'
+declare program_desc='Back-up terugzetten'
+declare display_name=${program_name/kz-/kz }
 
-usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
+declare usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
 [-s|--source=BRONMAP]
                     $options_usage"
-help="Gebruik: $display_name [OPTIE...]
+declare help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -32,23 +32,23 @@ Opties:
   -s, --source=BRONMAP
                  gebruik back-up in de BRONMAP
 $options_help"
-options_short+='gs:'
-options_long+=',dry-run,gui,source:'
+declare options_short+='gs:'
+declare options_long+=',dry-run,gui,source:'
 
-target=$HOME
+declare target=$HOME
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-medium=''
-option_dry_run=''
-option_gui=false
-option_source=false
-source_argument=''
-source_medium=''
-source=''
+declare medium=''
+declare option_dry_run=''
+declare option_gui=false
+declare option_source=false
+declare source_argument=''
+declare source_medium=''
+declare source=''
 
 
 ###############################################################################
@@ -56,8 +56,8 @@ source=''
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
-    local       parsed=''
+    local -i getopt_rc=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -295,8 +295,8 @@ function restore_settings_favorite_apps {
 
 
 function term_script {
-    local       dev=''
-    local   -i  rc=0
+    local dev=''
+    local -i rc=0
 
     sync |& $logcmd || rc+=$?
     text=''

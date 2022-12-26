@@ -8,21 +8,21 @@
 ###############################################################################
 
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source  "$program_path"/kz_common.sh
+source "$program_path"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-program_name='kz-backup'
-program_desc='Back-up maken'
-display_name=${program_name/kz-/kz }
+declare program_name='kz-backup'
+declare program_desc='Back-up maken'
+declare display_name=${program_name/kz-/kz }
 
-usage="Gebruik: $display_name [--delete] [--dry-run] [-g|--gui] \
+declare usage="Gebruik: $display_name [--delete] [--dry-run] [-g|--gui] \
 [-t|--target=DOELMAP]
                    $options_usage"
-help="Gebruik: $display_name [OPTIE...]
+declare help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
@@ -34,25 +34,25 @@ Opties:
   -t, --target=DOELMAP
                  plaats back-up in de DOELMAP
 $options_help"
-options_short+='gt:'
-options_long+=',delete,dry-run,gui,target:'
+declare options_short+='gt:'
+declare options_long+=',delete,dry-run,gui,target:'
 
-source=$HOME
+declare source=$HOME
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-medium=''
-option_delete=''
-option_delete_excluded=''
-option_dry_run=''
-option_gui=false
-option_target=false
-target_argument=''
-target_medium=''
-target=''
+declare medium=''
+declare option_delete=''
+declare option_delete_excluded=''
+declare option_dry_run=''
+declare option_gui=false
+declare option_target=false
+declare target_argument=''
+declare target_medium=''
+declare target=''
 
 
 ###############################################################################
@@ -60,8 +60,8 @@ target=''
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
-    local       parsed=''
+    local -i getopt_rc=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -259,8 +259,8 @@ function backup_settings_user_photo {
 
 
 function create_backup {
-    local       exclude=''
-    local   -i  rsync_rc=0
+    local exclude=''
+    local -i rsync_rc=0
 
     exclude=$(mktemp -t "$program_name-XXXXXXXXXX")
 
@@ -346,8 +346,8 @@ $target."
 
 
 function term_script {
-    local       dev=''
-    local   -i  rc=0
+    local dev=''
+    local -i rc=0
 
     text='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
     if $option_gui; then

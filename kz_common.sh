@@ -11,47 +11,47 @@
 # Constants
 ###############################################################################
 
-module_name='kz_common.sh'
-module_desc='Algemene module voor shell scripts'
+declare module_name='kz_common.sh'
+declare module_desc='Algemene module voor shell scripts'
 
-ok=0
-err=1
+declare -i ok=0
+declare -i err=1
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-options_short='huv'
-options_long='help,usage,version'
-options_usage='[-h|--help] [-u|--usage] [-v|--version]'
-options_help="  -h, --help     toon deze hulptekst
+declare options_short='huv'
+declare options_long='help,usage,version'
+declare options_usage='[-h|--help] [-u|--usage] [-v|--version]'
+declare options_help="  -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
   -v, --version  toon de programmaversie"
 
-less_options=''
-logcmd_check=''
-logcmd=''
-option_gui=false
-option_help=false
-option_usage=false
-option_version=false
+declare less_options=''
+declare logcmd_check=''
+declare logcmd=''
+declare option_gui=false
+declare option_help=false
+declare option_usage=false
+declare option_version=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-program_exec=${0/#./$program_path}
-text=''
-title=''
+declare program_exec=${0/#./$program_path}
+declare text=''
+declare title=''
 declare -a cmdline_args=()
 
 # Terminalattributen, zie man terminfo.  Gebruik ${<variabele-naam>}.
-blink=''
-blue=''
-cursor_invisable=''
-cursor_visable=''
-green=''
-normal=''
-red=''
-rewrite_line=''
-yellow=''
+declare blink=''
+declare blue=''
+declare cursor_invisable=''
+declare cursor_visable=''
+declare green=''
+declare normal=''
+declare red=''
+declare rewrite_line=''
+declare yellow=''
 
 
 ###############################################################################
@@ -222,14 +222,14 @@ informatie."
 
 
 function signal {
-    local       signal=${1:-unknown}
-    local   -i  lineno=${2:-unknown}
-    local       function=${3:-unknown}
-    local       command=${4:-unknown}
-    local   -i  rc=${5:-$err}
-    local       rc_desc=''
-    local   -i  rc_desc_signalno=0
-    local       status="${red}$rc/err${normal}"
+    local signal=${1:-unknown}
+    local -i lineno=${2:-unknown}
+    local function=${3:-unknown}
+    local command=${4:-unknown}
+    local -i rc=${5:-$err}
+    local rc_desc=''
+    local -i rc_desc_signalno=0
+    local status="${red}$rc/err${normal}"
 
     case $rc in
         0)

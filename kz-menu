@@ -8,31 +8,31 @@
 ###############################################################################
 
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source  "$program_path"/kz_common.sh
+source "$program_path"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-program_name='kz-menu'
-program_desc='Installatiemenu'
-display_name=${program_name/kz-/kz }
+declare program_name='kz-menu'
+declare program_desc='Installatiemenu'
+declare display_name=${program_name/kz-/kz }
 
-usage="Gebruik: $display_name [-g|--gui]
+declare usage="Gebruik: $display_name [-g|--gui]
                  $options_usage"
-help="Gebruik: $display_name [OPTIE...]
+declare help="Gebruik: $display_name [OPTIE...]
 
 $program_desc.
 
 Opties:
   -g, --gui      start in grafische modus
 $options_help"
-options_short+='g'
-options_long+=',gui'
+declare options_short+='g'
+declare options_long+=',gui'
 
-menu1_title=Installatiemenu
-menu1_head="                  $menu1_title"
+declare menu1_title=Installatiemenu
+declare menu1_head="                  $menu1_title"
 declare -a menu1_actions=(
     [1]='Installatie voorbereiden'
         'Installatie uitvoeren'
@@ -49,10 +49,10 @@ declare -a menu1_commands=(
         'Gebruikte opdrachten'
         'Menu verlaten'
     )
-menu1_lines=${#menu1_actions[@]}
+declare menu1_lines=${#menu1_actions[@]}
 
-menu2_title=Opdrachtenmenu
-menu2_head="             $menu2_title"
+declare menu2_title=Opdrachtenmenu
+declare menu2_head="             $menu2_title"
 declare -a menu2_actions=(
     [1]='Wifi-gegevens tonen'
         'Back-up maken'
@@ -73,16 +73,16 @@ declare -a menu2_commands=(
         'kz setup'
         'Vorig menu'
     )
-menu2_lines=${#menu2_actions[@]}
+declare menu2_lines=${#menu2_actions[@]}
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-execute_command=false
+declare execute_command=false
 declare -a rows=()
-option_gui=false
+declare option_gui=false
 
 
 ###############################################################################
@@ -90,8 +90,8 @@ option_gui=false
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
-    local       parsed=''
+    local -i getopt_rc=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -395,9 +395,9 @@ function process_menu2_choice {
 
 
 function process_commands {
-    local       action=''
-    local       command=''
-    local   -i  row=0
+    local action=''
+    local command=''
+    local -i row=0
 
     if ! $option_gui; then
         clear -x
@@ -431,10 +431,10 @@ function process_commands {
 
 
 function show_commands_before_execution {
-    local       action=''
-    local       command=''
-    local   -i  row=0
-    local       prompt=''
+    local action=''
+    local command=''
+    local -i row=0
+    local prompt=''
 
     text='Het volgende wordt uitgevoerd:
 '
@@ -490,9 +490,9 @@ $prompt"
 
 
 function execute_command {
-    local   -i  cmd_rc=0
-    local       row=''
-    local       gui_option=''
+    local -i cmd_rc=0
+    local row=''
+    local gui_option=''
 
     if ! $option_gui; then
         clear -x
@@ -559,9 +559,9 @@ Er is bij het maken van de back-up geen gebruikersfoto gevonden."
 
 
 function show_commands_after_execution {
-    local       action=''
-    local       command=''
-    local   -i  row=0
+    local action=''
+    local command=''
+    local -i row=0
 
     text='Het volgende is uitgevoerd:
 '

@@ -8,23 +8,23 @@
 ###############################################################################
 
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source  "$program_path"/kz_common.sh
+source "$program_path"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-program_name='kz-install'
-program_desc='Apps installeren'
-display_name=${program_name/kz-/kz }
+declare program_name='kz-install'
+declare program_desc='Apps installeren'
+declare display_name=${program_name/kz-/kz }
 
-usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] \
+declare usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] \
 [-g|--gui]
                     [-r|--remove] [--server] [-s|--simulate]
                     $options_usage
                     [APP...] [BESTAND...]"
-help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
+declare help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
 
 $program_desc.
 
@@ -41,13 +41,17 @@ $options_help
 Argumenten:
   APP            opgegeven APPs installeren
   BESTAND        opgegeven BESTANDen verwerken"
-options_short+='acfgrs'
-options_long+=',apps,cat,files,gui,remove,server,simulate'
+declare options_short+='acfgrs'
+declare options_long+=',apps,cat,files,gui,remove,server,simulate'
 
+declare distro
 distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
+declare apps_file
 apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
+declare cmds_file
 cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
+declare sims_file
 sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
 
 
@@ -56,23 +60,23 @@ sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
 ###############################################################################
 
 declare -a app_arguments=()
-argument_app=false
-argument_file=false
-commands_found=false
-edition=desktop
-execute_commands=true
+declare argument_app=false
+declare argument_file=false
+declare commands_found=false
+declare edition=desktop
+declare execute_commands=true
 declare -a file_arguments=()
 declare -a files_to_process=()
 declare -i maxrc=0
-option_apps=false
-option_cat=false
-option_files=false
-option_gui=false
-option_remove=false
-option_simulate=false
-status_busy=''
-status_err=''
-status_ok=''
+declare option_apps=false
+declare option_cat=false
+declare option_files=false
+declare option_gui=false
+declare option_remove=false
+declare option_simulate=false
+declare status_busy=''
+declare status_err=''
+declare status_ok=''
 
 
 ###############################################################################
@@ -80,10 +84,10 @@ status_ok=''
 ###############################################################################
 
 function check_input {
-    local   -i  app_arg_num=0
-    local   -i  file_arg_num=0
-    local   -i  getopt_rc=0
-    local       parsed=''
+    local -i app_arg_num=0
+    local -i file_arg_num=0
+    local -i getopt_rc=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -159,11 +163,11 @@ function check_input {
 
 
 function process_input {
-    local       dfltfile_1=''
-    local       dfltfile_2=''
-    local       file_notfound=false
-    local   -i  file_num=0
-    local       file=''
+    local dfltfile_1=''
+    local dfltfile_2=''
+    local file_notfound=false
+    local -i file_num=0
+    local file=''
 
     # Verwerk argumenten.
     dfltfile_1=$program_path/$program_name-$distro-$edition.sh
@@ -228,9 +232,9 @@ function process_input {
 
 
 function process_argument_app {
-    local       app=''
-    local       file=''
-    local   -a  files=()
+    local app=''
+    local file=''
+    local -a files=()
 
     # Zoek naar beschikbare APPs in alle installatiebestanden.
     for file in "$program_path/$program_name-"*.sh; do
@@ -413,15 +417,15 @@ Om de verwerking van BESTANDen te simuleren voer uit: ${blue}$display_name \
 
 
 function process_cmds_file {
-    local       app_description=''
-    local       first_description_line=true
-    local       operation='installeren'
-    local       record=''
-    local       recordtype=''
-    local       write_app_description_line=true
-    local   -i    app_seq_num=0
-    local   -i    app_tot_num=0
-    local   -i  cmd_seq_num=0
+    local app_description=''
+    local first_description_line=true
+    local operation='installeren'
+    local record=''
+    local recordtype=''
+    local write_app_description_line=true
+    local -i   app_seq_num=0
+    local -i   app_tot_num=0
+    local -i cmd_seq_num=0
 
     app_tot_num=$(
         grep --word-regexp --regexp='^#1' --count "$cmds_file" || true
@@ -491,12 +495,12 @@ function process_app_description_record {
 
 
 function process_command_record {
-    local       cmd=${1:-unknown}
-    local       app_description_line=''
-    local   -i  cmd_rc=0
-    local   -i  desc_maxlen=1000
-    local       desc_printf=''
-    local       status=''
+    local cmd=${1:-unknown}
+    local app_description_line=''
+    local -i cmd_rc=0
+    local -i desc_maxlen=1000
+    local desc_printf=''
+    local status=''
 
     commands_found=true
     ((++cmd_seq_num))
@@ -549,9 +553,9 @@ function process_command_record {
 
 
 function execute_command {
-    local       cmd=${1:-unknown}
-    local   -i  cmd_rc=0
-    local       status=''
+    local cmd=${1:-unknown}
+    local -i cmd_rc=0
+    local status=''
 
     if ! $option_gui; then
         if [[ $cmd_seq_num -eq 1 ]]; then

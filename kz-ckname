@@ -8,20 +8,20 @@
 ###############################################################################
 
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source  "$program_path"/kz_common.sh
+source "$program_path"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-program_name='kz-ckname'
-program_desc='Bestandsnamen controleren'
-display_name=${program_name/kz-/kz }
+declare program_name='kz-ckname'
+declare program_desc='Bestandsnamen controleren'
+declare display_name=${program_name/kz-/kz }
 
-usage="Gebruik: $display_name $options_usage
+declare usage="Gebruik: $display_name $options_usage
                    [MAP...]"
-help="Gebruik: $display_name [OPTIE...] [MAP...]
+declare help="Gebruik: $display_name [OPTIE...] [MAP...]
 
 $program_desc.
 
@@ -31,7 +31,7 @@ $options_help
 Argumenten:
   MAP            begin te controleren vanaf map MAP"
 
-start_dflt=$HOME
+declare start_dflt=$HOME
 declare -i filename_maxlen=142
 
 
@@ -39,7 +39,7 @@ declare -i filename_maxlen=142
 # Variables
 ###############################################################################
 
-argument_map=false
+declare argument_map=false
 declare -a map_arguments=()
 
 
@@ -48,9 +48,9 @@ declare -a map_arguments=()
 ###############################################################################
 
 function check_input {
-    local   -i  getopt_rc=0
-    local   -i  map_arg_num=0
-    local       parsed=''
+    local -i getopt_rc=0
+    local -i map_arg_num=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -103,11 +103,11 @@ function process_input {
 
 
 function check_files {
-    local       basename
+    local basename
     local -i    count=0
-    local       dirname
-    local       file
-    local       good
+    local dirname
+    local file
+    local good
 
     # Het maakt niet uit of in de bestandsnaam speciale tekens voorkomen zoals
     # tab, spatie, enz.  Hiervoor zorgt de find met print0,en de read met IFS=
