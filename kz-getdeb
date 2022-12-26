@@ -7,7 +7,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
+program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 logcmd="systemd-cat --identifier=$program_name"
 logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
