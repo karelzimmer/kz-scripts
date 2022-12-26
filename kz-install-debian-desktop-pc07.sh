@@ -13,6 +13,10 @@ sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/'
 #2 sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
 #2 sudo sed --in-place --expression='s/^#iface eth0 net dhcp$/iface eth0 net dhcp/' /etc/network/interfaces.d/setup
 
+#1 adm (gebruiker toevoegen aan groep adm)
+sudo adduser "${SUDO_USER:-$USER}" adm
+#2 sudo deluser ${SUDO_USER:-$USER} adm
+
 #1 spice-vdagent (klembord delen tussen gastheer en gast)
 sudo apt-get install --yes spice-vdagent
 #2 sudo apt-get remove --yes spice-vdagent
