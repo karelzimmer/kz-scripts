@@ -189,6 +189,12 @@ function kz_common.init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
+
+    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
+    logcmd_check="journalctl --all --boot \
+--identifier=${program_name:-$module_name} \
+--since='$(date '+%Y-%m-%d %H:%M:%S')'"
+
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' err
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
     trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
@@ -199,10 +205,6 @@ function kz_common.init_script {
     cmdline_args=("$@")
 
     log "started ($program_exec ${cmdline_args[*]} as $USER)" --priority=notice
-    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
-    logcmd_check="journalctl --all --boot \
---identifier=${program_name:-$module_name} \
---since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $logcmd
