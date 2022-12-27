@@ -7,29 +7,11 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)
-logcmd="systemd-cat --identifier=$program_name"
-logcmd_check="journalctl --all --boot --identifier=$program_name \
---since='$(date '+%Y-%m-%d %H:%M:%S')'"
 temp_kz_common=$(mktemp -t 'kz_common.sh-XXXXXXXXXX')
-if ! wget   --no-verbose                                                \
-            --output-document="$temp_kz_common"                         \
-            'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'    \
-            &> >($logcmd); then
-    printf  '%s\n%s\n'                              \
-            'Downloaden kz_common.sh is mislukt.'   \
-            "Controleer de log in het Terminalvenster met de opdracht: \
-$logcmd_check"
-    exit 1
-fi
-if ! source "$temp_kz_common" &> >($logcmd); then
-    printf  '%s\n%s\n'                          \
-            'Inlezen kz_common.sh is mislukt.'  \
-            "Controleer de log in het Terminalvenster met de opdracht: \
-$logcmd_check"
-    exit 1
-fi
-
+wget    --no-verbose                        \
+        --output-document="$temp_kz_common" \
+        'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'
+source "$temp_kz_common"
 
 ###############################################################################
 # Constants
@@ -162,7 +144,6 @@ Voer uw wachtwoord in:'
                 )" | sudo --stdin true 2> >($logcmd); then
                 break
             else
-                clear -x
                 title='Fout'
                 text='Er is een fout opgetreden.
 
