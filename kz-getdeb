@@ -13,6 +13,7 @@ wget    --no-verbose                        \
         'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'
 source "$temp_kz_common"
 
+
 ###############################################################################
 # Constants
 ###############################################################################
@@ -270,7 +271,7 @@ function pull_repos {
                 "$bin_repo"                             2> >($logcmd); then
         cd "$bin_repo"
         printf  "%s\n" "Initial pull $(basename "$bin_repo")..."
-        # Remove well known line from output.
+        # Remove known line from output.
         git pull | sed '/Already up to date./d'
     fi
     info 'Pull repos (gitpull)...'
