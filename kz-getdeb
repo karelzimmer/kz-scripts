@@ -7,11 +7,8 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-temp_kz_common=$(mktemp -t 'kz_common.sh-XXXXXXXXXX')
-wget    --output-document="$temp_kz_common" \
-        'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'
-source "$temp_kz_common"
-
+source <(wget --output-document=- \
+        'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
 
 ###############################################################################
 # Constants
@@ -75,8 +72,8 @@ function check_input {
         exit $err
     fi
 
-    clear -x
     kz_common.check_on_ac_power
+    clear -x
     if ! kz_common.check_user_sudo; then
         term_script
     fi
