@@ -7,8 +7,8 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-source <(wget --output-document=- \
-        'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
+source <(wget   --output-document=- \
+                'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
 
 ###############################################################################
 # Constants
