@@ -33,7 +33,7 @@ Opties:
 
 Argumenten:
   OPDRACHT       uit te voeren opdracht
-  ARG            argumenten behorend bij OPDRACHT"
+  ARG            ARGumenten voor OPDRACHT"
 
 
 ###############################################################################
@@ -46,32 +46,47 @@ Argumenten:
 ###############################################################################
 
 function check_input {
-    # Geen getopt want opgegeven opties zijn voor OPDRACHT, niet voor kz.
+    # Hier geen getopt zoals in alle andere scripts, want eventueel opgegeven
+    # opties in ARG, met kz OPDRACHT ARG, zijn voor OPDRACHT en niet voor kz.
     if ! [[ "$*" ]]; then
-        info "$display_name:verplicht argument ontbreekt"
+        info "$display_name: verplicht argument ontbreekt"
         info "$usageline"
         exit $err
-    elif [[ $1 == -u* || $1 == --u* ]]; then
-        kz_common.process_option_usage
-        exit $ok
-    elif [[ $1 == -h* || $1 == --h* ]]; then
-        kz_common.process_option_help
-        exit $ok
-    elif [[ $1 == -v* || $1 == --v* ]]; then
-        kz_common.process_option_version
-        exit $ok
-    elif [[ $1 == -l* || $1 == --l* ]]; then
-        show_commands
-        exit $ok
-    elif ! [[ -f "$program_path/kz-$1" ]]; then
-        info "$display_name:opdracht '$1' bestaat niet"
+    fi
+    case $1 in
+        -u*|--u*)
+            kz_common.process_option_usage
+            exit $ok
+            ;;
+        -h*|--h*)
+            kz_common.process_option_help
+            exit $ok
+            ;;
+        -v*|--v*)
+            kz_common.process_option_version
+            exit $ok
+            ;;
+        -l*|--l*)
+            process_option_list
+            exit $ok
+            ;;
+        -*)
+            info "$display_name: onbekende optie '$1'"
+            info "$usageline"
+            exit $err
+            ;;
+        *)
+            ;;
+    esac
+    if ! [[ -f "$program_path/kz-$1" ]]; then
+        info "$display_name: opdracht '$1' bestaat niet"
         info "$usageline"
         exit $err
     fi
 }
 
 
-function show_commands {
+function process_option_list {
     info 'De volgende OPDRACHTen zijn beschikbaar:
 
      OPDRACHT'
