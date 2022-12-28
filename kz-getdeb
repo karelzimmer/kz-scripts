@@ -8,8 +8,7 @@
 ###############################################################################
 
 temp_kz_common=$(mktemp -t 'kz_common.sh-XXXXXXXXXX')
-wget    --no-verbose                        \
-        --output-document="$temp_kz_common" \
+wget    --output-document="$temp_kz_common" \
         'https://karelzimmer.nl/data/linux/scripts/kz_common.sh'
 source "$temp_kz_common"
 
