@@ -272,7 +272,7 @@ function pull_repos {
         git pull | sed '/Already up to date./d'
     fi
     info 'Pull repos (gitpull)...'
-    /home/"$USER"/bin/gitpull
+    "$bin_repo"/gitpull
 }
 
 
