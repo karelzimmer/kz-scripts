@@ -109,7 +109,7 @@ function install_package {
 
     # Installeer pakket kz.
     temp_deb=$(mktemp -t "$program_name-XXXXXXXXXX.deb")
-    wget --no-verbose --output-document="$temp_deb" $site_deb |& $logcmd
+    wget --output-document="$temp_deb" $site_deb |& $logcmd
     kz_common.check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \

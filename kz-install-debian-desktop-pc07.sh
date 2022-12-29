@@ -51,7 +51,7 @@ sudo snap install signal-desktop
 
 #1 webmin (browsergebaseerd beheer)
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
-wget --no-verbose --output-document=- 'http://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
+wget --output-document=- 'http://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update
 sudo apt-get install --yes webmin
 #2 sudo apt-get remove --yes webmin
