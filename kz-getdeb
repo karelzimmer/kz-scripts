@@ -7,9 +7,9 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-set -o errexit
-source <(wget -O- 'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
-
+source <(wget --output-document=- \
+              'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
+              
 
 ###############################################################################
 # Constants
@@ -281,6 +281,7 @@ function pull_repos {
 ###############################################################################
 
 function main {
+    set -o errexit # Stop executing in case downloading kz_common.sh has failed
     kz_common.init_script "$@"
     check_input "$@"
     process_input
