@@ -498,8 +498,7 @@ function err {
 
 
 {
-    # Anonymous function to avoid using the shellcheck directive
-    # disable=SC2034.
+    # Anonymous function to avoid using shellcheck directive disable=SC2034.
     echo "$blink"
     echo "$cursor_invisable"
     echo "$less_options"

@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck source=kz_common.sh
 ###############################################################################
 # Opdracht uitvoeren.
 #
