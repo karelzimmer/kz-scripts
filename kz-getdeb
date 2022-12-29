@@ -9,7 +9,7 @@
 
 source <(wget --output-document=- \
               'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
-              
+
 
 ###############################################################################
 # Constants
