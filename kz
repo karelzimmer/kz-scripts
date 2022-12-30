@@ -19,9 +19,9 @@ declare program_name='kz'
 declare program_desc='Opdracht uitvoeren'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name OPDRACHT [ARG]
+declare usage="Gebruik: $display_name OPDRACHT [ARGUMENT]
      of: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
-declare help="Gebruik: $display_name OPDRACHT [ARG]
+declare help="Gebruik: $display_name OPDRACHT [ARGUMENT]
      of: $display_name OPTIE
 
 $program_desc.
@@ -34,7 +34,7 @@ Opties:
 
 Argumenten:
   OPDRACHT       uit te voeren opdracht
-  ARG            ARGumenten voor OPDRACHT"
+  ARGUMENT       ARGUMENTen voor OPDRACHT"
 
 
 ###############################################################################
@@ -47,9 +47,9 @@ Argumenten:
 ###############################################################################
 
 function check_input {
-    # Hier geen getopt zoals in alle andere scripts, want eventueel opgegeven
-    # opties in ARG, met kz OPDRACHT ARG, zijn voor OPDRACHT en niet voor kz.
-    if ! [[ "$*" ]]; then
+    # Hier geen getopt zoals in alle andere scripts; eventuele opgegeven opties
+    # in ARGUMENT, met kz OPDRACHT ARGUMENT, zijn voor OPDRACHT, niet voor kz.
+    if [[ -z "$*" ]]; then
         info "$display_name: verplicht argument ontbreekt"
         info "$usageline"
         exit $err
