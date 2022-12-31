@@ -145,22 +145,36 @@ def process_options(program_name, program_desc, display_name):
     """
     Deze functie verwerkt de algemene opties.
     """
-    parser = argparse.ArgumentParser(prog=display_name,
-                                     description=program_desc + '.',
-                                     epilog="Typ 'man " + display_name +
-                                     "' voor meer informatie.")
-    parser.add_argument('-u', '--usage', action='store_true',
-                        help='toon een korte gebruikssamenvatting')
-    parser.add_argument('-v', '--version', action='store_true',
-                        help='toon programmaversie')
+    parser = argparse.ArgumentParser(prog=display_name, add_help=False)
+    parser.add_argument('-h', '--help', action='store_true')
+    parser.add_argument('-u', '--usage', action='store_true')
+    parser.add_argument('-v', '--version', action='store_true')
     args = parser.parse_args()
 
-    if args.usage:
+    if args.help:
+        process_option_help(display_name, program_desc)
+        sys.exit(ok)
+    elif args.usage:
         process_option_usage(display_name)
         sys.exit(ok)
     elif args.version:
         process_option_version(program_name)
         sys.exit(ok)
+
+def process_option_help(display_name, program_desc):
+    """
+    Deze functie toont de beschikbare hulp.
+    """
+    print(f"""Gebruik: {display_name} [OPTIE...]
+
+{program_desc}.
+
+Opties:
+  -h, --help     toon deze hulptekst
+  -u, --usage    toon een korte gebruikssamenvatting
+  -v, --version  toon de programmaversie
+
+Typ 'man {display_name}' voor meer informatie.""")
 
 
 def process_option_usage(display_name):
