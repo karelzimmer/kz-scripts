@@ -355,12 +355,12 @@ function set_terminal_attributes {
 function kz_common.process_options {
     while true; do
         case $1 in
-            -u|--usage)
-                option_usage=true
-                shift
-                ;;
             -h|--help)
                 option_help=true
+                shift
+                ;;
+            -u|--usage)
+                option_usage=true
                 shift
                 ;;
             -v|--version)

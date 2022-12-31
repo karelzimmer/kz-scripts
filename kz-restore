@@ -75,13 +75,13 @@ function check_input {
 
     while true; do
         case $1 in
+            --dry-run)
+                option_dry_run='--dry-run'
+                shift
+                ;;
             -g|--gui)
                 option_gui=true
                 kz_common.reset_terminal_attributes
-                shift
-                ;;
-            --dry-run)
-                option_dry_run='--dry-run'
                 shift
                 ;;
             -s|--source)

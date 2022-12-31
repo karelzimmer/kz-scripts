@@ -79,11 +79,6 @@ function check_input {
 
     while true; do
         case $1 in
-            -g|--gui)
-                option_gui=true
-                kz_common.reset_terminal_attributes
-                shift
-                ;;
             --delete)
                 option_delete='--delete'
                 option_delete_excluded='--delete-excluded'
@@ -91,6 +86,11 @@ function check_input {
                 ;;
             --dry-run)
                 option_dry_run='--dry-run'
+                shift
+                ;;
+            -g|--gui)
+                option_gui=true
+                kz_common.reset_terminal_attributes
                 shift
                 ;;
             -t|--target)
