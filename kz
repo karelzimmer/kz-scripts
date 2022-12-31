@@ -51,7 +51,7 @@ function check_input {
     # in ARGUMENT, met kz OPDRACHT ARGUMENT, zijn voor OPDRACHT, niet voor kz.
     if [[ -z "$*" ]]; then
         info "$display_name: verplicht argument ontbreekt"
-        info "$usageline"
+        info "$usage_line"
         exit $err
     fi
     case $1 in
@@ -73,7 +73,7 @@ function check_input {
             ;;
         -*)
             info "$display_name: onbekende optie '$1'"
-            info "$usageline"
+            info "$usage_line"
             exit $err
             ;;
         *)
@@ -81,7 +81,7 @@ function check_input {
     esac
     if ! [[ -f "$program_path/kz-$1" ]]; then
         info "$display_name: opdracht '$1' bestaat niet"
-        info "$usageline"
+        info "$usage_line"
         exit $err
     fi
 }

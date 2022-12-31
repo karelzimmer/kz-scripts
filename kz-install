@@ -93,7 +93,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
-        info "$usageline"
+        info "$usage_line"
         exit $err
     fi
     eval set -- "$parsed"
@@ -320,7 +320,7 @@ function process_dfltfiles {
         ((++file_num))
     else
         err "Geen bestanden gevonden voor $distro $edition."
-        info "$usageline"
+        info "$usage_line"
         exit $err
     fi
     if [[ -f $dfltfile_2 ]]; then
@@ -398,7 +398,7 @@ $(
             sed     --expression='s/^/[/'; then
         printf '%s\n' "     0 Geen bestanden aanwezig.
 
-$usageline"
+$usage_line"
     else
         printf '%s\n' "
 Om de BESTANDen te verwerken voer uit: ${blue}$display_name BESTAND...${normal}

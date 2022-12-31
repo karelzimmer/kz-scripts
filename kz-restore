@@ -67,7 +67,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
-        info "$usageline"
+        info "$usage_line"
         exit $err
     fi
     eval set -- "$parsed"
@@ -101,7 +101,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         info "$display_name:geen argumenten toegestaan"
-        info "$usageline"
+        info "$usage_line"
         exit $err
     fi
 }
@@ -114,7 +114,7 @@ function process_input {
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
             info "Map $source_argument bestaat niet."
-            info "$usageline"
+            info "$usage_line"
             exit $err
         fi
         source=$source_argument/backup-$HOSTNAME-$USER

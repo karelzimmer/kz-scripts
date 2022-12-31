@@ -29,6 +29,7 @@ declare options_help="  -h, --help     toon deze hulptekst
   -u, --usage    toon een korte gebruikssamenvatting
   -v, --version  toon de programmaversie"
 
+declare -a cmdline_args=()
 declare less_options=''
 declare logcmd_check=''
 declare logcmd=''
@@ -40,7 +41,7 @@ declare option_version=false
 declare program_exec=${0/#./$program_path}
 declare text=''
 declare title=''
-declare -a cmdline_args=()
+declare usage_line=''
 
 # Terminalattributen, zie man terminfo.  Gebruik ${<variabele-naam>}.
 declare blink=''
@@ -218,7 +219,7 @@ function kz_common.init_script {
 --RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
 h voor hulp of q om te stoppen)"
-    usageline="Typ '${display_name:-$module_name} --usage' voor meer \
+    usage_line="Typ '${display_name:-$module_name} --usage' voor meer \
 informatie."
 }
 
@@ -392,14 +393,14 @@ function kz_common.process_options {
 function kz_common.process_option_help {
     info "${help:-Variable help not set}
 
-Typ 'man $display_name' voor meer informatie."
+Typ 'man ${display_name:-$module_name}' voor meer informatie."
 }
 
 
 function kz_common.process_option_usage {
     info "${usage:-Variable usage not set}
 
-Typ '$display_name --help' voor meer informatie."
+Typ '${display_name:-$module_name} --help' voor meer informatie."
 }
 
 
@@ -444,7 +445,7 @@ function log {
 
 
 function info {
-    local title="Informatie $display_name"
+    local title="Informatie ${display_name:-$module_name}"
 
     if $option_gui; then
         zenity  --info                  \
@@ -462,7 +463,7 @@ function info {
 
 
 function warn {
-    local title="Waarschuwing $display_name"
+    local title="Waarschuwing ${display_name:-$module_name}"
 
     if $option_gui; then
         zenity  --warning               \
@@ -480,7 +481,7 @@ function warn {
 
 
 function err {
-    local title="Foutmelding $display_name"
+    local title="Foutmelding ${display_name:-$module_name}"
 
     if $option_gui; then
         zenity  --error                 \
@@ -510,7 +511,7 @@ function err {
     echo "$options_usage"
     echo "$rewrite_line"
     echo "$text"
-    echo "$usageline"
+    echo "$usage_line"
 } > /dev/null
 
 
