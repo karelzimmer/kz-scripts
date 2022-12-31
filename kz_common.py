@@ -150,7 +150,7 @@ def process_options(program_name, program_desc, display_name):
     parser.add_argument('-u', '--usage', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
     args = parser.parse_args()
-
+    
     if args.help:
         process_option_help(display_name, program_desc)
         sys.exit(ok)
