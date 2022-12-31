@@ -145,7 +145,10 @@ def process_options(program_name, program_desc, display_name):
     """
     Deze functie verwerkt de algemene opties.
     """
-    parser = argparse.ArgumentParser(prog=display_name, add_help=False)
+    usage_line = f"typ '{display_name} --usage' voor meer informatie"
+
+    parser = argparse.ArgumentParser(prog=display_name, add_help=False,
+                                     usage=usage_line)
     parser.add_argument('-h', '--help', action='store_true')
     parser.add_argument('-u', '--usage', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
