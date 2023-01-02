@@ -131,11 +131,6 @@ function process_input {
 }
 
 
-function run_code {
-    "$program_path/$script" --usage |& $logcmd
-}
-
-
 function check_code {
     if grep --quiet --line-regexp --regexp='#!''/bin/bash' "$script"; then
         check_shellcheck
@@ -271,6 +266,11 @@ $(
 "
         maxrc=$err
     fi
+}
+
+
+function run_code {
+    "$program_path/$script" --usage |& $logcmd
 }
 
 
