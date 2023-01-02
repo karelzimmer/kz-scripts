@@ -51,6 +51,9 @@ function check_input {
     # in ARGUMENT, met kz OPDRACHT ARGUMENT, zijn voor OPDRACHT, niet voor kz.
     if [[ -z "$*" ]]; then
         info "$display_name: verplicht argument ontbreekt"
+        info
+        process_option_list
+        info
         info "$usage_line"
         exit $err
     fi
