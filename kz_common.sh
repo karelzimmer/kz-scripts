@@ -192,7 +192,7 @@ function kz_common.init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
-    log "started ($program_exec ${cmdline_args[*]} as $USER)" --priority=notice
+    log "started ($program_exec $* as $USER)" --priority=notice
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $logcmd
