@@ -422,11 +422,13 @@ function process_commands {
     if ! $option_gui; then
         clear -x
     fi
-    if [[ ${#rows[@]} -gt 1 ]]; then
+    if $execute_command && [[ ${#rows[@]} -gt 1 ]]; then
         show_commands_after_execution
     fi
-    check_setup_logout
-    check_install_reboot
+    if $execute_command; then
+        check_setup_logout
+        check_install_reboot
+    fi
 }
 
 
