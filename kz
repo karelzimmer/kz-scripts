@@ -28,9 +28,7 @@ $program_desc.
 
 Opties:
   -l, --list     toon beschikbare OPDRACHTen
-  -h, --help     toon deze hulptekst
-  -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon programmaversie
+$options_help
 
 Argumenten:
   OPDRACHT       uit te voeren opdracht
