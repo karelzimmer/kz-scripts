@@ -150,36 +150,25 @@ function kz_common.check_user_sudo {
 
 function kz_common.developer {
     local action=${1:-check}
-    local user_name_karel=''
-    local user_name_live=''
+    local user_name=''
 
     if [[ $action = 'check' ]]; then
         # Aangemeld als ontwikkelaar?
-        user_name_karel=$(
+        user_name=$(
             getent passwd karel             |
             cut --delimiter=':' --fields=5  |
             cut --delimiter=',' --fields=1  || true
             )
-        user_name_live=$(
-            getent passwd user              |
-            cut --delimiter=':' --fields=5  |
-            cut --delimiter=',' --fields=1  || true
-            )
-        if  [[  $HOSTNAME           == pc??     &&
-                $USER               = 'karel'   &&
-                $user_name_karel    = 'Karel Zimmer' ]]; then
-            return $ok
-        elif  [[    $HOSTNAME       = 'debian'  &&
-                    $USER           = 'user'    &&
-                    $user_name_live = 'Debian Live user' ]]; then
+        if  [[  $HOSTNAME   == pc??     &&
+                $USER       = 'karel'   &&
+                $user_name  = 'Karel Zimmer' ]]; then
             return $ok
         else
             return $err
         fi
     else
         printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
-karel met gebruikersnaam 'Karel Zimmer' op pc??, of aangemeld als user met \
-gebruikersnaam 'Debian Live user' op debian."
+karel met gebruikersnaam 'Karel Zimmer' op pc??."
     fi
 }
 
