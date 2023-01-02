@@ -203,8 +203,6 @@ function kz_common.init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
-    cmdline_args=("$@")
-
     log "started ($program_exec ${cmdline_args[*]} as $USER)" --priority=notice
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
@@ -215,6 +213,7 @@ function kz_common.init_script {
         set_terminal_attributes
     fi
 
+    cmdline_args=("$@")
     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
 --RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
