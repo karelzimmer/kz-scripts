@@ -430,9 +430,9 @@ function process_cmds_file {
     if $option_simulate; then
         operation+=' simuleren'
     else
-        status_busy="[${blink}${yellow}Werk${normal}]"
-        status_err="[${red}Fout${normal}]"
-        status_ok="[${green}Goed${normal}]"
+        status_busy="[${blink}${yellow}werk${normal}]"
+        status_err="[${red}fout${normal}]"
+        status_ok="[${green}goed${normal}]"
         printf '%s' "${cursor_invisable}"
     fi
 
@@ -505,7 +505,7 @@ function process_command_record {
         else
             # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
             #  <--------------- tput cols --------------->
-            # '[WERK] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
+            # '[werk] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
             #  <------- 20 ------->                    <3>
             desc_maxlen=$(($(tput cols) - 20))
             if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
