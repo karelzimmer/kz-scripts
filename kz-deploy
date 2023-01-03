@@ -86,10 +86,15 @@ function check_input {
 
 
 function process_input {
+    info '* CHECK *'
     check_names
     check_scripts
+    info '
+* DEPLOY *'
     build_package
     upload_website
+    info '
+* INSTALL *'
     install_package
 }
 
