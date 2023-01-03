@@ -7,7 +7,7 @@
 ###############################################################################
 
 #1 updates (bijgewerkte apps en systeembestanden)
-sudo kz-update
+sudo kz update
 
 #1-all-repos (alle repositories inschakelen)
 sudo apt-add-repository contrib
