@@ -72,10 +72,6 @@ sudo apt-get install --yes mlocate
 sudo apt-get install --yes nautilus-admin
 #2 sudo apt-get remove --yes nautilus-admin
 
-#1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
-sudo apt-get install --yes pinfo
-#2 sudo apt-get remove --yes pinfo
-
 #1 plex (mediaspeler)
 ## Snap plex-htpc is de mediaspeler voor de Linux-computer die is aangesloten op het grote scherm.
 ## Een Home Theater PC (HTPC) is een computer die fungeert als multimediacentrum in huis.

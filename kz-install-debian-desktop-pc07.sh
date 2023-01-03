@@ -41,10 +41,6 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
 
-#1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
-sudo apt-get install --yes pinfo
-#2 sudo apt-get remove --yes pinfo
-
 #1 signal (privéberichtenapp)
 sudo snap install signal-desktop
 #2 sudo snap remove signal-desktop

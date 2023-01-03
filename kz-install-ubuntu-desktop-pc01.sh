@@ -27,10 +27,6 @@ sudo passwd --delete gast
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
 
-#1 pinfo (gebruiksvriendelijke viewer voor Info-documenten)
-sudo apt-get install --yes pinfo
-#2 sudo apt-get remove --yes pinfo
-
 #1 ssh (veilige shell-client en server)
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
