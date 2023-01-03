@@ -14,10 +14,6 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #2 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 #2 sudo systemctl enable --now apport.service
 
-#1-info (GNU Info documentatie weergever)
-sudo apt-get remove --yes info
-#2 sudo apt-get install --yes info
-
 #1 updates (bijgewerkte apps en systeembestanden)
 sudo kz-update
 
