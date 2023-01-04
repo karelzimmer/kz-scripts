@@ -30,18 +30,17 @@ in de Vaak gebruikt-weergave en Alles-weergave;
 .br
 na het klikken op de rasterknop in de favorietenbalk (dash/dock).
 .sp
-Met optie \fB-a\fR, \fB--addfavaft\fR wordt een toepassingspictogram (favoriet)
-toegevoegd aan het einde van de favorietenbalk (dash/dock).
+Met optie \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR wordt toepassingspictogram
+(favoriet) \fIFAVORITE\fR toegevoegd aan het einde van de favorietenbalk
+(dash/dock).
 .sp
-Met optie \fB-b\fR, \fB--addfavbef\fR wordt een toepassingspictogram
-(favoriet) toegevoegd aan het begin van de favorietenbalk (dash/dock).
+Met optie \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR wordt toepassingspictogram
+(favoriet) \fIFAVORITE\fR toegevoegd aan het begin van de favorietenbalk
+(dash/dock).
 .sp
-Met optie \fB-d\fR, \fB--delfav\fR wordt een toepassingspictogram (favoriet)
-verwijderd uit de favorietenbalk (dash/dock).
+Met optie \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR wordt toepassingspictogram
+(favoriet) \fIFAVORITE\fR verwijderd uit de favorietenbalk (dash/dock).
 .sp
-Als één van deze opties wordt gebruikt moet ook argument \fIFAVORITE\fR (e.g.
-google-chrome) meegegeven worden.
-.br
 Als er al een toepassingspictogram (favoriet) van \fIFAVORITE\fR bestaat
 wordt deze niet opnieuw toegevoegd.
 .br
@@ -58,12 +57,11 @@ getoond.
 Met optie \fB-r\fR, \fB--resetfavs\fR wordt de favorietenbalk (dash/dock)
 teruggezet met standaard favorieten.
 .sp
-Met optie \fB-f\fR, \fB--addappfolder\fR wordt een appfolder toegevoegd.
+Met optie \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR wordt appfolder
+\fIAPPFOLDER\fR toegevoegd.
 .sp
-Met optie \fB-x\fR, \fB--delfavappfolder\fR wordt een appfolder verwijderd.
-.sp
-Als één van deze opties wordt gebruikt moet ook argument \fIAPPFOLDER\fR
-meegegeven worden.
+Met optie \fB-x\fR, \fB--delfavappfolder\fR=\fIAPPFOLDER\fR wordt appfolder
+\fIAPPFOLDER\fR verwijderd.
 .sp
 Als er geen opties zijn opgegeven toont \fBkz gset\fR wijzigingen in de
 configuratiedatabase na een wijziging in de grafische werkomgeving (GUI).
@@ -105,22 +103,22 @@ wat er gewijzigd moet worden:
 .\"
 .SH OPTIES
 .TP
-\fB-a\fR, \fB--addfavaft=\fIFAVORITE\fR
+\fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR
 Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe achteraan de
 favorietenbalk (dash/dock).
 .TP
-\fB-b\fR, \fB--addfavbef=\fIFAVORITE\fR
+\fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR
 Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe vooraan de
 favorietenbalk (dash/dock).
 .TP
-\fB-d\fR, \fB--delfav=\fIFAVORITE\fR
+\fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR
 Verwijder toepassingspictogram (favoriet) \fIFAVORITE\fR uit de
 favorietenbalk (dash/dock).
 .TP
-\fB-f\fR, \fB--addappfolder=\fIAPPFOLDER\fR
+\fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR
 voeg appfolder APPFOLDER toe.
 .TP
-\fB-x\fR, \fB--removeappfolder=\fIAPPFOLDER\fR
+\fB-x\fR, \fB--removeappfolder\fR=\fIAPPFOLDER\fR
 Verwijder appfolder APPFOLDER.
 .TP
 \fB-u\fR, \fB--usage\fR
