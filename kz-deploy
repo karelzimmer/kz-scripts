@@ -90,8 +90,10 @@ function process_input {
     check_names
     check_scripts
     info '
-* DEPLOY *'
+* BUILD *'
     build_package
+    info '
+* DEPLOY *'
     upload_website
     info '
 * INSTALL *'
