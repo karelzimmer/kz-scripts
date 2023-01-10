@@ -8,7 +8,7 @@
 ###############################################################################
 
 set -o errexit
-source <(wget -O- 'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
+source <(wget -qO- 'https://karelzimmer.n/data/linux/scripts/kz_common.sh')
 
 
 ###############################################################################
