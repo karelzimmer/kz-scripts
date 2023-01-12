@@ -16,5 +16,5 @@ Comment[nl]=Toon wifi-gegevens
 Keywords=wifi;network;
 Keywords[nl]=wifi;netwerk;
 Categories=KZ Scripts;
-Exec=kz-wifi
+Exec=kz-wifi --gui
 Icon=kz-wifi
