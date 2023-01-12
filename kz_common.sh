@@ -150,25 +150,17 @@ function kz_common.check_user_sudo {
 
 function kz_common.developer {
     local action=${1:-check}
-    local user_name=''
 
     if [[ $action = 'check' ]]; then
         # Aangemeld als ontwikkelaar?
-        user_name=$(
-            getent passwd karel             |
-            cut --delimiter=':' --fields=5  |
-            cut --delimiter=',' --fields=1  || true
-            )
-        if  [[  $HOSTNAME   == pc??     &&
-                $USER       = 'karel'   &&
-                $user_name  = 'Karel Zimmer' ]]; then
+        if  [[ $USER = 'karel' && $HOSTNAME == pc?? ]]; then
             return $ok
         else
             return $err
         fi
     else
         printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
-karel met gebruikersnaam 'Karel Zimmer' op pc??."
+karel op pc??."
     fi
 }
 
