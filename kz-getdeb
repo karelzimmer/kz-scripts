@@ -200,6 +200,7 @@ function check_dependencies {
     info '* Controleer afhankelijkheden...'
     # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
     kz_common.check_dpkgd_snapd
+    # Remove known line from output.
     sudo    apt-get             \
             install             \
             --yes               \
@@ -215,7 +216,7 @@ function check_dependencies {
             python3-autopep8    \
             python3-pip         \
             python-is-python3   \
-            w3c-linkchecker
+            w3c-linkchecker     | sed '/ is reeds de nieuwste versie /d'
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian pakket is oud, snap is nieuwer.
