@@ -181,7 +181,7 @@ function upload_website {
 
 function install_package {
     info '* Installeer pakket kz (kz getdeb)...'
-    if ! wget -qO- karelzimmer.nl/kz | bash; then
+    if ! wget -O- karelzimmer.nl/kz 2> >($logcmd) | bash; then
         err 'Installeren pakket kz is niet uitgevoerd.'
         exit $err
     fi
