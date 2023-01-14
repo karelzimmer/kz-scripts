@@ -107,7 +107,7 @@ function check_names {
     local docs_repo=$HOME/kz-docs
     local app_uploads_repo=$HOME/kz-uploads/app
 
-    info '* Controleer bestandsnamen (kz ckname)...'
+    info '* controleer bestandsnamen (kz ckname)...'
     log "Check filenames with kz ckname."
     "$scripts_repo"/kz ckname   "$scripts_repo"     \
                                 "$docs_repo"        \
@@ -124,7 +124,7 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 function check_scripts {
     local -i check_rc=0
 
-    info '* Controleer scripts (kz ivp)...'
+    info '* controleer scripts (kz ivp)...'
     log "Check scripts with kz ivp."
     "$scripts_repo"/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
@@ -138,7 +138,7 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 function build_package {
     local -i check_rc=0
 
-    info '* Bouw pakket en website (kz build)...'
+    info '* bouw pakket en website (kz build)...'
     log "Build package and website with kz build."
     "$scripts_repo"/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
@@ -160,7 +160,7 @@ function upload_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info '* Upload website (lftp)...'
+    info '* upload website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         read -rsp "Wachtwoord voor 'ftp://$ftp_host': "
         info "$REPLY" > "$ftp_login"
@@ -180,7 +180,7 @@ function upload_website {
 
 
 function install_package {
-    info '* Installeer pakket kz (kz getdeb)...'
+    info '* installeer pakket kz (kz getdeb)...'
     if ! wget -O- karelzimmer.nl/kz 2> >($logcmd) | bash; then
         err 'Installeren pakket kz is niet uitgevoerd.'
         exit $err

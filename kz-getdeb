@@ -189,7 +189,7 @@ Typ 'exit' om dit venster te sluiten."
         check_dependencies
         download_website
         pull_repos
-        info '* Status repos (gitstat)...'
+        info '* status repos (gitstat)...'
         /home/"$USER"/bin/gitstat
     fi
     exit $ok
@@ -197,7 +197,7 @@ Typ 'exit' om dit venster te sluiten."
 
 
 function check_dependencies {
-    info '* Controleer afhankelijkheden...'
+    info '* controleer afhankelijkheden...'
     # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
     kz_common.check_dpkgd_snapd
     # Remove known line from output.
@@ -238,7 +238,7 @@ function download_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info '* Download website (lftp)...'
+    info '* download website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.
         read -rsp "Wachtwoord voor 'ftp://$ftp_host': " < /dev/tty
@@ -268,11 +268,11 @@ function pull_repos {
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             2> >($logcmd); then
         cd "$bin_repo"
-        printf  "%s\n" "* Initial pull $(basename "$bin_repo")..."
+        printf  "%s\n" "* initial pull $(basename "$bin_repo")..."
         # Remove known line from output.
         git pull | sed '/Already up to date./d'
     fi
-    info '* Pull repos (gitpull)...'
+    info '* pull repos (gitpull)...'
     "$bin_repo"/gitpull
 }
 

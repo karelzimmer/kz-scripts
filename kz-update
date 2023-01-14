@@ -60,7 +60,7 @@ def perform_update():
 
 
 def perform_command(command):
-    print(f'* Uitvoeren {command}...')
+    print(f'* {command}...')
     kz_common.check_dpkgd_snapd()
     try:
         subprocess.run(f'sudo {command}', shell=True, check=True)
@@ -72,7 +72,7 @@ def perform_command(command):
 
 
 def snap_refresh():
-    print('* Uitvoeren snap refresh...')
+    print('* snap refresh...')
     kz_common.check_dpkgd_snapd()
     try:
         subprocess.run('sudo snap refresh', shell=True, check=True)
@@ -103,7 +103,7 @@ while read name ver rev trk pub notes; do \
     fi \
 done'
 
-    print('* Uitvoeren snap cleanup...')
+    print('* snap cleanup...')
     try:
         subprocess.run({cmd}, shell=True, check=True, executable='/bin/bash')
     except Exception as ex:
