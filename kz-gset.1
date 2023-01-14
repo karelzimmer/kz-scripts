@@ -18,28 +18,28 @@ kz-gset \- GUI wijzigen.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz gset\fR toont wijzigingen in de configuratiedatabase na aanpassingen in
-de grafische werkomgeving (GUI) op Debian en op Debian gebaseerd systeem zoals
-Ubuntu.
+\fBkz gset\fR helpt bij het wijzigen van de grafische werkomgeving (GUI) op
+Debian en op Debian gebaseerd systeem zoals Ubuntu.
+.sp
+\fBkz gset\fR:
+.RS
+- toont wijzigingen in de configuratiedatabase,
 .br
-kan een toepassingspictogram (favoriet) toevoegen aan de favorietenbalk (aka
-dash of dock), en
+- kan een toepassingspictogram (favoriet) toevoegen, en
 .br
-kan een appfolder toevoegen om starters te verzamelen, bijvoorbeeld KZ Scripts,
-in de Vaak gebruikt-weergave en Alles-weergave;
-.br
-na het klikken op de rasterknop in de favorietenbalk (dash/dock).
+- kan een appfolder toevoegen om starters te verzamelen.
+.RE
 .sp
 Met optie \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR wordt toepassingspictogram
 (favoriet) \fIFAVORITE\fR toegevoegd aan het einde van de favorietenbalk
-(dash/dock).
+(dash, dock).
 .sp
 Met optie \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR wordt toepassingspictogram
 (favoriet) \fIFAVORITE\fR toegevoegd aan het begin van de favorietenbalk
-(dash/dock).
+(dash, dock).
 .sp
 Met optie \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR wordt toepassingspictogram
-(favoriet) \fIFAVORITE\fR verwijderd uit de favorietenbalk (dash/dock).
+(favoriet) \fIFAVORITE\fR verwijderd uit de favorietenbalk (dash, dock).
 .sp
 Als er al een toepassingspictogram (favoriet) van \fIFAVORITE\fR bestaat
 wordt deze niet opnieuw toegevoegd.
@@ -54,7 +54,7 @@ zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten en appfolders
 getoond.
 .sp
-Met optie \fB-r\fR, \fB--resetfavs\fR wordt de favorietenbalk (dash/dock)
+Met optie \fB-r\fR, \fB--resetfavs\fR wordt de favorietenbalk (dash, dock)
 teruggezet met standaard favorieten.
 .sp
 Met optie \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR wordt appfolder
@@ -105,15 +105,15 @@ wat er gewijzigd moet worden:
 .TP
 \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR
 Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe achteraan de
-favorietenbalk (dash/dock).
+favorietenbalk (dash, dock).
 .TP
 \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR
 Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe vooraan de
-favorietenbalk (dash/dock).
+favorietenbalk (dash, dock).
 .TP
 \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR
 Verwijder toepassingspictogram (favoriet) \fIFAVORITE\fR uit de
-favorietenbalk (dash/dock).
+favorietenbalk (dash, dock).
 .TP
 \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR
 voeg appfolder \fIAPPFOLDER\fR toe.
@@ -146,7 +146,7 @@ werkomgeving (GUI).
 .sp
 \fBkz gset --addfavbef=idle\fR
 .RS
-Voeg de IDLE (Python’s Integrated Development and Learning Environment)
+Voeg de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
 idle.desktop moet bestaan in een van de applicatiemappen
 zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
@@ -154,7 +154,7 @@ zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .sp
 \fBkz gset --delfav=idle\fR
 .RS
-Verwijder de IDLE (Python’s Integrated Development and Learning Environment)
+Verwijder de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) uit de favorietenbalk.
 .RE
 .\"
