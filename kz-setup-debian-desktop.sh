@@ -10,10 +10,6 @@
 kz-gset --addfavaft=bitwarden_bitwarden
 #2 kz-gset --delfav=bitwarden_bitwarden
 
-#1 citrix (telewerken)
-## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
-xdg-mime default wfica.desktop application/x-ica
-
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
@@ -33,14 +29,6 @@ kz-gset --addfavaft=skype_skypeforlinux
 #1 spotify (muziekspeler)
 kz-gset --addfavaft=spotify_spotify
 #2 kz-gset --delfav=spotify_spotify
-
-#1 teams (samenwerken)
-kz-gset --addfavaft=teams_teams
-#2 kz-gset --delfav=teams_teams
-
-#1 zoom (samenwerken)
-kz-gset --addfavaft=zoom-client_zoom-client
-#2 kz-gset --delfav=zoom-client_zoom-client
 
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder --folder='KZ Scripts'

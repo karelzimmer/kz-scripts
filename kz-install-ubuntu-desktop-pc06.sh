@@ -96,6 +96,11 @@ sudo systemctl restart ssh.service
 sudo apt-get install --yes gnome-sushi
 #2 sudo apt-get remove --yes gnome-sushi
 
+#1 teams (samenwerken)
+## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
+sudo snap install teams
+#2 sudo snap remove teams
+
 #1 tree (mappenboom)
 sudo apt-get install --yes tree
 #2 sudo apt-get remove --yes tree

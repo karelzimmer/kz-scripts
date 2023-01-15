@@ -41,3 +41,7 @@ sudo apt-get install --yes gufw
 sudo ufw allow ssh
 sudo ufw enable
 #2 sudo ufw disable
+
+#1 zoom (samenwerken)
+sudo snap install zoom-client
+#2 sudo snap remove zoom-client

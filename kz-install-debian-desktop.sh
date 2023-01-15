@@ -25,15 +25,6 @@ sudo apt-get install --yes bash-completion
 sudo snap install bitwarden
 #2 sudo snap remove bitwarden
 
-#1 citrix (telewerken)
-## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
-wget --output-document=/tmp/icaclient.deb "https://karelzimmer.nl/downloads/citrix/icaclient_20.04.0.21_amd64.deb"
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb
-sudo ln --symbolic --force /usr/share/ca-certificates/mozilla/* /opt/Citrix/ICAClient/keystore/cacerts
-sudo c_rehash /opt/Citrix/ICAClient/keystore/cacerts
-rm /tmp/icaclient.deb
-#2 sudo apt-get remove --yes icaclient
-
 #1 cups (printsysteem)
 sudo apt-get install --yes cups
 #2 sudo apt-get remove --yes cups
@@ -73,11 +64,6 @@ sudo snap install --classic skype
 sudo snap install spotify
 #2 sudo snap remove spotify
 
-#1 teams (samenwerken)
-## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
-sudo snap install teams
-#2 sudo snap remove teams
-
 #1 teamviewer (afstandsbediening)
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
@@ -97,7 +83,3 @@ sudo apt-get install --yes thunderbird-l10n-nl
 #1 vlc (mediaspeler)
 sudo snap install vlc
 #2 sudo snap remove vlc
-
-#1 zoom (samenwerken)
-sudo snap install zoom-client
-#2 sudo snap remove zoom-client

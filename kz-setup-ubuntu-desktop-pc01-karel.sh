@@ -28,3 +28,7 @@ xdg-mime default code_code.desktop text/html                    # Web-pagina
 xdg-mime default code_code.desktop text/markdown                # Markdown document
 xdg-mime default code_code.desktop text/troff                   # Man-pagina
 #2 kz-gset --delfav=code_code
+
+#1 zoom (samenwerken)
+kz-gset --addfavaft=zoom-client_zoom-client
+#2 kz-gset --delfav=zoom-client_zoom-client
