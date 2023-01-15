@@ -75,7 +75,3 @@ sudo apt-key del 0C1289C0 DEB49217
 #1 thunderbird (e-mail)
 sudo apt-get install --yes thunderbird-l10n-nl
 #2 sudo apt-get remove --yes thunderbird-l10n-nl
-
-#1 vlc (mediaspeler)
-sudo snap install vlc
-#2 sudo snap remove vlc

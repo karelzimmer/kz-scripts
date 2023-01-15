@@ -45,6 +45,10 @@ sudo apt-get install --yes mlocate
 sudo snap install signal-desktop
 #2 sudo snap remove signal-desktop
 
+#1 vlc (mediaspeler)
+sudo snap install vlc
+#2 sudo snap remove vlc
+
 #1 webmin (browsergebaseerd beheer)
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 wget --output-document=- 'http://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
