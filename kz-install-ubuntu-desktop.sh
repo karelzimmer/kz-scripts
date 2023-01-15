@@ -67,6 +67,3 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get update
-
-#1-language-support (taalondersteuning)
-check-language-support | xargs sudo apt-get install --yes
