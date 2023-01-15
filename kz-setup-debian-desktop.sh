@@ -6,10 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1 bitwarden (wachtwoordbeheer)
-kz-gset --addfavaft=bitwarden_bitwarden
-#2 kz-gset --delfav=bitwarden_bitwarden
-
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome

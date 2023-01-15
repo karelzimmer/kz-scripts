@@ -21,10 +21,6 @@ sudo apt-get update
 sudo apt-get install --yes bash-completion
 #2 sudo apt-get remove --yes bash-completion
 
-#1 bitwarden (wachtwoordbeheer)
-sudo snap install bitwarden
-#2 sudo snap remove bitwarden
-
 #1 cups (printsysteem)
 sudo apt-get install --yes cups
 #2 sudo apt-get remove --yes cups
