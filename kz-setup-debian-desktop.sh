@@ -6,26 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1 google-chrome (webbrowser)
-kz-gset --addfavbef=google-chrome
-#2 kz-gset --delfav=google-chrome
-
-#1-install-debian (installatie Debian starten)
-kz-gset --delfav=install-debian
-#2 kz-gset --addfavbef=install-debian
-
-#1 snap (snap verbergen in Persoonlijke map)
-printf '%s\n' 'snap' > "$HOME"/.hidden
-#2 rm --force "$HOME"/.hidden
-
-#1 skype (beeldbellen)
-kz-gset --addfavaft=skype_skypeforlinux
-#2 kz-gset --delfav=skype_skypeforlinux
-
-#1 spotify (muziekspeler)
-kz-gset --addfavaft=spotify_spotify
-#2 kz-gset --delfav=spotify_spotify
-
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder --folder='KZ Scripts'
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
@@ -72,3 +52,23 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height true
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed
+
+#1 google-chrome (webbrowser)
+kz-gset --addfavbef=google-chrome
+#2 kz-gset --delfav=google-chrome
+
+#1-install-debian (installatie Debian starten)
+kz-gset --delfav=install-debian
+#2 kz-gset --addfavbef=install-debian
+
+#1 snap (snap verbergen in Persoonlijke map)
+printf '%s\n' 'snap' > "$HOME"/.hidden
+#2 rm --force "$HOME"/.hidden
+
+#1 skype (beeldbellen)
+kz-gset --addfavaft=skype_skypeforlinux
+#2 kz-gset --delfav=skype_skypeforlinux
+
+#1 spotify (muziekspeler)
+kz-gset --addfavaft=spotify_spotify
+#2 kz-gset --delfav=spotify_spotify

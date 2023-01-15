@@ -6,26 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1 google-chrome (webbrowser)
-kz-gset --addfavbef=google-chrome
-#2 kz-gset --delfav=google-chrome
-
-#1-install-ubuntu (installatie Ubuntu starten)
-kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
-#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
-
-#1 snap (snap verbergen in Persoonlijke map)
-printf '%s\n' 'snap' > "$HOME"/.hidden
-#2 rm --force "$HOME"/.hidden
-
-#1 skype (beeldbellen)
-kz-gset --addfavaft=skype_skypeforlinux
-#2 kz-gset --delfav=skype_skypeforlinux
-
-#1 spotify (muziekspeler)
-kz-gset --addfavaft=spotify_spotify
-#2 kz-gset --delfav=spotify_spotify
-
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -68,3 +48,23 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 #2 gsettings reset org.gnome.shell.extensions.ding show-home
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
+
+#1 google-chrome (webbrowser)
+kz-gset --addfavbef=google-chrome
+#2 kz-gset --delfav=google-chrome
+
+#1-install-ubuntu (installatie Ubuntu starten)
+kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
+#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
+
+#1 snap (snap verbergen in Persoonlijke map)
+printf '%s\n' 'snap' > "$HOME"/.hidden
+#2 rm --force "$HOME"/.hidden
+
+#1 skype (beeldbellen)
+kz-gset --addfavaft=skype_skypeforlinux
+#2 kz-gset --delfav=skype_skypeforlinux
+
+#1 spotify (muziekspeler)
+kz-gset --addfavaft=spotify_spotify
+#2 kz-gset --delfav=spotify_spotify

@@ -14,16 +14,16 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 
+#1 ansible (automatiseringsplatform)
+sudo apt-get install --yes ansible
+#2 sudo apt-get remove --yes ansible
+
 #1-brightness (helderheid instellen)
 echo '#!/bin/sh' | sudo tee /etc/rc.local
 echo 'echo 1900 > /sys/class/backlight/intel_backlight/brightness' | sudo tee --append /etc/rc.local
 sudo chmod +x /etc/rc.local
 #2 echo '' | sudo tee /etc/rc.local
 #2 sudo chmod -x /etc/rc.local
-
-#1 ansible (automatiseringsplatform)
-sudo apt-get install --yes ansible
-#2 sudo apt-get remove --yes ansible
 
 #1 cockpit (browsergebaseerd beheer)
 sudo apt-get install --yes cockpit cockpit-pcp
