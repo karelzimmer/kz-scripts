@@ -6,9 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1 updates (bijgewerkte apps en systeembestanden)
-sudo kz update
-
 #1-all-repos (alle repositories inschakelen)
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
@@ -16,6 +13,9 @@ sudo apt-get update
 #2 sudo apt-add-repository --remove contrib
 #2 sudo apt-add-repository --remove non-free
 #2 sudo apt-get update
+
+#1 updates (bijgewerkte apps en systeembestanden)
+sudo kz update
 
 #1 bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion

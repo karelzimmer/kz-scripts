@@ -14,14 +14,14 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #2 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 #2 sudo systemctl enable --now apport.service
 
-#1 updates (bijgewerkte apps en systeembestanden)
-sudo kz update
-
 #1-force-x11 (gebruik X11 i.p.v. Wayland)
 ## Met wayland issues met afspelen video en TeamViewer.
 ## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+
+#1 updates (bijgewerkte apps en systeembestanden)
+sudo kz update
 
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
