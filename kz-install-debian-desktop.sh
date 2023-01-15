@@ -14,9 +14,6 @@ sudo apt-get update
 #2 sudo apt-add-repository --remove non-free
 #2 sudo apt-get update
 
-#1 updates (bijgewerkte apps en systeembestanden)
-sudo kz update
-
 #1 bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion
 #2 sudo apt-get remove --yes bash-completion
@@ -75,3 +72,6 @@ sudo apt-key del 0C1289C0 DEB49217
 #1 thunderbird (e-mail)
 sudo apt-get install --yes thunderbird-l10n-nl
 #2 sudo apt-get remove --yes thunderbird-l10n-nl
+
+#1 updates (bijgewerkte apps en systeembestanden)
+sudo kz update
