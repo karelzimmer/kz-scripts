@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-add-repos (repositories inschakelen [Debian)]
+#1-add-repos (repositories inschakelen) [Debian]
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-get update
@@ -14,23 +14,23 @@ sudo apt-get update
 #2 sudo apt-add-repository --remove non-free
 #2 sudo apt-get update
 
-#1-bash-completion (tab-completion [Debian)]
+#1-bash-completion (tab-completion) [Debian]
 sudo apt-get install --yes bash-completion
 #2 sudo apt-get remove --yes bash-completion
 
-#1-cups (printsysteem [Debian)]
+#1-cups (printsysteem) [Debian]
 sudo apt-get install --yes cups
 #2 sudo apt-get remove --yes cups
 
-#1-dashtodock (favorietenbalk [Debian)]
+#1-dashtodock (favorietenbalk) [Debian]
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 #2 sudo apt-get remove --yes gnome-shell-extension-dashtodock
 
-#1-journalctl (log bekijken [Debian)]
+#1-journalctl (log bekijken) [Debian]
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 #2 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
-#1-updates (bijgewerkte apps en systeembestanden [Debian)]
+#1-updates (bijgewerkte apps en systeembestanden) [Debian]
 sudo kz update
 
 #1 google-chrome (webbrowser)

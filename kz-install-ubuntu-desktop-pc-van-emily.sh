@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-cups-backend-bjnp (printerbackend Canon BJNP-protocol [Ubuntu pc-van-emily])
+#1-cups-backend-bjnp (printerbackend Canon BJNP-protocol) [Ubuntu pc-van-emily]
 sudo apt-get install --yes cups-backend-bjnp
 #2 sudo apt-get remove --yes cups-backend-bjnp
 

@@ -6,12 +6,12 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-lidswitch (negeer sluiten laptopdesksel [Ubuntu pc04])
+#1-lidswitch (negeer sluiten laptopdesksel) [Ubuntu pc04]
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-#1-ros (Robot Operating System [Ubuntu pc04])
+#1-ros (Robot Operating System) [Ubuntu pc04]
 :
 
 #1 calibre (e-boekmanager)

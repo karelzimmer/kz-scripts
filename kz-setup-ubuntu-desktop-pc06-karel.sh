@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-gnome (bureaubladomgeving [Ubuntu pc06])
+#1-gnome (bureaubladomgeving) [Ubuntu pc06]
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32

@@ -6,11 +6,11 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-adm (gebruiker toevoegen aan groep adm [Debian pc07])
+#1-adm (gebruiker toevoegen aan groep adm) [Debian pc07]
 sudo adduser "${SUDO_USER:-$USER}" adm
 #2 sudo deluser ${SUDO_USER:-$USER} adm
 
-#1-deact-eth0 (activeren eth0 uit start-up halen [Debian pc07])
+#1-deact-eth0 (activeren eth0 uit start-up halen) [Debian pc07]
 ## ifup -a --read-environement: Cannot find device "eth0"/ [FAILED] Raise network interfaces
 sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
 sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup
