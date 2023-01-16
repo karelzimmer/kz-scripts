@@ -10,10 +10,6 @@
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
-#1 telegram (privéberichtenapp)
-kz-gset --addfavaft=telegram-desktop_telegram-desktop
-#2 kz-gset --delfav=telegram-desktop_telegram-desktop
-
 #1-virtualbox (virtualisatie)
 kz-gset --addfavaft=virtualbox
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
@@ -25,3 +21,7 @@ kz-gset --addfavaft=kz-vm-hugowin732
 #2 rm "$HOME"/kz-vm-hugowin732.sh
 #2 kz-gset --delfav=virtualbox
 #2 kz-gset --delfav=kz-vm-hugowin732
+
+#1 telegram (privéberichtenapp)
+kz-gset --addfavaft=telegram-desktop_telegram-desktop
+#2 kz-gset --delfav=telegram-desktop_telegram-desktop

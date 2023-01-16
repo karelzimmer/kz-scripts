@@ -6,6 +6,16 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+#1-gnome (bureaubladomgeving)
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
+gsettings set org.gnome.shell.extensions.ding show-home false
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
+#2 gsettings reset org.gnome.shell.extensions.ding show-home
+
+#1-install-ubuntu (installatie Ubuntu starten)
+kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
+#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
+
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -23,9 +33,12 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
+gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
-gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
-gsettings set org.gnome.shell.extensions.ding show-home false
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
+gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
+gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 kz-gset --delappfolder='KZ Scripts'
 #2 gsettings reset org.gnome.desktop.app-folders folder-children
@@ -44,18 +57,18 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 #2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 #2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
-#2 gsettings reset org.gnome.shell.extensions.ding show-home
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed true
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height true
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
-
-#1-install-ubuntu (installatie Ubuntu starten)
-kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
-#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
 
 #1 snap (snap verbergen in Persoonlijke map)
 printf '%s\n' 'snap' > "$HOME"/.hidden

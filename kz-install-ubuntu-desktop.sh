@@ -20,6 +20,9 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
+#1-updates (bijgewerkte apps en systeembestanden)
+sudo kz update
+
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -64,6 +67,3 @@ sudo apt-key del 0C1289C0 DEB49217
 #2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*
 #2 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get update
-
-#1 updates (bijgewerkte apps en systeembestanden)
-sudo kz update

@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-all-repos (alle repositories inschakelen)
+#1-add-repos (repositories inschakelen)
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-get update
@@ -14,17 +14,24 @@ sudo apt-get update
 #2 sudo apt-add-repository --remove non-free
 #2 sudo apt-get update
 
-#1 bash-completion (tab-completion)
+#1-bash-completion (tab-completion)
 sudo apt-get install --yes bash-completion
 #2 sudo apt-get remove --yes bash-completion
 
-#1 cups (printsysteem)
+#1-cups (printsysteem)
 sudo apt-get install --yes cups
 #2 sudo apt-get remove --yes cups
 
 #1-dashtodock (favorietenbalk)
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 #2 sudo apt-get remove --yes gnome-shell-extension-dashtodock
+
+#1-journalctl (log bekijken)
+sudo adduser "${SUDO_USER:-$USER}" systemd-journal
+#2 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
+
+#1-updates (bijgewerkte apps en systeembestanden)
+sudo kz update
 
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
@@ -40,10 +47,6 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
-
-#1-journalctl (log bekijken)
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
-#2 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
@@ -72,6 +75,3 @@ sudo apt-key del 0C1289C0 DEB49217
 #1 thunderbird (e-mail)
 sudo apt-get install --yes thunderbird-l10n-nl
 #2 sudo apt-get remove --yes thunderbird-l10n-nl
-
-#1 updates (bijgewerkte apps en systeembestanden)
-sudo kz update
