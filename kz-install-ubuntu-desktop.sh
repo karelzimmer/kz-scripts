@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-apport (genereren van crashrapporten)
+#1-apport (genereren van crashrapporten [Ubuntu])
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
@@ -14,14 +14,20 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #2 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 #2 sudo systemctl enable --now apport.service
 
-#1-force-x11 (gebruik X11 i.p.v. Wayland)
+#1-force-x11 (gebruik X11 i.p.v. Wayland [Ubuntu])
 ## Met wayland issues met afspelen video en TeamViewer.
 ## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
-#1-updates (bijgewerkte apps en systeembestanden)
+#1-updates (bijgewerkte apps en systeembestanden [Ubuntu])
 sudo kz update
+
+#1-restricted-addons (niet-vrije pakketten [Ubuntu])
+## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
+sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
+#2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
+#2 sudo apt autoremove --yes
 
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
@@ -41,12 +47,6 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice
 #2 sudo apt-get remove --yes aspell-nl libreoffice
-
-#1-restricted-addons (niet-vrije pakketten)
-## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
-sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
-#2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
-#2 sudo apt autoremove --yes
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype

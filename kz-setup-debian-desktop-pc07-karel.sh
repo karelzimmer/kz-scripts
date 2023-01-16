@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-gnome (bureaubladomgeving)
+#1-gnome (bureaubladomgeving [Debian pc07])
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing

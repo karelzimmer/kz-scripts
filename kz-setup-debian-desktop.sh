@@ -6,11 +6,11 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-dashtodock (favorietenbalk)
+#1-dashtodock (favorietenbalk [Debian])
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 #2 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
-#1-install-debian (installatie Debian starten)
+#1-install-debian (installatie starten [Debian])
 kz-gset --delfav=install-debian
 #2 kz-gset --addfavbef=install-debian
 

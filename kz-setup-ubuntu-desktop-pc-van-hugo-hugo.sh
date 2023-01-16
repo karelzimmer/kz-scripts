@@ -6,11 +6,11 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-gnome (bureaubladomgeving)
+#1-gnome (bureaubladomgeving [Ubuntu pc-van-hugo])
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
-#1-virtualbox (virtualisatie)
+#1-virtualbox (virtualisatie [Ubuntu pc-van-hugo])
 kz-gset --addfavaft=virtualbox
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
 chmod u+x "$HOME"/kz-vm-hugowin732.sh
