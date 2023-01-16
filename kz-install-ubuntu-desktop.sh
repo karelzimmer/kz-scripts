@@ -20,7 +20,7 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
-#1-updates (bijgewerkte apps en systeembestanden [Ubuntu]) [Ubuntu]
+#1-updates (bijgewerkte apps en systeembestanden) [Ubuntu]
 sudo kz update
 
 #1-restricted-addons (niet-vrije pakketten) [Ubuntu]
