@@ -12,7 +12,7 @@ gsettings set org.gnome.shell.extensions.ding show-home false
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 #2 gsettings reset org.gnome.shell.extensions.ding show-home
 
-#1-install-ubuntu (installatie starten [Ubuntu])
+#1-start-install (installatie starten [Ubuntu])
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
 #2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
 
