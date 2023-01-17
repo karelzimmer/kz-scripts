@@ -6,16 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-gnome (bureaubladomgeving) [Ubuntu]
-gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
-gsettings set org.gnome.shell.extensions.ding show-home false
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
-#2 gsettings reset org.gnome.shell.extensions.ding show-home
-
-#1-start-install (installatie starten) [Ubuntu]
-kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
-#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
-
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -61,10 +51,15 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed true
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height true
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
+
+#1-gnome (bureaubladomgeving) [Ubuntu]
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
+gsettings set org.gnome.shell.extensions.ding show-home false
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
+#2 gsettings reset org.gnome.shell.extensions.ding show-home
 
 #1 google-chrome (webbrowser)
 kz-gset --addfavbef=google-chrome
@@ -81,3 +76,7 @@ kz-gset --addfavaft=skype_skypeforlinux
 #1 spotify (muziekspeler)
 kz-gset --addfavaft=spotify_spotify
 #2 kz-gset --delfav=spotify_spotify
+
+#1-start-install (installatie starten) [Ubuntu]
+kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
+#2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop

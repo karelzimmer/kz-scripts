@@ -10,10 +10,6 @@
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 #2 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
-#1-start-install (installatie starten) [Debian]
-kz-gset --delfav=install-debian
-#2 kz-gset --addfavbef=install-debian
-
 #1 gnome (bureaubladomgeving)
 kz-gset --addappfolder='KZ Scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -59,9 +55,8 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed true
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height true
-#2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
+#2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #1 google-chrome (webbrowser)
@@ -79,3 +74,7 @@ kz-gset --addfavaft=skype_skypeforlinux
 #1 spotify (muziekspeler)
 kz-gset --addfavaft=spotify_spotify
 #2 kz-gset --delfav=spotify_spotify
+
+#1-start-install (installatie starten) [Debian]
+kz-gset --delfav=install-debian
+#2 kz-gset --addfavbef=install-debian

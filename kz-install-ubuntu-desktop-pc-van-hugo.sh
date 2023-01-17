@@ -6,11 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-lidswitch (negeer sluiten laptopdesksel) [Ubuntu pc-van-hugo]
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
-#2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-
 #1 bleachbit (overbodige bestanden verwijderen)
 sudo apt-get install --yes bleachbit
 #2 sudo apt-get remove --yes bleachbit
@@ -26,6 +21,11 @@ sudo apt-get install --yes clamtk-gnome
 #1 gimp (beeldmanipulatieprogramma)
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 #2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
+
+#1-lidswitch (negeer sluiten laptopdesksel) [Ubuntu pc-van-hugo]
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+#2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 #1 telegram (privéberichtenapp)
 sudo snap install telegram-desktop

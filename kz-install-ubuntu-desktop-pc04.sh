@@ -6,14 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-lidswitch (negeer sluiten laptopdesksel) [Ubuntu pc04]
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
-#2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-
-#1-ros (Robot Operating System) [Ubuntu pc04]
-:
-
 #1 calibre (e-boekmanager)
 sudo apt-get install --yes calibre
 #2 sudo apt-get remove --yes calibre
@@ -32,6 +24,14 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] http://dl.
 #2 sudo apt-get remove --yes google-earth-pro-stable
 #2 sudo rm --force /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
 #2 sudo apt-get update
+
+#1-lidswitch (negeer sluiten laptopdesksel) [Ubuntu pc04]
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+#2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
+#1-ros (Robot Operating System) [Ubuntu pc04]
+:
 
 #1 wine (windowsapps op Linux)
 sudo apt-get install --yes wine winetricks playonlinux

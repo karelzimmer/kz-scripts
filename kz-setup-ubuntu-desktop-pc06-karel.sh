@@ -6,6 +6,14 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+#1 cockpit (browsergebaseerd beheer)
+## https://localhost:9090
+cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
+sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
+kz-gset --addfavaft=kz-cockpit
+#2 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
+#2 kz-gset --delfav=kz-cockpit
+
 #1-gnome (bureaubladomgeving) [Ubuntu pc06]
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
@@ -13,14 +21,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #2 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 #2 gsettings reset org.gnome.nautilus.preferences show-create-link
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
-
-#1 cockpit (browsergebaseerd beheer)
-## https://localhost:9090
-cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
-kz-gset --addfavaft=kz-cockpit
-#2 rm "$HOME"/.local/share/applications/kz-cockpit.desktop
-#2 kz-gset --delfav=kz-cockpit
 
 #1 kvm (virtualisatie)
 kz-gset --addfavaft=virt-manager

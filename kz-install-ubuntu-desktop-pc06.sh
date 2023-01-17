@@ -14,12 +14,24 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 
+#1 ansible (automatiseringsplatform)
+sudo apt-get install --yes ansible
+#2 sudo apt-get remove --yes ansible
+
 #1-brightness (helderheid instellen) [Ubuntu pc06]
 echo '#!/bin/sh' | sudo tee /etc/rc.local
 echo 'echo 1900 > /sys/class/backlight/intel_backlight/brightness' | sudo tee --append /etc/rc.local
 sudo chmod +x /etc/rc.local
 #2 echo '' | sudo tee /etc/rc.local
 #2 sudo chmod -x /etc/rc.local
+
+#1 cockpit (browsergebaseerd beheer)
+sudo apt-get install --yes cockpit cockpit-pcp
+#2 sudo apt-get remove --yes cockpit
+
+#1 exiftool (metadata lezen en schrijven)
+sudo apt-get install --yes libimage-exiftool-perl
+#2 sudo apt-get remove --yes libimage-exiftool-perl
 
 #1-gast (gastgebruiker toevoegen) [Ubuntu pc06]
 sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
@@ -30,18 +42,6 @@ sudo passwd --delete gast
 if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
 #2 sudo rm --force ~gdm/.config/monitors.xml
-
-#1 ansible (automatiseringsplatform)
-sudo apt-get install --yes ansible
-#2 sudo apt-get remove --yes ansible
-
-#1 cockpit (browsergebaseerd beheer)
-sudo apt-get install --yes cockpit cockpit-pcp
-#2 sudo apt-get remove --yes cockpit
-
-#1 exiftool (metadata lezen en schrijven)
-sudo apt-get install --yes libimage-exiftool-perl
-#2 sudo apt-get remove --yes libimage-exiftool-perl
 
 #1 gimp (beeldmanipulatieprogramma)
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl

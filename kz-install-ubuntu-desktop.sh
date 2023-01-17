@@ -20,15 +20,6 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
-#1-updates (bijgewerkte apps en systeembestanden) [Ubuntu]
-sudo kz update
-
-#1-restricted-addons (niet-vrije pakketten) [Ubuntu]
-## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
-sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
-#2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
-#2 sudo apt autoremove --yes
-
 #1 google-chrome (webbrowser)
 ## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -47,6 +38,12 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #1 libreoffice (kantoorpakket)
 sudo apt-get install --yes aspell-nl libreoffice
 #2 sudo apt-get remove --yes aspell-nl libreoffice
+
+#1-restricted-addons (niet-vrije pakketten) [Ubuntu]
+## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
+sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
+#2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
+#2 sudo apt autoremove --yes
 
 #1 skype (beeldbellen)
 sudo snap install --classic skype

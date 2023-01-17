@@ -17,10 +17,6 @@ sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/'
 #2 sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
 #2 sudo sed --in-place --expression='s/^#iface eth0 net dhcp$/iface eth0 net dhcp/' /etc/network/interfaces.d/setup
 
-#1 spice-vdagent (klembord delen tussen gastheer en gast)
-sudo apt-get install --yes spice-vdagent
-#2 sudo apt-get remove --yes spice-vdagent
-
 #1 gnome-gmail (Gmail als e-mailtoepassing in GNOME)
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
@@ -44,6 +40,10 @@ sudo apt-get install --yes mlocate
 #1 signal (privéberichtenapp)
 sudo snap install signal-desktop
 #2 sudo snap remove signal-desktop
+
+#1 spice-vdagent (klembord delen tussen gastheer en gast)
+sudo apt-get install --yes spice-vdagent
+#2 sudo apt-get remove --yes spice-vdagent
 
 #1 vlc (mediaspeler)
 sudo snap install vlc
