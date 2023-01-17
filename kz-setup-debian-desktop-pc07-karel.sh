@@ -10,7 +10,7 @@
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
-#2 gsettings reset org.gnome.sound allow-volume-above-100-percent
+#2 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 #2 gsettings reset org.gnome.nautilus.preferences show-create-link
 #2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
