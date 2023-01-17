@@ -14,7 +14,7 @@ kz-gset --addfavaft=kz-cockpit
 #2 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 #2 kz-gset --delfav=kz-cockpit
 
-#1-gnome (bureaubladomgeving) [Ubuntu pc06]
+#1-gnome (bureaubladomgeving) [Ubuntu pc06 karel]
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32

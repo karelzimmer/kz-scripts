@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-gnome (bureaubladomgeving) [Ubuntu pc-van-hugo]
+#1-gnome (bureaubladomgeving) [Ubuntu pc-van-hugo hugo]
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
@@ -14,7 +14,7 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 kz-gset --addfavaft=telegram-desktop_telegram-desktop
 #2 kz-gset --delfav=telegram-desktop_telegram-desktop
 
-#1-virtualbox (virtualisatie) [Ubuntu pc-van-hugo]
+#1-virtualbox (virtualisatie) [Ubuntu pc-van-hugo hugo]
 kz-gset --addfavaft=virtualbox
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
 chmod u+x "$HOME"/kz-vm-hugowin732.sh
