@@ -6,6 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-dashoptions='backup build ckname deploy genpwd getdeb gset install ivp menu
-    restore setup update wifi'
+dashoptions='backup build ckname deploy getdeb gset install ivp menu restore
+    setup update wifi'
 complete -o default -W "$dashoptions" kz
