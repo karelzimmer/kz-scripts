@@ -160,7 +160,7 @@ function kz_common.developer {
         fi
     else
         printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
-karel op pc??."
+karel op pcNN (bijvoorbeeld pc02)."
     fi
 }
 
