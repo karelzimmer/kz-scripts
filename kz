@@ -19,9 +19,9 @@ declare program_name='kz'
 declare program_desc='Opdracht uitvoeren'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name OPDRACHT [ARGUMENT]
+declare usage="Gebruik: $display_name OPDRACHT [ARGUMENT...]
      of: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
-declare help="Gebruik: $display_name OPDRACHT [ARGUMENT]
+declare help="Gebruik: $display_name OPDRACHT [ARGUMENT...]
      of: $display_name OPTIE
 
 $program_desc.
