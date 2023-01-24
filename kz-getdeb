@@ -268,7 +268,7 @@ function pull_repos {
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             2> >($logcmd); then
         cd "$bin_repo"
-        printf  "%s\n" "* initial pull $(basename "$bin_repo")..."
+        printf  "%s\n" "* initiële pull $(basename "$bin_repo") repo..."
         # Remove known line from output.
         git pull | sed '/Already up to date./d'
     fi
