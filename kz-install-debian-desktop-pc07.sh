@@ -41,10 +41,6 @@ sudo apt-get install --yes mlocate
 sudo snap install signal-desktop
 #2 sudo snap remove signal-desktop
 
-#1 spice-vdagent (klembord delen tussen gastheer en gast)
-sudo apt-get install --yes spice-vdagent
-#2 sudo apt-get remove --yes spice-vdagent
-
 #1 vlc (mediaspeler)
 sudo snap install vlc
 #2 sudo snap remove vlc
