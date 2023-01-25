@@ -55,19 +55,19 @@ function check_input {
         exit $err
     fi
     case $1 in
-        -h|-help|--help)
+        -h|--h|-help|--help)
             kz_common.process_option_help
             exit $ok
             ;;
-        -u|-usage|--usage)
+        -u|--u|-usage|--usage)
             kz_common.process_option_usage
             exit $ok
             ;;
-        -v|-version|--version)
+        -v|--v|-version|--version)
             kz_common.process_option_version
             exit $ok
             ;;
-        -l|-list|--list)
+        -l|--l|-list|--list)
             process_option_list
             exit $ok
             ;;
