@@ -39,6 +39,8 @@ Argumenten:
 # Variables
 ###############################################################################
 
+declare exec_program_name=''
+
 
 ###############################################################################
 # Functions
@@ -53,19 +55,23 @@ function check_input {
         exit $err
     fi
     case $1 in
-        -h*|--h*)
+        -h|-he|-hel|-help|--h|--he|--hel|--help)
             kz_common.process_option_help
             exit $ok
             ;;
-        -u*|--u*)
+        -u|-us|-usa|-usag|-usage|--u|--us|--usa|--usag|--usage)
             kz_common.process_option_usage
             exit $ok
             ;;
-        -v*|--v*)
+        -v|-ve|-ver|-vers|-versi|-versio|-version)
             kz_common.process_option_version
             exit $ok
             ;;
-        -l*|--l*)
+        --v|--ve|--ver|--vers|--versi|--versio|--version)
+            kz_common.process_option_version
+            exit $ok
+            ;;
+        -l|-li|-lis|-list|--l|--li|--lis|--list)
             process_option_list
             exit $ok
             ;;
@@ -75,10 +81,11 @@ function check_input {
             exit $err
             ;;
         *)
+            exec_program_name=$1
             ;;
     esac
-    if ! [[ -f "$program_path/kz-$1" ]]; then
-        info "$display_name: opdracht '$1' bestaat niet"
+    if ! [[ -f "$program_path/kz-$exec_program_name" ]]; then
+        info "$display_name: opdracht '$exec_program_name' bestaat niet"
         info "$usage_line"
         exit $err
     fi
@@ -111,9 +118,6 @@ ${blue}$display_name OPDRACHT${normal}"
 
 
 function process_input {
-    local exec_program_name=''
-
-    exec_program_name=$1
     shift
     exec "$program_path/kz-$exec_program_name" "$@"
 }
