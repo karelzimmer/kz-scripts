@@ -63,8 +63,8 @@ function check_input {
             kz_common.process_option_usage
             exit $ok
             ;;
-        -v|-ve|-ver|-vers|-versi|-versio|-version|\
-        --v|--ve|--ver|--vers|--versi|--versio|--version)
+        -v|-ve|-ver|-vers|-versi|-versio|-version|--v|--ve|--ver|--vers|\
+        --versi|--versio|--version)
             kz_common.process_option_version
             exit $ok
             ;;
