@@ -54,21 +54,20 @@ function check_input {
         info "$usage_line"
         exit $err
     fi
-    # Geen getopt, dus strengere controle op opties.
     case $1 in
-        -h|--help)
+        -h*|--h*)
             kz_common.process_option_help
             exit $ok
             ;;
-        -u|--usage)
+        -u*|--u*)
             kz_common.process_option_usage
             exit $ok
             ;;
-        -v|--version)
+        -v*|--v*)
             kz_common.process_option_version
             exit $ok
             ;;
-        -l|--list)
+        -l*|--l*)
             process_option_list
             exit $ok
             ;;
