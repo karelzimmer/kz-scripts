@@ -39,8 +39,8 @@ Opties:
 $options_help
 
 Argumenten:
-  APP            opgegeven APPs installeren
-  BESTAND        opgegeven BESTANDen verwerken"
+  APP            installeer APPs
+  BESTAND        verwerk BESTANDen"
 declare options_short+='acfgrs'
 declare options_long+=',apps,cat,files,gui,remove,server,simulate'
 

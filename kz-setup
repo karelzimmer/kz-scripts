@@ -33,13 +33,13 @@ Opties:
   -f, --files    toon lijst van bestanden
   -g, --gui      start in grafische modus
   -r, --reset    reset apps
-      --server   apps voor een server instellen
+      --server   stel apps in voor een server
   -s, --simulate toon opdrachten
 $options_help
 
 Argumenten:
-  APP            opgegeven APPs instellen
-  BESTAND        opgegeven BESTANDen verwerken"
+  APP            stel APPs in
+  BESTAND        verwerk BESTANDen"
 declare options_short+='ace:fgrs'
 declare options_long+=',apps,cat,files,gui,reset,server,simulate'
 

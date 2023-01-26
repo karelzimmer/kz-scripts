@@ -30,7 +30,7 @@ Opties:
       --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -g, --gui      start in grafische modus
   -s, --source=BRONMAP
-                 gebruik back-up in de BRONMAP
+                 gebruik back-up in BRONMAP
 $options_help"
 declare options_short+='gs:'
 declare options_long+=',dry-run,gui,source:'

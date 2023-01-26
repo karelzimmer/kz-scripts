@@ -22,7 +22,7 @@ declare display_name=${program_name/kz-/kz }
 declare usage="Gebruik: $display_name [-a|--addfavaft=FAVORITE] \
 [-b|--addfavbef=FAVORITE]
                  [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
-                 [-f|--addappfolder=appfolder] [-x|--delappfolder=appfolder]
+                 [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]
                  $options_usage"
 declare help="Gebruik: $display_name [OPTIE...]
 
@@ -35,13 +35,13 @@ Opties:
                  voeg FAVORITE toe aan het begin
   -d, --delfav=FAVORITE
                  verwijder FAVORITE
-  -l, --list     list favorits en appfolders
+  -l, --list     toon favorieten en app-mappen
   -r, --resetfavs
-                 reset favorites
-  -f, --addappfolder=appfolder
-                 voeg appfolder toe
-  -x, --delappfolder=appfolder
-                 verwijder appfolder
+                 reset favorieten
+  -f, --addappfolder=APPFOLDER
+                 voeg APPFOLDER toe
+  -x, --delappfolder=APPFOLDER
+                 verwijder APPFOLDER
 $options_help"
 declare options_short+='a:b:d:lrf:x:'
 declare options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\

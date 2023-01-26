@@ -27,12 +27,12 @@ declare help="Gebruik: $display_name [OPTIE...]
 $program_desc.
 
 Opties:
-      --delete   uit de Persoonlijke map verwijderde bestanden ook uit de
-                 back-up verwijderen (standaard bij optie -g, --gui)
+      --delete   verwijder uit de back-up de bestanden die ook verwijderd zijn
+                 uit de Persoonlijke map (standaard bij optie -g, --gui)
       --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -g, --gui      start in grafische modus
   -t, --target=DOELMAP
-                 plaats back-up in de DOELMAP
+                 plaats back-up in DOELMAP
 $options_help"
 declare options_short+='gt:'
 declare options_long+=',delete,dry-run,gui,target:'

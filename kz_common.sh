@@ -34,9 +34,6 @@ declare less_options=''
 declare logcmd_check=''
 declare logcmd=''
 declare option_gui=false
-declare option_help=false
-declare option_usage=false
-declare option_version=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
 declare program_exec=${0/#./$program_path}
 declare text=''
@@ -337,16 +334,16 @@ function kz_common.process_options {
     while true; do
         case $1 in
             -h|--help)
-                option_help=true
-                shift
+                kz_common.process_option_help
+                exit $ok
                 ;;
             -u|--usage)
-                option_usage=true
-                shift
+                kz_common.process_option_usage
+                exit $ok
                 ;;
             -v|--version)
-                option_version=true
-                shift
+                kz_common.process_option_version
+                exit $ok
                 ;;
             --)
                 break
@@ -356,17 +353,6 @@ function kz_common.process_options {
                 ;;
         esac
     done
-
-    if $option_help; then
-        kz_common.process_option_help
-        exit $ok
-    elif $option_usage; then
-        kz_common.process_option_usage
-        exit $ok
-    elif $option_version; then
-        kz_common.process_option_version
-        exit $ok
-    fi
 }
 
 
