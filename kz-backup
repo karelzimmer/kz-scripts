@@ -42,9 +42,9 @@ declare source=$HOME
 # Variables
 ###############################################################################
 
+declare dry_run_option=''
 declare medium=''
 declare option_dry_run=false
-declare option_dry_run_rsync=''
 declare option_gui=false
 declare option_target=false
 declare target_argument=''
@@ -78,7 +78,7 @@ function check_input {
         case $1 in
             -d|--dry-run)
                 option_dry_run=true
-                option_dry_run_rsync='--dry-run'
+                dry_run_option='--dry-run'
                 shift
                 ;;
             -g|--gui)
@@ -293,7 +293,7 @@ EOF
     if $option_gui; then
         rsync   --archive                   \
                 --verbose                   \
-                $option_dry_run_rsync       \
+                $dry_run_option             \
                 --delete                    \
                 --exclude-from="$exclude"   \
                 --delete-excluded           \
@@ -314,7 +314,7 @@ EOF
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
-                $option_dry_run_rsync       \
+                $dry_run_option             \
                 --delete                    \
                 --exclude-from="$exclude"   \
                 --delete-excluded           \
