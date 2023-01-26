@@ -19,7 +19,7 @@ declare program_name='kz-backup'
 declare program_desc='Back-up maken'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [--delete] [--dry-run] [-g|--gui] \
+declare usage="Gebruik: $display_name [-d|--dry-run] [-g|--gui] \
 [-t|--target=DOELMAP]
                    $options_usage"
 declare help="Gebruik: $display_name [OPTIE...]
@@ -27,15 +27,13 @@ declare help="Gebruik: $display_name [OPTIE...]
 $program_desc.
 
 Opties:
-      --delete   verwijder uit de back-up de bestanden die ook verwijderd zijn
-                 uit de Persoonlijke map (standaard bij optie -g, --gui)
-      --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
+  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -g, --gui      start in grafische modus
   -t, --target=DOELMAP
                  plaats back-up in DOELMAP
 $options_help"
-declare options_short+='gt:'
-declare options_long+=',delete,dry-run,gui,target:'
+declare options_short+='dgt:'
+declare options_long+=',dry-run,gui,target:'
 
 declare source=$HOME
 
@@ -45,9 +43,8 @@ declare source=$HOME
 ###############################################################################
 
 declare medium=''
-declare option_delete=''
-declare option_delete_excluded=''
-declare option_dry_run=''
+declare option_dry_run=false
+declare option_dry_run_rsync=''
 declare option_gui=false
 declare option_target=false
 declare target_argument=''
@@ -79,13 +76,9 @@ function check_input {
 
     while true; do
         case $1 in
-            --delete)
-                option_delete='--delete'
-                option_delete_excluded='--delete-excluded'
-                shift
-                ;;
-            --dry-run)
-                option_dry_run='--dry-run'
+            -d|--dry-run)
+                option_dry_run=true
+                option_dry_run_rsync='--dry-run'
                 shift
                 ;;
             -g|--gui)
@@ -154,23 +147,24 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
 
     kz_common.check_on_ac_power
 
-    title='Instellingen veiligstellen'
-    text='Instellingen veiligstellen'
-    if $option_gui; then
-        backup_settings                 |
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$title"    \
-                --text      "$text"     2> >($logcmd)
-    else
-        info "$text..."
-        backup_settings
+    if ! $option_dry_run; then
+        title='Instellingen veiligstellen'
+        text='Instellingen veiligstellen'
+        if $option_gui; then
+            backup_settings                 |
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd)
+        else
+            info "$text..."
+            backup_settings
+        fi
     fi
-
     create_backup
 }
 
@@ -299,6 +293,7 @@ EOF
     if $option_gui; then
         rsync   --archive                   \
                 --verbose                   \
+                $option_dry_run_rsync       \
                 --delete                    \
                 --exclude-from="$exclude"   \
                 --delete-excluded           \
@@ -319,10 +314,10 @@ EOF
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
-                $option_dry_run             \
-                $option_delete              \
-                $option_delete_excluded     \
+                $option_dry_run_rsync       \
+                --delete                    \
                 --exclude-from="$exclude"   \
+                --delete-excluded           \
                 "$source"/                  \
                 "$target"/                  2> >($logcmd) || rsync_rc=$?
     fi
@@ -350,23 +345,29 @@ function term_script {
     local -i rc=0
 
     text='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
-    if $option_gui; then
-        sync                                        |
-        zenity  --progress                          \
-                --pulsate                           \
-                --auto-close                        \
-                --no-cancel                         \
-                --width     600                     \
-                --height    50                      \
-                --title     "$title"                \
-                --text      "$text"                 2> >($logcmd) || rc+=$?
-    else
-        info "
+    if ! $option_dry_run; then
+        if $option_gui; then
+            sync                            |
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd) || rc+=$?
+        else
+            info "
 $text..."
-        sync |& $logcmd || rc+=$?
+            sync |& $logcmd || rc+=$?
+        fi
     fi
 
     text=''
+    if $option_dry_run; then
+        err "De back-up is NIET gemaakt (DRY RUN)."
+        exit $err
+    fi
     if [[ $target_medium == /media/* ]]; then
         text='Het usb-medium afkoppelen'
         dev='/dev/'$(

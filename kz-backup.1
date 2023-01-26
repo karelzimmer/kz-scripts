@@ -37,13 +37,10 @@ Met optie \fB-t\fR, \fB--target\fR=\fIDOELMAP\fR kan een andere locatie
 opgegeven worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk
 (onverstandig want /tmp wordt leeggegooid na een herstart).
 .sp
-Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
-Het wordt meestal gebruikt in combinatie met de \fB--delete\fR optie om te zien
-wat een rsync-commando gaat doen voordat men het daadwerkelijk uitvoert.
-.sp
-Optie \fB--delete\fR verwijdert bestanden uit de back-up die niet meer
-voorkomen in de Persoonlijke map. Deze optie is standaard bij optie \fB-g\fR,
-\fB--gui\fR.
+Optie \fB-d\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
+te brengen. Het wordt meestal gebruikt in combinatie met rsync's optie --delete
+om te zien wat een rsync-commando gaat doen voordat men het daadwerkelijk
+uitvoert.
 .sp
 Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
 .RS
@@ -72,11 +69,7 @@ Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .\"
 .SH OPTIES
 .TP
-\fB--delete\fR
-Uit de Persoonlijke map verwijderde bestanden ook uit de back-up verwijderen
-(standaard bij optie \fB-g\fR, \fB--gui\fR).
-.TP
-\fB--dry-run\fR
+\fB-d\fR, \fB--dry-run\fR
 Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
 \fB-t\fR, \fB--target=\fIDOELMAP\fR
@@ -147,7 +140,7 @@ Hiervoor is in een grafische werkomgeving ook starter \fBBack-up maken\fR
 beschikbaar.
 .RE
 .sp
-\fBkz backup --dry-run --delete\fR
+\fBkz backup --dry-run\fR
 .RS
 Toon bestanden die anders toegevoegd en verwijderd zouden worden in de back-up.
 .RE

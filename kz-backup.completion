@@ -6,6 +6,6 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-dashoptions="--delete --dry-run -g --gui '-t DOELMAP' '--target DOELMAP' -h
-    --help -u --usage -v --version"
+dashoptions="-d --dry-run -g --gui '-t DOELMAP' '--target DOELMAP' -h --help -u
+    --usage -v --version"
 complete -o default -W "$dashoptions" kz-backup

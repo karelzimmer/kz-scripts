@@ -43,7 +43,8 @@ declare target=$HOME
 ###############################################################################
 
 declare medium=''
-declare option_dry_run=''
+declare option_dry_run=false
+declare option_dry_run_rsync=''
 declare option_gui=false
 declare option_source=false
 declare source_argument=''
@@ -76,7 +77,8 @@ function check_input {
     while true; do
         case $1 in
             --dry-run)
-                option_dry_run='--dry-run'
+                option_dry_run=true
+                option_dry_run_rsync='--dry-run'
                 shift
                 ;;
             -g|--gui)
@@ -197,22 +199,23 @@ $prompt"
     fi
     if $restore; then
         restore_backup
-
-        title='Instellingen terugzetten'
-        text='Instellingen terugzetten'
-        if $option_gui; then
-            restore_settings                |
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($logcmd)
-        else
-            info "$text..."
-            restore_settings
+        if ! $option_dry_run; then
+            title='Instellingen terugzetten'
+            text='Instellingen terugzetten'
+            if $option_gui; then
+                restore_settings                |
+                zenity  --progress              \
+                        --pulsate               \
+                        --auto-close            \
+                        --no-cancel             \
+                        --width     600         \
+                        --height    50          \
+                        --title     "$title"    \
+                        --text      "$text"     2> >($logcmd)
+            else
+                info "$text..."
+                restore_settings
+            fi
         fi
     else
         exit $ok
@@ -227,6 +230,7 @@ function restore_backup {
     if $option_gui; then
         rsync   --archive                   \
                 --verbose                   \
+                $option_dry_run_rsync       \
                 "$source"/                  \
                 "$target"/                  \
                 2> >($logcmd)               |
@@ -244,7 +248,7 @@ function restore_backup {
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
-                $option_dry_run             \
+                $option_dry_run_rsync       \
                 "$source"/                  \
                 "$target"/                  2> >($logcmd) || rsync_rc=$?
     fi
@@ -300,6 +304,10 @@ function term_script {
 
     sync |& $logcmd || rc+=$?
     text=''
+    if $option_dry_run; then
+        err "De back-up is NIET teruggezet (DRY RUN)."
+        exit $err
+    fi
     if [[ $source_medium == /media/* ]]; then
         text='Het usb-medium afkoppelen'
         dev='/dev/'$(
