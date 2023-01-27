@@ -72,8 +72,8 @@ function check_input {
             exit $ok
             ;;
         -*)
-            printf  "$display_name: %s\n$usage_line\n" \
-                    "onbekende optie '$1'"
+            printf  "$display_name: %s: %s\n$usage_line\n" \
+                    'onbekende optie' "$1"
             exit $err
             ;;
         *)
