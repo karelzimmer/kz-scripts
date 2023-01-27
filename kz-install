@@ -248,7 +248,7 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
-            info "App $app niet gevonden."
+            info "App '$app' niet gevonden."
             file_notfound=true
         fi
     done
@@ -304,7 +304,7 @@ function process_argument_file {
             files_to_process[file_num]=$file
             ((++file_num))
         else
-            info "Bestand $file niet gevonden."
+            info "Bestand '$file' niet gevonden."
             file_notfound=true
         fi
     done
@@ -319,7 +319,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
-        err "Geen bestanden gevonden voor $distro $edition."
+        err "Geen bestanden gevonden voor '$distro' en '$edition'."
         info "$usage_line"
         exit $err
     fi
