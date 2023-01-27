@@ -68,8 +68,8 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        info 'Geen argumenten toegestaan.'
-        info "$usage_line"
+        printf  "$display_name: %s: %s\n$usage_line\n" \
+                'geen argumenten toegestaan' "$*"
         exit $err
     fi
 

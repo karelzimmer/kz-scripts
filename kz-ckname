@@ -89,8 +89,8 @@ function check_input {
     fi
     for dir in "${map_arguments[@]}"; do
         if ! [[ -d $dir ]]; then
-            info "Map '$dir' bestaat niet."
-            info "$usage_line"
+            printf  "$display_name: %s: %s\n$usage_line\n" \
+                    'map bestaat niet' "$dir"
             exit $err
         fi
     done
