@@ -241,12 +241,12 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
-            info "App '$app' niet gevonden."
+            printf "$display_name: %s: %s\n" 'app niet gevonden' "$app"
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        info "Typ '$display_name --apps' voor beschikbare apps." >&2
+        printf "%s\n" "Typ '$display_name --apps' voor beschikbare apps."
     else
         files_to_process[file_num]=$apps_file
         ((++file_num))
@@ -298,12 +298,12 @@ function process_argument_file {
             files_to_process[file_num]=$file
             ((++file_num))
         else
-            info "Bestand '$file' niet gevonden."
+            printf "$display_name: %s: %s\n" 'bestand niet gevonden' "$file"
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        info "Typ '$display_name --files' voor beschikbare bestanden." >&2
+        printf "%s\n" "Typ '$display_name --files' voor beschikbare bestanden."
     fi
 }
 
@@ -313,8 +313,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
-        err "Geen bestanden gevonden voor '$distro' en '$edition'."
-        info "$usage_line"
+        warn 'Geen instelbestanden gevonden.'
         exit $err
     fi
     if [[ -f $dfltfile_2 ]]; then
