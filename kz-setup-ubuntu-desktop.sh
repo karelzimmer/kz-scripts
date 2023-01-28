@@ -66,7 +66,7 @@ kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
 
 #1 snap (snap verbergen in Persoonlijke map)
-printf '%s\n' 'snap' > "$HOME"/.hidden
+echo 'snap' > "$HOME"/.hidden
 #2 rm --force "$HOME"/.hidden
 
 #1 skype (beeldbellen)
