@@ -8,7 +8,8 @@
 ###############################################################################
 
 set -o errexit
-source <(wget -qO- 'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
+source <(wget --quiet --output-document=- \
+        'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
 
 
 ###############################################################################
@@ -240,7 +241,7 @@ function download_website {
 
     info '* download website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
-        # < /dev/tty want FD 1 al in gebruik bij 'wget -O- karelzim... | bash'.
+        # < /dev/tty want FD 1 al in gebruik bij 'wget --output-document=-...'.
         read -rsp "Wachtwoord voor 'ftp://$ftp_host': " < /dev/tty
         printf '%s\n' "$REPLY" > "$ftp_login"
         printf '\n'

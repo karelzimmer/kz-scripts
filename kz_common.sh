@@ -164,7 +164,7 @@ karel op pcNN (bijvoorbeeld pc01)."
 
 function kz_common.init_script {
     # Script-hardening.
-    set -o errexit
+    # set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
@@ -296,7 +296,7 @@ Terminalvenster en voer uit:
             # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
             rm --force kz.{2..99} /tmp/kz_common.sh
             # Maar wel als in HOME, zoals beschreven in Checklist installatie.
-            cd "$HOME"
+            cd "$HOME" || exit $err
             rm --force kz kz.1
 
             if [[ $rc -ne $ok ]]; then
