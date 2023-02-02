@@ -105,7 +105,7 @@ $text"
     else
         info 'Wifi-gegevens:
 '
-        nmcli device wifi show-password || nmcli_rc=$?
+        nmcli device wifi show-password 2> >($logcmd) || nmcli_rc=$?
         if [[ $nmcli_rc -eq 0 ]]; then
             info "
 $text"
