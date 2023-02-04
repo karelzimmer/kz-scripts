@@ -11,8 +11,9 @@
 cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
 kz-gset --addfavaft=kz-cockpit
-#2 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 #2 kz-gset --delfav=kz-cockpit
+#2 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
+
 
 #1-gnome (bureaubladomgeving) [Ubuntu pc06 karel]
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
