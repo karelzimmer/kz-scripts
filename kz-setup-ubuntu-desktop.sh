@@ -17,6 +17,7 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.session idle-delay 900
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
+gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
@@ -41,6 +42,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.desktop.session idle-delay
 #2 gsettings reset org.gnome.nautilus.icon-view default-zoom-level
 #2 gsettings reset org.gnome.nautilus.preferences click-policy
+#2 gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover
 #2 gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 #2 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 #2 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
