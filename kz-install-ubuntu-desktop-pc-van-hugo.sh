@@ -22,7 +22,7 @@ sudo apt-get install --yes clamtk-gnome
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 #2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
-#1-lidswitch (negeer sluiten laptopdesksel) [Ubuntu pc-van-hugo]
+#1-lidswitch (negeer sluiten laptopdesksel) [alleen ubuntu pc-van-hugo]
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf

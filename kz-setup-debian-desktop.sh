@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-dashtodock (favorietenbalk) [Debian]
+#1-dashtodock (favorietenbalk) [alleen debian]
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 #2 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
@@ -77,6 +77,6 @@ kz-gset --addfavaft=skype_skypeforlinux
 kz-gset --addfavaft=spotify_spotify
 #2 kz-gset --delfav=spotify_spotify
 
-#1-start-install (installatie starten) [Debian]
+#1-start-install (installatie starten) [alleen debian]
 kz-gset --delfav=install-debian
 #2 kz-gset --addfavbef=install-debian

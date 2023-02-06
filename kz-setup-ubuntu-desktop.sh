@@ -57,7 +57,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
-#1-gnome (bureaubladomgeving) [Ubuntu]
+#1-gnome (bureaubladomgeving) [alleen ubuntu]
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
@@ -79,6 +79,6 @@ kz-gset --addfavaft=skype_skypeforlinux
 kz-gset --addfavaft=spotify_spotify
 #2 kz-gset --delfav=spotify_spotify
 
-#1-start-install (installatie starten) [Ubuntu]
+#1-start-install (installatie starten) [alleen ubuntu]
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop
 #2 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer.desktop

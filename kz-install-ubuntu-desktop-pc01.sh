@@ -6,7 +6,7 @@
 # Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-add-hosts (koppel IP-adressen aan hostnamen) [Ubuntu pc01]
+#1-add-hosts (koppel IP-adressen aan hostnamen) [alleen ubuntu pc01]
 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 echo '192.168.1.112 pc06' | sudo tee --append /etc/hosts
@@ -14,11 +14,11 @@ echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
 #2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
 
-#1-bluetooth (externe bluetooth-adapter) [Ubuntu pc01]
+#1-bluetooth (externe bluetooth-adapter) [alleen ubuntu pc01]
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 #2 sudo rm --force /etc/udev/rules.d/81-bluetooth-hci.rules
 
-#1-gast (gastgebruiker toevoegen) [Ubuntu pc01]
+#1-gast (gastgebruiker toevoegen) [alleen ubuntu pc01]
 sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
 sudo passwd --delete gast
 #2 sudo userdel --remove gast
