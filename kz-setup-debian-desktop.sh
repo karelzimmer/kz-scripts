@@ -65,7 +65,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
 
-#1 snap (snap verbergen in Persoonlijke map)
+#1 snap (map snap verbergen in Persoonlijke map)
 echo 'snap' > "$HOME"/.hidden
 #2 rm --force "$HOME"/.hidden
 
