@@ -92,8 +92,8 @@ dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
 regel) er zijn en hoe deze regels verwerkt worden.
 .sp
-Zie \fBTabel 2\fR voor een voorbeeld van de \fBvolgorde\fR van deze regels in
-een installatiebestand.
+Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
+installatiebestand kz-install-ubuntu-pc02.sh.
 Meer voorbeelden zijn te zien via de opdracht \fBkz install --cat\fR.
 .sp
 .sp
@@ -161,7 +161,7 @@ Deze regel wordt wél gebruikt bij het verwerken van het installatiebestand.
 .sp
 .sp
 .br
-.B Tabel 2. Voorbeeld van volgorde van regels in een installatiebestand
+.B Tabel 2. Regels in voorbeeldbestand kz-install-ubuntu-pc02.sh
 .TS
 box tab(:);
 lb | lb.
@@ -176,11 +176,27 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# Software installeren
+#1 gnome-gmail (Gmail als e-mailtoepassing)
 T}:T{
-Commentaar.
+Naam APP met beschrijving tussen haakjes.
+T}
+T{
+sudo apt-get install --yes gnome-gmail
+T}:T{
+Installeer-opdracht.
+T}
+T{
+#2 sudo apt-get remove --yes gnome-gmail
+T}:T{
+Verwijder-opdracht; voor optie -r, --remove.
 T}
 T{
 .sp
@@ -188,19 +204,29 @@ T}:T{
 Lege regel.
 T}
 T{
-#1 google-chrome (webbrowser)
+## Alleen voor pc02!
 T}:T{
-Naam APP met beschrijving tussen haakjes.
+Commentaar.
 T}
 T{
-sudo apt-get install --yes google-chrome-stable
+#1-gast (gastgebruiker toevoegen)
 T}:T{
-Installeer-opdracht.
+Alleen op pc02 met Ubuntu installeren.
 T}
 T{
-#2 sudo apt-get remove --yes google-chrome-stable
+sudo useradd --create-home ... gast
 T}:T{
-Verwijder-opdracht; voor optie -r, --remove.
+Eerste opdrachtregel.
+T}
+T{
+sudo passwd --delete gast
+T}:T{
+Tweede opdrachtregel.
+T}
+T{
+#2 sudo userdel --remove gast
+T}:T{
+Verwijder-opdracht.
 T}
 .TE
 .\"

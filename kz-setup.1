@@ -163,7 +163,7 @@ Deze regel worden wél gebruikt bij het verwerken van het instelbestand.
 .sp
 .sp
 .br
-.B Tabel 2. Voorbeeld van volgorde van regels in een instelbestand
+.B Tabel 2. Regels in voorbeeldbestand kz-setup-ubuntu-desktop-pc02-jan.sh
 .TS
 box tab(:);
 lb | lb.
@@ -178,17 +178,11 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
+l | l
 l | l.
-T{
-# Software instellen
-T}:T{
-Commentaar.
-T}
-T{
-.sp
-T}:T{
-Lege regel.
-T}
 T{
 #1 google-chrome (webbrowser)
 T}:T{
@@ -203,6 +197,31 @@ T{
 #2 kz-gset --delfav=google-chrome
 T}:T{
 Reset-opdracht; voor optie -r, --reset.
+T}
+T{
+.sp
+T}:T{
+Lege regel.
+T}
+T{
+## Alleen voor jan op pc02!
+T}:T{
+Commentaar.
+T}
+T{
+#1-gnome (bureaubladomgeving)
+T}:T{
+Alleen voor Jan op pc02 met Ubuntu instellen.
+T}
+T{
+gsettings set org.gnome.shell...
+T}:T{
+Instel-opdracht.
+T}
+T{
+#2 gsettings reset org.gnome.shell...
+T}:T{
+Reset-opdracht.
 T}
 .TE
 .\"
