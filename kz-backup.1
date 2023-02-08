@@ -42,23 +42,22 @@ te brengen. Het wordt meestal gebruikt in combinatie met rsync's optie --delete
 om te zien wat een rsync-commando gaat doen voordat men het daadwerkelijk
 uitvoert.
 .sp
-Standaard worden de volgende bestanden en mappen NIET in de back-up opgenomen:
+Deze locaties worden standaard genegeerd:
 .RS
  .adobe/Flash_Player/AssetCache
  .cache
  .ccache
- .git
  .gvfs
  .Private
  .recent-applications.xbel
  .recently-used.xbel
- snap/*/*/.cache
  .steam/root
  .thumbnails
  .var/app/*/cache
  .xsession-errors
+ snap/*/*/.cache
+ *CACHEDIR.TAG*
 .RE
-.sp
 Tevens worden "git-controlled" mappen niet in de back-up opgenomen. Voorbeeld:
 ~/bin wordt overgeslagen vanwege de aanwezigheid van ~/bin/.git.
 .sp

@@ -259,7 +259,7 @@ function create_backup {
 
     exclude=$(mktemp -t "$program_name-XXXXXXXXXX")
 
-    # Backup solution Déjà Dup exclude these files by default.
+    # Déjà Dup: Sommige locaties worden standaard genegeerd.
     cat << EOF > "$exclude"
 .adobe/Flash_Player/AssetCache
 .cache
