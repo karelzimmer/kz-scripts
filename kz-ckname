@@ -101,12 +101,12 @@ function process_input {
 
 
 function check_files {
-    local basename
+    local basename=''
     local -i count=0
-    local dirname
-    local file
+    local dirname=''
+    local file=''
     local -i filename_maxlen=142
-    local good
+    local good=''
 
     # Het maakt niet uit of in de bestandsnaam speciale tekens voorkomen zoals
     # tab, spatie, enz.  Hiervoor zorgt de find met print0,en de read met IFS=
