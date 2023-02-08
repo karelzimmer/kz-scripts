@@ -45,21 +45,18 @@ Argumenten:
 declare options_short+='acfgrs'
 declare options_long+=',apps,cat,files,gui,remove,server,simulate'
 
-declare distro; distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-
-declare apps_file; apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
-declare cmds_file; cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
-declare sims_file; sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
-
 
 ###############################################################################
 # Variables
 ###############################################################################
 
 declare -a app_arguments=()
+declare apps_file=''
 declare argument_app=false
 declare argument_file=false
+declare cmds_file=''
 declare commands_found=false
+declare distro=''
 declare edition=desktop
 declare execute_commands=true
 declare -a file_arguments=()
@@ -71,6 +68,7 @@ declare option_files=false
 declare option_gui=false
 declare option_remove=false
 declare option_simulate=false
+declare sims_file=''
 declare status_busy=''
 declare status_err=''
 declare status_ok=''
@@ -166,7 +164,13 @@ function process_input {
     local -i file_num=0
     local file=''
 
+    # Maak tijdelijke bestanden.
+    apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
+    cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
+    sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
+
     # Verwerk argumenten.
+    distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
     dfltfile_1=$program_path/$program_name-$distro-$edition.sh
     dfltfile_2=$program_path/$program_name-$distro-$edition-$HOSTNAME.sh
     if $argument_app; then
