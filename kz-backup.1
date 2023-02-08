@@ -58,8 +58,11 @@ Deze locaties worden standaard genegeerd:
  snap/*/*/.cache
  *CACHEDIR.TAG*
 .RE
-Tevens worden "git-controlled" mappen niet in de back-up opgenomen. Voorbeeld:
-~/bin wordt overgeslagen vanwege de aanwezigheid van ~/bin/.git.
+Tevens worden door Git beheerde mappen ("git-controlled") niet in de back-up
+opgenomen.
+.br
+Voorbeeld: ~/bin wordt overgeslagen vanwege de aanwezigheid van
+~/bin/.git.
 .sp
 Voor het maken van de back-up wordt rsync gebruikt.
 .br
