@@ -63,6 +63,9 @@ Tevens worden "git-controlled" mappen niet in de back-up opgenomen. Voorbeeld:
 ~/bin wordt overgeslagen vanwege de aanwezigheid van ~/bin/.git.
 .sp
 Voor het maken van de back-up wordt rsync gebruikt.
+.br
+Bestanden die verwijderd zijn uit de Persoonlijke map worden ook verwijderd uit
+de back-up (rsync's optie delete wordt gebruikt).
 .sp
 Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .\"
