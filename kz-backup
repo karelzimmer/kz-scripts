@@ -268,11 +268,12 @@ function create_backup {
 .Private
 .recent-applications.xbel
 .recently-used.xbel
-snap/*/*/.cache
 .steam/root
 .thumbnails
 .var/app/*/cache
 .xsession-errors
+snap/*/*/.cache
+*CACHEDIR.TAG*
 EOF
 
     # Skip git-controlled directories.
