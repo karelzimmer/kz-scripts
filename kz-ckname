@@ -32,9 +32,6 @@ $options_help
 Argumenten:
   MAP            begin te controleren vanaf map MAP"
 
-declare start_dflt=$HOME
-declare -i filename_maxlen=142
-
 
 ###############################################################################
 # Variables
@@ -86,7 +83,7 @@ function check_input {
         shift
     done
     if ! $argument_map; then
-        map_arguments[0]=$start_dflt
+        map_arguments[0]=$HOME
     fi
     for dir in "${map_arguments[@]}"; do
         if ! [[ -d $dir ]]; then
@@ -105,9 +102,10 @@ function process_input {
 
 function check_files {
     local basename
-    local -i    count=0
+    local -i count=0
     local dirname
     local file
+    local -i filename_maxlen=142
     local good
 
     # Het maakt niet uit of in de bestandsnaam speciale tekens voorkomen zoals

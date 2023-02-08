@@ -36,8 +36,6 @@ $options_help"
 declare options_short+='dgt:'
 declare options_long+=',dry-run,gui,target:'
 
-declare source=$HOME
-
 
 ###############################################################################
 # Variables
@@ -256,6 +254,7 @@ function backup_settings_user_photo {
 function create_backup {
     local exclude=''
     local -i rsync_rc=0
+    local source=$HOME
 
     exclude=$(mktemp -t "$program_name-XXXXXXXXXX")
 

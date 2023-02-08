@@ -36,8 +36,6 @@ $options_help"
 declare options_short+='gs:'
 declare options_long+=',dry-run,gui,source:'
 
-declare target=$HOME
-
 
 ###############################################################################
 # Variables
@@ -226,6 +224,7 @@ $prompt"
 
 function restore_backup {
     local -i rsync_rc=0
+    local target=$HOME
 
     text='Restore voorbereiden (dit kan even duren)'
     if $option_gui; then
