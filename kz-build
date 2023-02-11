@@ -134,10 +134,10 @@ function build_uploads {
     local temptextfile=''
 
     log 'Bouw website...'
-    # Gebruik diff voor deltabepaling (i.p.v. rsync) omdat na git pull en lft
-    # mirror in script kz-getdeb de timestamps van de bestanden verschillen en
-    # dit met rsync tot vals positief leidt (aka false positive, alleen
-    # timestamp is verschillend, niet de inhoud).
+    # Gebruik diff voor deltabepaling (i.p.v. rsync) omdat na 'git pull' en
+    # 'lftp mirror' met script kz-getdeb de timestamps van de bestanden
+    # verschillen en dit met rsync tot vals positief leidt (aka false
+    # positive), alleen timestamp is verschillend, niet de inhoud.
 
     # Vul dist/ met app/
     cd "$uploads_appdir"
