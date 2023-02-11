@@ -242,6 +242,7 @@ function build_deb {
             --delete                    \
             --verbose                   \
             --exclude='__pycache__'     \
+            --exclude='LICENSE'         \
             --exclude='README.md'       \
             --exclude='.git*'           \
             --delete-excluded           \
