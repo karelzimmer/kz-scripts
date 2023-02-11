@@ -164,7 +164,7 @@ function build_uploads {
             cp  --preserve                  \
                 --verbose                   \
                 "$file"                     \
-                "${uploads_targets[docs]}"   |& $logcmd
+                "${uploads_targets[docs]}"  |& $logcmd
             lowriter    --headless                          \
                         --convert-to pdf                    \
                         --outdir "${uploads_targets[pdfs]}" \
