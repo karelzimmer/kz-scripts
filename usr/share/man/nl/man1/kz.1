@@ -1,0 +1,225 @@
+.\"############################################################################
+.\"# Man-pagina voor kz.
+.\"#
+.\"# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz \- Opdracht uitvoeren.
+.\"
+.\"
+.SH SAMENVATTING
+.B kz
+\fIOPDRACHT\fR [\fIARGUMENT\fR...]
+.br
+.B kz
+OPTIE
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkz\fR voert \fIOPDRACHT\fR uit, geïnstalleerd door pakket kz, eventueel met
+de opgegeven \fIARGUMENT\fRen.
+.sp
+Pakket kz is een verzameling documenten en scripts voor het installeren,
+instellen, en beheren van bijvoorbeeld Ubuntu Linux.
+.sp
+Gebruik optie \fB-l\fR, \fB--list\fR voor een lijst van beschikbare
+\fIOPDRACHT\fRen.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-l\fR, \fB--list\fR
+Toon de beschikbare opdrachten.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.\"
+.\"
+.SH KZ OPDRACHTEN
+.sp
+De opdrachten van kz zijn verdeeld in opdrachten op hoog niveau ("porcelein",
+"porcelain") en opdrachten op laag niveau ("loodgieterswerk", "plumbing").
+.SH OPDRACHTEN OP HOOG NIVEAU (PORCELEIN)
+Deze opdrachten zijn uit te voeren in een grafische werkomgeving met het
+Installatiemenu of door te zoeken naar de opdracht, en in het Terminalvenster.
+.TP
+\fBkz-backup\fR(1)
+Back-up maken.
+.TP
+\fBkz-install\fR(1)
+Apps installeren.
+.TP
+\fBkz-menu\fR(1)
+Installatiemenu.
+.TP
+\fBkz-restore\fR(1)
+Back-up terugzetten.
+.TP
+\fBkz-setup\fR(1)
+Apps instellen.
+.TP
+\fBkz-wifi\fR(1)
+Wifi-informatie tonen.
+.SH OPDRACHTEN OP LAAG NIVEAU (LOODGIETERSWERK)
+Deze opdrachten zijn alleen uit te voeren in het Terminalvenster en zijn
+ondersteunend voor het beheer en gebruik van kz en Linux.
+.TP
+\fBkz-build\fR(1)
+Pakket kz bouwen.
+.TP
+\fBkz-ckname\fR(1)
+Bestandsnamen controleren.
+.TP
+\fBkz-deploy\fR(1)
+Pakket kz distribueren.
+.TP
+\fBkz-getdeb\fR(1)
+Pakket kz installeren.
+.TP
+\fBkz-gset\fR(1)
+GUI wijzigen.
+.TP
+\fBkz-ivp\fR(1)
+Scripts controleren.
+.TP
+\fBkz-update\fR(1)
+Systeem bijwerken.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH NOTITIES
+.sp
+Pakket \fBkz\fR geeft met de documenten en scripts invulling aan en
+ondersteuning voor:
+.br
+\fB1. IaC\fR
+.br
+\fB2. CI/CD\fR
+.br
+\fB3. Day 0/Day 1/Day 2 Operations\fR
+.br
+Begrippen uit de moderne wereld van software-ontwikkeling, -distributie, en
+beheer.
+.sp
+\fB1. IaC\fR (Infrastructure as Code, Infrastructuur als Code of
+programmeerbare infrastructuur)
+.br
+Het definiëren en beheren van infrastructuur door middel van code.
+.br
+De opdrachten die standaard meegeleverd worden bij pakket kz zijn
+idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+.br
+Herhaalbaarheid (idempotentie) is één van de principes van IaC.
+.br
+De documenten en scripts worden vastgelegd en onderhouden in versiebeheer
+(GitHub), een ander principe van IaC.
+.br
+Voorbeelden zijn \fBkz-install-ubuntu-desktop.sh\fR (installatiebestand
+gebruikt door \fBkz install\fB) en \fBkz-setup-ubuntu-desktop.sh\fR
+(instelbestand gebruikt door \fBkz setup\fR).
+.sp
+\fB2. CI/CD\fR (Continuous Integration and Delivery, Continue integratie en
+levering)
+.br
+CI/CD is de gecombineerde praktijk van continuous integration (CI) en (vaker)
+continuous delivery of (minder vaak) continuous deployment (CD).
+.br
+CI (Continuous Integration, Continue integratie) is het meerdere keren per dag
+de werkkopieën van alle ontwikkelaars samenvoegen tot een gedeelde hoofdlijn.
+.br
+CD (Continuous Delivery, Continue levering) is software produceren in korte
+cycli, ervoor zorgen dat de software op elk moment betrouwbaar kan worden
+vrijgegeven en, bij het vrijgeven van de software, zonder dit handmatig te
+doen.
+.br
+CD (Continuous Deployment, Continue doorzetten) is een aanpak waarbij
+softwarefunctionaliteiten vaak en via geautomatiseerde implementaties worden
+geleverd.
+.br
+Een \fBCI/CD Pipeline\fR is een reeks stappen die moet worden uitgevoerd om
+geautomatiseerd een nieuwe softwareversie te leveren.
+.br
+Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
+.sp
+\fB3. Day 0/Day 1/Day 2 Operations\fR
+.br
+In IT verwijzen de termen Day 0/Day 1/Day 2 Operations naar verschillende fasen
+van software-ontwikkeling, -distributie, en beheer.
+.sp
+\fB3.1 Day 0 Operations\fR (Dag 0 Activiteiten)
+.br
+Dit is de ontwerpfase (design), waarin projectvereisten worden gespecificeerd
+en de architectuur van de oplossing wordt bepaald.
+.br
+Hierbij gebruik ik Visual Studio Code en GitHub, en programmeer ik in Bash en
+Python.
+.sp
+\fB3.2 Day 1 Operations\fR (Dag 1 Activiteiten)
+.br
+Omvat het ontwikkelen en implementeren (development and deploy) van software
+die is ontworpen in de dag 0-fase.
+.br
+Hierbij wordt onder andere gebruik gemaakt van \fBIaC\fR en
+\fBCI/CD Pipelines\fR (voor uitleg zie zie verderop), en het uitvoeren van
+Ansible Playbooks.
+.br
+Voorbeelden zijn Checklist installatie, en \fBkz getdeb\fR en \fBkz menu\fR.
+.sp
+\fB3.3 Day 2 Operations\fR (Dag 2 Activiteiten)
+.br
+Hier gaat de meeste aandacht uit naar het onderhouden, bewaken en optimaliseren
+(maintaining, monitoring, and optimizing) van het systeem.
+.br
+Voorbeelden zijn \fBkz backup\fR en \fBkz update\fR.
+.\"
+.\"
+.SH VOORBEELDEN
+\fBkz update\fR
+.RS
+Werk systeem bij.
+.RE
+.sp
+\fBkz install google-chrome\fR
+.RS
+Installeer Google Chrome.
+.RE
+.sp
+\fBkz setup --cat google-chrome\fR
+.RS
+Toon instel-opdrachten voor Google Chrome.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht \fBkz\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.

@@ -1,0 +1,57 @@
+.\"############################################################################
+.\"# Man-pagina voor kz_common.sh.
+.\"#
+.\"# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ_COMMON.SH 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz_common.sh \- Algemene module voor shell scripts.
+.\"
+.\"
+.SH SAMENVATTING
+.B source kz_common.sh
+.\"
+.\"
+.SH BESCHRIJVING
+Deze module geeft toegang tot algemene variabelen en functies.
+.sp
+Algemene variabelen zoals:
+.br
+- afsluitwaarden (ok, err)
+.br
+- terminalattributen (green, red)
+.sp
+Algemene functies zoals:
+.br
+- initiele acties bij starten van een script (kz_common.init_script)
+.br
+- verwerk opties zoals usage en help (kz_common.process_options)
+.br
+- controleer gebruik van superuser, root (kz_common.check_user_root)
+.sp
+Tevens zorgt deze module voor script-hardening en foutafhandeling.
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkz\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Module \fBkz_common.sh\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.

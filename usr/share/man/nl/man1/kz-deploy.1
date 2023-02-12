@@ -1,0 +1,122 @@
+.\"############################################################################
+.\"# Man-pagina voor kz-deploy.
+.\"#
+.\"# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ-DEPLOY 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz-deploy \- Pakket kz distribueren.
+.\"
+.\"
+.SH SAMENVATTING
+.B kz deploy
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkz deploy\fR distribueert pakket kz.
+.br
+Dit om de scripts en documenten beschikbaar te stellen voor algemeen gebruik.
+.sp
+Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
+.br
+\fBgit clone https://github.com/karelzimmer/kz-docs.git\fR
+.br
+\fBgit clone https://github.com/karelzimmer/kz-scripts.git\fR
+.sp
+Opdracht \fBkz deploy\fR kan alleen worden uitgevoerd als Ontwikkelaar, d.i.
+aangemeld als karel op pcNN (bijvoorbeeld pc01).
+.sp
+De volgende acties worden uitgevoerd:
+.RS
+   Als check:
+.br
+1. Controleer scriptnamen (met \fBkz ckname\fR).
+.br
+2. Controleer scripts (met \fBkz ivp\fR).
+.br
+   De build:
+.br
+3. Bouw pakket (met \fBkz build\fR).
+.br
+   De feitelijke deploy:
+.br
+4. Upload website (met \fBlftp\fR).
+.br
+   De installatie van pakket kz:
+.br
+5. Installer pakket kz (met \fBkz getdeb\fR).
+.RE
+.sp
+Met opdracht \fBkz getdeb\fR kan de scripts-ontwikkelomgeving op een andere of
+dezelfde machine neergezet worden.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH MAPPEN
+~/kz-uploads/
+.RS
+Website.
+.RE
+.\"
+.\"
+.SH BESTANDEN
+~/kz-uploads/downloads/kz/kz_365_all.deb
+.RS
+Debian-pakket kz.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+CI/CD en Day 1 Operations
+.RS 4
+\fBkz deploy\fR wordt voornamelijk gebruikt voor \fBCI/CD\fR en
+\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkz\fR(1),
+\fBkz-build\fR(1),
+\fBkz-ckname\fR(1),
+\fBkz_common.sh\fR(1),
+\fBkz-getdeb\fR(1),
+\fBkz-ivp\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht \fBkz deploy\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.

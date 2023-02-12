@@ -1,0 +1,182 @@
+.\"############################################################################
+.\"# Man-pagina voor kz-gset.
+.\"#
+.\"# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ-GSET 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz-gset \- GUI wijzigen.
+.\"
+.\"
+.SH SAMENVATTING
+.B kz gset
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkz gset\fR helpt bij het wijzigen van de grafische werkomgeving (GUI).
+.sp
+\fBkz gset\fR:
+.RS
+- toont wijzigingen in de configuratiedatabase,
+.br
+- kan een toepassingspictogram (favoriet) toevoegen, en
+.br
+- kan een appfolder toevoegen om starters te verzamelen.
+.RE
+.sp
+Met optie \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR wordt toepassingspictogram
+(favoriet) \fIFAVORITE\fR toegevoegd aan het einde van de favorietenbalk
+(dash, dock).
+.sp
+Met optie \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR wordt toepassingspictogram
+(favoriet) \fIFAVORITE\fR toegevoegd aan het begin van de favorietenbalk
+(dash, dock).
+.sp
+Met optie \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR wordt toepassingspictogram
+(favoriet) \fIFAVORITE\fR verwijderd uit de favorietenbalk (dash, dock).
+.sp
+Als er al een toepassingspictogram (favoriet) van \fIFAVORITE\fR bestaat
+wordt deze niet opnieuw toegevoegd.
+.br
+Als een toepassingspictogram (favoriet) bovenaan is toegevoegd die onderaan
+geplaatst moet worden, moet de bestaande eerst verwijderd te worden met optie
+\fB-d\fR, \fB--delfav\fR.
+.br
+Bestand \fIFAVORITE\fR.desktop moet bestaan in een van de applicatiemappen
+zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
+.sp
+Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten en appfolders
+getoond.
+.sp
+Met optie \fB-r\fR, \fB--resetfavs\fR wordt de favorietenbalk (dash, dock)
+teruggezet met standaard favorieten.
+.sp
+Met optie \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR wordt appfolder
+\fIAPPFOLDER\fR toegevoegd.
+.sp
+Met optie \fB-x\fR, \fB--delfavappfolder\fR=\fIAPPFOLDER\fR wordt appfolder
+\fIAPPFOLDER\fR verwijderd.
+.sp
+Als er geen opties zijn opgegeven toont \fBkz gset\fR wijzigingen in de
+configuratiedatabase na een wijziging in de grafische werkomgeving (GUI).
+.br
+Het volgende wordt uitgevoerd:
+.sp
+.RS
+1. Inhoud configuratiedatabase ervoor vastleggen.
+.br
+2. Gebruiker voert wijzigingen met de GUI uit.
+.br
+3. Inhoud configuratiedatabase erna vastleggen.
+.br
+4. Wijzigingen in de configuratiedatabase rapporteren.
+.RE
+.sp
+Met de opdracht \fBgsettings set \fIschema\fR\fB[:\fIpath\fR\fB] \fIkey\fR zijn
+daarna de wijzigingen op te slaan in de configuratiedatabase, en hoeven deze
+niet meer, met de hand, met de GUI te worden uitgevoerd.
+.sp
+Voor een systeem met Lubuntu met de LXDE- en met Xubuntu met de
+Xfce-werkomgeving kan via het Terminalvenster met opdrachten opgezocht worden
+wat er gewijzigd moet worden:
+.RS
+\fBxfconf-query --list\fR
+    Geeft overzicht kanalen/channels.
+.sp
+\fBxfconf-query --channel \fIkanaal\fR\fB --monitor --verbose\fR
+    Breng nu de wijzigingen via de GUI aan.
+.sp
+\fBxfconf-query --channel \fIkanaal\fR\fB --list --verbose\fR
+    Geeft overzicht eigenschappen/properties.
+.sp
+\fBxfconf-query --channel \fIkanaal\fR\fB --property \fIeigenschap\fR\fB
+--set \fIwaarde\fR
+    Vul de waarde in voor een property.
+.RE
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR
+Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe achteraan de
+favorietenbalk (dash, dock).
+.TP
+\fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR
+Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe vooraan de
+favorietenbalk (dash, dock).
+.TP
+\fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR
+Verwijder toepassingspictogram (favoriet) \fIFAVORITE\fR uit de
+favorietenbalk (dash, dock).
+.TP
+\fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR
+voeg appfolder \fIAPPFOLDER\fR toe.
+.TP
+\fB-x\fR, \fB--removeappfolder\fR=\fIAPPFOLDER\fR
+Verwijder appfolder \fIAPPFOLDER\fR.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkz gset\fR
+.RS
+Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
+werkomgeving (GUI).
+.RE
+.sp
+\fBkz gset --addfavbef=idle\fR
+.RS
+Voeg de IDLE (Python's Integrated Development and Learning Environment)
+toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
+idle.desktop moet bestaan in een van de applicatiemappen
+zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
+.RE
+.sp
+\fBkz gset --delfav=idle\fR
+.RS
+Verwijder de IDLE (Python's Integrated Development and Learning Environment)
+toepassingspictogram (favoriet) uit de favorietenbalk.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2015 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkz\fR(1),
+\fBgsettings\fR(1),
+\fBkz_common.sh\fR(1),
+\fBxfconf-query\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht \fBkz gset\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.

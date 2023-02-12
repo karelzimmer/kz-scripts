@@ -1,0 +1,146 @@
+.\"############################################################################
+.\"# Man-pagina voor kz-getdeb.
+.\"#
+.\"# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ-GETDEB 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz-getdeb \- Pakket kz installeren.
+.\"
+.\"
+.SH SAMENVATTING
+.B kz getdeb
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkz getdeb\fR downloadt en installeert pakket kz.
+.sp
+Pakket kz plaatst documenten en scripts van Karel Zimmer voor het installeren
+en beheren van Debian en op Debian gebaseerd systeem zoals Ubuntu.
+.sp
+Er  wordt een ontwikkelomgeving ingericht als aangemeld als Ontwikkelaar, d.i.
+aangemeld als karel op pcNN (bijvoorbeeld pc01).
+.sp
+Voor de nieuwste versie van \fBkz getdeb\fR én pakket kz, start een
+Terminalvenster en voer uit (kopie van kz wordt opgeslagen en later
+verwijderd):
+.br
+    \fBwget karelzimmer.nl/kz\fR
+.br
+    \fBbash kz\fR
+.br
+ of (idem hiervoor, nu op 1 regel):
+.br
+    \fBwget karelzimmer.nl/kz; bash kz\fR
+.br
+ of (er wordt geen kopie van kz opgeslagen):
+.br
+    \fBwget -O- karelzimmer.nl/kz | bash\fR
+.br
+ of (als curl is geïnstalleerd, geen kopie):
+.br
+    \fBcurl -L karelzimmer.nl/kz | bash\fR
+.br
+ of (mits pakket kz reeds is geïnstalleerd):
+.br
+    \fBkz getdeb\fR
+.sp
+Opdracht \fBkz getdeb\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH BESTANDEN
+https://karelzimmer.nl/data/linux/scripts/kz_common.sh
+.RS
+Algemene module voor shell scripts.
+.RE
+.\"
+.\"
+.SH MAPPEN
+/usr/bin
+.RS
+Scripts van pakket kz.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+IaC en Day 1 Operations
+.RS 4
+\fBkz getdeb\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
+\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+.RE
+.\"
+.\"
+.SH VOORBEELDEN
+Een website downloaden? Voer dan uit:
+.br
+\fBmkdir --parents ~/uploads/karelzimmer.nl/httpdocs
+.br
+lftp --user <USER> --password <PASSWORD> <HOST> -e\
+ 'set ssl:verify-certificate no; mirror --delete --verbose /httpdocs
+~/uploads/karelzimmer.nl/httpdocs; exit'\fR
+.sp
+Een website uploaden? Voer dan uit:
+.br
+\fBlftp --user <USER> --password <PASSWORD> <HOST> -e\
+ 'set ssl:verify-certificate no; mirror --reverse --delete --verbose /httpdocs
+~/uploads/karelzimmer.nl/httpdocs; exit'\fR
+.sp
+Een enkel bestand downloaden? Voer dan uit:
+.br
+\fBlftp --user <USER> --password <PASSWORD> <HOST> -e\
+ 'set ssl:verify-certificate no; get -O /httpdocs/<DIR>
+~/uploads/karelzimmer.nl/httpdocs/<DIR>/<FILE>; exit'\fR
+.sp
+Een enkel bestand uploaden? Voer dan uit:
+.br
+\fBlftp --user <USER> --password <PASSWORD> <HOST> -e\
+ 'set ssl:verify-certificate no; put -O /httpdocs/<DIR>
+~/uploads/karelzimmer.nl/httpdocs/<DIR>/<FILE>; exit'\fR
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2016 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkz\fR(1),
+\fBkz_common.sh\fR(1),
+\fBkz-deploy\fR(1),
+\fBkz-menu\fR(1),
+\fBkz-update\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht \fBkz getdeb\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.

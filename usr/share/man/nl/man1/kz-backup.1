@@ -1,0 +1,181 @@
+.\"############################################################################
+.\"# Man-pagina voor kz-backup.
+.\"#
+.\"# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ-BACKUP 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz-backup \- Back-up maken.
+.\"
+.\"
+.SH SAMENVATTING
+.B kz backup
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkz backup\fR maakt een back-up (reservekopie) van de Persoonlijke map.
+.sp
+In een grafische werkomgeving kan opdracht \fBkz backup\fR worden uitgevoerd
+door te zoeken naar \fBback\fR, klik op \fBBack-up maken\fR.
+.sp
+Voordat er een back-up wordt gemaakt, worden er instellingen veiliggesteld in
+de Persoonlijke map / Instellingen. In deze map komen de ingestelde
+Achtergrond, Gebruikersfoto, en Favorieten, en een lijst van geïnstalleerde
+Apps.
+.sp
+De back-up wordt geplaatst op een aangekoppeld usb-medium zoals een usb externe
+harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, deze map
+wordt aangemaakt als nodig, bijvoorbeeld
+/media/jan/backupdisk/backup-pc02-jan.
+.sp
+Met optie \fB-t\fR, \fB--target\fR=\fIDOELMAP\fR kan een andere locatie
+opgegeven worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk
+(onverstandig want /tmp wordt leeggegooid na een herstart).
+.sp
+Optie \fB-d\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
+te brengen. Het wordt meestal gebruikt in combinatie met rsync's optie --delete
+om te zien wat een rsync-commando gaat doen voordat men het daadwerkelijk
+uitvoert.
+.sp
+Deze locaties worden standaard genegeerd:
+.RS
+ .adobe/Flash_Player/AssetCache
+ .cache
+ .ccache
+ .gvfs
+ .Private
+ .recent-applications.xbel
+ .recently-used.xbel
+ .steam/root
+ .thumbnails
+ .var/app/*/cache
+ .xsession-errors
+ snap/*/*/.cache
+ *CACHEDIR.TAG*
+.RE
+Tevens worden door Git beheerde mappen ("git-controlled") niet in de back-up
+opgenomen.
+.br
+Voorbeeld: ~/bin wordt overgeslagen vanwege de aanwezigheid van
+~/bin/.git.
+.sp
+Voor het maken van de back-up wordt rsync gebruikt.
+.br
+Bestanden die verwijderd zijn uit de Persoonlijke map worden ook verwijderd uit
+de back-up (rsync's optie --delete wordt gebruikt).
+.sp
+Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-d\fR, \fB--dry-run\fR
+Een proefrun uitvoeren zonder wijzigingen aan te brengen.
+.TP
+\fB-t\fR, \fB--target=\fIDOELMAP\fR
+Plaats de back-up in de \fIDOELMAP\fR.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus
+(gui=graphical user interface; grafische gebruikersinterface).
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH BESTANDEN
+~/Instellingen/Apps
+.RS
+Lijst van geïnstalleerde apps.
+.RE
+.sp
+~/Instellingen/Achtergrond
+.RS
+Ingestelde bureaubladachtergrond.
+.RE
+.sp
+~/Instellingen/Favorieten
+.RS
+Ingestelde favorieten in de favorietenbalk (dash/dock).
+.RE
+.sp
+~/Instellingen/Gebruikersfoto
+.RS
+Ingestelde gebruikersfoto.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+Checklist installatie
+.RS 4
+https://karelzimmer.nl/html/linux.html#documenten
+.RE
+.IP " 2." 4
+Day 2 Operations
+.RS 4
+\fBkz backup\fR wordt voornamelijk gebruikt voor Day 2 Operations. Zie
+\fBkz\fR(1) voor een uitleg.
+.RE
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkz backup\fR
+.RS
+Maak een back-up van de Persoonlijke map.
+.br
+Hiervoor is in een grafische werkomgeving ook starter \fBBack-up maken\fR
+beschikbaar.
+.RE
+.sp
+\fBkz backup --dry-run\fR
+.RS
+Toon bestanden die anders toegevoegd en verwijderd zouden worden in de back-up.
+.RE
+.sp
+\fBkz backup --target=smb://fileserver/backups\fR
+.RS
+Maak een back-up van de Persoonlijke map naar SMB-share backups op fileserver
+in de map backup-pc02-jan (deze map wordt aangemaakt als nodig).
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2007 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkz\fR(1),
+\fBkz_common.sh\fR(1),
+\fBkz-menu\fR(1),
+\fBkz-restore\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht \fBkz backup\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.

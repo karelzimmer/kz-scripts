@@ -1,0 +1,130 @@
+.\"############################################################################
+.\"# Man-pagina voor kz-build.
+.\"#
+.\"# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ-BUILD 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz-build \- Pakket kz bouwen.
+.\"
+.\"
+.SH SAMENVATTING
+.B kz build
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkz build\fR bouwt het pakket kz én de website https://karelzimmer.nl.
+.br
+Dit om het pakket en de website te kunnen testen, en later te distribueren met
+\fBkz deploy\fR.
+.sp
+Als invoer worden de Git-repositories kz-docs en kz-scripts gebruikt. Van
+tekstbestanden worden pdf-bestanden gemaakt met 'lowriter convert-to pdf'.
+.sp
+Als ontwikkelen en testen gereed is, kan \fBkz deploy\fR uitgevoerd worden.
+.sp
+Opdracht \fBkz build\fR kan alleen worden uitgevoerd als Ontwikkelaar, d.i.
+aangemeld als karel op pcNN (bijvoorbeeld pc01).
+.sp
+Opdracht \fBkz build\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
+.sp
+De volgende acties worden uitgevoerd:
+.RS
+1. Controleer afhankelijkheden.
+.br
+2. Bouw website.
+.br
+3. Bouw pakket.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH MAPPEN
+~/kz-deb/
+.RS
+Basis-bestanden pakket kz.
+.RE
+.sp
+~/kz-docs/
+.RS
+Checklists.
+.RE
+.sp
+~/kz-scripts/
+.RS
+Scripts.
+.br
+Inclusief man-pagina's (*.1),
+Tab-completion-scripts (*.completion),
+bureaublad-configuratiebestanden (*.desktop), en
+PolicyKit actiedefinitiebestanden (*.policy).
+.RE
+.sp
+~/kz-uploads/
+.RS
+Website.
+.RE
+.\"
+.\"
+.SH BESTANDEN
+~/kz-uploads/downloads/kz/kz_365_all.deb
+.RS
+Debian-pakket kz.
+.RE
+.sp
+/usr/share/gnome-background-properties/kz-wallpapers.xml
+.RS
+Bureaubladachtergronden-configuratiebestand.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+CI/CD en Day 1 Operations
+.RS 4
+\fBkz build\fR wordt voornamelijk gebruikt voor \fBCI/CD\fR en
+\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkz\fR(1),
+\fBkz_common.sh\fR(1),
+\fBkz-deploy\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht \fBkz build\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.

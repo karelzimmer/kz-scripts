@@ -1,0 +1,375 @@
+.\"############################################################################
+.\"# Man-pagina voor kz-install.
+.\"#
+.\"# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative
+.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"############################################################################
+.\"
+.TH KZ-INSTALL 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.\"
+.\"
+.SH NAAM
+kz-install \- Apps installeren.
+.\"
+.\"
+.SH SAMENVATTING
+.B kz install
+[OPTIE...] [\fIAPP\fR...] [\fIBESTAND\fR...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkz install\fR installeert apps en wijzigt systeeminstellingen.
+.sp
+In een grafische werkomgeving kan opdracht \fBkz install\fR worden uitgevoerd
+door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
+.sp
+Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
+gebruikersinstellingen.
+.sp
+\fBkz install\fR verwerkt zogenaamde installatiebestanden die opdrachten
+bevatten voor het installeren van apps en het wijzigen van systeeminstellingen.
+.sp
+Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
+.br
+- /usr/bin/kz-install-<distributie>-desktop.sh
+.br
+- /usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh (indien aanwezig)
+.sp
+<distributie> en <computernaam> worden ingevuld met waarden van de huidige
+computer.
+.sp
+Bijvoorbeeld kz-install-ubuntu-desktop.sh en kz-install-ubuntu-desktop-pc02.sh.
+.br
+Deze installatiebestanden bevatten opdrachten voor ubuntu desktop algemeen en
+ubuntu desktop op pc02.
+.sp
+Voor de indeling van de installatiebestanden zie het deel
+\fBBESTANDSINDELING\fR hieronder.
+.sp
+Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
+standaard installatiebestanden opgenomen in de lijst van te verwerken
+bestanden.
+.sp
+Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
+.sp
+Optie \fB-f\fR, \fB--files\fR geeft een lijst van installatiebestanden.
+.sp
+Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
+beginnen met \fBkz-install-\fR en te eindigen met \fB.sh\fR.
+.br
+Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
+.br
+De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
+bestanden.
+.sp
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
+alle installatiebestanden (bestanden die beginnen met \fBkz-install-\fR en
+eindigen met \fB.sh\fR).
+.sp
+Het is mogelijk om \fIAPP\fRs op te geven.
+.br
+Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
+installatiebestanden en wordt deze samen met de bijbehorende opdrachten
+gekopieerd naar een tijdelijk bestand.
+.br
+De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
+installatiebestanden.
+.sp
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de installatiebestanden.
+.sp
+Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
+.\"
+.\"
+.SH BESTANDSINDELING
+De te verwerken bestanden dienen te beginnen met \fBkz-install-\fR en te
+eindigen met \fB.sh\fR.
+.sp
+De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+.br
+De opdrachten standaard meegeleverd bij \fBkz install\fR zijn zodanig opgesteld
+dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
+.sp
+Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
+regel) er zijn en hoe deze regels verwerkt worden.
+.sp
+Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
+voorbeeldbestand kz-install-ubuntu-pc02.sh.
+Meer voorbeelden zijn te zien via de opdracht \fBkz install --cat\fR.
+.sp
+.sp
+.br
+.B Tabel 1. Soorten regels en hun verwerking
+.TS
+allbox tab(:);
+lb | lb.
+T{
+Regel
+T}:T{
+Beschrijving
+T}
+.T&
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l.
+T{
+#1 APP (BESCHRIJVING)
+T}:T{
+Bevat de APP naam en een beschrijving van APP.
+T}
+T{
+#1-APP (BESCHRIJVING)
+T}:T{
+Idem, wordt niet altijd gebruikt, zie [1].
+T}
+T{
+#2 Opdracht
+T}:T{
+Opdracht voor het verwijderen van APP.
+T}
+T{
+.sp
+T}:T{
+Wordt overgeslagen (is leeg).
+T}
+T{
+#...
+T}:T{
+Wordt overgeslagen (is commentaar).
+T}
+T{
+Opdracht
+T}:T{
+Opdracht voor het installeren van APP
+T}
+.TE
+.sp
+.sp
+.br
+[1]
+.br
+Regel '#1-APP (beschrijving)' is bedoeld voor een opdracht die specifiek is
+voor een distributie of een computer.
+.br
+Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
+gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
+.br
+Deze regel wordt wél gebruikt bij het verwerken van het installatiebestand.
+.sp
+.sp
+.br
+.B Tabel 2. Regels in voorbeeldbestand kz-install-ubuntu-pc02.sh
+.TS
+box tab(:);
+lb | lb.
+T{
+Regel
+T}:T{
+Beschrijving
+T}
+.T&
+- | -
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l.
+T{
+#1 gnome-gmail (Gmail als e-mailtoepassing)
+T}:T{
+Naam APP met beschrijving tussen haakjes.
+T}
+T{
+sudo apt-get install --yes gnome-gmail
+T}:T{
+Installeer-opdracht.
+T}
+T{
+#2 sudo apt-get remove --yes gnome-gmail
+T}:T{
+Verwijder-opdracht; voor optie -r, --remove.
+T}
+T{
+.sp
+T}:T{
+Lege regel.
+T}
+T{
+## Alleen voor pc02!
+T}:T{
+Commentaar.
+T}
+T{
+#1-gast (gastgebruiker toevoegen)
+T}:T{
+Alleen op pc02 met Ubuntu installeren.
+T}
+T{
+sudo useradd --create-home ... gast
+T}:T{
+nstalleer-opdracht.
+T}
+T{
+#2 sudo userdel --remove gast
+T}:T{
+Verwijder-opdracht.
+T}
+.TE
+.\"
+.\"
+.sp
+.SH OPTIES
+.TP
+\fB-a\fR, \fB--apps\fR
+Toon een lijst van te installeren apps.
+.TP
+\fB-c\fR, \fB--cat\fR
+Toon de inhoud van installatiebestanden.
+.br
+Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
+.TP
+\fB-f\fR, \fB--files\fR
+Toon een lijst van installatiebestanden.
+.TP
+\fB-r\fR, \fB--remove\fR
+Verwijder apps.
+.TP
+\fB--server\fR
+Apps installeren en systeeminstellingen wijzigen voor een server.
+.TP
+\fB-s\fR, \fB--simulate\fR
+Geen actie, maar simuleer de installatie, en toon de opdrachten die uitgevoerd
+zouden worden.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus
+(gui=graphical user interface; grafische gebruikersinterface).
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde ongelijk 0.
+.\"
+.\"
+.SH BESTANDEN
+/usr/bin/kz-install-<distributie>-desktop.sh
+.RS
+Standaard installatiebestand.
+.RE
+.sp
+/usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh
+.RS
+Standaard installatiebestand voor <computernaam>.
+.RE
+.sp
+/tmp/kz-install-XXXXXXXXXX.apps
+.RS
+Tijdelijk installatiebestand met opdrachten behorend bij opgegeven apps.
+.RE
+.sp
+/tmp/kz-install-XXXXXXXXXX.cmds
+.RS
+Tijdelijk installatiebestand met alle uit te voeren opdrachten.
+.RE
+.sp
+/tmp/kz-install-XXXXXXXXXX.sims
+.RS
+Tijdelijk simulatiebestand.
+.RE
+.sp
+~/Instellingen/Apps
+.RS
+Lijst van geïnstalleerde apps. Ter controle. Aangemaakt door kz-backup.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+Checklist installatie
+.RS 4
+https://karelzimmer.nl/html/linux.html#documenten
+.RE
+.IP " 2." 4
+Persoonlijke map / Instellingen / Apps
+.RS 4
+In bestand Apps staan namen van eerder geïnstalleerde pakketten.
+.br
+Is te gebruiken om de installatie te controleren op volledigheid.
+.RE
+.IP " 3." 4
+IaC en Day 1 Operations
+.RS 4
+\fBkz install\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
+\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+.RE
+.\"
+.\"
+.SH VOORBEELDEN
+.sp
+\fBkz install\fR
+.RS
+Installeer alles wat in de standaard installatiebestanden staat.
+.br
+Hiervoor is in een grafische werkomgeving ook starter \fBApps installeren\fR
+beschikbaar.
+.RE
+.sp
+\fBkz install google-chrome\fR
+.RS
+Installeer Google Chrome.
+.RE
+.sp
+\fBkz install --remove google-chrome\fR
+.RS
+Verwijder Google Chrome.
+.RE
+.sp
+\fBkz install --cat google-chrome\fR
+.RS
+Toon installatie-opdrachten voor Google Chrome.
+.RE
+.sp
+\fBkz install --cat --remove google-chrome\fR
+.RS
+Toon verwijder-opdrachten voor Google Chrome.
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkz\fR(1),
+\fBkz_common.sh\fR(1),
+\fBkz-menu\fR(1),
+\fBkz-setup\fR(1),
+\fBkz-update\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht \fBkz install\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+.br
+<https://karelzimmer.nl/html/linux.html#scripts>.
