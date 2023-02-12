@@ -42,30 +42,25 @@ declare uploads_distdir=$uploads_repo/dist
 
 declare -A uploads_sources=(
                 [app]=$uploads_appdir
-               [docs]=$docs_repo
-            [scripts]=$scripts_repo
+            [kz-docs]=$docs_repo
+         [kz-scripts]=$scripts_repo
             )
 declare -A uploads_targets=(
                [dist]=$uploads_distdir
+            [kz-docs]=$uploads_distdir/data/linux/kz-docs
+         [kz-scripts]=$uploads_distdir/data/linux/kz-scripts
                 [deb]=$uploads_distdir/downloads/kz
-               [docs]=$uploads_distdir/data/linux/documents
-               [pdfs]=$uploads_distdir/data/linux/pdfs
-            [scripts]=$uploads_distdir/data/linux/scripts
             )
 
 declare -A deb_sources=(
                 [app]=$deb_appdir
-               [docs]=$docs_repo
-            [scripts]=$scripts_repo
+         [kz-scripts]=$scripts_repo
             )
 declare -A deb_targets=(
                [dist]=$deb_distdir
               [build]=$deb_distdir/usr/local/etc
-       [applications]=$deb_distdir/usr/share/applications
-                [bin]=$deb_distdir/usr/bin
-                [man]=$deb_distdir/usr/share/man/man1
-           [policy_1]=$deb_distdir/usr/share/polkit-1/actions
-           [tabcompl]=$deb_distdir/usr/share/bash-completion/completions
+             [man_en]=$deb_distdir/usr/share/man/man1
+             [man_nl]=$deb_distdir/usr/share/man/nl/man1
     )
 
 
@@ -123,7 +118,6 @@ function check_input {
 
 
 function process_input {
-    # Er is een afhankelijkheid met het maken van PDF's, vandaar uploads eerst.
     build_uploads
     build_deb
 }
@@ -131,7 +125,8 @@ function process_input {
 
 function build_uploads {
     local file=''
-    local temptextfile=''
+    local pdfdir=''
+    local tmptxt=''
 
     log 'Bouw website...'
 
@@ -144,80 +139,92 @@ function build_uploads {
         mkdir --parents "$dir" |& $logcmd
     done
 
-    # Vul repo kz-uploads/dist/ met gewijzigde bestanden in repo
-    # kz-uploads/app/.
-    mkdir --parents "$uploads_distdir"
+    # Vul kz-uploads/dist/ met gewijzigde bestanden in kz-uploads/app/.
     rsync   --archive           \
             --verbose           \
             --checksum          \
             "$uploads_appdir"/  \
             "$uploads_distdir"  |& $logcmd
 
-    # Vul repo kz-uploads/dist/ met gewijzigde bestanden in repo kz-docs, en
-    # maak een PDF aan van gewijzigde bestanden.  Gebruik diff i.p.v. 'rsync
-    # --checksum' omdat na kopiëren een PDF-bestand aangemaakt moet worden.
-    mkdir --parents "${uploads_targets[docs]}"
-    cd "${uploads_sources[docs]}"
+    # Vul kz-uploads/dist/ met gewijzigde bestanden in repo kz-docs, en maak
+    # een PDF aan van deze gewijzigde bestanden.
+    cd "${uploads_sources[kz-docs]}"
     for file in *.odt *.txt; do
-        if ! diff "$file" "${uploads_targets[docs]}/$file" |& $logcmd; then
-            cp  --preserve                  \
-                --verbose                   \
-                "$file"                     \
-                "${uploads_targets[docs]}"  |& $logcmd
-            lowriter    --headless                          \
-                        --convert-to pdf                    \
-                        --outdir "${uploads_targets[pdfs]}" \
-                        "$file"                             |& $logcmd
+        if ! diff "$file" "${uploads_targets[kz-docs]}/$file" |& $logcmd; then
+            cp  --preserve                      \
+                --verbose                       \
+                "$file"                         \
+                "${uploads_targets[kz-docs]}"   |& $logcmd
+            # PDF maken.
+            lowriter    --headless                              \
+                        --convert-to pdf                        \
+                        --outdir "${uploads_targets[kz-docs]}"  \
+                        "$file"                                 |& $logcmd
         fi
     done
     cd "$HOME"
 
-    # Vul kz-uploads/dist/ met gewijzigde bestanden in repo kz-scripts, en
-    # maak een PDF aan van gewijzigde bestanden.  Gebruik diff i.p.v. 'rsync
-    # --checksum' omdat na kopiëren een PDF-bestand aangemaakt moet worden.
-    mkdir --parents "${uploads_targets[scripts]}" "${uploads_targets[pdfs]}"
-    cd "${uploads_sources[scripts]}"
-    for file in kz*; do
-        if ! diff "$file" "${uploads_targets[scripts]}/$file" |& $logcmd; then
-            cp  --preserve                      \
-                --verbose                       \
-                "$file"                         \
-                "${uploads_targets[scripts]}"   |& $logcmd
+    # Vul kz-uploads/dist/ met gewijzigde bestanden in repo kz-scripts, en maak
+    # een PDF aan van deze gewijzigde bestanden.
+    cd "${uploads_sources[kz-scripts]}"
+    while read -r file; do
+        if ! diff "$file" "${uploads_targets[kz-scripts]}/$file" |& $logcmd
+        then
+            cp  --parents                           \
+                --preserve                          \
+                --verbose                           \
+                "$file"                             \
+                "${uploads_targets[kz-scripts]}"    |& $logcmd
+            # PDF maken.
             if grep --quiet --regexp='^''.TH ' "$file"; then
-                # Man-page.
-                man --troff "${uploads_sources[scripts]}/$file"  |
-                ps2pdf - "${uploads_targets[pdfs]}/$file.pdf"    |& $logcmd
+                # Man-page file.
+                man --troff "${uploads_sources[kz-scripts]}/$file"  |
+                ps2pdf - "${uploads_targets[kz-scripts]}/$file.pdf" |& $logcmd
             else
-                # Script, *.completion, *.desktop, *.policy, and *.sh files.
-                # Must copy each file with suffix e.g. .txt added
-                # (temptextfile) before converting because:
+                # Script file.
+
+                # Must copy each file with suffix e.g. .txt added (tmptxt)
+                # before converting because:
                 # 1. desktop-files have XML inside which gets interpreted by
                 #    Libre Office,
                 # 2. 'lowriter convert-to pdf' replaces last suffix (if any) by
                 #    .pdf.
-                temptextfile=/tmp/$file.txt
-                cp "$file" "$temptextfile"
-                lowriter    --headless                          \
-                            --convert-to pdf                    \
-                            --outdir "${uploads_targets[pdfs]}" \
-                            "$temptextfile"                     |& $logcmd
-                rm "$temptextfile"
+                tmptxt=/tmp/$(basename "$file").txt
+                cp "$file" "$tmptxt"
+                pdfdir=${uploads_targets[kz-scripts]}/$(dirname "$file")
+
+                lowriter    --headless          \
+                            --convert-to pdf    \
+                            --outdir "$pdfdir"  \
+                            "$tmptxt"           |& $logcmd
+                rm "$tmptxt"
             fi
         fi
-    done
+    done < <(
+            find .                      \
+            -type f                     \
+            -not -path './.git*'        \
+            -not -path '*/__pycache__*' \
+            -not -name LICENSE          \
+            -not -name README.md        \
+            -print
+            )
     cd "$HOME"
 }
 
 
 function build_deb {
-    local basename=''
     local dir=''
     local file=''
-    local newfile=''
-    local prefix='nl.karelzimmer.'
 
     log 'Bouw pakket...'
 
+    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de sync.
+    for dir in "${deb_targets[@]}"; do
+        mkdir --parents "$dir" |& $logcmd
+    done
+
+    # Vul kz-deb/dist/ met kz-deb/app/.
     rsync   --archive               \
             --delete                \
             --verbose               \
@@ -227,54 +234,26 @@ function build_deb {
             "${deb_sources[app]}"/  \
             "${deb_targets[dist]}"  |& $logcmd
 
-    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de sync.
-    for dir in "${deb_targets[@]}"; do
-        mkdir --parents "$dir" |& $logcmd
-    done
+    # Vul kz-deb/dist/ met repo kz-scripts.
+    rsync   --archive                       \
+            --verbose                       \
+            --exclude='__pycache__'         \
+            --exclude='LICENSE'             \
+            --exclude='README.md'           \
+            --exclude='.git*'               \
+            "${deb_sources[kz-scripts]}"/   \
+            "${deb_targets[dist]}"          |& $logcmd
 
-    # Deze rsync is inclusief *.1, *.completion, *.desktop, en *.policy.
-    rsync   --archive                   \
-            --delete                    \
-            --verbose                   \
-            --exclude='__pycache__'     \
-            --exclude='LICENSE'         \
-            --exclude='README.md'       \
-            --exclude='.git*'           \
-            --delete-excluded           \
-            "${deb_sources[scripts]}"/  \
-            "${deb_targets[bin]}"       |& $logcmd
+    # Man-pagina's compressen.
+    gzip    --best                      \
+            --force                     \
+            "${deb_targets[man_en]}"/*  \
+            "${deb_targets[man_nl]}"/*  |& $logcmd
 
-    # Man-pagina's (.1)
-    rsync   --archive                   \
-            --delete                    \
-            --verbose                   \
-            --remove-source-files       \
-            "${deb_targets[bin]}"/*.1   \
-            "${deb_targets[man]}"       |& $logcmd
-    gzip --best --force "${deb_targets[man]}"/*.1 |& $logcmd
-
-    # Tab-completion-scripts (.completion)
-    for file in "${deb_targets[bin]}"/*.completion; do
-        basename=$(basename "$file" .completion)
-        mv "$file" "${deb_targets[tabcompl]}/$basename" |& $logcmd
-    done
-
-    # Bureaublad-configuratiebestanden (.desktop)
-    for file in "${deb_targets[bin]}"/*.desktop; do
-        basename=$(basename "$file")
-        mv "$file" "${deb_targets[applications]}/$basename" |& $logcmd
-    done
-
-    # PolicyKit actiedefinitiebestanden (.policy)
-    for file in "${deb_targets[bin]}"/*.policy; do
-        basename=$(basename "$file")
-        newfile="${deb_targets[policy_1]}/$prefix$basename"
-        mv "$file" "$newfile" |& $logcmd
-    done
-
+    # Leg build-id Debian-pakket vast.
     printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
 
-    mkdir --parents "${uploads_targets[deb]}" |& $logcmd
+    # Maak Debian-pakket in kz-uploads.
     # Debian 11 does not support zst compression (default), hence the -Zxz.
     fakeroot    dpkg-deb                            \
                 --build                             \
