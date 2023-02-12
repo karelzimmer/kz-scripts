@@ -142,7 +142,7 @@ function build_uploads {
             --verbose           \
             --checksum          \
             "$uploads_appdir"/  \
-            "$uploads_distdir"  #|& $logcmd
+            "$uploads_distdir"  |& $logcmd
 
     # Vul repo kz-uploads/dist/ met gewijzigde bestanden in repo kz-docs, en
     # maak een PDF aan van gewijzigde bestanden.  Gebruik diff i.p.v. 'rsync
