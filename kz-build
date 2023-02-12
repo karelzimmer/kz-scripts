@@ -123,7 +123,7 @@ function check_input {
 
 
 function process_input {
-    # Er is een afhankelijkheid met het maken van pdf's, vandaar uploads eerst.
+    # Er is een afhankelijkheid met het maken van PDF's, vandaar uploads eerst.
     build_uploads
     build_deb
 }
@@ -134,6 +134,15 @@ function build_uploads {
     local temptextfile=''
 
     log 'Bouw website...'
+
+    # Zorg dat de rechten goed staan voor de sync.
+    chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
+    chmod 'a-x' -- "$scripts_repo"/*.* "$scripts_repo"/LICENSE
+
+    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de sync.
+    for dir in "${uploads_targets[@]}"; do
+        mkdir --parents "$dir" |& $logcmd
+    done
 
     # Vul repo kz-uploads/dist/ met gewijzigde bestanden in repo
     # kz-uploads/app/.
@@ -175,13 +184,13 @@ function build_uploads {
                 "$file"                         \
                 "${uploads_targets[scripts]}"   |& $logcmd
             if grep --quiet --regexp='^''.TH ' "$file"; then
-                # Man-pagina.
+                # Man-page.
                 man --troff "${uploads_sources[scripts]}/$file"  |
                 ps2pdf - "${uploads_targets[pdfs]}/$file.pdf"    |& $logcmd
             else
-                # Script, *.completion, *.desktop, *.policy, en *.sh.
-                # Must copy each file with suffix .txt added (temptextfile)
-                # before converting because:
+                # Script, *.completion, *.desktop, *.policy, and *.sh files.
+                # Must copy each file with suffix e.g. .txt added
+                # (temptextfile) before converting because:
                 # 1. desktop-files have XML inside which gets interpreted by
                 #    Libre Office,
                 # 2. 'lowriter convert-to pdf' replaces last suffix (if any) by
@@ -218,11 +227,7 @@ function build_deb {
             "${deb_sources[app]}"/  \
             "${deb_targets[dist]}"  |& $logcmd
 
-    # Zorg dat de rechten goed staan voor de rsync.
-    chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
-    chmod 'a-x' -- "$scripts_repo"/*.* "$scripts_repo"/LICENSE
-
-    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de rsync.
+    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de sync.
     for dir in "${deb_targets[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
