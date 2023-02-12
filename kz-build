@@ -134,32 +134,22 @@ function build_uploads {
     local temptextfile=''
 
     log 'Bouw website...'
-    # Gebruik diff voor deltabepaling (i.p.v. rsync) omdat na 'git pull' en
-    # 'lftp mirror' met script kz-getdeb de timestamps van de bestanden
-    # verschillen en dit met rsync tot vals positief leidt (aka false
-    # positive), alleen timestamp is verschillend, niet de inhoud.
 
-    # Vul dist/ met app/
-    cd "$uploads_appdir"
+    # Vul repo kz-uploads/dist/ met gewijzigde bestanden in repo
+    # kz-uploads/app/.
     mkdir --parents "$uploads_distdir"
-    while read -r file; do
-        # Kopieer bestand als deze nieuw of gewijzigd is (deltabepaling).
-        if ! diff "$file" "$uploads_distdir/$file" |& $logcmd; then
-            cp  --parents           \
-                --preserve          \
-                --verbose           \
-                "$file"             \
-                "$uploads_distdir"  |& $logcmd
-        fi
-    done < <(find . -type f -print)
-    cd "$HOME"
+    rsync   --archive           \
+            --verbose           \
+            --checksum          \
+            "$uploads_appdir"/  \
+            "$uploads_distdir"  #|& $logcmd
 
-    # Vul dist/ met kz-docs.
-    cd "${uploads_sources[docs]}"
+    # Vul repo kz-uploads/dist/ met gewijzigde bestanden in repo kz-docs, en
+    # maak een PDF aan van gewijzigde bestanden.  Gebruik diff i.p.v. 'rsync
+    # --checksum' omdat na kopiëren een PDF-bestand aangemaakt moet worden.
     mkdir --parents "${uploads_targets[docs]}"
+    cd "${uploads_sources[docs]}"
     for file in *.odt *.txt; do
-        # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
-        # (deltabepaling).
         if ! diff "$file" "${uploads_targets[docs]}/$file" |& $logcmd; then
             cp  --preserve                  \
                 --verbose                   \
@@ -173,12 +163,12 @@ function build_uploads {
     done
     cd "$HOME"
 
-    # Vul dist/ met kz-scripts.
-    cd "${uploads_sources[scripts]}"
+    # Vul kz-uploads/dist/ met gewijzigde bestanden in repo kz-scripts, en
+    # maak een PDF aan van gewijzigde bestanden.  Gebruik diff i.p.v. 'rsync
+    # --checksum' omdat na kopiëren een PDF-bestand aangemaakt moet worden.
     mkdir --parents "${uploads_targets[scripts]}" "${uploads_targets[pdfs]}"
+    cd "${uploads_sources[scripts]}"
     for file in kz*; do
-        # Kopieer bestand en maak pdf aan als deze nieuw of gewijzigd is
-        # (deltabepaling).
         if ! diff "$file" "${uploads_targets[scripts]}/$file" |& $logcmd; then
             cp  --preserve                      \
                 --verbose                       \
