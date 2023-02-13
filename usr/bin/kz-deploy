@@ -110,10 +110,10 @@ function check_names {
 
     info '* controleer bestandsnamen (kz ckname)...'
     log "Check filenames with kz ckname."
-    "$scripts_repo"/kz ckname   "$scripts_repo"     \
-                                "$docs_repo"        \
-                                "$deb_repo"         \
-                                "$app_uploads_repo" || check_rc=$?
+    "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
+                                        "$docs_repo"        \
+                                        "$deb_repo"         \
+                                        "$app_uploads_repo" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
@@ -127,7 +127,7 @@ function check_scripts {
 
     info '* controleer scripts (kz ivp)...'
     log "Check scripts with kz ivp."
-    "$scripts_repo"/kz ivp || check_rc=$?
+    "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
@@ -141,7 +141,7 @@ function build_package {
 
     info '* bouw pakket en website (kz build)...'
     log "Build package and website with kz build."
-    "$scripts_repo"/kz build || check_rc=$?
+    "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err '
 Herstel alle meldingen hierboven en start daarna deploy opnieuw.'

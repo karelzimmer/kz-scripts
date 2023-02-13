@@ -9,7 +9,7 @@
 
 set -o errexit
 source <(wget --quiet --output-document=- \
-        'https://karelzimmer.nl/data/linux/scripts/kz_common.sh')
+        'https://karelzimmer.nl/data/linux/kz-scripts/usr/bin/kz_common.sh')
 
 
 ###############################################################################
