@@ -17,8 +17,8 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <!-- Deze actie wordt gebruikt voor de ontwikkel-omgeving.
-         This action is used for the development environment. -->
+    <!-- This action is used for the development environment. -->
+    <!-- lang="nl": Deze actie wordt gebruikt voor de ontwikkel-omgeving. -->
     <action id="kz-install.install-apps">
         <message>Authentication is required to install apps.</message>
         <message xml:lang="nl">Authenticatie is vereist om apps te installeren.</message>
@@ -33,8 +33,8 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <!-- Deze actie wordt gebruikt voor de productie-omgeving.
-         This action is used for the production environment. -->
+    <!-- This action is used for the production environment. -->
+    <!-- lang="nl": Deze actie wordt gebruikt voor de productie-omgeving. -->
     <action id="nl.karelzimmer.kz-install.install-apps">
         <message>Authentication is required to install apps.</message>
         <message xml:lang="nl">Authenticatie is vereist om apps te installeren.</message>
