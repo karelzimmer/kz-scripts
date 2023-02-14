@@ -207,6 +207,7 @@ function check_dependencies {
             --yes               \
             curl                \
             fakeroot            \
+            gettext             \
             ghostscript         \
             git                 \
             jq                  \
@@ -275,6 +276,11 @@ function pull_repos {
     fi
     info '* pull repos (gitpull)...'
     "$bin_repo"/gitpull
+    ln  --force                         \
+        --relative                      \
+        --symbolic                      \
+        /home/karel/kz-scripts/usr/bin  \
+        /home/karel/kz-scripts/bin
 }
 
 
