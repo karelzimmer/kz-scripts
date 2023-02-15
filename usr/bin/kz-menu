@@ -426,10 +426,6 @@ function process_commands {
     if $execute_command && [[ ${#rows[@]} -gt 1 ]]; then
         show_commands_after_execution
     fi
-    if $execute_command; then
-        check_setup_logout
-        check_install_reboot
-    fi
 }
 
 
@@ -580,40 +576,6 @@ $row. $action ($command)"
     done
     info "$text"
     kz_common.wait_for_enter
-}
-
-
-function check_setup_logout {
-    # Uitvoeren bij 'Gebruiker inrichten' of 'Apps instellen'.
-    if [[ $title = "${menu1_actions[4]}" || $title = "${menu2_actions[7]}" ]]
-        then
-        text='
-De computer gaat nu afmelden om het instellen van apps af te ronden.'
-        warn "$text"
-        if ! $option_gui; then
-            read -rp '
-Druk op de Enter-toets voor afmelden [Enter]: '
-        fi
-        gnome-session-quit --logout --no-prompt
-        exit $ok
-    fi
-}
-
-
-function check_install_reboot {
-    # Uitvoeren bij 'Installatie afronden' of 'Apps installeren'.
-    if [[ $title = "${menu1_actions[3]}" || $title = "${menu2_actions[4]}" ]]
-        then
-        text="
-De computer gaat nu herstarten om het installeren van updates en apps af te \
-ronden."
-        warn "$text"
-        if ! $option_gui; then
-            read -rp '
-Druk op de Enter-toets voor het herstarten van de computer [Enter]: '
-        fi
-        systemctl reboot
-    fi
 }
 
 
