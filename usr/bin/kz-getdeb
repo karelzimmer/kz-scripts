@@ -279,6 +279,7 @@ function pull_repos {
     ln  --force                         \
         --relative                      \
         --symbolic                      \
+        --no-target-directory           \
         /home/karel/kz-scripts/usr/bin  \
         /home/karel/kz-scripts/bin
 }
