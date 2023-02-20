@@ -2,8 +2,8 @@
 ###############################################################################
 # Installatiebestand voor Ubuntu desktop op pc-van-emily.
 #
-# Geschreven in 2016 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2016 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 #1-cups-backend-bjnp (printerbackend Canon BJNP-protocol)

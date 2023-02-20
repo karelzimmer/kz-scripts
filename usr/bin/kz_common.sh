@@ -1,18 +1,23 @@
 # shellcheck shell=bash
 ###############################################################################
-# Algemene module voor shell scripts.
+# Common module for shell scripts.
 #
-# Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+
+source /usr/bin/gettext.sh
 
 ###############################################################################
 # Constants
 ###############################################################################
 
 declare module_name='kz_common.sh'
-declare module_desc='Algemene module voor shell scripts'
+declare module_desc
+module_desc=$(gettext 'Common module for shell scripts')
 
 declare -i ok=0
 declare -i err=1
@@ -25,9 +30,10 @@ declare -i err=1
 declare options_short='huv'
 declare options_long='help,usage,version'
 declare options_usage='[-h|--help] [-u|--usage] [-v|--version]'
-declare options_help="  -h, --help     toon deze hulptekst
-  -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon de programmaversie"
+declare options_help
+options_help="  -h, --help     $(gettext 'give this help list')
+  -u, --usage    $(gettext 'give a short usage message')
+  -v, --version  $(gettext 'print program version')"
 
 declare -a cmdline_args=()
 declare less_options=''
@@ -40,7 +46,7 @@ declare text=''
 declare title=''
 declare usage_line=''
 
-# Terminalattributen, zie man terminfo.  Gebruik ${<variabele-naam>}.
+# Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
 declare blink=''
 declare blue=''
 declare cursor_invisable=''
@@ -60,22 +66,22 @@ function kz_common.check_dpkgd_snapd {
     local -i dpkg_wait=10
 
     if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        # Systeem met snaps.
+        # System with snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     /snap/core/*/var/cache/debconf/config.dat           \
                     &> /dev/null; do
-            log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
+            log "Wait ${dpkg_wait}s for another package manager to finish..."
             sleep $dpkg_wait
         done
     else
-        # Systeem zonder snaps.
+        # System without snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     &> /dev/null; do
-            log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
+            log "Wait ${dpkg_wait}s for another package manager to finish..."
             sleep $dpkg_wait
         done
     fi
@@ -87,13 +93,12 @@ function kz_common.check_on_ac_power {
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        warn '
-De computer gebruikt nu alleen de accu voor de stroomvoorziening.
+        warn "$(gettext '
+The computer now uses only the battery for power.
 
-Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
+It is recommended to connect the computer to the wall socket.')"
         kz_common.wait_for_enter
     fi
-
 }
 
 
@@ -378,7 +383,7 @@ function kz_common.process_option_version {
         build_id=$(cat /usr/local/etc/kz-build-id)
     fi
     program_year=$(
-        grep '# Geschreven in ' "$program_path/$program_name" |
+        grep '# Written in ' "$program_path/$program_name" |
         cut --delimiter=' ' --fields=4
         ) || true
     if [[ $program_year = '' ]]; then

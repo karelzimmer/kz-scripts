@@ -2,8 +2,8 @@
 ###############################################################################
 # Start VM hugowin732.
 #
-# Geschreven in 2020 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2020 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 text='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'

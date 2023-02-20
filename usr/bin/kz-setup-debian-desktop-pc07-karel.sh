@@ -2,8 +2,8 @@
 ###############################################################################
 # Instelbestand voor Debian desktop op pc07 voor karel.
 #
-# Geschreven in 2019 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 #1-gnome (bureaubladomgeving)

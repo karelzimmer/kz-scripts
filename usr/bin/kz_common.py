@@ -6,8 +6,8 @@ Deze module geeft toegang tot algemene functies.
 ###############################################################################
 # Algemene module voor Python scripts.
 #
-# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 import argparse
@@ -208,7 +208,7 @@ def process_option_version(program_name):
         print(ex)
         sys.exit(err)
     finally:
-        cmd = f"grep '# Geschreven in ' {module_path}/{program_name}"
+        cmd = f"grep '# Written in ' {module_path}/{program_name}"
         cmd = f"{cmd} | cut --delimiter=' ' --fields=4"
         program_year = subprocess.check_output(cmd, shell=True,
                                                stderr=subprocess.DEVNULL)

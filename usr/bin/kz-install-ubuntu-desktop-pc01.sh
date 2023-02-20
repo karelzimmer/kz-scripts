@@ -2,8 +2,8 @@
 ###############################################################################
 # Installatiebestand voor Ubuntu desktop op pc01.
 #
-# Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 #1-add-hosts (koppel IP-adressen aan hostnamen)
