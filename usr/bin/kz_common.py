@@ -107,7 +107,7 @@ def check_user_root(display_name):
     Deze functie controleert of de gebruiker root is.
     """
     if check_user_sudo() != ok:
-        print(f'Reeds uitgevoerd door de beheerder.')
+        print('Reeds uitgevoerd door de beheerder.')
         sys.exit(ok)
     else:
         try:
