@@ -106,16 +106,17 @@ function kz_common.wait_for_enter {
     if $option_gui; then
         return
     fi
-    read -rp '
-Druk op de Enter-toets om door te gaan [Enter]: ' < /dev/tty
+    read -rp "$(gettext '
+Press the Enter key to continue [Enter]: ')" < /dev/tty
 }
 
 
 function kz_common.check_user_root {
     local -i pkexec_rc=0
+    local name=''
 
     if ! kz_common.check_user_sudo; then
-        info 'Reeds uitgevoerd door de beheerder.'
+        info "$(gettext 'Already performed by the administrator.')"
         exit $ok
     fi
     if [[ $UID -ne 0 ]]; then
@@ -128,8 +129,11 @@ function kz_common.check_user_root {
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
             if ! sudo -n true &> /dev/null; then
-                printf '%s\n' "Authenticatie is vereist om \
-${display_name:-$module_name} uit te voeren."
+                # shellcheck disable=SC2034
+                name=${display_name:-$module_name}
+                text=$(eval_gettext "Authentication is required to run \
+\$name.")
+                printf  '%s\n' "$text"
             fi
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi

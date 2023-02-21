@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-20 15:49+0100\n"
+"POT-Creation-Date: 2023-02-21 17:58+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -44,3 +44,20 @@ msgstr ""
 "De computer gebruikt nu alleen de accu voor de stroomvoorziening.\n"
 "\n"
 "Geadviseerd wordt om de computer aan te sluiten op het stopcontact."
+
+#: kz_common.sh:109
+msgid ""
+"\n"
+"Press the Enter key to continue [Enter]: "
+msgstr ""
+"\n"
+"Druk op de Enter-toets om door te gaan [Enter]: "
+
+#: kz_common.sh:119
+msgid "Already performed by the administrator."
+msgstr "Reeds uitgevoerd door de beheerder."
+
+#: kz_common.sh:135 kz_common.sh:134
+#, sh-format
+msgid "Authentication is required to run $name."
+msgstr "Authenticatie is vereist om $name uit te voeren."
