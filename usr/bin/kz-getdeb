@@ -276,12 +276,6 @@ function pull_repos {
     fi
     info '* pull repos (gitpull)...'
     "$bin_repo"/gitpull
-    ln  --force                         \
-        --relative                      \
-        --symbolic                      \
-        --no-target-directory           \
-        /home/karel/kz-scripts/usr/bin  \
-        /home/karel/kz-scripts/bin
 }
 
 
