@@ -114,6 +114,15 @@ function check_input {
         kz_common.developer report
         exit $err
     fi
+
+    # Checkout to main?
+    for repo in $docs_repo $scripts_repo $deb_repo $uploads_repo; do
+        cd "$repo"
+        if [[ $(git branch --show-current) != 'main' ]]; then
+            err "Repo $repo not on branch main."
+            exit $err
+        fi
+    done
 }
 
 
