@@ -15,7 +15,7 @@ source /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
-declare module_name='kz_common.sh'
+declare module_name='kz_common.sh' # TODO: echt nodig? m=M, zie verderop ivm xlat
 declare module_desc
 module_desc=$(gettext 'Common module for shell scripts')
 
@@ -129,7 +129,7 @@ function kz_common.check_user_root {
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
             if ! sudo -n true &> /dev/null; then
-                # shellcheck disable=SC2034
+                # shellcheck disable=SC2034 #TODO: echt nodig module_name?? m=M
                 name=${display_name:-$module_name}
                 text=$(eval_gettext "Authentication is required to run \
 \$name.")
