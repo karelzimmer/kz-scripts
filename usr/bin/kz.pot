@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 18:00+0100\n"
+"POT-Creation-Date: 2023-02-21 18:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,4 +56,13 @@ msgstr ""
 #: kz_common.sh:135 kz_common.sh:134
 #, sh-format
 msgid "Authentication is required to run $name."
+msgstr ""
+
+#: kz_common.sh:168
+msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
+msgstr ""
+
+#: kz_common.sh:212
+#, sh-format
+msgid "Type '$name --usage' for more information."
 msgstr ""

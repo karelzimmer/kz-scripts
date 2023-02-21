@@ -165,13 +165,15 @@ function kz_common.developer {
             return $err
         fi
     else
-        printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
-karel op pcNN (bijvoorbeeld pc01)."
+        printf '%s\n' "$(gettext "Run only as Developer, i.e. logged in as \
+karel on pcNN (e.g. pc01).")"
     fi
 }
 
 
 function kz_common.init_script {
+    local name=''
+
     # Script-hardening.
     # set -o errexit
     set -o errtrace
@@ -200,13 +202,14 @@ function kz_common.init_script {
         set_terminal_attributes
     fi
 
-    cmdline_args=("$@")
+    cmdline_args=("$@") #TODO: xlat less_options how? delete?
     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
 --RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
 ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
 h voor hulp of q om te stoppen)"
-    usage_line="Typ '${display_name:-$module_name} --usage' voor meer \
-informatie."
+        # shellcheck disable=SC2034
+        name=${display_name:-$module_name}
+    usage_line=$(eval_gettext "Type '\$name --usage' for more information.")
 }
 
 

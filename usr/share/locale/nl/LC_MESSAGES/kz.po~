@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 18:12+0100\n"
+"POT-Creation-Date: 2023-02-21 18:04+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -64,11 +64,4 @@ msgstr "Authenticatie is vereist om $name uit te voeren."
 
 #: kz_common.sh:168
 msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
-msgstr ""
-"Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als karel op pcNN "
-"(bijvoorbeeld pc01)."
-
-#: kz_common.sh:212
-#, sh-format
-msgid "Type '$name --usage' for more information."
-msgstr "Typ '$name --usage' voor meer informatie."
+msgstr "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als karel op pcNN (bijvoorbeeld pc01)."
