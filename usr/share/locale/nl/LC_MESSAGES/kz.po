@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 18:12+0100\n"
+"POT-Creation-Date: 2023-02-22 09:30+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -17,23 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: kz_common.sh:20
 msgid "Common module for shell scripts"
 msgstr "Algemene module voor shell scripts"
 
-#: kz_common.sh:35 kz_common.sh:36
 msgid "give a short usage message"
 msgstr "toon een korte gebruikssamenvatting"
 
-#: kz_common.sh:34 kz_common.sh:35
 msgid "give this help list"
 msgstr "toon deze hulptekst"
 
-#: kz_common.sh:36 kz_common.sh:37
 msgid "print program version"
 msgstr "toon de programmaversie"
 
-#: kz_common.sh:96
 msgid ""
 "\n"
 "The computer now uses only the battery for power.\n"
@@ -45,7 +40,6 @@ msgstr ""
 "\n"
 "Geadviseerd wordt om de computer aan te sluiten op het stopcontact."
 
-#: kz_common.sh:109
 msgid ""
 "\n"
 "Press the Enter key to continue [Enter]: "
@@ -53,22 +47,45 @@ msgstr ""
 "\n"
 "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz_common.sh:119
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
-#: kz_common.sh:135 kz_common.sh:134
 #, sh-format
-msgid "Authentication is required to run $name."
-msgstr "Authenticatie is vereist om $name uit te voeren."
+msgid "Authentication is required to run $display_name."
+msgstr "Authenticatie is vereist om $display_name uit te voeren."
 
-#: kz_common.sh:168
 msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
 msgstr ""
 "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als karel op pcNN "
 "(bijvoorbeeld pc01)."
 
-#: kz_common.sh:212
 #, sh-format
-msgid "Type '$name --usage' for more information."
-msgstr "Typ '$name --usage' voor meer informatie."
+msgid "Type '$display_name --usage' for more information."
+msgstr "Typ '$display_name --usage' voor meer informatie."
+
+#, sh-format
+msgid ""
+"\n"
+"Program $program_name encountered an error."
+msgstr ""
+"\n"
+"In programma $program_name is een fout opgetreden."
+
+#, sh-format
+msgid ""
+"\n"
+"Program $program_name has been interrupted."
+msgstr ""
+"\n"
+"Programma $program_name is onderbroken."
+
+#, sh-format
+msgid ""
+"If the package manager gives apt errors, launch a Terminal window and run:\n"
+"[1] kz update\n"
+"[2] sudo update-initramfs -u"
+msgstr ""
+"Als de pakketbeheerder apt foutmeldingen geeft, start een Terminalvenster en "
+"voer uit:\n"
+"[1] kz update\n"
+"[2] sudo update-initramfs -u"

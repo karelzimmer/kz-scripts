@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 18:12+0100\n"
+"POT-Creation-Date: 2023-02-22 09:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: kz_common.sh:20
 msgid "Common module for shell scripts"
 msgstr ""
 
-#: kz_common.sh:35 kz_common.sh:36
 msgid "give a short usage message"
 msgstr ""
 
-#: kz_common.sh:34 kz_common.sh:35
 msgid "give this help list"
 msgstr ""
 
-#: kz_common.sh:36 kz_common.sh:37
 msgid "print program version"
 msgstr ""
 
-#: kz_common.sh:96
 msgid ""
 "\n"
 "The computer now uses only the battery for power.\n"
@@ -41,7 +36,6 @@ msgid ""
 "It is recommended to connect the computer to the wall socket."
 msgstr ""
 
-#: kz_common.sh:109
 msgid ""
 "\n"
 "Press the Enter key to continue [Enter]: "
@@ -49,20 +43,35 @@ msgstr ""
 "\n"
 "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#: kz_common.sh:119
 msgid "Already performed by the administrator."
 msgstr ""
 
-#: kz_common.sh:135 kz_common.sh:134
 #, sh-format
-msgid "Authentication is required to run $name."
+msgid "Authentication is required to run $display_name."
 msgstr ""
 
-#: kz_common.sh:168
 msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
 msgstr ""
 
-#: kz_common.sh:212
 #, sh-format
-msgid "Type '$name --usage' for more information."
+msgid "Type '$display_name --usage' for more information."
+msgstr ""
+
+#, sh-format
+msgid ""
+"\n"
+"Program $program_name encountered an error."
+msgstr ""
+
+#, sh-format
+msgid ""
+"\n"
+"Program $program_name has been interrupted."
+msgstr ""
+
+#, sh-format
+msgid ""
+"If the package manager gives apt errors, launch a Terminal window and run:\n"
+"[1] kz update\n"
+"[2] sudo update-initramfs -u"
 msgstr ""

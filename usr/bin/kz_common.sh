@@ -1,4 +1,6 @@
 # shellcheck shell=bash
+# shellcheck disable=SC2034 # var appears unused
+# shellcheck disable=SC2154 # var is referenced but not assigned
 ###############################################################################
 # Common module for shell scripts.
 #
@@ -15,7 +17,7 @@ source /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
-declare module_name='kz_common.sh' # TODO: echt nodig? m=M, zie verderop ivm xlat
+declare module_name='kz_common.sh'
 declare module_desc
 module_desc=$(gettext 'Common module for shell scripts')
 
@@ -113,7 +115,6 @@ Press the Enter key to continue [Enter]: ')" < /dev/tty
 
 function kz_common.check_user_root {
     local -i pkexec_rc=0
-    local name=''
 
     if ! kz_common.check_user_sudo; then
         info "$(gettext 'Already performed by the administrator.')"
@@ -129,11 +130,9 @@ function kz_common.check_user_root {
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
             if ! sudo -n true &> /dev/null; then
-                # shellcheck disable=SC2034 #TODO: echt nodig module_name?? m=M
-                name=${display_name:-$module_name}
-                text=$(eval_gettext "Authentication is required to run \
-\$name.")
-                printf  '%s\n' "$text"
+                text=
+                printf  '%s\n' "$(eval_gettext "Authentication is required to \
+run \$display_name.")"
             fi
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi
@@ -172,17 +171,14 @@ karel on pcNN (e.g. pc01).")"
 
 
 function kz_common.init_script {
-    local name=''
-
     # Script-hardening.
     # set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
 
-    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
-    logcmd_check="journalctl --all --boot \
---identifier=${program_name:-$module_name} \
+    logcmd="systemd-cat --identifier=$program_name"
+    logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' err
@@ -202,14 +198,12 @@ function kz_common.init_script {
         set_terminal_attributes
     fi
 
-    cmdline_args=("$@") #TODO: xlat less_options how? delete?
-    less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
-?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
-h voor hulp of q om te stoppen)"
-        # shellcheck disable=SC2034
-        name=${display_name:-$module_name}
-    usage_line=$(eval_gettext "Type '\$name --usage' for more information.")
+    cmdline_args=("$@")
+    # Long options used from e.g. man systemd, 'to less (by default "FRSXMK")'.
+    less_options="--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines \
+--no-init --LONG-PROMPT"
+    usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
+information.")
 }
 
 
@@ -278,8 +272,8 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         err)
-            err "
-In programma $program_name is een fout opgetreden."
+            err "$(eval_gettext "
+Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
         exit)
@@ -289,8 +283,8 @@ In programma $program_name is een fout opgetreden."
             exit "$rc"
             ;;
         *)
-            err "
-Programma $program_name is onderbroken."
+            err "$(eval_gettext "
+Program \$program_name has been interrupted.")"
             exit "$rc"
             ;;
     esac
@@ -298,16 +292,17 @@ Programma $program_name is onderbroken."
 
 
 function signal_exit {
-    local apt_err="Als de pakketbeheerder apt foutmeldingen geeft, start een \
-Terminalvenster en voer uit:
-[1] ${blue}kz update${normal}
-[2] ${blue}sudo update-initramfs -u${normal}"
+    local apt_err
+    apt_err=$(eval_gettext "If the package manager gives apt errors, launch \
+a Terminal window and run:
+[1] kz update
+[2] sudo update-initramfs -u")
 
     case $program_name in
         kz-getdeb)
-            # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
+            # Do not delete kz and kz.1 due to script kz and man page kz.1.
             rm --force kz.{2..99} /tmp/kz_common.sh
-            # Maar wel als in HOME, zoals beschreven in Checklist installatie.
+            # But as in HOME, as described in Checklist installation.
             cd "$HOME" || exit $err
             rm --force kz kz.1
 
@@ -371,14 +366,14 @@ function kz_common.process_options {
 function kz_common.process_option_help {
     info "${help:-Variable help not set}
 
-Typ 'man ${display_name:-$module_name}' voor meer informatie."
+Typ 'man $display_name' voor meer informatie."
 }
 
 
 function kz_common.process_option_usage {
     info "${usage:-Variable usage not set}
 
-Typ '${display_name:-$module_name} --help' voor meer informatie."
+Typ '$display_name --help' voor meer informatie."
 }
 
 
@@ -423,7 +418,7 @@ function log {
 
 
 function info {
-    local title="Informatie ${display_name:-$module_name}"
+    local title="Informatie $display_name"
 
     if $option_gui; then
         zenity  --info                  \
@@ -441,7 +436,7 @@ function info {
 
 
 function warn {
-    local title="Waarschuwing ${display_name:-$module_name}"
+    local title="Waarschuwing $display_name"
 
     if $option_gui; then
         zenity  --warning               \
@@ -459,7 +454,7 @@ function warn {
 
 
 function err {
-    local title="Foutmelding ${display_name:-$module_name}"
+    local title="Foutmelding $display_name"
 
     if $option_gui; then
         zenity  --error                 \
@@ -474,23 +469,6 @@ function err {
     fi
     log "$@" --priority=err
 }
-
-
-{
-    # Anonymous function to avoid using shellcheck directive disable=SC2034.
-    echo "$blink"
-    echo "$cursor_invisable"
-    echo "$less_options"
-    echo "$logcmd_check"
-    echo "$module_desc"
-    echo "$options_help"
-    echo "$options_long"
-    echo "$options_short"
-    echo "$options_usage"
-    echo "$rewrite_line"
-    echo "$text"
-    echo "$usage_line"
-} > /dev/null
 
 
 true
