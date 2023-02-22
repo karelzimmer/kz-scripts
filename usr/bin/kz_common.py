@@ -96,10 +96,9 @@ def check_on_ac_power(program_name):
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
-        print('De computer gebruikt nu alleen de accu voor de '
-              'stroomvoorziening.'
-              '\nGeadviseerd wordt om de computer aan te sluiten op het '
-              'stopcontact.')
+        print(_('\nThe computer now uses only the battery for power.\n\n'
+              'It is recommended to connect the computer to the wall socket.'))
+        # TODO
         try:
             input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
         except KeyboardInterrupt:
