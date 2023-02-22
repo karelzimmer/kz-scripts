@@ -364,16 +364,16 @@ function kz_common.process_options {
 
 
 function kz_common.process_option_help {
-    info "${help:-Variable help not set}
+    info "$(eval_gettext "\$help
 
-Typ 'man $display_name' voor meer informatie."
+Type 'man \$display_name' for more information.")"
 }
 
 
 function kz_common.process_option_usage {
-    info "${usage:-Variable usage not set}
+    info "$(eval_gettext "\$usage
 
-Typ '$display_name --help' voor meer informatie."
+Type '\$display_name --help' for more information.")"
 }
 
 
@@ -391,11 +391,11 @@ function kz_common.process_option_version {
     if [[ $program_year = '' ]]; then
         program_year='1970'
     fi
-    info "$program_name (kz) 365 ($build_id)
+    info "$(eval_gettext "\$program_name (kz) 365 (\$build_id)
 
-Geschreven in ${program_year:-1970} door Karel Zimmer <info@karelzimmer.nl>, \
-Creative Commons
-Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
+Written in \$program_year by Karel Zimmer <info@karelzimmer.nl>, Creative \
+Commons
+Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.")"
 }
 
 
@@ -418,16 +418,16 @@ function log {
 
 
 function info {
-    local title="Informatie $display_name"
+    local title=''
 
     if $option_gui; then
+        title=$(eval_gettext "Information \$display_name")
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($logcmd) || true
+                --text      "$@"        2> >($logcmd) || true
     else
         printf '%b\n' "$@"
     fi
@@ -436,16 +436,16 @@ function info {
 
 
 function warn {
-    local title="Waarschuwing $display_name"
+    local title=''
 
     if $option_gui; then
+        title=$(eval_gettext "Warning \$display_name")
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($logcmd) || true
+                --text      "$@"        2> >($logcmd) || true
     else
         printf "${yellow}%b\n${normal}" "$@" >&2
     fi
@@ -454,16 +454,16 @@ function warn {
 
 
 function err {
-    local title="Foutmelding $display_name"
+    local title=''
 
     if $option_gui; then
+        title=$(eval_gettext "Error message \$display_name")
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($logcmd) || true
+                --text      "$@"        2> >($logcmd) || true
     else
         printf "${red}%b\n${normal}" "$@" >&2
     fi

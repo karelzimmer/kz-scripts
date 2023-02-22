@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 09:30+0100\n"
+"POT-Creation-Date: 2023-02-22 11:34+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -89,3 +89,55 @@ msgstr ""
 "voer uit:\n"
 "[1] kz update\n"
 "[2] sudo update-initramfs -u"
+
+#, sh-format
+msgid ""
+"$help\n"
+"\n"
+"Type 'man $display_name' for more information."
+msgstr ""
+".$help\n"
+"\n"
+"Typ '$display_name --usage' voor meer informatie."
+
+#, sh-format
+msgid ""
+"$usage\n"
+"\n"
+"Type '$display_name --help' for more information."
+msgstr ""
+"$usage\n"
+"\n"
+"Typ '$display_name --usage' voor meer informatie."
+
+#, sh-format
+msgid ""
+"$program_name (kz) 365 ($build_id)\n"
+"\n"
+"Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
+"Commons\n"
+"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+msgstr ""
+"$program_name (kz) 365 ($build_id)\n"
+"\n"
+"Geschreven in $program_year door Karel Zimmer <info@karelzimmer.nl>, "
+"Creative Commons\n"
+"Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
+
+#, sh-format
+msgid "Information $display_name"
+msgstr "Informatie $display_name"
+
+#, sh-format
+msgid "Warning $display_name"
+msgstr "Waarschuwing $display_name"
+
+#, sh-format
+msgid "Error message $display_name"
+msgstr "Foutmelding $display_name"
+
+msgid "Common module for Python scripts"
+msgstr "Algemene module voor Python scripts"
+
+msgid "Wait {}s for another package manager to finish..."
+msgstr "Wacht {}s tot andere pakketbeheerder klaar is..."

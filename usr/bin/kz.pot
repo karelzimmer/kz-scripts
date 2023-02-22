@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-22 09:32+0100\n"
+"POT-Creation-Date: 2023-02-22 11:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,8 +40,6 @@ msgid ""
 "\n"
 "Press the Enter key to continue [Enter]: "
 msgstr ""
-"\n"
-"Druk op de Enter-toets om door te gaan [Enter]: "
 
 msgid "Already performed by the administrator."
 msgstr ""
@@ -74,4 +72,45 @@ msgid ""
 "If the package manager gives apt errors, launch a Terminal window and run:\n"
 "[1] kz update\n"
 "[2] sudo update-initramfs -u"
+msgstr ""
+
+#, sh-format
+msgid ""
+"$help\n"
+"\n"
+"Type 'man $display_name' for more information."
+msgstr ""
+
+#, sh-format
+msgid ""
+"$usage\n"
+"\n"
+"Type '$display_name --help' for more information."
+msgstr ""
+
+#, sh-format
+msgid ""
+"$program_name (kz) 365 ($build_id)\n"
+"\n"
+"Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
+"Commons\n"
+"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+msgstr ""
+
+#, sh-format
+msgid "Information $display_name"
+msgstr ""
+
+#, sh-format
+msgid "Warning $display_name"
+msgstr ""
+
+#, sh-format
+msgid "Error message $display_name"
+msgstr ""
+
+msgid "Common module for Python scripts"
+msgstr ""
+
+msgid "Wait {}s for another package manager to finish..."
 msgstr ""

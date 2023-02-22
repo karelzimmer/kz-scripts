@@ -1,20 +1,25 @@
 """
-Algemene module voor Python scripts.
+Common module for Python scripts.
 
-Deze module geeft toegang tot algemene functies.
+This module gives access to general functions.
 """
 ###############################################################################
-# Algemene module voor Python scripts.
+# Common module for Python scripts.
 #
 # Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 import argparse
+import gettext
 import os
 import subprocess
 import sys
 import time
+
+gettext.bindtextdomain('kz', '/usr/share/locale')
+gettext.textdomain('kz')
+_ = gettext.gettext
 
 
 ###############################################################################
@@ -22,7 +27,7 @@ import time
 ###############################################################################
 
 module_name = 'kz_common.py'
-module_desc = 'Algemene module voor Python scripts'
+module_desc = (_('Common module for Python scripts'))
 module_path = f"{os.path.realpath(os.path.dirname(__file__))}"
 
 ok = 0
@@ -40,7 +45,7 @@ err = 1
 
 def check_dpkgd_snapd():
     """
-    Deze functie controleert op al een lopende Debian pakketbeheerder.
+    This function checks for a Debian package manager already running.
     """
     dpkg_wait = 10
 
@@ -66,8 +71,8 @@ def check_dpkgd_snapd():
             except Exception:
                 break
             else:
-                print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
-                      'is...')
+                print(_('Wait {}s for another package manager to finish...').
+                      format(dpkg_wait))
                 time.sleep(dpkg_wait)
         else:
             try:
@@ -80,14 +85,14 @@ def check_dpkgd_snapd():
             except Exception:
                 break
             else:
-                print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
-                      'is...')
+                print(_('Wait {}s for another package manager to finish...').
+                      format(dpkg_wait))
                 time.sleep(dpkg_wait)
 
 
 def check_on_ac_power(program_name):
     """
-    Deze functie controleert de stroomvoorziening.
+    This function monitors the power supply.
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
@@ -104,7 +109,7 @@ def check_on_ac_power(program_name):
 
 def check_user_root(display_name):
     """
-    Deze functie controleert of de gebruiker root is.
+    This function checks if the user is root.
     """
     if check_user_sudo() != ok:
         print('Reeds uitgevoerd door de beheerder.')
@@ -128,7 +133,7 @@ def check_user_root(display_name):
 
 def check_user_sudo():
     """
-    Deze functie controleert of de gebruiker sudo mag gebruiken.
+    This function checks if the user is allowed to use sudo.
     """
     if os.getuid() == 0:
         return(ok)
@@ -144,7 +149,7 @@ def check_user_sudo():
 
 def process_options(program_name, program_desc, display_name):
     """
-    Deze functie verwerkt de algemene opties.
+    This function handles the general options.
     """
     usage_line = f"typ '{display_name} --usage' voor meer informatie"
 
@@ -168,7 +173,7 @@ def process_options(program_name, program_desc, display_name):
 
 def process_option_help(display_name, program_desc):
     """
-    Deze functie toont de beschikbare hulp.
+    This function shows the available help.
     """
     print(f"""Gebruik: {display_name} [OPTIE...]
 
@@ -184,7 +189,7 @@ Typ 'man {display_name}' voor meer informatie.""")
 
 def process_option_usage(display_name):
     """
-    Deze functie toont de beschikbare opties.
+    This function shows the available options.
     """
     print(f"""Gebruik: {display_name} [-h|--help] [-u|--usage] [-v|--version]
 
@@ -193,7 +198,7 @@ Typ '{display_name} --help' voor meer informatie.""")
 
 def process_option_version(program_name):
     """
-    Deze functie toont informatie over de versie, auteur, en licentie.
+    This function displays version, author, and license information.
     """
     build_id = '1970-01-01'
     cmd = ''
