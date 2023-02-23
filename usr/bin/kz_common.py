@@ -98,20 +98,19 @@ def check_on_ac_power(program_name):
                       stderr=subprocess.DEVNULL).returncode == 1:
         print(_('\nThe computer now uses only the battery for power.\n\n'
               'It is recommended to connect the computer to the wall socket.'))
-        # TODO
         try:
-            input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
+            input(_('\nPress the Enter key to continue [Enter]: '))
         except KeyboardInterrupt:
-            print(f"\nProgramma {program_name} is afgebroken.")
+            print(_('\nProgram {} has been interrupted.').format(program_name))
             sys.exit(err)
 
 
-def check_user_root(display_name):
+def check_user_root(program_name, display_name):
     """
     This function checks if the user is root.
     """
     if check_user_sudo() != ok:
-        print('Reeds uitgevoerd door de beheerder.')
+        print(_('Already performed by the administrator.'))
         sys.exit(ok)
     else:
         try:
@@ -119,11 +118,13 @@ def check_user_root(display_name):
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
         except Exception:
-            print(f'Authenticatie is vereist om {display_name} uit te voeren.')
+            print(_('Authentication is required to run {}.').
+                  format(display_name))
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
-                print(f"\nProgramma {display_name} is afgebroken.")
+                print(_('\nProgram {} has been interrupted.').
+                      format(program_name))
                 sys.exit(err)
             except Exception as ex:
                 print(ex)
@@ -150,7 +151,8 @@ def process_options(program_name, program_desc, display_name):
     """
     This function handles the general options.
     """
-    usage_line = f"typ '{display_name} --usage' voor meer informatie"
+    usage_line = _("type '{} --usage' for more information").\
+        format(display_name)
 
     parser = argparse.ArgumentParser(prog=display_name, add_help=False,
                                      usage=usage_line)
@@ -174,25 +176,21 @@ def process_option_help(display_name, program_desc):
     """
     This function shows the available help.
     """
-    print(f"""Gebruik: {display_name} [OPTIE...]
-
-{program_desc}.
-
-Opties:
-  -h, --help     toon deze hulptekst
-  -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon de programmaversie
-
-Typ 'man {display_name}' voor meer informatie.""")
+    print(_('Usage: {} [OPTION...]\n\n{}.\n\nOptions:\n'
+            '  -h, --help     give this help list\n'
+            '  -u, --usage    give a short usage message\n'
+            '  -v, --version  print program version\n\n'
+            "Type 'man {}' for more information.").
+          format(display_name, program_desc, display_name))
 
 
 def process_option_usage(display_name):
     """
     This function shows the available options.
     """
-    print(f"""Gebruik: {display_name} [-h|--help] [-u|--usage] [-v|--version]
-
-Typ '{display_name} --help' voor meer informatie.""")
+    print(_('Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n\n'
+          "Type '{} --help' for more information.").
+          format(display_name, display_name))
 
 
 def process_option_version(program_name):
@@ -219,12 +217,12 @@ def process_option_version(program_name):
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
             program_year = 1970
-        print(f"""{program_name} (kz) 365 ({build_id})
-
-Geschreven in {program_year} door Karel Zimmer <info@karelzimmer.nl>, \
-Creative Commons
-Publiek Domein Verklaring \
-<http://creativecommons.org/publicdomain/zero/1.0>.""")
+        print(_('{} (kz) 365 ({})\n\n'
+                'Written in {} by Karel Zimmer <info@karelzimmer.nl>, \
+Creative Commons\n'
+                'Public Domain Dedication \
+<http://creativecommons.org/publicdomain/zero/1.0>.')
+              .format(program_name, build_id, program_year))
 
 
 ###############################################################################
@@ -232,4 +230,5 @@ Publiek Domein Verklaring \
 ###############################################################################
 
 if __name__ == '__main__':
-    print(f'{module_name}: ik ben een module')
+    # TODO
+    print(_('{}: i am a module').format(module_name))

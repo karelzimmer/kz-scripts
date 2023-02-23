@@ -200,8 +200,21 @@ function kz_common.init_script {
 
     cmdline_args=("$@")
     # Long options used from e.g. man systemd, 'to less (by default "FRSXMK")'.
-    less_options="--quit-if-one-screen --RAW-CONTROL-CHARS --chop-long-lines \
---no-init --LONG-PROMPT"
+    less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+--RAW-CONTROL-CHARS --prompt=M$(eval_gettext "Text output \$display_name") \
+?lt$(gettext "line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
+(press h for help or q to quit)")"
+
+#     less_options=$(eval_gettext "--LONG-PROMPT --no-init --quit-if-one-screen \
+# --quit-on-intr --RAW-CONTROL-CHARS --prompt=MText output \$display_name \
+# ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .(press h for help \
+# or q to quit)")
+
+#     less_options=$(eval_gettext "--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+# --RAW-CONTROL-CHARS --prompt=MTekstuitvoer \$display_name \
+# ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
+# h voor hulp of q om te stoppen)")
+
     usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
 }
