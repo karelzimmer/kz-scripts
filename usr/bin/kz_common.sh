@@ -1,6 +1,5 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034 # var appears unused
-# shellcheck disable=SC2154 # var is referenced but not assigned
+# shellcheck disable=SC2034 # appears unused (eval_gettext \$ & used by caller)
 ###############################################################################
 # Common module for shell scripts.
 #
@@ -177,6 +176,7 @@ function kz_common.init_script {
     set -o nounset
     set -o pipefail
 
+    # shellcheck disable=SC2154 # referenced but not assigned
     logcmd="systemd-cat --identifier=$program_name"
     logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
