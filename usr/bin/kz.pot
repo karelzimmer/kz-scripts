@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-23 09:52+0100\n"
+"POT-Creation-Date: 2023-02-23 12:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,4 +162,13 @@ msgid ""
 msgstr ""
 
 msgid "{}: i am a module"
+msgstr ""
+
+msgid "Run command"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Use: $display_name OPDRACHT [ARGUMENT...]\n"
+" or: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
 msgstr ""
