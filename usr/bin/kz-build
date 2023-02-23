@@ -120,6 +120,7 @@ function check_input {
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             err "Repo $repo not on branch main."
+            gitstat
             exit $err
         fi
     done
