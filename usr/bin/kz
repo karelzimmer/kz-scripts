@@ -18,28 +18,29 @@ source "$program_path"/kz_common.sh
 
 declare program_name='kz'
 declare program_desc
+# shellcheck disable=SC2034 # appears unused (eval_gettext \$)
 program_desc=$(gettext 'Run command')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
 # shellcheck disable=SC2034 # appears unused (eval_gettext \$)
-usage="$(eval_gettext "Use: \$display_name OPDRACHT [ARGUMENT...]
- or: \$display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")"
+usage=$(eval_gettext "Usage: \$display_name OPDRACHT [ARGUMENT...]
+   or: \$display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")
 
+declare help
 # shellcheck disable=SC2034 # appears unused (eval_gettext \$)
-# TODO
-declare help="Gebruik: $display_name OPDRACHT [ARGUMENT...]
-     of: $display_name OPTIE
+help=$(eval_gettext "Usage: \$display_name COMMAND [ARGUMENT...]
+   or: \$display_name OPTION
 
-$program_desc.
+\$program_desc.
 
-Opties:
-  -l, --list     toon beschikbare OPDRACHTen
-$options_help
+Options:
+  -l, --list     show available COMMANDs
+\$options_help
 
-Argumenten:
-  OPDRACHT       voer OPDRACHT uit
-  ARGUMENT       ARGUMENTen voor OPDRACHT"
+Arguments:
+  COMMAND        execute COMMAND
+  ARGUMENT       ARGUMENTs for COMMAND")
 
 
 ###############################################################################
@@ -57,8 +58,7 @@ function check_input {
     # Hier geen getopt zoals in alle andere scripts; eventuele opgegeven opties
     # in ARGUMENT, met kz OPDRACHT ARGUMENT, zijn voor OPDRACHT, niet voor kz.
     if [[ -z "$*" ]]; then
-        printf  "$display_name: %s\n$usage_line\n" \
-                'verplicht argument ontbreekt'
+        printf  "%s\n" "$usage"
         exit $err
     fi
     case $1 in
@@ -79,8 +79,8 @@ function check_input {
             exit $ok
             ;;
         -*)
-            printf  "$display_name: %s: %s\n$usage_line\n" \
-                    "$1" 'ongeldige optie'
+            printf  "$display_name: %s: $1%s\n$usage_line\n" \
+                    "$(gettext 'invalid option')"
             exit $err
             ;;
         *)
@@ -88,17 +88,17 @@ function check_input {
             ;;
     esac
     if ! [[ -f "$program_path/kz-$exec_program_name" ]]; then
-        printf  "$display_name: %s: %s\n$usage_line\n" \
-                "$exec_program_name" 'opdracht bestaat niet'
+        printf  "$display_name: $exec_program_name: %s\n$usage_line\n" \
+                "$(gettext 'command does not exist')"
         exit $err
     fi
 }
 
 
 function process_option_list {
-    info 'De volgende OPDRACHTen zijn beschikbaar:
+    info "$(gettext 'The following COMMANDs are available:
 
-     OPDRACHT'
+     COMMAND')"
     find    "$program_path"/kz-*            \
             -maxdepth 1                     \
             -type f                         \
@@ -114,9 +114,9 @@ function process_option_list {
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'
-    info "
-Om een OPDRACHT uit te voeren:
-${blue}$display_name OPDRACHT${normal}"
+    info "$(eval_gettext "
+To execute a COMMAND:
+\$display_name COMMAND")"
 }
 
 
