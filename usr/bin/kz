@@ -18,17 +18,17 @@ source "$program_path"/kz_common.sh
 
 declare program_name='kz'
 declare program_desc
-# shellcheck disable=SC2034 # appears unused (eval_gettext \$)
+# shellcheck disable=SC2034
 program_desc=$(gettext 'Run command')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
-# shellcheck disable=SC2034 # appears unused (eval_gettext \$)
+# shellcheck disable=SC2034
 usage=$(eval_gettext "Usage: \$display_name OPDRACHT [ARGUMENT...]
    or: \$display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")
 
 declare help
-# shellcheck disable=SC2034 # appears unused (eval_gettext \$)
+# shellcheck disable=SC2034
 help=$(eval_gettext "Usage: \$display_name COMMAND [ARGUMENT...]
    or: \$display_name OPTION
 

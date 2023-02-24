@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034 # appears unused (eval_gettext \$ & used by caller)
+# shellcheck disable=SC2034
 ###############################################################################
 # Common module for shell scripts.
 #
