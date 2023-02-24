@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-24 15:43+0100\n"
+"POT-Creation-Date: 2023-02-24 19:09+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -59,6 +59,16 @@ msgstr ""
 "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als karel op pcNN "
 "(bijvoorbeeld pc01)."
 
+msgid "Text output"
+msgstr "Tekstuitvoer"
+
+msgid ""
+"line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\\%. .(press h for "
+"help or q to quit)"
+msgstr ""
+"regel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\\%. .(druk op "
+"h voor help of q om te stoppen)"
+
 #, sh-format
 msgid "Type '$display_name --usage' for more information."
 msgstr "Typ '$display_name --usage' voor meer informatie."
@@ -79,74 +89,41 @@ msgstr ""
 "\n"
 "Programma $program_name is onderbroken."
 
-#, sh-format
 msgid ""
-"If the package manager gives apt errors, launch a Terminal window and run:\n"
-"[1] kz update\n"
-"[2] sudo update-initramfs -u"
+"If the package manager gives apt errors, launch a Terminal window and run:"
 msgstr ""
 "Als de pakketbeheerder apt foutmeldingen geeft, start een Terminalvenster en "
-"voer uit:\n"
-"[1] kz update\n"
-"[2] sudo update-initramfs -u"
+"voer uit:"
 
 #, sh-format
-msgid ""
-"$help\n"
-"\n"
-"Type 'man $display_name' for more information."
-msgstr ""
-"$help\n"
-"\n"
-"Typ 'man $display_name' voor meer informatie."
+msgid "Type 'man $display_name' for more information."
+msgstr "Typ 'man $display_name' voor meer informatie."
 
 #, sh-format
-msgid ""
-"$usage\n"
-"\n"
-"Type '$display_name --help' for more information."
-msgstr ""
-"$usage\n"
-"\n"
-"Typ '$display_name --help' voor meer informatie."
+msgid "Type '$display_name --help' for more information."
+msgstr "Typ '$display_name --help' voor meer informatie."
+
+msgid "Written in"
+msgstr "Geschreven in"
+
+msgid "by"
+msgstr "door"
+
+msgid "Public Domain Dedication"
+msgstr "Publiek Domein Verklaring"
 
 #, sh-format
-msgid ""
-"$program_name (kz) 365 ($build_id)\n"
-"\n"
-"Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
-"Commons\n"
-"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
-msgstr ""
-"$program_name (kz) 365 ($build_id)\n"
-"\n"
-"Geschreven in $program_year door Karel Zimmer <info@karelzimmer.nl>, "
-"Creative Commons\n"
-"Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
+msgid "Information"
+msgstr "Informatie"
 
 #, sh-format
-msgid "Information $display_name"
-msgstr "Informatie $display_name"
+msgid "Warning"
+msgstr "Waarschuwing"
 
-#, sh-format
-msgid "Warning $display_name"
-msgstr "Waarschuwing $display_name"
+msgid "Error message"
+msgstr "Foutmelding"
 
-#, sh-format
-msgid "Error message $display_name"
-msgstr "Foutmelding $display_name"
-
-#, sh-format
-msgid "Text output $display_name"
-msgstr "Tekstuitvoer $display_name"
-
-msgid ""
-"line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\\%. .(press h for "
-"help or q to quit)"
-msgstr ""
-"regel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\\%. .(druk op "
-"h voor help of q om te stoppen)"
-
+# FIXME
 msgid "Common module for Python scripts"
 msgstr "Algemene module voor Python scripts"
 

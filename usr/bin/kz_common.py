@@ -230,5 +230,4 @@ Creative Commons\n'
 ###############################################################################
 
 if __name__ == '__main__':
-    # TODO
     print(_('{}: i am a module').format(module_name))

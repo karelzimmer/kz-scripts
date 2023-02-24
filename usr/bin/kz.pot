@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-24 15:43+0100\n"
+"POT-Creation-Date: 2023-02-24 19:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,14 @@ msgstr ""
 msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
 msgstr ""
 
+msgid "Text output"
+msgstr ""
+
+msgid ""
+"line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\\%. .(press h for "
+"help or q to quit)"
+msgstr ""
+
 #, sh-format
 msgid "Type '$display_name --usage' for more information."
 msgstr ""
@@ -67,57 +75,39 @@ msgid ""
 "Program $program_name has been interrupted."
 msgstr ""
 
-#, sh-format
 msgid ""
-"If the package manager gives apt errors, launch a Terminal window and run:\n"
-"[1] kz update\n"
-"[2] sudo update-initramfs -u"
+"If the package manager gives apt errors, launch a Terminal window and run:"
 msgstr ""
 
 #, sh-format
-msgid ""
-"$help\n"
-"\n"
-"Type 'man $display_name' for more information."
+msgid "Type 'man $display_name' for more information."
 msgstr ""
 
 #, sh-format
-msgid ""
-"$usage\n"
-"\n"
-"Type '$display_name --help' for more information."
+msgid "Type '$display_name --help' for more information."
+msgstr ""
+
+msgid "Written in"
+msgstr ""
+
+msgid "by"
+msgstr ""
+
+msgid "Public Domain Dedication"
 msgstr ""
 
 #, sh-format
-msgid ""
-"$program_name (kz) 365 ($build_id)\n"
-"\n"
-"Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
-"Commons\n"
-"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+msgid "Information"
 msgstr ""
 
 #, sh-format
-msgid "Information $display_name"
+msgid "Warning"
 msgstr ""
 
-#, sh-format
-msgid "Warning $display_name"
+msgid "Error message"
 msgstr ""
 
-#, sh-format
-msgid "Error message $display_name"
-msgstr ""
-
-#, sh-format
-msgid "Text output $display_name"
-msgstr "Tekstuitvoer $display_name"
-
-msgid ""
-"line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\\%. .(press h for "
-"help or q to quit)"
-msgstr ""
-
+# FIXME
 msgid "Common module for Python scripts"
 msgstr ""
 
