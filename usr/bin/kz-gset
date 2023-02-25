@@ -25,7 +25,8 @@ declare usage="Gebruik: $display_name [-a|--addfavaft=FAVORITE] \
                  [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
                  [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]
                  $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
@@ -137,7 +138,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
-                'argumenten zijn niet toegestaan'
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 

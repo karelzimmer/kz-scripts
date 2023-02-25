@@ -23,7 +23,8 @@ declare display_name=${program_name/kz-/kz }
 declare usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
 [-s|--source=BRONMAP]
                     $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
@@ -102,7 +103,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
-                'argumenten zijn niet toegestaan'
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 }
@@ -114,8 +115,8 @@ function process_input {
 
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
-            printf  "$display_name: %s: %s\n$usage_line\n" \
-                    "$source_argument" 'map bestaat niet'
+            printf  "$display_name: $source_argument: %s\n$usage_line\n" \
+                    "$(gettext 'directory does not exist')"
             exit $err
         fi
         source=$source_argument/backup-$HOSTNAME-$USER

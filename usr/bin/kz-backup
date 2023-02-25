@@ -1,8 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# FIXME
-# Back-up maken.
+# Create backup.
 #
 # Written in 2007 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -18,21 +17,24 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-backup'
-declare program_desc='Back-up maken'
+declare program_desc
+program_desc=$(gettext 'Create backup')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [-d|--dry-run] [-g|--gui] \
-[-t|--target=DOELMAP]
-                   $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+declare usage
+usage="$(eval_gettext "Usage: \$display_name [-d|--dry-run] \
+[-g|--gui] [-t|--target=TARGET]")
+                 $options_usage"
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
-  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
-  -g, --gui      start in grafische modus
-  -t, --target=DOELMAP
-                 plaats back-up in DOELMAP
+$(gettext "Options:
+  -d, --dry-run  perform a test run without making any changes
+  -g, --gui      starts in graphics mode
+  -t, --target=TARGET
+                 put backup in directory TARGET")
 $options_help"
 declare options_short+='dgt:'
 declare options_long+=',dry-run,gui,target:'
@@ -103,7 +105,7 @@ function check_input {
 
     if [[ "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
-                'argumenten zijn niet toegestaan'
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 }
@@ -112,8 +114,8 @@ function check_input {
 function process_input {
     if $option_target; then
         if ! [[ -d $target_argument ]]; then
-            printf  "$display_name: %s: %s\n$usage_line\n" \
-                    "$target_argument" 'map bestaat niet'
+            printf  "$display_name: $target_argument: %s\n$usage_line\n" \
+                    "$(gettext 'directory does not exist')"
             exit $err
         fi
         target=$target_argument/backup-$HOSTNAME-$USER
@@ -121,24 +123,27 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            text="Koppel het usb-medium aan waarop de back-up wordt geplaatst."
+# TODO
+            text=$(gettext 'Connect the USB medium on which the backup will \
+be placed.')
             warn "$text"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err 'Geen usb-medium gevonden.
+                err "$(gettext 'No USB medium found.
 
-Koppel een usb-medium aan, en start daarna backup opnieuw.'
+Connect a USB medium, and then start backup again.')"
                 exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            err "Koppel slechts één usb-medium aan.
+        #FIXME Heet Bestanden (NL) Files in EN?
+            err "$(eval_gettext "Connect only one USB medium.
 
-Nu aangekoppeld zijn:
-$medium
+Now connected:
+\$medium
 
-Koppel media af via Bestanden, en start daarna backup opnieuw."
+Dismount media via Files, then restart backup.")"
             exit $err
         fi
         target=$medium/backup-$HOSTNAME-$USER
@@ -148,8 +153,11 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
     kz_common.check_on_ac_power
 
     if ! $option_dry_run; then
+# TODO
         title='Instellingen veiligstellen'
         text='Instellingen veiligstellen'
+        # title='Instellingen veiligstellen'
+        # text='Instellingen veiligstellen'
         if $option_gui; then
             backup_settings                 |
             zenity  --progress              \
@@ -290,7 +298,7 @@ $(
     )
 EOF
 
-    title='Back-up maken'
+    title='Reservekopie maken'
     text='Backup voorbereiden (dit kan even duren)'
     if $option_gui; then
         rsync   --archive                   \
@@ -330,11 +338,12 @@ EOF
             return $ok
             ;;
         *)
-            err "Back-up maken is geeindigd met fouten.
+            err "Reservekopie maken is geëindigd met fouten.
 
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
-of toegevoegd tijdens het maken van de back-up, of is er te weinig ruimte op
-$target."
+Mogelijk zijn enkele bestanden niet leesbaar,
+of zijn er bestanden verwijderd of toegevoegd tijdens het maken van de \
+reservekopie,
+of is er te weinig ruimte op $target."
             exit $err
             ;;
     esac
@@ -367,7 +376,7 @@ $text..."
 
     text=''
     if $option_dry_run; then
-        err "De back-up is NIET gemaakt (DRY RUN)."
+        err "De reservekopie is NIET gemaakt (DRY RUN)."
         exit $err
     fi
     if [[ $target_medium == /media/* ]]; then
@@ -402,18 +411,18 @@ $text..."
         fi
         if [[ $rc -eq $ok ]]; then
             info "
-De back-up is gemaakt.
+De reservekopie is gemaakt.
 
 Het usb-medium kan verwijderd worden."
         else
             warn "
-De back-up is gemaakt.
+De reservekopie is gemaakt.
 
 Koppel zelf (veilig!) het usb-medium af."
         fi
     else
         info "
-De back-up is gemaakt."
+De reservekopie is gemaakt."
     fi
     exit $ok
 }
