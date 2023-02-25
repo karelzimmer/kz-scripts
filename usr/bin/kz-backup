@@ -123,9 +123,8 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-# TODO
-            text=$(gettext 'Connect the USB medium on which the backup will \
-be placed.')
+            text=$(gettext "Connect the USB medium on which the backup will \
+be placed.")
             warn "$text"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
@@ -137,13 +136,12 @@ Connect a USB medium, and then start backup again.')"
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-        #FIXME Heet Bestanden (NL) Files in EN?
             err "$(eval_gettext "Connect only one USB medium.
 
 Now connected:
 \$medium
 
-Dismount media via Files, then restart backup.")"
+Unmount media via Files, then restart backup.")"
             exit $err
         fi
         target=$medium/backup-$HOSTNAME-$USER
@@ -153,11 +151,8 @@ Dismount media via Files, then restart backup.")"
     kz_common.check_on_ac_power
 
     if ! $option_dry_run; then
-# TODO
-        title='Instellingen veiligstellen'
-        text='Instellingen veiligstellen'
-        # title='Instellingen veiligstellen'
-        # text='Instellingen veiligstellen'
+        title=$(gettext 'Secure settings')
+        text=$title
         if $option_gui; then
             backup_settings                 |
             zenity  --progress              \
@@ -214,16 +209,19 @@ function backup_settings_favorite_apps {
 
 function backup_settings_installed_apps {
     local file=$tgtdir/Apps
-    local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
-met een opdracht zoals
-      'sudo apt --install <pakket|bestand>', of met kz install:"
-    local header2="[2/3] Deze snaps zijn geïnstalleerd via Software, \
-met '[sudo] install <snap>',
-      of met kz install:"
-    local header3="[3/3] Deze pakketbronnen zijn toegevoegd met de \
-installatie van een pakket, met
-      de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>', of
-      met kz install:"
+    local header1
+    header1="$(gettext "[1/3] These packages are installed via Add or Remove \
+Programs, with a command
+      such as 'sudo apt --install <package|file>', or with kz install:")"
+    local header2
+    header2="$(gettext "[2/3] These snaps are installed via Add or Remove \
+Programs,
+      with '[sudo] install <snap>', or with kz install:")"
+    local header3
+    header3="$(gettext "[3/3] These repositories are added with the \
+installation of a package, with
+      the command 'sudo add-apt-repository ppa:<ppa-user>/<ppa-name>', or
+      with kz install:")"
     local search=/etc/apt/sources.list
 
     printf '%b\n' "$header1" > "$file"
@@ -233,7 +231,7 @@ installatie van een pakket, met
 
     printf '\n%b\n' "$header2" >> "$file"
     if ! snap list 2> >($logcmd) >> "$file"; then
-        printf '%s\n' 'snap is niet geïnstalleerd' >> "$file"
+        printf '%s\n' "$(gettext 'snap is not installed')" >> "$file"
     fi
 
     printf '\n%b\n' "$header3" >> "$file"
@@ -267,7 +265,7 @@ function create_backup {
 
     exclude=$(mktemp -t "$program_name-XXXXXXXXXX")
 
-    # Déjà Dup: Sommige locaties worden standaard genegeerd.
+    # Déjà Dup: Some locations are ignored by default.
     cat << EOF > "$exclude"
 .adobe/Flash_Player/AssetCache
 .cache
@@ -298,8 +296,10 @@ $(
     )
 EOF
 
-    title='Reservekopie maken'
-    text='Backup voorbereiden (dit kan even duren)'
+    title=$(gettext 'Create backup')
+    text=$(gettext 'Preparing backup (this may take a while)')
+    # title=$(gettext '')
+    # text=$(gettext '')
     if $option_gui; then
         rsync   --archive                   \
                 --verbose                   \
@@ -338,12 +338,11 @@ EOF
             return $ok
             ;;
         *)
-            err "Reservekopie maken is geëindigd met fouten.
+            err "$(eval_gettext "Backup ended with errors.
 
-Mogelijk zijn enkele bestanden niet leesbaar,
-of zijn er bestanden verwijderd of toegevoegd tijdens het maken van de \
-reservekopie,
-of is er te weinig ruimte op $target."
+Some files may not be readable,
+or were any files added or removed while creating the backup,
+or is there not enough space on \$target.")"
             exit $err
             ;;
     esac
@@ -355,7 +354,8 @@ function term_script {
     local dev=''
     local -i rc=0
 
-    text='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
+    text=$(gettext 'Writing data from temporary memory (this may take a \
+while)')
     if ! $option_dry_run; then
         if $option_gui; then
             sync                            |
@@ -376,11 +376,12 @@ $text..."
 
     text=''
     if $option_dry_run; then
-        err "De reservekopie is NIET gemaakt (DRY RUN)."
+#FIME
+        err "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $err
     fi
     if [[ $target_medium == /media/* ]]; then
-        text='Het usb-medium afkoppelen'
+        text=$(gettext 'Unplug the USB media')
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
@@ -410,19 +411,19 @@ $text..."
             udisksctl power-off --block-device "$dev" |& $logcmd || rc+=$?
         fi
         if [[ $rc -eq $ok ]]; then
-            info "
-De reservekopie is gemaakt.
+            info "$(gettext '
+The backup has been made.
 
-Het usb-medium kan verwijderd worden."
+Het usb-medium kan verwijderd worden.')"
         else
-            warn "
-De reservekopie is gemaakt.
+            warn "$(gettext '
+The backup has been made.
 
-Koppel zelf (veilig!) het usb-medium af."
+Koppel zelf (veilig!) het usb-medium af.')"
         fi
     else
-        info "
-De reservekopie is gemaakt."
+        info "$(gettext '
+The backup has been made.')"
     fi
     exit $ok
 }

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-25 12:01+0100\n"
+"POT-Creation-Date: 2023-02-25 17:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,7 +223,6 @@ msgstr ""
 msgid "directory does not exist"
 msgstr ""
 
-# TODO
 msgid "Connect the USB medium on which the backup will be placed."
 msgstr ""
 
@@ -240,5 +239,68 @@ msgid ""
 "Now connected:\n"
 "$medium\n"
 "\n"
-"Dismount media via Files, then restart backup."
+"Unmount media via Files, then restart backup."
+msgstr ""
+
+msgid "Secure settings"
+msgstr ""
+
+msgid ""
+"[1/3] These packages are installed via Add or Remove Programs, with a "
+"command\n"
+"      such as 'sudo apt --install <package|file>', or with kz install:"
+msgstr ""
+
+msgid ""
+"[2/3] These snaps are installed via Add or Remove Programs,\n"
+"      with '[sudo] install <snap>', or with kz install:"
+msgstr ""
+
+msgid ""
+"[3/3] These repositories are added with the installation of a package, with\n"
+"      the command 'sudo add-apt-repository ppa:<ppa-user>/<ppa-name>', or\n"
+"      with kz install:"
+msgstr ""
+
+msgid "snap is not installed"
+msgstr ""
+
+msgid "Preparing backup (this may take a while)"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Backup ended with errors.\n"
+"\n"
+"Some files may not be readable,\n"
+"or were any files added or removed while creating the backup,\n"
+"or is there not enough space on $target."
+msgstr ""
+
+msgid "Writing data from temporary memory (this may take a while)"
+msgstr ""
+
+msgid "The backup has NOT been created (DRY RUN)."
+msgstr ""
+
+msgid "Unplug the USB media"
+msgstr ""
+
+msgid ""
+"\n"
+"The backup has been made.\n"
+"\n"
+"Het usb-medium kan verwijderd worden."
+msgstr ""
+
+msgid ""
+"\n"
+"The backup has been made.\n"
+"\n"
+"Koppel zelf (veilig!) het usb-medium af."
+msgstr ""
+
+msgid ""
+"\n"
+"The backup has been made."
 msgstr ""
