@@ -23,12 +23,10 @@ program_desc=$(gettext 'Run command')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
-# shellcheck disable=SC2034
 usage=$(eval_gettext "Usage: \$display_name OPDRACHT [ARGUMENT...]
    or: \$display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")
 
 declare help
-# shellcheck disable=SC2034
 help=$(eval_gettext "Usage: \$display_name COMMAND [ARGUMENT...]
    or: \$display_name OPTION
 
@@ -62,19 +60,19 @@ function check_input {
         exit $err
     fi
     case $1 in
-        -h|--help)
+        -h*|--h*)
             kz_common.process_option_help
             exit $ok
             ;;
-        -u|--usage)
+        -u*|--u*)
             kz_common.process_option_usage
             exit $ok
             ;;
-        -v|--version)
+        -v*|--v*)
             kz_common.process_option_version
             exit $ok
             ;;
-        -l|--list)
+        -l*|--l*)
             process_option_list
             exit $ok
             ;;

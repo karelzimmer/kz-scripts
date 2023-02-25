@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034,SC2154
+# shellcheck disable=SC2034
 ###############################################################################
 # Common module for shell scripts.
 #
@@ -176,6 +176,7 @@ function kz_common.init_script {
     set -o nounset
     set -o pipefail
 
+    # shellcheck disable=SC2154
     logcmd="systemd-cat --identifier=$program_name"
     logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
@@ -199,9 +200,13 @@ function kz_common.init_script {
 
     cmdline_args=("$@")
     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M$(gettext 'Text output') $display_name \
-?lt$(gettext "line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
+--RAW-CONTROL-CHARS --prompt=M$(eval_gettext "Text output \$display_name \
+?ltline %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
 (press h for help or q to quit)")"
+#     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
+# --RAW-CONTROL-CHARS --prompt=M$(gettext 'Text output') $display_name \
+# ?lt$(gettext "line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
+# (press h for help or q to quit)")"
     usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
 }
@@ -364,6 +369,7 @@ function kz_common.process_options {
 
 
 function kz_common.process_option_help {
+    # shellcheck disable=SC2154
     info "$help
 
 $(eval_gettext "Type 'man \$display_name' for more information.")"
@@ -371,6 +377,7 @@ $(eval_gettext "Type 'man \$display_name' for more information.")"
 
 
 function kz_common.process_option_usage {
+    # shellcheck disable=SC2154
     info "$usage
 
 $(eval_gettext "Type '\$display_name --help' for more information.")"
@@ -393,10 +400,9 @@ function kz_common.process_option_version {
     fi
     info "$program_name (kz) 365 ($build_id)
 
-$(gettext 'Written in') $program_year $(gettext 'by') Karel \
-Zimmer <info@karelzimmer.nl>, Creative Commons
-$(gettext 'Public Domain Dedication') \
-<http://creativecommons.org/publicdomain/zero/1.0>."
+$(eval_gettext "Written in \$program_year by Karel Zimmer \
+<info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.")"
 }
 
 
@@ -422,7 +428,7 @@ function info {
     local title=''
 
     if $option_gui; then
-        title="$(gettext 'Information') $display_name"
+        title=$(eval_gettext "Information \$display_name")
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
@@ -440,7 +446,7 @@ function warn {
     local title=''
 
     if $option_gui; then
-        title="$(gettext 'Warning') $display_name"
+        title=$(eval_gettext "Warning \$display_name")
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \
@@ -458,7 +464,7 @@ function err {
     local title=''
 
     if $option_gui; then
-        title="$(gettext 'Error message') $display_name"
+        title=$(eval_gettext "Error message \$display_name")
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \

@@ -176,7 +176,11 @@ def process_option_help(display_name, program_desc):
     """
     This function shows the available help.
     """
-    print(_('Usage: {} [OPTION...]\n\n{}.\n\nOptions:\n'
+    print(_('Usage: {} [OPTION...]\n'
+            '\n'
+            '{}.\n'
+            '\n'
+            'Options:\n'
             '  -h, --help     give this help list\n'
             '  -u, --usage    give a short usage message\n'
             '  -v, --version  print program version\n\n'
@@ -188,8 +192,9 @@ def process_option_usage(display_name):
     """
     This function shows the available options.
     """
-    print(_('Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n\n'
-          "Type '{} --help' for more information.").
+    print(_('Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n'
+            '\n'
+            "Type '{} --help' for more information.").
           format(display_name, display_name))
 
 
@@ -217,7 +222,8 @@ def process_option_version(program_name):
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
             program_year = 1970
-        print(_('{} (kz) 365 ({})\n\n'
+        print(_('{} (kz) 365 ({})\n'
+                '\n'
                 'Written in {} by Karel Zimmer <info@karelzimmer.nl>, \
 Creative Commons\n'
                 'Public Domain Dedication \

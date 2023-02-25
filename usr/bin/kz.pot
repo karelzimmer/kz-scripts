@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-24 19:27+0100\n"
+"POT-Creation-Date: 2023-02-25 10:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,12 +51,10 @@ msgstr ""
 msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
 msgstr ""
 
-msgid "Text output"
-msgstr ""
-
+#, sh-format
 msgid ""
-"line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\\%. .(press h for "
-"help or q to quit)"
+"Text output $display_name ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e "
+"(END) :?pB %pB\\%. .(press h for help or q to quit)"
 msgstr ""
 
 #, sh-format
@@ -87,27 +85,25 @@ msgstr ""
 msgid "Type '$display_name --help' for more information."
 msgstr ""
 
-msgid "Written in"
-msgstr ""
-
-msgid "by"
-msgstr ""
-
-msgid "Public Domain Dedication"
+#, sh-format
+msgid ""
+"Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
+"Commons\n"
+"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #, sh-format
-msgid "Information"
+msgid "Information $display_name"
 msgstr ""
 
 #, sh-format
-msgid "Warning"
+msgid "Warning $display_name"
 msgstr ""
 
-msgid "Error message"
+#, sh-format
+msgid "Error message $display_name"
 msgstr ""
 
-# FIXME
 msgid "Common module for Python scripts"
 msgstr ""
 
@@ -154,6 +150,7 @@ msgstr ""
 msgid "{}: i am a module"
 msgstr ""
 
+# FIXME
 msgid "Run command"
 msgstr ""
 
