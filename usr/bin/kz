@@ -18,7 +18,6 @@ source "$program_path"/kz_common.sh
 
 declare program_name='kz'
 declare program_desc
-# shellcheck disable=SC2034
 program_desc=$(gettext 'Run command')
 declare display_name=${program_name/kz-/kz }
 
@@ -27,18 +26,18 @@ usage=$(eval_gettext "Usage: \$display_name OPDRACHT [ARGUMENT...]
    or: \$display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")
 
 declare help
-help=$(eval_gettext "Usage: \$display_name COMMAND [ARGUMENT...]
-   or: \$display_name OPTION
+help="$(eval_gettext "Usage: \$display_name COMMAND [ARGUMENT...]
+   or: \$display_name OPTION")
 
-\$program_desc.
+$program_desc.
 
-Options:
-  -l, --list     show available COMMANDs
-\$options_help
+$(gettext "Options:
+  -l, --list     show available COMMANDs")
+$options_help
 
-Arguments:
+$(gettext "Arguments:
   COMMAND        execute COMMAND
-  ARGUMENT       ARGUMENTs for COMMAND")
+  ARGUMENT       ARGUMENTs for COMMAND")"
 
 
 ###############################################################################
