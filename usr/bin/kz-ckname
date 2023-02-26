@@ -119,26 +119,26 @@ function check_files {
         dirname=$(dirname "$file")
         basename=$(basename "$file")
 
-        # Verwijder de slechte tekens, \ is escape voor \.
+        # Remove the bad characters, \ is escape for \.
         good=$(printf '%s'"$file" | tr --delete '?"\\<>*|:')
 
         if ! [[ $file = "$good" ]]; then
             ((++count))
             if [[ -d "$file" ]]; then
-                info "BadName  DIR: $file"
+                info "$(gettext 'BadName  DIR'): $file"
             elif [[ -f "$file" ]]; then
-                info "BadName FILE: $basename ($dirname)"
+                info "$(gettext 'BadName FILE'): $basename ($dirname)"
             else
-                info "BadName SYML: $file"
+                info "$(gettext 'BadName SYML'): $file"
             fi
         fi
 
         if [[ ${#basename} -gt $filename_maxlen ]]; then
             ((++count))
             if [[ -d "$file" ]]; then
-                info "BadLen.  DIR: $basename"
+                info "$(gettext 'BadLen.  DIR'): $basename"
             else
-                info "BadLen. FILE: $basename ($dirname)"
+                info "$(gettext 'BadLen. FILE'): $basename ($dirname)"
             fi
         fi
 
@@ -157,15 +157,15 @@ function check_files {
                 -not -name '.*'         \
                 -not -path '*/.*'       \
                 -type l                 \
-                -print0
+                -print0                 2> /dev/null || true
         )
 
     if [[ $count -eq 0 ]]; then
         return $ok
     elif [[ $count -eq 1 ]]; then
-        info 'Er is een fout gevonden.'
+        info "$(gettext 'An error has been found.')"
     else
-        info "Er zijn $count fouten gevonden."
+        info "$(eval_gettext "\$count errors were found.")"
     fi
 }
 

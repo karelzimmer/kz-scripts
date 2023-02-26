@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 10:38+0100\n"
+"POT-Creation-Date: 2023-02-26 11:16+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -429,3 +429,24 @@ msgid ""
 msgstr ""
 "Argumenten:\n"
 "  MAP            begin te controleren vanaf MAP"
+
+msgid "BadName  DIR"
+msgstr "SlechtNaam  MAP"
+
+msgid "BadName FILE"
+msgstr "SlechtNaam BEST"
+
+msgid "BadName SYML"
+msgstr "SlechtNaam SYML"
+
+msgid "BadLen.  DIR"
+msgstr "SlechtLen.  MAP"
+
+msgid "BadLen. FILE"
+msgstr "SlechtLen. BEST"
+msgid "An error has been found."
+msgstr "Er is een fout gevonden."
+
+#, sh-format
+msgid "$count errors were found."
+msgstr "Er zijn $count fouten gevonden."
