@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 11:18+0100\n"
+"POT-Creation-Date: 2023-02-26 12:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -354,4 +354,28 @@ msgstr ""
 
 #, sh-format
 msgid "$count errors were found."
+msgstr ""
+
+msgid "Distribute kz package"
+msgstr ""
+
+msgid "* check filenames (kz ckname)..."
+msgstr ""
+
+msgid "Fix all the messages above and then restart deploy."
+msgstr ""
+
+msgid "* check scripts (kz ivp)..."
+msgstr ""
+
+msgid "* build package and website (kz build)..."
+msgstr ""
+
+msgid "Website upload failed."
+msgstr ""
+
+msgid "* install package kz (kz getdeb)..."
+msgstr ""
+
+msgid "Install package kz failed."
 msgstr ""

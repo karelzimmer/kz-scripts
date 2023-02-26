@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 11:16+0100\n"
+"POT-Creation-Date: 2023-02-26 12:36+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -444,9 +444,34 @@ msgstr "SlechtLen.  MAP"
 
 msgid "BadLen. FILE"
 msgstr "SlechtLen. BEST"
+
 msgid "An error has been found."
 msgstr "Er is een fout gevonden."
 
 #, sh-format
 msgid "$count errors were found."
 msgstr "Er zijn $count fouten gevonden."
+
+msgid "Distribute kz package"
+msgstr "Pakket kz distribueren"
+
+msgid "* check filenames (kz ckname)..."
+msgstr "* controleer bestandsnamen (kz ckname)..."
+
+msgid "Fix all the messages above and then restart deploy."
+msgstr "Herstel alle meldingen hierboven en start daarna deploy opnieuw."
+
+msgid "* check scripts (kz ivp)..."
+msgstr "* controleer scripts (kz ivp)..."
+
+msgid "* build package and website (kz build)..."
+msgstr "* bouw pakket en website (kz build)..."
+
+msgid "Website upload failed."
+msgstr "Uploaden website is mislukt."
+
+msgid "* install package kz (kz getdeb)..."
+msgstr "* installeer pakket kz (kz getdeb)..."
+
+msgid "Install package kz failed."
+msgstr "Installeren pakket kz is niet uitgevoerd."

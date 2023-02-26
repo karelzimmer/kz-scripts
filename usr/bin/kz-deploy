@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Pakket kz distribueren.
+# Distribute kz package.
 #
 # Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -17,7 +17,8 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-deploy'
-declare program_desc='Pakket kz distribueren'
+declare program_desc
+program_desc=$(gettext 'Distribute kz package')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
@@ -110,15 +111,15 @@ function check_names {
     local docs_repo=$HOME/kz-docs
     local app_uploads_repo=$HOME/kz-uploads/app
 
-    info '* controleer bestandsnamen (kz ckname)...'
+    info "$(gettext '* check filenames (kz ckname)...')"
     log "Check filenames with kz ckname."
     "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
                                         "$docs_repo"        \
                                         "$deb_repo"         \
                                         "$app_uploads_repo" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err '
-Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
+        err "
+$(gettext 'Fix all the messages above and then restart deploy.')"
         exit $check_rc
     fi
 }
@@ -127,12 +128,12 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 function check_scripts {
     local -i check_rc=0
 
-    info '* controleer scripts (kz ivp)...'
+    info "$(gettext '* check scripts (kz ivp)...')"
     log "Check scripts with kz ivp."
     "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err '
-Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
+        err "
+$(gettext 'Fix all the messages above and then restart deploy.')"
         exit $check_rc
     fi
 }
@@ -141,12 +142,12 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 function build_package {
     local -i check_rc=0
 
-    info '* bouw pakket en website (kz build)...'
+    info "$(gettext '* build package and website (kz build)...')"
     log "Build package and website with kz build."
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err '
-Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
+        err "
+$(gettext 'Fix all the messages above and then restart deploy.')"
         exit $check_rc
     fi
 }
@@ -175,7 +176,7 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
         rm      "$ftp_login"
-        err 'Uploaden website is mislukt.'
+        err "$(gettext 'Website upload failed.')"
         exit $err
     fi
     sleep 5
@@ -183,9 +184,9 @@ function upload_website {
 
 
 function install_package {
-    info '* installeer pakket kz (kz getdeb)...'
+    info "$(gettext '* install package kz (kz getdeb)...')"
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
-        err 'Installeren pakket kz is niet uitgevoerd.'
+        err "$(gettext 'Install package kz failed.')"
         exit $err
     fi
 }
