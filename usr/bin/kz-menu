@@ -27,7 +27,7 @@ help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
   -g, --gui      start in grafische modus
 $options_help"
 declare options_short+='g'

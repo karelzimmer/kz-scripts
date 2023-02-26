@@ -28,7 +28,7 @@ declare help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
   -a, --apps     toon lijst van beschikbare apps
   -c, --cat      toon inhoud van bestanden
   -f, --files    toon lijst van bestanden

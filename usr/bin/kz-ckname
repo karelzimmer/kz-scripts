@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Bestandsnamen controleren.
+# Check file names.
 #
 # Written in 2012 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -17,19 +17,27 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-ckname'
-declare program_desc='Bestandsnamen controleren'
+declare program_desc
+program_desc=$(gettext 'Check file names')
+# declare program_desc='Bestandsnamen controleren'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name $options_usage [MAP...]"
-declare help="Gebruik: $display_name [OPTIE...] [MAP...]
+# declare usage="Gebruik: $display_name $options_usage [MAP...]"
+# declare help="Gebruik: $display_name [OPTIE...] [MAP...]
+
+declare usage=
+usage=$(eval_gettext "Usage: \$display_name \$options_usage [DIRECTORY...]")
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...] [DIRECTORY...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
 $options_help
 
-Argumenten:
-  MAP            begin te controleren vanaf map MAP"
+Arguments:
+  DIRECTORY      start checking from DIRECTORY"
+  #begin te controleren vanaf MAP
 
 
 ###############################################################################

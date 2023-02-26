@@ -27,7 +27,7 @@ help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
 $options_help"
 
 

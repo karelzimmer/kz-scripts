@@ -254,8 +254,8 @@ msgid "Create backup"
 msgstr "Reservekopie maken"
 
 #, sh-format
-msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=TARGET]"
-msgstr "Gebruik: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=DOEL]"
+msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=DIRECTORY]"
+msgstr "Gebruik: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=MAP]"
 
 #, sh-format
 msgid "Usage: $display_name [OPTION...]"
@@ -265,14 +265,14 @@ msgid ""
 "Options:\n"
 "  -d, --dry-run  perform a test run without making any changes\n"
 "  -g, --gui      starts in graphics mode\n"
-"  -t, --target=TARGET\n"
-"                 put backup in directory TARGET"
+"  -t, --target=DIRECTORY\n"
+"                 put backup in DIRECTORY"
 msgstr ""
 "Opties:\n"
 "  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen\n"
 "  -g, --gui      start in grafische modus\n"
-"  -t, --target=DOEL\n"
-"                 plaats reservekopie in map DOEL"
+"  -t, --target=MAP\n"
+"                 plaats reservekopie in MAP"
 
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -404,6 +404,9 @@ msgstr "Pakket kz bouwen"
 #, sh-format
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
+
+msgid "Options:"
+msgstr "Opties:"
 
 #, sh-format
 msgid "Repo $repo must be on branch main."

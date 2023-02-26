@@ -30,7 +30,7 @@ help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
   -a, --addfavaft=FAVORITE
                  voeg FAVORITE toe aan het einde
   -b, --addfavbef=FAVORITE

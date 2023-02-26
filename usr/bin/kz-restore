@@ -28,7 +28,7 @@ help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
       --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
   -g, --gui      start in grafische modus
   -s, --source=BRONMAP

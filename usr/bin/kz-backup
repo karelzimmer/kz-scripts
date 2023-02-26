@@ -23,7 +23,7 @@ declare display_name=${program_name/kz-/kz }
 
 declare usage
 usage="$(eval_gettext "Usage: \$display_name [-d|--dry-run] \
-[-g|--gui] [-t|--target=TARGET]")
+[-g|--gui] [-t|--target=DIRECTORY]")
                  $options_usage"
 declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
@@ -33,8 +33,8 @@ $program_desc.
 $(gettext "Options:
   -d, --dry-run  perform a test run without making any changes
   -g, --gui      starts in graphics mode
-  -t, --target=TARGET
-                 put backup in directory TARGET")
+  -t, --target=DIRECTORY
+                 put backup in DIRECTORY")
 $options_help"
 declare options_short+='dgt:'
 declare options_long+=',dry-run,gui,target:'

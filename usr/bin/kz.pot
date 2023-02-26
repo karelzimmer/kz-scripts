@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 10:02+0100\n"
+"POT-Creation-Date: 2023-02-26 10:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,7 +201,7 @@ msgid "Create backup"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=TARGET]"
+msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=DIRECTORY]"
 msgstr ""
 
 #, sh-format
@@ -212,8 +212,8 @@ msgid ""
 "Options:\n"
 "  -d, --dry-run  perform a test run without making any changes\n"
 "  -g, --gui      starts in graphics mode\n"
-"  -t, --target=TARGET\n"
-"                 put backup in directory TARGET"
+"  -t, --target=DIRECTORY\n"
+"                 put backup in DIRECTORY"
 msgstr ""
 
 msgid "arguments are not allowed"
@@ -309,6 +309,9 @@ msgstr ""
 
 #, sh-format
 msgid "Usage: $display_name $options_usage"
+msgstr ""
+
+msgid "Options:"
 msgstr ""
 
 #, sh-format
