@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 14:04+0100\n"
+"POT-Creation-Date: 2023-02-26 14:51+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -261,16 +261,19 @@ msgstr "Gebruik: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=MAP]"
 msgid "Usage: $display_name [OPTION...]"
 msgstr "Gebruik: $display_name [OPTIE...]"
 
+msgid "Options:"
+msgstr "Opties:"
+
+msgid "perform a test run without making any changes"
+msgstr "een proefrun uitvoeren zonder wijzigingen aan te brengen"
+
+msgid "starts in graphics mode"
+msgstr "start in grafische modus"
+
 msgid ""
-"Options:\n"
-"  -d, --dry-run  perform a test run without making any changes\n"
-"  -g, --gui      starts in graphics mode\n"
 "  -t, --target=DIRECTORY\n"
 "                 put backup in DIRECTORY"
 msgstr ""
-"Opties:\n"
-"  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen\n"
-"  -g, --gui      start in grafische modus\n"
 "  -t, --target=MAP\n"
 "                 plaats reservekopie in MAP"
 
@@ -404,9 +407,6 @@ msgstr "Pakket kz bouwen"
 #, sh-format
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
-
-msgid "Options:"
-msgstr "Opties:"
 
 #, sh-format
 msgid "Repo $repo must be on branch main."
@@ -647,3 +647,49 @@ msgid ""
 msgstr ""
 "\n"
 "Bij WIJZIGINGen voer uit: ${blue}gsettings set WIJZIGING${normal}"
+
+msgid "Install apps"
+msgstr "Apps installeren"
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                  [-r|--remove] [--server] [-s|--simulate]\n"
+"                  $options_usage\n"
+"                  [APP...] [FILE...]"
+msgstr ""
+"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                    [-r|--remove] [--server] [-s|--simulate]\n"
+"                    $options_usage\n"
+"                    [APP...] [BESTAND...]"
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...] [APP...] [FILE...]"
+msgstr "Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]"
+
+msgid "show list of available apps"
+msgstr "toon lijst van beschikbare apps"
+
+msgid "show contents of files"
+msgstr "toon inhoud van bestanden"
+
+msgid "show list of files"
+msgstr "toon lijst van bestanden"
+
+msgid "delete apps"
+msgstr "verwijder apps"
+
+msgid "install apps for a server"
+msgstr "apps voor een server installeren"
+
+msgid "show commands"
+msgstr "toon opdrachten"
+
+msgid ""
+"Arguments:\n"
+"  APP            install APPs\n"
+"  BESTAND        process FILEs"
+msgstr ""
+"Argumenten:\n"
+"  APP            installeer APPs\n"
+"  BESTAND        verwerk BESTANDen"

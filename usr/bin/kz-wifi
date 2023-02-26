@@ -28,7 +28,7 @@ $program_desc.
 
 $(gettext 'Options:')
 $options_help
-  -g, --gui      start in grafische modus"
+  -g, --gui      $(gettext 'starts in graphics mode')"
 declare options_short+='g'
 declare options_long+=',gui'
 

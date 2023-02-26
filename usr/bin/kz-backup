@@ -30,11 +30,11 @@ help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-$(gettext "Options:
-  -d, --dry-run  perform a test run without making any changes
-  -g, --gui      starts in graphics mode
-  -t, --target=DIRECTORY
-                 put backup in DIRECTORY")
+$(gettext 'Options:') 
+  -d, --dry-run  $(gettext 'perform a test run without making any changes')
+  -g, --gui      $(gettext 'starts in graphics mode')
+$(gettext '  -t, --target=DIRECTORY
+                 put backup in DIRECTORY')
 $options_help"
 declare options_short+='dgt:'
 declare options_long+=',dry-run,gui,target:'

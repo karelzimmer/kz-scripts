@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 14:04+0100\n"
+"POT-Creation-Date: 2023-02-26 14:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -208,10 +208,16 @@ msgstr ""
 msgid "Usage: $display_name [OPTION...]"
 msgstr ""
 
+msgid "Options:"
+msgstr ""
+
+msgid "perform a test run without making any changes"
+msgstr ""
+
+msgid "starts in graphics mode"
+msgstr ""
+
 msgid ""
-"Options:\n"
-"  -d, --dry-run  perform a test run without making any changes\n"
-"  -g, --gui      starts in graphics mode\n"
 "  -t, --target=DIRECTORY\n"
 "                 put backup in DIRECTORY"
 msgstr ""
@@ -309,9 +315,6 @@ msgstr ""
 
 #, sh-format
 msgid "Usage: $display_name $options_usage"
-msgstr ""
-
-msgid "Options:"
 msgstr ""
 
 #, sh-format
@@ -506,4 +509,43 @@ msgstr ""
 msgid ""
 "\n"
 "At CHANGE, run: ${blue}gsettings set CHANGE${normal}"
+msgstr ""
+
+msgid "Install apps"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                  [-r|--remove] [--server] [-s|--simulate]\n"
+"                  $options_usage\n"
+"                  [APP...] [FILE...]"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...] [APP...] [FILE...]"
+msgstr ""
+
+msgid "show list of available apps"
+msgstr ""
+
+msgid "show contents of files"
+msgstr ""
+
+msgid "show list of files"
+msgstr ""
+
+msgid "delete apps"
+msgstr ""
+
+msgid "install apps for a server"
+msgstr ""
+
+msgid "show commands"
+msgstr ""
+
+msgid ""
+"Arguments:\n"
+"  APP            install APPs\n"
+"  BESTAND        process FILEs"
 msgstr ""

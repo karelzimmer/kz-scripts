@@ -20,22 +20,24 @@ declare program_name='kz-setup'
 declare program_desc='Apps instellen'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files]
+declare usage
+usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files]
                   [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
                   $options_usage
                   [APP...] [BESTAND...]"
-declare help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
+declare help
+help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
 
 $program_desc.
 
 $(gettext 'Options:')
-  -a, --apps     toon lijst van beschikbare apps
-  -c, --cat      toon inhoud van bestanden
-  -f, --files    toon lijst van bestanden
-  -g, --gui      start in grafische modus
+  -a, --apps     $(gettext 'show list of available apps')
+  -c, --cat      $(gettext 'show contents of files')
+  -f, --files    $(gettext 'show list of files')
+  -g, --gui      $(gettext 'starts in graphics mode')
   -r, --reset    reset apps
       --server   stel apps in voor een server
-  -s, --simulate toon opdrachten
+  -s, --simulate $(gettext 'show commands')
 $options_help
 
 Argumenten:
