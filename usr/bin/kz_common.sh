@@ -176,8 +176,7 @@ function kz_common.init_script {
     set -o nounset
     set -o pipefail
 
-    # shellcheck disable=SC2154
-    logcmd="systemd-cat --identifier=$program_name"
+    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
     logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
