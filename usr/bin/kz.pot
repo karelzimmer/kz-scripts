@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 12:36+0100\n"
+"POT-Creation-Date: 2023-02-26 13:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -378,4 +378,84 @@ msgid "* install package kz (kz getdeb)..."
 msgstr ""
 
 msgid "Install package kz failed."
+msgstr ""
+
+msgid "Install kz package."
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "Install package kz (may take a while)..."
+msgstr ""
+
+msgid "Need authentication"
+msgstr ""
+
+msgid ""
+"Authentication is required to install\n"
+"package kz with documents and scripts\n"
+"from Karel Zimmer.\n"
+"\n"
+"Enter your password:"
+msgstr ""
+
+msgid "Verify"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid ""
+"An error has occurred.\n"
+"\n"
+"Possible cause:\n"
+"1. No or incorrect password entered\n"
+"2. <Cancel> was selected on the previous screen"
+msgstr ""
+
+msgid "Again"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Stopped"
+msgstr ""
+
+msgid "Program has been stopped by the user"
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid ""
+"Package kz has been successfully installed.\n"
+"\n"
+"Now follow the steps as described\n"
+"in the Installation Checklist.\n"
+"\n"
+"Checklist installation can be found\n"
+"on the site https://karelzimmer.nl,\n"
+"under Linux.\n"
+"\n"
+"Type 'exit' to close this window."
+msgstr ""
+
+msgid "* DEVELOPER *"
+msgstr ""
+
+msgid "* check dependencies..."
+msgstr ""
+
+msgid "Password for"
+msgstr ""
+
+msgid "Website download failed."
+msgstr ""
+
+msgid "* initial pull bin repo..."
 msgstr ""

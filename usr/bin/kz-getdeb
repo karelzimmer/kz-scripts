@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Pakket kz installeren.
+# Install kz package.
 #
 # Written in 2016 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -17,7 +17,8 @@ source <(wget --quiet --output-document=- \
 ###############################################################################
 
 declare program_name='kz-getdeb'
-declare program_desc='Pakket kz installeren'
+declare program_desc
+program_desc=$(gettext 'Install kz package.')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
@@ -95,8 +96,8 @@ function install_package {
 
     check_user_root
 
-    title='Voortgang'
-    text='Installeer pakket kz (kan even duren)...'
+    title=$(gettext 'Progress')
+    text=$(gettext 'Install package kz (may take a while)...')
     TERM=ansi whiptail  --backtitle "$display_name" \
                         --title     "$title"        \
                         --infobox   "$text"         \
@@ -126,39 +127,39 @@ function install_package {
 function check_user_root {
     if ! sudo -n true 2> >($logcmd); then
         while true; do
-            title='Authenticatie nodig'
-            text='
-Authenticatie is vereist om pakket
-kz met documenten en scripts van
-Karel Zimmer te installeren.
+            title=$(gettext 'Need authentication')
+            text="
+$(gettext 'Authentication is required to install
+package kz with documents and scripts
+from Karel Zimmer.
 
-Voer uw wachtwoord in:'
-            # Constructie '3>&1 1>&2 2>&3' om stdout en stderr te wisselen.
+Enter your password:')"
+            # Construction '3>&1 1>&2 2>&3' to swap stdout and stderr.
             if printf '%s\n' "$(
-                whiptail    --backtitle     "$display_name" \
-                            --title         "$title"        \
-                            --ok-button     'Verifiëren'    \
-                            --cancel-button 'Annuleren'     \
-                            --passwordbox   "$text"         \
-                            13 38                           \
+                whiptail    --backtitle     "$display_name"         \
+                            --title         "$title"                \
+                            --ok-button     "$(gettext 'Verify')"   \
+                            --cancel-button "$(gettext 'Cancel')"   \
+                            --passwordbox   "$text"                 \
+                            13 41                                   \
                             3>&1 1>&2 2>&3
                 )" | sudo --stdin true 2> >($logcmd); then
                 break
             else
-                title='Fout'
-                text='Er is een fout opgetreden.
+                title=$(gettext 'Error')
+                text=$(gettext 'An error has occurred.
 
-Mogelijke oorzaak:
-1. Geen of verkeerd wachtwoord ingevoerd
-2. Op vorig scherm is <Annuleren> gekozen'
-                if ! whiptail   --backtitle     "$display_name" \
-                                --title         "$title"        \
-                                --yes-button    'Opnieuw'       \
-                                --no-button     'Stoppen'       \
-                                --yesno         "$text"         \
-                                11 45; then
-                    title='Gestopt'
-                    text='Programma is gestopt door de gebruiker'
+Possible cause:
+1. No or incorrect password entered
+2. <Cancel> was selected on the previous screen')
+                if ! whiptail   --backtitle     "$display_name"         \
+                                --title         "$title"                \
+                                --yes-button    "$(gettext 'Again')"    \
+                                --no-button     "$(gettext 'Stop')"     \
+                                --yesno         "$text"                 \
+                                11 51; then
+                    title=$(gettext 'Stopped')
+                    text=$(gettext 'Program has been stopped by the user')
                     TERM=ansi whiptail  --backtitle "$display_name" \
                                         --title     "$title"        \
                                         --infobox   "$text"         \
@@ -172,23 +173,23 @@ Mogelijke oorzaak:
 
 
 function term_script {
-    title='Gereed'
-    text="Pakket kz is succesvol geïnstalleerd.
+    title=$(gettext 'Finished')
+    text=$(gettext "Package kz has been successfully installed.
 
-Volg nu de stappen zoals beschreven
-in de Checklist installatie.
+Now follow the steps as described
+in the Installation Checklist.
 
-Checklist installatie is te vinden
-op de site https://karelzimmer.nl,
-onder Linux.
+Checklist installation can be found
+on the site https://karelzimmer.nl,
+under Linux.
 
-Typ 'exit' om dit venster te sluiten."
+Type 'exit' to close this window.")
     TERM=ansi whiptail  --backtitle "$display_name" \
                         --title     "$title"        \
                         --infobox   "$text"         \
-                        16 41
+                        16 47
     if kz_common.developer check; then
-        info '* ONTWIKKELAAR *'
+        info "$(gettext '* DEVELOPER *')"
         check_dependencies
         download_website
         pull_repos
@@ -200,16 +201,18 @@ Typ 'exit' om dit venster te sluiten."
 
 
 function check_dependencies {
-    info '* controleer afhankelijkheden...'
-    # Installeer ghostscript voor kz-build <man-pag>.pdf (ps2pdf).
+    local escape='gettext'
+
+    info "$(gettext '* check dependencies...')"
+    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf).
     kz_common.check_dpkgd_snapd
-    # Remove known line from output.
+    # Remove known lines from output.
     sudo    apt-get                                 \
             install                                 \
             --yes                                   \
             curl                                    \
             fakeroot                                \
-            gettext                                 \
+            $escape                                 \
             ghostscript                             \
             git                                     \
             jq                                      \
@@ -225,7 +228,7 @@ function check_dependencies {
             sed '/ is already the newest version /d'
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-    # Debian pakket is oud, snap is nieuwer.
+    # Debian package is old, snap is newer.
     kz_common.check_dpkgd_snapd
     sudo snap install shellcheck |& $logcmd
     kz_common.check_dpkgd_snapd
@@ -247,7 +250,7 @@ function download_website {
     info '* download website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         # < /dev/tty want FD 1 al in gebruik bij 'wget --output-document=-...'.
-        read -rsp "Wachtwoord voor 'ftp://$ftp_host': " < /dev/tty
+        read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s\n' "$REPLY" > "$ftp_login"
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login"
@@ -257,7 +260,7 @@ function download_website {
                 -e "$ftp_set; $ftp_cmd"             \
                 "$ftp_host"; then
         rm  "$ftp_login"
-        info 'Downloaden website is mislukt.'
+        info "$(gettext 'Website download failed.')"
         return  $err
     fi
 }
@@ -274,7 +277,7 @@ function pull_repos {
                 https://github.com/karelzimmer/bin.git  \
                 "$bin_repo"                             2> >($logcmd); then
         cd "$bin_repo"
-        printf  "%s\n" "* initiële pull $(basename "$bin_repo") repo..."
+        printf  "%s\n" "$(gettext '* initial pull bin repo...')"
         # Remove known line from output.
         git pull | sed '/Already up to date./d'
     fi
