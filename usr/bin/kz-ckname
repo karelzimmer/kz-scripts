@@ -19,11 +19,7 @@ source "$program_path"/kz_common.sh
 declare program_name='kz-ckname'
 declare program_desc
 program_desc=$(gettext 'Check file names')
-# declare program_desc='Bestandsnamen controleren'
 declare display_name=${program_name/kz-/kz }
-
-# declare usage="Gebruik: $display_name $options_usage [MAP...]"
-# declare help="Gebruik: $display_name [OPTIE...] [MAP...]
 
 declare usage=
 usage=$(eval_gettext "Usage: \$display_name \$options_usage [DIRECTORY...]")
@@ -35,9 +31,8 @@ $program_desc.
 $(gettext 'Options:')
 $options_help
 
-Arguments:
-  DIRECTORY      start checking from DIRECTORY"
-  #begin te controleren vanaf MAP
+$(gettext 'Arguments:
+  DIRECTORY      start checking from DIRECTORY')"
 
 
 ###############################################################################
@@ -115,10 +110,10 @@ function check_files {
     local -i filename_maxlen=142
     local good=''
 
-    # Het maakt niet uit of in de bestandsnaam speciale tekens voorkomen zoals
-    # tab, spatie, enz.  Hiervoor zorgt de find met print0,en de read met IFS=
-    # en als delimiter de null character die niet mag voorkomen in een
-    # bestandsnaam.  N.B.: In Linux is alles een bestand!
+    # It doesn't matter if the file name contains special characters like tab,
+    # space, etc. The find with print0 takes care of this, and the read with
+    # IFS= and as delimiter the null character that may not occur in a
+    # filename. Note: In Linux everything is a file!
     while IFS= read -r -d $'\0' file; do
 
         dirname=$(dirname "$file")

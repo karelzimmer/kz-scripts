@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 10:02+0100\n"
+"POT-Creation-Date: 2023-02-26 10:38+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -411,3 +411,21 @@ msgstr "Opties:"
 #, sh-format
 msgid "Repo $repo must be on branch main."
 msgstr "Repo $repo moet op branch main staan."
+
+msgid "Check file names"
+msgstr "Controleer bestandsnamen"
+
+#, sh-format
+msgid "Usage: $display_name $options_usage [DIRECTORY...]"
+msgstr "Gebruik: $display_name $options_usage [MAP...]"
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...] [DIRECTORY...]"
+msgstr "Gebruik: $display_name [OPTIE...] [MAP...]"
+
+msgid ""
+"Arguments:\n"
+"  DIRECTORY      start checking from DIRECTORY"
+msgstr ""
+"Argumenten:\n"
+"  MAP            begin te controleren vanaf MAP"
