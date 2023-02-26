@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 09:21+0100\n"
+"POT-Creation-Date: 2023-02-26 10:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -302,4 +302,15 @@ msgstr ""
 msgid ""
 "\n"
 "The backup has been made."
+msgstr ""
+
+msgid "Build package kz"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name $options_usage"
+msgstr ""
+
+#, sh-format
+msgid "Repo $repo must be on branch main."
 msgstr ""

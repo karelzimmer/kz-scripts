@@ -20,7 +20,8 @@ declare program_name='kz-ivp'
 declare program_desc='Scripts controleren'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name $options_usage"
+declare usage
+usage=$(eval_gettext "Usage: \$display_name \$options_usage")
 declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 

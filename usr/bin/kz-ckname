@@ -20,8 +20,7 @@ declare program_name='kz-ckname'
 declare program_desc='Bestandsnamen controleren'
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name $options_usage
-                   [MAP...]"
+declare usage="Gebruik: $display_name $options_usage [MAP...]"
 declare help="Gebruik: $display_name [OPTIE...] [MAP...]
 
 $program_desc.

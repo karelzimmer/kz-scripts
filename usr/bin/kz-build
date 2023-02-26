@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Pakket kz bouwen.
+# Build package kz.
 #
 # Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -17,10 +17,12 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-build'
-declare program_desc='Pakket kz bouwen'
+declare program_desc
+program_desc=$(gettext 'Build package kz')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name $options_usage"
+declare usage
+usage=$(eval_gettext "Usage: \$display_name \$options_usage")
 declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
@@ -110,7 +112,7 @@ function check_input {
         exit $err
     fi
 
-    # Aangemeld als ontwikkelaar?
+    # Signed up as a developer?
     if ! kz_common.developer check; then
         kz_common.developer report
         exit $err
@@ -120,7 +122,7 @@ function check_input {
     for repo in $docs_repo $scripts_repo $deb_repo $uploads_repo; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            err "Repo $repo not on branch main."
+            err "$(eval_gettext "Repo \$repo must be on branch main.")"
             gitstat
             exit $err
         fi
@@ -139,26 +141,26 @@ function build_uploads {
     local pdfdir=''
     local tmptxt=''
 
-    log 'Bouw website...'
+    log 'Build website...'
 
-    # Zorg dat de rechten goed staan voor de sync.
+    # Make sure the permissions are correct for the sync.
     chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
     chmod 'a-x' -- "$scripts_repo"/*.* "$scripts_repo"/LICENSE
 
-    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de sync.
+    # Make sure all necessary directories are available for the sync.
     for dir in "${uploads_targets[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
 
-    # Vul kz-uploads/dist/ met gewijzigde bestanden in kz-uploads/app/.
+    # Populate kz-uploads/dist/ with modified files in kz-uploads/app/.
     rsync   --archive           \
             --verbose           \
             --checksum          \
             "$uploads_appdir"/  \
             "$uploads_distdir"  |& $logcmd
 
-    # Vul kz-uploads/dist/ met gewijzigde bestanden in repo kz-docs, en maak
-    # een PDF aan van deze gewijzigde bestanden.
+    # Populate kz-uploads/dist/ with modified files in repo kz-docs, and create
+    # a PDF of these modified files.
     cd "${uploads_sources[kz-docs]}"
     for file in *.odt *.txt; do
         if ! diff "$file" "${uploads_targets[kz-docs]}/$file" |& $logcmd; then
@@ -166,7 +168,7 @@ function build_uploads {
                 --verbose                       \
                 "$file"                         \
                 "${uploads_targets[kz-docs]}"   |& $logcmd
-            # PDF maken.
+            # Craete a PDF.
             lowriter    --headless                              \
                         --convert-to pdf                        \
                         --outdir "${uploads_targets[kz-docs]}"  \
@@ -175,8 +177,8 @@ function build_uploads {
     done
     cd "$HOME"
 
-    # Vul kz-uploads/dist/ met gewijzigde bestanden in repo kz-scripts, en maak
-    # een PDF aan van deze gewijzigde bestanden.
+    # Fill kz-uploads/dist/ with modified files in repo kz-scripts, and create
+    # a PDF of these modified files.
     cd "${uploads_sources[kz-scripts]}"
     while read -r file; do
         if ! diff "$file" "${uploads_targets[kz-scripts]}/$file" |& $logcmd
@@ -186,7 +188,7 @@ function build_uploads {
                 --verbose                           \
                 "$file"                             \
                 "${uploads_targets[kz-scripts]}"    |& $logcmd
-            # PDF maken.
+            # Craete a PDF.
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man-page file.
                 man --troff "${uploads_sources[kz-scripts]}/$file"  |
@@ -228,14 +230,14 @@ function build_deb {
     local dir=''
     local file=''
 
-    log 'Bouw pakket...'
+    log 'Build package...'
 
-    # Zorg ervoor dat alle benodigde mappen beschikbaar zijn voor de sync.
+    # Make sure all necessary directories are available for the sync.
     for dir in "${deb_targets[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
 
-    # Vul kz-deb/dist/ met kz-deb/app/.
+    # Fill kz-deb/dist/ with kz-deb/app/.
     rsync   --archive               \
             --delete                \
             --verbose               \
@@ -245,7 +247,7 @@ function build_deb {
             "${deb_sources[app]}"/  \
             "${deb_targets[dist]}"  |& $logcmd
 
-    # Vul kz-deb/dist/ met repo kz-scripts.
+    # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive                       \
             --verbose                       \
             --exclude='__pycache__'         \
@@ -255,16 +257,16 @@ function build_deb {
             "${deb_sources[kz-scripts]}"/   \
             "${deb_targets[dist]}"          |& $logcmd
 
-    # Man-pagina's compressen.
+    # Compress man pages.
     gzip    --best                      \
             --force                     \
             "${deb_targets[man_en]}"/*  \
             "${deb_targets[man_nl]}"/*  |& $logcmd
 
-    # Leg build-id Debian-pakket vast.
+    # Capture build id Debian package.
     printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
 
-    # Maak Debian-pakket in kz-uploads.
+    # Create Debian package in kz-uploads.
     # Debian 11 does not support zst compression (default), hence the -Zxz.
     fakeroot    dpkg-deb                            \
                 --build                             \
