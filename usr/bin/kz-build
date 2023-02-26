@@ -220,6 +220,8 @@ function build_uploads {
             -not -path '*/__pycache__*' \
             -not -name LICENSE          \
             -not -name README.md        \
+            -not -name kz.po            \
+            -not -name kz.pot           \
             -print
             )
     cd "$HOME"
