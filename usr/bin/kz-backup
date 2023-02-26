@@ -414,12 +414,12 @@ $text..."
             info "$(gettext '
 The backup has been made.
 
-Het usb-medium kan verwijderd worden.')"
+The USB medium can be removed.')"
         else
             warn "$(gettext '
 The backup has been made.
 
-Koppel zelf (veilig!) het usb-medium af.')"
+Disconnect the USB medium yourself (safely!).')"
         fi
     else
         info "$(gettext '

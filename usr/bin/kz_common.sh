@@ -300,8 +300,8 @@ function signal_exit {
     local apt_err
     apt_err="$(gettext 'If the package manager gives apt errors, launch \
 a Terminal window and run:')
-[1] kz update
-[2] sudo update-initramfs -u"
+[1] ${blue}kz update${normal}
+[2] ${blue}sudo update-initramfs -u${normal}"
 
     case $program_name in
         kz-getdeb)
