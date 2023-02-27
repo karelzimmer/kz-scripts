@@ -173,7 +173,9 @@ Unmount media via Files, then restart backup.")"
 
 
 function backup_settings {
-    local tgtdir=$HOME/Instellingen
+    local tgtdir
+    tgtdir=$HOME/$(gettext 'Settings')
+    # Instellingen
 
     mkdir --parents "$tgtdir" |& $logcmd
     backup_settings_desktop_background
@@ -187,7 +189,8 @@ function backup_settings {
 
 
 function backup_settings_desktop_background {
-    local file=$tgtdir/Achtergrond
+    local file
+    file=$tgtdir/$(gettext 'Background')
     local picture_file=''
 
     picture_file=$(
@@ -252,7 +255,8 @@ installation of a package, with
 
 function backup_settings_user_photo {
     local srcdir=/var/lib/AccountsService/icons
-    local file=$tgtdir/Gebruikersfoto
+    local file
+    file=$tgtdir/$(gettext 'Userphoto')
 
     cp --update $srcdir/"$USER" "$file" |& $logcmd || true
 }

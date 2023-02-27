@@ -44,7 +44,7 @@ $options_help
 
 $(gettext 'Arguments:
   APP            install APPs
-  BESTAND        process FILEs')"
+  FILE           process FILEs')"
 declare options_short+='acfgrs'
 declare options_long+=',apps,cat,files,gui,remove,server,simulate'
 

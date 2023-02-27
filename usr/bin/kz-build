@@ -57,10 +57,12 @@ declare -A uploads_targets=(
 
 declare -A deb_sources=(
                 [app]=$deb_appdir
+                 [mo]=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
          [kz-scripts]=$scripts_repo
             )
 declare -A deb_targets=(
                [dist]=$deb_distdir
+                 [mo]=$deb_distdir/usr/share/locale/nl/LC_MESSAGES
               [build]=$deb_distdir/usr/local/etc
              [man_en]=$deb_distdir/usr/share/man/man1
              [man_nl]=$deb_distdir/usr/share/man/nl/man1
@@ -220,8 +222,6 @@ function build_uploads {
             -not -path '*/__pycache__*' \
             -not -name LICENSE          \
             -not -name README.md        \
-            -not -name kz.po            \
-            -not -name kz.pot           \
             -print
             )
     cd "$HOME"
@@ -256,6 +256,8 @@ function build_deb {
             --exclude='LICENSE'             \
             --exclude='README.md'           \
             --exclude='.git*'               \
+            --exclude='.po'                 \
+            --exclude='.pot'                \
             "${deb_sources[kz-scripts]}"/   \
             "${deb_targets[dist]}"          |& $logcmd
 
@@ -264,6 +266,10 @@ function build_deb {
             --force                     \
             "${deb_targets[man_en]}"/*  \
             "${deb_targets[man_nl]}"/*  |& $logcmd
+
+    # Compile GNU gettext message catalogue.
+    msgfmt  --output-file="${deb_targets[mo]}"/kz.mo    \
+            "${deb_sources[mo]}"/kz.mo                  |& $logcmd
 
     # Capture build id Debian package.
     printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
