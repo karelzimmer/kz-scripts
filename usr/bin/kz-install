@@ -143,7 +143,7 @@ function check_input {
         esac
     done
 
-    # Verwerk argumenten.
+    # Check arguments.
     while [[ "$*" ]]; do
         if [[ "$(basename "$1")" == $program_name-*.sh ]]; then
             argument_file=true
@@ -167,12 +167,12 @@ function process_input {
     local -i file_num=0
     local file=''
 
-    # Maak tijdelijke bestanden.
+    # Create temporary files.
     apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
     cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
     sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
 
-    # Verwerk argumenten.
+    # Process arguments.
     distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
     dfltfile_1=$program_path/$program_name-$distro-$edition.sh
     dfltfile_2=$program_path/$program_name-$distro-$edition-$HOSTNAME.sh
@@ -182,16 +182,16 @@ function process_input {
     if $argument_file; then
         process_argument_file
     fi
-    # Ergens hiervoor ging het niet helemaal goed.
+    # Somewhere before this it didn't go very well.
     if $file_notfound; then
         exit $err
     fi
-    # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
+    # Do not process standard files for certain arguments and options.
     if ! ($argument_app || $argument_file || $option_files); then
         process_dfltfiles
     fi
 
-    # Verwerk overige opties; afhankelijk van bestanden en argumenten.
+    # Process other options; depending on files and arguments.
     if $option_apps; then
         process_option_apps
         exit $ok
@@ -214,12 +214,10 @@ function process_input {
     done
 
     if $execute_commands && $option_gui; then
-# FIXME
-        title='Apps installeren'
-        text='Installeren voorbereiden'
-        # Met '|& zenity --progress' worden globale variabelen uit aangeroepen
-        # functies niet doorgegeven, vandaar de process substitution met
-        # '> >(zenity...)'.
+        title=$(gettext 'Install apps')
+        text=$(gettext 'Prepare to install')
+        # With '|& zenity --progress' global variables from called functions
+        # are not passed, hence the process substitution with '> >(zenity...)'.
         process_cmds_file > >(
             zenity  --progress              \
                     --pulsate               \
@@ -241,7 +239,7 @@ function process_argument_app {
     local file=''
     local -a files=()
 
-    # Zoek naar beschikbare APPs in alle installatiebestanden.
+    # Search for available APPs in all installation files.
     for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
@@ -257,12 +255,14 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
-            printf "$display_name: %s: %s\n" "$app" 'app niet gevonden'
+            printf  "$display_name: %s: %s\n" \
+                    "$app" "$(gettext 'app not found')"
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        printf "%s\n" "Typ '$display_name --apps' voor beschikbare apps."
+        printf  "%s\n" \
+                "$(gettext "Type '\$display_name --apps' for available apps.")"
     else
         files_to_process[file_num]=$apps_file
         ((++file_num))
@@ -278,24 +278,24 @@ function process_argument_app_file {
         case $record in
             '#1 '*)
                 if [[ $record == '#1 '$app* ]]; then
-                    # Gezochte app-naam.
-                    # Regels doorschrijven naar tijdelijk bestand tot
-                    # eerstvolgende app-naam of tot eof.
+                    # Found app name.
+                    # Write records to temporary file until next app name or
+                    # until eof.
                     printf '%s\n' "$record" >> "$apps_file"
                     app_found=true
                 elif $app_found; then
-                    # Volgende app.
+                    # Next app.
                     break
                 fi
                 ;;
             '#1-'*)
                 if $app_found; then
-                    # Volgende (hidden) app.
+                    # Next (hidden) app.
                     break
                 fi
                 ;;
             *)
-                # Overige regels.
+                # Other records.
                 if $app_found; then
                     printf '%s\n' "$record" >> "$apps_file"
                 fi
@@ -313,12 +313,14 @@ function process_argument_file {
             files_to_process[file_num]=$file
             ((++file_num))
         else
-            printf "$display_name: %s: %s\n" "$file" 'bestand niet gevonden'
+            printf  "$display_name: %s: %s\n" \
+                    "$file" "$(gettext 'file not found')"
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        printf "%s\n" "Typ '$display_name --files' voor beschikbare bestanden."
+        printf "%s\n" "$(gettext "Type '\$display_name --files' for available \
+files.")"
     fi
 }
 
@@ -328,6 +330,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
+# FIXME
         warn 'Geen installatiebestanden gevonden.'
         exit $err
     fi
