@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 10:11+0100\n"
+"POT-Creation-Date: 2023-02-27 11:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -574,4 +574,53 @@ msgstr ""
 
 #, sh-format
 msgid "Type '$display_name --files' for available files."
+msgstr ""
+
+msgid "No installation files found."
+msgstr ""
+
+msgid ""
+"The following APPs are available:\n"
+"\n"
+"     APP (DESCRIPTION)"
+msgstr ""
+
+msgid "     0   No apps found."
+msgstr ""
+
+msgid "To install the APPs run"
+msgstr ""
+
+msgid "To simulate installing APPs execute"
+msgstr ""
+
+msgid "To view the contents of the APPs installation file execute"
+msgstr ""
+
+msgid ""
+"The following FILEs are available:\n"
+"\n"
+"     FILE"
+msgstr ""
+
+#, sh-format
+msgid "     0 No files present."
+msgstr ""
+
+msgid "To process the FILEs execute"
+msgstr ""
+
+msgid "To view the contents of FILEs execute"
+msgstr ""
+
+msgid "To simulate the processing of FILEs execute"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
+msgid "remove"
+msgstr ""
+
+msgid " simulate"
 msgstr ""

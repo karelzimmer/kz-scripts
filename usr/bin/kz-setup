@@ -306,12 +306,14 @@ function process_argument_file {
             files_to_process[file_num]=$file
             ((++file_num))
         else
-            printf "$display_name: %s: %s\n" "$file" 'bestand niet gevonden'
+            printf  "$display_name: %s: %s\n" \
+                    "$file" "$(gettext 'file not found')"
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        printf "%s\n" "Typ '$display_name --files' voor beschikbare bestanden."
+        printf "%s\n" "$(gettext "Type '\$display_name --files' for available \
+files.")"
     fi
 }
 
@@ -334,13 +336,13 @@ function process_dfltfiles {
 function process_option_apps {
     local -a files=()
 
-    # Zoek naar beschikbare APPs in alle instelbestanden.
+    # Search for available APPs in all setup files.
     for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
-    text="De volgende APPs zijn beschikbaar om in te stellen:
+    text="$(gettext 'The following APPs are available:
 
-     APP (BESCHRIJVING)
+     APP (DESCRIPTION)')
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
@@ -353,7 +355,9 @@ $(
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen apps gevonden voor $distro."
+        printf '%s\n' "$(gettext '     0   No apps found.')
+        
+$usage_line"
     else
         printf '%s\n' "
 Om de APPs in te stellen voer uit: ${blue}$display_name APP...${normal}
@@ -397,16 +401,16 @@ $(
                     --number-separator='] '         \
                     --body-numbering=a              |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen bestanden aanwezig.
+        printf '%s\n' "$(eval_gettext '     0 No files present.')
 
 $usage_line"
     else
         printf '%s\n' "
-Om de BESTANDen te verwerken voer uit: ${blue}$display_name BESTAND...${normal}
-Om de inhoud van BESTANDen te bekijken voer uit: ${blue}$display_name --cat \
-BESTAND...${normal}
-Om de verwerking van BESTANDen te simuleren voer uit: ${blue}$display_name \
---simulate BESTAND...${normal}"
+$(gettext 'To install the APPs run'): ${blue}$display_name APP...${normal}
+$(gettext 'To simulate installing APPs execute'): ${blue}$display_name \
+--simulate APP...${normal}
+$(gettext 'To view the contents of the APPs installation file execute'): \
+${blue}$display_name --cat APP...${normal}"
     fi
 )"
     info "$text"
@@ -435,7 +439,7 @@ function process_cmds_file {
         operation='resetten'
     fi
     if $option_simulate; then
-        operation+=' simuleren'
+        operation+=$(gettext ' simulate')
     else
         status_busy="[${blink}${yellow}werk${normal}]"
         status_err="[${red}fout${normal}]"

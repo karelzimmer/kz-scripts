@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 10:10+0100\n"
+"POT-Creation-Date: 2023-02-27 11:06+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -719,3 +719,58 @@ msgstr "bestand niet gevonden"
 #, sh-format
 msgid "Type '$display_name --files' for available files."
 msgstr "Typ '$display_name --files' voor beschikbare bestanden."
+
+msgid "No installation files found."
+msgstr "Geen installatiebestanden gevonden.'"
+
+msgid ""
+"The following APPs are available:\n"
+"\n"
+"     APP (DESCRIPTION)"
+msgstr ""
+"De volgende APPs zijn beschikbaar:\n"
+"\n"
+"     APP (BESCHRIJVING)"
+
+msgid "     0   No apps found."
+msgstr "     0   Geen apps gevonden."
+
+msgid "To install the APPs run"
+msgstr "Om de APPs te installeren voer uit"
+
+msgid "To simulate installing APPs execute"
+msgstr "Om het installeren van APPs te simuleren voer uit"
+
+msgid "To view the contents of the APPs installation file execute"
+msgstr "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit"
+
+msgid ""
+"The following FILEs are available:\n"
+"\n"
+"     FILE"
+msgstr ""
+"De volgende BESTANDen zijn beschikbaar:\n"
+"\n"
+"     BESTAND"
+
+#, sh-format
+msgid "     0 No files present."
+msgstr ""
+
+msgid "To process the FILEs execute"
+msgstr "Om de BESTANDen te verwerken voer uit"
+
+msgid "To view the contents of FILEs execute"
+msgstr "m de inhoud van BESTANDen te bekijken voer uit"
+
+msgid "To simulate the processing of FILEs execute"
+msgstr "Om de verwerking van BESTANDen te simuleren voer uit"
+
+msgid "install"
+msgstr "installeren"
+
+msgid "remove"
+msgstr "verwijderen"
+
+msgid " simulate"
+msgstr " simuleren"

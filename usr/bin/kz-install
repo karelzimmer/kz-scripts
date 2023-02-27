@@ -330,8 +330,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
-# FIXME
-        warn 'Geen installatiebestanden gevonden.'
+        warn "$(gettext 'No installation files found.')"
         exit $err
     fi
     if [[ -f $dfltfile_2 ]]; then
@@ -344,13 +343,14 @@ function process_dfltfiles {
 function process_option_apps {
     local -a files=()
 
-    # Zoek naar beschikbare APPs in alle installatiebestanden.
+    # Search for available APPs in all installation files.
     for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
-    text="De volgende APPs zijn beschikbaar om te installeren:
 
-     APP (BESCHRIJVING)
+    text="$(gettext 'The following APPs are available:
+
+     APP (DESCRIPTION)')
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
@@ -363,13 +363,15 @@ $(
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen apps gevonden voor $distro."
+        printf '%s\n' "$(gettext '     0   No apps found.')
+        
+$usage_line"
     else
         printf '%s\n' "
-Om de APPs te installeren voer uit: ${blue}$display_name APP...${normal}
-Om het installeren van APPs te simuleren voer uit: ${blue}$display_name \
+$(gettext 'To install the APPs run'): ${blue}$display_name APP...${normal}
+$(gettext 'To simulate installing APPs execute'): ${blue}$display_name \
 --simulate APP...${normal}
-Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: \
+$(gettext 'To view the contents of the APPs installation file execute'): \
 ${blue}$display_name --cat APP...${normal}"
     fi
 )"
@@ -396,9 +398,9 @@ function process_option_cat {
 
 
 function process_option_files {
-    text="De volgende installatieBESTANDen zijn aanwezig:
+    text="$(gettext 'The following FILEs are available:
 
-     BESTAND
+     FILE')
 $(
     if !    find    "$program_path/$program_name-"* \
                     2> >($logcmd)                   |
@@ -407,16 +409,17 @@ $(
                     --number-separator='] '         \
                     --body-numbering=a              |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen bestanden aanwezig.
+        printf '%s\n' "$(eval_gettext '     0 No files present.')
 
 $usage_line"
     else
         printf '%s\n' "
-Om de BESTANDen te verwerken voer uit: ${blue}$display_name BESTAND...${normal}
-Om de inhoud van BESTANDen te bekijken voer uit: ${blue}$display_name --cat \
-BESTAND...${normal}
-Om de verwerking van BESTANDen te simuleren voer uit: ${blue}$display_name \
---simulate BESTAND...${normal}"
+$(gettext 'To process the FILEs execute'): ${blue}$display_name \
+FILE...${normal}
+$(gettext 'To view the contents of FILEs execute'): ${blue}$display_name \
+--cat FILE...${normal}
+$(gettext 'To simulate the processing of FILEs execute'): \
+${blue}$display_name --simulate FILE...${normal}"
     fi
 )"
     info "$text"
@@ -426,7 +429,8 @@ Om de verwerking van BESTANDen te simuleren voer uit: ${blue}$display_name \
 function process_cmds_file {
     local app_description=''
     local first_description_line=true
-    local operation='installeren'
+    local operation
+    operation=$(gettext 'install')
     local record=''
     local recordtype=''
     local write_app_description_line=true
@@ -442,11 +446,12 @@ function process_cmds_file {
     fi
 
     if $option_remove; then
-        operation='verwijderen'
+        operation=$(gettext 'remove')
     fi
     if $option_simulate; then
-        operation+=' simuleren'
+        operation+=$(gettext ' simulate')
     else
+# FIXME
         status_busy="[${blink}${yellow}werk${normal}]"
         status_err="[${red}fout${normal}]"
         status_ok="[${green}goed${normal}]"
