@@ -452,9 +452,9 @@ function process_cmds_file {
         operation+=$(gettext ' simulate')
     else
 # FIXME
-        status_busy="[${blink}${yellow}werk${normal}]"
-        status_err="[${red}fout${normal}]"
-        status_ok="[${green}goed${normal}]"
+        status_busy="[${blink}${yellow}$(gettext 'work')${normal}]"
+        status_err="[${red}$(gettext 'err.')${normal}]"
+        status_ok="[${green}$(gettext ' ok ')${normal}]"
         printf '%s' "${cursor_invisable}"
     fi
 
@@ -462,25 +462,25 @@ function process_cmds_file {
         recordtype=${record:0:2}
         case $recordtype in
             '')
-                # Lege regel.
+                # Empty line or empty app name.
                 continue
                 ;;
             '#1')
-                # Appnaam en -beschrijving.
+                # App name and description.
                 process_app_description_record "$record"
                 ;;
             '#2')
-                # Verwijderopdracht.
+                # Remove command.
                 if $option_remove; then
                     process_command_record "${record:3}"
                 fi
                 ;;
             '#'*)
-                # Commentaarregel.
+                # Comment line.
                 continue
                 ;;
             *)
-                # Installatieopdracht.
+                # Install command.
                 if ! $option_remove; then
                     process_command_record "$record"
                 fi

@@ -451,25 +451,25 @@ function process_cmds_file {
         recordtype=${record:0:2}
         case $recordtype in
             '')
-                # Lege regel of lege app-naam.
+                # Empty line or empty app name.
                 continue
                 ;;
             '#1')
-                # Appnaam en -beschrijving.
+                # App name and description.
                 process_app_description_record "$record"
                 ;;
             '#2')
-                # Resetopdracht.
+                # Reset command
                 if $option_reset; then
                     process_command_record "${record:3}"
                 fi
                 ;;
             '#'*)
-                # Commentaarregel.
+                # Comment line.
                 continue
                 ;;
             *)
-                # Instelopdracht.
+                # Setup command.
                 if ! $option_reset; then
                     process_command_record "$record"
                 fi
