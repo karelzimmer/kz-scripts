@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 13:53+0100\n"
+"POT-Creation-Date: 2023-02-28 14:58+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -806,3 +806,60 @@ msgstr "Installatiemenu'"
 #, sh-format
 msgid "Usage: $display_name [-g|--gui]"
 msgstr "Gebruik: $display_name [-g|--gui]"
+
+msgid "Preparing installation"
+msgstr "Installeren voorbereiden"
+
+msgid "Perform installation"
+msgstr "Installatie uitvoeren"
+
+msgid "Finish installation"
+msgstr "Installatie afronden"
+
+msgid "Provision user"
+msgstr "Gebruiker inrichten"
+
+msgid "Commands menu"
+msgstr "Opdrachtenmenu"
+
+msgid "Checklist chapter 1"
+msgstr "Checklist hoofdstuk 1"
+
+msgid "Checklist chapter 2"
+msgstr "Checklist hoofdstuk 2"
+
+msgid "Checklist chapter 3"
+msgstr "Checklist hoofdstuk 3"
+
+msgid "Checklist chapter 4"
+msgstr "Checklist hoofdstuk 4"
+
+msgid "Used commands"
+msgstr "Gebruikte opdrachten"
+
+msgid "Exit menu"
+msgstr "Menu verlaten"
+
+msgid "Show WiFi data"
+msgstr "Wifi-informatie tonen"
+
+msgid "Add users"
+msgstr "Gebruikers toevoegen"
+
+msgid "Restore backup"
+msgstr "Back-up terugzetten"
+
+msgid "Set user photo"
+msgstr "Gebruikersfoto instellen"
+
+msgid "Set up apps"
+msgstr "Apps instellen"
+
+msgid "Back"
+msgstr "Terug"
+
+msgid "Manually"
+msgstr "Handmatig"
+
+msgid "Previous menu"
+msgstr "Vorig menu"

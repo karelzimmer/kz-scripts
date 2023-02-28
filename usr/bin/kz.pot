@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 14:25+0100\n"
+"POT-Creation-Date: 2023-02-28 15:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -663,4 +663,61 @@ msgstr ""
 
 #, sh-format
 msgid "Usage: $display_name [-g|--gui]"
+msgstr ""
+
+msgid "Preparing installation"
+msgstr ""
+
+msgid "Perform installation"
+msgstr ""
+
+msgid "Finish installation"
+msgstr ""
+
+msgid "Provision user"
+msgstr ""
+
+msgid "Commands menu"
+msgstr ""
+
+msgid "Checklist chapter 1"
+msgstr ""
+
+msgid "Checklist chapter 2"
+msgstr ""
+
+msgid "Checklist chapter 3"
+msgstr ""
+
+msgid "Checklist chapter 4"
+msgstr ""
+
+msgid "Used commands"
+msgstr ""
+
+msgid "Exit menu"
+msgstr ""
+
+msgid "Show WiFi data"
+msgstr ""
+
+msgid "Add users"
+msgstr ""
+
+msgid "Restore backup"
+msgstr ""
+
+msgid "Set user photo"
+msgstr ""
+
+msgid "Set up apps"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Manually"
+msgstr ""
+
+msgid "Previous menu"
 msgstr ""

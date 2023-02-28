@@ -37,7 +37,6 @@ declare options_long+=',gui'
 
 declare menu1_title=Installatiemenu
 declare menu1_head="                  $menu1_title"
-#TODO
 declare -a menu1_actions=(
             [1]="$(gettext 'Preparing installation')"
                 "$(gettext 'Perform installation')"
@@ -46,12 +45,6 @@ declare -a menu1_actions=(
                 "$(gettext 'Commands menu')"
                 "$(gettext 'Stop')"
             )
-            # [1]='Installatie voorbereiden'
-            #     'Installatie uitvoeren'
-            #     'Installatie afronden'
-            #     'Gebruiker inrichten'
-            #     'Opdrachtenmenu'
-            #     'Stoppen'
 declare -a menu1_commands=(
             [1]="$(gettext 'Checklist chapter 1')"
                 "$(gettext 'Checklist chapter 2')"
@@ -60,12 +53,6 @@ declare -a menu1_commands=(
                 "$(gettext 'Used commands')"
                 "$(gettext 'Exit menu')"
             )
-            # [1]='Checklist hoofdstuk 1'
-            #     'Checklist hoofdstuk 2'
-            #     'Checklist hoofdstuk 3'
-            #     'Checklist hoofdstuk 4'
-            #     'Gebruikte opdrachten'
-            #     'Menu verlaten'
 declare menu1_lines=${#menu1_actions[@]}
 
 declare menu2_title=Opdrachtenmenu
@@ -80,32 +67,16 @@ declare -a menu2_actions=(
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Back')"
             )
-            # [1]='Wifi-gegevens tonen'
-            #     'Back-up maken'
-            #     'Gebruikers toevoegen'
-            #     'Apps installeren'
-            #     'Back-up terugzetten'
-            #     'Gebruikersfoto instellen'
-            #     'Apps instellen'
-            #     'Terug'
 declare -a menu2_commands=(
-            [1]="$(gettext 'kz wifi')"
-                "$(gettext 'kz backup')"
+            [1]='kz wifi'
+                'kz backup'
                 "$(gettext 'Manually')"
-                "$(gettext 'kz install')"
-                "$(gettext 'kz restore')"
+                'kz install'
+                'kz restore'
                 "$(gettext 'Manually')"
-                "$(gettext 'kz setup')"
+                'kz setup'
                 "$(gettext 'Previous menu')"
             )
-            # [1]='kz wifi'
-            #     'kz backup'
-            #     'Handmatig'
-            #     'kz install'
-            #     'kz restore'
-            #     'Handmatig'
-            #     'kz setup'
-            #     'Vorig menu'
 declare menu2_lines=${#menu2_actions[@]}
 
 
