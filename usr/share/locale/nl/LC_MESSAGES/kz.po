@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 09:38+0100\n"
+"POT-Creation-Date: 2023-02-28 12:21+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -779,3 +779,23 @@ msgstr "Apps $action is voltooid."
 
 msgid "Checking scripts"
 msgstr "Scripts controleren"
+
+msgid "    Unknown script. Function check_code cannot check script code."
+msgstr ""
+"    Onbekend script.  Functie check_code kan scriptcode niet controleren."
+
+#, sh-format
+msgid "    A line is longer than $max_line_length ($max_line_length_found)."
+msgstr "    Een regel is langer dan $max_line_length ($max_line_length_found)."
+
+msgid "Faulty line(s) found."
+msgstr "Foutieve regel(s) gevonden."
+
+msgid "    Flagged annotation found."
+msgstr "    Gemarkeerde annotatie gevonden."
+
+msgid "Continue? [Y/n]: "
+msgstr "Doorgaan? [J/n]: "
+
+msgid "    End spaces found."
+msgstr "    Eindspaties gevonden."

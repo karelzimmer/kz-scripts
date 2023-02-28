@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 10:26+0100\n"
+"POT-Creation-Date: 2023-02-28 12:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -637,4 +637,23 @@ msgid "Apps $action completed."
 msgstr ""
 
 msgid "Checking scripts"
+msgstr ""
+
+msgid "    Unknown script. Function check_code cannot check script code."
+msgstr ""
+
+#, sh-format
+msgid "    A line is longer than $max_line_length ($max_line_length_found)."
+msgstr ""
+
+msgid "Faulty line(s) found."
+msgstr ""
+
+msgid "    Flagged annotation found."
+msgstr ""
+
+msgid "Continue? [Y/n]: "
+msgstr ""
+
+msgid "    End spaces found."
 msgstr ""

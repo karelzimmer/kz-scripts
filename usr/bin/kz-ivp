@@ -144,10 +144,11 @@ function check_code {
                 "$script"; then
         check_pycodestyle
     else
-#TODO
         err "
 In $script:
-    Onbekend script.  Functie check_code kan scriptcode niet controleren."
+$(gettext "    Unknown script. Function check_code cannot check script code.")"
+# In $script:
+#     Onbekend script.  Functie check_code kan scriptcode niet controleren."
         maxrc=$err
     fi
 }
@@ -171,7 +172,8 @@ function check_record_length {
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
         err "
 In $script:
-    Een regel is langer dan $max_line_length ($max_line_length_found).
+$(eval_gettext "    A line is longer than \$max_line_length \
+(\$max_line_length_found).")
 "
         maxrc=$err
     fi
@@ -198,7 +200,7 @@ function check_record_types {
     if [[ $wrong_record ]]; then
         err "
 In $script:
-    Foutieve regel(s) gevonden.
+    $(gettext 'Faulty line(s) found.')
 $(
     printf '%s' "$wrong_record" |
                 nl --number-width=8 --number-separator='' --body-numbering=n
@@ -227,7 +229,7 @@ function check_tags {
             "$script"; then
         warn "
 In $script:
-    Gemarkeerde annotatie gevonden.
+$(gettext '    Flagged annotation found.')
 
 $(
     grep    --line-number           \
@@ -241,9 +243,9 @@ $(
 )
 "
     while true; do
-        read -rp 'Doorgaan? [J/n]: '
+        read -rp "$(gettext 'Continue? [Y/n]: ')"
         case $REPLY in
-            j*|J*|'')
+            y*|Y*|j*|J*|'')
                 break
                 ;;
             n*|N*)
@@ -263,7 +265,7 @@ function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
         err "
 In $script:
-    Eindspaties gevonden.
+$(gettext '    End spaces found.')
 $(
     grep    --line-number --regexp=' ''$' "$script" |
     nl      --number-width=4  --number-separator='' --body-numbering=n
