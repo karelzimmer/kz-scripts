@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Apps instellen.
+# Set up apps.
 #
 # Written in 2013 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.

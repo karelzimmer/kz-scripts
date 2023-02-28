@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Installatiemenu.
+# Installation menu.
 #
 # Written in 2015 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -17,10 +17,12 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-menu'
-declare program_desc='Installatiemenu'
+declare program_desc
+program_desc=$(gettext 'Installation menu')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [-g|--gui]
+declare usage
+usage="$(eval_gettext "Usage: \$display_name [-g|--gui]")
                  $options_usage"
 declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
@@ -35,46 +37,75 @@ declare options_long+=',gui'
 
 declare menu1_title=Installatiemenu
 declare menu1_head="                  $menu1_title"
+#TODO
 declare -a menu1_actions=(
-            [1]='Installatie voorbereiden'
-                'Installatie uitvoeren'
-                'Installatie afronden'
-                'Gebruiker inrichten'
-                'Opdrachtenmenu'
-                'Stoppen'
+            [1]="$(gettext 'Preparing installation')"
+                "$(gettext 'Perform installation')"
+                "$(gettext 'Finish installation')"
+                "$(gettext 'Provision user')"
+                "$(gettext 'Commands menu')"
+                "$(gettext 'Stop')"
             )
+            # [1]='Installatie voorbereiden'
+            #     'Installatie uitvoeren'
+            #     'Installatie afronden'
+            #     'Gebruiker inrichten'
+            #     'Opdrachtenmenu'
+            #     'Stoppen'
 declare -a menu1_commands=(
-            [1]='Checklist hoofdstuk 1'
-                'Checklist hoofdstuk 2'
-                'Checklist hoofdstuk 3'
-                'Checklist hoofdstuk 4'
-                'Gebruikte opdrachten'
-                'Menu verlaten'
+            [1]="$(gettext 'Checklist chapter 1')"
+                "$(gettext 'Checklist chapter 2')"
+                "$(gettext 'Checklist chapter 3')"
+                "$(gettext 'Checklist chapter 4')"
+                "$(gettext 'Used commands')"
+                "$(gettext 'Exit menu')"
             )
+            # [1]='Checklist hoofdstuk 1'
+            #     'Checklist hoofdstuk 2'
+            #     'Checklist hoofdstuk 3'
+            #     'Checklist hoofdstuk 4'
+            #     'Gebruikte opdrachten'
+            #     'Menu verlaten'
 declare menu1_lines=${#menu1_actions[@]}
 
 declare menu2_title=Opdrachtenmenu
 declare menu2_head="             $menu2_title"
 declare -a menu2_actions=(
-            [1]='Wifi-gegevens tonen'
-                'Back-up maken'
-                'Gebruikers toevoegen'
-                'Apps installeren'
-                'Back-up terugzetten'
-                'Gebruikersfoto instellen'
-                'Apps instellen'
-                'Terug'
+            [1]="$(gettext 'Show WiFi data')"
+                "$(gettext 'Create backup')"
+                "$(gettext 'Add users')"
+                "$(gettext 'Install apps')"
+                "$(gettext 'Restore backup')"
+                "$(gettext 'Set user photo')"
+                "$(gettext 'Set up apps')"
+                "$(gettext 'Back')"
             )
+            # [1]='Wifi-gegevens tonen'
+            #     'Back-up maken'
+            #     'Gebruikers toevoegen'
+            #     'Apps installeren'
+            #     'Back-up terugzetten'
+            #     'Gebruikersfoto instellen'
+            #     'Apps instellen'
+            #     'Terug'
 declare -a menu2_commands=(
-            [1]='kz wifi'
-                'kz backup'
-                'Handmatig'
-                'kz install'
-                'kz restore'
-                'Handmatig'
-                'kz setup'
-                'Vorig menu'
+            [1]="$(gettext 'kz wifi')"
+                "$(gettext 'kz backup')"
+                "$(gettext 'Manually')"
+                "$(gettext 'kz install')"
+                "$(gettext 'kz restore')"
+                "$(gettext 'Manually')"
+                "$(gettext 'kz setup')"
+                "$(gettext 'Previous menu')"
             )
+            # [1]='kz wifi'
+            #     'kz backup'
+            #     'Handmatig'
+            #     'kz install'
+            #     'kz restore'
+            #     'Handmatig'
+            #     'kz setup'
+            #     'Vorig menu'
 declare menu2_lines=${#menu2_actions[@]}
 
 
@@ -148,6 +179,7 @@ function process_menu1_gui {
 
     while true; do
         title=$menu1_title
+#TODO
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
@@ -155,7 +187,7 @@ function process_menu1_gui {
                     --height        240                                     \
                     --title         "$title"                                \
                     --text          'Selecteer een keuze:'                  \
-                    --ok-label      'Verder'                                \
+                    --ok-label      'Doorgaan'                              \
                     --cancel-label  'Afsluiten'                             \
                     --column        'Keuze'                                 \
                     --column        'Nr.'                                   \
@@ -168,6 +200,13 @@ function process_menu1_gui {
                     FALSE 5 "${menu1_actions[5]}" "${menu1_commands[5]}"    \
                     2> >($logcmd)
             ) || zenity_rc=$?
+                    # --text          'Selecteer een keuze:'                  \
+                    # --ok-label      'Doorgaan'                              \
+                    # --cancel-label  'Afsluiten'                             \
+                    # --column        'Keuze'                                 \
+                    # --column        'Nr.'                                   \
+                    # --column        'Actie'                                 \
+                    # --column        'Toelichting'                           \
         if [[ $zenity_rc -ne 0 ]]; then
             exit $ok
         fi
@@ -194,6 +233,7 @@ function process_menu1_tui {
         info ''
 
         while true; do
+#TODO
             read -rp "Voer uit nummer [1-$menu1_lines]: "
             case $REPLY in
                 *[^[:digit:]]*)
@@ -237,6 +277,7 @@ function process_menu1_choice {
             exit $ok
             ;;
         *)
+#TODO
             err 'Niet afgehandelde keuze.'
             exit $err
             ;;
@@ -256,6 +297,7 @@ function process_menu1_choice1 {
 
 function process_menu1_choice2 {
     title="${menu1_actions[2]}"
+#TODO
     text='
 Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
 Checklist installatie is te vinden op de site https://karelzimmer.nl,
@@ -306,6 +348,7 @@ function process_menu2_gui {
 
     while true; do
         title=$menu2_title
+#TODO
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
@@ -313,7 +356,7 @@ function process_menu2_gui {
                     --height        290                                     \
                     --title         "$title"                                \
                     --text          'Selecteer een keuze:'                  \
-                    --ok-label      'Verder'                                \
+                    --ok-label      'Doorgaan'                              \
                     --cancel-label  'Terug'                                 \
                     --column        'Keuze'                                 \
                     --column        'Nr.'                                   \
@@ -328,6 +371,13 @@ function process_menu2_gui {
                     FALSE  7 "${menu2_actions[7]}"  "${menu2_commands[7]}"  \
                     2> >($logcmd)
             ) || zenity_rc=$?
+                    # --text          'Selecteer een keuze:'                  \
+                    # --ok-label      'Doorgaan'                              \
+                    # --cancel-label  'Terug'                                 \
+                    # --column        'Keuze'                                 \
+                    # --column        'Nr.'                                   \
+                    # --column        'Actie'                                 \
+                    # --column        'Opdracht'                              \
         if [[ $zenity_rc -ne 0 ]]; then
             break
         fi
@@ -355,6 +405,7 @@ function process_menu2_tui {
         info ''
 
         while true; do
+#TODO
             read -rp "Voer uit nummer [1-$menu2_lines]: "
             case $REPLY in
                 *[^[:digit:]]*)
@@ -390,6 +441,7 @@ function process_menu2_choice {
     elif [[ $REPLY -eq $menu2_lines ]]; then
         exit_menu2=true
     else
+#TODO
         err 'Niet afgehandelde keuze.'
         exit $err
     fi
@@ -436,6 +488,7 @@ function show_commands_before_execution {
     local -i row=0
     local prompt=''
 
+#TODO
     text='Het volgende wordt uitgevoerd:
 '
     for row in "${!rows[@]}"; do
@@ -450,10 +503,12 @@ $row. $action ($command)"
     done
     text+='
 '
+#TODO
     prompt='Doorgaan?'
     if $option_gui; then
         text+="
 $prompt"
+#TODO
         if zenity   --question                  \
                     --no-markup                 \
                     --width         600         \
@@ -462,6 +517,8 @@ $prompt"
                     --text          "$text"     \
                     --ok-label      'Ja'        \
                     --cancel-label  'Nee'       2> >($logcmd); then
+                    # --ok-label      'Ja'        \
+                    # --cancel-label  'Nee'       2> >($logcmd); then
             execute_command=true
         else
             execute_command=false
@@ -469,6 +526,7 @@ $prompt"
     else
         info "$text"
         while true; do
+#TODO
             read -rp "$prompt [J/n]: "
             case $REPLY in
                 j*|J*|'')
@@ -499,6 +557,7 @@ function execute_command {
     fi
 
     # Verwerk handmatige acties.
+#TODO
     if [[ $command = 'Handmatig' ]]; then
         manual_actions
         return $ok
@@ -522,6 +581,7 @@ function execute_command {
 
 
 function manual_actions {
+#TODO
     if [[ $title = 'Gebruikers toevoegen' ]]; then
         text="Gebruikers toevoegen:
 
@@ -534,6 +594,7 @@ function manual_actions {
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$text"
         kz_common.wait_for_enter
+#TODO
     elif [[ $title = 'Gebruikersfoto instellen' ]]; then
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
             text="Gebruikersfoto instellen:
@@ -549,6 +610,7 @@ klik achter Instellingen op Gebruikers.
 [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
             info "$text"
         else
+#TODO
             text="Gebruikersfoto instellen:
 Er is bij het maken van de back-up geen gebruikersfoto gevonden."
             info "$text"
@@ -563,6 +625,7 @@ function show_commands_after_execution {
     local command=''
     local -i row=0
 
+#TODO
     text='Het volgende is uitgevoerd:
 '
     for row in "${!rows[@]}"; do

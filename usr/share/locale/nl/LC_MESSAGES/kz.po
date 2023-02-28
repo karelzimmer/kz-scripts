@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 12:21+0100\n"
+"POT-Creation-Date: 2023-02-28 13:53+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -799,3 +799,10 @@ msgstr "Doorgaan? [J/n]: "
 
 msgid "    End spaces found."
 msgstr "    Eindspaties gevonden."
+
+msgid "Installation menu"
+msgstr "Installatiemenu'"
+
+#, sh-format
+msgid "Usage: $display_name [-g|--gui]"
+msgstr "Gebruik: $display_name [-g|--gui]"
