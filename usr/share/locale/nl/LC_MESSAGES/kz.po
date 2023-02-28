@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 11:12+0100\n"
+"POT-Creation-Date: 2023-02-28 08:47+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -783,3 +783,20 @@ msgstr "fout"
 
 msgid " ok "
 msgstr "goed"
+
+msgid "No commands to execute."
+msgstr "Geen opdrachten om uit te voeren."
+
+#, sh-format
+msgid ""
+"One or more commands went wrong.\n"
+"The maximum exit value is $maxrc.\n"
+"Check the log in the Terminal with the command:"
+msgstr ""
+"Eén of meer opdrachten zijn fout gegegaan.\n"
+"De maximale afsluitwaarde is $maxrc.\n"
+"Controleer de log in het Terminalvenster met de opdracht:"
+
+#, sh-format
+msgid "Apps $action completed."
+msgstr "Apps $action is voltooid."

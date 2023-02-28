@@ -441,9 +441,9 @@ function process_cmds_file {
     if $option_simulate; then
         operation+=$(gettext ' simulate')
     else
-        status_busy="[${blink}${yellow}werk${normal}]"
-        status_err="[${red}fout${normal}]"
-        status_ok="[${green}goed${normal}]"
+        status_busy="[${blink}${yellow}$(gettext 'work')${normal}]"
+        status_err="[${red}$(gettext 'err.')${normal}]"
+        status_ok="[${green}$(gettext ' ok ')${normal}]"
         printf '%s' "${cursor_invisable}"
     fi
 
@@ -586,12 +586,12 @@ function term_script {
     local action='instellen'
 
     if ! $commands_found; then
-        info 'Geen opdrachten om uit te voeren.'
+        info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
         if [[ $maxrc -ne $ok ]]; then
-            err "Eén of meer opdrachten zijn fout gegegaan.
-De maximale afsluitwaarde is $maxrc.
-Controleer de log in het Terminalvenster met de opdracht: \
+            err "$(eval_gettext "One or more commands went wrong.
+The maximum exit value is \$maxrc.
+Check the log in the Terminal with the command:") \
 ${blue}$logcmd_check${normal}"
             exit $err
         else
@@ -599,7 +599,7 @@ ${blue}$logcmd_check${normal}"
                 action='resetten'
             fi
             info "
-Apps $action is voltooid."
+$(eval_gettext "Apps \$action completed.")"
         fi
     else
         less "$less_options" "$sims_file"

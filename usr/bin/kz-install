@@ -451,7 +451,6 @@ function process_cmds_file {
     if $option_simulate; then
         operation+=$(gettext ' simulate')
     else
-# FIXME
         status_busy="[${blink}${yellow}$(gettext 'work')${normal}]"
         status_err="[${red}$(gettext 'err.')${normal}]"
         status_ok="[${green}$(gettext ' ok ')${normal}]"
@@ -526,9 +525,9 @@ function process_command_record {
             text="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
             printf '%s\n' "$text"
         else
-            # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
+            # Terminate text in Terminal due to update status.
             #  <--------------- tput cols --------------->
-            # '[werk] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
+            # '[work] [ 1/1 ] [ 1] Too long description...' <=== on 1 line
             #  <------- 20 ------->                    <3>
             desc_maxlen=$(($(tput cols) - 20))
             if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
@@ -597,23 +596,25 @@ function execute_command {
 
 
 function term_script {
-    local action='installeren'
+    local action
+    action=$(gettext 'install')
 
     if ! $commands_found; then
-        info 'Geen opdrachten om uit te voeren.'
+        info "$(gettext 'No commands to execute.' )"
+        # Geen opdrachten om uit te voeren.'
     elif $execute_commands; then
         if [[ $maxrc -ne $ok ]]; then
-            err "Eén of meer opdrachten zijn fout gegegaan.
-De maximale afsluitwaarde is $maxrc.
-Controleer de log in het Terminalvenster met de opdracht: \
+            err "$(eval_gettext "One or more commands went wrong.
+The maximum exit value is \$maxrc.
+Check the log in the Terminal with the command:") \
 ${blue}$logcmd_check${normal}"
             exit $err
         else
             if $option_remove; then
-                action='verwijderen'
+                action=$(gettext 'remove')
             fi
             info "
-Apps $action is voltooid."
+$(eval_gettext "Apps \$action completed.")"
         fi
     else
         less "$less_options" "$sims_file"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 11:21+0100\n"
+"POT-Creation-Date: 2023-02-28 08:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -632,4 +632,18 @@ msgid "err."
 msgstr ""
 
 msgid " ok "
+msgstr ""
+
+msgid "No commands to execute."
+msgstr ""
+
+#, sh-format
+msgid ""
+"One or more commands went wrong.\n"
+"The maximum exit value is $maxrc.\n"
+"Check the log in the Terminal with the command:"
+msgstr ""
+
+#, sh-format
+msgid "Apps $action completed."
 msgstr ""
