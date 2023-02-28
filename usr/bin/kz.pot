@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 08:47+0100\n"
+"POT-Creation-Date: 2023-02-28 09:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,15 +62,11 @@ msgid "Type '$display_name --usage' for more information."
 msgstr ""
 
 #, sh-format
-msgid ""
-"\n"
-"Program $program_name encountered an error."
+msgid "Program $program_name encountered an error."
 msgstr ""
 
 #, sh-format
-msgid ""
-"\n"
-"Program $program_name has been interrupted."
+msgid "Program $program_name has been interrupted."
 msgstr ""
 
 msgid ""
@@ -192,7 +188,6 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"\n"
 "To execute a COMMAND:\n"
 "${blue}$display_name COMMAND${normal}"
 msgstr ""
@@ -301,22 +296,18 @@ msgid "Unplug the USB media"
 msgstr ""
 
 msgid ""
-"\n"
 "The backup has been made.\n"
 "\n"
 "The USB medium can be removed."
 msgstr ""
 
 msgid ""
-"\n"
 "The backup has been made.\n"
 "\n"
 "Disconnect the USB medium yourself (safely!)."
 msgstr ""
 
-msgid ""
-"\n"
-"The backup has been made."
+msgid "The backup has been made."
 msgstr ""
 
 msgid "Build package kz"
@@ -508,16 +499,13 @@ msgid "Config database content captured ($fase)."
 msgstr ""
 
 msgid ""
-"\n"
-"CHANGES in the configuration database,\n"
+"CHANGEs in the configuration database,\n"
 "< is the old setting (A),\n"
 "> is the new setting (B):"
 msgstr ""
 
 #, sh-format
-msgid ""
-"\n"
-"At CHANGE, run: ${blue}gsettings set CHANGE${normal}"
+msgid "when CHANGEs, run: ${blue}gsettings set CHANGE${normal}"
 msgstr ""
 
 msgid "Install apps"
@@ -646,4 +634,11 @@ msgstr ""
 
 #, sh-format
 msgid "Apps $action completed."
+msgstr ""
+
+msgid "Checking scripts"
+msgstr ""
+
+#, sh-format
+msgid "When CHANGEs, run: ${blue}gsettings set CHANGE${normal}"
 msgstr ""

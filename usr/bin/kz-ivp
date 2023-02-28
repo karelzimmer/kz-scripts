@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Scripts controleren.
+# Checking scripts.
 #
 # Written in 2015 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
@@ -17,7 +17,8 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-ivp'
-declare program_desc='Scripts controleren'
+declare program_desc
+program_desc=$(gettext 'Checking scripts')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
@@ -143,6 +144,7 @@ function check_code {
                 "$script"; then
         check_pycodestyle
     else
+#TODO
         err "
 In $script:
     Onbekend script.  Functie check_code kan scriptcode niet controleren."

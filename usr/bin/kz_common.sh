@@ -276,8 +276,8 @@ $command, code: $rc ($rc_desc)" --priority=debug
 
     case $signal in
         err)
-            err "$(eval_gettext "
-Program \$program_name encountered an error.")"
+            err "
+$(eval_gettext "Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
         exit)
@@ -287,8 +287,8 @@ Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
         *)
-            err "$(eval_gettext "
-Program \$program_name has been interrupted.")"
+            err "
+$(eval_gettext "Program \$program_name has been interrupted.")"
             exit "$rc"
             ;;
     esac

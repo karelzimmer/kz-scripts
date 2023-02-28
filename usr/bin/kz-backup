@@ -415,19 +415,19 @@ $text..."
             udisksctl power-off --block-device "$dev" |& $logcmd || rc+=$?
         fi
         if [[ $rc -eq $ok ]]; then
-            info "$(gettext '
-The backup has been made.
+            info "
+$(gettext 'The backup has been made.
 
 The USB medium can be removed.')"
         else
-            warn "$(gettext '
-The backup has been made.
+            warn "
+$(gettext 'The backup has been made.
 
 Disconnect the USB medium yourself (safely!).')"
         fi
     else
-        info "$(gettext '
-The backup has been made.')"
+        info "
+$(gettext 'The backup has been made.')"
     fi
     exit $ok
 }
