@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 15:09+0100\n"
+"POT-Creation-Date: 2023-02-28 16:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -720,4 +720,64 @@ msgid "Manually"
 msgstr ""
 
 msgid "Previous menu"
+msgstr ""
+
+msgid "Select a choice:"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Choice"
+msgstr ""
+
+msgid "No."
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Explanation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+#, sh-format
+msgid "Run number [1-$menu1_lines]: "
+msgstr ""
+
+#, sh-format
+msgid "Cannot handle this choice ($REPLY)."
+msgstr ""
+
+msgid ""
+"Follow the steps as described in Installation Checklist, Chapter 2.\n"
+"Checklist installation can be found on the site https://karelzimmer.nl,\n"
+"under Linux.\n"
+"\n"
+"Roughly boils down to:\n"
+"1. Download an image file (.iso).\n"
+"2. Create a bootable Live USB stick or DVD.\n"
+"3. Boot the computer from this USB stick or DVD.\n"
+"4. Install Linux."
+msgstr ""
+
+msgid "The following will be executed:"
+msgstr ""
+
+msgid "Continue?"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+#, sh-format
+msgid "$prompt [Y/n]: "
 msgstr ""

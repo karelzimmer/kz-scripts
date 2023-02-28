@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 14:58+0100\n"
+"POT-Creation-Date: 2023-02-28 16:47+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -863,3 +863,72 @@ msgstr "Handmatig"
 
 msgid "Previous menu"
 msgstr "Vorig menu"
+
+msgid "Select a choice:"
+msgstr "Selecteer een keuze:"
+
+msgid "Continue"
+msgstr "Doorgaan"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Choice"
+msgstr "Keuze"
+
+msgid "No."
+msgstr "Nr."
+
+msgid "Action"
+msgstr "Actie"
+
+msgid "Explanation"
+msgstr "Toelichting"
+
+msgid "Command"
+msgstr "Opdracht"
+
+#, sh-format
+msgid "Run number [1-$menu1_lines]: "
+msgstr "Voer uit nummer [1-$menu1_lines]: "
+
+#, sh-format
+msgid "Cannot handle this choice ($REPLY)."
+msgstr "Kan deze keuze niet afhandelen ($REPLY)."
+
+msgid ""
+"Follow the steps as described in Installation Checklist, Chapter 2.\n"
+"Checklist installation can be found on the site https://karelzimmer.nl,\n"
+"under Linux.\n"
+"\n"
+"Roughly boils down to:\n"
+"1. Download an image file (.iso).\n"
+"2. Create a bootable Live USB stick or DVD.\n"
+"3. Boot the computer from this USB stick or DVD.\n"
+"4. Install Linux."
+msgstr ""
+"Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.\n"
+"Checklist installatie is te vinden op de site https://karelzimmer.nl,\n"
+"onder Linux.\n"
+"\n"
+"Komt globaal neer op:\n"
+"1. Download een beeldbestand (.iso).\n"
+"2. Maak een opstartbare Live usb-stick of dvd aan.\n"
+"3. Start de computer op vanaf deze usb-stick of dvd.\n"
+"4. Installeer Linux."
+
+msgid "The following will be executed:"
+msgstr "Het volgende wordt uitgevoerd:"
+
+msgid "Continue?"
+msgstr "Doorgaan?"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nee"
+
+#, sh-format
+msgid "$prompt [Y/n]: "
+msgstr "$prompt [J/n]: "

@@ -150,20 +150,19 @@ function process_menu1_gui {
 
     while true; do
         title=$menu1_title
-#TODO
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         480                                     \
                     --height        240                                     \
                     --title         "$title"                                \
-                    --text          'Selecteer een keuze:'                  \
-                    --ok-label      'Doorgaan'                              \
-                    --cancel-label  'Afsluiten'                             \
-                    --column        'Keuze'                                 \
-                    --column        'Nr.'                                   \
-                    --column        'Actie'                                 \
-                    --column        'Toelichting'                           \
+                    --text          "$(gettext 'Select a choice:')"         \
+                    --ok-label      "$(gettext 'Continue')"                 \
+                    --cancel-label  "$(gettext 'Exit')"                     \
+                    --column        "$(gettext 'Choice')"                   \
+                    --column        "$(gettext 'No.')"                      \
+                    --column        "$(gettext 'Action')"                   \
+                    --column        "$(gettext 'Explanation')"              \
                     TRUE  1 "${menu1_actions[1]}" "${menu1_commands[1]}"    \
                     FALSE 2 "${menu1_actions[2]}" "${menu1_commands[2]}"    \
                     FALSE 3 "${menu1_actions[3]}" "${menu1_commands[3]}"    \
@@ -171,13 +170,6 @@ function process_menu1_gui {
                     FALSE 5 "${menu1_actions[5]}" "${menu1_commands[5]}"    \
                     2> >($logcmd)
             ) || zenity_rc=$?
-                    # --text          'Selecteer een keuze:'                  \
-                    # --ok-label      'Doorgaan'                              \
-                    # --cancel-label  'Afsluiten'                             \
-                    # --column        'Keuze'                                 \
-                    # --column        'Nr.'                                   \
-                    # --column        'Actie'                                 \
-                    # --column        'Toelichting'                           \
         if [[ $zenity_rc -ne 0 ]]; then
             exit $ok
         fi
@@ -191,7 +183,7 @@ function process_menu1_tui {
 
     while true; do
 
-        # Toon menu.
+        # Show menu.
         clear -x
         info "$menu1_head
 "
@@ -204,8 +196,7 @@ function process_menu1_tui {
         info ''
 
         while true; do
-#TODO
-            read -rp "Voer uit nummer [1-$menu1_lines]: "
+            read -rp "$(eval_gettext "Run number [1-\$menu1_lines]: ")"
             case $REPLY in
                 *[^[:digit:]]*)
                     printf '%s' "${rewrite_line}"
@@ -248,8 +239,7 @@ function process_menu1_choice {
             exit $ok
             ;;
         *)
-#TODO
-            err 'Niet afgehandelde keuze.'
+            err "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
             exit $err
             ;;
     esac
@@ -268,17 +258,16 @@ function process_menu1_choice1 {
 
 function process_menu1_choice2 {
     title="${menu1_actions[2]}"
-#TODO
-    text='
-Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.
-Checklist installatie is te vinden op de site https://karelzimmer.nl,
-onder Linux.
+    text="
+$(gettext "Follow the steps as described in Installation Checklist, Chapter 2.
+Checklist installation can be found on the site https://karelzimmer.nl,
+under Linux.
 
-Komt globaal neer op:
-1. Download een beeldbestand (.iso).
-2. Maak een opstartbare Live usb-stick of dvd aan.
-3. Start de computer op vanaf deze usb-stick of dvd.
-4. Installeer Linux.'
+Roughly boils down to:
+1. Download an image file (.iso).
+2. Create a bootable Live USB stick or DVD.
+3. Boot the computer from this USB stick or DVD.
+4. Install Linux.")"
     info "$text"
     kz_common.wait_for_enter
 }
@@ -319,20 +308,19 @@ function process_menu2_gui {
 
     while true; do
         title=$menu2_title
-#TODO
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         480                                     \
                     --height        290                                     \
                     --title         "$title"                                \
-                    --text          'Selecteer een keuze:'                  \
-                    --ok-label      'Doorgaan'                              \
-                    --cancel-label  'Terug'                                 \
-                    --column        'Keuze'                                 \
-                    --column        'Nr.'                                   \
-                    --column        'Actie'                                 \
-                    --column        'Opdracht'                              \
+                    --text          "$(gettext 'Select a choice:')"         \
+                    --ok-label      "$(gettext 'Continue')"                 \
+                    --cancel-label  "$(gettext 'Back')"                     \
+                    --column        "$(gettext 'Choice')"                   \
+                    --column        "$(gettext 'No.')"                      \
+                    --column        "$(gettext 'Action')"                   \
+                    --column        "$(gettext 'Command')"                  \
                     TRUE   1 "${menu2_actions[1]}"  "${menu2_commands[1]}"  \
                     FALSE  2 "${menu2_actions[2]}"  "${menu2_commands[2]}"  \
                     FALSE  3 "${menu2_actions[3]}"  "${menu2_commands[3]}"  \
@@ -342,13 +330,6 @@ function process_menu2_gui {
                     FALSE  7 "${menu2_actions[7]}"  "${menu2_commands[7]}"  \
                     2> >($logcmd)
             ) || zenity_rc=$?
-                    # --text          'Selecteer een keuze:'                  \
-                    # --ok-label      'Doorgaan'                              \
-                    # --cancel-label  'Terug'                                 \
-                    # --column        'Keuze'                                 \
-                    # --column        'Nr.'                                   \
-                    # --column        'Actie'                                 \
-                    # --column        'Opdracht'                              \
         if [[ $zenity_rc -ne 0 ]]; then
             break
         fi
@@ -363,7 +344,7 @@ function process_menu2_tui {
 
     while true; do
 
-        # Toon menu.
+        # Show menu.
         clear -x
         info "$menu2_head
 "
@@ -376,8 +357,7 @@ function process_menu2_tui {
         info ''
 
         while true; do
-#TODO
-            read -rp "Voer uit nummer [1-$menu2_lines]: "
+            read -rp "$(eval_gettext "Run number [1-\$menu1_lines]: ")"
             case $REPLY in
                 *[^[:digit:]]*)
                     printf '%s' "${rewrite_line}"
@@ -412,8 +392,7 @@ function process_menu2_choice {
     elif [[ $REPLY -eq $menu2_lines ]]; then
         exit_menu2=true
     else
-#TODO
-        err 'Niet afgehandelde keuze.'
+        err "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
         exit $err
     fi
 }
@@ -459,9 +438,8 @@ function show_commands_before_execution {
     local -i row=0
     local prompt=''
 
-#TODO
-    text='Het volgende wordt uitgevoerd:
-'
+    text="$(gettext 'The following will be executed:')
+"
     for row in "${!rows[@]}"; do
         action=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
@@ -474,22 +452,18 @@ $row. $action ($command)"
     done
     text+='
 '
-#TODO
-    prompt='Doorgaan?'
+    prompt=$(gettext 'Continue?')
     if $option_gui; then
         text+="
 $prompt"
-#TODO
-        if zenity   --question                  \
-                    --no-markup                 \
-                    --width         600         \
-                    --height        100         \
-                    --title         "$title"    \
-                    --text          "$text"     \
-                    --ok-label      'Ja'        \
-                    --cancel-label  'Nee'       2> >($logcmd); then
-                    # --ok-label      'Ja'        \
-                    # --cancel-label  'Nee'       2> >($logcmd); then
+        if zenity   --question                          \
+                    --no-markup                         \
+                    --width         600                 \
+                    --height        100                 \
+                    --title         "$title"            \
+                    --text          "$text"             \
+                    --ok-label      "$(gettext 'Yes')"  \
+                    --cancel-label  "$(gettext 'No')"   2> >($logcmd); then
             execute_command=true
         else
             execute_command=false
@@ -497,8 +471,7 @@ $prompt"
     else
         info "$text"
         while true; do
-#TODO
-            read -rp "$prompt [J/n]: "
+            read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
                 j*|J*|'')
                     execute_command=true
@@ -527,14 +500,13 @@ function execute_command {
         clear -x
     fi
 
-    # Verwerk handmatige acties.
-#TODO
-    if [[ $command = 'Handmatig' ]]; then
+    # Handle manual actions.
+    if [[ $command = $(gettext 'Manually') ]]; then
         manual_actions
         return $ok
     fi
 
-    # Verwerk (automatische) opdrachten.
+    # Process (automatic) commands.
     row=${command/kz /kz-}
     cmd=$(
         printf '%s' "$row" | cut --delimiter=' ' --fields=1
@@ -552,38 +524,54 @@ function execute_command {
 
 
 function manual_actions {
-#TODO
-    if [[ $title = 'Gebruikers toevoegen' ]]; then
-        text="Gebruikers toevoegen:
+#TODO Let op: dit betreft GUI-termen in EN versie van Ubuntu, naspelen op ubuntu2304-testing VM
+    if [[ $title = $(gettext 'Add users') ]]; then
+        text="$(gettext 'Add users'):
 
-1. Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op
-   de Super-toets[1], typ 'gebr' en klik achter Instellingen op Gebruikers.
-2. Klik op Ontgrendelen en geef wachtwoord.
-3. Klik op Gebruiker toevoegen.
-4. Sluit het scherm Gebruikers.
+1. Add any additional Standard or Admin users by pressing the Super key[1],
+   type 'user' and click behind Settings on Users.
+2. Click Unlock and enter password.
+3. Click Add User.
+4. Close the Users screen.
 
-[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
+[1] The Super key is the Windows key, Command key, or Magnifier key."
+# 1. Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk op
+#    de Super-toets[1], typ 'gebr' en klik achter Instellingen op Gebruikers.
+# 2. Klik op Ontgrendelen en geef wachtwoord.
+# 3. Klik op Gebruiker toevoegen.
+# 4. Sluit het scherm Gebruikers.
+
+# [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
         info "$text"
         kz_common.wait_for_enter
-#TODO
-    elif [[ $title = 'Gebruikersfoto instellen' ]]; then
+    elif [[ $title = $(gettext 'Set user photo') ]]; then
         if [[ -f $HOME/Instellingen/Gebruikersfoto ]]; then
-            text="Gebruikersfoto instellen:
+            text="$(gettext 'Set user photo'):
 
-1. Wijzig de gebruikersfoto via een druk op de Super-toets[1], typ 'gebr' en \
-klik achter Instellingen op Gebruikers.
-2. Klik op Ontgrendelen.
-3. Klik op de afbeelding voor de gebruiker.
-4. Klik op Selecteer een bestand.
-5. Selecteer Gebruikersfoto in Persoonlijke map / Instellingen.
-6. Sluit het scherm Gebruikers.
+1. Change the user photo by pressing the Super key[1], type 'user' and click on
+   Users behind Settings.
+2. Click Unlock.
+3. Click the image for the user.
+4. Click Select a file.
+5. Select User photo in Personal folder / Settings.
+6. Close the Users screen.
 
-[1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
+[1] The Super key is the Windows key, Command key, or Magnifier key."
+# 1. Wijzig de gebruikersfoto via een druk op de Super-toets[1], typ 'gebr' en
+#    klik achter Instellingen op Gebruikers.
+# 2. Klik op Ontgrendelen.
+# 3. Klik op de afbeelding voor de gebruiker.
+# 4. Klik op Selecteer een bestand.
+# 5. Selecteer Gebruikersfoto in Persoonlijke map / Instellingen.
+# 6. Sluit het scherm Gebruikers.
+
+# [1] De Super-toets is de Windows-toets, Command-toets, of Vergrootglas-toets."
             info "$text"
         else
 #TODO
-            text="Gebruikersfoto instellen:
-Er is bij het maken van de back-up geen gebruikersfoto gevonden."
+            text="$(gettext 'Set user photo'):
+$(gettext 'No user photo was found when backing up.')"
+#Er is bij het maken van de back-up geen gebruikersfoto gevonden."
             info "$text"
         fi
         kz_common.wait_for_enter
