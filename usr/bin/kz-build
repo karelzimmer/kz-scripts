@@ -57,7 +57,7 @@ declare -A uploads_targets=(
 
 declare -A deb_sources=(
                 [app]=$deb_appdir
-                 [mo]=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
+                 [po]=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
          [kz-scripts]=$scripts_repo
             )
 declare -A deb_targets=(
@@ -269,7 +269,7 @@ function build_deb {
 
     # Compile GNU gettext message catalogue.
     msgfmt  --output-file="${deb_targets[mo]}"/kz.mo    \
-            "${deb_sources[mo]}"/kz.mo                  |& $logcmd
+            "${deb_sources[po]}"/kz.po                  |& $logcmd
 
     # Capture build id Debian package.
     printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
