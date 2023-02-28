@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 09:26+0100\n"
+"POT-Creation-Date: 2023-02-28 09:38+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -629,9 +629,8 @@ msgstr ""
 "< is de oude   instelling (A),\n"
 "> is de nieuwe instelling (B):"
 
-#, fuzzy, sh-format
-#| msgid "When CHANGEs, run: ${blue}gsettings set CHANGE${normal}"
-msgid "when CHANGEs, run: ${blue}gsettings set CHANGE${normal}"
+#, sh-format
+msgid "When CHANGEs execute: ${blue}gsettings set CHANGE${normal}"
 msgstr "Bij WIJZIGINGen voer uit: ${blue}gsettings set WIJZIGING${normal}"
 
 msgid "Install apps"
@@ -780,7 +779,3 @@ msgstr "Apps $action is voltooid."
 
 msgid "Checking scripts"
 msgstr "Scripts controleren"
-
-#, sh-format
-msgid "When CHANGEs, run: ${blue}gsettings set CHANGE${normal}"
-msgstr "Bij WIJZIGINGen voer uit: ${blue}gsettings set WIJZIGING${normal}"

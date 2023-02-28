@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-28 09:26+0100\n"
+"POT-Creation-Date: 2023-02-28 09:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -505,7 +505,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "when CHANGEs, run: ${blue}gsettings set CHANGE${normal}"
+msgid "When CHANGEs execute: ${blue}gsettings set CHANGE${normal}"
 msgstr ""
 
 msgid "Install apps"
@@ -637,8 +637,4 @@ msgid "Apps $action completed."
 msgstr ""
 
 msgid "Checking scripts"
-msgstr ""
-
-#, sh-format
-msgid "When CHANGEs, run: ${blue}gsettings set CHANGE${normal}"
 msgstr ""
