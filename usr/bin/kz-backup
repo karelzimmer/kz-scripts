@@ -112,6 +112,9 @@ function check_input {
 
 
 function process_input {
+    # shellcheck disable=SC2034
+    local operation=backup
+
     if $option_target; then
         if ! [[ -d $target_argument ]]; then
             printf  "$display_name: $target_argument: %s\n$usage_line\n" \
@@ -129,9 +132,10 @@ be placed.")
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err "$(gettext 'No USB medium found.
+                err "$(eval_gettext "No USB medium found.
 
-Connect a USB medium, and then start backup again.')"
+Connect a USB medium, and then start \$operation again.")"
+#TODO
                 exit $err
             fi
         fi
@@ -141,7 +145,8 @@ Connect a USB medium, and then start backup again.')"
 Now connected:
 \$medium
 
-Unmount media via Files, then restart backup.")"
+Disconnect media via Files, then \$operation backup.")"
+#TODO
             exit $err
         fi
         target=$medium/backup-$HOSTNAME-$USER

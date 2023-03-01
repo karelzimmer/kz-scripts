@@ -112,6 +112,8 @@ function check_input {
 
 
 function process_input {
+    # shellcheck disable=SC2034
+    local operation=backup
     local prompt=''
     local restore=false
 
@@ -131,20 +133,22 @@ backup is connected.')"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err "$(gettext 'No USB medium found.
+                err "$(eval_gettext "No USB medium found.
 
-Connect a USB medium, and then start restore again.')"
+Connect a USB medium, and then start \$operation again.")"
+#TODO
             exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
 #TODO
-            err "Koppel slechts één usb-medium aan.
+            err "$(eval_gettext "Connect only one USB medium.
 
-Nu aangekoppeld zijn:
-$medium
+Now connected:
+\$medium
 
-Koppel media af via Bestanden, en start daarna restore opnieuw."
+Disconnect media via Files, then \$operation backup.")"
+#TODO
             exit $err
         fi
         source=$medium/backup-$HOSTNAME-$USER
