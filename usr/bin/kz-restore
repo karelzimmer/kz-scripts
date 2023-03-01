@@ -151,11 +151,10 @@ Disconnect media via Files, then restart \$operation.")"
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
-#TODO
-            err "Geen back-up gevonden op aangekoppeld usb-medium.
+            err "$(eval_gettext "No backup found on connected USB medium.
 
-Koppel een usb-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
-daarna restore opnieuw."
+Connect a USB medium with the directory backup-\$HOSTNAME-\$USER, and then \
+start restore again.")"
             exit $err
         fi
     fi
