@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-01 09:30+0100\n"
+"POT-Creation-Date: 2023-03-01 11:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -810,4 +810,22 @@ msgid "No user photo was found when backing up."
 msgstr ""
 
 msgid "The following has been executed:"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [--dry-run] [-g|--gui] [-s|--source=DIRECTORY]"
+msgstr ""
+
+msgid ""
+"  -s, --source=DIRECTORY\n"
+"                 use backup in DIRECTORY"
+msgstr ""
+
+msgid "Make sure that the USB medium containing the backup is connected."
+msgstr ""
+
+msgid ""
+"No USB medium found.\n"
+"\n"
+"Connect a USB medium, and then start restore again."
 msgstr ""

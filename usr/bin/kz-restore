@@ -17,12 +17,14 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-restore'
-declare program_desc='Back-up terugzetten'
+declare program_desc
+program_desc=$(gettext 'Restore backup')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
-[-s|--source=BRONMAP]
-                    $options_usage"
+declare usage
+usage="$(eval_gettext "Usage: \$display_name [--dry-run] [-g|--gui] \
+[-s|--source=DIRECTORY]")
+                  $options_usage"
 declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
@@ -31,8 +33,8 @@ $program_desc.
 $(gettext 'Options:')
       --dry-run  $(gettext 'perform a test run without making any changes')
   -g, --gui      $(gettext 'starts in graphics mode')
-  -s, --source=BRONMAP
-                 gebruik back-up in BRONMAP
+$(gettext '  -s, --source=DIRECTORY
+                 use backup in DIRECTORY')
 $options_help"
 declare options_short+='gs:'
 declare options_long+=',dry-run,gui,source:'
@@ -124,19 +126,19 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            text='
-Zorg dat het usb-medium is aangekoppeld waarop de back-up staat.'
-            warn "$text"
+            warn "$(gettext 'Make sure that the USB medium containing the \
+backup is connected.')"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err 'Geen usb-medium gevonden.
+                err "$(gettext 'No USB medium found.
 
-Koppel een usb-medium aan, en start daarna restore opnieuw.'
+Connect a USB medium, and then start restore again.')"
             exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+#TODO
             err "Koppel slechts één usb-medium aan.
 
 Nu aangekoppeld zijn:
@@ -148,6 +150,7 @@ Koppel media af via Bestanden, en start daarna restore opnieuw."
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
+#TODO
             err "Geen back-up gevonden op aangekoppeld usb-medium.
 
 Koppel een usb-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
@@ -158,13 +161,16 @@ daarna restore opnieuw."
 
     kz_common.check_on_ac_power
 
+#TODO
     title='Back-up terugzetten'
     text='Back-up wordt TERUGGEZET.
 '
+#TODO
     prompt='Doorgaan?'
     if $option_gui; then
         text+="
 $prompt"
+#TODO Ja/Nee
         if zenity   --question                  \
                     --no-markup                 \
                     --width         600         \
@@ -180,6 +186,7 @@ $prompt"
     else
         info "$text"
         while true; do
+#TODO j/N
             read -rp "$prompt [j/N]: "
             case $REPLY in
                 j*|J*)
@@ -200,6 +207,7 @@ $prompt"
     if $restore; then
         restore_backup
         if ! $option_dry_run; then
+#TODO
             title='Instellingen terugzetten'
             text='Instellingen terugzetten'
             if $option_gui; then
@@ -227,6 +235,7 @@ function restore_backup {
     local -i rsync_rc=0
     local target=$HOME
 
+#TODO
     text='Restore voorbereiden (dit kan even duren)'
     if $option_gui; then
         rsync   --archive               \
@@ -259,6 +268,7 @@ function restore_backup {
             return $ok
             ;;
         *)
+#TODO
             err "Back-up terugzetten is geëindigd met fouten.
 
 Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
@@ -271,6 +281,7 @@ ruimte op $target."
 
 
 function restore_settings {
+#TODO
     local tgtdir=$HOME/Instellingen
 
     restore_settings_desktop_background
@@ -282,6 +293,7 @@ function restore_settings {
 
 
 function restore_settings_desktop_background {
+#TODO
     local file=$tgtdir/Achtergrond
 
     if [[ -f $file ]]; then
@@ -291,6 +303,7 @@ function restore_settings_desktop_background {
 
 
 function restore_settings_favorite_apps {
+#TODO
     local file=$tgtdir/Favorieten
 
     if [[ -f $file ]]; then
@@ -306,10 +319,12 @@ function term_script {
     sync |& $logcmd || rc+=$?
     text=''
     if $option_dry_run; then
+#TODO
         err "De back-up is NIET teruggezet (DRY RUN)."
         exit $err
     fi
     if [[ $source_medium == /media/* ]]; then
+#TODO
         text='Het usb-medium afkoppelen'
         dev='/dev/'$(
             lsblk   --ascii             |
@@ -340,17 +355,20 @@ function term_script {
             udisksctl power-off --block-device "$dev" |& $logcmd || rc+=$?
         fi
         if [[ $rc -eq $ok ]]; then
+#TODO
             info "
 De back-up is teruggezet.
 
 Het usb-medium kan verwijderd worden."
         else
+#TODO
             warn "
 De back-up is teruggezet.
 
 Koppel zelf (veilig!) het usb-medium af."
         fi
     else
+#TODO
         info "
 De back-up is gemaakt."
     fi
