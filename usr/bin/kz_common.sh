@@ -94,8 +94,8 @@ function kz_common.check_on_ac_power {
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        warn "$(gettext '
-The computer now uses only the battery for power.
+        warn "
+$(gettext 'The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.')"
         kz_common.wait_for_enter
@@ -107,8 +107,8 @@ function kz_common.wait_for_enter {
     if $option_gui; then
         return
     fi
-    read -rp "$(gettext '
-Press the Enter key to continue [Enter]: ')" < /dev/tty
+    read -rp "
+$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 }
 
 

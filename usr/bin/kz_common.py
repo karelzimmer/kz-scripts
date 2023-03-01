@@ -96,12 +96,13 @@ def check_on_ac_power(program_name):
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
-        print(_('\nThe computer now uses only the battery for power.\n\n'
+        print('\n' + _('The computer now uses only the battery for power.\n\n'
               'It is recommended to connect the computer to the wall socket.'))
         try:
-            input(_('\nPress the Enter key to continue [Enter]: '))
+            input('\n' + _('Press the Enter key to continue [Enter]: '))
         except KeyboardInterrupt:
-            print(_('\nProgram {} has been interrupted.').format(program_name))
+            print('\n' + _('Program {} has been interrupted.').
+                  format(program_name))
             sys.exit(err)
 
 
@@ -123,7 +124,7 @@ def check_user_root(program_name, display_name):
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
-                print(_('\nProgram {} has been interrupted.').
+                print('\n' + _('Program {} has been interrupted.').
                       format(program_name))
                 sys.exit(err)
             except Exception as ex:
