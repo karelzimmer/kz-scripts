@@ -260,15 +260,11 @@ function restore_backup {
             return $ok
             ;;
         *)
-#TODO Lijkt heel erg op dezelfde msg in kz-backup....
-            err "$(eval_gettext "Restore backup has ended with errors.
+            err "$(eval_gettext "Restore ended with errors.
 
-Some files may not be readable, or files have been removed
-or added during the restore, or there is not enough space on \$target.")"
-#             err "Reservekopie terugzetten is geëindigd met fouten.
-
-# Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
-# of toegevoegd tijdens het terugzetten, of is er te weinig ruimte op $target.")
+Some files may not be readable,
+or were any files added or removed while restoring the backup,
+or is there not enough space on \$target.")"
             exit $err
             ;;
     esac
