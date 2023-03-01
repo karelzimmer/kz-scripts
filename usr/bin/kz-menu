@@ -524,7 +524,6 @@ function execute_command {
 
 
 function manual_actions {
-#TODO
     if [[ $title = $(gettext 'Add users') ]]; then
         text="$(gettext 'Add users'):
 
@@ -571,9 +570,8 @@ function show_commands_after_execution {
     local command=''
     local -i row=0
 
-#TODO
-    text='Het volgende is uitgevoerd:
-'
+    text="$(gettext 'The following has been executed:')
+"
     for row in "${!rows[@]}"; do
         action=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
