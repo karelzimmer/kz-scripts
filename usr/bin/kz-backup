@@ -204,7 +204,8 @@ function backup_settings_desktop_background {
 
 
 function backup_settings_favorite_apps {
-    local file=$tgtdir/Favorieten
+    local file
+    file=$tgtdir/$(gettext 'Favorites')
 
     gsettings get org.gnome.shell favorite-apps  > "$file" |& $logcmd || true
 }
