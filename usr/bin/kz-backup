@@ -135,7 +135,6 @@ be placed.")
                 err "$(eval_gettext "No USB medium found.
 
 Connect a USB medium, and then start \$operation again.")"
-#TODO
                 exit $err
             fi
         fi
@@ -145,8 +144,7 @@ Connect a USB medium, and then start \$operation again.")"
 Now connected:
 \$medium
 
-Disconnect media via Files, then \$operation backup.")"
-#TODO
+Disconnect media via Files, then restart \$operation.")"
             exit $err
         fi
         target=$medium/backup-$HOSTNAME-$USER
