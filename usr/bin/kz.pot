@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-01 13:57+0100\n"
+"POT-Creation-Date: 2023-03-01 17:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -768,9 +768,6 @@ msgstr ""
 msgid "The following will be executed:"
 msgstr ""
 
-msgid "Continue?"
-msgstr ""
-
 msgid "Yes"
 msgstr ""
 
@@ -831,4 +828,24 @@ msgid ""
 "\n"
 "Connect a USB medium with the directory backup-$HOSTNAME-$USER, and then "
 "start restore again."
+msgstr ""
+
+msgid "Backup copy will be RESTORED."
+msgstr ""
+
+msgid "Continue? [y/N]: "
+msgstr ""
+
+msgid "Restore settings"
+msgstr ""
+
+msgid "Preparing restore (this can take a while)"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Restore backup has ended with errors.\n"
+"\n"
+"Some files may not be readable, or files have been removed\n"
+"or added during the restore, or there is not enough space on $target."
 msgstr ""

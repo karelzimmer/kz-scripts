@@ -114,7 +114,6 @@ function check_input {
 function process_input {
     # shellcheck disable=SC2034
     local operation=backup
-    local prompt=''
     local restore=false
 
     if $option_source; then
@@ -161,24 +160,20 @@ start restore again.")"
 
     kz_common.check_on_ac_power
 
-#TODO
-    title='Back-up terugzetten'
-    text='Back-up wordt TERUGGEZET.
-'
-#TODO
-    prompt='Doorgaan?'
+    title=$(gettext 'Restore backup')
+    text="$(gettext 'Backup copy will be RESTORED.')
+"
     if $option_gui; then
         text+="
-$prompt"
-#TODO Ja/Nee
-        if zenity   --question                  \
-                    --no-markup                 \
-                    --width         600         \
-                    --height        50          \
-                    --title         "$title"    \
-                    --text          "$text"     \
-                    --ok-label      'Ja'        \
-                    --cancel-label  'Nee'       2> >($logcmd); then
+$(gettext 'Continue')?"
+        if zenity   --question                          \
+                    --no-markup                         \
+                    --width         600                 \
+                    --height        50                  \
+                    --title         "$title"            \
+                    --text          "$text"             \
+                    --ok-label      "$(gettext 'Yes')"  \
+                    --cancel-label  "$(gettext 'No')"   2> >($logcmd); then
             restore=true
         else
             restore=false
@@ -186,8 +181,7 @@ $prompt"
     else
         info "$text"
         while true; do
-#TODO j/N
-            read -rp "$prompt [j/N]: "
+            read -rp "$(gettext 'Continue? [y/N]: ')"
             case $REPLY in
                 j*|J*)
                     restore=true
@@ -207,9 +201,8 @@ $prompt"
     if $restore; then
         restore_backup
         if ! $option_dry_run; then
-#TODO
-            title='Instellingen terugzetten'
-            text='Instellingen terugzetten'
+            title=$(gettext 'Restore settings')
+            text=$title
             if $option_gui; then
                 restore_settings                |
                 zenity  --progress              \
@@ -235,8 +228,7 @@ function restore_backup {
     local -i rsync_rc=0
     local target=$HOME
 
-#TODO
-    text='Restore voorbereiden (dit kan even duren)'
+    text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
         rsync   --archive               \
                 --verbose               \
@@ -268,12 +260,15 @@ function restore_backup {
             return $ok
             ;;
         *)
-#TODO
-            err "Back-up terugzetten is geëindigd met fouten.
+#TODO Lijkt heel erg op dezelfde msg in kz-backup....
+            err "$(eval_gettext "Restore backup has ended with errors.
 
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
-of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig
-ruimte op $target."
+Some files may not be readable, or files have been removed
+or added during the restore, or there is not enough space on \$target.")"
+#             err "Reservekopie terugzetten is geëindigd met fouten.
+
+# Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
+# of toegevoegd tijdens het terugzetten, of is er te weinig ruimte op $target.")
             exit $err
             ;;
     esac

@@ -452,7 +452,7 @@ $row. $action ($command)"
     done
     text+='
 '
-    prompt=$(gettext 'Continue?')
+    prompt="$(gettext 'Continue')?"
     if $option_gui; then
         text+="
 $prompt"
@@ -549,7 +549,7 @@ and click
 2. Click Unlock.
 3. Click the image for the user.
 4. Click Select a file.
-5. Select User photo in Personal folder / Settings.
+5. Select Userphoto in Personal folder / Settings.
 6. Close the Users screen.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
