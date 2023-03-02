@@ -347,15 +347,15 @@ function term_script {
         if [[ $rc -eq $ok ]]; then
 #TODO
             info "
-$(gettext 'The backup has been restored.
+$(gettext 'The backup has been restored.')
 
-The USB medium can be removed.')"
+$(gettext 'The USB medium can be removed.')"
         else
 #TODO
             warn "
-$(gettext 'The backup has been restored.
+$(gettext 'The backup has been restored.')
 
-Disconnect the USB medium yourself (safely!).')"
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
         fi
     else
 #TODO 3x The backup has been restored -> 1 x!! + kz backup!!

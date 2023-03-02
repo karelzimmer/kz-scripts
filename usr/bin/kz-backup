@@ -420,14 +420,14 @@ $text..."
         fi
         if [[ $rc -eq $ok ]]; then
             info "
-$(gettext 'The backup has been made.
+$(gettext 'The backup has been made.')
 
-The USB medium can be removed.')"
+$(gettext 'The USB medium can be removed.')"
         else
             warn "
-$(gettext 'The backup has been made.
+$(gettext 'The backup has been made.')
 
-Disconnect the USB medium yourself (safely!).')"
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
         fi
     else
         info "
