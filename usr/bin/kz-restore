@@ -345,20 +345,17 @@ function term_script {
             udisksctl power-off --block-device "$dev" |& $logcmd || rc+=$?
         fi
         if [[ $rc -eq $ok ]]; then
-#TODO
             info "
 $(gettext 'The backup has been restored.')
 
 $(gettext 'The USB medium can be removed.')"
         else
-#TODO
             warn "
 $(gettext 'The backup has been restored.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
         fi
     else
-#TODO 3x The backup has been restored -> 1 x!! + kz backup!!
         info "
 $(gettext 'The backup has been restored.')"
     fi
