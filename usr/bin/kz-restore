@@ -183,7 +183,7 @@ $(gettext 'Continue')?"
         while true; do
             read -rp "$(gettext 'Continue? [y/N]: ')"
             case $REPLY in
-                j*|J*)
+                y*|Y*|j*|J*)
                     restore=true
                     break
                     ;;
@@ -272,8 +272,8 @@ or is there not enough space on \$target.")"
 
 
 function restore_settings {
-#TODO
-    local tgtdir=$HOME/Instellingen
+    local tgtdir
+    tgtdir=$HOME/$(gettext 'Settings')
 
     restore_settings_desktop_background
     restore_settings_favorite_apps
@@ -284,8 +284,8 @@ function restore_settings {
 
 
 function restore_settings_desktop_background {
-#TODO
-    local file=$tgtdir/Achtergrond
+    local file
+    file=$tgtdir/$(gettext 'Background')
 
     if [[ -f $file ]]; then
         gsettings set org.gnome.desktop.background picture-uri "file://$file"
@@ -294,8 +294,8 @@ function restore_settings_desktop_background {
 
 
 function restore_settings_favorite_apps {
-#TODO
-    local file=$tgtdir/Favorieten
+    local file
+    file=$tgtdir/$(gettext 'Favorites')
 
     if [[ -f $file ]]; then
         gsettings set org.gnome.shell favorite-apps "$(cat "$file")"

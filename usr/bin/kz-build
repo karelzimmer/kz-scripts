@@ -192,7 +192,7 @@ function build_uploads {
                 "${uploads_targets[kz-scripts]}"    |& $logcmd
             # Craete a PDF.
             if grep --quiet --regexp='^''.TH ' "$file"; then
-                # Man-page file.
+                # Man page file.
                 man --troff "${uploads_sources[kz-scripts]}/$file"  |
                 ps2pdf - "${uploads_targets[kz-scripts]}/$file.pdf" |& $logcmd
             else

@@ -178,7 +178,7 @@ Disconnect media via Files, then restart \$operation.")"
 function backup_settings {
     local tgtdir
     tgtdir=$HOME/$(gettext 'Settings')
-    # Instellingen
+    # Settings.
 
     mkdir --parents "$tgtdir" |& $logcmd
     backup_settings_desktop_background
