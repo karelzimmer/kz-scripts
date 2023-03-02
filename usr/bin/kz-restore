@@ -310,13 +310,12 @@ function term_script {
     sync |& $logcmd || rc+=$?
     text=''
     if $option_dry_run; then
-#TODO
-        err "De back-up is NIET teruggezet (DRY RUN)."
+        err "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $err
     fi
     if [[ $source_medium == /media/* ]]; then
 #TODO
-        text='Het usb-medium afkoppelen'
+        text=$(gettext 'Disconnect the USB media')
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
@@ -348,20 +347,20 @@ function term_script {
         if [[ $rc -eq $ok ]]; then
 #TODO
             info "
-De back-up is teruggezet.
+$(gettext 'The backup has been restored.
 
-Het usb-medium kan verwijderd worden."
+The USB medium can be removed.')"
         else
 #TODO
             warn "
-De back-up is teruggezet.
+$(gettext 'The backup has been restored.
 
-Koppel zelf (veilig!) het usb-medium af."
+Disconnect the USB medium yourself (safely!).')"
         fi
     else
-#TODO
+#TODO 3x The backup has been restored -> 1 x!! + kz backup!!
         info "
-De back-up is gemaakt."
+$(gettext 'The backup has been restored.')"
     fi
     exit $ok
 }

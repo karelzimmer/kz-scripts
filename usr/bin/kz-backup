@@ -389,7 +389,7 @@ $text..."
         exit $err
     fi
     if [[ $target_medium == /media/* ]]; then
-        text=$(gettext 'Unplug the USB media')
+        text=$(gettext 'Disconnect the USB media')
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
