@@ -17,16 +17,21 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-setup'
-declare program_desc='Apps instellen'
+declare program_desc
+program_desc=$(gettext 'Set up apps')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
-usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files]
-                  [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
-                  $options_usage
-                  [APP...] [BESTAND...]"
+#TODO
+usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
+[-f|--files]
+                [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
+                \$options_usage
+                [APP...] [FILE...]")
 declare help
-help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
+#TODO
+help="$(eval_gettext "Usage: \$display_name [OPTION...] [APP...] [FILE...]")
+
 
 $program_desc.
 
@@ -35,14 +40,17 @@ $(gettext 'Options:')
   -c, --cat      $(gettext 'show contents of files')
   -f, --files    $(gettext 'show list of files')
   -g, --gui      $(gettext 'starts in graphics mode')
-  -r, --reset    reset apps
-      --server   stel apps in voor een server
+  -r, --reset    $(gettext 'set apps on default values')
+      --server   $(gettext 'setup apps for a server')
   -s, --simulate $(gettext 'show commands')
 $options_help
 
-Argumenten:
-  APP            stel APPs in
-  BESTAND        verwerk BESTANDen"
+$(gettext 'Arguments:
+  APP            setup APPs
+  FILE           process FILEs')"
+# Argumenten:
+#   APP            stel APPs in
+#   BESTAND        verwerk BESTANDen"
 declare options_short+='ace:fgrs'
 declare options_long+=',apps,cat,files,gui,reset,server,simulate'
 
@@ -323,7 +331,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
-        warn 'Geen instelbestanden gevonden.'
+        warn "$(gettext 'No setting files found.')"
         exit $err
     fi
     if [[ -f $dfltfile_2 ]]; then
@@ -360,10 +368,10 @@ $(
 $usage_line"
     else
         printf '%s\n' "
-Om de APPs in te stellen voer uit: ${blue}$display_name APP...${normal}
-Om het instellen van APPs te simuleren voer uit: ${blue}$display_name \
+$(gettext 'To setup the APPs run:') ${blue}$display_name APP...${normal}
+$(gettext 'To simulate resetting APPs execute:') ${blue}$display_name \
 --simulate APP...${normal}
-Om de inhoud van het instelbestand voor APPs te bekijken voer uit: \
+$(gettext 'To view the contents of the APPs setup file execute:') \
 ${blue}$display_name --cat APP...${normal}"
     fi
 )"

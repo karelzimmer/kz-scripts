@@ -368,10 +368,10 @@ $(
 $usage_line"
     else
         printf '%s\n' "
-$(gettext 'To install the APPs run'): ${blue}$display_name APP...${normal}
-$(gettext 'To simulate installing APPs execute'): ${blue}$display_name \
+$(gettext 'To install the APPs run:') ${blue}$display_name APP...${normal}
+$(gettext 'To simulate installing APPs execute:') ${blue}$display_name \
 --simulate APP...${normal}
-$(gettext 'To view the contents of the APPs installation file execute'): \
+$(gettext 'To view the contents of the APPs installation file execute:') \
 ${blue}$display_name --cat APP...${normal}"
     fi
 )"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 09:05+0100\n"
+"POT-Creation-Date: 2023-03-03 08:06+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -647,7 +647,7 @@ msgid "delete apps"
 msgstr "verwijder apps"
 
 msgid "install apps for a server"
-msgstr "apps voor een server installeren"
+msgstr "installeer apps voor een server"
 
 msgid "show commands"
 msgstr "toon opdrachten"
@@ -693,14 +693,15 @@ msgstr ""
 msgid "     0   No apps found."
 msgstr "     0   Geen apps gevonden."
 
-msgid "To install the APPs run"
-msgstr "Om de APPs te installeren voer uit"
+msgid "To install the APPs run:"
+msgstr "Om de APPs te installeren voer uit:"
 
-msgid "To simulate installing APPs execute"
-msgstr "Om het installeren van APPs te simuleren voer uit"
+msgid "To simulate installing APPs execute:"
+msgstr "Om het installeren van APPs te simuleren voer uit:"
 
-msgid "To view the contents of the APPs installation file execute"
-msgstr "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit"
+msgid "To view the contents of the APPs installation file execute:"
+msgstr ""
+"Om de inhoud van het installatiebestand voor APPs te bekijken voer uit:"
 
 msgid ""
 "The following FILEs are available:\n"
@@ -1023,3 +1024,42 @@ msgstr "De reservekopie is NIET teruggezet (DRY RUN)."
 
 msgid "The backup has been restored."
 msgstr "De reservekopie is teruggezet."
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files]\n"
+"                [-g|--gui] [-r|--reset] {--server] [-s|--simulate]\n"
+"                $options_usage\n"
+"                [APP...] [FILE...]"
+msgstr ""
+"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                    [-r|--remove] [--server] [-s|--simulate]\n"
+"                    $options_usage\n"
+"                    [APP...] [BESTAND...]"
+
+msgid "set apps on default values"
+msgstr "stel apps in op standaardwaarden"
+
+msgid ""
+"Arguments:\n"
+"  APP            setup APPs\n"
+"  FILE           process FILEs"
+msgstr ""
+"Argumenten:\n"
+"  APP            stel APPs in\n"
+"  BESTAND        verwerk BESTANDen"
+
+msgid "setup apps for a server"
+msgstr "stel apps in voor een server"
+
+msgid "No setting files found."
+msgstr "Geen instelbestanden gevonden.'"
+
+msgid "To setup the APPs run:"
+msgstr "Om de APPs in te stellen voer uit"
+
+msgid "To simulate resetting APPs execute:"
+msgstr "Om het instellen van APPs te simuleren voer uit:"
+
+msgid "To view the contents of the APPs setup file execute:"
+msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"

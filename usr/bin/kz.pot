@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 09:06+0100\n"
+"POT-Creation-Date: 2023-03-03 08:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -569,13 +569,13 @@ msgstr ""
 msgid "     0   No apps found."
 msgstr ""
 
-msgid "To install the APPs run"
+msgid "To install the APPs run:"
 msgstr ""
 
-msgid "To simulate installing APPs execute"
+msgid "To simulate installing APPs execute:"
 msgstr ""
 
-msgid "To view the contents of the APPs installation file execute"
+msgid "To view the contents of the APPs installation file execute:"
 msgstr ""
 
 msgid ""
@@ -849,4 +849,36 @@ msgid "The backup was NOT restored (DRY RUN)."
 msgstr ""
 
 msgid "The backup has been restored."
+msgstr ""
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files]\n"
+"                [-g|--gui] [-r|--reset] {--server] [-s|--simulate]\n"
+"                $options_usage\n"
+"                [APP...] [FILE...]"
+msgstr ""
+
+msgid "set apps on default values"
+msgstr ""
+
+msgid ""
+"Arguments:\n"
+"  APP            setup APPs\n"
+"  FILE           process FILEs"
+msgstr ""
+
+msgid "setup apps for a server"
+msgstr ""
+
+msgid "No setting files found."
+msgstr ""
+
+msgid "To setup the APPs run:"
+msgstr ""
+
+msgid "To simulate resetting APPs execute:"
+msgstr ""
+
+msgid "To view the contents of the APPs setup file execute:"
 msgstr ""
