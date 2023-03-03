@@ -114,7 +114,7 @@ function check_input {
         exit $err
     fi
 
-    # Signed up as a developer?
+    # Logged on as developer?
     if ! kz_common.developer check; then
         kz_common.developer report
         exit $err

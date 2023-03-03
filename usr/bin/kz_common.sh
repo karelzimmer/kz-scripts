@@ -140,9 +140,9 @@ run \$display_name.")"
 
 
 function kz_common.check_user_sudo {
-    # Mag gebruiker sudo uitvoeren?
+    # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then
-        # Voor de "grace"-periode van sudo, of als root.
+        # For the "grace" period of sudo, or as a root.
         return $ok
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $ok
@@ -156,7 +156,7 @@ function kz_common.developer {
     local action=${1:-check}
 
     if [[ $action = 'check' ]]; then
-        # Aangemeld als ontwikkelaar?
+        # Logged on as developer?
         if  [[ $USER = 'karel' && $HOSTNAME == pc?? ]]; then
             return $ok
         else
@@ -202,10 +202,6 @@ function kz_common.init_script {
 --RAW-CONTROL-CHARS --prompt=M$(eval_gettext "Text output \$display_name \
 ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
 (press h for help or q to quit)")"
-#     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
-# --RAW-CONTROL-CHARS --prompt=M$(gettext 'Text output') $display_name \
-# ?lt$(gettext "line %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
-# (press h for help or q to quit)")"
     usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
 }

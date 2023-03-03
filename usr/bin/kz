@@ -22,7 +22,7 @@ program_desc=$(gettext 'Run command')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
-usage=$(eval_gettext "Usage: \$display_name OPDRACHT [ARGUMENT...]
+usage=$(eval_gettext "Usage: \$display_name COMMAND [ARGUMENT...]
    or: \$display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")
 
 declare help
@@ -52,8 +52,8 @@ declare exec_program_name=''
 ###############################################################################
 
 function check_input {
-    # Hier geen getopt zoals in alle andere scripts; eventuele opgegeven opties
-    # in ARGUMENT, met kz OPDRACHT ARGUMENT, zijn voor OPDRACHT, niet voor kz.
+    # No getopt here like in all other scripts; any specified options in
+    # ARGUMENT, with kz COMMAND ARGUMENT, are for COMMAND, not for kz.
     if [[ -z "$*" ]]; then
         printf  "%s\n" "$usage"
         exit $err

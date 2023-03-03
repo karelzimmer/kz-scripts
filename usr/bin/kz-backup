@@ -384,7 +384,6 @@ $text..."
 
     text=''
     if $option_dry_run; then
-#FIME
         err "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $err
     fi

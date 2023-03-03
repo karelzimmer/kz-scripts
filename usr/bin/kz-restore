@@ -314,7 +314,6 @@ function term_script {
         exit $err
     fi
     if [[ $source_medium == /media/* ]]; then
-#TODO
         text=$(gettext 'Disconnect the USB media')
         dev='/dev/'$(
             lsblk   --ascii             |

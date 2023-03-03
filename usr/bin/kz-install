@@ -601,7 +601,6 @@ function term_script {
 
     if ! $commands_found; then
         info "$(gettext 'No commands to execute.' )"
-        # Geen opdrachten om uit te voeren.'
     elif $execute_commands; then
         if [[ $maxrc -ne $ok ]]; then
             err "$(eval_gettext "One or more commands went wrong.

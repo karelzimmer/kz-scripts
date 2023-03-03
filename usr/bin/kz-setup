@@ -22,14 +22,12 @@ program_desc=$(gettext 'Set up apps')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
-#TODO
 usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
 [-f|--files]
                 [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
                 \$options_usage
                 [APP...] [FILE...]")
 declare help
-#TODO
 help="$(eval_gettext "Usage: \$display_name [OPTION...] [APP...] [FILE...]")
 
 
@@ -48,9 +46,6 @@ $options_help
 $(gettext 'Arguments:
   APP            setup APPs
   FILE           process FILEs')"
-# Argumenten:
-#   APP            stel APPs in
-#   BESTAND        verwerk BESTANDen"
 declare options_short+='ace:fgrs'
 declare options_long+=',apps,cat,files,gui,reset,server,simulate'
 

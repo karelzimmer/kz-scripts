@@ -79,7 +79,7 @@ function check_input {
         exit $err
     fi
 
-    # Aangemeld als ontwikkelaar?
+    # Logged on as developer?
     if ! kz_common.developer check; then
         kz_common.developer report
         exit $err
@@ -147,8 +147,6 @@ function check_code {
         err "
 In $script:
 $(gettext "    Unknown script. Function check_code cannot check script code.")"
-# In $script:
-#     Onbekend script.  Functie check_code kan scriptcode niet controleren."
         maxrc=$err
     fi
 }
@@ -183,14 +181,14 @@ $(eval_gettext "    A line is longer than \$max_line_length \
 function check_record_types {
     local wrong_record=''
 
-    # Kijk naar regels die beginnen met #1 t/m #9.
-    # Goed:
+    # Look at lines that start with #1 to #9.
+    # Ok:
     # #1 en #2
-    # #1 foo (bar)              (met optie -a, --app tonen en verwerken)
-    # #1-foo (bar)              (met optie -a, --app niet tonen, wel verwerken)
-    # #2 Verwijd./reset opdracht
-    # Fout:
-    # De rest :-)
+    # #1 foo              (with option -a, --app: show and process foo)
+    # #1-foo              (woth option -a, --app: do not show, but process foo)
+    # #2 Remove/reset command
+    # Wrong:
+    # The rest :-)
     wrong_record=$(
         grep --regexp='#[1-9]' "$script" --line-number  |
         grep --regexp='#[1-2]$' --invert-match          |
@@ -224,8 +222,9 @@ function check_shellcheck {
 function check_tags {
     if grep --quiet             \
             --word-regexp       \
-            --regexp='FIXME'':' \
-            --regexp='TODO'':'  \
+            --regexp='TODO'     \
+            --regexp='FIXME'    \
+            --regexp='BUG'      \
             "$script"; then
         warn "
 In $script:
@@ -234,8 +233,9 @@ $(gettext '    Flagged annotation found.')
 $(
     grep    --line-number           \
             --word-regexp           \
-            --regexp='FIXME'':'     \
-            --regexp='TODO'':'      \
+            --regexp='TODO'         \
+            --regexp='FIXME'        \
+            --regexp='BUG'          \
             "$script"               |
     nl      --number-width=4        \
             --number-separator=''   \

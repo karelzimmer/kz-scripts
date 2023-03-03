@@ -175,7 +175,7 @@ msgstr "Opdracht uitvoeren"
 
 #, sh-format
 msgid ""
-"Usage: $display_name OPDRACHT [ARGUMENT...]\n"
+"Usage: $display_name COMMAND [ARGUMENT...]\n"
 "   or: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
 msgstr ""
 "Gebruik: $display_name OPDRACHT [ARGUMENT...]\n"
