@@ -31,9 +31,11 @@ $program_desc.
 $(gettext 'Options:')
 $options_help"
 
+declare deb_repo=$HOME/kz-deb
+declare docs_repo=$HOME/kz-docs
 declare scripts_repo=$HOME/kz-scripts
 declare uploads_repo=$HOME/kz-uploads
-declare uploads_distdir=$uploads_repo/dist
+declare uploads_repo_distdir=$uploads_repo/dist
 
 
 ###############################################################################
@@ -91,6 +93,7 @@ function check_input {
 
 function process_input {
     info '* CHECK *'
+    check_branch
     check_names
     check_scripts
     info '
@@ -105,10 +108,21 @@ function process_input {
 }
 
 
+function check_branch {
+    for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+        cd "$repo"
+        if [[ $(git branch --show-current) != 'main' ]]; then
+            err "$(eval_gettext "Repo \$repo must be on branch main.")"
+            gitstat
+            exit $err
+        fi
+    done
+
+}
+
+
 function check_names {
     local -i check_rc=0
-    local deb_repo=$HOME/kz-deb
-    local docs_repo=$HOME/kz-docs
     local app_uploads_repo=$HOME/kz-uploads/app
 
     info "$(gettext '* check filenames (kz ckname)...')"
@@ -155,7 +169,7 @@ $(gettext 'Fix all the messages above and then restart deploy.')"
 
 function upload_website {
     local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=$uploads_distdir
+    local ftp_from=$uploads_repo_distdir
     local ftp_to=/httpdocs
     local ftp_opts='--reverse --delete --verbose'
     local ftp_exclude='--exclude icaclient_20.04.0.21_amd64.deb'
