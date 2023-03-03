@@ -91,6 +91,7 @@ function check_input {
 
 function process_input {
     info '* CHECK *'
+    check_branch
     check_names
     check_scripts
     info '
@@ -102,6 +103,20 @@ function process_input {
     info '
 * INSTALL *'
     install_package
+}
+
+
+function check_branch {
+    :
+    # ?
+    # for repo in $docs_repo $scripts_repo $deb_repo $uploads_repo; do
+    #     cd "$repo"
+    #     if [[ $(git branch --show-current) != 'main' ]]; then
+    #         err "$(eval_gettext "Repo \$repo must be on branch main.")"
+    #         gitstat
+    #         exit $err
+    #     fi
+    # done
 }
 
 
