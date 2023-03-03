@@ -522,9 +522,9 @@ function process_command_record {
             text="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
             printf '%s\n' "$text"
         else
-            # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
+            # Terminate text in Terminal due to update status.
             #  <--------------- tput cols --------------->
-            # '[werk] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
+            # '[work] [ 1/1 ] [ 1] Too long description...' <=== on 1 line
             #  <------- 20 ------->                    <3>
             desc_maxlen=$(($(tput cols) - 20))
             if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
@@ -591,7 +591,8 @@ function execute_command {
 
 
 function term_script {
-    local action='instellen'
+    local action
+    action=$(gettext 'setup')
 
     if ! $commands_found; then
         info "$(gettext 'No commands to execute.' )"
@@ -604,7 +605,7 @@ ${blue}$logcmd_check${normal}"
             exit $err
         else
             if $option_reset; then
-                action='resetten'
+                action=$(gettext 'reset' )
             fi
             info "
 $(eval_gettext "Apps \$action completed.")"

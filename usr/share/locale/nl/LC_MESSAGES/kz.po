@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 08:19+0100\n"
+"POT-Creation-Date: 2023-03-03 08:26+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1056,3 +1056,9 @@ msgstr "Om het instellen van APPs te simuleren voer uit:"
 
 msgid "To view the contents of the APPs setup file execute:"
 msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"
+
+msgid "setup"
+msgstr "instellen"
+
+msgid "reset"
+msgstr "resetten"
