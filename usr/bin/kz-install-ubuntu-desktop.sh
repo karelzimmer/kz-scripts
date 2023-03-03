@@ -1,12 +1,13 @@
 # shellcheck shell=bash
 ###############################################################################
-# Installatiebestand voor Ubuntu desktop.
+# Install file for Ubuntu desktop.
 #
-# Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-apport (genereren van crashrapporten)
+#1-apport
+## Stop generating crash reports
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
@@ -14,51 +15,58 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #2 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 #2 sudo systemctl enable --now apport.service
 
-#1-force-x11 (gebruik X11 i.p.v. Wayland)
-## Met wayland issues met afspelen video en TeamViewer.
-## check: echo $XDG_SESSION_TYPE: x11 (i.p.v wayland)
+#1-force-x11
+## UseX 11 instead of Wayland
+## With wayland issues with video playback and TeamViewer
+## To check execute: echo $XDG_SESSION_TYPE (should output 'x11')
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
-#1 google-chrome (webbrowser)
-## Extensies en apps worden automatisch geïnstalleerd met /etc/opt/chrome/policies/managed/kz.json uit "kz.deb".
+#1 google-chrome
+## Webbrowser
+## Extensions and apps are automatically installed with /etc/opt/chrome/policies/managed/kz.json from "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
-## Installeer ook chrome-gnome-shell om extensions.gnome.org te laten werken.
+## Also install chrome-gnome-shell to make extensions.gnome.org work.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
-## De installatie overschrijft de zojuist toegevoegde source-list.
+## The installation overwrites the newly added source-list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-## De installatie voegt een apt-key toe die niet meer nodig is.
+## The installation adds an apt-key that is no longer needed.
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 #2 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
 
-#1 libreoffice (kantoorpakket)
+#1 libreoffice
+## Office suite
 sudo apt-get install --yes aspell-nl libreoffice
 #2 sudo apt-get remove --yes aspell-nl libreoffice
 
-#1-restricted-addons (niet-vrije pakketten)
+#1-restricted-addons
+## Non-free packages
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt autoremove --yes
 
-#1 skype (beeldbellen)
+#1 skype
+## Video call
 sudo snap install --classic skype
 #2 sudo snap remove skype
 
-#1 spotify (muziekspeler)
+#1 spotify
+## Music player
 sudo snap install spotify
 #2 sudo snap remove spotify
 
-#1 teamviewer (afstandsbediening)
+#1 teamviewer
+## Remote control
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
-## De installatie voegt een apt-key toe die niet meer nodig is.
+## The installation adds an apt-key that is no longer needed.
 sudo apt-key del 0C1289C0 DEB49217
 #2 sudo apt-get remove --yes teamviewer
 #2 sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer.gpg*

@@ -1,19 +1,24 @@
 #!/usr/bin/python3
 """
-Systeem bijwerken.
+Update system.
 
-Dit script voert een repair en update uit.
+This script performs a repair and update.
 """
 ###############################################################################
-# Systeem bijwerken.
+# Update system.
 #
-# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+import gettext
 import kz_common
 import subprocess
 import sys
+
+gettext.bindtextdomain('kz', '/usr/share/locale')
+gettext.textdomain('kz')
+_ = gettext.gettext
 
 
 ###############################################################################
@@ -21,7 +26,7 @@ import sys
 ###############################################################################
 
 program_name = 'kz-update'
-program_desc = 'Systeem bijwerken'
+program_desc = (_('Update system'))
 display_name = program_name.replace('kz-', 'kz ')
 
 
@@ -113,8 +118,8 @@ done'
 def check_reboot():
     try:
         with open('/var/run/reboot-required') as fh:
-            print('\n*** De computer moet herstarten om het installeren van '
-                  'updates af te ronden ***')
+            print('\n' + _('*** The computer must restart to complete the '
+                           'installation of updates ***'))
     except FileNotFoundError:
         pass
     except Exception as ex:
@@ -130,7 +135,7 @@ kz_common.process_options(program_name, program_desc, display_name)
 
 kz_common.check_on_ac_power(program_name)
 
-kz_common.check_user_root(display_name)
+kz_common.check_user_root(program_name, display_name)
 
 perform_repair()
 

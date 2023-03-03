@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Back-up maken.
+# Create backup.
 #
-# Geschreven in 2007 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2007 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 set -o errexit
@@ -17,21 +17,24 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-backup'
-declare program_desc='Back-up maken'
+declare program_desc
+program_desc=$(gettext 'Create backup')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [-d|--dry-run] [-g|--gui] \
-[-t|--target=DOELMAP]
-                   $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+declare usage
+usage="$(eval_gettext "Usage: \$display_name [-d|--dry-run] \
+[-g|--gui] [-t|--target=DIRECTORY]")
+                 $options_usage"
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
-  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
-  -g, --gui      start in grafische modus
-  -t, --target=DOELMAP
-                 plaats back-up in DOELMAP
+$(gettext 'Options:') 
+  -d, --dry-run  $(gettext 'perform a test run without making any changes')
+  -g, --gui      $(gettext 'starts in graphics mode')
+$(gettext '  -t, --target=DIRECTORY
+                 put backup in DIRECTORY')
 $options_help"
 declare options_short+='dgt:'
 declare options_long+=',dry-run,gui,target:'
@@ -101,18 +104,21 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf  "$display_name: %s: %s\n$usage_line\n" \
-                "$*" 'argumenten zijn niet toegestaan'
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 }
 
 
 function process_input {
+    # shellcheck disable=SC2034
+    local operation=backup
+
     if $option_target; then
         if ! [[ -d $target_argument ]]; then
-            printf  "$display_name: %s: %s\n$usage_line\n" \
-                    "$target_argument" 'map bestaat niet'
+            printf  "$display_name: $target_argument: %s\n$usage_line\n" \
+                    "$(gettext 'directory does not exist')"
             exit $err
         fi
         target=$target_argument/backup-$HOSTNAME-$USER
@@ -120,24 +126,25 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            text="Koppel het usb-medium aan waarop de back-up wordt geplaatst."
+            text=$(gettext "Connect the USB medium on which the backup will \
+be placed.")
             warn "$text"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err 'Geen usb-medium gevonden.
+                err "$(eval_gettext "No USB medium found.
 
-Koppel een usb-medium aan, en start daarna backup opnieuw.'
+Connect a USB medium, and then start \$operation again.")"
                 exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            err "Koppel slechts één usb-medium aan.
+            err "$(eval_gettext "Connect only one USB medium.
 
-Nu aangekoppeld zijn:
-$medium
+Now connected:
+\$medium
 
-Koppel media af via Bestanden, en start daarna backup opnieuw."
+Disconnect media via Files, then restart \$operation.")"
             exit $err
         fi
         target=$medium/backup-$HOSTNAME-$USER
@@ -147,8 +154,8 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
     kz_common.check_on_ac_power
 
     if ! $option_dry_run; then
-        title='Instellingen veiligstellen'
-        text='Instellingen veiligstellen'
+        title=$(gettext 'Secure settings')
+        text=$title
         if $option_gui; then
             backup_settings                 |
             zenity  --progress              \
@@ -169,7 +176,9 @@ Koppel media af via Bestanden, en start daarna backup opnieuw."
 
 
 function backup_settings {
-    local tgtdir=$HOME/Instellingen
+    local tgtdir
+    tgtdir=$HOME/$(gettext 'Settings')
+    # Settings.
 
     mkdir --parents "$tgtdir" |& $logcmd
     backup_settings_desktop_background
@@ -183,7 +192,8 @@ function backup_settings {
 
 
 function backup_settings_desktop_background {
-    local file=$tgtdir/Achtergrond
+    local file
+    file=$tgtdir/$(gettext 'Background')
     local picture_file=''
 
     picture_file=$(
@@ -197,7 +207,8 @@ function backup_settings_desktop_background {
 
 
 function backup_settings_favorite_apps {
-    local file=$tgtdir/Favorieten
+    local file
+    file=$tgtdir/$(gettext 'Favorites')
 
     gsettings get org.gnome.shell favorite-apps  > "$file" |& $logcmd || true
 }
@@ -205,16 +216,19 @@ function backup_settings_favorite_apps {
 
 function backup_settings_installed_apps {
     local file=$tgtdir/Apps
-    local header1="[1/3] Deze pakketten zijn geïnstalleerd via Software, \
-met een opdracht zoals
-      'sudo apt --install <pakket|bestand>', of met kz install:"
-    local header2="[2/3] Deze snaps zijn geïnstalleerd via Software, \
-met '[sudo] install <snap>',
-      of met kz install:"
-    local header3="[3/3] Deze pakketbronnen zijn toegevoegd met de \
-installatie van een pakket, met
-      de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>', of
-      met kz install:"
+    local header1
+    header1="$(gettext "[1/3] These packages are installed via Add or Remove \
+Programs, with a command
+      such as 'sudo apt --install <package|file>', or with kz install:")"
+    local header2
+    header2="$(gettext "[2/3] These snaps are installed via Add or Remove \
+Programs,
+      with '[sudo] install <snap>', or with kz install:")"
+    local header3
+    header3="$(gettext "[3/3] These repositories are added with the \
+installation of a package, with
+      the command 'sudo add-apt-repository ppa:<ppa-user>/<ppa-name>', or
+      with kz install:")"
     local search=/etc/apt/sources.list
 
     printf '%b\n' "$header1" > "$file"
@@ -224,7 +238,7 @@ installatie van een pakket, met
 
     printf '\n%b\n' "$header2" >> "$file"
     if ! snap list 2> >($logcmd) >> "$file"; then
-        printf '%s\n' 'snap is niet geïnstalleerd' >> "$file"
+        printf '%s\n' "$(gettext 'snap is not installed')" >> "$file"
     fi
 
     printf '\n%b\n' "$header3" >> "$file"
@@ -245,7 +259,8 @@ installatie van een pakket, met
 
 function backup_settings_user_photo {
     local srcdir=/var/lib/AccountsService/icons
-    local file=$tgtdir/Gebruikersfoto
+    local file
+    file=$tgtdir/$(gettext 'Userphoto')
 
     cp --update $srcdir/"$USER" "$file" |& $logcmd || true
 }
@@ -258,7 +273,7 @@ function create_backup {
 
     exclude=$(mktemp -t "$program_name-XXXXXXXXXX")
 
-    # Déjà Dup: Sommige locaties worden standaard genegeerd.
+    # Déjà Dup: Some locations are ignored by default.
     cat << EOF > "$exclude"
 .adobe/Flash_Player/AssetCache
 .cache
@@ -289,8 +304,10 @@ $(
     )
 EOF
 
-    title='Back-up maken'
-    text='Backup voorbereiden (dit kan even duren)'
+    title=$(gettext 'Create backup')
+    text=$(gettext 'Preparing backup (this may take a while)')
+    # title=$(gettext '')
+    # text=$(gettext '')
     if $option_gui; then
         rsync   --archive                   \
                 --verbose                   \
@@ -329,11 +346,11 @@ EOF
             return $ok
             ;;
         *)
-            err "Back-up maken is geeindigd met fouten.
+            err "$(eval_gettext "Backup ended with errors.
 
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
-of toegevoegd tijdens het maken van de back-up, of is er te weinig ruimte op
-$target."
+Some files may not be readable,
+or were any files added or removed while creating the backup,
+or is there not enough space on \$target.")"
             exit $err
             ;;
     esac
@@ -345,7 +362,8 @@ function term_script {
     local dev=''
     local -i rc=0
 
-    text='Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)'
+    text=$(gettext 'Writing data from temporary memory (this may take a \
+while)')
     if ! $option_dry_run; then
         if $option_gui; then
             sync                            |
@@ -366,11 +384,11 @@ $text..."
 
     text=''
     if $option_dry_run; then
-        err "De back-up is NIET gemaakt (DRY RUN)."
+        err "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $err
     fi
     if [[ $target_medium == /media/* ]]; then
-        text='Het usb-medium afkoppelen'
+        text=$(gettext 'Disconnect the USB media')
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
@@ -401,18 +419,18 @@ $text..."
         fi
         if [[ $rc -eq $ok ]]; then
             info "
-De back-up is gemaakt.
+$(gettext 'The backup has been made.')
 
-Het usb-medium kan verwijderd worden."
+$(gettext 'The USB medium can be removed.')"
         else
             warn "
-De back-up is gemaakt.
+$(gettext 'The backup has been made.')
 
-Koppel zelf (veilig!) het usb-medium af."
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
         fi
     else
         info "
-De back-up is gemaakt."
+$(gettext 'The backup has been made.')"
     fi
     exit $ok
 }

@@ -1,18 +1,24 @@
 # shellcheck shell=bash
+# shellcheck disable=SC2034
 ###############################################################################
-# Algemene module voor shell scripts.
+# Common module for shell scripts.
 #
-# Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+
+source /usr/bin/gettext.sh
 
 ###############################################################################
 # Constants
 ###############################################################################
 
 declare module_name='kz_common.sh'
-declare module_desc='Algemene module voor shell scripts'
+declare module_desc
+module_desc=$(gettext 'Common module for shell scripts')
 
 declare -i ok=0
 declare -i err=1
@@ -25,9 +31,10 @@ declare -i err=1
 declare options_short='huv'
 declare options_long='help,usage,version'
 declare options_usage='[-h|--help] [-u|--usage] [-v|--version]'
-declare options_help="  -h, --help     toon deze hulptekst
-  -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon de programmaversie"
+declare options_help
+options_help="  -h, --help     $(gettext 'give this help list')
+  -u, --usage    $(gettext 'give a short usage message')
+  -v, --version  $(gettext 'print program version')"
 
 declare -a cmdline_args=()
 declare less_options=''
@@ -40,7 +47,7 @@ declare text=''
 declare title=''
 declare usage_line=''
 
-# Terminalattributen, zie man terminfo.  Gebruik ${<variabele-naam>}.
+# Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
 declare blink=''
 declare blue=''
 declare cursor_invisable=''
@@ -60,22 +67,22 @@ function kz_common.check_dpkgd_snapd {
     local -i dpkg_wait=10
 
     if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        # Systeem met snaps.
+        # System with snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     /snap/core/*/var/cache/debconf/config.dat           \
                     &> /dev/null; do
-            log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
+            log "Wait ${dpkg_wait}s for another package manager to finish..."
             sleep $dpkg_wait
         done
     else
-        # Systeem zonder snaps.
+        # System without snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
                     &> /dev/null; do
-            log "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
+            log "Wait ${dpkg_wait}s for another package manager to finish..."
             sleep $dpkg_wait
         done
     fi
@@ -87,13 +94,12 @@ function kz_common.check_on_ac_power {
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        warn '
-De computer gebruikt nu alleen de accu voor de stroomvoorziening.
+        warn "
+$(gettext 'The computer now uses only the battery for power.
 
-Geadviseerd wordt om de computer aan te sluiten op het stopcontact.'
+It is recommended to connect the computer to the wall socket.')"
         kz_common.wait_for_enter
     fi
-
 }
 
 
@@ -101,8 +107,8 @@ function kz_common.wait_for_enter {
     if $option_gui; then
         return
     fi
-    read -rp '
-Druk op de Enter-toets om door te gaan [Enter]: ' < /dev/tty
+    read -rp "
+$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 }
 
 
@@ -110,7 +116,7 @@ function kz_common.check_user_root {
     local -i pkexec_rc=0
 
     if ! kz_common.check_user_sudo; then
-        info 'Reeds uitgevoerd door de beheerder.'
+        info "$(gettext 'Already performed by the administrator.')"
         exit $ok
     fi
     if [[ $UID -ne 0 ]]; then
@@ -123,8 +129,9 @@ function kz_common.check_user_root {
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
                 --priority=debug
             if ! sudo -n true &> /dev/null; then
-                printf '%s\n' "Authenticatie is vereist om \
-${display_name:-$module_name} uit te voeren."
+                text=
+                printf  '%s\n' "$(eval_gettext "Authentication is required to \
+run \$display_name.")"
             fi
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi
@@ -133,9 +140,9 @@ ${display_name:-$module_name} uit te voeren."
 
 
 function kz_common.check_user_sudo {
-    # Mag gebruiker sudo uitvoeren?
+    # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then
-        # Voor de "grace"-periode van sudo, of als root.
+        # For the "grace" period of sudo, or as a root.
         return $ok
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $ok
@@ -149,15 +156,15 @@ function kz_common.developer {
     local action=${1:-check}
 
     if [[ $action = 'check' ]]; then
-        # Aangemeld als ontwikkelaar?
+        # Logged on as developer?
         if  [[ $USER = 'karel' && $HOSTNAME == pc?? ]]; then
             return $ok
         else
             return $err
         fi
     else
-        printf '%s\n' "Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als \
-karel op pcNN (bijvoorbeeld pc01)."
+        printf '%s\n' "$(gettext "Run only as Developer, i.e. logged in as \
+karel on pcNN (e.g. pc01).")"
     fi
 }
 
@@ -170,8 +177,7 @@ function kz_common.init_script {
     set -o pipefail
 
     logcmd="systemd-cat --identifier=${program_name:-$module_name}"
-    logcmd_check="journalctl --all --boot \
---identifier=${program_name:-$module_name} \
+    logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' err
@@ -193,11 +199,11 @@ function kz_common.init_script {
 
     cmdline_args=("$@")
     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=MTekstuitvoer ${display_name:-$module_name} \
-?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e (EINDE) :?pB %pB\%. .(druk op \
-h voor hulp of q om te stoppen)"
-    usage_line="Typ '${display_name:-$module_name} --usage' voor meer \
-informatie."
+--RAW-CONTROL-CHARS --prompt=M$(eval_gettext "Text output \$display_name \
+?ltline %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
+(press h for help or q to quit)")"
+    usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
+information.")
 }
 
 
@@ -267,7 +273,7 @@ $command, code: $rc ($rc_desc)" --priority=debug
     case $signal in
         err)
             err "
-In programma $program_name is een fout opgetreden."
+$(eval_gettext "Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
         exit)
@@ -278,7 +284,7 @@ In programma $program_name is een fout opgetreden."
             ;;
         *)
             err "
-Programma $program_name is onderbroken."
+$(eval_gettext "Program \$program_name has been interrupted.")"
             exit "$rc"
             ;;
     esac
@@ -286,16 +292,17 @@ Programma $program_name is onderbroken."
 
 
 function signal_exit {
-    local apt_err="Als de pakketbeheerder apt foutmeldingen geeft, start een \
-Terminalvenster en voer uit:
+    local apt_err
+    apt_err="$(gettext 'If the package manager gives apt errors, launch \
+a Terminal window and run:')
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
 
     case $program_name in
         kz-getdeb)
-            # Verwijder niet kz en kz.1 i.v.m. script kz en man-pagina kz.1.
+            # Do not delete kz and kz.1 due to script kz and man page kz.1.
             rm --force kz.{2..99} /tmp/kz_common.sh
-            # Maar wel als in HOME, zoals beschreven in Checklist installatie.
+            # But as in HOME, as described in Checklist installation.
             cd "$HOME" || exit $err
             rm --force kz kz.1
 
@@ -357,16 +364,18 @@ function kz_common.process_options {
 
 
 function kz_common.process_option_help {
-    info "${help:-Variable help not set}
+    # shellcheck disable=SC2154
+    info "$help
 
-Typ 'man ${display_name:-$module_name}' voor meer informatie."
+$(eval_gettext "Type 'man \$display_name' for more information.")"
 }
 
 
 function kz_common.process_option_usage {
-    info "${usage:-Variable usage not set}
+    # shellcheck disable=SC2154
+    info "$usage
 
-Typ '${display_name:-$module_name} --help' voor meer informatie."
+$(eval_gettext "Type '\$display_name --help' for more information.")"
 }
 
 
@@ -378,7 +387,7 @@ function kz_common.process_option_version {
         build_id=$(cat /usr/local/etc/kz-build-id)
     fi
     program_year=$(
-        grep '# Geschreven in ' "$program_path/$program_name" |
+        grep '# Written in ' "$program_path/$program_name" |
         cut --delimiter=' ' --fields=4
         ) || true
     if [[ $program_year = '' ]]; then
@@ -386,9 +395,9 @@ function kz_common.process_option_version {
     fi
     info "$program_name (kz) 365 ($build_id)
 
-Geschreven in ${program_year:-1970} door Karel Zimmer <info@karelzimmer.nl>, \
-Creative Commons
-Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
+$(eval_gettext "Written in \$program_year by Karel Zimmer \
+<info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.")"
 }
 
 
@@ -411,16 +420,16 @@ function log {
 
 
 function info {
-    local title="Informatie ${display_name:-$module_name}"
+    local title=''
 
     if $option_gui; then
+        title=$(eval_gettext "Information \$display_name")
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($logcmd) || true
+                --text      "$@"        2> >($logcmd) || true
     else
         printf '%b\n' "$@"
     fi
@@ -429,16 +438,16 @@ function info {
 
 
 function warn {
-    local title="Waarschuwing ${display_name:-$module_name}"
+    local title=''
 
     if $option_gui; then
+        title=$(eval_gettext "Warning \$display_name")
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($logcmd) || true
+                --text      "$@"        2> >($logcmd) || true
     else
         printf "${yellow}%b\n${normal}" "$@" >&2
     fi
@@ -447,38 +456,21 @@ function warn {
 
 
 function err {
-    local title="Foutmelding ${display_name:-$module_name}"
+    local title=''
 
     if $option_gui; then
+        title=$(eval_gettext "Error message \$display_name")
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        \
-                --ok-label  'Oké'       2> >($logcmd) || true
+                --text      "$@"        2> >($logcmd) || true
     else
         printf "${red}%b\n${normal}" "$@" >&2
     fi
     log "$@" --priority=err
 }
-
-
-{
-    # Anonymous function to avoid using shellcheck directive disable=SC2034.
-    echo "$blink"
-    echo "$cursor_invisable"
-    echo "$less_options"
-    echo "$logcmd_check"
-    echo "$module_desc"
-    echo "$options_help"
-    echo "$options_long"
-    echo "$options_short"
-    echo "$options_usage"
-    echo "$rewrite_line"
-    echo "$text"
-    echo "$usage_line"
-} > /dev/null
 
 
 true

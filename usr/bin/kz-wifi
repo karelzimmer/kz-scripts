@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Wifi-gegevens tonen.
+# Show WiFi data.
 #
-# Geschreven in 2022 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2022 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 set -o errexit
@@ -17,17 +17,21 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-wifi'
-declare program_desc='Wifi-informatie tonen'
+declare program_desc
+program_desc=$(gettext 'Show WiFi data')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name $options_usage [-g|--gui]"
-declare help="Gebruik: $display_name [OPTIE...]
+declare usage
+usage="$(eval_gettext "Usage: \$display_name \$options_usage") \
+[-g|--gui]"
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
 $options_help
-  -g, --gui      start in grafische modus"
+  -g, --gui      $(gettext 'starts in graphics mode')"
 declare options_short+='g'
 declare options_long+=',gui'
 
@@ -79,8 +83,8 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf  "$display_name: %s: %s\n$usage_line\n" \
-                "$*" 'argumenten zijn niet toegestaan'
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 }
@@ -89,28 +93,29 @@ function check_input {
 function process_input {
     local nmcli_output=''
     local -i nmcli_rc=''
-    local text='Leg deze gegevens vast, en gebruik die om (later)
-verbinding te maken met het draadloze netwerk.'
+    local text
+    text=$(gettext "Record this data to connect to the wireless network \
+later.")
 
     if $option_gui; then
         if nmcli_output=$(nmcli device wifi show-password 2> >($logcmd)); then
-            info "Wifi-gegevens:
+            info "$(gettext 'WiFi data:')
 
 $nmcli_output
 
 $text"
         else
-            info 'Geen wifi-apparaat gevonden.'
+            info "$(gettext 'No WiFi device found.')"
         fi
     else
-        info 'Wifi-gegevens:
-'
+        info "$(gettext 'WiFi data:')
+"
         nmcli device wifi show-password 2> >($logcmd) || nmcli_rc=$?
         if [[ $nmcli_rc -eq 0 ]]; then
             info "
 $text"
         else
-            info 'Geen wifi-apparaat gevonden.'
+            info "$(gettext 'No WiFi device found.')"
         fi
     fi
 }

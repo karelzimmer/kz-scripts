@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# GUI wijzigen.
+# Change GUI.
 #
-# Geschreven in 2015 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2015 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 set -o errexit
@@ -17,32 +17,35 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-gset'
-declare program_desc='GUI wijzigen'
+declare program_desc
+program_desc=$(gettext 'Change GUI')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [-a|--addfavaft=FAVORITE] \
+declare usage
+usage="$(eval_gettext "Usage: \$display_name [-a|--addfavaft=FAVORITE] \
 [-b|--addfavbef=FAVORITE]
-                 [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
-                 [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]
-                 $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+               [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
+               [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]
+               \$options_usage")"
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:
   -a, --addfavaft=FAVORITE
-                 voeg FAVORITE toe aan het einde
+                 add FAVORITE at the end
   -b, --addfavbef=FAVORITE
-                 voeg FAVORITE toe aan het begin
+                 add FAVORITE at the beginning
   -d, --delfav=FAVORITE
-                 verwijder FAVORITE
-  -l, --list     toon favorieten en app-mappen
+                 delete FAVORITE
+  -l, --list     show favorites and app folders
   -r, --resetfavs
-                 reset favorieten
+                 reset favorites
   -f, --addappfolder=APPFOLDER
-                 voeg APPFOLDER toe
+                 add APPFOLDER
   -x, --delappfolder=APPFOLDER
-                 verwijder APPFOLDER
+                 delete APPFOLDER')
 $options_help"
 declare options_short+='a:b:d:lrf:x:'
 declare options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
@@ -136,8 +139,8 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf  "$display_name: %s: %s\n$usage_line\n" \
-                "$*" 'argumenten zijn niet toegestaan'
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 
@@ -276,7 +279,7 @@ function process_option_delappfolder  {
 function capture_gui_changes {
     config_a=$(mktemp -t "$program_name-A-XXXXXXXXXX.lst")
     save_configuration_database A "$config_a"
-    info 'Voer nu de wijziging uit in de grafische werkomgeving.'
+    info "$(gettext 'Now make the change in the graphical workspace.')"
     kz_common.wait_for_enter
     config_b=$(mktemp -t "$program_name-B-XXXXXXXXXX.lst")
     save_configuration_database B "$config_b"
@@ -285,6 +288,7 @@ function capture_gui_changes {
 
 
 function save_configuration_database {
+    # shellcheck disable=SC2034
     local fase=${1:-unknown}
     local output_file=${2:-unknown}
 
@@ -294,7 +298,7 @@ function save_configuration_database {
             --output="$output_file" \
             "$output_file"
 
-    info "Inhoud configuratiedatabase vastgelegd ($fase)."
+    info "$(eval_gettext "Config database content captured (\$fase).")"
 }
 
 
@@ -302,13 +306,13 @@ function report_database_changes {
     local output_file1=${1:-unknown}
     local output_file2=${2:-unknown}
 
-    info '
-WIJZIGINGen in de configuratiedatabase,
-< is de oude   instelling (A),
-> is de nieuwe instelling (B):'
+    info "$(
+gettext 'CHANGEs in the configuration database,
+< is the old setting (A),
+> is the new setting (B):')"
     diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
     info "
-Bij WIJZIGINGen voer uit: ${blue}gsettings set WIJZIGING${normal}"
+$(eval_gettext "When CHANGEs execute: \${blue}gsettings set CHANGE\${normal}")"
     rm "$config_a" "$config_b"
 }
 

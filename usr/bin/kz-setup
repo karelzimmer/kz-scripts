@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Apps instellen.
+# Set up apps.
 #
-# Geschreven in 2013 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2013 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 set -o errexit
@@ -17,30 +17,35 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-setup'
-declare program_desc='Apps instellen'
+declare program_desc
+program_desc=$(gettext 'Set up apps')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files]
-                  [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
-                  $options_usage
-                  [APP...] [BESTAND...]"
-declare help="Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]
+declare usage
+usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
+[-f|--files]
+                [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
+                \$options_usage
+                [APP...] [FILE...]")
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...] [APP...] [FILE...]")
+
 
 $program_desc.
 
-Opties:
-  -a, --apps     toon lijst van beschikbare apps
-  -c, --cat      toon inhoud van bestanden
-  -f, --files    toon lijst van bestanden
-  -g, --gui      start in grafische modus
-  -r, --reset    reset apps
-      --server   stel apps in voor een server
-  -s, --simulate toon opdrachten
+$(gettext 'Options:')
+  -a, --apps     $(gettext 'show list of available apps')
+  -c, --cat      $(gettext 'show contents of files')
+  -f, --files    $(gettext 'show list of files')
+  -g, --gui      $(gettext 'starts in graphics mode')
+  -r, --reset    $(gettext 'set apps on default values')
+      --server   $(gettext 'setup apps for a server')
+  -s, --simulate $(gettext 'show commands')
 $options_help
 
-Argumenten:
-  APP            stel APPs in
-  BESTAND        verwerk BESTANDen"
+$(gettext 'Arguments:
+  APP            setup APPs
+  FILE           process FILEs')"
 declare options_short+='ace:fgrs'
 declare options_long+=',apps,cat,files,gui,reset,server,simulate'
 
@@ -139,7 +144,7 @@ function check_input {
         esac
     done
 
-    # Verwerk argumenten.
+    # Check arguments.
     while [[ "$*" ]]; do
         if [[ "$(basename "$1")" == $program_name-*.sh ]]; then
             argument_file=true
@@ -163,12 +168,12 @@ function process_input {
     local -i file_num=0
     local file=''
 
-    # Maak tijdelijke bestanden.
+    # Create temporary files.
     apps_file=$(mktemp -t "$program_name-XXXXXXXXXX.apps")
     cmds_file=$(mktemp -t "$program_name-XXXXXXXXXX.cmds")
     sims_file=$(mktemp -t "$program_name-XXXXXXXXXX.sims")
 
-    # Verwerk argumenten.
+    # Process arguments.
     distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
     dfltfile_1=$program_path/$program_name-$distro-$edition.sh
     dfltfile_2=$program_path/$program_name-$distro-$edition-$HOSTNAME-$USER.sh
@@ -178,16 +183,16 @@ function process_input {
     if $argument_file; then
         process_argument_file
     fi
-    # Ergens hiervoor ging het niet helemaal goed.
+    # Somewhere before this it didn't go very well.
     if $file_notfound; then
         exit $err
     fi
-    # Voor bepaalde argumenten en opties geen standaardbestanden verwerken.
+    # Do not process standard files for certain arguments and options.
     if ! ($argument_app || $argument_file || $option_files); then
         process_dfltfiles
     fi
 
-    # Verwerk overige opties; afhankelijk van bestanden en argumenten.
+    # Process other options; depending on files and arguments.
     if $option_apps; then
         process_option_apps
         exit $ok
@@ -206,9 +211,8 @@ function process_input {
     if $execute_commands && $option_gui; then
         title='Apps instellen'
         text='Instellen voorbereiden'
-        # Met '|& zenity --progress' worden globale variabelen uit aangeroepen
-        # functies niet doorgegeven, vandaar de process substitution met
-        # '> >(zenity...)'.
+        # With '|& zenity --progress' global variables from called functions
+        # are not passed, hence the process substitution with '> >(zenity...)'.
         process_cmds_file > >(
             zenity  --progress              \
                     --pulsate               \
@@ -230,7 +234,7 @@ function process_argument_app {
     local file=''
     local -a files=()
 
-    # Zoek naar beschikbare APPs in alle instelbestanden.
+    # Search for available APPs in all setup files.
     for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
@@ -246,12 +250,14 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
-            printf "$display_name: %s: %s\n" "$app" 'app niet gevonden'
+            printf  "$display_name: %s: %s\n" \
+                    "$app" "$(gettext 'app not found')"
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        printf "%s\n" "Typ '$display_name --apps' voor beschikbare apps."
+        printf  "%s\n" \
+                "$(gettext "Type '\$display_name --apps' for available apps.")"
     else
         files_to_process[file_num]=$apps_file
         ((++file_num))
@@ -267,25 +273,25 @@ function process_argument_app_file {
         case $record in
             '#1 '*)
                 if [[ $record == '#1 '$app* ]]; then
-                    # Gezochte app-naam.
-                    # Regels doorschrijven naar tijdelijk bestand tot
-                    # eerstvolgende app-naam of tot eof.
+                    # Found app name.
+                    # Write records to temporary file until next app name or
+                    # until eof.
                     app_found=true
                     printf '%b\n' "$record" >> "$apps_file"
                 elif $app_found; then
-                    # Volgende app.
+                    # Next app.
                     app_found=false
                     continue
                 fi
                 ;;
             '#1-'*)
                 if $app_found; then
-                    # Volgende (hidden) app.
+                    # Next (hidden) app.
                     break
                 fi
                 ;;
             *)
-                # Overige regels.
+                # Other records.
                 if $app_found; then
                     printf '%s\n' "$record" >> "$apps_file"
                 fi
@@ -303,12 +309,14 @@ function process_argument_file {
             files_to_process[file_num]=$file
             ((++file_num))
         else
-            printf "$display_name: %s: %s\n" "$file" 'bestand niet gevonden'
+            printf  "$display_name: %s: %s\n" \
+                    "$file" "$(gettext 'file not found')"
             file_notfound=true
         fi
     done
     if $file_notfound; then
-        printf "%s\n" "Typ '$display_name --files' voor beschikbare bestanden."
+        printf "%s\n" "$(gettext "Type '\$display_name --files' for available \
+files.")"
     fi
 }
 
@@ -318,7 +326,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
-        warn 'Geen instelbestanden gevonden.'
+        warn "$(gettext 'No setting files found.')"
         exit $err
     fi
     if [[ -f $dfltfile_2 ]]; then
@@ -331,13 +339,13 @@ function process_dfltfiles {
 function process_option_apps {
     local -a files=()
 
-    # Zoek naar beschikbare APPs in alle instelbestanden.
+    # Search for available APPs in all setup files.
     for file in "$program_path/$program_name-"*.sh; do
         files+=("$file")
     done
-    text="De volgende APPs zijn beschikbaar om in te stellen:
+    text="$(gettext 'The following APPs are available:
 
-     APP (BESCHRIJVING)
+     APP (DESCRIPTION)')
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
@@ -350,13 +358,15 @@ $(
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen apps gevonden voor $distro."
+        printf '%s\n' "$(gettext '     0   No apps found.')
+        
+$usage_line"
     else
         printf '%s\n' "
-Om de APPs in te stellen voer uit: ${blue}$display_name APP...${normal}
-Om het instellen van APPs te simuleren voer uit: ${blue}$display_name \
+$(gettext 'To setup the APPs run:') ${blue}$display_name APP...${normal}
+$(gettext 'To simulate resetting APPs execute:') ${blue}$display_name \
 --simulate APP...${normal}
-Om de inhoud van het instelbestand voor APPs te bekijken voer uit: \
+$(gettext 'To view the contents of the APPs setup file execute:') \
 ${blue}$display_name --cat APP...${normal}"
     fi
 )"
@@ -394,16 +404,16 @@ $(
                     --number-separator='] '         \
                     --body-numbering=a              |
             sed     --expression='s/^/[/'; then
-        printf '%s\n' "     0 Geen bestanden aanwezig.
+        printf '%s\n' "$(eval_gettext '     0 No files present.')
 
 $usage_line"
     else
         printf '%s\n' "
-Om de BESTANDen te verwerken voer uit: ${blue}$display_name BESTAND...${normal}
-Om de inhoud van BESTANDen te bekijken voer uit: ${blue}$display_name --cat \
-BESTAND...${normal}
-Om de verwerking van BESTANDen te simuleren voer uit: ${blue}$display_name \
---simulate BESTAND...${normal}"
+$(gettext 'To install the APPs run:') ${blue}$display_name APP...${normal}
+$(gettext 'To simulate installing APPs execute:') ${blue}$display_name \
+--simulate APP...${normal}
+$(gettext 'To view the contents of the APPs installation file execute:') \
+${blue}$display_name --cat APP...${normal}"
     fi
 )"
     info "$text"
@@ -432,11 +442,11 @@ function process_cmds_file {
         operation='resetten'
     fi
     if $option_simulate; then
-        operation+=' simuleren'
+        operation+=$(gettext ' simulate')
     else
-        status_busy="[${blink}${yellow}werk${normal}]"
-        status_err="[${red}fout${normal}]"
-        status_ok="[${green}goed${normal}]"
+        status_busy="[${blink}${yellow}$(gettext 'work')${normal}]"
+        status_err="[${red}$(gettext 'err.')${normal}]"
+        status_ok="[${green}$(gettext ' ok ')${normal}]"
         printf '%s' "${cursor_invisable}"
     fi
 
@@ -444,25 +454,25 @@ function process_cmds_file {
         recordtype=${record:0:2}
         case $recordtype in
             '')
-                # Lege regel of lege app-naam.
+                # Empty line or empty app name.
                 continue
                 ;;
             '#1')
-                # Appnaam en -beschrijving.
+                # App name and description.
                 process_app_description_record "$record"
                 ;;
             '#2')
-                # Resetopdracht.
+                # Reset command
                 if $option_reset; then
                     process_command_record "${record:3}"
                 fi
                 ;;
             '#'*)
-                # Commentaarregel.
+                # Comment line.
                 continue
                 ;;
             *)
-                # Instelopdracht.
+                # Setup command.
                 if ! $option_reset; then
                     process_command_record "$record"
                 fi
@@ -507,9 +517,9 @@ function process_command_record {
             text="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
             printf '%s\n' "$text"
         else
-            # Afbreken tekst in Terminalvenster moet i.v.m. updaten status.
+            # Terminate text in Terminal due to update status.
             #  <--------------- tput cols --------------->
-            # '[werk] [ 1/1 ] [ 1] Te lange description...' <=== op 1 regel
+            # '[work] [ 1/1 ] [ 1] Too long description...' <=== on 1 line
             #  <------- 20 ------->                    <3>
             desc_maxlen=$(($(tput cols) - 20))
             if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
@@ -576,23 +586,24 @@ function execute_command {
 
 
 function term_script {
-    local action='instellen'
+    local action
+    action=$(gettext 'setup')
 
     if ! $commands_found; then
-        info 'Geen opdrachten om uit te voeren.'
+        info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
         if [[ $maxrc -ne $ok ]]; then
-            err "Eén of meer opdrachten zijn fout gegegaan.
-De maximale afsluitwaarde is $maxrc.
-Controleer de log in het Terminalvenster met de opdracht: \
+            err "$(eval_gettext "One or more commands went wrong.
+The maximum exit value is \$maxrc.
+Check the log in the Terminal with the command:") \
 ${blue}$logcmd_check${normal}"
             exit $err
         else
             if $option_reset; then
-                action='resetten'
+                action=$(gettext 'reset' )
             fi
             info "
-Apps $action is voltooid."
+$(eval_gettext "Apps \$action completed.")"
         fi
     else
         less "$less_options" "$sims_file"

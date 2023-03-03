@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Back-up terugzetten.
+# Restore backup.
 #
-# Geschreven in 2007 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2007 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 set -o errexit
@@ -17,21 +17,24 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-restore'
-declare program_desc='Back-up terugzetten'
+declare program_desc
+program_desc=$(gettext 'Restore backup')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name [--dry-run] [-g|--gui] \
-[-s|--source=BRONMAP]
-                    $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+declare usage
+usage="$(eval_gettext "Usage: \$display_name [--dry-run] [-g|--gui] \
+[-s|--source=DIRECTORY]")
+                  $options_usage"
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
-      --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen
-  -g, --gui      start in grafische modus
-  -s, --source=BRONMAP
-                 gebruik back-up in BRONMAP
+$(gettext 'Options:')
+      --dry-run  $(gettext 'perform a test run without making any changes')
+  -g, --gui      $(gettext 'starts in graphics mode')
+$(gettext '  -s, --source=DIRECTORY
+                 use backup in DIRECTORY')
 $options_help"
 declare options_short+='gs:'
 declare options_long+=',dry-run,gui,source:'
@@ -101,21 +104,22 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf  "$display_name: %s: %s\n$usage_line\n" \
-                "$*" 'argumenten zijn niet toegestaan'
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 }
 
 
 function process_input {
-    local prompt=''
+    # shellcheck disable=SC2034
+    local operation=backup
     local restore=false
 
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
-            printf  "$display_name: %s: %s\n$usage_line\n" \
-                    "$source_argument" 'map bestaat niet'
+            printf  "$display_name: $source_argument: %s\n$usage_line\n" \
+                    "$(gettext 'directory does not exist')"
             exit $err
         fi
         source=$source_argument/backup-$HOSTNAME-$USER
@@ -123,55 +127,53 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            text='
-Zorg dat het usb-medium is aangekoppeld waarop de back-up staat.'
-            warn "$text"
+            warn "$(gettext 'Make sure that the USB medium containing the \
+backup is connected.')"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err 'Geen usb-medium gevonden.
+                err "$(eval_gettext "No USB medium found.
 
-Koppel een usb-medium aan, en start daarna restore opnieuw.'
+Connect a USB medium, and then start \$operation again.")"
             exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            err "Koppel slechts één usb-medium aan.
+            err "$(eval_gettext "Connect only one USB medium.
 
-Nu aangekoppeld zijn:
-$medium
+Now connected:
+\$medium
 
-Koppel media af via Bestanden, en start daarna restore opnieuw."
+Disconnect media via Files, then restart \$operation.")"
             exit $err
         fi
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
-            err "Geen back-up gevonden op aangekoppeld usb-medium.
+            err "$(eval_gettext "No backup found on connected USB medium.
 
-Koppel een usb-medium aan met hierop de map backup-$HOSTNAME-$USER, en start \
-daarna restore opnieuw."
+Connect a USB medium with the directory backup-\$HOSTNAME-\$USER, and then \
+start restore again.")"
             exit $err
         fi
     fi
 
     kz_common.check_on_ac_power
 
-    title='Back-up terugzetten'
-    text='Back-up wordt TERUGGEZET.
-'
-    prompt='Doorgaan?'
+    title=$(gettext 'Restore backup')
+    text="$(gettext 'Backup copy will be RESTORED.')
+"
     if $option_gui; then
         text+="
-$prompt"
-        if zenity   --question                  \
-                    --no-markup                 \
-                    --width         600         \
-                    --height        50          \
-                    --title         "$title"    \
-                    --text          "$text"     \
-                    --ok-label      'Ja'        \
-                    --cancel-label  'Nee'       2> >($logcmd); then
+$(gettext 'Continue')?"
+        if zenity   --question                          \
+                    --no-markup                         \
+                    --width         600                 \
+                    --height        50                  \
+                    --title         "$title"            \
+                    --text          "$text"             \
+                    --ok-label      "$(gettext 'Yes')"  \
+                    --cancel-label  "$(gettext 'No')"   2> >($logcmd); then
             restore=true
         else
             restore=false
@@ -179,9 +181,9 @@ $prompt"
     else
         info "$text"
         while true; do
-            read -rp "$prompt [j/N]: "
+            read -rp "$(gettext 'Continue? [y/N]: ')"
             case $REPLY in
-                j*|J*)
+                y*|Y*|j*|J*)
                     restore=true
                     break
                     ;;
@@ -199,8 +201,8 @@ $prompt"
     if $restore; then
         restore_backup
         if ! $option_dry_run; then
-            title='Instellingen terugzetten'
-            text='Instellingen terugzetten'
+            title=$(gettext 'Restore settings')
+            text=$title
             if $option_gui; then
                 restore_settings                |
                 zenity  --progress              \
@@ -226,7 +228,7 @@ function restore_backup {
     local -i rsync_rc=0
     local target=$HOME
 
-    text='Restore voorbereiden (dit kan even duren)'
+    text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
         rsync   --archive               \
                 --verbose               \
@@ -258,11 +260,11 @@ function restore_backup {
             return $ok
             ;;
         *)
-            err "Back-up terugzetten is geëindigd met fouten.
+            err "$(eval_gettext "Restore ended with errors.
 
-Mogelijk zijn enkele bestanden niet leesbaar, of zijn er bestanden verwijderd
-of toegevoegd tijdens het terugzetten van de back-up, of is er te weinig
-ruimte op $target."
+Some files may not be readable,
+or were any files added or removed while restoring the backup,
+or is there not enough space on \$target.")"
             exit $err
             ;;
     esac
@@ -270,7 +272,8 @@ ruimte op $target."
 
 
 function restore_settings {
-    local tgtdir=$HOME/Instellingen
+    local tgtdir
+    tgtdir=$HOME/$(gettext 'Settings')
 
     restore_settings_desktop_background
     restore_settings_favorite_apps
@@ -281,7 +284,8 @@ function restore_settings {
 
 
 function restore_settings_desktop_background {
-    local file=$tgtdir/Achtergrond
+    local file
+    file=$tgtdir/$(gettext 'Background')
 
     if [[ -f $file ]]; then
         gsettings set org.gnome.desktop.background picture-uri "file://$file"
@@ -290,7 +294,8 @@ function restore_settings_desktop_background {
 
 
 function restore_settings_favorite_apps {
-    local file=$tgtdir/Favorieten
+    local file
+    file=$tgtdir/$(gettext 'Favorites')
 
     if [[ -f $file ]]; then
         gsettings set org.gnome.shell favorite-apps "$(cat "$file")"
@@ -305,11 +310,11 @@ function term_script {
     sync |& $logcmd || rc+=$?
     text=''
     if $option_dry_run; then
-        err "De back-up is NIET teruggezet (DRY RUN)."
+        err "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $err
     fi
     if [[ $source_medium == /media/* ]]; then
-        text='Het usb-medium afkoppelen'
+        text=$(gettext 'Disconnect the USB media')
         dev='/dev/'$(
             lsblk   --ascii             |
             grep    --before-context=1  \
@@ -340,18 +345,18 @@ function term_script {
         fi
         if [[ $rc -eq $ok ]]; then
             info "
-De back-up is teruggezet.
+$(gettext 'The backup has been restored.')
 
-Het usb-medium kan verwijderd worden."
+$(gettext 'The USB medium can be removed.')"
         else
             warn "
-De back-up is teruggezet.
+$(gettext 'The backup has been restored.')
 
-Koppel zelf (veilig!) het usb-medium af."
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
         fi
     else
         info "
-De back-up is gemaakt."
+$(gettext 'The backup has been restored.')"
     fi
     exit $ok
 }

@@ -1,0 +1,1087 @@
+# Dutch translations for kz package.
+# Copyright (C) 2023 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the kz package.
+# Karel Zimmer <karel.zimmer@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kz 365\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-03 09:04+0100\n"
+"PO-Revision-Date: 2023-02-20 15:30+0100\n"
+"Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
+"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Common module for shell scripts"
+msgstr "Algemene module voor shell scripts"
+
+msgid "give a short usage message"
+msgstr "toon een korte gebruikssamenvatting"
+
+msgid "give this help list"
+msgstr "toon deze hulptekst"
+
+msgid "print program version"
+msgstr "toon de programmaversie"
+
+msgid ""
+"The computer now uses only the battery for power.\n"
+"\n"
+"It is recommended to connect the computer to the wall socket."
+msgstr ""
+"De computer gebruikt nu alleen de accu voor de stroomvoorziening.\n"
+"\n"
+"Geadviseerd wordt om de computer aan te sluiten op het stopcontact."
+
+msgid "Press the Enter key to continue [Enter]: "
+msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
+
+msgid "Already performed by the administrator."
+msgstr "Reeds uitgevoerd door de beheerder."
+
+#, sh-format
+msgid "Authentication is required to run $display_name."
+msgstr "Authenticatie is vereist om $display_name uit te voeren."
+
+msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
+msgstr ""
+"Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als karel op pcNN "
+"(bijvoorbeeld pc01)."
+
+#, sh-format
+msgid ""
+"Text output $display_name ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e "
+"(END) :?pB %pB\\%. .(press h for help or q to quit)"
+msgstr ""
+"Tekstuitvoer $display_name ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e "
+"(EINDE) :?pB %pB\\%. .(druk op h voor help of q om te stoppen)"
+
+#, sh-format
+msgid "Type '$display_name --usage' for more information."
+msgstr "Typ '$display_name --usage' voor meer informatie."
+
+#, sh-format
+msgid "Program $program_name encountered an error."
+msgstr "In programma $program_name is een fout opgetreden."
+
+#, sh-format
+msgid "Program $program_name has been interrupted."
+msgstr "Programma $program_name is onderbroken."
+
+msgid ""
+"If the package manager gives apt errors, launch a Terminal window and run:"
+msgstr ""
+"Als de pakketbeheerder apt foutmeldingen geeft, start een Terminalvenster en "
+"voer uit:"
+
+#, sh-format
+msgid "Type 'man $display_name' for more information."
+msgstr "Typ 'man $display_name' voor meer informatie."
+
+#, sh-format
+msgid "Type '$display_name --help' for more information."
+msgstr "Typ '$display_name --help' voor meer informatie."
+
+#, sh-format
+msgid ""
+"Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
+"Commons\n"
+"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+msgstr ""
+"Geschreven in $program_year door Karel Zimmer <info@karelzimmer.nl>, "
+"Creative Commons\n"
+"Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
+
+#, sh-format
+msgid "Information $display_name"
+msgstr "Informatie $display_name"
+
+#, sh-format
+msgid "Warning $display_name"
+msgstr "Waarschuwing $display_name"
+
+#, sh-format
+msgid "Error message $display_name"
+msgstr "Foutmelding $display_name"
+
+msgid "Common module for Python scripts"
+msgstr "Algemene module voor Python scripts"
+
+msgid "Wait {}s for another package manager to finish..."
+msgstr "Wacht {}s tot andere pakketbeheerder klaar is..."
+
+msgid "Program {} has been interrupted."
+msgstr "Programma {} is onderbroken."
+
+msgid "Authentication is required to run {}."
+msgstr "Authenticatie is vereist om {} uit te voeren."
+
+msgid "type '{} --usage' for more information"
+msgstr "typ '{} --usage' voor meer informatie"
+
+msgid ""
+"Usage: {} [OPTION...]\n"
+"\n"
+"{}.\n"
+"\n"
+"Options:\n"
+"  -h, --help     give this help list\n"
+"  -u, --usage    give a short usage message\n"
+"  -v, --version  print program version\n"
+"\n"
+"Type 'man {}' for more information."
+msgstr ""
+"Gebruik: {} [OPTIE...]\n"
+"\n"
+"{}.\n"
+"\n"
+"Opties:\n"
+"  -h, --help     toon deze hulptekst\n"
+"  -u, --usage    toon een korte gebruikssamenvatting\n"
+"  -v, --version  toon de programmaversie\n"
+"\n"
+"Typ 'man {}' voor meer informatie."
+
+msgid ""
+"Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n"
+"\n"
+"Type '{} --help' for more information."
+msgstr ""
+"Gebruik: {} [-h|--help] [-u|--usage] [-v|--version]\n"
+"\n"
+"Typ '{} --help' voor meer informatie."
+
+msgid ""
+"{} (kz) 365 ({})\n"
+"\n"
+"Written in {} by Karel Zimmer <info@karelzimmer.nl>, Creative Commons\n"
+"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+msgstr ""
+"{} (kz) 365 ({})\n"
+"\n"
+"Geschreven in {} door Karel Zimmer <info@karelzimmer.nl>, Creative Commons\n"
+"Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>."
+
+msgid "{}: i am a module"
+msgstr "{}: ik ben een module"
+
+msgid "Run command"
+msgstr "Opdracht uitvoeren"
+
+#, sh-format
+msgid ""
+"Usage: $display_name COMMAND [ARGUMENT...]\n"
+"   or: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
+msgstr ""
+"Gebruik: $display_name OPDRACHT [ARGUMENT...]\n"
+"     of: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
+
+#, sh-format
+msgid ""
+"Usage: $display_name COMMAND [ARGUMENT...]\n"
+"   or: $display_name OPTION"
+msgstr ""
+"Gebruik: $display_name OPDRACHT [ARGUMENT...]\n"
+"     of: $display_name OPTIE"
+
+msgid ""
+"Options:\n"
+"  -l, --list     show available COMMANDs"
+msgstr ""
+"Opties:\n"
+"  -l, --list     toon beschikbare OPDRACHTen"
+
+msgid ""
+"Arguments:\n"
+"  COMMAND        execute COMMAND\n"
+"  ARGUMENT       ARGUMENTs for COMMAND"
+msgstr ""
+"Argumenten\n"
+"  OPDRACHT       voer OPDRACHT uit\n"
+"  ARGUMENT       ARGUMENTen voor OPDRACHT"
+
+msgid "invalid option"
+msgstr "ongeldige optie"
+
+msgid "command does not exist"
+msgstr "opdracht bestaat niet"
+
+msgid ""
+"The following COMMANDs are available:\n"
+"\n"
+"     COMMAND"
+msgstr ""
+"De volgende OPDRACHTen zijn beschikbaar:\n"
+"\n"
+"     OPDRACHT"
+
+msgid "To execute a COMMAND:"
+msgstr "Om een OPDRACHT uit te voeren:"
+
+msgid "Create backup"
+msgstr "Reservekopie maken"
+
+#, sh-format
+msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=DIRECTORY]"
+msgstr "Gebruik: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=MAP]"
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...]"
+msgstr "Gebruik: $display_name [OPTIE...]"
+
+msgid "Options:"
+msgstr "Opties:"
+
+msgid "perform a test run without making any changes"
+msgstr "een proefrun uitvoeren zonder wijzigingen aan te brengen"
+
+msgid "starts in graphics mode"
+msgstr "start in grafische modus"
+
+msgid ""
+"  -t, --target=DIRECTORY\n"
+"                 put backup in DIRECTORY"
+msgstr ""
+"  -t, --target=MAP\n"
+"                 plaats reservekopie in MAP"
+
+msgid "arguments are not allowed"
+msgstr "argumenten zijn niet toegestaan"
+
+msgid "directory does not exist"
+msgstr "map bestaat niet"
+
+msgid "Connect the USB medium on which the backup will be placed."
+msgstr "Koppel het usb-medium aan waarop de reservekopie wordt geplaatst."
+
+#, sh-format
+msgid ""
+"No USB medium found.\n"
+"\n"
+"Connect a USB medium, and then start $operation again."
+msgstr ""
+"Geen usb-medium gevonden.\n"
+"\n"
+"Koppel een usb-medium aan, en start daarna $operation opnieuw."
+
+#, sh-format
+msgid ""
+"Connect only one USB medium.\n"
+"\n"
+"Now connected:\n"
+"$medium\n"
+"\n"
+"Disconnect media via Files, then restart $operation."
+msgstr ""
+"Koppel slechts één usb-medium aan.\n"
+"\n"
+"Nu aangekoppeld zijn:\n"
+"$medium\n"
+"\n"
+"Koppel media af via Bestanden, en start daarna $operation opnieuw."
+
+msgid "Secure settings"
+msgstr "Instellingen veiligstellen"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Background"
+msgstr "Achtergrond"
+
+msgid "Favorites"
+msgstr "Favorieten"
+
+msgid ""
+"[1/3] These packages are installed via Add or Remove Programs, with a "
+"command\n"
+"      such as 'sudo apt --install <package|file>', or with kz install:"
+msgstr ""
+"[1/3] Deze pakketten zijn geïnstalleerd via Software, met een opdracht "
+"zoals\n"
+"      'sudo apt --install <pakket|bestand>', of met kz install:"
+
+msgid ""
+"[2/3] These snaps are installed via Add or Remove Programs,\n"
+"      with '[sudo] install <snap>', or with kz install:"
+msgstr ""
+"[2/3] Deze snaps zijn geïnstalleerd via Software, met '[sudo] install "
+"<snap>',\n"
+"      of met kz install:"
+
+msgid ""
+"[3/3] These repositories are added with the installation of a package, with\n"
+"      the command 'sudo add-apt-repository ppa:<ppa-user>/<ppa-name>', or\n"
+"      with kz install:"
+msgstr ""
+"[3/3] Deze pakketbronnen zijn toegevoegd met de installatie van een pakket, "
+"met\n"
+"     de opdracht 'sudo add-apt-repository ppa:<ppa-gebruiker>/<ppa-naam>', "
+"of\n"
+"     met kz install:"
+
+msgid "Userphoto"
+msgstr "Gebruikersfoto"
+
+msgid "snap is not installed"
+msgstr "snap is niet geïnstalleerd"
+
+msgid "Preparing backup (this may take a while)"
+msgstr "Reservekopie voorbereiden (dit kan even duren)"
+
+#, sh-format
+msgid ""
+"Backup ended with errors.\n"
+"\n"
+"Some files may not be readable,\n"
+"or were any files added or removed while creating the backup,\n"
+"or is there not enough space on $target."
+msgstr ""
+"Reservekopie maken is geëindigd met fouten.\n"
+"\n"
+"Mogelijk zijn enkele bestanden niet leesbaar,\n"
+"of zijn er bestanden verwijderd of toegevoegd tijdens het maken van de "
+"reservekopie,\n"
+"of is er te weinig ruimte op $target."
+
+msgid "Writing data from temporary memory (this may take a while)"
+msgstr "Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)"
+
+msgid "The backup has NOT been created (DRY RUN)."
+msgstr "De reservekopie is NIET gemaakt (DRY RUN)."
+
+msgid "Disconnect the USB media"
+msgstr "Het usb-medium afkoppelen"
+
+msgid "The USB medium can be removed."
+msgstr "Het usb-medium kan verwijderd worden."
+
+msgid "Disconnect the USB medium yourself (safely!)."
+msgstr "Koppel zelf (veilig!) het usb-medium af."
+
+msgid "The backup has been made."
+msgstr "De reservekopie is gemaakt."
+
+msgid "Build package kz"
+msgstr "Pakket kz bouwen"
+
+#, sh-format
+msgid "Usage: $display_name $options_usage"
+msgstr "Gebruik: $display_name $options_usage"
+
+#, sh-format
+msgid "Repo $repo must be on branch main."
+msgstr "Repo $repo moet op branch main staan."
+
+msgid "Check file names"
+msgstr "Controleer bestandsnamen"
+
+#, sh-format
+msgid "Usage: $display_name $options_usage [DIRECTORY...]"
+msgstr "Gebruik: $display_name $options_usage [MAP...]"
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...] [DIRECTORY...]"
+msgstr "Gebruik: $display_name [OPTIE...] [MAP...]"
+
+msgid ""
+"Arguments:\n"
+"  DIRECTORY      start checking from DIRECTORY"
+msgstr ""
+"Argumenten:\n"
+"  MAP            begin te controleren vanaf MAP"
+
+msgid "BadName  DIR"
+msgstr "SlechtNaam  MAP"
+
+msgid "BadName FILE"
+msgstr "SlechtNaam BEST"
+
+msgid "BadName SYML"
+msgstr "SlechtNaam SYML"
+
+msgid "BadLen.  DIR"
+msgstr "SlechtLen.  MAP"
+
+msgid "BadLen. FILE"
+msgstr "SlechtLen. BEST"
+
+msgid "An error has been found."
+msgstr "Er is een fout gevonden."
+
+#, sh-format
+msgid "$count errors were found."
+msgstr "Er zijn $count fouten gevonden."
+
+msgid "Distribute kz package"
+msgstr "Pakket kz distribueren"
+
+msgid "* check filenames (kz ckname)..."
+msgstr "* controleer bestandsnamen (kz ckname)..."
+
+msgid "Fix all the messages above and then restart deploy."
+msgstr "Herstel alle meldingen hierboven en start daarna deploy opnieuw."
+
+msgid "* check scripts (kz ivp)..."
+msgstr "* controleer scripts (kz ivp)..."
+
+msgid "* build package and website (kz build)..."
+msgstr "* bouw pakket en website (kz build)..."
+
+msgid "Website upload failed."
+msgstr "Uploaden website is mislukt."
+
+msgid "* install package kz (kz getdeb)..."
+msgstr "* installeer pakket kz (kz getdeb)..."
+
+msgid "Install package kz failed."
+msgstr "Installeren pakket kz is niet uitgevoerd."
+
+msgid "Install kz package."
+msgstr "Pakket kz installeren."
+
+msgid "Progress"
+msgstr "Voortgang"
+
+msgid "Install package kz (may take a while)..."
+msgstr "Installeer pakket kz (kan even duren)..."
+
+msgid "Need authentication"
+msgstr "Authenticatie nodig"
+
+msgid ""
+"Authentication is required to install\n"
+"package kz with documents and scripts\n"
+"from Karel Zimmer.\n"
+"\n"
+"Enter your password:"
+msgstr ""
+"Authenticatie is vereist om pakket\n"
+"kz met documenten en scripts van\n"
+"Karel Zimmer te installeren.\n"
+"\n"
+"Voer uw wachtwoord in:"
+
+msgid "Verify"
+msgstr "Verifiëren"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Error"
+msgstr "Fout"
+
+msgid ""
+"An error has occurred.\n"
+"\n"
+"Possible cause:\n"
+"1. No or incorrect password entered\n"
+"2. <Cancel> was selected on the previous screen"
+msgstr ""
+"Er is een fout opgetreden.\n"
+"\n"
+"Mogelijke oorzaak:\n"
+"1. Geen of onjuist wachtwoord ingevoerd\n"
+"2. Op het vorige scherm is <Annuleren> geselecteerd"
+
+msgid "Again"
+msgstr "Opnieuw"
+
+msgid "Stop"
+msgstr "Stoppen"
+
+msgid "Stopped"
+msgstr "Gestopt"
+
+msgid "Program has been stopped by the user"
+msgstr "Programma is gestopt door de gebruiker"
+
+msgid "Finished"
+msgstr "Gereed"
+
+msgid ""
+"Package kz has been successfully installed.\n"
+"\n"
+"Now follow the steps as described\n"
+"in the Installation Checklist.\n"
+"\n"
+"Checklist installation can be found\n"
+"on the site https://karelzimmer.nl,\n"
+"under Linux.\n"
+"\n"
+"Type 'exit' to close this window."
+msgstr ""
+"Pakket kz is succesvol geïnstalleerd.\n"
+"\n"
+"Volg nu de stappen zoals beschreven\n"
+"in de Checklist installatie.\n"
+"\n"
+"Checklist installatie is te vinden\n"
+"op de site https://karelzimmer.nl,\n"
+"onder Linux.\n"
+"\n"
+"Typ 'exit' om dit venster te sluiten."
+
+msgid "* DEVELOPER *"
+msgstr "* ONTWIKKELAAR *"
+
+msgid "* check dependencies..."
+msgstr "* controleer afhankelijkheden..."
+
+msgid "Password for"
+msgstr "Wachtwoord voor"
+
+msgid "Website download failed."
+msgstr "Downloaden website is mislukt."
+
+msgid "* initial pull bin repo..."
+msgstr "* initiële pull bin repo..."
+
+msgid "Change GUI"
+msgstr "GUI wijzigen"
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--addfavaft=FAVORITE] [-b|--addfavbef=FAVORITE]\n"
+"               [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]\n"
+"               [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]\n"
+"               $options_usage"
+msgstr ""
+"Gebruik: $display_name [-a|--addfavaft=FAVORIET] [-b|--addfavbef=FAVORIET]\n"
+"                 [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]\n"
+"                 [-f|--addappfolder=APPMAP] [-x|--delappfolder=APPMAP]\n"
+"                 $options_usage"
+
+msgid ""
+"Options:\n"
+"  -a, --addfavaft=FAVORITE\n"
+"                 add FAVORITE at the end\n"
+"  -b, --addfavbef=FAVORITE\n"
+"                 add FAVORITE at the beginning\n"
+"  -d, --delfav=FAVORITE\n"
+"                 delete FAVORITE\n"
+"  -l, --list     show favorites and app folders\n"
+"  -r, --resetfavs\n"
+"                 reset favorites\n"
+"  -f, --addappfolder=APPFOLDER\n"
+"                 add APPFOLDER\n"
+"  -x, --delappfolder=APPFOLDER\n"
+"                 delete APPFOLDER"
+msgstr ""
+"Opties:\n"
+"  -a, --addfavaft=FAVORIET\n"
+"                 voeg FAVORIET toe aan het einde\n"
+"  -b, --addfavbef=FAVORIET\n"
+"                 voeg FAVORIET toe aan het begin\n"
+"  -d, --delfav=FAVORIET\n"
+"                 verwijder FAVORIET\n"
+"  -l, --list     toon favorieten en app-mappen\n"
+"  -r, --resetfavs\n"
+"                 reset favorieten\n"
+"  -f, --addappfolder=APPFMAP\n"
+"                 voeg APPFMAP toe\n"
+"  -x, --delappfolder=APPFMAP\n"
+"                 verwijder APPFMAP"
+
+msgid "Now make the change in the graphical workspace."
+msgstr "Voer nu de wijziging uit in de grafische werkomgeving."
+
+#, sh-format
+msgid "Config database content captured ($fase)."
+msgstr "Inhoud configuratiedatabase vastgelegd ($fase)."
+
+msgid ""
+"CHANGEs in the configuration database,\n"
+"< is the old setting (A),\n"
+"> is the new setting (B):"
+msgstr ""
+"WIJZIGINGen in de configuratiedatabase,\n"
+"< is de oude   instelling (A),\n"
+"> is de nieuwe instelling (B):"
+
+#, sh-format
+msgid "When CHANGEs execute: ${blue}gsettings set CHANGE${normal}"
+msgstr "Bij WIJZIGINGen voer uit: ${blue}gsettings set WIJZIGING${normal}"
+
+msgid "Install apps"
+msgstr "Apps installeren"
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                  [-r|--remove] [--server] [-s|--simulate]\n"
+"                  $options_usage\n"
+"                  [APP...] [FILE...]"
+msgstr ""
+"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                    [-r|--remove] [--server] [-s|--simulate]\n"
+"                    $options_usage\n"
+"                    [APP...] [BESTAND...]"
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...] [APP...] [FILE...]"
+msgstr "Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]"
+
+msgid "show list of available apps"
+msgstr "toon lijst van beschikbare apps"
+
+msgid "show contents of files"
+msgstr "toon inhoud van bestanden"
+
+msgid "show list of files"
+msgstr "toon lijst van bestanden"
+
+msgid "delete apps"
+msgstr "verwijder apps"
+
+msgid "install apps for a server"
+msgstr "installeer apps voor een server"
+
+msgid "show commands"
+msgstr "toon opdrachten"
+
+msgid ""
+"Arguments:\n"
+"  APP            install APPs\n"
+"  FILE           process FILEs"
+msgstr ""
+"Argumenten:\n"
+"  APP            installeer APPs\n"
+"  BESTAND        verwerk BESTANDen"
+
+msgid "Prepare to install"
+msgstr "Installeren voorbereiden"
+
+msgid "app not found"
+msgstr "app niet gevonden"
+
+#, sh-format
+msgid "Type '$display_name --apps' for available apps."
+msgstr "Typ '$display_name --apps' voor beschikbare apps."
+
+msgid "file not found"
+msgstr "bestand niet gevonden"
+
+#, sh-format
+msgid "Type '$display_name --files' for available files."
+msgstr "Typ '$display_name --files' voor beschikbare bestanden."
+
+msgid "No installation files found."
+msgstr "Geen installatiebestanden gevonden.'"
+
+msgid ""
+"The following APPs are available:\n"
+"\n"
+"     APP (DESCRIPTION)"
+msgstr ""
+"De volgende APPs zijn beschikbaar:\n"
+"\n"
+"     APP (BESCHRIJVING)"
+
+msgid "     0   No apps found."
+msgstr "     0   Geen apps gevonden."
+
+msgid "To install the APPs run:"
+msgstr "Om de APPs te installeren voer uit:"
+
+msgid "To simulate installing APPs execute:"
+msgstr "Om het installeren van APPs te simuleren voer uit:"
+
+msgid "To view the contents of the APPs installation file execute:"
+msgstr ""
+"Om de inhoud van het installatiebestand voor APPs te bekijken voer uit:"
+
+msgid ""
+"The following FILEs are available:\n"
+"\n"
+"     FILE"
+msgstr ""
+"De volgende BESTANDen zijn beschikbaar:\n"
+"\n"
+"     BESTAND"
+
+#, sh-format
+msgid "     0 No files present."
+msgstr ""
+
+msgid "To process the FILEs execute"
+msgstr "Om de BESTANDen te verwerken voer uit"
+
+msgid "To view the contents of FILEs execute"
+msgstr "m de inhoud van BESTANDen te bekijken voer uit"
+
+msgid "To simulate the processing of FILEs execute"
+msgstr "Om de verwerking van BESTANDen te simuleren voer uit"
+
+msgid "install"
+msgstr "installeren"
+
+msgid "remove"
+msgstr "verwijderen"
+
+msgid " simulate"
+msgstr " simuleren"
+
+msgid "work"
+msgstr "werk"
+
+msgid "err."
+msgstr "fout"
+
+msgid " ok "
+msgstr "goed"
+
+msgid "No commands to execute."
+msgstr "Geen opdrachten om uit te voeren."
+
+#, sh-format
+msgid ""
+"One or more commands went wrong.\n"
+"The maximum exit value is $maxrc.\n"
+"Check the log in the Terminal with the command:"
+msgstr ""
+"Eén of meer opdrachten zijn fout gegegaan.\n"
+"De maximale afsluitwaarde is $maxrc.\n"
+"Controleer de log in het Terminalvenster met de opdracht:"
+
+#, sh-format
+msgid "Apps $action completed."
+msgstr "Apps $action is voltooid."
+
+msgid "Checking scripts"
+msgstr "Scripts controleren"
+
+msgid "    Unknown script. Function check_code cannot check script code."
+msgstr ""
+"    Onbekend script.  Functie check_code kan scriptcode niet controleren."
+
+#, sh-format
+msgid "    A line is longer than $max_line_length ($max_line_length_found)."
+msgstr "    Een regel is langer dan $max_line_length ($max_line_length_found)."
+
+msgid "Faulty line(s) found."
+msgstr "Foutieve regel(s) gevonden."
+
+msgid "    Flagged annotation found."
+msgstr "    Gemarkeerde annotatie gevonden."
+
+msgid "Continue? [Y/n]: "
+msgstr "Doorgaan? [J/n]: "
+
+msgid "    End spaces found."
+msgstr "    Eindspaties gevonden."
+
+msgid "Installation menu"
+msgstr "Installatiemenu'"
+
+#, sh-format
+msgid "Usage: $display_name [-g|--gui]"
+msgstr "Gebruik: $display_name [-g|--gui]"
+
+msgid "Preparing installation"
+msgstr "Installeren voorbereiden"
+
+msgid "Perform installation"
+msgstr "Installatie uitvoeren"
+
+msgid "Finish installation"
+msgstr "Installatie afronden"
+
+msgid "Provision user"
+msgstr "Gebruiker inrichten"
+
+msgid "Commands menu"
+msgstr "Opdrachtenmenu"
+
+msgid "Checklist chapter 1"
+msgstr "Checklist hoofdstuk 1"
+
+msgid "Checklist chapter 2"
+msgstr "Checklist hoofdstuk 2"
+
+msgid "Checklist chapter 3"
+msgstr "Checklist hoofdstuk 3"
+
+msgid "Checklist chapter 4"
+msgstr "Checklist hoofdstuk 4"
+
+msgid "Used commands"
+msgstr "Gebruikte opdrachten"
+
+msgid "Exit menu"
+msgstr "Menu verlaten"
+
+msgid "Show WiFi data"
+msgstr "Wifi-informatie tonen"
+
+msgid "Add users"
+msgstr "Gebruikers toevoegen"
+
+msgid "Restore backup"
+msgstr "Reservekopie terugzetten"
+
+msgid "Set user photo"
+msgstr "Gebruikersfoto instellen"
+
+msgid "Set up apps"
+msgstr "Apps instellen"
+
+msgid "Back"
+msgstr "Terug"
+
+msgid "Manually"
+msgstr "Handmatig"
+
+msgid "Previous menu"
+msgstr "Vorig menu"
+
+msgid "Select a choice:"
+msgstr "Selecteer een keuze:"
+
+msgid "Continue"
+msgstr "Doorgaan"
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Choice"
+msgstr "Keuze"
+
+msgid "No."
+msgstr "Nr."
+
+msgid "Action"
+msgstr "Actie"
+
+msgid "Explanation"
+msgstr "Toelichting"
+
+msgid "Command"
+msgstr "Opdracht"
+
+#, sh-format
+msgid "Run number [1-$menu1_lines]: "
+msgstr "Voer uit nummer [1-$menu1_lines]: "
+
+#, sh-format
+msgid "Cannot handle this choice ($REPLY)."
+msgstr "Kan deze keuze niet afhandelen ($REPLY)."
+
+msgid ""
+"Follow the steps as described in Installation Checklist, Chapter 2.\n"
+"Checklist installation can be found on the site https://karelzimmer.nl,\n"
+"under Linux.\n"
+"\n"
+"Roughly boils down to:\n"
+"1. Download an image file (.iso).\n"
+"2. Create a bootable Live USB stick or DVD.\n"
+"3. Boot the computer from this USB stick or DVD.\n"
+"4. Install Linux."
+msgstr ""
+"Volg de stappen zoals beschreven in Checklist installatie, hoofdstuk 2.\n"
+"Checklist installatie is te vinden op de site https://karelzimmer.nl,\n"
+"onder Linux.\n"
+"\n"
+"Komt globaal neer op:\n"
+"1. Download een beeldbestand (.iso).\n"
+"2. Maak een opstartbare Live usb-stick of dvd aan.\n"
+"3. Start de computer op vanaf deze usb-stick of dvd.\n"
+"4. Installeer Linux."
+
+msgid "The following will be executed:"
+msgstr "Het volgende wordt uitgevoerd:"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nee"
+
+#, sh-format
+msgid "$prompt [Y/n]: "
+msgstr "$prompt [J/n]: "
+
+msgid ""
+"1. Add any additional Standard or Admin users by pressing the Super key[1],\n"
+"   type 'user' and click behind Settings on Users.\n"
+"2. Click Unlock and enter password.\n"
+"3. Click Add User.\n"
+"4. Complete the screen and click Add.\n"
+"5. Close the Users screen.\n"
+"\n"
+"[1] The Super key is the Windows key, Command key (Apple), or Magnifier key "
+"(Chromebook)."
+msgstr ""
+"1. Voeg eventuele extra Standaard of Beheerder gebruikers toe via een druk "
+"op\n"
+"   de Super-toets[1], typ 'gebr' en klik achter Instellingen op Gebruikers.\n"
+"2. Klik op Ontgrendelen en geef wachtwoord.\n"
+"3. Klik op Gebruiker toevoegen.\n"
+"4. Vul het scherm in en klik op Toevoegen.\n"
+"5. Sluit het scherm Gebruikers.\n"
+"\n"
+"[1] De Super-toets is de Windows-toets, Command-toets (Apple), of "
+"Vergrootglas-toets (Chromebook)."
+
+msgid ""
+"1. Change the user photo by pressing the Super key[1], type 'user' and "
+"click\n"
+"   behind Settings on Users.\n"
+"2. Click Unlock.\n"
+"3. Click the image for the user.\n"
+"4. Click Select a file.\n"
+"5. Select Userphoto in Personal folder / Settings.\n"
+"6. Close the Users screen.\n"
+"\n"
+"[1] The Super key is the Windows key, Command key (Apple), or Magnifier key "
+"(Chromebook)."
+msgstr ""
+"1. Wijzig de gebruikersfoto via een druk op de Super-toets[1], typ 'gebr' "
+"en\n"
+"   klik achter Instellingen op Gebruikers.\n"
+"2. Klik op Ontgrendelen.\n"
+"3. Klik op de afbeelding voor de gebruiker.\n"
+"4. Klik op Selecteer een bestand.\n"
+"5. Selecteer een Gebruikersfoto in Persoonlijke map / Instellingen.\n"
+"6. Sluit het scherm Gebruikers.\n"
+"\n"
+"[1] De Super-toets is de Windows-toets, Command-toets (Apple), of "
+"Vergrootglas-toets (Chromebook)."
+
+msgid "No user photo was found when backing up."
+msgstr "Er is bij het maken van de reservekopie geen gebruikersfoto gevonden."
+
+msgid "The following has been executed:"
+msgstr "Het volgende is uitgevoerd:"
+
+#, sh-format
+msgid "Usage: $display_name [--dry-run] [-g|--gui] [-s|--source=DIRECTORY]"
+msgstr "Gebruik: $display_name [-d|--dry-run] [-g|--gui] [-s|--source=MAP]"
+
+msgid ""
+"  -s, --source=DIRECTORY\n"
+"                 use backup in DIRECTORY"
+msgstr ""
+"  -t, --source=MAP\n"
+"                 gebruik reservekopie in MAP"
+
+msgid "Make sure that the USB medium containing the backup is connected."
+msgstr "Zorg dat het usb-medium is aangekoppeld waarop de back-up staat."
+
+#, sh-format
+msgid ""
+"No backup found on connected USB medium.\n"
+"\n"
+"Connect a USB medium with the directory backup-$HOSTNAME-$USER, and then "
+"start restore again."
+msgstr ""
+"Geen reservekopie gevonden op aangekoppeld usb-medium.\n"
+"\n"
+"Koppel een usb-medium aan met hierop de map backup-$HOSTNAME-$USER, en "
+"startdaarna restore opnieuw."
+
+msgid "Backup copy will be RESTORED."
+msgstr "Back-up wordt TERUGGEZET."
+
+msgid "Continue? [y/N]: "
+msgstr "Doorgaan? [j/N]: "
+
+msgid "Restore settings"
+msgstr "Instellingen terugzetten"
+
+msgid "Preparing restore (this can take a while)"
+msgstr "Terugzetten voorbereiden (dit kan even duren)"
+
+#, sh-format
+msgid ""
+"Restore ended with errors.\n"
+"\n"
+"Some files may not be readable,\n"
+"or were any files added or removed while restoring the backup,\n"
+"or is there not enough space on $target."
+msgstr ""
+"Reservekopie terugzetten is geëindigd met fouten.\n"
+"\n"
+"Mogelijk zijn enkele bestanden niet leesbaar,\n"
+"of zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
+"reservekopie,\n"
+"of is er te weinig ruimte op $target."
+
+msgid "The backup was NOT restored (DRY RUN)."
+msgstr "De reservekopie is NIET teruggezet (DRY RUN)."
+
+msgid "The backup has been restored."
+msgstr "De reservekopie is teruggezet."
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files]\n"
+"                [-g|--gui] [-r|--reset] {--server] [-s|--simulate]\n"
+"                $options_usage\n"
+"                [APP...] [FILE...]"
+msgstr ""
+"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                    [-r|--remove] [--server] [-s|--simulate]\n"
+"                    $options_usage\n"
+"                    [APP...] [BESTAND...]"
+
+msgid "set apps on default values"
+msgstr "stel apps in op standaardwaarden"
+
+msgid ""
+"Arguments:\n"
+"  APP            setup APPs\n"
+"  FILE           process FILEs"
+msgstr ""
+"Argumenten:\n"
+"  APP            stel APPs in\n"
+"  BESTAND        verwerk BESTANDen"
+
+msgid "setup apps for a server"
+msgstr "stel apps in voor een server"
+
+msgid "No setting files found."
+msgstr "Geen instelbestanden gevonden.'"
+
+msgid "To setup the APPs run:"
+msgstr "Om de APPs in te stellen voer uit"
+
+msgid "To simulate resetting APPs execute:"
+msgstr "Om het instellen van APPs te simuleren voer uit:"
+
+msgid "To view the contents of the APPs setup file execute:"
+msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"
+
+msgid "setup"
+msgstr "instellen"
+
+msgid "reset"
+msgstr "resetten"
+
+msgid "Update system"
+msgstr "Systeem bijwerken"
+
+msgid ""
+"*** The computer must restart to complete the installation of updates ***"
+msgstr ""
+"*** De computer moet herstarten om het installeren van updates af te ronden "
+"***"
+
+msgid "Virtual Machine Hugowin732 is started (can take a while ...)"
+msgstr "Virtuele Machine hugowin732 wordt gestart (kan even duren...)"
+
+msgid "Record this data to connect to the wireless network later."
+msgstr ""
+"Leg deze gegevens vast om later verbinding te maken met het draadloze "
+"netwerk."
+
+msgid "WiFi data:"
+msgstr "Wifi-gegevens"
+
+msgid "No WiFi device found."
+msgstr "Geen wifi-apparaat gevonden.'"

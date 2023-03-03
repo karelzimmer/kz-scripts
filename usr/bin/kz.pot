@@ -1,0 +1,904 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-03 09:45+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Common module for shell scripts"
+msgstr ""
+
+msgid "give a short usage message"
+msgstr ""
+
+msgid "give this help list"
+msgstr ""
+
+msgid "print program version"
+msgstr ""
+
+msgid ""
+"The computer now uses only the battery for power.\n"
+"\n"
+"It is recommended to connect the computer to the wall socket."
+msgstr ""
+
+msgid "Press the Enter key to continue [Enter]: "
+msgstr ""
+
+msgid "Already performed by the administrator."
+msgstr ""
+
+#, sh-format
+msgid "Authentication is required to run $display_name."
+msgstr ""
+
+msgid "Run only as Developer, i.e. logged in as karel on pcNN (e.g. pc01)."
+msgstr ""
+
+#, sh-format
+msgid ""
+"Text output $display_name ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e "
+"(END) :?pB %pB\\%. .(press h for help or q to quit)"
+msgstr ""
+
+#, sh-format
+msgid "Type '$display_name --usage' for more information."
+msgstr ""
+
+#, sh-format
+msgid "Program $program_name encountered an error."
+msgstr ""
+
+#, sh-format
+msgid "Program $program_name has been interrupted."
+msgstr ""
+
+msgid ""
+"If the package manager gives apt errors, launch a Terminal window and run:"
+msgstr ""
+
+#, sh-format
+msgid "Type 'man $display_name' for more information."
+msgstr ""
+
+#, sh-format
+msgid "Type '$display_name --help' for more information."
+msgstr ""
+
+#, sh-format
+msgid ""
+"Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
+"Commons\n"
+"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+msgstr ""
+
+#, sh-format
+msgid "Information $display_name"
+msgstr ""
+
+#, sh-format
+msgid "Warning $display_name"
+msgstr ""
+
+#, sh-format
+msgid "Error message $display_name"
+msgstr ""
+
+msgid "Common module for Python scripts"
+msgstr ""
+
+msgid "Wait {}s for another package manager to finish..."
+msgstr ""
+
+msgid "Program {} has been interrupted."
+msgstr ""
+
+msgid "Authentication is required to run {}."
+msgstr ""
+
+msgid "type '{} --usage' for more information"
+msgstr ""
+
+msgid ""
+"Usage: {} [OPTION...]\n"
+"\n"
+"{}.\n"
+"\n"
+"Options:\n"
+"  -h, --help     give this help list\n"
+"  -u, --usage    give a short usage message\n"
+"  -v, --version  print program version\n"
+"\n"
+"Type 'man {}' for more information."
+msgstr ""
+
+msgid ""
+"Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n"
+"\n"
+"Type '{} --help' for more information."
+msgstr ""
+
+msgid ""
+"{} (kz) 365 ({})\n"
+"\n"
+"Written in {} by Karel Zimmer <info@karelzimmer.nl>, Creative Commons\n"
+"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+msgstr ""
+
+msgid "{}: i am a module"
+msgstr ""
+
+msgid "Run command"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Usage: $display_name COMMAND [ARGUMENT...]\n"
+"   or: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Usage: $display_name COMMAND [ARGUMENT...]\n"
+"   or: $display_name OPTION"
+msgstr ""
+
+msgid ""
+"Options:\n"
+"  -l, --list     show available COMMANDs"
+msgstr ""
+
+msgid ""
+"Arguments:\n"
+"  COMMAND        execute COMMAND\n"
+"  ARGUMENT       ARGUMENTs for COMMAND"
+msgstr ""
+
+msgid "invalid option"
+msgstr ""
+
+msgid "command does not exist"
+msgstr ""
+
+msgid ""
+"The following COMMANDs are available:\n"
+"\n"
+"     COMMAND"
+msgstr ""
+
+msgid "To execute a COMMAND:"
+msgstr ""
+
+msgid "Create backup"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=DIRECTORY]"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...]"
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "perform a test run without making any changes"
+msgstr ""
+
+msgid "starts in graphics mode"
+msgstr ""
+
+msgid ""
+"  -t, --target=DIRECTORY\n"
+"                 put backup in DIRECTORY"
+msgstr ""
+
+msgid "arguments are not allowed"
+msgstr ""
+
+msgid "directory does not exist"
+msgstr ""
+
+msgid "Connect the USB medium on which the backup will be placed."
+msgstr ""
+
+#, sh-format
+msgid ""
+"No USB medium found.\n"
+"\n"
+"Connect a USB medium, and then start $operation again."
+msgstr ""
+
+#, sh-format
+msgid ""
+"Connect only one USB medium.\n"
+"\n"
+"Now connected:\n"
+"$medium\n"
+"\n"
+"Disconnect media via Files, then restart $operation."
+msgstr ""
+
+msgid "Secure settings"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid ""
+"[1/3] These packages are installed via Add or Remove Programs, with a "
+"command\n"
+"      such as 'sudo apt --install <package|file>', or with kz install:"
+msgstr ""
+
+msgid ""
+"[2/3] These snaps are installed via Add or Remove Programs,\n"
+"      with '[sudo] install <snap>', or with kz install:"
+msgstr ""
+
+msgid ""
+"[3/3] These repositories are added with the installation of a package, with\n"
+"      the command 'sudo add-apt-repository ppa:<ppa-user>/<ppa-name>', or\n"
+"      with kz install:"
+msgstr ""
+
+msgid "Userphoto"
+msgstr ""
+
+msgid "snap is not installed"
+msgstr ""
+
+msgid "Preparing backup (this may take a while)"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Backup ended with errors.\n"
+"\n"
+"Some files may not be readable,\n"
+"or were any files added or removed while creating the backup,\n"
+"or is there not enough space on $target."
+msgstr ""
+
+msgid "Writing data from temporary memory (this may take a while)"
+msgstr ""
+
+msgid "The backup has NOT been created (DRY RUN)."
+msgstr ""
+
+msgid "Disconnect the USB media"
+msgstr ""
+
+msgid "The USB medium can be removed."
+msgstr ""
+
+msgid "Disconnect the USB medium yourself (safely!)."
+msgstr ""
+
+msgid "The backup has been made."
+msgstr ""
+
+msgid "Build package kz"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name $options_usage"
+msgstr ""
+
+#, sh-format
+msgid "Repo $repo must be on branch main."
+msgstr ""
+
+msgid "Check file names"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name $options_usage [DIRECTORY...]"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...] [DIRECTORY...]"
+msgstr ""
+
+msgid ""
+"Arguments:\n"
+"  DIRECTORY      start checking from DIRECTORY"
+msgstr ""
+
+msgid "BadName  DIR"
+msgstr ""
+
+msgid "BadName FILE"
+msgstr ""
+
+msgid "BadName SYML"
+msgstr ""
+
+msgid "BadLen.  DIR"
+msgstr ""
+
+msgid "BadLen. FILE"
+msgstr ""
+
+msgid "An error has been found."
+msgstr ""
+
+#, sh-format
+msgid "$count errors were found."
+msgstr ""
+
+msgid "Distribute kz package"
+msgstr ""
+
+msgid "* check filenames (kz ckname)..."
+msgstr ""
+
+msgid "Fix all the messages above and then restart deploy."
+msgstr ""
+
+msgid "* check scripts (kz ivp)..."
+msgstr ""
+
+msgid "* build package and website (kz build)..."
+msgstr ""
+
+msgid "Website upload failed."
+msgstr ""
+
+msgid "* install package kz (kz getdeb)..."
+msgstr ""
+
+msgid "Install package kz failed."
+msgstr ""
+
+msgid "Install kz package."
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "Install package kz (may take a while)..."
+msgstr ""
+
+msgid "Need authentication"
+msgstr ""
+
+msgid ""
+"Authentication is required to install\n"
+"package kz with documents and scripts\n"
+"from Karel Zimmer.\n"
+"\n"
+"Enter your password:"
+msgstr ""
+
+msgid "Verify"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid ""
+"An error has occurred.\n"
+"\n"
+"Possible cause:\n"
+"1. No or incorrect password entered\n"
+"2. <Cancel> was selected on the previous screen"
+msgstr ""
+
+msgid "Again"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "Stopped"
+msgstr ""
+
+msgid "Program has been stopped by the user"
+msgstr ""
+
+msgid "Finished"
+msgstr ""
+
+msgid ""
+"Package kz has been successfully installed.\n"
+"\n"
+"Now follow the steps as described\n"
+"in the Installation Checklist.\n"
+"\n"
+"Checklist installation can be found\n"
+"on the site https://karelzimmer.nl,\n"
+"under Linux.\n"
+"\n"
+"Type 'exit' to close this window."
+msgstr ""
+
+msgid "* DEVELOPER *"
+msgstr ""
+
+msgid "* check dependencies..."
+msgstr ""
+
+msgid "Password for"
+msgstr ""
+
+msgid "Website download failed."
+msgstr ""
+
+msgid "* initial pull bin repo..."
+msgstr ""
+
+msgid "Change GUI"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--addfavaft=FAVORITE] [-b|--addfavbef=FAVORITE]\n"
+"               [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]\n"
+"               [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]\n"
+"               $options_usage"
+msgstr ""
+
+msgid ""
+"Options:\n"
+"  -a, --addfavaft=FAVORITE\n"
+"                 add FAVORITE at the end\n"
+"  -b, --addfavbef=FAVORITE\n"
+"                 add FAVORITE at the beginning\n"
+"  -d, --delfav=FAVORITE\n"
+"                 delete FAVORITE\n"
+"  -l, --list     show favorites and app folders\n"
+"  -r, --resetfavs\n"
+"                 reset favorites\n"
+"  -f, --addappfolder=APPFOLDER\n"
+"                 add APPFOLDER\n"
+"  -x, --delappfolder=APPFOLDER\n"
+"                 delete APPFOLDER"
+msgstr ""
+
+msgid "Now make the change in the graphical workspace."
+msgstr ""
+
+#, sh-format
+msgid "Config database content captured ($fase)."
+msgstr ""
+
+msgid ""
+"CHANGEs in the configuration database,\n"
+"< is the old setting (A),\n"
+"> is the new setting (B):"
+msgstr ""
+
+#, sh-format
+msgid "When CHANGEs execute: ${blue}gsettings set CHANGE${normal}"
+msgstr ""
+
+msgid "Install apps"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
+"                  [-r|--remove] [--server] [-s|--simulate]\n"
+"                  $options_usage\n"
+"                  [APP...] [FILE...]"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [OPTION...] [APP...] [FILE...]"
+msgstr ""
+
+msgid "show list of available apps"
+msgstr ""
+
+msgid "show contents of files"
+msgstr ""
+
+msgid "show list of files"
+msgstr ""
+
+msgid "delete apps"
+msgstr ""
+
+msgid "install apps for a server"
+msgstr ""
+
+msgid "show commands"
+msgstr ""
+
+msgid ""
+"Arguments:\n"
+"  APP            install APPs\n"
+"  FILE           process FILEs"
+msgstr ""
+
+msgid "Prepare to install"
+msgstr ""
+
+msgid "app not found"
+msgstr ""
+
+#, sh-format
+msgid "Type '$display_name --apps' for available apps."
+msgstr ""
+
+msgid "file not found"
+msgstr ""
+
+#, sh-format
+msgid "Type '$display_name --files' for available files."
+msgstr ""
+
+msgid "No installation files found."
+msgstr ""
+
+msgid ""
+"The following APPs are available:\n"
+"\n"
+"     APP (DESCRIPTION)"
+msgstr ""
+
+msgid "     0   No apps found."
+msgstr ""
+
+msgid "To install the APPs run:"
+msgstr ""
+
+msgid "To simulate installing APPs execute:"
+msgstr ""
+
+msgid "To view the contents of the APPs installation file execute:"
+msgstr ""
+
+msgid ""
+"The following FILEs are available:\n"
+"\n"
+"     FILE"
+msgstr ""
+
+#, sh-format
+msgid "     0 No files present."
+msgstr ""
+
+msgid "To process the FILEs execute"
+msgstr ""
+
+msgid "To view the contents of FILEs execute"
+msgstr ""
+
+msgid "To simulate the processing of FILEs execute"
+msgstr ""
+
+msgid "install"
+msgstr ""
+
+msgid "remove"
+msgstr ""
+
+msgid " simulate"
+msgstr ""
+
+msgid "work"
+msgstr ""
+
+msgid "err."
+msgstr ""
+
+msgid " ok "
+msgstr ""
+
+msgid "No commands to execute."
+msgstr ""
+
+#, sh-format
+msgid ""
+"One or more commands went wrong.\n"
+"The maximum exit value is $maxrc.\n"
+"Check the log in the Terminal with the command:"
+msgstr ""
+
+#, sh-format
+msgid "Apps $action completed."
+msgstr ""
+
+msgid "Checking scripts"
+msgstr ""
+
+msgid "    Unknown script. Function check_code cannot check script code."
+msgstr ""
+
+#, sh-format
+msgid "    A line is longer than $max_line_length ($max_line_length_found)."
+msgstr ""
+
+msgid "Faulty line(s) found."
+msgstr ""
+
+msgid "    Flagged annotation found."
+msgstr ""
+
+msgid "Continue? [Y/n]: "
+msgstr ""
+
+msgid "    End spaces found."
+msgstr ""
+
+msgid "Installation menu"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [-g|--gui]"
+msgstr ""
+
+msgid "Preparing installation"
+msgstr ""
+
+msgid "Perform installation"
+msgstr ""
+
+msgid "Finish installation"
+msgstr ""
+
+msgid "Provision user"
+msgstr ""
+
+msgid "Commands menu"
+msgstr ""
+
+msgid "Checklist chapter 1"
+msgstr ""
+
+msgid "Checklist chapter 2"
+msgstr ""
+
+msgid "Checklist chapter 3"
+msgstr ""
+
+msgid "Checklist chapter 4"
+msgstr ""
+
+msgid "Used commands"
+msgstr ""
+
+msgid "Exit menu"
+msgstr ""
+
+msgid "Show WiFi data"
+msgstr ""
+
+msgid "Add users"
+msgstr ""
+
+msgid "Restore backup"
+msgstr ""
+
+msgid "Set user photo"
+msgstr ""
+
+msgid "Set up apps"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Manually"
+msgstr ""
+
+msgid "Previous menu"
+msgstr ""
+
+msgid "Select a choice:"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "Choice"
+msgstr ""
+
+msgid "No."
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Explanation"
+msgstr ""
+
+msgid "Command"
+msgstr ""
+
+#, sh-format
+msgid "Run number [1-$menu1_lines]: "
+msgstr ""
+
+#, sh-format
+msgid "Cannot handle this choice ($REPLY)."
+msgstr ""
+
+msgid ""
+"Follow the steps as described in Installation Checklist, Chapter 2.\n"
+"Checklist installation can be found on the site https://karelzimmer.nl,\n"
+"under Linux.\n"
+"\n"
+"Roughly boils down to:\n"
+"1. Download an image file (.iso).\n"
+"2. Create a bootable Live USB stick or DVD.\n"
+"3. Boot the computer from this USB stick or DVD.\n"
+"4. Install Linux."
+msgstr ""
+
+msgid "The following will be executed:"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+#, sh-format
+msgid "$prompt [Y/n]: "
+msgstr ""
+
+msgid ""
+"1. Add any additional Standard or Admin users by pressing the Super key[1],\n"
+"   type 'user' and click behind Settings on Users.\n"
+"2. Click Unlock and enter password.\n"
+"3. Click Add User.\n"
+"4. Complete the screen and click Add.\n"
+"5. Close the Users screen.\n"
+"\n"
+"[1] The Super key is the Windows key, Command key (Apple), or Magnifier key "
+"(Chromebook)."
+msgstr ""
+
+msgid ""
+"1. Change the user photo by pressing the Super key[1], type 'user' and "
+"click\n"
+"   behind Settings on Users.\n"
+"2. Click Unlock.\n"
+"3. Click the image for the user.\n"
+"4. Click Select a file.\n"
+"5. Select Userphoto in Personal folder / Settings.\n"
+"6. Close the Users screen.\n"
+"\n"
+"[1] The Super key is the Windows key, Command key (Apple), or Magnifier key "
+"(Chromebook)."
+msgstr ""
+
+msgid "No user photo was found when backing up."
+msgstr ""
+
+msgid "The following has been executed:"
+msgstr ""
+
+#, sh-format
+msgid "Usage: $display_name [--dry-run] [-g|--gui] [-s|--source=DIRECTORY]"
+msgstr ""
+
+msgid ""
+"  -s, --source=DIRECTORY\n"
+"                 use backup in DIRECTORY"
+msgstr ""
+
+msgid "Make sure that the USB medium containing the backup is connected."
+msgstr ""
+
+#, sh-format
+msgid ""
+"No backup found on connected USB medium.\n"
+"\n"
+"Connect a USB medium with the directory backup-$HOSTNAME-$USER, and then "
+"start restore again."
+msgstr ""
+
+msgid "Backup copy will be RESTORED."
+msgstr ""
+
+msgid "Continue? [y/N]: "
+msgstr ""
+
+msgid "Restore settings"
+msgstr ""
+
+msgid "Preparing restore (this can take a while)"
+msgstr ""
+
+#, sh-format
+msgid ""
+"Restore ended with errors.\n"
+"\n"
+"Some files may not be readable,\n"
+"or were any files added or removed while restoring the backup,\n"
+"or is there not enough space on $target."
+msgstr ""
+
+msgid "The backup was NOT restored (DRY RUN)."
+msgstr ""
+
+msgid "The backup has been restored."
+msgstr ""
+
+#, sh-format
+msgid ""
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files]\n"
+"                [-g|--gui] [-r|--reset] {--server] [-s|--simulate]\n"
+"                $options_usage\n"
+"                [APP...] [FILE...]"
+msgstr ""
+
+msgid "set apps on default values"
+msgstr ""
+
+msgid ""
+"Arguments:\n"
+"  APP            setup APPs\n"
+"  FILE           process FILEs"
+msgstr ""
+
+msgid "setup apps for a server"
+msgstr ""
+
+msgid "No setting files found."
+msgstr ""
+
+msgid "To setup the APPs run:"
+msgstr ""
+
+msgid "To simulate resetting APPs execute:"
+msgstr ""
+
+msgid "To view the contents of the APPs setup file execute:"
+msgstr ""
+
+msgid "setup"
+msgstr ""
+
+msgid "reset"
+msgstr ""
+
+msgid "Update system"
+msgstr ""
+
+msgid ""
+"*** The computer must restart to complete the installation of updates ***"
+msgstr ""
+
+msgid "Virtual Machine Hugowin732 is started (can take a while ...)"
+msgstr ""
+
+msgid "Record this data to connect to the wireless network later."
+msgstr ""
+
+msgid "WiFi data:"
+msgstr ""
+
+msgid "No WiFi device found."
+msgstr ""

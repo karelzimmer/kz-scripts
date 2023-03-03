@@ -1,20 +1,25 @@
 """
-Algemene module voor Python scripts.
+Common module for Python scripts.
 
-Deze module geeft toegang tot algemene functies.
+This module gives access to general functions.
 """
 ###############################################################################
-# Algemene module voor Python scripts.
+# Common module for Python scripts.
 #
-# Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 import argparse
+import gettext
 import os
 import subprocess
 import sys
 import time
+
+gettext.bindtextdomain('kz', '/usr/share/locale')
+gettext.textdomain('kz')
+_ = gettext.gettext
 
 
 ###############################################################################
@@ -22,7 +27,7 @@ import time
 ###############################################################################
 
 module_name = 'kz_common.py'
-module_desc = 'Algemene module voor Python scripts'
+module_desc = (_('Common module for Python scripts'))
 module_path = f"{os.path.realpath(os.path.dirname(__file__))}"
 
 ok = 0
@@ -40,7 +45,7 @@ err = 1
 
 def check_dpkgd_snapd():
     """
-    Deze functie controleert op al een lopende Debian pakketbeheerder.
+    This function checks for a Debian package manager already running.
     """
     dpkg_wait = 10
 
@@ -66,8 +71,8 @@ def check_dpkgd_snapd():
             except Exception:
                 break
             else:
-                print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
-                      'is...')
+                print(_('Wait {}s for another package manager to finish...').
+                      format(dpkg_wait))
                 time.sleep(dpkg_wait)
         else:
             try:
@@ -80,34 +85,33 @@ def check_dpkgd_snapd():
             except Exception:
                 break
             else:
-                print(f'Wacht {dpkg_wait}s tot andere pakketbeheerder klaar '
-                      'is...')
+                print(_('Wait {}s for another package manager to finish...').
+                      format(dpkg_wait))
                 time.sleep(dpkg_wait)
 
 
 def check_on_ac_power(program_name):
     """
-    Deze functie controleert de stroomvoorziening.
+    This function monitors the power supply.
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
-        print('De computer gebruikt nu alleen de accu voor de '
-              'stroomvoorziening.'
-              '\nGeadviseerd wordt om de computer aan te sluiten op het '
-              'stopcontact.')
+        print('\n' + _('The computer now uses only the battery for power.\n\n'
+              'It is recommended to connect the computer to the wall socket.'))
         try:
-            input('\nDruk op de Enter-toets om door te gaan [Enter]: ')
+            input('\n' + _('Press the Enter key to continue [Enter]: '))
         except KeyboardInterrupt:
-            print(f"\nProgramma {program_name} is afgebroken.")
+            print('\n' + _('Program {} has been interrupted.').
+                  format(program_name))
             sys.exit(err)
 
 
-def check_user_root(display_name):
+def check_user_root(program_name, display_name):
     """
-    Deze functie controleert of de gebruiker root is.
+    This function checks if the user is root.
     """
     if check_user_sudo() != ok:
-        print(f'Reeds uitgevoerd door de beheerder.')
+        print(_('Already performed by the administrator.'))
         sys.exit(ok)
     else:
         try:
@@ -115,11 +119,13 @@ def check_user_root(display_name):
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
         except Exception:
-            print(f'Authenticatie is vereist om {display_name} uit te voeren.')
+            print(_('Authentication is required to run {}.').
+                  format(display_name))
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
-                print(f"\nProgramma {display_name} is afgebroken.")
+                print('\n' + _('Program {} has been interrupted.').
+                      format(program_name))
                 sys.exit(err)
             except Exception as ex:
                 print(ex)
@@ -128,7 +134,7 @@ def check_user_root(display_name):
 
 def check_user_sudo():
     """
-    Deze functie controleert of de gebruiker sudo mag gebruiken.
+    This function checks if the user is allowed to use sudo.
     """
     if os.getuid() == 0:
         return(ok)
@@ -144,9 +150,10 @@ def check_user_sudo():
 
 def process_options(program_name, program_desc, display_name):
     """
-    Deze functie verwerkt de algemene opties.
+    This function handles the general options.
     """
-    usage_line = f"typ '{display_name} --usage' voor meer informatie"
+    usage_line = _("type '{} --usage' for more information").\
+        format(display_name)
 
     parser = argparse.ArgumentParser(prog=display_name, add_help=False,
                                      usage=usage_line)
@@ -168,32 +175,33 @@ def process_options(program_name, program_desc, display_name):
 
 def process_option_help(display_name, program_desc):
     """
-    Deze functie toont de beschikbare hulp.
+    This function shows the available help.
     """
-    print(f"""Gebruik: {display_name} [OPTIE...]
-
-{program_desc}.
-
-Opties:
-  -h, --help     toon deze hulptekst
-  -u, --usage    toon een korte gebruikssamenvatting
-  -v, --version  toon de programmaversie
-
-Typ 'man {display_name}' voor meer informatie.""")
+    print(_('Usage: {} [OPTION...]\n'
+            '\n'
+            '{}.\n'
+            '\n'
+            'Options:\n'
+            '  -h, --help     give this help list\n'
+            '  -u, --usage    give a short usage message\n'
+            '  -v, --version  print program version\n\n'
+            "Type 'man {}' for more information.").
+          format(display_name, program_desc, display_name))
 
 
 def process_option_usage(display_name):
     """
-    Deze functie toont de beschikbare opties.
+    This function shows the available options.
     """
-    print(f"""Gebruik: {display_name} [-h|--help] [-u|--usage] [-v|--version]
-
-Typ '{display_name} --help' voor meer informatie.""")
+    print(_('Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n'
+            '\n'
+            "Type '{} --help' for more information.").
+          format(display_name, display_name))
 
 
 def process_option_version(program_name):
     """
-    Deze functie toont informatie over de versie, auteur, en licentie.
+    This function displays version, author, and license information.
     """
     build_id = '1970-01-01'
     cmd = ''
@@ -208,19 +216,20 @@ def process_option_version(program_name):
         print(ex)
         sys.exit(err)
     finally:
-        cmd = f"grep '# Geschreven in ' {module_path}/{program_name}"
+        cmd = f"grep '# Written in ' {module_path}/{program_name}"
         cmd = f"{cmd} | cut --delimiter=' ' --fields=4"
         program_year = subprocess.check_output(cmd, shell=True,
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
             program_year = 1970
-        print(f"""{program_name} (kz) 365 ({build_id})
-
-Geschreven in {program_year} door Karel Zimmer <info@karelzimmer.nl>, \
-Creative Commons
-Publiek Domein Verklaring \
-<http://creativecommons.org/publicdomain/zero/1.0>.""")
+        print(_('{} (kz) 365 ({})\n'
+                '\n'
+                'Written in {} by Karel Zimmer <info@karelzimmer.nl>, \
+Creative Commons\n'
+                'Public Domain Dedication \
+<http://creativecommons.org/publicdomain/zero/1.0>.')
+              .format(program_name, build_id, program_year))
 
 
 ###############################################################################
@@ -228,4 +237,4 @@ Publiek Domein Verklaring \
 ###############################################################################
 
 if __name__ == '__main__':
-    print(f'{module_name}: ik ben een module')
+    print(_('{}: i am a module').format(module_name))

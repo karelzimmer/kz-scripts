@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Scripts controleren.
+# Checking scripts.
 #
-# Geschreven in 2015 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2015 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 set -o errexit
@@ -17,15 +17,18 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-ivp'
-declare program_desc='Scripts controleren'
+declare program_desc
+program_desc=$(gettext 'Checking scripts')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+declare usage
+usage=$(eval_gettext "Usage: \$display_name \$options_usage")
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
 $options_help"
 
 
@@ -71,12 +74,12 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf  "$display_name: %s: %s\n$usage_line\n" \
-                "$*" 'argumenten zijn niet toegestaan'
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 
-    # Aangemeld als ontwikkelaar?
+    # Logged on as developer?
     if ! kz_common.developer check; then
         kz_common.developer report
         exit $err
@@ -143,7 +146,7 @@ function check_code {
     else
         err "
 In $script:
-    Onbekend script.  Functie check_code kan scriptcode niet controleren."
+$(gettext "    Unknown script. Function check_code cannot check script code.")"
         maxrc=$err
     fi
 }
@@ -167,7 +170,8 @@ function check_record_length {
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
         err "
 In $script:
-    Een regel is langer dan $max_line_length ($max_line_length_found).
+$(eval_gettext "    A line is longer than \$max_line_length \
+(\$max_line_length_found).")
 "
         maxrc=$err
     fi
@@ -177,14 +181,14 @@ In $script:
 function check_record_types {
     local wrong_record=''
 
-    # Kijk naar regels die beginnen met #1 t/m #9.
-    # Goed:
+    # Look at lines that start with #1 to #9.
+    # Ok:
     # #1 en #2
-    # #1 foo (bar)              (met optie -a, --app tonen en verwerken)
-    # #1-foo (bar)              (met optie -a, --app niet tonen, wel verwerken)
-    # #2 Verwijd./reset opdracht
-    # Fout:
-    # De rest :-)
+    # #1 foo              (with option -a, --app: show and process foo)
+    # #1-foo              (woth option -a, --app: do not show, but process foo)
+    # #2 Remove/reset command
+    # Wrong:
+    # The rest :-)
     wrong_record=$(
         grep --regexp='#[1-9]' "$script" --line-number  |
         grep --regexp='#[1-2]$' --invert-match          |
@@ -194,7 +198,7 @@ function check_record_types {
     if [[ $wrong_record ]]; then
         err "
 In $script:
-    Foutieve regel(s) gevonden.
+    $(gettext 'Faulty line(s) found.')
 $(
     printf '%s' "$wrong_record" |
                 nl --number-width=8 --number-separator='' --body-numbering=n
@@ -218,18 +222,20 @@ function check_shellcheck {
 function check_tags {
     if grep --quiet             \
             --word-regexp       \
-            --regexp='FIXME'':' \
-            --regexp='TODO'':'  \
+            --regexp='TODO'     \
+            --regexp='FIXME'    \
+            --regexp='BUG'      \
             "$script"; then
         warn "
 In $script:
-    Gemarkeerde annotatie gevonden.
+$(gettext '    Flagged annotation found.')
 
 $(
     grep    --line-number           \
             --word-regexp           \
-            --regexp='FIXME'':'     \
-            --regexp='TODO'':'      \
+            --regexp='TODO'         \
+            --regexp='FIXME'        \
+            --regexp='BUG'          \
             "$script"               |
     nl      --number-width=4        \
             --number-separator=''   \
@@ -237,9 +243,9 @@ $(
 )
 "
     while true; do
-        read -rp 'Doorgaan? [J/n]: '
+        read -rp "$(gettext 'Continue? [Y/n]: ')"
         case $REPLY in
-            j*|J*|'')
+            y*|Y*|j*|J*|'')
                 break
                 ;;
             n*|N*)
@@ -259,7 +265,7 @@ function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
         err "
 In $script:
-    Eindspaties gevonden.
+$(gettext '    End spaces found.')
 $(
     grep    --line-number --regexp=' ''$' "$script" |
     nl      --number-width=4  --number-separator='' --body-numbering=n

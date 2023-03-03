@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Pakket kz distribueren.
+# Distribute kz package.
 #
-# Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 set -o errexit
@@ -17,15 +17,18 @@ source "$program_path"/kz_common.sh
 ###############################################################################
 
 declare program_name='kz-deploy'
-declare program_desc='Pakket kz distribueren'
+declare program_desc
+program_desc=$(gettext 'Distribute kz package')
 declare display_name=${program_name/kz-/kz }
 
-declare usage="Gebruik: $display_name $options_usage"
-declare help="Gebruik: $display_name [OPTIE...]
+declare usage
+usage=$(eval_gettext "Usage: \$display_name \$options_usage")
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-Opties:
+$(gettext 'Options:')
 $options_help"
 
 declare scripts_repo=$HOME/kz-scripts
@@ -73,12 +76,12 @@ function check_input {
     done
 
     if [[ "$*" ]]; then
-        printf  "$display_name: %s: %s\n$usage_line\n" \
-                "$*" 'argumenten zijn niet toegestaan'
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
         exit $err
     fi
 
-    # Aangemeld als ontwikkelaar?
+    # Logged on as developer?
     if ! kz_common.developer check; then
         kz_common.developer report
         exit $err
@@ -108,15 +111,15 @@ function check_names {
     local docs_repo=$HOME/kz-docs
     local app_uploads_repo=$HOME/kz-uploads/app
 
-    info '* controleer bestandsnamen (kz ckname)...'
+    info "$(gettext '* check filenames (kz ckname)...')"
     log "Check filenames with kz ckname."
     "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
                                         "$docs_repo"        \
                                         "$deb_repo"         \
                                         "$app_uploads_repo" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err '
-Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
+        err "
+$(gettext 'Fix all the messages above and then restart deploy.')"
         exit $check_rc
     fi
 }
@@ -125,12 +128,12 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 function check_scripts {
     local -i check_rc=0
 
-    info '* controleer scripts (kz ivp)...'
+    info "$(gettext '* check scripts (kz ivp)...')"
     log "Check scripts with kz ivp."
     "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err '
-Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
+        err "
+$(gettext 'Fix all the messages above and then restart deploy.')"
         exit $check_rc
     fi
 }
@@ -139,12 +142,12 @@ Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
 function build_package {
     local -i check_rc=0
 
-    info '* bouw pakket en website (kz build)...'
+    info "$(gettext '* build package and website (kz build)...')"
     log "Build package and website with kz build."
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err '
-Herstel alle meldingen hierboven en start daarna deploy opnieuw.'
+        err "
+$(gettext 'Fix all the messages above and then restart deploy.')"
         exit $check_rc
     fi
 }
@@ -173,7 +176,7 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
         rm      "$ftp_login"
-        err 'Uploaden website is mislukt.'
+        err "$(gettext 'Website upload failed.')"
         exit $err
     fi
     sleep 5
@@ -181,9 +184,9 @@ function upload_website {
 
 
 function install_package {
-    info '* installeer pakket kz (kz getdeb)...'
+    info "$(gettext '* install package kz (kz getdeb)...')"
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
-        err 'Installeren pakket kz is niet uitgevoerd.'
+        err "$(gettext 'Install package kz failed.')"
         exit $err
     fi
 }

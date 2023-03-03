@@ -1,15 +1,17 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand voor Ubuntu desktop op pc04 voor nina.
+# Setup file for Ubuntu desktop on pc04 for nina.
 #
-# Geschreven in 2013 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+# Written in 2013 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1 calibre (e-boekmanager)
+#1 calibre
+## Ebook manager
 kz-gset --addfavaft=calibre-gui
 #2 kz-gset --delfav=calibre-gui
 
-#1 libreoffice-calc (spreadsheet van LibreOffice)
+#1 libreoffice-calc
+## LibreOffice spreadsheet
 kz-gset --addfavaft=libreoffice-calc
 #2 kz-gset --delfav=libreoffice-calc
