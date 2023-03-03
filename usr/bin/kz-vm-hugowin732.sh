@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck shell=bash
 ###############################################################################
 # Start VM hugowin732.
 #
@@ -6,7 +7,7 @@
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-text='Virtuele Machine hugowin732 wordt gestart (kan even duren...)'
+text=$(gettext 'Virtual Machine Hugowin732 is started (can take a while ...)')
 title='VirtualBox'
 
 function start_vm {
