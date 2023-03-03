@@ -111,9 +111,8 @@ function process_option_list {
                     --number-separator='] ' \
                     --body-numbering=a      |
             sed     --expression='s/^/[/'
-    info "$(
-eval_gettext "To execute a COMMAND:
-\${blue}\$display_name COMMAND\${normal}")"
+    info "
+$(gettext 'To execute a COMMAND:') ${blue}$display_name COMMAND${normal}"
 }
 
 
