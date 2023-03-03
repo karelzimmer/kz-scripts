@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 08:42+0100\n"
+"POT-Creation-Date: 2023-03-03 09:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -892,4 +892,13 @@ msgid ""
 msgstr ""
 
 msgid "Virtual Machine Hugowin732 is started (can take a while ...)"
+msgstr ""
+
+msgid "Record this data to connect to the wireless network later."
+msgstr ""
+
+msgid "WiFi data:"
+msgstr ""
+
+msgid "No WiFi device found."
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 08:42+0100\n"
+"POT-Creation-Date: 2023-03-03 09:04+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1074,3 +1074,14 @@ msgstr ""
 
 msgid "Virtual Machine Hugowin732 is started (can take a while ...)"
 msgstr "Virtuele Machine hugowin732 wordt gestart (kan even duren...)"
+
+msgid "Record this data to connect to the wireless network later."
+msgstr ""
+"Leg deze gegevens vast om later verbinding te maken met het draadloze "
+"netwerk."
+
+msgid "WiFi data:"
+msgstr "Wifi-gegevens"
+
+msgid "No WiFi device found."
+msgstr "Geen wifi-apparaat gevonden.'"
