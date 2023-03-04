@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Instelbestand for Ubuntu desktop.
+# Setup file for Ubuntu desktop.
 #
 # Written in 2013 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.

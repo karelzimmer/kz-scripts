@@ -93,18 +93,18 @@ function check_input {
 
 function process_input {
     info '* CHECK *'
-    check_branch
-    check_names
-    check_scripts
+    check_branch    #FIXME Really needed/wanted?
+    check_names     #FIXME Should these two go to kz-build?
+    check_scripts   #FIXME  Why build a "wrong" package?
     info '
 * BUILD *'
-    build_package
+    build_package   #FIXME IS this not already done by kz-build?
     info '
 * DEPLOY *'
-    upload_website
+    upload_website  #FIXME Now that's the real deploy!
     info '
 * INSTALL *'
-    install_package
+    install_package #FIXME Just as check as every user would do.
 }
 
 
@@ -126,7 +126,6 @@ function check_names {
     local app_uploads_repo=$HOME/kz-uploads/app
 
     info "$(gettext '* check filenames (kz ckname)...')"
-    log "Check filenames with kz ckname."
     "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
                                         "$docs_repo"        \
                                         "$deb_repo"         \
@@ -143,7 +142,6 @@ function check_scripts {
     local -i check_rc=0
 
     info "$(gettext '* check scripts (kz ivp)...')"
-    log "Check scripts with kz ivp."
     "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err "
@@ -157,7 +155,6 @@ function build_package {
     local -i check_rc=0
 
     info "$(gettext '* build package and website (kz build)...')"
-    log "Build package and website with kz build."
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err "
