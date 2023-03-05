@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 09:04+0100\n"
+"POT-Creation-Date: 2023-03-05 15:32+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -374,6 +374,25 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
 
+msgid "* check filenames (kz ckname)..."
+msgstr "* controleer bestandsnamen (kz ckname)..."
+
+msgid "Fix all the messages above and then restart the build."
+msgstr "Herstel alle meldingen hierboven en start daarna de build opnieuw."
+
+msgid "* check scripts (kz ivp)..."
+msgstr "* controleer scripts (kz ivp)..."
+
+msgid "* build website..."
+msgstr "* bouw website..."
+
+msgid "* build package..."
+msgstr "* bouw pakket..."
+
+msgid "* install package..."
+msgstr "* installeer pakker..."
+
+#FIXME Hoort hier?
 #, sh-format
 msgid "Repo $repo must be on branch main."
 msgstr "Repo $repo moet op branch main staan."
@@ -421,17 +440,11 @@ msgstr "Er zijn $count fouten gevonden."
 msgid "Distribute kz package"
 msgstr "Pakket kz distribueren"
 
-msgid "* check filenames (kz ckname)..."
-msgstr "* controleer bestandsnamen (kz ckname)..."
-
-msgid "Fix all the messages above and then restart deploy."
-msgstr "Herstel alle meldingen hierboven en start daarna deploy opnieuw."
-
-msgid "* check scripts (kz ivp)..."
-msgstr "* controleer scripts (kz ivp)..."
-
 msgid "* build package and website (kz build)..."
 msgstr "* bouw pakket en website (kz build)..."
+
+msgid "Fix all the messages above and then restart the deploy."
+msgstr "Herstel alle meldingen hierboven en start daarna de deploy opnieuw."
 
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."

@@ -126,7 +126,7 @@ function build_package {
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err "
-$(gettext 'Fix all the messages above and then restart deploy.')"
+$(gettext 'Fix all the messages above and then restart the deploy.')"
         exit $check_rc
     fi
 }
