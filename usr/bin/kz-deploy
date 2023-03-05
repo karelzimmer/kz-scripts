@@ -94,8 +94,6 @@ function check_input {
 function process_input {
     info '* CHECK *'
     check_branch
-    check_names
-    check_scripts
     info '
 * BUILD *'
     build_package
@@ -121,47 +119,14 @@ function check_branch {
 }
 
 
-function check_names {
-    local -i check_rc=0
-    local app_uploads_repo=$HOME/kz-uploads/app
-
-    info "$(gettext '* check filenames (kz ckname)...')"
-    log "Check filenames with kz ckname."
-    "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
-                                        "$docs_repo"        \
-                                        "$deb_repo"         \
-                                        "$app_uploads_repo" || check_rc=$?
-    if [[ $check_rc -ne $ok ]]; then
-        err "
-$(gettext 'Fix all the messages above and then restart deploy.')"
-        exit $check_rc
-    fi
-}
-
-
-function check_scripts {
-    local -i check_rc=0
-
-    info "$(gettext '* check scripts (kz ivp)...')"
-    log "Check scripts with kz ivp."
-    "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
-    if [[ $check_rc -ne $ok ]]; then
-        err "
-$(gettext 'Fix all the messages above and then restart deploy.')"
-        exit $check_rc
-    fi
-}
-
-
 function build_package {
     local -i check_rc=0
 
     info "$(gettext '* build package and website (kz build)...')"
-    log "Build package and website with kz build."
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err "
-$(gettext 'Fix all the messages above and then restart deploy.')"
+$(gettext 'Fix all the messages above and then restart the deploy.')"
         exit $check_rc
     fi
 }

@@ -63,7 +63,6 @@ declare -A deb_sources=(
 declare -A deb_targets=(
                [dist]=$deb_repo_distdir
                  [mo]=$deb_repo_distdir/usr/share/locale/nl/LC_MESSAGES
-                 [mo]=$deb_distdir/usr/share/locale/nl/LC_MESSAGES
               [build]=$deb_repo_distdir/usr/local/etc
              [man_en]=$deb_repo_distdir/usr/share/man/man1
              [man_nl]=$deb_repo_distdir/usr/share/man/nl/man1
@@ -120,32 +119,50 @@ function check_input {
         kz_common.developer report
         exit $err
     fi
-
-    # Checkout to main?
-    for repo in $docs_repo $scripts_repo $deb_repo $uploads_repo; do
-        cd "$repo"
-        if [[ $(git branch --show-current) != 'main' ]]; then
-            err "$(eval_gettext "Repo \$repo must be on branch main.")"
-            gitstat
-            exit $err
-        fi
-    done
-
-    # Checkout to main?
-    for repo in $docs_repo $scripts_repo $deb_repo $uploads_repo; do
-        cd "$repo"
-        if [[ $(git branch --show-current) != 'main' ]]; then
-            err "Repo $repo not on branch main."
-            exit $err
-        fi
-    done
 }
 
 
 function process_input {
+    info '* CHECK *'
+    check_names
+    check_scripts
+    info '
+* BUILD *'
     build_uploads
     build_deb
+    info '
+* INSTALL *'
     install_deb
+}
+
+
+function check_names {
+    local -i check_rc=0
+    local app_uploads_repo=$HOME/kz-uploads/app
+
+    info "$(gettext '* check filenames (kz ckname)...')"
+    "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
+                                        "$docs_repo"        \
+                                        "$deb_repo"         \
+                                        "$app_uploads_repo" || check_rc=$?
+    if [[ $check_rc -ne $ok ]]; then
+        err "
+$(gettext 'Fix all the messages above and then restart the build.')"
+        exit $check_rc
+    fi
+}
+
+
+function check_scripts {
+    local -i check_rc=0
+
+    info "$(gettext '* check scripts (kz ivp)...')"
+    "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
+    if [[ $check_rc -ne $ok ]]; then
+        err "
+$(gettext 'Fix all the messages above and then restart the build.')"
+        exit $check_rc
+    fi
 }
 
 
@@ -154,7 +171,7 @@ function build_uploads {
     local pdfdir=''
     local tmptxt=''
 
-    info 'Build website...'
+    info "$(gettext '* build website...')"
 
     # Make sure the permissions are correct for the sync.
     chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
@@ -244,7 +261,7 @@ function build_deb {
     local dir=''
     local file=''
 
-    info 'Build Debian package...'
+    info "$(gettext '* build package...')"
 
     # Make sure all necessary directories are available for the sync.
     for dir in "${deb_targets[@]}"; do
@@ -297,13 +314,12 @@ function build_deb {
 
 
 function install_deb {
-    info 'Install Debian package...'
+    info "$(gettext '* install package...')"
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
             reinstall                           \
             --yes                               \
             "${uploads_targets[deb]}/$deb_name" |& $logcmd
-    info 'Please continue with Integration test.'
 }
 
 
