@@ -63,7 +63,6 @@ declare -A deb_sources=(
 declare -A deb_targets=(
                [dist]=$deb_repo_distdir
                  [mo]=$deb_repo_distdir/usr/share/locale/nl/LC_MESSAGES
-                 [mo]=$deb_distdir/usr/share/locale/nl/LC_MESSAGES
               [build]=$deb_repo_distdir/usr/local/etc
              [man_en]=$deb_repo_distdir/usr/share/man/man1
              [man_nl]=$deb_repo_distdir/usr/share/man/nl/man1
@@ -321,7 +320,6 @@ function install_deb {
             reinstall                           \
             --yes                               \
             "${uploads_targets[deb]}/$deb_name" |& $logcmd
-    info 'Please continue with Integration test.'
 }
 
 
