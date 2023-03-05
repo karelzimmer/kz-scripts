@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-05 15:32+0100\n"
+"POT-Creation-Date: 2023-03-05 15:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -314,18 +314,13 @@ msgstr ""
 msgid "* check scripts (kz ivp)..."
 msgstr ""
 
-msgid "* build the website..."
+msgid "* build website..."
 msgstr ""
 
 msgid "* build package..."
 msgstr ""
 
 msgid "* install package..."
-msgstr ""
-
-#FIXME Hoort hier?
-#, sh-format
-msgid "Repo $repo must be on branch main."
 msgstr ""
 
 msgid "Check file names"
@@ -369,10 +364,14 @@ msgstr ""
 msgid "Distribute kz package"
 msgstr ""
 
+#, sh-format
+msgid "Repo $repo must be on branch main."
+msgstr ""
+
 msgid "* build package and website (kz build)..."
 msgstr ""
 
-msgid "Fix all the messages above and then restart deploy."
+msgid "Fix all the messages above and then restart the deploy."
 msgstr ""
 
 msgid "Website upload failed."
