@@ -362,8 +362,8 @@ function term_script {
     local dev=''
     local -i rc=0
 
-    text=$(gettext 'Writing data from temporary memory (this may take a \
-while)')
+    text=$(gettext "Writing data from temporary memory (this may take a \
+while)")
     if ! $option_dry_run; then
         if $option_gui; then
             sync                            |
