@@ -35,11 +35,24 @@ Opdracht \fBkz build\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
 .sp
 De volgende acties worden uitgevoerd:
 .RS
-1. Controleer afhankelijkheden.
+   Als check:
 .br
-2. Bouw website.
+1. Controleer scriptnamen (met \fBkz ckname\fR).
 .br
-3. Bouw pakket.
+2. Controleer scripts (met \fBkz ivp\fR).
+.br
+   De build:
+.br
+3. Bouw website.
+.br
+4. Bouw pakket.
+.br
+   De installatie:
+.br
+5. Installer pakket kz
+.RE
+.sp
+Met opdracht \fBkz deploy\fR kan de build geplaatst worden op de website.
 .\"
 .\"
 .SH OPTIES
