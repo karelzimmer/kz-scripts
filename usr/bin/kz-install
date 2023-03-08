@@ -451,7 +451,7 @@ function process_cmds_file {
     if $option_simulate; then
         operation+=$(gettext ' simulate')
     else
-        status_busy="[${blink}${yellow}$(gettext 'work')${normal}]"
+        status_busy="[${blink}${yellow}$(gettext 'busy')${normal}]"
         status_err="[${red}$(gettext 'err.')${normal}]"
         status_ok="[${green}$(gettext ' ok ')${normal}]"
         printf '%s' "${cursor_invisable}"
@@ -527,7 +527,7 @@ function process_command_record {
         else
             # Terminate text in Terminal due to update status.
             #  <--------------- tput cols --------------->
-            # '[work] [ 1/1 ] [ 1] Too long description...' <=== on 1 line
+            # '[busy] [ 1/1 ] [ 1] Too long description...' <=== on 1 line
             #  <------- 20 ------->                    <3>
             desc_maxlen=$(($(tput cols) - 20))
             if [[ ${#desc_printf} -gt $desc_maxlen ]]; then

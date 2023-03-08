@@ -613,7 +613,7 @@ msgstr ""
 msgid " simulate"
 msgstr ""
 
-msgid "work"
+msgid "busy"
 msgstr ""
 
 msgid "err."

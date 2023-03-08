@@ -739,7 +739,7 @@ msgstr "verwijderen"
 msgid " simulate"
 msgstr " simuleren"
 
-msgid "work"
+msgid "busy"
 msgstr "werk"
 
 msgid "err."
