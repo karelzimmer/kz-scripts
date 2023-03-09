@@ -570,7 +570,7 @@ msgstr ""
 msgid ""
 "The following APPs are available:\n"
 "\n"
-"     APP (DESCRIPTION)"
+"     APP"
 msgstr ""
 
 msgid "     0   No apps found."

@@ -350,7 +350,7 @@ function process_option_apps {
 
     text="$(gettext 'The following APPs are available:
 
-     APP (DESCRIPTION)')
+     APP')
 $(
     if !    grep    --no-messages           \
                     --regexp='^#1 '         \
