@@ -374,7 +374,7 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
 
-msgid "* check filenames (kz ckname)..."
+msgid "* check file names (kz ckname)..."
 msgstr "* controleer bestandsnamen (kz ckname)..."
 
 msgid "Fix all the messages above and then restart the build."
