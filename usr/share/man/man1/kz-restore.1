@@ -1,8 +1,9 @@
 .\"############################################################################
 .\"# Man-pagina voor kz-restore.
 .\"#
-.\"# # Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative
-.\"# Commons Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+.\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+.\"# Public Domain Dedication
+.\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
 .TH KZ-RESTORE 1 "Handleiding kz" "kz 365" "Handleiding kz"
@@ -13,7 +14,7 @@ This manual page will soon be translated from NL to EN.
 .\"
 .\"
 .SH NAAM
-kz-restore \- Back-up terugzetten.
+kz-restore \- Reservekopie terugzetten.
 .\"
 .\"
 .SH SAMENVATTING
@@ -22,17 +23,17 @@ kz-restore \- Back-up terugzetten.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz restore\fR zet een back-up (reservekopie) van de Persoonlijke map terug.
+\fBkz restore\fR zet een reservekopie (back-up) van de Persoonlijke map terug.
 .sp
 In een grafische werkomgeving kan opdracht \fBkz restore\fR worden uitgevoerd
 door te zoeken naar \fBback\fR, klik op \fBReservekopie terugzetten\fR.
 .sp
-De back-up wordt verwacht op een aangekoppeld usb-medium zoals een usb externe
-harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, bijvoorbeeld
-/media/jan/backupdisk/backup-pc02-jan.
+De reservekopie wordt verwacht op een aangekoppeld usb-medium zoals een usb
+externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR,
+bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
 .sp
-Als de back-up is teruggezet, worden de de eerder ingestelde Achtergrond en
-Favorieten teruggezet vanuit Persoonlijke map / Instellingen.
+Als de reservekopie is teruggezet, worden de de eerder ingestelde Achtergrond
+en Favorieten teruggezet vanuit Persoonlijke map / Instellingen.
 .sp
 Met optie \fB-s\fR, \fB--source\fR=\fIBRONMAP\fR kan een andere locatie
 opgegeven worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk
@@ -42,10 +43,10 @@ Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
 Het wordt meestal gebruikt in om te zien wat een rsync-commando gaat doen
 voordat men het daadwerkelijk uitvoert.
 .sp
-Voor het terugzetten van de back-up wordt rsync gebruikt.
+Voor het terugzetten van de reservekopie wordt rsync gebruikt.
 .br
-Bestanden in de Persoonlijke map die niet aanwezig zijn in de back-up worden
-niet verwijderd (rsync's optie --delete wordt niet gebruikt).
+Bestanden in de Persoonlijke map die niet aanwezig zijn in de reservekopie
+worden niet verwijderd (rsync's optie --delete wordt niet gebruikt).
 .sp
 Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
 .\"
@@ -56,7 +57,7 @@ Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
 Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
 \fB-s\fR, \fB--source=\fIBRONMAP\fR
-Gebruik back-ups in de \fIBRONMAP\fR.
+Gebruik reservekopieën in de \fIBRONMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -107,28 +108,28 @@ Day 1 Operations
 .sp
 \fBkz restore\fR
 .RS
-Zet alles in de back-up terug.
+Zet alles in de reservekopie (back-up) terug.
 .br
-Hiervoor is in een grafische werkomgeving ook starter \fBBack-up terugzetten\fR
-beschikbaar.
+Hiervoor is in een grafische werkomgeving ook starter \fBReservekopie
+terugzetten\fR beschikbaar.
 .RE
 .sp
 \fBkz restore --dry-run\fR
 .RS
-Toon bestanden die teruggezet zouden worden uit de back-up.
+Toon bestanden die teruggezet zouden worden uit de reservekopie.
 .RE
 .sp
 \fBkz restore\
  --source=smb://fileserver/backups\fR
 .RS
-Zet de back-up terug vanaf SMB-share backups op fileserver uit de map
+Zet de reservekopie terug vanaf SMB-share backups op fileserver uit de map
 backup-pc02-jan.
 .RE
 .\"
 .\"
 .SH AUTEUR
 Geschreven in 2007 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <http://creativecommons.org/publicdomain/zero/1.0>.
+Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH ZIE OOK

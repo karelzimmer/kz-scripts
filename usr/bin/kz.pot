@@ -82,7 +82,7 @@ msgstr ""
 msgid ""
 "Written in $program_year by Karel Zimmer <info@karelzimmer.nl>, Creative "
 "Commons\n"
-"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+"Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #, sh-format
@@ -135,7 +135,7 @@ msgid ""
 "{} (kz) 365 ({})\n"
 "\n"
 "Written in {} by Karel Zimmer <info@karelzimmer.nl>, Creative Commons\n"
-"Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>."
+"Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 msgid "{}: i am a module"

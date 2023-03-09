@@ -3,7 +3,7 @@
 # Setup file for Ubuntu desktop on pc-van-ria-en-toos for toos.
 #
 # Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 #1 citrix

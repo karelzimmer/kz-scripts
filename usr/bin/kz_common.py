@@ -7,7 +7,7 @@ This module gives access to general functions.
 # Common module for Python scripts.
 #
 # Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 import argparse
@@ -228,7 +228,7 @@ def process_option_version(program_name):
                 'Written in {} by Karel Zimmer <info@karelzimmer.nl>, \
 Creative Commons\n'
                 'Public Domain Dedication \
-<http://creativecommons.org/publicdomain/zero/1.0>.')
+<https://creativecommons.org/publicdomain/zero/1.0>.')
               .format(program_name, build_id, program_year))
 
 

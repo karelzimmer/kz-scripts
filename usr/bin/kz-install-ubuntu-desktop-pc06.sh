@@ -3,7 +3,7 @@
 # Install file for Ubuntu desktop on pc06.
 #
 # Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 #1-add-hosts

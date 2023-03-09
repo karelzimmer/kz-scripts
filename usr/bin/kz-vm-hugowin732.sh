@@ -4,7 +4,7 @@
 # Start VM hugowin732.
 #
 # Written in 2020 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <http://creativecommons.org/publicdomain/zero/1.0>.
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 text=$(gettext 'Virtual Machine Hugowin732 is started (can take a while ...)')
