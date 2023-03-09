@@ -151,7 +151,8 @@ function check_code {
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
         check_shellcheck
     elif grep --quiet --line-regexp --regexp="$tab_completion_script" "$script"
-        then        check_shellcheck
+        then
+        check_shellcheck
     elif grep --quiet --line-regexp --regexp="$python_script" "$script"; then
         check_pycodestyle
     else
@@ -223,6 +224,7 @@ $(
 function check_shellcheck {
     local -i check_rc=0
 
+    # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
     shellcheck --external-sources "$scriptname" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
