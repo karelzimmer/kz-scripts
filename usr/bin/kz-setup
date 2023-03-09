@@ -359,7 +359,7 @@ $(
                     --body-numbering=a      |
             sed     --expression='s/^/[/'; then
         printf '%s\n' "$(gettext '     0   No apps found.')
-        
+
 $usage_line"
     else
         printf '%s\n' "

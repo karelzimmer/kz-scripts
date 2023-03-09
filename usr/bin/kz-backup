@@ -30,7 +30,7 @@ help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-$(gettext 'Options:') 
+$(gettext 'Options:')
   -d, --dry-run  $(gettext 'perform a test run without making any changes')
   -g, --gui      $(gettext 'starts in graphics mode')
 $(gettext '  -t, --target=DIRECTORY

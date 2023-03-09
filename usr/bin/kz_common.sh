@@ -10,6 +10,7 @@
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 
+# shellcheck source=/dev/null
 source /usr/bin/gettext.sh
 
 ###############################################################################
