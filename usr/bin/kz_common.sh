@@ -398,7 +398,8 @@ function kz_common.process_option_version {
 
 $(eval_gettext "Written in \$program_year by Karel Zimmer \
 <info@karelzimmer.nl>, Creative Commons
-Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.")"
+Public Domain Dedication \
+<https://creativecommons.org/publicdomain/zero/1.0>.")"
 }
 
 
