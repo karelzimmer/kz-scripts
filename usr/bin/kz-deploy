@@ -123,6 +123,7 @@ function build_package {
     local -i check_rc=0
 
     info "$(gettext '* build package and website (kz build)...')"
+    printf '\n'
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err "
