@@ -383,7 +383,7 @@ msgstr ""
 msgid "Install package kz failed."
 msgstr ""
 
-msgid "Install kz package."
+msgid "Install kz package"
 msgstr ""
 
 msgid "Progress"

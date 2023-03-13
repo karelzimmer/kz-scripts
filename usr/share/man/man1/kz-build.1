@@ -1,91 +1,87 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-build.
+.\"# Man page for kz-build.
 .\"#
 .\"# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-BUILD 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ-BUILD 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz-build \- Build package kz.
 .\"
 .\"
-.SH NAAM
-kz-build \- Pakket kz bouwen.
-.\"
-.\"
-.SH SAMENVATTING
+.SH SYNOPSIS
 .B kz build
-[OPTIE...]
+[OPTION...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz build\fR bouwt het pakket kz én de website https://karelzimmer.nl.
+.SH DESCRIPTION
+\fBkz build\fR builds the kz package and the website https://karelzimmer.nl.
 .br
-Dit om het pakket en de website te kunnen testen, en later te distribueren met
+This is to test the package and the website, and to distribute it later with
 \fBkz deploy\fR.
 .sp
-Als invoer worden de Git-repositories kz-docs en kz-scripts gebruikt. Van
-tekstbestanden worden pdf-bestanden gemaakt met 'lowriter convert-to pdf'.
+The kz-docs and kz-scripts Git repositories are used as inputs. Text files are
+converted into pdf files with 'lowriter convert-to pdf'.
 .sp
-Als ontwikkelen en testen gereed is, kan \fBkz deploy\fR uitgevoerd worden.
+When development and testing is done, \fBkz deploy\fR can be executed.
 .sp
-Opdracht \fBkz build\fR kan alleen worden uitgevoerd als Ontwikkelaar, d.i.
-aangemeld als karel op pcNN (bijvoorbeeld pc01).
+Command \fBkz build\fR can only be run as Developer, i.e. logged in as karel
+on pcNN (e.g. pc01).
 .sp
-Opdracht \fBkz build\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
+Command \fBkz build\fR is also called from \fBkz deploy\fR.
 .sp
-De volgende acties worden uitgevoerd:
+The following actions are performed:
 .RS
-   Als check:
+   As a check:
 .br
-1. Controleer scriptnamen (met \fBkz ckname\fR).
+1. Check script names (using \fBkz ckname\fR).
 .br
-2. Controleer scripts (met \fBkz ivp\fR).
+2. Check scripts (using \fBkz ivp\fR).
 .br
-   De build:
+   The build:
 .br
-3. Bouw website.
+3. Build website.
 .br
-4. Bouw pakket.
+4. Build package.
 .br
-   De installatie:
+   The install:
 .br
-5. Installer pakket kz
+5. Install kz package
 .RE
 .sp
-Met opdracht \fBkz deploy\fR kan de build geplaatst worden op de website.
+With command \fBkz deploy\fR the build can be placed on the website.
 .\"
 .\"
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH MAPPEN
+.SH DIRECTORIES
 ~/kz-deb/app/
 .RS
-Basis-bestanden pakket kz (Git).
+Base files package kz (Git).
 .RE
 .sp
 ~/kz-deb/dist/
 .RS
-Distributie-bestanden pakket kz.
+Distribution files package kz.
 .RE
 .sp
 ~/kz-docs/
@@ -97,48 +93,48 @@ Checklists (Git).
 .RS
 Scripts (Git).
 .br
-Inclusief man-pagina's (usr/share/man/man1/ en usr/share/man/nl/man1/),
+Includes manual pages (usr/share/man/man1/ and usr/share/man/nl/man1/),
 .br
-Tab-completion-scripts (usr/share/bash-completion/completions/),
+Tab completion scripts (usr/share/bash-completion/completions/),
 .br
-bureaublad-configuratiebestanden (usr/share/applications/), en
+Desktop configuration files (usr/share/applications/), en
 .br
-PolicyKit actiedefinitiebestanden (usr/share/policypolkit-1/actions/).
+PolicyKit action definition files (usr/share/policypolkit-1/actions/).
 .RE
 .sp
 ~/kz-uploads/app/
 .RS
-Basis-bestanden website karelzimmer.nl (Git).
+Base files website karelzimmer.nl (Git).
 .RE
 .sp
 ~/kz-uploads/dist/
 .RS
-Distributie-bestanden website karelzimmer.nl.
+Distribution files website karelzimmer.nl.
 .RE
 .\"
 .\"
-.SH BESTANDEN
+.SH FILES
 ~/kz-uploads/dist/downloads/kz/kz_365_all.deb
 .RS
-Debian-pakket kz.
+Debian package kz.
 .RE
 .\"
 .\"
-.SH NOTITIES
+.SH NOTES
 .IP " 1." 4
-CI/CD en Day 1 Operations
+CI/CD and Day 1 Operations
 .RS 4
-\fBkz build\fR wordt voornamelijk gebruikt voor \fBCI/CD\fR en
-\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+\fBkz build\fR is mainly used for \fBCI/CD\fR and \fBDay 1 Operations\fR. See
+\fBkz\fR(1) for an explanation.
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
 \fBkz-deploy\fR(1),
@@ -146,11 +142,11 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz build\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz build\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.

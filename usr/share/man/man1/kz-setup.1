@@ -1,118 +1,110 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-setup.
+.\"# Man page for kz-setup.
 .\"#
 .\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-SETUP 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ-SETUP 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz-setup \- Set up apps.
 .\"
 .\"
-.SH NAAM
-kz-setup \- Apps instellen.
-.\"
-.\"
-.SH SAMENVATTING
+.SH SYNOPSIS
 .B kz setup
-[OPTIE...] [\fIAPP\fR...] [\fIBESTAND\fR...]
+[OPTION...] [\fIAPP\fR...] [\fIFILE\fR...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz setup\fR stelt apps in en wijzigt gebruikersinstellingen.
+.SH DESCRIPTION
+\fBkz setup\fR sets up apps and changes user settings.
 .sp
-In een grafische werkomgeving kan opdracht \fBkz setup\fR worden uitgevoerd
-door te zoeken naar \fBapps\fR, klik op \fBApps instellen\fR.
+In a graphical work environment command \fBkz setup\fR can be executed by
+searching for \fBapps\fR, click on \fBSet up apps\fR.
 .sp
-Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het wijzigen
-van systeeminstellingen.
+Use (first) \fBkz install\fR to install apps and change system settings.
 .sp
-\fBkz setup\fR verwerkt zogenaamde instelbestanden die opdrachten bevatten voor
-het instellen van apps en het wijzigen van instellingen.
+\fBkz setup\fR handles so-called setup files that contain commands for setting
+up apps and changing settings.
 .sp
-Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
+By default, \fBkz setup\fR handles the following two setup files:
 .br
-- /usr/bin/kz-setup-<distributie>-desktop.sh
+- /usr/bin/kz-setup-<distribution>-desktop.sh
 .br
-- /usr/bin/kz-setup-<distributie>-desktop-<computernaam>-<gebruikersnaam>.sh
-(indien aanwezig)
+- /usr/bin/kz-setup-<distribution>-desktop-<computername>-<username>.sh (if
+present)
 .sp
-<distributie>, <computernaam>, en <gebruikersnaam> worden ingevuld met waarden
-van de huidige computer en gebruiker.
+<distribution>, <computername>, and <username> are populated with values from
+the current computer and user.
 .sp
-Bijvoorbeeld kz-setup-ubuntu-desktop.sh en kz-setup-ubuntu-desktop-pc02-jan.sh.
+For example, kz-setup-ubuntu-desktop.sh and
+kz-setup-ubuntu-desktop-pc02-jan.sh.
 .br
-Deze instelbestanden bevatten opdrachten voor ubuntu desktop algemeen en ubuntu
-desktop op pc02 voor jan.
+These setup files contain commands for ubuntu desktop general and ubuntu
+desktop on pc02 for jan.
 .sp
-Voor de indeling van de instelbestanden zie het deel \fBBESTANDSINDELING\fR
-hieronder.
+For the setup file format, see the \fBFILE FORMAT\fR section below.
 .sp
-Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
-aanwezige standaard instelbestanden opgenomen in de lijst van te verwerken
-bestanden.
+If no \fIAPP\fRs or \fILE\fRs are specified, the names of the default settings
+files present will be included in the list of files to be processed.
 .sp
-Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
+With option \fB--server\fR server is used instead of desktop.
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van instelbestanden.
+Option \fB-f\fR, \fB--files\fR lists settings files.
 .sp
-Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
-beginnen met \fBkz-setup-\fR en te eindigen met \fB.sh\fR.
+It is possible to specify \fIFILE\fRs; these files should be starting with
+\fBkz-setup-\fR and ending with \fB.sh\fR.
 .br
-Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
+Anything else is considered an \fIAPP\fR, see below.
 .br
-De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
-bestanden.
+The specified \fIFILE\fRs are included in the list of files to be processed.
 .sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle instelbestanden (bestanden die beginnen met \fBkz-setup-\fR en eindigen
-met \fB.sh\fR).
+Option \fB-a\fR, \fB--apps\fR lists apps available in all setup files (files
+starting with \fBkz-setup-\fR and ending with \fB.sh\fR).
 .sp
-Het is mogelijk om \fIAPP\fRs op te geven.
+It is possible to specify \fIAPP\fRs.
 .br
-Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
-instelbestanden en wordt deze samen met de bijbehorende opdrachten gekopieerd
-naar een tijdelijk bestand.
+For each specified \fIAPP\fR, the first available app is found in all settings
+files and is copied to a temporary file together with the corresponding
+commands.
 .br
-De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
-instelbestanden.
+The name of this temporary file is included in the list of settings files to be
+processed.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de instelbestanden.
+Option \fB-c\fR, \fB--cat\fR gives the contents of the settings files.
 .sp
-Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
+The setting can be undone with option \fB-r\fR, \fB--reset\fR.
 .\"
 .\"
-.SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met \fBkz-setup-\fR en te
-eindigen met \fB.sh\fR.
+.SH FILE FORMAT
+The files to be processed should start with \fBkz-setup-\fR and end with
+\fB.sh\fR.
 .sp
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+The records are processed in the order they appear in the files.
 .br
-De opdrachten standaard meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld
-dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
+The commands supplied by default with \fBkz setup\fR are arranged in such a way
+that the result remains the same when executed repeatedly.
 .sp
-Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
-regel) er zijn en hoe deze regels verwerkt worden.
+See \fBTable 1\fR for which \fBtypes\fR records (first two positions on a line)
+there are and how these records are processed.
 .sp
-Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels in
-voorbeeldbestand kz-setup-ubuntu-desktop-pc02-jan.sh.
-Meer voorbeelden zijn te zien via de opdracht \fBkz setup --cat\fR.
+See \fBTable 2\fR for an \fBexample\fR of these records in
+kz-setup-ubuntu-desktop-pc02-jan.sh sample file.
+More examples can be seen through the \fBkz setup --cat\fR command.
 .\"
 .\"
 .sp
 .br
-.B Tabel 1. Soorten regels en hun verwerking
+.B Table 1. Record types and their processing
 .TS
 allbox tab(:);
 lb | lb.
 T{
-Regelsoort
+Record type
 T}:T{
-Beschrijving
+Description
 T}
 .T&
 l | l
@@ -125,32 +117,32 @@ l | l.
 T{
 #1 APP
 T}:T{
-Bevat de APP naam.
+Contains the APP name.
 T}
 T{
 #1-APP
 T}:T{
-Idem, wordt niet altijd gebruikt, zie [1].
+Ditto, not always used, see [1].
 T}
 T{
 #2 Opdracht
 T}:T{
-Opdracht voor het resetten van APP.
+APP reset command.
 T}
 T{
 .sp
 T}:T{
-Wordt overgeslagen (is leeg).
+Will be skipped (is empty).
 T}
 T{
 #...
 T}:T{
-Wordt overgeslagen (is commentaar).
+Will be skipped (is a comment).
 T}
 T{
 Opdracht
 T}:T{
-Opdracht voor het instellen van APP
+Command to set up APP
 T}
 .TE
 .sp
@@ -158,24 +150,24 @@ T}
 .br
 [1]
 .br
-Regel '#1-APP' is bedoeld voor een opdracht die specifiek is voor een
-distributie, een computer, of een gebruiker.
+Line '#1-APP' is for a command specific to a distribution or a computer or a
+user.
 .br
-Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
-gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
+This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
+look up commands at a given \fIAPP\fR.
 .br
-Deze regel worden wél gebruikt bij het verwerken van het instelbestand.
+This line is used when processing the set up file.
 .sp
 .sp
 .br
-.B Tabel 2. Regels in voorbeeldbestand kz-setup-ubuntu-desktop-pc02-jan.sh
+.B Table 2. Lines in kz-setup-ubuntu-desktop-pc02-jan.sh sample file
 .TS
 box tab(:);
 lb | lb.
 T{
-Regelsoort
+Record type
 T}:T{
-Beschrijving
+Description
 T}
 .T&
 - | -
@@ -191,167 +183,165 @@ l | l.
 T{
 #1 google-chrome
 T}:T{
-Naam van de APP.
+Name of the APP.
 T}
 T{
 kz-gset --addfavbef=google-chrome
 T}:T{
-Instel-opdracht.
+Setup command.
 T}
 T{
 #2 kz-gset --delfav=google-chrome
 T}:T{
-Reset-opdracht; voor optie -r, --reset.
+Reset command; for option -r, --reset.
 T}
 T{
 .sp
 T}:T{
-Lege regel.
+Empty line.
 T}
 T{
-## Alleen voor jan op pc02!
+## Only for jan on pc02!
 T}:T{
-Commentaar.
+Comment.
 T}
 T{
 #1-gnome
 T}:T{
-Alleen voor Jan op pc02 met Ubuntu instellen.
+Only set up for Jan on pc02 with Ubuntu.
 T}
 T{
 gsettings set org.gnome.shell...
 T}:T{
-Instel-opdracht.
+Setup command.
 T}
 T{
 #2 gsettings reset org.gnome.shell...
 T}:T{
-Reset-opdracht.
+Reset command.
 T}
 .TE
 .\"
 .\"
 .sp
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB-a\fR, \fB--apps\fR
-Toon een lijst van in te stellen apps.
+Show a list of apps to set up.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van instelbestanden.
+Display the contents of setup files.
 .br
-Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
+Each file is preceded by a comment line with the file name.
 .TP
 \fB-f\fR, \fB--files\fR
-Toon een lijst van instelbestanden.
+Display a list of setup files.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset apps.
 .TP
 \fB--server\fR
-Apps instellen en gebruikersinstellingen wijzigen voor een server.
+Set up apps and change user settings for a server.
 .TP
 \fB-s\fR, \fB--simulate\fR
-Geen actie, maar simuleer het instellen, en toon de opdrachten die uitgevoerd
-zouden worden.
+No action, but simulate the setup, and show the commands that would be
+executed.
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in grafische modus
-(gui=graphical user interface; grafische gebruikersinterface).
+Start in graphics mode (gui=graphical user interface).
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH BESTANDEN
-/usr/bin/kz-setup-<distributie>-desktop.sh
+.SH FILES
+/usr/bin/kz-setup-<distribution>-desktop.sh
 .RS
-Standaard instelbestand.
+Default setup file.
 .RE
 .sp
-/usr/bin/kz-setup-<distributie>-desktop-<computernaam>-<gebruikersnaam>.sh
+/usr/bin/kz-setup-<distribution>-desktop-<computername>-<username>.sh
 .RS
-Standaard instelbestand voor <computernaam> en <gebruikersnaam>.
+Default setup file for <computername> and <username>.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.apps
 .RS
-Tijdelijk instelbestand met opdrachten behorend bij opgegeven apps.
+Temporary setup file containing commands associated with specified apps.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.cmds
 .RS
-Tijdelijk instelbestand met alle uit te voeren opdrachten.
-.
+Temporary setup file containing all commands to be executed..
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.sims
 .RS
-Tijdelijk simulatiebestand.
+Temporary simulation file.
 .RE
 .sp
-~/Instellingen/Achtergrond
+~/Setup/Background
 .RS
-Ingestelde bureaubladachtergrond. Ter controle. Aangemaakt door kz-backup.
+Set desktop wallpaper. For control. Created by kz-backup.
 .RE
 .sp
-~/Instellingen/Favorieten
+~/Setup/Favorites
 .RS
-Ingestelde favorieten in de favorietenbalk (dash/dock). Ter controle.
-Aangemaakt door kz-backup
+Set favorites in the favorites bar (dash/dock). For control. Created by
+kz-backup
 .RE
 .sp
-~/Instellingen/Gebruikersfoto
+~/Setup/Userphote
 .RS
-Ingestelde gebruikersfoto. Ter controle. Aangemaakt door kz-backup.
+Set user photo. For control. Created by kz-backup.
 .RE
 .\"
 .\"
-.SH NOTITIES
+.SH NOTES
 .IP " 1." 4
-Checklist installatie
+Checklist install
 .RS 4
-https://karelzimmer.nl/html/linux.html#documenten
+https://karelzimmer.nl/html/en/linux.html#documents
 .RE
 .IP " 2." 4
-Persoonlijke map / Instellingen / Favorieten
+Personal folder / Settings / Favorites
 .RS 4
-In bestand Favorieten staan eerder ingestelde favorieten.
+The Favorites file contains previously set favorites.
 .br
-Is te gebruiken om de favorieten te controleren op volledigheid.
+Can be used to check the favorites for completeness.
 .RE
 .IP " 3." 4
-IaC en Day 1 Operations
+IaC and Day 1 Operations
 .RS 4
-\fBkz setup\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
-\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+\fBkz setup\fR is mainly used for \fBIaC\fR and \fBDay 1 Operations\fR. See
+\fBkz\fR(1) for an explanation.
 .RE
 .\"
 .\"
-.SH VOORBEELDEN
+.SH EXAMPLES
 .sp
 \fBkz setup\fR
 .RS
-Stel alles in wat in de standaard instelbestanden staat.
+Set everything in the default setup files.
 .br
-Hiervoor is in een grafische werkomgeving ook starter \fBApps instellen\fR
-beschikbaar.
+Starter \fBSetup apps\fR is also available for this in a graphical work
+environment.
 .RE
 .sp
 \fBkz setup google-chrome\fR
 .RS
-Stel Google Chrome in.
+Setup Google Chrome.
 .RE
 .sp
 \fBkz setup --reset google-chrome\fR
@@ -361,21 +351,21 @@ Reset Google Chrome.
 .sp
 \fBkz setup --cat google-chrome\fR
 .RS
-Toon instel-opdrachten voor Google Chrome.
+Show setup commands for Google Chrome.
 .RE
 .sp
 \fBkz setup --cat --reset google-chrome\fR
 .RS
-Toon reset-opdrachten voor Google Chrome.
+Show reset commands for Google Chrome.
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2013 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2013 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
 \fBkz-install\fR(1),
@@ -384,11 +374,11 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz setup\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz setup\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.

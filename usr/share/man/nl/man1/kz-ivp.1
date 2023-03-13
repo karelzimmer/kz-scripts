@@ -21,22 +21,22 @@ kz-ivp \- Scripts controleren.
 .SH BESCHRIJVING
 \fBkz ivp\fR voert een Installatie Verificatie Procedure (IVP) uit.
 .sp
-Voert een IVP uit waarbij scripts inhoudelijk en met shellcheck worden
-gecontroleerd.
+Voert een IVP uit waarbij scripts inhoudelijk en met shellcheck en pycodestyle
+worden gecontroleerd.
 .sp
 Gecontroleerd wordt onder andere:
 .br
-tags       - TODO/FIXME/BUG-tags
+tags        - TODO/FIXME/BUG-tags
 .br
-regels     - aantal regels en regellengte
+regels      - aantal regels en regellengte
 .br
-velden     - zoals vrijgavejaar
+velden      - zoals vrijgavejaar
 .br
-spaties    - eindspaties
+spaties     - eindspaties
 .br
-shellcheck - shellscript analyse tool
+shellcheck  - shellscript analyse tool
 .br
-gebruik    - roep shellscript aan met optie usage
+pycodestyle - Python-script analyse tool
 .sp
 Opdracht \fBkz ivp\fR kan alleen worden uitgevoerd als Ontwikkelaar, d.i.
 aangemeld als karel op pcNN (bijvoorbeeld pc01).
@@ -90,4 +90,4 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
 Opdracht \fBkz ivp\fR is onderdeel van het pakket \fBkz\fR en is
 beschikbaar op de website van Karel Zimmer
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/nl/linux.html#scripts>.

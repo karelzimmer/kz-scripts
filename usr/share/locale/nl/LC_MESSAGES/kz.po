@@ -454,8 +454,8 @@ msgstr "* installeer pakket kz (kz getdeb)..."
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
-msgid "Install kz package."
-msgstr "Pakket kz installeren."
+msgid "Install kz package"
+msgstr "Pakket kz installeren"
 
 msgid "Progress"
 msgstr "Voortgang"

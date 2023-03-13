@@ -1,52 +1,46 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-backup.
+.\"# Man page for kz-backup.
 .\"#
 .\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-BACKUP 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ-BACKUP 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz-backup \- Create backup.
 .\"
 .\"
-.SH NAAM
-kz-backup \- Reservekopie maken.
-.\"
-.\"
-.SH SAMENVATTING
+.SH SYNOPSIS
 .B kz backup
-[OPTIE...]
+[OPTION...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz backup\fR maakt een reservekopie (back-up) van de Persoonlijke map.
+.SH DESCRIPTION
+\fBkz backup\fR makes a backup copy of the Home directory.
 .sp
-In een grafische werkomgeving kan opdracht \fBkz backup\fR worden uitgevoerd
-door te zoeken naar \fBback\fR, klik op \fBReservekopie maken\fR.
+In a graphical working environment command \fBkz backup\fR can be executed by
+searching for \fBback\fR, click on \fBMake backup\fR.
 .sp
-Voordat er een reservekopie wordt gemaakt, worden er instellingen veiliggesteld
-in de Persoonlijke map / Instellingen. In deze map komen de ingestelde
-Achtergrond, Gebruikersfoto, en Favorieten, en een lijst van geïnstalleerde
-Apps.
+Before a backup is made, settings are backed up in Home / Settings directory.
+This directory contains the set Background, Userphoto, and Favorites, and a
+list of installed Apps.
 .sp
-De reservekopie wordt geplaatst op een aangekoppeld usb-medium zoals een usb
-externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, deze map
-wordt aangemaakt als nodig, bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
+The backup is placed on a mounted USB medium such as a USB external hard disk
+in directory \fBbackup-<computer name>-<user name>\fR, this directory is
+created as needed, for example /media/jan/backupdisk/backup-pc02-jan.
 .sp
-Met optie \fB-t\fR, \fB--target\fR=\fIDOELMAP\fR kan een andere locatie
-opgegeven worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk
-(onverstandig want /tmp wordt leeggegooid na een herstart).
+With option \fB-t\fR, \fB--target\fR=\fIDIRECTORY\fR another location can be
+specified. For example /tmp instead of /media/jan/backupdisk (unwise because
+/tmp is emptied after a reboot).
 .sp
-Optie \fB-d\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
-te brengen. Het wordt meestal gebruikt in combinatie met rsync's optie --delete
-om te zien wat een rsync-commando gaat doen voordat men het daadwerkelijk
-uitvoert.
+Option \fB-d\fR, \fB--dry-run\fR performs a trial run without making any
+changes. It is usually used in conjunction with rsync's --delete option to see
+what an rsync command will do before actually executing it.
 .sp
-Deze locaties worden standaard genegeerd:
+These locations are ignored by default:
 .RS
  .adobe/Flash_Player/AssetCache
  .cache
@@ -62,112 +56,108 @@ Deze locaties worden standaard genegeerd:
  snap/*/*/.cache
  *CACHEDIR.TAG*
 .RE
-Tevens worden door Git beheerde mappen ("git-controlled") niet in de
-reservekopie opgenomen.
+Also, directories managed by Git are not backed up.
 .br
-Voorbeeld: ~/bin wordt overgeslagen vanwege de aanwezigheid van
-~/bin/.git.
+Example: ~/bin is skipped due to the presence of ~/bin/.git.
 .sp
-Voor het maken van de reservekopie wordt rsync gebruikt.
+rsync is used to create the backup.
 .br
-Bestanden die verwijderd zijn uit de Persoonlijke map worden ook verwijderd uit
-de reservekopie (rsync's optie --delete wordt gebruikt).
+Files deleted from the Home directory are also removed from the backup (rsync's
+--delete option is used).
 .sp
-Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
+With command \fBkz restore\fR the Home directory can be restored.
 .\"
 .\"
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB-d\fR, \fB--dry-run\fR
-Een proefrun uitvoeren zonder wijzigingen aan te brengen.
+Perform a test run without making any changes.
 .TP
-\fB-t\fR, \fB--target=\fIDOELMAP\fR
-Plaats de reservekopie in de \fIDOELMAP\fR.
+\fB-t\fR, \fB--target=\fIDIRECTORY\fR
+Place the backup in the \fIDIRECTORY\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in grafische modus
-(gui=graphical user interface; grafische gebruikersinterface).
+Start in graphics mode (gui=graphical user interface).
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH BESTANDEN
-~/Instellingen/Apps
+.SH FILES
+~/Setup/Apps
 .RS
-Lijst van geïnstalleerde apps.
+List of installed apps.
 .RE
 .sp
-~/Instellingen/Achtergrond
+~/Setup/Background
 .RS
-Ingestelde bureaubladachtergrond.
+Set desktop wallpaper.
 .RE
 .sp
-~/Instellingen/Favorieten
+~/Setup/Favorites
 .RS
-Ingestelde favorieten in de favorietenbalk (dash/dock).
+Set favorites in the favorites bar (dash/dock).
 .RE
 .sp
-~/Instellingen/Gebruikersfoto
+~/Setup/Userphoto
 .RS
-Ingestelde gebruikersfoto.
+Set user photo.
 .RE
 .\"
 .\"
-.SH NOTITIES
+.SH NOTES
 .IP " 1." 4
-Checklist installatie
+Checklist install
 .RS 4
-https://karelzimmer.nl/html/linux.html#documenten
+https://karelzimmer.nl/html/en/linux.html#documents
 .RE
 .IP " 2." 4
 Day 2 Operations
 .RS 4
-\fBkz backup\fR wordt voornamelijk gebruikt voor Day 2 Operations. Zie
-\fBkz\fR(1) voor een uitleg.
+\fBkz backup\fR is mainly used for Day 2 Operations. See \fBkz\fR(1) for an
+explanation.
 .RE
 .\"
 .\"
-.SH VOORBEELDEN
+.SH EXAMPLES
 .sp
 \fBkz backup\fR
 .RS
-Maak een reservekopie (back-up) van de Persoonlijke map.
+Make a backup copy of the Home directory.
 .br
-Hiervoor is in een grafische werkomgeving ook starter \fBReservekopie maken\fR
-beschikbaar.
+Starter \fBMake a backup\fR is also available for this in a graphical work
+environment.
 .RE
 .sp
 \fBkz backup --dry-run\fR
 .RS
-Toon bestanden die anders toegevoegd en verwijderd zouden worden in de
-reservekopie.
+Show files that would otherwise be added and removed in the backup.
 .RE
 .sp
 \fBkz backup --target=smb://fileserver/backups\fR
 .RS
-Maak een reservekopie van de Persoonlijke map naar SMB-share backups op
-fileserver in de map backup-pc02-jan (deze map wordt aangemaakt als nodig).
+Back up the Home directory to SMB-share backups on fileserver in the directory
+backup-pc02-jan (this directory will be created as needed).
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2007 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2007 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
 \fBkz-menu\fR(1),
@@ -176,11 +166,11 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz backup\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz backup\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.

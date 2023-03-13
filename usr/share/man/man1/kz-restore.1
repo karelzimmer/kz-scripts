@@ -1,138 +1,133 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-restore.
+.\"# Man page for kz-restore.
 .\"#
 .\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-RESTORE 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ-RESTORE 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz-restore \- Restore backup.
 .\"
 .\"
-.SH NAAM
-kz-restore \- Reservekopie terugzetten.
-.\"
-.\"
-.SH SAMENVATTING
+.SH SYNOPSIS
 .B kz restore
-[OPTIE...]
+[OPTION...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz restore\fR zet een reservekopie (back-up) van de Persoonlijke map terug.
+.SH DESCRIPTION
+\fBkz restore\fR restores a backup copy of the Home folder.
 .sp
-In een grafische werkomgeving kan opdracht \fBkz restore\fR worden uitgevoerd
-door te zoeken naar \fBback\fR, klik op \fBReservekopie terugzetten\fR.
+In a graphical work environment command \fBkz restore\fR can be executed by
+searching for \fBback\fR, click on \fBRestore\fR.
 .sp
-De reservekopie wordt verwacht op een aangekoppeld usb-medium zoals een usb
-externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR,
-bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
+The backup is expected on a mounted USB medium such as a USB external hard disk
+in directory \fBbackup-<computer name>-<user name>\fR, for example
+/media/jan/backupdisk/backup-pc02-jan.
 .sp
-Als de reservekopie is teruggezet, worden de de eerder ingestelde Achtergrond
-en Favorieten teruggezet vanuit Persoonlijke map / Instellingen.
+When the backup is restored, the previously set desktop wallpaper and favorites
+will be restored from Home / Settings.
 .sp
-Met optie \fB-s\fR, \fB--source\fR=\fIBRONMAP\fR kan een andere locatie
-opgegeven worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk
-(onverstandig want /tmp wordt leeggegooid na een herstart).
+With option \fB-s\fR, \fB--source\fR=\fIDIRECTORY\fR another location can be
+specified. For example /tmp instead of /media/jan/backupdisk (unwise because
+/tmp is emptied after a reboot).
 .sp
-Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
-Het wordt meestal gebruikt in om te zien wat een rsync-commando gaat doen
-voordat men het daadwerkelijk uitvoert.
+Option \fB--dry-run\fR performs a trial run without making any changes. It is
+usually used in seeing what an rsync command will do before actually executing
+it.
 .sp
-Voor het terugzetten van de reservekopie wordt rsync gebruikt.
+rsync is used to restore the backup.
 .br
-Bestanden in de Persoonlijke map die niet aanwezig zijn in de reservekopie
-worden niet verwijderd (rsync's optie --delete wordt niet gebruikt).
+Files in the Home folder that are not in the backup are not deleted (rsync's
+--delete option is not used).
 .sp
-Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
+With command \fBkz backup\fR the Home folder can be backed up.
 .\"
 .\"
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB--dry-run\fR
-Een proefrun uitvoeren zonder wijzigingen aan te brengen.
+Perform a test run without making any changes.
 .TP
-\fB-s\fR, \fB--source=\fIBRONMAP\fR
-Gebruik reservekopieën in de \fIBRONMAP\fR.
+\fB-s\fR, \fB--source=\fIDIRECTORY\fR
+Use backups in the \fIDIRECTORY\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in grafische modus
-(gui=graphical user interface; grafische gebruikersinterface).
+Start in graphics mode (gui=graphical user interface).
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH BESTANDEN
-~/Instellingen/Achtergrond
+.SH FILES
+~/Setup/Background
 .RS
-Ingestelde bureaubladachtergrond.
+Set desktop wallpaper.
 .RE
 .sp
-~/Instellingen/Favorieten
+~/Setup/Favorites
 .RS
-Ingestelde favorieten in de favorietenbalk (dash/dock).
+Set favorites in the favorites bar (dash/dock).
 .RE
 .\"
 .\"
-.SH NOTITIES
+.SH NOTES
 .IP " 1." 4
-Checklist installatie
+Checklist install
 .RS 4
-https://karelzimmer.nl/html/linux.html#documenten
+https://karelzimmer.nl/html/en/linux.html#documents
 .RE
 .IP " 2." 4
 Day 1 Operations
 .RS 4
-\fBkz restore\fR wordt voornamelijk gebruikt voor \fBDay 1 Operations\fR. Zie
-\fBkz\fR(1) voor een uitleg.
+\fBkz restore\fR is mainly used for Day 1 Operations. See \fBkz\fR(1) for an
+explanation.
 .RE
 .\"
 .\"
-.SH VOORBEELDEN
+.SH EXAMPLES
 .sp
 \fBkz restore\fR
 .RS
-Zet alles in de reservekopie (back-up) terug.
+Restore everything in the backup.
 .br
-Hiervoor is in een grafische werkomgeving ook starter \fBReservekopie
-terugzetten\fR beschikbaar.
+Starter \fBRestore\fR is also available for this purpose in a graphical work
+environment.
 .RE
 .sp
 \fBkz restore --dry-run\fR
 .RS
-Toon bestanden die teruggezet zouden worden uit de reservekopie.
+Show files that would be restored from the backup.
 .RE
 .sp
 \fBkz restore\
  --source=smb://fileserver/backups\fR
 .RS
-Zet de reservekopie terug vanaf SMB-share backups op fileserver uit de map
-backup-pc02-jan.
+Restore the backup from SMB share backups on fileserver from backup-pc02-jan
+directorie.
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2007 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2007 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBkz\fR(1),
 \fBkz-backup\fR(1),
 \fBkz_common.sh\fR(1),
@@ -141,11 +136,11 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz restore\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz restore\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.

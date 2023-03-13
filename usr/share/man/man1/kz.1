@@ -1,116 +1,114 @@
 .\"############################################################################
-.\"# Man-pagina voor kz.
+.\"# Man page for kz.
 .\"#
 .\"# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz \- Run command.
 .\"
 .\"
-.SH NAAM
-kz \- Opdracht uitvoeren.
-.\"
-.\"
-.SH SAMENVATTING
+.SH SYNOPSIS
 .B kz
-\fIOPDRACHT\fR [\fIARGUMENT\fR...]
+\fICOMMAND\fR [\fIARGUMENT\fR...]
 .br
 .B kz
-OPTIE
+OPTION
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz\fR voert \fIOPDRACHT\fR uit, geïnstalleerd door pakket kz, eventueel met
-de opgegeven \fIARGUMENT\fRen.
+.SH DESCRIPTION
+\fBkz\fR executes \fICOMMAND\fR, installed by package kz, possibly with the
+specified \fIARGUMENT\fRen.
 .sp
-Pakket kz is een verzameling documenten en scripts voor het installeren,
-instellen, en beheren van bijvoorbeeld Ubuntu Linux.
+Package kz is a collection of documents and scripts for installing, setting up
+and managing e.g. Ubuntu Linux.
 .sp
-Gebruik optie \fB-l\fR, \fB--list\fR voor een lijst van beschikbare
-\fIOPDRACHT\fRen.
+Use option \fB-l\fR, \fB--list\fR for a list of available \fICOMMAND\fRs.
 .\"
 .\"
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB-l\fR, \fB--list\fR
-Toon de beschikbare opdrachten.
+Show the available commands.
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .\"
 .\"
-.SH KZ OPDRACHTEN
+.SH KZ COMMANDS
 .sp
-De opdrachten van kz zijn verdeeld in opdrachten op hoog niveau ("porcelein",
-"porcelain") en opdrachten op laag niveau ("loodgieterswerk", "plumbing").
-.SH OPDRACHTEN OP HOOG NIVEAU (PORCELEIN)
-Deze opdrachten zijn uit te voeren in een grafische werkomgeving met het
-Installatiemenu of door te zoeken naar de opdracht, en in het Terminalvenster.
+kz's commands are divided into high-level commands ("porcelain") and low-level
+commands ("plumbing").
+.\"
+.\"
+.SH HIGH-LEVEL COMMANDS (PORCELAIN)
+These commands can be executed in a graphical working environment with the
+Install menu or by searching for the command, and in the Terminal window.
 .TP
 \fBkz-backup\fR(1)
-Back-up maken.
+Create backup.
 .TP
 \fBkz-install\fR(1)
-Apps installeren.
+Install apps.
 .TP
 \fBkz-menu\fR(1)
-Installatiemenu.
+Installation menu.
 .TP
 \fBkz-restore\fR(1)
-Back-up terugzetten.
+Restore backup.
 .TP
 \fBkz-setup\fR(1)
-Apps instellen.
+Set up apps.
 .TP
 \fBkz-wifi\fR(1)
-Wifi-informatie tonen.
-.SH OPDRACHTEN OP LAAG NIVEAU (LOODGIETERSWERK)
-Deze opdrachten zijn alleen uit te voeren in het Terminalvenster en zijn
-ondersteunend voor het beheer en gebruik van kz en Linux.
+Show WiFi data.
+.\"
+.\"
+.SH LOW-LEVEL COMMANDS (PLUMBING)
+These commands can only be run in the Terminal window and are supporting the
+management and use of kz and Linux.
 .TP
 \fBkz-build\fR(1)
-Pakket kz bouwen.
+Build package kz.
 .TP
 \fBkz-ckname\fR(1)
-Bestandsnamen controleren.
+Check file names.
 .TP
 \fBkz-deploy\fR(1)
-Pakket kz distribueren.
+Distribute kz package.
 .TP
 \fBkz-getdeb\fR(1)
-Pakket kz installeren.
+Install kz package.
 .TP
 \fBkz-gset\fR(1)
-GUI wijzigen.
+Change GUI.
 .TP
 \fBkz-ivp\fR(1)
-Scripts controleren.
+Checking scripts.
 .TP
 \fBkz-update\fR(1)
-Systeem bijwerken.
+Update system.
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH NOTITIES
+.SH NOTES
 .sp
-Pakket \fBkz\fR geeft met de documenten en scripts invulling aan en
-ondersteuning voor:
+Package \fBkz\fR implements and with the documents and scripts supports for:
 .br
 \fB1. IaC\fR
 .br
@@ -118,121 +116,114 @@ ondersteuning voor:
 .br
 \fB3. Day 0/Day 1/Day 2 Operations\fR
 .br
-Begrippen uit de moderne wereld van software-ontwikkeling, -distributie, en
-beheer.
+Concepts from the modern world of software development, distribution, and
+management.
 .sp
-\fB1. IaC\fR (Infrastructure as Code, Infrastructuur als Code of
-programmeerbare infrastructuur)
+\fB1. IaC\fR (Infrastructure as Code)
 .br
-Het definiëren en beheren van infrastructuur door middel van code.
+Defining and managing infrastructure through code.
 .br
-De opdrachten die standaard meegeleverd worden bij pakket kz zijn
-idempotent; herhaaldelijk utvoeren leidt steeds tot hetzelfde resultaat.
+The commands that come standard with package kz are
+idempotent; repeated execution always leads to the same result.
 .br
-Herhaalbaarheid (idempotentie) is één van de principes van IaC.
+Repeatability (idempotency) is one of the principles of IaC.
 .br
-De documenten en scripts worden vastgelegd en onderhouden in versiebeheer
-(GitHub), een ander principe van IaC.
+The documents and scripts are recorded and maintained in version control
+(GitHub), another principle of IaC.
 .br
-Voorbeelden zijn \fBkz-install-ubuntu-desktop.sh\fR (installatiebestand
-gebruikt door \fBkz install\fB) en \fBkz-setup-ubuntu-desktop.sh\fR
-(instelbestand gebruikt door \fBkz setup\fR).
+Examples are \fBkz-install-ubuntu-desktop.sh\fR (install file used by
+\fBkz install\fR) and \fBkz-setup-ubuntu-desktop.sh\fR (setup file used by
+\fBkz setup\fR).
 .sp
-\fB2. CI/CD\fR (Continuous Integration and Delivery, Continue integratie en
-levering)
+\fB2. CI/CD\fR (Continuous Integration and Delivery)
 .br
-CI/CD is de gecombineerde praktijk van continuous integration (CI) en (vaker)
-continuous delivery of (minder vaak) continuous deployment (CD).
+CI/CD is the combined practice of continuous integration (CI) and (more
+commonly) continuous delivery or (less commonly) continuous deployment (CD).
 .br
-CI (Continuous Integration, Continue integratie) is het meerdere keren per dag
-de werkkopieën van alle ontwikkelaars samenvoegen tot een gedeelde hoofdlijn.
+CI (Continuous Integration) is the process of merging all developers' working
+copies into a shared main line several times a day.
 .br
-CD (Continuous Delivery, Continue levering) is software produceren in korte
-cycli, ervoor zorgen dat de software op elk moment betrouwbaar kan worden
-vrijgegeven en, bij het vrijgeven van de software, zonder dit handmatig te
-doen.
+CD (Continuous Delivery) is producing software in short cycles, ensuring that
+the software can be released reliably at any time and, when releasing the
+software, without doing it manually.
 .br
-CD (Continuous Deployment, Continue doorzetten) is een aanpak waarbij
-softwarefunctionaliteiten vaak en via geautomatiseerde implementaties worden
-geleverd.
+CD (Continuous Deployment) is an approach where software functionality is
+delivered frequently and through automated deployments.
 .br
-Een \fBCI/CD Pipeline\fR is een reeks stappen die moet worden uitgevoerd om
-geautomatiseerd een nieuwe softwareversie te leveren.
+A \fBCI/CD Pipeline\fR is a series of steps that must be performed to
+automatically deliver a new software version.
 .br
-Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
+Examples are \fBkz build\fR and \fBkz deploy\fR.
 .sp
 \fBCI/CD Pipeline flow\fR
 .br
-Applicatiecode ----> Source scm ----> Build ---->   Test   ----> Deployment
+Application code ----> Source scm ----> Build ---->   Test   ----> Deployment
 .br
-vscode               GitHub           kz-build    CLI/TUI/GUI    kz-deploy
+vscode                 GitHub           kz-build    CLI/TUI/GUI    kz-deploy
 .br
-+------------- DEV ------------+      +------- TEST --------+    +- PROD -+
++------------- DEV -------------+       +------- TEST --------+    +- PROD -+
 .sp
 \fB3. Day 0/Day 1/Day 2 Operations\fR
 .br
-In IT verwijzen de termen Day 0/Day 1/Day 2 Operations naar verschillende fasen
-van software-ontwikkeling, -distributie, en beheer.
+In IT, the terms Day 0/Day 1/Day 2 Operations refer to different phases of
+software development, distribution, and management.
 .sp
-\fB3.1 Day 0 Operations\fR (Dag 0 Activiteiten)
+\fB3.1 Day 0 Operations\fR
 .br
-Dit is de ontwerpfase (design), waarin projectvereisten worden gespecificeerd
-en de architectuur van de oplossing wordt bepaald.
+This is the design phase, where project requirements are specified and the
+architecture of the solution is determined.
 .br
-Hierbij gebruik ik Visual Studio Code en GitHub, en programmeer ik in Bash en
-Python.
+I use Visual Studio Code and GitHub, and I program in Bash and Python.
 .sp
-\fB3.2 Day 1 Operations\fR (Dag 1 Activiteiten)
+\fB3.2 Day 1 Operations\fR
 .br
-Omvat het ontwikkelen en implementeren (development and deploy) van software
-die is ontworpen in de dag 0-fase.
+Includes development and deploy of software designed in the day 0 phase.
 .br
-Hierbij wordt onder andere gebruik gemaakt van \fBIaC\fR en
-\fBCI/CD Pipelines\fR (voor uitleg zie zie verderop), en het uitvoeren van
-Ansible Playbooks.
+This includes using \fBIaC\fR and \fBCI/CD Pipelines\fR, and executing Ansible
+Playbooks.
 .br
-Voorbeelden zijn Checklist installatie, en \fBkz getdeb\fR en \fBkz menu\fR.
+Examples are Checklist installation, and \fBkz getdeb\fR and \fBkz menu\fR.
 .sp
-\fB3.3 Day 2 Operations\fR (Dag 2 Activiteiten)
+\fB3.3 Day 2 Operations\fR
 .br
-Hier gaat de meeste aandacht uit naar het onderhouden, bewaken en optimaliseren
-(maintaining, monitoring, and optimizing) van het systeem.
+Here, most attention is paid to maintaining, monitoring, and optimizing the
+system.
 .br
-Voorbeelden zijn \fBkz backup\fR en \fBkz update\fR.
+Examples are \fBkz backup\fR and \fBkz update\fR.
 .\"
 .\"
-.SH VOORBEELDEN
+.SH EXAMPLES
 \fBkz update\fR
 .RS
-Werk systeem bij.
+Update system.
 .RE
 .sp
 \fBkz install google-chrome\fR
 .RS
-Installeer Google Chrome.
+Install Google Chrome.
 .RE
 .sp
 \fBkz setup --cat google-chrome\fR
 .RS
-Toon instel-opdrachten voor Google Chrome.
+Show setup commands for Google Chrome.
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.

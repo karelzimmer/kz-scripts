@@ -18,7 +18,7 @@ source <(wget --quiet --output-document=- \
 
 declare program_name='kz-getdeb'
 declare program_desc
-program_desc=$(gettext 'Install kz package.')
+program_desc=$(gettext 'Install kz package')
 declare display_name=${program_name/kz-/kz }
 
 declare usage

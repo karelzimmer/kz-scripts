@@ -1,174 +1,168 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-gset.
+.\"# Man page for kz-gset.
 .\"#
 .\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-GSET 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ-GSET 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz-gset \- Change GUI.
 .\"
 .\"
-.SH NAAM
-kz-gset \- GUI wijzigen.
-.\"
-.\"
-.SH SAMENVATTING
+.SH SYNOPSIS
 .B kz gset
-[OPTIE...]
+[OPTION...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz gset\fR helpt bij het wijzigen van de grafische werkomgeving (GUI).
+.SH DESCRIPTION
+\fBkz gset\fR helps to change the graphical user environment (GUI).
 .sp
 \fBkz gset\fR:
 .RS
-- toont wijzigingen in de configuratiedatabase,
+- shows changes in the configuration database,
 .br
-- kan een toepassingspictogram (favoriet) toevoegen, en
+- can add an application icon (favorite), and
 .br
-- kan een appfolder toevoegen om starters te verzamelen.
+- can add an app folder to collect starters.
 .RE
 .sp
-Met optie \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR wordt toepassingspictogram
-(favoriet) \fIFAVORITE\fR toegevoegd aan het einde van de favorietenbalk
-(dash, dock).
+Option \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR adds application icon
+(favorite) \fIFAVORITE\fR to the end of favorites bar (dash, dock).
 .sp
-Met optie \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR wordt toepassingspictogram
-(favoriet) \fIFAVORITE\fR toegevoegd aan het begin van de favorietenbalk
-(dash, dock).
+Option \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR adds application icon
+(favorite) \fIFAVORITE\fR to the beginning of favorites bar (dash, dock).
 .sp
-Met optie \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR wordt toepassingspictogram
-(favoriet) \fIFAVORITE\fR verwijderd uit de favorietenbalk (dash, dock).
+Option \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR removes application icon
+(favorite) \fIFAVORITE\fR from favorites bar (dash, dock).
 .sp
-Als er al een toepassingspictogram (favoriet) van \fIFAVORITE\fR bestaat
-wordt deze niet opnieuw toegevoegd.
+If an application icon (favorite) of \fIFAVORITE\fR already exists, it will not
+be added again.
 .br
-Als een toepassingspictogram (favoriet) bovenaan is toegevoegd die onderaan
-geplaatst moet worden, moet de bestaande eerst verwijderd te worden met optie
-\fB-d\fR, \fB--delfav\fR.
+If an application icon (favorite) has been added at the top to be placed at the
+bottom, the existing one must first be removed with option \fB-d\fR,
+\fB--delfav\fR.
 .br
-Bestand \fIFAVORITE\fR.desktop moet bestaan in een van de applicatiemappen
-zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
+File \fIFAVORITE\fR.desktop must exist in one of the application directories
+such as /usr/share/applications or /var/lib/snapd/desktop/applications.
 .sp
-Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten en appfolders
-getoond.
+With option \fB-l\fR, \fB--list\fR the current favorites and app folders are
+displayed.
 .sp
-Met optie \fB-r\fR, \fB--resetfavs\fR wordt de favorietenbalk (dash, dock)
-teruggezet met standaard favorieten.
+With option \fB-r\fR, \fB--resetfavs\fR the favorites bar (dash, dock) is reset
+with default favourites.
 .sp
-Met optie \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR wordt appfolder
-\fIAPPFOLDER\fR toegevoegd.
+With option \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR appfolder
+\fIAPPFOLDER\fR is added.
 .sp
-Met optie \fB-x\fR, \fB--delfavappfolder\fR=\fIAPPFOLDER\fR wordt appfolder
-\fIAPPFOLDER\fR verwijderd.
+Option \fB-x\fR, \fB--delfavappfolder\fR=\fIAPPFOLDER\fR removes appfolder
+\fIAPPFOLDER\fR.
 .sp
-Als er geen opties zijn opgegeven toont \fBkz gset\fR wijzigingen in de
-configuratiedatabase na een wijziging in de grafische werkomgeving (GUI).
+If no options are specified, \fBkz gset\fR shows changes in the configuration
+database after a change in the graphical user environment (GUI).
 .br
-Het volgende wordt uitgevoerd:
+The following is performed:
 .sp
 .RS
-1. Inhoud configuratiedatabase ervoor vastleggen.
+1. Capture configuration database content before changing the GUI.
 .br
-2. Gebruiker voert wijzigingen met de GUI uit.
+2. User makes changes with the GUI.
 .br
-3. Inhoud configuratiedatabase erna vastleggen.
+3. Capture configuration database contents afterwards.
 .br
-4. Wijzigingen in de configuratiedatabase rapporteren.
+4. Report changes to the configuration database.
 .RE
 .sp
-Met de opdracht \fBgsettings set \fIschema\fR\fB[:\fIpath\fR\fB] \fIkey\fR zijn
-daarna de wijzigingen op te slaan in de configuratiedatabase, en hoeven deze
-niet meer, met de hand, met de GUI te worden uitgevoerd.
+With the \fBgsettings set \fIschema\fR\fB[:\fIpath\fR\fB] \fIkey\fR command,
+the changes can then be saved in the configuration database, and they no longer
+have to be entered manually with the GUI.
 .sp
-Voor een systeem met Lubuntu met de LXDE- en met Xubuntu met de
-Xfce-werkomgeving kan via het Terminalvenster met opdrachten opgezocht worden
-wat er gewijzigd moet worden:
+For a system with Lubuntu with the LXDE and with Xubuntu with the Xfce working
+environment the commands to see what needs to be changed can be found through
+the Terminal with :
 .RS
 \fBxfconf-query --list\fR
-    Geeft overzicht kanalen/channels.
+    Provides overview channels.
 .sp
 \fBxfconf-query --channel \fIkanaal\fR\fB --monitor --verbose\fR
-    Breng nu de wijzigingen via de GUI aan.
+    Now make the changes through the GUI.
 .sp
 \fBxfconf-query --channel \fIkanaal\fR\fB --list --verbose\fR
-    Geeft overzicht eigenschappen/properties.
+    Provides overview properties.
 .sp
 \fBxfconf-query --channel \fIkanaal\fR\fB --property \fIeigenschap\fR\fB
 --set \fIwaarde\fR
-    Vul de waarde in voor een property.
+    Enter the value for a property.
 .RE
 .\"
 .\"
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR
-Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe achteraan de
-favorietenbalk (dash, dock).
+Add application icon (favorite) \fIFAVORITE\fR to the back of the favorites bar
+(dash, dock).
 .TP
 \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR
-Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe vooraan de
-favorietenbalk (dash, dock).
+Add application icon (favorite) \fIFAVORITE\fR in front of the favorites bar
+(dash, dock).
 .TP
 \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR
-Verwijder toepassingspictogram (favoriet) \fIFAVORITE\fR uit de
-favorietenbalk (dash, dock).
+Remove application icon (favorite) \fIFAVORITE\fR from the favorites bar (dash,
+dock).
 .TP
 \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR
-voeg appfolder \fIAPPFOLDER\fR toe.
+Add app folder \fIAPPFOLDER\fR.
 .TP
 \fB-x\fR, \fB--removeappfolder\fR=\fIAPPFOLDER\fR
-Verwijder appfolder \fIAPPFOLDER\fR.
+Delete app folder \fIAPPFOLDER\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH VOORBEELDEN
+.SH EXAMPLES
 .sp
 \fBkz gset\fR
 .RS
-Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
-werkomgeving (GUI).
+Shows changes to the configuration database after changes to the graphical
+user environment (GUI).
 .RE
 .sp
 \fBkz gset --addfavbef=idle\fR
 .RS
-Voeg de IDLE (Python's Integrated Development and Learning Environment)
-toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
-idle.desktop moet bestaan in een van de applicatiemappen
-zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
+Add the IDLE (Python's Integrated Development and Learning Environment)
+application icon (favorite) to the front of the favorites bar. The idle.desktop
+file must exist in one of the application directories such as
+/usr/share/applications or /var/lib/snapd/desktop/applications.
 .RE
 .sp
 \fBkz gset --delfav=idle\fR
 .RS
-Verwijder de IDLE (Python's Integrated Development and Learning Environment)
-toepassingspictogram (favoriet) uit de favorietenbalk.
+Remove the IDLE (Python's Integrated Development and Learning Environment)
+application icon (favorite) from the favorites bar.
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2015 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2015 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBkz\fR(1),
 \fBgsettings\fR(1),
 \fBkz_common.sh\fR(1),
@@ -177,11 +171,11 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz gset\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz gset\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.

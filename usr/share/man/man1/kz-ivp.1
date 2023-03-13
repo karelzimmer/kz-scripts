@@ -1,85 +1,80 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-ivp.
+.\"# Man page for kz-ivp.
 .\"#
 .\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-IVP 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ-IVP 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz-ivp \- Checking scripts.
 .\"
 .\"
-.SH NAAM
-kz-ivp \- Scripts controleren.
-.\"
-.\"
-.SH SAMENVATTINGmsg
+.SH SYNOPSISmsg
 .B kz ivp
-[OPTIE...]
+[OPTION...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz ivp\fR voert een Installatie Verificatie Procedure (IVP) uit.
+.SH DESCRIPTION
+\fBkz ivp\fR performs an Installation Verification Procedure (IVP).
 .sp
-Voert een IVP uit waarbij scripts inhoudelijk en met shellcheck worden
-gecontroleerd.
+Performs an IVP that checks scripts content and with shellcheck and
+pycodestyle.
 .sp
-Gecontroleerd wordt onder andere:
+Among other things, the following are checked:
 .br
-tags       - TODO/FIXME/BUG-tags
+tags        - TODO/FIXME/BUG-tags
 .br
-regels     - aantal regels en regellengte
+lines       - number of lines and line length
 .br
-velden     - zoals vrijgavejaar
+fields      - such as release year
 .br
-spaties    - eindspaties
+spaces      - trailing spaces
 .br
-shellcheck - shellscript analyse tool
+shellcheck  - shell script analyse tool
 .br
-gebruik    - roep shellscript aan met optie usage
+pycodestyle - Python script analyse tool
 .sp
-Opdracht \fBkz ivp\fR kan alleen worden uitgevoerd als Ontwikkelaar, d.i.
-aangemeld als karel op pcNN (bijvoorbeeld pc01).
+Command \fBkz ivp\fR can only be run as Developer, i.e. logged in as karel on
+pcNN (e.g. pc01).
 .sp
-Opdracht \fBkz ivp\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
+Command \fBkz ivp\fR is also called from \fBkz deploy\fR.
 .\"
 .\"
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH NOTITIES
+.SH NOTES
 .IP " 1." 4
-Day 1 Operations en CI/CD
+Day 1 Operations and CI/CD
 .RS 4
-\fBkz ivp\fR wordt voornamelijk gebruikt voor \fBDay 1 Operations\fR en
-\fBCI/CD\fR. Zie \fBkz\fR(1) voor een uitleg.
-.RE
+\fBkz ivp\fR is mainly used for \fBDay 1 Operations\fR and \fBCI/CD\fR. See
+\fBkz\fR(1) for an explanation..RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2015 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2015 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
 \fBkz-deploy\fR(1),
@@ -87,11 +82,11 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz ivp\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz ivp\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.

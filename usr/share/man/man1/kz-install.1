@@ -1,116 +1,110 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-install.
+.\"# Man page for kz-install.
 .\"#
 .\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-INSTALL 1 "Handleiding kz" "kz 365" "Handleiding kz"
+.TH KZ-INSTALL 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
-.SH T9N
-This manual page will soon be translated from NL to EN.
+.SH NAME
+kz-install \- Install apps.
 .\"
 .\"
-.SH NAAM
-kz-install \- Apps installeren.
-.\"
-.\"
-.SH SAMENVATTING
+.SH SYNOPSIS
 .B kz install
-[OPTIE...] [\fIAPP\fR...] [\fIBESTAND\fR...]
+[OPTION...] [\fIAPP\fR...] [\fIFILE\fR...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkz install\fR installeert apps en wijzigt systeeminstellingen.
+.SH DESCRIPTION
+\fBkz install\fR installs apps and changes system settings.
 .sp
-In een grafische werkomgeving kan opdracht \fBkz install\fR worden uitgevoerd
-door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
+In a graphical work environment command \fBkz install\fR can be executed by
+searching for \fBapps\fR, click on \fBApps install\fR.
 .sp
-Gebruik (hierna) \fBkz setup\fR voor het instellen van apps en het wijzigen van
-gebruikersinstellingen.
+Use \fBkz setup\fR (after \fBkz install\fR) to set up apps and change user
+settings.
 .sp
-\fBkz install\fR verwerkt zogenaamde installatiebestanden die opdrachten
-bevatten voor het installeren van apps en het wijzigen van systeeminstellingen.
+\fBkz install\fR handles so-called installation files that contain commands for
+installing apps and changing system settings.
 .sp
-Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
+By default, \fBkz install\fR handles the following two installation files:
 .br
-- /usr/bin/kz-install-<distributie>-desktop.sh
+- /usr/bin/kz-install-<distribution>-desktop.sh
 .br
-- /usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh (indien aanwezig)
+- /usr/bin/kz-install-<distribution>-desktop-<computername>.sh (if present)
 .sp
-<distributie> en <computernaam> worden ingevuld met waarden van de huidige
+<distribution> and <computername> are populated with values from the current
 computer.
 .sp
-Bijvoorbeeld kz-install-ubuntu-desktop.sh en kz-install-ubuntu-desktop-pc02.sh.
+For example, kz-install-ubuntu-desktop.sh and
+kz-install-ubuntu-desktop-pc02.sh.
 .br
-Deze installatiebestanden bevatten opdrachten voor ubuntu desktop algemeen en
-ubuntu desktop op pc02.
+These installation files contain commands for ubuntu desktop general and ubuntu
+desktop on pc02.
 .sp
-Voor de indeling van de installatiebestanden zie het deel
-\fBBESTANDSINDELING\fR hieronder.
+For the format of the installation files see the section \fBFILE FORMAT\fR
+below.
 .sp
-Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
-standaard installatiebestanden opgenomen in de lijst van te verwerken
-bestanden.
+If no \fIAPP\fRs or \fIFILE\fRs are specified, the names of the default
+installation files are included in the list of files to process.
 .sp
-Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
+With option \fB--server\fR server is used instead of desktop.
 .sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van installatiebestanden.
+Option \fB-f\fR, \fB--files\fR lists installation files.
 .sp
-Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
-beginnen met \fBkz-install-\fR en te eindigen met \fB.sh\fR.
+It is possible to specify \fIFILE\fRs; these files should be starting with
+\fBkz-install-\fR and ending with \fB.sh\fR.
 .br
-Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
+Anything else is considered an \fIAPP\fR, see below.
 .br
-De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
-bestanden.
+The specified \fIFILE\fRs are included in the list of files to be processed.
 .sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle installatiebestanden (bestanden die beginnen met \fBkz-install-\fR en
-eindigen met \fB.sh\fR).
+Option \fB-a\fR, \fB--apps\fR lists apps available in all installation files
+(files starting with \fBkz-install-\fR and ending with \fB.sh\fR).
 .sp
-Het is mogelijk om \fIAPP\fRs op te geven.
+It is possible to specify \fIAPP\fRs.
 .br
-Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
-installatiebestanden en wordt deze samen met de bijbehorende opdrachten
-gekopieerd naar een tijdelijk bestand.
+Per specified \fIAPP\fR, the first available app is found in all installation
+files and is copied to a temporary file together with the corresponding
+commands.
 .br
-De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
-installatiebestanden.
+The name of this temporary file is included in the list of installation files
+to be processed.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de installatiebestanden.
+Option \fB-c\fR, \fB--cat\fR lists the contents of the installation files.
 .sp
-Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
+With option \fB-r\fR, \fB--remove\fR the installation can be uninstalled.
 .\"
 .\"
-.SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met \fBkz-install-\fR en te
-eindigen met \fB.sh\fR.
+.SH FILE FORMAT
+The files to be processed should start with \fBkz-install-\fR and end with
+\fB.sh\fR.
 .sp
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+The records are processed in the order they appear in the files.
 .br
-De opdrachten standaard meegeleverd bij \fBkz install\fR zijn zodanig opgesteld
-dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
+The commands supplied by default with \fBkz install\fR are arranged in such a
+way that the result remains the same when executed repeatedly.
 .sp
-Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
-regel) er zijn en hoe deze regels verwerkt worden.
+See \fBTable 1\fR which \fBtypes\fR of records (first two positions on a line)
+there are and how these records are processed.
 .sp
-Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
-voorbeeldbestand kz-install-ubuntu-pc02.sh.
-Meer voorbeelden zijn te zien via de opdracht \fBkz install --cat\fR.
+See \fBTable 2\fR for an \fBexample\fR of these records in sample file
+kz-install-ubuntu-pc02.sh.
+More examples can be seen through the \fBkz install --cat\fR command.
 .sp
 .sp
 .br
-.B Tabel 1. Soorten regels en hun verwerking
+.B Table 1. Record types and their processing
 .TS
 allbox tab(:);
 lb | lb.
 T{
-Regel
+Record type
 T}:T{
-Beschrijving
+Description
 T}
 .T&
 l | l
@@ -123,32 +117,32 @@ l | l.
 T{
 #1 APP
 T}:T{
-Bevat de APP naam.
+Contains the APP name.
 T}
 T{
 #1-APP
 T}:T{
-Idem, wordt niet altijd gebruikt, zie [1].
+Ditto, not always used, see [1].
 T}
 T{
-#2 Opdracht
+#2 Command
 T}:T{
-Opdracht voor het verwijderen van APP.
+APP uninstall command.
 T}
 T{
 .sp
 T}:T{
-Wordt overgeslagen (is leeg).
+Will be skipped (is empty).
 T}
 T{
 #...
 T}:T{
-Wordt overgeslagen (is commentaar).
+Will be skipped (is a comment).
 T}
 T{
 Opdracht
 T}:T{
-Opdracht voor het installeren van APP
+Command to install APP
 T}
 .TE
 .sp
@@ -156,24 +150,23 @@ T}
 .br
 [1]
 .br
-Regel '#1-APP' is bedoeld voor een opdracht die specifiek is voor een
-distributie of een computer.
+Line '#1-APP' is for a command specific to a distribution or a computer.
 .br
-Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
-gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
+This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
+look up commands at a given \fIAPP\fR.
 .br
-Deze regel wordt wél gebruikt bij het verwerken van het installatiebestand.
+This line is used when processing the installation file.
 .sp
 .sp
 .br
-.B Tabel 2. Regels in voorbeeldbestand kz-install-ubuntu-pc02.sh
+.B Table 2. Lines in sample file kz-install-ubuntu-pc02.sh
 .TS
 box tab(:);
 lb | lb.
 T{
-Regel
+Record type
 T}:T{
-Beschrijving
+Description
 T}
 .T&
 - | -
@@ -188,179 +181,177 @@ l | l.
 T{
 #1 gnome-gmail
 T}:T{
-Naam van de APP.
+Name of the APP.
 T}
 T{
 sudo apt-get install --yes gnome-gmail
 T}:T{
-Installeer-opdracht.
+Install command.
 T}
 T{
 #2 sudo apt-get remove --yes gnome-gmail
 T}:T{
-Verwijder-opdracht; voor optie -r, --remove.
+Remove command; for option -r, --remove.
 T}
 T{
 .sp
 T}:T{
-Lege regel.
+Empty line.
 T}
 T{
-## Alleen voor pc02!
+## Only for pc02!
 T}:T{
-Commentaar.
+Comment.
 T}
 T{
 #1-gast
 T}:T{
-Alleen op pc02 met Ubuntu installeren.
+Only install on pc02 with Ubuntu.
 T}
 T{
 sudo useradd --create-home ... gast
 T}:T{
-nstalleer-opdracht.
+Install command.
 T}
 T{
 #2 sudo userdel --remove gast
 T}:T{
-Verwijder-opdracht.
+Remove command.
 T}
 .TE
 .\"
 .\"
 .sp
-.SH OPTIES
+.SH OPTIONS
 .TP
 \fB-a\fR, \fB--apps\fR
-Toon een lijst van te installeren apps.
+Show a list of apps to install.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van installatiebestanden.
+Display the contents of installation files.
 .br
-Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
+Each file is preceded by a comment line with the file name.
 .TP
 \fB-f\fR, \fB--files\fR
-Toon een lijst van installatiebestanden.
+Show a list of installation files.
 .TP
 \fB-r\fR, \fB--remove\fR
-Verwijder apps.
+Remove apps.
 .TP
 \fB--server\fR
-Apps installeren en systeeminstellingen wijzigen voor een server.
+Install apps and change system settings for a server.
 .TP
 \fB-s\fR, \fB--simulate\fR
-Geen actie, maar simuleer de installatie, en toon de opdrachten die uitgevoerd
-zouden worden.
+No action, but simulate the installation, and show the commands that would be
+executed.
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
 .TP
 \fB-h\fR, \fB--help\fR
-Toon een korte omschrijving van de beschikbare opties.
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in grafische modus
-(gui=graphical user interface; grafische gebruikersinterface).
+Start in graphics mode (gui=graphical user interface).
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde ongelijk 0.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH BESTANDEN
-/usr/bin/kz-install-<distributie>-desktop.sh
+.SH FILES
+/usr/bin/kz-install-<distribution>-desktop.sh
 .RS
-Standaard installatiebestand.
+Default installation file.
 .RE
 .sp
-/usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh
+/usr/bin/kz-install-<distribution>-desktop-<computername>.sh
 .RS
-Standaard installatiebestand voor <computernaam>.
+Default installation file for <computername>.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.apps
 .RS
-Tijdelijk installatiebestand met opdrachten behorend bij opgegeven apps.
+Temporary installation file containing commands associated with specified apps.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.cmds
 .RS
-Tijdelijk installatiebestand met alle uit te voeren opdrachten.
+Temporary installation file containing all commands to run.
 .RE
 .sp
 /tmp/kz-install-XXXXXXXXXX.sims
 .RS
-Tijdelijk simulatiebestand.
+Temporary simulation file.
 .RE
 .sp
-~/Instellingen/Apps
+~/Setup/Apps
 .RS
-Lijst van geïnstalleerde apps. Ter controle. Aangemaakt door kz-backup.
+List of installed apps. For control. Created by kz-backup.
 .RE
 .\"
 .\"
-.SH NOTITIES
+.SH NOTES
 .IP " 1." 4
-Checklist installatie
+Checklist install
 .RS 4
-https://karelzimmer.nl/html/linux.html#documenten
+https://karelzimmer.nl/html/en/linux.html#documents
 .RE
 .IP " 2." 4
-Persoonlijke map / Instellingen / Apps
+Home / Setup / Apps
 .RS 4
-In bestand Apps staan namen van eerder geïnstalleerde pakketten.
+The Apps file contains names of previously installed packages.
 .br
-Is te gebruiken om de installatie te controleren op volledigheid.
+Can be used to check the installation for completeness.
 .RE
 .IP " 3." 4
-IaC en Day 1 Operations
+IaC and Day 1 Operations
 .RS 4
-\fBkz install\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
-\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+\fBkz install\fR is mainly used for \fBIaC\fR and \fBDay 1 Operations\fR. See
+\fBkz\fR(1) for an explanation.
 .RE
 .\"
 .\"
-.SH VOORBEELDEN
+.SH EXAMPLES
 .sp
 \fBkz install\fR
 .RS
-Installeer alles wat in de standaard installatiebestanden staat.
+Install everything in the default installation files.
 .br
-Hiervoor is in een grafische werkomgeving ook starter \fBApps installeren\fR
-beschikbaar.
+Starter \fBApps\fR is also available for this in a graphical work environment.
 .RE
 .sp
 \fBkz install google-chrome\fR
 .RS
-Installeer Google Chrome.
+Install Google Chrome.
 .RE
 .sp
 \fBkz install --remove google-chrome\fR
 .RS
-Verwijder Google Chrome.
+Remove Google Chrome.
 .RE
 .sp
 \fBkz install --cat google-chrome\fR
 .RS
-Toon installatie-opdrachten voor Google Chrome.
+Show installation commands for Google Chrome.
 .RE
 .sp
 \fBkz install --cat --remove google-chrome\fR
 .RS
-Toon verwijder-opdrachten voor Google Chrome.
+Show remove commands for Google Chrome.
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven in 2009 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
+.SH AUTHOR
+Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
-.SH ZIE OOK
+.SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
 \fBkz-menu\fR(1),
@@ -370,11 +361,11 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH KZ
-Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
+Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht \fBkz install\fR is onderdeel van het pakket \fBkz\fR en is
-beschikbaar op de website van Karel Zimmer
+.SH AVAILABILITY
+Command \fBkz install\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website
 .br
-<https://karelzimmer.nl/html/linux.html#scripts>.
+<https://karelzimmer.nl/html/en/linux.html#scripts>.
