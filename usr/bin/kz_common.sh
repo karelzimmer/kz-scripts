@@ -158,14 +158,14 @@ function kz_common.developer {
 
     if [[ $action = 'check' ]]; then
         # Logged on as developer?
-        if  [[ $USER = 'karel' && $HOSTNAME == pc?? ]]; then
+        if  [[ $USER = 'karel' && $HOSTNAME = pc[0-9][0-9] ]]; then
             return $ok
         else
             return $err
         fi
     else
         printf '%s\n' "$(gettext "Run only as Developer, i.e. logged in as \
-karel on pcNN (e.g. pc01).")"
+karel on pc<nn> (e.g. pc01), 00 <= nn <= 99.")"
     fi
 }
 
