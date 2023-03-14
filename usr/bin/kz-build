@@ -44,12 +44,10 @@ declare uploads_repo_appdir=$uploads_repo/app
 declare uploads_repo_distdir=$uploads_repo/dist
 
 declare -A uploads_sources=(
-                [app]=$uploads_repo_appdir
             [kz-docs]=$docs_repo
          [kz-scripts]=$scripts_repo
             )
 declare -A uploads_targets=(
-               [dist]=$uploads_repo_distdir
             [kz-docs]=$uploads_repo_distdir/data/linux/kz-docs
          [kz-scripts]=$uploads_repo_distdir/data/linux/kz-scripts
                 [deb]=$uploads_repo_distdir/downloads/kz
@@ -57,12 +55,10 @@ declare -A uploads_targets=(
 
 declare -A deb_sources=(
                 [app]=$deb_repo_appdir
-                 [po]=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
          [kz-scripts]=$scripts_repo
             )
 declare -A deb_targets=(
                [dist]=$deb_repo_distdir
-                 [mo]=$deb_repo_distdir/usr/share/locale/nl/LC_MESSAGES
               [build]=$deb_repo_distdir/usr/local/etc
              [man_en]=$deb_repo_distdir/usr/share/man/man1
              [man_nl]=$deb_repo_distdir/usr/share/man/nl/man1
@@ -177,11 +173,6 @@ function build_uploads {
     chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
     chmod 'a-x' -- "$scripts_repo"/*.* "$scripts_repo"/LICENSE
 
-    # Make sure all necessary directories are available for the sync.
-    for dir in "${uploads_targets[@]}"; do
-        mkdir --parents "$dir" |& $logcmd
-    done
-
     # Populate kz-uploads/dist/ with modified files in kz-uploads/app/.
     rsync   --archive               \
             --verbose               \
@@ -258,15 +249,9 @@ function build_uploads {
 
 
 function build_deb {
-    local dir=''
     local file=''
 
     info "$(gettext '* build package...')"
-
-    # Make sure all necessary directories are available for the sync.
-    for dir in "${deb_targets[@]}"; do
-        mkdir --parents "$dir" |& $logcmd
-    done
 
     # Fill kz-deb/dist/ with kz-deb/app/.
     rsync   --archive               \
