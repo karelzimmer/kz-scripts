@@ -57,10 +57,12 @@ declare -A uploads_targets=(
 
 declare -A deb_sources=(
                 [app]=$deb_repo_appdir
+                 [po]=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
          [kz-scripts]=$scripts_repo
             )
 declare -A deb_targets=(
                [dist]=$deb_repo_distdir
+                 [mo]=$deb_repo_distdir/usr/share/locale/nl/LC_MESSAGES
               [build]=$deb_repo_distdir/usr/local/etc
              [man_en]=$deb_repo_distdir/usr/share/man/man1
              [man_nl]=$deb_repo_distdir/usr/share/man/nl/man1
