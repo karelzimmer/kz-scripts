@@ -285,8 +285,8 @@ function build_deb {
             --exclude='LICENSE'             \
             --exclude='README.md'           \
             --exclude='.git*'               \
-            --exclude='.po'                 \
-            --exclude='.pot'                \
+            --exclude='kz.po'               \
+            --exclude='kz.pot'              \
             "${deb_sources[kz-scripts]}"/   \
             "${deb_targets[dist]}"          |& $logcmd
 
