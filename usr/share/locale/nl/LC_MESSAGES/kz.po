@@ -439,6 +439,9 @@ msgstr "Er zijn $count fouten gevonden."
 msgid "Distribute kz package"
 msgstr "Pakket kz distribueren"
 
+msgid "* check that all repos are on branch main..."
+msgstr "* controleer of alle repo's zich op branch main bevinden..."
+
 #, sh-format
 msgid "Repo $repo must be on branch main."
 msgstr "Repo $repo moet op branch main staan."

@@ -107,6 +107,7 @@ function process_input {
 
 
 function check_branch {
+    info "$(gettext '* check that all repos are on branch main...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
