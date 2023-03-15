@@ -299,17 +299,6 @@ a Terminal window and run:')
 [2] ${blue}sudo update-initramfs -u${normal}"
 
     case $program_name in
-        kz-getdeb)
-            # Do not delete kz and kz.1 due to script kz and man page kz.1.
-            rm --force kz.{2..99} /tmp/kz_common.sh
-            # But as in HOME, as described in Checklist installation.
-            cd "$HOME" || exit $err
-            rm --force kz kz.1
-
-            if [[ $rc -ne $ok ]]; then
-                log "$apt_err" --priority=debug
-            fi
-            ;;
         kz-install)
             printf "${normal}%s" "${cursor_visable}"
 
