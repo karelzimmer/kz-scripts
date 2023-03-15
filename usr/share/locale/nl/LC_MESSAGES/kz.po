@@ -461,61 +461,8 @@ msgstr "* installeer pakket kz (kz getdeb)..."
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
-msgid "Progress"
-msgstr "Voortgang"
-
 msgid "Install package kz (may take a while)..."
 msgstr "Installeer pakket kz (kan even duren)..."
-
-msgid "Need authentication"
-msgstr "Authenticatie nodig"
-
-msgid ""
-"Authentication is required to install\n"
-"package kz with documents and scripts\n"
-"from Karel Zimmer.\n"
-"\n"
-"Enter your password:"
-msgstr ""
-"Authenticatie is vereist om pakket\n"
-"kz met documenten en scripts van\n"
-"Karel Zimmer te installeren.\n"
-"\n"
-"Voer uw wachtwoord in:"
-
-msgid "Verify"
-msgstr "Verifiëren"
-
-msgid "Cancel"
-msgstr "Annuleren"
-
-msgid "Error"
-msgstr "Fout"
-
-msgid ""
-"An error has occurred.\n"
-"\n"
-"Possible cause:\n"
-"1. No or incorrect password entered\n"
-"2. <Cancel> was selected on the previous screen"
-msgstr ""
-"Er is een fout opgetreden.\n"
-"\n"
-"Mogelijke oorzaak:\n"
-"1. Geen of onjuist wachtwoord ingevoerd\n"
-"2. Op het vorige scherm is <Annuleren> geselecteerd"
-
-msgid "Again"
-msgstr "Opnieuw"
-
-msgid "Stop"
-msgstr "Stoppen"
-
-msgid "Stopped"
-msgstr "Gestopt"
-
-msgid "Program has been stopped by the user"
-msgstr "Programma is gestopt door de gebruiker"
 
 #, sh-format
 msgid "Wait ${dpkg_wait}s for another package manager to finish..."
@@ -814,6 +761,9 @@ msgstr "Gebruiker inrichten"
 
 msgid "Commands menu"
 msgstr "Opdrachtenmenu"
+
+msgid "Stop"
+msgstr "Stoppen"
 
 msgid "Checklist chapter 1"
 msgstr "Checklist hoofdstuk 1"

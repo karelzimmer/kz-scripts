@@ -388,50 +388,7 @@ msgstr ""
 msgid "Install package kz failed."
 msgstr ""
 
-msgid "Progress"
-msgstr ""
-
 msgid "Install package kz (may take a while)..."
-msgstr ""
-
-msgid "Need authentication"
-msgstr ""
-
-msgid ""
-"Authentication is required to install\n"
-"package kz with documents and scripts\n"
-"from Karel Zimmer.\n"
-"\n"
-"Enter your password:"
-msgstr ""
-
-msgid "Verify"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Error"
-msgstr ""
-
-msgid ""
-"An error has occurred.\n"
-"\n"
-"Possible cause:\n"
-"1. No or incorrect password entered\n"
-"2. <Cancel> was selected on the previous screen"
-msgstr ""
-
-msgid "Again"
-msgstr ""
-
-msgid "Stop"
-msgstr ""
-
-msgid "Stopped"
-msgstr ""
-
-msgid "Program has been stopped by the user"
 msgstr ""
 
 #, sh-format
@@ -681,6 +638,9 @@ msgid "Provision user"
 msgstr ""
 
 msgid "Commands menu"
+msgstr ""
+
+msgid "Stop"
 msgstr ""
 
 msgid "Checklist chapter 1"
