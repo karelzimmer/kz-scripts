@@ -388,9 +388,6 @@ msgstr ""
 msgid "Install package kz failed."
 msgstr ""
 
-msgid "Install kz package"
-msgstr ""
-
 msgid "Progress"
 msgstr ""
 
@@ -435,9 +432,6 @@ msgid "Stopped"
 msgstr ""
 
 msgid "Program has been stopped by the user"
-msgstr ""
-
-msgid "Finished"
 msgstr ""
 
 msgid ""

@@ -158,7 +158,7 @@ function kz_common.developer {
 
     if [[ $action = 'check' ]]; then
         # Logged on as developer?
-        if  [[ $USER = 'karel' && $HOSTNAME = pc[0-9][0-9] ]]; then
+        if [[ $USER = 'karel' && $HOSTNAME = pc[0-9][0-9] ]]; then
             return $ok
         else
             return $err

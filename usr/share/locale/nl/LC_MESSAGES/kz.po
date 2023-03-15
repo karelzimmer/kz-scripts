@@ -461,9 +461,6 @@ msgstr "* installeer pakket kz (kz getdeb)..."
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
-msgid "Install kz package"
-msgstr "Pakket kz installeren"
-
 msgid "Progress"
 msgstr "Voortgang"
 
@@ -519,9 +516,6 @@ msgstr "Gestopt"
 
 msgid "Program has been stopped by the user"
 msgstr "Programma is gestopt door de gebruiker"
-
-msgid "Finished"
-msgstr "Gereed"
 
 msgid ""
 "Package kz has been successfully installed.\n"

@@ -6,15 +6,16 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+
+# shellcheck source=/dev/null
+source /usr/bin/gettext.sh
+
 
 ###############################################################################
 # Constants
 ###############################################################################
-
-declare program_name='kz-getdeb'
-#declare program_desc
-#program_desc=$(gettext 'Install kz package')
-declare display_name=${program_name/kz-/kz }
 
 
 ###############################################################################
@@ -35,7 +36,6 @@ function init_script {
 
 
 function check_input {
-    # clear -x
     if ! sudo true; then
         term_script
     fi
@@ -51,7 +51,9 @@ function install_package {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    temp_deb=$(mktemp -t "$program_name-XXXXXXXXXX.deb")
+    temp_deb=$(mktemp -t 'kz-XXXXXXXXXX.deb')
+    # Prevent: N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)
+    chmod o+r "$temp_deb"
     wget --output-document="$temp_deb" $site_deb
     # kz_common.check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
@@ -64,8 +66,8 @@ function install_package {
 
 
 function term_script {
-    title=$(gettext 'Finished')
-    text=$(gettext "Package kz has been successfully installed.
+    clear -x
+    printf '%s\n' "$(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described
 in the Installation Checklist.
@@ -74,17 +76,13 @@ Checklist installation can be found
 on the site https://karelzimmer.nl,
 under Linux.
 
-Type 'exit' to close this window.")
-    TERM=ansi whiptail  --backtitle "$display_name" \
-                        --title     "$title"        \
-                        --infobox   "$text"         \
-                        16 47
-    if kz_common.developer check; then
-        info "$(gettext '* DEVELOPER *')"
+Type 'exit' to close this window.")"
+    if [[ $USER = 'karel' && $HOSTNAME = pc[0-9][0-9] ]]; then
+        printf '%s\n' "$(gettext '* DEVELOPER *')"
         check_dependencies
         download_website
         pull_repos
-        info '* status repos (gitstat)...'
+        printf '%s\n' '* status repos (gitstat)...'
         /home/"$USER"/bin/gitstat
     fi
     exit 0
@@ -94,10 +92,9 @@ Type 'exit' to close this window.")
 function check_dependencies {
     local escape='gettext'
 
-    info "$(gettext '* check dependencies...')"
-    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf).
-    kz_common.check_dpkgd_snapd
-    # Remove known lines from output.
+    printf '%s\n' "$(gettext '* check dependencies...')"
+    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf)and remove known
+    # lines from output.
     sudo    apt-get                                 \
             install                                 \
             --yes                                   \
@@ -114,15 +111,12 @@ function check_dependencies {
             python3-autopep8                        \
             python3-pip                             \
             python-is-python3                       \
-            w3c-linkchecker                         |
             sed '/ is reeds de nieuwste versie /d'  |
             sed '/ is already the newest version /d'
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian package is old, snap is newer.
-    kz_common.check_dpkgd_snapd
     sudo snap install shellcheck
-    kz_common.check_dpkgd_snapd
     sudo snap install --classic code
 }
 
