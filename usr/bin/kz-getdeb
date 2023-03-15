@@ -174,9 +174,9 @@ function check_dependencies {
     # Debian packages are old, snap is newer and remove known lines from
     # output.
     check_dpkgd_snapd
-    sudo snap install shellcheck | sed '/ is already installed /d'
+    sudo snap install shellcheck | sed '/is already installed/d'
     check_dpkgd_snapd
-    sudo snap install --classic code | sed '/ is already installed /d'
+    sudo snap install --classic code | sed '/is already installed/d'
 }
 
 
