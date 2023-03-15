@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck source=kz_common.sh
 ###############################################################################
 # Install kz package.
 #
@@ -7,29 +6,15 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-set -o errexit
-source <(wget --quiet --output-document=- \
-        'https://karelzimmer.nl/data/linux/kz-scripts/usr/bin/kz_common.sh')
-
 
 ###############################################################################
 # Constants
 ###############################################################################
 
 declare program_name='kz-getdeb'
-declare program_desc
-program_desc=$(gettext 'Install kz package')
+#declare program_desc
+#program_desc=$(gettext 'Install kz package')
 declare display_name=${program_name/kz-/kz }
-
-declare usage
-usage=$(eval_gettext "Usage: \$display_name \$options_usage")
-declare help
-help="$(eval_gettext "Usage: \$display_name [OPTION...]")
-
-$program_desc.
-
-$(gettext 'Options:')
-$options_help"
 
 
 ###############################################################################
@@ -41,45 +26,17 @@ $options_help"
 # Functions
 ###############################################################################
 
+function init_script {
+    set -o errexit
+    set -o errtrace
+    set -o nounset
+    set -o pipefail
+}
+
+
 function check_input {
-    local -i getopt_rc=0
-    local parsed=''
-
-    parsed=$(
-        getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$display_name"     \
-                --              "$@"
-        ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $ok ]]; then
-        info "$usage_line"
-        exit $err
-    fi
-    eval set -- "$parsed"
-    kz_common.process_options "$@"
-
-    while true; do
-        case $1 in
-            --)
-                shift
-                break
-                ;;
-            *)
-                shift
-                ;;
-        esac
-    done
-
-    if [[ "$*" ]]; then
-        printf  "$display_name: $*: %s\n$usage_line\n" \
-                "$(gettext 'arguments are not allowed')"
-        exit $err
-    fi
-
-    kz_common.check_on_ac_power
-    clear -x
-    if ! kz_common.check_user_sudo; then
+    # clear -x
+    if ! sudo true; then
         term_script
     fi
 }
@@ -94,81 +51,15 @@ function install_package {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
 
-    check_user_root
-
-    title=$(gettext 'Progress')
-    text=$(gettext 'Install package kz (may take a while)...')
-    TERM=ansi whiptail  --backtitle "$display_name" \
-                        --title     "$title"        \
-                        --infobox   "$text"         \
-                        7 44
-
-    # Bij Ubuntu Live sessie de universe repo aanzetten.
-    if  [[ $HOSTNAME = 'ubuntu' && $USER = 'ubuntu' ]]; then
-        kz_common.check_dpkgd_snapd
-        sudo apt-add-repository --yes universe  |& $logcmd
-        kz_common.check_dpkgd_snapd
-        sudo apt-get update |& $logcmd
-    fi
-
-    # Installeer pakket kz.
     temp_deb=$(mktemp -t "$program_name-XXXXXXXXXX.deb")
-    wget --output-document="$temp_deb" $site_deb |& $logcmd
-    kz_common.check_dpkgd_snapd
+    wget --output-document="$temp_deb" $site_deb
+    # kz_common.check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
             --yes                           \
-            "$temp_deb"                     |& $logcmd
-    rm "$temp_deb" |& $logcmd
-}
-
-
-function check_user_root {
-    if ! sudo -n true 2> >($logcmd); then
-        while true; do
-            title=$(gettext 'Need authentication')
-            text="
-$(gettext 'Authentication is required to install
-package kz with documents and scripts
-from Karel Zimmer.
-
-Enter your password:')"
-            # Construction '3>&1 1>&2 2>&3' to swap stdout and stderr.
-            if printf '%s\n' "$(
-                whiptail    --backtitle     "$display_name"         \
-                            --title         "$title"                \
-                            --ok-button     "$(gettext 'Verify')"   \
-                            --cancel-button "$(gettext 'Cancel')"   \
-                            --passwordbox   "$text"                 \
-                            13 41                                   \
-                            3>&1 1>&2 2>&3
-                )" | sudo --stdin true 2> >($logcmd); then
-                break
-            else
-                title=$(gettext 'Error')
-                text=$(gettext 'An error has occurred.
-
-Possible cause:
-1. No or incorrect password entered
-2. <Cancel> was selected on the previous screen')
-                if ! whiptail   --backtitle     "$display_name"         \
-                                --title         "$title"                \
-                                --yes-button    "$(gettext 'Again')"    \
-                                --no-button     "$(gettext 'Stop')"     \
-                                --yesno         "$text"                 \
-                                11 51; then
-                    title=$(gettext 'Stopped')
-                    text=$(gettext 'Program has been stopped by the user')
-                    TERM=ansi whiptail  --backtitle "$display_name" \
-                                        --title     "$title"        \
-                                        --infobox   "$text"         \
-                                        7 42
-                    exit $err
-                fi
-            fi
-        done
-    fi
+            "$temp_deb"                    
+    rm "$temp_deb"
 }
 
 
@@ -196,7 +87,7 @@ Type 'exit' to close this window.")
         info '* status repos (gitstat)...'
         /home/"$USER"/bin/gitstat
     fi
-    exit $ok
+    exit 0
 }
 
 
@@ -230,9 +121,9 @@ function check_dependencies {
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian package is old, snap is newer.
     kz_common.check_dpkgd_snapd
-    sudo snap install shellcheck |& $logcmd
+    sudo snap install shellcheck
     kz_common.check_dpkgd_snapd
-    sudo snap install --classic code |& $logcmd
+    sudo snap install --classic code
 }
 
 
@@ -261,7 +152,7 @@ function download_website {
                 "$ftp_host"; then
         rm  "$ftp_login"
         info "$(gettext 'Website download failed.')"
-        return  $err
+        return  1
     fi
 }
 
@@ -273,13 +164,11 @@ function pull_repos {
     git config --global user.email 'karel.zimmer@gmail.com'
     git config --global pull.ff only
     git config --global credential.helper store
-    if ! git    clone                                   \
-                https://github.com/karelzimmer/bin.git  \
-                "$bin_repo"                             2> >($logcmd); then
+    if ! git clone https://github.com/karelzimmer/bin.git "$bin_repo"; then
         cd "$bin_repo"
         printf  "%s\n" "$(gettext '* initial pull bin repo...')"
         # Remove known line from output.
-        git pull | sed '/Already up to date./d'
+        git pull | sed '/Already up to date./d' | sed '/Already up-to-date./d'
     fi
     info '* pull repos (gitpull)...'
     "$bin_repo"/gitpull
@@ -291,10 +180,10 @@ function pull_repos {
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
-    check_input "$@"
+    init_script
+    check_input
     process_input
     term_script
 }
 
-main "$@"
+main
