@@ -6,12 +6,6 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-
-# shellcheck source=/dev/null
-source /usr/bin/gettext.sh
-
 
 ###############################################################################
 # Constants
@@ -32,6 +26,12 @@ function init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
+
+    export TEXTDOMAIN=kz
+    export TEXTDOMAINDIR=/usr/share/locale
+
+    # shellcheck source=/dev/null
+    source /usr/bin/gettext.sh
 }
 
 
@@ -110,7 +110,7 @@ function check_dependencies {
             python3-pycodestyle                     \
             python3-autopep8                        \
             python3-pip                             \
-            python-is-python3                       \
+            python-is-python3                       |
             sed '/ is reeds de nieuwste versie /d'  |
             sed '/ is already the newest version /d'
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
