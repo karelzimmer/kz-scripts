@@ -2,7 +2,7 @@
 ###############################################################################
 # Install kz package.
 #
-# Written in 2016 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Written in 2016 by Karel Zimmer <printf '%s\n'@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
@@ -43,7 +43,19 @@ function check_input {
 
 
 function process_input {
+    update_system
     install_package
+}
+
+
+function update_system {
+    # Repair.
+    sudo dpkg --configure --pending
+    sudo apt-get update --fix-missing
+    sudo apt-get install --fix-broken
+    # Update.
+    sudo apt-get update
+    sudo apt-get upgrade --yes
 }
 
 
@@ -55,7 +67,6 @@ function install_package {
     # Prevent: N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)
     chmod o+r "$temp_deb"
     wget --output-document="$temp_deb" $site_deb
-    # kz_common.check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
@@ -66,8 +77,9 @@ function install_package {
 
 
 function term_script {
-    clear -x
-    printf '%s\n' "$(gettext "Package kz has been successfully installed.
+    printf '%s\n' "
+
+$(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described
 in the Installation Checklist.
@@ -93,7 +105,7 @@ function check_dependencies {
     local escape='gettext'
 
     printf '%s\n' "$(gettext '* check dependencies...')"
-    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf)and remove known
+    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf) and remove known
     # lines from output.
     sudo    apt-get                                 \
             install                                 \
@@ -132,9 +144,8 @@ function download_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info '* download website (lftp)...'
+    printf '%s\n' '* download website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
-        # < /dev/tty want FD 1 al in gebruik bij 'wget --output-document=-...'.
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s\n' "$REPLY" > "$ftp_login"
         printf '\n'
@@ -145,7 +156,7 @@ function download_website {
                 -e "$ftp_set; $ftp_cmd"             \
                 "$ftp_host"; then
         rm  "$ftp_login"
-        info "$(gettext 'Website download failed.')"
+        printf '%s\n' "$(gettext 'Website download failed.')"
         return  1
     fi
 }
@@ -158,13 +169,15 @@ function pull_repos {
     git config --global user.email 'karel.zimmer@gmail.com'
     git config --global pull.ff only
     git config --global credential.helper store
-    if ! git clone https://github.com/karelzimmer/bin.git "$bin_repo"; then
-        cd "$bin_repo"
-        printf  "%s\n" "$(gettext '* initial pull bin repo...')"
+
+    if [[ -d "$bin_repo" ]]; then
+        cd "$bin_repo" || exit 1
         # Remove known line from output.
         git pull | sed '/Already up to date./d' | sed '/Already up-to-date./d'
+    else
+        git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
-    info '* pull repos (gitpull)...'
+    printf '%s\n' '* pull repos (gitpull)...'
     "$bin_repo"/gitpull
 }
 
