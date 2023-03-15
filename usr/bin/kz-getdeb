@@ -2,7 +2,7 @@
 ###############################################################################
 # Install kz package.
 #
-# Written in 2016 by Karel Zimmer <printf '%s\n'@karelzimmer.nl>, Creative Commons
+# Written in 2016 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
@@ -71,7 +71,7 @@ function install_package {
             apt-get                         \
             reinstall                       \
             --yes                           \
-            "$temp_deb"                    
+            "$temp_deb"
     rm "$temp_deb"
 }
 
