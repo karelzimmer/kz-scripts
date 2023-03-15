@@ -172,7 +172,7 @@ karel on pc<nn> (e.g. pc01), 00 <= nn <= 99.")"
 
 function kz_common.init_script {
     # Script-hardening.
-    # set -o errexit
+    set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
