@@ -167,8 +167,8 @@ function check_dependencies {
             python3-autopep8                        \
             python3-pip                             \
             python-is-python3                       |
-            sed '/ is reeds de nieuwste versie /d'  |
-            sed '/ is already the newest version /d'
+            sed '/is reeds de nieuwste versie /d'   |
+            sed '/is already the newest version /d'
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian packages are old, snap is newer and remove known lines from
