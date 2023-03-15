@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 09:25+0100\n"
+"POT-Creation-Date: 2023-03-15 15:35+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -516,6 +516,10 @@ msgstr "Gestopt"
 
 msgid "Program has been stopped by the user"
 msgstr "Programma is gestopt door de gebruiker"
+
+#, sh-format
+msgid "Wait ${dpkg_wait}s for another package manager to finish..."
+msgstr "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
 
 msgid ""
 "Package kz has been successfully installed.\n"

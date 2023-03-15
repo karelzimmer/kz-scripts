@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck shell=bash
 ###############################################################################
 # Install kz package.
 #
@@ -50,12 +51,46 @@ function process_input {
 
 function update_system {
     # Repair.
+    check_dpkgd_snapd
     sudo dpkg --configure --pending
+    check_dpkgd_snapd
     sudo apt-get update --fix-missing
+    check_dpkgd_snapd
     sudo apt-get install --fix-broken
     # Update.
+    check_dpkgd_snapd
     sudo apt-get update
+    check_dpkgd_snapd
     sudo apt-get upgrade --yes
+}
+
+
+function check_dpkgd_snapd {
+    local -i dpkg_wait=10
+    local text
+    text=$(eval_gettext \
+            "Wait \${dpkg_wait}s for another package manager to finish...")
+
+    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+        # System with snaps.
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    /snap/core/*/var/cache/debconf/config.dat           \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $dpkg_wait
+        done
+    else
+        # System without snaps.
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $dpkg_wait
+        done
+    fi
 }
 
 
@@ -67,6 +102,7 @@ function install_package {
     # Prevent: N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)
     chmod o+r "$temp_deb"
     wget --output-document="$temp_deb" $site_deb
+    check_dpkgd_snapd
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
@@ -107,6 +143,7 @@ function check_dependencies {
     printf '%s\n' "$(gettext '* check dependencies...')"
     # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf) and remove known
     # lines from output.
+    check_dpkgd_snapd
     sudo    apt-get                                 \
             install                                 \
             --yes                                   \
@@ -127,9 +164,12 @@ function check_dependencies {
             sed '/ is already the newest version /d'
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-    # Debian package is old, snap is newer.
-    sudo snap install shellcheck
-    sudo snap install --classic code
+    # Debian packages are old, snap is newer and remove known lines from
+    # output.
+    check_dpkgd_snapd
+    sudo snap install shellcheck | sed '/ is already installed /d'
+    check_dpkgd_snapd
+    sudo snap install --classic code | sed '/ is already installed /d'
 }
 
 
