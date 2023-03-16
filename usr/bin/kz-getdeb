@@ -44,24 +44,24 @@ function check_input {
 
 
 function process_input {
+    printf '%s\n' '* REPAIR *'
+    repair_system
+    printf '\n%s\n' '* UPDATE *'
     update_system
+    printf '\n%s\n' '* INSTALL *'
     install_package
+    printf '\n%s\n' '* CLEANUP *'
+    cleanup_system
 }
 
 
-function update_system {
-    # Repair.
+function repair_system {
     check_dpkgd_snapd
     sudo dpkg --configure --pending
     check_dpkgd_snapd
     sudo apt-get update --fix-missing
     check_dpkgd_snapd
     sudo apt-get install --fix-broken
-    # Update.
-    check_dpkgd_snapd
-    sudo apt-get update
-    check_dpkgd_snapd
-    sudo apt-get upgrade --yes
 }
 
 
@@ -94,6 +94,14 @@ function check_dpkgd_snapd {
 }
 
 
+function update_system {
+    check_dpkgd_snapd
+    sudo apt-get update
+    check_dpkgd_snapd
+    sudo apt-get upgrade --yes
+}
+
+
 function install_package {
     local site_deb='https://karelzimmer.nl/downloads/kz/kz_365_all.deb'
     local temp_deb=''
@@ -112,8 +120,28 @@ function install_package {
 }
 
 
+function cleanup_system {
+    check_dpkgd_snapd
+    sudo apt-get autoclean --yes
+    check_dpkgd_snapd
+    sudo apt-get autoremove --yes
+    snap_cleanup
+}
+
+function snap_cleanup {
+    # shellcheck disable=SC2034
+    snap list --all |
+    while read -r name ver rev trk pub notes; do
+        if [[ $notes == *uitgeschakeld* || $notes == *disabled* ]]; then
+            sudo snap remove "$name" --revision="$rev"
+        fi
+    done
+}
+
+
 function term_script {
     printf '%s\n' "
+* FINISH *
 
 $(gettext "Package kz has been successfully installed.
 
