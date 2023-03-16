@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 15:44+0100\n"
+"POT-Creation-Date: 2023-03-16 19:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,11 +43,6 @@ msgstr ""
 
 #, sh-format
 msgid "Authentication is required to run $display_name."
-msgstr ""
-
-msgid ""
-"Run only as Developer, i.e. logged in as karel on pc<nn> (e.g. pc01), 00 <= "
-"nn <= 99."
 msgstr ""
 
 #, sh-format
@@ -408,7 +403,7 @@ msgid ""
 "Type 'exit' to close this window."
 msgstr ""
 
-msgid "* DEVELOPER *"
+msgid "Build development environment"
 msgstr ""
 
 msgid "* check dependencies..."

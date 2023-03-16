@@ -153,23 +153,6 @@ function kz_common.check_user_sudo {
 }
 
 
-function kz_common.developer {
-    local action=${1:-check}
-
-    if [[ $action = 'check' ]]; then
-        # Logged on as developer?
-        if [[ $USER = 'karel' && $HOSTNAME = pc[0-9][0-9] ]]; then
-            return $ok
-        else
-            return $err
-        fi
-    else
-        printf '%s\n' "$(gettext "Run only as Developer, i.e. logged in as \
-karel on pc<nn> (e.g. pc01), 00 <= nn <= 99.")"
-    fi
-}
-
-
 function kz_common.init_script {
     # Script-hardening.
     set -o errtrace

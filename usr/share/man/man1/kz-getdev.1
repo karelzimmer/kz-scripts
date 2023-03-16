@@ -1,7 +1,7 @@
 .\"############################################################################
-.\"# Man page for kz-build.
+.\"# Man page for kz-getdev.
 .\"#
-.\"# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+.\"# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
@@ -10,25 +10,23 @@
 .\"
 .\"
 .SH NAME
-kz-build \- Build package kz.
+kz-getdev \- Build package kz.
 .\"
 .\"
 .SH SYNOPSIS
-.B kz build
+.B kz getdev
 [OPTION...]
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz build\fR builds the package kz and the website https://karelzimmer.nl.
-The kz built package is then installed.
+\fBkz getdev\fR builds the kz package and the website https://karelzimmer.nl.
 .br
-This is to develop and test the package, the website, and the installation, and
-to distribute it later with \fBkz deploy\fR.
+This is to test the package and the website, and to distribute it later with
+\fBkz deploy\fR.
 .sp
-Sequentially performs a check, builds a development environment and installs.
+Successively performs a control and build development environment.
 .sp
-The local kz-docs and kz-scripts Git repositories are used as inputs. Text
-files are converted into pdf files with 'lowriter convert-to pdf'.
+The kz-docs and kz-scripts remote Git repositories are used as inputs.
 .\"
 .\"
 .SH OPTIONS
@@ -97,15 +95,15 @@ Debian package kz.
 .\"
 .SH NOTES
 .IP " 1." 4
-CI/CD and Day 1 Operations
+CI/CD and Day 0 Operations
 .RS 4
-\fBkz build\fR is mainly used for \fBCI/CD\fR and \fBDay 1 Operations\fR. See
+\fBkz getdev\fR is mainly used for \fBCI/CD\fR and \fBDay 0 Operations\fR. See
 \fBkz\fR(1) for an explanation.
 .RE
 .\"
 .\"
 .SH AUTHOR
-Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
@@ -115,7 +113,6 @@ Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 \fBkz-build\fR(1),
 \fBkz-deploy\fR(1),
 \fBkz-getdeb\fR(1),
-\fBkz-getdev\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
@@ -124,7 +121,7 @@ Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
 .SH AVAILABILITY
-Command \fBkz build\fR is part of the \fBkz\fR package and is available on
+Command \fBkz getdev\fR is part of the \fBkz\fR package and is available on
 Karel Zimmer's website
 .br
 <https://karelzimmer.nl/html/en/linux.html#scripts>.

@@ -109,12 +109,6 @@ function check_input {
                 "$(gettext 'arguments are not allowed')"
         exit $err
     fi
-
-    # Logged on as developer?
-    if ! kz_common.developer check; then
-        kz_common.developer report
-        exit $err
-    fi
 }
 
 
@@ -128,7 +122,7 @@ function process_input {
     build_deb
     info '
 * INSTALL *'
-    install_deb
+    install_package
 }
 
 
@@ -294,7 +288,7 @@ function build_deb {
 }
 
 
-function install_deb {
+function install_package {
     info "$(gettext '* install package...')"
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \

@@ -19,35 +19,12 @@ kz-update \- Systeem bijwerken.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz update\fR voert een repair en update uit.
+\fBkz update\fR werkt het systeem bij (updates).
 .sp
-Achtereenvolgens wordt uitgevoerd:
+Voert achtereenvolgens een reparatie, de update en opschoning uit.
 .br
-- Als repair:
-.br
-  - dpkg --configure --pending
-.br
-  - apt-get update --fix-missing
-.br
-  - apt-get install --fix-broken
-.br
-- De eigenlijke update:
-.br
-  - apt-get update
-.br
-  - apt-get dist-upgrade --yes
-.br
-  - snap refresh
-.br
-- Opschonen:
-.br
-  - apt-get autoclean --yes
-.br
-  - apt-get autoremove --yes
-.br
-  - snap cleanup
-.br
-- Melding "reboot" geven als bestand /var/run/reboot-required bestaat.
+Melding "reboot" geven als bestand /var/run/reboot-required bestaat.
+.RE
 .\"
 .\"
 .SH OPTIES

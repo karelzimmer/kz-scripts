@@ -1,7 +1,7 @@
 .\"############################################################################
-.\"# Man-pagina voor kz-build.
+.\"# Man-pagina voor kz-getdev.
 .\"#
-.\"# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+.\"# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
@@ -10,26 +10,24 @@
 .\"
 .\"
 .SH NAAM
-kz-build \- Pakket kz bouwen.
+kz-getdev \- Ontwikkelomgeving bouwen.
 .\"
 .\"
 .SH SAMENVATTING
-.B kz build
+.B kz getdev
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz build\fR bouwt het pakket kz én de website https://karelzimmer.nl. Het
-gebouwde pakket kz wordt vervolgens geïnstalleerd.
+\fBkz getdev\fR bouwt de ontwikkelomgeving voor het pakket kz én de website
+https://karelzimmer.nl.
 .br
-Dit om het pakket, de website, en de installatie te kunnen ontwikkelen, testen,
-en later te distribueren met \fBkz deploy\fR.
+Dit om het pakket en de website te kunnen ontwikkelen, testen, en later te
+distribueren met \fBkz deploy\fR.
 .sp
-Voert achtereenvolgens een controle, opbouwen ontwikkelomgeving, en installatie
-uit.
+Voert achtereenvolgens een controle en opbouwen ontwikkelomgeving uit.
 .sp
-Als invoer worden de lokale Git-repositories kz-docs en kz-scripts gebruikt.
-Van tekstbestanden worden pdf-bestanden gemaakt met 'lowriter convert-to pdf'.
+Als invoer worden de remote Git-repositories kz-docs en kz-scripts gebruikt.
 .\"
 .\"
 .SH OPTIES
@@ -98,15 +96,15 @@ Debian-pakket kz.
 .\"
 .SH NOTITIES
 .IP " 1." 4
-CI/CD en Day 1 Operations
+CI/CD en Day 0 Operations
 .RS 4
-\fBkz build\fR wordt voornamelijk gebruikt voor \fBCI/CD\fR en
-\fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
+\fBkz getdev\fR wordt voornamelijk gebruikt voor \fBCI/CD\fR en
+\fBDay 0 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
 .RE
 .\"
 .\"
 .SH AUTEUR
-Geschreven in 2021 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Geschreven in 2023 door Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
@@ -116,7 +114,6 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 \fBkz-build\fR(1),
 \fBkz-deploy\fR(1),
 \fBkz-getdeb\fR(1),
-\fBkz-getdev\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
@@ -125,7 +122,7 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
 .\"
 .\"
 .SH BESCHIKBAARHEID
-Opdracht \fBkz build\fR is onderdeel van het pakket \fBkz\fR en is
+Opdracht \fBkz getdev\fR is onderdeel van het pakket \fBkz\fR en is
 beschikbaar op de website van Karel Zimmer
 .br
 <https://karelzimmer.nl/html/nl/linux.html#scripts>.

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-15 15:35+0100\n"
+"POT-Creation-Date: 2023-03-16 19:39+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -47,13 +47,6 @@ msgstr "Reeds uitgevoerd door de beheerder."
 #, sh-format
 msgid "Authentication is required to run $display_name."
 msgstr "Authenticatie is vereist om $display_name uit te voeren."
-
-msgid ""
-"Run only as Developer, i.e. logged in as karel on pc<nn> (e.g. pc01), 00 <= "
-"nn <= 99."
-msgstr ""
-"Alleen uitvoeren als Ontwikkelaar, d.i. aangemeld als karel op pc<nn> "
-"(bijvoorbeeld pc01), 00 <= nn <= 99."
 
 #, sh-format
 msgid ""
@@ -491,8 +484,9 @@ msgstr ""
 "\n"
 "Typ 'exit' om dit venster te sluiten."
 
-msgid "* DEVELOPER *"
-msgstr "* ONTWIKKELAAR *"
+
+msgid "Build development environment"
+msgstr "Ontwikkelomgeving bouwen"
 
 msgid "* check dependencies..."
 msgstr "* controleer afhankelijkheden..."

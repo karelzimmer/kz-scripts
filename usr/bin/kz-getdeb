@@ -153,14 +153,6 @@ on the site https://karelzimmer.nl,
 under Linux.
 
 Type 'exit' to close this window.")"
-    if [[ $USER = 'karel' && $HOSTNAME = pc[0-9][0-9] ]]; then
-        printf '%s\n' "$(gettext '* DEVELOPER *')"
-        check_dependencies
-        download_website
-        pull_repos
-        printf '%s\n' '* status repos (gitstat)...'
-        /home/"$USER"/bin/gitstat
-    fi
 
     # Do not delete kz and kz.1 due to scripts and manuals with the same name.
     rm --force kz.{2..99}
@@ -172,89 +164,6 @@ Type 'exit' to close this window.")"
 }
 
 
-function check_dependencies {
-    local escape='gettext'
-
-    printf '%s\n' "$(gettext '* check dependencies...')"
-    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf) and remove known
-    # lines from output.
-    check_dpkgd_snapd
-    sudo    apt-get                                 \
-            install                                 \
-            --yes                                   \
-            curl                                    \
-            fakeroot                                \
-            $escape                                 \
-            ghostscript                             \
-            git                                     \
-            jq                                      \
-            lftp                                    \
-            nmap                                    \
-            pycodestyle                             \
-            python3-pycodestyle                     \
-            python3-autopep8                        \
-            python3-pip                             \
-            python-is-python3                       |
-            sed '/is reeds de nieuwste versie /d'   |
-            sed '/is already the newest version /d'
-    sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
-    sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-    # Debian packages are old, snap is newer and remove known lines from
-    # output.
-    check_dpkgd_snapd
-    sudo snap install shellcheck |& sed '/is already installed/d'
-    check_dpkgd_snapd
-    sudo snap install --classic code |& sed '/is already installed/d'
-}
-
-
-function download_website {
-    local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=/httpdocs
-    local ftp_to=$HOME/kz-uploads/dist
-    local ftp_opts='--delete --verbose'
-    local ftp_exclude='--exclude icaclient_20.04.0.21_amd64.deb'
-    local ftp_cmd="mirror $ftp_exclude $ftp_opts $ftp_from $ftp_to; exit"
-    local ftp_host=server106.hosting2go.nl
-    local ftp_user=kzimmer
-    local ftp_login=$HOME/.kz-$ftp_host
-
-    printf '%s\n' '* download website (lftp)...'
-    if ! [[ -f $ftp_login ]]; then
-        read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
-        printf '%s\n' "$REPLY" > "$ftp_login"
-        printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login"
-    fi
-    if ! lftp   --user "$ftp_user"                  \
-                --password "$(cat "$ftp_login")"    \
-                -e "$ftp_set; $ftp_cmd"             \
-                "$ftp_host"; then
-        rm  "$ftp_login"
-        printf '%s\n' "$(gettext 'Website download failed.')"
-        return  1
-    fi
-}
-
-
-function pull_repos {
-    local bin_repo=/home/"$USER"/bin
-
-    git config --global user.name 'Karel Zimmer'
-    git config --global user.email 'karel.zimmer@gmail.com'
-    git config --global pull.ff only
-    git config --global credential.helper store
-
-    if [[ -d "$bin_repo" ]]; then
-        cd "$bin_repo" || exit 1
-        # Remove known line from output.
-        git pull | sed '/Already up to date./d' | sed '/Already up-to-date./d'
-    else
-        git clone https://github.com/karelzimmer/bin.git "$bin_repo"
-    fi
-    printf '%s\n' '* pull repos (gitpull)...'
-    "$bin_repo"/gitpull
-}
 
 
 ###############################################################################

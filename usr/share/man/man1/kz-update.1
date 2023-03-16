@@ -19,35 +19,12 @@ kz-update \- Update system.
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz update\fR performs a repair and update.
+\fBkz update\fR updates teh system.
 .sp
-Executes successively:
+Performs repair, update, and cleanup in sequence.
 .br
-- As repair:
-.br
-  - dpkg --configure --pending
-.br
-  - apt-get update --fix-missing
-.br
-  - apt-get install --fix-broken
-.br
-- The actual update:
-.br
-  - apt-get update
-.br
-  - apt-get dist-upgrade --yes
-.br
-  - snap refresh
-.br
-- Clean up:
-.br
-  - apt-get autoclean --yes
-.br
-  - apt-get autoremove --yes
-.br
-  - snap cleanup
-.br
-- Report "reboot" if file /var/run/reboot-required exists.
+Report "reboot" if file /var/run/reboot-required exists.
+.RE
 .\"
 .\"
 .SH OPTIONS
