@@ -600,6 +600,7 @@ ${blue}$logcmd_check${normal}"
             exit $err
         else
             if $option_reset; then
+                # shellcheck disable=SC2034
                 action=$(gettext 'reset' )
             fi
             info "

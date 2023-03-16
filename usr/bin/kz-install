@@ -610,6 +610,7 @@ ${blue}$logcmd_check${normal}"
             exit $err
         else
             if $option_remove; then
+                # shellcheck disable=SC2034
                 action=$(gettext 'remove')
             fi
             info "
