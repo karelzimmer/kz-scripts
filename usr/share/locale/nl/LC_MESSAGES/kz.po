@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-18 10:03+0100\n"
+"POT-Creation-Date: 2023-03-18 10:15+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -460,6 +460,9 @@ msgstr "Installeer pakket kz (kan even duren)..."
 #, sh-format
 msgid "Wait ${dpkg_wait}s for another package manager to finish..."
 msgstr "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
+
+msgid "Install kz package"
+msgstr "Pakket kz installeren"
 
 msgid "Finished"
 msgstr "Gereed"
