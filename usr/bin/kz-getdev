@@ -125,6 +125,35 @@ function check_dependencies {
 }
 
 
+function check_dpkgd_snapd {
+    local -i dpkg_wait=10
+    local text
+    text=$(eval_gettext \
+            "Wait \${dpkg_wait}s for another package manager to finish...")
+
+    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+        # System with snaps.
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    /snap/core/*/var/cache/debconf/config.dat           \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $dpkg_wait
+        done
+    else
+        # System without snaps.
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $dpkg_wait
+        done
+    fi
+}
+
+
 function download_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs

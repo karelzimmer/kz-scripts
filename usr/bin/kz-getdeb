@@ -12,6 +12,9 @@
 # Constants
 ###############################################################################
 
+declare program_name='kz-getdeb'
+declare display_name=${program_name/kz-/kz }
+
 
 ###############################################################################
 # Variables
@@ -140,10 +143,10 @@ function snap_cleanup {
 
 
 function term_script {
-    printf '%s\n' "
-* FINISH *
-
-$(gettext "Package kz has been successfully installed.
+    local title
+    title=$(gettext 'Finished')
+    local text
+    text=$(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described
 in the Installation Checklist.
@@ -152,7 +155,25 @@ Checklist installation can be found
 on the site https://karelzimmer.nl,
 under Linux.
 
-Type 'exit' to close this window.")"
+Type 'exit' to close this window.")
+    TERM=ansi whiptail  --backtitle "$display_name" \
+                        --title     "$title"        \
+                        --infobox   "$text"         \
+                        16 47
+
+#     printf '%s\n' "
+# * FINISH *
+
+# $(gettext "Package kz has been successfully installed.
+
+# Now follow the steps as described
+# in the Installation Checklist.
+
+# Checklist installation can be found
+# on the site https://karelzimmer.nl,
+# under Linux.
+
+# Type 'exit' to close this window.")"
 
     # Do not delete kz and kz.1 due to scripts and manuals with the same name.
     rm --force kz.{2..99}
