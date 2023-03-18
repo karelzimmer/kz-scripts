@@ -19,17 +19,22 @@ kz-build \- Pakket kz bouwen.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz build\fR bouwt het pakket kz én de website https://karelzimmer.nl. Het
-gebouwde pakket kz wordt vervolgens geïnstalleerd.
+\fBkz build\fR bouwt het pakket kz én de website https://karelzimmer.nl.
+.br
+Het gebouwde pakket kz wordt vervolgens lokaal geïnstalleerd.
+.sp
+Voert achtereenvolgens een controle, opbouwen ontwikkelomgeving, en installatie
+uit.
 .br
 Dit om het pakket, de website, en de installatie te kunnen ontwikkelen, testen,
 en later te distribueren met \fBkz deploy\fR.
 .sp
-Voert achtereenvolgens een controle, opbouwen ontwikkelomgeving, en installatie
-uit.
-.sp
 Als invoer worden de lokale Git-repositories kz-docs en kz-scripts gebruikt.
 Van tekstbestanden worden pdf-bestanden gemaakt met 'lowriter convert-to pdf'.
+.sp
+Met opdracht \fBkz deploy\fR kan de website (inclusief pakket kz) geplaatst
+worden op het internet zodat de scripts en documenten beschikbaar zijn voor
+algemeen gebruik.
 .\"
 .\"
 .SH OPTIES
@@ -113,10 +118,9 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 .SH ZIE OOK
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
-\fBkz-build\fR(1),
+\fBkz-ckname\fR(1),
 \fBkz-deploy\fR(1),
-\fBkz-getdeb\fR(1),
-\fBkz-getdev\fR(1),
+\fBkz-ivp\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"

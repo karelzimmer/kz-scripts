@@ -21,7 +21,12 @@ kz-deploy \- Distribute kz package.
 .SH DESCRIPTION
 \fBkz deploy\fR distributes package kz.
 .br
-This is to make the scripts and documents available for general use.
+The command \fBkz deploy\fR places the development environment (website plus
+package kz) on the internet so that the scripts and documents are available for
+general use.
+.sp
+Sequentially performs a check, build website with package kz, distribute
+website with package kz, and then install package kz from the website.
 .sp
 The scripts and documents have also been placed on GitHub, which can be
 obtained via:
@@ -29,9 +34,10 @@ obtained via:
 \fBgit clone https://github.com/karelzimmer/kz-docs.git\fR
 .br
 \fBgit clone https://github.com/karelzimmer/kz-scripts.git\fR
-.sp
-Sequentially performs a check, builds package kz, distributes website, and
-installs.
+With command \fBkz getdeb\fR package kz can be installed on the local computer.
+.br
+With command \fBkz getdev\fR the development environment (website plus package
+kz) can be placed on the local computer.
 .\"
 .\"
 .SH OPTIONS
@@ -88,11 +94,8 @@ Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
 \fBkz-build\fR(1),
-\fBkz-ckname\fR(1),
-\fBkz-deploy\fR(1),
 \fBkz-getdeb\fR(1),
 \fBkz-getdev\fR(1),
-\fBkz-ivp\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"

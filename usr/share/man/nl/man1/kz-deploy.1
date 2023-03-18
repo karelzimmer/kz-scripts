@@ -21,7 +21,12 @@ kz-deploy \- Pakket kz distribueren.
 .SH BESCHRIJVING
 \fBkz deploy\fR distribueert pakket kz.
 .br
-Dit om de scripts en documenten beschikbaar te stellen voor algemeen gebruik.
+Met opdracht \fBkz deploy\fR wordt de onwikkelomgeving (website plus pakket kz)
+geplaatst op het internet zodat de scripts en documenten beschikbaar zijn voor
+algemeen gebruik.
+.sp
+Voert achtereenvolgens een controle, website met pakket kz bouwen, website met
+pakket kz distribueren, en installatie van pakket kz vanaf de website uit.
 .sp
 Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
 .br
@@ -29,8 +34,11 @@ Tevens zijn de scripts en documenten op GitHub geplaatst, te verkrijgen via:
 .br
 \fBgit clone https://github.com/karelzimmer/kz-scripts.git\fR
 .sp
-Voert achtereenvolgens een controle, pakket kz bouwen, website distribueren, en
-installatie uit.
+Met opdracht \fBkz getdeb\fR kan pakket kz geïnstalleerd worden op de locale
+computer.
+.br
+Met opdracht \fBkz getdev\fR kan de onwikkelomgeving (website plus pakket kz)
+geplaatst worden op de locale computer.
 .\"
 .\"
 .SH OPTIES
@@ -87,11 +95,8 @@ Publiek Domein Verklaring <https://creativecommons.org/publicdomain/zero/1.0>.
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
 \fBkz-build\fR(1),
-\fBkz-ckname\fR(1),
-\fBkz-deploy\fR(1),
 \fBkz-getdeb\fR(1),
 \fBkz-getdev\fR(1),
-\fBkz-ivp\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"

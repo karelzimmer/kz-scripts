@@ -20,15 +20,20 @@ kz-build \- Build package kz.
 .\"
 .SH DESCRIPTION
 \fBkz build\fR builds the package kz and the website https://karelzimmer.nl.
-The kz built package is then installed.
+.br
+The package built by kz will then be installed locally.
+.sp
+Sequentially performs a check, builds a development environment and installs.
 .br
 This is to develop and test the package, the website, and the installation, and
 to distribute it later with \fBkz deploy\fR.
 .sp
-Sequentially performs a check, builds a development environment and installs.
-.sp
 The local kz-docs and kz-scripts Git repositories are used as inputs. Text
 files are converted into pdf files with 'lowriter convert-to pdf'.
+.sp
+With command \fBkz deploy\fR the website (including package kz) can be placed
+on the internet so that the scripts and documents are available for general
+use.
 .\"
 .\"
 .SH OPTIONS
@@ -112,10 +117,9 @@ Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
-\fBkz-build\fR(1),
+\fBkz-ckname\fR(1),
 \fBkz-deploy\fR(1),
-\fBkz-getdeb\fR(1),
-\fBkz-getdev\fR(1),
+\fBkz-ivp\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
