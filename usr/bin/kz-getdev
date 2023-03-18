@@ -89,6 +89,7 @@ function process_input {
     info '
 * INSTALL *'
     install_package
+    info '* FINISHED *'
 }
 
 

@@ -57,6 +57,7 @@ function process_input {
     install_package
     printf '\n%s\n' '* CLEANUP *'
     cleanup_system
+    printf '\n%s' '* FINISHED *'
 }
 
 
