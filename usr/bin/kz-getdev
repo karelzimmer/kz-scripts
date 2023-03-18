@@ -86,6 +86,9 @@ function process_input {
 * BUILD *'
     download_website
     pull_repos
+    info '
+* INSTALL *'
+    install_package
 }
 
 
@@ -202,6 +205,19 @@ function pull_repos {
     "$bin_repo"/gitpull
     printf '%s\n' '* status repos (gitstat)...'
     /home/"$USER"/bin/gitstat
+}
+
+
+function install_package {
+    local deb_dir=$HOME/kz-uploads/dist/downloads/kz
+    local deb_name=kz_365_all.deb
+
+    info "$(gettext '* install package...')"
+    sudo    DEBIAN_FRONTEND=noninteractive  \
+            apt-get                         \
+            reinstall                       \
+            --yes                           \
+            "$deb_dir/$deb_name"
 }
 
 
