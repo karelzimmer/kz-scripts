@@ -158,6 +158,8 @@ on the site https://karelzimmer.nl,
 under Linux.
 
 Type 'exit' to close this window.")
+
+    clear -x
     TERM=ansi whiptail  --backtitle "$display_name - $program_desc" \
                         --title     "$title"                        \
                         --infobox   "$text"                         \
