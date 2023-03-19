@@ -222,6 +222,7 @@ function install_package {
 
 
 function term_script {
+    info '* FINISH *'
     exit $ok
 }
 
