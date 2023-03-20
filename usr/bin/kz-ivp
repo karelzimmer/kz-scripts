@@ -118,6 +118,7 @@ function process_input {
                 check_tags
                 check_record_length
                 check_code
+                run_code
                 ;;
         esac
     done < <(
@@ -271,6 +272,13 @@ $(
 )
 "
         maxrc=$err
+    fi
+}
+
+
+function run_code {
+    if [[ $script == */usr/bin/* ]]; then
+        "$script" --usage |& $logcmd
     fi
 }
 

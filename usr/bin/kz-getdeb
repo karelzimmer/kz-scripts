@@ -42,6 +42,12 @@ function init_script {
 
 
 function check_input {
+    if [[ "$*" ]]; then
+        printf  "$display_name: $*: %s\n" \
+                "$(gettext 'arguments are not allowed')"
+        # For kz ivp, exit 0 instead of exit 1.
+        exit 0
+    fi
     if ! sudo true; then
         term_script
     fi
@@ -184,9 +190,10 @@ Type 'exit' to close this window.")
 
 function main {
     init_script
-    check_input
+    check_input "$@"
     process_input
     term_script
 }
 
-main
+main "$@"
+
