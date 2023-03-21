@@ -116,7 +116,7 @@ done'
 
 
 def check_reboot():
-    print('* FINISH *')
+    print('\n* FINISH *')
     try:
         with open('/var/run/reboot-required') as fh:
             print('\n' + _('*** The computer must restart to complete the '
