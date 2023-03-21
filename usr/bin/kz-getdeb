@@ -43,8 +43,9 @@ function init_script {
 
 function check_input {
     if [[ "$*" ]]; then
-        printf  "$display_name: $*: %s\n" \
-                "$(gettext 'arguments are not allowed')"
+        printf  "$display_name: $*: %s\n%s\n" \
+                "$(gettext 'arguments are not allowed')" \
+                "$(eval_gettext "Usage: \$display_name \$options_usage")"
         # For kz ivp, exit 0 instead of exit 1.
         exit 0
     fi

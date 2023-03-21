@@ -131,6 +131,7 @@ function check_names {
     local app_uploads_repo=$HOME/kz-uploads/app
 
     info "$(gettext '* check file names (kz ckname)...')"
+    # Call kz-*.
     "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
                                         "$docs_repo"        \
                                         "$deb_repo"         \
@@ -147,6 +148,7 @@ function check_scripts {
     local -i check_rc=0
 
     info "$(gettext '* check scripts (kz ivp)...')"
+    # Call kz-ivp.
     "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err "
