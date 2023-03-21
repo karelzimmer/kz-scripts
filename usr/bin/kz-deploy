@@ -117,8 +117,8 @@ function check_branch {
 function build_package {
     local -i check_rc=0
 
-    info "$(gettext '* build package and website (kz build)...')"
-    printf '\n'
+    info "$(gettext '* build package and website (kz build)...')
+"
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
         err "
@@ -159,7 +159,8 @@ function upload_website {
 
 
 function install_package {
-    info "$(gettext '* install package kz (kz getdeb)...')"
+    info "$(gettext '* install package kz (kz getdeb)...')
+"
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
         err "$(gettext 'Install package kz failed.')"
         exit $err

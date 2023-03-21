@@ -256,7 +256,6 @@ $(
             --body-numbering=n
 )
 "
-        maxrc=$err
     fi
 }
 
