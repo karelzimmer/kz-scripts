@@ -89,7 +89,7 @@ function process_input {
     info '* CHECK *'
     check_branch
     info '
-* BUILD FINAL *'
+* FINAL BUILD *'
     build_package
     info '
 * DEPLOY *'
