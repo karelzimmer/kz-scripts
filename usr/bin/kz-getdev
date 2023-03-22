@@ -83,7 +83,7 @@ function process_input {
     info '* CHECK *'
     check_dependencies
     info '
-* BUILD *'
+* BUILD (TEST) *'
     download_website
     pull_repos
 }
