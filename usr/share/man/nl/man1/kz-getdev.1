@@ -21,12 +21,12 @@ kz-getdev \- Ontwikkelomgeving bouwen.
 .SH BESCHRIJVING
 \fBkz getdev\fR bouwt de ontwikkelomgeving voor het pakket kz én de website
 https://karelzimmer.nl.
-.br
+.sp
 Dit om het pakket en de website te kunnen ontwikkelen, testen, en later te
 distribueren met \fBkz deploy\fR.
 .sp
 Als invoer worden diverse remote Git-repositories gebruikt.
-.br
+.sp
 Met opdracht \fBkz build\fR kan het pakket kz en de website gebouwd worden.
 .br
 Met opdracht \fBkz deploy\fR kan het pakket kz en de website geplaatst worden
@@ -55,6 +55,14 @@ afsluitwaarde ongelijk 0.
 ~/kz-deb/app/
 .RS
 Basis-bestanden pakket kz (Git).
+.br
+Inclusief man-pagina's (usr/share/man/man1/ en usr/share/man/nl/man1/),
+.br
+Tabvoltooiingsscript (usr/share/bash-completion/completions/),
+.br
+Bureaubladconfiguratiebestand (usr/share/applications/), en
+.br
+PolicyKit actiedefinitiebestanden (usr/share/policypolkit-1/actions/).
 .RE
 .sp
 ~/kz-deb/dist/

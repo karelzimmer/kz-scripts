@@ -67,7 +67,7 @@ function install_package {
     local temp_deb=''
 
     temp_deb=$(mktemp -t "$program_name-XXXXXXXXXX.deb")
-    # Prevent: N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)
+    # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
     wget --output-document="$temp_deb" $site_deb
     check_dpkgd_snapd
@@ -132,7 +132,7 @@ Type 'exit' to close this window.")
 
     # Do not delete kz and kz.1 due to scripts and manuals with the same name.
     rm --force kz.{2..99}
-    # But do delete them if in HOME, as described in Checklist install.
+    # But do delete them if in HOME, as described in Checklist installation.
     rm --force "$HOME"/kz "$HOME"kz.1
 
     exit 0
