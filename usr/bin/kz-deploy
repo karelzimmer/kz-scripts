@@ -89,6 +89,9 @@ function process_input {
     info '* CHECK *'
     check_branch
     info '
+* BUILD *'
+    build_package
+    info '
 * DEPLOY *'
     upload_website
     info '
@@ -106,6 +109,21 @@ function check_branch {
         fi
     done
 
+}
+
+
+function build_package {
+    local -i check_rc=0
+
+    info "$(gettext '* build package and website (kz build)...')
+"
+    # Call kz-build.
+    "$scripts_repo"/usr/bin/kz build || check_rc=$?
+    if [[ $check_rc -ne $ok ]]; then
+        err "
+$(gettext 'Fix all the messages above and then restart the deploy.')"
+        exit $check_rc
+    fi
 }
 
 
