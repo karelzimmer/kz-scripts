@@ -276,6 +276,7 @@ $(
 
 
 function run_code {
+    # Skip tab completion scripts.
     if [[ $script == */usr/bin/* ]]; then
         "$script" --usage |& $logcmd
     fi
