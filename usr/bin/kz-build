@@ -118,7 +118,7 @@ function process_input {
     check_names
     check_scripts
     info '
-* BUILD (TEST) *'
+* BUILD *'
     build_uploads
     build_deb
     info '
