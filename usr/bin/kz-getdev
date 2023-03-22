@@ -206,7 +206,8 @@ function pull_repos {
 
 
 function term_script {
-    info '* FINISH *'
+    info '
+* FINISH *'
     exit $ok
 }
 
