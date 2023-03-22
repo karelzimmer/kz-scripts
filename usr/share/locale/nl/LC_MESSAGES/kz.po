@@ -436,8 +436,8 @@ msgid "* check that all repos are on branch main..."
 msgstr "* controleer of alle repo's zich op branch main bevinden..."
 
 #, sh-format
-msgid "Repo $repo must be on branch main."
-msgstr "Repo $repo moet op branch main staan."
+msgid "Repo $repo not on branch main."
+msgstr "Repo $repo staat niet op branch main."
 
 msgid "* build package and website (kz build)..."
 msgstr "* bouw pakket en website (kz build)..."

@@ -365,7 +365,7 @@ msgid "* check that all repos are on branch main..."
 msgstr ""
 
 #, sh-format
-msgid "Repo $repo must be on branch main."
+msgid "Repo $repo not on branch main."
 msgstr ""
 
 msgid "* build package and website (kz build)..."
