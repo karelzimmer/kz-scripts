@@ -810,7 +810,7 @@ msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 
 msgid "Continue"
-msgstr "Doorgaan"
+msgstr "Verder"
 
 msgid "Exit"
 msgstr "Afsluiten"
