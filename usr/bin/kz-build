@@ -282,7 +282,7 @@ function build_deb {
     printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
 
     # Create Debian package in kz-uploads.
-    # Debian 11 does not support zst compression (default), hence the -Zxz.
+    # Debian supports xz as maximum compression, the default Ubuntu is zst.
     fakeroot    dpkg-deb                            \
                 --build                             \
                 -Zxz                                \
