@@ -87,16 +87,16 @@ function check_input {
 
 function process_input {
     sudo true
-    info '* CHECK *'
+    info "* CHECK ($display_name) *"
     check_branch
-    info '
-* BUILD (DEPLOY) *'
+    info "
+* BUILD ($display_name) *"
     build_package
-    info '
-* DEPLOY *'
+    info "
+* DEPLOY ($display_name) *"
     upload_website
-    info '
-* INSTALL *'
+    info "
+* INSTALL ($display_name) *"
     install_package
 }
 
