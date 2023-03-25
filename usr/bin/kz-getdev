@@ -81,10 +81,10 @@ function check_input {
 
 function process_input {
     sudo true
-    info "* CHECK ($display_name) *"
+    info "* CHECK ($display_name)"
     check_dependencies
     info "
-* BUILD ($display_name) *"
+* BUILD ($display_name)"
     download_website
     pull_repos
 }
