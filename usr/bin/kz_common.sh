@@ -122,13 +122,11 @@ function kz_common.check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
-            log "restarted (pkexec $program_exec ${cmdline_args[*]})" \
-                --priority=debug
+            log "restarted (pkexec $program_exec ${cmdline_args[*]})"
             pkexec "$program_exec" "${cmdline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            log "restarted (exec sudo $program_exec ${cmdline_args[*]})" \
-                --priority=debug
+            log "restarted (exec sudo $program_exec ${cmdline_args[*]})"
             if ! sudo -n true &> /dev/null; then
                 text=
                 printf  '%s\n' "$(eval_gettext "Authentication is required to \
@@ -170,7 +168,7 @@ function kz_common.init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
 
-    log "started ($program_exec $* as $USER)" --priority=notice
+    log "started ($program_exec $* as $USER)"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $logcmd
@@ -251,7 +249,7 @@ function signal {
             ;;
     esac
     log "signal: $signal, line: $lineno, function: $function, command: \
-$command, code: $rc ($rc_desc)" --priority=debug
+$command, code: $rc ($rc_desc)"
 
     case $signal in
         err)
@@ -261,7 +259,7 @@ $(eval_gettext "Program \$program_name encountered an error.")"
             ;;
         exit)
             signal_exit
-            log "ended (code=exited, status=$status)" --priority=notice
+            log "ended (code=exited, status=$status)"
             trap - err EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
@@ -286,7 +284,7 @@ a Terminal window and run:')
             printf "${normal}%s" "${cursor_visable}"
 
             if [[ $rc -ne $ok ]]; then
-                log "$apt_err" --priority=debug
+                log "$apt_err"
             fi
             ;;
         kz-setup)
