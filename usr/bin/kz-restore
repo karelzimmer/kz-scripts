@@ -127,19 +127,19 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            warn "$(gettext 'Make sure that the USB medium containing the \
+             warning "$(gettext 'Make sure that the USB medium containing the \
 backup is connected.')"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err "$(eval_gettext "No USB medium found.
+                 error "$(eval_gettext "No USB medium found.
 
 Connect a USB medium, and then start \$operation again.")"
             exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            err "$(eval_gettext "Connect only one USB medium.
+             error "$(eval_gettext "Connect only one USB medium.
 
 Now connected:
 \$medium
@@ -150,7 +150,7 @@ Disconnect media via Files, then restart \$operation.")"
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
-            err "$(eval_gettext "No backup found on connected USB medium.
+             error "$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory backup-\$HOSTNAME-\$USER, and then \
 start restore again.")"
@@ -260,7 +260,7 @@ function restore_backup {
             return $ok
             ;;
         *)
-            err "$(eval_gettext "Restore ended with errors.
+             error "$(eval_gettext "Restore ended with errors.
 
 Some files may not be readable,
 or were any files added or removed while restoring the backup,
@@ -310,7 +310,7 @@ function term_script {
     sync |& $logcmd || rc+=$?
     text=''
     if $option_dry_run; then
-        err "$(gettext 'The backup was NOT restored (DRY RUN).')"
+         error "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $err
     fi
     if [[ $source_medium == /media/* ]]; then
@@ -349,7 +349,7 @@ $(gettext 'The backup has been restored.')
 
 $(gettext 'The USB medium can be removed.')"
         else
-            warn "
+             warning "
 $(gettext 'The backup has been restored.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"

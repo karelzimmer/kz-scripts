@@ -95,7 +95,7 @@ function kz_common.check_on_ac_power {
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        warn "
+         warning "
 $(gettext 'The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.')"
@@ -161,7 +161,7 @@ function kz_common.init_script {
     logcmd_check="journalctl --all --boot --identifier=$program_name \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
-    trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' err
+    trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
     trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
     trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
@@ -253,18 +253,18 @@ $command, code: $rc ($rc_desc)"
 
     case $signal in
         err)
-            err "
+             error "
 $(eval_gettext "Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
         exit)
             signal_exit
             log "ended (code=exited, status=$status)"
-            trap - err EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
         *)
-            err "
+             error "
 $(eval_gettext "Program \$program_name has been interrupted.")"
             exit "$rc"
             ;;
@@ -407,7 +407,7 @@ function info {
 }
 
 
-function warn {
+function warning {
     local title=''
 
     if $option_gui; then
@@ -424,7 +424,7 @@ function warn {
 }
 
 
-function err {
+function error {
     local title=''
 
     if $option_gui; then

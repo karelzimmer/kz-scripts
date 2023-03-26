@@ -138,7 +138,7 @@ function check_names {
                                         "$deb_repo"         \
                                         "$app_uploads_repo" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err "
+         error "
 $(gettext 'Fix all the messages above and then restart the build.')"
         exit $check_rc
     fi
@@ -152,7 +152,7 @@ function check_scripts {
     # Call kz-ivp.
     "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err "
+         error "
 $(gettext 'Fix all the messages above and then restart the build.')"
         exit $check_rc
     fi

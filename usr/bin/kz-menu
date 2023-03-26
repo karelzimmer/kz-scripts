@@ -239,7 +239,7 @@ function process_menu1_choice {
             exit $ok
             ;;
         *)
-            err "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+             error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
             exit $err
             ;;
     esac
@@ -392,7 +392,7 @@ function process_menu2_choice {
     elif [[ $REPLY -eq $menu2_lines ]]; then
         exit_menu2=true
     else
-        err "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+         error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
         exit $err
     fi
 }

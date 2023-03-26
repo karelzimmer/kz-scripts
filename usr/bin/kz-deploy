@@ -106,7 +106,7 @@ function check_branch {
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            warn "$(eval_gettext "Repo \$repo not on branch main.")"
+             warning "$(eval_gettext "Repo \$repo not on branch main.")"
         fi
     done
 
@@ -121,7 +121,7 @@ function build_package {
     # Call kz-build.
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        err "
+         error "
 $(gettext 'Fix all the messages above and then restart the deploy.')"
         exit $check_rc
     fi
@@ -151,7 +151,7 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
         rm      "$ftp_login"
-        err "$(gettext 'Website upload failed.')"
+         error "$(gettext 'Website upload failed.')"
         exit $err
     fi
     sleep 5
@@ -163,7 +163,7 @@ function install_package {
     info "$(gettext '* install package kz (kz getdeb)...')
 "
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
-        err "$(gettext 'Install package kz failed.')"
+         error "$(gettext 'Install package kz failed.')"
         exit $err
     fi
 }

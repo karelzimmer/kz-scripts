@@ -128,18 +128,18 @@ function process_input {
         if [[ -z $medium ]]; then
             text=$(gettext "Connect the USB medium on which the backup will \
 be placed.")
-            warn "$text"
+             warning "$text"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                err "$(eval_gettext "No USB medium found.
+                 error "$(eval_gettext "No USB medium found.
 
 Connect a USB medium, and then start \$operation again.")"
                 exit $err
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            err "$(eval_gettext "Connect only one USB medium.
+             error "$(eval_gettext "Connect only one USB medium.
 
 Now connected:
 \$medium
@@ -346,7 +346,7 @@ EOF
             return $ok
             ;;
         *)
-            err "$(eval_gettext "Backup ended with errors.
+             error "$(eval_gettext "Backup ended with errors.
 
 Some files may not be readable,
 or were any files added or removed while creating the backup,
@@ -384,7 +384,7 @@ $text..."
 
     text=''
     if $option_dry_run; then
-        err "$(gettext 'The backup has NOT been created (DRY RUN).')"
+         error "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $err
     fi
     if [[ $target_medium == /media/* ]]; then
@@ -423,7 +423,7 @@ $(gettext 'The backup has been made.')
 
 $(gettext 'The USB medium can be removed.')"
         else
-            warn "
+             warning "
 $(gettext 'The backup has been made.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"

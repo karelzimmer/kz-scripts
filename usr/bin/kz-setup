@@ -326,7 +326,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
-        warn "$(gettext 'No setting files found.')"
+         warning "$(gettext 'No setting files found.')"
         exit $err
     fi
     if [[ -f $dfltfile_2 ]]; then
@@ -593,7 +593,7 @@ function term_script {
         info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
         if [[ $maxrc -ne $ok ]]; then
-            err "$(eval_gettext "One or more commands went wrong.
+             error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
 Check the log in the Terminal with the command:") \
 ${blue}$logcmd_check${normal}"
