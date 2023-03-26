@@ -69,8 +69,10 @@ function install_package {
     temp_deb=$(mktemp -t "$program_name-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
+    printf '%s\n' "* DOWNLOAD ($display_name)"
     wget --output-document="$temp_deb" $site_deb
     check_dpkgd_snapd
+    printf '%s\n' "* INSTALL ($display_name)"
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
