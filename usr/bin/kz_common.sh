@@ -406,7 +406,6 @@ function info {
     else
         printf '%b\n' "$@"
     fi
-    log "$@" --priority=info
 }
 
 
@@ -424,7 +423,6 @@ function warn {
     else
         printf "${yellow}%b\n${normal}" "$@" >&2
     fi
-    log "$@" --priority=warn
 }
 
 
@@ -442,8 +440,4 @@ function err {
     else
         printf "${red}%b\n${normal}" "$@" >&2
     fi
-    log "$@" --priority=err
 }
-
-
-true
