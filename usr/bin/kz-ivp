@@ -56,7 +56,7 @@ function check_input {
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
         info "$usage_line"
-        exit $err
+        exit $error
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -76,7 +76,7 @@ function check_input {
     if [[ "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
                 "$(gettext 'arguments are not allowed')"
-        exit $err
+        exit $error
     fi
 }
 
@@ -154,7 +154,7 @@ function check_code {
          error "
 In $scriptdir / $scriptname:
 $(gettext "    Unknown script. Function check_code cannot check script code.")"
-        maxrc=$err
+        maxrc=$error
     fi
 }
 
@@ -164,7 +164,7 @@ function check_pycodestyle {
 
     pycodestyle "$script" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        maxrc=$err
+        maxrc=$error
     fi
 }
 
@@ -180,7 +180,7 @@ In $scriptdir / $scriptname:
 $(eval_gettext "    A line is longer than \$max_line_length \
 (\$max_line_length_found).")
 "
-        maxrc=$err
+        maxrc=$error
     fi
 }
 
@@ -211,7 +211,7 @@ $(
                 nl --number-width=8 --number-separator='' --body-numbering=n
 )
 "
-        maxrc=$err
+        maxrc=$error
     fi
 }
 
@@ -223,7 +223,7 @@ function check_shellcheck {
     cd "$scriptdir"
     shellcheck --external-sources "$scriptname" || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
-        maxrc=$err
+        maxrc=$error
     fi
     cd "$scripts_repo"
 }
@@ -270,7 +270,7 @@ $(
     nl      --number-width=4  --number-separator='' --body-numbering=n
 )
 "
-        maxrc=$err
+        maxrc=$error
     fi
 }
 

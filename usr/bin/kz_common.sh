@@ -22,7 +22,7 @@ declare module_desc
 module_desc=$(gettext 'Common module for shell scripts')
 
 declare -i ok=0
-declare -i err=1
+declare -i error=1
 
 
 ###############################################################################
@@ -146,7 +146,7 @@ function kz_common.check_user_sudo {
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $ok
     else
-        return $err
+        return $error
     fi
 }
 
@@ -193,7 +193,7 @@ function signal {
     local -i lineno=${2:-unknown}
     local function=${3:-unknown}
     local command=${4:-unknown}
-    local -i rc=${5:-$err}
+    local -i rc=${5:-$error}
     local rc_desc=''
     local -i rc_desc_signalno=0
     local status="${red}$rc/err${normal}"

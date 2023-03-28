@@ -31,7 +31,7 @@ module_desc = (_('Common module for Python scripts'))
 module_path = f"{os.path.realpath(os.path.dirname(__file__))}"
 
 ok = 0
-err = 1
+error = 1
 
 
 ###############################################################################
@@ -103,7 +103,7 @@ def check_on_ac_power(program_name):
         except KeyboardInterrupt:
             print('\n' + _('Program {} has been interrupted.').
                   format(program_name))
-            sys.exit(err)
+            sys.exit(error)
 
 
 def check_user_root(program_name, display_name):
@@ -126,10 +126,10 @@ def check_user_root(program_name, display_name):
             except KeyboardInterrupt:
                 print('\n' + _('Program {} has been interrupted.').
                       format(program_name))
-                sys.exit(err)
+                sys.exit(error)
             except Exception as ex:
                 print(ex)
-                sys.exit(err)
+                sys.exit(error)
 
 
 def check_user_sudo():
@@ -143,7 +143,7 @@ def check_user_sudo():
                        shell=True, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
-        return(err)
+        return(error)
     else:
         return(ok)
 
@@ -214,7 +214,7 @@ def process_option_version(program_name):
         build_id = '1970-01-01'
     except Exception as ex:
         print(ex)
-        sys.exit(err)
+        sys.exit(error)
     finally:
         cmd = f"grep '# Written in ' {module_path}/{program_name}"
         cmd = f"{cmd} | cut --delimiter=' ' --fields=4"

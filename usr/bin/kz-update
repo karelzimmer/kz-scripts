@@ -71,7 +71,7 @@ def perform_command(command):
         subprocess.run(f'sudo {command}', shell=True, check=True)
     except Exception as ex:
         print(ex)
-        sys.exit(kz_common.err)
+        sys.exit(kz_common.error)
     else:
         print()
 
@@ -124,7 +124,7 @@ def check_reboot():
         pass
     except Exception as ex:
         print(ex)
-        sys.exit(kz_common.err)
+        sys.exit(kz_common.error)
 
 
 ###############################################################################

@@ -97,7 +97,7 @@ function check_input {
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
         info "$usage_line"
-        exit $err
+        exit $error
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -185,7 +185,7 @@ function process_input {
     fi
     # Somewhere before this it didn't go very well.
     if $file_notfound; then
-        exit $err
+        exit $error
     fi
     # Do not process standard files for certain arguments and options.
     if ! ($argument_app || $argument_file || $option_files); then
@@ -327,7 +327,7 @@ function process_dfltfiles {
         ((++file_num))
     else
          warning "$(gettext 'No setting files found.')"
-        exit $err
+        exit $error
     fi
     if [[ -f $dfltfile_2 ]]; then
         files_to_process[file_num]=$dfltfile_2
@@ -597,7 +597,7 @@ function term_script {
 The maximum exit value is \$maxrc.
 Check the log in the Terminal with the command:") \
 ${blue}$logcmd_check${normal}"
-            exit $err
+            exit $error
         else
             if $option_reset; then
                 # shellcheck disable=SC2034

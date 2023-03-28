@@ -60,7 +60,7 @@ function check_input {
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
         info "$usage_line"
-        exit $err
+        exit $error
     fi
     eval set -- "$parsed"
     kz_common.process_options "$@"
@@ -80,7 +80,7 @@ function check_input {
     if [[ "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
                 "$(gettext 'arguments are not allowed')"
-        exit $err
+        exit $error
     fi
 }
 
@@ -157,7 +157,7 @@ function upload_website {
                 "$ftp_host"; then
         rm      "$ftp_login"
          error "$(gettext 'Website upload failed.')"
-        exit $err
+        exit $error
     fi
     sleep 5
 }
@@ -169,7 +169,7 @@ function install_package {
 "
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
          error "$(gettext 'Install package kz failed.')"
-        exit $err
+        exit $error
     fi
 }
 

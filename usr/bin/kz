@@ -56,7 +56,7 @@ function check_input {
     # ARGUMENT, with kz COMMAND ARGUMENT, are for COMMAND, not for kz.
     if [[ -z "$*" ]]; then
         printf  "%s\n" "$usage"
-        exit $err
+        exit $error
     fi
     case $1 in
         -h*|--h*)
@@ -78,7 +78,7 @@ function check_input {
         -*)
             printf  "$display_name: %s: $1%s\n$usage_line\n" \
                     "$(gettext 'invalid option')"
-            exit $err
+            exit $error
             ;;
         *)
             exec_program_name=$1
@@ -87,7 +87,7 @@ function check_input {
     if ! [[ -f "$program_path/kz-$exec_program_name" ]]; then
         printf  "$display_name: $exec_program_name: %s\n$usage_line\n" \
                 "$(gettext 'command does not exist')"
-        exit $err
+        exit $error
     fi
 }
 
