@@ -113,7 +113,12 @@ function check_input {
 
 
 function process_input {
-    sudo true || true
+    if groups "$USER" | grep --quiet --regexp='sudo'; then
+        sudo true
+    else
+        printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
+        term_script
+    fi
     info "* CHECK ($display_name)"
     check_names
     check_scripts
