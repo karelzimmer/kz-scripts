@@ -128,7 +128,6 @@ function kz_common.check_user_root {
         else
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})"
             if ! sudo -n true &> /dev/null; then
-                text=
                 printf  '%s\n' "$(eval_gettext "Authentication is required to \
 run \$display_name.")"
             fi
