@@ -56,6 +56,7 @@ function process_input {
     if groups "$USER" | grep --quiet --regexp='sudo'; then
         sudo true
     else
+        printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
     install_package
