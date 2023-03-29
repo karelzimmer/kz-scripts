@@ -7,6 +7,10 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+export TEXTDOMAIN=kz TEXTDOMAINDIR=/usr/share/locale
+# shellcheck source=/dev/null
+source /usr/bin/gettext.sh
+
 
 ###############################################################################
 # Constants
@@ -37,12 +41,6 @@ function init_script {
     set -o errtrace
     set -o nounset
     set -o pipefail
-
-    export TEXTDOMAIN=kz
-    export TEXTDOMAINDIR=/usr/share/locale
-
-    # shellcheck source=/dev/null
-    source /usr/bin/gettext.sh
 }
 
 
