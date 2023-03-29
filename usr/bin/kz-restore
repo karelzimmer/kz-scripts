@@ -127,8 +127,8 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-             warning "$(gettext 'Make sure that the USB medium containing the \
-backup is connected.')"
+             warning "$(gettext "Make sure that the USB medium containing the \
+backup is connected.")"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
