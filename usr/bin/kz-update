@@ -42,7 +42,7 @@ command = ''
 ###############################################################################
 
 def perform_repair():
-    print(f'* REPAIR ({display_name})')
+    print(f'* {kz_common.bold}Repair{kz_common.normal} ({display_name})')
     command = 'dpkg --configure --pending'
     perform_command(command)
 
@@ -54,7 +54,7 @@ def perform_repair():
 
 
 def perform_update():
-    print(f'* UPDATE ({display_name})')
+    print(f'* {kz_common.bold}Update{kz_common.normal} ({display_name})')
     command = 'apt-get update'
     perform_command(command)
 
@@ -88,7 +88,7 @@ def snap_refresh():
 
 
 def perform_cleanup():
-    print(f'* CLEANUP ({display_name})')
+    print(f'* {kz_common.bold}Cleanup{kz_common.normal} ({display_name})')
     command = 'apt-get autoclean --yes'
     perform_command(command)
 

@@ -33,6 +33,9 @@ module_path = f"{os.path.realpath(os.path.dirname(__file__))}"
 ok = 0
 error = 1
 
+bold = '\033[1m'
+normal = '\033[0m'
+
 
 ###############################################################################
 # Variables

@@ -295,11 +295,12 @@ a Terminal window and run:')
 
 function set_terminal_attributes {
     blink=$(tput bold; tput blink)
-    normal=$(tput sgr0)
     blue=$(tput bold; tput setaf 4)
+    bold=$(tput bold)
     cursor_invisable=$(tput civis)
     cursor_visable=$(tput cvvis)
     green=$(tput bold; tput setaf 2)
+    normal=$(tput sgr0)
     red=$(tput bold; tput setaf 1)
     rewrite_line=$(tput cuu1; tput el)
     yellow=$(tput bold; tput setaf 3)
@@ -374,6 +375,7 @@ Public Domain Dedication \
 function kz_common.reset_terminal_attributes {
     blink=''
     blue=''
+    bold=''
     cursor_invisable=''
     cursor_visable=''
     green=''

@@ -17,6 +17,11 @@ declare program_desc
 program_desc=$(gettext 'Install kz package')
 declare display_name=${program_name/kz-/kz }
 
+declare bold
+bold=$(tput bold)
+declare normal
+normal=$(tput sgr0)
+
 
 ###############################################################################
 # Variables
@@ -70,10 +75,10 @@ function install_package {
     temp_deb=$(mktemp -t "$program_name-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
-    printf '%s\n' "* DOWNLOAD ($display_name)"
+    printf '%s\n' "* ${bold}Download${normal} ($display_name)"
     wget --output-document="$temp_deb" $site_deb
     check_dpkgd_snapd
-    printf '%s\n' "* INSTALL ($display_name)"
+    printf '%s\n' "* ${bold}Install${normal} ($display_name)"
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \

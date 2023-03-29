@@ -119,15 +119,13 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    info "* CHECK ($display_name)"
+    info "* ${bold}Check${normal} ($display_name)"
     check_names
     check_scripts
-    info "
-* BUILD ($display_name)"
+    info "\n* ${bold}Build${normal} ($display_name)"
     build_uploads
     build_deb
-    info "
-* INSTALL ($display_name)"
+    info "\n* Install${normal} ($display_name)"
     install_package
 }
 
@@ -136,7 +134,7 @@ function check_names {
     local -i check_rc=0
     local app_uploads_repo=$HOME/kz-uploads/app
 
-    info "$(gettext '* check file names (kz ckname)...')"
+    info "$(gettext '* Check file names (kz ckname)...')"
     # Call kz-*.
     "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
                                         "$docs_repo"        \
@@ -153,7 +151,7 @@ $(gettext 'Fix all the messages above and then restart the build.')"
 function check_scripts {
     local -i check_rc=0
 
-    info "$(gettext '* check scripts (kz ivp)...')"
+    info "$(gettext '* Check scripts (kz ivp)...')"
     # Call kz-ivp.
     "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
@@ -169,7 +167,7 @@ function build_uploads {
     local pdfdir=''
     local tmptxt=''
 
-    info "$(gettext '* build website...')"
+    info "$(gettext '* Build website...')"
 
     # Make sure the permissions are correct for the sync.
     chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
@@ -253,7 +251,7 @@ function build_uploads {
 function build_deb {
     local file=''
 
-    info "$(gettext '* build package...')"
+    info "$(gettext '* Build package...')"
 
     # Fill kz-deb/dist/ with kz-deb/app/.
     rsync   --archive               \
@@ -297,7 +295,7 @@ function build_deb {
 
 
 function install_package {
-    info "$(gettext '* install package...')"
+    info "$(gettext '* Install package...')"
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
             reinstall                           \
