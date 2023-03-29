@@ -452,7 +452,7 @@ $row. $action ($command)"
     done
     text+='
 '
-    prompt="$(gettext 'Continue')?"
+    prompt="$(gettext 'Proceed?')"
     if $option_gui; then
         text+="
 $prompt"

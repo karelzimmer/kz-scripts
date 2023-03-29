@@ -165,7 +165,7 @@ start restore again.")"
 "
     if $option_gui; then
         text+="
-$(gettext 'Continue')?"
+$(gettext 'Proceed?')"
         if zenity   --question                          \
                     --no-markup                         \
                     --width         600                 \
