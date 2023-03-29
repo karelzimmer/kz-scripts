@@ -49,10 +49,8 @@ declare title=''
 declare usage_line=''
 
 # Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
-declare blink=''
 declare blue=''
-declare cursor_invisable=''
-declare cursor_visable=''
+declare bold=''
 declare green=''
 declare normal=''
 declare red=''
@@ -195,7 +193,7 @@ function signal {
     local -i rc=${5:-$error}
     local rc_desc=''
     local -i rc_desc_signalno=0
-    local status="${red}$rc/err${normal}"
+    local status="${red}$rc/error${normal}"
 
     case $rc in
         0)
@@ -272,33 +270,22 @@ $(eval_gettext "Program \$program_name has been interrupted.")"
 
 
 function signal_exit {
-    local apt_err
-    apt_err="$(gettext 'If the package manager gives apt errors, launch \
-a Terminal window and run:')
-[1] ${blue}kz update${normal}
-[2] ${blue}sudo update-initramfs -u${normal}"
-
     case $program_name in
         kz-install)
-            printf "${normal}%s" "${cursor_visable}"
-
             if [[ $rc -ne $ok ]]; then
-                log "$apt_err"
+                log "$(gettext 'If the package manager gives apt errors, \
+launch a Terminal window and run:')
+[1] ${blue}kz update${normal}
+[2] ${blue}sudo update-initramfs -u${normal}"
             fi
-            ;;
-        kz-setup)
-            printf "${normal}%s" "${cursor_visable}"
             ;;
     esac
 }
 
 
 function set_terminal_attributes {
-    blink=$(tput bold; tput blink)
     blue=$(tput bold; tput setaf 4)
     bold=$(tput bold)
-    cursor_invisable=$(tput civis)
-    cursor_visable=$(tput cvvis)
     green=$(tput bold; tput setaf 2)
     normal=$(tput sgr0)
     red=$(tput bold; tput setaf 1)
@@ -373,11 +360,8 @@ Public Domain Dedication \
 
 
 function kz_common.reset_terminal_attributes {
-    blink=''
     blue=''
     bold=''
-    cursor_invisable=''
-    cursor_visable=''
     green=''
     normal=''
     red=''

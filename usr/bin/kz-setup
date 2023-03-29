@@ -73,9 +73,6 @@ declare option_gui=false
 declare option_reset=false
 declare option_simulate=false
 declare sims_file=''
-declare status_busy=''
-declare status_err=''
-declare status_ok=''
 
 
 ###############################################################################
@@ -443,11 +440,6 @@ function process_cmds_file {
     fi
     if $option_simulate; then
         operation+=$(gettext ' simulate')
-    else
-        status_busy="[${blink}${yellow}$(gettext 'busy')${normal}]"
-        status_err="[${red}$(gettext 'err.')${normal}]"
-        status_ok="[${green}$(gettext ' ok ')${normal}]"
-        printf '%s' "${cursor_invisable}"
     fi
 
     while read -r record; do
@@ -479,8 +471,6 @@ function process_cmds_file {
                 ;;
         esac
     done < "$cmds_file"
-
-    printf '%s' "${cursor_visable}"
 }
 
 
@@ -501,9 +491,6 @@ function process_command_record {
     local cmd=${1:-unknown}
     local app_description_line=''
     local -i cmd_rc=0
-    local -i desc_maxlen=1000
-    local desc_printf=''
-    local status=''
 
     commands_found=true
     ((++cmd_seq_num))
@@ -512,26 +499,16 @@ function process_command_record {
     fi
 
     if $execute_commands; then
-        desc_printf=$app_description
         if $option_gui; then
             text="#[$app_seq_num/$app_tot_num] $app_description\n\n$cmd"
             printf '%s\n' "$text"
-        else
-            # Terminate text in Terminal due to update status.
-            #  <--------------- tput cols --------------->
-            # '[busy] [ 1/1 ] [ 1] Too long description...' <=== on 1 line
-            #  <------- 20 ------->                    <3>
-            desc_maxlen=$(($(tput cols) - 20))
-            if [[ ${#desc_printf} -gt $desc_maxlen ]]; then
-                desc_printf=${desc_printf:0:(($desc_maxlen - 3))}'...'
-            fi
         fi
-        printf  -v app_description_line                             \
-                "[%2d/%-2d] [%2d] %-${desc_maxlen}.${desc_maxlen}s" \
-                "$app_seq_num"                                      \
-                "$app_tot_num"                                      \
-                "$cmd_seq_num"                                      \
-                "$desc_printf"
+        printf  -v app_description_line \
+                "[%2d/%-2d] [%2d] %s"   \
+                "$app_seq_num"          \
+                "$app_tot_num"          \
+                "$cmd_seq_num"          \
+                "$app_description"
         execute_command "$cmd"
     else
         if $write_app_description_line; then
@@ -561,9 +538,9 @@ function execute_command {
 
     if ! $option_gui; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "$status_busy %b" "$app_description_line\r"
+            printf "%b\n" "$app_description_line"
         else
-            printf "$status_busy        %b" "${app_description_line:7}\r"
+            printf "       %b\n" "${app_description_line:7}"
         fi
     fi
 
@@ -574,14 +551,11 @@ function execute_command {
         maxrc=$cmd_rc
     fi
     if [[ $cmd_rc -eq $ok ]]; then
-        status="$status_ok"
+        status='ok'
     else
-        status="$status_err"
+        status='error'
     fi
     log "$status rc=$cmd_rc, maxrc=$maxrc"
-    if ! $option_gui; then
-        printf '%s\n' "$status"
-    fi
 }
 
 
