@@ -260,7 +260,7 @@ $(eval_gettext "Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
         *)
-             error "
+             warning "
 $(eval_gettext "Program \$program_name has been interrupted.")"
             exit "$rc"
             ;;
