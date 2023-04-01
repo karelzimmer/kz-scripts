@@ -15,6 +15,6 @@ Comment=Restore files and folders from a backup
 Comment[nl]=Zet reservekopie (back-up) van mappen en bestanden terug
 Keywords=z-restore;restore;copy;
 Keywords[nl]=kz-restore;restore;
-Categories=KZ Scripts;
+Categories=Kz-scripts;
 Exec=kz-restore --gui
 Icon=kz-restore

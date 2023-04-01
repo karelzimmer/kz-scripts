@@ -15,6 +15,6 @@ Comment=Communication and collaboration platform
 Comment[nl]=Communicatie- en samenwerkingsplatform
 Keywords=kzteams;teams;
 Keywords[nl]=kzteams;teams;
-Categories=KZ Scripts;
+Categories=Kz-scripts;
 Exec=google-chrome https://teams.microsoft.com/
 Icon=kz-teams

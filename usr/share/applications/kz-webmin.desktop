@@ -16,5 +16,6 @@ Comment[nl]=Browsergebaseerd beheer
 Keywords=system;management;
 Keywords[nl]=systeem;beheer;
 Exec=google-chrome https://localhost:10000
+Categories=Kz-scripts;
 Icon=kz-webmin
 NoDisplay=true
