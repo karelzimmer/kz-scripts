@@ -371,23 +371,23 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
 
-msgid "* check file names (kz ckname)..."
-msgstr "* controleer bestandsnamen (kz ckname)..."
+msgid "Check file names (kz ckname)..."
+msgstr "Controleer bestandsnamen (kz ckname)..."
 
 msgid "Fix all the messages above and then restart the build."
 msgstr "Herstel alle meldingen hierboven en start daarna de build opnieuw."
 
-msgid "* check scripts (kz ivp)..."
-msgstr "* controleer scripts (kz ivp)..."
+msgid "Check scripts (kz ivp)..."
+msgstr "Controleer scripts (kz ivp)..."
 
-msgid "* build website..."
-msgstr "* bouw website..."
+msgid "Build website..."
+msgstr "Bouw website..."
 
-msgid "* build package..."
-msgstr "* bouw pakket..."
+msgid "Build package..."
+msgstr "Bouw pakket..."
 
-msgid "* install package..."
-msgstr "* installeer pakket..."
+msgid "Install package..."
+msgstr "Installeer pakket..."
 
 msgid "Check file names"
 msgstr "Controleer bestandsnamen"
@@ -432,15 +432,15 @@ msgstr "Er zijn $count fouten gevonden."
 msgid "Distribute kz package"
 msgstr "Pakket kz distribueren"
 
-msgid "* check that all repos are on branch main..."
-msgstr "* controleer of alle repo's zich op branch main bevinden..."
+msgid "Check that all repos are on branch main..."
+msgstr "Controleer of alle repo's zich op branch main bevinden..."
 
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-msgid "* build package and website (kz build)..."
-msgstr "* bouw pakket en website (kz build)..."
+msgid "Build package and website (kz build)..."
+msgstr "Bouw pakket en website (kz build)..."
 
 msgid "Fix all the messages above and then restart the deploy."
 msgstr "Herstel alle meldingen hierboven en start daarna de deploy opnieuw."
@@ -448,8 +448,8 @@ msgstr "Herstel alle meldingen hierboven en start daarna de deploy opnieuw."
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-msgid "* install package kz (kz getdeb)..."
-msgstr "* installeer pakket kz (kz getdeb)..."
+msgid "Install package kz (kz getdeb)..."
+msgstr "Installeer pakket kz (kz getdeb)..."
 
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
@@ -493,17 +493,14 @@ msgstr ""
 msgid "Build development environment"
 msgstr "Ontwikkelomgeving bouwen"
 
-msgid "* check dependencies..."
-msgstr "* controleer afhankelijkheden..."
+msgid "Check dependencies..."
+msgstr "Controleer afhankelijkheden..."
 
 msgid "Password for"
 msgstr "Wachtwoord voor"
 
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
-
-msgid "* initial pull bin repo..."
-msgstr "* initiële pull bin repo..."
 
 msgid "Change GUI"
 msgstr "GUI wijzigen"

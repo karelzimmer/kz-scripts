@@ -302,22 +302,22 @@ msgstr ""
 msgid "Usage: $display_name $options_usage"
 msgstr ""
 
-msgid "* check file names (kz ckname)..."
+msgid "Check file names (kz ckname)..."
 msgstr ""
 
 msgid "Fix all the messages above and then restart the build."
 msgstr ""
 
-msgid "* check scripts (kz ivp)..."
+msgid "Check scripts (kz ivp)..."
 msgstr ""
 
-msgid "* build website..."
+msgid "Build website..."
 msgstr ""
 
-msgid "* build package..."
+msgid "Build package..."
 msgstr ""
 
-msgid "* install package..."
+msgid "Install package..."
 msgstr ""
 
 msgid "Check file names"
@@ -361,14 +361,14 @@ msgstr ""
 msgid "Distribute kz package"
 msgstr ""
 
-msgid "* check that all repos are on branch main..."
+msgid "Check that all repos are on branch main..."
 msgstr ""
 
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr ""
 
-msgid "* build package and website (kz build)..."
+msgid "Build package and website (kz build)..."
 msgstr ""
 
 msgid "Fix all the messages above and then restart the deploy."
@@ -377,7 +377,7 @@ msgstr ""
 msgid "Website upload failed."
 msgstr ""
 
-msgid "* install package kz (kz getdeb)..."
+msgid "Install package kz (kz getdeb)..."
 msgstr ""
 
 msgid "Install package kz failed."
@@ -412,16 +412,13 @@ msgstr ""
 msgid "Build development environment"
 msgstr ""
 
-msgid "* check dependencies..."
+msgid "Check dependencies..."
 msgstr ""
 
 msgid "Password for"
 msgstr ""
 
 msgid "Website download failed."
-msgstr ""
-
-msgid "* initial pull bin repo..."
 msgstr ""
 
 msgid "Change GUI"

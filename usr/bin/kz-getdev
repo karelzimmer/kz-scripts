@@ -86,9 +86,9 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    info "* ${bold}Check${normal} ($display_name)"
+    info "${bold}Check${normal} ($display_name)"
     check_dependencies
-    info "\n* ${bold}Build${normal} ($display_name)"
+    info "\n${bold}Build${normal} ($display_name)"
     download_website
     pull_repos
 }
@@ -97,7 +97,7 @@ function process_input {
 function check_dependencies {
     local escape='gettext'
 
-    printf '%s\n' "$(gettext '* Check dependencies...')"
+    printf '%s\n' "$(gettext 'Check dependencies...')"
     # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf) and remove known
     # lines from output.
     check_dpkgd_snapd
@@ -170,7 +170,7 @@ function download_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    printf '%s\n' '* Download website (lftp)...'
+    printf '%s\n' 'Download website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
@@ -203,9 +203,9 @@ function pull_repos {
     else
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
-    printf '%s\n' '* Pull repos (gitpull)...'
+    printf '%s\n' 'Pull repos (gitpull)...'
     "$bin_repo"/gitpull
-    printf '%s\n' '* Status repos (gitstat)...'
+    printf '%s\n' 'Status repos (gitstat)...'
     /home/"$USER"/bin/gitstat
 }
 

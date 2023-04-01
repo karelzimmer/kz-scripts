@@ -92,19 +92,19 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    info "* ${bold}Check${normal} ($display_name)"
+    info "${bold}Check${normal} ($display_name)"
     check_branch
-    info "\n* ${bold}Build${normal} final ($display_name)"
+    info "\n${bold}Build${normal} final ($display_name)"
     build_package
-    info "\n* ${bold}Deploy${normal} ($display_name)"
+    info "\n${bold}Deploy${normal} ($display_name)"
     upload_website
-    info "\n* ${bold}Install${normal} ($display_name)"
+    info "\n${bold}Install${normal} ($display_name)"
     install_package
 }
 
 
 function check_branch {
-    info "$(gettext '* Check that all repos are on branch main...')"
+    info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
@@ -118,7 +118,7 @@ function check_branch {
 function build_package {
     local -i check_rc=0
 
-    info "$(gettext '* Build package and website (kz build)...')
+    info "$(gettext 'Build package and website (kz build)...')
 "
     # Call kz-build.
     "$scripts_repo"/usr/bin/kz build || check_rc=$?
@@ -141,7 +141,7 @@ function upload_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info '* Upload website (lftp)...'
+    info 'Upload website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         read -rsp "Wachtwoord voor 'ftp://$ftp_host': "
         printf '%s' "$REPLY" > "$ftp_login"
