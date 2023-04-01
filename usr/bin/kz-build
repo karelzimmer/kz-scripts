@@ -295,7 +295,7 @@ function build_deb {
 
 
 function install_package {
-    info "$(gettext '* Install package...')"
+    info "$(gettext 'Install package...')"
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
             reinstall                           \
