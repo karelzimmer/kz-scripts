@@ -201,14 +201,12 @@ function process_menu1_tui {
             read -rp "$(eval_gettext "Run number [1-\$menu1_lines]: ")"
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
                 *)
                     if [[ $REPLY -ge 1 && $REPLY -le $menu1_lines ]]; then
                         break
                     else
-                        printf '%s' "${rewrite_line}"
                         continue
                     fi
                     ;;
@@ -362,14 +360,12 @@ function process_menu2_tui {
             read -rp "$(eval_gettext "Run number [1-\$menu1_lines]: ")"
             case $REPLY in
                 *[^[:digit:]]*)
-                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
                 *)
                     if [[ $REPLY -ge 1 && $REPLY -le $menu2_lines ]]; then
                         break
                     else
-                        printf '%s' "${rewrite_line}"
                         continue
                     fi
                     ;;
@@ -484,7 +480,6 @@ $prompt"
                     break
                     ;;
                 *)
-                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
             esac

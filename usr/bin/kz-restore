@@ -192,7 +192,6 @@ $(gettext 'Proceed?')"
                     break
                     ;;
                 *)
-                    printf '%s' "${rewrite_line}"
                     continue
                     ;;
             esac

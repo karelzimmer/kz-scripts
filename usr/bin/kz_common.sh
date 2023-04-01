@@ -54,7 +54,6 @@ declare bold=''
 declare green=''
 declare normal=''
 declare red=''
-declare rewrite_line=''
 declare yellow=''
 
 
@@ -289,7 +288,6 @@ function set_terminal_attributes {
     green=$(tput bold; tput setaf 2)
     normal=$(tput sgr0)
     red=$(tput bold; tput setaf 1)
-    rewrite_line=$(tput cuu1; tput el)
     yellow=$(tput bold; tput setaf 3)
 }
 
@@ -365,7 +363,6 @@ function kz_common.reset_terminal_attributes {
     green=''
     normal=''
     red=''
-    rewrite_line=''
     yellow=''
 }
 
