@@ -173,7 +173,7 @@ function download_website {
     printf '%s\n' '* Download website (lftp)...'
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
-        printf '%s\n' "$REPLY" > "$ftp_login"
+        printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login"
     fi
