@@ -186,7 +186,7 @@ function backup_settings {
     backup_settings_installed_apps
     backup_settings_user_photo
 
-    # Old folder, lagacy.
+    # Old directory, lagacy.
     rm --force --recursive "$HOME"/kz-data/
 }
 

@@ -278,7 +278,7 @@ function restore_settings {
     restore_settings_desktop_background
     restore_settings_favorite_apps
 
-    # Old folder, lagacy.
+    # Old directory, lagacy.
     rm --force --recursive "$HOME"/kz-data/
 }
 
