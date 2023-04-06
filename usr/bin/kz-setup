@@ -247,9 +247,9 @@ function process_argument_app {
         if [[ $file ]]; then
             process_argument_app_file
         else
+            file_notfound=true
             printf  "$display_name: %s: %s\n" \
                     "$app" "$(gettext 'app not found')"
-            file_notfound=true
         fi
     done
     if $file_notfound; then
@@ -274,6 +274,7 @@ function process_argument_app_file {
                     # Write records to temporary file until next app name or
                     # until eof.
                     app_found=true
+                    printf '%s\n' "# $file" >> "$apps_file"
                     printf '%b\n' "$record" >> "$apps_file"
                 elif $app_found; then
                     # Next app.
@@ -306,9 +307,9 @@ function process_argument_file {
             files_to_process[file_num]=$file
             ((++file_num))
         else
+            file_notfound=true
             printf  "$display_name: %s: %s\n" \
                     "$file" "$(gettext 'file not found')"
-            file_notfound=true
         fi
     done
     if $file_notfound; then
