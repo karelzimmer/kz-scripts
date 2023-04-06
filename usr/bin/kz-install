@@ -558,7 +558,7 @@ function execute_command {
     log "${blue}$cmd${normal}"
     kz_common.check_dpkgd_snapd
     eval "$cmd" |& $logcmd || cmd_rc=$?
-    # Extra message to the terminal, other is in the journal.
+    # Extra message to the terminal, other is in the log.
     if ! $option_gui && [[ $cmd_rc -gt 0 ]]; then
         info "$(eval_gettext "Program \$program_name encountered an error.")"
     fi
