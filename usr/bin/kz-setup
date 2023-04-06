@@ -547,6 +547,10 @@ function execute_command {
     log "$app_description_line"
     log "${blue}$cmd${normal}"
     eval "$cmd" |& $logcmd || cmd_rc=$?
+    # Extra message to the terminal, other is in the journal.
+    if ! $option_gui && [[ $cmd_rc -gt 0 ]]; then
+        info "$(eval_gettext "Program \$program_name encountered an error.")"
+    fi
     if [[ $cmd_rc -gt $maxrc ]]; then
         maxrc=$cmd_rc
     fi
