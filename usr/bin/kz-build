@@ -180,6 +180,11 @@ function build_uploads {
             "$uploads_repo_appdir"/ \
             "$uploads_repo_distdir" |& $logcmd
 
+    # Make sure all necessary directories are available for the sync.
+    for dir in "${uploads_targets[@]}"; do
+        mkdir --parents "$dir" |& $logcmd
+    done
+
     # Populate kz-uploads/dist/ with modified files in repo kz-docs, and create
     # a PDF of these modified files.
     cd "${uploads_sources[kz-docs]}"
