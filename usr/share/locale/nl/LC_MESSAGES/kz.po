@@ -836,7 +836,7 @@ msgid "Cannot handle this choice ($REPLY)."
 msgstr "Kan deze keuze niet afhandelen ($REPLY)."
 
 msgid ""
-"Follow the steps as described in Installation Checklist, Chapter 2.\n"
+"Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on the site https://karelzimmer.nl,\n"
 "under Linux.\n"
 "\n"

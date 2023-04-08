@@ -259,7 +259,7 @@ function process_menu1_choice1 {
 function process_menu1_choice2 {
     title="${menu1_actions[2]}"
     text="
-$(gettext "Follow the steps as described in Installation Checklist, Chapter 2.
+$(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on the site https://karelzimmer.nl,
 under Linux.
 
