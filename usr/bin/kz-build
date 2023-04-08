@@ -48,9 +48,9 @@ declare -A uploads_sources=(
          [kz-scripts]=$scripts_repo
             )
 declare -A uploads_targets=(
-            [kz-docs]=$uploads_repo_distdir/data/linux/kz-docs
-         [kz-scripts]=$uploads_repo_distdir/data/linux/kz-scripts
-                [deb]=$uploads_repo_distdir/downloads/kz
+            [kz-docs]=$uploads_repo_distdir/assets/kz-docs
+         [kz-scripts]=$uploads_repo_distdir/assets/kz-scripts
+                [deb]=$uploads_repo_distdir/assets/kz
             )
 
 declare -A deb_sources=(
