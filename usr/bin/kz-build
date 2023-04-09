@@ -180,7 +180,8 @@ function build_uploads {
             "$uploads_repo_appdir"/ \
             "$uploads_repo_distdir" |& $logcmd
 
-    # Make sure all necessary directories are available for the sync.
+    # Make sure all necessary directories are available for the sync with the
+    # cp command.
     for dir in "${uploads_targets[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
@@ -221,7 +222,6 @@ function build_uploads {
                 ps2pdf - "${uploads_targets[kz-scripts]}/$file.pdf" |& $logcmd
             else
                 # Script file.
-
                 # Must copy each file with suffix e.g. .txt added (tmptxt)
                 # before converting because:
                 # 1. desktop-files have XML inside which gets interpreted by
