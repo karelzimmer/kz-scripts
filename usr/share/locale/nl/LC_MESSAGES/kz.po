@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 07:47+0200\n"
+"POT-Creation-Date: 2023-04-11 15:21+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1051,3 +1051,26 @@ msgstr "Wifi-gegevens"
 
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden.'"
+
+msgid "Execute IVP"
+msgstr "IVP uitvoeren"
+
+#, sh-format
+msgid "Script $scriptname returned an error."
+msgstr "Script $scriptname gaf een fout."
+
+#, sh-format
+msgid "Message catalog $dir/kz.mo not found."
+msgstr "Berichtencatalogus $dir/kz.mo niet gevonden."
+
+#, sh-format
+msgid "Desktop configuration file $dir/$scriptname.desktop not found."
+msgstr "Bureaubladconfiguratiebestand $dir/$scriptname.desktop niet gevonden"
+
+#, sh-format
+msgid "Tab completion script $dir/$scriptname not found."
+msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden"
+
+#, sh-format
+msgid "Manual $dir/$scriptname.1.gz not found."
+msgstr "Man-pagina $dir/$scriptname.1.gz niet gevonden."

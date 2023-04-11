@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-29 07:47+0200\n"
+"POT-Creation-Date: 2023-04-11 15:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -877,4 +877,27 @@ msgid "WiFi data:"
 msgstr ""
 
 msgid "No WiFi device found."
+msgstr ""
+
+msgid "Execute IVP"
+msgstr ""
+
+#, sh-format
+msgid "Script $scriptname returned an error."
+msgstr ""
+
+#, sh-format
+msgid "Message catalog $dir/kz.mo not found."
+msgstr ""
+
+#, sh-format
+msgid "Desktop configuration file $dir/$scriptname.desktop not found."
+msgstr ""
+
+#, sh-format
+msgid "Tab completion script $dir/$scriptname not found."
+msgstr ""
+
+#, sh-format
+msgid "Manual $dir/$scriptname.1.gz not found."
 msgstr ""

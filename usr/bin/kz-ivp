@@ -1,0 +1,164 @@
+#!/bin/bash
+# shellcheck source=kz_common.sh
+###############################################################################
+# Execute IVP.
+#
+# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+###############################################################################
+
+set -o errexit
+program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+source "$program_path"/kz_common.sh
+
+
+###############################################################################
+# Constants
+###############################################################################
+
+declare program_name='kz-ivp'
+declare program_desc
+program_desc=$(gettext 'Execute IVP')
+declare display_name=${program_name/kz-/kz }
+
+declare usage
+usage=$(eval_gettext "Usage: \$display_name \$options_usage")
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
+
+$program_desc.
+
+$(gettext 'Options:')
+$options_help"
+
+
+###############################################################################
+# Globale variabelen
+###############################################################################
+
+declare -i maxrc=0
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+function check_input {
+    local -i getopt_rc=0
+    local parsed=''
+
+    parsed=$(
+        getopt  --alternative                       \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$display_name"     \
+                --              "$@"
+        ) || getopt_rc=$?
+    if [[ $getopt_rc -ne $ok ]]; then
+        info "$usage_line"
+        exit $error
+    fi
+    eval set -- "$parsed"
+    kz_common.process_options "$@"
+
+    while true; do
+        case $1 in
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+    if [[ "$*" ]]; then
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
+        exit $error
+    fi
+}
+
+
+function process_input {
+    local dir=''
+    local scriptname=''
+
+    # Message catalogue (gettext).
+    dir=/usr/share/locale/nl/LC_MESSAGES
+    if ! [[ -e $dir/kz.mo ]]; then
+        error "$(eval_gettext "Message catalog \$dir/kz.mo not found.")"
+    fi
+
+    # Check all kz scripts.
+    while read -r script; do
+        scriptname=$(basename "$script")
+        check_script
+    done < <(
+            find /usr/bin   \
+            -name 'kz*'     \
+            -type f         \
+            -executable     \
+            -print          |
+            sort
+            )
+}
+
+
+function check_script {
+    # Script.
+    if ! "$scriptname" --usage |& $logcmd; then
+        error "$(eval_gettext "Script \$scriptname returned an error.")"
+    fi
+
+    # Desktop file.
+    dir=/usr/bin
+    if grep --quiet --word-regexp --regexp='--gui' "$dir/$scriptname"; then
+        dir=/usr/share/applications
+        if ! [[ -e $dir/$scriptname.desktop ]]; then
+            error "$(eval_gettext "Desktop configuration file \
+\$dir/\$scriptname.desktop not found.")"
+            maxrc=$error
+        fi
+    fi
+
+    # Tab-completion script.
+    dir=/usr/share/bash-completion/completions
+    if ! [[ -e $dir/$scriptname ]]; then
+        error "$(eval_gettext "Tab completion script \$dir/\$scriptname not \
+found.")"
+        maxrc=$error
+    fi
+
+    # Manual page (EN + NL).
+    dir=/usr/share/man/man1
+    if ! [[ -e $dir/$scriptname.1.gz ]]; then
+        error "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
+        maxrc=$error
+    fi
+    dir=/usr/share/man/nl/man1
+    if ! [[ -e $dir/$scriptname.1.gz ]]; then
+        error "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
+        maxrc=$error
+    fi
+}
+
+
+function term_script {
+    exit $maxrc
+}
+
+
+###############################################################################
+# Script
+###############################################################################
+
+function main {
+    kz_common.init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
+}
+
+main "$@"

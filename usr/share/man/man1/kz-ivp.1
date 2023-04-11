@@ -1,43 +1,29 @@
 .\"############################################################################
-.\"# Man page for kz-check.
+.\"# Man page for kz-ivp.
 .\"#
-.\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+.\"# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-CHECK 1 "Kz Manual" "kz 365" "Kz Manual"
+.TH KZ-IVP 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
 .SH NAME
-kz-check \- Checking scripts.
+kz-ivp \- Checking scripts.
 .\"
 .\"
 .SH SYNOPSISmsg
-.B kz check
+.B kz ivp
 [OPTION...]
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz check\fR performs a check.
+\fBkz ivp\fR performs a (IVP).
 .sp
-Performs checks that check scripts content and with shellcheck and pycodestyle.
+Runs checks that check scripts and related files.
 .sp
-Among other things, the following are checked:
-.br
-tags        - TODO/FIXME/BUG-tags
-.br
-lines       - number of lines and line length
-.br
-fields      - such as release year
-.br
-spaces      - trailing spaces
-.br
-shellcheck  - shell script analyse tool
-.br
-pycodestyle - Python script analyse tool
-.sp
-Command \fBkz check\fR is also called from \fBkz build\fR and \fBkz deploy\fR.
+Command \fBkz ivp\fR is also called from \fBkz deploy\fR.
 .\"
 .\"
 .SH OPTIONS
@@ -61,20 +47,18 @@ to 0.
 .IP " 1." 4
 Day 1 Operations and CI/CD
 .RS 4
-\fBkz check\fR is mainly used for \fBDay 1 Operations\fR and \fBCI/CD\fR. See
-\fBkz\fR(1) for an explanation.
-.RE
+\fBkz ivp\fR is mainly used for \fBDay 1 Operations\fR and \fBCI/CD\fR. See
+\fBkz\fR(1) for an explanation..RE
 .\"
 .\"
 .SH AUTHOR
-Written in 2015 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"
 .\"
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
-\fBkz-build\fR(1),
 \fBkz-deploy\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
@@ -84,7 +68,7 @@ Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
 .SH AVAILABILITY
-Command \fBkz check\fR is part of the \fBkz\fR package and is available on
+Command \fBkz ivp\fR is part of the \fBkz\fR package and is available on
 Karel Zimmer's website
 .br
 <https://karelzimmer.nl/html/en/linux.html#scripts>.
