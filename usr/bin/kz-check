@@ -16,7 +16,7 @@ source "$program_path"/kz_common.sh
 # Constants
 ###############################################################################
 
-declare program_name='kz-ivp'
+declare program_name='kz-check'
 declare program_desc
 program_desc=$(gettext 'Checking scripts')
 declare display_name=${program_name/kz-/kz }

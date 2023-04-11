@@ -377,8 +377,8 @@ msgstr "Controleer bestandsnamen (kz ckname)..."
 msgid "Fix all the messages above and then restart the build."
 msgstr "Herstel alle meldingen hierboven en start daarna de build opnieuw."
 
-msgid "Check scripts (kz ivp)..."
-msgstr "Controleer scripts (kz ivp)..."
+msgid "Check scripts (kz check)..."
+msgstr "Controleer scripts (kz chheck)..."
 
 msgid "Build website..."
 msgstr "Bouw website..."

@@ -1,10 +1,10 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script voor kz-ivp.
+# Tab-completion-script voor kz-check.
 #
 # Written in 2020 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 dashoptions='-h --help -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-ivp
+complete -o default -W "$dashoptions" kz-check

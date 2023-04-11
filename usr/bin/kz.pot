@@ -308,7 +308,7 @@ msgstr ""
 msgid "Fix all the messages above and then restart the build."
 msgstr ""
 
-msgid "Check scripts (kz ivp)..."
+msgid "Check scripts (kz check)..."
 msgstr ""
 
 msgid "Build website..."

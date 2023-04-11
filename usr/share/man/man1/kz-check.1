@@ -1,27 +1,27 @@
 .\"############################################################################
-.\"# Man page for kz-ivp.
+.\"# Man page for kz-check.
 .\"#
 .\"# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 .\"# Public Domain Dedication
 .\"# <https://creativecommons.org/publicdomain/zero/1.0>.
 .\"############################################################################
 .\"
-.TH KZ-IVP 1 "Kz Manual" "kz 365" "Kz Manual"
+.TH KZ-CHECK 1 "Kz Manual" "kz 365" "Kz Manual"
 .\"
 .\"
 .SH NAME
-kz-ivp \- Checking scripts.
+kz-check \- Checking scripts.
 .\"
 .\"
 .SH SYNOPSISmsg
-.B kz ivp
+.B kz check
 [OPTION...]
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz ivp\fR performs an Installation Verification Procedure (IVP).
+\fBkz check\fR performs an Installation Verification Procedure (CHECK).
 .sp
-Performs an IVP that checks scripts content and with shellcheck and
+Performs an CHECK that checks scripts content and with shellcheck and
 pycodestyle.
 .sp
 Among other things, the following are checked:
@@ -38,7 +38,7 @@ shellcheck  - shell script analyse tool
 .br
 pycodestyle - Python script analyse tool
 .sp
-Command \fBkz ivp\fR is also called from \fBkz deploy\fR.
+Command \fBkz check\fR is also called from \fBkz build\fR and \fBkz deploy\fR.
 .\"
 .\"
 .SH OPTIONS
@@ -62,7 +62,7 @@ to 0.
 .IP " 1." 4
 Day 1 Operations and CI/CD
 .RS 4
-\fBkz ivp\fR is mainly used for \fBDay 1 Operations\fR and \fBCI/CD\fR. See
+\fBkz check\fR is mainly used for \fBDay 1 Operations\fR and \fBCI/CD\fR. See
 \fBkz\fR(1) for an explanation..RE
 .\"
 .\"
@@ -74,6 +74,7 @@ Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 .SH SEE ALSO
 \fBkz\fR(1),
 \fBkz_common.sh\fR(1),
+\fBkz-build\fR(1),
 \fBkz-deploy\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
@@ -83,7 +84,7 @@ Part of the \fBkz\fR(1) package, named after its creator Karel Zimmer.
 .\"
 .\"
 .SH AVAILABILITY
-Command \fBkz ivp\fR is part of the \fBkz\fR package and is available on
+Command \fBkz check\fR is part of the \fBkz\fR package and is available on
 Karel Zimmer's website
 .br
 <https://karelzimmer.nl/html/en/linux.html#scripts>.

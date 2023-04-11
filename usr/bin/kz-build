@@ -151,9 +151,9 @@ $(gettext 'Fix all the messages above and then restart the build.')"
 function check_scripts {
     local -i check_rc=0
 
-    info "$(gettext 'Check scripts (kz ivp)...')"
-    # Call kz-ivp.
-    "$scripts_repo"/usr/bin/kz ivp || check_rc=$?
+    info "$(gettext 'Check scripts (kz check)...')"
+    # Call kz-check.
+    "$scripts_repo"/usr/bin/kz check || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
          error "
 $(gettext 'Fix all the messages above and then restart the build.')"
