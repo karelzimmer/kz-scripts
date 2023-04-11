@@ -378,7 +378,7 @@ msgid "Fix all the messages above and then restart the build."
 msgstr "Herstel alle meldingen hierboven en start daarna de build opnieuw."
 
 msgid "Check scripts (kz check)..."
-msgstr "Controleer scripts (kz chheck)..."
+msgstr "Controleer scripts (kz check)..."
 
 msgid "Build website..."
 msgstr "Bouw website..."
