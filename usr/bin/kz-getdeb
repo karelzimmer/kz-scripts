@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck shell=bash
+# shellcheck shell=bash source=/dev/null
 ###############################################################################
 # Install kz package.
 #
@@ -8,8 +8,8 @@
 ###############################################################################
 
 export TEXTDOMAIN=kz TEXTDOMAINDIR=/usr/share/locale
-# shellcheck source=/dev/null
 source /usr/bin/gettext.sh
+program_path=$(dirname "$(realpath "$0")")
 
 
 ###############################################################################
@@ -20,6 +20,25 @@ declare program_name='kz-getdeb'
 declare program_desc
 program_desc=$(gettext 'Install kz package')
 declare display_name=${program_name/kz-/kz }
+
+# shellcheck disable=SC2034
+options_usage='[-u|--usage] [-h|--help] [-v|--version]'
+declare usage
+usage=$(eval_gettext "Usage: \$display_name \$options_usage")
+
+options_help="  -h, --help     $(gettext 'give this help list')
+  -u, --usage    $(gettext 'give a short usage message')
+  -v, --version  $(gettext 'print program version')"
+declare help
+help="$(eval_gettext "Usage: \$display_name [OPTION...]")
+
+$program_desc.
+
+$options_help"
+
+declare usage_line=''
+usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
+information.")
 
 declare bold
 bold=$(tput bold)
@@ -45,13 +64,68 @@ function init_script {
 
 
 function check_input {
+    case $1 in
+        -h*|--h*)
+            process_option_help
+            exit 0
+            ;;
+        -u*|--u*)
+            process_option_usage
+            exit 0
+            ;;
+        -v*|--v*)
+            process_option_version
+            exit 0
+            ;;
+        -*)
+            printf  "$display_name: %s: $1%s\n$usage_line\n" \
+                    "$(gettext 'invalid option')"
+            exit 1
+            ;;
+    esac
+
     if [[ "$*" ]]; then
-        printf  "$display_name: $*: %s\n%s\n" \
-                "$(gettext 'arguments are not allowed')" \
-                "$(eval_gettext "Usage: \$display_name \$options_usage")"
-        # For kz check, exit 0 instead of exit 1.
-        exit 0
+        printf  "$display_name: $*: %s\n$usage_line\n" \
+                "$(gettext 'arguments are not allowed')"
+        exit 1
     fi
+}
+
+
+function process_option_help {
+    printf '%s\n' "$help
+
+$(eval_gettext "Type 'man \$display_name' for more information.")"
+}
+
+
+function process_option_usage {
+    printf '%s\n' "$usage
+
+$(eval_gettext "Type '\$display_name --help' for more information.")"
+}
+
+
+function process_option_version {
+    local build_id='1970-01-01'
+    local program_year='1970'
+
+    if [[ -e /usr/local/etc/kz-build-id ]]; then
+        build_id=$(cat /usr/local/etc/kz-build-id)
+    fi
+    program_year=$(
+        grep '# Written in ' "$program_path/$program_name" |
+        cut --delimiter=' ' --fields=4
+        ) || true
+    if [[ $program_year = '' ]]; then
+        program_year='1970'
+    fi
+    printf '%s\n' "$program_name (kz) 365 ($build_id)
+
+$(eval_gettext "Written in \$program_year by Karel Zimmer \
+<info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication \
+<https://creativecommons.org/publicdomain/zero/1.0>.")"
 }
 
 
