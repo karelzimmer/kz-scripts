@@ -21,6 +21,8 @@ declare program_desc
 program_desc=$(gettext 'Install kz package')
 declare display_name=${program_name/kz-/kz }
 
+declare options_short='huv'
+declare options_long='help,usage,version'
 # shellcheck disable=SC2034
 options_usage='[-u|--usage] [-h|--help] [-v|--version]'
 declare usage
@@ -64,25 +66,45 @@ function init_script {
 
 
 function check_input {
-    case $1 in
-        -h*|--h*)
-            process_option_help
-            exit 0
-            ;;
-        -u*|--u*)
-            process_option_usage
-            exit 0
-            ;;
-        -v*|--v*)
-            process_option_version
-            exit 0
-            ;;
-        -*)
-            printf  "$display_name: %s: $1%s\n$usage_line\n" \
-                    "$(gettext 'invalid option')"
-            exit 1
-            ;;
-    esac
+    local -i    getopt_rc=0
+    local       parsed=''
+
+    parsed=$(
+        getopt  --alternative                       \
+                --options       "$options_short"    \
+                --longoptions   "$options_long"     \
+                --name          "$program_name"     \
+                --              "$@"
+        )       || getopt_rc=$?
+    if [[ $getopt_rc -ne 0 ]]; then
+        printf '%s\n' "$usage_line" >&2
+        exit 1
+    fi
+    eval set -- "$parsed"
+
+    while true; do
+        case $1 in
+            -h|--help)
+                process_option_help
+                exit 0
+                ;;
+            -u|--usage)
+                process_option_usage
+                exit 0
+                ;;
+            -v|--version)
+                process_option_version
+                exit 0
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
 
     if [[ "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
