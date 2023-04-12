@@ -107,18 +107,30 @@ function process_input {
 
 
 function check_script {
+    local gui='-''-''G''U''I'
+    local root=' kz_common.''c''h''e''c''k''_''u''s''e''r''_''r''o''o''t'
+
     # Script.
-    if ! "$scriptname" --usage |& $logcmd; then
+    if ! "$scriptname" --version |& $logcmd; then
         error "$(eval_gettext "Script \$scriptname returned an error.")"
     fi
 
     # Desktop file.
-    dir=/usr/bin
-    if grep --quiet --word-regexp --regexp='--gui' "$dir/$scriptname"; then
+    if grep --quiet --word-regexp --regexp="$gui" "/usr/bin/$scriptname"; then
         dir=/usr/share/applications
         if ! [[ -e $dir/$scriptname.desktop ]]; then
             error "$(eval_gettext "Desktop configuration file \
 \$dir/\$scriptname.desktop not found.")"
+            maxrc=$error
+        fi
+    fi
+
+    # PolicyKit action definition file.
+    if grep --quiet --word-regexp --regexp="$root" "/usr/bin/$scriptname"; then
+        dir=/usr/share/polkit-1/actions
+        if ! [[ -e $dir/nl.karelzimmer.$scriptname.policy ]]; then
+            error "$(eval_gettext "PolicyKit action definition file \
+\$dir/nl.karelzimmer.\$scriptname.policy not found.")"
             maxrc=$error
         fi
     fi

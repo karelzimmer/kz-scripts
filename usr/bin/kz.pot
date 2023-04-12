@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 15:21+0200\n"
+"POT-Creation-Date: 2023-04-12 07:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -900,4 +900,10 @@ msgstr ""
 
 #, sh-format
 msgid "Manual $dir/$scriptname.1.gz not found."
+msgstr ""
+
+#, sh-format
+msgid ""
+"PolicyKit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
+"found."
 msgstr ""
