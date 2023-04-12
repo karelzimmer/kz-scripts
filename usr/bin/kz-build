@@ -125,8 +125,10 @@ function process_input {
     info "\n${bold}Build${normal} ($display_name)"
     build_uploads
     build_deb
-    info "\nInstall${normal} ($display_name)"
+    info "\n${bold}Install${normal} ($display_name)"
     install_package
+    info "\n${bold}IVP${normal} ($display_name)"
+    run_ivp
 }
 
 
@@ -306,6 +308,20 @@ function install_package {
             reinstall                           \
             --yes                               \
             "${uploads_targets[deb]}/$deb_name" |& $logcmd
+}
+
+
+function run_ivp {
+    local -i ivp_rc=0
+
+    info "$(gettext 'Run IVP (kz ivp)...')"
+    # Call kz-ivp.
+    kz ivp || ivp_rc=$?
+    if [[ $ivp_rc -ne $ok ]]; then
+         error "
+$(gettext 'Fix all the messages above and then restart the build.')"
+        exit $ivp_rc
+    fi
 }
 
 

@@ -100,6 +100,9 @@ function process_input {
     upload_website
     info "\n${bold}Install${normal} ($display_name)"
     install_package
+    info "\n${bold}IVP${normal} ($display_name)"
+    run_ivp
+    check_site
 }
 
 
@@ -167,6 +170,34 @@ function install_package {
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
          error "$(gettext 'Install package kz failed.')"
         exit $error
+    fi
+}
+
+
+function run_ivp {
+    local -i ivp_rc=0
+
+    info "$(gettext 'Run IVP (kz ivp)...')"
+    # Call kz-ivp.
+    kz ivp || ivp_rc=$?
+    if [[ $ivp_rc -ne $ok ]]; then
+         error "
+$(gettext 'Fix all the messages above and then restart the build.')"
+        exit $ivp_rc
+    fi
+}
+
+
+function check_site {
+    local -i check_rc=0
+
+    info "$(gettext 'Check site (rchecklink)...')"
+    # Call rchecklink.
+    rchecklink || check_rc=$?
+    if [[ $check_rc -ne $ok ]]; then
+         error "
+$(gettext 'Fix all the messages above and then restart the build.')"
+        exit $check_rc
     fi
 }
 
