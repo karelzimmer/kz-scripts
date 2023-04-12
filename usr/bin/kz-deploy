@@ -94,7 +94,7 @@ function process_input {
     fi
     info "${bold}Check${normal} ($display_name)"
     check_branch
-    info "\n${bold}Build${normal} ($display_name)"
+    info "\n${bold}Build${normal} ($display_name) final"
     build_package
     info "\n${bold}Deploy${normal} ($display_name)"
     upload_website
