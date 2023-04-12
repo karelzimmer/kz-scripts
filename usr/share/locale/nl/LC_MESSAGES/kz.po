@@ -1086,5 +1086,5 @@ msgstr ""
 msgid "Run IVP (kz ivp)..."
 msgstr "Voer IVP uit (kz ivp)..."
 
-msgid "Check site (rchecklink)..."
-msgstr "Controleer site (rchecklink)..."
+msgid "Check website (rchecklink)..."
+msgstr "Controleer website (rchecklink)..."

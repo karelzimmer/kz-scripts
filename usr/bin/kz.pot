@@ -911,5 +911,5 @@ msgstr ""
 msgid "Run IVP (kz ivp)..."
 msgstr ""
 
-msgid "Check site (rchecklink)..."
+msgid "Check website (rchecklink)..."
 msgstr ""
