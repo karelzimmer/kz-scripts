@@ -302,9 +302,6 @@ msgstr ""
 msgid "Usage: $display_name $options_usage"
 msgstr ""
 
-msgid "Check file names (kz ckname)..."
-msgstr ""
-
 msgid "Fix all the messages above and then restart the build."
 msgstr ""
 

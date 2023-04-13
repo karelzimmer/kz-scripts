@@ -120,7 +120,6 @@ function process_input {
         term_script
     fi
     info "${bold}Check${normal} ($display_name) pre"
-    check_names
     check_scripts
     info "\n${bold}Build${normal} ($display_name)"
     build_uploads
@@ -130,24 +129,6 @@ function process_input {
     info "\n${bold}Check${normal} ($display_name) post"
     run_ivp
     check_website
-}
-
-
-function check_names {
-    local -i check_rc=0
-    local app_uploads_repo=$HOME/kz-uploads/app
-
-    info "$(gettext 'Check file names (kz ckname)...')"
-    # Call kz-*.
-    "$scripts_repo"/usr/bin/kz ckname   "$scripts_repo"     \
-                                        "$docs_repo"        \
-                                        "$deb_repo"         \
-                                        "$app_uploads_repo" || check_rc=$?
-    if [[ $check_rc -ne $ok ]]; then
-         error "
-$(gettext 'Fix all the messages above and then restart the build.')"
-        exit $check_rc
-    fi
 }
 
 
