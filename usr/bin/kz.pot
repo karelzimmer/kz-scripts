@@ -302,7 +302,7 @@ msgstr ""
 msgid "Usage: $display_name $options_usage"
 msgstr ""
 
-msgid "Fix all the messages above and then restart the build."
+msgid "Fix all the messages above and then restart kz build"
 msgstr ""
 
 msgid "Check scripts (kz check)..."
@@ -366,9 +366,6 @@ msgid "Repo $repo not on branch main."
 msgstr ""
 
 msgid "Build package and website (kz build)..."
-msgstr ""
-
-msgid "Fix all the messages above and then restart the deploy."
 msgstr ""
 
 msgid "Website upload failed."

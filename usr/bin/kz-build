@@ -140,7 +140,7 @@ function check_scripts {
     "$scripts_repo"/usr/bin/kz check || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
          error "
-$(gettext 'Fix all the messages above and then restart the build.')"
+$(gettext 'Fix all the messages above and then restart kz build.')"
         exit $check_rc
     fi
 }
@@ -301,7 +301,7 @@ function run_ivp {
     kz ivp || ivp_rc=$?
     if [[ $ivp_rc -ne $ok ]]; then
          error "
-$(gettext 'Fix all the messages above and then restart the build.')"
+$(gettext 'Fix all the messages above and then restart kz build.')"
         exit $ivp_rc
     fi
 }
@@ -315,7 +315,7 @@ function check_website {
     rchecklink || check_rc=$?
     if [[ $check_rc -ne $ok ]]; then
          error "
-$(gettext 'Fix all the messages above and then restart the build.')"
+$(gettext 'Fix all the messages above and then restart kz build.')"
         exit $check_rc
     fi
 }

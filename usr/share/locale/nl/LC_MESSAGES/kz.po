@@ -371,8 +371,8 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
 
-msgid "Fix all the messages above and then restart the build."
-msgstr "Herstel alle meldingen hierboven en start daarna de build opnieuw."
+msgid "Fix all the messages above and then restart kz build"
+msgstr "Herstel alle meldingen hierboven en start daarna kz build opnieuw."
 
 msgid "Check scripts (kz check)..."
 msgstr "Controleer scripts (kz check)..."
@@ -438,9 +438,6 @@ msgstr "Repo $repo staat niet op branch main."
 
 msgid "Build package and website (kz build)..."
 msgstr "Bouw pakket en website (kz build)..."
-
-msgid "Fix all the messages above and then restart the deploy."
-msgstr "Herstel alle meldingen hierboven en start daarna de deploy opnieuw."
 
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
