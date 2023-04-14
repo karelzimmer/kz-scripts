@@ -386,46 +386,6 @@ msgstr "Bouw pakket..."
 msgid "Install package..."
 msgstr "Installeer pakket..."
 
-msgid "Check file names"
-msgstr "Controleer bestandsnamen"
-
-#, sh-format
-msgid "Usage: $display_name $options_usage [DIRECTORY...]"
-msgstr "Gebruik: $display_name $options_usage [MAP...]"
-
-#, sh-format
-msgid "Usage: $display_name [OPTION...] [DIRECTORY...]"
-msgstr "Gebruik: $display_name [OPTIE...] [MAP...]"
-
-msgid ""
-"Arguments:\n"
-"  DIRECTORY      start checking from DIRECTORY"
-msgstr ""
-"Argumenten:\n"
-"  MAP            begin te controleren vanaf MAP"
-
-msgid "BadName  DIR"
-msgstr "SlechtNaam  MAP"
-
-msgid "BadName FILE"
-msgstr "SlechtNaam BEST"
-
-msgid "BadName SYML"
-msgstr "SlechtNaam SYML"
-
-msgid "BadLen.  DIR"
-msgstr "SlechtLen.  MAP"
-
-msgid "BadLen. FILE"
-msgstr "SlechtLen. BEST"
-
-msgid "An error has been found."
-msgstr "Er is een fout gevonden."
-
-#, sh-format
-msgid "$count errors were found."
-msgstr "Er zijn $count fouten gevonden."
-
 msgid "Distribute kz package"
 msgstr "Pakket kz distribueren"
 

@@ -317,44 +317,6 @@ msgstr ""
 msgid "Install package..."
 msgstr ""
 
-msgid "Check file names"
-msgstr ""
-
-#, sh-format
-msgid "Usage: $display_name $options_usage [DIRECTORY...]"
-msgstr ""
-
-#, sh-format
-msgid "Usage: $display_name [OPTION...] [DIRECTORY...]"
-msgstr ""
-
-msgid ""
-"Arguments:\n"
-"  DIRECTORY      start checking from DIRECTORY"
-msgstr ""
-
-msgid "BadName  DIR"
-msgstr ""
-
-msgid "BadName FILE"
-msgstr ""
-
-msgid "BadName SYML"
-msgstr ""
-
-msgid "BadLen.  DIR"
-msgstr ""
-
-msgid "BadLen. FILE"
-msgstr ""
-
-msgid "An error has been found."
-msgstr ""
-
-#, sh-format
-msgid "$count errors were found."
-msgstr ""
-
 msgid "Distribute kz package"
 msgstr ""
 
