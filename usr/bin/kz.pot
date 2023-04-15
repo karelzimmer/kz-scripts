@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 09:33+0200\n"
+"POT-Creation-Date: 2023-04-15 10:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -302,13 +302,16 @@ msgstr ""
 msgid "Usage: $display_name $options_usage"
 msgstr ""
 
-msgid "Fix all the messages above and then restart kz build"
+msgid "Fix all the messages above and then restart kz build."
 msgstr ""
 
 msgid "Check scripts (kz check)..."
 msgstr ""
 
 msgid "Build website..."
+msgstr ""
+
+msgid "Generate .mo file..."
 msgstr ""
 
 msgid "Build package..."
