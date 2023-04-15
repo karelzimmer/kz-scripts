@@ -86,7 +86,7 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf"${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
+    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
     check_dependencies
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build')"
     download_website
