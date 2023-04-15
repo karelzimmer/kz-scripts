@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 11:20+0200\n"
+"POT-Creation-Date: 2023-04-15 13:20+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -371,6 +371,18 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
 
+msgid "Build final"
+msgstr "Bouwen definitief"
+
+msgid "Deploy"
+msgstr "Distribueer"
+
+msgid "Check pre"
+msgstr "Controleren voor"
+
+msgid "Check post"
+msgstr "Controleren na"
+
 msgid "Fix all the messages above and then restart kz build."
 msgstr "Herstel alle meldingen hierboven en start daarna kz build opnieuw."
 
@@ -464,6 +476,9 @@ msgstr "Bouwen"
 
 msgid "Check dependencies..."
 msgstr "Controleer afhankelijkheden..."
+
+msgid "Download website (lftp)..."
+msgstr "Download website (lftp)..."
 
 msgid "Password for"
 msgstr "Wachtwoord voor"

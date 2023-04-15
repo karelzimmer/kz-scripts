@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 11:20+0200\n"
+"POT-Creation-Date: 2023-04-15 13:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -302,6 +302,18 @@ msgstr ""
 msgid "Usage: $display_name $options_usage"
 msgstr ""
 
+msgid "Build final"
+msgstr ""
+
+msgid "Deploy"
+msgstr ""
+
+msgid "Check pre"
+msgstr ""
+
+msgid "Check post"
+msgstr ""
+
 msgid "Fix all the messages above and then restart kz build."
 msgstr ""
 
@@ -384,6 +396,9 @@ msgid "Build"
 msgstr ""
 
 msgid "Check dependencies..."
+msgstr ""
+
+msgid "Download website (lftp)..."
 msgstr ""
 
 msgid "Password for"

@@ -92,13 +92,13 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    info "${bold}Check${normal} ($display_name)"
+    printf"${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
     check_branch
-    info "\n${bold}Build${normal} ($display_name) final"
+    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build final')"
     build_package
-    info "\n${bold}Deploy${normal} ($display_name)"
+    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Deploy')"
     upload_website
-    info "\n${bold}Install${normal} ($display_name)"
+    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Install')"
     install_package
 }
 
