@@ -197,16 +197,18 @@ function pull_repos {
     git config --global credential.helper store
 
     if [[ -d "$bin_repo" ]]; then
-        cd "$bin_repo" || exit 1
+        cd "$bin_repo"
         # Remove known line from output.
         git pull | sed '/Already up to date./d' | sed '/Already up-to-date./d'
     else
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
     printf '%s\n' 'Pull repos (gitpull)...'
+    # Call gitpull.
     "$bin_repo"/gitpull
     printf '%s\n' 'Status repos (gitstat)...'
-    /home/"$USER"/bin/gitstat
+    # Call gitstat.
+    "$bin_repo"/gitstat
 }
 
 
