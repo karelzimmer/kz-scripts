@@ -264,7 +264,6 @@ function restore_backup {
 Some files may not be readable,
 or were any files added or removed while restoring the backup,
 or is there not enough space on \$target.")"
-            exit $error
             ;;
     esac
 }
