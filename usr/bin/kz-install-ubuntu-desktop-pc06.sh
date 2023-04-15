@@ -117,8 +117,8 @@ sudo apt-get install --yes gnome-sushi
 #1 teams
 ## Collaborate
 ## Via webbrowser: https://www.microsoft.com/nl-nl/microsoft-teams/log-in
-sudo snap install teams
-#2 sudo snap remove teams
+sudo snap install teams-for-linux
+#2 sudo snap remove teams-for-linux
 
 #1 tree
 ## Directory tree
