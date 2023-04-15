@@ -89,8 +89,8 @@ function process_input {
     printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
     check_dependencies
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build')"
-    download_website
     pull_repos
+    download_website
 }
 
 
@@ -159,6 +159,30 @@ function check_dpkgd_snapd {
 }
 
 
+function pull_repos {
+    local bin_repo=/home/"$USER"/bin
+
+    git config --global user.name 'Karel Zimmer'
+    git config --global user.email 'karel.zimmer@gmail.com'
+    git config --global pull.ff only
+    git config --global credential.helper store
+
+    if [[ -d "$bin_repo" ]]; then
+        cd "$bin_repo"
+        # Remove known line from output.
+        git pull | sed '/Already up to date./d' | sed '/Already up-to-date./d'
+    else
+        git clone https://github.com/karelzimmer/bin.git "$bin_repo"
+    fi
+    printf '%s\n' "$(gettext 'Pull repos (gitpull)...')"
+    # Call gitpull.
+    "$bin_repo"/gitpull
+    printf '%s\n' "$(gettext 'Status repos (gitstat)...')"
+    # Call gitstat.
+    "$bin_repo"/gitstat
+}
+
+
 function download_website {
     local ftp_set='set ssl:verify-certificate no'
     local ftp_from=/httpdocs
@@ -185,30 +209,6 @@ function download_website {
         printf '%s\n' "$(gettext 'Website download failed.')"
         return  1
     fi
-}
-
-
-function pull_repos {
-    local bin_repo=/home/"$USER"/bin
-
-    git config --global user.name 'Karel Zimmer'
-    git config --global user.email 'karel.zimmer@gmail.com'
-    git config --global pull.ff only
-    git config --global credential.helper store
-
-    if [[ -d "$bin_repo" ]]; then
-        cd "$bin_repo"
-        # Remove known line from output.
-        git pull | sed '/Already up to date./d' | sed '/Already up-to-date./d'
-    else
-        git clone https://github.com/karelzimmer/bin.git "$bin_repo"
-    fi
-    printf '%s\n' "$(gettext 'Pull repos (gitpull)...')"
-    # Call gitpull.
-    "$bin_repo"/gitpull
-    printf '%s\n' "$(gettext 'Status repos (gitstat)...')"
-    # Call gitstat.
-    "$bin_repo"/gitstat
 }
 
 
