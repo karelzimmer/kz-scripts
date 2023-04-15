@@ -123,6 +123,7 @@ function process_input {
     check_scripts
     info "\n${bold}Build${normal} ($display_name)"
     build_uploads
+    compile_mo
     build_deb
     info "\n${bold}Install${normal} ($display_name)"
     install_package
@@ -234,6 +235,13 @@ function build_uploads {
             -print
             )
     cd "$HOME"
+}
+
+
+function compile_mo {
+    local lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+
+    msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
 }
 
 
