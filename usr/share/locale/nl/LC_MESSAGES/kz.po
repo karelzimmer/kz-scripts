@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 13:31+0200\n"
+"POT-Creation-Date: 2023-04-15 13:37+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -479,6 +479,12 @@ msgstr "Bouwen"
 
 msgid "Check dependencies..."
 msgstr "Controleer afhankelijkheden..."
+
+msgid "Pull repos (gitpull)..."
+msgstr "Pull repo's (gitpull)..."
+
+msgid "Status repos (gitstat)..."
+msgstr "Status repo's (gitstat)..."
 
 msgid "Download website (lftp)..."
 msgstr "Download website (lftp)..."

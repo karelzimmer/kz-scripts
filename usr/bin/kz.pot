@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 13:31+0200\n"
+"POT-Creation-Date: 2023-04-15 13:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -399,6 +399,12 @@ msgid "Build"
 msgstr ""
 
 msgid "Check dependencies..."
+msgstr ""
+
+msgid "Pull repos (gitpull)..."
+msgstr ""
+
+msgid "Status repos (gitstat)..."
 msgstr ""
 
 msgid "Download website (lftp)..."
