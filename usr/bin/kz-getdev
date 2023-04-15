@@ -53,7 +53,7 @@ function check_input {
                 --              "$@"
         ) || getopt_rc=$?
     if [[ $getopt_rc -ne $ok ]]; then
-        info "$usage_line"
+        printf '%s\n' "$usage_line"
         exit $error
     fi
     eval set -- "$parsed"
@@ -86,9 +86,9 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    info "${bold}Check${normal} ($display_name)"
+    printf"${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
     check_dependencies
-    info "\n${bold}Build${normal} ($display_name)"
+    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build')"
     download_website
     pull_repos
 }

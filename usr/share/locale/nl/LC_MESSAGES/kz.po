@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-15 09:59+0200\n"
+"POT-Creation-Date: 2023-04-15 11:20+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -421,6 +421,12 @@ msgstr "Wacht ${dpkg_wait}s tot andere pakketbeheerder klaar is..."
 msgid "Install kz package"
 msgstr "Pakket kz installeren"
 
+msgid "Download"
+msgstr "Downloaden"
+
+msgid "Install"
+msgstr "Installeren"
+
 msgid "Finished"
 msgstr "Gereed"
 
@@ -449,6 +455,12 @@ msgstr ""
 
 msgid "Build development environment"
 msgstr "Ontwikkelomgeving bouwen"
+
+msgid "Check"
+msgstr "Controleren"
+
+msgid "Build"
+msgstr "Bouwen"
 
 msgid "Check dependencies..."
 msgstr "Controleer afhankelijkheden..."
