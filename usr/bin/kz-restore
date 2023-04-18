@@ -259,7 +259,7 @@ function restore_backup {
             return $ok
             ;;
         *)
-             error "$(eval_gettext "Restore ended with errors.
+             warning "$(eval_gettext "Restore ended with errors.
 
 Some files may not be readable,
 or were any files added or removed while restoring the backup,
