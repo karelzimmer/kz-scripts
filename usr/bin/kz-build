@@ -120,6 +120,7 @@ function process_input {
         term_script
     fi
     printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check pre')"
+    check_repos
     check_scripts
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build')"
     build_uploads
@@ -130,6 +131,24 @@ function process_input {
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Check post')"
     run_ivp
     check_website
+}
+
+
+function check_repos {
+    info "$(gettext 'Check that all repos are on branch main...')"
+    for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+        cd "$repo"
+        if [[ $(git branch --show-current) != 'main' ]]; then
+             warning "$(eval_gettext "Repo \$repo not on branch main.")"
+        fi
+    done
+    info "$(gettext 'Check that all repos are clean...')"
+    for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+        cd "$repo"
+        if ! git diff-index --quiet HEAD; then
+             warning "$(eval_gettext "Repo \$repo is not clean.")"
+        fi
+    done
 }
 
 

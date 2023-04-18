@@ -93,7 +93,7 @@ function process_input {
         term_script
     fi
     printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
-    check_branch
+    check_repos
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build final')"
     build_package
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Deploy')"
@@ -103,15 +103,28 @@ function process_input {
 }
 
 
-function check_branch {
+function check_repos {
+    local -i maxrc=0
+
     info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-             warning "$(eval_gettext "Repo \$repo not on branch main.")"
+             error "$(eval_gettext "Repo \$repo not on branch main.")"
+             maxrc=1
         fi
     done
-
+    info "$(gettext 'Check that all repos are clean...')"
+    for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+        cd "$repo"
+        if ! git diff-index --quiet HEAD; then
+             error "$(eval_gettext "Repo \$repo is not clean.")"
+             maxrc=1
+        fi
+    done
+    if [[ $maxrc -gt 0 ]]; then
+        exit $maxrc
+    fi
 }
 
 
