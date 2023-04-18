@@ -2,7 +2,7 @@
 """
 Update system.
 
-This script performs a repair and update.
+This script performs a repair, update, and cleanup.
 """
 ###############################################################################
 # Update system.
