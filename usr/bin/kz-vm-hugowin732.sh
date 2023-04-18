@@ -11,9 +11,9 @@ text=$(gettext 'Virtual Machine Hugowin732 is started (can take a while ...)')
 title='VirtualBox'
 
 function start_vm {
-     while ! lsmod | grep --quiet --regexp='vbox'; do
-         sleep 5
-     done
+    while ! lsmod | grep --quiet --regexp='vbox'; do
+        sleep 5
+    done
     VBoxManage startvm 'hugowin732'
 }
 
