@@ -42,7 +42,8 @@ command = ''
 ###############################################################################
 
 def perform_repair():
-    print(f'{kz_common.bold}Repair{kz_common.normal} ({display_name})')
+    print('{}{}{} ({})'.format(kz_common.bold, _('Repair'), kz_common.normal,
+                               program_name))
     command = 'dpkg --configure --pending'
     perform_command(command)
 
@@ -54,7 +55,8 @@ def perform_repair():
 
 
 def perform_update():
-    print(f'{kz_common.bold}Update{kz_common.normal} ({display_name})')
+    print('{}{}{} ({})'.format(kz_common.bold, _('Update'), kz_common.normal,
+                               program_name))
     command = 'apt-get update'
     perform_command(command)
 
@@ -77,7 +79,7 @@ def perform_command(command):
 
 
 def snap_refresh():
-    print('Snap refresh...')
+    print(_('Snap refresh...'))
     kz_common.check_dpkgd_snapd()
     try:
         subprocess.run('sudo snap refresh', shell=True, check=True)
@@ -88,7 +90,8 @@ def snap_refresh():
 
 
 def perform_cleanup():
-    print(f'{kz_common.bold}Cleanup{kz_common.normal} ({display_name})')
+    print('{}{}{} ({})'.format(kz_common.bold, _('Cleanup'), kz_common.normal,
+                               program_name))
     command = 'apt-get autoclean --yes'
     perform_command(command)
 
@@ -108,7 +111,7 @@ while read name ver rev trk pub notes; do \
     fi \
 done'
 
-    print('Snap cleanup...')
+    print(_('Snap cleanup...'))
     try:
         subprocess.run({cmd}, shell=True, check=True, executable='/bin/bash')
     except Exception as ex:

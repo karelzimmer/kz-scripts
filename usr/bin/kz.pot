@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 09:07+0200\n"
+"POT-Creation-Date: 2023-04-18 10:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -863,6 +863,21 @@ msgid "reset"
 msgstr ""
 
 msgid "Update system"
+msgstr ""
+
+msgid "Repair"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Snap refresh..."
+msgstr ""
+
+msgid "Cleanup"
+msgstr ""
+
+msgid "Snap cleanup..."
 msgstr ""
 
 msgid ""

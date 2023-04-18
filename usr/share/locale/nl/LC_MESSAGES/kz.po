@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 09:07+0200\n"
+"POT-Creation-Date: 2023-04-18 10:41+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1031,6 +1031,21 @@ msgstr "resetten"
 
 msgid "Update system"
 msgstr "Systeem bijwerken"
+
+msgid "Repair"
+msgstr "Repareren"
+
+msgid "Update"
+msgstr "Bijwerken"
+
+msgid "Snap refresh..."
+msgstr "Snaps bijwerken..."
+
+msgid "Cleanup"
+msgstr "Opruimen"
+
+msgid "Snap cleanup..."
+msgstr "Snaps opruimen..."
 
 msgid ""
 "*** The computer must restart to complete the installation of updates ***"
