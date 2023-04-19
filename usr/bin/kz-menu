@@ -357,7 +357,7 @@ function process_menu2_tui {
         info ''
 
         while true; do
-            read -rp "$(eval_gettext "Run number [1-\$menu1_lines]: ")"
+            read -rp "$(eval_gettext "Run number [1-\$menu2_lines]: ")"
             case $REPLY in
                 *[^[:digit:]]*)
                     continue
@@ -524,7 +524,9 @@ function manual_actions {
     if [[ $title = $(gettext 'Add users') ]]; then
         text="$(gettext 'Add users'):
 
-$(gettext "1. Add any additional Standard or Admin users by pressing the \
+$(gettext "The following steps to add extra users are optional.
+
+1. Add any additional Standard or Admin users by pressing the \
 Super key[1],
    type 'user' and click behind Settings on Users.
 2. Click Unlock and enter password.
