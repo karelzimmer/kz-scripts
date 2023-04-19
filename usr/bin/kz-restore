@@ -114,7 +114,6 @@ function check_input {
 function process_input {
     # shellcheck disable=SC2034
     local operation=backup
-    local restore=false
 
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
@@ -159,66 +158,24 @@ start restore again.")"
     fi
 
     kz_common.check_on_ac_power
-
-    title=$(gettext 'Restore backup')
-    text="$(gettext 'Backup copy will be RESTORED.')
-"
-    if $option_gui; then
-        text+="
-$(gettext 'Proceed?')"
-        if zenity   --question                          \
-                    --no-markup                         \
-                    --width         600                 \
-                    --height        50                  \
-                    --title         "$title"            \
-                    --text          "$text"             \
-                    --ok-label      "$(gettext 'Yes')"  \
-                    --cancel-label  "$(gettext 'No')"   2> >($logcmd); then
-            restore=true
+    restore_backup
+    if ! $option_dry_run; then
+        title=$(gettext 'Restore settings')
+        text=$title
+        if $option_gui; then
+            restore_settings                |
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd)
         else
-            restore=false
+            info "$text..."
+            restore_settings
         fi
-    else
-        info "$text"
-        while true; do
-            read -rp "$(gettext 'Continue? [y/N]: ')"
-            case $REPLY in
-                y*|Y*|j*|J*)
-                    restore=true
-                    break
-                    ;;
-                n*|N*|'')
-                    restore=false
-                    break
-                    ;;
-                *)
-                    continue
-                    ;;
-            esac
-        done
-    fi
-    if $restore; then
-        restore_backup
-        if ! $option_dry_run; then
-            title=$(gettext 'Restore settings')
-            text=$title
-            if $option_gui; then
-                restore_settings                |
-                zenity  --progress              \
-                        --pulsate               \
-                        --auto-close            \
-                        --no-cancel             \
-                        --width     600         \
-                        --height    50          \
-                        --title     "$title"    \
-                        --text      "$text"     2> >($logcmd)
-            else
-                info "$text..."
-                restore_settings
-            fi
-        fi
-    else
-        exit $ok
     fi
 }
 

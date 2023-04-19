@@ -802,12 +802,6 @@ msgid ""
 "start restore again."
 msgstr ""
 
-msgid "Backup copy will be RESTORED."
-msgstr ""
-
-msgid "Continue? [y/N]: "
-msgstr ""
-
 msgid "Restore settings"
 msgstr ""
 

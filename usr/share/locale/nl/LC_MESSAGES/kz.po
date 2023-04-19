@@ -957,12 +957,6 @@ msgstr ""
 "Koppel een usb-medium aan met hierop de map backup-$HOSTNAME-$USER, en "
 "startdaarna restore opnieuw."
 
-msgid "Backup copy will be RESTORED."
-msgstr "Back-up wordt TERUGGEZET."
-
-msgid "Continue? [y/N]: "
-msgstr "Doorgaan? [j/N]: "
-
 msgid "Restore settings"
 msgstr "Instellingen terugzetten"
 
