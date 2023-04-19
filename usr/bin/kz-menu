@@ -545,11 +545,10 @@ Super key[1],
 $(gettext "1. Change the user photo by pressing the Super key[1], type 'user' \
 and click
    behind Settings on Users.
-2. Click Unlock.
-3. Click the image for the user.
-4. Click Select a file.
-5. Select Userphoto in Personal folder / Settings.
-6. Close the Users screen.
+2. Click the image for the user.
+3. Click Select a file.
+4. Select Userphoto in Personal folder / Settings.
+5. Close the Users screen.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
