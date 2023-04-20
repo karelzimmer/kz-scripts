@@ -8,12 +8,12 @@
 
 #1-add-hosts
 ## Map IP addresses to hostnames
-sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
-echo '192.168.1.112 pc06' | sudo tee --append /etc/hosts
-echo '192.168.1.113 pc01' | sudo tee --append /etc/hosts
-#2 sudo sed --in-place --expression='/^192.168.1.112/d' /etc/hosts
-#2 sudo sed --in-place --expression='/^192.168.1.113/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
+echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
 
 #1-bluetooth
 ## External bluetooth adapter
