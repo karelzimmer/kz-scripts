@@ -61,7 +61,7 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #1-gnome
-## Desktop environment
+## Desktop environment (Ubuntu-only)
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
