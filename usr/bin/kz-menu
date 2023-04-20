@@ -522,7 +522,9 @@ function execute_command {
 
 function manual_actions {
     if [[ $title = $(gettext 'Add users') ]]; then
-        text="$(gettext "The following steps to add extra users are optional.
+        text="$(gettext 'Add users'):
+
+$(gettext "The following steps to add extra users are optional.
 
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click Unlock and enter password.
@@ -551,6 +553,7 @@ on Users.
             info "$text"
         else
             text="$(gettext 'Set user photo'):
+
 $(gettext 'No user photo was found when backing up.')"
             info "$text"
         fi
