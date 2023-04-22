@@ -126,7 +126,7 @@ function check_dependencies {
     check_dpkgd_snapd
     sudo snap install shellcheck |& sed '/is already installed/d'
     check_dpkgd_snapd
-    sudo snap install --classic code |& sed '/is already installed/d'
+    sudo snap install code |& sed '/is already installed/d'
 }
 
 

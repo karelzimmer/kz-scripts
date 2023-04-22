@@ -52,7 +52,7 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 
 #1 skype
 ## Video call
-sudo snap install --classic skype
+sudo snap install skype
 #2 sudo snap remove skype
 
 #1 spotify
