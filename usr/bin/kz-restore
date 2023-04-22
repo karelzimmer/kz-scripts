@@ -184,6 +184,7 @@ function restore_backup {
     local -i rsync_rc=0
     local target=$HOME
 
+    title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
         rsync   --archive               \
