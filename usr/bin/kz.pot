@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-20 14:13+0200\n"
+"POT-Creation-Date: 2023-04-22 16:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,9 +210,6 @@ msgstr ""
 msgid "directory does not exist"
 msgstr ""
 
-msgid "Connect the USB medium on which the backup will be placed."
-msgstr ""
-
 #, sh-format
 msgid ""
 "No USB medium found.\n"
@@ -270,11 +267,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Backup ended with errors.\n"
+"Backup ended with warnings or errors.\n"
 "\n"
 "Some files may not be readable,\n"
 "or were any files added or removed while creating the backup,\n"
-"or is there not enough space on $target."
+"or is there not enough space on $target.\n"
+"Check the log in the Terminal with the command:"
 msgstr ""
 
 msgid "Writing data from temporary memory (this may take a while)"
@@ -789,9 +787,6 @@ msgid ""
 "                 use backup in DIRECTORY"
 msgstr ""
 
-msgid "Make sure that the USB medium containing the backup is connected."
-msgstr ""
-
 #, sh-format
 msgid ""
 "No backup found on connected USB medium.\n"
@@ -808,11 +803,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Restore ended with errors.\n"
+"Restore ended with warnings or errors.\n"
 "\n"
 "Some files may not be readable,\n"
 "or were any files added or removed while restoring the backup,\n"
-"or is there not enough space on $target."
+"or is there not enough space on $target.\n"
+"Check the log in the Terminal with the command:"
 msgstr ""
 
 msgid "The backup was NOT restored (DRY RUN)."

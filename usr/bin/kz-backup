@@ -126,26 +126,32 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            text=$(gettext "Connect the USB medium on which the backup will \
-be placed.")
-             warning "$text"
+            text="$(eval_gettext "No USB medium found.
+
+Connect a USB medium, and then start \$operation again.")"
+            warning "$text"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                 error "$(eval_gettext "No USB medium found.
-
-Connect a USB medium, and then start \$operation again.")"
+                error "$text"
                 exit $error
             fi
         fi
+        medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-             error "$(eval_gettext "Connect only one USB medium.
+            text="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
 \$medium
 
 Disconnect media via Files, then restart \$operation.")"
-            exit $error
+            warning "$text"
+            kz_common.wait_for_enter
+            medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+                error "$text"
+                exit $error
+            fi
         fi
         target=$medium/backup-$HOSTNAME-$USER
         target_medium=$medium
@@ -346,12 +352,13 @@ EOF
             return $ok
             ;;
         *)
-             error "$(eval_gettext "Backup ended with errors.
+             error "$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable,
 or were any files added or removed while creating the backup,
-or is there not enough space on \$target.")"
-            exit $error
+or is there not enough space on \$target.
+Check the log in the Terminal with the command:") \
+${blue}$logcmd_check${normal}"
             ;;
     esac
 
