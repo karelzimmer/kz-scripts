@@ -109,18 +109,19 @@ function check_repos {
     info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
-        git status
         if [[ $(git branch --show-current) != 'main' ]]; then
-             error "$(eval_gettext "Repo \$repo not on branch main.")"
-             maxrc=1
+            error "$(eval_gettext "Repo \$repo not on branch main.")"
+            git status
+            maxrc=1
         fi
     done
     info "$(gettext 'Check that all repos are clean...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
         if ! git diff-index --quiet HEAD; then
-             error "$(eval_gettext "Repo \$repo is not clean.")"
-             maxrc=1
+            error "$(eval_gettext "Repo \$repo is not clean.")"
+            git status
+            maxrc=1
         fi
     done
     if [[ $maxrc -gt 0 ]]; then
