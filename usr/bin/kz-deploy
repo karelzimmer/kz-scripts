@@ -109,6 +109,7 @@ function check_repos {
     info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
+        git status
         if [[ $(git branch --show-current) != 'main' ]]; then
              error "$(eval_gettext "Repo \$repo not on branch main.")"
              maxrc=1
