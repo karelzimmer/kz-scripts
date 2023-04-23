@@ -112,9 +112,6 @@ function check_input {
 
 
 function process_input {
-    # shellcheck disable=SC2034
-    local operation=restore
-
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
             printf  "$display_name: $source_argument: %s\n$usage_line\n" \
@@ -128,7 +125,7 @@ function process_input {
         if [[ -z $medium ]]; then
         text="$(eval_gettext "No USB medium found.
 
-Connect a USB medium, and then start \$operation again.")"
+Connect a USB medium.")"
             warning "$text"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
@@ -143,7 +140,7 @@ Connect a USB medium, and then start \$operation again.")"
 Now connected:
 \$medium
 
-Disconnect media via Files, then restart \$operation.")"
+Disconnect media via Files.")"
             warning "$text"
             kz_common.wait_for_enter
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
@@ -156,8 +153,7 @@ Disconnect media via Files, then restart \$operation.")"
         if ! [[ -d $source ]]; then
              error "$(eval_gettext "No backup found on connected USB medium.
 
-Connect a USB medium with the directory backup-\$HOSTNAME-\$USER, and then \
-start restore again.")"
+Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
             exit $error
         fi
     fi

@@ -421,7 +421,8 @@ ${blue}$display_name --cat APP...${normal}"
 function process_cmds_file {
     local app_description=''
     local first_description_line=true
-    local operation='instellen'
+    local operation
+    operation=$(gettext 'instellen')
     local record=''
     local recordtype=''
     local write_app_description_line=true
