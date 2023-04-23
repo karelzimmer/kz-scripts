@@ -104,8 +104,6 @@ function process_input {
 
 
 function check_repos {
-    local -i maxrc=0
-
     info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
         cd "$repo"
@@ -124,7 +122,7 @@ function check_repos {
             maxrc=1
         fi
     done
-    if [[ $maxrc -gt 0 ]]; then
+    if [[ $maxrc -gt $ok ]]; then
         exit $maxrc
     fi
 }

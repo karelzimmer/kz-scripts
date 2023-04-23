@@ -41,6 +41,7 @@ declare -a cmdline_args=()
 declare less_options=''
 declare logcmd_check=''
 declare logcmd=''
+declare -i maxrc=0
 declare option_gui=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
 declare program_exec=${0/#./$program_path}
@@ -98,15 +99,6 @@ $(gettext 'The computer now uses only the battery for power.
 It is recommended to connect the computer to the wall socket.')"
         kz_common.wait_for_enter
     fi
-}
-
-
-function kz_common.wait_for_enter {
-    if $option_gui; then
-        return
-    fi
-    read -rp "
-$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 }
 
 
@@ -171,7 +163,7 @@ function kz_common.init_script {
     fi
 
     if [[ -t 1 ]]; then
-        set_terminal_attributes
+        kz_common.set_terminal_attributes
     fi
 
     cmdline_args=("$@")
@@ -181,6 +173,165 @@ function kz_common.init_script {
 (press h for help or q to quit)")"
     usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
+}
+
+
+function kz_common.process_options {
+    while true; do
+        case $1 in
+            -h|--help)
+                kz_common.process_option_help
+                exit $ok
+                ;;
+            -u|--usage)
+                kz_common.process_option_usage
+                exit $ok
+                ;;
+            -v|--version)
+                kz_common.process_option_version
+                exit $ok
+                ;;
+            --)
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+}
+
+
+function kz_common.process_option_help {
+    # shellcheck disable=SC2154
+    info "$help
+
+$(eval_gettext "Type 'man \$display_name' for more information.")"
+}
+
+
+function kz_common.process_option_usage {
+    # shellcheck disable=SC2154
+    info "$usage
+
+$(eval_gettext "Type '\$display_name --help' for more information.")"
+}
+
+
+function kz_common.process_option_version {
+    local build_id='1970-01-01'
+    local program_year='1970'
+
+    if [[ -e /usr/local/etc/kz-build-id ]]; then
+        build_id=$(cat /usr/local/etc/kz-build-id)
+    fi
+    program_year=$(
+        grep '# Written in ' "$program_path/$program_name" |
+        cut --delimiter=' ' --fields=4
+        ) || true
+    if [[ $program_year = '' ]]; then
+        program_year='1970'
+    fi
+    info "$program_name (kz) 365 ($build_id)
+
+$(eval_gettext "Written in \$program_year by Karel Zimmer \
+<info@karelzimmer.nl>, Creative Commons
+Public Domain Dedication \
+<https://creativecommons.org/publicdomain/zero/1.0>.")"
+}
+
+
+function kz_common.reset_terminal_attributes {
+    blue=''
+    bold=''
+    green=''
+    normal=''
+    red=''
+    yellow=''
+}
+
+
+function kz_common.set_terminal_attributes {
+    blue=$(tput bold; tput setaf 4)
+    bold=$(tput bold)
+    green=$(tput bold; tput setaf 2)
+    normal=$(tput sgr0)
+    red=$(tput bold; tput setaf 1)
+    yellow=$(tput bold; tput setaf 3)
+}
+
+
+function kz_common.wait_for_enter {
+    if $option_gui; then
+        return
+    fi
+    read -rp "
+$(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
+}
+
+
+
+
+function error {
+    local title=''
+
+    if $option_gui; then
+        title=$(eval_gettext "Error message \$display_name")
+        zenity  --error                 \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        2> >($logcmd) || true
+    else
+        printf "${red}%b\n${normal}" "$@" >&2
+    fi
+}
+
+
+function info {
+    local title=''
+
+    if $option_gui; then
+        title=$(eval_gettext "Information \$display_name")
+        zenity  --info                  \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        2> >($logcmd) || true
+    else
+        printf '%b\n' "$@"
+    fi
+}
+
+
+function log {
+    printf '%b\n' "$1" |& $logcmd
+}
+
+
+function maxrc {
+    if [[ $rc -gt $maxrc ]]; then
+        maxrc=$rc
+    fi
+}
+
+
+function warning {
+    local title=''
+
+    if $option_gui; then
+        title=$(eval_gettext "Warning \$display_name")
+        zenity  --warning               \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        2> >($logcmd) || true
+    else
+        printf "${yellow}%b\n${normal}" "$@" >&2
+    fi
 }
 
 
@@ -279,145 +430,4 @@ launch a Terminal window and run:')
             fi
             ;;
     esac
-}
-
-
-function set_terminal_attributes {
-    blue=$(tput bold; tput setaf 4)
-    bold=$(tput bold)
-    green=$(tput bold; tput setaf 2)
-    normal=$(tput sgr0)
-    red=$(tput bold; tput setaf 1)
-    yellow=$(tput bold; tput setaf 3)
-}
-
-
-function kz_common.process_options {
-    while true; do
-        case $1 in
-            -h|--help)
-                kz_common.process_option_help
-                exit $ok
-                ;;
-            -u|--usage)
-                kz_common.process_option_usage
-                exit $ok
-                ;;
-            -v|--version)
-                kz_common.process_option_version
-                exit $ok
-                ;;
-            --)
-                break
-                ;;
-            *)
-                shift
-                ;;
-        esac
-    done
-}
-
-
-function kz_common.process_option_help {
-    # shellcheck disable=SC2154
-    info "$help
-
-$(eval_gettext "Type 'man \$display_name' for more information.")"
-}
-
-
-function kz_common.process_option_usage {
-    # shellcheck disable=SC2154
-    info "$usage
-
-$(eval_gettext "Type '\$display_name --help' for more information.")"
-}
-
-
-function kz_common.process_option_version {
-    local build_id='1970-01-01'
-    local program_year='1970'
-
-    if [[ -e /usr/local/etc/kz-build-id ]]; then
-        build_id=$(cat /usr/local/etc/kz-build-id)
-    fi
-    program_year=$(
-        grep '# Written in ' "$program_path/$program_name" |
-        cut --delimiter=' ' --fields=4
-        ) || true
-    if [[ $program_year = '' ]]; then
-        program_year='1970'
-    fi
-    info "$program_name (kz) 365 ($build_id)
-
-$(eval_gettext "Written in \$program_year by Karel Zimmer \
-<info@karelzimmer.nl>, Creative Commons
-Public Domain Dedication \
-<https://creativecommons.org/publicdomain/zero/1.0>.")"
-}
-
-
-function kz_common.reset_terminal_attributes {
-    blue=''
-    bold=''
-    green=''
-    normal=''
-    red=''
-    yellow=''
-}
-
-
-function log {
-    printf '%b\n' "$1" |& $logcmd
-}
-
-
-function info {
-    local title=''
-
-    if $option_gui; then
-        title=$(eval_gettext "Information \$display_name")
-        zenity  --info                  \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
-    else
-        printf '%b\n' "$@"
-    fi
-}
-
-
-function warning {
-    local title=''
-
-    if $option_gui; then
-        title=$(eval_gettext "Warning \$display_name")
-        zenity  --warning               \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
-    else
-        printf "${yellow}%b\n${normal}" "$@" >&2
-    fi
-}
-
-
-function error {
-    local title=''
-
-    if $option_gui; then
-        title=$(eval_gettext "Error message \$display_name")
-        zenity  --error                 \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
-    else
-        printf "${red}%b\n${normal}" "$@" >&2
-    fi
 }

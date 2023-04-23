@@ -65,7 +65,6 @@ declare edition=desktop
 declare execute_commands=true
 declare -a file_arguments=()
 declare -a files_to_process=()
-declare -i maxrc=0
 declare option_apps=false
 declare option_cat=false
 declare option_files=false
@@ -535,7 +534,6 @@ function process_command_record {
 function execute_command {
     local cmd=${1:-unknown}
     local -i rc=0
-    local status=''
 
     if ! $option_gui; then
         if [[ $cmd_seq_num -eq 1 ]]; then
@@ -548,19 +546,12 @@ function execute_command {
     log "$app_description_line"
     log "${blue}$cmd${normal}"
     eval "$cmd" |& $logcmd || rc=$?
+    maxrc
     # Extra message to the terminal, other is in the log.
-    if ! $option_gui && [[ $rc -gt 0 ]]; then
+    if ! $option_gui && [[ $rc -gt $ok ]]; then
         info "$(eval_gettext "Program \$program_name encountered an error.")"
     fi
-    if [[ $rc -gt $maxrc ]]; then
-        maxrc=$rc
-    fi
-    if [[ $rc -eq $ok ]]; then
-        status='ok'
-    else
-        status='error'
-    fi
-    log "$status rc=$rc, maxrc=$maxrc"
+    log "rc=$rc, maxrc=$maxrc"
 }
 
 
