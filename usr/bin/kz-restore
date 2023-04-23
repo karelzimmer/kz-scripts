@@ -59,7 +59,7 @@ declare source=''
 ###############################################################################
 
 function check_input {
-    local -i getopt_rc=0
+    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -68,8 +68,8 @@ function check_input {
                 --longoptions   "$options_long"     \
                 --name          "$display_name"     \
                 --              "$@"
-        ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $ok ]]; then
+        ) || rc=$?
+    if [[ $rc -ne $ok ]]; then
         printf '%s\n' "$usage_line"
         exit $error
     fi
@@ -182,7 +182,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
 
 
 function restore_backup {
-    local -i rsync_rc=0
+    local -i rc=0
     local target=$HOME
 
     title=$(gettext 'Restore backup')
@@ -202,7 +202,7 @@ function restore_backup {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$text"     2> >($logcmd) || rsync_rc=$?
+                --text      "$text"     2> >($logcmd) || rc=$?
     else
         info "$text..."
         rsync   --archive               \
@@ -210,10 +210,10 @@ function restore_backup {
                 --human-readable        \
                 $dry_run_option         \
                 "$source"/              \
-                "$target"/              2> >($logcmd) || rsync_rc=$?
+                "$target"/              2> >($logcmd) || rc=$?
     fi
 
-    case $rsync_rc in
+    case $rc in
         0)
             return $ok
             ;;

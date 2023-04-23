@@ -111,7 +111,7 @@ $(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 
 
 function kz_common.check_user_root {
-    local -i pkexec_rc=0
+    local -i rc=0
 
     if ! kz_common.check_user_sudo; then
         info "$(gettext 'Already performed by the administrator.')"
@@ -120,8 +120,8 @@ function kz_common.check_user_root {
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
             log "restarted (pkexec $program_exec ${cmdline_args[*]})"
-            pkexec "$program_exec" "${cmdline_args[@]}" || pkexec_rc=$?
-            exit $pkexec_rc
+            pkexec "$program_exec" "${cmdline_args[@]}" || rc=$?
+            exit $rc
         else
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})"
             if ! sudo -n true &> /dev/null; then

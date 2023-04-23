@@ -81,7 +81,7 @@ declare sims_file=''
 function check_input {
     local -i app_arg_num=0
     local -i file_arg_num=0
-    local -i getopt_rc=0
+    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -90,8 +90,8 @@ function check_input {
                 --longoptions   "$options_long"     \
                 --name          "$display_name"     \
                 --              "$@"
-        ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $ok ]]; then
+        ) || rc=$?
+    if [[ $rc -ne $ok ]]; then
         printf '%s\n' "$usage_line"
         exit $error
     fi
@@ -499,7 +499,6 @@ function process_app_description_record {
 function process_command_record {
     local cmd=${1:-unknown}
     local app_description_line=''
-    local -i cmd_rc=0
 
     commands_found=true
     ((++cmd_seq_num))
@@ -543,7 +542,7 @@ function process_command_record {
 
 function execute_command {
     local cmd=${1:-unknown}
-    local -i cmd_rc=0
+    local -i rc=0
     local status=''
 
     if ! $option_gui; then
@@ -557,20 +556,20 @@ function execute_command {
     log "$app_description_line"
     log "${blue}$cmd${normal}"
     kz_common.check_dpkgd_snapd
-    eval "$cmd" |& $logcmd || cmd_rc=$?
+    eval "$cmd" |& $logcmd || rc=$?
     # Extra message to the terminal, other is in the log.
-    if ! $option_gui && [[ $cmd_rc -gt 0 ]]; then
+    if ! $option_gui && [[ $rc -gt 0 ]]; then
         info "$(eval_gettext "Program \$program_name encountered an error.")"
     fi
-    if [[ $cmd_rc -gt $maxrc ]]; then
-        maxrc=$cmd_rc
+    if [[ $rc -gt $maxrc ]]; then
+        maxrc=$rc
     fi
-    if [[ $cmd_rc -eq $ok ]]; then
+    if [[ $rc -eq $ok ]]; then
         status='ok'
     else
         status='error'
     fi
-    log "$status rc=$cmd_rc, maxrc=$maxrc"
+    log "$status rc=$rc, maxrc=$maxrc"
 }
 
 

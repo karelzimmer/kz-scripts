@@ -44,7 +44,7 @@ declare -i maxrc=0
 ###############################################################################
 
 function check_input {
-    local -i getopt_rc=0
+    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -53,8 +53,8 @@ function check_input {
                 --longoptions   "$options_long"     \
                 --name          "$display_name"     \
                 --              "$@"
-        ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $ok ]]; then
+        ) || rc=$?
+    if [[ $rc -ne $ok ]]; then
         printf '%s\n' "$usage_line"
         exit $error
     fi
@@ -159,10 +159,10 @@ $(gettext "    Unknown script. Function check_code cannot check script code.")"
 
 
 function check_pycodestyle {
-    local -i check_rc=0
+    local -i rc=0
 
-    pycodestyle "$script" || check_rc=$?
-    if [[ $check_rc -ne $ok ]]; then
+    pycodestyle "$script" || rc=$?
+    if [[ $rc -ne $ok ]]; then
         maxrc=$error
     fi
 }
@@ -216,12 +216,12 @@ $(
 
 
 function check_shellcheck {
-    local -i check_rc=0
+    local -i rc=0
 
     # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
-    shellcheck --external-sources "$scriptname" || check_rc=$?
-    if [[ $check_rc -ne $ok ]]; then
+    shellcheck --external-sources "$scriptname" || rc=$?
+    if [[ $rc -ne $ok ]]; then
         maxrc=$error
     fi
     cd "$scripts_repo"

@@ -48,7 +48,7 @@ declare uploads_repo_distdir=$uploads_repo/dist
 ###############################################################################
 
 function check_input {
-    local -i getopt_rc=0
+    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -57,8 +57,8 @@ function check_input {
                 --longoptions   "$options_long"     \
                 --name          "$display_name"     \
                 --              "$@"
-        ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $ok ]]; then
+        ) || rc=$?
+    if [[ $rc -ne $ok ]]; then
         printf '%s\n' "$usage_line"
         exit $error
     fi
@@ -131,14 +131,14 @@ function check_repos {
 
 
 function build_package {
-    local -i check_rc=0
+    local -i rc=0
 
     info "$(gettext 'Build package and website (kz build)...')
 "
     # Call kz-build.
-    "$scripts_repo"/usr/bin/kz build || check_rc=$?
-    if [[ $check_rc -ne $ok ]]; then
-        exit $check_rc
+    "$scripts_repo"/usr/bin/kz build || rc=$?
+    if [[ $rc -ne $ok ]]; then
+        exit $rc
     fi
 }
 

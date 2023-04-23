@@ -59,7 +59,7 @@ declare target=''
 ###############################################################################
 
 function check_input {
-    local -i getopt_rc=0
+    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -68,8 +68,8 @@ function check_input {
                 --longoptions   "$options_long"     \
                 --name          "$display_name"     \
                 --              "$@"
-        ) || getopt_rc=$?
-    if [[ $getopt_rc -ne $ok ]]; then
+        ) || rc=$?
+    if [[ $rc -ne $ok ]]; then
         printf '%s\n' "$usage_line"
         exit $error
     fi
@@ -271,7 +271,7 @@ function backup_settings_user_photo {
 
 function create_backup {
     local exclude=''
-    local -i rsync_rc=0
+    local -i rc=0
     local source=$HOME
 
     exclude=$(mktemp -t "$program_name-XXXXXXXXXX")
@@ -329,7 +329,7 @@ EOF
                 --width     600             \
                 --height    50              \
                 --title     "$title"        \
-                --text      "$text"         2> >($logcmd) || rsync_rc=$?
+                --text      "$text"         2> >($logcmd) || rc=$?
     else
         info "$text..."
         rsync   --archive                   \
@@ -340,11 +340,11 @@ EOF
                 --exclude-from="$exclude"   \
                 --delete-excluded           \
                 "$source"/                  \
-                "$target"/                  2> >($logcmd) || rsync_rc=$?
+                "$target"/                  2> >($logcmd) || rc=$?
     fi
    rm "$exclude"
 
-    case $rsync_rc in
+    case $rc in
         0)
             return $ok
             ;;
