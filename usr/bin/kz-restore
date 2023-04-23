@@ -308,7 +308,7 @@ function term_script_unmount {
                 --width     600                     \
                 --height    50                      \
                 --title     "$title"                \
-                --text      "$text"                 2> >($logcmd) || rc+=$?
+                --text      "$text"                 2> >($logcmd) || rc=$?
     else
         info "$text..."
         umount "$source_medium" |& $logcmd || rc+=$?
@@ -317,12 +317,12 @@ function term_script_unmount {
     fi
     if [[ $rc -eq $ok ]]; then
         info "
-$(gettext 'The backup has been restored.')
+${green}$(gettext 'The backup has been restored.')${normal}
 
 $(gettext 'The USB medium can be removed.')"
     else
             warning "
-$(gettext 'The backup has been restored.')
+${green}$(gettext 'The backup has been restored.')${normal}
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
     fi
