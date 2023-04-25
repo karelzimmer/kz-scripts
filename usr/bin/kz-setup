@@ -205,8 +205,8 @@ function process_input {
     done
 
     if $execute_commands && $option_gui; then
-        title='Apps instellen'
-        text='Instellen voorbereiden'
+        title=$(gettext 'Set up apps')
+        text=$(gettext 'Preparing to set up')
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_cmds_file > >(
@@ -406,10 +406,10 @@ $(
 $usage_line"
     else
         printf '%s\n' "
-$(gettext 'To install the APPs run:') ${blue}$display_name APP...${normal}
-$(gettext 'To simulate installing APPs execute:') ${blue}$display_name \
+$(gettext 'To setup the APPs run:') ${blue}$display_name APP...${normal}
+$(gettext 'To simulate resetting APPs execute:') ${blue}$display_name \
 --simulate APP...${normal}
-$(gettext 'To view the contents of the APPs installation file execute:') \
+$(gettext 'To view the contents of the APPs setup file execute:') \
 ${blue}$display_name --cat APP...${normal}"
     fi
 )"
@@ -421,7 +421,7 @@ function process_cmds_file {
     local app_description=''
     local first_description_line=true
     local operation
-    operation=$(gettext 'instellen')
+    operation=$(gettext 'set up')
     local record=''
     local recordtype=''
     local write_app_description_line=true
@@ -557,16 +557,16 @@ function execute_command {
 
 function term_script {
     local action
-    action=$(gettext 'setup')
+    action=$(gettext 'set up')
 
     if ! $commands_found; then
         info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
         if [[ $maxrc -ne $ok ]]; then
-             error "$(eval_gettext "One or more commands went wrong.
+            error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
-Check the log in the Terminal with the command:") \
-${blue}$logcmd_check${normal}"
+Check the log in the next screen.")"
+            show_log
             exit $error
         else
             if $option_reset; then
@@ -574,7 +574,7 @@ ${blue}$logcmd_check${normal}"
                 action=$(gettext 'reset' )
             fi
             info "
-$(eval_gettext "Apps \$action completed.")"
+${green}$(eval_gettext "Apps \$action completed.")${normal}"
         fi
     else
         less "$less_options" "$sims_file"

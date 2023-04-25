@@ -572,10 +572,10 @@ function term_script {
         info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
         if [[ $maxrc -ne $ok ]]; then
-             error "$(eval_gettext "One or more commands went wrong.
+            error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
-Check the log in the Terminal with the command:") \
-${blue}$logcmd_check${normal}"
+Check the log in the next screen.")"
+            show_log
             exit $error
         else
             if $option_remove; then
@@ -583,7 +583,7 @@ ${blue}$logcmd_check${normal}"
                 action=$(gettext 'remove')
             fi
             info "
-$(eval_gettext "Apps \$action completed.")"
+${green}$(eval_gettext "Apps \$action completed.")${normal}"
         fi
     else
         less "$less_options" "$sims_file"

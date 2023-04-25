@@ -7,9 +7,7 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-
+export TEXTDOMAIN=kz TEXTDOMAINDIR=/usr/share/locale
 # shellcheck source=/dev/null
 source /usr/bin/gettext.sh
 
@@ -273,9 +271,8 @@ $(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 
 
 function error {
-    local title=''
-
     if $option_gui; then
+        local title
         title=$(eval_gettext "Error message \$display_name")
         zenity  --error                 \
                 --no-markup             \
@@ -290,9 +287,8 @@ function error {
 
 
 function info {
-    local title=''
-
     if $option_gui; then
+        local title
         title=$(eval_gettext "Information \$display_name")
         zenity  --info                  \
                 --no-markup             \
@@ -318,23 +314,22 @@ function maxrc {
 }
 
 
-function warning {
-    local title=''
-
+function show_log {
     if $option_gui; then
-        title=$(eval_gettext "Warning \$display_name")
-        zenity  --warning               \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
+        local temp_log
+        temp_log=$(mktemp -t "$program_name-XXXXXXXXXX.log")
+        eval "$logcmd_check" > "$temp_log"
+        zenity  --text-info                         \
+                --width         1300                \
+                --height        600                 \
+                --title         'Lograpport'        \
+                --filename      "$temp_log"         \
+                --cancel-label  "$(gettext 'Exit')" 2> >($logcmd) || true
+        rm "$temp_log"
     else
-        printf "${yellow}%b\n${normal}" "$@" >&2
+        gnome-terminal --window -- bash -c "$logcmd_check"
     fi
 }
-
-
 function signal {
     local signal=${1:-unknown}
     local -i lineno=${2:-unknown}
@@ -400,7 +395,7 @@ $command, code: $rc ($rc_desc)"
 
     case $signal in
         err)
-             error "
+            error "
 $(eval_gettext "Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
@@ -411,7 +406,7 @@ $(eval_gettext "Program \$program_name encountered an error.")"
             exit "$rc"
             ;;
         *)
-             warning "
+            warning "
 $(eval_gettext "Program \$program_name has been interrupted.")"
             exit "$rc"
             ;;
@@ -430,4 +425,20 @@ launch a Terminal window and run:')
             fi
             ;;
     esac
+}
+
+
+function warning {
+    if $option_gui; then
+        local title
+        title=$(eval_gettext "Warning \$display_name")
+        zenity  --warning               \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        2> >($logcmd) || true
+    else
+        printf "${yellow}%b\n${normal}" "$@" >&2
+    fi
 }

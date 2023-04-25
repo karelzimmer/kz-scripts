@@ -130,7 +130,7 @@ Connect a USB medium.")"
             kz_common.wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                 error "$text"
+                error "$text"
             exit $error
             fi
         fi
@@ -144,14 +144,14 @@ Disconnect media via Files.")"
             warning "$text"
             kz_common.wait_for_enter
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                error "$text"
+               error "$text"
                 exit $error
             fi
         fi
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
-             error "$(eval_gettext "No backup found on connected USB medium.
+            error "$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
             exit $error
@@ -261,14 +261,14 @@ function term_script {
     fi
 
     if [[ $maxrc -gt $ok ]]; then
-        warning "$(eval_gettext "Restore ended with warnings or errors.
+        error "$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable,
 or were any files added or removed while restoring the backup,
 or is there not enough space on \$target.
 The maximum exit value is \$maxrc.
-Check the log in the Terminal with the command:") \
-${blue}$logcmd_check${normal}"
+Check the log in the next screen.")"
+        show_log
         exit $error
     fi
 
@@ -276,7 +276,7 @@ ${blue}$logcmd_check${normal}"
         term_script_unmount
     else
         info "
-$(gettext 'The backup has been restored.')"
+${green}$(gettext 'The backup has been restored.')${normal}"
     fi
     exit $ok
 }
@@ -298,31 +298,32 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
-        umount "$source_medium";                    \
-        udisksctl lock --block-device "$dev";       \
-        udisksctl power-off --block-device "$dev"   |
-        zenity  --progress                          \
-                --pulsate                           \
-                --auto-close                        \
-                --no-cancel                         \
-                --width     600                     \
-                --height    50                      \
-                --title     "$title"                \
-                --text      "$text"                 2> >($logcmd) || rc=$?
+        umount "$source_medium"                     |& $logcmd || rc+=$?;   \
+        udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?;   \
+        udisksctl power-off --block-device "$dev"   |& $logcmd              |
+        zenity  --progress                                                  \
+                --pulsate                                                   \
+                --auto-close                                                \
+                --no-cancel                                                 \
+                --width     600                                             \
+                --height    50                                              \
+                --title     "$title"                                        \
+                --text      "$text"                                         \
+                2> >($logcmd) || rc=$?
     else
         info "$text..."
-        umount "$source_medium" |& $logcmd || rc+=$?
-        udisksctl lock --block-device "$dev" |& $logcmd || rc+=$?
-        udisksctl power-off --block-device "$dev" |& $logcmd || rc+=$?
+        umount "$source_medium"                     |& $logcmd || rc+=$?
+        udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?
+        udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
     fi
     if [[ $rc -eq $ok ]]; then
         info "
-${green}$(gettext 'The backup has been restored.')${normal}
+${green}$(gettext 'The backup has been restored.')
 
-$(gettext 'The USB medium can be removed.')"
+$(gettext 'The USB medium can be removed.')${normal}"
     else
             warning "
-${green}$(gettext 'The backup has been restored.')${normal}
+${green}$(gettext 'The backup has been restored.')${yellow}
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
     fi

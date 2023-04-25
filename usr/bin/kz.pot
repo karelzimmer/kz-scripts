@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-23 15:26+0200\n"
+"POT-Creation-Date: 2023-04-25 08:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -265,6 +265,12 @@ msgstr ""
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
+msgid "Writing data from temporary memory (this may take a while)"
+msgstr ""
+
+msgid "The backup has NOT been created (DRY RUN)."
+msgstr ""
+
 #, sh-format
 msgid ""
 "Backup ended with warnings or errors.\n"
@@ -273,13 +279,7 @@ msgid ""
 "or were any files added or removed while creating the backup,\n"
 "or is there not enough space on $target.\n"
 "The maximum exit value is $maxrc.\n"
-"Check the log in the Terminal with the command:"
-msgstr ""
-
-msgid "Writing data from temporary memory (this may take a while)"
-msgstr ""
-
-msgid "The backup has NOT been created (DRY RUN)."
+"Check the log in the next screen."
 msgstr ""
 
 msgid "Disconnect the USB media"
@@ -588,7 +588,7 @@ msgstr ""
 msgid ""
 "One or more commands went wrong.\n"
 "The maximum exit value is $maxrc.\n"
-"Check the log in the Terminal with the command:"
+"Check the log in the next screen."
 msgstr ""
 
 #, sh-format
@@ -673,6 +673,9 @@ msgid "Set user photo"
 msgstr ""
 
 msgid "Set up apps"
+msgstr ""
+
+msgid "Preparing to set up"
 msgstr ""
 
 msgid "Back"
@@ -808,8 +811,7 @@ msgid ""
 "Some files may not be readable,\n"
 "or were any files added or removed while restoring the backup,\n"
 "or is there not enough space on $target.\n"
-"The maximum exit value is $maxrc.\n"
-"Check the log in the Terminal with the command:"
+"The maximum exit value is $maxrc."
 msgstr ""
 
 msgid "The backup was NOT restored (DRY RUN)."
@@ -850,7 +852,7 @@ msgstr ""
 msgid "To view the contents of the APPs setup file execute:"
 msgstr ""
 
-msgid "setup"
+msgid "set up"
 msgstr ""
 
 msgid "reset"

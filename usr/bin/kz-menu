@@ -239,7 +239,7 @@ function process_menu1_choice {
             exit $ok
             ;;
         *)
-             error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+            error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
             exit $error
             ;;
     esac
