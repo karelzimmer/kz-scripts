@@ -418,8 +418,8 @@ function signal_exit {
     case $program_name in
         kz-install)
             if [[ $rc -ne $ok ]]; then
-                log "$(gettext 'If the package manager gives apt errors, \
-launch a Terminal window and run:')
+                log "$(gettext "If the package manager gives apt errors, \
+launch a Terminal window and run:")
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
             fi
