@@ -181,7 +181,7 @@ Disconnect media via Files.")"
 function backup_settings {
     local tgtdir
     tgtdir=$HOME/$(gettext 'Settings')
-    
+
     mkdir --parents "$tgtdir" |& $logcmd
     backup_settings_desktop_background
     backup_settings_favorite_apps
