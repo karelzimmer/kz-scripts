@@ -8,13 +8,13 @@
 [Desktop Entry]
 Type=Application
 Name=Make backup
-Name[nl]=Reservekopie maken
 GenericName=Backup program
-GenericName[nl]=Veiligstelprogramma
 Comment=Back up folders and files
-Comment[nl]=Maak een reservekopie (back-up) van mappen en bestanden
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 Keywords=kz-backup;copy;restore;
-Keywords[nl]=kz-backup;herstel;
 Categories=Kz-scripts;
 Exec=kz-backup --gui
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=kz-backup
+X-GNOME-Gettext-Domain=kz
+

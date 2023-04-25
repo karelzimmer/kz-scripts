@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-25 10:28+0200\n"
+"POT-Creation-Date: 2023-04-25 14:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -928,4 +928,16 @@ msgid "Check website (rchecklink)..."
 msgstr ""
 
 msgid "Authentication is required to install apps"
+msgstr ""
+
+msgid "Make backup"
+msgstr ""
+
+msgid "Backup program"
+msgstr ""
+
+msgid "Back up folders and files"
+msgstr ""
+
+msgid "kz-backup;copy;restore;"
 msgstr ""
