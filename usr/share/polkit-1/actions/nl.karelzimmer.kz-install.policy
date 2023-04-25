@@ -13,38 +13,35 @@
 -->
 
 <policyconfig>
-
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
     <!-- This action is used for the development environment. -->
     <!-- lang="nl": Deze actie wordt gebruikt voor de ontwikkel-omgeving. -->
-    <action id="nl.karelzimmer.kz-install.install-apps.dev">
+    <action id="nl.karelzimmer.kz-install.dev">
         <message>Authentication is required to install apps.</message>
         <message xml:lang="nl">Authenticatie is vereist om apps te installeren.</message>
+        <annotate key="org.freedesktop.policykit.exec.path">/home/karel/kz-scripts/usr/bin/kz-install</annotate>
+        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
             <allow_any>auth_admin</allow_any>
             <allow_inactive>auth_admin</allow_inactive>
             <allow_active>auth_admin</allow_active>
         </defaults>
-        <annotate key="org.freedesktop.policykit.exec.path">/home/karel/kz-scripts/usr/bin/kz-install</annotate>
-        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
     </action>
-    <vendor>Karel Zimmer</vendor>
-    <vendor_url>https://karelzimmer.nl</vendor_url>
 
     <!-- This action is used for the production environment. -->
     <!-- lang="nl": Deze actie wordt gebruikt voor de productie-omgeving. -->
-    <action id="nl.karelzimmer.kz-install.install-apps.prod">
+    <action id="nl.karelzimmer.kz-install.prod">
         <message>Authentication is required to install apps.</message>
         <message xml:lang="nl">Authenticatie is vereist om apps te installeren.</message>
+        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install</annotate>
+        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
             <allow_any>auth_admin</allow_any>
             <allow_inactive>auth_admin</allow_inactive>
             <allow_active>auth_admin</allow_active>
         </defaults>
-        <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install</annotate>
-        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
     </action>
 
 </policyconfig>
