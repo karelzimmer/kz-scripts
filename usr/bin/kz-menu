@@ -111,13 +111,13 @@ function check_input {
         exit $error
     fi
     eval set -- "$parsed"
-    kz_common.process_options "$@"
+    process_option "$@"
 
     while true; do
         case $1 in
             -g|--gui)
                 option_gui=true
-                kz_common.reset_terminal_attributes
+                reset_terminal_attributes
                 shift
                 ;;
             --)
@@ -269,7 +269,7 @@ Roughly boils down to:
 3. Boot the computer from this USB stick or DVD.
 4. Install Linux.")"
     info "$text"
-    kz_common.wait_for_enter
+    wait_for_enter
 }
 
 
@@ -516,7 +516,7 @@ function execute_command {
     fi
     "$program_path/$cmd" "$arg" $gui_option -- || rc=$?
     log "$command: rc=$rc"
-    kz_common.wait_for_enter
+    wait_for_enter
 }
 
 
@@ -536,7 +536,7 @@ $(gettext "The following steps to add extra users are optional.
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
         info "$text"
-        kz_common.wait_for_enter
+        wait_for_enter
     elif [[ $title = $(gettext 'Set user photo') ]]; then
         if [[ -f $HOME/$(gettext 'Settings')/$(gettext 'Userphoto') ]]; then
             text="$(gettext 'Set user photo'):
@@ -557,7 +557,7 @@ on Users.
 $(gettext 'No user photo was found when backing up.')"
             info "$text"
         fi
-        kz_common.wait_for_enter
+        wait_for_enter
     fi
 }
 
@@ -580,7 +580,7 @@ function show_commands_after_execution {
 $row. $action ($command)"
     done
     info "$text"
-    kz_common.wait_for_enter
+    wait_for_enter
 }
 
 
@@ -594,7 +594,7 @@ function term_script {
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

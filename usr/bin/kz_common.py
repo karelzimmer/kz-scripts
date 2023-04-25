@@ -151,7 +151,7 @@ def check_user_sudo():
         return(ok)
 
 
-def process_options(program_name, program_desc, display_name):
+def process_option(program_name, program_desc, display_name):
     """
     This function handles the general options.
     """

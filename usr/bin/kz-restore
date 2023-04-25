@@ -74,7 +74,7 @@ function check_input {
         exit $error
     fi
     eval set -- "$parsed"
-    kz_common.process_options "$@"
+    process_option "$@"
 
     while true; do
         case $1 in
@@ -85,7 +85,7 @@ function check_input {
                 ;;
             -g|--gui)
                 option_gui=true
-                kz_common.reset_terminal_attributes
+                reset_terminal_attributes
                 shift
                 ;;
             -s|--source)
@@ -127,7 +127,7 @@ function process_input {
 
 Connect a USB medium.")"
             warning "$text"
-            kz_common.wait_for_enter
+            wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
                 error "$text"
@@ -142,7 +142,7 @@ Now connected:
 
 Disconnect media via Files.")"
             warning "$text"
-            kz_common.wait_for_enter
+            wait_for_enter
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                error "$text"
                 exit $error
@@ -158,7 +158,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
         fi
     fi
 
-    kz_common.check_on_ac_power
+    check_on_ac_power
     restore_backup
     if ! $option_dry_run; then
         title=$(gettext 'Restore settings')
@@ -335,7 +335,7 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

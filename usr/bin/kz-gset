@@ -91,7 +91,7 @@ function check_input {
         exit $error
     fi
     eval set -- "$parsed"
-    kz_common.process_options "$@"
+    process_option "$@"
 
     while true; do
         case $1 in
@@ -280,7 +280,7 @@ function capture_gui_changes {
     config_a=$(mktemp -t "$program_name-A-XXXXXXXXXX.lst")
     save_configuration_database A "$config_a"
     info "$(gettext 'Now make the change in the graphical workspace.')"
-    kz_common.wait_for_enter
+    wait_for_enter
     config_b=$(mktemp -t "$program_name-B-XXXXXXXXXX.lst")
     save_configuration_database B "$config_b"
     report_database_changes "$config_a" "$config_b"
@@ -327,7 +327,7 @@ function term_script {
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

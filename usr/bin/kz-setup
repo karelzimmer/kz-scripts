@@ -96,7 +96,7 @@ function check_input {
         exit $error
     fi
     eval set -- "$parsed"
-    kz_common.process_options "$@"
+    process_option "$@"
 
     while true; do
         case $1 in
@@ -114,7 +114,7 @@ function check_input {
                 ;;
             -g|--gui)
                 option_gui=true
-                kz_common.reset_terminal_attributes
+                reset_terminal_attributes
                 shift
                 ;;
             -r|--reset)
@@ -588,7 +588,7 @@ ${green}$(eval_gettext "Apps \$action completed.")${normal}"
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

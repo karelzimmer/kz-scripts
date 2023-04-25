@@ -60,15 +60,15 @@ function check_input {
     fi
     case $1 in
         -h*|--h*)
-            kz_common.process_option_help
+            process_option_help
             exit $ok
             ;;
         -u*|--u*)
-            kz_common.process_option_usage
+            process_option_usage
             exit $ok
             ;;
         -v*|--v*)
-            kz_common.process_option_version
+            process_option_version
             exit $ok
             ;;
         -l*|--l*)
@@ -132,7 +132,7 @@ function term_script {
 ###############################################################################
 
 function main {
-    kz_common.init_script "$@"
+    init_script "$@"
     check_input "$@"
     process_input "$@"
     term_script
