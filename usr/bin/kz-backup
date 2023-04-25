@@ -181,16 +181,12 @@ Disconnect media via Files.")"
 function backup_settings {
     local tgtdir
     tgtdir=$HOME/$(gettext 'Settings')
-    # Settings.
-
+    
     mkdir --parents "$tgtdir" |& $logcmd
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
     backup_settings_user_photo
-
-    # Old directory, lagacy.
-    rm --force --recursive "$HOME"/kz-data/
 }
 
 
