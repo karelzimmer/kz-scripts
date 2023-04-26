@@ -140,8 +140,7 @@ function pull_repos {
 
     if [[ -d "$bin_repo" ]]; then
         cd "$bin_repo"
-        # Remove known line from output.
-        git pull | sed '/Already up to date./d' | sed '/Already up-to-date./d'
+        git pull
     else
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
