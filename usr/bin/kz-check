@@ -99,7 +99,6 @@ function process_input {
                 ;;
             kz_common.py)
                 check_tags
-                check_record_length
                 check_pycodestyle
                 ;;
             kz_common.sh)
@@ -169,6 +168,12 @@ function check_pycodestyle {
 function check_record_length {
     local -i max_line_length=79
     local -i max_line_length_found=0
+    local python_script='#!''/usr/bin/python3'
+
+    # Python is checked by pycodestyle.
+    if grep --quiet --line-regexp --regexp="$python_script" "$script"; then
+        return $ok
+    fi
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
