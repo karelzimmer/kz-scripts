@@ -17,4 +17,3 @@ Exec=kz-backup --gui
 # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=kz-backup
 X-GNOME-Gettext-Domain=kz
-

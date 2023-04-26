@@ -117,10 +117,6 @@ function check_user_root {
             exit $rc
         else
             log "restarted (exec sudo $program_exec ${cmdline_args[*]})"
-            if ! sudo -n true &> /dev/null; then
-                printf  '%s\n' "$(eval_gettext "Authentication is required to \
-run \$display_name.")"
-            fi
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi
     fi

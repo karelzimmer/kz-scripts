@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-25 14:23+0200\n"
+"POT-Creation-Date: 2023-04-26 08:34+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -43,10 +43,6 @@ msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
-
-#, sh-format
-msgid "Authentication is required to run $display_name."
-msgstr "Authenticatie is vereist om $display_name uit te voeren."
 
 #, sh-format
 msgid ""
@@ -113,9 +109,6 @@ msgstr "Wacht {}s tot andere pakketbeheerder klaar is..."
 
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
-
-msgid "Authentication is required to run {}."
-msgstr "Authenticatie is vereist om {} uit te voeren."
 
 msgid "type '{} --usage' for more information"
 msgstr "typ '{} --usage' voor meer informatie"
@@ -220,7 +213,7 @@ msgstr ""
 msgid "To execute a COMMAND:"
 msgstr "Om een OPDRACHT uit te voeren:"
 
-msgid "Create backup"
+msgid "Make backup"
 msgstr "Reservekopie maken"
 
 #, sh-format
@@ -364,6 +357,15 @@ msgstr "Koppel zelf (veilig!) het usb-medium af."
 
 msgid "The backup has been made."
 msgstr "De reservekopie is gemaakt."
+
+msgid "Backup program"
+msgstr "Veiligstelprogramma"
+
+msgid "Back up folders and files"
+msgstr "Maak een reservekopie (back-up) van mappen en bestanden"
+
+msgid "kz-backup;copy;restore;"
+msgstr "kz-backup;kopie;herstel;"
 
 msgid "Build package kz"
 msgstr "Pakket kz bouwen"
@@ -1105,15 +1107,3 @@ msgstr "Controleer website (rchecklink)..."
 
 msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
-
-msgid "Make backup"
-msgstr "Reservekopie maken"
-
-msgid "Backup program"
-msgstr "Veiligstelprogramma"
-
-msgid "Back up folders and files"
-msgstr "Maak een reservekopie (back-up) van mappen en bestanden"
-
-msgid "kz-backup;copy;restore;"
-msgstr "kz-backup;kopie;herstel;"

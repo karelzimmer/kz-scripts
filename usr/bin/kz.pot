@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-25 14:23+0200\n"
+"POT-Creation-Date: 2023-04-26 08:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,10 +39,6 @@ msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
 msgid "Already performed by the administrator."
-msgstr ""
-
-#, sh-format
-msgid "Authentication is required to run $display_name."
 msgstr ""
 
 #, sh-format
@@ -101,9 +97,6 @@ msgid "Wait {}s for another package manager to finish..."
 msgstr ""
 
 msgid "Program {} has been interrupted."
-msgstr ""
-
-msgid "Authentication is required to run {}."
 msgstr ""
 
 msgid "type '{} --usage' for more information"
@@ -179,7 +172,7 @@ msgstr ""
 msgid "To execute a COMMAND:"
 msgstr ""
 
-msgid "Create backup"
+msgid "Make backup"
 msgstr ""
 
 #, sh-format
@@ -292,6 +285,15 @@ msgid "Disconnect the USB medium yourself (safely!)."
 msgstr ""
 
 msgid "The backup has been made."
+msgstr ""
+
+msgid "Backup program"
+msgstr ""
+
+msgid "Back up folders and files"
+msgstr ""
+
+msgid "kz-backup;copy;restore;"
 msgstr ""
 
 msgid "Build package kz"
@@ -928,16 +930,4 @@ msgid "Check website (rchecklink)..."
 msgstr ""
 
 msgid "Authentication is required to install apps"
-msgstr ""
-
-msgid "Make backup"
-msgstr ""
-
-msgid "Backup program"
-msgstr ""
-
-msgid "Back up folders and files"
-msgstr ""
-
-msgid "kz-backup;copy;restore;"
 msgstr ""

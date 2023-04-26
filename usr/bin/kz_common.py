@@ -122,8 +122,6 @@ def check_user_root(program_name, display_name):
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
         except Exception:
-            print(_('Authentication is required to run {}.').
-                  format(display_name))
             try:
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:

@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# Create backup.
+# Make backup.
 #
 # Written in 2007 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
@@ -18,7 +18,7 @@ source "$program_path"/kz_common.sh
 
 declare program_name='kz-backup'
 declare program_desc
-program_desc=$(gettext 'Create backup')
+program_desc=$(gettext 'Make backup')
 declare display_name=${program_name/kz-/kz }
 
 declare usage
@@ -303,7 +303,7 @@ $(
     )
 EOF
 
-    title=$(gettext 'Create backup')
+    title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     # title=$(gettext '')
     # text=$(gettext '')
