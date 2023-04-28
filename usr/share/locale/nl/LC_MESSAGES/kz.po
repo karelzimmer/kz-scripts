@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 08:34+0200\n"
+"POT-Creation-Date: 2023-04-28 08:50+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1107,3 +1107,90 @@ msgstr "Controleer website (rchecklink)..."
 
 msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
+
+msgid "Cockpit"
+msgstr "Cockpit"
+
+msgid "System managment"
+msgstr "Systeembeheer"
+
+msgid "Browser-based system management"
+msgstr "Browsergebaseerd beheer"
+
+msgid "system;management;"
+msgstr "systeem;beheer;"
+
+msgid "Install program"
+msgstr "Installatieprogramma"
+
+msgid "Add apps and change system settings"
+msgstr "Installeer apps en wijzig systeeminstellingen"
+
+msgid "kzinstall;install;"
+msgstr "kz-install;installatie;"
+
+msgid "Create app list"
+msgstr "Applijst maken"
+
+msgid "Installation helper"
+msgstr "Installatiehulp'"
+
+msgid "Run commands through a menu"
+msgstr "Voer opdrachten uit via een menu"
+
+msgid "kz-menu;menu;"
+msgstr "kz-menu;menu;"
+
+msgid "Restore program"
+msgstr "Herstelprogramma"
+
+msgid "Restore files and folders from a backup"
+msgstr "Zet reservekopie (back-up) van mappen en bestanden terug"
+
+msgid "kz-restore;restore;copy;"
+msgstr "kz-restore;restore;"
+
+msgid "Setup program"
+msgstr "Instelprogramma"
+
+msgid "Setup apps and change settings"
+msgstr "Stel apps in en wijzig instellingen"
+
+msgid "kz-setup;setup;"
+msgstr "kz-setup;setup;"
+
+msgid "Create setup list"
+msgstr "Instellijst maken"
+
+msgid "Teams Web App"
+msgstr "Teams Web App"
+
+msgid "Collaboration program"
+msgstr "Samenwerkingsprogramma"
+
+msgid "Communication and collaboration platform"
+msgstr "Communicatie- en samenwerkingsplatform"
+
+msgid "kz-teams;teams;"
+msgstr "kz-teams;teams;"
+
+msgid "Start HugoWin732"
+msgstr "HugoWin732 starten"
+
+msgid "PC virtualization solution"
+msgstr "PC-virtualisatie-oplossing"
+
+msgid "Start VirtualBox VM hugowin732"
+msgstr "Start VirtualBox VM hugowin732"
+
+msgid "vbox;virtualization;"
+msgstr "vbox;virtualisatie;"
+
+msgid "Webmin"
+msgstr "Webmin"
+
+msgid "Utility program"
+msgstr "Hulpprogramma"
+
+msgid "wifi;network;"
+msgstr "wifi;netwerk;"

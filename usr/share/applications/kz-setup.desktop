@@ -8,19 +8,15 @@
 [Desktop Entry]
 Type=Application
 Name=Set up apps
-Name[nl]=Apps instellen
 GenericName=Setup program
-GenericName[nl]=Instelprogramma
 Comment=Setup apps and change settings
-Comment[nl]=Stel apps in en  en wijzig instellingen
-Keywords=kzsetup;setup;
-Keywords[nl]=kzsetup;setup;
+Keywords=kz-setup;setup;
 Categories=Kz-scripts;
 Exec=kz-setup --gui
 Icon=kz-setup
 Actions=list;
+X-GNOME-Gettext-Domain=kz
 
 [Desktop Action list]
 Name=Create setup list
-Name[nl]=Instellijst maken
 Exec=kz-setup --gui --list

@@ -8,11 +8,12 @@
 
 [Desktop Entry]
 Type=Application
-Name=HugoWin732 starten
-GenericName=PC-virtualisatie-oplossing
+Name=Start HugoWin732
+GenericName=PC virtualization solution
 Comment=Start VirtualBox VM hugowin732
-Keywords=vbox;virtualisatie;
+Keywords=vbox;virtualization;
 Exec=/home/hugo/kz-vm-hugowin732.sh
 Categories=Kz-scripts;
 Icon=virtualbox-vbox
 NoDisplay=true
+X-GNOME-Gettext-Domain=kz

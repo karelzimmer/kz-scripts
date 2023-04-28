@@ -8,13 +8,11 @@
 [Desktop Entry]
 Type=Application
 Name=Installation menu
-Name[nl]=Installatiemenu
 GenericName=Installation helper
-GenericName[nl]=Installatiehulp
 Comment=Run commands through a menu
 Comment[nl]=Voer opdrachten uit via een menu
-Keywords=kzmenu;menu;
-Keywords[nl]=kzmenu;menu;
+Keywords=kz-menu;menu;
 Categories=Kz-scripts;
 Exec=kz-menu --gui
 Icon=kz-menu
+X-GNOME-Gettext-Domain=kz

@@ -8,13 +8,10 @@
 [Desktop Entry]
 Type=Application
 Name=Teams Web App
-Name[nl]=Teams Web App
-GenericName=Setup program
-GenericName[nl]=Instelprogramma
+GenericName=Collaboration program
 Comment=Communication and collaboration platform
-Comment[nl]=Communicatie- en samenwerkingsplatform
-Keywords=kzteams;teams;
-Keywords[nl]=kzteams;teams;
+Keywords=kz-teams;teams;
 Categories=Kz-scripts;
 Exec=google-chrome https://teams.microsoft.com/
 Icon=kz-teams
+X-GNOME-Gettext-Domain=kz

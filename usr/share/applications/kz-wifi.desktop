@@ -7,14 +7,11 @@
 
 [Desktop Entry]
 Type=Application
-Name=Show Wifi data
-Name[nl]=Wifi-gegevens tonen
+Name=Show WiFi data
 GenericName=Utility program
-GenericName[nl]=Hulpprogramma
-Comment=Show wifi data
-Comment[nl]=Toon wifi-gegevens
+Comment=Show WiFi data
 Keywords=wifi;network;
-Keywords[nl]=wifi;netwerk;
 Categories=Kz-scripts;
 Exec=kz-wifi --gui
 Icon=kz-wifi
+X-GNOME-Gettext-Domain=kz

@@ -8,14 +8,11 @@
 [Desktop Entry]
 Type=Application
 Name=Cockpit
-Name[nl]=Cockpit
 GenericName=System managment
-GenericName[nl]=Systeembeheer
 Comment=Browser-based system management
-Comment[nl]=Browsergebaseerd beheer
 Keywords=system;management;
-Keywords[nl]=systeem;beheer;
 Exec=google-chrome https://localhost:9090
 Categories=Kz-scripts;
 Icon=kz-cockpit
 NoDisplay=true
+X-GNOME-Gettext-Domain=kz

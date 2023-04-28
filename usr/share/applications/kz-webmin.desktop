@@ -8,14 +8,11 @@
 [Desktop Entry]
 Type=Application
 Name=Webmin
-Name[nl]=Webmin
 GenericName=System managment
-GenericName[nl]=Systeembeheer
 Comment=Browser-based system management
-Comment[nl]=Browsergebaseerd beheer
 Keywords=system;management;
-Keywords[nl]=systeem;beheer;
 Exec=google-chrome https://localhost:10000
 Categories=Kz-scripts;
 Icon=kz-webmin
 NoDisplay=true
+X-GNOME-Gettext-Domain=kz
