@@ -635,7 +635,7 @@ msgid "Type '$display_name --files' for available files."
 msgstr "Typ '$display_name --files' voor beschikbare bestanden."
 
 msgid "No installation files found."
-msgstr "Geen installatiebestanden gevonden.'"
+msgstr "Geen installatiebestanden gevonden."
 
 msgid ""
 "The following APPs are available:\n"
@@ -740,7 +740,7 @@ msgid "    End spaces found."
 msgstr "    Eindspaties gevonden."
 
 msgid "Installation menu"
-msgstr "Installatiemenu'"
+msgstr "Installatiemenu"
 
 #, sh-format
 msgid "Usage: $display_name [-g|--gui]"
@@ -1013,7 +1013,7 @@ msgid "setup apps for a server"
 msgstr "stel apps in voor een server"
 
 msgid "No setting files found."
-msgstr "Geen instelbestanden gevonden.'"
+msgstr "Geen instelbestanden gevonden."
 
 msgid "To setup the APPs run:"
 msgstr "Om de APPs in te stellen voer uit"
@@ -1066,7 +1066,7 @@ msgid "WiFi data:"
 msgstr "Wifi-gegevens"
 
 msgid "No WiFi device found."
-msgstr "Geen wifi-apparaat gevonden.'"
+msgstr "Geen wifi-apparaat gevonden."
 
 msgid "Execute IVP"
 msgstr "IVP uitvoeren"
@@ -1133,7 +1133,7 @@ msgid "Create app list"
 msgstr "Applijst maken"
 
 msgid "Installation helper"
-msgstr "Installatiehulp'"
+msgstr "Installatiehulp"
 
 msgid "Run commands through a menu"
 msgstr "Voer opdrachten uit via een menu"
