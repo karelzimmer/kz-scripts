@@ -71,7 +71,7 @@ function check_input {
         esac
     done
 
-    if [[ "$*" ]]; then
+    if [[ -n "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
                 "$(gettext 'arguments are not allowed')"
         exit $error
@@ -204,7 +204,7 @@ function check_record_types {
         grep --regexp='#[1-2] ' --invert-match          |
         grep --regexp='#1-'     --invert-match          || true
         )
-    if [[ $wrong_record ]]; then
+    if [[ -n $wrong_record ]]; then
          error "
 In $scriptdir / $scriptname:
     $(gettext 'Faulty line(s) found.')
@@ -223,9 +223,10 @@ function check_shellcheck {
 
     # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
-    shellcheck  --enable=add-default-case   \
-                --external-sources          \
-                "$scriptname"               || rc=$?
+    shellcheck  --enable=add-default-case           \
+                --enable=avoid-nullary-conditions   \
+                --external-sources                  \
+                "$scriptname"                       || rc=$?
     if [[ $rc -ne $ok ]]; then
         maxrc=$error
     fi

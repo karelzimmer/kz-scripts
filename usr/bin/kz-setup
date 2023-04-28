@@ -141,7 +141,7 @@ function check_input {
     done
 
     # Check arguments.
-    while [[ "$*" ]]; do
+    while [[ -n "$*" ]]; do
         if [[ "$(basename "$1")" == $program_name-*.sh ]]; then
             argument_file=true
             file_arguments[file_arg_num]=$1
@@ -243,7 +243,7 @@ function process_argument_app {
                     2> >($logcmd)           |
             head    --lines=1               || printf '\n'
             )
-        if [[ $file ]]; then
+        if [[ -n $file ]]; then
             process_argument_app_file
         else
             file_notfound=true
