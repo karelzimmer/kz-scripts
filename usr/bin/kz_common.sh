@@ -412,6 +412,9 @@ launch a Terminal window and run:")
 [2] ${blue}sudo update-initramfs -u${normal}"
             fi
             ;;
+        *)
+            :
+            ;;
     esac
 }
 

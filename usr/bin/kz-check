@@ -223,7 +223,9 @@ function check_shellcheck {
 
     # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
-    shellcheck --external-sources "$scriptname" || rc=$?
+    shellcheck  --enable=add-default-case   \
+                --external-sources          \
+                "$scriptname"               || rc=$?
     if [[ $rc -ne $ok ]]; then
         maxrc=$error
     fi
