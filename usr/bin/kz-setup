@@ -312,8 +312,9 @@ function process_argument_file {
         fi
     done
     if $file_notfound; then
-        printf "%s\n" "$(gettext "Type '\$display_name --files' for available \
-files.")"
+        text=$(eval_gettext \
+                "Type '\$display_name --files' for available files.")
+        printf "%s\n" "$text"
     fi
 }
 
