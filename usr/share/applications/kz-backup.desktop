@@ -10,10 +10,8 @@ Type=Application
 Name=Make backup
 GenericName=Backup program
 Comment=Back up folders and files
-# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 Keywords=kz-backup;copy;restore;
 Categories=Kz-scripts;
 Exec=kz-backup --gui
-# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
 Icon=kz-backup
 X-GNOME-Gettext-Domain=kz

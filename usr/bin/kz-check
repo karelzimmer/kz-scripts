@@ -91,10 +91,10 @@ function process_input {
         scriptname=$(basename "$script")
         check_trailing_spaces
         case $scriptname in
-            *.desktop|*.policy)
+            *.policy)
                 continue
                 ;;
-            *.1)
+            *.1|*.desktop)
                 check_record_length
                 ;;
             kz_common.py)
