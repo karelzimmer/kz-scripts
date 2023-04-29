@@ -19,18 +19,18 @@ kz-backup \- Make backup.
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz backup\fR makes a backup copy of the Home directory.
+\fBkz backup\fR makes a backup copy of the Personal folder.
 .sp
 In a graphical working environment command \fBkz backup\fR can be executed by
 searching for \fBback\fR, click on \fBMake backup\fR.
 .sp
-Before a backup is made, settings are backed up in Home / Settings directory.
-This directory contains the set Background, Userphoto, and Favorites, and a
+Before a backup is made, settings are backed up in Personal / Settings folder.
+This folder contains the set Background, Userphoto, and Favorites, and a
 list of installed Apps.
 .sp
 The backup is placed on a mounted USB medium such as a USB external hard disk
-in directory \fBbackup-<computer name>-<user name>\fR, this directory is
-created as needed, for example /media/jan/backupdisk/backup-pc02-jan.
+in folder \fBbackup-<computer name>-<user name>\fR, this folder is created as
+needed, for example /media/jan/backupdisk/backup-pc02-jan.
 .sp
 With option \fB-t\fR, \fB--target\fR=\fIDIRECTORY\fR another location can be
 specified. For example /tmp instead of /media/jan/backupdisk (unwise because
@@ -62,10 +62,10 @@ Example: ~/bin is skipped due to the presence of ~/bin/.git.
 .sp
 rsync is used to create the backup.
 .br
-Files deleted from the Home directory are also removed from the backup (rsync's
+Files deleted from the Personal folder are also removed from the backup (rsync's
 --delete option is used).
 .sp
-With command \fBkz restore\fR the Home directory can be restored.
+With command \fBkz restore\fR the Personal folder can be restored.
 .\"
 .\"
 .SH OPTIONS
@@ -134,7 +134,7 @@ explanation.
 .sp
 \fBkz backup\fR
 .RS
-Make a backup copy of the Home directory.
+Make a backup copy of the Personal folder.
 .br
 Starter \fBMake a backup\fR is also available for this in a graphical work
 environment.
@@ -147,8 +147,8 @@ Show files that would otherwise be added and removed in the backup.
 .sp
 \fBkz backup --target=smb://fileserver/backups\fR
 .RS
-Back up the Home directory to SMB-share backups on fileserver in the directory
-backup-pc02-jan (this directory will be created as needed).
+Back up the Personal folder to SMB-share backups on fileserver in the folder
+backup-pc02-jan (this folder will be created as needed).
 .RE
 .\"
 .\"

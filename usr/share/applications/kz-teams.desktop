@@ -7,9 +7,9 @@
 
 [Desktop Entry]
 Type=Application
-Name=Teams Web App
+Name=Teams
 GenericName=Collaboration program
-Comment=Communication and collaboration platform
+Comment=Teams Web App
 Keywords=kz-teams;teams;
 Categories=Kz-scripts;
 Exec=google-chrome https://teams.microsoft.com/

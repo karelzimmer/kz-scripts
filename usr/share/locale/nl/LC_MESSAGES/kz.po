@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-28 08:50+0200\n"
+"POT-Creation-Date: 2023-04-29 10:08+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -358,11 +358,11 @@ msgstr "Koppel zelf (veilig!) het usb-medium af."
 msgid "The backup has been made."
 msgstr "De reservekopie is gemaakt."
 
+msgid "Backup"
+msgstr "Back-up"
+
 msgid "Backup program"
 msgstr "Veiligstelprogramma"
-
-msgid "Back up folders and files"
-msgstr "Maak een reservekopie (back-up) van mappen en bestanden"
 
 msgid "kz-backup;copy;restore;"
 msgstr "kz-backup;kopie;herstel;"
@@ -1162,20 +1162,20 @@ msgstr "kz-setup;setup;"
 msgid "Create setup list"
 msgstr "Instellijst maken"
 
-msgid "Teams Web App"
-msgstr "Teams Web App"
+msgid "Teams"
+msgstr "Teams"
 
 msgid "Collaboration program"
 msgstr "Samenwerkingsprogramma"
 
-msgid "Communication and collaboration platform"
-msgstr "Communicatie- en samenwerkingsplatform"
+msgid "Teams Web App"
+msgstr "Teams Web App"
 
 msgid "kz-teams;teams;"
 msgstr "kz-teams;teams;"
 
-msgid "Start HugoWin732"
-msgstr "HugoWin732 starten"
+msgid "VM-HugoWin732"
+msgstr "VM-HugoWin732"
 
 msgid "PC virtualization solution"
 msgstr "PC-virtualisatie-oplossing"
