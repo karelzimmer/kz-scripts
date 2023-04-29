@@ -7,11 +7,10 @@
 
 [Desktop Entry]
 Type=Application
-Name=Installation menu
+Name=Menu
 GenericName=Installation helper
-Comment=Run commands through a menu
-Comment[nl]=Voer opdrachten uit via een menu
-Keywords=kz-menu;menu;
+Comment=Installation menu
+Keywords=kz-menu;
 Categories=Kz-scripts;
 Exec=kz-menu --gui
 Icon=kz-menu

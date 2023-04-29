@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 10:08+0200\n"
+"POT-Creation-Date: 2023-04-29 11:08+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1123,44 +1123,41 @@ msgstr "systeem;beheer;"
 msgid "Install program"
 msgstr "Installatieprogramma"
 
-msgid "Add apps and change system settings"
-msgstr "Installeer apps en wijzig systeeminstellingen"
-
-msgid "kzinstall;install;"
+msgid "kz-install;install;"
 msgstr "kz-install;installatie;"
 
-msgid "Create app list"
-msgstr "Applijst maken"
+msgid "App list"
+msgstr "Applijst"
+
+msgid "Menu"
+msgstr ""
 
 msgid "Installation helper"
 msgstr "Installatiehulp"
 
-msgid "Run commands through a menu"
-msgstr "Voer opdrachten uit via een menu"
-
 msgid "kz-menu;menu;"
 msgstr "kz-menu;menu;"
+
+msgid "Restore"
+msgstr "Terugzetten"
 
 msgid "Restore program"
 msgstr "Herstelprogramma"
 
-msgid "Restore files and folders from a backup"
-msgstr "Zet reservekopie (back-up) van mappen en bestanden terug"
-
 msgid "kz-restore;restore;copy;"
 msgstr "kz-restore;restore;"
+
+msgid "Set up"
+msgstr "Instellen"
 
 msgid "Setup program"
 msgstr "Instelprogramma"
 
-msgid "Setup apps and change settings"
-msgstr "Stel apps in en wijzig instellingen"
-
 msgid "kz-setup;setup;"
 msgstr "kz-setup;setup;"
 
-msgid "Create setup list"
-msgstr "Instellijst maken"
+msgid "Setup list"
+msgstr "Instellijst"
 
 msgid "Teams"
 msgstr "Teams"
@@ -1191,6 +1188,9 @@ msgstr "Webmin"
 
 msgid "Utility program"
 msgstr "Hulpprogramma"
+
+msgid "WiFi"
+msgstr "Wifi"
 
 msgid "wifi;network;"
 msgstr "wifi;netwerk;"

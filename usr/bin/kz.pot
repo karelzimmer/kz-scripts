@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 10:20+0200\n"
+"POT-Creation-Date: 2023-04-29 11:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -947,43 +947,40 @@ msgstr ""
 msgid "Install program"
 msgstr ""
 
-msgid "Add apps and change system settings"
+msgid "kz-install;install;"
 msgstr ""
 
-msgid "kzinstall;install;"
+msgid "App list"
 msgstr ""
 
-msgid "Create app list"
+msgid "Menu"
 msgstr ""
 
 msgid "Installation helper"
 msgstr ""
 
-msgid "Run commands through a menu"
+msgid "kz-menu;menu;"
 msgstr ""
 
-msgid "kz-menu;menu;"
+msgid "Restore"
 msgstr ""
 
 msgid "Restore program"
 msgstr ""
 
-msgid "Restore files and folders from a backup"
+msgid "kz-restore;restore;copy;"
 msgstr ""
 
-msgid "kz-restore;restore;copy;"
+msgid "Set up"
 msgstr ""
 
 msgid "Setup program"
 msgstr ""
 
-msgid "Setup apps and change settings"
-msgstr ""
-
 msgid "kz-setup;setup;"
 msgstr ""
 
-msgid "Create setup list"
+msgid "Setup list"
 msgstr ""
 
 msgid "Teams"
@@ -1014,6 +1011,9 @@ msgid "Webmin"
 msgstr ""
 
 msgid "Utility program"
+msgstr ""
+
+msgid "WiFi"
 msgstr ""
 
 msgid "wifi;network;"
