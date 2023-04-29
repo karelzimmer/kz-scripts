@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-29 11:08+0200\n"
+"POT-Creation-Date: 2023-04-29 11:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -941,13 +941,13 @@ msgstr ""
 msgid "Browser-based system management"
 msgstr ""
 
-msgid "system;management;"
+msgid "kz-cockpit;"
 msgstr ""
 
 msgid "Install program"
 msgstr ""
 
-msgid "kz-install;install;"
+msgid "kz-install;"
 msgstr ""
 
 msgid "App list"
@@ -959,7 +959,7 @@ msgstr ""
 msgid "Installation helper"
 msgstr ""
 
-msgid "kz-menu;menu;"
+msgid "kz-menu;"
 msgstr ""
 
 msgid "Restore"
@@ -968,7 +968,7 @@ msgstr ""
 msgid "Restore program"
 msgstr ""
 
-msgid "kz-restore;restore;copy;"
+msgid "kz-restore;copy;backup;"
 msgstr ""
 
 msgid "Set up"
@@ -977,7 +977,7 @@ msgstr ""
 msgid "Setup program"
 msgstr ""
 
-msgid "kz-setup;setup;"
+msgid "kz-setup;"
 msgstr ""
 
 msgid "Setup list"
@@ -992,7 +992,7 @@ msgstr ""
 msgid "Teams Web App"
 msgstr ""
 
-msgid "kz-teams;teams;"
+msgid "kz-teams;"
 msgstr ""
 
 msgid "VM-HugoWin732"
@@ -1004,7 +1004,7 @@ msgstr ""
 msgid "Start VirtualBox VM hugowin732"
 msgstr ""
 
-msgid "vbox;virtualization;"
+msgid "vbox;"
 msgstr ""
 
 msgid "Webmin"
@@ -1013,8 +1013,11 @@ msgstr ""
 msgid "Utility program"
 msgstr ""
 
+msgid "kz-webmin;"
+msgstr ""
+
 msgid "WiFi"
 msgstr ""
 
-msgid "wifi;network;"
+msgid "kz-wifi;network;"
 msgstr ""
