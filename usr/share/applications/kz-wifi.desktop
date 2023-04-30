@@ -7,9 +7,9 @@
 
 [Desktop Entry]
 Type=Application
-Name=Show WiFi data
+Name=Show WiFi information
 GenericName=Utility program
-Comment=Show WiFi data
+Comment=Show WiFi information
 Keywords=wifi;network;
 Categories=Kz-scripts;
 Exec=kz-wifi --gui

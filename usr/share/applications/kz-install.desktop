@@ -9,7 +9,7 @@
 Type=Application
 Name=Install apps
 GenericName=Install program
-Comment=Add apps and change system settings
+Comment=Install apps and changes system settings
 Keywords=kz-install;install;
 Categories=Kz-scripts;
 Exec=kz-install --gui

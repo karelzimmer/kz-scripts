@@ -9,7 +9,7 @@
 Type=Application
 Name=Set up apps
 GenericName=Setup program
-Comment=Setup apps and change settings
+Comment=Set up apps and change user settings
 Keywords=kz-setup;setup;
 Categories=Kz-scripts;
 Exec=kz-setup --gui

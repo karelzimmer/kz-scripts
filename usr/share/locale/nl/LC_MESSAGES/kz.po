@@ -361,8 +361,8 @@ msgstr "De reservekopie is gemaakt."
 msgid "Backup program"
 msgstr "Veiligstelprogramma"
 
-msgid "Back up folders and files"
-msgstr "Maak een reservekopie (back-up) van mappen en bestanden"
+msgid "Make a backup copy of the Home folder"
+msgstr "Maak een reservekopie (back-up) van de Persoonlijke map"
 
 msgid "kz-backup;copy;restore;"
 msgstr "kz-backup;kopie;herstel;"
@@ -782,8 +782,8 @@ msgstr "Gebruikte opdrachten"
 msgid "Exit menu"
 msgstr "Menu verlaten"
 
-msgid "Show WiFi data"
-msgstr "Wifi-informatie tonen"
+msgid "Show WiFi information"
+msgstr "Wifi-informatie weergeven"
 
 msgid "Add users"
 msgstr "Gebruikers toevoegen"
@@ -1123,7 +1123,7 @@ msgstr "systeem;beheer;"
 msgid "Install program"
 msgstr "Installatieprogramma"
 
-msgid "Add apps and change system settings"
+msgid "Install apps and changes system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"
 
 msgid "kzinstall;install;"
@@ -1144,8 +1144,8 @@ msgstr "kz-menu;menu;"
 msgid "Restore program"
 msgstr "Herstelprogramma"
 
-msgid "Restore files and folders from a backup"
-msgstr "Zet reservekopie (back-up) van mappen en bestanden terug"
+msgid "Restores a backup copy of the Home folder"
+msgstr "Zet reservekopie (back-up) van de Persoonlijke map terug"
 
 msgid "kz-restore;restore;copy;"
 msgstr "kz-restore;restore;"
@@ -1153,8 +1153,8 @@ msgstr "kz-restore;restore;"
 msgid "Setup program"
 msgstr "Instelprogramma"
 
-msgid "Setup apps and change settings"
-msgstr "Stel apps in en wijzig instellingen"
+msgid "Set up apps and change user settings"
+msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
 msgid "kz-setup;setup;"
 msgstr "kz-setup;setup;"

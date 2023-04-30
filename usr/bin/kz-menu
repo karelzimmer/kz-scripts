@@ -60,7 +60,7 @@ declare menu2_title
 menu2_title=$(gettext 'Commands menu')
 declare menu2_head="             $menu2_title"
 declare -a menu2_actions=(
-            [1]="$(gettext 'Show WiFi data')"
+            [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
                 "$(gettext 'Add users')"
                 "$(gettext 'Install apps')"

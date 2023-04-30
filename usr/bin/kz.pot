@@ -290,7 +290,7 @@ msgstr ""
 msgid "Backup program"
 msgstr ""
 
-msgid "Back up folders and files"
+msgid "Make a backup copy of the Home folder"
 msgstr ""
 
 msgid "kz-backup;copy;restore;"
@@ -662,7 +662,7 @@ msgstr ""
 msgid "Exit menu"
 msgstr ""
 
-msgid "Show WiFi data"
+msgid "Show WiFi information"
 msgstr ""
 
 msgid "Add users"
@@ -947,7 +947,7 @@ msgstr ""
 msgid "Install program"
 msgstr ""
 
-msgid "Add apps and change system settings"
+msgid "Install apps and changes system settings"
 msgstr ""
 
 msgid "kzinstall;install;"
@@ -968,7 +968,7 @@ msgstr ""
 msgid "Restore program"
 msgstr ""
 
-msgid "Restore files and folders from a backup"
+msgid "Restores a backup copy of the Home folder"
 msgstr ""
 
 msgid "kz-restore;restore;copy;"
@@ -977,7 +977,7 @@ msgstr ""
 msgid "Setup program"
 msgstr ""
 
-msgid "Setup apps and change settings"
+msgid "Set up apps and change user settings"
 msgstr ""
 
 msgid "kz-setup;setup;"

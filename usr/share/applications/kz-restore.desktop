@@ -9,7 +9,7 @@
 Type=Application
 Name=Restore backup
 GenericName=Restore program
-Comment=Restore files and folders from a backup
+Comment=Restores a backup copy of the Home folder
 Keywords=kz-restore;restore;copy;
 Categories=Kz-scripts;
 Exec=kz-restore --gui
