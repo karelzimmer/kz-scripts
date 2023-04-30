@@ -7,10 +7,10 @@
 
 [Desktop Entry]
 Type=Application
-Name=Restore
+Name=Restore backup
 GenericName=Restore program
-Comment=Restore backup
-Keywords=kz-restore;copy;backup;
+Comment=Restore files and folders from a backup
+Keywords=kz-restore;restore;copy;
 Categories=Kz-scripts;
 Exec=kz-restore --gui
 Icon=kz-restore

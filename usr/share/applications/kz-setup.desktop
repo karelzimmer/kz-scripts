@@ -7,10 +7,10 @@
 
 [Desktop Entry]
 Type=Application
-Name=Set up
+Name=Set up apps
 GenericName=Setup program
-Comment=Set up apps
-Keywords=kz-setup;
+Comment=Setup apps and change settings
+Keywords=kz-setup;setup;
 Categories=Kz-scripts;
 Exec=kz-setup --gui
 Icon=kz-setup
@@ -18,5 +18,5 @@ Actions=list;
 X-GNOME-Gettext-Domain=kz
 
 [Desktop Action list]
-Name=Setup list
+Name=Create setup list
 Exec=kz-setup --gui --list

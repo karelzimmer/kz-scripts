@@ -7,10 +7,10 @@
 
 [Desktop Entry]
 Type=Application
-Name=Install
+Name=Install apps
 GenericName=Install program
-Comment=Install apps
-Keywords=kz-install;
+Comment=Add apps and change system settings
+Keywords=kz-install;install;
 Categories=Kz-scripts;
 Exec=kz-install --gui
 Icon=kz-install
@@ -18,5 +18,5 @@ Actions=list;
 X-GNOME-Gettext-Domain=kz
 
 [Desktop Action list]
-Name=App list
+Name=Create app list
 Exec=kz-install --gui --list
