@@ -92,28 +92,15 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf  "${bold}%s${normal} ($display_name)\n" \
+    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
+    check_repos
+    printf  "\n${bold}%s${normal} ($display_name)\n" \
             "$(gettext 'Build - final')"
     build_package
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
-    check_repos
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Deploy')"
     upload_website
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Install')"
     install_package
-}
-
-
-function build_package {
-    local -i rc=0
-
-    info "$(gettext 'Build package and website (kz build)...')
-"
-    # Call kz-build.
-    "$scripts_repo"/usr/bin/kz build || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        exit $rc
-    fi
 }
 
 
@@ -138,6 +125,19 @@ function check_repos {
     done
     if [[ $maxrc -gt $ok ]]; then
         exit $maxrc
+    fi
+}
+
+
+function build_package {
+    local -i rc=0
+
+    info "$(gettext 'Build package and website (kz build)...')
+"
+    # Call kz-build.
+    "$scripts_repo"/usr/bin/kz build || rc=$?
+    if [[ $rc -ne $ok ]]; then
+        exit $rc
     fi
 }
 
