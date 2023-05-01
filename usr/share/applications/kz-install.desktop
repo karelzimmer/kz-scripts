@@ -14,9 +14,4 @@ Keywords=kz-install;install;
 Categories=Kz-scripts;
 Exec=kz-install --gui
 Icon=kz-install
-Actions=list;
 X-GNOME-Gettext-Domain=kz
-
-[Desktop Action list]
-Name=Create app list
-Exec=kz-install --gui --apps

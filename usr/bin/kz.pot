@@ -953,9 +953,6 @@ msgstr ""
 msgid "kzinstall;install;"
 msgstr ""
 
-msgid "Create app list"
-msgstr ""
-
 msgid "Installation helper"
 msgstr ""
 
@@ -981,9 +978,6 @@ msgid "Set up apps and change user settings"
 msgstr ""
 
 msgid "kz-setup;setup;"
-msgstr ""
-
-msgid "Create setup list"
 msgstr ""
 
 msgid "Teams Web App"

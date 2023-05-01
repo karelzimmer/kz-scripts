@@ -1129,9 +1129,6 @@ msgstr "Installeer apps en wijzig systeeminstellingen"
 msgid "kzinstall;install;"
 msgstr "kz-install;installatie;"
 
-msgid "Create app list"
-msgstr "Applijst maken"
-
 msgid "Installation helper"
 msgstr "Installatiehulp"
 
@@ -1158,9 +1155,6 @@ msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
 msgid "kz-setup;setup;"
 msgstr "kz-setup;setup;"
-
-msgid "Create setup list"
-msgstr "Instellijst maken"
 
 msgid "Teams Web App"
 msgstr "Teams Web App"

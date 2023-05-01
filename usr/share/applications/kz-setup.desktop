@@ -14,9 +14,4 @@ Keywords=kz-setup;setup;
 Categories=Kz-scripts;
 Exec=kz-setup --gui
 Icon=kz-setup
-Actions=list;
 X-GNOME-Gettext-Domain=kz
-
-[Desktop Action list]
-Name=Create setup list
-Exec=kz-setup --gui --apps
