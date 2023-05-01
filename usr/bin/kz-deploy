@@ -104,6 +104,19 @@ function process_input {
 }
 
 
+function build_package {
+    local -i rc=0
+
+    info "$(gettext 'Build package and website (kz build)...')
+"
+    # Call kz-build.
+    "$scripts_repo"/usr/bin/kz build || rc=$?
+    if [[ $rc -ne $ok ]]; then
+        exit $rc
+    fi
+}
+
+
 function check_repos {
     info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
@@ -125,19 +138,6 @@ function check_repos {
     done
     if [[ $maxrc -gt $ok ]]; then
         exit $maxrc
-    fi
-}
-
-
-function build_package {
-    local -i rc=0
-
-    info "$(gettext 'Build package and website (kz build)...')
-"
-    # Call kz-build.
-    "$scripts_repo"/usr/bin/kz build || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        exit $rc
     fi
 }
 
