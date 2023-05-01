@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-01 08:30+0200\n"
+"POT-Creation-Date: 2023-05-01 12:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,15 +285,6 @@ msgid "Disconnect the USB medium yourself (safely!)."
 msgstr ""
 
 msgid "The backup has been made."
-msgstr ""
-
-msgid "Backup program"
-msgstr ""
-
-msgid "Make a backup copy of the Home folder"
-msgstr ""
-
-msgid "kz-backup;copy;restore;"
 msgstr ""
 
 msgid "Build package kz"
@@ -932,25 +923,16 @@ msgstr ""
 msgid "Authentication is required to install apps"
 msgstr ""
 
-msgid "Cockpit"
+msgid "Make a backup copy of the Home folder"
 msgstr ""
 
-msgid "System managment"
+msgid "Cockpit"
 msgstr ""
 
 msgid "Browser-based system management"
 msgstr ""
 
-msgid "system;management;"
-msgstr ""
-
-msgid "Install program"
-msgstr ""
-
 msgid "Install apps and changes system settings"
-msgstr ""
-
-msgid "kzinstall;install;"
 msgstr ""
 
 msgid "Installation helper"
@@ -959,56 +941,23 @@ msgstr ""
 msgid "Run commands through a menu"
 msgstr ""
 
-msgid "kz-menu;menu;"
-msgstr ""
-
-msgid "Restore program"
-msgstr ""
-
 msgid "Restores a backup copy of the Home folder"
-msgstr ""
-
-msgid "kz-restore;restore;copy;"
-msgstr ""
-
-msgid "Setup program"
 msgstr ""
 
 msgid "Set up apps and change user settings"
 msgstr ""
 
-msgid "kz-setup;setup;"
-msgstr ""
-
 msgid "Teams Web App"
-msgstr ""
-
-msgid "Collaboration program"
 msgstr ""
 
 msgid "Communication and collaboration platform"
 msgstr ""
 
-msgid "kz-teams;teams;"
-msgstr ""
-
 msgid "Start HugoWin732"
-msgstr ""
-
-msgid "PC virtualization solution"
 msgstr ""
 
 msgid "Start VirtualBox VM hugowin732"
 msgstr ""
 
-msgid "vbox;virtualization;"
-msgstr ""
-
 msgid "Webmin"
-msgstr ""
-
-msgid "Utility program"
-msgstr ""
-
-msgid "wifi;network;"
 msgstr ""

@@ -8,9 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Install apps
-GenericName=Install program
 Comment=Install apps and changes system settings
-Keywords=kz-install;
 Categories=Kz-scripts;
 Exec=kz-install --gui
 Icon=kz-install

@@ -8,9 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Make backup
-GenericName=Backup program
 Comment=Make a backup copy of the Home folder
-Keywords=kz-backup;
 Categories=Kz-scripts;
 Exec=kz-backup --gui
 Icon=kz-backup

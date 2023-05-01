@@ -8,9 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Cockpit
-GenericName=System managment
 Comment=Browser-based system management
-Keywords=kz-cockpit;
 Exec=google-chrome https://localhost:9090
 Categories=Kz-scripts;
 Icon=kz-cockpit

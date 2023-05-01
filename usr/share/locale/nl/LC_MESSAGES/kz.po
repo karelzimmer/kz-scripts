@@ -358,15 +358,6 @@ msgstr "Koppel zelf (veilig!) het usb-medium af."
 msgid "The backup has been made."
 msgstr "De reservekopie is gemaakt."
 
-msgid "Backup program"
-msgstr "Veiligstelprogramma"
-
-msgid "Make a backup copy of the Home folder"
-msgstr "Maak een reservekopie (back-up) van de Persoonlijke map"
-
-msgid "kz-backup;copy;restore;"
-msgstr "kz-backup;kopie;herstel;"
-
 msgid "Build package kz"
 msgstr "Pakket kz bouwen"
 
@@ -1108,26 +1099,17 @@ msgstr "Controleer website (rchecklink)..."
 msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
 
+msgid "Make a backup copy of the Home folder"
+msgstr "Maak een reservekopie (back-up) van de Persoonlijke map"
+
 msgid "Cockpit"
 msgstr "Cockpit"
-
-msgid "System managment"
-msgstr "Systeembeheer"
 
 msgid "Browser-based system management"
 msgstr "Browsergebaseerd beheer"
 
-msgid "system;management;"
-msgstr "systeem;beheer;"
-
-msgid "Install program"
-msgstr "Installatieprogramma"
-
 msgid "Install apps and changes system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"
-
-msgid "kzinstall;install;"
-msgstr "kz-install;installatie;"
 
 msgid "Installation helper"
 msgstr "Installatiehulp"
@@ -1135,56 +1117,23 @@ msgstr "Installatiehulp"
 msgid "Run commands through a menu"
 msgstr "Voer opdrachten uit via een menu"
 
-msgid "kz-menu;menu;"
-msgstr "kz-menu;menu;"
-
-msgid "Restore program"
-msgstr "Herstelprogramma"
-
 msgid "Restores a backup copy of the Home folder"
 msgstr "Zet reservekopie (back-up) van de Persoonlijke map terug"
-
-msgid "kz-restore;restore;copy;"
-msgstr "kz-restore;restore;"
-
-msgid "Setup program"
-msgstr "Instelprogramma"
 
 msgid "Set up apps and change user settings"
 msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
-msgid "kz-setup;setup;"
-msgstr "kz-setup;setup;"
-
 msgid "Teams Web App"
 msgstr "Teams Web App"
-
-msgid "Collaboration program"
-msgstr "Samenwerkingsprogramma"
 
 msgid "Communication and collaboration platform"
 msgstr "Communicatie- en samenwerkingsplatform"
 
-msgid "kz-teams;teams;"
-msgstr "kz-teams;teams;"
-
 msgid "Start HugoWin732"
 msgstr "HugoWin732 starten"
-
-msgid "PC virtualization solution"
-msgstr "PC-virtualisatie-oplossing"
 
 msgid "Start VirtualBox VM hugowin732"
 msgstr "Start VirtualBox VM hugowin732"
 
-msgid "vbox;virtualization;"
-msgstr "vbox;virtualisatie;"
-
 msgid "Webmin"
 msgstr "Webmin"
-
-msgid "Utility program"
-msgstr "Hulpprogramma"
-
-msgid "wifi;network;"
-msgstr "wifi;netwerk;"
