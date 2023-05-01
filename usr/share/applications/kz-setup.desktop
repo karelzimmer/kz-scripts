@@ -19,4 +19,4 @@ X-GNOME-Gettext-Domain=kz
 
 [Desktop Action list]
 Name=Create setup list
-Exec=kz-setup --gui --list
+Exec=kz-setup --gui --apps
