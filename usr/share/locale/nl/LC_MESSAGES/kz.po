@@ -374,17 +374,17 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $display_name $options_usage"
 msgstr "Gebruik: $display_name $options_usage"
 
-msgid "Build final"
-msgstr "Bouwen definitief"
+msgid "Build - final"
+msgstr "Bouwen - definitief"
 
 msgid "Deploy"
 msgstr "Distribueer"
 
-msgid "Check pre"
-msgstr "Controleren voor"
+msgid "Check - pre"
+msgstr "Controleren - voor"
 
-msgid "Check post"
-msgstr "Controleren na"
+msgid "Check - post"
+msgstr "Controleren - na"
 
 msgid "Fix all the messages above."
 msgstr "Herstel alle meldingen hierboven."

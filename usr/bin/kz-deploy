@@ -92,7 +92,8 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build final')"
+    printf  "\n${bold}%s${normal} ($display_name)\n" \
+            "$(gettext 'Build - final')"
     build_package
     printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
     check_repos

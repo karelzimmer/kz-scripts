@@ -119,7 +119,7 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check pre')"
+    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check - pre')"
     check_repos
     check_scripts
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build')"
@@ -128,7 +128,7 @@ function process_input {
     build_deb
     printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Install')"
     install_package
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Check post')"
+    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Check - post')"
     run_ivp
     check_website
 }
