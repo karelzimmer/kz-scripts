@@ -10,8 +10,8 @@
 Type=Application
 Name=Start HugoWin732
 Comment=Start VirtualBox VM hugowin732
-Exec=/home/hugo/kz-vm-hugowin732.sh
 Categories=Kz-scripts;
+Exec=/home/hugo/kz-vm-hugowin732.sh
 Icon=virtualbox-vbox
-NoDisplay=true
 X-GNOME-Gettext-Domain=kz
+NoDisplay=true

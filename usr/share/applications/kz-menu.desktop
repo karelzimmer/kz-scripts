@@ -9,7 +9,6 @@
 Type=Application
 Name=Installation menu
 Comment=Run commands through a menu
-Comment[nl]=Voer opdrachten uit via een menu
 Categories=Kz-scripts;
 Exec=kz-menu --gui
 Icon=kz-menu

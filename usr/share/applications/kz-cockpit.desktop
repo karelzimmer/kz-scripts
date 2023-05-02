@@ -9,8 +9,8 @@
 Type=Application
 Name=Cockpit
 Comment=Browser-based system management
-Exec=google-chrome https://localhost:9090
 Categories=Kz-scripts;
+Exec=google-chrome https://localhost:9090
 Icon=kz-cockpit
-NoDisplay=true
 X-GNOME-Gettext-Domain=kz
+NoDisplay=true
