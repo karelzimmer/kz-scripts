@@ -98,35 +98,31 @@ function check_dependencies {
     local escape='gettext'
 
     printf '%s\n' "$(gettext 'Check dependencies...')"
-    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf) and remove known
-    # lines from output.
+    # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf).
     check_dpkgd_snapd
-    sudo    apt-get                                 \
-            install                                 \
-            --yes                                   \
-            curl                                    \
-            fakeroot                                \
-            $escape                                 \
-            ghostscript                             \
-            git                                     \
-            jq                                      \
-            lftp                                    \
-            nmap                                    \
-            pycodestyle                             \
-            python3-pycodestyle                     \
-            python3-autopep8                        \
-            python3-pip                             \
-            python-is-python3                       |
-            sed '/is reeds de nieuwste versie /d'   |
-            sed '/is already the newest version /d'
+    sudo    apt-get             \
+            install             \
+            --yes               \
+            curl                \
+            fakeroot            \
+            $escape             \
+            ghostscript         \
+            git                 \
+            jq                  \
+            lftp                \
+            nmap                \
+            pycodestyle         \
+            python3-pycodestyle \
+            python3-autopep8    \
+            python3-pip         \
+            python-is-python3
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-    # Debian packages are old, snap is newer and remove known lines from
-    # output.
+    # Debian packages are old, snap is newer.
     check_dpkgd_snapd
-    sudo snap install shellcheck |& sed '/is already installed/d'
+    sudo snap install shellcheck
     check_dpkgd_snapd
-    sudo snap install --classic code |& sed '/is already installed/d'
+    sudo snap install --classic code
 }
 
 
