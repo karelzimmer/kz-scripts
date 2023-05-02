@@ -1,5 +1,4 @@
 # shellcheck shell=bash
-# shellcheck disable=SC2034
 ###############################################################################
 # Common module for shell scripts.
 #
@@ -17,6 +16,7 @@ source /usr/bin/gettext.sh
 
 declare module_name='kz_common.sh'
 declare module_desc
+# shellcheck disable=SC2034
 module_desc=$(gettext 'Common module for shell scripts')
 
 declare -i ok=0
@@ -27,10 +27,14 @@ declare -i error=1
 # Variables
 ###############################################################################
 
+# shellcheck disable=SC2034
 declare options_short='huv'
+# shellcheck disable=SC2034
 declare options_long='help,usage,version'
+# shellcheck disable=SC2034
 declare options_usage='[-h|--help] [-u|--usage] [-v|--version]'
 declare options_help
+# shellcheck disable=SC2034
 options_help="  -h, --help     $(gettext 'give this help list')
   -u, --usage    $(gettext 'give a short usage message')
   -v, --version  $(gettext 'print program version')"
@@ -196,10 +200,12 @@ function init_script {
     fi
 
     cmdline_args=("$@")
+    # shellcheck disable=SC2034
     less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
 --RAW-CONTROL-CHARS --prompt=M$(eval_gettext "Text output \$display_name \
 ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
 (press h for help or q to quit)")"
+    # shellcheck disable=SC2034
     usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
 }
@@ -293,12 +299,12 @@ function reset_terminal_attributes {
 
 
 function set_terminal_attributes {
-    blue=$(tput bold; tput setaf 4)
     bold=$(tput bold)
-    green=$(tput bold; tput setaf 2)
+    blue=${bold}$(tput setaf 4)
+    green=${bold}$(tput setaf 2)
     normal=$(tput sgr0)
-    red=$(tput bold; tput setaf 1)
-    yellow=$(tput bold; tput setaf 3)
+    red=${bold}$(tput setaf 1)
+    yellow=${bold}$(tput setaf 3)
 }
 
 
