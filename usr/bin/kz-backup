@@ -209,7 +209,7 @@ function backup_settings_favorite_apps {
     local file
     file=$tgtdir/$(gettext 'Favorites')
 
-    gsettings get org.gnome.shell favorite-apps  > "$file" |& $logcmd || true
+    gsettings get org.gnome.shell favorite-apps > "$file" |& $logcmd || true
 }
 
 
