@@ -10,7 +10,7 @@
 # Import
 ###############################################################################
 
-# Export two gettext environment variables.
+# Export the two gettext environment variables.
 declare -x TEXTDOMAIN=kz
 declare -x TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
