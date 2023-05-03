@@ -136,7 +136,7 @@ function process_option_version {
         build_id=$(cat /usr/local/etc/kz-build-id)
     fi
     program_year=$(
-        grep '# Written in ' "$program_path/$program_name" |
+        grep '# Written in ' "$program_path/$program_name" 2> /dev/null |
         cut --delimiter=' ' --fields=4
         ) || true
     if [[ $program_year = '' ]]; then
