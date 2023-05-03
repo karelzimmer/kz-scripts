@@ -390,7 +390,7 @@ function process_menu2_choice {
     elif [[ $REPLY -eq $menu2_lines ]]; then
         exit_menu2=true
     else
-         error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+        error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
         exit $error
     fi
 }

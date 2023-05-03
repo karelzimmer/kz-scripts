@@ -324,7 +324,7 @@ function process_dfltfiles {
         files_to_process[file_num]=$dfltfile_1
         ((++file_num))
     else
-         warning "$(gettext 'No setting files found.')"
+        warning "$(gettext 'No setting files found.')"
         exit $error
     fi
     if [[ -f $dfltfile_2 ]]; then

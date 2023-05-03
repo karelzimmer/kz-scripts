@@ -98,7 +98,7 @@ function check_on_ac_power {
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-         warning "
+        warning "
 $(gettext 'The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.')"

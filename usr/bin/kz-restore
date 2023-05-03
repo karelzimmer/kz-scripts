@@ -256,7 +256,7 @@ function term_script {
     local -i rc=0
 
     if $option_dry_run; then
-         error "$(gettext 'The backup was NOT restored (DRY RUN).')"
+        error "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $error
     fi
 
