@@ -267,6 +267,7 @@ function generate_mo {
 
 
 function build_deb {
+    local build_id=''
     local file=''
 
     info "$(gettext 'Build package...')"
@@ -299,8 +300,9 @@ function build_deb {
             "${deb_targets[man_en]}"/*  \
             "${deb_targets[man_nl]}"/*  |& $logcmd
 
-    # Capture build id Debian package.
-    printf '%s' "$(date +%Y-%m-%d)" > "${deb_targets[build]}/$program_name"-id
+    # Capture build id Debian package (ISO 8601 date-time).
+    build_id=$(date '+%Y-%m-%d %H:%M:%S')
+    printf '%s' "$build_id" > "${deb_targets[build]}/$program_name"-id
 
     # Create Debian package in kz-uploads.
     # Debian supports xz as maximum compression, the default Ubuntu is zst.
