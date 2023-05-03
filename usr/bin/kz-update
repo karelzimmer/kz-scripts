@@ -11,6 +11,10 @@ This script performs a repair, update, and cleanup.
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+###############################################################################
+# Import
+###############################################################################
+
 import gettext
 import kz_common
 import subprocess

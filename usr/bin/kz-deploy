@@ -7,6 +7,10 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+###############################################################################
+# Import
+###############################################################################
+
 set -o errexit
 declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)

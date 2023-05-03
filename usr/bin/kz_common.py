@@ -10,6 +10,10 @@ This module gives access to general functions.
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+###############################################################################
+# Import
+###############################################################################
+
 import argparse
 import gettext
 import os

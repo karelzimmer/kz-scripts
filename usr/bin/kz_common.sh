@@ -6,9 +6,14 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
+###############################################################################
+# Import
+###############################################################################
+
 export TEXTDOMAIN=kz TEXTDOMAINDIR=/usr/share/locale
 # shellcheck source=/dev/null
 source /usr/bin/gettext.sh
+
 
 ###############################################################################
 # Variables
