@@ -8,12 +8,13 @@
 ###############################################################################
 
 export TEXTDOMAIN=kz TEXTDOMAINDIR=/usr/share/locale
+declare program_path
+program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source /usr/bin/gettext.sh
-program_path=$(dirname "$(realpath "$0")")
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-getdeb'
@@ -27,7 +28,6 @@ declare options_long='help,usage,version'
 options_usage='[-u|--usage] [-h|--help] [-v|--version]'
 declare usage
 usage=$(eval_gettext "Usage: \$display_name \$options_usage")
-
 options_help="  -h, --help     $(gettext 'give this help list')
   -u, --usage    $(gettext 'give a short usage message')
   -v, --version  $(gettext 'print program version')"
@@ -37,7 +37,6 @@ help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 $program_desc.
 
 $options_help"
-
 declare usage_line=''
 usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
@@ -46,11 +45,6 @@ declare bold
 bold=$(tput bold)
 declare normal
 normal=$(tput sgr0)
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 
 ###############################################################################

@@ -8,19 +8,19 @@
 ###############################################################################
 
 set -o errexit
+declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-install'
 declare program_desc
 program_desc=$(gettext 'Install apps')
 declare display_name=${program_name/kz-/kz }
-
 declare usage
 usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
 [-f|--files] [-g|--gui]
@@ -47,11 +47,6 @@ $(gettext 'Arguments:
   FILE           process FILEs')"
 declare options_short+='acfgrs'
 declare options_long+=',apps,cat,files,gui,remove,server,simulate'
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 declare -a app_arguments=()
 declare apps_file=''

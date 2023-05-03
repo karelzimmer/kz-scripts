@@ -8,12 +8,13 @@
 ###############################################################################
 
 set -o errexit
-program_path=$(dirname "$(realpath "$0")")
+declare program_path
+program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-setup'
@@ -29,7 +30,6 @@ usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
                 [APP...] [FILE...]")
 declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...] [APP...] [FILE...]")
-
 
 $program_desc.
 
@@ -48,11 +48,6 @@ $(gettext 'Arguments:
   FILE           process FILEs')"
 declare options_short+='ace:fgrs'
 declare options_long+=',apps,cat,files,gui,reset,server,simulate'
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 declare -a app_arguments=()
 declare apps_file=''

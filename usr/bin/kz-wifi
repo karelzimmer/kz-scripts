@@ -8,12 +8,13 @@
 ###############################################################################
 
 set -o errexit
+declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-wifi'
@@ -34,11 +35,6 @@ $options_help
   -g, --gui      $(gettext 'starts in graphics mode')"
 declare options_short+='g'
 declare options_long+=',gui'
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 declare option_gui=false
 

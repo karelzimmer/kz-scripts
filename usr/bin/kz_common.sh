@@ -11,7 +11,7 @@ export TEXTDOMAIN=kz TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare module_name='kz_common.sh'
@@ -22,10 +22,6 @@ module_desc=$(gettext 'Common module for shell scripts')
 declare -i ok=0
 declare -i error=1
 
-
-###############################################################################
-# Variables
-###############################################################################
 
 # shellcheck disable=SC2034
 declare options_short='huv'

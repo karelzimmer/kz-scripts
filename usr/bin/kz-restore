@@ -8,12 +8,13 @@
 ###############################################################################
 
 set -o errexit
+declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-restore'
@@ -38,11 +39,6 @@ $(gettext '  -s, --source=DIRECTORY
 $options_help"
 declare options_short+='gs:'
 declare options_long+=',dry-run,gui,source:'
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 declare dry_run_option=''
 declare medium=''

@@ -8,12 +8,13 @@
 ###############################################################################
 
 set -o errexit
+declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-deploy'
@@ -36,11 +37,6 @@ declare docs_repo=$HOME/kz-docs
 declare scripts_repo=$HOME/kz-scripts
 declare uploads_repo=$HOME/kz-uploads
 declare uploads_repo_distdir=$uploads_repo/dist
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 
 ###############################################################################

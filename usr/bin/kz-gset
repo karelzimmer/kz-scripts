@@ -8,12 +8,13 @@
 ###############################################################################
 
 set -o errexit
+declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-gset'
@@ -50,11 +51,6 @@ $options_help"
 declare options_short+='a:b:d:lrf:x:'
 declare options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
 addappfolder:,delappfolder:"
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 declare appfolder=''
 declare config_a=''

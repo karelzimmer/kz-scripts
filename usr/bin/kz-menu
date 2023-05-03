@@ -8,12 +8,13 @@
 ###############################################################################
 
 set -o errexit
+declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
 declare program_name='kz-menu'
@@ -80,11 +81,6 @@ declare -a menu2_commands=(
                 "$(gettext 'Previous menu')"
             )
 declare menu2_lines=${#menu2_actions[@]}
-
-
-###############################################################################
-# Variables
-###############################################################################
 
 declare execute_command=false
 declare -a rows=()
