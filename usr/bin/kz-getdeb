@@ -86,14 +86,17 @@ function check_input {
         case $1 in
             -h|--help)
                 process_option_help
+                cleanup
                 exit 0
                 ;;
             -u|--usage)
                 process_option_usage
+                cleanup
                 exit 0
                 ;;
             -v|--version)
                 process_option_version
+                cleanup
                 exit 0
                 ;;
             --)
@@ -109,6 +112,7 @@ function check_input {
     if [[ -n "$*" ]]; then
         printf  "$display_name: $*: %s\n$usage_line\n" \
                 "$(gettext 'arguments are not allowed')"
+        cleanup
         exit 1
     fi
 }
@@ -211,6 +215,14 @@ function check_dpkgd_snapd {
 }
 
 
+function cleanup {
+    # Do not delete kz and kz.1 due to scripts and manuals with the same name.
+    rm --force kz.{2..99}
+    # But do delete them if in HOME, as described in Checklist installation.
+    rm --force "$HOME"/kz "$HOME"kz.1
+}
+
+
 function term_script {
     local title
     title=$(gettext 'Finished')
@@ -232,11 +244,7 @@ Type 'exit' to close this window.")
                         --infobox   "$text"                         \
                         16 47
 
-    # Do not delete kz and kz.1 due to scripts and manuals with the same name.
-    rm --force kz.{2..99}
-    # But do delete them if in HOME, as described in Checklist installation.
-    rm --force "$HOME"/kz "$HOME"kz.1
-
+    cleanup
     exit 0
 }
 
