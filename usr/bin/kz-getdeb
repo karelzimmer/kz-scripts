@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-export TEXTDOMAIN=kz TEXTDOMAINDIR=/usr/share/locale
-declare program_path
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+# Export two gettext environment variables.
+declare -x TEXTDOMAIN=kz
+declare -x TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
 
 
@@ -133,6 +133,9 @@ $(eval_gettext "Type '\$display_name --help' for more information.")"
 function process_option_version {
     local build_id='1970-01-01T00:00:00'
     local program_year='1970'
+    local program_path
+    program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=$(cat /usr/local/etc/kz-build-id)
