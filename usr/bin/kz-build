@@ -301,7 +301,7 @@ function build_deb {
             "${deb_targets[man_nl]}"/*  |& $logcmd
 
     # Capture build id Debian package (ISO 8601 date-time).
-    build_id=$(date '+%Y-%m-%d %H:%M:%S')
+    build_id=$(date '+%Y-%m-%dT%H:%M:%S')
     printf '%s' "$build_id" > "${deb_targets[build]}/$program_name"-id
 
     # Create Debian package in kz-uploads.
