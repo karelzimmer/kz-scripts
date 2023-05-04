@@ -107,6 +107,7 @@ function check_script {
     # Script.
     if ! "$scriptname" --version |& $logcmd; then
         error "$(eval_gettext "Script \$scriptname returned an error.")"
+        maxrc=$error
     fi
 
     # Desktop file.
