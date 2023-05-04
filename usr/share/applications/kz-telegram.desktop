@@ -1,0 +1,15 @@
+###############################################################################
+# Desktop configuration file for Telegram in Google Chrome.
+#
+# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Telegram Web App
+Comment=Private messaging app
+Categories=Kz-scripts;
+Exec=google-chrome https://web.telegram.org
+Icon=kz-whatsapp
+X-GNOME-Gettext-Domain=kz

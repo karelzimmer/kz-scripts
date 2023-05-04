@@ -34,6 +34,7 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 #1 telegram
 ## Private messaging app
+## Via webbrowser: https://web.telegram.org
 sudo snap install telegram-desktop
 #2 sudo snap remove telegram-desktop
 
@@ -79,6 +80,7 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 
 #1 whatsapp
 ## Private messaging app
+## Via webbrowser: https://web.whatsapp.com
 sudo snap install whatsie
 #2 sudo snap remove whatsie
 
