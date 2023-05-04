@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-04 13:54+0200\n"
+"POT-Creation-Date: 2023-05-04 14:56+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1124,7 +1124,7 @@ msgid "Set up apps and change user settings"
 msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
 msgid "Teams Web App"
-msgstr "Teams Web App"
+msgstr "Teams-webapp"
 
 msgid "Communication and collaboration platform"
 msgstr "Communicatie- en samenwerkingsplatform"
@@ -1139,7 +1139,16 @@ msgid "Webmin"
 msgstr "Webmin"
 
 msgid "TeamViewer Web App"
-msgstr "TeamViewer Web App"
+msgstr "TeamViewer-webapp"
 
 msgid "Zoom Web App"
-msgstr "Zoom Web App"
+msgstr "Zoom-webapp"
+
+msgid "WhatsApp Web App"
+msgstr "WhatsApp-webapp"
+
+msgid "Private messaging app"
+msgstr "App voor privéberichten"
+
+msgid "Telegram Web App"
+msgstr "Telegram-webapp"

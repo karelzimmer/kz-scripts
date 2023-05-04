@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-04 13:54+0200\n"
+"POT-Creation-Date: 2023-05-04 14:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -966,4 +966,13 @@ msgid "TeamViewer Web App"
 msgstr ""
 
 msgid "Zoom Web App"
+msgstr ""
+
+msgid "WhatsApp Web App"
+msgstr ""
+
+msgid "Private messaging app"
+msgstr ""
+
+msgid "Telegram Web App"
 msgstr ""
