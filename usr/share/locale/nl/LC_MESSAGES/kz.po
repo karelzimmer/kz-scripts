@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-28 08:50+0200\n"
+"POT-Creation-Date: 2023-05-04 13:54+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1137,3 +1137,9 @@ msgstr "Start VirtualBox VM hugowin732"
 
 msgid "Webmin"
 msgstr "Webmin"
+
+msgid "TeamViewer Web App"
+msgstr "TeamViewer Web App"
+
+msgid "Zoom Web App"
+msgstr "Zoom Web App"

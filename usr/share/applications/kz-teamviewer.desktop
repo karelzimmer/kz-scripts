@@ -1,15 +1,15 @@
 ###############################################################################
-# Desktop configuration file for Microsoft Teams in Google Chrome.
+# Desktop configuration file for TeamViewer in Google Chrome.
 #
-# Written in 2022 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 [Desktop Entry]
 Type=Application
-Name=Teams Web App
+Name=TeamViewer Web App
 Comment=Communication and collaboration platform
 Categories=Kz-scripts;
-Exec=google-chrome https://teams.microsoft.com
-Icon=kz-teams
+Exec=google-chrome https://web.teamviewer.com
+Icon=kz-teamviewer
 X-GNOME-Gettext-Domain=kz
