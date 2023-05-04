@@ -12,7 +12,6 @@
 ###############################################################################
 
 set -o errexit
-declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
@@ -21,15 +20,12 @@ source "$program_path"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare program_name='kz-wifi'
-declare program_desc
+program_name='kz-wifi'
 program_desc=$(gettext 'Show WiFi information')
-declare display_name=${program_name/kz-/kz }
+display_name=${program_name/kz-/kz }
 
-declare usage
 usage="$(eval_gettext "Usage: \$display_name \$options_usage") \
 [-g|--gui]"
-declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
@@ -37,10 +33,10 @@ $program_desc.
 $(gettext 'Options:')
 $options_help
   -g, --gui      $(gettext 'starts in graphics mode')"
-declare options_short+='g'
-declare options_long+=',gui'
+options_short+='g'
+options_long+=',gui'
 
-declare option_gui=false
+option_gui=false
 
 
 ###############################################################################

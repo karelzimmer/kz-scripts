@@ -12,7 +12,6 @@
 ###############################################################################
 
 set -o errexit
-declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
@@ -21,16 +20,13 @@ source "$program_path"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare program_name='kz-backup'
-declare program_desc
+program_name='kz-backup'
 program_desc=$(gettext 'Make backup')
-declare display_name=${program_name/kz-/kz }
+display_name=${program_name/kz-/kz }
 
-declare usage
 usage="$(eval_gettext "Usage: \$display_name [-d|--dry-run] \
 [-g|--gui] [-t|--target=DIRECTORY]")
                  $options_usage"
-declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
@@ -41,17 +37,17 @@ $(gettext 'Options:')
 $(gettext '  -t, --target=DIRECTORY
                  put backup in DIRECTORY')
 $options_help"
-declare options_short+='dgt:'
-declare options_long+=',dry-run,gui,target:'
+options_short+='dgt:'
+options_long+=',dry-run,gui,target:'
 
-declare dry_run_option=''
-declare medium=''
-declare option_dry_run=false
-declare option_gui=false
-declare option_target=false
-declare target_argument=''
-declare target_medium=''
-declare target=''
+dry_run_option=''
+medium=''
+option_dry_run=false
+option_gui=false
+option_target=false
+target_argument=''
+target_medium=''
+target=''
 
 
 ###############################################################################

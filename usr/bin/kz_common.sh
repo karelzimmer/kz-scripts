@@ -10,9 +10,8 @@
 # Import
 ###############################################################################
 
-# Export the two gettext environment variables.
-declare -x TEXTDOMAIN=kz
-declare -x TEXTDOMAINDIR=/usr/share/locale
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
 
 
@@ -20,46 +19,43 @@ source /usr/bin/gettext.sh
 # Variables
 ###############################################################################
 
-declare module_name='kz_common.sh'
-declare module_desc
+module_name='kz_common.sh'
 # shellcheck disable=SC2034
 module_desc=$(gettext 'Common module for shell scripts')
 
-declare -i ok=0
-declare -i error=1
+ok=0
+error=1
 
 
 # shellcheck disable=SC2034
-declare options_short='huv'
+options_short='huv'
 # shellcheck disable=SC2034
-declare options_long='help,usage,version'
+options_long='help,usage,version'
 # shellcheck disable=SC2034
-declare options_usage='[-h|--help] [-u|--usage] [-v|--version]'
-declare options_help
+options_usage='[-h|--help] [-u|--usage] [-v|--version]'
 # shellcheck disable=SC2034
 options_help="  -h, --help     $(gettext 'give this help list')
   -u, --usage    $(gettext 'give a short usage message')
   -v, --version  $(gettext 'print program version')"
 
 declare -a cmdline_args=()
-declare less_options=''
-declare logcmd_check=''
-declare logcmd=''
-declare -i maxrc=0
-declare option_gui=false
+less_options=''
+logcmd_check=''
+logcmd=''
+maxrc=0
+option_gui=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-declare program_exec=${0/#./$program_path}
-declare text=''
-declare title=''
-declare usage_line=''
+program_exec=${0/#./$program_path}
+text=''
+title=''
 
 # Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
-declare blue=''
-declare bold=''
-declare green=''
-declare normal=''
-declare red=''
-declare yellow=''
+blue=''
+bold=''
+green=''
+normal=''
+red=''
+yellow=''
 
 
 ###############################################################################

@@ -12,7 +12,6 @@
 ###############################################################################
 
 set -o errexit
-declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
@@ -21,18 +20,15 @@ source "$program_path"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare program_name='kz-setup'
-declare program_desc
+program_name='kz-setup'
 program_desc=$(gettext 'Set up apps')
-declare display_name=${program_name/kz-/kz }
+display_name=${program_name/kz-/kz }
 
-declare usage
 usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
 [-f|--files]
                 [-g|--gui] [-r|--reset] {--server] [-s|--simulate]
                 \$options_usage
                 [APP...] [FILE...]")
-declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...] [APP...] [FILE...]")
 
 $program_desc.
@@ -50,27 +46,27 @@ $options_help
 $(gettext 'Arguments:
   APP            setup APPs
   FILE           process FILEs')"
-declare options_short+='ace:fgrs'
-declare options_long+=',apps,cat,files,gui,reset,server,simulate'
+options_short+='ace:fgrs'
+options_long+=',apps,cat,files,gui,reset,server,simulate'
 
 declare -a app_arguments=()
-declare apps_file=''
-declare argument_app=false
-declare argument_file=false
-declare cmds_file=''
-declare commands_found=false
-declare distro=''
-declare edition=desktop
-declare execute_commands=true
+apps_file=''
+argument_app=false
+argument_file=false
+cmds_file=''
+commands_found=false
+distro=''
+edition=desktop
+execute_commands=true
 declare -a file_arguments=()
 declare -a files_to_process=()
-declare option_apps=false
-declare option_cat=false
-declare option_files=false
-declare option_gui=false
-declare option_reset=false
-declare option_simulate=false
-declare sims_file=''
+option_apps=false
+option_cat=false
+option_files=false
+option_gui=false
+option_reset=false
+option_simulate=false
+sims_file=''
 
 
 ###############################################################################

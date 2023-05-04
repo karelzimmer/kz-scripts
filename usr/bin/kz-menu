@@ -12,7 +12,6 @@
 ###############################################################################
 
 set -o errexit
-declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
@@ -21,15 +20,12 @@ source "$program_path"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare program_name='kz-menu'
-declare program_desc
+program_name='kz-menu'
 program_desc=$(gettext 'Installation menu')
-declare display_name=${program_name/kz-/kz }
+display_name=${program_name/kz-/kz }
 
-declare usage
 usage="$(eval_gettext "Usage: \$display_name [-g|--gui]")
                  $options_usage"
-declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
@@ -37,12 +33,12 @@ $program_desc.
 $(gettext 'Options:')
   -g, --gui      $(gettext 'starts in graphics mode')
 $options_help"
-declare options_short+='g'
-declare options_long+=',gui'
+options_short+='g'
+options_long+=',gui'
 
-declare menu1_title
+menu1_title
 menu1_title=$(gettext 'Installation menu')
-declare menu1_head="                  $menu1_title"
+menu1_head="                  $menu1_title"
 declare -a menu1_actions=(
             [1]="$(gettext 'Preparing installation')"
                 "$(gettext 'Perform installation')"
@@ -59,11 +55,11 @@ declare -a menu1_commands=(
                 "$(gettext 'Used commands')"
                 "$(gettext 'Exit menu')"
             )
-declare menu1_lines=${#menu1_actions[@]}
+menu1_lines=${#menu1_actions[@]}
 
-declare menu2_title
+menu2_title
 menu2_title=$(gettext 'Commands menu')
-declare menu2_head="             $menu2_title"
+menu2_head="             $menu2_title"
 declare -a menu2_actions=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
@@ -84,11 +80,11 @@ declare -a menu2_commands=(
                 'kz setup'
                 "$(gettext 'Previous menu')"
             )
-declare menu2_lines=${#menu2_actions[@]}
+menu2_lines=${#menu2_actions[@]}
 
-declare execute_command=false
+execute_command=false
 declare -a rows=()
-declare option_gui=false
+option_gui=false
 
 
 ###############################################################################

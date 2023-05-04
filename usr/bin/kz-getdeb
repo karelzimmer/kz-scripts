@@ -11,9 +11,8 @@
 # Import
 ###############################################################################
 
-# Export the two gettext environment variables.
-declare -x TEXTDOMAIN=kz
-declare -x TEXTDOMAINDIR=/usr/share/locale
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
 
 
@@ -21,33 +20,27 @@ source /usr/bin/gettext.sh
 # Variables
 ###############################################################################
 
-declare program_name='kz-getdeb'
-declare program_desc
+program_name='kz-getdeb'
 program_desc=$(gettext 'Install kz package')
-declare display_name=${program_name/kz-/kz }
+display_name=${program_name/kz-/kz }
 
-declare options_short='huv'
-declare options_long='help,usage,version'
+options_short='huv'
+options_long='help,usage,version'
 # shellcheck disable=SC2034
 options_usage='[-u|--usage] [-h|--help] [-v|--version]'
-declare usage
 usage=$(eval_gettext "Usage: \$display_name \$options_usage")
 options_help="  -h, --help     $(gettext 'give this help list')
   -u, --usage    $(gettext 'give a short usage message')
   -v, --version  $(gettext 'print program version')"
-declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
 $options_help"
-declare usage_line=''
 usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
 
-declare bold
 bold=$(tput bold)
-declare normal
 normal=$(tput sgr0)
 
 

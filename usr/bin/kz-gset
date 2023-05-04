@@ -12,7 +12,6 @@
 ###############################################################################
 
 set -o errexit
-declare program_path
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 source "$program_path"/kz_common.sh
 
@@ -21,18 +20,15 @@ source "$program_path"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare program_name='kz-gset'
-declare program_desc
+program_name='kz-gset'
 program_desc=$(gettext 'Change GUI')
-declare display_name=${program_name/kz-/kz }
+display_name=${program_name/kz-/kz }
 
-declare usage
 usage="$(eval_gettext "Usage: \$display_name [-a|--addfavaft=FAVORITE] \
 [-b|--addfavbef=FAVORITE]
                [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
                [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]
                \$options_usage")"
-declare help
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
@@ -52,23 +48,23 @@ $(gettext 'Options:
   -x, --delappfolder=APPFOLDER
                  delete APPFOLDER')
 $options_help"
-declare options_short+='a:b:d:lrf:x:'
-declare options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
+options_short+='a:b:d:lrf:x:'
+options_long+=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
 addappfolder:,delappfolder:"
 
-declare appfolder=''
-declare config_a=''
-declare config_b=''
-declare desktopfile=''
-declare favorite_argument=''
-declare folder_argument=''
-declare option_addappfolder=false
-declare option_addfavaft=false
-declare option_addfavbef=false
-declare option_delappfolder=false
-declare option_delfav=false
-declare option_list=false
-declare option_resetfavs=false
+appfolder=''
+config_a=''
+config_b=''
+desktopfile=''
+favorite_argument=''
+folder_argument=''
+option_addappfolder=false
+option_addfavaft=false
+option_addfavbef=false
+option_delappfolder=false
+option_delfav=false
+option_list=false
+option_resetfavs=false
 
 
 ###############################################################################
