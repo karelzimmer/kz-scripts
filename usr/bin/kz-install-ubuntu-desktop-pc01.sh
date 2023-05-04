@@ -50,5 +50,6 @@ sudo ufw enable
 
 #1 zoom
 ## Collaborate
+## Via webbrowser: https://join.zoom.us
 sudo snap install zoom-client
 #2 sudo snap remove zoom-client

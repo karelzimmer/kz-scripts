@@ -34,5 +34,6 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 
 #1 zoom
 ## Collaborate
+## Via webbrowser: https://join.zoom.us
 kz-gset --addfavaft=zoom-client_zoom-client
 #2 kz-gset --delfav=zoom-client_zoom-client
