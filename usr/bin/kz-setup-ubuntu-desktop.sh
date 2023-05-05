@@ -70,8 +70,8 @@ gsettings set org.gnome.shell.extensions.ding show-home false
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
 
-#1 snap
-## Hide folder snap in Home folder
+#1 hide
+## Hide folders in Home folder
 echo 'snap' > "$HOME"/.hidden
 #2 rm --force "$HOME"/.hidden
 
