@@ -1,0 +1,15 @@
+###############################################################################
+# Desktop configuration file for Spotify Web App.
+#
+# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Spotify
+Comment=Spotify Web App
+Exec=google-chrome https://open.spotify.com
+Categories=Kz-scripts;
+Icon=kz-spotify
+X-GNOME-Gettext-Domain=kz
