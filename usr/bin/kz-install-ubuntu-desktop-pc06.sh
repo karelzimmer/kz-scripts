@@ -85,15 +85,6 @@ sudo apt-get install --yes mlocate
 sudo apt-get install --yes nautilus-admin
 #2 sudo apt-get remove --yes nautilus-admin
 
-#1 plex
-## Media player
-## Snap plex-htpc is the media player for the Linux computer connected to the
-## big screen. A Home Theater PC (HTPC) is a computer that acts as a home
-## multimedia center.
-sudo snap install plex-desktop
-#2 sudo snap remove plex-desktop
-
-#1 signal
 #1 signal
 ## Private messaging app
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
