@@ -58,6 +58,7 @@ sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice
 
 #1 skype
 ## Video call
+## Via webbrowser: https://web.skype.com
 sudo snap install skype
 #2 sudo snap remove skype
 

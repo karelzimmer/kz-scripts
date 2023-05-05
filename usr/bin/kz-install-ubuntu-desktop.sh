@@ -52,6 +52,7 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 
 #1 skype
 ## Video call
+## Via webbrowser: https://web.skype.com
 sudo snap install skype
 #2 sudo snap remove skype
 

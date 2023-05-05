@@ -1,0 +1,15 @@
+###############################################################################
+# Desktop configuration file for Skype App.
+#
+# Written in 2023 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
+# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Skype
+Comment=Skype Web App
+Categories=Kz-scripts;
+Exec=google-chrome https://web.skype.com
+Icon=kz-skype
+X-GNOME-Gettext-Domain=kz
