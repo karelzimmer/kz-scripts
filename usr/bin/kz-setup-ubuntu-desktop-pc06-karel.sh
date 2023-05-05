@@ -31,7 +31,7 @@ kz-gset --addfavaft=virt-manager
 #2 kz-gset --delfav=virt-manager
 
 #1 teams
-## Collaborate
+## Collaborate (unofficial)
 kz-gset --addfavaft=teams-for-linux_teams-for-linux
 #2 kz-gset --delfav=teams-for-linux_teams-for-linux
 
