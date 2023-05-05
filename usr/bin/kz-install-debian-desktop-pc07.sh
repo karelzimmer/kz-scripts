@@ -43,9 +43,14 @@ sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
 
 #1 signal
-## Private messaging app (unofficial)
-sudo snap install signal-desktop
-#2 sudo snap remove signal-desktop
+## Private messaging app
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
+wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
+sudo apt-get update
+sudo apt-get install --yes signal-desktop
+#2 sudo apt-get remove --yes signal-desktop
+#2 sudo rm --force /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
+#2 sudo apt-get update
 
 #1 spice-vdagent
 ## Share clipboard between host and guest
