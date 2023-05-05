@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Cockpit
-Comment=Browser-based system management
+Comment=Cockpit Web App
 Categories=Kz-scripts;
 Exec=google-chrome https://localhost:9090
 Icon=kz-cockpit

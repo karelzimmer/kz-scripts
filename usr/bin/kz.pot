@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-04 14:56+0200\n"
+"POT-Creation-Date: 2023-05-05 12:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -929,7 +929,43 @@ msgstr ""
 msgid "Cockpit"
 msgstr ""
 
-msgid "Browser-based system management"
+msgid "Cockpit Web App"
+msgstr ""
+
+msgid "Skype"
+msgstr ""
+
+msgid "Skype Web App"
+msgstr ""
+
+msgid "Teams"
+msgstr ""
+
+msgid "Teams Web App"
+msgstr ""
+
+msgid "Telegram"
+msgstr ""
+
+msgid "Telegram Web App"
+msgstr ""
+
+msgid "Webmin"
+msgstr ""
+
+msgid "Webmin Web App"
+msgstr ""
+
+msgid "WhatsApp"
+msgstr ""
+
+msgid "WhatsApp Web App"
+msgstr ""
+
+msgid "Zoom"
+msgstr ""
+
+msgid "Zoom Web App"
 msgstr ""
 
 msgid "Install apps and changes system settings"
@@ -947,32 +983,8 @@ msgstr ""
 msgid "Set up apps and change user settings"
 msgstr ""
 
-msgid "Teams Web App"
-msgstr ""
-
-msgid "Communication and collaboration platform"
-msgstr ""
-
 msgid "Start HugoWin732"
 msgstr ""
 
 msgid "Start VirtualBox VM hugowin732"
-msgstr ""
-
-msgid "Webmin"
-msgstr ""
-
-msgid "TeamViewer Web App"
-msgstr ""
-
-msgid "Zoom Web App"
-msgstr ""
-
-msgid "WhatsApp Web App"
-msgstr ""
-
-msgid "Private messaging app"
-msgstr ""
-
-msgid "Telegram Web App"
 msgstr ""

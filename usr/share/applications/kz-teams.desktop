@@ -7,8 +7,8 @@
 
 [Desktop Entry]
 Type=Application
-Name=Teams Web App
-Comment=Communication and collaboration platform
+Name=Teams
+Comment=Teams Web App
 Categories=Kz-scripts;
 Exec=google-chrome https://teams.microsoft.com
 Icon=kz-teams

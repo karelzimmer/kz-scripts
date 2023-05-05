@@ -32,12 +32,6 @@ sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-#1 telegram
-## Private messaging app
-## Via webbrowser: https://web.telegram.org
-sudo snap install telegram-desktop
-#2 sudo snap remove telegram-desktop
-
 #1 virtualbox
 ## Virtualization
 ## If installation hangs, the computer has UEFI Secure Boot, see the log:
@@ -77,12 +71,6 @@ echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debcon
 ## VirtualBox Guest Additions ISO are in /usr/share/virtualbox/
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 #2 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
-
-#1 whatsapp
-## Private messaging app (unofficial)
-## Via webbrowser: https://web.whatsapp.com
-sudo snap install whatsie
-#2 sudo snap remove whatsie
 
 #1 youtube-downloader
 ## Download videos

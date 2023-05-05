@@ -56,12 +56,6 @@ sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #2 sudo apt-get remove --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
-#1 skype
-## Video call
-## Via webbrowser: https://web.skype.com
-sudo snap install skype
-#2 sudo snap remove skype
-
 #1 spotify
 ## Music player
 sudo snap install spotify

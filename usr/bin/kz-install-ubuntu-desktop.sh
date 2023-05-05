@@ -50,12 +50,6 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt autoremove --yes
 
-#1 skype
-## Video call
-## Via webbrowser: https://web.skype.com
-sudo snap install skype
-#2 sudo snap remove skype
-
 #1 spotify
 ## Music player
 sudo snap install spotify

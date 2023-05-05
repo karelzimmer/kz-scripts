@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Webmin
-Comment=Browser-based system management
+Comment=Webmin Web App
 Exec=google-chrome https://localhost:10000
 Categories=Kz-scripts;
 Icon=kz-webmin

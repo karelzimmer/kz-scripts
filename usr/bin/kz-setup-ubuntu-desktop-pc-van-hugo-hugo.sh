@@ -13,8 +13,8 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspe
 
 #1 telegram
 ## Private messaging app (unofficial)
-kz-gset --addfavaft=telegram-desktop_telegram-desktop
-#2 kz-gset --delfav=telegram-desktop_telegram-desktop
+kz-gset --addfavaft=kz-telegram
+#2 kz-gset --delfav=kz-telegram
 
 #1-virtualbox
 ## Virtualization
@@ -30,7 +30,6 @@ kz-gset --addfavaft=kz-vm-hugowin732
 #2 kz-gset --delfav=kz-vm-hugowin732
 
 #1 whatsapp
-## Private messaging app (unofficial)
-## Via webbrowser: https://web.whatsapp.com
-kz-gset --addfavaft=whatsie_whatsie.desktop
-#2 kz-gset --delfav=whatsie_whatsie.desktop
+## Private messaging app
+kz-gset --addfavaft=kz-whatsapp
+#2 kz-gset --delfav=kz-whatsapp

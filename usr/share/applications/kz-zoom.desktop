@@ -7,8 +7,8 @@
 
 [Desktop Entry]
 Type=Application
-Name=Zoom Web App
-Comment=Communication and collaboration platform
+Name=Zoom
+Comment=Zoom Web App
 Categories=Kz-scripts;
 Exec=google-chrome https://join.zoom.us
 Icon=kz-zoom

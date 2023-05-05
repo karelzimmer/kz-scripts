@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-04 14:56+0200\n"
+"POT-Creation-Date: 2023-05-05 12:56+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -537,10 +537,10 @@ msgstr ""
 "  -l, --list     toon favorieten en app-mappen\n"
 "  -r, --resetfavs\n"
 "                 reset favorieten\n"
-"  -f, --addappfolder=APPFMAP\n"
-"                 voeg APPFMAP toe\n"
-"  -x, --delappfolder=APPFMAP\n"
-"                 verwijder APPFMAP"
+"  -f, --addappfolder=APPMAP\n"
+"                 voeg APPMAP toe\n"
+"  -x, --delappfolder=APPMAP\n"
+"                 verwijder APPMAP"
 
 msgid "Now make the change in the graphical workspace."
 msgstr "Voer nu de wijziging uit in de grafische werkomgeving."
@@ -1105,8 +1105,44 @@ msgstr "Maak een reservekopie (back-up) van de Persoonlijke map"
 msgid "Cockpit"
 msgstr "Cockpit"
 
-msgid "Browser-based system management"
-msgstr "Browsergebaseerd beheer"
+msgid "Cockpit Web App"
+msgstr "Cockpit-webapp"
+
+msgid "Skype"
+msgstr "Skype"
+
+msgid "Skype Web App"
+msgstr "Skype-webapp"
+
+msgid "Teams"
+msgstr "Teams"
+
+msgid "Teams Web App"
+msgstr "Teams-webapp"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Telegram Web App"
+msgstr "Telegram-webapp"
+
+msgid "Webmin"
+msgstr "Webmin"
+
+msgid "Webmin Web App"
+msgstr "Webmin-webapp"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "WhatsApp Web App"
+msgstr "WhatsApp-webapp"
+
+msgid "Zoom"
+msgstr "Zoom"
+
+msgid "Zoom Web App"
+msgstr "Zoom-webapp"
 
 msgid "Install apps and changes system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"
@@ -1123,32 +1159,8 @@ msgstr "Zet reservekopie (back-up) van de Persoonlijke map terug"
 msgid "Set up apps and change user settings"
 msgstr "Stel apps in en wijzig gebruikersinstellingen"
 
-msgid "Teams Web App"
-msgstr "Teams-webapp"
-
-msgid "Communication and collaboration platform"
-msgstr "Communicatie- en samenwerkingsplatform"
-
 msgid "Start HugoWin732"
 msgstr "HugoWin732 starten"
 
 msgid "Start VirtualBox VM hugowin732"
 msgstr "Start VirtualBox VM hugowin732"
-
-msgid "Webmin"
-msgstr "Webmin"
-
-msgid "TeamViewer Web App"
-msgstr "TeamViewer-webapp"
-
-msgid "Zoom Web App"
-msgstr "Zoom-webapp"
-
-msgid "WhatsApp Web App"
-msgstr "WhatsApp-webapp"
-
-msgid "Private messaging app"
-msgstr "App voor privéberichten"
-
-msgid "Telegram Web App"
-msgstr "Telegram-webapp"

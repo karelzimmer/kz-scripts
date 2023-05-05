@@ -7,8 +7,8 @@
 
 [Desktop Entry]
 Type=Application
-Name=WhatsApp Web App
-Comment=Private messaging app
+Name=WhatsApp
+Comment=WhatsApp Web App
 Categories=Kz-scripts;
 Exec=google-chrome https://web.whatsapp.com
 Icon=kz-whatsapp

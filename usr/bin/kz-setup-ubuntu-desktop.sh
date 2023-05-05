@@ -79,8 +79,8 @@ echo 'snap' > "$HOME"/.hidden
 
 #1 skype
 ## Video call
-kz-gset --addfavaft=skype_skypeforlinux
-#2 kz-gset --delfav=skype_skypeforlinux
+kz-gset --addfavaft=skype
+#2 kz-gset --delfav=skype
 
 #1 spotify
 ## Music player
