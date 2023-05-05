@@ -7,22 +7,18 @@
 ###############################################################################
 
 #1 bleachbit
-## Delete unnecessary files
 sudo apt-get install --yes bleachbit
 #2 sudo apt-get remove --yes bleachbit
 
 #1 calibre
-## Ebook manager
 sudo apt-get install --yes calibre
 #2 sudo apt-get remove --yes calibre
 
 #1 clamav
-## Antivirus
 sudo apt-get install --yes clamtk-gnome
 #2 sudo apt-get remove --yes clamtk-gnome
 
 #1 gimp
-## Image manipulation program
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 #2 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
@@ -33,7 +29,6 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 #2 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 #1 virtualbox
-## Virtualization
 ## If installation hangs, the computer has UEFI Secure Boot, see the log:
 ## ----------------------------------------------------------------------------
 ## Configuring Secure Boot
@@ -73,6 +68,5 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 #2 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 #1 youtube-downloader
-## Download videos
 sudo apt-get install --yes youtubedl-gui
 #2 sudo apt-get remove --yes youtubedl-gui

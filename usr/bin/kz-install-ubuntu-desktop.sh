@@ -16,14 +16,13 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 #2 sudo systemctl enable --now apport.service
 
 #1-force-x11
-## UseX 11 instead of Wayland
+## Use X 11 instead of Wayland
 ## With wayland issues with video playback and TeamViewer
 ## To check execute: echo $XDG_SESSION_TYPE (should output 'x11')
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 #2 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 #1 google-chrome
-## Webbrowser
 ## Extensions and apps are automatically installed with /etc/opt/chrome/policies/managed/kz.json from "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
@@ -39,25 +38,21 @@ sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get update
 
 #1 libreoffice
-## Office suite
 sudo apt-get install --yes aspell-nl libreoffice
 #2 sudo apt-get remove --yes aspell-nl libreoffice
 
 #1-restricted-addons
-## Non-free packages
 ## Geen ubuntu-restricted-extras i.v.m. onbetrouwbare installatie van ttf-mscorefonts-installer, wel libavcodec-extra uit dat metapakket.
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt autoremove --yes
 
 #1 spotify
-## Music player
 sudo snap install spotify
 #2 sudo snap remove spotify
 
 #1 teamviewer
-## Remote control
-## Via webbrowser: https://web.teamviewer.com
+## Web App: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update

@@ -20,12 +20,10 @@ sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/'
 #2 sudo sed --in-place --expression='s/^#iface eth0 net dhcp$/iface eth0 net dhcp/' /etc/network/interfaces.d/setup
 
 #1 gnome-gmail
-## Gmail as an email application in GNOME
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
 
 #1 kvm
-## Virtualization
 ## Images are in /var/lib/libvirt/images/
 ## Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
@@ -38,12 +36,10 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 #2 sudo delgroup libvirtd
 
 #1 locate
-## Find files quickly by name
 sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
 
 #1 signal
-## Private messaging app
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
@@ -53,17 +49,14 @@ sudo apt-get install --yes signal-desktop
 #2 sudo apt-get update
 
 #1 spice-vdagent
-## Share clipboard between host and guest
 sudo apt-get install --yes spice-vdagent
 #2 sudo apt-get remove --yes spice-vdagent
 
 #1 vlc
-## Media player
 sudo snap install vlc
 #2 sudo snap remove vlc
 
 #1 webmin
-## Browser-based management
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 wget --output-document=- 'http://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update

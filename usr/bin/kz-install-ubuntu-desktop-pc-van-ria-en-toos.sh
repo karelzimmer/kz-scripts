@@ -7,11 +7,10 @@
 ###############################################################################
 
 #1 citrix
-## Teleworking
+## Aka Citrix Workspace app, Citrix Receiver, and ICA Client.
 ## Dependency since Ubuntu 22.04.
 wget --output-document=/tmp/libidn11.deb 'https://karelzimmer.nl/assets/citrix/libidn11_1.33-3_amd64.deb'
 sudo apt-get install --yes /tmp/libidn11.deb
-## Aka Citrix Workspace app, Citrix Receiver, ICA Client.
 ## This old version because a newer one doesn't work for Toos' work.
 wget --output-document=/tmp/icaclient.deb 'https://karelzimmer.nl/assets/citrix/icaclient_20.04.0.21_amd64.deb'
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes /tmp/icaclient.deb

@@ -7,17 +7,14 @@
 ###############################################################################
 
 #1-gnome
-## Desktop environment
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 #2 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
 #1 telegram
-## Private messaging app (unofficial)
 kz-gset --addfavaft=kz-telegram
 #2 kz-gset --delfav=kz-telegram
 
 #1-virtualbox
-## Virtualization
 kz-gset --addfavaft=virtualbox
 cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
 chmod u+x "$HOME"/kz-vm-hugowin732.sh
@@ -30,6 +27,5 @@ kz-gset --addfavaft=kz-vm-hugowin732
 #2 kz-gset --delfav=kz-vm-hugowin732
 
 #1 whatsapp
-## Private messaging app
 kz-gset --addfavaft=kz-whatsapp
 #2 kz-gset --delfav=kz-whatsapp

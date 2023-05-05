@@ -7,7 +7,6 @@
 ###############################################################################
 
 #1-gnome
-## Desktop environment
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
@@ -16,12 +15,10 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type not
 #2 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
 #1 kvm
-## Virtualization
 kz-gset --addfavaft=virt-manager
 #2 kz-gset --delfav=virt-manager
 
 #1 terminal
-## Terminal
 kz-gset --addfavbef=org.gnome.Terminal
 ## Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
@@ -33,7 +30,6 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #2 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #1 vscode
-## Editor
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
@@ -45,8 +41,7 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 #2 kz-gset --delfav=code_code
 
 #1 webmin
-## Browser-based management
-## https://localhost:10000
+## Web App: https://localhost:10000
 cp /usr/share/applications/kz-webmin.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-webmin.desktop
 kz-gset --addfavaft=kz-webmin

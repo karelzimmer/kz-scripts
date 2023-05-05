@@ -7,12 +7,10 @@
 ###############################################################################
 
 #1-dashtodock
-## Favorites bar
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 #2 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
 #1 gnome
-## Desktop environment
 kz-gset --addappfolder='Kz-scripts'
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -66,7 +64,6 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 #2 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #1 google-chrome
-## Webbrowser
 kz-gset --addfavbef=google-chrome
 #2 kz-gset --delfav=google-chrome
 
@@ -76,16 +73,13 @@ echo 'snap' > "$HOME"/.hidden
 #2 rm --force "$HOME"/.hidden
 
 #1 skype
-## Video call
 kz-gset --addfavaft=skype
 #2 kz-gset --delfav=skype
 
 #1 spotify
-## Music player
 kz-gset --addfavaft=spotify_spotify
 #2 kz-gset --delfav=spotify_spotify
 
 #1-start-install
-## Remove starter start installation
 kz-gset --delfav=install-debian
 #2 kz-gset --addfavbef=install-debian

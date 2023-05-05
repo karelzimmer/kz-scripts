@@ -7,6 +7,5 @@
 ###############################################################################
 
 #1 citrix
-## Teleworking
-## Aka Citrix Workspace app, Citrix Receiver, ICA Client
+## Aka Citrix Workspace app, Citrix Receiver, and ICA Client
 xdg-mime default wfica.desktop application/x-ica

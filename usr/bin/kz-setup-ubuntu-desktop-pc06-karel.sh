@@ -7,8 +7,7 @@
 ###############################################################################
 
 #1 cockpit
-## Browser-based management
-## https://localhost:9090
+## Web App: https://localhost:9090
 cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
 sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
 kz-gset --addfavaft=kz-cockpit
@@ -17,7 +16,6 @@ kz-gset --addfavaft=kz-cockpit
 
 
 #1-gnome
-## Desktop environment
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
@@ -26,17 +24,14 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 
 #1 kvm
-## Virtualization
 kz-gset --addfavaft=virt-manager
 #2 kz-gset --delfav=virt-manager
 
 #1 teams
-## Collaborate
 kz-gset --addfavaft=kz-teams
 #2 kz-gset --delfav=kz-teams
 
 #1 terminal
-## Terminal
 kz-gset --addfavbef=org.gnome.Terminal
 ## Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
@@ -45,7 +40,6 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 #2 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #1 vscode
-## Editor
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file

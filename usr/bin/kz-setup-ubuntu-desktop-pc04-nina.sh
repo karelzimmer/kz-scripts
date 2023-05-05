@@ -7,11 +7,9 @@
 ###############################################################################
 
 #1 calibre
-## Ebook manager
 kz-gset --addfavaft=calibre-gui
 #2 kz-gset --delfav=calibre-gui
 
 #1 libreoffice-calc
-## LibreOffice spreadsheet
 kz-gset --addfavaft=libreoffice-calc
 #2 kz-gset --delfav=libreoffice-calc
