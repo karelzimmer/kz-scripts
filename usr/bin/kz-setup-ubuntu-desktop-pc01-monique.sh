@@ -11,6 +11,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 #2 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 
 #1 zoom
-kz-gset --addfavaft=zoom-client_zoom-client
-#2 kz-gset --delfav=zoom-client_zoom-client
+kz-gset --addfavaft=kz-zoom
+#2 kz-gset --delfav=kz-zoom
 
