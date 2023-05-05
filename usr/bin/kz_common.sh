@@ -114,11 +114,11 @@ function check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
-            log "restarted (pkexec $program_exec ${cmdline_args[*]})"
+            log "restart (pkexec $program_exec ${cmdline_args[*]})"
             pkexec "$program_exec" "${cmdline_args[@]}" || rc=$?
             exit $rc
         else
-            log "restarted (exec sudo $program_exec ${cmdline_args[*]})"
+            log "restart (exec sudo $program_exec ${cmdline_args[*]})"
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi
     fi
