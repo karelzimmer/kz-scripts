@@ -79,7 +79,7 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 #2 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 #1 whatsapp
-## Private messaging app
+## Private messaging app (unofficial)
 ## Via webbrowser: https://web.whatsapp.com
 sudo snap install whatsie
 #2 sudo snap remove whatsie

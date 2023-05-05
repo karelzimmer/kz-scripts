@@ -49,7 +49,7 @@ sudo ufw enable
 #2 sudo ufw disable
 
 #1 zoom
-## Collaborate
+## Collaborate (unofficial)
 ## Via webbrowser: https://join.zoom.us
 sudo snap install zoom-client
 #2 sudo snap remove zoom-client

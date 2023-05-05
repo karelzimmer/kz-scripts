@@ -43,7 +43,7 @@ sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
 
 #1 signal
-## Private messaging app
+## Private messaging app (unofficial)
 sudo snap install signal-desktop
 #2 sudo snap remove signal-desktop
 

@@ -115,7 +115,7 @@ sudo apt-get install --yes gnome-sushi
 #2 sudo apt-get remove --yes gnome-sushi
 
 #1 teams
-## Collaborate
+## Collaborate (unofficial)
 ## Via webbrowser: https://teams.microsoft.com
 sudo snap install teams-for-linux
 #2 sudo snap remove teams-for-linux
