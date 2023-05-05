@@ -77,8 +77,8 @@ kz-gset --addfavaft=kz-skype
 #2 kz-gset --delfav=kz-skype
 
 #1 spotify
-kz-gset --addfavaft=spotify_spotify
-#2 kz-gset --delfav=spotify_spotify
+kz-gset --addfavaft=kz-spotify
+#2 kz-gset --delfav=kz-spotify
 
 #1-start-install
 kz-gset --delfav=install-debian

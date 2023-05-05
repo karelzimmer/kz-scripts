@@ -49,10 +49,6 @@ sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 #2 sudo apt-get remove --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
-#1 spotify
-sudo snap install spotify
-#2 sudo snap remove spotify
-
 #1 teamviewer
 ## Web App: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list

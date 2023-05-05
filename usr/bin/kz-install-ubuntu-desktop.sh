@@ -47,10 +47,6 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
 #2 sudo apt autoremove --yes
 
-#1 spotify
-sudo snap install spotify
-#2 sudo snap remove spotify
-
 #1 teamviewer
 ## Web App: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
