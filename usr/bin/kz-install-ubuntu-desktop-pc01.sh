@@ -42,8 +42,3 @@ sudo apt-get install --yes gufw
 sudo ufw allow ssh
 sudo ufw enable
 #2 sudo ufw disable
-
-#1 zoom
-## Web App: https://join.zoom.us
-sudo snap install zoom-client
-#2 sudo snap remove zoom-client

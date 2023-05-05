@@ -73,8 +73,8 @@ echo 'snap' > "$HOME"/.hidden
 #2 rm --force "$HOME"/.hidden
 
 #1 skype
-kz-gset --addfavaft=skype
-#2 kz-gset --delfav=skype
+kz-gset --addfavaft=kz-skype
+#2 kz-gset --delfav=kz-skype
 
 #1 spotify
 kz-gset --addfavaft=spotify_spotify
