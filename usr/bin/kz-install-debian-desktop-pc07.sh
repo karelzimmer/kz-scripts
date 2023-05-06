@@ -40,6 +40,7 @@ sudo apt-get install --yes mlocate
 #2 sudo apt-get remove --yes mlocate
 
 #1 signal
+## Web App: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
@@ -57,6 +58,7 @@ sudo snap install vlc
 #2 sudo snap remove vlc
 
 #1 webmin
+## Web App: https://localhost:10000
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] http://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 wget --output-document=- 'http://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update

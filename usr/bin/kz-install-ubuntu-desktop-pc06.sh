@@ -26,6 +26,7 @@ sudo chmod +x /etc/rc.local
 #2 sudo chmod -x /etc/rc.local
 
 #1 cockpit
+## Web App: https://localhost:9090
 sudo apt-get install --yes cockpit cockpit-pcp
 #2 sudo apt-get remove --yes cockpit
 
@@ -74,6 +75,7 @@ sudo apt-get install --yes nautilus-admin
 #2 sudo apt-get remove --yes nautilus-admin
 
 #1 signal
+## Web App: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
