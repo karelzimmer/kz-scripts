@@ -6,7 +6,7 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-add-repos
+#1-repos
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-get update

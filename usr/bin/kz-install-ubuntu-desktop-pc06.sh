@@ -6,14 +6,6 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-add-hosts
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
-echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
-echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
-#2 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-#2 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
-
 #1 ansible
 sudo apt-get install --yes ansible
 #2 sudo apt-get remove --yes ansible
@@ -39,7 +31,7 @@ sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
 sudo passwd --delete gast
 #2 sudo userdel --remove gast
 
-#1 gdm
+#1 monitor
 ## Dual monitor login screen
 if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
@@ -56,6 +48,14 @@ sudo apt-get install --yes gnome-gmail
 #1 gnome-tweaks
 sudo apt-get install --yes gnome-tweaks
 #2 sudo apt-get remove --yes gnome-tweaks
+
+#1-hosts
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
+echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
 
 #1 kvm
 ## Images are in /var/lib/libvirt/images/

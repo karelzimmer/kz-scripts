@@ -6,14 +6,6 @@
 # Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
-#1-add-hosts
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
-echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
-echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
-#2 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-#2 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
-
 #1-bluetooth
 ## Disable internal bluetooth adapter
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
@@ -27,6 +19,14 @@ sudo passwd --delete gast
 #1 gnome-gmail
 sudo apt-get install --yes gnome-gmail
 #2 sudo apt-get remove --yes gnome-gmail
+
+#1-hosts
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
+echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+#2 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
 
 #1 ssh
 sudo apt-get install --yes ssh
