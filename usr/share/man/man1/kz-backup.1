@@ -32,7 +32,7 @@ The backup is placed on a mounted USB medium such as a USB external hard disk
 in folder \fBbackup-<computer name>-<user name>\fR, this folder is
 created as needed, for example /media/jan/backupdisk/backup-pc02-jan.
 .sp
-With option \fB-t\fR, \fB--target\fR=\fIDIRECTORY\fR another location can be
+With option \fB-t\fR, \fB--target\fR \fIDIRECTORY\fR another location can be
 specified. For example /tmp instead of /media/jan/backupdisk (unwise because
 /tmp is emptied after a reboot).
 .sp
@@ -69,11 +69,12 @@ With command \fBkz restore\fR the Home folder can be restored.
 .\"
 .\"
 .SH OPTIONS
+Mandatory arguments to long options are mandatory for short options too.
 .TP
 \fB-d\fR, \fB--dry-run\fR
 Perform a test run without making any changes.
 .TP
-\fB-t\fR, \fB--target=\fIDIRECTORY\fR
+\fB-t\fR, \fB--target \fIDIRECTORY\fR
 Place the backup in the \fIDIRECTORY\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
@@ -86,7 +87,7 @@ Show a short description of the available options.
 Display the version, author, and copyright.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in graphics mode (gui=graphical user interface).
+Start in graphics mode (gui graphical user interface).
 .\"
 .\"
 .SH EXIT STATUS
@@ -145,7 +146,7 @@ environment.
 Show files that would otherwise be added and removed in the backup.
 .RE
 .sp
-\fBkz backup --target=smb://fileserver/backups\fR
+\fBkz backup --target smb://fileserver/backups\fR
 .RS
 Back up the Home folder to SMB-share backups on fileserver in the folder
 backup-pc02-jan (this folder will be created as needed).

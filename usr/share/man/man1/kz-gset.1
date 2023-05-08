@@ -30,13 +30,13 @@ kz-gset \- Change GUI.
 - can add an app folder to collect starters.
 .RE
 .sp
-Option \fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR adds application icon
+Option \fB-a\fR, \fB--addfavaft\fR \fIFAVORITE\fR adds application icon
 (favorite) \fIFAVORITE\fR to the end of favorites bar (dash, dock).
 .sp
-Option \fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR adds application icon
+Option \fB-b\fR, \fB--addfavbef\fR \fIFAVORITE\fR adds application icon
 (favorite) \fIFAVORITE\fR to the beginning of favorites bar (dash, dock).
 .sp
-Option \fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR removes application icon
+Option \fB-d\fR, \fB--delfav\fR \fIFAVORITE\fR removes application icon
 (favorite) \fIFAVORITE\fR from favorites bar (dash, dock).
 .sp
 If an application icon (favorite) of \fIFAVORITE\fR already exists, it will not
@@ -55,10 +55,10 @@ displayed.
 With option \fB-r\fR, \fB--resetfavs\fR the favorites bar (dash, dock) is reset
 with default favourites.
 .sp
-With option \fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR appfolder
+With option \fB-f\fR, \fB--addappfolder\fR \fIAPPFOLDER\fR appfolder
 \fIAPPFOLDER\fR is added.
 .sp
-Option \fB-x\fR, \fB--delfavappfolder\fR=\fIAPPFOLDER\fR removes appfolder
+Option \fB-x\fR, \fB--delfavappfolder\fR \fIAPPFOLDER\fR removes appfolder
 \fIAPPFOLDER\fR.
 .sp
 If no options are specified, \fBkz gset\fR shows changes in the configuration
@@ -100,23 +100,24 @@ the Terminal with :
 .\"
 .\"
 .SH OPTIONS
+Mandatory arguments to long options are mandatory for short options too.
 .TP
-\fB-a\fR, \fB--addfavaft\fR=\fIFAVORITE\fR
+\fB-a\fR, \fB--addfavaft\fR \fIFAVORITE\fR
 Add application icon (favorite) \fIFAVORITE\fR to the back of the favorites bar
 (dash, dock).
 .TP
-\fB-b\fR, \fB--addfavbef\fR=\fIFAVORITE\fR
+\fB-b\fR, \fB--addfavbef\fR \fIFAVORITE\fR
 Add application icon (favorite) \fIFAVORITE\fR in front of the favorites bar
 (dash, dock).
 .TP
-\fB-d\fR, \fB--delfav\fR=\fIFAVORITE\fR
+\fB-d\fR, \fB--delfav\fR \fIFAVORITE\fR
 Remove application icon (favorite) \fIFAVORITE\fR from the favorites bar (dash,
 dock).
 .TP
-\fB-f\fR, \fB--addappfolder\fR=\fIAPPFOLDER\fR
+\fB-f\fR, \fB--addappfolder\fR \fIAPPFOLDER\fR
 Add app folder \fIAPPFOLDER\fR.
 .TP
-\fB-x\fR, \fB--deleappfolder\fR=\fIAPPFOLDER\fR
+\fB-x\fR, \fB--deleappfolder\fR \fIAPPFOLDER\fR
 Delete app folder \fIAPPFOLDER\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
@@ -142,7 +143,7 @@ Shows changes to the configuration database after changes to the graphical
 user environment (GUI).
 .RE
 .sp
-\fBkz gset --addfavbef=idle\fR
+\fBkz gset --addfavbef idle\fR
 .RS
 Add the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) to the front of the favorites bar. The idle.desktop
@@ -150,7 +151,7 @@ file must exist in one of the application directories such as
 /usr/share/applications or /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gset --delfav=idle\fR
+\fBkz gset --delfav idle\fR
 .RS
 Remove the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) from the favorites bar.

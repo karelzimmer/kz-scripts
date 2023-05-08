@@ -31,7 +31,7 @@ bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
 Als de reservekopie is teruggezet, worden de de eerder ingestelde Achtergrond
 en Favorieten teruggezet vanuit Persoonlijke map / Instellingen.
 .sp
-Met optie \fB-s\fR, \fB--source\fR=\fIMAP\fR kan een andere locatie opgegeven
+Met optie \fB-s\fR, \fB--source\fR \fIMAP\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk (onverstandig
 want /tmp wordt leeggegooid na een herstart).
 .sp
@@ -48,11 +48,12 @@ Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
 .\"
 .\"
 .SH OPTIES
+Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
 \fB--dry-run\fR
 Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
-\fB-s\fR, \fB--source=\fIMAP\fR
+\fB-s\fR, \fB--source \fIMAP\fR
 Gebruik reservekopieën in \fIMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
@@ -65,7 +66,7 @@ Toon een korte omschrijving van de beschikbare opties.
 Toon de versie, de auteur, en het auteursrecht.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in grafische modus (gui=graphical user interface;
+Start in grafische modus (gui graphical user interface;
 grafische gebruikersinterface).
 .\"
 .\"
@@ -116,7 +117,7 @@ Toon bestanden die teruggezet zouden worden uit de reservekopie.
 .RE
 .sp
 \fBkz restore\
- --source=smb://fileserver/backups\fR
+ --source smb://fileserver/backups\fR
 .RS
 Zet de reservekopie terug vanaf SMB-share backups op fileserver uit de map
 backup-pc02-jan.

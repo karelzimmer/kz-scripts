@@ -114,8 +114,8 @@ function check_dependencies {
             python-is-python3
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-    # Debian packages are old, snap is newer.
     check_dpkgd_snapd
+    # Debian package shellcheck is old, snap is newer.
     sudo snap install shellcheck
     check_dpkgd_snapd
     sudo snap install --classic code

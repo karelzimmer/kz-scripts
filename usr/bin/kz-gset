@@ -24,28 +24,31 @@ program_name='kz-gset'
 program_desc=$(gettext 'Change GUI')
 display_name=${program_name/kz-/kz }
 
-usage="$(eval_gettext "Usage: \$display_name [-a|--addfavaft=FAVORITE] \
-[-b|--addfavbef=FAVORITE]
-               [-d|--delfav=FAVORITE] [-l|--list] [-r|--resetfavs]
-               [-f|--addappfolder=APPFOLDER] [-x|--delappfolder=APPFOLDER]
+usage="$(eval_gettext "Usage: \$display_name [-a|--addfavaft FAVORITE] \
+[-b|--addfavbef FAVORITE]
+               [-d|--delfav FAVORITE] [-l|--list] [-r|--resetfavs]
+               [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]
                \$options_usage")"
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
-$(gettext 'Options:
-  -a, --addfavaft=FAVORITE
+$(gettext 'Options:')
+  $(gettext "Mandatory arguments to long options are mandatory for short \
+options too.")
+
+  -a, --addfavaft FAVORITE
                  add FAVORITE at the end
-  -b, --addfavbef=FAVORITE
+  -b, --addfavbef FAVORITE
                  add FAVORITE at the beginning
-  -d, --delfav=FAVORITE
+  -d, --delfav FAVORITE
                  delete FAVORITE
   -l, --list     show favorites and app folders
   -r, --resetfavs
                  reset favorites
-  -f, --addappfolder=APPFOLDER
+  -f, --addappfolder APPFOLDER
                  add APPFOLDER
-  -x, --delappfolder=APPFOLDER
+  -x, --delappfolder APPFOLDER
                  delete APPFOLDER')
 $options_help"
 options_short+='a:b:d:lrf:x:'

@@ -33,7 +33,7 @@ De reservekopie wordt geplaatst op een aangekoppeld usb-medium zoals een usb
 externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, deze map
 wordt aangemaakt als nodig, bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
 .sp
-Met optie \fB-t\fR, \fB--target\fR=\fIMAP\fR kan een andere locatie opgegeven
+Met optie \fB-t\fR, \fB--target\fR \fIMAP\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk (onverstandig
 want /tmp wordt leeggegooid na een herstart).
 .sp
@@ -73,11 +73,12 @@ Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .\"
 .\"
 .SH OPTIES
+Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
 \fB-d\fR, \fB--dry-run\fR
 Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
-\fB-t\fR, \fB--target=\fIMAP\fR
+\fB-t\fR, \fB--target \fIMAP\fR
 Plaats de reservekopie in \fIMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
@@ -90,7 +91,7 @@ Toon een korte omschrijving van de beschikbare opties.
 Toon de versie, de auteur, en het auteursrecht.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in grafische modus (gui=graphical user interface;
+Start in grafische modus (gui graphical user interface;
 grafische gebruikersinterface).
 .\"
 .\"
@@ -151,7 +152,7 @@ Toon bestanden die anders toegevoegd en verwijderd zouden worden in de
 reservekopie.
 .RE
 .sp
-\fBkz backup --target=smb://fileserver/backups\fR
+\fBkz backup --target smb://fileserver/backups\fR
 .RS
 Maak een reservekopie van de Persoonlijke map naar SMB-share backups op
 fileserver in de map backup-pc02-jan (deze map wordt aangemaakt als nodig).

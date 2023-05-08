@@ -31,7 +31,7 @@ in directory \fBbackup-<computer name>-<user name>\fR, for example
 When the backup is restored, the previously set desktop wallpaper and favorites
 will be restored from Home / Settings.
 .sp
-With option \fB-s\fR, \fB--source\fR=\fIDIRECTORY\fR another location can be
+With option \fB-s\fR, \fB--source\fR \fIDIRECTORY\fR another location can be
 specified. For example /tmp instead of /media/jan/backupdisk (unwise because
 /tmp is emptied after a reboot).
 .sp
@@ -48,11 +48,12 @@ With command \fBkz backup\fR the Home folder can be backed up.
 .\"
 .\"
 .SH OPTIONS
+Mandatory arguments to long options are mandatory for short options too.
 .TP
 \fB--dry-run\fR
 Perform a test run without making any changes.
 .TP
-\fB-s\fR, \fB--source=\fIDIRECTORY\fR
+\fB-s\fR, \fB--source \fIDIRECTORY\fR
 Use backups in the \fIDIRECTORY\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
@@ -65,7 +66,7 @@ Show a short description of the available options.
 Display the version, author, and copyright.
 .TP
 \fB-g\fR, \fB--gui\fR
-Start in graphics mode (gui=graphical user interface).
+Start in graphics mode (gui graphical user interface).
 .\"
 .\"
 .SH EXIT STATUS
@@ -115,7 +116,7 @@ Show files that would be restored from the backup.
 .RE
 .sp
 \fBkz restore\
- --source=smb://fileserver/backups\fR
+ --source smb://fileserver/backups\fR
 .RS
 Restore the backup from SMB share backups on fileserver from backup-pc02-jan
 directorie.

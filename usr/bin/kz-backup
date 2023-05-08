@@ -25,16 +25,19 @@ program_desc=$(gettext 'Make backup')
 display_name=${program_name/kz-/kz }
 
 usage=$(eval_gettext "Usage: \$display_name [-d|--dry-run] \
-[-g|--gui] [-t|--target=DIRECTORY]
+[-g|--gui] [-t|--target DIRECTORY]
                  \$options_usage")
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
 
 $(gettext 'Options:')
+  $(gettext "Mandatory arguments to long options are mandatory for short \
+options too.")
+
   -d, --dry-run  $(gettext 'perform a test run without making any changes')
   -g, --gui      $(gettext 'starts in graphics mode')
-$(gettext '  -t, --target=DIRECTORY
+$(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')
 $options_help"
 options_short+='dgt:'
