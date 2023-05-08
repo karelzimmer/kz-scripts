@@ -24,8 +24,7 @@ program_name='kz-menu'
 program_desc=$(gettext 'Installation menu')
 display_name=${program_name/kz-/kz }
 
-usage="$(eval_gettext "Usage: \$display_name [-g|--gui]")
-                 $options_usage"
+usage=$(eval_gettext "Usage: \$display_name [-g|--gui] \$options_usage")
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.

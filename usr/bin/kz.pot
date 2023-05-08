@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-05 18:10+0200\n"
+"POT-Creation-Date: 2023-05-08 09:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,7 +176,9 @@ msgid "Make backup"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=DIRECTORY]"
+msgid ""
+"Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target=DIRECTORY]\n"
+"                 $options_usage"
 msgstr ""
 
 #, sh-format
@@ -614,7 +616,7 @@ msgid "Installation menu"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [-g|--gui]"
+msgid "Usage: $display_name [-g|--gui] options_usage"
 msgstr ""
 
 msgid "Preparing installation"
@@ -776,7 +778,7 @@ msgid "The following has been executed:"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [--dry-run] [-g|--gui] [-s|--source=DIRECTORY]"
+msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-s|--source=DIRECTORY]"
 msgstr ""
 
 msgid ""
@@ -804,7 +806,8 @@ msgid ""
 "Some files may not be readable,\n"
 "or were any files added or removed while restoring the backup,\n"
 "or is there not enough space on $target.\n"
-"The maximum exit value is $maxrc."
+"The maximum exit value is $maxrc.\n"
+"Check the log in the next screen."
 msgstr ""
 
 msgid "The backup was NOT restored (DRY RUN)."

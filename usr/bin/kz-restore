@@ -24,7 +24,7 @@ program_name='kz-restore'
 program_desc=$(gettext 'Restore backup')
 display_name=${program_name/kz-/kz }
 
-usage="$(eval_gettext "Usage: \$display_name [--dry-run] [-g|--gui] \
+usage="$(eval_gettext "Usage: \$display_name [-d|--dry-run] [-g|--gui] \
 [-s|--source=DIRECTORY]")
                   $options_usage"
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
@@ -37,7 +37,7 @@ $(gettext 'Options:')
 $(gettext '  -s, --source=DIRECTORY
                  use backup in DIRECTORY')
 $options_help"
-options_short+='gs:'
+options_short+='dgs:'
 options_long+=',dry-run,gui,source:'
 
 dry_run_option=''

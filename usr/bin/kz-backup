@@ -24,9 +24,9 @@ program_name='kz-backup'
 program_desc=$(gettext 'Make backup')
 display_name=${program_name/kz-/kz }
 
-usage="$(eval_gettext "Usage: \$display_name [-d|--dry-run] \
-[-g|--gui] [-t|--target=DIRECTORY]")
-                 $options_usage"
+usage=$(eval_gettext "Usage: \$display_name [-d|--dry-run] \
+[-g|--gui] [-t|--target=DIRECTORY]
+                 \$options_usage")
 help="$(eval_gettext "Usage: \$display_name [OPTION...]")
 
 $program_desc.
