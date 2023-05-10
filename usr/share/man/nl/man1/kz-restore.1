@@ -19,16 +19,16 @@ kz-restore \- Reservekopie terugzetten.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz restore\fR zet een reservekopie (back-up) van de Persoonlijke map terug.
+\fBkz restore\fR zet een back-up (back-up) van de Persoonlijke map terug.
 .sp
 In een grafische werkomgeving kan opdracht \fBkz restore\fR worden uitgevoerd
 door te zoeken naar \fBback\fR, klik op \fBReservekopie terugzetten\fR.
 .sp
-De reservekopie wordt verwacht op een aangekoppeld usb-medium zoals een usb
+De back-up wordt verwacht op een aangekoppeld usb-medium zoals een usb
 externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR,
 bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
 .sp
-Als de reservekopie is teruggezet, worden de de eerder ingestelde Achtergrond
+Als de back-up is teruggezet, worden de de eerder ingestelde Achtergrond
 en Favorieten teruggezet vanuit Persoonlijke map / Instellingen.
 .sp
 Met optie \fB-s\fR, \fB--source\fR \fIMAP\fR kan een andere locatie opgegeven
@@ -39,9 +39,9 @@ Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
 Het wordt meestal gebruikt in om te zien wat een rsync-commando gaat doen
 voordat men het daadwerkelijk uitvoert.
 .sp
-Voor het terugzetten van de reservekopie wordt rsync gebruikt.
+Voor het terugzetten van de back-up wordt rsync gebruikt.
 .br
-Bestanden in de Persoonlijke map die niet aanwezig zijn in de reservekopie
+Bestanden in de Persoonlijke map die niet aanwezig zijn in de back-up
 worden niet verwijderd (rsync's optie --delete wordt niet gebruikt).
 .sp
 Met opdracht \fBkz backup\fR kan de Persoonlijke map veiliggesteld worden.
@@ -54,7 +54,7 @@ Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
 \fB-s\fR, \fB--source \fIMAP\fR
-Gebruik reservekopieën in \fIMAP\fR.
+Gebruik back-upën in \fIMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -105,7 +105,7 @@ Day 1 Operations
 .sp
 \fBkz restore\fR
 .RS
-Zet alles in de reservekopie (back-up) terug.
+Zet alles in de back-up (back-up) terug.
 .br
 Hiervoor is in een grafische werkomgeving ook starter \fBReservekopie
 terugzetten\fR beschikbaar.
@@ -113,13 +113,13 @@ terugzetten\fR beschikbaar.
 .sp
 \fBkz restore --dry-run\fR
 .RS
-Toon bestanden die teruggezet zouden worden uit de reservekopie.
+Toon bestanden die teruggezet zouden worden uit de back-up.
 .RE
 .sp
 \fBkz restore\
  --source smb://fileserver/backups\fR
 .RS
-Zet de reservekopie terug vanaf SMB-share backups op fileserver uit de map
+Zet de back-up terug vanaf SMB-share backups op fileserver uit de map
 backup-pc02-jan.
 .RE
 .\"

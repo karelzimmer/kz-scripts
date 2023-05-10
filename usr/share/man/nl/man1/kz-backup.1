@@ -19,17 +19,17 @@ kz-backup \- Reservekopie maken.
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz backup\fR maakt een reservekopie (back-up) van de Persoonlijke map.
+\fBkz backup\fR maakt een back-up (back-up) van de Persoonlijke map.
 .sp
 In een grafische werkomgeving kan opdracht \fBkz backup\fR worden uitgevoerd
 door te zoeken naar \fBback\fR, klik op \fBReservekopie maken\fR.
 .sp
-Voordat er een reservekopie wordt gemaakt, worden er instellingen veiliggesteld
+Voordat er een back-up wordt gemaakt, worden er instellingen veiliggesteld
 in de Persoonlijke map / Instellingen. In deze map komen de ingestelde
 Achtergrond, Gebruikersfoto, en Favorieten, en een lijst van geïnstalleerde
 Apps.
 .sp
-De reservekopie wordt geplaatst op een aangekoppeld usb-medium zoals een usb
+De back-up wordt geplaatst op een aangekoppeld usb-medium zoals een usb
 externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, deze map
 wordt aangemaakt als nodig, bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
 .sp
@@ -59,15 +59,15 @@ Deze locaties worden standaard genegeerd:
  *CACHEDIR.TAG*
 .RE
 Tevens worden door Git beheerde mappen ("git-controlled") niet in de
-reservekopie opgenomen.
+back-up opgenomen.
 .br
 Voorbeeld: ~/bin wordt overgeslagen vanwege de aanwezigheid van
 ~/bin/.git.
 .sp
-Voor het maken van de reservekopie wordt rsync gebruikt.
+Voor het maken van de back-up wordt rsync gebruikt.
 .br
 Bestanden die verwijderd zijn uit de Persoonlijke map worden ook verwijderd uit
-de reservekopie (rsync's optie --delete wordt gebruikt).
+de back-up (rsync's optie --delete wordt gebruikt).
 .sp
 Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .\"
@@ -79,7 +79,7 @@ Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
 \fB-t\fR, \fB--target \fIMAP\fR
-Plaats de reservekopie in \fIMAP\fR.
+Plaats de back-up in \fIMAP\fR.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
@@ -140,7 +140,7 @@ Day 2 Operations
 .sp
 \fBkz backup\fR
 .RS
-Maak een reservekopie (back-up) van de Persoonlijke map.
+Maak een back-up (back-up) van de Persoonlijke map.
 .br
 Hiervoor is in een grafische werkomgeving ook starter \fBReservekopie maken\fR
 beschikbaar.
@@ -149,12 +149,12 @@ beschikbaar.
 \fBkz backup --dry-run\fR
 .RS
 Toon bestanden die anders toegevoegd en verwijderd zouden worden in de
-reservekopie.
+back-up.
 .RE
 .sp
 \fBkz backup --target smb://fileserver/backups\fR
 .RS
-Maak een reservekopie van de Persoonlijke map naar SMB-share backups op
+Maak een back-up van de Persoonlijke map naar SMB-share backups op
 fileserver in de map backup-pc02-jan (deze map wordt aangemaakt als nodig).
 .RE
 .\"

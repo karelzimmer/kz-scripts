@@ -214,7 +214,7 @@ msgid "To execute a COMMAND:"
 msgstr "Om een OPDRACHT uit te voeren:"
 
 msgid "Make backup"
-msgstr "Reservekopie maken"
+msgstr "Back-up maken"
 
 #, sh-format
 msgid ""
@@ -242,7 +242,7 @@ msgid ""
 "                 put backup in DIRECTORY"
 msgstr ""
 "  -t, --target MAP\n"
-"                 plaats reservekopie in MAP"
+"                 plaats back-up in MAP"
 
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -329,7 +329,7 @@ msgid "Writing data from temporary memory (this may take a while)"
 msgstr "Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)"
 
 msgid "The backup has NOT been created (DRY RUN)."
-msgstr "De reservekopie is NIET gemaakt (DRY RUN)."
+msgstr "De back-up is NIET gemaakt (DRY RUN)."
 
 #, sh-format
 msgid ""
@@ -345,7 +345,7 @@ msgstr ""
 "\n"
 "Mogelijk zijn enkele bestanden niet leesbaar,\n"
 "of zijn er bestanden verwijderd of toegevoegd tijdens het maken van de "
-"reservekopie,\n"
+"back-up,\n"
 "of is er te weinig ruimte op $target.\n"
 "De maximale afsluitwaarde is $maxrc.\n"
 "Controleer de log in het volgende scherm."
@@ -360,7 +360,7 @@ msgid "Disconnect the USB medium yourself (safely!)."
 msgstr "Koppel zelf (veilig!) het usb-medium af."
 
 msgid "The backup has been made."
-msgstr "De reservekopie is gemaakt."
+msgstr "De back-up is gemaakt."
 
 msgid "Build package kz"
 msgstr "Pakket kz bouwen"
@@ -784,7 +784,7 @@ msgid "Add users"
 msgstr "Gebruikers toevoegen"
 
 msgid "Restore backup"
-msgstr "Reservekopie terugzetten"
+msgstr "Back-up terugzetten"
 
 msgid "Set user photo"
 msgstr "Gebruikersfoto instellen"
@@ -925,7 +925,7 @@ msgstr ""
 "Vergrootglas-toets (Chromebook)."
 
 msgid "No user photo was found when backing up."
-msgstr "Er is bij het maken van de reservekopie geen gebruikersfoto gevonden."
+msgstr "Er is bij het maken van de back-up geen gebruikersfoto gevonden."
 
 msgid "The following has been executed:"
 msgstr "Het volgende is uitgevoerd:"
@@ -939,7 +939,7 @@ msgid ""
 "                 use backup in DIRECTORY"
 msgstr ""
 "  -t, --source MAP\n"
-"                 gebruik reservekopie in MAP"
+"                 gebruik back-up in MAP"
 
 #, sh-format
 msgid ""
@@ -947,7 +947,7 @@ msgid ""
 "\n"
 "Connect a USB medium with the directory backup-$HOSTNAME-$USER."
 msgstr ""
-"Geen reservekopie gevonden op aangekoppeld usb-medium.\n"
+"Geen back-up gevonden op aangekoppeld usb-medium.\n"
 "\n"
 "Koppel een usb-medium aan met hierop de map backup-$HOSTNAME-$USER."
 
@@ -971,16 +971,16 @@ msgstr ""
 "\n"
 "Mogelijk zijn enkele bestanden niet leesbaar,\n"
 "of zijn er bestanden verwijderd of toegevoegd tijdens het maken van de "
-"reservekopie,\n"
+"back-up,\n"
 "of is er te weinig ruimte op $target.\n"
 "De maximale afsluitwaarde is $maxrc.\n"
 "Controleer de log in het volgende scherm."
 
 msgid "The backup was NOT restored (DRY RUN)."
-msgstr "De reservekopie is NIET teruggezet (DRY RUN)."
+msgstr "De back-up is NIET teruggezet (DRY RUN)."
 
 msgid "The backup has been restored."
-msgstr "De reservekopie is teruggezet."
+msgstr "De back-up is teruggezet."
 
 #, sh-format
 msgid ""
@@ -1106,7 +1106,7 @@ msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
 
 msgid "Make a backup copy of the Home folder"
-msgstr "Maak een reservekopie (back-up) van de Persoonlijke map"
+msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 
 msgid "Cockpit"
 msgstr "Cockpit"
@@ -1166,7 +1166,7 @@ msgid "Run commands through a menu"
 msgstr "Voer opdrachten uit via een menu"
 
 msgid "Restores a backup copy of the Home folder"
-msgstr "Zet reservekopie (back-up) van de Persoonlijke map terug"
+msgstr "Zet back-up (reservekopie) van de Persoonlijke map terug"
 
 msgid "Set up apps and change user settings"
 msgstr "Stel apps in en wijzig gebruikersinstellingen"
