@@ -148,6 +148,7 @@ function error {
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
+        log "$@"
     else
         printf "${red}%b\n${normal}" "$@" >&2
     fi
@@ -443,6 +444,7 @@ function warning {
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
+        log "$@"
     else
         printf "${yellow}%b\n${normal}" "$@" >&2
     fi
