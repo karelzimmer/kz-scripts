@@ -11,10 +11,8 @@
 # Import
 ###############################################################################
 
-set -o errexit
 program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source "$program_path"/kz_common.sh
-
+source "$program_path"/kz_common.sh 2> >(systemd-cat) || exit 1
 
 ###############################################################################
 # Variables

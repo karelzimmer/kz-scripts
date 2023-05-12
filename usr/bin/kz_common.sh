@@ -172,6 +172,7 @@ function info {
 
 function init_script {
     # Script-hardening.
+    set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
