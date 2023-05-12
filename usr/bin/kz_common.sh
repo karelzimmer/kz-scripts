@@ -108,6 +108,7 @@ It is recommended to connect the computer to the wall socket.')"
 function check_user_root {
     local -i rc=0
 
+    # shellcheck disable=SC2310
     if ! check_user_sudo; then
         info "$(gettext 'Already performed by the administrator.')"
         exit $ok

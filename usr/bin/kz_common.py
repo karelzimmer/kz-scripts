@@ -163,7 +163,7 @@ def process_option(program_name, program_desc, display_name):
     args = parser.parse_args()
 
     if args.help:
-        process_option_help(display_name, program_desc)
+        process_option_help(display_name, program_desc, program_name)
         sys.exit(ok)
     elif args.usage:
         process_option_usage(display_name)
@@ -173,7 +173,7 @@ def process_option(program_name, program_desc, display_name):
         sys.exit(ok)
 
 
-def process_option_help(display_name, program_desc):
+def process_option_help(display_name, program_desc, program_name):
     """
     This function shows the available help.
     """
@@ -185,8 +185,8 @@ def process_option_help(display_name, program_desc):
             '  -h, --help     give this help list\n'
             '  -u, --usage    give a short usage message\n'
             '  -v, --version  print program version\n\n'
-            "Type 'man {}' for more information.").
-          format(display_name, program_desc, display_name))
+            "Type 'man {}' or open hyperlink man:{} for more information.").
+          format(display_name, program_desc, display_name, program_name))
 
 
 def process_option_usage(display_name):
