@@ -254,7 +254,7 @@ function process_option_help {
     info "$help
 
 $(eval_gettext "Type 'man \$display_name' or open hyperlink \
-\e]8;;man:\$program_name(1)\e\\man:\$program_name(1)\e]8;;\e\\ for more \
+\e]8;;man:\$program_name(1)\e\\man \$program_name\e]8;;\e\\ for more \
 information.")"
 }
 
