@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-12 08:48+0200\n"
+"POT-Creation-Date: 2023-05-12 09:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,8 +65,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Type 'man $display_name' or open hyperlink \\e]8;;man:$program_name(1)\\e\\"
-"$program_name(1)\\e]8;;\\e\\ for more information."
+"Type 'man $display_name' or open hyperlink \\e]8;;man:"
+"$program_name(1)\\e\\man:$program_name(1)\\e]8;;\\e\\ for more information."
 msgstr ""
 
 #, sh-format
