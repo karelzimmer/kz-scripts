@@ -75,7 +75,7 @@ msgid ""
 "Type 'man $display_name' or open hyperlink \\e]8;;man:"
 "$program_name(1)\\e\\man $program_name\\e]8;;\\e\\ for more information."
 msgstr ""
-"Typ 'man $display_name' of open koppeling \\e]8;;man:"
+"Typ 'man $display_name' of open verwijzing \\e]8;;man:"
 "$program_name(1)\\e\\man $program_name\\e]8;;\\e\\ voor meer informatie."
 
 #, sh-format
@@ -138,7 +138,7 @@ msgstr ""
 "  -u, --usage    toon een korte gebruikssamenvatting\n"
 "  -v, --version  toon de programmaversie\n"
 "\n"
-"Typ 'man {}' of open koppeling man:{} voor meer informatie."
+"Typ 'man {}' of open verwijzing man:{} voor meer informatie."
 
 msgid ""
 "Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n"
