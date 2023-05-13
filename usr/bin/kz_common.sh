@@ -254,8 +254,8 @@ function process_option_help {
     # shellcheck disable=SC2154
     info "$help
 
-$(eval_gettext "Type 'man \$display_name' or open hyperlink \
-\e]8;;man:\$program_name(1)\e\\man \$program_name\e]8;;\e\\ for more \
+$(eval_gettext "Type 'man \$display_name' or see the \
+\e]8;;man:\$program_name(1)\e\\\$display_name man page\e]8;;\e\\ for more \
 information.")"
 }
 

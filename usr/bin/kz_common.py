@@ -186,8 +186,10 @@ def process_option_help(display_name, program_desc, program_name):
             '  -h, --help     give this help list\n'
             '  -u, --usage    give a short usage message\n'
             '  -v, --version  print program version\n\n'
-            "Type 'man {}' or open hyperlink man:{} for more information.").
-          format(display_name, program_desc, display_name, program_name))
+            "Type 'man {}' or see the \
+\x1b]8;;man:{}(1)\x1b\\{} man page\x1b]8;;\x1b\\ for more information.").
+          format(display_name, program_desc, display_name, program_name,
+                 display_name))
 
 
 def process_option_usage(display_name):
