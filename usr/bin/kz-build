@@ -199,7 +199,7 @@ function build_uploads {
             lowriter    --headless                              \
                         --convert-to pdf                        \
                         --outdir "${uploads_targets[kz-docs]}"  \
-                        "$file"                                 |& $logcmd
+                        "$file"
         fi
     done
     cd "$HOME"
@@ -218,8 +218,8 @@ function build_uploads {
             # Craete a PDF.
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man page file.
-                man --troff "${uploads_sources[kz-scripts]}/$file"  |
-                ps2pdf - "${uploads_targets[kz-scripts]}/$file.pdf" |& $logcmd
+                man --troff "${uploads_sources[kz-scripts]}/$file" |
+                ps2pdf - "${uploads_targets[kz-scripts]}/$file.pdf"
             else
                 # Script file.
                 # Must copy each file with suffix e.g. .txt added (tmptxt)
@@ -235,7 +235,7 @@ function build_uploads {
                 lowriter    --headless          \
                             --convert-to pdf    \
                             --outdir "$pdfdir"  \
-                            "$tmptxt"           |& $logcmd
+                            "$tmptxt"
                 rm "$tmptxt"
             fi
         fi
