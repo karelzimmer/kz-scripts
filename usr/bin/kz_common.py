@@ -232,7 +232,6 @@ def process_option_version(program_name):
               .format(program_name, build_id, program_year, current_year))
 
 
-
 ###############################################################################
 # Main
 ###############################################################################
