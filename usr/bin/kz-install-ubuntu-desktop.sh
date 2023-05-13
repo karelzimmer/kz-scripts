@@ -24,13 +24,13 @@ sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /
 
 #1 google-chrome
 ## Extensions and apps are automatically installed with /etc/opt/chrome/policies/managed/kz.json from "kz.deb".
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
 ## Also install chrome-gnome-shell to make extensions.gnome.org work.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 ## The installation overwrites the newly added source-list.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 ## The installation adds an apt-key that is no longer needed.
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 #2 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
