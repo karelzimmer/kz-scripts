@@ -2,8 +2,8 @@
 ###############################################################################
 # Setup file for Debian desktop on pc07 for karel.
 #
-# Written in 2019 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2019-2023.
 ###############################################################################
 
 #1-gnome

@@ -2,8 +2,8 @@
 ###############################################################################
 # Install file for Ubuntu desktop on pc-van-emily.
 #
-# Written in 2016 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2016-2023.
 ###############################################################################
 
 #1-cups-backend-bjnp

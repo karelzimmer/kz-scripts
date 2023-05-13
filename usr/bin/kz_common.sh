@@ -2,8 +2,8 @@
 ###############################################################################
 # Common module for shell scripts.
 #
-# Written in 2009 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
 
 ###############################################################################
@@ -270,6 +270,9 @@ $(eval_gettext "Type '\$display_name --help' for more information.")"
 
 function process_option_version {
     local build_id='1970-01-01'
+    local current_year
+    # shellcheck disable=SC2034
+    current_year=$(date '+%Y')
     local program_year='1970'
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
@@ -284,10 +287,9 @@ function process_option_version {
     fi
     info "$program_name (kz) 365 ($build_id)
 
-$(eval_gettext "Written in \$program_year by Karel Zimmer \
-<info@karelzimmer.nl>, Creative Commons
-Public Domain Dedication \
-<https://creativecommons.org/publicdomain/zero/1.0>.")"
+$(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
+Universal <https://creativecommons.org/publicdomain/zero/1.0>, \
+\$program_year-\$current_year.")"
 }
 
 
