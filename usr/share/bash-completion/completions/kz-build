@@ -2,8 +2,8 @@
 ###############################################################################
 # Tab-completion-script voor kz-build.
 #
-# Written in 2021 by Karel Zimmer <info@karelzimmer.nl>, Creative Commons
-# Public Domain Dedication <https://creativecommons.org/publicdomain/zero/1.0>.
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
 ###############################################################################
 
 dashoptions='-h --help -u --usage -v --version'
