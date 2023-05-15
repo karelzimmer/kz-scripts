@@ -229,7 +229,8 @@ def process_option_version(program_name):
             program_year = 1970
         print(_('{} (kz) 365 ({})\n'
                 '\n'
-                'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 '
+                'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
+Universal\n'
                 '<https://creativecommons.org/publicdomain/zero/1.0>, {}-{}.')
               .format(program_name, build_id, program_year, this_year))
 

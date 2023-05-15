@@ -147,7 +147,8 @@ function process_option_version {
     printf '%s\n' "$program_name (kz) 365 ($build_id)
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
-Universal <https://creativecommons.org/publicdomain/zero/1.0>, \
+Universal
+<https://creativecommons.org/publicdomain/zero/1.0>, \
 \$program_year-\$this_year.")"
 }
 
