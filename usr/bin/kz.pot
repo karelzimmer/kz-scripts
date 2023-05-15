@@ -76,7 +76,7 @@ msgstr ""
 #, sh-format
 msgid ""
 "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal <https://"
-"creativecommons.org/publicdomain/zero/1.0>, $program_year-$current_year."
+"creativecommons.org/publicdomain/zero/1.0>, $program_year-$this_year."
 msgstr ""
 
 #, sh-format

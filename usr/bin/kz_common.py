@@ -208,7 +208,7 @@ def process_option_version(program_name):
     """
     build_id = '1970-01-01'
     cmd = ''
-    current_year = date.today().year
+    this_year = date.today().year
     program_year = 1970
 
     try:
@@ -231,7 +231,7 @@ def process_option_version(program_name):
                 '\n'
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 '
                 '<https://creativecommons.org/publicdomain/zero/1.0>, {}-{}.')
-              .format(program_name, build_id, program_year, current_year))
+              .format(program_name, build_id, program_year, this_year))
 
 
 ###############################################################################

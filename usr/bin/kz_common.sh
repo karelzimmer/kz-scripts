@@ -270,9 +270,9 @@ $(eval_gettext "Type '\$display_name --help' for more information.")"
 
 function process_option_version {
     local build_id='1970-01-01'
-    local current_year
+    local this_year
     # shellcheck disable=SC2034
-    current_year=$(date '+%Y')
+    this_year=$(date '+%Y')
     local program_year='1970'
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
@@ -289,7 +289,7 @@ function process_option_version {
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal <https://creativecommons.org/publicdomain/zero/1.0>, \
-\$program_year-\$current_year.")"
+\$program_year-\$this_year.")"
 }
 
 
