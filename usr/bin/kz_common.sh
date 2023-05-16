@@ -270,17 +270,15 @@ $(eval_gettext "Type '\$display_name --help' for more information.")"
 
 function process_option_version {
     local build_id='1970-01-01'
-    local this_year
-    # shellcheck disable=SC2034
-    this_year=$(date '+%Y')
+    local grep_expr='# <https://creativecommons.org'
     local program_year='1970'
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=$(cat /usr/local/etc/kz-build-id)
     fi
     program_year=$(
-        grep '# Written in ' "$program_path/$program_name" |
-        cut --delimiter=' ' --fields=4
+        grep    "$grep_expr" "$program_path/$program_name" |
+        cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
         program_year='1970'
@@ -289,8 +287,7 @@ function process_option_version {
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
-<https://creativecommons.org/publicdomain/zero/1.0>, \
-\$program_year-\$this_year.")"
+<https://creativecommons.org/publicdomain/zero/1.0>, \$program_year")"
 }
 
 

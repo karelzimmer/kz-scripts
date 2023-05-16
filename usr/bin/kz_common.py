@@ -15,7 +15,6 @@ This module gives access to general functions.
 ###############################################################################
 
 import argparse
-from datetime import date
 import gettext
 import os
 import subprocess
@@ -208,7 +207,7 @@ def process_option_version(program_name):
     """
     build_id = '1970-01-01'
     cmd = ''
-    this_year = date.today().year
+    grep_expr = '# <https://creativecommons.org'
     program_year = 1970
 
     try:
@@ -220,8 +219,8 @@ def process_option_version(program_name):
         print(ex)
         sys.exit(error)
     finally:
-        cmd = f"grep '# Written in ' {module_path}/{program_name}"
-        cmd = f"{cmd} | cut --delimiter=' ' --fields=4"
+        cmd = f"grep '{grep_expr}' {module_path}/{program_name}"
+        cmd = f"{cmd} | cut --delimiter=' ' --fields=3"
         program_year = subprocess.check_output(cmd, shell=True,
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
@@ -231,8 +230,8 @@ def process_option_version(program_name):
                 '\n'
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal\n'
-                '<https://creativecommons.org/publicdomain/zero/1.0>, {}-{}.')
-              .format(program_name, build_id, program_year, this_year))
+                '<https://creativecommons.org/publicdomain/zero/1.0>, {}')
+              .format(program_name, build_id, program_year))
 
 
 ###############################################################################
