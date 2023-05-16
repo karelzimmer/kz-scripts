@@ -182,7 +182,7 @@ function process_menu1_tui {
         info "$menu1_head
 "
         for action in "${!menu1_actions[@]}"; do
-            printf  '%2s. %-24.24s - %s\n'      \
+            printf  '%2s. %-25.25s - %s\n'      \
                     "$action"                   \
                     "${menu1_actions[$action]}" \
                     "${menu1_commands[$action]}"
@@ -341,7 +341,7 @@ function process_menu2_tui {
         info "$menu2_head
 "
         for action in "${!menu2_actions[@]}"; do
-            printf  '%2s. %-24.24s - %s\n'      \
+            printf  '%2s. %-25.25s - %s\n'      \
                     "$action"                   \
                     "${menu2_actions[$action]}" \
                     "${menu2_commands[$action]}"

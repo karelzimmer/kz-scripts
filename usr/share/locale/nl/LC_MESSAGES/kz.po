@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 10:09+0200\n"
+"POT-Creation-Date: 2023-05-16 08:38+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -740,9 +740,7 @@ msgstr "    Eindspaties gevonden."
 msgid "Installation menu"
 msgstr "Installatiemenu"
 
-#, fuzzy, sh-format
-#| msgid "Usage: $display_name [-g|--gui] $options_usage"
-msgid "Usage: $display_name [-g|--gui] options_usage"
+msgid "Usage: $display_name [-g|--gui] $options_usage"
 msgstr "Gebruik: $display_name [-g|--gui] $options_usage"
 
 msgid "Preparing installation"
@@ -836,8 +834,7 @@ msgstr "Opdracht"
 msgid "Run number [1-$menu1_lines]: "
 msgstr "Voer uit nummer [1-$menu1_lines]: "
 
-#, fuzzy, sh-format
-#| msgid "Run number [1-$menu2_lines]: "
+#, sh-format
 msgid "Run number [1-$menu2_lines]: "
 msgstr "Voer uit nummer [1-$menu2_lines]: "
 

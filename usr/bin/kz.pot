@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-15 10:11+0200\n"
+"POT-Creation-Date: 2023-05-16 08:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -618,7 +618,7 @@ msgid "Installation menu"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [-g|--gui] options_usage"
+msgid "Usage: $display_name [-g|--gui] $options_usage"
 msgstr ""
 
 msgid "Preparing installation"
