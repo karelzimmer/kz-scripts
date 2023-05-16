@@ -269,7 +269,7 @@ $(eval_gettext "Type '\$display_name --help' for more information.")"
 
 
 function process_option_version {
-    local build_id='1970-01-01'
+    local build_id='1970-01-01 00:00'
     local grep_expr='# <https://creativecommons.org'
     local program_year='1970'
 
