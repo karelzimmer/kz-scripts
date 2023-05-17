@@ -278,7 +278,7 @@ function process_argument_app_file {
                     # Write records to temporary file until next app name or
                     # until eof.
                     app_found=true
-                    printf '%s\n' "${blue}# $file${normal}" >> "$apps_file"
+                    printf "\n${blue}%s${normal}\n" "# $file" >> "$apps_file"
                     printf '%s\n' "$record" >> "$apps_file"
                 elif $app_found; then
                     # Next app.
@@ -299,7 +299,6 @@ function process_argument_app_file {
                 ;;
         esac
     done < "$file"
-    printf '\n' >> "$apps_file"
 }
 
 
@@ -388,7 +387,7 @@ function process_option_cat {
             else
                 printf '\n'
             fi
-            printf "${blue}%s\n${normal}" "# $file"
+            printf "${blue}%s${normal}\n" "# $file"
             cat "$file"
         }   >> "$cmds_file"
     done
@@ -533,10 +532,10 @@ function process_command_record {
                     "$app_description"  >> "$sims_file"
             write_app_description_line=false
         fi
-        printf  '%7s [%2d] %s\n'        \
-                " "                     \
-                "$cmd_seq_num"          \
-                "${blue}$cmd${normal}"  >> "$sims_file"
+        printf  "%7s [%2d] ${blue}%s${normal}\n"    \
+                " "                                 \
+                "$cmd_seq_num"                      \
+                "$cmd"  >> "$sims_file"
     fi
 }
 
