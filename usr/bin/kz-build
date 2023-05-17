@@ -170,8 +170,8 @@ function build_uploads {
     info "$(gettext 'Build website...')"
 
     # Make sure the permissions are correct for the sync.
-    chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/*
-    chmod 'a-x' -- "$scripts_repo"/*.* "$scripts_repo"/LICENSE
+    chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/usr/bin/*
+    chmod 'a-x' -- "$scripts_repo"/usr/bin/*.*
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/app/.
     rsync   --archive               \
