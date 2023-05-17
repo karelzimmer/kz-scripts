@@ -219,7 +219,7 @@ def process_option_version(program_name):
         print(ex)
         sys.exit(error)
     finally:
-        cmd = f"grep '{grep_expr}' {module_path}/{program_name}"
+        cmd = f"grep '--regexp={grep_expr}' {module_path}/{program_name}"
         cmd = f"{cmd} | cut --delimiter=' ' --fields=3"
         program_year = subprocess.check_output(cmd, shell=True,
                                                stderr=subprocess.DEVNULL)
