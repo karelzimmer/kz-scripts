@@ -9,6 +9,7 @@
 Type=Application
 Name=Spotify
 Comment=Spotify Web App
+TryExec=google-chrome
 Exec=google-chrome https://open.spotify.com
 Categories=Kz-scripts;
 Icon=kz-spotify

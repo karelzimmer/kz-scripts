@@ -8,8 +8,6 @@
 
 #1 cockpit
 ## Web App: https://localhost:9090
-cp /usr/share/applications/kz-cockpit.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-cockpit.desktop
 kz-gset --addfavaft=kz-cockpit
 #2 kz-gset --delfav=kz-cockpit
 #2 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop

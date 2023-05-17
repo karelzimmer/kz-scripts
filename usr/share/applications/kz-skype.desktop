@@ -10,6 +10,7 @@ Type=Application
 Name=Skype
 Comment=Skype Web App
 Categories=Kz-scripts;
+TryExec=google-chrome
 Exec=google-chrome https://web.skype.com
 Icon=kz-skype
 X-GNOME-Gettext-Domain=kz

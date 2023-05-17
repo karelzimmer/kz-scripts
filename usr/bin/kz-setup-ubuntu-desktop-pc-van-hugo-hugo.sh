@@ -16,10 +16,6 @@ kz-gset --addfavaft=kz-telegram
 
 #1-virtualbox
 kz-gset --addfavaft=virtualbox
-cp /usr/bin/kz-vm-hugowin732.sh "$HOME"
-chmod u+x "$HOME"/kz-vm-hugowin732.sh
-cp /usr/share/applications/kz-vm-hugowin732.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
 kz-gset --addfavaft=kz-vm-hugowin732
 #2 rm --force "$HOME"/.local/share/applications/kz-vm-hugowin732.desktop
 #2 rm --force "$HOME"/kz-vm-hugowin732.sh

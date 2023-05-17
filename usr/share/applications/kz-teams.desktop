@@ -10,6 +10,7 @@ Type=Application
 Name=Teams
 Comment=Teams Web App
 Categories=Kz-scripts;
+TryExec=google-chrome
 Exec=google-chrome https://teams.microsoft.com
 Icon=kz-teams
 X-GNOME-Gettext-Domain=kz

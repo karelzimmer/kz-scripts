@@ -10,6 +10,7 @@ Type=Application
 Name=Restore backup
 Comment=Restores a backup copy of the Home folder
 Categories=Kz-scripts;
+TryExec=kz
 Exec=kz-restore --gui
 Icon=kz-restore
 X-GNOME-Gettext-Domain=kz

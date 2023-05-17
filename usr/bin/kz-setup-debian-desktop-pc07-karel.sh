@@ -42,8 +42,6 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 
 #1 webmin
 ## Web App: https://localhost:10000
-cp /usr/share/applications/kz-webmin.desktop "$HOME"/.local/share/applications/
-sed --in-place --expression='s/NoDisplay=true/NoDisplay=false/' "$HOME"/.local/share/applications/kz-webmin.desktop
 kz-gset --addfavaft=kz-webmin
 #2 kz-gset --delfav=kz-webmin
 #2 rm --force "$HOME"/.local/share/applications/kz-webmin.desktop
