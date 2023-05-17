@@ -378,10 +378,10 @@ msgid "Deploy"
 msgstr "Distribueer"
 
 msgid "Check - pre"
-msgstr "Controleren - voor"
+msgstr "Controleren - vooraf"
 
 msgid "Check - post"
-msgstr "Controleren - na"
+msgstr "Controleren - achteraf"
 
 msgid "Fix all the messages above."
 msgstr "Herstel alle meldingen hierboven."
