@@ -9,7 +9,7 @@
 Type=Application
 Name=Show WiFi information
 Comment=Show WiFi information
-Categories=X-GNOME-Kz-scripts;
+Categories=Kz-scripts;
 TryExec=kz
 Exec=kz-wifi --gui
 Icon=kz-wifi
