@@ -295,6 +295,7 @@ function process_argument_app_file {
                 ;;
         esac
     done < "$file"
+    printf '\n' >> "$apps_file"
 }
 
 
