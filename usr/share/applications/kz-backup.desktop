@@ -9,7 +9,7 @@
 Type=Application
 Name=Make backup
 Comment=Make a backup copy of the Home folder
-Categories=Kz-scripts;
+Categories=X-GNOME-Kz-scripts;
 TryExec=kz
 Exec=kz-backup --gui
 Icon=kz-backup

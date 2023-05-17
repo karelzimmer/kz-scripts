@@ -9,7 +9,7 @@
 Type=Application
 Name=Cockpit
 Comment=Cockpit Web App
-Categories=Kz-scripts;
+Categories=X-GNOME-Kz-scripts;
 TryExec=google-chrome
 Exec=google-chrome https://localhost:9090
 Icon=kz-cockpit

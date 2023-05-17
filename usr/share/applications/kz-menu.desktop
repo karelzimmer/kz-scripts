@@ -9,7 +9,7 @@
 Type=Application
 Name=Installation menu
 Comment=Run commands through a menu
-Categories=Kz-scripts;
+Categories=X-GNOME-Kz-scripts;
 TryExec=kz
 Exec=kz-menu --gui
 Icon=kz-menu

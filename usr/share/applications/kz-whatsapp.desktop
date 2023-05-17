@@ -9,7 +9,7 @@
 Type=Application
 Name=WhatsApp
 Comment=WhatsApp Web App
-Categories=Kz-scripts;
+Categories=X-GNOME-Kz-scripts;
 TryExec=google-chrome
 Exec=google-chrome https://web.whatsapp.com
 Icon=kz-whatsapp

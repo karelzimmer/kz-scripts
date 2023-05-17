@@ -9,7 +9,7 @@
 Type=Application
 Name=Zoom
 Comment=Zoom Web App
-Categories=Kz-scripts;
+Categories=X-GNOME-Kz-scripts;
 TryExec=google-chrome
 Exec=google-chrome https://join.zoom.us
 Icon=kz-zoom
