@@ -263,13 +263,17 @@ function process_argument_app_file {
 
     while read -r record; do
         case $record in
+            '')
+                # Empty line.
+                continue
+                ;;
             '#1 '*)
                 if [[ $record == '#1 '$app* ]]; then
                     # Found app name.
                     # Write records to temporary file until next app name or
                     # until eof.
                     app_found=true
-                    printf '%s\n' "# $file" >> "$apps_file"
+                    printf '%s\n' "${blue}# $file${normal}" >> "$apps_file"
                     printf '%b\n' "$record" >> "$apps_file"
                 elif $app_found; then
                     # Next app.
@@ -445,7 +449,7 @@ function process_cmds_file {
         recordtype=${record:0:2}
         case $recordtype in
             '')
-                # Empty line or empty app name.
+                # Empty line.
                 continue
                 ;;
             '#1')
