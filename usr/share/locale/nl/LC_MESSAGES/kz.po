@@ -1051,9 +1051,6 @@ msgstr ""
 "*** De computer moet herstarten om het installeren van updates af te ronden "
 "***"
 
-msgid "Virtual Machine Hugowin732 is started (can take a while ...)"
-msgstr "Virtuele Machine hugowin732 wordt gestart (kan even duren...)"
-
 msgid "Record this data to connect to the wireless network later."
 msgstr ""
 "Leg deze gegevens vast om later verbinding te maken met het draadloze "

@@ -12,6 +12,6 @@ Name=Start HugoWin732
 Comment=Start VirtualBox VM hugowin732
 Categories=Kz-scripts;
 TryExec=VBoxManage
-Exec=/home/hugo/kz-vm-hugowin732.sh
+Exec=VBoxManage startvm 'hugowin732'
 Icon=virtualbox-vbox
 X-GNOME-Gettext-Domain=kz

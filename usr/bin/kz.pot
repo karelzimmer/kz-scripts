@@ -877,9 +877,6 @@ msgid ""
 "*** The computer must restart to complete the installation of updates ***"
 msgstr ""
 
-msgid "Virtual Machine Hugowin732 is started (can take a while ...)"
-msgstr ""
-
 msgid "Record this data to connect to the wireless network later."
 msgstr ""
 
