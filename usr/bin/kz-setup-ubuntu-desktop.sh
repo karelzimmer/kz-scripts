@@ -7,7 +7,7 @@
 ###############################################################################
 
 #1 gnome
-kz-gset --addappfolder=Kz-scripts
+kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -32,7 +32,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
-#2 kz-gset --delappfolder=Kz-scripts
+#2 kz-gset --delappfolder=KZ
 #2 gsettings reset org.gnome.desktop.app-folders folder-children
 #2 gsettings reset org.gnome.desktop.calendar show-weekdate
 #2 gsettings reset org.gnome.desktop.interface clock-show-date

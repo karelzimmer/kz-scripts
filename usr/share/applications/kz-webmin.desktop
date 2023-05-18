@@ -9,7 +9,7 @@
 Type=Application
 Name=Webmin
 Comment=Webmin Web App
-Categories=Kz-scripts;
+Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://localhost:10000
 Icon=kz-webmin

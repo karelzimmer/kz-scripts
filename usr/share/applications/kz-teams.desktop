@@ -9,7 +9,7 @@
 Type=Application
 Name=Teams
 Comment=Teams Web App
-Categories=Kz-scripts;
+Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://teams.microsoft.com
 Icon=kz-teams
