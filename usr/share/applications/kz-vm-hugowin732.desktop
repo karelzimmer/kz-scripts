@@ -13,5 +13,5 @@ Comment=Start VirtualBox VM hugowin732
 Categories=KZ;
 TryExec=VBoxManage
 Exec=VBoxManage startvm hugowin732
-Icon=virtualbox-vbox
+Icon=kz-virtualbox
 X-GNOME-Gettext-Domain=kz
