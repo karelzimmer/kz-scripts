@@ -269,20 +269,24 @@ $(eval_gettext "Type '\$display_name --help' for more information.")"
 
 
 function process_option_version {
-    local build_id='1970-01-01 00:00'
+    local build_id='????-??-?? ??:??'
     local grep_expr='# <https://creativecommons.org'
-    local program_year='1970'
+    local program_year='????'
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=$(cat /usr/local/etc/kz-build-id)
+    else
+        build_id='????-??-?? ??:??'
     fi
+
     program_year=$(
         grep    --regexp="$grep_expr" "$program_path/$program_name" |
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
-        program_year='1970'
+        program_year='????'
     fi
+
     info "$program_name (kz) 365 ($build_id)
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \

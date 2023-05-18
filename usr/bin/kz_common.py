@@ -205,16 +205,16 @@ def process_option_version(program_name):
     """
     This function displays version, author, and license information.
     """
-    build_id = '1970-01-01 00:00'
+    build_id = '????-??-?? ??:??'
     cmd = ''
     grep_expr = '# <https://creativecommons.org'
-    program_year = 1970
+    program_year = '????'
 
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
             build_id = fh.read()
     except FileNotFoundError:
-        build_id = '1970-01-01 00:00'
+        build_id = '????-??-?? ??:??'
     except Exception as ex:
         print(ex)
         sys.exit(error)
@@ -225,7 +225,8 @@ def process_option_version(program_name):
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
-            program_year = 1970
+            program_year = '????'
+
         print(_('{} (kz) 365 ({})\n'
                 '\n'
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
