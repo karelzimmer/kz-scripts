@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 11:20+0200\n"
+"POT-Creation-Date: 2023-05-31 09:19+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -245,6 +245,13 @@ msgid ""
 msgstr ""
 "  -t, --target MAP\n"
 "                 plaats back-up in MAP"
+
+msgid "too many options"
+msgstr "te veel opties"
+
+#, sh-format
+msgid "File name must start with '$program_name-'."
+msgstr "Bestandsnaam moet beginnen met '$program_name-'."
 
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"
@@ -572,28 +579,35 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
-"                  [-r|--remove] [--server] [-s|--simulate]\n"
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-l|--list]\n"
+"                  [-g|--gui] [-r|--remove] [--server] [-s|--simulate]\n"
 "                  $options_usage\n"
-"                  [--] [APP...] [FILE...]"
+"                  [--] [APP...]"
 msgstr ""
-"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
-"                    [-r|--remove] [--server] [-s|--simulate]\n"
+"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-l|--list]\n"
+"                    [-g|--gui] [-r|--remove] [--server] [-s|--simulate]\n"
 "                    $options_usage\n"
-"                    [--] [APP...] [BESTAND...]"
+"                    [--] [APP...]"
 
 #, sh-format
-msgid "Usage: $display_name [OPTION...] [APP...] [FILE...]"
-msgstr "Gebruik: $display_name [OPTIE...] [APP...] [BESTAND...]"
+msgid "Usage: $display_name [OPTION...] [APP...]"
+msgstr "Gebruik: $display_name [OPTIE...] [APP...]"
 
 msgid "show list of available apps"
 msgstr "toon lijst van beschikbare apps"
 
-msgid "show contents of files"
-msgstr "toon inhoud van bestanden"
+msgid "show contents of file"
+msgstr "toon inhoud van bestand"
 
-msgid "show list of files"
-msgstr "toon lijst van bestanden"
+msgid ""
+"  -f, --file FILE\n"
+"                 process FILE"
+msgstr ""
+"  -t, --file BESTAND\n"
+"                 verwerk BESTAND"
+
+msgid "show list of standard files"
+msgstr "toon lijst van standaard bestanden"
 
 msgid "delete apps"
 msgstr "verwijder apps"
@@ -606,12 +620,10 @@ msgstr "toon opdrachten"
 
 msgid ""
 "Arguments:\n"
-"  APP            install APPs\n"
-"  FILE           process FILEs"
+"  APP            install APPs"
 msgstr ""
 "Argumenten:\n"
-"  APP            installeer APPs\n"
-"  BESTAND        verwerk BESTANDen"
+"  APP            installeer APPs"
 
 msgid "Prepare to install"
 msgstr "Installeren voorbereiden"
@@ -623,15 +635,9 @@ msgstr "app niet gevonden"
 msgid "Type '$display_name --apps' for available apps."
 msgstr "Typ '$display_name --apps' voor beschikbare apps."
 
-msgid "file not found"
-msgstr "bestand niet gevonden"
-
 #, sh-format
-msgid "Type '$display_name --files' for available files."
-msgstr "Typ '$display_name --files' voor beschikbare bestanden."
-
-msgid "No installation files found."
-msgstr "Geen installatiebestanden gevonden."
+msgid "No install file found, looked for $inputfile."
+msgstr "Geen installatiebestand gevonden, zocht $inputfile."
 
 msgid ""
 "The following APPs are available:\n"
@@ -666,16 +672,29 @@ msgstr ""
 
 #, sh-format
 msgid "     0 No files present."
+msgstr "     0 Geen bestanden gevonden."
+
+#, sh-format
+msgid "To process FILE execute: ${blue}$display_name --file FILE${normal}"
 msgstr ""
+"Om BESTAND te verwerken voer uit: ${blue}$display_name --file "
+"BESTAND${normal}"
 
-msgid "To process the FILEs execute"
-msgstr "Om de BESTANDen te verwerken voer uit"
+#, sh-format
+msgid ""
+"To view the commands of FILE execute: ${blue}$display_name --cat --file "
+"FILE${normal}"
+msgstr ""
+"Om de opdrachten in BESTAND te bekijken voer uit ${blue}$display_name --cat "
+"--file BESTAND${normal}"
 
-msgid "To view the contents of FILEs execute"
-msgstr "m de inhoud van BESTANDen te bekijken voer uit"
-
-msgid "To simulate the processing of FILEs execute"
-msgstr "Om de verwerking van BESTANDen te simuleren voer uit"
+#, sh-format
+msgid ""
+"To simulate the processing of FILE execute: ${blue}$display_name --simulate "
+"--file FILE${normal}"
+msgstr ""
+"Om de opdrachten in BESTAND te simuleren voer uit: ${blue}$display_name --"
+"simulate --file BESTAND${normal}"
 
 msgid "install"
 msgstr "installeren"
@@ -709,8 +728,8 @@ msgstr ""
 "Controleer de log in het volgende scherm."
 
 #, sh-format
-msgid "Apps $action completed."
-msgstr "Apps $action is voltooid."
+msgid "Apps $operation completed."
+msgstr "Apps $operation is voltooid."
 
 msgid "Checking scripts"
 msgstr "Scripts controleren"
@@ -984,33 +1003,32 @@ msgstr "De back-up is teruggezet."
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files]\n"
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-l|--list]\n"
 "                [-g|--gui] [-r|--reset] [--server] [-s|--simulate]\n"
 "                $options_usage\n"
-"                [--] [APP...] [FILE...]"
+"                [--] [APP...]"
 msgstr ""
-"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
-"                  [-r|--reset] [--server] [-s|--simulate]\n"
+"Gebruik: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-l|--list]\n"
+"                  [-g|--gui] [-r|--reset] [--server] [-s|--simulate]\n"
 "                  $options_usage\n"
-"                  [--] [APP...] [BESTAND...]"
+"                  [--] [APP...]"
 
 msgid "set apps on default values"
 msgstr "stel apps in op standaardwaarden"
 
 msgid ""
 "Arguments:\n"
-"  APP            setup APPs\n"
-"  FILE           process FILEs"
+"  APP            setup APPs"
 msgstr ""
 "Argumenten:\n"
-"  APP            stel APPs in\n"
-"  BESTAND        verwerk BESTANDen"
+"  APP            stel APPs in"
 
 msgid "setup apps for a server"
 msgstr "stel apps in voor een server"
 
-msgid "No setting files found."
-msgstr "Geen instelbestanden gevonden."
+#, sh-format
+msgid "No set up file found, looked for $inputfile."
+msgstr "Geen installatiebestand gevonden, zocht $inputfile."
 
 msgid "To setup the APPs run:"
 msgstr "Om de APPs in te stellen voer uit"

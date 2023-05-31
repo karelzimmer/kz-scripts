@@ -14,7 +14,7 @@ kz-setup \- Apps instellen.
 .\"
 .SH SAMENVATTING
 .B kz setup
-[OPTIE...] [\fIAPP\fR...] [\fIBESTAND\fR...]
+[OPTIE...] [\fIAPP\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
@@ -24,80 +24,76 @@ In een grafische werkomgeving kan opdracht \fBkz setup\fR worden uitgevoerd
 door te zoeken naar \fBapps\fR, klik op \fBApps instellen\fR.
 .sp
 Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het wijzigen
-van systeeminstellingen.
+van gebruikersinstellingen.
 .sp
-\fBkz setup\fR verwerkt zogenaamde instelbestanden die opdrachten bevatten voor
-het instellen van apps en het wijzigen van instellingen.
+\fBkz setup\fR verwerkt een invoerbestand ("instelbestand") die opdrachten
+bevat voor het instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
-Standaard verwerkt \fBkz setup\fR de volgende twee instelbestanden:
+Standaard verwerkt \fBkz setup\fR het invoerbestand,
+/usr/bin/kz-setup-setup-<distributie>-desktop.sh
 .br
-- /usr/bin/kz-setup-<distributie>-desktop.sh
+<distributie> wordt ingevuld met waarden van de huidige computer.
+.sp
+Bijvoorbeeld kz-setup-setup-ubuntu-desktop.sh.
 .br
-- /usr/bin/kz-setup-<distributie>-desktop-<computernaam>-<gebruikersnaam>.sh
-(indien aanwezig)
+Dit invoerbestand bevat opdrachten voor alle hierin opgenomen computers voor
+Ubuntu desktop.
 .sp
-<distributie>, <computernaam>, en <gebruikersnaam> worden ingevuld met waarden
-van de huidige computer en gebruiker.
+Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander bestand opgegeven
+worden, de bestandsnaam dient te beginnen met \fBkz-setup-\fR.
 .sp
-Bijvoorbeeld kz-setup-ubuntu-desktop.sh en kz-setup-ubuntu-desktop-pc02-jan.sh.
+Bij het verwerken van dit invoerbestand worden de opdrachten voor de huidige
+computer en user (USER) geselecteerd en gekopieerd naar een tijdelijk bestand.
+.sp
+Met optie \fB-r\fR, \fB--remove\fR kan het instellen ongedaan worden gemaakt.
 .br
-Deze instelbestanden bevatten opdrachten voor ubuntu desktop algemeen en ubuntu
-desktop op pc02 voor jan.
-.sp
-Voor de indeling van de instelbestanden zie het deel \fBBESTANDSINDELING\fR
-hieronder.
-.sp
-Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
-aanwezige standaard instelbestanden opgenomen in de lijst van te verwerken
-bestanden.
+Dan wordt bijvoorbeeld bestand /usr/bin/kz-setup-reset-ubuntu-desktop.sh
+verwerkt.
 .sp
 Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
-.sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van instelbestanden.
-.sp
-Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
-beginnen met \fBkz-setup-\fR en te eindigen met \fB.sh\fR.
 .br
-Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
-.br
-De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
-bestanden.
+Dan wordt bijvoorbeeld bestand /usr/bin/kz-setup-setup-ubuntu-server.sh
+verwerkt.
+.sp
+Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
+hieronder.
+.sp
+Als er geen \fIAPP\fRs zijn  opgegeven wordt het tijdelijk bestand verwerkt.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle instelbestanden (bestanden die beginnen met \fBkz-setup-\fR en eindigen
-met \fB.sh\fR).
+alle standaard invoerbestanden.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
 Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
-instelbestanden en wordt deze samen met de bijbehorende opdrachten gekopieerd
-naar een tijdelijk bestand.
-.br
-De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
-instelbestanden.
+standaard invoerbestanden zonder een selectie op computer- en gebruikersnaam
+(USER) en wordt deze samen met de bijbehorende opdrachten gekopieerd naar een
+tijdelijk bestand.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de instelbestanden.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk bestand.
 .sp
-Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt.
+Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk bestand
+die uitgevoerd zouden worden.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met \fBkz-setup-\fR en te
-eindigen met \fB.sh\fR.
+De standaard invoerbestanden dienen te beginnen met \fBkz-setup-setup-\fR of
+\fBkz-setup-reset-\fR, en te eindigen met \fB.sh\fR.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
 De opdrachten standaard meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld
 dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
 .sp
-Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
-regel) er zijn en hoe deze regels verwerkt worden.
+Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
+verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels in
-voorbeeldbestand kz-setup-ubuntu-desktop-pc02-jan.sh.
+voorbeeldbestand kz-setup-setup-ubuntu-desktop.sh voor computer pc02 en
+gebruiker jan.
 Meer voorbeelden zijn te zien via de opdracht \fBkz setup --cat\fR.
 .\"
 .\"
@@ -108,7 +104,7 @@ Meer voorbeelden zijn te zien via de opdracht \fBkz setup --cat\fR.
 allbox tab(:);
 lb | lb.
 T{
-Regelsoort
+Regel
 T}:T{
 Beschrijving
 T}
@@ -118,25 +114,24 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
-#1 APP
+# APP <naam>
 T}:T{
-Bevat de APP naam en een beschrijving van APP.
+Bevat de <naam> van de APP.
 T}
 T{
-#1-APP
+#-APP <naam>
 T}:T{
 Idem, wordt niet altijd gebruikt, zie [1].
 T}
 T{
-#2 Opdracht
+# USER <user@host>
 T}:T{
-Opdracht voor het resetten van APP.
+Naam van de gebruiker (<user>) en computer (<host>) waar de opdracht van
+toepassing is
 T}
 T{
-.sp
 T}:T{
 Wordt overgeslagen (is leeg).
 T}
@@ -156,17 +151,17 @@ T}
 .br
 [1]
 .br
-Regel '#1-APP (beschrijving)' is bedoeld voor een opdracht die specifiek is
-voor een distributie, een computer, of een gebruiker.
+Regel '#-APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
+distributie, een computer, of een gebruiker.
 .br
 Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
 gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
 .br
-Deze regel worden wél gebruikt bij het verwerken van het instelbestand.
+Deze regel worden wél gebruikt bij het verwerken van het tijdelijk bestand.
 .sp
 .sp
 .br
-.B Tabel 2. Regels in voorbeeldbestand kz-setup-ubuntu-desktop-pc02-jan.sh
+.B Tabel 2. Regels in voorbeeldbestand kz-setup-setup-ubuntu-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -187,9 +182,19 @@ l | l
 l | l
 l | l.
 T{
-#1 google-chrome (webbrowser)
+# APP google-chrome
 T}:T{
-Naam APP met beschrijving tussen haakjes.
+Naam van de APP.
+T}
+T{
+# USER *@*
+T}:T{
+Opdracht is voor alle gebruikers op alle computers.
+T}
+T{
+# Google's webbrowser
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -197,36 +202,47 @@ T}:T{
 Instel-opdracht.
 T}
 T{
-#2 kz-gset --delfav=google-chrome
-T}:T{
-Reset-opdracht; voor optie -r, --reset.
-T}
-T{
 .sp
 T}:T{
 Lege regel.
 T}
 T{
-## Alleen voor jan op pc02!
+#-APP gnome
 T}:T{
-Commentaar.
+Verborgen APP gnome.
 T}
 T{
-#1-gnome (bureaubladomgeving)
+# USER jan@pc02
 T}:T{
-Alleen voor Jan op pc02 met Ubuntu instellen.
+Opdracht is voor Jan op pc02, zie [2].
+T}
+T{
+# Desktop environment
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 gsettings set org.gnome.shell...
 T}:T{
 Instel-opdracht.
 T}
-T{
-#2 gsettings reset org.gnome.shell...
-T}:T{
-Reset-opdracht.
-T}
 .TE
+.sp
+.sp
+.br
+[2]
+.br
+De regel '# USER jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen
+op computer pc02 voor gebruiker jan worden uitgevoerd.
+.br
+Een regel '# USER *@*' zorgt ervoor dat de bijbehorende opdrachten op alle
+computers voor alle gebruikers worden uitgevoerd.
+.br
+De combinaties <user>@* (gebruiker <user> op alle computers) en *@<host> (alle
+gebruikers op computer <host>) worden niet ondersteund.
+.br
+De regel '# USER ' wordt genegeerd (geen selectie op computernaam en
+gebruikersnaam) bij het zoeken naar opdrachten voor een opgegeven \fIAPP\fR.
 .\"
 .\"
 .sp
@@ -236,12 +252,7 @@ T}
 Toon een lijst van in te stellen apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van instelbestanden.
-.br
-Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
-.TP
-\fB-f\fR, \fB--files\fR
-Toon een lijst van instelbestanden.
+Toon de inhoud van het tijdelijk instelbestand.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset apps.
@@ -276,28 +287,32 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-setup-<distributie>-desktop.sh
+/usr/bin/kz-setup-setup-debian-desktop.sh
 .RS
-Standaard instelbestand.
+Standaard instelbestand voor Debian desktop.
 .RE
 .sp
-/usr/bin/kz-setup-<distributie>-desktop-<computernaam>-<gebruikersnaam>.sh
+/usr/bin/kz-setup-setup-ubuntu-desktop.sh
 .RS
-Standaard instelbestand voor <computernaam> en <gebruikersnaam>.
+Standaard instelbestand voor Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-setup-XXXXXXXXXX.apps
+/usr/bin/kz-setup-reset-debian-desktop.sh
 .RS
-Tijdelijk instelbestand met opdrachten behorend bij opgegeven apps.
+Standaard resetbestand voor Debian desktop.
 .RE
 .sp
-/tmp/kz-setup-XXXXXXXXXX.cmds
+/usr/bin/kz-setup-reset-ubuntu-desktop.sh
 .RS
-Tijdelijk instelbestand met alle uit te voeren opdrachten.
-.
+Standaard resetbestand voor Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-setup-XXXXXXXXXX.sims
+/tmp/kz-setup-setup-cmds-XXXXXXXXXX /tmp/kz-setup-reset-cmds-XXXXXXXXXX
+.RS
+Tijdelijk bestand met alle uit te voeren opdrachten.
+.RE
+.sp
+/tmp/kz-setup-setup-sims-XXXXXXXXXX /tmp/kz-setup-reset-sims-XXXXXXXXXX
 .RS
 Tijdelijk simulatiebestand.
 .RE

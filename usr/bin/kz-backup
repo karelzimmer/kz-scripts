@@ -87,6 +87,11 @@ function check_input {
                 shift
                 ;;
             -t|--target)
+                if $option_target; then
+                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                            "$(gettext 'too many options')"
+                    exit $error
+                fi
                 option_target=true
                 target_argument=$2
                 shift 2

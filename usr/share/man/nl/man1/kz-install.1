@@ -14,7 +14,7 @@ kz-install \- Apps installeren.
 .\"
 .SH SAMENVATTING
 .B kz install
-[OPTIE...] [\fIAPP\fR...] [\fIBESTAND\fR...]
+[OPTIE...] [\fIAPP\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
@@ -26,77 +26,75 @@ door te zoeken naar \fBapps\fR, klik op \fBApps installeren\fR.
 Gebruik \fBkz setup\fR (na \fBkz install\fR) voor het instellen van apps en het
 wijzigen van gebruikersinstellingen.
 .sp
-\fBkz install\fR verwerkt zogenaamde installatiebestanden die opdrachten
-bevatten voor het installeren van apps en het wijzigen van systeeminstellingen.
+\fBkz install\fR verwerkt een invoerbestand ("installatiebestand") die
+opdrachten bevat voor het installeren van apps en het wijzigen van
+systeeminstellingen.
 .sp
-Standaard verwerkt \fBkz install\fR de volgende twee installatiebestanden:
+Standaard verwerkt \fBkz install\fR het invoerbestand
+/usr/bin/kz-install-install-<distributie>-desktop.sh,
 .br
-- /usr/bin/kz-install-<distributie>-desktop.sh
+<distributie> wordt ingevuld met de waarde van de huidige computer.
+.sp
+Bijvoorbeeld kz-install-install-ubuntu-desktop.sh.
 .br
-- /usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh (indien aanwezig)
+Dit invoerbestand bevat opdrachten voor alle hierin opgenomen computers voor
+Ubuntu desktop.
 .sp
-<distributie> en <computernaam> worden ingevuld met waarden van de huidige
-computer.
+Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
+opgegeven worden, de bestandsnaam dient te beginnen met \fBkz-install-\fR.
 .sp
-Bijvoorbeeld kz-install-ubuntu-desktop.sh en kz-install-ubuntu-desktop-pc02.sh.
+Bij het verwerken van dit invoerbestand worden de opdrachten voor de huidige
+computernaam (HOST) geselecteerd en gekopieerd naar een tijdelijk bestand.
+.sp
+Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .br
-Deze installatiebestanden bevatten opdrachten voor ubuntu desktop algemeen en
-ubuntu desktop op pc02.
-.sp
-Voor de indeling van de installatiebestanden zie het deel
-\fBBESTANDSINDELING\fR hieronder.
-.sp
-Als er geen \fIAPP\fRs of \fIBESTAND\fRen zijn opgegeven worden de namen van de
-standaard installatiebestanden opgenomen in de lijst van te verwerken
-bestanden.
+Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-remove-ubuntu-desktop.sh
+verwerkt.
 .sp
 Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
-.sp
-Optie \fB-f\fR, \fB--files\fR geeft een lijst van installatiebestanden.
-.sp
-Het is mogelijk om \fIBESTAND\fRen op te geven; deze bestanden dienen te
-beginnen met \fBkz-install-\fR en te eindigen met \fB.sh\fR.
 .br
-Iets anders wordt beschouwd als een \fIAPP\fR, zie hierna.
-.br
-De opgegeven \fIBESTAND\fRen worden opgenomen in de lijst van te verwerken
-bestanden.
+Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-install-ubuntu-server.sh
+verwerkt.
+.sp
+Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
+hieronder.
+.sp
+Als er geen \fIAPP\fRs zijn opgegeven wordt het tijdelijk bestand verwerkt.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle installatiebestanden (bestanden die beginnen met \fBkz-install-\fR en
-eindigen met \fB.sh\fR).
+alle standaard invoerbestanden.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
 Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
-installatiebestanden en wordt deze samen met de bijbehorende opdrachten
-gekopieerd naar een tijdelijk bestand.
-.br
-De naam van dit tijdelijk bestand wordt opgenomen in de lijst van te verwerken
-installatiebestanden.
+standaard invoerbestanden zonder een selectie op computernaam (HOST) en wordt
+deze samen met de bijbehorende opdrachten gekopieerd naar een tijdelijk
+bestand.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van de installatiebestanden.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk bestand.
 .sp
-Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
+Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk bestand
+die uitgevoerd zouden worden.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De te verwerken bestanden dienen te beginnen met \fBkz-install-\fR en te
-eindigen met \fB.sh\fR.
+De standaard invoerbestanden dienen te beginnen met \fBkz-install-install-\fR
+of \fBkz-install-remove-\fR, en te eindigen met \fB.sh\fR.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
 De opdrachten standaard meegeleverd bij \fBkz install\fR zijn zodanig opgesteld
 dat bij herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
 .sp
-Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels (eerste twee posities op een
-regel) er zijn en hoe deze regels verwerkt worden.
+Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
+verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
-voorbeeldbestand kz-install-ubuntu-pc02.sh.
+voorbeeldbestand kz-install-install-ubuntu-desktop.sh voor computer pc02.
+.br
 Meer voorbeelden zijn te zien via de opdracht \fBkz install --cat\fR.
 .sp
 .sp
@@ -116,22 +114,21 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
-#1 APP
+# APP <naam>
 T}:T{
-Bevat de APP naam en een beschrijving van APP.
+Bevat de <naam> van de APP.
 T}
 T{
-#1-APP
+#-APP <naam>
 T}:T{
 Idem, wordt niet altijd gebruikt, zie [1].
 T}
 T{
-#2 Opdracht
+# HOST <host>
 T}:T{
-Opdracht voor het verwijderen van APP.
+Naam van de computer (<host>) waar de opdracht van toepassing is
 T}
 T{
 .sp
@@ -146,7 +143,7 @@ T}
 T{
 Opdracht
 T}:T{
-Opdracht voor het installeren van APP
+Opdracht voor het installeren van APP <app>
 T}
 .TE
 .sp
@@ -154,17 +151,17 @@ T}
 .br
 [1]
 .br
-Regel '#1-APP (beschrijving)' is bedoeld voor een opdracht die specifiek is
-voor een distributie of een computer.
+Regel '#-APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
+distributie of een computer.
 .br
 Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
 gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
 .br
-Deze regel wordt wél gebruikt bij het verwerken van het installatiebestand.
+Deze regel wordt wél gebruikt bij het verwerken van het tijdelijk bestand.
 .sp
 .sp
 .br
-.B Tabel 2. Regels in voorbeeldbestand kz-install-ubuntu-pc02.sh
+.B Tabel 2. Regels in voorbeeldbestand kz-install-install-ubuntu-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -182,11 +179,22 @@ l | l
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
-#1 gnome-gmail (Gmail als e-mailtoepassing)
+# APP gnome-gmail
 T}:T{
-Naam APP met beschrijving tussen haakjes.
+Naam van de APP.
+T}
+T{
+# HOST pc02
+T}:T{
+Opdracht is voor pc02, zie [2].
+T}
+T{
+# Gmail as the preferred email application in GNOME
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -194,51 +202,55 @@ T}:T{
 Installeer-opdracht.
 T}
 T{
-#2 sudo apt-get remove --yes gnome-gmail
-T}:T{
-Verwijder-opdracht; voor optie -r, --remove.
-T}
-T{
 .sp
 T}:T{
 Lege regel.
 T}
 T{
-## Alleen voor pc02!
+#-APP gast
 T}:T{
-Commentaar.
+Verborgen APP gast.
 T}
 T{
-#1-gast (gastgebruiker toevoegen)
+# HOST pc02
 T}:T{
-Alleen op pc02 met Ubuntu installeren.
+Alleen op pc02 uitvoeren.
+T}
+T{
+# Add user gast
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 sudo useradd --create-home ... gast
 T}:T{
 Installeer-opdracht.
 T}
-T{
-#2 sudo userdel --remove gast
-T}:T{
-Verwijder-opdracht.
-T}
 .TE
+.sp
+.sp
+.br
+[2]
+.br
+De regel '# HOST pc02' zorgt ervoor dat de bijbehorende opdrachten alleen op
+computer pc02 worden uitgevoerd.
+.br
+Een regel '# HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
+computers worden uitgevoerd.
+.br
+De regel '# HOST ' wordt genegeerd (geen selectie op computernaam) bij het
+zoeken naar opdrachten voor een opgegeven \fIAPP\fR.
 .\"
 .\"
 .sp
 .SH OPTIES
+Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
 \fB-a\fR, \fB--apps\fR
 Toon een lijst van te installeren apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van installatiebestanden.
-.br
-Ieder bestand wordt voorafgegaan door een commentaarregel met de bestandsnaam.
-.TP
-\fB-f\fR, \fB--files\fR
-Toon een lijst van installatiebestanden.
+Toon de inhoud van het tijdelijk bestand.
 .TP
 \fB-r\fR, \fB--remove\fR
 Verwijder apps.
@@ -273,27 +285,32 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-install-<distributie>-desktop.sh
+/usr/bin/kz-install-install-debian-desktop.sh
 .RS
-Standaard installatiebestand.
+Standaard installatiebestand voor Debian desktop.
 .RE
 .sp
-/usr/bin/kz-install-<distributie>-desktop-<computernaam>.sh
+/usr/bin/kz-install-install-ubuntu-desktop.sh
 .RS
-Standaard installatiebestand voor <computernaam>.
+Standaard installatiebestand voor Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.apps
+/usr/bin/kz-install-remove-debian-desktop.sh
 .RS
-Tijdelijk installatiebestand met opdrachten behorend bij opgegeven apps.
+Standaard verwijderbestand voor Debian desktop.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.cmds
+/usr/bin/kz-install-remove-ubuntu-desktop.sh
 .RS
-Tijdelijk installatiebestand met alle uit te voeren opdrachten.
+Standaard verwijderbestand voor Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.sims
+/tmp/kz-install-install-cmds-XXXXXXXXXX /tmp/kz-install-remove-cmds-XXXXXXXXXX
+.RS
+Tijdelijk bestand met alle uit te voeren opdrachten.
+.RE
+.sp
+/tmp/kz-install-install-sims-XXXXXXXXXX /tmp/kz-install-remove-sims-XXXXXXXXXX
 .RS
 Tijdelijk simulatiebestand.
 .RE

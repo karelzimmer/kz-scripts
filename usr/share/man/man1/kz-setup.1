@@ -23,76 +23,69 @@ kz-setup \- Set up apps.
 In a graphical work environment command \fBkz setup\fR can be executed by
 searching for \fBapps\fR, click on \fBSet up apps\fR.
 .sp
-Use (first) \fBkz install\fR to install apps and change system settings.
+Use (first) \fBkz install\fR to install apps and changes system settings.
 .sp
-\fBkz setup\fR handles so-called setup files that contain commands for setting
-up apps and changing settings.
+\fBkz setup\fR processes an input file ("installation file") that contains
+commands for setting up apps and changing user settings.
 .sp
-By default, \fBkz setup\fR handles the following two setup files:
+By default, \fBkz setup\fR processes the input file
+/usr/bin/kz-setup-<distribution>-desktop.sh,
 .br
-- /usr/bin/kz-setup-<distribution>-desktop.sh
+<distribution> is populated with the value from the current computer.
+.sp
+For example, kz-setup-setup-ubuntu-desktop.sh.
 .br
-- /usr/bin/kz-setup-<distribution>-desktop-<computername>-<username>.sh (if
-present)
+This input file contains commands for all computers and users included in it
+for Ubuntu desktop.
 .sp
-<distribution>, <computername>, and <username> are populated with values from
-the current computer and user.
+With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
+specified, the file name must start with \fBkz-setup-\fR.
 .sp
-For example, kz-setup-ubuntu-desktop.sh and
-kz-setup-ubuntu-desktop-pc02-jan.sh.
+When processing this input file, the commands for the current computer and user
+are selected and copied to a temporary file.
+.sp
+With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .br
-These setup files contain commands for ubuntu desktop general and ubuntu
-desktop on pc02 for jan.
-.sp
-For the setup file format, see the \fBFILE FORMAT\fR section below.
-.sp
-If no \fIAPP\fRs or \fILE\fRs are specified, the names of the default settings
-files present will be included in the list of files to be processed.
+Then, for example, file /usr/bin/kz-setup-reset-ubuntu-desktop.sh is
+processed.
 .sp
 With option \fB--server\fR server is used instead of desktop.
-.sp
-Option \fB-f\fR, \fB--files\fR lists settings files.
-.sp
-It is possible to specify \fIFILE\fRs; these files should be starting with
-\fBkz-setup-\fR and ending with \fB.sh\fR.
 .br
-Anything else is considered an \fIAPP\fR, see below.
-.br
-The specified \fIFILE\fRs are included in the list of files to be processed.
+Then, for example, file /usr/bin/kz-setup-setup-ubuntu-server.sh is processed.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists apps available in all setup files (files
-starting with \fBkz-setup-\fR and ending with \fB.sh\fR).
+For the input file format, see the \fBFILE FORMAT\fR section below.
+.sp
+If no \fIAPP\fRs are specified, the temporary file will be processed.
+.sp
+Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files.
 .sp
 It is possible to specify \fIAPP\fRs.
 .br
-For each specified \fIAPP\fR, the first available app is found in all settings
-files and is copied to a temporary file together with the corresponding
-commands.
-.br
-The name of this temporary file is included in the list of settings files to be
-processed.
+Per specified \fIAPP\fR, the first available app is found in all standard input
+files and is copied to a temporary file along with the associated commands.
 .sp
-Option \fB-c\fR, \fB--cat\fR gives the contents of the settings files.
+Option \fB-c\fR, \fB--cat\fR gives the contents of the temporary file.
 .sp
-The setting can be undone with option \fB-r\fR, \fB--reset\fR.
+Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary file that
+would be executed.
 .sp
 A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The files to be processed should start with \fBkz-setup-\fR and end with
-\fB.sh\fR.
+The standard input files to be processed should start with
+\fBkz-setup-setup-\fR or \fBkz-setup-reset-\fR, and end with \fB.sh\fR.
 .sp
 The records are processed in the order they appear in the files.
 .br
 The commands supplied by default with \fBkz setup\fR are arranged in such a way
 that the result remains the same when executed repeatedly.
 .sp
-See \fBTable 1\fR for which \fBtypes\fR records (first two positions on a line)
-there are and how these records are processed.
+See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
+are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in
-kz-setup-ubuntu-desktop-pc02-jan.sh sample file.
+kz-setup-setup-ubuntu-desktop.sh sample file for computer pc02 and user jan.
 More examples can be seen through the \fBkz setup --cat\fR command.
 .\"
 .\"
@@ -113,22 +106,21 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
-#1 APP
+# APP <name>
 T}:T{
-Contains the APP name.
+Contains the APP <name>.
 T}
 T{
-#1-APP
+#-APP <name>
 T}:T{
 Ditto, not always used, see [1].
 T}
 T{
-#2 Opdracht
+# USER <user@host>
 T}:T{
-APP reset command.
+Name of the user (<user>) and computer (<host>) where the command applies
 T}
 T{
 .sp
@@ -141,9 +133,9 @@ T}:T{
 Will be skipped (is a comment).
 T}
 T{
-Opdracht
+Command
 T}:T{
-Command to set up APP
+Command to set up APP <app>
 T}
 .TE
 .sp
@@ -151,24 +143,24 @@ T}
 .br
 [1]
 .br
-Line '#1-APP' is for a command specific to a distribution or a computer or a
+Line '#-APP' is for a command specific to a distribution or a computer or a
 user.
 .br
 This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
 look up commands at a given \fIAPP\fR.
 .br
-This line is used when processing the set up file.
+This line is used when processing the temporary file.
 .sp
 .sp
 .br
-.B Table 2. Lines in kz-setup-ubuntu-desktop-pc02-jan.sh sample file
+.B Table 2. Lines in kz-setup-setup-ubuntu-desktop.sh sample file
 .TS
 box tab(:);
 lb | lb.
 T{
-Record type
+Regelsoort
 T}:T{
-Description
+Beschrijving
 T}
 .T&
 - | -
@@ -182,19 +174,24 @@ l | l
 l | l
 l | l.
 T{
-#1 google-chrome
+# APP google-chrome
 T}:T{
 Name of the APP.
 T}
 T{
-kz-gset --addfavbef=google-chrome
+# USER *@*
 T}:T{
-Setup command.
+Command is for all users on all computers.
 T}
 T{
-#2 kz-gset --delfav=google-chrome
+# Google's webbrowser
 T}:T{
-Reset command; for option -r, --reset.
+Description of the APP.
+T}
+T{
+kz-gset --addfavbef=google-chrome
+T}:T{
+Set up command.
 T}
 T{
 .sp
@@ -202,26 +199,42 @@ T}:T{
 Empty line.
 T}
 T{
-## Only for jan on pc02!
+#-APP gnome
 T}:T{
-Comment.
+Hidden APP gnome.
 T}
 T{
-#1-gnome
+# USER jan@pc02
 T}:T{
-Only set up for Jan on pc02 with Ubuntu.
+Only set up for Jan on pc02, see [2].
+T}
+T{
+# Desktop environment
+T}:T{
+Description of the APP.
 T}
 T{
 gsettings set org.gnome.shell...
 T}:T{
-Setup command.
-T}
-T{
-#2 gsettings reset org.gnome.shell...
-T}:T{
-Reset command.
+Set up command.
 T}
 .TE
+sp
+.sp
+.br
+[2]
+.br
+The line '# USER jan@pc02' ensures that the associated commands are executed
+only on computer pc02 for user jan.
+.br
+A line '# USER *@*' causes the associated commands to run on all computers for
+all users.
+.br
+The combinations <user>@* (user <user> on all computers) and *@<host> (all
+users on computer <host>) are not supported.
+.br
+The line '# USER ' is ignored (no selection on computer anme and user name)
+when searching for commands for a specified \fIAPP\fR.
 .\"
 .\"
 .sp
@@ -231,12 +244,7 @@ T}
 Show a list of apps to set up.
 .TP
 \fB-c\fR, \fB--cat\fR
-Display the contents of setup files.
-.br
-Each file is preceded by a comment line with the file name.
-.TP
-\fB-f\fR, \fB--files\fR
-Display a list of setup files.
+Display the contents of the temporary file.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset apps.
@@ -270,27 +278,32 @@ to 0.
 .\"
 .\"
 .SH FILES
-/usr/bin/kz-setup-<distribution>-desktop.sh
+/usr/bin/kz-setup-setup-debian-desktop.sh
 .RS
-Default setup file.
+Standard set up file for Debian desktop.
 .RE
 .sp
-/usr/bin/kz-setup-<distribution>-desktop-<computername>-<username>.sh
+/usr/bin/kz-setup-setup-ubuntu-desktop.sh
 .RS
-Default setup file for <computername> and <username>.
+Standard set up file for Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-setup-XXXXXXXXXX.apps
+/usr/bin/kz-setup-reset-debian-desktop.sh
 .RS
-Temporary setup file containing commands associated with specified apps.
+Standard reset file for Debian desktop.
 .RE
 .sp
-/tmp/kz-setup-XXXXXXXXXX.cmds
+/usr/bin/kz-setup-reset-ubuntu-desktop.sh
 .RS
-Temporary setup file containing all commands to be executed..
+Standard reset file for removing apps on Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-setup-XXXXXXXXXX.sims
+/tmp/kz-setup-setup-cmds-XXXXXXXXXX /tmp/kz-setup-reset-cmds-XXXXXXXXXX
+.RS
+Temporary set up file containing all commands to run.
+.RE
+.sp
+/tmp/kz-setup-setup-sims-XXXXXXXXXX /tmp/kz-setup-reset-sims-XXXXXXXXXX
 .RS
 Temporary simulation file.
 .RE

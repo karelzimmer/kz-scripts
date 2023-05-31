@@ -39,7 +39,6 @@ options_help="  -h, --help     $(gettext 'give this help list')
   -v, --version  $(gettext 'print program version')"
 
 declare -a cmdline_args=()
-less_options=''
 logcmd_check=''
 logcmd=''
 maxrc=0
@@ -187,8 +186,8 @@ function init_script {
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
     trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP  # 1
     trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT  # 2
-    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #13
-    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #15
+    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #3
+    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #5
 
     log "started ($program_exec $* as $USER)"
 
@@ -201,11 +200,6 @@ function init_script {
     fi
 
     cmdline_args=("$@")
-    # shellcheck disable=SC2034
-    less_options="--LONG-PROMPT --no-init --quit-if-one-screen --quit-on-intr \
---RAW-CONTROL-CHARS --prompt=M$(eval_gettext "Text output \$display_name \
-?ltline %lt?L of %L.:byte %bB?s of %s..? .?e (END) :?pB %pB\%. .\
-(press h for help or q to quit)")"
     # shellcheck disable=SC2034
     usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
 information.")
@@ -423,6 +417,15 @@ function signal_exit {
 launch a Terminal window and run:")
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
+            else
+                # shellcheck disable=SC2154
+                rm --force "$cmdsfile" "$simsfile"
+            fi
+            ;;
+        kz-setup)
+            if [[ $rc -eq $ok ]]; then
+                # shellcheck disable=SC2154
+                rm --force "$cmdsfile" "$simsfile"
             fi
             ;;
         *)

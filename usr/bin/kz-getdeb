@@ -56,8 +56,8 @@ function init_script {
 
 
 function check_input {
-    local -i    rc=0
-    local       parsed=''
+    local -i rc=0
+    local parsed=''
 
     parsed=$(
         getopt  --alternative                       \

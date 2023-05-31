@@ -94,16 +94,31 @@ function check_input {
     while true; do
         case $1 in
             -a|--addfavaft)
+                if $option_addfavaft; then
+                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                            "$(gettext 'too many options')"
+                    exit $error
+                fi
                 option_addfavaft=true
                 favorite_argument=$2
                 shift 2
                 ;;
             -b|--addfavbef)
+                if $option_addfavbef; then
+                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                            "$(gettext 'too many options')"
+                    exit $error
+                fi
                 option_addfavbef=true
                 favorite_argument=$2
                 shift 2
                 ;;
             -d|--delfav)
+                if $option_delfav; then
+                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                            "$(gettext 'too many options')"
+                    exit $error
+                fi
                 option_delfav=true
                 favorite_argument=$2
                 shift 2
@@ -117,11 +132,21 @@ function check_input {
                 shift
                 ;;
             -f|--addappfolder)
+                if $option_addappfolder; then
+                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                            "$(gettext 'too many options')"
+                    exit $error
+                fi
                 option_addappfolder=true
                 folder_argument=$2
                 shift 2
                 ;;
             -x|--delappfolder)
+                if $option_delappfolder; then
+                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                            "$(gettext 'too many options')"
+                    exit $error
+                fi
                 option_delappfolder=true
                 folder_argument=$2
                 shift 2

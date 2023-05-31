@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 11:28+0200\n"
+"POT-Creation-Date: 2023-05-31 09:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -199,6 +199,13 @@ msgstr ""
 msgid ""
 "  -t, --target DIRECTORY\n"
 "                 put backup in DIRECTORY"
+msgstr ""
+
+msgid "too many options"
+msgstr ""
+
+#, sh-format
+msgid "File name must start with '$program_name-'."
 msgstr ""
 
 msgid "arguments are not allowed"
@@ -468,23 +475,28 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files] [-g|--gui]\n"
-"                  [-r|--remove] [--server] [-s|--simulate]\n"
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-l|--list]\n"
+"                  [-g|--gui] [-r|--remove] [--server] [-s|--simulate]\n"
 "                  $options_usage\n"
-"                  [--] [APP...] [FILE...]"
+"                  [--] [APP...]"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [OPTION...] [APP...] [FILE...]"
+msgid "Usage: $display_name [OPTION...] [APP...]"
 msgstr ""
 
 msgid "show list of available apps"
 msgstr ""
 
-msgid "show contents of files"
+msgid "show contents of file"
 msgstr ""
 
-msgid "show list of files"
+msgid ""
+"  -f, --file FILE\n"
+"                 process FILE"
+msgstr ""
+
+msgid "show list of standard files"
 msgstr ""
 
 msgid "delete apps"
@@ -498,8 +510,7 @@ msgstr ""
 
 msgid ""
 "Arguments:\n"
-"  APP            install APPs\n"
-"  FILE           process FILEs"
+"  APP            install APPs"
 msgstr ""
 
 msgid "Prepare to install"
@@ -512,14 +523,8 @@ msgstr ""
 msgid "Type '$display_name --apps' for available apps."
 msgstr ""
 
-msgid "file not found"
-msgstr ""
-
 #, sh-format
-msgid "Type '$display_name --files' for available files."
-msgstr ""
-
-msgid "No installation files found."
+msgid "No install file found, looked for $inputfile."
 msgstr ""
 
 msgid ""
@@ -550,13 +555,20 @@ msgstr ""
 msgid "     0 No files present."
 msgstr ""
 
-msgid "To process the FILEs execute"
+#, sh-format
+msgid "To process FILE execute: ${blue}$display_name --file FILE${normal}"
 msgstr ""
 
-msgid "To view the contents of FILEs execute"
+#, sh-format
+msgid ""
+"To view the commands of FILE execute: ${blue}$display_name --cat --file "
+"FILE${normal}"
 msgstr ""
 
-msgid "To simulate the processing of FILEs execute"
+#, sh-format
+msgid ""
+"To simulate the processing of FILE execute: ${blue}$display_name --simulate "
+"--file FILE${normal}"
 msgstr ""
 
 msgid "install"
@@ -588,7 +600,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "Apps $action completed."
+msgid "Apps $operation completed."
 msgstr ""
 
 msgid "Checking scripts"
@@ -819,10 +831,10 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--files]\n"
+"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-l|--list]\n"
 "                [-g|--gui] [-r|--reset] [--server] [-s|--simulate]\n"
 "                $options_usage\n"
-"                [--] [APP...] [FILE...]"
+"                [--] [APP...]"
 msgstr ""
 
 msgid "set apps on default values"
@@ -830,14 +842,14 @@ msgstr ""
 
 msgid ""
 "Arguments:\n"
-"  APP            setup APPs\n"
-"  FILE           process FILEs"
+"  APP            setup APPs"
 msgstr ""
 
 msgid "setup apps for a server"
 msgstr ""
 
-msgid "No setting files found."
+#, sh-format
+msgid "No set up file found, looked for $inputfile."
 msgstr ""
 
 msgid "To setup the APPs run:"

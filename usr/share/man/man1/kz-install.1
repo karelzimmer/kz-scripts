@@ -26,74 +26,69 @@ searching for \fBapps\fR, click on \fBApps install\fR.
 Use \fBkz setup\fR (after \fBkz install\fR) to set up apps and change user
 settings.
 .sp
-\fBkz install\fR handles so-called installation files that contain commands for
-installing apps and changing system settings.
+\fBkz install\fR processes an input file ("installation file") that contains
+commands for installing apps and modifying system settings.
 .sp
-By default, \fBkz install\fR handles the following two installation files:
+By default, \fBkz install\fR processes the input file
+/usr/bin/kz-install-install-<distribution>-desktop.sh,
 .br
-- /usr/bin/kz-install-<distribution>-desktop.sh
+<distribution> is populated with the value from the current computer.
+.sp
+For example, kz-install-install-ubuntu-desktop.sh.
 .br
-- /usr/bin/kz-install-<distribution>-desktop-<computername>.sh (if present)
+This input file contains commands for all computers included in it for Ubuntu
+desktop.
 .sp
-<distribution> and <computername> are populated with values from the current
-computer.
+With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
+specified, the file name must start with \fBkz-install-\fR.
 .sp
-For example, kz-install-ubuntu-desktop.sh and
-kz-install-ubuntu-desktop-pc02.sh.
+When processing this input file, the commands for the current computer are
+selected and copied to a temporary file.
+.sp
+With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .br
-These installation files contain commands for ubuntu desktop general and ubuntu
-desktop on pc02.
-.sp
-For the format of the installation files see the section \fBFILE FORMAT\fR
-below.
-.sp
-If no \fIAPP\fRs or \fIFILE\fRs are specified, the names of the default
-installation files are included in the list of files to process.
+Then, for example, file /usr/bin/kz-install-remove-ubuntu-desktop.sh is
+processed.
 .sp
 With option \fB--server\fR server is used instead of desktop.
-.sp
-Option \fB-f\fR, \fB--files\fR lists installation files.
-.sp
-It is possible to specify \fIFILE\fRs; these files should be starting with
-\fBkz-install-\fR and ending with \fB.sh\fR.
 .br
-Anything else is considered an \fIAPP\fR, see below.
-.br
-The specified \fIFILE\fRs are included in the list of files to be processed.
+Then, for example, file /usr/bin/kz-install-install-ubuntu-server.sh is
+processed.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists apps available in all installation files
-(files starting with \fBkz-install-\fR and ending with \fB.sh\fR).
+For the format of the input files see the section \fBFILE FORMAT\fR below.
+.sp
+If no \fIAPP\fRs are specified, the temporary file will be processed.
+.sp
+Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files.
 .sp
 It is possible to specify \fIAPP\fRs.
 .br
-Per specified \fIAPP\fR, the first available app is found in all installation
-files and is copied to a temporary file together with the corresponding
-commands.
-.br
-The name of this temporary file is included in the list of installation files
-to be processed.
+Per specified \fIAPP\fR, the first available app is found in all standard input
+files without a selection by computer name (HOST) and is copied to a temporary
+file along with the associated commands.
 .sp
-Option \fB-c\fR, \fB--cat\fR lists the contents of the installation files.
+Option \fB-c\fR, \fB--cat\fR lists the contents of the temporary file.
 .sp
-With option \fB-r\fR, \fB--remove\fR the installation can be uninstalled.
+Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary file that
+would be executed.
 .sp
 A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The files to be processed should start with \fBkz-install-\fR and end with
-\fB.sh\fR.
+The default input files to be processed should start with
+\fBkz-install-install-\fR or \fBkz-install-remove-\fR, and end with \fB.sh\fR.
 .sp
 The records are processed in the order they appear in the files.
 .br
 The commands supplied by default with \fBkz install\fR are arranged in such a
 way that the result remains the same when executed repeatedly.
 .sp
-See \fBTable 1\fR which \fBtypes\fR of records (first two positions on a line)
-there are and how these records are processed.
+See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
+are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in sample file
-kz-install-ubuntu-pc02.sh.
+kz-install-install-ubuntu-desktop.sh for computer pc02.
 More examples can be seen through the \fBkz install --cat\fR command.
 .sp
 .sp
@@ -113,22 +108,21 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
-#1 APP
+# APP <name>
 T}:T{
-Contains the APP name.
+Contains the APP <name>.
 T}
 T{
-#1-APP
+#-APP <name>
 T}:T{
 Ditto, not always used, see [1].
 T}
 T{
-#2 Command
+# HOST <host>
 T}:T{
-APP uninstall command.
+Name of the computer (<host>) where the command applies
 T}
 T{
 .sp
@@ -141,9 +135,9 @@ T}:T{
 Will be skipped (is a comment).
 T}
 T{
-Opdracht
+Command
 T}:T{
-Command to install APP
+Command to install APP <app>
 T}
 .TE
 .sp
@@ -151,16 +145,16 @@ T}
 .br
 [1]
 .br
-Line '#1-APP' is for a command specific to a distribution or a computer.
+Line '#-APP' is for a command specific to a distribution or a computer.
 .br
 This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
 look up commands at a given \fIAPP\fR.
 .br
-This line is used when processing the installation file.
+This line is used when processing the temporary file.
 .sp
 .sp
 .br
-.B Table 2. Lines in sample file kz-install-ubuntu-pc02.sh
+.B Table 2. Lines in sample file kz-install-install-ubuntu.sh
 .TS
 box tab(:);
 lb | lb.
@@ -178,11 +172,22 @@ l | l
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
-#1 gnome-gmail
+# APP gnome-gmail
 T}:T{
 Name of the APP.
+T}
+T{
+# HOST pc02
+T}:T{
+Command for pc02, see [2].
+T}
+T{
+# Gmail as the preferred email application in GNOME
+T}:T{
+Description of the APP.
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -190,51 +195,54 @@ T}:T{
 Install command.
 T}
 T{
-#2 sudo apt-get remove --yes gnome-gmail
-T}:T{
-Remove command; for option -r, --remove.
-T}
-T{
 .sp
 T}:T{
 Empty line.
 T}
 T{
-## Only for pc02!
+#-APP gast
 T}:T{
-Comment.
+Verborgen APP gast.
 T}
 T{
-#1-gast
+# HOST pc02
 T}:T{
-Only install on pc02 with Ubuntu.
+Only install on pc02.
+T}
+T{
+# Add user gast
+T}:T{
+Description of the APP.
 T}
 T{
 sudo useradd --create-home ... gast
 T}:T{
 Install command.
 T}
-T{
-#2 sudo userdel --remove gast
-T}:T{
-Remove command.
-T}
 .TE
+.sp
+.sp
+.br
+[2]
+.br
+The line '# HOST pc02' ensures that the associated commands are executed only
+on computer pc02.
+.br
+A line '# HOST *' causes the associated commands to run on all computers.
+.br
+The line '# HOST ' is ignored (no selection on computer name) when searching
+for commands for a specified \fIAPP\fR.
 .\"
 .\"
 .sp
 .SH OPTIONS
+Mandatory arguments to long options are mandatory for short options too.
 .TP
 \fB-a\fR, \fB--apps\fR
 Show a list of apps to install.
 .TP
 \fB-c\fR, \fB--cat\fR
-Display the contents of installation files.
-.br
-Each file is preceded by a comment line with the file name.
-.TP
-\fB-f\fR, \fB--files\fR
-Show a list of installation files.
+Display the contents of the temporary file.
 .TP
 \fB-r\fR, \fB--remove\fR
 Remove apps.
@@ -268,27 +276,33 @@ to 0.
 .\"
 .\"
 .SH FILES
-/usr/bin/kz-install-<distribution>-desktop.sh
+/usr/bin/kz-install-install-debian-desktop.sh
 .RS
-Default installation file.
+Standard installation file for Debian desktop.
 .RE
 .sp
-/usr/bin/kz-install-<distribution>-desktop-<computername>.sh
+/usr/bin/kz-install-install-ubuntu-desktop.sh
 .RS
-Default installation file for <computername>.
+Standard installation file for Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.apps
+/usr/bin/kz-install-remove-debian-desktop.sh
 .RS
-Temporary installation file containing commands associated with specified apps.
+Standard remove file for Debian desktop.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.cmds
+/usr/bin/kz-install-remove-ubuntu-desktop.sh
 .RS
-Temporary installation file containing all commands to run.
+Standard remove file for Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-install-XXXXXXXXXX.sims
+/tmp/kz-install-install-cmds-XXXXXXXXXX
+/tmp/kz-install-remove-cmds-XXXXXXXXXX
+.RS
+Temporary file containing all commands to run.
+.RE
+.sp
+/tmp/kz-install-install-sims-XXXXXXXXXX /tmp/kz-install-remove-sims-XXXXXXXXXX
 .RS
 Temporary simulation file.
 .RE
