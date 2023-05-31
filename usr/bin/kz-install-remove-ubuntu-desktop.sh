@@ -8,10 +8,10 @@
 # Record types:
 # # APP <app>       Remove <app>, or
 # #-APP <app>       Ditto, not used with option --apps and argument APP
-# # HOST <host>...  Where to execute <Command> (e.g. pc02 or *)
+# # HOST <host>...  Where to execute <Command>s (e.g. pc02 or *)
 # # <Description>   <app> description
-# # <Command>       Command line 1
-# # <Command>...    Command line...
+# <Command>         Command line 1
+# <Command>...      Command line...
 ###############################################################################
 
 # APP ansible

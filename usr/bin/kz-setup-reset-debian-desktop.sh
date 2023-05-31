@@ -8,10 +8,11 @@
 # Record types:
 # # APP <app>       Reset <app>, or
 # #-APP <app>       Ditto, not used with option --apps and argument APP
-# # USER <user>@<host>...   For who to execute <Command> (e.g. jan@pc02 or *.*)
+# # USER <user>@<host>...
+#                   For who to execute <Command>s (e.g. jan@pc02 or *.*)
 # # <Description>   <app> description
-# # <Command>       Command line 1
-# # <Command>...    Command line...
+# <Command>         Command line 1
+# <Command>...      Command line...
 ###############################################################################
 
 #-APP dashtodock
