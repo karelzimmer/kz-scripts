@@ -6,6 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2020-2023.
 ###############################################################################
 
-dashoptions="-a --apps -c --cat '-f FILE' '--file FILE' -g --gui -l --list -h
-    --help -r --reset --server -s --simulate -u --usage -v --version"
+dashoptions='-a --apps -c --cat -f --file -g --gui -l --list -h --help -r
+    --reset --server -s --simulate -u --usage -v --version'
 complete -o default -W "$dashoptions" kz-setup

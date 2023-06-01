@@ -6,6 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2020-2023.
 ###############################################################################
 
-dashoptions="--dry-run  -g --gui '-s DIRECTORY' '--source DIRECTORY' -h --help
-    -u --usage -v --version"
+dashoptions='-d --dry-run  -g --gui -s --source -h --help -u --usage -v
+    --version'
 complete -o default -W "$dashoptions" kz-restore

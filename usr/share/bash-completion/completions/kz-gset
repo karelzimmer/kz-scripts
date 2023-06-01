@@ -6,7 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2020-2023.
 ###############################################################################
 
-dashoptions="'--addfavbef FAVORITE' '--addfavaft FAVORITE'
-    '--delfav FAVORITE' -l --list -r --resetfavs '--addappfolder APPFOLDER'
-    '--delappfolder  APPFOLDER' -h --help -u --usage -v --version"
+dashoptions='--addfavbef --addfavaft --delfav -l --list -r --resetfavs
+    --addappfolder --delappfolder -h --help -u --usage -v --version'
 complete -o default -W "$dashoptions" kz-gset
