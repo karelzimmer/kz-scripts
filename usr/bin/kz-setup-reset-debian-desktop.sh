@@ -10,9 +10,8 @@
 # #-APP <app>       Ditto, not used with option --apps and argument APP
 # # USER <user>@<host>...
 #                   For who to execute <Command>s (e.g. jan@pc02 or *.*)
-# # <Description>   <app> description
-# <Command>         Command line 1
-# <Command>...      Command line...
+# # <Description>   Description of the <app>
+# <Command>         Command line [1-n]
 ###############################################################################
 
 #-APP dashtodock

@@ -9,9 +9,8 @@
 # # APP <app>       Install <app>, or
 # #-APP <app>       Ditto, not used with option --apps and argument APP
 # # HOST <host>...  Where to execute <Command>s (e.g. pc02 or *)
-# # <Description>   <app> description
-# <Command>         Command line 1
-# <Command>...      Command line...
+# # <Description>   Description of the <app>
+# <Command>         Command line [1-n]
 ###############################################################################
 
 #-APP extra-repos
