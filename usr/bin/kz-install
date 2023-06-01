@@ -23,8 +23,8 @@ program_name='kz-install'
 program_desc=$(gettext 'Install apps')
 display_name=${program_name/kz-/kz }
 usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
-[-f|--file FILE] [-l|--list]
-                  [-g|--gui] [-r|--remove] [--server] [-s|--simulate]
+[-f|--file FILE] [-g|--gui]
+                  [-l|--list] [-r|--remove] [--server] [-s|--simulate]
                   \$options_usage
                   [--] [APP...]")
 help="$(eval_gettext "Usage: \$display_name [OPTION...] [APP...]")
@@ -36,8 +36,8 @@ $(gettext 'Options:')
   -c, --cat      $(gettext 'show contents of file')
 $(gettext '  -f, --file FILE
                  process FILE')
-  -l, --list     $(gettext 'show list of standard files')
   -g, --gui      $(gettext 'starts in graphics mode')
+  -l, --list     $(gettext 'show list of standard files')
   -r, --remove   $(gettext 'delete apps')
       --server   $(gettext 'install apps for a server')
   -s, --simulate $(gettext 'show commands')

@@ -6,6 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2020-2023.
 ###############################################################################
 
-dashoptions="-d --dry-run -g --gui '-t DOELMAP' '--target DOELMAP' -h --help -u
-    --usage -v --version"
+dashoptions="-d --dry-run -g --gui '-t DIRECTORY' '--target DIRECTORY' -h
+    --help -u --usage -v --version"
 complete -o default -W "$dashoptions" kz-backup
