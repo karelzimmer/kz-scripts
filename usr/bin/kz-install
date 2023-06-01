@@ -227,8 +227,8 @@ function process_argument_app {
     local first_app_record=true
     local -a files=()
 
-    # Search for available APPs in all install or remove files,
-    # no selection on computer name (HOST).
+    # Search for available APPs in all install or remove files, no selection on
+    # computer name (HOST).
     for file in "$program_path/$program_name-$mode-"*.sh; do
         files+=("$file")
     done

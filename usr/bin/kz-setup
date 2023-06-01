@@ -224,8 +224,8 @@ function process_argument_app {
     local first_app_record=true
     local -a files=()
 
-    # Search for available APPs in alls setup or reset files,
-    # no selection on computer name and user name (USER).
+    # Search for available APPs in alls setup or reset files, no selection on
+    # user name and computer name (USER).
     for file in "$program_path/$program_name-$mode-"*.sh; do
         files+=("$file")
     done

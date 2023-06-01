@@ -25,7 +25,7 @@ searching for \fBapps\fR, click on \fBSet up apps\fR.
 .sp
 Use (first) \fBkz install\fR to install apps and changes system settings.
 .sp
-\fBkz setup\fR processes an input file ("installation file") that contains
+\fBkz setup\fR processes an input file ("set up file") that contains
 commands for setting up apps and changing user settings.
 .sp
 By default, \fBkz setup\fR processes the input file
@@ -35,19 +35,19 @@ By default, \fBkz setup\fR processes the input file
 .sp
 For example, kz-setup-setup-ubuntu-desktop.sh.
 .br
-This input file contains commands for all computers and users (USERs) included
-in it for Ubuntu desktop.
+This input file contains commands for all users (USERs) included in it for
+Ubuntu desktop.
 .sp
 With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
 specified, the file name must start with \fBkz-setup-\fR.
 .sp
-When processing this input file, the commands for the current computer and user
-(USER) are selected and copied to a temporary file.
+When processing this input file, the commands for the current user (USER) are
+selected and copied to a temporary file.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .br
-Then, for example, file /usr/bin/kz-setup-reset-ubuntu-desktop.sh is
-processed.
+Then, for example, file /usr/bin/kz-setup-reset-ubuntu-desktop.sh
+("reset file") is processed.
 .sp
 With option \fB--server\fR server is used instead of desktop.
 .br
@@ -62,7 +62,8 @@ Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files.
 It is possible to specify \fIAPP\fRs.
 .br
 Per specified \fIAPP\fR, the first available app is found in all standard input
-files and is copied to a temporary file along with the associated commands.
+files without a selection by user name (USER) and is copied to a temporary file
+along with the associated commands.
 .sp
 Option \fB-c\fR, \fB--cat\fR gives the contents of the temporary file.
 .sp
@@ -225,15 +226,15 @@ sp
 [2]
 .br
 The line '# USER jan@pc02' ensures that the associated commands are executed
-only on computer pc02 for user jan.
+only for user jan on computer pc02.
 .br
-A line '# USER *@*' causes the associated commands to run on all computers for
-all users.
+A line '# USER *@*' causes the associated commands to run for all users on all
+computers.
 .br
 The combinations <user>@* (user <user> on all computers) and *@<host> (all
 users on computer <host>) are not supported.
 .br
-The line '# USER ' is ignored (no selection on computer name and user name)
+The line '# USER ' is ignored (no selection on user name and computer name)
 when searching for commands for a specified \fIAPP\fR.
 .\"
 .\"
