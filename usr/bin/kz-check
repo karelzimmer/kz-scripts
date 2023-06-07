@@ -130,8 +130,8 @@ function process_input {
 
 
 function check_code {
-    local bash_script='#!''/bin/bash'
-    local python_script='#!''/usr/bin/python3'
+    local bash_script='#!''/usr/bin/env bash'
+    local python_script='#!''/usr/bin/env python3'
     local tab_completion_script='# ''shellcheck shell=bash'
 
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
