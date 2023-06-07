@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
 # Installation menu.
