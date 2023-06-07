@@ -473,8 +473,8 @@ function process_cmdsfile {
             '#'*' APP '*|'#'*' -APP '*)
                 # App (hidden) record.
                 app_name="$(
-                    printf '%s\n' "$record"     |
-                    tr --squeeze-repeats ' '    |
+                    printf '%s\n' "$record"             |
+                    tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3)"
                 write_app_line=true
                 ((++app_seq_num))
