@@ -41,8 +41,8 @@ Ubuntu desktop.
 With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
 specified, the file name must start with \fBkz-setup-\fR.
 .sp
-When processing this input file, the commands for the current user (USER) are
-selected and copied to a temporary file.
+When processing the input file, the commands for the current user (USER) are
+selected and copied to a temporary commands file.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .br
@@ -55,20 +55,21 @@ Then, for example, file /usr/bin/kz-setup-setup-ubuntu-server.sh is processed.
 .sp
 For the input file format, see the \fBFILE FORMAT\fR section below.
 .sp
-If no \fIAPP\fRs are specified, the temporary file will be processed.
+If no \fIAPP\fRs are specified, the temporary commands file will be processed.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files.
+Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files,
+or in the \fIFILE\fR provided with option \fB-f\fR, \fB--file\fR.
 .sp
 It is possible to specify \fIAPP\fRs.
 .br
 Per specified \fIAPP\fR, the first available app is found in all standard input
-files without a selection by user name (USER) and is copied to a temporary file
-along with the associated commands.
+files without a selection by user name (USER) and is copied to a temporary
+commands file along with the associated commands.
 .sp
-Option \fB-c\fR, \fB--cat\fR gives the contents of the temporary file.
+Option \fB-c\fR, \fB--cat\fR gives the contents of the temporary commands file.
 .sp
-Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary file that
-would be executed.
+Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary commands
+file that would be executed.
 .sp
 A -- signals the end of options and disables further option processing.
 .\"
@@ -107,6 +108,7 @@ l | l
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
 # APP <name>
@@ -114,14 +116,19 @@ T}:T{
 Contains the APP <name>.
 T}
 T{
-#-APP <name>
+# -APP <name>
 T}:T{
 Ditto, not always used, see [1].
 T}
 T{
+# DESC <description>
+T}:T{
+Description of the APP.
+T}
+T{
 # USER <user@host>
 T}:T{
-Name of the user (<user>) and computer (<host>) where the command applies
+Name of the user (<user>) and computer (<host>) where the command applies.
 T}
 T{
 .sp
@@ -136,7 +143,7 @@ T}
 T{
 Command
 T}:T{
-Command to set up APP <app>
+Command to set up APP <app>.
 T}
 .TE
 .sp
@@ -144,13 +151,13 @@ T}
 .br
 [1]
 .br
-Line '#-APP' is for a command specific to a distribution or a computer or a
-user.
+Line '# -APP <name>' is for a command specific to a distribution, a computer,
+or a user.
 .br
 This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
 look up commands at a given \fIAPP\fR.
 .br
-This line is used when processing the temporary file.
+This line is used when processing the temporarycommands file.
 .sp
 .sp
 .br
@@ -175,7 +182,7 @@ l | l
 l | l
 l | l.
 T{
-# APP google-chrome
+#  APP google-chrome
 T}:T{
 Name of the APP.
 T}
@@ -185,7 +192,7 @@ T}:T{
 Command is for all users on all computers.
 T}
 T{
-# Google's webbrowser
+# DESC Google's webbrowser
 T}:T{
 Description of the APP.
 T}
@@ -195,14 +202,18 @@ T}:T{
 Set up command.
 T}
 T{
-.sp
 T}:T{
 Empty line.
 T}
 T{
-#-APP gnome
+# -APP gnome
 T}:T{
 Hidden APP gnome.
+T}
+T{
+# DESC Desktop environment
+T}:T{
+Description of the APP.
 T}
 T{
 # USER jan@pc02
@@ -210,17 +221,12 @@ T}:T{
 Only set up for Jan on pc02, see [2].
 T}
 T{
-# Desktop environment
-T}:T{
-Description of the APP.
-T}
-T{
 gsettings set org.gnome.shell...
 T}:T{
 Set up command.
 T}
 .TE
-sp
+.sp
 .sp
 .br
 [2]
@@ -245,7 +251,7 @@ when searching for commands for a specified \fIAPP\fR.
 Show a list of apps to set up.
 .TP
 \fB-c\fR, \fB--cat\fR
-Display the contents of the temporary file.
+Display the contents of the temporarycommands file.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset apps.
@@ -301,7 +307,7 @@ Standard reset file for removing apps on Ubuntu desktop.
 .sp
 /tmp/kz-setup-setup-cmds-XXXXXXXXXX /tmp/kz-setup-reset-cmds-XXXXXXXXXX
 .RS
-Temporary set up file containing all commands to run.
+Temporary commands file.
 .RE
 .sp
 /tmp/kz-setup-setup-sims-XXXXXXXXXX /tmp/kz-setup-reset-sims-XXXXXXXXXX

@@ -42,8 +42,8 @@ Ubuntu desktop.
 With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
 specified, the file name must start with \fBkz-install-\fR.
 .sp
-When processing this input file, the commands for the current computer (HOST)
-are selected and copied to a temporary file.
+When processing the input file, the commands for the current computer (HOST)
+are selected and copied to a temporary commands file.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .br
@@ -57,20 +57,21 @@ processed.
 .sp
 For the format of the input files see the section \fBFILE FORMAT\fR below.
 .sp
-If no \fIAPP\fRs are specified, the temporary file will be processed.
+If no \fIAPP\fRs are specified, the temporary commands file will be processed.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files.
+Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files,
+or in the \fIFILE\fR provided with option \fB-f\fR, \fB--file\fR.
 .sp
 It is possible to specify \fIAPP\fRs.
 .br
 Per specified \fIAPP\fR, the first available app is found in all standard input
 files without a selection by computer name (HOST) and is copied to a temporary
-file along with the associated commands.
+commands file along with the associated commands.
 .sp
-Option \fB-c\fR, \fB--cat\fR lists the contents of the temporary file.
+Option \fB-c\fR, \fB--cat\fR lists the contents of the temporary commands file.
 .sp
-Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary file that
-would be executed.
+Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary commands
+file that would be executed.
 .sp
 A -- signals the end of options and disables further option processing.
 .\"
@@ -108,6 +109,7 @@ l | l
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
 # APP <name>
@@ -115,17 +117,21 @@ T}:T{
 Contains the APP <name>.
 T}
 T{
-#-APP <name>
+# -APP <name>
 T}:T{
 Ditto, not always used, see [1].
 T}
 T{
-# HOST <host>
+# DESC <description>
 T}:T{
-Name of the computer (<host>) where the command applies
+Description of the APP.
 T}
 T{
-.sp
+# HOST <host>
+T}:T{
+Name of the computer (<host>) where the command applies.
+T}
+T{
 T}:T{
 Will be skipped (is empty).
 T}
@@ -137,7 +143,7 @@ T}
 T{
 Command
 T}:T{
-Command to install APP <app>
+Command to install APP <app>.
 T}
 .TE
 .sp
@@ -145,12 +151,12 @@ T}
 .br
 [1]
 .br
-Line '#-APP' is for a command specific to a distribution or a computer.
+Line '# -APP <name>' is for a command specific to a distribution or a computer.
 .br
 This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
 look up commands at a given \fIAPP\fR.
 .br
-This line is used when processing the temporary file.
+This line is used when processing the temporary commands file.
 .sp
 .sp
 .br
@@ -200,9 +206,9 @@ T}:T{
 Empty line.
 T}
 T{
-#-APP gast
+# -APP gast
 T}:T{
-Verborgen APP gast.
+Hidden  APP gast.
 T}
 T{
 # HOST pc02
@@ -242,7 +248,7 @@ Mandatory arguments to long options are mandatory for short options too.
 Show a list of apps to install.
 .TP
 \fB-c\fR, \fB--cat\fR
-Display the contents of the temporary file.
+Display the contents of the temporary commands file.
 .TP
 \fB-r\fR, \fB--remove\fR
 Remove apps.
@@ -296,10 +302,9 @@ Standard remove file for Debian desktop.
 Standard remove file for Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-install-install-cmds-XXXXXXXXXX
-/tmp/kz-install-remove-cmds-XXXXXXXXXX
+/tmp/kz-install-install-cmds-XXXXXXXXXX /tmp/kz-install-remove-cmds-XXXXXXXXXX
 .RS
-Temporary file containing all commands to run.
+Temporary commands file.
 .RE
 .sp
 /tmp/kz-install-install-sims-XXXXXXXXXX /tmp/kz-install-remove-sims-XXXXXXXXXX

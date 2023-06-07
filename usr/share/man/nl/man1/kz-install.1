@@ -43,8 +43,9 @@ voor Ubuntu desktop.
 Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
 opgegeven worden, de bestandsnaam dient te beginnen met \fBkz-install-\fR.
 .sp
-Bij het verwerken van dit invoerbestand worden de opdrachten voor de huidige
-computernaam (HOST) geselecteerd en gekopieerd naar een tijdelijk bestand.
+Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
+computernaam (HOST) geselecteerd en gekopieerd naar een tijdelijk
+opdrachtenbestand.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .br
@@ -59,10 +60,12 @@ verwerkt.
 Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
-Als er geen \fIAPP\fRs zijn opgegeven wordt het tijdelijk bestand verwerkt.
+Als er geen \fIAPP\fRs zijn opgegeven wordt het tijdelijk opdrachtenbestand
+verwerkt.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle standaard invoerbestanden.
+alle standaard invoerbestanden, of in het bestand \fIFILE\fR dat wordt geleverd
+met optie \fB-f\fR, \fB--file\fR.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
@@ -71,10 +74,11 @@ standaard invoerbestanden zonder een selectie op computernaam (HOST) en wordt
 deze samen met de bijbehorende opdrachten gekopieerd naar een tijdelijk
 bestand.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk bestand.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk
+opdrachtenbestand.
 .sp
-Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk bestand
-die uitgevoerd zouden worden.
+Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk
+opdrachtenbestand die uitgevoerd zouden worden.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
@@ -114,24 +118,29 @@ l | l
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
-# APP <naam>
+#  APP <naam>
 T}:T{
 Bevat de <naam> van de APP.
 T}
 T{
-#-APP <naam>
+# -APP <naam>
 T}:T{
 Idem, wordt niet altijd gebruikt, zie [1].
 T}
 T{
-# HOST <host>
+# DESC <beschrijving>
 T}:T{
-Naam van de computer (<host>) waar de opdracht van toepassing is
+Bevat een <beschrijving> van de APP.
 T}
 T{
-.sp
+# HOST <host>
+T}:T{
+Naam van de computer (<host>) waar de opdracht van toepassing is.
+T}
+T{
 T}:T{
 Wordt overgeslagen (is leeg).
 T}
@@ -143,7 +152,7 @@ T}
 T{
 Opdracht
 T}:T{
-Opdracht voor het installeren van APP <app>
+Opdracht voor het installeren van APP <app>.
 T}
 .TE
 .sp
@@ -151,13 +160,14 @@ T}
 .br
 [1]
 .br
-Regel '#-APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
+Regel '# -APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
 distributie of een computer.
 .br
 Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
 gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
 .br
-Deze regel wordt wél gebruikt bij het verwerken van het tijdelijk bestand.
+Deze regel wordt wél gebruikt bij het verwerken van het tijdelijk
+opdrachtenbestand.
 .sp
 .sp
 .br
@@ -182,19 +192,19 @@ l | l
 l | l
 l | l.
 T{
-# APP gnome-gmail
+#  APP gnome-gmail
 T}:T{
 Naam van de APP.
+T}
+T{
+# DESC Gmail as the preferred email application in GNOME
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 # HOST pc02
 T}:T{
 Opdracht is voor pc02, zie [2].
-T}
-T{
-# Gmail as the preferred email application in GNOME
-T}:T{
-Beschrijving van de APP.
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -207,19 +217,19 @@ T}:T{
 Lege regel.
 T}
 T{
-#-APP gast
+# -APP gast
 T}:T{
 Verborgen APP gast.
+T}
+T{
+# DESC Add user gast
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 # HOST pc02
 T}:T{
 Alleen op pc02 uitvoeren.
-T}
-T{
-# Add user gast
-T}:T{
-Beschrijving van de APP.
 T}
 T{
 sudo useradd --create-home ... gast
@@ -250,7 +260,7 @@ Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 Toon een lijst van te installeren apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van het tijdelijk bestand.
+Toon de inhoud van het tijdelijk opdrachtenbestand.
 .TP
 \fB-r\fR, \fB--remove\fR
 Verwijder apps.
@@ -307,7 +317,7 @@ Standaard verwijderbestand voor Ubuntu desktop.
 .sp
 /tmp/kz-install-install-cmds-XXXXXXXXXX /tmp/kz-install-remove-cmds-XXXXXXXXXX
 .RS
-Tijdelijk bestand met alle uit te voeren opdrachten.
+Tijdelijk opdrachtenbestand.
 .RE
 .sp
 /tmp/kz-install-install-sims-XXXXXXXXXX /tmp/kz-install-remove-sims-XXXXXXXXXX

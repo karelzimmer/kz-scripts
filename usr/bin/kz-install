@@ -33,7 +33,7 @@ $program_desc.
 
 $(gettext 'Options:')
   -a, --apps     $(gettext 'show list of available apps')
-  -c, --cat      $(gettext 'show contents of file')
+  -c, --cat      $(gettext 'show contents of commands file')
 $(gettext '  -f, --file FILE
                  process FILE')
   -g, --gui      $(gettext 'starts in graphics mode')
@@ -227,20 +227,24 @@ function process_argument_app {
     local first_app_record=true
     local -a files=()
 
-    # Search for available APPs in all install or remove files, no selection on
-    # computer name (HOST).
-    for file in "$program_path/$program_name-$mode-"*.sh; do
-        files+=("$file")
-    done
+    if $option_file; then
+        files=("$inputfile")
+    else
+        # Search for available APPs in all install or remove files, no
+        # selection on computer name (HOST).
+        for file in "$program_path/$program_name-$mode-"*.sh; do
+            files+=("$file")
+        done
+    fi
 
     for app in "${app_arguments[@]}"; do
         file=$(
-            grep    --files-with-matches    \
-                    --word-regexp           \
-                    --regexp="# APP $app"   \
-                    "${files[@]}"           \
-                    2> >($logcmd)           |
-            head    --lines=1               || printf '\n'
+            grep    --files-with-matches        \
+                    --word-regexp               \
+                    --regexp="#.* APP .*$app"   \
+                    "${files[@]}"               \
+                    2> >($logcmd)               |
+            head    --lines=1                   || printf '\n'
             )
         if [[ -n $file ]]; then
             process_argument_app_file
@@ -268,9 +272,9 @@ function process_argument_app_file {
                 # Empty line.
                 continue
                 ;;
-            '# APP '*)
+            '#'*' APP '*)
                 # App record.
-                if [[ $record == '# APP '$app* ]]; then
+                if [[ $record == '#'*' APP '*$app* ]]; then
                     # Found app name.
                     # Write records to cmdsfile until next app name or eof.
                     app_found=true
@@ -279,14 +283,16 @@ function process_argument_app_file {
                     else
                         printf '\n' >> "$cmdsfile"
                     fi
-                    printf '%s\n' "# $file" >> "$cmdsfile"
-                    printf '%s\n' "$record" >> "$cmdsfile"
+                    {
+                        printf '%s\n' "#  SRC $file"
+                        printf '%b\n' "$record"
+                    } >> "$cmdsfile"
                 elif $app_found; then
                     # Next app.
                     break
                 fi
                 ;;
-            '#-APP '*)
+            '#'*' -APP '*)
                 # App hidden record.
                 if $app_found; then
                     # Next hidden app.
@@ -306,23 +312,28 @@ function process_argument_app_file {
 
 function process_inputfile {
     local apprecord=''
+    local descrecord=''
     local first_app_record=true
     local host_match=false
     local record=''
 
-    printf '%s\n\n' "# $inputfile" >> "$cmdsfile"
+    printf '%s\n\n' "#  SRC $inputfile" >> "$cmdsfile"
     while read -r record; do
         case $record in
             '')
                 # Empty line.
                 continue
                 ;;
-            '# APP '*|'#-APP '*)
+            '#'*' APP '*|'#'*' -APP '*)
                 # App (hidden) record.
                 host_match=false
                 apprecord=$record
                 ;;
-            '# HOST '*'*'*|'# HOST '*"$HOSTNAME"*)
+            '#'*' DESC '*)
+                # Description record.
+                descrecord=$record
+                ;;
+            '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
                 # Host record.
                 host_match=true
                 if $first_app_record; then
@@ -332,8 +343,11 @@ function process_inputfile {
                 fi
                 {
                     printf '%s\n' "$apprecord"
+                    printf '%s\n' "$descrecord"
                     printf '%s\n' "$record"
                 } >> "$cmdsfile"
+                apprecord=''
+                descrecord=''
                 ;;
             *)
                 # Other records.
@@ -349,18 +363,24 @@ function process_inputfile {
 function process_option_apps {
     local -a files=()
 
-    # Search for available APPs in all install and remove files.
-    for file in "$program_path/$program_name-$mode-"*.sh; do
-        files+=("$file")
-    done
+    if $option_file; then
+            files=("$inputfile")
+    else
+        # Search for available APPs in all install or remove files.
+        for file in "$program_path/$program_name-$mode-"*.sh; do
+            files+=("$file")
+        done
+    fi
 
     text="$(gettext 'The following APPs are available:
 
      APP')
 $(
     if !    grep    --no-messages           \
-                    --regexp='^# APP '      \
+                    --regexp='#.* APP '     \
                     "${files[@]}"           |
+            tr      --squeeze-repeats       \
+                    '[:space:]'             |
             cut     --delimiter=' '         \
                     --fields=3              |
             sort    --unique                |
@@ -431,7 +451,7 @@ function process_cmdsfile {
     local -i cmd_seq_num=0
 
     app_tot_num=$(
-        grep --word-regexp --regexp='^#.APP' --count "$cmdsfile" || true
+        grep --word-regexp --regexp='#.*APP' --count "$cmdsfile" || true
         )
     if [[ $app_tot_num -gt 99 ]]; then
         app_tot_num=99
@@ -450,9 +470,12 @@ function process_cmdsfile {
                 # Empty line.
                 continue
                 ;;
-            '# APP '*|'#-APP '*)
+            '#'*' APP '*|'#'*' -APP '*)
                 # App (hidden) record.
-                app_name="${record:6} $operation"
+                app_name="$(
+                    printf '%s\n' "$record"     |
+                    tr --squeeze-repeats ' '    |
+                    cut --delimiter=' ' --fields=3)"
                 write_app_line=true
                 ((++app_seq_num))
                 if [[ $app_seq_num -gt 99 ]]; then
@@ -460,8 +483,12 @@ function process_cmdsfile {
                 fi
                 cmd_seq_num=0
                 ;;
-            '# HOST '*)
+            '#'*' HOST '*)
                 # Host record.
+                continue
+                ;;
+            '#'*' DESC '*)
+                # Description record.
                 continue
                 ;;
             '#'*)
@@ -489,15 +516,16 @@ function process_command_record {
 
     if $execute_commands; then
         if $option_gui; then
-            text="#[$app_seq_num/$app_tot_num] $app_name\n\n$cmd"
+            text="#[$app_seq_num/$app_tot_num] $app_name $operation\n\n$cmd"
             printf '%s\n' "$text"
         fi
-        printf  -v app_name_line        \
-                "[%2d/%-2d] [%2d] %s"   \
-                "$app_seq_num"          \
-                "$app_tot_num"          \
-                "$cmd_seq_num"          \
-                "$app_name"
+        printf  -v app_name_line            \
+                "[%2d/%-2d] [%2d] %s %s"    \
+                "$app_seq_num"              \
+                "$app_tot_num"              \
+                "$cmd_seq_num"              \
+                "$app_name"                 \
+                "$operation"
         execute_command "$cmd"
     else
         # Option simulate.
@@ -507,16 +535,17 @@ function process_command_record {
             else
                 printf '\n' >> "$simsfile"
             fi
-            printf  '[%2d/%-2d] %s\n'   \
-                    "$app_seq_num"      \
-                    "$app_tot_num"      \
-                    "$app_name"  >> "$simsfile"
+            printf  '[%2d/%-2d] %s %s\n'    \
+                    "$app_seq_num"          \
+                    "$app_tot_num"          \
+                    "$app_name"             \
+                    "$operation"            >> "$simsfile"
             write_app_line=false
         fi
         printf  "%7s [%2d] ${blue}%s${normal}\n"    \
                 " "                                 \
                 "$cmd_seq_num"                      \
-                "$cmd"  >> "$simsfile"
+                "$cmd"                              >> "$simsfile"
     fi
 }
 

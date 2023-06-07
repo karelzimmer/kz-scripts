@@ -42,8 +42,9 @@ Dit invoerbestand bevat opdrachten voor alle hierin opgenomen gebruikers
 Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander bestand opgegeven
 worden, de bestandsnaam dient te beginnen met \fBkz-setup-\fR.
 .sp
-Bij het verwerken van dit invoerbestand worden de opdrachten voor de huidige
-gebruiker (USER) geselecteerd en gekopieerd naar een tijdelijk bestand.
+Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
+gebruiker (USER) geselecteerd en gekopieerd naar een tijdelijk
+opdrachtenbestand.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan het instellen ongedaan worden gemaakt.
 .br
@@ -58,22 +59,25 @@ verwerkt.
 Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
-Als er geen \fIAPP\fRs zijn  opgegeven wordt het tijdelijk bestand verwerkt.
+Als er geen \fIAPP\fRs zijn  opgegeven wordt het tijdelijk opdrachtenbestand
+verwerkt.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle standaard invoerbestanden.
+alle standaard invoerbestanden, of in het bestand \fIFILE\fR dat wordt geleverd
+met optie \fB-f\fR, \fB--file\fR.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven.
 .br
 Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
 standaard invoerbestanden zonder een selectie op gebruikersnaam (USER) en wordt
 deze samen met de bijbehorende opdrachten gekopieerd naar een tijdelijk
-bestand.
+opdrachtenbestand.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk bestand.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk
+opdrachtenbestand.
 .sp
-Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk bestand
-die uitgevoerd zouden worden.
+Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk
+opdrachtenbestand die uitgevoerd zouden worden.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
@@ -114,22 +118,28 @@ l | l
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
-# APP <naam>
+#  APP <naam>
 T}:T{
 Bevat de <naam> van de APP.
 T}
 T{
-#-APP <naam>
+# -APP <naam>
 T}:T{
 Idem, wordt niet altijd gebruikt, zie [1].
+T}
+T{
+# DESC <beschrijving>
+T}:T{
+Bevat een <beschrijving> van de APP.
 T}
 T{
 # USER <user@host>
 T}:T{
 Naam van de gebruiker (<user>) en computer (<host>) waar de opdracht van
-toepassing is
+toepassing is.
 T}
 T{
 T}:T{
@@ -143,7 +153,7 @@ T}
 T{
 Opdracht
 T}:T{
-Opdracht voor het instellen van APP
+Opdracht voor het instellen van APP.
 T}
 .TE
 .sp
@@ -151,13 +161,14 @@ T}
 .br
 [1]
 .br
-Regel '#-APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
+Regel '# -APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
 distributie, een computer, of een gebruiker.
 .br
 Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
 gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
 .br
-Deze regel wordt wél gebruikt bij het verwerken van het tijdelijk bestand.
+Deze regel wordt wél gebruikt bij het verwerken van het tijdelijk
+opdrachtenbestand.
 .sp
 .sp
 .br
@@ -182,19 +193,19 @@ l | l
 l | l
 l | l.
 T{
-# APP google-chrome
+#  APP google-chrome
 T}:T{
 Naam van de APP.
+T}
+T{
+# DESC Google's webbrowser
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 # USER *@*
 T}:T{
 Opdracht is voor alle gebruikers op alle computers.
-T}
-T{
-# Google's webbrowser
-T}:T{
-Beschrijving van de APP.
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -207,19 +218,19 @@ T}:T{
 Lege regel.
 T}
 T{
-#-APP gnome
+# -APP gnome
 T}:T{
 Verborgen APP gnome.
+T}
+T{
+# DESC Desktop environment
+T}:T{
+Beschrijving van de APP.
 T}
 T{
 # USER jan@pc02
 T}:T{
 Opdracht is voor Jan op pc02, zie [2].
-T}
-T{
-# Desktop environment
-T}:T{
-Beschrijving van de APP.
 T}
 T{
 gsettings set org.gnome.shell...
@@ -252,7 +263,7 @@ computernaam) bij het zoeken naar opdrachten voor een opgegeven \fIAPP\fR.
 Toon een lijst van in te stellen apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van het tijdelijk instelbestand.
+Toon de inhoud van het tijdelijk opdrachtenbestand.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset apps.
@@ -309,7 +320,7 @@ Standaard resetbestand voor Ubuntu desktop.
 .sp
 /tmp/kz-setup-setup-cmds-XXXXXXXXXX /tmp/kz-setup-reset-cmds-XXXXXXXXXX
 .RS
-Tijdelijk bestand met alle uit te voeren opdrachten.
+Tijdelijk opdrachtenbestand.
 .RE
 .sp
 /tmp/kz-setup-setup-sims-XXXXXXXXXX /tmp/kz-setup-reset-sims-XXXXXXXXXX

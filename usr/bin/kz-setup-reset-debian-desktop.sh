@@ -5,22 +5,14 @@
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
-# Record types:
-# # APP <app>       Reset <app>, or
-# #-APP <app>       Ditto, not used with option --apps and argument APP
-# # USER <user>@<host>...
-#                   For who to execute <Command>s (e.g. jan@pc02 or *.*)
-# # <Description>   Description of the <app>
-# <Command>         Command line [1-n]
-###############################################################################
 
-#-APP dashtodock
-# Transform dash to dock
+# -APP dashtodock
+# DESC Transform dash to dock
 # USER *@*
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
-# APP gnome
-# Desktop environment
+#  APP gnome
+# DESC Desktop environment
 # USER *@*
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
@@ -49,56 +41,57 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
-#-APP gnome
-# Desktop environment
+# -APP gnome
+# DESC Desktop environment
 # USER karel@pc07
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.nautilus.preferences show-create-link
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
-# APP google-chrome
-# Google's webbrowser
+#  APP google-chrome
+# DESC Google's webbrowser
 # USER *@*
 kz-gset --delfav=google-chrome
 
-# APP hide-folders
-# Hide folders in Home folder
+#  APP hide-folders
+# DESC Hide folders in Home folder
 # USER *@*
 rm --force "$HOME"/.hidden
 
-# APP kvm
-# Virtualization
+#  APP kvm
+# DESC Virtualization
 # USER karel@pc07
 kz-gset --delfav=virt-manager
 
-# APP skype
-# Video calls
+#  APP skype
+# DESC Video calls
 # USER *@*
 kz-gset --delfav=kz-skype
 
-# APP spotify
-# Music player
+#  APP spotify
+# DESC Music player
 # USER *@*
 kz-gset --delfav=kz-spotify
 
-#-APP start-install
-# Remove starter Start installation
+# -APP start-install
+# DESC Remove starter Start installation
 # USER *@*
 kz-gset --addfavbef=install-debian
-# APP terminal
-# Terminal
+
+#  APP terminal
+# DESC Terminal
 # USER karel@pc07
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-# APP vscode
-# Editor
+#  APP vscode
+# DESC Editor
 # USER karel@pc07
 kz-gset --delfav=code_code
 
-# APP webmin
-# Web-based administration
+#  APP webmin
+# DESC Web-based administration
 # USER karel@pc07
 # Web App: https://localhost:10000
 kz-gset --delfav=kz-webmin

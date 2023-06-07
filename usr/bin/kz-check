@@ -192,11 +192,19 @@ function check_record_types {
     # Wrong:
     # The rest :-)
     wrong_record=$(
-        grep --regexp='^# APP' --after-context=2 --line-number "$script" |
-        grep --regexp='# HOST ' --invert-match                           |
-        grep --regexp='# USER ' --invert-match                           |
-        grep --regexp='# '      --invert-match                           |
-        grep --regexp='--'      --invert-match                          || true
+        grep    --regexp='^# APP'   \
+                --regexp='^# -APP'  \
+                --after-context=2   \
+                --line-number       \
+                "$script"           |
+        grep    --regexp='# HOST '  \
+                --invert-match      |
+        grep    --regexp='# USER '  \
+                --invert-match      |
+        grep    --regexp='# '       \
+                --invert-match      |
+        grep    --regexp='--'       \
+                --invert-match      || true
         )
     if [[ -n $wrong_record ]]; then
         error "
