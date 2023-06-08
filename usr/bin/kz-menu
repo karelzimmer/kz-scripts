@@ -37,7 +37,7 @@ options_long+=',gui'
 menu1_title=$(gettext 'Installation menu')
 menu1_head="                  $menu1_title"
 declare -a menu1_actions=(
-            [1]="$(gettext 'Preparing installation')"
+            [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
                 "$(gettext 'Provision user')"

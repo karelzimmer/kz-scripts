@@ -761,7 +761,7 @@ msgstr "Installatiemenu"
 msgid "Usage: $display_name [-g|--gui] $options_usage"
 msgstr "Gebruik: $display_name [-g|--gui] $options_usage"
 
-msgid "Preparing installation"
+msgid "Prepare installation"
 msgstr "Installeren voorbereiden"
 
 msgid "Perform installation"
