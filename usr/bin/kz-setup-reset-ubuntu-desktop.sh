@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Reset apps file for Ubuntu desktop.
+# kz-setup-reset-ubuntu-desktop.sh - Reset apps file for Ubuntu desktop.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.

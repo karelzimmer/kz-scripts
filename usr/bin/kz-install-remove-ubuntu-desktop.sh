@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Remove apps file for Ubuntu desktop.
+# kz-install-remove-ubuntu-desktop.sh - Remove apps file for Ubuntu desktop.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.

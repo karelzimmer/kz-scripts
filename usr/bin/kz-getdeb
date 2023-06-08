@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash source=/dev/null
 ###############################################################################
-# Install kz package.
+# kz-getdeb - Install kz package.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2016-2023.
