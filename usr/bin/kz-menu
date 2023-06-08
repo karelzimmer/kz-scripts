@@ -35,7 +35,7 @@ options_short+='g'
 options_long+=',gui'
 
 menu1_title=$(gettext 'Installation menu')
-menu1_head="                  $menu1_title"
+menu1_head="                $menu1_title"
 declare -a menu1_actions=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
@@ -55,7 +55,7 @@ declare -a menu1_commands=(
 menu1_lines=${#menu1_actions[@]}
 
 menu2_title=$(gettext 'Commands menu')
-menu2_head="             $menu2_title"
+menu2_head="                $menu2_title"
 declare -a menu2_actions=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
