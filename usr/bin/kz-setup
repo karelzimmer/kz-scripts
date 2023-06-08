@@ -40,7 +40,7 @@ $(gettext '  -f, --file FILE
   -g, --gui      $(gettext 'starts in graphics mode')
   -l, --list     $(gettext 'show list of standard files')
   -r, --reset    $(gettext 'set apps on default values')
-      --server   $(gettext 'setup apps for a server')
+      --server   $(gettext 'set up apps for a server')
   -s, --simulate $(gettext 'show commands')
 $options_help
   --             $(gettext "signals the end of options and disables further \
@@ -224,7 +224,7 @@ function process_argument_app {
     local first_app_record=true
     local -a files=()
 
-    # Search for available APPs in alls setup or reset files, no selection on
+    # Search for available APPs in alls set up or reset files, no selection on
     # user name and computer name (USER).
     for file in "$program_path/$program_name-$mode-"*.sh; do
         files+=("$file")
@@ -357,7 +357,7 @@ function process_inputfile {
 function process_option_apps {
     local -a files=()
 
-    # Search for available APPs in all setup or reset files.
+    # Search for available APPs in all set up or reset files.
     for file in "$program_path/$program_name-$mode-"*.sh; do
         files+=("$file")
     done
@@ -383,10 +383,10 @@ $(
 $usage_line"
     else
         printf '%s\n' "
-$(gettext 'To setup the APPs run:') ${blue}$display_name APP...${normal}
+$(gettext 'To set up the APPs run:') ${blue}$display_name APP...${normal}
 $(gettext 'To simulate resetting APPs execute:') ${blue}$display_name \
 --simulate APP...${normal}
-$(gettext 'To view the contents of the APPs setup file execute:') \
+$(gettext 'To view the contents of the APPs set up file execute:') \
 ${blue}$display_name --cat APP...${normal}"
     fi
 )"

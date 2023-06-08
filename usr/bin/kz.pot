@@ -845,20 +845,20 @@ msgid ""
 "  APP            set up APPs"
 msgstr ""
 
-msgid "setup apps for a server"
+msgid "set up apps for a server"
 msgstr ""
 
 #, sh-format
 msgid "No set up file found, looked for $inputfile."
 msgstr ""
 
-msgid "To setup the APPs run:"
+msgid "To set up the APPs run:"
 msgstr ""
 
 msgid "To simulate resetting APPs execute:"
 msgstr ""
 
-msgid "To view the contents of the APPs setup file execute:"
+msgid "To view the contents of the APPs set up file execute:"
 msgstr ""
 
 msgid "set up"
