@@ -4,7 +4,7 @@ Common module for Python scripts.
 This module gives access to general functions.
 """
 ###############################################################################
-# kz_common.py - Common module for Python scripts.
+# Common module for Python scripts.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.

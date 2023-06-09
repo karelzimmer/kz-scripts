@@ -1,6 +1,6 @@
 # shellcheck shell=bash source=/dev/null
 ###############################################################################
-# kz_common.sh - Common module for shell scripts.
+# Common module for shell scripts.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
