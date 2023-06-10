@@ -73,6 +73,11 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 sudo adduser "${SUDO_USER:-$USER}" libvirt
 sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 
+# -APP kz-getdev
+# DESC Build development environment
+# HOST debian
+sudo kz-getdev
+
 #  APP libreoffice
 # DESC Office suite
 # HOST *

@@ -175,6 +175,11 @@ sudo apt-get install --yes mlocate
 # HOST pc06
 sudo apt-get install --yes nautilus-admin
 
+# -APP kz-getdev
+# DESC Build development environment
+# HOST pc01 pc06
+sudo kz-getdev
+
 # -APP restricted-addons
 # DESC Essential software not already included due to legal or copyright reasons
 # HOST *
@@ -286,7 +291,6 @@ sudo snap install vlc
 # DESC Editor
 # HOST pc01 pc06
 sudo snap install --classic code
-
 
 #  APP wine
 # DESC Run Windows programs (Wine Is Not an Emulator)
