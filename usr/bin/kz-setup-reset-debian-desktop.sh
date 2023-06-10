@@ -87,7 +87,7 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #  APP vscode
 # DESC Editor
-# USER karel@pc07
+# USER karel@pc07 user@debian
 kz-gset --delfav=code_code
 
 #  APP webmin

@@ -282,6 +282,12 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 # HOST pc06
 sudo snap install vlc
 
+#  APP vscode
+# DESC Editor
+# HOST pc01 pc06
+sudo snap install --classic code
+
+
 #  APP wine
 # DESC Run Windows programs (Wine Is Not an Emulator)
 # HOST pc04

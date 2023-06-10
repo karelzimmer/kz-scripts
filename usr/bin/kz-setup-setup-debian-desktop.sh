@@ -89,7 +89,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 #  APP vscode
 # DESC Editor
-# USER karel@pc07
+# USER karel@pc07 user@debian
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
