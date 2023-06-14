@@ -33,13 +33,6 @@ sudo apt-get install --yes cups
 # HOST *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
-#  APP deact-eth0
-# DESC Remove activate eth0 from startup
-# HOST pc07
-# Message in journal: ifup -a --read-environement: Cannot find device "eth0"/ [FAILED] Raise network interfaces
-sudo sed --in-place --expression='s/^auto eth0$/#auto eth0/' /etc/network/interfaces.d/setup
-sudo sed --in-place --expression='s/^iface eth0 net dhcp$/#iface eth0 net dhcp/' /etc/network/interfaces.d/setup
-
 #  APP gnome-gmail
 # DESC Gmail as the preferred email application in GNOME
 # HOST pc07
