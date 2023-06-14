@@ -6,34 +6,34 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# -APP extra-repos
+#  APP extra-repos
 # DESC Add extra repositories
 # HOST *
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
 sudo apt-get update
 
-# -APP adm-group
+#  APP adm-group
 # DESC Add user to group adm
 # HOST pc07
 sudo deluser "${SUDO_USER:-$USER}" adm
 
-# -APP bash-completion
+#  APP bash-completion
 # DESC Enable tab completion
 # HOST *
 sudo apt-get remove --yes bash-completion
 
-# -APP cups
+#  APP cups
 # DESC Common UNIX Printing System
 # HOST *
 sudo apt-get remove --yes cups
 
-# -APP dashtodock
+#  APP dashtodock
 # DESC Transform dash to dock
 # HOST *
 sudo apt-get remove --yes gnome-shell-extension-dashtodock
 
-# -APP deact-eth0
+#  APP deact-eth0
 # DESC Remove activate eth0 from startup
 # HOST pc07
 sudo sed --in-place --expression='s/^#auto eth0$/auto eth0/' /etc/network/interfaces.d/setup
@@ -51,7 +51,7 @@ sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
 
-# -APP journalctl
+#  APP journalctl
 # DESC Enable access to the log
 # HOST *
 sudo deluser "${SUDO_USER:-$USER}" systemd-journal

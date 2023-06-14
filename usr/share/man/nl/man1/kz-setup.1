@@ -29,22 +29,35 @@ van gebruikersinstellingen.
 \fBkz setup\fR verwerkt een invoerbestand ("instelbestand") die opdrachten
 bevat voor het instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
+Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
+hieronder.
+.sp
 Standaard verwerkt \fBkz setup\fR het invoerbestand,
-/usr/bin/kz-setup-setup-<distributie>-desktop.sh
-.br
-<distributie> wordt ingevuld met waarden van de huidige computer.
+/usr/bin/kz-setup-setup-<distributie>-desktop.sh <distributie> wordt ingevuld
+met waarden van de huidige computer.
 .sp
-Bijvoorbeeld kz-setup-setup-ubuntu-desktop.sh.
-.br
-Dit invoerbestand bevat opdrachten voor alle hierin opgenomen gebruikers
-(USERs) voor Ubuntu desktop.
-.sp
-Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander bestand opgegeven
-worden, de bestandsnaam dient te beginnen met \fBkz-setup-\fR.
+Bijvoorbeeld kz-setup-setup-ubuntu-desktop.sh. Dit invoerbestand bevat
+instel-opdrachten voor alle hierin opgenomen gebruikers (USERs) voor Ubuntu
+desktop.
 .sp
 Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
 gebruiker (USER) geselecteerd en gekopieerd naar een tijdelijk
 opdrachtenbestand.
+.sp
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
+het tijdelijk opdrachtenbestand.
+.sp
+Het is mogelijk om \fIAPP\fRs op te geven. Per opgegeven \fIAPP\fR worden de
+opdrachten voor \fIAPP\fR en de huidige gebruiker (USER) geselecteerd uit het
+invoerbestand en gekopieerd naar een tijdelijk opdrachtenbestand.
+.sp
+De opdrachten in het tijdelijk opdrachtenbestand worden uitgevoerd.
+.sp
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk
+opdrachtenbestand.
+.sp
+Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk
+opdrachtenbestand die uitgevoerd zouden worden.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan het instellen ongedaan worden gemaakt.
 .br
@@ -56,28 +69,8 @@ Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
 Dan wordt bijvoorbeeld bestand /usr/bin/kz-setup-setup-ubuntu-server.sh
 verwerkt.
 .sp
-Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
-hieronder.
-.sp
-Als er geen \fIAPP\fRs zijn  opgegeven wordt het tijdelijk opdrachtenbestand
-verwerkt.
-.sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle standaard invoerbestanden, of in het bestand \fIFILE\fR dat wordt geleverd
-met optie \fB-f\fR, \fB--file\fR.
-.sp
-Het is mogelijk om \fIAPP\fRs op te geven.
-.br
-Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
-standaard invoerbestanden zonder een selectie op gebruikersnaam (USER) en wordt
-deze samen met de bijbehorende opdrachten gekopieerd naar een tijdelijk
-opdrachtenbestand.
-.sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk
-opdrachtenbestand.
-.sp
-Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk
-opdrachtenbestand die uitgevoerd zouden worden.
+Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
+opgegeven worden, de bestandsnaam dient te beginnen met \fBkz-setup-\fR.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
@@ -118,17 +111,11 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
 #  APP <naam>
 T}:T{
 Bevat de <naam> van de APP.
-T}
-T{
-# -APP <naam>
-T}:T{
-Idem, wordt niet altijd gebruikt, zie [1].
 T}
 T{
 # DESC <beschrijving>
@@ -159,19 +146,6 @@ T}
 .sp
 .sp
 .br
-[1]
-.br
-Regel '# -APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
-distributie, een computer, of een gebruiker.
-.br
-Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
-gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
-.br
-Deze regel wordt wél gebruikt bij het verwerken van het tijdelijk
-opdrachtenbestand.
-.sp
-.sp
-.br
 .B Tabel 2. Regels in voorbeeldbestand kz-setup-setup-ubuntu-desktop.sh
 .TS
 box tab(:);
@@ -183,7 +157,6 @@ Beschrijving
 T}
 .T&
 - | -
-l | l
 l | l
 l | l
 l | l
@@ -218,11 +191,6 @@ T}:T{
 Lege regel.
 T}
 T{
-# -APP gnome
-T}:T{
-Verborgen APP gnome.
-T}
-T{
 # DESC Desktop environment
 T}:T{
 Beschrijving van de APP.
@@ -251,9 +219,6 @@ alle gebruikers computers worden uitgevoerd.
 .br
 De combinaties <user>@* (gebruiker <user> op alle computers) en *@<host> (alle
 gebruikers op computer <host>) worden niet ondersteund.
-.br
-De regel '# USER ' wordt genegeerd (geen selectie op gebruikers- en
-computernaam) bij het zoeken naar opdrachten voor een opgegeven \fIAPP\fR.
 .\"
 .\"
 .sp

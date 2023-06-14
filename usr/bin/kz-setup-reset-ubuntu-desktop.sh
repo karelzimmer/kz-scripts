@@ -46,20 +46,16 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
-gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
-
-# -APP gnome
-# DESC Desktop environment (Ubuntu-only)
-# USER *@*
 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 gsettings reset org.gnome.shell.extensions.ding show-home
+gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
-# -APP gnome
+#  APP gnome
 # DESC Desktop environment
 # USER hugo@pc-van-hugo
 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
-# -APP gnome
+#  APP gnome
 # DESC Desktop environment
 # USER karel@pc06
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
@@ -95,7 +91,7 @@ kz-gset --delfav=kz-skype
 # USER *@*
 kz-gset --delfav=kz-spotify
 
-# -APP start-install
+#  APP start-install
 # DESC Remove starter Start installation
 # USER *@*
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
@@ -116,7 +112,7 @@ kz-gset --delfav=kz-telegram
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-# -APP virtualbox
+#  APP virtualbox
 # DESC Virtualization
 # USER hugo@pc-van-hugo
 kz-gset --delfav=virtualbox

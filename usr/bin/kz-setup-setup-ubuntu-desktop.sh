@@ -49,20 +49,16 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
-gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
-
-# -APP gnome
-# DESC Desktop environment (Ubuntu-only)
-# USER *@*
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
+gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 
-# -APP gnome
+#  APP gnome
 # DESC Desktop environment
 # USER hugo@pc-van-hugo
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 
-# -APP gnome
+#  APP gnome
 # DESC Desktop environment
 # USER karel@pc06
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
@@ -98,7 +94,7 @@ kz-gset --addfavaft=kz-skype
 # USER *@*
 kz-gset --addfavaft=kz-spotify
 
-# -APP start-install
+#  APP start-install
 # DESC Remove starter Start installation
 # USER *@*
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
@@ -121,7 +117,7 @@ kz-gset --addfavbef=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
-# -APP virtualbox
+#  APP virtualbox
 # DESC Virtualization
 # USER hugo@pc-van-hugo
 kz-gset --addfavaft=virtualbox

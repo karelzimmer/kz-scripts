@@ -158,8 +158,6 @@ function check_input {
 
 function process_input {
     local inputfile=''
-    local file_not_found=false
-    local file=''
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $program_name-* ]]; then
@@ -179,8 +177,10 @@ function process_input {
     fi
 
     if $argument_app; then
+        # Generate cmdsfile from inputfile; filter on HOST and APPs.
         process_argument_app
     else
+        # Generate cmdsfile from inputfile; filter on HOST.
         process_inputfile
     fi
 
@@ -222,48 +222,41 @@ function process_input {
 
 
 function process_argument_app {
+    #
+    # Generate cmdsfile from inputfile; filter on HOST and APPs.
+    #
     local app=''
-    local file=''
     local first_app_record=true
-    local -a files=()
-
-    if $option_file; then
-        files=("$inputfile")
-    else
-        # Search for available APPs in all install or remove files, no
-        # selection on computer name (HOST).
-        for file in "$program_path/$program_name-$mode-"*.sh; do
-            files+=("$file")
-        done
-    fi
+    local app_not_found=false
 
     for app in "${app_arguments[@]}"; do
-        file=$(
-            grep    --files-with-matches        \
+        if ! grep    --quiet                    \
                     --word-regexp               \
                     --regexp="#.* APP .*$app"   \
-                    "${files[@]}"               \
-                    2> >($logcmd)               |
-            head    --lines=1                   || printf '\n'
-            )
-        if [[ -n $file ]]; then
-            process_argument_app_file
-        else
-            file_not_found=true
+                    "$inputfile"; then
+            app_not_found=true
             printf  "$display_name: %s: %s\n" \
                     "$app" "$(gettext 'app not found')"
         fi
     done
-    if $file_not_found; then
+    if $app_not_found; then
         text=$(eval_gettext "Type '\$display_name --apps' for available apps.")
         printf "%s\n" "$text"
         exit $error
     fi
+
+    for app in "${app_arguments[@]}"; do
+        process_argument_app_inputfile
+    done
 }
 
 
-function process_argument_app_file {
+function process_argument_app_inputfile {
     local app_found=false
+    local apprecord=''
+    local descrecord=''
+    local host_match=false
+    local no_host_match=true
     local record=''
 
     while read -r record; do
@@ -275,42 +268,60 @@ function process_argument_app_file {
             '#'*' APP '*)
                 # App record.
                 if [[ $record == '#'*' APP '*$app* ]]; then
-                    # Found app name.
-                    # Write records to cmdsfile until next app name or eof.
+                    # Found app.
                     app_found=true
+                    apprecord=$record
+                elif $app_found; then
+                    # Next app.
+                    app_found=false
+                fi
+                host_match=false
+                ;;
+            '#'*' DESC '*)
+                # Description record.
+                descrecord=$record
+                ;;
+            '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
+                # Host record.
+                if $app_found; then
+                    host_match=true
+                    no_host_match=false
                     if $first_app_record; then
                         first_app_record=false
                     else
                         printf '\n' >> "$cmdsfile"
                     fi
                     {
-                        printf '%s\n' "#  SRC $file"
-                        printf '%b\n' "$record"
+                        printf '%s\n' "#  SRC $inputfile"
+                        printf '%s\n' "$apprecord"
+                        printf '%s\n' "$descrecord"
+                        printf '%s\n' "$record"
                     } >> "$cmdsfile"
-                elif $app_found; then
-                    # Next app.
-                    break
                 fi
-                ;;
-            '#'*' -APP '*)
-                # App hidden record.
-                if $app_found; then
-                    # Next hidden app.
-                    break
-                fi
+                apprecord=''
+                descrecord=''
                 ;;
             *)
                 # Other records.
-                if $app_found; then
+                if $app_found && $host_match; then
                     printf '%s\n' "$record" >> "$cmdsfile"
                 fi
                 ;;
         esac
-    done < "$file"
+    done < "$inputfile"
+    if $no_host_match; then
+        printf "$display_name: %s: %s\n" "$app" "$(gettext 'app not found')"
+        text=$(eval_gettext "Type '\$display_name --apps' for available apps.")
+        printf "%s\n" "$text"
+        exit $error
+    fi
 }
 
 
 function process_inputfile {
+    #
+    # Generate cmdsfile from inputfile; filter on HOST.
+    #
     local apprecord=''
     local descrecord=''
     local first_app_record=true
@@ -324,8 +335,8 @@ function process_inputfile {
                 # Empty line.
                 continue
                 ;;
-            '#'*' APP '*|'#'*' -APP '*)
-                # App (hidden) record.
+            '#'*' APP '*)
+                # App record.
                 host_match=false
                 apprecord=$record
                 ;;
@@ -361,24 +372,13 @@ function process_inputfile {
 
 
 function process_option_apps {
-    local -a files=()
-
-    if $option_file; then
-            files=("$inputfile")
-    else
-        # Search for available APPs in all install or remove files.
-        for file in "$program_path/$program_name-$mode-"*.sh; do
-            files+=("$file")
-        done
-    fi
-
     text="$(gettext 'The following APPs are available:
 
      APP')
 $(
     if !    grep    --no-messages           \
                     --regexp='#.* APP '     \
-                    "${files[@]}"           |
+                    "$cmdsfile"             |
             tr      --squeeze-repeats       \
                     '[:space:]'             |
             cut     --delimiter=' '         \
@@ -470,8 +470,8 @@ function process_cmdsfile {
                 # Empty line.
                 continue
                 ;;
-            '#'*' APP '*|'#'*' -APP '*)
-                # App (hidden) record.
+            '#'*' APP '*)
+                # App record.
                 app_name="$(
                     printf '%s\n' "$record"             |
                     tr --squeeze-repeats '[:space:]'    |

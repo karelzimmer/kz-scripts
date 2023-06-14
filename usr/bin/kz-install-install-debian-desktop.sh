@@ -6,34 +6,34 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# -APP extra-repos
+#  APP extra-repos
 # DESC Add extra repositories
 # HOST *
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-get update
 
-# -APP adm-group
+#  APP adm-group
 # DESC Add user to group adm
 # HOST pc07
 sudo adduser "${SUDO_USER:-$USER}" adm
 
-# -APP bash-completion
+#  APP bash-completion
 # DESC Enable tab completion
 # HOST *
 sudo apt-get install --yes bash-completion
 
-# -APP cups
+#  APP cups
 # DESC Common UNIX Printing System
 # HOST *
 sudo apt-get install --yes cups
 
-# -APP dashtodock
+#  APP dashtodock
 # DESC Transform dash to dock
 # HOST *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
-# -APP deact-eth0
+#  APP deact-eth0
 # DESC Remove activate eth0 from startup
 # HOST pc07
 # Message in journal: ifup -a --read-environement: Cannot find device "eth0"/ [FAILED] Raise network interfaces
@@ -59,7 +59,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 # The installation adds an apt-key that is no longer needed.
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
-# -APP journalctl
+#  APP journalctl
 # DESC Enable access to the log
 # HOST *
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal

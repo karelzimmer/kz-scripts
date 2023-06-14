@@ -28,21 +28,31 @@ Use (first) \fBkz install\fR to install apps and changes system settings.
 \fBkz setup\fR processes an input file ("set up file") that contains
 commands for setting up apps and changing user settings.
 .sp
+For the input file format, see the \fBFILE FORMAT\fR section below.
+.sp
 By default, \fBkz setup\fR processes the input file
-/usr/bin/kz-setup-<distribution>-desktop.sh,
-.br
-<distribution> is populated with the value from the current computer.
+/usr/bin/kz-setup-<distribution>-desktop.sh, <distribution> is populated with
+the value from the current computer.
 .sp
-For example, kz-setup-setup-ubuntu-desktop.sh.
-.br
-This input file contains commands for all users (USERs) included in it for
-Ubuntu desktop.
-.sp
-With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
-specified, the file name must start with \fBkz-setup-\fR.
+For example, kz-setup-setup-ubuntu-desktop.sh. This input file contains
+commands for all users (USERs) included in it for Ubuntu desktop.
 .sp
 When processing the input file, the commands for the current user (USER) are
 selected and copied to a temporary commands file.
+.sp
+Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files,
+or in the \fIFILE\fR provided with option \fB-f\fR, \fB--file\fR.
+.sp
+It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands for
+\fIAPP\fR and the current user (USER) are selected from the input file and are
+copied to a temporary commands file.
+.sp
+The commands in the temporary command file are executed.
+.sp
+Option \fB-c\fR, \fB--cat\fR gives the contents of the temporary commands file.
+.sp
+Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary commands
+file that would be executed.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .br
@@ -53,23 +63,8 @@ With option \fB--server\fR server is used instead of desktop.
 .br
 Then, for example, file /usr/bin/kz-setup-setup-ubuntu-server.sh is processed.
 .sp
-For the input file format, see the \fBFILE FORMAT\fR section below.
-.sp
-If no \fIAPP\fRs are specified, the temporary commands file will be processed.
-.sp
-Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files,
-or in the \fIFILE\fR provided with option \fB-f\fR, \fB--file\fR.
-.sp
-It is possible to specify \fIAPP\fRs.
-.br
-Per specified \fIAPP\fR, the first available app is found in all standard input
-files without a selection by user name (USER) and is copied to a temporary
-commands file along with the associated commands.
-.sp
-Option \fB-c\fR, \fB--cat\fR gives the contents of the temporary commands file.
-.sp
-Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary commands
-file that would be executed.
+With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
+specified, the file name must start with \fBkz-setup-\fR.
 .sp
 A -- signals the end of options and disables further option processing.
 .\"
@@ -108,17 +103,11 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
 # APP <name>
 T}:T{
 Contains the APP <name>.
-T}
-T{
-# -APP <name>
-T}:T{
-Ditto, not always used, see [1].
 T}
 T{
 # DESC <description>
@@ -149,18 +138,6 @@ T}
 .sp
 .sp
 .br
-[1]
-.br
-Line '# -APP <name>' is for a command specific to a distribution, a computer,
-or a user.
-.br
-This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
-look up commands at a given \fIAPP\fR.
-.br
-This line is used when processing the temporarycommands file.
-.sp
-.sp
-.br
 .B Table 2. Lines in kz-setup-setup-ubuntu-desktop.sh sample file
 .TS
 box tab(:);
@@ -172,7 +149,6 @@ Beschrijving
 T}
 .T&
 - | -
-l | l
 l | l
 l | l
 l | l
@@ -206,11 +182,6 @@ T}:T{
 Empty line.
 T}
 T{
-# -APP gnome
-T}:T{
-Hidden APP gnome.
-T}
-T{
 # DESC Desktop environment
 T}:T{
 Description of the APP.
@@ -239,9 +210,6 @@ computers.
 .br
 The combinations <user>@* (user <user> on all computers) and *@<host> (all
 users on computer <host>) are not supported.
-.br
-The line '# USER ' is ignored (no selection on user name and computer name)
-when searching for commands for a specified \fIAPP\fR.
 .\"
 .\"
 .sp

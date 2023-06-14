@@ -30,22 +30,35 @@ wijzigen van gebruikersinstellingen.
 opdrachten bevat voor het installeren van apps en het wijzigen van
 systeeminstellingen.
 .sp
+Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
+hieronder.
+.sp
 Standaard verwerkt \fBkz install\fR het invoerbestand
-/usr/bin/kz-install-install-<distributie>-desktop.sh,
-.br
-<distributie> wordt ingevuld met de waarde van de huidige computer.
+/usr/bin/kz-install-install-<distributie>-desktop.sh, <distributie> wordt
+ingevuld met de waarde van de huidige computer.
 .sp
-Bijvoorbeeld kz-install-install-ubuntu-desktop.sh.
-.br
-Dit invoerbestand bevat opdrachten voor alle hierin opgenomen computers (HOSTs)
-voor Ubuntu desktop.
-.sp
-Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
-opgegeven worden, de bestandsnaam dient te beginnen met \fBkz-install-\fR.
+Bijvoorbeeld kz-install-install-ubuntu-desktop.sh. Dit invoerbestand bevat
+installatie-opdrachten voor alle hierin opgenomen computers (HOSTs) voor Ubuntu
+desktop.
 .sp
 Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
 computernaam (HOST) geselecteerd en gekopieerd naar een tijdelijk
 opdrachtenbestand.
+.sp
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
+het tijdelijk opdrachtenbestand.
+.sp
+Het is mogelijk om \fIAPP\fRs op te geven. Per opgegeven \fIAPP\fR worden de
+opdrachten voor de \fIAPP\fR en de huidige computernaam (HOST) geselecteerd uit
+het invoerbestand en gekopieerd naar een tijdelijk opdrachtenbestand.
+.sp
+De opdrachten in het tijdelijk opdrachtenbestand worden uitgevoerd.
+.sp
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk
+opdrachtenbestand.
+.sp
+Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk
+opdrachtenbestand die uitgevoerd zouden worden.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .br
@@ -57,28 +70,8 @@ Met optie \fB--server\fR wordt niet desktop maar server gebruikt.
 Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-install-ubuntu-server.sh
 verwerkt.
 .sp
-Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
-hieronder.
-.sp
-Als er geen \fIAPP\fRs zijn opgegeven wordt het tijdelijk opdrachtenbestand
-verwerkt.
-.sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-alle standaard invoerbestanden, of in het bestand \fIFILE\fR dat wordt geleverd
-met optie \fB-f\fR, \fB--file\fR.
-.sp
-Het is mogelijk om \fIAPP\fRs op te geven.
-.br
-Per opgegeven \fIAPP\fR wordt de eerst beschikbare app opgezocht in alle
-standaard invoerbestanden zonder een selectie op computernaam (HOST) en wordt
-deze samen met de bijbehorende opdrachten gekopieerd naar een tijdelijk
-bestand.
-.sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het tijdelijk
-opdrachtenbestand.
-.sp
-Optie \fB-s\fR, \fB--simulate\fR toont de opdrachten in het tijdelijk
-opdrachtenbestand die uitgevoerd zouden worden.
+Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
+opgegeven worden, de bestandsnaam dient te beginnen met \fBkz-install-\fR.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
@@ -118,17 +111,11 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
 #  APP <naam>
 T}:T{
 Bevat de <naam> van de APP.
-T}
-T{
-# -APP <naam>
-T}:T{
-Idem, wordt niet altijd gebruikt, zie [1].
 T}
 T{
 # DESC <beschrijving>
@@ -158,19 +145,6 @@ T}
 .sp
 .sp
 .br
-[1]
-.br
-Regel '# -APP <naam>' is bedoeld voor een opdracht die specifiek is voor een
-distributie of een computer.
-.br
-Deze regel wordt niet getoond bij optie \fB-a\fR, \fB--apps\fR, en wordt niet
-gebruikt om opdrachten op te zoeken bij een opgegeven \fIAPP\fR.
-.br
-Deze regel wordt wél gebruikt bij het verwerken van het tijdelijk
-opdrachtenbestand.
-.sp
-.sp
-.br
 .B Tabel 2. Regels in voorbeeldbestand kz-install-install-ubuntu-desktop.sh
 .TS
 box tab(:);
@@ -182,7 +156,6 @@ Beschrijving
 T}
 .T&
 - | -
-l | l
 l | l
 l | l
 l | l
@@ -217,11 +190,6 @@ T}:T{
 Lege regel.
 T}
 T{
-# -APP gast
-T}:T{
-Verborgen APP gast.
-T}
-T{
 # DESC Add user gast
 T}:T{
 Beschrijving van de APP.
@@ -247,9 +215,6 @@ computer pc02 worden uitgevoerd.
 .br
 Een regel '# HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
 computers worden uitgevoerd.
-.br
-De regel '# HOST ' wordt genegeerd (geen selectie op computernaam) bij het
-zoeken naar opdrachten voor een opgegeven \fIAPP\fR.
 .\"
 .\"
 .sp

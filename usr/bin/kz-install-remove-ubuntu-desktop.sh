@@ -11,7 +11,7 @@
 # HOST pc06
 sudo apt-get remove --yes ansible
 
-# -APP apport
+#  APP apport
 # DESC Stop generating crash reports
 # HOST *
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
@@ -22,12 +22,12 @@ sudo systemctl enable --now apport.service
 # HOST pc-van-hugo
 sudo apt-get remove --yes bleachbit
 
-# -APP bluetooth
+#  APP bluetooth
 # DESC Disable internal bluetooth adapter
 # HOST pc01
 sudo rm --force /etc/udev/rules.d/81-bluetooth-hci.rules
 
-# -APP brightness
+#  APP brightness
 # DESC Set brightness
 # HOST pc06
 echo '' | sudo tee /etc/rc.local
@@ -54,7 +54,7 @@ sudo apt-get remove --yes clamtk-gnome
 # Web App: https://localhost:9090
 sudo apt-get remove --yes cockpit
 
-# -APP cups-backend-bjnp
+#  APP cups-backend-bjnp
 # DESC Support for Canon BJNP protocol
 # HOST pc-van-emily
 sudo apt-get remove --yes cups-backend-bjnp
@@ -69,12 +69,12 @@ sudo rm --force ~gdm/.config/monitors.xml
 # HOST pc06
 sudo apt-get remove --yes libimage-exiftool-perl
 
-# -APP force-x11
+#  APP force-x11
 # DESC Use X 11 instead of Wayland
 # HOST *
 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
-# -APP gast
+#  APP gast
 # DESC Add user gast
 # HOST pc01 pc06
 sudo userdel --remove gast
@@ -113,7 +113,7 @@ sudo apt-get update
 # HOST pc-van-emily
 sudo apt-get remove --yes handbrake
 
-# -APP hosts
+#  APP hosts
 # DESC Add hosts
 # HOST pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
@@ -147,13 +147,13 @@ sudo apt-get remove --yes mlocate
 # HOST pc06
 sudo apt-get remove --yes nautilus-admin
 
-# -APP restricted-addons
+#  APP restricted-addons
 # DESC Essential software not already included due to legal or copyright reasons
 # HOST *
 sudo apt-get remove --yes ubuntu-restricted-addons libavcodec-extra
 sudo apt autoremove --yes
 
-# -APP ros
+#  APP ros
 # DESC Robot Operating System
 # HOST pc04
 :

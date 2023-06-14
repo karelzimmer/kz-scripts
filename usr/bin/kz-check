@@ -186,14 +186,13 @@ function check_record_types {
     local wrong_record=''
 
     # Ok:
-    # # APP             #-APP           # APP             #-APP
-    # # HOST            # HOST          # USER            # USER
-    # # <Description>   # <Description> # <Description>   # <Description>
+    # # APP             # APP
+    # # HOST            # USER
+    # # <Description>   # <Description>
     # Wrong:
     # The rest :-)
     wrong_record=$(
         grep    --regexp='^# APP'   \
-                --regexp='^# -APP'  \
                 --after-context=2   \
                 --line-number       \
                 "$script"           |

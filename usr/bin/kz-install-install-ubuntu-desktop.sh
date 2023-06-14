@@ -11,7 +11,7 @@
 # HOST pc06
 sudo apt-get install --yes ansible
 
-# -APP apport
+#  APP apport
 # DESC Stop generating crash reports
 # HOST *
 sudo systemctl stop apport.service
@@ -24,12 +24,12 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 # HOST pc-van-hugo
 sudo apt-get install --yes bleachbit
 
-# -APP bluetooth
+#  APP bluetooth
 # DESC Disable internal bluetooth adapter
 # HOST pc01
 echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
 
-# -APP brightness
+#  APP brightness
 # DESC Set brightness
 # HOST pc06
 echo '#!/bin/sh' | sudo tee /etc/rc.local
@@ -66,7 +66,7 @@ sudo apt-get install --yes clamtk-gnome
 # Web App: https://localhost:9090
 sudo apt-get install --yes cockpit cockpit-pcp
 
-# -APP cups-backend-bjnp
+#  APP cups-backend-bjnp
 # DESC Support for Canon BJNP protocol
 # HOST pc-van-emily
 sudo apt-get install --yes cups-backend-bjnp
@@ -82,14 +82,14 @@ if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/moni
 # HOST pc06
 sudo apt-get install --yes libimage-exiftool-perl
 
-# -APP force-x11
+#  APP force-x11
 # DESC Use X 11 instead of Wayland
 # HOST *
 # With wayland issues with video playback and TeamViewer
 # To check execute: echo $XDG_SESSION_TYPE (should output 'x11')
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 
-# -APP gast
+#  APP gast
 # DESC Add user gast
 # HOST pc01 pc06
 sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
@@ -139,7 +139,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl
 # HOST pc-van-emily
 sudo apt-get install --yes handbrake
 
-# -APP hosts
+#  APP hosts
 # DESC Add hosts
 # HOST pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
@@ -175,13 +175,13 @@ sudo apt-get install --yes mlocate
 # HOST pc06
 sudo apt-get install --yes nautilus-admin
 
-# -APP restricted-addons
+#  APP restricted-addons
 # DESC Essential software not already included due to legal or copyright reasons
 # HOST *
 # No ubuntu-restricted-extras due to unreliable installation of ttf-mscorefonts-installer, do install libavcodec-extra from that metapackage
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 
-# -APP ros
+#  APP ros
 # DESC Robot Operating System
 # HOST pc04
 :

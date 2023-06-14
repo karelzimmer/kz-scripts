@@ -29,21 +29,31 @@ settings.
 \fBkz install\fR processes an input file ("installation file") that contains
 commands for installing apps and modifying system settings.
 .sp
+For the format of the input files see the section \fBFILE FORMAT\fR below.
+.sp
 By default, \fBkz install\fR processes the input file
-/usr/bin/kz-install-install-<distribution>-desktop.sh,
-.br
-<distribution> is populated with the value from the current computer.
+/usr/bin/kz-install-install-<distribution>-desktop.sh, <distribution> is
+populated with the value from the current computer.
 .sp
-For example, kz-install-install-ubuntu-desktop.sh.
-.br
-This input file contains commands for all computers (HOSTs) included in it for
-Ubuntu desktop.
-.sp
-With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
-specified, the file name must start with \fBkz-install-\fR.
+For example, kz-install-install-ubuntu-desktop.sh. This input file contains
+commands for all computers (HOSTs) included in it for Ubuntu desktop.
 .sp
 When processing the input file, the commands for the current computer (HOST)
 are selected and copied to a temporary commands file.
+.sp
+Option \fB-a\fR, \fB--apps\fR lists apps available in the temporary commands
+file.
+.sp
+It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands for
+the \fIAPP\fR and the current computer (HOST) are selected from the input file
+and are copied to a temporary commands file.
+.sp
+The commands in the temporary command file are executed.
+.sp
+Option \fB-c\fR, \fB--cat\fR lists the contents of the temporary commands file.
+.sp
+Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary commands
+file that would be executed.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .br
@@ -55,23 +65,8 @@ With option \fB--server\fR server is used instead of desktop.
 Then, for example, file /usr/bin/kz-install-install-ubuntu-server.sh is
 processed.
 .sp
-For the format of the input files see the section \fBFILE FORMAT\fR below.
-.sp
-If no \fIAPP\fRs are specified, the temporary commands file will be processed.
-.sp
-Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files,
-or in the \fIFILE\fR provided with option \fB-f\fR, \fB--file\fR.
-.sp
-It is possible to specify \fIAPP\fRs.
-.br
-Per specified \fIAPP\fR, the first available app is found in all standard input
-files without a selection by computer name (HOST) and is copied to a temporary
-commands file along with the associated commands.
-.sp
-Option \fB-c\fR, \fB--cat\fR lists the contents of the temporary commands file.
-.sp
-Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary commands
-file that would be executed.
+With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
+specified, the file name must start with \fBkz-install-\fR.
 .sp
 A -- signals the end of options and disables further option processing.
 .\"
@@ -109,17 +104,11 @@ l | l
 l | l
 l | l
 l | l
-l | l
 l | l.
 T{
 # APP <name>
 T}:T{
 Contains the APP <name>.
-T}
-T{
-# -APP <name>
-T}:T{
-Ditto, not always used, see [1].
 T}
 T{
 # DESC <description>
@@ -149,17 +138,6 @@ T}
 .sp
 .sp
 .br
-[1]
-.br
-Line '# -APP <name>' is for a command specific to a distribution or a computer.
-.br
-This line is not shown with option \fB-a\fR, \fB--apps\fR, and is not used to
-look up commands at a given \fIAPP\fR.
-.br
-This line is used when processing the temporary commands file.
-.sp
-.sp
-.br
 .B Table 2. Lines in sample file kz-install-install-ubuntu.sh
 .TS
 box tab(:);
@@ -171,7 +149,6 @@ Description
 T}
 .T&
 - | -
-l | l
 l | l
 l | l
 l | l
@@ -206,11 +183,6 @@ T}:T{
 Empty line.
 T}
 T{
-# -APP gast
-T}:T{
-Hidden  APP gast.
-T}
-T{
 # HOST pc02
 T}:T{
 Only install on pc02.
@@ -235,9 +207,6 @@ The line '# HOST pc02' ensures that the associated commands are executed only
 on computer pc02.
 .br
 A line '# HOST *' causes the associated commands to run on all computers.
-.br
-The line '# HOST ' is ignored (no selection on computer name) when searching
-for commands for a specified \fIAPP\fR.
 .\"
 .\"
 .sp

@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# -APP dashtodock
+#  APP dashtodock
 # DESC Transform dash to dock
 # USER *@*
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
@@ -40,7 +40,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 
-# -APP gnome
+#  APP gnome
 # DESC Desktop environment
 # USER karel@pc07
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
@@ -72,7 +72,7 @@ kz-gset --addfavaft=kz-skype
 # USER *@*
 kz-gset --addfavaft=kz-spotify
 
-# -APP start-install
+#  APP start-install
 # DESC Remove starter Start installation
 # USER *@*
 kz-gset --delfav=install-debian
