@@ -175,7 +175,7 @@ sudo apt-get install --yes mlocate
 # HOST pc06
 sudo apt-get install --yes nautilus-admin
 
-# -APP restricted-addons
+#  APP restricted-addons
 # DESC Essential software not already included due to legal or copyright reasons
 # HOST *
 # No ubuntu-restricted-extras due to unreliable installation of ttf-mscorefonts-installer, do install libavcodec-extra from that metapackage
