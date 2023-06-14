@@ -118,6 +118,11 @@ sudo apt-get install --yes thunderbird-l10n-nl
 # HOST pc07
 sudo snap install vlc
 
+#  APP vscode
+# DESC Editor
+# HOST pc07
+sudo snap install --classic code
+
 #  APP webmin
 # DESC Web-based administration
 # HOST pc07
