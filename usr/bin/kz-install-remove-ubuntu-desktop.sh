@@ -210,6 +210,11 @@ sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additi
 # HOST pc06
 sudo snap remove vlc
 
+#  APP vscode
+# DESC Editor
+# HOST pc01 pc07
+sudo snap remove code
+
 #  APP wine
 # DESC Run Windows programs (Wine Is Not an Emulator)
 # HOST pc04

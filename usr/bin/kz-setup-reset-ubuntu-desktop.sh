@@ -120,7 +120,7 @@ kz-gset --delfav=kz-vm-hugowin732
 
 #  APP vscode
 # DESC Editor
-# USER karel@pc06
+# USER karel@pc01 karel@pc06
 kz-gset --delfav=code_code
 
 #  APP whatsapp

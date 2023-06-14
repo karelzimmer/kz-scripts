@@ -105,6 +105,11 @@ sudo apt-get remove --yes thunderbird-l10n-nl
 # HOST pc07
 sudo snap remove vlc
 
+#  APP vscode
+# DESC Editor
+# HOST pc07
+sudo snap remove code
+
 #  APP webmin
 # DESC Web-based administration
 # HOST pc07

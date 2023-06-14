@@ -175,7 +175,7 @@ sudo apt-get install --yes mlocate
 # HOST pc06
 sudo apt-get install --yes nautilus-admin
 
-#  APP restricted-addons
+# -APP restricted-addons
 # DESC Essential software not already included due to legal or copyright reasons
 # HOST *
 # No ubuntu-restricted-extras due to unreliable installation of ttf-mscorefonts-installer, do install libavcodec-extra from that metapackage
@@ -281,6 +281,11 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 # DESC Media player
 # HOST pc06
 sudo snap install vlc
+
+#  APP vscode
+# DESC Editor
+# HOST pc01 pc06
+sudo snap install --classic code
 
 #  APP wine
 # DESC Run Windows programs (Wine Is Not an Emulator)
