@@ -11,7 +11,7 @@
 # HOST *
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
-sudo apt-add-repository --remove 'deb https://www.deb-multimedia.org bookworm main non-free'
+sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
 sudo apt-get remove --yes deb-multimedia-keyring
 sudo apt-get update
 

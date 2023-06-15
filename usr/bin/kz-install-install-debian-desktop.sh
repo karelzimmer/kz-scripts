@@ -11,7 +11,7 @@
 # HOST *
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
-sudo apt-add-repository 'deb https://www.deb-multimedia.org bookworm main non-free'
+sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
 wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'
 sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
