@@ -237,9 +237,9 @@ under Linux.
 Type 'exit' to close this window.")
 
     clear -x
-    TERM=ansi whiptail  --backtitle "$display_name - $program_desc" \
-                        --title     "$title"                        \
-                        --infobox   "$text"                         \
+    TERM=ansi whiptail  --backtitle "$display_name" \
+                        --title     "$title"        \
+                        --infobox   "$text"         \
                         16 47
 
     cleanup
