@@ -204,7 +204,7 @@ function backup_settings_desktop_background {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp --update "$picture_file" "$file" |& $logcmd || true
+    cp "$picture_file" "$file" |& $logcmd || true
 }
 
 
@@ -264,7 +264,7 @@ function backup_settings_user_photo {
     local file
     file=$tgtdir/$(gettext 'Userphoto')
 
-    cp --update $srcdir/"$USER" "$file" |& $logcmd || true
+    cp $srcdir/"$USER" "$file" |& $logcmd || true
 }
 
 
