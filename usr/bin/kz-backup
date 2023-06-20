@@ -182,10 +182,13 @@ Disconnect media via Files.")"
 
 
 function backup_settings {
-    local tgtdir
-    tgtdir=$HOME/$(gettext 'Settings')
+    # Old directories, legacy.
+    rm  --force                 \
+        --recursive             \
+        "$HOME"/kz-data/        \
+        "$HOME"/Instellingen/   \
+        "$HOME"/Settings/
 
-    mkdir --parents "$tgtdir" |& $logcmd
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
@@ -194,30 +197,33 @@ function backup_settings {
 
 
 function backup_settings_desktop_background {
-    local file
-    file=$tgtdir/$(gettext 'Background')
-    local picture_file=''
+    local input_file=''
+    local output_file
+    output_file=$(xdg-user-dir PICTURES)/$(gettext 'Background')
 
-    picture_file=$(
+    input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed --expression='s|%20| |g'                            |
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp "$picture_file" "$file" |& $logcmd || true
+    cp "$input_file" "$output_file" |& $logcmd || true
 }
 
 
 function backup_settings_favorite_apps {
-    local file
-    file=$tgtdir/$(gettext 'Favorites')
+    local output_file
+    output_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
 
-    gsettings get org.gnome.shell favorite-apps > "$file" |& $logcmd || true
+    gsettings   get                             \
+                org.gnome.shell favorite-apps   \
+                > "$output_file"                |& $logcmd || true
 }
 
 
 function backup_settings_installed_apps {
-    local file=$tgtdir/Apps
+    local output_file
+    output_file=$(xdg-user-dir DOCUMENTS)/Apps
     local header1
     header1="$(gettext "[1/3] These packages are installed via Add or Remove \
 Programs, with a command
@@ -233,17 +239,17 @@ installation of a package, with
       with kz install:")"
     local search=/etc/apt/sources.list
 
-    printf '%b\n' "$header1" > "$file"
-    if ! apt list --manual-installed 2> >($logcmd) >> "$file"; then
+    printf '%b\n' "$header1" > "$output_file"
+    if ! apt list --manual-installed 2> >($logcmd) >> "$output_file"; then
         true
     fi
 
-    printf '\n%b\n' "$header2" >> "$file"
-    if ! snap list 2> >($logcmd) >> "$file"; then
-        printf '%s\n' "$(gettext 'snap is not installed')" >> "$file"
+    printf '\n%b\n' "$header2" >> "$output_file"
+    if ! snap list 2> >($logcmd) >> "$output_file"; then
+        printf '%s\n' "$(gettext 'snap is not installed')" >> "$output_file"
     fi
 
-    printf '\n%b\n' "$header3" >> "$file"
+    printf '\n%b\n' "$header3" >> "$output_file"
     cd  $search.d
     if !    grep    --recursive             \
                     --no-filename           \
@@ -253,18 +259,18 @@ installation of a package, with
                     /etc/apt/sources.list.d |
             grep    --invert-match          \
                     --regexp='ubuntu.com'   |
-            sort    --unique                >> "$file"; then
+            sort    --unique                >> "$output_file"; then
         true
     fi
 }
 
 
 function backup_settings_user_photo {
-    local srcdir=/var/lib/AccountsService/icons
-    local file
-    file=$tgtdir/$(gettext 'Userphoto')
+    local input_file=/var/lib/AccountsService/icons/"$USER"
+    local output_file
+    output_file=$(xdg-user-dir PICTURES)/$(gettext 'Userphoto')
 
-    cp $srcdir/"$USER" "$file" |& $logcmd || true
+    cp "$input_file" "$output_file" |& $logcmd || true
 }
 
 

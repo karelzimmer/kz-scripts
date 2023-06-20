@@ -530,14 +530,14 @@ $(gettext "The following steps to add extra users are optional.
         info "$text"
         wait_for_enter
     elif [[ $title = $(gettext 'Set user photo') ]]; then
-        if [[ -f $HOME/$(gettext 'Settings')/$(gettext 'Userphoto') ]]; then
+        if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
             text="$(gettext 'Set user photo'):
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.
 2. Click the image for the user.
 3. Click Select a file.
-4. Select Userphoto in Personal folder / Settings.
+4. Select Userphoto in Personal folder / Pictures.
 5. Close the Users screen.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \

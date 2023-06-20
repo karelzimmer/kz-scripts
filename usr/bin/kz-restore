@@ -223,33 +223,29 @@ function restore_backup {
 
 
 function restore_settings {
-    local tgtdir
-    tgtdir=$HOME/$(gettext 'Settings')
-
     restore_settings_desktop_background
     restore_settings_favorite_apps
-
-    # Old directory, lagacy.
-    rm --force --recursive "$HOME"/kz-data/
 }
 
 
 function restore_settings_desktop_background {
-    local file
-    file=$tgtdir/$(gettext 'Background')
+    local input_file
+    input_file=$(xdg-user-dir PICTURES)/$(gettext 'Background')
 
-    if [[ -f $file ]]; then
-        gsettings set org.gnome.desktop.background picture-uri "file://$file"
+    if [[ -f $input_file ]]; then
+        gsettings   set                                         \
+                    org.gnome.desktop.background picture-uri    \
+                    "file://$input_file"
     fi
 }
 
 
 function restore_settings_favorite_apps {
-    local file
-    file=$tgtdir/$(gettext 'Favorites')
+    local input_file
+    input_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
 
-    if [[ -f $file ]]; then
-        gsettings set org.gnome.shell favorite-apps "$(cat "$file")"
+    if [[ -f $input_file ]]; then
+        gsettings set org.gnome.shell favorite-apps "$(cat "$input_file")"
     fi
 }
 
