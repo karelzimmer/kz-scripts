@@ -182,13 +182,6 @@ Disconnect media via Files.")"
 
 
 function backup_settings {
-    # Old directories, legacy.
-    rm  --force                 \
-        --recursive             \
-        "$HOME"/kz-data/        \
-        "$HOME"/Instellingen/   \
-        "$HOME"/Settings/
-
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps

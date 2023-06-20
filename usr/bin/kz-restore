@@ -223,6 +223,13 @@ function restore_backup {
 
 
 function restore_settings {
+    # Old directories, legacy.
+    rm  --force                 \
+        --recursive             \
+        "$HOME"/kz-data/        \
+        "$HOME"/Instellingen/   \
+        "$HOME"/Settings/
+
     restore_settings_desktop_background
     restore_settings_favorite_apps
 }
