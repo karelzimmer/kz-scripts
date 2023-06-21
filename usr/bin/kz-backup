@@ -229,7 +229,7 @@ function backup_settings_desktop_background {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp "$input_file" "$output_file" |& $logcmd || true
+    cp --preserve "$input_file" "$output_file" |& $logcmd || true
 }
 
 
@@ -292,7 +292,7 @@ function backup_settings_user_photo {
     local output_file
     output_file=$(xdg-user-dir PICTURES)/$(gettext 'Userphoto')
 
-    cp "$input_file" "$output_file" |& $logcmd || true
+    cp --preserve "$input_file" "$output_file" |& $logcmd || true
 }
 
 
