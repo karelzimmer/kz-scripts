@@ -182,7 +182,7 @@ Disconnect media via Files.")"
 
 
 function backup_settings {
-    migrate_old_locations
+    migrate_settings
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
@@ -190,25 +190,31 @@ function backup_settings {
 }
 
 
-function migrate_old_locations {
-    mv "$HOME"/kz-data/Achtergrond      "$HOME"/Afbeeldingen/   || true
-    mv "$HOME"/kz-data/Apps             "$HOME"/Documenten/     || true
-    mv "$HOME"/kz-data/Gebruikersfoto   "$HOME"/Afbeeldingen/   || true
-    mv "$HOME"/kz-data/Favorieten       "$HOME"/Documenten/     || true
+function migrate_settings {
+    move_file "$HOME"/kz-data/Achtergrond           "$HOME"/Afbeeldingen/
+    move_file "$HOME"/kz-data/Achtergrond           "$HOME"/Afbeeldingen/
+    move_file "$HOME"/kz-data/Apps                  "$HOME"/Documenten/
+    move_file "$HOME"/kz-data/Gebruikersfoto        "$HOME"/Afbeeldingen/
+    move_file "$HOME"/kz-data/Favorieten            "$HOME"/Documenten/
 
-    mv "$HOME"/Instellingen/Achtergrond     "$HOME"/Afbeeldingen/   || true
-    mv "$HOME"/Instellingen/Apps            "$HOME"/Documenten/     || true
-    mv "$HOME"/Instellingen/Gebruikersfoto  "$HOME"/Afbeeldingen/   || true
-    mv "$HOME"/Instellingen/Favorieten      "$HOME"/Documenten/     || true
+    move_file "$HOME"/Instellingen/Achtergrond      "$HOME"/Afbeeldingen/
+    move_file "$HOME"/Instellingen/Apps             "$HOME"/Documenten/
+    move_file "$HOME"/Instellingen/Gebruikersfoto   "$HOME"/Afbeeldingen/
+    move_file "$HOME"/Instellingen/Favorieten       "$HOME"/Documenten/
 
-    mv "$HOME"/Settings/Apps        "$HOME"/Documents/  || true
-    mv "$HOME"/Settings/Background  "$HOME"/Pictures/   || true
-    mv "$HOME"/Settings/Favorites   "$HOME"/Documents/  || true
-    mv "$HOME"/Settings/Userphoto   "$HOME"/Pictures/   || true
+    move_file "$HOME"/Settings/Apps                 "$HOME"/Documents/
+    move_file "$HOME"/Settings/Background           "$HOME"/Pictures/
+    move_file "$HOME"/Settings/Favorites            "$HOME"/Documents/
+    move_file "$HOME"/Settings/Userphoto            "$HOME"/Pictures/
 
-    mv "$HOME"/kz-data      "$HOME"/kz-data-OUD         || true
-    mv "$HOME"/Instellingen "$HOME"/Instellingen-OUD    || true
-    mv "$HOME"/Settings     "$HOME"/Settings-OLD        || true
+    mv "$HOME"/kz-data      "$HOME"/kz-data-OUD         2> /dev/null    || true
+    mv "$HOME"/Instellingen "$HOME"/Instellingen-OUD    2> /dev/null    || true
+    mv "$HOME"/Settings     "$HOME"/Settings-OLD        2> /dev/null    || true
+}
+
+
+function move_file {
+    mv "$1" "$2" 2> /dev/null || true
 }
 
 
