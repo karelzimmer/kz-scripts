@@ -182,10 +182,33 @@ Disconnect media via Files.")"
 
 
 function backup_settings {
+    migrate_old_locations
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
     backup_settings_user_photo
+}
+
+
+function migrate_old_locations {
+    mv "$HOME"/kz-data/Achtergrond      "$HOME"/Afbeeldingen/   || true
+    mv "$HOME"/kz-data/Apps             "$HOME"/Documenten/     || true
+    mv "$HOME"/kz-data/Gebruikersfoto   "$HOME"/Afbeeldingen/   || true
+    mv "$HOME"/kz-data/Favorieten       "$HOME"/Documenten/     || true
+
+    mv "$HOME"/Instellingen/Achtergrond     "$HOME"/Afbeeldingen/   || true
+    mv "$HOME"/Instellingen/Apps            "$HOME"/Documenten/     || true
+    mv "$HOME"/Instellingen/Gebruikersfoto  "$HOME"/Afbeeldingen/   || true
+    mv "$HOME"/Instellingen/Favorieten      "$HOME"/Documenten/     || true
+
+    mv "$HOME"/Settings/Apps        "$HOME"/Documents/  || true
+    mv "$HOME"/Settings/Background  "$HOME"/Pictures/   || true
+    mv "$HOME"/Settings/Favorites   "$HOME"/Documents/  || true
+    mv "$HOME"/Settings/Userphoto   "$HOME"/Pictures/   || true
+
+    mv "$HOME"/kz-data      "$HOME"/kz-data-OUD         || true
+    mv "$HOME"/Instellingen "$HOME"/Instellingen-OUD    || true
+    mv "$HOME"/Settings     "$HOME"/Settings-OLD        || true
 }
 
 

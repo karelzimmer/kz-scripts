@@ -223,11 +223,6 @@ function restore_backup {
 
 
 function restore_settings {
-    # Old directories, legacy.
-    mv "$HOME"/kz-data      "$HOME"/kz-data-OUD         || true
-    mv "$HOME"/Instellingen "$HOME"/Instellingen-OUD    || true
-    mv "$HOME"/Settings     "$HOME"/Settings-OLD        || true
-
     restore_settings_desktop_background
     restore_settings_favorite_apps
 }
