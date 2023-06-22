@@ -124,10 +124,10 @@ T}:T{
 Bevat een <beschrijving> van de APP.
 T}
 T{
-# USER <user@host>
+# USER <user@host>|*
 T}:T{
-Naam van de gebruiker (<user>) en computer (<host>) waar de opdracht van
-toepassing is.
+Naam van de gebruiker (<user>@<host>) waar de opdracht van toepassing is, of *
+voor iedere gebruiker.
 T}
 T{
 T}:T{
@@ -177,9 +177,9 @@ T}:T{
 Beschrijving van de APP.
 T}
 T{
-# USER *@*
+# USER *
 T}:T{
-Opdracht is voor alle gebruikers op alle computers.
+Opdracht is voor iedere gebruiker, zie [1].
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -209,17 +209,15 @@ T}
 .TE
 .sp
 .sp
+[1]
 .br
+De regel '# USER *' zorgt ervoor dat de bijbehorende opdrachten voor iedere
+gebruiker worden uitgevoerd.
+.sp
 [2]
 .br
 De regel '# USER jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen
-voor gebruiker jan op computer pc02 worden uitgevoerd.
-.br
-Een regel '# USER *@*' zorgt ervoor dat de bijbehorende opdrachten voor alle
-gebruikers op alle computers worden uitgevoerd.
-.br
-De combinaties <user>@* (gebruiker <user> op alle computers) en *@<host> (alle
-gebruikers op computer <host>) worden niet ondersteund.
+voor gebruiker jan op pc02 worden uitgevoerd.
 .\"
 .\"
 .sp

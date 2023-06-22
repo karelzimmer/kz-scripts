@@ -278,8 +278,8 @@ function process_argument_app_inputfile {
                 # Description record.
                 descrecord=$record
                 ;;
-            '#'*' USER '*'*@*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
-                # User record. Not supported: $USER@* and *@$HOSTNAME.
+            '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
+                # User record.
                 if $app_found; then
                     user_match=true
                     no_user_match=false
@@ -341,8 +341,8 @@ function process_inputfile {
                 # Description record.
                 descrecord=$record
                 ;;
-            '#'*' USER '*'*@*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
-                # User record. Not supported: $USER@* and *@$HOSTNAME.
+            '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
+                # User record.
                 user_match=true
                 if $first_app_record; then
                     first_app_record=false

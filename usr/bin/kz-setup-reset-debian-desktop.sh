@@ -8,12 +8,12 @@
 
 #  APP dashtodock
 # DESC Transform dash to dock
-# USER *@*
+# USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
 #  APP gnome
 # DESC Desktop environment
-# USER *@*
+# USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -50,12 +50,12 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
 #  APP google-chrome
 # DESC Google's webbrowser
-# USER *@*
+# USER *
 kz-gset --delfav=google-chrome
 
 #  APP hide-folders
 # DESC Hide folders in Home folder
-# USER *@*
+# USER *
 rm --force "$HOME"/.hidden
 
 #  APP kvm
@@ -65,17 +65,17 @@ kz-gset --delfav=virt-manager
 
 #  APP skype
 # DESC Video calls
-# USER *@*
+# USER *
 kz-gset --delfav=kz-skype
 
 #  APP spotify
 # DESC Music player
-# USER *@*
+# USER *
 kz-gset --delfav=kz-spotify
 
 #  APP start-install
 # DESC Remove starter Start installation
-# USER *@*
+# USER *
 kz-gset --addfavbef=install-debian
 
 #  APP terminal

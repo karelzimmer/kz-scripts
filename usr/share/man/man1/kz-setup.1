@@ -117,9 +117,9 @@ T}:T{
 Description of the APP.
 T}
 T{
-# USER <user@host>
+# USER <user@host>|*
 T}:T{
-Name of the user (<user>) and computer (<host>) where the command applies.
+Name of the user (<user>@<host>) where the command applies, or * for any user.
 T}
 T{
 .sp
@@ -165,9 +165,9 @@ T}:T{
 Name of the APP.
 T}
 T{
-# USER *@*
+# USER *
 T}:T{
-Command is for all users on all computers.
+Command is for any user, see [1].
 T}
 T{
 # DESC Google's webbrowser
@@ -201,17 +201,14 @@ T}
 .TE
 .sp
 .sp
+[1]
 .br
+The line '# USER *' causes the associated commands to run for every user.
+.sp
 [2]
 .br
 The line '# USER jan@pc02' ensures that the associated commands are executed
-only for user jan on computer pc02.
-.br
-A line '# USER *@*' causes the associated commands to run for all users on all
-computers.
-.br
-The combinations <user>@* (user <user> on all computers) and *@<host> (all
-users on computer <host>) are not supported.
+only for user jan on pc02.
 .\"
 .\"
 .sp

@@ -20,7 +20,7 @@ rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 #  APP gnome
 # DESC Desktop environment
-# USER *@*
+# USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -63,12 +63,12 @@ gsettings reset org.gnome.nautilus.preferences show-create-link
 
 #  APP google-chrome
 # DESC Google's webbrowser
-# USER *@*
+# USER *
 kz-gset --delfav=google-chrome
 
 #  APP hide-folders
 # DESC Hide folders in Home folder
-# USER *@*
+# USER *
 rm --force "$HOME"/.hidden
 
 #  APP kvm
@@ -83,17 +83,17 @@ kz-gset --delfav=libreoffice-calc
 
 #  APP skype
 # DESC Video calls
-# USER *@*
+# USER *
 kz-gset --delfav=kz-skype
 
 #  APP spotify
 # DESC Music player
-# USER *@*
+# USER *
 kz-gset --delfav=kz-spotify
 
 #  APP start-install
 # DESC Remove starter Start installation
-# USER *@*
+# USER *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 #  APP teams
