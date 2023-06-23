@@ -90,8 +90,7 @@ Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels in
-voorbeeldbestand kz-setup-setup-ubuntu-desktop.sh voor computer pc02 en
-gebruiker jan.
+voorbeeldbestand kz-setup-setup-ubuntu-desktop.sh voor gebruiker Jan.
 Meer voorbeelden zijn te zien via de opdracht \fBkz setup --cat\fR.
 .\"
 .\"
@@ -108,10 +107,6 @@ Beschrijving
 T}
 .T&
 l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 #  APP <naam>
@@ -124,9 +119,9 @@ T}:T{
 Bevat een <beschrijving> van de APP.
 T}
 T{
-# USER <user@host>|*
+# USER <user> ...
 T}:T{
-Naam van de gebruiker (<user>@<host>) waar de opdracht van toepassing is, of *
+Naam van de gebruiker (<user>) waarvoor de opdracht van toepassing is, of *
 voor iedere gebruiker.
 T}
 T{
@@ -159,12 +154,6 @@ T}
 .T&
 - | -
 l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 #  APP google-chrome
@@ -192,14 +181,19 @@ T}:T{
 Lege regel.
 T}
 T{
+#  APP gnome
+T}:T{
+Naam van de APP.
+T}
+T{
 # DESC Desktop environment
 T}:T{
 Beschrijving van de APP.
 T}
 T{
-# USER jan@pc02
+# USER jan
 T}:T{
-Opdracht is voor Jan op pc02, zie [2].
+Opdracht is voor Jan, zie [2].
 T}
 T{
 gsettings set org.gnome.shell...
@@ -216,8 +210,8 @@ gebruiker worden uitgevoerd.
 .sp
 [2]
 .br
-De regel '# USER jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen
-voor gebruiker jan op pc02 worden uitgevoerd.
+De regel '# USER jan' zorgt ervoor dat de bijbehorende opdrachten alleen voor
+Jan worden uitgevoerd.
 .\"
 .\"
 .sp

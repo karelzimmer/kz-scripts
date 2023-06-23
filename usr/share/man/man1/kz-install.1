@@ -102,10 +102,6 @@ Description
 T}
 .T&
 l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 # APP <name>
@@ -118,9 +114,9 @@ T}:T{
 Description of the APP.
 T}
 T{
-# HOST <host>
+# HOST <host> ...
 T}:T{
-Name of the computer (<host>) where the command applies.
+Name of the computer (<host>) where the command applies, or * for any computer.
 T}
 T{
 T}:T{
@@ -152,12 +148,6 @@ T}
 .T&
 - | -
 l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 # APP gnome-gmail
@@ -165,14 +155,14 @@ T}:T{
 Name of the APP.
 T}
 T{
-# HOST pc02
-T}:T{
-Command for pc02, see [2].
-T}
-T{
-# Gmail as the preferred email application in GNOME
+# DESC Gmail as the preferred email application in GNOME
 T}:T{
 Description of the APP.
+T}
+T{
+# HOST *
+T}:T{
+Install on any computer, see [1].
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -185,14 +175,19 @@ T}:T{
 Empty line.
 T}
 T{
-# HOST pc02
+#  APP gast
 T}:T{
-Only install on pc02.
+Name of the APP.
 T}
 T{
-# Add user gast
+# DESC Add user gast
 T}:T{
 Description of the APP.
+T}
+T{
+# HOST pc02
+T}:T{
+Only install on pc02, see [2].
 T}
 T{
 sudo useradd --create-home ... gast
@@ -202,13 +197,14 @@ T}
 .TE
 .sp
 .sp
+[1]
 .br
+A line '# HOST *' causes the associated commands to run on all computers.
+.sp
 [2]
 .br
 The line '# HOST pc02' ensures that the associated commands are executed only
-on computer pc02.
-.br
-A line '# HOST *' causes the associated commands to run on all computers.
+on pc02.
 .\"
 .\"
 .sp

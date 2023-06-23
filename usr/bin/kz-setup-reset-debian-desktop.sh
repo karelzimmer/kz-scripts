@@ -43,7 +43,7 @@ gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #  APP gnome
 # DESC Desktop environment
-# USER karel@pc07
+# USER karel
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.nautilus.preferences show-create-link
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
@@ -60,7 +60,7 @@ rm --force "$HOME"/.hidden
 
 #  APP kvm
 # DESC Virtualization
-# USER karel@pc07
+# USER karel
 kz-gset --delfav=virt-manager
 
 #  APP skype
@@ -80,19 +80,20 @@ kz-gset --addfavbef=install-debian
 
 #  APP terminal
 # DESC Terminal
-# USER karel@pc07
+# USER karel
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #  APP vscode
 # DESC Editor
-# USER karel@pc07 user@debian
+# USER karel user
+# user lives with Debian Live
 kz-gset --delfav=code_code
 
 #  APP webmin
 # DESC Web-based administration
-# USER karel@pc07
+# USER karel
 # Web App: https://localhost:10000
 kz-gset --delfav=kz-webmin
 rm --force "$HOME"/.local/share/applications/kz-webmin.desktop

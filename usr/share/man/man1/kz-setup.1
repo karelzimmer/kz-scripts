@@ -84,7 +84,7 @@ See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in
-kz-setup-setup-ubuntu-desktop.sh sample file for computer pc02 and user jan.
+kz-setup-setup-ubuntu-desktop.sh sample file for user Jan.
 More examples can be seen through the \fBkz setup --cat\fR command.
 .\"
 .\"
@@ -101,10 +101,6 @@ Description
 T}
 .T&
 l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 # APP <name>
@@ -117,9 +113,9 @@ T}:T{
 Description of the APP.
 T}
 T{
-# USER <user@host>|*
+# USER <user> ...
 T}:T{
-Name of the user (<user>@<host>) where the command applies, or * for any user.
+Name of the user <user> for which the command applies, or * for any user.
 T}
 T{
 .sp
@@ -152,12 +148,6 @@ T}
 .T&
 - | -
 l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 #  APP google-chrome
@@ -165,14 +155,14 @@ T}:T{
 Name of the APP.
 T}
 T{
-# USER *
-T}:T{
-Command is for any user, see [1].
-T}
-T{
 # DESC Google's webbrowser
 T}:T{
 Description of the APP.
+T}
+T{
+# USER *
+T}:T{
+Command is for any user, see [1].
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -184,14 +174,19 @@ T}:T{
 Empty line.
 T}
 T{
+#  APP gnome
+T}:T{
+Name of the APP.
+T}
+T{
 # DESC Desktop environment
 T}:T{
 Description of the APP.
 T}
 T{
-# USER jan@pc02
+# USER jan
 T}:T{
-Only set up for Jan on pc02, see [2].
+Only set up for Jan, see [2].
 T}
 T{
 gsettings set org.gnome.shell...
@@ -207,8 +202,8 @@ The line '# USER *' causes the associated commands to run for every user.
 .sp
 [2]
 .br
-The line '# USER jan@pc02' ensures that the associated commands are executed
-only for user jan on pc02.
+The line '# USER jan' ensures that the associated commands are executed only
+for Jan.
 .\"
 .\"
 .sp

@@ -108,10 +108,6 @@ Beschrijving
 T}
 .T&
 l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 #  APP <naam>
@@ -124,9 +120,10 @@ T}:T{
 Bevat een <beschrijving> van de APP.
 T}
 T{
-# HOST <host>
+# HOST <host> ...
 T}:T{
-Naam van de computer (<host>) waar de opdracht van toepassing is.
+Naam van de computer (<host>) waar de opdracht van toepassing is, of *
+voor iedere computer.
 T}
 T{
 T}:T{
@@ -158,12 +155,6 @@ T}
 .T&
 - | -
 l | l
-l | l
-l | l
-l | l
-l | l
-l | l
-l | l
 l | l.
 T{
 #  APP gnome-gmail
@@ -176,9 +167,9 @@ T}:T{
 Beschrijving van de APP.
 T}
 T{
-# HOST pc02
+# HOST *
 T}:T{
-Opdracht is voor pc02, zie [2].
+Opdracht is voor iedere computer, zie [1].
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -191,6 +182,11 @@ T}:T{
 Lege regel.
 T}
 T{
+#  APP gast
+T}:T{
+Naam van de APP.
+T}
+T{
 # DESC Add user gast
 T}:T{
 Beschrijving van de APP.
@@ -198,7 +194,7 @@ T}
 T{
 # HOST pc02
 T}:T{
-Alleen op pc02 uitvoeren.
+Alleen op pc02 uitvoeren, zie [2].
 T}
 T{
 sudo useradd --create-home ... gast
@@ -208,14 +204,15 @@ T}
 .TE
 .sp
 .sp
+[1]
 .br
+De regel '# HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
+computers worden uitgevoerd.
+.sp
 [2]
 .br
 De regel '# HOST pc02' zorgt ervoor dat de bijbehorende opdrachten alleen op
-computer pc02 worden uitgevoerd.
-.br
-Een regel '# HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
-computers worden uitgevoerd.
+pc02 worden uitgevoerd.
 .\"
 .\"
 .sp
