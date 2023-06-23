@@ -206,9 +206,9 @@ function migrate_settings_previously_backuped {
     move_file "$HOME"/Settings/Favorites            "$HOME"/Documents/
     move_file "$HOME"/Settings/Userphoto            "$HOME"/Pictures/
 
-    mv "$HOME"/kz-data      "$HOME"/kz-data-OUD         2> /dev/null    || true
-    mv "$HOME"/Instellingen "$HOME"/Instellingen-OUD    2> /dev/null    || true
-    mv "$HOME"/Settings     "$HOME"/Settings-OLD        2> /dev/null    || true
+    rmdir   "$HOME"/kz-data         \
+            "$HOME"/Instellingen    \
+            "$HOME"/Settings        |& $logcmd || true
 }
 
 
