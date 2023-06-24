@@ -142,5 +142,5 @@ kz-gset --addfavaft=kz-whatsapp
 
 #  APP zoom
 # DESC Video calls
-# USER monique@pc01 karel@pc01
+# USER karel@pc01 monique@pc01
 kz-gset --addfavaft=kz-zoom
