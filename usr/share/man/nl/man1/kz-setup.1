@@ -119,10 +119,10 @@ T}:T{
 Bevat een <beschrijving> van de APP.
 T}
 T{
-# USER <user> ...
+# USER <user@host> ...
 T}:T{
-Naam van de gebruiker (<user>) waarvoor de opdracht van toepassing is, of *
-voor iedere gebruiker.
+Naam van de gebruiker (<user@host>) waarvoor de opdracht van toepassing is, of
+* voor iedere gebruiker.
 T}
 T{
 T}:T{
@@ -191,9 +191,9 @@ T}:T{
 Beschrijving van de APP.
 T}
 T{
-# USER jan
+# USER jan@pc02
 T}:T{
-Opdracht is voor Jan, zie [2].
+Opdracht is alleen voor Jan, zie [2].
 T}
 T{
 gsettings set org.gnome.shell...
@@ -210,8 +210,8 @@ gebruiker worden uitgevoerd.
 .sp
 [2]
 .br
-De regel '# USER jan' zorgt ervoor dat de bijbehorende opdrachten alleen voor
-Jan worden uitgevoerd.
+De regel '# USER jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen
+voor Jan op pc02 worden uitgevoerd.
 .\"
 .\"
 .sp

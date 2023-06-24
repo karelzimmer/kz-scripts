@@ -113,9 +113,9 @@ T}:T{
 Description of the APP.
 T}
 T{
-# USER <user> ...
+# USER <user@host> ...
 T}:T{
-Name of the user <user> for which the command applies, or * for any user.
+Name of the user <user@host> for which the command applies, or * for any user.
 T}
 T{
 .sp
@@ -184,7 +184,7 @@ T}:T{
 Description of the APP.
 T}
 T{
-# USER jan
+# USER jan@pc02
 T}:T{
 Only set up for Jan, see [2].
 T}
@@ -202,8 +202,8 @@ The line '# USER *' causes the associated commands to run for every user.
 .sp
 [2]
 .br
-The line '# USER jan' ensures that the associated commands are executed only
-for Jan.
+The line '# USER jan@pc02' ensures that the associated commands are executed
+only for Jan on pc02.
 .\"
 .\"
 .sp

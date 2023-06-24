@@ -8,18 +8,18 @@
 
 #  APP calibre
 # DESC E-book manager
-# USER nina
+# USER nina@pc04
 kz-gset --addfavaft=calibre-gui
 
 #  APP cockpit
 # DESC Web-based administration
-# USER karel
+# USER karel@pc06
 # Web App: https://localhost:9090
 kz-gset --addfavaft=kz-cockpit
 
 #  APP citrix
 # DESC Telecommuting (Aka Citrix Workspace app, Citrix Receiver, and ICA Client)
-# USER toos
+# USER toos@pc-van-ria-en-toos
 xdg-mime default wfica.desktop application/x-ica
 
 #  APP gnome
@@ -55,12 +55,12 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 
 #  APP gnome
 # DESC Desktop environment
-# USER hugo
+# USER hugo@pc-van-hugo
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 
 #  APP gnome
 # DESC Desktop environment
-# USER karel
+# USER karel@pc06
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 
@@ -76,12 +76,12 @@ echo 'snap' > "$HOME"/.hidden
 
 #  APP kvm
 # DESC Kernel-based Virtual Machine
-# USER karel
+# USER karel@pc06
 kz-gset --addfavaft=virt-manager
 
 #  APP libreoffice-calc
 # DESC Spreadsheet
-# USER nina
+# USER nina@pc04
 kz-gset --addfavaft=libreoffice-calc
 
 #  APP skype
@@ -101,17 +101,17 @@ kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 #  APP teams
 # DESC Video calls
-# USER karel
+# USER karel@pc06
 kz-gset --addfavaft=kz-teams
 
 #  APP telegram
 # DESC Messaging
-# USER hugo
+# USER hugo@pc-van-hugo
 kz-gset --addfavaft=kz-telegram
 
 #  APP terminal
 # DESC Terminal
-# USER karel
+# USER karel@pc01 karel@pc06
 kz-gset --addfavbef=org.gnome.Terminal
 # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
@@ -119,13 +119,13 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 #  APP virtualbox
 # DESC Virtualization
-# USER hugo
+# USER hugo@pc-van-hugo
 kz-gset --addfavaft=virtualbox
 kz-gset --addfavaft=kz-vm-hugowin732
 
 #  APP vscode
 # DESC Editor
-# USER karel
+# USER karel@pc01 karel@pc06
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
@@ -137,10 +137,10 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 
 #  APP whatsapp
 # DESC Messaging
-# USER hugo
+# USER hugo@pc-van-hugo
 kz-gset --addfavaft=kz-whatsapp
 
 #  APP zoom
 # DESC Video calls
-# USER karel monique
+# USER monique@pc01 karel@pc01
 kz-gset --addfavaft=kz-zoom

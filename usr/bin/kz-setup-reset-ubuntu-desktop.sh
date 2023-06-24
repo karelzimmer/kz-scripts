@@ -8,12 +8,12 @@
 
 #  APP calibre
 # DESC E-book manager
-# USER nina
+# USER nina@pc04
 kz-gset --delfav=calibre-gui
 
 #  APP cockpit
 # DESC Web-based administration
-# USER karel
+# USER karel@pc06
 # Web App: https://localhost:9090
 kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
@@ -52,12 +52,12 @@ gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #  APP gnome
 # DESC Desktop environment
-# USER hugo
+# USER hugo@pc-van-hugo
 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
 #  APP gnome
 # DESC Desktop environment
-# USER karel
+# USER karel@pc06
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.nautilus.preferences show-create-link
 
@@ -73,12 +73,12 @@ rm --force "$HOME"/.hidden
 
 #  APP kvm
 # DESC Kernel-based Virtual Machine
-# USER karel
+# USER karel@pc06
 kz-gset --delfav=virt-manager
 
 #  APP libreoffice-calc
 # DESC Spreadsheet
-# USER nina
+# USER nina@pc04
 kz-gset --delfav=libreoffice-calc
 
 #  APP skype
@@ -98,34 +98,34 @@ kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 #  APP teams
 # DESC Video calls
-# USER karel
+# USER karel@pc06
 kz-gset --delfav=kz-teams
 
 #  APP telegram
 # DESC Messaging
-# USER hugo
+# USER hugo@pc-van-hugo
 kz-gset --delfav=kz-telegram
 
 #  APP terminal
 # DESC Terminal
-# USER karel
+# USER karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #  APP virtualbox
 # DESC Virtualization
-# USER hugo
+# USER hugo@pc-van-hugo
 kz-gset --delfav=virtualbox
 kz-gset --delfav=kz-vm-hugowin732
 
 #  APP vscode
 # DESC Editor
-# USER karel
+# USER karel@pc01 karel@pc06
 kz-gset --delfav=code_code
 
 #  APP whatsapp
 # DESC Messaging
-# USER hugo
+# USER hugo@pc-van-hugo
 kz-gset --delfav=kz-whatsapp
 
 #  APP zoom
