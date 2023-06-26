@@ -7,12 +7,10 @@
 ###############################################################################
 
 #  APP dashtodock
-# DESC Transform dash to dock
 # USER *
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 
 #  APP gnome
-# DESC Desktop environment
 # USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -41,44 +39,36 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 
 #  APP gnome
-# DESC Desktop environment
 # USER karel@pc07
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
 
 #  APP google-chrome
-# DESC Google's webbrowser
 # USER *
 kz-gset --addfavbef=google-chrome
 
-#  APP hide-folders
-# DESC Hide folders in Home folder
-# USER *
-echo 'snap' > "$HOME"/.hidden
-
 #  APP kvm
-# DESC Virtualization
 # USER karel@pc07
 kz-gset --addfavaft=virt-manager
 
+#  APP nautilus-hide
+# USER *
+echo 'snap' > "$HOME"/.hidden
+
 #  APP skype
-# DESC Video calls
 # USER *
 kz-gset --addfavaft=kz-skype
 
 #  APP spotify
-# DESC Music player
 # USER *
 kz-gset --addfavaft=kz-spotify
 
 #  APP start-install
-# DESC Remove starter Start installation
 # USER *
 kz-gset --delfav=install-debian
 
 #  APP terminal
-# DESC Terminal
 # USER karel@pc07
 kz-gset --addfavbef=org.gnome.Terminal
 # Turn on aliases.
@@ -88,7 +78,6 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 #  APP vscode
-# DESC Editor
 # USER karel@pc07 user@debian
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
@@ -100,7 +89,6 @@ xdg-mime default code_code.desktop text/markdown                # Markdown docum
 xdg-mime default code_code.desktop text/troff                   # Man page
 
 #  APP webmin
-# DESC Web-based administration
 # USER karel@pc07
 # Web App: https://localhost:10000
 kz-gset --addfavaft=kz-webmin

@@ -227,7 +227,7 @@ function process_argument_app {
     local app_not_found=false
 
     for app in "${app_arguments[@]}"; do
-        if ! grep    --quiet                    \
+        if ! grep   --quiet                     \
                     --word-regexp               \
                     --regexp="#.* APP .*$app"   \
                     "$inputfile"; then
@@ -251,7 +251,6 @@ function process_argument_app {
 function process_argument_app_inputfile {
     local app_found=false
     local apprecord=''
-    local descrecord=''
     local no_user_match=true
     local record=''
     local user_match=false
@@ -274,10 +273,6 @@ function process_argument_app_inputfile {
                 fi
                 user_match=false
                 ;;
-            '#'*' DESC '*)
-                # Description record.
-                descrecord=$record
-                ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 # User record.
                 if $app_found; then
@@ -291,12 +286,10 @@ function process_argument_app_inputfile {
                     {
                         printf '%s\n' "#  SRC $inputfile"
                         printf '%s\n' "$apprecord"
-                        printf '%s\n' "$descrecord"
                         printf '%s\n' "$record"
                     } >> "$cmdsfile"
                 fi
                 apprecord=''
-                descrecord=''
                 ;;
             *)
                 # Other records.
@@ -320,7 +313,6 @@ function process_inputfile {
     # Generate cmdsfile from inputfile; filter on USER.
     #
     local apprecord=''
-    local descrecord=''
     local first_app_record=true
     local user_match=false
     local record=''
@@ -337,10 +329,6 @@ function process_inputfile {
                 user_match=false
                 apprecord=$record
                 ;;
-            '#'*' DESC '*)
-                # Description record.
-                descrecord=$record
-                ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 # User record.
                 user_match=true
@@ -351,11 +339,9 @@ function process_inputfile {
                 fi
                 {
                     printf '%s\n' "$apprecord"
-                    printf '%s\n' "$descrecord"
                     printf '%s\n' "$record"
                 } >> "$cmdsfile"
                 apprecord=''
-                descrecord=''
                 ;;
             *)
                 # Other records.
@@ -482,10 +468,6 @@ function process_cmdsfile {
                 ;;
             '#'*' USER '*)
                 # User record.
-                continue
-                ;;
-            '#'*' DESC '*)
-                # Description record.
                 continue
                 ;;
             '#'*)

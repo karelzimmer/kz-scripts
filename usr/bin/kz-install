@@ -230,7 +230,7 @@ function process_argument_app {
     local app_not_found=false
 
     for app in "${app_arguments[@]}"; do
-        if ! grep    --quiet                    \
+        if ! grep   --quiet                     \
                     --word-regexp               \
                     --regexp="#.* APP .*$app"   \
                     "$inputfile"; then
@@ -254,7 +254,6 @@ function process_argument_app {
 function process_argument_app_inputfile {
     local app_found=false
     local apprecord=''
-    local descrecord=''
     local host_match=false
     local no_host_match=true
     local record=''
@@ -277,10 +276,6 @@ function process_argument_app_inputfile {
                 fi
                 host_match=false
                 ;;
-            '#'*' DESC '*)
-                # Description record.
-                descrecord=$record
-                ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
                 # Host record.
                 if $app_found; then
@@ -294,12 +289,10 @@ function process_argument_app_inputfile {
                     {
                         printf '%s\n' "#  SRC $inputfile"
                         printf '%s\n' "$apprecord"
-                        printf '%s\n' "$descrecord"
                         printf '%s\n' "$record"
                     } >> "$cmdsfile"
                 fi
                 apprecord=''
-                descrecord=''
                 ;;
             *)
                 # Other records.
@@ -323,7 +316,6 @@ function process_inputfile {
     # Generate cmdsfile from inputfile; filter on HOST.
     #
     local apprecord=''
-    local descrecord=''
     local first_app_record=true
     local host_match=false
     local record=''
@@ -340,10 +332,6 @@ function process_inputfile {
                 host_match=false
                 apprecord=$record
                 ;;
-            '#'*' DESC '*)
-                # Description record.
-                descrecord=$record
-                ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
                 # Host record.
                 host_match=true
@@ -354,11 +342,9 @@ function process_inputfile {
                 fi
                 {
                     printf '%s\n' "$apprecord"
-                    printf '%s\n' "$descrecord"
                     printf '%s\n' "$record"
                 } >> "$cmdsfile"
                 apprecord=''
-                descrecord=''
                 ;;
             *)
                 # Other records.
@@ -485,10 +471,6 @@ function process_cmdsfile {
                 ;;
             '#'*' HOST '*)
                 # Host record.
-                continue
-                ;;
-            '#'*' DESC '*)
-                # Description record.
                 continue
                 ;;
             '#'*)

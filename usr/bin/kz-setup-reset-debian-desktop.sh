@@ -7,12 +7,10 @@
 ###############################################################################
 
 #  APP dashtodock
-# DESC Transform dash to dock
 # USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
 #  APP gnome
-# DESC Desktop environment
 # USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
@@ -42,56 +40,46 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #  APP gnome
-# DESC Desktop environment
 # USER karel@pc07
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.nautilus.preferences show-create-link
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
 #  APP google-chrome
-# DESC Google's webbrowser
 # USER *
 kz-gset --delfav=google-chrome
 
-#  APP hide-folders
-# DESC Hide folders in Home folder
-# USER *
-rm --force "$HOME"/.hidden
-
 #  APP kvm
-# DESC Virtualization
 # USER karel@pc07
 kz-gset --delfav=virt-manager
 
+#  APP nautilus-hide
+# USER *
+rm --force "$HOME"/.hidden
+
 #  APP skype
-# DESC Video calls
 # USER *
 kz-gset --delfav=kz-skype
 
 #  APP spotify
-# DESC Music player
 # USER *
 kz-gset --delfav=kz-spotify
 
 #  APP start-install
-# DESC Remove starter Start installation
 # USER *
 kz-gset --addfavbef=install-debian
 
 #  APP terminal
-# DESC Terminal
 # USER karel@pc07
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 #  APP vscode
-# DESC Editor
 # USER karel@pc07 user@debian
 kz-gset --delfav=code_code
 
 #  APP webmin
-# DESC Web-based administration
 # USER karel@pc07
 # Web App: https://localhost:10000
 kz-gset --delfav=kz-webmin

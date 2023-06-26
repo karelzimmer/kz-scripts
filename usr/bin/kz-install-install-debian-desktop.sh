@@ -6,9 +6,9 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-#  APP extra-repos
-# DESC Add extra repositories
+#  APP repos
 # HOST *
+# Exec this first.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -17,33 +17,27 @@ sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 
-#  APP adm-group
-# DESC Add user to group adm
+#  APP adm
 # HOST pc07
 sudo adduser "${SUDO_USER:-$USER}" adm
 
-#  APP bash-completion
-# DESC Enable tab completion
+#  APP completion
 # HOST *
 sudo apt-get install --yes bash-completion
 
 #  APP cups
-# DESC Common UNIX Printing System
 # HOST *
 sudo apt-get install --yes cups
 
 #  APP dashtodock
-# DESC Transform dash to dock
 # HOST *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
 #  APP gnome-gmail
-# DESC Gmail as the preferred email application in GNOME
 # HOST pc07
 sudo apt-get install --yes gnome-gmail
 
 #  APP google-chrome
-# DESC Google's webbrowser
 # HOST *
 # Extensions and apps are automatically installed with /etc/opt/chrome/policies/managed/kz.json from "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
@@ -57,12 +51,11 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 #  APP journalctl
-# DESC Enable access to the log
 # HOST *
+# Enable access to the log
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 #  APP kvm
-# DESC Virtualization
 # HOST pc07
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
@@ -71,17 +64,14 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt
 sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 
 #  APP libreoffice
-# DESC Office suite
 # HOST *
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 #  APP locate
-# DESC Find files quick
 # HOST pc07
 sudo apt-get install --yes mlocate
 
 #  APP signal
-# DESC Messaging
 # HOST pc07
 # Web App: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
@@ -90,12 +80,10 @@ sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
 #  APP spice-vdagent
-# DESC Copy from host to guest and v.v.
 # HOST pc07
 sudo apt-get install --yes spice-vdagent
 
 #  APP teamviewer
-# DESC Remote control
 # HOST *
 # Web App: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
@@ -106,22 +94,18 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
 sudo apt-key del 0C1289C0 DEB49217
 
 #  APP thunderbird
-# DESC E-mail
 # HOST *
 sudo apt-get install --yes thunderbird-l10n-nl
 
 #  APP vlc
-# DESC Media player
 # HOST pc07
 sudo snap install vlc
 
 #  APP vscode
-# DESC Editor
 # HOST pc07
 sudo snap install --classic code
 
 #  APP webmin
-# DESC Web-based administration
 # HOST pc07
 # Web App: https://localhost:10000
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
