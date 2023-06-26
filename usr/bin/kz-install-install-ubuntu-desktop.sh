@@ -37,6 +37,7 @@ sudo chmod +x /etc/rc.local
 sudo apt-get install --yes calibre
 
 #  APP citrix
+# HOST pc-van-ria-en-toos
 # Aka Citrix Workspace app, Citrix Receiver, and ICA Client.
 # Dependency since Ubuntu 22.04.
 wget --output-document=/tmp/libidn11.deb 'https://karelzimmer.nl/assets/citrix/libidn11_1.33-3_amd64.deb'
