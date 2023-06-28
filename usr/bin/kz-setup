@@ -222,38 +222,27 @@ function process_argument_app {
     #
     # Generate cmdsfile from inputfile; filter on USER and APPs.
     #
+    local app_not_found=false
     local app=''
     local first_app_record=true
-    local app_not_found=false
 
     for app in "${app_arguments[@]}"; do
-        if ! grep   --quiet                     \
-                    --word-regexp               \
-                    --regexp="#.* APP .*$app"   \
-                    "$inputfile"; then
-            app_not_found=true
-            printf  "$display_name: %s: %s\n" \
-                    "$app" "$(gettext 'app not found')"
-        fi
+        process_argument_app_inputfile
     done
     if $app_not_found; then
         text=$(eval_gettext "Type '\$display_name --apps' for available apps.")
         printf "%s\n" "$text"
         exit $error
     fi
-
-    for app in "${app_arguments[@]}"; do
-        process_argument_app_inputfile
-    done
 }
 
 
 function process_argument_app_inputfile {
-    local app_found=false
+    local app_match=false
+    local app_user_match=false
     local apprecord=''
-    local no_user_match=true
+    local no_app_user_match=true
     local record=''
-    local user_match=false
 
     while read -r record; do
         case $record in
@@ -265,19 +254,19 @@ function process_argument_app_inputfile {
                 # App record.
                 if [[ $record == '#'*' APP '*$app* ]]; then
                     # Found app.
-                    app_found=true
+                    app_match=true
                     apprecord=$record
-                elif $app_found; then
+                elif $app_match; then
                     # Next app.
-                    app_found=false
+                    app_match=false
                 fi
-                user_match=false
+                app_user_match=false
                 ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 # User record.
-                if $app_found; then
-                    user_match=true
-                    no_user_match=false
+                if $app_match; then
+                    app_user_match=true
+                    no_app_user_match=false
                     if $first_app_record; then
                         first_app_record=false
                     else
@@ -293,17 +282,15 @@ function process_argument_app_inputfile {
                 ;;
             *)
                 # Other records.
-                if $app_found && $user_match; then
+                if $app_match && $app_user_match; then
                     printf '%s\n' "$record" >> "$cmdsfile"
                 fi
                 ;;
         esac
     done < "$inputfile"
-    if $no_user_match; then
+    if $no_app_user_match; then
+        app_not_found=true
         printf "$display_name: %s: %s\n" "$app" "$(gettext 'app not found')"
-        text=$(eval_gettext "Type '\$display_name --apps' for available apps.")
-        printf "%s\n" "$text"
-        exit $error
     fi
 }
 
@@ -314,7 +301,7 @@ function process_inputfile {
     #
     local apprecord=''
     local first_app_record=true
-    local user_match=false
+    local app_user_match=false
     local record=''
 
     printf '%s\n\n' "#  SRC $inputfile" >> "$cmdsfile"
@@ -326,12 +313,12 @@ function process_inputfile {
                 ;;
             '#'*' APP '*)
                 # App record.
-                user_match=false
+                app_user_match=false
                 apprecord=$record
                 ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 # User record.
-                user_match=true
+                app_user_match=true
                 if $first_app_record; then
                     first_app_record=false
                 else
@@ -345,7 +332,7 @@ function process_inputfile {
                 ;;
             *)
                 # Other records.
-                if $user_match; then
+                if $app_user_match; then
                     printf '%s\n' "$record" >> "$cmdsfile"
                 fi
                 ;;
