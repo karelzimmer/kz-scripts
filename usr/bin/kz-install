@@ -255,7 +255,7 @@ function process_argument_app_inputfile {
                 ;;
             '#'*' APP '*)
                 # App record.
-                if [[ $record == '#'*' APP '*$app* ]]; then
+                if [[ $record == *$app* ]]; then
                     # Found app.
                     app_match=true
                     apprecord=$record
