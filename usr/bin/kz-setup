@@ -273,7 +273,6 @@ function process_argument_app_inputfile {
                         printf '\n' >> "$cmdsfile"
                     fi
                     {
-                        printf '%s\n' "#  SRC $inputfile"
                         printf '%s\n' "$apprecord"
                         printf '%s\n' "$record"
                     } >> "$cmdsfile"
@@ -304,7 +303,6 @@ function process_inputfile {
     local app_user_match=false
     local record=''
 
-    printf '%s\n\n' "#  SRC $inputfile" >> "$cmdsfile"
     while read -r record; do
         case $record in
             '')
