@@ -278,6 +278,7 @@ function process_argument_app_inputfile {
                         printf '%s\n' "$app_record"
                         printf '%s\n' "$record"
                     } >> "$cmdsfile"
+                    app_record=''
                 fi
                 ;;
             *)
@@ -312,8 +313,8 @@ function process_inputfile {
                 ;;
             '#'*' APP '*)
                 # App record.
-                app_host_match=false
                 app_record=$record
+                app_host_match=false
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
                 # Host record.
