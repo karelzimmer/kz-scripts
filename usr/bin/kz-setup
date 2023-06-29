@@ -224,7 +224,6 @@ function process_argument_app {
     #
     local app_not_found=false
     local app=''
-    local first_app_record=true
 
     for app in "${app_arguments[@]}"; do
         process_argument_app_inputfile
@@ -246,10 +245,6 @@ function process_argument_app_inputfile {
 
     while read -r record; do
         case $record in
-            '')
-                # Empty line.
-                continue
-                ;;
             '#'*' APP '*)
                 # App record.
                 app_match=false
@@ -267,11 +262,6 @@ function process_argument_app_inputfile {
                 if $app_match; then
                     app_user_match=true
                     no_app_user_match=false
-                    if $first_app_record; then
-                        first_app_record=false
-                    else
-                        printf '\n' >> "$cmdsfile"
-                    fi
                     {
                         printf '%s\n' "$app_record"
                         printf '%s\n' "$record"
@@ -299,16 +289,11 @@ function process_inputfile {
     # Generate cmdsfile from inputfile; filter on USER.
     #
     local app_record=''
-    local first_app_record=true
     local app_user_match=false
     local record=''
 
     while read -r record; do
         case $record in
-            '')
-                # Empty line.
-                continue
-                ;;
             '#'*' APP '*)
                 # App record.
                 app_record=$record
@@ -317,11 +302,6 @@ function process_inputfile {
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 # User record.
                 app_user_match=true
-                if $first_app_record; then
-                    first_app_record=false
-                else
-                    printf '\n' >> "$cmdsfile"
-                fi
                 {
                     printf '%s\n' "$app_record"
                     printf '%s\n' "$record"
@@ -409,7 +389,6 @@ $(eval_gettext "To simulate the processing of FILE execute: \
 
 function process_cmdsfile {
     local app_name=''
-    local first_app_line=true
     local operation
     operation=$(gettext 'set up')
     local record=''
@@ -494,12 +473,7 @@ function process_command_record {
     else
         # Option simulate.
         if $write_app_line; then
-            if $first_app_line; then
-                first_app_line=false
-            else
-                printf '\n' >> "$simsfile"
-            fi
-            printf  '[%2d/%-2d] %s %s\n'    \
+            printf  '\n[%2d/%-2d] %s %s\n'  \
                     "$app_seq_num"          \
                     "$app_tot_num"          \
                     "$app_name"             \
