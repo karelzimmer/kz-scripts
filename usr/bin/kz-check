@@ -103,7 +103,6 @@ function process_input {
                 ;;
             *.sh)
                 check_tags
-                check_record_types
                 check_shellcheck
                 ;;
             *)
@@ -176,43 +175,6 @@ function check_record_length {
 In $scriptdir / $scriptname:
 $(eval_gettext "    A line is longer than \$max_line_length \
 (\$max_line_length_found).")
-"
-        maxrc=$error
-    fi
-}
-
-
-function check_record_types {
-    local wrong_record=''
-
-    # Ok:
-    # # APP             # APP
-    # # HOST            # USER
-    # # <Description>   # <Description>
-    # Wrong:
-    # The rest :-)
-    wrong_record=$(
-        grep    --regexp='^# APP'   \
-                --after-context=2   \
-                --line-number       \
-                "$script"           |
-        grep    --regexp='# HOST '  \
-                --invert-match      |
-        grep    --regexp='# USER '  \
-                --invert-match      |
-        grep    --regexp='# '       \
-                --invert-match      |
-        grep    --regexp='--'       \
-                --invert-match      || true
-        )
-    if [[ -n $wrong_record ]]; then
-        error "
-In $scriptdir / $scriptname:
-    $(gettext 'Faulty line(s) found.')
-$(
-    printf '%s' "$wrong_record" |
-                nl --number-width=8 --number-separator='' --body-numbering=n
-)
 "
         maxrc=$error
     fi
