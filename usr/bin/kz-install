@@ -146,7 +146,6 @@ function check_input {
         esac
     done
 
-    # Check arguments.
     while [[ -n "$*" ]]; do
         argument_app=true
         app_arguments[app_arg_num]=$1
@@ -222,9 +221,6 @@ function process_input {
 
 
 function process_argument_app {
-    #
-    # Generate cmdsfile from inputfile; filter on HOST and APPs.
-    #
     local app_not_found=false
     local app=''
 
@@ -249,11 +245,9 @@ function process_argument_app_inputfile {
     while read -r record; do
         case $record in
             '')
-                # Empty line.
                 continue
                 ;;
             '#'*' APP '*)
-                # App record.
                 app_match=false
                 app_record=''
                 app_host_match=false
@@ -263,7 +257,6 @@ function process_argument_app_inputfile {
                 fi
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
-                # Host record.
                 app_host_match=false
                 if $app_match; then
                     app_host_match=true
@@ -276,7 +269,6 @@ function process_argument_app_inputfile {
                 fi
                 ;;
             *)
-                # Other records.
                 if $app_match && $app_host_match; then
                     printf '%s\n' "$record" >> "$cmdsfile"
                 fi
@@ -291,9 +283,6 @@ function process_argument_app_inputfile {
 
 
 function process_inputfile {
-    #
-    # Generate cmdsfile from inputfile; filter on HOST.
-    #
     local app_record=''
     local app_host_match=false
     local record=''
@@ -301,12 +290,10 @@ function process_inputfile {
     while read -r record; do
         case $record in
             '#'*' APP '*)
-                # App record.
                 app_record=$record
                 app_host_match=false
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
-                # Host record.
                 app_host_match=true
                 {
                     printf '%s\n' "$app_record"
@@ -315,7 +302,6 @@ function process_inputfile {
                 app_record=''
                 ;;
             *)
-                # Other records.
                 if $app_host_match; then
                     printf '%s\n' "$record" >> "$cmdsfile"
                 fi
@@ -420,11 +406,9 @@ function process_cmdsfile {
     while read -r record; do
         case $record in
             '')
-                # Empty line.
                 continue
                 ;;
             '#'*' APP '*)
-                # App record.
                 app_name="$(
                     printf '%s\n' "$record"             |
                     tr --squeeze-repeats '[:space:]'    |
@@ -437,15 +421,12 @@ function process_cmdsfile {
                 cmd_seq_num=0
                 ;;
             '#'*' HOST '*)
-                # Host record.
                 continue
                 ;;
             '#'*)
-                # Comment record.
                 continue
                 ;;
             *)
-                # Other records.
                 process_command_record "$record"
                 ;;
         esac
