@@ -239,8 +239,8 @@ function process_argument_app {
 
 function process_argument_app_inputfile {
     local app_match=false
+    local app_record=''
     local app_user_match=false
-    local apprecord=''
     local no_app_user_match=true
     local record=''
 
@@ -252,18 +252,18 @@ function process_argument_app_inputfile {
                 ;;
             '#'*' APP '*)
                 # App record.
+                app_match=false
+                app_record=''
+                app_user_match=false
                 if [[ $record == *' '$app ]]; then
                     # Found app.
                     app_match=true
-                    apprecord=$record
-                elif $app_match; then
-                    # Next app.
-                    app_match=false
+                    app_record=$record
                 fi
-                app_user_match=false
                 ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 # User record.
+                app_user_match=false
                 if $app_match; then
                     app_user_match=true
                     no_app_user_match=false
@@ -273,11 +273,10 @@ function process_argument_app_inputfile {
                         printf '\n' >> "$cmdsfile"
                     fi
                     {
-                        printf '%s\n' "$apprecord"
+                        printf '%s\n' "$app_record"
                         printf '%s\n' "$record"
                     } >> "$cmdsfile"
                 fi
-                apprecord=''
                 ;;
             *)
                 # Other records.
@@ -298,7 +297,7 @@ function process_inputfile {
     #
     # Generate cmdsfile from inputfile; filter on USER.
     #
-    local apprecord=''
+    local app_record=''
     local first_app_record=true
     local app_user_match=false
     local record=''
@@ -312,7 +311,7 @@ function process_inputfile {
             '#'*' APP '*)
                 # App record.
                 app_user_match=false
-                apprecord=$record
+                app_record=$record
                 ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 # User record.
@@ -323,10 +322,10 @@ function process_inputfile {
                     printf '\n' >> "$cmdsfile"
                 fi
                 {
-                    printf '%s\n' "$apprecord"
+                    printf '%s\n' "$app_record"
                     printf '%s\n' "$record"
                 } >> "$cmdsfile"
-                apprecord=''
+                app_record=''
                 ;;
             *)
                 # Other records.

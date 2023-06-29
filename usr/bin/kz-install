@@ -243,7 +243,7 @@ function process_argument_app {
 function process_argument_app_inputfile {
     local app_host_match=false
     local app_match=false
-    local apprecord=''
+    local app_record=''
     local no_app_host_match=true
     local record=''
 
@@ -255,18 +255,17 @@ function process_argument_app_inputfile {
                 ;;
             '#'*' APP '*)
                 # App record.
-                if [[ $record == *' '$app ]]; then
-                    # Found app.
-                    app_match=true
-                    apprecord=$record
-                elif $app_match; then
-                    # Next app.
-                    app_match=false
-                fi
+                app_match=false
+                app_record=''
                 app_host_match=false
+                if [[ $record == *' '$app ]]; then
+                    app_match=true
+                    app_record=$record
+                fi
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
                 # Host record.
+                app_host_match=false
                 if $app_match; then
                     app_host_match=true
                     no_app_host_match=false
@@ -276,11 +275,10 @@ function process_argument_app_inputfile {
                         printf '\n' >> "$cmdsfile"
                     fi
                     {
-                        printf '%s\n' "$apprecord"
+                        printf '%s\n' "$app_record"
                         printf '%s\n' "$record"
                     } >> "$cmdsfile"
                 fi
-                apprecord=''
                 ;;
             *)
                 # Other records.
@@ -301,7 +299,7 @@ function process_inputfile {
     #
     # Generate cmdsfile from inputfile; filter on HOST.
     #
-    local apprecord=''
+    local app_record=''
     local first_app_record=true
     local app_host_match=false
     local record=''
@@ -315,7 +313,7 @@ function process_inputfile {
             '#'*' APP '*)
                 # App record.
                 app_host_match=false
-                apprecord=$record
+                app_record=$record
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
                 # Host record.
@@ -326,10 +324,10 @@ function process_inputfile {
                     printf '\n' >> "$cmdsfile"
                 fi
                 {
-                    printf '%s\n' "$apprecord"
+                    printf '%s\n' "$app_record"
                     printf '%s\n' "$record"
                 } >> "$cmdsfile"
-                apprecord=''
+                app_record=''
                 ;;
             *)
                 # Other records.
