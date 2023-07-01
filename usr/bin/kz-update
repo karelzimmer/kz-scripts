@@ -26,12 +26,17 @@ _ = gettext.gettext
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
-program_name = 'kz-update'
-program_desc = (_('Update system'))
-display_name = program_name.replace('kz-', 'kz ')
+PROGRAM_NAME = 'kz-update'
+PROGRAM_DESC = (_('Update system'))
+DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
+
+
+###############################################################################
+# Variables
+###############################################################################
 
 command = ''
 
@@ -42,7 +47,7 @@ command = ''
 
 def perform_repair():
     print('{}{}{} ({})'.format(kz_common.bold, _('Repair'), kz_common.normal,
-                               program_name))
+                               PROGRAM_NAME))
     command = 'dpkg --configure --pending'
     perform_command(command)
 
@@ -55,7 +60,7 @@ def perform_repair():
 
 def perform_update():
     print('{}{}{} ({})'.format(kz_common.bold, _('Update'), kz_common.normal,
-                               program_name))
+                               PROGRAM_NAME))
     command = 'apt-get update'
     perform_command(command)
 
@@ -90,7 +95,7 @@ def snap_refresh():
 
 def perform_cleanup():
     print('{}{}{} ({})'.format(kz_common.bold, _('Cleanup'), kz_common.normal,
-                               program_name))
+                               PROGRAM_NAME))
     command = 'apt-get autoclean --yes'
     perform_command(command)
 
@@ -133,11 +138,11 @@ def check_reboot():
 # Main
 ###############################################################################
 
-kz_common.process_option(program_name, program_desc, display_name)
+kz_common.process_option(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
-kz_common.check_on_ac_power(program_name)
+kz_common.check_on_ac_power(PROGRAM_NAME)
 
-kz_common.check_user_root(program_name, display_name)
+kz_common.check_user_root(PROGRAM_NAME, DISPLAY_NAME)
 
 perform_repair()
 

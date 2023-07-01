@@ -27,18 +27,23 @@ _ = gettext.gettext
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
-module_name = 'kz_common.py'
-module_desc = (_('Common module for Python scripts'))
-module_path = f"{os.path.realpath(os.path.dirname(__file__))}"
+MODULE_NAME = 'kz_common.py'
+MODULE_DESC = (_('Common module for Python scripts'))
+MODULE_PATH = f"{os.path.realpath(os.path.dirname(__file__))}"
 
-ok = 0
-error = 1
+OK = 0
+ERROR = 1
 
-bold = '\033[1m'
-normal = '\033[0m'
+BOLD = '\033[1m'
+NORMAL = '\033[0m'
+
+
+###############################################################################
+# Variables
+###############################################################################
 
 
 ###############################################################################
@@ -105,16 +110,16 @@ def check_on_ac_power(program_name):
         except KeyboardInterrupt:
             print('\n' + _('Program {} has been interrupted.').
                   format(program_name))
-            sys.exit(error)
+            sys.exit(ERROR)
 
 
 def check_user_root(program_name, display_name):
     """
     This function checks if the user is root.
     """
-    if check_user_sudo() != ok:
+    if check_user_sudo() != OK:
         print(_('Already performed by the administrator.'))
-        sys.exit(ok)
+        sys.exit(OK)
     else:
         try:
             subprocess.run('sudo -n true', shell=True, check=True,
@@ -126,10 +131,10 @@ def check_user_root(program_name, display_name):
             except KeyboardInterrupt:
                 print('\n' + _('Program {} has been interrupted.').
                       format(program_name))
-                sys.exit(error)
+                sys.exit(ERROR)
             except Exception as ex:
                 print(ex)
-                sys.exit(error)
+                sys.exit(ERROR)
 
 
 def check_user_sudo():
@@ -137,15 +142,15 @@ def check_user_sudo():
     This function checks if the user is allowed to use sudo.
     """
     if os.getuid() == 0:
-        return(ok)
+        return(OK)
     try:
         subprocess.run('groups $USER | grep --quiet --regexp=sudo',
                        shell=True, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
-        return(error)
+        return(ERROR)
     else:
-        return(ok)
+        return(OK)
 
 
 def process_option(program_name, program_desc, display_name):
@@ -164,13 +169,13 @@ def process_option(program_name, program_desc, display_name):
 
     if args.help:
         process_option_help(display_name, program_desc, program_name)
-        sys.exit(ok)
+        sys.exit(OK)
     elif args.usage:
         process_option_usage(display_name)
-        sys.exit(ok)
+        sys.exit(OK)
     elif args.version:
         process_option_version(program_name)
-        sys.exit(ok)
+        sys.exit(OK)
 
 
 def process_option_help(display_name, program_desc, program_name):
@@ -217,9 +222,9 @@ def process_option_version(program_name):
         build_id = '????-??-?? ??:??'
     except Exception as ex:
         print(ex)
-        sys.exit(error)
+        sys.exit(ERROR)
     finally:
-        cmd = f"grep '--regexp={grep_expr}' {module_path}/{program_name}"
+        cmd = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{program_name}"
         cmd = f"{cmd} | cut --delimiter=' ' --fields=3"
         program_year = subprocess.check_output(cmd, shell=True,
                                                stderr=subprocess.DEVNULL)
@@ -240,4 +245,4 @@ Universal\n'
 ###############################################################################
 
 if __name__ == '__main__':
-    print(_('{}: i am a module').format(module_name))
+    print(_('{}: i am a module').format(MODULE_NAME))
