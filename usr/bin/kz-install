@@ -55,6 +55,11 @@ readonly HELP
 readonly X_OPTIONS_SHORT='acf:lgrs'
 readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove,server,simulate'
 
+CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-cmds-XXXXXXXXXX")
+readonly CMDS_FILE
+SIMS_FILE=$(mktemp -t "$PROGRAM_NAME-sims-XXXXXXXXXX")
+readonly SIMS_FILE
+
 
 ###############################################################################
 # Variables
@@ -75,11 +80,6 @@ declare option_list=false
 declare option_gui=false
 declare option_remove=false
 declare option_simulate=false
-
-CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-cmds-XXXXXXXXXX")
-readonly CMDS_FILE
-SIMS_FILE=$(mktemp -t "$PROGRAM_NAME-sims-XXXXXXXXXX")
-readonly SIMS_FILE
 
 
 ###############################################################################
