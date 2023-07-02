@@ -100,21 +100,21 @@ function process_option_list {
     info "$(gettext 'The following COMMANDs are available:
 
      COMMAND')"
-    find    "$PROGRAM_PATH"/kz-*            \
-            -maxdepth 1                     \
-            -type f                         \
-            -executable                     \
-            -readable                       \
-            -not -name '*~'                 \
-            -not -name 'kz'                 \
-            -printf '%f\n'                  |
-    sort                                    |
-    sed     --expression='s/kz-//'          |
-            nl      --number-width=2        \
-                    --number-format=rn      \
-                    --number-separator='] ' \
-                    --body-numbering=a      |
-            sed     --expression='s/^/[/'
+    find    "$PROGRAM_PATH"/kz-*    \
+            -maxdepth 1             \
+            -type f                 \
+            -executable             \
+            -readable               \
+            -not -name '*~'         \
+            -not -name 'kz'         \
+            -printf '%f\n'          |
+    sort                            |
+    sed     --expression='s/kz-//'  |
+    nl      --number-width=2        \
+            --number-format=rn      \
+            --number-separator='] ' \
+            --body-numbering=a      |
+    sed     --expression='s/^/[/'
     info "
 $(gettext 'To execute a COMMAND:') ${blue}$DISPLAY_NAME COMMAND${normal}"
 }
