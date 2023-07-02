@@ -11,25 +11,34 @@
 # Import
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source "$program_path"/kz_common.sh 2> >(systemd-cat) || exit 1
+PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat) || exit 1
+
+
+###############################################################################
+# Constants
+###############################################################################
+
+readonly PROGRAM_NAME='kz-getdev'
+PROGRAM_DESC=$(gettext 'Build development environment')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly USAGE
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$OPTIONS_HELP"
+readonly HELP
 
 
 ###############################################################################
 # Variables
 ###############################################################################
-
-program_name='kz-getdev'
-program_desc=$(gettext 'Build development environment')
-display_name=${program_name/kz-/kz }
-
-usage=$(eval_gettext "Usage: \$display_name \$options_usage")
-help="$(eval_gettext "Usage: \$display_name [OPTION...]")
-
-$program_desc.
-
-$(gettext 'Options:')
-$options_help"
 
 
 ###############################################################################
@@ -42,14 +51,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$display_name"     \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        printf '%s\n' "$usage_line"
-        exit $error
+    if [[ $rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_option "$@"
@@ -67,9 +76,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$display_name: $*: %s\n$usage_line\n" \
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
                 "$(gettext 'arguments are not allowed')"
-        exit $error
+        exit $ERROR
     fi
 }
 
@@ -81,9 +90,9 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
+    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Check')"
     check_dependencies
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build')"
+    printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Build')"
     pull_repos
     download_website
 }
@@ -174,7 +183,7 @@ function download_website {
 
 
 function term_script {
-    exit $ok
+    exit $OK
 }
 
 

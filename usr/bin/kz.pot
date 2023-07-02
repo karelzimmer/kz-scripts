@@ -43,20 +43,20 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Text output $display_name ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e "
+"Text output $DISPLAY_NAME ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e "
 "(END) :?pB %pB\\%. .(press h for help or q to quit)"
 msgstr ""
 
 #, sh-format
-msgid "Type '$display_name --usage' for more information."
+msgid "Type '$DISPLAY_NAME --usage' for more information."
 msgstr ""
 
 #, sh-format
-msgid "Program $program_name encountered an error."
+msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
 #, sh-format
-msgid "Program $program_name has been interrupted."
+msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
 
 msgid ""
@@ -65,12 +65,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Type 'man $display_name' or see the \\e]8;;man:$program_name(1)\\e\\"
-"$display_name man page\\e]8;;\\e\\ for more information."
+"Type 'man $DISPLAY_NAME' or see the \\e]8;;man:$PROGRAM_NAME(1)\\e\\"
+"$DISPLAY_NAME man page\\e]8;;\\e\\ for more information."
 msgstr ""
 
 #, sh-format
-msgid "Type '$display_name --help' for more information."
+msgid "Type '$DISPLAY_NAME --help' for more information."
 msgstr ""
 
 #, sh-format
@@ -80,15 +80,15 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "Information $display_name"
+msgid "Information $DISPLAY_NAME"
 msgstr ""
 
 #, sh-format
-msgid "Warning $display_name"
+msgid "Warning $DISPLAY_NAME"
 msgstr ""
 
 #, sh-format
-msgid "Error message $display_name"
+msgid "Error message $DISPLAY_NAME"
 msgstr ""
 
 msgid "Common module for Python scripts"
@@ -138,14 +138,14 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name COMMAND [ARGUMENT...]\n"
-"   or: $display_name [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]"
 msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name COMMAND [ARGUMENT...]\n"
-"   or: $display_name OPTION"
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME OPTION"
 msgstr ""
 
 msgid ""
@@ -179,12 +179,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-d|--dry-run] [-g|--gui] [-t|--target DIRECTORY]\n"
-"                 $options_usage"
+"Usage: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-t|--target DIRECTORY]\n"
+"                 $OPTIONS_USAGE"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [OPTION...]"
+msgid "Usage: $DISPLAY_NAME [OPTION...]"
 msgstr ""
 
 msgid "Options:"
@@ -205,7 +205,7 @@ msgid "too many options"
 msgstr ""
 
 #, sh-format
-msgid "File name must start with '$program_name-'."
+msgid "File name must start with '$PROGRAM_NAME-'."
 msgstr ""
 
 msgid "arguments are not allowed"
@@ -299,7 +299,7 @@ msgid "Build package kz"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name $options_usage"
+msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr ""
 
 msgid "Build - final"
@@ -428,10 +428,10 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-a|--addfavaft FAVORITE] [-b|--addfavbef FAVORITE]\n"
+"Usage: $DISPLAY_NAME [-a|--addfavaft FAVORITE] [-b|--addfavbef FAVORITE]\n"
 "               [-d|--delfav FAVORITE] [-l|--list] [-r|--resetfavs]\n"
 "               [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]\n"
-"               $options_usage"
+"               $OPTIONS_USAGE"
 msgstr ""
 
 msgid ""
@@ -472,14 +472,14 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
 "                  [-l|--list] [-r|--remove] [--server] [-s|--simulate]\n"
-"                  $options_usage\n"
+"                  $OPTIONS_USAGE\n"
 "                  [--] [APP...]"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [OPTION...] [APP...]"
+msgid "Usage: $DISPLAY_NAME [OPTION...] [APP...]"
 msgstr ""
 
 msgid "show list of available apps"
@@ -517,11 +517,11 @@ msgid "app not found"
 msgstr ""
 
 #, sh-format
-msgid "Type '$display_name --apps' for available apps."
+msgid "Type '$DISPLAY_NAME --apps' for available apps."
 msgstr ""
 
 #, sh-format
-msgid "No install file found, looked for $inputfile."
+msgid "No install file found, looked for $input_file."
 msgstr ""
 
 msgid ""
@@ -553,18 +553,18 @@ msgid "     0 No files present."
 msgstr ""
 
 #, sh-format
-msgid "To process FILE execute: ${blue}$display_name --file FILE${normal}"
+msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
 msgstr ""
 
 #, sh-format
 msgid ""
-"To view the commands of FILE execute: ${blue}$display_name --cat --file "
+"To view the commands of FILE execute: ${blue}$DISPLAY_NAME --cat --file "
 "FILE${normal}"
 msgstr ""
 
 #, sh-format
 msgid ""
-"To simulate the processing of FILE execute: ${blue}$display_name --simulate "
+"To simulate the processing of FILE execute: ${blue}$DISPLAY_NAME --simulate "
 "--file FILE${normal}"
 msgstr ""
 
@@ -626,7 +626,7 @@ msgid "Installation menu"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [-g|--gui] $options_usage"
+msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr ""
 
 msgid "Prepare installation"
@@ -788,7 +788,7 @@ msgid "The following has been executed:"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $display_name [-d|--dry-run] [-g|--gui] [-s|--source DIRECTORY]"
+msgid "Usage: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-s|--source DIRECTORY]"
 msgstr ""
 
 msgid ""
@@ -828,9 +828,9 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $display_name [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
 "                [-l|--list] [-r|--reset] [--server] [-s|--simulate]\n"
-"                $options_usage\n"
+"                $OPTIONS_USAGE\n"
 "                [--] [APP...]"
 msgstr ""
 
@@ -846,7 +846,7 @@ msgid "set up apps for a server"
 msgstr ""
 
 #, sh-format
-msgid "No set up file found, looked for $inputfile."
+msgid "No set up file found, looked for $input_file."
 msgstr ""
 
 msgid "To set up the APPs run:"

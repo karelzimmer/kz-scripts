@@ -97,7 +97,7 @@ def check_dpkgd_snapd():
                 time.sleep(dpkg_wait)
 
 
-def check_on_ac_power(program_name):
+def check_on_ac_power(PROGRAM_NAME):
     """
     This function monitors the power supply.
     """
@@ -109,11 +109,11 @@ def check_on_ac_power(program_name):
             input('\n' + _('Press the Enter key to continue [Enter]: '))
         except KeyboardInterrupt:
             print('\n' + _('Program {} has been interrupted.').
-                  format(program_name))
+                  format(PROGRAM_NAME))
             sys.exit(ERROR)
 
 
-def check_user_root(program_name, display_name):
+def check_user_root(PROGRAM_NAME, DISPLAY_NAME):
     """
     This function checks if the user is root.
     """
@@ -130,7 +130,7 @@ def check_user_root(program_name, display_name):
                 subprocess.run('sudo true', shell=True, check=True)
             except KeyboardInterrupt:
                 print('\n' + _('Program {} has been interrupted.').
-                      format(program_name))
+                      format(PROGRAM_NAME))
                 sys.exit(ERROR)
             except Exception as ex:
                 print(ex)
@@ -153,32 +153,32 @@ def check_user_sudo():
         return(OK)
 
 
-def process_option(program_name, program_desc, display_name):
+def process_option(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the general options.
     """
-    usage_line = _("type '{} --usage' for more information").\
-        format(display_name)
+    USAGE_LINE = _("type '{} --usage' for more information").\
+        format(DISPLAY_NAME)
 
-    parser = argparse.ArgumentParser(prog=display_name, add_help=False,
-                                     usage=usage_line)
+    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, add_help=False,
+                                     usage=USAGE_LINE)
     parser.add_argument('-h', '--help', action='store_true')
     parser.add_argument('-u', '--usage', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
     args = parser.parse_args()
 
     if args.help:
-        process_option_help(display_name, program_desc, program_name)
+        process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME)
         sys.exit(OK)
     elif args.usage:
-        process_option_usage(display_name)
+        process_option_usage(DISPLAY_NAME)
         sys.exit(OK)
     elif args.version:
-        process_option_version(program_name)
+        process_option_version(PROGRAM_NAME)
         sys.exit(OK)
 
 
-def process_option_help(display_name, program_desc, program_name):
+def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     This function shows the available help.
     """
@@ -192,21 +192,21 @@ def process_option_help(display_name, program_desc, program_name):
             '  -v, --version  print program version\n\n'
             "Type 'man {}' or see the \
 \x1b]8;;man:{}(1)\x1b\\{} man page\x1b]8;;\x1b\\ for more information.").
-          format(display_name, program_desc, display_name, program_name,
-                 display_name))
+          format(DISPLAY_NAME, PROGRAM_DESC, DISPLAY_NAME, PROGRAM_NAME,
+                 DISPLAY_NAME))
 
 
-def process_option_usage(display_name):
+def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
     print(_('Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n'
             '\n'
             "Type '{} --help' for more information.").
-          format(display_name, display_name))
+          format(DISPLAY_NAME, DISPLAY_NAME))
 
 
-def process_option_version(program_name):
+def process_option_version(PROGRAM_NAME):
     """
     This function displays version, author, and license information.
     """
@@ -224,7 +224,7 @@ def process_option_version(program_name):
         print(ex)
         sys.exit(ERROR)
     finally:
-        cmd = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{program_name}"
+        cmd = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME}"
         cmd = f"{cmd} | cut --delimiter=' ' --fields=3"
         program_year = subprocess.check_output(cmd, shell=True,
                                                stderr=subprocess.DEVNULL)
@@ -237,7 +237,7 @@ def process_option_version(program_name):
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal\n'
                 '<https://creativecommons.org/publicdomain/zero/1.0>, {}')
-              .format(program_name, build_id, program_year))
+              .format(PROGRAM_NAME, build_id, program_year))
 
 
 ###############################################################################

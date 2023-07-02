@@ -11,58 +11,67 @@
 # Import
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source "$program_path"/kz_common.sh 2> >(systemd-cat) || exit 1
+PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat) || exit 1
+
+
+###############################################################################
+# Constants
+###############################################################################
+
+readonly PROGRAM_NAME='kz-build'
+PROGRAM_DESC=$(gettext 'Build package kz')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly USAGE
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$OPTIONS_HELP"
+readonly HELP
+
+readonly DOCS_REPO=$HOME/kz-docs
+readonly SCRIPTS_REPO=$HOME/kz-scripts
+
+readonly deb_repo=$HOME/kz-deb
+readonly DEB_REPO_APPDIR=$deb_repo/app
+readonly DEB_REPO_DISTDIR=$deb_repo/dist
+readonly DEB_NAME=kz_365_all.deb
+
+readonly UPLOADS_REPO=$HOME/kz-uploads
+readonly UPLOADS_REPO_APPDIR=$UPLOADS_REPO/app
+readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
+
+readonly -A UPLOADS_SOURCES=(
+            [kz-docs]=$DOCS_REPO
+         [kz-scripts]=$SCRIPTS_REPO
+            )
+readonly -A UPLOADS_TARGETS=(
+            [kz-docs]=$UPLOADS_REPO_DISTDIR/assets/kz-docs
+         [kz-scripts]=$UPLOADS_REPO_DISTDIR/assets/kz-scripts
+                [deb]=$UPLOADS_REPO_DISTDIR/assets/kz
+            )
+
+readonly -A DEB_SOURCES=(
+                [app]=$DEB_REPO_APPDIR
+         [kz-scripts]=$SCRIPTS_REPO
+            )
+readonly -A DEB_TARGETS=(
+               [dist]=$DEB_REPO_DISTDIR
+              [build]=$DEB_REPO_DISTDIR/usr/local/etc
+             [man_en]=$DEB_REPO_DISTDIR/usr/share/man/man1
+             [man_nl]=$DEB_REPO_DISTDIR/usr/share/man/nl/man1
+            )
 
 
 ###############################################################################
 # Variables
 ###############################################################################
-
-program_name='kz-build'
-program_desc=$(gettext 'Build package kz')
-display_name=${program_name/kz-/kz }
-
-usage=$(eval_gettext "Usage: \$display_name \$options_usage")
-help="$(eval_gettext "Usage: \$display_name [OPTION...]")
-
-$program_desc.
-
-$(gettext 'Options:')
-$options_help"
-
-docs_repo=$HOME/kz-docs
-scripts_repo=$HOME/kz-scripts
-
-deb_repo=$HOME/kz-deb
-deb_repo_appdir=$deb_repo/app
-deb_repo_distdir=$deb_repo/dist
-deb_name=kz_365_all.deb
-
-uploads_repo=$HOME/kz-uploads
-uploads_repo_appdir=$uploads_repo/app
-uploads_repo_distdir=$uploads_repo/dist
-
-declare -A uploads_sources=(
-            [kz-docs]=$docs_repo
-         [kz-scripts]=$scripts_repo
-            )
-declare -A uploads_targets=(
-            [kz-docs]=$uploads_repo_distdir/assets/kz-docs
-         [kz-scripts]=$uploads_repo_distdir/assets/kz-scripts
-                [deb]=$uploads_repo_distdir/assets/kz
-            )
-
-declare -A deb_sources=(
-                [app]=$deb_repo_appdir
-         [kz-scripts]=$scripts_repo
-            )
-declare -A deb_targets=(
-               [dist]=$deb_repo_distdir
-              [build]=$deb_repo_distdir/usr/local/etc
-             [man_en]=$deb_repo_distdir/usr/share/man/man1
-             [man_nl]=$deb_repo_distdir/usr/share/man/nl/man1
-    )
 
 
 ###############################################################################
@@ -75,14 +84,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$display_name"     \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        printf '%s\n' "$usage_line"
-        exit $error
+    if [[ $rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_option "$@"
@@ -100,9 +109,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$display_name: $*: %s\n$usage_line\n" \
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
                 "$(gettext 'arguments are not allowed')"
-        exit $error
+        exit $ERROR
     fi
 }
 
@@ -114,16 +123,16 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check - pre')"
+    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Check - pre')"
     check_repos
     check_scripts
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Build')"
+    printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Build')"
     build_uploads
     generate_mo
     build_deb
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Install')"
+    printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
     install_package
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Check - post')"
+    printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Check - post')"
     run_ivp
     check_website
 }
@@ -131,14 +140,14 @@ function process_input {
 
 function check_repos {
     info "$(gettext 'Check that all repos are on branch main...')"
-    for repo in $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+    for repo in $deb_repo $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             warning "$(eval_gettext "Repo \$repo not on branch main.")"
         fi
     done
     info "$(gettext 'Check that all repos are clean...')"
-    for repo in $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+    for repo in $deb_repo $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if ! git diff-index --quiet HEAD; then
             warning "$(eval_gettext "Repo \$repo is not clean.")"
@@ -153,8 +162,8 @@ function check_scripts {
 
     info "$(gettext 'Check scripts (kz check)...')"
     # Call kz-check.
-    "$scripts_repo"/usr/bin/kz check || rc=$?
-    if [[ $rc -ne $ok ]]; then
+    "$SCRIPTS_REPO"/usr/bin/kz check || rc=$?
+    if [[ $rc -ne $OK ]]; then
         error "
 $(gettext 'Fix all the messages above.')"
         exit $rc
@@ -170,35 +179,35 @@ function build_uploads {
     info "$(gettext 'Build website...')"
 
     # Make sure the permissions are correct for the sync.
-    chmod 'u=rwx,g=rx,o=rx' -- "$scripts_repo"/usr/bin/*
-    chmod 'a-x' -- "$scripts_repo"/usr/bin/*.*
+    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*
+    chmod 'a-x' -- "$SCRIPTS_REPO"/usr/bin/*.*
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/app/.
     rsync   --archive               \
             --verbose               \
             --checksum              \
-            "$uploads_repo_appdir"/ \
-            "$uploads_repo_distdir" |& $logcmd
+            "$UPLOADS_REPO_APPDIR"/ \
+            "$UPLOADS_REPO_DISTDIR" |& $logcmd
 
     # Make sure all necessary directories are available for the sync with the
     # cp command.
-    for dir in "${uploads_targets[@]}"; do
+    for dir in "${UPLOADS_TARGETS[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
 
     # Populate kz-uploads/dist/ with modified files in repo kz-docs, and create
     # a PDF of these modified files.
-    cd "${uploads_sources[kz-docs]}"
+    cd "${UPLOADS_SOURCES[kz-docs]}"
     for file in *.odt *.txt; do
-        if ! diff "$file" "${uploads_targets[kz-docs]}/$file" |& $logcmd; then
+        if ! diff "$file" "${UPLOADS_TARGETS[kz-docs]}/$file" |& $logcmd; then
             cp  --preserve                      \
                 --verbose                       \
                 "$file"                         \
-                "${uploads_targets[kz-docs]}"   |& $logcmd
+                "${UPLOADS_TARGETS[kz-docs]}"   |& $logcmd
             # Craete a PDF.
             lowriter    --headless                              \
                         --convert-to pdf                        \
-                        --outdir "${uploads_targets[kz-docs]}"  \
+                        --outdir "${UPLOADS_TARGETS[kz-docs]}"  \
                         "$file"
         fi
     done
@@ -206,20 +215,20 @@ function build_uploads {
 
     # Fill kz-uploads/dist/ with modified files in repo kz-scripts, and create
     # a PDF of these modified files.
-    cd "${uploads_sources[kz-scripts]}"
+    cd "${UPLOADS_SOURCES[kz-scripts]}"
     while read -r file; do
-        if ! diff "$file" "${uploads_targets[kz-scripts]}/$file" |& $logcmd
+        if ! diff "$file" "${UPLOADS_TARGETS[kz-scripts]}/$file" |& $logcmd
         then
             cp  --parents                           \
                 --preserve                          \
                 --verbose                           \
                 "$file"                             \
-                "${uploads_targets[kz-scripts]}"    |& $logcmd
+                "${UPLOADS_TARGETS[kz-scripts]}"    |& $logcmd
             # Craete a PDF.
             if grep --quiet --regexp='^''.TH ' "$file"; then
                 # Man page file.
-                man --troff "${uploads_sources[kz-scripts]}/$file" |
-                ps2pdf - "${uploads_targets[kz-scripts]}/$file.pdf"
+                man --troff "${UPLOADS_SOURCES[kz-scripts]}/$file" |
+                ps2pdf - "${UPLOADS_TARGETS[kz-scripts]}/$file.pdf"
             else
                 # Script file.
                 # Must copy each file with suffix e.g. .txt added (tmptxt)
@@ -230,7 +239,7 @@ function build_uploads {
                 #    .pdf.
                 tmptxt=/tmp/$(basename "$file").txt
                 cp "$file" "$tmptxt"
-                pdfdir=${uploads_targets[kz-scripts]}/$(dirname "$file")
+                pdfdir=${UPLOADS_TARGETS[kz-scripts]}/$(dirname "$file")
 
                 lowriter    --headless          \
                             --convert-to pdf    \
@@ -274,8 +283,8 @@ function build_deb {
             --exclude='README.md'   \
             --exclude='.git*'       \
             --delete-excluded       \
-            "${deb_sources[app]}"/  \
-            "${deb_targets[dist]}"  |& $logcmd
+            "${DEB_SOURCES[app]}"/  \
+            "${DEB_TARGETS[dist]}"  |& $logcmd
 
     # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive                       \
@@ -286,26 +295,26 @@ function build_deb {
             --exclude='.git*'               \
             --exclude='kz.po'               \
             --exclude='kz.pot'              \
-            "${deb_sources[kz-scripts]}"/   \
-            "${deb_targets[dist]}"          |& $logcmd
+            "${DEB_SOURCES[kz-scripts]}"/   \
+            "${DEB_TARGETS[dist]}"          |& $logcmd
 
     # Compress man pages.
     gzip    --best                      \
             --force                     \
-            "${deb_targets[man_en]}"/*  \
-            "${deb_targets[man_nl]}"/*  |& $logcmd
+            "${DEB_TARGETS[man_en]}"/*  \
+            "${DEB_TARGETS[man_nl]}"/*  |& $logcmd
 
     # Capture build id Debian package.
     build_id=$(date '+%Y-%m-%d %H:%M')
-    printf '%s' "$build_id" > "${deb_targets[build]}/$program_name"-id
+    printf '%s' "$build_id" > "${DEB_TARGETS[build]}/$PROGRAM_NAME"-id
 
     # Create Debian package in kz-uploads.
     # Debian supports xz as maximum compression, the default Ubuntu is zst.
     fakeroot    dpkg-deb                            \
                 --build                             \
                 -Zxz                                \
-                "$deb_repo_distdir"                 \
-                "${uploads_targets[deb]}/$deb_name" |& $logcmd
+                "$DEB_REPO_DISTDIR"                 \
+                "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $logcmd
 }
 
 
@@ -315,7 +324,7 @@ function install_package {
             apt-get                             \
             reinstall                           \
             --yes                               \
-            "${uploads_targets[deb]}/$deb_name" |& $logcmd
+            "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $logcmd
 }
 
 
@@ -325,7 +334,7 @@ function run_ivp {
     info "$(gettext 'Run IVP (kz ivp)...')"
     # Call kz-ivp.
     kz ivp || rc=$?
-    if [[ $rc -ne $ok ]]; then
+    if [[ $rc -ne $OK ]]; then
         error "
 $(gettext 'Fix all the messages above.')"
         exit $rc
@@ -339,7 +348,7 @@ function check_website {
     info "$(gettext 'Check website (rchecklink)...')"
     # Call rchecklink.
     rchecklink || rc=$?
-    if [[ $rc -ne $ok ]]; then
+    if [[ $rc -ne $OK ]]; then
         error "
 $(gettext 'Fix all the messages above.')"
         exit $rc
@@ -348,7 +357,7 @@ $(gettext 'Fix all the messages above.')"
 
 
 function term_script {
-    exit $ok
+    exit $OK
 }
 
 

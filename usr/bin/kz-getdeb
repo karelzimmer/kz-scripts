@@ -17,31 +17,43 @@ source /usr/bin/gettext.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
-program_name='kz-getdeb'
-program_desc=$(gettext 'Install kz package')
-display_name=${program_name/kz-/kz }
+readonly PROGRAM_NAME='kz-getdeb'
+PROGRAM_DESC=$(gettext 'Install kz package')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-options_short='huv'
-options_long='help,usage,version'
 # shellcheck disable=SC2034
-options_usage='[-u|--usage] [-h|--help] [-v|--version]'
-usage=$(eval_gettext "Usage: \$display_name \$options_usage")
-options_help="  -h, --help     $(gettext 'give this help list')
+readonly OPTIONS_USAGE='[-u|--usage] [-h|--help] [-v|--version]'
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly USAGE
+OPTIONS_HELP="  -h, --help     $(gettext 'give this help list')
   -u, --usage    $(gettext 'give a short usage message')
   -v, --version  $(gettext 'print program version')"
-help="$(eval_gettext "Usage: \$display_name [OPTION...]")
+readonly OPTIONS_HELP
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
-$program_desc.
+$PROGRAM_DESC.
 
-$options_help"
-usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
+$OPTIONS_HELP"
+readonly HELP
+readonly OPTIONS_SHORT='huv'
+readonly OPTIONS_LONG='help,usage,version'
+
+USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
 information.")
+readonly USAGE_LINE
 
-bold=$(tput bold)
-normal=$(tput sgr0)
+BOLD=$(tput bold)
+readonly BOLD
+NORMAL=$(tput sgr0)
+readonly NORMAL
+
+###############################################################################
+# Variables
+###############################################################################
 
 
 ###############################################################################
@@ -49,7 +61,7 @@ normal=$(tput sgr0)
 ###############################################################################
 
 function init_script {
-        set -o errtrace
+    set -o errtrace
     set -o nounset
     set -o pipefail
 }
@@ -61,13 +73,13 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$program_name"     \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$PROGRAM_NAME"     \
                 --              "$@"
         )       || rc=$?
     if [[ $rc -ne 0 ]]; then
-        printf '%s\n' "$usage_line" >&2
+        printf '%s\n' "$USAGE_LINE" >&2
         exit 1
     fi
     eval set -- "$parsed"
@@ -100,7 +112,7 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$display_name: $*: %s\n$usage_line\n" \
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
                 "$(gettext 'arguments are not allowed')"
         cleanup
         exit 1
@@ -109,18 +121,18 @@ function check_input {
 
 
 function process_option_help {
-    printf '%b\n' "$help
+    printf '%b\n' "$HELP
 
-$(eval_gettext "Type 'man \$display_name' or see the \
-\e]8;;man:\$program_name(1)\e\\\$display_name man page\e]8;;\e\\ for more \
+$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \
+\e]8;;man:\$PROGRAM_NAME(1)\e\\\$DISPLAY_NAME man page\e]8;;\e\\ for more \
 information.")"
 }
 
 
 function process_option_usage {
-    printf '%s\n' "$usage
+    printf '%s\n' "$USAGE
 
-$(eval_gettext "Type '\$display_name --help' for more information.")"
+$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 }
 
 
@@ -128,8 +140,8 @@ function process_option_version {
     local build_id='????-??-?? ??:??'
     local grep_expr='# <https://creativecommons.org'
     local program_year='????'
-    local program_path
-    program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+    local PROGRAM_PATH
+    PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=$(cat /usr/local/etc/kz-build-id)
@@ -138,14 +150,14 @@ function process_option_version {
     fi
 
     program_year=$(
-        grep    --regexp="$grep_expr" "$program_path/$program_name" |
+        grep    --regexp="$grep_expr" "$PROGRAM_PATH/$PROGRAM_NAME" |
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
         program_year='????'
     fi
 
-    printf '%s\n' "$program_name (kz) 365 ($build_id)
+    printf '%s\n' "$PROGRAM_NAME (kz) 365 ($build_id)
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
@@ -168,13 +180,13 @@ function install_package {
     local site_deb='https://karelzimmer.nl/assets/kz/kz_365_all.deb'
     local temp_deb=''
 
-    temp_deb=$(mktemp -t "$program_name-XXXXXXXXXX.deb")
+    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
-    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Download')"
+    printf "${BOLD}%s${NORMAL} ($DISPLAY_NAME)\n" "$(gettext 'Download')"
     wget --output-document="$temp_deb" $site_deb
     check_dpkgd_snapd
-    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Install')"
+    printf "${BOLD}%s${NORMAL} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
@@ -237,7 +249,7 @@ under Linux.
 Type 'exit' to close this window.")
 
     clear -x
-    TERM=ansi whiptail  --backtitle "$display_name" \
+    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                         --title     "$title"        \
                         --infobox   "$text"         \
                         16 47

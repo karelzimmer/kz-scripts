@@ -11,32 +11,37 @@
 # Import
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source "$program_path"/kz_common.sh 2> >(systemd-cat) || exit 1
+PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat) || exit 1
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
-program_name='kz-menu'
-program_desc=$(gettext 'Installation menu')
-display_name=${program_name/kz-/kz }
+readonly PROGRAM_NAME='kz-menu'
+PROGRAM_DESC=$(gettext 'Installation menu')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-usage=$(eval_gettext "Usage: \$display_name [-g|--gui] \$options_usage")
-help="$(eval_gettext "Usage: \$display_name [OPTION...]")
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE")
+readonly USAGE
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
-$program_desc.
+$PROGRAM_DESC.
 
 $(gettext 'Options:')
   -g, --gui      $(gettext 'starts in graphics mode')
-$options_help"
-options_short+='g'
-options_long+=',gui'
+$OPTIONS_HELP"
+readonly HELP
+readonly X_OPTIONS_SHORT='g'
+readonly X_OPTIONS_LONG=',gui'
 
-menu1_title=$(gettext 'Installation menu')
-menu1_head="                   $menu1_title"
-declare -a menu1_actions=(
+MENU1_TITLE=$(gettext 'Installation menu')
+readonly MENU1_TITLE
+readonly MENU1_HEAD="                   $MENU1_TITLE"
+readonly -a MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
@@ -44,7 +49,7 @@ declare -a menu1_actions=(
                 "$(gettext 'Commands menu')"
                 "$(gettext 'Stop')"
             )
-declare -a menu1_commands=(
+readonly -a MENU1_COMMANDS=(
             [1]="$(gettext 'Checklist chapter 1')"
                 "$(gettext 'Checklist chapter 2')"
                 "$(gettext 'Checklist chapter 3')"
@@ -52,11 +57,12 @@ declare -a menu1_commands=(
                 "$(gettext 'Used commands')"
                 "$(gettext 'Exit menu')"
             )
-menu1_lines=${#menu1_actions[@]}
+readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
-menu2_title=$(gettext 'Commands menu')
-menu2_head="                   $menu2_title"
-declare -a menu2_actions=(
+MENU2_TITLE=$(gettext 'Commands menu')
+readonly MENU2_TITLE
+readonly MENU2_HEAD="                   $MENU2_TITLE"
+readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
                 "$(gettext 'Add users')"
@@ -66,7 +72,7 @@ declare -a menu2_actions=(
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Back')"
             )
-declare -a menu2_commands=(
+readonly -a MENU2_COMMANDS=(
             [1]='kz wifi'
                 'kz backup'
                 "$(gettext 'Manually')"
@@ -76,11 +82,16 @@ declare -a menu2_commands=(
                 'kz setup'
                 "$(gettext 'Previous menu')"
             )
-menu2_lines=${#menu2_actions[@]}
+readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
-execute_command=false
+
+###############################################################################
+# Variables
+###############################################################################
+
+declare execute_command=false
 declare -a rows=()
-option_gui=false
+declare option_gui=false
 
 
 ###############################################################################
@@ -92,15 +103,15 @@ function check_input {
     local parsed=''
 
     parsed=$(
-        getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$display_name"     \
+        getopt  --alternative                                       \
+                --options       "$OPTIONS_SHORT$X_OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        printf '%s\n' "$usage_line"
-        exit $error
+    if [[ $rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_option "$@"
@@ -123,9 +134,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$display_name: $*: %s\n$usage_line\n" \
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
                 "$(gettext 'arguments are not allowed')"
-        exit $error
+        exit $ERROR
     fi
 }
 
@@ -143,7 +154,7 @@ function process_menu1_gui {
     local -i rc=0
 
     while true; do
-        title=$menu1_title
+        title=$MENU1_TITLE
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
@@ -157,15 +168,15 @@ function process_menu1_gui {
                     --column        "$(gettext 'No.')"                      \
                     --column        "$(gettext 'Action')"                   \
                     --column        "$(gettext 'Explanation')"              \
-                    TRUE  1 "${menu1_actions[1]}" "${menu1_commands[1]}"    \
-                    FALSE 2 "${menu1_actions[2]}" "${menu1_commands[2]}"    \
-                    FALSE 3 "${menu1_actions[3]}" "${menu1_commands[3]}"    \
-                    FALSE 4 "${menu1_actions[4]}" "${menu1_commands[4]}"    \
-                    FALSE 5 "${menu1_actions[5]}" "${menu1_commands[5]}"    \
+                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_COMMANDS[1]}"    \
+                    FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_COMMANDS[2]}"    \
+                    FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_COMMANDS[3]}"    \
+                    FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_COMMANDS[4]}"    \
+                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_COMMANDS[5]}"    \
                     2> >($logcmd)
             ) || rc=$?
         if [[ $rc -ne 0 ]]; then
-            exit $ok
+            exit $OK
         fi
         process_menu1_choice
     done
@@ -173,30 +184,30 @@ function process_menu1_gui {
 
 
 function process_menu1_tui {
-    local action=''
+    local menu1_action=''
 
     while true; do
 
         # Show menu.
         clear -x
-        info "$menu1_head
+        info "$MENU1_HEAD
 "
-        for action in "${!menu1_actions[@]}"; do
-            printf  '%2s. %-25.25s - %s\n'      \
-                    "$action"                   \
-                    "${menu1_actions[$action]}" \
-                    "${menu1_commands[$action]}"
+        for menu1_action in "${!MENU1_ACTIONS[@]}"; do
+            printf  '%2s. %-25.25s - %s\n'              \
+                    "$menu1_action"                     \
+                    "${MENU1_ACTIONS[$menu1_action]}"   \
+                    "${MENU1_COMMANDS[$menu1_action]}"
         done
         info ''
 
         while true; do
-            read -rp "$(eval_gettext "Run number [1-\$menu1_lines]: ")"
+            read -rp "$(eval_gettext "Run number [1-\$MENU1_LINES]: ")"
             case $REPLY in
                 *[^[:digit:]]*)
                     continue
                     ;;
                 *)
-                    if [[ $REPLY -ge 1 && $REPLY -le $menu1_lines ]]; then
+                    if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
                         break
                     else
                         continue
@@ -228,28 +239,28 @@ function process_menu1_choice {
             process_menu2
             ;;
         6)
-            exit $ok
+            exit $OK
             ;;
         *)
             error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
-            exit $error
+            exit $ERROR
             ;;
     esac
 }
 
 
 function process_menu1_choice1 {
-    title="${menu1_actions[1]}"
+    title="${MENU1_ACTIONS[1]}"
     rows=(
-        [1]="${menu2_actions[1]}#${menu2_commands[1]}"
-            "${menu2_actions[2]}#${menu2_commands[2]}"
+        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
+            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
         )
     process_commands
 }
 
 
 function process_menu1_choice2 {
-    title="${menu1_actions[2]}"
+    title="${MENU1_ACTIONS[2]}"
     text="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on the site https://karelzimmer.nl,
@@ -266,21 +277,21 @@ Roughly boils down to:
 
 
 function process_menu1_choice3 {
-    title="${menu1_actions[3]}"
+    title="${MENU1_ACTIONS[3]}"
     rows=(
-        [1]="${menu2_actions[3]}#${menu2_commands[3]}"
-            "${menu2_actions[4]}#${menu2_commands[4]}"
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+            "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
         )
     process_commands
 }
 
 
 function process_menu1_choice4 {
-    title="${menu1_actions[4]}"
+    title="${MENU1_ACTIONS[4]}"
     rows=(
-        [1]="${menu2_actions[5]}#${menu2_commands[5]}"
-            "${menu2_actions[6]}#${menu2_commands[6]}"
-            "${menu2_actions[7]}#${menu2_commands[7]}"
+        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+            "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
+            "${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
         )
     process_commands
 }
@@ -299,7 +310,7 @@ function process_menu2_gui {
     local -i rc=0
 
     while true; do
-        title=$menu2_title
+        title=$MENU2_TITLE
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
@@ -313,13 +324,13 @@ function process_menu2_gui {
                     --column        "$(gettext 'No.')"                      \
                     --column        "$(gettext 'Action')"                   \
                     --column        "$(gettext 'Command')"                  \
-                    TRUE   1 "${menu2_actions[1]}"  "${menu2_commands[1]}"  \
-                    FALSE  2 "${menu2_actions[2]}"  "${menu2_commands[2]}"  \
-                    FALSE  3 "${menu2_actions[3]}"  "${menu2_commands[3]}"  \
-                    FALSE  4 "${menu2_actions[4]}"  "${menu2_commands[4]}"  \
-                    FALSE  5 "${menu2_actions[5]}"  "${menu2_commands[5]}"  \
-                    FALSE  6 "${menu2_actions[6]}"  "${menu2_commands[6]}"  \
-                    FALSE  7 "${menu2_actions[7]}"  "${menu2_commands[7]}"  \
+                    TRUE   1 "${MENU2_ACTIONS[1]}"  "${MENU2_COMMANDS[1]}"  \
+                    FALSE  2 "${MENU2_ACTIONS[2]}"  "${MENU2_COMMANDS[2]}"  \
+                    FALSE  3 "${MENU2_ACTIONS[3]}"  "${MENU2_COMMANDS[3]}"  \
+                    FALSE  4 "${MENU2_ACTIONS[4]}"  "${MENU2_COMMANDS[4]}"  \
+                    FALSE  5 "${MENU2_ACTIONS[5]}"  "${MENU2_COMMANDS[5]}"  \
+                    FALSE  6 "${MENU2_ACTIONS[6]}"  "${MENU2_COMMANDS[6]}"  \
+                    FALSE  7 "${MENU2_ACTIONS[7]}"  "${MENU2_COMMANDS[7]}"  \
                     2> >($logcmd)
             ) || rc=$?
         if [[ $rc -ne 0 ]]; then
@@ -331,31 +342,31 @@ function process_menu2_gui {
 
 
 function process_menu2_tui {
-    local action=''
+    local menu2_action=''
     local exit_menu2=false
 
     while true; do
 
         # Show menu.
         clear -x
-        info "$menu2_head
+        info "$MENU2_HEAD
 "
-        for action in "${!menu2_actions[@]}"; do
-            printf  '%2s. %-25.25s - %s\n'      \
-                    "$action"                   \
-                    "${menu2_actions[$action]}" \
-                    "${menu2_commands[$action]}"
+        for menu2_action in "${!MENU2_ACTIONS[@]}"; do
+            printf  '%2s. %-25.25s - %s\n'              \
+                    "$menu2_action"                     \
+                    "${MENU2_ACTIONS[$menu2_action]}"   \
+                    "${MENU2_COMMANDS[$menu2_action]}"
         done
         info ''
 
         while true; do
-            read -rp "$(eval_gettext "Run number [1-\$menu2_lines]: ")"
+            read -rp "$(eval_gettext "Run number [1-\$MENU2_LINES]: ")"
             case $REPLY in
                 *[^[:digit:]]*)
                     continue
                     ;;
                 *)
-                    if [[ $REPLY -ge 1 && $REPLY -le $menu2_lines ]]; then
+                    if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
                         break
                     else
                         continue
@@ -373,17 +384,17 @@ function process_menu2_tui {
 
 
 function process_menu2_choice {
-    if [[ $REPLY -ge 1 && $REPLY -le $((menu2_lines -1)) ]]; then
-        title="${menu2_actions[$REPLY]}"
+    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
+        title="${MENU2_ACTIONS[$REPLY]}"
         rows=(
-            [1]="${menu2_actions[$REPLY]}#${menu2_commands[$REPLY]}"
+            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
         process_commands
-    elif [[ $REPLY -eq $menu2_lines ]]; then
+    elif [[ $REPLY -eq $MENU2_LINES ]]; then
         exit_menu2=true
     else
         error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
-        exit $error
+        exit $ERROR
     fi
 }
 
@@ -492,7 +503,7 @@ function execute_command {
     # Handle manual actions.
     if [[ $command = $(gettext 'Manually') ]]; then
         manual_actions
-        return $ok
+        return $OK
     fi
 
     # Process (automatic) commands.
@@ -506,7 +517,7 @@ function execute_command {
     if $option_gui; then
         gui_option='--gui'
     fi
-    "$program_path/$cmd" "$arg" $gui_option -- || rc=$?
+    "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
     log "$command: rc=$rc"
     wait_for_enter
 }
@@ -577,7 +588,7 @@ $row. $action ($command)"
 
 
 function term_script {
-    exit $ok
+    exit $OK
 }
 
 

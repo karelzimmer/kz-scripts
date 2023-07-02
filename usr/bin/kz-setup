@@ -11,26 +11,29 @@
 # Import
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source "$program_path"/kz_common.sh 2> >(systemd-cat) || exit 1
+PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat) || exit 1
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
-program_name='kz-setup'
-program_desc=$(gettext 'Set up apps')
-display_name=${program_name/kz-/kz }
+readonly PROGRAM_NAME='kz-setup'
+PROGRAM_DESC=$(gettext 'Set up apps')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-usage=$(eval_gettext "Usage: \$display_name [-a|--apps] [-c|--cat] \
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] \
 [-f|--file FILE] [-g|--gui]
                 [-l|--list] [-r|--reset] [--server] [-s|--simulate]
-                \$options_usage
+                \$OPTIONS_USAGE
                 [--] [APP...]")
-help="$(eval_gettext "Usage: \$display_name [OPTION...] [APP...]")
+readonly USAGE
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
-$program_desc.
+$PROGRAM_DESC.
 
 $(gettext 'Options:')
   -a, --apps     $(gettext 'show list of available apps')
@@ -42,34 +45,40 @@ $(gettext '  -f, --file FILE
   -r, --reset    $(gettext 'set apps on default values')
       --server   $(gettext 'set up apps for a server')
   -s, --simulate $(gettext 'show commands')
-$options_help
+$OPTIONS_HELP
   --             $(gettext "signals the end of options and disables further \
 option processing")
 
 $(gettext 'Arguments:
   APP            set up APPs')"
-options_short+='acf:lgrs'
-options_long+=',apps,cat,file:,list,gui,reset,server,simulate'
+readonly HELP
+readonly X_OPTIONS_SHORT='acf:lgrs'
+readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,reset,server,simulate'
+
+CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-cmds-XXXXXXXXXX")
+readonly CMDS_FILE
+SIMS_FILE=$(mktemp -t "$PROGRAM_NAME-sims-XXXXXXXXXX")
+readonly SIMS_FILE
+
+###############################################################################
+# Variables
+###############################################################################
 
 declare -a app_arguments=()
-argument_app=false
-cmdsfile=''
-commands_found=false
-distro=''
-edition='desktop'
-execute_commands=true
-file_argument=''
-mode='setup'
-option_apps=false
-option_cat=false
-option_file=false
-option_list=false
-option_gui=false
-option_reset=false
-option_simulate=false
-
-cmdsfile=$(mktemp -t "$program_name-$mode-cmds-XXXXXXXXXX")
-simsfile=$(mktemp -t "$program_name-$mode-sims-XXXXXXXXXX")
+declare argument_app=false
+declare commands_found=false
+declare distro=''
+declare edition='desktop'
+declare execute_commands=true
+declare file_argument=''
+declare mode='setup'
+declare option_apps=false
+declare option_cat=false
+declare option_file=false
+declare option_list=false
+declare option_gui=false
+declare option_reset=false
+declare option_simulate=false
 
 
 ###############################################################################
@@ -82,15 +91,15 @@ function check_input {
     local parsed=''
 
     parsed=$(
-        getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$display_name"     \
+        getopt  --alternative                                       \
+                --options       "$OPTIONS_SHORT$X_OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        printf '%s\n' "$usage_line"
-        exit $error
+    if [[ $rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_option "$@"
@@ -107,9 +116,9 @@ function check_input {
                 ;;
             -f|--file)
                 if $option_file; then
-                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n" \
                             "$(gettext 'too many options')"
-                    exit $error
+                    exit $ERROR
                 fi
                 option_file=true
                 file_argument=$2
@@ -158,42 +167,42 @@ function check_input {
 
 
 function process_input {
-    local inputfile=''
+    local input_file=''
 
     if $option_file; then
-        if ! [[ "$(basename "$file_argument")" == $program_name-*.sh ]]; then
-            text=$(eval_gettext "File name must start with '\$program_name-'.")
+        if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
+            text=$(eval_gettext "File name must start with '\$PROGRAM_NAME-'.")
             warning "$text"
-            exit $error
+            exit $ERROR
         fi
-        inputfile=$file_argument
+        input_file=$file_argument
     else
         distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-        inputfile=$program_path/$program_name-$mode-$distro-$edition.sh
+        input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$distro-$edition.sh
     fi
-    if ! [[ -f $inputfile ]]; then
-        text=$(eval_gettext "No install file found, looked for \$inputfile.")
+    if ! [[ -f $input_file ]]; then
+        text=$(eval_gettext "No install file found, looked for \$input_file.")
         warning "$text"
-        exit $error
+        exit $ERROR
     fi
 
     if $argument_app; then
-        # Generate cmdsfile from inputfile; filter on USER and APPs.
+        # Generate cmds-file from input-file filtering on USER and APPs.
         process_argument_app
     else
-        # Generate cmdsfile from inputfile; filter on USER.
-        process_inputfile
+        # Generate cmds-file from input-file filtering on USER (dafault).
+        process_input_file
     fi
 
     if $option_apps; then
         process_option_apps
-        exit $ok
+        exit $OK
     elif $option_cat; then
         process_option_cat
-        exit $ok
+        exit $OK
     elif $option_list; then
         process_option_list
-        exit $ok
+        exit $OK
     fi
 
     if $execute_commands && $option_gui; then
@@ -201,7 +210,7 @@ function process_input {
         text=$(gettext 'Preparing to set up')
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_cmdsfile > >(
+        process_cmds_file > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -212,42 +221,42 @@ function process_input {
                     --text      "$text"     2> >($logcmd)
             )
     else
-        process_cmdsfile
+        process_cmds_file
     fi
 }
 
 
 function process_argument_app {
     local app_not_found=false
-    local app=''
+    local app_argument=''
 
-    for app in "${app_arguments[@]}"; do
-        process_argument_app_inputfile
+    for app_argument in "${app_arguments[@]}"; do
+        process_argument_app_input_file
     done
     if $app_not_found; then
-        text=$(eval_gettext "Type '\$display_name --apps' for available apps.")
+        text=$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")
         printf "%s\n" "$text"
-        exit $error
+        exit $ERROR
     fi
 }
 
 
-function process_argument_app_inputfile {
+function process_argument_app_input_file {
     local app_match=false
     local app_record=''
     local app_user_match=false
     local no_app_user_match=true
-    local record=''
+    local input_record=''
 
-    while read -r record; do
-        case $record in
+    while read -r input_record; do
+        case $input_record in
             '#'*' APP '*)
                 app_match=false
                 app_record=''
                 app_user_match=false
-                if [[ $record == *' '$app ]]; then
+                if [[ $input_record == *' '$app_argument ]]; then
                     app_match=true
-                    app_record=$record
+                    app_record=$input_record
                 fi
                 ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
@@ -257,51 +266,53 @@ function process_argument_app_inputfile {
                     no_app_user_match=false
                     {
                         printf '%s\n' "$app_record"
-                        printf '%s\n' "$record"
-                    } >> "$cmdsfile"
+                        printf '%s\n' "$input_record"
+                    } >> "$CMDS_FILE"
                     app_record=''
                 fi
                 ;;
             *)
                 if $app_match && $app_user_match; then
-                    printf '%s\n' "$record" >> "$cmdsfile"
+                    printf '%s\n' "$input_record" >> "$CMDS_FILE"
                 fi
                 ;;
         esac
-    done < "$inputfile"
+    done < "$input_file"
     if $no_app_user_match; then
         app_not_found=true
-        printf "$display_name: %s: %s\n" "$app" "$(gettext 'app not found')"
+        printf  "$DISPLAY_NAME: %s: %s\n"   \
+                "$app_argument"             \
+                "$(gettext 'app not found')"
     fi
 }
 
 
-function process_inputfile {
+function process_input_file {
     local app_record=''
     local app_user_match=false
-    local record=''
+    local input_record=''
 
-    while read -r record; do
-        case $record in
+    while read -r input_record; do
+        case $input_record in
             '#'*' APP '*)
-                app_record=$record
+                app_record=$input_record
                 app_user_match=false
                 ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOSTNAME"*)
                 app_user_match=true
                 {
                     printf '%s\n' "$app_record"
-                    printf '%s\n' "$record"
-                } >> "$cmdsfile"
+                    printf '%s\n' "$input_record"
+                } >> "$CMDS_FILE"
                 app_record=''
                 ;;
             *)
                 if $app_user_match; then
-                    printf '%s\n' "$record" >> "$cmdsfile"
+                    printf '%s\n' "$input_record" >> "$CMDS_FILE"
                 fi
                 ;;
         esac
-    done < "$inputfile"
+    done < "$input_file"
 }
 
 
@@ -312,7 +323,7 @@ function process_option_apps {
 $(
     if !    grep    --no-messages           \
                     --regexp='#.* APP '     \
-                    "$cmdsfile"             |
+                    "$CMDS_FILE"             |
             tr      --squeeze-repeats       \
                     '[:space:]'             |
             cut     --delimiter=' '         \
@@ -325,14 +336,14 @@ $(
             sed     --expression='s/^/[/'; then
         printf '%s\n' "$(gettext '     0   No apps found.')
 
-$usage_line"
+$USAGE_LINE"
     else
         printf '%s\n' "
-$(gettext 'To set up the APPs run:') ${blue}$display_name APP...${normal}
-$(gettext 'To simulate resetting APPs execute:') ${blue}$display_name \
+$(gettext 'To set up the APPs run:') ${blue}$DISPLAY_NAME APP...${normal}
+$(gettext 'To simulate resetting APPs execute:') ${blue}$DISPLAY_NAME \
 --simulate APP...${normal}
 $(gettext 'To view the contents of the APPs set up file execute:') \
-${blue}$display_name --cat APP...${normal}"
+${blue}$DISPLAY_NAME --cat APP...${normal}"
     fi
 )"
     info "$text"
@@ -340,7 +351,7 @@ ${blue}$display_name --cat APP...${normal}"
 
 
 function process_option_cat {
-    less --quit-if-one-screen "$cmdsfile"
+    less --quit-if-one-screen "$CMDS_FILE"
 }
 
 
@@ -349,7 +360,7 @@ function process_option_list {
 
      FILE')
 $(
-    if !    find    "$program_path/$program_name-"*'.sh'    \
+    if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"*'.sh'    \
                     2> >($logcmd)                           |
             nl      --number-width=2                        \
                     --number-format=rn                      \
@@ -358,33 +369,33 @@ $(
             sed     --expression='s/^/[/'; then
         printf '%s\n' "$(eval_gettext '     0 No files present.')
 
-$usage_line"
+$USAGE_LINE"
     else
         printf '%s\n' "
-$(eval_gettext "To process FILE execute: \${blue}\$display_name \
+$(eval_gettext "To process FILE execute: \${blue}\$DISPLAY_NAME \
 --file FILE\${normal}")
-$(eval_gettext "To view the commands of FILE execute: \${blue}\$display_name \
+$(eval_gettext "To view the commands of FILE execute: \${blue}\$DISPLAY_NAME \
 --cat --file FILE\${normal}")
 $(eval_gettext "To simulate the processing of FILE execute: \
-\${blue}\$display_name --simulate --file FILE\${normal}")"
+\${blue}\$DISPLAY_NAME --simulate --file FILE\${normal}")"
     fi
 )"
     info "$text"
 }
 
 
-function process_cmdsfile {
+function process_cmds_file {
     local app_name=''
     local operation
     operation=$(gettext 'set up')
-    local record=''
+    local cmds_record=''
     local write_app_line=true
     local -i app_seq_num=0
     local -i app_tot_num=0
     local -i cmd_seq_num=0
 
     app_tot_num=$(
-        grep --word-regexp --regexp='#.*APP' --count "$cmdsfile" || true
+        grep --word-regexp --regexp='#.*APP' --count "$CMDS_FILE" || true
         )
     if [[ $app_tot_num -gt 99 ]]; then
         app_tot_num=99
@@ -397,14 +408,14 @@ function process_cmdsfile {
         operation+=$(gettext ' simulate')
     fi
 
-    while read -r record; do
-        case $record in
+    while read -r cmds_record; do
+        case $cmds_record in
             '')
                 continue
                 ;;
             '#'*' APP '*)
                 app_name="$(
-                    printf '%s\n' "$record"             |
+                    printf '%s\n' "$cmds_record"             |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3)"
                 write_app_line=true
@@ -421,10 +432,10 @@ function process_cmdsfile {
                 continue
                 ;;
             *)
-                process_command_record "$record"
+                process_command_record "$cmds_record"
                 ;;
         esac
-    done < "$cmdsfile"
+    done < "$CMDS_FILE"
 }
 
 
@@ -458,13 +469,13 @@ function process_command_record {
                     "$app_seq_num"          \
                     "$app_tot_num"          \
                     "$app_name"             \
-                    "$operation"            >> "$simsfile"
+                    "$operation"            >> "$SIMS_FILE"
             write_app_line=false
         fi
         printf  "%7s [%2d] ${blue}%s${normal}\n"    \
                 " "                                 \
                 "$cmd_seq_num"                      \
-                "$cmd"                              >> "$simsfile"
+                "$cmd"                              >> "$SIMS_FILE"
     fi
 }
 
@@ -486,8 +497,8 @@ function execute_command {
     eval "$cmd" |& $logcmd || rc=$?
     maxrc
     # Extra message to the terminal, other is in the log.
-    if ! $option_gui && [[ $rc -gt $ok ]]; then
-        info "$(eval_gettext "Program \$program_name encountered an error.")"
+    if ! $option_gui && [[ $rc -gt $OK ]]; then
+        info "$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
     fi
     log "rc=$rc, maxrc=$maxrc"
 }
@@ -500,12 +511,12 @@ function term_script {
     if ! $commands_found; then
         info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
-        if [[ $maxrc -ne $ok ]]; then
+        if [[ $maxrc -ne $OK ]]; then
             error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
 Check the log in the next screen.")"
             show_log
-            exit $error
+            exit $ERROR
         else
             if $option_reset; then
                 # shellcheck disable=SC2034
@@ -516,9 +527,9 @@ ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         fi
     else
         # Option simulate.
-        less --quit-if-one-screen --RAW-CONTROL-CHARS "$simsfile"
+        less --quit-if-one-screen --RAW-CONTROL-CHARS "$SIMS_FILE"
     fi
-    exit $ok
+    exit $OK
 }
 
 

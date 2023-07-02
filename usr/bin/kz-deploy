@@ -11,31 +11,40 @@
 # Import
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source "$program_path"/kz_common.sh 2> >(systemd-cat) || exit 1
+PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat) || exit 1
+
+
+###############################################################################
+# Constants
+###############################################################################
+
+readonly PROGRAM_NAME='kz-deploy'
+PROGRAM_DESC=$(gettext 'Distribute kz package')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly USAGE
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$OPTIONS_HELP"
+readonly HELP
+
+readonly DEB_REPO=$HOME/kz-deb
+readonly DOCS_REPO=$HOME/kz-docs
+readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly UPLOADS_REPO=$HOME/kz-uploads
+readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 
 ###############################################################################
 # Variables
 ###############################################################################
-
-program_name='kz-deploy'
-program_desc=$(gettext 'Distribute kz package')
-display_name=${program_name/kz-/kz }
-
-usage=$(eval_gettext "Usage: \$display_name \$options_usage")
-help="$(eval_gettext "Usage: \$display_name [OPTION...]")
-
-$program_desc.
-
-$(gettext 'Options:')
-$options_help"
-
-deb_repo=$HOME/kz-deb
-docs_repo=$HOME/kz-docs
-scripts_repo=$HOME/kz-scripts
-uploads_repo=$HOME/kz-uploads
-uploads_repo_distdir=$uploads_repo/dist
 
 
 ###############################################################################
@@ -48,14 +57,14 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$display_name"     \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        printf '%s\n' "$usage_line"
-        exit $error
+    if [[ $rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_option "$@"
@@ -73,9 +82,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$display_name: $*: %s\n$usage_line\n" \
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
                 "$(gettext 'arguments are not allowed')"
-        exit $error
+        exit $ERROR
     fi
 }
 
@@ -87,21 +96,21 @@ function process_input {
         printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf "${bold}%s${normal} ($display_name)\n" "$(gettext 'Check')"
+    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Check')"
     check_repos
-    printf  "\n${bold}%s${normal} ($display_name)\n" \
+    printf  "\n${bold}%s${normal} ($DISPLAY_NAME)\n" \
             "$(gettext 'Build - final')"
     build_package
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Deploy')"
+    printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Deploy')"
     upload_website
-    printf "\n${bold}%s${normal} ($display_name)\n" "$(gettext 'Install')"
+    printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
     install_package
 }
 
 
 function check_repos {
     info "$(gettext 'Check that all repos are on branch main...')"
-    for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+    for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             error "$(eval_gettext "Repo \$repo not on branch main.")"
@@ -110,7 +119,7 @@ function check_repos {
         fi
     done
     info "$(gettext 'Check that all repos are clean...')"
-    for repo in  $deb_repo $docs_repo $scripts_repo $uploads_repo; do
+    for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if ! git diff-index --quiet HEAD; then
             error "$(eval_gettext "Repo \$repo is not clean.")"
@@ -118,7 +127,7 @@ function check_repos {
             maxrc=1
         fi
     done
-    if [[ $maxrc -gt $ok ]]; then
+    if [[ $maxrc -gt $OK ]]; then
         exit $maxrc
     fi
 }
@@ -130,8 +139,8 @@ function build_package {
     info "$(gettext 'Build package and website (kz build)...')
 "
     # Call kz-build.
-    "$scripts_repo"/usr/bin/kz build || rc=$?
-    if [[ $rc -ne $ok ]]; then
+    "$SCRIPTS_REPO"/usr/bin/kz build || rc=$?
+    if [[ $rc -ne $OK ]]; then
         exit $rc
     fi
 }
@@ -139,7 +148,7 @@ function build_package {
 
 function upload_website {
     local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=$uploads_repo_distdir
+    local ftp_from=$UPLOADS_REPO_DISTDIR
     local ftp_to=/httpdocs
     local ftp_opts='--reverse --delete --verbose'
     local ftp_exclude='--exclude icaclient_20.04.0.21_amd64.deb'
@@ -161,7 +170,7 @@ function upload_website {
                 "$ftp_host"; then
         rm "$ftp_login"
         error "$(gettext 'Website upload failed.')"
-        exit $error
+        exit $ERROR
     fi
     sleep 5
 }
@@ -173,13 +182,13 @@ function install_package {
 "
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
         error "$(gettext 'Install package kz failed.')"
-        exit $error
+        exit $ERROR
     fi
 }
 
 
 function term_script {
-    exit $ok
+    exit $OK
 }
 
 

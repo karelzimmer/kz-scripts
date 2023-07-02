@@ -16,45 +16,53 @@ source /usr/bin/gettext.sh
 
 
 ###############################################################################
+# Constants
+###############################################################################
+
+readonly MODULE_NAME='kz_common.sh'
+MODULE_DESC=$(gettext 'Common module for shell scripts')
+# shellcheck disable=SC2034
+readonly MODULE_DESC
+
+readonly OK=0
+readonly ERROR=1
+
+# shellcheck disable=SC2034
+OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
+# shellcheck disable=SC2034
+readonly OPTIONS_USAGE
+OPTIONS_HELP="  -h, --help     $(gettext 'give this help list')
+  -u, --usage    $(gettext 'give a short usage message')
+  -v, --version  $(gettext 'print program version')"
+# shellcheck disable=SC2034
+readonly OPTIONS_HELP
+# shellcheck disable=SC2034
+readonly OPTIONS_SHORT='huv'
+# shellcheck disable=SC2034
+readonly OPTIONS_LONG='help,usage,version'
+
+
+###############################################################################
 # Variables
 ###############################################################################
 
-module_name='kz_common.sh'
-# shellcheck disable=SC2034
-module_desc=$(gettext 'Common module for shell scripts')
-
-ok=0
-error=1
-
-
-# shellcheck disable=SC2034
-options_short='huv'
-# shellcheck disable=SC2034
-options_long='help,usage,version'
-# shellcheck disable=SC2034
-options_usage='[-h|--help] [-u|--usage] [-v|--version]'
-# shellcheck disable=SC2034
-options_help="  -h, --help     $(gettext 'give this help list')
-  -u, --usage    $(gettext 'give a short usage message')
-  -v, --version  $(gettext 'print program version')"
-
 declare -a cmdline_args=()
-logcmd_check=''
-logcmd=''
-maxrc=0
-option_gui=false
+declare logcmd_check=''
+declare logcmd=''
+declare -i maxrc=0
+declare option_gui=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-program_exec=${0/#./$program_path}
-text=''
-title=''
+declare program_exec=${0/#./$PROGRAM_PATH}
+declare text=''
+declare title=''
 
 # Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
-blue=''
-bold=''
-green=''
-normal=''
-red=''
-yellow=''
+declare blue=''
+declare bold=''
+declare green=''
+declare normal=''
+declare red=''
+declare yellow=''
 
 
 ###############################################################################
@@ -110,7 +118,7 @@ function check_user_root {
     # shellcheck disable=SC2310
     if ! check_user_sudo; then
         info "$(gettext 'Already performed by the administrator.')"
-        exit $ok
+        exit $OK
     fi
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
@@ -129,11 +137,11 @@ function check_user_sudo {
     # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then
         # For the "grace" period of sudo, or as a root.
-        return $ok
+        return $OK
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
-        return $ok
+        return $OK
     else
-        return $error
+        return $ERROR
     fi
 }
 
@@ -141,7 +149,7 @@ function check_user_sudo {
 function error {
     if $option_gui; then
         local title
-        title=$(eval_gettext "Error message \$display_name")
+        title=$(eval_gettext "Error message \$DISPLAY_NAME")
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \
@@ -158,7 +166,7 @@ function error {
 function info {
     if $option_gui; then
         local title
-        title=$(eval_gettext "Information \$display_name")
+        title=$(eval_gettext "Information \$DISPLAY_NAME")
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
@@ -178,8 +186,8 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    logcmd="systemd-cat --identifier=${program_name:-$module_name}"
-    logcmd_check="journalctl --all --boot --identifier=$program_name \
+    logcmd="systemd-cat --identifier=${PROGRAM_NAME:-$MODULE_NAME}"
+    logcmd_check="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
@@ -200,9 +208,10 @@ function init_script {
     fi
 
     cmdline_args=("$@")
-    # shellcheck disable=SC2034
-    usage_line=$(eval_gettext "Type '\$display_name --usage' for more \
+    USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
 information.")
+    # shellcheck disable=SC2034
+    readonly USAGE_LINE
 }
 
 
@@ -223,15 +232,15 @@ function process_option {
         case $1 in
             -h|--help)
                 process_option_help
-                exit $ok
+                exit $OK
                 ;;
             -u|--usage)
                 process_option_usage
-                exit $ok
+                exit $OK
                 ;;
             -v|--version)
                 process_option_version
-                exit $ok
+                exit $OK
                 ;;
             --)
                 break
@@ -246,19 +255,19 @@ function process_option {
 
 function process_option_help {
     # shellcheck disable=SC2154
-    info "$help
+    info "$HELP
 
-$(eval_gettext "Type 'man \$display_name' or see the \
-\e]8;;man:\$program_name(1)\e\\\$display_name man page\e]8;;\e\\ for more \
+$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \
+\e]8;;man:\$PROGRAM_NAME(1)\e\\\$DISPLAY_NAME man page\e]8;;\e\\ for more \
 information.")"
 }
 
 
 function process_option_usage {
     # shellcheck disable=SC2154
-    info "$usage
+    info "$USAGE
 
-$(eval_gettext "Type '\$display_name --help' for more information.")"
+$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 }
 
 
@@ -274,14 +283,14 @@ function process_option_version {
     fi
 
     program_year=$(
-        grep    --regexp="$grep_expr" "$program_path/$program_name" |
+        grep    --regexp="$grep_expr" "$PROGRAM_PATH/$PROGRAM_NAME" |
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
         program_year='????'
     fi
 
-    info "$program_name (kz) 365 ($build_id)
+    info "$PROGRAM_NAME (kz) 365 ($build_id)
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
@@ -312,7 +321,7 @@ function set_terminal_attributes {
 function show_log {
     if $option_gui; then
         local temp_log
-        temp_log=$(mktemp -t "$program_name-XXXXXXXXXX.log")
+        temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
         eval "$logcmd_check" > "$temp_log"
         zenity  --text-info                         \
                 --width         1300                \
@@ -330,7 +339,7 @@ function signal {
     local -i lineno=${2:-unknown}
     local function=${3:-unknown}
     local command=${4:-unknown}
-    local -i rc=${5:-$error}
+    local -i rc=${5:-$ERROR}
     local rc_desc=''
     local -i rc_desc_signalno=0
     local status="${red}$rc/error${normal}"
@@ -338,7 +347,7 @@ function signal {
     case $rc in
         0)
             rc_desc='successful termination'
-            status="${green}$rc/ok${normal}"
+            status="${green}$rc/OK${normal}"
             ;;
         1)
             rc_desc='terminated with error'
@@ -391,7 +400,7 @@ $command, code: $rc ($rc_desc)"
     case $signal in
         err)
             error "
-$(eval_gettext "Program \$program_name encountered an error.")"
+$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit)
@@ -402,7 +411,7 @@ $(eval_gettext "Program \$program_name encountered an error.")"
             ;;
         *)
             warning "
-$(eval_gettext "Program \$program_name has been interrupted.")"
+$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;
     esac
@@ -410,22 +419,22 @@ $(eval_gettext "Program \$program_name has been interrupted.")"
 
 
 function signal_exit {
-    case $program_name in
+    case $PROGRAM_NAME in
         kz-install)
-            if [[ $rc -ne $ok ]]; then
+            if [[ $rc -ne $OK ]]; then
                 log "$(gettext "If the package manager gives apt errors, \
 launch a Terminal window and run:")
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
             else
                 # shellcheck disable=SC2154
-                rm --force "$cmdsfile" "$simsfile"
+                rm --force "$CMDS_FILE" "$SIMS_FILE"
             fi
             ;;
         kz-setup)
-            if [[ $rc -eq $ok ]]; then
+            if [[ $rc -eq $OK ]]; then
                 # shellcheck disable=SC2154
-                rm --force "$cmdsfile" "$simsfile"
+                rm --force "$CMDS_FILE" "$SIMS_FILE"
             fi
             ;;
         *)
@@ -447,7 +456,7 @@ $(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 function warning {
     if $option_gui; then
         local title
-        title=$(eval_gettext "Warning \$display_name")
+        title=$(eval_gettext "Warning \$DISPLAY_NAME")
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \

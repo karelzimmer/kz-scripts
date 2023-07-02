@@ -11,24 +11,27 @@
 # Import
 ###############################################################################
 
-program_path=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-source "$program_path"/kz_common.sh 2> >(systemd-cat) || exit 1
+PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat) || exit 1
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
-program_name='kz-restore'
-program_desc=$(gettext 'Restore backup')
-display_name=${program_name/kz-/kz }
+readonly PROGRAM_NAME='kz-restore'
+PROGRAM_DESC=$(gettext 'Restore backup')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-usage="$(eval_gettext "Usage: \$display_name [-d|--dry-run] [-g|--gui] \
+USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] [-g|--gui] \
 [-s|--source DIRECTORY]")
-                  $options_usage"
-help="$(eval_gettext "Usage: \$display_name [OPTION...]")
+                  $OPTIONS_USAGE"
+readonly USAGE
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
-$program_desc.
+$PROGRAM_DESC.
 
 $(gettext 'Options:')
   $(gettext "Mandatory arguments to long options are mandatory for short \
@@ -38,18 +41,24 @@ options too.")
   -g, --gui      $(gettext 'starts in graphics mode')
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')
-$options_help"
-options_short+='dgs:'
-options_long+=',dry-run,gui,source:'
+$OPTIONS_HELP"
+readonly HELP
+readonly X_OPTIONS_SHORT='dgs:'
+readonly X_OPTIONS_LONG=',dry-run,gui,source:'
 
-dry_run_option=''
-medium=''
-option_dry_run=false
-option_gui=false
-option_source=false
-source_argument=''
-source_medium=''
-source=''
+
+###############################################################################
+# Variables
+###############################################################################
+
+declare dry_run_option=''
+declare medium=''
+declare option_dry_run=false
+declare option_gui=false
+declare option_source=false
+declare source_argument=''
+declare source_medium=''
+declare source=''
 
 
 ###############################################################################
@@ -61,15 +70,15 @@ function check_input {
     local parsed=''
 
     parsed=$(
-        getopt  --alternative                       \
-                --options       "$options_short"    \
-                --longoptions   "$options_long"     \
-                --name          "$display_name"     \
+        getopt  --alternative                                       \
+                --options       "$OPTIONS_SHORT$X_OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || rc=$?
-    if [[ $rc -ne $ok ]]; then
-        printf '%s\n' "$usage_line"
-        exit $error
+    if [[ $rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
     fi
     eval set -- "$parsed"
     process_option "$@"
@@ -88,9 +97,9 @@ function check_input {
                 ;;
             -s|--source)
                 if $option_source; then
-                    printf  "$display_name: $1 $2: %s\n$usage_line\n" \
+                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n" \
                             "$(gettext 'too many options')"
-                    exit $error
+                    exit $ERROR
                 fi
                 option_source=true
                 source_argument=$2
@@ -107,9 +116,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$display_name: $*: %s\n$usage_line\n" \
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
                 "$(gettext 'arguments are not allowed')"
-        exit $error
+        exit $ERROR
     fi
 }
 
@@ -117,9 +126,9 @@ function check_input {
 function process_input {
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
-            printf  "$display_name: $source_argument: %s\n$usage_line\n" \
+            printf  "$DISPLAY_NAME: $source_argument: %s\n$USAGE_LINE\n" \
                     "$(gettext 'directory does not exist')"
-            exit $error
+            exit $ERROR
         fi
         source=$source_argument/backup-$HOSTNAME-$USER
         source_medium=$source_argument
@@ -134,7 +143,7 @@ Connect a USB medium.")"
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
                 error "$text"
-            exit $error
+            exit $ERROR
             fi
         fi
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
@@ -148,7 +157,7 @@ Disconnect media via Files.")"
             wait_for_enter
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                error "$text"
-                exit $error
+                exit $ERROR
             fi
         fi
         source=$medium/backup-$HOSTNAME-$USER
@@ -157,7 +166,7 @@ Disconnect media via Files.")"
             error "$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
-            exit $error
+            exit $ERROR
         fi
     fi
 
@@ -256,10 +265,10 @@ function term_script {
 
     if $option_dry_run; then
         error "$(gettext 'The backup was NOT restored (DRY RUN).')"
-        exit $error
+        exit $ERROR
     fi
 
-    if [[ $maxrc -gt $ok ]]; then
+    if [[ $maxrc -gt $OK ]]; then
         error "$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable,
@@ -268,7 +277,7 @@ or is there not enough space on \$target.
 The maximum exit value is \$maxrc.
 Check the log in the next screen.")"
         show_log
-        exit $error
+        exit $ERROR
     fi
 
     if [[ $source_medium == /media/* ]]; then
@@ -277,7 +286,7 @@ Check the log in the next screen.")"
         info "
 ${green}$(gettext 'The backup has been restored.')${normal}"
     fi
-    exit $ok
+    exit $OK
 }
 
 
@@ -315,7 +324,7 @@ function term_script_unmount {
         udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
     fi
-    if [[ $rc -eq $ok ]]; then
+    if [[ $rc -eq $OK ]]; then
         info "
 ${green}$(gettext 'The backup has been restored.')
 

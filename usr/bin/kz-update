@@ -46,7 +46,7 @@ command = ''
 ###############################################################################
 
 def perform_repair():
-    print('{}{}{} ({})'.format(kz_common.bold, _('Repair'), kz_common.normal,
+    print('{}{}{} ({})'.format(kz_common.BOLD, _('Repair'), kz_common.NORMAL,
                                PROGRAM_NAME))
     command = 'dpkg --configure --pending'
     perform_command(command)
@@ -59,7 +59,7 @@ def perform_repair():
 
 
 def perform_update():
-    print('{}{}{} ({})'.format(kz_common.bold, _('Update'), kz_common.normal,
+    print('{}{}{} ({})'.format(kz_common.BOLD, _('Update'), kz_common.NORMAL,
                                PROGRAM_NAME))
     command = 'apt-get update'
     perform_command(command)
@@ -94,7 +94,7 @@ def snap_refresh():
 
 
 def perform_cleanup():
-    print('{}{}{} ({})'.format(kz_common.bold, _('Cleanup'), kz_common.normal,
+    print('{}{}{} ({})'.format(kz_common.BOLD, _('Cleanup'), kz_common.NORMAL,
                                PROGRAM_NAME))
     command = 'apt-get autoclean --yes'
     perform_command(command)
