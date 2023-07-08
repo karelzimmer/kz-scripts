@@ -3,6 +3,8 @@
 ###############################################################################
 # Build package kz.
 #
+# This script builds the package kz and the website https://karelzimmer.nl.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
 ###############################################################################
@@ -78,6 +80,7 @@ readonly -A DEB_TARGETS=(
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -116,6 +119,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     if groups "$USER" | grep --quiet --regexp='sudo'; then
         sudo true
@@ -138,6 +142,7 @@ function process_input {
 }
 
 
+# This function check that the repos are in the desired state.
 function check_repos {
     info "$(gettext 'Check that all repos are on branch main...')"
     for repo in $deb_repo $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
@@ -157,6 +162,7 @@ function check_repos {
 }
 
 
+# This function check the scripts.
 function check_scripts {
     local -i rc=0
 
@@ -171,6 +177,7 @@ $(gettext 'Fix all the messages above.')"
 }
 
 
+# This function builds the website.
 function build_uploads {
     local file=''
     local pdfdir=''
@@ -262,6 +269,8 @@ function build_uploads {
 }
 
 
+# This function generates the gettext binary Machine Object (.mo) file from the
+# readable Portable Object (.po) file.
 function generate_mo {
     local lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
 
@@ -270,6 +279,7 @@ function generate_mo {
 }
 
 
+# This function builds package kz.
 function build_deb {
     local build_id=''
     local file=''
@@ -318,6 +328,7 @@ function build_deb {
 }
 
 
+# This function installs package kz.
 function install_package {
     info "$(gettext 'Install package...')"
     sudo    DEBIAN_FRONTEND=noninteractive      \
@@ -328,6 +339,7 @@ function install_package {
 }
 
 
+# This function performs an installation verification procedure (IVP).
 function run_ivp {
     local -i rc=0
 
@@ -342,6 +354,7 @@ $(gettext 'Fix all the messages above.')"
 }
 
 
+# This function checks the website for missing or not used files.
 function check_website {
     local -i rc=0
 
@@ -356,13 +369,14 @@ $(gettext 'Fix all the messages above.')"
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     exit $OK
 }
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

@@ -3,6 +3,8 @@
 ###############################################################################
 # Install kz package.
 #
+# This script downloads and installs package kz.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2016-2023.
 ###############################################################################
@@ -67,6 +69,7 @@ function init_script {
 }
 
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -120,6 +123,7 @@ function check_input {
 }
 
 
+# This function shows the available help.
 function process_option_help {
     printf '%b\n' "$HELP
 
@@ -129,6 +133,7 @@ information.")"
 }
 
 
+# This function shows the available options.
 function process_option_usage {
     printf '%s\n' "$USAGE
 
@@ -136,6 +141,7 @@ $(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 }
 
 
+# This function displays version, author, and license information.
 function process_option_version {
     local build_id='????-??-?? ??:??'
     local grep_expr='# <https://creativecommons.org'
@@ -165,6 +171,7 @@ Universal
 }
 
 
+# This function processes the input.
 function process_input {
     if groups "$USER" | grep --quiet --regexp='sudo'; then
         sudo true
@@ -176,6 +183,7 @@ function process_input {
 }
 
 
+# This function installs package kz.
 function install_package {
     local site_deb='https://karelzimmer.nl/assets/kz/kz_365_all.deb'
     local temp_deb=''
@@ -196,6 +204,7 @@ function install_package {
 }
 
 
+# This function checks for a running Debian package manager or snaps refresh.
 function check_dpkgd_snapd {
     local -i dpkg_wait=10
     local text
@@ -225,6 +234,7 @@ function check_dpkgd_snapd {
 }
 
 
+# This function performs a cleanup.
 function cleanup {
     # Do not delete kz and kz.1 due to scripts and manuals with the same name.
     rm --force kz.{2..99}
@@ -233,6 +243,7 @@ function cleanup {
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     local title
     title=$(gettext 'Finished')
@@ -260,7 +271,7 @@ Type 'exit' to close this window.")
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

@@ -3,6 +3,8 @@
 ###############################################################################
 # Install apps.
 #
+# This script installs apps and changes system settings.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
@@ -86,6 +88,7 @@ declare option_simulate=false
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i app_arg_num=0
     local -i rc=0
@@ -158,6 +161,7 @@ function check_input {
         esac
     done
 
+    # Check arguments.
     while [[ -n "$*" ]]; do
         argument_app=true
         app_arguments[app_arg_num]=$1
@@ -167,6 +171,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     local input_file=''
 
@@ -188,10 +193,8 @@ function process_input {
     fi
 
     if $argument_app; then
-        # Generate cmds-file from input-file filtering on HOST and APPs.
         process_argument_app
     else
-        # Generate cmds-file from input-file filtering on HOST (dafault).
         process_input_file
     fi
 
@@ -232,6 +235,7 @@ function process_input {
 }
 
 
+# This function processes argument APP.
 function process_argument_app {
     local app_not_found=false
     local app_argument=''
@@ -247,6 +251,8 @@ function process_argument_app {
 }
 
 
+# This function generates the temporary commands file from the input file,
+# filtering on HOST and APPs.
 function process_argument_app_input_file {
     local app_host_match=false
     local app_match=false
@@ -256,10 +262,8 @@ function process_argument_app_input_file {
 
     while read -r input_record; do
         case $input_record in
-            '')
-                continue
-                ;;
             '#'*' APP '*)
+                # App record.
                 app_match=false
                 app_record=''
                 app_host_match=false
@@ -269,6 +273,7 @@ function process_argument_app_input_file {
                 fi
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
+                # Host record.
                 app_host_match=false
                 if $app_match; then
                     app_host_match=true
@@ -281,6 +286,7 @@ function process_argument_app_input_file {
                 fi
                 ;;
             *)
+                # Other record (comment or command).
                 if $app_match && $app_host_match; then
                     printf '%s\n' "$input_record" >> "$CMDS_FILE"
                 fi
@@ -296,6 +302,8 @@ function process_argument_app_input_file {
 }
 
 
+# This function generates the temporary commands file from the input file,
+# filtering on HOST.
 function process_input_file {
     local app_record=''
     local app_host_match=false
@@ -304,10 +312,12 @@ function process_input_file {
     while read -r input_record; do
         case $input_record in
             '#'*' APP '*)
+                # App record.
                 app_record=$input_record
                 app_host_match=false
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
+                # Host record.
                 app_host_match=true
                 {
                     printf '%s\n' "$app_record"
@@ -316,6 +326,7 @@ function process_input_file {
                 app_record=''
                 ;;
             *)
+                # Other record (emtpy, comment, or command).
                 if $app_host_match; then
                     printf '%s\n' "$input_record" >> "$CMDS_FILE"
                 fi
@@ -325,6 +336,7 @@ function process_input_file {
 }
 
 
+# This function shows the available APPs from the input file.
 function process_option_apps {
     text="$(gettext 'The following APPs are available:
 
@@ -359,11 +371,13 @@ ${blue}$DISPLAY_NAME --cat APP...${normal}"
 }
 
 
+# This function displays the contents of the temporary commands file.
 function process_option_cat {
     less --quit-if-one-screen "$CMDS_FILE"
 }
 
 
+# This function displays a list of available input files.
 function process_option_list {
     text="$(gettext 'The following FILEs are available:
 
@@ -393,6 +407,7 @@ $(eval_gettext "To simulate the processing of FILE execute: \
 }
 
 
+# This function reads commands from the temporary commands file.
 function process_cmds_file {
     local app_name=''
     local operation
@@ -420,9 +435,11 @@ function process_cmds_file {
     while read -r cmds_record; do
         case $cmds_record in
             '')
+                # Empty line.
                 continue
                 ;;
             '#'*' APP '*)
+                # App record.
                 app_name="$(
                     printf '%s\n' "$cmds_record"             |
                     tr --squeeze-repeats '[:space:]'    |
@@ -435,12 +452,15 @@ function process_cmds_file {
                 cmd_seq_num=0
                 ;;
             '#'*' HOST '*)
+                # Host record.
                 continue
                 ;;
             '#'*)
+                # Comment record.
                 continue
                 ;;
             *)
+                # Command record.
                 process_command_record "$cmds_record"
                 ;;
         esac
@@ -448,6 +468,8 @@ function process_cmds_file {
 }
 
 
+# This function prepares or simulates a command from the temporary commands
+# file.
 function process_command_record {
     local cmd=${1:-unknown}
     local app_name_line=''
@@ -489,6 +511,7 @@ function process_command_record {
 }
 
 
+# This function executes a command from the temporary commands file.
 function execute_command {
     local cmd=${1:-unknown}
     local -i rc=0
@@ -514,6 +537,7 @@ function execute_command {
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     local operation
     operation=$(gettext 'install')
@@ -544,7 +568,7 @@ ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

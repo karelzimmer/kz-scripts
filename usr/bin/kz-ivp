@@ -3,6 +3,8 @@
 ###############################################################################
 # Execute IVP.
 #
+# This script performs an Installation Verification Procedure (IVP).
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
@@ -45,6 +47,7 @@ readonly HELP
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -83,6 +86,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     local dir=''
     local scriptname=''
@@ -108,6 +112,7 @@ function process_input {
 }
 
 
+# This function checks the operation of the script and associated files.
 function check_script {
     local gui='-''-''G''U''I'
     local root=' kz_common.''c''h''e''c''k''_''u''s''e''r''_''r''o''o''t'
@@ -160,13 +165,14 @@ found.")"
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     exit $maxrc
 }
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

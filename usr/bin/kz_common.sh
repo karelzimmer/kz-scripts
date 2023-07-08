@@ -2,6 +2,8 @@
 ###############################################################################
 # Common module for shell scripts.
 #
+# This module provides access to general variables and functions.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
@@ -69,6 +71,7 @@ declare yellow=''
 # Functions
 ###############################################################################
 
+# This function checks for a running Debian package manager or snaps refresh.
 function check_dpkgd_snapd {
     local -i dpkg_wait=10
     local text
@@ -98,6 +101,7 @@ function check_dpkgd_snapd {
 }
 
 
+# This function checks if we are running on battery.
 function check_on_ac_power {
     local -i on_battery=0
 
@@ -111,7 +115,7 @@ It is recommended to connect the computer to the wall socket.')"
     fi
 }
 
-
+# This function checks if the user is root.
 function check_user_root {
     local -i rc=0
 
@@ -133,6 +137,7 @@ function check_user_root {
 }
 
 
+# This function checks if the user is allowed to use sudo.
 function check_user_sudo {
     # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then
@@ -146,6 +151,7 @@ function check_user_sudo {
 }
 
 
+# This function returns an error.
 function error {
     if $option_gui; then
         local title
@@ -163,6 +169,7 @@ function error {
 }
 
 
+# This function returns an informational message.
 function info {
     if $option_gui; then
         local title
@@ -179,6 +186,7 @@ function info {
 }
 
 
+# This function performs initial actions.
 function init_script {
     # Script-hardening.
     set -o errexit
@@ -215,11 +223,13 @@ information.")
 }
 
 
+# This function records a message.
 function log {
     printf '%b\n' "$1" |& $logcmd
 }
 
 
+# This function determines the highest return code.
 function maxrc {
     if [[ $rc -gt $maxrc ]]; then
         maxrc=$rc
@@ -227,6 +237,7 @@ function maxrc {
 }
 
 
+# This function covers the general options.
 function process_option {
     while true; do
         case $1 in
@@ -253,6 +264,7 @@ function process_option {
 }
 
 
+# This function shows the available help.
 function process_option_help {
     # shellcheck disable=SC2154
     info "$HELP
@@ -263,6 +275,7 @@ information.")"
 }
 
 
+# This function shows the available options.
 function process_option_usage {
     # shellcheck disable=SC2154
     info "$USAGE
@@ -271,6 +284,7 @@ $(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 }
 
 
+# This function displays version, author, and license information.
 function process_option_version {
     local build_id='????-??-?? ??:??'
     local grep_expr='# <https://creativecommons.org'
@@ -298,6 +312,7 @@ Universal
 }
 
 
+# This function resets the terminal_attributes for the GUI.
 function reset_terminal_attributes {
     blue=''
     bold=''
@@ -308,6 +323,7 @@ function reset_terminal_attributes {
 }
 
 
+# This function sets the terminal_attributes for the CLI.
 function set_terminal_attributes {
     bold=$(tput bold)
     blue=${bold}$(tput setaf 4)
@@ -318,6 +334,7 @@ function set_terminal_attributes {
 }
 
 
+# This function shows log messages.
 function show_log {
     if $option_gui; then
         local temp_log
@@ -334,6 +351,9 @@ function show_log {
         gnome-terminal --window -- bash -c "$logcmd_check"
     fi
 }
+
+
+# This function processes the signals.
 function signal {
     local signal=${1:-unknown}
     local -i lineno=${2:-unknown}
@@ -418,6 +438,7 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
 }
 
 
+# This function controls the termination of the script.
 function signal_exit {
     case $PROGRAM_NAME in
         kz-install)
@@ -444,6 +465,7 @@ launch a Terminal window and run:")
 }
 
 
+# This function waits for the user to press Enter.
 function wait_for_enter {
     if $option_gui; then
         return
@@ -453,6 +475,7 @@ $(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 }
 
 
+# This function returns a warning.
 function warning {
     if $option_gui; then
         local title

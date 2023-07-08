@@ -3,6 +3,8 @@
 ###############################################################################
 # Make backup.
 #
+# This script makes a backup copy of the Home folder.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2007-2023.
 ###############################################################################
@@ -65,6 +67,7 @@ declare target=''
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -123,6 +126,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     if $option_target; then
         if ! [[ -d $target_argument ]]; then
@@ -190,6 +194,7 @@ Disconnect media via Files.")"
 }
 
 
+# This function backs up user settings.
 function backup_settings {
     migrate_settings_previously_backuped
     backup_settings_desktop_background
@@ -199,6 +204,7 @@ function backup_settings {
 }
 
 
+# This function migrates backups of old user settings.
 function migrate_settings_previously_backuped {
     move_file "$HOME"/kz-data/Achtergrond           "$HOME"/Afbeeldingen/
     move_file "$HOME"/kz-data/Apps                  "$HOME"/Documenten/
@@ -221,11 +227,13 @@ function migrate_settings_previously_backuped {
 }
 
 
+# This function moves a file from one location to another.
 function move_file {
     mv "$1" "$2" 2> /dev/null || true
 }
 
 
+# This function copies the desktop background.
 function backup_settings_desktop_background {
     local input_file=''
     local output_file
@@ -241,6 +249,7 @@ function backup_settings_desktop_background {
 }
 
 
+# This function saves the favorite apps.
 function backup_settings_favorite_apps {
     local output_file
     output_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
@@ -251,6 +260,7 @@ function backup_settings_favorite_apps {
 }
 
 
+# This function creates a list of installed apps.
 function backup_settings_installed_apps {
     local output_file
     output_file=$(xdg-user-dir DOCUMENTS)/Apps
@@ -295,6 +305,7 @@ installation of a package, with
 }
 
 
+# This function copies the user photo.
 function backup_settings_user_photo {
     local input_file=/var/lib/AccountsService/icons/"$USER"
     local output_file
@@ -304,6 +315,7 @@ function backup_settings_user_photo {
 }
 
 
+# This function creates the backup.
 function create_backup {
     local exclude=''
     local -i rc=0
@@ -401,6 +413,7 @@ $text..."
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     if $option_dry_run; then
         error "$(gettext 'The backup has NOT been created (DRY RUN).')"
@@ -429,6 +442,7 @@ ${green}$(gettext 'The backup has been made.')${normal}"
 }
 
 
+# This function tries to unmount the USB device.
 function term_script_unmount {
     local dev=''
     local -i rc=0
@@ -478,7 +492,7 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

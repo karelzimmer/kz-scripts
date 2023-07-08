@@ -3,6 +3,9 @@
 ###############################################################################
 # Checking scripts.
 #
+# This script performs checks that check scripts content and with shellcheck
+# and pycodestyle.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2015-2023.
 ###############################################################################
@@ -45,6 +48,7 @@ readonly HELP
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -83,6 +87,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     local script=''
     local scriptdir=''
@@ -137,6 +142,7 @@ function process_input {
 }
 
 
+# This function checks Shell and Python script code.
 function check_code {
     local bash_script='#!''/usr/bin/env bash'
     local python_script='#!''/usr/bin/env python3'
@@ -158,6 +164,7 @@ $(gettext "    Unknown script. Function check_code cannot check script code.")"
 }
 
 
+# This function checks Python script code.
 function check_pycodestyle {
     local -i rc=0
 
@@ -168,6 +175,7 @@ function check_pycodestyle {
 }
 
 
+# This function checks on record length.
 function check_record_length {
     local -i max_line_length=79
     local -i max_line_length_found=0
@@ -190,6 +198,7 @@ $(eval_gettext "    A line is longer than \$max_line_length \
 }
 
 
+# This function checks Shell script code.
 function check_shellcheck {
     local -i rc=0
 
@@ -209,6 +218,7 @@ function check_shellcheck {
 }
 
 
+# This function checks the existence of tags.
 function check_tags {
     local bug='B''U''G'
     local fixme='F''I''X''M''E'
@@ -240,6 +250,7 @@ $(
 }
 
 
+# This function checks the existence of trailing spaces.
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
         error "
@@ -255,13 +266,14 @@ $(
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     exit $maxrc
 }
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

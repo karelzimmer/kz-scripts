@@ -3,6 +3,8 @@
 ###############################################################################
 # Change GUI.
 #
+# This script helps to change the graphical user environment (GUI).
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2015-2023.
 ###############################################################################
@@ -82,6 +84,7 @@ declare option_resetfavs=false
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -181,6 +184,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     if $option_addfavaft; then
         process_option_addfavaft
@@ -202,6 +206,7 @@ function process_input {
 }
 
 
+# This function adds a favorite to the end of the dash/dock.
 function process_option_addfavaft  {
     local favorite_apps=''
 
@@ -218,6 +223,7 @@ function process_option_addfavaft  {
 }
 
 
+# This function adds a favorite to the beginning of the dash/dock.
 function process_option_addfavbef  {
     local favorite_apps=''
 
@@ -234,6 +240,7 @@ function process_option_addfavbef  {
 }
 
 
+# This function removes a favorite from the dash/dock.
 function process_option_delfav  {
     local favorite_apps=''
 
@@ -251,17 +258,20 @@ function process_option_delfav  {
 }
 
 
+# This feature lists the favorite apps along with the app folders.
 function process_option_list  {
     gsettings get org.gnome.shell favorite-apps
     gsettings get org.gnome.desktop.app-folders folder-children
 }
 
 
+# This function resets the favorites to the factory settings.
 function process_option_resetfavs  {
     gsettings reset org.gnome.shell favorite-apps
 }
 
 
+# This function adds an application folder.
 function process_option_addappfolder  {
     local app_folders=''
     local schema=''
@@ -287,6 +297,7 @@ function process_option_addappfolder  {
 }
 
 
+# This function deletes an application folder.
 function process_option_delappfolder  {
     local app_folders=''
     local schema=''
@@ -308,6 +319,7 @@ function process_option_delappfolder  {
 }
 
 
+# This function records a change made through the GUI.
 function capture_gui_changes {
     config_a=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
     save_configuration_database A "$config_a"
@@ -319,6 +331,7 @@ function capture_gui_changes {
 }
 
 
+# This function stores the GUI configuration database.
 function save_configuration_database {
     # shellcheck disable=SC2034
     local fase=${1:-unknown}
@@ -334,6 +347,7 @@ function save_configuration_database {
 }
 
 
+# This function reports the changes to the GUI configuration database.
 function report_database_changes {
     local output_file1=${1:-unknown}
     local output_file2=${2:-unknown}
@@ -349,13 +363,14 @@ $(eval_gettext "When CHANGEs execute: \${blue}gsettings set CHANGE\${normal}")"
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     exit $OK
 }
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

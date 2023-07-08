@@ -3,6 +3,8 @@
 ###############################################################################
 # Restore backup.
 #
+# This script restores a backup copy of the Home folder.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2007-2023.
 ###############################################################################
@@ -65,6 +67,7 @@ declare source=''
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -123,6 +126,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
@@ -193,6 +197,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
 }
 
 
+# This function restores the backup.
 function restore_backup {
     local -i rc=0
     local target=$HOME
@@ -231,12 +236,14 @@ function restore_backup {
 }
 
 
+# This function restores user settings.
 function restore_settings {
     restore_settings_desktop_background
     restore_settings_favorite_apps
 }
 
 
+# This function restores the desktop background.
 function restore_settings_desktop_background {
     local input_file
     input_file=$(xdg-user-dir PICTURES)/$(gettext 'Background')
@@ -249,6 +256,7 @@ function restore_settings_desktop_background {
 }
 
 
+# This function restores the favorite apps.
 function restore_settings_favorite_apps {
     local input_file
     input_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
@@ -259,6 +267,7 @@ function restore_settings_favorite_apps {
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     local dev=''
     local -i rc=0
@@ -290,6 +299,7 @@ ${green}$(gettext 'The backup has been restored.')${normal}"
 }
 
 
+# This function tries to unmount the USB device.
 function term_script_unmount {
     local dev=''
     local -i rc=0
@@ -339,7 +349,7 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

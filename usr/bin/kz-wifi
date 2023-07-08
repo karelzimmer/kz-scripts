@@ -3,6 +3,8 @@
 ###############################################################################
 # Show WiFi information.
 #
+# This script shows WiFi details.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2022-2023.
 ###############################################################################
@@ -50,6 +52,7 @@ declare option_gui=false
 # Functions
 ###############################################################################
 
+# This function handles the options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -93,6 +96,7 @@ function check_input {
 }
 
 
+# This function processes the input.
 function process_input {
     local nmcli_output=''
     local -i rc=''
@@ -124,13 +128,14 @@ $text"
 }
 
 
+# This function controls the termination of the script.
 function term_script {
     exit $OK
 }
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 function main {

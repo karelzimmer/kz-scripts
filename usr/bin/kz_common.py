@@ -1,12 +1,14 @@
 """
 Common module for Python scripts.
 
-This module gives access to general functions.
+This module provides general variables and functions.
 """
 ###############################################################################
 # Common module for Python scripts.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# This module provides access to general variables and functions.
+#
+# # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
 ###############################################################################
 
@@ -52,7 +54,7 @@ NORMAL = '\033[0m'
 
 def check_dpkgd_snapd():
     """
-    This function checks for a Debian package manager already running.
+    This function checks for a running Debian package manager or snaps refresh.
     """
     dpkg_wait = 10
 
@@ -99,7 +101,7 @@ def check_dpkgd_snapd():
 
 def check_on_ac_power(PROGRAM_NAME):
     """
-    This function monitors the power supply.
+    This function checks if we are running on battery.
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
@@ -241,7 +243,7 @@ Universal\n'
 
 
 ###############################################################################
-# Main
+# Main Script
 ###############################################################################
 
 if __name__ == '__main__':

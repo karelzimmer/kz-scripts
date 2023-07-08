@@ -604,7 +604,7 @@ msgstr ""
 "                 verwerk BESTAND"
 
 msgid "show list of standard files"
-msgstr "toon lijst van standaard bestanden"
+msgstr "toon lijst van standaardbestanden"
 
 msgid "delete apps"
 msgstr "verwijder apps"
