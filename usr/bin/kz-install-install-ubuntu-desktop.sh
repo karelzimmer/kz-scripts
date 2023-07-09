@@ -2,6 +2,9 @@
 ###############################################################################
 # Install apps file for Ubuntu desktop.
 #
+# This script file is used by script kz-install.
+# Use 'man kz-install' for more information.
+#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
