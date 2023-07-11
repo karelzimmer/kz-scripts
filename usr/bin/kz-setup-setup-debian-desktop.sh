@@ -90,6 +90,7 @@ xdg-mime default code_code.desktop application/xml              # PolicyKit acti
 xdg-mime default code_code.desktop text/html                    # Web page
 xdg-mime default code_code.desktop text/markdown                # Markdown document
 xdg-mime default code_code.desktop text/troff                   # Man page
+xdg-mime default code_code.desktop text/x-python                # Python-script
 
 #  APP webmin
 # USER karel@pc07
