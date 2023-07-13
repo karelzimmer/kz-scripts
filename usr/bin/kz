@@ -57,7 +57,7 @@ declare exec_PROGRAM_NAME=''
 # Functions
 ###############################################################################
 
-# This function handles the options and arguments.
+# This function handles the script options and argumentsand arguments.
 function check_input {
     # No getopt here like in all other scripts; any specified options in
     # ARGUMENT, with kz COMMAND ARGUMENT, are for COMMAND, not for kz.
@@ -124,7 +124,7 @@ $(gettext 'To execute a COMMAND:') ${blue}$DISPLAY_NAME COMMAND${normal}"
 }
 
 
-# This function processes the input command.
+# This function processes the script options and arguments.
 function process_input {
     shift
     exec "$PROGRAM_PATH/kz-$exec_PROGRAM_NAME" "$@"

@@ -48,7 +48,7 @@ readonly HELP
 # Functions
 ###############################################################################
 
-# This function handles the options and arguments.
+# This function handles the script options and argumentsand arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -87,7 +87,7 @@ function check_input {
 }
 
 
-# This function processes the input and starts checking of script files.
+# This function processes the script options and arguments.
 function process_input {
     local script=''
     local scriptdir=''

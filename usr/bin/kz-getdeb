@@ -69,7 +69,7 @@ function init_script {
 }
 
 
-# This function handles the options and arguments.
+# This function handles the script options and argumentsand arguments.
 function check_input {
     local -i rc=0
     local parsed=''
@@ -171,7 +171,7 @@ Universal
 }
 
 
-# This function processes the input and installs package kz.
+# This function processes the script options and arguments.
 function process_input {
     if groups "$USER" | grep --quiet --regexp='sudo'; then
         sudo true

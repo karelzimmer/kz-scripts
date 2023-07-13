@@ -88,7 +88,7 @@ declare option_simulate=false
 # Functions
 ###############################################################################
 
-# This function handles the options and arguments.
+# This function handles the script options and argumentsand arguments.
 function check_input {
     local -i app_arg_num=0
     local -i rc=0
@@ -171,7 +171,7 @@ function check_input {
 }
 
 
-# This function processes the input and starts the installation.
+# This function processes the script options and arguments.
 function process_input {
     local input_file=''
 
@@ -268,6 +268,7 @@ function process_argument_app_input_file {
                 app_record=''
                 app_host_match=false
                 if [[ $input_record == *' '$app_argument ]]; then
+                    # Match by APP name.
                     app_match=true
                     app_record=$input_record
                 fi
@@ -276,6 +277,7 @@ function process_argument_app_input_file {
                 # Host record.
                 app_host_match=false
                 if $app_match; then
+                    # Match by APP name and HOST name.
                     app_host_match=true
                     no_app_host_match=false
                     {
@@ -306,7 +308,7 @@ function process_argument_app_input_file {
 # filtering on HOST.
 function process_input_file {
     local app_record=''
-    local app_host_match=false
+    local host_match=false
     local input_record=''
 
     while read -r input_record; do
@@ -314,11 +316,12 @@ function process_input_file {
             '#'*' APP '*)
                 # App record.
                 app_record=$input_record
-                app_host_match=false
+                host_match=false
                 ;;
             '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
                 # Host record.
-                app_host_match=true
+                # Match by HOST name.
+                host_match=true
                 {
                     printf '%s\n' "$app_record"
                     printf '%s\n' "$input_record"
@@ -327,7 +330,7 @@ function process_input_file {
                 ;;
             *)
                 # Other record (emtpy, comment, or command).
-                if $app_host_match; then
+                if $host_match; then
                     printf '%s\n' "$input_record" >> "$CMDS_FILE"
                 fi
                 ;;
