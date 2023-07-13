@@ -196,7 +196,7 @@ function process_menu1_tui {
 
         # Show menu.
         clear -x
-        info "$MENU1_HEAD
+        msg_info "$MENU1_HEAD
 "
         for menu1_action in "${!MENU1_ACTIONS[@]}"; do
             printf  '%2s. %-25.25s - %s\n'              \
@@ -204,7 +204,7 @@ function process_menu1_tui {
                     "${MENU1_ACTIONS[$menu1_action]}"   \
                     "${MENU1_COMMANDS[$menu1_action]}"
         done
-        info ''
+        msg_info ''
 
         while true; do
             read -rp "$(eval_gettext "Run number [1-\$MENU1_LINES]: ")"
@@ -249,7 +249,7 @@ function process_menu1_choice {
             exit $OK
             ;;
         *)
-            error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+            msg_error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
             exit $ERROR
             ;;
     esac
@@ -280,7 +280,7 @@ Roughly boils down to:
 2. Create a bootable Live USB stick or DVD.
 3. Boot the computer from this USB stick or DVD.
 4. Install Linux.")"
-    info "$text"
+    msg_info "$text"
     wait_for_enter
 }
 
@@ -363,7 +363,7 @@ function process_menu2_tui {
 
         # Show menu.
         clear -x
-        info "$MENU2_HEAD
+        msg_info "$MENU2_HEAD
 "
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
             printf  '%2s. %-25.25s - %s\n'              \
@@ -371,7 +371,7 @@ function process_menu2_tui {
                     "${MENU2_ACTIONS[$menu2_action]}"   \
                     "${MENU2_COMMANDS[$menu2_action]}"
         done
-        info ''
+        msg_info ''
 
         while true; do
             read -rp "$(eval_gettext "Run number [1-\$MENU2_LINES]: ")"
@@ -408,7 +408,7 @@ function process_menu2_choice {
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         exit_menu2=true
     else
-        error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+        msg_error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
         exit $ERROR
     fi
 }
@@ -487,7 +487,7 @@ $prompt"
             execute_command=false
         fi
     else
-        info "$text"
+        msg_info "$text"
         while true; do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
@@ -557,7 +557,7 @@ $(gettext "The following steps to add extra users are optional.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
-        info "$text"
+        msg_info "$text"
         wait_for_enter
     elif [[ $title = $(gettext 'Set user photo') ]]; then
         if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
@@ -572,12 +572,12 @@ on Users.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
-            info "$text"
+            msg_info "$text"
         else
             text="$(gettext 'Set user photo'):
 
 $(gettext 'No user photo was found when backing up.')"
-            info "$text"
+            msg_info "$text"
         fi
         wait_for_enter
     fi
@@ -602,7 +602,7 @@ function show_commands_after_execution {
         text+="
 $row. $action ($command)"
     done
-    info "$text"
+    msg_info "$text"
     wait_for_enter
 }
 

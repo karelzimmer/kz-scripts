@@ -101,7 +101,7 @@ function check_input {
 
 # This function processes the list option and displays all available commands.
 function process_option_list {
-    info "$(gettext 'The following COMMANDs are available:
+    msg_info "$(gettext 'The following COMMANDs are available:
 
      COMMAND')"
     find    "$PROGRAM_PATH"/kz-*    \
@@ -119,7 +119,7 @@ function process_option_list {
             --number-separator='] ' \
             --body-numbering=a      |
     sed     --expression='s/^/[/'
-    info "
+    msg_info "
 $(gettext 'To execute a COMMAND:') ${blue}$DISPLAY_NAME COMMAND${normal}"
 }
 

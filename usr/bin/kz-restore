@@ -142,11 +142,11 @@ function process_input {
         text="$(eval_gettext "No USB medium found.
 
 Connect a USB medium.")"
-            warning "$text"
+            msg_warning "$text"
             wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                 error "$text"
+                 msg_error "$text"
             exit $ERROR
             fi
         fi
@@ -157,17 +157,17 @@ Now connected:
 \$medium
 
 Disconnect media via Files.")"
-            warning "$text"
+            msg_warning "$text"
             wait_for_enter
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                error "$text"
+                msg_error "$text"
                 exit $ERROR
             fi
         fi
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
-            error "$(eval_gettext "No backup found on connected USB medium.
+            msg_error "$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
             exit $ERROR
@@ -190,7 +190,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
                     --title     "$title"    \
                     --text      "$text"     2> >($logcmd)
         else
-            info "$text..."
+            msg_info "$text..."
             restore_settings
         fi
     fi
@@ -221,7 +221,7 @@ function restore_backup {
                 --title     "$title"    \
                 --text      "$text"     2> >($logcmd) || rc=$?
     else
-        info "$text..."
+        msg_info "$text..."
         rsync   --archive               \
                 --verbose               \
                 --human-readable        \
@@ -273,12 +273,12 @@ function term_script {
     local -i rc=0
 
     if $option_dry_run; then
-        error "$(gettext 'The backup was NOT restored (DRY RUN).')"
+        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $ERROR
     fi
 
     if [[ $maxrc -gt $OK ]]; then
-        error "$(eval_gettext "Restore ended with warnings or errors.
+        msg_error "$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable,
 or were any files added or removed while restoring the backup,
@@ -292,7 +292,7 @@ Check the log in the next screen.")"
     if [[ $source_medium == /media/* ]]; then
         term_script_unmount
     else
-        info "
+        msg_info "
 ${green}$(gettext 'The backup has been restored.')${normal}"
     fi
     exit $OK
@@ -329,18 +329,18 @@ function term_script_unmount {
                 --text      "$text"                                         \
                 2> >($logcmd) || rc=$?
     else
-        info "$text..."
+        msg_info "$text..."
         umount "$source_medium"                     |& $logcmd || rc+=$?
         udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
     fi
     if [[ $rc -eq $OK ]]; then
-        info "
+        msg_info "
 ${green}$(gettext 'The backup has been restored.')
 
 $(gettext 'The USB medium can be removed.')${normal}"
     else
-            warning "
+            msg_warning "
 ${green}$(gettext 'The backup has been restored.')${yellow}
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"

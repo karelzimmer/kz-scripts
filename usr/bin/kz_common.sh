@@ -107,7 +107,7 @@ function check_on_ac_power {
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        warning "
+        msg_warning "
 $(gettext 'The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.')"
@@ -121,7 +121,7 @@ function check_user_root {
 
     # shellcheck disable=SC2310
     if ! check_user_sudo; then
-        info "$(gettext 'Already performed by the administrator.')"
+        msg_info "$(gettext 'Already performed by the administrator.')"
         exit $OK
     fi
     if [[ $UID -ne 0 ]]; then
@@ -147,41 +147,6 @@ function check_user_sudo {
         return $OK
     else
         return $ERROR
-    fi
-}
-
-
-# This function returns an error.
-function error {
-    if $option_gui; then
-        local title
-        title=$(eval_gettext "Error message \$DISPLAY_NAME")
-        zenity  --error                 \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
-        log "$@"
-    else
-        printf "${red}%b\n${normal}" "$@" >&2
-    fi
-}
-
-
-# This function returns an informational message.
-function info {
-    if $option_gui; then
-        local title
-        title=$(eval_gettext "Information \$DISPLAY_NAME")
-        zenity  --info                  \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
-    else
-        printf '%b\n' "$@"
     fi
 }
 
@@ -237,6 +202,59 @@ function maxrc {
 }
 
 
+# This function returns an error.
+function msg_error {
+    if $option_gui; then
+        local title
+        title=$(eval_gettext "Error message \$DISPLAY_NAME")
+        zenity  --error                 \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        2> >($logcmd) || true
+        log "$@"
+    else
+        printf "${red}%b\n${normal}" "$@" >&2
+    fi
+}
+
+
+# This function returns an informational message.
+function msg_info {
+    if $option_gui; then
+        local title
+        title=$(eval_gettext "Information \$DISPLAY_NAME")
+        zenity  --info                  \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        2> >($logcmd) || true
+    else
+        printf '%b\n' "$@"
+    fi
+}
+
+
+# This function returns a warning.
+function msg_warning {
+    if $option_gui; then
+        local title
+        title=$(eval_gettext "Warning \$DISPLAY_NAME")
+        zenity  --warning               \
+                --no-markup             \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$@"        2> >($logcmd) || true
+        log "$@"
+    else
+        printf "${yellow}%b\n${normal}" "$@" >&2
+    fi
+}
+
+
 # This function covers the general options.
 function process_option {
     while true; do
@@ -267,7 +285,7 @@ function process_option {
 # This function shows the available help.
 function process_option_help {
     # shellcheck disable=SC2154
-    info "$HELP
+    msg_info "$HELP
 
 $(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \
 \e]8;;man:\$PROGRAM_NAME(1)\e\\\$DISPLAY_NAME man page\e]8;;\e\\ for more \
@@ -278,7 +296,7 @@ information.")"
 # This function shows the available options.
 function process_option_usage {
     # shellcheck disable=SC2154
-    info "$USAGE
+    msg_info "$USAGE
 
 $(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 }
@@ -304,7 +322,7 @@ function process_option_version {
         program_year='????'
     fi
 
-    info "$PROGRAM_NAME (kz) 365 ($build_id)
+    msg_info "$PROGRAM_NAME (kz) 365 ($build_id)
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
@@ -419,7 +437,7 @@ $command, code: $rc ($rc_desc)"
 
     case $signal in
         err)
-            error "
+            msg_error "
 $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
@@ -430,7 +448,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         *)
-            warning "
+            msg_warning "
 $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;
@@ -472,22 +490,4 @@ function wait_for_enter {
     fi
     read -rp "
 $(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
-}
-
-
-# This function returns a warning.
-function warning {
-    if $option_gui; then
-        local title
-        title=$(eval_gettext "Warning \$DISPLAY_NAME")
-        zenity  --warning               \
-                --no-markup             \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
-        log "$@"
-    else
-        printf "${yellow}%b\n${normal}" "$@" >&2
-    fi
 }

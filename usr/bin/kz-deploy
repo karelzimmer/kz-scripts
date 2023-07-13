@@ -114,20 +114,20 @@ function process_input {
 
 # This function check that the repos are in the desired state.
 function check_repos {
-    info "$(gettext 'Check that all repos are on branch main...')"
+    msg_info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            error "$(eval_gettext "Repo \$repo not on branch main.")"
+            msg_error "$(eval_gettext "Repo \$repo not on branch main.")"
             git status
             maxrc=1
         fi
     done
-    info "$(gettext 'Check that all repos are clean...')"
+    msg_info "$(gettext 'Check that all repos are clean...')"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if ! git diff-index --quiet HEAD; then
-            error "$(eval_gettext "Repo \$repo is not clean.")"
+            msg_error "$(eval_gettext "Repo \$repo is not clean.")"
             git status
             maxrc=1
         fi
@@ -142,7 +142,7 @@ function check_repos {
 function build_package {
     local -i rc=0
 
-    info "$(gettext 'Build package and website (kz build)...')
+    msg_info "$(gettext 'Build package and website (kz build)...')
 "
     # Call kz-build.
     "$SCRIPTS_REPO"/usr/bin/kz build || rc=$?
@@ -164,7 +164,7 @@ function upload_website {
     local ftp_user=kzimmer
     local ftp_login=$HOME/.kz-$ftp_host
 
-    info "$(gettext 'Upload website (lftp)...')"
+    msg_info "$(gettext 'Upload website (lftp)...')"
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
@@ -176,7 +176,7 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
         rm "$ftp_login"
-        error "$(gettext 'Website upload failed.')"
+        msg_error "$(gettext 'Website upload failed.')"
         exit $ERROR
     fi
     sleep 5
@@ -186,10 +186,10 @@ function upload_website {
 # This function installs package kz.
 function install_package {
     # Call kz-getdeb via wget as a regular user would do.
-    info "$(gettext 'Install package kz (kz getdeb)...')
+    msg_info "$(gettext 'Install package kz (kz getdeb)...')
 "
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
-        error "$(gettext 'Install package kz failed.')"
+        msg_error "$(gettext 'Install package kz failed.')"
         exit $ERROR
     fi
 }

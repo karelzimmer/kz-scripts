@@ -94,7 +94,7 @@ function process_input {
     # Message catalogue (gettext).
     dir=/usr/share/locale/nl/LC_MESSAGES
     if ! [[ -e $dir/kz.mo ]]; then
-        error "$(eval_gettext "Message catalog \$dir/kz.mo not found.")"
+        msg_error "$(eval_gettext "Message catalog \$dir/kz.mo not found.")"
     fi
 
     # Check all kz scripts.
@@ -119,7 +119,7 @@ function check_script {
 
     # Script.
     if ! "$scriptname" --version |& $logcmd; then
-        error "$(eval_gettext "Script \$scriptname returned an error.")"
+        msg_error "$(eval_gettext "Script \$scriptname returned an error.")"
         maxrc=$ERROR
     fi
 
@@ -127,7 +127,7 @@ function check_script {
     if grep --quiet --word-regexp --regexp="$gui" "/usr/bin/$scriptname"; then
         dir=/usr/share/applications
         if ! [[ -e $dir/$scriptname.desktop ]]; then
-            error "$(eval_gettext "Desktop configuration file \
+            msg_error "$(eval_gettext "Desktop configuration file \
 \$dir/\$scriptname.desktop not found.")"
             maxrc=$ERROR
         fi
@@ -137,7 +137,7 @@ function check_script {
     if grep --quiet --word-regexp --regexp="$root" "/usr/bin/$scriptname"; then
         dir=/usr/share/polkit-1/actions
         if ! [[ -e $dir/nl.karelzimmer.$scriptname.policy ]]; then
-            error "$(eval_gettext "PolicyKit action definition file \
+            msg_error "$(eval_gettext "PolicyKit action definition file \
 \$dir/nl.karelzimmer.\$scriptname.policy not found.")"
             maxrc=$ERROR
         fi
@@ -146,20 +146,20 @@ function check_script {
     # Tab-completion script.
     dir=/usr/share/bash-completion/completions
     if ! [[ -e $dir/$scriptname ]]; then
-        error "$(eval_gettext "Tab completion script \$dir/\$scriptname not \
-found.")"
+        msg_error "$(eval_gettext "Tab completion script \$dir/\$scriptname \
+not found.")"
         maxrc=$ERROR
     fi
 
     # Manual page (EN + NL).
     dir=/usr/share/man/man1
     if ! [[ -e $dir/$scriptname.1.gz ]]; then
-        error "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
+        msg_error "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
         maxrc=$ERROR
     fi
     dir=/usr/share/man/nl/man1
     if ! [[ -e $dir/$scriptname.1.gz ]]; then
-        error "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
+        msg_error "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
         maxrc=$ERROR
     fi
 }

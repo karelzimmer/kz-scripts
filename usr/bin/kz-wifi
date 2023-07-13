@@ -106,23 +106,23 @@ later.")
 
     if $option_gui; then
         if nmcli_output=$(nmcli device wifi show-password 2> >($logcmd)); then
-            info "$(gettext 'WiFi data:')
+            msg_info "$(gettext 'WiFi data:')
 
 $nmcli_output
 
 $text"
         else
-            info "$(gettext 'No WiFi device found.')"
+            msg_info "$(gettext 'No WiFi device found.')"
         fi
     else
-        info "$(gettext 'WiFi data:')
+        msg_info "$(gettext 'WiFi data:')
 "
         nmcli device wifi show-password 2> >($logcmd) || rc=$?
         if [[ $rc -eq 0 ]]; then
-            info "
+            msg_info "
 $text"
         else
-            info "$(gettext 'No WiFi device found.')"
+            msg_info "$(gettext 'No WiFi device found.')"
         fi
     fi
 }

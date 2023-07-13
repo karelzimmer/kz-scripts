@@ -323,7 +323,7 @@ function process_option_delappfolder  {
 function capture_gui_changes {
     config_a=$(mktemp -t "$PROGRAM_NAME-A-XXXXXXXXXX.lst")
     save_configuration_database A "$config_a"
-    info "$(gettext 'Now make the change in the graphical workspace.')"
+    msg_info "$(gettext 'Now make the change in the graphical workspace.')"
     wait_for_enter
     config_b=$(mktemp -t "$PROGRAM_NAME-B-XXXXXXXXXX.lst")
     save_configuration_database B "$config_b"
@@ -343,7 +343,7 @@ function save_configuration_database {
             --output="$output_file" \
             "$output_file"
 
-    info "$(eval_gettext "Config database content captured (\$fase).")"
+    msg_info "$(eval_gettext "Config database content captured (\$fase).")"
 }
 
 
@@ -352,12 +352,12 @@ function report_database_changes {
     local output_file1=${1:-unknown}
     local output_file2=${2:-unknown}
 
-    info "$(
+    msg_info "$(
 gettext 'CHANGEs in the configuration database,
 < is the old setting (A),
 > is the new setting (B):')"
     diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
-    info "
+    msg_info "
 $(eval_gettext "When CHANGEs execute: \${blue}gsettings set CHANGE\${normal}")"
     rm "$config_a" "$config_b"
 }

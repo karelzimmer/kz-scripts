@@ -178,7 +178,7 @@ function process_input {
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-* ]]; then
             text=$(eval_gettext "File name must start with '\$PROGRAM_NAME-'.")
-            warning "$text"
+            msg_warning "$text"
             exit $ERROR
         fi
         input_file=$file_argument
@@ -188,7 +188,7 @@ function process_input {
     fi
     if ! [[ -f $input_file ]]; then
         text=$(eval_gettext "No install file found, looked for \$input_file.")
-        warning "$text"
+        msg_warning "$text"
         exit $ERROR
     fi
 
@@ -370,7 +370,7 @@ $(gettext 'To view the contents of the APPs installation file execute:') \
 ${blue}$DISPLAY_NAME --cat APP...${normal}"
     fi
 )"
-    info "$text"
+    msg_info "$text"
 }
 
 
@@ -406,7 +406,7 @@ $(eval_gettext "To simulate the processing of FILE execute: \
 \${blue}\$DISPLAY_NAME --simulate --file FILE\${normal}")"
     fi
 )"
-    info "$text"
+    msg_info "$text"
 }
 
 
@@ -534,7 +534,8 @@ function execute_command {
     maxrc
     # Extra message to the terminal, other is in the log.
     if ! $option_gui && [[ $rc -gt $OK ]]; then
-        info "$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
+        text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
+        msg_info "$text"
     fi
     log "rc=$rc, maxrc=$maxrc"
 }
@@ -546,10 +547,10 @@ function term_script {
     operation=$(gettext 'install')
 
     if ! $commands_found; then
-        info "$(gettext 'No commands to execute.' )"
+        msg_info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
         if [[ $maxrc -ne $OK ]]; then
-            error "$(eval_gettext "One or more commands went wrong.
+            msg_error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
 Check the log in the next screen.")"
             show_log
@@ -559,7 +560,7 @@ Check the log in the next screen.")"
                 # shellcheck disable=SC2034
                 operation=$(gettext 'remove')
             fi
-            info "
+            msg_info "
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         fi
     else

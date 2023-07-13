@@ -142,11 +142,11 @@ function process_input {
             text="$(eval_gettext "No USB medium found.
 
 Connect a USB medium.")"
-            warning "$text"
+            msg_warning "$text"
             wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
-                error "$text"
+                msg_error "$text"
                 exit $ERROR
             fi
         fi
@@ -158,11 +158,11 @@ Now connected:
 \$medium
 
 Disconnect media via Files.")"
-            warning "$text"
+            msg_warning "$text"
             wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                error "$text"
+                msg_error "$text"
                 exit $ERROR
             fi
         fi
@@ -186,7 +186,7 @@ Disconnect media via Files.")"
                     --title     "$title"    \
                     --text      "$text"     2> >($logcmd)
         else
-            info "$text..."
+            msg_info "$text..."
             backup_settings
         fi
     fi
@@ -376,7 +376,7 @@ EOF
                 --title     "$title"        \
                 --text      "$text"         2> >($logcmd) || rc=$?
     else
-        info "$text..."
+        msg_info "$text..."
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
@@ -404,7 +404,7 @@ while)")
                     --title     "$title"    \
                     --text      "$text"     2> >($logcmd) || rc=$?
         else
-            info "
+            msg_info "
 $text..."
             sync |& $logcmd || rc=$?
         fi
@@ -416,12 +416,12 @@ $text..."
 # This function controls the termination of the script.
 function term_script {
     if $option_dry_run; then
-        error "$(gettext 'The backup has NOT been created (DRY RUN).')"
+        msg_error "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $ERROR
     fi
 
     if [[ $maxrc -gt $OK ]]; then
-        error "$(eval_gettext "Backup ended with warnings or errors.
+        msg_error "$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable,
 or were any files added or removed while creating the backup,
@@ -435,7 +435,7 @@ Check the log in the next screen.")"
     if [[ $target_medium == /media/* ]]; then
         term_script_unmount
     else
-        info "
+        msg_info "
 ${green}$(gettext 'The backup has been made.')${normal}"
     fi
     exit $OK
@@ -472,18 +472,18 @@ function term_script_unmount {
                 --text      "$text"                                         \
                 2> >($logcmd) || rc+=$?
     else
-        info "$text..."
+        msg_info "$text..."
         umount "$target_medium"                     |& $logcmd || rc+=$?
         udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
     fi
     if [[ $rc -eq $OK ]]; then
-        info "
+        msg_info "
 ${green}$(gettext 'The backup has been made.')
 
 $(gettext 'The USB medium can be removed.')${normal}"
     else
-            warning "
+            msg_warning "
 ${green}$(gettext 'The backup has been made.')${yellow}
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
