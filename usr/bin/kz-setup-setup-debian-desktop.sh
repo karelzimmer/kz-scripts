@@ -13,6 +13,10 @@
 # USER *
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 
+#  APP firefox
+# USER user@debian
+kz-gset --delfav=firefox-esr.desktop
+
 #  APP gnome
 # USER *
 kz-gset --addappfolder=KZ

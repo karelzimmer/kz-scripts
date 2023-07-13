@@ -13,6 +13,10 @@
 # USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
+#  APP firefox
+# USER user@debian
+kz-gset --addfavbef=firefox-esr.desktop
+
 #  APP gnome
 # USER *
 kz-gset --delappfolder=KZ
