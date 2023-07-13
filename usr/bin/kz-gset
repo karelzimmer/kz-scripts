@@ -4,6 +4,7 @@
 # Change GUI.
 #
 # This script helps to change the graphical user environment (GUI).
+# See the kz-gset man page for details of how to make use of this script.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2015-2023.

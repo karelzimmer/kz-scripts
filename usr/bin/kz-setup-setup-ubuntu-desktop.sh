@@ -3,7 +3,7 @@
 # Set up apps file for Ubuntu desktop.
 #
 # This script file is used by script kz-setup.
-# Use 'man kz-setup' for more information.
+# See the kz-setup man page for details of how to make use of this script file.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
