@@ -4,7 +4,7 @@
 # Set up apps.
 #
 # This script sets up apps and changes user settings.
-# See the kz-setup man page for details of how to make use of this script.
+# See the kz setup man page for details of how to make use of this script.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.

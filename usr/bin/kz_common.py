@@ -7,7 +7,7 @@ This module provides general variables and functions.
 # Common module for Python scripts.
 #
 # This module provides access to general variables and functions.
-# See the kz_common.py man page for details of how to make use of this module.
+# See the kz common.py man page for details of how to make use of this module.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.

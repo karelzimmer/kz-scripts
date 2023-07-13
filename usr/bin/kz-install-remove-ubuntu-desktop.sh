@@ -3,7 +3,7 @@
 # Remove apps file for Ubuntu desktop.
 #
 # This script file is used by script kz-install.
-# See the kz-install man page for details of how to make use of this script
+# See the kz install man page for details of how to make use of this script
 # file.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal

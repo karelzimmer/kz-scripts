@@ -3,7 +3,7 @@
 # Common module for shell scripts.
 #
 # This module provides access to general variables and functions.
-# See the kz_common.sh man page for details of how to make use of this module.
+# See the kz common.sh man page for details of how to make use of this module.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
