@@ -52,7 +52,7 @@ declare option_gui=false
 # Functions
 ###############################################################################
 
-# This function handles the script options and argumentsand arguments.
+# This function handles the script options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''

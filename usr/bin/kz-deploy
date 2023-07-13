@@ -53,7 +53,7 @@ readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 # Functions
 ###############################################################################
 
-# This function handles the script options and argumentsand arguments.
+# This function handles the script options and arguments.
 function check_input {
     local -i rc=0
     local parsed=''

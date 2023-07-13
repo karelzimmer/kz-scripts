@@ -88,7 +88,7 @@ declare option_simulate=false
 # Functions
 ###############################################################################
 
-# This function handles the script options and argumentsand arguments.
+# This function handles the script options and arguments.
 function check_input {
     local -i app_arg_num=0
     local -i rc=0

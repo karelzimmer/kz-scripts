@@ -101,7 +101,7 @@ def check_dpkgd_snapd():
 
 def check_on_ac_power(PROGRAM_NAME):
     """
-    This function checks if we are running on battery.
+    This function checks if the computer is running on battery power.
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:

@@ -101,7 +101,7 @@ function check_dpkgd_snapd {
 }
 
 
-# This function checks if we are running on battery.
+# This function checks if the computer is running on battery power.
 function check_on_ac_power {
     local -i on_battery=0
 
@@ -202,7 +202,7 @@ function maxrc {
 }
 
 
-# This function returns an error.
+# This function returns an error message.
 function msg_error {
     if $option_gui; then
         local title
@@ -237,7 +237,7 @@ function msg_info {
 }
 
 
-# This function returns a warning.
+# This function returns a warning message.
 function msg_warning {
     if $option_gui; then
         local title

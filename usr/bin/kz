@@ -57,7 +57,7 @@ declare exec_PROGRAM_NAME=''
 # Functions
 ###############################################################################
 
-# This function handles the script options and argumentsand arguments.
+# This function handles the script options and arguments.
 function check_input {
     # No getopt here like in all other scripts; any specified options in
     # ARGUMENT, with kz COMMAND ARGUMENT, are for COMMAND, not for kz.
@@ -99,7 +99,7 @@ function check_input {
 }
 
 
-# This function processes the list option and displays all available commands.
+# This function displays all available commands.
 function process_option_list {
     msg_info "$(gettext 'The following COMMANDs are available:
 
