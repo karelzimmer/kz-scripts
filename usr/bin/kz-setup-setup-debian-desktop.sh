@@ -15,7 +15,7 @@ gnome-extensions enable dash-to-dock@micxgx.gmail.com
 
 #  APP firefox
 # USER karel@pc07
-kz-gset --delfav=firefox-esr.desktop
+kz-gset --delfav=firefox-esr
 
 #  APP gnome
 # USER *

@@ -15,7 +15,7 @@ gnome-extensions disable dash-to-dock@micxgx.gmail.com
 
 #  APP firefox
 # USER karel@pc07
-kz-gset --addfavbef=firefox-esr.desktop
+kz-gset --addfavbef=firefox-esr
 
 #  APP gnome
 # USER *
