@@ -119,7 +119,7 @@ def check_on_ac_power(PROGRAM_NAME):
 
 def check_user_root(PROGRAM_NAME, DISPLAY_NAME):
     """
-    This function checks if the user is root.
+    This function checks if the user is root and asks to become user root.
     """
     if check_user_sudo() != OK:
         print(_('Already performed by the administrator.'))
