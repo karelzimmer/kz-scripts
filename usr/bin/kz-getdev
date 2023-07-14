@@ -5,7 +5,7 @@
 #
 # This script builds the development environment for the kz package and the
 # website https://karelzimmer.nl.
-# See the kz getdev man page for details of how to make use of this script.
+# Use 'man kz getdev' for more information.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
@@ -111,7 +111,7 @@ function check_dependencies {
 
     printf '%s\n' "$(gettext 'Check dependencies...')"
     # Install ghostscript for kz-build <man-pag>.pdf (ps2pdf).
-    check_dpkgd_snapd
+    check_for_active_updates
     sudo    apt-get             \
             install             \
             --yes               \
@@ -130,10 +130,10 @@ function check_dependencies {
             python-is-python3
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-    check_dpkgd_snapd
+    check_for_active_updates
     # Debian package shellcheck is old, snap is newer.
     sudo snap install shellcheck
-    check_dpkgd_snapd
+    check_for_active_updates
     sudo snap install --classic code
 }
 

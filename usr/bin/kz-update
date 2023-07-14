@@ -8,7 +8,7 @@ This module performs a repair, update, and cleanup.
 # Update system.
 #
 # This script updates the system.
-# See the kz update man page for details of how to make use of this script.
+# Use 'man kz update' for more information.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
@@ -84,7 +84,7 @@ def perform_command(command):
     This function executes a command.
     """
     print(f'{command}...')
-    kz_common.check_dpkgd_snapd()
+    kz_common.check_for_active_updates()
     try:
         subprocess.run(f'sudo {command}', shell=True, check=True)
     except Exception as ex:
@@ -99,7 +99,7 @@ def snap_refresh():
     This function refreshes installed snaps.
     """
     print(_('Snap refresh...'))
-    kz_common.check_dpkgd_snapd()
+    kz_common.check_for_active_updates()
     try:
         subprocess.run('sudo snap refresh', shell=True, check=True)
     except Exception as ex:

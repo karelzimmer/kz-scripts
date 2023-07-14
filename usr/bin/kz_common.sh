@@ -3,7 +3,7 @@
 # Common module for shell scripts.
 #
 # This module provides access to general variables and functions.
-# See the kz common.sh man page for details of how to make use of this module.
+# Use 'man kz common.sh' for more information.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
@@ -72,12 +72,12 @@ declare yellow=''
 # Functions
 ###############################################################################
 
-# This function checks for a running Debian package manager or snaps refresh.
-function check_dpkgd_snapd {
-    local -i dpkg_wait=10
+# This function checks for active updates and waits for the next check.
+function check_for_active_updates {
+    local -i check_wait=10
     local text
     text=$(eval_gettext \
-            "Wait \${dpkg_wait}s for another package manager to finish...")
+            "Wait \${check_wait}s for another package manager to finish...")
 
     if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # System with snaps.
@@ -87,7 +87,7 @@ function check_dpkgd_snapd {
                     /snap/core/*/var/cache/debconf/config.dat           \
                     &> /dev/null; do
             printf '%s\n' "$text"
-            sleep $dpkg_wait
+            sleep $check_wait
         done
     else
         # System without snaps.
@@ -96,13 +96,14 @@ function check_dpkgd_snapd {
                     /var/cache/debconf/config.dat                       \
                     &> /dev/null; do
             printf '%s\n' "$text"
-            sleep $dpkg_wait
+            sleep $check_wait
         done
     fi
 }
 
 
-# This function checks if the computer is running on battery power.
+# This function checks if the computer is running on battery power and prompts
+# the user to continue.
 function check_on_ac_power {
     local -i on_battery=0
 
@@ -116,7 +117,7 @@ It is recommended to connect the computer to the wall socket.')"
     fi
 }
 
-# This function checks if the user is root.
+# This function checks if the user is root and restarts the script if not.
 function check_user_root {
     local -i rc=0
 
@@ -138,7 +139,8 @@ function check_user_root {
 }
 
 
-# This function checks if the user is allowed to use sudo.
+# This function checks if the user is allowed to use sudo and exits 0 if so,
+# otherwise exits 1.
 function check_user_sudo {
     # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then

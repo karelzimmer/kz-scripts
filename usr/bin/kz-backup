@@ -4,7 +4,7 @@
 # Make backup.
 #
 # This script makes a backup copy of the Home folder.
-# See the kz backup man page for details of how to make use of this script.
+# Use 'man kz backup' for more information.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2007-2023.

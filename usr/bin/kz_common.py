@@ -7,7 +7,7 @@ This module provides general variables and functions.
 # Common module for Python scripts.
 #
 # This module provides access to general variables and functions.
-# See the kz common.py man page for details of how to make use of this module.
+# Use 'man kz common.py' for more information.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
@@ -53,11 +53,11 @@ NORMAL = '\033[0m'
 # Functions
 ###############################################################################
 
-def check_dpkgd_snapd():
+def check_for_active_updates():
     """
-    This function checks for a running Debian package manager or snaps refresh.
+    This function checks for active updates and waits for the next check.
     """
-    dpkg_wait = 10
+    check_wait = 10
 
     try:
         subprocess.run('ls /snap/core/*/var/cache/debconf/config.dat',
@@ -82,8 +82,8 @@ def check_dpkgd_snapd():
                 break
             else:
                 print(_('Wait {}s for another package manager to finish...').
-                      format(dpkg_wait))
-                time.sleep(dpkg_wait)
+                      format(check_wait))
+                time.sleep(check_wait)
         else:
             try:
                 subprocess.run('sudo fuser /var/cache/apt/archives/lock '
@@ -96,13 +96,14 @@ def check_dpkgd_snapd():
                 break
             else:
                 print(_('Wait {}s for another package manager to finish...').
-                      format(dpkg_wait))
-                time.sleep(dpkg_wait)
+                      format(check_wait))
+                time.sleep(check_wait)
 
 
 def check_on_ac_power(PROGRAM_NAME):
     """
-    This function checks if the computer is running on battery power.
+    This function checks if the computer is running on battery power and
+    prompts the user to continue.
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
@@ -142,7 +143,8 @@ def check_user_root(PROGRAM_NAME, DISPLAY_NAME):
 
 def check_user_sudo():
     """
-    This function checks if the user is allowed to use sudo.
+    This function checks if the user is allowed to use sudo and exits 0 if so,
+    otherwise exits 1.
     """
     if os.getuid() == 0:
         return(OK)

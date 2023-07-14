@@ -4,7 +4,7 @@
 # Install kz package.
 #
 # This script downloads and installs package kz.
-# See the kz getdeb man page for details of how to make use of this script.
+# Use 'man kz getdeb' for more information.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2016-2023.
@@ -194,7 +194,7 @@ function install_package {
     chmod o+r "$temp_deb"
     printf "${BOLD}%s${NORMAL} ($DISPLAY_NAME)\n" "$(gettext 'Download')"
     wget --output-document="$temp_deb" $site_deb
-    check_dpkgd_snapd
+    check_for_active_updates
     printf "${BOLD}%s${NORMAL} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -205,12 +205,12 @@ function install_package {
 }
 
 
-# This function checks for a running Debian package manager or snaps refresh.
-function check_dpkgd_snapd {
-    local -i dpkg_wait=10
+# This function checks for active updates and waits for the next check.
+function check_for_active_updates {
+    local -i check_wait=10
     local text
     text=$(eval_gettext \
-            "Wait \${dpkg_wait}s for another package manager to finish...")
+            "Wait \${check_wait}s for another package manager to finish...")
 
     if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # System with snaps.
@@ -220,7 +220,7 @@ function check_dpkgd_snapd {
                     /snap/core/*/var/cache/debconf/config.dat           \
                     &> /dev/null; do
             printf '%s\n' "$text"
-            sleep $dpkg_wait
+            sleep $check_wait
         done
     else
         # System without snaps.
@@ -229,7 +229,7 @@ function check_dpkgd_snapd {
                     /var/cache/debconf/config.dat                       \
                     &> /dev/null; do
             printf '%s\n' "$text"
-            sleep $dpkg_wait
+            sleep $check_wait
         done
     fi
 }

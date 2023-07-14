@@ -368,7 +368,7 @@ msgid "Install package kz (may take a while)..."
 msgstr ""
 
 #, sh-format
-msgid "Wait ${dpkg_wait}s for another package manager to finish..."
+msgid "Wait ${check_wait}s for another package manager to finish..."
 msgstr ""
 
 msgid "Install kz package"

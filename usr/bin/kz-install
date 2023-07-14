@@ -4,7 +4,7 @@
 # Install apps.
 #
 # This script installs apps and changes system settings.
-# See the kz install man page for details of how to make use of this script.
+# Use 'man kz install' for more information.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
@@ -530,7 +530,7 @@ function execute_command {
 
     log "$app_name_line"
     log "${blue}$cmd${normal}"
-    check_dpkgd_snapd
+    check_for_active_updates
     eval "$cmd" |& $logcmd || rc=$?
     maxrc
     # Extra message to the terminal, other is in the log.
