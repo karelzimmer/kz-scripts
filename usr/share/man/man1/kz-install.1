@@ -42,6 +42,8 @@ Ubuntu desktop.
 .br
 When processing the input file, the commands for the current computer (HOST)
 are selected and copied to a temporary commands file.
+.br
+A HOST is defined in this context as <hostname>, e.g. pc02 or *.
 .sp
 Option \fB-a\fR, \fB--apps\fR lists apps available in the temporary commands
 file.
@@ -105,14 +107,15 @@ T}
 .T&
 l | l.
 T{
-# APP <name>
+# APP <appname>
 T}:T{
-Contains the APP <name>.
+Contains the APP <appname>.
 T}
 T{
-# HOST <host> ...
+# HOST <hostname> ...
 T}:T{
-Name of the computer (<host>) where the command applies, or * for any computer.
+Name of the computer (<hostname>) where the command applies, or * for any
+computer.
 T}
 T{
 T}:T{
@@ -126,7 +129,7 @@ T}
 T{
 Command
 T}:T{
-Command to install APP <app>.
+Command to install APP <appname>.
 T}
 .TE
 .sp
@@ -248,12 +251,12 @@ Standard installation file for Ubuntu desktop.
 .sp
 /usr/bin/kz-install-remove-debian-desktop.sh
 .RS
-Standard remove file for Debian desktop.
+Standard uninstaller file for Debian desktop.
 .RE
 .sp
 /usr/bin/kz-install-remove-ubuntu-desktop.sh
 .RS
-Standard remove file for Ubuntu desktop.
+Standard uninstaller file for Ubuntu desktop.
 .RE
 .sp
 /tmp/kz-install-cmds-XXXXXXXXXX

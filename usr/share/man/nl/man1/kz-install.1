@@ -45,6 +45,8 @@ computers (HOSTs) voor Ubuntu desktop.
 Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
 computernaam (HOST) geselecteerd en gekopieerd naar een tijdelijk
 opdrachtenbestand.
+.br
+Een HOST wordt in deze context gedefinieerd als <hostnaam>, b.v. pc02 of *.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
 het tijdelijk opdrachtenbestand.
@@ -111,14 +113,14 @@ T}
 .T&
 l | l.
 T{
-#  APP <naam>
+#  APP <appnaam>
 T}:T{
-Bevat de <naam> van de APP.
+Bevat de <appnaam> van de APP.
 T}
 T{
-# HOST <host> ...
+# HOST <hostnaam> ...
 T}:T{
-Naam van de computer (<host>) waar de opdracht van toepassing is, of * voor
+Naam van de computer (<hostnaam>) waar de opdracht van toepassing is, of * voor
 iedere computer.
 T}
 T{
@@ -133,7 +135,7 @@ T}
 T{
 Opdracht
 T}:T{
-Opdracht voor het installeren van APP <app>.
+Opdracht voor het installeren van APP <appnaam>.
 T}
 .TE
 .sp

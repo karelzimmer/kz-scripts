@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Set up apps file for Ubuntu desktop.
+# Standard set up file for Ubuntu desktop.
 #
 # This script file is used by script kz-setup.
 # Use 'man kz setup' for more information.

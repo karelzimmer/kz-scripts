@@ -63,6 +63,9 @@ readonly CMDS_FILE
 SIMS_FILE=$(mktemp -t "$PROGRAM_NAME-sims-XXXXXXXXXX")
 readonly SIMS_FILE
 
+readonly HOST=$HOSTNAME
+DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO
 
 ###############################################################################
 # Variables
@@ -71,7 +74,6 @@ readonly SIMS_FILE
 declare -a app_arguments=()
 declare argument_app=false
 declare commands_found=false
-declare distro=''
 declare edition='desktop'
 declare execute_commands=true
 declare file_argument=''
@@ -184,8 +186,7 @@ function process_input {
         fi
         input_file=$file_argument
     else
-        distro=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-        input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$distro-$edition.sh
+        input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$edition.sh
     fi
     if ! [[ -f $input_file ]]; then
         text=$(eval_gettext "No install file found, looked for \$input_file.")
@@ -274,7 +275,7 @@ function process_argument_app_input_file {
                     app_record=$input_record
                 fi
                 ;;
-            '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
+            '#'*' HOST '*'*'*|'#'*' HOST '*"$HOST"*)
                 # Host record.
                 app_host_match=false
                 if $app_match; then
@@ -319,7 +320,7 @@ function process_input_file {
                 app_record=$input_record
                 host_match=false
                 ;;
-            '#'*' HOST '*'*'*|'#'*' HOST '*"$HOSTNAME"*)
+            '#'*' HOST '*'*'*|'#'*' HOST '*"$HOST"*)
                 # Host record.
                 # Match by HOST name.
                 host_match=true

@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Remove apps file for Ubuntu desktop.
+# Standard uninstaller file for Ubuntu desktop.
 #
 # This script file is used by script kz-install.
 # Use 'man kz install' for more information.

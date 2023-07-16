@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Install apps file for Debian desktop.
+# Standard installation file for for Debian desktop.
 #
 # This script file is used by script kz-install.
 # Use 'man kz install' for more information.

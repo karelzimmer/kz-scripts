@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Reset apps file for Ubuntu desktop.
+# Standard reset file for Ubuntu desktop.
 #
 # This script file is used by script kz-setup.
 # Use 'man kz setup' for more information.

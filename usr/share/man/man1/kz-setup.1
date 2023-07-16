@@ -41,6 +41,9 @@ Ubuntu desktop.
 .br
 When processing the input file, the commands for the current user (USER) are
 selected and copied to a temporary commands file.
+.br
+A USER is defined in this context as <username>@<computername>, e.g. jan@pc02
+or *.
 .sp
 Option \fB-a\fR, \fB--apps\fR lists apps available in all standard input files,
 or in the \fIFILE\fR provided with option \fB-f\fR, \fB--file\fR.
@@ -104,14 +107,15 @@ T}
 .T&
 l | l.
 T{
-# APP <name>
+# APP <appname>
 T}:T{
-Contains the APP <name>.
+Contains the APP <appname>.
 T}
 T{
-# USER <user@host> ...
+# USER <username>@<hostname> ...
 T}:T{
-Name of the user <user@host> for which the command applies, or * for any user.
+Name of the user (<username>) and computer (<hostname>) for which the command
+applies, or * for every user on any computer.
 T}
 T{
 T}:T{
@@ -125,7 +129,7 @@ T}
 T{
 Command
 T}:T{
-Command to set up APP <app>.
+Command to set up APP <appname>.
 T}
 .TE
 .sp
@@ -251,7 +255,7 @@ Standard reset file for Debian desktop.
 .sp
 /usr/bin/kz-setup-reset-ubuntu-desktop.sh
 .RS
-Standard reset file for removing apps on Ubuntu desktop.
+Standard reset file for Ubuntu desktop.
 .RE
 .sp
 /tmp/kz-setup-cmds-XXXXXXXXXX

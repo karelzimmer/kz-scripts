@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Set up apps file for Debian desktop.
+# Standard set up file for Debian desktop.
 #
 # This script file is used by script kz-setup.
 # Use 'man kz setup' for more information.
