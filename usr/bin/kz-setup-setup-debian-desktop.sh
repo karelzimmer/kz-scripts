@@ -14,7 +14,7 @@
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 
 #  APP firefox
-# USER karel@pc07
+# USER karel@pc07 user@debian
 kz-gset --delfav=firefox-esr
 
 #  APP gnome
@@ -46,7 +46,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
 
 #  APP gnome
-# USER karel@pc07
+# USER karel@pc07 user@debian
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
@@ -76,7 +76,7 @@ kz-gset --addfavaft=kz-spotify
 kz-gset --delfav=install-debian
 
 #  APP terminal
-# USER karel@pc07
+# USER karel@pc07 user@debian
 kz-gset --addfavbef=org.gnome.Terminal
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc

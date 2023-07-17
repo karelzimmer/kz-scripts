@@ -37,7 +37,7 @@ sudo apt-get install --yes cups
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
 #  APP gnome-gmail
-# HOST pc07
+# HOST debian pc07
 sudo apt-get install --yes gnome-gmail
 
 #  APP google-chrome
@@ -71,7 +71,7 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 #  APP locate
-# HOST pc07
+# HOST debian pc07
 sudo apt-get install --yes mlocate
 
 #  APP signal
@@ -105,7 +105,7 @@ sudo apt-get install --yes thunderbird-l10n-nl
 sudo snap install vlc
 
 #  APP vscode
-# HOST pc07
+# HOST debian pc07
 sudo snap install --classic code
 
 #  APP webmin
