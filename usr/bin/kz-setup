@@ -519,9 +519,13 @@ function execute_command {
 
     if ! $option_gui; then
         if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "%b\n" "$app_name_line"
+            if [[ $app_seq_num -eq 1 ]]; then
+                printf "%b" "$app_name_line"
+            else
+                printf "\n%b" "$app_name_line"
+            fi
         else
-            printf "       %b\n" "${app_name_line:7}"
+            printf "\n       %b" "${app_name_line:7}"
         fi
     fi
 

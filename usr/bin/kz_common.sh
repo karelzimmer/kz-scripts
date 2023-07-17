@@ -374,7 +374,8 @@ function show_log {
 }
 
 
-# This function processes the signals.
+# This function processes the signals for which the trap was set by function
+# init_script.
 function signal {
     local signal=${1:-unknown}
     local -i lineno=${2:-unknown}
@@ -459,7 +460,7 @@ $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
 }
 
 
-# This function controls the termination of the script.
+# This function controls the final termination of the script.
 function signal_exit {
     case $PROGRAM_NAME in
         kz-install)
