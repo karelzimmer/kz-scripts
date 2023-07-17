@@ -128,11 +128,11 @@ function check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
-            log "restart (pkexec $program_exec ${cmdline_args[*]})"
+            msg_log  "restart (pkexec $program_exec ${cmdline_args[*]})"
             pkexec "$program_exec" "${cmdline_args[@]}" || rc=$?
             exit $rc
         else
-            log "restart (exec sudo $program_exec ${cmdline_args[*]})"
+            msg_log  "restart (exec sudo $program_exec ${cmdline_args[*]})"
             exec sudo "$program_exec" "${cmdline_args[@]}"
         fi
     fi
@@ -173,7 +173,7 @@ function init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE #3
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM #5
 
-    log "started ($program_exec $* as $USER)"
+    msg_log  "started ($program_exec $* as $USER)"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $logcmd
@@ -188,12 +188,6 @@ function init_script {
 information.")
     # shellcheck disable=SC2034
     readonly USAGE_LINE
-}
-
-
-# This function records a message.
-function log {
-    printf '%b\n' "$1" |& $logcmd
 }
 
 
@@ -216,7 +210,7 @@ function msg_error {
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
-        log "$@"
+        msg_log  "$@"
     else
         printf "${red}%b\n${normal}" "$@" >&2
     fi
@@ -240,6 +234,12 @@ function msg_info {
 }
 
 
+# This function records a message to the log.
+function msg_log {
+    printf '%b\n' "$@" |& $logcmd
+}
+
+
 # This function returns a warning message.
 function msg_warning {
     if $option_gui; then
@@ -251,7 +251,7 @@ function msg_warning {
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
-        log "$@"
+        msg_log  "$@"
     else
         printf "${yellow}%b\n${normal}" "$@" >&2
     fi
@@ -435,7 +435,7 @@ function signal {
             rc_desc='unknown error'
             ;;
     esac
-    log "signal: $signal, line: $lineno, function: $function, command: \
+    msg_log  "signal: $signal, line: $lineno, function: $function, command: \
 $command, code: $rc ($rc_desc)"
 
     case $signal in
@@ -446,7 +446,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             ;;
         exit)
             signal_exit
-            log "ended (code=exited, status=$status)"
+            msg_log  "ended (code=exited, status=$status)"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
@@ -464,7 +464,7 @@ function signal_exit {
     case $PROGRAM_NAME in
         kz-install)
             if [[ $rc -ne $OK ]]; then
-                log "$(gettext "If the package manager gives apt errors, \
+                msg_log  "$(gettext "If the package manager gives apt errors, \
 launch a Terminal window and run:")
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"

@@ -537,7 +537,7 @@ function execute_command {
         gui_option='--gui'
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
-    log "$command: rc=$rc"
+    msg_log  "$command: rc=$rc"
     wait_for_enter
 }
 

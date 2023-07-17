@@ -525,8 +525,8 @@ function execute_command {
         fi
     fi
 
-    log "$app_name_line"
-    log "${blue}$cmd${normal}"
+    msg_log  "$app_name_line"
+    msg_log  "${blue}$cmd${normal}"
     eval "$cmd" |& $logcmd || rc=$?
     maxrc
     # Extra message to the terminal, other is in the log.
@@ -534,7 +534,7 @@ function execute_command {
         text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
         msg_info "$text"
     fi
-    log "rc=$rc, maxrc=$maxrc"
+    msg_log  "rc=$rc, maxrc=$maxrc"
 }
 
 
