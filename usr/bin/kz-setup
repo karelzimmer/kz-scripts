@@ -77,6 +77,7 @@ declare commands_found=false
 declare edition='desktop'
 declare execute_commands=true
 declare file_argument=''
+declare logout=false
 declare mode='setup'
 declare option_apps=false
 declare option_cat=false
@@ -85,7 +86,6 @@ declare option_list=false
 declare option_gui=false
 declare option_reset=false
 declare option_simulate=false
-
 
 ###############################################################################
 # Functions
@@ -109,7 +109,12 @@ function check_input {
         exit $ERROR
     fi
     eval set -- "$parsed"
+
     process_option "$@"
+
+    if [[ $* = '--' || $* = '-g --' ||$* = '--gui --' ]]; then
+        logout=true
+    fi
 
     while true; do
         case $1 in
@@ -546,6 +551,7 @@ function term_script {
     if ! $commands_found; then
         msg_info "$(gettext 'No commands to execute.' )"
     elif $execute_commands; then
+        # Commands executed.
         if [[ $maxrc -ne $OK ]]; then
             msg_error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
@@ -561,8 +567,17 @@ Check the log in the next screen.")"
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         fi
     else
-        # Option simulate.
+        # Commands simulated.
         less --quit-if-one-screen --RAW-CONTROL-CHARS "$SIMS_FILE"
+    fi
+    if $logout; then
+        text=$(gettext "You will now be logged out of the computer to \
+complete the installation of the apps.")
+        msg_info "$text"
+        if ! $option_gui; then
+            wait_for_enter
+        fi
+        gnome-session-quit --logout --no-prompt
     fi
     exit $OK
 }
