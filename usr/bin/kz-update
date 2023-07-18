@@ -162,7 +162,7 @@ def check_reboot():
 # Main Script
 ###############################################################################
 
-kz_common.process_option(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
 kz_common.check_on_ac_power(PROGRAM_NAME)
 

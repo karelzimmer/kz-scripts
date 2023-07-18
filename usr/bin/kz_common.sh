@@ -259,7 +259,7 @@ function msg_warning {
 
 
 # This function covers the general options.
-function process_option {
+function process_common_options {
     while true; do
         case $1 in
             -h|--help)

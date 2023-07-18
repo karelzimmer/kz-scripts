@@ -110,7 +110,8 @@ function check_input {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_option "$@"
+
+    process_common_options "$@"
 
     if [[ $* = '--' || $* = '-g --' ||$* = '--gui --' ]]; then
         reboot=true

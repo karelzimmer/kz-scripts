@@ -98,7 +98,8 @@ function check_input {
         exit $ERROR
     fi
     eval set -- "$parsed"
-    process_option "$@"
+
+    process_common_options "$@"
 
     while true; do
         case $1 in
