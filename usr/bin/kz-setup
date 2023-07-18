@@ -550,8 +550,15 @@ function term_script {
 
     if ! $commands_found; then
         msg_info "$(gettext 'No commands to execute.' )"
-    elif $execute_commands; then
-        # Commands executed.
+        exit $OK
+    fi
+
+    if $option_simulate; then
+        less --quit-if-one-screen --RAW-CONTROL-CHARS "$SIMS_FILE"
+        exit $OK
+    fi
+
+    if $execute_commands; then
         if [[ $maxrc -ne $OK ]]; then
             msg_error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
@@ -566,9 +573,6 @@ Check the log in the next screen.")"
             msg_info "
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         fi
-    else
-        # Commands simulated.
-        less --quit-if-one-screen --RAW-CONTROL-CHARS "$SIMS_FILE"
     fi
     if $logout; then
         text=$(gettext "You will now be logged out of the computer to \
