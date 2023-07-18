@@ -578,16 +578,16 @@ Check the log in the next screen.")"
             fi
             msg_info "
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
-        fi
-    fi
-    if $reboot; then
-        text=$(gettext "The computer will now restart to complete the \
+            if $reboot; then
+                text=$(gettext "The computer will now restart to complete the \
 installation of the apps.")
-        msg_info "$text"
-        if ! $option_gui; then
-            wait_for_enter
+                msg_info "$text"
+                if ! $option_gui; then
+                    wait_for_enter
+                fi
+                sudo systemctl reboot
+            fi
         fi
-        sudo systemctl reboot
     fi
     exit $OK
 }

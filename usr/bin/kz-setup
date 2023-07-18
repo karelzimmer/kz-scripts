@@ -572,16 +572,16 @@ Check the log in the next screen.")"
             fi
             msg_info "
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
-        fi
-    fi
-    if $logout; then
-        text=$(gettext "You will now be logged out of the computer to \
+            if $logout; then
+                text=$(gettext "You will now be logged out of the computer to \
 complete the installation of the apps.")
-        msg_info "$text"
-        if ! $option_gui; then
-            wait_for_enter
+                msg_info "$text"
+                if ! $option_gui; then
+                    wait_for_enter
+                fi
+                gnome-session-quit --logout --no-prompt
+            fi
         fi
-        gnome-session-quit --logout --no-prompt
     fi
     exit $OK
 }
