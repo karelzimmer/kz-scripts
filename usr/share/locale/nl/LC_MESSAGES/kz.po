@@ -577,13 +577,13 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
-"                  [-l|--list] [-r|--remove] [--server] [-s|--simulate]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
+"                  [-g|--gui] [-l|--list] [-r|--remove] [-s|--server]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [APP...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
-"                    [-l|--list] [-r|--remove] [--server] [-s|--simulate]\n"
+"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
+"                    [-g|--gui] [-l|--list] [-r|--remove] [-s|--server]\n"
 "                    $OPTIONS_USAGE\n"
 "                    [--] [APP...]"
 
@@ -652,9 +652,6 @@ msgstr "     0   Geen apps gevonden."
 msgid "To install the APPs run:"
 msgstr "Om de APPs te installeren voer uit:"
 
-msgid "To simulate installing APPs execute:"
-msgstr "Om het installeren van APPs te simuleren voer uit:"
-
 msgid "To view the contents of the APPs installation file execute:"
 msgstr ""
 "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit:"
@@ -686,22 +683,11 @@ msgstr ""
 "Om de opdrachten in BESTAND te bekijken voer uit ${blue}$DISPLAY_NAME --cat "
 "--file BESTAND${normal}"
 
-#, sh-format
-msgid ""
-"To simulate the processing of FILE execute: ${blue}$DISPLAY_NAME --simulate "
-"--file FILE${normal}"
-msgstr ""
-"Om de opdrachten in BESTAND te simuleren voer uit: ${blue}$DISPLAY_NAME --"
-"simulate --file BESTAND${normal}"
-
 msgid "install"
 msgstr "installeren"
 
 msgid "remove"
 msgstr "verwijderen"
-
-msgid " simulate"
-msgstr " simuleren"
 
 msgid "busy"
 msgstr "werk"
@@ -1015,13 +1001,13 @@ msgstr "De back-up is teruggezet."
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
-"                [-l|--list] [-r|--reset] [--server] [-s|--simulate]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
+"                [-g|--gui] [-l|--list] [-r|--reset] [-s|--server]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [APP...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui]\n"
-"                  [-l|--list] [-r|--reset] [--server] [-s|--simulate]\n"
+"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
+"                  [-g|--gui] [-l|--list] [-r|--reset] [-s|--server]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [APP...]"
 
@@ -1044,9 +1030,6 @@ msgstr "Geen installatiebestand gevonden, zocht $input_file."
 
 msgid "To set up the APPs run:"
 msgstr "Om de APPs in te stellen voer uit"
-
-msgid "To simulate resetting APPs execute:"
-msgstr "Om het instellen van APPs te simuleren voer uit:"
 
 msgid "To view the contents of the APPs set up file execute:"
 msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"

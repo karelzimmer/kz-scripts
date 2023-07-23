@@ -29,8 +29,8 @@ readonly PROGRAM_DESC
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] \
-[-f|--file FILE] [-g|--gui]
-                  [-l|--list] [-r|--remove] [--server] [-s|--simulate]
+[-f|--file FILE]
+                  [-g|--gui] [-l|--list] [-r|--remove] [-s|--server]
                   \$OPTIONS_USAGE
                   [--] [APP...]")
 readonly USAGE
@@ -46,8 +46,7 @@ $(gettext '  -f, --file FILE
   -g, --gui      $(gettext 'starts in graphics mode')
   -l, --list     $(gettext 'show list of standard files')
   -r, --remove   $(gettext 'delete apps')
-      --server   $(gettext 'install apps for a server')
-  -s, --simulate $(gettext 'show commands')
+  -s, --server   $(gettext 'install apps for a server')
 $OPTIONS_HELP
   --             $(gettext "signals the end of options and disables further \
 option processing")
@@ -56,7 +55,7 @@ $(gettext 'Arguments:
   APP            install APPs')"
 readonly HELP
 readonly X_OPTIONS_SHORT='acf:lgrs'
-readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove,server,simulate'
+readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove,server'
 
 COMMANDS_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 readonly COMMANDS_FILE
@@ -82,7 +81,6 @@ declare option_file=false
 declare option_list=false
 declare option_gui=false
 declare option_remove=false
-declare option_simulate=false
 declare reboot=true
 
 
@@ -145,14 +143,8 @@ function check_input {
                 mode='remove'
                 shift
                 ;;
-            --server)
+            -s|--server)
                 edition=server
-                shift
-                ;;
-            -s|--simulate)
-                option_simulate=true
-                execute_commands=false
-                reboot=false
                 shift
                 ;;
             --)
@@ -369,8 +361,6 @@ $USAGE_LINE"
     else
         printf '%s\n' "
 $(gettext 'To install the APPs run:') ${blue}$DISPLAY_NAME APP...${normal}
-$(gettext 'To simulate installing APPs execute:') ${blue}$DISPLAY_NAME \
---simulate APP...${normal}
 $(gettext 'To view the contents of the APPs installation file execute:') \
 ${blue}$DISPLAY_NAME --cat APP...${normal}"
     fi
@@ -406,9 +396,7 @@ $USAGE_LINE"
 $(eval_gettext "To process FILE execute: \${blue}\$DISPLAY_NAME \
 --file FILE\${normal}")
 $(eval_gettext "To view the commands of FILE execute: \${blue}\$DISPLAY_NAME \
---cat --file FILE\${normal}")
-$(eval_gettext "To simulate the processing of FILE execute: \
-\${blue}\$DISPLAY_NAME --simulate --file FILE\${normal}")"
+--cat --file FILE\${normal}")"
     fi
 )"
     msg_info "$text"
@@ -421,7 +409,6 @@ function process_cmds_file {
     local operation
     operation=$(gettext 'install')
     local commands_record=''
-    local write_app_line=true
     local -i app_seq_num=0
     local -i app_tot_num=0
     local -i cmd_seq_num=0
@@ -436,9 +423,6 @@ function process_cmds_file {
     if $option_remove; then
         operation=$(gettext 'remove')
     fi
-    if $option_simulate; then
-        operation+=$(gettext ' simulate')
-    fi
 
     while read -r commands_record; do
         case $commands_record in
@@ -452,7 +436,6 @@ function process_cmds_file {
                     printf '%s\n' "$commands_record"    |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3)"
-                write_app_line=true
                 ((++app_seq_num))
                 if [[ $app_seq_num -gt 99 ]]; then
                     app_seq_num=99
@@ -469,41 +452,10 @@ function process_cmds_file {
                 ;;
             *)
                 # Command record.
-                process_command_record "$commands_record"
+                execute_command "$commands_record"
                 ;;
         esac
     done < "$COMMANDS_FILE"
-}
-
-
-# This function executes or simulates a command from the commands
-# file.
-function process_command_record {
-    local cmd=${1:-unknown}
-
-    commands_found=true
-    ((++cmd_seq_num))
-    if [[ $cmd_seq_num -gt 99 ]]; then
-        cmd_seq_num=99
-    fi
-
-    if $execute_commands; then
-        execute_command "$cmd"
-    else
-        # Option simulate.
-        if $write_app_line; then
-            printf  '\n[%2d/%-2d] %s %s\n'  \
-                    "$app_seq_num"          \
-                    "$app_tot_num"          \
-                    "$app_name"             \
-                    "$operation"
-            write_app_line=false
-        fi
-        printf  "%7s [%2d] ${blue}%s${normal}\n"    \
-                " "                                 \
-                "$cmd_seq_num"                      \
-                "$cmd"
-    fi
 }
 
 
@@ -513,6 +465,11 @@ function execute_command {
     local app_name_line=''
     local -i rc=0
 
+    commands_found=true
+    ((++cmd_seq_num))
+    if [[ $cmd_seq_num -gt 99 ]]; then
+        cmd_seq_num=99
+    fi
     printf  -v app_name_line            \
             "[%2d/%-2d] [%2d] %s %s"    \
             "$app_seq_num"              \
@@ -521,15 +478,15 @@ function execute_command {
             "$app_name"                 \
             "$operation"
 
-        if $option_gui; then
-            text="#$app_name_line\n\n$cmd"
-            printf '%s\n' "$text"
+    if $option_gui; then
+        text="#$app_name_line\n\n$cmd"
+        printf '%s\n' "$text"
+    else
+        if [[ $cmd_seq_num -eq 1 ]]; then
+            printf "%b\n" "$app_name_line"
         else
-            if [[ $cmd_seq_num -eq 1 ]]; then
-                printf "%b\n" "$app_name_line"
-            else
-                printf "       %b\n" "${app_name_line:7}"
-            fi
+            printf "       %b\n" "${app_name_line:7}"
+        fi
     fi
 
     msg_log  "$app_name_line"

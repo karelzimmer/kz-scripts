@@ -56,15 +56,12 @@ The commands in the command file are executed.
 .sp
 Option \fB-c\fR, \fB--cat\fR lists the contents of the commands file.
 .sp
-Option \fB-s\fR, \fB--simulate\fR shows the commands in the commands file that
-would be executed.
-.sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .br
 Then, for example, file /usr/bin/kz-install-remove-ubuntu-desktop.sh
 ("remove file") is processed.
 .sp
-With option \fB--server\fR server is used instead of desktop.
+With option \fB-s\fR, \fB--server\fR server is used instead of desktop.
 .br
 Then, for example, file /usr/bin/kz-install-install-ubuntu-server.sh is
 processed.
@@ -210,12 +207,8 @@ Show a list of standard files.
 \fB-r\fR, \fB--remove\fR
 Remove apps.
 .TP
-\fB--server\fR
+\fB-s\fR, \fB--server\fR
 Install apps and change system settings for a server.
-.TP
-\fB-s\fR, \fB--simulate\fR
-No action, but simulate the installation, and show the commands that would be
-executed.
 .TP
 \fB-u\fR, \fB--usage\fR
 Show the available options.
