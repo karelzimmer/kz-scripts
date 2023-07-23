@@ -85,7 +85,7 @@ declare option_list=false
 declare option_gui=false
 declare option_remove=false
 declare option_simulate=false
-declare reboot=false
+declare reboot=true
 
 
 ###############################################################################
@@ -112,10 +112,6 @@ function check_input {
     eval set -- "$parsed"
 
     process_common_options "$@"
-
-    if [[ $* = '--' || $* = '-g --' ||$* = '--gui --' ]]; then
-        reboot=true
-    fi
 
     while true; do
         case $1 in
@@ -158,6 +154,7 @@ function check_input {
             -s|--simulate)
                 option_simulate=true
                 execute_commands=false
+                reboot=false
                 shift
                 ;;
             --)
@@ -170,13 +167,15 @@ function check_input {
         esac
     done
 
-    # Check arguments.
-    while [[ -n "$*" ]]; do
+    if [[ -n "$*" ]]; then
         argument_app=true
-        app_arguments[app_arg_num]=$1
-        ((++app_arg_num))
-        shift
-    done
+        reboot=false
+        while [[ -n "$*" ]]; do
+            app_arguments[app_arg_num]=$1
+            ((++app_arg_num))
+            shift
+        done
+    fi
 }
 
 

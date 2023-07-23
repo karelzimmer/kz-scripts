@@ -77,7 +77,7 @@ declare commands_found=false
 declare edition='desktop'
 declare execute_commands=true
 declare file_argument=''
-declare logout=false
+declare logout=true
 declare mode='setup'
 declare option_apps=false
 declare option_cat=false
@@ -111,10 +111,6 @@ function check_input {
     eval set -- "$parsed"
 
     process_common_options "$@"
-
-    if [[ $* = '--' || $* = '-g --' ||$* = '--gui --' ]]; then
-        logout=true
-    fi
 
     while true; do
         case $1 in
@@ -157,6 +153,7 @@ function check_input {
             -s|--simulate)
                 option_simulate=true
                 execute_commands=false
+                logout=false
                 shift
                 ;;
             --)
@@ -169,12 +166,15 @@ function check_input {
         esac
     done
 
-    while [[ -n "$*" ]]; do
+    if [[ -n "$*" ]]; then
         argument_app=true
-        app_arguments[app_arg_num]=$1
-        ((++app_arg_num))
-        shift
-    done
+        logout=false
+        while [[ -n "$*" ]]; do
+            app_arguments[app_arg_num]=$1
+            ((++app_arg_num))
+            shift
+        done
+    fi
 }
 
 
