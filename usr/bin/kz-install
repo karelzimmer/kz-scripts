@@ -58,10 +58,8 @@ readonly HELP
 readonly X_OPTIONS_SHORT='acf:lgrs'
 readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove,server,simulate'
 
-CMDS_FILE=$(mktemp -t "$PROGRAM_NAME-cmds-XXXXXXXXXX")
-readonly CMDS_FILE
-SIMS_FILE=$(mktemp -t "$PROGRAM_NAME-sims-XXXXXXXXXX")
-readonly SIMS_FILE
+COMMANDS_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
+readonly COMMANDS_FILE
 
 readonly HOST=$HOSTNAME
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
@@ -290,14 +288,14 @@ function process_argument_app_input_file {
                     {
                         printf '%s\n' "$app_record"
                         printf '%s\n' "$input_record"
-                    } >> "$CMDS_FILE"
+                    } >> "$COMMANDS_FILE"
                     app_record=''
                 fi
                 ;;
             *)
                 # Other record (comment or command).
                 if $app_match && $app_host_match; then
-                    printf '%s\n' "$input_record" >> "$CMDS_FILE"
+                    printf '%s\n' "$input_record" >> "$COMMANDS_FILE"
                 fi
                 ;;
         esac
@@ -332,13 +330,13 @@ function process_input_file {
                 {
                     printf '%s\n' "$app_record"
                     printf '%s\n' "$input_record"
-                } >> "$CMDS_FILE"
+                } >> "$COMMANDS_FILE"
                 app_record=''
                 ;;
             *)
                 # Other record (emtpy, comment, or command).
                 if $host_match; then
-                    printf '%s\n' "$input_record" >> "$CMDS_FILE"
+                    printf '%s\n' "$input_record" >> "$COMMANDS_FILE"
                 fi
                 ;;
         esac
@@ -354,7 +352,7 @@ function process_option_apps {
 $(
     if !    grep    --no-messages           \
                     --regexp='#.* APP '     \
-                    "$CMDS_FILE"             |
+                    "$COMMANDS_FILE"             |
             tr      --squeeze-repeats       \
                     '[:space:]'             |
             cut     --delimiter=' '         \
@@ -383,7 +381,7 @@ ${blue}$DISPLAY_NAME --cat APP...${normal}"
 
 # This function displays the contents of the temporary commands file.
 function process_option_cat {
-    less --quit-if-one-screen "$CMDS_FILE"
+    cat "$COMMANDS_FILE"
 }
 
 
@@ -422,14 +420,14 @@ function process_cmds_file {
     local app_name=''
     local operation
     operation=$(gettext 'install')
-    local cmds_record=''
+    local commands_record=''
     local write_app_line=true
     local -i app_seq_num=0
     local -i app_tot_num=0
     local -i cmd_seq_num=0
 
     app_tot_num=$(
-        grep --word-regexp --regexp='#.*APP' --count "$CMDS_FILE" || true
+        grep --word-regexp --regexp='#.*APP' --count "$COMMANDS_FILE" || true
         )
     if [[ $app_tot_num -gt 99 ]]; then
         app_tot_num=99
@@ -442,8 +440,8 @@ function process_cmds_file {
         operation+=$(gettext ' simulate')
     fi
 
-    while read -r cmds_record; do
-        case $cmds_record in
+    while read -r commands_record; do
+        case $commands_record in
             '')
                 # Empty line.
                 continue
@@ -451,7 +449,7 @@ function process_cmds_file {
             '#'*' APP '*)
                 # App record.
                 app_name="$(
-                    printf '%s\n' "$cmds_record"             |
+                    printf '%s\n' "$commands_record"    |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3)"
                 write_app_line=true
@@ -471,18 +469,17 @@ function process_cmds_file {
                 ;;
             *)
                 # Command record.
-                process_command_record "$cmds_record"
+                process_command_record "$commands_record"
                 ;;
         esac
-    done < "$CMDS_FILE"
+    done < "$COMMANDS_FILE"
 }
 
 
-# This function prepares or simulates a command from the temporary commands
+# This function executes or simulates a command from the temporary commands
 # file.
 function process_command_record {
     local cmd=${1:-unknown}
-    local app_name_line=''
 
     commands_found=true
     ((++cmd_seq_num))
@@ -491,17 +488,6 @@ function process_command_record {
     fi
 
     if $execute_commands; then
-        if $option_gui; then
-            text="#[$app_seq_num/$app_tot_num] $app_name $operation\n\n$cmd"
-            printf '%s\n' "$text"
-        fi
-        printf  -v app_name_line            \
-                "[%2d/%-2d] [%2d] %s %s"    \
-                "$app_seq_num"              \
-                "$app_tot_num"              \
-                "$cmd_seq_num"              \
-                "$app_name"                 \
-                "$operation"
         execute_command "$cmd"
     else
         # Option simulate.
@@ -510,13 +496,13 @@ function process_command_record {
                     "$app_seq_num"          \
                     "$app_tot_num"          \
                     "$app_name"             \
-                    "$operation"            >> "$SIMS_FILE"
+                    "$operation"
             write_app_line=false
         fi
         printf  "%7s [%2d] ${blue}%s${normal}\n"    \
                 " "                                 \
                 "$cmd_seq_num"                      \
-                "$cmd"                              >> "$SIMS_FILE"
+                "$cmd"
     fi
 }
 
@@ -524,14 +510,26 @@ function process_command_record {
 # This function executes a command from the temporary commands file.
 function execute_command {
     local cmd=${1:-unknown}
+    local app_name_line=''
     local -i rc=0
 
-    if ! $option_gui; then
-        if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "%b\n" "$app_name_line"
+    printf  -v app_name_line            \
+            "[%2d/%-2d] [%2d] %s %s"    \
+            "$app_seq_num"              \
+            "$app_tot_num"              \
+            "$cmd_seq_num"              \
+            "$app_name"                 \
+            "$operation"
+
+        if $option_gui; then
+            text="#$app_name_line\n\n$cmd"
+            printf '%s\n' "$text"
         else
-            printf "       %b\n" "${app_name_line:7}"
-        fi
+            if [[ $cmd_seq_num -eq 1 ]]; then
+                printf "%b\n" "$app_name_line"
+            else
+                printf "       %b\n" "${app_name_line:7}"
+            fi
     fi
 
     msg_log  "$app_name_line"
@@ -555,11 +553,6 @@ function term_script {
 
     if ! $commands_found; then
         msg_info "$(gettext 'No commands to execute.' )"
-        exit $OK
-    fi
-
-    if $option_simulate; then
-        less --quit-if-one-screen --RAW-CONTROL-CHARS "$SIMS_FILE"
         exit $OK
     fi
 

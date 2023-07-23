@@ -471,13 +471,13 @@ launch a Terminal window and run:")
 [2] ${blue}sudo update-initramfs -u${normal}"
             else
                 # shellcheck disable=SC2154
-                rm --force "$CMDS_FILE" "$SIMS_FILE"
+                rm --force "$COMMANDS_FILE"
             fi
             ;;
         kz-setup)
             if [[ $rc -eq $OK ]]; then
                 # shellcheck disable=SC2154
-                rm --force "$CMDS_FILE" "$SIMS_FILE"
+                rm --force "$COMMANDS_FILE"
             fi
             ;;
         *)
