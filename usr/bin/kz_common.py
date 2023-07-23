@@ -237,7 +237,7 @@ def process_option_version(PROGRAM_NAME):
         if program_year == '':
             program_year = '????'
 
-        print(_('{} (kz) 365 ({})\n'
+        print(_('{} (kz) 360 ({})\n'
                 '\n'
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal\n'

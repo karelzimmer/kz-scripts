@@ -164,7 +164,7 @@ function process_option_version {
         program_year='????'
     fi
 
-    printf '%s\n' "$PROGRAM_NAME (kz) 365 ($build_id)
+    printf '%s\n' "$PROGRAM_NAME (kz) 360 ($build_id)
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
@@ -186,7 +186,7 @@ function process_input {
 
 # This function installs package kz.
 function install_package {
-    local site_deb='https://karelzimmer.nl/assets/kz/kz_365_all.deb'
+    local site_deb='https://karelzimmer.nl/assets/kz/kz_360_all.deb'
     local temp_deb=''
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
