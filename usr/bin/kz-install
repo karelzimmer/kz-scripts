@@ -381,7 +381,7 @@ ${blue}$DISPLAY_NAME --cat APP...${normal}"
 
 # This function displays the contents of the temporary commands file.
 function process_option_cat {
-    less --quit-if-one-screen "$CMDS_FILE"
+    less --quit-if-one-screen "$COMMANDS_FILE"
 }
 
 
