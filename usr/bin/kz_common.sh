@@ -325,7 +325,7 @@ function process_option_version {
         program_year='????'
     fi
 
-    msg_info "$PROGRAM_NAME (kz) 360 ($build_id)
+    msg_info "$PROGRAM_NAME (kz) 365 ($build_id)
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal

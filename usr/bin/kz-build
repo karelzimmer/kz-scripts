@@ -44,7 +44,7 @@ readonly SCRIPTS_REPO=$HOME/kz-scripts
 readonly deb_repo=$HOME/kz-deb
 readonly DEB_REPO_APPDIR=$deb_repo/app
 readonly DEB_REPO_DISTDIR=$deb_repo/dist
-readonly DEB_NAME=kz_360_all.deb
+readonly DEB_NAME=kz_365_all.deb
 
 readonly UPLOADS_REPO=$HOME/kz-uploads
 readonly UPLOADS_REPO_APPDIR=$UPLOADS_REPO/app

@@ -124,7 +124,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"{} (kz) 360 ({})\n"
+"{} (kz) 365 ({})\n"
 "\n"
 "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n"
 "<https://creativecommons.org/publicdomain/zero/1.0>, {}"
