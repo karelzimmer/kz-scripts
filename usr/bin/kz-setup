@@ -567,7 +567,7 @@ Check the log in the next screen.")"
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
             if $logout; then
                 text=$(gettext "You will now be logged out of the computer to \
-complete the installation of the apps.")
+finish installing the apps and changing user settings.")
                 msg_info "$text"
                 if ! $option_gui; then
                     wait_for_enter

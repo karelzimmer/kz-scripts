@@ -571,8 +571,8 @@ Check the log in the next screen.")"
             msg_info "
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
             if $reboot; then
-                text=$(gettext "The computer will now restart to complete the \
-installation of the apps.")
+                text=$(gettext "The computer will now reboot to finish \
+installing the apps and changing system settings.")
                 msg_info "$text"
                 if ! $option_gui; then
                     wait_for_enter
