@@ -253,7 +253,7 @@ function process_argument_app {
 }
 
 
-# This function generates the temporary commands file from the input file,
+# This function generates the commands file from the input file,
 # filtering on USER and APPs.
 function process_argument_app_input_file {
     local app_match=false
@@ -306,7 +306,7 @@ function process_argument_app_input_file {
 }
 
 
-# This function generates the temporary commands file from the input file,
+# This function generates the commands file from the input file,
 # filtering on USER.
 function process_input_file {
     local app_record=''
@@ -376,7 +376,7 @@ ${blue}$DISPLAY_NAME --cat APP...${normal}"
 }
 
 
-# This function displays the contents of the temporary commands file.
+# This function displays the contents of the commands file.
 function process_option_cat {
     less --quit-if-one-screen "$COMMANDS_FILE"
 }
@@ -412,7 +412,7 @@ $(eval_gettext "To simulate the processing of FILE execute: \
 }
 
 
-# This function reads commands from the temporary commands file.
+# This function reads commands from the commands file.
 function process_cmds_file {
     local app_name=''
     local operation
@@ -472,7 +472,7 @@ function process_cmds_file {
 }
 
 
-# This function executes or simulates a command from the temporary commands
+# This function executes or simulates a command from the commands
 # file.
 function process_command_record {
     local cmd=${1:-unknown}
@@ -503,7 +503,7 @@ function process_command_record {
 }
 
 
-# This function executes a command from the temporary commands file.
+# This function executes a command from the commands file.
 function execute_command {
     local cmd=${1:-unknown}
     local app_name_line=''

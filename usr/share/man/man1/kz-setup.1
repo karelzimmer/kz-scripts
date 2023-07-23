@@ -40,7 +40,7 @@ This input file contains commands for all users (USERs) included in it for
 Ubuntu desktop.
 .br
 When processing the input file, the commands for the current user (USER) are
-selected and copied to a temporary commands file.
+selected and copied to a commands file.
 .br
 A USER is defined in this context as <username>@<computername>, e.g. jan@pc02
 or *.
@@ -50,14 +50,14 @@ or in the \fIFILE\fR provided with option \fB-f\fR, \fB--file\fR.
 .sp
 It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands for
 the current user (USER) and \fIAPP\fR are selected from the input file and are
-copied to a temporary commands file.
+copied to a commands file.
 .sp
-The commands in the temporary command file are executed.
+The commands in the command file are executed.
 .sp
-Option \fB-c\fR, \fB--cat\fR gives the contents of the temporary commands file.
+Option \fB-c\fR, \fB--cat\fR gives the contents of the commands file.
 .sp
-Option \fB-s\fR, \fB--simulate\fR shows the commands in the temporary commands
-file that would be executed.
+Option \fB-s\fR, \fB--simulate\fR shows the commands in the commands file
+that would be executed.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .br
@@ -201,7 +201,7 @@ only for Jan on pc02.
 Show a list of apps to set up.
 .TP
 \fB-c\fR, \fB--cat\fR
-Display the contents of the temporarycommands file.
+Display the contents of the commands file.
 .TP
 \fB-l\fR, \fB--list\fR
 Show a list of standard files.

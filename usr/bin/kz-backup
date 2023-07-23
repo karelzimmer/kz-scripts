@@ -392,8 +392,7 @@ EOF
     maxrc
     rm "$exclude"
 
-    text=$(gettext "Writing data from temporary memory (this may take a \
-while)")
+    text=$(gettext "Writing data from memory (this may take a while)")
     if ! $option_dry_run; then
         if $option_gui; then
             sync                            |

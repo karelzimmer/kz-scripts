@@ -267,7 +267,7 @@ msgstr ""
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 
-msgid "Writing data from temporary memory (this may take a while)"
+msgid "Writing data from memory (this may take a while)"
 msgstr ""
 
 msgid "The backup has NOT been created (DRY RUN)."

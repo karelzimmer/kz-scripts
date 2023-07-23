@@ -333,8 +333,8 @@ msgstr "snap is niet geïnstalleerd"
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
-msgid "Writing data from temporary memory (this may take a while)"
-msgstr "Gegevens uit tijdelijk geheugen wegschrijven (dit kan even duren)"
+msgid "Writing data from memory (this may take a while)"
+msgstr "Gegevens uit geheugen wegschrijven (dit kan even duren)"
 
 msgid "The backup has NOT been created (DRY RUN)."
 msgstr "De back-up is NIET gemaakt (DRY RUN)."
