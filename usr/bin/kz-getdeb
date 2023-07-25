@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck shell=bash source=/dev/null
+# shellcheck shell=bash source=kz_common.sh
 ###############################################################################
 # Install kz package.
 #
@@ -14,6 +14,11 @@
 # Import
 ###############################################################################
 
+PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat)
+
+# If source kz_common.sh fails, e.g. when used in wget kz and bash kz sequence.
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
@@ -29,30 +34,14 @@ readonly PROGRAM_DESC
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 # shellcheck disable=SC2034
-readonly OPTIONS_USAGE='[-u|--usage] [-h|--help] [-v|--version]'
 USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 readonly USAGE
-OPTIONS_HELP="  -h, --help     $(gettext 'give this help list')
-  -u, --usage    $(gettext 'give a short usage message')
-  -v, --version  $(gettext 'print program version')"
-readonly OPTIONS_HELP
 HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $OPTIONS_HELP"
 readonly HELP
-readonly OPTIONS_SHORT='huv'
-readonly OPTIONS_LONG='help,usage,version'
-
-USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
-information.")
-readonly USAGE_LINE
-
-BOLD=$(tput bold)
-readonly BOLD
-NORMAL=$(tput sgr0)
-readonly NORMAL
 
 ###############################################################################
 # Variables
@@ -63,13 +52,6 @@ readonly NORMAL
 # Functions
 ###############################################################################
 
-function init_script {
-    set -o errtrace
-    set -o nounset
-    set -o pipefail
-}
-
-
 # This function handles the script options and arguments.
 function check_input {
     local -i rc=0
@@ -79,32 +61,19 @@ function check_input {
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$PROGRAM_NAME"     \
+                --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        )       || rc=$?
-    if [[ $rc -ne 0 ]]; then
-        printf '%s\n' "$USAGE_LINE" >&2
-        exit 1
+        ) || rc=$?
+    if [[ $rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
     fi
     eval set -- "$parsed"
 
+    process_common_options "$@"
+
     while true; do
         case $1 in
-            -h|--help)
-                process_option_help
-                cleanup
-                exit 0
-                ;;
-            -u|--usage)
-                process_option_usage
-                cleanup
-                exit 0
-                ;;
-            -v|--version)
-                process_option_version
-                cleanup
-                exit 0
-                ;;
             --)
                 shift
                 break
@@ -118,57 +87,8 @@ function check_input {
     if [[ -n "$*" ]]; then
         printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
                 "$(gettext 'arguments are not allowed')"
-        cleanup
-        exit 1
+        exit $ERROR
     fi
-}
-
-
-# This function shows the available help.
-function process_option_help {
-    printf '%b\n' "$HELP
-
-$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \
-\e]8;;man:\$PROGRAM_NAME(1)\e\\\$DISPLAY_NAME man page\e]8;;\e\\ for more \
-information.")"
-}
-
-
-# This function shows the available options.
-function process_option_usage {
-    printf '%s\n' "$USAGE
-
-$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
-}
-
-
-# This function displays version, author, and license information.
-function process_option_version {
-    local build_id='????-??-??T??:??'
-    local grep_expr='# <https://creativecommons.org'
-    local program_year='????'
-    local PROGRAM_PATH
-    PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-
-    if [[ -e /usr/local/etc/kz-build-id ]]; then
-        build_id=$(cat /usr/local/etc/kz-build-id)
-    else
-        build_id='????-??-??T??:??'
-    fi
-
-    program_year=$(
-        grep    --regexp="$grep_expr" "$PROGRAM_PATH/$PROGRAM_NAME" |
-        cut     --delimiter=' ' --fields=3
-        ) || true
-    if [[ $program_year = '' ]]; then
-        program_year='????'
-    fi
-
-    printf '%s\n' "$PROGRAM_NAME (kz) 365 ($build_id)
-
-$(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
-Universal
-<https://creativecommons.org/publicdomain/zero/1.0>, \$program_year")"
 }
 
 
@@ -192,46 +112,16 @@ function install_package {
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
-    printf "${BOLD}%s${NORMAL} ($DISPLAY_NAME)\n" "$(gettext 'Download')"
+    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Download')"
     wget --output-document="$temp_deb" $site_deb
     check_for_active_updates
-    printf "${BOLD}%s${NORMAL} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
+    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
             --yes                           \
             "$temp_deb"
     rm "$temp_deb"
-}
-
-
-# This function checks for active updates and waits for the next check.
-function check_for_active_updates {
-    local -i check_wait=10
-    local text
-    text=$(eval_gettext \
-            "Wait \${check_wait}s for another package manager to finish...")
-
-    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        # System with snaps.
-        while sudo  fuser                                               \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       \
-                    /snap/core/*/var/cache/debconf/config.dat           \
-                    &> /dev/null; do
-            printf '%s\n' "$text"
-            sleep $check_wait
-        done
-    else
-        # System without snaps.
-        while sudo  fuser                                               \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       \
-                    &> /dev/null; do
-            printf '%s\n' "$text"
-            sleep $check_wait
-        done
-    fi
 }
 
 
@@ -276,7 +166,7 @@ Type 'exit' to close this window.")
 ###############################################################################
 
 function main {
-    init_script
+    init_script "$@"
     check_input "$@"
     process_input
     term_script
