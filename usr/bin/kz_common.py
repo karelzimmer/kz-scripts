@@ -215,7 +215,7 @@ def process_option_version(PROGRAM_NAME):
     """
     This function displays version, author, and license information.
     """
-    build_id = '????-??-?? ??:??'
+    build_id = '????-??-??T??:??'
     cmd = ''
     grep_expr = '# <https://creativecommons.org'
     program_year = '????'
@@ -224,7 +224,7 @@ def process_option_version(PROGRAM_NAME):
         with open('/usr/local/etc/kz-build-id') as fh:
             build_id = fh.read()
     except FileNotFoundError:
-        build_id = '????-??-?? ??:??'
+        build_id = '????-??-??T??:??'
     except Exception as ex:
         print(ex)
         sys.exit(ERROR)

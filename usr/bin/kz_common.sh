@@ -307,14 +307,14 @@ $(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 
 # This function displays version, author, and license information.
 function process_option_version {
-    local build_id='????-??-?? ??:??'
+    local build_id='????-??-??T??:??'
     local grep_expr='# <https://creativecommons.org'
     local program_year='????'
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=$(cat /usr/local/etc/kz-build-id)
     else
-        build_id='????-??-?? ??:??'
+        build_id='????-??-??T??:??'
     fi
 
     program_year=$(
