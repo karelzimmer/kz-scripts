@@ -16,7 +16,7 @@
 
 PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 readonly PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat)
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifier=kz-getdeb)
 
 # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
 export TEXTDOMAIN=kz
@@ -71,7 +71,8 @@ function check_input {
     eval set -- "$parsed"
 
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type process_common_options 1>/dev/null 2> >(systemd-cat); then
+    if type process_common_options &> >(systemd-cat --identifier=$PROGRAM_NAME)
+    then
         process_common_options "$@"
     fi
 
@@ -119,7 +120,8 @@ function install_package {
     wget --output-document="$temp_deb" $site_deb
 
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type check_for_active_updates 1>/dev/null 2> >(systemd-cat); then
+    if type check_for_active_updates \
+        &> >(systemd-cat --identifier=$PROGRAM_NAME); then
         check_for_active_updates
     fi
 
@@ -175,7 +177,7 @@ Type 'exit' to close this window.")
 
 function main {
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type init_script 1>/dev/null 2> >(systemd-cat); then
+    if type init_script &> >(systemd-cat --identifier=$PROGRAM_NAME); then
         init_script "$@"
     fi
     check_input "$@"

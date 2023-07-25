@@ -231,7 +231,7 @@ function migrate_settings_previously_backuped {
 
 # This function moves a file from one location to another.
 function move_file {
-    mv "$1" "$2" 2> /dev/null || true
+    mv "$1" "$2" &> >(systemd-cat --identifier=$PROGRAM_NAME) || true
 }
 
 

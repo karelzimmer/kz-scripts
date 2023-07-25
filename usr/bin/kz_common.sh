@@ -22,6 +22,7 @@ source /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
+# shellcheck disable=SC2034
 readonly MODULE_NAME='kz_common.sh'
 MODULE_DESC=$(gettext 'Common module for shell scripts')
 # shellcheck disable=SC2034
@@ -79,13 +80,14 @@ function check_for_active_updates {
     text=$(eval_gettext \
             "Wait \${check_wait}s for another package manager to finish...")
 
-    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+    if find /snap/core/*/var/cache/debconf/config.dat \
+        &> >(systemd-cat --identifier="$PROGRAM_NAME"); then
         # System with snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
-                    /snap/core/*/var/cache/debconf/config.dat           \
-                    &> /dev/null; do
+                    /snap/core/*/var/cache/debconf/config.dat           |
+                    tee &> >(systemd-cat); do
             printf '%s\n' "$text"
             sleep $check_wait
         done
@@ -93,8 +95,8 @@ function check_for_active_updates {
         # System without snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       \
-                    &> /dev/null; do
+                    /var/cache/debconf/config.dat                       |
+                    tee &> >(systemd-cat --identifier="$PROGRAM_NAME"); do
             printf '%s\n' "$text"
             sleep $check_wait
         done
@@ -162,7 +164,7 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    logcmd="systemd-cat --identifier=${PROGRAM_NAME:-$MODULE_NAME}"
+    logcmd="systemd-cat --identifier=$PROGRAM_NAME"
     logcmd_check="journalctl --all --boot --identifier=$PROGRAM_NAME \
 --since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
