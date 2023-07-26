@@ -32,8 +32,7 @@ restored from Home / Pictures, and Favorites will be restored from Home /
 Documents.
 .sp
 With option \fB-s\fR, \fB--source\fR \fIDIRECTORY\fR another location can be
-specified. For example /tmp instead of /media/jan/backupdisk (unwise because
-/tmp is emptied after a reboot).
+specified. For example /media/jan/usbstick instead of /media/jan/backupdisk.
 .sp
 Option  \fB-d\fR, \fB--dry-run\fR performs a trial run without making any
 changes. It is usually used in seeing what an rsync command will do before
@@ -116,11 +115,9 @@ environment.
 Show files that would be restored from the backup.
 .RE
 .sp
-\fBkz restore\
- --source smb://fileserver/backups\fR
+\fBkz restore --source/media/jan/usbstick\fR
 .RS
-Restore the backup from SMB share backups on fileserver from backup-pc02-jan
-directorie.
+Restore the backup from /media/jan/usbstick from the backup-pc02-jan directory.
 .RE
 .\"
 .\"

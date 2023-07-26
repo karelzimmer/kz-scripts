@@ -32,8 +32,7 @@ teruggezet vanuit Persoonlijke map / Afbeeldingen, en de Favorieten vanuit
 Persoonlijke map / Documenten.
 .sp
 Met optie \fB-s\fR, \fB--source\fR \fIMAP\fR kan een andere locatie opgegeven
-worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk (onverstandig
-want /tmp wordt leeggegooid na een herstart).
+worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
 .sp
 Optie \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan te brengen.
 Het wordt meestal gebruikt in om te zien wat een rsync-commando gaat doen
@@ -116,11 +115,9 @@ terugzetten\fR beschikbaar.
 Toon bestanden die teruggezet zouden worden uit de back-up.
 .RE
 .sp
-\fBkz restore\
- --source smb://fileserver/backups\fR
+\fBkz restore --source /media/jan/usbstick\fR
 .RS
-Zet de back-up terug vanaf SMB-share backups op fileserver uit de map
-backup-pc02-jan.
+Zet de back-up terug vanaf /media/jan/usbstick uit de map backup-pc02-jan.
 .RE
 .\"
 .\"

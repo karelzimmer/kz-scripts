@@ -32,8 +32,7 @@ externe harddisk in map \fBbackup-<computernaam>-<gebruikersnaam>\fR, deze map
 wordt aangemaakt als nodig, bijvoorbeeld /media/jan/backupdisk/backup-pc02-jan.
 .sp
 Met optie \fB-t\fR, \fB--target\fR \fIMAP\fR kan een andere locatie opgegeven
-worden. Bijvoorbeeld /tmp in plaats van /media/jan/backupdisk (onverstandig
-want /tmp wordt leeggegooid na een herstart).
+worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
 .sp
 Optie \fB-d\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
 te brengen. Het wordt meestal gebruikt in combinatie met rsync's optie --delete
@@ -150,10 +149,10 @@ Toon bestanden die anders toegevoegd en verwijderd zouden worden in de
 back-up.
 .RE
 .sp
-\fBkz backup --target smb://fileserver/backups\fR
+\fBkz backup --target /media/jan/usbstick\fR
 .RS
-Maak een back-up van de Persoonlijke map naar SMB-share backups op
-fileserver in de map backup-pc02-jan (deze map wordt aangemaakt als nodig).
+Maak een back-up van de Persoonlijke map naar /media/jan/usbstick in de map
+backup-pc02-jan (deze map wordt aangemaakt als nodig).
 .RE
 .\"
 .\"
