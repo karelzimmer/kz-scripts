@@ -91,6 +91,10 @@ kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 # USER karel@pc06
 kz-gset --delfav=kz-teams
 
+#  APP teamviewer
+# USER karel@pc06
+kz-gset --delfav=com.teamviewer.TeamViewer
+
 #  APP telegram
 # USER hugo@pc-van-hugo
 kz-gset --delfav=kz-telegram
