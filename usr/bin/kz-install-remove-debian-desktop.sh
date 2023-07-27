@@ -34,6 +34,10 @@ sudo apt-get remove --yes cups
 # HOST *
 sudo apt-get remove --yes gnome-shell-extension-dashtodock
 
+#  APP deja-dup
+# HOST *
+sudo apt-get remove --yes deja-dup
+
 #  APP gnome-gmail
 # HOST pc07
 sudo apt-get remove --yes gnome-gmail

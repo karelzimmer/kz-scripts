@@ -36,6 +36,10 @@ sudo apt-get install --yes cups
 # HOST *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
+#  APP deja-dup
+# HOST *
+sudo apt-get install --yes deja-dup
+
 #  APP gnome-gmail
 # HOST debian pc07
 sudo apt-get install --yes gnome-gmail
