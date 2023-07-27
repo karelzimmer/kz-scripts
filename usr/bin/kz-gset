@@ -262,7 +262,10 @@ function process_option_delfav  {
 
 # This feature lists the favorite apps along with the app folders.
 function process_option_list  {
+    msg_info "$(gettext 'Favorite apps:')"
     gsettings get org.gnome.shell favorite-apps
+    msg_info "
+$(gettext 'App folders:')"
     gsettings get org.gnome.desktop.app-folders folder-children
 }
 
