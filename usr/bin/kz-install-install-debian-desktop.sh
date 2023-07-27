@@ -40,6 +40,10 @@ sudo apt-get install --yes gnome-shell-extension-dashtodock
 # HOST *
 sudo apt-get install --yes deja-dup
 
+#  APP gedit
+# HOST *
+sudo apt-get install --yes gedit
+
 #  APP gnome-gmail
 # HOST debian pc07
 sudo apt-get install --yes gnome-gmail

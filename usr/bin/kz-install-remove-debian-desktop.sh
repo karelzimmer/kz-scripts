@@ -38,6 +38,10 @@ sudo apt-get remove --yes gnome-shell-extension-dashtodock
 # HOST *
 sudo apt-get remove --yes deja-dup
 
+#  APP gedit
+# HOST *
+sudo apt-get remove --yes gedit
+
 #  APP gnome-gmail
 # HOST pc07
 sudo apt-get remove --yes gnome-gmail
