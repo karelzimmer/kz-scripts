@@ -36,7 +36,7 @@ sudo apt-get remove --yes gnome-shell-extension-dashtodock
 
 #  APP deja-dup
 # HOST *
-sudo apt-get remove --yes deja-dup
+sudo snap remove deja-dup
 
 #  APP gedit
 # HOST *

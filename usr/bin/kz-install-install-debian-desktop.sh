@@ -38,7 +38,7 @@ sudo apt-get install --yes gnome-shell-extension-dashtodock
 
 #  APP deja-dup
 # HOST *
-sudo apt-get install --yes deja-dup
+sudo snap install --classic deja-dup
 
 #  APP gedit
 # HOST *
