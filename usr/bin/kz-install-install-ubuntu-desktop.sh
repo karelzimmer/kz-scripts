@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Standard installation file for for Ubuntu desktop.
+# Standard installation file for Ubuntu desktop.
 #
 # This script file is used by script kz-install.
 # Use 'man kz install' for more information.
