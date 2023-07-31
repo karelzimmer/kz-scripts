@@ -9,6 +9,10 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
+#  APP adm
+# HOST *
+sudo deluser "${SUDO_USER:-$USER}" adm
+
 #  APP ansible
 # HOST *
 sudo apt-get remove --yes ansible
