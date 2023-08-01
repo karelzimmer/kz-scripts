@@ -80,14 +80,13 @@ function check_for_active_updates {
     text=$(eval_gettext \
             "Wait \${check_wait}s for another package manager to finish...")
 
-    if find /snap/core/*/var/cache/debconf/config.dat \
-        &> >(systemd-cat --identifier="$PROGRAM_NAME"); then
+    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # System with snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
                     /var/cache/debconf/config.dat                       \
-                    /snap/core/*/var/cache/debconf/config.dat           |
-                    tee &> >(systemd-cat); do
+                    /snap/core/*/var/cache/debconf/config.dat           \
+                    &> /dev/null; do
             printf '%s\n' "$text"
             sleep $check_wait
         done
@@ -95,8 +94,8 @@ function check_for_active_updates {
         # System without snaps.
         while sudo  fuser                                               \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
-                    /var/cache/debconf/config.dat                       |
-                    tee &> >(systemd-cat --identifier="$PROGRAM_NAME"); do
+                    /var/cache/debconf/config.dat                       \
+                    &> /dev/null; do
             printf '%s\n' "$text"
             sleep $check_wait
         done
