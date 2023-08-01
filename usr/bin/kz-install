@@ -475,8 +475,8 @@ function execute_command {
             "$app_seq_num"              \
             "$app_tot_num"              \
             "$cmd_seq_num"              \
-            "$app_name"                 \
-            "$operation"
+            "$operation"                \
+            "$app_name"
 
     if $option_gui; then
         text="#$app_name_line\n\n$cmd"
