@@ -31,8 +31,9 @@ commands for setting up apps and changing user settings.
 For the input file format, see the \fBFILE FORMAT\fR section below.
 .sp
 By default, \fBkz setup\fR processes the input file
-/usr/bin/kz-setup-<distribution>-desktop.sh, <distribution> is populated with
-the value from the current computer.
+/usr/bin/kz-setup-<distribution>-<edition>.sh, <distribution> (e.g.
+ubuntu) and <edition> (desktop or server) are populated with the values from
+the current computer.
 .br
 For example, kz-setup-setup-ubuntu-desktop.sh.
 .sp
@@ -60,10 +61,6 @@ With option \fB-r\fR, \fB--reset\fR the setting can be undone.
 .br
 Then, for example, file /usr/bin/kz-setup-reset-ubuntu-desktop.sh
 ("reset file") is processed.
-.sp
-With option \fB-s\fR, \fB--server\fR server is used instead of desktop.
-.br
-Then, for example, file /usr/bin/kz-setup-setup-ubuntu-server.sh is processed.
 .sp
 The \fB-l\fR, \fB--list\fR option displays a list of default files.
 .sp
@@ -205,9 +202,6 @@ Show a list of standard files.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset apps.
-.TP
-\fB-s\fR, \fB--server\fR
-Set up apps and change user settings for a server.
 .TP
 \fB-u\fR, \fB--usage\fR
 Show the available options.

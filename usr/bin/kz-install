@@ -30,7 +30,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] \
 [-f|--file FILE]
-                  [-g|--gui] [-l|--list] [-r|--remove] [-s|--server]
+                  [-g|--gui] [-l|--list] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [APP...]")
 readonly USAGE
@@ -46,7 +46,6 @@ $(gettext '  -f, --file FILE
   -g, --gui      $(gettext 'starts in graphics mode')
   -l, --list     $(gettext 'show list of standard files')
   -r, --remove   $(gettext 'delete apps')
-  -s, --server   $(gettext 'install apps for a server')
 $OPTIONS_HELP
   --             $(gettext "signals the end of options and disables further \
 option processing")
@@ -54,8 +53,8 @@ option processing")
 $(gettext 'Arguments:
   APP            install APPs')"
 readonly HELP
-readonly X_OPTIONS_SHORT='acf:lgrs'
-readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove,server'
+readonly X_OPTIONS_SHORT='acf:lgr'
+readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove'
 
 COMMANDS_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 readonly COMMANDS_FILE
@@ -63,6 +62,12 @@ readonly COMMANDS_FILE
 readonly HOST=$HOSTNAME
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
+if [[ -z $XDG_CURRENT_DESKTOP ]]; then
+    readonly EDITION='server'
+else
+    readonly EDITION='desktop'
+fi
+
 
 ###############################################################################
 # Variables
@@ -71,7 +76,6 @@ readonly DISTRO
 declare -a app_arguments=()
 declare argument_app=false
 declare commands_found=false
-declare edition='desktop'
 declare execute_commands=true
 declare file_argument=''
 declare mode='install'
@@ -143,10 +147,6 @@ function check_input {
                 mode='remove'
                 shift
                 ;;
-            -s|--server)
-                edition=server
-                shift
-                ;;
             --)
                 shift
                 break
@@ -181,7 +181,7 @@ function process_input {
         fi
         input_file=$file_argument
     else
-        input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$edition.sh
+        input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$EDITION.sh
     fi
     if ! [[ -f $input_file ]]; then
         text=$(eval_gettext "No install file found, looked for \$input_file.")

@@ -32,8 +32,9 @@ commands for installing apps and modifying system settings.
 For the format of the input files see the section \fBFILE FORMAT\fR below.
 .sp
 By default, \fBkz install\fR processes the input file
-/usr/bin/kz-install-install-<distribution>-desktop.sh, <distribution> is
-populated with the value from the current computer.
+/usr/bin/kz-install-install-<distribution>-<edition>.sh, <distribution> (e.g.
+ubuntu) and <edition> (desktop or server) are populated with the values from
+the current computer.
 .br
 For example, kz-install-install-ubuntu-desktop.sh.
 .sp
@@ -60,11 +61,6 @@ With option \fB-r\fR, \fB--remove\fR the installation can be undone.
 .br
 Then, for example, file /usr/bin/kz-install-remove-ubuntu-desktop.sh
 ("remove file") is processed.
-.sp
-With option \fB-s\fR, \fB--server\fR server is used instead of desktop.
-.br
-Then, for example, file /usr/bin/kz-install-install-ubuntu-server.sh is
-processed.
 .sp
 The \fB-l\fR, \fB--list\fR option displays a list of default files.
 .sp

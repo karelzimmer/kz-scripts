@@ -7,5 +7,5 @@
 ###############################################################################
 
 dashoptions='-a --apps -c --cat  -f --file -g --gui -l --list -h --help -r
-    --remove --server -u --usage -v --version'
+    --remove -u --usage -v --version'
 complete -o default -W "$dashoptions" kz-install

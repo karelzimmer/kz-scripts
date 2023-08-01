@@ -34,8 +34,9 @@ Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Standaard verwerkt \fBkz install\fR het invoerbestand
-/usr/bin/kz-install-install-<distributie>-desktop.sh, <distributie> wordt
-ingevuld met de waarde van de huidige computer.
+/usr/bin/kz-install-install-<distributie>-<editie>.sh, <distributie> (b.v.
+ubuntu) en <editie> (desktop of server) worden ingevuld met de waarden van de
+huidige computer.
 .br
 Bijvoorbeeld kz-install-install-ubuntu-desktop.sh.
 .sp
@@ -62,11 +63,6 @@ Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
 .br
 Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-remove-ubuntu-desktop.sh
 ("verwijderbestand") verwerkt.
-.sp
-Met optie \fB-s\fR, \fB--server\fR wordt niet desktop maar server gebruikt.
-.br
-Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-install-ubuntu-server.sh
-verwerkt.
 .sp
 De optie \fB-l\fR, \fB--list\fR geeft een lijst met standaardbestanden weer.
 .sp
@@ -211,9 +207,6 @@ Toon een lijst van standaardbestanden.
 .TP
 \fB-r\fR, \fB--remove\fR
 Verwijder apps.
-.TP
-\fB-s\fR, \fB--server\fR
-Apps installeren en systeeminstellingen wijzigen voor een server.
 .TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
