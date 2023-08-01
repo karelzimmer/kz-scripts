@@ -462,6 +462,10 @@ function execute_command {
     local app_name_line=''
     local -i rc=0
 
+    ((++cmd_seq_num))
+    if [[ $cmd_seq_num -gt 99 ]]; then
+        cmd_seq_num=99
+    fi
     printf  -v app_name_line            \
             "[%2d/%-2d] [%2d] %s %s"    \
             "$app_seq_num"              \
@@ -470,10 +474,6 @@ function execute_command {
             "$app_name"                 \
             "$operation"
     commands_found=true
-    ((++cmd_seq_num))
-    if [[ $cmd_seq_num -gt 99 ]]; then
-        cmd_seq_num=99
-    fi
 
     if $option_gui; then
         text="#$app_name_line\n\n$cmd"
