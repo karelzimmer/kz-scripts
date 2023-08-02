@@ -161,11 +161,14 @@ under Linux.
 Type 'exit' to close this window.")
 
     clear -x
-    TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
-                        --title     "$title"        \
-                        --infobox   "$text"         \
-                        16 47
-
+    if [[ -n $XDG_CURRENT_DESKTOP ]]; then
+        TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
+                            --title     "$title"        \
+                            --infobox   "$text"         \
+                            16 47
+    else
+        printf "%s\n" "$(gettext 'Finished')."
+    fi
     cleanup
     exit 0
 }

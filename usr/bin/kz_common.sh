@@ -31,6 +31,13 @@ readonly MODULE_DESC
 readonly OK=0
 readonly ERROR=1
 
+if [[ -n $XDG_CURRENT_DESKTOP ]]; then
+    readonly EDITION='desktop'
+else
+    # shellcheck disable=SC2034
+    readonly EDITION='server'
+fi
+
 # shellcheck disable=SC2034
 OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
 # shellcheck disable=SC2034
@@ -191,12 +198,6 @@ function init_script {
 information.")
     # shellcheck disable=SC2034
     readonly USAGE_LINE
-    if [[ -n $XDG_CURRENT_DESKTOP ]]; then
-        readonly EDITION='desktop'
-    else
-        # shellcheck disable=SC2034
-        readonly EDITION='server'
-fi
 }
 
 
