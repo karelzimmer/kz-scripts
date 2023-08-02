@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 365\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-01 09:16+0200\n"
+"POT-Creation-Date: 2023-08-02 08:06+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -249,6 +249,9 @@ msgstr ""
 
 msgid "too many options"
 msgstr "te veel opties"
+
+msgid "not allowed on server edition"
+msgstr "niet toegestaan op servereditie"
 
 #, sh-format
 msgid "File name must start with '$PROGRAM_NAME-'."
@@ -1195,3 +1198,6 @@ msgstr ""
 msgid "signals the end of options and disables further option processing"
 msgstr ""
 "signaleert het einde van opties en schakelt verdere verwerking van opties uit"
+
+msgid "not allowed on server edition"
+msgstr ""

@@ -191,6 +191,12 @@ function init_script {
 information.")
     # shellcheck disable=SC2034
     readonly USAGE_LINE
+    if [[ -n $XDG_CURRENT_DESKTOP ]]; then
+        readonly EDITION='desktop'
+    else
+        # shellcheck disable=SC2034
+        readonly EDITION='server'
+fi
 }
 
 
