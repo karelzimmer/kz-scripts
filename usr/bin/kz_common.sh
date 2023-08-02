@@ -184,7 +184,7 @@ function init_script {
     msg_log  "started ($program_exec $* as $USER)"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        if command -v xhost &> >(systemd-cat); then
+        if command -v xhost &> /dev/null; then
             xhost +si:localuser:root |& $logcmd
         fi
     fi
