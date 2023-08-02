@@ -16,7 +16,7 @@
 
 PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 readonly PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat)
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifier=kz_common.sh)
 
 
 ###############################################################################
