@@ -71,7 +71,7 @@ function check_input {
     eval set -- "$parsed"
 
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type -t function process_common_options &> /dev/null
+    if type process_common_options &> /dev/null
     then
         process_common_options "$@"
     fi
@@ -120,7 +120,7 @@ function install_package {
     wget --output-document="$temp_deb" $site_deb
 
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type -t function check_for_active_updates &> /dev/null; then
+    if type check_for_active_updates &> /dev/null; then
         check_for_active_updates
     fi
 
@@ -179,7 +179,7 @@ Type 'exit' to close this window.")
 
 function main {
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type -t function init_script &> /dev/null; then
+    if type init_script &> /dev/null; then
         init_script "$@"
     fi
     check_input "$@"
