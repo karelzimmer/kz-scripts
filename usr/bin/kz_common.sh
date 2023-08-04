@@ -184,7 +184,8 @@ function init_script {
     msg_log  "started ($program_exec $* as $USER)"
 
     if [[ $(lsb_release --id --short) = 'Debian' && $UID -ne 0 ]]; then
-        if type xhost &> /dev/null; then
+        # GUI only on desktop editions.
+        if [[ $EDITION = 'desktop' ]]; then
             xhost +si:localuser:root |& $logcmd
         fi
     fi
