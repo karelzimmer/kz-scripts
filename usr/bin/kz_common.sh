@@ -31,7 +31,7 @@ readonly MODULE_DESC
 readonly OK=0
 readonly ERROR=1
 
-if [[ -n $XDG_CURRENT_DESKTOP ]]; then
+if dpkg --list gnome || dpkg --list ubuntu-desktop; then
     readonly EDITION='desktop'
 else
     # shellcheck disable=SC2034
