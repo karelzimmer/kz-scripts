@@ -60,8 +60,6 @@ COMMANDS_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
 readonly COMMANDS_FILE
 
 readonly HOST=$HOSTNAME
-DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly DISTRO
 
 
 ###############################################################################

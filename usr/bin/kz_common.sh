@@ -31,6 +31,8 @@ readonly MODULE_DESC
 readonly OK=0
 readonly ERROR=1
 
+DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO
 if dpkg --list gnome-shell &> /dev/null; then
     readonly EDITION='desktop'
 else
@@ -183,8 +185,8 @@ function init_script {
 
     msg_log  "started ($program_exec $* as $USER)"
 
-    # GUI only on desktop editions.
-    if [[ $EDITION = 'desktop' && $UID -ne 0 ]]; then
+    # Setting xhost is needed on Debian for GUI root scripts, e.g. kz-install.
+    if [[ $DISTRO = 'debian' && $EDITION = 'desktop' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $logcmd
     fi
 
