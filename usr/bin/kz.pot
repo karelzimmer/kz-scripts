@@ -722,11 +722,11 @@ msgid "Command"
 msgstr ""
 
 #, sh-format
-msgid "Run number [1-$menu1_lines]: "
+msgid "Run number [1-$MENU1_LINES]: "
 msgstr ""
 
 #, sh-format
-msgid "Run number [1-$menu2_lines]: "
+msgid "Run number [1-$MENU2_LINES]: "
 msgstr ""
 
 #, sh-format

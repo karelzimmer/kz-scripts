@@ -853,12 +853,12 @@ msgid "Command"
 msgstr "Opdracht"
 
 #, sh-format
-msgid "Run number [1-$menu1_lines]: "
-msgstr "Voer uit nummer [1-$menu1_lines]: "
+msgid "Run number [1-$MENU1_LINES]: "
+msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
 #, sh-format
-msgid "Run number [1-$menu2_lines]: "
-msgstr "Voer uit nummer [1-$menu2_lines]: "
+msgid "Run number [1-$MENU2_LINES]: "
+msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
