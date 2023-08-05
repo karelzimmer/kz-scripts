@@ -31,7 +31,8 @@ readonly MODULE_DESC
 readonly OK=0
 readonly ERROR=1
 
-if dpkg --list gnome || dpkg --list ubuntu-desktop; then
+if dpkg --list gnome &> /dev/null || dpkg --list ubuntu-desktop &> /dev/null
+then
     readonly EDITION='desktop'
 else
     # shellcheck disable=SC2034
