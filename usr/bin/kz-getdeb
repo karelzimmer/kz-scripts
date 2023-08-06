@@ -159,7 +159,7 @@ under Linux.
 
 Type 'exit' to close this window.")
 
-    if [[ -n $XDG_CURRENT_DESKTOP ]]; then
+    if dpkg --list gnome-shell &> /dev/null; then
         clear -x
         TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                             --title     "$title"        \
