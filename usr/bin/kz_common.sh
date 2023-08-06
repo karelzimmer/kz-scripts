@@ -33,7 +33,7 @@ readonly ERROR=1
 
 DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 readonly DISTRO
-if dpkg --list gnome-shell &> /dev/null; then
+if type gnome-shell &> /dev/null; then
     readonly EDITION='desktop'
 else
     # shellcheck disable=SC2034
