@@ -57,6 +57,12 @@ function check_input {
     local -i rc=0
     local parsed=''
 
+    if [[ -f $PROGRAM_PATH/kz.1 ]]; then
+        text=$(gettext 'delete all versions of kz first (kz, kz.1, kz.2, ...)')
+        printf  "$DISPLAY_NAME: kz.1: %s\n$USAGE_LINE\n" "$text"
+        exit $ERROR
+    fi
+
     parsed=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \

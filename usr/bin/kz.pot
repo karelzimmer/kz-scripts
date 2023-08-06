@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-06 09:16+0200\n"
+"POT-Creation-Date: 2023-08-06 10:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -376,6 +376,9 @@ msgid "Wait ${check_wait}s for another package manager to finish..."
 msgstr ""
 
 msgid "Install kz package"
+msgstr ""
+
+msgid "delete all versions of kz first (kz, kz.1, kz.2, ...)"
 msgstr ""
 
 msgid "Download"
