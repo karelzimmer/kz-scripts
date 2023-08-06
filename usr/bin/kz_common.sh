@@ -93,8 +93,8 @@ function check_for_active_updates {
         # System with snaps.
         while sudo  fuser                                                   \
                     /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
-                    /var/cache/debconf/config.dat                           \
                     /snap/core/*/var/cache/debconf/config.dat               \
+                    /var/cache/debconf/config.dat                           \
                     &> /dev/null; do
             printf '%s\n' "$text"
             sleep $check_wait
