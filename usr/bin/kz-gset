@@ -104,7 +104,7 @@ function check_input {
     eval set -- "$parsed"
 
     process_common_options "$@"
-    if [[ $EDITION = 'desktop' ]]; then
+    if [[ $EDITION = 'server' ]]; then
         printf  "$DISPLAY_NAME: %s\n$USAGE_LINE\n" \
                 "$(gettext 'not allowed on server edition')"
         exit $ERROR
