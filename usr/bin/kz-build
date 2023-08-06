@@ -322,6 +322,7 @@ function build_deb {
 
     # Create Debian package in kz-uploads.
     # Debian supports xz as maximum compression, the default Ubuntu is zst.
+    check_for_active_updates
     fakeroot    dpkg-deb                            \
                 --build                             \
                 -Zxz                                \
@@ -333,6 +334,7 @@ function build_deb {
 # This function installs package kz.
 function install_package {
     msg_info "$(gettext 'Install package...')"
+    check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
             reinstall                           \
