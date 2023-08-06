@@ -13,6 +13,11 @@
 # HOST *
 sudo apt-get install --yes ansible
 
+#  APP cloud-init
+# HOST *
+# To prevent extra lines from cloud-init printed in terminal at login.
+sudo touch /etc/cloud/cloud-init.disabled
+
 #  APP locate
 # HOST *
 sudo apt-get install --yes mlocate

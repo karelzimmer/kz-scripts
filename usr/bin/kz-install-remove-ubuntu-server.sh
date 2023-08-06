@@ -13,6 +13,10 @@
 # HOST *
 sudo apt-get remove --yes ansible
 
+#  APP cloud-init
+# HOST *
+sudo rm --force /etc/cloud/cloud-init.disabled
+
 #  APP locate
 # HOST *
 sudo apt-get remove --yes mlocate
