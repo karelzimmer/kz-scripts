@@ -92,8 +92,8 @@ function check_for_active_updates {
     if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # System with snaps.
         while sudo  fuser                                                   \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
                     /snap/core/*/var/cache/debconf/config.dat               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
                     /var/cache/debconf/config.dat                           \
                     &> /dev/null; do
             printf '%s\n' "$text"
