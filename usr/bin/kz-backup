@@ -179,7 +179,7 @@ Disconnect media via Files.")"
 
     check_on_ac_power
 
-    if ! $option_dry_run; then
+    if ! $option_dry_run && [[ $EDITION = 'desktop' ]]; then
         title=$(gettext 'Secure settings')
         text=$title
         if $option_gui; then
