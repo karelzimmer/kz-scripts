@@ -72,8 +72,7 @@ def check_for_active_updates():
         if snaps:
             try:
                 subprocess.run('sudo fuser /var/cache/apt/archives/lock '
-                               '/var/lib/apt/lists/lock  /var/lib/dpkg/lock '
-                               '/var/lib/dpkg/lock-frontend '
+                               '/var/lib/apt/lists/lock  /var/lib/dpkg/lock* '
                                '/var/cache/debconf/config.dat '
                                '/snap/core/*/var/cache/debconf/config.dat',
                                shell=True, check=True,
@@ -88,8 +87,7 @@ def check_for_active_updates():
         else:
             try:
                 subprocess.run('sudo fuser /var/cache/apt/archives/lock '
-                               '/var/lib/apt/lists/lock  /var/lib/dpkg/lock '
-                               '/var/lib/dpkg/lock-frontend '
+                               '/var/lib/apt/lists/lock  /var/lib/dpkg/lock* '
                                '/var/cache/debconf/config.dat',
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
