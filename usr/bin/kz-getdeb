@@ -52,6 +52,36 @@ readonly HELP
 # Functions
 ###############################################################################
 
+# This function checks for active updates and waits for the next check.
+function check_for_active_updates {
+    local -i check_wait=10
+    local text
+    text=$(eval_gettext \
+            "Wait \${check_wait}s for another package manager to finish...")
+
+    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+        # System with snaps.
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    /snap/core/*/var/cache/debconf/config.dat           \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $check_wait
+        done
+    else
+        # System without snaps.
+        while sudo  fuser                                               \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock \
+                    /var/cache/debconf/config.dat                       \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $check_wait
+        done
+    fi
+}
+
+
 # This function handles the script options and arguments.
 function check_input {
     local -i rc=0
@@ -125,12 +155,8 @@ function install_package {
     printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Download')"
     wget --output-document="$temp_deb" $site_deb
 
-    # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type check_for_active_updates &> /dev/null; then
-        check_for_active_updates
-    fi
-
     printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
+    check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
