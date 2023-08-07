@@ -378,7 +378,7 @@ msgstr ""
 msgid "Install kz package"
 msgstr ""
 
-msgid "delete file kz and start again"
+msgid "files are deleted, please start again"
 msgstr ""
 
 msgid "Download"
