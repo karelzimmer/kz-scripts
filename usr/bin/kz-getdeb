@@ -16,7 +16,7 @@
 
 PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 readonly PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifier=kz-getdeb)
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifier=kz_common.sh)
 
 # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
 export TEXTDOMAIN=kz
@@ -213,6 +213,8 @@ function main {
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
     if type init_script &> /dev/null; then
         init_script "$@"
+    else
+        set -o errexit
     fi
     check_input "$@"
     process_input
@@ -220,4 +222,3 @@ function main {
 }
 
 main "$@"
-
