@@ -250,8 +250,8 @@ msgstr ""
 msgid "too many options"
 msgstr "te veel opties"
 
-msgid "not allowed on server edition"
-msgstr "niet toegestaan op server-editie"
+msgid "not allowed on a server"
+msgstr "niet toegestaan op een server"
 
 #, sh-format
 msgid "File name must start with '$PROGRAM_NAME-'."

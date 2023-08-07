@@ -205,7 +205,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-msgid "not allowed on server edition"
+msgid "not allowed on a server"
 msgstr ""
 
 #, sh-format
