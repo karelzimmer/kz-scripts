@@ -52,36 +52,6 @@ readonly HELP
 # Functions
 ###############################################################################
 
-# This function checks for active updates and waits for the next check.
-function check_for_active_updates {
-    local -i check_wait=10
-    local text
-    text=$(eval_gettext \
-            "Wait \${check_wait}s for another package manager to finish...")
-
-    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        # System with snaps.
-        while sudo  fuser                                                   \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
-                    /snap/core/*/var/cache/debconf/config.dat               \
-                    /var/cache/debconf/config.dat                           \
-                    &> /dev/null; do
-            printf '%s\n' "$text"
-            sleep $check_wait
-        done
-    else
-        # System without snaps.
-        while sudo  fuser                                                   \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
-                    /var/cache/debconf/config.dat                           \
-                    &> /dev/null; do
-            printf '%s\n' "$text"
-            sleep $check_wait
-        done
-    fi
-}
-
-
 # This function handles the script options and arguments.
 function check_input {
     local -i rc=0
@@ -89,7 +59,7 @@ function check_input {
 
     if ls kz.* &> /dev/null; then
         text=$(gettext 'files are deleted, please start again')
-        printf  "$DISPLAY_NAME: kz $(ls -C kz.*): %s\n$USAGE_LINE\n" "$text"
+        printf  "$DISPLAY_NAME: kz $(ls -C kz.*) %s\n$USAGE_LINE\n" "$text"
         cleanup
         exit $ERROR
     fi
@@ -145,6 +115,16 @@ function process_input {
 }
 
 
+# This function performs a cleanup.
+function cleanup {
+    # Do not delete kz and kz.1 because of script and manual with the same
+    # name.
+    rm --force kz.{2..99}
+    # But do delete them if in HOME, as described in Checklist installation.
+    rm --force "$HOME"/kz "$HOME"/kz.1
+}
+
+
 # This function installs package kz.
 function install_package {
     local site_deb='https://karelzimmer.nl/assets/kz/kz_365_all.deb'
@@ -167,12 +147,33 @@ function install_package {
 }
 
 
-# This function performs a cleanup.
-function cleanup {
-    # Do not delete kz and kz.1 due to scripts and manuals with the same name.
-    rm --force kz.{2..99}
-    # But do delete them if in HOME, as described in Checklist installation.
-    rm --force "$HOME"/kz "$HOME"/kz.1
+# This function checks for active updates and waits for the next check.
+function check_for_active_updates {
+    local -i check_wait=10
+    local text
+    text=$(eval_gettext \
+            "Wait \${check_wait}s for another package manager to finish...")
+
+    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
+        # System with snaps.
+        while sudo  fuser                                                   \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
+                    /snap/core/*/var/cache/debconf/config.dat               \
+                    /var/cache/debconf/config.dat                           \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $check_wait
+        done
+    else
+        # System without snaps.
+        while sudo  fuser                                                   \
+                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
+                    /var/cache/debconf/config.dat                           \
+                    &> /dev/null; do
+            printf '%s\n' "$text"
+            sleep $check_wait
+        done
+    fi
 }
 
 
