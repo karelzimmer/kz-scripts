@@ -61,7 +61,8 @@ def check_for_active_updates():
 
     try:
         subprocess.run('ls /snap/core/*/var/cache/debconf/config.dat',
-                       shell=True, check=True, stdout=subprocess.DEVNULL,
+                       shell=True, check=True,
+                       stdout=subprocess.DEVNULL,
                        stderr=subprocess.DEVNULL)
     except Exception:
         snaps = False
@@ -75,8 +76,9 @@ def check_for_active_updates():
                                '/snap/core/*/var/cache/debconf/config.dat '
                                '/var/cache/apt/archives/lock '
                                '/var/cache/debconf/config.dat '
-                               '/var/lib/apt/lists/lock  '
-                               '/var/lib/dpkg/lock*',
+                               '/var/lib/apt/lists/lock '
+                               '/var/lib/dpkg/lock-frontend '
+                               '/var/lib/dpkg/lock',
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
@@ -91,8 +93,9 @@ def check_for_active_updates():
                 subprocess.run('sudo fuser '
                                '/var/cache/apt/archives/lock '
                                '/var/cache/debconf/config.dat '
-                               '/var/lib/apt/lists/lock  '
-                               '/var/lib/dpkg/lock*',
+                               '/var/lib/apt/lists/lock '
+                               '/var/lib/dpkg/lock-frontend '
+                               '/var/lib/dpkg/lock',
                                shell=True, check=True,
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)

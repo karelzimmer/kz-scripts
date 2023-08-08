@@ -91,19 +91,25 @@ function check_for_active_updates {
 
     if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
         # System with snaps.
-        while sudo  fuser                                                   \
-                    /snap/core/*/var/cache/debconf/config.dat               \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
-                    /var/cache/debconf/config.dat                           \
+        while sudo  fuser                                       \
+                    /snap/core/*/var/cache/debconf/config.dat   \
+                    /var/cache/apt/archives/lock                \
+                    /var/cache/debconf/config.dat               \
+                    /var/lib/apt/lists/lock                     \
+                    /var/lib/dpkg/lock-frontend                 \
+                    /var/lib/dpkg/lock                          \
                     &> /dev/null; do
             printf '%s\n' "$text"
             sleep $check_wait
         done
     else
         # System without snaps.
-        while sudo  fuser                                                   \
-                    /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*    \
-                    /var/cache/debconf/config.dat                           \
+        while sudo  fuser                                       \
+                    /var/cache/apt/archives/lock                \
+                    /var/cache/debconf/config.dat               \
+                    /var/lib/apt/lists/lock                     \
+                    /var/lib/dpkg/lock-frontend                 \
+                    /var/lib/dpkg/lock                          \
                     &> /dev/null; do
             printf '%s\n' "$text"
             sleep $check_wait
