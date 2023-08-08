@@ -211,7 +211,7 @@ function process_input {
 
     if $execute_commands && $option_gui; then
         title=$(gettext 'Install apps')
-        text=$(gettext 'Prepare to install')
+        text=$(gettext 'Prepare installation')
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_cmds_file > >(

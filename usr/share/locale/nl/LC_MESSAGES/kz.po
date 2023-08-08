@@ -632,9 +632,6 @@ msgstr ""
 "Argumenten:\n"
 "  APP            installeer APPs"
 
-msgid "Prepare to install"
-msgstr "Installeren voorbereiden"
-
 msgid "app not found"
 msgstr "app niet gevonden"
 
@@ -778,7 +775,7 @@ msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 
 msgid "Prepare installation"
-msgstr "Installeren voorbereiden"
+msgstr "Installatie voorbereiden"
 
 msgid "Perform installation"
 msgstr "Installatie uitvoeren"
