@@ -54,13 +54,16 @@ readonly HELP
 
 # This function handles the script options and arguments.
 function check_input {
+    local files_found
+    files_found=$(ls -C kz.{1..99} 2> /dev/null || true)
     local -i rc=0
     local parsed=''
 
-    # Clean up after multiple wget's.
-    if ls kz.* &> /dev/null; then
+    # If the kz.{1..99} files exist, possible after multiple wget's, clean them
+    # up and start over.
+    if [[ -n $files_found ]]; then
         text=$(gettext 'files are deleted, please start again')
-        printf "$DISPLAY_NAME: kz $(ls -C kz.*) %s\n$USAGE_LINE\n" "$text"
+        printf "$DISPLAY_NAME: kz $files_found %s\n$USAGE_LINE\n" "$text"
         cleanup
         exit $ERROR
     fi
