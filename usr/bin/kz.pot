@@ -691,7 +691,7 @@ msgstr ""
 msgid "Set up apps"
 msgstr ""
 
-msgid "Preparing to set up"
+msgid "Preparing set up"
 msgstr ""
 
 msgid "Back"

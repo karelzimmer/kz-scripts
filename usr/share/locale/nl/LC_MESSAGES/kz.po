@@ -825,7 +825,7 @@ msgstr "Gebruikersfoto instellen"
 msgid "Set up apps"
 msgstr "Apps instellen"
 
-msgid "Preparing to set up"
+msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
 msgid "Back"
