@@ -9,7 +9,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-#  APP adm
+#  APP adduser
 # HOST *
 sudo adduser "${SUDO_USER:-$USER}" adm
 

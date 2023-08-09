@@ -9,7 +9,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-#  APP repos
+#  APP addrepos
 # HOST *
 # Exec this first.
 sudo apt-add-repository contrib
@@ -20,9 +20,12 @@ sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 
-#  APP adm
-# HOST pc07
+#  APP adduser
+# HOST *
+# Enable access to system monitoring tasks like read many log files in /var/log
 sudo adduser "${SUDO_USER:-$USER}" adm
+# Enable access to the log
+sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 #  APP completion
 # HOST *
@@ -60,11 +63,6 @@ sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 # The installation adds an apt-key that is no longer needed.
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
-
-#  APP journalctl
-# HOST *
-# Enable access to the log
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 #  APP kvm
 # HOST pc07

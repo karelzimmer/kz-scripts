@@ -9,7 +9,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-#  APP repos
+#  APP addrepos
 # HOST *
 # Exec this first.
 sudo apt-add-repository --remove contrib
@@ -18,9 +18,10 @@ sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_relea
 sudo apt-get remove --yes deb-multimedia-keyring
 sudo apt-get update
 
-#  APP adm
+#  APP adduser
 # HOST pc07
 sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 #  APP completion
 # HOST *
@@ -51,10 +52,6 @@ sudo apt-get remove --yes gnome-gmail
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
-
-#  APP journalctl
-# HOST *
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 #  APP kvm
 # HOST pc07
