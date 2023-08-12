@@ -400,9 +400,6 @@ msgstr "Controleer scripts (kz check)..."
 msgid "Build website..."
 msgstr "Bouw website..."
 
-msgid "Generate .mo file..."
-msgstr "Genereer .mo bestand..."
-
 msgid "Build package..."
 msgstr "Bouw pakket..."
 

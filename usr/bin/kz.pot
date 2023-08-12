@@ -327,9 +327,6 @@ msgstr ""
 msgid "Build website..."
 msgstr ""
 
-msgid "Generate .mo file..."
-msgstr ""
-
 msgid "Build package..."
 msgstr ""
 
