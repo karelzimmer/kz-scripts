@@ -189,7 +189,7 @@ function upload_website {
 
 # This function installs package kz.
 function install_package {
-    # Call kz-getdeb via wget as a regular user would do.
+    # Call kz-getdeb (via wget and bash as a regular user would do).
     msg_info "$(gettext 'Install package kz (kz getdeb)...')
 "
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
