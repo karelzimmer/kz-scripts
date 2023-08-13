@@ -134,6 +134,7 @@ function process_input {
     check_scripts
     printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Build')"
     build_uploads
+    generate_mo
     build_deb
     printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
     install_package
@@ -269,6 +270,16 @@ function build_uploads {
             -print
             )
     cd "$HOME"
+}
+
+
+# This function generates the gettext binary Machine Object (.mo) file from the
+# readable Portable Object (.po) file.
+function generate_mo {
+    local lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+
+    msg_info "$(gettext 'Generate .mo file...')"
+    msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
 }
 
 
