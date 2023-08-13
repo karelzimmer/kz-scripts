@@ -128,6 +128,8 @@ function check_repos {
     msg_info "$(gettext 'Check that all repos are clean...')"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
+        # Prevent false positives.
+        git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
             msg_error "$(eval_gettext "Repo \$repo is not clean.")"
             git status
