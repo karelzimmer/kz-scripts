@@ -152,7 +152,7 @@ def check_reboot():
             print('\n' + _('*** The computer must restart to complete the '
                            'installation of updates ***'))
     except FileNotFoundError:
-        pass
+        print(_('Finished') + '.')
     except Exception as ex:
         print(ex)
         sys.exit(kz_common.error)
