@@ -427,9 +427,6 @@ function process_commands {
     local command=''
     local -i row=0
 
-    if ! $option_gui; then
-        clear -x
-    fi
     if [[ ${#rows[@]} -eq 1 ]]; then
         execute_command=true
     else
@@ -446,9 +443,6 @@ function process_commands {
             title=$action
             execute_command
         done
-    fi
-    if ! $option_gui; then
-        clear -x
     fi
     if $execute_command && [[ ${#rows[@]} -gt 1 ]]; then
         show_commands_after_execution
@@ -494,7 +488,8 @@ $prompt"
             execute_command=false
         fi
     else
-        msg_info "$text"
+        msg_info "
+$text"
         while true; do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
@@ -521,9 +516,7 @@ function execute_command {
     local row=''
     local gui_option=''
 
-    if ! $option_gui; then
-        clear -x
-    fi
+    printf '\n'
 
     # Handle manual actions.
     if [[ $command = $(gettext 'Manually') ]]; then
@@ -609,7 +602,8 @@ function show_commands_after_execution {
         text+="
 $row. $action ($command)"
     done
-    msg_info "$text"
+    msg_info "
+$text"
     wait_for_enter
 }
 
