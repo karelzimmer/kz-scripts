@@ -560,8 +560,12 @@ $(gettext "The following steps to add extra users are optional.
         msg_info "$text"
         wait_for_enter
     elif [[ $title = $(gettext 'Set user photo') ]]; then
-        if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
-            text="$(gettext 'Set user photo'):
+        text="$(gettext 'Set user photo'):
+
+$(gettext 'No user photo was found when backing up.')"
+        if type xdg-user-dir &> /dev/null; then
+            if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
+                text="$(gettext 'Set user photo'):
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.
@@ -572,11 +576,11 @@ on Users.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
-            msg_info "$text"
+                msg_info "$text"
+            else
+                msg_info "$text"
+            fi
         else
-            text="$(gettext 'Set user photo'):
-
-$(gettext 'No user photo was found when backing up.')"
             msg_info "$text"
         fi
         wait_for_enter
