@@ -526,6 +526,9 @@ ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
                     text=$(gettext "You will now be logged out of the \
 computer to finish installing the apps and changing user settings.")
                     msg_info "$text"
+                    if ! $option_gui; then
+                        wait_for_enter
+                    fi
                     gnome-session-quit --logout --no-prompt
                 else
                     text=$(gettext "You must log out of the computer to \
