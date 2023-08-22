@@ -12,8 +12,10 @@
 #  APP dashtodock
 # USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
+gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
+gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
 gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position
 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
