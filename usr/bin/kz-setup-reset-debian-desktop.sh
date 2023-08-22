@@ -12,6 +12,11 @@
 #  APP dashtodock
 # USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
+gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
+gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
+gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position
+gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
+gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 
 #  APP firefox
 # USER karel@pc07
@@ -38,13 +43,6 @@ gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
-gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
-gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
-gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
-gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
-gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position
-gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
-gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 #  APP gnome
