@@ -305,7 +305,7 @@ Some files may not be readable,
 or were any files added or removed while restoring the backup,
 or is there not enough space on \$target.
 The maximum exit value is \$maxrc.
-Check the log in the next screen.")"
+Check the log on the screen.")"
         show_log
         exit $ERROR
     fi

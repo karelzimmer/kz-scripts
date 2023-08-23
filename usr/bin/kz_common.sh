@@ -386,7 +386,7 @@ function show_log {
                 --cancel-label  "$(gettext 'Exit')" 2> >($logcmd) || true
         rm "$temp_log"
     else
-        gnome-terminal --window -- bash -c "$logcmd_check"
+        eval "$logcmd_check"
     fi
 }
 
