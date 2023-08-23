@@ -512,7 +512,7 @@ function term_script {
     fi
 
     if $execute_commands; then
-        if [[ $maxrc -eq $OK ]]; then
+        if [[ $maxrc -ne $OK ]]; then
             msg_error "$(eval_gettext "One or more commands went wrong.
 The maximum exit value is \$maxrc.
 Check the log on the screen.")"
