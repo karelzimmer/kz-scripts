@@ -76,7 +76,7 @@ sudo rm --force /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/
 sudo apt-get update
 
 #  APP spice-vdagent
-# HOST pc07
+# HOST *
 sudo apt-get remove --yes spice-vdagent
 
 #  APP teamviewer

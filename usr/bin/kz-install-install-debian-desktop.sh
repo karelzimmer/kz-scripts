@@ -89,7 +89,7 @@ sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
 #  APP spice-vdagent
-# HOST pc07
+# HOST *
 sudo apt-get install --yes spice-vdagent
 
 #  APP teamviewer
