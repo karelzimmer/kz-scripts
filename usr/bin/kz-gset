@@ -42,7 +42,7 @@ $(gettext 'Options:')
   $(gettext "Mandatory arguments to long options are mandatory for short \
 options too.")
 
-  -a, --addfavaft FAVORITE
+$(gettext "  -a, --addfavaft FAVORITE
                  add FAVORITE at the end
   -b, --addfavbef FAVORITE
                  add FAVORITE at the beginning
@@ -54,7 +54,7 @@ options too.")
   -f, --addappfolder APPFOLDER
                  add APPFOLDER
   -x, --delappfolder APPFOLDER
-                 delete APPFOLDER')
+                 delete APPFOLDER")
 $OPTIONS_HELP"
 readonly HELP
 readonly X_OPTIONS_SHORT='a:b:d:lrf:x:'
