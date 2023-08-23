@@ -833,9 +833,6 @@ msgstr "Terug"
 msgid "Manually"
 msgstr "Handmatig"
 
-msgid "Previous menu"
-msgstr "Vorig menu"
-
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
 

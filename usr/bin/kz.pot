@@ -694,13 +694,7 @@ msgstr ""
 msgid "Preparing set up"
 msgstr ""
 
-msgid "Back"
-msgstr ""
-
 msgid "Manually"
-msgstr ""
-
-msgid "Previous menu"
 msgstr ""
 
 msgid "Select a choice:"

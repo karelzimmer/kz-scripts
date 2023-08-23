@@ -73,7 +73,7 @@ readonly -a MENU2_ACTIONS=(
                 "$(gettext 'Restore backup')"
                 "$(gettext 'Set user photo')"
                 "$(gettext 'Set up apps')"
-                "$(gettext 'Back')"
+                "$(gettext 'Stop')"
             )
 readonly -a MENU2_COMMANDS=(
             [1]='kz wifi'
@@ -83,7 +83,7 @@ readonly -a MENU2_COMMANDS=(
                 'kz restore'
                 "$(gettext 'Manually')"
                 'kz setup'
-                "$(gettext 'Previous menu')"
+                "$(gettext 'Exit menu')"
             )
 readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
@@ -199,37 +199,32 @@ function process_menu1_gui {
 function process_menu1_tui {
     local menu1_action=''
 
-    while true; do
-
-        # Show menu.
-        msg_info "$MENU1_HEAD
+    msg_info "$MENU1_HEAD
 "
-        for menu1_action in "${!MENU1_ACTIONS[@]}"; do
-            printf  '%2s - %-25.25s - %s\n'             \
-                    "$menu1_action"                     \
-                    "${MENU1_ACTIONS[$menu1_action]}"   \
-                    "${MENU1_COMMANDS[$menu1_action]}"
-        done
-        msg_info ''
-
-        while true; do
-            read -rp "$(eval_gettext "Run number [1-\$MENU1_LINES]: ")"
-            case $REPLY in
-                *[^[:digit:]]*)
-                    continue
-                    ;;
-                *)
-                    if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
-                        break
-                    else
-                        continue
-                    fi
-                    ;;
-            esac
-        done
-        process_menu1_choice
-        execute_command=false
+    for menu1_action in "${!MENU1_ACTIONS[@]}"; do
+        printf  '%2s - %-25.25s - %s\n'             \
+                "$menu1_action"                     \
+                "${MENU1_ACTIONS[$menu1_action]}"   \
+                "${MENU1_COMMANDS[$menu1_action]}"
     done
+    msg_info ''
+
+    while true; do
+        read -rp "$(eval_gettext "Run number [1-\$MENU1_LINES]: ")"
+        case $REPLY in
+            *[^[:digit:]]*)
+                continue
+                ;;
+            *)
+                if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
+                    break
+                else
+                    continue
+                fi
+                ;;
+        esac
+    done
+    process_menu1_choice
 }
 
 
@@ -365,42 +360,33 @@ function process_menu2_gui {
 # This function shows and processes menu #2 in TUI mode.
 function process_menu2_tui {
     local menu2_action=''
-    local exit_menu2=false
+
+    msg_info "$MENU2_HEAD
+"
+    for menu2_action in "${!MENU2_ACTIONS[@]}"; do
+        printf  '%2s - %-25.25s - %s\n'             \
+                "$menu2_action"                     \
+                "${MENU2_ACTIONS[$menu2_action]}"   \
+                "${MENU2_COMMANDS[$menu2_action]}"
+    done
+    msg_info ''
 
     while true; do
-
-        # Show menu.
-        msg_info "$MENU2_HEAD
-"
-        for menu2_action in "${!MENU2_ACTIONS[@]}"; do
-            printf  '%2s - %-25.25s - %s\n'             \
-                    "$menu2_action"                     \
-                    "${MENU2_ACTIONS[$menu2_action]}"   \
-                    "${MENU2_COMMANDS[$menu2_action]}"
-        done
-        msg_info ''
-
-        while true; do
-            read -rp "$(eval_gettext "Run number [1-\$MENU2_LINES]: ")"
-            case $REPLY in
-                *[^[:digit:]]*)
+        read -rp "$(eval_gettext "Run number [1-\$MENU2_LINES]: ")"
+        case $REPLY in
+            *[^[:digit:]]*)
+                continue
+                ;;
+            *)
+                if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
+                    break
+                else
                     continue
-                    ;;
-                *)
-                    if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
-                        break
-                    else
-                        continue
-                    fi
-                    ;;
-            esac
-        done
-        process_menu2_choice
-        if $exit_menu2; then
-            break
-        fi
-        execute_command=false
+                fi
+                ;;
+        esac
     done
+    process_menu2_choice
 }
 
 
@@ -413,7 +399,7 @@ function process_menu2_choice {
             )
         process_commands
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
-        exit_menu2=true
+        exit $OK
     else
         msg_error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
         exit $ERROR
