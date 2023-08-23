@@ -202,7 +202,6 @@ function process_menu1_tui {
     while true; do
 
         # Show menu.
-        clear -x
         msg_info "$MENU1_HEAD
 "
         for menu1_action in "${!MENU1_ACTIONS[@]}"; do
@@ -369,7 +368,6 @@ function process_menu2_tui {
     while true; do
 
         # Show menu.
-        clear -x
         msg_info "$MENU2_HEAD
 "
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
@@ -443,9 +441,6 @@ function process_commands {
             title=$action
             execute_command
         done
-    fi
-    if $execute_command && [[ ${#rows[@]} -gt 1 ]]; then
-        show_commands_after_execution
     fi
 }
 
@@ -585,30 +580,6 @@ on Users.
         fi
         wait_for_enter
     fi
-}
-
-
-# This function shows the command before it is executed.
-function show_commands_after_execution {
-    local action=''
-    local command=''
-    local -i row=0
-
-    text="$(gettext 'The following has been executed:')
-"
-    for row in "${!rows[@]}"; do
-        action=$(
-            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
-            )
-        command=$(
-            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
-            )
-        text+="
-$row. $action ($command)"
-    done
-    msg_info "
-$text"
-    wait_for_enter
 }
 
 
