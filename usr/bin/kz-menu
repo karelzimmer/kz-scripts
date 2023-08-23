@@ -287,7 +287,9 @@ Roughly boils down to:
 3. Boot the computer from this USB stick or DVD.
 4. Install Linux.")"
     msg_info "$text"
-    wait_for_enter
+    if $option_gui; then
+        wait_for_enter
+    fi
 }
 
 
@@ -532,7 +534,9 @@ function execute_command {
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
     msg_log  "$command: rc=$rc"
-    wait_for_enter
+    if $option_gui; then
+        wait_for_enter
+    fi
 }
 
 
@@ -553,7 +557,9 @@ $(gettext "The following steps to add extra users are optional.
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
         msg_info "$text"
-        wait_for_enter
+        if $option_gui; then
+            wait_for_enter
+        fi
     elif [[ $title = $(gettext 'Set user photo') ]]; then
         text="$(gettext 'Set user photo'):
 
@@ -578,7 +584,9 @@ on Users.
         else
             msg_info "$text"
         fi
-        wait_for_enter
+        if $option_gui; then
+            wait_for_enter
+        fi
     fi
 }
 
