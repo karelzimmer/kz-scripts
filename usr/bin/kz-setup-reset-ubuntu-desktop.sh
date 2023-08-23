@@ -43,9 +43,6 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-t
 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
 gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
-gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed
-gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
-gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
