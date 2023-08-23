@@ -535,9 +535,6 @@ computer to finish installing the apps and changing user settings.")
 finish installing the apps and changing user settings.
 Type 'logout' to log out.")
                     msg_info "$text"
-                    if ! $option_gui; then
-                        wait_for_enter
-                    fi
                     exit $OK
                 fi
             fi
