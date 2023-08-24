@@ -785,8 +785,8 @@ msgstr "Installatie afronden"
 msgid "Provision user"
 msgstr "Gebruiker inrichten"
 
-msgid "Commands menu"
-msgstr "Opdrachtenmenu"
+msgid "Command menu"
+msgstr "Opdrachtmenu"
 
 msgid "Stop"
 msgstr "Stoppen"
@@ -803,8 +803,8 @@ msgstr "Checklist hoofdstuk 3"
 msgid "Checklist chapter 4"
 msgstr "Checklist hoofdstuk 4"
 
-msgid "Used commands"
-msgstr "Gebruikte opdrachten"
+msgid "Show command menu"
+msgstr "Opdrachtmenu weergeven"
 
 msgid "Exit menu"
 msgstr "Menu verlaten"

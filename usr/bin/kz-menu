@@ -43,13 +43,13 @@ readonly X_OPTIONS_LONG=',gui'
 
 MENU1_TITLE=$(gettext 'Installation menu')
 readonly MENU1_TITLE
-readonly MENU1_HEAD="                   $MENU1_TITLE"
+readonly MENU1_HEAD="     $MENU1_TITLE"
 readonly -a MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
                 "$(gettext 'Provision user')"
-                "$(gettext 'Commands menu')"
+                "$(gettext 'Command menu')"
                 "$(gettext 'Stop')"
             )
 readonly -a MENU1_COMMANDS=(
@@ -57,14 +57,14 @@ readonly -a MENU1_COMMANDS=(
                 "$(gettext 'Checklist chapter 2')"
                 "$(gettext 'Checklist chapter 3')"
                 "$(gettext 'Checklist chapter 4')"
-                "$(gettext 'Used commands')"
+                "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
 readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
-MENU2_TITLE=$(gettext 'Commands menu')
+MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-readonly MENU2_HEAD="                   $MENU2_TITLE"
+readonly MENU2_HEAD="     $MENU2_TITLE"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"

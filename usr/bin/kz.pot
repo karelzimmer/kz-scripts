@@ -652,7 +652,7 @@ msgstr ""
 msgid "Provision user"
 msgstr ""
 
-msgid "Commands menu"
+msgid "Command menu"
 msgstr ""
 
 msgid "Stop"
@@ -670,7 +670,7 @@ msgstr ""
 msgid "Checklist chapter 4"
 msgstr ""
 
-msgid "Used commands"
+msgid "Show command menu"
 msgstr ""
 
 msgid "Exit menu"
