@@ -11,7 +11,6 @@
 
 #  APP dashtodock
 # USER *
-gsettings set org.gnome.shell disable-user-extensions false
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
@@ -20,6 +19,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'
 gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
+gsettings set org.gnome.shell disable-user-extensions false
 
 #  APP firefox
 # USER karel@pc07 user@debian
@@ -46,6 +46,7 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'inter
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant light
+gsettings set org.gnome.shell disable-user-extensions false
 
 
 #  APP gnome
