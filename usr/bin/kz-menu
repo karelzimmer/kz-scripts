@@ -531,7 +531,7 @@ function manual_actions {
     if [[ $title = $(gettext 'Add users') ]]; then
         text="$(gettext 'Add users'):
 
-$(gettext "The following steps to add extra users are optional.
+$(gettext "Add any additional users with the following steps.
 
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click Unlock and enter password.
