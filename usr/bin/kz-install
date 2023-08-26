@@ -492,11 +492,6 @@ function execute_command {
     check_for_active_updates
     eval "$cmd" |& $logcmd || rc=$?
     maxrc
-    # Extra message to the terminal, other is in the log.
-    if ! $option_gui && [[ $rc -gt $OK ]]; then
-        text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
-        msg_info "$text"
-    fi
     msg_log  "rc=$rc, maxrc=$maxrc"
 }
 
