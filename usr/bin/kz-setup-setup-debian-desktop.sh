@@ -46,7 +46,7 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'inter
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
-
+gsettings set org.gnome.shell disable-user-extensions false
 
 #  APP gnome
 # USER karel@pc07 user@debian

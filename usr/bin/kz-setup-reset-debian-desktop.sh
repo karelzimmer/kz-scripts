@@ -47,6 +47,7 @@ gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
+gsettings reset org.gnome.shell disable-user-extensions
 
 #  APP gnome
 # USER karel@pc07

@@ -191,7 +191,7 @@ function init_script {
 
     msg_log  "started ($program_exec $* as $USER)"
 
-    # Setting xhost is needed on Debian for GUI root scripts, e.g. kz-install.
+    # Setting xhost is needed on Debian for GUI root scripts like kz-install.
     if [[ $DISTRO = 'debian' && $EDITION = 'desktop' && $UID -ne 0 ]]; then
         xhost +si:localuser:root |& $logcmd
     fi
