@@ -376,16 +376,6 @@ function set_terminal_attributes {
 function show_log {
     if $option_gui; then
         gnome-terminal --window -- bash -c "$logcmd_check"
-        # local temp_log
-        # temp_log=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.log")
-        # eval "$logcmd_check" > "$temp_log"
-        # zenity  --text-info                         \
-        #         --width         1300                \
-        #         --height        600                 \
-        #         --title         'Lograpport'        \
-        #         --filename      "$temp_log"         \
-        #         --cancel-label  "$(gettext 'Exit')" 2> >($logcmd) || true
-        # rm "$temp_log"
     else
         eval "$logcmd_check"
     fi
