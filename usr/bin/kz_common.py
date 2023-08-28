@@ -229,9 +229,9 @@ def process_option_version(PROGRAM_NAME):
 
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
-            build_id = ' (' + fh.read() + ')'
+            build_id = fh.read()
     except FileNotFoundError:
-        build_id = ''
+        build_id = time.strftime("%Y-%m")
     except Exception as ex:
         print(ex)
         sys.exit(ERROR)
@@ -244,7 +244,7 @@ def process_option_version(PROGRAM_NAME):
         if program_year == '':
             program_year = time.strftime("%Y")
 
-        print(_('kz 365{}\n'
+        print(_('kz 365 ({})\n'
                 '\n'
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal\n'
