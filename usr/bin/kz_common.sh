@@ -193,7 +193,9 @@ function init_script {
 
     # Setting xhost is needed on Debian for GUI root scripts like kz-install.
     if [[ $DISTRO = 'debian' && $EDITION = 'desktop' && $UID -ne 0 ]]; then
-        xhost +si:localuser:root |& $logcmd
+        if ! [[ $(xhost) == *SI:localuser:root* ]]; then
+            xhost +si:localuser:root |& $logcmd
+        fi
     fi
 
     if [[ -t 1 ]]; then
