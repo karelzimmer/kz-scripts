@@ -326,14 +326,12 @@ $(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 
 # This function displays version, author, and license information.
 function process_option_version {
-    local build_id='????-??-??T??:??'
+    local build_id=''
     local grep_expr='# <https://creativecommons.org'
-    local program_year='????'
+    local program_year=''
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
-        build_id=$(cat /usr/local/etc/kz-build-id)
-    else
-        build_id='????-??-??T??:??'
+        build_id=' ('$(cat /usr/local/etc/kz-build-id)')'
     fi
 
     program_year=$(
@@ -341,10 +339,10 @@ function process_option_version {
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
-        program_year='????'
+        program_year=$(date '+%Y')
     fi
 
-    msg_info "kz 365 ($build_id)
+    msg_info "kz 365$build_id
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
