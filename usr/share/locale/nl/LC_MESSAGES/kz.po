@@ -82,10 +82,7 @@ msgstr ""
 msgid "Type '$DISPLAY_NAME --help' for more information."
 msgstr "Typ '$DISPLAY_NAME --help' voor meer informatie."
 
-#, fuzzy, sh-format
-#| msgid ""
-#| "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n"
-#| "<https://creativecommons.org/publicdomain/zero/1.0>, $program_year"
+#, sh-format
 msgid ""
 "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n"
 "<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
