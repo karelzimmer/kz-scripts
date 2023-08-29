@@ -88,7 +88,7 @@ msgid ""
 "<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
 msgstr ""
 "Geschreven door Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universeel\n"
-"<https://creativecommons.org/publicdomain/zero/1.0/deed.nl>, $program_year"
+"<https://creativecommons.org/publicdomain/zero/1.0/deed.nl>$program_year"
 
 #, sh-format
 msgid "Information $DISPLAY_NAME"
