@@ -245,7 +245,7 @@ def process_option_version(PROGRAM_NAME):
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
-            journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + 
+            journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' +
                           _('Program year cannot be determined.'))
             program_year = '.'
         else:
