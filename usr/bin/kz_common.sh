@@ -331,9 +331,7 @@ function process_option_version {
     local program_year=''
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
-        build_id=$(cat /usr/local/etc/kz-build-id)
-    else
-        build_id=$(date '+%Y-%m')
+        build_id=' ('$(cat /usr/local/etc/kz-build-id)')'
     fi
 
     program_year=$(
@@ -344,7 +342,7 @@ function process_option_version {
         program_year=$(date '+%Y')
     fi
 
-    msg_info "kz 365 ($build_id)
+    msg_info "kz 365$build_id
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
