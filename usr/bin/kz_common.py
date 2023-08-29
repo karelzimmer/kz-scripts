@@ -244,7 +244,7 @@ def process_option_version(PROGRAM_NAME):
         if program_year == '':
             program_year = '.'
         else:
-            program_year = ', ' + program_year 
+            program_year = ', ' + program_year
 
         print(_('kz 365{}\n'
                 '\n'
