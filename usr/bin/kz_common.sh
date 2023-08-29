@@ -339,14 +339,16 @@ function process_option_version {
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
-        program_year=$(date '+%Y')
+        program_year='.'
+    else
+        program_year=', '$program_year
     fi
 
     msg_info "kz 365$build_id
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal
-<https://creativecommons.org/publicdomain/zero/1.0>, \$program_year")"
+<https://creativecommons.org/publicdomain/zero/1.0>\$program_year")"
 }
 
 

@@ -242,13 +242,15 @@ def process_option_version(PROGRAM_NAME):
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
-            program_year = time.strftime("%Y")
+            program_year = '.'
+        else:
+            program_year = ', ' + program_year 
 
         print(_('kz 365{}\n'
                 '\n'
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal\n'
-                '<https://creativecommons.org/publicdomain/zero/1.0>, {}')
+                '<https://creativecommons.org/publicdomain/zero/1.0>{}')
               .format(build_id, program_year))
 
 
