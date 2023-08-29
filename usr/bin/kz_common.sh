@@ -332,6 +332,8 @@ function process_option_version {
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=' ('$(cat /usr/local/etc/kz-build-id)')'
+    else
+        msg_log "$(gettext 'Build ID cannot be determined.')"
     fi
 
     program_year=$(
@@ -339,6 +341,7 @@ function process_option_version {
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
+        msg_log "$(gettext 'Program year cannot be determined.')"
         program_year='.'
     else
         program_year=', '$program_year

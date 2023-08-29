@@ -23,6 +23,7 @@ import os
 import subprocess
 import sys
 import time
+from systemd import journal
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -231,6 +232,8 @@ def process_option_version(PROGRAM_NAME):
         with open('/usr/local/etc/kz-build-id') as fh:
             build_id = ' (' + fh.read() + ')'
     except FileNotFoundError:
+        journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' +
+                      _('Build ID cannot be determined.'))
         build_id = ''
     except Exception as ex:
         print(ex)
@@ -242,6 +245,8 @@ def process_option_version(PROGRAM_NAME):
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
+            journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + 
+                          _('Program year cannot be determined.'))
             program_year = '.'
         else:
             program_year = ', ' + program_year
