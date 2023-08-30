@@ -42,6 +42,7 @@ DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 ###############################################################################
 
 command = ''
+text = ''
 
 
 ###############################################################################
@@ -87,8 +88,10 @@ def perform_command(command):
     kz_common.check_for_active_updates()
     try:
         subprocess.run(f'sudo {command}', shell=True, check=True)
-    except Exception as ex:
-        print(ex)
+    except Exception as exc:
+        text = str(exc)
+        kz_common.msg_log(PROGRAM_NAME, text)
+        print(_('Program {} encountered an error.').format(PROGRAM_NAME))
         sys.exit(kz_common.error)
     else:
         print()
@@ -102,8 +105,9 @@ def snap_refresh():
     kz_common.check_for_active_updates()
     try:
         subprocess.run('sudo snap refresh', shell=True, check=True)
-    except Exception as ex:
-        print(ex)
+    except Exception as exc:
+        text = str(exc)
+        kz_common.msg_log(PROGRAM_NAME, text)
     else:
         print()
 
@@ -139,8 +143,9 @@ done'
     print(_('Snap cleanup...'))
     try:
         subprocess.run({cmd}, shell=True, check=True, executable='/bin/bash')
-    except Exception as ex:
-        print(ex)
+    except Exception as exc:
+        text = str(exc)
+        kz_common.msg_log(PROGRAM_NAME, text)
 
 
 def check_reboot():
@@ -151,10 +156,14 @@ def check_reboot():
         with open('/var/run/reboot-required') as fh:
             print('\n' + _('*** The computer must restart to complete the '
                            'installation of updates ***'))
-    except FileNotFoundError:
+    except FileNotFoundError as fnf:
+        text = str(fnf)
+        kz_common.msg_log(PROGRAM_NAME, text)
         print(_('Finished') + '.')
-    except Exception as ex:
-        print(ex)
+    except Exception as exc:
+        text = str(exc)
+        kz_common.msg_log(PROGRAM_NAME, text)
+        print(_('Program {} encountered an error.').format(PROGRAM_NAME))
         sys.exit(kz_common.error)
 
 

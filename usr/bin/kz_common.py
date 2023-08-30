@@ -121,9 +121,11 @@ def check_on_ac_power(PROGRAM_NAME):
               'It is recommended to connect the computer to the wall socket.'))
         try:
             input('\n' + _('Press the Enter key to continue [Enter]: '))
-        except KeyboardInterrupt:
+        except KeyboardInterrupt as kbdint:
+            text = str(kbdint)
+            msg_log(PROGRAM_NAME, text)
             print('\n' + _('Program {} has been interrupted.').
-                  format(PROGRAM_NAME))
+                    format(PROGRAM_NAME))
             sys.exit(ERROR)
 
 
@@ -142,12 +144,17 @@ def check_user_root(PROGRAM_NAME, DISPLAY_NAME):
         except Exception:
             try:
                 subprocess.run('sudo true', shell=True, check=True)
-            except KeyboardInterrupt:
+            except KeyboardInterrupt as kbdint:
+                text = str(kbdint)
+                msg_log(PROGRAM_NAME, text)
                 print('\n' + _('Program {} has been interrupted.').
                       format(PROGRAM_NAME))
                 sys.exit(ERROR)
-            except Exception as ex:
-                print(ex)
+            except Exception as exc:
+                text = str(exc)
+                msg_log(PROGRAM_NAME, text)
+                print(_('Program {} encountered an error.').
+                      format(PROGRAM_NAME))
                 sys.exit(ERROR)
 
 
@@ -237,12 +244,16 @@ def process_option_version(PROGRAM_NAME):
     try:
         with open('/usr/local/etc/kz-build-id') as fh:
             build_id = ' (' + fh.read() + ')'
-    except FileNotFoundError:
+    except FileNotFoundError as fnf:
+        text = str(fnf)
+        msg_log(PROGRAM_NAME, text)
         text = _('Build ID cannot be determined.')
         msg_log(PROGRAM_NAME, text)
         build_id = ''
-    except Exception as ex:
-        print(ex)
+    except Exception as exc:
+        text = str(exc)
+        msg_log(PROGRAM_NAME, text)
+        print(_('Program {} encountered an error.').format(PROGRAM_NAME))
         sys.exit(ERROR)
     finally:
         cmd = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME}"
