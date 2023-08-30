@@ -49,6 +49,8 @@ NORMAL = '\033[0m'
 # Variables
 ###############################################################################
 
+text = ''
+
 
 ###############################################################################
 # Functions
@@ -166,6 +168,10 @@ def check_user_sudo():
         return(OK)
 
 
+def msg_log(PROGRAM_NAME, text):
+    journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + text)
+
+
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the general options.
@@ -232,8 +238,8 @@ def process_option_version(PROGRAM_NAME):
         with open('/usr/local/etc/kz-build-id') as fh:
             build_id = ' (' + fh.read() + ')'
     except FileNotFoundError:
-        journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' +
-                      _('Build ID cannot be determined.'))
+        text = _('Build ID cannot be determined.')
+        msg_log(PROGRAM_NAME, text)
         build_id = ''
     except Exception as ex:
         print(ex)
@@ -245,8 +251,8 @@ def process_option_version(PROGRAM_NAME):
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':
-            journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' +
-                          _('Program year cannot be determined.'))
+            text = _('Program year cannot be determined.')
+            msg_log(PROGRAM_NAME, text)
             program_year = '.'
         else:
             program_year = ', ' + program_year
