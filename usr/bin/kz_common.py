@@ -125,7 +125,7 @@ def check_on_ac_power(PROGRAM_NAME):
             text = str(kbdint)
             msg_log(PROGRAM_NAME, text)
             print('\n' + _('Program {} has been interrupted.').
-                    format(PROGRAM_NAME))
+                  format(PROGRAM_NAME))
             sys.exit(ERROR)
 
 
