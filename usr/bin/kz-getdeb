@@ -158,32 +158,17 @@ function check_for_active_updates {
     text=$(eval_gettext \
             "Wait \${check_wait}s for another package manager to finish...")
 
-    if find /snap/core/*/var/cache/debconf/config.dat &> /dev/null; then
-        # System with snaps.
-        while sudo  fuser                                       \
-                    /snap/core/*/var/cache/debconf/config.dat   \
-                    /var/cache/apt/archives/lock                \
-                    /var/cache/debconf/config.dat               \
-                    /var/lib/apt/lists/lock                     \
-                    /var/lib/dpkg/lock-frontend                 \
-                    /var/lib/dpkg/lock                          \
-                    &> /dev/null; do
-            printf '%s\n' "$text"
-            sleep $check_wait
-        done
-    else
-        # System without snaps.
-        while sudo  fuser                                       \
-                    /var/cache/apt/archives/lock                \
-                    /var/cache/debconf/config.dat               \
-                    /var/lib/apt/lists/lock                     \
-                    /var/lib/dpkg/lock-frontend                 \
-                    /var/lib/dpkg/lock                          \
-                    &> /dev/null; do
-            printf '%s\n' "$text"
-            sleep $check_wait
-        done
-    fi
+    while sudo  fuser                                       \
+                /snap/core/*/var/cache/debconf/config.dat   \
+                /var/cache/apt/archives/lock                \
+                /var/cache/debconf/config.dat               \
+                /var/lib/apt/lists/lock                     \
+                /var/lib/dpkg/lock                          \
+                /var/lib/dpkg/lock-frontend                 \
+                &> /dev/null; do
+        printf '%s\n' "$text"
+        sleep $check_wait
+    done
 }
 
 

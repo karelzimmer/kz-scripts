@@ -62,52 +62,24 @@ def check_for_active_updates():
     """
     check_wait = 10
 
-    try:
-        subprocess.run('ls /snap/core/*/var/cache/debconf/config.dat',
-                       shell=True, check=True,
-                       stdout=subprocess.DEVNULL,
-                       stderr=subprocess.DEVNULL)
-    except Exception:
-        snaps = False
-    else:
-        snaps = True
-
     while True:
-        if snaps:
-            try:
-                subprocess.run('sudo fuser '
-                               '/snap/core/*/var/cache/debconf/config.dat '
-                               '/var/cache/apt/archives/lock '
-                               '/var/cache/debconf/config.dat '
-                               '/var/lib/apt/lists/lock '
-                               '/var/lib/dpkg/lock-frontend '
-                               '/var/lib/dpkg/lock',
-                               shell=True, check=True,
-                               stdout=subprocess.DEVNULL,
-                               stderr=subprocess.DEVNULL)
-            except Exception:
-                break
-            else:
-                print(_('Wait {}s for another package manager to finish...').
-                      format(check_wait))
-                time.sleep(check_wait)
+        try:
+            subprocess.run('sudo fuser '
+                            '/snap/core/*/var/cache/debconf/config.dat '
+                            '/var/cache/apt/archives/lock '
+                            '/var/cache/debconf/config.dat '
+                            '/var/lib/apt/lists/lock '
+                            '/var/lib/dpkg/lock-frontend '
+                            '/var/lib/dpkg/lock',
+                            shell=True, check=True,
+                            stdout=subprocess.DEVNULL,
+                            stderr=subprocess.DEVNULL)
+        except Exception:
+            break
         else:
-            try:
-                subprocess.run('sudo fuser '
-                               '/var/cache/apt/archives/lock '
-                               '/var/cache/debconf/config.dat '
-                               '/var/lib/apt/lists/lock '
-                               '/var/lib/dpkg/lock-frontend '
-                               '/var/lib/dpkg/lock',
-                               shell=True, check=True,
-                               stdout=subprocess.DEVNULL,
-                               stderr=subprocess.DEVNULL)
-            except Exception:
-                break
-            else:
-                print(_('Wait {}s for another package manager to finish...').
-                      format(check_wait))
-                time.sleep(check_wait)
+            print(_('Wait {}s for another package manager to finish...').
+                    format(check_wait))
+            time.sleep(check_wait)
 
 
 def check_on_ac_power(PROGRAM_NAME):
