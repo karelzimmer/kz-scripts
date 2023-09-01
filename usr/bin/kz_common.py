@@ -65,20 +65,20 @@ def check_for_active_updates():
     while True:
         try:
             subprocess.run('sudo fuser '
-                            '/snap/core/*/var/cache/debconf/config.dat '
-                            '/var/cache/apt/archives/lock '
-                            '/var/cache/debconf/config.dat '
-                            '/var/lib/apt/lists/lock '
-                            '/var/lib/dpkg/lock-frontend '
-                            '/var/lib/dpkg/lock',
-                            shell=True, check=True,
-                            stdout=subprocess.DEVNULL,
-                            stderr=subprocess.DEVNULL)
+                           '/snap/core/*/var/cache/debconf/config.dat '
+                           '/var/cache/apt/archives/lock '
+                           '/var/cache/debconf/config.dat '
+                           '/var/lib/apt/lists/lock '
+                           '/var/lib/dpkg/lock-frontend '
+                           '/var/lib/dpkg/lock',
+                           shell=True, check=True,
+                           stdout=subprocess.DEVNULL,
+                           stderr=subprocess.DEVNULL)
         except Exception:
             break
         else:
             print(_('Wait {}s for another package manager to finish...').
-                    format(check_wait))
+                  format(check_wait))
             time.sleep(check_wait)
 
 
