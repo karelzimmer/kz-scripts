@@ -179,6 +179,10 @@ sudo snap remove vlc
 # HOST pc01 pc07
 sudo snap remove code
 
+#  APP web
+# HOST pc06
+sudo apt-get remove --yes epiphany-browser
+
 #  APP wine
 # HOST pc04
 sudo apt-get remove --yes wine winetricks playonlinux

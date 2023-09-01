@@ -249,6 +249,10 @@ sudo snap install vlc
 # HOST pc01 pc06
 sudo snap install --classic code
 
+#  APP web
+# HOST pc06
+sudo apt-get install --yes epiphany-browser
+
 #  APP wine
 # HOST pc04
 sudo apt-get install --yes wine winetricks playonlinux
