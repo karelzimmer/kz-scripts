@@ -176,6 +176,9 @@ def check_user_sudo():
 
 
 def msg_log(PROGRAM_NAME, text):
+    """
+    This function records a message to the log.
+    """
     journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + text)
 
 
