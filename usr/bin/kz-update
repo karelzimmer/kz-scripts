@@ -53,8 +53,9 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
-    print('{}{}{} ({})'.format(kz_common.BOLD, _('Repair'), kz_common.NORMAL,
-                               PROGRAM_NAME))
+    text = _('Repair')
+    print(f'{kz_common.BOLD}{text}{kz_common.NORMAL} ({PROGRAM_NAME})')
+    exit
     command = 'dpkg --configure --pending'
     perform_command(command)
 
@@ -69,8 +70,8 @@ def perform_update():
     """
     This function updates installed Debian packages.
     """
-    print('{}{}{} ({})'.format(kz_common.BOLD, _('Update'), kz_common.NORMAL,
-                               PROGRAM_NAME))
+    text = _('Update')
+    print(f'{kz_common.BOLD}{text}{kz_common.NORMAL} ({PROGRAM_NAME})')
     command = 'apt-get update'
     perform_command(command)
 
@@ -91,7 +92,8 @@ def perform_command(command):
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
-        print(_('Program {} encountered an error.').format(PROGRAM_NAME))
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        kz_common.msg_error(PROGRAM_NAME, text)
         sys.exit(kz_common.error)
     else:
         print()
@@ -116,8 +118,8 @@ def perform_cleanup():
     """
     This function performs a Debian package cleanup.
     """
-    print('{}{}{} ({})'.format(kz_common.BOLD, _('Cleanup'), kz_common.NORMAL,
-                               PROGRAM_NAME))
+    text = _('Cleanup')
+    print(f'{kz_common.BOLD}{text}{kz_common.NORMAL} ({PROGRAM_NAME})')
     command = 'apt-get autoclean --yes'
     perform_command(command)
 
@@ -159,11 +161,13 @@ def check_reboot():
     except FileNotFoundError as fnf:
         text = str(fnf)
         kz_common.msg_log(PROGRAM_NAME, text)
-        print(_('Finished') + '.')
+        text = _('Finished')
+        print(f'{kz_common.GREEN}{text}.{kz_common.NORMAL}')
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
-        print(_('Program {} encountered an error.').format(PROGRAM_NAME))
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        kz_common.msg_error(PROGRAM_NAME, text)
         sys.exit(kz_common.error)
 
 

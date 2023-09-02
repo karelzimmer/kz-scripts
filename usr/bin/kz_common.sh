@@ -203,7 +203,7 @@ function maxrc {
 }
 
 
-# This function returns an error message.
+# This function returns an error message and logs it.
 function msg_error {
     if $option_gui; then
         local title
@@ -219,6 +219,7 @@ function msg_error {
     else
         printf "${red}%b\n${normal}" "$@" >&2
     fi
+    msg_log "$@"
 }
 
 
@@ -246,7 +247,7 @@ function msg_log {
 }
 
 
-# This function returns a warning message.
+# This function returns a warning message and logs it.
 function msg_warning {
     if $option_gui; then
         local title
@@ -262,6 +263,7 @@ function msg_warning {
     else
         printf "${yellow}%b\n${normal}" "$@" >&2
     fi
+    msg_log "$@"
 }
 
 
@@ -442,7 +444,7 @@ $command, code: $rc ($rc_desc)"
 
     case $signal in
         err)
-            msg_log "
+            msg_error "
 $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
@@ -453,7 +455,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         *)
-            msg_log "
+            msg_error "
 $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;

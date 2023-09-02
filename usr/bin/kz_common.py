@@ -15,7 +15,7 @@ This module provides general variables and functions.
 
 ###############################################################################
 # Import
-###############################################################################
+##############################################################################
 
 import argparse
 import gettext
@@ -42,7 +42,10 @@ OK = 0
 ERROR = 1
 
 BOLD = '\033[1m'
+GREEN = BOLD + '\033[92m'
 NORMAL = '\033[0m'
+RED = BOLD + '\033[91m'
+YELLOW = BOLD + '\033[93m'
 
 
 ###############################################################################
@@ -89,15 +92,17 @@ def check_on_ac_power(PROGRAM_NAME):
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
-        print('\n' + _('The computer now uses only the battery for power.\n\n'
-              'It is recommended to connect the computer to the wall socket.'))
+        text = _('The computer now uses only the battery for power.\n\n'
+                 'It is recommended to connect the computer to the wall \
+socket.')
+        msg_warning(PROGRAM_NAME, text)
         try:
             input('\n' + _('Press the Enter key to continue [Enter]: '))
         except KeyboardInterrupt as kbdint:
             text = str(kbdint)
             msg_log(PROGRAM_NAME, text)
-            print('\n' + _('Program {} has been interrupted.').
-                  format(PROGRAM_NAME))
+            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+            msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
 
 
@@ -119,14 +124,16 @@ def check_user_root(PROGRAM_NAME, DISPLAY_NAME):
             except KeyboardInterrupt as kbdint:
                 text = str(kbdint)
                 msg_log(PROGRAM_NAME, text)
-                print('\n' + _('Program {} has been interrupted.').
-                      format(PROGRAM_NAME))
+                text = _('Program {} has been interrupted.').\
+                    format(PROGRAM_NAME)
+                msg_error(PROGRAM_NAME, text)
                 sys.exit(ERROR)
             except Exception as exc:
                 text = str(exc)
                 msg_log(PROGRAM_NAME, text)
-                print(_('Program {} encountered an error.').
-                      format(PROGRAM_NAME))
+                text = _('Program {} encountered an error.').\
+                    format(PROGRAM_NAME)
+                msg_error(PROGRAM_NAME, text)
                 sys.exit(ERROR)
 
 
@@ -147,11 +154,27 @@ def check_user_sudo():
         return(OK)
 
 
+def msg_error(PROGRAM_NAME, text):
+    """
+    This function returns an error message and logs it.
+    """
+    print(f'{RED}{text}{NORMAL}')
+    msg_log(PROGRAM_NAME, text)
+
+
 def msg_log(PROGRAM_NAME, text):
     """
     This function records a message to the log.
     """
     journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + text)
+
+
+def msg_warning(PROGRAM_NAME, text):
+    """
+    This function returns a warning message and logs it.
+    """
+    print(f'{YELLOW}{text}{NORMAL}')
+    msg_log(PROGRAM_NAME, text)
 
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
@@ -228,7 +251,8 @@ def process_option_version(PROGRAM_NAME):
     except Exception as exc:
         text = str(exc)
         msg_log(PROGRAM_NAME, text)
-        print(_('Program {} encountered an error.').format(PROGRAM_NAME))
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        msg_error(PROGRAM_NAME, text)
         sys.exit(ERROR)
     finally:
         cmd = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME}"
