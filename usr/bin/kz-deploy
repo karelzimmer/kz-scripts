@@ -122,7 +122,7 @@ function check_repos {
         if [[ $(git branch --show-current) != 'main' ]]; then
             msg_error "$(eval_gettext "Repo \$repo not on branch main.")"
             git status
-            maxrc=1
+            maxrc=$ERROR
         fi
     done
     msg_info "$(gettext 'Check that all repos are clean...')"
@@ -133,7 +133,7 @@ function check_repos {
         if ! git diff-index --quiet HEAD; then
             msg_error "$(eval_gettext "Repo \$repo is not clean.")"
             git status
-            maxrc=1
+            maxrc=$ERROR
         fi
     done
     if [[ $maxrc -gt $OK ]]; then

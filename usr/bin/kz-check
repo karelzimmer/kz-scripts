@@ -171,9 +171,7 @@ function check_pycodestyle {
     local -i rc=0
 
     pycodestyle "$script" || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        maxrc=$ERROR
-    fi
+    maxrc
 }
 
 
@@ -213,9 +211,7 @@ function check_shellcheck {
                 --enable=require-double-brackets    \
                 --external-sources                  \
                 "$scriptname"                       || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        maxrc=$ERROR
-    fi
+    maxrc
     cd "$scripts_repo"
 }
 
