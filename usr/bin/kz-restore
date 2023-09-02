@@ -254,6 +254,7 @@ function restore_backup {
 Some files may not be readable,
 or were any files added or removed while restoring the backup,
 or is there not enough space on \$target.
+
 Check the restored data.
 Try te restore the backup again.")"
         exit $ERROR
