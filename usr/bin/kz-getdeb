@@ -198,7 +198,7 @@ Type 'exit' to close this window.")
                             --infobox   "$text"         \
                             16 47
     else
-        printf "%s\n" "$(gettext 'Finished')."
+        printf "%s\n" "${green}$(gettext 'Finished').${normal}"
     fi
     cleanup
     exit 0
