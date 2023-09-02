@@ -1186,9 +1186,6 @@ msgstr "Zoom-webapp"
 msgid "Install apps and changes system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"
 
-msgid "Installation helper"
-msgstr "Installatiehulp"
-
 msgid "Run commands through a menu"
 msgstr "Voer opdrachten uit via een menu"
 

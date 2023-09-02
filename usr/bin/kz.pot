@@ -998,9 +998,6 @@ msgstr ""
 msgid "Install apps and changes system settings"
 msgstr ""
 
-msgid "Installation helper"
-msgstr ""
-
 msgid "Run commands through a menu"
 msgstr ""
 

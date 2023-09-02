@@ -194,5 +194,5 @@ sudo apt-get remove --yes wine winetricks playonlinux
 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 #  APP youtube-downloader
-# HOST pc-van-hugo
+# HOST pc-van-emily pc-van-hugo
 sudo apt-get remove --yes youtubedl-gui
