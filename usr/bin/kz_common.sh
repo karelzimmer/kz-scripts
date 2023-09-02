@@ -60,7 +60,6 @@ readonly OPTIONS_LONG='help,usage,version'
 ###############################################################################
 
 declare -a cmdline_args=()
-declare logcmd_check=''
 declare logcmd=''
 declare -i maxrc=0
 declare option_gui=false
@@ -164,8 +163,6 @@ function init_script {
     set -o pipefail
 
     logcmd="systemd-cat --identifier=$PROGRAM_NAME"
-    logcmd_check="journalctl --all --boot --identifier=$PROGRAM_NAME \
---since='$(date '+%Y-%m-%d %H:%M:%S')'"
 
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
@@ -367,16 +364,6 @@ function set_terminal_attributes {
 }
 
 
-# This function shows log messages.
-function show_log {
-    if $option_gui; then
-        gnome-terminal --window -- bash -c "$logcmd_check"
-    else
-        eval "$logcmd_check"
-    fi
-}
-
-
 # This function processes the signals for which the trap was set by function
 # init_script.
 function signal {
@@ -444,7 +431,7 @@ $command, code: $rc ($rc_desc)"
 
     case $signal in
         err)
-            msg_error "
+            msg_log "
 $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
@@ -455,7 +442,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         *)
-            msg_error "
+            msg_log "
 $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;

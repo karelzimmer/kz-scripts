@@ -455,9 +455,8 @@ function term_script {
 Some files may not be readable,
 or were any files added or removed while creating the backup,
 or is there not enough space on \$target.
-The maximum exit value is \$maxrc.
-Check the log on the screen.")"
-        show_log
+Check the backup made.
+Try backing up again.")"
         exit $ERROR
     fi
 
