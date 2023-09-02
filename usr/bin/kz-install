@@ -515,8 +515,10 @@ function term_script {
         if [[ -n ${failed_cmds[*]} ]]; then
             # shellcheck disable=SC2034
             failed_cmds_text=${failed_cmds[*]}
-            msg_error "$(eval_gettext "The installation of the following apps \
-failed: \$failed_cmds_text
+            msg_error "$(eval_gettext "Installation of the following apps \
+failed:
+\$failed_cmds_text
+
 Try installing the apps again.")"
             exit $ERROR
         else

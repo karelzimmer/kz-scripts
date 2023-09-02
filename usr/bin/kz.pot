@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-02 20:46+0200\n"
+"POT-Creation-Date: 2023-09-02 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -595,13 +595,17 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"The installation of the following apps failed: $failed_cmds_text\n"
+"Installation of the following apps failed:\n"
+"$failed_cmds_text\n"
+"\n"
 "Try installing the apps again."
 msgstr ""
 
 #, sh-format
 msgid ""
-"Setup of the following apps failed: $failed_cmds_text\n"
+"Setup of the following apps failed:\n"
+"$failed_cmds_text\n"
+"\n"
 "Try to set up the apps again."
 msgstr ""
 

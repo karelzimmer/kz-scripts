@@ -185,24 +185,22 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
 
     restore_backup
 
-    if ! $option_dry_run; then
-        if [[ $EDITION = 'desktop' ]]; then
-            title=$(gettext 'Restore settings')
-            text=$title
-            if $option_gui; then
-                restore_settings                |
-                zenity  --progress              \
-                        --pulsate               \
-                        --auto-close            \
-                        --no-cancel             \
-                        --width     600         \
-                        --height    50          \
-                        --title     "$title"    \
-                        --text      "$text"     2> >($logcmd)
-            else
-                msg_info "$text..."
-                restore_settings
-            fi
+    if [[ $EDITION = 'desktop' ]]; then
+        title=$(gettext 'Restore settings')
+        text=$title
+        if $option_gui; then
+            restore_settings                |
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd)
+        else
+            msg_info "$text..."
+            restore_settings
         fi
     fi
 }
@@ -244,6 +242,22 @@ function restore_backup {
 
     sync |& $logcmd || rc+=$?
     maxrc
+
+    if $option_dry_run; then
+        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
+        exit $ERROR
+    fi
+
+    if [[ $maxrc -gt $OK ]]; then
+        msg_error "$(eval_gettext "Restore ended with warnings or errors.
+
+Some files may not be readable,
+or were any files added or removed while restoring the backup,
+or is there not enough space on \$target.
+Check the restored data.
+Try te restore the backup again.")"
+        exit $ERROR
+    fi
 }
 
 
@@ -292,22 +306,6 @@ function restore_settings_favorite_apps {
 function term_script {
     local dev=''
     local -i rc=0
-
-    if $option_dry_run; then
-        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
-        exit $ERROR
-    fi
-
-    if [[ $maxrc -gt $OK ]]; then
-        msg_error "$(eval_gettext "Restore ended with warnings or errors.
-
-Some files may not be readable,
-or were any files added or removed while restoring the backup,
-or is there not enough space on \$target.
-Check the restored data.
-Try te restore the backup again.")"
-        exit $ERROR
-    fi
 
     if [[ $source_medium == /media/* ]]; then
         term_script_unmount

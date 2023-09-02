@@ -420,30 +420,6 @@ EOF
     maxrc
     rm "$exclude"
 
-    text=$(gettext "Writing data from memory (this may take a while)")
-    if ! $option_dry_run; then
-        if $option_gui; then
-            sync                            |
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($logcmd) || rc=$?
-        else
-            msg_info "
-$text..."
-            sync |& $logcmd || rc=$?
-        fi
-    fi
-    maxrc
-}
-
-
-# This function controls the termination of the script.
-function term_script {
     if $option_dry_run; then
         msg_error "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $ERROR
@@ -460,6 +436,28 @@ Try backing up again.")"
         exit $ERROR
     fi
 
+    text=$(gettext "Writing data from memory (this may take a while)")
+    if $option_gui; then
+        sync                            |
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$title"    \
+                --text      "$text"     2> >($logcmd) || rc=$?
+    else
+        msg_info "
+$text..."
+        sync |& $logcmd || rc=$?
+    fi
+    maxrc
+}
+
+
+# This function controls the termination of the script.
+function term_script {
     if [[ $target_medium == /media/* ]]; then
         term_script_unmount
     else
