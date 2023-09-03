@@ -67,7 +67,7 @@ readonly HOST=$HOSTNAME
 ###############################################################################
 
 declare -a app_arguments=()
-declare -A failed_cmds=()
+declare -A failed_apps=()
 declare argument_app=false
 declare commands_found=false
 declare execute_commands=true
@@ -491,14 +491,14 @@ function execute_command {
     maxrc
     msg_log  "rc=$rc, maxrc=$maxrc"
     if [[ $rc -gt $OK ]]; then
-        failed_cmds[$app_name]=$app_name
+        failed_apps[$app_name]=$app_name
     fi
 }
 
 
 # This function controls the termination of the script.
 function term_script {
-    local failed_cmds_text=''
+    local failed_apps_text=''
     local operation
     operation=$(gettext 'set up')
 
@@ -508,11 +508,12 @@ function term_script {
     fi
 
     if $execute_commands; then
-        if [[ -n ${failed_cmds[*]} ]]; then
+        if [[ -n ${failed_apps[*]} ]]; then
             # shellcheck disable=SC2034
-            failed_cmds_text=${failed_cmds[*]}
-            msg_error "$(eval_gettext "Setup of the following apps failed:
-\$failed_cmds_text
+            failed_apps_text=${failed_apps[*]}
+            msg_error "$(eval_gettext "The set up of the following apps \
+contains errors:
+\$failed_apps_text
 
 Try to set up the apps again.")"
             exit $ERROR

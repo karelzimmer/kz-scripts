@@ -243,11 +243,6 @@ function restore_backup {
     sync |& $logcmd || rc+=$?
     maxrc
 
-    if $option_dry_run; then
-        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
-        exit $ERROR
-    fi
-
     if [[ $maxrc -gt $OK ]]; then
         msg_error "$(eval_gettext "Restore ended with warnings or errors.
 
@@ -257,6 +252,11 @@ or is there not enough space on \$target.
 
 Check the restored data.
 Try te restore the backup again.")"
+        exit $ERROR
+    fi
+
+    if $option_dry_run; then
+        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $ERROR
     fi
 }
@@ -305,9 +305,6 @@ function restore_settings_favorite_apps {
 
 # This function controls the termination of the script.
 function term_script {
-    local dev=''
-    local -i rc=0
-
     if [[ $source_medium == /media/* ]]; then
         term_script_unmount
     else

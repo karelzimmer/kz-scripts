@@ -420,11 +420,6 @@ EOF
     maxrc
     rm "$exclude"
 
-    if $option_dry_run; then
-        msg_error "$(gettext 'The backup has NOT been created (DRY RUN).')"
-        exit $ERROR
-    fi
-
     if [[ $maxrc -gt $OK ]]; then
         msg_error "$(eval_gettext "Backup ended with warnings or errors.
 
@@ -459,6 +454,11 @@ $text..."
 
 # This function controls the termination of the script.
 function term_script {
+    if $option_dry_run; then
+        msg_error "$(gettext 'The backup has NOT been created (DRY RUN).')"
+        exit $ERROR
+    fi
+
     if [[ $target_medium == /media/* ]]; then
         term_script_unmount
     else
