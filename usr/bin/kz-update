@@ -162,7 +162,7 @@ def check_reboot():
         text = str(fnf)
         kz_common.msg_log(PROGRAM_NAME, text)
         text = _('Finished')
-        print(f'{kz_common.GREEN}{text}.{kz_common.NORMAL}')
+        print(f'{kz_common.BOLD}{text}.{kz_common.NORMAL}')
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
