@@ -43,6 +43,7 @@ $PROGRAM_DESC.
 $OPTIONS_HELP"
 readonly HELP
 
+
 ###############################################################################
 # Variables
 ###############################################################################
@@ -109,13 +110,10 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    local text=''
-
     if groups "$USER" | grep --quiet --regexp='sudo'; then
         sudo true
     else
-        text="$(gettext 'Already performed by the administrator.')"
-        printf '%s\n' "${green}$text${normal}"
+        printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
     install_package
