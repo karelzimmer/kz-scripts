@@ -146,8 +146,8 @@ function process_input {
 
 # This function checks Shell and Python script code.
 function check_code {
-    local bash_script='#!''/usr/bin/env bash'
-    local python_script='#!''/usr/bin/env python3'
+    local bash_script='#!''/usr/bin/bash'
+    local python_script='#!''/usr/bin/python'
     local tab_completion_script='# ''shellcheck shell=bash'
 
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
