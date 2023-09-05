@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 # shellcheck shell=bash source=kz_common.sh
 ###############################################################################
 # Install kz package.

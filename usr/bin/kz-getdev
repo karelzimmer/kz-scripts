@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 # shellcheck source=kz_common.sh
 ###############################################################################
 # Build development environment.
