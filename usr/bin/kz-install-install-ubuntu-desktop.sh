@@ -77,7 +77,7 @@ sudo apt-get install --yes libimage-exiftool-perl
 
 #  APP gast
 # HOST pc01 pc06
-sudo useradd --create-home --shell /bin/bash --comment 'Gast' gast || true
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Gast' gast || true
 sudo passwd --delete gast
 
 #  APP gimp

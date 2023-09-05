@@ -144,7 +144,8 @@ done'
 
     print(_('Snap cleanup...'))
     try:
-        subprocess.run({cmd}, shell=True, check=True, executable='/bin/bash')
+        subprocess.run({cmd}, shell=True, check=True,
+                       executable='/usr/bin/bash')
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
