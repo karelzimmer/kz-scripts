@@ -179,7 +179,7 @@ function check_pycodestyle {
 function check_record_length {
     local -i max_line_length=79
     local -i max_line_length_found=0
-    local python_script='#!''/usr/bin/python3'
+    local python_script='#!''/usr/bin/python'
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp --regexp="$python_script" "$script"; then
