@@ -33,7 +33,7 @@ echo '' | sudo tee /etc/rc.local
 sudo chmod -x /etc/rc.local
 
 #  APP calibre
-# HOST pc-van-hugo pc04
+# HOST pc-van-hugo pc04 pc06
 sudo apt-get remove --yes calibre
 
 #  APP citrix

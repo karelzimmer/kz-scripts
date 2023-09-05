@@ -36,7 +36,7 @@ echo 'echo 1900 > /sys/class/backlight/intel_backlight/brightness' | sudo tee --
 sudo chmod +x /etc/rc.local
 
 #  APP calibre
-# HOST pc-van-hugo pc04
+# HOST pc-van-hugo pc04 pc06
 sudo apt-get install --yes calibre
 
 #  APP citrix
