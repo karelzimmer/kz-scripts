@@ -40,7 +40,7 @@ $PROGRAM_DESC.
 
 $(gettext 'Options:')
   -a, --apps     $(gettext 'show list of available apps')
-  -c, --cat      $(gettext 'show contents of commands file')
+  -c, --cat      $(gettext 'show contents of command file')
 $(gettext '  -f, --file FILE
                  process FILE')
   -g, --gui      $(gettext 'starts in graphics mode')
@@ -56,9 +56,6 @@ readonly HELP
 readonly X_OPTIONS_SHORT='acf:lgr'
 readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove'
 
-COMMANDS_FILE=$(mktemp -t "$PROGRAM_NAME-commands-XXXXXXXXXX")
-readonly COMMANDS_FILE
-
 readonly HOST=$HOSTNAME
 
 
@@ -69,6 +66,7 @@ readonly HOST=$HOSTNAME
 declare -a app_arguments=()
 declare -A failed_apps=()
 declare argument_app=false
+declare command_file=''
 declare commands_found=false
 declare execute_commands=true
 declare file_argument=''
@@ -187,6 +185,9 @@ function process_input {
         msg_warning "$text"
         exit $ERROR
     fi
+    command_file=$(
+        mktemp -t "$PROGRAM_NAME-$mode-$DISTRO-$EDITION-XXXXXXXXXX.sh"
+        )
 
     if $argument_app; then
         process_argument_app
@@ -247,7 +248,7 @@ function process_argument_app {
 }
 
 
-# This function generates the commands file from the input file,
+# This function generates the command file from the input file,
 # filtering on HOST and APPs.
 function process_argument_app_input_file {
     local app_host_match=false
@@ -279,14 +280,14 @@ function process_argument_app_input_file {
                     {
                         printf '%s\n' "$app_record"
                         printf '%s\n' "$input_record"
-                    } >> "$COMMANDS_FILE"
+                    } >> "$command_file"
                     app_record=''
                 fi
                 ;;
             *)
                 # Other record (comment or command).
                 if $app_match && $app_host_match; then
-                    printf '%s\n' "$input_record" >> "$COMMANDS_FILE"
+                    printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
         esac
@@ -300,7 +301,7 @@ function process_argument_app_input_file {
 }
 
 
-# This function generates the commands file from the input file,
+# This function generates the command file from the input file,
 # filtering on HOST.
 function process_input_file {
     local app_record=''
@@ -321,13 +322,13 @@ function process_input_file {
                 {
                     printf '%s\n' "$app_record"
                     printf '%s\n' "$input_record"
-                } >> "$COMMANDS_FILE"
+                } >> "$command_file"
                 app_record=''
                 ;;
             *)
                 # Other record (emtpy, comment, or command).
                 if $host_match; then
-                    printf '%s\n' "$input_record" >> "$COMMANDS_FILE"
+                    printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
         esac
@@ -335,7 +336,7 @@ function process_input_file {
 }
 
 
-# This function shows the available APPs from the input file.
+# This function shows the available APPs from the command file.
 function process_option_apps {
     text="$(gettext 'The following APPs are available:
 
@@ -343,7 +344,7 @@ function process_option_apps {
 $(
     if !    grep    --no-messages           \
                     --regexp='#.* APP '     \
-                    "$COMMANDS_FILE"             |
+                    "$command_file"             |
             tr      --squeeze-repeats       \
                     '[:space:]'             |
             cut     --delimiter=' '         \
@@ -368,9 +369,9 @@ ${blue}$DISPLAY_NAME --cat APP...${normal}"
 }
 
 
-# This function displays the contents of the commands file.
+# This function displays the contents of the command file.
 function process_option_cat {
-    less --quit-if-one-screen "$COMMANDS_FILE"
+    less --quit-if-one-screen "$command_file"
 }
 
 
@@ -402,7 +403,7 @@ $(eval_gettext "To view the commands of FILE execute: \${blue}\$DISPLAY_NAME \
 }
 
 
-# This function reads commands from the commands file.
+# This function reads commands from the command file for further processing.
 function process_cmds_file {
     local app_name=''
     local operation
@@ -413,7 +414,7 @@ function process_cmds_file {
     local -i cmd_seq_num=0
 
     app_tot_num=$(
-        grep --word-regexp --regexp='#.*APP' --count "$COMMANDS_FILE" || true
+        grep --word-regexp --regexp='#.*APP' --count "$command_file" || true
         )
     if [[ $app_tot_num -gt 99 ]]; then
         app_tot_num=99
@@ -454,11 +455,11 @@ function process_cmds_file {
                 execute_command "$commands_record"
                 ;;
         esac
-    done < "$COMMANDS_FILE"
+    done < "$command_file"
 }
 
 
-# This function executes a command from the commands file.
+# This function executes a command from the command file.
 function execute_command {
     local cmd=${1:-unknown}
     local app_name_line=''

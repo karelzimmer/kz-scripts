@@ -44,27 +44,29 @@ Dit invoerbestand bevat installatie-opdrachten voor alle hierin opgenomen
 computers (HOSTs) voor Ubuntu desktop.
 .br
 Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
-computernaam (HOST) geselecteerd en gekopieerd naar een opdrachtenbestand.
+computernaam (HOST) geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
-Een HOST wordt in deze context gedefinieerd als <hostnaam>, b.v. pc02 of *.
+Een HOST wordt in deze context gedefinieerd als <hostnaam>, b.v. pc02 of *
+(iedere computer).
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
-het opdrachtenbestand.
+het opdrachtbestand.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven. Per opgegeven \fIAPP\fR worden de
 opdrachten voor de huidige computernaam (HOST) en \fIAPP\fR geselecteerd uit
-het invoerbestand en gekopieerd naar een opdrachtenbestand.
+het invoerbestand en gekopieerd naar het opdrachtbestand.
 .sp
-De opdrachten in het opdrachtenbestand worden uitgevoerd.
+De opdrachten in het opdrachtbestand worden uitgevoerd.
 .sp
-Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtenbestand.
+Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt.
+Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt,
+de modus wijzigt dan van install naar remove.
 .br
 Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-remove-ubuntu-desktop.sh
 ("verwijderbestand") verwerkt.
 .sp
-De optie \fB-l\fR, \fB--list\fR geeft een lijst met standaardbestanden weer.
+De optie \fB-l\fR, \fB--list\fR geeft een lijst met installatiebestanden weer.
 .sp
 Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
 opgegeven worden, de bestandsnaam dient te beginnen met \fBkz-install-\fR.
@@ -74,8 +76,8 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De standaard invoerbestanden dienen te beginnen met \fBkz-install-install-\fR
-of \fBkz-install-remove-\fR, en te eindigen met \fB.sh\fR.
+De naamgeving van de standaard invoerbestanden is
+kz-install-<mode>-<distribution>-<edition>.sh.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
@@ -200,7 +202,7 @@ Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 Toon een lijst van te installeren apps.
 .TP
 \fB-c\fR, \fB--cat\fR
-Toon de inhoud van het opdrachtenbestand.
+Toon de inhoud van het opdrachtbestand.
 .TP
 \fB-l\fR, \fB--list\fR
 Toon een lijst van standaardbestanden.
@@ -251,9 +253,9 @@ Standaard verwijderbestand voor Debian desktop.
 Standaard verwijderbestand voor Ubuntu desktop.
 .RE
 .sp
-/tmp/kz-install-commands-XXXXXXXXXX
+/tmp/kz-install-<modus>-<distributie>-<editie>-XXXXXXXXXX.sh
 .RS
-Opdrachtenbestand.
+Opdrachtbestand, bijvoorbeeld kz-install-install-ubuntu-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
 ~/Instellingen/Apps

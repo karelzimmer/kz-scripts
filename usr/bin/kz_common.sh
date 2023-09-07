@@ -459,15 +459,6 @@ function signal_exit {
 launch a Terminal window and run:")
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
-            else
-                # shellcheck disable=SC2154
-                rm --force "$COMMANDS_FILE"
-            fi
-            ;;
-        kz-setup)
-            if [[ $rc -eq $OK ]]; then
-                # shellcheck disable=SC2154
-                rm --force "$COMMANDS_FILE"
             fi
             ;;
         *)

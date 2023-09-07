@@ -616,8 +616,8 @@ msgstr "Gebruik: $DISPLAY_NAME [OPTIE...] [APP...]"
 msgid "show list of available apps"
 msgstr "toon lijst van beschikbare apps"
 
-msgid "show contents of commands file"
-msgstr "toon inhoud van opdrachtenbestand"
+msgid "show contents of command file"
+msgstr "toon inhoud van opdrachtbestand"
 
 msgid ""
 "  -f, --file FILE\n"

@@ -42,27 +42,28 @@ This input file contains commands for all computers (HOSTs) included in it for
 Ubuntu desktop.
 .br
 When processing the input file, the commands for the current computer (HOST)
-are selected and copied to a commands file.
+are selected and copied to a command file.
 .br
-A HOST is defined in this context as <hostname>, e.g. pc02 or *.
+A HOST is defined in this context as <hostname>, e.g. pc02 or * (any computer).
 .sp
 Option \fB-a\fR, \fB--apps\fR lists apps available in the commands
 file.
 .sp
 It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands for
 the current computer (HOST) and \fIAPP\fR are selected from the input file and
-are copied to a commands file.
+are copied to a command file.
 .sp
 The commands in the command file are executed.
 .sp
-Option \fB-c\fR, \fB--cat\fR lists the contents of the commands file.
+Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
-With option \fB-r\fR, \fB--remove\fR the installation can be undone.
+With option \fB-r\fR, \fB--remove\fR the installation can be undone, the mode
+then changes from install to remove.
 .br
 Then, for example, file /usr/bin/kz-install-remove-ubuntu-desktop.sh
 ("remove file") is processed.
 .sp
-The \fB-l\fR, \fB--list\fR option displays a list of default files.
+The \fB-l\fR, \fB--list\fR option displays a list of installation files.
 .sp
 With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
 specified, the file name must start with \fBkz-install-\fR.
@@ -71,8 +72,8 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The default input files to be processed should start with
-\fBkz-install-install-\fR or \fBkz-install-remove-\fR, and end with \fB.sh\fR.
+The format of the default input file is
+kz-install-<mode>-<distribution>-<edition>.sh.
 .sp
 The records are processed in the order they appear in the files.
 .br
@@ -195,7 +196,7 @@ Mandatory arguments to long options are mandatory for short options too.
 Show a list of apps to install.
 .TP
 \fB-c\fR, \fB--cat\fR
-Display the contents of the commands file.
+Display the contents of the command file.
 .TP
 \fB-l\fR, \fB--list\fR
 Show a list of standard files.
@@ -247,10 +248,9 @@ Standard uninstaller file for Debian desktop.
 .RS
 Standard uninstaller file for Ubuntu desktop.
 .RE
-.sp
-/tmp/kz-install-commands-XXXXXXXXXX
+/tmp/kz-setup-<mode>-<distribution>-<edition>-XXXXXXXXXX.sh
 .RS
-Commands file.
+Command file, e.g. kz-install-install-ubuntu-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
 ~/Setup/Apps
