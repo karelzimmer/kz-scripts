@@ -496,6 +496,7 @@ $text"
 # This function executes the command.
 function execute_command {
     local -i rc=0
+    local cmd=''
     local row=''
     local gui_option=''
 

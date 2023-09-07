@@ -235,7 +235,7 @@ def process_option_version(PROGRAM_NAME):
     This function displays version, author, and license information.
     """
     build_id = ''
-    cmd = ''
+    command = ''
     grep_expr = '# <https://creativecommons.org'
     program_year = ''
 
@@ -255,9 +255,9 @@ def process_option_version(PROGRAM_NAME):
         msg_error(PROGRAM_NAME, text)
         sys.exit(ERROR)
     finally:
-        cmd = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME}"
-        cmd = f"{cmd} | cut --delimiter=' ' --fields=3"
-        program_year = subprocess.check_output(cmd, shell=True,
+        command = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME}"
+        command = f"{command} | cut --delimiter=' ' --fields=3"
+        program_year = subprocess.check_output(command, shell=True,
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
         if program_year == '':

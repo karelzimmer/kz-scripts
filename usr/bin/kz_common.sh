@@ -59,7 +59,7 @@ readonly OPTIONS_LONG='help,usage,version'
 # Variables
 ###############################################################################
 
-declare -a cmdline_args=()
+declare -a commandline_args=()
 declare logcmd=''
 declare -i maxrc=0
 declare option_gui=false
@@ -128,12 +128,12 @@ function check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
-            msg_log  "restart (pkexec $program_exec ${cmdline_args[*]})"
-            pkexec "$program_exec" "${cmdline_args[@]}" || rc=$?
+            msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
+            pkexec "$program_exec" "${commandline_args[@]}" || rc=$?
             exit $rc
         else
-            msg_log  "restart (exec sudo $program_exec ${cmdline_args[*]})"
-            exec sudo "$program_exec" "${cmdline_args[@]}"
+            msg_log  "restart (exec sudo $program_exec ${commandline_args[*]})"
+            exec sudo "$program_exec" "${commandline_args[@]}"
         fi
     fi
 }
@@ -184,7 +184,7 @@ function init_script {
         set_terminal_attributes
     fi
 
-    cmdline_args=("$@")
+    commandline_args=("$@")
     USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
 information.")
     # shellcheck disable=SC2034
