@@ -68,7 +68,6 @@ declare -A failed_apps=()
 declare argument_app=false
 declare command_file=''
 declare commands_found=false
-declare execute_commands=true
 declare file_argument=''
 declare logout=true
 declare mode='setup'
@@ -209,7 +208,7 @@ function process_input {
         exit $OK
     fi
 
-    if $execute_commands && $option_gui; then
+    if $option_gui; then
         title=$(gettext 'Set up apps')
         text=$(gettext 'Preparing set up')
         # With '|& zenity --progress' global variables from called functions
@@ -496,39 +495,37 @@ function term_script {
         exit $OK
     fi
 
-    if $execute_commands; then
-        if [[ -n ${failed_apps[*]} ]]; then
-            # shellcheck disable=SC2034
-            failed_apps_text=${failed_apps[*]}
-            msg_error "$(eval_gettext "The set up of the following apps \
-contains errors:
+    if [[ -n ${failed_apps[*]} ]]; then
+        # shellcheck disable=SC2034
+        failed_apps_text=${failed_apps[*]}
+        msg_error "$(eval_gettext "The set up of the following apps contains \
+errors:
 \$failed_apps_text
 
 Try to set up the apps again.")"
-            exit $ERROR
-        else
-            if $option_reset; then
-                # shellcheck disable=SC2034
-                operation=$(gettext 'reset')
-            fi
-            msg_info "
+        exit $ERROR
+    else
+        if $option_reset; then
+            # shellcheck disable=SC2034
+            operation=$(gettext 'reset')
+        fi
+        msg_info "
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
-            if $logout; then
-                if [[ $EDITION = 'desktop' ]]; then
-                    text=$(gettext "You will now be logged out of the \
-computer to finish installing the apps and changing user settings.")
-                    msg_info "$text"
-                    if ! $option_gui; then
-                        wait_for_enter
-                    fi
-                    gnome-session-quit --logout --no-prompt
-                else
-                    text=$(gettext "You must log out of the computer to \
-finish installing the apps and changing user settings.
-Type 'logout' to log out.")
-                    msg_info "$text"
-                    exit $OK
+        if $logout; then
+            if [[ $EDITION = 'desktop' ]]; then
+                text=$(gettext "You will now be logged out of the computer to \
+finish installing the apps and changing user settings.")
+                msg_info "$text"
+                if ! $option_gui; then
+                    wait_for_enter
                 fi
+                gnome-session-quit --logout --no-prompt
+            else
+                text=$(gettext "You must log out of the computer to finish \
+installing the apps and changing user settings.
+Type 'logout' to log out.")
+                msg_info "$text"
+                exit $OK
             fi
         fi
     fi

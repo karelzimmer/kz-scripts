@@ -68,7 +68,6 @@ declare -A failed_apps=()
 declare argument_app=false
 declare command_file=''
 declare commands_found=false
-declare execute_commands=true
 declare file_argument=''
 declare mode='install'
 declare option_apps=false
@@ -209,12 +208,9 @@ function process_input {
         exit $OK
     fi
 
-    if $execute_commands; then
-        check_user_root
-        check_on_ac_power
-    fi
-
-    if $execute_commands && $option_gui; then
+    check_user_root
+    check_on_ac_power
+    if $option_gui; then
         title=$(gettext 'Install apps')
         text=$(gettext 'Prepare installation')
         # With '|& zenity --progress' global variables from called functions
@@ -500,32 +496,30 @@ function term_script {
         exit $OK
     fi
 
-    if $execute_commands; then
-        if [[ -n ${failed_apps[*]} ]]; then
-            # shellcheck disable=SC2034
-            failed_apps_text=${failed_apps[*]}
-            msg_error "$(eval_gettext "The installation of the following apps \
+    if [[ -n ${failed_apps[*]} ]]; then
+        # shellcheck disable=SC2034
+        failed_apps_text=${failed_apps[*]}
+        msg_error "$(eval_gettext "The installation of the following apps \
 contains errors:
 \$failed_apps_text
 
 Try installing the apps again.")"
-            exit $ERROR
-        else
-            if $option_remove; then
-                # shellcheck disable=SC2034
-                operation=$(gettext 'remove')
-            fi
-            msg_info "
+        exit $ERROR
+    else
+        if $option_remove; then
+            # shellcheck disable=SC2034
+            operation=$(gettext 'remove')
+        fi
+        msg_info "
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
-            if $reboot; then
-                text=$(gettext "The computer will now reboot to finish \
-installing the apps and changing system settings.")
-                msg_info "$text"
-                if ! $option_gui; then
-                    wait_for_enter
-                fi
-                sudo systemctl reboot
+        if $reboot; then
+            text=$(gettext "The computer will now reboot to finish installing \
+the apps and changing system settings.")
+            msg_info "$text"
+            if ! $option_gui; then
+                wait_for_enter
             fi
+            sudo systemctl reboot
         fi
     fi
     exit $OK
