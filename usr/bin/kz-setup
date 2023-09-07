@@ -310,7 +310,6 @@ function process_argument_app {
 # APPs.
 function process_argument_app_input_file {
     local app_match=false
-    local app_record=''
     local no_app_match=true
     local input_record=''
 
@@ -319,7 +318,6 @@ function process_argument_app_input_file {
             '#'*' APP '*)
                 # APP record.
                 app_match=false
-                app_record=''
                 if [[ $input_record == *' '$app_argument ]]; then
                     # Match by APP name.
                     app_match=true
@@ -359,8 +357,7 @@ function process_input_file {
                 user_match=false
                 ;;
             '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOST"*)
-                # USER record.
-                # Match by USER name.
+                # Matching USER record.
                 user_match=true
                 {
                     printf '%s\n' "$app_record"
