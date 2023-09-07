@@ -193,16 +193,18 @@ function process_input {
         mktemp -t "$PROGRAM_NAME-$mode-$DISTRO-$EDITION-XXXXXXXXXX.sh"
         )
 
+    if $option_apps; then
+        process_option_apps
+        exit $OK
+    fi
+
     if $argument_app; then
         process_argument_app
     else
         process_input_file
     fi
 
-    if $option_apps; then
-        process_option_apps
-        exit $OK
-    elif $option_cat; then
+    if $option_cat; then
         process_option_cat
         exit $OK
     fi
@@ -212,7 +214,7 @@ function process_input {
         text=$(gettext 'Preparing set up')
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_cmds_file > >(
+        process_command_file > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -223,154 +225,8 @@ function process_input {
                     --text      "$text"     2> >($logcmd)
             )
     else
-        process_cmds_file
+        process_command_file
     fi
-}
-
-
-# This function processes argument APP.
-function process_argument_app {
-    #
-    # Generate cmds-file from input-file; filter on USER and APPs.
-    #
-    local app_not_found=false
-    local app_argument=''
-
-    for app_argument in "${app_arguments[@]}"; do
-        process_argument_app_input_file
-    done
-    if $app_not_found; then
-        text=$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")
-        printf "%s\n" "$text"
-        exit $ERROR
-    fi
-}
-
-
-# This function generates the command file from the input file,
-# filtering on USER and APPs.
-function process_argument_app_input_file {
-    local app_match=false
-    local app_record=''
-    local app_user_match=false
-    local no_app_user_match=true
-    local input_record=''
-
-    while read -r input_record; do
-        case $input_record in
-            '#'*' APP '*)
-                # App record.
-                app_match=false
-                app_record=''
-                app_user_match=false
-                if [[ $input_record == *' '$app_argument ]]; then
-                    # Match by APP name.
-                    app_match=true
-                    app_record=$input_record
-                fi
-                ;;
-            '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOST"*)
-                # User record.
-                app_user_match=false
-                if $app_match; then
-                    # Match by APP name and USER name.
-                    app_user_match=true
-                    no_app_user_match=false
-                    {
-                        printf '%s\n' "$app_record"
-                        printf '%s\n' "$input_record"
-                    } >> "$command_file"
-                    app_record=''
-                fi
-                ;;
-            *)
-                # Other record (comment or command).
-                if $app_match && $app_user_match; then
-                    printf '%s\n' "$input_record" >> "$command_file"
-                fi
-                ;;
-        esac
-    done < "$input_file"
-    if $no_app_user_match; then
-        app_not_found=true
-        printf  "$DISPLAY_NAME: %s: %s\n"   \
-                "$app_argument"             \
-                "$(gettext 'app not found')"
-    fi
-}
-
-
-# This function generates the command file from the input file,
-# filtering on USER.
-function process_input_file {
-    local app_record=''
-    local user_match=false
-    local input_record=''
-
-    while read -r input_record; do
-        case $input_record in
-                # App record.
-            '#'*' APP '*)
-                app_record=$input_record
-                user_match=false
-                ;;
-            '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOST"*)
-                # User record.
-                # Match by USER name.
-                user_match=true
-                {
-                    printf '%s\n' "$app_record"
-                    printf '%s\n' "$input_record"
-                } >> "$command_file"
-                app_record=''
-                ;;
-            *)
-                # Other record (emtpy, comment, or command).
-                if $user_match; then
-                    printf '%s\n' "$input_record" >> "$command_file"
-                fi
-                ;;
-        esac
-    done < "$input_file"
-}
-
-
-# This function shows the available APPs from the command file.
-function process_option_apps {
-    text="$(gettext 'The following APPs are available:
-
-     APP')
-$(
-    if !    grep    --no-messages           \
-                    --regexp='#.* APP '     \
-                    "$command_file"             |
-            tr      --squeeze-repeats       \
-                    '[:space:]'             |
-            cut     --delimiter=' '         \
-                    --fields=3              |
-            sort    --unique                |
-            nl      --number-width=2        \
-                    --number-format=rn      \
-                    --number-separator='] ' \
-                    --body-numbering=a      |
-            sed     --expression='s/^/[/'; then
-        printf '%s\n' "$(gettext '     0   No apps found.')
-
-$USAGE_LINE"
-    else
-        printf '%s\n' "
-$(gettext 'To set up the APPs run:') ${blue}$DISPLAY_NAME APP...${normal}
-$(gettext 'To view the contents of the APPs set up file execute:') \
-${blue}$DISPLAY_NAME --cat APP...${normal}"
-    fi
-)"
-    msg_info "$text"
-}
-
-
-# This function displays the contents of the command file.
-function process_option_cat {
-    less --quit-if-one-screen "$command_file"
 }
 
 
@@ -402,8 +258,139 @@ $(eval_gettext "To view the commands of FILE execute: \${blue}\$DISPLAY_NAME \
 }
 
 
+# This function shows the available APPs from the input file.
+function process_option_apps {
+    text="$(gettext 'The following APPs are available:
+
+     APP')
+$(
+    if !    grep    --no-messages           \
+                    --regexp='#.* APP '     \
+                    "$input_file"           |
+            tr      --squeeze-repeats       \
+                    '[:space:]'             |
+            cut     --delimiter=' '         \
+                    --fields=3              |
+            sort    --unique                |
+            nl      --number-width=2        \
+                    --number-format=rn      \
+                    --number-separator='] ' \
+                    --body-numbering=a      |
+            sed     --expression='s/^/[/'; then
+        printf '%s\n' "$(gettext '     0   No apps found.')
+
+$USAGE_LINE"
+    else
+        printf '%s\n' "
+$(gettext 'To set up the APPs run:') ${blue}$DISPLAY_NAME APP...${normal}
+$(gettext 'To view the contents of the APPs set up file execute:') \
+${blue}$DISPLAY_NAME --cat APP...${normal}"
+    fi
+)"
+    msg_info "$text"
+}
+
+
+# This function processes argument APP.
+function process_argument_app {
+    #
+    # Generate cmds-file from input-file; filter on USER and APPs.
+    #
+    local app_not_found=false
+    local app_argument=''
+
+    for app_argument in "${app_arguments[@]}"; do
+        process_argument_app_input_file
+    done
+    if $app_not_found; then
+        text=$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")
+        printf "%s\n" "$text"
+        exit $ERROR
+    fi
+}
+
+
+# This function generates the command file from the input file, filtering on
+# APPs.
+function process_argument_app_input_file {
+    local app_match=false
+    local app_record=''
+    local no_app_match=true
+    local input_record=''
+
+    while read -r input_record; do
+        case $input_record in
+            '#'*' APP '*)
+                # APP record.
+                app_match=false
+                app_record=''
+                if [[ $input_record == *' '$app_argument ]]; then
+                    # Match by APP name.
+                    app_match=true
+                    no_app_match=false
+                    printf '%s\n' "$input_record" >> "$command_file"
+                fi
+                ;;
+            *)
+                # Other record (empty, comment, USER record, or command).
+                if $app_match; then
+                    printf '%s\n' "$input_record" >> "$command_file"
+                fi
+                ;;
+        esac
+    done < "$input_file"
+    if $no_app_match; then
+        app_not_found=true
+        printf  "$DISPLAY_NAME: %s: %s\n"   \
+                "$app_argument"             \
+                "$(gettext 'app not found')"
+    fi
+}
+
+
+# This function generates the command file from the input file, filtering on
+# USER.
+function process_input_file {
+    local app_record=''
+    local user_match=false
+    local input_record=''
+
+    while read -r input_record; do
+        case $input_record in
+                # APP record.
+            '#'*' APP '*)
+                app_record=$input_record
+                user_match=false
+                ;;
+            '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOST"*)
+                # USER record.
+                # Match by USER name.
+                user_match=true
+                {
+                    printf '%s\n' "$app_record"
+                    printf '%s\n' "$input_record"
+                } >> "$command_file"
+                app_record=''
+                ;;
+            *)
+                # Other record (empty, comment, or command).
+                if $user_match; then
+                    printf '%s\n' "$input_record" >> "$command_file"
+                fi
+                ;;
+        esac
+    done < "$input_file"
+}
+
+
+# This function displays the contents of the command file.
+function process_option_cat {
+    less --quit-if-one-screen "$command_file"
+}
+
+
 # This function reads commands from the command file for further processing.
-function process_cmds_file {
+function process_command_file {
     local app_name=''
     local operation
     operation=$(gettext 'set up')
@@ -429,7 +416,7 @@ function process_cmds_file {
                 continue
                 ;;
             '#'*' APP '*)
-                # App record.
+                # APP record.
                 app_name="$(
                     printf '%s\n' "$commands_record"    |
                     tr --squeeze-repeats '[:space:]'    |
@@ -441,7 +428,7 @@ function process_cmds_file {
                 cmd_seq_num=0
                 ;;
             '#'*' USER '*)
-                # User record.
+                # USER record.
                 continue
                 ;;
             '#'*)
