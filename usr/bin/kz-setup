@@ -168,7 +168,12 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    local input_file=''
+    local input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$EDITION.sh
+
+    if $option_list; then
+        process_option_list
+        exit $OK
+    fi
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
@@ -178,8 +183,6 @@ function process_input {
             exit $ERROR
         fi
         input_file=$file_argument
-    else
-        input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$EDITION.sh
     fi
     if ! [[ -f $input_file ]]; then
         text=$(eval_gettext "No install file found, looked for \$input_file.")
@@ -201,9 +204,6 @@ function process_input {
         exit $OK
     elif $option_cat; then
         process_option_cat
-        exit $OK
-    elif $option_list; then
-        process_option_list
         exit $OK
     fi
 
