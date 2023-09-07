@@ -9,21 +9,17 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-#  APP calibre
-# USER nina@pc04
+# APP calibre nina@pc04
 kz-gset --addfavaft=calibre-gui
 
-#  APP cockpit
-# USER karel@pc06
+# APP cockpit karel@pc06
 # Web App: https://localhost:9090
 kz-gset --addfavaft=kz-cockpit
 
-#  APP citrix
-# USER toos@pc-van-ria-en-toos
+# APP citrix toos@pc-van-ria-en-toos
 xdg-mime default wfica.desktop application/x-ica
 
-#  APP gnome
-# USER *
+# APP gnome *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -49,69 +45,54 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
-#  APP gnome
-# USER hugo@pc-van-hugo
+# APP gnome hugo@pc-van-hugo
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 
-#  APP gnome
-# USER karel@pc06
+# APP gnome karel@pc06
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.nautilus.preferences show-create-link true
 
-#  APP google-chrome
-# USER *
+# APP google-chrome *
 kz-gset --addfavbef=google-chrome
 
-#  APP kvm
-# USER karel@pc06
+# APP kvm karel@pc06
 kz-gset --addfavaft=virt-manager
 
-#  APP libreoffice-calc
-# USER nina@pc04
+# APP libreoffice-calc nina@pc04
 kz-gset --addfavaft=libreoffice-calc
 
-#  APP nautilus-hide
-# USER *
+# APP nautilus-hide *
 echo 'snap' > "$HOME"/.hidden
 
-#  APP skype
-# USER *
+# APP skype *
 kz-gset --addfavaft=kz-skype
 
-#  APP spotify
-# USER *
+# APP spotify *
 kz-gset --addfavaft=kz-spotify
 
-#  APP start-install
-# USER *
+# APP start-install *
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
 
-#  APP teams
-# USER karel@pc06
+# APP teams karel@pc06
 kz-gset --addfavaft=kz-teams
 
-#  APP teamviewer
-# USER karel@pc06
+# APP teamviewer karel@pc06
 kz-gset --addfavaft=com.teamviewer.TeamViewer
 
-#  APP telegram
-# USER hugo@pc-van-hugo
+# APP telegram hugo@pc-van-hugo
 kz-gset --addfavaft=kz-telegram
 
-#  APP terminal
-# USER karel@pc01 karel@pc06
+# APP terminal karel@pc01 karel@pc06
 kz-gset --addfavbef=org.gnome.Terminal
 # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
-#  APP virtualbox
-# USER hugo@pc-van-hugo
+# APP virtualbox hugo@pc-van-hugo
 kz-gset --addfavaft=virtualbox
 kz-gset --addfavaft=kz-vm-hugowin732
 
-#  APP vscode
-# USER karel@pc01 karel@pc06
+# APP vscode karel@pc01 karel@pc06
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
@@ -122,10 +103,8 @@ xdg-mime default code_code.desktop text/markdown                # Markdown docum
 xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
-#  APP whatsapp
-# USER hugo@pc-van-hugo
+# APP whatsapp hugo@pc-van-hugo
 kz-gset --addfavaft=kz-whatsapp
 
-#  APP zoom
-# USER karel@pc01 monique@pc01
+# APP zoom karel@pc01 monique@pc01
 kz-gset --addfavaft=kz-zoom

@@ -38,18 +38,16 @@ the current computer.
 .br
 For example, kz-install-install-ubuntu-desktop.sh.
 .sp
-This input file contains commands for all computers (HOSTs) included in it for
-Ubuntu desktop.
+This input file contains commands for all computers included in it for Ubuntu
+desktop.
 .br
-When processing the input file, the commands for the current computer (HOST)
+When processing the input file, the commands for any and the current computer
 are selected and copied to a command file.
-.br
-A HOST is defined in this context as <hostname>, e.g. pc02 or * (any computer).
 .sp
 Option \fB-a\fR, \fB--apps\fR lists apps available in the input file.
 .sp
-It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands for
-the \fIAPP\fR are selected from the input file and are copied to the command
+It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands are
+selected from the input file and are copied to the command
 file.
 .sp
 The commands in the command file are executed.
@@ -102,24 +100,18 @@ T}
 .T&
 l | l.
 T{
-# APP <appname>
+# APP <appname> <computername>...
 T}:T{
-Contains the APP <appname>.
-T}
-T{
-# HOST <hostname> ...
-T}:T{
-Name of the computer (<hostname>) where the command applies, or * for any
-computer.
+The APP <appname> and computer (<computername>).
 T}
 T{
 T}:T{
-Will be skipped (is empty).
+Will be skipped, is empty.
 T}
 T{
 #...
 T}:T{
-Will be skipped (is a comment).
+Will be skipped, is a comment.
 T}
 T{
 Command
@@ -143,14 +135,9 @@ T}
 - | -
 l | l.
 T{
-#  APP gnome-gmail
+# APP gnome-gmail *
 T}:T{
-Name of the APP.
-T}
-T{
-# HOST *
-T}:T{
-Install on any computer, see [1].
+Install the APP on any computer, see [1].
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -162,14 +149,9 @@ T}:T{
 Empty line.
 T}
 T{
-#  APP gast
+# APP gast pc02
 T}:T{
-Name of the APP.
-T}
-T{
-# HOST pc02
-T}:T{
-Only install on pc02, see [2].
+Install the APP only on pc02, see [2].
 T}
 T{
 sudo useradd --create-home ... gast
@@ -181,12 +163,12 @@ T}
 .sp
 [1]
 .br
-A line '# HOST *' causes the associated commands to run on all computers.
+The line with '*' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line '# HOST pc02' ensures that the associated commands are executed only
-on pc02.
+The line with 'pc02' ensures that the associated commands are executed only on
+pc02.
 .\"
 .\"
 .sp

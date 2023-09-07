@@ -9,8 +9,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-#  APP dashtodock
-# USER *
+# APP dashtodock *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
@@ -21,12 +20,10 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
-#  APP firefox
-# USER karel@pc07
+# APP firefox karel@pc07
 kz-gset --addfavbef=firefox-esr
 
-#  APP gnome
-# USER *
+# APP gnome *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -49,48 +46,38 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-t
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 gsettings reset org.gnome.shell disable-user-extensions
 
-#  APP gnome
-# USER karel@pc07
+# APP gnome karel@pc07
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.nautilus.preferences show-create-link
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 
-#  APP google-chrome
-# USER *
+# APP google-chrome *
 kz-gset --delfav=google-chrome
 
-#  APP kvm
-# USER karel@pc07
+# APP kvm karel@pc07
 kz-gset --delfav=virt-manager
 
-#  APP nautilus-hide
-# USER *
+# APP nautilus-hide *
 rm --force "$HOME"/.hidden
 
-#  APP skype
-# USER *
+# APP skype *
 kz-gset --delfav=kz-skype
 
-#  APP spotify
-# USER *
+# APP spotify *
 kz-gset --delfav=kz-spotify
 
-#  APP start-install
-# USER *
+# APP start-install *
 kz-gset --addfavbef=install-debian
 
-#  APP terminal
-# USER karel@pc07
+# APP terminal karel@pc07
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-#  APP vscode
-# USER karel@pc07 user@debian
+# APP vscode karel@pc07 user@debian
 kz-gset --delfav=code_code
 
-#  APP webmin
-# USER karel@pc07
+# APP webmin karel@pc07
 # Web App: https://localhost:10000
 kz-gset --delfav=kz-webmin
 rm --force "$HOME"/.local/share/applications/kz-webmin.desktop

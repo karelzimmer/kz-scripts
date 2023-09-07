@@ -40,20 +40,17 @@ huidige computer.
 Bijvoorbeeld kz-setup-setup-ubuntu-desktop.sh.
 .sp
 Dit invoerbestand bevat instel-opdrachten voor alle hierin opgenomen gebruikers
-(USERs) voor Ubuntu desktop.
+voor Ubuntu desktop.
 .br
-Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
-gebruiker (USER) geselecteerd en gekopieerd naar het opdrachtbestand.
-.br
-Een USER wordt in deze context gedefinieerd als
-<gebruikersnaam>@<computernaam>, b.v. jan@pc02 of * (iedere gebruiker).
+Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
+huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
 het invoerbestand.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven. Per opgegeven \fIAPP\fR worden de
-opdrachten voor de \fIAPP\fR geselecteerd uit het invoerbestand en gekopieerd
-naar het opdrachtbestand.
+opdrachten geselecteerd uit het invoerbestand en gekopieerd naar het
+opdrachtbestand.
 .sp
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 .sp
@@ -107,15 +104,9 @@ T}
 .T&
 l | l.
 T{
-#  APP <appnaam>
+# APP <appnaam> <gebruikersnaam>@<computernaam>...
 T}:T{
-Bevat de <appnaam> van de APP.
-T}
-T{
-# USER <usernaam>@<hostnaam> ...
-T}:T{
-Naam van de gebruiker (<usernaam>) en computer (<hostnaam>) waarvoor de
-opdracht van toepassing is, of * voor iedere gebruiker op iedere computer.
+De APP <appnaam> en gebruiker <gebruikersnaam>@<computernaam>.
 T}
 T{
 T}:T{
@@ -148,14 +139,9 @@ T}
 - | -
 l | l.
 T{
-#  APP google-chrome
+# APP google-chrome *
 T}:T{
-Naam van de APP.
-T}
-T{
-# USER *
-T}:T{
-Opdracht is voor iedere gebruiker, zie [1].
+Stel APP in op iedere computer, zie [1].
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -167,14 +153,9 @@ T}:T{
 Lege regel.
 T}
 T{
-#  APP gnome
+# APP gnome jan@pc02
 T}:T{
-Naam van de APP.
-T}
-T{
-# USER jan@pc02
-T}:T{
-Opdracht is alleen voor Jan, zie [2].
+Stel APP in alleen voor Jan, zie [2].
 T}
 T{
 gsettings set org.gnome.shell...
@@ -186,13 +167,13 @@ T}
 .sp
 [1]
 .br
-De regel '# USER *' zorgt ervoor dat de bijbehorende opdrachten voor iedere
+De regel met '*' zorgt ervoor dat de bijbehorende opdrachten voor iedere
 gebruiker worden uitgevoerd.
 .sp
 [2]
 .br
-De regel '# USER jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen
-voor Jan op pc02 worden uitgevoerd.
+De regel met 'jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen voor
+Jan op pc02 worden uitgevoerd.
 .\"
 .\"
 .sp

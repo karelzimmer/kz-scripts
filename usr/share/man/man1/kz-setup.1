@@ -37,19 +37,16 @@ the current computer.
 .br
 For example, kz-setup-setup-ubuntu-desktop.sh.
 .sp
-This input file contains commands for all users (USERs) included in it for
-Ubuntu desktop.
+This input file contains commands for all users included in it for Ubuntu
+desktop.
 .br
-When processing the input file, the commands for the current user (USER) are
+When processing the input file, the commands for any and the current user are
 selected and copied to a command file.
-.br
-A USER is defined in this context as <username>@<computername>, e.g. jan@pc02
-or * (any user).
 .sp
 Option \fB-a\fR, \fB--apps\fR lists apps available in the input file.
 .sp
-It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands for
-the \fIAPP\fR are selected from the input file and are copied to the command
+It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands are
+selected from the input file and are copied to the command
 file.
 .sp
 The commands in the command file are executed.
@@ -103,24 +100,18 @@ T}
 .T&
 l | l.
 T{
-# APP <appname>
+# APP <appname> <username>@<computername>...
 T}:T{
-Contains the APP <appname>.
-T}
-T{
-# USER <username>@<hostname> ...
-T}:T{
-Name of the user (<username>) and computer (<hostname>) for which the command
-applies, or * for every user on any computer.
+The APP <appname> and user <username>@<computername>.
 T}
 T{
 T}:T{
-Will be skipped (is empty).
+Will be skipped, is empty.
 T}
 T{
 #...
 T}:T{
-Will be skipped (is a comment).
+Will be skipped, is a comment.
 T}
 T{
 Command
@@ -144,14 +135,9 @@ T}
 - | -
 l | l.
 T{
-#  APP google-chrome
+# APP google-chrome *
 T}:T{
-Name of the APP.
-T}
-T{
-# USER *
-T}:T{
-Command is for any user, see [1].
+Set up the APP for any user, see [1].
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -163,14 +149,9 @@ T}:T{
 Empty line.
 T}
 T{
-#  APP gnome
+# APP gnome jan@pc02
 T}:T{
-Name of the APP.
-T}
-T{
-# USER jan@pc02
-T}:T{
-Only set up for Jan, see [2].
+Set up the APP only for Jan, see [2].
 T}
 T{
 gsettings set org.gnome.shell...
@@ -182,12 +163,12 @@ T}
 .sp
 [1]
 .br
-The line '# USER *' causes the associated commands to run for every user.
+The line with '*' causes the associated commands to run for every user.
 .sp
 [2]
 .br
-The line '# USER jan@pc02' ensures that the associated commands are executed
-only for Jan on pc02.
+The line with 'jan@pc02' ensures that the associated commands are executed only
+for Jan on pc02.
 .\"
 .\"
 .sp

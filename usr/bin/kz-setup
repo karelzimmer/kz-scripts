@@ -56,8 +56,6 @@ readonly HELP
 readonly X_OPTIONS_SHORT='acf:lgr'
 readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,reset'
 
-readonly HOST=$HOSTNAME
-
 
 ###############################################################################
 # Variables
@@ -69,6 +67,7 @@ declare argument_app=false
 declare command_file=''
 declare commands_found=false
 declare file_argument=''
+declare input_file=''
 declare logout=true
 declare mode='setup'
 declare option_apps=false
@@ -167,7 +166,7 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    local input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$EDITION.sh
+    input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$EDITION.sh
 
     if $option_list; then
         process_option_list
@@ -315,18 +314,18 @@ function process_argument_app_input_file {
 
     while read -r input_record; do
         case $input_record in
-            '#'*' APP '*)
+            '#'*'APP'*)
                 # APP record.
                 app_match=false
-                if [[ $input_record == *' '$app_argument ]]; then
-                    # Match by APP name.
+                if [[ $input_record == *$app_argument* ]]; then
+                    # Match on appname.
                     app_match=true
                     no_app_match=false
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
             *)
-                # Other record (empty, comment, USER record, or command).
+                # Other record (empty, comment, or command).
                 if $app_match; then
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
@@ -343,27 +342,24 @@ function process_argument_app_input_file {
 
 
 # This function generates the command file from the input file, filtering on
-# USER.
+# username.
 function process_input_file {
-    local app_record=''
-    local user_match=false
     local input_record=''
+    local user_match=false
+    local user=''
 
     while read -r input_record; do
         case $input_record in
-            '#'*' APP '*)
+            '#'*'APP'*)
                 # APP record.
-                app_record=$input_record
                 user_match=false
-                ;;
-            '#'*' USER '*'*'*|'#'*' USER '*"$USER"'@'"$HOST"*)
-                # Matching USER record.
-                user_match=true
-                {
-                    printf '%s\n' "$app_record"
-                    printf '%s\n' "$input_record"
-                } >> "$command_file"
-                app_record=''
+                user=$USER'@'$HOSTNAME
+                if [[ $input_record == *'*'* || $input_record == *$user* ]]
+                then
+                    # Match on username.
+                    user_match=true
+                    printf '%s\n' "$input_record" >> "$command_file"
+                fi
                 ;;
             *)
                 # Other record (empty, comment, or command).

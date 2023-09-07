@@ -9,8 +9,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-#  APP terminal
-# USER *
+# APP terminal *
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 # Search forward in history (with Ctrl-S).

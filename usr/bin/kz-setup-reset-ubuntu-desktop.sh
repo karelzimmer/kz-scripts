@@ -9,18 +9,15 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-#  APP calibre
-# USER nina@pc04
+# APP calibre nina@pc04
 kz-gset --delfav=calibre-gui
 
-#  APP cockpit
-# USER karel@pc06
+# APP cockpit karel@pc06
 # Web App: https://localhost:9090
 kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 
-#  APP gnome
-# USER *
+# APP gnome *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -47,73 +44,56 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
-#  APP gnome
-# USER hugo@pc-van-hugo
+# APP gnome hugo@pc-van-hugo
 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 
-#  APP gnome
-# USER karel@pc06
+# APP gnome karel@pc06
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.nautilus.preferences show-create-link
 
-#  APP google-chrome
-# USER *
+# APP google-chrome *
 kz-gset --delfav=google-chrome
 
-#  APP kvm
-# USER karel@pc06
+# APP kvm karel@pc06
 kz-gset --delfav=virt-manager
 
-#  APP libreoffice-calc
-# USER nina@pc04
+# APP libreoffice-calc nina@pc04
 kz-gset --delfav=libreoffice-calc
 
-#  APP nautilus-hide
-# USER *
+# APP nautilus-hide *
 rm --force "$HOME"/.hidden
 
-#  APP skype
-# USER *
+# APP skype *
 kz-gset --delfav=kz-skype
 
-#  APP spotify
-# USER *
+# APP spotify *
 kz-gset --delfav=kz-spotify
 
-#  APP start-install
-# USER *
+# APP start-install *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
-#  APP teams
-# USER karel@pc06
+# APP teams karel@pc06
 kz-gset --delfav=kz-teams
 
-#  APP teamviewer
-# USER karel@pc06
+# APP teamviewer karel@pc06
 kz-gset --delfav=com.teamviewer.TeamViewer
 
-#  APP telegram
-# USER hugo@pc-van-hugo
+# APP telegram hugo@pc-van-hugo
 kz-gset --delfav=kz-telegram
 
-#  APP terminal
-# USER karel@pc06
+# APP terminal karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-#  APP virtualbox
-# USER hugo@pc-van-hugo
+# APP virtualbox hugo@pc-van-hugo
 kz-gset --delfav=virtualbox
 kz-gset --delfav=kz-vm-hugowin732
 
-#  APP vscode
-# USER karel@pc01 karel@pc06
+# APP vscode karel@pc01 karel@pc06
 kz-gset --delfav=code_code
 
-#  APP whatsapp
-# USER hugo@pc-van-hugo
+# APP whatsapp hugo@pc-van-hugo
 kz-gset --delfav=kz-whatsapp
 
-#  APP zoom
-# USER karel@pc01 monique@pc01
+# APP zoom karel@pc01 monique@pc01
 kz-gset --delfav=kz-zoom

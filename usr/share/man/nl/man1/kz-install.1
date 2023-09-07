@@ -41,20 +41,17 @@ huidige computer.
 Bijvoorbeeld kz-install-install-ubuntu-desktop.sh.
 .sp
 Dit invoerbestand bevat installatie-opdrachten voor alle hierin opgenomen
-computers (HOSTs) voor Ubuntu desktop.
+computers voor Ubuntu desktop.
 .br
-Bij het verwerken van het invoerbestand worden de opdrachten voor de huidige
-computernaam (HOST) geselecteerd en gekopieerd naar het opdrachtbestand.
-.br
-Een HOST wordt in deze context gedefinieerd als <hostnaam>, b.v. pc02 of *
-(iedere computer).
+Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
+huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van apps die beschikbaar zijn in
 het invoerbestand.
 .sp
 Het is mogelijk om \fIAPP\fRs op te geven. Per opgegeven \fIAPP\fR worden de
-opdrachten voor de \fIAPP\fR geselecteerd uit het invoerbestand en gekopieerd
-naar het opdrachtbestand.
+opdrachten geselecteerd uit het invoerbestand en gekopieerd naar het
+opdrachtbestand.
 .sp
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 .sp
@@ -108,24 +105,18 @@ T}
 .T&
 l | l.
 T{
-#  APP <appnaam>
+# APP <appnaam> <hostnaam>...
 T}:T{
-Bevat de <appnaam> van de APP.
-T}
-T{
-# HOST <hostnaam> ...
-T}:T{
-Naam van de computer (<hostnaam>) waar de opdracht van toepassing is, of * voor
-iedere computer.
+De APP <appnaam> en computer <hostnaam>.
 T}
 T{
 T}:T{
-Wordt overgeslagen (is leeg).
+Wordt overgeslagen, is leeg.
 T}
 T{
 #...
 T}:T{
-Wordt overgeslagen (is commentaar).
+Wordt overgeslagen, is commentaar.
 T}
 T{
 Opdracht
@@ -149,14 +140,9 @@ T}
 - | -
 l | l.
 T{
-#  APP gnome-gmail
+# APP gnome-gmail *
 T}:T{
-Naam van de APP.
-T}
-T{
-# HOST *
-T}:T{
-Opdracht is voor iedere computer, zie [1].
+Installeer de APP op iedere computer, zie [1].
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -168,14 +154,9 @@ T}:T{
 Lege regel.
 T}
 T{
-#  APP gast
+# APP gast pc02
 T}:T{
-Naam van de APP.
-T}
-T{
-# HOST pc02
-T}:T{
-Alleen op pc02 uitvoeren, zie [2].
+Installeer de APP alleen op pc02, zie [2].
 T}
 T{
 sudo useradd --create-home ... gast
@@ -187,13 +168,13 @@ T}
 .sp
 [1]
 .br
-De regel '# HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
-computers worden uitgevoerd.
+De regel met '*' zorgt ervoor dat de bijbehorende opdrachten op alle computers
+worden uitgevoerd.
 .sp
 [2]
 .br
-De regel '# HOST pc02' zorgt ervoor dat de bijbehorende opdrachten alleen op
-pc02 worden uitgevoerd.
+De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten alleen op pc02
+worden uitgevoerd.
 .\"
 .\"
 .sp

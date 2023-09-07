@@ -9,6 +9,5 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-#  APP terminal
-# USER *
+# APP terminal *
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
