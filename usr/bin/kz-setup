@@ -292,9 +292,6 @@ ${blue}$DISPLAY_NAME --cat APP...${normal}"
 
 # This function processes argument APP.
 function process_argument_app {
-    #
-    # Generate cmds-file from input-file; filter on USER and APPs.
-    #
     local app_not_found=false
     local app_argument=''
 
@@ -356,8 +353,8 @@ function process_input_file {
 
     while read -r input_record; do
         case $input_record in
-                # APP record.
             '#'*' APP '*)
+                # APP record.
                 app_record=$input_record
                 user_match=false
                 ;;
