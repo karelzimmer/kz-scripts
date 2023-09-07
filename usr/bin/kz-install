@@ -171,8 +171,9 @@ function process_input {
     local input_file=''
 
     if $option_file; then
-        if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-* ]]; then
-            text=$(eval_gettext "File name must start with '\$PROGRAM_NAME-'.")
+        if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
+            text=$(eval_gettext \
+            "File name must start with '\$PROGRAM_NAME-' and end with '.sh'.")
             msg_warning "$text"
             exit $ERROR
         fi

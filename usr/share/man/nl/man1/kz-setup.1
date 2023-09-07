@@ -68,7 +68,8 @@ Dan wordt bijvoorbeeld bestand /usr/bin/kz-setup-reset-ubuntu-desktop.sh
 De optie \fB-l\fR, \fB--list\fR geeft een lijst met installatiebestanden weer.
 .sp
 Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
-opgegeven worden, de bestandsnaam dient te beginnen met \fBkz-setup-\fR.
+opgegeven worden, de bestandsnaam moet beginnen met \fBkz-setup-\fR en eindigen
+met \fB.sh\fR.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
@@ -76,7 +77,8 @@ opties uit.
 .\"
 .SH BESTANDSINDELING
 De naamgeving van de standaard invoerbestanden is
-kz-setup-<mode>-<distribution>-<edition>.sh.
+kz-setup-<mode>-<distribution>-<edition>.sh, voor een door de gebruiker
+aangeleverd invoerbestand is het kz-setup-*.sh.
 .sp
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .br
