@@ -208,7 +208,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
 
 # This function restores the backup.
 function restore_backup {
-    local -i rc=0
+    local -i restore_rc=0
     local target=$HOME
 
     title=$(gettext 'Restore backup')
@@ -228,7 +228,7 @@ function restore_backup {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$text"     2> >($logcmd) || rc=$?
+                --text      "$text"     2> >($logcmd) || restore_rc=$?
     else
         msg_info "$text..."
         rsync   --archive               \
@@ -236,22 +236,13 @@ function restore_backup {
                 --human-readable        \
                 $dry_run_option         \
                 "$source"/              \
-                "$target"/              2> >($logcmd) || rc=$?
+                "$target"/              2> >($logcmd) || restore_rc=$?
     fi
-    maxrc
 
-    sync |& $logcmd || rc+=$?
-    maxrc
+    if [[ $restore_rc -eq 11 ]]; then
+        msg_error "$(eval_gettext "No space left on device.
 
-    if [[ $maxrc -gt $OK ]]; then
-        msg_error "$(eval_gettext "Restore ended with warnings or errors.
-
-Some files may not be readable,
-or were any files added or removed while restoring the backup,
-or is there not enough space on \$target.
-
-Check the restored data.
-Try te restore the backup again.")"
+There is not enough space on \$target.")"
         exit $ERROR
     fi
 
@@ -259,6 +250,8 @@ Try te restore the backup again.")"
         msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $ERROR
     fi
+
+    sync |& $logcmd || true
 }
 
 
