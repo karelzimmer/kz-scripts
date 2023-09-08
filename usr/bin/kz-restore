@@ -251,7 +251,22 @@ There is not enough space on \$target.")"
         exit $ERROR
     fi
 
-    sync |& $logcmd || true
+    text=$(gettext "Writing data from memory (this may take a while)")
+    if $option_gui; then
+        sync                            |
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$title"    \
+                --text      "$text"     2> >($logcmd) || true
+    else
+        msg_info "
+$text..."
+        sync |& $logcmd || true
+    fi
 }
 
 
