@@ -347,12 +347,14 @@ function backup_settings_user_photo {
 
 # This function creates the backup.
 function create_backup {
-    local exclude=''
-    local -i rc=0
     local -i backup_rc=0
+    local errors=''
+    local exclude=''
+    local rsync_messages=''
     local source=$HOME
 
-    exclude=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX")
+    exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
+    errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
     # Déjà Dup: Some locations are ignored by default.
     cat << EOF > "$exclude"
@@ -396,7 +398,7 @@ EOF
                 --delete-excluded           \
                 "$source"/                  \
                 "$target"/                  \
-                2> >($logcmd)               |
+                2> "$errors"                |
         sed     --expression='s/^/#/'       |
         zenity  --progress                  \
                 --auto-close                \
@@ -416,32 +418,41 @@ EOF
                 --exclude-from="$exclude"   \
                 --delete-excluded           \
                 "$source"/                  \
-                "$target"/                  2> >($logcmd) || backup_rc=$?
+                "$target"/                  2> "$errors" || backup_rc=$?
     fi
     rm "$exclude"
 
-    if [[ $backup_rc -eq 11 ]]; then
-        msg_error "$(eval_gettext "No space left on device.
-
-There is not enough space on \$target.")"
-        exit $ERROR
-    fi
-
-    text=$(gettext "Writing data from memory (this may take a while)")
-    if $option_gui; then
-        sync                            |
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$title"    \
-                --text      "$text"     2> >($logcmd) || true
-    else
-        msg_info "
+    if [[ $backup_rc -eq $OK ]]; then
+        text=$(gettext "Writing data from memory (this may take a while)")
+        if $option_gui; then
+            sync                            |
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     &> >($logcmd)
+        else
+            msg_info "
 $text..."
-        sync |& $logcmd || true
+            sync |& $logcmd
+        fi
+    else
+        # shellcheck disable=SC2034
+        rsync_messages=$(cat "$errors")
+        msg_error "$(eval_gettext "Backup ended with warnings or errors.
+
+Some files may not be readable,
+or were any files added or removed while creating the backup,
+or is there not enough space on \$target.
+
+Check the rsync messages:
+\$rsync_messages
+
+Try creating the back up again.")"
+        exit $ERROR
     fi
 }
 
