@@ -213,6 +213,8 @@ function restore_backup {
     local errors=''
     local rsync_messages=''
 
+    errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
