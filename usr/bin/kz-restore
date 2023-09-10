@@ -255,7 +255,9 @@ or is there not enough space on \$target.
 Check the rsync messages:
 \$rsync_messages
 
-Try restoring the back up again.")"
+Try restoring the back up again.
+Use app 'Installation menu' and select '5 - Command menu', or
+use app Terminal, type 'kz restore'.")"
         exit $ERROR
     fi
 

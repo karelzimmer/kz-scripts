@@ -496,7 +496,9 @@ function term_script {
 contains errors:
 \$failed_apps_text
 
-Try installing the apps again.")"
+Try installing the apps again.
+Use app 'Installation menu' and select '5 - Command menu', or
+use app Terminal, type 'kz install \$failed_apps_text'.")"
         exit $ERROR
     else
         if $option_remove; then

@@ -451,7 +451,9 @@ or is there not enough space on \$target.
 Check the rsync messages:
 \$rsync_messages
 
-Try creating the back up again.")"
+Try creating the back up again.
+Use app 'Installation menu' and select '5 - Command menu', or
+use app Terminal, type 'kz backup'.")"
         exit $ERROR
     fi
 }
