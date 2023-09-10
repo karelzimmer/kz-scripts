@@ -61,7 +61,6 @@ readonly OPTIONS_LONG='help,usage,version'
 
 declare -a commandline_args=()
 declare logcmd=''
-declare -i maxrc=0
 declare option_gui=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
 declare program_exec=${0/#./$PROGRAM_PATH}
@@ -189,14 +188,6 @@ function init_script {
 information.")
     # shellcheck disable=SC2034
     readonly USAGE_LINE
-}
-
-
-# This function determines the highest return code.
-function maxrc {
-    if [[ $rc -gt $maxrc ]]; then
-        maxrc=$rc
-    fi
 }
 
 

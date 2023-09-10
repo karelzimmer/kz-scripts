@@ -470,8 +470,6 @@ function execute_command {
     msg_log  "${blue}$cmd${normal}"
     check_for_active_updates
     eval "$cmd" |& $logcmd || rc=$?
-    maxrc
-    msg_log  "rc=$rc, maxrc=$maxrc"
     if [[ $rc -gt $OK ]]; then
         failed_apps[$app_name]=$app_name
     fi

@@ -116,13 +116,15 @@ function process_input {
 
 # This function check that the repos are in the desired state.
 function check_repos {
+    local error_flag=false
+
     msg_info "$(gettext 'Check that all repos are on branch main...')"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             msg_error "$(eval_gettext "Repo \$repo not on branch main.")"
             git status
-            maxrc=$ERROR
+            error_flag=true
         fi
     done
     msg_info "$(gettext 'Check that all repos are clean...')"
@@ -133,11 +135,11 @@ function check_repos {
         if ! git diff-index --quiet HEAD; then
             msg_error "$(eval_gettext "Repo \$repo is not clean.")"
             git status
-            maxrc=$ERROR
+            error_flag=true
         fi
     done
-    if [[ $maxrc -gt $OK ]]; then
-        exit $maxrc
+    if $error_flag; then
+        exit $ERROR
     fi
 }
 
