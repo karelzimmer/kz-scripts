@@ -118,7 +118,7 @@ It is recommended to connect the computer to the wall socket.')"
 
 # This function checks if the user is root and restarts the script if not.
 function check_user_root {
-    local -i rc=0
+    local -i pkexec_rc=0
 
     # shellcheck disable=SC2310
     if ! check_user_sudo; then
@@ -128,8 +128,8 @@ function check_user_root {
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
             msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
-            pkexec "$program_exec" "${commandline_args[@]}" || rc=$?
-            exit $rc
+            pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
+            exit $pkexec_rc
         else
             msg_log  "restart (exec sudo $program_exec ${commandline_args[*]})"
             exec sudo "$program_exec" "${commandline_args[@]}"

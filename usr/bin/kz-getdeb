@@ -57,7 +57,6 @@ readonly HELP
 function check_input {
     local files_found
     files_found=$(ls -C kz.{1..99} 2> /dev/null || true)
-    local -i rc=0
     local parsed=''
 
     # If the kz.{1..99} files exist, possible after multiple wget's, clean them
@@ -75,11 +74,7 @@ function check_input {
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        ) || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        printf '%s\n' "$USAGE_LINE"
-        exit $ERROR
-    fi
+        ) || ( printf '%s\n' "$USAGE_LINE"; exit $ERROR )
     eval set -- "$parsed"
 
     # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.

@@ -76,6 +76,8 @@ readonly -A DEB_TARGETS=(
 # Variables
 ###############################################################################
 
+declare error_flag=false
+
 
 ###############################################################################
 # Functions
@@ -83,7 +85,6 @@ readonly -A DEB_TARGETS=(
 
 # This function handles the script options and arguments.
 function check_input {
-    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -92,11 +93,7 @@ function check_input {
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        ) || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        printf '%s\n' "$USAGE_LINE"
-        exit $ERROR
-    fi
+        ) || ( printf '%s\n' "$USAGE_LINE"; exit $ERROR )
     eval set -- "$parsed"
 
     process_common_options "$@"
@@ -168,16 +165,9 @@ function check_repos {
 
 # This function check the scripts.
 function check_scripts {
-    local -i rc=0
-
     msg_info "$(gettext 'Check scripts (kz check)...')"
     # Call kz-check.
-    "$SCRIPTS_REPO"/usr/bin/kz check || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        msg_error "
-$(gettext 'Fix all the messages above.')"
-        exit $rc
-    fi
+    "$SCRIPTS_REPO"/usr/bin/kz check || error_flag=true
 }
 
 
@@ -348,37 +338,29 @@ function install_package {
 
 # This function performs an installation verification procedure (IVP).
 function run_ivp {
-    local -i rc=0
-
     msg_info "$(gettext 'Run IVP (kz ivp)...')"
     # Call kz-ivp.
-    kz ivp || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        msg_error "
-$(gettext 'Fix all the messages above.')"
-        exit $rc
-    fi
+    kz ivp || error_flag=true
 }
 
 
 # This function checks the website for missing or not used files.
 function check_website {
-    local -i rc=0
-
     msg_info "$(gettext 'Check website (rchecklink)...')"
     # Call rchecklink.
-    rchecklink || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        msg_error "
-$(gettext 'Fix all the messages above.')"
-        exit $rc
-    fi
+    rchecklink || error_flag=true
 }
 
 
 # This function controls the termination of the script.
 function term_script {
-    exit $OK
+    if $error_flag; then
+        msg_error "
+$(gettext 'Fix all the messages above.')"
+        exit $ERROR
+    else
+        exit $OK
+    fi
 }
 
 

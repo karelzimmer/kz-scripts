@@ -85,7 +85,6 @@ declare option_reset=false
 # This function handles the script options and arguments.
 function check_input {
     local -i app_arg_num=0
-    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -94,11 +93,7 @@ function check_input {
                 --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        printf '%s\n' "$USAGE_LINE"
-        exit $ERROR
-    fi
+        ) || ( printf '%s\n' "$USAGE_LINE"; exit $ERROR )
     eval set -- "$parsed"
 
     process_common_options "$@"
@@ -437,7 +432,6 @@ function process_command_file {
 function execute_command {
     local cmd=${1:-unknown}
     local app_name_line=''
-    local -i rc=0
 
     commands_found=true
     ((++cmd_seq_num))
@@ -465,10 +459,7 @@ function execute_command {
 
     msg_log  "$app_name_line"
     msg_log  "${blue}$cmd${normal}"
-    eval "$cmd" |& $logcmd || rc=$?
-    if [[ $rc -gt $OK ]]; then
-        failed_apps[$app_name]=$app_name
-    fi
+    eval "$cmd" |& $logcmd || failed_apps[$app_name]=$app_name
 }
 
 

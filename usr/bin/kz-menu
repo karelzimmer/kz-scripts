@@ -103,7 +103,6 @@ declare option_gui=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -112,11 +111,7 @@ function check_input {
                 --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        printf '%s\n' "$USAGE_LINE"
-        exit $ERROR
-    fi
+        ) || ( printf '%s\n' "$USAGE_LINE"; exit $ERROR )
     eval set -- "$parsed"
 
     process_common_options "$@"
@@ -163,8 +158,6 @@ function process_input {
 
 # This function shows and processes menu #1 in GUI mode.
 function process_menu1_gui {
-    local -i rc=0
-
     while true; do
         title=$MENU1_TITLE
         REPLY=$(
@@ -186,10 +179,7 @@ function process_menu1_gui {
                     FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_COMMANDS[4]}"    \
                     FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_COMMANDS[5]}"    \
                     2> >($logcmd)
-            ) || rc=$?
-        if [[ $rc -ne 0 ]]; then
-            exit $OK
-        fi
+            ) || exit $OK
         process_menu1_choice
     done
 }
@@ -323,8 +313,6 @@ function process_menu2 {
 
 # This function shows and processes menu #2 in GUI mode.
 function process_menu2_gui {
-    local -i rc=0
-
     while true; do
         title=$MENU2_TITLE
         REPLY=$(
@@ -348,10 +336,7 @@ function process_menu2_gui {
                     FALSE 6 "${MENU2_ACTIONS[6]}" "${MENU2_COMMANDS[6]}"    \
                     FALSE 7 "${MENU2_ACTIONS[7]}" "${MENU2_COMMANDS[7]}"    \
                     2> >($logcmd)
-            ) || rc=$?
-        if [[ $rc -ne 0 ]]; then
-            break
-        fi
+            ) || break
         process_menu2_choice
     done
 }
@@ -520,7 +505,7 @@ function execute_command {
         gui_option='--gui'
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
-    msg_log  "$command: rc=$rc"
+    msg_log "$command: rc=$rc"
     if $option_gui; then
         wait_for_enter
     fi

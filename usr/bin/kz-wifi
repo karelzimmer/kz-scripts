@@ -55,7 +55,6 @@ declare option_gui=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local -i rc=0
     local parsed=''
 
     parsed=$(
@@ -64,11 +63,7 @@ function check_input {
                 --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || rc=$?
-    if [[ $rc -ne $OK ]]; then
-        printf '%s\n' "$USAGE_LINE"
-        exit $ERROR
-    fi
+        ) || ( printf '%s\n' "$USAGE_LINE"; exit $ERROR )
     eval set -- "$parsed"
 
     process_common_options "$@"
@@ -105,8 +100,8 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
+    local -i nmcli_rc=''
     local nmcli_output=''
-    local -i rc=''
     local text
     text=$(gettext "Record this data to connect to the wireless network \
 later.")
@@ -124,8 +119,8 @@ $text"
     else
         msg_info "$(gettext 'WiFi data:')
 "
-        nmcli device wifi show-password 2> >($logcmd) || rc=$?
-        if [[ $rc -eq 0 ]]; then
+        nmcli device wifi show-password 2> >($logcmd) || nmcli_rc=$?
+        if [[ $nmcli_rc -eq 0 ]]; then
             msg_info "
 $text"
         else
