@@ -37,12 +37,10 @@ Standaard verwerkt \fBkz install\fR het invoerbestand
 /usr/bin/kz-install-install-<distributie>-<editie>.sh, <distributie> (b.v.
 ubuntu) en <editie> (desktop of server) worden ingevuld met de waarden van de
 huidige computer.
-.br
 Bijvoorbeeld kz-install-install-ubuntu-desktop.sh.
 .sp
 Dit invoerbestand bevat installatie-opdrachten voor alle hierin opgenomen
 computers voor Ubuntu desktop.
-.br
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .sp
@@ -54,12 +52,12 @@ opdrachten geselecteerd uit het invoerbestand en gekopieerd naar het
 opdrachtbestand.
 .sp
 De opdrachten in het opdrachtbestand worden uitgevoerd.
+Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt,
 de modus wijzigt dan van install naar remove.
-.br
 Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-remove-ubuntu-desktop.sh
 ("verwijderbestand") verwerkt.
 .sp
@@ -105,9 +103,9 @@ T}
 .T&
 l | l.
 T{
-# APP <appnaam> <hostnaam>...
+# APP <appnaam> <computernaam>...
 T}:T{
-De APP <appnaam> en computer <hostnaam>.
+De APP <appnaam> en computer <computernaam>.
 T}
 T{
 T}:T{

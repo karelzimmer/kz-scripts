@@ -35,12 +35,10 @@ By default, \fBkz install\fR processes the input file
 /usr/bin/kz-install-install-<distribution>-<edition>.sh, <distribution> (e.g.
 ubuntu) and <edition> (desktop or server) are populated with the values from
 the current computer.
-.br
 For example, kz-install-install-ubuntu-desktop.sh.
 .sp
 This input file contains commands for all computers included in it for Ubuntu
 desktop.
-.br
 When processing the input file, the commands for any and the current computer
 are selected and copied to a command file.
 .sp
@@ -51,12 +49,12 @@ selected from the input file and are copied to the command
 file.
 .sp
 The commands in the command file are executed.
+Upon successful completion the computer will restart.
 .sp
 Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone, the mode
 then changes from install to remove.
-.br
 Then, for example, file /usr/bin/kz-install-remove-ubuntu-desktop.sh
 ("remove file") is processed.
 .sp

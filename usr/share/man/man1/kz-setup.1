@@ -34,12 +34,10 @@ By default, \fBkz setup\fR processes the input file
 /usr/bin/kz-setup-<distribution>-<edition>.sh, <distribution> (e.g.
 ubuntu) and <edition> (desktop or server) are populated with the values from
 the current computer.
-.br
 For example, kz-setup-setup-ubuntu-desktop.sh.
 .sp
 This input file contains commands for all users included in it for Ubuntu
 desktop.
-.br
 When processing the input file, the commands for any and the current user are
 selected and copied to a command file.
 .sp
@@ -50,12 +48,12 @@ selected from the input file and are copied to the command
 file.
 .sp
 The commands in the command file are executed.
+Upon successful completion the user will be logged out.
 .sp
 Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone, the mode then
 changes from setup to reset.
-.br
 Then, for example, file /usr/bin/kz-setup-reset-ubuntu-desktop.sh
 ("reset file") is processed.
 .sp
