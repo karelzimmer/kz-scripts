@@ -200,7 +200,8 @@ function build_uploads {
     # a PDF of these modified files.
     cd "${UPLOADS_SOURCES[kz-docs]}"
     for file in *.odt *.txt; do
-        if ! diff "$file" "${UPLOADS_TARGETS[kz-docs]}/$file" |& $logcmd; then
+        if ! diff "$file" "${UPLOADS_TARGETS[kz-docs]}/$file" &> /dev/null
+        then
             cp  --preserve                      \
                 --verbose                       \
                 "$file"                         \
@@ -218,7 +219,7 @@ function build_uploads {
     # a PDF of these modified files.
     cd "${UPLOADS_SOURCES[kz-scripts]}"
     while read -r file; do
-        if ! diff "$file" "${UPLOADS_TARGETS[kz-scripts]}/$file" |& $logcmd
+        if ! diff "$file" "${UPLOADS_TARGETS[kz-scripts]}/$file" &> /dev/null
         then
             cp  --parents                           \
                 --preserve                          \
