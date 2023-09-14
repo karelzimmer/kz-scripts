@@ -56,14 +56,12 @@ Deze locaties worden standaard genegeerd:
  snap/*/*/.cache
  *CACHEDIR.TAG*
 .RE
-Tevens worden door Git beheerde mappen ("git-controlled") niet in de
-back-up opgenomen.
-.br
-Voorbeeld: ~/bin wordt overgeslagen vanwege de aanwezigheid van
-~/bin/.git.
+Tevens worden door Git beheerde mappen ("git-controlled") niet in de back-up
+opgenomen.
+Voorbeeld: ~/bin wordt overgeslagen vanwege de aanwezigheid van ~/bin/.git.
 .sp
 Voor het maken van de back-up wordt rsync gebruikt.
-.br
+.sp
 Bestanden die verwijderd zijn uit de Persoonlijke map worden ook verwijderd uit
 de back-up (rsync's optie --delete wordt gebruikt).
 .sp
@@ -139,7 +137,6 @@ Day 2 Operations
 \fBkz backup\fR
 .RS
 Maak een back-up (reservekopie) van de Persoonlijke map.
-.br
 Hiervoor is in een grafische werkomgeving ook starter \fBBack-up maken\fR
 beschikbaar.
 .RE
@@ -177,5 +174,4 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker Karel Zimmer.
 .SH BESCHIKBAARHEID
 Opdracht \fBkz backup\fR is onderdeel van het pakket \fBkz\fR en is
 beschikbaar op de website van Karel Zimmer
-.br
 <https://karelzimmer.nl/html/nl/linux.html#scripts>.
