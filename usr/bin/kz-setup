@@ -194,7 +194,7 @@ function process_input {
     if $argument_app; then
         process_argument_app
     else
-        process_input_file
+        process_input_file_by_user
     fi
 
     if $option_cat; then
@@ -290,7 +290,7 @@ function process_argument_app {
     local app_argument=''
 
     for app_argument in "${app_arguments[@]}"; do
-        process_argument_app_input_file
+        process_input_file_by_app
     done
     if $app_not_found; then
         text=$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")
@@ -300,16 +300,16 @@ function process_argument_app {
 }
 
 
-# This function generates the command file from the input file, filtering on
+# This function generates the command file from the input file and filters by
 # APPs.
-function process_argument_app_input_file {
+function process_input_file_by_app {
     local app_match=false
     local no_app_match=true
     local input_record=''
 
     while read -r input_record; do
         case $input_record in
-            '#'*'APP'*)
+            '#'*' APP '*)
                 # APP record.
                 app_match=false
                 if [[ $input_record == *$app_argument* ]]; then
@@ -336,19 +336,18 @@ function process_argument_app_input_file {
 }
 
 
-# This function generates the command file from the input file, filtering on
-# username.
-function process_input_file {
+# This function generates the command file from the input file and filters by
+# user.
+function process_input_file_by_user {
     local input_record=''
     local user_match=false
-    local user=''
+    local user=$USER'@'$HOSTNAME
 
     while read -r input_record; do
         case $input_record in
-            '#'*'APP'*)
+            '#'*' APP '*)
                 # APP record.
                 user_match=false
-                user=$USER'@'$HOSTNAME
                 if [[ $input_record == *'*'* || $input_record == *$user* ]]
                 then
                     # Match on username.
@@ -384,7 +383,7 @@ function process_command_file {
     local -i cmd_seq_num=0
 
     app_tot_num=$(
-        grep --word-regexp --regexp='#.*APP' --count "$command_file" || true
+        grep --word-regexp --regexp='#.* APP ' --count "$command_file" || true
         )
     if [[ $app_tot_num -gt 99 ]]; then
         app_tot_num=99
@@ -410,10 +409,6 @@ function process_command_file {
                     app_seq_num=99
                 fi
                 cmd_seq_num=0
-                ;;
-            '#'*' USER '*)
-                # USER record.
-                continue
                 ;;
             '#'*)
                 # Comment record.
