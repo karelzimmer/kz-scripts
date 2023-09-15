@@ -1,6 +1,4 @@
 """
-Common module for Python scripts.
-
 This module provides general variables and functions.
 """
 ###############################################################################
