@@ -263,7 +263,7 @@ msgid "not allowed on a server"
 msgstr "niet toegestaan op een server"
 
 #, sh-format
-msgid "File name must start with '$PROGRAM_NAME-' and end with '.sh'."
+msgid "Filename must start with '$PROGRAM_NAME-' and end with '.sh'."
 msgstr "Bestandsnaam moet beginnen met '$PROGRAM_NAME-' en eindigen met '.sh'."
 
 msgid "arguments are not allowed"

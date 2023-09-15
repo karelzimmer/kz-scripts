@@ -218,7 +218,7 @@ msgid "not allowed on a server"
 msgstr ""
 
 #, sh-format
-msgid "File name must start with '$PROGRAM_NAME-' and end with '.sh'."
+msgid "Filename must start with '$PROGRAM_NAME-' and end with '.sh'."
 msgstr ""
 
 msgid "arguments are not allowed"
