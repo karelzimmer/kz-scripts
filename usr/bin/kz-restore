@@ -130,6 +130,11 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
+    local -i restore_rc=0
+    local errors=''
+    local rsync_messages=''
+    local target=$HOME
+
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
             printf  "$DISPLAY_NAME: $source_argument: %s\n$USAGE_LINE\n" \
@@ -180,6 +185,11 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
 
     restore_backup
 
+    if $option_dry_run; then
+        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
+        exit $ERROR
+    fi
+
     if [[ $EDITION = 'desktop' ]]; then
         title=$(gettext 'Restore settings')
         text=$title
@@ -198,17 +208,30 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
             restore_settings
         fi
     fi
+
+    if [[ $restore_rc -ne $OK ]]; then
+        # shellcheck disable=SC2034
+        rsync_messages=$(cat "$errors")
+        msg_error "$(eval_gettext "Restore ended with warnings or errors.
+
+Some files may not be readable,
+or were any files added or removed while restoring the backup,
+or is there not enough space on \$target.
+
+Check the rsync messages:
+\$rsync_messages
+
+Try restoring the back up again.
+Use app 'Installation menu' and select '5 - Command menu', or
+use app Terminal, type 'kz restore'.")"
+        exit $ERROR
+    fi
 }
 
 
 # This function restores the backup.
 function restore_backup {
-    local -i restore_rc=0
-    local target=$HOME
-    local errors=''
-    local rsync_messages=''
-
-    errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    errors=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.errors")
 
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
@@ -236,29 +259,6 @@ function restore_backup {
                 $dry_run_option         \
                 "$source"/              \
                 "$target"/              2> "$errors" || restore_rc=$?
-    fi
-
-    if [[ $restore_rc -ne $OK ]]; then
-        # shellcheck disable=SC2034
-        rsync_messages=$(cat "$errors")
-        msg_error "$(eval_gettext "Restore ended with warnings or errors.
-
-Some files may not be readable,
-or were any files added or removed while restoring the backup,
-or is there not enough space on \$target.
-
-Check the rsync messages:
-\$rsync_messages
-
-Try restoring the back up again.
-Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz restore'.")"
-        exit $ERROR
-    fi
-
-    if $option_dry_run; then
-        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
-        exit $ERROR
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")

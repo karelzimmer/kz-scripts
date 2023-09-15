@@ -348,8 +348,8 @@ function create_backup {
     local rsync_messages=''
     local source=$HOME
 
-    exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
-    errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    exclude=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.exclude")
+    errors=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.errors")
 
     # Déjà Dup: Some locations are ignored by default.
     cat << EOF > "$exclude"
