@@ -6,9 +6,6 @@ This module provides general variables and functions.
 ###############################################################################
 # Common module for Python scripts.
 #
-# This module provides access to general variables and functions.
-# Use 'man kz common.py' for more information.
-#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
 ###############################################################################

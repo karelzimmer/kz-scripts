@@ -3,9 +3,6 @@
 ###############################################################################
 # Install kz package.
 #
-# This script downloads and installs package kz.
-# Use 'man kz getdeb' for more information.
-#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2016-2023.
 ###############################################################################

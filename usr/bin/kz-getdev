@@ -3,10 +3,6 @@
 ###############################################################################
 # Build development environment.
 #
-# This script builds the development environment for the kz package and the
-# website https://karelzimmer.nl.
-# Use 'man kz getdev' for more information.
-#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################

@@ -3,9 +3,6 @@
 ###############################################################################
 # Installation menu.
 #
-# This script runs commands through a menu.
-# Use 'man kz menu' for more information.
-#
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2015-2023.
 ###############################################################################
