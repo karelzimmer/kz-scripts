@@ -231,7 +231,7 @@ use app Terminal, type 'kz restore'.")"
 
 # This function restores the backup.
 function restore_backup {
-    errors=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.errors")
+    errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
