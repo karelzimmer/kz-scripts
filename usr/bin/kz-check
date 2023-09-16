@@ -210,7 +210,6 @@ function check_tags {
     local todo='T''O''D''O'
 
     if grep --quiet             \
-            --word-regexp       \
             --regexp="$bug"     \
             --regexp="$fixme"   \
             --regexp="$todo"    \
@@ -221,7 +220,6 @@ $(gettext '    Flagged annotation found.')
 
 $(
     grep    --line-number           \
-            --word-regexp           \
             --regexp="$bug"         \
             --regexp="$fixme"       \
             --regexp="$todo"        \

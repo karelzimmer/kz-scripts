@@ -213,7 +213,7 @@ function process_option_addfavaft  {
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
     elif !  printf '%s' "$favorite_apps" |
-            grep --quiet --word-regexp --regexp="$desktopfile"; then
+            grep --quiet --regexp="$desktopfile"; then
         gsettings set org.gnome.shell favorite-apps "$(
             printf '%s' "$favorite_apps" |
             cut --delimiter=']' --fields=1
@@ -230,7 +230,7 @@ function process_option_addfavbef  {
     if [[ $favorite_apps = '@as []' ]]; then
         gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
     elif !  printf '%s' "$favorite_apps" |
-            grep --quiet --word-regexp --regexp="$desktopfile"; then
+            grep --quiet --regexp="$desktopfile"; then
         gsettings set org.gnome.shell favorite-apps \
             "['$desktopfile', $(
                 printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
@@ -284,9 +284,7 @@ function process_option_addappfolder  {
     if [[ $app_folders = '@as []' ]]; then
         set org.gnome.desktop.app-folders folder-children "['$appfolder']"
     elif !  printf  '%s' "$app_folders" |
-            grep    --quiet             \
-                    --word-regexp       \
-                    --regexp="$appfolder"; then
+            grep --quiet --regexp="$appfolder"; then
         gsettings set org.gnome.desktop.app-folders folder-children "$(
             printf '%s' "$app_folders" | cut --delimiter=']' --fields=1
             ), '$appfolder']"

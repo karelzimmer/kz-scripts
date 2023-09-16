@@ -120,7 +120,7 @@ function check_script {
     fi
 
     # Desktop file.
-    if grep --quiet --word-regexp --regexp="$gui" "/usr/bin/$scriptname"; then
+    if grep --quiet --regexp="$gui" "/usr/bin/$scriptname"; then
         dir=/usr/share/applications
         if ! [[ -e $dir/$scriptname.desktop ]]; then
             msg_error "$(eval_gettext "Desktop configuration file \
@@ -130,7 +130,7 @@ function check_script {
     fi
 
     # PolicyKit action definition file.
-    if grep --quiet --word-regexp --regexp="$root" "/usr/bin/$scriptname"; then
+    if grep --quiet --regexp="$root" "/usr/bin/$scriptname"; then
         dir=/usr/share/polkit-1/actions
         if ! [[ -e $dir/nl.karelzimmer.$scriptname.policy ]]; then
             msg_error "$(eval_gettext "PolicyKit action definition file \
