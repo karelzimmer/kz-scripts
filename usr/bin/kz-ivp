@@ -110,7 +110,7 @@ function process_input {
 
 # This function checks the operation of the script and associated files.
 function check_script {
-    local gui='-''-''G''U''I'
+    local gui='-''-''g''u''i'
     local root=' kz_common.''c''h''e''c''k''_''u''s''e''r''_''r''o''o''t'
 
     # Script.
