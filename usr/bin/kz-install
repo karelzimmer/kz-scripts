@@ -381,9 +381,7 @@ function process_command_file {
     local -i app_tot_num=0
     local -i cmd_seq_num=0
 
-    app_tot_num=$(
-        grep --word-regexp --regexp='#.* APP ' --count "$command_file" || true
-        )
+    app_tot_num=$(grep --regexp='#.* APP ' --count "$command_file" || true)
     if [[ $app_tot_num -gt 99 ]]; then
         app_tot_num=99
     fi
