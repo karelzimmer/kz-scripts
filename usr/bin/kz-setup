@@ -498,6 +498,10 @@ Type 'logout' to log out.")
                 msg_info "$text"
                 exit $OK
             fi
+        else
+            text=$(gettext "If the apps you set up aren't working properly, \
+you may need to log out and log back in to your computer.")
+            msg_info "$text"
         fi
     fi
     exit $OK
