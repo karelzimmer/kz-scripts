@@ -140,7 +140,7 @@ function process_input {
 # This function checks Shell and Python script code.
 function check_code {
     local bash_script='#!''/usr/bin/bash'
-    local python_script='#!''/usr/bin/python'
+    local python_script='#!''/usr/bin/python3'
     local tab_completion_script='# ''shellcheck shell=bash'
 
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
@@ -169,7 +169,7 @@ function check_pycodestyle {
 function check_record_length {
     local -i max_line_length=79
     local -i max_line_length_found=0
-    local python_script='#!''/usr/bin/python'
+    local python_script='#!''/usr/bin/python3'
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp --regexp="$python_script" "$script"; then
