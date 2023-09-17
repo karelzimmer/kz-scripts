@@ -179,14 +179,15 @@ function process_input {
         msg_warning "$text"
         exit $ERROR
     fi
-    command_file=$(
-        mktemp -t "$PROGRAM_NAME-$mode-$DISTRO-$EDITION-XXXXXXXXXX.sh"
-        )
 
     if $option_apps; then
         process_option_apps
         exit $OK
     fi
+
+    command_file=$(
+        mktemp -t "$PROGRAM_NAME-$mode-$DISTRO-$EDITION-XXXXXXXXXX.sh"
+        )
 
     if $argument_app; then
         process_argument_app
