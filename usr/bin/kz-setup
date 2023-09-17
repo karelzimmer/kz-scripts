@@ -238,11 +238,11 @@ $(
 
 $USAGE_LINE"
     else
-        printf '%s\n' "
-$(eval_gettext "To process FILE execute: \${blue}\$DISPLAY_NAME \
---file FILE\${normal}")
-$(eval_gettext "To view the commands of FILE execute: \${blue}\$DISPLAY_NAME \
---cat --file FILE\${normal}")"
+        printf  '\n%s\n%s\n'                            \
+                "$(eval_gettext "To view the commands of FILE execute: \
+\${blue}\$DISPLAY_NAME --cat --file FILE\${normal}")"   \
+                "$(eval_gettext "To process FILE execute: \
+\${blue}\$DISPLAY_NAME --file FILE\${normal}")"
     fi
 )"
     msg_info "$text"
@@ -272,10 +272,11 @@ $(
 
 $USAGE_LINE"
     else
-        printf '%s\n' "
-$(gettext 'To set up the APPs run:') ${blue}$DISPLAY_NAME APP...${normal}
-$(gettext 'To view the contents of the APPs set up file execute:') \
-${blue}$DISPLAY_NAME --cat APP...${normal}"
+        printf  '\n%s\n%s\n'                                \
+                "$(gettext "To view the contents of the APPs set up file \
+execute:") ${blue}$DISPLAY_NAME --cat APP...${normal}" \
+                "$(gettext 'To set up the APPs run:') ${blue}$DISPLAY_NAME \
+APP...${normal}"
     fi
 )"
     msg_info "$text"
