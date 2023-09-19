@@ -192,7 +192,7 @@ Disconnect media via Files.")"
         fi
     fi
 
-    # create_backup
+    create_backup
 }
 
 
