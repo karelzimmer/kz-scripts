@@ -321,11 +321,11 @@ function process_option_delappfolder  {
 
 # This function records a change made through the GUI.
 function capture_gui_changes {
-    config_a=$(mktemp -t "$PROGRAM_NAME-CONFIG-A-XXXXXXXXXX")
+    config_a=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
     save_configuration_database A "$config_a"
     msg_info "$(gettext 'Now make the change in the graphical workspace.')"
     wait_for_enter
-    config_b=$(mktemp -t "$PROGRAM_NAME-CONFIG-B-XXXXXXXXXX")
+    config_b=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
     save_configuration_database B "$config_b"
     report_database_changes "$config_a" "$config_b"
     rm "$config_a" "$config_b"
