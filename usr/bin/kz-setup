@@ -225,15 +225,14 @@ function process_input {
 function process_option_list {
     text="$(gettext 'The following FILEs are available:
 
-     FILE')
+NUM  FILE')
 $(
     if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"*'.sh'    \
                     2> >($logcmd)                           |
-            nl      --number-width=2                        \
+            nl      --number-width=3                        \
                     --number-format=rn                      \
-                    --number-separator='] '                 \
-                    --body-numbering=a                      |
-            sed     --expression='s/^/[/'; then
+                    --number-separator='  '                 \
+                    --body-numbering=a; then
         printf '%s\n' "$(eval_gettext '     0 No files present.')
 
 $USAGE_LINE"
@@ -253,7 +252,7 @@ $USAGE_LINE"
 function process_option_apps {
     text="$(gettext 'The following APPs are available:
 
-     APP')
+NUM  APP')
 $(
     if !    grep    --no-messages           \
                     --regexp='#.* APP '     \
@@ -263,11 +262,10 @@ $(
             cut     --delimiter=' '         \
                     --fields=3              |
             sort    --unique                |
-            nl      --number-width=2        \
+            nl      --number-width=3        \
                     --number-format=rn      \
-                    --number-separator='] ' \
-                    --body-numbering=a      |
-            sed     --expression='s/^/[/'; then
+                    --number-separator='  ' \
+                    --body-numbering=a; then
         printf '%s\n' "$(gettext '     0   No apps found.')
 
 $USAGE_LINE"
@@ -382,9 +380,6 @@ function process_command_file {
     local -i cmd_seq_num=0
 
     app_tot_num=$(grep --regexp='#.* APP ' --count "$command_file" || true)
-    if [[ $app_tot_num -gt 99 ]]; then
-        app_tot_num=99
-    fi
 
     if $option_reset; then
         operation=$(gettext 'reset')
@@ -402,9 +397,6 @@ function process_command_file {
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3)"
                 ((++app_seq_num))
-                if [[ $app_seq_num -gt 99 ]]; then
-                    app_seq_num=99
-                fi
                 cmd_seq_num=0
                 ;;
             '#'*)
@@ -427,30 +419,24 @@ function execute_command {
 
     commands_found=true
     ((++cmd_seq_num))
-    if [[ $cmd_seq_num -gt 99 ]]; then
-        cmd_seq_num=99
+    if [[ $app_seq_num -eq 1 ]];then
+        printf '%s\n' 'NUM/TOT  SUB  APP'
     fi
-    printf  -v app_name_line            \
-            "[%2d/%-2d] [%2d] %s %s"    \
-            "$app_seq_num"              \
-            "$app_tot_num"              \
-            "$cmd_seq_num"              \
-            "$operation"                \
+    printf  -v app_name_line    \
+            "%3d/%-3d  %3d  %s" \
+            "$app_seq_num"      \
+            "$app_tot_num"      \
+            "$cmd_seq_num"      \
             "$app_name"
 
     if $option_gui; then
-        text="#$app_name_line\n\n$cmd"
-        printf '%s\n' "$text"
+        printf '%s\n' "#$app_name\n\n$cmd"
     else
-        if [[ $cmd_seq_num -eq 1 ]]; then
-            printf "%b\n" "$app_name_line"
-        else
-            printf "       %b\n" "${app_name_line:7}"
-        fi
+        printf "%b\n" "$app_name_line"
     fi
 
-    msg_log  "$app_name_line"
-    msg_log  "${blue}$cmd${normal}"
+    msg_log "$app_name_line"
+    msg_log "${blue}$cmd${normal}"
     eval "$cmd" |& $logcmd || failed_apps[$app_name]=$app_name
 }
 
@@ -469,21 +455,27 @@ function term_script {
     if [[ -n ${failed_apps[*]} ]]; then
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
-        msg_error "$(eval_gettext "The set up of the following apps contains \
+        text="$(eval_gettext "The set up of the following apps contains \
 errors:
 \$failed_apps_text
 
 Try to set up the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz setup \$failed_apps_text'.")"
+        msg_error "
+$text"
         exit $ERROR
     else
         if $option_reset; then
             # shellcheck disable=SC2034
             operation=$(gettext 'reset')
         fi
+        text="${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         msg_info "
-${green}$(eval_gettext "Apps \$operation completed.")${normal}"
+$text"
+        text=$(gettext "If the apps you set up aren't working properly, you \
+may need to log out and log back in to your computer.")
+        msg_info "$text"
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
                 text=$(gettext "You will now be logged out of the computer to \
@@ -500,10 +492,6 @@ Type 'logout' to log out.")
                 msg_info "$text"
                 exit $OK
             fi
-        else
-            text=$(gettext "If the apps you set up aren't working properly, \
-you may need to log out and log back in to your computer.")
-            msg_info "$text"
         fi
     fi
     exit $OK
