@@ -98,7 +98,7 @@ def perform_command(command):
 
 def snap_refresh():
     """
-    This function refreshes installed snaps.
+    This function refreshes installed snaps ====.
     """
     print(_('Snap refresh...'))
     kz_common.check_for_active_updates()

@@ -276,17 +276,17 @@ function backup_settings_favorite_apps {
 function backup_settings_installed_apps {
     local output_file=''
     local header1
-    header1=$(gettext '==== START Installed packages')
+    header1=$(gettext '==== START installed packages ====')
     local footer1
-    footer1=$(gettext '==== END Installed packages')
+    footer1=$(gettext '==== END installed packages ====')
     local header2
-    header2=$(gettext '==== START Installed snaps')
+    header2=$(gettext '==== START installed snaps ====')
     local footer2
-    footer2=$(gettext '==== END Installed snaps')
+    footer2=$(gettext '==== END installed snaps ====')
     local header3
-    header3=$(gettext '==== START Added repositories')
+    header3=$(gettext '==== START added repositories ====')
     local footer3
-    footer3=$(gettext '==== END Added repositories')
+    footer3=$(gettext '==== END added repositories ====')
     local search=/etc/apt/sources.list
 
     if type xdg-user-dir &> /dev/null; then

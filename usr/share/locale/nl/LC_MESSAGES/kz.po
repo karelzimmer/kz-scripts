@@ -307,23 +307,23 @@ msgstr "Achtergrond"
 msgid "Favorites"
 msgstr "Favorieten"
 
-msgid "==== START Installed packages"
-msgstr "==== BEGIN Geïnstalleerde pakketten"
+msgid "==== START installed packages ===="
+msgstr "==== BEGIN geïnstalleerde pakketten ===="
 
-msgid "==== END Installed packages"
-msgstr "==== EINDE Geïnstalleerde pakketten"
+msgid "==== END installed packages ===="
+msgstr "==== EINDE geïnstalleerde pakketten ===="
 
-msgid "==== START Installed snaps"
-msgstr "==== BEGIN Geïnstalleerde snaps"
+msgid "==== START installed snaps ===="
+msgstr "==== BEGIN geïnstalleerde snaps ===="
 
-msgid "==== END Installed snaps"
-msgstr "==== EINDE Geïnstalleerde snaps"
+msgid "==== END installed snaps ===="
+msgstr "==== EINDE geïnstalleerde snaps ===="
 
-msgid "==== START Added repositories"
-msgstr "==== BEGIN Toegevoegde pakketbronnen "
+msgid "==== START added repositories ===="
+msgstr "==== BEGIN toegevoegde pakketbronnen ===="
 
-msgid "==== END Added repositories"
-msgstr "==== EINDE Toegevoegde pakketbronnen "
+msgid "==== END added repositories ===="
+msgstr "==== EINDE toegevoegde pakketbronnen ===="
 
 msgid "Userphoto"
 msgstr "Gebruikersfoto"

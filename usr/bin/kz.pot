@@ -253,22 +253,22 @@ msgstr ""
 msgid "Favorites"
 msgstr ""
 
-msgid "==== START Installed packages"
+msgid "==== START installed packages ===="
 msgstr ""
 
-msgid "==== END Installed packages"
+msgid "==== END installed packages ===="
 msgstr ""
 
-msgid "==== START Installed snaps"
+msgid "==== START installed snaps ===="
 msgstr ""
 
-msgid "==== END Installed snaps"
+msgid "==== END installed snaps ===="
 msgstr ""
 
-msgid "==== START Added repositories"
+msgid "==== START added repositories ===="
 msgstr ""
 
-msgid "==== END Added repositories"
+msgid "==== END added repositories ===="
 msgstr ""
 
 msgid "Userphoto"
