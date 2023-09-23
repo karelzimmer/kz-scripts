@@ -101,7 +101,7 @@ function check_input {
 function process_option_list {
     msg_info "$(gettext 'The following COMMANDs are available:
 
-     COMMAND')"
+NUM  COMMAND')"
     find    "$PROGRAM_PATH"/kz-*    \
             -maxdepth 1             \
             -type f                 \
@@ -112,11 +112,10 @@ function process_option_list {
             -printf '%f\n'          |
     sort                            |
     sed     --expression='s/kz-//'  |
-    nl      --number-width=2        \
+    nl      --number-width=3        \
             --number-format=rn      \
-            --number-separator='] ' \
-            --body-numbering=a      |
-    sed     --expression='s/^/[/'
+            --number-separator='  ' \
+            --body-numbering=a
     msg_info "
 $(eval_gettext "To execute a COMMAND: \${blue}\$DISPLAY_NAME \
 COMMAND\${normal}")"

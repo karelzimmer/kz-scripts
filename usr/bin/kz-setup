@@ -70,7 +70,6 @@ declare mode='setup'
 declare option_apps=false
 declare option_cat=false
 declare option_file=false
-declare option_gui=false
 declare option_list=false
 declare option_reset=false
 
@@ -167,16 +166,15 @@ function process_input {
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
-            text=$(eval_gettext \
-            "Filename must start with '\$PROGRAM_NAME-' and end with '.sh'.")
-            msg_warning "$text"
+            msg_error "$(eval_gettext \
+            "Filename must start with '\$PROGRAM_NAME-' and end with '.sh'.")"
             exit $ERROR
         fi
         input_file=$file_argument
     fi
     if ! [[ -f $input_file ]]; then
-        text=$(eval_gettext "No install file found, looked for \$input_file.")
-        msg_warning "$text"
+        msg_error \
+        "$(eval_gettext "No install file found, looked for \$input_file.")"
         exit $ERROR
     fi
 
@@ -223,7 +221,7 @@ function process_input {
 
 # This function displays a list of available input files.
 function process_option_list {
-    text="$(gettext 'The following FILEs are available:
+    msg_info "$(gettext 'The following FILEs are available:
 
 NUM  FILE')
 $(
@@ -244,13 +242,12 @@ $USAGE_LINE"
 \${blue}\$DISPLAY_NAME --file FILE\${normal}")"
     fi
 )"
-    msg_info "$text"
 }
 
 
 # This function shows the available APPs from the input file.
 function process_option_apps {
-    text="$(gettext 'The following APPs are available:
+    msg_info "$(gettext 'The following APPs are available:
 
 NUM  APP')
 $(
@@ -277,7 +274,6 @@ execute:") ${blue}$DISPLAY_NAME --cat APP...${normal}" \
 APP...${normal}"
     fi
 )"
-    msg_info "$text"
 }
 
 
@@ -290,8 +286,8 @@ function process_argument_app {
         process_input_file_by_app
     done
     if $app_not_found; then
-        text=$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")
-        printf '%s\n' "$text"
+        printf '%s\n' \
+        "$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")"
         exit $ERROR
     fi
 }
@@ -459,44 +455,38 @@ function term_script {
     if [[ -n ${failed_apps[*]} ]]; then
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
-        text="$(eval_gettext "The set up of the following apps contains \
-errors:
+        msg_error "
+$(eval_gettext "The set up of the following apps contains errors:
 \$failed_apps_text
 
 Try to set up the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz setup \$failed_apps_text'.")"
-        msg_error "
-$text"
         exit $ERROR
     else
         if $option_reset; then
             # shellcheck disable=SC2034
             operation=$(gettext 'reset')
         fi
-        text="${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         msg_info "
-$text"
+${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
-                text=$(gettext "You will now be logged out of the computer to \
-finish installing the apps and changing user settings.")
-                msg_info "$text"
+                msg_info "$(gettext "You will now be logged out of the \
+computer to finish installing the apps and changing user settings.")"
                 if ! $option_gui; then
                     wait_for_enter
                 fi
                 gnome-session-quit --logout --no-prompt
             else
-                text=$(gettext "You must log out of the computer to finish \
-installing the apps and changing user settings.
-Type 'logout' to log out.")
-                msg_info "$text"
+                msg_info "$(gettext "You must log out of the computer to \
+finish installing the apps and changing user settings.
+Type 'logout' to log out.")"
                 exit $OK
             fi
         else
-            text=$(gettext "If the apps you set up aren't working properly, \
-you may need to log out and log back in to your computer.")
-            msg_info "$text"
+            msg_info "$(gettext "If the apps you set up aren't working \
+properly, you may need to log out and log back in to your computer.")"
         fi
     fi
     exit $OK

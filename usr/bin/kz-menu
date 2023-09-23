@@ -91,7 +91,6 @@ readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
 declare execute_command=false
 declare -a rows=()
-declare option_gui=false
 
 
 ###############################################################################

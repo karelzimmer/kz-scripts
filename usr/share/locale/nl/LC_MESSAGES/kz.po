@@ -215,11 +215,11 @@ msgstr "opdracht bestaat niet"
 msgid ""
 "The following COMMANDs are available:\n"
 "\n"
-"     COMMAND"
+"NUM  COMMAND"
 msgstr ""
 "De volgende OPDRACHTen zijn beschikbaar:\n"
 "\n"
-"     OPDRACHT"
+"NUM  OPDRACHT"
 
 #, sh-format
 msgid "To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND${normal}"

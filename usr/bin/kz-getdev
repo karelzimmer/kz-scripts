@@ -86,12 +86,12 @@ function process_input {
     if groups "$USER" | grep --quiet --regexp='sudo'; then
         sudo true
     else
-        printf  '%s\n' "$(gettext 'Already performed by the administrator.')"
+        msg_info "$(eval_gettext 'Already performed by the administrator.')"
         term_script
     fi
-    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Check')"
+    msg_info "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
     check_dependencies
-    printf "\n${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Build')"
+    msg_info "\n${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
     pull_repos
     download_website
 }

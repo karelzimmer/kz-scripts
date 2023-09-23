@@ -54,7 +54,6 @@ readonly X_OPTIONS_LONG=',dry-run,gui,source:'
 declare dry_run_option=''
 declare medium=''
 declare option_dry_run=false
-declare option_gui=false
 declare option_source=false
 declare source_argument=''
 declare source_medium=''
