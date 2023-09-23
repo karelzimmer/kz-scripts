@@ -596,7 +596,7 @@ msgstr ""
 msgid " ok "
 msgstr ""
 
-msgid "         COMMAND"
+msgid "         COMMAND..."
 msgstr ""
 
 msgid "No commands to execute."

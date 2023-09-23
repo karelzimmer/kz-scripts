@@ -291,7 +291,7 @@ function process_argument_app {
     done
     if $app_not_found; then
         text=$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")
-        printf "%s\n" "$text"
+        printf '%s\n' "$text"
         exit $ERROR
     fi
 }
@@ -421,7 +421,7 @@ function execute_command {
     ((++cmd_seq_num))
 
     if [[ $app_seq_num -eq 1 ]];then
-        printf '%s\n%s\n' 'NUM/TOT  APP' "$(gettext '         COMMAND')"
+        printf '%s\n%s\n' 'NUM/TOT  APP' "$(gettext '         COMMAND...')"
     fi
 
     printf  -v app_name_line    \
@@ -434,9 +434,9 @@ function execute_command {
         printf '%s\n' "#$app_name\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]];then
-            printf "%b\n" "$app_name_line"
+            printf '%b\n' "$app_name_line"
         fi
-        printf "         %b\n" "$cmd"
+        printf '         %b\n' "$cmd"
     fi
 
     msg_log "$app_name_line/$cmd_seq_num"
