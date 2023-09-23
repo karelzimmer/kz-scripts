@@ -415,31 +415,34 @@ function process_command_file {
 }
 
 
-# This function executes a command from the command file.
+# This function reports and executes a command from the command file.
 function execute_command {
     local cmd=${1:-unknown}
     local app_name_line=''
 
     commands_found=true
     ((++cmd_seq_num))
+
     if [[ $app_seq_num -eq 1 ]];then
-        printf '%s\n' 'NUM/TOT  SUB  APP'
+        printf '%s\n%s\n' 'NUM/TOT  APP' "$(gettext '         COMMAND')"
     fi
+
     printf  -v app_name_line    \
-            "%3d/%-3d  %3d  %s" \
+            "%3d/%-3d  %s" \
             "$app_seq_num"      \
             "$app_tot_num"      \
-            "$cmd_seq_num"      \
             "$app_name"
 
     if $option_gui; then
-        text="#$app_name\n\n$cmd"
-        printf '%s\n' "$text"
+        printf '%s\n' "#$app_name\n\n$cmd"
     else
-        printf "%b\n" "$app_name_line"
+        if [[ $cmd_seq_num -eq 1 ]];then
+            printf "%b\n" "$app_name_line"
+        fi
+        printf "         %b\n" "$cmd"
     fi
 
-    msg_log "$app_name_line"
+    msg_log "$app_name_line/$cmd_seq_num"
     msg_log "${blue}$cmd${normal}"
     check_for_active_updates
     eval "$cmd" |& $logcmd || failed_apps[$app_name]=$app_name
@@ -478,9 +481,6 @@ $text"
         text="${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         msg_info "
 $text"
-        text=$(gettext "If the installed apps are not working properly, you \
-may need to restart your computer.")
-        msg_info "$text"
         if $reboot; then
             text=$(gettext "The computer will now reboot to finish installing \
 the apps and changing system settings.")
@@ -489,6 +489,10 @@ the apps and changing system settings.")
                 wait_for_enter
             fi
             sudo systemctl reboot
+        else
+            text=$(gettext "If the installed apps are not working properly, \
+you may need to restart your computer.")
+            msg_info "$text"
         fi
     fi
     exit $OK
