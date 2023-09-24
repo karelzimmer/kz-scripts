@@ -11,26 +11,28 @@
 # Import
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-getdeb'
 PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 readonly PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifier=kz_common.sh)
-
-# If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
+if ! source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --ide=$PROGRAM_NAME);
+then
+    temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
+    wget    --output-document="$temp_kz_common"                             \
+            https://karelzimmer.nl/assets/kz-scripts/usr/bin/kz_common.sh   \
+            2> >(systemd-cat --identifier=$PROGRAM_NAME)
+     source "$temp_kz_common" 2> >(systemd-cat --identifier=$PROGRAM_NAME)
+    rm "$temp_kz_common" 2> >(systemd-cat --identifier=$PROGRAM_NAME)
+fi
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-getdeb'
 PROGRAM_DESC=$(gettext 'Install kz package')
 readonly PROGRAM_DESC
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-# shellcheck disable=SC2034
 USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 readonly USAGE
 HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
@@ -74,11 +76,7 @@ function check_input {
         ) || ( printf '%s\n' "$USAGE_LINE"; exit $ERROR )
     eval set -- "$parsed"
 
-    # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type process_common_options &> /dev/null
-    then
-        process_common_options "$@"
-    fi
+    process_common_options "$@"
 
     while true; do
         case $1 in
@@ -102,12 +100,14 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    if groups "$USER" | grep --quiet --regexp='sudo'; then
+    # shellcheck disable=SC2310
+    if check_user_sudo; then
         sudo true
     else
-        printf '%s\n' "$(gettext 'Already performed by the administrator.')"
+        msg_info "$(eval_gettext 'Already performed by the administrator.')"
         term_script
     fi
+
     install_package
 }
 
@@ -130,10 +130,11 @@ function install_package {
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
-    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Download')"
+
+    msg_info "${bold}$(gettext 'Download')${normal} ($DISPLAY_NAME)"
     wget --output-document="$temp_deb" $site_deb
 
-    printf "${bold}%s${normal} ($DISPLAY_NAME)\n" "$(gettext 'Install')"
+    msg_info "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -141,27 +142,6 @@ function install_package {
             --yes                           \
             "$temp_deb"
     rm "$temp_deb"
-}
-
-
-# This function checks for active updates and waits for the next check.
-function check_for_active_updates {
-    local -i check_wait=10
-    local text
-    text=$(eval_gettext \
-            "Wait \${check_wait}s for another package manager to finish...")
-
-    while sudo  fuser                                       \
-                /snap/core/*/var/cache/debconf/config.dat   \
-                /var/cache/apt/archives/lock                \
-                /var/cache/debconf/config.dat               \
-                /var/lib/apt/lists/lock                     \
-                /var/lib/dpkg/lock                          \
-                /var/lib/dpkg/lock-frontend                 \
-                &> /dev/null; do
-        printf '%s\n' "$text"
-        sleep $check_wait
-    done
 }
 
 
@@ -188,7 +168,7 @@ Type 'exit' to close this window.")
                             --infobox   "$text"         \
                             16 47
     else
-        printf '%s\n' "$(gettext 'Finished')."
+        msg_info "${bold}$(gettext 'Finished').${normal} ($DISPLAY_NAME)"
     fi
     cleanup
     exit 0
@@ -200,12 +180,7 @@ Type 'exit' to close this window.")
 ###############################################################################
 
 function main {
-    # If source kz_common.sh has failed, e.g. in wget kz and bash kz sequence.
-    if type init_script &> /dev/null; then
-        init_script "$@"
-    else
-        set -o errexit
-    fi
+    init_script "$@"
     check_input "$@"
     process_input
     term_script

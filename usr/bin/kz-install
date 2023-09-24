@@ -11,16 +11,16 @@
 # Import
 ###############################################################################
 
+readonly PROGRAM_NAME='kz-install'
 PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 readonly PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifier=kz_common.sh)
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-install'
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
