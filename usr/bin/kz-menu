@@ -75,10 +75,10 @@ readonly -a MENU2_ACTIONS=(
 readonly -a MENU2_COMMANDS=(
             [1]='kz wifi'
                 'kz backup'
-                "$(gettext ' -hand-')"
+                "$(gettext '"manually"')"
                 'kz install'
                 'kz restore'
-                "$(gettext ' -hand-')"
+                "$(gettext '"manually"')"
                 'kz setup'
                 "$(gettext 'Exit menu')"
             )
@@ -500,7 +500,7 @@ function execute_command {
     local gui_option=''
 
     # Handle manual actions.
-    if [[ $command = $(gettext ' -hand-') ]]; then
+    if [[ $command = $(gettext '"manually"') ]]; then
         manual_actions
         return $OK
     fi
