@@ -875,8 +875,8 @@ msgstr "Apps instellen"
 msgid "Preparing set up"
 msgstr "Instellen voorbereiden"
 
-msgid "Manually"
-msgstr "Handmatig"
+msgid " -hand-"
+msgstr " -handje-"
 
 msgid "Select a choice:"
 msgstr "Selecteer een keuze:"
