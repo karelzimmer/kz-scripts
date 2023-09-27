@@ -202,10 +202,10 @@ $MENU1_HEAD
                 "${MENU1_ACTIONS[$menu1_action]}"   \
                 "${MENU1_COMMANDS[$menu1_action]}"
     done
-    msg_info ''
 
     while true; do
-        read -rp "$(eval_gettext "Run number [1-\$MENU1_LINES]: ")"
+        read -rp "
+$(eval_gettext "Run number [1-\$MENU1_LINES]: ")"
         case $REPLY in
             *[^[:digit:]]*)
                 continue
@@ -368,10 +368,10 @@ $MENU2_HEAD
                 "${MENU2_ACTIONS[$menu2_action]}"   \
                 "${MENU2_COMMANDS[$menu2_action]}"
     done
-    msg_info ''
 
     while true; do
-        read -rp "$(eval_gettext "Run number [1-\$MENU2_LINES]: ")"
+        read -rp "
+$(eval_gettext "Run number [1-\$MENU2_LINES]: ")"
         case $REPLY in
             *[^[:digit:]]*)
                 continue
@@ -498,8 +498,6 @@ function execute_command {
     local cmd=''
     local row=''
     local gui_option=''
-
-    printf '\n'
 
     # Handle manual actions.
     if [[ $command = $(gettext ' -hand-') ]]; then
