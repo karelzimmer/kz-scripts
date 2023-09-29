@@ -890,20 +890,20 @@ msgstr "Terug"
 msgid "Exit"
 msgstr "Afsluiten"
 
-msgid "Choice"
-msgstr "Keuze"
+msgid "CHOICE"
+msgstr "KEUZE"
 
-msgid "No."
-msgstr "Nr."
+msgid "NUM"
+msgstr "NUM"
 
-msgid "Action"
-msgstr "Actie"
+msgid "ACTION"
+msgstr "ACTIE"
 
-msgid "Explanation"
-msgstr "Toelichting"
+msgid "EXPLANATION"
+msgstr "TOELICHTING"
 
-msgid "Command"
-msgstr "Opdracht"
+msgid "COMMAND"
+msgstr "OPDRACHT"
 
 #, sh-format
 msgid "Run number [1-$MENU1_LINES]: "

@@ -750,16 +750,16 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-msgid "Choice"
+msgid "CHOICE"
 msgstr ""
 
-msgid "No."
+msgid "NUM"
 msgstr ""
 
-msgid "Action"
+msgid "ACTION"
 msgstr ""
 
-msgid "Explanation"
+msgid "EXPLANATION"
 msgstr ""
 
 msgid "Command"

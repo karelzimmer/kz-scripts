@@ -165,10 +165,10 @@ function process_menu1_gui {
                     --text          "$(gettext 'Select a choice:')"         \
                     --ok-label      "$(gettext 'Continue')"                 \
                     --cancel-label  "$(gettext 'Exit')"                     \
-                    --column        "$(gettext 'Choice')"                   \
-                    --column        "$(gettext 'No.')"                      \
-                    --column        "$(gettext 'Action')"                   \
-                    --column        "$(gettext 'Explanation')"              \
+                    --column        "$(gettext 'CHOICE')"                   \
+                    --column        "$(gettext 'NUM')"                      \
+                    --column        "$(gettext 'ACTION')"                   \
+                    --column        "$(gettext 'EXPLANATION')"              \
                     TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_COMMANDS[1]}"    \
                     FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_COMMANDS[2]}"    \
                     FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_COMMANDS[3]}"    \
@@ -188,16 +188,12 @@ function process_menu1_tui {
     msg_info "
 $MENU1_HEAD
 "
-        printf  '%3s  %-25.25s  %s\n'       \
-                "$(gettext 'No.')"          \
-                "$(gettext 'Action')"       \
-                "$(gettext 'Explanation')"
-        printf  '%3s  %-25.25s  %s\n'       \
-                '---'                       \
-                '-------------------------' \
-                '---------------------'
+        printf  '%3s  %-25s  %s\n'      \
+                "$(gettext 'NUM')"      \
+                "$(gettext 'ACTION')"   \
+                "$(gettext 'EXPLANATION')"
     for menu1_action in "${!MENU1_ACTIONS[@]}"; do
-        printf  '%3s  %-25.25s  %s\n'             \
+        printf  '%3s  %-25s  %s\n'                  \
                 "$menu1_action"                     \
                 "${MENU1_ACTIONS[$menu1_action]}"   \
                 "${MENU1_COMMANDS[$menu1_action]}"
@@ -329,10 +325,10 @@ function process_menu2_gui {
                     --text          "$(gettext 'Select a choice:')"         \
                     --ok-label      "$(gettext 'Continue')"                 \
                     --cancel-label  "$(gettext 'Back')"                     \
-                    --column        "$(gettext 'Choice')"                   \
-                    --column        "$(gettext 'No.')"                      \
-                    --column        "$(gettext 'Action')"                   \
-                    --column        "$(gettext 'Command')"                  \
+                    --column        "$(gettext 'CHOICE')"                   \
+                    --column        "$(gettext 'NUM')"                      \
+                    --column        "$(gettext 'ACTION')"                   \
+                    --column        "$(gettext 'COMMAND')"                  \
                     TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"    \
                     FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"    \
                     FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"    \
@@ -354,16 +350,12 @@ function process_menu2_tui {
     msg_info "
 $MENU2_HEAD
 "
-        printf  '%3s  %-25.25s  %s\n'       \
-                "$(gettext 'No.')"          \
-                "$(gettext 'Action')"       \
-                "$(gettext 'Command')"
-        printf  '%3s  %-25.25s  %s\n'       \
-                '---'                       \
-                '-------------------------' \
-                '-------------'
+        printf  '%3s  %-25s  %s\n'      \
+                "$(gettext 'NUM')"      \
+                "$(gettext 'ACTION')"   \
+                "$(gettext 'COMMAND')"
     for menu2_action in "${!MENU2_ACTIONS[@]}"; do
-        printf  '%3s  %-25.25s  %s\n'               \
+        printf  '%3s  %-25s  %s\n'                  \
                 "$menu2_action"                     \
                 "${MENU2_ACTIONS[$menu2_action]}"   \
                 "${MENU2_COMMANDS[$menu2_action]}"
