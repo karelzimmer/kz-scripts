@@ -19,7 +19,7 @@ then
     printf  '%s\n'                              \
             '==== START get kz_common.sh =====' \
             &> >(systemd-cat --identifier=$PROGRAM_NAME)
-    declare temp_kz_common
+    declare temp_kz_common=''
             temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     wget    --output-document="$temp_kz_common"                             \
             https://karelzimmer.nl/assets/kz-scripts/usr/bin/kz_common.sh   \

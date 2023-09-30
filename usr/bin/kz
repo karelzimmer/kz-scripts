@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,14 +21,14 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Run command')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Run command')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
    or: \$DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
    or: \$DISPLAY_NAME OPTION")
 
 $PROGRAM_DESC.
@@ -41,14 +41,14 @@ $(gettext "Arguments:
   COMMAND        execute COMMAND
   ARGUMENT       ARGUMENTs for COMMAND")"
 # shellcheck disable=SC2034
-readonly HELP
+readonly    HELP
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare exec_PROGRAM_NAME=''
+declare     exec_PROGRAM_NAME=''
 
 
 ###############################################################################

@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-restore'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-restore'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,15 +21,15 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Restore backup')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Restore backup')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] [-g|--gui] \
-[-s|--source DIRECTORY]")
+            USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] \
+[-g|--gui] [-s|--source DIRECTORY]")
                   $OPTIONS_USAGE"
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -42,22 +42,22 @@ options too.")
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')
 $OPTIONS_HELP"
-readonly HELP
-readonly X_OPTIONS_SHORT='dgs:'
-readonly X_OPTIONS_LONG=',dry-run,gui,source:'
+readonly    HELP
+readonly    X_OPTIONS_SHORT='dgs:'
+readonly    X_OPTIONS_LONG=',dry-run,gui,source:'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare dry_run_option=''
-declare medium=''
-declare option_dry_run=false
-declare option_source=false
-declare source_argument=''
-declare source_medium=''
-declare source=''
+declare     dry_run_option=''
+declare     medium=''
+declare     option_dry_run=false
+declare     option_source=false
+declare     source_argument=''
+declare     source_medium=''
+declare     source=''
 
 
 ###############################################################################
@@ -66,7 +66,7 @@ declare source=''
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                                       \
@@ -126,10 +126,10 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    local -i restore_rc=0
-    local errors=''
-    local rsync_messages=''
-    local target=$HOME
+    local   -i  restore_rc=0
+    local       errors=''
+    local       rsync_messages=''
+    local       target=$HOME
 
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
@@ -285,7 +285,7 @@ function restore_settings {
 
 # This function restores the desktop background.
 function restore_settings_desktop_background {
-    local input_file=''
+    local   input_file=''
 
     if type xdg-user-dir &> /dev/null; then
         input_file=$(xdg-user-dir PICTURES)/$(gettext 'Background')
@@ -303,7 +303,7 @@ function restore_settings_desktop_background {
 
 # This function restores the favorite apps.
 function restore_settings_favorite_apps {
-    local input_file=''
+    local   input_file=''
 
     if type xdg-user-dir &> /dev/null; then
         input_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
@@ -331,8 +331,8 @@ ${green}$(gettext 'The backup has been restored.')${normal}"
 
 # This function tries to unmount the USB device.
 function term_script_unmount {
-    local dev=''
-    local -i rc=0
+    local       dev=''
+    local   -i  rc=0
 
     text=$(gettext 'Disconnect the USB media')
     dev='/dev/'$(

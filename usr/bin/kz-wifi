@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-wifi'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-wifi'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,22 +21,23 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Show WiFi information')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Show WiFi information')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+\$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP
   -g, --gui      $(gettext 'starts in graphics mode')"
-readonly HELP
-readonly X_OPTIONS_SHORT='g'
-readonly X_OPTIONS_LONG=',gui'
+readonly    HELP
+readonly    X_OPTIONS_SHORT='g'
+readonly    X_OPTIONS_LONG=',gui'
 
 
 ###############################################################################
@@ -50,7 +51,7 @@ readonly X_OPTIONS_LONG=',gui'
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                                       \
@@ -95,9 +96,9 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    local -i nmcli_rc=''
-    local nmcli_output=''
-    local text
+    local   -i  nmcli_rc=''
+    local       nmcli_output=''
+    local       text
     text=$(gettext "Record this data to connect to the wireless network \
 later.")
 

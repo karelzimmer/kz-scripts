@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-backup'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-backup'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,15 +21,15 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Make backup')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Make backup')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] \
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] \
 [-g|--gui] [-t|--target DIRECTORY]
                  \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -42,22 +42,22 @@ options too.")
 $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')
 $OPTIONS_HELP"
-readonly HELP
-readonly X_OPTIONS_SHORT='dgt:'
-readonly X_OPTIONS_LONG=',dry-run,gui,target:'
+readonly    HELP
+readonly    X_OPTIONS_SHORT='dgt:'
+readonly    X_OPTIONS_LONG=',dry-run,gui,target:'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare dry_run_option=''
-declare medium=''
-declare option_dry_run=false
-declare option_target=false
-declare target_argument=''
-declare target_medium=''
-declare target=''
+declare     dry_run_option=''
+declare     medium=''
+declare     option_dry_run=false
+declare     option_target=false
+declare     target_argument=''
+declare     target_medium=''
+declare     target=''
 
 
 ###############################################################################
@@ -66,7 +66,7 @@ declare target=''
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                                       \
@@ -236,8 +236,8 @@ function move_file {
 
 # This function copies the desktop background.
 function backup_settings_desktop_background {
-    local input_file=''
-    local output_file=''
+    local   input_file=''
+    local   output_file=''
 
     if type xdg-user-dir &> /dev/null; then
         output_file=$(xdg-user-dir PICTURES)/$(gettext 'Background')
@@ -257,7 +257,7 @@ function backup_settings_desktop_background {
 
 # This function saves the favorite apps.
 function backup_settings_favorite_apps {
-    local output_file=''
+    local   output_file=''
 
     if type xdg-user-dir &> /dev/null; then
         output_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
@@ -273,20 +273,20 @@ function backup_settings_favorite_apps {
 
 # This function creates a list of installed apps.
 function backup_settings_installed_apps {
-    local output_file=''
-    local header1
-    header1=$(gettext '==== START installed packages ====')
-    local footer1
-    footer1=$(gettext '==== END installed packages ====')
-    local header2
-    header2=$(gettext '==== START installed snaps ====')
-    local footer2
-    footer2=$(gettext '==== END installed snaps ====')
-    local header3
-    header3=$(gettext '==== START added repositories ====')
-    local footer3
-    footer3=$(gettext '==== END added repositories ====')
-    local search=/etc/apt/sources.list
+    local   output_file=''
+    local   header1
+            header1=$(gettext '==== START installed packages ====')
+    local   footer1
+            footer1=$(gettext '==== END installed packages ====')
+    local   header2
+            header2=$(gettext '==== START installed snaps ====')
+    local   footer2
+            footer2=$(gettext '==== END installed snaps ====')
+    local   header3
+            header3=$(gettext '==== START added repositories ====')
+    local   footer3
+            footer3=$(gettext '==== END added repositories ====')
+    local   search=/etc/apt/sources.list
 
     if type xdg-user-dir &> /dev/null; then
         output_file=$(xdg-user-dir DOCUMENTS)/Apps
@@ -325,8 +325,8 @@ function backup_settings_installed_apps {
 
 # This function copies the user photo.
 function backup_settings_user_photo {
-    local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file=''
+    local   input_file=/var/lib/AccountsService/icons/"$USER"
+    local   output_file=''
 
     if type xdg-user-dir &> /dev/null; then
         output_file=$(xdg-user-dir PICTURES)/$(gettext 'Userphoto')
@@ -340,11 +340,11 @@ function backup_settings_user_photo {
 
 # This function creates the backup.
 function create_backup {
-    local -i backup_rc=0
-    local errors=''
-    local exclude=''
-    local rsync_messages=''
-    local source=$HOME
+    local   -i  backup_rc=0
+    local       errors=''
+    local       exclude=''
+    local       rsync_messages=''
+    local       source=$HOME
 
     exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
     errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
@@ -471,8 +471,8 @@ ${green}$(gettext 'The backup has been made.')${normal}"
 
 # This function tries to unmount the USB device.
 function term_script_unmount {
-    local dev=''
-    local -i rc=0
+    local       dev=''
+    local   -i  rc=0
 
     text=$(gettext 'Disconnect the USB media')
     dev='/dev/'$(

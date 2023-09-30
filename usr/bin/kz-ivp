@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-ivp'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-ivp'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,26 +21,26 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Execute IVP')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Execute IVP')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
-readonly HELP
+readonly    HELP
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare error_flag=false
+declare     error_flag=false
 
 
 ###############################################################################
@@ -49,7 +49,7 @@ declare error_flag=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -84,8 +84,8 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    local dir=''
-    local scriptname=''
+    local   dir=''
+    local   scriptname=''
 
     # Message catalogue (gettext).
     dir=/usr/share/locale/nl/LC_MESSAGES
@@ -110,8 +110,8 @@ function process_input {
 
 # This function checks the operation of the script and associated files.
 function check_script {
-    local gui='-''-''g''u''i'
-    local root=' kz_common.''c''h''e''c''k''_''u''s''e''r''_''r''o''o''t'
+    local   gui='-''-''g''u''i'
+    local   root=' kz_common.''c''h''e''c''k''_''u''s''e''r''_''r''o''o''t'
 
     # Script.
     if ! "$scriptname" --version |& $logcmd; then

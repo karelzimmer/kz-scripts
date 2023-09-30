@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-menu'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-menu'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,26 +21,27 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Installation menu')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Installation menu')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+\$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
   -g, --gui      $(gettext 'starts in graphics mode')
-$OPTIONS_HELP"
-readonly HELP
-readonly X_OPTIONS_SHORT='g'
-readonly X_OPTIONS_LONG=',gui'
+$OPTIONS_   HELP"
+readonly    HELP
+readonly    X_OPTIONS_SHORT='g'
+readonly    X_OPTIONS_LONG=',gui'
 
-MENU1_TITLE=$(gettext 'Installation menu')
-readonly MENU1_TITLE
-readonly MENU1_HEAD="                 $MENU1_TITLE"
+            MENU1_TITLE=$(gettext 'Installation menu')
+readonly    MENU1_TITLE
+readonly    MENU1_HEAD="                 $MENU1_TITLE"
 readonly -a MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
@@ -57,11 +58,11 @@ readonly -a MENU1_COMMANDS=(
                 "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
-readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
+readonly    MENU1_LINES=${#MENU1_ACTIONS[@]}
 
-MENU2_TITLE=$(gettext 'Command menu')
-readonly MENU2_TITLE
-readonly MENU2_HEAD="                $MENU2_TITLE"
+            MENU2_TITLE=$(gettext 'Command menu')
+readonly    MENU2_TITLE
+readonly    MENU2_HEAD="                $MENU2_TITLE"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
@@ -82,15 +83,15 @@ readonly -a MENU2_COMMANDS=(
                 'kz setup'
                 "$(gettext 'Exit menu')"
             )
-readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
+readonly    MENU2_LINES=${#MENU2_ACTIONS[@]}
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare execute_command=false
-declare -a rows=()
+declare     execute_command=false
+declare -a  rows=()
 
 
 ###############################################################################
@@ -99,7 +100,7 @@ declare -a rows=()
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                                       \
@@ -183,7 +184,7 @@ function process_menu1_gui {
 
 # This function shows and processes menu #1 in TUI mode.
 function process_menu1_tui {
-    local menu1_action=''
+    local   menu1_action=''
 
     msg_info "
 $MENU1_HEAD
@@ -345,7 +346,7 @@ function process_menu2_gui {
 
 # This function shows and processes menu #2 in TUI mode.
 function process_menu2_tui {
-    local menu2_action=''
+    local   menu2_action=''
 
     msg_info "
 $MENU2_HEAD
@@ -400,9 +401,9 @@ function process_menu2_choice {
 
 # This function processes the command corresponding to the choice made.
 function process_commands {
-    local action=''
-    local command=''
-    local -i row=0
+    local       action=''
+    local       command=''
+    local   -i  row=0
 
     if [[ ${#rows[@]} -eq 1 ]]; then
         execute_command=true
@@ -426,10 +427,10 @@ function process_commands {
 
 # This function shows the command before it is executed.
 function show_commands_before_execution {
-    local action=''
-    local command=''
-    local -i row=0
-    local prompt=''
+    local       action=''
+    local       command=''
+    local   -i  row=0
+    local       prompt=''
 
     text="$(gettext 'The following will be executed:')
 "
@@ -486,10 +487,10 @@ $text"
 
 # This function executes the command.
 function execute_command {
-    local -i rc=0
-    local cmd=''
-    local row=''
-    local gui_option=''
+    local   -i  rc=0
+    local       cmd=''
+    local       row=''
+    local       gui_option=''
 
     # Handle manual actions.
     if [[ $command = $(gettext '"manually"') ]]; then

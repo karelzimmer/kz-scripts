@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-install'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-install'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,17 +21,17 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Install apps')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Install apps')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] \
-[-f|--file FILE]
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
+[-c|--cat] [-f|--file FILE]
                   [-g|--gui] [-l|--list] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [APP...]")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -49,29 +49,29 @@ option processing")
 
 $(gettext 'Arguments:
   APP            install APPs')"
-readonly HELP
-readonly X_OPTIONS_SHORT='acf:lgr'
-readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove'
+readonly    HELP
+readonly    X_OPTIONS_SHORT='acf:lgr'
+readonly    X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare -a app_arguments=()
-declare -A failed_apps=()
-declare argument_app=false
-declare command_file=''
-declare commands_found=false
-declare file_argument=''
-declare input_file=''
-declare mode='install'
-declare option_apps=false
-declare option_cat=false
-declare option_file=false
-declare option_list=false
-declare option_remove=false
-declare reboot=true
+declare -a  app_arguments=()
+declare -A  failed_apps=()
+declare     argument_app=false
+declare     command_file=''
+declare     commands_found=false
+declare     file_argument=''
+declare     input_file=''
+declare     mode='install'
+declare     option_apps=false
+declare     option_cat=false
+declare     option_file=false
+declare     option_list=false
+declare     option_remove=false
+declare     reboot=true
 
 
 ###############################################################################
@@ -80,8 +80,8 @@ declare reboot=true
 
 # This function handles the script options and arguments.
 function check_input {
-    local -i app_arg_num=0
-    local parsed=''
+    local   -i  app_arg_num=0
+    local       parsed=''
 
     parsed=$(
         getopt  --alternative                                       \
@@ -281,8 +281,8 @@ APP...${normal}"
 
 # This function processes argument APP.
 function process_argument_app {
-    local app_not_found=false
-    local app_argument=''
+    local   app_not_found=false
+    local   app_argument=''
 
     for app_argument in "${app_arguments[@]}"; do
         process_input_file_by_app
@@ -298,9 +298,9 @@ function process_argument_app {
 # This function generates the command file from the input file and filters by
 # APPs.
 function process_input_file_by_app {
-    local app_match=false
-    local no_app_match=true
-    local input_record=''
+    local   app_match=false
+    local   no_app_match=true
+    local   input_record=''
 
     while read -r input_record; do
         case $input_record in
@@ -334,9 +334,9 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # host.
 function process_input_file_by_host {
-    local host_match=false
-    local host=$HOSTNAME
-    local input_record=''
+    local   host_match=false
+    local   host=$HOSTNAME
+    local   input_record=''
 
     while read -r input_record; do
         case $input_record in
@@ -369,13 +369,13 @@ function process_option_cat {
 
 # This function reads commands from the command file for further processing.
 function process_command_file {
-    local app_name=''
-    local operation
-    operation=$(gettext 'install')
-    local commands_record=''
-    local -i app_seq_num=0
-    local -i app_tot_num=0
-    local -i cmd_seq_num=0
+    local       app_name=''
+    local       operation
+                operation=$(gettext 'install')
+    local       commands_record=''
+    local   -i  app_seq_num=0
+    local   -i  app_tot_num=0
+    local   -i  cmd_seq_num=0
 
     app_tot_num=$(grep --regexp='#.* APP ' --count "$command_file" || true)
 
@@ -413,8 +413,8 @@ function process_command_file {
 
 # This function reports and executes a command from the command file.
 function execute_command {
-    local cmd=${1:-unknown}
-    local app_name_line=''
+    local   cmd=${1:-unknown}
+    local   app_name_line=''
 
     commands_found=true
     ((++cmd_seq_num))
@@ -447,9 +447,9 @@ function execute_command {
 
 # This function controls the termination of the script.
 function term_script {
-    local failed_apps_text=''
-    local operation
-    operation=$(gettext 'install')
+    local   failed_apps_text=''
+    local   operation
+            operation=$(gettext 'install')
 
     if ! $commands_found; then
         msg_info "$(gettext 'No commands to execute.' )"

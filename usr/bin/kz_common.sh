@@ -10,9 +10,9 @@
 # Import
 ###############################################################################
 
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
+export      TEXTDOMAIN=kz
+export      TEXTDOMAINDIR=/usr/share/locale
+source      /usr/bin/gettext.sh
 
 
 ###############################################################################
@@ -20,57 +20,56 @@ source /usr/bin/gettext.sh
 ###############################################################################
 
 # shellcheck disable=SC2034
-readonly MODULE_NAME='kz_common.sh'
-MODULE_DESC=$(gettext 'Common module for shell scripts')
+readonly    MODULE_NAME='kz_common.sh'
+            MODULE_DESC=$(gettext 'Common module for shell scripts')
 # shellcheck disable=SC2034
-readonly MODULE_DESC
+readonly    MODULE_DESC
 
-readonly OK=0
-readonly ERROR=1
+readonly    OK=0
+readonly    ERROR=1
 
-DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly DISTRO
+            DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly    DISTRO
 if type gnome-shell &> /dev/null; then
-    readonly EDITION='desktop'
+    EDITION='desktop'
 else
-    # shellcheck disable=SC2034
-    readonly EDITION='server'
+    EDITION='server'
 fi
-
+readonly    EDITION
 # shellcheck disable=SC2034
-OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
+            OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
 # shellcheck disable=SC2034
-readonly OPTIONS_USAGE
-OPTIONS_HELP="  -h, --help     $(gettext 'give this help list')
+readonly    OPTIONS_USAGE
+            OPTIONS_HELP="  -h, --help     $(gettext 'give this help list')
   -u, --usage    $(gettext 'give a short usage message')
   -v, --version  $(gettext 'print program version')"
 # shellcheck disable=SC2034
-readonly OPTIONS_HELP
+readonly    OPTIONS_HELP
 # shellcheck disable=SC2034
-readonly OPTIONS_SHORT='huv'
+readonly    OPTIONS_SHORT='huv'
 # shellcheck disable=SC2034
-readonly OPTIONS_LONG='help,usage,version'
+readonly    OPTIONS_LONG='help,usage,version'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare -a commandline_args=()
-declare logcmd=''
-declare option_gui=false
+declare -a  commandline_args=()
+declare     logcmd=''
+declare     option_gui=false
 # pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-declare program_exec=${0/#./$PROGRAM_PATH}
-declare text=''
-declare title=''
+declare     program_exec=${0/#./$PROGRAM_PATH}
+declare     text=''
+declare     title=''
 
 # Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
-declare blue=''
-declare bold=''
-declare green=''
-declare normal=''
-declare red=''
-declare yellow=''
+declare     blue=''
+declare     bold=''
+declare     green=''
+declare     normal=''
+declare     red=''
+declare     yellow=''
 
 
 ###############################################################################
@@ -79,9 +78,9 @@ declare yellow=''
 
 # This function checks for active updates and waits for the next check.
 function check_for_active_updates {
-    local -i check_wait=10
-    local text
-    text=$(eval_gettext \
+    local   -i  check_wait=10
+    local       text
+                text=$(eval_gettext \
             "Wait \${check_wait}s for another package manager to finish...")
 
     while sudo  fuser                                       \
@@ -101,7 +100,7 @@ function check_for_active_updates {
 # This function checks if the computer is running on battery power and prompts
 # the user to continue.
 function check_on_ac_power {
-    local -i on_battery=0
+    local   -i  on_battery=0
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
@@ -115,7 +114,7 @@ It is recommended to connect the computer to the wall socket.')"
 
 # This function checks if the user is root and restarts the script if not.
 function check_user_root {
-    local -i pkexec_rc=0
+    local   -i  pkexec_rc=0
 
     # shellcheck disable=SC2310
     if ! check_user_sudo; then
@@ -182,18 +181,17 @@ function init_script {
     fi
 
     commandline_args=("$@")
+    # shellcheck disable=SC2034
     USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
 information.")
-    # shellcheck disable=SC2034
-    readonly USAGE_LINE
 }
 
 
 # This function returns an error message and logs it.
 function msg_error {
     if $option_gui; then
-        local title
-        title=$(eval_gettext "Error message \$DISPLAY_NAME")
+        local   title
+                title=$(eval_gettext "Error message \$DISPLAY_NAME")
 
         zenity  --error                 \
                 --no-markup             \
@@ -212,8 +210,8 @@ function msg_error {
 # This function returns an informational message.
 function msg_info {
     if $option_gui; then
-        local title
-        title=$(eval_gettext "Information \$DISPLAY_NAME")
+        local   title
+                title=$(eval_gettext "Information \$DISPLAY_NAME")
 
         zenity  --info                  \
                 --no-markup             \
@@ -236,8 +234,8 @@ function msg_log {
 # This function returns a warning message and logs it.
 function msg_warning {
     if $option_gui; then
-        local title
-        title=$(eval_gettext "Warning \$DISPLAY_NAME")
+        local   title
+                title=$(eval_gettext "Warning \$DISPLAY_NAME")
 
         zenity  --warning               \
                 --no-markup             \
@@ -302,9 +300,9 @@ $(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 
 # This function displays version, author, and license information.
 function process_option_version {
-    local build_id=''
-    local grep_expr='# <https://creativecommons.org'
-    local program_year=''
+    local   build_id=''
+    local   grep_expr='# <https://creativecommons.org'
+    local   program_year=''
 
     if [[ -e /usr/local/etc/kz-build-id ]]; then
         build_id=' ('$(cat /usr/local/etc/kz-build-id)')'
@@ -356,14 +354,14 @@ function set_terminal_attributes {
 # This function processes the signals for which the trap was set by function
 # init_script.
 function signal {
-    local signal=${1:-unknown}
-    local -i lineno=${2:-unknown}
-    local function=${3:-unknown}
-    local command=${4:-unknown}
-    local -i rc=${5:-$ERROR}
-    local rc_desc=''
-    local -i rc_desc_signalno=0
-    local status="${red}$rc/error${normal}"
+    local       signal=${1:-unknown}
+    local   -i  lineno=${2:-unknown}
+    local       function=${3:-unknown}
+    local       command=${4:-unknown}
+    local   -i  rc=${5:-$ERROR}
+    local       rc_desc=''
+    local   -i  rc_desc_signalno=0
+    local       status="${red}$rc/error${normal}"
 
     case $rc in
         0)

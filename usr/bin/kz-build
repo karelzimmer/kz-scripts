@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-build'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-build'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,31 +21,31 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Build package kz')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Build package kz')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
-readonly HELP
+readonly    HELP
 
-readonly DOCS_REPO=$HOME/kz-docs
-readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly    DOCS_REPO=$HOME/kz-docs
+readonly    SCRIPTS_REPO=$HOME/kz-scripts
 
-readonly deb_repo=$HOME/kz-deb
-readonly DEB_REPO_APPDIR=$deb_repo/app
-readonly DEB_REPO_DISTDIR=$deb_repo/dist
-readonly DEB_NAME=kz_365_all.deb
+readonly    DEB_REPO=$HOME/kz-deb
+readonly    DEB_REPO_APPDIR=$DEB_REPO/app
+readonly    DEB_REPO_DISTDIR=$DEB_REPO/dist
+readonly    DEB_NAME=kz_365_all.deb
 
-readonly UPLOADS_REPO=$HOME/kz-uploads
-readonly UPLOADS_REPO_APPDIR=$UPLOADS_REPO/app
-readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
+readonly    UPLOADS_REPO=$HOME/kz-uploads
+readonly    UPLOADS_REPO_APPDIR=$UPLOADS_REPO/app
+readonly    UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 readonly -A UPLOADS_SOURCES=(
             [kz-docs]=$DOCS_REPO
@@ -73,7 +73,7 @@ readonly -A DEB_TARGETS=(
 # Variables
 ###############################################################################
 
-declare error_flag=false
+declare     error_flag=false
 
 
 ###############################################################################
@@ -82,7 +82,7 @@ declare error_flag=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -143,14 +143,14 @@ function process_input {
 # This function check that the repos are in the desired state.
 function check_repos {
     msg_info "$(gettext 'Check that all repos are on branch main...')"
-    for repo in $deb_repo $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
+    for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             msg_warning "$(eval_gettext "Repo \$repo not on branch main.")"
         fi
     done
     msg_info "$(gettext 'Check that all repos are clean...')"
-    for repo in $deb_repo $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
+    for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
         git status &> /dev/null
@@ -172,9 +172,9 @@ function check_scripts {
 
 # This function builds the website.
 function build_uploads {
-    local file=''
-    local pdfdir=''
-    local tmptxt=''
+    local   file=''
+    local   pdfdir=''
+    local   tmptxt=''
 
     msg_info "$(gettext 'Build website...')"
 
@@ -266,8 +266,9 @@ function build_uploads {
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
 function generate_mo {
-    local lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    local   lc_messages=''
 
+    lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
     msg_info "$(gettext 'Generate .mo file (mogen)...')"
     msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
 }
@@ -275,8 +276,8 @@ function generate_mo {
 
 # This function builds package kz.
 function build_deb {
-    local build_id=''
-    local file=''
+    local   build_id=''
+    local   file=''
 
     msg_info "$(gettext 'Build package...')"
 

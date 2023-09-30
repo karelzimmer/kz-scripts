@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-check'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-check'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,26 +21,26 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Checking scripts')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Checking scripts')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
-readonly HELP
+readonly    HELP
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare error_flag=false
+declare     error_flag=false
 
 
 ###############################################################################
@@ -49,7 +49,7 @@ declare error_flag=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -84,10 +84,10 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    local script=''
-    local scriptdir=''
-    local scriptname=''
-    local scripts_repo=$HOME/kz-scripts
+    local   script=''
+    local   scriptdir=''
+    local   scriptname=''
+    local   scripts_repo=$HOME/kz-scripts
 
     cd "$scripts_repo"
     while read -r script; do
@@ -139,9 +139,9 @@ function process_input {
 
 # This function checks Shell and Python script code.
 function check_code {
-    local bash_script='#!''/usr/bin/bash'
-    local python_script='#!''/usr/bin/python3'
-    local tab_completion_script='# ''shellcheck shell=bash'
+    local   bash_script='#!''/usr/bin/bash'
+    local   python_script='#!''/usr/bin/python3'
+    local   tab_completion_script='# ''shellcheck shell=bash'
 
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
         check_shellcheck
@@ -167,9 +167,9 @@ function check_pycodestyle {
 
 # This function checks on record length.
 function check_record_length {
-    local -i max_line_length=79
-    local -i max_line_length_found=0
-    local python_script='#!''/usr/bin/python3'
+    local   -i  max_line_length=79
+    local   -i  max_line_length_found=0
+    local       python_script='#!''/usr/bin/python3'
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp --regexp="$python_script" "$script"; then
@@ -205,9 +205,9 @@ function check_shellcheck {
 
 # This function checks the existence of tags.
 function check_tags {
-    local bug='B''U''G'
-    local fixme='F''I''X''M''E'
-    local todo='T''O''D''O'
+    local   bug='B''U''G'
+    local   fixme='F''I''X''M''E'
+    local   todo='T''O''D''O'
 
     if grep --quiet             \
             --regexp="$bug"     \

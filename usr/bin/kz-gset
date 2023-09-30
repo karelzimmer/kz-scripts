@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-gset'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-gset'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,17 +21,17 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Change GUI')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Change GUI')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addfavaft FAVORITE] \
-[-b|--addfavbef FAVORITE]
+            USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME \
+[-a|--addfavaft FAVORITE] [-b|--addfavbef FAVORITE]
                [-d|--delfav FAVORITE] [-l|--list] [-r|--resetfavs]
                [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]
                \$OPTIONS_USAGE")"
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -53,9 +53,9 @@ $(gettext "  -a, --addfavaft FAVORITE
   -x, --delappfolder APPFOLDER
                  delete APPFOLDER")
 $OPTIONS_HELP"
-readonly HELP
-readonly X_OPTIONS_SHORT='a:b:d:lrf:x:'
-readonly X_OPTIONS_LONG=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
+readonly    HELP
+readonly    X_OPTIONS_SHORT='a:b:d:lrf:x:'
+readonly    X_OPTIONS_LONG=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
 addappfolder:,delappfolder:"
 
 
@@ -63,19 +63,19 @@ addappfolder:,delappfolder:"
 # Variables
 ###############################################################################
 
-declare appfolder=''
-declare config_a=''
-declare config_b=''
-declare desktopfile=''
-declare favorite_argument=''
-declare folder_argument=''
-declare option_addappfolder=false
-declare option_addfavaft=false
-declare option_addfavbef=false
-declare option_delappfolder=false
-declare option_delfav=false
-declare option_list=false
-declare option_resetfavs=false
+declare     appfolder=''
+declare     config_a=''
+declare     config_b=''
+declare     desktopfile=''
+declare     favorite_argument=''
+declare     folder_argument=''
+declare     option_addappfolder=false
+declare     option_addfavaft=false
+declare     option_addfavbef=false
+declare     option_delappfolder=false
+declare     option_delfav=false
+declare     option_list=false
+declare     option_resetfavs=false
 
 
 ###############################################################################
@@ -84,7 +84,7 @@ declare option_resetfavs=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                                       \
@@ -207,7 +207,7 @@ function process_input {
 
 # This function adds a favorite to the end of the dash/dock.
 function process_option_addfavaft  {
-    local favorite_apps=''
+    local   favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
@@ -224,7 +224,7 @@ function process_option_addfavaft  {
 
 # This function adds a favorite to the beginning of the dash/dock.
 function process_option_addfavbef  {
-    local favorite_apps=''
+    local   favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
@@ -241,7 +241,7 @@ function process_option_addfavbef  {
 
 # This function removes a favorite from the dash/dock.
 function process_option_delfav  {
-    local favorite_apps=''
+    local   favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
@@ -275,9 +275,9 @@ function process_option_resetfavs  {
 
 # This function adds an application folder.
 function process_option_addappfolder  {
-    local app_folders=''
-    local schema=''
-    local path=''
+    local   app_folders=''
+    local   schema=''
+    local   path=''
 
     app_folders=$(gsettings get org.gnome.desktop.app-folders folder-children)
 
@@ -299,9 +299,9 @@ function process_option_addappfolder  {
 
 # This function deletes an application folder.
 function process_option_delappfolder  {
-    local app_folders=''
-    local schema=''
-    local path=''
+    local   app_folders=''
+    local   schema=''
+    local   path=''
 
     app_folders=$(gsettings get org.gnome.desktop.app-folders folder-children)
 
@@ -335,8 +335,8 @@ function capture_gui_changes {
 # This function stores the GUI configuration database.
 function save_configuration_database {
     # shellcheck disable=SC2034
-    local fase=${1:-unknown}
-    local output_file=${2:-unknown}
+    local   fase=${1:-unknown}
+    local   output_file=${2:-unknown}
 
     gsettings list-recursively > "$output_file" 2> >($logcmd)
 
@@ -350,8 +350,8 @@ function save_configuration_database {
 
 # This function reports the changes to the GUI configuration database.
 function report_database_changes {
-    local output_file1=${1:-unknown}
-    local output_file2=${2:-unknown}
+    local   output_file1=${1:-unknown}
+    local   output_file2=${2:-unknown}
 
     msg_info "$(
 gettext 'CHANGEs in the configuration database,

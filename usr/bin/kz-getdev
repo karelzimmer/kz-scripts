@@ -11,9 +11,9 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-getdev'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
+readonly    PROGRAM_NAME='kz-getdev'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
 source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 
 
@@ -21,19 +21,19 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Build development environment')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Build development environment')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
-readonly HELP
+readonly    HELP
 
 
 ###############################################################################
@@ -47,7 +47,7 @@ readonly HELP
 
 # This function handles the script options and arguments.
 function check_input {
-    local parsed=''
+    local   parsed=''
 
     parsed=$(
         getopt  --alternative                       \
@@ -100,7 +100,7 @@ function process_input {
 
 # This function check and installs dependencies.
 function check_dependencies {
-    local escape='gettext'
+    local   escape='gettext'
 
     printf '%s\n' "$(gettext 'Check dependencies...')"
     check_for_active_updates
@@ -132,7 +132,7 @@ function check_dependencies {
 
 # This function retrieves the public repos.
 function pull_repos {
-    local bin_repo=/home/"$USER"/bin
+    local   bin_repo=/home/"$USER"/bin
 
     git config --global user.name 'Karel Zimmer'
     git config --global user.email 'karel.zimmer@gmail.com'
@@ -156,15 +156,15 @@ function pull_repos {
 
 # This function downloads the website.
 function download_website {
-    local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=/httpdocs
-    local ftp_to=$HOME/kz-uploads/dist
-    local ftp_opts='--delete --verbose'
-    local ftp_exclude='--exclude icaclient_20.04.0.21_amd64.deb'
-    local ftp_cmd="mirror $ftp_exclude $ftp_opts $ftp_from $ftp_to; exit"
-    local ftp_host=server106.hosting2go.nl
-    local ftp_user=kzimmer
-    local ftp_login=$HOME/.kz-$ftp_host
+    local   ftp_set='set ssl:verify-certificate no'
+    local   ftp_from=/httpdocs
+    local   ftp_to=$HOME/kz-uploads/dist
+    local   ftp_opts='--delete --verbose'
+    local   ftp_exclude='--exclude icaclient_20.04.0.21_amd64.deb'
+    local   ftp_cmd="mirror $ftp_exclude $ftp_opts $ftp_from $ftp_to; exit"
+    local   ftp_host=server106.hosting2go.nl
+    local   ftp_user=kzimmer
+    local   ftp_login=$HOME/.kz-$ftp_host
 
     printf '%s\n' "$(gettext 'Download website (lftp)...')"
     if ! [[ -f $ftp_login ]]; then
