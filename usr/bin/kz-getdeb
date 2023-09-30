@@ -11,17 +11,24 @@
 # Import
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-getdeb'
-PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly PROGRAM_PATH
-if ! source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --ide=$PROGRAM_NAME);
+readonly    PROGRAM_NAME='kz-getdeb'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
+if ! source "$PROGRAM_PATH"/kz_common.sh &> >(systemd-cat --ide=$PROGRAM_NAME);
 then
-    temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
+    printf  '%s\n'                              \
+            '==== START get kz_common.sh =====' \
+            &> >(systemd-cat --identifier=$PROGRAM_NAME)
+    declare temp_kz_common
+            temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     wget    --output-document="$temp_kz_common"                             \
             https://karelzimmer.nl/assets/kz-scripts/usr/bin/kz_common.sh   \
-            2> >(systemd-cat --identifier=$PROGRAM_NAME)
-     source "$temp_kz_common" 2> >(systemd-cat --identifier=$PROGRAM_NAME)
-    rm "$temp_kz_common" 2> >(systemd-cat --identifier=$PROGRAM_NAME)
+            &> >(systemd-cat --identifier=$PROGRAM_NAME)
+    source  "$temp_kz_common" &> >(systemd-cat --identifier=$PROGRAM_NAME)
+    rm      "$temp_kz_common" &> >(systemd-cat --identifier=$PROGRAM_NAME)
+    printf  '%s\n'                              \
+            '==== END get kz_common.sh ====='   \
+            &> >(systemd-cat --identifier=$PROGRAM_NAME)
 fi
 
 
@@ -29,18 +36,18 @@ fi
 # Constants
 ###############################################################################
 
-PROGRAM_DESC=$(gettext 'Install kz package')
-readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+            PROGRAM_DESC=$(gettext 'Install kz package')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly USAGE
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $OPTIONS_HELP"
-readonly HELP
+readonly    HELP
 
 
 ###############################################################################
@@ -54,9 +61,9 @@ readonly HELP
 
 # This function handles the script options and arguments.
 function check_input {
-    local files_found
-    files_found=$(ls -C kz.{1..99} 2> /dev/null || true)
-    local parsed=''
+    local   files_found
+            files_found=$(ls -C kz.{1..99} 2> /dev/null || true)
+    local   parsed=''
 
     # If the kz.{1..99} files exist, possible after multiple wget's, clean them
     # up and start over.
@@ -124,8 +131,8 @@ function cleanup {
 
 # This function installs package kz.
 function install_package {
-    local site_deb='https://karelzimmer.nl/assets/kz/kz_365_all.deb'
-    local temp_deb=''
+    local   site_deb='https://karelzimmer.nl/assets/kz/kz_365_all.deb'
+    local   temp_deb=''
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
@@ -141,16 +148,16 @@ function install_package {
             reinstall                       \
             --yes                           \
             "$temp_deb"
-    rm "$temp_deb"
+    rm  "$temp_deb"
 }
 
 
 # This function controls the termination of the script.
 function term_script {
-    local title
-    title=$(gettext 'Finished')
-    local text
-    text=$(gettext "Package kz has been successfully installed.
+    local   title
+            title=$(gettext 'Finished')
+    local   text
+            text=$(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described
 in the Checklist installation.
