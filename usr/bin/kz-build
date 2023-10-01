@@ -173,8 +173,6 @@ function check_scripts {
 # This function builds the website.
 function build_uploads {
     local   file=''
-    local   pdfdir=''
-    local   tmptxt=''
 
     msg_info "$(gettext 'Build website...')"
 
@@ -195,70 +193,27 @@ function build_uploads {
         mkdir --parents "$dir" |& $logcmd
     done
 
-    # Populate kz-uploads/dist/ with modified files in repo kz-docs, and create
-    # a PDF of these modified files.
+    # Populate kz-uploads/dist/ with a PDF of files in repo kz-docs.
     cd "${UPLOADS_SOURCES[kz-docs]}"
     for file in *.odt *.txt; do
-        if ! diff "$file" "${UPLOADS_TARGETS[kz-docs]}/$file" &> /dev/null
-        then
-            cp  --preserve                      \
-                --verbose                       \
-                "$file"                         \
-                "${UPLOADS_TARGETS[kz-docs]}"   |& $logcmd
-            # Craete a PDF.
-            lowriter    --headless                              \
-                        --convert-to pdf                        \
-                        --outdir "${UPLOADS_TARGETS[kz-docs]}"  \
-                        "$file"
-        fi
+        lowriter    --headless                              \
+                    --convert-to pdf                        \
+                    --outdir "${UPLOADS_TARGETS[kz-docs]}"  \
+                    "$file"
     done
     cd "$HOME"
 
-    # Fill kz-uploads/dist/ with modified files in repo kz-scripts, and create
-    # a PDF of these modified files.
+    # Populate kz-uploads/dist/ with a PDF of man page files in repo
+    # kz-scripts.
     cd "${UPLOADS_SOURCES[kz-scripts]}"
     while read -r file; do
-        if ! diff "$file" "${UPLOADS_TARGETS[kz-scripts]}/$file" &> /dev/null
-        then
-            cp  --parents                           \
-                --preserve                          \
-                --verbose                           \
-                "$file"                             \
-                "${UPLOADS_TARGETS[kz-scripts]}"    |& $logcmd
-            # Craete a PDF.
-            if grep --quiet --regexp='^''.TH ' "$file"; then
-                # Man page file.
-                man --troff "${UPLOADS_SOURCES[kz-scripts]}/$file" |
-                ps2pdf - "${UPLOADS_TARGETS[kz-scripts]}/$file.pdf"
-            else
-                # Script file.
-                # Must copy each file with suffix e.g. .txt added (tmptxt)
-                # before converting because:
-                # 1. desktop-files have XML inside which gets interpreted by
-                #    Libre Office,
-                # 2. 'lowriter convert-to pdf' replaces last suffix (if any) by
-                #    .pdf.
-                tmptxt=/tmp/$(basename "$file").txt
-                cp "$file" "$tmptxt"
-                pdfdir=${UPLOADS_TARGETS[kz-scripts]}/$(dirname "$file")
-
-                lowriter    --headless          \
-                            --convert-to pdf    \
-                            --outdir "$pdfdir"  \
-                            "$tmptxt"
-                rm "$tmptxt"
-            fi
+        # Create a man page PDF.
+        printf '%s\n' "Create PDF for man page $file"
+        if grep --quiet --regexp='^''.TH ' "$file"; then
+            man --troff "${UPLOADS_SOURCES[kz-scripts]}/$file" |
+            ps2pdf - "${UPLOADS_TARGETS[kz-scripts]}/$file.pdf"
         fi
-    done < <(
-            find .                      \
-            -type f                     \
-            -not -path './.git*'        \
-            -not -path '*/__pycache__*' \
-            -not -name kz.mo            \
-            -not -name LICENSE          \
-            -not -name README.md        \
-            -print
-            )
+    done < <(find . -name '*.1' -type f -print)
     cd "$HOME"
 }
 
