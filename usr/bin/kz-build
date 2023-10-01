@@ -285,7 +285,6 @@ function build_deb {
     # package, so kz-getdeb keeps working.
         cp  --preserve                              \
             --verbose                               \
-            "$file"                                 \
             "$SCRIPTS_REPO"/usr/bin/kz_common.sh    \
             "$SCRIPTS_REPO"/usr/bin/kz-getdeb       \
             "${UPLOADS_TARGETS[deb]}/"              |& $logcmd
