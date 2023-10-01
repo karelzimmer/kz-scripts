@@ -173,6 +173,7 @@ function check_scripts {
 # This function builds the website.
 function build_uploads {
     local   file=''
+    local   filename=''
 
     msg_info "$(gettext 'Build website...')"
 
@@ -191,30 +192,34 @@ function build_uploads {
     for dir in "${UPLOADS_TARGETS[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
-    mkdir   --parents                                           \
-            "${UPLOADS_TARGETS[kz-scripts]}"/usr/share/man/man1 |& $logcmd
+    mkdir   --parents                                               \
+            "${UPLOADS_TARGETS[kz-scripts]}"/usr/share/man/man1     |& $logcmd
     mkdir   --parents                                               \
             "${UPLOADS_TARGETS[kz-scripts]}"/usr/share/man/nl/man1  |& $logcmd
 
-    # Populate kz-uploads/dist/ with a PDF of files in repo kz-docs.
+    # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
     cd "${UPLOADS_SOURCES[kz-docs]}"
     for file in *.odt *.txt; do
-        lowriter    --headless                              \
-                    --convert-to pdf                        \
-                    --outdir "${UPLOADS_TARGETS[kz-docs]}"  \
-                    "$file"
+        filename=${file%.*}
+        if [[ $file -nt "${UPLOADS_TARGETS[kz-docs]}/$filename".pdf ]]; then
+            lowriter    --headless                              \
+                        --convert-to pdf                        \
+                        --outdir "${UPLOADS_TARGETS[kz-docs]}"  \
+                        "$file"
+        fi
     done
     cd "$HOME"
 
-    # Populate kz-uploads/dist/ with a PDF of man page files in repo
+    # Populate kz-uploads/dist/ with a PDF of modified man page files in repo
     # kz-scripts.
     cd "${UPLOADS_SOURCES[kz-scripts]}"
     while read -r file; do
-        # Create a man page PDF.
-        printf '%s\n' "Create PDF for man page $file"
         if grep --quiet --regexp='^''.TH ' "$file"; then
-            man --troff "${UPLOADS_SOURCES[kz-scripts]}/$file" |
-            ps2pdf - "${UPLOADS_TARGETS[kz-scripts]}/$file.pdf"
+            if [[ $file -nt "${UPLOADS_TARGETS[kz-scripts]}/$file".pdf ]]; then
+                printf '%s\n' "Create PDF for man page $file"
+                man --troff "${UPLOADS_SOURCES[kz-scripts]}/$file" |
+                ps2pdf - "${UPLOADS_TARGETS[kz-scripts]}/$file".pdf
+            fi
         fi
     done < <(find . -name '*.1' -type f -print)
     cd "$HOME"
