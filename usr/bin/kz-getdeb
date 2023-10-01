@@ -21,8 +21,9 @@ then
             &> >(systemd-cat --identifier=$PROGRAM_NAME)
     declare temp_kz_common=''
             temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
-    wget    --output-document="$temp_kz_common"             \
-            https://karelzimmer.nl/assets/kz/kz_common.sh   \
+    declare github_uri='https://raw.githubusercontent.com/karelzimmer/'
+            github_uri+='kz-scripts/main/usr/bin/kz_common.sh'
+    wget    --output-document="$temp_kz_common" $github_uri \
             &> >(systemd-cat --identifier=$PROGRAM_NAME)
     source  "$temp_kz_common" &> >(systemd-cat --identifier=$PROGRAM_NAME)
     rm      "$temp_kz_common" &> >(systemd-cat --identifier=$PROGRAM_NAME)
@@ -30,7 +31,7 @@ then
             '==== END get kz_common.sh ====='   \
             &> >(systemd-cat --identifier=$PROGRAM_NAME)
 fi
-
+exit
 
 ###############################################################################
 # Constants
