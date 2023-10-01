@@ -187,11 +187,14 @@ function build_uploads {
             "$UPLOADS_REPO_APPDIR"/ \
             "$UPLOADS_REPO_DISTDIR" |& $logcmd
 
-    # Make sure all necessary directories are available for the sync with the
-    # cp command.
+    # Make sure all necessary directories are available.
     for dir in "${UPLOADS_TARGETS[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
+    mkdir   --parents                                           \
+            "${UPLOADS_TARGETS[kz-scripts]}"/usr/share/man/man1 |& $logcmd
+    mkdir   --parents                                               \
+            "${UPLOADS_TARGETS[kz-scripts]}"/usr/share/man/nl/man1  |& $logcmd
 
     # Populate kz-uploads/dist/ with a PDF of files in repo kz-docs.
     cd "${UPLOADS_SOURCES[kz-docs]}"
