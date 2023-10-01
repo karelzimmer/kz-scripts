@@ -31,7 +31,7 @@ then
             '==== END get kz_common.sh ====='   \
             &> >(systemd-cat --identifier=$PROGRAM_NAME)
 fi
-exit
+
 
 ###############################################################################
 # Constants
