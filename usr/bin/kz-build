@@ -280,6 +280,15 @@ function build_deb {
                 -Zxz                                \
                 "$DEB_REPO_DISTDIR"                 \
                 "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $logcmd
+
+    # Add kz-getdeb and kz_common.sh to the same location as the Debian
+    # package, so kz-getdeb keeps working.
+        cp  --preserve                              \
+            --verbose                               \
+            "$file"                                 \
+            "$SCRIPTS_REPO"/usr/bin/kz_common.sh    \
+            "$SCRIPTS_REPO"/usr/bin/kz-getdeb       \
+            "${UPLOADS_TARGETS[deb]}/"              |& $logcmd
 }
 
 
