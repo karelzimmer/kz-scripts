@@ -418,7 +418,7 @@ $command, code: $rc ($rc_desc)"
 
     case $signal in
         err)
-            msg_log "
+            msg_error "
 $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
@@ -430,7 +430,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         *)
-            msg_log "
+            msg_error "
 $(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;
