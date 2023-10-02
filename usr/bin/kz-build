@@ -192,10 +192,6 @@ function build_uploads {
     for dir in "${UPLOADS_TARGETS[@]}"; do
         mkdir --parents "$dir" |& $logcmd
     done
-    mkdir   --parents                                               \
-            "${UPLOADS_TARGETS[kz-scripts]}"/usr/share/man/man1     |& $logcmd
-    mkdir   --parents                                               \
-            "${UPLOADS_TARGETS[kz-scripts]}"/usr/share/man/nl/man1  |& $logcmd
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
     cd "${UPLOADS_SOURCES[kz-docs]}"
