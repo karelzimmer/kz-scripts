@@ -49,17 +49,15 @@ readonly    UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 readonly -A UPLOADS_SOURCES=(
             [kz-docs]=$DOCS_REPO
-         [kz-scripts]=$SCRIPTS_REPO
             )
 readonly -A UPLOADS_TARGETS=(
             [kz-docs]=$UPLOADS_REPO_DISTDIR/assets/kz-docs
-         [kz-scripts]=$UPLOADS_REPO_DISTDIR/assets/kz-scripts
                 [deb]=$UPLOADS_REPO_DISTDIR/assets/kz
             )
 
 readonly -A DEB_SOURCES=(
-                [app]=$DEB_REPO_APPDIR
          [kz-scripts]=$SCRIPTS_REPO
+                [app]=$DEB_REPO_APPDIR
             )
 readonly -A DEB_TARGETS=(
                [dist]=$DEB_REPO_DISTDIR
