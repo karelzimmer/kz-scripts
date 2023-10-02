@@ -110,7 +110,6 @@ function check_dependencies {
             curl                \
             fakeroot            \
             $escape             \
-            ghostscript         \
             git                 \
             jq                  \
             lftp                \

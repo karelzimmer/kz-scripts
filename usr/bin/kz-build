@@ -209,20 +209,6 @@ function build_uploads {
         fi
     done
     cd "$HOME"
-
-    # Populate kz-uploads/dist/ with a PDF of modified man page files in repo
-    # kz-scripts.
-    cd "${UPLOADS_SOURCES[kz-scripts]}"
-    while read -r file; do
-        if grep --quiet --regexp='^''.TH ' "$file"; then
-            if [[ $file -nt "${UPLOADS_TARGETS[kz-scripts]}/$file".pdf ]]; then
-                printf '%s\n' "Create PDF for man page $file"
-                man --troff "${UPLOADS_SOURCES[kz-scripts]}/$file" |
-                ps2pdf - "${UPLOADS_TARGETS[kz-scripts]}/$file".pdf
-            fi
-        fi
-    done < <(find . -name '*.1' -type f -print)
-    cd "$HOME"
 }
 
 
