@@ -1,5 +1,5 @@
 ###############################################################################
-# Desktop configuration file for Telegram Web App.
+# Desktop configuration file for Telegram web app.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Telegram
-Comment=Telegram Web App
+Comment=Telegram web app
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://web.telegram.org

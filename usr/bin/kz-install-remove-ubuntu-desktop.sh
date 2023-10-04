@@ -34,7 +34,7 @@ sudo apt-get remove --yes icaclient libidn11
 sudo apt-get remove --yes clamtk-gnome
 
 # APP cockpit pc06
-# Web App: https://localhost:9090
+# Web app: https://localhost:9090
 sudo apt-get remove --yes cockpit
 
 # APP cups pc-van-emily

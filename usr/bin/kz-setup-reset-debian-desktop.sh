@@ -75,6 +75,6 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 kz-gset --delfav=code_code
 
 # APP webmin karel@pc07
-# Web App: https://localhost:10000
+# Web app: https://localhost:10000
 kz-gset --delfav=kz-webmin
 rm --force "$HOME"/.local/share/applications/kz-webmin.desktop

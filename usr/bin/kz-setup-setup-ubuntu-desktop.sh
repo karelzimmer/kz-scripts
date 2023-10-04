@@ -10,7 +10,7 @@
 kz-gset --addfavaft=calibre-gui
 
 # APP cockpit karel@pc06
-# Web App: https://localhost:9090
+# Web app: https://localhost:9090
 kz-gset --addfavaft=kz-cockpit
 
 # APP citrix toos@pc-van-ria-en-toos

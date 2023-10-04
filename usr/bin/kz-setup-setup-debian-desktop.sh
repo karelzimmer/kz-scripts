@@ -85,5 +85,5 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
 # APP webmin karel@pc07
-# Web App: https://localhost:10000
+# Web app: https://localhost:10000
 kz-gset --addfavaft=kz-webmin

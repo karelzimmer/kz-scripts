@@ -987,49 +987,49 @@ msgstr ""
 msgid "Cockpit"
 msgstr ""
 
-msgid "Cockpit Web App"
+msgid "Cockpit web app"
 msgstr ""
 
 msgid "Spotify"
 msgstr ""
 
-msgid "Spotify Web App"
+msgid "Spotify web app"
 msgstr ""
 
 msgid "Skype"
 msgstr ""
 
-msgid "Skype Web App"
+msgid "Skype web app"
 msgstr ""
 
 msgid "Teams"
 msgstr ""
 
-msgid "Teams Web App"
+msgid "Teams web app"
 msgstr ""
 
 msgid "Telegram"
 msgstr ""
 
-msgid "Telegram Web App"
+msgid "Telegram web app"
 msgstr ""
 
 msgid "Webmin"
 msgstr ""
 
-msgid "Webmin Web App"
+msgid "Webmin web app"
 msgstr ""
 
 msgid "WhatsApp"
 msgstr ""
 
-msgid "WhatsApp Web App"
+msgid "WhatsApp web app"
 msgstr ""
 
 msgid "Zoom"
 msgstr ""
 
-msgid "Zoom Web App"
+msgid "Zoom web app"
 msgstr ""
 
 msgid "Install apps and changes system settings"

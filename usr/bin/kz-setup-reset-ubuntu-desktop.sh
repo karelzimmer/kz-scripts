@@ -10,7 +10,7 @@
 kz-gset --delfav=calibre-gui
 
 # APP cockpit karel@pc06
-# Web App: https://localhost:9090
+# Web app: https://localhost:9090
 kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 

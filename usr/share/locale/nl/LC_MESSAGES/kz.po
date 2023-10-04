@@ -1187,49 +1187,49 @@ msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 msgid "Cockpit"
 msgstr "Cockpit"
 
-msgid "Cockpit Web App"
+msgid "Cockpit web app"
 msgstr "Cockpit-webapp"
 
 msgid "Spotify"
 msgstr ""
 
-msgid "Spotify Web App"
+msgid "Spotify web app"
 msgstr "Spotify-webapp"
 
 msgid "Skype"
 msgstr "Skype"
 
-msgid "Skype Web App"
+msgid "Skype web app"
 msgstr "Skype-webapp"
 
 msgid "Teams"
 msgstr "Teams"
 
-msgid "Teams Web App"
+msgid "Teams web app"
 msgstr "Teams-webapp"
 
 msgid "Telegram"
 msgstr "Telegram"
 
-msgid "Telegram Web App"
+msgid "Telegram web app"
 msgstr "Telegram-webapp"
 
 msgid "Webmin"
 msgstr "Webmin"
 
-msgid "Webmin Web App"
+msgid "Webmin web app"
 msgstr "Webmin-webapp"
 
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
-msgid "WhatsApp Web App"
+msgid "WhatsApp web app"
 msgstr "WhatsApp-webapp"
 
 msgid "Zoom"
 msgstr "Zoom"
 
-msgid "Zoom Web App"
+msgid "Zoom web app"
 msgstr "Zoom-webapp"
 
 msgid "Install apps and changes system settings"

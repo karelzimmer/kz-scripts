@@ -66,7 +66,7 @@ sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice
 sudo apt-get install --yes mlocate
 
 # APP signal pc07
-# Web App: n/a
+# Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
@@ -76,7 +76,7 @@ sudo apt-get install --yes signal-desktop
 sudo apt-get install --yes spice-vdagent
 
 # APP teamviewer *
-# Web App: https://web.teamviewer.com
+# Web app: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
@@ -94,7 +94,7 @@ sudo snap install vlc
 sudo snap install --classic code
 
 # APP webmin pc07
-# Web App: https://localhost:10000
+# Web app: https://localhost:10000
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update

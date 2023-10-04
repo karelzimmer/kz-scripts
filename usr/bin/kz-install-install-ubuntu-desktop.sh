@@ -47,7 +47,7 @@ rm /tmp/icaclient.deb /tmp/libidn11.deb
 sudo apt-get install --yes clamtk-gnome
 
 # APP cockpit pc06
-# Web App: https://localhost:9090
+# Web app: https://localhost:9090
 sudo apt-get install --yes cockpit cockpit-pcp
 
 # APP cups pc-van-emily
@@ -129,7 +129,7 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 :
 
 # APP signal pc06
-# Web App: n/a
+# Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
@@ -150,7 +150,7 @@ sudo systemctl restart ssh.service
 sudo apt-get install --yes gnome-sushi
 
 # APP teamviewer *
-# Web App: https://web.teamviewer.com
+# Web app: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
