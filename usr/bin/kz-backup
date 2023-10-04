@@ -295,9 +295,7 @@ function backup_settings_installed_apps {
     fi
 
     printf '%b\n' "$header1" > "$output_file"
-    if ! apt list --manual-installed 2> >($logcmd) >> "$output_file"; then
-        true
-    fi
+    apt list --manual-installed 2> >($logcmd) >> "$output_file" || true
     printf '%b\n' "$footer1" >> "$output_file"
 
     printf '\n%b\n' "$header2" >> "$output_file"
@@ -308,17 +306,15 @@ function backup_settings_installed_apps {
 
     printf '\n%b\n' "$header3" >> "$output_file"
     cd  $search.d
-    if !    grep    --recursive             \
-                    --no-filename           \
-                    --regexp='^deb '        \
-                    --recursive             \
-                    /etc/apt/sources.list   \
-                    /etc/apt/sources.list.d |
-            grep    --invert-match          \
-                    --regexp='ubuntu.com'   |
-            sort    --unique                >> "$output_file"; then
-        true
-    fi
+    grep    --recursive             \
+            --no-filename           \
+            --regexp='^deb '        \
+            --recursive             \
+            /etc/apt/sources.list   \
+            /etc/apt/sources.list.d |
+    grep    --invert-match          \
+            --regexp='ubuntu.com'   |
+    sort    --unique                >> "$output_file" || true
     printf '%b\n' "$footer3" >> "$output_file"
 }
 
