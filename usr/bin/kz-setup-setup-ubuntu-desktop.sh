@@ -25,10 +25,12 @@ gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.session idle-delay 900
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
 gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true
+gsettings set org.gnome.nautilus.preferences show-create-link true
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
@@ -41,13 +43,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
 gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
-
-# APP gnome hugo@pc-van-hugo
-gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
-
-# APP gnome karel@pc06
-gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
-gsettings set org.gnome.nautilus.preferences show-create-link true
 
 # APP google-chrome *
 kz-gset --addfavbef=google-chrome

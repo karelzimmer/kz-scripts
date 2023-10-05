@@ -30,23 +30,20 @@ gsettings reset org.gnome.desktop.interface show-battery-percentage
 gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
 gsettings reset org.gnome.desktop.screensaver lock-enabled
 gsettings reset org.gnome.desktop.session idle-delay
+gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.mutter center-new-windows
 gsettings reset org.gnome.nautilus.icon-view default-zoom-level
 gsettings reset org.gnome.nautilus.preferences click-policy
 gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover
+gsettings reset org.gnome.nautilus.preferences show-create-link
 gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
-gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 gsettings reset org.gnome.shell disable-user-extensions
-
-# APP gnome karel@pc07
-gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
-gsettings reset org.gnome.nautilus.preferences show-create-link
-gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
+gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 # APP google-chrome *
 kz-gset --delfav=google-chrome
