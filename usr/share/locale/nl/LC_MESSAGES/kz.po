@@ -712,8 +712,8 @@ msgstr "fout"
 msgid " ok "
 msgstr "goed"
 
-msgid "         COMMAND..."
-msgstr "         OPDRACHT..."
+msgid "COMMAND..."
+msgstr "OPDRACHT..."
 
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."

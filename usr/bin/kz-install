@@ -420,11 +420,11 @@ function execute_command {
     ((++cmd_seq_num))
 
     if [[ $app_seq_num -eq 1 ]];then
-        printf '%s\n%s\n' 'NUM/TOT  APP' "$(gettext '         COMMAND...')"
+        printf '%s\n%s\n' 'NUM/TOT  APP' "         $(gettext 'COMMAND...')"
     fi
 
     printf  -v app_name_line    \
-            "%3d/%-3d  %s" \
+            "%3d/%-3d  %s"      \
             "$app_seq_num"      \
             "$app_tot_num"      \
             "$app_name"
