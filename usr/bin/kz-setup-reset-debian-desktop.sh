@@ -17,8 +17,10 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
+
 # APP firefox karel@pc07
 kz-gset --addfavbef=firefox-esr
+
 
 # APP gnome *
 kz-gset --delappfolder=KZ
@@ -45,31 +47,40 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-t
 gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
+
 # APP google-chrome *
 kz-gset --delfav=google-chrome
+
 
 # APP kvm karel@pc07
 kz-gset --delfav=virt-manager
 
+
 # APP nautilus-hide *
 rm --force "$HOME"/.hidden
+
 
 # APP skype *
 kz-gset --delfav=kz-skype
 
+
 # APP spotify *
 kz-gset --delfav=kz-spotify
 
+
 # APP start-install *
 kz-gset --addfavbef=install-debian
+
 
 # APP terminal karel@pc07
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
+
 # APP vscode karel@pc07 user@debian
 kz-gset --delfav=code_code
+
 
 # APP webmin karel@pc07
 # Web app: https://localhost:10000

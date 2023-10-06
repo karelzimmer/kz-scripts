@@ -17,8 +17,10 @@ gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.shell disable-user-extensions false
 
+
 # APP firefox karel@pc07 user@debian
 kz-gset --delfav=firefox-esr
+
 
 # APP gnome *
 kz-gset --addappfolder=KZ
@@ -44,23 +46,30 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-typ
 gsettings set org.gnome.shell disable-user-extensions false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
+
 # APP google-chrome *
 kz-gset --addfavbef=google-chrome
+
 
 # APP kvm karel@pc07
 kz-gset --addfavaft=virt-manager
 
+
 # APP nautilus-hide *
 echo 'snap' > "$HOME"/.hidden
+
 
 # APP skype *
 kz-gset --addfavaft=kz-skype
 
+
 # APP spotify *
 kz-gset --addfavaft=kz-spotify
 
+
 # APP start-install *
 kz-gset --delfav=install-debian
+
 
 # APP terminal karel@pc07 user@debian
 kz-gset --addfavbef=org.gnome.Terminal
@@ -69,6 +78,7 @@ sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
+
 
 # APP vscode karel@pc07 user@debian
 kz-gset --addfavbef=code_code
@@ -80,6 +90,7 @@ xdg-mime default code_code.desktop text/html                    # Web page
 xdg-mime default code_code.desktop text/markdown                # Markdown document
 xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
+
 
 # APP webmin karel@pc07
 # Web app: https://localhost:10000

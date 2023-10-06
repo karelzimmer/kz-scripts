@@ -9,10 +9,12 @@
 # APP calibre hugo@pc-van-hugo nina@pc04 karel@pc06
 kz-gset --delfav=calibre-gui
 
+
 # APP cockpit karel@pc06
 # Web app: https://localhost:9090
 kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
+
 
 # APP gnome *
 kz-gset --delappfolder=KZ
@@ -43,49 +45,64 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
+
 # APP google-chrome *
 kz-gset --delfav=google-chrome
+
 
 # APP kvm karel@pc06
 kz-gset --delfav=virt-manager
 
+
 # APP libreoffice-calc nina@pc04
 kz-gset --delfav=libreoffice-calc
+
 
 # APP nautilus-hide *
 rm --force "$HOME"/.hidden
 
+
 # APP skype *
 kz-gset --delfav=kz-skype
+
 
 # APP spotify *
 kz-gset --delfav=kz-spotify
 
+
 # APP start-install *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
+
 
 # APP teams karel@pc06
 kz-gset --delfav=kz-teams
 
+
 # APP teamviewer karel@pc06
 kz-gset --delfav=com.teamviewer.TeamViewer
 
+
 # APP telegram hugo@pc-van-hugo
 kz-gset --delfav=kz-telegram
+
 
 # APP terminal karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
+
 # APP virtualbox hugo@pc-van-hugo
 kz-gset --delfav=virtualbox
 kz-gset --delfav=kz-vm-hugowin732
 
+
 # APP vscode karel@pc01 karel@pc06
 kz-gset --delfav=code_code
 
+
 # APP whatsapp hugo@pc-van-hugo
 kz-gset --delfav=kz-whatsapp
+
 
 # APP zoom karel@pc01 monique@pc01
 kz-gset --delfav=kz-zoom

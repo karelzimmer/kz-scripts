@@ -16,29 +16,37 @@ sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 
+
 # APP adduser *
 # Enable access to system monitoring tasks like read many log files in /var/log
 sudo adduser "${SUDO_USER:-$USER}" adm
 # Enable access to the log
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
+
 # APP completion *
 sudo apt-get install --yes bash-completion
+
 
 # APP cups *
 sudo apt-get install --yes cups
 
+
 # APP dashtodock *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
+
 
 # APP deja-dup *
 sudo snap install --classic deja-dup
 
+
 # APP gedit *
 sudo apt-get install --yes gedit
 
+
 # APP gnome-gmail debian pc07
 sudo apt-get install --yes gnome-gmail
+
 
 # APP google-chrome *
 # Extensions and apps are automatically installed with /etc/opt/chrome/policies/managed/kz.json from "kz.deb".
@@ -52,6 +60,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 # The installation adds an apt-key that is no longer needed.
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
+
 # APP kvm pc07
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
@@ -59,11 +68,14 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 sudo adduser "${SUDO_USER:-$USER}" libvirt
 sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 
+
 # APP libreoffice *
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
+
 # APP locate debian pc07
 sudo apt-get install --yes mlocate
+
 
 # APP signal pc07
 # Web app: n/a
@@ -72,8 +84,10 @@ wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sud
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
+
 # APP spice-vdagent *
 sudo apt-get install --yes spice-vdagent
+
 
 # APP teamviewer *
 # Web app: https://web.teamviewer.com
@@ -84,14 +98,18 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
 # The installation adds an apt-key that is no longer needed.
 sudo apt-key del 0C1289C0 DEB49217
 
+
 # APP thunderbird *
 sudo apt-get install --yes thunderbird-l10n-nl
+
 
 # APP vlc pc07
 sudo snap install vlc
 
+
 # APP vscode debian pc07
 sudo snap install --classic code
+
 
 # APP webmin pc07
 # Web app: https://localhost:10000

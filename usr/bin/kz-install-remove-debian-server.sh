@@ -9,16 +9,20 @@
 # APP adduser *
 sudo deluser "${SUDO_USER:-$USER}" adm
 
+
 # APP ansible *
 sudo apt-get remove --yes ansible
 
+
 # APP locate *
 sudo apt-get remove --yes mlocate
+
 
 # APP ssh *
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --yes ssh
+
 
 # APP ufw *
 sudo ufw disable

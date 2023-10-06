@@ -9,12 +9,15 @@
 # APP ansible *
 sudo apt-get install --yes ansible
 
+
 # APP cloud-init *
 # To prevent extra lines from cloud-init printed in terminal at login.
 sudo touch /etc/cloud/cloud-init.disabled
 
+
 # APP locate *
 sudo apt-get install --yes mlocate
+
 
 # APP ssh *
 sudo apt-get install --yes ssh
@@ -22,6 +25,7 @@ sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRoot
 # Check for remote root access
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
+
 
 # APP ufw *
 sudo apt-get install --yes ufw

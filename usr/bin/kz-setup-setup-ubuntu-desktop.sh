@@ -9,12 +9,15 @@
 # APP calibre hugo@pc-van-hugo nina@pc04 karel@pc06
 kz-gset --addfavaft=calibre-gui
 
+
 # APP cockpit karel@pc06
 # Web app: https://localhost:9090
 kz-gset --addfavaft=kz-cockpit
 
+
 # APP citrix toos@pc-van-ria-en-toos
 xdg-mime default wfica.desktop application/x-ica
+
 
 # APP gnome *
 kz-gset --addappfolder=KZ
@@ -44,35 +47,46 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
+
 # APP google-chrome *
 kz-gset --addfavbef=google-chrome
+
 
 # APP kvm karel@pc06
 kz-gset --addfavaft=virt-manager
 
+
 # APP libreoffice-calc nina@pc04
 kz-gset --addfavaft=libreoffice-calc
+
 
 # APP nautilus-hide *
 echo 'snap' > "$HOME"/.hidden
 
+
 # APP skype *
 kz-gset --addfavaft=kz-skype
+
 
 # APP spotify *
 kz-gset --addfavaft=kz-spotify
 
+
 # APP start-install *
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
+
 
 # APP teams karel@pc06
 kz-gset --addfavaft=kz-teams
 
+
 # APP teamviewer karel@pc06
 kz-gset --addfavaft=com.teamviewer.TeamViewer
 
+
 # APP telegram hugo@pc-van-hugo
 kz-gset --addfavaft=kz-telegram
+
 
 # APP terminal karel@pc01 karel@pc06
 kz-gset --addfavbef=org.gnome.Terminal
@@ -80,9 +94,11 @@ kz-gset --addfavbef=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
+
 # APP virtualbox hugo@pc-van-hugo
 kz-gset --addfavaft=virtualbox
 kz-gset --addfavaft=kz-vm-hugowin732
+
 
 # APP vscode karel@pc01 karel@pc06
 kz-gset --addfavbef=code_code
@@ -95,8 +111,10 @@ xdg-mime default code_code.desktop text/markdown                # Markdown docum
 xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
+
 # APP whatsapp hugo@pc-van-hugo
 kz-gset --addfavaft=kz-whatsapp
+
 
 # APP zoom karel@pc01 monique@pc01
 kz-gset --addfavaft=kz-zoom
