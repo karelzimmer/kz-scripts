@@ -638,18 +638,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"If the apps you set up aren't working properly, you may need to log out and "
-"log back in to your computer."
-msgstr ""
-
-msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
-msgstr ""
-
-msgid ""
-"If the installed apps are not working properly, you may need to restart your "
-"computer."
 msgstr ""
 
 msgid "Checking scripts"

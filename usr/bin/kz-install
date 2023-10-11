@@ -480,9 +480,6 @@ installing the apps and changing system settings.")"
                 wait_for_enter
             fi
             sudo systemctl reboot
-        else
-            msg_info "$(gettext "If the installed apps are not working \
-properly, you may need to restart your computer.")"
         fi
     fi
     exit $OK
