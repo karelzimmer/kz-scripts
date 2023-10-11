@@ -83,6 +83,13 @@ sudo apt-get update
 sudo apt-get remove --yes spice-vdagent
 
 
+# APP teamviewer *
+sudo apt-get remove --yes teamviewer
+sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
+sudo apt-key del 0C1289C0 DEB49217
+sudo apt-get update
+
+
 # APP thunderbird *
 sudo apt-get remove --yes thunderbird-l10n-nl
 
