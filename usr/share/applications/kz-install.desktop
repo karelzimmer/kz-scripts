@@ -8,7 +8,6 @@
 [Desktop Entry]
 Type=Application
 Name=Install apps
-Comment=Install apps and changes system settings
 Categories=KZ;
 TryExec=kz
 Exec=kz-install --gui

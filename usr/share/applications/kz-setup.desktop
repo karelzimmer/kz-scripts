@@ -8,7 +8,6 @@
 [Desktop Entry]
 Type=Application
 Name=Set up apps
-Comment=Set up apps and change user settings
 Categories=KZ;
 TryExec=kz
 Exec=kz-setup --gui

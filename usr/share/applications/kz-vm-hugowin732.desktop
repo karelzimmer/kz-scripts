@@ -9,7 +9,6 @@
 [Desktop Entry]
 Type=Application
 Name=Start HugoWin732
-Comment=Start VirtualBox VM hugowin732
 Categories=KZ;
 TryExec=VBoxManage
 Exec=VBoxManage startvm hugowin732

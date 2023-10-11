@@ -971,73 +971,31 @@ msgstr ""
 msgid "Authentication is required to install apps"
 msgstr ""
 
-msgid "Make a backup copy of the Home folder"
-msgstr ""
-
 msgid "Cockpit"
-msgstr ""
-
-msgid "Cockpit web app"
 msgstr ""
 
 msgid "Spotify"
 msgstr ""
 
-msgid "Spotify web app"
-msgstr ""
-
 msgid "Skype"
-msgstr ""
-
-msgid "Skype web app"
 msgstr ""
 
 msgid "Teams"
 msgstr ""
 
-msgid "Teams web app"
-msgstr ""
-
 msgid "Telegram"
-msgstr ""
-
-msgid "Telegram web app"
 msgstr ""
 
 msgid "Webmin"
 msgstr ""
 
-msgid "Webmin web app"
-msgstr ""
-
 msgid "WhatsApp"
-msgstr ""
-
-msgid "WhatsApp web app"
 msgstr ""
 
 msgid "Zoom"
 msgstr ""
 
-msgid "Zoom web app"
-msgstr ""
-
-msgid "Install apps and changes system settings"
-msgstr ""
-
-msgid "Run commands through a menu"
-msgstr ""
-
-msgid "Restores a backup copy of the Home folder"
-msgstr ""
-
-msgid "Set up apps and change user settings"
-msgstr ""
-
 msgid "Start HugoWin732"
-msgstr ""
-
-msgid "Start VirtualBox VM hugowin732"
 msgstr ""
 
 msgid ""

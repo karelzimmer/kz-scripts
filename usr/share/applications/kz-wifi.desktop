@@ -8,7 +8,6 @@
 [Desktop Entry]
 Type=Application
 Name=Show WiFi information
-Comment=Show WiFi information
 Categories=KZ;
 TryExec=kz
 Exec=kz-wifi --gui

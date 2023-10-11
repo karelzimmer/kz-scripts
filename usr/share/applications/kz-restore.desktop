@@ -8,7 +8,6 @@
 [Desktop Entry]
 Type=Application
 Name=Restore backup
-Comment=Restores a backup copy of the Home folder
 Categories=KZ;
 TryExec=kz
 Exec=kz-restore --gui

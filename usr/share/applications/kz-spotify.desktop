@@ -8,7 +8,6 @@
 [Desktop Entry]
 Type=Application
 Name=Spotify
-Comment=Spotify web app
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://open.spotify.com

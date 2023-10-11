@@ -8,7 +8,6 @@
 [Desktop Entry]
 Type=Application
 Name=WhatsApp
-Comment=WhatsApp web app
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://web.whatsapp.com

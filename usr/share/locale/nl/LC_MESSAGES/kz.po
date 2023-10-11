@@ -1167,74 +1167,32 @@ msgstr "Controleer website (rchecklink)..."
 msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
 
-msgid "Make a backup copy of the Home folder"
-msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
-
 msgid "Cockpit"
 msgstr "Cockpit"
-
-msgid "Cockpit web app"
-msgstr "Cockpit-webapp"
 
 msgid "Spotify"
 msgstr ""
 
-msgid "Spotify web app"
-msgstr "Spotify-webapp"
-
 msgid "Skype"
 msgstr "Skype"
-
-msgid "Skype web app"
-msgstr "Skype-webapp"
 
 msgid "Teams"
 msgstr "Teams"
 
-msgid "Teams web app"
-msgstr "Teams-webapp"
-
 msgid "Telegram"
 msgstr "Telegram"
-
-msgid "Telegram web app"
-msgstr "Telegram-webapp"
 
 msgid "Webmin"
 msgstr "Webmin"
 
-msgid "Webmin web app"
-msgstr "Webmin-webapp"
-
 msgid "WhatsApp"
 msgstr "WhatsApp"
-
-msgid "WhatsApp web app"
-msgstr "WhatsApp-webapp"
 
 msgid "Zoom"
 msgstr "Zoom"
 
-msgid "Zoom web app"
-msgstr "Zoom-webapp"
-
-msgid "Install apps and changes system settings"
-msgstr "Installeer apps en wijzig systeeminstellingen"
-
-msgid "Run commands through a menu"
-msgstr "Voer opdrachten uit via een menu"
-
-msgid "Restores a backup copy of the Home folder"
-msgstr "Zet back-up (reservekopie) van de Persoonlijke map terug"
-
-msgid "Set up apps and change user settings"
-msgstr "Stel apps in en wijzig gebruikersinstellingen"
-
 msgid "Start HugoWin732"
 msgstr "HugoWin732 starten"
-
-msgid "Start VirtualBox VM hugowin732"
-msgstr "Start VirtualBox VM hugowin732"
 
 msgid ""
 "Mandatory arguments to long options are mandatory for short options too."
