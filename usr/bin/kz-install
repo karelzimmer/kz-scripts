@@ -384,6 +384,10 @@ function process_command_file {
         operation=$(gettext 'remove')
     fi
 
+    if ! $option_gui; then
+        printf '%s\n%s\n' 'NUM/TOT  APP' "         $(gettext 'COMMAND...')"
+    fi
+
     while read -r commands_record; do
         case $commands_record in
             '')
@@ -427,9 +431,6 @@ function execute_command {
     if $option_gui; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        if [[ $app_seq_num -eq 1 ]];then
-            printf '%s\n%s\n' 'NUM/TOT  APP' "         $(gettext 'COMMAND...')"
-        fi
         if [[ $cmd_seq_num -eq 1 ]];then
             printf '%b\n' "$app_name_line"
         fi
