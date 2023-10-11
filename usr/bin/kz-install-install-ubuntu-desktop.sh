@@ -6,15 +6,23 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
 
-# APP ansible pc06
-sudo apt-get install --yes ansible
-
-
 # APP apport *
+# EXEC THIS FIRST.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
+
+
+# APP ansible pc06
+sudo apt-get install --yes ansible
+
+
+# APP anydesk *
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
+wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
+sudo apt-get update
+sudo apt-get install --yes anydesk
 
 
 # APP bleachbit pc-van-hugo
@@ -178,16 +186,6 @@ sudo systemctl restart ssh.service
 # APP sushi pc06
 # Select a file, press the space bar, and a preview will appear.
 sudo apt-get install --yes gnome-sushi
-
-
-# APP teamviewer *
-# Web app: https://web.teamviewer.com
-echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
-wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
-sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
-# The installation adds an apt-key that is no longer needed.
-sudo apt-key del 0C1289C0 DEB49217
 
 
 # APP tree pc06

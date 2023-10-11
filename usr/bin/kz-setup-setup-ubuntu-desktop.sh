@@ -80,10 +80,6 @@ kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
 kz-gset --addfavaft=kz-teams
 
 
-# APP teamviewer karel@pc06
-kz-gset --addfavaft=com.teamviewer.TeamViewer
-
-
 # APP telegram hugo@pc-van-hugo
 kz-gset --addfavaft=kz-telegram
 

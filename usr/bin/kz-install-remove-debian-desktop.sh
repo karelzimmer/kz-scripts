@@ -7,7 +7,7 @@
 ###############################################################################
 
 # APP addrepos *
-# Exec this first.
+# EXEC THIS FIRST.
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
 sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -18,6 +18,12 @@ sudo apt-get update
 # APP adduser pc07
 sudo deluser "${SUDO_USER:-$USER}" adm
 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
+
+
+# APP anydesk *
+sudo apt-get remove --yes anydesk
+sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
+sudo apt-get update
 
 
 # APP completion *
@@ -74,13 +80,6 @@ sudo apt-get update
 
 # APP spice-vdagent *
 sudo apt-get remove --yes spice-vdagent
-
-
-# APP teamviewer *
-sudo apt-get remove --yes teamviewer
-sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
-sudo apt-key del 0C1289C0 DEB49217
-sudo apt-get update
 
 
 # APP thunderbird *

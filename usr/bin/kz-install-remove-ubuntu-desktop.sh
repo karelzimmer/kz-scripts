@@ -6,13 +6,20 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
+# APP apport *
+# EXEC THIS FIRST.
+sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
+sudo systemctl enable --now apport.service
+
+
 # APP ansible pc06
 sudo apt-get remove --yes ansible
 
 
-# APP apport *
-sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
-sudo systemctl enable --now apport.service
+# APP anydesk *
+sudo apt-get remove --yes anydesk
+sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
+sudo apt-get update
 
 
 # APP bleachbit pc-van-hugo
@@ -146,13 +153,6 @@ sudo apt-get remove --yes ssh
 # APP sushi pc06
 # Select a file, press the space bar, and a preview will appear.
 sudo apt-get remove --yes gnome-sushi
-
-
-# APP teamviewer *
-sudo apt-get remove --yes teamviewer
-sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
-sudo apt-key del 0C1289C0 DEB49217
-sudo apt-get update
 
 
 # APP tree pc06

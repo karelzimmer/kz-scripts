@@ -7,7 +7,7 @@
 ###############################################################################
 
 # APP addrepos *
-# Exec this first.
+# EXEC THIS FIRST.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -22,6 +22,13 @@ sudo apt-get update
 sudo adduser "${SUDO_USER:-$USER}" adm
 # Enable access to the log
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
+
+
+# APP anydesk *
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
+wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
+sudo apt-get update
+sudo apt-get install --yes anydesk
 
 
 # APP completion *
@@ -87,16 +94,6 @@ sudo apt-get install --yes signal-desktop
 
 # APP spice-vdagent *
 sudo apt-get install --yes spice-vdagent
-
-
-# APP teamviewer *
-# Web app: https://web.teamviewer.com
-echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
-wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
-sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
-# The installation adds an apt-key that is no longer needed.
-sudo apt-key del 0C1289C0 DEB49217
 
 
 # APP thunderbird *
