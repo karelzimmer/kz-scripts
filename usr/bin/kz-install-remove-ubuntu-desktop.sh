@@ -17,6 +17,7 @@ sudo apt-get remove --yes ansible
 
 
 # APP anydesk *
+# Web app: https://my.anydesk.com/v2
 sudo apt-get remove --yes anydesk
 sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update

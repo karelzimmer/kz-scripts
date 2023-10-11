@@ -7,6 +7,7 @@
 ###############################################################################
 
 # APP anydesk karel@pc06
+# Web app: https://my.anydesk.com/v2
 kz-gset --addfavaft=anydesk
 
 
