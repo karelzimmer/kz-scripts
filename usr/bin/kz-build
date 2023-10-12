@@ -272,10 +272,11 @@ function build_deb {
 function install_package {
     msg_info "$(gettext 'Install package...')"
     check_for_active_updates
-    sudo    DEBIAN_FRONTEND=noninteractive      \
-            apt-get                             \
-            reinstall                           \
-            --yes                               \
+    sudo    DEBIAN_FRONTEND=noninteractive  \
+            apt-get                         \
+            install                         \
+            --reinstall                     \
+            --yes                           \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $logcmd
 }
 
