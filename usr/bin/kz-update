@@ -135,7 +135,7 @@ def snap_cleanup():
 snap list --all | \
 while read name ver rev trk pub notes; do \
     if [[ $notes == *uitgeschakeld* || $notes == *disabled* ]]; then \
-        sudo snap remove "$name" --revision="$rev"; \
+        sudo snap remove --purge "$name" --revision="$rev"; \
     fi \
 done'
 
