@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-27 19:42+0200\n"
+"POT-Creation-Date: 2023-10-12 18:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -632,6 +632,10 @@ msgid ""
 msgstr ""
 
 msgid ""
+"You may need to log out and log back in for your changes to take effect."
+msgstr ""
+
+msgid ""
 "You must log out of the computer to finish installing the apps and changing "
 "user settings.\n"
 "Type 'logout' to log out."
@@ -640,6 +644,9 @@ msgstr ""
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
+msgstr ""
+
+msgid "You may need to restart for your changes to take effect."
 msgstr ""
 
 msgid "Checking scripts"
@@ -752,7 +759,7 @@ msgstr ""
 msgid "EXPLANATION"
 msgstr ""
 
-msgid "Command"
+msgid "COMMAND"
 msgstr ""
 
 #, sh-format
