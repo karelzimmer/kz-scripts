@@ -7,7 +7,8 @@
 ###############################################################################
 
 # APP ansible *
-sudo apt-get remove --yes ansible
+sudo apt-get remove --purge --yes ansible
+sudo apt-get autoremove --yes
 
 
 # APP cloud-init *
@@ -15,15 +16,18 @@ sudo rm --force /etc/cloud/cloud-init.disabled
 
 
 # APP locate *
-sudo apt-get remove --yes mlocate
+sudo apt-get remove --purge --yes mlocate
+sudo apt-get autoremove --yes
 
 
 # APP ssh *
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
-sudo apt-get remove --yes ssh
+sudo apt-get remove --purge --yes ssh
+sudo apt-get autoremove --yes
 
 
 # APP ufw *
 sudo ufw disable
-sudo apt-get remove --yes ufw
+sudo apt-get remove --purge --yes ufw
+sudo apt-get autoremove --yes
