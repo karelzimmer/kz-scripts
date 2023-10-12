@@ -14,7 +14,7 @@
 readonly    PROGRAM_NAME='kz-getdeb'
             PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
 readonly    PROGRAM_PATH
-if ! source "$PROGRAM_PATH"/kz_common.sh &> >(systemd-cat --ide=$PROGRAM_NAME);
+if ! source "$PROGRAM_PATH"/kz_common.sh &> >(systemd-cat --ide=$PROGRAM_NAME)
 then
     printf  '%s\n'                              \
             '==== START get kz_common.sh =====' \
