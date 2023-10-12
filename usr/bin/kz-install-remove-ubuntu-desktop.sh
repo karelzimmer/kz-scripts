@@ -221,7 +221,7 @@ sudo apt-get remove --purge --yes wine winetricks playonlinux
 sudo apt-get autoremove --yes
 
 
-# APP x11
+# APP x11 *
 # Force to use wayland. With wayland issues with video playback and TeamViewer.
 # To check execute: echo $XDG_SESSION_TYPE (should output 'wayland') *
 sudo sed --in-place --expression='s/WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf

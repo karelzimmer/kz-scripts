@@ -200,39 +200,7 @@ sudo ufw enable
 
 
 # APP virtualbox pc-van-hugo
-# If installation hangs, the computer has UEFI Secure Boot, see the log:
-# ----------------------------------------------------------------------------
-# Configuring Secure Boot
-# -----------------------
-#
-# Your system has UEFI Secure Boot enabled.
-#
-# UEFI Secure Boot requires additional configuration to work with third-party
-# drivers.
-#
-# The system will assist you in configuring UEFI Secure Boot. To permit the
-# use of third-party drivers, a new Machine-Owner Key MOK has been generated.
-# This key now needs to be enrolled in your system's firmware.
-#
-# To ensure that this change is being made by you as an authorized user, and
-# not by an attacker, you must choose a password now and then confirm the
-# change after reboot using the same password, in both the "Enroll MOK" and
-# "Change Secure Boot state" menus that will be presented to you when this
-# system reboots.
-#
-# If you proceed but do not confirm the password upon reboot, Ubuntu will
-# still be able to boot on your system but any hardware that requires
-# third-party drivers to work correctly may not be usable.
-# ----------------------------------------------------------------------------
-# Steps to take:
-# 1. Reboot.
-# 2. Run kz update, who does a repair, among other things.
-# 3. Provide a Secure Boot password and remember it.
-# 4. Reboot.
-# 5. Enroll MOK and provide the Secure Boot password from step 3.
-#
-# With an AMD processor, AMD-V will be enabled, but Intel often requires VT-x
-# be enabled in the UEFI BIOS screen !
+# If installation hangs or VBox does not work, check Linux-info.txt.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
 # VirtualBox Guest Additions ISO are in /usr/share/virtualbox/
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
