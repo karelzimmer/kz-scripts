@@ -223,7 +223,7 @@ sudo apt-get install --yes wine winetricks playonlinux
 
 
 # APP x11 *
-# Force to use x11. With wayland issues with video playback and TeamViewer.
+# Force to use wayland. With wayland issues with video playback and remote desktop app such as AnyDesk and TeamViewer.
 # To check execute: echo $XDG_SESSION_TYPE (should output 'x11')
 sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 
