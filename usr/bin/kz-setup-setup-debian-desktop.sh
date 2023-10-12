@@ -32,6 +32,7 @@ gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.session idle-delay 900
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
 gsettings set org.gnome.mutter center-new-windows true
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'

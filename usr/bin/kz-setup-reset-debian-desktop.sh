@@ -33,6 +33,7 @@ gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
 gsettings reset org.gnome.desktop.screensaver lock-enabled
 gsettings reset org.gnome.desktop.session idle-delay
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
+gsettings reset org.gnome.desktop.wm.preferences button-layout
 gsettings reset org.gnome.mutter center-new-windows
 gsettings reset org.gnome.nautilus.icon-view default-zoom-level
 gsettings reset org.gnome.nautilus.preferences click-policy
@@ -46,7 +47,6 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
 gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
-
 
 # APP google-chrome *
 kz-gset --delfav=google-chrome
