@@ -222,11 +222,5 @@ sudo apt-get install --yes epiphany-browser
 sudo apt-get install --yes wine winetricks playonlinux
 
 
-# APP x11 *
-# Force the use of Wayland because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
-# To check execute: echo $XDG_SESSION_TYPE (should output 'x11')
-sudo sed --in-place --expression='s/#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
-
-
 # APP youtube-downloader pc-van-emily pc-van-hugo
 sudo apt-get install --yes youtubedl-gui
