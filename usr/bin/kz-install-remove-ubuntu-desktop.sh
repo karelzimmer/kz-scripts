@@ -211,6 +211,12 @@ sudo snap remove --purge vlc
 sudo snap remove --purge code
 
 
+# APP wayland *
+# Remove the forced use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
+# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+
+
 # APP web pc06
 sudo apt-get remove --purge --yes epiphany-browser
 sudo apt-get autoremove --yes
@@ -219,12 +225,6 @@ sudo apt-get autoremove --yes
 # APP wine pc04
 sudo apt-get remove --purge --yes wine winetricks playonlinux
 sudo apt-get autoremove --yes
-
-
-# APP x11 *
-# Remove the forced use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
 # APP youtube-downloader pc-van-emily pc-van-hugo
