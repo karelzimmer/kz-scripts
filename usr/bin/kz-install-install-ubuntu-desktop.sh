@@ -76,11 +76,6 @@ if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/moni
 sudo apt-get install --yes libimage-exiftool-perl
 
 
-# APP gast pc01 pc06
-sudo useradd --create-home --shell /usr/bin/bash --comment 'Gast' gast || true
-sudo passwd --delete gast
-
-
 # APP gimp pc-van-hugo pc06
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 

@@ -77,10 +77,6 @@ sudo apt-get autoremove --yes
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
-# APP gast pc01 pc06
-sudo userdel --remove gast
-
-
 # APP gimp pc-van-hugo pc06
 sudo apt-get remove --purge --yes gimp gimp-help-en gimp-help-nl
 sudo apt-get autoremove --yes
