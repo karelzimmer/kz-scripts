@@ -76,6 +76,12 @@ sudo apt-get remove --purge --yes libimage-exiftool-perl
 sudo apt-get autoremove --yes
 
 
+# APP force-x11 *
+# Remove the forced use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
+# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+
+
 # APP gast pc01 pc06
 sudo userdel --remove gast
 
@@ -209,12 +215,6 @@ sudo snap remove --purge vlc
 
 # APP vscode pc01 pc07
 sudo snap remove --purge code
-
-
-# APP wayland *
-# Remove the forced use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
 # APP web pc06
