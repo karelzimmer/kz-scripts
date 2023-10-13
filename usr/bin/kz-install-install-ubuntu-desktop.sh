@@ -30,12 +30,6 @@ sudo apt-get install --yes anydesk
 sudo apt-get install --yes bleachbit
 
 
-# APP bluetooth pc01
-# Disable internal bluetooth adapter, see: lsusb
-:
-##echo 'SUBSYSTEM=="usb", ATTRS{idVendor}=="413c", ATTRS{idProduct}=="8187", ATTR{authorized}="0"' | sudo tee /etc/udev/rules.d/81-bluetooth-hci.rules
-
-
 # APP brightness pc06
 echo '#!/bin/sh' | sudo tee /etc/rc.local
 echo 'echo 1900 > /sys/class/backlight/intel_backlight/brightness' | sudo tee --append /etc/rc.local

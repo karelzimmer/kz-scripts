@@ -30,11 +30,6 @@ sudo apt-get remove --purge --yes bleachbit
 sudo apt-get autoremove --yes
 
 
-# APP bluetooth pc01
-# Enable internal bluetooth adapter, see: lsusb
-sudo rm --force /etc/udev/rules.d/81-bluetooth-hci.rules
-
-
 # APP brightness pc06
 echo '' | sudo tee /etc/rc.local
 sudo chmod -x /etc/rc.local
