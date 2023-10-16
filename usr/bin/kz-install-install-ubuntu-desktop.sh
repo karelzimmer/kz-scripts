@@ -151,12 +151,6 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 :
 
 
-# APP set-brightness pc06
-echo '#!/bin/sh' | sudo tee /etc/rc.local
-echo 'echo 1900 > /sys/class/backlight/intel_backlight/brightness' | sudo tee --append /etc/rc.local
-sudo chmod +x /etc/rc.local
-
-
 # APP signal pc06
 # Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list

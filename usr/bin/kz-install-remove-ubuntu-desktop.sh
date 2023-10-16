@@ -148,11 +148,6 @@ sudo apt-get autoremove --yes
 :
 
 
-# APP set-brightness pc06
-echo '' | sudo tee /etc/rc.local
-sudo chmod -x /etc/rc.local
-
-
 # APP signal pc06
 sudo apt-get remove --purge --yes signal-desktop
 sudo apt-get autoremove --yes
