@@ -14,6 +14,13 @@ sudo rm --force /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
+# APP add-hosts pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
+echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
+
+
 # APP ansible pc06
 sudo apt-get install --yes ansible
 
@@ -28,12 +35,6 @@ sudo apt-get install --yes anydesk
 
 # APP bleachbit pc-van-hugo
 sudo apt-get install --yes bleachbit
-
-
-# APP brightness pc06
-echo '#!/bin/sh' | sudo tee /etc/rc.local
-echo 'echo 1900 > /sys/class/backlight/intel_backlight/brightness' | sudo tee --append /etc/rc.local
-sudo chmod +x /etc/rc.local
 
 
 # APP calibre pc-van-hugo pc04 pc06
@@ -62,14 +63,18 @@ sudo apt-get install --yes clamtk-gnome
 sudo apt-get install --yes cockpit cockpit-pcp
 
 
-# APP cups pc-van-emily
-# Add support for Canon BJNP protocol
+# APP cups-backend-bjnp pc-van-emily
+# Add support for Canon USB over IP BJNP protocol
 sudo apt-get install --yes cups-backend-bjnp
 
 
 # APP dual-monitor pc06
 if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
+
+
+# APP epiphany-browser pc06
+sudo apt-get install --yes epiphany-browser
 
 
 # APP exiftool pc06
@@ -114,11 +119,9 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl
 sudo apt-get install --yes handbrake
 
 
-# APP hosts pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
-echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
-echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
+# APP ignore-close-laptop-lid pc-van-hugo pc04
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 
 # APP kvm pc06
@@ -129,11 +132,6 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 
 # APP libreoffice *
 sudo apt-get install --yes aspell-nl libreoffice
-
-
-# APP lidswitch pc-van-hugo pc04
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 
 # APP locate pc06
@@ -151,6 +149,12 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 
 # APP ros pc04
 :
+
+
+# APP set-brightness pc06
+echo '#!/bin/sh' | sudo tee /etc/rc.local
+echo 'echo 1900 > /sys/class/backlight/intel_backlight/brightness' | sudo tee --append /etc/rc.local
+sudo chmod +x /etc/rc.local
 
 
 # APP signal pc06
@@ -203,13 +207,9 @@ sudo snap install vlc
 sudo snap install --classic code
 
 
-# APP web pc06
-sudo apt-get install --yes epiphany-browser
-
-
 # APP wine pc04
 sudo apt-get install --yes wine winetricks playonlinux
 
 
-# APP youtube-downloader pc-van-emily pc-van-hugo
+# APP youtube-dl pc-van-emily pc-van-hugo
 sudo apt-get install --yes youtubedl-gui

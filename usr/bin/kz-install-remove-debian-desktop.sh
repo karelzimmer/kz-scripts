@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP addrepos *
+# APP add-repository *
 # EXEC THIS FIRST.
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
@@ -16,20 +16,14 @@ sudo apt-get autoremove --yes
 sudo apt-get update
 
 
-# APP adduser pc07
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
-
-
 # APP anydesk *
-# Web app: https://my.anydesk.com/v2
 sudo apt-get remove --purge --yes anydesk
 sudo apt-get autoremove --yes
 sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
 
-# APP completion *
+# APP bash-completion *
 sudo apt-get remove --purge --yes bash-completion
 sudo apt-get autoremove --yes
 
@@ -53,7 +47,7 @@ sudo apt-get remove --purge --yes gedit
 sudo apt-get autoremove --yes
 
 
-# APP gnome-gmail pc07
+# APP gnome-gmail pc07 debian
 sudo apt-get remove --purge --yes gnome-gmail
 sudo apt-get autoremove --yes
 
@@ -79,9 +73,14 @@ sudo apt-get remove --purge --yes aspell-nl libreoffice libreoffice-help-nl libr
 sudo apt-get autoremove --yes
 
 
-# APP locate pc07
+# APP locate pc07 debian
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
+
+
+# APP logging *
+sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # APP signal pc07
@@ -113,7 +112,7 @@ sudo apt-get autoremove --yes
 sudo snap remove --purge vlc
 
 
-# APP vscode pc07
+# APP vscode pc07 debian
 sudo snap remove --purge code
 
 

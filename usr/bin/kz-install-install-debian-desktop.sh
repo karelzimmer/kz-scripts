@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP addrepos *
+# APP add-repository *
 # EXEC THIS FIRST.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
@@ -17,13 +17,6 @@ rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 
 
-# APP adduser *
-# Enable access to system monitoring tasks like read many log files in /var/log
-sudo adduser "${SUDO_USER:-$USER}" adm
-# Enable access to the log
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
-
-
 # APP anydesk *
 # Web app: https://my.anydesk.com/v2
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
@@ -32,7 +25,7 @@ sudo apt-get update
 sudo apt-get install --yes anydesk
 
 
-# APP completion *
+# APP bash-completion *
 sudo apt-get install --yes bash-completion
 
 
@@ -52,7 +45,7 @@ sudo snap install --classic deja-dup
 sudo apt-get install --yes gedit
 
 
-# APP gnome-gmail debian pc07
+# APP gnome-gmail pc07 debian
 sudo apt-get install --yes gnome-gmail
 
 
@@ -81,8 +74,15 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
-# APP locate debian pc07
+# APP locate pc07 debian
 sudo apt-get install --yes mlocate
+
+
+# APP logging *
+# Enable access to system monitoring tasks like read many log files in /var/log.
+sudo adduser "${SUDO_USER:-$USER}" adm
+# Enable access to the log
+sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # APP signal pc07
@@ -105,7 +105,7 @@ sudo apt-get install --yes thunderbird-l10n-nl
 sudo snap install vlc
 
 
-# APP vscode debian pc07
+# APP vscode pc07 debian
 sudo snap install --classic code
 
 

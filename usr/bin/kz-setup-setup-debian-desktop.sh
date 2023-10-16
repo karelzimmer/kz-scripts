@@ -68,7 +68,7 @@ kz-gset --addfavaft=kz-skype
 kz-gset --addfavaft=kz-spotify
 
 
-# APP start-install *
+# APP start-installer *
 kz-gset --delfav=install-debian
 
 

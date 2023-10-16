@@ -77,7 +77,7 @@ kz-gset --addfavaft=kz-skype
 kz-gset --addfavaft=kz-spotify
 
 
-# APP start-install *
+# APP start-installer *
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 

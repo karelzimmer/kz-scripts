@@ -18,7 +18,7 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
 
-# APP firefox karel@pc07
+# APP firefox karel@pc07 user@debian
 kz-gset --addfavbef=firefox-esr
 
 
@@ -68,11 +68,11 @@ kz-gset --delfav=kz-skype
 kz-gset --delfav=kz-spotify
 
 
-# APP start-install *
+# APP start-installer *
 kz-gset --addfavbef=install-debian
 
 
-# APP terminal karel@pc07
+# APP terminal karel@pc01 karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc

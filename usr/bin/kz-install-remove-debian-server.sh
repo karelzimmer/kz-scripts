@@ -6,10 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP adduser *
-sudo deluser "${SUDO_USER:-$USER}" adm
-
-
 # APP ansible *
 sudo apt-get remove --purge --yes ansible
 sudo apt-get autoremove --yes
@@ -18,6 +14,10 @@ sudo apt-get autoremove --yes
 # APP locate *
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
+
+
+# APP logging *
+sudo deluser "${SUDO_USER:-$USER}" adm
 
 
 # APP ssh *

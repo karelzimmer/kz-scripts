@@ -12,13 +12,17 @@ sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
+# APP add-hosts pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+
+
 # APP ansible pc06
 sudo apt-get remove --purge --yes ansible
 sudo apt-get autoremove --yes
 
 
 # APP anydesk *
-# Web app: https://my.anydesk.com/v2
 sudo apt-get remove --purge --yes anydesk
 sudo apt-get autoremove --yes
 sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
@@ -28,11 +32,6 @@ sudo apt-get update
 # APP bleachbit pc-van-hugo
 sudo apt-get remove --purge --yes bleachbit
 sudo apt-get autoremove --yes
-
-
-# APP brightness pc06
-echo '' | sudo tee /etc/rc.local
-sudo chmod -x /etc/rc.local
 
 
 # APP calibre pc-van-hugo pc04 pc06
@@ -51,13 +50,11 @@ sudo apt-get autoremove --yes
 
 
 # APP cockpit pc06
-# Web app: https://localhost:9090
 sudo apt-get remove --purge --yes cockpit
 sudo apt-get autoremove --yes
 
 
-# APP cups pc-van-emily
-# Remove support for Canon BJNP protocol
+# APP cups-backend-bjnp pc-van-emily
 sudo apt-get remove --purge --yes cups-backend-bjnp
 sudo apt-get autoremove --yes
 
@@ -66,14 +63,18 @@ sudo apt-get autoremove --yes
 sudo rm --force ~gdm/.config/monitors.xml
 
 
+# APP epiphany-browser pc06
+sudo apt-get remove --purge --yes epiphany-browser
+sudo apt-get autoremove --yes
+
+
 # APP exiftool pc06
 sudo apt-get remove --purge --yes libimage-exiftool-perl
 sudo apt-get autoremove --yes
 
 
-# APP force-x11 *
-# Remove the forced use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+# APP x11 *
+# To check, after executing and reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
@@ -111,9 +112,8 @@ sudo apt-get remove --purge --yes handbrake
 sudo apt-get autoremove --yes
 
 
-# APP hosts pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+# APP ignore-close-laptop-lid pc-van-hugo pc04
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
 # APP kvm pc06
@@ -127,10 +127,6 @@ sudo delgroup libvirtd
 # APP libreoffice *
 sudo apt-get remove --purge --yes aspell-nl libreoffice
 sudo apt-get autoremove --yes
-
-
-# APP lidswitch pc-van-hugo pc04
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
 # APP locate pc06
@@ -152,6 +148,11 @@ sudo apt-get autoremove --yes
 :
 
 
+# APP set-brightness pc06
+echo '' | sudo tee /etc/rc.local
+sudo chmod -x /etc/rc.local
+
+
 # APP signal pc06
 sudo apt-get remove --purge --yes signal-desktop
 sudo apt-get autoremove --yes
@@ -171,7 +172,6 @@ sudo apt-get autoremove --yes
 
 
 # APP sushi pc06
-# Select a file, press the space bar, and a preview will appear.
 sudo apt-get remove --purge --yes gnome-sushi
 sudo apt-get autoremove --yes
 
@@ -204,13 +204,8 @@ sudo apt-get autoremove --yes
 sudo snap remove --purge vlc
 
 
-# APP vscode pc01 pc07
+# APP vscode pc01 pc06
 sudo snap remove --purge code
-
-
-# APP web pc06
-sudo apt-get remove --purge --yes epiphany-browser
-sudo apt-get autoremove --yes
 
 
 # APP wine pc04
@@ -218,6 +213,6 @@ sudo apt-get remove --purge --yes wine winetricks playonlinux
 sudo apt-get autoremove --yes
 
 
-# APP youtube-downloader pc-van-emily pc-van-hugo
+# APP youtube-dl pc-van-emily pc-van-hugo
 sudo apt-get remove --purge --yes youtubedl-gui
 sudo apt-get autoremove --yes

@@ -7,7 +7,6 @@
 ###############################################################################
 
 # APP anydesk karel@pc06
-# Web app: https://my.anydesk.com/v2
 kz-gset --delfav=anydesk
 
 
@@ -16,7 +15,6 @@ kz-gset --delfav=calibre-gui
 
 
 # APP cockpit karel@pc06
-# Web app: https://localhost:9090
 kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 
@@ -75,7 +73,7 @@ kz-gset --delfav=kz-skype
 kz-gset --delfav=kz-spotify
 
 
-# APP start-install *
+# APP start-installer *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
@@ -87,7 +85,7 @@ kz-gset --delfav=kz-teams
 kz-gset --delfav=kz-telegram
 
 
-# APP terminal karel@pc06
+# APP terminal karel@pc01 karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 

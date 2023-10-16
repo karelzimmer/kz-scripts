@@ -6,16 +6,17 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP adduser *
-sudo adduser "${SUDO_USER:-$USER}" adm
-
-
 # APP ansible *
 sudo apt-get install --yes ansible
 
 
 # APP locate *
 sudo apt-get install --yes mlocate
+
+
+# APP logging *
+# Enable access to system monitoring tasks like read many log files in /var/log.
+sudo adduser "${SUDO_USER:-$USER}" adm
 
 
 # APP ssh *
