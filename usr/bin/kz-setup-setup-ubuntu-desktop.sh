@@ -20,10 +20,6 @@ kz-gset --addfavaft=calibre-gui
 kz-gset --addfavaft=kz-cockpit
 
 
-# APP citrix toos@pc-van-ria-en-toos
-xdg-mime default wfica.desktop application/x-ica
-
-
 # APP gnome *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true

@@ -39,11 +39,6 @@ sudo apt-get remove --purge --yes calibre
 sudo apt-get autoremove --yes
 
 
-# APP citrix pc-van-ria-en-toos
-sudo apt-get remove --purge --yes icaclient libidn11
-sudo apt-get autoremove --yes
-
-
 # APP clamav pc-van-hugo
 sudo apt-get remove --purge --yes clamtk-gnome
 sudo apt-get autoremove --yes
