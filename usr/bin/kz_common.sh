@@ -91,7 +91,7 @@ function check_for_active_updates {
                 /var/lib/dpkg/lock                          \
                 /var/lib/dpkg/lock-frontend                 \
                 &> /dev/null; do
-        printf '%b\n' "$text"
+        printf '%s\n' "$text"
         sleep $check_wait
     done
 }
@@ -220,14 +220,14 @@ function msg_info {
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
     else
-        printf '%b\n' "$@"
+        printf '%s\n' "$@"
     fi
 }
 
 
 # This function records a message to the log.
 function msg_log {
-    printf '%b\n' "$@" |& $logcmd
+    printf '%s\n' "$@" |& $logcmd
 }
 
 
