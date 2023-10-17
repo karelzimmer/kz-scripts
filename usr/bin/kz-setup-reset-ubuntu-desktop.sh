@@ -103,5 +103,5 @@ kz-gset --delfav=code_code
 kz-gset --delfav=kz-whatsapp
 
 
-# APP zoom karel@pc01 monique@pc01
+# APP zoom monique@pc01 karel@pc01
 kz-gset --delfav=kz-zoom

@@ -78,7 +78,7 @@ sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice
 sudo apt-get install --yes mlocate
 
 
-# APP logging *
+# APP add-user-to-group *
 # Enable access to system monitoring tasks like read many log files in /var/log.
 sudo adduser "${SUDO_USER:-$USER}" adm
 # Enable access to the log

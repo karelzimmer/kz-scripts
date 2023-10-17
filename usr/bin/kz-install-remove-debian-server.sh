@@ -16,7 +16,7 @@ sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
 
 
-# APP logging *
+# APP add-user-to-group *
 sudo deluser "${SUDO_USER:-$USER}" adm
 
 

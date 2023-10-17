@@ -113,5 +113,5 @@ xdg-mime default code_code.desktop text/x-python                # Python-script
 kz-gset --addfavaft=kz-whatsapp
 
 
-# APP zoom karel@pc01 monique@pc01
+# APP zoom monique@pc01 karel@pc01
 kz-gset --addfavaft=kz-zoom

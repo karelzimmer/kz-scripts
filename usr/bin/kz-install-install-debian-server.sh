@@ -14,7 +14,7 @@ sudo apt-get install --yes ansible
 sudo apt-get install --yes mlocate
 
 
-# APP logging *
+# APP add-user-to-group *
 # Enable access to system monitoring tasks like read many log files in /var/log.
 sudo adduser "${SUDO_USER:-$USER}" adm
 
