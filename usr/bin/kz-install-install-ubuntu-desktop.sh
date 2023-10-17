@@ -17,7 +17,8 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 # APP add-host pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
-sudo sed --in-place --expression='3s/^/192.168.1.64 pc01\n/' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
+sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
 sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
 
 

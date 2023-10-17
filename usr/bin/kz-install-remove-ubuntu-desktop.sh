@@ -13,8 +13,9 @@ sudo systemctl enable --now apport.service
 
 
 # APP add-host pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
 
 
 # APP ansible pc06
