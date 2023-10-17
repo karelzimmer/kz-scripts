@@ -298,13 +298,13 @@ function backup_settings_installed_apps {
     apt list --manual-installed 2> >($logcmd) >> "$output_file" || true
     printf '%s\n' "$footer1" >> "$output_file"
 
-    printf '\n%b\n' "$header2" >> "$output_file"
+    printf '\n%s\n' "$header2" >> "$output_file"
     if ! snap list 2> >($logcmd) >> "$output_file"; then
         printf '%s\n' "$(gettext 'snap is not installed')" >> "$output_file"
     fi
     printf '%s\n' "$footer2" >> "$output_file"
 
-    printf '\n%b\n' "$header3" >> "$output_file"
+    printf '\n%s\n' "$header3" >> "$output_file"
     cd  $search.d
     grep    --recursive             \
             --no-filename           \

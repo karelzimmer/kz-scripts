@@ -42,12 +42,6 @@ msgid "Already performed by the administrator."
 msgstr ""
 
 #, sh-format
-msgid ""
-"Text output $DISPLAY_NAME ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e "
-"(END) :?pB %pB\\%. .(press h for help or q to quit)"
-msgstr ""
-
-#, sh-format
 msgid "Type '$DISPLAY_NAME --usage' for more information."
 msgstr ""
 

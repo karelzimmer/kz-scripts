@@ -45,14 +45,6 @@ msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
 #, sh-format
-msgid ""
-"Text output $DISPLAY_NAME ?ltline %lt?L of %L.:byte %bB?s of %s..? .?e "
-"(END) :?pB %pB\\%. .(press h for help or q to quit)"
-msgstr ""
-"Tekstuitvoer $DISPLAY_NAME ?ltregel %lt?L van %L.:byte %bB?s van %s..? .?e "
-"(EINDE) :?pB %pB\\%. .(druk op h voor help of q om te stoppen)"
-
-#, sh-format
 msgid "Type '$DISPLAY_NAME --usage' for more information."
 msgstr "Typ '$DISPLAY_NAME --usage' voor meer informatie."
 
