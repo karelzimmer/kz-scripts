@@ -126,13 +126,16 @@ function process_input {
     msg_info "${bold}$(gettext 'Check - pre')${normal} ($DISPLAY_NAME)"
     check_repos
     check_scripts
-    msg_info "\n${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
+    msg_info
+    msg_info "${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
     build_uploads
     generate_mo
     build_deb
-    msg_info "\n${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
+    msg_info
+    msg_info "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
     install_package
-    msg_info "\n${bold}$(gettext 'Check - post')${normal} ($DISPLAY_NAME)"
+    msg_info
+    msg_info "${bold}$(gettext 'Check - post')${normal} ($DISPLAY_NAME)"
     run_ivp
     check_website
 }

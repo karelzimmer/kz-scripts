@@ -92,7 +92,8 @@ function process_input {
 
     msg_info "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
     check_dependencies
-    msg_info "\n${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
+    msg_info
+    msg_info "${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
     pull_repos
     download_website
 }
