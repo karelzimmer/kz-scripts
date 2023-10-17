@@ -98,14 +98,14 @@ function process_input {
 
     msg_info "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
     check_repos
-    msg_info
-    msg_info "${bold}$(gettext 'Build - final')${normal} ($DISPLAY_NAME)"
+    msg_info "
+${bold}$(gettext 'Build - final')${normal} ($DISPLAY_NAME)"
     build_package
-    msg_info
-    msg_info "${bold}$(gettext 'Deploy')${normal} ($DISPLAY_NAME)"
+    msg_info "
+${bold}$(gettext 'Deploy')${normal} ($DISPLAY_NAME)"
     upload_website
-    msg_info
-    msg_info "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
+    msg_info "
+${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
     install_package
 }
 
