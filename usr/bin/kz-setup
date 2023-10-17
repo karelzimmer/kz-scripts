@@ -429,9 +429,9 @@ function execute_command {
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]];then
-            printf '%b\n' "$app_name_line"
+            printf '%s\n' "$app_name_line"
         fi
-        printf '         %b\n' "$cmd"
+        printf '         %s\n' "$cmd"
     fi
 
     msg_log "$app_name_line/$cmd_seq_num"

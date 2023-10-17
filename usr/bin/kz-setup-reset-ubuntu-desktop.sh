@@ -10,7 +10,7 @@
 kz-gset --delfav=anydesk
 
 
-# APP calibre hugo@pc-van-hugo nina@pc04 karel@pc06
+# APP calibre nina@pc04 karel@pc06 hugo@pc-van-hugo
 kz-gset --delfav=calibre-gui
 
 

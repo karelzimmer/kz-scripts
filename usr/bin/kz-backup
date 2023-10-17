@@ -294,15 +294,15 @@ function backup_settings_installed_apps {
         return $OK
     fi
 
-    printf '%b\n' "$header1" > "$output_file"
+    printf '%s\n' "$header1" > "$output_file"
     apt list --manual-installed 2> >($logcmd) >> "$output_file" || true
-    printf '%b\n' "$footer1" >> "$output_file"
+    printf '%s\n' "$footer1" >> "$output_file"
 
     printf '\n%b\n' "$header2" >> "$output_file"
     if ! snap list 2> >($logcmd) >> "$output_file"; then
         printf '%s\n' "$(gettext 'snap is not installed')" >> "$output_file"
     fi
-    printf '%b\n' "$footer2" >> "$output_file"
+    printf '%s\n' "$footer2" >> "$output_file"
 
     printf '\n%b\n' "$header3" >> "$output_file"
     cd  $search.d
@@ -315,7 +315,7 @@ function backup_settings_installed_apps {
     grep    --invert-match          \
             --regexp='ubuntu.com'   |
     sort    --unique                >> "$output_file" || true
-    printf '%b\n' "$footer3" >> "$output_file"
+    printf '%s\n' "$footer3" >> "$output_file"
 }
 
 

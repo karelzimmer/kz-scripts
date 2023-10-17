@@ -12,9 +12,9 @@ sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
-# APP add-hosts pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+# APP add-host pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
 
 
 # APP ansible pc06
@@ -34,7 +34,7 @@ sudo apt-get remove --purge --yes bleachbit
 sudo apt-get autoremove --yes
 
 
-# APP calibre pc-van-hugo pc04 pc06
+# APP calibre pc04 pc06 pc-van-hugo
 sudo apt-get remove --purge --yes calibre
 sudo apt-get autoremove --yes
 
@@ -73,7 +73,7 @@ sudo apt-get autoremove --yes
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
-# APP gimp pc-van-hugo pc06
+# APP gimp pc06 pc-van-hugo
 sudo apt-get remove --purge --yes gimp gimp-help-en gimp-help-nl
 sudo apt-get autoremove --yes
 
@@ -107,7 +107,7 @@ sudo apt-get remove --purge --yes handbrake
 sudo apt-get autoremove --yes
 
 
-# APP ignore-close-laptop-lid pc-van-hugo pc04
+# APP ignore-close-laptop-lid pc04 pc-van-hugo
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
@@ -164,14 +164,6 @@ sudo apt-get autoremove --yes
 # APP sushi pc06
 sudo apt-get remove --purge --yes gnome-sushi
 sudo apt-get autoremove --yes
-
-
-# APP teamviewer *
-sudo apt-get remove --purge --yes teamviewer
-sudo apt-get autoremove --yes
-sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
-sudo apt-key del 0C1289C0 DEB49217
-sudo apt-get update
 
 
 # APP tree pc06

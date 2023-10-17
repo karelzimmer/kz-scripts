@@ -220,14 +220,14 @@ function msg_info {
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
     else
-        printf '%b\n' "$@"
+        printf '%s\n' "$@"
     fi
 }
 
 
 # This function records a message to the log.
 function msg_log {
-    printf '%b\n' "$@" |& $logcmd
+    printf '%s\n' "$@" |& $logcmd
 }
 
 

@@ -14,11 +14,11 @@ sudo rm --force /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
-# APP add-hosts pc01 pc06
+# APP add-host pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.64/d' /etc/hosts
-echo '192.168.1.83 pc06' | sudo tee --append /etc/hosts
-echo '192.168.1.64 pc01' | sudo tee --append /etc/hosts
+sudo sed --in-place --expression='3s/^/192.168.1.64 pc01\n/' /etc/hosts
+sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
 
 
 # APP ansible pc06
@@ -37,7 +37,7 @@ sudo apt-get install --yes anydesk
 sudo apt-get install --yes bleachbit
 
 
-# APP calibre pc-van-hugo pc04 pc06
+# APP calibre pc04 pc06 pc-van-hugo
 sudo apt-get install --yes calibre
 
 
@@ -68,7 +68,7 @@ sudo apt-get install --yes epiphany-browser
 sudo apt-get install --yes libimage-exiftool-perl
 
 
-# APP gimp pc-van-hugo pc06
+# APP gimp pc06 pc-van-hugo
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 
 
@@ -106,7 +106,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl
 sudo apt-get install --yes handbrake
 
 
-# APP ignore-close-laptop-lid pc-van-hugo pc04
+# APP ignore-close-laptop-lid pc04 pc-van-hugo
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
