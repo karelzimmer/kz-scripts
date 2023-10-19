@@ -201,7 +201,7 @@ function msg_error {
                 --text      "$@"        2> >($logcmd) || true
         msg_log  "$@"
     else
-        printf "${red}%s\n${normal}" "$@" >&2
+        printf "${red}%b\n${normal}" "$@" >&2
     fi
     msg_log "$@"
 }
@@ -220,7 +220,7 @@ function msg_info {
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
     else
-        printf '%s\n' "$@"
+        printf '%b\n' "$@"
     fi
 }
 
@@ -245,7 +245,7 @@ function msg_warning {
                 --text      "$@"        2> >($logcmd) || true
         msg_log  "$@"
     else
-        printf "${yellow}%s\n${normal}" "$@" >&2
+        printf "${yellow}%b\n${normal}" "$@" >&2
     fi
     msg_log "$@"
 }
