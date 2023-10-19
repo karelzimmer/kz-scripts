@@ -82,6 +82,7 @@ declare     option_reset=false
 function check_input {
     local   -i  app_arg_num=0
     local       parsed=''
+    local   -i  parsed_rc=0
 
     parsed=$(
         getopt  --alternative                                       \
