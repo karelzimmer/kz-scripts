@@ -14,3 +14,4 @@ TryExec=kz
 Exec=kz-backup --gui
 Icon=kz-backup
 X-GNOME-Gettext-Domain=kz
+X-Ubuntu-Gettext-Domain=kz
