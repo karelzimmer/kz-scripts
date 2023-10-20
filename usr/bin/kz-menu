@@ -165,7 +165,7 @@ function process_menu1_gui {
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
-                    --width         500                                     \
+                    --width         510                                     \
                     --height        240                                     \
                     --title         "$title"                                \
                     --text          "$(gettext 'Select a choice:')"         \
@@ -325,7 +325,7 @@ function process_menu2_gui {
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
-                    --width         440                                     \
+                    --width         450                                     \
                     --height        290                                     \
                     --title         "$title"                                \
                     --text          "$(gettext 'Select a choice:')"         \
