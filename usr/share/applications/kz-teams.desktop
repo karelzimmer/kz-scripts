@@ -14,3 +14,4 @@ TryExec=google-chrome
 Exec=google-chrome https://teams.microsoft.com
 Icon=kz-teams
 X-GNOME-Gettext-Domain=kz
+X-Ubuntu-Gettext-Domain=kz

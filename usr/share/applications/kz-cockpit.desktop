@@ -14,3 +14,4 @@ TryExec=google-chrome
 Exec=google-chrome https://localhost:9090
 Icon=kz-cockpit
 X-GNOME-Gettext-Domain=kz
+X-Ubuntu-Gettext-Domain=kz
