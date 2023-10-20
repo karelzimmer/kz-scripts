@@ -8,6 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Skype
+Comment=Skype web app
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://web.skype.com

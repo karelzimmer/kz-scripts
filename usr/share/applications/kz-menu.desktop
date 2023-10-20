@@ -8,6 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Installation menu
+Comment=Run commands through a menu
 Categories=KZ;
 TryExec=kz
 Exec=kz-menu --gui
