@@ -1172,29 +1172,44 @@ msgstr "Authenticatie is vereist om apps te installeren"
 msgid "Make a backup copy of the Home folder"
 msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 
-msgid "Cockpit web app"
-msgstr "Cockpit-webapp"
+msgid "Cockpit"
+msgstr "Cockpit"
 
-msgid "Spotify web app"
-msgstr "Spotify-webapp"
+msgid "Web Console for Linux servers"
+msgstr "Webconsole voor Linux-servers"
 
-msgid "Skype web app"
-msgstr "Skype-webapp"
+msgid "Spotify"
+msgstr "Spotify"
 
-msgid "Teams web app"
-msgstr "Teams-webapp"
+msgid "Music streaming service"
+msgstr "Muziekstreamingdienst"
 
-msgid "Telegram web app"
-msgstr "Telegram-webapp"
+msgid "Skype"
+msgstr "Skype"
 
-msgid "Webmin web app"
-msgstr "Webmin-webapp"
+msgid "Make video calls"
+msgstr "Videogesprekken voeren"
 
-msgid "WhatsApp web app"
-msgstr "WhatsApp-webapp"
+msgid "Teams"
+msgstr "Teams"
 
-msgid "Zoom web app"
-msgstr "Zoom-webapp"
+msgid "Team collaboration"
+msgstr "Teamsamenwerking"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Send messages"
+msgstr "Berichten versturen"
+
+msgid "Webmin"
+msgstr "Webmin"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Zoom"
+msgstr "Zoom"
 
 msgid "Install apps and changes system settings"
 msgstr "Installeer apps en wijzig systeeminstellingen"

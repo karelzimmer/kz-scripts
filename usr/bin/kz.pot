@@ -978,49 +978,49 @@ msgstr ""
 msgid "Cockpit"
 msgstr ""
 
-msgid "Cockpit web app"
+msgid "Web Console for Linux servers"
 msgstr ""
 
 msgid "Spotify"
 msgstr ""
 
-msgid "Spotify web app"
+msgid "Music streaming service"
 msgstr ""
 
 msgid "Skype"
 msgstr ""
 
-msgid "Skype web app"
+msgid "Make video calls"
 msgstr ""
 
 msgid "Teams"
 msgstr ""
 
-msgid "Teams web app"
+msgid "Team collaboration"
 msgstr ""
 
 msgid "Telegram"
 msgstr ""
 
-msgid "Telegram web app"
+msgid "Send messages"
 msgstr ""
 
 msgid "Webmin"
 msgstr ""
 
-msgid "Webmin web app"
+msgid "Web Console for Linux servers"
 msgstr ""
 
 msgid "WhatsApp"
 msgstr ""
 
-msgid "WhatsApp web app"
+msgid "Send messages"
 msgstr ""
 
 msgid "Zoom"
 msgstr ""
 
-msgid "Zoom web app"
+msgid "Make video calls"
 msgstr ""
 
 msgid "Install apps and changes system settings"
