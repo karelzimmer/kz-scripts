@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Cockpit
-Comment=Cockpit web app
+Comment=Web Console for Linux servers
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://localhost:9090

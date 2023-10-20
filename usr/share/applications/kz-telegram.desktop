@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Telegram
-Comment=Telegram web app
+Comment=Send messages
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://web.telegram.org
