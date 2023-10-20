@@ -13,5 +13,6 @@ Categories=KZ;
 TryExec=kz
 Exec=kz-wifi --gui
 Icon=kz-wifi
+OnlyShowIn=GNOME;Unity;
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

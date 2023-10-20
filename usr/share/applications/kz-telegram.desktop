@@ -13,5 +13,6 @@ Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://web.telegram.org
 Icon=kz-telegram
+OnlyShowIn=GNOME;Unity;
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

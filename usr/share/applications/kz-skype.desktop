@@ -13,5 +13,6 @@ Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://web.skype.com
 Icon=kz-skype
+OnlyShowIn=GNOME;Unity;
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
