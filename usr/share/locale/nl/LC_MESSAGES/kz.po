@@ -1176,7 +1176,7 @@ msgid "Cockpit"
 msgstr "Cockpit"
 
 msgid "Manage Linux servers from a web browser"
-msgstr "Beheer Linux servers vanuit een webbrowser"
+msgstr "Beheer Linux-servers vanuit een webbrowser"
 
 msgid "Spotify"
 msgstr "Spotify"
