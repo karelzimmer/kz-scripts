@@ -118,7 +118,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 
 
 # APP libreoffice *
-sudo apt-get install --yes aspell-nl libreoffice
+sudo apt-get install --yes aspell-en aspell-nllibreoffice
 
 
 # APP locate pc06

@@ -71,7 +71,7 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 
 
 # APP libreoffice *
-sudo apt-get install --yes aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
+sudo apt-get install --yes aspell-en aspell-nllibreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
 # APP locate pc07 debian
