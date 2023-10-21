@@ -1008,19 +1008,10 @@ msgstr ""
 msgid "Webmin"
 msgstr ""
 
-msgid "Manage Linux servers from a web browser"
-msgstr ""
-
 msgid "WhatsApp"
 msgstr ""
 
-msgid "Send and receive messages, photos and videos via a web browser"
-msgstr ""
-
 msgid "Zoom"
-msgstr ""
-
-msgid "Video call with others from a web browser"
 msgstr ""
 
 msgid "Install apps and changes system settings"
