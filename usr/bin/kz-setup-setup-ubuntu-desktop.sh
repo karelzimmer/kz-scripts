@@ -6,11 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP anydesk karel@pc06
-# Web app: https://my.anydesk.com/v2
-kz-gset --addfavaft=anydesk
-
-
 # APP calibre nina@pc04 hugo@pc-van-hugo
 kz-gset --addfavaft=calibre-gui
 
