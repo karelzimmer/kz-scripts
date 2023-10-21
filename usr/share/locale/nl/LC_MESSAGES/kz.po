@@ -1175,32 +1175,32 @@ msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
 msgid "Cockpit"
 msgstr "Cockpit"
 
-msgid "Web Console for Linux servers"
-msgstr "Webconsole voor Linux-servers"
+msgid "Manage Linux servers from a web browser"
+msgstr "Beheer Linux servers vanuit een webbrowser"
 
 msgid "Spotify"
 msgstr "Spotify"
 
-msgid "Music streaming service"
-msgstr "Muziekstreamingdienst"
+msgid "Listen to music and podcasts via a web browser"
+msgstr "Luister naar muziek en podcasts via een webbrowser"
 
 msgid "Skype"
 msgstr "Skype"
 
-msgid "Make video calls"
-msgstr "Videogesprekken voeren"
+msgid "Video call with others from a web browser"
+msgstr "Videogesprek met anderen vanuit een webbrowser"
 
 msgid "Teams"
 msgstr "Teams"
 
-msgid "Team collaboration"
-msgstr "Teamsamenwerking"
+msgid "Collaborate with others from a web browser"
+msgstr "Werk samen met anderen vanuit een webbrowser"
 
 msgid "Telegram"
 msgstr "Telegram"
 
-msgid "Send messages"
-msgstr "Berichten versturen"
+msgid "Send and receive messages, photos and videos via a web browser"
+msgstr "Verzend en ontvang berichten, foto's en video's via een webbrowser"
 
 msgid "Webmin"
 msgstr "Webmin"

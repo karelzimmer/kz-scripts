@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=WhatsApp
-Comment=Send messages
+Comment=Send and receive messages, photos and videos via a web browser
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://web.whatsapp.com

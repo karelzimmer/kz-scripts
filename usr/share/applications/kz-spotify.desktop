@@ -8,7 +8,7 @@
 [Desktop Entry]
 Type=Application
 Name=Spotify
-Comment=Music streaming service
+Comment=Listen to music and podcasts via a web browser
 Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://open.spotify.com
