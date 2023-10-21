@@ -151,7 +151,9 @@ function install_package {
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
-            reinstall                       \
+            install                         \
+            --allow-downgrades              \
+            --reinstall                     \
             --yes                           \
             "$temp_deb"
     rm  "$temp_deb"
