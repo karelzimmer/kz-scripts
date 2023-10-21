@@ -69,7 +69,7 @@ sudo delgroup libvirtd
 
 
 # APP libreoffice *
-sudo apt-get remove --purge --yes aspell-en aspell-nllibreoffice libreoffice-help-nl libreoffice-l10n-nl
+sudo apt-get remove --purge --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 sudo apt-get autoremove --yes
 
 
