@@ -321,7 +321,7 @@ function process_option_version {
         program_year=', '$program_year
     fi
 
-    msg_info "kz 365$build_id
+    msg_info "kz 2.4.7$build_id
 
 $(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal

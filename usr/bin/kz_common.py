@@ -270,7 +270,7 @@ def process_option_version(PROGRAM_NAME):
         else:
             program_year = ', ' + program_year
 
-        print(_('kz 365{}\n'
+        print(_('kz 2.4.7{}\n'
                 '\n'
                 'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
 Universal\n'

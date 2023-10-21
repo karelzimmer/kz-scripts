@@ -137,7 +137,7 @@ function cleanup {
 
 # This function installs package kz.
 function install_package {
-    local   site_deb='https://karelzimmer.nl/assets/kz/kz_365_all.deb'
+    local   site_deb='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
     local   temp_deb=''
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")

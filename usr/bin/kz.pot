@@ -127,7 +127,7 @@ msgid "Program year cannot be determined."
 msgstr ""
 
 msgid ""
-"kz 365{}\n"
+"kz 2.4.7{}\n"
 "\n"
 "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n"
 "<https://creativecommons.org/publicdomain/zero/1.0>{}"

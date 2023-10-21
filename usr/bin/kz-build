@@ -41,7 +41,7 @@ readonly    SCRIPTS_REPO=$HOME/kz-scripts
 readonly    DEB_REPO=$HOME/kz-deb
 readonly    DEB_REPO_APPDIR=$DEB_REPO/app
 readonly    DEB_REPO_DISTDIR=$DEB_REPO/dist
-readonly    DEB_NAME=kz_365_all.deb
+readonly    DEB_NAME=kz_2.4.7_all.deb
 
 readonly    UPLOADS_REPO=$HOME/kz-uploads
 readonly    UPLOADS_REPO_APPDIR=$UPLOADS_REPO/app
@@ -280,9 +280,11 @@ function build_deb {
 function install_package {
     msg_info "$(gettext 'Install package...')"
     check_for_active_updates
+    # allow downgrades from version 365 to 2.4.7.
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
+            --allow-downgrades              \
             --reinstall                     \
             --yes                           \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $logcmd
