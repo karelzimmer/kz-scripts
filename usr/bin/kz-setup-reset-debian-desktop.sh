@@ -60,10 +60,6 @@ kz-gset --delfav=virt-manager
 rm --force "$HOME"/.hidden
 
 
-# APP skype *
-kz-gset --delfav=kz-skype
-
-
 # APP spotify *
 kz-gset --delfav=kz-spotify
 

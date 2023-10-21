@@ -10,7 +10,7 @@
 kz-gset --delfav=anydesk
 
 
-# APP calibre nina@pc04 karel@pc06 hugo@pc-van-hugo
+# APP calibre nina@pc04 hugo@pc-van-hugo
 kz-gset --delfav=calibre-gui
 
 
@@ -65,20 +65,12 @@ kz-gset --delfav=libreoffice-calc
 rm --force "$HOME"/.hidden
 
 
-# APP skype *
-kz-gset --delfav=kz-skype
-
-
 # APP spotify *
 kz-gset --delfav=kz-spotify
 
 
 # APP start-installer *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
-
-
-# APP teams karel@pc06
-kz-gset --delfav=kz-teams
 
 
 # APP telegram hugo@pc-van-hugo

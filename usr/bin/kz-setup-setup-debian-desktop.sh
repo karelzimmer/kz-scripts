@@ -60,10 +60,6 @@ kz-gset --addfavaft=virt-manager
 echo 'snap' > "$HOME"/.hidden
 
 
-# APP skype *
-kz-gset --addfavaft=kz-skype
-
-
 # APP spotify *
 kz-gset --addfavaft=kz-spotify
 
