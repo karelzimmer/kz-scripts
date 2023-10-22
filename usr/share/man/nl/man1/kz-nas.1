@@ -39,6 +39,9 @@ Zorg dat de NAS een vast IP-adres heeft.  Hiervoor is nodig:
 bereik van DHCP die automatisch de IP-adressen uitdeelt (vaak 192.168.0.200).
  2. Kies in de NAS het vaste IP-adres en zet DHCP uit.
 .sp
+Gebruik opdracht \fBsudo systemctl disable mnt-kz-nas.mount\fR voor het
+deactiveren van het systemd mount-bestand.
+.sp
 NAS is een acroniem (letterwoord), en een afkorting, van network-attached
 storage.
 .\"
@@ -72,7 +75,7 @@ NAS-login gegevens.
 .sp
 /etc/systemd/system/mnt-kz-nas.mount
 .RS
-Systemd mount unit-bestand.
+Systemd mount-bestand.
 .RE.\"
 .\"
 .SH NOTITIES

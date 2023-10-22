@@ -40,6 +40,9 @@ Make sure the NAS has a fixed IP address. This requires:
      (often 192.168.0.200).
   2. Select the fixed IP address in the NAS and turn off DHCP.
 .sp
+Use command \fBsudo systemctl disable mnt-kz-nas.mount\fR to deactivate the
+systemd mount file.
+.sp
 NAS is an acronym, and abbreviation, of network-attached storage.
 .\"
 .\"
@@ -71,7 +74,7 @@ NAS-login data.
 .sp
 /etc/systemd/system/mnt-kz-nas.mount
 .RS
-Systemd mount unit file.
+Systemd mount file.
 .RE.\"
 .\"
 .SH NOTES

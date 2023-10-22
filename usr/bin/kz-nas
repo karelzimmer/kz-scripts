@@ -232,7 +232,7 @@ process_input() {
     local   text1
             text1=$(gettext 'Create NAS login...')
     local   text2
-            text2=$(gettext 'Create systemd mount unit file...')
+            text2=$(gettext 'Create systemd mount file...')
     local   text3
             text3=$(gettext 'Mount NAS...')
 

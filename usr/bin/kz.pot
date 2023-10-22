@@ -1094,7 +1094,7 @@ msgstr ""
 msgid "Create NAS login..."
 msgstr ""
 
-msgid "Create systemd mount unit file..."
+msgid "Create systemd mount file..."
 msgstr ""
 
 msgid "Mount NAS..."

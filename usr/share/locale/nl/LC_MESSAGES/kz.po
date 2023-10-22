@@ -1304,8 +1304,8 @@ msgstr "Opdrachten worden verwerkt"
 msgid "Create NAS login..."
 msgstr "Maak NAS login..."
 
-msgid "Create systemd mount unit file..."
-msgstr "Maak systemd mount unit-bestand..."
+msgid "Create systemd mount file..."
+msgstr "Maak systemd mount-bestand..."
 
 msgid "Mount NAS..."
 msgstr "Koppel NAS aan..."
