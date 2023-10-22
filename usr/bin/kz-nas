@@ -239,10 +239,13 @@ process_input() {
     title=$(gettext 'Mount network drive')
     if $option_gui; then
         (
+        sleep 1
         printf '%s\n' "#$text1"
         create_nas_login
+        sleep 1
         printf '%s\n' "#$text2"
         create_systemd_unit_file
+        sleep 1
         printf '%s\n' "#$text3"
         mount_nas
         ) |&
