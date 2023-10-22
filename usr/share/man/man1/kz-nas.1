@@ -1,0 +1,139 @@
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" Man-pagina voor kznas.
+.\"
+.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
+.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
+.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
+.\"
+.\" ReleaseNumber: 03.06.01
+.\" DateOfRelease: 2021-07-14
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\" TO BE CHANGED/XLATED
+.\" TO BE CHANGED/XLATED
+.\" TO BE CHANGED/XLATED
+.\" TO BE CHANGED/XLATED
+.\" TO BE CHANGED/XLATED
+.\" TO BE CHANGED/XLATED
+.\" TO BE CHANGED/XLATED
+.\" TO BE CHANGED/XLATED
+.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.\"
+.TH KZNAS 1 "kznas" "kzscripts 365" "kznas"
+.\"
+.\"
+.SH NAAM
+kznas \- Netwerkschijf aankoppelen.
+.\"
+.\"
+.SH SAMENVATTING
+.B kznas
+[OPTIE...]
+.\"
+.\"
+.SH BESCHRIJVING
+\fBkznas\fR koppelt een NAS aan tijdens het opstarten.
+.sp
+Er wordt een systemd mount-bestand aangemaakt en geactiveerd.
+.sp
+Het aan te maken systemd mount-bestand wordt samengesteld met standaardwaarden.
+.br
+Bij het uitvoeren van dit script worden deze standaardwaarden getoond tussen []
+en zijn deze op te geven.
+.br
+Als er al regels voorkomen voor de NAS wordt de optie geboden deze te
+verwijderen.
+Doen, want nu wordt systemd gebruikt!
+.sp
+Zorg dat de NAS een vast IP-adres heeft.  Hiervoor is nodig:
+.sp
+ -  het MAC-adres van de NAS (ziet eruit als aa:bb:cc:dd:ee:ff)
+ -  toegang tot de NAS via een webbrowser
+ -  toegang tot de router via een webbrowser
+.sp
+ 1. Kies in de router met het MAC-adres van de NAS een IP-adres buiten het
+bereik van DHCP die automatisch de IP-adressen uitdeelt (vaak 192.168.0.200).
+ 2. Kies in de NAS het vaste IP-adres en zet DHCP uit.
+.sp
+NAS is een acroniem (letterwoord), en een afkorting, van network-attached
+storage.
+.sp
+In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkznas\fR worden
+gestart door te zoeken naar \fBnas\fR, klik op \fBNetwerkschijf aankoppelen\fR.
+.\"
+.\"
+.SH OPTIES
+.TP
+\fB-d\fR, \fB--debug\fR
+Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
+-ab -t kznas').
+.TP
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui = graphical user interface).
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een een korte omschrijving van de beschikbare opties.
+.TP
+\fB-u\fR, \fB--usage\fR
+Toon de beschikbare opties.
+.TP
+\fB-v\fR, \fB--version\fR
+Toon de versie, de auteur, en het auteursrecht.
+.TP
+\fB--\fR
+Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
+opties uit.
+.br
+Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
+Een argument van - is gelijk aan --.
+.\"
+.\"
+.SH STOPSTATUS
+Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
+afsluitwaarde 1.
+.br
+Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.\"
+.\"
+.SH BESTANDEN
+/etc/kznaslogin
+.RS
+NAS-login gegevens.
+.RE
+.sp
+/etc/systemd/system/mnt-nas.mount
+.RS
+Systemd mount-bestand.
+.RE
+.\"
+.\"
+.SH NOTITIES
+.IP " 1." 4
+Checklist installatie
+.RS 4
+https://karelzimmer.nl
+.RE
+.\"
+.\"
+.SH AUTEUR
+Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.\"
+.\"
+.SH AUTEURSRECHT
+Auteursrecht (c) 2014-2021 Karel Zimmer.
+.br
+GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+.\"
+.\"
+.SH ZIE OOK
+\fBkzcommon.sh\fR(1),
+\fBkzmenu\fR(1),
+\fBhttps://karelzimmer.nl\fR
+.\"
+.\"
+.SH BESCHIKBAARHEID
+Opdracht kznas is onderdeel van het pakket kzscripts en is beschikbaar vanaf
+Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
+.sp
+.\" EOF

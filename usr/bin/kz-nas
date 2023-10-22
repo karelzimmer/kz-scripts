@@ -1,0 +1,321 @@
+#!/usr/bin/bash
+# shellcheck source=kz_common.sh
+###############################################################################
+# Mount network drive.
+#
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2014-2023.
+###############################################################################
+
+###############################################################################
+# Import
+###############################################################################
+
+readonly    PROGRAM_NAME='kz-nas'
+            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
+readonly    PROGRAM_PATH
+source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
+
+
+###############################################################################
+# Constants
+###############################################################################
+
+            PROGRAM_DESC=$(gettext 'Mount network drive')
+readonly    PROGRAM_DESC
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+\$OPTIONS_USAGE")
+readonly    USAGE
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+  -g, --gui      $(gettext 'starts in graphics mode')
+$OPTIONS_   HELP"
+readonly    HELP
+readonly    X_OPTIONS_SHORT='g'
+readonly    X_OPTIONS_LONG=',gui'
+
+readonly    NAS_LOGIN=/usr/local/etc/${PROGRAM_NAME}login
+readonly    NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
+            NAS_FIXED_IP_ADDRESS="\
+$(gettext "Make sure the NAS has a fixed IP address.
+This requires:
+
+  - the MAC address of the NAS (looks like aa:bb:cc:dd:ee:ff)
+  - access the NAS via a web browser
+  - access the router via a web browser
+
+  1. Select the MAC address of the NAS in the router
+     IP address outside the range of DHCP automatically
+     distributes the IP addresses (often 192.168.0.200).
+  2. Select the fixed IP address in the NAS and turn off DHCP.")"
+readonly    NAS_FIXED_IP_ADDRESS
+readonly    SYSTEMD_MOUNT_DIR=/etc/systemd/system
+readonly    SYSTEMD_MOUNT_FILE=mnt-$PROGRAM_NAME.mount
+# readonly    SYSTEMD_MOUNT_FILE=mnt-${PROGRAM_NAME/kz-/kz}.mount
+readonly    SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
+
+
+###############################################################################
+# Variables
+###############################################################################
+
+declare nas_username=${SUDO_USER:-$USER}
+declare nas_ip_address=192.168.0.200
+declare nas_share_name=${SUDO_USER:-$USER}
+declare nas_password='secret'
+
+
+###############################################################################
+# Functions
+###############################################################################
+
+# This function handles the script options and arguments.
+function check_input {
+    local       parsed=''
+    local   -i  parsed_rc=0
+
+    parsed=$(
+        getopt  --alternative                                       \
+                --options       "$OPTIONS_SHORT$X_OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
+                --name          "$DISPLAY_NAME"                     \
+                --              "$@"
+        ) || parsed_rc=$?
+    if [[ $parsed_rc -ne $OK ]]; then
+        printf '%s\n' "$USAGE_LINE"
+        exit $ERROR
+    fi
+    eval set -- "$parsed"
+
+    process_common_options "$@"
+
+    while true; do
+        case $1 in
+            -g|--gui)
+                if [[ $EDITION = 'server' ]]; then
+                    printf  "$DISPLAY_NAME: $1: %s\n$USAGE_LINE\n" \
+                            "$(gettext 'not allowed on a server')"
+                    exit $ERROR
+                fi
+                option_gui=true
+                reset_terminal_attributes
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                shift
+                ;;
+        esac
+    done
+
+
+    if [[ -n "$*" ]]; then
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
+                "$(gettext 'arguments are not allowed')"
+        exit $ERROR
+    fi
+
+    check_user_root
+    request_input
+}
+
+
+# This function asks the user for input.
+request_input() {
+    local       quest1
+                quest1=$(eval_gettext "Does the NAS have a fixed IP address \
+such as \$nas_ip_address?")
+    local       quest2
+                quest2=$(gettext 'IP address of the NAS')
+    local       quest3
+                quest3=$(gettext 'Username on the NAS')
+    local       quest4
+                quest4=$(gettext 'Password of this user on the NAS')
+    local       quest5
+                quest5=$(gettext 'Share name of this user on the NAS')
+
+    if $option_gui; then
+        title=$(gettext 'Question')
+        text=$quest1
+        if ! zenity --question              \
+                    --no-markup             \
+                    --width     400         \
+                    --height    100         \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd); then
+            title=$(gettext 'Notification')
+            text=$NAS_FIXED_IP_ADDRESS
+            zenity  --info                  \
+                    --no-markup             \
+                    --width     500         \
+                    --height    100         \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($logcmd) || true
+            exit $OK
+        fi
+    else
+        while true; do
+            read -rp "$(eval_gettext "\$quest1 [y/N]: ")"
+            case $REPLY in
+                [YyJj]*)
+                    break
+                    ;;
+                [Nn]*|'')
+                    printf '%s\n' "$NAS_FIXED_IP_ADDRESS"
+                    exit $OK
+                    ;;
+                *)
+                    continue
+                    ;;
+            esac
+        done
+    fi
+
+    title=$(gettext 'Questions')
+    text=$(gettext 'Please answer the following questions')
+    if $option_gui; then
+        REPLY=$(
+            zenity  --forms                     \
+                    --title         "$title"    \
+                    --text          "$text"     \
+                    --separator     ","         \
+                    --add-entry     "$quest2"   \
+                    --add-entry     "$quest3"   \
+                    --add-password  "$quest4"   \
+                    --add-entry     "$quest5"   2> >($logcmd)
+	        ) || exit $OK
+        nas_ip_address=$(   printf '%s' "$REPLY" | awk -F, '{print $1}')
+        nas_username=$(     printf '%s' "$REPLY" | awk -F, '{print $2}')
+        nas_password=$(     printf '%s' "$REPLY" | awk -F, '{print $3}')
+        nas_share_name=$(   printf '%s' "$REPLY" | awk -F, '{print $4}')
+    else
+        printf '\n%s\n%s\n' \
+                "$text."    \
+                "$(gettext "If you do not specify, the value in [] is used as \
+the response.")"
+        read -rp "
+$quest2? [$nas_ip_address]: "
+        if [[ -n $REPLY ]]; then
+            nas_ip_address=$REPLY
+        fi
+        read -rp "
+$quest3? [$nas_username]: "
+        if [[ -n $REPLY ]]; then
+            nas_username=$REPLY
+        fi
+        read -rsp "
+$quest4? [$nas_password]: "
+        if [[ -n $REPLY ]]; then
+            nas_password=$REPLY
+        fi
+        printf '\n'
+        read -rp "
+$quest5? [$nas_share_name]: "
+        if [[ -n $REPLY ]]; then
+            nas_share_name=$REPLY
+        fi
+    fi
+}
+
+
+process_input() {
+    local   text0
+            text0=$(gettext 'Commands are being processed')
+    local   text1
+            text1=$(gettext 'Create NAS login...')
+    local   text2
+            text2=$(gettext 'Create systemd mount unit file...')
+    local   text3
+            text3=$(gettext 'Mount NAS...')
+
+    title=$(gettext 'Mount network drive')
+    if $option_gui; then
+        (
+        printf '%s\n' "#$text1"
+        create_nas_login
+        printf '%s\n' "#$text2"
+        create_systemd_unit_file
+        printf '%s\n' "#$text3"
+        mount_nas
+        ) |&
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$title"    \
+                --text      "$text0"    2> >($logcmd)
+    else
+        printf '%s\n' "$text1"
+        create_nas_login
+        printf '%s\n' "$text2"
+        create_systemd_unit_file
+        printf '%s\n' "$text3"
+        mount_nas
+    fi
+}
+
+
+create_nas_login() {
+    text="username=$nas_username\npassword=$nas_password"
+    printf '%b\n' "$text" > "$NAS_LOGIN"
+    chmod '600' "$NAS_LOGIN" |& $logcmd
+}
+
+
+create_systemd_unit_file() {
+    printf '%s\n' "[Unit]
+Description=Mount NAS Directory
+
+[Mount]
+What=//$nas_ip_address/$nas_share_name
+Where=$NAS_MOUNT_POINT
+Type=cifs
+Options=credentials=$NAS_LOGIN,vers=1.0,rw,noperm,iocharset=utf8,\
+dir_mode=0777,file_mode=0777
+
+[Install]
+WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
+}
+
+
+mount_nas() {
+    systemctl enable "$SYSTEMD_MOUNT_FILE" |& $logcmd
+    systemctl start "$SYSTEMD_MOUNT_FILE" |& $logcmd || true
+    systemctl daemon-reload |& $logcmd
+}
+
+
+term_script() {
+    systemctl status "$SYSTEMD_MOUNT_FILE" || true
+    msg_info "
+$(eval_gettext "The systemd mount file is activated.
+The NAS should be available at '\$NAS_MOUNT_POINT'.
+
+Deactivate the systemd mount file with the command:") \
+${blue}sudo systemctl disable $SYSTEMD_MOUNT_FILE${normal}"
+    exit $OK
+}
+
+
+###############################################################################
+# Main Script
+###############################################################################
+
+function main {
+    init_script "$@"
+    check_input "$@"
+    process_input
+    term_script
+}
+
+main "$@"

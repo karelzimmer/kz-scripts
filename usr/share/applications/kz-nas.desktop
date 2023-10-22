@@ -1,0 +1,18 @@
+###############################################################################
+# Desktop configuration file for kz-nas.
+#
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2016-2023.
+###############################################################################
+
+[Desktop Entry]
+Type=Application
+Name=Mount network drive
+Comment=Mount a NAS during startup
+Categories=KZ;
+TryExec=kz
+Exec=kz-nas --gui
+Icon=kz-nas
+OnlyShowIn=GNOME;Unity;
+X-GNOME-Gettext-Domain=kz
+X-Ubuntu-Gettext-Domain=kz

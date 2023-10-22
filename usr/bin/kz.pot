@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-12 18:26+0200\n"
+"POT-Creation-Date: 2023-10-22 10:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -659,9 +659,6 @@ msgstr ""
 msgid "    Flagged annotation found."
 msgstr ""
 
-msgid "Continue? [Y/n]: "
-msgstr ""
-
 msgid "    End spaces found."
 msgstr ""
 
@@ -1037,4 +1034,82 @@ msgid ""
 msgstr ""
 
 msgid "signals the end of options and disables further option processing"
+msgstr ""
+
+msgid "Mount network drive"
+msgstr ""
+
+msgid ""
+"Make sure the NAS has a fixed IP address.\n"
+"This requires:\n"
+"\n"
+"  - the MAC address of the NAS (looks like aa:bb:cc:dd:ee:ff)\n"
+"  - access the NAS via a web browser\n"
+"  - access the router via a web browser\n"
+"\n"
+"  1. Select the MAC address of the NAS in the router\n"
+"     IP address outside the range of DHCP automatically\n"
+"     distributes the IP addresses (often 192.168.0.200).\n"
+"  2. Select the fixed IP address in the NAS and turn off DHCP."
+msgstr ""
+
+#, sh-format
+msgid "Does the NAS have a fixed IP address such as $nas_ip_address?"
+msgstr ""
+
+msgid "IP address of the NAS"
+msgstr ""
+
+msgid "Username on the NAS"
+msgstr ""
+
+msgid "Password of this user on the NAS"
+msgstr ""
+
+msgid "Share name of this user on the NAS"
+msgstr ""
+
+msgid "Question"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+#, sh-format
+msgid "$quest1 [y/N]: "
+msgstr ""
+
+msgid "Questions"
+msgstr ""
+
+msgid "Please answer the following questions"
+msgstr ""
+
+msgid "If you do not specify, the value in [] is used as the response."
+msgstr ""
+
+msgid "Commands are being processed"
+msgstr ""
+
+msgid "Create NAS login..."
+msgstr ""
+
+msgid "Create systemd mount unit file..."
+msgstr ""
+
+msgid "Mount NAS..."
+msgstr ""
+
+#, sh-format
+msgid ""
+"The systemd mount file is activated.\n"
+"The NAS should be available at '$NAS_MOUNT_POINT'.\n"
+"\n"
+"Deactivate the systemd mount file with the command:"
+msgstr ""
+
+msgid "Authentication is required to mount a network drive"
+msgstr ""
+
+msgid "Mount a NAS during startup"
 msgstr ""

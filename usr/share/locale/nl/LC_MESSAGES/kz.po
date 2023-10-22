@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-12 18:25+0200\n"
+"POT-Creation-Date: 2023-10-22 10:41+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -796,9 +796,6 @@ msgstr "Foutieve regel(s) gevonden."
 msgid "    Flagged annotation found."
 msgstr "    Gemarkeerde annotatie gevonden."
 
-msgid "Continue? [Y/n]: "
-msgstr "Doorgaan? [J/n]: "
-
 msgid "    End spaces found."
 msgstr "    Eindspaties gevonden."
 
@@ -1237,3 +1234,96 @@ msgstr ""
 msgid "signals the end of options and disables further option processing"
 msgstr ""
 "signaleert het einde van opties en schakelt verdere verwerking van opties uit"
+
+msgid "Mount network drive"
+msgstr "Netwerkschijf aankoppelen"
+
+msgid ""
+"Make sure the NAS has a fixed IP address.\n"
+"This requires:\n"
+"\n"
+"  - the MAC address of the NAS (looks like aa:bb:cc:dd:ee:ff)\n"
+"  - access the NAS via a web browser\n"
+"  - access the router via a web browser\n"
+"\n"
+"  1. Select the MAC address of the NAS in the router\n"
+"     IP address outside the range of DHCP automatically\n"
+"     distributes the IP addresses (often 192.168.0.200).\n"
+"  2. Select the fixed IP address in the NAS and turn off DHCP."
+msgstr ""
+"Zorg dat de NAS een vast IP-adres heeft.\n"
+"Hiervoor is nodig:\n"
+"\n"
+" -  het MAC-adres van de NAS (ziet eruit als aa:bb:cc:dd:ee:ff)\n"
+" -  toegang tot de NAS via een webbrowser\n"
+" -  toegang tot de router via een webbrowser\n"
+"\n"
+" 1. Kies in de router met het MAC-adres van de NAS een\n"
+"    IP-adres buiten het bereik van DHCP die automatisch\n"
+"    de IP-adressen uitdeelt (vaak 192.168.0.200).\n"
+" 2. Kies in de NAS het vaste IP-adres en zet DHCP uit."
+
+#, sh-format
+msgid "Does the NAS have a fixed IP address such as $nas_ip_address?"
+msgstr "Heeft de NAS een vast IP-adres zoals $nas_ip_address?"
+
+msgid "IP address of the NAS"
+msgstr "IP-adres van de NAS"
+
+msgid "Username on the NAS"
+msgstr "Gebruikersnaam op de NAS"
+
+msgid "Password of this user on the NAS"
+msgstr "Wachtwoord van deze gebruiker op de NAS"
+
+msgid "Share name of this user on the NAS"
+msgstr "Share-naam van deze gebruiker op de NAS"
+
+msgid "Question"
+msgstr "Vraag"
+
+msgid "Notification"
+msgstr "Melding"
+
+#, sh-format
+msgid "$quest1 [y/N]: "
+msgstr "$quest1 [j/N]: "
+
+msgid "Questions"
+msgstr "Vragen"
+
+msgid "Please answer the following questions"
+msgstr "Beantwoord alstublieft de volgende vragen"
+
+msgid "If you do not specify, the value in [] is used as the response."
+msgstr "Als u niets opgeeft, wordt de waarde tussen [] gebruikt als antwoord."
+
+msgid "Commands are being processed"
+msgstr "Opdrachten worden verwerkt"
+
+msgid "Create NAS login..."
+msgstr "Maak NAS login..."
+
+msgid "Create systemd mount unit file..."
+msgstr "Maak systemd mount unit-bestand..."
+
+msgid "Mount NAS..."
+msgstr "Koppel NAS aan..."
+
+#, sh-format
+msgid ""
+"The systemd mount file is activated.\n"
+"The NAS should be available at '$NAS_MOUNT_POINT'.\n"
+"\n"
+"Deactivate the systemd mount file with the command:"
+msgstr ""
+"Het systemd mount-bestand is geactiveerd.\n"
+"De NAS zou beschikbaar moetn zijn op '$NAS_MOUNT_POINT'.\n"
+"\n"
+"De-activeer het systemd mount-bestand met de opdracht:"
+
+msgid "Authentication is required to mount a network drive"
+msgstr "Authenticatie is vereist om een netwerkschijf aan te koppelen"
+
+msgid "Mount a NAS during startup"
+msgstr "Koppel een NAS aan tijdens het opstarten"
