@@ -1,39 +1,27 @@
-.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kznas.
+.\"############################################################################
+.\"# Man-pagina voor kz-nas.
+.\"#
+.\"# Geschreven door Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universeel
+.\"# <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>, 2019-2023.
+.\"############################################################################
 .\"
-.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-.\"
-.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
-.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
-.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
-.\"
-.\" ReleaseNumber: 03.06.01
-.\" DateOfRelease: 2021-07-14
-.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\"
-.TH KZNAS 1 "kznas" "kzscripts 365" "kznas"
+.TH "kz-nas" "1" "2019-2023" "kz 2.4.7" "Handleiding kz"
 .\"
 .\"
 .SH NAAM
-kznas \- Netwerkschijf aankoppelen.
+kz-nas\ - Netwerkschijf aankoppelen.
 .\"
 .\"
 .SH SAMENVATTING
-.B kznas
+.B kz nas
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkznas\fR koppelt een NAS aan tijdens het opstarten.
+\fBkz nas\fR koppelt een NAS aan tijdens het opstarten.
+.sp
+In een grafische werkomgeving kan opdracht \fBkz nas\fR worden uitgevoerd door
+te zoeken naar \fBnas\fR, klik op \fBNetwerkschijf aankoppelen\fR.
 .sp
 Er wordt een systemd mount-bestand aangemaakt en geactiveerd.
 .sp
@@ -41,13 +29,8 @@ Het aan te maken systemd mount-bestand wordt samengesteld met standaardwaarden.
 .br
 Bij het uitvoeren van dit script worden deze standaardwaarden getoond tussen []
 en zijn deze op te geven.
-.br
-Als er al regels voorkomen voor de NAS wordt de optie geboden deze te
-verwijderen.
-Doen, want nu wordt systemd gebruikt!
 .sp
 Zorg dat de NAS een vast IP-adres heeft.  Hiervoor is nodig:
-.sp
  -  het MAC-adres van de NAS (ziet eruit als aa:bb:cc:dd:ee:ff)
  -  toegang tot de NAS via een webbrowser
  -  toegang tot de router via een webbrowser
@@ -58,82 +41,65 @@ bereik van DHCP die automatisch de IP-adressen uitdeelt (vaak 192.168.0.200).
 .sp
 NAS is een acroniem (letterwoord), en een afkorting, van network-attached
 storage.
-.sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkznas\fR worden
-gestart door te zoeken naar \fBnas\fR, klik op \fBNetwerkschijf aankoppelen\fR.
 .\"
 .\"
 .SH OPTIES
 .TP
-\fB-d\fR, \fB--debug\fR
-Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kznas').
-.TP
-\fB-g\fR, \fB--gui\fR
-Start in grafische modus (gui = graphical user interface).
-.TP
-\fB-h\fR, \fB--help\fR
-Toon een een korte omschrijving van de beschikbare opties.
-.TP
 \fB-u\fR, \fB--usage\fR
 Toon de beschikbare opties.
+.TP
+\fB-h\fR, \fB--help\fR
+Toon een korte omschrijving van de beschikbare opties.
 .TP
 \fB-v\fR, \fB--version\fR
 Toon de versie, de auteur, en het auteursrecht.
 .TP
-\fB--\fR
-Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
-opties uit.
-.br
-Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
-Een argument van - is gelijk aan --.
+\fB-g\fR, \fB--gui\fR
+Start in grafische modus (gui=graphical user interface; grafische
+gebruikersinterface).
 .\"
 .\"
 .SH STOPSTATUS
 Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde 1.
-.br
-Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/etc/kznaslogin
+/etc/kz-naslogin
 .RS
 NAS-login gegevens.
 .RE
 .sp
-/etc/systemd/system/mnt-nas.mount
+/etc/systemd/system/mnt-kz-nas.mount
 .RS
-Systemd mount-bestand.
-.RE
-.\"
+Systemd mount unit-bestand.
+.RE.\"
 .\"
 .SH NOTITIES
 .IP " 1." 4
-Checklist installatie
+Day 1 Operations
 .RS 4
-https://karelzimmer.nl
+\fBkz nas\fR wordt voornamelijk gebruikt voor \fBDay 1 Operations\fR. Zie
+\fBkz\fR(1) voor een uitleg.
 .RE
 .\"
 .\"
 .SH AUTEUR
-Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-.\"
-.\"
-.SH AUTEURSRECHT
-Auteursrecht (c) 2014-2021 Karel Zimmer.
-.br
-GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
+Geschreven door Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universeel
+<https://creativecommons.org/publicdomain/zero/1.0/deed.nl>, 2019-2023.
 .\"
 .\"
 .SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzmenu\fR(1),
+\fBkz_common.sh\fR(1),
+\fBkz-menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
+.SH KZ
+Onderdeel van het \fBkz\fR(1) pakket, genoemd naar zijn maker, Karel Zimmer.
+.\"
+.\"
 .SH BESCHIKBAARHEID
-Opdracht kznas is onderdeel van het pakket kzscripts en is beschikbaar vanaf
-Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
-.sp
-.\" EOF
+Opdracht \fBkz nas\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer
+<https://karelzimmer.nl/html/nl/linux.html#scripts>.

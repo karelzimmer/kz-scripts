@@ -1,139 +1,103 @@
-.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" Man-pagina voor kznas.
+.\"############################################################################
+.\"# Man page for kz-nas.
+.\"#
+.\"# Written Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+.\"# <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>, 2019-2023.
+.\"############################################################################
 .\"
-.\" Geschreven door Karel Zimmer <info@karelzimmer.nl>.
-.\"
-.\" Auteursrecht (c) 2019-2021 Karel Zimmer.
-.\" Creative Commons Naamsvermelding-GelijkDelen Internationaal-licentie
-.\" <https://creativecommons.org/licenses/by-sa/4.0/>.
-.\"
-.\" ReleaseNumber: 03.06.01
-.\" DateOfRelease: 2021-07-14
-.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\" TO BE CHANGED/XLATED
-.\"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.\"
-.TH KZNAS 1 "kznas" "kzscripts 365" "kznas"
+.TH "kz-nas" "1" "2019-2023" "kz 2.4.7" "Kz Manual"
 .\"
 .\"
-.SH NAAM
-kznas \- Netwerkschijf aankoppelen.
+.SH NAME
+kz-nas\ - Mount network drive.
 .\"
 .\"
-.SH SAMENVATTING
-.B kznas
-[OPTIE...]
+.SH SYNOPSIS
+.B kz nas
+[OPTION...]
 .\"
 .\"
-.SH BESCHRIJVING
-\fBkznas\fR koppelt een NAS aan tijdens het opstarten.
+.SH DESCRIPTION
+\fBkz nas\fR mounts a NAS during startup.
 .sp
-Er wordt een systemd mount-bestand aangemaakt en geactiveerd.
+In a graphical work environment command \fBkz nas\fR can be executed by
+searching for \fBnas\fR, click on \fBMount network drive\fR.
 .sp
-Het aan te maken systemd mount-bestand wordt samengesteld met standaardwaarden.
+A systemd mount file is created and activated.
+.sp
+The systemd mount file to be created is constructed with default values.
 .br
-Bij het uitvoeren van dit script worden deze standaardwaarden getoond tussen []
-en zijn deze op te geven.
-.br
-Als er al regels voorkomen voor de NAS wordt de optie geboden deze te
-verwijderen.
-Doen, want nu wordt systemd gebruikt!
+When running this script, these default values are shown between [] and can be
+specified.
 .sp
-Zorg dat de NAS een vast IP-adres heeft.  Hiervoor is nodig:
+Make sure the NAS has a fixed IP address. This requires:
+ -  the MAC address of the NAS (looks like aa:bb:cc:dd:ee:ff)
+ -  access the NAS via a web browser
+ -  access the router via a web browser
+
+  1. Select the MAC address of the NAS in the router IP address outside the
+     range of DHCP automatically distributes the IP addresses
+     (often 192.168.0.200).
+  2. Select the fixed IP address in the NAS and turn off DHCP.
 .sp
- -  het MAC-adres van de NAS (ziet eruit als aa:bb:cc:dd:ee:ff)
- -  toegang tot de NAS via een webbrowser
- -  toegang tot de router via een webbrowser
-.sp
- 1. Kies in de router met het MAC-adres van de NAS een IP-adres buiten het
-bereik van DHCP die automatisch de IP-adressen uitdeelt (vaak 192.168.0.200).
- 2. Kies in de NAS het vaste IP-adres en zet DHCP uit.
-.sp
-NAS is een acroniem (letterwoord), en een afkorting, van network-attached
-storage.
-.sp
-In een grafische werkomgeving zoals GNOME (e.g. Ubuntu) kan \fBkznas\fR worden
-gestart door te zoeken naar \fBnas\fR, klik op \fBNetwerkschijf aankoppelen\fR.
+NAS is an acronym, and abbreviation, of network-attached storage.
 .\"
 .\"
-.SH OPTIES
-.TP
-\fB-d\fR, \fB--debug\fR
-Geef foutopsporingsinformatie weer in het logboek (gebruik '[sudo] journalctl
--ab -t kznas').
-.TP
-\fB-g\fR, \fB--gui\fR
-Start in grafische modus (gui = graphical user interface).
-.TP
-\fB-h\fR, \fB--help\fR
-Toon een een korte omschrijving van de beschikbare opties.
+.SH OPTIONS
 .TP
 \fB-u\fR, \fB--usage\fR
-Toon de beschikbare opties.
+Show the available options.
+.TP
+\fB-h\fR, \fB--help\fR
+Show a short description of the available options.
 .TP
 \fB-v\fR, \fB--version\fR
-Toon de versie, de auteur, en het auteursrecht.
+Display the version, author, and copyright.
 .TP
-\fB--\fR
-Een -- geeft het einde van de opties aan en schakelt de verdere verwerking van
-opties uit.
-.br
-Alle argumenten na de -- worden behandeld als bestandsnamen en argumenten.
-Een argument van - is gelijk aan --.
+\fB-g\fR, \fB--gui\fR
+Start in graphics mode (gui=graphical user interface).
 .\"
 .\"
-.SH STOPSTATUS
-Normaal wordt afsluitwaarde 0 teruggegeven; als er een fout optreedt, is de
-afsluitwaarde 1.
-.br
-Als er een waarschuwing optreedt, is de afsluitwaarde 2.
+.SH EXIT STATUS
+Normally exit value 0 is returned; if an error occurs, the exit value not equal
+to 0.
 .\"
 .\"
-.SH BESTANDEN
-/etc/kznaslogin
+.SH FILES
+/etc/kz-naslogin
 .RS
-NAS-login gegevens.
+NAS-login data.
 .RE
 .sp
-/etc/systemd/system/mnt-nas.mount
+/etc/systemd/system/mnt-kz-nas.mount
 .RS
-Systemd mount-bestand.
-.RE
+Systemd mount unit file.
+.RE.\"
 .\"
-.\"
-.SH NOTITIES
+.SH NOTES
 .IP " 1." 4
-Checklist installatie
+Day 1 Operations
 .RS 4
-https://karelzimmer.nl
+\fBkz nas\fR is mainly used for \fBDay 1 Operations\fR. See \fBkz\fR(1) for an
+explanation.
 .RE
 .\"
 .\"
-.SH AUTEUR
-Geschreven door Karel Zimmer <info@karelzimmer.nl>.
+.SH AUTHOR
+Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
+<https://creativecommons.org/publicdomain/zero/1.0>, 2019-2023.
 .\"
 .\"
-.SH AUTEURSRECHT
-Auteursrecht (c) 2014-2021 Karel Zimmer.
-.br
-GNU Algemene Publieke Licentie <https://www.gnu.org/licenses/gpl.html>.
-.\"
-.\"
-.SH ZIE OOK
-\fBkzcommon.sh\fR(1),
-\fBkzmenu\fR(1),
+.SH SEE ALSO
+\fBkz_common.sh\fR(1),
+\fBkz-menu\fR(1),
 \fBhttps://karelzimmer.nl\fR
 .\"
 .\"
-.SH BESCHIKBAARHEID
-Opdracht kznas is onderdeel van het pakket kzscripts en is beschikbaar vanaf
-Karel Zimmer Linux Scripts <https://karelzimmer.nl/html/linux.html#scripts>.
-.sp
-.\" EOF
+.SH KZ
+Part of the \fBkz\fR(1) package, named after its creator, Karel Zimmer.
+.\"
+.\"
+.SH AVAILABILITY
+Command \fBkz nas\fR is part of the \fBkz\fR package and is available on
+Karel Zimmer's website <https://karelzimmer.nl/html/en/linux.html#scripts>.
