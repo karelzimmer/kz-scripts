@@ -330,54 +330,51 @@ msgstr ""
 msgid "Fix all the messages above."
 msgstr ""
 
-msgid "Check scripts (kz check)..."
+msgid "Check scripts (kz check)"
 msgstr ""
 
-msgid "Build website..."
+msgid "Build website"
 msgstr ""
 
-msgid "Generate .mo file (mogen)..."
+msgid "Generate .mo file (mogen)"
 msgstr ""
 
-msgid "Build package..."
+msgid "Build package"
 msgstr ""
 
-msgid "Install package..."
+msgid "Install package"
 msgstr ""
 
 msgid "Distribute kz package"
 msgstr ""
 
-msgid "Check that all repos are on branch main..."
+msgid "Check that all repos are on branch main"
 msgstr ""
 
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr ""
 
-msgid "Check that all repos are clean..."
+msgid "Check that all repos are clean"
 msgstr ""
 
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr ""
 
-msgid "Build package and website (kz build)..."
+msgid "Build package and website (kz build)"
 msgstr ""
 
-msgid "Upload website (lftp)..."
+msgid "Upload website (lftp)"
 msgstr ""
 
 msgid "Website upload failed."
 msgstr ""
 
-msgid "Install package kz (kz getdeb)..."
+msgid "Install package kz (kz getdeb)"
 msgstr ""
 
 msgid "Install package kz failed."
-msgstr ""
-
-msgid "Install package kz (may take a while)..."
 msgstr ""
 
 #, sh-format
@@ -421,16 +418,16 @@ msgstr ""
 msgid "Build"
 msgstr ""
 
-msgid "Check dependencies..."
+msgid "Check dependencies"
 msgstr ""
 
-msgid "Pull repos (gitpull)..."
+msgid "Pull repos (gitpull)"
 msgstr ""
 
-msgid "Status repos (gitstat)..."
+msgid "Status repos (gitstat)"
 msgstr ""
 
-msgid "Download website (lftp)..."
+msgid "Download website (lftp)"
 msgstr ""
 
 msgid "Password for"
@@ -909,13 +906,13 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-msgid "Snap refresh..."
+msgid "Snap refresh"
 msgstr ""
 
 msgid "Cleanup"
 msgstr ""
 
-msgid "Snap cleanup..."
+msgid "Snap cleanup"
 msgstr ""
 
 msgid ""
@@ -960,10 +957,10 @@ msgid ""
 "found."
 msgstr ""
 
-msgid "Run IVP (kz ivp)..."
+msgid "Run IVP (kz ivp)"
 msgstr ""
 
-msgid "Check website (rchecklink)..."
+msgid "Check website (rchecklink)"
 msgstr ""
 
 msgid "Authentication is required to install apps"
@@ -1091,13 +1088,13 @@ msgstr ""
 msgid "Commands are being processed"
 msgstr ""
 
-msgid "Create NAS login..."
+msgid "Create NAS login"
 msgstr ""
 
-msgid "Create systemd mount file..."
+msgid "Create systemd mount file"
 msgstr ""
 
-msgid "Mount NAS..."
+msgid "Mount NAS"
 msgstr ""
 
 #, sh-format

@@ -119,7 +119,7 @@ ${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
 function check_repos {
     local   error_flag=false
 
-    msg_info "$(gettext 'Check that all repos are on branch main...')"
+    msg_info "$(gettext 'Check that all repos are on branch main')..."
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
@@ -128,7 +128,7 @@ function check_repos {
             error_flag=true
         fi
     done
-    msg_info "$(gettext 'Check that all repos are clean...')"
+    msg_info "$(gettext 'Check that all repos are clean')..."
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
@@ -147,7 +147,7 @@ function check_repos {
 
 # This function builds package kz.
 function build_package {
-    msg_info "$(gettext 'Build package and website (kz build)...')
+    msg_info "$(gettext 'Build package and website (kz build)')...
 "
     # Call kz-build.
     "$SCRIPTS_REPO"/usr/bin/kz build || exit $ERROR
@@ -165,7 +165,7 @@ function upload_website {
     local   ftp_user=kzimmer
     local   ftp_login=$HOME/.kz-$ftp_host
 
-    msg_info "$(gettext 'Upload website (lftp)...')"
+    msg_info "$(gettext 'Upload website (lftp)')..."
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
@@ -187,7 +187,7 @@ function upload_website {
 # This function installs package kz.
 function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
-    msg_info "$(gettext 'Install package kz (kz getdeb)...')
+    msg_info "$(gettext 'Install package kz (kz getdeb)')...
 "
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
         msg_error "$(gettext 'Install package kz failed.')"

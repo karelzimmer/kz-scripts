@@ -108,7 +108,7 @@ ${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
 function check_dependencies {
     local   escape='gettext'
 
-    printf '%s\n' "$(gettext 'Check dependencies...')"
+    printf '%s\n' "$(gettext 'Check dependencies')..."
     check_for_active_updates
     sudo    apt-get             \
             install             \
@@ -150,10 +150,10 @@ function pull_repos {
     else
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
-    printf '%s\n' "$(gettext 'Pull repos (gitpull)...')"
+    printf '%s\n' "$(gettext 'Pull repos (gitpull)')..."
     # Call gitpull.
     "$bin_repo"/gitpull
-    printf '%s\n' "$(gettext 'Status repos (gitstat)...')"
+    printf '%s\n' "$(gettext 'Status repos (gitstat)')..."
     # Call gitstat.
     "$bin_repo"/gitstat
 }
@@ -170,7 +170,7 @@ function download_website {
     local   ftp_user=kzimmer
     local   ftp_login=$HOME/.kz-$ftp_host
 
-    printf '%s\n' "$(gettext 'Download website (lftp)...')"
+    printf '%s\n' "$(gettext 'Download website (lftp)')..."
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"

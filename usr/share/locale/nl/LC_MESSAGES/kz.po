@@ -395,55 +395,52 @@ msgstr "Controleren - achteraf"
 msgid "Fix all the messages above."
 msgstr "Herstel alle meldingen hierboven."
 
-msgid "Check scripts (kz check)..."
-msgstr "Controleer scripts (kz check)..."
+msgid "Check scripts (kz check)"
+msgstr "Controleer scripts (kz check)"
 
-msgid "Build website..."
-msgstr "Bouw website..."
+msgid "Build website"
+msgstr "Bouw website"
 
-msgid "Generate .mo file (mogen)..."
-msgstr "Genereer .mo bestand (mogen)..."
+msgid "Generate .mo file (mogen)"
+msgstr "Genereer .mo bestand (mogen)"
 
-msgid "Build package..."
-msgstr "Bouw pakket..."
+msgid "Build package"
+msgstr "Bouw pakket"
 
-msgid "Install package..."
-msgstr "Installeer pakket..."
+msgid "Install package"
+msgstr "Installeer pakket"
 
 msgid "Distribute kz package"
 msgstr "Pakket kz distribueren"
 
-msgid "Check that all repos are on branch main..."
-msgstr "Controleer of alle repo's zich op branch main bevinden..."
+msgid "Check that all repos are on branch main"
+msgstr "Controleer of alle repo's zich op branch main bevinden"
 
 #, sh-format
 msgid "Repo $repo not on branch main."
 msgstr "Repo $repo staat niet op branch main."
 
-msgid "Check that all repos are clean..."
-msgstr "Controleer of alle repo's schoon zijn..."
+msgid "Check that all repos are clean"
+msgstr "Controleer of alle repo's schoon zijn"
 
 #, sh-format
 msgid "Repo $repo is not clean."
 msgstr "Repo $repo is niet schoon."
 
-msgid "Build package and website (kz build)..."
-msgstr "Bouw pakket en website (kz build)..."
+msgid "Build package and website (kz build)"
+msgstr "Bouw pakket en website (kz build)"
 
-msgid "Upload website (lftp)..."
-msgstr "Upload website (lftp)..."
+msgid "Upload website (lftp)"
+msgstr "Upload website (lftp)"
 
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."
 
-msgid "Install package kz (kz getdeb)..."
-msgstr "Installeer pakket kz (kz getdeb)..."
+msgid "Install package kz (kz getdeb)"
+msgstr "Installeer pakket kz (kz getdeb)"
 
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
-
-msgid "Install package kz (may take a while)..."
-msgstr "Installeer pakket kz (kan even duren)..."
 
 #, sh-format
 msgid "Wait ${check_wait}s for another package manager to finish..."
@@ -496,17 +493,17 @@ msgstr "Controleren"
 msgid "Build"
 msgstr "Bouwen"
 
-msgid "Check dependencies..."
-msgstr "Controleer afhankelijkheden..."
+msgid "Check dependencies"
+msgstr "Controleer afhankelijkheden"
 
-msgid "Pull repos (gitpull)..."
-msgstr "Pull repo's (gitpull)..."
+msgid "Pull repos (gitpull)"
+msgstr "Pull repo's (gitpull)"
 
-msgid "Status repos (gitstat)..."
-msgstr "Status repo's (gitstat)..."
+msgid "Status repos (gitstat)"
+msgstr "Status repo's (gitstat)"
 
-msgid "Download website (lftp)..."
-msgstr "Download website (lftp)..."
+msgid "Download website (lftp)"
+msgstr "Download website (lftp)"
 
 msgid "Password for"
 msgstr "Wachtwoord voor"
@@ -1100,14 +1097,14 @@ msgstr "Repareren"
 msgid "Update"
 msgstr "Bijwerken"
 
-msgid "Snap refresh..."
-msgstr "Snaps bijwerken..."
+msgid "Snap refresh"
+msgstr "Snaps bijwerken"
 
 msgid "Cleanup"
 msgstr "Opruimen"
 
-msgid "Snap cleanup..."
-msgstr "Snaps opruimen..."
+msgid "Snap cleanup"
+msgstr "Snaps opruimen"
 
 msgid ""
 "*** The computer must restart to complete the installation of updates ***"
@@ -1157,11 +1154,11 @@ msgstr ""
 "PolicyKit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
 
-msgid "Run IVP (kz ivp)..."
-msgstr "Voer IVP uit (kz ivp)..."
+msgid "Run IVP (kz ivp)"
+msgstr "Voer IVP uit (kz ivp)"
 
-msgid "Check website (rchecklink)..."
-msgstr "Controleer website (rchecklink)..."
+msgid "Check website (rchecklink)"
+msgstr "Controleer website (rchecklink)"
 
 msgid "Authentication is required to install apps"
 msgstr "Authenticatie is vereist om apps te installeren"
@@ -1301,14 +1298,14 @@ msgstr "Als u niets opgeeft, wordt de waarde tussen [] gebruikt als antwoord."
 msgid "Commands are being processed"
 msgstr "Opdrachten worden verwerkt"
 
-msgid "Create NAS login..."
-msgstr "Maak NAS login..."
+msgid "Create NAS login"
+msgstr "Maak NAS login"
 
-msgid "Create systemd mount file..."
-msgstr "Maak systemd mount-bestand..."
+msgid "Create systemd mount file"
+msgstr "Maak systemd mount-bestand"
 
-msgid "Mount NAS..."
-msgstr "Koppel NAS aan..."
+msgid "Mount NAS"
+msgstr "Koppel NAS aan"
 
 #, sh-format
 msgid ""

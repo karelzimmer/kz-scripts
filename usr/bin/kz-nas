@@ -232,13 +232,13 @@ process_input() {
     local   text0
             text0=$(gettext 'Commands are being processed')
     local   text1
-            text1=$(gettext 'Check dependencies...')
+            text1=$(gettext 'Check dependencies')
     local   text2
-            text2=$(gettext 'Create NAS login...')
+            text2=$(gettext 'Create NAS login')
     local   text3
-            text3=$(gettext 'Create systemd mount file...')
+            text3=$(gettext 'Create systemd mount file')
     local   text4
-            text4=$(gettext 'Mount NAS...')
+            text4=$(gettext 'Mount NAS')
 
     title=$(gettext 'Mount network drive')
     if $option_gui; then
@@ -265,11 +265,11 @@ process_input() {
                 --title     "$title"    \
                 --text      "$text0"    2> >($logcmd)
     else
-        printf '%s\n' "${bold}$text1${normal}"
+        printf '%s\n' "${bold}$text1...${normal}"
         check_dependencies
-        printf '%s\n' "${bold}$text2${normal}"
+        printf '%s\n' "${bold}$text2...${normal}"
         create_nas_login
-        printf '%s\n' "${bold}$text3${normal}"
+        printf '%s\n' "${bold}$text3...${normal}"
         create_systemd_unit_file
         printf '%s\n' "${bold}$text4${normal}"
         mount_nas
