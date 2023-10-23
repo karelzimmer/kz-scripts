@@ -304,8 +304,8 @@ function process_option_version {
     local   grep_expr='# <https://creativecommons.org'
     local   program_year=''
 
-    if [[ -e /usr/local/etc/kz-build-id ]]; then
-        build_id=' ('$(cat /usr/local/etc/kz-build-id)')'
+    if [[ -e /usr/local/etc/kz-build.id ]]; then
+        build_id=' ('$(cat /usr/local/etc/kz-build.id)')'
     else
         msg_log "$(gettext 'Build ID cannot be determined.')"
     fi

@@ -39,7 +39,8 @@ readonly    HELP
 readonly    X_OPTIONS_SHORT='g'
 readonly    X_OPTIONS_LONG=',gui'
 
-readonly    NAS_LOGIN=/usr/local/etc/${PROGRAM_NAME}login
+readonly    NAS_LOGIN_DIR=/usr/local/etc
+readonly    NAS_LOGIN=$NAS_LOGIN_DIR/$PROGRAM_NAME.login
 readonly    NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
             NAS_FIXED_IP_ADDRESS="\
 $(gettext "Make sure the NAS has a fixed IP address.
@@ -286,6 +287,7 @@ function check_dependencies {
 # This function creates the secret needed to log in to the NAS.
 create_nas_login() {
     text="username=$nas_username\npassword=$nas_password"
+    rm --force $$NAS_LOGIN_DIR/$PROGRAM_NAME*
     printf '%b\n' "$text" > "$NAS_LOGIN"
     chmod '600' "$NAS_LOGIN" |& $logcmd
 }
@@ -323,8 +325,10 @@ term_script() {
 $(eval_gettext "The systemd mount file is activated.
 The NAS should be available at '\$NAS_MOUNT_POINT'.
 
-Deactivate the systemd mount file with the command:") \
-${blue}sudo systemctl disable $SYSTEMD_MOUNT_FILE${normal}"
+Deactivate the systemd mount file and remove the NAS login with the following \
+commands:")
+${blue}sudo systemctl disable $SYSTEMD_MOUNT_FILE${normal}
+${blue}sudo rm $NAS_LOGIN${normal}"
     exit $OK
 }
 
