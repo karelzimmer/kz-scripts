@@ -226,27 +226,33 @@ $quest5? [$nas_share_name]: "
 }
 
 
+# This function processes the script options and arguments.
 process_input() {
     local   text0
             text0=$(gettext 'Commands are being processed')
     local   text1
-            text1=$(gettext 'Create NAS login...')
+            text1=$(gettext 'Check dependencies...')
     local   text2
-            text2=$(gettext 'Create systemd mount file...')
+            text2=$(gettext 'Create NAS login...')
     local   text3
-            text3=$(gettext 'Mount NAS...')
+            text3=$(gettext 'Create systemd mount file...')
+    local   text4
+            text4=$(gettext 'Mount NAS...')
 
     title=$(gettext 'Mount network drive')
     if $option_gui; then
         (
         sleep 1
         printf '%s\n' "#$text1"
-        create_nas_login
+        check_dependencies
         sleep 1
         printf '%s\n' "#$text2"
-        create_systemd_unit_file
+        create_nas_login
         sleep 1
         printf '%s\n' "#$text3"
+        create_systemd_unit_file
+        sleep 1
+        printf '%s\n' "#$text4"
         mount_nas
         ) |&
         zenity  --progress              \
@@ -259,6 +265,8 @@ process_input() {
                 --text      "$text0"    2> >($logcmd)
     else
         printf '%s\n' "$text1"
+        check_dependencies
+        printf '%s\n' "$text1"
         create_nas_login
         printf '%s\n' "$text2"
         create_systemd_unit_file
@@ -268,6 +276,14 @@ process_input() {
 }
 
 
+# This function check and installs dependencies.
+function check_dependencies {
+    check_for_active_updates
+    sudo apt-get install --yes cifs-utils samba
+}
+
+
+# This function creates the secret needed to log in to the NAS.
 create_nas_login() {
     text="username=$nas_username\npassword=$nas_password"
     printf '%b\n' "$text" > "$NAS_LOGIN"
@@ -275,6 +291,7 @@ create_nas_login() {
 }
 
 
+# This function creates the systemd unit mount file.
 create_systemd_unit_file() {
     printf '%s\n' "[Unit]
 Description=Mount NAS Directory
@@ -291,6 +308,7 @@ WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 }
 
 
+# This function allows the NAS to be connected ad hoc.
 mount_nas() {
     systemctl enable "$SYSTEMD_MOUNT_FILE" |& $logcmd
     systemctl start "$SYSTEMD_MOUNT_FILE" |& $logcmd || true
@@ -298,6 +316,7 @@ mount_nas() {
 }
 
 
+# This function controls the termination of the script.
 term_script() {
     systemctl status "$SYSTEMD_MOUNT_FILE" || true
     msg_info "

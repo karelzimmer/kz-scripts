@@ -39,12 +39,6 @@ sudo apt-get remove --purge --yes calibre
 sudo apt-get autoremove --yes
 
 
-# APP cifs pc-van-hugo
-# Needed for kz-nas.
-sudo apt-get remove --purge --yes cifs-utils samba
-sudo apt-get autoremove --yes
-
-
 # APP clamav pc-van-hugo
 sudo apt-get remove --purge --yes clamtk-gnome
 sudo apt-get autoremove --yes

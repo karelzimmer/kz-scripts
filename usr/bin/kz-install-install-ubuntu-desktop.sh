@@ -41,11 +41,6 @@ sudo apt-get install --yes bleachbit
 sudo apt-get install --yes calibre
 
 
-# APP cifs pc-van-hugo
-# Needed for kz-nas.
-sudo apt-get install --yes cifs-utils samba
-
-
 # APP clamav pc-van-hugo
 sudo apt-get install --yes clamtk-gnome
 
