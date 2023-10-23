@@ -1085,7 +1085,7 @@ msgstr ""
 msgid "If you do not specify, the value in [] is used as the response."
 msgstr ""
 
-msgid "Commands are being processed"
+msgid "Commands are being prepared"
 msgstr ""
 
 msgid "Create NAS login"

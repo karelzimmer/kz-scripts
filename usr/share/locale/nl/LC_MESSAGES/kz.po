@@ -1295,8 +1295,8 @@ msgstr "Beantwoord alstublieft de volgende vragen"
 msgid "If you do not specify, the value in [] is used as the response."
 msgstr "Als u niets opgeeft, wordt de waarde tussen [] gebruikt als antwoord."
 
-msgid "Commands are being processed"
-msgstr "Opdrachten worden verwerkt"
+msgid "Commands are being prepared"
+msgstr "Opdrachten worden voorbereid"
 
 msgid "Create NAS login"
 msgstr "Maak NAS login"

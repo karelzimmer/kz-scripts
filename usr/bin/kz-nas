@@ -230,7 +230,7 @@ $quest5? [$nas_share_name]: "
 # This function processes the script options and arguments.
 process_input() {
     local   text0
-            text0=$(gettext 'Commands are being processed')
+            text0=$(gettext 'Commands are being prepared')
     local   text1
             text1=$(gettext 'Check dependencies')
     local   text2
@@ -255,6 +255,7 @@ process_input() {
         sleep 2
         printf '%s\n' "#$text4"
         mount_nas
+        sleep 2
         ) |&
         zenity  --progress              \
                 --pulsate               \
