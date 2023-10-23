@@ -202,6 +202,10 @@ Disconnect media via Files.")"
 
 # This function backs up user settings.
 function backup_settings {
+    if $option_gui; then
+        # To prevent screens from coming and going very quickly.
+        sleep 2
+    fi
     migrate_settings_previously_backuped
     backup_settings_desktop_background
     backup_settings_favorite_apps

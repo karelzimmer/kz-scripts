@@ -283,6 +283,10 @@ $text..."
 
 # This function restores user settings.
 function restore_settings {
+    if $option_gui; then
+        # To prevent screens from coming and going very quickly.
+        sleep 2
+    fi
     restore_settings_desktop_background
     restore_settings_favorite_apps
 }
