@@ -164,6 +164,16 @@ sudo systemctl restart ssh.service
 sudo apt-get install --yes gnome-sushi
 
 
+# APP teamviewer pc06
+# Web app: https://web.teamviewer.com
+echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
+wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
+sudo apt-get update
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
+# The installation adds an apt-key that is no longer needed.
+sudo apt-key del 0C1289C0 DEB49217
+
+
 # APP tree pc06
 sudo apt-get install --yes tree
 
