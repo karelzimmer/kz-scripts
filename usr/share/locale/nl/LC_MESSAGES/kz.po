@@ -1077,7 +1077,7 @@ msgid "No set up file found, looked for $input_file."
 msgstr "Geen installatiebestand gevonden, zocht $input_file."
 
 msgid "To set up the APPs run:"
-msgstr "Om de APPs in te stellen voer uit"
+msgstr "Om de APPs in te stellen voer uit:"
 
 msgid "To view the contents of the APPs set up file execute:"
 msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"
