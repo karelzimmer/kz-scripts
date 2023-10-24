@@ -282,7 +282,8 @@ file execute:")
     ${blue}$DISPLAY_NAME --cat APP...${normal}" \
                 "$(gettext 'To install the APPs run:')
     ${blue}$DISPLAY_NAME APP...${normal}"       \
-                "$(gettext 'To view the contents of the default install file run:')
+                "$(gettext "To view the contents of the default install file \
+run:")
     ${blue}$DISPLAY_NAME --cat${normal}"
     fi
 )"
