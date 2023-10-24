@@ -194,12 +194,12 @@ function process_menu1_tui {
     msg_info "
 $MENU1_HEAD
 "
-        printf  '%3s  %-25s  %s\n'      \
+        printf  '%3s  %-24s  %s\n'      \
                 "$(gettext 'NUM')"      \
                 "$(gettext 'ACTION')"   \
                 "$(gettext 'EXPLANATION')"
     for menu1_action in "${!MENU1_ACTIONS[@]}"; do
-        printf  '%3s  %-25s  %s\n'                  \
+        printf  '%3s  %-24s  %s\n'                  \
                 "$menu1_action"                     \
                 "${MENU1_ACTIONS[$menu1_action]}"   \
                 "${MENU1_COMMANDS[$menu1_action]}"
