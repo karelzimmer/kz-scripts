@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 09:13+0200\n"
+"POT-Creation-Date: 2023-10-24 19:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,8 +174,7 @@ msgid ""
 "NUM  COMMAND"
 msgstr ""
 
-#, sh-format
-msgid "To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND${normal}"
+msgid "To execute a COMMAND:"
 msgstr ""
 
 msgid "Make backup"
@@ -482,8 +481,7 @@ msgid ""
 "> is the new setting (B):"
 msgstr ""
 
-#, sh-format
-msgid "When CHANGEs execute: ${blue}gsettings set CHANGE${normal}"
+msgid "When CHANGEs execute:"
 msgstr ""
 
 msgid "Install apps"
@@ -546,10 +544,13 @@ msgstr ""
 msgid "     0   No apps found."
 msgstr ""
 
+msgid "To view the contents of the APPs installation file execute:"
+msgstr ""
+
 msgid "To install the APPs run:"
 msgstr ""
 
-msgid "To view the contents of the APPs installation file execute:"
+msgid "To view the contents of the default install file run:"
 msgstr ""
 
 msgid ""
@@ -563,13 +564,13 @@ msgid "     0 No files present."
 msgstr ""
 
 #, sh-format
-msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
+msgid "To process FILE execute:"
 msgstr ""
 
-#, sh-format
-msgid ""
-"To view the commands of FILE execute: ${blue}$DISPLAY_NAME --cat --file "
-"FILE${normal}"
+msgid "To view the commands of FILE execute:"
+msgstr ""
+
+msgid "The default FILE is:"
 msgstr ""
 
 msgid "install"
@@ -885,10 +886,13 @@ msgstr ""
 msgid "No set up file found, looked for $input_file."
 msgstr ""
 
+msgid "To view the contents of the APPs set up file execute:"
+msgstr ""
+
 msgid "To set up the APPs run:"
 msgstr ""
 
-msgid "To view the contents of the APPs set up file execute:"
+msgid "To view the contents of the default set up file run:"
 msgstr ""
 
 msgid "set up"

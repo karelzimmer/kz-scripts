@@ -240,11 +240,13 @@ $(
 
 $USAGE_LINE"
     else
-        printf  '\n%s\n%s\n'                            \
-                "$(eval_gettext "To view the commands of FILE execute: \
-\${blue}\$DISPLAY_NAME --cat --file FILE\${normal}")"   \
-                "$(eval_gettext "To process FILE execute: \
-\${blue}\$DISPLAY_NAME --file FILE\${normal}")"
+        printf  '\n%s\n%s\n%s\n'                        \
+                "$(gettext 'To view the commands of FILE execute:')
+    ${blue}$DISPLAY_NAME --cat --file FILE${normal}"    \
+                "$(gettext 'To process FILE execute:')
+    ${blue}$DISPLAY_NAME --file FILE${normal}"          \
+                "$(gettext 'The default FILE is:')
+    $input_file"
     fi
 )"
 }
@@ -272,11 +274,14 @@ $(
 
 $USAGE_LINE"
     else
-        printf  '\n%s\n%s\n'                                \
+        printf  '\n%s\n%s\n%s\n'                \
                 "$(gettext "To view the contents of the APPs set up file \
-execute:") ${blue}$DISPLAY_NAME --cat APP...${normal}" \
-                "$(gettext 'To set up the APPs run:') ${blue}$DISPLAY_NAME \
-APP...${normal}"
+execute:")
+    ${blue}$DISPLAY_NAME --cat APP...${normal}" \
+                "$(gettext 'To set up the APPs run:')
+    ${blue}$DISPLAY_NAME APP...${normal}"       \
+                "$(gettext 'To view the contents of the default set up file run:')
+    ${blue}$DISPLAY_NAME --cat${normal}"
     fi
 )"
 }

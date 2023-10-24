@@ -117,8 +117,8 @@ NUM  COMMAND')"
             --number-separator='  ' \
             --body-numbering=a
     msg_info "
-$(eval_gettext "To execute a COMMAND: \${blue}\$DISPLAY_NAME \
-COMMAND\${normal}")"
+$(gettext 'To execute a COMMAND:')
+    ${blue}$DISPLAY_NAME COMMAND${normal}"
 }
 
 

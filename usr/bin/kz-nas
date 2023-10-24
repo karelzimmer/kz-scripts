@@ -328,8 +328,8 @@ The NAS should be available at '\$NAS_MOUNT_POINT'.
 
 Deactivate the systemd mount file and remove the NAS login with the following \
 commands:")
-${blue}sudo systemctl disable $SYSTEMD_MOUNT_FILE${normal}
-${blue}sudo rm $NAS_LOGIN${normal}"
+    ${blue}sudo systemctl disable $SYSTEMD_MOUNT_FILE${normal}
+    ${blue}sudo rm $NAS_LOGIN${normal}"
     exit $OK
 }
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-23 09:12+0200\n"
+"POT-Creation-Date: 2023-10-24 19:25+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -213,9 +213,8 @@ msgstr ""
 "\n"
 "NUM  OPDRACHT"
 
-#, sh-format
-msgid "To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND${normal}"
-msgstr "Om een OPDRACHT uit te voeren: ${blue}$DISPLAY_NAME OPDRACHT${normal}"
+msgid "To execute a COMMAND:"
+msgstr "Om een OPDRACHT uit te voeren:"
 
 msgid "Make backup"
 msgstr "Back-up maken"
@@ -577,9 +576,8 @@ msgstr ""
 "< is de oude   instelling (A),\n"
 "> is de nieuwe instelling (B):"
 
-#, sh-format
-msgid "When CHANGEs execute: ${blue}gsettings set CHANGE${normal}"
-msgstr "Bij WIJZIGINGen voer uit: ${blue}gsettings set WIJZIGING${normal}"
+msgid "When CHANGEs execute:"
+msgstr "Bij WIJZIGINGen voer uit:"
 
 msgid "Install apps"
 msgstr "Apps installeren"
@@ -652,12 +650,16 @@ msgstr ""
 msgid "     0   No apps found."
 msgstr "     0   Geen apps gevonden."
 
-msgid "To install the APPs run:"
-msgstr "Om de APPs te installeren voer uit:"
-
 msgid "To view the contents of the APPs installation file execute:"
 msgstr ""
 "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit:"
+
+msgid "To install the APPs run:"
+msgstr "Om de APPs te installeren voer uit:"
+
+msgid "To view the contents of the default install file run:"
+msgstr "Om de inhoud van het standaard installatiebestand te bekijken voer "
+"uit:"
 
 msgid ""
 "The following FILEs are available:\n"
@@ -673,18 +675,14 @@ msgid "     0 No files present."
 msgstr "     0 Geen bestanden gevonden."
 
 #, sh-format
-msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
-msgstr ""
-"Om BESTAND te verwerken voer uit: ${blue}$DISPLAY_NAME --file "
-"BESTAND${normal}"
+msgid "To process FILE execute:"
+msgstr "Om BESTAND te verwerken voer uit:"
 
-#, sh-format
-msgid ""
-"To view the commands of FILE execute: ${blue}$DISPLAY_NAME --cat --file "
-"FILE${normal}"
-msgstr ""
-"Om de opdrachten in BESTAND te bekijken voer uit ${blue}$DISPLAY_NAME --cat "
-"--file BESTAND${normal}"
+msgid "To view the commands of FILE execute:"
+msgstr "Om de opdrachten in BESTAND te bekijken voer uit:"
+
+msgid "The default FILE is:"
+msgstr "Het standaardBESTAND is:"
 
 msgid "install"
 msgstr "installeren"
@@ -1076,11 +1074,14 @@ msgstr ""
 msgid "No set up file found, looked for $input_file."
 msgstr "Geen installatiebestand gevonden, zocht $input_file."
 
+msgid "To view the contents of the APPs set up file execute:"
+msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"
+
 msgid "To set up the APPs run:"
 msgstr "Om de APPs in te stellen voer uit:"
 
-msgid "To view the contents of the APPs set up file execute:"
-msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"
+msgid "To view the contents of the default set up file run:"
+msgstr "Om de inhoud van het standaard instelbestand te bekijken voer uit:"
 
 msgid "set up"
 msgstr "instellen"
