@@ -135,6 +135,7 @@ sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 
 
 # APP ros pc04
+# Check: https://wiki.ros.org/Installation/Ubuntu
 :
 
 
