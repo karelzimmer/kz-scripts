@@ -236,7 +236,7 @@ $(
                     --number-format=rn                      \
                     --number-separator='  '                 \
                     --body-numbering=a; then
-        printf '%s\n' "$(eval_gettext '     0 No files present.')
+        printf '%s\n' "$(gettext '  0  No files present.')
 
 $USAGE_LINE"
     else
@@ -269,7 +269,7 @@ $(
                     --number-format=rn      \
                     --number-separator='  ' \
                     --body-numbering=a; then
-        printf '%s\n' "$(gettext '     0   No apps found.')
+        printf '%s\n' "$(gettext '  0  No apps found.')
 
 $USAGE_LINE"
     else

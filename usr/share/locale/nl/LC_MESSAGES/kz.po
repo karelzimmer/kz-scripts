@@ -647,8 +647,8 @@ msgstr ""
 "\n"
 "NUM  APP"
 
-msgid "     0   No apps found."
-msgstr "     0   Geen apps gevonden."
+msgid "  0  No apps found."
+msgstr "  0  Geen apps gevonden."
 
 msgid "To view the contents of the APPs installation file execute:"
 msgstr ""
@@ -670,11 +670,9 @@ msgstr ""
 "\n"
 "NUM  BESTAND"
 
-#, sh-format
-msgid "     0 No files present."
-msgstr "     0 Geen bestanden gevonden."
+msgid "  0  No files present."
+msgstr "  0  Geen bestanden gevonden."
 
-#, sh-format
 msgid "To process FILE execute:"
 msgstr "Om BESTAND te verwerken voer uit:"
 
