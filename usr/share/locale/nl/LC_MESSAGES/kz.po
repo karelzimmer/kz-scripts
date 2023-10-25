@@ -681,8 +681,8 @@ msgstr "Om BESTAND te verwerken voer uit:"
 msgid "To view the commands of FILE execute:"
 msgstr "Om de opdrachten in BESTAND te bekijken voer uit:"
 
-msgid "The default FILE is:"
-msgstr "Het standaardBESTAND is:"
+msgid "The default FILE is"
+msgstr "Het standaardBESTAND is"
 
 msgid "install"
 msgstr "installeren"

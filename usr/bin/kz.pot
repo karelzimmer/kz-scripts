@@ -570,7 +570,7 @@ msgstr ""
 msgid "To view the commands of FILE execute:"
 msgstr ""
 
-msgid "The default FILE is:"
+msgid "The default FILE is"
 msgstr ""
 
 msgid "install"
