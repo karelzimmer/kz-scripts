@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-25 10:27+0200\n"
+"POT-Creation-Date: 2023-10-25 19:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -532,7 +532,7 @@ msgid "Type '$DISPLAY_NAME --apps' for available apps."
 msgstr ""
 
 #, sh-format
-msgid "No install file found, looked for $input_file."
+msgid "No install file found, looked for '$input_file'."
 msgstr ""
 
 msgid ""
@@ -881,7 +881,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "No set up file found, looked for $input_file."
+msgid "No set up file found, looked for '$input_file'."
 msgstr ""
 
 msgid "To view the contents of the APPs set up file execute:"

@@ -179,7 +179,7 @@ function process_input {
     fi
     if ! [[ -f $input_file ]]; then
         msg_error \
-        "$(eval_gettext "No install file found, looked for \$input_file.")"
+        "$(eval_gettext "No install file found, looked for '\$input_file'.")"
         exit $ERROR
     fi
 
@@ -247,7 +247,7 @@ $USAGE_LINE"
                 "${blue}$DISPLAY_NAME --cat --file FILE${normal}"       \
                 "$(gettext 'To process FILE execute:')"                 \
                 "${blue}$DISPLAY_NAME --file FILE${normal}"             \
-                "$(gettext 'The default FILE is') $input_file."
+                "$(gettext 'The default FILE is') '$input_file'."
     fi
 )"
 }

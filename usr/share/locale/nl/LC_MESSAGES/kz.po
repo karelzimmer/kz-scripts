@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-24 19:25+0200\n"
+"POT-Creation-Date: 2023-10-25 19:16+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <karel.zimmer@gmail.com>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -635,8 +635,8 @@ msgid "Type '$DISPLAY_NAME --apps' for available apps."
 msgstr "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
 
 #, sh-format
-msgid "No install file found, looked for $input_file."
-msgstr "Geen installatiebestand gevonden, zocht $input_file."
+msgid "No install file found, looked for '$input_file'."
+msgstr "Geen installatiebestand gevonden, zocht '$input_file'."
 
 msgid ""
 "The following APPs are available:\n"
@@ -658,8 +658,8 @@ msgid "To install the APPs run:"
 msgstr "Om de APPs te installeren voer uit:"
 
 msgid "To view the contents of the default install file run:"
-msgstr "Om de inhoud van het standaard installatiebestand te bekijken voer "
-"uit:"
+msgstr ""
+"Om de inhoud van het standaard installatiebestand te bekijken voer uit:"
 
 msgid ""
 "The following FILEs are available:\n"
@@ -1069,8 +1069,8 @@ msgstr ""
 "  APP            stel APPs in"
 
 #, sh-format
-msgid "No set up file found, looked for $input_file."
-msgstr "Geen installatiebestand gevonden, zocht $input_file."
+msgid "No set up file found, looked for '$input_file'."
+msgstr "Geen instelbestand gevonden, zocht '$input_file'."
 
 msgid "To view the contents of the APPs set up file execute:"
 msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"
