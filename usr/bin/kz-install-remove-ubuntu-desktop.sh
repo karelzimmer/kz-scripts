@@ -68,11 +68,6 @@ sudo apt-get remove --purge --yes libimage-exiftool-perl
 sudo apt-get autoremove --yes
 
 
-# APP x11 HOST *
-# To check, after executing and reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
-
-
 # APP gimp HOST pc06 pc-van-hugo
 sudo apt-get remove --purge --yes gimp gimp-help-en gimp-help-nl
 sudo apt-get autoremove --yes
