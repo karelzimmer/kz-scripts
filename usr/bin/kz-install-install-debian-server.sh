@@ -6,20 +6,20 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP ansible *
+# APP ansible HOST *
 sudo apt-get install --yes ansible
 
 
-# APP locate *
+# APP locate HOST *
 sudo apt-get install --yes mlocate
 
 
-# APP add-user-to-group *
+# APP add-user-to-group HOST *
 # Enable access to system monitoring tasks like read many log files in /var/log.
 sudo adduser "${SUDO_USER:-$USER}" adm
 
 
-# APP ssh *
+# APP ssh HOST *
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 # Check for remote root access
@@ -27,7 +27,7 @@ grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
 
-# APP ufw *
+# APP ufw HOST *
 sudo apt-get install --yes ufw
 sudo ufw allow ssh
 sudo ufw enable

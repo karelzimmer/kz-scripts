@@ -6,28 +6,28 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP ansible *
+# APP ansible HOST *
 sudo apt-get remove --purge --yes ansible
 sudo apt-get autoremove --yes
 
 
-# APP cloud-init *
+# APP cloud-init HOST *
 sudo rm --force /etc/cloud/cloud-init.disabled
 
 
-# APP locate *
+# APP locate HOST *
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
 
 
-# APP ssh *
+# APP ssh HOST *
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --purge --yes ssh
 sudo apt-get autoremove --yes
 
 
-# APP ufw *
+# APP ufw HOST *
 sudo ufw disable
 sudo apt-get remove --purge --yes ufw
 sudo apt-get autoremove --yes

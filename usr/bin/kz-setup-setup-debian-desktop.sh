@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP dashtodock *
+# APP dashtodock USER *
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
@@ -18,11 +18,11 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.shell disable-user-extensions false
 
 
-# APP firefox karel@pc07 user@debian
+# APP firefox USER karel@pc07 user@debian
 kz-gset --delfav=firefox-esr
 
 
-# APP gnome *
+# APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -48,27 +48,27 @@ gsettings set org.gnome.shell disable-user-extensions false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
 
-# APP google-chrome *
+# APP google-chrome USER *
 kz-gset --addfavbef=google-chrome
 
 
-# APP kvm karel@pc07
+# APP kvm USER karel@pc07
 kz-gset --addfavaft=virt-manager
 
 
-# APP nautilus-hide *
+# APP nautilus-hide USER *
 echo 'snap' > "$HOME"/.hidden
 
 
-# APP spotify *
+# APP spotify USER *
 kz-gset --addfavaft=kz-spotify
 
 
-# APP start-installer *
+# APP start-installer USER *
 kz-gset --delfav=install-debian
 
 
-# APP terminal karel@pc07 user@debian
+# APP terminal USER karel@pc07 user@debian
 kz-gset --addfavbef=org.gnome.Terminal
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
@@ -77,7 +77,7 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
-# APP vscode karel@pc07 user@debian
+# APP vscode USER karel@pc07 user@debian
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
@@ -89,6 +89,6 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
 
-# APP webmin karel@pc07
+# APP webmin USER karel@pc07
 # Web app: https://localhost:10000
 kz-gset --addfavaft=kz-webmin

@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
 
-# APP apport *
+# APP apport HOST *
 # EXEC THIS FIRST.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
@@ -14,18 +14,18 @@ sudo rm --force /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
-# APP add-host pc01 pc06
+# APP add-host HOST pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
 sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
 sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
 
 
-# APP ansible pc06
+# APP ansible HOST pc06
 sudo apt-get install --yes ansible
 
 
-# APP anydesk *
+# APP anydesk HOST *
 # Web app: https://my.anydesk.com/v2
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
@@ -33,54 +33,54 @@ sudo apt-get update
 sudo apt-get install --yes anydesk
 
 
-# APP bleachbit pc-van-hugo
+# APP bleachbit HOST pc-van-hugo
 sudo apt-get install --yes bleachbit
 
 
-# APP calibre pc04 pc06 pc-van-hugo
+# APP calibre HOST pc04 pc06 pc-van-hugo
 sudo apt-get install --yes calibre
 
 
-# APP clamav pc-van-hugo
+# APP clamav HOST pc-van-hugo
 sudo apt-get install --yes clamtk-gnome
 
 
-# APP cockpit pc06
+# APP cockpit HOST pc06
 # Web app: https://localhost:9090
 sudo apt-get install --yes cockpit cockpit-pcp
 
 
-# APP cups-backend-bjnp pc-van-emily
+# APP cups-backend-bjnp HOST pc-van-emily
 # Add support for Canon USB over IP BJNP protocol
 sudo apt-get install --yes cups-backend-bjnp
 
 
-# APP dual-monitor pc06
+# APP dual-monitor HOST pc06
 if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
 
 
-# APP epiphany-browser pc06
+# APP epiphany-browser HOST pc06
 sudo apt-get install --yes epiphany-browser
 
 
-# APP exiftool pc06
+# APP exiftool HOST pc06
 sudo apt-get install --yes libimage-exiftool-perl
 
 
-# APP gimp pc06 pc-van-hugo
+# APP gimp HOST pc06 pc-van-hugo
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 
 
-# APP gnome-gmail pc01 pc04 pc06
+# APP gnome-gmail HOST pc01 pc04 pc06
 sudo apt-get install --yes gnome-gmail
 
 
-# APP gnome-tweaks pc06
+# APP gnome-tweaks HOST pc06
 sudo apt-get install --yes gnome-tweaks
 
 
-# APP google-chrome *
+# APP google-chrome HOST *
 # Extensions and apps are automatically installed with /etc/opt/chrome/policies/managed/kz.json from "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
@@ -93,7 +93,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 
-# APP google-earth pc04
+# APP google-earth HOST pc04
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
 sudo apt-get update
@@ -102,44 +102,44 @@ sudo apt-get install --yes google-earth-pro-stable
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 
 
-# APP handbrake pc-van-emily
+# APP handbrake HOST pc-van-emily
 sudo apt-get install --yes handbrake
 
 
-# APP ignore-close-laptop-lid pc04 pc-van-hugo
+# APP ignore-close-laptop-lid HOST pc04 pc-van-hugo
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 
-# APP kvm pc06
+# APP kvm HOST pc06
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" cpu-checker qemu-kvm bridge-utils virt-manager
 
 
-# APP libreoffice *
+# APP libreoffice HOST *
 sudo apt-get install --yes aspell-en aspell-nl libreoffice
 
 
-# APP locate pc06
+# APP locate HOST pc06
 sudo apt-get install --yes mlocate
 
 
-# APP nautilus-admin pc06
+# APP nautilus-admin HOST pc06
 sudo apt-get install --yes nautilus-admin
 
 
-# APP restricted-addons *
+# APP restricted-addons HOST *
 # No ubuntu-restricted-extras due to unreliable installation of ttf-mscorefonts-installer, do install libavcodec-extra from that metapackage
 sudo apt-get install --yes ubuntu-restricted-addons libavcodec-extra
 
 
-# APP ros pc04
+# APP ros HOST pc04
 # Check: https://wiki.ros.org/Installation/Ubuntu
 :
 
 
-# APP signal pc06
+# APP signal HOST pc06
 # Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
@@ -147,11 +147,11 @@ sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
 
-# APP sound-juicer pc-van-emily
+# APP sound-juicer HOST pc-van-emily
 sudo apt-get install --yes sound-juicer
 
 
-# APP ssh pc01 pc06
+# APP ssh HOST pc01 pc06
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 # Check for remote root access
@@ -159,12 +159,12 @@ grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
 
-# APP sushi pc06
+# APP sushi HOST pc06
 # Select a file, press the space bar, and a preview will appear.
 sudo apt-get install --yes gnome-sushi
 
 
-# APP teamviewer pc06
+# APP teamviewer HOST pc06
 # Web app: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
@@ -174,34 +174,34 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
 sudo apt-key del 0C1289C0 DEB49217
 
 
-# APP tree pc06
+# APP tree HOST pc06
 sudo apt-get install --yes tree
 
 
-# APP ufw pc01 pc06
+# APP ufw HOST pc01 pc06
 sudo apt-get install --yes gufw
 sudo ufw allow ssh
 sudo ufw enable
 
 
-# APP virtualbox pc-van-hugo
+# APP virtualbox HOST pc-van-hugo
 # If installation hangs or VBox does not work, check Linux-info.txt.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
 # VirtualBox Guest Additions ISO are in /usr/share/virtualbox/
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 
-# APP vlc pc06
+# APP vlc HOST pc06
 sudo snap install vlc
 
 
-# APP vscode pc01 pc06
+# APP vscode HOST pc01 pc06
 sudo snap install --classic code
 
 
-# APP wine pc04
+# APP wine HOST pc04
 sudo apt-get install --yes wine winetricks playonlinux
 
 
-# APP youtube-dl pc-van-emily pc-van-hugo
+# APP youtube-dl HOST pc-van-emily pc-van-hugo
 sudo apt-get install --yes youtubedl-gui

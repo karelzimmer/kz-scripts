@@ -6,16 +6,16 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP calibre nina@pc04 hugo@pc-van-hugo
+# APP calibre USER nina@pc04 hugo@pc-van-hugo
 kz-gset --delfav=calibre-gui
 
 
-# APP cockpit karel@pc06
+# APP cockpit USER karel@pc06
 kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
-# APP gnome *
+# APP gnome USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -45,55 +45,55 @@ gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 
-# APP google-chrome *
+# APP google-chrome USER *
 kz-gset --delfav=google-chrome
 
 
-# APP kvm karel@pc06
+# APP kvm USER karel@pc06
 kz-gset --delfav=virt-manager
 
 
-# APP libreoffice-calc nina@pc04
+# APP libreoffice-calc USER nina@pc04
 kz-gset --delfav=libreoffice-calc
 
 
-# APP nautilus-hide *
+# APP nautilus-hide USER *
 rm --force "$HOME"/.hidden
 
 
-# APP spotify *
+# APP spotify USER *
 kz-gset --delfav=kz-spotify
 
 
-# APP start-installer *
+# APP start-installer USER *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
-# APP teamviewer karel@pc06
+# APP teamviewer USER karel@pc06
 kz-gset --delfav=com.teamviewer.TeamViewer
 
 
-# APP telegram hugo@pc-van-hugo
+# APP telegram USER hugo@pc-van-hugo
 kz-gset --delfav=kz-telegram
 
 
-# APP terminal karel@pc01 karel@pc06
+# APP terminal USER karel@pc01 karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
-# APP virtualbox hugo@pc-van-hugo
+# APP virtualbox USER hugo@pc-van-hugo
 kz-gset --delfav=virtualbox
 kz-gset --delfav=kz-vm-hugowin732
 
 
-# APP vscode karel@pc01 karel@pc06
+# APP vscode USER karel@pc01 karel@pc06
 kz-gset --delfav=code_code
 
 
-# APP whatsapp hugo@pc-van-hugo
+# APP whatsapp USER hugo@pc-van-hugo
 kz-gset --delfav=kz-whatsapp
 
 
-# APP zoom monique@pc01 karel@pc01
+# APP zoom USER monique@pc01 karel@pc01
 kz-gset --delfav=kz-zoom

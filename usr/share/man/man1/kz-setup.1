@@ -85,22 +85,17 @@ More examples can be seen through the \fBkz setup --cat\fR command.
 .B Table 1. Record types and their processing
 .TS
 allbox tab(:);
-l | l
-l | l
-l | l
-l | l.
+lb | lb.
 T{
-Record type
+Record
 T}:T{
 Description
 T}
 .T&
+l | l
+l | l
+l | l
 l | l.
-T{
-# APP <appname> <username>@<computername>...
-T}:T{
-The APP <appname> and user <username>@<computername>.
-T}
 T{
 T}:T{
 Will be skipped, is empty.
@@ -111,9 +106,14 @@ T}:T{
 Will be skipped, is a comment.
 T}
 T{
+# APP <appname> USER <username>@<computername>...
+T}:T{
+The application <appname> and user <username>@<computername>.
+T}
+T{
 Command
 T}:T{
-Command to set up APP <appname>.
+Set up command.
 T}
 .TE
 .sp
@@ -123,9 +123,9 @@ T}
 box tab(:);
 lb | lb.
 T{
-Regelsoort
+Record
 T}:T{
-Beschrijving
+Description
 T}
 .T&
 - | -
@@ -133,30 +133,42 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP google-chrome *
+# APP google-chrome USER *
 T}:T{
-Set up the APP for any user, see [1].
+Set up google-chrome for any user, see [1].
 T}
 T{
 kz-gset --addfavbef=google-chrome
 T}:T{
-Set up command.
 T}
 T{
 T}:T{
-Empty line.
 T}
 T{
-# APP gnome jan@pc02
+# APP gnome USER jan@pc02
 T}:T{
-Set up the APP only for Jan, see [2].
+Set up gnome only for Jan, see [2].
 T}
 T{
 gsettings set org.gnome.shell...
 T}:T{
-Set up command.
+T}
+T{
+T}:T{
+T}
+T{
+# APP kvm USER mo@pc01 peter@pc03
+T}:T{
+Set up kvm for Mo and Peter.
+T}
+T{
+kz-gset --addfavaft=virt-manager
+T}:T{
 T}
 .TE
 .sp

@@ -86,22 +86,17 @@ More examples can be seen through the \fBkz install --cat\fR command.
 .B Table 1. Record types and their processing
 .TS
 allbox tab(:);
-l | l
-l | l
-l | l
-l | l.
+lb | lb.
 T{
-Record type
+Record
 T}:T{
 Description
 T}
 .T&
+l | l
+l | l
+l | l
 l | l.
-T{
-# APP <appname> <computername>...
-T}:T{
-The APP <appname> and computer (<computername>).
-T}
 T{
 T}:T{
 Will be skipped, is empty.
@@ -112,14 +107,19 @@ T}:T{
 Will be skipped, is a comment.
 T}
 T{
+# APP <appname> HOST <computername>...
+T}:T{
+The application <appname> and computer (<computername>).
+T}
+T{
 Command
 T}:T{
-Command to install APP <appname>.
+Installation command.
 T}
 .TE
 .sp
 .sp
-.B Table 2. Lines in sample file kz-install-install-ubuntu.sh
+.B Table 2. Lines in sample file kz-install-install-ubuntu-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -134,30 +134,42 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP gnome-gmail *
+# APP gnome-gmail HOST *
 T}:T{
-Install the APP on any computer, see [1].
+Install gnome-gmail on any computer, see [1].
 T}
 T{
 sudo apt-get install --yes gnome-gmail
 T}:T{
-Install command.
 T}
 T{
 T}:T{
-Empty line.
 T}
 T{
-# APP ufw pc02
+# APP ufw HOST pc02
 T}:T{
-Install the APP only on pc02, see [2].
+Install ufw only on pc02, see [2].
 T}
 T{
 sudo apt-get install --yes gufw
 T}:T{
-Install command.
+T}
+T{
+T}:T{
+T}
+T{
+# APP kvm HOST pc01 pc03
+T}:T{
+Install kvm on pc01 and pc03.
+T}
+T{
+sudo apt-get install --yes qemu-kvm
+T}:T{
 T}
 .TE
 .sp

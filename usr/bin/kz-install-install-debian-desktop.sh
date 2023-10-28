@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP add-repository *
+# APP add-repository HOST *
 # EXEC THIS FIRST.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
@@ -17,7 +17,7 @@ rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 
 
-# APP anydesk *
+# APP anydesk HOST *
 # Web app: https://my.anydesk.com/v2
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
@@ -25,31 +25,31 @@ sudo apt-get update
 sudo apt-get install --yes anydesk
 
 
-# APP bash-completion *
+# APP bash-completion HOST *
 sudo apt-get install --yes bash-completion
 
 
-# APP cups *
+# APP cups HOST *
 sudo apt-get install --yes cups
 
 
-# APP dashtodock *
+# APP dashtodock HOST *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
 
-# APP deja-dup *
+# APP deja-dup HOST *
 sudo snap install --classic deja-dup
 
 
-# APP gedit *
+# APP gedit HOST *
 sudo apt-get install --yes gedit
 
 
-# APP gnome-gmail pc07 debian
+# APP gnome-gmail HOST pc07 debian
 sudo apt-get install --yes gnome-gmail
 
 
-# APP google-chrome *
+# APP google-chrome HOST *
 # Extensions and apps are automatically installed with /etc/opt/chrome/policies/managed/kz.json from "kz.deb".
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
@@ -62,7 +62,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 
-# APP kvm pc07
+# APP kvm HOST pc07
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
@@ -70,22 +70,22 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt
 sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 
 
-# APP libreoffice *
+# APP libreoffice HOST *
 sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
-# APP locate pc07 debian
+# APP locate HOST pc07 debian
 sudo apt-get install --yes mlocate
 
 
-# APP add-user-to-group *
+# APP add-user-to-group HOST *
 # Enable access to system monitoring tasks like read many log files in /var/log.
 sudo adduser "${SUDO_USER:-$USER}" adm
 # Enable access to the log
 sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 
-# APP signal pc07
+# APP signal HOST pc07
 # Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
@@ -93,11 +93,11 @@ sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
 
-# APP spice-vdagent *
+# APP spice-vdagent HOST *
 sudo apt-get install --yes spice-vdagent
 
 
-# APP teamviewer pc06
+# APP teamviewer HOST pc06
 # Web app: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
@@ -107,19 +107,19 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
 sudo apt-key del 0C1289C0 DEB49217
 
 
-# APP thunderbird *
+# APP thunderbird HOST *
 sudo apt-get install --yes thunderbird-l10n-nl
 
 
-# APP vlc pc07
+# APP vlc HOST pc07
 sudo snap install vlc
 
 
-# APP vscode pc07 debian
+# APP vscode HOST pc07 debian
 sudo snap install --classic code
 
 
-# APP webmin pc07
+# APP webmin HOST pc07
 # Web app: https://localhost:10000
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg

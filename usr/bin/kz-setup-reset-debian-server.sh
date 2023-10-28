@@ -6,6 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP terminal *
+# APP terminal USER *
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc

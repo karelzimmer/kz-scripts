@@ -102,11 +102,6 @@ T}
 .T&
 l | l.
 T{
-# APP <appnaam> <computernaam>...
-T}:T{
-De APP <appnaam> en computer <computernaam>.
-T}
-T{
 T}:T{
 Wordt overgeslagen, is leeg.
 T}
@@ -116,9 +111,14 @@ T}:T{
 Wordt overgeslagen, is commentaar.
 T}
 T{
+# APP <appnaam> HOST <computernaam>...
+T}:T{
+De applicatie <appnaam> en computer <computernaam>.
+T}
+T{
 Opdracht
 T}:T{
-Opdracht voor het installeren van APP <appnaam>.
+Installatie-opdracht.
 T}
 .TE
 .sp
@@ -138,30 +138,44 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP gnome-gmail *
+# APP gnome-gmail HOST *
 T}:T{
-Installeer de APP op iedere computer, zie [1].
+Installeer de gnome-gmail op iedere computer, zie [1].
 T}
 T{
 sudo apt-get install --yes gnome-gmail
 T}:T{
-Installeer-opdracht.
+
 T}
 T{
 T}:T{
-Lege regel.
+
 T}
 T{
-# APP ufw pc02
+# APP ufw HOST pc02
 T}:T{
-Installeer de APP alleen op pc02, zie [2].
+Installeer ufw alleen op pc02, zie [2].
 T}
 T{
 sudo apt-get install --yes gufw
 T}:T{
-Installeer-opdracht.
+T}
+T{
+T}:T{
+T}
+T{
+# APP kvm HOST pc01 pc03
+T}:T{
+Installeer kvm op pc01 en pc03.
+T}
+T{
+sudo apt-get install --yes qemu-kvm
+T}:T{
 T}
 .TE
 .sp

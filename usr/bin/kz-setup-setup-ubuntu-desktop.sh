@@ -6,16 +6,16 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP calibre nina@pc04 hugo@pc-van-hugo
+# APP calibre USER nina@pc04 hugo@pc-van-hugo
 kz-gset --addfavaft=calibre-gui
 
 
-# APP cockpit karel@pc06
+# APP cockpit USER karel@pc06
 # Web app: https://localhost:9090
 kz-gset --addfavaft=kz-cockpit
 
 
-# APP gnome *
+# APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -44,51 +44,51 @@ gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
 
-# APP google-chrome *
+# APP google-chrome USER *
 kz-gset --addfavbef=google-chrome
 
 
-# APP kvm karel@pc06
+# APP kvm USER karel@pc06
 kz-gset --addfavaft=virt-manager
 
 
-# APP libreoffice-calc nina@pc04
+# APP libreoffice-calc USER nina@pc04
 kz-gset --addfavaft=libreoffice-calc
 
 
-# APP nautilus-hide *
+# APP nautilus-hide USER *
 echo 'snap' > "$HOME"/.hidden
 
 
-# APP spotify *
+# APP spotify USER *
 kz-gset --addfavaft=kz-spotify
 
 
-# APP start-installer *
+# APP start-installer USER *
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
-# APP teamviewer karel@pc06
+# APP teamviewer USER karel@pc06
 kz-gset --addfavaft=com.teamviewer.TeamViewer
 
 
-# APP telegram hugo@pc-van-hugo
+# APP telegram USER hugo@pc-van-hugo
 kz-gset --addfavaft=kz-telegram
 
 
-# APP terminal karel@pc01 karel@pc06
+# APP terminal USER karel@pc01 karel@pc06
 kz-gset --addfavbef=org.gnome.Terminal
 # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
-# APP virtualbox hugo@pc-van-hugo
+# APP virtualbox USER hugo@pc-van-hugo
 kz-gset --addfavaft=virtualbox
 kz-gset --addfavaft=kz-vm-hugowin732
 
 
-# APP vscode karel@pc01 karel@pc06
+# APP vscode USER karel@pc01 karel@pc06
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
@@ -100,9 +100,9 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
 
-# APP whatsapp hugo@pc-van-hugo
+# APP whatsapp USER hugo@pc-van-hugo
 kz-gset --addfavaft=kz-whatsapp
 
 
-# APP zoom monique@pc01 karel@pc01
+# APP zoom USER monique@pc01 karel@pc01
 kz-gset --addfavaft=kz-zoom

@@ -101,11 +101,6 @@ l | l
 l | l
 l | l.
 T{
-# APP <appnaam> <gebruikersnaam>@<computernaam>...
-T}:T{
-De APP <appnaam> en gebruiker <gebruikersnaam>@<computernaam>.
-T}
-T{
 T}:T{
 Wordt overgeslagen (is leeg).
 T}
@@ -115,9 +110,14 @@ T}:T{
 Wordt overgeslagen (is commentaar).
 T}
 T{
+# APP <appnaam> USER <gebruikersnaam>@<computernaam>...
+T}:T{
+De applicatie <appnaam> en gebruiker <gebruikersnaam>@<computernaam>.
+T}
+T{
 Opdracht
 T}:T{
-Opdracht voor het instellen van APP.
+Instel-opdracht.
 T}
 .TE
 .sp
@@ -127,7 +127,7 @@ T}
 box tab(:);
 lb | lb.
 T{
-Regelsoort
+Regel
 T}:T{
 Beschrijving
 T}
@@ -137,30 +137,42 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP google-chrome *
+# APP google-chrome USER *
 T}:T{
-Stel APP in op voor iedere gebruiker, zie [1].
+Stel google-chrome in op voor iedere gebruiker, zie [1].
 T}
 T{
 kz-gset --addfavbef=google-chrome
 T}:T{
-Instel-opdracht.
 T}
 T{
 T}:T{
-Lege regel.
 T}
 T{
-# APP gnome jan@pc02
+# APP gnome USER jan@pc02
 T}:T{
-Stel APP in alleen voor Jan, zie [2].
+Stel gnome in alleen voor Jan, zie [2].
 T}
 T{
 gsettings set org.gnome.shell...
 T}:T{
-Instel-opdracht.
+T}
+T{
+T}:T{
+T}
+T{
+# APP kvm USER mo@pc01 Peter@pc03
+T}:T{
+Stel kvm in voor Mo en Peter.
+T}
+T{
+kz-gset --addfavaft=virt-manager
+T}:T{
 T}
 .TE
 .sp

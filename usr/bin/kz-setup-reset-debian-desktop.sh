@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP dashtodock *
+# APP dashtodock USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
@@ -18,11 +18,11 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
 
-# APP firefox karel@pc07 user@debian
+# APP firefox USER karel@pc07 user@debian
 kz-gset --addfavbef=firefox-esr
 
 
-# APP gnome *
+# APP gnome USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -48,37 +48,37 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-t
 gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
-# APP google-chrome *
+# APP google-chrome USER *
 kz-gset --delfav=google-chrome
 
 
-# APP kvm karel@pc07
+# APP kvm USER karel@pc07
 kz-gset --delfav=virt-manager
 
 
-# APP nautilus-hide *
+# APP nautilus-hide USER *
 rm --force "$HOME"/.hidden
 
 
-# APP spotify *
+# APP spotify USER *
 kz-gset --delfav=kz-spotify
 
 
-# APP start-installer *
+# APP start-installer USER *
 kz-gset --addfavbef=install-debian
 
 
-# APP terminal karel@pc01 karel@pc06
+# APP terminal USER karel@pc01 karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
-# APP vscode karel@pc07 user@debian
+# APP vscode USER karel@pc07 user@debian
 kz-gset --delfav=code_code
 
 
-# APP webmin karel@pc07
+# APP webmin USER karel@pc07
 # Web app: https://localhost:10000
 kz-gset --delfav=kz-webmin
 rm --force "$HOME"/.local/share/applications/kz-webmin.desktop
