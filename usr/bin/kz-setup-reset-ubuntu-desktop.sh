@@ -15,6 +15,10 @@ kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
+# APP firefox USER monique@pc01 karel@pc01 karel@pc06
+kz-gset --addfavbef=firefox_firefox
+
+
 # APP gnome USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children

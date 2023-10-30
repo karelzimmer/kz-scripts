@@ -15,6 +15,10 @@ kz-gset --addfavaft=calibre-gui
 kz-gset --addfavaft=kz-cockpit
 
 
+# APP firefox USER monique@pc01 karel@pc01 karel@pc06
+kz-gset --delfav=firefox_firefox
+
+
 # APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
