@@ -18,7 +18,7 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
 
-# APP firefox USER karel@pc07 user@debian
+# APP firefox USER karel@pc07
 kz-gset --addfavbef=firefox-esr
 
 
@@ -74,7 +74,7 @@ sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
-# APP vscode USER karel@pc07 user@debian
+# APP vscode USER karel@pc07
 kz-gset --delfav=code_code
 
 

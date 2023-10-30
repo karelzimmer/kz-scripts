@@ -47,7 +47,7 @@ sudo apt-get remove --purge --yes gedit
 sudo apt-get autoremove --yes
 
 
-# APP gnome-gmail HOST pc07 debian
+# APP gnome-gmail HOST pc07
 sudo apt-get remove --purge --yes gnome-gmail
 sudo apt-get autoremove --yes
 
@@ -73,7 +73,7 @@ sudo apt-get remove --purge --yes aspell-en aspell-nl libreoffice libreoffice-he
 sudo apt-get autoremove --yes
 
 
-# APP locate HOST pc07 debian
+# APP locate HOST pc07
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
 
@@ -111,7 +111,7 @@ sudo apt-get autoremove --yes
 sudo snap remove --purge vlc
 
 
-# APP vscode HOST pc07 debian
+# APP vscode HOST pc07
 sudo snap remove --purge code
 
 

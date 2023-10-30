@@ -18,7 +18,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.shell disable-user-extensions false
 
 
-# APP firefox USER karel@pc07 user@debian
+# APP firefox USER karel@pc07
 kz-gset --delfav=firefox-esr
 
 
@@ -68,7 +68,7 @@ kz-gset --addfavaft=kz-spotify
 kz-gset --delfav=install-debian
 
 
-# APP terminal USER karel@pc07 user@debian
+# APP terminal USER karel@pc07
 kz-gset --addfavbef=org.gnome.Terminal
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
@@ -77,7 +77,7 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 
-# APP vscode USER karel@pc07 user@debian
+# APP vscode USER karel@pc07
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file

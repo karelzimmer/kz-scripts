@@ -45,7 +45,7 @@ sudo snap install --classic deja-dup
 sudo apt-get install --yes gedit
 
 
-# APP gnome-gmail HOST pc07 debian
+# APP gnome-gmail HOST pc07
 sudo apt-get install --yes gnome-gmail
 
 
@@ -74,7 +74,7 @@ sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
 sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
-# APP locate HOST pc07 debian
+# APP locate HOST pc07
 sudo apt-get install --yes mlocate
 
 
@@ -115,7 +115,7 @@ sudo apt-get install --yes thunderbird-l10n-nl
 sudo snap install vlc
 
 
-# APP vscode HOST pc07 debian
+# APP vscode HOST pc07
 sudo snap install --classic code
 
 
