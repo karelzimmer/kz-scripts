@@ -120,6 +120,7 @@ $text"
     else
         msg_info "$(gettext 'WiFi data:')
 "
+        # Shows QR code for quick connection to Wi-Fi network.
         nmcli device wifi show-password 2> >($logcmd) || nmcli_rc=$?
         if [[ $nmcli_rc -eq 0 ]]; then
             msg_info "
