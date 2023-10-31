@@ -62,10 +62,6 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 
-# APP gstreamer HOST *
-sudo apt-get install --yes libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
-
-
 # APP kvm HOST pc07
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
@@ -113,6 +109,10 @@ sudo apt-key del 0C1289C0 DEB49217
 
 # APP thunderbird HOST *
 sudo apt-get install --yes thunderbird-l10n-nl
+
+
+# APP totem HOST *
+sudo apt-get install --yes libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
 
 
 # APP vlc HOST pc07
