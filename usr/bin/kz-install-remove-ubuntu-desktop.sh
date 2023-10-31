@@ -48,9 +48,13 @@ sudo apt-get autoremove --yes
 sudo rm --force ~gdm/.config/monitors.xml
 
 
-# APP config-hostnames-to-ip-addresses  HOST pc01 pc06
+# APP config-hostnames-to-ip-addresses HOST pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
+
+
+# APP config-laptop-lid-ignore-close HOST pc04 pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
 # APP cups-backend-bjnp HOST pc-van-emily
@@ -100,10 +104,6 @@ sudo apt-get update
 # APP handbrake HOST pc-van-emily
 sudo apt-get remove --purge --yes handbrake
 sudo apt-get autoremove --yes
-
-
-# APP ignore-close-laptop-lid HOST pc04 pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
 # APP kvm HOST pc06

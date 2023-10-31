@@ -55,6 +55,11 @@ sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
 sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
 
 
+# APP config-laptop-lid-ignore-close HOST pc04 pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+
+
 # APP cups-backend-bjnp HOST pc-van-emily
 # Add support for Canon USB over IP BJNP protocol
 sudo apt-get install --yes cups-backend-bjnp
@@ -104,11 +109,6 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl
 
 # APP handbrake HOST pc-van-emily
 sudo apt-get install --yes handbrake
-
-
-# APP ignore-close-laptop-lid HOST pc04 pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 
 # APP kvm HOST pc06
