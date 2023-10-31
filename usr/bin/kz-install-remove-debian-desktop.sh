@@ -6,16 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP add-repository HOST *
-# EXEC THIS FIRST.
-sudo apt-add-repository --remove contrib
-sudo apt-add-repository --remove non-free
-sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
-sudo apt-get remove --purge --yes deb-multimedia-keyring
-sudo apt-get autoremove --yes
-sudo apt-get update
-
-
 # APP anydesk HOST *
 sudo apt-get remove --purge --yes anydesk
 sudo apt-get autoremove --yes
@@ -26,6 +16,20 @@ sudo apt-get update
 # APP bash-completion HOST *
 sudo apt-get remove --purge --yes bash-completion
 sudo apt-get autoremove --yes
+
+
+# APP config-repositories HOST *
+sudo apt-add-repository --remove contrib
+sudo apt-add-repository --remove non-free
+sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
+sudo apt-get remove --purge --yes deb-multimedia-keyring
+sudo apt-get autoremove --yes
+sudo apt-get update
+
+
+# APP config-user HOST *
+sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # APP cups HOST *
@@ -76,11 +80,6 @@ sudo apt-get autoremove --yes
 # APP locate HOST pc07
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
-
-
-# APP add-user-to-group HOST *
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # APP signal HOST pc07

@@ -6,17 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP add-repository HOST *
-# EXEC THIS FIRST.
-sudo apt-add-repository contrib
-sudo apt-add-repository non-free
-sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
-wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'
-sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
-rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
-sudo apt-get update
-
-
 # APP anydesk HOST *
 # Web app: https://my.anydesk.com/v2
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
@@ -27,6 +16,23 @@ sudo apt-get install --yes anydesk
 
 # APP bash-completion HOST *
 sudo apt-get install --yes bash-completion
+
+
+# APP config-repositories HOST *
+sudo apt-add-repository contrib
+sudo apt-add-repository non-free
+sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
+wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'
+sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
+rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
+sudo apt-get update
+
+
+# APP config-user HOST *
+# Enable access to system monitoring tasks like read many log files in /var/log.
+sudo adduser "${SUDO_USER:-$USER}" adm
+# Enable access to the log
+sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # APP cups HOST *
@@ -76,13 +82,6 @@ sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl l
 
 # APP locate HOST pc07
 sudo apt-get install --yes mlocate
-
-
-# APP add-user-to-group HOST *
-# Enable access to system monitoring tasks like read many log files in /var/log.
-sudo adduser "${SUDO_USER:-$USER}" adm
-# Enable access to the log
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # APP signal HOST pc07

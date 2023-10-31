@@ -11,13 +11,13 @@ sudo apt-get remove --purge --yes ansible
 sudo apt-get autoremove --yes
 
 
+# APP config-user HOST *
+sudo deluser "${SUDO_USER:-$USER}" adm
+
+
 # APP locate HOST *
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
-
-
-# APP add-user-to-group HOST *
-sudo deluser "${SUDO_USER:-$USER}" adm
 
 
 # APP ssh HOST *

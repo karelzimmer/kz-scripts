@@ -10,13 +10,13 @@
 sudo apt-get install --yes ansible
 
 
-# APP locate HOST *
-sudo apt-get install --yes mlocate
-
-
-# APP add-user-to-group HOST *
+# APP config-user HOST *
 # Enable access to system monitoring tasks like read many log files in /var/log.
 sudo adduser "${SUDO_USER:-$USER}" adm
+
+
+# APP locate HOST *
+sudo apt-get install --yes mlocate
 
 
 # APP ssh HOST *
