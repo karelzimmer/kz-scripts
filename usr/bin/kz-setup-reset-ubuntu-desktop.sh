@@ -53,6 +53,10 @@ gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 kz-gset --delfav=google-chrome
 
 
+# APP handbrake USER emily@pc-van-emily
+kz-gset --delfav=fr.handbrake.ghb
+
+
 # APP kvm USER karel@pc06
 kz-gset --delfav=virt-manager
 
@@ -71,6 +75,10 @@ kz-gset --delfav=kz-spotify
 
 # APP start-installer USER *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
+
+
+# APP sound-juicer USER *
+kz-gset --delfav=org.gnome.SoundJuicer
 
 
 # APP teamviewer USER karel@pc06

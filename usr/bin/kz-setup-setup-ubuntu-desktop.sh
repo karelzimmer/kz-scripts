@@ -52,6 +52,10 @@ gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 kz-gset --addfavbef=google-chrome
 
 
+# APP handbrake USER emily@pc-van-emily
+kz-gset --addfavaft=fr.handbrake.ghb
+
+
 # APP kvm USER karel@pc06
 kz-gset --addfavaft=virt-manager
 
@@ -70,6 +74,10 @@ kz-gset --addfavaft=kz-spotify
 
 # APP start-installer USER *
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
+
+
+# APP sound-juicer USER emily@pc-van-emily
+kz-gset --addfavaft=org.gnome.SoundJuicer
 
 
 # APP teamviewer USER karel@pc06
