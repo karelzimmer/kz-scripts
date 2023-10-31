@@ -58,11 +58,6 @@ sudo apt-get autoremove --yes
 sudo rm --force ~gdm/.config/monitors.xml
 
 
-# APP epiphany-browser HOST pc06
-sudo apt-get remove --purge --yes epiphany-browser
-sudo apt-get autoremove --yes
-
-
 # APP exiftool HOST pc06
 sudo apt-get remove --purge --yes libimage-exiftool-perl
 sudo apt-get autoremove --yes
@@ -80,6 +75,11 @@ sudo apt-get autoremove --yes
 
 # APP gnome-tweaks HOST pc06
 sudo apt-get remove --purge --yes gnome-tweaks
+sudo apt-get autoremove --yes
+
+
+# APP gnome-web HOST pc06
+sudo apt-get remove --purge --yes epiphany-browser
 sudo apt-get autoremove --yes
 
 

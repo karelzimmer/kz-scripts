@@ -60,10 +60,6 @@ if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
 
 
-# APP epiphany-browser HOST pc06
-sudo apt-get install --yes epiphany-browser
-
-
 # APP exiftool HOST pc06
 sudo apt-get install --yes libimage-exiftool-perl
 
@@ -78,6 +74,10 @@ sudo apt-get install --yes gnome-gmail
 
 # APP gnome-tweaks HOST pc06
 sudo apt-get install --yes gnome-tweaks
+
+
+# APP gnome-web HOST pc06
+sudo apt-get install --yes epiphany-browser
 
 
 # APP google-chrome HOST *
