@@ -12,11 +12,6 @@ sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
-# APP add-host HOST pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
-
-
 # APP ansible HOST pc06
 sudo apt-get remove --purge --yes ansible
 sudo apt-get autoremove --yes
@@ -51,6 +46,11 @@ sudo apt-get autoremove --yes
 
 # APP config-dual-monitor HOST pc06
 sudo rm --force ~gdm/.config/monitors.xml
+
+
+# APP config-hostnames-to-ip-addresses  HOST pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
 
 
 # APP cups-backend-bjnp HOST pc-van-emily

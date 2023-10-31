@@ -14,13 +14,6 @@ sudo rm --force /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
-# APP add-host HOST pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
-sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
-sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
-
-
 # APP ansible HOST pc06
 sudo apt-get install --yes ansible
 
@@ -53,6 +46,13 @@ sudo apt-get install --yes cockpit cockpit-pcp
 # APP config-dual-monitor HOST pc06
 if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
+
+
+# APP config-hostnames-to-ip-addresses HOST pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
+sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
+sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
 
 
 # APP cups-backend-bjnp HOST pc-van-emily
