@@ -49,13 +49,13 @@ sudo apt-get remove --purge --yes cockpit
 sudo apt-get autoremove --yes
 
 
+# APP config-dual-monitor HOST pc06
+sudo rm --force ~gdm/.config/monitors.xml
+
+
 # APP cups-backend-bjnp HOST pc-van-emily
 sudo apt-get remove --purge --yes cups-backend-bjnp
 sudo apt-get autoremove --yes
-
-
-# APP dual-monitor HOST pc06
-sudo rm --force ~gdm/.config/monitors.xml
 
 
 # APP exiftool HOST pc06

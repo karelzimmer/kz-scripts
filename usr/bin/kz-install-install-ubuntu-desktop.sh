@@ -50,14 +50,14 @@ sudo apt-get install --yes clamtk-gnome
 sudo apt-get install --yes cockpit cockpit-pcp
 
 
+# APP config-dual-monitor HOST pc06
+if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
+
+
 # APP cups-backend-bjnp HOST pc-van-emily
 # Add support for Canon USB over IP BJNP protocol
 sudo apt-get install --yes cups-backend-bjnp
-
-
-# APP dual-monitor HOST pc06
-if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
 
 
 # APP exiftool HOST pc06
