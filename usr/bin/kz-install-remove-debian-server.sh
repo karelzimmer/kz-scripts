@@ -11,10 +11,6 @@ sudo apt-get remove --purge --yes ansible
 sudo apt-get autoremove --yes
 
 
-# APP config-user HOST *
-sudo deluser "${SUDO_USER:-$USER}" adm
-
-
 # APP locate HOST *
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
@@ -31,3 +27,7 @@ sudo apt-get autoremove --yes
 sudo ufw disable
 sudo apt-get remove --purge --yes ufw
 sudo apt-get autoremove --yes
+
+
+# APP users HOST *
+sudo deluser "${SUDO_USER:-$USER}" adm

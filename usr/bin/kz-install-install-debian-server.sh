@@ -10,11 +10,6 @@
 sudo apt-get install --yes ansible
 
 
-# APP config-user HOST *
-# Enable access to system monitoring tasks like read many log files in /var/log.
-sudo adduser "${SUDO_USER:-$USER}" adm
-
-
 # APP locate HOST *
 sudo apt-get install --yes mlocate
 
@@ -31,3 +26,8 @@ sudo systemctl restart ssh.service
 sudo apt-get install --yes ufw
 sudo ufw allow ssh
 sudo ufw enable
+
+
+# APP users HOST *
+# Enable access to system monitoring tasks like read many log files in /var/log.
+sudo adduser "${SUDO_USER:-$USER}" adm

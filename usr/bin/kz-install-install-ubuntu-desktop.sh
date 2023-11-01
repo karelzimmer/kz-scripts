@@ -43,23 +43,6 @@ sudo apt-get install --yes clamtk-gnome
 sudo apt-get install --yes cockpit cockpit-pcp
 
 
-# APP config-dual-monitor HOST pc06
-if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
-
-
-# APP config-hostnames-to-ip-addresses HOST pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
-sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
-sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
-
-
-# APP config-laptop-lid-ignore-close HOST pc04 pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
-
-
 # APP cups-backend-bjnp HOST pc-van-emily
 # Add support for Canon USB over IP BJNP protocol
 sudo apt-get install --yes cups-backend-bjnp
@@ -111,6 +94,18 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl
 sudo apt-get install --yes handbrake
 
 
+# APP handlelidswitch HOST pc04 pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+
+
+# APP hostnames HOST pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
+sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
+sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
+
+
 # APP kvm HOST pc06
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
@@ -123,6 +118,11 @@ sudo apt-get install --yes aspell-en aspell-nl libreoffice
 
 # APP locate HOST pc06
 sudo apt-get install --yes mlocate
+
+
+# APP monitors HOST pc06
+if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/monitors.xml; fi
 
 
 # APP nautilus-admin HOST pc06

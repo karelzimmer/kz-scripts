@@ -18,23 +18,6 @@ sudo apt-get install --yes anydesk
 sudo apt-get install --yes bash-completion
 
 
-# APP config-repositories HOST *
-sudo apt-add-repository contrib
-sudo apt-add-repository non-free
-sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
-wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'
-sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
-rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
-sudo apt-get update
-
-
-# APP config-user HOST *
-# Enable access to system monitoring tasks like read many log files in /var/log.
-sudo adduser "${SUDO_USER:-$USER}" adm
-# Enable access to the log
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
-
-
 # APP cups HOST *
 sudo apt-get install --yes cups
 
@@ -84,6 +67,16 @@ sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl l
 sudo apt-get install --yes mlocate
 
 
+# APP repositories HOST *
+sudo apt-add-repository contrib
+sudo apt-add-repository non-free
+sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
+wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'
+sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
+rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
+sudo apt-get update
+
+
 # APP signal HOST pc07
 # Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
@@ -112,6 +105,13 @@ sudo apt-get install --yes thunderbird-l10n-nl
 
 # APP totem HOST *
 sudo apt-get install --yes libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
+
+
+# APP users HOST *
+# Enable access to system monitoring tasks like read many log files in /var/log.
+sudo adduser "${SUDO_USER:-$USER}" adm
+# Enable access to the log
+sudo adduser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # APP vlc HOST pc07

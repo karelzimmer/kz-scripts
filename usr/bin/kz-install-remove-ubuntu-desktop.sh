@@ -44,19 +44,6 @@ sudo apt-get remove --purge --yes cockpit
 sudo apt-get autoremove --yes
 
 
-# APP config-dual-monitor HOST pc06
-sudo rm --force ~gdm/.config/monitors.xml
-
-
-# APP config-hostnames-to-ip-addresses HOST pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
-
-
-# APP config-laptop-lid-ignore-close HOST pc04 pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-
-
 # APP cups-backend-bjnp HOST pc-van-emily
 sudo apt-get remove --purge --yes cups-backend-bjnp
 sudo apt-get autoremove --yes
@@ -106,6 +93,15 @@ sudo apt-get remove --purge --yes handbrake
 sudo apt-get autoremove --yes
 
 
+# APP handlelidswitch HOST pc04 pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
+
+# APP hostnames HOST pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
+
+
 # APP kvm HOST pc06
 sudo apt-get remove --purge --yes cpu-checker qemu-kvm bridge-utils virt-manager
 sudo apt-get autoremove --yes
@@ -122,6 +118,10 @@ sudo apt-get autoremove --yes
 # APP locate HOST pc06
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
+
+
+# APP monitors HOST pc06
+sudo rm --force ~gdm/.config/monitors.xml
 
 
 # APP nautilus-admin HOST pc06
