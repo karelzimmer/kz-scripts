@@ -68,7 +68,7 @@ kz-gset --delfav=kz-spotify
 kz-gset --addfavbef=install-debian
 
 
-# APP terminal USER karel@pc01 karel@pc06
+# APP terminal USER karel@pc07
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
