@@ -68,7 +68,7 @@ kz-gset --addfavaft=kz-spotify
 kz-gset --delfav=install-debian
 
 
-# APP terminal USER karel@pc07
+# APP terminal USER karel@pc01 karel@pc06
 kz-gset --addfavbef=org.gnome.Terminal
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc

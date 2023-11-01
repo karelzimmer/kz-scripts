@@ -77,7 +77,7 @@ kz-gset --delfav=kz-spotify
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
-# APP sound-juicer USER *
+# APP sound-juicer USER emily@pc-van-emily
 kz-gset --delfav=org.gnome.SoundJuicer
 
 
