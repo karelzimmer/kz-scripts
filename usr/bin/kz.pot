@@ -38,7 +38,6 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
-#, sh-format
 msgid "Already performed by the administrator."
 msgstr ""
 
@@ -221,7 +220,6 @@ msgstr ""
 msgid "directory does not exist"
 msgstr ""
 
-#, sh-format
 msgid ""
 "No USB medium found.\n"
 "\n"

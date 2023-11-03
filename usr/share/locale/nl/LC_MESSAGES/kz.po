@@ -41,7 +41,6 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#, sh-format
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
@@ -264,7 +263,6 @@ msgstr "argumenten zijn niet toegestaan"
 msgid "directory does not exist"
 msgstr "map bestaat niet"
 
-#, sh-format
 msgid ""
 "No USB medium found.\n"
 "\n"
