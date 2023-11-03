@@ -176,7 +176,10 @@ function init_script {
         fi
     fi
 
-    set_terminal_attributes
+    if [[ -t 1 ]]; then
+        set_terminal_attributes
+    fi
+
     commandline_args=("$@")
     # shellcheck disable=SC2034
     USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
