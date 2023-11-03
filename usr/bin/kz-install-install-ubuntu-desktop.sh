@@ -30,7 +30,7 @@ sudo apt-get install --yes anydesk
 sudo apt-get install --yes bleachbit
 
 
-# APP calibre HOST pc04 pc06 pc-van-hugo
+# APP calibre HOST pc06 pc-van-hugo
 sudo apt-get install --yes calibre
 
 
@@ -56,7 +56,7 @@ sudo apt-get install --yes libimage-exiftool-perl
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 
 
-# APP gnome-gmail HOST pc01 pc04 pc06
+# APP gnome-gmail HOST pc01 pc06
 sudo apt-get install --yes gnome-gmail
 
 
@@ -81,7 +81,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 
-# APP google-earth HOST pc04
+# APP google-earth HOST pc06
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
 sudo apt-get update
@@ -94,7 +94,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl
 sudo apt-get install --yes handbrake
 
 
-# APP handlelidswitch HOST pc04 pc-van-hugo
+# APP handlelidswitch HOST pc-van-hugo
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
 
@@ -127,11 +127,6 @@ if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/moni
 
 # APP nautilus-admin HOST pc06
 sudo apt-get install --yes nautilus-admin
-
-
-# APP ros HOST pc04
-# Check: https://wiki.ros.org/Installation/Ubuntu
-:
 
 
 # APP signal HOST pc06
@@ -197,10 +192,6 @@ sudo snap install vlc
 
 # APP vscode HOST pc01 pc06
 sudo snap install --classic code
-
-
-# APP wine HOST pc04
-sudo apt-get install --yes wine winetricks playonlinux
 
 
 # APP youtube-dl HOST pc-van-emily pc-van-hugo

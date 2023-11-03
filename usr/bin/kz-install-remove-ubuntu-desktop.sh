@@ -29,7 +29,7 @@ sudo apt-get remove --purge --yes bleachbit
 sudo apt-get autoremove --yes
 
 
-# APP calibre HOST pc04 pc06 pc-van-hugo
+# APP calibre HOST pc06 pc-van-hugo
 sudo apt-get remove --purge --yes calibre
 sudo apt-get autoremove --yes
 
@@ -59,7 +59,7 @@ sudo apt-get remove --purge --yes gimp gimp-help-en gimp-help-nl
 sudo apt-get autoremove --yes
 
 
-# APP gnome-gmail HOST pc01 pc04 pc06
+# APP gnome-gmail HOST pc01 pc06
 sudo apt-get remove --purge --yes gnome-gmail
 sudo apt-get autoremove --yes
 
@@ -81,7 +81,7 @@ sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/
 sudo apt-get update
 
 
-# APP google-earth HOST pc04
+# APP google-earth HOST pc06
 sudo apt-get remove --purge --yes google-earth-pro-stable
 sudo apt-get autoremove --yes
 sudo rm --force /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
@@ -93,7 +93,7 @@ sudo apt-get remove --purge --yes handbrake
 sudo apt-get autoremove --yes
 
 
-# APP handlelidswitch HOST pc04 pc-van-hugo
+# APP handlelidswitch HOST pc-van-hugo
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
@@ -127,10 +127,6 @@ sudo rm --force ~gdm/.config/monitors.xml
 # APP nautilus-admin HOST pc06
 sudo apt-get remove --purge --yes nautilus-admin
 sudo apt-get autoremove --yes
-
-
-# APP ros HOST pc04
-:
 
 
 # APP signal HOST pc06
@@ -190,11 +186,6 @@ sudo snap remove --purge vlc
 
 # APP vscode HOST pc01 pc06
 sudo snap remove --purge code
-
-
-# APP wine HOST pc04
-sudo apt-get remove --purge --yes wine winetricks playonlinux
-sudo apt-get autoremove --yes
 
 
 # APP youtube-dl HOST pc-van-emily pc-van-hugo

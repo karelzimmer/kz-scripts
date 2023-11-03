@@ -6,7 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
-# APP calibre USER nina@pc04 hugo@pc-van-hugo
+# APP calibre USER hugo@pc-van-hugo
 kz-gset --addfavaft=calibre-gui
 
 
@@ -58,10 +58,6 @@ kz-gset --addfavaft=fr.handbrake.ghb
 
 # APP kvm USER karel@pc06
 kz-gset --addfavaft=virt-manager
-
-
-# APP libreoffice-calc USER nina@pc04
-kz-gset --addfavaft=libreoffice-calc
 
 
 # APP nautilus-hide USER *
