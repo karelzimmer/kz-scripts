@@ -270,8 +270,7 @@ function process_menu1_choice2 {
     title="${MENU1_ACTIONS[2]}"
     text="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
-Checklist installation can be found on the site https://karelzimmer.nl,
-under Linux.
+Checklist installation can be found on https://karelzimmer.nl, under Linux.
 
 Roughly boils down to:
 1. Download an image file (.iso).
