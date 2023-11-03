@@ -275,8 +275,8 @@ under Linux.
 
 Roughly boils down to:
 1. Download an image file (.iso).
-2. Create a bootable Live USB stick or DVD.
-3. Boot the computer from this USB stick or DVD.
+2. Create a bootable Live USB stick.
+3. Boot the computer from this USB stick.
 4. Install Linux.")"
     msg_info "$text"
     if $option_gui; then
