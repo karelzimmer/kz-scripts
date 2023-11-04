@@ -68,13 +68,14 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The format of the default input file is
+The format of the supplied input file is
 kz-install-<mode>-<distribution>-<edition>.sh, for a user supplied input file
 it is kz-install-*.sh.
+for a user supplied input file it is kz-install-*.sh.
 The records are processed in the order they appear in the files.
 .sp
-The commands supplied by default with \fBkz install\fR are arranged in such a
-way that the result remains the same when executed repeatedly.
+The commands supplied by with \fBkz install\fR are arranged in such a way that
+the result remains the same when executed repeatedly.
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
@@ -225,22 +226,22 @@ equal to 0.
 .SH FILES
 /usr/bin/kz-install-install-debian-desktop.sh
 .RS
-Standard installation file for Debian desktop.
+Installation file for Debian desktop.
 .RE
 .sp
 /usr/bin/kz-install-install-ubuntu-desktop.sh
 .RS
-Standard installation file for Ubuntu desktop.
+Installation file for Ubuntu desktop.
 .RE
 .sp
 /usr/bin/kz-install-remove-debian-desktop.sh
 .RS
-Standard uninstaller file for Debian desktop.
+Uninstaller file for Debian desktop.
 .RE
 .sp
 /usr/bin/kz-install-remove-ubuntu-desktop.sh
 .RS
-Standard uninstaller file for Ubuntu desktop.
+Uninstaller file for Ubuntu desktop.
 .RE
 /tmp/kz-setup-<mode>-<distribution>-<edition>-XXXXXXXXXX.sh
 .RS

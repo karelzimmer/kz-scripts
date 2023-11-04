@@ -36,12 +36,12 @@ readonly    USAGE
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-  -a, --apps     $(gettext 'show list of available apps')
+  -a, --apps     $(gettext 'show list of apps')
   -c, --cat      $(gettext 'show contents of command file')
 $(gettext '  -f, --file FILE
                  process FILE')
   -g, --gui      $(gettext 'starts in graphics mode')
-  -l, --list     $(gettext 'show list of standard files')
+  -l, --list     $(gettext 'show list of files')
   -r, --remove   $(gettext 'delete apps')
 $OPTIONS_HELP
   --             $(gettext "signals the end of options and disables further \
@@ -226,9 +226,9 @@ function process_input {
 }
 
 
-# This function displays a list of available input files.
+# This function displays a list of input files present.
 function process_option_list {
-    msg_info "$(gettext 'The following FILEs are available:
+    msg_info "$(gettext 'The following FILEs are present:
 
 NUM  FILE')
 $(
