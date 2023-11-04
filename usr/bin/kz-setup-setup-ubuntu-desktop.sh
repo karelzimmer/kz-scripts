@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Standard set up file for Ubuntu desktop.
+# Set up file for Ubuntu desktop.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
