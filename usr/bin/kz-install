@@ -309,6 +309,7 @@ function process_argument_app {
 # APPs.
 function process_input_file_by_app {
     local   app_match=false
+    local   app_name=''
     local   no_app_match=true
     local   input_record=''
 
@@ -317,7 +318,11 @@ function process_input_file_by_app {
             '#'*' APP '*)
                 # APP record.
                 app_match=false
-                if [[ $input_record == *$app_argument* ]]; then
+                app_name="$(
+                    printf '%s\n' "$input_record"       |
+                    tr --squeeze-repeats '[:space:]'    |
+                    cut --delimiter=' ' --fields=3)"
+                if [[ $app_name = "$app_argument" ]]; then
                     # Match on appname.
                     app_match=true
                     no_app_match=false
@@ -345,6 +350,7 @@ function process_input_file_by_app {
 # host.
 function process_input_file_by_host {
     local   host_match=false
+    local   host_names=''
     local   host=$HOSTNAME
     local   input_record=''
 
@@ -353,8 +359,11 @@ function process_input_file_by_host {
             '#'*' APP '*)
                 # APP record.
                 host_match=false
-                if [[ $input_record == *'*'* || $input_record == *$host* ]]
-                then
+                host_names="$(
+                    printf '%s\n' "$input_record"       |
+                    tr --squeeze-repeats '[:space:]'    |
+                    cut --delimiter=' ' --fields=5-)"
+                if [[ $host_names = '*' || $host_names == *$host* ]]; then
                     # Match on hostname.
                     host_match=true
                     printf '%s\n' "$input_record" >> "$command_file"
