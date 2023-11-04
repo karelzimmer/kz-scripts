@@ -81,6 +81,15 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 
+# APP google-earth HOST
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
+wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
+sudo apt-get update
+sudo apt-get install --yes google-earth-pro-stable
+# The installation overwrites the newly added source-list.
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
+
+
 # APP handbrake HOST pc-van-emily
 sudo apt-get install --yes handbrake
 
@@ -183,6 +192,10 @@ sudo snap install vlc
 
 # APP vscode HOST pc01 pc06
 sudo snap install --classic code
+
+
+# APP wine HOST
+sudo apt-get install --yes wine winetricks playonlinux
 
 
 # APP youtube-dl HOST pc-van-emily pc-van-hugo

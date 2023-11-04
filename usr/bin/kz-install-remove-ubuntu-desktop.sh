@@ -81,6 +81,13 @@ sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/
 sudo apt-get update
 
 
+# APP google-earth HOST
+sudo apt-get remove --purge --yes google-earth-pro-stable
+sudo apt-get autoremove --yes
+sudo rm --force /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
+sudo apt-get update
+
+
 # APP handbrake HOST pc-van-emily
 sudo apt-get remove --purge --yes handbrake
 sudo apt-get autoremove --yes
@@ -179,6 +186,11 @@ sudo snap remove --purge vlc
 
 # APP vscode HOST pc01 pc06
 sudo snap remove --purge code
+
+
+# APP wine HOST
+sudo apt-get remove --purge --yes wine winetricks playonlinux
+sudo apt-get autoremove --yes
 
 
 # APP youtube-dl HOST pc-van-emily pc-van-hugo
