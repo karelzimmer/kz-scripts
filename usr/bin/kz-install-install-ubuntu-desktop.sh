@@ -6,14 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
 
-# APP apport HOST *
-# EXEC THIS FIRST.
-sudo systemctl stop apport.service
-sudo systemctl disable apport.service
-sudo rm --force /var/crash/*
-sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
-
-
 # APP ansible HOST pc06
 sudo apt-get install --yes ansible
 
@@ -24,6 +16,13 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anyd
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
 sudo apt-get update
 sudo apt-get install --yes anydesk
+
+
+# APP apport HOST *
+sudo systemctl stop apport.service
+sudo systemctl disable apport.service
+sudo rm --force /var/crash/*
+sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
 # APP bleachbit HOST pc-van-hugo

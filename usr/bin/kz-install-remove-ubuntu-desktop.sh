@@ -6,12 +6,6 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
-# APP apport HOST *
-# EXEC THIS FIRST.
-sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
-sudo systemctl enable --now apport.service
-
-
 # APP ansible HOST pc06
 sudo apt-get remove --purge --yes ansible
 sudo apt-get autoremove --yes
@@ -22,6 +16,11 @@ sudo apt-get remove --purge --yes anydesk
 sudo apt-get autoremove --yes
 sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
+
+
+# APP apport HOST *
+sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
+sudo systemctl enable --now apport.service
 
 
 # APP bleachbit HOST pc-van-hugo
