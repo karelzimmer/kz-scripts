@@ -347,10 +347,10 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # user.
 function process_input_file_by_user {
+    local   current_user=$USER'@'$HOSTNAME
     local   input_record=''
     local   user_match=false
     local   user_names=''
-    local   user=$USER'@'$HOSTNAME
 
     while read -r input_record; do
         case $input_record in
@@ -361,7 +361,8 @@ function process_input_file_by_user {
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=5-)"
-                if [[ $user_names = '*' || $user_names == *$user* ]]; then
+                if [[ $user_names = '*' || $user_names == *$current_user* ]]
+                then
                     # Match on username.
                     user_match=true
                     printf '%s\n' "$input_record" >> "$command_file"

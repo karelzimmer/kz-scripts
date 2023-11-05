@@ -349,9 +349,9 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # host.
 function process_input_file_by_host {
+    local   current_host=$HOSTNAME
     local   host_match=false
     local   host_names=''
-    local   host=$HOSTNAME
     local   input_record=''
 
     while read -r input_record; do
@@ -363,7 +363,8 @@ function process_input_file_by_host {
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=5-)"
-                if [[ $host_names = '*' || $host_names == *$host* ]]; then
+                if [[ $host_names = '*' || $host_names == *$current_host* ]]
+                then
                     # Match on hostname.
                     host_match=true
                     printf '%s\n' "$input_record" >> "$command_file"
