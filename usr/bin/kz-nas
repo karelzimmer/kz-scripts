@@ -65,7 +65,7 @@ readonly    SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 # Variables
 ###############################################################################
 
-declare nas_username=${SUDO_USER:-$USER}
+declare nas_user_name=${SUDO_USER:-$USER}
 declare nas_ip_address=192.168.0.200
 declare nas_share_name=${SUDO_USER:-$USER}
 declare nas_password='secret'
@@ -137,7 +137,7 @@ such as \$nas_ip_address?")
     local       quest2
                 quest2=$(gettext 'IP address of the NAS')
     local       quest3
-                quest3=$(gettext 'Username on the NAS')
+                quest3=$(gettext 'User name on the NAS')
     local       quest4
                 quest4=$(gettext 'Password of this user on the NAS')
     local       quest5
@@ -194,7 +194,7 @@ such as \$nas_ip_address?")
                     --add-entry     "$quest5"   2> >($logcmd)
 	        ) || exit $OK
         nas_ip_address=$(   printf '%s' "$REPLY" | awk -F, '{print $1}')
-        nas_username=$(     printf '%s' "$REPLY" | awk -F, '{print $2}')
+        nas_user_name=$(    printf '%s' "$REPLY" | awk -F, '{print $2}')
         nas_password=$(     printf '%s' "$REPLY" | awk -F, '{print $3}')
         nas_share_name=$(   printf '%s' "$REPLY" | awk -F, '{print $4}')
     else
@@ -208,9 +208,9 @@ $quest2? [$nas_ip_address]: "
             nas_ip_address=$REPLY
         fi
         read -rp "
-$quest3? [$nas_username]: "
+$quest3? [$nas_user_name]: "
         if [[ -n $REPLY ]]; then
-            nas_username=$REPLY
+            nas_user_name=$REPLY
         fi
         read -rsp "
 $quest4? [$nas_password]: "
@@ -287,7 +287,7 @@ function check_dependencies {
 
 # This function creates the secret needed to log in to the NAS.
 create_nas_login() {
-    text="username=$nas_username\npassword=$nas_password"
+    text="username=$nas_user_name\npassword=$nas_password"
     rm --force $$NAS_LOGIN_DIR/$PROGRAM_NAME*
     printf '%b\n' "$text" > "$NAS_LOGIN"
     chmod '600' "$NAS_LOGIN" |& $logcmd

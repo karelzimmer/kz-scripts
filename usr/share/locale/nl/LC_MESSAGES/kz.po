@@ -1258,7 +1258,7 @@ msgstr "Heeft de NAS een vast IP-adres zoals $nas_ip_address?"
 msgid "IP address of the NAS"
 msgstr "IP-adres van de NAS"
 
-msgid "Username on the NAS"
+msgid "User name on the NAS"
 msgstr "Gebruikersnaam op de NAS"
 
 msgid "Password of this user on the NAS"

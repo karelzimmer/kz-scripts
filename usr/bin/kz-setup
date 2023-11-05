@@ -321,7 +321,7 @@ function process_input_file_by_app {
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3)"
                 if [[ $app_name = "$app_argument" ]]; then
-                    # Match on appname.
+                    # Match on app name.
                     app_match=true
                     no_app_match=false
                     printf '%s\n' "$input_record" >> "$command_file"
@@ -363,7 +363,7 @@ function process_input_file_by_user {
                     cut --delimiter=' ' --fields=5-)"
                 if [[ $user_names = '*' || $user_names == *$current_user* ]]
                 then
-                    # Match on username.
+                    # Match on user name.
                     user_match=true
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi

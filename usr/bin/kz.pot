@@ -1053,7 +1053,7 @@ msgstr ""
 msgid "IP address of the NAS"
 msgstr ""
 
-msgid "Username on the NAS"
+msgid "User name on the NAS"
 msgstr ""
 
 msgid "Password of this user on the NAS"
