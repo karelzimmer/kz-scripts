@@ -619,9 +619,6 @@ msgid ""
 "changing user settings."
 msgstr ""
 
-msgid "You may need to log out and log back in for the changes to take effect."
-msgstr ""
-
 msgid ""
 "You must log out of the computer to finish installing the apps and changing "
 "user settings.\n"
@@ -631,9 +628,6 @@ msgstr ""
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
-msgstr ""
-
-msgid "You may need to restart for the changes to take effect."
 msgstr ""
 
 msgid "Checking scripts"

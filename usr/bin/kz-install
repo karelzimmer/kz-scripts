@@ -500,9 +500,6 @@ installing the apps and changing system settings.")"
                 wait_for_enter
             fi
             sudo systemctl reboot
-        else
-            msg_info "$(gettext "You may need to restart for the changes to \
-take effect.")"
         fi
     fi
     exit $OK

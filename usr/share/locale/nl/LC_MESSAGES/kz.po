@@ -743,11 +743,6 @@ msgstr ""
 "U wordt nu afgemeld bij de computer om de installatie van de apps en het "
 "wijzigen van de gebruikersinstellingen te voltooien."
 
-msgid "You may need to log out and log back in for the changes to take effect."
-msgstr ""
-"Mogelijk moet u zich afmelden en opnieuw aanmelden om de wijzigingen door "
-"te voeren."
-
 msgid ""
 "You must log out of the computer to finish installing the apps and changing "
 "user settings.\n"
@@ -763,10 +758,6 @@ msgid ""
 msgstr ""
 "De computer zal nu opnieuw opstarten om de installatie van de apps en het "
 "wijzigen van de systeeminstellingen te voltooien."
-
-msgid "You may need to restart for the changes to take effect."
-msgstr ""
-"Mogelijk moet u opnieuw opstarten voordat de wijzigingen van kracht worden."
 
 msgid "Checking scripts"
 msgstr "Scripts controleren"

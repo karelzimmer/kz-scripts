@@ -503,9 +503,6 @@ finish installing the apps and changing user settings.
 Type 'logout' to log out.")"
                 exit $OK
             fi
-        else
-            msg_info "$(gettext "You may need to log out and log back in for \
-the changes to take effect.")"
         fi
     fi
     exit $OK
