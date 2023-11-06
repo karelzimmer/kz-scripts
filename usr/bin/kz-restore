@@ -288,7 +288,6 @@ function restore_settings {
         sleep 2
     fi
     restore_settings_desktop_background
-    restore_settings_favorite_apps
 }
 
 
@@ -306,22 +305,6 @@ function restore_settings_desktop_background {
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"
-    fi
-}
-
-
-# This function restores the favorite apps.
-function restore_settings_favorite_apps {
-    local   input_file=''
-
-    if type xdg-user-dir &> /dev/null; then
-        input_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
-    else
-        return $OK
-    fi
-
-    if [[ -f $input_file ]]; then
-        gsettings set org.gnome.shell favorite-apps "$(cat "$input_file")"
     fi
 }
 
