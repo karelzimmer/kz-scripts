@@ -501,7 +501,7 @@ installing the apps and changing system settings.")"
             fi
             sudo systemctl reboot
         else
-            msg_info "$(gettext "You may need to restart for your changes to \
+            msg_info "$(gettext "You may need to restart for the changes to \
 take effect.")"
         fi
     fi
