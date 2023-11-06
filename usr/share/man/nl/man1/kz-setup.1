@@ -169,12 +169,24 @@ T{
 T}:T{
 T}
 T{
-# APP kvm USER mo@pc01 Peter@pc03
+# APP kvm USER mo@pc01 peter@pc03
 T}:T{
-Stel kvm in voor Mo en Peter.
+Stel kvm in voor Mo en Peter, zie [3].
 T}
 T{
 kz-gset --addfavaft=virt-manager
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# APP google-earth HOST
+T}:T{
+Standaard niet google-earth instellen, zie [4].
+T}
+T{
+kz-gset --addfavaft=google-earth
 T}:T{
 T}
 .TE
@@ -186,7 +198,21 @@ gebruiker worden uitgevoerd.
 .sp
 [2]
 De regel met 'jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen voor
-Jan op pc02 worden uitgevoerd.
+Jan op pc02 worden uitgevoerd. De APP kan alsnog worden ingesteld op een andere
+computer met de opdracht 'kz setup gnome'.
+.sp
+[3]
+.br
+De regel met 'mo@pc01 peter@pc03' zorgt ervoor dat de bijbehorende opdrachten
+standaard alleen voor Mo op pc01 en voor Peter op pc03 worden uitgevoerd. De
+APP kan alsnog worden ingesteld op een andere computer met de opdracht
+'kz setup kvm'.
+.sp
+[4]
+.br
+De regel zonder computernaam achter HOST zorgt ervoor dat de bijbehorende
+opdrachten standaard niet worden uitgevoerd. De APP kan alsnog worden
+ingesteld met de opdracht 'kz setup google-earth'.
 .\"
 .\"
 .sp

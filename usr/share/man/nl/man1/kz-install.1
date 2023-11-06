@@ -174,10 +174,22 @@ T}
 T{
 # APP kvm HOST pc01 pc03
 T}:T{
-Installeer kvm op pc01 en pc03.
+Installeer kvm op pc01 en pc03, zie [3].
 T}
 T{
 sudo apt-get install --yes qemu-kvm
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# APP google-earth HOST
+T}:T{
+Standaard niet google-earth installeren, zie [4].
+T}
+T{
+sudo apt-get install --yes google-earth
 T}:T{
 T}
 .TE
@@ -191,7 +203,20 @@ worden uitgevoerd.
 [2]
 .br
 De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc02 worden uitgevoerd.
+alleen op pc02 worden uitgevoerd. De APP kan alsnog worden geïnstalleerd op een
+andere computer met de opdracht 'kz install gnome'.
+.sp
+[3]
+.br
+De regel met 'pc01 pc03' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op pc01 en pc03 worden uitgevoerd. De APP kan alsnog worden
+geïnstalleerd op een andere computer met de opdracht 'kz install kvm'.
+.sp
+[4]
+.br
+De regel zonder computernaam achter HOST zorgt ervoor dat de bijbehorende
+opdrachten standaard niet worden uitgevoerd. De APP kan worden geïnstalleerd
+met de opdracht 'kz install google-earth'.
 .\"
 .\"
 .sp

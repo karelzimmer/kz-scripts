@@ -169,10 +169,22 @@ T}
 T{
 # APP kvm HOST pc01 pc03
 T}:T{
-Install kvm on pc01 and pc03.
+Install kvm on pc01 and pc03, see [3].
 T}
 T{
 sudo apt-get install --yes qemu-kvm
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# APP google-earth HOST
+T}:T{
+Do not install Google Earth by default, zie [4].
+T}
+T{
+sudo apt-get install --yes google-earth
 T}:T{
 T}
 .TE
@@ -184,6 +196,19 @@ The line with '*' causes the associated commands to run on all computers.
 [2]
 The line with 'pc02' ensures that the associated commands are executed only on
 pc02.
+.br
+.sp
+[3]
+.br
+The line with 'pc01 pc03' ensures that the associated commands are executed
+only on pc01 and pc03 by default. The APP can still be installed on another
+computer with the command 'kz install kvm'.
+.sp
+[4]
+.br
+The line without a computer name after HOST ensures that the associated
+commands are not executed by default. The APP can be installed with the
+command 'kz install google-earth'.
 .\"
 .\"
 .sp
