@@ -180,7 +180,7 @@ Type 'exit' to close this window.")
         TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                             --title     "$title"        \
                             --infobox   "$text"         \
-                            16 47
+                            15 47
     else
         msg_info "${bold}$(gettext 'Finished').${normal} ($DISPLAY_NAME)"
     fi
