@@ -171,7 +171,7 @@ function process_input {
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
-            msg_error "$(eval_gettext \
+            printf "${red}%b\n${normal}" "$(eval_gettext \
             "Filename must start with '\$PROGRAM_NAME-' and end with '.sh'.")"
             exit $ERROR
         fi
@@ -226,7 +226,7 @@ function process_input {
 
 # This function displays a list of input files present.
 function process_option_list {
-    msg_info "$(gettext 'The following FILEs are present:
+    printf '%s\n' "$(gettext 'The following FILEs are present:
 
 NUM  FILE')
 $(
@@ -253,7 +253,7 @@ $USAGE_LINE"
 
 # This function shows the available APPs from the input file.
 function process_option_apps {
-    msg_info "$(gettext 'The following APPs are available:
+    printf '%s\n' "$(gettext 'The following APPs are available:
 
 NUM  APP')
 $(

@@ -156,8 +156,7 @@ function check_code {
     elif grep --quiet --line-regexp --regexp="$python_script" "$script"; then
         check_pycodestyle
     else
-        msg_error "
-In $scriptdir / $scriptname:
+        printf "\n${red}%b\n${normal}" "In $scriptdir / $scriptname:
 $(gettext "    Unknown script. Function check_code cannot check script code.")"
         error_flag=true
     fi
@@ -183,8 +182,7 @@ function check_record_length {
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
-        msg_error "
-In $scriptdir / $scriptname:
+        printf "\n${red}%b\n${normal}" "In $scriptdir / $scriptname:
 $(eval_gettext "    A line is longer than \$max_line_length \
 (\$max_line_length_found).")
 "
@@ -219,8 +217,7 @@ function check_tags {
             --regexp="$fixme"   \
             --regexp="$todo"    \
             "$script"; then
-        msg_warning "
-In $scriptdir / $scriptname:
+        printf "\n${yellow}%s\n${normal}" "In $scriptdir / $scriptname:
 $(gettext '    Flagged annotation found.')
 
 $(
@@ -241,8 +238,7 @@ $(
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
-        msg_error "
-In $scriptdir / $scriptname:
+        printf "\n${red}%b\n${normal}" "In $scriptdir / $scriptname:
 $(gettext '    End spaces found.')
 $(
     grep    --line-number --regexp=' ''$' "$script" |

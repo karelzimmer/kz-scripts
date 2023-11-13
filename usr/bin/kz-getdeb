@@ -117,7 +117,8 @@ function process_input {
     if check_user_sudo; then
         sudo true
     else
-        msg_info "$(eval_gettext 'Already performed by the administrator.')"
+        printf  '%s\n'  \
+                "$(eval_gettext 'Already performed by the administrator.')"
         term_script
     fi
 
@@ -144,10 +145,10 @@ function install_package {
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
 
-    msg_info "${bold}$(gettext 'Download')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Download')${normal} ($DISPLAY_NAME)"
     wget --output-document="$temp_deb" $site_deb
 
-    msg_info "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -182,7 +183,7 @@ Type 'exit' to close this window.")
                             --infobox   "$text"         \
                             15 47
     else
-        msg_info "${bold}$(gettext 'Finished').${normal} ($DISPLAY_NAME)"
+        printf '%s\n' "${bold}$(gettext 'Finished').${normal} ($DISPLAY_NAME)"
     fi
     cleanup
     exit 0

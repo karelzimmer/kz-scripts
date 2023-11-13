@@ -97,20 +97,19 @@ function process_input {
     if check_user_sudo; then
         sudo true
     else
-        msg_info "$(eval_gettext 'Already performed by the administrator.')"
+        printf  '%s\n'  \
+                "$(eval_gettext 'Already performed by the administrator.')"
         term_script
     fi
 
-    msg_info "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
     check_repos
-    msg_info "
-${bold}$(gettext 'Build - final')${normal} ($DISPLAY_NAME)"
+    printf  '\n%s\n'    \
+            "${bold}$(gettext 'Build - final')${normal} ($DISPLAY_NAME)"
     build_package
-    msg_info "
-${bold}$(gettext 'Deploy')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Deploy')${normal} ($DISPLAY_NAME)"
     upload_website
-    msg_info "
-${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
     install_package
 }
 
@@ -119,22 +118,24 @@ ${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
 function check_repos {
     local   error_flag=false
 
-    msg_info "$(gettext 'Check that all repos are on branch main')..."
+    printf '%s\n' "$(gettext 'Check that all repos are on branch main')..."
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            msg_error "$(eval_gettext "Repo \$repo not on branch main.")"
+            printf  "${red}%b\n${normal}"   \
+                    "$(eval_gettext "Repo \$repo not on branch main.")"
             git status
             error_flag=true
         fi
     done
-    msg_info "$(gettext 'Check that all repos are clean')..."
+    printf '%s\n' "$(gettext 'Check that all repos are clean')..."
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            msg_error "$(eval_gettext "Repo \$repo is not clean.")"
+            printf  "${red}%b\n${normal}"   \
+                    "$(eval_gettext "Repo \$repo is not clean.")"
             git status
             error_flag=true
         fi
@@ -147,8 +148,7 @@ function check_repos {
 
 # This function builds package kz.
 function build_package {
-    msg_info "$(gettext 'Build package and website (kz build)')...
-"
+    printf '%s\n\n' "$(gettext 'Build package and website (kz build)')..."
     # Call kz-build.
     "$SCRIPTS_REPO"/usr/bin/kz build || exit $ERROR
 }
@@ -165,7 +165,7 @@ function upload_website {
     local   ftp_user=kzimmer
     local   ftp_login=$HOME/.kz-$ftp_host
 
-    msg_info "$(gettext 'Upload website (lftp)')..."
+    printf '%s\n' "$(gettext 'Upload website (lftp)')..."
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
@@ -177,7 +177,7 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
         rm "$ftp_login"
-        msg_error "$(gettext 'Website upload failed.')"
+        printf "${red}%b\n${normal}" "$(gettext 'Website upload failed.')"
         exit $ERROR
     fi
     sleep 5
@@ -187,10 +187,9 @@ function upload_website {
 # This function installs package kz.
 function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
-    msg_info "$(gettext 'Install package kz (kz getdeb)')...
-"
+    printf '%s\n\n' "$(gettext 'Install package kz (kz getdeb)')..."
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
-        msg_error "$(gettext 'Install package kz failed.')"
+        printf "${red}%b\n${normal}" "$(gettext 'Install package kz failed.')"
         exit $ERROR
     fi
 }

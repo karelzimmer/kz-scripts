@@ -124,23 +124,21 @@ function process_input {
     if check_user_sudo; then
         sudo true
     else
-        msg_info "$(eval_gettext 'Already performed by the administrator.')"
+        printf  '%s\n'  \
+                "$(eval_gettext 'Already performed by the administrator.')"
         term_script
     fi
 
-    msg_info "${bold}$(gettext 'Check - pre')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Check - pre')${normal} ($DISPLAY_NAME)"
     check_repos
     check_scripts
-    msg_info "
-${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
     build_uploads
     generate_mo
     build_deb
-    msg_info "
-${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
     install_package
-    msg_info "
-${bold}$(gettext 'Check - post')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Check - post')${normal} ($DISPLAY_NAME)"
     run_ivp
     check_website
 }
@@ -148,20 +146,22 @@ ${bold}$(gettext 'Check - post')${normal} ($DISPLAY_NAME)"
 
 # This function check that the repos are in the desired state.
 function check_repos {
-    msg_info "$(gettext 'Check that all repos are on branch main')..."
+    printf '%s\n' "$(gettext 'Check that all repos are on branch main')..."
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            msg_warning "$(eval_gettext "Repo \$repo not on branch main.")"
+            printf  "${yellow}%s\n${normal}"    \
+                    "$(eval_gettext "Repo \$repo not on branch main.")"
         fi
     done
-    msg_info "$(gettext 'Check that all repos are clean')..."
+    printf '%s\n' "$(gettext 'Check that all repos are clean')..."
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            msg_warning "$(eval_gettext "Repo \$repo is not clean.")"
+            printf  "${yellow}%s\n${normal}"    \
+                    "$(eval_gettext "Repo \$repo is not clean.")"
             git status
         fi
     done
@@ -170,7 +170,7 @@ function check_repos {
 
 # This function check the scripts.
 function check_scripts {
-    msg_info "$(gettext 'Check scripts (kz check)')..."
+    printf '%s\n' "$(gettext 'Check scripts (kz check)')..."
     # Call kz-check.
     "$SCRIPTS_REPO"/usr/bin/kz check || error_flag=true
 }
@@ -181,7 +181,7 @@ function build_uploads {
     local   file=''
     local   filename=''
 
-    msg_info "$(gettext 'Build website')..."
+    printf '%s\n' "$(gettext 'Build website')..."
 
     # Make sure the permissions are correct for the sync.
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*
@@ -220,7 +220,7 @@ function generate_mo {
     local   lc_messages=''
 
     lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
-    msg_info "$(gettext 'Generate .mo file (mogen)')..."
+    printf '%s\n' "$(gettext 'Generate .mo file (mogen)')..."
     msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
 }
 
@@ -230,7 +230,7 @@ function build_deb {
     local   build_id=''
     local   file=''
 
-    msg_info "$(gettext 'Build package')..."
+    printf '%s\n' "$(gettext 'Build package')..."
 
     # Fill kz-deb/dist/ with kz-deb/app/.
     rsync   --archive               \
@@ -279,7 +279,7 @@ function build_deb {
 
 # This function installs package kz.
 function install_package {
-    msg_info "$(gettext 'Install package')..."
+    printf '%s\n' "$(gettext 'Install package')..."
     check_for_active_updates
     # allow downgrades from version 365 to 2.4.7.
     sudo    DEBIAN_FRONTEND=noninteractive  \
@@ -294,7 +294,7 @@ function install_package {
 
 # This function performs an installation verification procedure (IVP).
 function run_ivp {
-    msg_info "$(gettext 'Run IVP (kz ivp)')..."
+    printf '%s\n' "$(gettext 'Run IVP (kz ivp)')..."
     # Call kz-ivp.
     kz ivp || error_flag=true
 }
@@ -302,7 +302,7 @@ function run_ivp {
 
 # This function checks the website for missing or not used files.
 function check_website {
-    msg_info "$(gettext 'Check website (rchecklink)')..."
+    printf '%s\n' "$(gettext 'Check website (rchecklink)')..."
     # Call rchecklink.
     rchecklink || error_flag=true
 }
@@ -311,8 +311,7 @@ function check_website {
 # This function controls the termination of the script.
 function term_script {
     if $error_flag; then
-        msg_error "
-$(gettext 'Fix all the messages above.')"
+        printf "${red}%b\n${normal}" "$(gettext 'Fix all the messages above.')"
         exit $ERROR
     else
         exit $OK

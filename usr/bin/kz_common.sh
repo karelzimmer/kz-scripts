@@ -108,7 +108,9 @@ function check_on_ac_power {
 $(gettext 'The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.')"
-        wait_for_enter
+        if ! $option_gui; then
+            wait_for_enter
+        fi
     fi
 }
 
@@ -199,7 +201,6 @@ function msg_error {
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
-        msg_log  "$@"
     else
         printf "${red}%b\n${normal}" "$@" >&2
     fi
@@ -243,7 +244,6 @@ function msg_warning {
                 --height    100         \
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
-        msg_log  "$@"
     else
         printf "${yellow}%b\n${normal}" "$@" >&2
     fi
@@ -281,9 +281,9 @@ function process_common_options {
 # This function shows the available help.
 function process_option_help {
     # shellcheck disable=SC2154
-    msg_info "$HELP
-
-$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \
+    printf  '%s\n\n%b\n'    \
+            "$HELP"         \
+            "$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \
 \e]8;;man:\$PROGRAM_NAME(1)\e\\\$DISPLAY_NAME man page\e]8;;\e\\ for more \
 information.")"
 }
@@ -292,9 +292,9 @@ information.")"
 # This function shows the available options.
 function process_option_usage {
     # shellcheck disable=SC2154
-    msg_info "$USAGE
-
-$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
+    printf  '%s\n\n%s\n'    \
+            "$USAGE"        \
+        "$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
 }
 
 
@@ -321,10 +321,10 @@ function process_option_version {
         program_year=', '$program_year
     fi
 
-    msg_info "kz 2.4.7$build_id
-
-$(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
-Universal
+    printf  '%s\n\n%s\n'        \
+            "kz 2.4.7$build_id" \
+            "$(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, \
+CC0 1.0 Universal
 <https://creativecommons.org/publicdomain/zero/1.0>\$program_year")"
 }
 
@@ -458,9 +458,6 @@ launch a Terminal window and run:")
 
 # This function waits for the user to press Enter.
 function wait_for_enter {
-    if $option_gui; then
-        return
-    fi
     read -rp "
 $(gettext 'Press the Enter key to continue [Enter]: ')" < /dev/tty
 }

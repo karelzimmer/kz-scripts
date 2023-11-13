@@ -91,14 +91,14 @@ function process_input {
     if check_user_sudo; then
         sudo true
     else
-        msg_info "$(eval_gettext 'Already performed by the administrator.')"
+        printf  '%s\n'  \
+                "$(eval_gettext 'Already performed by the administrator.')"
         term_script
     fi
 
-    msg_info "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
     check_dependencies
-    msg_info "
-${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
     pull_repos
     download_website
 }

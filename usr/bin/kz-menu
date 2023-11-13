@@ -191,9 +191,7 @@ function process_menu1_gui {
 function process_menu1_tui {
     local   menu1_action=''
 
-    msg_info "
-$MENU1_HEAD
-"
+    printf '\n%s\n\n' "$MENU1_HEAD"
         printf  '%3s  %-24s  %s\n'      \
                 "$(gettext 'NUM')"      \
                 "$(gettext 'ACTION')"   \
@@ -278,7 +276,7 @@ Roughly boils down to:
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
     msg_info "$text"
-    if $option_gui; then
+    if ! $option_gui; then
         wait_for_enter
     fi
 }
@@ -352,9 +350,7 @@ function process_menu2_gui {
 function process_menu2_tui {
     local   menu2_action=''
 
-    msg_info "
-$MENU2_HEAD
-"
+    printf '\n%s\n\n' "$MENU2_HEAD"
         printf  '%3s  %-25s  %s\n'      \
                 "$(gettext 'NUM')"      \
                 "$(gettext 'ACTION')"   \
@@ -467,8 +463,7 @@ $prompt"
             execute_command=false
         fi
     else
-        msg_info "
-$text"
+        printf '\n%s\n' "$text"
         while true; do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
@@ -515,7 +510,7 @@ function execute_command {
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
     msg_log "$command: rc=$rc"
-    if $option_gui; then
+    if ! $option_gui; then
         wait_for_enter
     fi
 }
@@ -538,7 +533,7 @@ $(gettext "Add any additional users with the following steps.
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
         msg_info "$text"
-        if $option_gui; then
+        if ! $option_gui; then
             wait_for_enter
         fi
     elif [[ $title = $(gettext 'Set user photo') ]]; then
@@ -565,7 +560,7 @@ on Users.
         else
             msg_info "$text"
         fi
-        if $option_gui; then
+        if ! $option_gui; then
             wait_for_enter
         fi
     fi

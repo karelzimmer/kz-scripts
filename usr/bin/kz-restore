@@ -151,7 +151,9 @@ function process_input {
 
 Connect a USB medium.")"
             msg_warning "$text"
-            wait_for_enter
+            if ! $option_gui; then
+                wait_for_enter
+            fi
             medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
             if [[ -z $medium ]]; then
                  msg_error "$text"
@@ -166,7 +168,9 @@ Now connected:
 
 Disconnect media via Files.")"
             msg_warning "$text"
-            wait_for_enter
+            if ! $option_gui; then
+                wait_for_enter
+            fi
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 msg_error "$text"
                 exit $ERROR
@@ -187,7 +191,8 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
     restore_backup
 
     if $option_dry_run; then
-        msg_error "$(gettext 'The backup was NOT restored (DRY RUN).')"
+        printf  "${red}%b\n${normal}"   \
+                "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $ERROR
     fi
 
@@ -205,7 +210,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
                     --title     "$title"    \
                     --text      "$text"     2> >($logcmd)
         else
-            msg_info "$text..."
+            printf '%s\n' "$text..."
             restore_settings
         fi
     fi
@@ -253,7 +258,7 @@ function restore_backup {
                 --title     "$title"    \
                 --text      "$text"     2> >($logcmd) || restore_rc=$?
     else
-        msg_info "$text..."
+        printf '%s\n' "$text..."
         rsync   --archive               \
                 --verbose               \
                 --human-readable        \
@@ -274,8 +279,7 @@ function restore_backup {
                 --title     "$title"    \
                 --text      "$text"     &> >($logcmd)
     else
-        msg_info "
-$text..."
+        printf '\n%s\n' "$text..."
         sync |& $logcmd
     fi
 }
@@ -351,7 +355,7 @@ function term_script_unmount {
                 --text      "$text"                                         \
                 2> >($logcmd) || rc=$?
     else
-        msg_info "$text..."
+        printf '%s\n' "$text..."
         umount "$source_medium"                     |& $logcmd || rc+=$?
         udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
