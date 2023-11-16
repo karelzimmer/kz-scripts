@@ -77,6 +77,10 @@ kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 kz-gset --delfav=org.gnome.SoundJuicer
 
 
+# APP thunderbird USER monique@pc01 karel@pc01 karel@pc06
+kz-gset --addfavbef=thunderbird
+
+
 # APP teamviewer USER karel@pc06
 kz-gset --delfav=com.teamviewer.TeamViewer
 
