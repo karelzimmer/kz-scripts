@@ -68,7 +68,7 @@ sudo apt-get install --yes epiphany-browser
 
 
 # APP google-chrome HOST *
-# Extensions and policies are automatically installed by "kz.deb" (json files in /etc/opt/chrome/policies/managed/).
+# Extensions and policies are applied by "kz.deb" policy file policies.json, for Chrome in /etc/opt/chrome/policies/managed/, for Firefox in /etc/firefox/policies/.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
