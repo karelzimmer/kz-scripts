@@ -63,8 +63,8 @@ sudo apt-get remove --purge --yes gnome-gmail
 sudo apt-get autoremove --yes
 
 
-# APP gnome-tweaks HOST pc06
-sudo apt-get remove --purge --yes *
+# APP gnome-tweaks HOST *
+sudo apt-get remove --purge --yes gnome-tweaks
 sudo apt-get autoremove --yes
 
 
