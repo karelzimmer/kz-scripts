@@ -64,7 +64,7 @@ sudo apt-get autoremove --yes
 
 
 # APP gnome-tweaks HOST pc06
-sudo apt-get remove --purge --yes gnome-tweaks
+sudo apt-get remove --purge --yes *
 sudo apt-get autoremove --yes
 
 

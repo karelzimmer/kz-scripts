@@ -59,7 +59,7 @@ sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 sudo apt-get install --yes gnome-gmail
 
 
-# APP gnome-tweaks HOST pc06
+# APP gnome-tweaks HOST *
 sudo apt-get install --yes gnome-tweaks
 
 
