@@ -35,6 +35,7 @@ gsettings reset org.gnome.nautilus.icon-view default-zoom-level
 gsettings reset org.gnome.nautilus.preferences click-policy
 gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover
 gsettings reset org.gnome.nautilus.preferences show-create-link
+gsettings reset org.gnome.nautilus.preferences show-image-thumbnails
 gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
@@ -47,7 +48,6 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
 gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
-
 
 # APP google-chrome USER *
 kz-gset --delfav=google-chrome
