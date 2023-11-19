@@ -38,6 +38,7 @@ gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
 gsettings set org.gnome.nautilus.preferences click-policy 'single'
 gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true
 gsettings set org.gnome.nautilus.preferences show-create-link true
+gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
