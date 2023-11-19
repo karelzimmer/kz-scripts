@@ -26,7 +26,7 @@ readonly    PROGRAM_DESC
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
             USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
-   or: \$DISPLAY_NAME [-l|--list] [-u|--usage] [-h|--help] [-v|--version]")
+   or: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE")
 readonly    USAGE
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
    or: \$DISPLAY_NAME OPTION")
