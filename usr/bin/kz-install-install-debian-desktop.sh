@@ -30,6 +30,13 @@ sudo apt-get install --yes gnome-shell-extension-dashtodock
 sudo snap install --classic deja-dup
 
 
+# APP force-x11 HOST
+# Force the use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
+# Force means no choice @ user login for X11 or Wayland!
+# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
+sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+
+
 # APP gedit HOST *
 sudo apt-get install --yes gedit
 
@@ -49,6 +56,11 @@ sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 # The installation adds an apt-key that is no longer needed.
 sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
+
+
+# APP guest HOST
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
 
 # APP kvm HOST pc07

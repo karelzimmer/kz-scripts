@@ -32,6 +32,11 @@ sudo apt-get autoremove --yes
 sudo snap remove --purge deja-dup
 
 
+# APP force-x11 HOST
+# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+
+
 # APP gedit HOST *
 sudo apt-get remove --purge --yes gedit
 sudo apt-get autoremove --yes
@@ -47,6 +52,10 @@ sudo apt-get remove --purge --yes google-chrome-stable chrome-gnome-shell
 sudo apt-get autoremove --yes
 sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
+
+
+# APP guest HOST
+sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # APP kvm HOST pc07

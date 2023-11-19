@@ -53,6 +53,11 @@ sudo apt-get remove --purge --yes libimage-exiftool-perl
 sudo apt-get autoremove --yes
 
 
+# APP force-x11 HOST
+# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+
+
 # APP gimp HOST pc06 pc-van-hugo
 sudo apt-get remove --purge --yes gimp gimp-help-en gimp-help-nl
 sudo apt-get autoremove --yes
@@ -85,6 +90,10 @@ sudo apt-get remove --purge --yes google-earth-pro-stable
 sudo apt-get autoremove --yes
 sudo rm --force /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
 sudo apt-get update
+
+
+# APP guest HOST
+sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # APP handbrake HOST pc-van-emily

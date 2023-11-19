@@ -1307,3 +1307,9 @@ msgstr "Authenticatie is vereist om een netwerkschijf aan te koppelen"
 
 msgid "Mount a NAS during startup"
 msgstr "Koppel een NAS aan tijdens het opstarten"
+
+msgid "Guest"
+msgstr "Gast"
+
+msgid "guest"
+msgstr "gast"

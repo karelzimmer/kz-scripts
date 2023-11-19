@@ -1100,3 +1100,9 @@ msgstr ""
 
 msgid "Mount a NAS during startup"
 msgstr ""
+
+msgid "Guest"
+msgstr ""
+
+msgid "guest"
+msgstr ""
