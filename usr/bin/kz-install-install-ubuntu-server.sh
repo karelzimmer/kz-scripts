@@ -15,6 +15,12 @@ sudo apt-get install --yes ansible
 sudo touch /etc/cloud/cloud-init.disabled
 
 
+# APP fwupd HOST
+sudo systemctl stop fwupd.service       # Stop the service
+sudo systemctl disable fwupd.service    # Disable automatic start upon boot
+sudo systemctl mask fwupd.service       # Disable manual invoking
+
+
 # APP locate HOST *
 sudo apt-get install --yes mlocate
 

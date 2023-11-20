@@ -37,6 +37,12 @@ sudo snap install --classic deja-dup
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
+# APP fwupd HOST
+sudo systemctl stop fwupd.service       # Stop the service
+sudo systemctl disable fwupd.service    # Disable automatic start upon boot
+sudo systemctl mask fwupd.service       # Disable manual invoking
+
+
 # APP gedit HOST *
 sudo apt-get install --yes gedit
 

@@ -15,6 +15,12 @@ sudo apt-get autoremove --yes
 sudo rm --force /etc/cloud/cloud-init.disabled
 
 
+# APP fwupd HOST
+systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
+
+
 # APP locate HOST *
 sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes

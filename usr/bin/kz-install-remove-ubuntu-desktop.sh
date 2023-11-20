@@ -53,9 +53,10 @@ sudo apt-get remove --purge --yes libimage-exiftool-perl
 sudo apt-get autoremove --yes
 
 
-# APP force-x11 HOST
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+# APP fwupd HOST
+systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
 
 
 # APP gimp HOST pc06 pc-van-hugo

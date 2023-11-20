@@ -58,6 +58,12 @@ sudo apt-get install --yes libimage-exiftool-perl
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
+# APP fwupd HOST
+sudo systemctl stop fwupd.service       # Stop the service
+sudo systemctl disable fwupd.service    # Disable automatic start upon boot
+sudo systemctl mask fwupd.service       # Disable manual invoking
+
+
 # APP gimp HOST pc06 pc-van-hugo
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 

@@ -37,6 +37,12 @@ sudo snap remove --purge deja-dup
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 
 
+# APP fwupd HOST
+systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
+
+
 # APP gedit HOST *
 sudo apt-get remove --purge --yes gedit
 sudo apt-get autoremove --yes
