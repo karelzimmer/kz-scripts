@@ -15,7 +15,7 @@ kz-gset --delfav=kz-cockpit
 rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
-# APP firefox USER monique@pc01 karel@pc01 karel@pc06
+# APP firefox USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavbef=firefox_firefox
 
 
@@ -77,7 +77,7 @@ kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 kz-gset --delfav=org.gnome.SoundJuicer
 
 
-# APP thunderbird USER monique@pc01 karel@pc01 karel@pc06
+# APP thunderbird USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavbef=thunderbird
 
 
