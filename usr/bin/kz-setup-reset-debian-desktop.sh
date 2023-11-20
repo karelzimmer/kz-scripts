@@ -57,6 +57,10 @@ kz-gset --delfav=google-chrome
 kz-gset --delfav=virt-manager
 
 
+# APP lynis USER
+rm --force --recursive /home/"$USER"/lynis
+
+
 # APP nautilus-hide USER *
 rm --force "$HOME"/.hidden
 

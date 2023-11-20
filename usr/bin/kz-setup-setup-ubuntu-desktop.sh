@@ -60,6 +60,13 @@ kz-gset --addfavaft=fr.handbrake.ghb
 kz-gset --addfavaft=virt-manager
 
 
+# APP lynis USER
+# Use Lynis (CISOfy):
+# cd ~/lynis
+# [sudo] ./lynis audit system
+git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis
+
+
 # APP nautilus-hide USER *
 echo 'snap' > "$HOME"/.hidden
 
