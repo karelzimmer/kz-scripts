@@ -64,6 +64,10 @@ kz-gset --addfavaft=virt-manager
 echo 'snap' > "$HOME"/.hidden
 
 
+# APP recover-files-thumbnails USER
+rm --force --recursive "$HOME"/.cache/thumbnails/
+
+
 # APP spotify USER *
 kz-gset --addfavaft=kz-spotify
 
