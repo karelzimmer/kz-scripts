@@ -51,6 +51,14 @@ sudo apt-get install --yes cups-backend-bjnp
 sudo apt-get install --yes libimage-exiftool-perl
 
 
+# APP fdupes HOST
+# Usage:
+# fdupes -r /home               # Report recursively from /home
+# fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
+# fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
+sudo apt-get install --yes fdupes
+
+
 # APP force-x11 HOST
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
 # Force means no choice @ user login for X11 or Wayland!

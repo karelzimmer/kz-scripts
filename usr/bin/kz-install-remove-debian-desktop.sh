@@ -32,6 +32,11 @@ sudo apt-get autoremove --yes
 sudo snap remove --purge deja-dup
 
 
+# APP fdupes HOST
+sudo apt-get remove --purge --yes fdupes
+sudo apt-get autoremove --yes
+
+
 # APP force-x11 HOST
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf

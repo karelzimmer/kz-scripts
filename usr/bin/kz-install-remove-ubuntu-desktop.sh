@@ -53,6 +53,18 @@ sudo apt-get remove --purge --yes libimage-exiftool-perl
 sudo apt-get autoremove --yes
 
 
+# APP fdupes HOST
+sudo apt-get remove --purge --yes fdupes
+sudo apt-get autoremove --yes
+
+
+# APP force-x11 HOST
+# Force the use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
+# Force means no choice @ user login for X11 or Wayland!
+# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+
+
 # APP fwupd HOST
 systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
