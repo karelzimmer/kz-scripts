@@ -111,6 +111,11 @@ sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
 
 
+# APP htop HOST pc06
+sudo apt-get remove --purge --yes htop
+sudo apt-get autoremove --yes
+
+
 # APP kvm HOST pc06
 sudo apt-get remove --purge --yes cpu-checker qemu-kvm bridge-utils virt-manager
 sudo apt-get autoremove --yes

@@ -123,6 +123,10 @@ sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
 sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
 
 
+# APP htop HOST pc06
+sudo apt-get install --yes htop
+
+
 # APP kvm HOST pc06
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
