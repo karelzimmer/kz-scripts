@@ -83,6 +83,11 @@ sudo apt-get remove --purge --yes mlocate
 sudo apt-get autoremove --yes
 
 
+# APP repair-ntfs HOST
+sudo apt-get remove --purge --yes ntfs-3g
+sudo apt-get autoremove --yes
+
+
 # APP repositories HOST *
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free

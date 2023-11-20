@@ -146,6 +146,15 @@ if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown gdm:gdm ~gdm/.config/moni
 sudo apt-get install --yes nautilus-admin
 
 
+# APP repair-ntfs HOST
+# Usage:
+# findmnt
+# TARGET          SOURCE    FSTYPE OPTIONS
+# /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+# sudo ntfsfix /dev/sdb2
+sudo apt-get install --yes ntfs-3g
+
+
 # APP signal HOST pc06
 # Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list > /dev/null

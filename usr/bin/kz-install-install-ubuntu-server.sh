@@ -25,6 +25,15 @@ sudo systemctl mask fwupd.service       # Disable manual invoking
 sudo apt-get install --yes mlocate
 
 
+# APP repair-ntfs HOST
+# Usage:
+# findmnt
+# TARGET          SOURCE    FSTYPE OPTIONS
+# /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+# sudo ntfsfix /dev/sdb2
+sudo apt-get install --yes ntfs-3g
+
+
 # APP ssh HOST *
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config

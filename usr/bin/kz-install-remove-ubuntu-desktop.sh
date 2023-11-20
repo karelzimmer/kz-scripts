@@ -138,6 +138,11 @@ sudo apt-get remove --purge --yes nautilus-admin
 sudo apt-get autoremove --yes
 
 
+# APP repair-ntfs HOST
+sudo apt-get remove --purge --yes ntfs-3g
+sudo apt-get autoremove --yes
+
+
 # APP signal HOST pc06
 sudo apt-get remove --purge --yes signal-desktop
 sudo apt-get autoremove --yes

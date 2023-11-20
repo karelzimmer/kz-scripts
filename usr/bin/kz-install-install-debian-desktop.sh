@@ -85,6 +85,15 @@ sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl l
 sudo apt-get install --yes mlocate
 
 
+# APP repair-ntfs HOST
+# Usage:
+# findmnt
+# TARGET          SOURCE    FSTYPE OPTIONS
+# /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+# sudo ntfsfix /dev/sdb2
+sudo apt-get install --yes ntfs-3g
+
+
 # APP repositories HOST *
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
