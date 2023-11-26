@@ -117,7 +117,8 @@ NUM  COMMAND')"
             --number-separator='  ' \
             --body-numbering=a
     printf  '\n%s\n' \
-    "$(eval_gettext "To execute a COMMAND: \${blue}\$DISPLAY_NAME COMMAND [ARGUMENT...]\${normal}")"
+    "$(eval_gettext "To execute a COMMAND: \${blue}\$DISPLAY_NAME COMMAND \
+[ARGUMENT...]\${normal}")"
 }
 
 
