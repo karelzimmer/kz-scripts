@@ -271,14 +271,11 @@ $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on https://karelzimmer.nl, under Linux.
 
 Roughly boils down to:
-1. Download an image file (.iso).
-2. Create a bootable Live USB stick.
+1. Download a CD image file (.iso).
+2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
     msg_info "$text"
-    if ! $option_gui; then
-        wait_for_enter
-    fi
 }
 
 
@@ -389,12 +386,62 @@ function process_menu2_choice {
         rows=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
-        process_commands
+        if [[ ${MENU2_COMMANDS[$REPLY]} = $(gettext '"manually"') ]]; then
+            manual_actions
+            return $OK
+        else
+            process_commands
+        fi
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         exit $OK
     else
         msg_error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
         exit $ERROR
+    fi
+}
+
+
+# This function shows the manual actions to be performed.
+function manual_actions {
+    if [[ $title = $(gettext 'Add users') ]]; then
+        text="$(gettext 'Add users'):
+
+$(gettext "Add any additional users with the following steps.
+
+1. Press the Super key[1], type 'user' and click behind Settings on Users.
+2. Click Unlock and enter password.
+3. Click Add User.
+4. Choose Account Type Standard or Admin.
+5. Complete the screen and click Add.
+6. Close the Users screen.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
+(Chromebook).")"
+        msg_info "$text"
+    elif [[ $title = $(gettext 'Set user photo') ]]; then
+        text="$(gettext 'Set user photo'):
+
+$(gettext 'No user photo was found when backing up.')"
+        if type xdg-user-dir &> /dev/null; then
+            if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
+                text="$(gettext 'Set user photo'):
+
+$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
+on Users.
+2. Click the image for the user.
+3. Click Select a file.
+4. Select Userphoto in Personal folder / Pictures.
+5. Close the Users screen.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
+(Chromebook).")"
+                msg_info "$text"
+            else
+                msg_info "$text"
+            fi
+        else
+            msg_info "$text"
+        fi
     fi
 }
 
@@ -484,7 +531,7 @@ $prompt"
 }
 
 
-# This function executes the command.
+# This function executes the commands.
 function execute_command {
     local   -i  rc=0
     local       cmd=''
@@ -494,6 +541,9 @@ function execute_command {
     # Handle manual actions.
     if [[ $command = $(gettext '"manually"') ]]; then
         manual_actions
+        if ! $option_gui; then
+            wait_for_enter
+        fi
         return $OK
     fi
 
@@ -510,63 +560,7 @@ function execute_command {
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
     msg_log "$command: rc=$rc"
-    if ! $option_gui; then
-        wait_for_enter
-    fi
 }
-
-
-# This function shows the manual actions to be performed.
-function manual_actions {
-    if [[ $title = $(gettext 'Add users') ]]; then
-        text="$(gettext 'Add users'):
-
-$(gettext "Add any additional users with the following steps.
-
-1. Press the Super key[1], type 'user' and click behind Settings on Users.
-2. Click Unlock and enter password.
-3. Click Add User.
-4. Choose Account Type Standard or Admin.
-5. Complete the screen and click Add.
-6. Close the Users screen.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
-(Chromebook).")"
-        msg_info "$text"
-        if ! $option_gui; then
-            wait_for_enter
-        fi
-    elif [[ $title = $(gettext 'Set user photo') ]]; then
-        text="$(gettext 'Set user photo'):
-
-$(gettext 'No user photo was found when backing up.')"
-        if type xdg-user-dir &> /dev/null; then
-            if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
-                text="$(gettext 'Set user photo'):
-
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
-on Users.
-2. Click the image for the user.
-3. Click Select a file.
-4. Select Userphoto in Personal folder / Pictures.
-5. Close the Users screen.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
-(Chromebook).")"
-                msg_info "$text"
-            else
-                msg_info "$text"
-            fi
-        else
-            msg_info "$text"
-        fi
-        if ! $option_gui; then
-            wait_for_enter
-        fi
-    fi
-}
-
-
 # This function controls the termination of the script.
 function term_script {
     exit $OK
