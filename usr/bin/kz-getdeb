@@ -145,10 +145,10 @@ function install_package {
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb"
 
-    printf '%s\n' "${bold}$(gettext 'Download')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Download')${normal}"
     wget --output-document="$temp_deb" $site_deb
 
-    printf '%s\n' "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Install')${normal}"
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -183,7 +183,7 @@ Type 'exit' to close this window.")
                             --infobox   "$text"         \
                             15 47
     else
-        printf '%s\n' "${bold}$(gettext 'Finished').${normal} ($DISPLAY_NAME)"
+        printf '%s\n' "${bold}$(gettext 'Finished').${normal}"
     fi
     cleanup
     exit 0

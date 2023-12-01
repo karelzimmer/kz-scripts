@@ -96,9 +96,9 @@ function process_input {
         term_script
     fi
 
-    printf '%s\n' "${bold}$(gettext 'Check')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Check')${normal}"
     check_dependencies
-    printf '\n%s\n' "${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Build')${normal}"
     pull_repos
     download_website
 }
@@ -150,10 +150,10 @@ function pull_repos {
     else
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
-    printf '%s\n' "$(gettext 'Pull repos (gitpull)')..."
+    printf '%s\n' "$(gettext 'Pull repos')..."
     # Call gitpull.
     "$bin_repo"/gitpull
-    printf '%s\n' "$(gettext 'Status repos (gitstat)')..."
+    printf '%s\n' "$(gettext 'Status repos')..."
     # Call gitstat.
     "$bin_repo"/gitstat
 }

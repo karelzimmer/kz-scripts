@@ -129,16 +129,16 @@ function process_input {
         term_script
     fi
 
-    printf '%s\n' "${bold}$(gettext 'Check - pre')${normal} ($DISPLAY_NAME)"
+    printf '%s\n' "${bold}$(gettext 'Check - pre')${normal}"
     check_repos
     check_scripts
-    printf '\n%s\n' "${bold}$(gettext 'Build')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Build')${normal}"
     build_uploads
     generate_mo
     build_deb
-    printf '\n%s\n' "${bold}$(gettext 'Install')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Install')${normal}"
     install_package
-    printf '\n%s\n' "${bold}$(gettext 'Check - post')${normal} ($DISPLAY_NAME)"
+    printf '\n%s\n' "${bold}$(gettext 'Check - post')${normal}"
     run_ivp
     check_website
 }
@@ -170,7 +170,7 @@ function check_repos {
 
 # This function check the scripts.
 function check_scripts {
-    printf '%s\n' "$(gettext 'Check scripts (kz check)')..."
+    printf '%s\n' "$(gettext 'Check scripts')..."
     # Call kz-check.
     "$SCRIPTS_REPO"/usr/bin/kz check || error_flag=true
 }
@@ -294,7 +294,7 @@ function install_package {
 
 # This function performs an installation verification procedure (IVP).
 function run_ivp {
-    printf '%s\n' "$(gettext 'Run IVP (kz ivp)')..."
+    printf '%s\n' "$(gettext 'Run IVP')..."
     # Call kz-ivp.
     kz ivp || error_flag=true
 }
@@ -302,7 +302,7 @@ function run_ivp {
 
 # This function checks the website for missing or not used files.
 function check_website {
-    printf '%s\n' "$(gettext 'Check website (rchecklink)')..."
+    printf '%s\n' "$(gettext 'Check website')..."
     # Call rchecklink.
     rchecklink || error_flag=true
 }

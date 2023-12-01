@@ -330,13 +330,13 @@ msgstr ""
 msgid "Fix all the messages above."
 msgstr ""
 
-msgid "Check scripts (kz check)"
+msgid "Check scripts"
 msgstr ""
 
 msgid "Build website"
 msgstr ""
 
-msgid "Generate .mo file (mogen)"
+msgid "Generate .mo file"
 msgstr ""
 
 msgid "Build package"
@@ -362,16 +362,16 @@ msgstr ""
 msgid "Repo $repo is not clean."
 msgstr ""
 
-msgid "Build package and website (kz build)"
+msgid "Build package and website"
 msgstr ""
 
-msgid "Upload website (lftp)"
+msgid "Upload website"
 msgstr ""
 
 msgid "Website upload failed."
 msgstr ""
 
-msgid "Install package kz (kz getdeb)"
+msgid "Install package kz"
 msgstr ""
 
 msgid "Install package kz failed."
@@ -420,13 +420,13 @@ msgstr ""
 msgid "Check dependencies"
 msgstr ""
 
-msgid "Pull repos (gitpull)"
+msgid "Pull repos"
 msgstr ""
 
-msgid "Status repos (gitstat)"
+msgid "Status repos"
 msgstr ""
 
-msgid "Download website (lftp)"
+msgid "Download website"
 msgstr ""
 
 msgid "Password for"
@@ -948,10 +948,10 @@ msgid ""
 "found."
 msgstr ""
 
-msgid "Run IVP (kz ivp)"
+msgid "Run IVP"
 msgstr ""
 
-msgid "Check website (rchecklink)"
+msgid "Check website"
 msgstr ""
 
 msgid "Authentication is required to install apps"
