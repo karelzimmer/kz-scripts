@@ -315,16 +315,7 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr ""
 
-msgid "Build - final"
-msgstr ""
-
 msgid "Deploy"
-msgstr ""
-
-msgid "Check - pre"
-msgstr ""
-
-msgid "Check - post"
 msgstr ""
 
 msgid "Fix all the messages above."

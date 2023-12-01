@@ -105,7 +105,7 @@ function process_input {
     printf '%s\n' "${bold}$(gettext 'Check')${normal}"
     check_repos
     printf  '\n%s\n'    \
-            "${bold}$(gettext 'Build - final')${normal}"
+            "${bold}$(gettext 'Build')${normal}"
     build_package
     printf '\n%s\n' "${bold}$(gettext 'Deploy')${normal}"
     upload_website
@@ -165,7 +165,7 @@ function upload_website {
     local   ftp_user=kzimmer
     local   ftp_login=$HOME/.kz-$ftp_host
 
-    printf '%s\n' "$(gettext 'Upload website (lftp)')..."
+    printf '%s\n' "$(gettext 'Upload website')..."
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"

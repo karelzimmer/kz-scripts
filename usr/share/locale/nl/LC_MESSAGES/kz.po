@@ -379,17 +379,8 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
 
-msgid "Build - final"
-msgstr "Bouwen - definitief"
-
 msgid "Deploy"
 msgstr "Distribueren"
-
-msgid "Check - pre"
-msgstr "Controleren - vooraf"
-
-msgid "Check - post"
-msgstr "Controleren - achteraf"
 
 msgid "Fix all the messages above."
 msgstr "Herstel alle meldingen hierboven."
