@@ -104,8 +104,7 @@ function process_input {
 
     printf '%s\n' "${bold}$(gettext 'Check')${normal}"
     check_repos
-    printf  '\n%s\n'    \
-            "${bold}$(gettext 'Build')${normal}"
+    printf '\n%s\n' "${bold}$(gettext 'Build')${normal}"
     build_package
     printf '\n%s\n' "${bold}$(gettext 'Deploy')${normal}"
     upload_website
