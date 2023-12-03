@@ -168,7 +168,7 @@ function init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    msg_log "==== START log $PROGRAM_NAME ====="
+    msg_log "==== START log $PROGRAM_NAME ===="
     msg_log "started ($program_exec $* as $USER)"
 
     # Setting xhost is needed on Debian for GUI root scripts like kz-install.
@@ -425,7 +425,7 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
         exit)
             signal_exit
             msg_log "ended (code=exited, status=$status)"
-            msg_log "==== END log $PROGRAM_NAME ====="
+            msg_log "==== END log $PROGRAM_NAME ===="
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;

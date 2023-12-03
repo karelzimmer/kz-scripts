@@ -172,7 +172,9 @@ function check_repos {
 function check_scripts {
     printf '%s\n' "$(gettext 'Check scripts')..."
     # Call kz-check.
-    "$SCRIPTS_REPO"/usr/bin/kz check || error_flag=true
+    msg_log '==== START call kz-check ===='
+    "$SCRIPTS_REPO"/usr/bin/kz-check || error_flag=true
+    msg_log '==== END call kz-check ===='
 }
 
 
@@ -296,7 +298,9 @@ function install_package {
 function run_ivp {
     printf '%s\n' "$(gettext 'Run IVP')..."
     # Call kz-ivp.
-    kz ivp || error_flag=true
+    msg_log '==== START call kz-ivp ===='
+    kz-ivp || error_flag=true
+    msg_log '==== END call kz-ivp ===='
 }
 
 
@@ -304,7 +308,9 @@ function run_ivp {
 function check_website {
     printf '%s\n' "$(gettext 'Check website')..."
     # Call rchecklink.
+    msg_log '==== START call rchecklink ===='
     rchecklink || error_flag=true
+    msg_log '==== END call rchecklink ===='
 }
 
 
