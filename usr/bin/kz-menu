@@ -468,7 +468,7 @@ function process_commands {
 }
 
 
-# This function shows the command before it is executed.
+# This function shows the commands before they are executed.
 function show_commands_before_execution {
     local       action=''
     local       command=''
