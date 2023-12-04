@@ -152,14 +152,14 @@ function pull_repos {
     fi
     printf '%s\n' "$(gettext 'Pull repos')..."
     # Call gitpull.
-    msg_log '==== START call gitpull ===='
+    msg_log 'Calling gitpull...'
     "$bin_repo"/gitpull
-    msg_log '==== END call gitpull ===='
+    msg_log 'Called gitpull.'
     printf '%s\n' "$(gettext 'Status repos')..."
     # Call gitstat.
-    msg_log '==== START call gitstat ===='
+    msg_log 'Calling gitstat...'
     "$bin_repo"/gitstat
-    msg_log '==== END call gitstat ===='
+    msg_log 'Called gitstat.'
 }
 
 
