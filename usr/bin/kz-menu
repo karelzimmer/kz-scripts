@@ -485,7 +485,7 @@ function show_commands_before_execution {
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         text+="
-$row. $action ($command)"
+$row. $action"
     done
     text+='
 '
