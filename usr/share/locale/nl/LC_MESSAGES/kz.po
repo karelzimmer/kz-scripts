@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-26 11:37+0100\n"
+"POT-Creation-Date: 2023-12-04 12:11+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -214,8 +214,11 @@ msgstr ""
 "NUM  OPDRACHT"
 
 #, sh-format
-msgid "To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND [ARGUMENT...]${normal}"
-msgstr "Om een OPDRACHT uit te voeren: ${blue}$DISPLAY_NAME OPDRACHT [ARGUMENT...]${normal}"
+msgid ""
+"To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND [ARGUMENT...]${normal}"
+msgstr ""
+"Om een OPDRACHT uit te voeren: ${blue}$DISPLAY_NAME OPDRACHT "
+"[ARGUMENT...]${normal}"
 
 msgid "Make backup"
 msgstr "Back-up maken"
@@ -793,9 +796,6 @@ msgstr "Gebruiker inrichten"
 msgid "Command menu"
 msgstr "Opdrachtmenu"
 
-msgid "Stop"
-msgstr "Stoppen"
-
 msgid "Checklist chapter 1"
 msgstr "Checklist hoofdstuk 1"
 
@@ -846,6 +846,9 @@ msgstr "Terug"
 
 msgid "Exit"
 msgstr "Afsluiten"
+
+msgid "N/A"
+msgstr "N.V.T."
 
 msgid "CHOICE"
 msgstr "KEUZE"

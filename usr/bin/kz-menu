@@ -41,14 +41,14 @@ readonly    X_OPTIONS_LONG=',gui'
 
             MENU1_TITLE=$(gettext 'Installation menu')
 readonly    MENU1_TITLE
-readonly    MENU1_HEAD="                 $MENU1_TITLE"
+readonly    MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
 readonly -a MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
                 "$(gettext 'Provision user')"
                 "$(gettext 'Command menu')"
-                "$(gettext 'Stop')"
+                "$(gettext 'Exit')"
             )
 readonly -a MENU1_COMMANDS=(
             [1]="$(gettext 'Checklist chapter 1')"
@@ -62,7 +62,7 @@ readonly    MENU1_LINES=${#MENU1_ACTIONS[@]}
 
             MENU2_TITLE=$(gettext 'Command menu')
 readonly    MENU2_TITLE
-readonly    MENU2_HEAD="                $MENU2_TITLE"
+readonly    MENU2_HEAD="--------------- $MENU2_TITLE ---------------"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
@@ -71,7 +71,7 @@ readonly -a MENU2_ACTIONS=(
                 "$(gettext 'Restore backup')"
                 "$(gettext 'Set user photo')"
                 "$(gettext 'Set up apps')"
-                "$(gettext 'Stop')"
+                "$(gettext 'Back')"
             )
 readonly -a MENU2_COMMANDS=(
             [1]='kz wifi'
@@ -81,7 +81,7 @@ readonly -a MENU2_COMMANDS=(
                 'kz restore'
                 "$(gettext '"manually"')"
                 'kz setup'
-                "$(gettext 'Exit menu')"
+                "$(gettext 'N/A')"
             )
 readonly    MENU2_LINES=${#MENU2_ACTIONS[@]}
 
@@ -191,20 +191,19 @@ function process_menu1_gui {
 function process_menu1_tui {
     local   menu1_action=''
 
-    printf '\n%s\n\n' "$MENU1_HEAD"
-        printf  '%3s  %-24s  %s\n'      \
-                "$(gettext 'NUM')"      \
-                "$(gettext 'ACTION')"   \
-                "$(gettext 'EXPLANATION')"
-    for menu1_action in "${!MENU1_ACTIONS[@]}"; do
-        printf  '%3s  %-24s  %s\n'                  \
-                "$menu1_action"                     \
-                "${MENU1_ACTIONS[$menu1_action]}"   \
-                "${MENU1_COMMANDS[$menu1_action]}"
-    done
-    printf '\n'
-
     while true; do
+        printf '\n%s\n\n' "$MENU1_HEAD"
+            printf  '%3s  %-24s  %s\n'      \
+                    "$(gettext 'NUM')"      \
+                    "$(gettext 'ACTION')"   \
+                    "$(gettext 'EXPLANATION')"
+        for menu1_action in "${!MENU1_ACTIONS[@]}"; do
+            printf  '%3s  %-24s  %s\n'                  \
+                    "$menu1_action"                     \
+                    "${MENU1_ACTIONS[$menu1_action]}"   \
+                    "${MENU1_COMMANDS[$menu1_action]}"
+        done
+        printf '\n'
         read -rp "$(eval_gettext "Run number [1-\$MENU1_LINES]: ")"
         case $REPLY in
             *[^[:digit:]]*)
@@ -212,14 +211,13 @@ function process_menu1_tui {
                 ;;
             *)
                 if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
-                    break
+                    process_menu1_choice
                 else
                     continue
                 fi
                 ;;
         esac
     done
-    process_menu1_choice
 }
 
 
@@ -347,20 +345,19 @@ function process_menu2_gui {
 function process_menu2_tui {
     local   menu2_action=''
 
-    printf '\n%s\n\n' "$MENU2_HEAD"
+    while true; do
+        printf '\n%s\n\n' "$MENU2_HEAD"
         printf  '%3s  %-25s  %s\n'      \
                 "$(gettext 'NUM')"      \
                 "$(gettext 'ACTION')"   \
                 "$(gettext 'COMMAND')"
-    for menu2_action in "${!MENU2_ACTIONS[@]}"; do
-        printf  '%3s  %-25s  %s\n'                  \
-                "$menu2_action"                     \
-                "${MENU2_ACTIONS[$menu2_action]}"   \
-                "${MENU2_COMMANDS[$menu2_action]}"
-    done
-    printf '\n'
-
-    while true; do
+        for menu2_action in "${!MENU2_ACTIONS[@]}"; do
+            printf  '%3s  %-25s  %s\n'                  \
+                    "$menu2_action"                     \
+                    "${MENU2_ACTIONS[$menu2_action]}"   \
+                    "${MENU2_COMMANDS[$menu2_action]}"
+        done
+        printf '\n'
         read -rp "$(eval_gettext "Run number [1-\$MENU2_LINES]: ")"
         case $REPLY in
             *[^[:digit:]]*)
@@ -368,14 +365,13 @@ function process_menu2_tui {
                 ;;
             *)
                 if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
-                    break
+                    process_menu2_choice
                 else
                     continue
                 fi
                 ;;
         esac
     done
-    process_menu2_choice
 }
 
 
@@ -393,7 +389,7 @@ function process_menu2_choice {
             process_commands
         fi
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
-        exit $OK
+        process_menu1_tui
     else
         msg_error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
         exit $ERROR
