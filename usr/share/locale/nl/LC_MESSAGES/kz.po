@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-05 17:45+0100\n"
+"POT-Creation-Date: 2023-12-05 18:52+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -647,11 +647,17 @@ msgstr ""
 msgid "  0  No files present."
 msgstr "  0  Geen bestanden gevonden."
 
+msgid "To view the commands of FILE execute:"
+msgstr "Om de opdrachten in BESTAND te bekijken voer uit:"
+
+msgid " --cat --file FILE"
+msgstr " --cat --file BESTAND"
+
 msgid "To process FILE execute:"
 msgstr "Om BESTAND te verwerken voer uit:"
 
-msgid "To view the commands of FILE execute:"
-msgstr "Om de opdrachten in BESTAND te bekijken voer uit:"
+msgid " --file FILE"
+msgstr " --file BESTAND"
 
 msgid "The default FILE is"
 msgstr "Het standaardBESTAND is"

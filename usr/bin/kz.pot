@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-05 17:45+0100\n"
+"POT-Creation-Date: 2023-12-05 18:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -535,10 +535,16 @@ msgstr ""
 msgid "  0  No files present."
 msgstr ""
 
+msgid "To view the commands of FILE execute:"
+msgstr ""
+
+msgid " --cat --file FILE"
+msgstr ""
+
 msgid "To process FILE execute:"
 msgstr ""
 
-msgid "To view the commands of FILE execute:"
+msgid " --file FILE"
 msgstr ""
 
 msgid "The default FILE is"

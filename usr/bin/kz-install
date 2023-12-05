@@ -242,11 +242,11 @@ $(
 
 $USAGE_LINE"
     else
-        printf  '\n%s %s\n%s %s\n%s\n'                                  \
+        printf  "\n%s ${blue}%s${normal}\n%s ${blue}%s${normal}\n%s\n"  \
                 "$(gettext 'To view the commands of FILE execute:')"    \
-                "${blue}$DISPLAY_NAME --cat --file FILE${normal}"       \
+                "$DISPLAY_NAME$(gettext ' --cat --file FILE')"          \
                 "$(gettext 'To process FILE execute:')"                 \
-                "${blue}$DISPLAY_NAME --file FILE${normal}"             \
+                "$DISPLAY_NAME$(gettext ' --file FILE')"                \
                 "$(gettext 'The default FILE is') '$input_file'."
     fi
 )"
