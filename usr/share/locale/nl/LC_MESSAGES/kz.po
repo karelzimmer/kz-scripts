@@ -1049,21 +1049,6 @@ msgstr "resetten"
 msgid "Update system"
 msgstr "Systeem bijwerken"
 
-msgid "Repair"
-msgstr "Repareren"
-
-msgid "Update"
-msgstr "Bijwerken"
-
-msgid "Snap refresh"
-msgstr "Snaps bijwerken"
-
-msgid "Cleanup"
-msgstr "Opruimen"
-
-msgid "Snap cleanup"
-msgstr "Snaps opruimen"
-
 msgid ""
 "*** The computer must restart to complete the installation of updates ***"
 msgstr ""
