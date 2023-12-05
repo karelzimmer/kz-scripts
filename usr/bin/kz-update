@@ -70,13 +70,15 @@ def perform_update():
     command = 'apt-get upgrade --yes'
     perform_command(command)
 
-    snap_refresh()
+    command = 'snap refresh'
+    snap_refresh(command)
 
 
 def perform_command(command):
     """
     This function executes a command.
     """
+    print(f'==== {command}...')
     kz_common.check_for_active_updates()
     try:
         subprocess.run(f'sudo {command}', shell=True, check=True)
@@ -88,13 +90,14 @@ def perform_command(command):
         sys.exit(kz_common.error)
 
 
-def snap_refresh():
+def snap_refresh(command):
     """
     This function refreshes installed snaps.
     """
+    print(f'==== {command}...')
     kz_common.check_for_active_updates()
     try:
-        subprocess.run('sudo snap refresh', shell=True, check=True)
+        subprocess.run(f'sudo {command}', shell=True, check=True)
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
@@ -110,13 +113,15 @@ def perform_cleanup():
     command = 'apt-get autoremove --yes'
     perform_command(command)
 
-    snap_cleanup()
+    command = 'snap cleanup'
+    snap_cleanup(command)
 
 
-def snap_cleanup():
+def snap_cleanup(command):
     """
     This function performs a snaps cleanup.
     """
+    print(f'==== {command}...')
     # Start with LANG=en_US.UTF-8 and check for disabled does not always work.
     cmd = '\
 snap list --all | \
