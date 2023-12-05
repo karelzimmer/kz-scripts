@@ -315,9 +315,6 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr ""
 
-msgid "Deploy"
-msgstr ""
-
 msgid "Fix all the messages above."
 msgstr ""
 
@@ -378,15 +375,6 @@ msgstr ""
 msgid "files are deleted, please start again"
 msgstr ""
 
-msgid "Download"
-msgstr ""
-
-msgid "Install"
-msgstr ""
-
-msgid "Finished"
-msgstr ""
-
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -400,12 +388,6 @@ msgid ""
 msgstr ""
 
 msgid "Build development environment"
-msgstr ""
-
-msgid "Check"
-msgstr ""
-
-msgid "Build"
 msgstr ""
 
 msgid "Check dependencies"

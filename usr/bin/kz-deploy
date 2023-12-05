@@ -102,13 +102,9 @@ function process_input {
         term_script
     fi
 
-    printf '%s\n' "${bold}$(gettext 'Check')${normal}"
     check_repos
-    printf '\n%s\n' "${bold}$(gettext 'Build')${normal}"
     build_package
-    printf '\n%s\n' "${bold}$(gettext 'Deploy')${normal}"
     upload_website
-    printf '\n%s\n' "${bold}$(gettext 'Install')${normal}"
     install_package
 }
 

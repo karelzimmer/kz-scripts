@@ -96,9 +96,7 @@ function process_input {
         term_script
     fi
 
-    printf '%s\n' "${bold}$(gettext 'Check')${normal}"
     check_dependencies
-    printf '\n%s\n' "${bold}$(gettext 'Build')${normal}"
     pull_repos
     download_website
 }
@@ -174,7 +172,6 @@ function download_website {
     local   ftp_user=kzimmer
     local   ftp_login=$HOME/.kz-$ftp_host
 
-    printf '%s\n' "$(gettext 'Download website (lftp)')..."
     if ! [[ -f $ftp_login ]]; then
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"

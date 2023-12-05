@@ -382,9 +382,6 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
 
-msgid "Deploy"
-msgstr "Distribueren"
-
 msgid "Fix all the messages above."
 msgstr "Herstel alle meldingen hierboven."
 
@@ -445,15 +442,6 @@ msgstr "Pakket kz installeren"
 msgid "files are deleted, please start again"
 msgstr "bestanden zijn verwijderd, begin opnieuw"
 
-msgid "Download"
-msgstr "Downloaden"
-
-msgid "Install"
-msgstr "Installeren"
-
-msgid "Finished"
-msgstr "Gereed"
-
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"
@@ -477,12 +465,6 @@ msgstr ""
 
 msgid "Build development environment"
 msgstr "Ontwikkelomgeving bouwen"
-
-msgid "Check"
-msgstr "Controleren"
-
-msgid "Build"
-msgstr "Bouwen"
 
 msgid "Check dependencies"
 msgstr "Controleer afhankelijkheden"
