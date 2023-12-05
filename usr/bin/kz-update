@@ -127,7 +127,7 @@ def snap_cleanup(command):
     """
     This function performs a snaps cleanup.
     """
-    text = _('Command {}...').format(command)
+    text = _('Command "{}"...').format(command)
     print(f'{text}')
     # Start with LANG=en_US.UTF-8 and check for disabled does not always work.
     cmd = '\
