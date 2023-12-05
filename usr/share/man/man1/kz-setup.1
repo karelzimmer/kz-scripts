@@ -79,7 +79,7 @@ See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in
-kz-setup-setup-ubuntu-desktop.sh sample file for user Jan.
+kz-setup-setup-ubuntu-desktop.sh sample file.
 More examples can be seen through the \fBkz setup --cat\fR command.
 .sp
 .B Table 1. Record types and their processing
@@ -153,9 +153,9 @@ T{
 T}:T{
 T}
 T{
-# APP gnome USER jan@pc02
+# APP gnome USER john@pc02
 T}:T{
-Set up gnome only for Jan, see [2].
+Set up gnome only for John, see [2].
 T}
 T{
 gsettings set org.gnome.shell...
@@ -165,12 +165,24 @@ T{
 T}:T{
 T}
 T{
-# APP kvm USER mo@pc01 peter@pc03
+# APP kvm USER jane@pc01 john@pc02
 T}:T{
-Set up kvm for Mo and Peter.
+Set up kvm for Jane and John, see [3].
 T}
 T{
 kz-gset --addfavaft=virt-manager
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+# APP google-earth HOST
+T}:T{
+Do not set up Google Earth by default, see [4].
+T}
+T{
+kz-gset --addfavaft=google-earth
 T}:T{
 T}
 .TE
@@ -182,13 +194,13 @@ The line with '*' causes the associated commands to run for every user.
 .sp
 [2]
 .br
-The line with 'jan@pc02' ensures that the associated commands are executed only
-for Jan on pc02.
+The line with 'john@pc02' ensures that the associated commands are executed
+only for John on pc02.
 .sp
 [3]
 .br
-The line with 'mo@pc01 peter@pc03' ensures that the associated commands are
-executed only for Mo on pc01 and for Peter on pc02 by default. The APP can
+The line with 'jane@pc01 jan@pc02' ensures that the associated commands are
+executed only for Jane on pc01 and for John on pc02 by default. The APP can
 still be set up on another computer with the command 'kz setup kvm'.
 .sp
 [4]

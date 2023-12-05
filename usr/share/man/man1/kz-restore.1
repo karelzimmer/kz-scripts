@@ -25,14 +25,14 @@ searching for \fBback\fR, click on \fBRestore\fR.
 .sp
 The backup is expected on a mounted USB medium such as a USB external hard disk
 in directory \fBbackup-<computer name>-<user_name>\fR, for example
-/media/jan/backupdisk/backup-pc02-jan.
+/media/john/backupdisk/backup-pc02-john for user John on pc02.
 .sp
 In a graphical work environment when the backup is restored, the previously set
 desktop Wallpaper will be restored from Home / Pictures, and Favorites will be
 restored from Home Documents.
 .sp
 With option \fB-s\fR, \fB--source\fR \fIDIRECTORY\fR another location can be
-specified. For example /media/jan/usbstick instead of /media/jan/backupdisk.
+specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
 Option  \fB-d\fR, \fB--dry-run\fR performs a trial run without making any
 changes. It is usually used in seeing what an rsync command will do before
@@ -114,9 +114,10 @@ environment.
 Show files that would be restored from the backup.
 .RE
 .sp
-\fBkz restore --source/media/jan/usbstick\fR
+\fBkz restore --source/media/john/usbstick\fR
 .RS
-Restore the backup from /media/jan/usbstick from the backup-pc02-jan directory.
+Restore the backup of the Home folder of John on /media/john/usbstick from the
+backup-pc02-john directory.
 .RE
 .\"
 .\"

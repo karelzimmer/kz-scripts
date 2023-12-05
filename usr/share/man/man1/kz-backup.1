@@ -29,10 +29,11 @@ of Apps are backed up in Home / Documents folder.
 .sp
 The backup is placed on a mounted USB medium such as a USB external hard disk
 in folder \fBbackup-<computer name>-<user_name>\fR, this folder is
-created as needed, for example /media/jan/backupdisk/backup-pc02-jan.
+created as needed, for example /media/john/backupdisk/backup-pc02-john for John
+at pc02.
 .sp
 With option \fB-t\fR, \fB--target\fR \fIDIRECTORY\fR another location can be
-specified. For example /media/jan/usbstick instead of /media/jan/backupdisk.
+specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
 Option \fB-d\fR, \fB--dry-run\fR performs a trial run without making any
 changes. It is usually used in conjunction with rsync's --delete option to see
@@ -142,10 +143,10 @@ environment.
 Show files that would otherwise be added and removed in the backup.
 .RE
 .sp
-\fBkz backup --target /media/jan/usbstick\fR
+\fBkz backup --target /media/john/usbstick\fR
 .RS
-Back up the Home folder to /media/jan/usbstick in the folder backup-pc02-jan
-(this folder will be created as needed).
+Back up the Home folder of John on pc02 to /media/john/usbstick in the folder
+backup-pc02-john (this folder will be created as needed).
 .RE
 .\"
 .\"
