@@ -143,7 +143,7 @@ function check_repos {
 
 # This function builds package kz.
 function build_package {
-    printf '%s\n\n' "$(gettext 'Build package and website')..."
+    printf '%s\n' "$(gettext 'Build package and website')..."
     # Call kz-build.
     msg_log 'Calling kz-build...'
     "$SCRIPTS_REPO"/usr/bin/kz-build || exit $ERROR
@@ -184,7 +184,7 @@ function upload_website {
 # This function installs package kz.
 function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
-    printf '%s\n\n' "$(gettext 'Install package kz')..."
+    printf '%s\n' "$(gettext 'Install package kz')..."
     msg_log 'Calling kz-getdeb...'
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
         printf "${red}%b\n${normal}" "$(gettext 'Install package kz failed.')"
