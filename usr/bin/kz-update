@@ -50,13 +50,13 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
-    command = 'dpkg --configure --pending'
+    command = 'sudo dpkg --configure --pending'
     perform_command(command)
 
-    command = 'apt-get update --fix-missing'
+    command = 'sudo apt-get update --fix-missing'
     perform_command(command)
 
-    command = 'apt-get install --fix-broken'
+    command = 'sudo apt-get install --fix-broken'
     perform_command(command)
 
 
@@ -64,13 +64,13 @@ def perform_update():
     """
     This function updates installed Debian packages.
     """
-    command = 'apt-get update'
+    command = 'sudo apt-get update'
     perform_command(command)
 
-    command = 'apt-get upgrade --yes'
+    command = 'sudo apt-get upgrade --yes'
     perform_command(command)
 
-    command = 'snap refresh'
+    command = 'sudo snap refresh'
     snap_refresh(command)
 
 
@@ -78,10 +78,11 @@ def perform_command(command):
     """
     This function executes a command.
     """
-    print(f'==== {command}...')
+    text = _('Command {}...').format(command)
+    print(f'{text}')
     kz_common.check_for_active_updates()
     try:
-        subprocess.run(f'sudo {command}', shell=True, check=True)
+        subprocess.run(f'{command}', shell=True, check=True)
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
@@ -94,10 +95,11 @@ def snap_refresh(command):
     """
     This function refreshes installed snaps.
     """
-    print(f'==== {command}...')
+    text = _('Command {}...').format(command)
+    print(f'{text}')
     kz_common.check_for_active_updates()
     try:
-        subprocess.run(f'sudo {command}', shell=True, check=True)
+        subprocess.run(f'{command}', shell=True, check=True)
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
@@ -107,13 +109,13 @@ def perform_cleanup():
     """
     This function performs a Debian package cleanup.
     """
-    command = 'apt-get autoclean --yes'
+    command = 'sudo apt-get autoclean --yes'
     perform_command(command)
 
-    command = 'apt-get autoremove --yes'
+    command = 'sudo apt-get autoremove --yes'
     perform_command(command)
 
-    command = 'snap cleanup'
+    command = 'sudo snap cleanup'
     snap_cleanup(command)
 
 
@@ -121,7 +123,8 @@ def snap_cleanup(command):
     """
     This function performs a snaps cleanup.
     """
-    print(f'==== {command}...')
+    text = _('Command {}...').format(command)
+    print(f'{text}')
     # Start with LANG=en_US.UTF-8 and check for disabled does not always work.
     cmd = '\
 snap list --all | \
