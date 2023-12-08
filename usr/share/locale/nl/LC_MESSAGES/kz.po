@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-05 18:52+0100\n"
+"POT-Creation-Date: 2023-12-08 10:56+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -57,18 +57,18 @@ msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."
 
 msgid ""
-"If the package manager gives apt errors, launch a Terminal window and run:"
+"If the package manager gives apt errors, launch a Terminal window and "
+"execute:"
 msgstr ""
 "Als de pakketbeheerder apt foutmeldingen geeft, start een Terminalvenster en "
 "voer uit:"
 
+msgid "man page"
+msgstr "man-pagina"
+
 #, sh-format
-msgid ""
-"Type 'man $DISPLAY_NAME' or see the \\e]8;;man:$PROGRAM_NAME(1)\\e\\"
-"$DISPLAY_NAME man page\\e]8;;\\e\\ for more information."
-msgstr ""
-"Typ 'man $DISPLAY_NAME' of zie de \\e]8;;man:$PROGRAM_NAME(1)\\e\\"
-"$DISPLAY_NAME man-pagina\\e]8;;\\e\\ voor meer informatie."
+msgid "Type 'man $DISPLAY_NAME' or see the $man_url for more information."
+msgstr "Typ 'man $DISPLAY_NAME' of zie de $man_url voor meer informatie."
 
 #, sh-format
 msgid "Type '$DISPLAY_NAME --help' for more information."
@@ -119,8 +119,7 @@ msgid ""
 "  -u, --usage    give a short usage message\n"
 "  -v, --version  print program version\n"
 "\n"
-"Type 'man {}' or see the ]8;;man:{}(1)\\{} man page]8;;\\ for more "
-"information."
+"Type 'man {}' or see the {} for more information."
 msgstr ""
 "Gebruik: {} [OPTIE...]\n"
 "\n"
@@ -131,8 +130,7 @@ msgstr ""
 "  -u, --usage    toon een korte gebruikssamenvatting\n"
 "  -v, --version  toon de programmaversie\n"
 "\n"
-"Typ 'man {}' of zie de ]8;;man:{}(1)\\{} man-pagina]8;;\\ voor meer "
-"informatie."
+"Typ 'man {}' of zie de {} voor meer informatie."
 
 msgid ""
 "Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n"
@@ -612,55 +610,62 @@ msgstr "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
 msgid "No install file found, looked for '$input_file'."
 msgstr "Geen installatiebestand gevonden, zocht '$input_file'."
 
-msgid ""
-"The following APPs are available:\n"
-"\n"
-"NUM  APP"
-msgstr ""
-"De volgende APPs zijn beschikbaar:\n"
-"\n"
-"NUM  APP"
+msgid "The following APPs are available:"
+msgstr "De volgende APPs zijn beschikbaar:"
+
+msgid "NUM  APP"
+msgstr "NUM  APP"
 
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
-msgid "To view the contents of the APPs installation file execute:"
-msgstr ""
-"Om de inhoud van het installatiebestand voor APPs te bekijken voer uit:"
-
-msgid "To install the APPs run:"
-msgstr "Om de APPs te installeren voer uit:"
-
-msgid "To view the contents of the default install file run:"
-msgstr ""
-"Om de inhoud van het standaard installatiebestand te bekijken voer uit:"
-
+#, sh-format
 msgid ""
-"The following FILEs are present:\n"
-"\n"
-"NUM  FILE"
+"To view the contents of the APPs installation file execute: "
+"${blue}$DISPLAY_NAME --cat APP...${normal}"
 msgstr ""
-"De volgende BESTANDen zijn aanwezig:\n"
-"\n"
-"NUM  BESTAND"
+"Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
+"${blue}$DISPLAY_NAME --cat APP...${normal}"
+
+#, sh-format
+msgid "To install the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
+msgstr ""
+"Om de APPs te installeren voer uit: ${blue}$DISPLAY_NAME APP...${normal}"
+
+#, sh-format
+msgid ""
+"To view the contents of the default install file execute: "
+"${blue}$DISPLAY_NAME --cat${normal}"
+msgstr ""
+"Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
+"${blue}$DISPLAY_NAME --cat${normal}"
+
+msgid "The following FILEs are present:"
+msgstr "De volgende BESTANDen zijn aanwezig:"
+
+msgid "NUM  FILE"
+msgstr "NUM  BESTAND"
 
 msgid "  0  No files present."
 msgstr "  0  Geen bestanden gevonden."
 
-msgid "To view the commands of FILE execute:"
-msgstr "Om de opdrachten in BESTAND te bekijken voer uit:"
+#, sh-format
+msgid ""
+"To view the commands of FILE execute: ${blue}$DISPLAY_NAME --cat --file "
+"FILE${normal}"
+msgstr ""
+"Om de opdrachten in BESTAND te bekijken voer uit: ${blue}$DISPLAY_NAME --cat "
+"--file BESTAND${normal}"
 
-msgid " --cat --file FILE"
-msgstr " --cat --file BESTAND"
+#, sh-format
+msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
+msgstr ""
+"Om BESTAND te verwerken voer uit: ${blue}$DISPLAY_NAME --file "
+"BESTAND${normal}"
 
-msgid "To process FILE execute:"
-msgstr "Om BESTAND te verwerken voer uit:"
-
-msgid " --file FILE"
-msgstr " --file BESTAND"
-
-msgid "The default FILE is"
-msgstr "Het standaardBESTAND is"
+#, sh-format
+msgid "The default FILE is $input_file."
+msgstr "Het standaardBESTAND is $input_file."
 
 msgid "install"
 msgstr "installeren"
@@ -1037,14 +1042,26 @@ msgstr ""
 msgid "No set up file found, looked for '$input_file'."
 msgstr "Geen instelbestand gevonden, zocht '$input_file'."
 
-msgid "To view the contents of the APPs set up file execute:"
-msgstr "Om de inhoud van het instelbestand voor APPs te bekijken voer uit:"
+#, sh-format
+msgid ""
+"To view the contents of the APPs set up file execute: ${blue}$DISPLAY_NAME --"
+"cat APP...${normal}"
+msgstr ""
+"Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
+"${blue}$DISPLAY_NAME --cat APP...${normal}"
 
-msgid "To set up the APPs run:"
-msgstr "Om de APPs in te stellen voer uit:"
+#, sh-format
+msgid "To set up the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
+msgstr ""
+"Om de APPs te installeren voer uit: ${blue}$DISPLAY_NAME APP...${normal}"
 
-msgid "To view the contents of the default set up file run:"
-msgstr "Om de inhoud van het standaard instelbestand te bekijken voer uit:"
+#, sh-format
+msgid ""
+"To view the contents of the default set up file execute: "
+"${blue}$DISPLAY_NAME --cat${normal}"
+msgstr ""
+"Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
+"${blue}$DISPLAY_NAME --cat${normal}"
 
 msgid "set up"
 msgstr "instellen"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-05 18:52+0100\n"
+"POT-Creation-Date: 2023-12-08 12:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,13 +54,15 @@ msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
 
 msgid ""
-"If the package manager gives apt errors, launch a Terminal window and run:"
+"If the package manager gives apt errors, launch a Terminal window and "
+"execute:"
+msgstr ""
+
+msgid "man page"
 msgstr ""
 
 #, sh-format
-msgid ""
-"Type 'man $DISPLAY_NAME' or see the \\e]8;;man:$PROGRAM_NAME(1)\\e\\"
-"$DISPLAY_NAME man page\\e]8;;\\e\\ for more information."
+msgid "Type 'man $DISPLAY_NAME' or see the $man_url for more information."
 msgstr ""
 
 #, sh-format
@@ -110,8 +112,7 @@ msgid ""
 "  -u, --usage    give a short usage message\n"
 "  -v, --version  print program version\n"
 "\n"
-"Type 'man {}' or see the ]8;;man:{}(1)\\{} man page]8;;\\ for more "
-"information."
+"Type 'man {}' or see the {} for more information."
 msgstr ""
 
 msgid ""
@@ -508,46 +509,52 @@ msgstr ""
 msgid "No install file found, looked for '$input_file'."
 msgstr ""
 
-msgid ""
-"The following APPs are available:\n"
-"\n"
-"NUM  APP"
+msgid "The following APPs are available:"
+msgstr ""
+
+msgid "NUM  APP"
 msgstr ""
 
 msgid "  0  No apps found."
 msgstr ""
 
-msgid "To view the contents of the APPs installation file execute:"
-msgstr ""
-
-msgid "To install the APPs run:"
-msgstr ""
-
-msgid "To view the contents of the default install file run:"
-msgstr ""
-
+#, sh-format
 msgid ""
-"The following FILEs are present:\n"
-"\n"
-"NUM  FILE"
+"To view the contents of the APPs installation file execute: "
+"${blue}$DISPLAY_NAME --cat APP...${normal}"
+msgstr ""
+
+#, sh-format
+msgid "To install the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
+msgstr ""
+
+#, sh-format
+msgid ""
+"To view the contents of the default install file execute: "
+"${blue}$DISPLAY_NAME --cat${normal}"
+msgstr ""
+
+msgid "The following FILEs are present:"
+msgstr ""
+
+msgid "NUM  FILE"
 msgstr ""
 
 msgid "  0  No files present."
 msgstr ""
 
-msgid "To view the commands of FILE execute:"
+#, sh-format
+msgid ""
+"To view the commands of FILE execute: ${blue}$DISPLAY_NAME --cat --file "
+"FILE${normal}"
 msgstr ""
 
-msgid " --cat --file FILE"
+#, sh-format
+msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
 msgstr ""
 
-msgid "To process FILE execute:"
-msgstr ""
-
-msgid " --file FILE"
-msgstr ""
-
-msgid "The default FILE is"
+#, sh-format
+msgid "The default FILE is $input_file."
 msgstr ""
 
 msgid "install"
@@ -852,13 +859,20 @@ msgstr ""
 msgid "No set up file found, looked for '$input_file'."
 msgstr ""
 
-msgid "To view the contents of the APPs set up file execute:"
+#, sh-format
+msgid ""
+"To view the contents of the APPs set up file execute: ${blue}$DISPLAY_NAME --"
+"cat APP...${normal}"
 msgstr ""
 
-msgid "To set up the APPs run:"
+#, sh-format
+msgid "To set up the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
 msgstr ""
 
-msgid "To view the contents of the default set up file run:"
+#, sh-format
+msgid ""
+"To view the contents of the default set up file execute: "
+"${blue}$DISPLAY_NAME --cat${normal}"
 msgstr ""
 
 msgid "set up"

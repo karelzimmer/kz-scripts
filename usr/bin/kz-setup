@@ -226,37 +226,33 @@ function process_input {
 
 # This function displays a list of input files present.
 function process_option_list {
-    printf '%s\n' "$(gettext 'The following FILEs are present:
-
-NUM  FILE')
-$(
+    #FIXME 2x gettext!
+    printf  '%s\n\n%s\n'                                    \
+            "$(gettext 'The following FILEs are present:')" \
+            "$(gettext 'NUM  FILE')"
     if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"*'.sh'    \
                     2> >($logcmd)                           |
             nl      --number-width=3                        \
                     --number-format=rn                      \
                     --number-separator='  '                 \
                     --body-numbering=a; then
-        printf '%s\n' "$(gettext '  0  No files present.')
-
-$USAGE_LINE"
+        printf '%s\n\n%s\n' "$(gettext '  0  No files present.')" "$USAGE_LINE"
     else
-        printf  "\n%s ${blue}%s${normal}\n%s ${blue}%s${normal}\n%s\n"  \
-                "$(gettext 'To view the commands of FILE execute:')"    \
-                "$DISPLAY_NAME$(gettext ' --cat --file FILE')"          \
-                "$(gettext 'To process FILE execute:')"                 \
-                "$DISPLAY_NAME$(gettext ' --file FILE')"                \
-                "$(gettext 'The default FILE is') '$input_file'."
+        printf  '\n%s\n%s\n%s\n'                        \
+                "$(eval_gettext "To view the commands of FILE execute: \
+\${blue}\$DISPLAY_NAME --cat --file FILE\${normal}")"   \
+                "$(eval_gettext "To process FILE execute: \
+\${blue}\$DISPLAY_NAME --file FILE\${normal}")"         \
+                "$(eval_gettext "The default FILE is \$input_file.")"
     fi
-)"
 }
 
 
 # This function shows the available APPs from the input file.
 function process_option_apps {
-    printf '%s\n' "$(gettext 'The following APPs are available:
-
-NUM  APP')
-$(
+    printf  '%s\n\n%s\n'                                        \
+            "$(gettext 'The following APPs are available:')"    \
+            "$(gettext 'NUM  APP')"
     if !    grep    --no-messages           \
                     --regexp='#.* APP '     \
                     "$input_file"           |
@@ -273,17 +269,14 @@ $(
 
 $USAGE_LINE"
     else
-        printf  '\n%s %s\n%s %s\n%s %s\n'                       \
-                "$(gettext "To view the contents of the APPs set up file \
-execute:")"                                                     \
-                "${blue}$DISPLAY_NAME --cat APP...${normal}"    \
-                "$(gettext 'To set up the APPs run:')"          \
-                "${blue}$DISPLAY_NAME APP...${normal}"          \
-                "$(gettext "To view the contents of the default set up file \
-run:")"                                                         \
-                "${blue}$DISPLAY_NAME --cat${normal}"
+        printf  '\n%s\n%s\n%s\n'                            \
+                "$(eval_gettext "To view the contents of the APPs set up file \
+execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")"   \
+                "$(eval_gettext "To set up the APPs execute: \
+\${blue}\$DISPLAY_NAME APP...\${normal}")"                  \
+                "$(eval_gettext "To view the contents of the default set up \
+file execute: \${blue}\$DISPLAY_NAME --cat\${normal}")"
     fi
-)"
 }
 
 

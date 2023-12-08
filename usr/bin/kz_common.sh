@@ -280,12 +280,14 @@ function process_common_options {
 
 # This function shows the available help.
 function process_option_help {
+    local man_url=\
+"\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME $(gettext 'man page')\e]8;;\e\\"
+
     # shellcheck disable=SC2154
     printf  '%s\n\n%b\n'    \
             "$HELP"         \
-            "$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \
-\e]8;;man:\$PROGRAM_NAME(1)\e\\\$DISPLAY_NAME man page\e]8;;\e\\ for more \
-information.")"
+            "$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url \
+for more information.")"
 }
 
 
@@ -444,7 +446,7 @@ function signal_exit {
         kz-install)
             if [[ $rc -ne $OK ]]; then
                 msg_log  "$(gettext "If the package manager gives apt errors, \
-launch a Terminal window and run:")
+launch a Terminal window and execute:")
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
             fi
