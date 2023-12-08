@@ -226,7 +226,6 @@ function process_input {
 
 # This function displays a list of input files present.
 function process_option_list {
-    #FIXME 2x gettext!
     printf  '%s\n\n%s\n'                                    \
             "$(gettext 'The following FILEs are present:')" \
             "$(gettext 'NUM  FILE')"

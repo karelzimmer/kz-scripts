@@ -280,7 +280,9 @@ function process_common_options {
 
 # This function shows the available help.
 function process_option_help {
-    local man_url=\
+    local   man_url
+            # shellcheck disable=SC2034
+            man_url=\
 "\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME $(gettext 'man page')\e]8;;\e\\"
 
     # shellcheck disable=SC2154

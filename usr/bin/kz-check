@@ -156,8 +156,10 @@ function check_code {
     elif grep --quiet --line-regexp --regexp="$python_script" "$script"; then
         check_pycodestyle
     else
-        printf "\n${red}%b\n${normal}" "In $scriptdir / $scriptname:
-$(gettext "    Unknown script. Function check_code cannot check script code.")"
+        printf  "\n${bold}%s${normal}\n${red}%b\n${normal}" \
+                "In $scriptdir / $scriptname:"              \
+                "$(gettext "    Unknown script. Function check_code cannot \
+check script code.")"
         error_flag=true
     fi
 }
@@ -182,10 +184,10 @@ function check_record_length {
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
-        printf "\n${red}%b\n${normal}" "In $scriptdir / $scriptname:
-$(eval_gettext "    A line is longer than \$max_line_length \
-(\$max_line_length_found).")
-"
+        printf  "\n${bold}%s${normal}\n${red}%b\n${normal}" \
+                "In $scriptdir / $scriptname:"              \
+                "$(eval_gettext "    A line is longer than \$max_line_length \
+(\$max_line_length_found).")"
         error_flag=true
     fi
 }
@@ -217,20 +219,17 @@ function check_tags {
             --regexp="$fixme"   \
             --regexp="$todo"    \
             "$script"; then
-        printf "\n${yellow}%s\n${normal}" "In $scriptdir / $scriptname:
-$(gettext '    Flagged annotation found.')
-
-$(
-    grep    --line-number           \
-            --regexp="$bug"         \
-            --regexp="$fixme"       \
-            --regexp="$todo"        \
-            "$script"               |
-    nl      --number-width=4        \
-            --number-separator=''   \
-            --body-numbering=n
-)
-"
+        printf  "\n${bold}%s${normal}\n${yellow}%s\n${normal}"  \
+                "In $scriptdir / $scriptname:"                  \
+                "$(gettext '    Flagged annotation found.')"
+        grep    --line-number           \
+                --regexp="$bug"         \
+                --regexp="$fixme"       \
+                --regexp="$todo"        \
+                "$script"               |
+        nl      --number-width=4        \
+                --number-separator=''   \
+                --body-numbering=n
     fi
 }
 
@@ -238,13 +237,11 @@ $(
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
-        printf "\n${red}%b\n${normal}" "In $scriptdir / $scriptname:
-$(gettext '    End spaces found.')
-$(
-    grep    --line-number --regexp=' ''$' "$script" |
-    nl      --number-width=4  --number-separator='' --body-numbering=n
-)
-"
+        printf  "\n${bold}%s${normal}\n${red}%b\n${normal}" \
+                "In $scriptdir / $scriptname:"              \
+                "$(gettext '    End spaces found.')"
+        grep    --line-number --regexp=' ''$' "$script" |
+        nl      --number-width=4  --number-separator='' --body-numbering=n
         error_flag=true
     fi
 }
