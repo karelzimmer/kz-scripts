@@ -237,7 +237,7 @@ function process_option_list {
                     --body-numbering=a; then
         printf '%s\n\n%s\n' "$(gettext '  0  No files present.')" "$USAGE_LINE"
     else
-        printf  '\n%s\n%s\n%s\n'                        \
+        printf  '\n%b\n%b\n%s\n'                        \
                 "$(eval_gettext "To view the commands of FILE execute: \
 \${blue}\$DISPLAY_NAME --cat --file FILE\${normal}")"   \
                 "$(eval_gettext "To process FILE execute: \
@@ -268,7 +268,7 @@ function process_option_apps {
 
 $USAGE_LINE"
     else
-        printf  '\n%s\n%s\n%s\n'                            \
+        printf  '\n%b\n%b\n%b\n'                            \
                 "$(eval_gettext "To view the contents of the APPs set up file \
 execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")"   \
                 "$(eval_gettext "To set up the APPs execute: \

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-08 12:33+0100\n"
+"POT-Creation-Date: 2023-12-09 09:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,8 +30,10 @@ msgid "print program version"
 msgstr ""
 
 msgid ""
-"The computer now uses only the battery for power.\n"
-"\n"
+"The computer now uses only the battery for power."
+msgstr ""
+
+msgid ""
 "It is recommended to connect the computer to the wall socket."
 msgstr ""
 
@@ -70,9 +72,7 @@ msgid "Type '$DISPLAY_NAME --help' for more information."
 msgstr ""
 
 #, sh-format
-msgid ""
-"Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n"
-"<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
+msgid "Written by"
 msgstr ""
 
 #, sh-format
@@ -102,36 +102,25 @@ msgstr ""
 msgid "type '{} --usage' for more information"
 msgstr ""
 
-msgid ""
-"Usage: {} [OPTION...]\n"
-"\n"
-"{}.\n"
-"\n"
-"Options:\n"
-"  -h, --help     give this help list\n"
-"  -u, --usage    give a short usage message\n"
-"  -v, --version  print program version\n"
-"\n"
-"Type 'man {}' or see the {} for more information."
+msgid "Usage: {} [OPTION...]\n"
 msgstr ""
 
-msgid ""
-"Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n"
-"\n"
-"Type '{} --help' for more information."
+msgid "Options:\n"
+msgstr ""
+
+msgid "Type 'man {}' or see the {} for more information."
+msgstr ""
+
+msgid "Usage: {}"
+msgstr ""
+
+msgid "Type '{} --help' for more information."
 msgstr ""
 
 msgid "Build ID cannot be determined."
 msgstr ""
 
 msgid "Program year cannot be determined."
-msgstr ""
-
-msgid ""
-"kz 2.4.7{}\n"
-"\n"
-"Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n"
-"<https://creativecommons.org/publicdomain/zero/1.0>{}"
 msgstr ""
 
 msgid "{}: i am a module"

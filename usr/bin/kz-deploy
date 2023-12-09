@@ -117,7 +117,7 @@ function check_repos {
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            printf  "${red}%b\n${normal}"   \
+            printf  "${red}%s\n${normal}"   \
                     "$(eval_gettext "Repo \$repo not on branch main.")"
             git status
             error_flag=true
@@ -129,7 +129,7 @@ function check_repos {
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            printf  "${red}%b\n${normal}"   \
+            printf  "${red}%s\n${normal}"   \
                     "$(eval_gettext "Repo \$repo is not clean.")"
             git status
             error_flag=true

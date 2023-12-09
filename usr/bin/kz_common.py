@@ -37,10 +37,11 @@ OK = 0
 ERROR = 1
 
 BOLD = '\033[1m'
-GREEN = BOLD + '\033[92m'
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
 NORMAL = '\033[0m'
-RED = BOLD + '\033[91m'
-YELLOW = BOLD + '\033[93m'
 
 
 ###############################################################################
@@ -87,8 +88,9 @@ def check_on_ac_power(PROGRAM_NAME):
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
-        text = _('The computer now uses only the battery for power.\n\n'
-                 'It is recommended to connect the computer to the wall \
+        text = _('The computer now uses only the battery for power.') + \
+               '\n\n' + \
+               _('It is recommended to connect the computer to the wall \
 socket.')
         msg_warning(PROGRAM_NAME, text)
         try:
@@ -211,26 +213,27 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME
     man_url = man_url + ' ' + _('man page') + '\x1b]8;;\x1b\\'
-    print(_('Usage: {} [OPTION...]\n'
-            '\n'
-            '{}.\n'
-            '\n'
-            'Options:\n'
-            '  -h, --help     give this help list\n'
-            '  -u, --usage    give a short usage message\n'
-            '  -v, --version  print program version\n\n'
-            "Type 'man {}' or see the {} for more information.").
-          format(DISPLAY_NAME, PROGRAM_DESC, DISPLAY_NAME, man_url))
+    print(_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME) +
+          '\n' +
+          PROGRAM_DESC + '.\n' +
+          '\n' +
+          _('Options:\n') +
+          '  -h, --help     ' + _('give this help list') + '\n' +
+          '  -u, --usage    ' + _('give a short usage message') + '\n' +
+          '  -v, --version  ' + _('print program version') + '\n' +
+          '\n' +
+          _("Type 'man {}' or see the {} for more information.").
+          format(DISPLAY_NAME, man_url))
 
 
 def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    print(_('Usage: {} [-h|--help] [-u|--usage] [-v|--version]\n'
-            '\n'
-            "Type '{} --help' for more information.").
-          format(DISPLAY_NAME, DISPLAY_NAME))
+    print(_('Usage: {}').format(DISPLAY_NAME) +
+          ' [-h|--help] [-u|--usage] [-v|--version]\n' +
+          '\n' +
+          _("Type '{} --help' for more information.").format(DISPLAY_NAME))
 
 
 def process_option_version(PROGRAM_NAME):
@@ -270,12 +273,12 @@ def process_option_version(PROGRAM_NAME):
         else:
             program_year = ', ' + program_year
 
-        print(_('kz 2.4.7{}\n'
-                '\n'
-                'Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
-Universal\n'
-                '<https://creativecommons.org/publicdomain/zero/1.0>{}')
-              .format(build_id, program_year))
+        print('kz 2.4.7' + build_id + '\n' +
+              '\n' +
+              _('Written by') + 'Karel Zimmer <info@karelzimmer.nl>,' +
+              ' CC0 1.0 Universal\n' +
+              '<https://creativecommons.org/publicdomain/zero/1.0>' +
+              program_year)
 
 
 def term_script(PROGRAM_NAME):

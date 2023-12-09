@@ -105,9 +105,9 @@ function check_on_ac_power {
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
         msg_warning "
-$(gettext 'The computer now uses only the battery for power.
+$(gettext 'The computer now uses only the battery for power.')
 
-It is recommended to connect the computer to the wall socket.')"
+$(gettext 'It is recommended to connect the computer to the wall socket.')"
         if ! $option_gui; then
             wait_for_enter
         fi
@@ -325,11 +325,11 @@ function process_option_version {
         program_year=', '$program_year
     fi
 
-    printf  '%s\n\n%s\n'        \
+    printf  '%s\n\n%s\n%s\n'        \
             "kz 2.4.7$build_id" \
-            "$(eval_gettext "Written by Karel Zimmer <info@karelzimmer.nl>, \
-CC0 1.0 Universal
-<https://creativecommons.org/publicdomain/zero/1.0>\$program_year")"
+            "$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, \
+CC0 1.0 Universal" \
+"<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
 }
 
 
@@ -346,12 +346,12 @@ function reset_terminal_attributes {
 
 # This function sets the terminal_attributes for the CLI.
 function set_terminal_attributes {
-    bold=$(tput bold)
-    blue=${bold}$(tput setaf 4)
-    green=${bold}$(tput setaf 2)
-    normal=$(tput sgr0)
-    red=${bold}$(tput setaf 1)
-    yellow=${bold}$(tput setaf 3)
+    bold='\033[1m'
+    red='\033[91m'
+    green='\033[92m'
+    yellow='\033[93m'
+    blue='\033[94m'
+    normal='\033[0m'
 }
 
 
