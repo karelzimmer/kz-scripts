@@ -32,7 +32,7 @@ readonly    USAGE
 
 $PROGRAM_DESC.
 
-$(gettext 'Options:')
+$(gettext 'Options'):
 $OPTIONS_HELP
   -g, --gui      $(gettext 'starts in graphics mode')"
 readonly    HELP

@@ -31,7 +31,7 @@ readonly    USAGE
 
 $PROGRAM_DESC.
 
-$(gettext 'Options:')
+$(gettext 'Options'):
 $OPTIONS_HELP"
 readonly    HELP
 

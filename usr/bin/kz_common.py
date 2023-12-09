@@ -217,7 +217,7 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
           '\n' +
           PROGRAM_DESC + '.\n' +
           '\n' +
-          _('Options:\n') +
+          _('Options') + ':\n' +
           '  -h, --help     ' + _('give this help list') + '\n' +
           '  -u, --usage    ' + _('give a short usage message') + '\n' +
           '  -v, --version  ' + _('print program version') + '\n' +

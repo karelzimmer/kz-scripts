@@ -80,8 +80,8 @@ declare     yellow=''
 function check_for_active_updates {
     local   -i  check_wait=10
     local       text
-                text=$(eval_gettext \
-            "Wait \${check_wait}s for another package manager to finish...")
+                text=$(eval_gettext "Wait \${check_wait}s for another package \
+manager to finish...")
 
     while sudo  fuser                                       \
                 /snap/core/*/var/cache/debconf/config.dat   \
@@ -282,8 +282,8 @@ function process_common_options {
 function process_option_help {
     local   man_url
             # shellcheck disable=SC2034
-            man_url=\
-"\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME $(gettext 'man page')\e]8;;\e\\"
+            man_url="\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME \
+$(gettext 'man page')\e]8;;\e\\"
 
     # shellcheck disable=SC2154
     printf  '%s\n\n%b\n'    \

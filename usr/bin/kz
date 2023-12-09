@@ -25,21 +25,23 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 readonly    PROGRAM_DESC
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
-   or: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE")
+            USAGE="$(gettext 'Usage'): $DISPLAY_NAME $(gettext 'COMMAND') \
+[ARGUMENT...]
+   $(gettext 'or'): $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
 readonly    USAGE
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
-   or: \$DISPLAY_NAME OPTION")
+            HELP="$(gettext 'Usage'): $DISPLAY_NAME $(gettext 'COMMAND') \
+[ARGUMENT...]
+   $(gettext 'or'): $DISPLAY_NAME OPTION
 
 $PROGRAM_DESC.
 
-$(gettext "Options:
-  -l, --list     show available COMMANDs")
+$(gettext 'Options'):
+  -l, --list     $(gettext 'show available COMMANDs')
 $OPTIONS_HELP
 
-$(gettext "Arguments:
-  COMMAND        execute COMMAND
-  ARGUMENT       ARGUMENTs for COMMAND")"
+$(gettext 'Arguments'):
+$(gettext '  COMMAND        execute COMMAND')
+$(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
 # shellcheck disable=SC2034
 readonly    HELP
 
@@ -99,9 +101,9 @@ function check_input {
 
 # This function displays all available commands.
 function process_option_list {
-    printf '%s\n' "$(gettext 'The following COMMANDs are available:
-
-NUM  COMMAND')"
+    printf  '%s\n\n%s\n'                                            \
+            "$(gettext 'The following COMMANDs are available:')"    \
+            "$(gettext 'NUM  COMMAND')"
     find    "$PROGRAM_PATH"/kz-*    \
             -maxdepth 1             \
             -type f                 \
@@ -116,9 +118,8 @@ NUM  COMMAND')"
             --number-format=rn      \
             --number-separator='  ' \
             --body-numbering=a
-    printf  '\n%s\n' \
-    "$(eval_gettext "To execute a COMMAND: \${blue}\$DISPLAY_NAME COMMAND \
-[ARGUMENT...]\${normal}")"
+    printf  '\n%b\n' "$(gettext 'To execute a COMMAND'): ${blue}$DISPLAY_NAME \
+$(gettext 'COMMAND') [ARGUMENT...]${normal}"
 }
 
 
