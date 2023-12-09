@@ -346,6 +346,7 @@ function reset_terminal_attributes {
 
 # This function sets the terminal_attributes for the CLI.
 function set_terminal_attributes {
+    # shellcheck disable=SC2034
     bold='\033[1m'
     red='\033[91m'
     green='\033[92m'
