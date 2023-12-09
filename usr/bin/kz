@@ -27,11 +27,11 @@ readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
             USAGE="$(gettext 'Usage'): $DISPLAY_NAME $(gettext 'COMMAND') \
 [ARGUMENT...]
-   $(gettext 'or'): $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+$(gettext '   or'): $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
 readonly    USAGE
             HELP="$(gettext 'Usage'): $DISPLAY_NAME $(gettext 'COMMAND') \
 [ARGUMENT...]
-   $(gettext 'or'): $DISPLAY_NAME OPTION
+$(gettext '   or'): $DISPLAY_NAME OPTION
 
 $PROGRAM_DESC.
 

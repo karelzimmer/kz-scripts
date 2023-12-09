@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-09 10:55+0100\n"
+"POT-Creation-Date: 2023-12-09 11:10+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -129,11 +129,11 @@ msgstr "Opdracht uitvoeren"
 msgid "Usage"
 msgstr "Gebruik"
 
+msgid "   or"
+msgstr "     of"
+
 msgid "COMMAND"
 msgstr "OPDRACHT"
-
-msgid "or"
-msgstr "of"
 
 msgid "Options"
 msgstr "Opties"
