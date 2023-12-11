@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-09 11:10+0100\n"
+"POT-Creation-Date: 2023-12-11 15:37+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -20,14 +20,14 @@ msgstr ""
 msgid "Common module for shell scripts"
 msgstr "Algemene module voor shell scripts"
 
-msgid "give a short usage message"
-msgstr "toon een korte gebruikssamenvatting"
-
-msgid "give this help list"
-msgstr "toon deze hulptekst"
-
-msgid "print program version"
-msgstr "toon de programmaversie"
+msgid ""
+"  -h, --help     give this help list\n"
+"  -u, --usage    give a short usage message\n"
+"  -v, --version  print program version"
+msgstr ""
+"  -h, --help     toon deze hulptekst\n"
+"  -u, --usage    toon een korte gebruikssamenvatting\n"
+"  -v, --version  toon de programmaversie"
 
 msgid ""
 "The computer now uses only the battery for power.\n"
@@ -145,21 +145,20 @@ msgstr ""
 "Gebruik: $DISPLAY_NAME OPDRACHT [ARGUMENT...]\n"
 "     of: $DISPLAY_NAME OPTIE"
 
-msgid ""
-"Options:\n"
-"  -l, --list     show available COMMANDs"
+msgid "  -l, --list     show available COMMANDs"
+msgstr "  -l, --list     toon beschikbare OPDRACHTen"
+
+msgid "Arguments:"
 msgstr ""
-"Opties:\n"
-"  -l, --list     toon beschikbare OPDRACHTen"
+"Argumenten:"
 
 msgid ""
-"Arguments:\n"
 "  COMMAND        execute COMMAND\n"
 "  ARGUMENT       ARGUMENTs for COMMAND"
 msgstr ""
-"Argumenten:\n"
 "  OPDRACHT       voer OPDRACHT uit\n"
 "  ARGUMENT       ARGUMENTen voor OPDRACHT"
+
 msgid "invalid option"
 msgstr "ongeldige optie"
 
@@ -181,6 +180,7 @@ msgid ""
 msgstr ""
 "Om een OPDRACHT uit te voeren: ${blue}$DISPLAY_NAME OPDRACHT "
 "[ARGUMENT...]${normal}"
+
 msgid "Make backup"
 msgstr "Back-up maken"
 
@@ -192,18 +192,19 @@ msgstr ""
 "Gebruik: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-t|--target MAP]\n"
 "                   $OPTIONS_USAGE"
 
-msgid "Options:"
-msgstr "Opties:"
-
 #, sh-format
 msgid "Usage: $DISPLAY_NAME [OPTION...]"
 msgstr "Gebruik: $DISPLAY_NAME [OPTIE...]"
 
-msgid "perform a test run without making any changes"
-msgstr "een proefrun uitvoeren zonder wijzigingen aan te brengen"
+msgid "Options:"
+msgstr "Opties:"
 
-msgid "starts in graphics mode"
-msgstr "start in grafische modus"
+msgid "  -d, --dry-run  perform a test run without making any changes"
+msgstr ""
+"  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen"
+
+msgid "  -g, --gui      starts in graphics mode"
+msgstr "  -g, --gui      start in grafische modus"
 
 msgid ""
 "  -t, --target DIRECTORY\n"
@@ -228,6 +229,7 @@ msgstr "argumenten zijn niet toegestaan"
 msgid "directory does not exist"
 msgstr "map bestaat niet"
 
+#, sh-format
 msgid ""
 "No USB medium found.\n"
 "\n"
@@ -533,11 +535,11 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME [OPTION...] [APP...]"
 msgstr "Gebruik: $DISPLAY_NAME [OPTIE...] [APP...]"
 
-msgid "show list of apps"
-msgstr "toon lijst van apps"
+msgid "  -a, --apps     show list of apps"
+msgstr "  -a, --apps     toon lijst van apps"
 
-msgid "show contents of command file"
-msgstr "toon inhoud van opdrachtbestand"
+msgid "  -c, --cat      show contents of command file"
+msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 
 msgid ""
 "  -f, --file FILE\n"
@@ -546,20 +548,15 @@ msgstr ""
 "  -t, --file BESTAND\n"
 "                 verwerk BESTAND"
 
-msgid "show list of files"
-msgstr "toon lijst van bestanden"
+msgid "  -l, --list     show list of files"
+msgstr "  -l, --list     toon lijst van bestanden"
 
-msgid "delete apps"
-msgstr "verwijder apps"
-
-msgid "show commands"
-msgstr "toon opdrachten"
+msgid "  -r, --remove   delete apps"
+msgstr "  -r, --remove   verwijder apps"
 
 msgid ""
-"Arguments:\n"
 "  APP            install APPs"
 msgstr ""
-"Argumenten:\n"
 "  APP            installeer APPs"
 
 msgid "app not found"
@@ -636,14 +633,8 @@ msgstr "installeren"
 msgid "remove"
 msgstr "verwijderen"
 
-msgid "busy"
-msgstr "werk"
-
-msgid "err."
-msgstr "fout"
-
-msgid " ok "
-msgstr "goed"
+msgid "COMMAND"
+msgstr "OPDRACHT"
 
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."
@@ -988,14 +979,12 @@ msgstr ""
 "                  $OPTIONS_USAGE\n"
 "                  [--] [APP...]"
 
-msgid "set apps on default values"
-msgstr "stel apps in op standaardwaarden"
+msgid "  -r, --reset    set apps on default values"
+msgstr "  -r, --reset    stel apps in op standaardwaarden"
 
 msgid ""
-"Arguments:\n"
 "  APP            set up APPs"
 msgstr ""
-"Argumenten:\n"
 "  APP            stel APPs in"
 
 #, sh-format

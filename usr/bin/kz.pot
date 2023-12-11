@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-11 12:59+0100\n"
+"POT-Creation-Date: 2023-12-11 15:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,10 @@ msgstr ""
 msgid "Common module for shell scripts"
 msgstr ""
 
-msgid "give a short usage message"
-msgstr ""
-
-msgid "give this help list"
-msgstr ""
-
-msgid "print program version"
+msgid ""
+"  -h, --help     give this help list\n"
+"  -u, --usage    give a short usage message\n"
+"  -v, --version  print program version"
 msgstr ""
 
 msgid ""
@@ -136,13 +133,13 @@ msgid ""
 "   or: $DISPLAY_NAME OPTION"
 msgstr ""
 
-msgid ""
-"Options:\n"
-"  -l, --list     show available COMMANDs"
+msgid "  -l, --list     show available COMMANDs"
+msgstr ""
+
+msgid "Arguments:"
 msgstr ""
 
 msgid ""
-"Arguments:\n"
 "  COMMAND        execute COMMAND\n"
 "  ARGUMENT       ARGUMENTs for COMMAND"
 msgstr ""
@@ -180,10 +177,10 @@ msgstr ""
 msgid "Options:"
 msgstr ""
 
-msgid "perform a test run without making any changes"
+msgid "  -d, --dry-run  perform a test run without making any changes"
 msgstr ""
 
-msgid "starts in graphics mode"
+msgid "  -g, --gui      starts in graphics mode"
 msgstr ""
 
 msgid ""
@@ -207,6 +204,7 @@ msgstr ""
 msgid "directory does not exist"
 msgstr ""
 
+#, sh-format
 msgid ""
 "No USB medium found.\n"
 "\n"
@@ -457,10 +455,10 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME [OPTION...] [APP...]"
 msgstr ""
 
-msgid "show list of apps"
+msgid "  -a, --apps     show list of apps"
 msgstr ""
 
-msgid "show contents of command file"
+msgid "  -c, --cat      show contents of command file"
 msgstr ""
 
 msgid ""
@@ -468,18 +466,13 @@ msgid ""
 "                 process FILE"
 msgstr ""
 
-msgid "show list of files"
+msgid "  -l, --list     show list of files"
 msgstr ""
 
-msgid "delete apps"
+msgid "  -r, --remove   delete apps"
 msgstr ""
 
-msgid "show commands"
-msgstr ""
-
-msgid ""
-"Arguments:\n"
-"  APP            install APPs"
+msgid "  APP            install APPs"
 msgstr ""
 
 msgid "app not found"
@@ -547,13 +540,7 @@ msgstr ""
 msgid "remove"
 msgstr ""
 
-msgid "busy"
-msgstr ""
-
-msgid "err."
-msgstr ""
-
-msgid " ok "
+msgid "COMMAND"
 msgstr ""
 
 msgid "No commands to execute."
@@ -828,12 +815,10 @@ msgid ""
 "                [--] [APP...]"
 msgstr ""
 
-msgid "set apps on default values"
+msgid "  -r, --reset    set apps on default values"
 msgstr ""
 
-msgid ""
-"Arguments:\n"
-"  APP            set up APPs"
+msgid "  APP            set up APPs"
 msgstr ""
 
 #, sh-format

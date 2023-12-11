@@ -216,10 +216,10 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
           '\n' +
           PROGRAM_DESC + '.\n' +
           '\n' +
-          _('Options') + ':\n' +
-          '  -h, --help     ' + _('give this help list') + '\n' +
-          '  -u, --usage    ' + _('give a short usage message') + '\n' +
-          '  -v, --version  ' + _('print program version') + '\n' +
+          _('Options:') + '\n' +
+          _('  -h, --help     give this help list\n'
+            '  -u, --usage    give a short usage message\n'
+            '  -v, --version  print program version') + '\n' +
           '\n' +
           _("Type 'man {}' or see the {} for more information.").
           format(DISPLAY_NAME, man_url))

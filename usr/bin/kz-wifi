@@ -35,7 +35,7 @@ $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP
-  -g, --gui      $(gettext 'starts in graphics mode')"
+$(gettext '  -g, --gui      starts in graphics mode')"
 readonly    HELP
 
 readonly    X_OPTIONS_SHORT='g'

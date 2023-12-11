@@ -40,9 +40,9 @@ readonly    EDITION
             OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
 # shellcheck disable=SC2034
 readonly    OPTIONS_USAGE
-            OPTIONS_HELP="  -h, --help     $(gettext 'give this help list')
-  -u, --usage    $(gettext 'give a short usage message')
-  -v, --version  $(gettext 'print program version')"
+            OPTIONS_HELP="$(gettext '  -h, --help     give this help list
+  -u, --usage    give a short usage message
+  -v, --version  print program version')"
 # shellcheck disable=SC2034
 readonly    OPTIONS_HELP
 # shellcheck disable=SC2034

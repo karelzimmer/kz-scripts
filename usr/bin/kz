@@ -33,13 +33,13 @@ readonly    USAGE
 
 $PROGRAM_DESC.
 
-$(gettext "Options:
-  -l, --list     show available COMMANDs")
+$(gettext 'Options:')
+$(gettext '  -l, --list     show available COMMANDs')
 $OPTIONS_HELP
 
-$(gettext "Arguments:
-  COMMAND        execute COMMAND
-  ARGUMENT       ARGUMENTs for COMMAND")"
+$(gettext 'Arguments:')
+$(gettext '  COMMAND        execute COMMAND
+  ARGUMENT       ARGUMENTs for COMMAND')"
 # shellcheck disable=SC2034
 readonly    HELP
 
