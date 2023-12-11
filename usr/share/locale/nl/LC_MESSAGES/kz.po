@@ -157,7 +157,7 @@ msgid ""
 "  COMMAND        execute COMMAND\n"
 "  ARGUMENT       ARGUMENTs for COMMAND"
 msgstr ""
-"Argumenten\n"
+"Argumenten:\n"
 "  OPDRACHT       voer OPDRACHT uit\n"
 "  ARGUMENT       ARGUMENTen voor OPDRACHT"
 msgid "invalid option"
@@ -191,6 +191,9 @@ msgid ""
 msgstr ""
 "Gebruik: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-t|--target MAP]\n"
 "                   $OPTIONS_USAGE"
+
+msgid "Options:"
+msgstr "Opties:"
 
 #, sh-format
 msgid "Usage: $DISPLAY_NAME [OPTION...]"

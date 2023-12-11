@@ -36,7 +36,7 @@ readonly    USAGE
 
 $PROGRAM_DESC.
 
-$(gettext 'Options'):
+$(gettext 'Options:')
   $(gettext "Mandatory arguments to long options are mandatory for short \
 options too.")
 
