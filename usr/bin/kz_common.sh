@@ -105,9 +105,9 @@ function check_on_ac_power {
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
         msg_warning "
-$(gettext 'The computer now uses only the battery for power.')
+$(gettext 'The computer now uses only the battery for power.
 
-$(gettext 'It is recommended to connect the computer to the wall socket.')"
+It is recommended to connect the computer to the wall socket.')"
         if ! $option_gui; then
             wait_for_enter
         fi

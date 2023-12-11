@@ -29,11 +29,14 @@ msgstr "toon deze hulptekst"
 msgid "print program version"
 msgstr "toon de programmaversie"
 
-msgid "The computer now uses only the battery for power."
-msgstr "De computer gebruikt nu alleen de accu voor de stroomvoorziening."
-
-msgid "It is recommended to connect the computer to the wall socket."
-msgstr "Geadviseerd wordt om de computer aan te sluiten op het stopcontact."
+msgid ""
+"The computer now uses only the battery for power.\n"
+"\n"
+"It is recommended to connect the computer to the wall socket."
+msgstr ""
+"De computer gebruikt nu alleen de accu voor de stroomvoorziening.\n"
+"\n"
+"Geadviseerd wordt om de computer aan te sluiten op het stopcontact."
 
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
@@ -126,45 +129,58 @@ msgstr "{}: ik ben een module"
 msgid "Run command"
 msgstr "Opdracht uitvoeren"
 
-msgid "Usage"
-msgstr "Gebruik"
+#, sh-format
+msgid ""
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+msgstr ""
+"Gebruik: $DISPLAY_NAME OPDRACHT [ARGUMENT...]\n"
+"     of: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
 
-msgid "   or"
-msgstr "     of"
+#, sh-format
+msgid ""
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME OPTION"
+msgstr ""
+"Gebruik: $DISPLAY_NAME OPDRACHT [ARGUMENT...]\n"
+"     of: $DISPLAY_NAME OPTIE"
 
-msgid "COMMAND"
-msgstr "OPDRACHT"
+msgid ""
+"Options:\n"
+"  -l, --list     show available COMMANDs"
+msgstr ""
+"Opties:\n"
+"  -l, --list     toon beschikbare OPDRACHTen"
 
-msgid "Options"
-msgstr "Opties"
-
-msgid "show available COMMANDs"
-msgstr "toon beschikbare OPDRACHTen"
-
-msgid "Arguments"
-msgstr "Argumenten"
-
-msgid "  COMMAND        execute COMMAND"
-msgstr "  OPDRACHT       voer OPDRACHT uit"
-
-msgid "  ARGUMENT       ARGUMENTs for COMMAND"
-msgstr "  ARGUMENT       ARGUMENTen voor OPDRACHT"
-
+msgid ""
+"Arguments:\n"
+"  COMMAND        execute COMMAND\n"
+"  ARGUMENT       ARGUMENTs for COMMAND"
+msgstr ""
+"Argumenten\n"
+"  OPDRACHT       voer OPDRACHT uit\n"
+"  ARGUMENT       ARGUMENTen voor OPDRACHT"
 msgid "invalid option"
 msgstr "ongeldige optie"
 
 msgid "command does not exist"
 msgstr "opdracht bestaat niet"
 
-msgid "The following COMMANDs are available:"
-msgstr "De volgende OPDRACHTen zijn beschikbaar:"
+msgid ""
+"The following COMMANDs are available:\n"
+"\n"
+"NUM  COMMAND"
+msgstr ""
+"De volgende OPDRACHTen zijn beschikbaar:\n"
+"\n"
+"NUM  OPDRACHT"
 
-msgid "NUM  COMMAND"
-msgstr "NUM  OPDRACHT"
-
-msgid "To execute a COMMAND"
-msgstr "Om een OPDRACHT uit te voeren"
-
+#, sh-format
+msgid ""
+"To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND [ARGUMENT...]${normal}"
+msgstr ""
+"Om een OPDRACHT uit te voeren: ${blue}$DISPLAY_NAME OPDRACHT "
+"[ARGUMENT...]${normal}"
 msgid "Make backup"
 msgstr "Back-up maken"
 

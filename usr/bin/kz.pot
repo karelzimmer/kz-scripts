@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-09 11:23+0100\n"
+"POT-Creation-Date: 2023-12-11 12:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,10 +29,10 @@ msgstr ""
 msgid "print program version"
 msgstr ""
 
-msgid "The computer now uses only the battery for power."
-msgstr ""
-
-msgid "It is recommended to connect the computer to the wall socket."
+msgid ""
+"The computer now uses only the battery for power.\n"
+"\n"
+"It is recommended to connect the computer to the wall socket."
 msgstr ""
 
 msgid "Press the Enter key to continue [Enter]: "
@@ -124,28 +124,27 @@ msgstr ""
 msgid "Run command"
 msgstr ""
 
-msgid "Usage"
+#, sh-format
+msgid ""
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
 msgstr ""
 
-msgid "   or"
+#, sh-format
+msgid ""
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME OPTION"
 msgstr ""
 
-msgid "COMMAND"
+msgid ""
+"Options:\n"
+"  -l, --list     show available COMMANDs"
 msgstr ""
 
-msgid "Options"
-msgstr ""
-
-msgid "show available COMMANDs"
-msgstr ""
-
-msgid "Arguments"
-msgstr ""
-
-msgid "  COMMAND        execute COMMAND"
-msgstr ""
-
-msgid "  ARGUMENT       ARGUMENTs for COMMAND"
+msgid ""
+"Arguments:\n"
+"  COMMAND        execute COMMAND\n"
+"  ARGUMENT       ARGUMENTs for COMMAND"
 msgstr ""
 
 msgid "invalid option"
@@ -154,13 +153,15 @@ msgstr ""
 msgid "command does not exist"
 msgstr ""
 
-msgid "The following COMMANDs are available:"
+msgid ""
+"The following COMMANDs are available:\n"
+"\n"
+"NUM  COMMAND"
 msgstr ""
 
-msgid "NUM  COMMAND"
-msgstr ""
-
-msgid "To execute a COMMAND"
+#, sh-format
+msgid ""
+"To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND [ARGUMENT...]${normal}"
 msgstr ""
 
 msgid "Make backup"
