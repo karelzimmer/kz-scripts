@@ -164,14 +164,16 @@ function install_package {
 function term_script {
     local   title
             title=$(gettext 'Finished')
+    # shellcheck disable=SC2034
+    local   website_url=https://karelzimmer.nl
     local   text
-            text=$(gettext "Package kz has been successfully installed.
+            text=$(eval_gettext "Package kz has been successfully installed.
 
 Now follow the steps as described
 in the Checklist installation.
 
 Checklist installation can be found on
-https://karelzimmer.nl, under Linux.
+\$website_url, under Linux.
 
 Type 'exit' to close this window.")
 
