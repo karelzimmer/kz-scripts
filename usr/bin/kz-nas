@@ -28,6 +28,7 @@ readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
             USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 \$OPTIONS_USAGE")
 readonly    USAGE
+
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
@@ -36,6 +37,7 @@ $(gettext 'Options'):
   -g, --gui      $(gettext 'starts in graphics mode')
 $OPTIONS_   HELP"
 readonly    HELP
+
 readonly    X_OPTIONS_SHORT='g'
 readonly    X_OPTIONS_LONG=',gui'
 
@@ -55,9 +57,9 @@ This requires:
      distributes the IP addresses (often 192.168.0.200).
   2. Select the fixed IP address in the NAS and turn off DHCP.")"
 readonly    NAS_FIXED_IP_ADDRESS
+
 readonly    SYSTEMD_MOUNT_DIR=/etc/systemd/system
 readonly    SYSTEMD_MOUNT_FILE=mnt-$PROGRAM_NAME.mount
-# readonly    SYSTEMD_MOUNT_FILE=mnt-${PROGRAM_NAME/kz-/kz}.mount
 readonly    SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 
 

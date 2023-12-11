@@ -29,6 +29,7 @@ readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 [-g|--gui] [-t|--target DIRECTORY]
                  \$OPTIONS_USAGE")
 readonly    USAGE
+
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
@@ -43,6 +44,7 @@ $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')
 $OPTIONS_HELP"
 readonly    HELP
+
 readonly    X_OPTIONS_SHORT='dgt:'
 readonly    X_OPTIONS_LONG=',dry-run,gui,target:'
 

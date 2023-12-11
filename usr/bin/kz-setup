@@ -31,6 +31,7 @@ readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
                 \$OPTIONS_USAGE
                 [--] [APP...]")
 readonly    USAGE
+
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
@@ -50,6 +51,7 @@ option processing")
 $(gettext 'Arguments:
   APP            set up APPs')"
 readonly    HELP
+
 readonly    X_OPTIONS_SHORT='acf:lgr'
 readonly    X_OPTIONS_LONG=',apps,cat,file:,list,gui,reset'
 

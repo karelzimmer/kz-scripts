@@ -28,6 +28,7 @@ readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
             USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 \$OPTIONS_USAGE")
 readonly    USAGE
+
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.

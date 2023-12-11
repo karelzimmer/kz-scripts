@@ -31,6 +31,7 @@ readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
                [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]
                \$OPTIONS_USAGE")"
 readonly    USAGE
+
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
@@ -54,6 +55,7 @@ $(gettext "  -a, --addfavaft FAVORITE
                  delete APPFOLDER")
 $OPTIONS_HELP"
 readonly    HELP
+
 readonly    X_OPTIONS_SHORT='a:b:d:lrf:x:'
 readonly    X_OPTIONS_LONG=",addfavaft:,addfavbef:,delfav:,list,resetfavs,\
 addappfolder:,delappfolder:"
