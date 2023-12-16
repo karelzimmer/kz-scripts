@@ -36,15 +36,17 @@ else
     EDITION='server'
 fi
 readonly    EDITION
-# shellcheck disable=SC2034
+
             OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
 # shellcheck disable=SC2034
 readonly    OPTIONS_USAGE
-            OPTIONS_HELP="$(gettext '  -h, --help     give this help list
-  -u, --usage    give a short usage message
-  -v, --version  print program version')"
+
+            OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
+$(gettext '  -u, --usage    give a short usage message')
+$(gettext '  -v, --version  print program version')"
 # shellcheck disable=SC2034
 readonly    OPTIONS_HELP
+
 # shellcheck disable=SC2034
 readonly    OPTIONS_SHORT='huv'
 # shellcheck disable=SC2034
