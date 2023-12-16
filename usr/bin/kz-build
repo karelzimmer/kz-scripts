@@ -141,9 +141,14 @@ function process_input {
 }
 
 
-# This function check that the repos are in the desired state.
+# This function reports repos which are not in the desired state.
+# Show repos not on branch main
+# Toon repo's die zich niet op branch main bevinden
+
+# Show repos which are not clean
+# Toon repo's die niet schoon zijn
 function check_repos {
-    printf '%s\n' "$(gettext 'Check that all repos are on branch main')..."
+    printf '%s\n' "$(gettext 'Show repos not on branch main')..."
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
@@ -151,7 +156,7 @@ function check_repos {
                     "$(eval_gettext "Repo \$repo not on branch main.")"
         fi
     done
-    printf '%s\n' "$(gettext 'Check that all repos are clean')..."
+    printf '%s\n' "$(gettext 'Show repos which are not clean')..."
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
@@ -219,7 +224,7 @@ function generate_mo {
     local   lc_messages=''
 
     lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
-    printf '%s\n' "$(gettext 'Generate .mo file (mogen)')..."
+    printf '%s\n' "$(gettext 'Generate .mo file')..."
     msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
 }
 
