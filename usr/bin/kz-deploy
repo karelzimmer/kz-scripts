@@ -144,7 +144,7 @@ function check_repos {
 
 # This function builds package kz.
 function build_package {
-    printf '\%s\n' "$(gettext 'Build package and website')..."
+    printf '\n%s\n' "$(gettext 'Build package and website')..."
     # Call kz-build.
     msg_log 'Calling kz-build...'
     "$SCRIPTS_REPO"/usr/bin/kz-build || exit $ERROR
