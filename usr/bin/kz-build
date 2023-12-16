@@ -130,7 +130,7 @@ function process_input {
         term_script
     fi
 
-    check_repos
+    report_repos
     check_scripts
     build_uploads
     generate_mo
@@ -142,12 +142,7 @@ function process_input {
 
 
 # This function reports repos which are not in the desired state.
-# Show repos not on branch main
-# Toon repo's die zich niet op branch main bevinden
-
-# Show repos which are not clean
-# Toon repo's die niet schoon zijn
-function check_repos {
+function report_repos {
     printf '%s\n' "$(gettext 'Show repos not on branch main')..."
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
