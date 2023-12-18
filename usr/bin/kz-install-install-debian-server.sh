@@ -39,4 +39,4 @@ sudo ufw enable
 
 # APP users HOST *
 # Enable access to system monitoring tasks like read many log files in /var/log.
-sudo adduser "${SUDO_USER:-$USER}" adm
+sudo usermod --append --groups adm "${SUDO_USER:-$USER}"

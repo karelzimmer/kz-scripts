@@ -81,8 +81,7 @@ sudo passwd --delete "$(gettext --domain=kz 'guest')"
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
-sudo adduser "${SUDO_USER:-$USER}" libvirt
-sudo adduser "${SUDO_USER:-$USER}" libvirt-qemu
+sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
 
 
 # APP libreoffice HOST *
@@ -143,10 +142,8 @@ sudo apt-get install --yes libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev 
 
 
 # APP users HOST *
-# Enable access to system monitoring tasks like read many log files in /var/log.
-sudo adduser "${SUDO_USER:-$USER}" adm
-# Enable access to the log
-sudo adduser "${SUDO_USER:-$USER}" systemd-journal
+# Enable access to system monitoring tasks like read many log files in /var/log and to the log.
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
 
 # APP vlc HOST pc07
