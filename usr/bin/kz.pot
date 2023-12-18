@@ -526,7 +526,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs installation file execute: "
+"To view the contents of the APPs install file execute: "
 "${blue}$DISPLAY_NAME --cat APP...${normal}"
 msgstr ""
 

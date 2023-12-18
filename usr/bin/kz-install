@@ -271,7 +271,7 @@ function process_option_apps {
     else
         printf  '\n%b\n%b\n%b\n'                            \
                 "$(eval_gettext "To view the contents of the APPs \
-installation file execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")" \
+install file execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")" \
                 "$(eval_gettext "To install the APPs execute: \
 \${blue}\$DISPLAY_NAME APP...\${normal}")"          \
                 "$(eval_gettext "To view the contents of the default install \

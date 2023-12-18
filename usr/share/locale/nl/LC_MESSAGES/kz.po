@@ -598,7 +598,7 @@ msgstr "  0  Geen apps gevonden."
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs installation file execute: "
+"To view the contents of the APPs install file execute: "
 "${blue}$DISPLAY_NAME --cat APP...${normal}"
 msgstr ""
 "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
