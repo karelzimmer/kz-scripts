@@ -6,6 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2023.
 ###############################################################################
 
+
 # APP ansible HOST pc06
 sudo apt-get install --yes ansible
 

@@ -6,6 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
+
 # APP lynis USER
 # Use Lynis (CISOfy):
 # cd ~/lynis

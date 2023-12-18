@@ -6,6 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
+
 # APP anydesk HOST *
 sudo apt-get remove --purge --yes anydesk
 sudo apt-get autoremove --yes

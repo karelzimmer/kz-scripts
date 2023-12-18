@@ -6,6 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
 ###############################################################################
 
+
 # APP dashtodock USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme

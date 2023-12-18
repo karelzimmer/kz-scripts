@@ -6,6 +6,7 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2023.
 ###############################################################################
 
+
 # APP calibre USER hugo@pc-van-hugo
 kz-gset --addfavaft=calibre-gui
 
