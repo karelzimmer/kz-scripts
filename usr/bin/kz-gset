@@ -29,8 +29,8 @@ readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
             USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME \
 [-a|--addfavaft FAVORITE] [-b|--addfavbef FAVORITE]
                [-d|--delfav FAVORITE] [-l|--list] [-r|--resetfavs]
-               [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]
-               \$OPTIONS_USAGE")"
+               [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]")
+               $OPTIONS_USAGE"
 readonly    USAGE
 
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
@@ -41,19 +41,19 @@ $(gettext 'Options:')
   $(gettext "Mandatory arguments to long options are mandatory for short \
 options too.")
 
-$(gettext "  -a, --addfavaft FAVORITE
-                 add FAVORITE at the end
-  -b, --addfavbef FAVORITE
-                 add FAVORITE at the beginning
-  -d, --delfav FAVORITE
-                 delete FAVORITE
-  -l, --list     show favorites and app folders
-  -r, --resetfavs
-                 reset favorites
-  -f, --addappfolder APPFOLDER
-                 add APPFOLDER
-  -x, --delappfolder APPFOLDER
-                 delete APPFOLDER")
+$(gettext '  -a, --addfavaft FAVORITE
+                 add FAVORITE at the end')
+$(gettext '  -b, --addfavbef FAVORITE
+                 add FAVORITE at the beginning')
+$(gettext '  -d, --delfav FAVORITE
+                 delete FAVORITE')
+$(gettext '  -l, --list     show favorites and app folders')
+$(gettext '  -r, --resetfavs
+                 reset favorites')
+$(gettext '  -f, --addappfolder APPFOLDER
+                 add APPFOLDER')
+$(gettext '  -x, --delappfolder APPFOLDER
+                 delete APPFOLDER')
 $OPTIONS_HELP"
 readonly    HELP
 

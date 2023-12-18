@@ -39,8 +39,8 @@ $(gettext '  -l, --list     show available COMMANDs')
 $OPTIONS_HELP
 
 $(gettext 'Arguments:')
-$(gettext '  COMMAND        execute COMMAND
-  ARGUMENT       ARGUMENTs for COMMAND')"
+$(gettext '  COMMAND        execute COMMAND')
+$(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
 # shellcheck disable=SC2034
 readonly    HELP
 

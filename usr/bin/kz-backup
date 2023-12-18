@@ -26,9 +26,9 @@ source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
 readonly    PROGRAM_DESC
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] \
-[-g|--gui] [-t|--target DIRECTORY]
-                 \$OPTIONS_USAGE")
+            USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] \
+[-g|--gui] [-t|--target DIRECTORY]")
+                 $OPTIONS_USAGE"
 readonly    USAGE
 
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
