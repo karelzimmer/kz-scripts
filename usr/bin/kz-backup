@@ -145,7 +145,7 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            text=$(eval_gettext "No USB medium found.
+            text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
             msg_warning "$text"

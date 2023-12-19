@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-18 12:14+0100\n"
+"POT-Creation-Date: 2023-12-19 18:35+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -41,7 +41,6 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#, sh-format
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
@@ -224,7 +223,6 @@ msgstr "argumenten zijn niet toegestaan"
 msgid "directory does not exist"
 msgstr "map bestaat niet"
 
-#, sh-format
 msgid ""
 "No USB medium found.\n"
 "\n"
@@ -598,8 +596,8 @@ msgstr "  0  Geen apps gevonden."
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs install file execute: "
-"${blue}$DISPLAY_NAME --cat APP...${normal}"
+"To view the contents of the APPs install file execute: ${blue}$DISPLAY_NAME "
+"--cat APP...${normal}"
 msgstr ""
 "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
 "${blue}$DISPLAY_NAME --cat APP...${normal}"

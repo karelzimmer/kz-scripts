@@ -120,7 +120,7 @@ function process_input {
         sudo true
     else
         printf  '%s\n'  \
-                "$(eval_gettext 'Already performed by the administrator.')"
+                "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
 
