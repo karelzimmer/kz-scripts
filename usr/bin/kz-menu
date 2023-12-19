@@ -563,6 +563,8 @@ function execute_command {
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
     msg_log "$command: rc=$rc"
 }
+
+
 # This function controls the termination of the script.
 function term_script {
     exit $OK

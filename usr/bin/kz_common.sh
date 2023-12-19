@@ -117,6 +117,7 @@ It is recommended to connect the computer to the wall socket.')"
     fi
 }
 
+
 # This function checks if the user is root and restarts the script if not.
 function check_user_root {
     local   -i  pkexec_rc=0
