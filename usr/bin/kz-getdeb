@@ -64,19 +64,8 @@ readonly    HELP
 
 # This function handles the script options and arguments.
 function check_input {
-    local       files_found
-                files_found=$(ls -C kz kz.{1..99} 2> /dev/null || true)
     local       parsed=''
     local   -i  parsed_rc=0
-
-    # If the kz.{1..99} files exist, possible after multiple wget's, clean them
-    # up and start over.
-    if [[ -n $files_found ]]; then
-        printf  "$DISPLAY_NAME: $files_found %s\n"   \
-                "$(gettext 'files are deleted, please start again')"
-        cleanup
-        exit $ERROR
-    fi
 
     parsed=$(
         getopt  --alternative                       \
@@ -128,18 +117,6 @@ function process_input {
 }
 
 
-# This function performs a cleanup.
-function cleanup {
-    # Do not unconditional delete kz and kz.1 because of script and manual with
-    # the same name, but do delete them if not in directory */kz-scripts/*.
-    if [[ $PWD == */kz-scripts/* ]]; then
-        return $OK
-    else
-        rm --force kz kz.{1..99}
-    fi
-}
-
-
 # This function installs package kz.
 function install_package {
     local   site_deb='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
@@ -187,7 +164,7 @@ Type 'exit' to close this window.")
                             --infobox   "$text"         \
                             15 47
     fi
-    cleanup
+    rm --force "$HOME"/kz "$HOME"/kz.{1..99}
     exit 0
 }
 
