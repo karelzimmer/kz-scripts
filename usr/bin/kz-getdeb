@@ -72,7 +72,7 @@ function check_input {
     # If the kz.{1..99} files exist, possible after multiple wget's, clean them
     # up and start over.
     if [[ -n $files_found ]]; then
-        printf  "$DISPLAY_NAME: kz $files_found %s\n$USAGE_LINE\n"  \
+        printf  "$DISPLAY_NAME: kz $files_found %s\n"   \
                 "$(gettext 'files are deleted, please start again')"
         cleanup
         exit $ERROR
