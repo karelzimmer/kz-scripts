@@ -64,8 +64,8 @@ readonly    HELP
 
 # This function handles the script options and arguments.
 function check_input {
-    local   files_found
-            files_found=$(ls -C kz.{1..99} 2> /dev/null || true)
+    local       files_found
+                files_found=$(ls -C kz.{1..99} 2> /dev/null || true)
     local       parsed=''
     local   -i  parsed_rc=0
 
