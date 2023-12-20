@@ -401,9 +401,6 @@ msgstr "Wacht ${check_wait}s tot andere pakketbeheerder klaar is..."
 msgid "Install kz package"
 msgstr "Pakket kz installeren"
 
-msgid "files are deleted, please start again"
-msgstr "bestanden zijn verwijderd, begin opnieuw"
-
 msgid "Finished"
 msgstr "Gereed"
 

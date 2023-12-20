@@ -361,9 +361,6 @@ msgstr ""
 msgid "Install kz package"
 msgstr ""
 
-msgid "files are deleted, please start again"
-msgstr ""
-
 msgid "Finished"
 msgstr ""
 
