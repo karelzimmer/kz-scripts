@@ -130,11 +130,7 @@ function process_input {
 
 # This function performs a cleanup.
 function cleanup {
-    # Do not delete kz and kz.1 because of script and manual with the same
-    # name.
-    rm --force kz.{2..99}
-    # But do delete them if in HOME, as described in Checklist installation.
-    rm --force "$HOME"/kz "$HOME"/kz.1
+    rm --force kz kz.{1..99}
 }
 
 
