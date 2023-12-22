@@ -68,7 +68,6 @@ declare     title=''
 
 # Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
 declare     blue=''
-declare     bold=''
 declare     green=''
 declare     normal=''
 declare     red=''
@@ -340,7 +339,6 @@ CC0 1.0 Universal" \
 # This function resets the terminal_attributes for the GUI.
 function reset_terminal_attributes {
     blue=''
-    bold=''
     green=''
     normal=''
     red=''
@@ -350,8 +348,6 @@ function reset_terminal_attributes {
 
 # This function sets the terminal_attributes for the CLI.
 function set_terminal_attributes {
-    # shellcheck disable=SC2034
-    bold='\033[1m'
     red='\033[91m'
     green='\033[92m'
     yellow='\033[93m'

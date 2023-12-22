@@ -37,6 +37,8 @@ $(gettext 'Options:')
 $OPTIONS_HELP"
 readonly    HELP
 
+BOLD='\033[1m'
+
 
 ###############################################################################
 # Variables
@@ -158,7 +160,7 @@ function check_code {
     elif grep --quiet --line-regexp --regexp="$python_script" "$script"; then
         check_pycodestyle
     else
-        printf  "\n${bold}%s${normal}\n${red}%b\n${normal}" \
+        printf  "\n${BOLD}%s${normal}\n${red}%b\n${normal}" \
                 "In $scriptdir / $scriptname:"              \
                 "$(gettext "    Unknown script. Function check_code cannot \
 check script code.")"
@@ -186,7 +188,7 @@ function check_record_length {
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
-        printf  "\n${bold}%s${normal}\n${red}%b\n${normal}" \
+        printf  "\n${BOLD}%s${normal}\n${red}%b\n${normal}" \
                 "In $scriptdir / $scriptname:"              \
                 "$(eval_gettext "    A line is longer than \$max_line_length \
 (\$max_line_length_found).")"
@@ -221,7 +223,7 @@ function check_tags {
             --regexp="$fixme"   \
             --regexp="$todo"    \
             "$script"; then
-        printf  "\n${bold}%s${normal}\n${yellow}%s\n${normal}"  \
+        printf  "\n${BOLD}%s${normal}\n${yellow}%s\n${normal}"  \
                 "In $scriptdir / $scriptname:"                  \
                 "$(gettext '    Flagged annotation found.')"
         grep    --line-number           \
@@ -239,7 +241,7 @@ function check_tags {
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
-        printf  "\n${bold}%s${normal}\n${red}%b\n${normal}" \
+        printf  "\n${BOLD}%s${normal}\n${red}%b\n${normal}" \
                 "In $scriptdir / $scriptname:"              \
                 "$(gettext '    End spaces found.')"
         grep    --line-number --regexp=' ''$' "$script" |
