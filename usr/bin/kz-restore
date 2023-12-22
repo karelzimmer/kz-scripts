@@ -194,7 +194,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
     restore_backup
 
     if $option_dry_run; then
-        printf  "${red}%b\n${normal}"   \
+        printf  "${red}%s\n${normal}"   \
                 "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $ERROR
     fi

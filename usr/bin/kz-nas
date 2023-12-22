@@ -269,13 +269,13 @@ process_input() {
                 --title     "$title"    \
                 --text      "$text0"    2> >($logcmd)
     else
-        printf '%s\n' "${bold}$text1...${normal}"
+        printf '\n%b\n' "${bold}$text1...${normal}"
         check_dependencies
-        printf '%s\n' "${bold}$text2...${normal}"
+        printf '\n%b\n' "${bold}$text2...${normal}"
         create_nas_login
-        printf '%s\n' "${bold}$text3...${normal}"
+        printf '\n%b\n' "${bold}$text3...${normal}"
         create_systemd_unit_file
-        printf '%s\n' "${bold}$text4${normal}"
+        printf '\n%b\n' "${bold}$text4...${normal}"
         mount_nas
     fi
 }

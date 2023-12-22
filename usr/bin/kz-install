@@ -172,7 +172,7 @@ function process_input {
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
-            printf "${red}%b\n${normal}" "$(eval_gettext \
+            printf "${red}%s\n${normal}" "$(eval_gettext \
             "Filename must start with '\$PROGRAM_NAME-' and end with '.sh'.")"
             exit $ERROR
         fi
