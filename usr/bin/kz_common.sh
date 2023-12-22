@@ -232,7 +232,7 @@ function msg_info {
 
 # This function records a message to the log.
 function msg_log {
-    printf '%s\n' "$@" |& $logcmd
+    printf '%b\n' "$@" |& $logcmd
 }
 
 
@@ -370,12 +370,12 @@ function signal {
     local   -i  rc=${5:-$ERROR}
     local       rc_desc=''
     local   -i  rc_desc_signalno=0
-    local       status="${red}$rc/error${normal}"
+    local       status=${red}$rc/error${normal}
 
     case $rc in
         0)
             rc_desc='successful termination'
-            status="${green}$rc/OK${normal}"
+            status=${green}$rc/OK${normal}
             ;;
         1)
             rc_desc='terminated with error'

@@ -255,7 +255,7 @@ function process_menu1_choice {
 
 # This function processes menu #1 choice #1.
 function process_menu1_choice1 {
-    title="${MENU1_ACTIONS[1]}"
+    title=${MENU1_ACTIONS[1]}
     rows=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
             "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
@@ -266,7 +266,7 @@ function process_menu1_choice1 {
 
 # This function processes menu #1 choice #2.
 function process_menu1_choice2 {
-    title="${MENU1_ACTIONS[2]}"
+    title=${MENU1_ACTIONS[2]}
     # shellcheck disable=SC2034
     local   website_url=https://karelzimmer.nl
     text="
@@ -285,7 +285,7 @@ Roughly boils down to:
 
 # This function processes menu #1 choice #3.
 function process_menu1_choice3 {
-    title="${MENU1_ACTIONS[3]}"
+    title=${MENU1_ACTIONS[3]}
     rows=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
             "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
@@ -296,7 +296,7 @@ function process_menu1_choice3 {
 
 # This function processes menu #1 choice #4.
 function process_menu1_choice4 {
-    title="${MENU1_ACTIONS[4]}"
+    title=${MENU1_ACTIONS[4]}
     rows=(
         [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
             "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
@@ -384,7 +384,7 @@ function process_menu2_tui {
 # This function processes menu #2 choice.
 function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        title="${MENU2_ACTIONS[$REPLY]}"
+        title=${MENU2_ACTIONS[$REPLY]}
         rows=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
