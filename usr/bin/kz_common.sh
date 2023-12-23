@@ -309,7 +309,7 @@ function process_option_version {
         program_year=', '$program_year
     fi
 
-    printf  '%s\n\n%s\n%s\n'        \
+    printf  '%s\n\n%s\n%s\n'    \
             "kz 2.4.7$build_id" \
             "$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, \
 CC0 1.0 Universal" \
