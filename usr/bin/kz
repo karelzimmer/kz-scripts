@@ -57,7 +57,7 @@ declare     exec_program_name=''
 
 # This function handles the script options and arguments.
 function check_input {
-    # No getopt here like in all other scripts; any specified options in
+    # No getopt here like in all other scripts because any specified options in
     # ARGUMENT, with kz COMMAND ARGUMENT, are for COMMAND, not for kz.
     if [[ -z "$*" ]]; then
         printf '%s\n' "$USAGE"

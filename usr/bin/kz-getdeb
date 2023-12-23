@@ -128,7 +128,7 @@ function install_package {
 function term_script {
     local   title=$(gettext 'Finished')
     # shellcheck disable=SC2034
-    local   website_url=https://karelzimmer.nl
+    local   website_url='https://karelzimmer.nl'
     local   text=$(eval_gettext "\
 Package kz has been successfully installed.
 
