@@ -23,12 +23,13 @@ readonly    PROGRAM_NAME='kz-setup'
 readonly    PROGRAM_DESC=$(gettext 'Set up apps')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
-[-c|--cat] [-f|--file FILE]
+readonly    USAGE=\
+$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]
                 [-g|--gui] [-l|--list] [-r|--reset]
                 \$OPTIONS_USAGE
                 [--] [APP...]")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+readonly    HELP="\
+$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -41,7 +42,7 @@ $(gettext '  -g, --gui      starts in graphics mode')
 $(gettext '  -l, --list     show list of files')
 $(gettext '  -r, --reset    set apps on default values')
 $OPTIONS_HELP
-  --             $(gettext "signals the end of options and disables further \
+$(gettext "  --             signals the end of options and disables further \
 option processing")
 
 $(gettext 'Arguments:')
@@ -49,6 +50,8 @@ $(gettext '  APP            set up APPs')"
 
 readonly    X_OPTIONS_SHORT='acf:lgr'
 readonly    X_OPTIONS_LONG=',apps,cat,file:,list,gui,reset'
+
+readonly    PROGRAM_PATH=$MODULE_PATH
 
 
 ###############################################################################
@@ -232,11 +235,12 @@ function process_option_list {
                     --body-numbering=a; then
         printf '%s\n\n%s\n' "$(gettext '  0  No files present.')" "$USAGE_LINE"
     else
-        printf  '\n%b\n%b\n%s\n'                        \
-                "$(eval_gettext "To view the commands of FILE execute: \
-\${blue}\$DISPLAY_NAME --cat --file FILE\${normal}")"   \
-                "$(eval_gettext "To process FILE execute: \
-\${blue}\$DISPLAY_NAME --file FILE\${normal}")"         \
+        printf  '\n%b\n%b\n%s\n'                                            \
+                "$(eval_gettext "\
+To view the commands of FILE execute: \${blue}\$DISPLAY_NAME --cat --file \
+FILE\${normal}")"                                                           \
+                "$(eval_gettext "\
+To process FILE execute: \${blue}\$DISPLAY_NAME --file FILE\${normal}")"    \
                 "$(eval_gettext "The default FILE is: \$input_file")"
     fi
 }
@@ -263,13 +267,15 @@ function process_option_apps {
 
 $USAGE_LINE"
     else
-        printf  '\n%b\n%b\n%b\n'                            \
-                "$(eval_gettext "To view the contents of the APPs set up file \
-execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")"   \
-                "$(eval_gettext "To set up the APPs execute: \
-\${blue}\$DISPLAY_NAME APP...\${normal}")"                  \
-                "$(eval_gettext "To view the contents of the default set up \
-file execute: \${blue}\$DISPLAY_NAME --cat\${normal}")"
+        printf  '\n%b\n%b\n%b\n'                                        \
+                "$(eval_gettext "\
+To view the contents of the APPs set up file execute: \${blue}\$DISPLAY_NAME \
+--cat APP...\${normal}")"                                               \
+                "$(eval_gettext "\
+To set up the APPs execute: \${blue}\$DISPLAY_NAME APP...\${normal}")"  \
+                "$(eval_gettext "\
+To view the contents of the default set up file execute: \${blue}\
+\$DISPLAY_NAME --cat\${normal}")"
     fi
 }
 
@@ -460,7 +466,8 @@ function term_script {
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
         msg_error "
-$(eval_gettext "The set up of the following apps contains errors:
+$(eval_gettext "\
+The set up of the following apps contains errors:
 \$failed_apps_text
 
 Try to set up the apps again.
@@ -476,15 +483,17 @@ use app Terminal, type 'kz setup \$failed_apps_text'.")"
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
-                msg_info "$(gettext "You will now be logged out of the \
-computer to finish installing the apps and changing user settings.")"
+                msg_info "\
+$(gettext "You will now be logged out of the computer to finish installing \
+the apps and changing user settings.")"
                 if ! $option_gui; then
                     wait_for_enter
                 fi
                 gnome-session-quit --logout --no-prompt
             else
-                msg_info "$(gettext "You must log out of the computer to \
-finish installing the apps and changing user settings.
+                msg_info "$(gettext "\
+You must log out of the computer to finish installing the apps and changing \
+user settings.
 Type 'logout' to log out.")"
                 exit $OK
             fi

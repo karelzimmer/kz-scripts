@@ -127,8 +127,8 @@ function check_script {
         dir=/usr/share/applications
         if ! [[ -e $dir/$scriptname.desktop ]]; then
             printf  "${red}%s\n${normal}"   \
-                    "$(eval_gettext "Desktop configuration file \
-\$dir/\$scriptname.desktop not found.")"
+                    "$(eval_gettext \
+        "Desktop configuration file \$dir/\$scriptname.desktop not found.")"
             error_flag=true
         fi
     fi
@@ -138,8 +138,9 @@ function check_script {
         dir=/usr/share/polkit-1/actions
         if ! [[ -e $dir/nl.karelzimmer.$scriptname.policy ]]; then
             printf  "${red}%s\n${normal}"   \
-                    "$(eval_gettext "PolicyKit action definition file \
-\$dir/nl.karelzimmer.\$scriptname.policy not found.")"
+                    "$(eval_gettext \
+"PolicyKit action definition file \$dir/nl.karelzimmer.\$scriptname.policy \
+not found.")"
             error_flag=true
         fi
     fi
@@ -148,8 +149,8 @@ function check_script {
     dir=/usr/share/bash-completion/completions
     if ! [[ -e $dir/$scriptname ]]; then
         printf  "${red}%s\n${normal}"   \
-                "$(eval_gettext "Tab completion script \$dir/\$scriptname not \
-found.")"
+                "$(eval_gettext \
+                        "Tab completion script \$dir/\$scriptname not found.")"
         error_flag=true
     fi
 

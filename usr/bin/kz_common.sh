@@ -25,7 +25,8 @@ readonly    MODULE_DESC=$(gettext 'Common module for shell scripts')
 readonly    MODULE_PATH=$(dirname "$(realpath "$0")")
 
 readonly    OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
-readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
+readonly    OPTIONS_HELP="\
+$(gettext '  -h, --help     give this help list')
 $(gettext '  -u, --usage    give a short usage message')
 $(gettext '  -v, --version  print program version')"
 
@@ -36,11 +37,11 @@ readonly    OK=0
 readonly    ERROR=1
 
 readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-if type gnome-shell &> /dev/null; then
-    EDITION='desktop'
-else
-    EDITION='server'
-fi
+            if type gnome-shell &> /dev/null; then
+                EDITION='desktop'
+            else
+                EDITION='server'
+            fi
 readonly    EDITION
 
 
@@ -70,8 +71,8 @@ declare     yellow=''
 # This function checks for active updates and waits for the next check.
 function check_for_active_updates {
     local   -i  check_wait=10
-    local       text=$(eval_gettext "Wait \${check_wait}s for another package \
-manager to finish...")
+    local       text=\
+$(eval_gettext "Wait \${check_wait}s for another package manager to finish...")
 
     while sudo  fuser                                       \
                 /snap/core/*/var/cache/debconf/config.dat   \
@@ -94,10 +95,10 @@ function check_on_ac_power {
 
     on_ac_power |& $logcmd || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        msg_warning "
-$(gettext 'The computer now uses only the battery for power.
+        msg_warning "$(gettext "\
+The computer now uses only the battery for power.
 
-It is recommended to connect the computer to the wall socket.')"
+It is recommended to connect the computer to the wall socket.")"
         if ! $option_gui; then
             wait_for_enter
         fi
@@ -175,8 +176,8 @@ function init_script {
     fi
 
     commandline_args=("$@")
-    USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
-information.")
+    USAGE_LINE=$(eval_gettext \
+                        "Type '\$DISPLAY_NAME --usage' for more information.")
 }
 
 
@@ -268,13 +269,13 @@ function process_common_options {
 
 # This function shows the available help.
 function process_option_help {
-    local   man_url="\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME \
-$(gettext 'man page')\e]8;;\e\\"
+    local   man_url="\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME "
+            man_url+="$(gettext 'man page')\e]8;;\e\\"
 
     printf  '%s\n\n%b\n'    \
             "$HELP"         \
-            "$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url \
-for more information.")"
+            "$(eval_gettext \
+    "Type 'man \$DISPLAY_NAME' or see the \$man_url for more information.")"
 }
 
 
@@ -282,7 +283,8 @@ for more information.")"
 function process_option_usage {
     printf  '%s\n\n%s\n'    \
             "$USAGE"        \
-        "$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
+            "$(eval_gettext \
+                        "Type '\$DISPLAY_NAME --help' for more information.")"
 }
 
 
@@ -309,11 +311,12 @@ function process_option_version {
         program_year=', '$program_year
     fi
 
+    text="$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, "
+    text+='CC0 1.0 Universal'
     printf  '%s\n\n%s\n%s\n'    \
             "kz 2.4.7$build_id" \
-            "$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, \
-CC0 1.0 Universal" \
-"<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
+            "$text"             \
+            "<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
 }
 
 
@@ -401,13 +404,14 @@ function signal {
             rc_desc='unknown error'
             ;;
     esac
-    msg_log  "signal: $signal, line: $lineno, function: $function, command: \
-$command, code: $rc ($rc_desc)"
+    text="signal: $signal, line: $lineno, function: $function, command: "
+    text+="$command, code: $rc ($rc_desc)"
+    msg_log "$text"
 
     case $signal in
         err)
-            msg_error "
-$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
+            msg_error \
+            "\n$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         exit)
@@ -418,8 +422,8 @@ $(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
             exit "$rc"
             ;;
         *)
-            msg_error "
-$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
+            msg_error \
+            "\n$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
             exit "$rc"
             ;;
     esac
@@ -431,8 +435,9 @@ function signal_exit {
     case $PROGRAM_NAME in
         kz-install)
             if [[ $rc -ne $OK ]]; then
-                msg_log  "$(gettext "If the package manager gives apt errors, \
-launch a Terminal window and execute:")
+                msg_log  "$(gettext "\
+If the package manager gives apt errors, launch a Terminal window and execute:\
+")
 [1] ${blue}kz update${normal}
 [2] ${blue}sudo update-initramfs -u${normal}"
             fi

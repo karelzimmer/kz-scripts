@@ -31,7 +31,8 @@ readonly    PROGRAM_DESC=$(gettext 'Install kz package')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    HELP="\
+$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -128,7 +129,8 @@ function term_script {
     local   title=$(gettext 'Finished')
     # shellcheck disable=SC2034
     local   website_url=https://karelzimmer.nl
-    local   text=$(eval_gettext "Package kz has been successfully installed.
+    local   text=$(eval_gettext "\
+Package kz has been successfully installed.
 
 Now follow the steps as described
 in the Checklist installation.

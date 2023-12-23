@@ -23,12 +23,13 @@ readonly    PROGRAM_NAME=kz-install
 readonly    PROGRAM_DESC=$(gettext 'Install apps')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
-[-c|--cat] [-f|--file FILE]
+readonly    USAGE=$(eval_gettext "\
+Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]
                   [-g|--gui] [-l|--list] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [APP...]")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+readonly    HELP="\
+$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -41,7 +42,7 @@ $(gettext '  -g, --gui      starts in graphics mode')
 $(gettext '  -l, --list     show list of files')
 $(gettext '  -r, --remove   delete apps')
 $OPTIONS_HELP
-  --             $(gettext "signals the end of options and disables further \
+$(gettext "  --             signals the end of options and disables further \
 option processing")
 
 $(gettext 'Arguments:')
@@ -236,11 +237,12 @@ function process_option_list {
                     --body-numbering=a; then
         printf '%s\n\n%s\n' "$(gettext '  0  No files present.')" "$USAGE_LINE"
     else
-        printf  "\n%b\n%b\n%s\n"                        \
-                "$(eval_gettext "To view the commands of FILE execute: \
-\${blue}\$DISPLAY_NAME --cat --file FILE\${normal}")"   \
-                "$(eval_gettext "To process FILE execute: \
-\${blue}\$DISPLAY_NAME --file FILE\${normal}")"         \
+        printf  "\n%b\n%b\n%s\n"                                            \
+                "$(eval_gettext "\
+To view the commands of FILE execute: \${blue}\$DISPLAY_NAME --cat --file \
+FILE\${normal}")"                                                           \
+                "$(eval_gettext "\
+To process FILE execute: \${blue}\$DISPLAY_NAME --file FILE\${normal}")"    \
                 "$(eval_gettext "The default FILE is: \$input_file")"
     fi
 }
@@ -265,13 +267,15 @@ function process_option_apps {
                     --body-numbering=a; then
         printf '%s\n\n%s\n' "$(gettext '  0  No apps found.')" "$USAGE_LINE"
     else
-        printf  '\n%b\n%b\n%b\n'                            \
-                "$(eval_gettext "To view the contents of the APPs \
-install file execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")" \
-                "$(eval_gettext "To install the APPs execute: \
-\${blue}\$DISPLAY_NAME APP...\${normal}")"          \
-                "$(eval_gettext "To view the contents of the default install \
-file execute: \${blue}\$DISPLAY_NAME --cat\${normal}")"
+        printf  '\n%b\n%b\n%b\n'                                        \
+                "$(eval_gettext "\
+To view the contents of the APPs install file execute: \${blue}\$DISPLAY_NAME \
+--cat APP...\${normal}")"                                               \
+                "$(eval_gettext "\
+To install the APPs execute: \${blue}\$DISPLAY_NAME APP...\${normal}")" \
+                "$(eval_gettext "\
+To view the contents of the default install file execute: \${blue}\
+\$DISPLAY_NAME --cat\${normal}")"
     fi
 }
 
@@ -464,7 +468,8 @@ function term_script {
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
         msg_error "
-$(eval_gettext "The installation of the following apps contains errors:
+$(eval_gettext "\
+The installation of the following apps contains errors:
 \$failed_apps_text
 
 Try installing the apps again.
@@ -476,11 +481,12 @@ use app Terminal, type 'kz install \$failed_apps_text'.")"
             # shellcheck disable=SC2034
             operation=$(gettext 'remove')
         fi
-        msg_info "
-${green}$(eval_gettext "Apps \$operation completed.")${normal}"
+        msg_info "${green}
+$(eval_gettext "Apps \$operation completed.")${normal}"
         if $reboot; then
-            msg_info "$(gettext "The computer will now reboot to finish \
-installing the apps and changing system settings.")"
+            msg_info "$(gettext \
+"The computer will now reboot to finish installing the apps and changing \
+system settings.")"
             if ! $option_gui; then
                 wait_for_enter
             fi

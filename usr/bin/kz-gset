@@ -23,18 +23,19 @@ readonly    PROGRAM_NAME='kz-gset'
 readonly    PROGRAM_DESC=$(gettext 'Change GUI')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME \
-[-a|--addfavaft FAVORITE] [-b|--addfavbef FAVORITE]
+readonly    USAGE="$(eval_gettext "\
+Usage: \$DISPLAY_NAME [-a|--addfavaft FAVORITE] [-b|--addfavbef FAVORITE]
                [-d|--delfav FAVORITE] [-l|--list] [-r|--resetfavs]
-               [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]")
-               $OPTIONS_USAGE"
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+               [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]
+               \$OPTIONS_USAGE")"
+readonly    HELP="\
+$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-  $(gettext "Mandatory arguments to long options are mandatory for short \
-options too.")
+$(gettext \
+"  Mandatory arguments to long options are mandatory for short options too.")
 
 $(gettext '  -a, --addfavaft FAVORITE
                  add FAVORITE at the end')
@@ -356,12 +357,15 @@ function report_database_changes {
     local   output_file1=${1:-unknown}
     local   output_file2=${2:-unknown}
 
-    printf '\n%s\n' "$(gettext 'CHANGEs in the configuration database,
+    printf  '\n%s\n'    \
+            "$(gettext "\
+CHANGEs in the configuration database,
 < is the old setting (A),
-> is the new setting (B):')"
+> is the new setting (B):")"
     diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
-    printf '\n%b\n' "$(gettext 'When CHANGEs execute:') ${blue}gsettings set \
-CHANGE${normal}"
+    printf  '\n%b\n'    \
+            "$(gettext "\
+When CHANGEs execute:") ${blue}gsettings set CHANGE${normal}"
 }
 
 

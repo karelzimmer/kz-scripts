@@ -23,9 +23,10 @@ readonly    PROGRAM_NAME='kz-menu'
 readonly    PROGRAM_DESC=$(gettext 'Installation menu')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
-\$OPTIONS_USAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    USAGE=$(\
+eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE")
+readonly    HELP="\
+$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -35,6 +36,8 @@ $OPTIONS_HELP"
 
 readonly    X_OPTIONS_SHORT='g'
 readonly    X_OPTIONS_LONG=',gui'
+
+readonly    PROGRAM_PATH=$MODULE_PATH
 
             MENU1_TITLE=$(gettext 'Installation menu')
 readonly    MENU1_TITLE
@@ -264,8 +267,8 @@ function process_menu1_choice2 {
     # shellcheck disable=SC2034
     local   website_url=https://karelzimmer.nl
     text="
-$(eval_gettext "Follow the steps as described in Checklist installation, \
-Chapter 2.
+$(eval_gettext "\
+Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on \$website_url, under Linux.
 
 Roughly boils down to:
@@ -402,7 +405,8 @@ function manual_actions {
     if [[ $title = $(gettext 'Add users') ]]; then
         text="$(gettext 'Add users'):
 
-$(gettext "Add any additional users with the following steps.
+$(gettext "\
+Add any additional users with the following steps.
 
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click Unlock and enter password.
@@ -422,8 +426,8 @@ $(gettext 'No user photo was found when backing up.')"
             if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
                 text="$(gettext 'Set user photo'):
 
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
-on Users.
+$(gettext "\
+1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click the image for the user.
 3. Click Select a file.
 4. Select Userphoto in Personal folder / Pictures.
