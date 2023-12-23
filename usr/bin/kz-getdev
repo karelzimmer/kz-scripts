@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz_common.sh disable=SC2155
 ###############################################################################
 # Build development environment.
 #
@@ -12,30 +12,24 @@
 # Import
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-getdev'
-            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly    PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
+source "$(dirname "$0")"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-            PROGRAM_DESC=$(gettext 'Build development environment')
-readonly    PROGRAM_DESC
+readonly    PROGRAM_NAME='kz-getdev'
+readonly    PROGRAM_DESC=$(gettext 'Build development environment')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    USAGE
-
+readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
-readonly    HELP
 
 
 ###############################################################################
@@ -90,9 +84,7 @@ function check_input {
 # This function processes the script options and arguments.
 function process_input {
     # shellcheck disable=SC2310
-    if check_user_sudo; then
-        sudo true
-    else
+    if ! check_user_sudo; then
         printf  '%s\n'  \
                 "$(gettext 'Already performed by the administrator.')"
         term_script

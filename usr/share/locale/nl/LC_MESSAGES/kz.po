@@ -636,8 +636,8 @@ msgstr ""
 "BESTAND${normal}"
 
 #, sh-format
-msgid "The default FILE is $input_file."
-msgstr "Het standaardBESTAND is $input_file."
+msgid "The default FILE is: $input_file"
+msgstr "Het standaardBESTAND is: $input_file"
 
 msgid "install"
 msgstr "installeren"

@@ -37,9 +37,12 @@ MODULE_PATH = f"{os.path.realpath(os.path.dirname(__file__))}"
 OK = 0
 ERROR = 1
 
-NORMAL = '\033[0m'
 RED = '\033[91m'
+GREEN = '\033[92m'
 YELLOW = '\033[93m'
+BLUE = '\033[94m'
+BOLD = '\033[1m'
+NORMAL = '\033[0m'
 
 
 ###############################################################################

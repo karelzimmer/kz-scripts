@@ -1,4 +1,4 @@
-# shellcheck shell=bash source=/dev/null
+# shellcheck shell=bash source=/dev/null disable=SC2155,SC2034
 ###############################################################################
 # Common module for shell scripts.
 #
@@ -20,38 +20,28 @@ source      /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
-# shellcheck disable=SC2034
 readonly    MODULE_NAME='kz_common.sh'
-            MODULE_DESC=$(gettext 'Common module for shell scripts')
-# shellcheck disable=SC2034
-readonly    MODULE_DESC
+readonly    MODULE_DESC=$(gettext 'Common module for shell scripts')
+readonly    MODULE_PATH=$(dirname "$(realpath "$0")")
+
+readonly    OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
+readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
+$(gettext '  -u, --usage    give a short usage message')
+$(gettext '  -v, --version  print program version')"
+
+readonly    OPTIONS_SHORT='huv'
+readonly    OPTIONS_LONG='help,usage,version'
 
 readonly    OK=0
 readonly    ERROR=1
 
-            DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-readonly    DISTRO
+readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 if type gnome-shell &> /dev/null; then
     EDITION='desktop'
 else
     EDITION='server'
 fi
 readonly    EDITION
-
-            OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
-# shellcheck disable=SC2034
-readonly    OPTIONS_USAGE
-
-            OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
-$(gettext '  -u, --usage    give a short usage message')
-$(gettext '  -v, --version  print program version')"
-# shellcheck disable=SC2034
-readonly    OPTIONS_HELP
-
-# shellcheck disable=SC2034
-readonly    OPTIONS_SHORT='huv'
-# shellcheck disable=SC2034
-readonly    OPTIONS_LONG='help,usage,version'
 
 
 ###############################################################################
@@ -61,13 +51,12 @@ readonly    OPTIONS_LONG='help,usage,version'
 declare -a  commandline_args=()
 declare     logcmd=''
 declare     option_gui=false
-# pkexec needs absolute path-name, e.g. ./script -> /path/to/script.
-declare     program_exec=${0/#./$PROGRAM_PATH}
 declare     text=''
 declare     title=''
 
 # Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
 declare     blue=''
+declare     bold=''
 declare     green=''
 declare     normal=''
 declare     red=''
@@ -81,8 +70,7 @@ declare     yellow=''
 # This function checks for active updates and waits for the next check.
 function check_for_active_updates {
     local   -i  check_wait=10
-    local       text
-                text=$(eval_gettext "Wait \${check_wait}s for another package \
+    local       text=$(eval_gettext "Wait \${check_wait}s for another package \
 manager to finish...")
 
     while sudo  fuser                                       \
@@ -120,6 +108,7 @@ It is recommended to connect the computer to the wall socket.')"
 # This function checks if the user is root and restarts the script if not.
 function check_user_root {
     local   -i  pkexec_rc=0
+    local       program_exec=$MODULE_PATH/$PROGRAM_NAME
 
     # shellcheck disable=SC2310
     if ! check_user_sudo; then
@@ -172,7 +161,7 @@ function init_script {
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     msg_log "==== START log $PROGRAM_NAME ===="
-    msg_log "started ($program_exec $* as $USER)"
+    msg_log "started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
 
     # Setting xhost is needed on Debian for GUI root scripts like kz-install.
     if [[ $DISTRO = 'debian' && $EDITION = 'desktop' && $UID -ne 0 ]]; then
@@ -186,7 +175,6 @@ function init_script {
     fi
 
     commandline_args=("$@")
-    # shellcheck disable=SC2034
     USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more \
 information.")
 }
@@ -195,8 +183,7 @@ information.")
 # This function returns an error message and logs it.
 function msg_error {
     if $option_gui; then
-        local   title
-                title=$(eval_gettext "Error message \$DISPLAY_NAME")
+        local   title=$(eval_gettext "Error message \$DISPLAY_NAME")
 
         zenity  --error                 \
                 --no-markup             \
@@ -214,8 +201,7 @@ function msg_error {
 # This function returns an informational message.
 function msg_info {
     if $option_gui; then
-        local   title
-                title=$(eval_gettext "Information \$DISPLAY_NAME")
+        local   title=$(eval_gettext "Information \$DISPLAY_NAME")
 
         zenity  --info                  \
                 --no-markup             \
@@ -238,8 +224,7 @@ function msg_log {
 # This function returns a warning message and logs it.
 function msg_warning {
     if $option_gui; then
-        local   title
-                title=$(eval_gettext "Warning \$DISPLAY_NAME")
+        local   title=$(eval_gettext "Warning \$DISPLAY_NAME")
 
         zenity  --warning               \
                 --no-markup             \
@@ -283,12 +268,9 @@ function process_common_options {
 
 # This function shows the available help.
 function process_option_help {
-    local   man_url
-            # shellcheck disable=SC2034
-            man_url="\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME \
+    local   man_url="\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME \
 $(gettext 'man page')\e]8;;\e\\"
 
-    # shellcheck disable=SC2154
     printf  '%s\n\n%b\n'    \
             "$HELP"         \
             "$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url \
@@ -298,7 +280,6 @@ for more information.")"
 
 # This function shows the available options.
 function process_option_usage {
-    # shellcheck disable=SC2154
     printf  '%s\n\n%s\n'    \
             "$USAGE"        \
         "$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
@@ -318,7 +299,7 @@ function process_option_version {
     fi
 
     program_year=$(
-        grep    --regexp="$grep_expr" "$PROGRAM_PATH/$PROGRAM_NAME" |
+        grep    --regexp="$grep_expr" "$MODULE_PATH/$PROGRAM_NAME" |
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
@@ -339,6 +320,7 @@ CC0 1.0 Universal" \
 # This function resets the terminal_attributes for the GUI.
 function reset_terminal_attributes {
     blue=''
+    bold=''
     green=''
     normal=''
     red=''
@@ -352,6 +334,7 @@ function set_terminal_attributes {
     green='\033[92m'
     yellow='\033[93m'
     blue='\033[94m'
+    bold='\033[1m'
     normal='\033[0m'
 }
 

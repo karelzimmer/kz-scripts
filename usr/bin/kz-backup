@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz_common.sh disable=SC2155
 ###############################################################################
 # Make backup.
 #
@@ -12,26 +12,21 @@
 # Import
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-backup'
-            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly    PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
+source "$(dirname "$0")"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-            PROGRAM_DESC=$(gettext 'Make backup')
-readonly    PROGRAM_DESC
+readonly    PROGRAM_NAME='kz-backup'
+readonly    PROGRAM_DESC=$(gettext 'Make backup')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-            USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] \
+readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] \
 [-g|--gui] [-t|--target DIRECTORY]")
                  $OPTIONS_USAGE"
-readonly    USAGE
-
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -44,7 +39,6 @@ $(gettext '  -g, --gui      starts in graphics mode')
 $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')
 $OPTIONS_HELP"
-readonly    HELP
 
 readonly    X_OPTIONS_SHORT='dgt:'
 readonly    X_OPTIONS_LONG=',dry-run,gui,target:'
@@ -290,18 +284,12 @@ function backup_settings_favorite_apps {
 # This function creates a list of installed apps.
 function backup_settings_installed_apps {
     local   output_file=''
-    local   header1
-            header1=$(gettext '==== START installed packages ====')
-    local   footer1
-            footer1=$(gettext '==== END installed packages ====')
-    local   header2
-            header2=$(gettext '==== START installed snaps ====')
-    local   footer2
-            footer2=$(gettext '==== END installed snaps ====')
-    local   header3
-            header3=$(gettext '==== START added repositories ====')
-    local   footer3
-            footer3=$(gettext '==== END added repositories ====')
+    local   header1=$(gettext '==== START installed packages ====')
+    local   footer1=$(gettext '==== END installed packages ====')
+    local   header2=$(gettext '==== START installed snaps ====')
+    local   footer2=$(gettext '==== END installed snaps ====')
+    local   header3=$(gettext '==== START added repositories ====')
+    local   footer3=$(gettext '==== END added repositories ====')
     local   search=/etc/apt/sources.list
 
     if type xdg-user-dir &> /dev/null; then

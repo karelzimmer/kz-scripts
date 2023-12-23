@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz_common.sh disable=SC2155
 ###############################################################################
 # Mount network drive.
 #
@@ -12,32 +12,26 @@
 # Import
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-nas'
-            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly    PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
+source "$(dirname "$0")"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-            PROGRAM_DESC=$(gettext 'Mount network drive')
-readonly    PROGRAM_DESC
+readonly    PROGRAM_NAME='kz-nas'
+readonly    PROGRAM_DESC=$(gettext 'Mount network drive')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 \$OPTIONS_USAGE")
-readonly    USAGE
-
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $(gettext '  -g, --gui      starts in graphics mode')
-$OPTIONS_   HELP"
-readonly    HELP
+$OPTIONS_HELP"
 
 readonly    X_OPTIONS_SHORT='g'
 readonly    X_OPTIONS_LONG=',gui'
@@ -134,17 +128,12 @@ function check_input {
 
 # This function asks the user for input.
 request_input() {
-    local       quest1
-                quest1=$(eval_gettext "Does the NAS have a fixed IP address \
+    local       quest1=$(eval_gettext "Does the NAS have a fixed IP address \
 such as \$nas_ip_address?")
-    local       quest2
-                quest2=$(gettext 'IP address of the NAS')
-    local       quest3
-                quest3=$(gettext 'User name on the NAS')
-    local       quest4
-                quest4=$(gettext 'Password of this user on the NAS')
-    local       quest5
-                quest5=$(gettext 'Share name of this user on the NAS')
+    local       quest2=$(gettext 'IP address of the NAS')
+    local       quest3=$(gettext 'User name on the NAS')
+    local       quest4=$(gettext 'Password of this user on the NAS')
+    local       quest5=$(gettext 'Share name of this user on the NAS')
 
     if $option_gui; then
         title=$(gettext 'Question')
@@ -232,16 +221,11 @@ $quest5? [$nas_share_name]: "
 
 # This function processes the script options and arguments.
 process_input() {
-    local   text0
-            text0=$(gettext 'Commands are being prepared')
-    local   text1
-            text1=$(gettext 'Check dependencies')
-    local   text2
-            text2=$(gettext 'Create NAS login')
-    local   text3
-            text3=$(gettext 'Create systemd mount file')
-    local   text4
-            text4=$(gettext 'Mount NAS')
+    local   text0=$(gettext 'Commands are being prepared')
+    local   text1=$(gettext 'Check dependencies')
+    local   text2=$(gettext 'Create NAS login')
+    local   text3=$(gettext 'Create systemd mount file')
+    local   text4=$(gettext 'Mount NAS')
 
     title=$(gettext 'Mount network drive')
     if $option_gui; then

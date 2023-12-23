@@ -554,7 +554,7 @@ msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
 msgstr ""
 
 #, sh-format
-msgid "The default FILE is $input_file."
+msgid "The default FILE is: $input_file"
 msgstr ""
 
 msgid "install"

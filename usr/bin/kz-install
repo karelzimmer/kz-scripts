@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh
+# shellcheck source=kz_common.sh disable=SC2155
 ###############################################################################
 # Install apps.
 #
@@ -12,28 +12,23 @@
 # Import
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-install'
-            PROGRAM_PATH=$(cd "$(dirname "$(realpath "$0")")" && pwd)
-readonly    PROGRAM_PATH
-source "$PROGRAM_PATH"/kz_common.sh 2> >(systemd-cat --identifie=$PROGRAM_NAME)
+source "$(dirname "$0")"/kz_common.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-            PROGRAM_DESC=$(gettext 'Install apps')
-readonly    PROGRAM_DESC
+readonly    PROGRAM_NAME=kz-install
+readonly    PROGRAM_DESC=$(gettext 'Install apps')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
+readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
 [-c|--cat] [-f|--file FILE]
                   [-g|--gui] [-l|--list] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [APP...]")
-readonly    USAGE
-
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -51,10 +46,11 @@ option processing")
 
 $(gettext 'Arguments:')
 $(gettext '  APP            install APPs')"
-readonly    HELP
 
 readonly    X_OPTIONS_SHORT='acf:lgr'
 readonly    X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove'
+
+readonly    PROGRAM_PATH=$MODULE_PATH
 
 
 ###############################################################################
@@ -245,7 +241,7 @@ function process_option_list {
 \${blue}\$DISPLAY_NAME --cat --file FILE\${normal}")"   \
                 "$(eval_gettext "To process FILE execute: \
 \${blue}\$DISPLAY_NAME --file FILE\${normal}")"         \
-                "$(eval_gettext "The default FILE is \$input_file.")"
+                "$(eval_gettext "The default FILE is: \$input_file")"
     fi
 }
 
@@ -382,8 +378,7 @@ function process_option_cat {
 function process_command_file {
     local       app_name=''
     local       app_name_line=''
-    local       operation
-                operation=$(gettext 'install')
+    local       operation=$(gettext 'install')
     local       commands_record=''
     local   -i  app_seq_num=0
     local   -i  app_tot_num=0
@@ -458,8 +453,7 @@ function execute_command {
 # This function controls the termination of the script.
 function term_script {
     local   failed_apps_text=''
-    local   operation
-            operation=$(gettext 'install')
+    local   operation=$(gettext 'install')
 
     if ! $commands_found; then
         msg_info "$(gettext 'No commands to execute.' )"
