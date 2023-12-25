@@ -1,10 +1,10 @@
 # shellcheck shell=bash
-###############################################################################
+################################################################################
 # Tab-completion-script for kz-setup.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2020-2023.
-###############################################################################
+################################################################################
 
 dashoptions='-a --apps -c --cat -f --file -g --gui -l --list -h --help -r
     --reset -u --usage -v --version'
