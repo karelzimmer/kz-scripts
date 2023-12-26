@@ -41,8 +41,8 @@ $(gettext '  -g, --gui      starts in graphics mode')
 $(gettext '  -l, --list     show list of files')
 $(gettext '  -r, --reset    set apps on default values')
 $OPTIONS_HELP
-$(gettext "  --             signals the end of options and disables further \
-option processing")
+$(gettext "  --             signals the end of options and disables further op\
+tion processing")
 
 $(gettext 'Arguments:')
 $(gettext '  APP            set up APPs')"
@@ -109,7 +109,7 @@ function check_input {
                 ;;
             -f|--file)
                 if $option_file; then
-                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n" \
+                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n"   \
                             "$(gettext 'too many options')"
                     exit $ERROR
                 fi
@@ -123,7 +123,7 @@ function check_input {
                 ;;
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
-                    printf  "$DISPLAY_NAME: $1: %s\n$USAGE_LINE\n" \
+                    printf  "$DISPLAY_NAME: $1: %s\n$USAGE_LINE\n"  \
                             "$(gettext 'not allowed on a server')"
                     exit $ERROR
                 fi
@@ -168,7 +168,7 @@ function process_input {
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
-            printf  "${red}%s\n${normal}" \
+            printf  "${red}%s\n${normal}"   \
                     "$(eval_gettext "Filename must start with '\$PROGRAM_NAME-\
 ' and end with '.sh'.")"
             exit $ERROR
@@ -286,7 +286,7 @@ function process_argument_app {
         process_input_file_by_app
     done
     if $app_not_found; then
-        printf  '%s\n' \
+        printf  '%s\n'  \
                 "$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available ap\
 ps.")"
         exit $ERROR

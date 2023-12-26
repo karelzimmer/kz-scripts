@@ -79,7 +79,7 @@ function check_input {
             exit $OK
             ;;
         -*)
-            printf  "$DISPLAY_NAME: %s: $1%s\n$USAGE_LINE\n" \
+            printf  "$DISPLAY_NAME: %s: $1%s\n$USAGE_LINE\n"    \
                     "$(gettext 'invalid option')"
             exit $ERROR
             ;;
@@ -88,7 +88,7 @@ function check_input {
             ;;
     esac
     if ! [[ -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
-        printf  "$DISPLAY_NAME: $exec_program_name: %s\n$USAGE_LINE\n" \
+        printf  "$DISPLAY_NAME: $exec_program_name: %s\n$USAGE_LINE\n"  \
                 "$(gettext 'command does not exist')"
         exit $ERROR
     fi

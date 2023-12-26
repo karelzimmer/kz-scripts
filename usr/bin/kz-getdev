@@ -74,7 +74,7 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n" \
+        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
                 "$(gettext 'arguments are not allowed')"
         exit $ERROR
     fi
@@ -85,7 +85,7 @@ function check_input {
 function process_input {
     # shellcheck disable=SC2310
     if ! check_user_sudo; then
-        printf  '%s\n' \
+        printf  '%s\n'  \
                 "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
