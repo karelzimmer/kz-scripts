@@ -23,10 +23,9 @@ readonly    PROGRAM_NAME='kz-nas'
 readonly    PROGRAM_DESC=$(gettext 'Mount network drive')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=\
-$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE")
-readonly    HELP="\
-$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
+SAGE")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -40,8 +39,8 @@ readonly    X_OPTIONS_LONG=',gui'
 readonly    NAS_LOGIN_DIR=/usr/local/etc
 readonly    NAS_LOGIN=$NAS_LOGIN_DIR/$PROGRAM_NAME.login
 readonly    NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
-            NAS_FIXED_IP_ADDRESS="$(gettext "\
-Make sure the NAS has a fixed IP address.
+            NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP \
+address.
 This requires:
 
   - the MAC address of the NAS (looks like aa:bb:cc:dd:ee:ff)
@@ -129,8 +128,8 @@ function check_input {
 
 # This function asks the user for input.
 request_input() {
-    local       quest1=$(eval_gettext \
-            "Does the NAS have a fixed IP address such as \$nas_ip_address?")
+    local       quest1=$(eval_gettext "Does the NAS have a fixed IP address su\
+ch as \$nas_ip_address?")
     local       quest2=$(gettext 'IP address of the NAS')
     local       quest3=$(gettext 'User name on the NAS')
     local       quest4=$(gettext 'Password of this user on the NAS')
@@ -193,8 +192,8 @@ request_input() {
     else
         printf '\n%s\n%s\n' \
                 "$text."    \
-                "$(gettext \
-"If you do not specify, the value in [] is used as the response.")"
+                "$(gettext "If you do not specify, the value in [] is used as \
+the response.")"
         read -rp "
 $quest2? [$nas_ip_address]: "
         if [[ -n $REPLY ]]; then
@@ -284,16 +283,15 @@ create_nas_login() {
 
 # This function creates the systemd unit mount file.
 create_systemd_unit_file() {
-    printf '%s\n' "\
-[Unit]
+    printf '%s\n' "[Unit]
 Description=Mount NAS Directory
 
 [Mount]
 What=//$nas_ip_address/$nas_share_name
 Where=$NAS_MOUNT_POINT
 Type=cifs
-Options=credentials=$NAS_LOGIN,vers=1.0,rw,noperm,iocharset=utf8,\
-dir_mode=0777,file_mode=0777
+Options=credentials=$NAS_LOGIN,vers=1.0,rw,noperm,iocharset=utf8,dir_mode=0777\
+,file_mode=0777
 
 [Install]
 WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
@@ -312,8 +310,7 @@ mount_nas() {
 term_script() {
     systemctl status "$SYSTEMD_MOUNT_FILE" || true
     msg_info "
-$(eval_gettext "\
-The systemd mount file is activated.
+$(eval_gettext "The systemd mount file is activated.
 The NAS should be available at '\$NAS_MOUNT_POINT'.
 
 Deactivate the systemd mount file and remove the NAS login with the following \

@@ -23,17 +23,16 @@ readonly    PROGRAM_NAME='kz-backup'
 readonly    PROGRAM_DESC=$(gettext 'Make backup')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE="$(eval_gettext "\
-Usage: \$DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-t|--target DIRECTORY]
+readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] [-g|--\
+gui] [-t|--target DIRECTORY]
                  \$OPTIONS_USAGE")"
-readonly    HELP="$(eval_gettext "\
-Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext \
-"  Mandatory arguments to long options are mandatory for short options too.")
+$(gettext "  Mandatory arguments to long options are mandatory for short optio\
+ns too.")
 
 $(gettext '  -d, --dry-run  perform a test run without making any changes')
 $(gettext '  -g, --gui      starts in graphics mode')
@@ -140,8 +139,7 @@ function process_input {
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ -z $medium ]]; then
-            text=$(gettext "\
-No USB medium found.
+            text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
             msg_warning "$text"
@@ -156,8 +154,7 @@ Connect a USB medium.")
         fi
         medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            text="$(eval_gettext "\
-Connect only one USB medium.
+            text="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
 \$medium
@@ -437,8 +434,7 @@ EOF
     else
         # shellcheck disable=SC2034
         rsync_messages=$(cat "$errors")
-        msg_error "$(eval_gettext "\
-Backup ended with warnings or errors.
+        msg_error "$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable,
 or were any files added or removed while creating the backup,
@@ -458,7 +454,7 @@ use app Terminal, type 'kz backup'.")"
 # This function controls the termination of the script.
 function term_script {
     if $option_dry_run; then
-        printf  "${red}%b\n${normal}"   \
+        printf  "${red}%b\n${normal}" \
                 "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $ERROR
     fi

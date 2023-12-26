@@ -23,13 +23,12 @@ readonly    PROGRAM_NAME='kz-setup'
 readonly    PROGRAM_DESC=$(gettext 'Set up apps')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=\
-$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]
+readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat]\
+ [-f|--file FILE]
                 [-g|--gui] [-l|--list] [-r|--reset]
                 \$OPTIONS_USAGE
                 [--] [APP...]")
-readonly    HELP="\
-$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -169,15 +168,16 @@ function process_input {
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
-            printf "${red}%s\n${normal}" "$(eval_gettext \
-            "Filename must start with '\$PROGRAM_NAME-' and end with '.sh'.")"
+            printf  "${red}%s\n${normal}" \
+                    "$(eval_gettext "Filename must start with '\$PROGRAM_NAME-\
+' and end with '.sh'.")"
             exit $ERROR
         fi
         input_file=$file_argument
     fi
     if ! [[ -f $input_file ]]; then
-        msg_error \
-        "$(eval_gettext "No set up file found, looked for '\$input_file'.")"
+        msg_error "$(eval_gettext "No set up file found, looked for '\$input_f\
+ile'.")"
         exit $ERROR
     fi
 
@@ -235,12 +235,11 @@ function process_option_list {
                     --body-numbering=a; then
         printf '%s\n\n%s\n' "$(gettext '  0  No files present.')" "$USAGE_LINE"
     else
-        printf  '\n%b\n%b\n%s\n'                                            \
-                "$(eval_gettext "\
-To view the commands of FILE execute: \${blue}\$DISPLAY_NAME --cat --file \
-FILE\${normal}")"                                                           \
-                "$(eval_gettext "\
-To process FILE execute: \${blue}\$DISPLAY_NAME --file FILE\${normal}")"    \
+        printf  '\n%b\n%b\n%s\n'                \
+                "$(eval_gettext "To view the commands of FILE execute: \${blue\
+}\$DISPLAY_NAME --cat --file FILE\${normal}")"  \
+                "$(eval_gettext "To process FILE execute: \${blue}\$DISPLAY_NA\
+ME --file FILE\${normal}")"                     \
                 "$(eval_gettext "The default FILE is: \$input_file")"
     fi
 }
@@ -267,15 +266,13 @@ function process_option_apps {
 
 $USAGE_LINE"
     else
-        printf  '\n%b\n%b\n%b\n'                                        \
-                "$(eval_gettext "\
-To view the contents of the APPs set up file execute: \${blue}\$DISPLAY_NAME \
---cat APP...\${normal}")"                                               \
-                "$(eval_gettext "\
-To set up the APPs execute: \${blue}\$DISPLAY_NAME APP...\${normal}")"  \
-                "$(eval_gettext "\
-To view the contents of the default set up file execute: \${blue}\
-\$DISPLAY_NAME --cat\${normal}")"
+        printf  '\n%b\n%b\n%b\n'                            \
+                "$(eval_gettext "To view the contents of the APPs set up file \
+execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")"   \
+                "$(eval_gettext "To set up the APPs execute: \${blue}\$DISPLAY\
+_NAME APP...\${normal}")"                                   \
+                "$(eval_gettext "To view the contents of the default set up fi\
+le execute: \${blue}\$DISPLAY_NAME --cat\${normal}")"
     fi
 }
 
@@ -289,8 +286,9 @@ function process_argument_app {
         process_input_file_by_app
     done
     if $app_not_found; then
-        printf '%s\n' \
-        "$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.")"
+        printf  '%s\n' \
+                "$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available ap\
+ps.")"
         exit $ERROR
     fi
 }
@@ -395,7 +393,9 @@ function process_command_file {
     fi
 
     if ! $option_gui; then
-        printf '%s\n%s\n' 'NUM/TOT  APP' "         $(gettext 'COMMAND')..."
+        printf  '%s\n%s\n'                  \
+                "$(gettext 'NUM/TOT  APP')" \
+                "         $(gettext 'COMMAND')..."
     fi
 
     while read -r commands_record; do
@@ -466,8 +466,7 @@ function term_script {
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
         msg_error "
-$(eval_gettext "\
-The set up of the following apps contains errors:
+$(eval_gettext "The set up of the following apps contains errors:
 \$failed_apps_text
 
 Try to set up the apps again.
@@ -483,17 +482,15 @@ use app Terminal, type 'kz setup \$failed_apps_text'.")"
 ${green}$(eval_gettext "Apps \$operation completed.")${normal}"
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
-                msg_info "\
-$(gettext "You will now be logged out of the computer to finish installing \
-the apps and changing user settings.")"
+                msg_info "$(gettext "You will now be logged out of the compute\
+r to finish installing the apps and changing user settings.")"
                 if ! $option_gui; then
                     wait_for_enter
                 fi
                 gnome-session-quit --logout --no-prompt
             else
-                msg_info "$(gettext "\
-You must log out of the computer to finish installing the apps and changing \
-user settings.
+                msg_info "$(gettext "You must log out of the computer to finis\
+h installing the apps and changing user settings.
 Type 'logout' to log out.")"
                 exit $OK
             fi

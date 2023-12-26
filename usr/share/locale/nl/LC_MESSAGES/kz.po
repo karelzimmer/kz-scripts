@@ -647,8 +647,11 @@ msgstr "installeren"
 msgid "remove"
 msgstr "verwijderen"
 
-msgid "COMMAND"
-msgstr "OPDRACHT"
+msgid "NUM/TOT  APP"
+msgstr "NUM/TOT  APP"
+
+msgid "         COMMAND"
+msgstr "         OPDRACHT"
 
 msgid "No commands to execute."
 msgstr "Geen opdrachten om uit te voeren."

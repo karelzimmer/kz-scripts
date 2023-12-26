@@ -24,8 +24,7 @@ readonly    PROGRAM_DESC=$(gettext 'Distribute kz package')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    HELP="\
-$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -92,7 +91,7 @@ function check_input {
 function process_input {
     # shellcheck disable=SC2310
     if ! check_user_sudo; then
-        printf  '%s\n'  \
+        printf  '%s\n' \
                 "$(gettext 'Already performed by the administrator.')"
         term_script
     fi
@@ -112,7 +111,7 @@ function check_repos {
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            printf  "${red}%s\n${normal}"   \
+            printf  "${red}%s\n${normal}" \
                     "$(eval_gettext "Repo \$repo not on branch main.")"
             git status
             error_flag=true
@@ -124,7 +123,7 @@ function check_repos {
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            printf  "${red}%s\n${normal}"   \
+            printf  "${red}%s\n${normal}" \
                     "$(eval_gettext "Repo \$repo is not clean.")"
             git status
             error_flag=true

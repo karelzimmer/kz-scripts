@@ -24,8 +24,7 @@ readonly    PROGRAM_DESC=$(gettext 'Checking scripts')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    HELP="\
-$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -155,8 +154,8 @@ function check_code {
     else
         printf  "\n${bold}%s${normal}\n${red}%s\n${normal}" \
                 "In $scriptdir / $scriptname:"              \
-                "$(gettext \
-        "    Unknown script. Function check_code cannot check script code.")"
+                "$(gettext "    Unknown script. Function check_code cannot che\
+ck script code.")"
         error_flag=true
     fi
 }
@@ -183,8 +182,8 @@ function check_record_length {
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
         printf  "\n${bold}%s${normal}\n${red}%s\n${normal}" \
                 "In $scriptdir / $scriptname:"              \
-                "$(eval_gettext \
-    "    A line is longer than \$max_line_length (\$max_line_length_found).")"
+                "$(eval_gettext "    A line is longer than \$max_line_length (\
+\$max_line_length_found).")"
         error_flag=true
     fi
 }
@@ -238,7 +237,7 @@ function check_trailing_spaces {
                 "In $scriptdir / $scriptname:"              \
                 "$(gettext '    End spaces found.')"
         grep    --line-number --regexp=' ''$' "$script" |
-        nl      --number-width=4  --number-separator='' --body-numbering=n
+        nl      --number-width=4 --number-separator='' --body-numbering=n
         error_flag=true
     fi
 }
