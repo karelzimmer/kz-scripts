@@ -55,12 +55,12 @@ declare     text=''
 declare     title=''
 
 # Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
-declare     blue=''
-declare     bold=''
-declare     green=''
-declare     normal=''
-declare     red=''
-declare     yellow=''
+declare     blue='\033[94m'
+declare     bold='\033[1m'
+declare     green='\033[92m'
+declare     normal='\033[0m'
+declare     red='\033[91m'
+declare     yellow='\033[93m'
 
 
 ###############################################################################
@@ -168,10 +168,6 @@ function init_script {
         if ! [[ $(xhost) == *SI:localuser:root* ]]; then
             xhost +si:localuser:root |& $logcmd
         fi
-    fi
-
-    if [[ -t 1 ]]; then
-        set_terminal_attributes
     fi
 
     commandline_args=("$@")
@@ -327,17 +323,6 @@ function reset_terminal_attributes {
     normal=''
     red=''
     yellow=''
-}
-
-
-# This function sets the terminal_attributes for the CLI.
-function set_terminal_attributes {
-    red='\033[91m'
-    green='\033[92m'
-    yellow='\033[93m'
-    blue='\033[94m'
-    bold='\033[1m'
-    normal='\033[0m'
 }
 
 
