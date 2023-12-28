@@ -64,13 +64,13 @@ declare     blink='\033[5m'
 declare     reverse='\033[7m'
 declare     hidden='\033[8m'
 
-declare     red='\033[1;31m'
-declare     green='\033[1;32m'
-declare     yellow='\033[1;33m'
-declare     blue='\033[1;34m'
-declare     magenta='\033[1;35m'
-declare     cyan='\033[1;36m'
-declare     gray='\033[1;37m'
+declare     red='\033[31m'
+declare     green='\033[32m'
+declare     yellow='\033[33m'
+declare     blue='\033[34m'
+declare     magenta='\033[35m'
+declare     cyan='\033[36m'
+declare     gray='\033[37m'
 
 
 ###############################################################################
