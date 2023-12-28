@@ -37,12 +37,23 @@ MODULE_PATH = f"{os.path.realpath(os.path.dirname(__file__))}"
 OK = 0
 ERROR = 1
 
-RED = '\033[91m'
-GREEN = '\033[92m'
-YELLOW = '\033[93m'
-BLUE = '\033[94m'
-BOLD = '\033[1m'
+# Terminal attributes, see man console_codes.  Use {<variabele-name>}.
 NORMAL = '\033[0m'
+BOLD = '\033[1m'
+DIM = '\033[2m'
+ITALIC = '\033[3m'
+UNDERLINE = '\033[4m'
+BLINK = '\033[5m'
+REVERSE = '\033[7m'
+HIDDEN = '\033[8m'
+
+RED = '\033[31m'
+GREEN = '\033[32m'
+YELLOW = '\033[33m'
+BLUE = '\033[34m'
+MAGENTA = '\033[35m'
+CYAN = '\033[36m'
+GRAY = '\033[37m'
 
 
 ###############################################################################
@@ -171,7 +182,8 @@ def msg_log(PROGRAM_NAME, text):
     """
     This function records a message to the log.
     """
-    journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + text)
+    journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'PRIORITY=7',
+                  'MESSAGE=' + text)
 
 
 def msg_warning(PROGRAM_NAME, text):

@@ -54,13 +54,23 @@ declare     option_gui=false
 declare     text=''
 declare     title=''
 
-# Terminal attributes, see man terminfo.  Use ${<variabele-name>}.
-declare     blue='\033[94m'
-declare     bold='\033[1m'
-declare     green='\033[92m'
+# Terminal attributes, see man console_codes.  Use ${<variabele-name>}.
 declare     normal='\033[0m'
-declare     red='\033[91m'
-declare     yellow='\033[93m'
+declare     bold='\033[1m'
+declare     dim='\033[2m'
+declare     italic='\033[3m'
+declare     underline='\033[4m'
+declare     blink='\033[5m'
+declare     reverse='\033[7m'
+declare     hidden='\033[8m'
+
+declare     red='\033[31m'
+declare     green='\033[32m'
+declare     yellow='\033[33m'
+declare     blue='\033[34m'
+declare     magenta='\033[35m'
+declare     cyan='\033[36m'
+declare     gray='\033[37m'
 
 
 ###############################################################################
@@ -151,7 +161,7 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    logcmd="systemd-cat --identifier=$PROGRAM_NAME"
+    logcmd="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
 
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
@@ -264,8 +274,8 @@ function process_common_options {
 
 # This function shows the available help.
 function process_option_help {
-    local   man_url="\e]8;;man:$PROGRAM_NAME(1)\e\\$DISPLAY_NAME "
-            man_url+="$(gettext 'man page')\e]8;;\e\\"
+    local   man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
+            man_url+="$(gettext 'man page')\033]8;;\033\\"
 
     printf  '%s\n\n%b\n'    \
             "$HELP"         \
@@ -336,12 +346,12 @@ function signal {
     local   -i  rc=${5:-$ERROR}
     local       rc_desc=''
     local   -i  rc_desc_signalno=0
-    local       status=${red}$rc/error${normal}
+    local       status=$rc/error
 
     case $rc in
         0)
             rc_desc='successful termination'
-            status=${green}$rc/OK${normal}
+            status=$rc/OK
             ;;
         1)
             rc_desc='terminated with error'
@@ -421,8 +431,8 @@ function signal_exit {
             if [[ $rc -ne $OK ]]; then
                 msg_log  "$(gettext "If the package manager gives apt errors, \
 launch a Terminal window and execute:")
-[1] ${blue}kz update${normal}
-[2] ${blue}sudo update-initramfs -u${normal}"
+[1] \033[34mkz update\033[0m
+[2] \033[34msudo update-initramfs -u\033[0m"
             fi
             ;;
         *)

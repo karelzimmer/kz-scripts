@@ -447,7 +447,7 @@ function execute_command {
     fi
 
     msg_log "$app_name_line/$cmd_seq_num"
-    msg_log "${blue}$cmd${normal}"
+    msg_log "\033[34m$cmd\033[0m"
     eval "$cmd" |& $logcmd || failed_apps[$app_name]=$app_name
 }
 
