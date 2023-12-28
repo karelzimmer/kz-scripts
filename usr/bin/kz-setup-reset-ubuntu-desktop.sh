@@ -7,6 +7,10 @@
 ###############################################################################
 
 
+# APP anydesk USER karel@pc06
+kz-gset --delfav=anydesk
+
+
 # APP calibre USER hugo@pc-van-hugo
 kz-gset --delfav=calibre-gui
 
