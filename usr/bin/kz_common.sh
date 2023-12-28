@@ -431,8 +431,8 @@ function signal_exit {
             if [[ $rc -ne $OK ]]; then
                 msg_log  "$(gettext "If the package manager gives apt errors, \
 launch a Terminal window and execute:")
-[1] \033[34mkz update\033[0m
-[2] \033[34msudo update-initramfs -u\033[0m"
+[1] kz update
+[2] sudo update-initramfs -u"
             fi
             ;;
         *)
