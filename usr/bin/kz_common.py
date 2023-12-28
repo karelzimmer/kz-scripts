@@ -37,7 +37,7 @@ MODULE_PATH = f"{os.path.realpath(os.path.dirname(__file__))}"
 OK = 0
 ERROR = 1
 
-# Terminal attributes, see man console_codes.  Use {<variabele-name>}.
+# Terminal attributes, see man console_codes.
 NORMAL = '\033[0m'
 BOLD = '\033[1m'
 DIM = '\033[2m'
