@@ -306,7 +306,6 @@ function check_website {
 
 # This function controls the termination of the script.
 function term_script {
-    sudo --reset-timestamp
     if $error_flag; then
         printf "${red}%b\n${normal}" "$(gettext 'Fix all the messages above.')"
         exit $ERROR
