@@ -139,7 +139,6 @@ Checklist installation can be found on
     sudo --reset-timestamp
     if type gnome-shell &> /dev/null; then
         text+="\n\n$(gettext "Type 'exit' to close this window.")"
-        # clear -x
         TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                             --title     "$title"        \
                             --infobox   "$text"         \
