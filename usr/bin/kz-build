@@ -286,7 +286,7 @@ function install_package {
 
 # This function performs an installation verification procedure (IVP).
 function run_ivp {
-    printf '%b\n' "${bold}$(gettext 'Run IVP')..."
+    printf '%b\n' "$(gettext 'Run IVP')..."
     # Call kz-ivp.
     msg_log 'Calling kz-ivp...'
     kz-ivp || error_flag=true
@@ -296,7 +296,7 @@ function run_ivp {
 
 # This function checks the website for missing or not used files.
 function check_website {
-    printf '%b\n' "${bold}$(gettext 'Check website')..."
+    printf '%b\n' "$(gettext 'Check website')..."
     # Call rchecklink.
     msg_log 'Calling rchecklink...'
     rchecklink || error_flag=true
