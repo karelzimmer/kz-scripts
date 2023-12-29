@@ -148,7 +148,7 @@ Checklist installation can be found on
         printf '%s\n' "$text"
     fi
     rm --force "$HOME"/kz "$HOME"/kz.{1..99}
-    exit 0
+    exit $OK
 }
 
 
