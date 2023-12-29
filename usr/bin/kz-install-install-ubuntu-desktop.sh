@@ -61,7 +61,7 @@ sudo apt-get install --yes fdupes
 
 
 # APP force-x11 HOST
-# Force the use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
+# Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 # Force means no choice @ user login for X11 or Wayland!
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
@@ -193,7 +193,7 @@ sudo systemctl restart ssh.service
 sudo apt-get install --yes gnome-sushi
 
 
-# APP teamviewer HOST pc06
+# APP teamviewer HOST *
 # Web app: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
