@@ -79,8 +79,8 @@ def perform_command(command):
     """
     This function executes a command.
     """
-    text = _('Command {}...').format(command)
-    print(f'{text}')
+    text = _('Command {}').format(command)
+    print(f'{kz_common.BOLD}{text}{kz_common.NORMAL}')
     kz_common.check_for_active_updates()
     try:
         subprocess.run(f'{command}', shell=True, check=True)
@@ -98,8 +98,8 @@ def snap_refresh(command):
     """
     This function refreshes installed snaps.
     """
-    text = _('Command {}...').format(command)
-    print(f'{text}')
+    text = _('Command {}').format(command)
+    print(f'{kz_common.BOLD}{text}{kz_common.NORMAL}')
     kz_common.check_for_active_updates()
     try:
         subprocess.run(f'{command}', shell=True, check=True)
@@ -131,8 +131,8 @@ def snap_cleanup(command):
     """
     This function performs a snaps cleanup.
     """
-    text = _('Command {}...').format(command)
-    print(f'{text}')
+    text = _('Command {}').format(command)
+    print(f'{kz_common.BOLD}{text}{kz_common.NORMAL}')
     # Start with LANG=en_US.UTF-8 and check for disabled does not always work.
     cmd = '\
 snap list --all | \

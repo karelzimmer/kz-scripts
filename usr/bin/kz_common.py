@@ -69,7 +69,7 @@ text = ''
 
 def check_for_active_updates():
     """
-    This function checks for active updates and waits for the next check.
+    This function checks for active updates and waits for the next check if so.
     """
     check_wait = 10
 
@@ -95,8 +95,8 @@ def check_for_active_updates():
 
 def check_on_ac_power(PROGRAM_NAME):
     """
-    This function checks if the computer is running on battery power and
-    prompts the user to continue.
+    This function checks to see if the computer is running on battery power and
+    prompts the user to continue if so.
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
@@ -116,7 +116,8 @@ socket.')
 
 def check_user_root(PROGRAM_NAME, DISPLAY_NAME):
     """
-    This function checks if the user is root and asks to become user root.
+    This function checks if the user is root and asks to become user root if
+    not.
     """
     if check_user_sudo() != OK:
         print(_('Already performed by the administrator.'))

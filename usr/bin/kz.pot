@@ -883,7 +883,7 @@ msgstr ""
 msgid "Update system"
 msgstr ""
 
-msgid "Command {}..."
+msgid "Command {}"
 msgstr ""
 
 msgid ""

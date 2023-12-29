@@ -77,7 +77,7 @@ declare     gray='\033[37m'
 # Functions
 ###############################################################################
 
-# This function checks for active updates and waits for the next check.
+# This function checks for active updates and waits for the next check if so.
 function check_for_active_updates {
     local   -i  check_wait=10
     local       text=$(eval_gettext "Wait \${check_wait}s for another package \
@@ -97,8 +97,8 @@ manager to finish...")
 }
 
 
-# This function checks if the computer is running on battery power and prompts
-# the user to continue.
+# This function checks to see if the computer is running on battery power and
+# prompts the user to continue if so.
 function check_on_ac_power {
     local   -i  on_battery=0
 
@@ -115,7 +115,8 @@ It is recommended to connect the computer to the wall socket.")"
 }
 
 
-# This function checks if the user is root and restarts the script if not.
+# This function checks whether the script is started as user root and restarts
+# the script as user root if not.
 function check_user_root {
     local   -i  pkexec_rc=0
     local       program_exec=$MODULE_PATH/$PROGRAM_NAME
@@ -153,7 +154,7 @@ function check_user_sudo {
 }
 
 
-# This function performs initial actions.
+# This function performs initial actions such as set traps (script-hardening).
 function init_script {
     # Script-hardening.
     set -o errexit
@@ -337,7 +338,7 @@ function reset_terminal_attributes {
 
 
 # This function processes the signals for which the trap was set by function
-# init_script.
+# init_script (script-hardening).
 function signal {
     local       signal=${1:-unknown}
     local   -i  lineno=${2:-unknown}
