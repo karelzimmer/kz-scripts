@@ -273,7 +273,7 @@ function build_deb {
 function install_package {
     printf '%s\n' "$(gettext 'Install package')..."
     check_for_active_updates
-    # allow downgrades from version 365 to 2.4.7.
+    # Allow downgrade from previous version 365 to 2.4.7.
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
@@ -306,6 +306,7 @@ function check_website {
 
 # This function controls the termination of the script.
 function term_script {
+    sudo --reset-timestamp
     if $error_flag; then
         printf "${red}%b\n${normal}" "$(gettext 'Fix all the messages above.')"
         exit $ERROR

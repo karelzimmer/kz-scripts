@@ -123,6 +123,9 @@ def perform_cleanup():
     command = 'sudo snap cleanup'
     snap_cleanup(command)
 
+    command = 'sudo --reset-timestamp'
+    perform_command(command)
+
 
 def snap_cleanup(command):
     """
@@ -145,6 +148,8 @@ done'
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
+    else:
+        print()
 
 
 def check_reboot():

@@ -308,6 +308,7 @@ mount_nas() {
 
 # This function controls the termination of the script.
 term_script() {
+    sudo --reset-timestamp
     systemctl status "$SYSTEMD_MOUNT_FILE" || true
     msg_info "
 $(eval_gettext "The systemd mount file is activated.

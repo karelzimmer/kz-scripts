@@ -185,6 +185,7 @@ function download_website {
 
 # This function controls the termination of the script.
 function term_script {
+    sudo --reset-timestamp
     printf '%s\n' "$(gettext 'Finished')."
     exit $OK
 }
