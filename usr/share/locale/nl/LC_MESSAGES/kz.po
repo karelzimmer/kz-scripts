@@ -383,7 +383,7 @@ msgid "Build package and website"
 msgstr "Bouw pakket en website"
 
 msgid "Upload website"
-msgstr "Upload website"
+msgstr "Uploaden website"
 
 msgid "Website upload failed."
 msgstr "Uploaden website is mislukt."

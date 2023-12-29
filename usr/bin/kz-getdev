@@ -142,12 +142,12 @@ function pull_repos {
     else
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
-    printf '\n%b\n' "${bold}$(gettext 'Pull repos')${normal}"
+    printf '%b\n' "$(gettext 'Pull repos')..."
     # Call gitpull.
     msg_log 'Calling gitpull...'
     "$bin_repo"/gitpull
     msg_log 'Called gitpull.'
-    printf '\n%b\n' "${bold}$(gettext 'Status repos')${normal}"
+    printf '%b\n' "$(gettext 'Status repos')..."
     # Call gitstat.
     msg_log 'Calling gitstat...'
     "$bin_repo"/gitstat

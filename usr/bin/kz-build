@@ -160,7 +160,7 @@ function report_repos {
 
 # This function check the scripts.
 function check_scripts {
-    printf '\n%b\n' "${bold}$(gettext 'Check scripts')${normal}"
+    printf '%b\n' "$(gettext 'Check scripts')..."
     # Call kz-check.
     msg_log 'Calling kz-check...'
     "$SCRIPTS_REPO"/usr/bin/kz-check || error_flag=true
@@ -286,7 +286,7 @@ function install_package {
 
 # This function performs an installation verification procedure (IVP).
 function run_ivp {
-    printf '\n%b\n' "${bold}$(gettext 'Run IVP')${normal}"
+    printf '%b\n' "${bold}$(gettext 'Run IVP')..."
     # Call kz-ivp.
     msg_log 'Calling kz-ivp...'
     kz-ivp || error_flag=true
@@ -296,7 +296,7 @@ function run_ivp {
 
 # This function checks the website for missing or not used files.
 function check_website {
-    printf '\n%b\n' "${bold}$(gettext 'Check website')${normal}"
+    printf '%b\n' "${bold}$(gettext 'Check website')..."
     # Call rchecklink.
     msg_log 'Calling rchecklink...'
     rchecklink || error_flag=true
