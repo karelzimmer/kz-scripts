@@ -101,7 +101,6 @@ function check_input {
                     exit $ERROR
                 fi
                 option_gui=true
-                reset_terminal_attributes
                 shift
                 ;;
             --)
@@ -316,8 +315,8 @@ The NAS should be available at '\$NAS_MOUNT_POINT'.
 
 Deactivate the systemd mount file and remove the NAS login with the following \
 commands:")
-[1] ${blue}sudo systemctl disable $SYSTEMD_MOUNT_FILE${normal}
-[2] ${blue}sudo rm $NAS_LOGIN${normal}"
+[1] sudo systemctl disable $SYSTEMD_MOUNT_FILE
+[2] sudo rm $NAS_LOGIN"
     exit $OK
 }
 

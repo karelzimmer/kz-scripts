@@ -75,7 +75,6 @@ function check_input {
                     exit $ERROR
                 fi
                 option_gui=true
-                reset_terminal_attributes
                 shift
                 ;;
             --)

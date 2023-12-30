@@ -43,6 +43,23 @@ readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
             fi
 readonly    EDITION
 
+readonly    NORMAL='\033[0m'
+readonly    BOLD='\033[1m'
+readonly    DIM='\033[2m'
+readonly    ITALIC='\033[3m'
+readonly    UNDERLINE='\033[4m'
+readonly    BLINK='\033[5m'
+readonly    REVERSE='\033[7m'
+readonly    HIDDEN='\033[8m'
+
+readonly    RED='\033[31m'
+readonly    GREEN='\033[32m'
+readonly    YELLOW='\033[33m'
+readonly    BLUE='\033[34m'
+readonly    MAGENTA='\033[35m'
+readonly    CYAN='\033[36m'
+readonly    GRAY='\033[37m'
+
 
 ###############################################################################
 # Variables
@@ -53,24 +70,6 @@ declare     logcmd=''
 declare     option_gui=false
 declare     text=''
 declare     title=''
-
-# Terminal attributes, see man console_codes.  Use ${<variabele-name>}.
-declare     normal='\033[0m'
-declare     bold='\033[1m'
-declare     dim='\033[2m'
-declare     italic='\033[3m'
-declare     underline='\033[4m'
-declare     blink='\033[5m'
-declare     reverse='\033[7m'
-declare     hidden='\033[8m'
-
-declare     red='\033[31m'
-declare     green='\033[32m'
-declare     yellow='\033[33m'
-declare     blue='\033[34m'
-declare     magenta='\033[35m'
-declare     cyan='\033[36m'
-declare     gray='\033[37m'
 
 
 ###############################################################################
@@ -199,7 +198,7 @@ function msg_error {
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
     else
-        printf "${red}%b\n${normal}" "$@" >&2
+        printf "${RED}%b\n${NORMAL}" "$@" >&2
     fi
     msg_log "$@"
 }
@@ -240,7 +239,7 @@ function msg_warning {
                 --title     "$title"    \
                 --text      "$@"        2> >($logcmd) || true
     else
-        printf "${yellow}%b\n${normal}" "$@" >&2
+        printf "${YELLOW}%b\n${NORMAL}" "$@" >&2
     fi
     msg_log "$@"
 }
@@ -323,17 +322,6 @@ function process_option_version {
             "kz 2.4.7$build_id" \
             "$text"             \
             "<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
-}
-
-
-# This function resets the terminal_attributes for the GUI.
-function reset_terminal_attributes {
-    blue=''
-    bold=''
-    green=''
-    normal=''
-    red=''
-    yellow=''
 }
 
 

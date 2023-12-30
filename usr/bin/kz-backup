@@ -95,7 +95,6 @@ function check_input {
                     exit $ERROR
                 fi
                 option_gui=true
-                reset_terminal_attributes
                 shift
                 ;;
             -t|--target)
@@ -454,7 +453,7 @@ use app Terminal, type 'kz backup'.")"
 # This function controls the termination of the script.
 function term_script {
     if $option_dry_run; then
-        printf  "${red}%b\n${normal}"   \
+        printf  "$RED%b\n$NORMAL"   \
                 "$(gettext 'The backup has NOT been created (DRY RUN).')"
         exit $ERROR
     fi
@@ -462,8 +461,8 @@ function term_script {
     if [[ $target_medium == /media/* ]]; then
         term_script_unmount
     else
-        msg_info "${green}
-$(gettext 'The backup has been made.')${normal}"
+        msg_info "
+$(gettext 'The backup has been made.')"
     fi
     exit $OK
 }
@@ -505,15 +504,15 @@ function term_script_unmount {
         udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
     fi
     if [[ $rc -eq $OK ]]; then
-        msg_info "${green}
+        msg_info "
 $(gettext 'The backup has been made.')
 
-$(gettext 'The USB medium can be removed.')${normal}"
+$(gettext 'The USB medium can be removed.')"
     else
-            msg_warning "${green}
-$(gettext 'The backup has been made.')${yellow}
+            msg_warning "
+$(gettext 'The backup has been made.')
 
-$(gettext 'Disconnect the USB medium yourself (safely!).')${normal}"
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
     fi
 }
 

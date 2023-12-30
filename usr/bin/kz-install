@@ -128,7 +128,6 @@ function check_input {
                     exit $ERROR
                 fi
                 option_gui=true
-                reset_terminal_attributes
                 shift
                 ;;
             -r|--remove)
@@ -168,7 +167,7 @@ function process_input {
 
     if $option_file; then
         if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
-            printf  "${red}%s\n${normal}"   \
+            printf  "$RED%s\n$NORMAL"   \
                     "$(eval_gettext "Filename must start with '\$PROGRAM_NAME-\
 ' and end with '.sh'.")"
             exit $ERROR
@@ -237,11 +236,11 @@ function process_option_list {
                     --body-numbering=a; then
         printf '%s\n\n%s\n' "$(gettext '  0  No files present.')" "$USAGE_LINE"
     else
-        printf  "\n%b\n%b\n%s\n"                \
-                "$(eval_gettext "To view the commands of FILE execute: \${blue\
-}\$DISPLAY_NAME --cat --file FILE\${normal}")"  \
-                "$(eval_gettext "To process FILE execute: \${blue}\$DISPLAY_NA\
-ME --file FILE\${normal}")"                     \
+        printf  "\n%b\n%b\n%s\n"            \
+                "$(eval_gettext "To view the commands of FILE execute: \$BLUE\
+\$DISPLAY_NAME --cat --file FILE\$NORMAL")" \
+                "$(eval_gettext "To process FILE execute: \$BLUE\$DISPLAY_NAME\
+ --file FILE\$NORMAL")"                     \
                 "$(eval_gettext "The default FILE is: \$input_file")"
     fi
 }
@@ -266,13 +265,13 @@ function process_option_apps {
                     --body-numbering=a; then
         printf '%s\n\n%s\n' "$(gettext '  0  No apps found.')" "$USAGE_LINE"
     else
-        printf  '\n%b\n%b\n%b\n'                            \
+        printf  '\n%b\n%b\n%b\n'                        \
                 "$(eval_gettext "To view the contents of the APPs install file\
- execute: \${blue}\$DISPLAY_NAME --cat APP...\${normal}")"  \
-                "$(eval_gettext "To install the APPs execute: \${blue}\$DISPLA\
-Y_NAME APP...\${normal}")"                                  \
+ execute: \$BLUE\$DISPLAY_NAME --cat APP...\$NORMAL")"  \
+                "$(eval_gettext "To install the APPs execute: \$BLUE\$DISPLAY_\
+NAME APP...\$NORMAL")"                                  \
                 "$(eval_gettext "To view the contents of the default install f\
-ile execute: \${blue}\$DISPLAY_NAME --cat\${normal}")"
+ile execute: \$BLUE\$DISPLAY_NAME --cat\$NORMAL")"
     fi
 }
 
@@ -480,8 +479,8 @@ use app Terminal, type 'kz install \$failed_apps_text'.")"
             # shellcheck disable=SC2034
             operation=$(gettext 'remove')
         fi
-        msg_info "${green}
-$(eval_gettext "Apps \$operation completed.")${normal}"
+        msg_info "
+$(eval_gettext "Apps \$operation completed.")"
         if $reboot; then
             msg_info "$(gettext "The computer will now reboot to finish instal\
 ling the apps and changing system settings.")"

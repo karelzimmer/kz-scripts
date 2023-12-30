@@ -95,7 +95,6 @@ function check_input {
                     exit $ERROR
                 fi
                 option_gui=true
-                reset_terminal_attributes
                 shift
                 ;;
             -s|--source)
@@ -188,7 +187,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
     restore_backup
 
     if $option_dry_run; then
-        printf  "${red}%s\n${normal}"   \
+        printf  "${RED}%s\n${NORMAL}"   \
                 "$(gettext 'The backup was NOT restored (DRY RUN).')"
         exit $ERROR
     fi
@@ -316,7 +315,7 @@ function term_script {
         term_script_unmount
     else
         msg_info "
-${green}$(gettext 'The backup has been restored.')${normal}"
+$(gettext 'The backup has been restored.')"
     fi
     exit $OK
 }
@@ -359,12 +358,12 @@ function term_script_unmount {
     fi
     if [[ $rc -eq $OK ]]; then
         msg_info "
-${green}$(gettext 'The backup has been restored.')
+$(gettext 'The backup has been restored.')
 
-$(gettext 'The USB medium can be removed.')${normal}"
+$(gettext 'The USB medium can be removed.')"
     else
             msg_warning "
-${green}$(gettext 'The backup has been restored.')${yellow}
+$(gettext 'The backup has been restored.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
     fi
