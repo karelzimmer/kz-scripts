@@ -140,7 +140,7 @@ function report_repos {
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            printf  "${yellow}%s\n${normal}"    \
+            printf  "$YELLOW%s\n$NORMAL"    \
                     "$(eval_gettext "Repo \$repo not on branch main.")"
         fi
     done
@@ -150,7 +150,7 @@ function report_repos {
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            printf  "${yellow}%s\n${normal}"    \
+            printf  "$YELLOW%s\n$NORMAL"    \
                     "$(eval_gettext "Repo \$repo is not clean.")"
             git status
         fi
@@ -307,7 +307,7 @@ function check_website {
 # This function controls the termination of the script.
 function term_script {
     if $error_flag; then
-        printf "${red}%b\n${normal}" "$(gettext 'Fix all the messages above.')"
+        printf "$RED%b\n$NORMAL" "$(gettext 'Fix all the messages above.')"
         exit $ERROR
     else
         exit $OK

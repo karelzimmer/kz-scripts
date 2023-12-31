@@ -91,7 +91,7 @@ function process_input {
     # Message catalogue (gettext).
     dir=/usr/share/locale/nl/LC_MESSAGES
     if ! [[ -e $dir/kz.mo ]]; then
-        printf  "${red}%s\n${normal}"   \
+        printf  "$RED%s\n$NORMAL"   \
                 "$(eval_gettext "Message catalog \$dir/kz.mo not found.")"
     fi
 
@@ -117,7 +117,7 @@ function check_script {
 
     # Script.
     if ! "$scriptname" --version |& $logcmd; then
-        printf  "${red}%s\n${normal}"   \
+        printf  "$RED%s\n$NORMAL"   \
                 "$(eval_gettext "Script \$scriptname returned an error.")"
         error_flag=true
     fi
@@ -126,7 +126,7 @@ function check_script {
     if grep --quiet --regexp="$gui" "/usr/bin/$scriptname"; then
         dir=/usr/share/applications
         if ! [[ -e $dir/$scriptname.desktop ]]; then
-            printf  "${red}%s\n${normal}"   \
+            printf  "$RED%s\n$NORMAL"   \
                     "$(eval_gettext "Desktop configuration file \$dir/\$script\
 name.desktop not found.")"
             error_flag=true
@@ -137,7 +137,7 @@ name.desktop not found.")"
     if grep --quiet --regexp="$root" "/usr/bin/$scriptname"; then
         dir=/usr/share/polkit-1/actions
         if ! [[ -e $dir/nl.karelzimmer.$scriptname.policy ]]; then
-            printf  "${red}%s\n${normal}"   \
+            printf  "$RED%s\n$NORMAL"   \
                     "$(eval_gettext "PolicyKit action definition file \$dir/nl\
 .karelzimmer.\$scriptname.policy not found.")"
             error_flag=true
@@ -147,7 +147,7 @@ name.desktop not found.")"
     # Tab-completion script.
     dir=/usr/share/bash-completion/completions
     if ! [[ -e $dir/$scriptname ]]; then
-        printf  "${red}%s\n${normal}"   \
+        printf  "$RED%s\n$NORMAL"   \
                 "$(eval_gettext "Tab completion script \$dir/\$scriptname not \
 found.")"
         error_flag=true
@@ -156,13 +156,13 @@ found.")"
     # Manual page (EN + NL).
     dir=/usr/share/man/man1
     if ! [[ -e $dir/$scriptname.1.gz ]]; then
-        printf  "${red}%s\n${normal}"   \
+        printf  "$RED%s\n$NORMAL"   \
                 "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
         error_flag=true
     fi
     dir=/usr/share/man/nl/man1
     if ! [[ -e $dir/$scriptname.1.gz ]]; then
-        printf  "${red}%s\n${normal}"   \
+        printf  "$RED%s\n$NORMAL"   \
                 "$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")"
         error_flag=true
     fi

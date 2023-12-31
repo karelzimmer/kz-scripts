@@ -161,7 +161,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND [ARGUMENT...]${normal}"
+"To execute a COMMAND: $BLUE$DISPLAY_NAME COMMAND [ARGUMENT...]$NORMAL"
 msgstr ""
 
 msgid "Make backup"
@@ -524,18 +524,18 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs install file execute: ${blue}$DISPLAY_NAME "
-"--cat APP...${normal}"
+"To view the contents of the APPs install file execute: $BLUE$DISPLAY_NAME "
+"--cat APP...$NORMAL"
 msgstr ""
 
 #, sh-format
-msgid "To install the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
+msgid "To install the APPs execute: $BLUE$DISPLAY_NAME APP...$NORMAL"
 msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the default install file execute: "
-"${blue}$DISPLAY_NAME --cat${normal}"
+"To view the contents of the default install file execute: $BLUE$DISPLAY_NAME "
+"--cat$NORMAL"
 msgstr ""
 
 msgid "The following FILEs are present:"
@@ -549,12 +549,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the commands of FILE execute: ${blue}$DISPLAY_NAME --cat --file "
-"FILE${normal}"
+"To view the commands of FILE execute: $BLUE$DISPLAY_NAME --cat --file "
+"FILE$NORMAL"
 msgstr ""
 
 #, sh-format
-msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
+msgid "To process FILE execute: $BLUE$DISPLAY_NAME --file FILE$NORMAL"
 msgstr ""
 
 #, sh-format
@@ -860,18 +860,18 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs set up file execute: ${blue}$DISPLAY_NAME --"
-"cat APP...${normal}"
+"To view the contents of the APPs set up file execute: $BLUE$DISPLAY_NAME --"
+"cat APP...$NORMAL"
 msgstr ""
 
 #, sh-format
-msgid "To set up the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
+msgid "To set up the APPs execute: $BLUE$DISPLAY_NAME APP...$NORMAL"
 msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the default set up file execute: "
-"${blue}$DISPLAY_NAME --cat${normal}"
+"To view the contents of the default set up file execute: $BLUE$DISPLAY_NAME "
+"--cat$NORMAL"
 msgstr ""
 
 msgid "set up"

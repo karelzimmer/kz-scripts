@@ -111,7 +111,7 @@ function check_repos {
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            printf  "${red}%s\n${normal}"   \
+            printf  "$RED%s\n$NORMAL"   \
                     "$(eval_gettext "Repo \$repo not on branch main.")"
             git status
             error_flag=true
@@ -123,7 +123,7 @@ function check_repos {
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            printf  "${red}%s\n${normal}"   \
+            printf  "$RED%s\n$NORMAL"   \
                     "$(eval_gettext "Repo \$repo is not clean.")"
             git status
             error_flag=true
@@ -168,7 +168,7 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
         rm "$ftp_login"
-        printf "${red}%b\n${normal}" "$(gettext 'Website upload failed.')"
+        printf "$RED%b\n$NORMAL" "$(gettext 'Website upload failed.')"
         exit $ERROR
     fi
     sleep 5
@@ -181,7 +181,7 @@ function install_package {
     printf '%b\n' "$(gettext 'Install package kz')..."
     msg_log 'Calling kz-getdeb...'
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
-        printf "${red}%b\n${normal}" "$(gettext 'Install package kz failed.')"
+        printf "$RED%b\n$NORMAL" "$(gettext 'Install package kz failed.')"
         exit $ERROR
     fi
     msg_log 'Called kz-getdeb.'

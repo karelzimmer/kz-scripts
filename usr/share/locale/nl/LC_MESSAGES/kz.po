@@ -169,11 +169,10 @@ msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
 #, sh-format
-msgid ""
-"To execute a COMMAND: ${blue}$DISPLAY_NAME COMMAND [ARGUMENT...]${normal}"
+msgid "To execute a COMMAND: $BLUE$DISPLAY_NAME COMMAND [ARGUMENT...]$NORMAL"
 msgstr ""
-"Om een OPDRACHT uit te voeren: ${blue}$DISPLAY_NAME OPDRACHT "
-"[ARGUMENT...]${normal}"
+"Om een OPDRACHT uit te voeren: $BLUE$DISPLAY_NAME OPDRACHT "
+"[ARGUMENT...]$NORMAL"
 
 msgid "Make backup"
 msgstr "Back-up maken"
@@ -594,24 +593,23 @@ msgstr "  0  Geen apps gevonden."
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs install file execute: ${blue}$DISPLAY_NAME "
-"--cat APP...${normal}"
+"To view the contents of the APPs install file execute: $BLUE$DISPLAY_NAME "
+"--cat APP...$NORMAL"
 msgstr ""
 "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
-"${blue}$DISPLAY_NAME --cat APP...${normal}"
+"$BLUE$DISPLAY_NAME --cat APP...$NORMAL"
 
 #, sh-format
-msgid "To install the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
-msgstr ""
-"Om de APPs te installeren voer uit: ${blue}$DISPLAY_NAME APP...${normal}"
+msgid "To install the APPs execute: $BLUE$DISPLAY_NAME APP...$NORMAL"
+msgstr "Om de APPs te installeren voer uit: $BLUE$DISPLAY_NAME APP...$NORMAL"
 
 #, sh-format
 msgid ""
-"To view the contents of the default install file execute: "
-"${blue}$DISPLAY_NAME --cat${normal}"
+"To view the contents of the default install file execute: $BLUE$DISPLAY_NAME "
+"--cat$NORMAL"
 msgstr ""
 "Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
-"${blue}$DISPLAY_NAME --cat${normal}"
+"$BLUE$DISPLAY_NAME --cat$NORMAL"
 
 msgid "The following FILEs are present:"
 msgstr "De volgende BESTANDen zijn aanwezig:"
@@ -624,17 +622,16 @@ msgstr "  0  Geen bestanden gevonden."
 
 #, sh-format
 msgid ""
-"To view the commands of FILE execute: ${blue}$DISPLAY_NAME --cat --file "
-"FILE${normal}"
+"To view the commands of FILE execute: $BLUE$DISPLAY_NAME --cat --file "
+"FILE$NORMAL"
 msgstr ""
-"Om de opdrachten in BESTAND te bekijken voer uit: ${blue}$DISPLAY_NAME --cat "
-"--file BESTAND${normal}"
+"Om de opdrachten in BESTAND te bekijken voer uit: $BLUE$DISPLAY_NAME --cat "
+"--file BESTAND$NORMAL"
 
 #, sh-format
-msgid "To process FILE execute: ${blue}$DISPLAY_NAME --file FILE${normal}"
+msgid "To process FILE execute: $BLUE$DISPLAY_NAME --file FILE$NORMAL"
 msgstr ""
-"Om BESTAND te verwerken voer uit: ${blue}$DISPLAY_NAME --file "
-"BESTAND${normal}"
+"Om BESTAND te verwerken voer uit: $BLUE$DISPLAY_NAME --file BESTAND$NORMAL"
 
 #, sh-format
 msgid "The default FILE is: $input_file"
@@ -1012,24 +1009,23 @@ msgstr "Geen instelbestand gevonden, zocht '$input_file'."
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs set up file execute: ${blue}$DISPLAY_NAME --"
-"cat APP...${normal}"
+"To view the contents of the APPs set up file execute: $BLUE$DISPLAY_NAME --"
+"cat APP...$NORMAL"
 msgstr ""
 "Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
-"${blue}$DISPLAY_NAME --cat APP...${normal}"
+"$BLUE$DISPLAY_NAME --cat APP...$NORMAL"
 
 #, sh-format
-msgid "To set up the APPs execute: ${blue}$DISPLAY_NAME APP...${normal}"
-msgstr ""
-"Om de APPs te installeren voer uit: ${blue}$DISPLAY_NAME APP...${normal}"
+msgid "To set up the APPs execute: $BLUE$DISPLAY_NAME APP...$NORMAL"
+msgstr "Om de APPs te installeren voer uit: $BLUE$DISPLAY_NAME APP...$NORMAL"
 
 #, sh-format
 msgid ""
-"To view the contents of the default set up file execute: "
-"${blue}$DISPLAY_NAME --cat${normal}"
+"To view the contents of the default set up file execute: $BLUE$DISPLAY_NAME "
+"--cat$NORMAL"
 msgstr ""
 "Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
-"${blue}$DISPLAY_NAME --cat${normal}"
+"$BLUE$DISPLAY_NAME --cat$NORMAL"
 
 msgid "set up"
 msgstr "instellen"

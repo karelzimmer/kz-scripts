@@ -363,8 +363,8 @@ function report_database_changes {
 > is the new setting (B):")"
     diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
     printf  '\n%b\n'    \
-            "$(gettext "When CHANGEs execute:") ${blue}gsettings set CHANGE${n\
-ormal}"
+            "$(gettext "When CHANGEs execute:") ${BLUE}gsettings set CHANGE$NO\
+RMAL"
 }
 
 
