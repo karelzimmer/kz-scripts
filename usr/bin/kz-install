@@ -394,7 +394,7 @@ function process_command_file {
     if ! $option_gui; then
         printf  '%s\n%s\n'                  \
                 "$(gettext 'NUM/TOT  APP')" \
-                "$(gettext '         COMMAND')..."
+                "         $(gettext 'COMMAND')..."
     fi
 
     while read -r commands_record; do

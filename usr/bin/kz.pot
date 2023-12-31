@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-12-29 08:45+0100\n"
+"POT-Creation-Date: 2023-12-31 09:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,8 +160,7 @@ msgid "NUM  COMMAND"
 msgstr ""
 
 #, sh-format
-msgid ""
-"To execute a COMMAND: $BLUE$DISPLAY_NAME COMMAND [ARGUMENT...]$NORMAL"
+msgid "To execute a COMMAND: $BLUE$DISPLAY_NAME COMMAND [ARGUMENT...]$NORMAL"
 msgstr ""
 
 msgid "Make backup"
@@ -524,8 +523,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs install file execute: $BLUE$DISPLAY_NAME "
-"--cat APP...$NORMAL"
+"To view the contents of the APPs install file execute: $BLUE$DISPLAY_NAME --"
+"cat APP...$NORMAL"
 msgstr ""
 
 #, sh-format
@@ -570,7 +569,7 @@ msgstr ""
 msgid "NUM/TOT  APP"
 msgstr ""
 
-msgid "         COMMAND"
+msgid "COMMAND"
 msgstr ""
 
 msgid "No commands to execute."
