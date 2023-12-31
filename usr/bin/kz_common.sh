@@ -24,24 +24,8 @@ readonly    MODULE_NAME='kz_common.sh'
 readonly    MODULE_DESC=$(gettext 'Common module for shell scripts')
 readonly    MODULE_PATH=$(dirname "$(realpath "$0")")
 
-readonly    OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
-readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
-$(gettext '  -u, --usage    give a short usage message')
-$(gettext '  -v, --version  print program version')"
-
-readonly    OPTIONS_SHORT='huv'
-readonly    OPTIONS_LONG='help,usage,version'
-
 readonly    OK=0
 readonly    ERROR=1
-
-readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-            if type gnome-shell &> /dev/null; then
-                EDITION='desktop'
-            else
-                EDITION='server'
-            fi
-readonly    EDITION
 
 readonly    NORMAL='\033[0m'
 readonly    BOLD='\033[1m'
@@ -59,6 +43,22 @@ readonly    BLUE='\033[34m'
 readonly    MAGENTA='\033[35m'
 readonly    CYAN='\033[36m'
 readonly    GRAY='\033[37m'
+
+readonly    OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
+readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
+$(gettext '  -u, --usage    give a short usage message')
+$(gettext '  -v, --version  print program version')"
+
+readonly    OPTIONS_SHORT='huv'
+readonly    OPTIONS_LONG='help,usage,version'
+
+readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+            if type gnome-shell &> /dev/null; then
+                EDITION='desktop'
+            else
+                EDITION='server'
+            fi
+readonly    EDITION
 
 
 ###############################################################################
