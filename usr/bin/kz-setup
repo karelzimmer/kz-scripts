@@ -37,7 +37,7 @@ $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext '  -f, --file FILE
                  process FILE')
-$(gettext '  -g, --gui      starts in graphics mode')
+$(gettext '  -g, --gui      starts in graphical mode')
 $(gettext '  -l, --list     show list of files')
 $(gettext '  -r, --reset    set apps on default values')
 $OPTIONS_HELP

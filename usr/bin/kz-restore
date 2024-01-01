@@ -35,7 +35,7 @@ $(gettext "  Mandatory arguments to long options are mandatory for short optio\
 ns too.")
 
 $(gettext '  -d, --dry-run  perform a test run without making any changes')
-$(gettext '  -g, --gui      starts in graphics mode')
+$(gettext '  -g, --gui      starts in graphical mode')
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')
 $OPTIONS_HELP"

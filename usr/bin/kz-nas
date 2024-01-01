@@ -30,7 +30,7 @@ readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -g, --gui      starts in graphics mode')
+$(gettext '  -g, --gui      starts in graphical mode')
 $OPTIONS_HELP"
 
 readonly    X_OPTIONS_SHORT='g'
@@ -118,6 +118,12 @@ function check_input {
         printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
                 "$(gettext 'arguments are not allowed')"
         exit $ERROR
+    fi
+
+    # Needed if started as user root in graphical mode.
+    if $option_gui; then
+        xhost +si:localuser:root |& $logcmd
+        export DISPLAY=:0.0
     fi
 
     check_user_root

@@ -30,7 +30,7 @@ readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -g, --gui      starts in graphics mode')
+$(gettext '  -g, --gui      starts in graphical mode')
 $OPTIONS_HELP"
 
 readonly    X_OPTIONS_SHORT='g'

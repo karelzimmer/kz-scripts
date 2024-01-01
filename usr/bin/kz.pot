@@ -182,7 +182,7 @@ msgstr ""
 msgid "  -d, --dry-run  perform a test run without making any changes"
 msgstr ""
 
-msgid "  -g, --gui      starts in graphics mode"
+msgid "  -g, --gui      starts in graphical mode"
 msgstr ""
 
 msgid ""

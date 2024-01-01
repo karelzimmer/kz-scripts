@@ -37,7 +37,7 @@ $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext '  -f, --file FILE
                  process FILE')
-$(gettext '  -g, --gui      starts in graphics mode')
+$(gettext '  -g, --gui      starts in graphical mode')
 $(gettext '  -l, --list     show list of files')
 $(gettext '  -r, --remove   delete apps')
 $OPTIONS_HELP
@@ -198,6 +198,12 @@ file'.")"
     if $option_cat; then
         process_option_cat
         exit $OK
+    fi
+
+    # Needed if started as user root in graphical mode.
+    if $option_gui; then
+        xhost +si:localuser:root |& $logcmd
+        export DISPLAY=:0.0
     fi
 
     check_user_root

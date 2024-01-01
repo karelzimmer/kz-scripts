@@ -196,7 +196,7 @@ msgid "  -d, --dry-run  perform a test run without making any changes"
 msgstr ""
 "  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen"
 
-msgid "  -g, --gui      starts in graphics mode"
+msgid "  -g, --gui      starts in graphical mode"
 msgstr "  -g, --gui      start in grafische modus"
 
 msgid ""

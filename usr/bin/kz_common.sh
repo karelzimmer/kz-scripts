@@ -173,13 +173,6 @@ function init_script {
     msg_log "==== START log $PROGRAM_NAME ====\nstarted ($MODULE_PATH/$PROGRAM\
 _NAME $* as $USER)"
 
-    # Setting xhost is needed on Debian for GUI root scripts like kz-install.
-    if [[ $DISTRO = 'debian' && $EDITION = 'desktop' && $UID -ne 0 ]]; then
-        if ! [[ $(xhost) == *SI:localuser:root* ]]; then
-            xhost +si:localuser:root |& $logcmd
-        fi
-    fi
-
     commandline_args=("$@")
     USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more informat\
 ion.")
