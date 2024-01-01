@@ -5,7 +5,7 @@ This module provides general variables and functions.
 # Common module for Python scripts.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2023.
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2024.
 ###############################################################################
 
 

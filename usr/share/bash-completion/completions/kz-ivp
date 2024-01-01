@@ -3,7 +3,7 @@
 # Tab-completion-script for kz-ivp.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2023-2024.
 ###############################################################################
 
 dashoptions='-h --help -u --usage -v --version'
