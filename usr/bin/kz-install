@@ -200,7 +200,7 @@ file'.")"
         exit $OK
     fi
 
-    # Needed if started as user root in graphical mode.
+    # Needed if started in graphical mode as user root.
     if $option_gui; then
         xhost +si:localuser:root |& $logcmd
         export DISPLAY=:0.0
