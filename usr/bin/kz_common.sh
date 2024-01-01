@@ -174,8 +174,8 @@ function init_script {
 _NAME $* as $USER)"
 
     commandline_args=("$@")
-    USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more informat\
-ion.")
+    readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
+ information.")
 }
 
 
