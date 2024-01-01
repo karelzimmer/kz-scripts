@@ -53,6 +53,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
+
 # APP google-chrome USER *
 kz-gset --addfavbef=google-chrome
 

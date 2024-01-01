@@ -54,6 +54,7 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
 gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
+
 # APP google-chrome USER *
 kz-gset --delfav=google-chrome
 

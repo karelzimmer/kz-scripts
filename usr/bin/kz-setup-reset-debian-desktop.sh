@@ -50,6 +50,7 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-t
 gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
+
 # APP google-chrome USER *
 kz-gset --delfav=google-chrome
 
