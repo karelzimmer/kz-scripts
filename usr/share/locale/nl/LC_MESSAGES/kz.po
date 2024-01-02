@@ -1036,9 +1036,6 @@ msgstr "resetten"
 msgid "Update system"
 msgstr "Systeem bijwerken"
 
-msgid "Command {}"
-msgstr "Opdracht {}"
-
 msgid ""
 "*** The computer must restart to complete the installation of updates ***"
 msgstr ""
