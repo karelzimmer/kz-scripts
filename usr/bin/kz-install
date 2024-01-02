@@ -200,12 +200,6 @@ file'.")"
         exit $OK
     fi
 
-    # Needed if started in graphical mode as user root.
-    if $option_gui; then
-        xhost +si:localuser:root |& $logcmd
-        export DISPLAY=:0.0
-    fi
-
     check_user_root
     check_on_ac_power
     if $option_gui; then

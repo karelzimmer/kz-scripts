@@ -127,6 +127,8 @@ function check_user_root {
     fi
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
+            xhost +si:localuser:root |& $logcmd
+            export DISPLAY=:0.0
             msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc

@@ -120,12 +120,6 @@ function check_input {
         exit $ERROR
     fi
 
-    # Needed if started in graphical mode as user root.
-    if $option_gui; then
-        xhost +si:localuser:root |& $logcmd
-        export DISPLAY=:0.0
-    fi
-
     check_user_root
     request_input
 }
