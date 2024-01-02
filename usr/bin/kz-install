@@ -472,7 +472,6 @@ $(eval_gettext "The installation of the following apps contains errors:
 Try installing the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz install \$failed_apps_text'.")"
-        sudo --reset-timestamp
         exit $ERROR
     else
         if $option_remove; then
@@ -489,7 +488,6 @@ ling the apps and changing system settings.")"
             fi
             sudo systemctl reboot
         fi
-        sudo --reset-timestamp
     fi
     exit $OK
 }

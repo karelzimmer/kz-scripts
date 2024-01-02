@@ -136,7 +136,6 @@ in the Checklist installation.
 Checklist installation can be found on
 \$website_url, under Linux.")
 
-    sudo --reset-timestamp
     if type gnome-shell &> /dev/null; then
         text+="\n\n$(gettext "Type 'exit' to close this window.")"
         clear -x
