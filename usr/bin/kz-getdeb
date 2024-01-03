@@ -107,10 +107,12 @@ function install_package {
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
-    chmod o+r "$temp_deb"
+    chmod o+r "$temp_deb" |& $logcmd
 
-    wget --output-document="$temp_deb" $site_deb
+    printf '%s\n' "$(gettext 'Download package kz')..."
+    wget --output-document="$temp_deb" $site_deb |& $logcmd
 
+    printf '%s\n' "$(gettext 'Install package kz')..."
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -118,8 +120,8 @@ function install_package {
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "$temp_deb"
-    rm  "$temp_deb"
+            "$temp_deb"                     |& $logcmd
+    rm  "$temp_deb" |& $logcmd
 }
 
 
