@@ -178,7 +178,7 @@ function process_menu1_gui {
                     FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_COMMANDS[3]}"    \
                     FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_COMMANDS[4]}"    \
                     FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_COMMANDS[5]}"    \
-                    2> >($logcmd)
+                    2> >($LOGCMD)
             ) || exit $OK
         process_menu1_choice
     done
@@ -335,7 +335,7 @@ function process_menu2_gui {
                     FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"    \
                     FALSE 6 "${MENU2_ACTIONS[6]}" "${MENU2_COMMANDS[6]}"    \
                     FALSE 7 "${MENU2_ACTIONS[7]}" "${MENU2_COMMANDS[7]}"    \
-                    2> >($logcmd)
+                    2> >($LOGCMD)
             ) || break
         process_menu2_choice
     done
@@ -501,7 +501,7 @@ $prompt"
                     --title         "$title"            \
                     --text          "$text"             \
                     --ok-label      "$(gettext 'Yes')"  \
-                    --cancel-label  "$(gettext 'No')"   2> >($logcmd); then
+                    --cancel-label  "$(gettext 'No')"   2> >($LOGCMD); then
             execute_command=true
         else
             execute_command=false

@@ -141,7 +141,7 @@ function process_input {
         source=$source_argument/backup-$HOSTNAME-$USER
         source_medium=$source_argument
     else
-        medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
         if [[ -z $medium ]]; then
         text="$(gettext "No USB medium found.
 
@@ -150,7 +150,7 @@ Connect a USB medium.")"
             if ! $option_gui; then
                 wait_for_enter
             fi
-            medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
                  msg_error "$text"
             exit $ERROR
@@ -204,7 +204,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
                     --width     600         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     2> >($logcmd)
+                    --text      "$text"     2> >($LOGCMD)
         else
             printf '%s\n' "$text..."
             restore_settings
@@ -252,7 +252,7 @@ function restore_backup {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$text"     2> >($logcmd) || restore_rc=$?
+                --text      "$text"     2> >($LOGCMD) || restore_rc=$?
     else
         printf '%s\n' "$text..."
         rsync   --archive               \
@@ -273,10 +273,10 @@ function restore_backup {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$text"     &> >($logcmd)
+                --text      "$text"     &> >($LOGCMD)
     else
         printf '\n%s\n' "$text..."
-        sync |& $logcmd
+        sync |& $LOGCMD
     fi
 }
 
@@ -338,9 +338,9 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
-        umount "$source_medium"                     |& $logcmd || rc+=$?;   \
-        udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?;   \
-        udisksctl power-off --block-device "$dev"   |& $logcmd              |
+        umount "$source_medium"                     |& $LOGCMD || rc+=$?;   \
+        udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
+        udisksctl power-off --block-device "$dev"   |& $LOGCMD              |
         zenity  --progress                                                  \
                 --pulsate                                                   \
                 --auto-close                                                \
@@ -349,12 +349,12 @@ function term_script_unmount {
                 --height    50                                              \
                 --title     "$title"                                        \
                 --text      "$text"                                         \
-                2> >($logcmd) || rc=$?
+                2> >($LOGCMD) || rc=$?
     else
         printf '%s\n' "$text..."
-        umount "$source_medium"                     |& $logcmd || rc+=$?
-        udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?
-        udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
+        umount "$source_medium"                     |& $LOGCMD || rc+=$?
+        udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
+        udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
     fi
     if [[ $rc -eq $OK ]]; then
         msg_info "

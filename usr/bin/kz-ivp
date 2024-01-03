@@ -116,7 +116,7 @@ function check_script {
     local   root=' kz_common.''c''h''e''c''k''_''u''s''e''r''_''r''o''o''t'
 
     # Script.
-    if ! "$scriptname" --version |& $logcmd; then
+    if ! "$scriptname" --version |& $LOGCMD; then
         printf  "$RED%s\n$NORMAL"   \
                 "$(eval_gettext "Script \$scriptname returned an error.")"
         error_flag=true

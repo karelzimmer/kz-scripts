@@ -215,7 +215,7 @@ file'.")"
                     --width     700         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     2> >($logcmd)
+                    --text      "$text"     2> >($LOGCMD)
             )
     else
         process_command_file
@@ -229,7 +229,7 @@ function process_option_list {
             "$(gettext 'The following FILEs are present:')" \
             "$(gettext 'NUM  FILE')"
     if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"*'.sh'    \
-                    2> >($logcmd)                           |
+                    2> >($LOGCMD)                           |
             nl      --number-width=3                        \
                     --number-format=rn                      \
                     --number-separator='  '                 \
@@ -448,7 +448,7 @@ function execute_command {
 
     msg_log "$app_name_line/$cmd_seq_num\n$cmd"
     check_for_active_updates
-    eval "$cmd" |& $logcmd || failed_apps[$app_name]=$app_name
+    eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
 }
 
 

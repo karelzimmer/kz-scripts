@@ -103,7 +103,7 @@ function process_input {
 twork later.")
 
     if $option_gui; then
-        if nmcli_output=$(nmcli device wifi show-password 2> >($logcmd)); then
+        if nmcli_output=$(nmcli device wifi show-password 2> >($LOGCMD)); then
             msg_info "$(gettext 'WiFi data:')
 
 $nmcli_output
@@ -115,7 +115,7 @@ $text"
     else
         printf '%s\n\n' "$(gettext 'WiFi data:')"
         # Shows QR code for quick connection to Wi-Fi network.
-        nmcli device wifi show-password 2> >($logcmd) || nmcli_rc=$?
+        nmcli device wifi show-password 2> >($LOGCMD) || nmcli_rc=$?
         if [[ $nmcli_rc -eq 0 ]]; then
             printf '\n%s\n' "$text"
         else

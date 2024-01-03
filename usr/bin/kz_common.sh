@@ -66,7 +66,7 @@ readonly    EDITION
 ###############################################################################
 
 declare -a  commandline_args=()
-declare     logcmd=''
+declare     LOGCMD=''
 declare     option_gui=false
 declare     text=''
 declare     title=''
@@ -87,7 +87,7 @@ function become_root {
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
             export DISPLAY=:0.0
-            xhost +si:localuser:root |& $logcmd
+            xhost +si:localuser:root |& $LOGCMD
             msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
@@ -140,7 +140,7 @@ manager to finish...")
 function check_on_ac_power {
     local   -i  on_battery=0
 
-    on_ac_power |& $logcmd || on_battery=$?
+    on_ac_power |& $LOGCMD || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
         msg_warning "$(gettext "The computer now uses only the battery for pow\
 er.
@@ -161,7 +161,7 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    logcmd="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
+    readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
 
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
@@ -189,7 +189,7 @@ function msg_error {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
+                --text      "$@"        2> >($LOGCMD) || true
     else
         printf "$RED%b\n$NORMAL" "$@" >&2
     fi
@@ -207,7 +207,7 @@ function msg_info {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
+                --text      "$@"        2> >($LOGCMD) || true
     else
         printf '%b\n' "$@"
     fi
@@ -216,7 +216,7 @@ function msg_info {
 
 # This function records a message to the log.
 function msg_log {
-    printf '%b\n' "$@" |& $logcmd
+    printf '%b\n' "$@" |& $LOGCMD
 }
 
 
@@ -230,7 +230,7 @@ function msg_warning {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        2> >($logcmd) || true
+                --text      "$@"        2> >($LOGCMD) || true
     else
         printf "$YELLOW%b\n$NORMAL" "$@" >&2
     fi

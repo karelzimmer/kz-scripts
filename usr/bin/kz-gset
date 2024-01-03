@@ -341,7 +341,7 @@ function save_configuration_database {
     local   fase=${1:-unknown}
     local   output_file=${2:-unknown}
 
-    gsettings list-recursively > "$output_file" 2> >($logcmd)
+    gsettings list-recursively > "$output_file" 2> >($LOGCMD)
 
     sort    --unique                \
             --output="$output_file" \

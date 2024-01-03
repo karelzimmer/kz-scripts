@@ -136,7 +136,7 @@ function process_input {
         target=$target_argument/backup-$HOSTNAME-$USER
         target_medium=$target_argument
     else
-        medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
         if [[ -z $medium ]]; then
             text=$(gettext "No USB medium found.
 
@@ -145,13 +145,13 @@ Connect a USB medium.")
             if ! $option_gui; then
                 wait_for_enter
             fi
-            medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
                 msg_error "$text"
                 exit $ERROR
             fi
         fi
-        medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text="$(eval_gettext "Connect only one USB medium.
 
@@ -163,7 +163,7 @@ Disconnect media via Files.")"
             if ! $option_gui; then
                 wait_for_enter
             fi
-            medium=$(ls --directory /media/"$USER"/* 2> >($logcmd) || true)
+            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 msg_error "$text"
                 exit $ERROR
@@ -188,7 +188,7 @@ Disconnect media via Files.")"
                         --width     600         \
                         --height    50          \
                         --title     "$title"    \
-                        --text      "$text"     2> >($logcmd)
+                        --text      "$text"     2> >($LOGCMD)
             else
                 printf '%s\n' "$text..."
                 backup_settings
@@ -233,7 +233,7 @@ function migrate_settings_previously_backuped {
 
     rmdir   "$HOME"/kz-data         \
             "$HOME"/Instellingen    \
-            "$HOME"/Settings        |& $logcmd || true
+            "$HOME"/Settings        |& $LOGCMD || true
 }
 
 
@@ -260,7 +260,7 @@ function backup_settings_desktop_background {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp --preserve "$input_file" "$output_file" |& $logcmd || true
+    cp --preserve "$input_file" "$output_file" |& $LOGCMD || true
 }
 
 
@@ -276,7 +276,7 @@ function backup_settings_favorite_apps {
 
     gsettings   get                             \
                 org.gnome.shell favorite-apps   \
-                > "$output_file"                |& $logcmd || true
+                > "$output_file"                |& $LOGCMD || true
 }
 
 
@@ -298,11 +298,11 @@ function backup_settings_installed_apps {
     fi
 
     printf '%s\n' "$header1" > "$output_file"
-    apt list --manual-installed 2> >($logcmd) >> "$output_file" || true
+    apt list --manual-installed 2> >($LOGCMD) >> "$output_file" || true
     printf '%s\n' "$footer1" >> "$output_file"
 
     printf '\n%s\n' "$header2" >> "$output_file"
-    if ! snap list 2> >($logcmd) >> "$output_file"; then
+    if ! snap list 2> >($LOGCMD) >> "$output_file"; then
         printf '%s\n' "$(gettext 'snap is not installed')" >> "$output_file"
     fi
     printf '%s\n' "$footer2" >> "$output_file"
@@ -333,7 +333,7 @@ function backup_settings_user_photo {
         return $OK
     fi
 
-    cp --preserve "$input_file" "$output_file" |& $logcmd || true
+    cp --preserve "$input_file" "$output_file" |& $LOGCMD || true
 }
 
 
@@ -399,7 +399,7 @@ EOF
                 --width     600             \
                 --height    50              \
                 --title     "$title"        \
-                --text      "$text"         2> >($logcmd) || backup_rc=$?
+                --text      "$text"         2> >($LOGCMD) || backup_rc=$?
     else
         printf '%s\n' "$text..."
         rsync   --archive                   \
@@ -425,10 +425,10 @@ EOF
                     --width     600         \
                     --height    50          \
                     --title     "$title"    \
-                    --text      "$text"     &> >($logcmd)
+                    --text      "$text"     &> >($LOGCMD)
         else
             printf '\n%s\n' "$text..."
-            sync |& $logcmd
+            sync |& $LOGCMD
         fi
     else
         # shellcheck disable=SC2034
@@ -485,9 +485,9 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
-        umount "$target_medium"                     |& $logcmd || rc+=$?;   \
-        udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?;   \
-        udisksctl power-off --block-device "$dev"   |& $logcmd              |
+        umount "$target_medium"                     |& $LOGCMD || rc+=$?;   \
+        udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
+        udisksctl power-off --block-device "$dev"   |& $LOGCMD              |
         zenity  --progress                                                  \
                 --pulsate                                                   \
                 --auto-close                                                \
@@ -496,12 +496,12 @@ function term_script_unmount {
                 --height    50                                              \
                 --title     "$title"                                        \
                 --text      "$text"                                         \
-                2> >($logcmd) || rc+=$?
+                2> >($LOGCMD) || rc+=$?
     else
         printf '%s\n' "$text..."
-        umount "$target_medium"                     |& $logcmd || rc+=$?
-        udisksctl lock --block-device "$dev"        |& $logcmd || rc+=$?
-        udisksctl power-off --block-device "$dev"   |& $logcmd || rc+=$?
+        umount "$target_medium"                     |& $LOGCMD || rc+=$?
+        udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
+        udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
     fi
     if [[ $rc -eq $OK ]]; then
         msg_info "

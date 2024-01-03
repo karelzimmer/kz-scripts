@@ -155,7 +155,7 @@ function upload_website {
         read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login" |& $logcmd
+        chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
     if ! lftp   --user      "$ftp_user"             \
                 --password  "$(cat "$ftp_login")"   \
@@ -174,7 +174,7 @@ function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
     printf '%b\n' "$(gettext 'Install package kz')..."
     msg_log 'Calling kz-getdeb...'
-    if ! wget --output-document=- karelzimmer.nl/kz 2> >($logcmd) | bash; then
+    if ! wget --output-document=- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
         printf "$RED%b\n$NORMAL" "$(gettext 'Install package kz failed.')"
         exit $ERROR
     fi

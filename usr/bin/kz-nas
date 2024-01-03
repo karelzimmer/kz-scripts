@@ -142,7 +142,7 @@ ch as \$nas_ip_address?")
                     --width     400         \
                     --height    100         \
                     --title     "$title"    \
-                    --text      "$text"     2> >($logcmd); then
+                    --text      "$text"     2> >($LOGCMD); then
             title=$(gettext 'Notification')
             text=$NAS_FIXED_IP_ADDRESS
             zenity  --info                  \
@@ -150,7 +150,7 @@ ch as \$nas_ip_address?")
                     --width     500         \
                     --height    100         \
                     --title     "$title"    \
-                    --text      "$text"     2> >($logcmd) || true
+                    --text      "$text"     2> >($LOGCMD) || true
             exit $OK
         fi
     else
@@ -182,7 +182,7 @@ ch as \$nas_ip_address?")
                     --add-entry     "$quest2"   \
                     --add-entry     "$quest3"   \
                     --add-password  "$quest4"   \
-                    --add-entry     "$quest5"   2> >($logcmd)
+                    --add-entry     "$quest5"   2> >($LOGCMD)
 	        ) || exit $OK
         nas_ip_address=$(   printf '%s' "$REPLY" | awk -F, '{print $1}')
         nas_user_name=$(    printf '%s' "$REPLY" | awk -F, '{print $2}')
@@ -250,7 +250,7 @@ process_input() {
                 --width     600         \
                 --height    50          \
                 --title     "$title"    \
-                --text      "$text0"    2> >($logcmd)
+                --text      "$text0"    2> >($LOGCMD)
     else
         printf '\n%s\n' "$text1..."
         check_dependencies
@@ -276,7 +276,7 @@ create_nas_login() {
     text="username=$nas_user_name\npassword=$nas_password"
     rm --force $$NAS_LOGIN_DIR/$PROGRAM_NAME*
     printf '%b\n' "$text" > "$NAS_LOGIN"
-    chmod '600' "$NAS_LOGIN" |& $logcmd
+    chmod '600' "$NAS_LOGIN" |& $LOGCMD
 }
 
 
@@ -299,9 +299,9 @@ WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 
 # This function allows the NAS to be connected ad hoc.
 mount_nas() {
-    systemctl enable "$SYSTEMD_MOUNT_FILE" |& $logcmd
-    systemctl start "$SYSTEMD_MOUNT_FILE" |& $logcmd || true
-    systemctl daemon-reload |& $logcmd
+    systemctl enable "$SYSTEMD_MOUNT_FILE" |& $LOGCMD
+    systemctl start "$SYSTEMD_MOUNT_FILE" |& $LOGCMD || true
+    systemctl daemon-reload |& $LOGCMD
 }
 
 

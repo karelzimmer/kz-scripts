@@ -178,11 +178,11 @@ function build_uploads {
             --verbose               \
             --checksum              \
             "$UPLOADS_REPO_APPDIR"/ \
-            "$UPLOADS_REPO_DISTDIR" |& $logcmd
+            "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
 
     # Make sure all necessary directories are available.
     for dir in "${UPLOADS_TARGETS[@]}"; do
-        mkdir --parents "$dir" |& $logcmd
+        mkdir --parents "$dir" |& $LOGCMD
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
@@ -226,7 +226,7 @@ function build_deb {
             --exclude='.git*'       \
             --delete-excluded       \
             "${DEB_SOURCES[app]}"/  \
-            "${DEB_TARGETS[dist]}"  |& $logcmd
+            "${DEB_TARGETS[dist]}"  |& $LOGCMD
 
     # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive                       \
@@ -238,18 +238,18 @@ function build_deb {
             --exclude='kz.po'               \
             --exclude='kz.pot'              \
             "${DEB_SOURCES[kz-scripts]}"/   \
-            "${DEB_TARGETS[dist]}"          |& $logcmd
+            "${DEB_TARGETS[dist]}"          |& $LOGCMD
 
     # Compress man pages.
     gzip    --best                      \
             --force                     \
             "${DEB_TARGETS[man_en]}"/*  \
-            "${DEB_TARGETS[man_nl]}"/*  |& $logcmd
+            "${DEB_TARGETS[man_nl]}"/*  |& $LOGCMD
 
     # Capture build id Debian package.
     build_id=$(date '+%Y-%m-%dT%H:%M')
-    mkdir --parents "${DEB_TARGETS[build]}" |& $logcmd
-    rm --force "${DEB_TARGETS[build]}"/$PROGRAM_NAME* |& $logcmd
+    mkdir --parents "${DEB_TARGETS[build]}" |& $LOGCMD
+    rm --force "${DEB_TARGETS[build]}"/$PROGRAM_NAME* |& $LOGCMD
     printf '%s' "$build_id" > "${DEB_TARGETS[build]}"/$PROGRAM_NAME.id
 
     # Create Debian package in kz-uploads.
@@ -259,7 +259,7 @@ function build_deb {
                 --build                             \
                 -Zxz                                \
                 "$DEB_REPO_DISTDIR"                 \
-                "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $logcmd
+                "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
 }
 
 
@@ -274,7 +274,7 @@ function install_package {
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $logcmd
+            "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
 }
 
 
