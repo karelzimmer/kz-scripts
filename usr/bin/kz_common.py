@@ -66,6 +66,48 @@ text = ''
 # Functions
 ###############################################################################
 
+def become_root(PROGRAM_NAME, DISPLAY_NAME):
+    """
+    This function checks if the user is root and asks to become user root if
+    not.
+    """
+    become_root_check()
+
+    try:
+        subprocess.run('sudo true', shell=True, check=True)
+    except KeyboardInterrupt as kbdint:
+        text = str(kbdint)
+        msg_log(PROGRAM_NAME, text)
+        text = _('Program {} has been interrupted.').\
+            format(PROGRAM_NAME)
+        msg_error(PROGRAM_NAME, text)
+        sys.exit(ERROR)
+    except Exception as exc:
+        text = str(exc)
+        msg_log(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').\
+            format(PROGRAM_NAME)
+        msg_error(PROGRAM_NAME, text)
+        sys.exit(ERROR)
+
+
+def become_root_check():
+    """
+    This function checks if the user is allowed to become root and returns 0 if
+    so, otherwise exits 1.
+    """
+    if os.getuid() == 0:
+        return(OK)
+    try:
+        subprocess.run('sudo true', shell=True, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        print(_('Already performed by the administrator.'))
+        sys.exit(OK)
+    else:
+        return(OK)
+
+
 def check_for_active_updates():
     """
     This function checks for active updates and waits for the next check if so.
@@ -111,55 +153,6 @@ socket.')
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
-
-
-def check_user_root(PROGRAM_NAME, DISPLAY_NAME):
-    """
-    This function checks if the user is root and asks to become user root if
-    not.
-    """
-    if check_user_sudo() != OK:
-        print(_('Already performed by the administrator.'))
-        sys.exit(OK)
-    else:
-        try:
-            subprocess.run('sudo -n true', shell=True, check=True,
-                           stdout=subprocess.DEVNULL,
-                           stderr=subprocess.DEVNULL)
-        except Exception:
-            try:
-                subprocess.run('sudo true', shell=True, check=True)
-            except KeyboardInterrupt as kbdint:
-                text = str(kbdint)
-                msg_log(PROGRAM_NAME, text)
-                text = _('Program {} has been interrupted.').\
-                    format(PROGRAM_NAME)
-                msg_error(PROGRAM_NAME, text)
-                sys.exit(ERROR)
-            except Exception as exc:
-                text = str(exc)
-                msg_log(PROGRAM_NAME, text)
-                text = _('Program {} encountered an error.').\
-                    format(PROGRAM_NAME)
-                msg_error(PROGRAM_NAME, text)
-                sys.exit(ERROR)
-
-
-def check_user_sudo():
-    """
-    This function checks if the user is allowed to use sudo and exits 0 if so,
-    otherwise exits 1.
-    """
-    if os.getuid() == 0:
-        return(OK)
-    try:
-        subprocess.run('groups $USER | grep --quiet --regexp=sudo',
-                       shell=True, check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    except Exception:
-        return(ERROR)
-    else:
-        return(OK)
 
 
 def init_script(PROGRAM_NAME):

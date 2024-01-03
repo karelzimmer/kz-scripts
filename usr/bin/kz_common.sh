@@ -76,6 +76,45 @@ declare     title=''
 # Functions
 ###############################################################################
 
+# This function checks whether the script is started as user root and restarts
+# the script as user root if not.
+function become_root {
+    local   -i  pkexec_rc=0
+    local       program_exec=$MODULE_PATH/$PROGRAM_NAME
+
+    become_root_check
+
+    if [[ $UID -ne 0 ]]; then
+        if $option_gui; then
+            xhost +si:localuser:root |& $logcmd
+            export DISPLAY=:0.0
+            msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
+            pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
+            exit $pkexec_rc
+        else
+            msg_log  "restart (exec sudo $program_exec ${commandline_args[*]})"
+            exec sudo "$program_exec" "${commandline_args[@]}"
+        fi
+    fi
+}
+
+
+# This function checks if the user is allowed to become root and returns 0 if
+# so, otherwise exits 1.
+function become_root_check {
+    # Can user perform sudo?
+    if [[ $UID -eq 0 ]]; then
+        # For the "grace" period of sudo, or as a root.
+        return $OK
+    elif sudo true |& $logcmd; then
+        return $OK
+    else
+        msg_info "$(gettext 'Already performed by the administrator.')"
+        exit $OK
+    fi
+}
+
+
 # This function checks for active updates and waits for the next check if so.
 function check_for_active_updates {
     local   -i  check_wait=10
@@ -110,47 +149,6 @@ It is recommended to connect the computer to the wall socket.")"
         if ! $option_gui; then
             wait_for_enter
         fi
-    fi
-}
-
-
-# This function checks whether the script is started as user root and restarts
-# the script as user root if not.
-function check_user_root {
-    local   -i  pkexec_rc=0
-    local       program_exec=$MODULE_PATH/$PROGRAM_NAME
-
-    # shellcheck disable=SC2310
-    if ! check_user_sudo; then
-        msg_info "$(gettext 'Already performed by the administrator.')"
-        exit $OK
-    fi
-    if [[ $UID -ne 0 ]]; then
-        if $option_gui; then
-            xhost +si:localuser:root |& $logcmd
-            export DISPLAY=:0.0
-            msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
-            pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
-            exit $pkexec_rc
-        else
-            msg_log  "restart (exec sudo $program_exec ${commandline_args[*]})"
-            exec sudo "$program_exec" "${commandline_args[@]}"
-        fi
-    fi
-}
-
-
-# This function checks if the user is allowed to use sudo and exits 0 if so,
-# otherwise exits 1.
-function check_user_sudo {
-    # Can user perform sudo?
-    if [[ $UID -eq 0 ]]; then
-        # For the "grace" period of sudo, or as a root.
-        return $OK
-    elif groups "$USER" | grep --quiet --regexp='sudo'; then
-        return $OK
-    else
-        return $ERROR
     fi
 }
 

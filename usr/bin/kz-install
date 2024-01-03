@@ -200,7 +200,7 @@ file'.")"
         exit $OK
     fi
 
-    check_user_root
+    become_root
     check_on_ac_power
     if $option_gui; then
         title=$(gettext 'Install apps')
