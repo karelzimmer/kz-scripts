@@ -100,7 +100,7 @@ function become_root {
 
 
 # This function checks if the user is allowed to become root and returns 0 if
-# so, otherwise exits 1.
+# so, otherwise exits 0 with descriptive message.
 function become_root_check {
     # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then

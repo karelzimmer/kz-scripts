@@ -94,7 +94,7 @@ def become_root(PROGRAM_NAME, DISPLAY_NAME):
 def become_root_check():
     """
     This function checks if the user is allowed to become root and returns 0 if
-    so, otherwise exits 1.
+    so, otherwise exits 0 with descriptive message.
     """
     if os.getuid() == 0:
         return(OK)
