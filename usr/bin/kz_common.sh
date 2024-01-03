@@ -86,8 +86,8 @@ function become_root {
 
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
-            xhost +si:localuser:root |& $logcmd
             export DISPLAY=:0.0
+            xhost +si:localuser:root |& $logcmd
             msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
@@ -106,7 +106,7 @@ function become_root_check {
     if [[ $UID -eq 0 ]]; then
         # For the "grace" period of sudo, or as a root.
         return $OK
-    elif sudo true |& $logcmd; then
+    elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $OK
     else
         msg_info "$(gettext 'Already performed by the administrator.')"

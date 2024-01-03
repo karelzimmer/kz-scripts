@@ -99,7 +99,8 @@ def become_root_check():
     if os.getuid() == 0:
         return(OK)
     try:
-        subprocess.run('sudo true', shell=True, check=True,
+        subprocess.run('groups $USER | grep --quiet --regexp=sudo',
+                       shell=True, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         print(_('Already performed by the administrator.'))
