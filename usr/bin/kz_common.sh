@@ -70,6 +70,7 @@ declare     LOGCMD=''
 declare     option_gui=false
 declare     text=''
 declare     title=''
+declare     USAGE_LINE=''
 
 
 ###############################################################################
