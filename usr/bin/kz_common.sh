@@ -59,6 +59,8 @@ readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
                 EDITION='server'
             fi
 readonly    EDITION
+declare     LOGCMD=''
+declare     USAGE_LINE=''
 
 
 ###############################################################################
@@ -66,11 +68,9 @@ readonly    EDITION
 ###############################################################################
 
 declare -a  commandline_args=()
-declare     LOGCMD=''
 declare     option_gui=false
 declare     text=''
 declare     title=''
-declare     USAGE_LINE=''
 
 
 ###############################################################################
