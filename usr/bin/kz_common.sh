@@ -94,7 +94,7 @@ function become_root {
             exit $pkexec_rc
         else
             msg_log "restart (exec sudo $program_exec ${commandline_args[*]})"
-            sudo -n true || true
+            sudo --non-interactive true || true
             exec sudo "$program_exec" "${commandline_args[@]}"
         fi
     fi
@@ -123,6 +123,7 @@ function check_for_active_updates {
     local       text=$(eval_gettext "Wait \${check_wait}s for another package \
 manager to finish...")
 
+    sudo --non-interactive true || true
     while sudo  fuser                                       \
                 /snap/core/*/var/cache/debconf/config.dat   \
                 /var/cache/apt/archives/lock                \

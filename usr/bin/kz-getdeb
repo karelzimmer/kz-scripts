@@ -115,7 +115,6 @@ function install_package {
 
     printf '%s\n' "$(gettext 'Install package kz')..."
     check_for_active_updates
-    sudo    --non-interactive true || true
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \

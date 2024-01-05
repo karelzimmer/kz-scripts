@@ -74,7 +74,7 @@ def become_root(PROGRAM_NAME, DISPLAY_NAME):
     become_root_check()
 
     try:
-        subprocess.run('sudo -n true', shell=True, check=True)
+        subprocess.run('sudo --non-interactive true', shell=True, check=True)
     except Exception:
         try:
             subprocess.run('sudo true', shell=True, check=True)
@@ -118,6 +118,7 @@ def check_for_active_updates():
     """
     check_wait = 10
 
+    subprocess.run('sudo --non-interactive true', shell=True, check=True)
     while True:
         try:
             subprocess.run('sudo fuser '
