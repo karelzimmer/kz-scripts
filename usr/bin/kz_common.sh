@@ -89,11 +89,12 @@ function become_root {
         if $option_gui; then
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD
-            msg_log  "restart (pkexec $program_exec ${commandline_args[*]})"
+            msg_log "restart (pkexec $program_exec ${commandline_args[*]})"
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            msg_log  "restart (exec sudo $program_exec ${commandline_args[*]})"
+            msg_log "restart (exec sudo $program_exec ${commandline_args[*]})"
+            sudo -n true || true
             exec sudo "$program_exec" "${commandline_args[@]}"
         fi
     fi
