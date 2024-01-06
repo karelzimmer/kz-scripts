@@ -68,8 +68,8 @@ text = ''
 
 def become_root(PROGRAM_NAME):
     """
-    This function checks if the user is root and asks to become user root if
-    not.
+    This function checks whether the script is started as user root and
+    restarts the script as user root if not.
     """
     become_root_check()
 
