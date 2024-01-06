@@ -76,7 +76,10 @@ def become_root(PROGRAM_NAME):
     if os.getuid() != 0:
         subprocess.run('sudo --non-interactive true || true', shell=True)
         try:
-            subprocess.run('sudo true', shell=True, check=True)
+            text = f'restart (exec sudo {MODULE_PATH}/{PROGRAM_NAME})'
+            msg_log(PROGRAM_NAME, text)
+            subprocess.run('exec sudo ' + MODULE_PATH + '/' + PROGRAM_NAME,
+                           shell=True, check=True)
         except KeyboardInterrupt as kbdint:
             text = str(kbdint)
             msg_log(PROGRAM_NAME, text)
@@ -198,8 +201,8 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     USAGE_LINE = _("type '{} --usage' for more information").\
         format(DISPLAY_NAME)
 
-    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, add_help=False,
-                                     usage=USAGE_LINE)
+    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE_LINE,
+                                     add_help=False)
     parser.add_argument('-h', '--help', action='store_true')
     parser.add_argument('-u', '--usage', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
@@ -207,12 +210,15 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
 
     if args.help:
         process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME)
+        term_script(PROGRAM_NAME)
         sys.exit(OK)
     elif args.usage:
         process_option_usage(DISPLAY_NAME)
+        term_script(PROGRAM_NAME)
         sys.exit(OK)
     elif args.version:
         process_option_version(PROGRAM_NAME)
+        term_script(PROGRAM_NAME)
         sys.exit(OK)
 
 
