@@ -66,7 +66,7 @@ text = ''
 # Functions
 ###############################################################################
 
-def become_root(PROGRAM_NAME, DISPLAY_NAME):
+def become_root(PROGRAM_NAME):
     """
     This function checks if the user is root and asks to become user root if
     not.

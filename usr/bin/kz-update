@@ -176,7 +176,7 @@ kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
 kz_common.check_on_ac_power(PROGRAM_NAME)
 
-kz_common.become_root(PROGRAM_NAME, DISPLAY_NAME)
+kz_common.become_root(PROGRAM_NAME)
 
 perform_repair()
 
