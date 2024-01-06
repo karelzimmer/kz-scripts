@@ -265,9 +265,9 @@ function build_deb {
 
 # This function installs package kz.
 function install_package {
+    # Allow downgrade from previous version 365 to 2.4.7.
     printf '%s\n' "$(gettext 'Install package')..."
     check_for_active_updates
-    # Allow downgrade from previous version 365 to 2.4.7.
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \

@@ -129,11 +129,12 @@ def snap_cleanup(command):
     print(f'{kz_common.BOLD}{command}{kz_common.NORMAL}')
     # Start with LANG=en_US.UTF-8 and check for disabled does not always work.
     cmd = '\
-snap list --all | \
-while read name ver rev trk pub notes; do \
-    if [[ $notes == *uitgeschakeld* || $notes == *disabled* ]]; then \
-        sudo snap remove --purge "$name" --revision="$rev"; \
-    fi \
+snap list --all |                                                       \
+while read name ver rev trk pub notes; do                               \
+    if [[ $notes == *uitgeschakeld* || $notes == *disabled* ]]; then    \
+        sudo --non-interactive true || true                             \
+        sudo snap remove --purge "$name" --revision="$rev";             \
+    fi                                                                  \
 done'
 
     try:
