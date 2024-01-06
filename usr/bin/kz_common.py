@@ -73,23 +73,24 @@ def become_root(PROGRAM_NAME, DISPLAY_NAME):
     """
     become_root_check()
 
-    subprocess.run('sudo --non-interactive true || true', shell=True)
-    try:
-        subprocess.run('sudo true', shell=True, check=True)
-    except KeyboardInterrupt as kbdint:
-        text = str(kbdint)
-        msg_log(PROGRAM_NAME, text)
-        text = _('Program {} has been interrupted.').\
-            format(PROGRAM_NAME)
-        msg_error(PROGRAM_NAME, text)
-        sys.exit(ERROR)
-    except Exception as exc:
-        text = str(exc)
-        msg_log(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').\
-            format(PROGRAM_NAME)
-        msg_error(PROGRAM_NAME, text)
-        sys.exit(ERROR)
+    if os.getuid() != 0:
+        subprocess.run('sudo --non-interactive true || true', shell=True)
+        try:
+            subprocess.run('sudo true', shell=True, check=True)
+        except KeyboardInterrupt as kbdint:
+            text = str(kbdint)
+            msg_log(PROGRAM_NAME, text)
+            text = _('Program {} has been interrupted.').\
+                format(PROGRAM_NAME)
+            msg_error(PROGRAM_NAME, text)
+            sys.exit(ERROR)
+        except Exception as exc:
+            text = str(exc)
+            msg_log(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').\
+                format(PROGRAM_NAME)
+            msg_error(PROGRAM_NAME, text)
+            sys.exit(ERROR)
 
 
 def become_root_check():
