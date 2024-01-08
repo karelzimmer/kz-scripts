@@ -121,8 +121,8 @@ function install_package {
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "$temp_deb"                     |& $LOGCMD
-    rm      "$temp_deb" |& $LOGCMD
+            "$temp_deb"
+    rm      "$temp_deb"                     |& $LOGCMD
 }
 
 
