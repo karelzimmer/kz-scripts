@@ -114,6 +114,13 @@ function install_package {
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     printf '%s\n' "$(gettext 'Install package kz')..."
+
+    # Zenity only on desktop.
+    if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
+        check_for_active_updates
+        sudo apt-get install --yes zenity
+    fi
+
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -139,7 +146,7 @@ in the Checklist installation.
 Checklist installation can be found on
 \$website_url, under Linux.")
 
-    if type gnome-shell &> /dev/null; then
+    if [[ $EDITION = 'desktop' ]]; then
         text+="\n\n$(gettext "Type 'exit' to close this window.")"
         clear -x
         TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
