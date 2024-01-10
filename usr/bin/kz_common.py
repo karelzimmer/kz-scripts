@@ -71,28 +71,32 @@ def become_root(PROGRAM_NAME):
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
+    exec_sudo = 'sudo '
+
     become_root_check()
 
     if os.getuid() != 0:
         subprocess.run('sudo --non-interactive true || true', shell=True)
         try:
-            text = f'restart (sudo {MODULE_PATH}/{PROGRAM_NAME})'
+            for arg_num in range(len(sys.argv)):
+                if arg_num == 0:
+                    exec_sudo += MODULE_PATH + '/' + str(sys.argv[arg_num])
+                else:
+                    exec_sudo += ' ' + str(sys.argv[arg_num])
+            text = f'restart ({exec_sudo})'
             msg_log(PROGRAM_NAME, text)
-            subprocess.run('sudo ' + MODULE_PATH + '/' + PROGRAM_NAME,
-                           shell=True, check=True)
+            subprocess.run(exec_sudo, shell=True, check=True)
             sys.exit(OK)
         except KeyboardInterrupt as kbdint:
             text = str(kbdint)
             msg_log(PROGRAM_NAME, text)
-            text = _('Program {} has been interrupted.').\
-                format(PROGRAM_NAME)
+            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
         except Exception as exc:
             text = str(exc)
             msg_log(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').\
-                format(PROGRAM_NAME)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
 
