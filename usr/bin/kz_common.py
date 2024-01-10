@@ -80,7 +80,7 @@ def become_root(PROGRAM_NAME):
         try:
             for arg_num in range(len(sys.argv)):
                 if arg_num == 0:
-                    exec_sudo += MODULE_PATH + '/' + str(sys.argv[arg_num])
+                    exec_sudo += str(sys.argv[arg_num])
                 else:
                     exec_sudo += ' ' + str(sys.argv[arg_num])
             text = f'restart ({exec_sudo})'
