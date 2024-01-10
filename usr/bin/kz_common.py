@@ -76,10 +76,11 @@ def become_root(PROGRAM_NAME):
     if os.getuid() != 0:
         subprocess.run('sudo --non-interactive true || true', shell=True)
         try:
-            text = f'restart (exec sudo {MODULE_PATH}/{PROGRAM_NAME})'
+            text = f'restart (sudo {MODULE_PATH}/{PROGRAM_NAME})'
             msg_log(PROGRAM_NAME, text)
-            subprocess.run('exec sudo ' + MODULE_PATH + '/' + PROGRAM_NAME,
+            subprocess.run('sudo ' + MODULE_PATH + '/' + PROGRAM_NAME,
                            shell=True, check=True)
+            sys.exit(OK)
         except KeyboardInterrupt as kbdint:
             text = str(kbdint)
             msg_log(PROGRAM_NAME, text)
