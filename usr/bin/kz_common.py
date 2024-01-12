@@ -77,16 +77,18 @@ def become_root(PROGRAM_NAME):
 
     if os.getuid() != 0:
         subprocess.run('sudo --non-interactive true || true', shell=True)
+
+        # From ['path/script', 'arg1', ...] to 'path/script' 'arg1' 'arg2' ...
+        for arg_num in range(len(sys.argv)):
+            if arg_num == 0:
+                exec_sudo += str(sys.argv[arg_num])
+            else:
+                exec_sudo += ' ' + str(sys.argv[arg_num])
+        text = f'restart ({exec_sudo})'
+        msg_log(PROGRAM_NAME, text)
+
         try:
-            for arg_num in range(len(sys.argv)):
-                if arg_num == 0:
-                    exec_sudo += str(sys.argv[arg_num])
-                else:
-                    exec_sudo += ' ' + str(sys.argv[arg_num])
-            text = f'restart ({exec_sudo})'
-            msg_log(PROGRAM_NAME, text)
             subprocess.run(exec_sudo, shell=True, check=True)
-            sys.exit(OK)
         except KeyboardInterrupt as kbdint:
             text = str(kbdint)
             msg_log(PROGRAM_NAME, text)
@@ -99,6 +101,8 @@ def become_root(PROGRAM_NAME):
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
+        else:
+            sys.exit(OK)
 
 
 def become_root_check():
@@ -165,6 +169,14 @@ socket.')
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
+        except Exception as exc:
+            text = str(exc)
+            msg_log(PROGRAM_NAME, text)
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            msg_error(PROGRAM_NAME, text)
+            sys.exit(ERROR)
+        else:
+            return(OK)
 
 
 def init_script(PROGRAM_NAME):

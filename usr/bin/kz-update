@@ -51,6 +51,8 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
+    print(f'{kz_common.BOLD}==== REPAIR ===={kz_common.NORMAL}\n')
+
     command = 'sudo dpkg --configure --pending'
     perform_command(command)
 
@@ -65,6 +67,8 @@ def perform_update():
     """
     This function updates installed Debian packages.
     """
+    print(f'{kz_common.BOLD}==== UPDATE ===={kz_common.NORMAL}\n')
+
     command = 'sudo apt-get update'
     perform_command(command)
 
@@ -72,77 +76,47 @@ def perform_update():
     perform_command(command)
 
     command = 'sudo snap refresh'
-    snap_refresh(command)
-
-
-def perform_command(command):
-    """
-    This function executes a command.
-    """
-    print(f'{kz_common.BOLD}{command}{kz_common.NORMAL}')
-    kz_common.check_for_active_updates()
-    try:
-        subprocess.run(f'{command}', shell=True, check=True)
-    except Exception as exc:
-        text = str(exc)
-        kz_common.msg_log(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.msg_error(PROGRAM_NAME, text)
-        sys.exit(kz_common.error)
-    else:
-        print()
-
-
-def snap_refresh(command):
-    """
-    This function refreshes installed snaps.
-    """
-    print(f'{kz_common.BOLD}{command}{kz_common.NORMAL}')
-    kz_common.check_for_active_updates()
-    try:
-        subprocess.run(f'{command}', shell=True, check=True)
-    except Exception as exc:
-        text = str(exc)
-        kz_common.msg_log(PROGRAM_NAME, text)
-    else:
-        print()
+    perform_command(command)
 
 
 def perform_cleanup():
     """
-    This function performs a Debian package cleanup.
+    This function performs a Debian packages and snap packages cleanup.
     """
+    print(f'{kz_common.BOLD}==== CLEANUP ===={kz_common.NORMAL}\n')
+
     command = 'sudo apt-get autoclean --yes'
     perform_command(command)
 
     command = 'sudo apt-get autoremove --yes'
     perform_command(command)
 
-    command = 'sudo snap cleanup'
-    snap_cleanup(command)
+    # Start with LANGUAGE=en and only check for disabled does not always work.
+    command = '# sudo snap cleanup: \n\
+snap list --all |\n\
+while read Name Version Rev Tracking Publisher Notes; do\n\
+    if [[ $Notes == *uitgeschakeld* || $Notes == *disabled* ]]; then\n\
+        sudo snap remove --purge "$Name" --revision="$Rev";\n\
+    fi\n\
+done'
+    perform_command(command)
 
 
-def snap_cleanup(command):
+def perform_command(command):
     """
-    This function performs a snaps cleanup.
+    This function executes a Bourne-Again SHell command.
     """
     print(f'{kz_common.BOLD}{command}{kz_common.NORMAL}')
-    # Start with LANG=en_US.UTF-8 and check for disabled does not always work.
-    cmd = '\
-snap list --all |                                                       \
-while read name ver rev trk pub notes; do                               \
-    if [[ $notes == *uitgeschakeld* || $notes == *disabled* ]]; then    \
-        sudo --non-interactive true || true                             \
-        sudo snap remove --purge "$name" --revision="$rev";             \
-    fi                                                                  \
-done'
-
+    kz_common.check_for_active_updates()
     try:
-        subprocess.run({cmd}, shell=True, check=True,
+        subprocess.run({command}, shell=True, check=True,
                        executable='/usr/bin/bash')
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        kz_common.msg_error(PROGRAM_NAME, text)
+        sys.exit(kz_common.error)
     else:
         print()
 
