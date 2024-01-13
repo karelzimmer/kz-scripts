@@ -293,13 +293,7 @@ function restore_settings {
 
 # This function restores the desktop background.
 function restore_settings_desktop_background {
-    local   input_file=''
-
-    if type xdg-user-dir &> /dev/null; then
-        input_file=$(xdg-user-dir PICTURES)/$(gettext 'Background')
-    else
-        return $OK
-    fi
+    local   input_file=$HOME/.kz-backup/Background
 
     if [[ -f $input_file ]]; then
         gsettings   set                                         \

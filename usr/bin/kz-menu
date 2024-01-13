@@ -416,27 +416,25 @@ $(gettext "Add any additional users with the following steps.
 hromebook).")"
         msg_info "$text"
     elif [[ $title = $(gettext 'Set user photo') ]]; then
-        text="$(gettext 'Set user photo'):
-
-$(gettext 'No user photo was found when backing up.')"
-        if type xdg-user-dir &> /dev/null; then
-            if [[ -f $(xdg-user-dir PICTURES)/$(gettext 'Userphoto') ]]; then
-                text="$(gettext 'Set user photo'):
+        if [[ -f $HOME/.kz-backup/Userphoto ]]; then
+            text="$(gettext 'Set user photo'):
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.
 2. Click the image for the user.
 3. Click Select a file.
-4. Select Userphoto in Personal folder / Pictures.
+4. Select Userphoto in Personal folder / .kz-backup
+   (press the Crtl + H keys or use Menu > Show Hidden Files to open .kz-backup\
+).
 5. Close the Users screen.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
 hromebook).")"
-                msg_info "$text"
-            else
-                msg_info "$text"
-            fi
+            msg_info "$text"
         else
+            text="$(gettext 'Set user photo'):
+
+$(gettext 'No user photo was found when backing up.')"
             msg_info "$text"
         fi
     fi

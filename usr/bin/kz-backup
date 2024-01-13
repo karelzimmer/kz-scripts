@@ -206,7 +206,7 @@ function backup_settings {
         # To prevent screens from coming and going very quickly.
         sleep 2
     fi
-    migrate_settings_previously_backuped
+    delete_settings_previously_backuped
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
@@ -214,45 +214,41 @@ function backup_settings {
 }
 
 
-# This function migrates backups of old user settings.
-function migrate_settings_previously_backuped {
-    move_file "$HOME"/kz-data/Achtergrond           "$HOME"/Afbeeldingen/
-    move_file "$HOME"/kz-data/Apps                  "$HOME"/Documenten/
-    move_file "$HOME"/kz-data/Favorieten            "$HOME"/Documenten/
-    move_file "$HOME"/kz-data/Gebruikersfoto        "$HOME"/Afbeeldingen/
+# This function deletes previously backuped user settings.
+function delete_settings_previously_backuped {
+    rm      --force                             \
+            "$HOME"/kz-data/Achtergrond         \
+            "$HOME"/kz-data/Apps                \
+            "$HOME"/kz-data/Favorieten          \
+            "$HOME"/kz-data/Gebruikersfoto      \
+            "$HOME"/Instellingen/Achtergrond    \
+            "$HOME"/Instellingen/Apps           \
+            "$HOME"/Instellingen/Favorieten     \
+            "$HOME"/Instellingen/Gebruikersfoto \
+            "$HOME"/Settings/Apps               \
+            "$HOME"/Settings/Background         \
+            "$HOME"/Settings/Favorites          \
+            "$HOME"/Settings/Userphoto 
+    rmdir   "$HOME"/kz-data                     \
+            "$HOME"/Instellingen                \
+            "$HOME"/Settings                    |& $LOGCMD || true
 
-    move_file "$HOME"/Instellingen/Achtergrond      "$HOME"/Afbeeldingen/
-    move_file "$HOME"/Instellingen/Apps             "$HOME"/Documenten/
-    move_file "$HOME"/Instellingen/Favorieten       "$HOME"/Documenten/
-    move_file "$HOME"/Instellingen/Gebruikersfoto   "$HOME"/Afbeeldingen/
-
-    move_file "$HOME"/Settings/Apps                 "$HOME"/Documents/
-    move_file "$HOME"/Settings/Background           "$HOME"/Pictures/
-    move_file "$HOME"/Settings/Favorites            "$HOME"/Documents/
-    move_file "$HOME"/Settings/Userphoto            "$HOME"/Pictures/
-
-    rmdir   "$HOME"/kz-data         \
-            "$HOME"/Instellingen    \
-            "$HOME"/Settings        |& $LOGCMD || true
-}
-
-
-# This function moves a file from one location to another.
-function move_file {
-    mv "$1" "$2" 2> /dev/null || true
+    rm      --force                             \
+            "$HOME"/Afbeeldingen/Achtergrond    \
+            "$HOME"/Documenten/Apps             \
+            "$HOME"/Documenten/Favorieten       \
+            "$HOME"/Afbeeldingen/Gebruikersfoto \
+            "$HOME"/Documents/Apps              \
+            "$HOME"/Pictures/Background         \
+            "$HOME"/Documents/Favorites         \
+            "$HOME"/Pictures/Userphoto
 }
 
 
 # This function copies the desktop background.
 function backup_settings_desktop_background {
     local   input_file=''
-    local   output_file=''
-
-    if type xdg-user-dir &> /dev/null; then
-        output_file=$(xdg-user-dir PICTURES)/$(gettext 'Background')
-    else
-        return $OK
-    fi
+    local   output_file=$HOME/.$PROGRAM_NAME/Background
 
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
@@ -260,20 +256,15 @@ function backup_settings_desktop_background {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp --preserve "$input_file" "$output_file" |& $LOGCMD || true
+    cp "$input_file" "$output_file" |& $LOGCMD || true
 }
 
 
 # This function saves the favorite apps.
 function backup_settings_favorite_apps {
-    local   output_file=''
+    local   output_file=$HOME/.$PROGRAM_NAME/Favorites
 
-    if type xdg-user-dir &> /dev/null; then
-        output_file=$(xdg-user-dir DOCUMENTS)/$(gettext 'Favorites')
-    else
-        return $OK
-    fi
-
+    mkdir --parents "$HOME"/.$PROGRAM_NAME
     gsettings   get                             \
                 org.gnome.shell favorite-apps   \
                 > "$output_file"                |& $LOGCMD || true
@@ -282,7 +273,7 @@ function backup_settings_favorite_apps {
 
 # This function creates a list of installed apps.
 function backup_settings_installed_apps {
-    local   output_file=''
+    local   output_file=$HOME/.$PROGRAM_NAME/Apps
     local   header1=$(gettext '==== START installed packages ====')
     local   footer1=$(gettext '==== END installed packages ====')
     local   header2=$(gettext '==== START installed snaps ====')
@@ -291,11 +282,7 @@ function backup_settings_installed_apps {
     local   footer3=$(gettext '==== END added repositories ====')
     local   search=/etc/apt/sources.list
 
-    if type xdg-user-dir &> /dev/null; then
-        output_file=$(xdg-user-dir DOCUMENTS)/Apps
-    else
-        return $OK
-    fi
+    mkdir --parents "$HOME"/.$PROGRAM_NAME
 
     printf '%s\n' "$header1" > "$output_file"
     apt list --manual-installed 2> >($LOGCMD) >> "$output_file" || true
@@ -325,15 +312,9 @@ function backup_settings_installed_apps {
 # This function copies the user photo.
 function backup_settings_user_photo {
     local   input_file=/var/lib/AccountsService/icons/"$USER"
-    local   output_file=''
+    local   output_file=$HOME/.$PROGRAM_NAME/Userphoto
 
-    if type xdg-user-dir &> /dev/null; then
-        output_file=$(xdg-user-dir PICTURES)/$(gettext 'Userphoto')
-    else
-        return $OK
-    fi
-
-    cp --preserve "$input_file" "$output_file" |& $LOGCMD || true
+    cp "$input_file" "$output_file" |& $LOGCMD || true
 }
 
 
