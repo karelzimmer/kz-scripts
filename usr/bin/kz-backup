@@ -237,10 +237,9 @@ function delete_settings_previously_backuped {
             "$HOME"/Settings/Background         \
             "$HOME"/Settings/Favorites          \
             "$HOME"/Settings/Userphoto
-    rmdir   --ignore-fail-on-non-empty          \
-            "$HOME"/kz-data                     \
+    rmdir   "$HOME"/kz-data                     \
             "$HOME"/Instellingen                \
-            "$HOME"/Settings
+            "$HOME"/Settings                    |& $LOGCMD || true
 }
 
 
