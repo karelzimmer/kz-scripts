@@ -90,6 +90,7 @@ function process_input {
     local   scriptname=''
     local   scripts_repo=$HOME/kz-scripts
 
+    printf "%s\n" "$(gettext 'Checking scripts (this may take a while)')..."
     cd "$scripts_repo"
     while read -r script; do
         scriptdir=$(realpath "$(dirname "$script")")
