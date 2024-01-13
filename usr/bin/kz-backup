@@ -217,31 +217,30 @@ function backup_settings {
 # This function deletes previously backuped user settings.
 function delete_settings_previously_backuped {
     rm      --force                             \
-            "$HOME"/kz-data/Achtergrond         \
-            "$HOME"/kz-data/Apps                \
-            "$HOME"/kz-data/Favorieten          \
-            "$HOME"/kz-data/Gebruikersfoto      \
+            "$HOME"/Afbeeldingen/Achtergrond    \
+            "$HOME"/Afbeeldingen/Gebruikersfoto \
+            "$HOME"/Documenten/Apps             \
+            "$HOME"/Documenten/Favorieten       \
+            "$HOME"/Documents/Apps              \
+            "$HOME"/Documents/Favorites         \
             "$HOME"/Instellingen/Achtergrond    \
             "$HOME"/Instellingen/Apps           \
             "$HOME"/Instellingen/Favorieten     \
             "$HOME"/Instellingen/Gebruikersfoto \
+            "$HOME"/kz-data/Achtergrond         \
+            "$HOME"/kz-data/Apps                \
+            "$HOME"/kz-data/Favorieten          \
+            "$HOME"/kz-data/Gebruikersfoto      \
+            "$HOME"/Pictures/Background         \
+            "$HOME"/Pictures/Userphoto          \
             "$HOME"/Settings/Apps               \
             "$HOME"/Settings/Background         \
             "$HOME"/Settings/Favorites          \
             "$HOME"/Settings/Userphoto
-    rmdir   "$HOME"/kz-data                     \
+    rmdir   --ignore-fail-on-non-empty          \
+            "$HOME"/kz-data                     \
             "$HOME"/Instellingen                \
-            "$HOME"/Settings                    |& $LOGCMD || true
-
-    rm      --force                             \
-            "$HOME"/Afbeeldingen/Achtergrond    \
-            "$HOME"/Documenten/Apps             \
-            "$HOME"/Documenten/Favorieten       \
-            "$HOME"/Afbeeldingen/Gebruikersfoto \
-            "$HOME"/Documents/Apps              \
-            "$HOME"/Pictures/Background         \
-            "$HOME"/Documents/Favorites         \
-            "$HOME"/Pictures/Userphoto
+            "$HOME"/Settings
 }
 
 
@@ -265,9 +264,8 @@ function backup_settings_favorite_apps {
     local   output_file=$HOME/.$PROGRAM_NAME/Favorites
 
     mkdir --parents "$HOME"/.$PROGRAM_NAME
-    gsettings   get                             \
-                org.gnome.shell favorite-apps   \
-                > "$output_file"                |& $LOGCMD || true
+    gsettings get org.gnome.shell favorite-apps > "$output_file" |&
+        $LOGCMD || true
 }
 
 
