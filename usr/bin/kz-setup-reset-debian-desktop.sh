@@ -7,7 +7,7 @@
 ###############################################################################
 
 
-# APP dashtodock USER *
+# APP dashtodock USER karel@pc07
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
