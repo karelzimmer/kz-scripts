@@ -228,7 +228,7 @@ function delete_settings_previously_backuped {
             "$HOME"/Settings/Apps               \
             "$HOME"/Settings/Background         \
             "$HOME"/Settings/Favorites          \
-            "$HOME"/Settings/Userphoto 
+            "$HOME"/Settings/Userphoto
     rmdir   "$HOME"/kz-data                     \
             "$HOME"/Instellingen                \
             "$HOME"/Settings                    |& $LOGCMD || true
