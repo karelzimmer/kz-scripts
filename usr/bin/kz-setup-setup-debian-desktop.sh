@@ -92,7 +92,7 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 # APP vlc USER *
 xdg-mime default vlc_vlc.desktop video/mp4          # MPEG4-video
-xdg-mime default vlc_vlc.desktop video/x-matroska   # Matroska-video 
+xdg-mime default vlc_vlc.desktop video/x-matroska   # Matroska-video
 xdg-mime default vlc_vlc.desktop video/webm         # WebM video
 
 
