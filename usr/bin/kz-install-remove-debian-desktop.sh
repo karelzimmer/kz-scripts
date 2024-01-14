@@ -21,7 +21,7 @@ sudo apt-get remove --purge --yes bash-completion
 sudo apt-get remove --purge --yes cups
 
 
-# APP dashtodock HOST pc07
+# APP dashtodock HOST *
 sudo apt-get remove --purge --yes gnome-shell-extension-dashtodock
 
 

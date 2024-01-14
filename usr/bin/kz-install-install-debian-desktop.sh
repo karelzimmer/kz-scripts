@@ -23,7 +23,7 @@ sudo apt-get install --yes bash-completion
 sudo apt-get install --yes cups
 
 
-# APP dashtodock HOST pc07
+# APP dashtodock HOST *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
 

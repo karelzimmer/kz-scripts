@@ -7,7 +7,7 @@
 ###############################################################################
 
 
-# APP dashtodock USER karel@pc07
+# APP dashtodock USER *
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
