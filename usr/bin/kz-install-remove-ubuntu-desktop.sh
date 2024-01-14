@@ -11,7 +11,7 @@
 sudo apt-get remove --purge --yes ansible
 
 
-# APP anydesk HOST *
+# APP anydesk HOST
 sudo apt-get remove --purge --yes anydesk
 sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update

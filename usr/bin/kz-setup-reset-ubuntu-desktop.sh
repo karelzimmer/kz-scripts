@@ -7,7 +7,7 @@
 ###############################################################################
 
 
-# APP anydesk USER karel@pc06
+# APP anydesk USER
 kz-gset --delfav=anydesk
 
 
