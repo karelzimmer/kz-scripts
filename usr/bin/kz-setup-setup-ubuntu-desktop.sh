@@ -117,6 +117,12 @@ kz-gset --addfavaft=virtualbox
 kz-gset --addfavaft=kz-vm-hugowin732
 
 
+# APP vlc USER *
+xdg-mime default vlc_vlc.desktop video/mp4          # MPEG4-video
+xdg-mime default vlc_vlc.desktop video/x-matroska   # Matroska-video 
+xdg-mime default vlc_vlc.desktop video/webm         # WebM video
+
+
 # APP vscode USER karel@pc01 karel@pc06
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document

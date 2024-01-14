@@ -220,7 +220,7 @@ echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debcon
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 
-# APP vlc HOST pc06
+# APP vlc HOST *
 sudo snap install vlc
 
 

@@ -143,7 +143,7 @@ sudo apt-get install --yes thunderbird-l10n-nl
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
 
-# APP vlc HOST pc07
+# APP vlc HOST *
 sudo snap install vlc
 
 
