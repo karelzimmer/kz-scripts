@@ -78,7 +78,7 @@ def become_root(PROGRAM_NAME):
     if os.getuid() != 0:
         subprocess.run('sudo --non-interactive true || true', shell=True)
 
-        # From ['path/script', 'arg1', ...] to 'path/script' 'arg1' 'arg2' ...
+        # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
         for arg_num in range(len(sys.argv)):
             if arg_num == 0:
                 exec_sudo += str(sys.argv[arg_num])
