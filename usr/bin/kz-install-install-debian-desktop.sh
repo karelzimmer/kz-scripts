@@ -138,10 +138,6 @@ sudo apt-key del 0C1289C0 DEB49217
 sudo apt-get install --yes thunderbird-l10n-nl
 
 
-# APP totem HOST *
-sudo apt-get install --yes libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
-
-
 # APP users HOST *
 # Enable access to system monitoring tasks like read many log files in /var/log and to the log.
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
