@@ -164,7 +164,7 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME --priority=debug"
+    readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
 
     trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT

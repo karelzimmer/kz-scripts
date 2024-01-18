@@ -199,8 +199,7 @@ def msg_log(PROGRAM_NAME, text):
     """
     This function records a message to the log.
     """
-    journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'PRIORITY=7',
-                  'MESSAGE=' + text)
+    journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + text)
 
 
 def msg_warning(PROGRAM_NAME, text):
