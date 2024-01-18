@@ -196,7 +196,7 @@ function msg_error {
     else
         printf "$RED%b\n$NORMAL" "$@" >&2
     fi
-    msg_log "$@"
+    msg_log "<3>$*"
 }
 
 
@@ -237,7 +237,7 @@ function msg_warning {
     else
         printf "$YELLOW%b\n$NORMAL" "$@" >&2
     fi
-    msg_log "$@"
+    msg_log "<4>$*"
 }
 
 

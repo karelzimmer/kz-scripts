@@ -89,9 +89,7 @@ def become_root(PROGRAM_NAME):
 
         try:
             subprocess.run(exec_sudo, shell=True, check=True)
-        except KeyboardInterrupt as kbdint:
-            text = str(kbdint)
-            msg_log(PROGRAM_NAME, text)
+        except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
@@ -163,9 +161,7 @@ socket.')
         msg_warning(PROGRAM_NAME, text)
         try:
             input('\n' + _('Press the Enter key to continue [Enter]: '))
-        except KeyboardInterrupt as kbdint:
-            text = str(kbdint)
-            msg_log(PROGRAM_NAME, text)
+        except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             sys.exit(ERROR)
@@ -192,7 +188,7 @@ def msg_error(PROGRAM_NAME, text):
     This function returns an error message and logs it.
     """
     print(f'{RED}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, text)
+    msg_log(PROGRAM_NAME, RED + text + NORMAL)
 
 
 def msg_log(PROGRAM_NAME, text):
@@ -207,7 +203,7 @@ def msg_warning(PROGRAM_NAME, text):
     This function returns a warning message and logs it.
     """
     print(f'{YELLOW}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, text)
+    msg_log(PROGRAM_NAME, YELLOW + text + NORMAL)
 
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
