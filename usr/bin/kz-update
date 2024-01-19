@@ -62,6 +62,9 @@ def perform_repair():
     command = 'sudo apt-get install --fix-broken'
     perform_command(command)
 
+    command = '# sudo update-initramfs -u'
+    perform_command(command)
+
 
 def perform_update():
     """
@@ -92,7 +95,7 @@ def perform_cleanup():
     perform_command(command)
 
     # Start with LANGUAGE=en and only check for disabled does not always work.
-    command = '# sudo snap cleanup: \n\
+    command = '# snap cleanup:\n\
 snap list --all |\n\
 while read Name Version Rev Tracking Publisher Notes; do\n\
     if [[ $Notes == *uitgeschakeld* || $Notes == *disabled* ]]; then\n\
