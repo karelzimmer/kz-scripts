@@ -188,14 +188,14 @@ def msg_error(PROGRAM_NAME, text):
     This function returns an error message and logs it.
     """
     print(f'{RED}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, RED + text + NORMAL)
+    msg_log(PROGRAM_NAME, f'{RED}{text}{NORMAL}')
 
 
 def msg_log(PROGRAM_NAME, text):
     """
     This function records a message to the log.
     """
-    journal.sendv('SYSLOG_IDENTIFIER=' + PROGRAM_NAME, 'MESSAGE=' + text)
+    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={text}')
 
 
 def msg_warning(PROGRAM_NAME, text):
@@ -203,7 +203,7 @@ def msg_warning(PROGRAM_NAME, text):
     This function returns a warning message and logs it.
     """
     print(f'{YELLOW}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, YELLOW + text + NORMAL)
+    msg_log(PROGRAM_NAME, f'{YELLOW}{text}{NORMAL}')
 
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):

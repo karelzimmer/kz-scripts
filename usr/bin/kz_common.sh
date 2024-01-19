@@ -192,9 +192,9 @@ function msg_error {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        2> >($LOGCMD) || true
+                --text      "$*"        2> >($LOGCMD) || true
     else
-        printf "$RED%b\n$NORMAL" "$@" >&2
+        printf "$RED%b\n$NORMAL" "$*" >&2
     fi
     msg_log "<3>$*"
 }
@@ -210,16 +210,16 @@ function msg_info {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        2> >($LOGCMD) || true
+                --text      "$*"        2> >($LOGCMD) || true
     else
-        printf '%b\n' "$@"
+        printf '%b\n' "$*"
     fi
 }
 
 
 # This function records a message to the log.
 function msg_log {
-    printf '%b\n' "$@" |& $LOGCMD
+    printf '%b\n' "$*" |& $LOGCMD
 }
 
 
@@ -233,9 +233,9 @@ function msg_warning {
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
-                --text      "$@"        2> >($LOGCMD) || true
+                --text      "$*"        2> >($LOGCMD) || true
     else
-        printf "$YELLOW%b\n$NORMAL" "$@" >&2
+        printf "$YELLOW%b\n$NORMAL" "$*" >&2
     fi
     msg_log "<4>$*"
 }
