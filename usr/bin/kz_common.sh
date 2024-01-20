@@ -120,8 +120,6 @@ function become_root_check {
 # This function checks for active updates and waits for the next check if so.
 function check_for_active_updates {
     local   -i  check_wait=10
-    local       text=$(eval_gettext "Wait \${check_wait}s for another package \
-manager to finish...")
 
     sudo --non-interactive true || true
     while sudo  fuser                                       \
@@ -132,6 +130,8 @@ manager to finish...")
                 /var/lib/dpkg/lock                          \
                 /var/lib/dpkg/lock-frontend                 \
                 &> /dev/null; do
+        text=$(eval_gettext "Wait \${check_wait}s for another package manager \
+to finish...")
         printf '%s\n' "$text"
         sleep $check_wait
     done
@@ -145,10 +145,10 @@ function check_on_ac_power {
 
     on_ac_power |& $LOGCMD || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
-        msg_warning "$(gettext "The computer now uses only the battery for pow\
-er.
+        text=$(gettext "The computer now uses only the battery for power.
 
-It is recommended to connect the computer to the wall socket.")"
+It is recommended to connect the computer to the wall socket.")
+        msg_warning "$text"
         if ! $option_gui; then
             wait_for_enter
         fi
@@ -173,8 +173,9 @@ function init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    msg_log "==== START log $PROGRAM_NAME ====\nstarted ($MODULE_PATH/$PROGRAM\
-_NAME $* as $USER)"
+    text="==== START log $PROGRAM_NAME ====\nstarted ($MODULE_PATH/$PROGRAM_NA\
+ME $* as $USER)"
+    msg_log "$text"
 
     commandline_args=("$@")
     readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
@@ -185,8 +186,7 @@ _NAME $* as $USER)"
 # This function returns an error message and logs it.
 function msg_error {
     if $option_gui; then
-        local   title=$(eval_gettext "Error message \$DISPLAY_NAME")
-
+        title=$(eval_gettext "Error message \$DISPLAY_NAME")
         zenity  --error                 \
                 --no-markup             \
                 --width     600         \
@@ -203,8 +203,7 @@ function msg_error {
 # This function returns an informational message.
 function msg_info {
     if $option_gui; then
-        local   title=$(eval_gettext "Information \$DISPLAY_NAME")
-
+        title=$(eval_gettext "Information \$DISPLAY_NAME")
         zenity  --info                  \
                 --no-markup             \
                 --width     600         \
@@ -226,8 +225,7 @@ function msg_log {
 # This function returns a warning message and logs it.
 function msg_warning {
     if $option_gui; then
-        local   title=$(eval_gettext "Warning \$DISPLAY_NAME")
-
+        title=$(eval_gettext "Warning \$DISPLAY_NAME")
         zenity  --warning               \
                 --no-markup             \
                 --width     600         \
@@ -273,19 +271,20 @@ function process_option_help {
     local   man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
             man_url+="$(gettext 'man page')\033]8;;\033\\"
 
+    text="$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url for m\
+ore information.")"
     printf  '%s\n\n%b\n'    \
             "$HELP"         \
-            "$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url fo\
-r more information.")"
+            "$text"
 }
 
 
 # This function shows the available options.
 function process_option_usage {
+    text="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
     printf  '%s\n\n%s\n'    \
             "$USAGE"        \
-            "$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information\
-.")"
+            "$text"
 }
 
 
@@ -298,7 +297,8 @@ function process_option_version {
     if [[ -e /usr/local/etc/kz-build.id ]]; then
         build_id=' ('$(cat /usr/local/etc/kz-build.id)')'
     else
-        msg_log "$(gettext 'Build ID cannot be determined.')"
+        text=$(gettext 'Build ID cannot be determined.')
+        msg_log "$text"
     fi
 
     program_year=$(
@@ -306,17 +306,17 @@ function process_option_version {
         cut     --delimiter=' ' --fields=3
         ) || true
     if [[ $program_year = '' ]]; then
-        msg_log "$(gettext 'Program year cannot be determined.')"
+        text=$(gettext 'Program year cannot be determined.')
+        msg_log "$text"
         program_year='.'
     else
         program_year=', '$program_year
     fi
 
-    text="$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, "
-    text+='CC0 1.0 Universal'
     printf  '%s\n\n%s\n%s\n'    \
             "kz 2.4.7$build_id" \
-            "$text"             \
+            "$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1\
+.0 Universal"                   \
             "<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
 }
 
@@ -389,20 +389,23 @@ function signal {
 
     case $signal in
         err)
+            text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
             msg_error "
-$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")"
+$text"
             exit "$rc"
             ;;
         exit)
             signal_exit
-            msg_log "ended (code=exited, status=$status)\n==== END log $PROGRA\
-M_NAME ===="
+            text="ended (code=exited, status=$status)\n==== END log "
+            text+="$PROGRAM_NAME ===="
+            msg_log "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
         *)
+            text=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
             msg_error "
-$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")"
+$text"
             exit "$rc"
             ;;
     esac
@@ -414,10 +417,11 @@ function signal_exit {
     case $PROGRAM_NAME in
         kz-install)
             if [[ $rc -ne $OK ]]; then
-                msg_log  "$(gettext "If the package manager gives apt errors, \
-launch a Terminal window and execute:")
+                text="$(gettext "If the package manager gives apt errors, laun\
+ch a Terminal window and execute:")
 [1] kz update
 [2] sudo update-initramfs -u"
+                msg_log "$text"
             fi
             ;;
         *)

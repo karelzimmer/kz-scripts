@@ -238,17 +238,14 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     This function shows the available help.
     """
-    man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME
-    man_url = man_url + ' ' + _('man page') + '\x1b]8;;\x1b\\'
+    man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME + ' '
+    man_url += _('man page') + '\x1b]8;;\x1b\\'
     print(_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME) +
-          '\n' +
-          PROGRAM_DESC + '.\n' +
-          '\n' +
-          _('Options:') + '\n' +
-          _('  -h, --help     give this help list') + '\n' +
-          _('  -u, --usage    give a short usage message') + '\n' +
-          _('  -v, --version  print program version') + '\n' +
-          '\n' +
+          f'\n{PROGRAM_DESC}.\n\n' +
+          f"{_('Options:')}\n" +
+          f"{_('  -h, --help     give this help list')}\n" +
+          f"{_('  -u, --usage    give a short usage message')}\n" +
+          f"{_('  -v, --version  print program version')}\n\n" +
           _("Type 'man {}' or see the {} for more information.").
           format(DISPLAY_NAME, man_url))
 
@@ -258,8 +255,7 @@ def process_option_usage(DISPLAY_NAME):
     This function shows the available options.
     """
     print(_('Usage: {}').format(DISPLAY_NAME) +
-          ' [-h|--help] [-u|--usage] [-v|--version]\n' +
-          '\n' +
+          f' [-h|--help] [-u|--usage] [-v|--version]\n\n' +
           _("Type '{} --help' for more information.").format(DISPLAY_NAME))
 
 
@@ -300,12 +296,11 @@ def process_option_version(PROGRAM_NAME):
         else:
             program_year = ', ' + program_year
 
-        print('kz 2.4.7' + build_id + '\n' +
-              '\n' +
-              _('Written by') + 'Karel Zimmer <info@karelzimmer.nl>,' +
-              ' CC0 1.0 Universal\n' +
-              '<https://creativecommons.org/publicdomain/zero/1.0>' +
-              program_year)
+        print(f'kz 2.4.7{build_id}\n\n' +
+              f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
+Universal\n" +
+              f'<https://creativecommons.org/publicdomain/zero/1.0>' +
+              f'{program_year}')
 
 
 def term_script(PROGRAM_NAME):
