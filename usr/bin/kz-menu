@@ -241,7 +241,8 @@ function process_menu1_choice {
             exit $OK
             ;;
         *)
-            msg_error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+            text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+            msg_error "$text"
             exit $ERROR
             ;;
     esac
@@ -392,7 +393,8 @@ function process_menu2_choice {
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         process_menu1_tui
     else
-        msg_error "$(eval_gettext "Cannot handle this choice (\$REPLY).")"
+        text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+        msg_error "$text"
         exit $ERROR
     fi
 }
@@ -554,7 +556,8 @@ function execute_command {
         gui_option='--gui'
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
-    msg_log "$command: rc=$rc"
+    text="$command: rc=$rc"
+    msg_log "$text"
 }
 
 

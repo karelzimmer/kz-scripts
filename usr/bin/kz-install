@@ -175,8 +175,9 @@ function process_input {
         input_file=$file_argument
     fi
     if ! [[ -f $input_file ]]; then
-        msg_error "$(eval_gettext "No install file found, looked for '\$input_\
-file'.")"
+        text=$(eval_gettext "No install file found, looked for '\$input_file'.\
+")
+        msg_error "$text"
         exit $ERROR
     fi
 
@@ -446,7 +447,8 @@ function execute_command {
         printf '         %s\n' "$cmd"
     fi
 
-    msg_log "$app_name_line/$cmd_seq_num\n$cmd"
+    text="$app_name_line/$cmd_seq_num\n$cmd"
+    msg_log "$text"
     check_for_active_updates
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
 }
@@ -458,31 +460,34 @@ function term_script {
     local   operation=$(gettext 'install')
 
     if ! $commands_found; then
-        msg_info "$(gettext 'No commands to execute.' )"
+        text=$(gettext 'No commands to execute.' )
+        msg_info "$text"
         exit $OK
     fi
 
     if [[ -n ${failed_apps[*]} ]]; then
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
-        msg_error "
-$(eval_gettext "The installation of the following apps contains errors:
+        text=$(eval_gettext "The installation of the following apps contains e\
+rrors:
 \$failed_apps_text
 
 Try installing the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz install \$failed_apps_text'.")"
+use app Terminal, type 'kz install \$failed_apps_text'.")
+        msg_error "$text"
         exit $ERROR
     else
         if $option_remove; then
             # shellcheck disable=SC2034
             operation=$(gettext 'remove')
         fi
-        msg_info "
-$(eval_gettext "Apps \$operation completed.")"
+        text=$(eval_gettext "Apps \$operation completed.")
+        msg_info "$text"
         if $reboot; then
-            msg_info "$(gettext "The computer will now reboot to finish instal\
-ling the apps and changing system settings.")"
+            text=$(gettext "The computer will now reboot to finish installing \
+the apps and changing system settings.")
+            msg_info "$text"
             if ! $option_gui; then
                 wait_for_enter
             fi

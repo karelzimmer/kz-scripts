@@ -73,7 +73,7 @@ def become_root(PROGRAM_NAME):
     """
     exec_sudo = 'sudo '
 
-    become_root_check()
+    become_root_check(PROGRAM_NAME)
 
     if os.getuid() != 0:
         subprocess.run('sudo --non-interactive true || true', shell=True)
@@ -92,18 +92,20 @@ def become_root(PROGRAM_NAME):
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
+            term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         except Exception as exc:
             text = str(exc)
             msg_log(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
+            term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         else:
             sys.exit(OK)
 
 
-def become_root_check():
+def become_root_check(PROGRAM_NAME):
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise exits 0 with descriptive message.
@@ -116,6 +118,7 @@ def become_root_check():
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         print(_('Already performed by the administrator.'))
+        term_script(PROGRAM_NAME)
         sys.exit(OK)
     else:
         return(OK)
@@ -164,12 +167,14 @@ socket.')
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
+            term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         except Exception as exc:
             text = str(exc)
             msg_log(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
+            term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         else:
             return(OK)
@@ -188,7 +193,7 @@ def msg_error(PROGRAM_NAME, text):
     This function returns an error message and logs it.
     """
     print(f'{RED}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, f'{RED}{text}{NORMAL}')
+    msg_log(PROGRAM_NAME, text)
 
 
 def msg_log(PROGRAM_NAME, text):
@@ -203,7 +208,7 @@ def msg_warning(PROGRAM_NAME, text):
     This function returns a warning message and logs it.
     """
     print(f'{YELLOW}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, f'{YELLOW}{text}{NORMAL}')
+    msg_log(PROGRAM_NAME, text)
 
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
@@ -240,23 +245,23 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME + ' '
     man_url += _('man page') + '\x1b]8;;\x1b\\'
-    print(_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME) +
-          f'\n{PROGRAM_DESC}.\n\n' +
-          f"{_('Options:')}\n" +
-          f"{_('  -h, --help     give this help list')}\n" +
-          f"{_('  -u, --usage    give a short usage message')}\n" +
-          f"{_('  -v, --version  print program version')}\n\n" +
-          _("Type 'man {}' or see the {} for more information.").
-          format(DISPLAY_NAME, man_url))
+    print(_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME)
+          + f'\n{PROGRAM_DESC}.\n\n'
+          + f"{_('Options:')}\n"
+          + f"{_('  -h, --help     give this help list')}\n"
+          + f"{_('  -u, --usage    give a short usage message')}\n"
+          + f"{_('  -v, --version  print program version')}\n\n"
+          + _("Type 'man {}' or see the {} for more information.").
+            format(DISPLAY_NAME, man_url))
 
 
 def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    print(_('Usage: {}').format(DISPLAY_NAME) +
-          f' [-h|--help] [-u|--usage] [-v|--version]\n\n' +
-          _("Type '{} --help' for more information.").format(DISPLAY_NAME))
+    print(_('Usage: {}').format(DISPLAY_NAME)
+          + f' [-h|--help] [-u|--usage] [-v|--version]\n\n'
+          + _("Type '{} --help' for more information.").format(DISPLAY_NAME))
 
 
 def process_option_version(PROGRAM_NAME):
@@ -282,6 +287,7 @@ def process_option_version(PROGRAM_NAME):
         msg_log(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         msg_error(PROGRAM_NAME, text)
+        term_script(PROGRAM_NAME)
         sys.exit(ERROR)
     finally:
         command = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME}"
@@ -296,11 +302,11 @@ def process_option_version(PROGRAM_NAME):
         else:
             program_year = ', ' + program_year
 
-        print(f'kz 2.4.7{build_id}\n\n' +
-              f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 \
-Universal\n" +
-              f'<https://creativecommons.org/publicdomain/zero/1.0>' +
-              f'{program_year}')
+        print(f'kz 2.4.7{build_id}\n\n'
+              + f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 1.\
+0 Universal\n"
+              + f'<https://creativecommons.org/publicdomain/zero/1.0>'
+              + f'{program_year}')
 
 
 def term_script(PROGRAM_NAME):

@@ -411,7 +411,7 @@ EOF
     else
         # shellcheck disable=SC2034
         rsync_messages=$(cat "$errors")
-        msg_error "$(eval_gettext "Backup ended with warnings or errors.
+        text="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable,
 or were any files added or removed while creating the backup,
@@ -423,6 +423,7 @@ Check the rsync messages:
 Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz backup'.")"
+        msg_error "$text"
         exit $ERROR
     fi
 }
@@ -439,8 +440,8 @@ function term_script {
     if [[ $target_medium == /media/* ]]; then
         term_script_unmount
     else
-        msg_info "
-$(gettext 'The backup has been made.')"
+        text=$(gettext 'The backup has been made.')
+        msg_info "$text"
     fi
     exit $OK
 }
@@ -482,15 +483,15 @@ function term_script_unmount {
         udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
     fi
     if [[ $rc -eq $OK ]]; then
-        msg_info "
-$(gettext 'The backup has been made.')
+        text="$(gettext 'The backup has been made.')
 
 $(gettext 'The USB medium can be removed.')"
+        msg_info "$text"
     else
-            msg_warning "
-$(gettext 'The backup has been made.')
+        text="$(gettext 'The backup has been made.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
+        msg_warning "$text"
     fi
 }
 

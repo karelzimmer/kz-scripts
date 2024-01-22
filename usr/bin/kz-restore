@@ -175,9 +175,10 @@ Disconnect media via Files.")"
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
         if ! [[ -d $source ]]; then
-            msg_error "$(eval_gettext "No backup found on connected USB medium.
+            text=$(eval_gettext "No backup found on connected USB medium.
 
-Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
+Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
+            msg_error "$text"
             exit $ERROR
         fi
     fi
@@ -214,7 +215,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")"
     if [[ $restore_rc -ne $OK ]]; then
         # shellcheck disable=SC2034
         rsync_messages=$(cat "$errors")
-        msg_error "$(eval_gettext "Restore ended with warnings or errors.
+        text=$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable,
 or were any files added or removed while restoring the backup,
@@ -225,7 +226,8 @@ Check the rsync messages:
 
 Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz restore'.")"
+use app Terminal, type 'kz restore'.")
+        msg_error "$text"
         exit $ERROR
     fi
 }
@@ -308,8 +310,8 @@ function term_script {
     if [[ $source_medium == /media/* ]]; then
         term_script_unmount
     else
-        msg_info "
-$(gettext 'The backup has been restored.')"
+        text=$(gettext 'The backup has been restored.')
+        msg_info "$text"
     fi
     exit $OK
 }
@@ -351,15 +353,16 @@ function term_script_unmount {
         udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
     fi
     if [[ $rc -eq $OK ]]; then
-        msg_info "
-$(gettext 'The backup has been restored.')
+        text="$(gettext 'The backup has been restored.')
 
 $(gettext 'The USB medium can be removed.')"
+        msg_info "$text"
     else
-            msg_warning "
-$(gettext 'The backup has been restored.')
+        text="$(gettext 'The backup has been restored.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
+        msg_warning "$text"
+
     fi
 }
 

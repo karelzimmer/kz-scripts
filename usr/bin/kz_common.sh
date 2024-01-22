@@ -89,11 +89,13 @@ function become_root {
         if $option_gui; then
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD
-            msg_log "restart (pkexec $program_exec ${commandline_args[*]})"
+            text="restart (pkexec $program_exec ${commandline_args[*]})"
+            msg_log "$text"
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            msg_log "restart (exec sudo $program_exec ${commandline_args[*]})"
+            text="restart (exec sudo $program_exec ${commandline_args[*]})"
+            msg_log "$text"
             sudo --non-interactive true || true
             exec sudo "$program_exec" "${commandline_args[@]}"
         fi
@@ -111,7 +113,8 @@ function become_root_check {
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $OK
     else
-        msg_info "$(gettext 'Already performed by the administrator.')"
+        text=$(gettext 'Already performed by the administrator.')
+        msg_info "$text"
         exit $OK
     fi
 }
@@ -130,9 +133,9 @@ function check_for_active_updates {
                 /var/lib/dpkg/lock                          \
                 /var/lib/dpkg/lock-frontend                 \
                 &> /dev/null; do
-        text=$(eval_gettext "Wait \${check_wait}s for another package manager \
-to finish...")
-        printf '%s\n' "$text"
+        printf  '%s\n'  \
+                "$(eval_gettext "Wait \${check_wait}s for another package mana\
+ger to finish...")"
         sleep $check_wait
     done
 }
@@ -196,7 +199,8 @@ function msg_error {
     else
         printf "$RED%b\n$NORMAL" "$*" >&2
     fi
-    msg_log "<3>$*"
+    text="$*"
+    msg_log "$text"
 }
 
 
@@ -235,7 +239,8 @@ function msg_warning {
     else
         printf "$YELLOW%b\n$NORMAL" "$*" >&2
     fi
-    msg_log "<4>$*"
+    text="$*"
+    msg_log "$text"
 }
 
 
@@ -390,8 +395,7 @@ function signal {
     case $signal in
         err)
             text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
-            msg_error "
-$text"
+            msg_error "$text"
             exit "$rc"
             ;;
         exit)
@@ -404,8 +408,7 @@ $text"
             ;;
         *)
             text=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
-            msg_error "
-$text"
+            msg_error "$text"
             exit "$rc"
             ;;
     esac

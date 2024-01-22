@@ -175,8 +175,8 @@ function process_input {
         input_file=$file_argument
     fi
     if ! [[ -f $input_file ]]; then
-        msg_error "$(eval_gettext "No set up file found, looked for '\$input_f\
-ile'.")"
+        text=$(eval_gettext "No set up file found, looked for '\$input_file'.")
+        msg_error "$text"
         exit $ERROR
     fi
 
@@ -445,7 +445,8 @@ function execute_command {
         printf '         %s\n' "$cmd"
     fi
 
-    msg_log "$app_name_line/$cmd_seq_num\n$cmd"
+    text="$app_name_line/$cmd_seq_num\n$cmd"
+    msg_log "$text"
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
 }
 
@@ -456,40 +457,43 @@ function term_script {
     local   operation=$(gettext 'set up')
 
     if ! $commands_found; then
-        msg_info "$(gettext 'No commands to execute.' )"
+        text=$(gettext 'No commands to execute.' )
+        msg_info "$text"
         exit $OK
     fi
 
     if [[ -n ${failed_apps[*]} ]]; then
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
-        msg_error "
-$(eval_gettext "The set up of the following apps contains errors:
+        text=$(eval_gettext "The set up of the following apps contains errors:
 \$failed_apps_text
 
 Try to set up the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz setup \$failed_apps_text'.")"
+use app Terminal, type 'kz setup \$failed_apps_text'.")
+        msg_error "$text"
         exit $ERROR
     else
         if $option_reset; then
             # shellcheck disable=SC2034
             operation=$(gettext 'reset')
         fi
-        msg_info "
-$(eval_gettext "Apps \$operation completed.")"
+        text=$(eval_gettext "Apps \$operation completed.")
+        msg_info "$text"
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
-                msg_info "$(gettext "You will now be logged out of the compute\
-r to finish installing the apps and changing user settings.")"
+                text=$(gettext "You will now be logged out of the computer to \
+finish installing the apps and changing user settings.")
+                msg_info "$text"
                 if ! $option_gui; then
                     wait_for_enter
                 fi
                 gnome-session-quit --logout --no-prompt
             else
-                msg_info "$(gettext "You must log out of the computer to finis\
-h installing the apps and changing user settings.
-Type 'logout' to log out.")"
+                text=$(gettext "You must log out of the computer to finish ins\
+talling the apps and changing user settings.
+Type 'logout' to log out.")
+                msg_info "$text"
                 exit $OK
             fi
         fi
