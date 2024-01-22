@@ -48,6 +48,16 @@ sudo apt-get install --yes cockpit cockpit-pcp
 sudo apt-get install --yes cups-backend-bjnp
 
 
+# APP disable-aer HOST pc06
+# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+# Express Advanced Error Reporting) to prevent the log gets flooded with
+# 'AER: Corrected errors received'.  Usually needed for HP hardware.
+sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
+sudo update-grub
+# Check for kernel config parameter pci=noaer.
+grep --quiet --regexp='pci=noaer' /etc/default/grub
+
+
 # APP exiftool HOST pc06
 sudo apt-get install --yes libimage-exiftool-perl
 

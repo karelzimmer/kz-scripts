@@ -42,6 +42,13 @@ sudo apt-get remove --yes cockpit
 sudo apt-get remove --yes cups-backend-bjnp
 
 
+# APP disable-aer HOST pc06
+sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
+sudo update-grub
+# Check for kernel config parameter pci=noaer.
+! grep --quiet --regexp='pci=noaer' /etc/default/grub
+
+
 # APP exiftool HOST pc06
 sudo apt-get remove --yes libimage-exiftool-perl
 
