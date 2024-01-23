@@ -73,7 +73,9 @@ def become_root(PROGRAM_NAME):
     """
     exec_sudo = 'sudo '
 
-    become_root_check(PROGRAM_NAME)
+    if become_root_check():
+        term_script(PROGRAM_NAME)
+        sys.exit(OK)
 
     if os.getuid() != 0:
         subprocess.run('sudo --non-interactive true || true', shell=True)
@@ -105,10 +107,10 @@ def become_root(PROGRAM_NAME):
             sys.exit(OK)
 
 
-def become_root_check(PROGRAM_NAME):
+def become_root_check():
     """
     This function checks if the user is allowed to become root and returns 0 if
-    so, otherwise exits 0 with descriptive message.
+    so, otherwise returns 1 with descriptive message.
     """
     if os.getuid() == 0:
         return(OK)
@@ -118,8 +120,7 @@ def become_root_check(PROGRAM_NAME):
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         print(_('Already performed by the administrator.'))
-        term_script(PROGRAM_NAME)
-        sys.exit(OK)
+        return(ERROR)
     else:
         return(OK)
 

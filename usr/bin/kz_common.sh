@@ -83,7 +83,10 @@ function become_root {
     local   -i  pkexec_rc=0
     local       program_exec=$MODULE_PATH/$PROGRAM_NAME
 
-    become_root_check
+    # shellcheck disable=SC2310
+    if ! become_root_check; then
+        exit $OK
+    fi
 
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
@@ -104,7 +107,7 @@ function become_root {
 
 
 # This function checks if the user is allowed to become root and returns 0 if
-# so, otherwise exits 0 with descriptive message.
+# so, otherwise returns 1 with descriptive message.
 function become_root_check {
     # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then
@@ -115,7 +118,7 @@ function become_root_check {
     else
         text=$(gettext 'Already performed by the administrator.')
         msg_info "$text"
-        exit $OK
+        return $ERROR
     fi
 }
 

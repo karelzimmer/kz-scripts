@@ -403,7 +403,11 @@ function process_menu2_choice {
 # This function shows the manual actions to be performed.
 function manual_actions {
     if [[ $title = $(gettext 'Add users') ]]; then
-        text="$(gettext 'Add users'):
+        # shellcheck disable=SC2310
+        if ! become_root_check; then
+            return $OK
+        fi
+        text="$(gettext 'Add users (only as administrator)'):
 
 $(gettext "Add any additional users with the following steps.
 

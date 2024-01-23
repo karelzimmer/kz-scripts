@@ -89,7 +89,10 @@ function check_input {
 
 # This function processes the script options and arguments.
 function process_input {
-    become_root_check
+    # shellcheck disable=SC2310
+    if ! become_root_check; then
+        return $OK
+    fi
     check_repos
     build_package
     upload_website
