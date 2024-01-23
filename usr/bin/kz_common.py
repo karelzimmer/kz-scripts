@@ -314,6 +314,7 @@ def term_script(PROGRAM_NAME):
     """
     This function controls the termination of the script.
     """
+    print(f'{_("Finished")}.')
     text = f'==== END log {PROGRAM_NAME} ===='
     msg_log(PROGRAM_NAME, text)
 
