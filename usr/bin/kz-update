@@ -31,7 +31,7 @@ _ = gettext.gettext
 ###############################################################################
 
 PROGRAM_NAME = 'kz-update'
-PROGRAM_DESC = (_('Update system'))
+PROGRAM_DESC = _('Update system')
 DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
 
@@ -51,7 +51,7 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
-    print(f'{kz_common.BOLD}==== REPAIR ===={kz_common.NORMAL}\n')
+    print(f"==== {_('Repair')} ====\n")
 
     command = 'sudo dpkg --configure --pending'
     perform_command(command)
@@ -70,7 +70,7 @@ def perform_update():
     """
     This function updates installed Debian packages.
     """
-    print(f'{kz_common.BOLD}==== UPDATE ===={kz_common.NORMAL}\n')
+    print(f"==== {_('Update')} ====\n")
 
     command = 'sudo apt-get update'
     perform_command(command)
@@ -86,7 +86,7 @@ def perform_cleanup():
     """
     This function performs a Debian packages and snap packages cleanup.
     """
-    print(f'{kz_common.BOLD}==== CLEANUP ===={kz_common.NORMAL}\n')
+    print(f"==== {_('Cleanup')} ====\n")
 
     command = 'sudo apt-get autoclean --yes'
     perform_command(command)
@@ -109,7 +109,7 @@ def perform_command(command):
     """
     This function executes a Bourne-Again SHell command.
     """
-    print(f'{kz_common.BOLD}{command}{kz_common.NORMAL}')
+    print(f'{kz_common.BLUE}{command}{kz_common.NORMAL}')
     kz_common.check_for_active_updates()
     try:
         subprocess.run({command}, shell=True, check=True,

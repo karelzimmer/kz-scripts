@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-13 18:21+0100\n"
+"POT-Creation-Date: 2024-01-24 14:29+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1036,6 +1036,15 @@ msgstr "resetten"
 
 msgid "Update system"
 msgstr "Systeem bijwerken"
+
+msgid "Repair"
+msgstr "Repareren"
+
+msgid "Update"
+msgstr "Bijwerken"
+
+msgid "Cleanup"
+msgstr "Opruimen"
 
 msgid ""
 "*** The computer must restart to complete the installation of updates ***"
