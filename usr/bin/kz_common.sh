@@ -179,8 +179,8 @@ function init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    text="==== START log $PROGRAM_NAME ====\nstarted ($MODULE_PATH/$PROGRAM_NA\
-ME $* as $USER)"
+    text="==== START log $PROGRAM_NAME ====
+started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     msg_log "$text"
 
     commandline_args=("$@")
@@ -200,14 +200,14 @@ function msg_error {
                 --title     "$title"    \
                 --text      "$*"        2> >($LOGCMD) || true
     else
-        printf "$RED%b\n$NORMAL" "$*" >&2
+        printf "$RED%b$NORMAL\n" "$*" >&2
     fi
-    text="$*"
+    text="$RED$*$NORMAL"
     msg_log "$text"
 }
 
 
-# This function returns an informational message.
+# This function returns an informational message and logs it.
 function msg_info {
     if $option_gui; then
         title=$(eval_gettext "Information \$DISPLAY_NAME")
@@ -220,6 +220,8 @@ function msg_info {
     else
         printf '%b\n' "$*"
     fi
+    text="$*"
+    msg_log "$text"
 }
 
 
@@ -240,9 +242,9 @@ function msg_warning {
                 --title     "$title"    \
                 --text      "$*"        2> >($LOGCMD) || true
     else
-        printf "$YELLOW%b\n$NORMAL" "$*" >&2
+        printf "$YELLOW%b$NORMAL\n" "$*" >&2
     fi
-    text="$*"
+    text="$YELLOW$*$NORMAL"
     msg_log "$text"
 }
 

@@ -59,6 +59,7 @@ GRAY = '\033[37m'
 # Variables
 ###############################################################################
 
+PROGRAM_NAME = ''
 text = ''
 
 
@@ -119,7 +120,8 @@ def become_root_check():
                        shell=True, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
-        print(_('Already performed by the administrator.'))
+        tex=_('Already performed by the administrator.')
+        msg_info(PROGRAM_NAME, text)
         return(ERROR)
     else:
         return(OK)
@@ -147,8 +149,9 @@ def check_for_active_updates():
         except Exception:
             break
         else:
-            print(_('Wait {}s for another package manager to finish...').
-                  format(check_wait))
+            text = _('Wait {check_wait}s for another package manager to finish\
+...')
+            msg_info(PROGRAM_NAME, text)
             time.sleep(check_wait)
 
 
@@ -160,8 +163,8 @@ def check_on_ac_power(PROGRAM_NAME):
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
         text = _('The computer now uses only the battery for power.\n\n'
-                 'It is recommended to connect the computer to the wall \
-socket.')
+                 'It is recommended to connect the computer to the wall socket\
+.')
         msg_warning(PROGRAM_NAME, text)
         try:
             input('\n' + _('Press the Enter key to continue [Enter]: '))
@@ -194,6 +197,14 @@ def msg_error(PROGRAM_NAME, text):
     This function returns an error message and logs it.
     """
     print(f'{RED}{text}{NORMAL}')
+    msg_log(PROGRAM_NAME, f'{RED}{text}{NORMAL}')
+
+
+def msg_info(PROGRAM_NAME, text):
+    """
+    This function returns an informational message and logs it.
+    """
+    print(f'{text}')
     msg_log(PROGRAM_NAME, text)
 
 
@@ -209,7 +220,7 @@ def msg_warning(PROGRAM_NAME, text):
     This function returns a warning message and logs it.
     """
     print(f'{YELLOW}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, text)
+    msg_log(PROGRAM_NAME, f'{YELLOW}{text}{NORMAL}')
 
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
@@ -246,23 +257,25 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME + ' '
     man_url += _('man page') + '\x1b]8;;\x1b\\'
-    print(_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME)
-          + f'\n{PROGRAM_DESC}.\n\n'
-          + f"{_('Options:')}\n"
-          + f"{_('  -h, --help     give this help list')}\n"
-          + f"{_('  -u, --usage    give a short usage message')}\n"
-          + f"{_('  -v, --version  print program version')}\n\n"
-          + _("Type 'man {}' or see the {} for more information.").
+    text = (_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME)
+            + f'\n{PROGRAM_DESC}.\n\n'
+            + f"{_('Options:')}\n"
+            + f"{_('  -h, --help     give this help list')}\n"
+            + f"{_('  -u, --usage    give a short usage message')}\n"
+            + f"{_('  -v, --version  print program version')}\n\n"
+            + _("Type 'man {}' or see the {} for more information.").
             format(DISPLAY_NAME, man_url))
+    msg_info(PROGRAM_NAME, text)
 
 
 def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    print(_('Usage: {}').format(DISPLAY_NAME)
-          + f' [-h|--help] [-u|--usage] [-v|--version]\n\n'
-          + _("Type '{} --help' for more information.").format(DISPLAY_NAME))
+    text = (_('Usage: {}').format(DISPLAY_NAME)
+            + f' [-h|--help] [-u|--usage] [-v|--version]\n\n'
+            + _("Type '{} --help' for more information.").format(DISPLAY_NAME))
+    msg_info(PROGRAM_NAME, text)
 
 
 def process_option_version(PROGRAM_NAME):
@@ -303,18 +316,18 @@ def process_option_version(PROGRAM_NAME):
         else:
             program_year = ', ' + program_year
 
-        print(f'kz 2.4.7{build_id}\n\n'
-              + f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 1.\
-0 Universal\n"
-              + f'<https://creativecommons.org/publicdomain/zero/1.0>'
-              + f'{program_year}')
+        text = (f'kz 2.4.7{build_id}\n\n'
+                + f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 \
+1.0 Universal\n"
+                + f'<https://creativecommons.org/publicdomain/zero/1.0>'
+                + f'{program_year}')
+        msg_info(PROGRAM_NAME, text)
 
 
 def term_script(PROGRAM_NAME):
     """
     This function controls the termination of the script.
     """
-    print(f'{_("Finished")}.')
     text = f'==== END log {PROGRAM_NAME} ===='
     msg_log(PROGRAM_NAME, text)
 
@@ -324,4 +337,5 @@ def term_script(PROGRAM_NAME):
 ###############################################################################
 
 if __name__ == '__main__':
-    print(_('{}: i am a module').format(MODULE_NAME))
+    text = _('{}: i am a module').format(MODULE_NAME)
+    msg_info(PROGRAM_NAME, text)

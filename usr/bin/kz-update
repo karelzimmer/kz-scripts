@@ -40,7 +40,6 @@ DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 ###############################################################################
 
 command = ''
-text = ''
 
 
 ###############################################################################
@@ -51,7 +50,8 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
-    print(f"==== {_('Repair')} ====\n")
+    text = f"==== {_('Repair')} ====\n"
+    kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo dpkg --configure --pending'
     perform_command(command)
@@ -70,7 +70,8 @@ def perform_update():
     """
     This function updates installed Debian packages.
     """
-    print(f"==== {_('Update')} ====\n")
+    text = f"==== {_('Update')} ====\n"
+    kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo apt-get update'
     perform_command(command)
@@ -86,7 +87,8 @@ def perform_cleanup():
     """
     This function performs a Debian packages and snap packages cleanup.
     """
-    print(f"==== {_('Cleanup')} ====\n")
+    text = f"==== {_('Cleanup')} ====\n"
+    kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo apt-get autoclean --yes'
     perform_command(command)
@@ -109,7 +111,8 @@ def perform_command(command):
     """
     This function executes a Bourne-Again SHell command.
     """
-    print(f'{kz_common.BLUE}{command}{kz_common.NORMAL}')
+    text = f'{kz_common.BLUE}{command}{kz_common.NORMAL}'
+    kz_common.msg_info(PROGRAM_NAME, text)
     kz_common.check_for_active_updates()
     try:
         subprocess.run({command}, shell=True, check=True,
@@ -121,7 +124,8 @@ def perform_command(command):
         kz_common.msg_error(PROGRAM_NAME, text)
         sys.exit(kz_common.error)
     else:
-        print()
+        text = ''
+        kz_common.msg_info(PROGRAM_NAME, text)
 
 
 def check_reboot():
@@ -130,8 +134,9 @@ def check_reboot():
     """
     try:
         with open('/var/run/reboot-required') as fh:
-            print('\n' + _('*** The computer must restart to complete the '
-                           'installation of updates ***'))
+            text = _('*** The computer must restart to complete the installati\
+on of updates ***')
+            kz_common.msg_info(PROGRAM_NAME, text)
     except FileNotFoundError as fnf:
         text = str(fnf)
         kz_common.msg_log(PROGRAM_NAME, text)
@@ -162,5 +167,8 @@ perform_update()
 perform_cleanup()
 
 check_reboot()
+
+text = f"{_('Finished')}."
+kz_common.msg_info(PROGRAM_NAME, text)
 
 kz_common.term_script(PROGRAM_NAME)
