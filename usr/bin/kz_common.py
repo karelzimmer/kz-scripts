@@ -120,7 +120,7 @@ def become_root_check():
                        shell=True, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
-        tex=_('Already performed by the administrator.')
+        text = _('Already performed by the administrator.')
         msg_info(PROGRAM_NAME, text)
         return(ERROR)
     else:
