@@ -99,7 +99,7 @@ msgstr ""
 msgid "type '{} --usage' for more information"
 msgstr ""
 
-msgid "Usage: {} [OPTION...]\n"
+msgid "Usage: {} [OPTION...]"
 msgstr ""
 
 msgid "Type 'man {}' or see the {} for more information."

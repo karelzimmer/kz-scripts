@@ -261,7 +261,7 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME + ' '
     man_url += _('man page') + '\x1b]8;;\x1b\\'
     text = (_('Usage: {} [OPTION...]').format(DISPLAY_NAME)
-            + f'\n{PROGRAM_DESC}.\n\n'
+            + f'\n\n{PROGRAM_DESC}.\n\n'
             + f"{_('Options:')}\n"
             + f"{_('  -h, --help     give this help list')}\n"
             + f"{_('  -u, --usage    give a short usage message')}\n"

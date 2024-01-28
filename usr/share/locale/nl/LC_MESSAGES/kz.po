@@ -104,8 +104,8 @@ msgstr "In programma {} is een fout opgetreden."
 msgid "type '{} --usage' for more information"
 msgstr "typ '{} --usage' voor meer informatie"
 
-msgid "Usage: {} [OPTION...]\n"
-msgstr "Gebruik: {} [OPTIE...]\n"
+msgid "Usage: {} [OPTION...]"
+msgstr "Gebruik: {} [OPTIE...]"
 
 msgid "Type 'man {}' or see the {} for more information."
 msgstr "Typ 'man {}' of zie de {} voor meer informatie."
