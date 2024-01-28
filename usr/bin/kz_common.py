@@ -147,10 +147,13 @@ def check_for_active_updates():
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
         except Exception:
+            text = _('Wait {}s for another package manager to finish...').\
+                format(check_wait)
+            msg_info(PROGRAM_NAME, text)
             break
         else:
-            text = _('Wait {check_wait}s for another package manager to finish\
-...')
+            text = _('Wait {}s for another package manager to finish...').\
+                format(check_wait)
             msg_info(PROGRAM_NAME, text)
             time.sleep(check_wait)
 
@@ -257,7 +260,7 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME + ' '
     man_url += _('man page') + '\x1b]8;;\x1b\\'
-    text = (_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME)
+    text = (_('Usage: {} [OPTION...]').format(DISPLAY_NAME)
             + f'\n{PROGRAM_DESC}.\n\n'
             + f"{_('Options:')}\n"
             + f"{_('  -h, --help     give this help list')}\n"
