@@ -120,7 +120,7 @@ def perform_command(command):
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
-        text = _('Program {PROGRAM_NAME} encountered an error.')
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.msg_error(PROGRAM_NAME, text)
         sys.exit(kz_common.error)
     else:
@@ -143,7 +143,7 @@ on of updates ***')
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
-        text = _('Program {PROGRAM_NAME} encountered an error.')
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.msg_error(PROGRAM_NAME, text)
         sys.exit(kz_common.error)
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-28 14:32+0100\n"
+"POT-Creation-Date: 2024-01-24 14:29+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -92,37 +92,29 @@ msgstr "Foutmelding $DISPLAY_NAME"
 msgid "Common module for Python scripts"
 msgstr "Algemene module voor Python scripts"
 
-#, python-brace-format
-msgid "Wait {check_wait}s for another package manager to finish..."
-msgstr "Wacht {check_wait}s tot andere pakketbeheerder klaar is..."
+msgid "Wait {}s for another package manager to finish..."
+msgstr "Wacht {}s tot andere pakketbeheerder klaar is..."
 
-#, python-brace-format
-msgid "Program {PROGRAM_NAME} has been interrupted."
-msgstr "Programma {PROGRAM_NAME} is onderbroken."
+msgid "Program {} has been interrupted."
+msgstr "Programma {} is onderbroken."
 
-#, python-brace-format
-msgid "Program {PROGRAM_NAME} encountered an error."
-msgstr "In programma {PROGRAM_NAME} is een fout opgetreden."
+msgid "Program {} encountered an error."
+msgstr "In programma {} is een fout opgetreden."
 
-#, python-brace-format
-msgid "type '{DISPLAY_NAME} --usage' for more information"
-msgstr "typ '{DISPLAY_NAME} --usage' voor meer informatie"
+msgid "type '{} --usage' for more information"
+msgstr "typ '{} --usage' voor meer informatie"
 
-#, python-brace-format
-msgid "Usage: {DISPLAY_NAME} [OPTION...]"
-msgstr "Gebruik: {DISPLAY_NAME} [OPTIE...]"
+msgid "Usage: {} [OPTION...]\n"
+msgstr "Gebruik: {} [OPTIE...]\n"
 
-#, python-brace-format
-msgid "Type 'man {DISPLAY_NAME}' or see the {man_url} for more information."
-msgstr "Typ 'man {DISPLAY_NAME}' of zie de {man_url} voor meer informatie."
+msgid "Type 'man {}' or see the {} for more information."
+msgstr "Typ 'man {}' of zie de {} voor meer informatie."
 
-#, python-brace-format
-msgid "Usage: {DISPLAY_NAME}"
-msgstr "Gebruik: {DISPLAY_NAME}"
+msgid "Usage: {}"
+msgstr "Gebruik: {}"
 
-#, python-brace-format
-msgid "Type '{DISPLAY_NAME} --help' for more information."
-msgstr "Typ '{DISPLAY_NAME} --help' voor meer informatie."
+msgid "Type '{} --help' for more information."
+msgstr "Typ '{} --help' voor meer informatie."
 
 msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
@@ -130,9 +122,8 @@ msgstr "Build-ID kan niet worden bepaald."
 msgid "Program year cannot be determined."
 msgstr "Programmajaar kan niet worden vastgesteld."
 
-#, python-brace-format
-msgid "{MODULE_NAME}: i am a module"
-msgstr "{MODULE_NAME}: ik ben een module"
+msgid "{}: i am a module"
+msgstr "{}: ik ben een module"
 
 msgid "Run command"
 msgstr "Opdracht uitvoeren"

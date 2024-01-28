@@ -93,14 +93,14 @@ def become_root(PROGRAM_NAME):
         try:
             subprocess.run(exec_sudo, shell=True, check=True)
         except KeyboardInterrupt:
-            text = _('Program {PROGRAM_NAME} has been interrupted.')
+            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         except Exception as exc:
             text = str(exc)
             msg_log(PROGRAM_NAME, text)
-            text = _('Program {PROGRAM_NAME} encountered an error.')
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
@@ -169,14 +169,14 @@ def check_on_ac_power(PROGRAM_NAME):
         try:
             input('\n' + _('Press the Enter key to continue [Enter]: '))
         except KeyboardInterrupt:
-            text = _('Program {PROGRAM_NAME} has been interrupted.')
+            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         except Exception as exc:
             text = str(exc)
             msg_log(PROGRAM_NAME, text)
-            text = _('Program {PROGRAM_NAME} encountered an error.')
+            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
@@ -227,7 +227,8 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the general options.
     """
-    USAGE_LINE = _("type '{DISPLAY_NAME} --usage' for more information")
+    USAGE_LINE = _("type '{} --usage' for more information").\
+        format(DISPLAY_NAME)
 
     parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE_LINE,
                                      add_help=False)
@@ -256,14 +257,14 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME + ' '
     man_url += _('man page') + '\x1b]8;;\x1b\\'
-    text = (f"{_('Usage: {DISPLAY_NAME} [OPTION...]')}\n"
+    text = (_('Usage: {} [OPTION...]\n').format(DISPLAY_NAME)
             + f'\n{PROGRAM_DESC}.\n\n'
             + f"{_('Options:')}\n"
             + f"{_('  -h, --help     give this help list')}\n"
             + f"{_('  -u, --usage    give a short usage message')}\n"
             + f"{_('  -v, --version  print program version')}\n\n"
-            + _("Type 'man {DISPLAY_NAME}' or see the {man_url} for more infor\
-mation."))
+            + _("Type 'man {}' or see the {} for more information.").
+            format(DISPLAY_NAME, man_url))
     msg_info(PROGRAM_NAME, text)
 
 
@@ -271,9 +272,9 @@ def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    text = (_('Usage: {DISPLAY_NAME}')
+    text = (_('Usage: {}').format(DISPLAY_NAME)
             + f' [-h|--help] [-u|--usage] [-v|--version]\n\n'
-            + _("Type '{DISPLAY_NAME} --help' for more information."))
+            + _("Type '{} --help' for more information.").format(DISPLAY_NAME))
     msg_info(PROGRAM_NAME, text)
 
 
@@ -298,7 +299,7 @@ def process_option_version(PROGRAM_NAME):
     except Exception as exc:
         text = str(exc)
         msg_log(PROGRAM_NAME, text)
-        text = _('Program {PROGRAM_NAME} encountered an error.')
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
         msg_error(PROGRAM_NAME, text)
         term_script(PROGRAM_NAME)
         sys.exit(ERROR)
@@ -336,5 +337,5 @@ def term_script(PROGRAM_NAME):
 ###############################################################################
 
 if __name__ == '__main__':
-    text = _('{MODULE_NAME}: i am a module')
+    text = _('{}: i am a module').format(MODULE_NAME)
     msg_info(PROGRAM_NAME, text)
