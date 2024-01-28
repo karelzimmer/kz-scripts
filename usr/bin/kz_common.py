@@ -74,7 +74,7 @@ def become_root(PROGRAM_NAME):
     """
     exec_sudo = 'sudo '
 
-    if become_root_check():
+    if not become_root_check(PROGRAM_NAME):
         term_script(PROGRAM_NAME)
         sys.exit(OK)
 
@@ -108,13 +108,13 @@ def become_root(PROGRAM_NAME):
             sys.exit(OK)
 
 
-def become_root_check():
+def become_root_check(PROGRAM_NAME):
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
     """
     if os.getuid() == 0:
-        return(OK)
+        return True
     try:
         subprocess.run('groups $USER | grep --quiet --regexp=sudo',
                        shell=True, check=True,
@@ -122,9 +122,9 @@ def become_root_check():
     except Exception:
         text = _('Already performed by the administrator.')
         msg_info(PROGRAM_NAME, text)
-        return(ERROR)
+        return False
     else:
-        return(OK)
+        return True
 
 
 def check_for_active_updates():

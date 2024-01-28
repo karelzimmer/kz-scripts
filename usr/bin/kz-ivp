@@ -56,7 +56,8 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        printf '%s\n' "$USAGE_LINE"
+        text=$USAGE_LINE
+        msg_info "$text"
         exit $ERROR
     fi
     eval set -- "$parsed"
