@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-24 14:29+0100\n"
+"POT-Creation-Date: 2024-01-28 14:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,28 +87,36 @@ msgstr ""
 msgid "Common module for Python scripts"
 msgstr ""
 
-msgid "Wait {}s for another package manager to finish..."
+#, python-brace-format
+msgid "Wait {check_wait}s for another package manager to finish..."
 msgstr ""
 
-msgid "Program {} has been interrupted."
+#, python-brace-format
+msgid "Program {PROGRAM_NAME} has been interrupted."
 msgstr ""
 
-msgid "Program {} encountered an error."
+#, python-brace-format
+msgid "Program {PROGRAM_NAME} encountered an error."
 msgstr ""
 
-msgid "type '{} --usage' for more information"
+#, python-brace-format
+msgid "type '{DISPLAY_NAME} --usage' for more information"
 msgstr ""
 
-msgid "Usage: {} [OPTION...]\n"
+#, python-brace-format
+msgid "Usage: {DISPLAY_NAME} [OPTION...]"
 msgstr ""
 
-msgid "Type 'man {}' or see the {} for more information."
+#, python-brace-format
+msgid "Type 'man {DISPLAY_NAME}' or see the {man_url} for more information."
 msgstr ""
 
-msgid "Usage: {}"
+#, python-brace-format
+msgid "Usage: {DISPLAY_NAME}"
 msgstr ""
 
-msgid "Type '{} --help' for more information."
+#, python-brace-format
+msgid "Type '{DISPLAY_NAME} --help' for more information."
 msgstr ""
 
 msgid "Build ID cannot be determined."
@@ -117,7 +125,8 @@ msgstr ""
 msgid "Program year cannot be determined."
 msgstr ""
 
-msgid "{}: i am a module"
+#, python-brace-format
+msgid "{MODULE_NAME}: i am a module"
 msgstr ""
 
 msgid "Run command"
