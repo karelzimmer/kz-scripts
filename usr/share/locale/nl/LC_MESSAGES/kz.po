@@ -130,20 +130,16 @@ msgid "Run command"
 msgstr "Opdracht uitvoeren"
 
 #, sh-format
-msgid ""
-"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
-"   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
-msgstr ""
-"Gebruik: $DISPLAY_NAME OPDRACHT [ARGUMENT...]\n"
-"     of: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+msgid "Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]"
+msgstr "Gebruik: $DISPLAY_NAME OPDRACHT [ARGUMENT...]"
 
 #, sh-format
-msgid ""
-"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
-"   or: $DISPLAY_NAME OPTION"
-msgstr ""
-"Gebruik: $DISPLAY_NAME OPDRACHT [ARGUMENT...]\n"
-"     of: $DISPLAY_NAME OPTIE"
+msgid "   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+msgstr "     of: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+
+#, sh-format
+msgid "   or: $DISPLAY_NAME OPTION"
+msgstr "     of: $DISPLAY_NAME OPTIE"
 
 msgid "  -l, --list     show available COMMANDs"
 msgstr "  -l, --list     toon beschikbare OPDRACHTen"

@@ -168,7 +168,7 @@ def check_on_ac_power(PROGRAM_NAME):
 t.')
         msg_warning(PROGRAM_NAME, text)
         try:
-            text = f"\n{_('Press the Enter key to continue [Enter]: ')}"
+            text += _('Press the Enter key to continue [Enter]: ')
             input(text)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
@@ -259,15 +259,18 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     man_url = f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME} '
     man_url += f"{_('man page')}\x1b]8;;\x1b\\"
-    text = f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n"
+    text = _('Usage: {} [OPTION...]').format(DISPLAY_NAME)
+    text += '\n\n'
+    text += f'{PROGRAM_DESC}.'
+    text += '\n\n'
+    text += _('Options:')
     text += '\n'
-    text += f'{PROGRAM_DESC}.\n'
+    text += _('  -h, --help     give this help list')
     text += '\n'
-    text += f"{_('Options:')}\n"
-    text += f"{_('  -h, --help     give this help list')}\n"
-    text += f"{_('  -u, --usage    give a short usage message')}\n"
-    text += f"{_('  -v, --version  print program version')}\n"
+    text += _('  -u, --usage    give a short usage message')
     text += '\n'
+    text += _('  -v, --version  print program version')
+    text += '\n\n'
     text += _("Type 'man {}' or see the {} for more information.").\
         format(DISPLAY_NAME, man_url)
     msg_info(PROGRAM_NAME, text)
@@ -277,9 +280,9 @@ def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    text = f"{_('Usage: {}').format(DISPLAY_NAME)} [-h|--help] [-u|--usage] "
-    text += f'[-v|--version]\n'
-    text += '\n'
+    text = _('Usage: {}').format(DISPLAY_NAME)
+    text += ' [-h|--help] [-u|--usage] [-v|--version]'
+    text += '\n\n'
     text += _("Type '{} --help' for more information.").format(DISPLAY_NAME)
     msg_info(PROGRAM_NAME, text)
 
@@ -321,11 +324,13 @@ def process_option_version(PROGRAM_NAME):
             program_year = '.'
         else:
             program_year = ', ' + program_year
-        text = f'kz 2.4.7{build_id}\n'
-        text += '\n'
-        text += f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 "
-        text += '1.0 Universal\n'
-        text += f'<https://creativecommons.org/publicdomain/zero/1.0>'
+
+        text = f'kz 2.4.7{build_id}'
+        text += '\n\n'
+        text += _('Written by')
+        text += ' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
+        text += '\n\n'
+        text += '<https://creativecommons.org/publicdomain/zero/1.0>'
         text += f'{program_year}'
         msg_info(PROGRAM_NAME, text)
 

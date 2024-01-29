@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-29 08:27+0100\n"
+"POT-Creation-Date: 2024-01-29 17:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,15 +124,15 @@ msgid "Run command"
 msgstr ""
 
 #, sh-format
-msgid ""
-"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
-"   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+msgid "Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]"
 msgstr ""
 
 #, sh-format
-msgid ""
-"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
-"   or: $DISPLAY_NAME OPTION"
+msgid "   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+msgstr ""
+
+#, sh-format
+msgid "   or: $DISPLAY_NAME OPTION"
 msgstr ""
 
 msgid "  -l, --list     show available COMMANDs"
