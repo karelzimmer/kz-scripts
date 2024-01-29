@@ -30,12 +30,13 @@ msgid "  -v, --version  print program version"
 msgstr "  -v, --version  toon de programmaversie"
 
 msgid ""
-"The computer now uses only the battery for power.\n"
-"\n"
+"The computer now uses only the battery for power."
+msgstr ""
+"De computer gebruikt nu alleen de accu voor de stroomvoorziening."
+
+msgid ""
 "It is recommended to connect the computer to the wall socket."
 msgstr ""
-"De computer gebruikt nu alleen de accu voor de stroomvoorziening.\n"
-"\n"
 "Geadviseerd wordt om de computer aan te sluiten op het stopcontact."
 
 msgid "Press the Enter key to continue [Enter]: "

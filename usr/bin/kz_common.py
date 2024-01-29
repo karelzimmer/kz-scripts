@@ -162,12 +162,14 @@ def check_on_ac_power(PROGRAM_NAME):
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
-        text = _('The computer now uses only the battery for power.\n\n'
-                 'It is recommended to connect the computer to the wall socket\
-.')
+        text = _('The computer now uses only the battery for power.')
+        text += '\n\n'
+        text += _('It is recommended to connect the computer to the wall socke\
+t.')
         msg_warning(PROGRAM_NAME, text)
         try:
-            input('\n' + _('Press the Enter key to continue [Enter]: '))
+            text = f"\n{_('Press the Enter key to continue [Enter]: ')}"
+            input(text)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             msg_error(PROGRAM_NAME, text)
@@ -255,16 +257,19 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     This function shows the available help.
     """
-    man_url = '\x1b]8;;man:' + PROGRAM_NAME + '(1)\x1b\\' + DISPLAY_NAME + ' '
-    man_url += _('man page') + '\x1b]8;;\x1b\\'
-    text = (_('Usage: {} [OPTION...]').format(DISPLAY_NAME)
-            + f'\n\n{PROGRAM_DESC}.\n\n'
-            + f"{_('Options:')}\n"
-            + f"{_('  -h, --help     give this help list')}\n"
-            + f"{_('  -u, --usage    give a short usage message')}\n"
-            + f"{_('  -v, --version  print program version')}\n\n"
-            + _("Type 'man {}' or see the {} for more information.").
-            format(DISPLAY_NAME, man_url))
+    man_url = f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME} '
+    man_url += f"{_('man page')}\x1b]8;;\x1b\\"
+    text = f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n"
+    text += '\n'
+    text += f'{PROGRAM_DESC}.\n'
+    text += '\n'
+    text += f"{_('Options:')}\n"
+    text += f"{_('  -h, --help     give this help list')}\n"
+    text += f"{_('  -u, --usage    give a short usage message')}\n"
+    text += f"{_('  -v, --version  print program version')}\n"
+    text += '\n'
+    text += _("Type 'man {}' or see the {} for more information.").\
+        format(DISPLAY_NAME, man_url)
     msg_info(PROGRAM_NAME, text)
 
 
@@ -272,9 +277,10 @@ def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    text = (_('Usage: {}').format(DISPLAY_NAME)
-            + f' [-h|--help] [-u|--usage] [-v|--version]\n\n'
-            + _("Type '{} --help' for more information.").format(DISPLAY_NAME))
+    text = f"{_('Usage: {}').format(DISPLAY_NAME)} [-h|--help] [-u|--usage] "
+    text += f'[-v|--version]\n'
+    text += '\n'
+    text += _("Type '{} --help' for more information.").format(DISPLAY_NAME)
     msg_info(PROGRAM_NAME, text)
 
 
@@ -289,7 +295,7 @@ def process_option_version(PROGRAM_NAME):
 
     try:
         with open('/usr/local/etc/kz-build.id') as fh:
-            build_id = ' (' + fh.read() + ')'
+            build_id = f' ({fh.read()})'
     except FileNotFoundError as fnf:
         text = str(fnf)
         msg_log(PROGRAM_NAME, text)
@@ -304,8 +310,8 @@ def process_option_version(PROGRAM_NAME):
         term_script(PROGRAM_NAME)
         sys.exit(ERROR)
     finally:
-        command = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME}"
-        command = f"{command} | cut --delimiter=' ' --fields=3"
+        command = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME} |"
+        command += f" cut --delimiter=' ' --fields=3"
         program_year = subprocess.check_output(command, shell=True,
                                                stderr=subprocess.DEVNULL)
         program_year = program_year.decode('utf-8').strip()
@@ -315,12 +321,12 @@ def process_option_version(PROGRAM_NAME):
             program_year = '.'
         else:
             program_year = ', ' + program_year
-
-        text = (f'kz 2.4.7{build_id}\n\n'
-                + f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 \
-1.0 Universal\n"
-                + f'<https://creativecommons.org/publicdomain/zero/1.0>'
-                + f'{program_year}')
+        text = f'kz 2.4.7{build_id}\n'
+        text += '\n'
+        text += f"{_('Written by')} Karel Zimmer <info@karelzimmer.nl>, CC0 "
+        text += '1.0 Universal\n'
+        text += f'<https://creativecommons.org/publicdomain/zero/1.0>'
+        text += f'{program_year}'
         msg_info(PROGRAM_NAME, text)
 
 
