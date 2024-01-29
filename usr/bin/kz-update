@@ -140,6 +140,8 @@ on of updates ***')
     except FileNotFoundError as fnf:
         text = str(fnf)
         kz_common.msg_log(PROGRAM_NAME, text)
+        text = f"{_('Finished')}."
+        kz_common.msg_info(PROGRAM_NAME, text)
     except Exception as exc:
         text = str(exc)
         kz_common.msg_log(PROGRAM_NAME, text)
@@ -167,8 +169,5 @@ perform_update()
 perform_cleanup()
 
 check_reboot()
-
-text = f"{_('Finished')}."
-kz_common.msg_info(PROGRAM_NAME, text)
 
 kz_common.term_script(PROGRAM_NAME)
