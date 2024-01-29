@@ -147,9 +147,6 @@ def check_for_active_updates():
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL)
         except Exception:
-            text = _('Wait {}s for another package manager to finish...').\
-                format(check_wait)
-            msg_info(PROGRAM_NAME, text)
             break
         else:
             text = _('Wait {}s for another package manager to finish...').\
