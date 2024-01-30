@@ -24,29 +24,20 @@ readonly    PROGRAM_NAME='kz'
 readonly    PROGRAM_DESC
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]")
-            USAGE+='\n'
-            USAGE+=$(eval_gettext "   or: \$DISPLAY_NAME [-l|--list] \$OPTIONS\
-_USAGE")
-readonly    USAGE
-            HELP=$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]")
-            HELP+='\n'
-            HELP+=$(eval_gettext "   or: \$DISPLAY_NAME OPTION")
-            HELP+='\n\n'
-            HELP+="$PROGRAM_DESC."
-            HELP+='\n\n'
-            HELP+=$(gettext 'Options:')
-            HELP+='\n'
-            HELP+=$(gettext '  -l, --list     show available COMMANDs')
-            HELP+='\n'
-            HELP+=$OPTIONS_HELP
-            HELP+='\n\n'
-            HELP+=$(gettext 'Arguments:')
-            HELP+='\n'
-            HELP+=$(gettext '  COMMAND        execute COMMAND')
-            HELP+='\n'
-            HELP+=$(gettext '  ARGUMENT       ARGUMENTs for COMMAND')
-readonly    HELP
+readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
+   or: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME COMMAND [ARGUMENT...]
+   or: \$DISPLAY_NAME OPTION")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$(gettext '  -l, --list     show available COMMANDs')
+$OPTIONS_HELP
+
+$(gettext 'Arguments:')
+$(gettext '  COMMAND        execute COMMAND')
+$(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
 
 readonly    PROGRAM_PATH=$MODULE_PATH
 
@@ -89,9 +80,7 @@ function check_input {
             exit $OK
             ;;
         -*)
-            text="$DISPLAY_NAME: $(gettext 'invalid option'): $1"
-            text+='\n'
-            text+=$USAGE_LINE
+            text="$DISPLAY_NAME: $(gettext 'invalid option'): $1\n$USAGE_LINE"
             msg_info "$text"
             exit $ERROR
             ;;
@@ -100,10 +89,9 @@ function check_input {
             ;;
     esac
     if ! [[ -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
-        text="$DISPLAY_NAME: $exec_program_name: "
-        text+=$(gettext "command does not exist")
-        text+='\n'
-        text+=$USAGE_LINE
+        text="$DISPLAY_NAME: $exec_program_name: $(gettext "command does not e\
+xist")
+$USAGE_LINE"
         msg_info "$text"
         exit $ERROR
     fi
@@ -112,9 +100,8 @@ function check_input {
 
 # This function displays all available commands.
 function process_option_list {
-        text=$(gettext 'The following COMMANDs are available:')
-        text+='\n\n'
-        text+=$(gettext 'NUM  COMMAND')
+        text="$(gettext 'The following COMMANDs are available:')
+$(gettext 'NUM  COMMAND')"
         msg_info "$text"
     find    "$PROGRAM_PATH"/kz-*    \
             -maxdepth 1             \
@@ -130,9 +117,8 @@ function process_option_list {
             --number-format=rn      \
             --number-separator='  ' \
             --body-numbering=a
-    text='\n'
-    text+=$(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [\
-ARGUMENT...]\$NORMAL")
+    text="\n$(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND\
+ [ARGUMENT...]\$NORMAL")"
     msg_info "$text"
 }
 

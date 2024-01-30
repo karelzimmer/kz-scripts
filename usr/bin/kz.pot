@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-29 17:27+0100\n"
+"POT-Creation-Date: 2024-01-30 07:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,10 +29,10 @@ msgstr ""
 msgid "  -v, --version  print program version"
 msgstr ""
 
-msgid "The computer now uses only the battery for power."
-msgstr ""
-
-msgid "It is recommended to connect the computer to the wall socket."
+msgid ""
+"The computer now uses only the battery for power.\n"
+"\n"
+"It is recommended to connect the computer to the wall socket."
 msgstr ""
 
 msgid "Press the Enter key to continue [Enter]: "
@@ -124,15 +124,15 @@ msgid "Run command"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]"
+msgid ""
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
 msgstr ""
 
 #, sh-format
-msgid "   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
-msgstr ""
-
-#, sh-format
-msgid "   or: $DISPLAY_NAME OPTION"
+msgid ""
+"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
+"   or: $DISPLAY_NAME OPTION"
 msgstr ""
 
 msgid "  -l, --list     show available COMMANDs"
