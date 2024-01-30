@@ -108,8 +108,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 }
@@ -134,22 +135,24 @@ function process_input {
 
 # This function reports repos which are not in the desired state.
 function report_repos {
-    printf '%s\n' "$(gettext 'Show repos not on branch main')..."
+    text=$(gettext 'Show repos not on branch main')...
+    msg_info "$text"
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            printf  "$YELLOW%s\n$NORMAL"    \
-                    "$(eval_gettext "Repo \$repo not on branch main.")"
+            text=$(eval_gettext "Repo \$repo not on branch main.")
+            msg_warning "$text"
         fi
     done
-    printf '%s\n' "$(gettext 'Show repos which are not clean')..."
+    text=$(gettext 'Show repos which are not clean')...
+    msg_info "$text"
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            printf  "$YELLOW%s\n$NORMAL"    \
-                    "$(eval_gettext "Repo \$repo is not clean.")"
+            text=$(eval_gettext "Repo \$repo is not clean.")
+            msg_warning "$text"
             git status
         fi
     done
@@ -158,11 +161,14 @@ function report_repos {
 
 # This function check the scripts.
 function check_scripts {
-    printf '%b\n' "$(gettext 'Check scripts')..."
+    text=$(gettext 'Check scripts')...
+    msg_info "$text"
     # Call kz-check.
-    msg_log 'Calling kz-check...'
+    text='Calling kz-check...'
+    msg_log "$text"
     "$SCRIPTS_REPO"/usr/bin/kz-check || error_flag=true
-    msg_log 'Called kz-check.'
+    text='Called kz-check.'
+    msg_log "$text"
 }
 
 
@@ -171,7 +177,8 @@ function build_uploads {
     local   file=''
     local   filename=''
 
-    printf '%s\n' "$(gettext 'Build website')..."
+    text=$(gettext 'Build website')...
+    msg_info "$text"
 
     # Make sure the permissions are correct for the sync.
     chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*
@@ -210,7 +217,8 @@ function generate_mo {
     local   lc_messages=''
 
     lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
-    printf '%s\n' "$(gettext 'Generate .mo file')..."
+    text=$(gettext 'Generate .mo file')...
+    msg_info "$text"
     msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
 }
 
@@ -220,7 +228,8 @@ function build_deb {
     local   build_id=''
     local   file=''
 
-    printf '%s\n' "$(gettext 'Build package')..."
+    text=$(gettext 'Build package')...
+    msg_info "$text"
 
     # Fill kz-deb/dist/ with kz-deb/app/.
     rsync   --archive               \
@@ -270,7 +279,8 @@ function build_deb {
 # This function installs package kz.
 function install_package {
     # Allow downgrade from previous version 365 to 2.4.7.
-    printf '%s\n' "$(gettext 'Install package')..."
+    text=$(gettext 'Install package')...
+    msg_info "$text"
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -284,28 +294,35 @@ function install_package {
 
 # This function performs an installation verification procedure (IVP).
 function run_ivp {
-    printf '%b\n' "$(gettext 'Run IVP')..."
+    text=$(gettext 'Run IVP')...
+    msg_info "$text"
     # Call kz-ivp.
-    msg_log 'Calling kz-ivp...'
+    text='Calling kz-ivp...'
+    msg_log "$text"
     kz-ivp || error_flag=true
-    msg_log 'Called kz-ivp.'
+    text='Called kz-ivp.'
+    msg_log "$text"
 }
 
 
 # This function checks the website for missing or not used files.
 function check_website {
-    printf '%b\n' "$(gettext 'Check website')..."
+    text=$(gettext 'Check website')...
+    msg_info "$text"
     # Call rchecklink.
-    msg_log 'Calling rchecklink...'
+    text='Calling rchecklink...'
+    msg_log "$text"
     rchecklink || error_flag=true
-    msg_log 'Called rchecklink.'
+    text='Called rchecklink.'
+    msg_log "$text"
 }
 
 
 # This function controls the termination of the script.
 function term_script {
     if $error_flag; then
-        printf "$RED%b\n$NORMAL" "$(gettext 'Fix all the messages above.')"
+        text=$(gettext 'Fix all the messages above.')
+        msg_error "$text"
         exit $ERROR
     else
         exit $OK
