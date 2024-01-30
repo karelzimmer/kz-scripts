@@ -81,8 +81,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 }
@@ -105,24 +106,27 @@ function process_input {
 function check_repos {
     local   error_flag=false
 
-    printf '%s\n' "$(gettext 'Check that all repos are on branch main')..."
+
+    text=$(gettext 'Check that all repos are on branch main')...
+    msg_info "$text"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            printf  "$RED%s\n$NORMAL"   \
-                    "$(eval_gettext "Repo \$repo not on branch main.")"
+            text=$(gettext "Repo \$repo not on branch main.")
+            msg_error "$text"
             git status
             error_flag=true
         fi
     done
-    printf '%s\n' "$(gettext 'Check that all repos are clean')..."
+    text=$(gettext 'Check that all repos are clean')...
+    msg_info "$text"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
         git status &> /dev/null
         if ! git diff-index --quiet HEAD; then
-            printf  "$RED%s\n$NORMAL"   \
-                    "$(eval_gettext "Repo \$repo is not clean.")"
+            text=$(eval_gettext "Repo \$repo is not clean.")
+            msg_error "$text"
             git status
             error_flag=true
         fi
@@ -135,11 +139,14 @@ function check_repos {
 
 # This function builds package kz.
 function build_package {
-    printf '%b\n' "$(gettext 'Build package and website')..."
+    text=$(gettext 'Build package and website')...
+    msg_info "$text"
     # Call kz-build.
-    msg_log 'Calling kz-build...'
+    text='Calling kz-build...'
+    msg_log "$text"
     "$SCRIPTS_REPO"/usr/bin/kz-build || exit $ERROR
-    msg_log 'Called kz-build.'
+    text='Called kz-build.'
+    msg_log "$text"
 }
 
 
@@ -154,9 +161,11 @@ function upload_website {
     local   ftp_user=kzimmer
     local   ftp_login=$HOME/.kz-$ftp_host
 
-    printf '%s\n' "$(gettext 'Upload website')..."
+    text=$(gettext 'Upload website')...
+    msg_info "$text"
     if ! [[ -f $ftp_login ]]; then
-        read -rsp "$(gettext 'Password for') ftp://$ftp_host': " < /dev/tty
+        text="$(gettext 'Password for') ftp://$ftp_host': "
+        read -rsp "$text" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
@@ -166,7 +175,8 @@ function upload_website {
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
         rm "$ftp_login"
-        printf "$RED%b\n$NORMAL" "$(gettext 'Website upload failed.')"
+        text=$(gettext 'Website upload failed.')
+        msg_error "$text"
         exit $ERROR
     fi
     sleep 5
@@ -176,13 +186,17 @@ function upload_website {
 # This function installs package kz.
 function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
-    printf '%b\n' "$(gettext 'Install package kz')..."
-    msg_log 'Calling kz-getdeb...'
+    text=$(gettext 'Install package kz')...
+    msg_info "$text"
+    text='Calling kz-getdeb...'
+    msg_log "$text"
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
-        printf "$RED%b\n$NORMAL" "$(gettext 'Install package kz failed.')"
+        text=$(gettext 'Install package kz failed.')
+        msg_error "$text"
         exit $ERROR
     fi
-    msg_log 'Called kz-getdeb.'
+    text='Called kz-getdeb.'
+    msg_log "$text"
 }
 
 

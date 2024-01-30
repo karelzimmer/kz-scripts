@@ -77,8 +77,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 }
@@ -91,7 +92,8 @@ function process_input {
     local   scriptname=''
     local   scripts_repo=$HOME/kz-scripts
 
-    printf "%s\n" "$(gettext 'Checking scripts (this may take a while)')..."
+    text=$(gettext 'Checking scripts (this may take a while)')...
+    msg_info "$text"
     cd "$scripts_repo"
     while read -r script; do
         scriptdir=$(realpath "$(dirname "$script")")
@@ -154,10 +156,11 @@ function check_code {
     elif grep --quiet --line-regexp --regexp="$python_script" "$script"; then
         check_pycodestyle
     else
-        printf  "\n$BOLD%s$NORMAL\n$RED%s\n$NORMAL" \
-                "In $scriptdir / $scriptname:"      \
-                "$(gettext "    Unknown script. Function check_code cannot che\
-ck script code.")"
+        text="
+${BOLD}In $scriptdir / $scriptname:$NORMAL
+$RED$(gettext "    Unknown script. Function check_code cannot check script cod\
+e.")$NORMAL"
+        msg_info "$text"
         error_flag=true
     fi
 }
@@ -182,10 +185,11 @@ function check_record_length {
 
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
-        printf  "\n$BOLD%s$NORMAL\n$RED%s\n$NORMAL" \
-                "In $scriptdir / $scriptname:"      \
-                "$(eval_gettext "    A line is longer than \$max_line_length (\
-\$max_line_length_found).")"
+        text="
+${BOLD}In $scriptdir / $scriptname:$NORMAL
+$RED$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_le\
+ngth_found).")$NORMAL"
+        msg_info "$text"
         error_flag=true
     fi
 }
@@ -217,9 +221,10 @@ function check_tags {
             --regexp="$fixme"   \
             --regexp="$todo"    \
             "$script"; then
-        printf  "\n$BOLD%s$NORMAL\n$YELLOW%s\n$NORMAL"  \
-                "In $scriptdir / $scriptname:"          \
-                "$(gettext '    Flagged annotation found.')"
+        text="
+${BOLD}In $scriptdir / $scriptname:$NORMAL
+$YELLOW$(gettext '    Flagged annotation found.')$NORMAL"
+        msg_info "$text"
         grep    --line-number           \
                 --regexp="$bug"         \
                 --regexp="$fixme"       \
@@ -235,9 +240,10 @@ function check_tags {
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
-        printf  "\n$BOLD%s$NORMAL\n$RED%s\n$NORMAL" \
-                "In $scriptdir / $scriptname:"      \
-                "$(gettext '    End spaces found.')"
+        text="
+${BOLD}In $scriptdir / $scriptname:$NORMAL
+$RED$(gettext '    End spaces found.')$NORMAL"
+        msg_info "$text"
         grep    --line-number --regexp=' ''$' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
         error_flag=true

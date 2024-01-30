@@ -88,8 +88,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 }
@@ -114,10 +115,12 @@ function install_package {
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb" |& $LOGCMD
 
-    printf '%s\n' "$(gettext 'Download package kz')..."
+    text=$(gettext 'Download package kz')...
+    msg_info "$text"
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
-    printf '%s\n' "$(gettext 'Install package kz')..."
+    text=$(gettext 'Install package kz')...
+    msg_info "$text"
 
     # Zenity only on desktop.
     if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
@@ -161,7 +164,7 @@ $(gettext "Type 'exit' to close this window.")"
                             --infobox   "$text"         \
                             15 47
     else
-        printf '%s\n' "$text"
+        msg_info "$text"
     fi
     rm --force "$HOME"/kz "$HOME"/kz.{1..99}
     exit $OK
