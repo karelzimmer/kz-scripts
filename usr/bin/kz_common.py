@@ -258,20 +258,15 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     man_url = f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME} '
     man_url += f"{_('man page')}\x1b]8;;\x1b\\"
-    text = _('Usage: {} [OPTION...]').format(DISPLAY_NAME)
-    text += '\n\n'
-    text += f'{PROGRAM_DESC}.'
-    text += '\n\n'
-    text += _('Options:')
-    text += '\n'
-    text += _('  -h, --help     give this help list')
-    text += '\n'
-    text += _('  -u, --usage    give a short usage message')
-    text += '\n'
-    text += _('  -v, --version  print program version')
-    text += '\n\n'
-    text += _("Type 'man {}' or see the {} for more information.").\
-        format(DISPLAY_NAME, man_url)
+
+    text = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+            f'{PROGRAM_DESC}.\n\n'
+            f"{_('Options:')}\n"
+            f"{_('  -h, --help     give this help list')}\n"
+            f"{_('  -u, --usage    give a short usage message')}\n"
+            f"{_('  -v, --version  print program version')}\n\n"
+            f'''{_("Type 'man {}' or see the {} for more information.").
+               format(DISPLAY_NAME, man_url)}''')
     msg_info(PROGRAM_NAME, text)
 
 
@@ -279,10 +274,10 @@ def process_option_usage(DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    text = _('Usage: {}').format(DISPLAY_NAME)
-    text += ' [-h|--help] [-u|--usage] [-v|--version]'
-    text += '\n\n'
-    text += _("Type '{} --help' for more information.").format(DISPLAY_NAME)
+    text = (f"{_('Usage: {}').format(DISPLAY_NAME)}"
+            ' [-h|--help] [-u|--usage] [-v|--version]\n\n'
+            f'''{_("Type '{} --help' for more information.").
+                format(DISPLAY_NAME)}''')
     msg_info(PROGRAM_NAME, text)
 
 
@@ -324,13 +319,11 @@ def process_option_version(PROGRAM_NAME):
         else:
             program_year = ', ' + program_year
 
-        text = f'kz 2.4.7{build_id}'
-        text += '\n\n'
-        text += _('Written by')
-        text += ' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
-        text += '\n\n'
-        text += '<https://creativecommons.org/publicdomain/zero/1.0>'
-        text += f'{program_year}'
+        text = (f'kz 2.4.7{build_id}\n\n'
+                f"{_('Written by')}"
+                ' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n\n'
+                '<https://creativecommons.org/publicdomain/zero/1.0>'
+                f'{program_year}')
         msg_info(PROGRAM_NAME, text)
 
 
