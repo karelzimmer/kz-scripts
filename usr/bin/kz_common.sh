@@ -45,11 +45,9 @@ readonly    CYAN='\033[36m'
 readonly    GRAY='\033[37m'
 
 readonly    OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
-            OPTIONS_HELP=$(gettext '  -h, --help     give this help list')'\n'
-            OPTIONS_HELP+=$(gettext "  -u, --usage    give a short usage messa\
-ge")'\n'
-            OPTIONS_HELP+=$(gettext '  -v, --version  print program version')
-readonly    OPTIONS_HELP
+readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
+$(gettext "  -u, --usage    give a short usage message")
+$(gettext '  -v, --version  print program version')"
 
 readonly    OPTIONS_SHORT='huv'
 readonly    OPTIONS_LONG='help,usage,version'
@@ -61,8 +59,6 @@ readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
                 EDITION='server'
             fi
 readonly    EDITION
-declare     LOGCMD=''
-declare     USAGE_LINE=''
 
 
 ###############################################################################
@@ -181,9 +177,8 @@ function init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    text="==== START log $PROGRAM_NAME ===="
-    text+='\n'
-    text+="started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
+    text="==== START log $PROGRAM_NAME ====
+started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     msg_log "$text"
 
     commandline_args=("$@")
@@ -320,12 +315,10 @@ function process_option_version {
         program_year=', '$program_year
     fi
 
-    text="kz 2.4.7$build_id"
-    text+='\n\n'
-    text+=$(gettext 'Written by')
-    text+=' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
-    text+='\n'
-    text+="<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
+    text="kz 2.4.7$build_id
+
+$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
+<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
     msg_info "$text"
 }
 
@@ -404,8 +397,8 @@ function signal {
             ;;
         exit)
             signal_exit
-            text="ended (code=exited, status=$status)\n==== END log "
-            text+="$PROGRAM_NAME ===="
+            text="ended (code=exited, status=$status)
+==== END log $PROGRAM_NAME ===="
             msg_log "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
@@ -424,12 +417,10 @@ function signal_exit {
     case $PROGRAM_NAME in
         kz-install)
             if [[ $rc -ne $OK ]]; then
-                text=$(gettext "If the package manager gives apt errors, launc\
-h a Terminal window and execute:")
-                text+='\n'
-                text+='[1] kz update'
-                text+='\n'
-                text+='[2] sudo update-initramfs -u'
+                text="$(gettext "If the package manager gives apt errors, laun\
+ch a Terminal window and execute:")
+[1] kz update
+[2] sudo update-initramfs -u"
                 msg_log "$text"
             fi
             ;;

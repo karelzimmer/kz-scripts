@@ -101,6 +101,7 @@ $USAGE_LINE"
 # This function displays all available commands.
 function process_option_list {
         text="$(gettext 'The following COMMANDs are available:')
+
 $(gettext 'NUM  COMMAND')"
         msg_info "$text"
     find    "$PROGRAM_PATH"/kz-*    \
@@ -117,8 +118,9 @@ $(gettext 'NUM  COMMAND')"
             --number-format=rn      \
             --number-separator='  ' \
             --body-numbering=a
-    text="\n$(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND\
- [ARGUMENT...]\$NORMAL")"
+    text="
+$(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
+.]\$NORMAL")"
     msg_info "$text"
 }
 
