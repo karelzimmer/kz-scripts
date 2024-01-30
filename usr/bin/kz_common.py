@@ -162,13 +162,12 @@ def check_on_ac_power(PROGRAM_NAME):
     """
     if subprocess.run('on_ac_power', shell=True,
                       stderr=subprocess.DEVNULL).returncode == 1:
-        text = _('The computer now uses only the battery for power.')
-        text += '\n\n'
-        text += _('It is recommended to connect the computer to the wall socke\
-t.')
+        text = _('The computer now uses only the battery for power.\n\n'
+                 'It is recommended to connect the computer to the wall socket\
+.')
         msg_warning(PROGRAM_NAME, text)
         try:
-            text += _('Press the Enter key to continue [Enter]: ')
+            text = f"\n{_('Press the Enter key to continue [Enter]: ')}"
             input(text)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
