@@ -198,7 +198,6 @@ function msg_error {
     if $option_gui; then
         title=$(eval_gettext "Error message \$DISPLAY_NAME")
         zenity  --error                 \
-                --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
@@ -206,8 +205,7 @@ function msg_error {
     else
         printf "$RED%b$NORMAL\n" "$*" >&2
     fi
-    text="$RED$*$NORMAL"
-    msg_log "$text"
+    msg_log "$RED$*$NORMAL"
 }
 
 
@@ -216,7 +214,6 @@ function msg_info {
     if $option_gui; then
         title=$(eval_gettext "Information \$DISPLAY_NAME")
         zenity  --info                  \
-                --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
@@ -224,8 +221,7 @@ function msg_info {
     else
         printf '%b\n' "$*"
     fi
-    text="$*"
-    msg_log "$text"
+    msg_log "$*"
 }
 
 
@@ -240,7 +236,6 @@ function msg_warning {
     if $option_gui; then
         title=$(eval_gettext "Warning \$DISPLAY_NAME")
         zenity  --warning               \
-                --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$title"    \
@@ -248,8 +243,7 @@ function msg_warning {
     else
         printf "$YELLOW%b$NORMAL\n" "$*" >&2
     fi
-    text="$YELLOW$*$NORMAL"
-    msg_log "$text"
+    msg_log "$YELLOW$*$NORMAL"
 }
 
 
@@ -449,6 +443,7 @@ h a Terminal window and execute:")
 
 # This function waits for the user to press Enter.
 function wait_for_enter {
-    text=$(gettext 'Press the Enter key to continue [Enter]: ')
+    text="
+$(gettext 'Press the Enter key to continue [Enter]: ')"
     read -rp "$text" < /dev/tty
 }
