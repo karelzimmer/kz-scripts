@@ -227,34 +227,45 @@ nd end with '.sh'.")"
 
 # This function displays a list of input files present.
 function process_option_list {
-    #FIXME
-    printf  '%s\n\n%s\n'                                    \
-            "$(gettext 'The following FILEs are present:')" \
-            "$(gettext 'NUM  FILE')"
-    if !    find    "$PROGRAM_PATH/$PROGRAM_NAME-"*'.sh'    \
+    local   files=''
+
+    text="$(gettext 'The following FILEs are present:')
+
+$(gettext 'NUM  FILE')\n"
+    files=$(find    "$PROGRAM_PATH/$PROGRAM_NAME-"*'.sh'    \
                     2> >($LOGCMD)                           |
             nl      --number-width=3                        \
                     --number-format=rn                      \
                     --number-separator='  '                 \
-                    --body-numbering=a; then
-        printf '%s\n\n%s\n' "$(gettext '  0  No files present.')" "$USAGE_LINE"
+                    --body-numbering=a || true
+            )
+    if [[ -n $files ]]; then
+        text+=$files
+        if ! $option_gui; then
+            text+="\n
+$(eval_gettext "To view the commands of FILE execute: \$BLUE\$DISPLAY_NAME --c\
+at --file FILE\$NORMAL")
+$(eval_gettext "To process FILE execute: \$BLUE\$DISPLAY_NAME --file FILE\$NOR\
+MAL")
+$(eval_gettext "The default FILE is: \$input_file")"
+        fi
     else
-        printf  '\n%b\n%b\n%s\n'                \
-                "$(eval_gettext "To view the commands of FILE execute: \$BLUE\
-\$DISPLAY_NAME --cat --file FILE\$NORMAL")"  \
-                "$(eval_gettext "To process FILE execute: \$BLUE\$DISPLAY_NAME\
- --file FILE\$NORMAL")"                     \
-                "$(eval_gettext "The default FILE is: \$input_file")"
+        text+="$(gettext '  0  No files present.')
+
+$USAGE_LINE"
     fi
+    msg_info "$text"
 }
 
 
 # This function shows the available APPs from the input file.
 function process_option_apps {
-    printf  '%s\n\n%s\n'                                        \
-            "$(gettext 'The following APPs are available:')"    \
-            "$(gettext 'NUM  APP')"
-    if !    grep    --no-messages           \
+    local   apps=''
+
+    text="$(gettext 'The following APPs are available:')
+
+$(gettext 'NUM  APP')\n"
+    apps=$( grep    --no-messages           \
                     --regexp='#.* APP '     \
                     "$input_file"           |
             tr      --squeeze-repeats       \
@@ -265,19 +276,25 @@ function process_option_apps {
             nl      --number-width=3        \
                     --number-format=rn      \
                     --number-separator='  ' \
-                    --body-numbering=a; then
-        printf '%s\n' "$(gettext '  0  No apps found.')
+                    --body-numbering=a || true
+        )
+    if [[ -n $apps ]]; then
+        text+=$apps
+        if ! $option_gui; then
+            text+="\n
+$(eval_gettext "To view the contents of the APPs set up file execute: \$BLUE\
+\$DISPLAY_NAME --cat APP...\$NORMAL")
+$(eval_gettext "To set up the APPs execute: \$BLUE\$DISPLAY_NAME APP...\$NORMA\
+L")
+$(eval_gettext "To view the contents of the default set up file execute: \$BLU\
+E\$DISPLAY_NAME --cat\$NORMAL")"
+        fi
+    else
+        text+="$(gettext '  0  No apps found.')
 
 $USAGE_LINE"
-    else
-        printf  '\n%b\n%b\n%b\n'                        \
-                "$(eval_gettext "To view the contents of the APPs set up file \
-execute: \$BLUE\$DISPLAY_NAME --cat APP...\$NORMAL")"   \
-                "$(eval_gettext "To set up the APPs execute: \$BLUE\$DISPLAY_N\
-AME APP...\$NORMAL")"                                   \
-                "$(eval_gettext "To view the contents of the default set up fi\
-le execute: \$BLUE\$DISPLAY_NAME --cat\$NORMAL")"
     fi
+    msg_info "$text"
 }
 
 
@@ -290,9 +307,9 @@ function process_argument_app {
         process_input_file_by_app
     done
     if $app_not_found; then
-        printf  '%s\n'  \
-                "$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available ap\
-ps.")"
+        text="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
+")"
+        msg_info "$text"
         exit $ERROR
     fi
 }
@@ -332,9 +349,8 @@ function process_input_file_by_app {
     done < "$input_file"
     if $no_app_match; then
         app_not_found=true
-        printf  "$DISPLAY_NAME: %s: %s\n"   \
-                "$app_argument"             \
-                "$(gettext 'app not found')"
+        text="$DISPLAY_NAME: $app_argument: $(gettext 'app not found')"
+        msg_info "$text"
     fi
 }
 
@@ -397,9 +413,9 @@ function process_command_file {
     fi
 
     if ! $option_gui; then
-        printf  '%s\n%s\n'                  \
-                "$(gettext 'NUM/TOT  APP')" \
-                "         $(gettext 'COMMAND')..."
+        text="$(gettext 'NUM/TOT  APP')
+         $(gettext 'COMMAND')..."
+        msg_info "$text"
     fi
 
     while read -r commands_record; do
@@ -445,13 +461,13 @@ function execute_command {
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]];then
-            printf '%s\n' "$app_name_line"
+            text=$app_name_line
+            msg_info "$text"
         fi
-        printf '         %s\n' "$cmd"
+        text="         $cmd"
+        msg_info "$text"
     fi
 
-    text="$app_name_line/$cmd_seq_num\n$cmd"
-    msg_log "$text"
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
 }
 

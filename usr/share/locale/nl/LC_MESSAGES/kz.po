@@ -1013,19 +1013,19 @@ msgid ""
 "To view the contents of the APPs set up file execute: $BLUE$DISPLAY_NAME --"
 "cat APP...$NORMAL"
 msgstr ""
-"Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
+"Om de inhoud van het instelbestand voor APPs te bekijken voer uit: "
 "$BLUE$DISPLAY_NAME --cat APP...$NORMAL"
 
 #, sh-format
 msgid "To set up the APPs execute: $BLUE$DISPLAY_NAME APP...$NORMAL"
-msgstr "Om de APPs te installeren voer uit: $BLUE$DISPLAY_NAME APP...$NORMAL"
+msgstr "Om de APPs in te stellen voer uit: $BLUE$DISPLAY_NAME APP...$NORMAL"
 
 #, sh-format
 msgid ""
 "To view the contents of the default set up file execute: $BLUE$DISPLAY_NAME "
 "--cat$NORMAL"
 msgstr ""
-"Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
+"Om de inhoud van het standaard instelbestand te bekijken voer uit: "
 "$BLUE$DISPLAY_NAME --cat$NORMAL"
 
 msgid "set up"

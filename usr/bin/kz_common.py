@@ -168,6 +168,7 @@ def check_on_ac_power(PROGRAM_NAME):
         msg_warning(PROGRAM_NAME, text)
         try:
             text = f"\n{_('Press the Enter key to continue [Enter]: ')}"
+            msg_log(PROGRAM_NAME, text)
             input(text)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
