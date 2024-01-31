@@ -101,27 +101,30 @@ $USAGE_LINE"
 
 # This function displays all available commands.
 function process_option_list {
-        text="$(gettext 'The following COMMANDs are available:')
+    text="$(gettext 'The following COMMANDs are available:')
 
-$(gettext 'NUM  COMMAND')"
-        msg_info "$text"
-    find    "$PROGRAM_PATH"/kz-*    \
-            -maxdepth 1             \
-            -type f                 \
-            -executable             \
-            -readable               \
-            -not -name '*~'         \
-            -not -name 'kz'         \
-            -printf '%f\n'          |
-    sort                            |
-    sed     --expression='s/kz-//'  |
-    nl      --number-width=3        \
-            --number-format=rn      \
-            --number-separator='  ' \
-            --body-numbering=a
-    text="
+$(gettext 'NUM  COMMAND')\n"
+    text+=$(
+        find    "$PROGRAM_PATH"/kz-*    \
+                -maxdepth 1             \
+                -type f                 \
+                -executable             \
+                -readable               \
+                -not -name '*~'         \
+                -not -name 'kz'         \
+                -printf '%f\n'          |
+        sort                            |
+        sed     --expression='s/kz-//'  |
+        nl      --number-width=3        \
+                --number-format=rn      \
+                --number-separator='  ' \
+                --body-numbering=a
+        )
+    if ! $option_gui; then
+        text+="\n
 $(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
 .]\$NORMAL")"
+    fi
     msg_info "$text"
 }
 

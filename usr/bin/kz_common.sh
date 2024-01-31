@@ -433,7 +433,8 @@ ch a Terminal window and execute:")
 
 # This function waits for the user to press Enter.
 function wait_for_enter {
-    text="
+    local prompt="
 $(gettext 'Press the Enter key to continue [Enter]: ')"
-    read -rp "$text" < /dev/tty
+
+    read -rp "$prompt" < /dev/tty
 }

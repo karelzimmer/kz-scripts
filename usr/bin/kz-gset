@@ -100,8 +100,9 @@ function check_input {
 
     process_common_options "$@"
     if [[ $EDITION = 'server' ]]; then
-        printf  "$DISPLAY_NAME: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'not allowed on a server')"
+        text="$DISPLAY_NAME: $1: $(gettext 'not allowed on a server')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 
@@ -109,8 +110,9 @@ function check_input {
         case $1 in
             -a|--addfavaft)
                 if $option_addfavaft; then
-                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n"   \
-                            "$(gettext 'too many options')"
+                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_addfavaft=true
@@ -119,8 +121,9 @@ function check_input {
                 ;;
             -b|--addfavbef)
                 if $option_addfavbef; then
-                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n"   \
-                            "$(gettext 'too many options')"
+                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_addfavbef=true
@@ -129,8 +132,9 @@ function check_input {
                 ;;
             -d|--delfav)
                 if $option_delfav; then
-                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n"   \
-                            "$(gettext 'too many options')"
+                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_delfav=true
@@ -147,8 +151,9 @@ function check_input {
                 ;;
             -f|--addappfolder)
                 if $option_addappfolder; then
-                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n"   \
-                            "$(gettext 'too many options')"
+                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_addappfolder=true
@@ -157,8 +162,9 @@ function check_input {
                 ;;
             -x|--delappfolder)
                 if $option_delappfolder; then
-                    printf  "$DISPLAY_NAME: $1 $2: %s\n$USAGE_LINE\n"   \
-                            "$(gettext 'too many options')"
+                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_delappfolder=true
@@ -176,8 +182,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 
@@ -262,10 +269,11 @@ function process_option_delfav  {
 
 # This feature lists the favorite apps along with the app folders.
 function process_option_list  {
-    printf '%s\n' "$(gettext 'Favorite apps:')"
-    gsettings get org.gnome.shell favorite-apps
-    printf '\n%s\n' "$(gettext 'App folders:')"
-    gsettings get org.gnome.desktop.app-folders folder-children
+    text=$(gettext 'Favorite apps:')
+    text+="\n$(gsettings get org.gnome.shell favorite-apps)"
+    text+="\n\n$(gettext 'App folders:')"
+    text+="\n$(gsettings get org.gnome.desktop.app-folders folder-children)"
+    msg_info "$text"
 }
 
 
@@ -326,8 +334,8 @@ function process_option_delappfolder  {
 function capture_gui_changes {
     config_a=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
     save_configuration_database A "$config_a"
-    printf  '%s\n'  \
-            "$(gettext 'Now make the change in the graphical workspace.')"
+    text=$(gettext 'Now make the change in the graphical workspace.')
+    msg_info "$text"
     wait_for_enter
     config_b=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
     save_configuration_database B "$config_b"
@@ -348,8 +356,8 @@ function save_configuration_database {
             --output="$output_file" \
             "$output_file"
 
-    printf  '%s\n'  \
-            "$(eval_gettext "Config database content captured (\$fase).")"
+    text=$(eval_gettext "Config database content captured (\$fase).")
+    msg_info "$text"
 }
 
 
@@ -358,14 +366,15 @@ function report_database_changes {
     local   output_file1=${1:-unknown}
     local   output_file2=${2:-unknown}
 
-    printf  '\n%s\n'    \
-            "$(gettext "CHANGEs in the configuration database,
+    text="\n$(gettext "CHANGEs in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")"
-    diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
-    printf  '\n%b\n'    \
-            "$(gettext "When CHANGEs execute:") ${BLUE}gsettings set CHANGE$NO\
-RMAL"
+    text+=$(
+        diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
+        )
+    text+="\n\n$(gettext "When CHANGEs execute:")"
+    text+=" ${BLUE}gsettings set CHANGE$NORMAL"
+    msg_info "$text"
 }
 
 

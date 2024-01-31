@@ -160,12 +160,13 @@ function upload_website {
     local   ftp_host=server106.hosting2go.nl
     local   ftp_user=kzimmer
     local   ftp_login=$HOME/.kz-$ftp_host
+    local   prompt="$(gettext 'Password for') ftp://$ftp_host': "
+
 
     text=$(gettext 'Upload website')...
     msg_info "$text"
     if ! [[ -f $ftp_login ]]; then
-        text="$(gettext 'Password for') ftp://$ftp_host': "
-        read -rsp "$text" < /dev/tty
+        read -rp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
         chmod 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
