@@ -97,8 +97,10 @@ function check_input {
         case $1 in
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
-                    printf  "$DISPLAY_NAME: $1: %s\n$USAGE_LINE\n"  \
-                            "$(gettext 'not allowed on a server')"
+                    text="$DISPLAY_NAME: $1: \
+$(gettext 'not allowed on a server')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -116,8 +118,9 @@ function check_input {
 
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 
@@ -190,10 +193,10 @@ ch as \$nas_ip_address?")
         nas_password=$(     printf '%s' "$REPLY" | awk -F, '{print $3}')
         nas_share_name=$(   printf '%s' "$REPLY" | awk -F, '{print $4}')
     else
-        printf '\n%s\n%s\n' \
-                "$text."    \
-                "$(gettext "If you do not specify, the value in [] is used as \
-the response.")"
+        text="
+$text.
+$(gettext "If you do not specify, the value in [] is used as the response.")"
+        msg_info "$text"
         read -rp "
 $quest2? [$nas_ip_address]: "
         if [[ -n $REPLY ]]; then

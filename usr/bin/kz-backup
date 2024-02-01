@@ -197,7 +197,8 @@ Disconnect media via Files.")"
                         --title     "$title"    \
                         --text      "$text"     2> >($LOGCMD)
             else
-                printf '%s\n' "$text..."
+                text=$text...
+                msg_info "$text"
                 backup_settings
             fi
         fi
@@ -386,7 +387,8 @@ EOF
                 --title     "$title"        \
                 --text      "$text"         2> >($LOGCMD) || backup_rc=$?
     else
-        printf '%s\n' "$text..."
+                text=$text...
+                msg_info "$text"
         rsync   --archive                   \
                 --verbose                   \
                 --human-readable            \
@@ -412,7 +414,8 @@ EOF
                     --title     "$title"    \
                     --text      "$text"     &> >($LOGCMD)
         else
-            printf '\n%s\n' "$text..."
+            text=$text...
+            msg_info "$text"
             sync |& $LOGCMD
         fi
     else
@@ -484,7 +487,8 @@ function term_script_unmount {
                 --text      "$text"                                         \
                 2> >($LOGCMD) || rc+=$?
     else
-        printf '%s\n' "$text..."
+        text=$text...
+        msg_info "$text"
         umount "$target_medium"                     |& $LOGCMD || rc+=$?
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?

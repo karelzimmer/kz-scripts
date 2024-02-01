@@ -71,8 +71,10 @@ function check_input {
         case $1 in
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
-                    printf  "$DISPLAY_NAME: $1: %s\n$USAGE_LINE\n"  \
-                            "$(gettext 'not allowed on a server')"
+                    text="$DISPLAY_NAME: $1: \
+$(gettext 'not allowed on a server')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -89,8 +91,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 }
@@ -116,13 +119,15 @@ $text"
             msg_info "$text"
         fi
     else
-        printf '%s\n\n' "$(gettext 'WiFi data:')"
+        text=$(gettext 'WiFi data:')
+        msg_info "$text"
         # Shows QR code for quick connection to Wi-Fi network.
         nmcli device wifi show-password 2> >($LOGCMD) || nmcli_rc=$?
         if [[ $nmcli_rc -eq 0 ]]; then
-            printf '\n%s\n' "$text"
+            msg_info "$text"
         else
-            printf '%s\n' "$(gettext 'No WiFi device found.')"
+            text=$(gettext 'No WiFi device found.')
+            msg_info "$text"
         fi
     fi
 }

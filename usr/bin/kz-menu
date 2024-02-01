@@ -122,8 +122,10 @@ function check_input {
         case $1 in
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
-                    printf  "$DISPLAY_NAME: $1: %s\n$USAGE_LINE\n"  \
-                            "$(gettext 'not allowed on a server')"
+                    text="$DISPLAY_NAME: $1: \
+$(gettext 'not allowed on a server')
+$USAGE_LINE"
+                    msg_info "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -140,8 +142,9 @@ function check_input {
     done
 
     if [[ -n "$*" ]]; then
-        printf  "$DISPLAY_NAME: $*: %s\n$USAGE_LINE\n"  \
-                "$(gettext 'arguments are not allowed')"
+        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        msg_info "$text"
         exit $ERROR
     fi
 }
@@ -191,11 +194,11 @@ function process_menu1_tui {
     local   menu1_action=''
 
     while true; do
-        printf '\n%s\n\n' "$MENU1_HEAD"
-            printf  '%3s  %-24s  %s\n'      \
-                    "$(gettext 'NUM')"      \
-                    "$(gettext 'ACTION')"   \
-                    "$(gettext 'EXPLANATION')"
+        printf  '%s\n\n%3s  %-24s  %s\n'    \
+                "$MENU1_HEAD"               \
+                "$(gettext 'NUM')"          \
+                "$(gettext 'ACTION')"       \
+                "$(gettext 'EXPLANATION')"
         for menu1_action in "${!MENU1_ACTIONS[@]}"; do
             printf  '%3s  %-24s  %s\n'                  \
                     "$menu1_action"                     \
@@ -349,10 +352,10 @@ function process_menu2_tui {
     local   menu2_action=''
 
     while true; do
-        printf '\n%s\n\n' "$MENU2_HEAD"
-        printf  '%3s  %-25s  %s\n'      \
-                "$(gettext 'NUM')"      \
-                "$(gettext 'ACTION')"   \
+        printf  '\n%s\n\n%3s  %-25s  %s\n'  \
+                "$MENU2_HEAD"               \
+                "$(gettext 'NUM')"          \
+                "$(gettext 'ACTION')"       \
                 "$(gettext 'COMMAND')"
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
