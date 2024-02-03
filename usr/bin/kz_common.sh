@@ -53,12 +53,11 @@ readonly    OPTIONS_SHORT='huv'
 readonly    OPTIONS_LONG='help,usage,version'
 
 readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-            if type gnome-shell &> /dev/null; then
-                EDITION='desktop'
-            else
-                EDITION='server'
-            fi
-readonly    EDITION
+if type gnome-shell &> /dev/null; then
+readonly    EDITION='desktop'
+else
+readonly    EDITION='server'
+fi
 
 
 ###############################################################################
