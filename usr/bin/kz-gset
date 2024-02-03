@@ -340,7 +340,6 @@ function capture_gui_changes {
     config_b=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
     save_configuration_database B "$config_b"
     report_database_changes "$config_a" "$config_b"
-    rm "$config_a" "$config_b"
 }
 
 

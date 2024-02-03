@@ -272,7 +272,7 @@ function process_option_help {
     local   man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
             man_url+="$(gettext 'man page')\033]8;;\033\\"
 
-    text="$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url for m\
+    text="$(eval_gettext "Type 'man \$DISPLAY_NAME'mktemp  or see the \$man_url for m\
 ore information.")"
     printf  '%b\n\n%b\n'    \
             "$HELP"         \
@@ -413,8 +413,20 @@ function signal {
 
 # This function controls the final termination of the script.
 function signal_exit {
+    # shellcheck disable=SC2154
     case $PROGRAM_NAME in
-        kz-install)
+        kz-backup)
+            rm --force "$exclude" "$errors"
+            ;;
+
+        kz-getdeb)
+            rm--force "$kz_common_temp" "$temp_deb"
+            ;;
+        kz-gset)
+            rm--force "$config_a" "$config_b"
+            ;;
+        kz-install|kz-setup)
+            rm --force "$command_file"
             if [[ $rc -ne $OK ]]; then
                 text="$(gettext "If the package manager gives apt errors, laun\
 ch a Terminal window and execute:")

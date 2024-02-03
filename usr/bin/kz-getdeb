@@ -22,7 +22,6 @@ else
     wget    --output-document="$kz_common_temp" $kz_common_github_uri |&
         systemd-cat --identifier=kz-getdeb --priority=debug
     source  "$kz_common_temp"
-    rm      "$kz_common_temp"
 fi
 
 
@@ -133,7 +132,6 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$temp_deb"
-    rm      "$temp_deb"                     |& $LOGCMD
 }
 
 

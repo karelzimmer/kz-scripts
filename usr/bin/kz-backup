@@ -434,6 +434,7 @@ Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz backup'.")"
         msg_error "$text"
+        rm "$errors"
         exit $ERROR
     fi
 }
