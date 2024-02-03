@@ -45,6 +45,7 @@ $OPTIONS_HELP"
 # Variables
 ###############################################################################
 
+declare    temp_deb=''
 
 ###############################################################################
 # Functions
@@ -105,7 +106,6 @@ function process_input {
 # This function installs package kz.
 function install_package {
     local   site_deb='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
-    local   temp_deb=''
 
     temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".

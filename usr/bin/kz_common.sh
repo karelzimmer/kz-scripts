@@ -272,7 +272,7 @@ function process_option_help {
     local   man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
             man_url+="$(gettext 'man page')\033]8;;\033\\"
 
-    text="$(eval_gettext "Type 'man \$DISPLAY_NAME'mktemp  or see the \$man_url for m\
+    text="$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url for m\
 ore information.")"
     printf  '%b\n\n%b\n'    \
             "$HELP"         \
@@ -418,12 +418,11 @@ function signal_exit {
         kz-backup)
             rm --force "$exclude" "$errors"
             ;;
-
         kz-getdeb)
-            rm--force "$kz_common_temp" "$temp_deb"
+            rm --force "$temp_deb"
             ;;
         kz-gset)
-            rm--force "$config_a" "$config_b"
+            rm --force "$config_a" "$config_b"
             ;;
         kz-install|kz-setup)
             rm --force "$command_file"

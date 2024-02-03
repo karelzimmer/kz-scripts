@@ -55,6 +55,8 @@ declare     option_target=false
 declare     target_argument=''
 declare     target_medium=''
 declare     target=''
+declare     errors=''
+declare     exclude=''
 
 
 ###############################################################################
@@ -326,8 +328,6 @@ function backup_settings_user_photo {
 # This function creates the backup.
 function create_backup {
     local   -i  backup_rc=0
-    local       errors=''
-    local       exclude=''
     local       rsync_messages=''
     local       source=$HOME
 
@@ -434,7 +434,6 @@ Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz backup'.")"
         msg_error "$text"
-        rm "$errors"
         exit $ERROR
     fi
 }
