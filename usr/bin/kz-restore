@@ -214,7 +214,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
                     --title     "$title"    \
                     --text      "$text"     2> >($LOGCMD)
         else
-            text=$text...
+            text+='...'
             msg_info "$text"
             restore_settings
         fi
@@ -264,7 +264,7 @@ function restore_backup {
                 --title     "$title"    \
                 --text      "$text"     2> >($LOGCMD) || restore_rc=$?
     else
-        text=$text...
+        text+='...'
         msg_info "$text"
         rsync   --archive               \
                 --verbose               \
@@ -286,7 +286,7 @@ function restore_backup {
                 --title     "$title"    \
                 --text      "$text"     &> >($LOGCMD)
     else
-        text=$text...
+        text+='...'
         msg_info "$text"
         sync |& $LOGCMD
     fi
@@ -357,7 +357,7 @@ function term_script_unmount {
                 --text      "$text"                                         \
                 2> >($LOGCMD) || rc=$?
     else
-        text=$text...
+        text+='...'
         msg_info "$text"
         umount "$source_medium"                     |& $LOGCMD || rc+=$?
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
