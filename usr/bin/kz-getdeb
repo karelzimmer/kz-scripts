@@ -12,15 +12,14 @@
 # Import
 ###############################################################################
 
-if [[ -e $(dirname "$0")/kz_common.sh ]]; then
-    source "$(dirname "$0")"/kz_common.sh
-else
+
+if ! source "$(dirname "$0")"/kz_common.sh 2> /dev/null; then
     printf  '%s\n' 'Download kz_common.sh...'
     declare temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     declare kz_common_github_uri='https://raw.githubusercontent.com/karel'
             kz_common_github_uri+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
     wget    --output-document="$temp_kz_common" $kz_common_github_uri |&
-        systemd-cat --identifier=kz-getdeb --priority=debug
+            systemd-cat --identifier=kz-getdeb --priority=debug
     source  "$temp_kz_common"
     rm      "$temp_kz_common"
 fi
