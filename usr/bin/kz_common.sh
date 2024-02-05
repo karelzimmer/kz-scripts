@@ -29,20 +29,10 @@ readonly    ERROR=1
 
 readonly    NORMAL='\033[0m'
 readonly    BOLD='\033[1m'
-readonly    DIM='\033[2m'
-readonly    ITALIC='\033[3m'
-readonly    UNDERLINE='\033[4m'
-readonly    BLINK='\033[5m'
-readonly    REVERSE='\033[7m'
-readonly    HIDDEN='\033[8m'
 
 readonly    RED='\033[1;31m'
-readonly    GREEN='\033[1;32m'
 readonly    YELLOW='\033[1;33m'
 readonly    BLUE='\033[1;34m'
-readonly    MAGENTA='\033[1;35m'
-readonly    CYAN='\033[1;36m'
-readonly    GRAY='\033[1;37m'
 
 readonly    OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
 readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
