@@ -12,8 +12,7 @@
 # Import
 ###############################################################################
 
-
-if  ! source "$(dirname "$0")"/kz_common.sh; then
+if  ! source "$(dirname "$0")"/kz_common.sh 2> /dev/null; then
     printf  '%s\n' 'Download kz_common.sh...'
     declare temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     declare kz_common_github_uri='https://raw.githubusercontent.com/karel'
