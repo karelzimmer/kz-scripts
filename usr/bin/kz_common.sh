@@ -395,7 +395,6 @@ function signal {
             exit "$rc"
             ;;
         exit)
-            signal_exit
             text="ended (code=exited, status=$status)
 ==== END log $PROGRAM_NAME ===="
             msg_log "$text"
@@ -406,36 +405,6 @@ function signal {
             text=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
             msg_error "$text"
             exit "$rc"
-            ;;
-    esac
-}
-
-
-# This function controls the final termination of the script.
-function signal_exit {
-    # shellcheck disable=SC2154
-    case $PROGRAM_NAME in
-        kz-backup)
-            rm --force "$exclude" "$errors"
-            ;;
-        kz-getdeb)
-            rm --force "$temp_deb"
-            ;;
-        kz-gset)
-            rm --force "$config_a" "$config_b"
-            ;;
-        kz-install|kz-setup)
-            rm --force "$command_file"
-            if [[ $rc -ne $OK ]]; then
-                text="$(gettext "If the package manager gives apt errors, laun\
-ch a Terminal window and execute:")
-[1] kz update
-[2] sudo update-initramfs -u"
-                msg_log "$text"
-            fi
-            ;;
-        *)
-            :
             ;;
     esac
 }
