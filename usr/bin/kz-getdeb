@@ -18,10 +18,12 @@ if  ! source "$(dirname "$0")"/kz_common.sh 2> \
     declare temp_kz_common=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     declare kz_common_github_uri='https://raw.githubusercontent.com/karel'
             kz_common_github_uri+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
-    wget    --output-document="$temp_kz_common" $kz_common_github_uri|&
+    wget    --output-document="$temp_kz_common" $kz_common_github_uri |&
             systemd-cat --identifier=kz-getdeb --priority=debug
-    source  "$temp_kz_common"
-    rm      "$temp_kz_common"
+    source  "$temp_kz_common" 2> \
+            >(systemd-cat --identifier=kz-getdeb --priority=debug)
+    rm      "$temp_kz_common" |&
+            systemd-cat --identifier=kz-getdeb --priority=debug
 fi
 
 
@@ -115,6 +117,10 @@ function install_package {
     msg_info "$text"
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
+    # If necessary, display a sudo prompt before the informational installation
+    # message.
+    sudo --non-interactive true || true
+    sudo true
     text=$(gettext 'Install package kz (this may take a while)')...
     msg_info "$text"
 
