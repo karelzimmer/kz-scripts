@@ -187,7 +187,7 @@ function upload_website {
 # This function installs package kz.
 function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
-    text=$(gettext 'Install package kz')...
+    text=$(gettext 'Install package kz (this may take a while)')...
     msg_info "$text"
     text='Calling kz-getdeb...'
     msg_log "$text"
