@@ -124,12 +124,6 @@ function install_package {
     text=$(gettext 'Install package kz (this may take a while)')...
     msg_info "$text"
 
-    # Zenity only on desktop.
-    if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
-        check_for_active_updates
-        sudo apt-get install --yes zenity |& $LOGCMD
-    fi
-
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
