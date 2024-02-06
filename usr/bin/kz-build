@@ -135,7 +135,7 @@ function process_input {
 
 # This function reports repos which are not in the desired state.
 function report_repos {
-    text=$(gettext 'Show repos not on branch main'):
+    text=$(gettext 'Show repos not on branch main')...
     msg_info "$text"
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
@@ -144,7 +144,7 @@ function report_repos {
             msg_warning "$text"
         fi
     done
-    text=$(gettext 'Show repos which are not clean'):
+    text=$(gettext 'Show repos which are not clean')...
     msg_info "$text"
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
