@@ -163,7 +163,7 @@ function upload_website {
     local   prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
 
-    text=$(gettext 'Upload website'):
+    text=$(gettext 'Upload website')...
     msg_info "$text"
     if ! [[ -f $ftp_login ]]; then
         read -rp "$prompt" < /dev/tty
