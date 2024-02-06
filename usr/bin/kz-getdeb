@@ -124,12 +124,6 @@ function install_package {
     text=$(gettext 'Install package kz (this may take a while)')...
     msg_info "$text"
 
-    # Zenity only on desktop.
-    if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
-        check_for_active_updates
-        sudo apt-get install --yes zenity |& $LOGCMD
-    fi
-
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -138,6 +132,22 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$temp_deb"                     |& $LOGCMD
+
+    # Zenity is a dependency for running scripts in "kz.deb".
+    if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
+        check_for_active_updates
+        sudo apt-get install --yes zenity |& $LOGCMD
+    fi
+
+    # Snaps are a dependency for running scripts in "kz.deb".
+    if ! snap list core &> /dev/null; then
+        sudo --non-interactive true || true
+        sudo systemctl enable --now snapd.socket |& $LOGCMD
+        sudo --non-interactive true || true
+        sudo systemctl restart snapd.seeded.service |& $LOGCMD
+        check_for_active_updates
+        sudo snap install core |& $LOGCMD
+    fi
 }
 
 
