@@ -133,13 +133,13 @@ function install_package {
             --yes                           \
             "$temp_deb"                     |& $LOGCMD
 
-    # Zenity is a dependency for running scripts in "kz.deb".
+    # Zenity is a dependency for running GUI scripts in package kz.
     if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
         check_for_active_updates
         sudo apt-get install --yes zenity |& $LOGCMD
     fi
 
-    # Snaps are a dependency for running scripts in "kz.deb".
+    # Snaps are a dependency for running scripts in package kz.
     if ! snap list core &> /dev/null; then
         sudo --non-interactive true || true
         sudo systemctl enable --now snapd.socket |& $LOGCMD
