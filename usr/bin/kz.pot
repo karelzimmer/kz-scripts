@@ -343,9 +343,6 @@ msgstr ""
 msgid "Download package kz"
 msgstr ""
 
-msgid "Install zenity for GUI use"
-msgstr ""
-
 msgid "Install snapd runtime environment"
 msgstr ""
 
