@@ -109,9 +109,6 @@ function install_package {
     local   site_deb='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
     local   temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
-    # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
-    chmod o+r "$temp_deb" |& $LOGCMD
-
     text='Download kz.deb...'
     msg_info "$text"
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
@@ -120,6 +117,8 @@ function install_package {
     msg_info "$text"
     text='Installing package kz...'
     msg_log "$text"
+    # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
+    chmod o+r "$temp_deb" |& $LOGCMD
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
