@@ -236,6 +236,7 @@ Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz restore'.")
         msg_error "$text"
+        rm "$errors" |& $LOGCMD
         exit $ERROR
     fi
 }

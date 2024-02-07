@@ -22,7 +22,7 @@ sudo apt-get install --yes anydesk
 # APP apport HOST *
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
-sudo rm --force /var/crash/*
+sudo rm --force --verbose /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 
@@ -109,7 +109,7 @@ sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 # The installation overwrites the newly added source-list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 # The installation adds an apt-key that is no longer needed.
-sudo rm --force /etc/apt/trusted.gpg.d/google-chrome.gpg
+sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 
 # APP google-earth HOST

@@ -13,7 +13,7 @@ sudo apt-get remove --yes ansible
 
 # APP anydesk HOST
 sudo apt-get remove --yes anydesk
-sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
+sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
 
@@ -88,13 +88,13 @@ sudo apt-get remove --yes epiphany-browser
 
 # APP google-chrome HOST *
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
-sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
+sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
 
 
 # APP google-earth HOST
 sudo apt-get remove --yes google-earth-pro-stable
-sudo rm --force /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
+sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
 sudo apt-get update
 
 
@@ -135,7 +135,7 @@ sudo apt-get remove --yes mlocate
 
 
 # APP monitors HOST pc06
-sudo rm --force ~gdm/.config/monitors.xml
+sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 
 # APP nautilus-admin HOST pc06
@@ -148,7 +148,7 @@ sudo apt-get remove --yes ntfs-3g
 
 # APP signal HOST pc06
 sudo apt-get remove --yes signal-desktop
-sudo rm --force /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
+sudo rm --force --verbose /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
 sudo apt-get update
 
 
@@ -167,7 +167,7 @@ sudo apt-get remove --yes gnome-sushi
 
 # APP teamviewer HOST *
 sudo apt-get remove --yes teamviewer
-sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
+sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
 sudo apt-key del 0C1289C0 DEB49217
 sudo apt-get update
 

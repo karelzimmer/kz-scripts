@@ -78,7 +78,7 @@ echo 'snap' > "$HOME"/.hidden
 
 
 # APP recover-files-thumbnails USER
-rm --force --recursive "$HOME"/.cache/thumbnails/
+rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 
 # APP spotify USER *

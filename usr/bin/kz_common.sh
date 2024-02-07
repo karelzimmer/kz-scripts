@@ -76,6 +76,8 @@ function become_root {
     fi
 
     if [[ $UID -ne 0 ]]; then
+        # Remove files created as non-root.
+        rm --force --verbose /tmp/kz-install-* |& $LOGCMD
         if $option_gui; then
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD

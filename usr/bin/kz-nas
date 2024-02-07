@@ -278,7 +278,7 @@ function check_dependencies {
 # This function creates the secret needed to log in to the NAS.
 create_nas_login() {
     text="username=$nas_user_name\npassword=$nas_password"
-    rm --force $$NAS_LOGIN_DIR/$PROGRAM_NAME*
+    rm --force --verbose $NAS_LOGIN_DIR/$PROGRAM_NAME* |& $LOGCMD
     printf '%b\n' "$text" > "$NAS_LOGIN"
     chmod '600' "$NAS_LOGIN" |& $LOGCMD
 }

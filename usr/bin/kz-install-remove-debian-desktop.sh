@@ -9,7 +9,7 @@
 
 # APP anydesk HOST
 sudo apt-get remove --yes anydesk
-sudo rm --force /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
+sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
 
@@ -54,7 +54,7 @@ sudo apt-get remove --yes gnome-gmail
 
 # APP google-chrome HOST *
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
-sudo rm --force /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
+sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
 
 
@@ -92,7 +92,7 @@ sudo apt-get update
 
 # APP signal HOST pc07
 sudo apt-get remove --yes signal-desktop
-sudo rm --force /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
+sudo rm --force --verbose /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
 sudo apt-get update
 
 
@@ -102,7 +102,7 @@ sudo apt-get remove --yes spice-vdagent
 
 # APP teamviewer HOST *
 sudo apt-get remove --yes teamviewer
-sudo rm --force /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
+sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
 sudo apt-key del 0C1289C0 DEB49217
 sudo apt-get update
 
@@ -126,5 +126,5 @@ sudo snap remove code
 
 # APP webmin HOST pc07
 sudo apt-get remove --yes webmin
-sudo rm --force /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
+sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 sudo apt-get update

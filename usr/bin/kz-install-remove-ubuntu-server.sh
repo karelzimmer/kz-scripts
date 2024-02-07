@@ -12,7 +12,7 @@ sudo apt-get remove --yes ansible
 
 
 # APP cloud-init HOST *
-sudo rm --force /etc/cloud/cloud-init.disabled
+sudo rm --force --verbose /etc/cloud/cloud-init.disabled
 
 
 # APP fwupd HOST

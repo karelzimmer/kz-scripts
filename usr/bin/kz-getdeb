@@ -127,6 +127,7 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$temp_deb"                     |& $LOGCMD
+    rm "$temp_deb" |& $LOGCMD
     text='Installed package kz.'
     msg_log "$text"
 }
@@ -158,7 +159,7 @@ $(gettext "Type 'exit' to close this window.")"
     else
         msg_info "$text"
     fi
-    rm --force "$HOME"/kz "$HOME"/kz.{1..99}
+    rm --force --verbose "$HOME"/kz "$HOME"/kz.{1..99} |& $LOGCMD
     exit $OK
 }
 

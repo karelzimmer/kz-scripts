@@ -8,7 +8,7 @@
 
 
 # APP lynis USER
-rm --force --recursive /home/"$USER"/lynis
+rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
 # APP terminal USER *

@@ -17,7 +17,7 @@ kz-gset --delfav=calibre-gui
 
 # APP cockpit USER karel@pc06
 kz-gset --delfav=kz-cockpit
-rm --force "$HOME"/.local/share/applications/kz-cockpit.desktop
+rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
 # APP firefox USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
@@ -68,11 +68,11 @@ kz-gset --delfav=virt-manager
 
 
 # APP lynis USER
-rm --force --recursive /home/"$USER"/lynis
+rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
 # APP nautilus-hide USER *
-rm --force "$HOME"/.hidden
+rm --force --verbose "$HOME"/.hidden
 
 
 # APP spotify USER *
