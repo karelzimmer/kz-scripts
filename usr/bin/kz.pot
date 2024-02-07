@@ -343,9 +343,6 @@ msgstr ""
 msgid "Download package kz"
 msgstr ""
 
-msgid "Install package kz (this may take a while)"
-msgstr ""
-
 msgid "Install zenity for GUI use"
 msgstr ""
 

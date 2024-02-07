@@ -47,7 +47,6 @@ $OPTIONS_HELP"
 # Variables
 ###############################################################################
 
-declare    temp_deb=''
 
 ###############################################################################
 # Functions
@@ -108,22 +107,23 @@ function process_input {
 # This function installs package kz.
 function install_package {
     local   site_deb='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
+    local   temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
-    temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    text='Download & install. kz...'
+    msg_info "$text"
+
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb" |& $LOGCMD
 
-    text=$(gettext 'Download package kz')...
-    msg_info "$text"
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
     # If necessary, display a sudo prompt before the informational installation
     # message.
     sudo --non-interactive true || true
     sudo true
-    text=$(gettext 'Install package kz (this may take a while)')...
-    msg_info "$text"
 
+    text='Installing package kz...'
+    msg_log "$text"
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -132,6 +132,8 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$temp_deb"                     |& $LOGCMD
+    text='Installed package kz.'
+    msg_log "$text"
 
     # Zenity is a dependency for running GUI scripts in package kz.
     if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then

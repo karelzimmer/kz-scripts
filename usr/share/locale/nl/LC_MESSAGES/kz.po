@@ -381,9 +381,6 @@ msgstr "Uploaden website is mislukt."
 msgid "Download package kz"
 msgstr "Download pakket kz"
 
-msgid "Install package kz (this may take a while)"
-msgstr "Installeer pakket kz (dit kan even duren)"
-
 msgid "Install zenity for GUI use"
 msgstr "Installeer zenity voor GUI-gebruik"
 
