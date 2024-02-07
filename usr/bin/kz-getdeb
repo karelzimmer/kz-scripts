@@ -135,18 +135,26 @@ function install_package {
 
     # Zenity is a dependency for running GUI scripts in package kz.
     if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
+        text='Installing zenity...'
+        msg_log "$text"
         check_for_active_updates
         sudo apt-get install --yes zenity |& $LOGCMD
+        text='Installed zenity.'
+        msg_log "$text"
     fi
 
     # Snaps are a dependency for running scripts in package kz.
     if ! snap list core &> /dev/null; then
+        text='Installing snap core...'
+        msg_log "$text"
         sudo --non-interactive true || true
         sudo systemctl enable --now snapd.socket |& $LOGCMD
         sudo --non-interactive true || true
         sudo systemctl restart snapd.seeded.service |& $LOGCMD
         check_for_active_updates
         sudo snap install core |& $LOGCMD
+        text='Installed snap core.'
+        msg_log "$text"
     fi
 }
 
