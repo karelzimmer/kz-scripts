@@ -117,11 +117,6 @@ function install_package {
 
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
 
-    # If necessary, display a sudo prompt before the informational installation
-    # message.
-    sudo --non-interactive true || true
-    sudo true
-
     text='Installing package kz...'
     msg_log "$text"
     check_for_active_updates
