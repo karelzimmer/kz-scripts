@@ -135,6 +135,8 @@ function install_package {
 
     # Zenity is a dependency for running GUI scripts in package kz.
     if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
+        text=$(gettext 'Install zenity for GUI use')...
+        msg_info "$text"
         text='Installing zenity...'
         msg_log "$text"
         check_for_active_updates
@@ -145,6 +147,8 @@ function install_package {
 
     # Snaps are a dependency for running scripts in package kz.
     if ! snap list core &> /dev/null; then
+        text=$(gettext 'Install snapd runtime environment')...
+        msg_info "$text"
         text='Installing snap core...'
         msg_log "$text"
         sudo --non-interactive true || true

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-06 10:51+0100\n"
+"POT-Creation-Date: 2024-02-07 08:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -344,6 +344,12 @@ msgid "Download package kz"
 msgstr ""
 
 msgid "Install package kz (this may take a while)"
+msgstr ""
+
+msgid "Install zenity for GUI use"
+msgstr ""
+
+msgid "Install snapd runtime environment"
 msgstr ""
 
 msgid "Install package kz failed."

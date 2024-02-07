@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-28 15:15+0100\n"
+"POT-Creation-Date: 2024-02-07 08:37+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -383,6 +383,12 @@ msgstr "Download pakket kz"
 
 msgid "Install package kz (this may take a while)"
 msgstr "Installeer pakket kz (dit kan even duren)"
+
+msgid "Install zenity for GUI use"
+msgstr "Installeer zenity voor GUI-gebruik"
+
+msgid "Install snapd runtime environment"
+msgstr "Installeer de runtime-omgeving van snapd"
 
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
