@@ -112,13 +112,13 @@ function install_package {
     text='Download kz.deb...'
     msg_info "$text"
     wget --output-document="$temp_deb" $site_deb |& $LOGCMD
+    # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
+    chmod o+r "$temp_deb" |& $LOGCMD
 
     text='Install. kz.deb...'
     msg_info "$text"
     text='Installing package kz...'
     msg_log "$text"
-    # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
-    chmod o+r "$temp_deb" |& $LOGCMD
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
