@@ -343,9 +343,6 @@ msgstr ""
 msgid "Download package kz"
 msgstr ""
 
-msgid "Install snapd runtime environment"
-msgstr ""
-
 msgid "Install package kz failed."
 msgstr ""
 

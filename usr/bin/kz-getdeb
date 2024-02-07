@@ -129,22 +129,6 @@ function install_package {
             "$temp_deb"                     |& $LOGCMD
     text='Installed package kz.'
     msg_log "$text"
-
-    # Snaps are a dependency for running scripts in package kz.
-    if ! snap list core &> /dev/null; then
-        text=$(gettext 'Install snapd runtime environment')...
-        msg_info "$text"
-        text='Installing snap core...'
-        msg_log "$text"
-        sudo --non-interactive true || true
-        sudo systemctl enable --now snapd.socket |& $LOGCMD
-        sudo --non-interactive true || true
-        sudo systemctl restart snapd.seeded.service |& $LOGCMD
-        check_for_active_updates
-        sudo snap install core |& $LOGCMD
-        text='Installed snap core.'
-        msg_log "$text"
-    fi
 }
 
 

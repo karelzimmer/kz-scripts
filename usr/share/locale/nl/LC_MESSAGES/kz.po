@@ -381,9 +381,6 @@ msgstr "Uploaden website is mislukt."
 msgid "Download package kz"
 msgstr "Download pakket kz"
 
-msgid "Install snapd runtime environment"
-msgstr "Installeer de runtime-omgeving van snapd"
-
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
