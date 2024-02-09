@@ -191,7 +191,6 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
     fi
 
     check_on_ac_power
-
     restore_backup
 
     if $option_dry_run; then
