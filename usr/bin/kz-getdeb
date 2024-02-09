@@ -115,6 +115,8 @@ function install_package {
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$temp_deb" |& $LOGCMD
 
+    sudo --non-interactive true || true
+    sudo true
     text='Install. kz.deb...'
     msg_info "$text"
     text='Installing package kz...'
