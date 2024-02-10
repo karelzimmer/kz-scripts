@@ -151,7 +151,7 @@ It is recommended to connect the computer to the wall socket.")
 }
 
 
-# This function if necessary, prompt the user for the [sudo] password.
+# This function prompts the user for the [sudo] password if necessary.
 function check_sudo_true {
     sudo --non-interactive true || true
     sudo true

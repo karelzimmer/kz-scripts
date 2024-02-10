@@ -177,6 +177,9 @@ def check_on_ac_power(PROGRAM_NAME):
 
 
 def check_sudo_true():
+    """
+    This function prompts the user for the [sudo] password if necessary.
+    """
     subprocess.run('sudo --non-interactive true || true', shell=True)
     try:
         subprocess.run('sudo true', shell=True)
