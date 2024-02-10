@@ -159,7 +159,8 @@ $(gettext "Type 'exit' to close this window.")"
     else
         msg_info "$text"
     fi
-    # Cleanup downloaded kz-files.
+    text='Cleanup downloaded kz-files...'
+    msg_log "$text"
     rm --force --verbose "$HOME"/kz "$HOME"/kz.{1..99} |& $LOGCMD
     exit $OK
 }
