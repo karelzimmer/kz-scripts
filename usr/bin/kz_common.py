@@ -1,5 +1,5 @@
 """
-This module provides general variables and functions.
+This module provides global variables and functions.
 """
 ###############################################################################
 # Common module for Python scripts.
