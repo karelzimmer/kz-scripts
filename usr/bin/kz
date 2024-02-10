@@ -54,27 +54,27 @@ declare     exec_program_name=''
 
 # This function handles the script options and arguments.
 function check_input {
-    # No getopt here like in all other scripts because any specified options in
-    # ARGUMENT, with kz COMMAND ARGUMENT, are for COMMAND, not for kz.
+    # No parsing here with getopt like in all other scripts, because with
+    # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
     if [[ -z "$*" ]]; then
         text=$USAGE
         msg_info "$text"
         exit $ERROR
     fi
     case $1 in
-        -h*|--h*)
+        -h|--help)
             process_option_help
             exit $OK
             ;;
-        -u*|--u*)
+        -u|--usage)
             process_option_usage
             exit $OK
             ;;
-        -v*|--v*)
+        -v|--version)
             process_option_version
             exit $OK
             ;;
-        -l*|--l*)
+        -l|--list)
             process_option_list
             exit $OK
             ;;

@@ -1,4 +1,3 @@
-#
 # This module provides global variables and functions.
 #
 # shellcheck shell=bash source=/dev/null disable=SC2155,SC2034
