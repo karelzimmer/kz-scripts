@@ -98,6 +98,7 @@ function process_input {
     if ! become_root_check; then
         return $OK
     fi
+    check_sudo_true
     install_package
 }
 
@@ -106,8 +107,6 @@ function process_input {
 function install_package {
     local   site_deb='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
     local   temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-
-    check_sudo_true
 
     text='Download kz.deb...'
     msg_info "$text"

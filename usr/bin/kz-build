@@ -122,6 +122,7 @@ function process_input {
     if ! become_root_check; then
         return $OK
     fi
+    check_sudo_true
     report_repos
     check_scripts
     build_uploads
