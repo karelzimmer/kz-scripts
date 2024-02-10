@@ -22,8 +22,6 @@ if  ! source "$(dirname "$0")"/kz_common.sh 2> \
             systemd-cat --identifier=kz-getdeb --priority=debug
     source  "$temp_kz_common" 2> \
             >(systemd-cat --identifier=kz-getdeb --priority=debug)
-    rm      "$temp_kz_common" |&
-            systemd-cat --identifier=kz-getdeb --priority=debug
 fi
 
 
@@ -133,7 +131,6 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$temp_deb"                     |& $LOGCMD
-    rm "$temp_deb" |& $LOGCMD
 }
 
 
@@ -163,6 +160,7 @@ $(gettext "Type 'exit' to close this window.")"
     else
         msg_info "$text"
     fi
+    # Cleanup downloaded kz-files.
     rm --force --verbose "$HOME"/kz "$HOME"/kz.{1..99} |& $LOGCMD
     exit $OK
 }

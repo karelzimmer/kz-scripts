@@ -399,7 +399,6 @@ EOF
                 "$source"/                  \
                 "$target"/                  2> "$errors" || backup_rc=$?
     fi
-    rm "$exclude"
 
     if [[ $backup_rc -eq $OK ]]; then
         text=$(gettext "Writing data from memory (this may take a while)")
@@ -434,7 +433,6 @@ Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz backup'.")"
         msg_error "$text"
-        rm "$errors" |& $LOGCMD
         exit $ERROR
     fi
 }

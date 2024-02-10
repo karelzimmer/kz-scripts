@@ -175,6 +175,7 @@ function upload_website {
                 --password  "$(cat "$ftp_login")"   \
                 -e          "$ftp_set; $ftp_cmd"    \
                 "$ftp_host"; then
+        # Force entering the password next time.
         rm "$ftp_login"
         text=$(gettext 'Website upload failed.')
         msg_error "$text"

@@ -310,7 +310,6 @@ function process_argument_app {
         text="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
 ")"
         msg_info "$text"
-        rm "$command_file" |& $LOGCMD
         exit $ERROR
     fi
 }
@@ -394,7 +393,6 @@ function process_input_file_by_user {
 # This function displays the contents of the command file.
 function process_option_cat {
     less --quit-if-one-screen "$command_file"
-    rm "$command_file" |& $LOGCMD
 }
 
 
@@ -449,7 +447,6 @@ function process_command_file {
                 ;;
         esac
     done < "$command_file"
-    rm "$command_file" |& $LOGCMD
 }
 
 
