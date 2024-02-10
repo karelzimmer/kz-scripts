@@ -398,7 +398,7 @@ function signal {
             ;;
         exit)
             # Cleanup temporary kz-files.
-            rm --force --verbose /tmp/kz-* |& $LOGCMD
+            rm --force --verbose /tmp/kz_common* /tmp/kz-* |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END log $PROGRAM_NAME ===="
             msg_log "$text"
