@@ -117,9 +117,9 @@ function check_dependencies {
             python3-autopep8    \
             python3-pip         \
             python-is-python3
-    sudo --non-interactive true || true
+    check_sudo_true
     sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
-    sudo --non-interactive true || true
+    check_sudo_true
     sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
     # Debian package shellcheck is old, snap is newer.
     check_for_active_updates

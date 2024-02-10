@@ -109,9 +109,7 @@ function install_package {
     local   site_deb='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
     local   temp_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
-    # If necessary, prompt the user for the [sudo] password.
-    sudo --non-interactive true || true
-    sudo true
+    check_sudo_true
 
     text='Download kz.deb...'
     msg_info "$text"
