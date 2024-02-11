@@ -105,12 +105,12 @@ function process_input {
 
 # This function installs package kz.
 function install_package {
-    local   site_deb_uri='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
+    local   kz_deb_site_uri='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
 
     text='Download kz.deb...'
     msg_info "$text"
     tmp_kz_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    wget --output-document="$tmp_kz_deb" $site_deb_uri |& $LOGCMD
+    wget --output-document="$tmp_kz_deb" $kz_deb_site_uri |& $LOGCMD
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$tmp_kz_deb" |& $LOGCMD
 

@@ -65,7 +65,7 @@ declare     tmp_config_a=''
 declare     tmp_config_b=''
 declare     tmp_errors=''
 declare     tmp_exclude=''
-declare     tmp_kz_common=''
+declare     tmp_kz_common
 declare     tmp_kz_deb=''
 
 
@@ -408,6 +408,8 @@ function signal {
             msg_log "$text"
             rm  --force             \
                 --verbose           \
+                "$HOME"/kz          \
+                "$HOME"/kz.{1..99}  \
                 "$tmp_command_file" \
                 "$tmp_config_a"     \
                 "$tmp_config_b"     \
