@@ -87,7 +87,6 @@ function become_root {
     if [[ $UID -ne 0 ]]; then
         text='Delete the kz install command file created as non-root...'
         msg_log "$text"
-        # shellcheck disable=SC2154
         rm --force --verbose "$tmp_command_file" |& $LOGCMD
         if $option_gui; then
             export DISPLAY=:0.0
