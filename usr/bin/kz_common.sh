@@ -65,7 +65,6 @@ declare     tmp_config_a=''
 declare     tmp_config_b=''
 declare     tmp_errors=''
 declare     tmp_exclude=''
-declare     tmp_kz_common
 declare     tmp_kz_deb=''
 
 
@@ -415,7 +414,6 @@ function signal {
                 "$tmp_config_b"     \
                 "$tmp_errors"       \
                 "$tmp_exclude"      \
-                "$tmp_kz_common"    \
                 "$tmp_kz_deb"       |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END log $PROGRAM_NAME ===="

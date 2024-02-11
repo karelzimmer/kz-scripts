@@ -22,6 +22,7 @@ if  ! source "$(dirname "$0")"/kz_common.sh 2> \
     wget    --output-document="$tmp_kz_common" $kz_common_github_uri |&
             systemd-cat --identifier=kz-getdeb --priority=debug
     source  "$tmp_kz_common"
+    rm      "$tmp_kz_common"
 fi
 
 
