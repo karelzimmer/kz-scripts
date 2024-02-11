@@ -60,6 +60,13 @@ declare -a  commandline_args=()
 declare     option_gui=false
 declare     text=''
 declare     title=''
+declare     tmp_command_file=''
+declare     tmp_config_a=''
+declare     tmp_config_b=''
+declare     tmp_errors=''
+declare     tmp_exclude=''
+declare     tmp_kz_common=''
+declare     tmp_kz_deb=''
 
 
 ###############################################################################
@@ -78,8 +85,10 @@ function become_root {
     fi
 
     if [[ $UID -ne 0 ]]; then
-        # Remove files created as non-root.
-        rm --force --verbose /tmp/kz-install-* |& $LOGCMD
+        text='Remove kz install command file created as non-root...'
+        msg_log "$text"
+        # shellcheck disable=SC2154
+        rm --force --verbose "$tmp_command_file" |& $LOGCMD
         if $option_gui; then
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD
@@ -398,7 +407,15 @@ function signal {
         exit)
             text='Cleanup temporary kz-files...'
             msg_log "$text"
-            rm --force --verbose /tmp/kz_common* /tmp/kz-* |& $LOGCMD
+            rm  --force             \
+                --verbose           \
+                "$tmp_command_file" \
+                "$tmp_config_a"     \
+                "$tmp_config_b"     \
+                "$tmp_errors"       \
+                "$tmp_exclude"      \
+                "$tmp_kz_common"    \
+                "$tmp_kz_deb"       |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END log $PROGRAM_NAME ===="
             msg_log "$text"

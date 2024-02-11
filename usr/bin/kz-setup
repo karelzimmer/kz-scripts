@@ -60,7 +60,6 @@ readonly    PROGRAM_PATH=$MODULE_PATH
 declare -A  app_arguments=()
 declare -A  failed_apps=()
 declare     argument_app=false
-declare     command_file=''
 declare     commands_found=false
 declare     file_argument=''
 declare     input_file=''
@@ -189,7 +188,7 @@ nd end with '.sh'.")"
         exit $OK
     fi
 
-    command_file=$(
+    tmp_command_file=$(
         mktemp -t "$PROGRAM_NAME-$mode-$DISTRO-$EDITION-XXXXXXXXXX.sh"
         )
 
@@ -209,7 +208,7 @@ nd end with '.sh'.")"
         text=$(gettext 'Preparing set up')
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_command_file > >(
+        process_tmp_command_file > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -220,7 +219,7 @@ nd end with '.sh'.")"
                     --text      "$text"     2> >($LOGCMD)
             )
     else
-        process_command_file
+        process_tmp_command_file
     fi
 }
 
@@ -336,13 +335,13 @@ function process_input_file_by_app {
                     # Match on app name.
                     app_match=true
                     no_app_match=false
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
                 ;;
             *)
                 # Other record (empty, comment, or command).
                 if $app_match; then
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
                 ;;
         esac
@@ -376,13 +375,13 @@ function process_input_file_by_user {
                 then
                     # Match on user name.
                     user_match=true
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
                 ;;
             *)
                 # Other record (empty, comment, or command).
                 if $user_match; then
-                    printf '%s\n' "$input_record" >> "$command_file"
+                    printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
                 ;;
         esac
@@ -392,12 +391,12 @@ function process_input_file_by_user {
 
 # This function displays the contents of the command file.
 function process_option_cat {
-    less --quit-if-one-screen "$command_file"
+    less --quit-if-one-screen "$tmp_command_file"
 }
 
 
 # This function reads commands from the command file for further processing.
-function process_command_file {
+function process_tmp_command_file {
     local       app_name=''
     local       app_name_line=''
     local       operation=$(gettext 'set up')
@@ -406,7 +405,7 @@ function process_command_file {
     local   -i  app_tot_num=0
     local   -i  cmd_seq_num=0
 
-    app_tot_num=$(grep --regexp='#.* APP ' --count "$command_file" || true)
+    app_tot_num=$(grep --regexp='#.* APP ' --count "$tmp_command_file" || true)
 
     if $option_reset; then
         operation=$(gettext 'reset')
@@ -446,7 +445,7 @@ function process_command_file {
                 execute_command "$commands_record"
                 ;;
         esac
-    done < "$command_file"
+    done < "$tmp_command_file"
 }
 
 

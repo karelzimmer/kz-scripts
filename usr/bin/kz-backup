@@ -55,8 +55,6 @@ declare     option_target=false
 declare     target_argument=''
 declare     target_medium=''
 declare     target=''
-declare     errors=''
-declare     exclude=''
 
 
 ###############################################################################
@@ -213,7 +211,7 @@ Disconnect media via Files.")"
 # This function backs up user settings.
 function backup_settings {
     if $option_gui; then
-        # To prevent screens from coming and going very quickly.
+        # To prevent dialogs from coming and going very quickly.
         sleep 2
     fi
     delete_settings_previously_backuped
@@ -331,11 +329,11 @@ function create_backup {
     local       rsync_messages=''
     local       source=$HOME
 
-    exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
-    errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    tmp_exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
+    tmp_errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
     # Déjà Dup: Some locations are ignored by default.
-    cat << EOF > "$exclude"
+    cat << EOF > "$tmp_exclude"
 .adobe/Flash_Player/AssetCache
 .cache
 .ccache
@@ -352,7 +350,7 @@ snap/*/*/.cache
 EOF
 
     # Skip git-controlled directories.
-    cat << EOF >> "$exclude"
+    cat << EOF >> "$tmp_exclude"
 $(
     find    "$HOME"         \
             -maxdepth 2     \
@@ -372,11 +370,11 @@ EOF
                 --verbose                   \
                 $dry_run_option             \
                 --delete                    \
-                --exclude-from="$exclude"   \
+                --exclude-from="$tmp_exclude"   \
                 --delete-excluded           \
                 "$source"/                  \
                 "$target"/                  \
-                2> "$errors"                |
+                2> "$tmp_errors"            |
         sed     --expression='s/^/#/'       |
         zenity  --progress                  \
                 --auto-close                \
@@ -394,10 +392,10 @@ EOF
                 --human-readable            \
                 $dry_run_option             \
                 --delete                    \
-                --exclude-from="$exclude"   \
+                --exclude-from="$tmp_exclude"   \
                 --delete-excluded           \
                 "$source"/                  \
-                "$target"/                  2> "$errors" || backup_rc=$?
+                "$target"/                  2> "$tmp_errors" || backup_rc=$?
     fi
 
     if [[ $backup_rc -eq $OK ]]; then
@@ -419,7 +417,7 @@ EOF
         fi
     else
         # shellcheck disable=SC2034
-        rsync_messages=$(cat "$errors")
+        rsync_messages=$(cat "$tmp_errors")
         text="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable,
