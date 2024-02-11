@@ -305,6 +305,9 @@ function restore_settings {
 function restore_settings_desktop_background {
     local   input_file=$HOME/.kz-backup/Background
 
+    text='Restore the desktop background...'
+    msg_log "$text"
+
     if [[ -f $input_file ]]; then
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \

@@ -224,6 +224,9 @@ function backup_settings {
 
 # This function deletes previously backuped user settings.
 function delete_settings_previously_backuped {
+    text='Delete previously backuped user settings...'
+    msg_log "$text"
+
     rm      --force                             \
             "$HOME"/Afbeeldingen/Achtergrond    \
             "$HOME"/Afbeeldingen/Gebruikersfoto \
@@ -256,6 +259,9 @@ function backup_settings_desktop_background {
     local   input_file=''
     local   output_file=$HOME/.$PROGRAM_NAME/Background
 
+    text='Copy the desktop background...'
+    msg_log "$text"
+
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed --expression='s|%20| |g'                            |
@@ -269,6 +275,9 @@ function backup_settings_desktop_background {
 # This function saves the favorite apps.
 function backup_settings_favorite_apps {
     local   output_file=$HOME/.$PROGRAM_NAME/Favorites
+
+    text='Save the favorite apps...'
+    msg_log "$text"
 
     mkdir --parents "$HOME"/.$PROGRAM_NAME
     gsettings get org.gnome.shell favorite-apps > "$output_file" |&
@@ -286,6 +295,9 @@ function backup_settings_installed_apps {
     local   header3=$(gettext '==== START added repositories ====')
     local   footer3=$(gettext '==== END added repositories ====')
     local   search=/etc/apt/sources.list
+
+    text='Create a list of installed apps...'
+    msg_log "$text"
 
     mkdir --parents "$HOME"/.$PROGRAM_NAME
 
@@ -316,6 +328,9 @@ function backup_settings_installed_apps {
 
 # This function copies the user photo.
 function backup_settings_user_photo {
+    text='Copy the user photo...'
+    msg_log "$text"
+
     local   input_file=/var/lib/AccountsService/icons/"$USER"
     local   output_file=$HOME/.$PROGRAM_NAME/Userphoto
 
@@ -366,36 +381,37 @@ EOF
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     if $option_gui; then
-        rsync   --archive                   \
-                --verbose                   \
-                $dry_run_option             \
-                --delete                    \
+        rsync   --archive                       \
+                --verbose                       \
+                $dry_run_option                 \
+                --delete                        \
                 --exclude-from="$tmp_exclude"   \
-                --delete-excluded           \
-                "$source"/                  \
-                "$target"/                  \
-                2> "$tmp_errors"            |
-        sed     --expression='s/^/#/'       |
-        zenity  --progress                  \
-                --auto-close                \
-                --no-cancel                 \
-                --pulsate                   \
-                --width     600             \
-                --height    50              \
-                --title     "$title"        \
-                --text      "$text"         2> >($LOGCMD) || backup_rc=$?
+                --delete-excluded               \
+                "$source"/                      \
+                "$target"/                      \
+                2> "$tmp_errors"                |
+        sed     --expression='s/^/#/'           |
+        zenity  --progress                      \
+                --auto-close                    \
+                --no-cancel                     \
+                --pulsate                       \
+                --width     600                 \
+                --height    50                  \
+                --title     "$title"            \
+                --text      "$text"             2> >($LOGCMD) || backup_rc=$?
     else
                 text+='...'
                 msg_info "$text"
-        rsync   --archive                   \
-                --verbose                   \
-                --human-readable            \
-                $dry_run_option             \
-                --delete                    \
+        rsync   --archive                       \
+                --verbose                       \
+                --human-readable                \
+                $dry_run_option                 \
+                --delete                        \
                 --exclude-from="$tmp_exclude"   \
-                --delete-excluded           \
-                "$source"/                  \
-                "$target"/                  2> "$tmp_errors" || backup_rc=$?
+                --delete-excluded               \
+                "$source"/                      \
+                "$target"/                      2> "$tmp_errors" ||
+                                                backup_rc=$?
     fi
 
     if [[ $backup_rc -eq $OK ]]; then
