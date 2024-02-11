@@ -208,7 +208,7 @@ nd end with '.sh'.")"
         text=$(gettext 'Preparing set up')
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_tmp_command_file > >(
+        process_command_file > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -219,7 +219,7 @@ nd end with '.sh'.")"
                     --text      "$text"     2> >($LOGCMD)
             )
     else
-        process_tmp_command_file
+        process_command_file
     fi
 }
 
@@ -396,7 +396,7 @@ function process_option_cat {
 
 
 # This function reads commands from the command file for further processing.
-function process_tmp_command_file {
+function process_command_file {
     local       app_name=''
     local       app_name_line=''
     local       operation=$(gettext 'set up')

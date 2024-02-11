@@ -129,7 +129,7 @@ function install_package {
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "$tmp_kz_deb"                     |& $LOGCMD
+            "$tmp_kz_deb"                   |& $LOGCMD
 }
 
 
