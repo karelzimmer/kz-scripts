@@ -138,9 +138,10 @@ ch as \$nas_ip_address?")
     local       quest4=$(gettext 'Password of this user on the NAS')
     local       quest5=$(gettext 'Share name of this user on the NAS')
 
+    title=$(gettext 'Question')
+    text=$quest1
+    msg_log "$title: $text"
     if $option_gui; then
-        title=$(gettext 'Question')
-        text=$quest1
         if ! zenity --question              \
                     --no-markup             \
                     --width     400         \
@@ -159,7 +160,11 @@ ch as \$nas_ip_address?")
         fi
     else
         while true; do
-            read -rp "$(eval_gettext "\$quest1 [y/N]: ")"
+            prompt=$(eval_gettext "\$quest1 [y/N]: ")
+            msg_log "$prompt"
+            read -rp "$prompt"
+            text="$REPLY"
+            msg_log "$text"
             case $REPLY in
                 [YyJj]*)
                     break
@@ -177,6 +182,7 @@ ch as \$nas_ip_address?")
 
     title=$(gettext 'Questions')
     text=$(gettext 'Please answer the following questions')
+    msg_log "$title: $text"
     if $option_gui; then
         REPLY=$(
             zenity  --forms                     \
@@ -231,6 +237,7 @@ process_input() {
     local   text4=$(gettext 'Mount NAS')
 
     title=$(gettext 'Mount network drive')
+    msg_log "$title"
     if $option_gui; then
         (
         sleep 2
@@ -270,6 +277,8 @@ process_input() {
 
 # This function check and installs dependencies.
 function check_dependencies {
+    text='Check_dependencies...'
+    msg_log "$text"
     check_for_active_updates
     sudo apt-get install --yes cifs-utils samba
 }
@@ -277,6 +286,8 @@ function check_dependencies {
 
 # This function creates the secret needed to log in to the NAS.
 create_nas_login() {
+    text='Create NAS login...'
+    msg_log "$text"
     text="username=$nas_user_name\npassword=$nas_password"
     printf '%b\n' "$text" > "$NAS_LOGIN"
     chmod '600' "$NAS_LOGIN" |& $LOGCMD
@@ -285,6 +296,8 @@ create_nas_login() {
 
 # This function creates the systemd unit mount file.
 create_systemd_unit_file() {
+    text='Create systemd unit file...'
+    msg_log "$text"
     printf '%s\n' "[Unit]
 Description=Mount NAS Directory
 
@@ -302,6 +315,8 @@ WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 
 # This function allows the NAS to be connected ad hoc.
 mount_nas() {
+    text='Mount NAS...'
+    msg_log "$text"
     systemctl enable "$SYSTEMD_MOUNT_FILE" |& $LOGCMD
     systemctl start "$SYSTEMD_MOUNT_FILE" |& $LOGCMD || true
     systemctl daemon-reload |& $LOGCMD

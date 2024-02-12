@@ -203,9 +203,10 @@ nd end with '.sh'.")"
         exit $OK
     fi
 
+    title=$(gettext 'Set up apps')
+    text=$(gettext 'Preparing set up')
+    msg_log "$title"...
     if $option_gui; then
-        title=$(gettext 'Set up apps')
-        text=$(gettext 'Preparing set up')
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
