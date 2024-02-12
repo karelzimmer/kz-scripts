@@ -132,6 +132,10 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
+    local   -i  backup_rc=0
+    local       rsync_messages=''
+    local       target=''
+
     if $option_target; then
         if ! [[ -d $target_argument ]]; then
             text="$DISPLAY_NAME: $target_argument: \
@@ -187,6 +191,7 @@ Disconnect media via Files.")"
             title=$(gettext 'Secure settings')
             text=$title
             if $option_gui; then
+                sleep 2
                 backup_settings                 |
                 zenity  --progress              \
                         --pulsate               \
@@ -205,15 +210,29 @@ Disconnect media via Files.")"
     fi
 
     create_backup
+    if [[ $backup_rc -ne $OK ]]; then
+        # shellcheck disable=SC2034
+        rsync_messages=$(cat "$tmp_errors")
+        text="$(eval_gettext "Backup ended with warnings or errors.
+
+Some files may not be readable,
+or were any files added or removed while creating the backup,
+or is there not enough space on \$target.
+
+Check the rsync messages:
+\$rsync_messages
+
+Try creating the back up again.
+Use app 'Installation menu' and select '5 - Command menu', or
+use app Terminal, type 'kz backup'.")"
+        msg_error "$text"
+        exit $ERROR
+    fi
 }
 
 
 # This function backs up user settings.
 function backup_settings {
-    if $option_gui; then
-        # To prevent dialogs from coming and going very quickly.
-        sleep 2
-    fi
     delete_settings_previously_backuped
     backup_settings_desktop_background
     backup_settings_favorite_apps
@@ -296,7 +315,7 @@ function backup_settings_installed_apps {
     local   footer3=$(gettext '==== END added repositories ====')
     local   search=/etc/apt/sources.list
 
-    text='Create a list of installed apps...'
+    text='Create a list of installed apps...(ignore WARNING)'
     msg_log "$text"
 
     mkdir --parents "$HOME"/.$PROGRAM_NAME
@@ -340,8 +359,6 @@ function backup_settings_user_photo {
 
 # This function creates the backup.
 function create_backup {
-    local   -i  backup_rc=0
-    local       rsync_messages=''
     local       source=$HOME
 
     tmp_exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
@@ -381,6 +398,7 @@ EOF
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     if $option_gui; then
+        msg_log "$title"...
         rsync   --archive                       \
                 --verbose                       \
                 $dry_run_option                 \
@@ -400,8 +418,8 @@ EOF
                 --title     "$title"            \
                 --text      "$text"             2> >($LOGCMD) || backup_rc=$?
     else
-                text+='...'
-                msg_info "$text"
+        text+='...'
+        msg_info "$text"
         rsync   --archive                       \
                 --verbose                       \
                 --human-readable                \
@@ -414,40 +432,22 @@ EOF
                                                 backup_rc=$?
     fi
 
-    if [[ $backup_rc -eq $OK ]]; then
-        text=$(gettext "Writing data from memory (this may take a while)")
-        if $option_gui; then
-            sync                            |
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     &> >($LOGCMD)
-        else
-            text+='...'
-            msg_info "$text"
-            sync |& $LOGCMD
-        fi
+    text=$(gettext "Writing data from memory (this may take a while)")
+    if $option_gui; then
+        msg_log "$text"...
+        sync                            |
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$title"    \
+                --text      "$text"     &> >($LOGCMD)
     else
-        # shellcheck disable=SC2034
-        rsync_messages=$(cat "$tmp_errors")
-        text="$(eval_gettext "Backup ended with warnings or errors.
-
-Some files may not be readable,
-or were any files added or removed while creating the backup,
-or is there not enough space on \$target.
-
-Check the rsync messages:
-\$rsync_messages
-
-Try creating the back up again.
-Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz backup'.")"
-        msg_error "$text"
-        exit $ERROR
+        text+='...'
+        msg_info "$text"
+        sync |& $LOGCMD
     fi
 }
 
@@ -487,6 +487,7 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
+        msg_log "$text"...
         umount "$target_medium"                     |& $LOGCMD || rc+=$?;   \
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
         udisksctl power-off --block-device "$dev"   |& $LOGCMD              |

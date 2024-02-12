@@ -202,6 +202,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
         title=$(gettext 'Restore settings')
         text=$title
         if $option_gui; then
+            sleep 2
             restore_settings                |
             zenity  --progress              \
                     --pulsate               \
@@ -246,6 +247,7 @@ function restore_backup {
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
+        msg_log "$title"...
         rsync   --archive               \
                 --verbose               \
                 $dry_run_option         \
@@ -274,6 +276,7 @@ function restore_backup {
 
     text=$(gettext "Writing data from memory (this may take a while)")
     if $option_gui; then
+        msg_log "$text"...
         sync                            |
         zenity  --progress              \
                 --pulsate               \
@@ -293,10 +296,6 @@ function restore_backup {
 
 # This function restores user settings.
 function restore_settings {
-    if $option_gui; then
-        # To prevent dialogs from coming and going very quickly.
-        sleep 2
-    fi
     restore_settings_desktop_background
 }
 
@@ -345,6 +344,7 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
+        msg_log "$text"...
         umount "$source_medium"                     |& $LOGCMD || rc+=$?;   \
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
         udisksctl power-off --block-device "$dev"   |& $LOGCMD              |
