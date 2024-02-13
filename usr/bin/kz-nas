@@ -194,36 +194,52 @@ ch as \$nas_ip_address?")
                     --add-password  "$quest4"   \
                     --add-entry     "$quest5"   2> >($LOGCMD)
 	        ) || exit $OK
+        msg_log "$quest2"
         nas_ip_address=$(   printf '%s' "$REPLY" | awk -F, '{print $1}')
+        msg_log "$nas_ip_address"
+        msg_log "$quest3"
         nas_user_name=$(    printf '%s' "$REPLY" | awk -F, '{print $2}')
+        msg_log "$nas_user_name"
+        msg_log "$quest4"
         nas_password=$(     printf '%s' "$REPLY" | awk -F, '{print $3}')
+        msg_log "$nas_password"
+        msg_log "$quest5"
         nas_share_name=$(   printf '%s' "$REPLY" | awk -F, '{print $4}')
+        msg_log "$nas_share_name"
     else
         text="
 $text.
 $(gettext "If you do not specify, the value in [] is used as the response.")"
         msg_info "$text"
+        msg_log "$quest2"
         read -rp "
 $quest2? [$nas_ip_address]: "
         if [[ -n $REPLY ]]; then
             nas_ip_address=$REPLY
         fi
+        msg_log "$nas_ip_address"
+        msg_log "$quest3"
         read -rp "
 $quest3? [$nas_user_name]: "
         if [[ -n $REPLY ]]; then
             nas_user_name=$REPLY
         fi
+        msg_log "$nas_user_name"
+        msg_log "$quest4"
         read -rsp "
 $quest4? [$nas_password]: "
         if [[ -n $REPLY ]]; then
             nas_password=$REPLY
         fi
         printf '\n'
+        msg_log "$nas_password"
+        msg_log "$quest5"
         read -rp "
 $quest5? [$nas_share_name]: "
         if [[ -n $REPLY ]]; then
             nas_share_name=$REPLY
         fi
+        msg_log "$nas_share_name"
     fi
 }
 
