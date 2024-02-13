@@ -140,7 +140,8 @@ ch as \$nas_ip_address?")
 
     title=$(gettext 'Question')
     text=$quest1
-    msg_log "$title: $text"
+    msg_log "$title"
+    msg_log "$quest1"
     if $option_gui; then
         if ! zenity --question              \
                     --no-markup             \
@@ -160,9 +161,7 @@ ch as \$nas_ip_address?")
         fi
     else
         while true; do
-            prompt=$(eval_gettext "\$quest1 [y/N]: ")
-            msg_log "$prompt"
-            read -rp "$prompt"
+            read -rp "$(eval_gettext "\$quest1 [y/N]: ")"
             text="$REPLY"
             msg_log "$text"
             case $REPLY in
@@ -182,7 +181,6 @@ ch as \$nas_ip_address?")
 
     title=$(gettext 'Questions')
     text=$(gettext 'Please answer the following questions')
-    msg_log "$title: $text"
     if $option_gui; then
         REPLY=$(
             zenity  --forms                     \
