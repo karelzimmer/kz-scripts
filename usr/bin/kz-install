@@ -458,6 +458,8 @@ function process_command_file {
 # This function reports and executes a command from the command file.
 function execute_command {
     local   cmd=${1:-unknown}
+    local   cmd_dis=''
+    local   cmd_dis_len=0 
 
     commands_found=true
     ((++cmd_seq_num))
