@@ -468,7 +468,9 @@ function execute_command {
         if [[ $cmd_seq_num -eq 1 ]];then
             msg_info "$app_name_line"
         fi
-        msg_info "         $cmd"
+        cmd_dis_len=($COLUMNS-9-3)
+        cmd_dis=${cmd:0:cmd_dis_len}
+        msg_info "         $cmd_dis..."
     fi
 
     check_for_active_updates

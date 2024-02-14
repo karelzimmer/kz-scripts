@@ -138,8 +138,8 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /de
 # APP hostnames HOST pc01 pc06
 sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
-sudo sed --in-place --expression='3s/^/192.168.1.100 pc01\n/' /etc/hosts
-sudo sed --in-place --expression='4s/^/192.168.1.83 pc06\n/' /etc/hosts
+sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
+sudo sed --in-place --expression='3a192.168.1.83 pc06' /etc/hosts
 
 
 # APP htop HOST pc06
