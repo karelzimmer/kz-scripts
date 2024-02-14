@@ -110,8 +110,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -574,8 +573,7 @@ function execute_command {
         gui_option='--gui'
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
-    text="$command: rc=$rc"
-    msg_log "$text"
+    msg_log "$command: rc=$rc"
 }
 
 

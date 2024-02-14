@@ -84,19 +84,16 @@ function become_root {
     fi
 
     if [[ $UID -ne 0 ]]; then
-        text='Delete the kz install command file created as non-root...'
-        msg_log "$text"
+        msg_log 'Delete the kz install command file created as non-root...'
         rm --force --verbose "$tmp_command_file" |& $LOGCMD
         if $option_gui; then
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD
-            text="restart (pkexec $program_exec ${commandline_args[*]})"
-            msg_log "$text"
+            msg_log "restart (pkexec $program_exec ${commandline_args[*]})"
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            text="restart (exec sudo $program_exec ${commandline_args[*]})"
-            msg_log "$text"
+            msg_log "restart (exec sudo $program_exec ${commandline_args[*]})"
             check_sudo_true
             exec sudo "$program_exec" "${commandline_args[@]}"
         fi
@@ -403,8 +400,7 @@ function signal {
             exit "$rc"
             ;;
         exit)
-            text='Cleanup temporary kz-files...'
-            msg_log "$text"
+            msg_log 'Cleanup temporary kz-files...'
             rm  --force             \
                 --verbose           \
                 "$HOME"/kz          \

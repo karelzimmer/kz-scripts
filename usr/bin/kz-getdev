@@ -54,8 +54,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -148,18 +147,14 @@ function pull_repos {
     text=$(gettext 'Pull repos')...
     msg_info "$text"
     # Call gitpull.
-    text='Calling gitpull...'
-    msg_log "$text"
+    msg_log 'Calling gitpull...'
     "$bin_repo"/gitpull
-    text='Called gitpull.'
-    msg_log "$text"
+    msg_log 'Called gitpull.'
     printf '%b\n' "$(gettext 'Status repos')..."
     # Call gitstat.
-    text='Calling gitstat...'
-    msg_log "$text"
+    msg_log 'Calling gitstat...'
     "$bin_repo"/gitstat
-    text='Called gitstat.'
-    msg_log "$text"
+    msg_log 'Called gitstat.'
 }
 
 
@@ -196,7 +191,8 @@ function download_website {
 
 # This function controls the termination of the script.
 function term_script {
-    printf '%s\n' "$(gettext 'Finished')."
+    text=$(gettext 'Finished').
+    msg_info "$text"
     exit $OK
 }
 

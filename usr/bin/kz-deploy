@@ -60,8 +60,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -143,11 +142,9 @@ function build_package {
     text=$(gettext 'Build package and website')...
     msg_info "$text"
     # Call kz-build.
-    text='Calling kz-build...'
-    msg_log "$text"
+    msg_log text='Calling kz-build...'
     "$SCRIPTS_REPO"/usr/bin/kz-build || exit $ERROR
-    text='Called kz-build.'
-    msg_log "$text"
+    msg_log 'Called kz-build.'
 }
 
 
@@ -191,15 +188,13 @@ function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
     text=$(gettext 'Install package')...
     msg_info "$text"
-    text='Calling kz-getdeb...'
-    msg_log "$text"
+    msg_log 'Calling kz-getdeb...'
     if ! wget --output-document=- karelzimmer.nl/kz 2> >($LOGCMD) | bash; then
         text=$(gettext 'Install package kz failed.')
         msg_error "$text"
         exit $ERROR
     fi
-    text='Called kz-getdeb.'
-    msg_log "$text"
+    msg_log 'Called kz-getdeb.'
 }
 
 

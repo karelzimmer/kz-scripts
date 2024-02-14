@@ -67,8 +67,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -111,15 +110,13 @@ function process_input {
 function install_package {
     local   kz_deb_site_uri='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
 
-    text='Download kz.deb...'
-    msg_info "$text"
+    msg_info 'Download kz.deb...'
     tmp_kz_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --output-document="$tmp_kz_deb" $kz_deb_site_uri |& $LOGCMD
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$tmp_kz_deb" |& $LOGCMD
 
-    text='Install. kz.deb...'
-    msg_info "$text"
+    msg_info 'Install. kz.deb...'
     # Progress indicator with growing number of '#'s as long as the
     # installation is in progress.
     while test -e "$tmp_kz_deb"; do
@@ -150,7 +147,6 @@ in the Checklist installation.
 
 Checklist installation can be found on
 \$website_url, under Linux.")
-
     if [[ $EDITION = 'desktop' ]]; then
         text+="
 
@@ -163,8 +159,7 @@ $(gettext "Type 'exit' to close this window.")"
     else
         msg_info "$text"
     fi
-    text='Cleanup downloaded kz-files...'
-    msg_log "$text"
+    msg_log 'Cleanup downloaded kz-files...'
     rm --force --verbose "$HOME"/kz "$HOME"/kz.{1..99} |& $LOGCMD
     exit $OK
 }

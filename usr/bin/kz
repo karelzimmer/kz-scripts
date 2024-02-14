@@ -57,8 +57,7 @@ function check_input {
     # No parsing here with getopt like in all other scripts, because with
     # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
     if [[ -z "$*" ]]; then
-        text=$USAGE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     case $1 in

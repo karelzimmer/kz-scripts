@@ -74,8 +74,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -243,9 +242,7 @@ function backup_settings {
 
 # This function deletes previously backuped user settings.
 function delete_settings_previously_backuped {
-    text='Delete previously backuped user settings...'
-    msg_log "$text"
-
+    msg_log 'Delete previously backuped user settings...'
     rm      --force                             \
             "$HOME"/Afbeeldingen/Achtergrond    \
             "$HOME"/Afbeeldingen/Gebruikersfoto \
@@ -278,9 +275,7 @@ function backup_settings_desktop_background {
     local   input_file=''
     local   output_file=$HOME/.$PROGRAM_NAME/Background
 
-    text='Copy the desktop background...'
-    msg_log "$text"
-
+    msg_log 'Copy the desktop background...'
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed --expression='s|%20| |g'                            |
@@ -295,9 +290,7 @@ function backup_settings_desktop_background {
 function backup_settings_favorite_apps {
     local   output_file=$HOME/.$PROGRAM_NAME/Favorites
 
-    text='Save the favorite apps...'
-    msg_log "$text"
-
+    msg_log 'Save the favorite apps...'
     mkdir --parents "$HOME"/.$PROGRAM_NAME
     gsettings get org.gnome.shell favorite-apps > "$output_file" |&
         $LOGCMD || true
@@ -315,9 +308,7 @@ function backup_settings_installed_apps {
     local   footer3=$(gettext '==== END added repositories ====')
     local   search=/etc/apt/sources.list
 
-    text='Create a list of installed apps...(ignore WARNING)'
-    msg_log "$text"
-
+    msg_log 'Create a list of installed apps...(ignore WARNING)'
     mkdir --parents "$HOME"/.$PROGRAM_NAME
 
     printf '%s\n' "$header1" > "$output_file"
@@ -347,12 +338,10 @@ function backup_settings_installed_apps {
 
 # This function copies the user photo.
 function backup_settings_user_photo {
-    text='Copy the user photo...'
-    msg_log "$text"
-
     local   input_file=/var/lib/AccountsService/icons/"$USER"
     local   output_file=$HOME/.$PROGRAM_NAME/Userphoto
 
+    msg_log 'Copy the user photo...'
     cp "$input_file" "$output_file" |& $LOGCMD || true
 }
 

@@ -85,8 +85,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -162,8 +161,7 @@ ch as \$nas_ip_address?")
     else
         while true; do
             read -rp "$(eval_gettext "\$quest1 [y/N]: ")"
-            text="$REPLY"
-            msg_log "$text"
+            msg_log "$REPLY"
             case $REPLY in
                 [YyJj]*)
                     break
@@ -291,8 +289,7 @@ process_input() {
 
 # This function check and installs dependencies.
 function check_dependencies {
-    text='Check_dependencies...'
-    msg_log "$text"
+    msg_log 'Check_dependencies...'
     check_for_active_updates
     sudo apt-get install --yes cifs-utils samba
 }
@@ -300,8 +297,7 @@ function check_dependencies {
 
 # This function creates the secret needed to log in to the NAS.
 create_nas_login() {
-    text='Create NAS login...'
-    msg_log "$text"
+    msg_log 'Create NAS login...'
     text="username=$nas_user_name\npassword=$nas_password"
     printf '%b\n' "$text" > "$NAS_LOGIN"
     chmod '600' "$NAS_LOGIN" |& $LOGCMD
@@ -310,8 +306,7 @@ create_nas_login() {
 
 # This function creates the systemd unit mount file.
 create_systemd_unit_file() {
-    text='Create systemd unit file...'
-    msg_log "$text"
+    msg_log 'Create systemd unit file...'
     printf '%s\n' "[Unit]
 Description=Mount NAS Directory
 
@@ -329,8 +324,7 @@ WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 
 # This function allows the NAS to be connected ad hoc.
 mount_nas() {
-    text='Mount NAS...'
-    msg_log "$text"
+    msg_log 'Mount NAS...'
     systemctl enable "$SYSTEMD_MOUNT_FILE" |& $LOGCMD
     systemctl start "$SYSTEMD_MOUNT_FILE" |& $LOGCMD || true
     systemctl daemon-reload |& $LOGCMD

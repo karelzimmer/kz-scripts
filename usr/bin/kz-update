@@ -88,7 +88,6 @@ def perform_cleanup():
     This function performs a Debian packages and snap packages cleanup.
     """
     text = f"==== {_('Cleanup')} ====\n"
-    text += '\n'
     kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo apt-get autoclean --yes'
@@ -125,8 +124,7 @@ def perform_command(command):
         kz_common.msg_error(PROGRAM_NAME, text)
         sys.exit(kz_common.error)
     else:
-        text = ''
-        kz_common.msg_info(PROGRAM_NAME, text)
+        kz_common.msg_info(PROGRAM_NAME, '')
 
 
 def check_reboot():

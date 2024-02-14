@@ -87,8 +87,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -165,11 +164,9 @@ function check_scripts {
     text=$(gettext 'Check scripts')...
     msg_info "$text"
     # Call kz-check.
-    text='Calling kz-check...'
-    msg_log "$text"
+    msg_log 'Calling kz-check...'
     "$SCRIPTS_REPO"/usr/bin/kz-check || error_flag=true
-    text='Called kz-check.'
-    msg_log "$text"
+    msg_log 'Called kz-check.'
 }
 
 
@@ -297,11 +294,9 @@ function run_ivp {
     text=$(gettext 'Run IVP')...
     msg_info "$text"
     # Call kz-ivp.
-    text='Calling kz-ivp...'
-    msg_log "$text"
+    msg_log 'Calling kz-ivp...'
     kz-ivp || error_flag=true
-    text='Called kz-ivp.'
-    msg_log "$text"
+    msg_log 'Called kz-ivp.'
 }
 
 
@@ -310,11 +305,9 @@ function check_website {
     text=$(gettext 'Check website')...
     msg_info "$text"
     # Call rchecklink.
-    text='Calling rchecklink...'
-    msg_log "$text"
+    msg_log 'Calling rchecklink...'
     rchecklink || error_flag=true
-    text='Called rchecklink.'
-    msg_log "$text"
+    msg_log 'Called rchecklink.'
 }
 
 

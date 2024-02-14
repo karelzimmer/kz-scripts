@@ -89,8 +89,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        text=$USAGE_LINE
-        msg_info "$text"
+        msg_info "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -461,11 +460,9 @@ function execute_command {
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]];then
-            text=$app_name_line
-            msg_info "$text"
+            msg_info "$app_name_line"
         fi
-        text="         $cmd"
-        msg_info "$text"
+        msg_info "         $cmd"
     fi
 
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
