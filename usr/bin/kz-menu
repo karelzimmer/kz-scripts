@@ -435,7 +435,7 @@ $(gettext "Add any additional users with the following steps.
 hromebook).")"
         msg_info "$text"
     elif [[ $title = $(gettext 'Set user photo') ]]; then
-        if [[ -f $HOME/.kz-backup/Userphoto ]]; then
+        if [[ -f $SETTINGS/Userphoto ]]; then
             text="$(gettext 'Set user photo'):
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\

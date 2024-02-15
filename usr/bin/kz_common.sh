@@ -50,6 +50,7 @@ readonly    EDITION='desktop'
 else
 readonly    EDITION='server'
 fi
+readonly    SETTINGS=$HOME/.kz
 
 
 ###############################################################################
@@ -186,6 +187,7 @@ started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     msg_log "$text"
 
     commandline_args=("$@")
+    mkdir --parents "$SETTINGS"
     readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
  information.")
 }

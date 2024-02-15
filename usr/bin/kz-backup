@@ -243,37 +243,27 @@ function backup_settings {
 # This function deletes previously backuped user settings.
 function delete_settings_previously_backuped {
     msg_log 'Delete previously backuped user settings...'
-    rm      --force                             \
-            "$HOME"/Afbeeldingen/Achtergrond    \
-            "$HOME"/Afbeeldingen/Gebruikersfoto \
-            "$HOME"/Documenten/Apps             \
-            "$HOME"/Documenten/Favorieten       \
-            "$HOME"/Documents/Apps              \
-            "$HOME"/Documents/Favorites         \
-            "$HOME"/Instellingen/Achtergrond    \
-            "$HOME"/Instellingen/Apps           \
-            "$HOME"/Instellingen/Favorieten     \
-            "$HOME"/Instellingen/Gebruikersfoto \
-            "$HOME"/kz-data/Achtergrond         \
-            "$HOME"/kz-data/Apps                \
-            "$HOME"/kz-data/Favorieten          \
-            "$HOME"/kz-data/Gebruikersfoto      \
-            "$HOME"/Pictures/Background         \
-            "$HOME"/Pictures/Userphoto          \
-            "$HOME"/Settings/Apps               \
-            "$HOME"/Settings/Background         \
-            "$HOME"/Settings/Favorites          \
-            "$HOME"/Settings/Userphoto
-    rmdir   "$HOME"/kz-data                     \
-            "$HOME"/Instellingen                \
-            "$HOME"/Settings                    |& $LOGCMD || true
+    rm  --force                             \
+        "$HOME"/Afbeeldingen/Gebruikersfoto \
+        "$HOME"/Documenten/Apps             \
+        "$HOME"/Documenten/Favorieten       \
+        "$HOME"/Documents/Apps              \
+        "$HOME"/Documents/Favorites         \
+        "$HOME"/Pictures/Background         \
+        "$HOME"/Pictures/Userphoto
+    rm  --force                             \
+        --recursive                         \
+        "$HOME"/.kz-backup                  \
+        "$HOME"/Instellingen                \
+        "$HOME"/kz-data                     \
+        "$HOME"/Settings
 }
 
 
 # This function copies the desktop background.
 function backup_settings_desktop_background {
     local   input_file=''
-    local   output_file=$HOME/.$PROGRAM_NAME/Background
+    local   output_file=$SETTINGS/Background
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -288,10 +278,9 @@ function backup_settings_desktop_background {
 
 # This function saves the favorite apps.
 function backup_settings_favorite_apps {
-    local   output_file=$HOME/.$PROGRAM_NAME/Favorites
+    local   output_file=$SETTINGS/Favorites
 
     msg_log 'Save the favorite apps...'
-    mkdir --parents "$HOME"/.$PROGRAM_NAME
     gsettings get org.gnome.shell favorite-apps > "$output_file" |&
         $LOGCMD || true
 }
@@ -299,7 +288,7 @@ function backup_settings_favorite_apps {
 
 # This function creates a list of installed apps.
 function backup_settings_installed_apps {
-    local   output_file=$HOME/.$PROGRAM_NAME/Apps
+    local   output_file=$SETTINGS/Apps
     local   header1=$(gettext '==== START installed packages ====')
     local   footer1=$(gettext '==== END installed packages ====')
     local   header2=$(gettext '==== START installed snaps ====')
@@ -339,7 +328,7 @@ function backup_settings_installed_apps {
 # This function copies the user photo.
 function backup_settings_user_photo {
     local   input_file=/var/lib/AccountsService/icons/"$USER"
-    local   output_file=$HOME/.$PROGRAM_NAME/Userphoto
+    local   output_file=$SETTINGS/Userphoto
 
     msg_log 'Copy the user photo...'
     cp "$input_file" "$output_file" |& $LOGCMD || true
@@ -348,7 +337,7 @@ function backup_settings_user_photo {
 
 # This function creates the backup.
 function create_backup {
-    local       source=$HOME
+    local   source=$HOME
 
     tmp_exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
     tmp_errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
