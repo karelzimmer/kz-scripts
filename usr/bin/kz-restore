@@ -296,6 +296,7 @@ function restore_backup {
 # This function restores user settings.
 function restore_settings {
     restore_settings_desktop_background
+    restore_settings_favorite_apps
 }
 
 
@@ -308,6 +309,17 @@ function restore_settings_desktop_background {
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"
+    fi
+}
+
+
+# This function restores the favorite apps.
+function restore_settings_favorite_apps {
+    local   input_file=$HOME/.kz-backup/Favorites
+
+    msg_log 'Restore the favorite apps...'
+    if [[ -f $input_file ]]; then
+        gsettings set org.gnome.shell favorite-apps """$(cat $input_file)"""
     fi
 }
 
