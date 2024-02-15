@@ -98,6 +98,11 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/sh
 sudo apt-get update
 
 
+# APP grub-timeout HOST *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/default/grub
+sudo update-grub
+
+
 # APP guest HOST
 sudo userdel --remove "$(gettext --domain=kz 'guest')"
 

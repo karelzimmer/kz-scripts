@@ -121,6 +121,11 @@ sudo apt-get install --yes google-earth-pro-stable
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 
 
+# APP grub-timeout HOST *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/' /etc/default/grub
+sudo update-grub
+
+
 # APP guest HOST
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
