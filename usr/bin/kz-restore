@@ -319,7 +319,7 @@ function restore_settings_favorite_apps {
 
     msg_log 'Restore the favorite apps...'
     if [[ -f $input_file ]]; then
-        gsettings set org.gnome.shell favorite-apps """$(cat $input_file)"""
+        gsettings set org.gnome.shell favorite-apps """$(cat "$input_file")"""
     fi
 }
 
