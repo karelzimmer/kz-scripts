@@ -65,7 +65,6 @@ readonly    MENU2_HEAD="--------------- $MENU2_TITLE ---------------"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
-                "$(gettext 'Add users')"
                 "$(gettext 'Install apps')"
                 "$(gettext 'Restore backup')"
                 "$(gettext 'Set up apps')"
@@ -74,7 +73,6 @@ readonly -a MENU2_ACTIONS=(
 readonly -a MENU2_COMMANDS=(
             [1]='kz wifi'
                 'kz backup'
-                "$(gettext '"manually"')"
                 'kz install'
                 'kz restore'
                 'kz setup'
@@ -301,7 +299,6 @@ function process_menu1_choice4 {
     title=${MENU1_ACTIONS[4]}
     rows=(
         [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
-            "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
         )
     process_commands
 }
@@ -393,12 +390,7 @@ function process_menu2_choice {
         rows=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
-        if [[ ${MENU2_COMMANDS[$REPLY]} = $(gettext '"manually"') ]]; then
-            manual_action
-            return $OK
-        else
-            process_commands
-        fi
+        process_commands
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         process_menu1_tui
     else
@@ -406,29 +398,6 @@ function process_menu2_choice {
         msg_error "$text"
         exit $ERROR
     fi
-}
-
-
-# This function shows the manual action to be performed.
-function manual_action {
-    # shellcheck disable=SC2310
-    if ! become_root_check; then
-        return $OK
-    fi
-    text="$(gettext 'Add users'):
-
-$(gettext "Add any additional users with the following steps.
-
-1. Press the Super key[1], type 'user' and click behind Settings on Users.
-2. Click Unlock and enter password.
-3. Click Add User.
-4. Choose Account Type Standard or Admin.
-5. Complete the screen and click Add.
-6. Close the Users screen.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-    msg_info "$text"
 }
 
 
