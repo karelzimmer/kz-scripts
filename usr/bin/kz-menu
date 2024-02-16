@@ -68,7 +68,6 @@ readonly -a MENU2_ACTIONS=(
                 "$(gettext 'Add users')"
                 "$(gettext 'Install apps')"
                 "$(gettext 'Restore backup')"
-                "$(gettext 'Set user photo')"
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Back')"
             )
@@ -78,7 +77,6 @@ readonly -a MENU2_COMMANDS=(
                 "$(gettext '"manually"')"
                 'kz install'
                 'kz restore'
-                "$(gettext '"manually"')"
                 'kz setup'
                 "$(gettext 'N/A')"
             )
@@ -304,7 +302,6 @@ function process_menu1_choice4 {
     rows=(
         [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
             "${MENU2_ACTIONS[6]}#${MENU2_COMMANDS[6]}"
-            "${MENU2_ACTIONS[7]}#${MENU2_COMMANDS[7]}"
         )
     process_commands
 }
@@ -343,7 +340,6 @@ function process_menu2_gui {
                     FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_COMMANDS[4]}"    \
                     FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"    \
                     FALSE 6 "${MENU2_ACTIONS[6]}" "${MENU2_COMMANDS[6]}"    \
-                    FALSE 7 "${MENU2_ACTIONS[7]}" "${MENU2_COMMANDS[7]}"    \
                     2> >($LOGCMD)
             ) || break
         msg_log "$title"
@@ -398,7 +394,7 @@ function process_menu2_choice {
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
         if [[ ${MENU2_COMMANDS[$REPLY]} = $(gettext '"manually"') ]]; then
-            manual_actions
+            manual_action
             return $OK
         else
             process_commands
@@ -413,14 +409,13 @@ function process_menu2_choice {
 }
 
 
-# This function shows the manual actions to be performed.
-function manual_actions {
-    if [[ $title = $(gettext 'Add users') ]]; then
-        # shellcheck disable=SC2310
-        if ! become_root_check; then
-            return $OK
-        fi
-        text="$(gettext 'Add users'):
+# This function shows the manual action to be performed.
+function manual_action {
+    # shellcheck disable=SC2310
+    if ! become_root_check; then
+        return $OK
+    fi
+    text="$(gettext 'Add users'):
 
 $(gettext "Add any additional users with the following steps.
 
@@ -433,29 +428,7 @@ $(gettext "Add any additional users with the following steps.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
 hromebook).")"
-        msg_info "$text"
-    elif [[ $title = $(gettext 'Set user photo') ]]; then
-        if [[ -f $SETTINGS/userphoto ]]; then
-            text="$(gettext 'Set user photo'):
-
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
- Users.
-2. Click the image for the user.
-3. Click Select a file.
-4. Select userphoto in Personal folder / .kz
-   (press the Crtl + H keys or use Menu > Show Hidden Files to open .kz).
-5. Close the Users screen.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-            msg_info "$text"
-        else
-            text="$(gettext 'Set user photo'):
-
-$(gettext 'No user photo was found when backing up.')"
-            msg_info "$text"
-        fi
-    fi
+    msg_info "$text"
 }
 
 
@@ -553,7 +526,7 @@ function execute_command {
 
     # Handle manual actions.
     if [[ $command = $(gettext '"manually"') ]]; then
-        manual_actions
+        manual_action
         if ! $option_gui; then
             wait_for_enter
         fi
