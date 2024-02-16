@@ -232,37 +232,11 @@ use app Terminal, type 'kz backup'.")"
 
 # This function backs up user settings.
 function backup_settings {
-    delete_settings_previously_backuped
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
     backup_settings_user_photo
-}
-
-
-# This function deletes previously backuped user settings.
-function delete_settings_previously_backuped {
-    msg_log 'Delete previously backuped user settings...'
-    # Files.
-    rm  --force                             \
-        "$HOME"/.kz/Apps                    \
-        "$HOME"/.kz/Background              \
-        "$HOME"/.kz/Favorites               \
-        "$HOME"/.kz/Userphoto               \
-        "$HOME"/Afbeeldingen/Gebruikersfoto \
-        "$HOME"/Documenten/Apps             \
-        "$HOME"/Documenten/Favorieten       \
-        "$HOME"/Documents/Apps              \
-        "$HOME"/Documents/Favorites         \
-        "$HOME"/Pictures/Background         \
-        "$HOME"/Pictures/Userphoto
-    # Directories.
-    rm  --force                             \
-        --recursive                         \
-        "$HOME"/.kz-backup                  \
-        "$HOME"/Instellingen                \
-        "$HOME"/kz-data                     \
-        "$HOME"/Settings
+    delete_settings_previously_backuped
 }
 
 
@@ -337,6 +311,32 @@ function backup_settings_user_photo {
 
     msg_log 'Copy the user photo...'
     cp "$input_file" "$output_file" |& $LOGCMD || true
+}
+
+
+# This function deletes previously backuped user settings.
+function delete_settings_previously_backuped {
+    msg_log 'Delete previously backuped user settings...'
+    # Files.
+    rm  --force                             \
+        "$HOME"/.kz/Apps                    \
+        "$HOME"/.kz/Background              \
+        "$HOME"/.kz/Favorites               \
+        "$HOME"/.kz/Userphoto               \
+        "$HOME"/Afbeeldingen/Gebruikersfoto \
+        "$HOME"/Documenten/Apps             \
+        "$HOME"/Documenten/Favorieten       \
+        "$HOME"/Documents/Apps              \
+        "$HOME"/Documents/Favorites         \
+        "$HOME"/Pictures/Background         \
+        "$HOME"/Pictures/Userphoto
+    # Directories.
+    rm  --force                             \
+        --recursive                         \
+        "$HOME"/.kz-backup                  \
+        "$HOME"/Instellingen                \
+        "$HOME"/kz-data                     \
+        "$HOME"/Settings
 }
 
 
