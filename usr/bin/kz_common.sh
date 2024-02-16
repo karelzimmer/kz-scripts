@@ -187,9 +187,11 @@ started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     msg_log "$text"
 
     commandline_args=("$@")
-    mkdir --parents "$SETTINGS"
     readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
  information.")
+    if [[ $UID -ne 0 ]]; then
+        mkdir --parents "$SETTINGS"
+    fi
 }
 
 

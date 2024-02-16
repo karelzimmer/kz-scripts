@@ -245,10 +245,10 @@ function delete_settings_previously_backuped {
     msg_log 'Delete previously backuped user settings...'
     # Files.
     rm  --force                             \
-        "$HOME"/.kz/Apps                    \
-        "$HOME"/.kz/Background              \
-        "$HOME"/.kz/Favorites               \
-        "$HOME"/.kz/Userphoto               \
+        "$HOME"/.kz/apps                    \
+        "$HOME"/.kz/background              \
+        "$HOME"/.kz/favorites               \
+        "$HOME"/.kz/userphoto               \
         "$HOME"/Afbeeldingen/Gebruikersfoto \
         "$HOME"/Documenten/Apps             \
         "$HOME"/Documenten/Favorieten       \

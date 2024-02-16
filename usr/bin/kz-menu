@@ -420,7 +420,7 @@ function manual_actions {
         if ! become_root_check; then
             return $OK
         fi
-        text="$(gettext 'Add users (only as administrator)'):
+        text="$(gettext 'Add users'):
 
 $(gettext "Add any additional users with the following steps.
 
@@ -442,9 +442,8 @@ $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.
 2. Click the image for the user.
 3. Click Select a file.
-4. Select Userphoto in Personal folder / .kz-backup
-   (press the Crtl + H keys or use Menu > Show Hidden Files to open .kz-backup\
-).
+4. Select userphoto in Personal folder / .kz
+   (press the Crtl + H keys or use Menu > Show Hidden Files to open .kz).
 5. Close the Users screen.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
