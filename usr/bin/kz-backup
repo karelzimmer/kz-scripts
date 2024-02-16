@@ -237,6 +237,7 @@ function backup_settings {
     backup_settings_installed_apps
     backup_settings_user_photo
     delete_settings_previously_backuped
+    restore_settings_desktop_background
 }
 
 
@@ -337,6 +338,19 @@ function delete_settings_previously_backuped {
         "$HOME"/Instellingen                \
         "$HOME"/kz-data                     \
         "$HOME"/Settings
+}
+
+
+# This function restores the desktop background.
+function restore_settings_desktop_background {
+    local   input_file=$SETTINGS/background
+
+    msg_log 'Restore the desktop background...'
+    if [[ -f $input_file ]]; then
+        gsettings   set                                         \
+                    org.gnome.desktop.background picture-uri    \
+                    "file://$input_file"
+    fi
 }
 
 
