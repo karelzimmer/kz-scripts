@@ -237,6 +237,7 @@ function backup_settings {
     backup_settings_installed_apps
     backup_settings_user_photo
     delete_settings_previously_backuped
+    # In case the desktop background has been removed.
     restore_settings_desktop_background
 }
 
