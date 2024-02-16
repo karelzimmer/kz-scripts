@@ -304,7 +304,6 @@ function backup_settings_installed_apps {
     local   search=/etc/apt/sources.list
 
     msg_log 'Create a list of installed apps...(ignore WARNING)'
-    mkdir --parents "$HOME"/.$PROGRAM_NAME
 
     printf '%s\n' "$header1" > "$output_file"
     apt list --manual-installed 2> >($LOGCMD) >> "$output_file" || true
