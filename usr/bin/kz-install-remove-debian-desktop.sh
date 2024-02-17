@@ -52,7 +52,7 @@ sudo apt-get remove --yes gedit
 sudo apt-get remove --yes gnome-gmail
 
 
-# APP google-chrome HOST *
+# APP google-chrome HOST pc07
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update

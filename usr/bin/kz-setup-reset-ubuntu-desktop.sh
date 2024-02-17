@@ -55,7 +55,7 @@ gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 
-# APP google-chrome USER *
+# APP google-chrome USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delfav=google-chrome
 
 
@@ -75,7 +75,7 @@ rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 rm --force --verbose "$HOME"/.hidden
 
 
-# APP spotify USER *
+# APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delfav=kz-spotify
 
 

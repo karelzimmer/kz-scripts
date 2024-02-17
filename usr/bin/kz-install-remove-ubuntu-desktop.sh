@@ -86,7 +86,7 @@ sudo apt-get remove --yes gnome-tweaks
 sudo apt-get remove --yes epiphany-browser
 
 
-# APP google-chrome HOST *
+# APP google-chrome HOST pc01 pc02 pc06
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update

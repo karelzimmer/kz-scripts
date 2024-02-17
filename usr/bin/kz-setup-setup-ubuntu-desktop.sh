@@ -54,7 +54,7 @@ gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
 
-# APP google-chrome USER *
+# APP google-chrome USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavbef=google-chrome
 
 
@@ -81,7 +81,7 @@ echo 'snap' > "$HOME"/.hidden
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 
-# APP spotify USER *
+# APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavaft=kz-spotify
 
 
