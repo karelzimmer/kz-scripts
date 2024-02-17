@@ -191,10 +191,10 @@ function process_menu1_tui {
     local   menu1_action=''
 
     while true; do
-        printf  '%s\n\n%3s  %-24s  %s\n'    \
-                "$MENU1_HEAD"               \
-                "$(gettext 'NUM')"          \
-                "$(gettext 'ACTION')"       \
+        printf  '\n\n%s\n\n%3s  %-24s  %s\n'    \
+                "$MENU1_HEAD"                   \
+                "$(gettext 'NUM')"              \
+                "$(gettext 'ACTION')"           \
                 "$(gettext 'EXPLANATION')"
         for menu1_action in "${!MENU1_ACTIONS[@]}"; do
             printf  '%3s  %-24s  %s\n'                  \
@@ -321,8 +321,8 @@ function process_menu2_gui {
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
-                    --width         450                                     \
-                    --height        290                                     \
+                    --width         510                                     \
+                    --height        240                                     \
                     --title         "$title"                                \
                     --text          "$(gettext 'Select a choice:')"         \
                     --ok-label      "$(gettext 'Continue')"                 \
@@ -336,7 +336,6 @@ function process_menu2_gui {
                     FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"    \
                     FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_COMMANDS[4]}"    \
                     FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"    \
-                    FALSE 6 "${MENU2_ACTIONS[6]}" "${MENU2_COMMANDS[6]}"    \
                     2> >($LOGCMD)
             ) || break
         msg_log "$title"
@@ -351,10 +350,10 @@ function process_menu2_tui {
     local   menu2_action=''
 
     while true; do
-        printf  '\n%s\n\n%3s  %-25s  %s\n'  \
-                "$MENU2_HEAD"               \
-                "$(gettext 'NUM')"          \
-                "$(gettext 'ACTION')"       \
+        printf  '\n\n%s\n\n%3s  %-25s  %s\n'    \
+                "$MENU2_HEAD"                   \
+                "$(gettext 'NUM')"              \
+                "$(gettext 'ACTION')"           \
                 "$(gettext 'COMMAND')"
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
@@ -407,11 +406,7 @@ function process_commands {
     local       command=''
     local   -i  row=0
 
-    if [[ ${#rows[@]} -eq 1 ]]; then
-        execute_command=true
-    else
-        show_commands_before_execution
-    fi
+    show_commands_before_execution
     if $execute_command; then
         for row in "${!rows[@]}"; do
             action=$(
@@ -444,7 +439,7 @@ function show_commands_before_execution {
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         text+="
-$row. $action"
+[$row] $action ($command)"
     done
     text+='
 '
