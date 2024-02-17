@@ -95,7 +95,7 @@ kz-gset --addfavbef=thunderbird
 kz-gset --delfav=com.teamviewer.TeamViewer
 
 
-# APP telegram USER hugo@pc-van-hugo
+# APP telegram USER hugo@pc-van-hugo  maria@maria-desktop
 kz-gset --delfav=kz-telegram
 
 
@@ -113,7 +113,7 @@ kz-gset --delfav=kz-vm-hugowin732
 kz-gset --delfav=code_code
 
 
-# APP whatsapp USER hugo@pc-van-hugo
+# APP whatsapp USER hugo@pc-van-hugo maria@maria-desktop
 kz-gset --delfav=kz-whatsapp
 
 

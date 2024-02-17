@@ -101,7 +101,7 @@ kz-gset --delfav=thunderbird
 kz-gset --addfavaft=com.teamviewer.TeamViewer
 
 
-# APP telegram USER hugo@pc-van-hugo
+# APP telegram USER hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addfavaft=kz-telegram
 
 
@@ -135,7 +135,7 @@ xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
 
-# APP whatsapp USER hugo@pc-van-hugo
+# APP whatsapp USER hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addfavaft=kz-whatsapp
 
 
