@@ -792,9 +792,6 @@ msgstr "Terug"
 msgid "Exit"
 msgstr "Afsluiten"
 
-msgid "N/A"
-msgstr "N.V.T."
-
 msgid "CHOICE"
 msgstr "KEUZE"
 

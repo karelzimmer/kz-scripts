@@ -61,7 +61,7 @@ readonly    MENU1_LINES=${#MENU1_ACTIONS[@]}
 
             MENU2_TITLE=$(gettext 'Command menu')
 readonly    MENU2_TITLE
-readonly    MENU2_HEAD="--------------- $MENU2_TITLE ---------------"
+readonly    MENU2_HEAD="------------------ $MENU2_TITLE ------------------"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
@@ -76,7 +76,7 @@ readonly -a MENU2_COMMANDS=(
                 'kz install'
                 'kz restore'
                 'kz setup'
-                "$(gettext 'N/A')"
+                "$(gettext 'Installation menu')"
             )
 readonly    MENU2_LINES=${#MENU2_ACTIONS[@]}
 
@@ -330,7 +330,7 @@ function process_menu2_gui {
                     --column        "$(gettext 'CHOICE')"                   \
                     --column        "$(gettext 'NUM')"                      \
                     --column        "$(gettext 'ACTION')"                   \
-                    --column        "$(gettext 'COMMAND')"                  \
+                    --column        "$(gettext 'EXPLANATION')"              \
                     TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"    \
                     FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"    \
                     FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"    \
@@ -354,7 +354,7 @@ function process_menu2_tui {
                 "$MENU2_HEAD"                   \
                 "$(gettext 'NUM')"              \
                 "$(gettext 'ACTION')"           \
-                "$(gettext 'COMMAND')"
+                "$(gettext 'EXPLANATION')"
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
                     "$menu2_action"                     \
