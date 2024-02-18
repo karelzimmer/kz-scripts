@@ -203,7 +203,7 @@ def init_script(PROGRAM_NAME):
     """
     This function performs initial actions.
     """
-    text = f'==== START log {PROGRAM_NAME} ===='
+    text = f'==== START logs for script {PROGRAM_NAME} ===='
     msg_log(PROGRAM_NAME, text)
 
 
@@ -345,7 +345,7 @@ def term_script(PROGRAM_NAME):
     """
     This function controls the termination of the script.
     """
-    text = f'==== END log {PROGRAM_NAME} ===='
+    text = f'==== END logs for script {PROGRAM_NAME} ===='
     msg_log(PROGRAM_NAME, text)
 
 

@@ -182,7 +182,7 @@ function init_script {
     trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    text="==== START log $PROGRAM_NAME ====
+    text="==== START logs for script $PROGRAM_NAME ====
 started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     msg_log "$text"
 
@@ -416,7 +416,7 @@ function signal {
                 "$tmp_exclude"      \
                 "$tmp_kz_deb"       |& $LOGCMD
             text="ended (code=exited, status=$status)
-==== END log $PROGRAM_NAME ===="
+==== END logs for script $PROGRAM_NAME ===="
             msg_log "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"

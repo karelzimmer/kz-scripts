@@ -271,12 +271,12 @@ function backup_settings_favorite_apps {
 # This function creates a list of installed apps.
 function backup_settings_installed_apps {
     local   output_file=$SETTINGS/apps
-    local   header1=$(gettext '==== START installed packages ====')
-    local   footer1=$(gettext '==== END installed packages ====')
-    local   header2=$(gettext '==== START installed snaps ====')
-    local   footer2=$(gettext '==== END installed snaps ====')
-    local   header3=$(gettext '==== START added repositories ====')
-    local   footer3=$(gettext '==== END added repositories ====')
+    local   header1=$(gettext '==== START list of installed packages ====')
+    local   footer1=$(gettext '==== END list of installed packages ====')
+    local   header2=$(gettext '==== START list of installed snaps ====')
+    local   footer2=$(gettext '==== END list of installed snaps ====')
+    local   header3=$(gettext '==== START list of added repositories ====')
+    local   footer3=$(gettext '==== END list of added repositories ====')
     local   search=/etc/apt/sources.list
 
     msg_log 'Create a list of installed apps...(ignore WARNING)'

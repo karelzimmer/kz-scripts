@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 18:56+0100\n"
+"POT-Creation-Date: 2024-02-18 19:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -225,22 +225,22 @@ msgstr ""
 msgid "Secure settings"
 msgstr ""
 
-msgid "==== START installed packages ===="
+msgid "==== START list of installed packages ===="
 msgstr ""
 
-msgid "==== END installed packages ===="
+msgid "==== END list of installed packages ===="
 msgstr ""
 
-msgid "==== START installed snaps ===="
+msgid "==== START list of installed snaps ===="
 msgstr ""
 
-msgid "==== END installed snaps ===="
+msgid "==== END list of installed snaps ===="
 msgstr ""
 
-msgid "==== START added repositories ===="
+msgid "==== START list of added repositories ===="
 msgstr ""
 
-msgid "==== END added repositories ===="
+msgid "==== END list of added repositories ===="
 msgstr ""
 
 msgid "snap is not installed"

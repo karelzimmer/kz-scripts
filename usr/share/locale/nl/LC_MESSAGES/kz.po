@@ -250,23 +250,23 @@ msgstr ""
 msgid "Secure settings"
 msgstr "Instellingen veiligstellen"
 
-msgid "==== START installed packages ===="
-msgstr "==== BEGIN geïnstalleerde pakketten ===="
+msgid "==== START list of installed packages ===="
+msgstr "==== BEGIN overzicht van geïnstalleerde pakketten ===="
 
-msgid "==== END installed packages ===="
-msgstr "==== EINDE geïnstalleerde pakketten ===="
+msgid "==== END list of installed packages ===="
+msgstr "==== EINDE overzicht van geïnstalleerde pakketten ===="
 
-msgid "==== START installed snaps ===="
-msgstr "==== BEGIN geïnstalleerde snaps ===="
+msgid "==== START list of installed snaps ===="
+msgstr "==== BEGIN overzicht van geïnstalleerde snaps ===="
 
-msgid "==== END installed snaps ===="
-msgstr "==== EINDE geïnstalleerde snaps ===="
+msgid "==== END list of installed snaps ===="
+msgstr "==== EINDE overzicht van geïnstalleerde snaps ===="
 
-msgid "==== START added repositories ===="
-msgstr "==== BEGIN toegevoegde pakketbronnen ===="
+msgid "==== START list of added repositories ===="
+msgstr "==== BEGIN overzicht van toegevoegde pakketbronnen ===="
 
-msgid "==== END added repositories ===="
-msgstr "==== EINDE toegevoegde pakketbronnen ===="
+msgid "==== END list of added repositories ===="
+msgstr "==== EINDE overzicht van toegevoegde pakketbronnen ===="
 
 msgid "snap is not installed"
 msgstr "snap is niet geïnstalleerd"
