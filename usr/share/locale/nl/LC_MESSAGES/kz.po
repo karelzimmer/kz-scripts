@@ -798,8 +798,8 @@ msgstr "NUM"
 msgid "ACTION"
 msgstr "ACTIE"
 
-msgid "EXPLANATION"
-msgstr "TOELICHTING"
+msgid "DESCRIPTION"
+msgstr "BESCHRIJVING"
 
 #, sh-format
 msgid "Run number [1-$MENU1_LINES]: "

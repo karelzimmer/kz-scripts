@@ -171,7 +171,7 @@ function process_menu1_gui {
                     --column        "$(gettext 'CHOICE')"                   \
                     --column        "$(gettext 'NUM')"                      \
                     --column        "$(gettext 'ACTION')"                   \
-                    --column        "$(gettext 'EXPLANATION')"              \
+                    --column        "$(gettext 'DESCRIPTION')"              \
                     TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_COMMANDS[1]}"    \
                     FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_COMMANDS[2]}"    \
                     FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_COMMANDS[3]}"    \
@@ -195,7 +195,7 @@ function process_menu1_tui {
                 "$MENU1_HEAD"                   \
                 "$(gettext 'NUM')"              \
                 "$(gettext 'ACTION')"           \
-                "$(gettext 'EXPLANATION')"
+                "$(gettext 'DESCRIPTION')"
         for menu1_action in "${!MENU1_ACTIONS[@]}"; do
             printf  '%3s  %-24s  %s\n'                  \
                     "$menu1_action"                     \
@@ -288,7 +288,6 @@ function process_menu1_choice3 {
     title=${MENU1_ACTIONS[3]}
     rows=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
-            "${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
         )
     process_commands
 }
@@ -298,7 +297,8 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     title=${MENU1_ACTIONS[4]}
     rows=(
-        [1]="${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
+            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
         )
     process_commands
 }
@@ -330,7 +330,7 @@ function process_menu2_gui {
                     --column        "$(gettext 'CHOICE')"                   \
                     --column        "$(gettext 'NUM')"                      \
                     --column        "$(gettext 'ACTION')"                   \
-                    --column        "$(gettext 'EXPLANATION')"              \
+                    --column        "$(gettext 'DESCRIPTION')"              \
                     TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"    \
                     FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"    \
                     FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"    \
@@ -354,7 +354,7 @@ function process_menu2_tui {
                 "$MENU2_HEAD"                   \
                 "$(gettext 'NUM')"              \
                 "$(gettext 'ACTION')"           \
-                "$(gettext 'EXPLANATION')"
+                "$(gettext 'DESCRIPTION')"
         for menu2_action in "${!MENU2_ACTIONS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
                     "$menu2_action"                     \
