@@ -488,15 +488,6 @@ function execute_command {
     local       row=''
     local       gui_option=''
 
-    # Handle manual actions.
-    if [[ $command = $(gettext '"manually"') ]]; then
-        manual_action
-        if ! $option_gui; then
-            wait_for_enter
-        fi
-        return $OK
-    fi
-
     # Process (automatic) commands.
     row=${command/kz /kz-}
     cmd=$(
