@@ -488,7 +488,6 @@ function execute_command {
     local       row=''
     local       gui_option=''
 
-    # Process (automatic) commands.
     row=${command/kz /kz-}
     cmd=$(
         printf '%s' "$row" | cut --delimiter=' ' --fields=1
