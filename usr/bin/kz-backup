@@ -319,7 +319,6 @@ function backup_settings_user_photo {
 # This function deletes previously backuped user settings.
 function delete_settings_previously_backuped {
     msg_log 'Delete previously backuped user settings...'
-    # Files.
     rm  --force                             \
         "$HOME"/.kz/Apps                    \
         "$HOME"/.kz/Background              \
@@ -332,13 +331,6 @@ function delete_settings_previously_backuped {
         "$HOME"/Documents/Favorites         \
         "$HOME"/Pictures/Background         \
         "$HOME"/Pictures/Userphoto
-    # Directories.
-    rm  --force                             \
-        --recursive                         \
-        "$HOME"/.kz-backup                  \
-        "$HOME"/Instellingen                \
-        "$HOME"/kz-data                     \
-        "$HOME"/Settings
 }
 
 
