@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-18 19:17+0100\n"
+"POT-Creation-Date: 2024-02-18 19:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -850,9 +850,6 @@ msgid ""
 msgstr ""
 
 msgid "Record this data to connect to the wireless network later."
-msgstr ""
-
-msgid "WiFi data:"
 msgstr ""
 
 msgid "No WiFi device found."

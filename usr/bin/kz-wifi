@@ -107,9 +107,7 @@ twork later.")
 
     if $option_gui; then
         if nmcli_output=$(nmcli device wifi show-password 2> >($LOGCMD)); then
-            text="$(gettext 'WiFi data:')
-
-$nmcli_output
+            text="$nmcli_output
 
 $text"
             msg_info "$text"
@@ -118,13 +116,9 @@ $text"
             msg_info "$text"
         fi
     else
-        text=$(gettext 'WiFi data:')
-        msg_info "$text"
         # Shows QR code for quick connection to Wi-Fi network.
         nmcli device wifi show-password 2> >($LOGCMD) || nmcli_rc=$?
-        if [[ $nmcli_rc -eq 0 ]]; then
-            msg_info "$text"
-        else
+        if [[ $nmcli_rc -ne 0 ]]; then
             text=$(gettext 'No WiFi device found.')
             msg_info "$text"
         fi
