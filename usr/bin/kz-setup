@@ -63,8 +63,8 @@ declare     argument_app=false
 declare     commands_found=false
 declare     file_argument=''
 declare     input_file=''
+declare     operator='+'
 declare     logout=true
-declare     mode='setup'
 declare     option_apps=false
 declare     option_cat=false
 declare     option_file=false
@@ -134,7 +134,7 @@ $USAGE_LINE"
                 ;;
             -r|--reset)
                 option_reset=true
-                mode='reset'
+                operator='-'
                 shift
                 ;;
             --)
@@ -160,7 +160,7 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
-    input_file=$PROGRAM_PATH/$PROGRAM_NAME-$mode-$DISTRO-$EDITION.sh
+    input_file=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$EDITION.sh
 
     if $option_list; then
         process_option_list
@@ -188,7 +188,7 @@ nd end with '.sh'.")"
     fi
 
     tmp_command_file=$(
-        mktemp -t "$PROGRAM_NAME-$mode-$DISTRO-$EDITION-XXXXXXXXXX.sh"
+        mktemp -t "$PROGRAM_NAME-$DISTRO-$EDITION-XXXXXXXXXX.sh"
         )
 
     if $argument_app; then
@@ -264,18 +264,19 @@ function process_option_apps {
     text="$(gettext 'The following APPs are available:')
 
 $(gettext 'NUM  APP')\n"
-    apps=$( grep    --no-messages           \
-                    --regexp='#.* APP '     \
-                    "$input_file"           |
-            tr      --squeeze-repeats       \
-                    '[:space:]'             |
-            cut     --delimiter=' '         \
-                    --fields=3              |
-            sort    --unique                |
-            nl      --number-width=3        \
-                    --number-format=rn      \
-                    --number-separator='  ' \
-                    --body-numbering=a || true
+    apps=$(
+        grep    --no-messages                   \
+                --regexp="#${operator}.* APP "  \
+                "$input_file"                   |
+        tr      --squeeze-repeats               \
+                '[:space:]'                     |
+        cut     --delimiter=' '                 \
+                --fields=3                      |
+        sort    --unique                        |
+        nl      --number-width=3                \
+                --number-format=rn              \
+                --number-separator='  '         \
+                --body-numbering=a              || true
         )
     if [[ -n $apps ]]; then
         text+=$apps
@@ -315,23 +316,26 @@ function process_argument_app {
 
 
 # This function generates the command file from the input file and filters by
-# APPs.
+# APP.
 function process_input_file_by_app {
     local   app_match=false
     local   app_name=''
-    local   no_app_match=true
+    local   app_operator=''
     local   input_record=''
+    local   no_app_match=true
 
     while read -r input_record; do
         case $input_record in
             '#'*' APP '*)
                 # APP record.
                 app_match=false
+                app_operator=${input_record:1:1}
                 app_name="$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3)"
-                if [[ $app_name = "$app_argument" ]]; then
+                if  [[ $app_operator = "$operator" ]] &&
+                    [[ $app_name = "$app_argument" ]]; then
                     # Match on app name.
                     app_match=true
                     no_app_match=false
@@ -357,6 +361,7 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # user.
 function process_input_file_by_user {
+    local   app_operator=''
     local   current_user=$USER'@'$HOSTNAME
     local   input_record=''
     local   user_match=false
@@ -367,11 +372,15 @@ function process_input_file_by_user {
             '#'*' APP '*)
                 # APP record.
                 user_match=false
+                app_operator=${input_record:1:1}
                 user_names="$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=5-)"
-                if [[ $user_names = '*' || $user_names == *$current_user* ]]
+
+
+                if  [[ $app_operator = "$operator" ]] &&
+                    [[ $user_names = '*' || $user_names == *$current_user* ]]
                 then
                     # Match on user name.
                     user_match=true
