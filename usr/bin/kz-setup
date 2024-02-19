@@ -329,6 +329,7 @@ function process_input_file_by_app {
             '#'*' APP '*)
                 # APP record.
                 app_match=false
+                # Operator '+' means set, and '-' means reset.
                 app_operator=${input_record:1:1}
                 app_name="$(
                     printf '%s\n' "$input_record"       |
@@ -372,6 +373,7 @@ function process_input_file_by_user {
             '#'*' APP '*)
                 # APP record.
                 user_match=false
+                # Operator '+' means set, and '-' means reset.
                 app_operator=${input_record:1:1}
                 user_names="$(
                     printf '%s\n' "$input_record"       |

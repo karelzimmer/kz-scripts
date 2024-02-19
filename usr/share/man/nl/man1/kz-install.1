@@ -34,10 +34,10 @@ Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Standaard verwerkt \fBkz install\fR het invoerbestand
-/usr/bin/kz-install-install-<distributie>-<editie>.sh, <distributie> (b.v.
-ubuntu) en <editie> (desktop of server) worden ingevuld met de waarden van de
-huidige computer.
-Bijvoorbeeld kz-install-install-ubuntu-desktop.sh.
+/usr/bin/kz-install-<distributie>-<editie>.sh, <distributie> (b.v. ubuntu) en
+<editie> (desktop of server) worden ingevuld met de waarden van de huidige
+computer.
+Bijvoorbeeld kz-install-ubuntu-desktop.sh.
 .sp
 Dit invoerbestand bevat installatie-opdrachten voor alle hierin opgenomen
 computers voor Ubuntu desktop.
@@ -58,8 +58,6 @@ Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
 Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt,
 de modus wijzigt dan van install naar remove.
-Dan wordt bijvoorbeeld bestand /usr/bin/kz-install-remove-ubuntu-desktop.sh
-("verwijderbestand") verwerkt.
 .sp
 De optie \fB-l\fR, \fB--list\fR geeft een lijst met installatiebestanden weer.
 .sp
@@ -73,18 +71,18 @@ opties uit.
 .\"
 .SH BESTANDSINDELING
 De naamgeving van de meegeleverde invoerbestanden is
-kz-install-<mode>-<distribution>-<edition>.sh, voor een door de gebruiker
+kz-install-<distribution>-<edition>.sh, voor een door de gebruiker
 aangeleverd invoerbestand is het kz-install-*.sh.
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .sp
 De opdrachten meegeleverd bij \fBkz install\fR zijn zodanig opgesteld dat bij
-herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
+herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
-voorbeeldbestand kz-install-install-ubuntu-desktop.sh voor computer pc02.
+voorbeeldbestand kz-install-ubuntu-desktop.sh voor computer pc02.
 Meer voorbeelden zijn te zien via de opdracht \fBkz install --cat\fR.
 .sp
 .B Tabel 1. Soorten regels en hun verwerking
@@ -100,25 +98,31 @@ T}
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
 T}:T{
-Wordt overgeslagen, is leeg.
+Wordt overgeslagen, is leeg
 T}
 T{
-#...
+# ...
 T}:T{
-Wordt overgeslagen, is commentaar.
+Wordt overgeslagen, is commentaar
 T}
 T{
-# APP <appnaam> HOST <computernaam>...
+#+ APP <appnaam> HOST <computernaam>...
 T}:T{
-De applicatie <appnaam> en computer <computernaam>.
+De applicatie <appnaam> installeren op computer <computernaam>
+T}
+T{
+#- APP <appnaam> HOST <computernaam>...
+T}:T{
+De applicatie <appnaam> verwijderen van computer <computernaam> (optie reset)
 T}
 T{
 Opdracht
 T}:T{
-Installatie/Verwijder-opdracht.
+Installatie/Verwijder-opdracht
 T}
 .TE
 .sp
@@ -126,7 +130,7 @@ T}
 Bij het gebruik van optie \fB-a\fR, \fB--apps\fR wordt er alleen geselecteerd
 op <appnaam>, en niet op niet op <computernaam>.
 .sp
-.B Tabel 2. Regels in voorbeeldbestand kz-install-install-ubuntu-desktop.sh
+.B Tabel 2. Regels in voorbeeldbestand kz-install-ubuntu-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -144,25 +148,37 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP gnome-gmail HOST *
+#+ APP gnome-gmail HOST *
 T}:T{
-Installeer de gnome-gmail op iedere computer, zie [1].
+Installeer de gnome-gmail op iedere computer, zie [1]
+T}
+T{
+T}:T{
+T}
+T{
+#- APP gnome-gmail HOST *
+T}:T{
+Verwijder de gnome-gmail van iedere computer, zie [1]
 T}
 T{
 sudo apt-get install --yes gnome-gmail
 T}:T{
-
 T}
 T{
 T}:T{
-
 T}
 T{
-# APP ufw HOST pc02
+#+ APP ufw HOST pc02
 T}:T{
-Installeer ufw alleen op pc02, zie [2].
+Installeer ufw alleen op pc02, zie [2]
 T}
 T{
 sudo apt-get install --yes gufw
@@ -172,9 +188,9 @@ T{
 T}:T{
 T}
 T{
-# APP kvm HOST pc01 pc02
+#+ APP kvm HOST pc01 pc02
 T}:T{
-Installeer kvm op pc01 en pc02, zie [3].
+Installeer kvm op pc01 en pc02, zie [3]
 T}
 T{
 sudo apt-get install --yes qemu-kvm
@@ -184,9 +200,9 @@ T{
 T}:T{
 T}
 T{
-# APP google-earth HOST
+#+ APP google-earth HOST
 T}:T{
-Standaard niet google-earth installeren, zie [4].
+Standaard niet google-earth installeren, zie [4]
 T}
 T{
 sudo apt-get install --yes google-earth
@@ -258,32 +274,22 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-install-install-debian-desktop.sh
+/usr/bin/kz-install-debian-desktop.sh
 .RS
 Installatiebestand voor Debian desktop.
 .RE
 .sp
-/usr/bin/kz-install-install-ubuntu-desktop.sh
+/usr/bin/kz-install-ubuntu-desktop.sh
 .RS
 Installatiebestand voor Ubuntu desktop.
 .RE
 .sp
-/usr/bin/kz-install-remove-debian-desktop.sh
+/tmp/kz-install-<distributie>-<editie>-XXXXXXXXXX.sh
 .RS
-Verwijderbestand voor Debian desktop.
+Opdrachtbestand, bijvoorbeeld kz-install-ubuntu-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
-/usr/bin/kz-install-remove-ubuntu-desktop.sh
-.RS
-Verwijderbestand voor Ubuntu desktop.
-.RE
-.sp
-/tmp/kz-install-<modus>-<distributie>-<editie>-XXXXXXXXXX.sh
-.RS
-Opdrachtbestand, bijvoorbeeld kz-install-install-ubuntu-desktop-SYpGEKVWZI.sh.
-.RE
-.sp
-~/Documenten/Apps
+~/.kz/apps
 .RS
 Lijst van geïnstalleerde apps ter controle. Aangemaakt door kz-backup.
 .RE
@@ -296,9 +302,9 @@ Checklist installatie
 https://karelzimmer.nl/html/nl/linux.html#documents
 .RE
 .IP " 2." 4
-Persoonlijke map / Documenten / Apps
+Persoonlijke map / .kz / apps
 .RS 4
-In bestand Apps staan namen van eerder geïnstalleerde pakketten. Dit bestand is
+In bestand apps staan namen van eerder geïnstalleerde pakketten. Dit bestand is
 te gebruiken om de installatie te controleren op volledigheid.
 .RE
 .IP " 3." 4

@@ -32,10 +32,10 @@ commands for installing apps and modifying system settings.
 For the format of the input files see the section \fBFILE FORMAT\fR below.
 .sp
 By default, \fBkz install\fR processes the input file
-/usr/bin/kz-install-install-<distribution>-<edition>.sh, <distribution> (e.g.
-ubuntu) and <edition> (desktop or server) are populated with the values from
-the current computer.
-For example, kz-install-install-ubuntu-desktop.sh.
+/usr/bin/kz-install-<distribution>-<edition>.sh, <distribution> (e.g. ubuntu)
+and <edition> (desktop or server) are populated with the values from the
+current computer.
+For example, kz-install-ubuntu-desktop.sh.
 .sp
 This input file contains commands for all computers included in it for Ubuntu
 desktop.
@@ -45,8 +45,7 @@ are selected and copied to a command file.
 Option \fB-a\fR, \fB--apps\fR lists apps available in the input file.
 .sp
 It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands are
-selected from the input file and are copied to the command
-file.
+selected from the input file and are copied to the command file.
 .sp
 The commands in the command file are executed.
 Upon successful completion the computer will restart.
@@ -55,8 +54,6 @@ Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone, the mode
 then changes from install to remove.
-Then, for example, file /usr/bin/kz-install-remove-ubuntu-desktop.sh
-("remove file") is processed.
 .sp
 The \fB-l\fR, \fB--list\fR option displays a list of install files.
 .sp
@@ -68,20 +65,20 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The format of the supplied input file is
-kz-install-<mode>-<distribution>-<edition>.sh, for a user supplied input file
-it is kz-install-*.sh.
+The format of the supplied input file is 
+kz-install-<distribution>-<edition>.sh, for a user supplied input file it is
+kz-install-*.sh.
 for a user supplied input file it is kz-install-*.sh.
 The records are processed in the order they appear in the files.
 .sp
 The commands supplied by with \fBkz install\fR are arranged in such a way that
-the result remains the same when executed repeatedly.
+the result remains the same when executed repeatedly (idempotent).
 .sp
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in sample file
-kz-install-install-ubuntu-desktop.sh for computer pc02.
+kz-install-ubuntu-desktop.sh for computer pc02.
 More examples can be seen through the \fBkz install --cat\fR command.
 .sp
 .B Table 1. Record types and their processing
@@ -97,20 +94,26 @@ T}
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
 T}:T{
-Will be skipped, is empty.
+Will be skipped, is empty
 T}
 T{
-#...
+# ...
 T}:T{
-Will be skipped, is a comment.
+Will be skipped, is a comment
 T}
 T{
-# APP <app name> HOST <computer name>...
+#+ APP<app name> HOST <computer name>...
 T}:T{
-The application <app name> and computer (<computer name>).
+Install the application <app name> on computer <computer name>
+T}
+T{
+#- APP<app name> HOST <computer name>...
+T}:T{
+Remove the application <app name> from computer <computer name> (option reset)
 T}
 T{
 Command
@@ -123,7 +126,7 @@ T}
 When using option \fB-a\fR, \fB--apps\fR, only <app name> is selected, and not
 <computer name>.
 .sp
-.B Table 2. Lines in sample file kz-install-install-ubuntu-desktop.sh
+.B Table 2. Lines in sample file kz-install-ubuntu-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -141,9 +144,15 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP gnome-gmail HOST *
+#+ APP gnome-gmail HOST *
 T}:T{
 Install gnome-gmail on any computer, see [1].
 T}
@@ -155,7 +164,19 @@ T{
 T}:T{
 T}
 T{
-# APP ufw HOST pc02
+#- APP gnome-gmail HOST *
+T}:T{
+Remove gnome-gmail from any computer, see [1].
+T}
+T{
+sudo apt-get install --yes gnome-gmail
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+#+ APP ufw HOST pc02
 T}:T{
 Install ufw only on pc02, see [2].
 T}
@@ -167,7 +188,7 @@ T{
 T}:T{
 T}
 T{
-# APP kvm HOST pc01 pc02
+#+ APP kvm HOST pc01 pc02
 T}:T{
 Install kvm on pc01 and pc02, see [3].
 T}
@@ -179,7 +200,7 @@ T{
 T}:T{
 T}
 T{
-# APP google-earth HOST
+#+ APP google-earth HOST
 T}:T{
 Do not install Google Earth by default, zie [4].
 T}
@@ -254,32 +275,22 @@ equal to 0.
 .\"
 .\"
 .SH FILES
-/usr/bin/kz-install-install-debian-desktop.sh
+/usr/bin/kz-install-debian-desktop.sh
 .RS
 Install file for Debian desktop.
 .RE
 .sp
-/usr/bin/kz-install-install-ubuntu-desktop.sh
+/usr/bin/kz-install-ubuntu-desktop.sh
 .RS
 Install file for Ubuntu desktop.
 .RE
 .sp
-/usr/bin/kz-install-remove-debian-desktop.sh
+/tmp/kz-install-<distribution>-<edition>-XXXXXXXXXX.sh
 .RS
-Uninstall file for Debian desktop.
+Command file, e.g. kz-install-ubuntu-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
-/usr/bin/kz-install-remove-ubuntu-desktop.sh
-.RS
-Uninstall file for Ubuntu desktop.
-.RE
-.sp
-/tmp/kz-setup-<mode>-<distribution>-<edition>-XXXXXXXXXX.sh
-.RS
-Command file, e.g. kz-install-install-ubuntu-desktop-SYpGEKVWZI.sh.
-.RE
-.sp
-~/Documents/Apps
+~/.kz/apps
 .RS
 List of installed apps for checking. Created by kz-backup.
 .RE
@@ -292,9 +303,9 @@ Checklist install
 https://karelzimmer.nl/html/en/linux.html#documents
 .RE
 .IP " 2." 4
-Home / Documents / Apps
+Home / .kz / apps
 .RS 4
-The Apps file contains names of previously installed packages. This file can be
+The apps file contains names of previously installed packages. This file can be
 used to check the installation for completeness.
 .RE
 .IP " 3." 4

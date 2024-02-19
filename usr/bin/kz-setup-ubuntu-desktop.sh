@@ -5,6 +5,8 @@
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2024.
 ###############################################################################
+# Format: #<operator> APP <app> USER [<user@host>...]
+# Where operator '+' means set, and '-' means reset.
 
 #+ APP anydesk USER
 kz-gset --addfavaft=anydesk

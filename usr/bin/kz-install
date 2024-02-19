@@ -334,6 +334,7 @@ function process_input_file_by_app {
             '#'*' APP '*)
                 # APP record.
                 app_match=false
+                # Operator '+' means install and '-' means remove.
                 app_operator=${input_record:1:1}
                 app_name="$(
                     printf '%s\n' "$input_record"       |
@@ -377,6 +378,7 @@ function process_input_file_by_host {
             '#'*' APP '*)
                 # APP record.
                 host_match=false
+                # Operator '+' means install and '-' means remove.
                 app_operator=${input_record:1:1}
                 host_names="$(
                     printf '%s\n' "$input_record"       |

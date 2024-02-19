@@ -33,10 +33,10 @@ Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Standaard verwerkt \fBkz setup\fR het invoerbestand,
-/usr/bin/kz-setup-setup-<distributie>-<editie>.sh, <distributie> (b.v.
+/usr/bin/kz-setup-<distributie>-<editie>.sh, <distributie> (b.v.
 ubuntu) en <editie> (desktop of server) worden ingevuld met de waarden van de
 huidige computer.
-Bijvoorbeeld kz-setup-setup-ubuntu-desktop.sh.
+Bijvoorbeeld kz-setup-ubuntu-desktop.sh.
 .sp
 Dit invoerbestand bevat instel-opdrachten voor alle hierin opgenomen gebruikers
 voor Ubuntu desktop.
@@ -57,8 +57,6 @@ Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
 Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt, de
 modus wijzigt dan van setup naar reset.
-Dan wordt bijvoorbeeld bestand /usr/bin/kz-setup-reset-ubuntu-desktop.sh
-("resetbestand") verwerkt.
 .sp
 De optie \fB-l\fR, \fB--list\fR geeft een lijst met installatiebestanden weer.
 .sp
@@ -72,18 +70,18 @@ opties uit.
 .\"
 .SH BESTANDSINDELING
 De naamgeving van de meegeleverde invoerbestanden is
-kz-setup-<mode>-<distribution>-<edition>.sh, voor een door de gebruiker
+kz-setup-<distribution>-<edition>.sh, voor een door de gebruiker
 aangeleverd invoerbestand is het kz-setup-*.sh.
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .sp
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
-herhaaldelijk uitvoeren het resultaat hetzelfde blijft.
+herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels in
-voorbeeldbestand kz-setup-setup-ubuntu-desktop.sh.
+voorbeeldbestand kz-setup-ubuntu-desktop.sh.
 Meer voorbeelden zijn te zien via de opdracht \fBkz setup --cat\fR.
 .sp
 .B Tabel 1. Soorten regels en hun verwerking
@@ -99,25 +97,33 @@ T}
 l | l
 l | l
 l | l
+l | l
 l | l.
 T{
 T}:T{
-Wordt overgeslagen (is leeg).
+Wordt overgeslagen (is leeg)
 T}
 T{
-#...
+# ...
 T}:T{
-Wordt overgeslagen (is commentaar).
+Wordt overgeslagen (is commentaar)
 T}
 T{
-# APP <appnaam> USER <gebruikersnaam>@<computernaam>...
+#+ APP<appnaam> USER <gebruikersnaam>@<computernaam>...
 T}:T{
-De applicatie <appnaam> en gebruiker <gebruikersnaam>@<computernaam>.
+De applicatie <appnaam> instellen voor gebruiker
+<gebruikersnaam>@<computernaam>
+T}
+T{
+#- APP<appnaam> USER <gebruikersnaam>@<computernaam>...
+T}:T{
+De applicatie <appnaam> resetten voor gebruiker <gebruikersnaam>@<computernaam>
+(optie reset)
 T}
 T{
 Opdracht
 T}:T{
-Instel/Reset-opdracht.
+Instel/Reset-opdracht
 T}
 .TE
 .sp
@@ -125,7 +131,7 @@ T}
 Bij het gebruik van optie \fB-a\fR, \fB--apps\fR wordt er alleen geselecteerd
 op <appnaam>, en niet op niet op <gebruikersnaam>@<computernaam>.
 .sp
-.B Tabel 2. Regels in voorbeeldbestand kz-setup-setup-ubuntu-desktop.sh
+.B Tabel 2. Regels in voorbeeldbestand kz-setup-ubuntu-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -143,11 +149,15 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP google-chrome USER *
+#+ APPgoogle-chrome USER *
 T}:T{
-Stel google-chrome in op voor iedere gebruiker, zie [1].
+Stel google-chrome in op voor iedere gebruiker, zie [1]
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -157,9 +167,21 @@ T{
 T}:T{
 T}
 T{
-# APP gnome USER jan@pc02
+#- APPgoogle-chrome USER *
 T}:T{
-Stel gnome in alleen voor Jan, zie [2].
+Reset google-chrome voor iedere gebruiker, zie [1]
+T}
+T{
+kz-gset --addfavbef=google-chrome
+T}:T{
+T}
+T{
+T}:T{
+T}
+T{
+#+ APPgnome USER jan@pc02
+T}:T{
+Stel gnome in alleen voor Jan, zie [2]
 T}
 T{
 gsettings set org.gnome.shell...
@@ -169,9 +191,9 @@ T{
 T}:T{
 T}
 T{
-# APP kvm USER jantine@pc01 jan@pc02
+#+ APPkvm USER jantine@pc01 jan@pc02
 T}:T{
-Stel kvm in voor Jantine and Jan, zie [3].
+Stel kvm in voor Jantine and Jan, zie [3]
 T}
 T{
 kz-gset --addfavaft=virt-manager
@@ -181,9 +203,9 @@ T{
 T}:T{
 T}
 T{
-# APP google-earth HOST
+#+ APPgoogle-earth HOST
 T}:T{
-Standaard niet google-earth instellen, zie [4].
+Standaard niet google-earth instellen, zie [4]
 T}
 T{
 kz-gset --addfavaft=google-earth
@@ -255,29 +277,19 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-setup-setup-debian-desktop.sh
+/usr/bin/kz-setup-debian-desktop.sh
 .RS
 Instelbestand voor Debian desktop.
 .RE
 .sp
-/usr/bin/kz-setup-setup-ubuntu-desktop.sh
+/usr/bin/kz-setup-ubuntu-desktop.sh
 .RS
 Instelbestand voor Ubuntu desktop.
 .RE
 .sp
-/usr/bin/kz-setup-reset-debian-desktop.sh
+/tmp/kz-setup-<distributie>-<editie>-XXXXXXXXXX.sh
 .RS
-Resetbestand voor Debian desktop.
-.RE
-.sp
-/usr/bin/kz-setup-reset-ubuntu-desktop.sh
-.RS
-Resetbestand voor Ubuntu desktop.
-.RE
-.sp
-/tmp/kz-setup-<modus>-<distributie>-<editie>-XXXXXXXXXX.sh
-.RS
-Opdrachtbestand, bijvoorbeeld kz-setup-setup-ubuntu-desktop-SYpGEKVWZI.sh.
+Opdrachtbestand, bijvoorbeeld kz-setup-ubuntu-desktop-SYpGEKVWZI.sh.
 .RE
 .\"
 .\"
@@ -288,7 +300,7 @@ Checklist installatie
 https://karelzimmer.nl/html/nl/linux.html#documents
 .RE
 .IP " 2." 4
-Persoonlijke map / Instellingen / Favorieten
+Persoonlijke map / .kz / favorites
 .RS 4
 In bestand Favorieten staan eerder ingestelde favorieten.
 Is te gebruiken om de favorieten te controleren op volledigheid.

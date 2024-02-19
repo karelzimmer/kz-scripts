@@ -5,6 +5,8 @@
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2024.
 ###############################################################################
+# Format: #<operation> APP <app> HOST [<host>...]
+# Where operation '+' means install, and '-' means remove.
 
 #+ APP ansible HOST pc06
 sudo apt-get install --yes ansible

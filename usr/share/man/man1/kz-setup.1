@@ -34,7 +34,7 @@ By default, \fBkz setup\fR processes the input file
 /usr/bin/kz-setup-<distribution>-<edition>.sh, <distribution> (e.g.
 ubuntu) and <edition> (desktop or server) are populated with the values from
 the current computer.
-For example, kz-setup-setup-ubuntu-desktop.sh.
+For example, kz-setup-ubuntu-desktop.sh.
 .sp
 This input file contains commands for all users included in it for Ubuntu
 desktop.
@@ -54,8 +54,6 @@ Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone, the mode then
 changes from setup to reset.
-Then, for example, file /usr/bin/kz-setup-reset-ubuntu-desktop.sh
-("reset file") is processed.
 .sp
 The \fB-l\fR, \fB--list\fR option displays a list of set up files.
 .sp
@@ -67,19 +65,18 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The format of the supplied input file is
-kz-setup-<mode>-<distribution>-<edition>.sh, for a user supplied input file
-it is kz-setup-*.sh.
+The format of the supplied input file is kz-setup-<distribution>-<edition>.sh,
+for a user supplied input file it is kz-setup-*.sh.
 The records are processed in the order they appear in the files.
 .sp
 The commands supplied by with \fBkz setup\fR are arranged in such a way that
-the result remains the same when executed repeatedly.
+the result remains the same when executed repeatedly idempotent).
 .sp
 See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in
-kz-setup-setup-ubuntu-desktop.sh sample file.
+kz-setup-ubuntu-desktop.sh sample file.
 More examples can be seen through the \fBkz setup --cat\fR command.
 .sp
 .B Table 1. Record types and their processing
@@ -98,22 +95,28 @@ l | l
 l | l.
 T{
 T}:T{
-Will be skipped, is empty.
+Will be skipped, is empty
 T}
 T{
-#...
+# ...
 T}:T{
-Will be skipped, is a comment.
+Will be skipped, is a comment
 T}
 T{
-# APP <app name> USER <user name>@<computer name>...
+#+ APP<app name> USER <user name>@<computer name>...
 T}:T{
-The application <app name> and user <user name>@<computer name>.
+Set up application <app name> for user <user name>@<computer name>
+T}
+T{
+#- APP<app name> USER <user name>@<computer name>...
+T}:T{
+Reset application <app name> for user <user name>@<computer name> (option
+reset)
 T}
 T{
 Command
 T}:T{
-Set up/Reset command.
+Set up/Reset command
 T}
 .TE
 .sp
@@ -121,7 +124,7 @@ T}
 When using option \fB-a\fR, \fB--apps\fR, only <app name> is selected, and not
 <user name>@<computer name>.
 .sp
-.B Table 2. Lines in kz-setup-setup-ubuntu-desktop.sh sample file
+.B Table 2. Lines in kz-setup-ubuntu-desktop.sh sample file
 .TS
 box tab(:);
 lb | lb.
@@ -139,11 +142,15 @@ l | l
 l | l
 l | l
 l | l
+l | l
+l | l
+l | l
+l | l
 l | l.
 T{
-# APP google-chrome USER *
+#+ APPgoogle-chrome USER *
 T}:T{
-Set up google-chrome for any user, see [1].
+Set up google-chrome for any user, see [1]
 T}
 T{
 kz-gset --addfavbef=google-chrome
@@ -153,9 +160,9 @@ T{
 T}:T{
 T}
 T{
-# APP gnome USER john@pc02
+#+ APPgnome USER john@pc02
 T}:T{
-Set up gnome only for John, see [2].
+Set up gnome only for John, see [2]
 T}
 T{
 gsettings set org.gnome.shell...
@@ -165,9 +172,9 @@ T{
 T}:T{
 T}
 T{
-# APP kvm USER jane@pc01 john@pc02
+#+ APPkvm USER jane@pc01 john@pc02
 T}:T{
-Set up kvm for Jane and John, see [3].
+Set up kvm for Jane and John, see [3]
 T}
 T{
 kz-gset --addfavaft=virt-manager
@@ -177,9 +184,9 @@ T{
 T}:T{
 T}
 T{
-# APP google-earth HOST
+#+ APPgoogle-earth HOST
 T}:T{
-Do not set up Google Earth by default, see [4].
+Do not set up Google Earth by default, see [4]
 T}
 T{
 kz-gset --addfavaft=google-earth
@@ -247,29 +254,19 @@ equal to 0.
 .\"
 .\"
 .SH FILES
-/usr/bin/kz-setup-setup-debian-desktop.sh
+/usr/bin/kz-setup-debian-desktop.sh
 .RS
 Set up file for Debian desktop.
 .RE
 .sp
-/usr/bin/kz-setup-setup-ubuntu-desktop.sh
+/usr/bin/kz-setup-ubuntu-desktop.sh
 .RS
 Set up file for Ubuntu desktop.
 .RE
 .sp
-/usr/bin/kz-setup-reset-debian-desktop.sh
+/tmp/kz-setup-<distribution>-<edition>-XXXXXXXXXX.sh
 .RS
-Reset file for Debian desktop.
-.RE
-.sp
-/usr/bin/kz-setup-reset-ubuntu-desktop.sh
-.RS
-Reset file for Ubuntu desktop.
-.RE
-.sp
-/tmp/kz-setup-<mode>-<distribution>-<edition>-XXXXXXXXXX.sh
-.RS
-Command file, e.g. kz-setup-setup-ubuntu-desktop-SYpGEKVWZI.sh.
+Command file, e.g. kz-setup-ubuntu-desktop-SYpGEKVWZI.sh.
 .RE
 .\"
 .\"
@@ -280,7 +277,7 @@ Checklist install
 https://karelzimmer.nl/html/en/linux.html#documents
 .RE
 .IP " 2." 4
-Personal folder / Settings / Favorites
+Personal folder / .kz / favorites
 .RS 4
 The Favorites file contains previously set favorites.
 Can be used to check the favorites for completeness.
