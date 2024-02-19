@@ -65,6 +65,7 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 
 
 # APP fwupd HOST
+# Enable the Firmware update daemon
 systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service

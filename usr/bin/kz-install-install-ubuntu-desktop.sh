@@ -78,6 +78,7 @@ sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' 
 
 
 # APP fwupd HOST
+# Disable the Firmware update daemon
 sudo systemctl stop fwupd.service       # Stop the service
 sudo systemctl disable fwupd.service    # Disable automatic start upon boot
 sudo systemctl mask fwupd.service       # Disable manual invoking

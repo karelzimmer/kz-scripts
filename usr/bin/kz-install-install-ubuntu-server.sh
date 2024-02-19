@@ -17,6 +17,7 @@ sudo touch /etc/cloud/cloud-init.disabled
 
 
 # APP fwupd HOST
+# Disable the Firmware update daemon
 sudo systemctl stop fwupd.service       # Stop the service
 sudo systemctl disable fwupd.service    # Disable automatic start upon boot
 sudo systemctl mask fwupd.service       # Disable manual invoking
