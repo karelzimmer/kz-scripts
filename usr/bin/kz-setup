@@ -447,7 +447,7 @@ function process_command_file {
                 app_name=$(
                     printf '%s\n' "$commands_record"    |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=3
+                    cut --delimiter=' ' --fields=4
                     )
                 ((++app_seq_num))
                 cmd_seq_num=0
