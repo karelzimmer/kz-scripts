@@ -5,10 +5,8 @@
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2024.
 ###############################################################################
-# Format: #<operator> APP <app> USER [<user@host>...]
-# Where operator '+' means set, and '-' means reset.
 
-#+ APP dashtodock USER *
+# setup APP dashtodock USER *
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
@@ -19,7 +17,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.shell disable-user-extensions false
 
-#- APP dashtodock USER *
+# reset APP dashtodock USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
@@ -31,14 +29,14 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
 
-#+ APP firefox USER karel@pc07
+# setup APP firefox USER karel@pc07
 kz-gset --delfav=firefox-esr
 
-#- APP firefox USER karel@pc07
+# reset APP firefox USER karel@pc07
 kz-gset --addfavbef=firefox-esr
 
 
-#+ APP gnome USER *
+# setup APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -64,7 +62,7 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-typ
 gsettings set org.gnome.shell disable-user-extensions false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
-#- APP gnome USER *
+# reset APP gnome USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -92,56 +90,56 @@ gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 
-#+ APP google-chrome USER karel@pc07
+# setup APP google-chrome USER karel@pc07
 kz-gset --addfavbef=google-chrome
 
-#- APP google-chrome USER karel@pc07
+# reset APP google-chrome USER karel@pc07
 kz-gset --delfav=google-chrome
 
 
-#+ APP kvm USER karel@pc07
+# setup APP kvm USER karel@pc07
 kz-gset --addfavaft=virt-manager
 
-#- APP kvm USER karel@pc07
+# reset APP kvm USER karel@pc07
 kz-gset --delfav=virt-manager
 
 
-#+ APP lynis USER
+# setup APP lynis USER
 # Use Lynis (CISOfy):
 # cd ~/lynis
 # [sudo] ./lynis audit system
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis
 
-#- APP lynis USER
+# reset APP lynis USER
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
-#+ APP nautilus-hide USER *
+# setup APP nautilus-hide USER *
 echo 'snap' > "$HOME"/.hidden
 
-#- APP nautilus-hide USER *
+# reset APP nautilus-hide USER *
 rm --force --verbose "$HOME"/.hidden
 
 
-#+ APP recover-files-thumbnails USER
+# setup APP recover-files-thumbnails USER
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 
-#+ APP spotify USER karel@pc07
+# setup APP spotify USER karel@pc07
 kz-gset --addfavaft=kz-spotify
 
-#- APP spotify USER karel@pc07
+# reset APP spotify USER karel@pc07
 kz-gset --delfav=kz-spotify
 
 
-#+ APP start-installer USER *
+# setup APP start-installer USER *
 kz-gset --delfav=install-debian
 
-#- APP start-installer USER *
+# reset APP start-installer USER *
 kz-gset --addfavbef=install-debian
 
 
-#+ APP terminal USER karel@pc07
+# setup APP terminal USER karel@pc07
 kz-gset --addfavbef=org.gnome.Terminal
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
@@ -149,19 +147,19 @@ sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
-#- APP terminal USER karel@pc07
+# reset APP terminal USER karel@pc07
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
-#+ APP vlc USER *
+# setup APP vlc USER *
 xdg-mime default vlc_vlc.desktop video/mp4          # MPEG4-video
 xdg-mime default vlc_vlc.desktop video/x-matroska   # Matroska-video
 xdg-mime default vlc_vlc.desktop video/webm         # WebM video
 
 
-#+ APP vscode USER karel@pc07
+# setup APP vscode USER karel@pc07
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
@@ -172,15 +170,15 @@ xdg-mime default code_code.desktop text/markdown                # Markdown docum
 xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
-#- APP vscode USER karel@pc07
+# reset APP vscode USER karel@pc07
 kz-gset --delfav=code_code
 
 
-#+ APP webmin USER karel@pc07
+# setup APP webmin USER karel@pc07
 # Web app: https://localhost:10000
 kz-gset --addfavaft=kz-webmin
 
-#- APP webmin USER karel@pc07
+# reset APP webmin USER karel@pc07
 # Web app: https://localhost:10000
 kz-gset --delfav=kz-webmin
 rm --force --verbose "$HOME"/.local/share/applications/kz-webmin.desktop

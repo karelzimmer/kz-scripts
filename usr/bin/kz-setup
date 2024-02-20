@@ -63,7 +63,7 @@ declare     argument_app=false
 declare     commands_found=false
 declare     file_argument=''
 declare     input_file=''
-declare     operator='+'
+declare     mode='setup'
 declare     logout=true
 declare     option_apps=false
 declare     option_cat=false
@@ -134,7 +134,7 @@ $USAGE_LINE"
                 ;;
             -r|--reset)
                 option_reset=true
-                operator='-'
+                mode='reset'
                 shift
                 ;;
             --)
@@ -266,12 +266,12 @@ function process_option_apps {
 $(gettext 'NUM  APP')\n"
     apps=$(
         grep    --no-messages                   \
-                --regexp="#${operator}.* APP "  \
+                --regexp=".*#.* $mode.* APP "   \
                 "$input_file"                   |
         tr      --squeeze-repeats               \
                 '[:space:]'                     |
         cut     --delimiter=' '                 \
-                --fields=3                      |
+                --fields=4                      |
         sort    --unique                        |
         nl      --number-width=3                \
                 --number-format=rn              \
@@ -320,22 +320,27 @@ function process_argument_app {
 function process_input_file_by_app {
     local   app_match=false
     local   app_name=''
-    local   app_operator=''
+    local   app_mode=''
     local   input_record=''
     local   no_app_match=true
 
     while read -r input_record; do
         case $input_record in
-            '#'*' APP '*)
+            *'#'*' APP '*)
                 # APP record.
                 app_match=false
                 # Operator '+' means set, and '-' means reset.
-                app_operator=${input_record:1:1}
-                app_name="$(
+                app_mode=$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=3)"
-                if  [[ $app_operator = "$operator" ]] &&
+                    cut --delimiter=' ' --fields=2
+                    )
+                app_name=$(
+                    printf '%s\n' "$input_record"       |
+                    tr --squeeze-repeats '[:space:]'    |
+                    cut --delimiter=' ' --fields=4
+                    )
+                if  [[ $app_mode = "$mode" ]] &&
                     [[ $app_name = "$app_argument" ]]; then
                     # Match on app name.
                     app_match=true
@@ -362,7 +367,7 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # user.
 function process_input_file_by_user {
-    local   app_operator=''
+    local   app_mode=''
     local   current_user=$USER'@'$HOSTNAME
     local   input_record=''
     local   user_match=false
@@ -370,18 +375,20 @@ function process_input_file_by_user {
 
     while read -r input_record; do
         case $input_record in
-            '#'*' APP '*)
+            *'#'*' APP '*)
                 # APP record.
                 user_match=false
-                # Operator '+' means set, and '-' means reset.
-                app_operator=${input_record:1:1}
-                user_names="$(
+                app_mode=$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=5-)"
-
-
-                if  [[ $app_operator = "$operator" ]] &&
+                    cut --delimiter=' ' --fields=2
+                    )
+                user_names=$(
+                    printf '%s\n' "$input_record"       |
+                    tr --squeeze-repeats '[:space:]'    |
+                    cut --delimiter=' ' --fields=6-
+                    )
+                if  [[ $app_mode = "$mode" ]] &&
                     [[ $user_names = '*' || $user_names == *$current_user* ]]
                 then
                     # Match on user name.
@@ -416,7 +423,9 @@ function process_command_file {
     local   -i  app_tot_num=0
     local   -i  cmd_seq_num=0
 
-    app_tot_num=$(grep --regexp='#.* APP ' --count "$tmp_command_file" || true)
+    app_tot_num=$(
+        grep --regexp='.*#.* APP ' --count "$tmp_command_file" || true
+        )
 
     if $option_reset; then
         operation=$(gettext 'reset')
@@ -433,12 +442,13 @@ function process_command_file {
             '')
                 continue
                 ;;
-            '#'*' APP '*)
+            *'#'*' APP '*)
                 # APP record.
-                app_name="$(
+                app_name=$(
                     printf '%s\n' "$commands_record"    |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=3)"
+                    cut --delimiter=' ' --fields=3
+                    )
                 ((++app_seq_num))
                 cmd_seq_num=0
                 printf  -v app_name_line    \
