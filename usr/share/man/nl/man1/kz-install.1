@@ -105,11 +105,6 @@ T}:T{
 Wordt overgeslagen, is leeg
 T}
 T{
-# ...
-T}:T{
-Wordt overgeslagen, is commentaar
-T}
-T{
 # install APP <appnaam> HOST <computernaam>...
 T}:T{
 De applicatie <appnaam> installeren op computer <computernaam>
@@ -117,7 +112,12 @@ T}
 T{
 # remove APP <appnaam> HOST <computernaam>...
 T}:T{
-De applicatie <appnaam> verwijderen van computer <computernaam> (optie reset)
+De applicatie <appnaam> verwijderen van computer <computernaam> (optie remove)
+T}
+T{
+#...
+T}:T{
+Wordt overgeslagen, is commentaar
 T}
 T{
 Opdracht
@@ -159,6 +159,10 @@ T{
 # install APP gnome-gmail HOST *
 T}:T{
 Installeer de gnome-gmail op iedere computer, zie [1]
+T}
+T{
+sudo apt-get install --yes gnome-gmail
+T}:T{
 T}
 T{
 T}:T{
