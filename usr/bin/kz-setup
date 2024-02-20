@@ -63,7 +63,7 @@ declare     argument_app=false
 declare     commands_found=false
 declare     file_argument=''
 declare     input_file=''
-declare     mode='setup'
+declare     mode='Setup'
 declare     logout=true
 declare     option_apps=false
 declare     option_cat=false
@@ -134,7 +134,7 @@ $USAGE_LINE"
                 ;;
             -r|--reset)
                 option_reset=true
-                mode='reset'
+                mode='Reset'
                 shift
                 ;;
             --)

@@ -63,7 +63,7 @@ declare     argument_app=false
 declare     commands_found=false
 declare     file_argument=''
 declare     input_file=''
-declare     mode='install'
+declare     mode='Install'
 declare     option_apps=false
 declare     option_cat=false
 declare     option_file=false
@@ -134,7 +134,7 @@ $USAGE_LINE"
                 ;;
             -r|--remove)
                 option_remove=true
-                mode='remove'
+                mode='Remove'
                 shift
                 ;;
             --)

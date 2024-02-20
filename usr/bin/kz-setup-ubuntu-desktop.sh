@@ -6,37 +6,37 @@
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2024.
 ###############################################################################
 
-# setup APP anydesk USER
+# Setup APP anydesk USER
 kz-gset --addfavaft=anydesk
 
-# reset APP anydesk USER
+# Reset APP anydesk USER
 kz-gset --delfav=anydesk
 
 
-# setup APP calibre USER hugo@pc-van-hugo
+# Setup APP calibre USER hugo@pc-van-hugo
 kz-gset --addfavaft=calibre-gui
 
-# reset APP calibre USER hugo@pc-van-hugo
+# Reset APP calibre USER hugo@pc-van-hugo
 kz-gset --delfav=calibre-gui
 
 
-# setup APP cockpit USER karel@pc06
+# Setup APP cockpit USER karel@pc06
 # Web app: https://localhost:9090
 kz-gset --addfavaft=kz-cockpit
 
-# reset APP cockpit USER karel@pc06
+# Reset APP cockpit USER karel@pc06
 kz-gset --delfav=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
-# setup APP firefox USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup APP firefox USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delfav=firefox_firefox
 
-# reset APP firefox USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset APP firefox USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavbef=firefox_firefox
 
 
-# setup APP gnome USER *
+# Setup APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -65,7 +65,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
 gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
-# reset APP gnome USER *
+# Reset APP gnome USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -96,117 +96,117 @@ gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 
-# setup APP google-chrome USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup APP google-chrome USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavbef=google-chrome
 
-# reset APP google-chrome USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset APP google-chrome USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delfav=google-chrome
 
 
-# setup APP handbrake USER emily@pc-van-emily
+# Setup APP handbrake USER emily@pc-van-emily
 kz-gset --addfavaft=fr.handbrake.ghb
 
-# reset APP handbrake USER emily@pc-van-emily
+# Reset APP handbrake USER emily@pc-van-emily
 kz-gset --delfav=fr.handbrake.ghb
 
 
-# setup APP kvm USER karel@pc06
+# Setup APP kvm USER karel@pc06
 kz-gset --addfavaft=virt-manager
 
-# reset APP kvm USER karel@pc06
+# Reset APP kvm USER karel@pc06
 kz-gset --delfav=virt-manager
 
 
-# setup APP lynis USER
+# Setup APP lynis USER
 # Use Lynis (CISOfy):
 # cd ~/lynis
 # [sudo] ./lynis audit system
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis
 
-# reset APP lynis USER
+# Reset APP lynis USER
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
-# setup APP nautilus-hide USER *
+# Setup APP nautilus-hide USER *
 echo 'snap' > "$HOME"/.hidden
 
-# reset APP nautilus-hide USER *
+# Reset APP nautilus-hide USER *
 rm --force --verbose "$HOME"/.hidden
 
 
-# setup APP recover-files-thumbnails USER
+# Setup APP recover-files-thumbnails USER
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 
-# setup APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavaft=kz-spotify
 
-# reset APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delfav=kz-spotify
 
 
-# setup APP start-installer USER *
+# Setup APP start-installer USER *
 kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
 
-# reset APP start-installer USER *
+# Reset APP start-installer USER *
 kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
-# setup APP sound-juicer USER emily@pc-van-emily
+# Setup APP sound-juicer USER emily@pc-van-emily
 kz-gset --addfavaft=org.gnome.SoundJuicer
 
-# reset APP sound-juicer USER emily@pc-van-emily
+# Reset APP sound-juicer USER emily@pc-van-emily
 kz-gset --delfav=org.gnome.SoundJuicer
 
 
-# setup APP thunderbird USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup APP thunderbird USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delfav=thunderbird
 
-# reset APP thunderbird USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset APP thunderbird USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavbef=thunderbird
 
 
-# setup APP teamviewer USER karel@pc06
+# Setup APP teamviewer USER karel@pc06
 kz-gset --addfavaft=com.teamviewer.TeamViewer
 
-# reset APP teamviewer USER karel@pc06
+# Reset APP teamviewer USER karel@pc06
 kz-gset --delfav=com.teamviewer.TeamViewer
 
 
-# setup APP telegram USER hugo@pc-van-hugo maria@maria-desktop
+# Setup APP telegram USER hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addfavaft=kz-telegram
 
-# reset APP telegram USER hugo@pc-van-hugo  maria@maria-desktop
+# Reset APP telegram USER hugo@pc-van-hugo  maria@maria-desktop
 kz-gset --delfav=kz-telegram
 
 
-# setup APP terminal USER karel@pc01 karel@pc06
+# Setup APP terminal USER karel@pc01 karel@pc06
 kz-gset --addfavbef=org.gnome.Terminal
 # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
-# reset APP terminal USER karel@pc01 karel@pc06
+# Reset APP terminal USER karel@pc01 karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
-# setup APP virtualbox USER hugo@pc-van-hugo
+# Setup APP virtualbox USER hugo@pc-van-hugo
 kz-gset --addfavaft=virtualbox
 kz-gset --addfavaft=kz-vm-hugowin732
 
-# reset APP virtualbox USER hugo@pc-van-hugo
+# Reset APP virtualbox USER hugo@pc-van-hugo
 kz-gset --delfav=virtualbox
 kz-gset --delfav=kz-vm-hugowin732
 
 
-# setup APP vlc USER *
+# Setup APP vlc USER *
 xdg-mime default vlc_vlc.desktop video/mp4          # MPEG4-video
 xdg-mime default vlc_vlc.desktop video/x-matroska   # Matroska-video
 xdg-mime default vlc_vlc.desktop video/webm         # WebM video
 
 
-# setup APP vscode USER karel@pc01 karel@pc06
+# Setup APP vscode USER karel@pc01 karel@pc06
 kz-gset --addfavbef=code_code
 xdg-mime default code_code.desktop application/json             # JSON document
 xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
@@ -217,19 +217,19 @@ xdg-mime default code_code.desktop text/markdown                # Markdown docum
 xdg-mime default code_code.desktop text/troff                   # Man page
 xdg-mime default code_code.desktop text/x-python                # Python-script
 
-# reset APP vscode USER karel@pc01 karel@pc06
+# Reset APP vscode USER karel@pc01 karel@pc06
 kz-gset --delfav=code_code
 
 
-# setup APP whatsapp USER hugo@pc-van-hugo maria@maria-desktop
+# Setup APP whatsapp USER hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addfavaft=kz-whatsapp
 
-# reset APP whatsapp USER hugo@pc-van-hugo maria@maria-desktop
+# Reset APP whatsapp USER hugo@pc-van-hugo maria@maria-desktop
 kz-gset --delfav=kz-whatsapp
 
 
-# setup APP zoom USER monique@pc01 karel@pc01
+# Setup APP zoom USER monique@pc01 karel@pc01
 kz-gset --addfavaft=kz-zoom
 
-# reset APP zoom USER monique@pc01 karel@pc01
+# Reset APP zoom USER monique@pc01 karel@pc01
 kz-gset --delfav=kz-zoom

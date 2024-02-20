@@ -56,7 +56,7 @@ Na succesvolle voltooiing wordt de gebruiker uitgelogd.
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
 Met optie \fB-r\fR, \fB--reset\fR kan het instellen ongedaan worden gemaakt, de
-modus wijzigt dan van setup naar reset.
+modus wijzigt dan van Setup naar Reset.
 .sp
 De optie \fB-l\fR, \fB--list\fR geeft een lijst met installatiebestanden weer.
 .sp
@@ -67,19 +67,13 @@ met \fB.sh\fR.
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
 .\"
-.\"T{
-# setup APPgoogle-chrome USER *
-T}:T{
-Set up google-chrome for any user, see [1]
-T}
-T{
-kz-gset --addfavbef=google-chrome
-T}:T{
-T}
-T{
-T}:T{
-T}
-
+.\"
+.SH BESTANDSINDELING
+De naamgeving van de meegeleverde invoerbestanden is 
+kz-setup-<distribution>-<edition>.sh, voor een door de gebruiker aangeleverd
+invoerbestand is het kz-setup-*.sh.
+De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+.sp
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
@@ -110,13 +104,13 @@ T}:T{
 Wordt overgeslagen (is leeg)
 T}
 T{
-# setup APP<appnaam> USER <gebruikersnaam>@<computernaam>...
+# Setup APP <appnaam> USER <gebruikersnaam>@<computernaam>...
 T}:T{
 De applicatie <appnaam> instellen voor gebruiker
 <gebruikersnaam>@<computernaam>
 T}
 T{
-# reset APP<appnaam> USER <gebruikersnaam>@<computernaam>...
+# Reset APP <appnaam> USER <gebruikersnaam>@<computernaam>...
 T}:T{
 De applicatie <appnaam> resetten voor gebruiker <gebruikersnaam>@<computernaam>
 (optie reset)

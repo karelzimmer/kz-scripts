@@ -53,7 +53,7 @@ Upon successful completion the computer will restart.
 Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone, the mode
-then changes from install to remove.
+then changes from Install to Remove.
 .sp
 The \fB-l\fR, \fB--list\fR option displays a list of install files.
 .sp
@@ -101,12 +101,12 @@ T}:T{
 Will be skipped, is empty
 T}
 T{
-# install APP<app name> HOST <computer name>...
+# Install APP <app name> HOST <computer name>...
 T}:T{
 Install the application <app name> on computer <computer name>
 T}
 T{
-# remove APP<app name> HOST <computer name>...
+# Remove APP <app name> HOST <computer name>...
 T}:T{
 Remove the application <app name> from computer <computer name> (option remove)
 T}
@@ -118,7 +118,7 @@ T}
 T{
 Command
 T}:T{
-Install/Uninstall command.
+Install/Remove command.
 T}
 .TE
 .sp
@@ -152,7 +152,7 @@ l | l
 l | l
 l | l.
 T{
-# install APP gnome-gmail HOST *
+# Install APP gnome-gmail HOST *
 T}:T{
 Install gnome-gmail on any computer, see [1].
 T}
@@ -164,7 +164,7 @@ T{
 T}:T{
 T}
 T{
-# remove APP gnome-gmail HOST *
+# Remove APP gnome-gmail HOST *
 T}:T{
 Remove gnome-gmail from any computer, see [1].
 T}
@@ -176,7 +176,7 @@ T{
 T}:T{
 T}
 T{
-# install APP ufw HOST pc02
+# Install APP ufw HOST pc02
 T}:T{
 Install ufw only on pc02, see [2].
 T}
@@ -188,7 +188,7 @@ T{
 T}:T{
 T}
 T{
-# install APP kvm HOST pc01 pc02
+# Install APP kvm HOST pc01 pc02
 T}:T{
 Install kvm on pc01 and pc02, see [3].
 T}
@@ -200,7 +200,7 @@ T{
 T}:T{
 T}
 T{
-# install APP google-earth HOST
+# Install APP google-earth HOST
 T}:T{
 Do not install Google Earth by default, zie [4].
 T}
