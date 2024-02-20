@@ -67,13 +67,19 @@ met \fB.sh\fR.
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
 .\"
-.\"
-.SH BESTANDSINDELING
-De naamgeving van de meegeleverde invoerbestanden is
-kz-setup-<distribution>-<edition>.sh, voor een door de gebruiker
-aangeleverd invoerbestand is het kz-setup-*.sh.
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
-.sp
+.\"T{
+#+ APPgoogle-chrome USER *
+T}:T{
+Set up google-chrome for any user, see [1]
+T}
+T{
+kz-gset --addfavbef=google-chrome
+T}:T{
+T}
+T{
+T}:T{
+T}
+
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
@@ -172,7 +178,7 @@ T}:T{
 Reset google-chrome voor iedere gebruiker, zie [1]
 T}
 T{
-kz-gset --addfavbef=google-chrome
+kz-gset --delfav=google-chrome
 T}:T{
 T}
 T{
