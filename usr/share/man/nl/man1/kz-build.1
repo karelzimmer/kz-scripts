@@ -31,6 +31,49 @@ Van tekstbestanden worden pdf-bestanden gemaakt met 'lowriter convert-to pdf'.
 Met opdracht \fBkz deploy\fR kan de website (inclusief pakket kz) geplaatst
 worden op het internet zodat de scripts en documenten beschikbaar zijn voor
 algemeen gebruik.
+.sp
+Pakket kz vult de volgende systeemmappen:
+Package kz populates the following system directories:
+.br
+/usr/bin/
+.RS
+Scripts (kz*)
+.RE
+.sp
+/usr/share/applications/
+.RS
+Bureaubladconfiguratiebestanden (kz*.desktop)
+.RE
+.sp
+/usr/share/bash-completion/completions/
+.RS
+Tabvoltooiingsscripts (kz*)
+.RE
+.sp
+/usr/share/locale/nl/
+.RS
+Nederlandse vertaling (kz.mo)
+.RE
+.sp
+/usr/share/man/man1/
+.RS
+Man-pagina's (EN)
+.RE
+.sp
+/usr/share/man/nl/man1/
+.RS
+Man-pagina's (NL)
+.RE
+.sp
+/usr/share/polkit-1/actions/
+.RS
+PolicyKit actiedefinitiebestanden (nl.karelzimmer.kz*.policy)
+.RE
+.sp
+/etc/
+.RS
+Configuration files (kz*)
+.RE
 .\"
 .\"
 .SH OPTIES
