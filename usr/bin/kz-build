@@ -57,7 +57,7 @@ readonly -A DEB_SOURCES=(
             )
 readonly -A DEB_TARGETS=(
                [dist]=$DEB_REPO_DISTDIR
-              [build]=$DEB_REPO_DISTDIR/usr/local/etc
+              [build]=$DEB_REPO_DISTDIR/etc
              [man_en]=$DEB_REPO_DISTDIR/usr/share/man/man1
              [man_nl]=$DEB_REPO_DISTDIR/usr/share/man/nl/man1
             )

@@ -36,7 +36,7 @@ $OPTIONS_HELP"
 readonly    X_OPTIONS_SHORT='g'
 readonly    X_OPTIONS_LONG=',gui'
 
-readonly    NAS_LOGIN_DIR=/usr/local/etc
+readonly    NAS_LOGIN_DIR=/etc
 readonly    NAS_LOGIN=$NAS_LOGIN_DIR/$PROGRAM_NAME.login
 readonly    NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
             NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP \

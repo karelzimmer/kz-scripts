@@ -305,7 +305,7 @@ def process_option_version(PROGRAM_NAME):
     program_year = ''
 
     try:
-        with open('/usr/local/etc/kz-build.id') as fh:
+        with open('/etc/kz-build.id') as fh:
             build_id = f' ({fh.read()})'
     except FileNotFoundError as fnf:
         text = str(fnf)
