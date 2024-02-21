@@ -34,13 +34,15 @@ Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Standaard verwerkt \fBkz install\fR het invoerbestand
-/usr/bin/kz-install-<distributie>-<editie>.sh, <distributie> (b.v. ubuntu) en
-<editie> (desktop of server) worden ingevuld met de waarden van de huidige
-computer.
-Bijvoorbeeld kz-install-ubuntu-desktop.sh.
+/usr/bin/kz-install-<distributie>-<editie>.sh, bijvoorbeeld
+kz-install-ubuntu-desktop.sh.
+.br
+De <distributie> en <editie> (desktop of server) worden ingevuld met de waarden
+van de huidige computer.
 .sp
 Dit invoerbestand bevat installatie-opdrachten voor alle hierin opgenomen
 computers voor Ubuntu desktop.
+.br
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .sp
@@ -73,6 +75,7 @@ opties uit.
 De naamgeving van de meegeleverde invoerbestanden is
 kz-install-<distribution>-<edition>.sh, voor een door de gebruiker
 aangeleverd invoerbestand is het kz-install-*.sh.
+.br
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .sp
 De opdrachten meegeleverd bij \fBkz install\fR zijn zodanig opgesteld dat bij
@@ -83,7 +86,7 @@ verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
 voorbeeldbestand kz-install-ubuntu-desktop.sh voor computer pc02.
-Meer voorbeelden zijn te zien via de opdracht \fBkz install --cat\fR.
+Meer voorbeelden zijn te zien met de opdracht \fBkz install --cat\fR.
 .sp
 .B Tabel 1. Soorten regels en hun verwerking
 .TS
@@ -102,7 +105,7 @@ l | l
 l | l.
 T{
 T}:T{
-Wordt overgeslagen, is leeg
+Lege regel
 T}
 T{
 # Install APP <appnaam> HOST <computernaam>...
@@ -117,7 +120,7 @@ T}
 T{
 #...
 T}:T{
-Wordt overgeslagen, is commentaar
+Commentaarregel
 T}
 T{
 Opdracht
@@ -223,20 +226,26 @@ worden uitgevoerd.
 [2]
 .br
 De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc02 worden uitgevoerd. De APP kan alsnog worden geïnstalleerd op een
-andere computer met de opdracht 'kz install gnome'.
+alleen op pc02 worden uitgevoerd.
+.br
+De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
+'kz install gnome'.
 .sp
 [3]
 .br
 De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc01 en pc02 worden uitgevoerd. De APP kan alsnog worden
-geïnstalleerd op een andere computer met de opdracht 'kz install kvm'.
+alleen op pc01 en pc02 worden uitgevoerd.
+.br
+De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
+'kz install kvm'.
 .sp
 [4]
 .br
 De regel zonder computernaam achter HOST zorgt ervoor dat de bijbehorende
-opdrachten standaard niet worden uitgevoerd. De APP kan worden geïnstalleerd
-met de opdracht 'kz install google-earth'.
+opdrachten standaard niet worden uitgevoerd.
+.br
+De APP kan alsnog worden geïnstalleerd met de opdracht 'kz install google-eart\
+h'.
 .\"
 .\"
 .sp

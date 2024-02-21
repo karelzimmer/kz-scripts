@@ -31,13 +31,15 @@ commands for setting up apps and changing user settings.
 For the input file format, see the \fBFILE FORMAT\fR section below.
 .sp
 By default, \fBkz setup\fR processes the input file
-/usr/bin/kz-setup-<distribution>-<edition>.sh, <distribution> (e.g.
-ubuntu) and <edition> (desktop or server) are populated with the values from
-the current computer.
-For example, kz-setup-ubuntu-desktop.sh.
+/usr/bin/kz-setup-<distribution>-<edition>.sh, for example
+kz-setup-ubuntu-desktop.sh.
+.sp
+The <distribution> and <edition> (desktop or server) are populated with the
+values from the current computer.
 .sp
 This input file contains commands for all users included in it for Ubuntu
 desktop.
+.sp
 When processing the input file, the commands for any and the current user are
 selected and copied to a command file.
 .sp
@@ -67,6 +69,7 @@ A -- signals the end of options and disables further option processing.
 .SH FILE FORMAT
 The format of the supplied input file is kz-setup-<distribution>-<edition>.sh,
 for a user supplied input file it is kz-setup-*.sh.
+.br
 The records are processed in the order they appear in the files.
 .sp
 The commands supplied by with \fBkz setup\fR are arranged in such a way that
@@ -95,7 +98,7 @@ l | l
 l | l.
 T{
 T}:T{
-Will be skipped, is empty
+Blank line
 T}
 T{
 # Setup APP <app name> USER <user name>@<computer name>...
@@ -111,7 +114,7 @@ T}
 T{
 #...
 T}:T{
-Will be skipped, is a comment
+Comment line
 T}
 T{
 Command
@@ -215,18 +218,24 @@ The line with '*' causes the associated commands to run for every user.
 .br
 The line with 'john@pc02' ensures that the associated commands are executed
 only for John on pc02.
+.br
+The APP can still be set up on another computer with the command 'kz setup goo\
+gle-earth'.
 .sp
 [3]
 .br
 The line with 'jane@pc01 jan@pc02' ensures that the associated commands are
-executed only for Jane on pc01 and for John on pc02 by default. The APP can
-still be set up on another computer with the command 'kz setup kvm'.
+executed only for Jane on pc01 and for John on pc02 by default.
+.br
+The APP can still be set up on another computer with the command 'kz setup kvm\
+'.
 .sp
 [4]
 .br
 The line without a computer name after HOST ensures that the associated
-commands are not executed by default. The APP can be set up with the
-command 'kz setup google-earth'.
+commands are not executed by default.
+.br
+The APP can still be set up with the command 'kz setup google-earth'.
 .\"
 .\"
 .sp

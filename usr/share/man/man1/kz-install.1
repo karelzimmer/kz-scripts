@@ -32,13 +32,15 @@ commands for installing apps and modifying system settings.
 For the format of the input files see the section \fBFILE FORMAT\fR below.
 .sp
 By default, \fBkz install\fR processes the input file
-/usr/bin/kz-install-<distribution>-<edition>.sh, <distribution> (e.g. ubuntu)
-and <edition> (desktop or server) are populated with the values from the
-current computer.
-For example, kz-install-ubuntu-desktop.sh.
+/usr/bin/kz-install-<distribution>-<edition>.sh, for example
+kz-install-ubuntu-desktop.sh.
+.br
+The <distribution> and <edition> (desktop or server) are populated with the
+values from the current computer.
 .sp
 This input file contains commands for all computers included in it for Ubuntu
 desktop.
+.br
 When processing the input file, the commands for any and the current computer
 are selected and copied to a command file.
 .sp
@@ -68,7 +70,7 @@ A -- signals the end of options and disables further option processing.
 The format of the supplied input file is
 kz-install-<distribution>-<edition>.sh, for a user supplied input file it is
 kz-install-*.sh.
-for a user supplied input file it is kz-install-*.sh.
+.br
 The records are processed in the order they appear in the files.
 .sp
 The commands supplied by with \fBkz install\fR are arranged in such a way that
@@ -98,7 +100,7 @@ l | l
 l | l.
 T{
 T}:T{
-Will be skipped, is empty
+Blank line
 T}
 T{
 # Install APP <app name> HOST <computer name>...
@@ -113,7 +115,7 @@ T}
 T{
 #...
 T}:T{
-Will be skipped, is a comment
+Comment line
 T}
 T{
 Command
@@ -220,18 +222,23 @@ The line with '*' causes the associated commands to run on all computers.
 The line with 'pc02' ensures that the associated commands are executed only on
 pc02.
 .br
+The APP can still be installed on another computer with the command 'kz instal\
+l google-earth'.
 .sp
 [3]
 .br
 The line with 'pc01 pc02' ensures that the associated commands are executed
-only on pc01 and pc02 by default. The APP can still be installed on another
-computer with the command 'kz install kvm'.
+only on pc01 and pc02 by default.
+.br
+The APP can still be installed on another computer with the command 'kz instal\
+l kvm'.
 .sp
 [4]
 .br
 The line without a computer name after HOST ensures that the associated
-commands are not executed by default. The APP can be installed with the
-command 'kz install google-earth'.
+commands are not executed by default.
+.br
+The APP can still be installed with the command 'kz install google-earth'.
 .\"
 .\"
 .sp

@@ -302,6 +302,7 @@ $USAGE_LINE"
 function process_argument_app {
     local   app_not_found=false
     local   app_argument=''
+    local   newline=''
 
     for app_argument in "${app_arguments[@]}"; do
         process_input_file_by_app
@@ -326,10 +327,13 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
+            '')
+                # Blank line.
+                continue
+                ;;
             *'#'*' APP '*)
                 # APP record.
                 app_match=false
-                # Operator '+' means set, and '-' means reset.
                 app_mode=$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
@@ -345,11 +349,13 @@ function process_input_file_by_app {
                     # Match on app name.
                     app_match=true
                     no_app_match=false
-                    printf '%s\n' "$input_record" >> "$tmp_command_file"
+                    printf  "$newline%s\n"  \
+                            "$input_record" >> "$tmp_command_file"
+                    newline='\n'
                 fi
                 ;;
             *)
-                # Other record (empty, comment, or command).
+                # Command or comment record.
                 if $app_match; then
                     printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
@@ -365,16 +371,21 @@ function process_input_file_by_app {
 
 
 # This function generates the command file from the input file and filters by
-# user.
+# USER.
 function process_input_file_by_user {
     local   app_mode=''
     local   current_user=$USER'@'$HOSTNAME
     local   input_record=''
+    local   newline=''
     local   user_match=false
     local   user_names=''
 
     while read -r input_record; do
         case $input_record in
+            '')
+                # Blank line.
+                continue
+                ;;
             *'#'*' APP '*)
                 # APP record.
                 user_match=false
@@ -393,11 +404,13 @@ function process_input_file_by_user {
                 then
                     # Match on user name.
                     user_match=true
-                    printf '%s\n' "$input_record" >> "$tmp_command_file"
+                    printf  "$newline%s\n"  \
+                            "$input_record" >> "$tmp_command_file"
+                    newline='\n'
                 fi
                 ;;
             *)
-                # Other record (empty, comment, or command).
+                # Command or comment record.
                 if $user_match; then
                     printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
@@ -417,7 +430,6 @@ function process_option_cat {
 function process_command_file {
     local       app_name=''
     local       app_name_line=''
-    local       operation=$(gettext 'set up')
     local       commands_record=''
     local   -i  app_seq_num=0
     local   -i  app_tot_num=0
@@ -426,10 +438,6 @@ function process_command_file {
     app_tot_num=$(
         grep --regexp='.*#.* APP ' --count "$tmp_command_file" || true
         )
-
-    if $option_reset; then
-        operation=$(gettext 'reset')
-    fi
 
     if ! $option_gui; then
         text="$(gettext 'NUM/TOT  APP')
@@ -440,6 +448,7 @@ function process_command_file {
     while read -r commands_record; do
         case $commands_record in
             '')
+                # Blank line.
                 continue
                 ;;
             *'#'*' APP '*)
