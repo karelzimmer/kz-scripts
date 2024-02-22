@@ -133,8 +133,8 @@ def check_reboot():
     """
     try:
         with open('/var/run/reboot-required') as fh:
-            text = _('*** The computer must restart to complete the installati\
-on of updates ***')
+            text = _('*** The computer needs to be restarted to complete the i\
+nstallation of updates ***')
             kz_common.msg_info(PROGRAM_NAME, text)
     except FileNotFoundError as fnf:
         text = str(fnf)
