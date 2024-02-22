@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-16 08:16+0100\n"
+"POT-Creation-Date: 2024-02-21 16:28+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -610,6 +610,10 @@ msgstr "NUM  BESTAND"
 
 msgid "  0  No files present."
 msgstr "  0  Geen bestanden gevonden."
+
+#, sh-format
+msgid "To view the contents of FILE execute: ${BLUE}cat FILE$NORMAL"
+msgstr "Om de inhoud van BESTAND te bekijken voer uit: ${BLUE}cat FILE$NORMAL"
 
 #, sh-format
 msgid ""
