@@ -338,7 +338,7 @@ $(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
 function progress_indicator {
     local tmp_process_file
 
-    tmp_process_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.pf")
+    tmp_process_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.proc")
     while test -e "$tmp_process_file"; do
         printf '#'
         sleep 1
