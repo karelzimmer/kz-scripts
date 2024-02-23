@@ -66,7 +66,7 @@ declare     tmp_config_a=''
 declare     tmp_config_b=''
 declare     tmp_errors=''
 declare     tmp_exclude=''
-declare     progress_indicator_file=''
+declare     tmp_progress_indicator_file=''
 
 
 ###############################################################################
@@ -332,9 +332,9 @@ $(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
 
 
 # This function shows a progress indicator with growing number of '#'s as long
-# as the temporary progress file ($progress_indicator_file) exists.
+# as the temporary progress file ($tmp_progress_indicator_file) exists.
 function progress_indicator {
-    while test -e "$progress_indicator_file"; do
+    while test -e "$tmp_progress_indicator_file"; do
         printf '#'
         sleep 1
     done &
@@ -415,16 +415,16 @@ function signal {
             ;;
         exit)
             msg_log 'Cleanup temporary files...'
-            rm  --force                     \
-                --verbose                   \
-                "$HOME"/kz                  \
-                "$HOME"/kz.{1..99}          \
-                "$tmp_command_file"         \
-                "$tmp_config_a"             \
-                "$tmp_config_b"             \
-                "$tmp_errors"               \
-                "$tmp_exclude"              \
-                "$progress_indicator_file"  |& $LOGCMD
+            rm  --force                         \
+                --verbose                       \
+                "$HOME"/kz                      \
+                "$HOME"/kz.{1..99}              \
+                "$tmp_command_file"             \
+                "$tmp_config_a"                 \
+                "$tmp_config_b"                 \
+                "$tmp_errors"                   \
+                "$tmp_exclude"                  \
+                "$tmp_progress_indicator_file"  |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             msg_log "$text"
