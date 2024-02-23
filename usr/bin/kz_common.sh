@@ -63,7 +63,7 @@ declare     text=''
 declare     title=''
 declare     tmp_file_1=''
 declare     tmp_file_2=''
-declare     tmp_progress_indicator_file=''
+declare     tmp_process_file=''
 
 
 ###############################################################################
@@ -329,9 +329,17 @@ $(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
 
 
 # This function shows a progress indicator with growing number of '#'s as long
-# as the temporary progress file ($tmp_progress_indicator_file) exists.
+# as the temporary process file ($tmp_process_file) exists.
+# Usage:
+# 1. Call this function, i.e.
+#       progress_indicator
+# 2. Remove the temporary process file to stop the progress indicator, i.e.
+#       rm "$tmp_process_file"
 function progress_indicator {
-    while test -e "$tmp_progress_indicator_file"; do
+    local tmp_process_file
+
+    tmp_process_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.pf")
+    while test -e "$tmp_process_file"; do
         printf '#'
         sleep 1
     done &
@@ -418,7 +426,7 @@ function signal {
                 "$HOME"/kz.{1..99}              \
                 "$tmp_file_1"                   \
                 "$tmp_file_2"                   \
-                "$tmp_progress_indicator_file"  |& $LOGCMD
+                "$tmp_process_file"  |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             msg_log "$text"
