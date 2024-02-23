@@ -211,7 +211,7 @@ Disconnect media via Files.")"
     create_backup
     if [[ $backup_rc -ne $OK ]]; then
         # shellcheck disable=SC2034
-        rsync_messages=$(cat "$tmp_errors")
+        rsync_messages=$(cat "$tmp_file_2")
         text="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable,
@@ -351,11 +351,11 @@ function restore_settings_desktop_background {
 function create_backup {
     local   source=$HOME
 
-    tmp_exclude=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
-    tmp_errors=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    tmp_file_1=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
+    tmp_file_2=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
     # Déjà Dup: Some locations are ignored by default.
-    cat << EOF > "$tmp_exclude"
+    cat << EOF > "$tmp_file_1"
 .adobe/Flash_Player/AssetCache
 .cache
 .ccache
@@ -372,7 +372,7 @@ snap/*/*/.cache
 EOF
 
     # Skip git-controlled directories.
-    cat << EOF >> "$tmp_exclude"
+    cat << EOF >> "$tmp_file_1"
 $(
     find    "$HOME"         \
             -maxdepth 2     \
@@ -393,11 +393,11 @@ EOF
                 --verbose                       \
                 $dry_run_option                 \
                 --delete                        \
-                --exclude-from="$tmp_exclude"   \
+                --exclude-from="$tmp_file_1"    \
                 --delete-excluded               \
                 "$source"/                      \
                 "$target"/                      \
-                2> "$tmp_errors"                |
+                2> "$tmp_file_2"                |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
@@ -415,10 +415,10 @@ EOF
                 --human-readable                \
                 $dry_run_option                 \
                 --delete                        \
-                --exclude-from="$tmp_exclude"   \
+                --exclude-from="$tmp_file_1"    \
                 --delete-excluded               \
                 "$source"/                      \
-                "$target"/                      2> "$tmp_errors" ||
+                "$target"/                      2> "$tmp_file_2" ||
                                                 backup_rc=$?
     fi
 

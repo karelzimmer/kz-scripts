@@ -188,9 +188,7 @@ nd end with '.sh'.")"
         exit $OK
     fi
 
-    tmp_command_file=$(
-        mktemp -t "$PROGRAM_NAME-$DISTRO-$EDITION-XXXXXXXXXX.sh"
-        )
+    tmp_file_1=$(mktemp -t "$PROGRAM_NAME-$DISTRO-$EDITION-XXXXXXXXXX.sh")
 
     if $argument_app; then
         process_argument_app
@@ -357,14 +355,14 @@ function process_input_file_by_app {
                     app_match=true
                     no_app_match=false
                     printf  "$newline%s\n"  \
-                            "$input_record" >> "$tmp_command_file"
+                            "$input_record" >> "$tmp_file_1"
                     newline='\n'
                 fi
                 ;;
             *)
                 # Command or comment record.
                 if $app_match; then
-                    printf '%s\n' "$input_record" >> "$tmp_command_file"
+                    printf '%s\n' "$input_record" >> "$tmp_file_1"
                 fi
                 ;;
         esac
@@ -412,14 +410,14 @@ function process_input_file_by_host {
                     # Match on host name.
                     host_match=true
                     printf  "$newline%s\n"  \
-                            "$input_record" >> "$tmp_command_file"
+                            "$input_record" >> "$tmp_file_1"
                     newline='\n'
                 fi
                 ;;
             *)
                 # Command or comment record.
                 if $host_match; then
-                    printf '%s\n' "$input_record" >> "$tmp_command_file"
+                    printf '%s\n' "$input_record" >> "$tmp_file_1"
                 fi
                 ;;
         esac
@@ -429,7 +427,7 @@ function process_input_file_by_host {
 
 # This function displays the contents of the command file.
 function process_option_cat {
-    less --quit-if-one-screen "$tmp_command_file"
+    less --quit-if-one-screen "$tmp_file_1"
 }
 
 
@@ -443,7 +441,7 @@ function process_command_file {
     local   -i  cmd_seq_num=0
 
     app_tot_num=$(
-        grep --regexp='.*#.* APP ' --count "$tmp_command_file" || true
+        grep --regexp='.*#.* APP ' --count "$tmp_file_1" || true
         )
 
     if ! $option_gui; then
@@ -482,7 +480,7 @@ function process_command_file {
                 execute_command "$commands_record"
                 ;;
         esac
-    done < "$tmp_command_file"
+    done < "$tmp_file_1"
 }
 
 

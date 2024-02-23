@@ -61,11 +61,8 @@ declare -a  commandline_args=()
 declare     option_gui=false
 declare     text=''
 declare     title=''
-declare     tmp_command_file=''
-declare     tmp_config_a=''
-declare     tmp_config_b=''
-declare     tmp_errors=''
-declare     tmp_exclude=''
+declare     tmp_file_1=''
+declare     tmp_file_2=''
 declare     tmp_progress_indicator_file=''
 
 
@@ -86,7 +83,7 @@ function become_root {
 
     if [[ $UID -ne 0 ]]; then
         msg_log 'Delete the kz install command file created as non-root...'
-        rm --force --verbose "$tmp_command_file" |& $LOGCMD
+        rm --force --verbose "$tmp_file_1" |& $LOGCMD
         if $option_gui; then
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD
@@ -419,11 +416,8 @@ function signal {
                 --verbose                       \
                 "$HOME"/kz                      \
                 "$HOME"/kz.{1..99}              \
-                "$tmp_command_file"             \
-                "$tmp_config_a"                 \
-                "$tmp_config_b"                 \
-                "$tmp_errors"                   \
-                "$tmp_exclude"                  \
+                "$tmp_file_1"                   \
+                "$tmp_file_2"                   \
                 "$tmp_progress_indicator_file"  |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
