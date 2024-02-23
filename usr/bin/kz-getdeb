@@ -126,7 +126,7 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$tmp_file_2"                   |& $LOGCMD
-    rm --verbose "$tmp_process_file" |& $LOGCMD
+    rm --force --verbose "$tmp_process_file" |& $LOGCMD
 }
 
 
