@@ -139,7 +139,7 @@ function process_input {
             sort
             )
     cd "$HOME"
-    rm --force --verbose "$tmp_process_file" |& $LOGCMD 
+    rm --force --verbose "$tmp_process_file" |& $LOGCMD
 }
 
 
