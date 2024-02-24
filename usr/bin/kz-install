@@ -160,6 +160,8 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
+    local tmp_command_file=''
+
     input_file=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$EDITION.sh
 
     if $option_list; then
@@ -188,8 +190,9 @@ nd end with '.sh'.")"
         exit $OK
     fi
 
-    tmp_file_1=$(mktemp -t "$PROGRAM_NAME-$DISTRO-$EDITION-XXXXXXXXXX.sh")
-
+    tmp_command_file=$(
+        mktemp -t "$PROGRAM_NAME-$DISTRO-$EDITION-XXXXXXXXXX.sh"
+        )
     if $argument_app; then
         process_argument_app
     else
@@ -201,6 +204,10 @@ nd end with '.sh'.")"
         exit $OK
     fi
 
+    if [[ $UID -ne 0 ]]; then
+        msg_log 'Delete the kz install command file created as non-root...'
+        rm --force --verbose "$tmp_command_file" |& $LOGCMD
+    fi
     become_root
     check_on_ac_power
 
@@ -316,6 +323,7 @@ function process_argument_app {
         text="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
 ")"
         msg_info "$text"
+        rm --verbose "$tmp_command_file" |& $LOGCMD
         exit $ERROR
     fi
 }
@@ -355,14 +363,14 @@ function process_input_file_by_app {
                     app_match=true
                     no_app_match=false
                     printf  "$newline%s\n"  \
-                            "$input_record" >> "$tmp_file_1"
+                            "$input_record" >> "$tmp_command_file"
                     newline='\n'
                 fi
                 ;;
             *)
                 # Command or comment record.
                 if $app_match; then
-                    printf '%s\n' "$input_record" >> "$tmp_file_1"
+                    printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
                 ;;
         esac
@@ -410,14 +418,14 @@ function process_input_file_by_host {
                     # Match on host name.
                     host_match=true
                     printf  "$newline%s\n"  \
-                            "$input_record" >> "$tmp_file_1"
+                            "$input_record" >> "$tmp_command_file"
                     newline='\n'
                 fi
                 ;;
             *)
                 # Command or comment record.
                 if $host_match; then
-                    printf '%s\n' "$input_record" >> "$tmp_file_1"
+                    printf '%s\n' "$input_record" >> "$tmp_command_file"
                 fi
                 ;;
         esac
@@ -427,7 +435,8 @@ function process_input_file_by_host {
 
 # This function displays the contents of the command file.
 function process_option_cat {
-    less --quit-if-one-screen "$tmp_file_1"
+    less --quit-if-one-screen "$tmp_command_file"
+    rm "$tmp_command_file" |& $LOGCMD
 }
 
 
@@ -441,7 +450,10 @@ function process_command_file {
     local   -i  cmd_seq_num=0
 
     app_tot_num=$(
-        grep --regexp='.*#.* APP ' --count "$tmp_file_1" || true
+        grep    --regexp='.*#.* APP '   \
+                --count                 \
+                "$tmp_command_file"     ||
+        true
         )
 
     if ! $option_gui; then
@@ -480,7 +492,8 @@ function process_command_file {
                 execute_command "$commands_record"
                 ;;
         esac
-    done < "$tmp_file_1"
+    done < "$tmp_command_file"
+    rm --verbose "$tmp_command_file" |& $LOGCMD
 }
 
 

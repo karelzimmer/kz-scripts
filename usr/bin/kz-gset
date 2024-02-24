@@ -329,14 +329,19 @@ function process_option_delappfolder  {
 
 # This function records a change made through the GUI.
 function capture_gui_changes {
-    tmp_file_1=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
-    save_configuration_database A "$tmp_file_1"
+    local tmp_config_a_file=''
+    local tmp_config_b_file=''
+
+    tmp_config_a_file=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
+    save_configuration_database A "$tmp_config_a_file"
     text=$(gettext 'Now make the change in the graphical workspace.')
     msg_info "$text"
     wait_for_enter
-    tmp_file_2=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
-    save_configuration_database B "$tmp_file_2"
-    report_database_changes "$tmp_file_1" "$tmp_file_2"
+    tmp_config_b_file=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
+    save_configuration_database B "$tmp_config_b_file"
+    report_database_changes "$tmp_config_a_file" "$tmp_config_b_file"
+    rm --verbose "$tmp_config_a_file" "$tmp_config_b_file" |& $LOGCMD
+
 }
 
 
