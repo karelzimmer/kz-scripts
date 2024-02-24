@@ -63,7 +63,6 @@ declare     text=''
 declare     title=''
 declare     tmp_file_1=''
 declare     tmp_file_2=''
-declare     tmp_process_file=''
 
 
 ###############################################################################
@@ -328,24 +327,6 @@ $(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
 }
 
 
-# This function shows a progress indicator with growing number of '#'s as long
-# as the temporary process file ($tmp_process_file) exists.
-# Usage:
-# 1. Call this function, i.e.
-#       progress_indicator
-# 2. Remove the temporary process file to stop the progress indicator, i.e.
-#       rm "$tmp_process_file"
-function progress_indicator {
-    local tmp_process_file
-
-    tmp_process_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.proc")
-    while test -e "$tmp_process_file"; do
-        printf '#'
-        sleep 1
-    done &
-}
-
-
 # This function processes the signals for which the trap was set by function
 # init_script (script-hardening).
 function signal {
@@ -425,8 +406,7 @@ function signal {
                 "$HOME"/kz                      \
                 "$HOME"/kz.{1..99}              \
                 "$tmp_file_1"                   \
-                "$tmp_file_2"                   \
-                "$tmp_process_file"  |& $LOGCMD
+                "$tmp_file_2"                   |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             msg_log "$text"

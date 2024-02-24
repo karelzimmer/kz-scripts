@@ -111,22 +111,26 @@ function install_package {
     local   kz_deb_site_uri='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
 
     msg_info 'Download kz.deb...'
-    tmp_file_2=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    wget --output-document="$tmp_file_2" $kz_deb_site_uri |& $LOGCMD
+    tmp_kz_deb=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    wget --output-document="$tmp_kz_deb" $kz_deb_site_uri |& $LOGCMD
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
-    chmod o+r "$tmp_file_2" |& $LOGCMD
+    chmod o+r "$tmp_kz_deb" |& $LOGCMD
 
     msg_info 'Install. kz.deb...'
     check_for_active_updates
-    progress_indicator
-    sudo    DEBIAN_FRONTEND=noninteractive  \
+    # Progress indicator with growing number of '#'s as long as the
+    # installation is in progress.
+    while test -e "$tmp_kz_deb"; do
+        printf '#'
+        sleep 1
+    done &    sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "$tmp_file_2"                   |& $LOGCMD
-    rm --force --verbose "$tmp_process_file" |& $LOGCMD
+            "$tmp_kz_deb"                   |& $LOGCMD
+    rm --verbose "$tmp_kz_deb" |& $LOGCMD
 }
 
 

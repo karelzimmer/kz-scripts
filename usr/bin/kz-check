@@ -93,7 +93,6 @@ function process_input {
 
     text=$(gettext 'Checking scripts (this may take a while)')...
     msg_info "$text"
-    progress_indicator
     cd "$scripts_repo"
     while read -r script; do
         scriptdir=$(realpath "$(dirname "$script")")
@@ -139,7 +138,6 @@ function process_input {
             sort
             )
     cd "$HOME"
-    rm --force --verbose "$tmp_process_file" |& $LOGCMD
 }
 
 
