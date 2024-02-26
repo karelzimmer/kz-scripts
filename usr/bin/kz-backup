@@ -215,11 +215,11 @@ Disconnect media via Files.")"
         rsync_messages=$(cat "$error_file")
         text="$(eval_gettext "Backup ended with warnings or errors.
 
-Some files may not be readable,
-or were any files added or removed while creating the backup,
-or is there not enough space on \$target.
+Some files may not be readable, or
+were any files added or removed while creating the backup, or
+is there not enough space on \$target.
 
-Check the rsync messages:
+Check the rsync messages (also in \$error_file):
 \$rsync_messages
 
 Try creating the back up again.
