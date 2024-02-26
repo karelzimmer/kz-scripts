@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 08:50+0100\n"
+"POT-Creation-Date: 2024-02-26 08:25+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -518,8 +518,9 @@ msgstr ""
 "< is de oude   instelling (A),\n"
 "> is de nieuwe instelling (B):"
 
-msgid "When CHANGEs execute:"
-msgstr "Bij WIJZIGINGen voer uit:"
+#, sh-format
+msgid "When CHANGEs execute: ${BLUE}gsettings set CHANGE$NORMAL"
+msgstr "Bij WIJZIGINGen voer uit: ${BLUE}gsettings set WIJZIGING$NORMAL"
 
 msgid "Install apps"
 msgstr "Apps installeren"
@@ -708,9 +709,6 @@ msgstr ""
 
 msgid "Checking scripts"
 msgstr "Scripts controleren"
-
-msgid "Checking scripts (this may take a while)"
-msgstr "Scripts controleren (dit kan even duren)"
 
 msgid "    Unknown script. Function check_code cannot check script code."
 msgstr ""

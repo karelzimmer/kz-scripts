@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-22 08:52+0100\n"
+"POT-Creation-Date: 2024-02-26 08:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -611,9 +611,6 @@ msgid ""
 msgstr ""
 
 msgid "Checking scripts"
-msgstr ""
-
-msgid "Checking scripts (this may take a while)"
 msgstr ""
 
 msgid "    Unknown script. Function check_code cannot check script code."
