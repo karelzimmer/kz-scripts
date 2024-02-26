@@ -58,10 +58,10 @@ readonly    SETTINGS=$HOME/.kz
 ###############################################################################
 
 declare -a  commandline_args=()
+declare     kz_deb_file=''
 declare     option_gui=false
 declare     text=''
 declare     title=''
-
 
 ###############################################################################
 # Functions
@@ -396,6 +396,9 @@ function signal {
             exit "$rc"
             ;;
         exit)
+            # If the installation of the Debian package kz in kz-getdeb fails,
+            # stop the progress indicator.
+            rm --force --verbose "$kz_deb_file"
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             msg_log "$text"

@@ -16,15 +16,15 @@ if  ! source "$(dirname "$0")"/kz_common.sh 2> \
             >(systemd-cat --identifier=kz-getdeb --priority=debug); then
     echo    'Download kz_common.sh...' |&
             systemd-cat --identifier=kz-getdeb --priority=debug
-    declare tmp_kz_common_file=$(mktemp -t "kz-getdeb-kz_common-XXXXXXXXXX.sh")
+    declare kz_common_file=$(mktemp -t "kz-getdeb-kz_common-XXXXXXXXXX.sh")
     declare kz_common_github_uri='https://raw.githubusercontent.com/karel'
             kz_common_github_uri+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
-    wget    --output-document="$tmp_kz_common_file" $kz_common_github_uri |&
+    wget    --output-document="$kz_common_file" $kz_common_github_uri |&
             systemd-cat --identifier=kz-getdeb --priority=debug
     echo    'Source kz_common.sh...' |&
             systemd-cat --identifier=kz-getdeb --priority=debug
-    source  "$tmp_kz_common_file"
-    rm      --verbose "$tmp_kz_common_file" |&
+    source  "$kz_common_file"
+    rm      --verbose "$kz_common_file" |&
             systemd-cat --identifier=kz-getdeb --priority=debug
 fi
 
@@ -108,20 +108,20 @@ function process_input {
 
 # This function installs package kz.
 function install_package {
-    local tmp_kz_deb_file=''
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
 
     msg_info 'Download kz.deb...'
-    tmp_kz_deb_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    wget --output-document="$tmp_kz_deb_file" $kz_deb_site_uri |& $LOGCMD
+    # Variable kz_deb_file is declared in kz_common.sh.
+    kz_deb_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    wget --output-document="$kz_deb_file" $kz_deb_site_uri |& $LOGCMD
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
-    chmod o+r "$tmp_kz_deb_file" |& $LOGCMD
+    chmod o+r "$kz_deb_file" |& $LOGCMD
 
     msg_info 'Install. kz.deb...'
     check_for_active_updates
     # Progress indicator with growing number of '#'s as long as the temporary
     # debian package file exists, i.e. installation is in progress.
-    while test -e "$tmp_kz_deb_file"; do
+    while test -e "$kz_deb_file"; do
         printf '#'
         sleep 1
     done &
@@ -131,8 +131,8 @@ function install_package {
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "$tmp_kz_deb_file"              |& $LOGCMD
-    rm --verbose "$tmp_kz_deb_file" |& $LOGCMD
+            "$kz_deb_file"                  |& $LOGCMD
+    rm --verbose "$kz_deb_file" |& $LOGCMD
 }
 
 

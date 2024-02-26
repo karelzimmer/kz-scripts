@@ -134,7 +134,7 @@ function process_input {
     local   -i  backup_rc=0
     local       rsync_messages=''
     local       target=''
-    local       tmp_error_file=''
+    local       error_file=''
 
     if $option_target; then
         if ! [[ -d $target_argument ]]; then
@@ -212,7 +212,7 @@ Disconnect media via Files.")"
     create_backup
     if [[ $backup_rc -ne $OK ]]; then
         # shellcheck disable=SC2034
-        rsync_messages=$(cat "$tmp_error_file")
+        rsync_messages=$(cat "$error_file")
         text="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable,
@@ -226,9 +226,9 @@ Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz backup'.")"
         msg_error "$text"
-        rm --verbose "$tmp_error_file" |& $LOGCMD
         exit $ERROR
     fi
+    rm --verbose "$error_file" |& $LOGCMD
 }
 
 
@@ -352,13 +352,13 @@ function restore_settings_desktop_background {
 # This function creates the backup.
 function create_backup {
     local source=$HOME
-    local tmp_exclude_file=''
+    local exclude_file=''
 
-    tmp_exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
-    tmp_error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
 
     # Déjà Dup: Some locations are ignored by default.
-    cat << EOF > "$tmp_exclude_file"
+    cat << EOF > "$exclude_file"
 .adobe/Flash_Player/AssetCache
 .cache
 .ccache
@@ -375,7 +375,7 @@ snap/*/*/.cache
 EOF
 
     # Skip git-controlled directories.
-    cat << EOF >> "$tmp_exclude_file"
+    cat << EOF >> "$exclude_file"
 $(
     find    "$HOME"         \
             -maxdepth 2     \
@@ -392,40 +392,38 @@ EOF
     text=$(gettext 'Preparing backup (this may take a while)')
     if $option_gui; then
         msg_log "$title"...
-        rsync   --archive                           \
-                --verbose                           \
-                $dry_run_option                     \
-                --delete                            \
-                --exclude-from="$tmp_exclude_file"  \
-                --delete-excluded                   \
-                "$source"/                          \
-                "$target"/                          \
-                2> "$tmp_error_file"                |
-        sed     --expression='s/^/#/'               |
-        zenity  --progress                          \
-                --auto-close                        \
-                --no-cancel                         \
-                --pulsate                           \
-                --width     600                     \
-                --height    50                      \
-                --title     "$title"                \
-                --text      "$text"                 2> >($LOGCMD) ||
-                                                    backup_rc=$?
+        rsync   --archive                       \
+                --verbose                       \
+                $dry_run_option                 \
+                --delete                        \
+                --exclude-from="$exclude_file"  \
+                --delete-excluded               \
+                "$source"/                      \
+                "$target"/                      \
+                2> "$error_file"                |
+        sed     --expression='s/^/#/'           |
+        zenity  --progress                      \
+                --auto-close                    \
+                --no-cancel                     \
+                --pulsate                       \
+                --width     600                 \
+                --height    50                  \
+                --title     "$title"            \
+                --text      "$text"             2> >($LOGCMD) || backup_rc=$?
     else
         text+='...'
         msg_info "$text"
-        rsync   --archive                           \
-                --verbose                           \
-                --human-readable                    \
-                $dry_run_option                     \
-                --delete                            \
-                --exclude-from="$tmp_exclude_file"  \
-                --delete-excluded                   \
-                "$source"/                          \
-                "$target"/                          2> "$tmp_error_file" ||
-                                                    backup_rc=$?
+        rsync   --archive                       \
+                --verbose                       \
+                --human-readable                \
+                $dry_run_option                 \
+                --delete                        \
+                --exclude-from="$exclude_file"  \
+                --delete-excluded               \
+                "$source"/                      \
+                "$target"/                     2> "$error_file" || backup_rc=$?
     fi
-    rm --verbose "$tmp_exclude_file" |& $LOGCMD
+    rm --verbose "$exclude_file" |& $LOGCMD
     text=$(gettext "Writing data from memory (this may take a while)")
     if $option_gui; then
         msg_log "$text"...

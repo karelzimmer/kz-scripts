@@ -134,7 +134,7 @@ function process_input {
     local   -i  restore_rc=0
     local       rsync_messages=''
     local       target=$HOME
-    local       tmp_error_file=''
+    local       error_file=''
 
     if $option_source; then
         if ! [[ -d $source_argument ]]; then
@@ -221,7 +221,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
 
     if [[ $restore_rc -ne $OK ]]; then
         # shellcheck disable=SC2034
-        rsync_messages=$(cat "$tmp_error_file")
+        rsync_messages=$(cat "$error_file")
         text=$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable,
@@ -235,16 +235,16 @@ Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz restore'.")
         msg_error "$text"
-        rm --verbose "$tmp_error_file" |& $LOGCMD
         exit $ERROR
     fi
+    rm --verbose "$error_file" |& $LOGCMD
 }
 
 
 # This function restores the backup.
 function restore_backup {
 
-    tmp_error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
@@ -255,7 +255,7 @@ function restore_backup {
                 $dry_run_option         \
                 "$source"/              \
                 "$target"/              \
-                2> "$tmp_error_file"    |
+                2> "$error_file"    |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -273,7 +273,7 @@ function restore_backup {
                 --human-readable        \
                 $dry_run_option         \
                 "$source"/              \
-                "$target"/              2> "$tmp_error_file" || restore_rc=$?
+                "$target"/              2> "$error_file" || restore_rc=$?
     fi
 
     text=$(gettext "Writing data from memory (this may take a while)")

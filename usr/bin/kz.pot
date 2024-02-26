@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-26 08:18+0100\n"
+"POT-Creation-Date: 2024-02-26 09:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -454,7 +454,8 @@ msgid ""
 "> is the new setting (B):"
 msgstr ""
 
-msgid "When CHANGEs execute:"
+#, sh-format
+msgid "When CHANGEs execute: ${BLUE}gsettings set CHANGE$NORMAL"
 msgstr ""
 
 msgid "Install apps"
