@@ -120,7 +120,7 @@ function install_package {
     msg_info 'Install. kz.deb...'
     check_for_active_updates
     # Progress indicator with growing number of '#'s as long as the temporary
-    # debian package file exists, i.e. installation is in progress.
+    # Debian package file exists, i.e. installation is in progress.
     while test -e "$kz_deb_file"; do
         printf '#'
         sleep 1
