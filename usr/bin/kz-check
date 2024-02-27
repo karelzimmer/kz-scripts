@@ -91,13 +91,13 @@ function process_input {
     local   scriptname=''
     local   scripts_repo=$HOME/kz-scripts
 
-    text=$(gettext 'Checking scripts')...
+    text=$(gettext 'Checking scripts'):
     msg_info "$text"
     cd "$scripts_repo"
     while read -r script; do
         scriptdir=$(realpath "$(dirname "$script")")
         scriptname=$(basename "$script")
-        msg_info "...$scriptname"
+        msg_info "  $scriptname"
         check_trailing_spaces
         case $scriptname in
             *.policy)
