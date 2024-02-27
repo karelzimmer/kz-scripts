@@ -76,7 +76,7 @@ def perform_update():
     command = 'sudo apt-get update'
     perform_command(command)
 
-    command = 'sudo apt-get upgrade --yes'
+    command = 'sudo apt-get dist-upgrade --yes'
     perform_command(command)
 
     command = 'sudo snap refresh'
