@@ -204,7 +204,7 @@ nd end with '.sh'.")"
 
     if [[ $UID -ne 0 ]]; then
         msg_log 'Delete the kz install command file created as non-root...'
-        rm --force --verbose "$command_file" |& $LOGCMD
+        rm --verbose "$command_file" |& $LOGCMD
     fi
     become_root
     check_on_ac_power
