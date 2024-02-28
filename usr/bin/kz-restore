@@ -211,7 +211,6 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
                     --height    50          \
                     --title     "$title"    \
                     --text      "$text"     2> >($LOGCMD)
-            sleep 2
         else
             text+='...'
             msg_info "$text"
@@ -265,7 +264,6 @@ function restore_backup {
                 --height    50          \
                 --title     "$title"    \
                 --text      "$text"     2> >($LOGCMD) || restore_rc=$?
-        sleep 2
     else
         text+='...'
         msg_info "$text"
@@ -289,7 +287,6 @@ function restore_backup {
                 --height    50          \
                 --title     "$title"    \
                 --text      "$text"     &> >($LOGCMD)
-        sleep 2
     else
         text+='...'
         msg_info "$text"

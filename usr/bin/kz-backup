@@ -200,7 +200,6 @@ Disconnect media via Files.")"
                         --height    50          \
                         --title     "$title"    \
                         --text      "$text"     2> >($LOGCMD)
-                sleep 2
             else
                 text+='...'
                 msg_info "$text"
@@ -410,7 +409,6 @@ EOF
                 --height    50                  \
                 --title     "$title"            \
                 --text      "$text"             2> >($LOGCMD) || backup_rc=$?
-        sleep 2
     else
         text+='...'
         msg_info "$text"
@@ -437,7 +435,6 @@ EOF
                 --height    50          \
                 --title     "$title"    \
                 --text      "$text"     &> >($LOGCMD)
-        sleep 2
     else
         text+='...'
         msg_info "$text"
