@@ -252,19 +252,14 @@ process_input() {
     msg_log "$title"
     if $option_gui; then
         (
-        sleep 2
         printf '%s\n' "#$text1"
         check_dependencies
-        sleep 2
         printf '%s\n' "#$text2"
         create_nas_login
-        sleep 2
         printf '%s\n' "#$text3"
         create_systemd_unit_file
-        sleep 2
         printf '%s\n' "#$text4"
         mount_nas
-        sleep 2
         ) |&
         zenity  --progress              \
                 --pulsate               \

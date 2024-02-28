@@ -178,7 +178,6 @@ function upload_website {
         msg_error "$text"
         exit $ERROR
     fi
-    sleep 5
 }
 
 
