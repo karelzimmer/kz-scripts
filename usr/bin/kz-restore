@@ -249,6 +249,7 @@ function restore_backup {
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
+        sleep 2
         msg_log "$title"...
         rsync   --archive               \
                 --verbose               \

@@ -391,6 +391,7 @@ EOF
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     if $option_gui; then
+        sleep 2
         msg_log "$title"...
         rsync   --archive                       \
                 --verbose                       \
