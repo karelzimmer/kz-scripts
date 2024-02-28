@@ -202,7 +202,6 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
         title=$(gettext 'Restore settings')
         text=$title
         if $option_gui; then
-            sleep 2
             restore_settings                |
             zenity  --progress              \
                     --pulsate               \
@@ -212,6 +211,7 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
                     --height    50          \
                     --title     "$title"    \
                     --text      "$text"     2> >($LOGCMD)
+            sleep 2
         else
             text+='...'
             msg_info "$text"
@@ -249,7 +249,6 @@ function restore_backup {
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
-        sleep 2
         msg_log "$title"...
         rsync   --archive               \
                 --verbose               \
@@ -266,6 +265,7 @@ function restore_backup {
                 --height    50          \
                 --title     "$title"    \
                 --text      "$text"     2> >($LOGCMD) || restore_rc=$?
+        sleep 2
     else
         text+='...'
         msg_info "$text"
@@ -289,6 +289,7 @@ function restore_backup {
                 --height    50          \
                 --title     "$title"    \
                 --text      "$text"     &> >($LOGCMD)
+        sleep 2
     else
         text+='...'
         msg_info "$text"

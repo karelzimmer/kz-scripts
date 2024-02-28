@@ -191,7 +191,6 @@ Disconnect media via Files.")"
             title=$(gettext 'Secure settings')
             text=$title
             if $option_gui; then
-                sleep 2
                 backup_settings                 |
                 zenity  --progress              \
                         --pulsate               \
@@ -201,6 +200,7 @@ Disconnect media via Files.")"
                         --height    50          \
                         --title     "$title"    \
                         --text      "$text"     2> >($LOGCMD)
+                sleep 2
             else
                 text+='...'
                 msg_info "$text"
@@ -391,7 +391,6 @@ EOF
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     if $option_gui; then
-        sleep 2
         msg_log "$title"...
         rsync   --archive                       \
                 --verbose                       \
@@ -411,6 +410,7 @@ EOF
                 --height    50                  \
                 --title     "$title"            \
                 --text      "$text"             2> >($LOGCMD) || backup_rc=$?
+        sleep 2
     else
         text+='...'
         msg_info "$text"
@@ -437,6 +437,7 @@ EOF
                 --height    50          \
                 --title     "$title"    \
                 --text      "$text"     &> >($LOGCMD)
+        sleep 2
     else
         text+='...'
         msg_info "$text"
