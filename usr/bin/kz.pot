@@ -350,7 +350,7 @@ msgstr ""
 msgid "Wait ${check_wait}s for another package manager to finish..."
 msgstr ""
 
-msgid "Install kz package"
+msgid "Install package kz"
 msgstr ""
 
 msgid "Finished"

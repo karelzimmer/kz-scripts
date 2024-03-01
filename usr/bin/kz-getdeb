@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # shellcheck shell=bash source=kz_common.sh disable=SC2155
 ###############################################################################
-# Install kz package.
+# Install package kz.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2016-2024.
@@ -34,7 +34,7 @@ fi
 ###############################################################################
 
 readonly    PROGRAM_NAME='kz-getdeb'
-readonly    PROGRAM_DESC=$(gettext 'Install kz package')
+readonly    PROGRAM_DESC=$(gettext 'Install package kz')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
@@ -110,14 +110,14 @@ function process_input {
 function install_package {
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/kz_2.4.7_all.deb'
 
-    msg_info 'Download kz.deb...'
+    msg_info "$(gettext 'Download package kz')..."
     # Variable kz_deb_file is declared in kz_common.sh.
     kz_deb_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget --output-document="$kz_deb_file" $kz_deb_site_uri |& $LOGCMD
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$kz_deb_file" |& $LOGCMD
 
-    msg_info 'Install. kz.deb...'
+    msg_info "$(gettext 'Install package kz')..."
     check_for_active_updates
     # Progress indicator with growing number of '#'s as long as the temporary
     # Debian package file exists, i.e. installation is in progress.
