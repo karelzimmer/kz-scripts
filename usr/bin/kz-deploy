@@ -186,14 +186,14 @@ function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
     text=$(gettext 'Install package')...
     msg_info "$text"
-    msg_log 'Calling kz-getdeb...'
-    if ! wget --output-document=- karelzimmer.nl/kz.sh 2> >($LOGCMD) | bash
+    msg_log 'Calling kz-getdeb (via wget getdeb and bash getdeb)...'
+    if ! wget --output-document=- karelzimmer.nl/getdeb 2> >($LOGCMD) | bash
     then
         text=$(gettext 'Install package kz failed.')
         msg_error "$text"
         exit $ERROR
     fi
-    msg_log 'Called kz-getdeb.'
+    msg_log 'Called kz-getdeb (via wget getdeb and bash getdeb).'
 }
 
 

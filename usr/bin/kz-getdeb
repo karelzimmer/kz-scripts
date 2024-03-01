@@ -161,8 +161,8 @@ $(gettext "Type 'exit' to close this window.")"
     else
         msg_info "\n$text"
     fi
-    msg_log 'Cleanup downloaded kz.sh-files...'
-    rm --force --verbose kz.sh kz.sh.{1..99} |& $LOGCMD
+    msg_log 'Cleanup downloaded getdeb files...'
+    rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
     exit $OK
 }
 
