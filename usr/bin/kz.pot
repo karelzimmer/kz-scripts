@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-26 13:05+0100\n"
+"POT-Creation-Date: 2024-03-02 18:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,14 +125,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
-"   or: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE"
+"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"          COMMAND [ARGUMENT...]"
 msgstr ""
 
 #, sh-format
-msgid ""
-"Usage: $DISPLAY_NAME COMMAND [ARGUMENT...]\n"
-"   or: $DISPLAY_NAME OPTION"
+msgid "Usage: $DISPLAY_NAME [OPTION...] COMMAND [ARGUMENT...]"
 msgstr ""
 
 msgid "  -l, --list     show available COMMANDs"
@@ -338,9 +336,6 @@ msgid "Upload website"
 msgstr ""
 
 msgid "Website upload failed."
-msgstr ""
-
-msgid "Download package kz"
 msgstr ""
 
 msgid "Install package kz failed."
