@@ -398,7 +398,7 @@ function signal {
         exit)
             # If the installation of the Debian package kz in kz-getdeb fails,
             # stop the progress indicator.
-            rm --force --verbose "$kz_deb_file"
+            rm --force --verbose "$kz_deb_file" |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             msg_log "$text"
