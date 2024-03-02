@@ -41,6 +41,7 @@ kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
+gsettings set org.gnome.desktop.interface locate-pointer true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
@@ -68,6 +69,7 @@ gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
 gsettings reset org.gnome.desktop.interface clock-show-date
 gsettings reset org.gnome.desktop.interface clock-show-weekday
+gsettings reset org.gnome.desktop.interface locate-pointer
 gsettings reset org.gnome.desktop.interface show-battery-percentage
 gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
 gsettings reset org.gnome.desktop.screensaver lock-enabled
