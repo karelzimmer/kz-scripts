@@ -112,18 +112,18 @@ function install_package {
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
 
     msg_info "Download $kz_deb_site_file..."
-    # Variable kz_deb_file is declared in kz_common.sh.
-    kz_deb_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    wget    --output-document="$kz_deb_file"        \
+    # Variable kz_deb_local_file is declared in kz_common.sh.
+    kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
-    chmod o+r "$kz_deb_file" |& $LOGCMD
+    chmod o+r "$kz_deb_local_file" |& $LOGCMD
 
     msg_info "Install. $kz_deb_site_file..."
     check_for_active_updates
-    # Progress indicator with growing number of '#'s as long as the temporary
+    # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress.
-    while test -e "$kz_deb_file"; do
+    while test -e "$kz_deb_local_file"; do
         printf '#'
         sleep 1
     done &
@@ -133,8 +133,8 @@ function install_package {
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "$kz_deb_file"                  |& $LOGCMD
-    rm --verbose "$kz_deb_file" |& $LOGCMD
+            "$kz_deb_local_file"            |& $LOGCMD
+    rm --verbose "$kz_deb_local_file" |& $LOGCMD
 }
 
 
