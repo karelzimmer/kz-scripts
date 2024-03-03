@@ -97,7 +97,7 @@ function process_input {
     while read -r script; do
         scriptdir=$(realpath "$(dirname "$script")")
         scriptname=$(basename "$script")
-        msg_info "  $scriptname"
+        msg_info "  $(realpath "$script")"
         check_trailing_spaces
         case $scriptname in
             *.policy)
