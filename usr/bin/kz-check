@@ -126,16 +126,16 @@ function process_input {
                 ;;
         esac
     done < <(
-            find .                      \
-            -type f                     \
-            -not -path './.git*'        \
-            -not -path '*/__pycache__*' \
-            -not -name kz.mo            \
-            -not -name kz.po            \
-            -not -name kz.pot           \
-            -not -name LICENSE          \
-            -not -name README.md        \
-            -print                      |
+            find    .                           \
+                    -type f                     \
+                    -not -path './.git*'        \
+                    -not -path '*/__pycache__*' \
+                    -not -name kz.mo            \
+                    -not -name kz.po            \
+                    -not -name kz.pot           \
+                    -not -name LICENSE          \
+                    -not -name README.md        \
+                    -print                      |
             sort
             )
     cd "$HOME"
