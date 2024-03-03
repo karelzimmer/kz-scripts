@@ -55,39 +55,34 @@ declare     exec_program_name=''
 
 # This function handles the script options and arguments.
 function check_input {
-    # No parsing here with getopt like in all other scripts, because with
-    # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
     if [[ -z "$*" ]]; then
         msg_info "$USAGE"
         exit $ERROR
     fi
-    case $1 in
-        -h|--help)
-            process_option_help
-            exit $OK
-            ;;
-        -u|--usage)
-            process_option_usage
-            exit $OK
-            ;;
-        -v|--version)
-            process_option_version
-            exit $OK
-            ;;
-        -l|--list)
-            process_option_list
-            exit $OK
-            ;;
-        -*)
-            text="$DISPLAY_NAME: $(gettext 'invalid option'): $1
+
+    # No parsing here with getopt like in all other scripts, because with
+    # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
+    if [[ '--help' == *$1* ]]; then
+        process_option_help
+        exit $OK
+    elif [[ '--usage' == *$1* ]]; then
+        process_option_usage
+        exit $OK
+    elif [[ '--version' == *$1* ]]; then
+        process_option_version
+        exit $OK
+    elif [[ '--list' == *$1* ]]; then
+        process_option_list
+        exit $OK
+    elif [[ $1 == '-'* ]]; then
+        text="$DISPLAY_NAME: $(gettext 'invalid option'): $1
 $USAGE_LINE"
-            msg_info "$text"
-            exit $ERROR
-            ;;
-        *)
-            exec_program_name=$1
-            ;;
-    esac
+        msg_info "$text"
+        exit $ERROR
+    else
+        exec_program_name=$1
+    fi
+
     if ! [[ -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
         text="$DISPLAY_NAME: $exec_program_name: \
 $(gettext "command does not exist")
