@@ -62,16 +62,16 @@ function check_input {
 
     # No parsing here with getopt like in all other scripts, because with
     # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
-    if [[ '--help' == *$1* ]]; then
+    if [[ '-help' == $1* || '--help' == $1* ]]; then
         process_option_help
         exit $OK
-    elif [[ '--usage' == *$1* ]]; then
+    elif [[ '-usage' == $1* || '--usage' == $1* ]]; then
         process_option_usage
         exit $OK
-    elif [[ '--version' == *$1* ]]; then
+    elif [[ '-version' == $1* || '--version' == $1* ]]; then
         process_option_version
         exit $OK
-    elif [[ '--list' == *$1* ]]; then
+    elif [[ '-list' == $1* || '--list' == $1* ]]; then
         process_option_list
         exit $OK
     elif [[ $1 == '-'* ]]; then
