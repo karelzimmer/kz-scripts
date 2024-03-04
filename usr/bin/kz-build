@@ -263,7 +263,8 @@ function build_deb {
     printf '%s' "$build_id" > "${DEB_TARGETS[build]}"/$PROGRAM_NAME.id
 
     # Create Debian package in kz-uploads.
-    # See instructions in Linux-info.txt if on Debian < 12.
+    # See instructions in https://karelzimmer.nl/assets/kz-docs/Linux-info.pdf
+    # if on Debian < 12.
     check_for_active_updates
     fakeroot    dpkg-deb                            \
                 --build                             \
