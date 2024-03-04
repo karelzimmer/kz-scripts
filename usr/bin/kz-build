@@ -263,11 +263,9 @@ function build_deb {
     printf '%s' "$build_id" > "${DEB_TARGETS[build]}"/$PROGRAM_NAME.id
 
     # Create Debian package in kz-uploads.
-    # Debian supports xz as maximum compression, the default Ubuntu is zst.
     check_for_active_updates
     fakeroot    dpkg-deb                            \
                 --build                             \
-                -Zxz                                \
                 "$DEB_REPO_DISTDIR"                 \
                 "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
 }
