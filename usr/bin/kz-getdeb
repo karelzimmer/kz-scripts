@@ -111,7 +111,7 @@ function install_package {
     local       kz_deb_site_file=kz_2.4.7_all.deb
     local       kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
     local       kz_deb_local_file_xz='/tmp/kz_2.4.7_all_xz.deb'
-    local -i    rc=0
+    local -i    kz_deb_install_rc=0
 
     msg_info "Download $kz_deb_site_file..."
     # Variable kz_deb_local_file is declared in kz_common.sh.
@@ -135,8 +135,8 @@ function install_package {
             --allow-downgrades              \
             --reinstall                     \
             --yes                           \
-            "$kz_deb_local_file"            |& $LOGCMD || rc=$?
-    if [[ $rc -ne $OK ]]; then
+            "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
+    if [[ $kz_deb_install_rc -ne $OK ]]; then
         # Try installing package kz that uses xz by repackaging it.
         msg_log 'Install required packages...'
         sudo    apt-get install --yes binutils zstd |& $LOGCMD
