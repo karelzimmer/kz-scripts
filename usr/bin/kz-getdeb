@@ -110,7 +110,6 @@ function process_input {
 function install_package {
     local       kz_deb_site_file=kz_2.4.7_all.deb
     local       kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
-    local       kz_deb_local_file_xz='/tmp/kz_2.4.7_all_xz.deb'
     local -i    rc=0
 
     msg_info "Download $kz_deb_site_file..."
@@ -137,27 +136,30 @@ function install_package {
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || rc=$?
     if [[ $rc -ne $OK ]]; then
-        # Try installing a .deb package that uses zstd by repackaging it.
+        # Try installing package kz that uses xz by repackaging it.
         msg_log 'Install required packages...'
         sudo apt-get install --yes binutils zstd |& $LOGCMD
         msg_log 'Extract files from the archive...'
-        ar x --output=/tmp "$kz_deb_local_file"
+        cd /tmp
+        ar -xv "$kz_deb_local_file" |& $LOGCMD
         msg_log 'Uncompress zstd files an re-compress them using xz...'
-        zstd -d < /tmp/control.tar.zst | xz > /tmp/control.tar.xz
-        zstd -d < /tmp/data.tar.zst | xz > /tmp/data.tar.xz
+        zstd --uncompress < control.tar.zst                     |
+            xz --compress --verbose --verbose > control.tar.xz  |& $LOGCMD
+        zstd --uncompress < data.tar.zst                        |
+            xz --compress --verbose --verbose > data.tar.xz     |& $LOGCMD
         msg_log 'Re-create the Debian package...'
-        ar  -m -c -a sdsd           \
-            "$kz_deb_local_file_xz" \
-            /tmp/debian-binary      \
-            /tmp/control.tar.xz     \
-            /tmp/data.tar.xz
-        mv --verbose "$kz_deb_local_file_xz" "$kz_deb_local_file" |& $LOGCMD
+        ar  -mcav sdsd              \
+            xz"$kz_deb_local_file"  \
+            debian-binary           \
+            control.tar.xz          \
+            data.tar.xz             |& $LOGCMD
+        mv --verbose xz"$kz_deb_local_file" "$kz_deb_local_file" |& $LOGCMD
         msg_log 'Clean up...'
-        rm  /tmp/debian-binary      \
-            /tmp/control.tar.xz     \
-            /tmp/data.tar.xz        \
-            /tmp/control.tar.zst    \
-            /tmp/data.tar.zst
+        rm  debian-binary      \
+            control.tar.xz     \
+            data.tar.xz        \
+            control.tar.zst    \
+            data.tar.zst
         msg_log 'Install repackaged kz_2.4.7_all.deb...'
         sudo    DEBIAN_FRONTEND=noninteractive  \
                 apt-get                         \
