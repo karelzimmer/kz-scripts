@@ -136,7 +136,7 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || rc=$?
-    if [[ $rc -eq $OK ]]; then
+    if [[ $rc -ne $OK ]]; then
         # Try installing a .deb package that uses zstd by repackaging it.
         msg_log 'Install required packages...'
         sudo apt-get install --yes binutils zstd |& $LOGCMD
