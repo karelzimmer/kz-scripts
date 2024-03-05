@@ -110,6 +110,7 @@ function process_input {
 function install_package {
     local       kz_deb_site_file=kz_2.4.7_all.deb
     local       kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
+    local       kz_deb_local_file_xz='/tmp/kz_2.4.7_all_xz.deb'
     local -i    rc=0
 
     msg_info "Download $kz_deb_site_file..."
@@ -143,17 +144,15 @@ function install_package {
         cd /tmp
         ar -xv "$kz_deb_local_file" |& $LOGCMD
         msg_log 'Uncompress zstd files an re-compress them using xz...'
-        zstd --uncompress < control.tar.zst                     |
-            xz --compress --verbose --verbose > control.tar.xz  |& $LOGCMD
-        zstd --uncompress < data.tar.zst                        |
-            xz --compress --verbose --verbose > data.tar.xz     |& $LOGCMD
+        zstd --uncompress < control.tar.zst | xz > control.tar.xz |& $LOGCMD
+        zstd --uncompress < data.tar.zst    | xz > data.tar.xz    |& $LOGCMD
         msg_log 'Re-create the Debian package...'
         ar  -mcav sdsd              \
-            xz"$kz_deb_local_file"  \
+            "$kz_deb_local_file_xz" \
             debian-binary           \
             control.tar.xz          \
             data.tar.xz             |& $LOGCMD
-        mv --verbose xz"$kz_deb_local_file" "$kz_deb_local_file" |& $LOGCMD
+        mv --verbose "$kz_deb_local_file_xz" "$kz_deb_local_file" |& $LOGCMD
         msg_log 'Clean up...'
         rm  debian-binary      \
             control.tar.xz     \
