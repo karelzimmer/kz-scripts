@@ -317,7 +317,7 @@ function process_option_version {
 
     text="kz 2.4.7$build_id
 
-$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal'
+$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 <https://creativecommons.org/publicdomain/zero/1.0>$program_year"
     msg_info "$text"
 }
