@@ -141,26 +141,27 @@ function install_package {
         msg_log 'Install required packages...'
         sudo    apt-get install --yes binutils zstd |& $LOGCMD
         msg_log 'Extract files from the archive...'
-        cd      /tmp
-        ar      -xv "$kz_deb_local_file" |& $LOGCMD
+        ar      -xv --output=/tmp "$kz_deb_local_file" |& $LOGCMD
         msg_log 'Uncompress zstd files an re-compress them using xz...'
-        zstd    --uncompress < control.tar.zst | xz > control.tar.xz |& $LOGCMD
-        zstd    --uncompress < data.tar.zst    | xz > data.tar.xz    |& $LOGCMD
+        zstd    --uncompress < /tmp/control.tar.zst |
+        xz      --compress   > /tmp/control.tar.xz  |& $LOGCMD
+        zstd    --uncompress < /tmp/data.tar.zst    |
+        xz      --compress   > /tmp/data.tar.xz     |& $LOGCMD
         msg_log 'Re-create the Debian package...'
         ar      -mcav sdsd              \
                 "$kz_deb_local_file_xz" \
-                debian-binary           \
-                control.tar.xz          \
-                data.tar.xz             |& $LOGCMD
+                /tmp/debian-binary      \
+                /tmp/control.tar.xz     \
+                /tmp/data.tar.xz        |& $LOGCMD
         mv      --verbose               \
                 "$kz_deb_local_file_xz" \
                 "$kz_deb_local_file"    |& $LOGCMD
         msg_log 'Clean up...'
-        rm      debian-binary      \
-                control.tar.xz     \
-                data.tar.xz        \
-                control.tar.zst    \
-                data.tar.zst
+        rm      /tmp/debian-binary      \
+                /tmp/control.tar.xz     \
+                /tmp/data.tar.xz        \
+                /tmp/control.tar.zst    \
+                /tmp/data.tar.zst
         msg_log 'Install repackaged kz_2.4.7_all.deb...'
         sudo    DEBIAN_FRONTEND=noninteractive  \
                 apt-get                         \
