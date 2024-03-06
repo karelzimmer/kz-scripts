@@ -701,6 +701,9 @@ msgstr ""
 msgid "Checking scripts"
 msgstr "Scripts controleren"
 
+msgid "Check script:"
+msgstr "Controleer script:"
+
 msgid "    Unknown script. Function check_code cannot check script code."
 msgstr ""
 "    Onbekend script.  Functie check_code kan scriptcode niet controleren."
