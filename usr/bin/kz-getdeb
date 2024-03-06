@@ -102,7 +102,7 @@ $USAGE_LINE"
 function process_input {
     # shellcheck disable=SC2310
     if ! become_root_check; then
-        return $OK
+        exit $OK
     fi
     check_sudo_true
     download_package
