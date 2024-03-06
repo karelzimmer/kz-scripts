@@ -104,14 +104,7 @@ function become_root_check {
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $OK
     else
-        if type kz &> /dev/null; then
-            text=$(gettext 'Already performed by the administrator.')
-        else
-            text="$(gettext 'Have the administrator perform:')
-sudo apt install wget
-wget karelzimmer.nl/getdeb
-bash getdeb"
-        fi
+        text=$(gettext 'Already performed by the administrator.')
         msg_info "$text"
         return $ERROR
     fi

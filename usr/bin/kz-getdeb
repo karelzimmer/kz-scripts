@@ -102,6 +102,7 @@ $USAGE_LINE"
 function process_input {
     # shellcheck disable=SC2310
     if ! become_root_check; then
+        rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
         exit $OK
     fi
     check_sudo_true
