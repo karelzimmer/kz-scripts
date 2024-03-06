@@ -49,6 +49,10 @@ $OPTIONS_HELP"
 # Variables
 ###############################################################################
 
+# Variable kz_deb_local_file is declared in kz_common.sh.
+declare kz_deb_site_file=kz_2.4.7_all.deb
+declare kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
+
 
 ###############################################################################
 # Functions
@@ -102,24 +106,26 @@ function process_input {
         return $OK
     fi
     check_sudo_true
+    download_package
     install_package
 }
 
 
-# This function installs package kz.
-function install_package {
-    local       kz_deb_site_file=kz_2.4.7_all.deb
-    local       kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
-    local       kz_deb_local_file_xz='/tmp/kz_2.4.7_all_xz.deb'
-    local -i    kz_deb_install_rc=0
-
+# This function downloads package kz.
+function download_package {
     msg_info "Download $kz_deb_site_file..."
-    # Variable kz_deb_local_file is declared in kz_common.sh.
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
     # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
     chmod o+r "$kz_deb_local_file" |& $LOGCMD
+}
+
+
+# This function installs package kz.
+function install_package {
+    local       kz_deb_local_file_xz='/tmp/kz_2.4.7_all_xz.deb'
+    local -i    kz_deb_install_rc=0
 
     msg_info "Install. $kz_deb_site_file..."
     check_for_active_updates
@@ -139,37 +145,37 @@ function install_package {
     if [[ $kz_deb_install_rc -ne $OK ]]; then
         # Try installing package kz that uses xz by repackaging it.
         msg_log 'Install required packages...'
-        sudo    apt-get install --yes binutils zstd |& $LOGCMD
+        sudo    apt-get install --yes binutils zstd     |& $LOGCMD
         msg_log 'Extract files from the archive...'
-        ar      -xv --output=/tmp "$kz_deb_local_file" |& $LOGCMD
+        ar      -xv --output=/tmp "$kz_deb_local_file"  |& $LOGCMD
         msg_log 'Uncompress zstd files an re-compress them using xz...'
-        zstd    --uncompress < /tmp/control.tar.zst |
-        xz      --compress   > /tmp/control.tar.xz  |& $LOGCMD
-        zstd    --uncompress < /tmp/data.tar.zst    |
-        xz      --compress   > /tmp/data.tar.xz     |& $LOGCMD
+        zstd    --uncompress < /tmp/control.tar.zst     |
+        xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
+        zstd    --uncompress < /tmp/data.tar.zst        |
+        xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
         msg_log 'Re-create the Debian package...'
-        ar      -mcav sdsd              \
-                "$kz_deb_local_file_xz" \
-                /tmp/debian-binary      \
-                /tmp/control.tar.xz     \
-                /tmp/data.tar.xz        |& $LOGCMD
-        mv      --verbose               \
-                "$kz_deb_local_file_xz" \
-                "$kz_deb_local_file"    |& $LOGCMD
+        ar      -mcav sdsd                              \
+                "$kz_deb_local_file_xz"                 \
+                /tmp/debian-binary                      \
+                /tmp/control.tar.xz                     \
+                /tmp/data.tar.xz                        |& $LOGCMD
+        mv      --verbose                               \
+                "$kz_deb_local_file_xz"                 \
+                "$kz_deb_local_file"                    |& $LOGCMD
         msg_log 'Clean up...'
-        rm      /tmp/debian-binary      \
-                /tmp/control.tar.xz     \
-                /tmp/data.tar.xz        \
-                /tmp/control.tar.zst    \
+        rm      /tmp/debian-binary                      \
+                /tmp/control.tar.xz                     \
+                /tmp/data.tar.xz                        \
+                /tmp/control.tar.zst                    \
                 /tmp/data.tar.zst
         msg_log 'Install repackaged kz_2.4.7_all.deb...'
-        sudo    DEBIAN_FRONTEND=noninteractive  \
-                apt-get                         \
-                install                         \
-                --allow-downgrades              \
-                --reinstall                     \
-                --yes                           \
-                "$kz_deb_local_file"            |& $LOGCMD
+        sudo    DEBIAN_FRONTEND=noninteractive          \
+                apt-get                                 \
+                install                                 \
+                --allow-downgrades                      \
+                --reinstall                             \
+                --yes                                   \
+                "$kz_deb_local_file"                    |& $LOGCMD
     fi
     rm --verbose "$kz_deb_local_file" |& $LOGCMD
 }
