@@ -50,7 +50,7 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
-    text = f"==== {_('Repair')} ====\n"
+    text = f"{kz_common.YELLOW}==== {_('Repair')} ===={kz_common.NORMAL}\n"
     kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo dpkg --configure --pending'
@@ -70,7 +70,7 @@ def perform_update():
     """
     This function updates installed Debian packages.
     """
-    text = f"==== {_('Update')} ====\n"
+    text = f"{kz_common.YELLOW}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo apt-get update'
@@ -87,7 +87,7 @@ def perform_cleanup():
     """
     This function performs a Debian packages and snap packages cleanup.
     """
-    text = f"==== {_('Cleanup')} ====\n"
+    text = f"{kz_common.YELLOW}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo apt-get autoclean --yes'
@@ -135,6 +135,7 @@ def check_reboot():
         with open('/var/run/reboot-required') as fh:
             text = _('*** The computer needs to be restarted to complete the i\
 nstallation of updates ***')
+            text = f"{kz_common.RED}{text}{kz_common.NORMAL}"
             kz_common.msg_info(PROGRAM_NAME, text)
     except FileNotFoundError as fnf:
         text = str(fnf)
