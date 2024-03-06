@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # shellcheck source=kz_common.sh disable=SC2155
 ###############################################################################
-# Checking scripts.
+# Check scripts.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
 # <https://creativecommons.org/publicdomain/zero/1.0>, 2015-2024.
@@ -20,7 +20,7 @@ source "$(dirname "$0")"/kz_common.sh
 ###############################################################################
 
 readonly    PROGRAM_NAME='kz-check'
-readonly    PROGRAM_DESC=$(gettext 'Checking scripts')
+readonly    PROGRAM_DESC=$(gettext 'Check scripts')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
@@ -91,7 +91,7 @@ function process_input {
     local   scriptname=''
     local   scripts_repo=$HOME/kz-scripts
 
-    text=$(gettext 'Check script:')
+    text=$(gettext 'Check scripts'):
     msg_info "$text"
     cd "$scripts_repo"
     while read -r script; do
