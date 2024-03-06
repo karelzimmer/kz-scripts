@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 2.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 13:03+0100\n"
+"POT-Creation-Date: 2024-03-06 14:23+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -43,6 +43,9 @@ msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
 msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
+
+msgid "Have the administrator perform:"
+msgstr "Laat door de beheerder uitvoeren:"
 
 #, sh-format
 msgid "Type '$DISPLAY_NAME --usage' for more information."

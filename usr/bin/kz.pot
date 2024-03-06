@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-06 13:03+0100\n"
+"POT-Creation-Date: 2024-03-06 14:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,6 +39,9 @@ msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
 msgid "Already performed by the administrator."
+msgstr ""
+
+msgid "Have the administrator perform:"
 msgstr ""
 
 #, sh-format
