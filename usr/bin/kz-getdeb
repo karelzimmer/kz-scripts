@@ -102,6 +102,7 @@ $USAGE_LINE"
 function process_input {
     # shellcheck disable=SC2310
     if ! become_root_check; then
+        msg_log 'Cleanup getdeb files...'
         rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
         exit $OK
     fi
@@ -206,7 +207,7 @@ $(gettext "Type 'exit' to close this window.")"
     else
         msg_info "\n$text"
     fi
-    msg_log 'Cleanup downloaded getdeb files...'
+    msg_log 'Cleanup getdeb files...'
     rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
     exit $OK
 }

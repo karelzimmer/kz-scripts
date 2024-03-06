@@ -396,6 +396,8 @@ function signal {
             exit "$rc"
             ;;
         exit)
+            msg_log 'Cleanup getdeb files...'
+            rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
             # If the installation of the Debian package kz in kz-getdeb fails,
             # stop the progress indicator.
             rm --force --verbose "$kz_deb_local_file" |& $LOGCMD
