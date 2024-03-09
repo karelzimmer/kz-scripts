@@ -135,11 +135,10 @@ function install_package {
         printf '#'
         sleep 1
     done &
-    # In case update and upgrade are required for the actual installation of
-    # package kz to succeed.
+    msg_log 'Run apt update and upgrade...'
     sudo    apt-get update                  |& $LOGCMD
     sudo    apt-get upgrade --yes           |& $LOGCMD
-    # The actual installation of package kz.
+    msg_log 'Install package kz...'
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
