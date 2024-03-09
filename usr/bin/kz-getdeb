@@ -147,7 +147,7 @@ function install_package {
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
     if [[ $kz_deb_install_rc -ne $OK ]]; then
-        # Try installing package kz that uses xz by repackaging it.
+        msg_log 'Try installing package kz that uses xz by repackaging it.'
         msg_log 'Install required packages...'
         sudo    apt-get install --yes binutils zstd     |& $LOGCMD
         msg_log 'Extract files from the archive...'
