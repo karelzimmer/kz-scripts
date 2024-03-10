@@ -135,7 +135,6 @@ function install_package {
         printf '#'
         sleep 1
     done &
-    msg_log 'Install package kz...'
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
@@ -144,17 +143,17 @@ function install_package {
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
     if [[ $kz_deb_install_rc -ne $OK ]]; then
-        msg_log 'Try installing package kz that uses xz by repackaging it.'
-        msg_log 'Install required packages...'
+        msg_log '--- Try installing package kz that uses xz by repackaging it.'
+        msg_log '--- Install required packages...'
         sudo    apt-get install --yes binutils zstd     |& $LOGCMD
-        msg_log 'Extract files from the archive...'
+        msg_log '--- Extract files from the archive...'
         ar      -xv --output=/tmp "$kz_deb_local_file"  |& $LOGCMD
-        msg_log 'Uncompress zstd files an re-compress them using xz...'
+        msg_log '--- Uncompress zstd files an re-compress them using xz...'
         zstd    --uncompress < /tmp/control.tar.zst     |
         xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
         zstd    --uncompress < /tmp/data.tar.zst        |
         xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
-        msg_log 'Re-create the Debian package...'
+        msg_log '--- Re-create the Debian package...'
         ar      -mcav sdsd                              \
                 "$kz_deb_local_file_xz"                 \
                 /tmp/debian-binary                      \
@@ -163,13 +162,13 @@ function install_package {
         mv      --verbose                               \
                 "$kz_deb_local_file_xz"                 \
                 "$kz_deb_local_file"                    |& $LOGCMD
-        msg_log 'Clean up...'
+        msg_log '--- Clean up...'
         rm      /tmp/debian-binary                      \
                 /tmp/control.tar.xz                     \
                 /tmp/data.tar.xz                        \
                 /tmp/control.tar.zst                    \
                 /tmp/data.tar.zst
-        msg_log 'Install repackaged kz_2.4.7_all.deb...'
+        msg_log '--- Install repackaged kz_2.4.7_all.deb...'
         sudo    DEBIAN_FRONTEND=noninteractive          \
                 apt-get                                 \
                 install                                 \
