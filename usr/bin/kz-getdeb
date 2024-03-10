@@ -49,8 +49,6 @@ $OPTIONS_HELP"
 # Variables
 ###############################################################################
 
-declare kz_deb_local_file=''
-declare kz_deb_local_file_xz=''
 declare kz_deb_site_file=kz_2.4.7_all.deb
 declare kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
 
@@ -126,6 +124,7 @@ function download_package {
 
 # This function installs package kz.
 function install_package {
+    local       kz_deb_local_file_xz=''
     local -i    kz_deb_install_rc=0
 
     msg_info "Install. $kz_deb_site_file..."
@@ -175,8 +174,11 @@ function install_package {
                 --reinstall                             \
                 --yes                                   \
                 "$kz_deb_local_file_xz"                 |& $LOGCMD
+        msg_log '--- Cleanup repackaged kz_2.4.7_all.deb...'
+        rm      --verbose "$kz_deb_local_file_xz"       |& $LOGCMD
     fi
-    rm --verbose "$kz_deb_local_file" "$kz_deb_local_file_xz" |& $LOGCMD
+    msg_log 'Cleanup kz_2.4.7_all.deb...'
+    rm --verbose "$kz_deb_local_file" |& $LOGCMD
 }
 
 

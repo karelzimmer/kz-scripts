@@ -58,6 +58,7 @@ readonly    SETTINGS=$HOME/.kz
 ###############################################################################
 
 declare -a  commandline_args=()
+declare     kz_deb_local_file=''
 declare     option_gui=false
 declare     text=''
 declare     title=''
@@ -397,6 +398,9 @@ function signal {
         exit)
             msg_log 'Cleanup getdeb files...'
             rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
+            # If the installation of the Debian package kz in kz-getdeb fails,
+            # stop the progress indicator.
+            rm --force --verbose "$kz_deb_local_file" |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             msg_log "$text"
