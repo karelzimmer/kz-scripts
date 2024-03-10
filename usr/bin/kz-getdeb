@@ -135,9 +135,6 @@ function install_package {
         printf '#'
         sleep 1
     done &
-    msg_log 'Run apt update and upgrade...'
-    sudo    apt-get update                  |& $LOGCMD
-    sudo    apt-get upgrade --yes           |& $LOGCMD
     msg_log 'Install package kz...'
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
