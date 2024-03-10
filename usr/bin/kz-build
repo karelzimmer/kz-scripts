@@ -275,12 +275,12 @@ function install_package {
     text=$(gettext 'Install package')...
     msg_info "$text"
     check_for_active_updates
-    sudo    DEBIAN_FRONTEND=noninteractive  \
-            apt-get                         \
-            install                         \
-            --allow-downgrades              \
-            --reinstall                     \
-            --yes                           \
+    sudo    DEBIAN_FRONTEND=noninteractive      \
+            apt-get                             \
+            install                             \
+            --allow-downgrades                  \
+            --reinstall                         \
+            --yes                               \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
 }
 
