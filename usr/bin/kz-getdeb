@@ -142,7 +142,7 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
-    if [[ $kz_deb_install_rc -eq $OK ]]; then
+    if [[ $kz_deb_install_rc -ne $OK ]]; then
         msg_log '--- Try installing package kz that uses xz by repackaging it.'
         kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
         msg_log '--- Install required packages...'
