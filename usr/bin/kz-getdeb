@@ -49,9 +49,6 @@ $OPTIONS_HELP"
 # Variables
 ###############################################################################
 
-declare kz_deb_site_file=kz_2.4.7_all.deb
-declare kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
-
 
 ###############################################################################
 # Functions
@@ -113,7 +110,10 @@ function process_input {
 
 # This function downloads package kz.
 function download_package {
-    msg_info "Download $kz_deb_site_file (=$kz_deb_local_file)..."
+    local kz_deb_site_file=kz_2.4.7_all.deb
+    local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
+
+    msg_info 'Download kz deb...'
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
@@ -124,10 +124,10 @@ function download_package {
 
 # This function installs package kz.
 function install_package {
-    local       kz_deb_local_file_xz='/tmp/kz_2.4.7_all_xz.deb'
+    local       kz_deb_local_file_xz=''
     local -i    kz_deb_install_rc=0
 
-    msg_info "Install. $kz_deb_site_file (=$kz_deb_local_file)..."
+    msg_info 'Install. kz deb...'
     check_for_active_updates
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress.
@@ -142,8 +142,9 @@ function install_package {
             --reinstall                     \
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
-    if [[ $kz_deb_install_rc -ne $OK ]]; then
+    if [[ $kz_deb_install_rc -eq $OK ]]; then
         msg_log '--- Try installing package kz that uses xz by repackaging it.'
+        kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
         msg_log '--- Install required packages...'
         sudo    apt-get install --yes binutils zstd     |& $LOGCMD
         msg_log '--- Extract files from the archive...'
