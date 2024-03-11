@@ -48,6 +48,7 @@ $OPTIONS_HELP"
 ###############################################################################
 # Variables
 ###############################################################################
+declare kz_deb_local_file=''
 
 
 ###############################################################################
@@ -129,9 +130,9 @@ function install_package {
 
     msg_info 'Install. kz deb...'
     check_for_active_updates
-    # Progress indicator with growing number of '#'s as long as the local
-    # Debian package file exists, i.e. installation is in progress.
-    while test -e "$kz_deb_local_file"; do
+    # Progress indicator with growing number of '#'s as long as this script
+    # runs, i.e. installation is in progress.
+    while [[ $(pidof -x -- *"$PROGRAM_NAME" | grep --count $$) -eq 1 ]]; do
         printf '#'
         sleep 1
     done &
