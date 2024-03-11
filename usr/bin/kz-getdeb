@@ -131,7 +131,8 @@ function install_package {
     msg_info 'Install. kz deb...'
     check_for_active_updates
     # Progress indicator with growing number of '#'s as long as the local
-    # Debian package file exists, i.e. installation is in progress.
+    # Debian package file exists, i.e. installation is in progress. If all
+    # fails, kz_common.sh will delete the local Debian package file on exit.
     while test -e "$kz_deb_local_file"; do
         printf '#'
         sleep 1
