@@ -295,7 +295,7 @@ create_nas_login() {
     msg_log 'Create NAS login...'
     text="username=$nas_user_name\npassword=$nas_password"
     printf '%b\n' "$text" > "$NAS_LOGIN"
-    chmod '600' "$NAS_LOGIN" |& $LOGCMD
+    chmod --verbose '600' "$NAS_LOGIN" |& $LOGCMD
 }
 
 

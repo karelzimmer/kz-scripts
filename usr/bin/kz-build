@@ -178,8 +178,8 @@ function build_uploads {
     msg_info "$text"
 
     # Make sure the permissions are correct for the sync.
-    chmod 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*
-    chmod 'a-x' -- "$SCRIPTS_REPO"/usr/bin/*.*
+    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*  |& $LOGCMD
+    chmod --verbose 'a-x' -- "$SCRIPTS_REPO"/usr/bin/*.*            |& $LOGCMD
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/app/.
     rsync   --archive               \

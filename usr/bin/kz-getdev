@@ -173,7 +173,7 @@ function download_website {
         read -rsp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
-        chmod 'u=rw,g=,o=' "$ftp_login"
+        chmod --verbose 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
     fi
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \

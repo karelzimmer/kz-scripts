@@ -118,8 +118,8 @@ function download_package {
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
-    # Prevent "N: ... user '_apt'. - pkgAcquire::Run (13: Permission denied)".
-    chmod o+r "$kz_deb_local_file" |& $LOGCMD
+    msg_log "Prevent ...user '_apt'. - pkgAcquire::Run (13: Permission denied)"
+    chmod --verbose o+r "$kz_deb_local_file" |& $LOGCMD
 }
 
 
