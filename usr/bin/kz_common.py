@@ -212,7 +212,7 @@ def msg_error(PROGRAM_NAME, text):
     This function returns an error message and logs it.
     """
     print(f'{RED}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, f'E: {text}')
+    msg_log(PROGRAM_NAME, f'{text}')
 
 
 def msg_info(PROGRAM_NAME, text):
@@ -220,7 +220,7 @@ def msg_info(PROGRAM_NAME, text):
     This function returns an informational message and logs it.
     """
     print(f'{text}')
-    msg_log(PROGRAM_NAME, f'I: {text}')
+    msg_log(PROGRAM_NAME, f'{text}')
 
 
 def msg_log(PROGRAM_NAME, text):
@@ -235,7 +235,7 @@ def msg_warning(PROGRAM_NAME, text):
     This function returns a warning message and logs it.
     """
     print(f'{YELLOW}{text}{NORMAL}')
-    msg_log(PROGRAM_NAME, f'W: {text}')
+    msg_log(PROGRAM_NAME, f'{text}')
 
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
