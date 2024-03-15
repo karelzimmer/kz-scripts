@@ -255,7 +255,7 @@ function backup_settings_desktop_background {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp "$input_file" "$output_file" |& $LOGCMD || true
+    cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
 }
 
 
@@ -264,8 +264,8 @@ function backup_settings_favorite_apps {
     local   output_file=$SETTINGS/favorites
 
     msg_log 'Save the favorite apps...'
-    gsettings get org.gnome.shell favorite-apps > "$output_file" |&
-        $LOGCMD || true
+    gsettings get                           \
+              org.gnome.shell favorite-apps > "$output_file" |& $LOGCMD || true
 }
 
 
@@ -313,7 +313,7 @@ function backup_settings_user_photo {
     local   output_file=$SETTINGS/userphoto
 
     msg_log 'Copy the user photo...'
-    cp "$input_file" "$output_file" |& $LOGCMD || true
+    cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
 }
 
 
@@ -321,6 +321,7 @@ function backup_settings_user_photo {
 function delete_settings_previously_backuped {
     msg_log 'Delete previously backuped user settings...'
     rm  --force                             \
+        --verbose                           \
         "$HOME"/.kz/Apps                    \
         "$HOME"/.kz/Background              \
         "$HOME"/.kz/Favorites               \

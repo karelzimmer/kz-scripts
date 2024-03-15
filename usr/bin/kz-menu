@@ -179,8 +179,6 @@ function process_menu1_gui {
                     FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_COMMANDS[5]}"    \
                     2> >($LOGCMD)
             ) || exit $OK
-        msg_log "$title"
-        msg_log "$REPLY"
         process_menu1_choice
     done
 }
@@ -204,9 +202,7 @@ function process_menu1_tui {
         done
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
-        msg_log "$prompt"
         read -rp "$prompt"
-        msg_log "$REPLY"
         case $REPLY in
             *[^[:digit:]]*)
                 continue
@@ -338,8 +334,6 @@ function process_menu2_gui {
                     FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"    \
                     2> >($LOGCMD)
             ) || break
-        msg_log "$title"
-        msg_log "$REPLY"
         process_menu2_choice
     done
 }
@@ -363,9 +357,7 @@ function process_menu2_tui {
         done
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
-        msg_log "$prompt"
         read -rp "$prompt"
-        msg_log "$REPLY"
         case $REPLY in
             *[^[:digit:]]*)
                 continue

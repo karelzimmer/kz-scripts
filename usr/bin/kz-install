@@ -203,7 +203,7 @@ nd end with '.sh'.")"
     fi
 
     if [[ $UID -ne 0 ]]; then
-        msg_log 'Delete the kz install command file created as non-root...'
+        msg_log 'Delete the kz-install command file created as non-root...'
         rm --verbose "$command_file" |& $LOGCMD
     fi
     become_root
@@ -216,7 +216,6 @@ nd end with '.sh'.")"
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
-            msg_log "$title"...
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -434,7 +433,7 @@ function process_input_file_by_host {
 # This function displays the contents of the command file.
 function process_option_cat {
     less --quit-if-one-screen "$command_file"
-    rm "$command_file" |& $LOGCMD
+    rm --verbose "$command_file" |& $LOGCMD
 }
 
 

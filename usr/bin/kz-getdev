@@ -180,7 +180,7 @@ function download_website {
                 -e "$ftp_set; $ftp_cmd"             \
                 "$ftp_host"; then
         # Force entering the password next time.
-        rm  "$ftp_login"
+        rm --verbose "$ftp_login"
         text=$(gettext 'Website download failed.')
         msg_error "$text"
         exit $ERROR
