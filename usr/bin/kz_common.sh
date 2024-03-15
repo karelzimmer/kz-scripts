@@ -393,7 +393,7 @@ function signal {
             exit "$rc"
             ;;
         exit)
-            msg_log 'Cleanup kz-getdeb files...'
+            # Cleanup kz-getdeb files.
             rm  --force                 \
                 --verbose               \
                 getdeb                  \
