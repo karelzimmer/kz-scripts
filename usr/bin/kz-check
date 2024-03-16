@@ -168,7 +168,6 @@ e.")$NORMAL"
 
 # This function checks Python script code.
 function check_pycodestyle {
-    msg_log "Check pycodestyle $scriptname..."
     pycodestyle "$script" || error_flag=true
 }
 
@@ -184,7 +183,6 @@ function check_record_length {
         return $OK
     fi
 
-    msg_log "Check record length $scriptname..."
     max_line_length_found=$(wc --max-line-length < "$script")
     if  [[ $max_line_length_found -gt $max_line_length ]]; then
         text="
@@ -201,7 +199,6 @@ ngth_found).")$NORMAL"
 function check_shellcheck {
     # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
-    msg_log "Check shellcheck $scriptname..."
     shellcheck  --enable=add-default-case           \
                 --enable=avoid-nullary-conditions   \
                 --enable=check-set-e-suppressed     \
@@ -219,7 +216,6 @@ function check_tags {
     local   fixme='F''I''X''M''E'
     local   todo='T''O''D''O'
 
-    msg_log "Check tags $scriptname..."
     if grep --quiet             \
             --regexp="$bug"     \
             --regexp="$fixme"   \
@@ -243,7 +239,6 @@ $YELLOW$(gettext '    Flagged annotation found.')$NORMAL"
 
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces {
-    msg_log "Check trailing spaces $scriptname..."
     if grep --quiet --regexp=' ''$' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
