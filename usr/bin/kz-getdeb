@@ -140,7 +140,6 @@ function install_package {
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
-            --allow-downgrades              \
             --reinstall                     \
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
@@ -166,7 +165,6 @@ function install_package {
         sudo    DEBIAN_FRONTEND=noninteractive          \
                 apt-get                                 \
                 install                                 \
-                --allow-downgrades                      \
                 --reinstall                             \
                 --yes                                   \
                 "$kz_deb_local_file_xz"                 |& $LOGCMD

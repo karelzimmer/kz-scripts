@@ -271,14 +271,12 @@ function build_deb {
 
 # This function installs package kz.
 function install_package {
-    # Allow downgrade from previous version 365 to 4.2.1.
     text=$(gettext 'Install package')...
     msg_info "$text"
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
             install                             \
-            --allow-downgrades                  \
             --reinstall                         \
             --yes                               \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
