@@ -3,6 +3,11 @@
     "*": {
       "installation_mode": "allowed"
     },
+    "bgnkhhnnamicmpeenaelnjfhikgbkllg": {
+      "installation_mode": "force_installed",
+      "update_url":
+        "https://clients2.google.com/service/update2/crx"
+    },
     "gphhapmejobijbbhgpjhcjognlahblep": {
       "installation_mode": "force_installed",
       "update_url":
