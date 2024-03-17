@@ -329,7 +329,7 @@ def process_option_version(PROGRAM_NAME):
         else:
             program_year = ', ' + program_year
 
-        text = (f'kz 2.4.7{build_id}\n\n'
+        text = (f'kz 4.2.1{build_id}\n\n'
                 f"{_('Written by')}"
                 ' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n\n'
                 '<https://creativecommons.org/publicdomain/zero/1.0>'

@@ -111,7 +111,7 @@ function process_input {
 
 # This function downloads package kz.
 function download_package {
-    local kz_deb_site_file=kz_2.4.7_all.deb
+    local kz_deb_site_file=kz_4.2.1_all.deb
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
 
     msg_info 'Download kz deb...'
