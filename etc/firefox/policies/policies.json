@@ -8,7 +8,7 @@
         "installation_mode": "force_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/gnome-shell-integration/latest.xpi"
       },
-      "{adguardadblocker@adguard.com}": {
+      "adguardadblocker@adguard.com": {
         "installation_mode": "force_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/adguard-adblocker/latest.xpi"
       },
