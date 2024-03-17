@@ -98,28 +98,36 @@ function process_input {
         scriptdir=$(realpath "$(dirname "$script")")
         scriptname=$(basename "$script")
         msg_info "  $(realpath "$script")"
-        check_trailing_spaces
         case $scriptname in
-            *.policy)
+            *.png)
+                continue
+                ;;
+            *.json|*.policy)
+                check_trailing_spaces
                 continue
                 ;;
             *.1|*.desktop)
+                check_trailing_spaces
                 check_record_length
                 ;;
             kz_common.py)
+                check_trailing_spaces
                 check_tags
                 check_pycodestyle
                 ;;
             kz_common.sh)
+                check_trailing_spaces
                 check_tags
                 check_record_length
                 check_shellcheck
                 ;;
             *.sh)
+                check_trailing_spaces
                 check_tags
                 check_shellcheck
                 ;;
             *)
+                check_trailing_spaces
                 check_tags
                 check_record_length
                 check_code
