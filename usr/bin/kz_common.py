@@ -5,7 +5,7 @@ This module provides global variables and functions.
 # Common module for Python scripts.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2024.
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2021.
 ###############################################################################
 
 
@@ -32,6 +32,7 @@ _ = gettext.gettext
 
 MODULE_NAME = 'kz_common.py'
 MODULE_DESC = _('Common module for Python scripts')
+MODULE_YEAR = 2021
 MODULE_PATH = f"{os.path.realpath(os.path.dirname(__file__))}"
 
 OK = 0
@@ -49,7 +50,6 @@ BLUE = '\033[1;34m'
 # Variables
 ###############################################################################
 
-PROGRAM_NAME = ''
 text = ''
 
 
@@ -69,7 +69,7 @@ def become_root(PROGRAM_NAME):
         sys.exit(OK)
 
     if os.getuid() != 0:
-        check_sudo_true()
+        check_sudo_true(PROGRAM_NAME)
 
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
         for arg_num in range(len(sys.argv)):
@@ -117,13 +117,13 @@ def become_root_check(PROGRAM_NAME):
         return True
 
 
-def check_for_active_updates():
+def check_for_active_updates(PROGRAM_NAME):
     """
     This function checks for active updates and waits for the next check if so.
     """
     check_wait = 10
 
-    check_sudo_true()
+    check_sudo_true(PROGRAM_NAME)
     while True:
         try:
             subprocess.run('sudo fuser '
@@ -175,7 +175,7 @@ def check_on_ac_power(PROGRAM_NAME):
             return(OK)
 
 
-def check_sudo_true():
+def check_sudo_true(PROGRAM_NAME):
     """
     This function prompts the user for the [sudo] password if necessary.
     """
@@ -234,7 +234,7 @@ def msg_warning(PROGRAM_NAME, text):
     print(f'{YELLOW}{text}{NORMAL}')
 
 
-def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
+def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, PROGRAM_YEAR):
     """
     This function handles the general options.
     """
@@ -253,11 +253,11 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
         term_script(PROGRAM_NAME)
         sys.exit(OK)
     elif args.usage:
-        process_option_usage(DISPLAY_NAME)
+        process_option_usage(DISPLAY_NAME, PROGRAM_NAME)
         term_script(PROGRAM_NAME)
         sys.exit(OK)
     elif args.version:
-        process_option_version(PROGRAM_NAME)
+        process_option_version(PROGRAM_NAME, PROGRAM_YEAR)
         term_script(PROGRAM_NAME)
         sys.exit(OK)
 
@@ -280,7 +280,7 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     msg_info(PROGRAM_NAME, text)
 
 
-def process_option_usage(DISPLAY_NAME):
+def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
     """
     This function shows the available options.
     """
@@ -291,14 +291,11 @@ def process_option_usage(DISPLAY_NAME):
     msg_info(PROGRAM_NAME, text)
 
 
-def process_option_version(PROGRAM_NAME):
+def process_option_version(PROGRAM_NAME, PROGRAM_YEAR):
     """
     This function displays version, author, and license information.
     """
     build_id = ''
-    command = ''
-    grep_expr = '# <https://creativecommons.org'
-    program_year = ''
 
     try:
         with open('/etc/kz-build.id') as fh:
@@ -317,23 +314,12 @@ def process_option_version(PROGRAM_NAME):
         term_script(PROGRAM_NAME)
         sys.exit(ERROR)
     finally:
-        command = f"grep '--regexp={grep_expr}' {MODULE_PATH}/{PROGRAM_NAME} |"
-        command += f" cut --delimiter=' ' --fields=3"
-        program_year = subprocess.check_output(command, shell=True,
-                                               stderr=subprocess.DEVNULL)
-        program_year = program_year.decode('utf-8').strip()
-        if program_year == '':
-            text = _('Program year cannot be determined.')
-            msg_log(PROGRAM_NAME, text)
-            program_year = '.'
-        else:
-            program_year = ', ' + program_year
 
         text = (f'kz 4.2.1{build_id}\n\n'
                 f"{_('Written by')}"
-                ' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n\n'
-                '<https://creativecommons.org/publicdomain/zero/1.0>'
-                f'{program_year}')
+                ' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n'
+                '<https://creativecommons.org/publicdomain/zero/1.0>, '
+                f'{PROGRAM_YEAR}.')
         msg_info(PROGRAM_NAME, text)
 
 
@@ -351,4 +337,4 @@ def term_script(PROGRAM_NAME):
 
 if __name__ == '__main__':
     text = _('{}: i am a module').format(MODULE_NAME)
-    msg_info(PROGRAM_NAME, text)
+    msg_info(MODULE_NAME, text)

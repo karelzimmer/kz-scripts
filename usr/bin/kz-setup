@@ -4,7 +4,7 @@
 # Set up apps.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2013-2024.
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2013.
 ###############################################################################
 
 
@@ -21,6 +21,7 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    PROGRAM_NAME='kz-setup'
 readonly    PROGRAM_DESC=$(gettext 'Set up apps')
+readonly    PROGRAM_YEAR=2013
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat]\

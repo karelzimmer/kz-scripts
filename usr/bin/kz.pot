@@ -114,9 +114,6 @@ msgstr ""
 msgid "Build ID cannot be determined."
 msgstr ""
 
-msgid "Program year cannot be determined."
-msgstr ""
-
 msgid "{}: i am a module"
 msgstr ""
 

@@ -8,7 +8,7 @@ This module performs a repair, update, and cleanup.
 # Update system.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2021-2024.
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2021.
 ###############################################################################
 
 
@@ -32,8 +32,8 @@ _ = gettext.gettext
 
 PROGRAM_NAME = 'kz-update'
 PROGRAM_DESC = _('Update system')
+PROGRAM_YEAR = 2021
 DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
-
 
 ###############################################################################
 # Variables
@@ -113,7 +113,7 @@ def perform_command(command):
     """
     text = f'{kz_common.BLUE}{command}{kz_common.NORMAL}'
     kz_common.msg_info(PROGRAM_NAME, text)
-    kz_common.check_for_active_updates()
+    kz_common.check_for_active_updates(PROGRAM_NAME)
     try:
         subprocess.run({command}, shell=True, check=True,
                        executable='/usr/bin/bash')
@@ -156,7 +156,8 @@ nstallation of updates ***')
 
 kz_common.init_script(PROGRAM_NAME)
 
-kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME,
+                          PROGRAM_YEAR)
 
 kz_common.become_root(PROGRAM_NAME)
 

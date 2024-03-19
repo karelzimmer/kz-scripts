@@ -4,7 +4,7 @@
 # Make backup.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2007-2024.
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2007.
 ###############################################################################
 
 
@@ -21,6 +21,7 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    PROGRAM_NAME='kz-backup'
 readonly    PROGRAM_DESC=$(gettext 'Make backup')
+readonly    PROGRAM_YEAR=2007
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] [-g|--\

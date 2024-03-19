@@ -5,7 +5,7 @@
 # Common module for shell scripts.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2009-2024.
+# <https://creativecommons.org/publicdomain/zero/1.0>, 2009.
 ###############################################################################
 
 
@@ -24,6 +24,7 @@ source      /usr/bin/gettext.sh
 
 readonly    MODULE_NAME='kz_common.sh'
 readonly    MODULE_DESC=$(gettext 'Common module for shell scripts')
+readonly    MODULE_YEAR=2009
 readonly    MODULE_PATH=$(dirname "$(realpath "$0")")
 
 readonly    OK=0
@@ -290,8 +291,6 @@ function process_option_usage {
 # This function displays version, author, and license information.
 function process_option_version {
     local   build_id=''
-    local   grep_expr='# <https://creativecommons.org'
-    local   program_year=''
 
     if [[ -e /etc/kz-build.id ]]; then
         build_id=' ('$(cat /etc/kz-build.id)')'
@@ -300,22 +299,10 @@ function process_option_version {
         msg_log "$text"
     fi
 
-    program_year=$(
-        grep    --regexp="$grep_expr" "$MODULE_PATH/$PROGRAM_NAME" |
-        cut     --delimiter=' ' --fields=3
-        ) || true
-    if [[ $program_year = '' ]]; then
-        text=$(gettext 'Program year cannot be determined.')
-        msg_log "$text"
-        program_year='.'
-    else
-        program_year=', '$program_year
-    fi
-
     text="kz 4.2.1$build_id
 
 $(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-<https://creativecommons.org/publicdomain/zero/1.0>$program_year"
+<https://creativecommons.org/publicdomain/zero/1.0>, $PROGRAM_YEAR."
     msg_info "$text"
 }
 
