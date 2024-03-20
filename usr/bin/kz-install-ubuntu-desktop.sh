@@ -244,6 +244,13 @@ sudo apt-get install --yes htop
 sudo apt-get remove --yes htop
 
 
+# Install APP krita HOST pc06
+sudo apt-get install --yes krita
+
+# Remove APP kvm HOST pc06
+sudo apt-get remove --yes krita
+
+
 # Install APP kvm HOST pc06
 # Images are in /var/lib/libvirt/images/
 # Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
