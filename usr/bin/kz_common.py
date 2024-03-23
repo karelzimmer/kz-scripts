@@ -32,7 +32,6 @@ _ = gettext.gettext
 
 MODULE_NAME = 'kz_common.py'
 MODULE_DESC = _('Common module for Python scripts')
-MODULE_YEAR = 2021
 MODULE_PATH = f"{os.path.realpath(os.path.dirname(__file__))}"
 
 OK = 0
