@@ -3,8 +3,8 @@
 ###############################################################################
 # Change GUI.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2015.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 
@@ -21,7 +21,6 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    PROGRAM_NAME='kz-gset'
 readonly    PROGRAM_DESC=$(gettext 'Change GUI')
-readonly    PROGRAM_YEAR=2015
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addfavaft FAVOR\

@@ -4,8 +4,8 @@ This module provides global variables and functions.
 ###############################################################################
 # Common module for Python scripts.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2021.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 
@@ -234,7 +234,7 @@ def msg_warning(PROGRAM_NAME, text):
     print(f'{YELLOW}{text}{NORMAL}')
 
 
-def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, PROGRAM_YEAR):
+def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the general options.
     """
@@ -257,7 +257,7 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME, PROGRAM_YEAR):
         term_script(PROGRAM_NAME)
         sys.exit(OK)
     elif args.version:
-        process_option_version(PROGRAM_NAME, PROGRAM_YEAR)
+        process_option_version(PROGRAM_NAME)
         term_script(PROGRAM_NAME)
         sys.exit(OK)
 
@@ -291,7 +291,7 @@ def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
     msg_info(PROGRAM_NAME, text)
 
 
-def process_option_version(PROGRAM_NAME, PROGRAM_YEAR):
+def process_option_version(PROGRAM_NAME):
     """
     This function displays version, author, and license information.
     """
@@ -317,9 +317,9 @@ def process_option_version(PROGRAM_NAME, PROGRAM_YEAR):
 
         text = (f'kz 4.2.1{build_id}\n\n'
                 f"{_('Written by')}"
-                ' Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal\n'
-                '<https://creativecommons.org/publicdomain/zero/1.0>, '
-                f'{PROGRAM_YEAR}.')
+                ' Karel Zimmer <info@karelzimmer.nl>.\n'
+                'CC0 1.0 Universal'
+                '<https://creativecommons.org/publicdomain/zero/1.0>.')
         msg_info(PROGRAM_NAME, text)
 
 

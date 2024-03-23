@@ -3,8 +3,8 @@
 ###############################################################################
 # Mount network drive.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2014.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 
@@ -21,7 +21,6 @@ source "$(dirname "$0")"/kz_common.sh
 
 readonly    PROGRAM_NAME='kz-nas'
 readonly    PROGRAM_DESC=$(gettext 'Mount network drive')
-readonly    PROGRAM_YEAR=2014
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\

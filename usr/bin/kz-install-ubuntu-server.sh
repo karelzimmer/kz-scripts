@@ -2,8 +2,8 @@
 ###############################################################################
 # Install file for Ubuntu server.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2023.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 # Install APP ansible HOST *

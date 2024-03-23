@@ -2,8 +2,8 @@
 ###############################################################################
 # Install file for Debian desktop.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2013.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 # Install APP anydesk HOST

@@ -2,8 +2,8 @@
 ###############################################################################
 # Tab-completion-script for kz-getdeb.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2020.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 dashoptions='-h --help -u --usage -v --version'

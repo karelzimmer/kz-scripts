@@ -7,8 +7,8 @@ This module performs a repair, update, and cleanup.
 ###############################################################################
 # Update system.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>, 2021.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 
@@ -32,7 +32,6 @@ _ = gettext.gettext
 
 PROGRAM_NAME = 'kz-update'
 PROGRAM_DESC = _('Update system')
-PROGRAM_YEAR = 2021
 DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
 ###############################################################################
@@ -156,8 +155,7 @@ nstallation of updates ***')
 
 kz_common.init_script(PROGRAM_NAME)
 
-kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME,
-                          PROGRAM_YEAR)
+kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
 kz_common.become_root(PROGRAM_NAME)
 
