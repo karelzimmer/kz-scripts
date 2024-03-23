@@ -292,6 +292,13 @@ sudo apt-get install --yes nautilus-admin
 sudo apt-get remove --yes nautilus-admin
 
 
+# Install APP procs HOST pc06
+sudo snap install procs
+
+# Remove APP procs HOST pc06
+sudo snap remove procs
+
+
 # Install APP repair-ntfs HOST
 # Usage:
 # findmnt
