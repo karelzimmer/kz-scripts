@@ -32,8 +32,15 @@ Met opdracht \fBkz deploy\fR kan de website (inclusief pakket kz) geplaatst
 worden op het internet zodat de scripts en documenten beschikbaar zijn voor
 algemeen gebruik.
 .sp
+Opdracht \fBkz build\fR wordt ook aangeroepen vanuit \fBkz deploy\fR.
+.sp
 Pakket kz vult de volgende systeemmappen:
 .br
+/etc/
+.RS
+Beleidsreges-bestanden voor Firefox en Chrome, en build-id van pakket kz.
+.RE
+.sp
 /usr/bin/
 .RS
 Scripts (kz*)
@@ -67,11 +74,6 @@ Man-pagina's (NL)
 /usr/share/polkit-1/actions/
 .RS
 PolicyKit actiedefinitiebestanden (nl.karelzimmer.kz*.policy)
-.RE
-.sp
-/etc/
-.RS
-Configuration files (kz*)
 .RE
 .\"
 .\"

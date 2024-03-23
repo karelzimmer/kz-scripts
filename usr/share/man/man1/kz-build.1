@@ -32,8 +32,15 @@ With command \fBkz deploy\fR the website (including package kz) can be placed
 on the internet so that the scripts and documents are available for general
 use.
 .sp
+Command \fBkz build\fR is also called from \fBkz deploy\fR.
+.sp
 Package kz populates the following system directories:
 .br
+/etc/
+.RS
+Policy files for Firefox and Chrome, and package kz build ID.
+.RE
+.sp
 /usr/bin/
 .RS
 Scripts (kz*)
@@ -67,11 +74,6 @@ Manual pages (NL)
 /usr/share/polkit-1/actions/
 .RS
 PolicyKit action definition files (nl.karelzimmer.kz*.policy)
-.RE
-.sp
-/etc/
-.RS
-Configuration files (kz*)
 .RE
 .\"
 .\"
