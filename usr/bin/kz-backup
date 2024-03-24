@@ -368,7 +368,7 @@ function create_backup {
 .recently-used.xbel
 .steam/root
 .thumbnails
-.var/app/*/cache
+.var/src/*/cache
 .xsession-errors
 snap/*/*/.cache
 *CACHEDIR.TAG*
