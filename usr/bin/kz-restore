@@ -304,7 +304,7 @@ function restore_settings {
 
 # This function restores the desktop background.
 function restore_settings_desktop_background {
-    local   input_file=$SETTINGS/background
+    local   input_file=$SETTINGS/desktop-background-picture-uri
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
@@ -317,7 +317,7 @@ function restore_settings_desktop_background {
 
 # This function restores the favorite apps.
 function restore_settings_favorite_apps {
-    local   input_file=$SETTINGS/favorites
+    local   input_file=$SETTINGS/favorite-apps
 
     msg_log 'Restore the favorite apps...'
     if [[ -f $input_file ]]; then

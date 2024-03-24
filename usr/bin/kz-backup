@@ -236,7 +236,7 @@ function backup_settings {
     backup_settings_desktop_background
     backup_settings_favorite_apps
     backup_settings_installed_apps
-    backup_settings_user_photo
+    backup_settings_user_picture
     delete_settings_previously_backuped
     # In case the desktop background has been removed.
     restore_settings_desktop_background
@@ -246,7 +246,7 @@ function backup_settings {
 # This function copies the desktop background.
 function backup_settings_desktop_background {
     local   input_file=''
-    local   output_file=$SETTINGS/background
+    local   output_file=$SETTINGS/desktop-background-picture-uri
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -261,7 +261,7 @@ function backup_settings_desktop_background {
 
 # This function saves the favorite apps.
 function backup_settings_favorite_apps {
-    local   output_file=$SETTINGS/favorites
+    local   output_file=$SETTINGS/favorite-apps
 
     msg_log 'Save the favorite apps...'
     gsettings get                           \
@@ -271,7 +271,7 @@ function backup_settings_favorite_apps {
 
 # This function creates a list of installed apps.
 function backup_settings_installed_apps {
-    local   output_file=$SETTINGS/apps
+    local   output_file=$SETTINGS/installed-apps
     local   header1=$(gettext '==== START list of installed packages ====')
     local   footer1=$(gettext '==== END list of installed packages ====')
     local   header2=$(gettext '==== START list of installed snaps ====')
@@ -308,9 +308,9 @@ function backup_settings_installed_apps {
 
 
 # This function copies the user photo.
-function backup_settings_user_photo {
+function backup_settings_user_picture {
     local   input_file=/var/lib/AccountsService/icons/"$USER"
-    local   output_file=$SETTINGS/userphoto
+    local   output_file=$SETTINGS/user-profile-picture
 
     msg_log 'Copy the user photo...'
     cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
@@ -332,13 +332,17 @@ function delete_settings_previously_backuped {
         "$HOME"/Documents/Apps              \
         "$HOME"/Documents/Favorites         \
         "$HOME"/Pictures/Background         \
-        "$HOME"/Pictures/Userphoto
+        "$HOME"/Pictures/Userphoto          \
+        "$SETTINGS"/apps                    \
+        "$SETTINGS"/background              \
+        "$SETTINGS"/favorites               \
+        "$SETTINGS"/userphoto
 }
 
 
 # This function restores the desktop background.
 function restore_settings_desktop_background {
-    local   input_file=$SETTINGS/background
+    local   input_file=$SETTINGS/desktop-background-picture-uri
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
