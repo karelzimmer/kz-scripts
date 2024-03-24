@@ -34,7 +34,7 @@ $OPTIONS_HELP"
 readonly    DEB_REPO=$HOME/kz-deb
 readonly    DOCS_REPO=$HOME/kz-docs
 readonly    SCRIPTS_REPO=$HOME/kz-scripts
-readonly    UPLOADS_REPO=$HOME/kz-uploads
+readonly    UPLOADS_REPO=$HOME/kz-upload
 readonly    UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 
