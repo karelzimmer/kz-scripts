@@ -233,18 +233,18 @@ use app Terminal, type 'kz backup'.")"
 
 # This function backs up user settings.
 function backup_settings {
-    backup_settings_desktop_background
+    backup_settings_desktop_background_picture
     backup_settings_favorite_apps
     backup_settings_installed_apps
-    backup_settings_user_picture
+    backup_settings_user_profile_picture
     delete_settings_previously_backuped
-    # In case the desktop background has been removed.
-    restore_settings_desktop_background
+    # In case the desktop background picture has been removed.
+    restore_settings_desktop_background_picture
 }
 
 
 # This function copies the desktop background.
-function backup_settings_desktop_background {
+function backup_settings_desktop_background_picture {
     local   input_file=''
     local   output_file=$SETTINGS/desktop-background-picture
 
@@ -308,7 +308,7 @@ function backup_settings_installed_apps {
 
 
 # This function copies the user photo.
-function backup_settings_user_picture {
+function backup_settings_user_profile_picture {
     local   input_file=/var/lib/AccountsService/icons/"$USER"
     local   output_file=$SETTINGS/user-profile-picture
 
@@ -341,7 +341,7 @@ function delete_settings_previously_backuped {
 
 
 # This function restores the desktop background.
-function restore_settings_desktop_background {
+function restore_settings_desktop_background_picture {
     local   input_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Restore the desktop background...'

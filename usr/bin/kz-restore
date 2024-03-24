@@ -297,13 +297,13 @@ function restore_backup {
 
 # This function restores user settings.
 function restore_settings {
-    restore_settings_desktop_background
+    restore_settings_desktop_background_picture
     restore_settings_favorite_apps
 }
 
 
 # This function restores the desktop background.
-function restore_settings_desktop_background {
+function restore_settings_desktop_background_picture {
     local   input_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Restore the desktop background...'
