@@ -166,7 +166,7 @@ function download_website {
     local   ftp_cmd="mirror  $ftp_opts $ftp_from $ftp_to; exit"
     local   ftp_host=server106.hosting2go.nl
     local   ftp_user=kzimmer
-    local   ftp_login=$SETTINGS/$ftp_host
+    local   ftp_login=$SETTINGS/$ftp_host'-login'
     local   prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
     if ! [[ -f $ftp_login ]]; then
@@ -180,7 +180,7 @@ function download_website {
                 -e "$ftp_set; $ftp_cmd"             \
                 "$ftp_host"; then
         # Force entering the password next time.
-        rm --verbose "$ftp_login"
+        rm --verbose "$ftp_login"*
         text=$(gettext 'Website download failed.')
         msg_error "$text"
         exit $ERROR
