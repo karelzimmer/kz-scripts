@@ -246,7 +246,7 @@ function backup_settings {
 # This function copies the desktop background.
 function backup_settings_desktop_background {
     local   input_file=''
-    local   output_file=$SETTINGS/desktop-background-picture-uri
+    local   output_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -342,7 +342,7 @@ function delete_settings_previously_backuped {
 
 # This function restores the desktop background.
 function restore_settings_desktop_background {
-    local   input_file=$SETTINGS/desktop-background-picture-uri
+    local   input_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then

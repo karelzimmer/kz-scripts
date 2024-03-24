@@ -304,7 +304,7 @@ function restore_settings {
 
 # This function restores the desktop background.
 function restore_settings_desktop_background {
-    local   input_file=$SETTINGS/desktop-background-picture-uri
+    local   input_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
