@@ -2,7 +2,7 @@
 #
 # shellcheck shell=bash source=/dev/null disable=SC2155,SC2034
 ###############################################################################
-# Common module for shell scripts.
+# Common module for Bourne-Again shell scripts.
 #
 # Written by Karel Zimmer <info@karelzimmer.nl>.
 # CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>.

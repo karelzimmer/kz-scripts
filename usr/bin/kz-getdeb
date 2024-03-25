@@ -125,8 +125,7 @@ function download_package {
 
 # This function installs package kz.
 function install_package {
-    local       kz_deb_local_file_xz=''
-    local -i    kz_deb_install_rc=0
+    local -i kz_deb_install_rc=0
 
     msg_info 'Install. kz deb...'
     check_for_active_updates
@@ -145,7 +144,7 @@ function install_package {
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
     if [[ $kz_deb_install_rc -ne $OK ]]; then
         msg_log 'Try installing package kz that uses xz by repackaging it.'
-        kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
+        local kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
         msg_log 'Install required packages...'
         sudo    apt-get install --yes binutils zstd     |& $LOGCMD
         msg_log 'Extract files from the archive...'
