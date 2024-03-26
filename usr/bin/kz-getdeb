@@ -138,15 +138,6 @@ function install_package {
         sleep 1
     done &
 
-    # Repair section from kz-update:
-    # Maximize the chance of successful installation of package kz.
-    check_for_active_updates |& $LOGCMD
-    sudo dpkg --configure --pending     |& $LOGCMD
-    check_for_active_updates |& $LOGCMD
-    sudo apt-get update --fix-missing   |& $LOGCMD
-    check_for_active_updates |& $LOGCMD
-    sudo apt-get install --fix-broken   |& $LOGCMD
-
     check_for_active_updates |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
