@@ -99,7 +99,7 @@ def perform_cleanup():
     command = '# snap cleanup:\n\
 snap list --all |\n\
 while read Name Version Rev Tracking Publisher Notes; do\n\
-    if [[ $Notes = disabled || $Notes = uitgeschakeld ]]; then\n\
+    if [[ $Notes == *disabled* || $Notes == *uitgeschakeld* ]]; then\n\
         sudo snap remove "$Name" --revision="$Rev"\n\
     fi\n\
 done'
