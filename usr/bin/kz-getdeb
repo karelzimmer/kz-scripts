@@ -104,6 +104,7 @@ function process_input {
         rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
         exit $OK
     fi
+    check_on_ac_power
     download_package
     install_package
 }
