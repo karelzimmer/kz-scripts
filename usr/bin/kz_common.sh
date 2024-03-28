@@ -4,7 +4,7 @@
 ###############################################################################
 # Common module for Bourne-Again shell scripts.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>.
+# Written by Karel Zimmer <info@karelzimmer.nl>
 # CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
@@ -300,7 +300,7 @@ function process_option_version {
 
     text="kz 4.2.1$build_id
 
-$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>.
+$(gettext 'Written by') Karel Zimmer <info@karelzimmer.nl>
 CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
     msg_info "$text"
 }
