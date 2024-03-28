@@ -280,7 +280,7 @@ function install_package {
             install                             \
             --reinstall                         \
             --yes                               \
-            "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
+            "${UPLOADS_TARGETS[deb]}/$DEB_NAME"
 }
 
 
