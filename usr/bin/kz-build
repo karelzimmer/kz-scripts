@@ -273,6 +273,7 @@ function build_deb {
 function install_package {
     text=$(gettext 'Install package')...
     msg_info "$text"
+    check_on_ac_power
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
