@@ -2,7 +2,7 @@
 ###############################################################################
 # Set up file for Ubuntu server.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl> CC0 1.0
+# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0
 # <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
