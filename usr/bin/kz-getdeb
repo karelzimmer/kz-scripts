@@ -130,7 +130,7 @@ function install_package {
 
     msg_log 'Install. kz deb...'
     if ! sudo --non-interactive true |& $LOGCMD; then
-        text=$(gettext 'Authentication is required to install package kz').
+        text=$(gettext 'Authentication is required to install package kz.')
         msg_info "$text"
         sudo true
     fi

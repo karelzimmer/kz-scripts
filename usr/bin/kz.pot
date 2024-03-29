@@ -345,7 +345,7 @@ msgstr ""
 msgid "Install package kz"
 msgstr ""
 
-msgid "Authentication is required to install package kz"
+msgid "Authentication is required to install package kz."
 msgstr ""
 
 msgid "Finished"
@@ -885,7 +885,7 @@ msgstr ""
 msgid "Check website"
 msgstr ""
 
-msgid "Authentication is required to install apps"
+msgid "Authentication is required to install apps."
 msgstr ""
 
 msgid "Make a backup copy of the Home folder"
@@ -1030,7 +1030,7 @@ msgid ""
 "following commands:"
 msgstr ""
 
-msgid "Authentication is required to mount a network drive"
+msgid "Authentication is required to mount a network drive."
 msgstr ""
 
 msgid "Mount a NAS during startup"
