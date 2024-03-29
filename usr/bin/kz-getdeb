@@ -129,7 +129,6 @@ function install_package {
     local -i kz_deb_install_rc=0
 
     msg_log 'Install. kz deb...'
-    sudo --non-interactive true || true
     sudo true
 
     # Progress indicator with growing number of '#'s as long as the local
