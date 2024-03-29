@@ -115,7 +115,7 @@ function download_package {
     local kz_deb_site_file=kz_4.2.1_all.deb
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
 
-    msg_info 'Download kz deb...'
+    msg_log 'Download kz deb...'
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
@@ -128,8 +128,8 @@ function download_package {
 function install_package {
     local -i kz_deb_install_rc=0
 
-    msg_info 'Install. kz deb...'
-    check_sudo_true
+    msg_log 'Install. kz deb...'
+    sudo true
 
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress. If all

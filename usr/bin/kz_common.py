@@ -68,8 +68,6 @@ def become_root(PROGRAM_NAME):
         sys.exit(OK)
 
     if os.getuid() != 0:
-        check_sudo_true(PROGRAM_NAME)
-
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
         for arg_num in range(len(sys.argv)):
             if arg_num == 0:
@@ -122,7 +120,6 @@ def check_for_active_updates(PROGRAM_NAME):
     """
     check_wait = 10
 
-    check_sudo_true(PROGRAM_NAME)
     while True:
         try:
             subprocess.run('sudo fuser '
@@ -172,29 +169,6 @@ def check_on_ac_power(PROGRAM_NAME):
             sys.exit(ERROR)
         else:
             return(OK)
-
-
-def check_sudo_true(PROGRAM_NAME):
-    """
-    This function prompts the user for the [sudo] password if necessary.
-    """
-    subprocess.run('sudo --non-interactive true || true', shell=True)
-    try:
-        subprocess.run('sudo true', shell=True)
-    except KeyboardInterrupt:
-        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        msg_error(PROGRAM_NAME, text)
-        term_script(PROGRAM_NAME)
-        sys.exit(ERROR)
-    except Exception as exc:
-        text = str(exc)
-        msg_log(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        msg_error(PROGRAM_NAME, text)
-        term_script(PROGRAM_NAME)
-        sys.exit(ERROR)
-    else:
-        return(OK)
 
 
 def init_script(PROGRAM_NAME):

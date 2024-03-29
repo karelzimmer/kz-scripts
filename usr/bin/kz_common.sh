@@ -87,7 +87,6 @@ function become_root {
             exit $pkexec_rc
         else
             msg_log "restart (exec sudo $program_exec ${commandline_args[*]})"
-            check_sudo_true
             exec sudo "$program_exec" "${commandline_args[@]}"
         fi
     fi
@@ -115,7 +114,6 @@ function become_root_check {
 function check_for_active_updates {
     local   -i  check_wait=10
 
-    check_sudo_true
     while sudo  fuser                                       \
                 /snap/core/*/var/cache/debconf/config.dat   \
                 /var/cache/apt/archives/lock                \
@@ -147,13 +145,6 @@ It is recommended to connect the computer to the wall socket.")
             wait_for_enter
         fi
     fi
-}
-
-
-# This function prompts the user for the [sudo] password if necessary.
-function check_sudo_true {
-    sudo --non-interactive true || true
-    sudo true
 }
 
 
