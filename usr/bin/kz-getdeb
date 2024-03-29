@@ -129,11 +129,8 @@ function install_package {
     local -i kz_deb_install_rc=0
 
     msg_log 'Install. kz deb...'
-    if ! sudo --non-interactive true |& $LOGCMD; then
-        text=$(gettext 'Authentication is required to install package kz.')
-        msg_info "$text"
-        sudo true
-    fi
+    sudo --non-interactive true || true
+    sudo true
 
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress. If all

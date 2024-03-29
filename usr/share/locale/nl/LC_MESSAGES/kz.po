@@ -381,9 +381,6 @@ msgstr "Wacht ${check_wait}s tot andere pakketbeheerder klaar is..."
 msgid "Install package kz"
 msgstr "Pakket kz installeren"
 
-msgid "Authentication is required to install package kz."
-msgstr "Authenticatie is vereist om pakket kz te installeren."
-
 msgid "Finished"
 msgstr "Gereed"
 
@@ -1022,8 +1019,8 @@ msgstr "Voer IVP uit"
 msgid "Check website"
 msgstr "Controleer website"
 
-msgid "Authentication is required to install apps."
-msgstr "Authenticatie is vereist om apps te installeren."
+msgid "Authentication is required to install apps"
+msgstr "Authenticatie is vereist om apps te installeren"
 
 msgid "Make a backup copy of the Home folder"
 msgstr "Maak een back-up (reservekopie) van de Persoonlijke map"
@@ -1187,8 +1184,8 @@ msgstr ""
 "Deactiveer het systemd mount-bestand en verwijder de NAS-aanmelding met de "
 "volgende opdrachten:"
 
-msgid "Authentication is required to mount a network drive."
-msgstr "Authenticatie is vereist om een netwerkschijf aan te koppelen."
+msgid "Authentication is required to mount a network drive"
+msgstr "Authenticatie is vereist om een netwerkschijf aan te koppelen"
 
 msgid "Mount a NAS during startup"
 msgstr "Koppel een NAS aan tijdens het opstarten"

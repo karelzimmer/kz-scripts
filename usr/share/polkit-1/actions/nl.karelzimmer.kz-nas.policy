@@ -18,7 +18,7 @@
 
     <action id="nl.karelzimmer.kz-nas.dev">
         <description gettext-domain="kz">Mount network drive</description>
-        <message gettext-domain="kz">Authentication is required to mount a network drive.</message>
+        <message gettext-domain="kz">Authentication is required to mount a network drive</message>
         <annotate key="org.freedesktop.policykit.exec.path">/home/karel/kz-scripts/usr/bin/kz-nas</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
@@ -30,7 +30,7 @@
 
     <action id="nl.karelzimmer.kz-nas.prod">
         <description gettext-domain="kz">Install apps</description>
-        <message gettext-domain="kz">Authentication is required to mount a network drive.</message>
+        <message gettext-domain="kz">Authentication is required to mount a network drive</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-nas</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>

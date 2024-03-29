@@ -18,7 +18,7 @@
 
     <action id="nl.karelzimmer.kz-install.dev">
         <description gettext-domain="kz">Install apps</description>
-        <message gettext-domain="kz">Authentication is required to install apps.</message>
+        <message gettext-domain="kz">Authentication is required to install apps</message>
         <annotate key="org.freedesktop.policykit.exec.path">/home/karel/kz-scripts/usr/bin/kz-install</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
@@ -30,7 +30,7 @@
 
     <action id="nl.karelzimmer.kz-install.prod">
         <description gettext-domain="kz">Install apps</description>
-        <message gettext-domain="kz">Authentication is required to install apps.</message>
+        <message gettext-domain="kz">Authentication is required to install apps</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install</annotate>
         <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
         <defaults>
