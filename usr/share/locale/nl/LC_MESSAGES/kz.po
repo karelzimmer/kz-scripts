@@ -381,6 +381,9 @@ msgstr "Wacht ${check_wait}s tot andere pakketbeheerder klaar is..."
 msgid "Install package kz"
 msgstr "Pakket kz installeren"
 
+msgid "Authentication is required to install package kz"
+msgstr "Authenticatie is vereist om pakket kz te installeren"
+
 msgid "Finished"
 msgstr "Gereed"
 
