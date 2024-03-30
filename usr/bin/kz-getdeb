@@ -105,8 +105,23 @@ function process_input {
         exit $OK
     fi
     check_on_ac_power
+    prepare_processing
     download_package
     install_package
+}
+
+
+# This function prepares processing.
+function prepare_processing {
+    sudo true
+    kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    # Progress indicator with growing number of '#'s as long as the local
+    # Debian package file exists, i.e. installation is in progress. If all
+    # fails, kz_common.sh will delete the local Debian package file on exit.
+    while test -e "$kz_deb_local_file"; do
+        printf '#'
+        sleep 1
+    done &
 }
 
 
@@ -116,7 +131,7 @@ function download_package {
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
 
     msg_log 'Download kz deb...'
-    kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
     msg_log "Prevent ...user '_apt'. - pkgAcquire::Run (13: Permission denied)"
@@ -129,15 +144,6 @@ function install_package {
     local -i kz_deb_install_rc=0
 
     msg_log 'Install. kz deb...'
-    sudo true
-
-    # Progress indicator with growing number of '#'s as long as the local
-    # Debian package file exists, i.e. installation is in progress. If all
-    # fails, kz_common.sh will delete the local Debian package file on exit.
-    while test -e "$kz_deb_local_file"; do
-        printf '#'
-        sleep 1
-    done &
 
     check_for_active_updates |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
