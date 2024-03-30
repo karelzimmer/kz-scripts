@@ -111,7 +111,7 @@ function process_input {
 }
 
 
-# This function prepares processing.
+# This function prepares further processing.
 function prepare_processing {
     sudo true
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
