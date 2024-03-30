@@ -131,7 +131,6 @@ function download_package {
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
 
     msg_log 'Download kz deb...'
-
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
     msg_log "Prevent ...user '_apt'. - pkgAcquire::Run (13: Permission denied)"
@@ -144,7 +143,6 @@ function install_package {
     local -i kz_deb_install_rc=0
 
     msg_log 'Install. kz deb...'
-
     check_for_active_updates |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
