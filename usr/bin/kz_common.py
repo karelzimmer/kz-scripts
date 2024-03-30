@@ -118,7 +118,7 @@ def check_for_active_updates(PROGRAM_NAME):
     """
     This function checks for active updates and waits for the next check if so.
     """
-    check_wait = 10
+    check_wait = 1
 
     while True:
         try:

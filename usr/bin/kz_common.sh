@@ -112,7 +112,7 @@ function become_root_check {
 
 # This function checks for active updates and waits for the next check if so.
 function check_for_active_updates {
-    local   -i  check_wait=10
+    local   -i  check_wait=2
 
     while sudo  fuser                                       \
                 /snap/core/*/var/cache/debconf/config.dat   \
