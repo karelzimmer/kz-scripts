@@ -72,6 +72,9 @@ msgstr ""
 msgid "Written by"
 msgstr ""
 
+msgid "Universal"
+msgstr ""
+
 #, sh-format
 msgid "Information $DISPLAY_NAME"
 msgstr ""
