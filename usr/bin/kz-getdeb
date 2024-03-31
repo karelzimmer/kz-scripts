@@ -191,17 +191,14 @@ function install_package {
 
 # This function controls the termination of the script.
 function term_script {
-    # shellcheck disable=SC2034
-    local   website_url='https://karelzimmer.nl'
-
     title=$(gettext 'Finished')
-    text=$(eval_gettext "Package kz has been successfully installed.
+    text=$(gettext 'Package kz has been successfully installed.
 
 Now follow the steps as described
 in the Checklist installation.
 
 Checklist installation can be found on
-\$website_url, under Linux.")
+https://karelzimmer.nl/html/en/home.html, under Linux.')
     if [[ $EDITION = 'desktop' ]]; then
         text+="
 
@@ -210,7 +207,7 @@ $(gettext "Type 'exit' to close this window.")"
         TERM=ansi whiptail  --backtitle "$DISPLAY_NAME" \
                             --title     "$title"        \
                             --infobox   "$text"         \
-                            15 47
+                            16 47
     else
         msg_info "\n$text"
     fi
