@@ -4,8 +4,8 @@ This module provides global variables and functions.
 ###############################################################################
 # Common module for Python scripts.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 
@@ -288,8 +288,8 @@ def process_option_version(PROGRAM_NAME):
         sys.exit(ERROR)
     finally:
         text = f'kz 4.2.1{build_id}\n\n'
-        text += _('Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Univ\
-ersal <https://creativecommons.org/publicdomain/zero/1.0>.')
+        text += _('Written by Karel Zimmer <info@karelzimmer.nl>.\n\
+License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>.')
         msg_info(PROGRAM_NAME, text)
 
 

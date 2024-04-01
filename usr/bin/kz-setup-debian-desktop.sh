@@ -2,8 +2,8 @@
 ###############################################################################
 # Set up file for Debian desktop.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>, CC0 1.0 Universal
-# <https://creativecommons.org/publicdomain/zero/1.0>.
+# Written by Karel Zimmer <info@karelzimmer.nl>.
+# License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>.
 ###############################################################################
 
 # Setup APP dashtodock USER *
