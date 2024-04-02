@@ -2,8 +2,8 @@
 ###############################################################################
 # Install file for Debian desktop.
 #
-# Written by Karel Zimmer <info@karelzimmer.nl>.
-# License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>.
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
 # Install APP anydesk HOST

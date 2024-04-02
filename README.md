@@ -1,3 +1,8 @@
+<!---
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+--->
+
 # kz-scripts
 
 Scripts for installing and managing Debian and Debian-based systems such as Ubuntu.
