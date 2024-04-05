@@ -6,5 +6,5 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-dashoptions='-g --gui-h --help -u --usage -v --version'
+dashoptions='-g --gui-h --help -u --usage -m --manual -v --version'
 complete -o default -W "$dashoptions" kz-wifi

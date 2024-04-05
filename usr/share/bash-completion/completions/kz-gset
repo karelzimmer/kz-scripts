@@ -7,5 +7,6 @@
 ###############################################################################
 
 dashoptions='--addfavbef --addfavaft --delfav -l --list -r --resetfavs
-    --addappfolder --delappfolder -h --help -u --usage -v --version'
+    --addappfolder --delappfolder -h --help -u --usage -m --manual -v
+    --version'
 complete -o default -W "$dashoptions" kz-gset
