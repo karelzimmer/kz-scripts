@@ -437,12 +437,11 @@ function process_command_file {
 
     app_tot_num=$(grep --regexp='.*#.* APP ' --count "$command_file" || true)
 
-    $option_gui ||
-        {
-            text="$(gettext 'NUM/TOT  APP')
-            $(gettext 'COMMAND')..."
-            msg_info "$text"
-        }
+    if ! $option_gui; then
+        text="$(gettext 'NUM/TOT  APP')
+        $(gettext 'COMMAND')..."
+        msg_info "$text"
+    fi
 
     while read -r commands_record; do
         case $commands_record in
