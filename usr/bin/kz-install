@@ -247,7 +247,7 @@ $(gettext 'NUM  FILE')\n"
             )
     if [[ -n $files ]]; then
         text+=$files
-        if ! $option_gui; then
+        $option_gui ||
             text+="\n
 $(eval_gettext "To view the contents of FILE execute: \${BLUE}cat FILE\$NORMAL\
 ")
@@ -256,7 +256,6 @@ at --file FILE\$NORMAL")
 $(eval_gettext "To process FILE execute: \$BLUE\$DISPLAY_NAME --file FILE\$NOR\
 MAL")
 $(eval_gettext "The default FILE is: \$input_file")"
-        fi
     else
         text+="$(gettext '  0  No files present.')
 
@@ -289,15 +288,13 @@ $(gettext 'NUM  APP')\n"
         )
     if [[ -n $apps ]]; then
         text+=$apps
-        if ! $option_gui; then
-            text+="\n
+        $option_gui || text+="\n
 $(eval_gettext "To view the contents of the APPs install file execute: \$BLUE\
 \$DISPLAY_NAME --cat APP...\$NORMAL")
 $(eval_gettext "To install the APPs execute: \$BLUE\$DISPLAY_NAME APP...\$NORM\
 AL")
 $(eval_gettext "To view the contents of the default install file execute: \$BL\
 UE\$DISPLAY_NAME --cat\$NORMAL")"
-        fi
     else
         text+="$(gettext '  0  No apps found.')
 
@@ -553,9 +550,7 @@ use app Terminal, type 'kz install \$failed_apps_text'.")
             text=$(gettext "The computer will now reboot to finish installing \
 the apps and changing system settings.")
             msg_info "$text"
-            if ! $option_gui; then
-                wait_for_enter
-            fi
+            $option_gui || wait_for_enter
             sudo systemctl reboot
         fi
     fi

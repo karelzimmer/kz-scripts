@@ -240,8 +240,7 @@ $(gettext 'NUM  FILE')\n"
             )
     if [[ -n $files ]]; then
         text+=$files
-        if ! $option_gui; then
-            text+="\n
+        $option_gui || text+="\n
 $(eval_gettext "To view the contents of FILE execute: \${BLUE}cat FILE\$NORMAL\
 ")
 $(eval_gettext "To view the commands of FILE execute: \$BLUE\$DISPLAY_NAME --c\
@@ -249,7 +248,6 @@ at --file FILE\$NORMAL")
 $(eval_gettext "To process FILE execute: \$BLUE\$DISPLAY_NAME --file FILE\$NOR\
 MAL")
 $(eval_gettext "The default FILE is: \$input_file")"
-        fi
     else
         text+="$(gettext '  0  No files present.')
 
@@ -282,7 +280,7 @@ $(gettext 'NUM  APP')\n"
         )
     if [[ -n $apps ]]; then
         text+=$apps
-        if ! $option_gui; then
+        $option_gui ||
             text+="\n
 $(eval_gettext "To view the contents of the APPs set up file execute: \$BLUE\
 \$DISPLAY_NAME --cat APP...\$NORMAL")
@@ -290,7 +288,6 @@ $(eval_gettext "To set up the APPs execute: \$BLUE\$DISPLAY_NAME APP...\$NORMA\
 L")
 $(eval_gettext "To view the contents of the default set up file execute: \$BLU\
 E\$DISPLAY_NAME --cat\$NORMAL")"
-        fi
     else
         text+="$(gettext '  0  No apps found.')
 
@@ -552,9 +549,7 @@ use app Terminal, type 'kz setup \$failed_apps_text'.")
                 text=$(gettext "You will now be logged out of the computer to \
 finish installing the apps and changing user settings.")
                 msg_info "$text"
-                if ! $option_gui; then
-                    wait_for_enter
-                fi
+                $option_gui || wait_for_enter
                 gnome-session-quit --logout --no-prompt
             else
                 text=$(gettext "You must log out of the computer to finish ins\

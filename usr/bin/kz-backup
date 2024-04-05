@@ -153,9 +153,7 @@ $USAGE_LINE"
 
 Connect a USB medium.")
             msg_warning "$text"
-            if ! $option_gui; then
-                wait_for_enter
-            fi
+            $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
                 msg_error "$text"
@@ -171,9 +169,7 @@ Now connected:
 
 Disconnect media via Files.")"
             msg_warning "$text"
-            if ! $option_gui; then
-                wait_for_enter
-            fi
+            $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 msg_error "$text"
@@ -287,9 +283,8 @@ function backup_settings_installed_apps {
     printf '%s\n' "$footer1" >> "$output_file"
 
     printf '\n%s\n' "$header2" >> "$output_file"
-    if ! snap list 2> >($LOGCMD) >> "$output_file"; then
+    snap list 2> >($LOGCMD) >> "$output_file" ||
         printf '%s\n' "$(gettext 'snap is not installed')" >> "$output_file"
-    fi
     printf '%s\n' "$footer2" >> "$output_file"
 
     printf '\n%s\n' "$header3" >> "$output_file"

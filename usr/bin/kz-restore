@@ -153,9 +153,7 @@ $USAGE_LINE"
 
 Connect a USB medium.")"
             msg_warning "$text"
-            if ! $option_gui; then
-                wait_for_enter
-            fi
+            $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
                  msg_error "$text"
@@ -170,9 +168,7 @@ Now connected:
 
 Disconnect media via Files.")"
             msg_warning "$text"
-            if ! $option_gui; then
-                wait_for_enter
-            fi
+            $option_gui || wait_for_enter
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 msg_error "$text"
                 exit $ERROR

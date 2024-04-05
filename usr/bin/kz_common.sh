@@ -140,9 +140,7 @@ function check_on_ac_power {
 
 It is recommended to connect the computer to the wall socket.")
         msg_warning "$text"
-        if ! $option_gui; then
-            wait_for_enter
-        fi
+        $option_gui || wait_for_enter
     fi
 }
 

@@ -125,11 +125,9 @@ $(gettext 'NUM  COMMAND')\n"
                 --number-separator='  ' \
                 --body-numbering=a
         )
-    if ! $option_gui; then
-        text+="\n
+    text+="\n
 $(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
 .]\$NORMAL")"
-    fi
     msg_info "$text"
 }
 
