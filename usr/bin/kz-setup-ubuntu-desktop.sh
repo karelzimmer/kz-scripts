@@ -98,6 +98,13 @@ gsettings reset org.gnome.shell.extensions.ding show-home
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 
+# Setup APP google-chrome USER *
+xdg-mime default google-chrome.desktop application/pdf
+
+# Reset APP google-chrome USER *
+xdg-mime default org.gnome.Evince.desktop application/pdf
+
+
 # Setup APP google-chrome USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addfavbef=google-chrome
 
@@ -138,6 +145,9 @@ rm --force --verbose "$HOME"/.hidden
 
 # Setup APP recover-files-thumbnails USER
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
+
+# Reset APP recover-files-thumbnails USER
+: # noop
 
 
 # Setup APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
@@ -203,24 +213,37 @@ kz-gset --delfav=kz-vm-hugowin732
 
 
 # Setup APP vlc USER *
-xdg-mime default vlc_vlc.desktop video/mp4          # MPEG4-video
-xdg-mime default vlc_vlc.desktop video/x-matroska   # Matroska-video
-xdg-mime default vlc_vlc.desktop video/webm         # WebM video
+xdg-mime default vlc_vlc.desktop video/mp4
+xdg-mime default vlc_vlc.desktop video/x-matroska
+xdg-mime default vlc_vlc.desktop video/webm
+
+# Reset APP vlc USER *
+xdg-mime default org.gnome.Totem.desktop video/mp4
+xdg-mime default org.gnome.Totem.desktop video/x-matroska
+xdg-mime default org.gnome.Totem.desktop video/webm
 
 
 # Setup APP vscode USER karel@pc01 karel@pc06
 kz-gset --addfavbef=code_code
-xdg-mime default code_code.desktop application/json             # JSON document
-xdg-mime default code_code.desktop application/x-desktop        # Desktop configuration file
-xdg-mime default code_code.desktop application/x-shellscript    # Bash script
-xdg-mime default code_code.desktop application/xml              # PolicyKit action definition file
-xdg-mime default code_code.desktop text/html                    # Web page
-xdg-mime default code_code.desktop text/markdown                # Markdown document
-xdg-mime default code_code.desktop text/troff                   # Man page
-xdg-mime default code_code.desktop text/x-python                # Python-script
+xdg-mime default code_code.desktop application/json
+xdg-mime default code_code.desktop application/x-desktop
+xdg-mime default code_code.desktop application/x-shellscript
+xdg-mime default code_code.desktop application/xml
+xdg-mime default code_code.desktop text/html
+xdg-mime default code_code.desktop text/markdown
+xdg-mime default code_code.desktop text/troff
+xdg-mime default code_code.desktop text/x-python
 
 # Reset APP vscode USER karel@pc01 karel@pc06
 kz-gset --delfav=code_code
+xdg-mime default org.gnome.gedit.desktop application/json
+xdg-mime default org.gnome.gedit.desktop application/x-desktop
+xdg-mime default org.gnome.gedit.desktop application/x-shellscript
+xdg-mime default org.gnome.gedit.desktop application/xml
+xdg-mime default org.gnome.gedit.desktop text/html
+xdg-mime default org.gnome.gedit.desktop text/markdown
+xdg-mime default org.gnome.gedit.desktop text/troff
+xdg-mime default org.gnome.gedit.desktop text/x-python
 
 
 # Setup APP whatsapp USER hugo@pc-van-hugo maria@maria-desktop
