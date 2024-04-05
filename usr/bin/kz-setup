@@ -280,8 +280,7 @@ $(gettext 'NUM  APP')\n"
         )
     if [[ -n $apps ]]; then
         text+=$apps
-        $option_gui ||
-            text+="\n
+        $option_gui || text+="\n
 $(eval_gettext "To view the contents of the APPs set up file execute: \$BLUE\
 \$DISPLAY_NAME --cat APP...\$NORMAL")
 $(eval_gettext "To set up the APPs execute: \$BLUE\$DISPLAY_NAME APP...\$NORMA\

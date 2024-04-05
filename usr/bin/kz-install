@@ -247,8 +247,7 @@ $(gettext 'NUM  FILE')\n"
             )
     if [[ -n $files ]]; then
         text+=$files
-        $option_gui ||
-            text+="\n
+        $option_gui || text+="\n
 $(eval_gettext "To view the contents of FILE execute: \${BLUE}cat FILE\$NORMAL\
 ")
 $(eval_gettext "To view the commands of FILE execute: \$BLUE\$DISPLAY_NAME --c\
