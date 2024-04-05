@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 12:28+0200\n"
+"POT-Creation-Date: 2024-04-05 09:57+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -25,6 +25,9 @@ msgstr "  -h, --help     toon deze hulptekst"
 
 msgid "  -u, --usage    give a short usage message"
 msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
+
+msgid "  -m, --manual   show manual page"
+msgstr "  -m, --manual   toon handleidingpagina"
 
 msgid "  -v, --version  print program version"
 msgstr "  -v, --version  toon de programmaversie"
@@ -67,8 +70,12 @@ msgid "man page"
 msgstr "man-pagina"
 
 #, sh-format
-msgid "Type 'man $DISPLAY_NAME' or see the $man_url for more information."
-msgstr "Typ 'man $DISPLAY_NAME' of zie de $man_url voor meer informatie."
+msgid ""
+"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME', or see the $man_url "
+"for more information."
+msgstr ""
+"Typ '$DISPLAY_NAME --manual' of 'man $DISPLAY_NAME', of zie de $man_url voor "
+"meer informatie."
 
 #, sh-format
 msgid "Type '$DISPLAY_NAME --help' for more information."

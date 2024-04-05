@@ -218,6 +218,7 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
                                      add_help=False)
     parser.add_argument('-h', '--help', action='store_true')
     parser.add_argument('-u', '--usage', action='store_true')
+    parser.add_argument('-m', '--manual', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
     args = parser.parse_args()
 
@@ -227,6 +228,10 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
         sys.exit(OK)
     elif args.usage:
         process_option_usage(DISPLAY_NAME, PROGRAM_NAME)
+        term_script(PROGRAM_NAME)
+        sys.exit(OK)
+    elif args.manual:
+        process_option_manual(PROGRAM_NAME)
         term_script(PROGRAM_NAME)
         sys.exit(OK)
     elif args.version:
@@ -247,6 +252,7 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
             f"{_('Options:')}\n"
             f"{_('  -h, --help     give this help list')}\n"
             f"{_('  -u, --usage    give a short usage message')}\n"
+            f"{_('  -m, --manual   show manual page')}\n"
             f"{_('  -v, --version  print program version')}\n\n"
             f'''{_("Type 'man {}' or see the {} for more information.").
                format(DISPLAY_NAME, man_url)}''')
@@ -258,10 +264,29 @@ def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
     This function shows the available options.
     """
     text = (f"{_('Usage: {}').format(DISPLAY_NAME)}"
-            ' [-h|--help] [-u|--usage] [-v|--version]\n\n'
+            ' [-h|--help] [-u|--usage] [-m|--manual] [-v|--version]\n\n'
             f'''{_("Type '{} --help' for more information.").
                 format(DISPLAY_NAME)}''')
     msg_info(PROGRAM_NAME, text)
+
+
+def process_option_manual(PROGRAM_NAME):
+    """
+    This function displays the manual page..
+    """
+    try:
+        subprocess.run(f'man --pager=cat {PROGRAM_NAME}',
+                       shell=True, check=True,
+                       stderr=subprocess.DEVNULL)
+    except Exception as exc:
+        text = str(exc)
+        msg_log(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        msg_error(PROGRAM_NAME, text)
+        term_script(PROGRAM_NAME)
+        sys.exit(ERROR)
+    else:
+        return(OK)
 
 
 def process_option_version(PROGRAM_NAME):

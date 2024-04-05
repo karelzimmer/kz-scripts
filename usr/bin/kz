@@ -71,6 +71,10 @@ function check_input {
             process_option_usage
             exit $OK
             ;;
+        -m*|--m*)
+            process_option_manual
+            exit $OK
+            ;;
         -v*|--v*)
             process_option_version
             exit $OK

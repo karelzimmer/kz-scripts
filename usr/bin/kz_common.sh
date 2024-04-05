@@ -36,13 +36,15 @@ readonly    RED='\033[1;31m'
 readonly    YELLOW='\033[1;33m'
 readonly    BLUE='\033[1;34m'
 
-readonly    OPTIONS_USAGE='[-h|--help] [-u|--usage] [-v|--version]'
+readonly    OPTIONS_USAGE="[-h|--help] [-u|--usage] [-m|--manual] [-v|--versio\
+n]"
 readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
-$(gettext "  -u, --usage    give a short usage message")
+$(gettext '  -u, --usage    give a short usage message')
+$(gettext '  -m, --manual   show manual page')
 $(gettext '  -v, --version  print program version')"
 
-readonly    OPTIONS_SHORT='huv'
-readonly    OPTIONS_LONG='help,usage,version'
+readonly    OPTIONS_SHORT='humv'
+readonly    OPTIONS_LONG='help,usage,manual,version'
 
 readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 if [[ -z $XDG_CURRENT_DESKTOP ]]; then
@@ -241,6 +243,10 @@ function process_common_options {
                 process_option_usage
                 exit $OK
                 ;;
+            -m|--manual)
+                process_option_manual
+                exit $OK
+                ;;
             -v|--version)
                 process_option_version
                 exit $OK
@@ -261,11 +267,17 @@ function process_option_help {
     local   man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
             man_url+="$(gettext 'man page')\033]8;;\033\\"
 
-    text="$(eval_gettext "Type 'man \$DISPLAY_NAME' or see the \$man_url for m\
-ore information.")"
+    text="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
+E', or see the \$man_url for more information.")"
     printf  '%b\n\n%b\n'    \
             "$HELP"         \
             "$text"
+}
+
+
+# This function displays the manual page.
+function process_option_manual {
+    man --pager=cat "$PROGRAM_NAME"
 }
 
 
