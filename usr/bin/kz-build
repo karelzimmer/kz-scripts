@@ -117,10 +117,7 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
-    # shellcheck disable=SC2310
-    if ! become_root_check; then
-        return $OK
-    fi
+    become_root_check || exit $OK
     report_repos
     check_scripts
     build_uploads

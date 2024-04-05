@@ -75,10 +75,7 @@ function become_root {
     local   -i  pkexec_rc=0
     local       program_exec=$MODULE_PATH/$PROGRAM_NAME
 
-    # shellcheck disable=SC2310
-    if ! become_root_check; then
-        exit $OK
-    fi
+    become_root_check || exit $OK
 
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
