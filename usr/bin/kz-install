@@ -497,7 +497,7 @@ function execute_command {
     if $option_gui; then
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        if [[ $cmd_seq_num -eq 1 ]];then
+        if [[ $cmd_seq_num -eq 1 ]]; then
             msg_info "$app_name_line"
         fi
         if [[ ${#cmd} -gt $COLUMNS ]]; then
