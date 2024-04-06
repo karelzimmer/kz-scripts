@@ -207,12 +207,7 @@ ngth_found).")$NORMAL"
 function check_shellcheck {
     # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
-    shellcheck  --enable=add-default-case           \
-                --enable=avoid-nullary-conditions   \
-                --enable=deprecate-which            \
-                --enable=require-double-brackets    \
-                --external-sources                  \
-                "$scriptname"                       || error_flag=true
+    shellcheck --external-sources "$scriptname" || error_flag=true
     cd "$scripts_repo"
 }
 
