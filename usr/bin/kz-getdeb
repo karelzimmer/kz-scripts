@@ -98,11 +98,7 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
-    if ! become_root_check; then
-        msg_log 'Cleanup getdeb files...'
-        rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
-        exit $OK
-    fi
+    become_root_check || exit $OK
     check_on_ac_power
     prepare_processing
     download_package
