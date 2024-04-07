@@ -169,9 +169,7 @@ started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     commandline_args=("$@")
     readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
  information.")
-    if [[ $UID -ne 0 ]]; then
-        mkdir --parents "$SETTINGS"
-    fi
+    [[ $UID -eq 0 ]] || mkdir --parents "$SETTINGS"
 }
 
 

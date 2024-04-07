@@ -198,25 +198,17 @@ $(gettext "If you do not specify, the value in [] is used as the response.")"
         msg_info "$text"
         read -rp "
 $quest2? [$nas_ip_address]: "
-        if [[ -n $REPLY ]]; then
-            nas_ip_address=$REPLY
-        fi
+        [[ -z $REPLY ]] || nas_ip_address=$REPLY
         read -rp "
 $quest3? [$nas_user_name]: "
-        if [[ -n $REPLY ]]; then
-            nas_user_name=$REPLY
-        fi
+        [[ -z $REPLY ]] || nas_user_name=$REPLY
         read -rsp "
 $quest4? [$nas_password]: "
-        if [[ -n $REPLY ]]; then
-            nas_password=$REPLY
-        fi
+        [[ -z $REPLY ]] || nas_password=$REPLY
         printf '\n'
         read -rp "
 $quest5? [$nas_share_name]: "
-        if [[ -n $REPLY ]]; then
-            nas_share_name=$REPLY
-        fi
+        [[ -z $REPLY ]] || nas_share_name=$REPLY
     fi
 }
 
