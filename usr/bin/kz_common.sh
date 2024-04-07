@@ -47,10 +47,12 @@ readonly    OPTIONS_SHORT='humv'
 readonly    OPTIONS_LONG='help,usage,manual,version'
 
 readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-if [[ -z $XDG_CURRENT_DESKTOP ]]; then
-readonly    EDITION='server'
-else
+if  type gnome-session &> /dev/null ||
+    type lxqt-session  &> /dev/null ||
+    type xfce4-session &> /dev/null; then
 readonly    EDITION='desktop'
+else
+readonly    EDITION='server'
 fi
 readonly    SETTINGS=$HOME/.kz
 
