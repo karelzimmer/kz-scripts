@@ -94,7 +94,7 @@ $USAGE_LINE"
             ;;
     esac
 
-    if ! [[ -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
+    if [[ ! -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
         text="$DISPLAY_NAME: $exec_program_name: \
 $(gettext "command does not exist")
 $USAGE_LINE"

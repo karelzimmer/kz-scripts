@@ -60,10 +60,10 @@ readonly    PROGRAM_PATH=$MODULE_PATH
 declare -A  app_arguments=()
 declare -A  failed_apps=()
 declare     argument_app=false
-declare     commands_found=false
 declare     file_argument=''
 declare     input_file=''
 declare     mode='Install'
+declare     no_commands_found=true
 declare     option_apps=false
 declare     option_cat=false
 declare     option_file=false
@@ -170,7 +170,7 @@ function process_input {
     fi
 
     if $option_file; then
-        if ! [[ "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
+        if [[ ! "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
             text="$(eval_gettext "Filename must start with '\$PROGRAM_NAME-' a\
 nd end with '.sh'.")"
             msg_error "$text"
@@ -178,7 +178,7 @@ nd end with '.sh'.")"
         fi
         input_file=$file_argument
     fi
-    if ! [[ -f $input_file ]]; then
+    if [[ ! -f $input_file ]]; then
         text=$(eval_gettext "No install file found, looked for '\$input_file'.\
 ")
         msg_error "$text"
@@ -491,7 +491,7 @@ function execute_command {
     local   cmd_dis=''
     local   cmd_dis_len=0
 
-    commands_found=true
+    no_commands_found=false
     ((++cmd_seq_num))
 
     if $option_gui; then
@@ -520,7 +520,7 @@ function term_script {
     local   failed_apps_text=''
     local   operation=$(gettext 'install')
 
-    if ! $commands_found; then
+    if $no_commands_found; then
         text=$(gettext 'No commands to execute.' )
         msg_info "$text"
         exit $OK

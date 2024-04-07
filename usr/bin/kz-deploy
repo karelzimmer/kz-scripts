@@ -158,7 +158,7 @@ function upload_website {
 
     text=$(gettext 'Upload website')...
     msg_info "$text"
-    if ! [[ -f $ftp_login ]]; then
+    if [[ ! -f $ftp_login ]]; then
         read -rp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'

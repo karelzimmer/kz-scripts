@@ -192,7 +192,7 @@ function check_record_length {
     fi
 
     max_line_length_found=$(wc --max-line-length < "$script")
-    if  [[ $max_line_length_found -gt $max_line_length ]]; then
+    if [[ $max_line_length_found -gt $max_line_length ]]; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_le\

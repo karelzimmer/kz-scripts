@@ -49,8 +49,8 @@ readonly    X_OPTIONS_LONG=',dry-run,gui,target:'
 ###############################################################################
 
 declare     dry_run_option=''
+declare     dry_run=false
 declare     medium=''
-declare     option_dry_run=false
 declare     option_target=false
 declare     target_argument=''
 declare     target_medium=''
@@ -84,7 +84,7 @@ function check_input {
     while true; do
         case $1 in
             -d|--dry-run)
-                option_dry_run=true
+                dry_run=true
                 dry_run_option='--dry-run'
                 shift
                 ;;
@@ -137,7 +137,7 @@ function process_input {
     local       error_file=''
 
     if $option_target; then
-        if ! [[ -d $target_argument ]]; then
+        if [[ ! -d $target_argument ]]; then
             text="$DISPLAY_NAME: $target_argument: \
 $(gettext 'directory does not exist')
 $USAGE_LINE"
@@ -182,7 +182,7 @@ Disconnect media via Files.")"
 
     check_on_ac_power
 
-    if ! $option_dry_run; then
+    if ! $dry_run; then
         if [[ $EDITION = 'desktop' ]]; then
             title=$(gettext 'Secure settings')
             text=$title
@@ -445,7 +445,7 @@ EOF
 
 # This function controls the termination of the script.
 function term_script {
-    if $option_dry_run; then
+    if $dry_run; then
         text=$(gettext 'The backup has NOT been created (DRY RUN).')
         msg_warning "$text"
         exit $ERROR

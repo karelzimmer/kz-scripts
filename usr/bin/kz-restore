@@ -137,7 +137,7 @@ function process_input {
     local       error_file=''
 
     if $option_source; then
-        if ! [[ -d $source_argument ]]; then
+        if [[ ! -d $source_argument ]]; then
             text="$DISPLAY_NAME: $source_argument: \
 $(gettext 'directory does not exist')
 $USAGE_LINE"
@@ -176,7 +176,7 @@ Disconnect media via Files.")"
         fi
         source=$medium/backup-$HOSTNAME-$USER
         source_medium=$medium
-        if ! [[ -d $source ]]; then
+        if [[ ! -d $source ]]; then
             text=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")

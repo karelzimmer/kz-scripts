@@ -164,7 +164,7 @@ function download_website {
     local   ftp_login=$SETTINGS/$ftp_host'-login'
     local   prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
-    if ! [[ -f $ftp_login ]]; then
+    if [[ ! -f $ftp_login ]]; then
         read -rsp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
