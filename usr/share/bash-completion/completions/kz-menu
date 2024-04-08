@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Tab-completion-script for kz-menu.
+# SPDX-FileComment: Tab-completion-script for kz-menu
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

@@ -5,7 +5,7 @@ Update system.
 This module performs a repair, update, and cleanup.
 """
 ###############################################################################
-# Update system.
+# SPDX-FileComment: Update system
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

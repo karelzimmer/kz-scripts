@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # shellcheck source=kz_common.sh disable=SC2155
 ###############################################################################
-# Check scripts.
+# SPDX-FileComment: Check scripts
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

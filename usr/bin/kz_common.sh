@@ -2,7 +2,7 @@
 #
 # shellcheck shell=bash source=/dev/null disable=SC2155,SC2034
 ###############################################################################
-# Common module for Bourne-Again shell scripts.
+# SPDX-FileComment: Common module for Bourne-Again shell scripts
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

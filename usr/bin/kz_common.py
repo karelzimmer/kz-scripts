@@ -2,7 +2,7 @@
 This module provides global variables and functions.
 """
 ###############################################################################
-# Common module for Python scripts.
+# SPDX-FileComment: Common module for Python scripts
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0

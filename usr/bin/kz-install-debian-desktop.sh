@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Install file for Debian desktop.
+# SPDX-FileComment: Install file for Debian desktop
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -71,9 +71,9 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 
 # Install APP fwupd HOST
 : # Disable the Firmware update daemon
-sudo systemctl stop fwupd.service       # Stop the service
-sudo systemctl disable fwupd.service    # Disable automatic start upon boot
-sudo systemctl mask fwupd.service       # Disable manual invoking
+sudo systemctl stop fwupd.service
+sudo systemctl disable fwupd.service
+sudo systemctl mask fwupd.service
 
 # Remove APP fwupd HOST
 : # Enable the Firmware update daemon

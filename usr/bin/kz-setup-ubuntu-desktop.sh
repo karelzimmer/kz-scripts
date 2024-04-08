@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# Set up file for Ubuntu desktop.
+# SPDX-FileComment: Set up file for Ubuntu desktop
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
