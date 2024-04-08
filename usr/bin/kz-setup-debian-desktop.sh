@@ -114,10 +114,10 @@ kz-gset --delfav=virt-manager
 
 
 # Setup APP lynis USER
-# Use Lynis (CISOfy):
-# cd ~/lynis
-# [sudo] ./lynis audit system
-git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis
+git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
+: # Use Lynis (CISOfy):
+: # cd ~/lynis
+: # [sudo] ./lynis audit system
 
 # Reset APP lynis USER
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
@@ -134,7 +134,6 @@ rm --force --verbose "$HOME"/.hidden
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset APP recover-files-thumbnails USER
-: # noop
 
 
 # Setup APP spotify USER karel@pc07
@@ -153,9 +152,9 @@ kz-gset --addfavbef=install-debian
 
 # Setup APP terminal USER karel@pc07
 kz-gset --addfavbef=org.gnome.Terminal
-# Turn on aliases.
+: # # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
-# Search forward in history (with Ctrl-S).
+: # Enable search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
@@ -200,10 +199,8 @@ xdg-mime default org.gnome.gedit.desktop text/x-python
 
 
 # Setup APP webmin USER karel@pc07
-# Web app: https://localhost:10000
 kz-gset --addfavaft=kz-webmin
 
 # Reset APP webmin USER karel@pc07
-# Web app: https://localhost:10000
 kz-gset --delfav=kz-webmin
 rm --force --verbose "$HOME"/.local/share/applications/kz-webmin.desktop

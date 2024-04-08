@@ -13,6 +13,19 @@ sudo apt-get install --yes ansible
 sudo apt-get remove --yes ansible
 
 
+# Install APP fwupd HOST
+: # Disable the Firmware update daemon
+sudo systemctl stop fwupd.service       # Stop the service
+sudo systemctl disable fwupd.service    # Disable automatic start upon boot
+sudo systemctl mask fwupd.service       # Disable manual invoking
+
+# Remove APP fwupd HOST
+: # Enable the Firmware update daemon
+systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
+
+
 # Install APP locate HOST *
 sudo apt-get install --yes mlocate
 
@@ -21,12 +34,12 @@ sudo apt-get remove --yes mlocate
 
 
 # Install APP repair-ntfs HOST
-# Usage:
-# findmnt
-# TARGET          SOURCE    FSTYPE OPTIONS
-# /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
-# sudo ntfsfix /dev/sdb2
 sudo apt-get install --yes ntfs-3g
+: # Usage:
+: # findmnt
+: # TARGET          SOURCE    FSTYPE OPTIONS
+: # /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+: # sudo ntfsfix /dev/sdb2
 
 # Remove APP repair-ntfs HOST
 sudo apt-get remove --yes ntfs-3g
@@ -35,7 +48,7 @@ sudo apt-get remove --yes ntfs-3g
 # Install APP ssh HOST *
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-# Check for remote root access
+: # Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
@@ -56,7 +69,7 @@ sudo apt-get remove --yes ufw
 
 
 # Install APP users HOST *
-# Enable access to system monitoring tasks like read many log files in /var/log.
+: # Enable access to system monitoring tasks like read many log files in /var/log.
 sudo usermod --append --groups adm "${SUDO_USER:-$USER}"
 
 # Remove APP users HOST *

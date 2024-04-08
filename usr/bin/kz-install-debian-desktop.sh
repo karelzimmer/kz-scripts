@@ -7,11 +7,11 @@
 ###############################################################################
 
 # Install APP anydesk HOST
-# Web app: https://my.anydesk.com/v2
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
 sudo apt-get update
 sudo apt-get install --yes anydesk
+: # Web app: https://my.anydesk.com/v2
 
 # Remove APP anydesk HOST
 sudo apt-get remove --yes anydesk
@@ -48,35 +48,35 @@ sudo snap remove deja-dup
 
 
 # Install APP fdupes HOST
-# Usage:
-# fdupes -r /home               # Report recursively from /home
-# fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
-# fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 sudo apt-get install --yes fdupes
+: # Usage:
+: # fdupes -r /home               # Report recursively from /home
+: # fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
+: # fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
 # Remove APP fdupes HOST
 sudo apt-get remove --yes fdupes
 
 
 # Install APP force-x11 HOST
-# Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
-# Force means no choice @ user login for X11 or Wayland!
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
+: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
+: # Force means no choice @ user login for X11 or Wayland!
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove APP force-x11 HOST
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 
 # Install APP fwupd HOST
-# Disable the Firmware update daemon
+: # Disable the Firmware update daemon
 sudo systemctl stop fwupd.service       # Stop the service
 sudo systemctl disable fwupd.service    # Disable automatic start upon boot
 sudo systemctl mask fwupd.service       # Disable manual invoking
 
 # Remove APP fwupd HOST
-# Enable the Firmware update daemon
+: # Enable the Firmware update daemon
 systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
@@ -97,15 +97,14 @@ sudo apt-get remove --yes gnome-gmail
 
 
 # Install APP google-chrome HOST pc07
-# Extensions and policies are applied by "kz.deb" policy file policies.json, for Chrome in /etc/opt/chrome/policies/managed/, for Firefox in /etc/firefox/policies/.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
-# Also install chrome-gnome-shell to make extensions.gnome.org work.
+: # Also install chrome-gnome-shell to make extensions.gnome.org work.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
-# The installation overwrites the newly added source-list.
+: # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
-# The installation adds an apt-key that is no longer needed.
+: # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 # Remove APP google-chrome HOST pc07
@@ -123,10 +122,10 @@ sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # Install APP kvm HOST pc07
-# Images are in /var/lib/libvirt/images/
-# Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
+: # Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
+: # Images are in /var/lib/libvirt/images/
 
 # Remove APP kvm HOST pc07
 sudo apt-get remove --yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
@@ -151,12 +150,12 @@ sudo apt-get remove --yes mlocate
 
 
 # Install APP repair-ntfs HOST
-# Usage:
-# findmnt
-# TARGET          SOURCE    FSTYPE OPTIONS
-# /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
-# sudo ntfsfix /dev/sdb2
 sudo apt-get install --yes ntfs-3g
+: # Usage:
+: # findmnt
+: # TARGET          SOURCE    FSTYPE OPTIONS
+: # /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+: # sudo ntfsfix /dev/sdb2
 
 # Remove APP repair-ntfs HOST
 sudo apt-get remove --yes ntfs-3g
@@ -180,7 +179,6 @@ sudo apt-get update
 
 
 # Install APP signal HOST pc07
-# Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list > /dev/null
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
@@ -200,13 +198,13 @@ sudo apt-get remove --yes spice-vdagent
 
 
 # Install APP teamviewer HOST *
-# Web app: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
-# The installation adds an apt-key that is no longer needed.
+: # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo apt-key del 0C1289C0 DEB49217
+: # Web app: https://web.teamviewer.com
 
 # Remove APP teamviewer HOST *
 sudo apt-get remove --yes teamviewer
@@ -223,7 +221,7 @@ sudo apt-get remove --yes thunderbird-l10n-nl
 
 
 # Install APP users HOST *
-# Enable access to system monitoring tasks like read many log files in /var/log and to the log.
+: # Enable access to system monitoring tasks like read many log files in /var/log and to the log.
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
 # Remove APP users HOST *
@@ -246,11 +244,11 @@ sudo snap remove code
 
 
 # Install APP webmin HOST pc07
-# Web app: https://localhost:10000
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list > /dev/null
 wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update
 sudo apt-get install --yes webmin
+: # Web app: https://localhost:10000
 
 # Remove APP webmin HOST pc07
 sudo apt-get remove --yes webmin

@@ -14,11 +14,11 @@ sudo apt-get remove --yes ansible
 
 
 # Install APP anydesk HOST
-# Web app: https://my.anydesk.com/v2
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
 sudo apt-get update
 sudo apt-get install --yes anydesk
+: # Web app: https://my.anydesk.com/v2
 
 # Remove APP anydesk HOST
 sudo apt-get remove --yes anydesk
@@ -59,15 +59,15 @@ sudo apt-get remove --yes clamtk-gnome
 
 
 # Install APP cockpit HOST pc06
-# Web app: https://localhost:9090
 sudo apt-get install --yes cockpit cockpit-pcp
+: # Web app: https://localhost:9090
 
 # Remove APP cockpit HOST pc06
 sudo apt-get remove --yes cockpit
 
 
 # Install APP cups-backend-bjnp HOST pc-van-emily
-# Add support for Canon USB over IP BJNP protocol
+: # Add support for Canon USB over IP BJNP protocol
 sudo apt-get install --yes cups-backend-bjnp
 
 # Remove APP cups-backend-bjnp HOST pc-van-emily
@@ -75,18 +75,18 @@ sudo apt-get remove --yes cups-backend-bjnp
 
 
 # Install APP disable-aer HOST pc06
-# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
-# Express Advanced Error Reporting) to prevent the log gets flooded with
-# 'AER: Corrected errors received'.  Usually needed for HP hardware.
+: # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+: # Express Advanced Error Reporting) to prevent the log gets flooded with
+: # 'AER: Corrected errors received'.  Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
-# Check for kernel config parameter pci=noaer.
+: # Check for kernel config parameter pci=noaer.
 grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Remove APP disable-aer HOST pc06
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
-# Check for kernel config parameter pci=noaer.
+: # Check for kernel config parameter pci=noaer.
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 
@@ -98,37 +98,35 @@ sudo apt-get remove --yes libimage-exiftool-perl
 
 
 # Install APP fdupes HOST
-# Usage:
-# fdupes -r /home               # Report recursively from /home
-# fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
-# fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 sudo apt-get install --yes fdupes
+: # Usage:
+: # fdupes -r /home               # Report recursively from /home
+: # fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
+: # fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
 # Remove APP fdupes HOST
 sudo apt-get remove --yes fdupes
 
 
 # Install APP force-x11 HOST
-# Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
-# Force means no choice @ user login for X11 or Wayland!
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
+: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
+: # Force means no choice @ user login for X11 or Wayland!
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove APP force-x11 HOST
-# Force the use of X11 because Wayland is not (yet) supported by remote desktop apps such as AnyDesk and TeamViewer.
-# Force means no choice @ user login for X11 or Wayland!
-# To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 
 # Install APP fwupd HOST
-# Disable the Firmware update daemon
+: # Disable the Firmware update daemon
 sudo systemctl stop fwupd.service       # Stop the service
 sudo systemctl disable fwupd.service    # Disable automatic start upon boot
 sudo systemctl mask fwupd.service       # Disable manual invoking
 
 # Remove APP fwupd HOST
-# Enable the Firmware update daemon
+: # Enable the Firmware update daemon
 systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
@@ -163,15 +161,14 @@ sudo apt-get remove --yes epiphany-browser
 
 
 # Install APP google-chrome HOST pc01 pc02 pc06
-# Extensions and policies are applied by "kz.deb" policy file policies.json, for Chrome in /etc/opt/chrome/policies/managed/, for Firefox in /etc/firefox/policies/.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
-# Also install chrome-gnome-shell to make extensions.gnome.org work.
+: # Also install chrome-gnome-shell to make extensions.gnome.org work.
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
-# The installation overwrites the newly added source-list.
+: # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
-# The installation adds an apt-key that is no longer needed.
+: # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 # Remove APP google-chrome HOST pc01 pc02 pc06
@@ -185,7 +182,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
 sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
-# The installation overwrites the newly added source-list.
+: # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 
 # Remove APP google-earth HOST
@@ -252,9 +249,10 @@ sudo apt-get remove --yes krita
 
 
 # Install APP kvm HOST pc06
-# Images are in /var/lib/libvirt/images/
-# Dpkg::Options due to interaction due to restore /etc/libvirt configuration files.
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" cpu-checker qemu-kvm bridge-utils virt-manager
+: # Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
+sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
+: # Images are in /var/lib/libvirt/images/
 
 # Remove APP kvm HOST pc06
 sudo apt-get remove --yes cpu-checker qemu-kvm bridge-utils virt-manager
@@ -300,19 +298,18 @@ sudo snap remove procs
 
 
 # Install APP repair-ntfs HOST
-# Usage:
-# findmnt
-# TARGET          SOURCE    FSTYPE OPTIONS
-# /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
-# sudo ntfsfix /dev/sdb2
 sudo apt-get install --yes ntfs-3g
+: # Usage:
+: # findmnt
+: # TARGET          SOURCE    FSTYPE OPTIONS
+: # /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+: # sudo ntfsfix /dev/sdb2
 
 # Remove APP repair-ntfs HOST
 sudo apt-get remove --yes ntfs-3g
 
 
 # Install APP signal HOST pc06
-# Web app: n/a
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list > /dev/null
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
@@ -334,7 +331,7 @@ sudo apt-get remove --yes sound-juicer
 # Install APP ssh HOST pc01 pc06
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-# Check for remote root access
+: # Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
@@ -344,21 +341,22 @@ sudo apt-get remove --yes ssh
 
 
 # Install APP sushi HOST pc06
-# Select a file, press the space bar, and a preview will appear.
 sudo apt-get install --yes gnome-sushi
+: # Usage:
+: # Select a file, press the space bar, and a preview will appear.
 
 # Remove APP sushi HOST pc06
 sudo apt-get remove --yes gnome-sushi
 
 
 # Install APP teamviewer HOST *
-# Web app: https://web.teamviewer.com
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
-# The installation adds an apt-key that is no longer needed.
+: # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo apt-key del 0C1289C0 DEB49217
+: # Web app: https://web.teamviewer.com
 
 # Remove APP teamviewer HOST *
 sudo apt-get remove --yes teamviewer
@@ -385,10 +383,10 @@ sudo apt-get remove --yes gufw
 
 
 # Install APP virtualbox HOST pc-van-hugo
-# If installation hangs or VBox does not work, check Linux-info.txt.
+: # If installation hangs or VBox does not work, check Linux-info.txt.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
-# VirtualBox Guest Additions ISO are in /usr/share/virtualbox/
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
+: # VirtualBox Guest Additions ISO are in /usr/share/virtualbox/
 
 # Remove APP virtualbox HOST pc-van-hugo
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso

@@ -21,7 +21,6 @@ kz-gset --delfav=calibre-gui
 
 
 # Setup APP cockpit USER karel@pc06
-# Web app: https://localhost:9090
 kz-gset --addfavaft=kz-cockpit
 
 # Reset APP cockpit USER karel@pc06
@@ -127,10 +126,10 @@ kz-gset --delfav=virt-manager
 
 
 # Setup APP lynis USER
-# Use Lynis (CISOfy):
-# cd ~/lynis
-# [sudo] ./lynis audit system
-git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis
+git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
+: # Use Lynis (CISOfy):
+: # cd ~/lynis
+: # [sudo] ./lynis audit system
 
 # Reset APP lynis USER
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
@@ -147,7 +146,6 @@ rm --force --verbose "$HOME"/.hidden
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset APP recover-files-thumbnails USER
-: # noop
 
 
 # Setup APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
@@ -194,7 +192,7 @@ kz-gset --delfav=kz-telegram
 
 # Setup APP terminal USER karel@pc01 karel@pc06
 kz-gset --addfavbef=org.gnome.Terminal
-# Search forward in history (with Ctrl-S).
+: # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
