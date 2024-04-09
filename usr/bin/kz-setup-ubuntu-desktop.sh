@@ -127,9 +127,9 @@ kz-gset --delfav=virt-manager
 
 # Setup APP lynis USER
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
-: # Use Lynis (CISOfy):
-: # cd ~/lynis
-: # [sudo] ./lynis audit system
+: # Usage:
+: #   cd ~/lynis
+: #   [sudo] ./lynis audit system
 
 # Reset APP lynis USER
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
