@@ -301,8 +301,8 @@ sudo snap remove procs
 sudo apt-get install --yes ntfs-3g
 : # Usage:
 : # $ findmnt
-: # $ TARGET          SOURCE    FSTYPE OPTIONS
-: # $ /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+: #   TARGET          SOURCE    FSTYPE OPTIONS
+: #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
 : # $ sudo ntfsfix /dev/sdb2
 
 # Remove APP repair-ntfs HOST
@@ -343,7 +343,7 @@ sudo apt-get remove --yes ssh
 # Install APP sushi HOST pc06
 sudo apt-get install --yes gnome-sushi
 : # Usage:
-: # $ Select a file, press the space bar, and a preview will appear.
+: #   Select a file, press the space bar, and a preview will appear.
 
 # Remove APP sushi HOST pc06
 sudo apt-get remove --yes gnome-sushi

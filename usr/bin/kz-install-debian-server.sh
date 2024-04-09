@@ -37,8 +37,8 @@ sudo apt-get remove --yes mlocate
 sudo apt-get install --yes ntfs-3g
 : # Usage:
 : # $ findmnt
-: # $ TARGET          SOURCE    FSTYPE OPTIONS
-: # $ /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+: #   TARGET          SOURCE    FSTYPE OPTIONS
+: #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
 : # $ sudo ntfsfix /dev/sdb2
 
 # Remove APP repair-ntfs HOST
