@@ -9,8 +9,8 @@
 # Setup APP lynis USER
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 : # Usage:
-: #   cd ~/lynis
-: #   [sudo] ./lynis audit system
+: # $ cd ~/lynis
+: # $ [sudo] ./lynis audit system
 
 # Reset APP lynis USER
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis

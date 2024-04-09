@@ -50,9 +50,9 @@ sudo snap remove deja-dup
 # Install APP fdupes HOST
 sudo apt-get install --yes fdupes
 : # Usage:
-: #   fdupes -r /home               # Report recursively from /home
-: #   fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
-: #   fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
+: # $ fdupes -r /home               # Report recursively from /home
+: # $ fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
+: # $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
 # Remove APP fdupes HOST
 sudo apt-get remove --yes fdupes
@@ -152,10 +152,10 @@ sudo apt-get remove --yes mlocate
 # Install APP repair-ntfs HOST
 sudo apt-get install --yes ntfs-3g
 : # Usage:
-: #   findmnt
-: #   TARGET          SOURCE    FSTYPE OPTIONS
-: #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
-: #   sudo ntfsfix /dev/sdb2
+: # $ findmnt
+: # $ TARGET          SOURCE    FSTYPE OPTIONS
+: # $ /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+: # $ sudo ntfsfix /dev/sdb2
 
 # Remove APP repair-ntfs HOST
 sudo apt-get remove --yes ntfs-3g
