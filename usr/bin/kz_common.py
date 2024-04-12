@@ -217,8 +217,8 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE_LINE,
                                      add_help=False)
     parser.add_argument('-h', '--help', action='store_true')
-    parser.add_argument('-u', '--usage', action='store_true')
     parser.add_argument('-m', '--manual', action='store_true')
+    parser.add_argument('-u', '--usage', action='store_true')
     parser.add_argument('-v', '--version', action='store_true')
     args = parser.parse_args()
 
@@ -226,12 +226,12 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
         process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME)
         term_script(PROGRAM_NAME)
         sys.exit(OK)
-    elif args.usage:
-        process_option_usage(DISPLAY_NAME, PROGRAM_NAME)
-        term_script(PROGRAM_NAME)
-        sys.exit(OK)
     elif args.manual:
         process_option_manual(PROGRAM_NAME)
+        term_script(PROGRAM_NAME)
+        sys.exit(OK)
+    elif args.usage:
+        process_option_usage(DISPLAY_NAME, PROGRAM_NAME)
         term_script(PROGRAM_NAME)
         sys.exit(OK)
     elif args.version:
@@ -259,17 +259,6 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     msg_info(PROGRAM_NAME, text)
 
 
-def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
-    """
-    This function shows the available options.
-    """
-    text = (f"{_('Usage: {}').format(DISPLAY_NAME)}"
-            ' [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n\n'
-            f'''{_("Type '{} --help' for more information.").
-                format(DISPLAY_NAME)}''')
-    msg_info(PROGRAM_NAME, text)
-
-
 def process_option_manual(PROGRAM_NAME):
     """
     This function displays the manual page..
@@ -287,6 +276,17 @@ def process_option_manual(PROGRAM_NAME):
         sys.exit(ERROR)
     else:
         return(OK)
+
+
+def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
+    """
+    This function shows the available options.
+    """
+    text = (f"{_('Usage: {}').format(DISPLAY_NAME)}"
+            ' [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n\n'
+            f'''{_("Type '{} --help' for more information.").
+                format(DISPLAY_NAME)}''')
+    msg_info(PROGRAM_NAME, text)
 
 
 def process_option_version(PROGRAM_NAME):

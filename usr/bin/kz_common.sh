@@ -43,8 +43,8 @@ $(gettext '  -u, --usage    give a short usage message')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -v, --version  print program version')"
 
-readonly    OPTIONS_SHORT='humv'
-readonly    OPTIONS_LONG='help,usage,manual,version'
+readonly    OPTIONS_SHORT='hmuv'
+readonly    OPTIONS_LONG='help,manual,usage,version'
 
 readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 if  type gnome-session &> /dev/null ||
@@ -234,12 +234,12 @@ function process_common_options {
                 process_option_help
                 exit $OK
                 ;;
-            -u|--usage)
-                process_option_usage
-                exit $OK
-                ;;
             -m|--manual)
                 process_option_manual
+                exit $OK
+                ;;
+            -u|--usage)
+                process_option_usage
                 exit $OK
                 ;;
             -v|--version)
