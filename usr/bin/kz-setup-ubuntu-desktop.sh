@@ -146,6 +146,7 @@ rm --force --verbose "$HOME"/.hidden
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset APP recover-files-thumbnails USER
+: # noop
 
 
 # Setup APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
