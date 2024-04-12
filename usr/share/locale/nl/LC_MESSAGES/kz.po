@@ -852,7 +852,7 @@ msgid ""
 "                  $OPTIONS_USAGE"
 msgstr ""
 "Gebruik: $DISPLAY_NAME [-g|--gui] [-s|--source MAP]\n"
-"                   $OPTIONS_USAGE"
+"                    $OPTIONS_USAGE"
 
 msgid ""
 "  -s, --source DIRECTORY\n"
