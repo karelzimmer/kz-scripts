@@ -6,6 +6,6 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-dashoptions='-d --dry-run -g --gui -t --target -h --help -u --usage -m --manual
-    -v --version'
+dashoptions='-g --gui -t --target -h --help -u --usage -m --manual -v
+    --version'
 complete -o default -W "$dashoptions" kz-backup

@@ -23,8 +23,8 @@ readonly    PROGRAM_NAME='kz-restore'
 readonly    PROGRAM_DESC=$(gettext 'Restore backup')
 readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-d|--dry-run] [-g|--\
-gui] [-s|--source DIRECTORY]
+readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-s|--sour\
+ce DIRECTORY]
                   \$OPTIONS_USAGE")"
 readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
@@ -34,23 +34,20 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short optio\
 ns too.")
 
-$(gettext '  -d, --dry-run  perform a test run without making any changes')
 $(gettext '  -g, --gui      starts in graphical mode')
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')
 $OPTIONS_HELP"
 
-readonly    X_OPTIONS_SHORT='dgs:'
-readonly    X_OPTIONS_LONG=',dry-run,gui,source:'
+readonly    X_OPTIONS_SHORT='gs:'
+readonly    X_OPTIONS_LONG=',gui,source:'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare     dry_run_option=''
 declare     medium=''
-declare     option_dry_run=false
 declare     option_source=false
 declare     source_argument=''
 declare     source_medium=''
@@ -83,11 +80,6 @@ function check_input {
 
     while true; do
         case $1 in
-            --dry-run)
-                option_dry_run=true
-                dry_run_option='--dry-run'
-                shift
-                ;;
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
                     text="$DISPLAY_NAME: $1: \
@@ -188,12 +180,6 @@ Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
     check_on_ac_power
     restore_backup
 
-    if $option_dry_run; then
-        text=$(gettext 'The backup was NOT restored (DRY RUN).')
-        msg_warning "$text"
-        exit $ERROR
-    fi
-
     if [[ $EDITION = 'desktop' ]]; then
         title=$(gettext 'Restore settings')
         text=$title
@@ -247,7 +233,6 @@ function restore_backup {
         msg_log "$title"...
         rsync   --archive               \
                 --verbose               \
-                $dry_run_option         \
                 "$source"/              \
                 "$target"/              \
                 2> "$error_file"    |
@@ -266,7 +251,6 @@ function restore_backup {
         rsync   --archive               \
                 --verbose               \
                 --human-readable        \
-                $dry_run_option         \
                 "$source"/              \
                 "$target"/              2> "$error_file" || restore_rc=$?
     fi

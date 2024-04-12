@@ -170,7 +170,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-t|--target DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
 
@@ -179,9 +179,6 @@ msgid "Usage: $DISPLAY_NAME [OPTION...]"
 msgstr ""
 
 msgid "Options:"
-msgstr ""
-
-msgid "  -d, --dry-run  perform a test run without making any changes"
 msgstr ""
 
 msgid "  -g, --gui      starts in graphical mode"
@@ -268,9 +265,6 @@ msgid ""
 "Try creating the back up again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
 "use app Terminal, type 'kz backup'."
-msgstr ""
-
-msgid "The backup has NOT been created (DRY RUN)."
 msgstr ""
 
 msgid "Disconnect the USB media"
@@ -746,7 +740,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-s|--source DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
 
@@ -782,9 +776,6 @@ msgid ""
 "Try restoring the back up again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
 "use app Terminal, type 'kz restore'."
-msgstr ""
-
-msgid "The backup was NOT restored (DRY RUN)."
 msgstr ""
 
 msgid "The backup has been restored."

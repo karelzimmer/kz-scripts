@@ -35,11 +35,6 @@ voor Jan op pc02.
 Met optie \fB-t\fR, \fB--target\fR \fIMAP\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
 .sp
-Optie \fB-d\fR, \fB--dry-run\fR voert een proefrun uit zonder wijzigingen aan
-te brengen. Het wordt meestal gebruikt in combinatie met rsync's optie --delete
-om te zien wat een rsync-commando gaat doen voordat men het daadwerkelijk
-uitvoert.
-.sp
 Deze locaties worden standaard genegeerd:
 .RS
  .adobe/Flash_Player/AssetCache
@@ -70,9 +65,6 @@ Met opdracht \fBkz restore\fR is de Persoonlijke map te herstellen.
 .\"
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
-.TP
-\fB-d\fR, \fB--dry-run\fR
-Een proefrun uitvoeren zonder wijzigingen aan te brengen.
 .TP
 \fB-t\fR, \fB--target \fIMAP\fR
 Plaats de back-up in \fIMAP\fR.
@@ -142,12 +134,6 @@ Day 2 Operations
 Maak een back-up (reservekopie) van de Persoonlijke map.
 Hiervoor is in een grafische werkomgeving ook starter \fBBack-up maken\fR
 beschikbaar.
-.RE
-.sp
-\fBkz backup --dry-run\fR
-.RS
-Toon bestanden die anders toegevoegd en verwijderd zouden worden in de
-back-up.
 .RE
 .sp
 \fBkz backup --target /media/jan/usbstick\fR

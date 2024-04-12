@@ -34,10 +34,6 @@ at pc02.
 With option \fB-t\fR, \fB--target\fR \fIDIRECTORY\fR another location can be
 specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
-Option \fB-d\fR, \fB--dry-run\fR performs a trial run without making any
-changes. It is usually used in conjunction with rsync's --delete option to see
-what an rsync command will do before actually executing it.
-.sp
 These locations are ignored by default:
 .RS
  .adobe/Flash_Player/AssetCache
@@ -67,9 +63,6 @@ With command \fBkz restore\fR the Home folder can be restored.
 .\"
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
-.TP
-\fB-d\fR, \fB--dry-run\fR
-Perform a test run without making any changes.
 .TP
 \fB-t\fR, \fB--target \fIDIRECTORY\fR
 Place the backup in the \fIDIRECTORY\fR.
@@ -138,11 +131,6 @@ explanation.
 Make a backup copy of the Home folder.
 Starter \fBMake a backup\fR is also available for this in a graphical work
 environment.
-.RE
-.sp
-\fBkz backup --dry-run\fR
-.RS
-Show files that would otherwise be added and removed in the backup.
 .RE
 .sp
 \fBkz backup --target /media/john/usbstick\fR

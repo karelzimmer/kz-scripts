@@ -33,11 +33,6 @@ desktop background and favorites will be restored from Home / .kz.
 With option \fB-s\fR, \fB--source\fR \fIDIRECTORY\fR another location can be
 specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
-Option  \fB-d\fR, \fB--dry-run\fR performs a trial run without making any
-changes. It is usually used in seeing what an rsync command will do before
-actually executing
-it.
-.sp
 rsync is used to restore the backup.
 .sp
 Files in the Home folder that are not in the backup are not deleted (rsync's
@@ -48,9 +43,6 @@ With command \fBkz backup\fR the Home folder can be backed up.
 .\"
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
-.TP
-\fB--dry-run\fR
-Perform a test run without making any changes.
 .TP
 \fB-s\fR, \fB--source \fIDIRECTORY\fR
 Use backups in the \fIDIRECTORY\fR.
@@ -109,11 +101,6 @@ explanation.
 Restore everything in the backup.
 Starter \fBRestore\fR is also available for this purpose in a graphical work
 environment.
-.RE
-.sp
-\fBkz restore --dry-run\fR
-.RS
-Show files that would be restored from the backup.
 .RE
 .sp
 \fBkz restore --source/media/john/usbstick\fR

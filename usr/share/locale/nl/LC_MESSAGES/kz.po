@@ -184,10 +184,10 @@ msgstr "Back-up maken"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-t|--target DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-t|--target MAP]\n"
+"Gebruik: $DISPLAY_NAME [-g|--gui] [-t|--target MAP]\n"
 "                   $OPTIONS_USAGE"
 
 #, sh-format
@@ -196,10 +196,6 @@ msgstr "Gebruik: $DISPLAY_NAME [OPTIE...]"
 
 msgid "Options:"
 msgstr "Opties:"
-
-msgid "  -d, --dry-run  perform a test run without making any changes"
-msgstr ""
-"  -d, --dry-run  een proefrun uitvoeren zonder wijzigingen aan te brengen"
 
 msgid "  -g, --gui      starts in graphical mode"
 msgstr "  -g, --gui      start in grafische modus"
@@ -310,9 +306,6 @@ msgstr ""
 "Probeer de back-up opnieuw te maken.\n"
 "Gebruik app 'Installatie menu' en selecteer '5 - Opdrachtmenu', of\n"
 "gebruik app Terminal en typ 'kz backup'."
-
-msgid "The backup has NOT been created (DRY RUN)."
-msgstr "De back-up is NIET gemaakt (DRY RUN)."
 
 msgid "Disconnect the USB media"
 msgstr "Het usb-medium afkoppelen"
@@ -852,14 +845,6 @@ msgstr "$prompt [J/n]: "
 msgid "The following has been executed:"
 msgstr "Het volgende is uitgevoerd:"
 
-#, sh-format
-msgid ""
-"Usage: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-s|--source DIRECTORY]\n"
-"                  $OPTIONS_USAGE"
-msgstr ""
-"Gebruik: $DISPLAY_NAME [-d|--dry-run] [-g|--gui] [-s|--source MAP]\n"
-"                    $OPTIONS_USAGE"
-
 msgid ""
 "  -s, --source DIRECTORY\n"
 "                 use backup in DIRECTORY"
@@ -911,9 +896,6 @@ msgstr ""
 "Probeer de back-up opnieuw terug te zetten.\n"
 "Gebruik app 'Installatie menu' en selecteer '5 - Opdrachtmenu', of\n"
 "gebruik app Terminal en typ 'kz restore'."
-
-msgid "The backup was NOT restored (DRY RUN)."
-msgstr "De back-up is NIET teruggezet (DRY RUN)."
 
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
