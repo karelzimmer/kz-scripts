@@ -251,8 +251,8 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
             f'{PROGRAM_DESC}.\n\n'
             f"{_('Options:')}\n"
             f"{_('  -h, --help     give this help list')}\n"
-            f"{_('  -u, --usage    give a short usage message')}\n"
             f"{_('  -m, --manual   show manual page')}\n"
+            f"{_('  -u, --usage    give a short usage message')}\n"
             f"{_('  -v, --version  print program version')}\n\n"
             f'''{_("Type 'man {}' or see the {} for more information.").
                format(DISPLAY_NAME, man_url)}''')
