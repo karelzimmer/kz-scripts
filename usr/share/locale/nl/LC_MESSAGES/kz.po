@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-09 07:48+0200\n"
+"POT-Creation-Date: 2024-04-12 16:59+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -81,7 +81,6 @@ msgstr ""
 msgid "Type '$DISPLAY_NAME --help' for more information."
 msgstr "Typ '$DISPLAY_NAME --help' voor meer informatie."
 
-
 msgid ""
 "Written by Karel Zimmer <info@karelzimmer.nl>, Creative Commons Zero 1.0 "
 "license <https://creativecommons.org/publicdomain/zero/1.0>."
@@ -139,10 +138,12 @@ msgstr "Opdracht uitvoeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Usage: $DISPLAY_NAME [-l|--list]\n"
+"          $OPTIONS_USAGE\n"
 "          COMMAND [ARGUMENT...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Gebruik: $DISPLAY_NAME [-l|--list]\n"
+"            $OPTIONS_USAGE\n"
 "            OPDRACHT [ARGUMENT...]"
 
 #, sh-format
@@ -844,6 +845,14 @@ msgstr "$prompt [J/n]: "
 
 msgid "The following has been executed:"
 msgstr "Het volgende is uitgevoerd:"
+
+#, sh-format
+msgid ""
+"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
+"                  $OPTIONS_USAGE"
+msgstr ""
+"Gebruik: $DISPLAY_NAME [-g|--gui] [-s|--source MAP]\n"
+"                   $OPTIONS_USAGE"
 
 msgid ""
 "  -s, --source DIRECTORY\n"
