@@ -202,9 +202,9 @@ T{
 T}:T{
 T}
 T{
-# Install APP google-earth HOST
+# Install APP google-earth HOST -none
 T}:T{
-Do not install Google Earth by default, zie [4].
+Do not install Google Earth by default, see [4].
 T}
 T{
 sudo apt-get install --yes google-earth
@@ -215,28 +215,28 @@ T}
 .sp
 [1]
 .br
-The line with '*' causes the associated commands to run on all computers.
+The line with 'HOST *' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line with 'pc02' ensures that the associated commands are executed only on
-pc02.
+The line with 'HOST pc02' ensures that the associated commands are executed
+only on pc02.
 .br
 The APP can still be installed on another computer with the command 'kz instal\
 l google-earth'.
 .sp
 [3]
 .br
-The line with 'pc01 pc02' ensures that the associated commands are executed
-only on pc01 and pc02 by default.
+The line with 'HOST pc01 pc02' ensures that the associated commands are
+executed only on pc01 and pc02 by default.
 .br
 The APP can still be installed on another computer with the command 'kz instal\
 l kvm'.
 .sp
 [4]
 .br
-The line without a computer name after HOST ensures that the associated
-commands are not executed by default.
+The line with 'HOST -none' ensures that the associated commands are not
+executed by default (NOTE: '-none' is not a valid computer name).
 .br
 The APP can still be installed with the command 'kz install google-earth'.
 .\"

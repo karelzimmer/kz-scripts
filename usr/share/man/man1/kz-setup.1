@@ -199,7 +199,7 @@ T{
 T}:T{
 T}
 T{
-# Setup APP google-earth HOST
+# Setup APP google-earth USER -none
 T}:T{
 Do not set up Google Earth by default, see [4]
 T}
@@ -212,28 +212,28 @@ T}
 .sp
 [1]
 .br
-The line with '*' causes the associated commands to run for every user.
+The line with 'USER *' causes the associated commands to run for every user.
 .sp
 [2]
 .br
-The line with 'john@pc02' ensures that the associated commands are executed
-only for John on pc02.
+The line with 'USER john@pc02' ensures that the associated commands are
+executed only for John on pc02.
 .br
 The APP can still be set up on another computer with the command 'kz setup goo\
 gle-earth'.
 .sp
 [3]
 .br
-The line with 'jane@pc01 jan@pc02' ensures that the associated commands are
-executed only for Jane on pc01 and for John on pc02 by default.
+The line with 'USER jane@pc01 jan@pc02' ensures that the associated commands
+are executed only for Jane on pc01 and for John on pc02 by default.
 .br
 The APP can still be set up on another computer with the command 'kz setup kvm\
 '.
 .sp
 [4]
 .br
-The line without a computer name after HOST ensures that the associated
-commands are not executed by default.
+The line with 'USER -none' ensures that the associated commands are not
+executed by default (NOTE: '-none' is not a valid user or computer name).
 .br
 The APP can still be set up with the command 'kz setup google-earth'.
 .\"

@@ -207,7 +207,7 @@ T{
 T}:T{
 T}
 T{
-# Install APP google-earth HOST
+# Install APP google-earth HOST -none
 T}:T{
 Standaard niet google-earth installeren, zie [4]
 T}
@@ -220,12 +220,12 @@ T}
 .sp
 [1]
 .br
-De regel met '*' zorgt ervoor dat de bijbehorende opdrachten op alle computers
-worden uitgevoerd.
+De regel met 'HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
+computers worden uitgevoerd.
 .sp
 [2]
 .br
-De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
+De regel met 'HOST pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
 alleen op pc02 worden uitgevoerd.
 .br
 De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
@@ -233,16 +233,16 @@ De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 .sp
 [3]
 .br
-De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
-alleen op pc01 en pc02 worden uitgevoerd.
+De regel met 'HOST pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten
+standaard alleen op pc01 en pc02 worden uitgevoerd.
 .br
 De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 'kz install kvm'.
 .sp
 [4]
 .br
-De regel zonder computernaam achter HOST zorgt ervoor dat de bijbehorende
-opdrachten standaard niet worden uitgevoerd.
+De regel 'HOST -none' zorgt ervoor dat de bijbehorende opdrachten standaard
+niet worden uitgevoerd (OPMERKING: '-none' is geen geldige computernaam).
 .br
 De APP kan alsnog worden geïnstalleerd met de opdracht 'kz install google-eart\
 h'.

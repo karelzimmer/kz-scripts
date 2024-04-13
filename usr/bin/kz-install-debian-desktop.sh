@@ -6,14 +6,14 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Install APP anydesk HOST
+# Install APP anydesk HOST -none
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
 sudo apt-get update
 sudo apt-get install --yes anydesk
 : # Web app: https://my.anydesk.com/v2
 
-# Remove APP anydesk HOST
+# Remove APP anydesk HOST -none
 sudo apt-get remove --yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
@@ -47,35 +47,35 @@ sudo snap install --classic deja-dup
 sudo snap remove deja-dup
 
 
-# Install APP fdupes HOST
+# Install APP fdupes HOST -none
 sudo apt-get install --yes fdupes
 : # Usage:
 : # $ fdupes -r /home               # Report recursively from /home
 : # $ fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
 : # $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
-# Remove APP fdupes HOST
+# Remove APP fdupes HOST -none
 sudo apt-get remove --yes fdupes
 
 
-# Install APP force-x11 HOST
+# Install APP force-x11 HOST -none
 : # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 : # Force means no choice @ user login for X11 or Wayland!
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 : # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
-# Remove APP force-x11 HOST
+# Remove APP force-x11 HOST -none
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 : # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 
-# Install APP fwupd HOST
+# Install APP fwupd HOST -none
 : # Disable the Firmware update daemon
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove APP fwupd HOST
+# Remove APP fwupd HOST -none
 : # Enable the Firmware update daemon
 systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
@@ -113,11 +113,11 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share
 sudo apt-get update
 
 
-# Install APP guest HOST
+# Install APP guest HOST -none
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
-# Remove APP guest HOST
+# Remove APP guest HOST -none
 sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
@@ -149,7 +149,7 @@ sudo apt-get install --yes mlocate
 sudo apt-get remove --yes mlocate
 
 
-# Install APP repair-ntfs HOST
+# Install APP repair-ntfs HOST -none
 sudo apt-get install --yes ntfs-3g
 : # Usage:
 : # $ findmnt
@@ -157,7 +157,7 @@ sudo apt-get install --yes ntfs-3g
 : #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
 : # $ sudo ntfsfix /dev/sdb2
 
-# Remove APP repair-ntfs HOST
+# Remove APP repair-ntfs HOST -none
 sudo apt-get remove --yes ntfs-3g
 
 
