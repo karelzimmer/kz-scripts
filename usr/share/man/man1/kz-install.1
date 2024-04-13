@@ -44,7 +44,7 @@ desktop.
 When processing the input file, the commands for any and the current computer
 are selected and copied to a command file.
 .sp
-Option \fB-a\fR, \fB--apps\fR lists apps available in the input file.
+Option \fB-a\fR, \fB--apps\fR lists all apps available in the input file.
 .sp
 It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands are
 selected from the input file and are copied to the command file.
@@ -82,6 +82,7 @@ are processed.
 See \fBTable 2\fR for an \fBexample\fR of these records in sample file
 kz-install-ubuntu-desktop.sh for computer pc02.
 More examples can be seen through the \fBkz install --cat\fR command.
+.sp
 .sp
 .B Table 1. Record types and their processing
 .TS
@@ -124,9 +125,6 @@ Install/Remove command.
 T}
 .TE
 .sp
-.sp
-When using option \fB-a\fR, \fB--apps\fR, only <app name> is selected, and not
-<computer name>.
 .sp
 .B Table 2. Lines in sample file kz-install-ubuntu-desktop.sh
 .TS
