@@ -175,7 +175,7 @@ started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
 }
 
 
-# This function returns an error message and logs it.
+# This function returns an error message.
 function msg_error {
     if $option_gui; then
         title=$(eval_gettext "Error message \$DISPLAY_NAME")
@@ -190,7 +190,7 @@ function msg_error {
 }
 
 
-# This function returns an informational message and logs it.
+# This function returns an informational message.
 function msg_info {
     if $option_gui; then
         title=$(eval_gettext "Information \$DISPLAY_NAME")
@@ -211,7 +211,7 @@ function msg_log {
 }
 
 
-# This function returns a warning message and logs it.
+# This function returns a warning message.
 function msg_warning {
     if $option_gui; then
         title=$(eval_gettext "Warning \$DISPLAY_NAME")

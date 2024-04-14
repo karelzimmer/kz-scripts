@@ -181,14 +181,14 @@ def init_script(PROGRAM_NAME):
 
 def msg_error(PROGRAM_NAME, text):
     """
-    This function returns an error message and logs it.
+    This function returns an error message.
     """
     print(f'{RED}{text}{NORMAL}')
 
 
 def msg_info(PROGRAM_NAME, text):
     """
-    This function returns an informational message and logs it.
+    This function returns an informational message.
     """
     print(f'{text}')
 
@@ -202,7 +202,7 @@ def msg_log(PROGRAM_NAME, text):
 
 def msg_warning(PROGRAM_NAME, text):
     """
-    This function returns a warning message and logs it.
+    This function returns a warning message.
     """
     print(f'{YELLOW}{text}{NORMAL}')
 
