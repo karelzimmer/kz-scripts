@@ -6,10 +6,10 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Setup APP anydesk USER -none
+# Setup APP anydesk USER -nouser
 kz-gset --addfavaft=anydesk
 
-# Reset APP anydesk USER -none
+# Reset APP anydesk USER -nouser
 kz-gset --delfav=anydesk
 
 
@@ -125,13 +125,13 @@ kz-gset --addfavaft=virt-manager
 kz-gset --delfav=virt-manager
 
 
-# Setup APP lynis USER -none
+# Setup APP lynis USER -nouser
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 : # Usage:
 : # $ cd ~/lynis
 : # $ [sudo] ./lynis audit system
 
-# Reset APP lynis USER -none
+# Reset APP lynis USER -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
@@ -142,10 +142,10 @@ echo 'snap' > "$HOME"/.hidden
 rm --force --verbose "$HOME"/.hidden
 
 
-# Setup APP recover-files-thumbnails USER -none
+# Setup APP recover-files-thumbnails USER -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
-# Reset APP recover-files-thumbnails USER -none
+# Reset APP recover-files-thumbnails USER -nouser
 : # noop
 
 

@@ -13,13 +13,13 @@ sudo apt-get install --yes ansible
 sudo apt-get remove --yes ansible
 
 
-# Install APP fwupd HOST -none
+# Install APP fwupd HOST -nohost
 : # Disable the Firmware update daemon
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove APP fwupd HOST -none
+# Remove APP fwupd HOST -nohost
 : # Enable the Firmware update daemon
 systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
@@ -33,7 +33,7 @@ sudo apt-get install --yes mlocate
 sudo apt-get remove --yes mlocate
 
 
-# Install APP repair-ntfs HOST -none
+# Install APP repair-ntfs HOST -nohost
 sudo apt-get install --yes ntfs-3g
 : # Usage:
 : # $ findmnt
@@ -41,7 +41,7 @@ sudo apt-get install --yes ntfs-3g
 : #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
 : # $ sudo ntfsfix /dev/sdb2
 
-# Remove APP repair-ntfs HOST -none
+# Remove APP repair-ntfs HOST -nohost
 sudo apt-get remove --yes ntfs-3g
 
 

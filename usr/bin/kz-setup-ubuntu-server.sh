@@ -6,13 +6,13 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Setup APP lynis USER -none
+# Setup APP lynis USER -nouser
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 : # Usage:
 : # $ cd ~/lynis
 : # $ [sudo] ./lynis audit system
 
-# Reset APP lynis USER -none
+# Reset APP lynis USER -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
