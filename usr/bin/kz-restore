@@ -136,7 +136,7 @@ $USAGE_LINE"
             msg_info "$text"
             exit $ERROR
         fi
-        source=$source_argument/backup-$HOSTNAME-$USER
+        source=$source_argument/$USER@$HOSTNAME
         source_medium=$source_argument
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
@@ -166,12 +166,12 @@ Disconnect media via Files.")"
                 exit $ERROR
             fi
         fi
-        source=$medium/backup-$HOSTNAME-$USER
+        source=$medium/$USER@$HOSTNAME
         source_medium=$medium
         if [[ ! -d $source ]]; then
             text=$(eval_gettext "No backup found on connected USB medium.
 
-Connect a USB medium with the directory backup-\$HOSTNAME-\$USER.")
+Connect a USB medium with the directory \$USER@\$HOSTNAME.")
             msg_error "$text"
             exit $ERROR
         fi

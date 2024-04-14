@@ -136,7 +136,7 @@ $USAGE_LINE"
             msg_info "$text"
             exit $ERROR
         fi
-        target=$target_argument/backup-$HOSTNAME-$USER
+        target=$target_argument/$USER@$HOSTNAME
         target_medium=$target_argument
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
@@ -168,7 +168,7 @@ Disconnect media via Files.")"
                 exit $ERROR
             fi
         fi
-        target=$medium/backup-$HOSTNAME-$USER
+        target=$medium/$USER@$HOSTNAME
         target_medium=$medium
     fi
 
