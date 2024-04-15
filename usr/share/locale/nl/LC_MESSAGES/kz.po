@@ -85,11 +85,9 @@ msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
 msgid ""
-"Creative Commons Zero 1.0 license <https://creativecommons.org/publicdomain/"
-"zero/1.0>."
+"CC0 1.0 license <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
-"Creative Commons Zero 1.0 licentie <https://creativecommons.org/publicdomain/"
-"zero/1.0/deed.nl>."
+"CC0 1.0 licentie <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
 #, sh-format
 msgid "Information $DISPLAY_NAME"
