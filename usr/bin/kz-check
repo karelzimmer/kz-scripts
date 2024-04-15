@@ -19,12 +19,12 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-check'
-readonly    PROGRAM_DESC=$(gettext 'Check scripts')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-check'
+readonly PROGRAM_DESC=$(gettext 'Check scripts')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -36,7 +36,7 @@ $OPTIONS_HELP"
 # Variables
 ###############################################################################
 
-declare     error_flag=false
+declare error_flag=false
 
 
 ###############################################################################
@@ -86,10 +86,10 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
-    local   script=''
-    local   scriptdir=''
-    local   scriptname=''
-    local   scripts_repo=$HOME/kz-scripts
+    local script=''
+    local scriptdir=''
+    local scriptname=''
+    local scripts_repo=$HOME/kz-scripts
 
     text=$(gettext 'Check scripts'):
     msg_info "$text"
@@ -152,9 +152,9 @@ function process_input {
 
 # This function checks Shell and Python script code.
 function check_code {
-    local   bash_script='#!''/usr/bin/bash'
-    local   python_script='#!''/usr/bin/python3'
-    local   tab_completion_script='# ''shellcheck shell=bash'
+    local bash_script='#!''/usr/bin/bash'
+    local python_script='#!''/usr/bin/python3'
+    local tab_completion_script='# ''shellcheck shell=bash'
 
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
         check_shellcheck
@@ -214,9 +214,9 @@ function check_shellcheck {
 
 # This function checks the existence of tags.
 function check_tags {
-    local   bug='B''U''G'
-    local   fixme='F''I''X''M''E'
-    local   todo='T''O''D''O'
+    local bug='B''U''G'
+    local fixme='F''I''X''M''E'
+    local todo='T''O''D''O'
 
     if grep --quiet             \
             --regexp="$bug"     \

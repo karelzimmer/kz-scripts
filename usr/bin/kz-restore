@@ -19,14 +19,14 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-restore'
-readonly    PROGRAM_DESC=$(gettext 'Restore backup')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-restore'
+readonly PROGRAM_DESC=$(gettext 'Restore backup')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-s|--sour\
+readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-s|--sour\
 ce DIRECTORY]
                   \$OPTIONS_USAGE")"
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -39,19 +39,19 @@ $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')
 $OPTIONS_HELP"
 
-readonly    X_OPTIONS_SHORT='gs:'
-readonly    X_OPTIONS_LONG=',gui,source:'
+readonly X_OPTIONS_SHORT='gs:'
+readonly X_OPTIONS_LONG=',gui,source:'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare     medium=''
-declare     option_source=false
-declare     source_argument=''
-declare     source_medium=''
-declare     source=''
+declare medium=''
+declare option_source=false
+declare source_argument=''
+declare source_medium=''
+declare source=''
 
 
 ###############################################################################
@@ -284,7 +284,7 @@ function restore_settings {
 
 # This function restores the desktop background.
 function restore_settings_desktop_background_picture {
-    local   input_file=$SETTINGS/desktop-background-picture
+    local input_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
@@ -297,7 +297,7 @@ function restore_settings_desktop_background_picture {
 
 # This function restores the favorite apps.
 function restore_settings_favorite_apps {
-    local   input_file=$SETTINGS/favorite-apps
+    local input_file=$SETTINGS/favorite-apps
 
     msg_log 'Restore the favorite apps...'
     if [[ -f $input_file ]]; then

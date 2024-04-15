@@ -19,12 +19,12 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-getdev'
-readonly    PROGRAM_DESC=$(gettext 'Build development environment')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-getdev'
+readonly PROGRAM_DESC=$(gettext 'Build development environment')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -93,7 +93,7 @@ function process_input {
 
 # This function check and installs dependencies.
 function check_dependencies {
-    local   escape='gettext'
+    local escape='gettext'
 
     text=$(gettext 'Check dependencies')...
     msg_info "$text"
@@ -125,7 +125,7 @@ function check_dependencies {
 
 # This function retrieves the public repos.
 function pull_repos {
-    local   bin_repo=/home/"$USER"/bin
+    local bin_repo=/home/"$USER"/bin
 
     git config --global user.name 'Karel Zimmer'
     git config --global user.email 'karel.zimmer@gmail.com'
@@ -154,15 +154,15 @@ function pull_repos {
 
 # This function downloads the website.
 function download_website {
-    local   ftp_set='set ssl:verify-certificate no'
-    local   ftp_from=/httpdocs
-    local   ftp_to=$HOME/kz-upload/dist
-    local   ftp_opts='--delete --verbose'
-    local   ftp_cmd="mirror  $ftp_opts $ftp_from $ftp_to; exit"
-    local   ftp_host=server106.hosting2go.nl
-    local   ftp_user=kzimmer
-    local   ftp_login=$SETTINGS/$ftp_host'-login'
-    local   prompt="$(gettext 'Password for') ftp://$ftp_host': "
+    local ftp_set='set ssl:verify-certificate no'
+    local ftp_from=/httpdocs
+    local ftp_to=$HOME/kz-upload/dist
+    local ftp_opts='--delete --verbose'
+    local ftp_cmd="mirror  $ftp_opts $ftp_from $ftp_to; exit"
+    local ftp_host=server106.hosting2go.nl
+    local ftp_user=kzimmer
+    local ftp_login=$SETTINGS/$ftp_host'-login'
+    local prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
     if [[ ! -f $ftp_login ]]; then
         read -rsp "$prompt" < /dev/tty

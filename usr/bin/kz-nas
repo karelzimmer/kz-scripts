@@ -130,12 +130,12 @@ $USAGE_LINE"
 
 # This function asks the user for input.
 request_input() {
-    local       quest1=$(eval_gettext "Does the NAS have a fixed IP address su\
-ch as \$nas_ip_address?")
-    local       quest2=$(gettext 'IP address of the NAS')
-    local       quest3=$(gettext 'User name on the NAS')
-    local       quest4=$(gettext 'Password of this user on the NAS')
-    local       quest5=$(gettext 'Share name of this user on the NAS')
+    local quest1=$(eval_gettext "Does the NAS have a fixed IP address such as \
+\$nas_ip_address?")
+    local quest2=$(gettext 'IP address of the NAS')
+    local quest3=$(gettext 'User name on the NAS')
+    local quest4=$(gettext 'Password of this user on the NAS')
+    local quest5=$(gettext 'Share name of this user on the NAS')
 
     title=$(gettext 'Question')
     text=$quest1

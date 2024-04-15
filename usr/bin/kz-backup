@@ -19,14 +19,14 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-backup'
-readonly    PROGRAM_DESC=$(gettext 'Make backup')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-backup'
+readonly PROGRAM_DESC=$(gettext 'Make backup')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-t|--targ\
+readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-t|--targ\
 et DIRECTORY]
                  \$OPTIONS_USAGE")"
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -39,19 +39,19 @@ $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')
 $OPTIONS_HELP"
 
-readonly    X_OPTIONS_SHORT='gt:'
-readonly    X_OPTIONS_LONG=',gui,target:'
+readonly X_OPTIONS_SHORT='gt:'
+readonly X_OPTIONS_LONG=',gui,target:'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare     medium=''
-declare     option_target=false
-declare     target_argument=''
-declare     target_medium=''
-declare     target=''
+declare medium=''
+declare option_target=false
+declare target_argument=''
+declare target_medium=''
+declare target=''
 
 
 ###############################################################################
@@ -231,8 +231,8 @@ function backup_settings {
 
 # This function copies the desktop background.
 function backup_settings_desktop_background_picture {
-    local   input_file=''
-    local   output_file=$SETTINGS/desktop-background-picture
+    local input_file=''
+    local output_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -247,7 +247,7 @@ function backup_settings_desktop_background_picture {
 
 # This function saves the favorite apps.
 function backup_settings_favorite_apps {
-    local   output_file=$SETTINGS/favorite-apps
+    local output_file=$SETTINGS/favorite-apps
 
     msg_log 'Save the favorite apps...'
     gsettings get                           \
@@ -257,14 +257,14 @@ function backup_settings_favorite_apps {
 
 # This function creates a list of installed apps.
 function backup_settings_installed_apps {
-    local   output_file=$SETTINGS/installed-apps
-    local   header1=$(gettext '==== START list of installed packages ====')
-    local   footer1=$(gettext '==== END list of installed packages ====')
-    local   header2=$(gettext '==== START list of installed snaps ====')
-    local   footer2=$(gettext '==== END list of installed snaps ====')
-    local   header3=$(gettext '==== START list of added repositories ====')
-    local   footer3=$(gettext '==== END list of added repositories ====')
-    local   search=/etc/apt/sources.list
+    local output_file=$SETTINGS/installed-apps
+    local header1=$(gettext '==== START list of installed packages ====')
+    local footer1=$(gettext '==== END list of installed packages ====')
+    local header2=$(gettext '==== START list of installed snaps ====')
+    local footer2=$(gettext '==== END list of installed snaps ====')
+    local header3=$(gettext '==== START list of added repositories ====')
+    local footer3=$(gettext '==== END list of added repositories ====')
+    local search=/etc/apt/sources.list
 
     msg_log 'Create a list of installed apps...(ignore WARNING)'
 
@@ -294,8 +294,8 @@ function backup_settings_installed_apps {
 
 # This function copies the user photo.
 function backup_settings_user_profile_picture {
-    local   input_file=/var/lib/AccountsService/icons/"$USER"
-    local   output_file=$SETTINGS/user-profile-picture
+    local input_file=/var/lib/AccountsService/icons/"$USER"
+    local output_file=$SETTINGS/user-profile-picture
 
     msg_log 'Copy the user photo...'
     cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
@@ -327,7 +327,7 @@ function delete_settings_previously_backuped {
 
 # This function restores the desktop background.
 function restore_settings_desktop_background_picture {
-    local   input_file=$SETTINGS/desktop-background-picture
+    local input_file=$SETTINGS/desktop-background-picture
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then

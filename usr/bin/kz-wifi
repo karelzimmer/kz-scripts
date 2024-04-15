@@ -19,13 +19,13 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-wifi'
-readonly    PROGRAM_DESC=$(gettext 'Show WiFi information')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-wifi'
+readonly PROGRAM_DESC=$(gettext 'Show WiFi information')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
 SAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -33,8 +33,8 @@ $(gettext 'Options:')
 $OPTIONS_HELP
 $(gettext '  -g, --gui      starts in graphical mode')"
 
-readonly    X_OPTIONS_SHORT='g'
-readonly    X_OPTIONS_LONG=',gui'
+readonly X_OPTIONS_SHORT='g'
+readonly X_OPTIONS_LONG=',gui'
 
 
 ###############################################################################

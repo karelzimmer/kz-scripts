@@ -19,16 +19,16 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-setup'
-readonly    PROGRAM_DESC=$(gettext 'Set up apps')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-setup'
+readonly PROGRAM_DESC=$(gettext 'Set up apps')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat]\
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat]\
  [-f|--file FILE]
                 [-g|--gui] [-l|--list] [-r|--reset]
                 \$OPTIONS_USAGE
                 [--] [APP...]")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -47,10 +47,10 @@ tion processing")
 $(gettext 'Arguments:')
 $(gettext '  APP            set up APPs')"
 
-readonly    X_OPTIONS_SHORT='acf:lgr'
-readonly    X_OPTIONS_LONG=',apps,cat,file:,list,gui,reset'
+readonly X_OPTIONS_SHORT='acf:lgr'
+readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,reset'
 
-readonly    PROGRAM_PATH=$MODULE_PATH
+readonly PROGRAM_PATH=$MODULE_PATH
 
 
 ###############################################################################
@@ -226,7 +226,7 @@ nd end with '.sh'.")"
 
 # This function displays a list of input files present.
 function process_option_list {
-    local   files=''
+    local files=''
 
     text="$(gettext 'The following FILEs are present:')
 
@@ -257,7 +257,7 @@ $USAGE_LINE"
 
 # This function shows the available APPs from the input file.
 function process_option_apps {
-    local   apps=''
+    local apps=''
 
     text="$(gettext 'The following APPs are available:')
 
@@ -295,9 +295,9 @@ $USAGE_LINE"
 
 # This function processes argument APP.
 function process_argument_app {
-    local   app_not_found=false
-    local   app_argument=''
-    local   newline=''
+    local app_not_found=false
+    local app_argument=''
+    local newline=''
 
     for app_argument in "${app_arguments[@]}"; do
         process_input_file_by_app
@@ -315,11 +315,11 @@ function process_argument_app {
 # This function generates the command file from the input file and filters by
 # APP.
 function process_input_file_by_app {
-    local   app_match=false
-    local   app_name=''
-    local   app_mode=''
-    local   input_record=''
-    local   no_app_match=true
+    local app_match=false
+    local app_name=''
+    local app_mode=''
+    local input_record=''
+    local no_app_match=true
 
     while read -r input_record; do
         case $input_record in
@@ -369,12 +369,12 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # USER.
 function process_input_file_by_user {
-    local   app_mode=''
-    local   current_user=$USER'@'$HOSTNAME
-    local   input_record=''
-    local   newline=''
-    local   user_match=false
-    local   user_names=''
+    local app_mode=''
+    local current_user=$USER'@'$HOSTNAME
+    local input_record=''
+    local newline=''
+    local user_match=false
+    local user_names=''
 
     while read -r input_record; do
         case $input_record in
@@ -477,9 +477,9 @@ function process_command_file {
 
 # This function reports and executes a command from the command file.
 function execute_command {
-    local   cmd=${1:-unknown}
-    local   cmd_dis=''
-    local   cmd_dis_len=0
+    local cmd=${1:-unknown}
+    local cmd_dis=''
+    local cmd_dis_len=0
 
     no_commands_found=false
     ((++cmd_seq_num))
@@ -506,8 +506,8 @@ function execute_command {
 
 # This function controls the termination of the script.
 function term_script {
-    local   failed_apps_text=''
-    local   operation=$(gettext 'set up')
+    local failed_apps_text=''
+    local operation=$(gettext 'set up')
 
     if $no_commands_found; then
         text=$(gettext 'No commands to execute.' )

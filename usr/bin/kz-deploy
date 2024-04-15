@@ -19,23 +19,23 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-deploy'
-readonly    PROGRAM_DESC=$(gettext 'Distribute kz package')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-deploy'
+readonly PROGRAM_DESC=$(gettext 'Distribute kz package')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-readonly    DEB_REPO=$HOME/kz-deb
-readonly    DOCS_REPO=$HOME/kz-docs
-readonly    SCRIPTS_REPO=$HOME/kz-scripts
-readonly    UPLOADS_REPO=$HOME/kz-upload
-readonly    UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
+readonly DEB_REPO=$HOME/kz-deb
+readonly DOCS_REPO=$HOME/kz-docs
+readonly SCRIPTS_REPO=$HOME/kz-scripts
+readonly UPLOADS_REPO=$HOME/kz-upload
+readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 
 ###############################################################################
@@ -100,7 +100,7 @@ function process_input {
 
 # This function check that the repos are in the desired state.
 function check_repos {
-    local   error_flag=false
+    local error_flag=false
 
 
     text=$(gettext 'Check that all repos are on branch main')...
@@ -146,15 +146,15 @@ function build_package {
 
 # This function uploads the website.
 function upload_website {
-    local   ftp_set='set ssl:verify-certificate no'
-    local   ftp_from=$UPLOADS_REPO_DISTDIR
-    local   ftp_to=/httpdocs
-    local   ftp_opts='--reverse --delete --verbose'
-    local   ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
-    local   ftp_host=server106.hosting2go.nl
-    local   ftp_user=kzimmer
-    local   ftp_login=$SETTINGS/$ftp_host'-login'
-    local   prompt="$(gettext 'Password for') ftp://$ftp_host': "
+    local ftp_set='set ssl:verify-certificate no'
+    local ftp_from=$UPLOADS_REPO_DISTDIR
+    local ftp_to=/httpdocs
+    local ftp_opts='--reverse --delete --verbose'
+    local ftp_cmd="mirror $ftp_opts $ftp_from $ftp_to; exit"
+    local ftp_host=server106.hosting2go.nl
+    local ftp_user=kzimmer
+    local ftp_login=$SETTINGS/$ftp_host'-login'
+    local prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
     text=$(gettext 'Upload website')...
     msg_info "$text"

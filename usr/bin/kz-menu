@@ -19,13 +19,13 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-menu'
-readonly    PROGRAM_DESC=$(gettext 'Installation menu')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-menu'
+readonly PROGRAM_DESC=$(gettext 'Installation menu')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
 SAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -33,14 +33,14 @@ $(gettext 'Options:')
 $(gettext '  -g, --gui      starts in graphical mode')
 $OPTIONS_HELP"
 
-readonly    X_OPTIONS_SHORT='g'
-readonly    X_OPTIONS_LONG=',gui'
+readonly X_OPTIONS_SHORT='g'
+readonly X_OPTIONS_LONG=',gui'
 
-readonly    PROGRAM_PATH=$MODULE_PATH
+readonly PROGRAM_PATH=$MODULE_PATH
 
             MENU1_TITLE=$(gettext 'Installation menu')
-readonly    MENU1_TITLE
-readonly    MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
+readonly MENU1_TITLE
+readonly MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
 readonly -a MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
@@ -57,11 +57,11 @@ readonly -a MENU1_COMMANDS=(
                 "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
-readonly    MENU1_LINES=${#MENU1_ACTIONS[@]}
+readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
             MENU2_TITLE=$(gettext 'Command menu')
-readonly    MENU2_TITLE
-readonly    MENU2_HEAD="------------------ $MENU2_TITLE ------------------"
+readonly MENU2_TITLE
+readonly MENU2_HEAD="------------------ $MENU2_TITLE ------------------"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
@@ -78,7 +78,7 @@ readonly -a MENU2_COMMANDS=(
                 'kz setup'
                 "$(gettext 'Installation menu')"
             )
-readonly    MENU2_LINES=${#MENU2_ACTIONS[@]}
+readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 
 
 ###############################################################################
@@ -186,7 +186,7 @@ function process_menu1_gui {
 
 # This function shows and processes menu #1 in TUI mode.
 function process_menu1_tui {
-    local   menu1_action=''
+    local menu1_action=''
 
     while true; do
         printf  '\n\n%s\n\n%3s  %-24s  %s\n'    \
@@ -264,7 +264,7 @@ function process_menu1_choice1 {
 function process_menu1_choice2 {
     title=${MENU1_ACTIONS[2]}
     # shellcheck disable=SC2034
-    local   website_url=https://karelzimmer.nl
+    local website_url=https://karelzimmer.nl
     text="
 $(eval_gettext "Follow the steps as described in Checklist installation, Chapt\
 er 2.
@@ -341,7 +341,7 @@ function process_menu2_gui {
 
 # This function shows and processes menu #2 in TUI mode.
 function process_menu2_tui {
-    local   menu2_action=''
+    local menu2_action=''
 
     while true; do
         printf  '\n\n%s\n\n%3s  %-25s  %s\n'    \

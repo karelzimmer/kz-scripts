@@ -19,29 +19,29 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-build'
-readonly    PROGRAM_DESC=$(gettext 'Build package kz')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-build'
+readonly PROGRAM_DESC=$(gettext 'Build package kz')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-readonly    DOCS_REPO=$HOME/kz-docs
-readonly    SCRIPTS_REPO=$HOME/kz-scripts
+readonly DOCS_REPO=$HOME/kz-docs
+readonly SCRIPTS_REPO=$HOME/kz-scripts
 
-readonly    DEB_REPO=$HOME/kz-deb
-readonly    DEB_REPO_APPDIR=$DEB_REPO/src
-readonly    DEB_REPO_DISTDIR=$DEB_REPO/dist
-readonly    DEB_NAME=kz_4.2.1_all.deb
+readonly DEB_REPO=$HOME/kz-deb
+readonly DEB_REPO_APPDIR=$DEB_REPO/src
+readonly DEB_REPO_DISTDIR=$DEB_REPO/dist
+readonly DEB_NAME=kz_4.2.1_all.deb
 
-readonly    UPLOADS_REPO=$HOME/kz-upload
-readonly    UPLOADS_REPO_APPDIR=$UPLOADS_REPO/src
-readonly    UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
+readonly UPLOADS_REPO=$HOME/kz-upload
+readonly UPLOADS_REPO_APPDIR=$UPLOADS_REPO/src
+readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 readonly -A UPLOADS_SOURCES=(
             [kz-docs]=$DOCS_REPO
@@ -67,7 +67,7 @@ readonly -A DEB_TARGETS=(
 # Variables
 ###############################################################################
 
-declare     error_flag=false
+declare error_flag=false
 
 
 ###############################################################################
@@ -168,8 +168,8 @@ function check_scripts {
 
 # This function builds the website.
 function build_uploads {
-    local   file=''
-    local   filename=''
+    local file=''
+    local filename=''
 
     text=$(gettext 'Build website')...
     msg_info "$text"
@@ -208,7 +208,7 @@ function build_uploads {
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
 function generate_mo {
-    local   lc_messages=''
+    local lc_messages=''
 
     lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
     text=$(gettext 'Generate .mo file')...
@@ -219,8 +219,8 @@ function generate_mo {
 
 # This function builds package kz.
 function build_deb {
-    local   build_id=''
-    local   file=''
+    local build_id=''
+    local file=''
 
     text=$(gettext 'Build package')...
     msg_info "$text"

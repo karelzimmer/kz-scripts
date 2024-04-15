@@ -13,47 +13,47 @@
 # Import
 ###############################################################################
 
-export      TEXTDOMAIN=kz
-export      TEXTDOMAINDIR=/usr/share/locale
-source      /usr/bin/gettext.sh
+export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+source /usr/bin/gettext.sh
 
 
 ###############################################################################
 # Constants
 ###############################################################################
 
-readonly    MODULE_NAME='kz_common.sh'
-readonly    MODULE_DESC=$(gettext 'Common module for shell scripts')
-readonly    MODULE_PATH=$(dirname "$(realpath "$0")")
+readonly MODULE_NAME='kz_common.sh'
+readonly MODULE_DESC=$(gettext 'Common module for shell scripts')
+readonly MODULE_PATH=$(dirname "$(realpath "$0")")
 
-readonly    OK=0
-readonly    ERROR=1
+readonly OK=0
+readonly ERROR=1
 
-readonly    NORMAL='\033[0m'
-readonly    BOLD='\033[1m'
+readonly NORMAL='\033[0m'
+readonly BOLD='\033[1m'
 
-readonly    RED='\033[1;31m'
-readonly    YELLOW='\033[1;33m'
+readonly RED='\033[1;31m'
+readonly YELLOW='\033[1;33m'
 
-readonly    OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--versio\
+readonly OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--versio\
 n]"
-readonly    OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
+readonly OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    give a short usage message')
 $(gettext '  -v, --version  print program version')"
 
-readonly    OPTIONS_SHORT='hmuv'
-readonly    OPTIONS_LONG='help,manual,usage,version'
+readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_LONG='help,manual,usage,version'
 
-readonly    DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 if  type gnome-session &> /dev/null ||
     type lxqt-session  &> /dev/null ||
     type xfce4-session &> /dev/null; then
-readonly    EDITION='desktop'
+readonly EDITION='desktop'
 else
-readonly    EDITION='server'
+readonly EDITION='server'
 fi
-readonly    SETTINGS=$HOME/.kz
+readonly SETTINGS=$HOME/.kz
 
 
 ###############################################################################
@@ -65,6 +65,7 @@ declare     option_gui=false
 declare     text=''
 declare     title=''
 declare     kz_deb_local_file=''
+
 
 ###############################################################################
 # Functions

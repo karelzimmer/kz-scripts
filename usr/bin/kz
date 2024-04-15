@@ -19,14 +19,14 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz'
-readonly    PROGRAM_DESC=$(gettext 'Run command')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz'
+readonly PROGRAM_DESC=$(gettext 'Run command')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list]
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list]
           \$OPTIONS_USAGE
           COMMAND [ARGUMENT...]")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND [A\
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND [A\
 RGUMENT...]")
 
 $PROGRAM_DESC.
@@ -39,14 +39,14 @@ $(gettext 'Arguments:')
 $(gettext '  COMMAND        execute COMMAND')
 $(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
 
-readonly    PROGRAM_PATH=$MODULE_PATH
+readonly PROGRAM_PATH=$MODULE_PATH
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare     exec_program_name=''
+declare exec_program_name=''
 
 
 ###############################################################################
