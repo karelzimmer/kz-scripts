@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-dashoptions='--addappfolder --addfavaft --addfavbef --delappfolder --delfav -l
-    --list -m --manual -r --resetfavs -h --help -m --manual -u --usage -v
-    --version'
+dashoptions='-a --addfavaft -b --addfavbef -d --delfav -l --list -f
+    --addappfolder -x, --delappfolder -r --resetfavs -h --help -m --manual -u
+    --usage -v --version'
 complete -o default -W "$dashoptions" kz-gset
