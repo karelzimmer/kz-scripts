@@ -372,8 +372,7 @@ function report_database_changes {
     text+=$(
         diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
         )
-    text+="\n\n$(eval_gettext "When CHANGEs execute: \${BLUE}gsettings set CHA\
-NGE\$NORMAL")"
+    text+="\n\n$(gettext 'When CHANGEs execute: gsettings set CHANGE')"
     msg_info "$text"
 }
 

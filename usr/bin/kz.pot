@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-14 10:51+0200\n"
+"POT-Creation-Date: 2024-04-15 09:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,7 @@ msgid "NUM  COMMAND"
 msgstr ""
 
 #, sh-format
-msgid "To execute a COMMAND: $BLUE$DISPLAY_NAME COMMAND [ARGUMENT...]$NORMAL"
+msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ARGUMENT...]"
 msgstr ""
 
 msgid "Make backup"
@@ -447,8 +447,7 @@ msgid ""
 "> is the new setting (B):"
 msgstr ""
 
-#, sh-format
-msgid "When CHANGEs execute: ${BLUE}gsettings set CHANGE$NORMAL"
+msgid "When CHANGEs execute: gsettings set CHANGE"
 msgstr ""
 
 msgid "Install apps"
@@ -508,18 +507,17 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs install file execute: $BLUE$DISPLAY_NAME --"
-"cat APP...$NORMAL"
+"To view the contents of the APPs install file execute: $DISPLAY_NAME --cat "
+"APP..."
 msgstr ""
 
 #, sh-format
-msgid "To install the APPs execute: $BLUE$DISPLAY_NAME APP...$NORMAL"
+msgid "To install the APPs execute: $DISPLAY_NAME APP..."
 msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the default install file execute: $BLUE$DISPLAY_NAME "
-"--cat$NORMAL"
+"To view the contents of the default install file execute: $DISPLAY_NAME --cat"
 msgstr ""
 
 msgid "The following FILEs are present:"
@@ -531,18 +529,15 @@ msgstr ""
 msgid "  0  No files present."
 msgstr ""
 
-#, sh-format
-msgid "To view the contents of FILE execute: ${BLUE}cat FILE$NORMAL"
+msgid "To view the contents of FILE execute: cat FILE"
 msgstr ""
 
 #, sh-format
-msgid ""
-"To view the commands of FILE execute: $BLUE$DISPLAY_NAME --cat --file "
-"FILE$NORMAL"
+msgid "To view the commands of FILE execute: $DISPLAY_NAME --cat --file FILE"
 msgstr ""
 
 #, sh-format
-msgid "To process FILE execute: $BLUE$DISPLAY_NAME --file FILE$NORMAL"
+msgid "To process FILE execute: $DISPLAY_NAME --file FILE"
 msgstr ""
 
 #, sh-format
@@ -802,18 +797,17 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs set up file execute: $BLUE$DISPLAY_NAME --"
-"cat APP...$NORMAL"
+"To view the contents of the APPs set up file execute: $DISPLAY_NAME --cat "
+"APP..."
 msgstr ""
 
 #, sh-format
-msgid "To set up the APPs execute: $BLUE$DISPLAY_NAME APP...$NORMAL"
+msgid "To set up the APPs execute: $DISPLAY_NAME APP..."
 msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the default set up file execute: $BLUE$DISPLAY_NAME "
-"--cat$NORMAL"
+"To view the contents of the default set up file execute: $DISPLAY_NAME --cat"
 msgstr ""
 
 msgid "set up"

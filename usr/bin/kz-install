@@ -248,12 +248,10 @@ $(gettext 'NUM  FILE')\n"
     if [[ -n $files ]]; then
         text+=$files
         $option_gui || text+="\n
-$(eval_gettext "To view the contents of FILE execute: \${BLUE}cat FILE\$NORMAL\
-")
-$(eval_gettext "To view the commands of FILE execute: \$BLUE\$DISPLAY_NAME --c\
-at --file FILE\$NORMAL")
-$(eval_gettext "To process FILE execute: \$BLUE\$DISPLAY_NAME --file FILE\$NOR\
-MAL")
+$(gettext 'To view the contents of FILE execute: cat FILE')
+$(eval_gettext "To view the commands of FILE execute: \$DISPLAY_NAME --cat --f\
+ile FILE")
+$(eval_gettext "To process FILE execute: \$DISPLAY_NAME --file FILE")
 $(eval_gettext "The default FILE is: \$input_file")"
     else
         text+="$(gettext '  0  No files present.')
@@ -288,12 +286,11 @@ $(gettext 'NUM  APP')\n"
     if [[ -n $apps ]]; then
         text+=$apps
         $option_gui || text+="\n
-$(eval_gettext "To view the contents of the APPs install file execute: \$BLUE\
-\$DISPLAY_NAME --cat APP...\$NORMAL")
-$(eval_gettext "To install the APPs execute: \$BLUE\$DISPLAY_NAME APP...\$NORM\
-AL")
-$(eval_gettext "To view the contents of the default install file execute: \$BL\
-UE\$DISPLAY_NAME --cat\$NORMAL")"
+$(eval_gettext "To view the contents of the APPs install file execute: \$DISPL\
+AY_NAME --cat APP...")
+$(eval_gettext "To install the APPs execute: \$DISPLAY_NAME APP...")
+$(eval_gettext "To view the contents of the default install file execute: \$DI\
+SPLAY_NAME --cat")"
     else
         text+="$(gettext '  0  No apps found.')
 

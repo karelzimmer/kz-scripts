@@ -110,7 +110,7 @@ def perform_command(command):
     """
     This function executes a Bourne-Again SHell command.
     """
-    text = f'{kz_common.BLUE}{command}{kz_common.NORMAL}'
+    text = f'{command}'
     kz_common.msg_info(PROGRAM_NAME, text)
     kz_common.check_for_active_updates(PROGRAM_NAME)
     try:
