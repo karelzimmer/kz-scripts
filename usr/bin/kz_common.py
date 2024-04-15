@@ -312,8 +312,9 @@ def process_option_version(PROGRAM_NAME):
         sys.exit(ERROR)
     finally:
         text = f'kz 4.2.1{build_id}\n\n'
-        text += _('Written by Karel Zimmer <info@karelzimmer.nl>, Creative Com\
-mons Zero 1.0 license <https://creativecommons.org/publicdomain/zero/1.0>.')
+        text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
+        text += _('Creative Commons Zero 1.0 license <https://creativecommons.\
+org/publicdomain/zero/1.0>.')
         msg_info(PROGRAM_NAME, text)
 
 

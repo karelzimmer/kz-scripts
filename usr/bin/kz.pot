@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 09:34+0200\n"
+"POT-Creation-Date: 2024-04-15 14:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,9 +74,12 @@ msgstr ""
 msgid "Type '$DISPLAY_NAME --help' for more information."
 msgstr ""
 
+msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
+msgstr ""
+
 msgid ""
-"Written by Karel Zimmer <info@karelzimmer.nl>, Creative Commons Zero 1.0 "
-"license <https://creativecommons.org/publicdomain/zero/1.0>."
+"Creative Commons Zero 1.0 license <https://creativecommons.org/publicdomain/"
+"zero/1.0>."
 msgstr ""
 
 #, sh-format
