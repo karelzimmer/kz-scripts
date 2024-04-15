@@ -117,10 +117,6 @@ $USAGE_LINE"
                 file_argument=$2
                 shift 2
                 ;;
-            -l|--list)
-                option_list=true
-                shift
-                ;;
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
                     text="$DISPLAY_NAME: $1: \
@@ -130,6 +126,10 @@ $USAGE_LINE"
                     exit $ERROR
                 fi
                 option_gui=true
+                shift
+                ;;
+            -l|--list)
+                option_list=true
                 shift
                 ;;
             -r|--reset)

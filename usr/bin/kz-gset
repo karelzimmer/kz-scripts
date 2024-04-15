@@ -138,14 +138,6 @@ $USAGE_LINE"
                 favorite_argument=$2
                 shift 2
                 ;;
-            -l|--list)
-                option_list=true
-                shift
-                ;;
-            -r|--resetfavs)
-                option_resetfavs=true
-                shift
-                ;;
             -f|--addappfolder)
                 if $option_addappfolder; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
@@ -156,6 +148,14 @@ $USAGE_LINE"
                 option_addappfolder=true
                 folder_argument=$2
                 shift 2
+                ;;
+            -l|--list)
+                option_list=true
+                shift
+                ;;
+            -r|--resetfavs)
+                option_resetfavs=true
+                shift
                 ;;
             -x|--delappfolder)
                 if $option_delappfolder; then
