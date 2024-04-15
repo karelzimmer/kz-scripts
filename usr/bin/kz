@@ -47,6 +47,7 @@ readonly    PROGRAM_PATH=$MODULE_PATH
 ###############################################################################
 
 declare     exec_program_name=''
+declare -a  exec_program_options=()
 
 
 ###############################################################################
@@ -62,37 +63,53 @@ function check_input {
 
     # No parsing here with getopt like in all other scripts, because with
     # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
-    case $1 in
-        -h|--h|-help|--help)
-            process_option_help
-            exit $OK
-            ;;
-        -m|--m|-manual|--manual)
-            process_option_manual
-            exit $OK
-            ;;
-        -u|--u|-usage|--usage)
-            process_option_usage
-            exit $OK
-            ;;
-        -v|--v|-version|--version)
-            process_option_version
-            exit $OK
-            ;;
-        -l|--l|-list|--list)
-            process_option_list
-            exit $OK
-            ;;
-        -*)
-            text="$DISPLAY_NAME: $(gettext 'invalid option'): $1
+    while true; do
+        case $1 in
+            -g|--gui)
+                if [[ $EDITION = 'server' ]]; then
+                    text="$DISPLAY_NAME: $1: \
+$(gettext 'not allowed on a server')
 $USAGE_LINE"
-            msg_info "$text"
-            exit $ERROR
-            ;;
-        *)
-            exec_program_name=$1
-            ;;
-    esac
+                    msg_info "$text"
+                    exit $ERROR
+                fi
+                option_gui=true
+                shift
+                ;;
+            -h|--h|-help|--help)
+                process_option_help
+                exit $OK
+                ;;
+            -m|--m|-manual|--manual)
+                process_option_manual
+                exit $OK
+                ;;
+            -u|--u|-usage|--usage)
+                process_option_usage
+                exit $OK
+                ;;
+            -v|--v|-version|--version)
+                process_option_version
+                exit $OK
+                ;;
+            -l|--l|-list|--list)
+                process_option_list
+                exit $OK
+                ;;
+            -*)
+                text="$DISPLAY_NAME: $(gettext 'invalid option'): $1
+    $USAGE_LINE"
+                msg_info "$text"
+                exit $ERROR
+                ;;
+            *)
+                exec_program_name=$1
+                shift
+                exec_program_options=( "$@" )
+                break
+                ;;
+        esac
+    done
 
     if [[ ! -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
         text="$DISPLAY_NAME: $exec_program_name: \
@@ -134,8 +151,7 @@ $(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
 
 # This function processes the script options and arguments.
 function process_input {
-    shift
-    exec "$PROGRAM_PATH/kz-$exec_program_name" "$@"
+    exec "$PROGRAM_PATH/kz-$exec_program_name" "${exec_program_options[@]}"
 }
 
 
@@ -152,7 +168,7 @@ function term_script {
 function main {
     init_script "$@"
     check_input "$@"
-    process_input "$@"
+    process_input
     term_script
 }
 
