@@ -264,11 +264,9 @@ function process_menu1_choice1 {
 function process_menu1_choice2 {
     title=${MENU1_ACTIONS[2]}
     # shellcheck disable=SC2034
-    local website_url=https://karelzimmer.nl
     text="
-$(eval_gettext "Follow the steps as described in Checklist installation, Chapt\
-er 2.
-Checklist installation can be found on \$website_url, under Linux.
+$(gettext "Follow the steps as described in Checklist installation, Chapter 2.
+Checklist installation can be found on https://karelzimmer.nl/en, under Linux.
 
 Roughly boils down to:
 1. Download a CD image file (.iso).
