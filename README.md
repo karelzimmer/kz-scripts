@@ -13,4 +13,4 @@ Scripts for installing and managing Debian and Debian-based systems such as Ubun
 
 Part of Debian package *kz*, named after its creator, Karel Zimmer.
 
-More information on [karelzimmer.nl](https://karelzimmer.nl).
+More information on [karelzimmer.nl/en](https://karelzimmer.nl/en).
