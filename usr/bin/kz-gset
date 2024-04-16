@@ -44,7 +44,7 @@ $(gettext '  -d, --delfav FAVORITE
                  delete FAVORITE')
 $(gettext '  -l, --list     show favorites and app folders')
 $(gettext '  -r, --resetfavs
-                 reset favorites')
+                 set favorites on default values')
 $(gettext '  -f, --addappfolder APPFOLDER
                  add APPFOLDER')
 $(gettext '  -x, --delappfolder APPFOLDER
@@ -52,7 +52,7 @@ $(gettext '  -x, --delappfolder APPFOLDER
 $OPTIONS_HELP"
 
 readonly X_OPTIONS_SHORT='a:b:d:lrf:x:'
-            X_OPTIONS_LONG=',addfavaft:,addfavbef:,delfav:,list,resetfavs,'
+         X_OPTIONS_LONG=',addfavaft:,addfavbef:,delfav:,list,resetfavs,'
 readonly X_OPTIONS_LONG+='addappfolder:,delappfolder:'
 
 
@@ -138,6 +138,14 @@ $USAGE_LINE"
                 favorite_argument=$2
                 shift 2
                 ;;
+            -l|--list)
+                option_list=true
+                shift
+                ;;
+            -r|--resetfavs)
+                option_resetfavs=true
+                shift
+                ;;
             -f|--addappfolder)
                 if $option_addappfolder; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
@@ -148,14 +156,6 @@ $USAGE_LINE"
                 option_addappfolder=true
                 folder_argument=$2
                 shift 2
-                ;;
-            -l|--list)
-                option_list=true
-                shift
-                ;;
-            -r|--resetfavs)
-                option_resetfavs=true
-                shift
                 ;;
             -x|--delappfolder)
                 if $option_delappfolder; then

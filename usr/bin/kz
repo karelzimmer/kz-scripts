@@ -63,23 +63,25 @@ function check_input {
     # No parsing here with getopt like in all other scripts, because with
     # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
     case $1 in
-        -l|--l|-list|--list)
+        -l|-li|-lis|-list|--l|--li|--lis|--list)
             process_option_list
             exit $OK
             ;;
-        -h|--h|-help|--help)
+        -h|-he|-hel|-help|--h|--he|--hel|--help)
             process_option_help
             exit $OK
             ;;
-        -m|--m|-manual|--manual)
+        -m|-ma|-man|--manu|-manua|-manual|--m|--ma|--man|---manu|--manua|\
+        --manual)
             process_option_manual
             exit $OK
             ;;
-        -u|--u|-usage|--usage)
+        -u|-us|-usa|-usag|-usage|--u|--us|--usa|--usag|--usage)
             process_option_usage
             exit $OK
             ;;
-        -v|--v|-version|--version)
+        -v|-ve|-ver|-vers|-versi|-versio|-version|--v|--ve|--ver|--vers|\
+        --versi|--versio|--version)
             process_option_version
             exit $OK
             ;;

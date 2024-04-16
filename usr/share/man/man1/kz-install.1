@@ -54,14 +54,16 @@ Upon successful completion the computer will restart.
 .sp
 Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
-With option \fB-r\fR, \fB--remove\fR the installation can be undone, the mode
-then changes from Install to Remove.
-.sp
-The \fB-l\fR, \fB--list\fR option displays a list of install files.
-.sp
 With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
 specified, the filename must start with \fBkz-install-\fR and end with
 \fB.sh\fR.
+.sp
+With option \fB-g\fR, \fB--gui\fR start \fBkz install\fR in graphical mode.
+.sp
+The \fB-l\fR, \fB--list\fR option displays a list of install files.
+.sp
+With option \fB-r\fR, \fB--remove\fR the installation can be undone, the mode
+then changes from Install to Remove.
 .sp
 A -- signals the end of options and disables further option processing.
 .\"
@@ -249,6 +251,9 @@ Show a list of apps to install.
 \fB-c\fR, \fB--cat\fR
 Display the contents of the command file.
 .TP
+\fB-f\fR, \fB--file\fR \fIFILE\fR
+Specify input file \fIFILE\fR.
+.TP
 \fB-g\fR, \fB--gui\fR
 Start in graphical mode (gui=graphical user interface).
 .TP
@@ -257,9 +262,6 @@ Show a list of standard files.
 .TP
 \fB-r\fR, \fB--remove\fR
 Remove apps.
-.TP
-\fB-s\fR, \fB--server\fR
-Install apps and change system settings for a server.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.

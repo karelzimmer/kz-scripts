@@ -7,5 +7,6 @@
 ###############################################################################
 
 dashoptions='backup build check deploy getdeb getdev gset install ivp menu
-    restore setup update wifi -h --help -m --manual -u --usage -v --version'
+    restore setup update wifi -l --list -h --help -m --manual -u --usage -v
+    --version'
 complete -o default -W "$dashoptions" kz

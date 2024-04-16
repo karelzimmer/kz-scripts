@@ -58,14 +58,16 @@ Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt,
-de modus wijzigt dan van Install naar Remove.
-.sp
-De optie \fB-l\fR, \fB--list\fR geeft een lijst met installatiebestanden weer.
-.sp
 Met optie \fB-f\fR, \fB--file\fR \fIFILE\fR kan een ander invoerbestand
 opgegeven worden, de bestandsnaam moet beginnen met \fBkz-install-\fR en
 eindigen met \fB.sh\fR.
+.sp
+Met optie \fB-g\fR, \fB--gui\fR start \fBkz install\fR in grafische modus.
+.sp
+De optie \fB-l\fR, \fB--list\fR geeft een lijst met installatiebestanden weer.
+.sp
+Met optie \fB-r\fR, \fB--remove\fR kan de installatie ongedaan worden gemaakt,
+de modus wijzigt dan van Install naar Remove.
 .sp
 Een -- signaleert het einde van opties en schakelt verdere verwerking van
 opties uit.
@@ -255,6 +257,9 @@ Toon een lijst van te installeren apps.
 .TP
 \fB-c\fR, \fB--cat\fR
 Toon de inhoud van het opdrachtbestand.
+.TP
+\fB-f\fR, \fB--file\fR \fIFILE\fR
+Geef invoerbestand \fIFILE\fR op.
 .TP
 \fB-g\fR, \fB--gui\fR
 Start in grafische modus (gui=graphical user interface;
