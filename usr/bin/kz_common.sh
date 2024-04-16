@@ -299,8 +299,8 @@ function process_option_version {
     text="kz 4.2.1$build_id
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
-$(gettext "CC0 1.0 license <https://creativecommons.org/publicdomain/zero/1.0>\
-.")"
+$(gettext "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.\
+0>.")"
     msg_info "$text"
 }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 14:25+0200\n"
+"POT-Creation-Date: 2024-04-16 09:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,7 @@ msgstr ""
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-msgid "CC0 1.0 license <https://creativecommons.org/publicdomain/zero/1.0>."
+msgid "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #, sh-format

@@ -313,8 +313,8 @@ def process_option_version(PROGRAM_NAME):
     finally:
         text = f'kz 4.2.1{build_id}\n\n'
         text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
-        text += _('CC0 1.0 license <https://creativecommons.org/publicdomain/z\
-ero/1.0>.')
+        text += _('CC0 1.0 Universal <https://creativecommons.org/publicdomain\
+/zero/1.0>.')
         msg_info(PROGRAM_NAME, text)
 
 
