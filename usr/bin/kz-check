@@ -256,8 +256,12 @@ $RED$(gettext '    End spaces found.')$NORMAL"
 # This function controls the termination of the script.
 function term_script {
     if $error_flag; then
+        text=$(gettext 'Fix all the messages above.')
+        msg_error "$text"
         exit $ERROR
     else
+        text=$(gettext 'Finished').
+        msg_info "$text"
         exit $OK
     fi
 }
