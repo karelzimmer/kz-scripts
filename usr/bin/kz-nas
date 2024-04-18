@@ -19,13 +19,13 @@ source "$(dirname "$0")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-nas'
-readonly    PROGRAM_DESC=$(gettext 'Mount network drive')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-nas'
+readonly PROGRAM_DESC=$(gettext 'Mount network drive')
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
-SAGE")
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAG\
+E")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -33,14 +33,14 @@ $(gettext 'Options:')
 $(gettext '  -g, --gui      starts in graphical mode')
 $OPTIONS_HELP"
 
-readonly    X_OPTIONS_SHORT='g'
-readonly    X_OPTIONS_LONG=',gui'
+readonly X_OPTIONS_SHORT='g'
+readonly X_OPTIONS_LONG=',gui'
 
-readonly    NAS_LOGIN_DIR=/etc
-readonly    NAS_LOGIN=$NAS_LOGIN_DIR/$PROGRAM_NAME.login
-readonly    NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
-            NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP \
-address.
+readonly NAS_LOGIN_DIR=/etc
+readonly NAS_LOGIN=$NAS_LOGIN_DIR/$PROGRAM_NAME.login
+readonly NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
+readonly NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP add\
+ress.
 This requires:
 
   - the MAC address of the NAS (looks like aa:bb:cc:dd:ee:ff)
@@ -51,11 +51,10 @@ This requires:
      IP address outside the range of DHCP automatically
      distributes the IP addresses (often 192.168.0.200).
   2. Select the fixed IP address in the NAS and turn off DHCP.")"
-readonly    NAS_FIXED_IP_ADDRESS
 
-readonly    SYSTEMD_MOUNT_DIR=/etc/systemd/system
-readonly    SYSTEMD_MOUNT_FILE=mnt-$PROGRAM_NAME.mount
-readonly    SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
+readonly SYSTEMD_MOUNT_DIR=/etc/systemd/system
+readonly SYSTEMD_MOUNT_FILE=mnt-$PROGRAM_NAME.mount
+readonly SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 
 
 ###############################################################################

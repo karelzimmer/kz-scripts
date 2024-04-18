@@ -23,8 +23,8 @@ readonly PROGRAM_NAME='kz-backup'
 readonly PROGRAM_DESC=$(gettext 'Make backup')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-t|--targ\
-et DIRECTORY]
+readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-t|--target \
+DIRECTORY]
                  \$OPTIONS_USAGE")"
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 

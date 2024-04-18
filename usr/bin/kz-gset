@@ -23,8 +23,8 @@ readonly PROGRAM_NAME='kz-gset'
 readonly PROGRAM_DESC=$(gettext 'Change GUI')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addfavaft FAVOR\
-ITE] [-b|--addfavbef FAVORITE]
+readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addfavaft FAVORITE\
+] [-b|--addfavbef FAVORITE]
                [-d|--delfav FAVORITE] [-l|--list] [-r|--resetfavs]
                [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]
                \$OPTIONS_USAGE")"

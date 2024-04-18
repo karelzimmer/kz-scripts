@@ -23,8 +23,8 @@ readonly PROGRAM_NAME='kz-menu'
 readonly PROGRAM_DESC=$(gettext 'Installation menu')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
-SAGE")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAG\
+E")
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.

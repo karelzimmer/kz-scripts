@@ -23,8 +23,8 @@ readonly PROGRAM_NAME=kz-install
 readonly PROGRAM_DESC=$(gettext 'Install apps')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat]\
- [-f|--file FILE]
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-\
+f|--file FILE]
                   [-g|--gui] [-l|--list] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [APP...]")
