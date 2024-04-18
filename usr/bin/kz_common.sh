@@ -33,6 +33,7 @@ readonly NORMAL='\033[0m'
 readonly BOLD='\033[1m'
 
 readonly RED='\033[1;31m'
+readonly GREEN='\033[1;32m'
 readonly YELLOW='\033[1;33m'
 
 readonly OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--versio\

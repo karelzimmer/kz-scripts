@@ -260,7 +260,7 @@ function term_script {
         msg_error "$text"
         exit $ERROR
     else
-        text=$(gettext 'Finished').
+        text=$GREEN$(gettext 'Finished')$NORMAL.
         msg_info "$text"
         exit $OK
     fi
