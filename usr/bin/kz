@@ -54,7 +54,7 @@ readonly PROGRAM_PATH=$MODULE_PATH
 # Functions
 ###############################################################################
 
-# This function only handles the script options.
+# This function handles the script options and arguments.
 function check_input {
     local       parsed=''
     local   -i  parsed_rc=0
