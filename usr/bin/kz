@@ -39,6 +39,9 @@ $(gettext 'Arguments:')
 $(gettext '  COMMAND        execute COMMAND')
 $(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
 
+readonly X_OPTIONS_SHORT='l'
+readonly X_OPTIONS_LONG=',list'
+
 readonly PROGRAM_PATH=$MODULE_PATH
 
 
@@ -46,62 +49,47 @@ readonly PROGRAM_PATH=$MODULE_PATH
 # Variables
 ###############################################################################
 
-declare exec_program_name=''
-
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
+# This function only handles the script options.
 function check_input {
-    if [[ -z "$*" ]]; then
-        msg_info "$USAGE"
-        exit $ERROR
-    fi
+    local       parsed=''
+    local   -i  parsed_rc=0
 
-    # No parsing here with getopt like in all other scripts, because with
-    # "kz COMMAND ARGUMENT..." the ARGUMENTs are for COMMAND, not for kz.
-    case $1 in
-        -l|-li|-lis|-list|--l|--li|--lis|--list)
-            process_option_list
-            exit $OK
-            ;;
-        -h|-he|-hel|-help|--h|--he|--hel|--help)
-            process_option_help
-            exit $OK
-            ;;
-        -m|-ma|-man|--manu|-manua|-manual|--m|--ma|--man|---manu|--manua|\
-        --manual)
-            process_option_manual
-            exit $OK
-            ;;
-        -u|-us|-usa|-usag|-usage|--u|--us|--usa|--usag|--usage)
-            process_option_usage
-            exit $OK
-            ;;
-        -v|-ve|-ver|-vers|-versi|-versio|-version|--v|--ve|--ver|--vers|\
-        --versi|--versio|--version)
-            process_option_version
-            exit $OK
-            ;;
-        -*)
-            text="$DISPLAY_NAME: $(gettext 'invalid option'): $1
-$USAGE_LINE"
-            msg_info "$text"
+    if [[ $1 == -* ]]; then
+        parsed=$(
+            getopt  --alternative                                       \
+                    --options       "$OPTIONS_SHORT$X_OPTIONS_SHORT"    \
+                    --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
+                    --name          "$DISPLAY_NAME"                     \
+                    --              "$@"
+            ) || parsed_rc=$?
+        if [[ $parsed_rc -ne $OK ]]; then
+            msg_info "$USAGE"
             exit $ERROR
-            ;;
-        *)
-            exec_program_name=$1
-            ;;
-    esac
+        fi
+        eval set -- "$parsed"
 
-    if [[ ! -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
-        text="$DISPLAY_NAME: $exec_program_name: \
-$(gettext "command does not exist")
-$USAGE_LINE"
-        msg_info "$text"
-        exit $ERROR
+        process_common_options "$@"
+
+        while true; do
+            case $1 in
+                -l|--list)
+                    process_option_list
+                    exit $OK
+                    ;;
+                --)
+                    shift
+                    break
+                    ;;
+                *)
+                    shift
+                    ;;
+            esac
+        done
     fi
 }
 
@@ -136,6 +124,15 @@ $(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
 
 # This function processes the script options and arguments.
 function process_input {
+    local exec_program_name=$1
+
+    if [[ ! -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
+        text="$DISPLAY_NAME: $exec_program_name: \
+$(gettext "command does not exist")
+$USAGE_LINE"
+        msg_info "$text"
+        exit $ERROR
+    fi
     shift
     exec "$PROGRAM_PATH/kz-$exec_program_name" "$@"
 }
