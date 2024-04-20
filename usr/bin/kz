@@ -59,6 +59,11 @@ function check_input {
     local       parsed=''
     local   -i  parsed_rc=0
 
+    if [[ -z "$*" ]]; then
+        msg_info "$USAGE"
+        exit $ERROR
+    fi
+    
     if [[ $1 == -* ]]; then
         parsed=$(
             getopt  --alternative                                       \
