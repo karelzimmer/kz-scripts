@@ -238,12 +238,12 @@ function process_option_list {
     text="$(gettext 'The following FILEs are present:')
 
 $(gettext 'NUM  FILE')\n"
-    files=$(find    "$PROGRAM_PATH/$PROGRAM_NAME-"*'.sh'    \
-                    2> >($LOGCMD)                           |
-            nl      --number-width=3                        \
-                    --number-format=rn                      \
-                    --number-separator='  '                 \
-                    --body-numbering=a || true
+    files=$(find    "$PROGRAM_PATH"/$PROGRAM_NAME-*.sh  \
+                    2> >($LOGCMD)                       |
+            nl      --number-width=3                    \
+                    --number-format=rn                  \
+                    --number-separator='  '             \
+                    --body-numbering=a                  || true
             )
     if [[ -n $files ]]; then
         text+=$files
