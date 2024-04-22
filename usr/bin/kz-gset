@@ -178,7 +178,7 @@ $USAGE_LINE"
         esac
     done
 
-    if [[ -n "$*" ]]; then
+    if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
         msg_info "$text"
@@ -252,7 +252,7 @@ function process_option_delfav  {
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]; then
         :
-    elif [[ $favorite_apps = "['$desktopfile']" ]]; then
+    elif [[ $favorite_apps = [$desktopfile] ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
     else
         gsettings set org.gnome.shell favorite-apps "$(
@@ -314,7 +314,7 @@ function process_option_delappfolder  {
 
     if [[ $app_folders = '@as []' ]]; then
         :
-    elif [[ $app_folders = "['$appfolder']" ]]; then
+    elif [[ $app_folders = [$appfolder] ]]; then
         gsettings set org.gnome.desktop.app-folders folder-children "[]"
     else
         gsettings set org.gnome.desktop.app-folders folder-children "$(

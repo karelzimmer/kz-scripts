@@ -106,7 +106,7 @@ function check_input {
         esac
     done
 
-    if [[ -n "$*" ]]; then
+    if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
         msg_info "$text"
@@ -194,7 +194,7 @@ function build_uploads {
     cd "${UPLOADS_SOURCES[kz-docs]}"
     for file in *.odt *.txt; do
         filename=${file%.*}
-        if [[ $file -nt "${UPLOADS_TARGETS[kz-docs]}/$filename".pdf ]]; then
+        if [[ $file -nt ${UPLOADS_TARGETS[kz-docs]}/$filename.pdf ]]; then
             lowriter    --headless                              \
                         --convert-to pdf                        \
                         --outdir "${UPLOADS_TARGETS[kz-docs]}"  \

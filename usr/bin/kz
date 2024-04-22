@@ -59,7 +59,7 @@ function check_input {
     local       parsed=''
     local   -i  parsed_rc=0
 
-    if [[ -z "$*" ]]; then
+    if [[ -z $* ]]; then
         msg_info "$USAGE"
         exit $ERROR
     fi
@@ -131,7 +131,7 @@ $(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
 function process_input {
     local command=$1
 
-    if [[ ! -f "$PROGRAM_PATH/$PROGRAM_NAME-$command" ]]; then
+    if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$command ]]; then
         text="$DISPLAY_NAME: $command: \
 $(gettext "command does not exist")
 $USAGE_LINE"

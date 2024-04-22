@@ -147,10 +147,10 @@ $USAGE_LINE"
         esac
     done
 
-    if [[ -n "$*" ]]; then
+    if [[ -n $* ]]; then
         argument_app=true
         logout=false
-        while [[ -n "$*" ]]; do
+        while [[ -n $* ]]; do
             app_arguments[$1]=$1
             shift
         done
@@ -170,7 +170,7 @@ function process_input {
     fi
 
     if $option_file; then
-        if [[ ! "$(basename "$file_argument")" == $PROGRAM_NAME-*.sh ]]; then
+        if [[ ! $(basename "$file_argument") == $PROGRAM_NAME-*.sh ]]; then
             text="$(eval_gettext "Filename must start with '\$PROGRAM_NAME-' a\
 nd end with '.sh'.")"
             msg_error "$text"

@@ -115,7 +115,7 @@ $USAGE_LINE"
     done
 
 
-    if [[ -n "$*" ]]; then
+    if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
         msg_info "$text"
