@@ -105,19 +105,19 @@ function process_option_list {
 
 $(gettext 'NUM  COMMAND')\n"
     text+=$(
-        find    "$PROGRAM_PATH"/kz-*    \
-                -maxdepth 1             \
-                -type f                 \
-                -executable             \
-                -readable               \
-                -not -name '*~'         \
-                -not -name 'kz'         \
-                -printf '%f\n'          |
-        sort                            |
-        sed     --expression='s/kz-//'  |
-        nl      --number-width=3        \
-                --number-format=rn      \
-                --number-separator='  ' \
+        find    "$PROGRAM_PATH"/$PROGRAM_NAME-*     \
+                -maxdepth 1                         \
+                -type f                             \
+                -executable                         \
+                -readable                           \
+                -not -name '*~'                     \
+                -not -name $PROGRAM_NAME            \
+                -printf '%f\n'                      |
+        sort                                        |
+        sed     --expression="s/$PROGRAM_NAME-//"   |
+        nl      --number-width=3                    \
+                --number-format=rn                  \
+                --number-separator='  '             \
                 --body-numbering=a
         )
     text+="\n
@@ -129,17 +129,17 @@ $(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
 
 # This function processes the script options and arguments.
 function process_input {
-    local exec_program_name=$1
+    local command=$1
 
-    if [[ ! -f "$PROGRAM_PATH/kz-$exec_program_name" ]]; then
-        text="$DISPLAY_NAME: $exec_program_name: \
+    if [[ ! -f "$PROGRAM_PATH/$PROGRAM_NAME-$command" ]]; then
+        text="$DISPLAY_NAME: $command: \
 $(gettext "command does not exist")
 $USAGE_LINE"
         msg_info "$text"
         exit $ERROR
     fi
     shift
-    exec "$PROGRAM_PATH/kz-$exec_program_name" "$@"
+    exec "$PROGRAM_PATH/$PROGRAM_NAME-$command" "$@"
 }
 
 
