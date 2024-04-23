@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-16 13:44+0200\n"
+"POT-Creation-Date: 2024-04-23 12:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,7 +119,15 @@ msgstr ""
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-msgid "Build ID cannot be determined."
+msgid "Build ID cannot be determined"
+msgstr ""
+
+#, sh-format
+msgid "kz version 4.2.1 (built $build_id)."
+msgstr ""
+
+#, sh-format
+msgid "kz version 4.2.1 (built {})."
 msgstr ""
 
 msgid "{}: i am a module"

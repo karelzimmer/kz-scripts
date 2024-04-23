@@ -297,13 +297,13 @@ def process_option_version(PROGRAM_NAME):
 
     try:
         with open('/etc/kz-build.id') as fh:
-            build_id = f' ({fh.read()})'
+            build_id = f'{fh.read()}'
     except FileNotFoundError as fnf:
         text = str(fnf)
         msg_log(PROGRAM_NAME, text)
-        text = _('Build ID cannot be determined.')
+        text = _('Build ID cannot be determined')
         msg_log(PROGRAM_NAME, text)
-        build_id = ''
+        build_id = text
     except Exception as exc:
         text = str(exc)
         msg_log(PROGRAM_NAME, text)
@@ -312,7 +312,7 @@ def process_option_version(PROGRAM_NAME):
         term_script(PROGRAM_NAME)
         sys.exit(ERROR)
     finally:
-        text = f'kz 4.2.1{build_id}\n\n'
+        text = f"{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n"
         text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         text += _('CC0 1.0 Universal <https://creativecommons.org/publicdomain\
 /zero/1.0>.')
