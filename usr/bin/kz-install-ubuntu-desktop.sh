@@ -132,6 +132,13 @@ sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
 
+# Install APP gdebi HOST *
+sudo apt-get install --yes gdebi
+
+# Remove APP gdebi HOST *
+sudo apt-get remove --yes gdebi
+
+
 # Install APP gimp HOST pc06 pc-van-hugo
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 

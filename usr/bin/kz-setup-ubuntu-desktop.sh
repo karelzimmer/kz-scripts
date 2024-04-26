@@ -35,6 +35,13 @@ kz-gset --delfav=firefox_firefox
 kz-gset --addfavbef=firefox_firefox
 
 
+# Setup APP gdebi USER *
+xdg-mime default gdebi.desktop application/vnd.debian.binary-package
+
+# Reset APP gdebi USER *
+xdg-mime default snap-store_ubuntu-software-local-file.desktop application/vnd.debian.binary-package
+
+
 # Setup APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true

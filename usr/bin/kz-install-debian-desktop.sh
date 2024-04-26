@@ -82,6 +82,13 @@ sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
 
+# Install APP gdebi HOST *
+sudo apt-get install --yes gdebi
+
+# Remove APP gdebi HOST *
+sudo apt-get remove --yes gdebi
+
+
 # Install APP gedit HOST *
 sudo apt-get install --yes gedit
 

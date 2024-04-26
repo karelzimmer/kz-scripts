@@ -36,6 +36,13 @@ kz-gset --delfav=firefox-esr
 kz-gset --addfavbef=firefox-esr
 
 
+# Setup APP gdebi USER *
+xdg-mime default gdebi.desktop application/vnd.debian.binary-package
+
+# Reset APP gdebi USER *
+xdg-mime default org.gnome.FileRoller.desktop application/vnd.debian.binary-package
+
+
 # Setup APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
