@@ -6,32 +6,24 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Install APP 00-users HOST *
-: # Enable access to system monitoring tasks like read many log files in /var/log.
-sudo usermod --append --groups adm "${SUDO_USER:-$USER}"
-
-# Remove APP 00-users HOST *
-sudo deluser "${SUDO_USER:-$USER}" adm
-
-
-# Install APP 99-fwupd HOST -nohost
-: # Disable the Firmware update daemon
-sudo systemctl stop fwupd.service
-sudo systemctl disable fwupd.service
-sudo systemctl mask fwupd.service
-
-# Remove APP 99-fwupd HOST -nohost
-: # Enable the Firmware update daemon
-systemctl unmask fwupd.service
-sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
-
-
 # Install APP ansible HOST *
 sudo apt-get install --yes ansible
 
 # Remove APP ansible HOST *
 sudo apt-get remove --yes ansible
+
+
+# Install APP fwupd HOST -nohost
+: # Disable the Firmware update daemon
+sudo systemctl stop fwupd.service
+sudo systemctl disable fwupd.service
+sudo systemctl mask fwupd.service
+
+# Remove APP fwupd HOST -nohost
+: # Enable the Firmware update daemon
+systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
 
 
 # Install APP locate HOST *
@@ -74,3 +66,11 @@ sudo ufw enable
 # Remove APP ufw HOST *
 sudo ufw disable
 sudo apt-get remove --yes ufw
+
+
+# Install APP users HOST *
+: # Enable access to system monitoring tasks like read many log files in /var/log.
+sudo usermod --append --groups adm "${SUDO_USER:-$USER}"
+
+# Remove APP users HOST *
+sudo deluser "${SUDO_USER:-$USER}" adm

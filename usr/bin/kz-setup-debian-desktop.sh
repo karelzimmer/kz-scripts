@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Setup APP 00-dashtodock USER *
+# Setup APP dashtodock USER *
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
@@ -17,7 +17,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true
 gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true
 gsettings set org.gnome.shell disable-user-extensions false
 
-# Reset APP 00-dashtodock USER *
+# Reset APP dashtodock USER *
 gnome-extensions disable dash-to-dock@micxgx.gmail.com
 gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
 gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
@@ -29,7 +29,21 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
 
-# Setup APP 00-gnome USER *
+# Setup APP firefox USER karel@pc07
+kz-gset --delfav=firefox-esr
+
+# Reset APP firefox USER karel@pc07
+kz-gset --addfavbef=firefox-esr
+
+
+# Setup APP gdebi USER *
+xdg-mime default gdebi.desktop application/vnd.debian.binary-package
+
+# Reset APP gdebi USER *
+xdg-mime default org.gnome.FileRoller.desktop application/vnd.debian.binary-package
+
+
+# Setup APP gnome USER *
 kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
@@ -56,7 +70,7 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-typ
 gsettings set org.gnome.shell disable-user-extensions false
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
-# Reset APP 00-gnome USER *
+# Reset APP gnome USER *
 kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
@@ -85,43 +99,6 @@ gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
 
-# Setup APP 99-lynis USER -nouser
-git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
-: # Usage:
-: # $ cd ~/lynis
-: # $ [sudo] ./lynis audit system
-
-# Reset APP 99-lynis USER -nouser
-rm --force --verbose --recursive --verbose /home/"$USER"/lynis
-
-
-# Setup APP 99-nautilus-hide USER *
-echo 'snap' > "$HOME"/.hidden
-
-# Reset APP 99-nautilus-hide USER *
-rm --force --verbose "$HOME"/.hidden
-
-
-# Setup APP 99-recover-files-thumbnails USER -nouser
-rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
-
-# Reset APP 99-recover-files-thumbnails USER -nouser
-: # nocmd
-
-# Setup APP firefox USER karel@pc07
-kz-gset --delfav=firefox-esr
-
-# Reset APP firefox USER karel@pc07
-kz-gset --addfavbef=firefox-esr
-
-
-# Setup APP gdebi USER *
-xdg-mime default gdebi.desktop application/vnd.debian.binary-package
-
-# Reset APP gdebi USER *
-xdg-mime default org.gnome.FileRoller.desktop application/vnd.debian.binary-package
-
-
 # Setup APP google-chrome USER *
 xdg-mime default google-chrome.desktop application/pdf
 
@@ -142,6 +119,29 @@ kz-gset --addfavaft=virt-manager
 # Reset APP kvm USER karel@pc07
 kz-gset --delfav=virt-manager
 
+
+# Setup APP lynis USER -nouser
+git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
+: # Usage:
+: # $ cd ~/lynis
+: # $ [sudo] ./lynis audit system
+
+# Reset APP lynis USER -nouser
+rm --force --verbose --recursive --verbose /home/"$USER"/lynis
+
+
+# Setup APP nautilus-hide USER *
+echo 'snap' > "$HOME"/.hidden
+
+# Reset APP nautilus-hide USER *
+rm --force --verbose "$HOME"/.hidden
+
+
+# Setup APP recover-files-thumbnails USER -nouser
+rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
+
+# Reset APP recover-files-thumbnails USER -nouser
+: # nocmd
 
 # Setup APP spotify USER karel@pc07
 kz-gset --addfavaft=kz-spotify

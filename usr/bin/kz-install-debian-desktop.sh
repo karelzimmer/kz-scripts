@@ -23,25 +23,6 @@ sudo apt-get remove --yes deb-multimedia-keyring
 sudo apt-get update
 
 
-# Install APP 99-force-x11 HOST -nohost
-: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
-: # Force means no choice @ user login for X11 or Wayland!
-sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
-: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
-
-# Remove APP 99-force-x11 HOST -nohost
-sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
-: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-
-
-# Install APP 99-guest HOST -nohost
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
-sudo passwd --delete "$(gettext --domain=kz 'guest')"
-
-# Remove APP 99-guest HOST -nohost
-sudo userdel --remove "$(gettext --domain=kz 'guest')"
-
-
 # Install APP anydesk HOST -nohost
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
@@ -94,6 +75,17 @@ sudo apt-get install --yes fdupes
 sudo apt-get remove --yes fdupes
 
 
+# Install APP force-x11 HOST -nohost
+: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
+: # Force means no choice @ user login for X11 or Wayland!
+sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
+
+# Remove APP force-x11 HOST -nohost
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+
+
 # Install APP fwupd HOST -nohost
 : # Disable the Firmware update daemon
 sudo systemctl stop fwupd.service
@@ -143,6 +135,14 @@ sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
+
+
+# Install APP guest HOST -nohost
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo passwd --delete "$(gettext --domain=kz 'guest')"
+
+# Remove APP guest HOST -nohost
+sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # Install APP kvm HOST pc07

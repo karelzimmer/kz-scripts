@@ -25,89 +25,6 @@ sudo apt-get install --yes ubuntu-desktop
 : # Better not, will delete the Ubuntu desktop.
 : # nocmd
 
-# Install APP 99-disable-aer HOST pc06
-: # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
-: # Express Advanced Error Reporting) to prevent the log gets flooded with
-: # 'AER: Corrected errors received'.  Usually needed for HP hardware.
-sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
-sudo update-grub
-: # Check for kernel config parameter pci=noaer.
-grep --quiet --regexp='pci=noaer' /etc/default/grub
-
-# Remove APP 99-disable-aer HOST pc06
-sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
-sudo update-grub
-: # Check for kernel config parameter pci=noaer.
-! grep --quiet --regexp='pci=noaer' /etc/default/grub
-
-
-# Install APP 99-force-x11 HOST -nohost
-: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
-: # Force means no choice @ user login for X11 or Wayland!
-sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
-: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
-
-# Remove APP 99-force-x11 HOST -nohost
-sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
-: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-
-
-# Install APP 99-fwupd HOST -nohost
-: # Disable the Firmware update daemon
-sudo systemctl stop fwupd.service
-sudo systemctl disable fwupd.service
-sudo systemctl mask fwupd.service
-
-# Remove APP 99-fwupd HOST -nohost
-: # Enable the Firmware update daemon
-systemctl unmask fwupd.service
-sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
-
-
-# Install APP 99-grub-timeout HOST *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/' /etc/default/grub
-sudo update-grub
-
-# Remove APP 99-grub-timeout HOST *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/default/grub
-sudo update-grub
-
-
-# Install APP 99-guest HOST -nohost
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
-sudo passwd --delete "$(gettext --domain=kz 'guest')"
-
-# Remove APP 99-guest HOST -nohost
-sudo userdel --remove "$(gettext --domain=kz 'guest')"
-
-
-# Install APP 99-handlelidswitch HOST pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
-
-# Remove APP 99-handlelidswitch HOST pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-
-
-# Install APP 99-hostnames HOST pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
-sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
-sudo sed --in-place --expression='3a192.168.1.83 pc06' /etc/hosts
-
-# Remove APP 99-hostnames HOST pc01 pc06
-sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
-sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
-
-
-# Install APP 99-monitors HOST pc06
-if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp  --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
-
-# Remove APP 99-monitors HOST pc06
-sudo rm --force --verbose ~gdm/.config/monitors.xml
-
 
 # Install APP ansible HOST pc06
 sudo apt-get install --yes ansible
@@ -166,6 +83,22 @@ sudo apt-get install --yes cups-backend-bjnp
 sudo apt-get remove --yes cups-backend-bjnp
 
 
+# Install APP disable-aer HOST pc06
+: # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
+: # Express Advanced Error Reporting) to prevent the log gets flooded with
+: # 'AER: Corrected errors received'.  Usually needed for HP hardware.
+sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
+sudo update-grub
+: # Check for kernel config parameter pci=noaer.
+grep --quiet --regexp='pci=noaer' /etc/default/grub
+
+# Remove APP disable-aer HOST pc06
+sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
+sudo update-grub
+: # Check for kernel config parameter pci=noaer.
+! grep --quiet --regexp='pci=noaer' /etc/default/grub
+
+
 # Install APP exiftool HOST pc06
 sudo apt-get install --yes libimage-exiftool-perl
 
@@ -182,6 +115,30 @@ sudo apt-get install --yes fdupes
 
 # Remove APP fdupes HOST -nohost
 sudo apt-get remove --yes fdupes
+
+
+# Install APP force-x11 HOST -nohost
+: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
+: # Force means no choice @ user login for X11 or Wayland!
+sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
+
+# Remove APP force-x11 HOST -nohost
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+
+
+# Install APP fwupd HOST -nohost
+: # Disable the Firmware update daemon
+sudo systemctl stop fwupd.service
+sudo systemctl disable fwupd.service
+sudo systemctl mask fwupd.service
+
+# Remove APP fwupd HOST -nohost
+: # Enable the Firmware update daemon
+systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
 
 
 # Install APP gdebi HOST *
@@ -250,11 +207,47 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/sh
 sudo apt-get update
 
 
+# Install APP grub-timeout HOST *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/' /etc/default/grub
+sudo update-grub
+
+# Remove APP grub-timeout HOST *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/default/grub
+sudo update-grub
+
+
+# Install APP guest HOST -nohost
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo passwd --delete "$(gettext --domain=kz 'guest')"
+
+# Remove APP guest HOST -nohost
+sudo userdel --remove "$(gettext --domain=kz 'guest')"
+
+
 # Install APP handbrake HOST pc-van-emily
 sudo apt-get install --yes handbrake
 
 # Remove APP handbrake HOST pc-van-emily
 sudo apt-get remove --yes handbrake
+
+
+# Install APP handlelidswitch HOST pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
+
+# Remove APP handlelidswitch HOST pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+
+
+# Install APP hostnames HOST pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
+sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
+sudo sed --in-place --expression='3a192.168.1.83 pc06' /etc/hosts
+
+# Remove APP hostnames HOST pc01 pc06
+sudo sed --in-place --expression='/^192.168.1.83/d' /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
 
 
 # Install APP htop HOST pc06
@@ -296,6 +289,14 @@ sudo apt-get install --yes mlocate
 
 # Remove APP locate HOST pc06
 sudo apt-get remove --yes mlocate
+
+
+# Install APP monitors HOST pc06
+if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp  --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
+
+# Remove APP monitors HOST pc06
+sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 
 # Install APP nautilus-admin HOST pc06
