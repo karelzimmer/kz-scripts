@@ -168,7 +168,7 @@ def check_on_ac_power(PROGRAM_NAME):
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         else:
-            return(OK)
+            return OK
 
 
 def init_script(PROGRAM_NAME):
@@ -255,7 +255,7 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
             f"{_('  -u, --usage    give a short usage message')}\n"
             f"{_('  -v, --version  print program version')}\n\n"
             f'''{_("Type 'man {}' or see the {} for more information.").
-               format(DISPLAY_NAME, man_url)}''')
+                 format(DISPLAY_NAME, man_url)}''')
     msg_info(PROGRAM_NAME, text)
 
 
@@ -275,7 +275,7 @@ def process_option_manual(PROGRAM_NAME):
         term_script(PROGRAM_NAME)
         sys.exit(ERROR)
     else:
-        return(OK)
+        return OK
 
 
 def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
@@ -285,7 +285,7 @@ def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
     text = (f"{_('Usage: {}').format(DISPLAY_NAME)}"
             ' [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n\n'
             f'''{_("Type '{} --help' for more information.").
-                format(DISPLAY_NAME)}''')
+                 format(DISPLAY_NAME)}''')
     msg_info(PROGRAM_NAME, text)
 
 
