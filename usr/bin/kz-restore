@@ -141,17 +141,18 @@ $USAGE_LINE"
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
         if [[ -z $medium ]]; then
-        text="$(gettext "No USB medium found.
+            text=$(gettext "No USB medium found.
 
-Connect a USB medium.")"
+Connect a USB medium.")
             msg_warning "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
-                 msg_error "$text"
-            exit $ERROR
+                msg_error "$text"
+                exit $ERROR
             fi
         fi
+        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
         if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
             text="$(eval_gettext "Connect only one USB medium.
 
@@ -161,6 +162,7 @@ Now connected:
 Disconnect media via Files.")"
             msg_warning "$text"
             $option_gui || wait_for_enter
+            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
                 msg_error "$text"
                 exit $ERROR
