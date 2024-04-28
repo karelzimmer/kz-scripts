@@ -167,10 +167,11 @@ sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl li
 
 
 # Install APP locate HOST pc07
-sudo apt-get install --yes mlocate
+sudo apt-get install --yes locate
+sudo updatedb
 
 # Remove APP locate HOST pc07
-sudo apt-get remove --yes mlocate
+sudo apt-get remove --yes locate
 
 
 # Install APP repair-ntfs HOST -nohost

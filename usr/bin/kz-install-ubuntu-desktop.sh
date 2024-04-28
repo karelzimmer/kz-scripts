@@ -285,10 +285,11 @@ sudo apt-get remove --yes aspell-en aspell-nl libreoffice
 
 
 # Install APP locate HOST pc06
-sudo apt-get install --yes mlocate
+sudo apt-get install --yes locate
+sudo updatedb
 
 # Remove APP locate HOST pc06
-sudo apt-get remove --yes mlocate
+sudo apt-get remove --yes locate
 
 
 # Install APP monitors HOST pc06

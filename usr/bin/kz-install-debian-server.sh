@@ -27,10 +27,11 @@ sudo systemctl start fwupd.service
 
 
 # Install APP locate HOST *
-sudo apt-get install --yes mlocate
+sudo apt-get install --yes locate
+sudo updatedb
 
 # Remove APP locate HOST *
-sudo apt-get remove --yes mlocate
+sudo apt-get remove --yes locate
 
 
 # Install APP repair-ntfs HOST -nohost
