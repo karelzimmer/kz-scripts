@@ -6,32 +6,32 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Install APP ansible HOST *
-sudo apt-get install --yes ansible
-
-# Remove APP ansible HOST *
-sudo apt-get remove --yes ansible
-
-
-# Install APP cloud-init HOST *
+# Install APP 00-cloud-init HOST *
 : # Prevent extra lines from cloud-init printed in terminal at login.
 sudo touch /etc/cloud/cloud-init.disabled
 
-# Remove APP cloud-init HOST *
+# Remove APP 00-cloud-init HOST *
 sudo rm --force --verbose /etc/cloud/cloud-init.disabled
 
 
-# Install APP fwupd HOST -nohost
+# Install APP 99-fwupd HOST -nohost
 : # Disable the Firmware update daemon
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove APP fwupd HOST -nohost
+# Remove APP 99-fwupd HOST -nohost
 : # Enable the Firmware update daemon
 systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
+
+
+# Install APP ansible HOST *
+sudo apt-get install --yes ansible
+
+# Remove APP ansible HOST *
+sudo apt-get remove --yes ansible
 
 
 # Install APP locate HOST *

@@ -6,6 +6,42 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
+# Install APP 00-repositories HOST *
+sudo apt-add-repository contrib
+sudo apt-add-repository non-free
+sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
+wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'
+sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
+rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
+sudo apt-get update
+
+# Remove APP 00-repositories HOST *
+sudo apt-add-repository --remove contrib
+sudo apt-add-repository --remove non-free
+sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
+sudo apt-get remove --yes deb-multimedia-keyring
+sudo apt-get update
+
+
+# Install APP 99-force-x11 HOST -nohost
+: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
+: # Force means no choice @ user login for X11 or Wayland!
+sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
+
+# Remove APP 99-force-x11 HOST -nohost
+sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
+: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
+
+
+# Install APP 99-guest HOST -nohost
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo passwd --delete "$(gettext --domain=kz 'guest')"
+
+# Remove APP 99-guest HOST -nohost
+sudo userdel --remove "$(gettext --domain=kz 'guest')"
+
+
 # Install APP anydesk HOST -nohost
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
@@ -56,17 +92,6 @@ sudo apt-get install --yes fdupes
 
 # Remove APP fdupes HOST -nohost
 sudo apt-get remove --yes fdupes
-
-
-# Install APP force-x11 HOST -nohost
-: # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
-: # Force means no choice @ user login for X11 or Wayland!
-sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
-: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
-
-# Remove APP force-x11 HOST -nohost
-sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
-: # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 
 # Install APP fwupd HOST -nohost
@@ -120,14 +145,6 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share
 sudo apt-get update
 
 
-# Install APP guest HOST -nohost
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
-sudo passwd --delete "$(gettext --domain=kz 'guest')"
-
-# Remove APP guest HOST -nohost
-sudo userdel --remove "$(gettext --domain=kz 'guest')"
-
-
 # Install APP kvm HOST pc07
 : # Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
@@ -166,23 +183,6 @@ sudo apt-get install --yes ntfs-3g
 
 # Remove APP repair-ntfs HOST -nohost
 sudo apt-get remove --yes ntfs-3g
-
-
-# Install APP repositories HOST *
-sudo apt-add-repository contrib
-sudo apt-add-repository non-free
-sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
-wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'
-sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
-rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
-sudo apt-get update
-
-# Remove APP repositories HOST *
-sudo apt-add-repository --remove contrib
-sudo apt-add-repository --remove non-free
-sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
-sudo apt-get remove --yes deb-multimedia-keyring
-sudo apt-get update
 
 
 # Install APP signal HOST pc07
