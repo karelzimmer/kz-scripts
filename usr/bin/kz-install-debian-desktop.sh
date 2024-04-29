@@ -6,7 +6,8 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Install APP 00-repositories HOST *
+# Install APP repositories HOST *
+# This first.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -15,7 +16,7 @@ sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 
-# Remove APP 00-repositories HOST *
+# Remove APP repositories HOST *
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
 sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"

@@ -6,22 +6,24 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Install APP 00-apport HOST *
+# Install APP apport HOST *
+# This first.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force --verbose /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
-# Remove APP 00-apport HOST *
+# Remove APP apport HOST *
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
-# Install APP 00-ubuntu-desktop HOST *
+# Install APP ubuntu-desktop HOST *
+# This second.
 : # Necessary if the user chose "Default selection" during installation.
 sudo apt-get install --yes ubuntu-desktop
 
-# Remove APP 00-ubuntu-desktop HOST *
+# Remove APP ubuntu-desktop HOST *
 : # Better not, will delete the Ubuntu desktop.
 : # nocmd
 
