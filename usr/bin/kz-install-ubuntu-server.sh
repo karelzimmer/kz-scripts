@@ -29,7 +29,7 @@ sudo systemctl mask fwupd.service
 
 # Remove APP fwupd HOST -nohost
 : # Enable the Firmware update daemon
-systemctl unmask fwupd.service
+sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 

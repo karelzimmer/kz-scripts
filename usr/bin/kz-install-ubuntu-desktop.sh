@@ -7,7 +7,6 @@
 ###############################################################################
 
 # Install APP apport HOST *
-# This first.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force --verbose /var/crash/*
@@ -19,13 +18,11 @@ sudo systemctl enable --now apport.service
 
 
 # Install APP ubuntu-desktop HOST *
-# This second.
-: # Necessary if the user chose "Default selection" during installation.
+: # Necessary if "Default selection" was chosen during installation.
 sudo apt-get install --yes ubuntu-desktop
 
 # Remove APP ubuntu-desktop HOST *
-: # Better not, will delete the Ubuntu desktop.
-: # nocmd
+: # nocmd. Better not, will delete the Ubuntu desktop.
 
 
 # Install APP ansible HOST pc06
@@ -138,7 +135,7 @@ sudo systemctl mask fwupd.service
 
 # Remove APP fwupd HOST -nohost
 : # Enable the Firmware update daemon
-systemctl unmask fwupd.service
+sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
