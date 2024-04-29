@@ -7,12 +7,14 @@
 ###############################################################################
 
 # Install APP apport HOST *
+: # Suppress the program crash report
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force --verbose /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 # Remove APP apport HOST *
+: # Enable the program crash report
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
