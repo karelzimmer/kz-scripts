@@ -17,7 +17,7 @@ rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
 # Setup APP terminal USER *
-: # # Turn on aliases.
+: # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 : # Enable search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc

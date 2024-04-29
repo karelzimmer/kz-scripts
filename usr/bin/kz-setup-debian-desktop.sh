@@ -159,7 +159,7 @@ kz-gset --addfavbef=install-debian
 
 # Setup APP terminal USER karel@pc07
 kz-gset --addfavbef=org.gnome.Terminal
-: # # Turn on aliases.
+: # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 : # Enable search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
