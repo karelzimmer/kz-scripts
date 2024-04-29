@@ -277,10 +277,10 @@ sudo delgroup libvirtd
 
 
 # Install APP libreoffice HOST *
-sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl
+sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 # Remove APP libreoffice HOST *
-sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl
+sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
 # Install APP locate HOST pc06
