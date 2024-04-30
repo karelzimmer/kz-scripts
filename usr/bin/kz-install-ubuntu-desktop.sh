@@ -7,20 +7,20 @@
 ###############################################################################
 
 # Install APP apport HOST *
-: # Suppress the program crash report
+: # Suppress the program crash report.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force --verbose /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 # Remove APP apport HOST *
-: # Enable the program crash report
+: # Enable the program crash report.
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
 # Install APP ubuntu-desktop HOST *
-: # Necessary if "Default selection" was chosen during installation.
+: # Necessary if "Default selection", i.e. ubuntu-desktop-minimal, was chosen during installation.
 sudo apt-get install --yes ubuntu-desktop
 
 # Remove APP ubuntu-desktop HOST *
@@ -77,7 +77,7 @@ sudo apt-get remove --yes cockpit
 
 
 # Install APP cups-backend-bjnp HOST pc-van-emily
-: # Add support for Canon USB over IP BJNP protocol
+: # Add support for Canon USB over IP BJNP protocol.
 sudo apt-get install --yes cups-backend-bjnp
 
 # Remove APP cups-backend-bjnp HOST pc-van-emily
@@ -87,7 +87,7 @@ sudo apt-get remove --yes cups-backend-bjnp
 # Install APP disable-aer HOST pc06
 : # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
 : # Express Advanced Error Reporting) to prevent the log gets flooded with
-: # 'AER: Corrected errors received'.  Usually needed for HP hardware.
+: # 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
 : # Check for kernel config parameter pci=noaer.
@@ -130,13 +130,13 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 
 
 # Install APP fwupd HOST -nohost
-: # Disable the Firmware update daemon
+: # Disable the Firmware update daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
 # Remove APP fwupd HOST -nohost
-: # Enable the Firmware update daemon
+: # Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
@@ -269,7 +269,7 @@ sudo apt-get remove --yes krita
 : # Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
-: # Images are in /var/lib/libvirt/images/
+: # Images are in: /var/lib/libvirt/images/
 
 # Remove APP kvm HOST pc06
 sudo apt-get remove --yes cpu-checker qemu-kvm bridge-utils virt-manager
@@ -404,7 +404,7 @@ sudo apt-get remove --yes gufw
 : # If installation hangs or VBox does not work, check Linux-info.txt.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
-: # VirtualBox Guest Additions ISO are in /usr/share/virtualbox/
+: # VirtualBox Guest Additions ISO are in: /usr/share/virtualbox/
 
 # Remove APP virtualbox HOST pc-van-hugo
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso

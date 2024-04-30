@@ -22,13 +22,13 @@ sudo rm --force --verbose /etc/cloud/cloud-init.disabled
 
 
 # Install APP fwupd HOST -nohost
-: # Disable the Firmware update daemon
+: # Disable the Firmware update daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
 # Remove APP fwupd HOST -nohost
-: # Enable the Firmware update daemon
+: # Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service

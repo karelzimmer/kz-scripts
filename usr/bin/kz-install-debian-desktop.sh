@@ -7,6 +7,7 @@
 ###############################################################################
 
 # Install APP repositories HOST *
+: #1 Add additional repositories.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -16,6 +17,7 @@ rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 
 # Remove APP repositories HOST *
+: #1 Remove additional repositories.
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
 sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -87,13 +89,13 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 
 
 # Install APP fwupd HOST -nohost
-: # Disable the Firmware update daemon
+: # Disable the Firmware update daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
 # Remove APP fwupd HOST -nohost
-: # Enable the Firmware update daemon
+: # Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
@@ -149,7 +151,7 @@ sudo userdel --remove "$(gettext --domain=kz 'guest')"
 : # Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
-: # Images are in /var/lib/libvirt/images/
+: # Images are in: /var/lib/libvirt/images/
 
 # Remove APP kvm HOST pc07
 sudo apt-get remove --yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
