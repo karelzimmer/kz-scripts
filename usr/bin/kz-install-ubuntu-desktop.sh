@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
+########################## Execute this block first ###########################
 # Install APP apport HOST *
 : # Suppress the program crash report.
 sudo systemctl stop apport.service
@@ -25,6 +26,7 @@ sudo apt-get install --yes ubuntu-desktop
 
 # Remove APP ubuntu-desktop HOST *
 : # nocmd. Better not, will delete the Ubuntu desktop.
+########################## Execute this block first ###########################
 
 
 # Install APP ansible HOST pc06
@@ -85,9 +87,7 @@ sudo apt-get remove --yes cups-backend-bjnp
 
 
 # Install APP disable-aer HOST pc06
-: # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect
-: # Express Advanced Error Reporting) to prevent the log gets flooded with
-: # 'AER: Corrected errors received'. Usually needed for HP hardware.
+: # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting) to prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
 : # Check for kernel config parameter pci=noaer.

@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
+########################## Execute this block first ###########################
 # Install APP repositories HOST *
 : #1 Add additional repositories.
 sudo apt-add-repository contrib
@@ -23,6 +24,7 @@ sudo apt-add-repository --remove non-free
 sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
 sudo apt-get remove --yes deb-multimedia-keyring
 sudo apt-get update
+########################## Execute this block first ###########################
 
 
 # Install APP anydesk HOST -nohost

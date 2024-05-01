@@ -357,8 +357,12 @@ function process_input_file_by_app {
                     newline='\n'
                 fi
                 ;;
+            '#'*)
+                # Comment line.
+                continue
+                ;;
             *)
-                # Command or comment record.
+                # Command record.
                 if $app_match; then
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
@@ -412,8 +416,12 @@ function process_input_file_by_host {
                     newline='\n'
                 fi
                 ;;
+            '#'*)
+                # Comment line.
+                continue
+                ;;
             *)
-                # Command or comment record.
+                # Command record.
                 if $host_match; then
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
@@ -469,7 +477,7 @@ function process_command_file {
                         "$app_name"
                 ;;
             '#'*)
-                # Comment record.
+                # Comment line.
                 continue
                 ;;
             *)
