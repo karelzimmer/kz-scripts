@@ -444,7 +444,7 @@ function process_command_file {
 
     if ! $option_gui; then
         text="$(gettext 'NUM/TOT  APP')
-        $(gettext 'COMMAND')..."
+         $(gettext 'COMMAND')..."
         msg_info "$text"
     fi
 
