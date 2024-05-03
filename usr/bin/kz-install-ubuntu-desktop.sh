@@ -403,6 +403,7 @@ sudo apt-get remove --yes gufw
 
 # Install APP user-guest HOST pc06
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo usermod --groups pipo,users pipo
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
 # Remove APP user-guest HOST pc06
@@ -411,6 +412,7 @@ sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
 # Install APP user-karel HOST pc01
 sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
+sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel
 sudo passwd --delete --expire karel
 
 # Remove APP user-karel HOST pc01
@@ -419,6 +421,7 @@ sudo passwd --delete --expire karel
 
 # Install APP user-toos HOST Laptop
 sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
+sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos
 sudo passwd --delete --expire toos
 
 # Remove APP user-toos HOST Laptop
