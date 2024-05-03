@@ -96,8 +96,7 @@ def perform_cleanup():
     perform_command(command)
 
     # Start with LANGUAGE=en and only check for disabled does not always work.
-    command = '# snap cleanup\n\
-snap  list --all |\n\
+    command = 'snap  list --all |\n\
 while read Name Version Rev Tracking Publisher Notes; do\n\
    if [[ $Notes == *disabled* || $Notes == *uitgeschakeld* ]]; then\n\
       sudo snap remove "$Name" --revision="$Rev"\n\
