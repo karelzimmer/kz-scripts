@@ -141,7 +141,7 @@ rm --force --verbose "$HOME"/.hidden
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset APP recover-files-thumbnails USER -nouser
-: # NoCommand
+: # No command.
 
 # Setup APP spotify USER karel@pc07
 kz-gset --addfavaft=kz-spotify
