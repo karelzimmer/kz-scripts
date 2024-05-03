@@ -26,7 +26,7 @@ sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove APP update HOST *
-: # nocmd
+: # NoCommand
 
 
 # Install APP ubuntu-desktop HOST *
@@ -34,7 +34,7 @@ sudo snap refresh
 sudo apt-get install --yes ubuntu-desktop
 
 # Remove APP ubuntu-desktop HOST *
-: # nocmd. Better not, will delete the Ubuntu desktop.
+: # NoCommand. Better not, will delete the Ubuntu desktop.
 ########################## Execute this block first ###########################
 
 

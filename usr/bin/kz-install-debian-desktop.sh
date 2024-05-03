@@ -34,7 +34,7 @@ sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove APP update HOST *
-: # nocmd
+: # NoCommand
 ########################## Execute this block first ###########################
 
 
