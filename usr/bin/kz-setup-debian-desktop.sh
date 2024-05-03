@@ -144,10 +144,10 @@ echo 'snap' > "$HOME"/.hidden
 rm --force --verbose "$HOME"/.hidden
 
 
-# Setup APP recovered-thumbnails USER -nouser
+# Setup APP recovere-thumbnails USER -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
-# Reset APP recovered-thumbnails USER -nouser
+# Reset APP recovere-thumbnails USER -nouser
 : # There is no command available to reset recovered thumbnails.
 
 # Setup APP spotify USER karel@pc07
