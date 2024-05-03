@@ -124,8 +124,7 @@ function check_for_active_updates {
                 /var/lib/dpkg/lock                          \
                 /var/lib/dpkg/lock-frontend                 \
                 &> /dev/null; do
-        text="$(eval_gettext "Wait \${check_wait}s for another package manager\
- to finish...")"
+        text="$(gettext 'Wait for another package manager to finish...')"
         msg_info "$text"
         sleep $check_wait
     done

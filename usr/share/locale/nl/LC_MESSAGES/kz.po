@@ -104,8 +104,8 @@ msgstr "Foutmelding $DISPLAY_NAME"
 msgid "Common module for Python scripts"
 msgstr "Algemene module voor Python scripts"
 
-msgid "Wait {}s for another package manager to finish..."
-msgstr "Wacht {}s tot andere pakketbeheerder klaar is..."
+msgid "Wait for another package manager to finish..."
+msgstr "Wacht tot andere pakketbeheerder klaar is..."
 
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
@@ -386,10 +386,6 @@ msgstr "Uploaden website is mislukt."
 
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
-
-#, sh-format
-msgid "Wait ${check_wait}s for another package manager to finish..."
-msgstr "Wacht ${check_wait}s tot andere pakketbeheerder klaar is..."
 
 msgid "Install package kz"
 msgstr "Pakket kz installeren"
