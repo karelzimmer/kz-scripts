@@ -28,13 +28,13 @@ sudo apt-get update
 sudo apt-get upgrade --yes
 
 
-# Install APP update HOST *
+# Install APP update-system HOST *
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
-# Remove APP update HOST *
-: # No command.
+# Remove APP update-system HOST *
+: # There is no command available to remove update system.
 ########################## Execute this block first ###########################
 
 

@@ -20,13 +20,13 @@ sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
-# Install APP update HOST *
+# Install APP update-system HOST *
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
-# Remove APP update HOST *
-: # No command.
+# Remove APP update-system HOST *
+: # There is no command available to remove update system.
 
 
 # Install APP ubuntu-desktop HOST *
@@ -34,7 +34,7 @@ sudo snap refresh
 sudo apt-get install --yes ubuntu-desktop
 
 # Remove APP ubuntu-desktop HOST *
-: # No command. Better not, will delete the Ubuntu desktop.
+: # sudo apt-get remove --yes ubuntu-desktop
 ########################## Execute this block first ###########################
 
 
