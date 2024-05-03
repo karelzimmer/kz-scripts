@@ -149,10 +149,10 @@ echo 'snap' > "$HOME"/.hidden
 rm --force --verbose "$HOME"/.hidden
 
 
-# Setup APP recover-thumbnails USER -nouser
+# Setup APP recovered-thumbnails USER -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
-# Reset APP recover-thumbnails USER -nouser
+# Reset APP recovered-thumbnails USER -nouser
 : # There is no command available to reset recovered thumbnails.
 
 # Setup APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
@@ -160,13 +160,6 @@ kz-gset --addfavaft=kz-spotify
 
 # Reset APP spotify USER monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delfav=kz-spotify
-
-
-# Setup APP start-installer USER *
-kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
-
-# Reset APP start-installer USER *
-kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
 # Setup APP sound-juicer USER emily@pc-van-emily
@@ -206,6 +199,13 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 # Reset APP terminal USER karel@pc01 karel@pc06
 kz-gset --delfav=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
+
+
+# Setup APP ubuntu-desktop-installer USER *
+kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
+
+# Reset APP ubuntu-desktop-installer USER *
+kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
 # Setup APP virtualbox USER hugo@pc-van-hugo

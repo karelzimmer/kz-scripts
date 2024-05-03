@@ -7,14 +7,14 @@
 ###############################################################################
 
 ########################## Execute this block first ###########################
-# Install APP apport HOST *
+# Install APP disabled-apport HOST *
 : # Suppress the program crash report.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
 sudo rm --force --verbose /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
-# Remove APP apport HOST *
+# Remove APP disabled-apport HOST *
 : # Enable the program crash report.
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
@@ -72,6 +72,15 @@ sudo apt-get install --yes calibre
 sudo apt-get remove --yes calibre
 
 
+# Install APP change-grub-timeout HOST *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/' /etc/default/grub
+sudo update-grub
+
+# Remove APP change-grub-timeout HOST *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/default/grub
+sudo update-grub
+
+
 # Install APP clamav HOST pc-van-hugo
 sudo apt-get install --yes clamtk-gnome
 
@@ -95,18 +104,26 @@ sudo apt-get install --yes cups-backend-bjnp
 sudo apt-get remove --yes cups-backend-bjnp
 
 
-# Install APP disable-aer HOST pc06
+# Install APP disabled-aer HOST pc06
 : # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting) to prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
 : # Check for kernel config parameter pci=noaer.
 grep --quiet --regexp='pci=noaer' /etc/default/grub
 
-# Remove APP disable-aer HOST pc06
+# Remove APP disabled-aer HOST pc06
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
 : # Check for kernel config parameter pci=noaer.
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
+
+
+# Install APP disabled-lidswitch HOST pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
+
+# Remove APP disabled-lidswitch HOST pc-van-hugo
+sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
 # Install APP exiftool HOST pc06
@@ -217,28 +234,11 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/sh
 sudo apt-get update
 
 
-# Install APP grub-timeout HOST *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/' /etc/default/grub
-sudo update-grub
-
-# Remove APP grub-timeout HOST *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/default/grub
-sudo update-grub
-
-
 # Install APP handbrake HOST pc-van-emily
 sudo apt-get install --yes handbrake
 
 # Remove APP handbrake HOST pc-van-emily
 sudo apt-get remove --yes handbrake
-
-
-# Install APP handlelidswitch HOST pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
-
-# Remove APP handlelidswitch HOST pc-van-hugo
-sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 
 # Install APP hostnames HOST pc01 pc06

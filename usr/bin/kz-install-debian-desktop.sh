@@ -7,7 +7,7 @@
 ###############################################################################
 
 ########################## Execute this block first ###########################
-# Install APP repositories HOST *
+# Install APP extra-repos HOST *
 : #1 Add additional repositories.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
@@ -18,7 +18,7 @@ rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 sudo apt-get upgrade --yes
 
-# Remove APP repositories HOST *
+# Remove APP extra-repos HOST *
 : #1 Remove additional repositories.
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
@@ -152,14 +152,6 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share
 sudo apt-get update
 
 
-# Install APP guest HOST -nohost
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
-sudo passwd --delete "$(gettext --domain=kz 'guest')"
-
-# Remove APP guest HOST -nohost
-sudo userdel --remove "$(gettext --domain=kz 'guest')"
-
-
 # Install APP kvm HOST pc07
 : # Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
@@ -187,6 +179,15 @@ sudo updatedb
 
 # Remove APP locate HOST pc07
 sudo apt-get remove --yes locate
+
+
+# Install APP log-access HOST *
+: # Enable access to system monitoring tasks like read many log files in /var/log and to the log.
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
+
+# Remove APP log-access HOST *
+sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 
 # Install APP repair-ntfs HOST -nohost
@@ -243,13 +244,12 @@ sudo apt-get install --yes thunderbird-l10n-nl
 sudo apt-get remove --yes thunderbird-l10n-nl
 
 
-# Install APP users HOST *
-: # Enable access to system monitoring tasks like read many log files in /var/log and to the log.
-sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
+# Install APP user-guest HOST -nohost
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
-# Remove APP users HOST *
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
+# Remove APP user-guest HOST -nohost
+sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # Install APP vlc HOST *

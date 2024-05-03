@@ -29,6 +29,13 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 gsettings reset org.gnome.shell disable-user-extensions
 
 
+# Setup APP debian-desktop-installer USER *
+kz-gset --delfav=install-debian
+
+# Reset APP debian-desktop-installer USER *
+kz-gset --addfavbef=install-debian
+
+
 # Setup APP firefox USER karel@pc07
 kz-gset --delfav=firefox-esr
 
@@ -137,10 +144,10 @@ echo 'snap' > "$HOME"/.hidden
 rm --force --verbose "$HOME"/.hidden
 
 
-# Setup APP recover-thumbnails USER -nouser
+# Setup APP recovered-thumbnails USER -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
-# Reset APP recover-thumbnails USER -nouser
+# Reset APP recovered-thumbnails USER -nouser
 : # There is no command available to reset recovered thumbnails.
 
 # Setup APP spotify USER karel@pc07
@@ -148,13 +155,6 @@ kz-gset --addfavaft=kz-spotify
 
 # Reset APP spotify USER karel@pc07
 kz-gset --delfav=kz-spotify
-
-
-# Setup APP start-installer USER *
-kz-gset --delfav=install-debian
-
-# Reset APP start-installer USER *
-kz-gset --addfavbef=install-debian
 
 
 # Setup APP terminal USER karel@pc07

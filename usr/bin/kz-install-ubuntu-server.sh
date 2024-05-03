@@ -24,11 +24,11 @@ sudo apt-get install --yes ansible
 sudo apt-get remove --yes ansible
 
 
-# Install APP cloud-init HOST *
+# Install APP disabled-cloud-init HOST *
 : # Prevent extra lines from cloud-init printed in terminal at login.
 sudo touch /etc/cloud/cloud-init.disabled
 
-# Remove APP cloud-init HOST *
+# Remove APP disabled-cloud-init HOST *
 sudo rm --force --verbose /etc/cloud/cloud-init.disabled
 
 
