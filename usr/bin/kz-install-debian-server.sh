@@ -6,6 +6,17 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
+########################## Execute this block first ###########################
+# Install APP update HOST *
+sudo apt-get update
+sudo apt-get upgrade --yes
+sudo snap refresh
+
+# Remove APP update HOST *
+: # nocmd
+########################## Execute this block first ###########################
+
+
 # Install APP ansible HOST *
 sudo apt-get install --yes ansible
 

@@ -20,6 +20,15 @@ sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
+# Install APP update HOST *
+sudo apt-get update
+sudo apt-get upgrade --yes
+sudo snap refresh
+
+# Remove APP update HOST *
+: # nocmd
+
+
 # Install APP ubuntu-desktop HOST *
 : # Necessary if "Default selection", i.e. ubuntu-desktop-minimal, was chosen during installation.
 sudo apt-get install --yes ubuntu-desktop

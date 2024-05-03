@@ -16,6 +16,7 @@ wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www
 sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
+sudo apt-get upgrade --yes
 
 # Remove APP repositories HOST *
 : #1 Remove additional repositories.
@@ -24,6 +25,16 @@ sudo apt-add-repository --remove non-free
 sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
 sudo apt-get remove --yes deb-multimedia-keyring
 sudo apt-get update
+sudo apt-get upgrade --yes
+
+
+# Install APP update HOST *
+sudo apt-get update
+sudo apt-get upgrade --yes
+sudo snap refresh
+
+# Remove APP update HOST *
+: # nocmd
 ########################## Execute this block first ###########################
 
 
