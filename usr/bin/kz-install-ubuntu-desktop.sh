@@ -226,14 +226,6 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/defaul
 sudo update-grub
 
 
-# Install APP guest HOST -nohost
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
-sudo passwd --delete "$(gettext --domain=kz 'guest')"
-
-# Remove APP guest HOST -nohost
-sudo userdel --remove "$(gettext --domain=kz 'guest')"
-
-
 # Install APP handbrake HOST pc-van-emily
 sudo apt-get install --yes handbrake
 
@@ -407,6 +399,30 @@ sudo ufw enable
 # Remove APP ufw HOST pc01 pc06
 sudo ufw disable
 sudo apt-get remove --yes gufw
+
+
+# Install APP user-guest HOST pc06
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo passwd --delete "$(gettext --domain=kz 'guest')"
+
+# Remove APP user-guest HOST pc06
+: # sudo userdel --remove "$(gettext --domain=kz 'guest')"
+
+
+# Install APP user-karel HOST pc01
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
+sudo passwd --delete --expire karel
+
+# Remove APP user-karel HOST pc01
+: # sudo userdel --remove karel
+
+
+# Install APP user-toos HOST Laptop
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
+sudo passwd --delete --expire toos
+
+# Remove APP user-toos HOST Laptop
+: # sudo userdel --remove toos
 
 
 # Install APP virtualbox HOST pc-van-hugo
