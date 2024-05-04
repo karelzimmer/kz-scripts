@@ -134,7 +134,7 @@ def check_for_active_updates(PROGRAM_NAME):
             break
         else:
             text = _('Wait for another package manager to finish...')
-            msg_info(PROGRAM_NAME, text)
+            msg_log(PROGRAM_NAME, text)
             time.sleep(1)
 
 

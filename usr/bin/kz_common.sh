@@ -123,7 +123,7 @@ function check_for_active_updates {
                 /var/lib/dpkg/lock-frontend                 \
                 &> /dev/null; do
         text="$(gettext 'Wait for another package manager to finish...')"
-        msg_info "$text"
+        msg_log "$text"
         sleep 1
     done
 }
