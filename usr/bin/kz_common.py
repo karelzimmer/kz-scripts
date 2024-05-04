@@ -135,6 +135,7 @@ def check_for_active_updates(PROGRAM_NAME):
         else:
             text = _('Wait for another package manager to finish...')
             msg_info(PROGRAM_NAME, text)
+            time.sleep(1)
 
 
 def check_on_ac_power(PROGRAM_NAME):
