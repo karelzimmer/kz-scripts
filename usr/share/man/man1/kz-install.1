@@ -106,14 +106,14 @@ T}:T{
 Blank line
 T}
 T{
-# Install APP <app name> HOST <computer name>...
+# Install APP HOST...
 T}:T{
-Install the application <app name> on computer <computer name>
+Install the application APP on computer HOSTs
 T}
 T{
-# Remove APP <app name> HOST <computer name>...
+# Remove APP HOST...
 T}:T{
-Remove the application <app name> from computer <computer name> (option remove)
+Remove the application APP from computer HOSTs (option remove)
 T}
 T{
 #...
@@ -154,7 +154,7 @@ l | l
 l | l
 l | l.
 T{
-# Install APP gnome-gmail HOST *
+# Install gnome-gmail *
 T}:T{
 Install gnome-gmail on any computer, see [1].
 T}
@@ -166,7 +166,7 @@ T{
 T}:T{
 T}
 T{
-# Remove APP gnome-gmail HOST *
+# Remove gnome-gmail *
 T}:T{
 Remove gnome-gmail from any computer, see [1].
 T}
@@ -178,7 +178,7 @@ T{
 T}:T{
 T}
 T{
-# Install APP ufw HOST pc02
+# Install ufw pc02
 T}:T{
 Install ufw only on pc02, see [2].
 T}
@@ -190,7 +190,7 @@ T{
 T}:T{
 T}
 T{
-# Install APP kvm HOST pc01 pc02
+# Install kvm pc01 pc02
 T}:T{
 Install kvm on pc01 and pc02, see [3].
 T}
@@ -202,7 +202,7 @@ T{
 T}:T{
 T}
 T{
-# Install APP google-earth HOST -nohost
+# Install google-earth -nohost
 T}:T{
 Do not install Google Earth by default, see [4].
 T}
@@ -215,28 +215,28 @@ T}
 .sp
 [1]
 .br
-The line with 'HOST *' causes the associated commands to run on all computers.
+The line with '*' causes the associated commands to run on all computers.
 .sp
 [2]
 .br
-The line with 'HOST pc02' ensures that the associated commands are executed
-only on pc02.
+The line with 'pc02' ensures that the associated commands are executed only on
+pc02.
 .br
 The APP can still be installed on another computer with the command 'kz instal\
 l google-earth'.
 .sp
 [3]
 .br
-The line with 'HOST pc01 pc02' ensures that the associated commands are
-executed only on pc01 and pc02 by default.
+The line with 'pc01 pc02' ensures that the associated commands are executed
+only on pc01 and pc02 by default.
 .br
 The APP can still be installed on another computer with the command 'kz instal\
 l kvm'.
 .sp
 [4]
 .br
-The line with 'HOST -nohost' ensures that the associated commands are not
-executed by default (NOTE: '-nohost' is not a valid computer name).
+The line with '-nohost' ensures that the associated commands are not executed
+by default (NOTE: '-nohost' is not a valid computer name).
 .br
 The APP can still be installed with the command 'kz install google-earth'.
 .\"
@@ -293,6 +293,16 @@ Install file for Debian desktop.
 /usr/bin/kz-install-ubuntu-desktop.sh
 .RS
 Install file for Ubuntu desktop.
+.RE
+.sp
+/usr/bin/kz-install-debian-server.sh
+.RS
+Install file for Debian server.
+.RE
+.sp
+/usr/bin/kz-install-ubuntu-server.sh
+.RS
+Install file for Ubuntu server.
 .RE
 .sp
 /tmp/kz-install-<distribution>-<edition>-XXXXXXXXXX.sh

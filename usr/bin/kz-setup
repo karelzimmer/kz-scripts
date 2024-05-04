@@ -64,6 +64,7 @@ declare     file_argument=''
 declare     input_file=''
 declare     logout=true
 declare     mode='Setup'
+declare     mode_back='Reset'
 declare     no_commands_found=true
 declare     option_apps=false
 declare     option_cat=false
@@ -135,6 +136,7 @@ $USAGE_LINE"
             -r|--reset)
                 option_reset=true
                 mode='Reset'
+                mode_back='Setup'
                 shift
                 ;;
             --)
@@ -263,18 +265,18 @@ function process_option_apps {
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --no-messages                   \
-                --regexp=".*#.* $mode.* APP "   \
-                "$input_file"                   |
-        tr      --squeeze-repeats               \
-                '[:space:]'                     |
-        cut     --delimiter=' '                 \
-                --fields=4                      |
-        sort    --unique                        |
-        nl      --number-width=3                \
-                --number-format=rn              \
-                --number-separator='  '         \
-                --body-numbering=a              || true
+        grep    --no-messages               \
+                --regexp=".*# .*$mode.*"    \
+                "$input_file"               |
+        tr      --squeeze-repeats           \
+                '[:space:]'                 |
+        cut     --delimiter=' '             \
+                --fields=3                  |
+        sort    --unique                    |
+        nl      --number-width=3            \
+                --number-format=rn          \
+                --number-separator='  '     \
+                --body-numbering=a          || true
         )
     if [[ -n $apps ]]; then
         text+=$apps
@@ -327,7 +329,7 @@ function process_input_file_by_app {
                 # Blank line.
                 continue
                 ;;
-            *'#'*' APP '*)
+            *'#'*"$mode"*)
                 # APP record.
                 app_match=false
                 app_mode=$(
@@ -338,7 +340,7 @@ function process_input_file_by_app {
                 app_name=$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=4
+                    cut --delimiter=' ' --fields=3
                     )
                 if  [[ $app_mode = "$mode" ]] &&
                     [[ $app_name = "$app_argument" ]]; then
@@ -350,8 +352,9 @@ function process_input_file_by_app {
                     newline='\n'
                 fi
                 ;;
-            '#'*)
-                # Comment line.
+            *'#'*"$mode_back"*)
+                # APP reverse record.
+                app_match=false
                 continue
                 ;;
             *)
@@ -386,7 +389,7 @@ function process_input_file_by_user {
                 # Blank line.
                 continue
                 ;;
-            *'#'*' APP '*)
+            *'#'*"$mode"*)
                 # APP record.
                 user_match=false
                 app_mode=$(
@@ -397,7 +400,7 @@ function process_input_file_by_user {
                 user_names=$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=6-
+                    cut --delimiter=' ' --fields=4-
                     )
                 if  [[ $app_mode = "$mode" ]] &&
                     [[ $user_names = '*' || $user_names == *$current_user* ]]
@@ -409,8 +412,9 @@ function process_input_file_by_user {
                     newline='\n'
                 fi
                 ;;
-            '#'*)
-                # Comment line.
+            *'#'*"$mode_back"*)
+                # APP reverse record.
+                user_match=false
                 continue
                 ;;
             *)
@@ -440,7 +444,7 @@ function process_command_file {
     local   -i  app_tot_num=0
     local   -i  cmd_seq_num=0
 
-    app_tot_num=$(grep --regexp='.*#.* APP ' --count "$command_file" || true)
+    app_tot_num=$(grep --regexp="#.* $mode " --count "$command_file" || true)
 
     if ! $option_gui; then
         text="$(gettext 'NUM/TOT  APP')
@@ -454,12 +458,12 @@ function process_command_file {
                 # Blank line.
                 continue
                 ;;
-            *'#'*' APP '*)
+            *'#'*"$mode"*)
                 # APP record.
                 app_name=$(
                     printf '%s\n' "$commands_record"    |
                     tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=4
+                    cut --delimiter=' ' --fields=3
                     )
                 ((++app_seq_num))
                 cmd_seq_num=0
@@ -468,10 +472,6 @@ function process_command_file {
                         "$app_seq_num"      \
                         "$app_tot_num"      \
                         "$app_name"
-                ;;
-            '#'*)
-                # Comment line.
-                continue
                 ;;
             *)
                 # Command record.
@@ -539,19 +539,21 @@ use app Terminal, type 'kz setup \$failed_apps_text'.")
             # shellcheck disable=SC2034
             operation=$(gettext 'reset')
         fi
-        text=$(eval_gettext "Apps \$operation completed.")
+        text=$(eval_gettext "APPs \$operation completed.")
         msg_info "$text"
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
-                text=$(gettext "You will now be logged out of the computer to \
-finish installing the apps and changing user settings.")
+                text="
+$(gettext "You will now be logged out of the computer to finish installing the\
+ apps and changing user settings.")"
                 msg_info "$text"
                 $option_gui || wait_for_enter
                 gnome-session-quit --logout --no-prompt
             else
-                text=$(gettext "You must log out of the computer to finish ins\
-talling the apps and changing user settings.
-Type 'logout' to log out.")
+                text="
+$(gettext "You must log out of the computer to finish installing the apps and \
+changing user settings.
+Type 'logout' to log out.")"
                 msg_info "$text"
                 exit $OK
             fi

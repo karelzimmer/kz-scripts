@@ -7,82 +7,82 @@
 ###############################################################################
 
 ########################## Execute this block first ###########################
-# Install APP update-system HOST *
+# Install update-system *
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
-# Remove APP update-system HOST *
-: # There is no command available to remove update system.
+# Remove update-system *
+# There is no command available to remove update system.
 ########################## Execute this block first ###########################
 
 
-# Install APP ansible HOST *
+# Install ansible *
 sudo apt-get install --yes ansible
 
-# Remove APP ansible HOST *
+# Remove ansible *
 sudo apt-get remove --yes ansible
 
 
-# Install APP disabled-cloud-init HOST *
-: # Prevent extra lines from cloud-init printed in terminal at login.
+# Install disabled-cloud-init *
+# Prevent extra lines from cloud-init printed in terminal at login.
 sudo touch /etc/cloud/cloud-init.disabled
 
-# Remove APP disabled-cloud-init HOST *
+# Remove disabled-cloud-init *
 sudo rm --force --verbose /etc/cloud/cloud-init.disabled
 
 
-# Install APP fwupd HOST -nohost
-: # Disable the Firmware update daemon.
+# Install fwupd -nohost
+# Disable the Firmware update daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove APP fwupd HOST -nohost
-: # Enable the Firmware update daemon.
+# Remove fwupd -nohost
+# Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
 
-# Install APP locate HOST *
+# Install locate *
 sudo apt-get install --yes locate
 sudo updatedb
 
-# Remove APP locate HOST *
+# Remove locate *
 sudo apt-get remove --yes locate
 
 
-# Install APP repair-ntfs HOST -nohost
+# Install repair-ntfs -nohost
 sudo apt-get install --yes ntfs-3g
-: # Usage:
-: # $ findmnt
-: #   TARGET          SOURCE    FSTYPE OPTIONS
-: #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
-: # $ sudo ntfsfix /dev/sdb2
+# Usage:
+# $ findmnt
+#   TARGET          SOURCE    FSTYPE OPTIONS
+#   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
+# $ sudo ntfsfix /dev/sdb2
 
-# Remove APP repair-ntfs HOST -nohost
+# Remove repair-ntfs -nohost
 sudo apt-get remove --yes ntfs-3g
 
 
-# Install APP ssh HOST *
+# Install ssh *
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-: # Check for remote root access.
+# Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
-# Remove APP ssh HOST *
+# Remove ssh *
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --yes ssh
 
 
-# Install APP ufw HOST *
+# Install ufw *
 sudo apt-get install --yes ufw
 sudo ufw allow ssh
 sudo ufw enable
 
-# Remove APP ufw HOST *
+# Remove ufw *
 sudo ufw disable
 sudo apt-get remove --yes ufw

@@ -673,8 +673,8 @@ msgstr ""
 "gebruik app Terminal en typ 'kz setup $failed_apps_text'."
 
 #, sh-format
-msgid "Apps $operation completed."
-msgstr "Apps $operation is voltooid."
+msgid "APPs $operation completed."
+msgstr "APPs $operation is voltooid."
 
 msgid ""
 "You will now be logged out of the computer to finish installing the apps and "

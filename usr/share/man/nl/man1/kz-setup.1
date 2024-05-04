@@ -109,16 +109,14 @@ T}:T{
 Lege regel
 T}
 T{
-# Setup APP <appnaam> USER <gebruikersnaam>@<computernaam>...
+# Setup APP USER...
 T}:T{
-De applicatie <appnaam> instellen voor gebruiker
-<gebruikersnaam>@<computernaam>
+De applicatie APP instellen voor gebruiker USERs
 T}
 T{
-# Reset APP <appnaam> USER <gebruikersnaam>@<computernaam>...
+# Reset APP USER...
 T}:T{
-De applicatie <appnaam> resetten voor gebruiker <gebruikersnaam>@<computernaam>
-(optie reset)
+De applicatie APP resetten voor gebruiker USERs (optie reset)
 T}
 T{
 #...
@@ -157,7 +155,7 @@ l | l
 l | l
 l | l.
 T{
-# setup APP google-chrome USER *
+# Setup google-chrome *
 T}:T{
 Stel google-chrome in op voor iedere gebruiker, zie [1]
 T}
@@ -169,7 +167,7 @@ T{
 T}:T{
 T}
 T{
-# reset APPgoogle-chrome USER *
+# Reset google-chrome *
 T}:T{
 Reset google-chrome voor iedere gebruiker, zie [1]
 T}
@@ -181,7 +179,7 @@ T{
 T}:T{
 T}
 T{
-# setup APP gnome USER jan@pc02
+# Setup gnome jan@pc02
 T}:T{
 Stel gnome in alleen voor Jan, zie [2]
 T}
@@ -193,7 +191,7 @@ T{
 T}:T{
 T}
 T{
-# setup APP kvm USER jantine@pc01 jan@pc02
+# Setup kvm jantine@pc01 jan@pc02
 T}:T{
 Stel kvm in voor Jantine and Jan, zie [3]
 T}
@@ -205,7 +203,7 @@ T{
 T}:T{
 T}
 T{
-# setup APP google-earth USER -nouser
+# Setup google-earth -nouser
 T}:T{
 Standaard niet google-earth instellen, zie [4]
 T}
@@ -218,20 +216,20 @@ T}
 .sp
 [1]
 .br
-De regel met 'USER *' zorgt ervoor dat de bijbehorende opdrachten voor iedere
+De regel met '*' zorgt ervoor dat de bijbehorende opdrachten voor iedere
 gebruiker worden uitgevoerd.
 .sp
 [2]
 .br
-De regel met 'USER jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen
-voor Jan op pc02 worden uitgevoerd.
+De regel met 'jan@pc02' zorgt ervoor dat de bijbehorende opdrachten alleen voor
+Jan op pc02 worden uitgevoerd.
 .br
 De APP kan alsnog worden ingesteld op een andere computer met de opdracht 'kz \
 setup gnome'.
 .sp
 [3]
 .br
-De regel met 'USER jantine@pc01 jan@pc02' zorgt ervoor dat de bijbehorende
+De regel met 'jantine@pc01 jan@pc02' zorgt ervoor dat de bijbehorende
 opdrachten standaard alleen voor Jantine op pc01 en voor Jan op pc02 worden
 uitgevoerd.
 .br
@@ -240,9 +238,8 @@ setup kvm'.
 .sp
 [4]
 .br
-De regel met 'USER -nouser' zorgt ervoor dat de bijbehorende opdrachten
-standaard niet worden uitgevoerd (OPMERKING: '-nouser' is geen geldige
-gebruikersnaam).
+De regel met '-nouser' zorgt ervoor dat de bijbehorende opdrachten standaard
+niet worden uitgevoerd (OPMERKING: '-nouser' is geen geldige gebruikersnaam).
 .br
 De APP kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.
 .\"
@@ -299,6 +296,16 @@ Instelbestand voor Debian desktop.
 /usr/bin/kz-setup-ubuntu-desktop.sh
 .RS
 Instelbestand voor Ubuntu desktop.
+.RE
+.sp
+/usr/bin/kz-setup-debian-server.sh
+.RS
+Instelbestand voor Debian server.
+.RE
+.sp
+/usr/bin/kz-setup-ubuntu-server.sh
+.RS
+Instelbestand voor Ubuntu server.
 .RE
 .sp
 /tmp/kz-setup-<distributie>-<editie>-XXXXXXXXXX.sh

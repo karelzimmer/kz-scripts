@@ -104,15 +104,14 @@ T}:T{
 Blank line
 T}
 T{
-# Setup APP <app name> USER <user name>@<computer name>...
+# Setup APP USER...
 T}:T{
-Set up application <app name> for user <user name>@<computer name>
+Set up application APP for user USERs
 T}
 T{
-# Reset APP <app name> USER <user name>@<computer name>...
+# Reset APP USER...
 T}:T{
-Reset application <app name> for user <user name>@<computer name> (option
-reset)
+Reset application APP for user USERs (option reset)
 T}
 T{
 #...
@@ -151,7 +150,7 @@ l | l
 l | l
 l | l.
 T{
-# Setup APP google-chrome USER *
+# Setup google-chrome *
 T}:T{
 Set up google-chrome for any user, see [1]
 T}
@@ -163,7 +162,7 @@ T{
 T}:T{
 T}
 T{
-# Setup APP google-chrome USER *
+# Reset google-chrome *
 T}:T{
 Reset google-chrome for any user, see [1]
 T}
@@ -175,7 +174,7 @@ T{
 T}:T{
 T}
 T{
-# Setup APP gnome USER john@pc02
+# Setup gnome john@pc02
 T}:T{
 Set up gnome only for John, see [2]
 T}
@@ -187,7 +186,7 @@ T{
 T}:T{
 T}
 T{
-# setup APP kvm USER jane@pc01 john@pc02
+# setup kvm jane@pc01 john@pc02
 T}:T{
 Set up kvm for Jane and John, see [3]
 T}
@@ -199,7 +198,7 @@ T{
 T}:T{
 T}
 T{
-# Setup APP google-earth USER -nouser
+# Setup google-earth -nouser
 T}:T{
 Do not set up Google Earth by default, see [4]
 T}
@@ -212,28 +211,28 @@ T}
 .sp
 [1]
 .br
-The line with 'USER *' causes the associated commands to run for every user.
+The line with '*' causes the associated commands to run for every user.
 .sp
 [2]
 .br
-The line with 'USER john@pc02' ensures that the associated commands are
-executed only for John on pc02.
+The line with 'john@pc02' ensures that the associated commands are executed
+only for John on pc02.
 .br
 The APP can still be set up on another computer with the command 'kz setup goo\
 gle-earth'.
 .sp
 [3]
 .br
-The line with 'USER jane@pc01 jan@pc02' ensures that the associated commands
-are executed only for Jane on pc01 and for John on pc02 by default.
+The line with 'jane@pc01 jan@pc02' ensures that the associated commands are
+executed only for Jane on pc01 and for John on pc02 by default.
 .br
 The APP can still be set up on another computer with the command 'kz setup kvm\
 '.
 .sp
 [4]
 .br
-The line with 'USER -nouser' ensures that the associated commands are not
-executed by default (NOTE: '-nouser' is not a valid user name).
+The line with '-nouser' ensures that the associated commands are not executed
+by default (NOTE: '-nouser' is not a valid user name).
 .br
 The APP can still be set up with the command 'kz setup google-earth'.
 .\"
@@ -289,6 +288,16 @@ Set up file for Debian desktop.
 /usr/bin/kz-setup-ubuntu-desktop.sh
 .RS
 Set up file for Ubuntu desktop.
+.RE
+.sp
+/usr/bin/kz-setup-debian-server.sh
+.RS
+Set up file for Debian server.
+.RE
+.sp
+/usr/bin/kz-setup-ubuntu-server.sh
+.RS
+Set up file for Ubuntu server.
 .RE
 .sp
 /tmp/kz-setup-<distribution>-<edition>-XXXXXXXXXX.sh

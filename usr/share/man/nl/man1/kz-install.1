@@ -111,14 +111,14 @@ T}:T{
 Lege regel
 T}
 T{
-# Install APP <appnaam> HOST <computernaam>...
+# Install APP HOST...
 T}:T{
-De applicatie <appnaam> installeren op computer <computernaam>
+De applicatie APP installeren op computer HOSTs
 T}
 T{
-# Remove APP <appnaam> HOST <computernaam>...
+# Remove APP HOST...
 T}:T{
-De applicatie <appnaam> verwijderen van computer <computernaam> (optie remove)
+De applicatie APP verwijderen van computer HOSTs (optie remove)
 T}
 T{
 #...
@@ -159,9 +159,9 @@ l | l
 l | l
 l | l.
 T{
-# Install APP gnome-gmail HOST *
+# Install gnome-gmail *
 T}:T{
-Installeer de gnome-gmail op iedere computer, zie [1]
+Installeer gnome-gmail op iedere computer, zie [1]
 T}
 T{
 sudo apt-get install --yes gnome-gmail
@@ -171,9 +171,9 @@ T{
 T}:T{
 T}
 T{
-# Remove APP gnome-gmail HOST *
+# Remove gnome-gmail *
 T}:T{
-Verwijder de gnome-gmail van iedere computer, zie [1]
+Verwijder gnome-gmail van iedere computer, zie [1]
 T}
 T{
 sudo apt-get remove --yes gnome-gmail
@@ -183,7 +183,7 @@ T{
 T}:T{
 T}
 T{
-# Install APP ufw HOST pc02
+# Install ufw pc02
 T}:T{
 Installeer ufw alleen op pc02, zie [2]
 T}
@@ -195,7 +195,7 @@ T{
 T}:T{
 T}
 T{
-# Install APP kvm HOST pc01 pc02
+# Install kvm pc01 pc02
 T}:T{
 Installeer kvm op pc01 en pc02, zie [3]
 T}
@@ -207,7 +207,7 @@ T{
 T}:T{
 T}
 T{
-# Install APP google-earth HOST -nohost
+# Install google-earth -nohost
 T}:T{
 Standaard niet google-earth installeren, zie [4]
 T}
@@ -220,12 +220,12 @@ T}
 .sp
 [1]
 .br
-De regel met 'HOST *' zorgt ervoor dat de bijbehorende opdrachten op alle
-computers worden uitgevoerd.
+De regel met '*' zorgt ervoor dat de bijbehorende opdrachten op alle computers
+worden uitgevoerd.
 .sp
 [2]
 .br
-De regel met 'HOST pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
+De regel met 'pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
 alleen op pc02 worden uitgevoerd.
 .br
 De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
@@ -233,16 +233,16 @@ De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 .sp
 [3]
 .br
-De regel met 'HOST pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten
-standaard alleen op pc01 en pc02 worden uitgevoerd.
+De regel met 'pc01 pc02' zorgt ervoor dat de bijbehorende opdrachten standaard
+alleen op pc01 en pc02 worden uitgevoerd.
 .br
 De APP kan alsnog worden geïnstalleerd op een andere computer met de opdracht \
 'kz install kvm'.
 .sp
 [4]
 .br
-De regel 'HOST -nohost' zorgt ervoor dat de bijbehorende opdrachten standaard
-niet worden uitgevoerd (OPMERKING: '-nohost' is geen geldige computernaam).
+De regel '-nohost' zorgt ervoor dat de bijbehorende opdrachten standaard niet
+worden uitgevoerd (OPMERKING: '-nohost' is geen geldige computernaam).
 .br
 De APP kan alsnog worden geïnstalleerd met de opdracht 'kz install google-eart\
 h'.
@@ -301,6 +301,16 @@ Installatiebestand voor Debian desktop.
 /usr/bin/kz-install-ubuntu-desktop.sh
 .RS
 Installatiebestand voor Ubuntu desktop.
+.RE
+.sp
+/usr/bin/kz-install-debian-server.sh
+.RS
+Installatiebestand voor Debian server.
+.RE
+.sp
+/usr/bin/kz-install-ubuntu-server.sh
+.RS
+Installatiebestand voor Ubuntu server.
 .RE
 .sp
 /tmp/kz-install-<distributie>-<editie>-XXXXXXXXXX.sh

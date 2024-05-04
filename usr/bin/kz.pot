@@ -585,7 +585,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "Apps $operation completed."
+msgid "APPs $operation completed."
 msgstr ""
 
 msgid ""
