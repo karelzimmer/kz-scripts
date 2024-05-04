@@ -64,7 +64,7 @@ declare     file_argument=''
 declare     input_file=''
 declare     logout=true
 declare     mode='Setup'
-declare     mode_back='Reset'
+declare     mode_reverse='Reset'
 declare     no_commands_found=true
 declare     option_apps=false
 declare     option_cat=false
@@ -136,7 +136,7 @@ $USAGE_LINE"
             -r|--reset)
                 option_reset=true
                 mode='Reset'
-                mode_back='Setup'
+                mode_reverse='Setup'
                 shift
                 ;;
             --)
@@ -265,18 +265,18 @@ function process_option_apps {
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --no-messages               \
-                --regexp=".*# .*$mode.*"    \
-                "$input_file"               |
-        tr      --squeeze-repeats           \
-                '[:space:]'                 |
-        cut     --delimiter=' '             \
-                --fields=3                  |
-        sort    --unique                    |
-        nl      --number-width=3            \
-                --number-format=rn          \
-                --number-separator='  '     \
-                --body-numbering=a          || true
+        grep    --no-messages           \
+                --regexp=".*#.*$mode.*" \
+                "$input_file"           |
+        tr      --squeeze-repeats       \
+                '[:space:]'             |
+        cut     --delimiter=' '         \
+                --fields=3              |
+        sort    --unique                |
+        nl      --number-width=3        \
+                --number-format=rn      \
+                --number-separator='  ' \
+                --body-numbering=a      || true
         )
     if [[ -n $apps ]]; then
         text+=$apps
@@ -319,7 +319,6 @@ function process_argument_app {
 function process_input_file_by_app {
     local app_match=false
     local app_name=''
-    local app_mode=''
     local input_record=''
     local no_app_match=true
 
@@ -332,18 +331,12 @@ function process_input_file_by_app {
             *'#'*"$mode"*)
                 # APP record.
                 app_match=false
-                app_mode=$(
-                    printf '%s\n' "$input_record"       |
-                    tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=2
-                    )
                 app_name=$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3
                     )
-                if  [[ $app_mode = "$mode" ]] &&
-                    [[ $app_name = "$app_argument" ]]; then
+                if [[ $app_name = "$app_argument" ]]; then
                     # Match on app name.
                     app_match=true
                     no_app_match=false
@@ -352,7 +345,7 @@ function process_input_file_by_app {
                     newline='\n'
                 fi
                 ;;
-            *'#'*"$mode_back"*)
+            *'#'*"$mode_reverse"*)
                 # APP reverse record.
                 app_match=false
                 continue
@@ -376,7 +369,6 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # USER.
 function process_input_file_by_user {
-    local app_mode=''
     local current_user=$USER'@'$HOSTNAME
     local input_record=''
     local newline=''
@@ -392,18 +384,12 @@ function process_input_file_by_user {
             *'#'*"$mode"*)
                 # APP record.
                 user_match=false
-                app_mode=$(
-                    printf '%s\n' "$input_record"       |
-                    tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=2
-                    )
                 user_names=$(
                     printf '%s\n' "$input_record"       |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=4-
                     )
-                if  [[ $app_mode = "$mode" ]] &&
-                    [[ $user_names = '*' || $user_names == *$current_user* ]]
+                if [[ $user_names = '*' || $user_names == *$current_user* ]]
                 then
                     # Match on user name.
                     user_match=true
@@ -412,7 +398,7 @@ function process_input_file_by_user {
                     newline='\n'
                 fi
                 ;;
-            *'#'*"$mode_back"*)
+            *'#'*"$mode_reverse"*)
                 # APP reverse record.
                 user_match=false
                 continue
