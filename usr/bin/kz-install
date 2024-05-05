@@ -324,19 +324,29 @@ function process_argument_app {
 # APP.
 function process_input_file_by_app {
     local app_match=false
+    local app_name=''
     local input_record=''
     local no_app_match=true
 
     while read -r input_record; do
         case $input_record in
             *'#'*"$mode"*"$app_argument"*)
-                # Matching APP record.
-                app_match=true
-                no_app_match=false
-                printf '%s\n' "$input_record" >> "$command_file"
+                # Possible matching APP name.
+                app_match=false
+                app_name=$(
+                    printf '%s\n' "$input_record"       |
+                    tr --squeeze-repeats '[:space:]'    |
+                    cut --delimiter=' ' --fields=3
+                    )
+                if [[ $app_name = "$app_argument" ]]; then
+                    # Matching APP name.
+                    app_match=true
+                    no_app_match=false
+                    printf '%s\n' "$input_record" >> "$command_file"
+                fi
                 ;;
             *'#'*"$mode"*|*'#'*"$mode_reverse"*)
-                # Another APP record.
+                # Non-matchng APP record.
                 app_match=false
                 continue
                 ;;
@@ -396,7 +406,7 @@ function process_option_cat {
 function process_command_file {
     local       app_name=''
     local       app_name_line=''
-    local       commands_record=''
+    local       command_record=''
     local   -i  app_seq_num=0
     local   -i  app_tot_num=0
     local   -i  cmd_seq_num=0
@@ -409,8 +419,8 @@ function process_command_file {
         msg_info "$text"
     fi
 
-    while read -r commands_record; do
-        case $commands_record in
+    while read -r command_record; do
+        case $command_record in
             '')
                 # Blank line.
                 continue
@@ -418,7 +428,7 @@ function process_command_file {
             *'#'*"$mode"*)
                 # APP record.
                 app_name=$(
-                    printf '%s\n' "$commands_record"    |
+                    printf '%s\n' "$command_record"    |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3
                     )
@@ -432,7 +442,7 @@ function process_command_file {
                 ;;
             *)
                 # Command record.
-                execute_command "$commands_record"
+                execute_command "$command_record"
                 ;;
         esac
     done < "$command_file"
