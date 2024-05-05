@@ -421,7 +421,7 @@ function process_command_file {
             *'#'*"$mode"*)
                 # APP record.
                 app_name=$(
-                    printf '%s\n' "$command_record"    |
+                    printf '%s\n' "$command_record"     |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3
                     )
