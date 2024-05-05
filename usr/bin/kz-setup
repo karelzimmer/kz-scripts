@@ -299,7 +299,6 @@ $USAGE_LINE"
 function process_argument_app {
     local app_not_found=false
     local app_argument=''
-    local newline=''
 
     for app_argument in "${app_arguments[@]}"; do
         process_input_file_by_app
@@ -318,7 +317,6 @@ function process_argument_app {
 # APP.
 function process_input_file_by_app {
     local app_match=false
-    local app_name=''
     local input_record=''
     local no_app_match=true
 
@@ -328,25 +326,14 @@ function process_input_file_by_app {
                 # Blank line.
                 continue
                 ;;
-            *'#'*"$mode"*)
-                # APP record.
-                app_match=false
-                app_name=$(
-                    printf '%s\n' "$input_record"       |
-                    tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=3
-                    )
-                if [[ $app_name = "$app_argument" ]]; then
-                    # Match on app name.
-                    app_match=true
-                    no_app_match=false
-                    printf  "$newline%s\n"  \
-                            "$input_record" >> "$command_file"
-                    newline='\n'
-                fi
+            *'#'*"$mode"*"$app_argument"*)
+                # Matching APP record.
+                app_match=true
+                no_app_match=false
+                printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            *'#'*"$mode_reverse"*)
-                # APP reverse record.
+            *'#'*"$mode"*|*'#'*"$mode_reverse"*)
+                # Another APP record.
                 app_match=false
                 continue
                 ;;
@@ -369,11 +356,8 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # USER.
 function process_input_file_by_user {
-    local current_user=$USER'@'$HOSTNAME
     local input_record=''
-    local newline=''
     local user_match=false
-    local user_names=''
 
     while read -r input_record; do
         case $input_record in
@@ -381,25 +365,13 @@ function process_input_file_by_user {
                 # Blank line.
                 continue
                 ;;
-            *'#'*"$mode"*)
-                # APP record.
-                user_match=false
-                user_names=$(
-                    printf '%s\n' "$input_record"       |
-                    tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=4-
-                    )
-                if [[ $user_names = '*' || $user_names == *$current_user* ]]
-                then
-                    # Match on user name.
-                    user_match=true
-                    printf  "$newline%s\n"  \
-                            "$input_record" >> "$command_file"
-                    newline='\n'
-                fi
+            *'#'*"$mode"*'*'*|*'#'*"$mode"*"$USER"'@'"$HOSTNAME"*)
+                # Matching APP record.
+                user_match=true
+                printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            *'#'*"$mode_reverse"*)
-                # APP reverse record.
+            *'#'*"$mode"*|*'#'*"$mode_reverse"*)
+                # Another APP record.
                 user_match=false
                 continue
                 ;;

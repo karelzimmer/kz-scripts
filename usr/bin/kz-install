@@ -306,7 +306,6 @@ $USAGE_LINE"
 function process_argument_app {
     local app_not_found=false
     local app_argument=''
-    local newline=''
 
     for app_argument in "${app_arguments[@]}"; do
         process_input_file_by_app
@@ -325,35 +324,23 @@ function process_argument_app {
 # APP.
 function process_input_file_by_app {
     local app_match=false
-    local app_name=''
     local input_record=''
     local no_app_match=true
 
     while read -r input_record; do
         case $input_record in
-            '')
-                # Blank line.
-                continue
+            # '')
+            #     # Blank line.
+            #     continue
+            #     ;;
+            *'#'*"$mode"*"$app_argument"*)
+                # Matching APP record.
+                app_match=true
+                no_app_match=false
+                printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            *'#'*"$mode"*)
-                # APP record.
-                app_match=false
-                app_name=$(
-                    printf '%s\n' "$input_record"       |
-                    tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=3
-                    )
-                if [[ $app_name = "$app_argument" ]]; then
-                    # Match on app name.
-                    app_match=true
-                    no_app_match=false
-                    printf  "$newline%s\n"  \
-                            "$input_record" >> "$command_file"
-                    newline='\n'
-                fi
-                ;;
-            *'#'*"$mode_reverse"*)
-                # APP reverse record.
+            *'#'*"$mode"*|*'#'*"$mode_reverse"*)
+                # Another APP record.
                 app_match=false
                 continue
                 ;;
@@ -376,37 +363,22 @@ function process_input_file_by_app {
 # This function generates the command file from the input file and filters by
 # HOST.
 function process_input_file_by_host {
-    local current_host=$HOSTNAME
     local host_match=false
-    local host_names=''
     local input_record=''
-    local newline=''
 
     while read -r input_record; do
         case $input_record in
-            '')
-                # Blank line.
-                continue
+            # '')
+            #     # Blank line.
+            #     continue
+            #     ;;
+            *'#'*"$mode"*'*'*|*'#'*"$mode"*"$HOSTNAME"*)
+                # Matching APP record.
+                host_match=true
+                printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            *'#'*"$mode"*)
-                # APP record.
-                host_match=false
-                host_names=$(
-                    printf '%s\n' "$input_record"       |
-                    tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=4-
-                    )
-                if [[ $host_names = '*' || $host_names == *$current_host* ]]
-                then
-                    # Match on host name.
-                    host_match=true
-                    printf  "$newline%s\n"  \
-                            "$input_record" >> "$command_file"
-                    newline='\n'
-                fi
-                ;;
-            *'#'*"$mode_reverse"*)
-                # APP reverse record.
+            *'#'*"$mode"*|*'#'*"$mode_reverse"*)
+                # Another APP record.
                 host_match=false
                 continue
                 ;;
