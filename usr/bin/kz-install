@@ -368,10 +368,6 @@ function process_input_file_by_host {
 
     while read -r input_record; do
         case $input_record in
-            # '')
-            #     # Blank line.
-            #     continue
-            #     ;;
             *'#'*"$mode"*'*'*|*'#'*"$mode"*"$HOSTNAME"*)
                 # Matching APP record.
                 host_match=true

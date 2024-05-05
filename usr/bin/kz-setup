@@ -322,10 +322,6 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '')
-                # Blank line.
-                continue
-                ;;
             *'#'*"$mode"*"$app_argument"*)
                 # Matching APP record.
                 app_match=true
@@ -361,10 +357,6 @@ function process_input_file_by_user {
 
     while read -r input_record; do
         case $input_record in
-            '')
-                # Blank line.
-                continue
-                ;;
             *'#'*"$mode"*'*'*|*'#'*"$mode"*"$USER"'@'"$HOSTNAME"*)
                 # Matching APP record.
                 user_match=true
