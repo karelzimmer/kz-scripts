@@ -331,7 +331,7 @@ function process_input_file_by_app {
     while read -r input_record; do
         case $input_record in
             *'#'*"$mode"*"$app_argument"*)
-                # Possible matching APP record.
+                # Possible matching APP record (app_argument is user input).
                 app_match=false
                 app_name=$(
                     printf '%s\n' "$input_record"       |
