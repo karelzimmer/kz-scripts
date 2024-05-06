@@ -368,12 +368,12 @@ function process_input_file_by_user {
     while read -r input_record; do
         case $input_record in
             *'#'*"$mode"*'*'*|*'#'*"$mode"*"$USER"'@'"$HOSTNAME"*)
-                # Matching USER record.
+                # Matching APP record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
             *'#'*"$mode"*|*'#'*"$mode_reverse"*)
-                # Mismatched USER record.
+                # Mismatched APP record.
                 user_match=false
                 continue
                 ;;

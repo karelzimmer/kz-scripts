@@ -375,12 +375,12 @@ function process_input_file_by_host {
     while read -r input_record; do
         case $input_record in
             *'#'*"$mode"*'*'*|*'#'*"$mode"*"$HOSTNAME"*)
-                # Matching HOST record.
+                # Matching APP record.
                 host_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
             *'#'*"$mode"*|*'#'*"$mode_reverse"*)
-                # Mismatched HOST record.
+                # Mismatched APP record.
                 host_match=false
                 continue
                 ;;
