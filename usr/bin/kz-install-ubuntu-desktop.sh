@@ -406,7 +406,7 @@ sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=k
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
 # Remove user-guest -nohost
-# sudo userdel --remove "$(gettext --domain=kz 'guest')"
+sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # Install user-karel pc01
@@ -415,7 +415,7 @@ sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel
 sudo passwd --delete --expire karel
 
 # Remove user-karel pc01
-# sudo userdel --remove karel
+sudo userdel --remove karel
 
 
 # Install user-toos Laptop
@@ -424,7 +424,7 @@ sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos
 sudo passwd --delete --expire toos
 
 # Remove user-toos Laptop
-# sudo userdel --remove toos
+sudo userdel --remove toos
 
 
 # Install virtualbox pc-van-hugo
