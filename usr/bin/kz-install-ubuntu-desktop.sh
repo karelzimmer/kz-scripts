@@ -403,7 +403,6 @@ sudo apt-get remove --yes gufw
 
 # Install user-guest -nohost
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
-sudo usermod --groups pipo,users pipo
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
 # Remove user-guest -nohost
