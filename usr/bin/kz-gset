@@ -368,7 +368,8 @@ function report_database_changes {
 
     text="\n$(gettext "CHANGEs in the configuration database,
 < is the old setting (A),
-> is the new setting (B):")"
+> is the new setting (B):")
+"
     text+=$(
         diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
         )

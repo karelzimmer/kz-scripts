@@ -58,6 +58,7 @@ gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface locate-pointer true
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
+gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.session idle-delay 900
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
@@ -86,6 +87,7 @@ gsettings reset org.gnome.desktop.interface clock-show-weekday
 gsettings reset org.gnome.desktop.interface locate-pointer
 gsettings reset org.gnome.desktop.interface show-battery-percentage
 gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
+gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click
 gsettings reset org.gnome.desktop.screensaver lock-enabled
 gsettings reset org.gnome.desktop.session idle-delay
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
@@ -104,7 +106,6 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
 gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
-
 
 # Setup google-chrome *
 xdg-mime default google-chrome.desktop application/pdf
