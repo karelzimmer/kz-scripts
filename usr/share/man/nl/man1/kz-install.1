@@ -78,6 +78,9 @@ De naamgeving van de meegeleverde invoerbestanden is
 kz-install-<distribution>-<edition>.sh, voor een door de gebruiker
 aangeleverd invoerbestand is het kz-install-*.sh.
 .br
+In het invoerbestand staan zogenaamde \fBApp-regels\fR en
+\fBOpdracht-regels\fR.
+.br
 De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
 .sp
 De opdrachten meegeleverd bij \fBkz install\fR zijn zodanig opgesteld dat bij
@@ -87,7 +90,7 @@ Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
 .sp
 Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
-voorbeeldbestand kz-install-ubuntu-desktop.sh voor computer pc02.
+voorbeeldbestand kz-install-ubuntu-desktop.sh.
 Meer voorbeelden zijn te zien met de opdracht \fBkz install --cat\fR.
 .sp
 .sp
@@ -108,22 +111,22 @@ l | l.
 T{
 # Install APP HOST...
 T}:T{
-De APP installeren op HOSTs
+De APP installeren op HOSTs (\fBApp-regel\fR)
 T}
 T{
 Opdracht
 T}:T{
-Installatie-opdracht (één of meer regels)
+Installatie-opdracht (één of meer \fBOpdracht-regels\fR)
 T}
 T{
 # Remove APP HOST...
 T}:T{
-De APP verwijderen van HOSTs (optie remove)
+De APP verwijderen van HOSTs (\fBApp-regel\fR voor optie remove)
 T}
 T{
 Opdracht
 T}:T{
-Verwijder-opdracht (één of meer regels)
+Verwijder-opdracht (één of meer \fBOpdracht-regels\fR)
 T}
 .TE
 .sp

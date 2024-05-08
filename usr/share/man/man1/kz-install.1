@@ -73,6 +73,8 @@ The format of the supplied input file is
 kz-install-<distribution>-<edition>.sh, for a user supplied input file it is
 kz-install-*.sh.
 .br
+The input file contains so-called \fBApp records\fR and \fBCommand records\fR.
+.br
 The records are processed in the order they appear in the files.
 .sp
 The commands supplied by with \fBkz install\fR are arranged in such a way that
@@ -82,7 +84,7 @@ See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
 .sp
 See \fBTable 2\fR for an \fBexample\fR of these records in sample file
-kz-install-ubuntu-desktop.sh for computer pc02.
+kz-install-ubuntu-desktop.sh.
 More examples can be seen through the \fBkz install --cat\fR command.
 .sp
 .sp
@@ -103,22 +105,22 @@ l | l.
 T{
 # Install APP HOST...
 T}:T{
-Install the APP on HOSTs
+Install the APP on HOSTs (\fBApp record\fR)
 T}
 T{
 Command
 T}:T{
-Install command (one or more records)
+Install command (one or more \fBCommand records\fR)
 T}
 T{
 # Remove APP HOST...
 T}:T{
-Remove the APP from HOSTs (option remove)
+Remove the APP from HOSTs (\fBApp record\fR for option remove)
 T}
 T{
 Command
 T}:T{
-Remove command (one or more records)
+Remove command (one or more \fBCommand records\fR)
 T}
 .TE
 .sp

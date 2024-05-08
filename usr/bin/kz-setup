@@ -324,7 +324,7 @@ function process_input_file_by_app {
     while read -r input_record; do
         case $input_record in
             *'#'*"$mode"*"$app_argument"*)
-                # Possible matching APP record (app_argument is user input).
+                # Possible matching App record (app_argument is user input).
                 app_match=false
                 app_name=$(
                     printf '%s\n' "$input_record"       |
@@ -332,14 +332,14 @@ function process_input_file_by_app {
                     cut --delimiter=' ' --fields=3
                     )
                 if [[ $app_name = "$app_argument" ]]; then
-                    # Matching APP record.
+                    # Matching App record.
                     app_match=true
                     no_app_match=false
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
             *'#'*"$mode"*|*'#'*"$mode_reverse"*)
-                # Mismatched APP record.
+                # Mismatched App record.
                 app_match=false
                 continue
                 ;;
@@ -368,12 +368,12 @@ function process_input_file_by_user {
     while read -r input_record; do
         case $input_record in
             *'#'*"$mode"*'*'*|*'#'*"$mode"*"$USER"'@'"$HOSTNAME"*)
-                # Matching APP record.
+                # Matching App record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
             *'#'*"$mode"*|*'#'*"$mode_reverse"*)
-                # Mismatched APP record.
+                # Mismatched App record.
                 user_match=false
                 continue
                 ;;
@@ -419,7 +419,7 @@ function process_command_file {
                 continue
                 ;;
             *'#'*"$mode"*)
-                # APP record.
+                # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
                     tr --squeeze-repeats '[:space:]'    |

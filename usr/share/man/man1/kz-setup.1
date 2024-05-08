@@ -72,6 +72,8 @@ A -- signals the end of options and disables further option processing.
 The format of the supplied input file is kz-setup-<distribution>-<edition>.sh,
 for a user supplied input file it is kz-setup-*.sh.
 .br
+The input file contains so-called \fBApp records\fR and \fBCommand records\fR.
+.br
 The records are processed in the order they appear in the files.
 .sp
 The commands supplied by with \fBkz setup\fR are arranged in such a way that
@@ -102,22 +104,22 @@ l | l.
 T{
 # Setup APP USER...
 T}:T{
-Set up APP for USERs
+Set up APP for USERs (\fBApp record\fR)
 T}
 T{
 Command
 T}:T{
-Setup command (one or more records)
+Setup command (one or more \fBCommand records\fR)
 T}
 T{
 # Reset APP USER...
 T}:T{
-Reset APP for USERs (option reset)
+Reset APP for USERs  (\fBApp record\fR for option reset)
 T}
 T{
 Command
 T}:T{
-Reset command (one or more records)
+Reset command (one or more \fBCommand records\fR)
 T}
 .TE
 .sp
