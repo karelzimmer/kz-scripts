@@ -28,11 +28,11 @@ kz-gset --delfav=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
-# Setup firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --delfav=firefox            # dpkg
 kz-gset --delfav=firefox_firefox    # snap
 
-# Reset firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --addfavbef=firefox         # dpkg
 kz-gset --addfavbef=firefox_firefox # snap
 
