@@ -232,7 +232,7 @@ function backup_settings {
 # This function copies the desktop background.
 function backup_setting_desktop_background {
     local input_file=''
-    local output_file=$SETTINGS/background
+    local output_file=$SETTINGS/desktop
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -294,6 +294,7 @@ function delete_previously_backuped_settings {
         "$HOME"/.kz/Apps                        \
         "$HOME"/.kz/Background                  \
         "$HOME"/.kz/desktop-background-picture  \
+        "$HOME"/.kz/favorite-apps               \
         "$HOME"/.kz/Favorites                   \
         "$HOME"/.kz/installed-apps              \
         "$HOME"/.kz/user-profile-picture        \
@@ -304,17 +305,13 @@ function delete_previously_backuped_settings {
         "$HOME"/Documents/Apps                  \
         "$HOME"/Documents/Favorites             \
         "$HOME"/Pictures/Background             \
-        "$HOME"/Pictures/Userphoto              \
-        "$SETTINGS"/apps                        \
-        "$SETTINGS"/background                  \
-        "$SETTINGS"/favorites                   \
-        "$SETTINGS"/userphoto
+        "$HOME"/Pictures/Userphoto
 }
 
 
 # This function restores the desktop background.
 function restore_setting_desktop_background {
-    local input_file=$SETTINGS/desktop-background
+    local input_file=$SETTINGS/desktop
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
