@@ -232,7 +232,7 @@ function backup_settings {
 # This function copies the desktop background.
 function backup_setting_desktop_background {
     local input_file=''
-    local output_file=$SETTINGS/desktop-background
+    local output_file=$SETTINGS/background
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -247,7 +247,7 @@ function backup_setting_desktop_background {
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favorite_apps {
-    local output_file=$SETTINGS/favorite-apps
+    local output_file=$SETTINGS/favorites
 
     msg_log 'Save the favorite apps...'
     gsettings get                           \
@@ -257,7 +257,7 @@ function backup_setting_favorite_apps {
 
 # This function creates a list of installed apps.
 function backup_setting_installed_apps {
-    local output_file=$SETTINGS/installed-apps
+    local output_file=$SETTINGS/apps
     local header1=$(gettext '==== START list of installed packages ====')
     local footer1=$(gettext '==== END list of installed packages ====')
     local header2=$(gettext '==== START list of installed snaps ====')
@@ -279,7 +279,7 @@ function backup_setting_installed_apps {
 # This function copies the user avatar.
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file=$SETTINGS/user-avatar
+    local output_file=$SETTINGS/avatar
 
     msg_log 'Copy the user photo...'
     cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
