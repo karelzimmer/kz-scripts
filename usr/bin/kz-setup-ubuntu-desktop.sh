@@ -29,11 +29,11 @@ rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
 # Setup firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --delfav=firefox            # dpkg
+kz-gset --delfav=firefox            # apt
 kz-gset --delfav=firefox_firefox    # snap
 
 # Reset firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --addfavbef=firefox         # dpkg
+kz-gset --addfavbef=firefox         # apt
 kz-gset --addfavbef=firefox_firefox # snap
 
 
@@ -172,11 +172,11 @@ kz-gset --delfav=org.gnome.SoundJuicer
 
 
 # Setup thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --delfav=thunderbird                # dpkg
+kz-gset --delfav=thunderbird                # apt
 kz-gset --delfav=thunderbird_thunderbird    # snap
 
 # Reset thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --addfavbef=thunderbird             # dpkg
+kz-gset --addfavbef=thunderbird             # apt
 kz-gset --addfavbef=thunderbird_thunderbird # snap
 
 
