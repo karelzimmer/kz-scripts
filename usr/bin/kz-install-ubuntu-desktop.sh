@@ -20,6 +20,14 @@ sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
+# Install ubuntu-desktop *
+# Necessary if "Default selection", i.e. ubuntu-desktop-minimal, was chosen during installation.
+sudo apt-get install --yes ubuntu-desktop
+
+# Remove ubuntu-desktop *
+# sudo apt-get remove --yes ubuntu-desktop
+
+
 # Install update-system *
 sudo apt-get update
 sudo apt-get upgrade --yes
@@ -27,14 +35,6 @@ sudo snap refresh
 
 # Remove update-system *
 # There is no command available to remove update system.
-
-
-# Install ubuntu-desktop *
-# Necessary if "Default selection", i.e. ubuntu-desktop-minimal, was chosen during installation.
-sudo apt-get install --yes ubuntu-desktop
-
-# Remove ubuntu-desktop *
-# sudo apt-get remove --yes ubuntu-desktop
 ########################## Execute this block first ###########################
 
 
