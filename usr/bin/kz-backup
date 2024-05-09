@@ -221,7 +221,7 @@ use app Terminal, type 'kz backup'.")"
 function backup_settings {
     backup_settings_desktop_background_picture
     backup_settings_favorite_apps
-    backup_settings_installed_apps
+    backup_settings_manual_installed_apps
     backup_settings_user_profile_picture
     delete_settings_previously_backuped
     # In case the desktop background picture has been removed.
@@ -229,7 +229,7 @@ function backup_settings {
 }
 
 
-# This function copies the desktop background.
+# This function copies the desktop background picture.
 function backup_settings_desktop_background_picture {
     local input_file=''
     local output_file=$SETTINGS/desktop-background-picture
@@ -245,7 +245,7 @@ function backup_settings_desktop_background_picture {
 }
 
 
-# This function saves the favorite apps.
+# This function saves the favorite apps in the dash.
 function backup_settings_favorite_apps {
     local output_file=$SETTINGS/favorite-apps
 
@@ -255,9 +255,9 @@ function backup_settings_favorite_apps {
 }
 
 
-# This function creates a list of installed apps.
-function backup_settings_installed_apps {
-    local output_file=$SETTINGS/installed-apps
+# This function creates a list of installed manual apps.
+function backup_settings_manual_installed_apps {
+    local output_file=$SETTINGS/manual-installed-apps
     local header1=$(gettext '==== START list of installed packages ====')
     local footer1=$(gettext '==== END list of installed packages ====')
     local header2=$(gettext '==== START list of installed snaps ====')
@@ -292,7 +292,7 @@ function backup_settings_installed_apps {
 }
 
 
-# This function copies the user photo.
+# This function copies the user profile photo.
 function backup_settings_user_profile_picture {
     local input_file=/var/lib/AccountsService/icons/"$USER"
     local output_file=$SETTINGS/user-profile-picture
@@ -310,6 +310,7 @@ function delete_settings_previously_backuped {
         "$HOME"/.kz/Apps                    \
         "$HOME"/.kz/Background              \
         "$HOME"/.kz/Favorites               \
+        "$HOME"/.kz/installed-apps          \
         "$HOME"/.kz/Userphoto               \
         "$HOME"/Afbeeldingen/Gebruikersfoto \
         "$HOME"/Documenten/Apps             \
