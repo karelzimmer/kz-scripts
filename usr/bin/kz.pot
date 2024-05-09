@@ -246,12 +246,6 @@ msgstr ""
 msgid "==== END list of installed snaps ===="
 msgstr ""
 
-msgid "==== START list of added repositories ===="
-msgstr ""
-
-msgid "==== END list of added repositories ===="
-msgstr ""
-
 msgid "snap is not installed"
 msgstr ""
 
