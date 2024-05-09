@@ -113,10 +113,10 @@ xdg-mime default google-chrome.desktop application/pdf
 xdg-mime default org.gnome.Evince.desktop application/pdf
 
 
-# Setup google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --addfavbef=google-chrome
 
-# Reset google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --delfav=google-chrome
 
 
