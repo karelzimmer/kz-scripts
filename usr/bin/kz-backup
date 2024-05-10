@@ -128,49 +128,7 @@ function process_input {
     local       target=''
     local       error_file=''
 
-    if $option_target; then
-        if [[ ! -d $target_argument ]]; then
-            text="$DISPLAY_NAME: $target_argument: \
-$(gettext 'directory does not exist')
-$USAGE_LINE"
-            msg_info "$text"
-            exit $ERROR
-        fi
-        target=$target_argument/$USER@$HOSTNAME
-        target_medium=$target_argument
-    else
-        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ -z $medium ]]; then
-            text=$(gettext "No USB medium found.
-
-Connect a USB medium.")
-            msg_warning "$text"
-            $option_gui || wait_for_enter
-            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ -z $medium ]]; then
-                msg_error "$text"
-                exit $ERROR
-            fi
-        fi
-        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-            text="$(eval_gettext "Connect only one USB medium.
-
-Now connected:
-\$medium
-
-Disconnect media via Files.")"
-            msg_warning "$text"
-            $option_gui || wait_for_enter
-            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                msg_error "$text"
-                exit $ERROR
-            fi
-        fi
-        target=$medium/$USER@$HOSTNAME
-        target_medium=$medium
-    fi
+    check_target
 
     check_on_ac_power
 
@@ -214,6 +172,60 @@ use app Terminal, type 'kz backup'.")"
         exit $ERROR
     fi
     rm --verbose "$error_file" |& $LOGCMD
+}
+
+
+# This function checks if target is available.
+function check_target {
+    if $option_target; then
+        if [[ ! -d $target_argument ]]; then
+            text="$DISPLAY_NAME: $target_argument: \
+$(gettext 'directory does not exist')
+$USAGE_LINE"
+            msg_info "$text"
+            exit $ERROR
+        fi
+        target=$target_argument/$USER@$HOSTNAME
+        target_medium=$target_argument
+    else
+        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+        if [[ -z $medium ]]; then
+            text=$(gettext "No USB medium found.
+
+Connect a USB medium.")
+            msg_warning "$text"
+            $option_gui || wait_for_enter
+            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+            if [[ -z $medium ]]; then
+                msg_error "$text"
+                exit $ERROR
+            fi
+        fi
+        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+            text="$(eval_gettext "Connect only one USB medium.
+
+Now connected:
+\$medium
+
+Disconnect media via Files.")"
+            msg_warning "$text"
+            $option_gui || wait_for_enter
+            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+                msg_error "$text"
+                exit $ERROR
+            fi
+        fi
+        target=$medium/$USER@$HOSTNAME
+        target_medium=$medium
+    fi
+    if [[ -e $target_medium/backup-$HOSTNAME-$USER ]]; then
+        text="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. P\
+lease rename to 'USER@HOST'.")"
+        msg_error "$text"
+        exit $ERROR
+    fi
 }
 
 
