@@ -54,7 +54,6 @@ readonly EDITION='desktop'
 else
 readonly EDITION='server'
 fi
-readonly SETTINGS=$HOME/.kz
 
 
 ###############################################################################
@@ -169,7 +168,6 @@ started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     commandline_args=("$@")
     readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
  information.")
-    [[ $UID -eq 0 ]] || mkdir --parents --verbose "$SETTINGS" |& $LOGCMD
 }
 
 
