@@ -285,7 +285,7 @@ function restore_settings {
 
 # This function restores the desktop background.
 function restore_setting_desktop {
-    local input_file=$(xdg-user-dir PICTURES)/zk-backup-desktop
+    local input_file=$(xdg-user-dir PICTURES)/zz-backup-desktop
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
