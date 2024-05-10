@@ -243,7 +243,7 @@ function backup_settings {
 
 # This function creates a list of installed apps.
 function backup_setting_apps {
-    local output_file=$(xdg-user-dir DOCUMENTS)/apps
+    local output_file=$(xdg-user-dir DOCUMENTS)/zk-backup-apps
     local header1=$(gettext '==== START list of installed packages ====')
     local footer1=$(gettext '==== END list of installed packages ====')
     local header2=$(gettext '==== START list of installed snaps ====')
@@ -265,7 +265,7 @@ function backup_setting_apps {
 # This function copies the user avatar.
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file=$(xdg-user-dir PICTURES)/avatar
+    local output_file=$(xdg-user-dir PICTURES)/zk-backup-avatar
 
     msg_log 'Copy the user photo...'
     cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
@@ -275,7 +275,7 @@ function backup_setting_avatar {
 # This function copies the desktop background.
 function backup_setting_desktop {
     local input_file=''
-    local output_file=$(xdg-user-dir PICTURES)/desktop
+    local output_file=$(xdg-user-dir PICTURES)/zk-backup-desktop
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -290,7 +290,7 @@ function backup_setting_desktop {
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favorits {
-    local output_file=$(xdg-user-dir DOCUMENTS)/favorites
+    local output_file=$(xdg-user-dir DOCUMENTS)/zk-backup-favorites
 
     msg_log 'Save the favorite apps...'
     gsettings get                           \
@@ -317,7 +317,7 @@ function delete_previously_backuped_settings {
 
 # This function restores the desktop background.
 function restore_setting_desktop {
-    local input_file=$(xdg-user-dir PICTURES)/desktop
+    local input_file=$(xdg-user-dir PICTURES)/zk-backup-desktop
 
     msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
