@@ -281,7 +281,11 @@ function backup_setting_desktop {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
+
+    # Debian defaults to /usr/share/images/desktop-base/desktop-background.xml.
+    if [[ $input_file != *.xml ]]; then
+        cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
+    fi
 }
 
 
