@@ -234,16 +234,15 @@ function backup_settings {
     backup_setting_apps
     backup_setting_avatar
     backup_setting_desktop
-    backup_setting_favorits
-    delete_previously_backuped_settings
-    # In case the desktop background has been removed.
+    backup_setting_favs
+    # In case the desktop wallpaper has been removed by backing it up.
     restore_setting_desktop
 }
 
 
 # This function creates a list of installed apps.
 function backup_setting_apps {
-    local output_file=$(xdg-user-dir DOCUMENTS)/zz-backup-apps
+    local output_file=$(xdg-user-dir DOCUMENTS)/apps
     local header1=$(gettext '==== START list of installed packages ====')
     local footer1=$(gettext '==== END list of installed packages ====')
     local header2=$(gettext '==== START list of installed snaps ====')
@@ -265,9 +264,9 @@ function backup_setting_apps {
 # This function copies the user avatar.
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file=$(xdg-user-dir PICTURES)/zz-backup-avatar
+    local output_file=$(xdg-user-dir PICTURES)/avatar
 
-    msg_log 'Copy the user photo...'
+    msg_log 'Copy the user avatar...'
     cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
 }
 
@@ -275,7 +274,7 @@ function backup_setting_avatar {
 # This function copies the desktop background.
 function backup_setting_desktop {
     local input_file=''
-    local output_file=$(xdg-user-dir PICTURES)/zz-backup-desktop
+    local output_file=$(xdg-user-dir PICTURES)/desktop
 
     msg_log 'Copy the desktop background...'
     input_file=$(
@@ -289,8 +288,8 @@ function backup_setting_desktop {
 
 
 # This function saves the favorite apps in the dash.
-function backup_setting_favorits {
-    local output_file=$(xdg-user-dir DOCUMENTS)/zz-backup-favorites
+function backup_setting_favs {
+    local output_file=$(xdg-user-dir DOCUMENTS)/favs
 
     msg_log 'Save the favorite apps...'
     gsettings get                           \
@@ -298,29 +297,12 @@ function backup_setting_favorits {
 }
 
 
-# This function deletes previously backuped user settings.
-function delete_previously_backuped_settings {
-    msg_log 'Delete previously backuped user settings...'
-    rm  --force                             \
-        --recursive                         \
-        --verbose                           \
-        "$(xdg-user-dir DOCUMENTS)"/Apps    \
-        "$HOME"/.kz                         \
-        "$HOME"/Afbeeldingen/Gebruikersfoto \
-        "$HOME"/Documenten/Favorieten       \
-        "$HOME"/Documents/Apps              \
-        "$HOME"/Documents/Favorites         \
-        "$HOME"/Pictures/Background         \
-        "$HOME"/Pictures/Userphoto          |& $LOGCMD
-}
-
-
 # This function restores the desktop background.
 function restore_setting_desktop {
-    local input_file=$(xdg-user-dir PICTURES)/zz-backup-desktop
+    local input_file=$(xdg-user-dir PICTURES)/desktop
 
-    msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
+        msg_log 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-10 07:35+0200\n"
+"POT-Creation-Date: 2024-05-11 09:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -761,6 +761,19 @@ msgid "Restore settings"
 msgstr ""
 
 msgid "Preparing restore (this can take a while)"
+msgstr ""
+
+msgid "Set user photo"
+msgstr ""
+
+msgid ""
+"1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
+"2. Click on Change avatar (pencil icon).\n"
+"3. Click Select a file.\n"
+"4. Select avatar in Personal folder / Pictures.\n"
+"\n"
+"[1] The Super key is the Windows key, Command key (Apple), or Magnifier key "
+"(Chromebook)."
 msgstr ""
 
 #, sh-format

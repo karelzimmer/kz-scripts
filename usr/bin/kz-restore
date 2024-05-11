@@ -280,18 +280,41 @@ function restore_backup {
 # This function restores user settings.
 function restore_settings {
     restore_setting_desktop
+    restore_setting_avatar
 }
 
 
 # This function restores the desktop background.
 function restore_setting_desktop {
-    local input_file=$(xdg-user-dir PICTURES)/zz-backup-desktop
+    local input_file=$(xdg-user-dir PICTURES)/desktop
 
-    msg_log 'Restore the desktop background...'
     if [[ -f $input_file ]]; then
+        msg_log 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"
+    fi
+}
+
+
+# This function copies the user avatar.
+function restore_setting_avatar {
+    local input_file=$(xdg-user-dir PICTURES)/avatar
+
+    if [[ -f $input_file ]]; then
+        msg_log 'Restore the user avatar...'
+        text="$(gettext 'Set user photo'):
+
+$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
+on Users.
+2. Click on Change avatar (pencil icon).
+3. Click Select a file.
+4. Select avatar in Personal folder / Pictures.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
+(Chromebook).")"
+        msg_info "$text"
+        $option_gui || wait_for_enter
     fi
 }
 
