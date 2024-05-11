@@ -235,8 +235,6 @@ function backup_settings {
     backup_setting_avatar
     backup_setting_desktop
     backup_setting_favs
-    # In case the desktop wallpaper has been removed by backing it up.
-    restore_setting_desktop
 }
 
 
@@ -294,19 +292,6 @@ function backup_setting_favs {
     msg_log 'Save the favorite apps...'
     gsettings get                           \
               org.gnome.shell favorite-apps > "$output_file" |& $LOGCMD || true
-}
-
-
-# This function restores the desktop background.
-function restore_setting_desktop {
-    local input_file=$(xdg-user-dir PICTURES)/desktop
-
-    if [[ -f $input_file ]]; then
-        msg_log 'Restore the desktop background...'
-        gsettings   set                                         \
-                    org.gnome.desktop.background picture-uri    \
-                    "file://$input_file"
-    fi
 }
 
 
