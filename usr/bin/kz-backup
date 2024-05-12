@@ -282,7 +282,7 @@ function backup_setting_desktop {
         sed --expression='s|file://||'                          || true
         )
 
-    # By default, Debian input_file with gsettings results in
+    # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
     if [[ $input_file != *.xml ]]; then
