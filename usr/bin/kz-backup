@@ -284,7 +284,7 @@ function backup_setting_desktop {
 
     # By default, Debian input_file with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
-    # image file, and copying it from xdg-user-dir to gsettings doesn't work.
+    # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
     if [[ $input_file != *.xml ]]; then
         cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
     fi
