@@ -42,6 +42,8 @@ $OPTIONS_HELP"
 readonly X_OPTIONS_SHORT='gs:'
 readonly X_OPTIONS_LONG=',gui,source:'
 
+readonly TARGET=$HOME
+
 
 ###############################################################################
 # Variables
@@ -123,11 +125,15 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
-    local   -i  restore_rc=0
-    local       rsync_messages=''
-    local       target=$HOME
-    local       error_file=''
+    check_source
+    check_on_ac_power
+    restore_backup
+    restore_settings
+}
 
+
+# This function checks if the source is available.
+function check_source {
     if $option_source; then
         if [[ ! -d $source_argument ]]; then
             text="$DISPLAY_NAME: $source_argument: \
@@ -178,15 +184,16 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
             exit $ERROR
         fi
     fi
+}
 
-    check_on_ac_power
-    restore_backup
 
+# This function processes the restore of user settings.
+function restore_settings {
     if [[ $EDITION = 'desktop' ]]; then
         title=$(gettext 'Restore settings')
         text=$title
         if $option_gui; then
-            restore_settings                |
+            restore_setting_all                |
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -198,87 +205,14 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
         else
             text+='...'
             msg_info "$text"
-            restore_settings
+            restore_setting_all
         fi
     fi
-
-    if [[ $restore_rc -ne $OK ]]; then
-        # shellcheck disable=SC2034
-        rsync_messages=$(cat "$error_file")
-        text=$(eval_gettext "Restore ended with warnings or errors.
-
-Some files may not be readable, or
-were any files added or removed while restoring the backup, or
-is there not enough space on \$target.
-
-Check the rsync messages (also in \$error_file):
-\$rsync_messages
-
-Try restoring the back up again.
-Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz restore'.")
-        msg_error "$text"
-        exit $ERROR
-    fi
-    rm --verbose "$error_file" |& $LOGCMD
 }
 
 
-# This function restores the backup.
-function restore_backup {
-
-    error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
-
-    title=$(gettext 'Restore backup')
-    text=$(gettext 'Preparing restore (this can take a while)')
-    if $option_gui; then
-        msg_log "$title"...
-        rsync   --archive               \
-                --verbose               \
-                "$source"/              \
-                "$target"/              \
-                2> "$error_file"    |
-        sed     --expression='s/^/#/'   |
-        zenity  --progress              \
-                --auto-close            \
-                --no-cancel             \
-                --pulsate               \
-                --width     600         \
-                --height    50          \
-                --title     "$title"    \
-                --text      "$text"     2> >($LOGCMD) || restore_rc=$?
-    else
-        text+='...'
-        msg_info "$text"
-        rsync   --archive               \
-                --verbose               \
-                --human-readable        \
-                "$source"/              \
-                "$target"/              2> "$error_file" || restore_rc=$?
-    fi
-
-    text=$(gettext "Writing data from memory (this may take a while)")
-    if $option_gui; then
-        msg_log "$text"...
-        sync                            |
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$title"    \
-                --text      "$text"     &> >($LOGCMD)
-    else
-        text+='...'
-        msg_info "$text"
-        sync |& $LOGCMD
-    fi
-}
-
-
-# This function restores user settings.
-function restore_settings {
+# This function restores the user settings.
+function restore_setting_all {
     restore_setting_desktop
     restore_setting_avatar
 }
@@ -316,6 +250,81 @@ on Users.
         msg_info "$text"
         $option_gui || wait_for_enter
     fi
+}
+
+
+# This function restores the backup.
+function restore_backup {
+    local       error_file=''
+    local       rsync_messages=''
+    local   -i  restore_rc=0
+
+    error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+
+    title=$(gettext 'Restore backup')
+    text=$(gettext 'Preparing restore (this can take a while)')
+    if $option_gui; then
+        msg_log "$title"...
+        rsync   --archive               \
+                --verbose               \
+                "$source"/              \
+                "$TARGET"/              \
+                2> "$error_file"    |
+        sed     --expression='s/^/#/'   |
+        zenity  --progress              \
+                --auto-close            \
+                --no-cancel             \
+                --pulsate               \
+                --width     600         \
+                --height    50          \
+                --title     "$title"    \
+                --text      "$text"     2> >($LOGCMD) || restore_rc=$?
+    else
+        text+='...'
+        msg_info "$text"
+        rsync   --archive               \
+                --verbose               \
+                --human-readable        \
+                "$source"/              \
+                "$TARGET"/              2> "$error_file" || restore_rc=$?
+    fi
+
+    text=$(gettext "Writing data from memory (this may take a while)")
+    if $option_gui; then
+        msg_log "$text"...
+        sync                            |
+        zenity  --progress              \
+                --pulsate               \
+                --auto-close            \
+                --no-cancel             \
+                --width     600         \
+                --height    50          \
+                --title     "$title"    \
+                --text      "$text"     &> >($LOGCMD)
+    else
+        text+='...'
+        msg_info "$text"
+        sync |& $LOGCMD
+    fi
+    if [[ $restore_rc -ne $OK ]]; then
+        # shellcheck disable=SC2034
+        rsync_messages=$(cat "$error_file")
+        text=$(eval_gettext "Restore ended with warnings or errors.
+
+Some files may not be readable, or
+were any files added or removed while restoring the backup, or
+is there not enough space on \$TARGET.
+
+Check the rsync messages (also in \$error_file):
+\$rsync_messages
+
+Try restoring the back up again.
+Use app 'Installation menu' and select '5 - Command menu', or
+use app Terminal, type 'kz restore'.")
+        msg_error "$text"
+        exit $ERROR
+    fi
+    rm --verbose "$error_file" |& $LOGCMD
 }
 
 
