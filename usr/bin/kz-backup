@@ -222,8 +222,9 @@ function backup_setting_all {
 # This function creates a list of installed apps.
 function backup_setting_apps {
     local output_file=$(xdg-user-dir DOCUMENTS)/apps
-    local header1=$(gettext '==== START list of installed packages ====')
-    local footer1=$(gettext '==== END list of installed packages ====')
+    local header1=$(gettext "==== START list of manual installed packages ====\
+")
+    local footer1=$(gettext '==== END list of manual installed packages ====')
     local header2=$(gettext '==== START list of installed snaps ====')
     local footer2=$(gettext '==== END list of installed snaps ====')
 

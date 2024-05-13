@@ -266,11 +266,11 @@ msgstr ""
 msgid "Secure settings"
 msgstr "Instellingen veiligstellen"
 
-msgid "==== START list of installed packages ===="
-msgstr "==== BEGIN overzicht van geïnstalleerde pakketten ===="
+msgid "==== START list of manual installed packages ===="
+msgstr "==== BEGIN overzicht van handmatig geïnstalleerde pakketten ===="
 
-msgid "==== END list of installed packages ===="
-msgstr "==== EINDE overzicht van geïnstalleerde pakketten ===="
+msgid "==== END list of manual installed packages ===="
+msgstr "==== EINDE overzicht van handmatig geïnstalleerde pakketten ===="
 
 msgid "==== START list of installed snaps ===="
 msgstr "==== BEGIN overzicht van geïnstalleerde snaps ===="
