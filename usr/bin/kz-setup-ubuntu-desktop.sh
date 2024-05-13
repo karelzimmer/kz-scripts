@@ -29,12 +29,12 @@ rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
 # Setup firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --delfav=firefox            # APT
-kz-gset --delfav=firefox_firefox    # Snap
+kz-gset --delfav=firefox            # dpkg
+kz-gset --delfav=firefox_firefox    # snap
 
 # Reset firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --addfavbef=firefox         # APT
-kz-gset --addfavbef=firefox_firefox # Snap
+kz-gset --addfavbef=firefox         # dpkg
+kz-gset --addfavbef=firefox_firefox # snap
 
 
 # Setup gdebi *
@@ -172,12 +172,12 @@ kz-gset --delfav=org.gnome.SoundJuicer
 
 
 # Setup thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --delfav=thunderbird                # APT
-kz-gset --delfav=thunderbird_thunderbird    # Snap
+kz-gset --delfav=thunderbird                # dpkg
+kz-gset --delfav=thunderbird_thunderbird    # snap
 
 # Reset thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --addfavbef=thunderbird             # APT
-kz-gset --addfavbef=thunderbird_thunderbird # Snap
+kz-gset --addfavbef=thunderbird             # dpkg
+kz-gset --addfavbef=thunderbird_thunderbird # snap
 
 
 # Setup teamviewer karel@pc06
@@ -222,12 +222,12 @@ kz-gset --delfav=kz-vm-hugowin732
 
 
 # Setup vlc *
-xdg-mime default vlc.desktop video/mp4              # APT
-xdg-mime default vlc.desktop video/x-matroska       # APT
-xdg-mime default vlc.desktop video/webm             # APT
-xdg-mime default vlc_vlc.desktop video/mp4          # Snap
-xdg-mime default vlc_vlc.desktop video/x-matroska   # Snap
-xdg-mime default vlc_vlc.desktop video/webm         # Snap
+xdg-mime default vlc.desktop video/mp4              # dpkg
+xdg-mime default vlc.desktop video/x-matroska       # dpkg
+xdg-mime default vlc.desktop video/webm             # dpkg
+xdg-mime default vlc_vlc.desktop video/mp4          # snap
+xdg-mime default vlc_vlc.desktop video/x-matroska   # snap
+xdg-mime default vlc_vlc.desktop video/webm         # snap
 
 # Reset vlc *
 xdg-mime default org.gnome.Totem.desktop video/mp4
