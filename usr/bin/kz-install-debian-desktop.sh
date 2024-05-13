@@ -253,9 +253,11 @@ sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # Install vlc *
+sudo snap remove vlc
 sudo apt-get install --yes vlc
 
 # Remove vlc *
+sudo snap remove vlc
 sudo apt-get remove --yes vlc
 
 

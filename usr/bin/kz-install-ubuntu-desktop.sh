@@ -445,9 +445,11 @@ sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additi
 
 
 # Install vlc *
+sudo snap remove vlc
 sudo apt-get install --yes vlc
 
 # Remove vlc *
+sudo snap remove vlc
 sudo apt-get remove --yes vlc
 
 
