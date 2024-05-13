@@ -29,11 +29,11 @@ rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
 # Setup firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --delfav=firefox            # apt
+kz-gset --delfav=firefox            # deb
 kz-gset --delfav=firefox_firefox    # snap
 
 # Reset firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --addfavbef=firefox         # apt
+kz-gset --addfavbef=firefox         # deb
 kz-gset --addfavbef=firefox_firefox # snap
 
 
@@ -172,11 +172,11 @@ kz-gset --delfav=org.gnome.SoundJuicer
 
 
 # Setup thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --delfav=thunderbird                # apt
+kz-gset --delfav=thunderbird                # deb
 kz-gset --delfav=thunderbird_thunderbird    # snap
 
 # Reset thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --addfavbef=thunderbird             # apt
+kz-gset --addfavbef=thunderbird             # deb
 kz-gset --addfavbef=thunderbird_thunderbird # snap
 
 
@@ -222,9 +222,12 @@ kz-gset --delfav=kz-vm-hugowin732
 
 
 # Setup vlc *
-xdg-mime default vlc_vlc.desktop video/mp4
-xdg-mime default vlc_vlc.desktop video/x-matroska
-xdg-mime default vlc_vlc.desktop video/webm
+xdg-mime default vlc.desktop video/mp4              # deb
+xdg-mime default vlc.desktop video/x-matroska       # deb
+xdg-mime default vlc.desktop video/webm             # deb
+xdg-mime default vlc_vlc.desktop video/mp4          # snap
+xdg-mime default vlc_vlc.desktop video/x-matroska   # snap
+xdg-mime default vlc_vlc.desktop video/webm         # snap
 
 # Reset vlc *
 xdg-mime default org.gnome.Totem.desktop video/mp4

@@ -173,9 +173,12 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
 # Setup vlc *
-xdg-mime default vlc_vlc.desktop video/mp4
-xdg-mime default vlc_vlc.desktop video/x-matroska
-xdg-mime default vlc_vlc.desktop video/webm
+xdg-mime default vlc.desktop video/mp4              # deb
+xdg-mime default vlc.desktop video/x-matroska       # deb
+xdg-mime default vlc.desktop video/webm             # deb
+xdg-mime default vlc_vlc.desktop video/mp4          # snap
+xdg-mime default vlc_vlc.desktop video/x-matroska   # snap
+xdg-mime default vlc_vlc.desktop video/webm         # snap
 
 # Reset vlc *
 xdg-mime default org.gnome.Totem.desktop video/mp4

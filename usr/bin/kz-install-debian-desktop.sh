@@ -253,10 +253,10 @@ sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
 # Install vlc *
-sudo snap install vlc
+sudo apt-get install --yes vlc
 
-# Remove vlc pc07
-sudo snap remove vlc
+# Remove vlc *
+sudo apt-get remove --yes vlc
 
 
 # Install vscode pc07
