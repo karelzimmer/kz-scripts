@@ -238,7 +238,8 @@ function restore_setting_avatar {
     if [[ -f $input_file ]]; then
         msg_log 'Restore the user avatar...'
         title=$(gettext 'Set user photo')
-        text="$(gettext "To restore the users avatar:
+        text="$(
+gettext "To restore the users avatar:
 1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.
 2. Click on Change avatar (pencil icon).
