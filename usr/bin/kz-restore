@@ -193,7 +193,7 @@ function restore_settings {
         title=$(gettext 'Restore settings')
         text=$title
         if $option_gui; then
-            restore_setting_all                |
+            restore_setting_all             |
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -237,9 +237,9 @@ function restore_setting_avatar {
 
     if [[ -f $input_file ]]; then
         msg_log 'Restore the user avatar...'
-        text="$(gettext 'Set user photo'):
-
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
+        title=$(gettext 'Set user photo')
+        text="$(gettext "To restore the users avatar:
+1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.

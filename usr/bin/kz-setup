@@ -203,26 +203,7 @@ nd end with '.sh'.")"
         process_option_cat
         exit $OK
     fi
-
-    title=$(gettext 'Set up apps')
-    text=$(gettext 'Preparing set up')
-    msg_log "$title"...
-    if $option_gui; then
-        # With '|& zenity --progress' global variables from called functions
-        # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_command_file > >(
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     700         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD)
-            )
-    else
-        process_command_file
-    fi
+    setup_apps
 }
 
 
@@ -392,6 +373,30 @@ function process_input_file_by_user {
 function process_option_cat {
     less --quit-if-one-screen "$command_file"
     rm --verbose "$command_file" |& $LOGCMD
+}
+
+
+# This function starts setting up the apps.
+function setup_apps {
+    title=$(gettext 'Set up apps')
+    text=$(gettext 'Preparing set up')
+    msg_log "$title"...
+    if $option_gui; then
+        # With '|& zenity --progress' global variables from called functions
+        # are not passed, hence the process substitution with '> >(zenity...)'.
+        process_command_file > >(
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     700         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($LOGCMD)
+            )
+    else
+        process_command_file
+    fi
 }
 
 

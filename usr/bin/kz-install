@@ -210,26 +210,7 @@ nd end with '.sh'.")"
     fi
     become_root
     check_on_ac_power
-
-    title=$(gettext 'Install apps')
-    text=$(gettext 'Prepare installation')
-    msg_log "$title"...
-    if $option_gui; then
-        # With '|& zenity --progress' global variables from called functions
-        # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_command_file > >(
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     700         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD)
-            )
-    else
-        process_command_file
-    fi
+    install_apps
 }
 
 
@@ -399,6 +380,30 @@ function process_input_file_by_host {
 function process_option_cat {
     less --quit-if-one-screen "$command_file"
     rm --verbose "$command_file" |& $LOGCMD
+}
+
+
+# This function starts installing the apps.
+function install_apps {
+    title=$(gettext 'Install apps')
+    text=$(gettext 'Prepare installation')
+    msg_log "$title"...
+    if $option_gui; then
+        # With '|& zenity --progress' global variables from called functions
+        # are not passed, hence the process substitution with '> >(zenity...)'.
+        process_command_file > >(
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     700         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     2> >($LOGCMD)
+            )
+    else
+        process_command_file
+    fi
 }
 
 

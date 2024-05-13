@@ -102,27 +102,25 @@ $USAGE_LINE"
 function process_input {
     local   -i  nmcli_rc=''
     local       nmcli_output=''
-    local       text=$(gettext "Record this data to connect to the wireless ne\
-twork later.")
 
+    text=$(gettext "Record this data to connect to the wireless network later.\
+")
     if $option_gui; then
         if nmcli_output=$(nmcli device wifi show-password 2> >($LOGCMD)); then
             text="$nmcli_output
 
 $text"
-            msg_info "$text"
         else
             text=$(gettext 'No WiFi device found.')
-            msg_info "$text"
         fi
     else
         # Shows QR code for quick connection to Wi-Fi network.
         nmcli device wifi show-password 2> >($LOGCMD) || nmcli_rc=$?
         if [[ $nmcli_rc -ne 0 ]]; then
             text=$(gettext 'No WiFi device found.')
-            msg_info "$text"
         fi
     fi
+    msg_info "$text"
 }
 
 
