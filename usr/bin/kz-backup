@@ -216,6 +216,7 @@ function backup_setting_all {
     backup_setting_avatar
     backup_setting_desktop
     backup_setting_favs
+    backup_setting_release
 }
 
 
@@ -280,6 +281,15 @@ function backup_setting_favs {
     msg_log 'Save the favorite apps...'
     gsettings get                           \
               org.gnome.shell favorite-apps > "$output_file" |& $LOGCMD || true
+}
+
+
+# This function saves the release information.
+function backup_setting_release {
+    local output_file=$(xdg-user-dir DOCUMENTS)/vers
+
+    msg_log 'Save the release information...'
+    lsb_release --all > "$output_file" |& $LOGCMD || true
 }
 
 
