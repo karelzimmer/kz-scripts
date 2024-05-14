@@ -224,18 +224,18 @@ sudo apt-get remove --yes spice-vdagent
 # Install ssh pc07
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-sudo sed --in-place --expression='/^192.168.1.83/d'  /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.30/d'  /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.219/d' /etc/hosts
 sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
-sudo sed --in-place --expression='3a192.168.1.83  pc06' /etc/hosts
+sudo sed --in-place --expression='3a192.168.1.30  pc06' /etc/hosts
 sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts
 # Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
 # Remove ssh pc07
-sudo sed --in-place --expression='/^192.168.1.83/d'  /etc/hosts
+sudo sed --in-place --expression='/^192.168.1.30/d'  /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.100/d' /etc/hosts
 sudo sed --in-place --expression='/^192.168.1.219/d' /etc/hosts
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
