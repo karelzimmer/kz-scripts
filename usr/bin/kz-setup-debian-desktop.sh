@@ -36,6 +36,13 @@ kz-gset --delfav=install-debian
 kz-gset --addfavbef=install-debian
 
 
+# Setup evolution karel@pc07
+kz-gset --delfav=org.gnome.Evolution.desktop
+
+# Reset debian-desktop-installer karel@pc07
+kz-gset --addfavbef=org.gnome.Evolution.desktop
+
+
 # Setup firefox karel@pc07
 kz-gset --delfav=firefox-esr
 
