@@ -97,9 +97,7 @@ function become_root {
 # This function checks if the user is allowed to become root and returns 0 if
 # so, otherwise returns 1 with descriptive message.
 function become_root_check {
-    # Can user perform sudo?
     if [[ $UID -eq 0 ]]; then
-        # For the "grace" period of sudo, or as a root.
         return $OK
     elif groups "$USER" | grep --quiet --regexp='sudo'; then
         return $OK

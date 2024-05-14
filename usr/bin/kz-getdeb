@@ -108,8 +108,7 @@ function process_input {
 
 # This function prepares further processing.
 function prepare_processing {
-    sudo --non-interactive true || true
-    sudo true
+    sudo --non-interactive true || sudo true
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress. If all
