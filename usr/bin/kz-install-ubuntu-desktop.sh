@@ -348,8 +348,7 @@ sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
 sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
-sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts # wireless
-sudo sed --in-place --expression='3a192.168.1.30  pc06' /etc/hosts # wired
+sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts
 sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts
 # Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
