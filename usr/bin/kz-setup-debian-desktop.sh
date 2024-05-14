@@ -83,6 +83,7 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'inter
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 gsettings set org.gnome.shell disable-user-extensions false
+gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
 gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
 
 # Reset gnome *
@@ -112,7 +113,9 @@ gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
 gsettings reset org.gnome.shell disable-user-extensions
+gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
+
 
 # Setup google-chrome *
 xdg-mime default google-chrome.desktop application/pdf

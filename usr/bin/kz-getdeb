@@ -108,6 +108,11 @@ function process_input {
 
 # This function prepares further processing.
 function prepare_processing {
+    # Force GNOME not to show an overview at startup, especially for Debian.
+    gsettings   set                                     \
+                org.gnome.shell.extensions.dash-to-dock \
+                disable-overview-on-startup             \
+                true                                    || true
     sudo --non-interactive true || sudo true
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Progress indicator with growing number of '#'s as long as the local
