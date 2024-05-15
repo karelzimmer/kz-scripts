@@ -261,10 +261,10 @@ sudo apt-get install --yes thunderbird-l10n-nl
 sudo apt-get remove --yes thunderbird-l10n-nl
 
 
-# Install thunderbird *
+# Install usbutils *
 sudo apt-get install --yes usbutils
 
-# Remove thunderbird *
+# Remove usbutils *
 sudo apt-get remove --yes usbutils
 
 
