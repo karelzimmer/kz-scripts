@@ -403,7 +403,7 @@ sudo apt-get remove --yes gufw
 
 
 # Install user-guest -nohost
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest')" "$(gettext --domain=kz 'guest')" || true
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest user')" "$(gettext --domain=kz 'guest')" || true
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
 # Remove user-guest -nohost
@@ -432,7 +432,7 @@ sudo userdel --remove toos
 # If installation hangs or VBox does not work, check Linux-info.txt.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
-# VirtualBox Guest Additions ISO are in: /usr/share/virtualbox/
+# VirtualBox Guest user Additions ISO are in: /usr/share/virtualbox/
 
 # Remove virtualbox pc-van-hugo
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso

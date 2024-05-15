@@ -1068,7 +1068,7 @@ msgstr ""
 msgid "Mount a NAS during startup"
 msgstr ""
 
-msgid "Guest"
+msgid "Guest user"
 msgstr ""
 
 msgid "guest"
