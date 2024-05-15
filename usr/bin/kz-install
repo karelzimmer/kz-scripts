@@ -210,7 +210,7 @@ nd end with '.sh'.")"
     fi
     become_root
     check_on_ac_power
-    add_additional_users
+    $argument_app || add_additional_users
     install_apps
 }
 
