@@ -7,6 +7,7 @@
 ###############################################################################
 
 # Setup anydesk -nouser
+# Remote Wayland display server is not supported.
 kz-gset --addfavaft=anydesk
 
 # Reset anydesk -nouser
