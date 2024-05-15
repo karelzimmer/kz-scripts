@@ -402,10 +402,10 @@ $(gettext 'Additional _user_s can be added manually:')
 $(gettext "sudo useradd --create-home --comment '_user_' [--groups adm,sudo] _\
 username_
 sudo passwd --delete --expire _username_")"
-        printf '%s\n' "$text" > "$HOME"/add_users
+        printf '%s\n' "$text" > /root/add_users
         text="
 $(gettext 'Additional _user_s can be added manually:')
-$(gettext 'See file ~/add-users.')"
+$(gettext 'See file /root/add-users.')"
     fi
     msg_info "$text"
     $option_gui || wait_for_enter

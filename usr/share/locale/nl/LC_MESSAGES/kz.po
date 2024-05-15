@@ -753,8 +753,8 @@ msgstr ""
 "_gebruikersnaam_\n"
 "sudo passwd --delete --expire _gebruikersnaam_"
 
-msgid "See file ~/add-users."
-msgstr "Raadpleeg bestand ~/add-users."
+msgid "See file /root/add-users."
+msgstr "Raadpleeg bestand /root/add-users."
 
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
