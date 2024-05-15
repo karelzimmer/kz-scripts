@@ -261,6 +261,13 @@ sudo apt-get install --yes thunderbird-l10n-nl
 sudo apt-get remove --yes thunderbird-l10n-nl
 
 
+# Install thunderbird *
+sudo apt-get install --yes usbutils
+
+# Remove thunderbird *
+sudo apt-get remove --yes usbutils
+
+
 # Install user-guest -nohost
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest user')" "$(gettext --domain=kz 'guest')" || true
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
