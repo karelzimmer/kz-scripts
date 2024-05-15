@@ -236,7 +236,7 @@ msgid ""
 "'USER@HOST'."
 msgstr ""
 
-msgid "Secure settings"
+msgid "Secure settings..."
 msgstr ""
 
 msgid "==== START list of manual installed packages ===="
@@ -778,7 +778,7 @@ msgid ""
 "Connect a USB medium with the directory $USER@$HOSTNAME."
 msgstr ""
 
-msgid "Restore settings"
+msgid "Restore settings..."
 msgstr ""
 
 msgid "Preparing restore (this can take a while)"

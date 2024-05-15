@@ -187,32 +187,9 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 }
 
 
-# This function processes the restore of user settings.
-function restore_settings {
-    if [[ $EDITION = 'desktop' ]]; then
-        title=$(gettext 'Restore settings')
-        text=$title
-        if $option_gui; then
-            restore_setting_all             |
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD)
-        else
-            text+='...'
-            msg_info "$text"
-            restore_setting_all
-        fi
-    fi
-}
-
-
 # This function restores the user settings.
-function restore_setting_all {
+function restore_settings {
+    $option_gui || msg_info "$(gettext 'Restore settings...')"
     restore_setting_desktop
     restore_setting_avatar
 }
@@ -287,24 +264,6 @@ function restore_backup {
                 --human-readable        \
                 "$source"/              \
                 "$TARGET"/              2> "$error_file" || restore_rc=$?
-    fi
-
-    text=$(gettext "Writing data from memory (this may take a while)")
-    if $option_gui; then
-        msg_log "$text"...
-        sync                            |
-        zenity  --progress              \
-                --pulsate               \
-                --auto-close            \
-                --no-cancel             \
-                --width     600         \
-                --height    50          \
-                --title     "$title"    \
-                --text      "$text"     &> >($LOGCMD)
-    else
-        text+='...'
-        msg_info "$text"
-        sync |& $LOGCMD
     fi
     if [[ $restore_rc -ne $OK ]]; then
         # shellcheck disable=SC2034

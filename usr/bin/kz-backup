@@ -186,32 +186,9 @@ lease rename to 'USER@HOST'.")"
 }
 
 
-# This function processes the backup of user settings.
-function backup_settings {
-    if [[ $EDITION = 'desktop' ]]; then
-        title=$(gettext 'Secure settings')
-        text=$title
-        if $option_gui; then
-            backup_setting_all              |
-            zenity  --progress              \
-                    --pulsate               \
-                    --auto-close            \
-                    --no-cancel             \
-                    --width     600         \
-                    --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD)
-        else
-            text+='...'
-            msg_info "$text"
-            backup_setting_all
-        fi
-    fi
-}
-
-
 # This function backups the user settings.
-function backup_setting_all {
+function backup_settings {
+    $option_gui || msg_info "$(gettext 'Secure settings...')"
     backup_setting_apps
     backup_setting_avatar
     backup_setting_desktop
