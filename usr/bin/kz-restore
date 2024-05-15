@@ -240,14 +240,13 @@ function restore_setting_avatar {
         title=$(gettext 'Set user photo')
         text="
 $(gettext "To restore the users avatar:
-1. Press the Super key[1], type 'user' and click behind Settings \
-on Users.
+1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
 4. Select avatar in Personal folder / Pictures.
 
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
-(Chromebook).")"
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
+hromebook).")"
         msg_info "$text"
         $option_gui || wait_for_enter
     fi

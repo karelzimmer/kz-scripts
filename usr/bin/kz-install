@@ -210,6 +210,7 @@ nd end with '.sh'.")"
     fi
     become_root
     check_on_ac_power
+    add_additional_users
     install_apps
 }
 
@@ -380,6 +381,28 @@ function process_input_file_by_host {
 function process_option_cat {
     less --quit-if-one-screen "$command_file"
     rm --verbose "$command_file" |& $LOGCMD
+}
+
+
+# This function displays instructions for adding additional users.
+function add_additional_users {
+    if [[ $EDITION = 'desktop' ]]; then
+        text="
+$(gettext "Additional _user_s can be added manually:
+1. Press the Super key[1], type 'user' and click behind Settings on Users.
+2. Click on Unlock and then Add User.
+3. Enter Name _user_ and Username _username_.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
+hromebook).")"
+    else
+        text="
+$(gettext "Additional _user_s can be added manually:
+sudo useradd --create-home --comment '_user_' [--groups adm,sudo] _username_
+sudo passwd --delete --expire _username_")"
+    fi
+    msg_info "$text"
+    $option_gui || wait_for_enter
 }
 
 
