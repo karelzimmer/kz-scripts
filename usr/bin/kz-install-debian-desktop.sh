@@ -191,6 +191,13 @@ sudo deluser "${SUDO_USER:-$USER}" adm
 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
 
+# Install lshw *
+sudo apt-get install --yes lshw
+
+# Remove lshw *
+sudo apt-get remove --yes lshw
+
+
 # Install repair-ntfs -nohost
 sudo apt-get install --yes ntfs-3g
 # Usage:
