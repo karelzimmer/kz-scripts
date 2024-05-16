@@ -6,9 +6,8 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-########################## Execute this block first ###########################
 # Install extra-repos *
-# Add additional repositories.
+# More repositories with packages to choose from.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
 sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -19,7 +18,7 @@ sudo apt-get update
 sudo apt-get upgrade --yes
 
 # Remove extra-repos *
-# Remove additional repositories.
+# Revert to standard number of repositories.
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
 sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
@@ -29,13 +28,13 @@ sudo apt-get upgrade --yes
 
 
 # Install update-system *
+# Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove update-system *
 # There is no command available to remove update system.
-########################## Execute this block first ###########################
 
 
 # Install anydesk -nohost

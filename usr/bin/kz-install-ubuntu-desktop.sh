@@ -6,7 +6,6 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-########################## Execute this block first ###########################
 # Install disabled-apport *
 # Suppress the program crash report.
 sudo systemctl stop apport.service
@@ -29,13 +28,13 @@ sudo apt-get install --yes ubuntu-desktop
 
 
 # Install update-system *
+# Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove update-system *
 # There is no command available to remove update system.
-########################## Execute this block first ###########################
 
 
 # Install ansible pc06
