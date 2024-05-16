@@ -397,8 +397,7 @@ $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
 hromebook).")"
     else
-        text="
-$(gettext 'Additional _user_s can be added manually:')
+        text="$(gettext 'Additional _user_s can be added manually:')
 $(gettext "# Standard:
 sudo useradd --create-home --comment '_user_' _username_
 # Administrator:
