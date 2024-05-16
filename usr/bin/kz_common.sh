@@ -266,7 +266,7 @@ E', or see the \$man_url for more information.")"
 
 # This function displays the manual page.
 function process_option_manual {
-    man --pager=cat "$PROGRAM_NAME"
+    yelp man:"$PROGRAM_NAME" &> /dev/null || man --pager=cat "$PROGRAM_NAME"
 }
 
 
