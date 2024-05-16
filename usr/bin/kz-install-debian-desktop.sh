@@ -59,6 +59,15 @@ sudo apt-get install --yes bash-completion
 sudo apt-get remove --yes bash-completion
 
 
+# Install change-grub-timeout *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=3/' /etc/default/grub
+sudo update-grub
+
+# Remove change-grub-timeout *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=5/' /etc/default/grub
+sudo update-grub
+
+
 # Install cups *
 sudo apt-get install --yes cups
 
