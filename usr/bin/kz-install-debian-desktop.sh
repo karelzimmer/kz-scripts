@@ -7,6 +7,7 @@
 ###############################################################################
 
 # Install extra-repos *
+# *** DO THIS FIRST ***
 # More repositories with packages to choose from.
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
@@ -18,6 +19,7 @@ sudo apt-get update
 sudo apt-get upgrade --yes
 
 # Remove extra-repos *
+# *** DO THIS FIRST ***
 # Revert to standard number of repositories.
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
@@ -28,12 +30,14 @@ sudo apt-get upgrade --yes
 
 
 # Install update-system *
+# *** DO THIS FIRST ***
 # Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove update-system *
+# *** DO THIS FIRST ***
 # There is no command available to remove update system.
 
 

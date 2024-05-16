@@ -7,6 +7,7 @@
 ###############################################################################
 
 # Install disabled-apport *
+# *** DO THIS FIRST ***
 # Suppress the program crash report.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
@@ -14,26 +15,31 @@ sudo rm --force --verbose /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 # Remove disabled-apport *
+# *** DO THIS FIRST ***
 # Enable the program crash report.
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
 # Install ubuntu-desktop *
+# *** DO THIS FIRST ***
 # Necessary if "Default selection", i.e. ubuntu-desktop-minimal, was chosen during installation.
 sudo apt-get install --yes ubuntu-desktop
 
 # Remove ubuntu-desktop *
+# *** DO THIS FIRST ***
 # sudo apt-get remove --yes ubuntu-desktop
 
 
 # Install update-system *
+# *** DO THIS FIRST ***
 # Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove update-system *
+# *** DO THIS FIRST ***
 # There is no command available to remove update system.
 
 
