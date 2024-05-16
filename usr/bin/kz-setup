@@ -507,23 +507,24 @@ use app Terminal, type 'kz setup \$failed_apps_text'.")
             operation=$(gettext 'reset')
         fi
         text=$(eval_gettext "APPs \$operation completed.")
-        msg_info "$text"
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
-                text="
+                text+="
 $(gettext "You will now be logged out of the computer to finish installing the\
  apps and changing user settings.")"
-                msg_info "$text"
-                $option_gui || wait_for_enter
-                gnome-session-quit --logout --no-prompt
             else
-                text="
+                text+="
 $(gettext "You must log out of the computer to finish installing the apps and \
 changing user settings.
 Type 'logout' to log out.")"
-                msg_info "$text"
-                exit $OK
             fi
+        fi
+        msg_info "$text"
+        if $logout && [[ $EDITION = 'desktop' ]]; then
+            $option_gui || wait_for_enter
+            gnome-session-quit --logout --no-prompt
+        else
+            exit $OK
         fi
     fi
     exit $OK

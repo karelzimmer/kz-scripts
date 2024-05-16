@@ -547,13 +547,14 @@ use app Terminal, type 'kz install \$failed_apps_text'.")
             operation=$(gettext 'remove')
         fi
         text=$(eval_gettext "APPs \$operation completed.")
-        msg_info "$text"
         if $reboot; then
-            text="
+            text+="
 $(gettext "The computer will now reboot to finish installing the apps and chan\
 ging system settings.")"
-            msg_info "$text"
-            $option_gui || wait_for_enter
+        fi
+        msg_info "$text"
+        $option_gui || wait_for_enter
+        if $reboot; then
             sudo systemctl reboot
         fi
     fi
