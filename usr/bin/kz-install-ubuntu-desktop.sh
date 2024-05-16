@@ -59,13 +59,6 @@ sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyri
 sudo apt-get update
 
 
-# Install appimage *
-sudo apt-get install --yes libfuse2t64
-
-# Remove appimage pc06
-sudo apt-get remove --yes libfuse2t64
-
-
 # Install bleachbit pc-van-hugo
 sudo apt-get install --yes bleachbit
 
