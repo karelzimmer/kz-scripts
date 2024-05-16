@@ -85,7 +85,6 @@ readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
 # Variables
 ###############################################################################
 
-declare     execute_command=false
 declare -a  rows=()
 
 
@@ -398,31 +397,6 @@ function process_commands {
     local       command=''
     local   -i  row=0
 
-    show_commands_before_execution
-    if $execute_command; then
-        for row in "${!rows[@]}"; do
-            action=$(
-                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
-                )
-            command=$(
-                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
-                )
-            title=$action
-            execute_command
-        done
-    fi
-}
-
-
-# This function shows the commands before they are executed.
-function show_commands_before_execution {
-    local       action=''
-    local       command=''
-    local   -i  row=0
-    local       prompt=''
-
-    text="$(gettext 'The following will be executed:')
-"
     for row in "${!rows[@]}"; do
         action=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
@@ -430,46 +404,10 @@ function show_commands_before_execution {
         command=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
-        text+="
-[$row] $action ($command)"
+        title=$action
+        $option_gui || msg_info "$action ($command):"
+        execute_command
     done
-    text+='
-'
-    prompt="$(gettext 'Proceed?')"
-    if $option_gui; then
-        text+="
-$prompt"
-        if zenity   --question                          \
-                    --no-markup                         \
-                    --width         600                 \
-                    --height        100                 \
-                    --title         "$title"            \
-                    --text          "$text"             \
-                    --ok-label      "$(gettext 'Yes')"  \
-                    --cancel-label  "$(gettext 'No')"   2> >($LOGCMD); then
-            execute_command=true
-        else
-            execute_command=false
-        fi
-    else
-        printf '\n%s\n' "$text"
-        while true; do
-            read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
-            case $REPLY in
-                [YyJj]*|'')
-                    execute_command=true
-                    break
-                    ;;
-                [Nn]*)
-                    execute_command=false
-                    break
-                    ;;
-                *)
-                    continue
-                    ;;
-            esac
-        done
-    fi
 }
 
 
