@@ -405,7 +405,7 @@ sudo useradd --create-home --comment '_user_' _username_
 sudo usermod --append --groups adm,sudo _username_'
 # User sets password on first login:
 sudo passwd --delete --expire _username_")"
-        printf '%s\n' "$text" > /root/add_users
+        printf '%s\n' "$text" > /root/add-users
         text="
 $(gettext 'Additional _user_s can be added manually:')
 $(gettext 'See file /root/add-users.')"
