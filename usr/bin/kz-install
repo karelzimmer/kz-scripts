@@ -512,7 +512,9 @@ function execute_command {
     fi
 
     check_for_active_updates
+    errexit=false
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
+    errexit=true
 }
 
 

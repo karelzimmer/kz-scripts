@@ -473,7 +473,9 @@ function execute_command {
         msg_info "         $cmd_dis"
     fi
 
+    errexit=false
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
+    errexit=true
 }
 
 

@@ -60,12 +60,12 @@ fi
 # Variables
 ###############################################################################
 
-declare -a  commandline_args=()
+declare     errexit=true
+declare     kz_deb_local_file=''
 declare     option_gui=false
 declare     text=''
 declare     title=''
-declare     kz_deb_local_file=''
-
+declare -a  commandline_args=()
 
 ###############################################################################
 # Functions
@@ -368,9 +368,12 @@ function signal {
 
     case $signal in
         err)
-            text=$(eval_gettext "Program \$PROGRAM_NAME encountered an error.")
-            msg_error "$text"
-            exit "$rc"
+            if $errexit; then
+                text=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
+or.")
+                msg_error "$text"
+                exit "$rc"
+            fi
             ;;
         exit)
             # Cleanup kz-getdeb files.
