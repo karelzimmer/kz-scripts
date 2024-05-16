@@ -399,8 +399,11 @@ hromebook).")"
     else
         text="
 $(gettext 'Additional _user_s can be added manually:')
-$(gettext "sudo useradd --create-home --comment '_user_' [--groups adm,sudo] _\
-username_
+$(gettext "# Standard:
+sudo useradd --create-home --comment '_user_' _username_
+# Administrator:
+sudo usermod --append --groups adm,sudo _username_'
+# User sets password on first login:
 sudo passwd --delete --expire _username_")"
         printf '%s\n' "$text" > /root/add_users
         text="
