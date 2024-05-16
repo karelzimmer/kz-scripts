@@ -20,7 +20,7 @@ sudo apt-get upgrade --yes
 
 # Remove extra-repos *
 # *** DO THIS FIRST *** 1/2
-# Revert to standard number of repositories.
+# Revert to standard repositories.
 sudo apt-add-repository --remove contrib
 sudo apt-add-repository --remove non-free
 sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"
