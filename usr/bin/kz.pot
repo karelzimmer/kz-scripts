@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-16 19:34+0200\n"
+"POT-Creation-Date: 2024-05-16 07:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -742,6 +742,25 @@ msgid ""
 "2. Create a bootable USB stick.\n"
 "3. Boot the computer from this USB stick.\n"
 "4. Install Linux."
+msgstr ""
+
+msgid "The following will be executed:"
+msgstr ""
+
+msgid "Proceed?"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+#, sh-format
+msgid "$prompt [Y/n]: "
+msgstr ""
+
+msgid "The following has been executed:"
 msgstr ""
 
 #, sh-format
