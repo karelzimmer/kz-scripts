@@ -49,7 +49,7 @@ readonly -a MENU1_ACTIONS=(
                 "$(gettext 'Command menu')"
                 "$(gettext 'Exit')"
             )
-readonly -a MENU1_COMMANDS=(
+readonly -a MENU1_DESCS=(
             [1]="$(gettext 'Checklist chapter 1')"
                 "$(gettext 'Checklist chapter 2')"
                 "$(gettext 'Checklist chapter 3')"
@@ -61,24 +61,24 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
             MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-readonly MENU2_HEAD="------------------ $MENU2_TITLE ------------------"
-readonly -a MENU2_ACTIONS=(
-            [1]="$(gettext 'Show WiFi information')"
-                "$(gettext 'Make backup')"
-                "$(gettext 'Install apps')"
-                "$(gettext 'Restore backup')"
-                "$(gettext 'Set up apps')"
-                "$(gettext 'Back')"
-            )
+readonly MENU2_HEAD="-------------- $MENU2_TITLE --------------"
 readonly -a MENU2_COMMANDS=(
             [1]='kz wifi'
                 'kz backup'
                 'kz install'
                 'kz restore'
                 'kz setup'
-                "$(gettext 'Installation menu')"
+                "$(gettext 'Back')"
             )
-readonly MENU2_LINES=${#MENU2_ACTIONS[@]}
+readonly -a MENU2_DESCS=(
+            [1]="$(gettext 'Show WiFi information')"
+                "$(gettext 'Make backup')"
+                "$(gettext 'Install apps')"
+                "$(gettext 'Restore backup')"
+                "$(gettext 'Set up apps')"
+                "$(gettext 'Go to installation menu')"
+            )
+readonly MENU2_LINES=${#MENU2_COMMANDS[@]}
 
 
 ###############################################################################
@@ -160,23 +160,23 @@ function process_menu1_gui {
     while true; do
         title=$MENU1_TITLE
         REPLY=$(
-            zenity  --list                                                  \
-                    --radiolist                                             \
-                    --width         520                                     \
-                    --height        420                                     \
-                    --title         "$title"                                \
-                    --text          "$(gettext 'Select a choice:')"         \
-                    --ok-label      "$(gettext 'Continue')"                 \
-                    --cancel-label  "$(gettext 'Exit')"                     \
-                    --column        "$(gettext 'CHOICE')"                   \
-                    --column        "$(gettext 'NUM')"                      \
-                    --column        "$(gettext 'ACTION')"                   \
-                    --column        "$(gettext 'DESCRIPTION')"              \
-                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_COMMANDS[1]}"    \
-                    FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_COMMANDS[2]}"    \
-                    FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_COMMANDS[3]}"    \
-                    FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_COMMANDS[4]}"    \
-                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_COMMANDS[5]}"    \
+            zenity  --list                                              \
+                    --radiolist                                         \
+                    --width         520                                 \
+                    --height        420                                 \
+                    --title         "$title"                            \
+                    --text          "$(gettext 'Select a choice:')"     \
+                    --ok-label      "$(gettext 'Continue')"             \
+                    --cancel-label  "$(gettext 'Exit')"                 \
+                    --column        "$(gettext 'CHOICE')"               \
+                    --column        "$(gettext 'NUM')"                  \
+                    --column        "$(gettext 'ACTION')"               \
+                    --column        "$(gettext 'DESCRIPTION')"          \
+                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}"   \
+                    FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}"   \
+                    FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
+                    FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
+                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
                     2> >($LOGCMD)
             ) || exit $OK
         process_menu1_choice
@@ -198,7 +198,7 @@ function process_menu1_tui {
             printf  '%3s  %-24s  %s\n'                  \
                     "$menu1_action"                     \
                     "${MENU1_ACTIONS[$menu1_action]}"   \
-                    "${MENU1_COMMANDS[$menu1_action]}"
+                    "${MENU1_DESCS[$menu1_action]}"
         done
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
@@ -252,10 +252,10 @@ function process_menu1_choice {
 
 # This function processes menu #1 choice #1.
 function process_menu1_choice1 {
-    title=${MENU1_ACTIONS[1]}
+    title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
     rows=(
-        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
-            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+        [1]="${MENU2_COMMANDS[1]}#${MENU2_DESCS[1]}"
+            "${MENU2_COMMANDS[2]}#${MENU2_DESCS[2]}"
         )
     process_commands
 }
@@ -263,8 +263,7 @@ function process_menu1_choice1 {
 
 # This function processes menu #1 choice #2.
 function process_menu1_choice2 {
-    title=${MENU1_ACTIONS[2]}
-    # shellcheck disable=SC2034
+    title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
     text="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on https://karelzimmer.nl/en, under Linux.
@@ -274,15 +273,23 @@ Roughly boils down to:
 2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
-    msg_info "$text"
+    if $option_gui; then
+        zenity  --info                  \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$text"     2> >($LOGCMD)
+    else
+        printf '%s\n' "$text"
+    fi
 }
 
 
 # This function processes menu #1 choice #3.
 function process_menu1_choice3 {
-    title=${MENU1_ACTIONS[3]}
+    title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
     rows=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+        [1]="${MENU2_COMMANDS[3]}#${MENU2_DESCS[3]}"
         )
     process_commands
 }
@@ -290,10 +297,10 @@ function process_menu1_choice3 {
 
 # This function processes menu #1 choice #4.
 function process_menu1_choice4 {
-    title=${MENU1_ACTIONS[4]}
+    title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
     rows=(
-        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+        [1]="${MENU2_COMMANDS[4]}#${MENU2_DESCS[4]}"
+            "${MENU2_COMMANDS[5]}#${MENU2_DESCS[5]}"
         )
     process_commands
 }
@@ -314,23 +321,23 @@ function process_menu2_gui {
     while true; do
         title=$MENU2_TITLE
         REPLY=$(
-            zenity  --list                                                  \
-                    --radiolist                                             \
-                    --width         520                                     \
-                    --height        420                                     \
-                    --title         "$title"                                \
-                    --text          "$(gettext 'Select a choice:')"         \
-                    --ok-label      "$(gettext 'Continue')"                 \
-                    --cancel-label  "$(gettext 'Back')"                     \
-                    --column        "$(gettext 'CHOICE')"                   \
-                    --column        "$(gettext 'NUM')"                      \
-                    --column        "$(gettext 'ACTION')"                   \
-                    --column        "$(gettext 'DESCRIPTION')"              \
-                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"    \
-                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"    \
-                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"    \
-                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_COMMANDS[4]}"    \
-                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"    \
+            zenity  --list                                              \
+                    --radiolist                                         \
+                    --width         520                                 \
+                    --height        420                                 \
+                    --title         "$title"                            \
+                    --text          "$(gettext 'Select a choice:')"     \
+                    --ok-label      "$(gettext 'Continue')"             \
+                    --cancel-label  "$(gettext 'Back')"                 \
+                    --column        "$(gettext 'CHOICE')"               \
+                    --column        "$(gettext 'NUM')"                  \
+                    --column        "$(gettext 'COMMAND')"              \
+                    --column        "$(gettext 'DESCRIPTION')"          \
+                    TRUE  1 "${MENU2_COMMANDS[1]}" "${MENU2_DESCS[1]}"  \
+                    FALSE 2 "${MENU2_COMMANDS[2]}" "${MENU2_DESCS[2]}"  \
+                    FALSE 3 "${MENU2_COMMANDS[3]}" "${MENU2_DESCS[3]}"  \
+                    FALSE 4 "${MENU2_COMMANDS[4]}" "${MENU2_DESCS[4]}"  \
+                    FALSE 5 "${MENU2_COMMANDS[5]}" "${MENU2_DESCS[5]}"  \
                     2> >($LOGCMD)
             ) || break
         process_menu2_choice
@@ -340,19 +347,19 @@ function process_menu2_gui {
 
 # This function shows and processes menu #2 in TUI mode.
 function process_menu2_tui {
-    local menu2_action=''
+    local menu2_command=''
 
     while true; do
-        printf  '\n\n%s\n\n%3s  %-25s  %s\n'    \
+        printf  '\n\n%s\n\n%3s  %-10s  %s\n'    \
                 "$MENU2_HEAD"                   \
                 "$(gettext 'NUM')"              \
-                "$(gettext 'ACTION')"           \
+                "$(gettext 'COMMAND')"          \
                 "$(gettext 'DESCRIPTION')"
-        for menu2_action in "${!MENU2_ACTIONS[@]}"; do
-            printf  '%3s  %-25s  %s\n'                  \
-                    "$menu2_action"                     \
-                    "${MENU2_ACTIONS[$menu2_action]}"   \
-                    "${MENU2_COMMANDS[$menu2_action]}"
+        for menu2_command in "${!MENU2_COMMANDS[@]}"; do
+            printf  '%3s  %-10s  %s\n'                  \
+                    "$menu2_command"                    \
+                    "${MENU2_COMMANDS[$menu2_command]}" \
+                    "${MENU2_DESCS[$menu2_command]}"
         done
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
@@ -377,9 +384,9 @@ function process_menu2_tui {
 # This function processes menu #2 choice.
 function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        title=${MENU2_ACTIONS[$REPLY]}
+        title="${MENU2_COMMANDS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         rows=(
-            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
+            [1]="${MENU2_COMMANDS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
             )
         process_commands
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
@@ -394,20 +401,21 @@ function process_menu2_choice {
 
 # This function processes the command corresponding to the choice made.
 function process_commands {
-    local       action=''
     local       command=''
+    local       description=''
     local   -i  row=0
 
     show_commands_before_execution
     if $execute_command; then
         for row in "${!rows[@]}"; do
-            action=$(
+            command=$(
                 printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
                 )
-            command=$(
+            description=$(
                 printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
                 )
-            title=$action
+            title="$command ($description)"
+            $option_gui || printf '%s\n' "$title:"
             execute_command
         done
     fi
@@ -416,22 +424,22 @@ function process_commands {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution {
-    local       action=''
     local       command=''
+    local       description=''
     local   -i  row=0
     local       prompt=''
 
     text="$(gettext 'The following will be executed:')
 "
     for row in "${!rows[@]}"; do
-        action=$(
+        command=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
             )
-        command=$(
+        description=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         text+="
-[$row] $action ($command)"
+[$row] $command ($description)"
     done
     text+='
 '

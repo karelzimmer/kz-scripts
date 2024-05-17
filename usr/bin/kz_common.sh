@@ -172,7 +172,7 @@ started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
 # This function returns an error message.
 function msg_error {
     if $option_gui; then
-        title=$(eval_gettext "Error message \$DISPLAY_NAME")
+        title=$(eval_gettext "Error message \$DISPLAY_NAME (\$PROGRAM_DESC)")
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -187,7 +187,7 @@ function msg_error {
 # This function returns an informational message.
 function msg_info {
     if $option_gui; then
-        title=$(eval_gettext "Information \$DISPLAY_NAME")
+        title=$(eval_gettext "Information \$DISPLAY_NAME (\$PROGRAM_DESC)")
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
@@ -208,7 +208,7 @@ function msg_log {
 # This function returns a warning message.
 function msg_warning {
     if $option_gui; then
-        title=$(eval_gettext "Warning \$DISPLAY_NAME")
+        title=$(eval_gettext "Warning \$DISPLAY_NAME (\$PROGRAM_DESC)")
         zenity  --warning               \
                 --width     600         \
                 --height    100         \

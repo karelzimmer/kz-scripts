@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-16 07:46+0200\n"
+"POT-Creation-Date: 2024-05-17 10:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,15 +81,15 @@ msgid "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #, sh-format
-msgid "Information $DISPLAY_NAME"
+msgid "Information $DISPLAY_NAME ($PROGRAM_DESC)"
 msgstr ""
 
 #, sh-format
-msgid "Warning $DISPLAY_NAME"
+msgid "Warning $DISPLAY_NAME ($PROGRAM_DESC)"
 msgstr ""
 
 #, sh-format
-msgid "Error message $DISPLAY_NAME"
+msgid "Error message $DISPLAY_NAME ($PROGRAM_DESC)"
 msgstr ""
 
 msgid "Common module for Python scripts"
@@ -620,6 +620,9 @@ msgid "    End spaces found."
 msgstr ""
 
 msgid "Installation menu"
+msgstr ""
+
+msgid "Go to installation menu"
 msgstr ""
 
 #, sh-format
