@@ -73,7 +73,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -87,7 +87,7 @@ function check_input {
                     text="$DISPLAY_NAME: $1: \
 $(gettext 'not allowed on a server')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -97,7 +97,7 @@ $USAGE_LINE"
                 if $option_target; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_target=true
@@ -117,7 +117,7 @@ $USAGE_LINE"
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -139,7 +139,7 @@ function check_target {
             text="$DISPLAY_NAME: $target_argument: \
 $(gettext 'directory does not exist')
 $USAGE_LINE"
-            msg_info "$text"
+            infomsg "$text"
             exit $ERROR
         fi
         target=$target_argument/$USER@$HOSTNAME
@@ -150,11 +150,11 @@ $USAGE_LINE"
             text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
-            msg_info "$text"
+            infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
-                msg_error "$text"
+                errormsg "$text"
                 exit $ERROR
             fi
         fi
@@ -166,11 +166,11 @@ Now connected:
 \$medium
 
 Disconnect media via Files.")"
-            msg_info "$text"
+            infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                msg_error "$text"
+                errormsg "$text"
                 exit $ERROR
             fi
         fi
@@ -180,7 +180,7 @@ Disconnect media via Files.")"
     if [[ -e $target_medium/backup-$HOSTNAME-$USER ]]; then
         text="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. P\
 lease rename to 'USER@HOST'.")"
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
 }
@@ -188,7 +188,7 @@ lease rename to 'USER@HOST'.")"
 
 # This function backups the user settings.
 function backup_settings {
-    $option_gui || msg_info "$(gettext 'Secure settings...')"
+    $option_gui || infomsg "$(gettext 'Secure settings...')"
     backup_setting_apps
     backup_setting_avatar
     backup_setting_desktop
@@ -206,7 +206,7 @@ function backup_setting_apps {
     local header2=$(gettext '==== START list of installed snaps ====')
     local footer2=$(gettext '==== END list of installed snaps ====')
 
-    msg_log 'Create a list of installed apps...(ignore WARNING)'
+    logmsg 'Create a list of installed apps...(ignore WARNING)'
 
     printf '%s\n' "$header1" > "$output_file"
     apt list --manual-installed 2> >($LOGCMD) >> "$output_file" || true
@@ -224,7 +224,7 @@ function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
     local output_file=$(xdg-user-dir PICTURES)/avatar
 
-    msg_log 'Copy the user avatar...'
+    logmsg 'Copy the user avatar...'
     cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
 }
 
@@ -234,7 +234,7 @@ function backup_setting_desktop {
     local input_file=''
     local output_file=$(xdg-user-dir PICTURES)/desktop
 
-    msg_log 'Copy the desktop background...'
+    logmsg 'Copy the desktop background...'
     input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed --expression='s|%20| |g'                            |
@@ -255,7 +255,7 @@ function backup_setting_desktop {
 function backup_setting_favs {
     local output_file=$(xdg-user-dir DOCUMENTS)/favs
 
-    msg_log 'Save the favorite apps...'
+    logmsg 'Save the favorite apps...'
     gsettings get                           \
               org.gnome.shell favorite-apps > "$output_file" |& $LOGCMD || true
 }
@@ -265,7 +265,7 @@ function backup_setting_favs {
 function backup_setting_release {
     local output_file=$(xdg-user-dir DOCUMENTS)/vers
 
-    msg_log 'Save the release information...'
+    logmsg 'Save the release information...'
     lsb_release --all > "$output_file" |& $LOGCMD || true
 }
 
@@ -314,7 +314,7 @@ EOF
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     if $option_gui; then
-        msg_log "$title"...
+        logmsg "$title"...
         rsync   --archive                       \
                 --verbose                       \
                 --delete                        \
@@ -334,7 +334,7 @@ EOF
                 --text      "$text"             2> >($LOGCMD) || backup_rc=$?
     else
         text+='...'
-        msg_info "$text"
+        infomsg "$text"
         rsync   --archive                       \
                 --verbose                       \
                 --human-readable                \
@@ -347,7 +347,7 @@ EOF
     rm --verbose "$exclude_file" |& $LOGCMD
     text=$(gettext "Writing data from memory (this may take a while)")
     if $option_gui; then
-        msg_log "$text"...
+        logmsg "$text"...
         sync                            |
         zenity  --progress              \
                 --pulsate               \
@@ -359,7 +359,7 @@ EOF
                 --text      "$text"     &> >($LOGCMD)
     else
         text+='...'
-        msg_info "$text"
+        infomsg "$text"
         sync |& $LOGCMD
     fi
     if [[ $backup_rc -ne $OK ]]; then
@@ -377,7 +377,7 @@ Check the rsync messages (also in \$error_file):
 Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz backup'.")"
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
     rm --verbose "$error_file" |& $LOGCMD
@@ -390,7 +390,7 @@ function term_script {
         term_script_unmount
     else
         text=$(gettext 'The backup has been made.')
-        msg_info "$text"
+        infomsg "$text"
     fi
     exit $OK
 }
@@ -413,7 +413,7 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
-        msg_log "$text"...
+        logmsg "$text"...
         umount "$target_medium"                     |& $LOGCMD || rc+=$?;   \
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
         udisksctl power-off --block-device "$dev"   |& $LOGCMD              |
@@ -428,7 +428,7 @@ function term_script_unmount {
                 2> >($LOGCMD) || rc+=$?
     else
         text+='...'
-        msg_info "$text"
+        infomsg "$text"
         umount "$target_medium"                     |& $LOGCMD || rc+=$?
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
@@ -437,12 +437,12 @@ function term_script_unmount {
         text="$(gettext 'The backup has been made.')
 
 $(gettext 'The USB medium can be removed.')"
-        msg_info "$text"
+        infomsg "$text"
     else
         text="$(gettext 'The backup has been made.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
-        msg_info "$text"
+        infomsg "$text"
     fi
 }
 

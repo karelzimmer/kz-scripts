@@ -60,7 +60,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -82,7 +82,7 @@ function check_input {
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -104,25 +104,25 @@ function check_repos {
 
 
     text=$(gettext 'Check that all repos are on branch main')...
-    msg_info "$text"
+    infomsg "$text"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             text=$(gettext "Repo \$repo not on branch main.")
-            msg_error "$text"
+            errormsg "$text"
             git status
             error_flag=true
         fi
     done
     text=$(gettext 'Check that all repos are clean')...
-    msg_info "$text"
+    infomsg "$text"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$repo"
         # Prevent false positives.
         git status |& $LOGCMD
         if ! git diff-index --quiet HEAD; then
             text=$(eval_gettext "Repo \$repo is not clean.")
-            msg_error "$text"
+            errormsg "$text"
             git status
             error_flag=true
         fi
@@ -136,11 +136,11 @@ function check_repos {
 # This function builds package kz.
 function build_package {
     text=$(gettext 'Build package and website')...
-    msg_info "$text"
+    infomsg "$text"
     # Call kz-build.
-    msg_log 'Calling kz-build...'
+    logmsg 'Calling kz-build...'
     "$SCRIPTS_REPO"/usr/bin/kz-build || exit $ERROR
-    msg_log 'Called kz-build.'
+    logmsg 'Called kz-build.'
 }
 
 
@@ -157,7 +157,7 @@ function upload_website {
     local prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
     text=$(gettext 'Upload website')...
-    msg_info "$text"
+    infomsg "$text"
     if [[ ! -f $ftp_login ]]; then
         read -rp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
@@ -171,7 +171,7 @@ function upload_website {
         # Force entering the password next time.
         rm --verbose "$ftp_login"*
         text=$(gettext 'Website upload failed.')
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
 }
@@ -181,15 +181,15 @@ function upload_website {
 function install_package {
     # Call kz-getdeb (via wget and bash as a regular user would do).
     text=$(gettext 'Install package')...
-    msg_info "$text"
-    msg_log 'Calling kz-getdeb (via wget getdeb and bash getdeb)...'
+    infomsg "$text"
+    logmsg 'Calling kz-getdeb (via wget getdeb and bash getdeb)...'
     if ! wget --output-document=- karelzimmer.nl/getdeb 2> >($LOGCMD) | bash
     then
         text=$(gettext 'Install package kz failed.')
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
-    msg_log 'Called kz-getdeb (via wget getdeb and bash getdeb).'
+    logmsg 'Called kz-getdeb (via wget getdeb and bash getdeb).'
 }
 
 

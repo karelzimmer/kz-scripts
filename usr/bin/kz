@@ -60,7 +60,7 @@ function check_input {
     local   -i  parsed_rc=0
 
     if [[ -z $* ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
 
@@ -73,7 +73,7 @@ function check_input {
                     --              "$@"
             ) || parsed_rc=$?
         if [[ $parsed_rc -ne $OK ]]; then
-            msg_info "$USAGE"
+            infomsg "$USAGE"
             exit $ERROR
         fi
         eval set -- "$parsed"
@@ -123,7 +123,7 @@ $(gettext 'NUM  COMMAND')\n"
     text+="\n
 $(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
 .]\$NORMAL")"
-    msg_info "$text"
+    infomsg "$text"
 }
 
 
@@ -135,7 +135,7 @@ function process_input {
         text="$DISPLAY_NAME: $command: \
 $(gettext "command does not exist")
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
     shift

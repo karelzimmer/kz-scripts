@@ -68,7 +68,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -90,7 +90,7 @@ function check_input {
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -125,10 +125,10 @@ function download_package {
     local kz_deb_site_file=kz_4.2.1_all.deb
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
 
-    msg_log 'Download kz deb...'
+    logmsg 'Download kz deb...'
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
-    msg_log "Prevent ...user '_apt'. - pkgAcquire::Run (13: Permission denied)"
+    logmsg "Prevent ...user '_apt'. - pkgAcquire::Run (13: Permission denied)"
     chmod --verbose o+r "$kz_deb_local_file" |& $LOGCMD
 }
 
@@ -137,7 +137,7 @@ function download_package {
 function install_package {
     local -i kz_deb_install_rc=0
 
-    msg_log 'Install. kz deb...'
+    logmsg 'Install. kz deb...'
     check_for_active_updates |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -146,31 +146,31 @@ function install_package {
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
     if [[ $kz_deb_install_rc -ne $OK ]]; then
-        msg_log 'Try installing package kz that uses xz by repackaging it.'
+        logmsg 'Try installing package kz that uses xz by repackaging it.'
         local kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
-        msg_log 'Install required packages...'
+        logmsg 'Install required packages...'
         sudo    apt-get install --yes binutils zstd     |& $LOGCMD
-        msg_log 'Extract files from the archive...'
+        logmsg 'Extract files from the archive...'
         ar      -xv --output=/tmp "$kz_deb_local_file"  |& $LOGCMD
-        msg_log 'Uncompress zstd files an re-compress them using xz...'
+        logmsg 'Uncompress zstd files an re-compress them using xz...'
         zstd    --uncompress < /tmp/control.tar.zst     |
         xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
         zstd    --uncompress < /tmp/data.tar.zst        |
         xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
-        msg_log 'Re-create the package...'
+        logmsg 'Re-create the package...'
         ar      -mcav sdsd                              \
                 "$kz_deb_local_file_xz"                 \
                 /tmp/debian-binary                      \
                 /tmp/control.tar.xz                     \
                 /tmp/data.tar.xz                        |& $LOGCMD
-        msg_log "Install the package..."
+        logmsg "Install the package..."
         sudo    DEBIAN_FRONTEND=noninteractive          \
                 apt-get                                 \
                 install                                 \
                 --reinstall                             \
                 --yes                                   \
                 "$kz_deb_local_file_xz"                 |& $LOGCMD
-        msg_log 'Cleanup...'
+        logmsg 'Cleanup...'
         rm       --verbose                              \
                 /tmp/debian-binary                      \
                 /tmp/control.tar.xz                     \
@@ -179,7 +179,7 @@ function install_package {
                 /tmp/data.tar.zst                       \
                 "$kz_deb_local_file_xz"                 |& $LOGCMD
     fi
-    msg_log 'Cleanup...'
+    logmsg 'Cleanup...'
     rm --verbose "$kz_deb_local_file" |& $LOGCMD
 }
 
@@ -204,9 +204,9 @@ $(gettext "Type 'exit' to close this window.")"
                             --infobox   "$text"         \
                             15 47
     else
-        msg_info "\n$text"
+        infomsg "\n$text"
     fi
-    msg_log 'Cleanup getdeb files...'
+    logmsg 'Cleanup getdeb files...'
     rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
     exit $OK
 }

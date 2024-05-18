@@ -54,7 +54,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -76,7 +76,7 @@ function check_input {
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -96,7 +96,7 @@ function check_dependencies {
     local escape='gettext'
 
     text=$(gettext 'Check dependencies')...
-    msg_info "$text"
+    infomsg "$text"
     check_for_active_updates
     sudo    apt-get             \
             install             \
@@ -139,16 +139,16 @@ function pull_repos {
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
     text=$(gettext 'Pull repos')...
-    msg_info "$text"
+    infomsg "$text"
     # Call gitpull.
-    msg_log 'Calling gitpull...'
+    logmsg 'Calling gitpull...'
     "$bin_repo"/gitpull
-    msg_log 'Called gitpull.'
+    logmsg 'Called gitpull.'
     printf '%b\n' "$(gettext 'Status repos')..."
     # Call gitstat.
-    msg_log 'Calling gitstat...'
+    logmsg 'Calling gitstat...'
     "$bin_repo"/gitstat
-    msg_log 'Called gitstat.'
+    logmsg 'Called gitstat.'
 }
 
 
@@ -177,7 +177,7 @@ function download_website {
         # Force entering the password next time.
         rm --verbose "$ftp_login"*
         text=$(gettext 'Website download failed.')
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
 }
@@ -186,7 +186,7 @@ function download_website {
 # This function controls the termination of the script.
 function term_script {
     text=$GREEN$(gettext 'Finished')$NORMAL
-    msg_info "$text"
+    infomsg "$text"
     exit $OK
 }
 

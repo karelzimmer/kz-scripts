@@ -73,7 +73,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -87,7 +87,7 @@ function check_input {
                     text="$DISPLAY_NAME: $1: \
 $(gettext 'not allowed on a server')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -97,7 +97,7 @@ $USAGE_LINE"
                 if $option_source; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_source=true
@@ -117,7 +117,7 @@ $USAGE_LINE"
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -139,7 +139,7 @@ function check_source {
             text="$DISPLAY_NAME: $source_argument: \
 $(gettext 'directory does not exist')
 $USAGE_LINE"
-            msg_info "$text"
+            infomsg "$text"
             exit $ERROR
         fi
         source=$source_argument/$USER@$HOSTNAME
@@ -150,11 +150,11 @@ $USAGE_LINE"
             text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
-            msg_info "$text"
+            infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
-                msg_error "$text"
+                errormsg "$text"
                 exit $ERROR
             fi
         fi
@@ -166,11 +166,11 @@ Now connected:
 \$medium
 
 Disconnect media via Files.")"
-            msg_info "$text"
+            infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
-                msg_error "$text"
+                errormsg "$text"
                 exit $ERROR
             fi
         fi
@@ -180,7 +180,7 @@ Disconnect media via Files.")"
             text=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
-            msg_error "$text"
+            errormsg "$text"
             exit $ERROR
         fi
     fi
@@ -189,7 +189,7 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the user settings.
 function restore_settings {
-    $option_gui || msg_info "$(gettext 'Restore settings...')"
+    $option_gui || infomsg "$(gettext 'Restore settings...')"
     restore_setting_desktop
     restore_setting_avatar
 }
@@ -200,7 +200,7 @@ function restore_setting_desktop {
     local input_file=$(xdg-user-dir PICTURES)/desktop
 
     if [[ -f $input_file ]]; then
-        msg_log 'Restore the desktop background...'
+        logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"
@@ -213,7 +213,7 @@ function restore_setting_avatar {
     local input_file=$(xdg-user-dir PICTURES)/avatar
 
     if [[ -f $input_file ]]; then
-        msg_log 'Restore the user avatar...'
+        logmsg 'Restore the user avatar...'
         title=$(gettext 'Set user photo')
         text="
 $(gettext "To restore the users avatar:
@@ -224,7 +224,7 @@ $(gettext "To restore the users avatar:
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
 hromebook).")"
-        msg_info "$text"
+        infomsg "$text"
         $option_gui || wait_for_enter
     fi
 }
@@ -241,7 +241,7 @@ function restore_backup {
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
     if $option_gui; then
-        msg_log "$title"...
+        logmsg "$title"...
         rsync   --archive               \
                 --verbose               \
                 "$source"/              \
@@ -258,7 +258,7 @@ function restore_backup {
                 --text      "$text"     2> >($LOGCMD) || restore_rc=$?
     else
         text+='...'
-        msg_info "$text"
+        infomsg "$text"
         rsync   --archive               \
                 --verbose               \
                 --human-readable        \
@@ -280,7 +280,7 @@ Check the rsync messages (also in \$error_file):
 Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz restore'.")
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
     rm --verbose "$error_file" |& $LOGCMD
@@ -293,7 +293,7 @@ function term_script {
         term_script_unmount
     else
         text=$(gettext 'The backup has been restored.')
-        msg_info "$text"
+        infomsg "$text"
     fi
     exit $OK
 }
@@ -316,7 +316,7 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
-        msg_log "$text"...
+        logmsg "$text"...
         umount "$source_medium"                     |& $LOGCMD || rc+=$?;   \
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
         udisksctl power-off --block-device "$dev"   |& $LOGCMD              |
@@ -331,7 +331,7 @@ function term_script_unmount {
                 2> >($LOGCMD) || rc=$?
     else
         text+='...'
-        msg_info "$text"
+        infomsg "$text"
         umount "$source_medium"                     |& $LOGCMD || rc+=$?
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
@@ -340,12 +340,12 @@ function term_script_unmount {
         text="$(gettext 'The backup has been restored.')
 
 $(gettext 'The USB medium can be removed.')"
-        msg_info "$text"
+        infomsg "$text"
     else
         text="$(gettext 'The backup has been restored.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
-        msg_info "$text"
+        infomsg "$text"
 
     fi
 }

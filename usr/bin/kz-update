@@ -50,7 +50,7 @@ def perform_repair():
     This function runs a repair of Debian packages.
     """
     text = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.msg_info(PROGRAM_NAME, text)
+    kz_common.infomsg(PROGRAM_NAME, text)
 
     command = 'sudo dpkg --configure --pending'
     perform_command(command)
@@ -70,7 +70,7 @@ def perform_update():
     This function updates installed Debian packages.
     """
     text = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
-    kz_common.msg_info(PROGRAM_NAME, text)
+    kz_common.infomsg(PROGRAM_NAME, text)
 
     command = 'sudo apt-get update'
     perform_command(command)
@@ -87,7 +87,7 @@ def perform_cleanup():
     This function performs a Debian packages and snap packages cleanup.
     """
     text = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
-    kz_common.msg_info(PROGRAM_NAME, text)
+    kz_common.infomsg(PROGRAM_NAME, text)
 
     command = 'sudo apt-get autoclean --yes'
     perform_command(command)
@@ -110,19 +110,19 @@ def perform_command(command):
     This function executes a Bourne-Again SHell command.
     """
     text = f'{command}'
-    kz_common.msg_info(PROGRAM_NAME, text)
+    kz_common.infomsg(PROGRAM_NAME, text)
     kz_common.check_for_active_updates(PROGRAM_NAME)
     try:
         subprocess.run({command}, shell=True, check=True,
                        executable='/usr/bin/bash')
     except Exception as exc:
         text = str(exc)
-        kz_common.msg_log(PROGRAM_NAME, text)
+        kz_common.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.msg_error(PROGRAM_NAME, text)
+        kz_common.errormsg(PROGRAM_NAME, text)
         sys.exit(kz_common.ERROR)
     else:
-        kz_common.msg_info(PROGRAM_NAME, '')
+        kz_common.infomsg(PROGRAM_NAME, '')
 
 
 def check_reboot():
@@ -134,17 +134,17 @@ def check_reboot():
             text = _('*** The computer needs to be restarted to complete the i\
 nstallation of updates ***')
             text = f"{kz_common.RED}{text}{kz_common.NORMAL}"
-            kz_common.msg_info(PROGRAM_NAME, text)
+            kz_common.infomsg(PROGRAM_NAME, text)
     except FileNotFoundError as fnf:
         text = str(fnf)
-        kz_common.msg_log(PROGRAM_NAME, text)
+        kz_common.logmsg(PROGRAM_NAME, text)
         text = f"{kz_common.GREEN}{_('Finished')}{kz_common.NORMAL}"
-        kz_common.msg_info(PROGRAM_NAME, text)
+        kz_common.infomsg(PROGRAM_NAME, text)
     except Exception as exc:
         text = str(exc)
-        kz_common.msg_log(PROGRAM_NAME, text)
+        kz_common.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.msg_error(PROGRAM_NAME, text)
+        kz_common.errormsg(PROGRAM_NAME, text)
         sys.exit(kz_common.ERROR)
 
 

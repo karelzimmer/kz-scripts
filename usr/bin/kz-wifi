@@ -59,7 +59,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -73,7 +73,7 @@ function check_input {
                     text="$DISPLAY_NAME: $1: \
 $(gettext 'not allowed on a server')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -92,7 +92,7 @@ $USAGE_LINE"
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -120,7 +120,7 @@ $text"
             text=$(gettext 'No WiFi device found.')
         fi
     fi
-    msg_info "$text"
+    infomsg "$text"
 }
 
 

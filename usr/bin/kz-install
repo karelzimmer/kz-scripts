@@ -90,7 +90,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -111,7 +111,7 @@ function check_input {
                 if $option_file; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_file=true
@@ -123,7 +123,7 @@ $USAGE_LINE"
                     text="$DISPLAY_NAME: $1: \
 $(gettext 'not allowed on a server')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -175,7 +175,7 @@ function process_input {
         if [[ ! $(basename "$file_argument") == $PROGRAM_NAME-*.sh ]]; then
             text="$(eval_gettext "Filename must start with '\$PROGRAM_NAME-' a\
 nd end with '.sh'.")"
-            msg_error "$text"
+            errormsg "$text"
             exit $ERROR
         fi
         input_file=$file_argument
@@ -183,7 +183,7 @@ nd end with '.sh'.")"
     if [[ ! -f $input_file ]]; then
         text=$(eval_gettext "No install file found, looked for '\$input_file'.\
 ")
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
 
@@ -205,7 +205,7 @@ nd end with '.sh'.")"
     fi
 
     if [[ $UID -ne 0 ]]; then
-        msg_log 'Delete the kz-install command file created as non-root...'
+        logmsg 'Delete the kz-install command file created as non-root...'
         rm --verbose "$command_file" |& $LOGCMD
     fi
     become_root
@@ -242,7 +242,7 @@ $(eval_gettext "The default FILE is: \$input_file")"
 
 $USAGE_LINE"
     fi
-    msg_info "$text"
+    infomsg "$text"
 }
 
 
@@ -280,7 +280,7 @@ SPLAY_NAME --cat")"
 
 $USAGE_LINE"
     fi
-    msg_info "$text"
+    infomsg "$text"
 }
 
 
@@ -295,7 +295,7 @@ function process_argument_app {
     if $app_not_found; then
         text="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
 ")"
-        msg_info "$text"
+        infomsg "$text"
         rm --verbose "$command_file" |& $LOGCMD
         exit $ERROR
     fi
@@ -343,7 +343,7 @@ function process_input_file_by_app {
     if $no_app_match; then
         app_not_found=true
         text="$DISPLAY_NAME: $app_argument: $(gettext 'app not found')"
-        msg_info "$text"
+        infomsg "$text"
     fi
 }
 
@@ -409,7 +409,7 @@ sudo passwd --delete --expire _username_")"
 $(gettext 'Additional _user_s can be added manually:')
 $(gettext 'See file /root/add-users.')"
     fi
-    msg_info "$text"
+    infomsg "$text"
     $option_gui || wait_for_enter
 }
 
@@ -418,7 +418,7 @@ $(gettext 'See file /root/add-users.')"
 function install_apps {
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
-    msg_log "$title"...
+    logmsg "$title"...
     if $option_gui; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
@@ -452,7 +452,7 @@ function process_command_file {
     if ! $option_gui; then
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        msg_info "$text"
+        infomsg "$text"
     fi
 
     while read -r command_record; do
@@ -499,7 +499,7 @@ function execute_command {
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
-            msg_info "$app_name_line"
+            infomsg "$app_name_line"
         fi
         if [[ ${#cmd} -gt $COLUMNS ]]; then
             # Width 12 characters less, 9 for spaces and 3 for ellipsis.
@@ -508,7 +508,7 @@ function execute_command {
         else
             cmd_dis=$cmd
         fi
-        msg_info "         $cmd_dis"
+        infomsg "         $cmd_dis"
     fi
 
     check_for_active_updates
@@ -525,7 +525,7 @@ function term_script {
 
     if $no_commands_found; then
         text=$(gettext 'No commands to execute.' )
-        msg_info "$text"
+        infomsg "$text"
         exit $OK
     fi
 
@@ -539,7 +539,7 @@ rrors:
 Try installing the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app Terminal, type 'kz install \$failed_apps_text'.")
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     else
         if $option_remove; then
@@ -552,7 +552,7 @@ use app Terminal, type 'kz install \$failed_apps_text'.")
 $(gettext "The computer will now reboot to finish installing the apps and chan\
 ging system settings.")"
         fi
-        msg_info "$text"
+        infomsg "$text"
         $option_gui || wait_for_enter
         if $reboot; then
             sudo systemctl reboot

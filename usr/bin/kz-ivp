@@ -56,7 +56,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -78,7 +78,7 @@ function check_input {
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -93,7 +93,7 @@ function process_input {
     dir=/usr/share/locale/nl/LC_MESSAGES
     if [[ ! -e $dir/kz.mo ]]; then
         text=$(eval_gettext "Message catalog \$dir/kz.mo not found.")
-        msg_error "$text"
+        errormsg "$text"
         error_flag=true
     fi
 
@@ -120,7 +120,7 @@ function check_script {
     # Script.
     if ! "$scriptname" --version |& $LOGCMD; then
         text=$(eval_gettext "Script \$scriptname returned an error.")
-        msg_error "$text"
+        errormsg "$text"
         error_flag=true
     fi
 
@@ -130,7 +130,7 @@ function check_script {
         if [[ ! -e $dir/$scriptname.desktop ]]; then
             text=$(eval_gettext "Desktop configuration file \$dir/\$scriptname\
 .desktop not found.")
-            msg_error "$text"
+            errormsg "$text"
             error_flag=true
         fi
     fi
@@ -141,7 +141,7 @@ function check_script {
         if [[ ! -e $dir/nl.karelzimmer.$scriptname.policy ]]; then
             text=$(eval_gettext "PolicyKit action definition file \$dir/nl.kar\
 elzimmer.\$scriptname.policy not found.")
-            msg_error "$text"
+            errormsg "$text"
             error_flag=true
         fi
     fi
@@ -151,7 +151,7 @@ elzimmer.\$scriptname.policy not found.")
     if [[ ! -e $dir/$scriptname ]]; then
         text=$(eval_gettext "Tab completion script \$dir/\$scriptname not foun\
 d.")
-        msg_error "$text"
+        errormsg "$text"
         error_flag=true
     fi
 
@@ -159,13 +159,13 @@ d.")
     dir=/usr/share/man/man1
     if [[ ! -e $dir/$scriptname.1.gz ]]; then
         text=$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")
-        msg_error "$text"
+        errormsg "$text"
         error_flag=true
     fi
     dir=/usr/share/man/nl/man1
     if [[ ! -e $dir/$scriptname.1.gz ]]; then
         text=$(eval_gettext "Manual \$dir/\$scriptname.1.gz not found.")
-        msg_error "$text"
+        errormsg "$text"
         error_flag=true
     fi
 }
@@ -175,11 +175,11 @@ d.")
 function term_script {
     if $error_flag; then
         text=$(gettext 'Fix all the messages above.')
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     else
         text=$GREEN$(gettext 'Finished')$NORMAL
-        msg_info "$text"
+        infomsg "$text"
         exit $OK
     fi
 }

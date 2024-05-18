@@ -82,11 +82,11 @@ function become_root {
         if $option_gui; then
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD
-            msg_log "restart (pkexec $program_exec ${commandline_args[*]})"
+            logmsg "restart (pkexec $program_exec ${commandline_args[*]})"
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            msg_log "restart (exec sudo $program_exec ${commandline_args[*]})"
+            logmsg "restart (exec sudo $program_exec ${commandline_args[*]})"
             exec sudo "$program_exec" "${commandline_args[@]}"
         fi
     fi
@@ -102,7 +102,7 @@ function become_root_check {
         return $OK
     else
         text=$(gettext 'Already performed by the administrator.')
-        msg_info "$text"
+        infomsg "$text"
         return $ERROR
     fi
 }
@@ -119,7 +119,7 @@ function check_for_active_updates {
                 /var/lib/dpkg/lock-frontend                 \
                 &> /dev/null; do
         text="$(gettext 'Wait for another package manager to finish...')"
-        msg_log "$text"
+        logmsg "$text"
         sleep 1
     done
 }
@@ -135,8 +135,38 @@ function check_on_ac_power {
         text=$(gettext "The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.")
-        msg_info "$text"
+        infomsg "$text"
         $option_gui || wait_for_enter
+    fi
+}
+
+
+# This function returns an error message.
+function errormsg {
+    if $option_gui; then
+        title=$(eval_gettext "Error message \$DISPLAY_NAME (\$PROGRAM_DESC)")
+        zenity  --error                 \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$*"        2> >($LOGCMD) || true
+    else
+        printf "$RED%b$NORMAL\n" "$*" >&2
+    fi
+}
+
+
+# This function returns an informational message.
+function infomsg {
+    if $option_gui; then
+        title=$(eval_gettext "Information \$DISPLAY_NAME (\$PROGRAM_DESC)")
+        zenity  --info                  \
+                --width     600         \
+                --height    100         \
+                --title     "$title"    \
+                --text      "$*"        2> >($LOGCMD) || true
+    else
+        printf '%b\n' "$*"
     fi
 }
 
@@ -160,7 +190,7 @@ function init_script {
 
     text="==== START logs for script $PROGRAM_NAME ====
 started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
-    msg_log "$text"
+    logmsg "$text"
 
     commandline_args=("$@")
     readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
@@ -168,38 +198,8 @@ started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
 }
 
 
-# This function returns an error message.
-function msg_error {
-    if $option_gui; then
-        title=$(eval_gettext "Error message \$DISPLAY_NAME (\$PROGRAM_DESC)")
-        zenity  --error                 \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$*"        2> >($LOGCMD) || true
-    else
-        printf "$RED%b$NORMAL\n" "$*" >&2
-    fi
-}
-
-
-# This function returns an informational message.
-function msg_info {
-    if $option_gui; then
-        title=$(eval_gettext "Information \$DISPLAY_NAME (\$PROGRAM_DESC)")
-        zenity  --info                  \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$*"        2> >($LOGCMD) || true
-    else
-        printf '%b\n' "$*"
-    fi
-}
-
-
 # This function records a message to the log.
-function msg_log {
+function logmsg {
     printf '%b\n' "$*" |& $LOGCMD
 }
 
@@ -271,7 +271,7 @@ function process_option_version {
         build_id=$(cat /etc/kz-build.id)
     else
         text=$(gettext 'Build ID cannot be determined')
-        msg_log "$text"
+        logmsg "$text"
         build_id=$text
     fi
 
@@ -280,7 +280,7 @@ function process_option_version {
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.\
 0>.")"
-    msg_info "$text"
+    infomsg "$text"
 }
 
 
@@ -348,14 +348,14 @@ function signal {
     esac
     text="signal: $signal, line: $lineno, function: $function, command: "
     text+="$command, code: $rc ($rc_desc)"
-    msg_log "$text"
+    logmsg "$text"
 
     case $signal in
         err)
             if $errexit; then
                 text=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
 or.")
-                msg_error "$text"
+                errormsg "$text"
                 exit "$rc"
             fi
             ;;
@@ -368,13 +368,13 @@ or.")
                 "$kz_deb_local_file"    |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
-            msg_log "$text"
+            logmsg "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
         *)
             text=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
-            msg_error "$text"
+            errormsg "$text"
             exit "$rc"
             ;;
     esac
@@ -385,6 +385,6 @@ or.")
 function wait_for_enter {
     local prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
 
-    msg_log "$prompt"
+    logmsg "$prompt"
     read -rp "$prompt" < /dev/tty
 }

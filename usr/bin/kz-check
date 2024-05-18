@@ -56,7 +56,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -78,7 +78,7 @@ function check_input {
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -92,12 +92,12 @@ function process_input {
     local scripts_repo=$HOME/kz-scripts
 
     text=$(gettext 'Check scripts'):
-    msg_info "$text"
+    infomsg "$text"
     cd "$scripts_repo"
     while read -r script; do
         scriptdir=$(realpath "$(dirname "$script")")
         scriptname=$(basename "$script")
-        msg_info "  $(realpath "$script")"
+        infomsg "  $(realpath "$script")"
         case $scriptname in
             *.png)
                 continue
@@ -168,7 +168,7 @@ function check_code {
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED$(gettext "    Unknown script. Function check_code cannot check script cod\
 e.")$NORMAL"
-        msg_info "$text"
+        infomsg "$text"
         error_flag=true
     fi
 }
@@ -197,7 +197,7 @@ function check_record_length {
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_le\
 ngth_found).")$NORMAL"
-        msg_info "$text"
+        infomsg "$text"
         error_flag=true
     fi
 }
@@ -226,7 +226,7 @@ function check_tags {
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $(gettext '    Flagged annotation found.')"
-        msg_info "$text"
+        infomsg "$text"
         grep    --line-number           \
                 --regexp="$bug"         \
                 --regexp="$fixme"       \
@@ -245,7 +245,7 @@ function check_trailing_spaces {
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $RED$(gettext '    End spaces found.')$NORMAL"
-        msg_info "$text"
+        infomsg "$text"
         grep    --line-number --regexp=' ''$' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
         error_flag=true
@@ -257,11 +257,11 @@ $RED$(gettext '    End spaces found.')$NORMAL"
 function term_script {
     if $error_flag; then
         text=$(gettext 'Fix all the messages above.')
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     else
         text=$GREEN$(gettext 'Finished')$NORMAL
-        msg_info "$text"
+        infomsg "$text"
         exit $OK
     fi
 }

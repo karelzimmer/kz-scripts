@@ -106,7 +106,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -120,7 +120,7 @@ function check_input {
                     text="$DISPLAY_NAME: $1: \
 $(gettext 'not allowed on a server')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -139,7 +139,7 @@ $USAGE_LINE"
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 }
@@ -243,7 +243,7 @@ function process_menu1_choice {
             ;;
         *)
             text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-            msg_error "$text"
+            errormsg "$text"
             exit $ERROR
             ;;
     esac
@@ -393,7 +393,7 @@ function process_menu2_choice {
         process_menu1_tui
     else
         text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-        msg_error "$text"
+        errormsg "$text"
         exit $ERROR
     fi
 }
@@ -415,7 +415,7 @@ function process_commands {
                 printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
                 )
             title="$command ($description)"
-            $option_gui || printf '\n%b\n' "${BOLD}==== $title ====${NORMAL}"
+            $option_gui || infomsg "\n${BOLD}==== $title ====${NORMAL}"
             execute_command
         done
     fi
@@ -499,7 +499,7 @@ function execute_command {
         gui_option='--gui'
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
-    msg_log "$command: rc=$rc"
+    logmsg "$command: rc=$rc"
 }
 
 

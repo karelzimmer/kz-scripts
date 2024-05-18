@@ -74,20 +74,20 @@ def become_root(PROGRAM_NAME):
             else:
                 exec_sudo += ' ' + str(sys.argv[arg_num])
         text = f'restart ({exec_sudo})'
-        msg_log(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, text)
 
         try:
             subprocess.run(exec_sudo, shell=True, check=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            msg_error(PROGRAM_NAME, text)
+            errormsg(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         except Exception as exc:
             text = str(exc)
-            msg_log(PROGRAM_NAME, text)
+            logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            msg_error(PROGRAM_NAME, text)
+            errormsg(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         else:
@@ -107,7 +107,7 @@ def become_root_check(PROGRAM_NAME):
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception:
         text = _('Already performed by the administrator.')
-        msg_info(PROGRAM_NAME, text)
+        infomsg(PROGRAM_NAME, text)
         return False
     else:
         return True
@@ -133,7 +133,7 @@ def check_for_active_updates(PROGRAM_NAME):
             break
         else:
             text = _('Wait for another package manager to finish...')
-            msg_log(PROGRAM_NAME, text)
+            logmsg(PROGRAM_NAME, text)
             time.sleep(1)
 
 
@@ -147,20 +147,20 @@ def check_on_ac_power(PROGRAM_NAME):
         text = _('The computer now uses only the battery for power.\n\n'
                  'It is recommended to connect the computer to the wall socket\
 .')
-        msg_info(PROGRAM_NAME, text)
+        infomsg(PROGRAM_NAME, text)
         try:
             text = f"\n{_('Press the Enter key to continue [Enter]: ')}"
             input(text)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            msg_error(PROGRAM_NAME, text)
+            errormsg(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         except Exception as exc:
             text = str(exc)
-            msg_log(PROGRAM_NAME, text)
+            logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            msg_error(PROGRAM_NAME, text)
+            errormsg(PROGRAM_NAME, text)
             term_script(PROGRAM_NAME)
             sys.exit(ERROR)
         else:
@@ -172,24 +172,24 @@ def init_script(PROGRAM_NAME):
     This function performs initial actions.
     """
     text = f'==== START logs for script {PROGRAM_NAME} ===='
-    msg_log(PROGRAM_NAME, text)
+    logmsg(PROGRAM_NAME, text)
 
 
-def msg_error(PROGRAM_NAME, text):
+def errormsg(PROGRAM_NAME, text):
     """
     This function returns an error message.
     """
     print(f'{RED}{text}{NORMAL}')
 
 
-def msg_info(PROGRAM_NAME, text):
+def infomsg(PROGRAM_NAME, text):
     """
     This function returns an informational message.
     """
     print(f'{text}')
 
 
-def msg_log(PROGRAM_NAME, text):
+def logmsg(PROGRAM_NAME, text):
     """
     This function records a message to the log.
     """
@@ -245,7 +245,7 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
             f"{_('  -v, --version  print program version')}\n\n"
             f'''{_("Type 'man {}' or see the {} for more information.").
                  format(DISPLAY_NAME, man_url)}''')
-    msg_info(PROGRAM_NAME, text)
+    infomsg(PROGRAM_NAME, text)
 
 
 def process_option_manual(PROGRAM_NAME):
@@ -258,9 +258,9 @@ def process_option_manual(PROGRAM_NAME):
                        stderr=subprocess.DEVNULL)
     except Exception as exc:
         text = str(exc)
-        msg_log(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        msg_error(PROGRAM_NAME, text)
+        errormsg(PROGRAM_NAME, text)
         term_script(PROGRAM_NAME)
         sys.exit(ERROR)
     else:
@@ -275,7 +275,7 @@ def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
             ' [-h|--help] [-m|--manual] [-u|--usage] [-v|--version]\n\n'
             f'''{_("Type '{} --help' for more information.").
                  format(DISPLAY_NAME)}''')
-    msg_info(PROGRAM_NAME, text)
+    infomsg(PROGRAM_NAME, text)
 
 
 def process_option_version(PROGRAM_NAME):
@@ -289,15 +289,15 @@ def process_option_version(PROGRAM_NAME):
             build_id = f'{fh.read()}'
     except FileNotFoundError as fnf:
         text = str(fnf)
-        msg_log(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, text)
         text = _('Build ID cannot be determined')
-        msg_log(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, text)
         build_id = text
     except Exception as exc:
         text = str(exc)
-        msg_log(PROGRAM_NAME, text)
+        logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        msg_error(PROGRAM_NAME, text)
+        errormsg(PROGRAM_NAME, text)
         term_script(PROGRAM_NAME)
         sys.exit(ERROR)
     finally:
@@ -305,7 +305,7 @@ def process_option_version(PROGRAM_NAME):
         text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         text += _('CC0 1.0 Universal <https://creativecommons.org/publicdomain\
 /zero/1.0>.')
-        msg_info(PROGRAM_NAME, text)
+        infomsg(PROGRAM_NAME, text)
 
 
 def term_script(PROGRAM_NAME):
@@ -313,7 +313,7 @@ def term_script(PROGRAM_NAME):
     This function controls the termination of the script.
     """
     text = f'==== END logs for script {PROGRAM_NAME} ===='
-    msg_log(PROGRAM_NAME, text)
+    logmsg(PROGRAM_NAME, text)
 
 
 ###############################################################################
@@ -322,4 +322,4 @@ def term_script(PROGRAM_NAME):
 
 if __name__ == '__main__':
     text = _('{}: i am a module').format(MODULE_NAME)
-    msg_info(MODULE_NAME, text)
+    infomsg(MODULE_NAME, text)

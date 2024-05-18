@@ -84,7 +84,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -98,7 +98,7 @@ function check_input {
                     text="$DISPLAY_NAME: $1: \
 $(gettext 'not allowed on a server')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_gui=true
@@ -118,7 +118,7 @@ $USAGE_LINE"
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 
@@ -194,7 +194,7 @@ request_input() {
         text="
 $text.
 $(gettext "If you do not specify, the value in [] is used as the response.")"
-        msg_info "$text"
+        infomsg "$text"
         read -rp "
 $quest2? [$nas_ip_address]: "
         [[ -z $REPLY ]] || nas_ip_address=$REPLY
@@ -255,7 +255,7 @@ process_input() {
 
 # This function check and installs dependencies.
 function check_dependencies {
-    msg_log 'Check_dependencies...'
+    logmsg 'Check_dependencies...'
     check_for_active_updates
     sudo apt-get install --yes cifs-utils samba
 }
@@ -263,7 +263,7 @@ function check_dependencies {
 
 # This function creates the secret needed to log in to the NAS.
 create_nas_login() {
-    msg_log 'Create NAS login...'
+    logmsg 'Create NAS login...'
     text="username=$nas_user_name\npassword=$nas_password"
     printf '%b\n' "$text" > "$NAS_LOGIN"
     chmod --verbose '600' "$NAS_LOGIN" |& $LOGCMD
@@ -272,7 +272,7 @@ create_nas_login() {
 
 # This function creates the systemd unit mount file.
 create_systemd_unit_file() {
-    msg_log 'Create systemd unit file...'
+    logmsg 'Create systemd unit file...'
     printf '%s\n' "[Unit]
 Description=Mount NAS Directory
 
@@ -290,7 +290,7 @@ WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 
 # This function allows the NAS to be connected ad hoc.
 mount_nas() {
-    msg_log 'Mount NAS...'
+    logmsg 'Mount NAS...'
     systemctl enable "$SYSTEMD_MOUNT_FILE" |& $LOGCMD
     systemctl start "$SYSTEMD_MOUNT_FILE" |& $LOGCMD || true
     systemctl daemon-reload |& $LOGCMD
@@ -305,7 +305,7 @@ The NAS should be available at '\$NAS_MOUNT_POINT'.
 
 Deactivate the systemd mount file and remove the NAS login with the following \
 commands:")
-    msg_info "$text
+    infomsg "$text
 [1] sudo systemctl disable $SYSTEMD_MOUNT_FILE
 [2] sudo rm $NAS_LOGIN"
     exit $OK

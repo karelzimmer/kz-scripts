@@ -90,7 +90,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        msg_info "$USAGE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -99,7 +99,7 @@ function check_input {
     if [[ $EDITION = 'server' ]]; then
         text="$DISPLAY_NAME: $1: $(gettext 'not allowed on a server')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 
@@ -109,7 +109,7 @@ $USAGE_LINE"
                 if $option_addfavaft; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_addfavaft=true
@@ -120,7 +120,7 @@ $USAGE_LINE"
                 if $option_addfavbef; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_addfavbef=true
@@ -131,7 +131,7 @@ $USAGE_LINE"
                 if $option_delfav; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_delfav=true
@@ -150,7 +150,7 @@ $USAGE_LINE"
                 if $option_addappfolder; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_addappfolder=true
@@ -161,7 +161,7 @@ $USAGE_LINE"
                 if $option_delappfolder; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
-                    msg_info "$text"
+                    infomsg "$text"
                     exit $ERROR
                 fi
                 option_delappfolder=true
@@ -181,7 +181,7 @@ $USAGE_LINE"
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE_LINE"
-        msg_info "$text"
+        infomsg "$text"
         exit $ERROR
     fi
 
@@ -270,7 +270,7 @@ function process_option_list  {
     text+="\n$(gsettings get org.gnome.shell favorite-apps)"
     text+="\n\n$(gettext 'App folders:')"
     text+="\n$(gsettings get org.gnome.desktop.app-folders folder-children)"
-    msg_info "$text"
+    infomsg "$text"
 }
 
 
@@ -335,7 +335,7 @@ function capture_gui_changes {
     config_a_file=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
     save_configuration_database A "$config_a_file"
     text=$(gettext 'Now make the change in the graphical workspace.')
-    msg_info "$text"
+    infomsg "$text"
     wait_for_enter
     config_b_file=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
     save_configuration_database B "$config_b_file"
@@ -357,7 +357,7 @@ function save_configuration_database {
             "$output_file"
 
     text=$(eval_gettext "Config database content captured (\$fase).")
-    msg_info "$text"
+    infomsg "$text"
 }
 
 
@@ -374,7 +374,7 @@ function report_database_changes {
         diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
         )
     text+="\n\n$(gettext 'When CHANGEs execute: gsettings set CHANGE')"
-    msg_info "$text"
+    infomsg "$text"
 }
 
 
