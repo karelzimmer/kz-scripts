@@ -129,6 +129,7 @@ $USAGE_LINE"
 
 # This function asks the user for input.
 request_input() {
+    local prompt=''
     local quest1=$(eval_gettext "Does the NAS have a fixed IP address such as \
 \$nas_ip_address?")
     local quest2=$(gettext 'IP address of the NAS')
@@ -137,27 +138,26 @@ request_input() {
     local quest5=$(gettext 'Share name of this user on the NAS')
 
     title=$(gettext 'Question')
-    text=$quest1
     if $option_gui; then
         if ! zenity --question              \
                     --no-markup             \
                     --width     400         \
                     --height    100         \
                     --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD); then
+                    --text      "$quest1"   2> >($LOGCMD); then
             title=$(gettext 'Notification')
-            text=$NAS_FIXED_IP_ADDRESS
-            zenity  --info                  \
-                    --no-markup             \
-                    --width     500         \
-                    --height    100         \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD) || true
+            zenity  --info                              \
+                    --no-markup                         \
+                    --width     500                     \
+                    --height    100                     \
+                    --title     "$title"                \
+                    --text      "$NAS_FIXED_IP_ADDRESS" 2> >($LOGCMD) || true
             exit $OK
         fi
     else
         while true; do
-            read -rp "$(eval_gettext "\$quest1 [y/N]: ")"
+            prompt=$(eval_gettext "\$quest1 [y/N]: ")
+            read -rp "$prompt"
             case $REPLY in
                 [YyJj]*)
                     break
