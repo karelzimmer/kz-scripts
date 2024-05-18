@@ -415,7 +415,7 @@ function process_commands {
                 printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
                 )
             title="$command ($description)"
-            $option_gui || printf '\n%s\n' "$title:"
+            $option_gui || printf '\n%s\n' "==== $title ===="
             execute_command
         done
     fi
