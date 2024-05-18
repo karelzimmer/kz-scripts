@@ -150,7 +150,7 @@ $USAGE_LINE"
             text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
-            msg_warning "$text"
+            msg_info "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $medium ]]; then
@@ -166,7 +166,7 @@ Now connected:
 \$medium
 
 Disconnect media via Files.")"
-            msg_warning "$text"
+            msg_info "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
@@ -345,7 +345,7 @@ $(gettext 'The USB medium can be removed.')"
         text="$(gettext 'The backup has been restored.')
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
-        msg_warning "$text"
+        msg_info "$text"
 
     fi
 }

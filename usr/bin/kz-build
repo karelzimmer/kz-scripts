@@ -137,7 +137,7 @@ function report_repos {
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]; then
             text=$(eval_gettext "Repo \$repo not on branch main.")
-            msg_warning "$text"
+            msg_info "$text"
         fi
     done
     text=$(gettext 'Show repos which are not clean')...
@@ -148,7 +148,7 @@ function report_repos {
         git status |& $LOGCMD
         if ! git diff-index --quiet HEAD; then
             text=$(eval_gettext "Repo \$repo is not clean.")
-            msg_warning "$text"
+            msg_info "$text"
             git status
         fi
     done

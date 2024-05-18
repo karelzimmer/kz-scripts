@@ -225,7 +225,7 @@ function check_tags {
             "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$YELLOW$(gettext '    Flagged annotation found.')$NORMAL"
+$(gettext '    Flagged annotation found.')"
         msg_info "$text"
         grep    --line-number           \
                 --regexp="$bug"         \

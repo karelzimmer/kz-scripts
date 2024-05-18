@@ -49,7 +49,7 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
-    text = f"{kz_common.YELLOW}==== {_('Repair')} ===={kz_common.NORMAL}\n"
+    text = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
     kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo dpkg --configure --pending'
@@ -69,7 +69,7 @@ def perform_update():
     """
     This function updates installed Debian packages.
     """
-    text = f"{kz_common.YELLOW}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    text = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo apt-get update'
@@ -86,7 +86,7 @@ def perform_cleanup():
     """
     This function performs a Debian packages and snap packages cleanup.
     """
-    text = f"{kz_common.YELLOW}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    text = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.msg_info(PROGRAM_NAME, text)
 
     command = 'sudo apt-get autoclean --yes'

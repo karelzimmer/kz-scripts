@@ -42,7 +42,6 @@ BOLD = '\033[1m'
 
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
-YELLOW = '\033[1;33m'
 
 
 ###############################################################################
@@ -148,7 +147,7 @@ def check_on_ac_power(PROGRAM_NAME):
         text = _('The computer now uses only the battery for power.\n\n'
                  'It is recommended to connect the computer to the wall socket\
 .')
-        msg_warning(PROGRAM_NAME, text)
+        msg_info(PROGRAM_NAME, text)
         try:
             text = f"\n{_('Press the Enter key to continue [Enter]: ')}"
             input(text)
@@ -195,13 +194,6 @@ def msg_log(PROGRAM_NAME, text):
     This function records a message to the log.
     """
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={text}')
-
-
-def msg_warning(PROGRAM_NAME, text):
-    """
-    This function returns a warning message.
-    """
-    print(f'{YELLOW}{text}{NORMAL}')
 
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):

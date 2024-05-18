@@ -34,7 +34,6 @@ readonly BOLD='\033[1m'
 
 readonly RED='\033[1;31m'
 readonly GREEN='\033[1;32m'
-readonly YELLOW='\033[1;33m'
 
 readonly OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--versio\
 n]"
@@ -136,7 +135,7 @@ function check_on_ac_power {
         text=$(gettext "The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.")
-        msg_warning "$text"
+        msg_info "$text"
         $option_gui || wait_for_enter
     fi
 }
@@ -202,21 +201,6 @@ function msg_info {
 # This function records a message to the log.
 function msg_log {
     printf '%b\n' "$*" |& $LOGCMD
-}
-
-
-# This function returns a warning message.
-function msg_warning {
-    if $option_gui; then
-        title=$(eval_gettext "Warning \$DISPLAY_NAME (\$PROGRAM_DESC)")
-        zenity  --warning               \
-                --width     600         \
-                --height    100         \
-                --title     "$title"    \
-                --text      "$*"        2> >($LOGCMD) || true
-    else
-        printf "$YELLOW%b$NORMAL\n" "$*" >&2
-    fi
 }
 
 
