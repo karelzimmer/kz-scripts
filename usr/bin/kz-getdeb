@@ -196,8 +196,8 @@ Checklist installation can be found on https://karelzimmer.nl/en, under Linux.\
 $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "\n$text"
-    logmsg "Cleanup kz-getdeb files ($PROGRAM_NAME)..."
-    rm --force --verbose kz kz.{1..99} |& $LOGCMD
+    logmsg 'Cleanup getdeb files...'
+    rm --force --verbose getdeb getdeb.{1..99} |& $LOGCMD
     exit $OK
 }
 

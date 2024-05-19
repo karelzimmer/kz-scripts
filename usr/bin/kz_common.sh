@@ -361,7 +361,11 @@ or.")
             ;;
         exit)
             logmsg "Cleanup kz-getdeb files ($MODULE_NAME)..."
-            rm --force --verbose kz kz.{1..99} "$kz_deb_local_file" |& $LOGCMD
+            rm  --force                 \
+                --verbose               \
+                getdeb                  \
+                getdeb.{1..99}          \
+                "$kz_deb_local_file"    |& $LOGCMD
             text="ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$text"
