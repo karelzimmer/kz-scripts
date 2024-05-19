@@ -141,8 +141,7 @@ function install_package {
     check_for_active_updates |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
-            install                         \
-            --reinstall                     \
+            reinstall                       \
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
     if [[ $kz_deb_install_rc -ne $OK ]]; then
@@ -166,8 +165,7 @@ function install_package {
         logmsg "Install the package..."
         sudo    DEBIAN_FRONTEND=noninteractive          \
                 apt-get                                 \
-                install                                 \
-                --reinstall                             \
+                reinstall                               \
                 --yes                                   \
                 "$kz_deb_local_file_xz"                 |& $LOGCMD
         logmsg 'Cleanup...'

@@ -274,8 +274,7 @@ function install_package {
     check_for_active_updates
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
-            install                             \
-            --reinstall                         \
+            reinstall                           \
             --yes                               \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME"
 }
