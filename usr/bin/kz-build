@@ -276,7 +276,7 @@ function install_package {
             apt-get                             \
             reinstall                           \
             --yes                               \
-            "${UPLOADS_TARGETS[deb]}/$DEB_NAME"
+            "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
 }
 
 
