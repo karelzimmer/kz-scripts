@@ -13,6 +13,5 @@ Categories=KZ;
 TryExec=kz
 Exec=kz-restore --gui
 Icon=kz-restore
-OnlyShowIn=GNOME;Unity;
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

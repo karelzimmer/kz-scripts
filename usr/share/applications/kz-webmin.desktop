@@ -13,6 +13,5 @@ Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://localhost:10000
 Icon=kz-webmin
-OnlyShowIn=GNOME;Unity;
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

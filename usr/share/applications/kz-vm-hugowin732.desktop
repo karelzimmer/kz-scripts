@@ -13,6 +13,5 @@ Categories=KZ;
 TryExec=VBoxManage
 Exec=VBoxManage startvm hugowin732
 Icon=kz-virtualbox
-OnlyShowIn=GNOME;Unity;
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz

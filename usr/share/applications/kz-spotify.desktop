@@ -13,6 +13,5 @@ Categories=KZ;
 TryExec=google-chrome
 Exec=google-chrome https://open.spotify.com
 Icon=kz-spotify
-OnlyShowIn=GNOME;Unity;
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
