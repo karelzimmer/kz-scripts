@@ -101,6 +101,7 @@ function process_input {
     become_root_check || exit $OK
     check_on_ac_power
     prepare_processing
+    check_dependencies
     download_package
     install_package
 }
@@ -108,8 +109,8 @@ function process_input {
 
 # This function prepares further processing.
 function prepare_processing {
-    sudo --non-interactive true || sudo true
     kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    sudo --non-interactive true || sudo true
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress. If all
     # fails, kz_common.sh will delete the local Debian package file on exit.
@@ -117,6 +118,17 @@ function prepare_processing {
         printf '#'
         sleep 1
     done &
+}
+
+
+# This function check and installs dependencies.
+function check_dependencies {
+    if [[ $EDITION = 'desktop' ]]; then
+        sudo --non-interactive true || sudo true
+        check_for_active_updates
+        # Mainly for Lubuntu, where zenity is not installed by default.
+        sudo apt-get install --yes zenity
+    fi
 }
 
 
