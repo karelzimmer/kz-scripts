@@ -127,7 +127,7 @@ function check_dependencies {
         sudo --non-interactive true || sudo true
         check_for_active_updates
         # Mainly for Lubuntu, where zenity is not installed by default.
-        sudo apt-get install --yes zenity
+        sudo apt-get install --yes zenity |& $LOGCMD
     fi
 }
 
