@@ -121,12 +121,12 @@ function prepare_processing {
 }
 
 
-# This function check and installs dependencies.
+# This function checks and installs dependencies.
 function check_dependencies {
-    if [[ $EDITION = 'desktop' ]]; then
+# For Lubuntu, where zenity is not installed by default.
+if  type lxqt-session  &> /dev/null; then
         sudo --non-interactive true || sudo true
         check_for_active_updates
-        # Mainly for Lubuntu, where zenity is not installed by default.
         sudo apt-get install --yes zenity |& $LOGCMD
     fi
 }

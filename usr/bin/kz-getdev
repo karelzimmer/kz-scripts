@@ -91,7 +91,7 @@ function process_input {
 }
 
 
-# This function check and installs dependencies.
+# This function checks and installs dependencies.
 function check_dependencies {
     local escape='gettext'
 

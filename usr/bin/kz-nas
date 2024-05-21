@@ -253,7 +253,7 @@ process_input() {
 }
 
 
-# This function check and installs dependencies.
+# This function checks and installs dependencies.
 function check_dependencies {
     logmsg 'Check_dependencies...'
     check_for_active_updates
