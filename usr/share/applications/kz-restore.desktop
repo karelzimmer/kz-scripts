@@ -9,7 +9,7 @@
 Type=Application
 Name=Restore backup
 Comment=Restores a backup copy of the Home folder
-Categories=KZ;
+Categories=Utility;
 TryExec=kz
 Exec=kz-restore --gui
 Icon=kz-restore

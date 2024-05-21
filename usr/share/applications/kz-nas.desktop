@@ -9,7 +9,7 @@
 Type=Application
 Name=Mount network drive
 Comment=Mount a NAS during startup
-Categories=KZ;
+Categories=Utility;
 TryExec=kz
 Exec=kz-nas --gui
 Icon=kz-nas

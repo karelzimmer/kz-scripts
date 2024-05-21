@@ -9,7 +9,7 @@
 Type=Application
 Name=WhatsApp
 Comment=Send and receive messages, photos and videos via a web browser
-Categories=KZ;
+Categories=Utility;
 TryExec=google-chrome
 Exec=google-chrome https://web.whatsapp.com
 Icon=kz-whatsapp
