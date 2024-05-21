@@ -56,23 +56,24 @@ gsettings set org.gnome.desktop.screensaver lock-enabled false
 gsettings set org.gnome.desktop.session idle-delay 900
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.mutter center-new-windows true
-gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'
-gsettings set org.gnome.nautilus.preferences click-policy 'single'
-gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true
-gsettings set org.gnome.nautilus.preferences show-create-link true
-gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'
 gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true
-gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'
-gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32
-gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false
-gsettings set org.gnome.shell.extensions.ding show-home false
-gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
+# *** The following commands only on machines running GNOME ***
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome *
 kz-gset --delappfolder=KZ
@@ -87,23 +88,24 @@ gsettings reset org.gnome.desktop.screensaver lock-enabled
 gsettings reset org.gnome.desktop.session idle-delay
 gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent
 gsettings reset org.gnome.mutter center-new-windows
-gsettings reset org.gnome.nautilus.icon-view default-zoom-level
-gsettings reset org.gnome.nautilus.preferences click-policy
-gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover
-gsettings reset org.gnome.nautilus.preferences show-create-link
-gsettings reset org.gnome.nautilus.preferences show-image-thumbnails
 gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock
 gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled
 gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
-gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme
-gsettings reset org.gnome.shell.extensions.dash-to-dock click-action
-gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size
-gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network
-gsettings reset org.gnome.shell.extensions.ding show-home
-gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
+# *** The following commands only on machines running GNOME ***
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
 
 
 # Setup google-chrome *
