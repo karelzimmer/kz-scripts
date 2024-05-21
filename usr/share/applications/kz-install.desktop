@@ -9,7 +9,7 @@
 Type=Application
 Name=Install apps
 Comment=Install apps and changes system settings
-Categories=Utility;
+Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-install --gui
 Icon=kz-install

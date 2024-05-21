@@ -9,7 +9,7 @@
 Type=Application
 Name=Zoom
 Comment=Video call with others from a web browser
-Categories=Utility;
+Categories=Utility;X-GNOME-Utilities;
 TryExec=google-chrome
 Exec=google-chrome https://join.zoom.us
 Icon=kz-zoom

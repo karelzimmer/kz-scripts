@@ -9,7 +9,7 @@
 Type=Application
 Name=Start HugoWin732
 Comment=Start VirtualBox VM hugowin732
-Categories=Utility;
+Categories=Utility;X-GNOME-Utilities;
 TryExec=VBoxManage
 Exec=VBoxManage startvm hugowin732
 Icon=kz-virtualbox

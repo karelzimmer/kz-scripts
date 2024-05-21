@@ -9,7 +9,7 @@
 Type=Application
 Name=Mount network drive
 Comment=Mount a NAS during startup
-Categories=Utility;
+Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-nas --gui
 Icon=kz-nas
