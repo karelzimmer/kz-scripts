@@ -24,18 +24,16 @@ kz-gset \- Change GUI
 .RS
 - shows changes in the configuration database,
 .br
-- can add an application icon (favorite), and
-.br
-- can add an app folder to collect starters.
+- can add or delete an application icon (favorite).
 .RE
 .sp
-Option \fB-a\fR, \fB--addfavaft\fR \fIFAVORITE\fR adds application icon
+Option \fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR adds application icon
 (favorite) \fIFAVORITE\fR to the end of favorites bar (dash, dock).
 .sp
-Option \fB-b\fR, \fB--addfavbef\fR \fIFAVORITE\fR adds application icon
+Option \fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR adds application icon
 (favorite) \fIFAVORITE\fR to the beginning of favorites bar (dash, dock).
 .sp
-Option \fB-d\fR, \fB--delfav\fR \fIFAVORITE\fR removes application icon
+Option \fB-d\fR, \fB--delete\fR \fIFAVORITE\fR removes application icon
 (favorite) \fIFAVORITE\fR from favorites bar (dash, dock).
 .sp
 If an application icon (favorite) of \fIFAVORITE\fR already exists, it will not
@@ -43,22 +41,15 @@ be added again.
 .br
 If an application icon (favorite) has been added at the top to be placed at the
 bottom, the existing one must first be removed with option \fB-d\fR,
-\fB--delfav\fR.
+\fB--delete\fR.
 .br
 File \fIFAVORITE\fR.desktop must exist in one of the application directories
 such as /usr/share/applications or /var/lib/snapd/desktop/applications.
 .sp
-With option \fB-l\fR, \fB--list\fR the current favorites and app folders are
-displayed.
+With option \fB-l\fR, \fB--list\fR the current favorites are displayed.
 .sp
-With option \fB-r\fR, \fB--resetfavs\fR the favorites bar (dash, dock) is reset
+With option \fB-r\fR, \fB--reset\fR the favorites bar (dash, dock) is reset
 with default favourites.
-.sp
-With option \fB-f\fR, \fB--addappfolder\fR \fIAPPFOLDER\fR appfolder
-\fIAPPFOLDER\fR is added.
-.sp
-Option \fB-x\fR, \fB--delfavappfolder\fR \fIAPPFOLDER\fR removes appfolder
-\fIAPPFOLDER\fR.
 .sp
 If no options are specified, \fBkz gset\fR shows changes in the configuration
 database after a change in the graphical user environment (GUI).
@@ -74,56 +65,28 @@ The following is performed:
 .br
 4. Report changes to the configuration database.
 .RE
-.sp
-With the \fBgsettings set \fIschema\fR\fB[:\fIpath\fR\fB] \fIkey\fR command,
-the changes can then be saved in the configuration database, and they no longer
-have to be entered manually with the GUI.
-.sp
-For a system with Lubuntu with the LXDE and with Xubuntu with the Xfce working
-environment the commands to see what needs to be changed can be found through
-the Terminal with :
-.RS
-\fBxfconf-query --list\fR
-    Provides overview channels.
-.sp
-\fBxfconf-query --channel \fIkanaal\fR\fB --monitor --verbose\fR
-    Now make the changes through the GUI.
-.sp
-\fBxfconf-query --channel \fIkanaal\fR\fB --list --verbose\fR
-    Provides overview properties.
-.sp
-\fBxfconf-query --channel \fIkanaal\fR\fB --property \fIeigenschap\fR\fB
---set \fIwaarde\fR
-    Enter the value for a property.
-.RE
 .\"
 .\"
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\fB-a\fR, \fB--addfavaft\fR \fIFAVORITE\fR
+\fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR
 Add application icon (favorite) \fIFAVORITE\fR to the back of the favorites bar
 (dash, dock).
 .TP
-\fB-b\fR, \fB--addfavbef\fR \fIFAVORITE\fR
+\fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR
 Add application icon (favorite) \fIFAVORITE\fR in front of the favorites bar
 (dash, dock).
 .TP
-\fB-d\fR, \fB--delfav\fR \fIFAVORITE\fR
+\fB-d\fR, \fB--delete\fR \fIFAVORITE\fR
 Remove application icon (favorite) \fIFAVORITE\fR from the favorites bar (dash,
 dock).
 .TP
 \fB-l\fR, \fB--list\fR
 Display the current the current favorites and app folders.
 .TP
-\fB-r\fR, \fB--resetfavs\fR
+\fB-r\fR, \fB--reset\fR
 Reset the favorites bar (dash, dock) with default favourites.
-.TP
-\fB-f\fR, \fB--addappfolder\fR \fIAPPFOLDER\fR
-Add app folder \fIAPPFOLDER\fR.
-.TP
-\fB-x\fR, \fB--deleappfolder\fR \fIAPPFOLDER\fR
-Delete app folder \fIAPPFOLDER\fR.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.
@@ -151,7 +114,7 @@ Shows changes to the configuration database after changes to the graphical
 user environment (GUI).
 .RE
 .sp
-\fBkz gset --addfavbef idle\fR
+\fBkz gset --addbef idle\fR
 .RS
 Add the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) to the front of the favorites bar. The idle.desktop
@@ -159,7 +122,7 @@ file must exist in one of the application directories such as
 /usr/share/applications or /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gset --delfav idle\fR
+\fBkz gset --delete idle\fR
 .RS
 Remove the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) from the favorites bar.

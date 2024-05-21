@@ -8,34 +8,34 @@
 
 # Setup anydesk -nouser
 # Remote Wayland display server is not supported.
-kz-gset --addfavaft=anydesk
+kz-gset --addaft=anydesk
 
 # Reset anydesk -nouser
-kz-gset --delfav=anydesk
+kz-gset --delete=anydesk
 
 
 # Setup calibre hugo@pc-van-hugo
-kz-gset --addfavaft=calibre-gui
+kz-gset --addaft=calibre-gui
 
 # Reset calibre hugo@pc-van-hugo
-kz-gset --delfav=calibre-gui
+kz-gset --delete=calibre-gui
 
 
 # Setup cockpit karel@pc06
-kz-gset --addfavaft=kz-cockpit
+kz-gset --addaft=kz-cockpit
 
 # Reset cockpit karel@pc06
-kz-gset --delfav=kz-cockpit
+kz-gset --delete=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
 # Setup firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --delfav=firefox            # dpkg
-kz-gset --delfav=firefox_firefox    # snap
+kz-gset --delete=firefox            # dpkg
+kz-gset --delete=firefox_firefox    # snap
 
 # Reset firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --addfavbef=firefox         # dpkg
-kz-gset --addfavbef=firefox_firefox # snap
+kz-gset --addbef=firefox         # dpkg
+kz-gset --addbef=firefox_firefox # snap
 
 
 # Setup gdebi *
@@ -46,7 +46,6 @@ xdg-mime default snap-store_ubuntu-software-local-file.desktop application/vnd.d
 
 
 # Setup gnome *
-kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -115,24 +114,24 @@ xdg-mime default org.gnome.Evince.desktop application/pdf
 
 
 # Setup google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --addfavbef=google-chrome
+kz-gset --addbef=google-chrome
 
 # Reset google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --delfav=google-chrome
+kz-gset --delete=google-chrome
 
 
 # Setup handbrake emily@pc-van-emily
-kz-gset --addfavaft=fr.handbrake.ghb
+kz-gset --addaft=fr.handbrake.ghb
 
 # Reset handbrake emily@pc-van-emily
-kz-gset --delfav=fr.handbrake.ghb
+kz-gset --delete=fr.handbrake.ghb
 
 
 # Setup kvm karel@pc06
-kz-gset --addfavaft=virt-manager
+kz-gset --addaft=virt-manager
 
 # Reset kvm karel@pc06
-kz-gset --delfav=virt-manager
+kz-gset --delete=virt-manager
 
 
 # Setup lynis -nouser
@@ -159,67 +158,67 @@ rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 # There is no command available to reset restored thumbnails.
 
 # Setup spotify monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --addfavaft=kz-spotify
+kz-gset --addaft=kz-spotify
 
 # Reset spotify monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --delfav=kz-spotify
+kz-gset --delete=kz-spotify
 
 
 # Setup sound-juicer emily@pc-van-emily
-kz-gset --addfavaft=org.gnome.SoundJuicer
+kz-gset --addaft=org.gnome.SoundJuicer
 
 # Reset sound-juicer emily@pc-van-emily
-kz-gset --delfav=org.gnome.SoundJuicer
+kz-gset --delete=org.gnome.SoundJuicer
 
 
 # Setup thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --delfav=thunderbird                # dpkg
-kz-gset --delfav=thunderbird_thunderbird    # snap
+kz-gset --delete=thunderbird                # dpkg
+kz-gset --delete=thunderbird_thunderbird    # snap
 
 # Reset thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --addfavbef=thunderbird             # dpkg
-kz-gset --addfavbef=thunderbird_thunderbird # snap
+kz-gset --addbef=thunderbird             # dpkg
+kz-gset --addbef=thunderbird_thunderbird # snap
 
 
 # Setup teamviewer karel@pc06
-kz-gset --addfavaft=com.teamviewer.TeamViewer
+kz-gset --addaft=com.teamviewer.TeamViewer
 
 # Reset teamviewer karel@pc06
-kz-gset --delfav=com.teamviewer.TeamViewer
+kz-gset --delete=com.teamviewer.TeamViewer
 
 
 # Setup telegram hugo@pc-van-hugo maria@maria-desktop
-kz-gset --addfavaft=kz-telegram
+kz-gset --addaft=kz-telegram
 
 # Reset telegram hugo@pc-van-hugo  maria@maria-desktop
-kz-gset --delfav=kz-telegram
+kz-gset --delete=kz-telegram
 
 
 # Setup terminal karel@pc01 karel@pc06
-kz-gset --addfavbef=org.gnome.Terminal
+kz-gset --addbef=org.gnome.Terminal
 # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 # Reset terminal karel@pc01 karel@pc06
-kz-gset --delfav=org.gnome.Terminal
+kz-gset --delete=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
 # Setup ubuntu-desktop-installer *
-kz-gset --delfav=ubuntu-desktop-installer_ubuntu-desktop-installer
+kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 # Reset ubuntu-desktop-installer *
-kz-gset --addfavbef=ubuntu-desktop-installer_ubuntu-desktop-installer
+kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
 # Setup virtualbox hugo@pc-van-hugo
-kz-gset --addfavaft=virtualbox
-kz-gset --addfavaft=kz-vm-hugowin732
+kz-gset --addaft=virtualbox
+kz-gset --addaft=kz-vm-hugowin732
 
 # Reset virtualbox hugo@pc-van-hugo
-kz-gset --delfav=virtualbox
-kz-gset --delfav=kz-vm-hugowin732
+kz-gset --delete=virtualbox
+kz-gset --delete=kz-vm-hugowin732
 
 
 # Setup vlc *
@@ -237,7 +236,7 @@ xdg-mime default org.gnome.Totem.desktop video/webm
 
 
 # Setup vscode karel@pc01 karel@pc06
-kz-gset --addfavbef=code_code
+kz-gset --addbef=code_code
 xdg-mime default code_code.desktop application/json
 xdg-mime default code_code.desktop application/x-desktop
 xdg-mime default code_code.desktop application/x-shellscript
@@ -248,7 +247,7 @@ xdg-mime default code_code.desktop text/troff
 xdg-mime default code_code.desktop text/x-python
 
 # Reset vscode karel@pc01 karel@pc06
-kz-gset --delfav=code_code
+kz-gset --delete=code_code
 xdg-mime default org.gnome.gedit.desktop application/json
 xdg-mime default org.gnome.gedit.desktop application/x-desktop
 xdg-mime default org.gnome.gedit.desktop application/x-shellscript
@@ -260,14 +259,14 @@ xdg-mime default org.gnome.gedit.desktop text/x-python
 
 
 # Setup whatsapp hugo@pc-van-hugo maria@maria-desktop
-kz-gset --addfavaft=kz-whatsapp
+kz-gset --addaft=kz-whatsapp
 
 # Reset whatsapp hugo@pc-van-hugo maria@maria-desktop
-kz-gset --delfav=kz-whatsapp
+kz-gset --delete=kz-whatsapp
 
 
 # Setup zoom monique@pc01 karel@pc01
-kz-gset --addfavaft=kz-zoom
+kz-gset --addaft=kz-zoom
 
 # Reset zoom monique@pc01 karel@pc01
-kz-gset --delfav=kz-zoom
+kz-gset --delete=kz-zoom

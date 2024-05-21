@@ -24,20 +24,18 @@ kz-gset \- GUI wijzigen
 .RS
 - toont wijzigingen in de configuratiedatabase,
 .br
-- kan een toepassingspictogram (favoriet) toevoegen, en
-.br
-- kan een appfolder toevoegen om starters te verzamelen.
+- kan een toepassingspictogram (favoriet) toevoegen en verwijderen.
 .RE
 .sp
-Met optie \fB-a\fR, \fB--addfavaft\fR \fIFAVORITE\fR wordt toepassingspictogram
+Met optie \fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR wordt toepassingspictogram
 (favoriet) \fIFAVORITE\fR toegevoegd aan het einde van de favorietenbalk
 (dash, dock).
 .sp
-Met optie \fB-b\fR, \fB--addfavbef\fR \fIFAVORITE\fR wordt toepassingspictogram
+Met optie \fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR wordt toepassingspictogram
 (favoriet) \fIFAVORITE\fR toegevoegd aan het begin van de favorietenbalk
 (dash, dock).
 .sp
-Met optie \fB-d\fR, \fB--delfav\fR \fIFAVORITE\fR wordt toepassingspictogram
+Met optie \fB-d\fR, \fB--delete\fR \fIFAVORITE\fR wordt toepassingspictogram
 (favoriet) \fIFAVORITE\fR verwijderd uit de favorietenbalk (dash, dock).
 .sp
 Als er al een toepassingspictogram (favoriet) van \fIFAVORITE\fR bestaat
@@ -45,22 +43,15 @@ wordt deze niet opnieuw toegevoegd.
 .br
 Als een toepassingspictogram (favoriet) bovenaan is toegevoegd die onderaan
 geplaatst moet worden, moet de bestaande eerst verwijderd te worden met optie
-\fB-d\fR, \fB--delfav\fR.
+\fB-d\fR, \fB--delete\fR.
 .br
 Bestand \fIFAVORITE\fR.desktop moet bestaan in een van de applicatiemappen
 zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .sp
-Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten en appfolders
-getoond.
+Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten getoond.
 .sp
-Met optie \fB-r\fR, \fB--resetfavs\fR wordt de favorietenbalk (dash, dock)
+Met optie \fB-r\fR, \fB--reset\fR wordt de favorietenbalk (dash, dock)
 teruggezet met standaard favorieten.
-.sp
-Met optie \fB-f\fR, \fB--addappfolder\fR \fIAPPFOLDER\fR wordt appfolder
-\fIAPPFOLDER\fR toegevoegd.
-.sp
-Met optie \fB-x\fR, \fB--delfavappfolder\fR \fIAPPFOLDER\fR wordt appfolder
-\fIAPPFOLDER\fR verwijderd.
 .sp
 Als er geen opties zijn opgegeven toont \fBkz gset\fR wijzigingen in de
 configuratiedatabase na een wijziging in de grafische werkomgeving (GUI).
@@ -76,56 +67,28 @@ Het volgende wordt uitgevoerd:
 .br
 4. Wijzigingen in de configuratiedatabase rapporteren.
 .RE
-.sp
-Met de opdracht \fBgsettings set \fIschema\fR\fB[:\fIpath\fR\fB] \fIkey\fR zijn
-daarna de wijzigingen op te slaan in de configuratiedatabase, en hoeven deze
-niet meer, met de hand, met de GUI te worden uitgevoerd.
-.sp
-Voor een systeem met Lubuntu met de LXDE- en met Xubuntu met de
-Xfce-werkomgeving kan via het Terminalvenster met opdrachten opgezocht worden
-wat er gewijzigd moet worden:
-.RS
-\fBxfconf-query --list\fR
-    Geeft overzicht kanalen/channels.
-.sp
-\fBxfconf-query --channel \fIkanaal\fR\fB --monitor --verbose\fR
-    Breng nu de wijzigingen via de GUI aan.
-.sp
-\fBxfconf-query --channel \fIkanaal\fR\fB --list --verbose\fR
-    Geeft overzicht eigenschappen/properties.
-.sp
-\fBxfconf-query --channel \fIkanaal\fR\fB --property \fIeigenschap\fR\fB
---set \fIwaarde\fR
-    Vul de waarde in voor een property.
-.RE
 .\"
 .\"
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
-\fB-a\fR, \fB--addfavaft\fR \fIFAVORITE\fR
+\fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR
 Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe achteraan de
 favorietenbalk (dash, dock).
 .TP
-\fB-b\fR, \fB--addfavbef\fR \fIFAVORITE\fR
+\fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR
 Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe vooraan de
 favorietenbalk (dash, dock).
 .TP
-\fB-d\fR, \fB--delfav\fR \fIFAVORITE\fR
+\fB-d\fR, \fB--delete\fR \fIFAVORITE\fR
 Verwijder toepassingspictogram (favoriet) \fIFAVORITE\fR uit de
 favorietenbalk (dash, dock).
 .TP
 \fB-l\fR, \fB--list\fR
 Toon de huidige favorieten en appfolders.
 .TP
-\fB-r\fR, \fB--resetfavs\fR
+\fB-r\fR, \fB--reset\fR
 Zet de favorietenbalk (dash, dock) terug met standaard favorieten.
-.TP
-\fB-f\fR, \fB--addappfolder\fR \fIAPPFOLDER\fR
-Voeg appfolder \fIAPPFOLDER\fR toe.
-.TP
-\fB-x\fR, \fB--delappfolder\fR \fIAPPFOLDER\fR
-Verwijder appfolder \fIAPPFOLDER\fR.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.
@@ -153,7 +116,7 @@ Toont wijzigingen in de configuratiedatabase na aanpassingen in de grafische
 werkomgeving (GUI).
 .RE
 .sp
-\fBkz gset --addfavbef idle\fR
+\fBkz gset --addbef idle\fR
 .RS
 Voeg de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
@@ -161,7 +124,7 @@ idle.desktop moet bestaan in een van de applicatiemappen
 zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gset --delfav idle\fR
+\fBkz gset --delete idle\fR
 .RS
 Verwijder de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) uit de favorietenbalk.

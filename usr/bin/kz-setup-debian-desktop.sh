@@ -32,24 +32,24 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 
 
 # Setup debian-desktop-installer *
-kz-gset --delfav=install-debian
+kz-gset --delete=install-debian
 
 # Reset debian-desktop-installer *
-kz-gset --addfavbef=install-debian
+kz-gset --addbef=install-debian
 
 
 # Setup evolution karel@pc07
-kz-gset --delfav=org.gnome.Evolution
+kz-gset --delete=org.gnome.Evolution
 
 # Reset debian-desktop-installer karel@pc07
-kz-gset --addfavbef=org.gnome.Evolution
+kz-gset --addbef=org.gnome.Evolution
 
 
 # Setup firefox karel@pc07
-kz-gset --delfav=firefox-esr
+kz-gset --delete=firefox-esr
 
 # Reset firefox karel@pc07
-kz-gset --addfavbef=firefox-esr
+kz-gset --addbef=firefox-esr
 
 
 # Setup gdebi *
@@ -60,7 +60,6 @@ xdg-mime default org.gnome.FileRoller.desktop application/vnd.debian.binary-pack
 
 
 # Setup gnome *
-kz-gset --addappfolder=KZ
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -125,17 +124,17 @@ xdg-mime default org.gnome.Evince.desktop application/pdf
 
 
 # Setup google-chrome karel@pc07
-kz-gset --addfavbef=google-chrome
+kz-gset --addbef=google-chrome
 
 # Reset google-chrome karel@pc07
-kz-gset --delfav=google-chrome
+kz-gset --delete=google-chrome
 
 
 # Setup kvm karel@pc07
-kz-gset --addfavaft=virt-manager
+kz-gset --addaft=virt-manager
 
 # Reset kvm karel@pc07
-kz-gset --delfav=virt-manager
+kz-gset --delete=virt-manager
 
 
 # Setup lynis -nouser
@@ -162,14 +161,14 @@ rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 # There is no command available to reset restored thumbnails.
 
 # Setup spotify karel@pc07
-kz-gset --addfavaft=kz-spotify
+kz-gset --addaft=kz-spotify
 
 # Reset spotify karel@pc07
-kz-gset --delfav=kz-spotify
+kz-gset --delete=kz-spotify
 
 
 # Setup terminal karel@pc07
-kz-gset --addfavbef=org.gnome.Terminal
+kz-gset --addbef=org.gnome.Terminal
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
 # Enable search forward in history (with Ctrl-S).
@@ -177,7 +176,7 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 # Reset terminal karel@pc07
-kz-gset --delfav=org.gnome.Terminal
+kz-gset --delete=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
@@ -197,7 +196,7 @@ xdg-mime default org.gnome.Totem.desktop video/webm
 
 
 # Setup vscode karel@pc07
-kz-gset --addfavbef=code_code
+kz-gset --addbef=code_code
 xdg-mime default code_code.desktop application/json
 xdg-mime default code_code.desktop application/x-desktop
 xdg-mime default code_code.desktop application/x-shellscript
@@ -208,7 +207,7 @@ xdg-mime default code_code.desktop text/troff
 xdg-mime default code_code.desktop text/x-python
 
 # Reset vscode karel@pc07
-kz-gset --delfav=code_code
+kz-gset --delete=code_code
 xdg-mime default org.gnome.gedit.desktop application/json
 xdg-mime default org.gnome.gedit.desktop application/x-desktop
 xdg-mime default org.gnome.gedit.desktop application/x-shellscript
@@ -220,8 +219,8 @@ xdg-mime default org.gnome.gedit.desktop text/x-python
 
 
 # Setup webmin karel@pc07
-kz-gset --addfavaft=kz-webmin
+kz-gset --addaft=kz-webmin
 
 # Reset webmin karel@pc07
-kz-gset --delfav=kz-webmin
+kz-gset --delete=kz-webmin
 rm --force --verbose "$HOME"/.local/share/applications/kz-webmin.desktop

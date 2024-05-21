@@ -23,10 +23,9 @@ readonly PROGRAM_NAME='kz-gset'
 readonly PROGRAM_DESC=$(gettext 'Change GUI')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addfavaft FAVORITE\
-] [-b|--addfavbef FAVORITE]
-               [-d|--delfav FAVORITE] [-l|--list] [-r|--resetfavs]
-               [-f|--addappfolder APPFOLDER] [-x|--delappfolder APPFOLDER]
+readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] [\
+-b|--addbef FAVORITE]
+               [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
                \$OPTIONS_USAGE")"
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
@@ -36,41 +35,31 @@ $(gettext 'Options:')
 $(gettext "  Mandatory arguments to long options are mandatory for short optio\
 ns too.")
 
-$(gettext '  -a, --addfavaft FAVORITE
+$(gettext '  -a, --addaft FAVORITE
                  add FAVORITE at the end')
-$(gettext '  -b, --addfavbef FAVORITE
+$(gettext '  -b, --addbef FAVORITE
                  add FAVORITE at the beginning')
-$(gettext '  -d, --delfav FAVORITE
+$(gettext '  -d, --delete FAVORITE
                  delete FAVORITE')
-$(gettext '  -l, --list     show favorites and app folders')
-$(gettext '  -r, --resetfavs
-                 set favorites on default values')
-$(gettext '  -f, --addappfolder APPFOLDER
-                 add APPFOLDER')
-$(gettext '  -x, --delappfolder APPFOLDER
-                 delete APPFOLDER')
+$(gettext '  -l, --list     show favorites')
+$(gettext '  -r, --reset    set favorites on default values')
 $OPTIONS_HELP"
 
-readonly X_OPTIONS_SHORT='a:b:d:lrf:x:'
-         X_OPTIONS_LONG=',addfavaft:,addfavbef:,delfav:,list,resetfavs,'
-readonly X_OPTIONS_LONG+='addappfolder:,delappfolder:'
+readonly X_OPTIONS_SHORT='a:b:d:lr'
+readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare appfolder=''
 declare desktopfile=''
 declare favorite_argument=''
-declare folder_argument=''
-declare option_addappfolder=false
-declare option_addfavaft=false
-declare option_addfavbef=false
-declare option_delappfolder=false
-declare option_delfav=false
+declare option_addaft=false
+declare option_addbef=false
+declare option_delete=false
 declare option_list=false
-declare option_resetfavs=false
+declare option_reset=false
 
 
 ###############################################################################
@@ -105,36 +94,36 @@ $USAGE_LINE"
 
     while true; do
         case $1 in
-            -a|--addfavaft)
-                if $option_addfavaft; then
+            -a|--addaft)
+                if $option_addaft; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
                 fi
-                option_addfavaft=true
+                option_addaft=true
                 favorite_argument=$2
                 shift 2
                 ;;
-            -b|--addfavbef)
-                if $option_addfavbef; then
+            -b|--addbef)
+                if $option_addbef; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
                 fi
-                option_addfavbef=true
+                option_addbef=true
                 favorite_argument=$2
                 shift 2
                 ;;
-            -d|--delfav)
-                if $option_delfav; then
+            -d|--delete)
+                if $option_delete; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
                 fi
-                option_delfav=true
+                option_delete=true
                 favorite_argument=$2
                 shift 2
                 ;;
@@ -142,31 +131,9 @@ $USAGE_LINE"
                 option_list=true
                 shift
                 ;;
-            -r|--resetfavs)
-                option_resetfavs=true
+            -r|--reset)
+                option_reset=true
                 shift
-                ;;
-            -f|--addappfolder)
-                if $option_addappfolder; then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE_LINE"
-                    infomsg "$text"
-                    exit $ERROR
-                fi
-                option_addappfolder=true
-                folder_argument=$2
-                shift 2
-                ;;
-            -x|--delappfolder)
-                if $option_delappfolder; then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE_LINE"
-                    infomsg "$text"
-                    exit $ERROR
-                fi
-                option_delappfolder=true
-                folder_argument=$2
-                shift 2
                 ;;
             --)
                 shift
@@ -185,27 +152,22 @@ $USAGE_LINE"
         exit $ERROR
     fi
 
-    appfolder=$folder_argument
     desktopfile=$favorite_argument.desktop
 }
 
 
 # This function processes the script options and arguments.
 function process_input {
-    if $option_addfavaft; then
-        process_option_addfavaft
-    elif $option_addfavbef; then
-        process_option_addfavbef
-    elif $option_delfav; then
-        process_option_delfav
+    if $option_addaft; then
+        process_option_addaft
+    elif $option_addbef; then
+        process_option_addbef
+    elif $option_delete; then
+        process_option_delete
     elif $option_list; then
         process_option_list
-    elif $option_resetfavs; then
-        process_option_resetfavs
-    elif $option_addappfolder; then
-        process_option_addappfolder
-    elif $option_delappfolder; then
-        process_option_delappfolder
+    elif $option_reset; then
+        process_option_reset
     else
         capture_gui_changes
     fi
@@ -213,7 +175,7 @@ function process_input {
 
 
 # This function adds a favorite to the end of the dash/dock.
-function process_option_addfavaft  {
+function process_option_addaft  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -230,7 +192,7 @@ function process_option_addfavaft  {
 
 
 # This function adds a favorite to the beginning of the dash/dock.
-function process_option_addfavbef  {
+function process_option_addbef  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -246,7 +208,7 @@ function process_option_addfavbef  {
 
 
 # This function removes a favorite from the dash/dock.
-function process_option_delfav  {
+function process_option_delete  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
@@ -264,66 +226,17 @@ function process_option_delfav  {
 }
 
 
-# This feature lists the favorite apps along with the app folders.
+# This feature lists the favorite apps in the dash/dock.
 function process_option_list  {
     text=$(gettext 'Favorite apps:')
     text+="\n$(gsettings get org.gnome.shell favorite-apps)"
-    text+="\n\n$(gettext 'App folders:')"
-    text+="\n$(gsettings get org.gnome.desktop.app-folders folder-children)"
     infomsg "$text"
 }
 
 
 # This function resets the favorites to the factory settings.
-function process_option_resetfavs  {
+function process_option_reset  {
     gsettings reset org.gnome.shell favorite-apps
-}
-
-
-# This function adds an application folder.
-function process_option_addappfolder  {
-    local app_folders=''
-    local schema=''
-    local path=''
-
-    app_folders=$(gsettings get org.gnome.desktop.app-folders folder-children)
-
-    if [[ $app_folders = '@as []' ]]; then
-        set org.gnome.desktop.app-folders folder-children "['$appfolder']"
-    elif !  printf  '%s' "$app_folders" |
-            grep --quiet --regexp="$appfolder"; then
-        gsettings set org.gnome.desktop.app-folders folder-children "$(
-            printf '%s' "$app_folders" | cut --delimiter=']' --fields=1
-            ), '$appfolder']"
-    fi
-    schema=org.gnome.desktop.app-folders.folder
-    path=/org/gnome/desktop/app-folders/folders/$appfolder/
-    gsettings set "$schema":"$path" name        "$appfolder"
-    gsettings set "$schema":"$path" translate   true
-    gsettings set "$schema":"$path" categories  "['$appfolder']"
-}
-
-
-# This function deletes an application folder.
-function process_option_delappfolder  {
-    local app_folders=''
-    local schema=''
-    local path=''
-
-    app_folders=$(gsettings get org.gnome.desktop.app-folders folder-children)
-
-    if [[ $app_folders = '@as []' ]]; then
-        :
-    elif [[ $app_folders = [$appfolder] ]]; then
-        gsettings set org.gnome.desktop.app-folders folder-children "[]"
-    else
-        gsettings set org.gnome.desktop.app-folders folder-children "$(
-            printf '%s' "$app_folders" | sed --expression="s/, '$appfolder'//"
-            )"
-    fi
-    schema=org.gnome.desktop.app-folders.folder
-    path=/org/gnome/desktop/app-folders/folders/$appfolder/
-    gsettings reset-recursively "$schema":"$path"
 }
 
 
