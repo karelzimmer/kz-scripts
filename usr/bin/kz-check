@@ -106,9 +106,14 @@ function process_input {
                 check_trailing_spaces
                 continue
                 ;;
-            *.1|*.desktop)
+            *.1)
                 check_trailing_spaces
                 check_record_length
+                ;;
+            *.desktop)
+                check_trailing_spaces
+                check_record_length
+                check_desktop_file_validation
                 ;;
             kz_common.py)
                 check_trailing_spaces
@@ -200,6 +205,12 @@ ngth_found).")$NORMAL"
         infomsg "$text"
         error_flag=true
     fi
+}
+
+
+# This function validates the desktop file.
+function check_desktop_file_validation {
+    desktop-file-validate "$script"
 }
 
 
