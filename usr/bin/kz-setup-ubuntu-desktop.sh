@@ -76,7 +76,6 @@ if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extension
 if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome *
-kz-gset --delappfolder=KZ
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
 gsettings reset org.gnome.desktop.interface clock-show-date
