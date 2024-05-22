@@ -62,7 +62,7 @@ gsettings set org.gnome.settings-daemon.plugins.power idle-dim false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
-# *** The following GSettings configuration tool commands only for machines running GNOME, e.g. not for Lubuntu and Xubuntu ***
+# *** The following GSettings configuration tool commands only for machines running GNOME, e.g. not for Lubuntu, uses LXQt, and Xubuntu, uses Xfce ***
 if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
@@ -93,7 +93,7 @@ gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
-# *** The following GSettings configuration tool commands only for machines running GNOME, e.g. not for Lubuntu and Xubuntu ***
+# *** The following GSettings configuration tool commands only for machines running GNOME, e.g. not for Lubuntu, uses LXQt, and Xubuntu, uses Xfce ***
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
