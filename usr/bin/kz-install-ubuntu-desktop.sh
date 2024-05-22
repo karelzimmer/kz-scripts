@@ -7,7 +7,7 @@
 ###############################################################################
 
 # Install disabled-apport *
-# *** DO THIS FIRST *** 1/2
+# Do this first [1/2].
 # Suppress the program crash report.
 sudo systemctl stop apport.service
 sudo systemctl disable apport.service
@@ -15,21 +15,21 @@ sudo rm --force --verbose /var/crash/*
 sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 
 # Remove disabled-apport *
-# *** DO THIS FIRST *** 1/2
+# Do this first [1/2].
 # Enable the program crash report.
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
 
 # Install update-system *
-# *** DO THIS FIRST *** 2/2
+# Do this first [2/2].
 # Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove update-system *
-# *** DO THIS FIRST *** 2/2
+# Do this first [2/2].
 # There is no command available to remove update system.
 
 

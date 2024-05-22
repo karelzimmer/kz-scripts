@@ -7,14 +7,14 @@
 ###############################################################################
 
 # Install update-system *
-# *** DO THIS FIRST ***
+# Do this first.
 # Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
 # Remove update-system *
-# *** DO THIS FIRST ***
+# Do this first.
 # There is no command available to remove update system.
 
 
