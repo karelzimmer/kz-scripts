@@ -46,6 +46,8 @@ readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
+# Determine edition, desktop or server, based on the availability of a desktop
+# environment. GNOME e.g. Ubuntu, LXQt e.g. Lubuntu, and Xfce e.g. Xubuntu.
 if  type gnome-session &> /dev/null ||
     type lxqt-session  &> /dev/null ||
     type xfce4-session &> /dev/null; then

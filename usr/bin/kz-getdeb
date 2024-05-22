@@ -123,7 +123,7 @@ function prepare_processing {
 
 # This function checks and installs dependencies.
 function check_dependencies {
-# For Lubuntu, where zenity is not installed by default.
+# For Lubuntu. which uses LXQt, where zenity is not installed by default.
 if  type lxqt-session  &> /dev/null; then
         sudo --non-interactive true || sudo true
         check_for_active_updates
