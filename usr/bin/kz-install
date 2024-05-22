@@ -538,7 +538,8 @@ rrors:
 
 Try installing the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz install \$failed_apps_text'.")
+use app 'Install apps', or
+use app 'Terminal', type 'kz install \$failed_apps_text'.")
         errormsg "$text"
         exit $ERROR
     else

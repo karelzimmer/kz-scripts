@@ -376,7 +376,8 @@ Check the rsync messages (also in \$error_file):
 
 Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz backup'.")"
+use app 'Make backup', or
+use app 'Terminal', type 'kz backup'.")"
         errormsg "$text"
         exit $ERROR
     fi

@@ -498,7 +498,8 @@ function term_script {
 
 Try to set up the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz setup \$failed_apps_text'.")
+use app 'Set up apps', or
+use app 'Terminal', type 'kz setup \$failed_apps_text'.")
         errormsg "$text"
         exit $ERROR
     else

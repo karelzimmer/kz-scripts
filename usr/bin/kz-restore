@@ -279,7 +279,8 @@ Check the rsync messages (also in \$error_file):
 
 Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
-use app Terminal, type 'kz restore'.")
+use app 'Restore backup', or
+use app 'Terminal', type 'kz restore'.")
         errormsg "$text"
         exit $ERROR
     fi
