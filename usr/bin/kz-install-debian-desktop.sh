@@ -18,7 +18,7 @@ rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb
 sudo apt-get update
 sudo apt-get upgrade --yes
 
-# Remove extra-repos *
+# Remove  extra-repos *
 # Do this first [1/2].
 # Revert to standard repositories.
 sudo apt-add-repository --remove contrib
@@ -36,7 +36,7 @@ sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
-# Remove update-system *
+# Remove  update-system *
 # Do this first [2/2].
 # There is no command available to remove update system.
 
@@ -49,7 +49,7 @@ sudo apt-get update
 sudo apt-get install --yes anydesk
 # Web app: https://my.anydesk.com/v2
 
-# Remove anydesk -nohost
+# Remove  anydesk -nohost
 sudo apt-get remove --yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
@@ -58,7 +58,7 @@ sudo apt-get update
 # Install bash-completion *
 sudo apt-get install --yes bash-completion
 
-# Remove bash-completion *
+# Remove  bash-completion *
 sudo apt-get remove --yes bash-completion
 
 
@@ -66,7 +66,7 @@ sudo apt-get remove --yes bash-completion
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=3/' /etc/default/grub
 sudo update-grub
 
-# Remove change-grub-timeout *
+# Remove  change-grub-timeout *
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=5/' /etc/default/grub
 sudo update-grub
 
@@ -74,21 +74,21 @@ sudo update-grub
 # Install cups *
 sudo apt-get install --yes cups
 
-# Remove cups *
+# Remove  cups *
 sudo apt-get remove --yes cups
 
 
 # Install dashtodock *
 sudo apt-get install --yes gnome-shell-extension-dashtodock
 
-# Remove dashtodock *
+# Remove  dashtodock *
 sudo apt-get remove --yes gnome-shell-extension-dashtodock
 
 
 # Install deja-dup *
 sudo snap install --classic deja-dup
 
-# Remove deja-dup *
+# Remove  deja-dup *
 sudo snap remove deja-dup
 
 
@@ -99,7 +99,7 @@ sudo apt-get install --yes fdupes
 # $ fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
 # $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
-# Remove fdupes -nohost
+# Remove  fdupes -nohost
 sudo apt-get remove --yes fdupes
 
 
@@ -109,7 +109,7 @@ sudo apt-get remove --yes fdupes
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
-# Remove force-x11 -nohost
+# Remove  force-x11 -nohost
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
@@ -120,7 +120,7 @@ sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove fwupd -nohost
+# Remove  fwupd -nohost
 # Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
@@ -130,21 +130,21 @@ sudo systemctl start fwupd.service
 # Install gdebi *
 sudo apt-get install --yes gdebi
 
-# Remove gdebi *
+# Remove  gdebi *
 sudo apt-get remove --yes gdebi
 
 
 # Install gedit *
 sudo apt-get install --yes gedit
 
-# Remove gedit *
+# Remove  gedit *
 sudo apt-get remove --yes gedit
 
 
 # Install gnome-gmail pc07
 sudo apt-get install --yes gnome-gmail
 
-# Remove gnome-gmail pc07
+# Remove  gnome-gmail pc07
 sudo apt-get remove --yes gnome-gmail
 
 
@@ -156,10 +156,10 @@ sudo apt-get update
 sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
 # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
-# Remove the apt-key added during installation as an apt-key is no longer needed.
+# Remove  the apt-key added during installation as an apt-key is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
-# Remove google-chrome pc07
+# Remove  google-chrome pc07
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
@@ -171,7 +171,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
 # Images are in: /var/lib/libvirt/images/
 
-# Remove kvm pc07
+# Remove  kvm pc07
 sudo apt-get remove --yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo delgroup libvirtd-dnsmasq
 sudo deluser "${SUDO_USER:-$USER}" libvirtd
@@ -182,7 +182,7 @@ sudo delgroup libvirtd
 # Install libreoffice *
 sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
-# Remove libreoffice *
+# Remove  libreoffice *
 sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 
@@ -190,7 +190,7 @@ sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl li
 sudo apt-get install --yes locate
 sudo updatedb
 
-# Remove locate pc07
+# Remove  locate pc07
 sudo apt-get remove --yes locate
 
 
@@ -198,7 +198,7 @@ sudo apt-get remove --yes locate
 # Enable access to system monitoring tasks like read many log files in /var/log and to the log.
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
-# Remove log-access *
+# Remove  log-access *
 sudo deluser "${SUDO_USER:-$USER}" adm
 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
@@ -206,7 +206,7 @@ sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 # Install lshw *
 sudo apt-get install --yes lshw
 
-# Remove lshw *
+# Remove  lshw *
 sudo apt-get remove --yes lshw
 
 
@@ -218,7 +218,7 @@ sudo apt-get install --yes ntfs-3g
 #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
 # $ sudo ntfsfix /dev/sdb2
 
-# Remove repair-ntfs -nohost
+# Remove  repair-ntfs -nohost
 sudo apt-get remove --yes ntfs-3g
 
 
@@ -228,7 +228,7 @@ wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sud
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
-# Remove signal pc07
+# Remove  signal pc07
 sudo apt-get remove --yes signal-desktop
 sudo rm --force --verbose /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
 sudo apt-get update
@@ -237,7 +237,7 @@ sudo apt-get update
 # Install spice-vdagent *
 sudo apt-get install --yes spice-vdagent
 
-# Remove spice-vdagent *
+# Remove  spice-vdagent *
 sudo apt-get remove --yes spice-vdagent
 
 
@@ -252,7 +252,7 @@ sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
-# Remove ssh pc07
+# Remove  ssh pc07
 sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --yes ssh
@@ -263,11 +263,11 @@ echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewe
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
-# Remove the apt-key added during installation as an apt-key is no longer needed.
+# Remove  the apt-key added during installation as an apt-key is no longer needed.
 sudo apt-key del 0C1289C0 DEB49217
 # Web app: https://web.teamviewer.com
 
-# Remove teamviewer *
+# Remove  teamviewer *
 sudo apt-get remove --yes teamviewer
 sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
 sudo apt-key del 0C1289C0 DEB49217
@@ -277,14 +277,14 @@ sudo apt-get update
 # Install thunderbird *
 sudo apt-get install --yes thunderbird-l10n-nl
 
-# Remove thunderbird *
+# Remove  thunderbird *
 sudo apt-get remove --yes thunderbird-l10n-nl
 
 
 # Install usbutils *
 sudo apt-get install --yes usbutils
 
-# Remove usbutils *
+# Remove  usbutils *
 sudo apt-get remove --yes usbutils
 
 
@@ -292,7 +292,7 @@ sudo apt-get remove --yes usbutils
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest user')" "$(gettext --domain=kz 'guest')" || true
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
-# Remove user-guest -nohost
+# Remove  user-guest -nohost
 sudo userdel --remove "$(gettext --domain=kz 'guest')"
 
 
@@ -300,7 +300,7 @@ sudo userdel --remove "$(gettext --domain=kz 'guest')"
 sudo snap remove vlc
 sudo apt-get install --yes vlc
 
-# Remove vlc *
+# Remove  vlc *
 sudo snap remove vlc
 sudo apt-get remove --yes vlc
 
@@ -308,7 +308,7 @@ sudo apt-get remove --yes vlc
 # Install vscode pc07
 sudo snap install --classic code
 
-# Remove vscode pc07
+# Remove  vscode pc07
 sudo snap remove code
 
 
@@ -319,7 +319,7 @@ sudo apt-get update
 sudo apt-get install --yes webmin
 # Web app: https://localhost:10000
 
-# Remove webmin pc07
+# Remove  webmin pc07
 sudo apt-get remove --yes webmin
 sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 sudo apt-get update

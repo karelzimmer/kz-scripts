@@ -13,7 +13,7 @@ sudo apt-get update
 sudo apt-get upgrade --yes
 sudo snap refresh
 
-# Remove update-system *
+# Remove  update-system *
 # Do this first.
 # There is no command available to remove update system.
 
@@ -21,7 +21,7 @@ sudo snap refresh
 # Install ansible *
 sudo apt-get install --yes ansible
 
-# Remove ansible *
+# Remove  ansible *
 sudo apt-get remove --yes ansible
 
 
@@ -31,7 +31,7 @@ sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove fwupd -nohost
+# Remove  fwupd -nohost
 # Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
@@ -42,7 +42,7 @@ sudo systemctl start fwupd.service
 sudo apt-get install --yes locate
 sudo updatedb
 
-# Remove locate *
+# Remove  locate *
 sudo apt-get remove --yes locate
 
 
@@ -54,7 +54,7 @@ sudo apt-get install --yes ntfs-3g
 #   /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
 # $ sudo ntfsfix /dev/sdb2
 
-# Remove repair-ntfs -nohost
+# Remove  repair-ntfs -nohost
 sudo apt-get remove --yes ntfs-3g
 
 
@@ -65,7 +65,7 @@ sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRoot
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
-# Remove ssh *
+# Remove  ssh *
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --yes ssh
@@ -76,7 +76,7 @@ sudo apt-get install --yes ufw
 sudo ufw allow ssh
 sudo ufw enable
 
-# Remove ufw *
+# Remove  ufw *
 sudo ufw disable
 sudo apt-get remove --yes ufw
 
@@ -85,5 +85,5 @@ sudo apt-get remove --yes ufw
 # Enable access to system monitoring tasks like read many log files in /var/log.
 sudo usermod --append --groups adm "${SUDO_USER:-$USER}"
 
-# Remove users *
+# Remove  users *
 sudo deluser "${SUDO_USER:-$USER}" adm
