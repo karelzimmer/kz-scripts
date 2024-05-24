@@ -227,7 +227,7 @@ $(gettext 'NUM  FILE')\n"
             )
     if [[ -n $files ]]; then
         text+=$files
-        $option_gui || text+="\n
+        text+="\n
 $(gettext 'To view the contents of FILE execute: cat FILE')
 $(eval_gettext "To view the commands of FILE execute: \$DISPLAY_NAME --cat --f\
 ile FILE")
@@ -265,7 +265,7 @@ $(gettext 'NUM  APP')\n"
         )
     if [[ -n $apps ]]; then
         text+=$apps
-        $option_gui || text+="\n
+        text+="\n
 $(eval_gettext "To view the contents of the APPs set up file execute: \$DISPLA\
 Y_NAME --cat APP...")
 $(eval_gettext "To set up the APPs execute: \$DISPLAY_NAME APP...")
