@@ -167,11 +167,13 @@ function process_input {
     input_file=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$EDITION.sh
 
     if $option_list; then
+        option_gui=false # Ignore start in graphical mode.
         process_option_list
         exit $OK
     fi
 
     if $option_file; then
+        option_gui=false # Ignore start in graphical mode.
         if [[ ! $(basename "$file_argument") == $PROGRAM_NAME-*.sh ]]; then
             text="$(eval_gettext "Filename must start with '\$PROGRAM_NAME-' a\
 nd end with '.sh'.")"
@@ -187,6 +189,7 @@ nd end with '.sh'.")"
     fi
 
     if $option_apps; then
+        option_gui=false # Ignore start in graphical mode.
         process_option_apps
         exit $OK
     fi
@@ -194,6 +197,7 @@ nd end with '.sh'.")"
     command_file=$(mktemp -t "$PROGRAM_NAME-$DISTRO-$EDITION-XXXXXXXXXX.sh")
 
     if $argument_app; then
+        option_gui=false # Ignore start in graphical mode.
         process_argument_app
     else
         process_input_file_by_user
