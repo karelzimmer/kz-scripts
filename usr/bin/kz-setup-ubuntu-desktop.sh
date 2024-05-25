@@ -6,46 +6,46 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-# Setup anydesk -nouser
+# Setup anydesk for -nouser
 # Remote Wayland display server is not supported.
 kz-gset --addaft=anydesk
 
-# Reset anydesk -nouser
+# Reset anydesk for -nouser
 kz-gset --delete=anydesk
 
 
-# Setup calibre hugo@pc-van-hugo
+# Setup calibre for hugo@pc-van-hugo
 kz-gset --addaft=calibre-gui
 
-# Reset calibre hugo@pc-van-hugo
+# Reset calibre for hugo@pc-van-hugo
 kz-gset --delete=calibre-gui
 
 
-# Setup cockpit karel@pc06
+# Setup cockpit for karel@pc06
 kz-gset --addaft=kz-cockpit
 
-# Reset cockpit karel@pc06
+# Reset cockpit for karel@pc06
 kz-gset --delete=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 
-# Setup firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
+# Setup firefox for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --delete=firefox            # dpkg
 kz-gset --delete=firefox_firefox    # snap
 
-# Reset firefox monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
+# Reset firefox for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --addbef=firefox         # dpkg
 kz-gset --addbef=firefox_firefox # snap
 
 
-# Setup gdebi *
+# Setup gdebi for *
 xdg-mime default gdebi.desktop application/vnd.debian.binary-package
 
-# Reset gdebi *
+# Reset gdebi for *
 xdg-mime default snap-store_ubuntu-software-local-file.desktop application/vnd.debian.binary-package
 
 
-# Setup gnome *
+# Setup gnome for *
 gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface clock-show-weekday true
@@ -75,7 +75,7 @@ if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extension
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
-# Reset gnome *
+# Reset gnome for *
 gsettings reset org.gnome.desktop.app-folders folder-children
 gsettings reset org.gnome.desktop.calendar show-weekdate
 gsettings reset org.gnome.desktop.interface clock-show-date
@@ -107,122 +107,122 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.pref
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
 
 
-# Setup google-chrome *
+# Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf
 
-# Reset google-chrome *
+# Reset google-chrome for *
 xdg-mime default org.gnome.Evince.desktop application/pdf
 
 
-# Setup google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
+# Setup google-chrome for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --addbef=google-chrome
 
-# Reset google-chrome monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
+# Reset google-chrome for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --delete=google-chrome
 
 
-# Setup handbrake emily@pc-van-emily
+# Setup handbrake for emily@pc-van-emily
 kz-gset --addaft=fr.handbrake.ghb
 
-# Reset handbrake emily@pc-van-emily
+# Reset handbrake for emily@pc-van-emily
 kz-gset --delete=fr.handbrake.ghb
 
 
-# Setup kvm karel@pc06
+# Setup kvm for karel@pc06
 kz-gset --addaft=virt-manager
 
-# Reset kvm karel@pc06
+# Reset kvm for karel@pc06
 kz-gset --delete=virt-manager
 
 
-# Setup lynis -nouser
+# Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
-# Reset lynis -nouser
+# Reset lynis for -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
 
-# Setup nautilus-hide *
+# Setup nautilus-hide for *
 echo 'snap' > "$HOME"/.hidden
 
-# Reset nautilus-hide *
+# Reset nautilus-hide for *
 rm --force --verbose "$HOME"/.hidden
 
 
-# Setup restore-thumbnails -nouser
+# Setup restore-thumbnails for -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
-# Reset restore-thumbnails -nouser
+# Reset restore-thumbnails for -nouser
 # There is no command available to reset restored thumbnails.
 
-# Setup spotify monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup spotify for monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addaft=kz-spotify
 
-# Reset spotify monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset spotify for monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delete=kz-spotify
 
 
-# Setup sound-juicer emily@pc-van-emily
+# Setup sound-juicer for emily@pc-van-emily
 kz-gset --addaft=org.gnome.SoundJuicer
 
-# Reset sound-juicer emily@pc-van-emily
+# Reset sound-juicer for emily@pc-van-emily
 kz-gset --delete=org.gnome.SoundJuicer
 
 
-# Setup thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup thunderbird for monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delete=thunderbird                # dpkg
 kz-gset --delete=thunderbird_thunderbird    # snap
 
-# Reset thunderbird monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset thunderbird for monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addbef=thunderbird             # dpkg
 kz-gset --addbef=thunderbird_thunderbird # snap
 
 
-# Setup teamviewer karel@pc06
+# Setup teamviewer for karel@pc06
 kz-gset --addaft=com.teamviewer.TeamViewer
 
-# Reset teamviewer karel@pc06
+# Reset teamviewer for karel@pc06
 kz-gset --delete=com.teamviewer.TeamViewer
 
 
-# Setup telegram hugo@pc-van-hugo maria@maria-desktop
+# Setup telegram for hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addaft=kz-telegram
 
-# Reset telegram hugo@pc-van-hugo  maria@maria-desktop
+# Reset telegram for hugo@pc-van-hugo  maria@maria-desktop
 kz-gset --delete=kz-telegram
 
 
-# Setup terminal karel@pc01 karel@pc06
+# Setup terminal for karel@pc01 karel@pc06
 kz-gset --addbef=org.gnome.Terminal
 # Search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
-# Reset terminal karel@pc01 karel@pc06
+# Reset terminal for karel@pc01 karel@pc06
 kz-gset --delete=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 
-# Setup ubuntu-desktop-installer *
+# Setup ubuntu-desktop-installer for *
 kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer
 
-# Reset ubuntu-desktop-installer *
+# Reset ubuntu-desktop-installer for *
 kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 
-# Setup virtualbox hugo@pc-van-hugo
+# Setup virtualbox for hugo@pc-van-hugo
 kz-gset --addaft=virtualbox
 kz-gset --addaft=kz-vm-hugowin732
 
-# Reset virtualbox hugo@pc-van-hugo
+# Reset virtualbox for hugo@pc-van-hugo
 kz-gset --delete=virtualbox
 kz-gset --delete=kz-vm-hugowin732
 
 
-# Setup vlc *
+# Setup vlc for *
 xdg-mime default vlc.desktop video/mp4              # dpkg
 xdg-mime default vlc.desktop video/x-matroska       # dpkg
 xdg-mime default vlc.desktop video/webm             # dpkg
@@ -230,13 +230,13 @@ xdg-mime default vlc_vlc.desktop video/mp4          # snap
 xdg-mime default vlc_vlc.desktop video/x-matroska   # snap
 xdg-mime default vlc_vlc.desktop video/webm         # snap
 
-# Reset vlc *
+# Reset vlc for *
 xdg-mime default org.gnome.Totem.desktop video/mp4
 xdg-mime default org.gnome.Totem.desktop video/x-matroska
 xdg-mime default org.gnome.Totem.desktop video/webm
 
 
-# Setup vscode karel@pc01 karel@pc06
+# Setup vscode for karel@pc01 karel@pc06
 kz-gset --addbef=code_code
 xdg-mime default code_code.desktop application/json
 xdg-mime default code_code.desktop application/x-desktop
@@ -247,7 +247,7 @@ xdg-mime default code_code.desktop text/markdown
 xdg-mime default code_code.desktop text/troff
 xdg-mime default code_code.desktop text/x-python
 
-# Reset vscode karel@pc01 karel@pc06
+# Reset vscode for karel@pc01 karel@pc06
 kz-gset --delete=code_code
 xdg-mime default org.gnome.gedit.desktop application/json
 xdg-mime default org.gnome.gedit.desktop application/x-desktop
@@ -259,15 +259,15 @@ xdg-mime default org.gnome.gedit.desktop text/troff
 xdg-mime default org.gnome.gedit.desktop text/x-python
 
 
-# Setup whatsapp hugo@pc-van-hugo maria@maria-desktop
+# Setup whatsapp for hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addaft=kz-whatsapp
 
-# Reset whatsapp hugo@pc-van-hugo maria@maria-desktop
+# Reset whatsapp for hugo@pc-van-hugo maria@maria-desktop
 kz-gset --delete=kz-whatsapp
 
 
-# Setup zoom monique@pc01 karel@pc01
+# Setup zoom for monique@pc01 karel@pc01
 kz-gset --addaft=kz-zoom
 
-# Reset zoom monique@pc01 karel@pc01
+# Reset zoom for monique@pc01 karel@pc01
 kz-gset --delete=kz-zoom
