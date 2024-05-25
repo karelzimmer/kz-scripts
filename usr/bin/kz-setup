@@ -309,7 +309,7 @@ function process_input_file_by_app {
     while read -r input_record; do
         case $input_record in
             '#'*"$mode"*"$app_argument"*)
-                # Possible matching App record (app_argument is user input).
+                # Possible matching app record (app_argument is user input).
                 app_match=false
                 app_name=$(
                     printf '%s\n' "$input_record"       |
@@ -317,14 +317,14 @@ function process_input_file_by_app {
                     cut --delimiter=' ' --fields=3
                     )
                 if [[ $app_name = "$app_argument" ]]; then
-                    # Matching App record.
+                    # Matching app record.
                     app_match=true
                     no_app_match=false
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
             '#'*"$mode"*|'#'*"$mode_reverse"*)
-                # Mismatched App record.
+                # Mismatched app record.
                 app_match=false
                 continue
                 ;;
@@ -353,12 +353,12 @@ function process_input_file_by_user {
     while read -r input_record; do
         case $input_record in
             '#'*"$mode"*'*'*|'#'*"$mode"*"$USER"'@'"$HOSTNAME"*)
-                # Matching App record.
+                # Matching app record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
             '#'*"$mode"*|'#'*"$mode_reverse"*)
-                # Mismatched App record.
+                # Mismatched app record.
                 user_match=false
                 continue
                 ;;
