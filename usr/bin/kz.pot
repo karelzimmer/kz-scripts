@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 15:29+0200\n"
+"POT-Creation-Date: 2024-05-25 09:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -484,7 +484,7 @@ msgstr ""
 msgid "No install file found, looked for '$input_file'."
 msgstr ""
 
-msgid "The following APPs are available:"
+msgid "The following apps are available:"
 msgstr ""
 
 msgid "NUM  APP"
@@ -495,12 +495,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs install file execute: $DISPLAY_NAME --cat "
+"To view the contents of the apps install file execute: $DISPLAY_NAME --cat "
 "APP..."
 msgstr ""
 
 #, sh-format
-msgid "To install the APPs execute: $DISPLAY_NAME APP..."
+msgid "To install the apps execute: $DISPLAY_NAME APP..."
 msgstr ""
 
 #, sh-format
@@ -570,7 +570,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "APPs $operation completed."
+msgid "Apps $operation completed."
 msgstr ""
 
 msgid ""
@@ -830,12 +830,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs set up file execute: $DISPLAY_NAME --cat "
+"To view the contents of the apps set up file execute: $DISPLAY_NAME --cat "
 "APP..."
 msgstr ""
 
 #, sh-format
-msgid "To set up the APPs execute: $DISPLAY_NAME APP..."
+msgid "To set up the apps execute: $DISPLAY_NAME APP..."
 msgstr ""
 
 #, sh-format

@@ -250,11 +250,11 @@ $USAGE_LINE"
 }
 
 
-# This function shows the available APPs from the input file.
+# This function shows the available apps from the input file.
 function process_option_apps {
     local apps=''
 
-    text="$(gettext 'The following APPs are available:')
+    text="$(gettext 'The following apps are available:')
 
 $(gettext 'NUM  APP')\n"
     apps=$(
@@ -274,9 +274,9 @@ $(gettext 'NUM  APP')\n"
     if [[ -n $apps ]]; then
         text+=$apps
         text+="\n
-$(eval_gettext "To view the contents of the APPs install file execute: \$DISPL\
+$(eval_gettext "To view the contents of the apps install file execute: \$DISPL\
 AY_NAME --cat APP...")
-$(eval_gettext "To install the APPs execute: \$DISPLAY_NAME APP...")
+$(eval_gettext "To install the apps execute: \$DISPLAY_NAME APP...")
 $(eval_gettext "To view the contents of the default install file execute: \$DI\
 SPLAY_NAME --cat")"
     else
@@ -551,7 +551,7 @@ use app 'Terminal', type 'kz install \$failed_apps_text'.")
             # shellcheck disable=SC2034
             operation=$(gettext 'remove')
         fi
-        text=$(eval_gettext "APPs \$operation completed.")
+        text=$(eval_gettext "Apps \$operation completed.")
         if $reboot; then
             text+="
 $(gettext "The computer will now reboot to finish installing the apps and chan\

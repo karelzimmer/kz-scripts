@@ -242,11 +242,11 @@ $USAGE_LINE"
 }
 
 
-# This function shows the available APPs from the input file.
+# This function shows the available apps from the input file.
 function process_option_apps {
     local apps=''
 
-    text="$(gettext 'The following APPs are available:')
+    text="$(gettext 'The following apps are available:')
 
 $(gettext 'NUM  APP')\n"
     apps=$(
@@ -266,9 +266,9 @@ $(gettext 'NUM  APP')\n"
     if [[ -n $apps ]]; then
         text+=$apps
         text+="\n
-$(eval_gettext "To view the contents of the APPs set up file execute: \$DISPLA\
+$(eval_gettext "To view the contents of the apps set up file execute: \$DISPLA\
 Y_NAME --cat APP...")
-$(eval_gettext "To set up the APPs execute: \$DISPLAY_NAME APP...")
+$(eval_gettext "To set up the apps execute: \$DISPLAY_NAME APP...")
 $(eval_gettext "To view the contents of the default set up file execute: \$DIS\
 PLAY_NAME --cat")"
     else
@@ -511,7 +511,7 @@ use app 'Terminal', type 'kz setup \$failed_apps_text'.")
             # shellcheck disable=SC2034
             operation=$(gettext 'reset')
         fi
-        text=$(eval_gettext "APPs \$operation completed.")
+        text=$(eval_gettext "Apps \$operation completed.")
         if $logout; then
             if [[ $EDITION = 'desktop' ]]; then
                 text+="

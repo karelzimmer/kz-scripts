@@ -548,8 +548,8 @@ msgstr "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
 msgid "No install file found, looked for '$input_file'."
 msgstr "Geen installatiebestand gevonden, zocht '$input_file'."
 
-msgid "The following APPs are available:"
-msgstr "De volgende APPs zijn beschikbaar:"
+msgid "The following apps are available:"
+msgstr "De volgende apps zijn beschikbaar:"
 
 msgid "NUM  APP"
 msgstr "NUM  APP"
@@ -559,15 +559,15 @@ msgstr "  0  Geen apps gevonden."
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs install file execute: $DISPLAY_NAME --cat "
+"To view the contents of the apps install file execute: $DISPLAY_NAME --cat "
 "APP..."
 msgstr ""
-"Om de inhoud van het installatiebestand voor APPs te bekijken voer uit: "
+"Om de inhoud van het installatiebestand voor apps te bekijken voer uit: "
 "$DISPLAY_NAME --cat APP..."
 
 #, sh-format
-msgid "To install the APPs execute: $DISPLAY_NAME APP..."
-msgstr "Om de APPs te installeren voer uit: $DISPLAY_NAME APP..."
+msgid "To install the apps execute: $DISPLAY_NAME APP..."
+msgstr "Om de apps te installeren voer uit: $DISPLAY_NAME APP..."
 
 #, sh-format
 msgid ""
@@ -654,8 +654,8 @@ msgstr ""
 "gebruik app 'Terminal' en typ 'kz setup $failed_apps_text'."
 
 #, sh-format
-msgid "APPs $operation completed."
-msgstr "APPs $operation is voltooid."
+msgid "Apps $operation completed."
+msgstr "Apps $operation is voltooid."
 
 msgid ""
 "You will now be logged out of the computer to finish installing the apps and "
@@ -977,15 +977,15 @@ msgstr "Geen instelbestand gevonden, zocht '$input_file'."
 
 #, sh-format
 msgid ""
-"To view the contents of the APPs set up file execute: $DISPLAY_NAME --cat "
+"To view the contents of the apps set up file execute: $DISPLAY_NAME --cat "
 "APP..."
 msgstr ""
-"Om de inhoud van het instelbestand voor APPs te bekijken voer uit: "
+"Om de inhoud van het instelbestand voor apps te bekijken voer uit: "
 "$DISPLAY_NAME --cat APP..."
 
 #, sh-format
-msgid "To set up the APPs execute: $DISPLAY_NAME APP..."
-msgstr "Om de APPs in te stellen voer uit: $DISPLAY_NAME APP..."
+msgid "To set up the apps execute: $DISPLAY_NAME APP..."
+msgstr "Om de apps in te stellen voer uit: $DISPLAY_NAME APP..."
 
 #, sh-format
 msgid ""
