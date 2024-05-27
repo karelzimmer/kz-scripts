@@ -178,7 +178,7 @@ sudo apt-get install --yes epiphany-browser
 # Remove gnome-web from pc06
 sudo apt-get remove --yes epiphany-browser
 
-# Install google-chrome on pc01 pc02 pc06
+# Install google-chrome on *
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
@@ -189,7 +189,7 @@ echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://d
 # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
-# Remove google-chrome from pc01 pc02 pc06
+# Remove google-chrome from *
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
