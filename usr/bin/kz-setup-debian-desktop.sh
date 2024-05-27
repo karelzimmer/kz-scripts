@@ -112,11 +112,11 @@ gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 # Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf
 
-# Reset google-chrome for *
-xdg-mime default org.gnome.Evince.desktop application/pdf
-
 # Setup google-chrome for karel@pc07
 kz-gset --addbef=google-chrome
+
+# Reset google-chrome for *
+xdg-mime default org.gnome.Evince.desktop application/pdf
 
 # Reset google-chrome for karel@pc07
 kz-gset --delete=google-chrome

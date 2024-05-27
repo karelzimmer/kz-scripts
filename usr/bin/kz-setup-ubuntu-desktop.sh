@@ -104,11 +104,11 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.pref
 # Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf
 
-# Reset google-chrome for *
-xdg-mime default org.gnome.Evince.desktop application/pdf
-
 # Setup google-chrome for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --addbef=google-chrome
+
+# Reset google-chrome for *
+xdg-mime default org.gnome.Evince.desktop application/pdf
 
 # Reset google-chrome for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --delete=google-chrome
