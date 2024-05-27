@@ -242,6 +242,12 @@ kz-gset --addaft=kz-whatsapp
 # Reset whatsapp for hugo@pc-van-hugo maria@maria-desktop
 kz-gset --delete=kz-whatsapp
 
+# Setup youtubedl-gui for emily@pc-van-emily
+kz-gset --addaft=youtubedl-gui
+
+# Reset youtubedl-gui for emily@pc-van-emily
+kz-gset --delete=youtubedl-gui
+
 # Setup zoom for monique@pc01 karel@pc01
 kz-gset --addaft=kz-zoom
 
