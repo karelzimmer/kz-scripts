@@ -17,13 +17,11 @@ sudo snap refresh
 # Do this first.
 # There is no command available to remove update system.
 
-
 # Install ansible on *
 sudo apt-get install --yes ansible
 
 # Remove ansible from *
 sudo apt-get remove --yes ansible
-
 
 # Install fwupd on -nohost
 # Disable the Firmware update daemon.
@@ -37,14 +35,12 @@ sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
-
 # Install locate on *
 sudo apt-get install --yes locate
 sudo updatedb
 
 # Remove locate from *
 sudo apt-get remove --yes locate
-
 
 # Install repair-ntfs on -nohost
 sudo apt-get install --yes ntfs-3g
@@ -56,7 +52,6 @@ sudo apt-get install --yes ntfs-3g
 
 # Remove repair-ntfs from -nohost
 sudo apt-get remove --yes ntfs-3g
-
 
 # Install ssh on *
 sudo apt-get install --yes ssh
@@ -70,7 +65,6 @@ sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --yes ssh
 
-
 # Install ufw on *
 sudo apt-get install --yes ufw
 sudo ufw allow ssh
@@ -79,7 +73,6 @@ sudo ufw enable
 # Remove ufw from *
 sudo ufw disable
 sudo apt-get remove --yes ufw
-
 
 # Install users on *
 # Enable access to system monitoring tasks like read many log files in /var/log.

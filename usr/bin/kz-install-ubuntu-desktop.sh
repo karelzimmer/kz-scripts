@@ -20,7 +20,6 @@ sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport
 sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport
 sudo systemctl enable --now apport.service
 
-
 # Install update-system on *
 # Do this first [2/2].
 # Update the system.
@@ -32,13 +31,11 @@ sudo snap refresh
 # Do this first [2/2].
 # There is no command available to remove update system.
 
-
 # Install ansible on pc06
 sudo apt-get install --yes ansible
 
 # Remove ansible from pc06
 sudo apt-get remove --yes ansible
-
 
 # Install anydesk on -nohost
 # Remote Wayland display server is not supported.
@@ -53,20 +50,17 @@ sudo apt-get remove --yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
-
 # Install bleachbit on pc-van-hugo
 sudo apt-get install --yes bleachbit
 
 # Remove bleachbit from pc-van-hugo
 sudo apt-get remove --yes bleachbit
 
-
 # Install calibre on pc06 pc-van-hugo
 sudo apt-get install --yes calibre
 
 # Remove calibre from pc06 pc-van-hugo
 sudo apt-get remove --yes calibre
-
 
 # Install change-grub-timeout on *
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/' /etc/default/grub
@@ -76,13 +70,11 @@ sudo update-grub
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/default/grub
 sudo update-grub
 
-
 # Install clamav on pc-van-hugo
 sudo apt-get install --yes clamtk-gnome
 
 # Remove clamav from pc-van-hugo
 sudo apt-get remove --yes clamtk-gnome
-
 
 # Install cockpit on pc06
 sudo apt-get install --yes cockpit cockpit-pcp
@@ -91,14 +83,12 @@ sudo apt-get install --yes cockpit cockpit-pcp
 # Remove cockpit from pc06
 sudo apt-get remove --yes cockpit
 
-
 # Install cups-backend-bjnp on pc-van-emily
 # Add support for Canon USB over IP BJNP protocol.
 sudo apt-get install --yes cups-backend-bjnp
 
 # Remove cups-backend-bjnp from pc-van-emily
 sudo apt-get remove --yes cups-backend-bjnp
-
 
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting) to prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
@@ -113,7 +103,6 @@ sudo update-grub
 # Check for kernel config parameter pci=noaer.
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
-
 # Install disabled-lidswitch on pc-van-hugo
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
@@ -121,13 +110,11 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /de
 # Remove disabled-lidswitch from pc-van-hugo
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
-
 # Install exiftool on pc06
 sudo apt-get install --yes libimage-exiftool-perl
 
 # Remove exiftool from pc06
 sudo apt-get remove --yes libimage-exiftool-perl
-
 
 # Install fdupes on -nohost
 sudo apt-get install --yes fdupes
@@ -139,7 +126,6 @@ sudo apt-get install --yes fdupes
 # Remove fdupes from -nohost
 sudo apt-get remove --yes fdupes
 
-
 # Install force-x11 on -nohost
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 # Force means no choice @ user login for X11 or Wayland!
@@ -149,7 +135,6 @@ sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' 
 # Remove force-x11 from -nohost
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-
 
 # Install fwupd on -nohost
 # Disable the Firmware update daemon.
@@ -163,13 +148,11 @@ sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
-
 # Install gdebi on *
 sudo apt-get install --yes gdebi
 
 # Remove gdebi from *
 sudo apt-get remove --yes gdebi
-
 
 # Install gimp on pc06 pc-van-hugo
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
@@ -177,13 +160,11 @@ sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 # Remove gimp from pc06 pc-van-hugo
 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
-
 # Install gnome-gmail on pc01 pc06
 sudo apt-get install --yes gnome-gmail
 
 # Remove gnome-gmail from pc01 pc06
 sudo apt-get remove --yes gnome-gmail
-
 
 # Install gnome-tweaks on *
 sudo apt-get install --yes gnome-tweaks
@@ -191,13 +172,11 @@ sudo apt-get install --yes gnome-tweaks
 # Remove gnome-tweaks from *
 sudo apt-get remove --yes gnome-tweaks
 
-
 # Install gnome-web on pc06
 sudo apt-get install --yes epiphany-browser
 
 # Remove gnome-web from pc06
 sudo apt-get remove --yes epiphany-browser
-
 
 # Install google-chrome on pc01 pc02 pc06
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
@@ -215,7 +194,6 @@ sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
 
-
 # Install google-earth on -nohost
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
@@ -229,13 +207,11 @@ sudo apt-get remove --yes google-earth-pro-stable
 sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
 sudo apt-get update
 
-
 # Install handbrake on pc-van-emily
 sudo apt-get install --yes handbrake
 
 # Remove handbrake from pc-van-emily
 sudo apt-get remove --yes handbrake
-
 
 # Install htop on pc06
 sudo apt-get install --yes htop
@@ -243,13 +219,11 @@ sudo apt-get install --yes htop
 # Remove htop from pc06
 sudo apt-get remove --yes htop
 
-
 # Install krita on pc06
 sudo apt-get install --yes krita
 
 # Remove kvm from pc06
 sudo apt-get remove --yes krita
-
 
 # Install kvm on pc06
 # Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
@@ -263,13 +237,11 @@ sudo delgroup libvirtd-dnsmasq
 sudo deluser "${SUDO_USER:-${SUDO_USER:-$USER}}" libvirtd
 sudo delgroup libvirtd
 
-
 # Install libreoffice on *
 sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
 
 # Remove libreoffice from *
 sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
-
 
 # Install locate on pc06
 sudo apt-get install --yes locate
@@ -278,7 +250,6 @@ sudo updatedb
 # Remove locate from pc06
 sudo apt-get remove --yes locate
 
-
 # Install monitors on pc06
 if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
@@ -286,20 +257,17 @@ if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.c
 # Remove monitors from pc06
 sudo rm --force --verbose ~gdm/.config/monitors.xml
 
-
 # Install nautilus-admin on pc06
 sudo apt-get install --yes nautilus-admin
 
 # Remove nautilus-admin from pc06
 sudo apt-get remove --yes nautilus-admin
 
-
 # Install procs on pc06
 sudo snap install procs
 
 # Remove procs from pc06
 sudo snap remove procs
-
 
 # Install repair-ntfs on -nohost
 sudo apt-get install --yes ntfs-3g
@@ -312,7 +280,6 @@ sudo apt-get install --yes ntfs-3g
 # Remove repair-ntfs from -nohost
 sudo apt-get remove --yes ntfs-3g
 
-
 # Install signal on pc06
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list > /dev/null
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
@@ -324,13 +291,11 @@ sudo apt-get remove --yes signal-desktop
 sudo rm --force --verbose /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
 sudo apt-get update
 
-
 # Install sound-juicer on pc-van-emily
 sudo apt-get install --yes sound-juicer
 
 # Remove sound-juicer from pc-van-emily
 sudo apt-get remove --yes sound-juicer
-
 
 # Install ssh on pc01 pc06
 sudo apt-get install --yes ssh
@@ -348,7 +313,6 @@ sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --yes ssh
 
-
 # Install sushi on pc06
 sudo apt-get install --yes gnome-sushi
 # Usage:
@@ -356,7 +320,6 @@ sudo apt-get install --yes gnome-sushi
 
 # Remove sushi from pc06
 sudo apt-get remove --yes gnome-sushi
-
 
 # Install teamviewer on *
 echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
@@ -373,13 +336,11 @@ sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/ke
 sudo apt-key del 0C1289C0 DEB49217
 sudo apt-get update
 
-
 # Install tree on pc06
 sudo apt-get install --yes tree
 
 # Remove tree from pc06
 sudo apt-get remove --yes tree
-
 
 # Install ufw on pc01 pc06
 sudo apt-get install --yes gufw
@@ -390,14 +351,12 @@ sudo ufw enable
 sudo ufw disable
 sudo apt-get remove --yes gufw
 
-
 # Install user-guest on -nohost
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest user')" "$(gettext --domain=kz 'guest')" || true
 sudo passwd --delete "$(gettext --domain=kz 'guest')"
 
 # Remove user-guest from -nohost
 sudo userdel --remove "$(gettext --domain=kz 'guest')"
-
 
 # Install user-karel on pc01
 sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
@@ -407,7 +366,6 @@ sudo passwd --delete --expire karel
 # Remove user-karel from pc01
 sudo userdel --remove karel
 
-
 # Install user-toos on Laptop
 sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
 sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos
@@ -415,7 +373,6 @@ sudo passwd --delete --expire toos
 
 # Remove user-toos from Laptop
 sudo userdel --remove toos
-
 
 # Install virtualbox on pc-van-hugo
 # If installation hangs or VBox does not work, check Linux-info.txt.
@@ -426,7 +383,6 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 # Remove virtualbox from pc-van-hugo
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
-
 # Install vlc on *
 sudo snap remove vlc
 sudo apt-get install --yes vlc
@@ -435,20 +391,17 @@ sudo apt-get install --yes vlc
 sudo snap remove vlc
 sudo apt-get remove --yes vlc
 
-
 # Install vscode on pc01 pc06
 sudo snap install --classic code
 
 # Remove vscode from pc01 pc06
 sudo snap remove code
 
-
 # Install wine on -nohost
 sudo apt-get install --yes wine winetricks playonlinux
 
 # Remove wine from -nohost
 sudo apt-get remove --yes wine winetricks playonlinux
-
 
 # Install youtube-dl on pc-van-emily pc-van-hugo
 sudo apt-get install --yes youtubedl-gui

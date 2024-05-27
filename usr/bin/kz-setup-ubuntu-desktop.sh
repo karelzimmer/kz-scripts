@@ -13,13 +13,11 @@ kz-gset --addaft=anydesk
 # Reset anydesk for -nouser
 kz-gset --delete=anydesk
 
-
 # Setup calibre for hugo@pc-van-hugo
 kz-gset --addaft=calibre-gui
 
 # Reset calibre for hugo@pc-van-hugo
 kz-gset --delete=calibre-gui
-
 
 # Setup cockpit for karel@pc06
 kz-gset --addaft=kz-cockpit
@@ -27,7 +25,6 @@ kz-gset --addaft=kz-cockpit
 # Reset cockpit for karel@pc06
 kz-gset --delete=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
-
 
 # Setup firefox for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --delete=firefox            # dpkg
@@ -37,13 +34,11 @@ kz-gset --delete=firefox_firefox    # snap
 kz-gset --addbef=firefox         # dpkg
 kz-gset --addbef=firefox_firefox # snap
 
-
 # Setup gdebi for *
 xdg-mime default gdebi.desktop application/vnd.debian.binary-package
 
 # Reset gdebi for *
 xdg-mime default snap-store_ubuntu-software-local-file.desktop application/vnd.debian.binary-package
-
 
 # Setup gnome for *
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -106,13 +101,11 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Lega
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
 
-
 # Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf
 
 # Reset google-chrome for *
 xdg-mime default org.gnome.Evince.desktop application/pdf
-
 
 # Setup google-chrome for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --addbef=google-chrome
@@ -120,20 +113,17 @@ kz-gset --addbef=google-chrome
 # Reset google-chrome for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
 kz-gset --delete=google-chrome
 
-
 # Setup handbrake for emily@pc-van-emily
 kz-gset --addaft=fr.handbrake.ghb
 
 # Reset handbrake for emily@pc-van-emily
 kz-gset --delete=fr.handbrake.ghb
 
-
 # Setup kvm for karel@pc06
 kz-gset --addaft=virt-manager
 
 # Reset kvm for karel@pc06
 kz-gset --delete=virt-manager
-
 
 # Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
@@ -144,33 +134,28 @@ git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 # Reset lynis for -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
-
 # Setup nautilus-hide for *
 echo 'snap' > "$HOME"/.hidden
 
 # Reset nautilus-hide for *
 rm --force --verbose "$HOME"/.hidden
 
-
 # Setup restore-thumbnails for -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset restore-thumbnails for -nouser
 # There is no command available to reset restored thumbnails.
-
 # Setup spotify for monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --addaft=kz-spotify
 
 # Reset spotify for monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delete=kz-spotify
 
-
 # Setup sound-juicer for emily@pc-van-emily
 kz-gset --addaft=org.gnome.SoundJuicer
 
 # Reset sound-juicer for emily@pc-van-emily
 kz-gset --delete=org.gnome.SoundJuicer
-
 
 # Setup thunderbird for monique@pc01 karel@pc01 marin@pc02 karel@pc06
 kz-gset --delete=thunderbird                # dpkg
@@ -180,20 +165,17 @@ kz-gset --delete=thunderbird_thunderbird    # snap
 kz-gset --addbef=thunderbird             # dpkg
 kz-gset --addbef=thunderbird_thunderbird # snap
 
-
 # Setup teamviewer for karel@pc06
 kz-gset --addaft=com.teamviewer.TeamViewer
 
 # Reset teamviewer for karel@pc06
 kz-gset --delete=com.teamviewer.TeamViewer
 
-
 # Setup telegram for hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addaft=kz-telegram
 
 # Reset telegram for hugo@pc-van-hugo  maria@maria-desktop
 kz-gset --delete=kz-telegram
-
 
 # Setup terminal for karel@pc01 karel@pc06
 kz-gset --addbef=org.gnome.Terminal
@@ -205,13 +187,11 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 kz-gset --delete=org.gnome.Terminal
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-
 # Setup ubuntu-desktop-installer for *
 kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer
 
 # Reset ubuntu-desktop-installer for *
 kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer
-
 
 # Setup virtualbox for hugo@pc-van-hugo
 kz-gset --addaft=virtualbox
@@ -220,7 +200,6 @@ kz-gset --addaft=kz-vm-hugowin732
 # Reset virtualbox for hugo@pc-van-hugo
 kz-gset --delete=virtualbox
 kz-gset --delete=kz-vm-hugowin732
-
 
 # Setup vlc for *
 xdg-mime default vlc.desktop video/mp4              # dpkg
@@ -234,7 +213,6 @@ xdg-mime default vlc_vlc.desktop video/webm         # snap
 xdg-mime default org.gnome.Totem.desktop video/mp4
 xdg-mime default org.gnome.Totem.desktop video/x-matroska
 xdg-mime default org.gnome.Totem.desktop video/webm
-
 
 # Setup vscode for karel@pc01 karel@pc06
 kz-gset --addbef=code_code
@@ -258,13 +236,11 @@ xdg-mime default org.gnome.gedit.desktop text/markdown
 xdg-mime default org.gnome.gedit.desktop text/troff
 xdg-mime default org.gnome.gedit.desktop text/x-python
 
-
 # Setup whatsapp for hugo@pc-van-hugo maria@maria-desktop
 kz-gset --addaft=kz-whatsapp
 
 # Reset whatsapp for hugo@pc-van-hugo maria@maria-desktop
 kz-gset --delete=kz-whatsapp
-
 
 # Setup zoom for monique@pc01 karel@pc01
 kz-gset --addaft=kz-zoom

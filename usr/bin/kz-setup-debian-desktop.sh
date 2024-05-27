@@ -30,13 +30,11 @@ gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position
 gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height
 gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed
 
-
 # Setup debian-desktop-installer for *
 kz-gset --delete=install-debian
 
 # Reset debian-desktop-installer for *
 kz-gset --addbef=install-debian
-
 
 # Setup evolution for karel@pc07
 kz-gset --delete=org.gnome.Evolution
@@ -44,20 +42,17 @@ kz-gset --delete=org.gnome.Evolution
 # Reset evolution for karel@pc07
 kz-gset --addbef=org.gnome.Evolution
 
-
 # Setup firefox for karel@pc07
 kz-gset --delete=firefox-esr
 
 # Reset firefox for karel@pc07
 kz-gset --addbef=firefox-esr
 
-
 # Setup gdebi for *
 xdg-mime default gdebi.desktop application/vnd.debian.binary-package
 
 # Reset gdebi for *
 xdg-mime default org.gnome.FileRoller.desktop application/vnd.debian.binary-package
-
 
 # Setup gnome for *
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -114,13 +109,11 @@ gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-t
 gsettings reset org.gnome.shell disable-user-extensions
 gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant
 
-
 # Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf
 
 # Reset google-chrome for *
 xdg-mime default org.gnome.Evince.desktop application/pdf
-
 
 # Setup google-chrome for karel@pc07
 kz-gset --addbef=google-chrome
@@ -128,13 +121,11 @@ kz-gset --addbef=google-chrome
 # Reset google-chrome for karel@pc07
 kz-gset --delete=google-chrome
 
-
 # Setup kvm for karel@pc07
 kz-gset --addaft=virt-manager
 
 # Reset kvm for karel@pc07
 kz-gset --delete=virt-manager
-
 
 # Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
@@ -145,26 +136,22 @@ git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 # Reset lynis for -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
-
 # Setup nautilus-hide for *
 echo 'snap' > "$HOME"/.hidden
 
 # Reset nautilus-hide for *
 rm --force --verbose "$HOME"/.hidden
 
-
 # Setup restore-thumbnails for -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset restore-thumbnails for -nouser
 # There is no command available to reset restored thumbnails.
-
 # Setup spotify for karel@pc07
 kz-gset --addaft=kz-spotify
 
 # Reset spotify for karel@pc07
 kz-gset --delete=kz-spotify
-
 
 # Setup terminal for karel@pc07
 kz-gset --addbef=org.gnome.Terminal
@@ -179,7 +166,6 @@ kz-gset --delete=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-
 # Setup vlc for *
 xdg-mime default vlc.desktop video/mp4              # dpkg
 xdg-mime default vlc.desktop video/x-matroska       # dpkg
@@ -192,7 +178,6 @@ xdg-mime default vlc_vlc.desktop video/webm         # snap
 xdg-mime default org.gnome.Totem.desktop video/mp4
 xdg-mime default org.gnome.Totem.desktop video/x-matroska
 xdg-mime default org.gnome.Totem.desktop video/webm
-
 
 # Setup vscode for karel@pc07
 kz-gset --addbef=code_code
@@ -215,7 +200,6 @@ xdg-mime default org.gnome.gedit.desktop text/html
 xdg-mime default org.gnome.gedit.desktop text/markdown
 xdg-mime default org.gnome.gedit.desktop text/troff
 xdg-mime default org.gnome.gedit.desktop text/x-python
-
 
 # Setup webmin for karel@pc07
 kz-gset --addaft=kz-webmin

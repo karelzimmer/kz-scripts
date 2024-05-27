@@ -15,7 +15,6 @@ git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 # Reset lynis for -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 
-
 # Setup terminal for *
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc

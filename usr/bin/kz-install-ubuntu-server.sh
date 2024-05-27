@@ -17,13 +17,11 @@ sudo snap refresh
 # Do this first.
 # There is no command available to remove update system.
 
-
 # Install ansible on *
 sudo apt-get install --yes ansible
 
 # Remove ansible from *
 sudo apt-get remove --yes ansible
-
 
 # Install disabled-cloud-init on *
 # Prevent extra lines from cloud-init printed in terminal at login.
@@ -31,7 +29,6 @@ sudo touch /etc/cloud/cloud-init.disabled
 
 # Remove disabled-cloud-init from *
 sudo rm --force --verbose /etc/cloud/cloud-init.disabled
-
 
 # Install fwupd on -nohost
 # Disable the Firmware update daemon.
@@ -45,14 +42,12 @@ sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
-
 # Install locate on *
 sudo apt-get install --yes locate
 sudo updatedb
 
 # Remove locate from *
 sudo apt-get remove --yes locate
-
 
 # Install repair-ntfs on -nohost
 sudo apt-get install --yes ntfs-3g
@@ -65,7 +60,6 @@ sudo apt-get install --yes ntfs-3g
 # Remove repair-ntfs from -nohost
 sudo apt-get remove --yes ntfs-3g
 
-
 # Install ssh on *
 sudo apt-get install --yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
@@ -77,7 +71,6 @@ sudo systemctl restart ssh.service
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sudo apt-get remove --yes ssh
-
 
 # Install ufw on *
 sudo apt-get install --yes ufw
