@@ -226,7 +226,7 @@ sudo apt-get install --yes krita
 sudo apt-get remove --yes krita
 
 # Install kvm on pc06
-# Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
+# Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
 # Images are in: /var/lib/libvirt/images/

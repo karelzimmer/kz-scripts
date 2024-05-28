@@ -151,7 +151,7 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share
 sudo apt-get update
 
 # Install kvm on pc07
-# Dpkg::Options due to interaction due to restoring /etc/libvirt configuration files.
+# Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
 # Prevent "Error starting domain: Requested operation is not valid: network 'default' is not active".
