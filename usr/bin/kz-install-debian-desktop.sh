@@ -156,6 +156,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options
 sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
 # Prevent "Error starting domain: Requested operation is not valid: network 'default' is not active".
 sudo virsh --connect=qemu:///system net-autostart default
+# Check network 'default' with: sudo virsh --connect=qemu:///system net-info default (should output 'Autostart: yes')
 # Images are in: /var/lib/libvirt/images/
 
 # Remove kvm from pc07
