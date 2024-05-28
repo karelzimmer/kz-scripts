@@ -58,17 +58,17 @@ gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'inter
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
 # The following GSettings configuration tool commands only for machines running GNOME, e.g. not for Lubuntu, uses LXQt, and Xubuntu, uses Xfce.
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'                    ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'                       ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true               ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true                       ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'              ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true            ; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32              ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false          ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false                            ; fi
+if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'                   ; fi
 
 # Reset gnome for *
 gsettings reset org.gnome.desktop.app-folders folder-children
@@ -89,17 +89,17 @@ gsettings reset org.gnome.settings-daemon.plugins.power power-button-action
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type
 gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type
 # The following GSettings configuration tool commands only for machines running GNOME, e.g. not for Lubuntu, uses LXQt, and Xubuntu, uses Xfce.
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level            ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy                ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails       ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action       ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size ; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home                  ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant           ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover    ; fi
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link            ; fi
 
 # Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf
