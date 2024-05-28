@@ -138,7 +138,8 @@ nstallation of updates ***')
     except FileNotFoundError as fnf:
         text = str(fnf)
         kz_common.logmsg(PROGRAM_NAME, text)
-        text = f"{kz_common.GREEN}{_('Finished')}{kz_common.NORMAL}"
+        text = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}"
+        text += f'{kz_common.NORMAL}'
         kz_common.infomsg(PROGRAM_NAME, text)
     except Exception as exc:
         text = str(exc)

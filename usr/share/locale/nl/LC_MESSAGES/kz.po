@@ -393,8 +393,8 @@ msgstr "Installeren pakket kz is niet uitgevoerd."
 msgid "Install package kz"
 msgstr "Pakket kz installeren"
 
-msgid "Finished"
-msgstr "Gereed"
+msgid "finished"
+msgstr "gereed"
 
 msgid ""
 "Package kz has been successfully installed.\n"
