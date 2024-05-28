@@ -39,7 +39,7 @@ readonly DEB_REPO_APPDIR=$DEB_REPO/src
 readonly DEB_REPO_DISTDIR=$DEB_REPO/dist
 readonly DEB_NAME=kz_4.2.1_all.deb
 
-readonly UPLOADS_REPO=$HOME/kz-upload
+readonly UPLOADS_REPO=$HOME/kz-uploads
 readonly UPLOADS_REPO_APPDIR=$UPLOADS_REPO/src
 readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
@@ -178,7 +178,7 @@ function build_uploads {
     chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*  |& $LOGCMD
     chmod --verbose 'a-x' -- "$SCRIPTS_REPO"/usr/bin/*.*            |& $LOGCMD
 
-    # Populate kz-upload/dist/ with modified files in kz-upload/src/.
+    # Populate kz-uploads/dist/ with modified files in kz-uploads/src/.
     rsync   --archive               \
             --verbose               \
             --checksum              \
@@ -190,7 +190,7 @@ function build_uploads {
         mkdir --parents "$dir" |& $LOGCMD
     done
 
-    # Populate kz-upload/dist/ with a PDF of modified files in repo kz-docs.
+    # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
     cd "${UPLOADS_SOURCES[kz-docs]}"
     for file in *.odt *.txt; do
         filename=${file%.*}
@@ -258,7 +258,7 @@ function build_deb {
     mkdir --parents "${DEB_TARGETS[build]}" |& $LOGCMD
     printf '%s' "$build_id" > "${DEB_TARGETS[build]}"/$PROGRAM_NAME.id
 
-    # Create Debian package in kz-upload.
+    # Create Debian package in kz-uploads.
     fakeroot    dpkg-deb                            \
                 --build                             \
                 "$DEB_REPO_DISTDIR"                 \
