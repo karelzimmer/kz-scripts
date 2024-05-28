@@ -196,6 +196,7 @@ function install_package {
 # This function controls the termination of the script.
 function term_script {
     text=$GREEN$(gettext 'Finished')$NORMAL
+    infomsg "$text"
     exit $OK
 }
 
