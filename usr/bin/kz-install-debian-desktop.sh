@@ -180,14 +180,6 @@ sudo updatedb
 # Remove locate from pc07
 sudo apt-get remove --yes locate
 
-# Install log-access on *
-# Enable access to system monitoring tasks like read many log files in /var/log and to the log.
-sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
-
-# Remove log-access from *
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
-
 # Install lshw on *
 sudo apt-get install --yes lshw
 
@@ -297,3 +289,11 @@ sudo apt-get install --yes webmin
 sudo apt-get remove --yes webmin
 sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 sudo apt-get update
+
+# Install user-log-access on *
+# Enable access to system monitoring tasks like read many log files in /var/log and to the log.
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
+
+# Remove user-log-access from *
+sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal

@@ -74,9 +74,10 @@ sudo ufw enable
 sudo ufw disable
 sudo apt-get remove --yes ufw
 
-# Install users on *
+# Install user-log-access on *
 # Enable access to system monitoring tasks like read many log files in /var/log.
-sudo usermod --append --groups adm "${SUDO_USER:-$USER}"
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
-# Remove users from *
+# Remove user-log-access from *
 sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
