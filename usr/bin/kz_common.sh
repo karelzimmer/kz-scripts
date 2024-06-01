@@ -46,15 +46,7 @@ readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-if (
-    type budgie-session     ||
-    type cinnamon-session   ||
-    type gnome-session      ||
-    type lxqt-session       ||
-    type sugar-session      ||
-    type unity-session      ||
-    type xfce4-session
-    )                       &> /dev/null; then
+if [[ -n $XDG_CURRENT_DESKTOP ]]; then
 readonly EDITION='desktop'
 else
 readonly EDITION='server'
