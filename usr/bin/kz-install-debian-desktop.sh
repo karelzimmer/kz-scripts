@@ -134,6 +134,12 @@ sudo apt-get install --yes gnome-gmail
 # Remove gnome-gmail from pc07
 sudo apt-get remove --yes gnome-gmail
 
+# Install gnome-tweaks on pc07
+sudo apt-get install --yes gnome-tweaks
+
+# Remove gnome-tweaks from pc07
+sudo apt-get remove --yes gnome-tweaks
+
 # Install google-chrome on *
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
