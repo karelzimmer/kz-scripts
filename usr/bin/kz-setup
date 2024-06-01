@@ -528,17 +528,15 @@ Type 'logout' to log out.")"
         if $logout && [[ $EDITION = 'desktop' ]]; then
             $option_gui || wait_for_enter
             if type gnome-session &> /dev/null; then
-                # Desktop environment GNOME e.g. Ubuntu.
                 gnome-session-quit --logout --no-prompt
             elif type lxqt-session  &> /dev/null; then
-                # Desktop environment LXQt e.g. Lubuntu.
                 lxqt-leave --logout
             elif type xfce4-session &> /dev/null; then
-                # Desktop environment Xfce e.g. Xubuntu.
                 xfce4-session-logout --logout
             else
                 text='No logout command available.'
                 msg_log "$text"
+                text=$(gettext 'Please log out of the computer.')
                 msg_info "$text"
             fi
         else

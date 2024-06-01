@@ -673,6 +673,9 @@ msgstr ""
 "wijzigen van de gebruikersinstellingen te voltooien.\n"
 "Typ 'logout' om uit te loggen."
 
+msgid "Please log out of the computer."
+msgstr "Meld u af van de computer."
+
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
 "system settings."
