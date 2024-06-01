@@ -121,6 +121,12 @@ xdg-mime default org.gnome.Evince.desktop application/pdf
 # Reset google-chrome for karel@pc07
 kz-gset --delete=google-chrome
 
+# Setup hide-files for *
+echo 'snap' > "$HOME"/.hidden
+
+# Reset hide-files for *
+rm --force --verbose "$HOME"/.hidden
+
 # Setup kvm for karel@pc07
 kz-gset --addaft=virt-manager
 
@@ -135,12 +141,6 @@ git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 
 # Reset lynis for -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
-
-# Setup nautilus-hide for *
-echo 'snap' > "$HOME"/.hidden
-
-# Reset nautilus-hide for *
-rm --force --verbose "$HOME"/.hidden
 
 # Setup restore-thumbnails for -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/

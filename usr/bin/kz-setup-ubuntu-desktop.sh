@@ -119,6 +119,12 @@ kz-gset --addaft=fr.handbrake.ghb
 # Reset handbrake for emily@pc-van-emily
 kz-gset --delete=fr.handbrake.ghb
 
+# Setup hide-files for *
+echo 'snap' > "$HOME"/.hidden
+
+# Reset hide-files for *
+rm --force --verbose "$HOME"/.hidden
+
 # Setup kvm for karel@pc06
 kz-gset --addaft=virt-manager
 
@@ -133,12 +139,6 @@ git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
 
 # Reset lynis for -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
-
-# Setup nautilus-hide for *
-echo 'snap' > "$HOME"/.hidden
-
-# Reset nautilus-hide for *
-rm --force --verbose "$HOME"/.hidden
 
 # Setup restore-thumbnails for -nouser
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/

@@ -158,6 +158,7 @@ $USAGE_LINE"
 
 # This function processes the script options and arguments.
 function process_input {
+    type gnome-session &> /dev/null || exit $OK
     if $option_addaft; then
         process_option_addaft
     elif $option_addbef; then
