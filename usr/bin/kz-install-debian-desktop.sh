@@ -73,10 +73,10 @@ sudo apt-get install --yes cups
 sudo apt-get remove --yes cups
 
 # Install dashtodock on *
-sudo apt-get install --yes gnome-shell-extension-dashtodock
+if type gnome-session &> /dev/null; then sudo apt-get install --yes gnome-shell-extension-dashtodock; fi
 
 # Remove dashtodock from *
-sudo apt-get remove --yes gnome-shell-extension-dashtodock
+if type gnome-session &> /dev/null; then sudo apt-get remove --yes gnome-shell-extension-dashtodock; fi
 
 # Install deja-dup on *
 sudo snap install --classic deja-dup
@@ -144,14 +144,16 @@ sudo apt-get remove --yes gnome-tweaks
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
+sudo apt-get install --yes google-chrome-stable
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-sudo apt-get install --yes google-chrome-stable chrome-gnome-shell
+if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
 # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 # Remove google-chrome from *
+if type gnome-session &> /dev/null; then apt-get remove --yes chrome-gnome-shell; fi
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
