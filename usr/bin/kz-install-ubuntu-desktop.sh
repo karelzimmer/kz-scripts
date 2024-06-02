@@ -63,11 +63,11 @@ sudo apt-get install --yes calibre
 sudo apt-get remove --yes calibre
 
 # Install change-grub-timeout on *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=3/' /etc/default/grub
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=1/' /etc/default/grub
 sudo update-grub
 
 # Remove change-grub-timeout from *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=3/GRUB_TIMEOUT=10/' /etc/default/grub
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=10/' /etc/default/grub
 sudo update-grub
 
 # Install clamav on pc-van-hugo
