@@ -536,9 +536,9 @@ Type 'logout' to log out.")"
                 xfce4-session-logout --logout
             else
                 text='No logout command available.'
-                msg_log "$text"
+                logmsg "$text"
                 text=$(gettext 'Please log out of the computer.')
-                msg_info "$text"
+                infomsg "$text"
             fi
         else
             exit $OK
