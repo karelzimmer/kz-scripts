@@ -537,7 +537,7 @@ Type 'logout' to log out.")"
             else
                 text='No logout command available.'
                 logmsg "$text"
-                text=$(gettext 'Please log out of the computer.')
+                text=$(gettext 'Log out of the computer yourself.')
                 infomsg "$text"
             fi
         else
