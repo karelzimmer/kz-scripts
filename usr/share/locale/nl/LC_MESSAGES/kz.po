@@ -474,6 +474,9 @@ msgstr "  -l, --list     toon favorieten"
 msgid "  -r, --reset    set favorites on default values"
 msgstr "  -r, --reset    stel favorieten in op standaardwaarden"
 
+msgid "For GNOME systems only."
+msgstr "Alleen voor GNOME-systemen."
+
 msgid "Favorite apps:"
 msgstr "Favorieten:"
 
