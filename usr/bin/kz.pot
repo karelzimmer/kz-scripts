@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 09:19+0200\n"
+"POT-Creation-Date: 2024-06-02 19:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,15 +81,11 @@ msgid "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #, sh-format
-msgid "Information $DISPLAY_NAME ($PROGRAM_DESC)"
+msgid "$PROGRAM_DESC information ($DISPLAY_NAME)"
 msgstr ""
 
 #, sh-format
-msgid "Warning $DISPLAY_NAME ($PROGRAM_DESC)"
-msgstr ""
-
-#, sh-format
-msgid "Error message $DISPLAY_NAME ($PROGRAM_DESC)"
+msgid "$PROGRAM_DESC error message ($DISPLAY_NAME)"
 msgstr ""
 
 msgid "Common module for Python scripts"

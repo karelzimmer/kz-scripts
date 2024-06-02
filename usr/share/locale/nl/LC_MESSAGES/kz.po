@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-22 15:27+0200\n"
+"POT-Creation-Date: 2024-06-02 19:35+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -90,16 +90,12 @@ msgstr ""
 "nl>."
 
 #, sh-format
-msgid "Information $DISPLAY_NAME ($PROGRAM_DESC)"
-msgstr "Informatie $DISPLAY_NAME ($PROGRAM_DESC)"
+msgid "$PROGRAM_DESC information ($DISPLAY_NAME)"
+msgstr "$PROGRAM_DESC informatie ($DISPLAY_NAME)"
 
 #, sh-format
-msgid "Warning $DISPLAY_NAME ($PROGRAM_DESC)"
-msgstr "Waarschuwing $DISPLAY_NAME ($PROGRAM_DESC)"
-
-#, sh-format
-msgid "Error message $DISPLAY_NAME ($PROGRAM_DESC)"
-msgstr "Foutmelding $DISPLAY_NAME ($PROGRAM_DESC)"
+msgid "$PROGRAM_DESC error message ($DISPLAY_NAME)"
+msgstr "$PROGRAM_DESC foutmelding ($DISPLAY_NAME)"
 
 msgid "Common module for Python scripts"
 msgstr "Algemene module voor Python scripts"

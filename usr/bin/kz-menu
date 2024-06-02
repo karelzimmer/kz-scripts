@@ -61,7 +61,15 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
             MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-readonly MENU2_HEAD="-------------- $MENU2_TITLE --------------"
+readonly MENU2_HEAD="--------------- $MENU2_TITLE ---------------"
+readonly -a MENU2_ACTIONS=(
+            [1]="$(gettext 'Show WiFi information')"
+                "$(gettext 'Make backup')"
+                "$(gettext 'Install apps')"
+                "$(gettext 'Restore backup')"
+                "$(gettext 'Set up apps')"
+                "$(gettext 'Go to installation menu')"
+            )
 readonly -a MENU2_COMMANDS=(
             [1]='kz wifi'
                 'kz backup'
@@ -69,14 +77,6 @@ readonly -a MENU2_COMMANDS=(
                 'kz restore'
                 'kz setup'
                 "$(gettext 'Back')"
-            )
-readonly -a MENU2_DESCS=(
-            [1]="$(gettext 'Show WiFi information')"
-                "$(gettext 'Make backup')"
-                "$(gettext 'Install apps')"
-                "$(gettext 'Restore backup')"
-                "$(gettext 'Set up apps')"
-                "$(gettext 'Go to installation menu')"
             )
 readonly MENU2_LINES=${#MENU2_COMMANDS[@]}
 
@@ -254,8 +254,8 @@ function process_menu1_choice {
 function process_menu1_choice1 {
     title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
     rows=(
-        [1]="${MENU2_COMMANDS[1]}#${MENU2_DESCS[1]}"
-            "${MENU2_COMMANDS[2]}#${MENU2_DESCS[2]}"
+        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
+            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
         )
     process_commands
 }
@@ -289,7 +289,7 @@ Roughly boils down to:
 function process_menu1_choice3 {
     title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
     rows=(
-        [1]="${MENU2_COMMANDS[3]}#${MENU2_DESCS[3]}"
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
         )
     process_commands
 }
@@ -299,8 +299,8 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
     rows=(
-        [1]="${MENU2_COMMANDS[4]}#${MENU2_DESCS[4]}"
-            "${MENU2_COMMANDS[5]}#${MENU2_DESCS[5]}"
+        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
+            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
         )
     process_commands
 }
@@ -333,11 +333,11 @@ function process_menu2_gui {
                     --column        "$(gettext 'NUM')"                  \
                     --column        "$(gettext 'COMMAND')"              \
                     --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU2_COMMANDS[1]}" "${MENU2_DESCS[1]}"  \
-                    FALSE 2 "${MENU2_COMMANDS[2]}" "${MENU2_DESCS[2]}"  \
-                    FALSE 3 "${MENU2_COMMANDS[3]}" "${MENU2_DESCS[3]}"  \
-                    FALSE 4 "${MENU2_COMMANDS[4]}" "${MENU2_DESCS[4]}"  \
-                    FALSE 5 "${MENU2_COMMANDS[5]}" "${MENU2_DESCS[5]}"  \
+                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"  \
+                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"  \
+                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"  \
+                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_COMMANDS[4]}"  \
+                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"  \
                     2> >($LOGCMD)
             ) || break
         process_menu2_choice
@@ -350,16 +350,16 @@ function process_menu2_tui {
     local menu2_command=''
 
     while true; do
-        printf  '\n\n%s\n\n%3s  %-10s  %s\n'    \
+        printf  '\n\n%s\n\n%3s  %-25s  %s\n'    \
                 "$MENU2_HEAD"                   \
                 "$(gettext 'NUM')"              \
-                "$(gettext 'COMMAND')"          \
-                "$(gettext 'DESCRIPTION')"
+                "$(gettext 'DESCRIPTION')"      \
+                "$(gettext 'COMMAND')"
         for menu2_command in "${!MENU2_COMMANDS[@]}"; do
-            printf  '%3s  %-10s  %s\n'                  \
+            printf  '%3s  %-25s  %s\n'                  \
                     "$menu2_command"                    \
-                    "${MENU2_COMMANDS[$menu2_command]}" \
-                    "${MENU2_DESCS[$menu2_command]}"
+                    "${MENU2_ACTIONS[$menu2_command]}" \
+                    "${MENU2_COMMANDS[$menu2_command]}"
         done
         printf '\n'
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
@@ -384,9 +384,9 @@ function process_menu2_tui {
 # This function processes menu #2 choice.
 function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        title="${MENU2_COMMANDS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
+        title="${MENU2_ACTIONS[$REPLY]} (${MENU2_COMMANDS[$REPLY]})"
         rows=(
-            [1]="${MENU2_COMMANDS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
+            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
         process_commands
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
@@ -408,13 +408,13 @@ function process_commands {
     show_commands_before_execution
     if $execute_command; then
         for row in "${!rows[@]}"; do
-            command=$(
+            description=$(
                 printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
                 )
-            description=$(
+            command=$(
                 printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
                 )
-            title="$command ($description)"
+            title="$description ($command)"
             $option_gui || infomsg "\n${BOLD}==== $title ====${NORMAL}"
             execute_command
         done
@@ -432,14 +432,14 @@ function show_commands_before_execution {
     text="$(gettext 'The following will be executed:')
 "
     for row in "${!rows[@]}"; do
-        command=$(
+        description=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
             )
-        description=$(
+        command=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
             )
         text+="
-[$row] $command ($description)"
+[$row] $description ($command)"
     done
     text+='
 '

@@ -151,7 +151,7 @@ It is recommended to connect the computer to the wall socket.")
 # This function returns an error message.
 function errormsg {
     if $option_gui; then
-        title=$(eval_gettext "Error message \$DISPLAY_NAME (\$PROGRAM_DESC)")
+        title=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -166,7 +166,7 @@ function errormsg {
 # This function returns an informational message.
 function infomsg {
     if $option_gui; then
-        title=$(eval_gettext "Information \$DISPLAY_NAME (\$PROGRAM_DESC)")
+        title=$(eval_gettext "\$PROGRAM_DESC information (\$DISPLAY_NAME)")
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
