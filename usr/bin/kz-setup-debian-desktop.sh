@@ -135,9 +135,9 @@ kz-gset --delete=virt-manager
 
 # Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
-# Usage:
-# $ cd ~/lynis
-# $ [sudo] ./lynis audit system
+## Usage:
+## $ cd ~/lynis
+## $ [sudo] ./lynis audit system
 
 # Reset lynis for -nouser
 rm --force --verbose --recursive --verbose /home/"$USER"/lynis
@@ -146,7 +146,8 @@ rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset restore-thumbnails for -nouser
-# There is no command available to reset restored thumbnails.
+## There is no command available to reset restored thumbnails.
+
 # Setup spotify for karel@pc07
 kz-gset --addaft=kz-spotify
 
@@ -155,9 +156,9 @@ kz-gset --delete=kz-spotify
 
 # Setup terminal for karel@pc07
 kz-gset --addbef=org.gnome.Terminal
-# Turn on aliases.
+## Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
-# Enable search forward in history (with Ctrl-S).
+## Enable search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
