@@ -94,7 +94,7 @@ sudo apt-get remove --yes cups-backend-bjnp
 ## Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting) to prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
-# Check for kernel config parameter pci=noaer.
+## Check for kernel config parameter pci=noaer.
 grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Remove disabled-aer from pc06
@@ -318,7 +318,7 @@ sudo apt-get remove --yes ssh
 # Install sushi on pc06
 sudo apt-get install --yes gnome-sushi
 ## Usage:
-##  Select a file, press the space bar, and a preview will appear.
+## Select a file, press the space bar, and a preview will appear.
 
 # Remove sushi from pc06
 sudo apt-get remove --yes gnome-sushi
