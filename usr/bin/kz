@@ -60,7 +60,7 @@ function check_input {
     local   -i  parsed_rc=0
 
     if [[ -z $* ]]; then
-        infomsg "$USAGE"
+        infomsg "$USAGE_LINE"
         exit $ERROR
     fi
 
@@ -73,7 +73,7 @@ function check_input {
                     --              "$@"
             ) || parsed_rc=$?
         if [[ $parsed_rc -ne $OK ]]; then
-            infomsg "$USAGE"
+            infomsg "$USAGE_LINE"
             exit $ERROR
         fi
         eval set -- "$parsed"
@@ -132,8 +132,7 @@ function process_input {
     local command=$1
 
     if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$command ]]; then
-        text="$DISPLAY_NAME: $command: \
-$(gettext "command does not exist")
+        text="$DISPLAY_NAME: $command: $(gettext "command does not exist")
 $USAGE_LINE"
         infomsg "$text"
         exit $ERROR

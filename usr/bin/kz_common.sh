@@ -249,9 +249,7 @@ function process_option_help {
 
     text="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
 E', or see the \$man_url for more information.")"
-    printf  '%b\n\n%b\n'    \
-            "$HELP"         \
-            "$text"
+    printf '%b\n\n%b\n' "$HELP" "$text"
 }
 
 
@@ -264,9 +262,7 @@ function process_option_manual {
 # This function shows the available options.
 function process_option_usage {
     text="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
-    printf  '%b\n\n%b\n'    \
-            "$USAGE"        \
-            "$text"
+    printf '%b\n\n%b\n' "$USAGE" "$text"
 }
 
 

@@ -70,7 +70,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        infomsg "$USAGE"
+        infomsg "$USAGE_LINE"
         exit $ERROR
     fi
     eval set -- "$parsed"
