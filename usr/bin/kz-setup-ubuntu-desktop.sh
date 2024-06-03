@@ -41,62 +41,62 @@ xdg-mime default gdebi.desktop application/vnd.debian.binary-package
 xdg-mime default snap-store_ubuntu-software-local-file.desktop application/vnd.debian.binary-package
 
 # Setup gnome for *
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.interface locate-pointer true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.mutter center-new-windows true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power idle-dim false; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
+if type gnome-session; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
+if type gnome-session; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
+if type gnome-session; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
+if type gnome-session; then gsettings set org.gnome.desktop.interface locate-pointer true; fi
+if type gnome-session; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
+if type gnome-session; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
+if type gnome-session; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
+if type gnome-session; then gsettings set org.gnome.desktop.session idle-delay 900; fi
+if type gnome-session; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
+if type gnome-session; then gsettings set org.gnome.mutter center-new-windows true; fi
+if type gnome-session; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
+if type gnome-session; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
+if type gnome-session; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
+if type gnome-session; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
+if type gnome-session; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
+if type gnome-session; then gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true; fi
+if type gnome-session; then gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; fi
+if type gnome-session; then gsettings set org.gnome.settings-daemon.plugins.power idle-dim false; fi
+if type gnome-session; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
+if type gnome-session; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
+if type gnome-session; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
+if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false; fi
+if type gnome-session; then gsettings set org.gnome.shell.extensions.ding show-home false; fi
+if type gnome-session; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome for *
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.interface locate-pointer; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.session idle-delay; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.mutter center-new-windows; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power idle-dim; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.interface locate-pointer; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.session idle-delay; fi
+if type gnome-session; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
+if type gnome-session; then gsettings reset org.gnome.mutter center-new-windows; fi
+if type gnome-session; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
+if type gnome-session; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
+if type gnome-session; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
+if type gnome-session; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
+if type gnome-session; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
+if type gnome-session; then gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock; fi
+if type gnome-session; then gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled; fi
+if type gnome-session; then gsettings reset org.gnome.settings-daemon.plugins.power idle-dim; fi
+if type gnome-session; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
+if type gnome-session; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
+if type gnome-session; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
+if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network; fi
+if type gnome-session; then gsettings reset org.gnome.shell.extensions.ding show-home; fi
+if type gnome-session; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf

@@ -41,7 +41,7 @@ sudo snap refresh
 
 # Install anydesk on -nohost
 # Remote Wayland display server is not supported.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
 sudo apt-get update
 sudo apt-get install --yes anydesk
@@ -73,10 +73,10 @@ sudo apt-get install --yes cups
 sudo apt-get remove --yes cups
 
 # Install dashtodock on *
-if type gnome-session &> /dev/null; then sudo apt-get install --yes gnome-shell-extension-dashtodock; fi
+if type gnome-session; then sudo apt-get install --yes gnome-shell-extension-dashtodock; fi
 
 # Remove dashtodock from *
-if type gnome-session &> /dev/null; then sudo apt-get remove --yes gnome-shell-extension-dashtodock; fi
+if type gnome-session; then sudo apt-get remove --yes gnome-shell-extension-dashtodock; fi
 
 # Install deja-dup on *
 sudo snap install --classic deja-dup
@@ -141,19 +141,19 @@ sudo apt-get install --yes gnome-tweaks
 sudo apt-get remove --yes gnome-tweaks
 
 # Install google-chrome on *
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
 sudo apt-get update
 sudo apt-get install --yes google-chrome-stable
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
+if type gnome-session; then sudo apt-get install --yes chrome-gnome-shell; fi
 # Add the source list again because the installation overwrote the newly added source list.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 # Remove google-chrome from *
-if type gnome-session &> /dev/null; then apt-get remove --yes chrome-gnome-shell; fi
+if type gnome-session; then apt-get remove --yes chrome-gnome-shell; fi
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
@@ -206,7 +206,7 @@ sudo apt-get install --yes ntfs-3g
 sudo apt-get remove --yes ntfs-3g
 
 # Install signal on pc07
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
@@ -239,7 +239,7 @@ sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-
 sudo apt-get remove --yes ssh
 
 # Install teamviewer on *
-echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
+echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
@@ -287,7 +287,7 @@ sudo snap install --classic code
 sudo snap remove code
 
 # Install webmin on pc07
-echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list > /dev/null
+echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
 sudo apt-get update
 sudo apt-get install --yes webmin
