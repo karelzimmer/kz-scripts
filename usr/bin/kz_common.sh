@@ -55,7 +55,7 @@ if (
     type sugar-session      ||
     type unity-session      ||
     type xfce4-session
-    )                       &> /dev/null; then
+    ) |& systemd-cat --identifier=$MODULE_NAME; then
 readonly EDITION='desktop'
 else
 readonly EDITION='server'
@@ -124,7 +124,7 @@ function check_for_active_updates {
                 /var/lib/apt/lists/lock                     \
                 /var/lib/dpkg/lock                          \
                 /var/lib/dpkg/lock-frontend                 \
-                &> /dev/null; do
+                |& $LOGCMD; do
         text="$(gettext 'Wait for another package manager to finish...')"
         logmsg "$text"
         sleep 1
@@ -257,7 +257,7 @@ E', or see the \$man_url for more information.")"
 
 # This function displays the manual page.
 function process_option_manual {
-    yelp man:"$PROGRAM_NAME" &> /dev/null || man --pager=cat "$PROGRAM_NAME"
+    yelp man:"$PROGRAM_NAME" |& $LOGCMD || man --pager=cat "$PROGRAM_NAME"
 }
 
 

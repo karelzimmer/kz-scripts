@@ -125,7 +125,7 @@ function prepare_processing {
 
 # This function checks and installs dependencies.
 function check_dependencies {
-    if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
+    if [[ $EDITION = 'desktop' ]] && ! type zenity |& $LOGCMD; then
         check_for_active_updates
         sudo apt-get install --yes zenity |& $LOGCMD
     fi
