@@ -102,9 +102,8 @@ def become_root_check(PROGRAM_NAME):
     if os.getuid() == 0:
         return True
     try:
-        subprocess.run('groups $USER | grep --quiet --regexp=sudo',
-                       shell=True, check=True,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run('groups $USER | grep --quiet --regexp=sudo', shell=True,
+                       check=True)
     except Exception:
         text = _('Already performed by the administrator.')
         infomsg(PROGRAM_NAME, text)
@@ -126,9 +125,7 @@ def check_for_active_updates(PROGRAM_NAME):
                            '/var/lib/apt/lists/lock '
                            '/var/lib/dpkg/lock-frontend '
                            '/var/lib/dpkg/lock',
-                           shell=True, check=True,
-                           stdout=subprocess.DEVNULL,
-                           stderr=subprocess.DEVNULL)
+                           shell=True, check=True)
         except Exception:
             break
         else:
@@ -142,8 +139,7 @@ def check_on_ac_power(PROGRAM_NAME):
     This function checks to see if the computer is running on battery power and
     prompts the user to continue if so.
     """
-    if subprocess.run('on_ac_power', shell=True,
-                      stderr=subprocess.DEVNULL).returncode == 1:
+    if subprocess.run('on_ac_power', shell=True).returncode == 1:
         text = _('The computer now uses only the battery for power.\n\n'
                  'It is recommended to connect the computer to the wall socket\
 .')
@@ -253,9 +249,8 @@ def process_option_manual(PROGRAM_NAME):
     This function displays the manual page..
     """
     try:
-        subprocess.run(f'man --pager=cat {PROGRAM_NAME}',
-                       shell=True, check=True,
-                       stderr=subprocess.DEVNULL)
+        subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
+                       check=True)
     except Exception as exc:
         text = str(exc)
         logmsg(PROGRAM_NAME, text)
