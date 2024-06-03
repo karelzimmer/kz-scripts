@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-02 19:35+0200\n"
+"POT-Creation-Date: 2024-06-03 18:57+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -143,12 +143,10 @@ msgstr "Opdracht uitvoeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-l|--list]\n"
-"          $OPTIONS_USAGE\n"
+"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
 "          COMMAND [ARGUMENT...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-l|--list]\n"
-"            $OPTIONS_USAGE\n"
+"Gebruik: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
 "            OPDRACHT [ARGUMENT...]"
 
 #, sh-format

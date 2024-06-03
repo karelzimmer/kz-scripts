@@ -23,8 +23,8 @@ readonly PROGRAM_NAME='kz'
 readonly PROGRAM_DESC=$(gettext 'Run command')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list]
-          \$OPTIONS_USAGE
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USA\
+GE
           COMMAND [ARGUMENT...]")
 
 readonly X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
@@ -124,8 +124,7 @@ $(gettext 'NUM  COMMAND')\n"
                 --body-numbering=a
         )
     text+="\n
-$(eval_gettext "To execute a COMMAND: \$BLUE\$DISPLAY_NAME COMMAND [ARGUMENT..\
-.]\$NORMAL")"
+$(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
     infomsg "$text"
 }
 
