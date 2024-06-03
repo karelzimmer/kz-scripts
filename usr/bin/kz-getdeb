@@ -40,10 +40,12 @@ readonly PROGRAM_DESC=$(gettext 'Install package kz')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
+$(gettext 'Options:')
 $OPTIONS_HELP"
 
 

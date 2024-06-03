@@ -26,13 +26,16 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list]
           \$OPTIONS_USAGE
           COMMAND [ARGUMENT...]")
+
+readonly X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
+
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND [ARGU\
 MENT...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext '  -l, --list     show available COMMANDs')
+$X_OPTIONS_HELP
 $OPTIONS_HELP
 
 $(gettext 'Arguments:')

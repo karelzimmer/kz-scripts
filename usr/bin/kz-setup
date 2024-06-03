@@ -28,18 +28,24 @@ f|--file FILE]
                 [-g|--gui] [-l|--list] [-r|--reset]
                 \$OPTIONS_USAGE
                 [--] [APP...]")
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
-$PROGRAM_DESC.
+readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+mandatory for short options too.")
 
-$(gettext 'Options:')
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext '  -f, --file FILE
                  process FILE')
 $(gettext '  -g, --gui      starts in graphical mode')
 $(gettext '  -l, --list     show list of files')
-$(gettext '  -r, --reset    set apps on default values')
+$(gettext '  -r, --reset    set apps on default values')"
+
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$X_OPTIONS_HELP
 $OPTIONS_HELP
 $(gettext "  --             signals the end of options and disables further op\
 tion processing")

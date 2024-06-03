@@ -27,13 +27,9 @@ readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] [\
 -b|--addbef FAVORITE]
                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
                \$OPTIONS_USAGE")"
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
-$PROGRAM_DESC.
-
-$(gettext 'Options:')
-$(gettext "  Mandatory arguments to long options are mandatory for short optio\
-ns too.")
+readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+mandatory for short options too.")
 
 $(gettext '  -a, --addaft FAVORITE
                  add FAVORITE at the end')
@@ -42,7 +38,14 @@ $(gettext '  -b, --addbef FAVORITE
 $(gettext '  -d, --delete FAVORITE
                  delete FAVORITE')
 $(gettext '  -l, --list     show favorites')
-$(gettext '  -r, --reset    set favorites on default values')
+$(gettext '  -r, --reset    set favorites on default values')"
+
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+
+$PROGRAM_DESC.
+
+$(gettext 'Options:')
+$X_OPTIONS_HELP
 $OPTIONS_HELP"
 
 readonly X_OPTIONS_SHORT='a:b:d:lr'

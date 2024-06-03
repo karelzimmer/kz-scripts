@@ -24,6 +24,7 @@ readonly PROGRAM_DESC=$(gettext 'Distribute kz package')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.

@@ -26,17 +26,20 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-s|--source \
 DIRECTORY]
                   \$OPTIONS_USAGE")"
+
+readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+mandatory for short options too.")
+
+$(gettext '  -g, --gui      starts in graphical mode')
+$(gettext '  -s, --source DIRECTORY
+                 use backup in DIRECTORY')"
+
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$(gettext "  Mandatory arguments to long options are mandatory for short optio\
-ns too.")
-
-$(gettext '  -g, --gui      starts in graphical mode')
-$(gettext '  -s, --source DIRECTORY
-                 use backup in DIRECTORY')
+$X_OPTIONS_HELP
 $OPTIONS_HELP"
 
 readonly X_OPTIONS_SHORT='gs:'
