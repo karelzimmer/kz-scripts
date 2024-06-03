@@ -443,7 +443,7 @@ function process_command_file {
                         "$app_name"
                 ;;
             '#'*)
-                # Comment line. Do not execute. Use cat option to view it.
+                # Comment line. Do not execute this line, use --cat to view it.
                 continue
                 ;;
             *)
