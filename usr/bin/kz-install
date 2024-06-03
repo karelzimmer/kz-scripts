@@ -480,6 +480,10 @@ function process_command_file {
                         "$app_tot_num"      \
                         "$app_name"
                 ;;
+            '#'*)
+                # Comment line. Do not execute. Use cat option to view it.
+                continue
+                ;;
             *)
                 # Command record.
                 execute_command "$command_record"
