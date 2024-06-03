@@ -184,14 +184,14 @@ wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | s
 sudo apt-get update
 sudo apt-get install --yes google-chrome-stable
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-! type gnome-session &> /dev/null || sudo apt-get install --yes chrome-gnome-shell
+if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
 # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 # Remove the apt-key added during installation as an apt-key is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 # Remove google-chrome from *
-! type gnome-session &> /dev/null || apt-get remove --yes chrome-gnome-shell
+if type gnome-session &> /dev/null; then apt-get remove --yes chrome-gnome-shell; fi
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
@@ -253,8 +253,8 @@ sudo updatedb
 sudo apt-get remove --yes locate
 
 # Install monitors on pc06
-test ! -f /home/"${SUDO_USER:-$USER}"/.config/monitors.xml || sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml
-test ! -f ~gdm/.config/monitors.xml || sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml
+if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
 # Remove monitors from pc06
 sudo rm --force --verbose ~gdm/.config/monitors.xml
