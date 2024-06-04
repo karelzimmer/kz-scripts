@@ -128,8 +128,6 @@ def check_for_active_updates(PROGRAM_NAME):
                            '/var/lib/dpkg/lock',
                            shell=True, check=True)
         except Exception:
-            text = _('Wait for another package manager to finish...')
-            logmsg(PROGRAM_NAME, text)
             break
         else:
             text = _('Wait for another package manager to finish...')
