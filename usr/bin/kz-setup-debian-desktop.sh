@@ -7,7 +7,7 @@
 ###############################################################################
 
 # Setup dashtodock for *
-gnome-extensions enable dash-to-dock@micxgx.gmail.com
+if type gnome-session; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if type gnome-session; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
@@ -19,7 +19,7 @@ if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-doc
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
 # Reset dashtodock for *
-gnome-extensions disable dash-to-dock@micxgx.gmail.com
+if type gnome-session; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if type gnome-session; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
