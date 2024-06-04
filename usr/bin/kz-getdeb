@@ -120,7 +120,7 @@ function prepare_processing {
     # fails, kz_common.sh will delete the local Debian package file on exit.
     while test -e "$kz_deb_local_file"; do
         printf '#'
-        sleep 2
+        sleep 1
     done &
 }
 
