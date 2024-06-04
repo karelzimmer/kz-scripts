@@ -119,6 +119,7 @@ def check_for_active_updates(PROGRAM_NAME):
     while True:
         try:
             subprocess.run('sudo fuser '
+                           '--silent '
                            '/snap/core/*/var/cache/debconf/config.dat '
                            '/var/cache/apt/archives/lock '
                            '/var/cache/debconf/config.dat '
@@ -127,6 +128,8 @@ def check_for_active_updates(PROGRAM_NAME):
                            '/var/lib/dpkg/lock',
                            shell=True, check=True)
         except Exception:
+            text = _('Wait for another package manager to finish...')
+            logmsg(PROGRAM_NAME, text)
             break
         else:
             text = _('Wait for another package manager to finish...')
