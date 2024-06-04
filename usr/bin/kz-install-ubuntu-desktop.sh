@@ -207,7 +207,7 @@ if type gnome-session; then sudo apt-get install --yes chrome-gnome-shell; fi
 # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 #
-# Remove the apt-key added during installation as an apt-key is no longer needed.
+# The apt-key added during installation is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 # Remove google-chrome from *
@@ -355,7 +355,7 @@ wget --output-document=- 'https://download.teamviewer.com/download/linux/signatu
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
 #
-# Remove the apt-key added during installation as an apt-key is no longer needed.
+# The apt-key added during installation is no longer needed.
 sudo apt-key del 0C1289C0 DEB49217
 #
 # Web app: https://web.teamviewer.com
