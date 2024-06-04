@@ -17,7 +17,7 @@ sudo snap refresh
 # Remove update-system from *
 #
 # Do this first.
-: # There is no command available to remove update system.
+# There is no command available to remove update system.
 
 # Install ansible on *
 sudo apt-get install --yes ansible

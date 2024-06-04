@@ -33,7 +33,7 @@ sudo snap refresh
 # Remove update-system from *
 #
 # Do this first [2/2].
-: # There is no command available to remove update system.
+# There is no command available to remove update system.
 
 # Install ansible on pc06
 sudo apt-get install --yes ansible

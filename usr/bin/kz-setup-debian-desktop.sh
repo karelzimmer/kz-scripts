@@ -147,7 +147,7 @@ rm --force --verbose --recursive --verbose /home/"$USER"/lynis
 rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset restore-thumbnails for -nouser
-: # There is no command available to reset restored thumbnails.
+# There is no command available to reset restored thumbnails.
 
 # Setup spotify for karel@pc07
 kz-gset --addaft=kz-spotify
