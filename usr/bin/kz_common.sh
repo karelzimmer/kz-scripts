@@ -47,7 +47,9 @@ readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-if (
+
+# Determine whether it is desktop or server, with a preference for desktop.
+if ! (
     type cinnamon-session   ||
     type gnome-session      ||
     type ksmserver          ||
@@ -55,9 +57,9 @@ if (
     type mate-session       ||
     type xfce4-session
     ) |& systemd-cat --identifier=$MODULE_NAME; then
-readonly EDITION='desktop'
+    readonly EDITION='server'
 else
-readonly EDITION='server'
+    readonly EDITION='desktop'
 fi
 
 
