@@ -49,8 +49,8 @@ readonly OPTIONS_LONG='help,manual,usage,version'
 
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 
-# Determine whether it is desktop or server, with a preference for desktop.
-if ! (
+# Determine whether it is desktop or server.
+if (
     type cinnamon-session   ||
     type gnome-session      ||
     type ksmserver          ||
@@ -58,9 +58,9 @@ if ! (
     type mate-session       ||
     type xfce4-session
     ) &> >(systemd-cat --identifier=$MODULE_NAME --priority=debug); then
-    readonly EDITION='server'
-else
     readonly EDITION='desktop'
+else
+    readonly EDITION='server'
 fi
 
 
