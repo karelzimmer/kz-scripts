@@ -13,7 +13,7 @@
 ###############################################################################
 
 # The server reports $0 as '-bash' (login shell) for bash, so remove the '-'.
-if ! source "$(dirname "${0/^-/}")"/kz_common.sh 2> >(
+if ! source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
             systemd-cat --identifier=kz-getdeb --priority=debug); then
     echo    'Download kz_common.sh...' |&
             systemd-cat --identifier=kz-getdeb --priority=debug
