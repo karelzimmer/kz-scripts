@@ -96,7 +96,7 @@ function process_input {
     infomsg "$text"
     cd "$scripts_repo"
     while read -r script; do
-        scriptdir=$(realpath "$(dirname "$script")")
+        scriptdir=$(dirname "$(realpath "$script")")
         scriptname=$(basename "$script")
         infomsg "  $(realpath "$script")"
         case $scriptname in
