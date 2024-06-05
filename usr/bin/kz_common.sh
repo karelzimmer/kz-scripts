@@ -25,6 +25,7 @@ source /usr/bin/gettext.sh
 readonly MODULE_NAME='kz_common.sh'
 readonly MODULE_DESC=$(gettext 'Common module for shell scripts')
 readonly MODULE_PATH=$(dirname "$(realpath "$0")")
+#FIXME op server $0=-bash ==> invalid option -b
 
 readonly OK=0
 readonly ERROR=1
@@ -47,9 +48,7 @@ readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-
-# Determine whether it is desktop or server, with a preference for desktop.
-if ! (
+if (
     type cinnamon-session   ||
     type gnome-session      ||
     type ksmserver          ||
@@ -57,9 +56,9 @@ if ! (
     type mate-session       ||
     type xfce4-session
     ) |& systemd-cat --identifier=$MODULE_NAME; then
-    readonly EDITION='server'
-else
     readonly EDITION='desktop'
+else
+    readonly EDITION='server'
 fi
 
 
