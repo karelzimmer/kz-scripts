@@ -12,7 +12,7 @@ if type gnome-session; then gsettings set org.gnome.shell disable-user-extension
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
+if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi # Not every GNOME machine has this key.
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
 if type gnome-session; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
