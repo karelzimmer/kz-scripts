@@ -24,7 +24,7 @@ if type gnome-session; then gsettings reset org.gnome.shell disable-user-extensi
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
+if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi || true
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if type gnome-session; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
