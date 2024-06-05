@@ -57,7 +57,7 @@ if ! (
     type lxqt-session       ||
     type mate-session       ||
     type xfce4-session
-    ) &> /dev/null; then
+    ) &> >(systemd-cat --identifier=$MODULE_NAME --priority=debug); then
     readonly EDITION='server'
 else
     readonly EDITION='desktop'
