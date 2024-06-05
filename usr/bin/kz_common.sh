@@ -24,8 +24,8 @@ source /usr/bin/gettext.sh
 
 readonly MODULE_NAME='kz_common.sh'
 readonly MODULE_DESC=$(gettext 'Common module for shell scripts')
-# Debian server reports $0 as '-bash', so delete '-'.
-readonly MODULE_PATH=$(dirname "$(realpath "${0/-/}")")
+# Debian server reports $0 as '-bash', so remove the leading '-'.
+readonly MODULE_PATH=$(dirname "$(realpath "${0/^-/}")")
 
 readonly OK=0
 readonly ERROR=1
