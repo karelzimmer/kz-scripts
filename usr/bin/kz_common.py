@@ -116,6 +116,8 @@ def check_for_active_updates(PROGRAM_NAME):
     """
     This function checks for active updates and waits for the next check if so.
     """
+    check_wait = 10
+
     while True:
         try:
             subprocess.run('sudo fuser '
@@ -130,9 +132,10 @@ def check_for_active_updates(PROGRAM_NAME):
         except Exception:
             break
         else:
-            text = _('Wait for another package manager to finish...')
-            logmsg(PROGRAM_NAME, text)
-            time.sleep(5)
+            text = _('Wait {}s for another package manager to finish...').\
+                format(check_wait)
+            infomsg(PROGRAM_NAME, text)
+            time.sleep(check_wait)
 
 
 def check_on_ac_power(PROGRAM_NAME):

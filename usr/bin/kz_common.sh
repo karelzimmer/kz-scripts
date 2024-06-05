@@ -118,6 +118,8 @@ function become_root_check {
 
 # This function checks for active updates and waits for the next check if so.
 function check_for_active_updates {
+    local   -i  check_wait=10
+
     while sudo  fuser                                       \
                 --silent                                    \
                 /snap/core/*/var/cache/debconf/config.dat   \
@@ -126,9 +128,9 @@ function check_for_active_updates {
                 /var/lib/apt/lists/lock                     \
                 /var/lib/dpkg/lock                          \
                 /var/lib/dpkg/lock-frontend; do
-        text="$(gettext 'Wait for another package manager to finish...')"
+        text="Wait ${check_wait}s for another package manager to finish..."
         logmsg "$text"
-        sleep 5
+        sleep $check_wait
     done
 }
 
