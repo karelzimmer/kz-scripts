@@ -12,7 +12,7 @@
 # Import
 ###############################################################################
 
-if ! source "$(dirname "$0")"/kz_common.sh 2> >(
+if ! source "$(dirname "${0/-/}")"/kz_common.sh 2> >(
             systemd-cat --identifier=kz-getdeb --priority=debug); then
     echo    'Download kz_common.sh...' |&
             systemd-cat --identifier=kz-getdeb --priority=debug
