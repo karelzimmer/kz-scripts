@@ -48,13 +48,11 @@ readonly OPTIONS_LONG='help,manual,usage,version'
 
 readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
 if (
-    type budgie-session     ||
     type cinnamon-session   ||
     type gnome-session      ||
     type ksmserver          ||
     type lxqt-session       ||
-    type sugar-session      ||
-    type unity-session      ||
+    type mate-session       ||
     type xfce4-session
     ) |& systemd-cat --identifier=$MODULE_NAME; then
 readonly EDITION='desktop'
