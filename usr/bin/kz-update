@@ -78,8 +78,14 @@ def perform_update():
     command = 'sudo apt-get dist-upgrade --yes'
     perform_command(command)
 
-    command = 'sudo snap refresh || true'
-    perform_command(command)
+    try:
+        subprocess.run('type snap', shell=True, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:
+        pass
+    else:
+        command = 'sudo snap refresh'
+        perform_command(command)
 
 
 def perform_cleanup():
