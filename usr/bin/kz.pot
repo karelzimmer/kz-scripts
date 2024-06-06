@@ -859,9 +859,6 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-msgid "disabled"
-msgstr ""
-
 msgid "Cleanup"
 msgstr ""
 

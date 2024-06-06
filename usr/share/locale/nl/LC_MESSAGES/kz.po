@@ -1009,9 +1009,6 @@ msgstr "Repareren"
 msgid "Update"
 msgstr "Bijwerken"
 
-msgid "disabled"
-msgstr "uitgeschakeld"
-
 msgid "Cleanup"
 msgstr "Opruimen"
 
