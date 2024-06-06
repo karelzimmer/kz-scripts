@@ -223,6 +223,7 @@ xdg-mime default code_code.desktop application/x-shellscript
 xdg-mime default code_code.desktop application/xml
 xdg-mime default code_code.desktop text/html
 xdg-mime default code_code.desktop text/markdown
+xdg-mime default code_code.desktop text/plain
 xdg-mime default code_code.desktop text/troff
 xdg-mime default code_code.desktop text/x-python
 
@@ -234,6 +235,7 @@ xdg-mime default org.gnome.gedit.desktop application/x-shellscript
 xdg-mime default org.gnome.gedit.desktop application/xml
 xdg-mime default org.gnome.gedit.desktop text/html
 xdg-mime default org.gnome.gedit.desktop text/markdown
+xdg-mime default org.gnome.gedit.desktop text/plain
 xdg-mime default org.gnome.gedit.desktop text/troff
 xdg-mime default org.gnome.gedit.desktop text/x-python
 
