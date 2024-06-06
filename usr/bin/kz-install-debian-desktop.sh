@@ -310,9 +310,11 @@ wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | s
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes code
+sudo update-alternatives --set editor /usr/bin/code
 
 # Remove vscode from pc07
 sudo apt-get remove --yes code
+sudo update-alternatives --remove editor /usr/bin/code
 sudo rm --force --verbose /etc/apt/sources.list.d/vscode.list* /usr/share/keyrings/packages.microsoft*
 sudo apt-get update
 
