@@ -184,18 +184,18 @@ xdg-mime default org.gnome.Totem.desktop video/x-matroska
 xdg-mime default org.gnome.Totem.desktop video/webm
 
 # Setup vscode for karel@pc07
-kz-gset --addbef=code_code
-xdg-mime default code_code.desktop application/json
-xdg-mime default code_code.desktop application/x-desktop
-xdg-mime default code_code.desktop application/x-shellscript
-xdg-mime default code_code.desktop application/xml
-xdg-mime default code_code.desktop text/html
-xdg-mime default code_code.desktop text/markdown
-xdg-mime default code_code.desktop text/troff
-xdg-mime default code_code.desktop text/x-python
+kz-gset --addbef=code
+xdg-mime default code.desktop application/json
+xdg-mime default code.desktop application/x-desktop
+xdg-mime default code.desktop application/x-shellscript
+xdg-mime default code.desktop application/xml
+xdg-mime default code.desktop text/html
+xdg-mime default code.desktop text/markdown
+xdg-mime default code.desktop text/troff
+xdg-mime default code.desktop text/x-python
 
 # Reset vscode for karel@pc07
-kz-gset --delete=code_code
+kz-gset --delete=code
 xdg-mime default org.gnome.gedit.desktop application/json
 xdg-mime default org.gnome.gedit.desktop application/x-desktop
 xdg-mime default org.gnome.gedit.desktop application/x-shellscript
