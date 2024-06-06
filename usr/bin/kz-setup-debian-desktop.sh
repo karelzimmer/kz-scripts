@@ -121,12 +121,6 @@ xdg-mime default org.gnome.Evince.desktop application/pdf
 # Reset google-chrome for karel@pc07
 kz-gset --delete=google-chrome
 
-# Setup hide-files for *
-echo 'snap' > "$HOME"/.hidden
-
-# Reset hide-files for *
-rm --force --verbose "$HOME"/.hidden
-
 # Setup kvm for karel@pc07
 kz-gset --addaft=virt-manager
 
