@@ -121,13 +121,12 @@ function become_root_check {
 function check_for_active_updates {
     local   -i  check_wait=10
 
-    while sudo  fuser                                       \
-                --silent                                    \
-                /snap/core/*/var/cache/debconf/config.dat   \
-                /var/cache/apt/archives/lock                \
-                /var/cache/debconf/config.dat               \
-                /var/lib/apt/lists/lock                     \
-                /var/lib/dpkg/lock                          \
+    while sudo  fuser                           \
+                --silent                        \
+                /var/cache/apt/archives/lock    \
+                /var/cache/debconf/config.dat   \
+                /var/lib/apt/lists/lock         \
+                /var/lib/dpkg/lock              \
                 /var/lib/dpkg/lock-frontend; do
         text="Wait ${check_wait}s for another package manager to finish..."
         logmsg "$text"

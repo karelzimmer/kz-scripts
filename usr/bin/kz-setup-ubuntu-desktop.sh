@@ -28,12 +28,10 @@ kz-gset --delete=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 # Setup firefox for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --delete=firefox            # dpkg
-kz-gset --delete=firefox_firefox    # snap
+kz-gset --delete=firefox
 
 # Reset firefox for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
-kz-gset --addbef=firefox         # dpkg
-kz-gset --addbef=firefox_firefox # snap
+kz-gset --addbef=firefox
 
 # Setup gdebi for *
 xdg-mime default gdebi.desktop application/vnd.debian.binary-package
@@ -158,12 +156,10 @@ kz-gset --addaft=org.gnome.SoundJuicer
 kz-gset --delete=org.gnome.SoundJuicer
 
 # Setup thunderbird for monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --delete=thunderbird                # dpkg
-kz-gset --delete=thunderbird_thunderbird    # snap
+kz-gset --delete=thunderbird
 
 # Reset thunderbird for monique@pc01 karel@pc01 marin@pc02 karel@pc06
-kz-gset --addbef=thunderbird             # dpkg
-kz-gset --addbef=thunderbird_thunderbird # snap
+kz-gset --addbef=thunderbird
 
 # Setup teamviewer for karel@pc06
 kz-gset --addaft=com.teamviewer.TeamViewer
@@ -203,12 +199,9 @@ kz-gset --delete=virtualbox
 kz-gset --delete=kz-vm-hugowin732
 
 # Setup vlc for *
-xdg-mime default vlc.desktop video/mp4              # dpkg
-xdg-mime default vlc.desktop video/x-matroska       # dpkg
-xdg-mime default vlc.desktop video/webm             # dpkg
-xdg-mime default vlc_vlc.desktop video/mp4          # snap
-xdg-mime default vlc_vlc.desktop video/x-matroska   # snap
-xdg-mime default vlc_vlc.desktop video/webm         # snap
+xdg-mime default vlc.desktop video/mp4
+xdg-mime default vlc.desktop video/x-matroska
+xdg-mime default vlc.desktop video/webm
 
 # Reset vlc for *
 xdg-mime default org.gnome.Totem.desktop video/mp4

@@ -122,7 +122,6 @@ def check_for_active_updates(PROGRAM_NAME):
         try:
             subprocess.run('sudo fuser '
                            '--silent '
-                           '/snap/core/*/var/cache/debconf/config.dat '
                            '/var/cache/apt/archives/lock '
                            '/var/cache/debconf/config.dat '
                            '/var/lib/apt/lists/lock '
