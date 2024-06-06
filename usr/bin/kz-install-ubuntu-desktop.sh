@@ -44,8 +44,8 @@ sudo apt-get remove --yes ansible
 # Install anydesk on -nohost
 #
 # Remote Wayland display server is not supported.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
 sudo apt-get update
 sudo apt-get install --yes anydesk
 #
@@ -196,8 +196,8 @@ sudo apt-get install --yes epiphany-browser
 sudo apt-get remove --yes epiphany-browser
 
 # Install google-chrome on *
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 sudo apt-get update
 sudo apt-get install --yes google-chrome-stable
 #
@@ -217,8 +217,8 @@ sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share
 sudo apt-get update
 
 # Install google-earth on -nohost
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
 #
@@ -288,12 +288,6 @@ sudo apt-get install --yes nautilus-admin
 # Remove nautilus-admin from pc06
 sudo apt-get remove --yes nautilus-admin
 
-# Install procs on pc06
-sudo snap install procs
-
-# Remove procs from pc06
-sudo snap remove procs
-
 # Install repair-ntfs on -nohost
 sudo apt-get install --yes ntfs-3g
 #
@@ -306,9 +300,15 @@ sudo apt-get install --yes ntfs-3g
 # Remove repair-ntfs from -nohost
 sudo apt-get remove --yes ntfs-3g
 
+# Install shellcheck on pc06
+sudo apt-get install --yes shellcheck
+
+# Remove shellcheck from pc06
+sudo apt-get remove --yes shellcheck
+
 # Install signal on pc06
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
@@ -350,8 +350,8 @@ sudo apt-get install --yes gnome-sushi
 sudo apt-get remove --yes gnome-sushi
 
 # Install teamviewer on *
-echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
+echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
 #
@@ -416,18 +416,21 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 # Install vlc on *
-sudo snap remove vlc
 sudo apt-get install --yes vlc
 
 # Remove vlc from *
-sudo snap remove vlc
 sudo apt-get remove --yes vlc
 
 # Install vscode on pc01 pc06
-sudo snap install --classic code
+wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list
+sudo apt-get update
+sudo apt-get install --yes code
 
 # Remove vscode from pc01 pc06
-sudo snap remove code
+sudo apt-get remove --yes code
+sudo rm --force --verbose /etc/apt/sources.list.d/vscode.list* /usr/share/keyrings/packages.microsoft*
+sudo apt-get update
 
 # Install wine on -nohost
 sudo apt-get install --yes wine winetricks playonlinux

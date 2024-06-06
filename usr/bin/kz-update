@@ -78,13 +78,13 @@ def perform_update():
     command = 'sudo apt-get dist-upgrade --yes'
     perform_command(command)
 
-    command = 'sudo snap refresh'
+    command = 'sudo snap refresh || true'
     perform_command(command)
 
 
 def perform_cleanup():
     """
-    This function performs a Debian packages and snap packages cleanup.
+    This function performs a Debian packages cleanup.
     """
     text = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, text)
@@ -93,15 +93,6 @@ def perform_cleanup():
     perform_command(command)
 
     command = 'sudo apt-get autoremove --yes'
-    perform_command(command)
-
-    command = f"snap  list --all |\n\
-while read Name Version Rev Tracking Publisher Notes\n\
-do\n\
-   if [[ $Notes == *{_('disabled')}* || $Notes == *disabled* ]]; then\n\
-      sudo snap remove $Name --revision=$Rev\n\
-   fi\n\
-done"
     perform_command(command)
 
 
