@@ -57,10 +57,10 @@ sudo apt-get remove --yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
-# Install bash-completion on *
+# Install bash-completion on pc07
 sudo apt-get install --yes bash-completion
 
-# Remove bash-completion from *
+# Remove bash-completion from pc07
 sudo apt-get remove --yes bash-completion
 
 # Install change-grub-timeout on *
@@ -83,10 +83,10 @@ if type gnome-session; then sudo apt-get install --yes gnome-shell-extension-das
 # Remove dashtodock from *
 if type gnome-session; then sudo apt-get remove --yes gnome-shell-extension-dashtodock; fi
 
-# Install deja-dup on *
+# Install deja-dup on pc07
 sudo apt-get install --yes deja-dup
 
-# Remove deja-dup from *
+# Remove deja-dup from pc07
 sudo apt-get remove --yes deja-dup
 
 # Install fdupes on -nohost
@@ -205,10 +205,10 @@ sudo updatedb
 # Remove locate from pc07
 sudo apt-get remove --yes locate
 
-# Install lshw on *
+# Install lshw on pc07
 sudo apt-get install --yes lshw
 
-# Remove lshw from *
+# Remove lshw from pc07
 sudo apt-get remove --yes lshw
 
 # Install repair-ntfs on -nohost
@@ -240,10 +240,10 @@ sudo apt-get remove --yes signal-desktop
 sudo rm --force --verbose /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
 sudo apt-get update
 
-# Install spice-vdagent on *
+# Install spice-vdagent on pc07
 sudo apt-get install --yes spice-vdagent
 
-# Remove spice-vdagent from *
+# Remove spice-vdagent from pc07
 sudo apt-get remove --yes spice-vdagent
 
 # Install ssh on pc07
@@ -286,10 +286,10 @@ sudo apt-get install --yes thunderbird-l10n-nl
 # Remove thunderbird from *
 sudo apt-get remove --yes thunderbird-l10n-nl
 
-# Install usbutils on *
+# Install usbutils on pc07
 sudo apt-get install --yes usbutils
 
-# Remove usbutils from *
+# Remove usbutils from pc07
 sudo apt-get remove --yes usbutils
 
 # Install user-guest on -nohost
@@ -331,11 +331,11 @@ sudo apt-get remove --yes webmin
 sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 sudo apt-get update
 
-# Install user-log-access on *
+# Install user-log-access on pc07
 #
 # Enable access to system monitoring tasks like read many log files in /var/log and to the log.
 sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
-# Remove user-log-access from *
+# Remove user-log-access from pc07
 sudo deluser "${SUDO_USER:-$USER}" adm
 sudo deluser "${SUDO_USER:-$USER}" systemd-journal
