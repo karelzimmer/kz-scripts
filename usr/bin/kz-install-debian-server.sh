@@ -24,6 +24,14 @@ sudo apt-get install --yes ansible
 # Remove ansible from *
 sudo apt-get remove --yes ansible
 
+# Install change-grub-timeout on *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
+sudo update-grub
+
+# Remove change-grub-timeout from *
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
+sudo update-grub
+
 # Install fwupd on -nohost
 #
 # Disable the Firmware update daemon.
