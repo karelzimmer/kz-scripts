@@ -213,7 +213,6 @@ function process_menu1_tui {
             *)
                 if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
                     process_menu1_choice
-                    exit $OK
                 else
                     continue
                 fi
@@ -374,7 +373,6 @@ function process_menu2_tui {
             *)
                 if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
                     process_menu2_choice
-                    exit $OK
                 else
                     continue
                 fi
