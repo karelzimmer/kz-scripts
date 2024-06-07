@@ -110,8 +110,8 @@ def perform_command(command):
     kz_common.infomsg(PROGRAM_NAME, text)
     kz_common.check_for_active_updates(PROGRAM_NAME)
     try:
-        subprocess.run({command}, shell=True, check=True,
-                       executable='/usr/bin/bash')
+        subprocess.run({command}, executable='/usr/bin/bash', shell=True,
+                       check=True)
     except Exception as exc:
         text = str(exc)
         kz_common.logmsg(PROGRAM_NAME, text)
