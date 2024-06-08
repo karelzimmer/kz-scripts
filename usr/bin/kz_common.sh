@@ -315,7 +315,7 @@ function signal {
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
             ;;
         100)
-            rc_desc='apt exited with error'
+            rc_desc='apt/dpkg exited with error'
             ;;
         126)
             rc_desc='command cannot execute'
