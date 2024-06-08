@@ -108,7 +108,7 @@ def perform_command(command):
     """
     text = f'{command}'
     kz_common.infomsg(PROGRAM_NAME, text)
-    kz_common.check_for_active_updates(PROGRAM_NAME)
+    kz_common.check_package_manager(PROGRAM_NAME)
     try:
         subprocess.run({command}, executable='/usr/bin/bash', shell=True,
                        check=True)

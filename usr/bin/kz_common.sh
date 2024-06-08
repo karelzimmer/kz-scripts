@@ -117,24 +117,6 @@ function become_root_check {
 }
 
 
-# This function checks for active updates and waits for the next check if so.
-function check_for_active_updates {
-    local   -i  check_wait=10
-
-    while sudo  fuser                           \
-                --silent                        \
-                /var/cache/apt/archives/lock    \
-                /var/cache/debconf/config.dat   \
-                /var/lib/apt/lists/lock         \
-                /var/lib/dpkg/lock              \
-                /var/lib/dpkg/lock-frontend; do
-        text="Wait ${check_wait}s for another package manager to finish..."
-        logmsg "$text"
-        sleep $check_wait
-    done
-}
-
-
 # This function checks to see if the computer is running on battery power and
 # prompts the user to continue if so.
 function check_on_ac_power {
@@ -148,6 +130,25 @@ It is recommended to connect the computer to the wall socket.")
         infomsg "$text"
         $option_gui || wait_for_enter
     fi
+}
+
+
+# This function checks for another active package manager and waits for the
+# next check if so.
+function check_package_manager {
+    local   -i  check_wait=10
+
+    while sudo  fuser                           \
+                --silent                        \
+                /var/cache/apt/archives/lock    \
+                /var/cache/debconf/config.dat   \
+                /var/lib/apt/lists/lock         \
+                /var/lib/dpkg/lock              \
+                /var/lib/dpkg/lock-frontend; do
+        text="Wait ${check_wait}s for another package manager to finish..."
+        logmsg "$text"
+        sleep $check_wait
+    done
 }
 
 
@@ -312,6 +313,9 @@ function signal {
             ;;
         6[4-9]|7[0-8])                  # 64--78
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
+            ;;
+        100)
+            rc_desc='apt exited with error'
             ;;
         126)
             rc_desc='command cannot execute'

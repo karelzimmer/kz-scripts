@@ -129,7 +129,7 @@ function prepare_processing {
 # This function checks and installs dependencies.
 function check_dependencies {
     if [[ $EDITION = 'desktop' ]] && ! type zenity |& $LOGCMD; then
-        check_for_active_updates
+        check_package_manager
         sudo apt-get install --yes zenity |& $LOGCMD
     fi
 }
@@ -153,7 +153,7 @@ function install_package {
     local -i kz_deb_install_rc=0
 
     logmsg 'Install. kz deb...'
-    check_for_active_updates |& $LOGCMD
+    check_package_manager |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \

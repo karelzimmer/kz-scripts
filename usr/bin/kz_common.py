@@ -112,31 +112,6 @@ def become_root_check(PROGRAM_NAME):
         return True
 
 
-def check_for_active_updates(PROGRAM_NAME):
-    """
-    This function checks for active updates and waits for the next check if so.
-    """
-    check_wait = 10
-
-    while True:
-        try:
-            subprocess.run('sudo fuser '
-                           '--silent '
-                           '/var/cache/apt/archives/lock '
-                           '/var/cache/debconf/config.dat '
-                           '/var/lib/apt/lists/lock '
-                           '/var/lib/dpkg/lock-frontend '
-                           '/var/lib/dpkg/lock',
-                           shell=True, check=True)
-        except Exception:
-            break
-        else:
-            text = _('Wait {}s for another package manager to finish...').\
-                format(check_wait)
-            infomsg(PROGRAM_NAME, text)
-            time.sleep(check_wait)
-
-
 def check_on_ac_power(PROGRAM_NAME):
     """
     This function checks to see if the computer is running on battery power and
@@ -164,6 +139,32 @@ def check_on_ac_power(PROGRAM_NAME):
             sys.exit(ERROR)
         else:
             return OK
+
+
+def check_package_manager(PROGRAM_NAME):
+    """
+    This function checks for another active package manager and waits for the
+    next check if so.
+    """
+    check_wait = 10
+
+    while True:
+        try:
+            subprocess.run('sudo fuser '
+                           '--silent '
+                           '/var/cache/apt/archives/lock '
+                           '/var/cache/debconf/config.dat '
+                           '/var/lib/apt/lists/lock '
+                           '/var/lib/dpkg/lock-frontend '
+                           '/var/lib/dpkg/lock',
+                           shell=True, check=True)
+        except Exception:
+            break
+        else:
+            text = _('Wait {}s for another package manager to finish...').\
+                format(check_wait)
+            infomsg(PROGRAM_NAME, text)
+            time.sleep(check_wait)
 
 
 def init_script(PROGRAM_NAME):
