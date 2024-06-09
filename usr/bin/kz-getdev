@@ -99,24 +99,8 @@ function check_dependencies {
     text=$(gettext 'Check dependencies')...
     infomsg "$text"
     check_package_manager
-    sudo    apt-get             \
-            install             \
-            --yes               \
-            curl                \
-            fakeroot            \
-            $escape             \
-            git                 \
-            jq                  \
-            lftp                \
-            nmap                \
-            pycodestyle         \
-            python3-pycodestyle \
-            python3-autopep8    \
-            python3-pip         \
-            python-is-python3
-    sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
-    sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
-    kz install shellcheck vscode
+    sudo apt-get install --yes fakeroot $escape jq lftp nmap
+    kz install git python shellcheck vscode
 }
 
 

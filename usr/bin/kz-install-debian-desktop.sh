@@ -211,6 +211,15 @@ sudo apt-get install --yes lshw
 # Remove lshw from pc07
 sudo apt-get remove --yes lshw
 
+# Install python on pc07
+sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
+sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
+
+# Remove python from pc07
+sudo apt-get remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip
+
 # Install repair-ntfs on -nohost
 sudo apt-get install --yes ntfs-3g
 #

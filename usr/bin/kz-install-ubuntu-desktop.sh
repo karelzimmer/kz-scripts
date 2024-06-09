@@ -177,6 +177,12 @@ sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 # Remove gimp from pc06 pc-van-hugo
 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
+# Install git on pc06
+sudo apt-get install --yes git
+
+# Remove git from pc06
+sudo apt-get remove --yes git
+
 # Install gnome-gmail on pc01 pc06
 sudo apt-get install --yes gnome-gmail
 
@@ -287,6 +293,15 @@ sudo apt-get install --yes nautilus-admin
 
 # Remove nautilus-admin from pc06
 sudo apt-get remove --yes nautilus-admin
+
+# Install python on pc06
+sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
+sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
+
+# Remove python from pc06
+sudo apt-get remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip
 
 # Install repair-ntfs on -nohost
 sudo apt-get install --yes ntfs-3g
