@@ -139,6 +139,12 @@ sudo apt-get install --yes gedit
 # Remove gedit from *
 sudo apt-get remove --yes gedit
 
+# Install git on pc07
+sudo apt-get install --yes git
+
+# Remove git from pc07
+sudo apt-get remove --yes git
+
 # Install gnome-gmail on pc07
 sudo apt-get install --yes gnome-gmail
 
