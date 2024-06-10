@@ -31,14 +31,12 @@ commands for setting up apps and changing user settings.
 For the input file format, see the \fBFILE FORMAT\fR section below.
 .sp
 By default, \fBkz setup\fR processes the input file
-/usr/bin/kz-setup-<distribution>-<edition>.sh, for example
-kz-setup-ubuntu-desktop.sh.
+/usr/bin/kz-setup-<edition>.sh, for example kz-setup-desktop.sh.
 .sp
-The <distribution> and <edition> (desktop or server) are populated with the
-values from the current computer.
+The <edition> (desktop or server) is populated with the values from the current
+computer.
 .sp
-This input file contains commands for all users included in it for Ubuntu
-desktop.
+This input file contains commands for all users included in it for a desktop.
 .sp
 When processing the input file, the commands for any and the current user are
 selected and copied to a command file.
@@ -69,8 +67,8 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The format of the supplied input file is kz-setup-<distribution>-<edition>.sh,
-for a user supplied input file it is kz-setup-*.sh.
+The format of the supplied input file is kz-setup-<edition>.sh, for a user
+supplied input file it is kz-setup-*.sh.
 .br
 The input file contains so-called \fBApp records\fR and \fBCommand records\fR.
 .br
@@ -82,8 +80,8 @@ the result remains the same when executed repeatedly idempotent).
 See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
 .sp
-See \fBTable 2\fR for an \fBexample\fR of these records in
-kz-setup-ubuntu-desktop.sh sample file.
+See \fBTable 2\fR for an \fBexample\fR of these records in file
+kz-setup-desktop.sh.
 More examples can be seen through the \fBkz setup --cat\fR command.
 .sp
 .sp
@@ -124,7 +122,7 @@ T}
 .TE
 .sp
 .sp
-.B Table 2. Lines in kz-setup-ubuntu-desktop.sh sample file
+.B Table 2. Lines in file kz-setup-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -278,29 +276,19 @@ equal to 0.
 .\"
 .\"
 .SH FILES
-/usr/bin/kz-setup-debian-desktop.sh
+/usr/bin/kz-setup-desktop.sh
 .RS
-Set up file for Debian desktop.
+Set up file for a desktop.
 .RE
 .sp
-/usr/bin/kz-setup-ubuntu-desktop.sh
+/usr/bin/kz-setup-server.sh
 .RS
-Set up file for Ubuntu desktop.
+Set up file for a server.
 .RE
 .sp
-/usr/bin/kz-setup-debian-server.sh
+/tmp/kz-setup-<edition>-XXXXXXXXXX.sh
 .RS
-Set up file for Debian server.
-.RE
-.sp
-/usr/bin/kz-setup-ubuntu-server.sh
-.RS
-Set up file for Ubuntu server.
-.RE
-.sp
-/tmp/kz-setup-<distribution>-<edition>-XXXXXXXXXX.sh
-.RS
-Command file, e.g. kz-setup-ubuntu-desktop-SYpGEKVWZI.sh.
+Command file, e.g. kz-setup-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
 xdg-user-dir DOCUMENTS/favs

@@ -32,13 +32,12 @@ commands for installing apps and modifying system settings.
 For the format of the input files see the section \fBFILE FORMAT\fR below.
 .sp
 By default, \fBkz install\fR processes the input file
-/usr/bin/kz-install-<distribution>-<edition>.sh, for example
-kz-install-ubuntu-desktop.sh.
+/usr/bin/kz-install-<edition>.sh, for example kz-install-desktop.sh.
 .br
-The <distribution> and <edition> (desktop or server) are populated with the
-values from the current computer.
+The <edition> (desktop or server) is populated with the values from the current
+computer.
 .sp
-This input file contains commands for all computers included in it for Ubuntu
+This input file contains commands for all computers included in it for a
 desktop.
 .br
 When processing the input file, the commands for any and the current computer
@@ -69,9 +68,8 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The format of the supplied input file is
-kz-install-<distribution>-<edition>.sh, for a user supplied input file it is
-kz-install-*.sh.
+The format of the supplied input file is kz-install-<edition>.sh, for a user
+supplied input file it is kz-install-*.sh.
 .br
 The input file contains so-called \fBApp records\fR and \fBCommand records\fR.
 .br
@@ -83,8 +81,8 @@ the result remains the same when executed repeatedly (idempotent).
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
 .sp
-See \fBTable 2\fR for an \fBexample\fR of these records in sample file
-kz-install-ubuntu-desktop.sh.
+See \fBTable 2\fR for an \fBexample\fR of these records in file
+kz-install-desktop.sh.
 More examples can be seen through the \fBkz install --cat\fR command.
 .sp
 .sp
@@ -125,7 +123,7 @@ T}
 .TE
 .sp
 .sp
-.B Table 2. Lines in sample file kz-install-ubuntu-desktop.sh
+.B Table 2. Lines in file kz-install-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -280,29 +278,19 @@ equal to 0.
 .\"
 .\"
 .SH FILES
-/usr/bin/kz-install-debian-desktop.sh
+/usr/bin/kz-install-desktop.sh
 .RS
-Install file for Debian desktop.
+Install file for a desktop.
 .RE
 .sp
-/usr/bin/kz-install-ubuntu-desktop.sh
+/usr/bin/kz-install-server.sh
 .RS
-Install file for Ubuntu desktop.
+Install file for a server.
 .RE
 .sp
-/usr/bin/kz-install-debian-server.sh
+/tmp/kz-install-<edition>-XXXXXXXXXX.sh
 .RS
-Install file for Debian server.
-.RE
-.sp
-/usr/bin/kz-install-ubuntu-server.sh
-.RS
-Install file for Ubuntu server.
-.RE
-.sp
-/tmp/kz-install-<distribution>-<edition>-XXXXXXXXXX.sh
-.RS
-Command file, e.g. kz-install-ubuntu-desktop-SYpGEKVWZI.sh.
+Command file, e.g. kz-install-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
 xdg-user-dir DOCUMENTS/apps

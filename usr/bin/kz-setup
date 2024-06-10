@@ -170,7 +170,7 @@ $USAGE_LINE"
 function process_input {
     local command_file=''
 
-    input_file=$PROGRAM_PATH/$PROGRAM_NAME-$DISTRO-$EDITION.sh
+    input_file=$PROGRAM_PATH/$PROGRAM_NAME-$EDITION.sh
 
     if $option_list; then
         option_gui=false # Ignore start in graphical mode.
@@ -200,7 +200,7 @@ nd end with '.sh'.")"
         exit $OK
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-$DISTRO-$EDITION-XXXXXXXXXX.sh")
+    command_file=$(mktemp -t "$PROGRAM_NAME-$EDITION-XXXXXXXXXX.sh")
 
     if $argument_app; then
         option_gui=false # Ignore start in graphical mode.

@@ -33,14 +33,13 @@ Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Standaard verwerkt \fBkz setup\fR het invoerbestand
-/usr/bin/kz-setup-<distributie>-<editie>.sh, bijvoorbeeld
-kz-setup-ubuntu-desktop.sh.
+/usr/bin/kz-setup-<editie>.sh, bijvoorbeeld kz-setup-desktop.sh.
 .br
-De <distributie> en <editie> (desktop of server) worden ingevuld met de waarden
-van de huidige computer.
+De <editie> (desktop of server) wordt ingevuld met de waarden van de huidige
+computer.
 .sp
 Dit invoerbestand bevat instel-opdrachten voor alle hierin opgenomen gebruikers
-voor Ubuntu desktop.
+voor een desktop.
 .br
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige gebruiker geselecteerd en gekopieerd naar het opdrachtbestand.
@@ -73,9 +72,8 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De naamgeving van de meegeleverde invoerbestanden is
-kz-setup-<distribution>-<edition>.sh, voor een door de gebruiker aangeleverd
-invoerbestand is het kz-setup-*.sh.
+De naamgeving van de meegeleverde invoerbestanden is kz-setup-<edition>.sh,
+voor een door de gebruiker aangeleverd invoerbestand is het kz-setup-*.sh.
 .br
 In het invoerbestand staan zogenaamde \fBApp-regels\fR en
 \fBOpdracht-regels\fR.
@@ -88,8 +86,8 @@ herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
 .sp
-Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels in
-voorbeeldbestand kz-setup-ubuntu-desktop.sh.
+Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze deze regels in bestand
+kz-setup-desktop.sh.
 Meer voorbeelden zijn te zien met de opdracht \fBkz setup --cat\fR.
 .sp
 .B Tabel 1. Soorten regels en hun verwerking
@@ -129,7 +127,7 @@ T}
 .TE
 .sp
 .sp
-.B Tabel 2. Regels in voorbeeldbestand kz-setup-ubuntu-desktop.sh
+.B Tabel 2. Regels in bestand kz-setup-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -286,29 +284,19 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-setup-debian-desktop.sh
+/usr/bin/kz-setup-desktop.sh
 .RS
-Instelbestand voor Debian desktop.
+Instelbestand voor een desktop.
 .RE
 .sp
-/usr/bin/kz-setup-ubuntu-desktop.sh
+/usr/bin/kz-setup-server.sh
 .RS
-Instelbestand voor Ubuntu desktop.
+Instelbestand voor een server.
 .RE
 .sp
-/usr/bin/kz-setup-debian-server.sh
+/tmp/kz-setup-<editie>-XXXXXXXXXX.sh
 .RS
-Instelbestand voor Debian server.
-.RE
-.sp
-/usr/bin/kz-setup-ubuntu-server.sh
-.RS
-Instelbestand voor Ubuntu server.
-.RE
-.sp
-/tmp/kz-setup-<distributie>-<editie>-XXXXXXXXXX.sh
-.RS
-Opdrachtbestand, bijvoorbeeld kz-setup-ubuntu-desktop-SYpGEKVWZI.sh.
+Opdrachtbestand, bijvoorbeeld kz-setup-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
 xdg-user-dir DOCUMENTS/favs

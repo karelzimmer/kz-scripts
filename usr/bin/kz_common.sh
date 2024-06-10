@@ -47,8 +47,6 @@ $(gettext '  -v, --version  print program version')"
 readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
-readonly DISTRO=$(lsb_release --id --short | tr '[:upper:]' '[:lower:]')
-
 # Determine whether it is desktop or server.
 if (
     type cinnamon-session   ||

@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# SPDX-FileComment: Install file for Debian server
+# SPDX-FileComment: Install file for a server
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -12,6 +12,7 @@
 # Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
+if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo snap refresh; fi
 
 # Remove update-system from *
 #
@@ -25,12 +26,20 @@ sudo apt-get install --yes ansible
 sudo apt-get remove --yes ansible
 
 # Install change-grub-timeout on *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub; fi
 sudo update-grub
 
 # Remove change-grub-timeout from *
-sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub; fi
 sudo update-grub
+
+# Install disabled-cloud-init on *
+#
+# Prevent extra lines from cloud-init printed in terminal at login.
+if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo touch /etc/cloud/cloud-init.disabled; fi
+
+# Remove disabled-cloud-init from *
+if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /etc/cloud/cloud-init.disabled; fi
 
 # Install fwupd on -nohost
 #
@@ -90,8 +99,8 @@ sudo apt-get remove --yes ufw
 # Install user-log-access on *
 #
 # Enable access to system monitoring tasks like read many log files in /var/log.
-sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"; fi
 
 # Remove user-log-access from *
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" adm; fi
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" systemd-journal; fi

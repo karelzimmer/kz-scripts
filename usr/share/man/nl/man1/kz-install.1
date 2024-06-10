@@ -34,14 +34,13 @@ Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
 Standaard verwerkt \fBkz install\fR het invoerbestand
-/usr/bin/kz-install-<distributie>-<editie>.sh, bijvoorbeeld
-kz-install-ubuntu-desktop.sh.
+/usr/bin/kz-install-<editie>.sh, bijvoorbeeld kz-install-desktop.sh.
 .br
-De <distributie> en <editie> (desktop of server) worden ingevuld met de waarden
-van de huidige computer.
+De <editie> (desktop of server) wordt ingevuld met de waarden van de huidige
+computer.
 .sp
 Dit invoerbestand bevat installatie-opdrachten voor alle hierin opgenomen
-computers voor Ubuntu desktop.
+computers voor een desktop.
 .br
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
@@ -74,9 +73,8 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De naamgeving van de meegeleverde invoerbestanden is
-kz-install-<distribution>-<edition>.sh, voor een door de gebruiker
-aangeleverd invoerbestand is het kz-install-*.sh.
+De naamgeving van de meegeleverde invoerbestanden is kz-install-<edition>.sh,
+voor een door de gebruiker aangeleverd invoerbestand is het kz-install-*.sh.
 .br
 In het invoerbestand staan zogenaamde \fBApp-regels\fR en
 \fBOpdracht-regels\fR.
@@ -89,8 +87,8 @@ herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
 .sp
-Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in
-voorbeeldbestand kz-install-ubuntu-desktop.sh.
+Zie \fBTabel 2\fR voor een \fBvoorbeeld\fR van deze regels in bestand
+kz-install-desktop.sh.
 Meer voorbeelden zijn te zien met de opdracht \fBkz install --cat\fR.
 .sp
 .sp
@@ -131,7 +129,7 @@ T}
 .TE
 .sp
 .sp
-.B Tabel 2. Regels in voorbeeldbestand kz-install-ubuntu-desktop.sh
+.B Tabel 2. Regels in bestand kz-install-desktop.sh
 .TS
 box tab(:);
 lb | lb.
@@ -289,29 +287,19 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-install-debian-desktop.sh
+/usr/bin/kz-install-desktop.sh
 .RS
-Installatiebestand voor Debian desktop.
+Installatiebestand voor een desktop.
 .RE
 .sp
-/usr/bin/kz-install-ubuntu-desktop.sh
+/usr/bin/kz-install-server.sh
 .RS
-Installatiebestand voor Ubuntu desktop.
+Installatiebestand voor een server.
 .RE
 .sp
-/usr/bin/kz-install-debian-server.sh
+/tmp/kz-install-<editie>-XXXXXXXXXX.sh
 .RS
-Installatiebestand voor Debian server.
-.RE
-.sp
-/usr/bin/kz-install-ubuntu-server.sh
-.RS
-Installatiebestand voor Ubuntu server.
-.RE
-.sp
-/tmp/kz-install-<distributie>-<editie>-XXXXXXXXXX.sh
-.RS
-Opdrachtbestand, bijvoorbeeld kz-install-ubuntu-desktop-SYpGEKVWZI.sh.
+Opdrachtbestand, bijvoorbeeld kz-install-desktop-SYpGEKVWZI.sh.
 .RE
 .sp
 xdg-user-dir DOCUMENTS/apps
