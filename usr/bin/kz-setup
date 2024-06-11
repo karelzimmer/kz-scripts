@@ -541,8 +541,12 @@ Type 'logout' to log out.")"
             $option_gui || wait_for_enter
             if type gnome-session |& $LOGCMD; then
                 gnome-session-quit --logout --no-prompt
+            elif type ksmserver |& $LOGCMD; then
+                qdbus org.kde.ksmserver /KSMServer logout 0 0 0
             elif type lxqt-session |& $LOGCMD; then
                 lxqt-leave --logout
+            elif type mate-session |& $LOGCMD; then
+                mate-session-save --logout
             elif type xfce4-session |& $LOGCMD; then
                 xfce4-session-logout --logout
             else
