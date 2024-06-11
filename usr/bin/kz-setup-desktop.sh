@@ -66,13 +66,13 @@ kz-gset --addbef=org.gnome.Evolution
 # Setup firefox for karel@pc07
 kz-gset --delete=firefox-esr
 
-# Setup firefox for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
+# Setup firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
 kz-gset --delete=firefox
 
 # Reset firefox for karel@pc07
 kz-gset --addbef=firefox-esr
 
-# Reset firefox for monique@pc01 karel@pc01 marin@pc02 karel@pc06 emily@pc-van-emily
+# Reset firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
 kz-gset --addbef=firefox
 
 # Setup gdebi for *
@@ -146,13 +146,13 @@ if type gnome-session; then gsettings reset org.gnome.Terminal.Legacy.Settings t
 # Setup google-chrome for *
 xdg-mime default google-chrome.desktop application/pdf
 
-# Setup google-chrome for monique@pc01 karel@pc01 karel@pc07 marin@pc02 karel@pc06 emily@pc-van-emily
+# Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gset --addbef=google-chrome
 
 # Reset google-chrome for *
 xdg-mime default org.gnome.Evince.desktop application/pdf
 
-# Reset google-chrome for monique@pc01 karel@pc01 karel@pc07 marin@pc02 karel@pc06 emily@pc-van-emily
+# Reset google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gset --delete=google-chrome
 
 # Setup handbrake for emily@pc-van-emily
@@ -195,10 +195,10 @@ kz-gset --addaft=org.gnome.SoundJuicer
 # Reset sound-juicer for emily@pc-van-emily
 kz-gset --delete=org.gnome.SoundJuicer
 
-# Setup spotify for monique@pc01 karel@pc01 karel@pc07 marin@pc02 karel@pc06
+# Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gset --addaft=kz-spotify
 
-# Reset spotify for monique@pc01 karel@pc01 karel@pc07 marin@pc02 karel@pc06
+# Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gset --delete=kz-spotify
 
 # Setup teamviewer for karel@pc06
@@ -228,10 +228,10 @@ kz-gset --delete=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
-# Setup thunderbird for monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
 kz-gset --delete=thunderbird
 
-# Reset thunderbird for monique@pc01 karel@pc01 marin@pc02 karel@pc06
+# Reset thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
 kz-gset --addbef=thunderbird
 
 # Setup ubuntu-desktop-installer for *

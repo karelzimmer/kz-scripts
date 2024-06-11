@@ -221,10 +221,10 @@ sudo apt-get install --yes gedit
 # Remove gedit from *
 sudo apt-get remove --yes gedit
 
-# Install gimp on pc06 pc-van-hugo
+# Install gimp on pc-van-hugo pc06
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
 
-# Remove gimp from pc06 pc-van-hugo
+# Remove gimp from pc-van-hugo pc06
 sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
 
 # Install git on pc06 pc07
