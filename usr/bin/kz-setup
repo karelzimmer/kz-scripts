@@ -475,6 +475,7 @@ function execute_command {
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
+            logmsg "$app_name_line"
             infomsg "$app_name_line"
         fi
         if [[ ${#cmd} -gt $COLUMNS ]]; then
@@ -487,7 +488,7 @@ function execute_command {
         infomsg "         $cmd_dis"
     fi
 
-    logmsg "$app_name_line\n$cmd"
+    logmsg "$cmd"
     errexit=false
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
     errexit=true
