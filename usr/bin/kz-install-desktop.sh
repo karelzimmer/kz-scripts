@@ -9,7 +9,7 @@
 # Install disabled-apport on *
 #
 # Do this first [1/3].
-# Suppress the program crash report.
+# Disable the program crash report.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl disable apport.service; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
@@ -25,7 +25,6 @@ if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --no
 # Install extra-repos on *
 #
 # Do this first [2/3].
-# More repositories with packages to choose from.
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-add-repository contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-add-repository non-free; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
@@ -38,7 +37,6 @@ if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get upgrade --yes
 # Remove extra-repos from *
 #
 # Do this first [2/3].
-# Revert to standard repositories.
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-add-repository --remove contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-add-repository --remove non-free; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
@@ -49,7 +47,6 @@ if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get upgrade --yes
 # Install update-system on *
 #
 # Do this first [3/3].
-# Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo snap refresh; fi
@@ -122,12 +119,10 @@ sudo apt-get install --yes cups
 # Remove cups from *
 sudo apt-get remove --yes cups
 
-# Install cups-backend-bjnp on pc-van-emily
-#
-# Add support for Canon USB over IP BJNP protocol.
+# Install cups-backend-canon on pc-van-emily
 sudo apt-get install --yes cups-backend-bjnp
 
-# Remove cups-backend-bjnp from pc-van-emily
+# Remove cups-backend-canon from pc-van-emily
 sudo apt-get remove --yes cups-backend-bjnp
 
 # Install dashtodock on *
@@ -144,7 +139,8 @@ sudo apt-get remove --yes deja-dup
 
 # Install disabled-aer on pc06
 #
-# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting) to prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
+# Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).
+# To prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
 #
@@ -152,17 +148,37 @@ sudo update-grub
 grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Remove disabled-aer from pc06
+#
+# Enable kernel config parameter PCIEAER.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
 #
 # Check for kernel config parameter pci=noaer.
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
+# Install disabled-fwupd on -nohost
+#
+# Disable the Firmware update daemon.
+sudo systemctl stop fwupd.service
+sudo systemctl disable fwupd.service
+sudo systemctl mask fwupd.service
+
+# Remove disabled-fwupd from -nohost
+#
+# Enable the Firmware update daemon.
+sudo systemctl unmask fwupd.service
+sudo systemctl enable fwupd.service
+sudo systemctl start fwupd.service
+
 # Install disabled-lidswitch on pc-van-hugo
+#
+# Do nothing when the lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 # Remove disabled-lidswitch from pc-van-hugo
+#
+# Restore the default action when the lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install exiftool on pc06 pc07
@@ -191,23 +207,11 @@ sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' 
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove force-x11 from -nohost
+#
+# Enable choice @ user login for X11 or Wayland.
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
 #
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
-
-# Install fwupd on -nohost
-#
-# Disable the Firmware update daemon.
-sudo systemctl stop fwupd.service
-sudo systemctl disable fwupd.service
-sudo systemctl mask fwupd.service
-
-# Remove fwupd from -nohost
-#
-# Enable the Firmware update daemon.
-sudo systemctl unmask fwupd.service
-sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
 
 # Install gdebi on *
 sudo apt-get install --yes gdebi
@@ -495,10 +499,12 @@ sudo userdel --remove karel
 
 # Install user-log-access on *
 #
-# Enable access to system monitoring tasks like read many log files in /var/log and to the log.
+# Enable access to system monitoring tasks like read many log files in /var/log and to the log/systemd journal.
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"; fi
 
 # Remove user-log-access from *
+#
+# Return to default behavior regarding log/systemd journal access.
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" adm; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" systemd-journal; fi
 
@@ -512,7 +518,7 @@ sudo userdel --remove toos
 
 # Install virtualbox on pc-van-hugo
 #
-# If installation hangs or VBox does not work, check Linux-info.txt.
+# If the installation hangs or VBox does not work, check the virtualization settings in the BIOS/UEFI.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 #

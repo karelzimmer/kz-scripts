@@ -9,7 +9,6 @@
 # Install update-system on *
 #
 # Do this first.
-# Update the system.
 sudo apt-get update
 sudo apt-get upgrade --yes
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo snap refresh; fi
@@ -39,21 +38,9 @@ sudo update-grub
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo touch /etc/cloud/cloud-init.disabled; fi
 
 # Remove disabled-cloud-init from *
+#
+# Return to default behavior regarding cloud-init messages.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /etc/cloud/cloud-init.disabled; fi
-
-# Install fwupd on -nohost
-#
-# Disable the Firmware update daemon.
-sudo systemctl stop fwupd.service
-sudo systemctl disable fwupd.service
-sudo systemctl mask fwupd.service
-
-# Remove fwupd from -nohost
-#
-# Enable the Firmware update daemon.
-sudo systemctl unmask fwupd.service
-sudo systemctl enable fwupd.service
-sudo systemctl start fwupd.service
 
 # Install locate on *
 sudo apt-get install --yes locate
@@ -98,9 +85,11 @@ sudo apt-get remove --yes ufw
 
 # Install user-log-access on *
 #
-# Enable access to system monitoring tasks like read many log files in /var/log.
+# Enable access to system monitoring tasks like read many log files in /var/log and to the log/systemd journal.
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"; fi
 
 # Remove user-log-access from *
+#
+# Return to default behavior regarding log/systemd journal access.
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" adm; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" systemd-journal; fi
