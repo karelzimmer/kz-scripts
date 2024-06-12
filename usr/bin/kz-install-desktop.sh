@@ -48,7 +48,7 @@ if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get upgrade --yes
 #
 # Do this first [3/3].
 sudo apt-get update
-sudo apt-get upgrade --yes
+sudo apt-get dist-upgrade --yes
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo snap refresh; fi
 
 # Remove update-system from *
