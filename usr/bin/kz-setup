@@ -470,9 +470,11 @@ function execute_command {
 
     no_commands_found=false
     ((++cmd_seq_num))
-    logmsg "$app_name_line"
 
     if $option_gui; then
+        if [[ $cmd_seq_num -eq 1 ]]; then
+            logmsg "$app_name_line"
+        fi
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
         if [[ $cmd_seq_num -eq 1 ]]; then
