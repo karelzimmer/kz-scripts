@@ -44,7 +44,9 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-#, sh-format
+msgid "Wait"
+msgstr "Wacht"
+
 msgid "Wait for another package manager to finish"
 msgstr "Wacht tot andere pakketbeheerder klaar is"
 

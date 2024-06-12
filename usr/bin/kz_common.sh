@@ -143,11 +143,11 @@ function check_package_manager {
                 /var/lib/apt/lists/lock         \
                 /var/lib/dpkg/lock              \
                 /var/lib/dpkg/lock-frontend; do
-        text=$(eval_gettext 'Wait for another package manager to finish')
+        text=$(gettext 'Wait for another package manager to finish')
         if $option_gui; then
             logmsg "$text"
             # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$text"
+            printf '%s\n' "#$(gettext 'Wait')\n\n$text"
         else
             infomsg "$text..."
         fi

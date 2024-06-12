@@ -41,7 +41,6 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 
-#, sh-format
 msgid "Wait for another package manager to finish"
 msgstr ""
 
