@@ -509,6 +509,7 @@ function execute_command {
     no_commands_found=false
     ((++cmd_seq_num))
 
+    check_package_manager
     if $option_gui; then
         if [[ $cmd_seq_num -eq 1 ]]; then
             logmsg "$app_name_line"
@@ -528,7 +529,6 @@ function execute_command {
         infomsg "         $cmd_dis"
     fi
 
-    check_package_manager
     logmsg "$cmd"
     errexit=false
     eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
