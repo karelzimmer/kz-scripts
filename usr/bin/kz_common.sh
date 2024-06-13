@@ -147,7 +147,7 @@ function check_package_manager {
         if $option_gui; then
             logmsg "$text"
             # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$(gettext 'Wait')\n\n$text"
+            printf '%s\n' "#$text"
         else
             infomsg "$text..."
         fi

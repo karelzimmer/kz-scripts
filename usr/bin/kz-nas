@@ -260,7 +260,7 @@ process_input() {
 function check_dependencies {
     logmsg 'Check_dependencies...'
     check_package_manager
-    sudo apt-get install --yes cifs-utils samba
+    sudo apt-get install --yes cifs-utils samba |& $LOGCMD
 }
 
 

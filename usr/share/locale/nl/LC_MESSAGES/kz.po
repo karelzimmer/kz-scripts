@@ -44,9 +44,6 @@ msgstr ""
 msgid "Press the Enter key to continue [Enter]: "
 msgstr "Druk op de Enter-toets om door te gaan [Enter]: "
 
-msgid "Wait"
-msgstr "Wacht"
-
 msgid "Wait for another package manager to finish"
 msgstr "Wacht tot andere pakketbeheerder klaar is"
 
@@ -105,11 +102,6 @@ msgstr "$PROGRAM_DESC foutmelding ($DISPLAY_NAME)"
 
 msgid "Common module for Python scripts"
 msgstr "Algemene module voor Python scripts"
-
-#, fuzzy
-#| msgid "Wait for another package manager to finish"
-msgid "Wait {}s for another package manager to finish..."
-msgstr "Wacht tot andere pakketbeheerder klaar is"
 
 msgid "Program {} has been interrupted."
 msgstr "Programma {} is onderbroken."
