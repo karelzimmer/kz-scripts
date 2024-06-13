@@ -24,8 +24,7 @@ readonly PROGRAM_DESC=$(gettext 'Install apps')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-\
-f|--file FILE]
-                  [-g|--gui] [-l|--list] [-r|--remove]
+f|--file FILE] [-g|--gui] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [APP...]")
 
@@ -37,7 +36,6 @@ $(gettext '  -c, --cat      show contents of command file')
 $(gettext '  -f, --file FILE
                  process FILE')
 $(gettext '  -g, --gui      starts in graphical mode')
-$(gettext '  -l, --list     show list of files')
 $(gettext '  -r, --remove   delete apps')"
 
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
@@ -53,8 +51,8 @@ tion processing")
 $(gettext 'Arguments:')
 $(gettext '  APP            install APPs')"
 
-readonly X_OPTIONS_SHORT='acf:lgr'
-readonly X_OPTIONS_LONG=',apps,cat,file:,list,gui,remove'
+readonly X_OPTIONS_SHORT='acf:gr'
+readonly X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
 
 readonly PROGRAM_PATH=$MODULE_PATH
 
@@ -74,7 +72,6 @@ declare     no_commands_found=true
 declare     option_apps=false
 declare     option_cat=false
 declare     option_file=false
-declare     option_list=false
 declare     option_remove=false
 declare     reboot=true
 
@@ -135,10 +132,6 @@ $USAGE_LINE"
                 option_gui=true
                 shift
                 ;;
-            -l|--list)
-                option_list=true
-                shift
-                ;;
             -r|--remove)
                 option_remove=true
                 mode='Remove'
@@ -171,12 +164,6 @@ function process_input {
     local command_file=''
 
     input_file=$PROGRAM_PATH/$PROGRAM_NAME-$EDITION.sh
-
-    if $option_list; then
-        option_gui=false # Ignore start in graphical mode.
-        process_option_list
-        exit $OK
-    fi
 
     if $option_file; then
         option_gui=false # Ignore start in graphical mode.
@@ -222,37 +209,6 @@ nd end with '.sh'.")"
     check_on_ac_power
     $argument_app || add_additional_users
     install_apps
-}
-
-
-# This function displays a list of input files present.
-function process_option_list {
-    local files=''
-
-    text="$(gettext 'The following FILEs are present:')
-
-$(gettext 'NUM  FILE')\n"
-    files=$(find    "$PROGRAM_PATH"/$PROGRAM_NAME-*.sh  \
-                    2> >($LOGCMD)                       |
-            nl      --number-width=3                    \
-                    --number-format=rn                  \
-                    --number-separator='  '             \
-                    --body-numbering=a                  || true
-            )
-    if [[ -n $files ]]; then
-        text+=$files
-        text+="\n
-$(gettext 'To view the contents of FILE execute: cat FILE')
-$(eval_gettext "To view the commands of FILE execute: \$DISPLAY_NAME --cat --f\
-ile FILE")
-$(eval_gettext "To process FILE execute: \$DISPLAY_NAME --file FILE")
-$(eval_gettext "The default FILE is: \$input_file")"
-    else
-        text+="$(gettext '  0  No files present.')
-
-$USAGE_LINE"
-    fi
-    infomsg "$text"
 }
 
 

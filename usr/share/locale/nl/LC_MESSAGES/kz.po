@@ -498,13 +498,13 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
-"                  [-g|--gui] [-l|--list] [-r|--remove]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] "
+"[-r|--remove]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [APP...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
-"                    [-g|--gui] [-l|--list] [-r|--remove]\n"
+"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] "
+"[-r|--remove]\n"
 "                    $OPTIONS_USAGE\n"
 "                    [--] [APP...]"
 
@@ -524,9 +524,6 @@ msgid ""
 msgstr ""
 "  -f, --file BESTAND\n"
 "                 verwerk BESTAND"
-
-msgid "  -l, --list     show list of files"
-msgstr "  -l, --list     toon lijst van bestanden"
 
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
@@ -572,32 +569,6 @@ msgid ""
 msgstr ""
 "Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
 "$DISPLAY_NAME --cat"
-
-msgid "The following FILEs are present:"
-msgstr "De volgende BESTANDen zijn aanwezig:"
-
-msgid "NUM  FILE"
-msgstr "NUM  BESTAND"
-
-msgid "  0  No files present."
-msgstr "  0  Geen bestanden gevonden."
-
-msgid "To view the contents of FILE execute: cat FILE"
-msgstr "Om de inhoud van BESTAND te bekijken voer uit: cat FILE"
-
-#, sh-format
-msgid "To view the commands of FILE execute: $DISPLAY_NAME --cat --file FILE"
-msgstr ""
-"Om de opdrachten in BESTAND te bekijken voer uit: $DISPLAY_NAME --cat --file "
-"BESTAND"
-
-#, sh-format
-msgid "To process FILE execute: $DISPLAY_NAME --file FILE"
-msgstr "Om BESTAND te verwerken voer uit: $DISPLAY_NAME --file BESTAND"
-
-#, sh-format
-msgid "The default FILE is: $input_file"
-msgstr "Het standaardBESTAND is: $input_file"
 
 msgid "install"
 msgstr "installeren"
@@ -955,13 +926,13 @@ msgstr "De back-up is teruggezet."
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
-"                [-g|--gui] [-l|--list] [-r|--reset]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] "
+"[-r|--reset]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [APP...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
-"                  [-g|--gui] [-l|--list] [-r|--reset]\n"
+"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] "
+"[-r|--reset]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [APP...]"
 

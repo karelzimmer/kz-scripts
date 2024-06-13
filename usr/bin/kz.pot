@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-13 07:54+0200\n"
+"POT-Creation-Date: 2024-06-13 19:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -441,8 +441,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
-"                  [-g|--gui] [-l|--list] [-r|--remove]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"r|--remove]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [APP...]"
 msgstr ""
@@ -460,9 +460,6 @@ msgstr ""
 msgid ""
 "  -f, --file FILE\n"
 "                 process FILE"
-msgstr ""
-
-msgid "  -l, --list     show list of files"
 msgstr ""
 
 msgid "  -r, --remove   delete apps"
@@ -504,30 +501,6 @@ msgstr ""
 #, sh-format
 msgid ""
 "To view the contents of the default install file execute: $DISPLAY_NAME --cat"
-msgstr ""
-
-msgid "The following FILEs are present:"
-msgstr ""
-
-msgid "NUM  FILE"
-msgstr ""
-
-msgid "  0  No files present."
-msgstr ""
-
-msgid "To view the contents of FILE execute: cat FILE"
-msgstr ""
-
-#, sh-format
-msgid "To view the commands of FILE execute: $DISPLAY_NAME --cat --file FILE"
-msgstr ""
-
-#, sh-format
-msgid "To process FILE execute: $DISPLAY_NAME --file FILE"
-msgstr ""
-
-#, sh-format
-msgid "The default FILE is: $input_file"
 msgstr ""
 
 msgid "install"
@@ -813,8 +786,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE]\n"
-"                [-g|--gui] [-l|--list] [-r|--reset]\n"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"r|--reset]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [APP...]"
 msgstr ""
