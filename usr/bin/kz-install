@@ -33,8 +33,9 @@ mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
-$(gettext '  -f, --file FILE
-                 process FILE')
+$(eval_gettext "  -f, --file FILE
+                 process FILE (default FILE is /usr/bin/kz-install-\$EDITION.s\
+h)")
 $(gettext '  -g, --gui      starts in graphical mode')
 $(gettext '  -r, --remove   delete apps')"
 
@@ -65,7 +66,7 @@ declare -A  app_arguments=()
 declare -A  failed_apps=()
 declare     argument_app=false
 declare     file_argument=''
-declare     input_file=''
+declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME-$EDITION.sh
 declare     mode='Install'
 declare     mode_reverse='Remove'
 declare     no_commands_found=true
@@ -163,16 +164,7 @@ $USAGE_LINE"
 function process_input {
     local command_file=''
 
-    input_file=$PROGRAM_PATH/$PROGRAM_NAME-$EDITION.sh
-
     if $option_file; then
-        option_gui=false # Ignore start in graphical mode.
-        if [[ ! $(basename "$file_argument") == $PROGRAM_NAME-*.sh ]]; then
-            text="$(eval_gettext "Filename must start with '\$PROGRAM_NAME-' a\
-nd end with '.sh'.")"
-            errormsg "$text"
-            exit $ERROR
-        fi
         input_file=$file_argument
     fi
     if [[ ! -f $input_file ]]; then
@@ -183,14 +175,12 @@ nd end with '.sh'.")"
     fi
 
     if $option_apps; then
-        option_gui=false # Ignore start in graphical mode.
         process_option_apps
         exit $OK
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-$EDITION-XXXXXXXXXX.sh")
     if $argument_app; then
-        option_gui=false # Ignore start in graphical mode.
         process_argument_app
     else
         process_input_file_by_host

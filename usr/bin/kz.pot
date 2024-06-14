@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-13 19:17+0200\n"
+"POT-Creation-Date: 2024-06-14 08:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,10 +198,6 @@ msgid "too many options"
 msgstr ""
 
 msgid "not allowed on a server"
-msgstr ""
-
-#, sh-format
-msgid "Filename must start with '$PROGRAM_NAME-' and end with '.sh'."
 msgstr ""
 
 msgid "arguments are not allowed"
@@ -457,9 +453,11 @@ msgstr ""
 msgid "  -c, --cat      show contents of command file"
 msgstr ""
 
+#, sh-format
 msgid ""
 "  -f, --file FILE\n"
-"                 process FILE"
+"                 process FILE (default FILE is /usr/bin/kz-install-$EDITION."
+"sh)"
 msgstr ""
 
 msgid "  -r, --remove   delete apps"
