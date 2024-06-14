@@ -423,8 +423,7 @@ function process_command_file {
 # This function displays instructions for adding additional users.
 function add_additional_users {
     if [[ $EDITION = 'desktop' ]]; then
-        text="
-$(gettext 'Additional _user_s can be added manually:')
+        text="$(gettext 'Additional _user_s can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.
 2. Click on Unlock and then Add User.
