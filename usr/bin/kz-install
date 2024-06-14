@@ -197,7 +197,6 @@ function process_input {
     fi
     become_root
     check_on_ac_power
-    $argument_app || add_additional_users
     install_apps
 }
 
@@ -340,36 +339,6 @@ function process_option_cat {
 }
 
 
-# This function displays instructions for adding additional users.
-function add_additional_users {
-    if [[ $EDITION = 'desktop' ]]; then
-        text="
-$(gettext 'Additional _user_s can be added manually:')
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
- Users.
-2. Click on Unlock and then Add User.
-3. Enter Name _user_ and Username _username_.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-    else
-        text="$(gettext 'Additional _user_s can be added manually:')
-$(gettext "# Standard:
-sudo useradd --create-home --comment '_user_' _username_
-# Administrator:
-sudo usermod --append --groups adm,sudo _username_
-# User sets password on first login:
-sudo passwd --delete --expire _username_")"
-        printf '%s\n' "$text" > /root/add-users
-        text="
-$(gettext 'Additional _user_s can be added manually:')
-$(gettext 'See file /root/add-users.')"
-    fi
-    infomsg "$text"
-    $option_gui || wait_for_enter
-}
-
-
 # This function starts installing the apps.
 function install_apps {
     title=$(gettext 'Install apps')
@@ -404,6 +373,10 @@ function process_command_file {
     local   -i  cmd_seq_num=0
 
     app_tot_num=$(grep --regexp="#.* $mode " --count "$command_file" || true)
+    if [[ $app_tot_num -eq 0 ]]; then
+        return $OK
+    fi
+    $argument_app || add_additional_users
 
     if ! $option_gui; then
         text="$(gettext 'NUM/TOT  APP')
@@ -438,11 +411,42 @@ function process_command_file {
                 ;;
             *)
                 # Command record.
+                no_commands_found=false
                 execute_command "$command_record"
                 ;;
         esac
     done < "$command_file"
     rm --verbose "$command_file" |& $LOGCMD
+}
+
+
+# This function displays instructions for adding additional users.
+function add_additional_users {
+    if [[ $EDITION = 'desktop' ]]; then
+        text="
+$(gettext 'Additional _user_s can be added manually:')
+$(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
+ Users.
+2. Click on Unlock and then Add User.
+3. Enter Name _user_ and Username _username_.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
+hromebook).")"
+    else
+        text="$(gettext 'Additional _user_s can be added manually:')
+$(gettext "# Standard:
+sudo useradd --create-home --comment '_user_' _username_
+# Administrator:
+sudo usermod --append --groups adm,sudo _username_
+# User sets password on first login:
+sudo passwd --delete --expire _username_")"
+        printf '%s\n' "$text" > /root/add-users
+        text="
+$(gettext 'Additional _user_s can be added manually:')
+$(gettext 'See file /root/add-users.')"
+    fi
+    infomsg "$text"
+    $option_gui || wait_for_enter
 }
 
 
@@ -452,7 +456,6 @@ function execute_command {
     local cmd_dis=''
     local cmd_dis_len=0
 
-    no_commands_found=false
     ((++cmd_seq_num))
 
     check_package_manager
