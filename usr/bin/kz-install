@@ -341,6 +341,14 @@ function process_option_cat {
 
 # This function starts installing the apps.
 function install_apps {
+    local   -i  app_tot_num=0
+
+    app_tot_num=$(grep --regexp="#.* $mode " --count "$command_file" || true)
+    if [[ $app_tot_num -eq 0 ]]; then
+        return $OK
+    fi
+    $argument_app || add_additional_users
+
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
     logmsg "$title"...
@@ -369,14 +377,7 @@ function process_command_file {
     local       app_name_line=''
     local       command_record=''
     local   -i  app_seq_num=0
-    local   -i  app_tot_num=0
     local   -i  cmd_seq_num=0
-
-    app_tot_num=$(grep --regexp="#.* $mode " --count "$command_file" || true)
-    if [[ $app_tot_num -eq 0 ]]; then
-        return $OK
-    fi
-    $argument_app || add_additional_users
 
     if ! $option_gui; then
         text="$(gettext 'NUM/TOT  APP')
