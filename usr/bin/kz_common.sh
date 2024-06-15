@@ -90,6 +90,8 @@ function become_root {
             export DISPLAY=:0.0
             xhost +si:localuser:root |& $LOGCMD
             logmsg "restart (pkexec $program_exec ${commandline_args[*]})"
+            # Because $program_exec will be started again, do not trap twice.
+            trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
