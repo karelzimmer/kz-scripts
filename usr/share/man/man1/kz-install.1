@@ -38,7 +38,7 @@ The <edition> (desktop or server) is populated with the values from the current
 computer.
 .sp
 This input file contains commands for all computers included in it for a
-desktop.
+desktop or a server.
 .br
 When processing the input file, the commands for any and the current computer
 are selected and copied to a command file.
@@ -78,8 +78,8 @@ the result remains the same when executed repeatedly (idempotent).
 See \fBTable 1\fR which \fBtypes\fR of records there are and how these records
 are processed.
 .sp
-See \fBTable 2\fR for an \fBexample\fR of these records in file
-kz-install-desktop.sh.
+See \fBTable 2\fR for an \fBexample\fR of these records and how these records
+are processed.
 More examples can be seen through the \fBkz install --cat\fR command.
 .sp
 .sp
@@ -120,7 +120,7 @@ T}
 .TE
 .sp
 .sp
-.B Table 2. Lines in file kz-install-desktop.sh
+.B Table 2. Example of records and their processing
 .TS
 box tab(:);
 lb | lb.
