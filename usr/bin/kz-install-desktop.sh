@@ -77,6 +77,12 @@ sudo apt-get remove --yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
+# Install bash-completion on *
+sudo apt-get install --yes bash-completion
+
+# Remove bash-completion from *
+sudo apt-get remove --yes bash-completion
+
 # Install bleachbit on pc-van-hugo
 sudo apt-get install --yes bleachbit
 
