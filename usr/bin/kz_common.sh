@@ -55,7 +55,7 @@ if (
     type lxqt-session       ||
     type mate-session       ||
     type xfce4-session
-    ) &> >(systemd-cat --identifier=$MODULE_NAME --priority=debug); then
+    ) &> /dev/null; then
     readonly EDITION='desktop'
 else
     readonly EDITION='server'
@@ -88,7 +88,7 @@ function become_root {
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
             export DISPLAY=:0.0
-            xhost +si:localuser:root |& $LOGCMD
+            xhost +si:localuser:root &> /dev/null
             logmsg "restart (pkexec $program_exec ${commandline_args[*]})"
             # Because $program_exec will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
@@ -122,7 +122,7 @@ function become_root_check {
 function check_on_ac_power {
     local   -i  on_battery=0
 
-    on_ac_power |& $LOGCMD || on_battery=$?
+    on_ac_power &> /dev/null || on_battery=$?
     if [[ on_battery -eq 1 ]]; then
         text=$(gettext "The computer now uses only the battery for power.
 
@@ -265,7 +265,7 @@ E', or see the \$man_url for more information.")"
 
 # This function displays the manual page.
 function process_option_manual {
-    yelp man:"$PROGRAM_NAME" |& $LOGCMD || man --pager=cat "$PROGRAM_NAME"
+    yelp man:"$PROGRAM_NAME" &> /dev/null || man --pager=cat "$PROGRAM_NAME"
 }
 
 

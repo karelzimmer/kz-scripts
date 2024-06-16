@@ -66,7 +66,7 @@ sudo apt-get remove --yes ansible
 #
 # Remote Wayland display server is not supported.
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes anydesk
 #
@@ -132,10 +132,10 @@ sudo apt-get install --yes cups-backend-bjnp
 sudo apt-get remove --yes cups-backend-bjnp
 
 # Install dashtodock on *
-if type gnome-session; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME machine has this extension available.
+if type gnome-session &> /dev/null; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME machine has this extension available.
 
 # Remove dashtodock from *
-if type gnome-session; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME machine has this extension available.
+if type gnome-session &> /dev/null; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME machine has this extension available.
 
 # Install deja-dup on pc07
 sudo apt-get install --yes deja-dup
@@ -180,7 +180,7 @@ sudo systemctl start fwupd.service
 #
 # Do nothing when the lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
 
 # Remove disabled-lidswitch from pc-van-hugo
 #
@@ -263,33 +263,33 @@ sudo apt-get remove --yes epiphany-browser
 
 # Install google-chrome on *
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes google-chrome-stable
 #
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-if type gnome-session; then sudo apt-get install --yes chrome-gnome-shell; fi
+if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
 #
 # Add the source list again because the installation overwrote the newly added source list.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
 #
 # The apt-key added during installation is no longer needed.
 sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
 
 # Remove google-chrome from *
-if type gnome-session; then apt-get remove --yes chrome-gnome-shell; fi
+if type gnome-session &> /dev/null; then apt-get remove --yes chrome-gnome-shell; fi
 sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
 sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
 sudo apt-get update
 
 # Install google-earth on -nohost
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
 #
 # Add the source list again because the installation overwrote the newly added source list.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 
 # Remove google-earth from -nohost
 sudo apt-get remove --yes google-earth-pro-stable
@@ -395,7 +395,7 @@ sudo apt-get remove --yes shellcheck
 
 # Install signal on pc06 pc07
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
@@ -444,7 +444,7 @@ sudo apt-get remove --yes gnome-sushi
 
 # Install teamviewer on *
 wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
-echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list
+echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
 #
@@ -541,7 +541,7 @@ sudo apt-get remove --yes vlc
 
 # Install vscode on pc01 pc06 pc07
 wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes code
 sudo update-alternatives --set editor /usr/bin/code
@@ -554,7 +554,7 @@ sudo apt-get update
 
 # Install webmin on pc07
 wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
-echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
+echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes webmin
 #

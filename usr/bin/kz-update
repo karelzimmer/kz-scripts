@@ -79,9 +79,8 @@ def perform_update():
     perform_command(command)
 
     try:
-        subprocess.run(f'type snap', executable='/usr/bin/bash', shell=True,
-                       check=True, stdout=subprocess.DEVNULL,
-                       stderr=subprocess.DEVNULL)
+        subprocess.run(f'type snap &> /dev/null', shell=True, check=True,
+                       executable='/usr/bin/bash')
     except Exception as exc:
         text = str(exc)
         kz_common.logmsg(PROGRAM_NAME, text)
@@ -112,8 +111,8 @@ def perform_command(command):
     kz_common.infomsg(PROGRAM_NAME, text)
     kz_common.check_package_manager(PROGRAM_NAME)
     try:
-        subprocess.run({command}, executable='/usr/bin/bash', shell=True,
-                       check=True)
+        subprocess.run({command}, shell=True, check=True,
+                       executable='/usr/bin/bash')
     except Exception as exc:
         text = str(exc)
         kz_common.logmsg(PROGRAM_NAME, text)

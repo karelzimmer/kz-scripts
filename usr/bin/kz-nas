@@ -294,9 +294,9 @@ WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"
 # This function allows the NAS to be connected ad hoc.
 mount_nas() {
     logmsg 'Mount NAS...'
-    systemctl enable "$SYSTEMD_MOUNT_FILE" |& $LOGCMD
-    systemctl start "$SYSTEMD_MOUNT_FILE" |& $LOGCMD || true
-    systemctl daemon-reload |& $LOGCMD
+    systemctl enable "$SYSTEMD_MOUNT_FILE"  |& $LOGCMD
+    systemctl start "$SYSTEMD_MOUNT_FILE"   |& $LOGCMD || true
+    systemctl daemon-reload                 |& $LOGCMD
 }
 
 
