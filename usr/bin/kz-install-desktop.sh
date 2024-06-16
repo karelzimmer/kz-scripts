@@ -198,7 +198,7 @@ sudo apt-get install --yes fdupes
 #
 # Usage:
 # $ fdupes -r /home               # Report recursively from /home
-# $ fdupes -d /path/to/folder     # Remove, interactively, from /path/to/folder
+# $ fdupes -d /path/to/folder     # Delete, interactively, from /path/to/folder
 # $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
 # Remove fdupes from -nohost
