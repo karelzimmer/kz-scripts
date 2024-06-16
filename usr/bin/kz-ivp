@@ -119,7 +119,7 @@ function check_script {
     local root=' kz_common.''c''h''e''c''k''_''u''s''e''r''_''r''o''o''t'
 
     # Script.
-    if ! "$scriptname" --version &> /dev/null; then
+    if ! "$scriptname" --version |& $LOGCMD; then
         text=$(eval_gettext "Script \$scriptname returned an error.")
         errormsg "$text"
         error_flag=true
