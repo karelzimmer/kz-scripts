@@ -215,7 +215,7 @@ msgstr ""
 msgid "too many options"
 msgstr "te veel opties"
 
-msgid "not allowed on a server"
+msgid "only allowed on desktop"
 msgstr "niet toegestaan op een server"
 
 msgid "arguments are not allowed"

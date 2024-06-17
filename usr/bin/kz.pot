@@ -200,7 +200,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-msgid "not allowed on a server"
+msgid "only allowed on desktop"
 msgstr ""
 
 msgid "arguments are not allowed"

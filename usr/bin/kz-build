@@ -93,6 +93,12 @@ function check_input {
     fi
     eval set -- "$parsed"
 
+    if [[ $EDITION = 'server' ]]; then
+        text="$DISPLAY_NAME: $1: $(gettext 'only allowed on desktop')
+$USAGE_LINE"
+        infomsg "$text"
+        exit $ERROR
+    fi
     process_common_options "$@"
 
     while true; do

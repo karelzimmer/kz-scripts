@@ -74,7 +74,7 @@ function check_input {
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
                     text="$DISPLAY_NAME: $1: \
-$(gettext 'not allowed on a server')
+$(gettext 'only allowed on desktop')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
