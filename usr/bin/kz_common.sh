@@ -88,7 +88,7 @@ function become_root {
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
             export DISPLAY=:0.0
-            xhost +si:localuser:root &> /dev/null
+            xhost +si:localuser:root |& $LOGCMD
             logmsg "restart (pkexec $program_exec ${commandline_args[*]})"
             # Because $program_exec will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
