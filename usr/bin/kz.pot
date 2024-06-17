@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-14 20:36+0200\n"
+"POT-Creation-Date: 2024-06-17 09:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,13 +64,16 @@ msgid ""
 "execute:"
 msgstr ""
 
+msgid ", or see the "
+msgstr ""
+
 msgid "man page"
 msgstr ""
 
 #, sh-format
 msgid ""
-"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME', or see the $man_url "
-"for more information."
+"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$yelp_man_url for more "
+"information."
 msgstr ""
 
 #, sh-format
@@ -106,7 +109,7 @@ msgstr ""
 msgid "Usage: {} [OPTION...]"
 msgstr ""
 
-msgid "Type 'man {}' or see the {} for more information."
+msgid "Type '{} --manual' or 'man {}'{} for more information."
 msgstr ""
 
 msgid "Usage: {}"

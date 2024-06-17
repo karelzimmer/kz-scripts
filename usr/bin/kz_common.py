@@ -43,6 +43,25 @@ BOLD = '\033[1m'
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
 
+# Determine whether it is desktop or server.
+if subprocess.run('type cinnamon-session &> /dev/null', shell=True,
+                  executable='/usr/bin/bash').returncode == OK  or \
+   subprocess.run('type gnome-session &> /dev/null', shell=True,
+                  executable='/usr/bin/bash').returncode == OK  or \
+   subprocess.run('type ksmserver &> /dev/null', shell=True,
+                  executable='/usr/bin/bash').returncode == OK  or \
+   subprocess.run('type lxqt-session &> /dev/null', shell=True,
+                  executable='/usr/bin/bash').returncode == OK  or \
+   subprocess.run('type lxqt-session &> /dev/null', shell=True,
+                  executable='/usr/bin/bash').returncode == OK  or \
+   subprocess.run('type mate-session &> /dev/null', shell=True,
+                  executable='/usr/bin/bash').returncode == OK  or \
+   subprocess.run('type xfce4-session &> /dev/null', shell=True,
+                  executable='/usr/bin/bash').returncode == OK:
+    EDITION = 'desktop'
+else:
+    EDITION = 'server'
+
 
 ###############################################################################
 # Variables
@@ -232,9 +251,12 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
     """
     This function shows the available help.
     """
-    man_url = f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME} '
-    man_url += f"{_('man page')}\x1b]8;;\x1b\\"
+    yelp_man_url = f"{_(', or see the ')}"
+    yelp_man_url += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME} '
+    yelp_man_url += f"{_('man page')}\x1b]8;;\x1b\\"
 
+    if EDITION != 'desktop':
+        yelp_man_url = ''
     text = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
             f'{PROGRAM_DESC}.\n\n'
             f"{_('Options:')}\n"
@@ -242,8 +264,8 @@ def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
             f"{_('  -m, --manual   show manual page')}\n"
             f"{_('  -u, --usage    give a short usage message')}\n"
             f"{_('  -v, --version  print program version')}\n\n"
-            f'''{_("Type 'man {}' or see the {} for more information.").
-                 format(DISPLAY_NAME, man_url)}''')
+            f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
+                 format(DISPLAY_NAME, DISPLAY_NAME, yelp_man_url)}''')
     infomsg(PROGRAM_NAME, text)
 
 

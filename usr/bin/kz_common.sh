@@ -254,11 +254,13 @@ function process_common_options {
 
 # This function shows the available help.
 function process_option_help {
-    local   man_url="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
-            man_url+="$(gettext 'man page')\033]8;;\033\\"
+    local   yelp_man_url="$(gettext ', or see the ')"
+            yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
+            yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
 
+    [[ $EDITION = 'desktop' ]] || yelp_man_url=''
     text="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
-E', or see the \$man_url for more information.")"
+E'\$yelp_man_url for more information.")"
     printf '%b\n\n%b\n' "$HELP" "$text"
 }
 
