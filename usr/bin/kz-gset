@@ -87,13 +87,13 @@ function check_input {
     fi
     eval set -- "$parsed"
 
+    process_common_options "$@"
     if [[ $EDITION = 'server' ]]; then
         text="$DISPLAY_NAME: $1: $(gettext 'only allowed on desktop')
 $USAGE_LINE"
         infomsg "$text"
         exit $ERROR
     fi
-    process_common_options "$@"
 
     while true; do
         case $1 in
