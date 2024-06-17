@@ -45,17 +45,17 @@ GREEN = '\033[1;32m'
 
 # Determine whether it is desktop or server.
 if subprocess.run('type cinnamon-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK  or \
+                  executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type gnome-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK  or \
+                  executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type ksmserver &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK  or \
+                  executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type lxqt-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK  or \
+                  executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type lxqt-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK  or \
+                  executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type mate-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK  or \
+                  executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type xfce4-session &> /dev/null', shell=True,
                   executable='/usr/bin/bash').returncode == OK:
     EDITION = 'desktop'

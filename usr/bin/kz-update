@@ -79,7 +79,7 @@ def perform_update():
     perform_command(command)
 
     try:
-        subprocess.run(f'type snap &> /dev/null', shell=True, check=True,
+        subprocess.run('type snap &> /dev/null', shell=True, check=True,
                        executable='/usr/bin/bash')
     except Exception as exc:
         text = str(exc)
