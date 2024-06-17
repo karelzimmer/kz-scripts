@@ -62,8 +62,6 @@ if subprocess.run('type cinnamon-session &> /dev/null', shell=True,
                   executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type lxqt-session &> /dev/null', shell=True,
                   executable='/usr/bin/bash').returncode == OK or   \
-   subprocess.run('type lxqt-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type mate-session &> /dev/null', shell=True,
                   executable='/usr/bin/bash').returncode == OK or   \
    subprocess.run('type xfce4-session &> /dev/null', shell=True,
