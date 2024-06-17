@@ -24,7 +24,7 @@ source /usr/bin/gettext.sh
 
 readonly MODULE_NAME='kz_common.sh'
 readonly MODULE_DESC=$(gettext 'Common module for shell scripts')
-readonly MODULE_PATH=$(dirname "$(realpath "${0/^-/}")")
+readonly MODULE_PATH=$(dirname "$(realpath "${0/^-/}")") # On server $0='-bash'
 
 readonly OK=0
 readonly ERROR=1
