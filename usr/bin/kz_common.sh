@@ -50,7 +50,7 @@ readonly OPTIONS_LONG='help,manual,usage,version'
 # Determine whether it is desktop or server.
 if (
     type cinnamon-session   ||
-    type gnome-session      ||
+    type gnome-sessio      ||
     type ksmserver          ||
     type lxqt-session       ||
     type mate-session       ||

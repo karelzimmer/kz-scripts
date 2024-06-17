@@ -124,8 +124,8 @@ $USAGE_LINE"
                 ;;
             -g|--gui)
                 if [[ $EDITION = 'server' ]]; then
-                    text="$DISPLAY_NAME: $1: \
-$(gettext 'only allowed on desktop')
+                    text=\
+"$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
