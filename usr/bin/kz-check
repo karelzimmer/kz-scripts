@@ -184,8 +184,8 @@ function check_code {
     else
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED$(gettext "    Unknown script. Function check_code cannot check script cod\
-e.")$NORMAL"
+${RED}$(gettext "    Unknown script. Function check_code cannot check script c\
+ode.")$NORMAL"
         infomsg "$text"
         error_flag=true
     fi
@@ -213,8 +213,8 @@ function check_record_length {
     if [[ $max_line_length_found -gt $max_line_length ]]; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_le\
-ngth_found).")$NORMAL"
+${RED}$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_\
+length_found).")$NORMAL"
         infomsg "$text"
         error_flag=true
     fi
@@ -268,7 +268,7 @@ function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$RED$(gettext '    End spaces found.')$NORMAL"
+${RED}$(gettext '    End spaces found.')$NORMAL"
         infomsg "$text"
         grep    --line-number --regexp=' ''$' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
@@ -284,7 +284,7 @@ function term_script {
         errormsg "$text"
         exit $ERROR
     else
-        text="$GREEN$PROGRAM_NAME $(gettext 'finished')$NORMAL"
+        text="${GREEN}$PROGRAM_NAME $(gettext 'finished')$NORMAL"
         infomsg "$text"
         exit $OK
     fi

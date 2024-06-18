@@ -208,7 +208,7 @@ function install_package {
 
 # This function controls the termination of the script.
 function term_script {
-    text="$GREEN$PROGRAM_NAME $(gettext 'finished')$NORMAL"
+    text="${GREEN}$PROGRAM_NAME $(gettext 'finished')$NORMAL"
     infomsg "$text"
     exit $OK
 }

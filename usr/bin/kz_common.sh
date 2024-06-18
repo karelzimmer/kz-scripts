@@ -166,7 +166,7 @@ function errormsg {
                 --title     "$title"    \
                 --text      "$*"        2> >($LOGCMD) || true
     else
-        printf "$RED%b$NORMAL\n" "$*" >&2
+        printf "${RED}%b${NORMAL}\n" "$*" >&2
     fi
 }
 
