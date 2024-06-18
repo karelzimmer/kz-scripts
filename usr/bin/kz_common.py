@@ -76,6 +76,7 @@ else:
 ###############################################################################
 
 text = ''
+rc = OK
 
 
 ###############################################################################
@@ -90,8 +91,8 @@ def become_root(PROGRAM_NAME):
     exec_sudo = 'sudo '
 
     if not become_root_check(PROGRAM_NAME):
-        term_script(PROGRAM_NAME)
-        sys.exit(OK)
+        text = ''
+        signal(PROGRAM_NAME, text, OK)
 
     if os.getuid() != 0:
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
@@ -107,18 +108,15 @@ def become_root(PROGRAM_NAME):
             subprocess.run(exec_sudo, shell=True, check=True)
         except KeyboardInterrupt:
             text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errormsg(PROGRAM_NAME, text)
-            term_script(PROGRAM_NAME)
-            sys.exit(ERROR)
+            signal(PROGRAM_NAME, text, ERROR)
         except Exception as exc:
             text = str(exc)
             logmsg(PROGRAM_NAME, text)
             text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errormsg(PROGRAM_NAME, text)
-            term_script(PROGRAM_NAME)
-            sys.exit(ERROR)
+            signal(PROGRAM_NAME, text, ERROR)
         else:
-            sys.exit(OK)
+            text = ''
+            signal(PROGRAM_NAME, text, OK)
 
 
 def become_root_check(PROGRAM_NAME):
@@ -149,23 +147,7 @@ def check_on_ac_power(PROGRAM_NAME):
                  'It is recommended to connect the computer to the wall socket\
 .')
         infomsg(PROGRAM_NAME, text)
-        try:
-            text = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
-            input(text)
-        except KeyboardInterrupt:
-            text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            errormsg(PROGRAM_NAME, text)
-            term_script(PROGRAM_NAME)
-            sys.exit(ERROR)
-        except Exception as exc:
-            text = str(exc)
-            logmsg(PROGRAM_NAME, text)
-            text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            errormsg(PROGRAM_NAME, text)
-            term_script(PROGRAM_NAME)
-            sys.exit(ERROR)
-        else:
-            return OK
+        wait_for_enter(PROGRAM_NAME)
 
 
 def check_package_manager(PROGRAM_NAME):
@@ -239,24 +221,24 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     args = parser.parse_args()
 
     if args.help:
-        process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME)
-        term_script(PROGRAM_NAME)
-        sys.exit(OK)
+        process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        text = ''
+        signal(PROGRAM_NAME, text, OK)
     elif args.manual:
         process_option_manual(PROGRAM_NAME)
-        term_script(PROGRAM_NAME)
-        sys.exit(OK)
+        text = ''
+        signal(PROGRAM_NAME, text, OK)
     elif args.usage:
-        process_option_usage(DISPLAY_NAME, PROGRAM_NAME)
-        term_script(PROGRAM_NAME)
-        sys.exit(OK)
+        process_option_usage(PROGRAM_NAME, DISPLAY_NAME)
+        text = ''
+        signal(PROGRAM_NAME, text, OK)
     elif args.version:
         process_option_version(PROGRAM_NAME)
-        term_script(PROGRAM_NAME)
-        sys.exit(OK)
+        text = ''
+        signal(PROGRAM_NAME, text, OK)
 
 
-def process_option_help(DISPLAY_NAME, PROGRAM_DESC, PROGRAM_NAME):
+def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function shows the available help.
     """
@@ -286,14 +268,12 @@ def process_option_manual(PROGRAM_NAME):
         text = str(exc)
         logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        errormsg(PROGRAM_NAME, text)
-        term_script(PROGRAM_NAME)
-        sys.exit(ERROR)
+        signal(PROGRAM_NAME, text, ERROR)
     else:
         return OK
 
 
-def process_option_usage(DISPLAY_NAME, PROGRAM_NAME):
+def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
     """
     This function shows the available options.
     """
@@ -322,9 +302,7 @@ def process_option_version(PROGRAM_NAME):
         text = str(exc)
         logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        errormsg(PROGRAM_NAME, text)
-        term_script(PROGRAM_NAME)
-        sys.exit(ERROR)
+        signal(PROGRAM_NAME, text, ERROR)
     finally:
         text = f"{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n"
         text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
@@ -333,12 +311,42 @@ def process_option_version(PROGRAM_NAME):
         infomsg(PROGRAM_NAME, text)
 
 
-def term_script(PROGRAM_NAME):
+def signal(PROGRAM_NAME, text, rc):
     """
-    This function controls the termination of the script.
+    This function processes the signals and controls the termination of the
+    script.
     """
+    if rc == OK:
+        if text:
+            infomsg(PROGRAM_NAME, text)
+    else:
+        if text:
+            errormsg(PROGRAM_NAME, text)
     text = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, text)
+    if rc == OK:
+        sys.exit(OK)
+    else:
+        sys.exit(ERROR)
+
+
+def wait_for_enter(PROGRAM_NAME):
+    """
+    This function waits for the user to press Enter.
+    """
+    try:
+        text = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
+        input(text)
+    except KeyboardInterrupt:
+        text = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        signal(PROGRAM_NAME, text, ERROR)
+    except Exception as exc:
+        text = str(exc)
+        logmsg(PROGRAM_NAME, text)
+        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        signal(PROGRAM_NAME, text, ERROR)
+    else:
+        return OK
 
 
 ###############################################################################

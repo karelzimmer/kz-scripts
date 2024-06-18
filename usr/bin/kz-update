@@ -117,8 +117,7 @@ def perform_command(command):
         text = str(exc)
         kz_common.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.errormsg(PROGRAM_NAME, text)
-        sys.exit(kz_common.ERROR)
+        kz_common.signal(PROGRAM_NAME, text, kz_common.ERROR)
     else:
         kz_common.infomsg(PROGRAM_NAME, '')
 
@@ -136,15 +135,16 @@ nstallation of updates ***')
     except FileNotFoundError as fnf:
         text = str(fnf)
         kz_common.logmsg(PROGRAM_NAME, text)
-        text = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}"
-        text += f'{kz_common.NORMAL}'
-        kz_common.infomsg(PROGRAM_NAME, text)
     except Exception as exc:
         text = str(exc)
         kz_common.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.errormsg(PROGRAM_NAME, text)
-        sys.exit(kz_common.ERROR)
+        kz_common.signal(PROGRAM_NAME, text, kz_common.ERROR)
+
+
+def term_script():
+    text = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}{kz_common.NORMAL}"
+    kz_common.signal(PROGRAM_NAME, text, kz_common.OK)
 
 
 ###############################################################################
@@ -167,4 +167,4 @@ perform_cleanup()
 
 check_reboot()
 
-kz_common.term_script(PROGRAM_NAME)
+term_script()
