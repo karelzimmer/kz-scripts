@@ -27,7 +27,7 @@ readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-t|--target \
 DIRECTORY]
                  \$OPTIONS_USAGE")"
 
-readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+readonly OPTIONS_HELP_X="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -g, --gui      starts in graphical mode')
@@ -39,11 +39,11 @@ readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
+$OPTIONS_HELP_X
 $OPTIONS_HELP"
 
-readonly X_OPTIONS_SHORT='gt:'
-readonly X_OPTIONS_LONG=',gui,target:'
+readonly OPTIONS_SHORT_X='gt:'
+readonly OPTIONS_LONG_X=',gui,target:'
 
 readonly SOURCE=$HOME
 
@@ -70,8 +70,8 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                                       \
-                --options       "$OPTIONS_SHORT$X_OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
+                --options       "$OPTIONS_SHORT$OPTIONS_SHORT_X"    \
+                --longoptions   "$OPTIONS_LONG$OPTIONS_LONG_X"      \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?

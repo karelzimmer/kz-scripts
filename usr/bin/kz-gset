@@ -28,7 +28,7 @@ readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] [\
                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
                \$OPTIONS_USAGE")"
 
-readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+readonly OPTIONS_HELP_X="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -a, --addaft FAVORITE
@@ -45,11 +45,11 @@ readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
+$OPTIONS_HELP_X
 $OPTIONS_HELP"
 
-readonly X_OPTIONS_SHORT='a:b:d:lr'
-readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
+readonly OPTIONS_SHORT_X='a:b:d:lr'
+readonly OPTIONS_LONG_X=',addaft:,addbef:,delete:,list,reset'
 
 
 ###############################################################################
@@ -76,8 +76,8 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                                       \
-                --options       "$OPTIONS_SHORT$X_OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG$X_OPTIONS_LONG"      \
+                --options       "$OPTIONS_SHORT$OPTIONS_SHORT_X"    \
+                --longoptions   "$OPTIONS_LONG$OPTIONS_LONG_X"      \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?
