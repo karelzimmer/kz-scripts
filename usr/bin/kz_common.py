@@ -313,7 +313,7 @@ def process_option_version(PROGRAM_NAME):
 
 def term(PROGRAM_NAME, text, rc):
     """
-    # This function controls the termination.
+    This function controls the termination.
     """
     if rc == OK:
         if text:
