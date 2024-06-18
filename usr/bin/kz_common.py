@@ -193,14 +193,6 @@ def check_package_manager(PROGRAM_NAME):
             time.sleep(check_wait)
 
 
-def init_script(PROGRAM_NAME):
-    """
-    This function performs initial actions.
-    """
-    text = f'==== START logs for script {PROGRAM_NAME} ===='
-    logmsg(PROGRAM_NAME, text)
-
-
 def errormsg(PROGRAM_NAME, text):
     """
     This function returns an error message.
@@ -215,6 +207,18 @@ def infomsg(PROGRAM_NAME, text):
     print(f'{text}')
 
 
+def init_script(PROGRAM_NAME, DISPLAY_NAME):
+    """
+    This function performs initial actions.
+    """
+    global USAGE_LINE
+
+    text = f'==== START logs for script {PROGRAM_NAME} ===='
+    logmsg(PROGRAM_NAME, text)
+    USAGE_LINE = _("type '{} --usage' for more information").\
+        format(DISPLAY_NAME)
+
+
 def logmsg(PROGRAM_NAME, text):
     """
     This function records a message to the log.
@@ -226,9 +230,6 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the general options.
     """
-    USAGE_LINE = _("type '{} --usage' for more information").\
-        format(DISPLAY_NAME)
-
     parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE_LINE,
                                      add_help=False)
     parser.add_argument('-h', '--help', action='store_true')

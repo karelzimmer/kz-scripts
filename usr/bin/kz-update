@@ -151,7 +151,7 @@ nstallation of updates ***')
 # Main Script
 ###############################################################################
 
-kz_common.init_script(PROGRAM_NAME)
+kz_common.init_script(PROGRAM_NAME, DISPLAY_NAME)
 
 kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
