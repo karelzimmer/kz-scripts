@@ -196,12 +196,12 @@ function init_script {
 
     readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
 
-    trap 'signal err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
-    trap 'signal exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
-    trap 'signal sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
-    trap 'signal sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
-    trap 'signal sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
-    trap 'signal sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
+    trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
+    trap 'term exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
+    trap 'term sighup  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGHUP
+    trap 'term sigint  $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGINT
+    trap 'term sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
+    trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     text="==== START logs for script $PROGRAM_NAME ====
 started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
@@ -297,9 +297,8 @@ $(gettext "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.\
 }
 
 
-# This function processes the signals for which the trap was set by function
-# init_script (script-hardening).
-function signal {
+# This function controls the termination.
+function term {
     local       signal=${1:-unknown}
     local   -i  lineno=${2:-unknown}
     local       function=${3:-unknown}

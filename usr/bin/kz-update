@@ -117,7 +117,7 @@ def perform_command(command):
         text = str(exc)
         kz_common.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.signal(PROGRAM_NAME, text, kz_common.ERROR)
+        kz_common.term(PROGRAM_NAME, text, kz_common.ERROR)
     else:
         kz_common.infomsg(PROGRAM_NAME, '')
 
@@ -139,12 +139,15 @@ nstallation of updates ***')
         text = str(exc)
         kz_common.logmsg(PROGRAM_NAME, text)
         text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.signal(PROGRAM_NAME, text, kz_common.ERROR)
+        kz_common.term(PROGRAM_NAME, text, kz_common.ERROR)
 
 
 def term_script():
+    """
+    This function controls the termination of the script.
+    """
     text = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}{kz_common.NORMAL}"
-    kz_common.signal(PROGRAM_NAME, text, kz_common.OK)
+    kz_common.term(PROGRAM_NAME, text, kz_common.OK)
 
 
 ###############################################################################
