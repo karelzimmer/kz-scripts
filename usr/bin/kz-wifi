@@ -67,8 +67,13 @@ function check_input {
     fi
     eval set -- "$parsed"
 
-    process_common_options "$@"
+    process_options   "$@"
+    process_options_x "$@"
+}
 
+
+# This function handles the extra options and arguments.
+function process_options_x {
     while true; do
         case $1 in
             -g|--gui)

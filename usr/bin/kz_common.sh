@@ -219,8 +219,8 @@ function logmsg {
 }
 
 
-# This function covers the general options.
-function process_common_options {
+# This function handles the common options.
+function process_options {
     while true; do
         case $1 in
             -h|--help)

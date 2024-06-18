@@ -210,7 +210,7 @@ def logmsg(PROGRAM_NAME, text):
 
 def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
-    This function handles the general options.
+    This function handles the common options.
     """
     parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE_LINE,
                                      add_help=False)

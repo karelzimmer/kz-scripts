@@ -87,7 +87,13 @@ function check_input {
     fi
     eval set -- "$parsed"
 
-    process_common_options "$@"
+    process_options   "$@"
+    process_options_x "$@"
+}
+
+
+# This function handles the extra options and arguments.
+function process_options_x {
     if [[ $EDITION = 'server' ]]; then
         text="$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
 $USAGE_LINE"
