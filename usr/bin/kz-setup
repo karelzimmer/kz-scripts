@@ -28,7 +28,7 @@ f|--file FILE] [-g|--gui] [-r|--reset]
                 \$OPTIONS_USAGE
                 [--] [APP...]")
 
-readonly OPTIONS_HELP_X="$(gettext "  Mandatory arguments to long options are \
+readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
@@ -44,7 +44,7 @@ readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
-$OPTIONS_HELP_X
+$X_OPTIONS_HELP
 $OPTIONS_HELP
 $(gettext "  --             signals the end of options and disables further op\
 tion processing")
@@ -52,8 +52,8 @@ tion processing")
 $(gettext 'Arguments:')
 $(gettext '  APP            set up APPs')"
 
-readonly OPTIONS_SHORT_X='acf:gr'
-readonly OPTIONS_LONG_X=',apps,cat,file:,gui,reset'
+readonly X_OPTIONS_SHORT='acf:gr'
+readonly X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
 
 readonly PROGRAM_PATH=$MODULE_PATH
 
@@ -88,8 +88,8 @@ function check_input {
 
     parsed=$(
         getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$OPTIONS_SHORT_X"  \
-                --longoptions   "${OPTIONS_LONG}$OPTIONS_LONG_X"    \
+                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
+                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?
@@ -100,12 +100,12 @@ function check_input {
     eval set -- "$parsed"
 
     process_options   "$@"
-    process_options_x "$@"
+    process_x_options "$@"
 }
 
 
 # This function handles the extra options and arguments.
-function process_options_x {
+function process_x_options {
     while true; do
         case $1 in
             -a|--apps)
