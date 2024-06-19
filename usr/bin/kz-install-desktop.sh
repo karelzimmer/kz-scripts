@@ -193,6 +193,12 @@ sudo apt-get install --yes libimage-exiftool-perl
 # Remove exiftool from pc06 pc07
 sudo apt-get remove --yes libimage-exiftool-perl
 
+# Install fakeroot on pc06 pc07
+sudo apt-get install --yes fakeroot
+
+# Remove fakeroot from pc06 pc07
+sudo apt-get remove --yes fakeroot
+
 # Install fdupes on -nohost
 sudo apt-get install --yes fdupes
 #
@@ -230,6 +236,12 @@ sudo apt-get install --yes gedit
 
 # Remove gedit from *
 sudo apt-get remove --yes gedit
+
+# Install gettext on pc06 pc07
+sudo apt-get install --yes gettext
+
+# Remove gettext from pc06 pc07
+sudo apt-get remove --yes gettext
 
 # Install gimp on pc-van-hugo pc06
 sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
@@ -308,6 +320,12 @@ sudo apt-get install --yes htop
 # Remove htop from pc06 pc07
 sudo apt-get remove --yes htop
 
+# Install jq on pc06 pc07
+sudo apt-get install --yes jq
+
+# Remove jq from pc06 pc07
+sudo apt-get remove --yes jq
+
 # Install krita on pc06
 sudo apt-get install --yes krita
 
@@ -333,6 +351,12 @@ sudo delgroup libvirtd-dnsmasq
 sudo deluser "${SUDO_USER:-$USER}" libvirtd
 sudo deluser "${SUDO_USER:-$USER}" libvirtd-qemu
 sudo delgroup libvirtd
+
+# Install lftp on pc06 pc07
+sudo apt-get install --yes lftp
+
+# Remove lftp from pc06 pc07
+sudo apt-get remove --yes lftp
 
 # Install libreoffice on *
 sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
@@ -365,6 +389,12 @@ sudo apt-get install --yes nautilus-admin
 
 # Remove nautilus-admin from pc06 pc07
 sudo apt-get remove --yes nautilus-admin
+
+# Install nmap on pc06 pc07
+sudo apt-get install --yes nmap
+
+# Remove nmap from pc06 pc07
+sudo apt-get remove --yes nmap
 
 # Install python on pc06 pc07
 sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3

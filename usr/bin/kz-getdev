@@ -106,13 +106,10 @@ function process_input {
 
 # This function checks and installs dependencies.
 function check_dependencies {
-    local escape='gettext'
-
     text=$(gettext 'Check dependencies')...
     infomsg "$text"
     check_package_manager
-    sudo apt-get install --yes fakeroot $escape jq lftp nmap
-    kz install git python shellcheck vscode
+    kz install fakeroot gettext git jq lftp nmap python shellcheck vscode
 }
 
 
