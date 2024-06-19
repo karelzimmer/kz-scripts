@@ -93,7 +93,7 @@ $USAGE_LINE"
     fi
 
     if [[ $EDITION = 'server' ]]; then
-        text="$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
+        text="$DISPLAY_NAME: $(gettext 'only allowed on a desktop')
 $USAGE_LINE"
         infomsg "$text"
         exit $ERROR
