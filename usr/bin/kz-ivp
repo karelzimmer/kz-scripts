@@ -69,13 +69,6 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    if [[ $EDITION = 'server' ]]; then
-        text="$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
-$USAGE_LINE"
-        infomsg "$text"
-        exit $ERROR
-    fi
-
     while true; do
         case $1 in
             --)
@@ -90,6 +83,13 @@ $USAGE_LINE"
 
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE_LINE"
+        infomsg "$text"
+        exit $ERROR
+    fi
+
+    if [[ $EDITION = 'server' ]]; then
+        text="$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
 $USAGE_LINE"
         infomsg "$text"
         exit $ERROR
