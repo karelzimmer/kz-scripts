@@ -160,8 +160,6 @@ $USAGE_LINE"
         infomsg "$text"
         exit $ERROR
     fi
-
-    desktopfile=$favorite_argument.desktop
 }
 
 
@@ -172,6 +170,9 @@ function process_input {
         infomsg "$text"
         exit $OK
     fi
+
+    desktopfile=$favorite_argument.desktop
+
     if $option_addaft; then
         process_option_addaft
     elif $option_addbef; then
