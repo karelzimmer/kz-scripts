@@ -306,3 +306,4 @@ kz-gset --addaft=kz-zoom
 
 # Reset zoom for monique@pc01 karel@pc01
 kz-gset --delete=kz-zoom
+

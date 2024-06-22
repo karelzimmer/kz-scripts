@@ -93,3 +93,4 @@ if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo usermod --append --gr
 # Return to default behavior regarding log/systemd journal access.
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" adm; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" systemd-journal; fi
+

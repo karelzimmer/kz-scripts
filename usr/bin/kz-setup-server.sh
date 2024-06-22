@@ -30,3 +30,4 @@ echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 # Return to default behavior regarding aliases and searching forward in history.
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
+
