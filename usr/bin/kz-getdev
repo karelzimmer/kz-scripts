@@ -110,6 +110,7 @@ function check_dependencies {
     infomsg "$text"
     check_package_manager
     kz install fakeroot gettext git jq lftp nmap python shellcheck vscode
+    kz setup vscode
 }
 
 
