@@ -187,6 +187,13 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /de
 # Restore the default action when the lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
+# Install dual-monitor on pc06
+if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
+
+# Remove dual-monitor from pc06
+sudo rm --force --verbose ~gdm/.config/monitors.xml
+
 # Install exiftool on pc06 pc07
 sudo apt-get install --yes libimage-exiftool-perl
 
@@ -376,13 +383,6 @@ sudo apt-get install --yes lshw
 
 # Remove lshw from pc07
 sudo apt-get remove --yes lshw
-
-# Install monitors on pc06
-if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
-if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
-
-# Remove monitors from pc06
-sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 # Install nautilus-admin on pc06 pc07
 sudo apt-get install --yes nautilus-admin
