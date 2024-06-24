@@ -133,9 +133,12 @@ function prepare_processing {
 
 # This function checks and installs dependencies.
 function check_dependencies {
-    if [[ $EDITION = 'desktop' ]] && ! type zenity &> /dev/null; then
+    if [[ $EDITION = 'desktop' ]]; then
         check_package_manager
-        sudo apt-get install --yes zenity |& $LOGCMD
+        type pkexec &> /dev/null ||
+            sudo apt-get install --yes pkexec |& $LOGCMD
+        type zenity &> /dev/null ||
+            sudo apt-get install --yes zenity |& $LOGCMD
     fi
 }
 
