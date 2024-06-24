@@ -84,13 +84,9 @@ sudo ufw disable
 sudo apt-get remove --yes ufw
 
 # Install user-log-access on *
-#
-# Enable access to system monitoring tasks like read many log files in /var/log and to the log/systemd journal.
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"; fi
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
 
 # Remove user-log-access from *
-#
-# Return to default behavior regarding log/systemd journal access.
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" adm; fi
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo deluser "${SUDO_USER:-$USER}" systemd-journal; fi
+sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 
