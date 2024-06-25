@@ -85,9 +85,7 @@ function become_root {
 
     if [[ $UID -ne 0 ]]; then
         if $option_gui; then
-            # Because $program_exec is executed by a user other than the owner
-            # of the current display (the logged in user), export DISPLAY.
-            export DISPLAY=$DISPLAY
+            export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
             logmsg "restart (pkexec $program_exec ${commandline_args[*]})"
             # Because $program_exec will be started again, do not trap twice.
