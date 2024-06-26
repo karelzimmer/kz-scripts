@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # shellcheck shell=bash source=kz_common.sh disable=SC2155
 ###############################################################################
-# SPDX-FileComment: Install package kz
+# SPDX-FileComment: Download and install package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -111,7 +111,6 @@ function process_input {
     become_root_check || exit $OK
     check_on_ac_power
     prepare_processing
-    check_dependencies
     download_package
     install_package
 }
@@ -128,18 +127,6 @@ function prepare_processing {
         printf '#'
         sleep 1
     done &
-}
-
-
-# This function checks and installs dependencies.
-function check_dependencies {
-    if [[ $EDITION = 'desktop' ]]; then
-        check_package_manager
-        type pkexec &> /dev/null ||
-            sudo apt-get install --yes pkexec |& $LOGCMD
-        type zenity &> /dev/null ||
-            sudo apt-get install --yes zenity |& $LOGCMD
-    fi
 }
 
 
