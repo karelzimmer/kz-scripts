@@ -145,11 +145,17 @@ function download_package {
 
 # This function installs package kz.
 function install_package {
+    local install_suggests=''
+
     logmsg 'Install. kz deb...'
+    if [[ $EDITION = 'desktop' ]]; then
+        install_suggests='--install-suggests'
+    fi
     check_package_manager |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
+            $install_suggests               \
             --yes                           \
             "$kz_deb_local_file"            |& $LOGCMD
     logmsg 'Cleanup...'
