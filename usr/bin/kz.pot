@@ -118,7 +118,7 @@ msgstr ""
 msgid "Type '{} --help' for more information."
 msgstr ""
 
-msgid "Build ID cannot be determined"
+msgid "Build ID cannot be determined."
 msgstr ""
 
 #, sh-format

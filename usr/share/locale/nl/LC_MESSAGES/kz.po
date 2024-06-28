@@ -127,8 +127,8 @@ msgstr "Gebruik: {}"
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."
 
-msgid "Build ID cannot be determined"
-msgstr "Build-ID kan niet worden bepaald"
+msgid "Build ID cannot be determined."
+msgstr "Build-ID kan niet worden bepaald."
 
 #, sh-format
 msgid "kz version 4.2.1 (built $build_id)."

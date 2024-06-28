@@ -138,7 +138,7 @@ function download_package {
     logmsg 'Download kz deb...'
     wget    --output-document="$kz_deb_local_file"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
-    logmsg "Prevent ...user '_apt'. - pkgAcquire::Run (13: Permission denied)"
+    logmsg "Prevent ... - pkgAcquire::Run (13: Permission denied):"
     chmod --verbose o+r "$kz_deb_local_file" |& $LOGCMD
 }
 

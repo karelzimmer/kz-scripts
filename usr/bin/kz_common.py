@@ -295,7 +295,7 @@ def process_option_version(PROGRAM_NAME):
     except FileNotFoundError as fnf:
         text = str(fnf)
         logmsg(PROGRAM_NAME, text)
-        text = _('Build ID cannot be determined')
+        text = _('Build ID cannot be determined.')
         logmsg(PROGRAM_NAME, text)
         build_id = text
     except Exception as exc:

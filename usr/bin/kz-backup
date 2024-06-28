@@ -213,7 +213,7 @@ function backup_setting_apps {
     local header2=$(gettext '==== START list of installed snaps ====')
     local footer2=$(gettext '==== END list of installed snaps ====')
 
-    logmsg 'Create a list of installed apps...(ignore WARNING)'
+    logmsg 'Create a list of installed apps...(ignore WARNING).'
 
     printf '%s\n' "$header1" > "$output_file"
     apt list --manual-installed 2> >($LOGCMD) >> "$output_file" || true
@@ -312,7 +312,7 @@ EOF
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
     if $option_gui; then
-        logmsg "$title"...
+        logmsg "$title..."
         rsync   --archive                       \
                 --verbose                       \
                 --delete                        \
@@ -345,7 +345,7 @@ EOF
     rm --verbose "$exclude_file" |& $LOGCMD
     text=$(gettext "Writing data from memory (this may take a while)")
     if $option_gui; then
-        logmsg "$text"...
+        logmsg "$text..."
         sync                            |
         zenity  --progress              \
                 --pulsate               \
@@ -412,7 +412,7 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
-        logmsg "$text"...
+        logmsg "$text..."
         umount "$target_medium"                     |& $LOGCMD || rc+=$?;   \
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
         udisksctl power-off --block-device "$dev"   |& $LOGCMD              |

@@ -87,13 +87,15 @@ function become_root {
         if $option_gui; then
             export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
-            logmsg "restart (pkexec $program_exec ${commandline_args[*]})"
+            text="Restart (pkexec $program_exec ${commandline_args[*]})..."
+            logmsg "$text"
             # Because $program_exec will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            logmsg "restart (exec sudo $program_exec ${commandline_args[*]})"
+            text="Restart (exec sudo $program_exec ${commandline_args[*]})..."
+            logmsg "$text"
             exec sudo "$program_exec" "${commandline_args[@]}"
         fi
     fi
@@ -150,7 +152,7 @@ function check_package_manager {
                 /var/lib/dpkg/lock-frontend; do
         text=$(gettext 'Wait for another package manager to finish')
         if $option_gui; then
-            logmsg "$text"
+            logmsg "$text..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$text"
         else
@@ -288,7 +290,7 @@ function process_option_version {
     if [[ -e /etc/kz-build.id ]]; then
         build_id=$(cat /etc/kz-build.id)
     else
-        text=$(gettext 'Build ID cannot be determined')
+        text=$(gettext 'Build ID cannot be determined.')
         logmsg "$text"
         build_id=$text
     fi
@@ -366,8 +368,8 @@ function term {
             rc_desc='unknown error'
             ;;
     esac
-    text="signal: $signal, line: $lineno, function: $function, command: "
-    text+="$command, code: $rc ($rc_desc)"
+    text="Signal: $signal, line: $lineno, function: $function, command: "
+    text+="$command, code: $rc ($rc_desc)."
     logmsg "$text"
 
     case $signal in
@@ -386,7 +388,7 @@ or.")
                 getdeb                  \
                 getdeb.{1..99}          \
                 "$kz_deb_local_file"    |& $LOGCMD
-            text="ended (code=exited, status=$status)
+            text="Ended (code=exited, status=$status)
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
