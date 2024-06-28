@@ -121,6 +121,11 @@ function check_on_ac_power {
     local   -i  on_battery=0
 
     on_ac_power &> /dev/null || on_battery=$?
+    # Value on_battery:
+    #   0 (true)  System is on mains power
+    #   1 (false) System is not on mains power
+    # 255 (false) Power status could not be determined (e.g. on VM)
+
     if [[ on_battery -eq 1 ]]; then
         text=$(gettext "The computer now uses only the battery for power.
 
