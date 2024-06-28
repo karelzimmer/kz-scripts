@@ -15,4 +15,3 @@ Exec=kz-wifi --gui
 Icon=kz-wifi
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
-StartupWMClass=zenity

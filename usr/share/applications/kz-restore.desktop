@@ -15,4 +15,3 @@ Exec=kz-restore --gui
 Icon=kz-restore
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
-StartupWMClass=zenity

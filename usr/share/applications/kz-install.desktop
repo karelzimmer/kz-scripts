@@ -15,4 +15,3 @@ Exec=kz-install --gui
 Icon=kz-install
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
-StartupWMClass=zenity

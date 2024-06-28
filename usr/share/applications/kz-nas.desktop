@@ -15,4 +15,3 @@ Exec=kz-nas --gui
 Icon=kz-nas
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
-StartupWMClass=zenity
