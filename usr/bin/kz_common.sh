@@ -211,7 +211,7 @@ function init_script {
     trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     text="==== START logs for script $PROGRAM_NAME ====
-Started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
+Started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)."
     logmsg "$text"
 
     commandline_args=("$@")
@@ -388,7 +388,7 @@ or.")
                 getdeb                  \
                 getdeb.{1..99}          \
                 "$kz_deb_local_file"    |& $LOGCMD
-            text="Ended (code=exited, status=$status)
+            text="Ended (code=exited, status=$status).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$text"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
