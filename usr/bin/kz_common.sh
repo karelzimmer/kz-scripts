@@ -211,7 +211,7 @@ function init_script {
     trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     text="==== START logs for script $PROGRAM_NAME ====
-started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
+Started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)"
     logmsg "$text"
 
     commandline_args=("$@")
