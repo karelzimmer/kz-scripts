@@ -47,9 +47,10 @@ verwijderd):
 .br
     \fBkz getdeb\fR
 .sp
-Indien nodig, bijvoorbeeld Debian < 12, zal het gedownloade pakket opnieuw
-worden verpakt als een pakket dat xz gebruikt, en vervolgens zal het opnieuw
-verpakte pakket worden geïnstalleerd.
+Op een desktop zal het gedownloade pakket worden geïnstalleerd met APT optie
+\fB--install-suggests\fR om een scrip met optie \fB--gui\fR uit te kunnen
+voeren. Zo is pkexec niet standaard geïnstalleerd bij Kubuntu en is zenity niet
+standaard geïnstalleerd bij Lubuntu.
 .sp
 Met opdracht \fBkz getdev\fR kan de ontwikkelomgeving geplaatst worden op de
 locale computer zodat het pakket en de website ontwikkeld en getest kan worden.

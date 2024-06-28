@@ -148,7 +148,9 @@ function install_package {
     local install_suggests=''
 
     logmsg 'Install. kz deb...'
-    [[ $EDITION = 'server' ]] || install_suggests='--install-suggests'
+    if [[ $EDITION = 'desktop' ]]; then
+        install_suggests='--install-suggests'
+    fi
     check_package_manager |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \

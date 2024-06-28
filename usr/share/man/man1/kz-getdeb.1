@@ -46,9 +46,10 @@ run (copy of kz will be saved and later deleted):
 .br
     \fBkz getdeb\fR
 .sp
-If necessary, for example Debian < 12, the downloaded package will be
-repackaged as a package using xz, and then the repackaged package will be
-installed.
+On a desktop, the downloaded package will be installed with APT option
+\fB--install-suggests\fR to be able to execute a script with option
+\fB--gui\fR. For example, pkexec is not installed by default with Kubuntu, and
+zenity is not installed by default with Lubuntu.
 .sp
 With command \fBkz getdev\fR the development environment can be placed on the
 local computer so that the package and the website can be developed and tested.
