@@ -118,7 +118,10 @@ function become_root_check {
 # This function checks to see if the computer is running on battery power and
 # prompts the user to continue if so.
 function check_on_ac_power {
-    if ! on_ac_power &> /dev/null; then
+    local   -i  on_battery=0
+
+    on_ac_power &> /dev/null || on_battery=$?
+    if [[ on_battery -eq 1 ]]; then
         text=$(gettext "The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.")
