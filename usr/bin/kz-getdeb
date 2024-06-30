@@ -145,7 +145,8 @@ function download_package {
 
 # This function installs package kz.
 function install_package {
-    local install_suggests=''
+    local       install_suggests=''
+    local   -i  kz_deb_install_rc=0
 
     logmsg 'Install. kz deb...'
     [[ $EDITION = 'server' ]] || install_suggests='--install-suggests'
@@ -155,7 +156,40 @@ function install_package {
             reinstall                       \
             $install_suggests               \
             --yes                           \
-            "$kz_deb_local_file"            |& $LOGCMD
+            "$kz_deb_local_file"            |& $LOGCMD || kz_deb_install_rc=$?
+    if [[ $kz_deb_install_rc -ne $OK ]]; then
+        logmsg 'Try installing package kz that uses xz by repackaging it.'
+        local kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
+        logmsg 'Install required packages...'
+        sudo    apt-get install --yes binutils zstd     |& $LOGCMD
+        logmsg 'Extract files from the archive...'
+        ar      -xv --output=/tmp "$kz_deb_local_file"  |& $LOGCMD
+        logmsg 'Uncompress zstd files an re-compress them using xz...'
+        zstd    --uncompress < /tmp/control.tar.zst     |
+        xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
+        zstd    --uncompress < /tmp/data.tar.zst        |
+        xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
+        logmsg 'Re-create the package...'
+        ar      -mcav sdsd                              \
+                "$kz_deb_local_file_xz"                 \
+                /tmp/debian-binary                      \
+                /tmp/control.tar.xz                     \
+                /tmp/data.tar.xz                        |& $LOGCMD
+        logmsg "Install the package..."
+        sudo    DEBIAN_FRONTEND=noninteractive          \
+                apt-get                                 \
+                reinstall                               \
+                --yes                                   \
+                "$kz_deb_local_file_xz"                 |& $LOGCMD
+        logmsg 'Cleanup...'
+        rm       --verbose                              \
+                /tmp/debian-binary                      \
+                /tmp/control.tar.xz                     \
+                /tmp/data.tar.xz                        \
+                /tmp/control.tar.zst                    \
+                /tmp/data.tar.zst                       \
+                "$kz_deb_local_file_xz"                 |& $LOGCMD
+    fi
     logmsg 'Cleanup...'
     rm --verbose "$kz_deb_local_file" |& $LOGCMD
 }
