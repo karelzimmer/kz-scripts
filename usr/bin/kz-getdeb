@@ -179,6 +179,7 @@ function install_package {
         sudo    DEBIAN_FRONTEND=noninteractive          \
                 apt-get                                 \
                 reinstall                               \
+                $install_suggests                       \
                 --yes                                   \
                 "$kz_deb_local_file_xz"                 |& $LOGCMD
         logmsg 'Cleanup...'
