@@ -11,26 +11,39 @@
 # Do this first.
 sudo apt-get update
 sudo apt-get dist-upgrade --yes
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo snap refresh; fi
+if type snap &> /dev/null; then sudo snap refresh; fi
 
 # Remove update-system from *
 #
 # Do this first.
 # There is no command available to remove update system.
 
-# Install ansible on *
+# Install ansible on -nohost
 sudo apt-get install --yes ansible
 
-# Remove ansible from *
+# Remove ansible from -nohost
 sudo apt-get remove --yes ansible
 
+# Install bash-completion on *
+sudo apt-get install --yes bash-completion
+
+# Remove bash-completion from *
+sudo apt-get remove --yes bash-completion
+
 # Install change-grub-timeout on *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub; fi
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=1/' /etc/default/grub
 sudo update-grub
 
 # Remove change-grub-timeout from *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub; fi
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
 sudo update-grub
+
+# Install cups on *
+sudo apt-get install --yes cups
+
+# Remove cups from *
+sudo apt-get remove --yes cups
 
 # Install disabled-cloud-init on *
 #

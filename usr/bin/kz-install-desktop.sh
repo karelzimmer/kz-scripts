@@ -49,7 +49,7 @@ if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get upgrade --yes
 # Do this first [3/3].
 sudo apt-get update
 sudo apt-get dist-upgrade --yes
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo snap refresh; fi
+if type snap &> /dev/null; then sudo snap refresh; fi
 
 # Remove update-system from *
 #
@@ -96,13 +96,12 @@ sudo apt-get install --yes calibre
 sudo apt-get remove --yes calibre
 
 # Install change-grub-timeout on *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=1/' /etc/default/grub; fi
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=1/' /etc/default/grub
 sudo update-grub
 
 # Remove change-grub-timeout from *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=10/' /etc/default/grub; fi
+sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
 sudo update-grub
 
 # Install clamav on pc-van-hugo
@@ -237,12 +236,6 @@ sudo apt-get install --yes gdebi
 
 # Remove gdebi from *
 sudo apt-get remove --yes gdebi
-
-# Install gedit on *
-sudo apt-get install --yes gedit
-
-# Remove gedit from *
-sudo apt-get remove --yes gedit
 
 # Install gettext on pc06 pc07
 sudo apt-get install --yes gettext
