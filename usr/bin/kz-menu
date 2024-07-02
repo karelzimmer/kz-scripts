@@ -311,9 +311,7 @@ function process_menu1_choice4 {
         )
     process_commands
     # User must type 'logout' to log out.
-    if [[ $EDITION = 'server' ]]; then
-        exit $OK
-    fi
+    [[ $EDITION = 'desktop' ]] || exit $OK
 }
 
 
