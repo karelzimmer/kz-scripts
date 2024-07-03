@@ -32,11 +32,7 @@ bevat voor het instellen van apps en het wijzigen van gebruikersinstellingen.
 Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
-Standaard verwerkt \fBkz setup\fR het invoerbestand
-/usr/bin/kz-setup-<editie>.sh, bijvoorbeeld kz-setup-desktop.sh.
-.br
-De <editie> (desktop of server) wordt ingevuld met de waarden van de huidige
-computer.
+Standaard verwerkt \fBkz setup\fR het invoerbestand /usr/bin/kz-setup.sh.
 .sp
 Dit invoerbestand bevat instel-opdrachten voor alle hierin opgenomen gebruikers
 voor een desktop of server.
@@ -69,7 +65,7 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De naamgeving van de meegeleverde invoerbestanden is kz-setup-<edition>.sh.
+De naamgeving van het meegeleverde invoerbestand is kz-setup.sh.
 .br
 In het invoerbestand staan zogenaamde \fBApp-regels\fR en
 \fBOpdracht-regels\fR.
@@ -277,19 +273,14 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-setup-desktop.sh
+/usr/bin/kz-setup.sh
 .RS
-Instelbestand voor een desktop.
-.RE
-.sp
-/usr/bin/kz-setup-server.sh
-.RS
-Instelbestand voor een server.
+Instelbestand.
 .RE
 .sp
 /tmp/kz-setup-<editie>-XXXXXXXXXX.sh
 .RS
-Opdrachtbestand, bijvoorbeeld kz-setup-desktop-SYpGEKVWZI.sh.
+Opdrachtbestand, bijvoorbeeld kz-setup-SYpGEKVWZI.sh.
 .RE
 .sp
 xdg-user-dir DOCUMENTS/favs

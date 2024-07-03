@@ -31,14 +31,9 @@ commands for installing apps and modifying system settings.
 .sp
 For the format of the input files see the section \fBFILE FORMAT\fR below.
 .sp
-By default, \fBkz install\fR processes the input file
-/usr/bin/kz-install-<edition>.sh, for example kz-install-desktop.sh.
-.br
-The <edition> (desktop or server) is populated with the values from the current
-computer.
+By default, \fBkz install\fR processes the input file /usr/bin/kz-install.sh
 .sp
-This input file contains commands for all computers included in it for a
-desktop or a server.
+This input file contains commands for all computers included in it.
 .br
 When processing the input file, the commands for any and the current computer
 are selected and copied to a command file.
@@ -65,7 +60,7 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The format of the supplied input file is kz-install-<edition>.sh.
+The naming of the supplied input file is kz-install.sh.
 .br
 The input file contains so-called \fBApp records\fR and \fBCommand records\fR.
 .br
@@ -271,19 +266,14 @@ equal to 0.
 .\"
 .\"
 .SH FILES
-/usr/bin/kz-install-desktop.sh
+/usr/bin/kz-install.sh
 .RS
-Install file for a desktop.
+Install file.
 .RE
 .sp
-/usr/bin/kz-install-server.sh
+/tmp/kz-install-XXXXXXXXXX.sh
 .RS
-Install file for a server.
-.RE
-.sp
-/tmp/kz-install-<edition>-XXXXXXXXXX.sh
-.RS
-Command file, e.g. kz-install-desktop-SYpGEKVWZI.sh.
+Command file, e.g. kz-install-SYpGEKVWZI.sh.
 .RE
 .sp
 xdg-user-dir DOCUMENTS/apps

@@ -33,14 +33,10 @@ systeeminstellingen.
 Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
 hieronder.
 .sp
-Standaard verwerkt \fBkz install\fR het invoerbestand
-/usr/bin/kz-install-<editie>.sh, bijvoorbeeld kz-install-desktop.sh.
-.br
-De <editie> (desktop of server) wordt ingevuld met de waarden van de huidige
-computer.
+Standaard verwerkt \fBkz install\fR het invoerbestand /usr/bin/kz-install.sh.
 .sp
 Dit invoerbestand bevat installatie-opdrachten voor alle hierin opgenomen
-computers voor een desktop of server.
+computers.
 .br
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
@@ -70,7 +66,7 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De naamgeving van de meegeleverde invoerbestanden is kz-install-<edition>.sh.
+De naamgeving van het meegeleverde invoerbestand is kz-install.sh.
 .br
 In het invoerbestand staan zogenaamde \fBApp-regels\fR en
 \fBOpdracht-regels\fR.
@@ -280,19 +276,14 @@ afsluitwaarde ongelijk 0.
 .\"
 .\"
 .SH BESTANDEN
-/usr/bin/kz-install-desktop.sh
+/usr/bin/kz-install.sh
 .RS
-Installatiebestand voor een desktop.
+Installatiebestand.
 .RE
 .sp
-/usr/bin/kz-install-server.sh
+/tmp/kz-install-XXXXXXXXXX.sh
 .RS
-Installatiebestand voor een server.
-.RE
-.sp
-/tmp/kz-install-<editie>-XXXXXXXXXX.sh
-.RS
-Opdrachtbestand, bijvoorbeeld kz-install-desktop-SYpGEKVWZI.sh.
+Opdrachtbestand, bijvoorbeeld kz-install-SYpGEKVWZI.sh.
 .RE
 .sp
 xdg-user-dir DOCUMENTS/apps
