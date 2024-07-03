@@ -423,7 +423,7 @@ function process_command_file {
 }
 
 
-# This function displays instructions for adding additional users.
+# This function saves instructions for adding additional users.
 function add_additional_users {
     if $GUI; then
         text="$(gettext 'Additional _user_s can be added manually:')
@@ -442,13 +442,8 @@ sudo useradd --create-home --comment '_user_' _username_
 sudo usermod --append --groups adm,sudo _username_
 # User sets password on first login:
 sudo passwd --delete --expire _username_")"
-        printf '%s\n' "$text" > /root/add-users
-        text="
-$(gettext 'Additional _user_s can be added manually:')
-$(gettext 'See file /root/add-users.')"
     fi
-    infomsg "$text"
-    $option_gui || wait_for_enter
+    printf '%s\n' "$text" > /root/add-users.txt
 }
 
 
