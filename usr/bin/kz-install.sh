@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# SPDX-FileComment: Install file for a desktop
+# SPDX-FileComment: Install file
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -232,10 +232,10 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
-sudo apt-get install --yes gdebi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes gdebi; fi
 
 # Remove gdebi from *
-sudo apt-get remove --yes gdebi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes gdebi; fi
 
 # Install gettext on pc06 pc07
 sudo apt-get install --yes gettext
@@ -274,25 +274,25 @@ sudo apt-get install --yes epiphany-browser
 sudo apt-get remove --yes epiphany-browser
 
 # Install google-chrome on *
-wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
-sudo apt-get update
-sudo apt-get install --yes google-chrome-stable
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes google-chrome-stable; fi
 #
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
 if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
 #
 # Add the source list again because the installation overwrote the newly added source list.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
 #
 # The apt-key added during installation is no longer needed.
-sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 
 # Remove google-chrome from *
 if type gnome-session &> /dev/null; then apt-get remove --yes chrome-gnome-shell; fi
-sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell
-sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg
-sudo apt-get update
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
 
 # Install google-earth on -nohost
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
@@ -359,10 +359,10 @@ sudo apt-get install --yes lftp
 sudo apt-get remove --yes lftp
 
 # Install libreoffice on *
-sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Remove libreoffice from *
-sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Install locate on pc06 pc07
 sudo apt-get install --yes locate
@@ -466,29 +466,29 @@ sudo apt-get install --yes gnome-sushi
 sudo apt-get remove --yes gnome-sushi
 
 # Install teamviewer on *
-wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg
-echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null
-sudo apt-get update
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer; fi
 #
 # The apt-key added during installation is no longer needed.
-sudo apt-key del 0C1289C0 DEB49217
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-key del 0C1289C0 DEB49217; fi
 #
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
-sudo apt-get remove --yes teamviewer
-sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*
-sudo apt-key del 0C1289C0 DEB49217
-sudo apt-get update
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes teamviewer; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-key del 0C1289C0 DEB49217; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
 
 # Install thunderbird on *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get install --yes thunderbird-l10n-nl; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo apt-get install --yes thunderbird-locale-nl; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes thunderbird-l10n-nl || true; fi # Debian
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Remove thunderbird from *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get remove --yes thunderbird-l10n-nl; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo apt-get remove --yes thunderbird-locale-nl; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes thunderbird-l10n-nl || true; fi # Debian
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Install tree on pc06 pc07
 sudo apt-get install --yes tree
@@ -553,10 +553,10 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 # Install vlc on *
-sudo apt-get install --yes vlc
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes vlc; fi
 
 # Remove vlc from *
-sudo apt-get remove --yes vlc
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
 wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg

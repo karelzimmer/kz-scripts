@@ -34,8 +34,7 @@ mandatory for short options too.")
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(eval_gettext "  -f, --file FILE
-                 process FILE (default FILE is /usr/bin/\$PROGRAM_NAME-\$EDITI\
-ON.sh)")
+                 process FILE (default FILE is /usr/bin/\$PROGRAM_NAME.sh)")
 $(gettext '  -g, --gui      starts in graphical mode')
 $(gettext '  -r, --remove   delete apps')"
 
@@ -66,7 +65,7 @@ declare -A  app_arguments=()
 declare -A  failed_apps=()
 declare     argument_app=false
 declare     file_argument=''
-declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME-$EDITION.sh
+declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME.sh
 declare     mode='Install'
 declare     mode_reverse='Remove'
 declare     no_commands_found=true
@@ -184,7 +183,7 @@ function process_input {
         exit $OK
     fi
 
-    command_file=$(mktemp -t "$PROGRAM_NAME-$EDITION-XXXXXXXXXX.sh")
+    command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
     if $argument_app; then
         process_argument_app
     else

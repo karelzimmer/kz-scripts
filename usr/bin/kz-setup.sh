@@ -51,11 +51,13 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
-# Setup debian-desktop-installer for *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then kz-gset --delete=install-debian; fi
+# Setup desktop-installer for *
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --delete=install-debian || true; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
 
-# Reset debian-desktop-installer for *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then kz-gset --addbef=install-debian; fi
+# Reset desktop-installer for *
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --addbef=install-debian || true; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
 
 # Setup evolution for karel@pc07
 kz-gset --delete=org.gnome.Evolution
@@ -76,10 +78,10 @@ kz-gset --addbef=firefox-esr
 kz-gset --addbef=firefox
 
 # Setup gdebi for *
-xdg-mime default gdebi.desktop application/vnd.debian.binary-package
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
-xdg-mime default org.gnome.FileRoller.desktop application/vnd.debian.binary-package
+# There is no command needed to reset gdebi.
 
 # Setup gnome for *
 if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
@@ -144,13 +146,13 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
-xdg-mime default google-chrome.desktop application/pdf
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gset --addbef=google-chrome
 
 # Reset google-chrome for *
-xdg-mime default org.gnome.Evince.desktop application/pdf
+# There is no command needed to reset google chrome.
 
 # Reset google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gset --delete=google-chrome
@@ -234,12 +236,6 @@ kz-gset --delete=thunderbird
 # Reset thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
 kz-gset --addbef=thunderbird
 
-# Setup ubuntu-desktop-installer for *
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
-
-# Reset ubuntu-desktop-installer for *
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
-
 # Setup virtualbox for hugo@pc-van-hugo
 kz-gset --addaft=virtualbox
 kz-gset --addaft=kz-vm-hugowin732
@@ -249,14 +245,12 @@ kz-gset --delete=virtualbox
 kz-gset --delete=kz-vm-hugowin732
 
 # Setup vlc for *
-xdg-mime default vlc.desktop video/mp4
-xdg-mime default vlc.desktop video/x-matroska
-xdg-mime default vlc.desktop video/webm
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/mp4; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/x-matroska; fi
+if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/webm; fi
 
 # Reset vlc for *
-xdg-mime default org.gnome.Totem.desktop video/mp4
-xdg-mime default org.gnome.Totem.desktop video/x-matroska
-xdg-mime default org.gnome.Totem.desktop video/webm
+# There is no command needed to reset vlc.
 
 # Setup vscode for karel@pc01 karel@pc06 karel@pc07
 kz-gset --addbef=code
@@ -272,15 +266,6 @@ xdg-mime default code.desktop text/x-python
 
 # Reset vscode for karel@pc01 karel@pc06 karel@pc07
 kz-gset --delete=code
-xdg-mime default org.gnome.gedit.desktop application/json
-xdg-mime default org.gnome.gedit.desktop application/x-desktop
-xdg-mime default org.gnome.gedit.desktop application/x-shellscript
-xdg-mime default org.gnome.gedit.desktop application/xml
-xdg-mime default org.gnome.gedit.desktop text/html
-xdg-mime default org.gnome.gedit.desktop text/markdown
-xdg-mime default org.gnome.gedit.desktop text/plain
-xdg-mime default org.gnome.gedit.desktop text/troff
-xdg-mime default org.gnome.gedit.desktop text/x-python
 
 # Setup webmin for karel@pc07
 kz-gset --addaft=kz-webmin
