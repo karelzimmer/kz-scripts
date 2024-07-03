@@ -476,7 +476,7 @@ use app 'Terminal', type 'kz setup \$failed_apps_text'.")
         fi
         text=$(eval_gettext "Apps \$operation completed.")
         if $logout; then
-            if GUI; then
+            if $GUI; then
                 text+="
 $(gettext "You will now be logged out of the computer to finish installing the\
  apps and changing user settings.")"
