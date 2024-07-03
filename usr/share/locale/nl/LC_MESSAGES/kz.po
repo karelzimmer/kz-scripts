@@ -713,8 +713,9 @@ msgstr ""
 "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:\n"
 "sudo passwd --delete --expire _gebruikersnaam_"
 
-msgid "See file /root/add-users."
-msgstr "Raadpleeg bestand /root/add-users."
+msgid "See file /root/add-users.txt how to add dditional _user_s."
+msgstr "Zie bestand /root/add-users.txt voor informatie over het toevoegen "
+"van extra _gebruiker_s."
 
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
