@@ -128,9 +128,9 @@ $USAGE_LINE"
                 shift 2
                 ;;
             -g|--gui)
-                if [[ $EDITION = 'server' ]]; then
+                if ! $GUI; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
+"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
@@ -477,7 +477,7 @@ use app 'Terminal', type 'kz setup \$failed_apps_text'.")
         fi
         text=$(eval_gettext "Apps \$operation completed.")
         if $logout; then
-            if [[ $EDITION = 'desktop' ]]; then
+            if GUI; then
                 text+="
 $(gettext "You will now be logged out of the computer to finish installing the\
  apps and changing user settings.")"
@@ -489,7 +489,7 @@ Type 'logout' to log out.")"
             fi
         fi
         infomsg "$text"
-        if $logout && [[ $EDITION = 'desktop' ]]; then
+        if $logout && $GUI; then
             $option_gui || wait_for_enter
             if type gnome-session &> /dev/null; then
                 gnome-session-quit --logout --no-prompt

@@ -124,9 +124,9 @@ function process_x_options {
     while true; do
         case $1 in
             -g|--gui)
-                if [[ $EDITION = 'server' ]]; then
+                if ! $GUI; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
+"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
@@ -310,8 +310,10 @@ function process_menu1_choice4 {
             "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
         )
     process_commands
-    # User must type 'logout' to log out.
-    [[ $EDITION = 'desktop' ]] || exit $OK
+    if $GUI; then
+        # User must type 'logout' to log out.
+        exit $OK
+    fi
 }
 
 

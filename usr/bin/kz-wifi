@@ -77,9 +77,9 @@ function process_x_options {
     while true; do
         case $1 in
             -g|--gui)
-                if [[ $EDITION = 'server' ]]; then
+                if ! $GUI; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
+"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR

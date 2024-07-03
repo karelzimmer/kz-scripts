@@ -54,8 +54,10 @@ if (
     type mate-session       ||
     type xfce4-session
     ) &> /dev/null; then
+    readonly GUI=true
     readonly EDITION='desktop'
 else
+    readonly GUI=false
     readonly EDITION='server'
 fi
 
@@ -259,11 +261,13 @@ function process_options {
 
 # This function shows the available help.
 function process_option_help {
-    local   yelp_man_url="$(gettext ', or see the ')"
-            yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
-            yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
+    local yelp_man_url=''
 
-    [[ $EDITION = 'desktop' ]] || yelp_man_url=''
+    if $GUI; then
+        yelp_man_url="$(gettext ', or see the ')"
+        yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
+        yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
+    fi
     text="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
 E'\$yelp_man_url for more information.")"
     printf '%b\n\n%b\n' "$HELP" "$text"

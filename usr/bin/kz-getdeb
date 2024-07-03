@@ -148,7 +148,9 @@ function install_package {
     local install_suggests=''
 
     logmsg 'Install. kz deb...'
-    [[ $EDITION = 'server' ]] || install_suggests='--install-suggests'
+    if $GUI; then
+        install_suggests='--install-suggests'
+    fi
     check_package_manager |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -206,7 +208,7 @@ Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under Linux.\
 ")
-    if [[ $EDITION = 'desktop' ]]; then
+    if $GUI; then
         text+="
 
 $(gettext "Type 'exit' to close this window.")"

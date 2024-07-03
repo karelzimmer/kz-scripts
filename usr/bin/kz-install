@@ -128,9 +128,9 @@ $USAGE_LINE"
                 shift 2
                 ;;
             -g|--gui)
-                if [[ $EDITION = 'server' ]]; then
+                if ! $GUI; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'only allowed on a desktop')
+"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
@@ -426,7 +426,7 @@ function process_command_file {
 
 # This function displays instructions for adding additional users.
 function add_additional_users {
-    if [[ $EDITION = 'desktop' ]]; then
+    if $GUI; then
         text="$(gettext 'Additional _user_s can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.

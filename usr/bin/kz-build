@@ -119,8 +119,8 @@ $USAGE_LINE"
         exit $ERROR
     fi
 
-    if [[ $EDITION = 'server' ]]; then
-        text="$DISPLAY_NAME: $(gettext 'only allowed on a desktop')
+    if ! $GUI; then
+        text="$DISPLAY_NAME: $(gettext 'no GUI available')
 $USAGE_LINE"
         infomsg "$text"
         exit $ERROR
