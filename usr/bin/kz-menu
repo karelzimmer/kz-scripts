@@ -310,10 +310,8 @@ function process_menu1_choice4 {
             "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
         )
     process_commands
-    if $GUI; then
-        # User must type 'logout' to log out.
-        exit $OK
-    fi
+    # User must type 'logout' to log out.
+    $GUI || exit $OK
 }
 
 
