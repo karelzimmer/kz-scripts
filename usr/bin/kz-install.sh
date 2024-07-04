@@ -137,11 +137,11 @@ sudo apt-get remove --yes cups-backend-bjnp
 
 # Install dashtodock on *
 # GNOME-system-only.
-if type gnome-session &> /dev/null; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME machine has this extension available.
+if type gnome-session &> /dev/null; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME system has this extension available.
 
 # Remove dashtodock from *
 # GNOME-system-only.
-if type gnome-session &> /dev/null; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME machine has this extension available.
+if type gnome-session &> /dev/null; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME system has this extension available.
 
 # Install deja-dup on pc07
 sudo apt-get install --yes deja-dup

@@ -29,12 +29,12 @@ rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 # Setup dashtodock for *
 # GNOME-system-only.
-if type gnome-session &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME machine has this extension installed.
+if type gnome-session &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME system has this extension installed.
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi # Not every GNOME machine has this key.
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi # Not every GNOME system has this key.
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
@@ -42,12 +42,12 @@ if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extension
 
 # Reset dashtodock for *
 # GNOME-system-only.
-if type gnome-session &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME machine has this installed.
+if type gnome-session &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME system has this installed.
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup || true; fi # Not every GNOME machine has this key.
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup || true; fi # Not every GNOME system has this key.
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
@@ -116,8 +116,8 @@ if type gnome-session &> /dev/null; then gsettings set org.gnome.shell disable-u
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi # Not every GNOME machine has this key.
-if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi # Not every GNOME machine has this key.
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi # Not every GNOME system has this key.
+if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi # Not every GNOME system has this key.
 if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome for *
@@ -148,8 +148,8 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell disable
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network || true; fi # Not every GNOME machine has this key.
-if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi # Not every GNOME machine has this key.
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network || true; fi # Not every GNOME system has this key.
+if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi # Not every GNOME system has this key.
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
