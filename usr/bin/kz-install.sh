@@ -20,7 +20,7 @@ if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expr
 #
 # Do this first [1/3].
 # Enable the program crash report.
-# Ubuntu-only.
+# Ubuntu-systems-only.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
 
