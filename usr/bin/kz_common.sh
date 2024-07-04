@@ -55,10 +55,8 @@ if (
     type xfce4-session
     ) &> /dev/null; then
     readonly GUI=true
-    readonly EDITION='desktop'
 else
     readonly GUI=false
-    readonly EDITION='server'
 fi
 
 
