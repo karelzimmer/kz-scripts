@@ -200,7 +200,7 @@ msgstr ""
 msgid "too many options"
 msgstr ""
 
-msgid "no GUI available"
+msgid "no desktop environment available"
 msgstr ""
 
 msgid "arguments are not allowed"

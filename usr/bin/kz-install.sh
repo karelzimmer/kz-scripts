@@ -10,7 +10,7 @@
 #
 # Do this first [1/3].
 # Disable the program crash report.
-# Ubuntu-system-only.
+# Only for Ubuntu.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl disable apport.service; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
@@ -20,14 +20,14 @@ if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expr
 #
 # Do this first [1/3].
 # Enable the program crash report.
-# Ubuntu-system-only.
+# Only for Ubuntu.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
 
 # Install extra-repos on *
 #
 # Do this first [2/3].
-# Debian-GUI-system-only.
+# Only for Debian with desktop environment.
 if [[ $(lsb_release --id --short) = 'Debian' ]] && (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-add-repository contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]] && (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-add-repository non-free; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]] && (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
@@ -40,7 +40,7 @@ if [[ $(lsb_release --id --short) = 'Debian' ]] && (type cinnamon-session || typ
 # Remove extra-repos from *
 #
 # Do this first [2/3].
-# Debian-GUI-system-only.
+# Only for Debian with desktop environment.
 if [[ $(lsb_release --id --short) = 'Debian' ]] && (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-add-repository --remove contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]] && (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-add-repository --remove non-free; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]] && (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
@@ -136,11 +136,11 @@ sudo apt-get install --yes cups-backend-bjnp
 sudo apt-get remove --yes cups-backend-bjnp
 
 # Install dashtodock on *
-# GNOME-system-only.
+# Only for GNOME desktop environment.
 if type gnome-session &> /dev/null; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME system has this extension available.
 
 # Remove dashtodock from *
-# GNOME-system-only.
+# Only for GNOME desktop environment.
 if type gnome-session &> /dev/null; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME system has this extension available.
 
 # Install deja-dup on pc07
@@ -240,11 +240,11 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes gdebi; fi
 
 # Remove gdebi from *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes gdebi; fi
 
 # Install gettext on pc06 pc07
@@ -284,28 +284,28 @@ sudo apt-get install --yes epiphany-browser
 sudo apt-get remove --yes epiphany-browser
 
 # Install google-chrome on *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes google-chrome-stable; fi
 #
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-# GNOME-system-only.
+# Only for GNOME desktop environment.
 if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
 #
 # Add the source list again because the installation overwrote the newly added source list.
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
 #
 # The apt-key added during installation is no longer needed.
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 
 # Remove google-chrome from *
-# GNOME-system-only.
+# Only for GNOME desktop environment.
 if type gnome-session &> /dev/null; then apt-get remove --yes chrome-gnome-shell; fi
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
@@ -375,11 +375,11 @@ sudo apt-get install --yes lftp
 sudo apt-get remove --yes lftp
 
 # Install libreoffice on *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Remove libreoffice from *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Install locate on pc06 pc07
@@ -484,32 +484,32 @@ sudo apt-get install --yes gnome-sushi
 sudo apt-get remove --yes gnome-sushi
 
 # Install teamviewer on *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer; fi
 #
 # The apt-key added during installation is no longer needed.
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-key del 0C1289C0 DEB49217; fi
 #
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes teamviewer; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-key del 0C1289C0 DEB49217; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get update; fi
 
 # Install thunderbird on *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes thunderbird-l10n-nl || true; fi # Debian
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Remove thunderbird from *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes thunderbird-l10n-nl || true; fi # Debian
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes thunderbird-locale-nl || true; fi # Ubuntu
 
@@ -576,11 +576,11 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 # Install vlc on *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get install --yes vlc; fi
 
 # Remove vlc from *
-# GUI-system-only.
+# Only for desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then sudo apt-get remove --yes vlc; fi
 
 # Install vscode on pc01 pc06 pc07

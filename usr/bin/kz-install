@@ -127,9 +127,9 @@ $USAGE_LINE"
                 shift 2
                 ;;
             -g|--gui)
-                if ! $GUI; then
+                if ! $DESKTOP_ENVIRONMENT; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
@@ -507,7 +507,7 @@ ging system settings.")"
 
 # This function saves instructions for adding additional users.
 function add_additional_users {
-    if $GUI; then
+    if $DESKTOP_ENVIRONMENT; then
         text="$(gettext 'Additional _user_s can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.

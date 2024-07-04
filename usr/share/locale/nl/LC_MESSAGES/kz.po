@@ -215,8 +215,8 @@ msgstr ""
 msgid "too many options"
 msgstr "te veel opties"
 
-msgid "no GUI available"
-msgstr "geen GUI beschikbaar"
+msgid "no desktop environment available"
+msgstr "geen bureaubladomgeving beschikbaar"
 
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"

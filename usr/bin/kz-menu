@@ -124,9 +124,9 @@ function process_x_options {
     while true; do
         case $1 in
             -g|--gui)
-                if ! $GUI; then
+                if ! $DESKTOP_ENVIRONMENT; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
@@ -311,7 +311,7 @@ function process_menu1_choice4 {
         )
     process_commands
     # User must type 'logout' to log out.
-    $GUI || exit $OK
+    $DESKTOP_ENVIRONMENT || exit $OK
 }
 
 

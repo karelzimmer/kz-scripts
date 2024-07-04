@@ -91,9 +91,9 @@ function process_x_options {
     while true; do
         case $1 in
             -g|--gui)
-                if ! $GUI; then
+                if ! $DESKTOP_ENVIRONMENT; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR

@@ -88,8 +88,8 @@ $USAGE_LINE"
         exit $ERROR
     fi
 
-    if ! $GUI; then
-        text="$DISPLAY_NAME: $(gettext 'no GUI available')
+    if ! $DESKTOP_ENVIRONMENT; then
+        text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE_LINE"
         infomsg "$text"
         exit $ERROR

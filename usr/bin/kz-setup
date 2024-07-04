@@ -127,9 +127,9 @@ $USAGE_LINE"
                 shift 2
                 ;;
             -g|--gui)
-                if ! $GUI; then
+                if ! $DESKTOP_ENVIRONMENT; then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'no GUI available')
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE_LINE"
                     infomsg "$text"
                     exit $ERROR
@@ -476,7 +476,7 @@ use app 'Terminal', type 'kz setup \$failed_apps_text'.")
         fi
         text=$(eval_gettext "Apps \$operation completed.")
         if $logout; then
-            if $GUI; then
+            if $DESKTOP_ENVIRONMENT; then
                 text+="
 
 $(gettext "You will now be logged out of the computer to finish installing the\
@@ -490,7 +490,7 @@ Type 'logout' to log out.")"
             fi
         fi
         infomsg "$text"
-        if $logout && $GUI; then
+        if $logout && $DESKTOP_ENVIRONMENT; then
             $option_gui || wait_for_enter
             if type gnome-session &> /dev/null; then
                 gnome-session-quit --logout --no-prompt

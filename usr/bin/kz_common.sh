@@ -45,7 +45,7 @@ $(gettext '  -v, --version  print program version')"
 readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
-# Determine whether it is desktop or server.
+# Determine whether a desktop environment is available.
 if (
     type cinnamon-session   ||
     type gnome-session      ||
@@ -54,9 +54,9 @@ if (
     type mate-session       ||
     type xfce4-session
     ) &> /dev/null; then
-    readonly GUI=true
+    readonly DESKTOP_ENVIRONMENT=true
 else
-    readonly GUI=false
+    readonly DESKTOP_ENVIRONMENT=false
 fi
 
 
@@ -261,7 +261,7 @@ function process_options {
 function process_option_help {
     local yelp_man_url=''
 
-    if $GUI; then
+    if $DESKTOP_ENVIRONMENT; then
         yelp_man_url="$(gettext ', or see the ')"
         yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
