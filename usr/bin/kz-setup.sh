@@ -28,7 +28,7 @@ kz-gset --delete=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 # Setup dashtodock for *
-# Only for GNOME desktop environment.
+# For all with GNOME desktop environment.
 if type gnome-session &> /dev/null; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME system has this extension installed.
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
@@ -41,7 +41,7 @@ if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extension
 if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
 # Reset dashtodock for *
-# Only for GNOME desktop environment.
+# For all with GNOME desktop environment.
 if type gnome-session &> /dev/null; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME system has this installed.
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
@@ -54,12 +54,12 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
 # Setup desktop-installer for *
-# Only for desktop environment.
+# For all with desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --delete=install-debian || true; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
 
 # Reset desktop-installer for *
-# Only for desktop environment.
+# For all with desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --addbef=install-debian || true; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
 
@@ -82,14 +82,14 @@ kz-gset --addbef=firefox-esr
 kz-gset --addbef=firefox
 
 # Setup gdebi for *
-# Only for desktop environment.
+# For all with desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
 # There is no command needed to reset gdebi.
 
 # Setup gnome for *
-# Only for GNOME desktop environment.
+# For all with GNOME desktop environment.
 if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if type gnome-session &> /dev/null; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
@@ -121,7 +121,7 @@ if type gnome-session &> /dev/null; then gsettings set org.gnome.shell.extension
 if type gnome-session &> /dev/null; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome for *
-# Only for GNOME desktop environment.
+# For all with GNOME desktop environment.
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
@@ -153,7 +153,7 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
-# Only for desktop environment.
+# For all with desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
@@ -253,7 +253,7 @@ kz-gset --delete=virtualbox
 kz-gset --delete=kz-vm-hugowin732
 
 # Setup vlc for *
-# Only for desktop environment.
+# For all with desktop environment.
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/mp4; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/x-matroska; fi
 if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/webm; fi
