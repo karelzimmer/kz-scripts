@@ -26,7 +26,8 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAG\
 E")
 
-readonly X_OPTIONS_HELP=$(gettext '  -g, --gui      starts in graphical mode')
+readonly X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
+t")
 
 readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 

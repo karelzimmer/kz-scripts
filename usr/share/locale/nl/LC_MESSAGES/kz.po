@@ -202,8 +202,8 @@ msgstr "Gebruik: $DISPLAY_NAME [OPTIE...]"
 msgid "Options:"
 msgstr "Opties:"
 
-msgid "  -g, --gui      starts in graphical mode"
-msgstr "  -g, --gui      start in grafische modus"
+msgid "  -g, --gui      run in graphical mode, requires desktop environment"
+msgstr "  -g, --gui      draai in grafische modus, vereist bureaubladomgeving"
 
 msgid ""
 "  -t, --target DIRECTORY\n"

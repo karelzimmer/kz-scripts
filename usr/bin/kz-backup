@@ -30,7 +30,8 @@ DIRECTORY]
 readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
-$(gettext '  -g, --gui      starts in graphical mode')
+$(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
+t")
 $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')"
 
