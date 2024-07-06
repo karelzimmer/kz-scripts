@@ -185,7 +185,8 @@ function check_code {
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 ${RED}$(gettext "    Unknown script. Function check_code cannot check script c\
-ode.")$NORMAL"
+ode.")$NORMAL
+"
         infomsg "$text"
         error_flag=true
     fi
@@ -214,7 +215,8 @@ function check_record_length {
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 ${RED}$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_\
-length_found).")$NORMAL"
+length_found).")$NORMAL
+"
         infomsg "$text"
         error_flag=true
     fi
@@ -231,7 +233,11 @@ function check_desktop_file_validation {
 function check_shellcheck {
     # Shellcheck doesn't work well with absolute filenames.
     cd "$scriptdir"
-    shellcheck --external-sources "$scriptname" || error_flag=true
+    shellcheck  --external-sources                  \
+                --enable add-default-case           \
+                --enable avoid-nullary-conditions   \
+                --enable require-double-brackets    \
+                "$scriptname"                       || error_flag=true
     cd "$scripts_repo"
 }
 
@@ -249,7 +255,8 @@ function check_tags {
             "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$(gettext '    Flagged annotation found.')"
+$(gettext '    Flagged annotation found.')
+"
         infomsg "$text"
         grep    --line-number           \
                 --regexp="$bug"         \
@@ -268,7 +275,8 @@ function check_trailing_spaces {
     if grep --quiet --regexp=' ''$' "$script"; then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-${RED}$(gettext '    End spaces found.')$NORMAL"
+${RED}$(gettext '    End spaces found.')$NORMAL
+"
         infomsg "$text"
         grep    --line-number --regexp=' ''$' "$script" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
