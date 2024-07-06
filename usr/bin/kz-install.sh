@@ -53,7 +53,6 @@ if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,
 # Do this first [3/3].
 sudo apt-get update
 sudo apt-get dist-upgrade --yes
-# Snap-system-only.
 if type snap &> /dev/null; then sudo snap refresh; fi
 
 # Remove update-system from *
@@ -194,7 +193,6 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /de
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install dual-monitor on pc06
-# Dual-monitor-system-only.
 if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
