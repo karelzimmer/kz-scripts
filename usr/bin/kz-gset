@@ -166,7 +166,7 @@ $USAGE_LINE"
 # This function processes the script options and arguments.
 function process_input {
     if ! type gnome-session &> /dev/null; then
-        text=$(gettext 'For GNOME systems only.')
+        text=$(gettext 'For GNOME desktop environments only.')
         infomsg "$text"
         exit $OK
     fi

@@ -413,7 +413,7 @@ msgstr ""
 msgid "  -r, --reset    set favorites on default values"
 msgstr ""
 
-msgid "For GNOME systems only."
+msgid "For GNOME desktop environments only."
 msgstr ""
 
 msgid "Favorite apps:"
