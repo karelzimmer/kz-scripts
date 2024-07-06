@@ -55,13 +55,13 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 
 # Setup desktop-installer for *
 # For all with desktop environment.
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --delete=install-debian || true; fi
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --delete=install-debian || true; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
 
 # Reset desktop-installer for *
 # For all with desktop environment.
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --addbef=install-debian || true; fi
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --addbef=install-debian || true; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer || true; fi
 
 # Setup evolution for karel@pc07
 kz-gset --delete=org.gnome.Evolution
@@ -83,7 +83,7 @@ kz-gset --addbef=firefox
 
 # Setup gdebi for *
 # For all with desktop environment.
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
 # There is no command needed to reset gdebi.
@@ -154,7 +154,7 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Lega
 
 # Setup google-chrome for *
 # For all with desktop environment.
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default google-chrome.desktop application/pdf; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gset --addbef=google-chrome
@@ -254,9 +254,9 @@ kz-gset --delete=kz-vm-hugowin732
 
 # Setup vlc for *
 # For all with desktop environment.
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/mp4; fi
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/x-matroska; fi
-if (type cinnamon-session || type gnome-session || type ksmserver || type lxqt-session || type mate-session || type xfce4-session) &> /dev/null; then xdg-mime default vlc.desktop video/webm; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default vlc.desktop video/mp4; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default vlc.desktop video/x-matroska; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default vlc.desktop video/webm; fi
 
 # Reset vlc for *
 # There is no command needed to reset vlc.

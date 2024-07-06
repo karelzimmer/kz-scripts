@@ -46,14 +46,9 @@ readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
 
 # Determine whether a desktop environment is available.
-if (
-    type cinnamon-session   ||
-    type gnome-session      ||
-    type ksmserver          ||
-    type lxqt-session       ||
-    type mate-session       ||
-    type xfce4-session
-    ) &> /dev/null; then
+if [[ -n $(
+    type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null
+    ) ]]; then
     readonly DESKTOP_ENVIRONMENT=true
 else
     readonly DESKTOP_ENVIRONMENT=false
@@ -138,18 +133,14 @@ It is recommended to connect the computer to the wall socket.")
 }
 
 
-# This function checks for another active package manager and waits for the
+# This function checks for another running package manager and waits for the
 # next check if so.
 function check_package_manager {
     local   -i  check_wait=10
-
     while sudo  fuser                           \
                 --silent                        \
-                /var/cache/apt/archives/lock    \
                 /var/cache/debconf/config.dat   \
-                /var/lib/apt/lists/lock         \
-                /var/lib/dpkg/lock              \
-                /var/lib/dpkg/lock-frontend; do
+                /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
         text=$(gettext 'Wait for another package manager to finish')
         if $option_gui; then
             logmsg "$text..."

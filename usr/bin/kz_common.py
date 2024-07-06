@@ -54,18 +54,11 @@ OPTIONS_SHORT = 'hmuv'
 OPTIONS_LONG = 'help,manual,usage,version'
 
 # Determine whether a desktop environment is available.
-if subprocess.run('type cinnamon-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK or   \
-   subprocess.run('type gnome-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK or   \
-   subprocess.run('type ksmserver &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK or   \
-   subprocess.run('type lxqt-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK or   \
-   subprocess.run('type mate-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK or   \
-   subprocess.run('type xfce4-session &> /dev/null', shell=True,
-                  executable='/usr/bin/bash').returncode == OK:
+if subprocess.run('[[ -n $('
+                  'type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} '
+                  '2> /dev/null'
+                  ') ]]',
+                  shell=True, executable='/usr/bin/bash').returncode == OK:
     DESKTOP_ENVIRONMENT = True
 else:
     DESKTOP_ENVIRONMENT = False
@@ -152,7 +145,7 @@ def check_on_ac_power(PROGRAM_NAME):
 
 def check_package_manager(PROGRAM_NAME):
     """
-    This function checks for another active package manager and waits for the
+    This function checks for another running package manager and waits for the
     next check if so.
     """
     check_wait = 10
@@ -161,12 +154,10 @@ def check_package_manager(PROGRAM_NAME):
         try:
             subprocess.run('sudo fuser '
                            '--silent '
-                           '/var/cache/apt/archives/lock '
                            '/var/cache/debconf/config.dat '
-                           '/var/lib/apt/lists/lock '
-                           '/var/lib/dpkg/lock-frontend '
-                           '/var/lib/dpkg/lock',
-                           shell=True, check=True)
+                           '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/'
+                           'lock*',
+                           shell=True, executable='/usr/bin/bash', check=True)
         except Exception:
             break
         else:
