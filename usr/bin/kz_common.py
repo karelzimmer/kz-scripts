@@ -237,8 +237,8 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
 
     if DESKTOP_ENVIRONMENT:
         yelp_man_url = f"{_(', or see the ')}"
-        yelp_man_url += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME} '
-        yelp_man_url += f"{_('man page')}\x1b]8;;\x1b\\"
+        yelp_man_url += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
+        yelp_man_url += f" {_('man page')}\x1b]8;;\x1b\\"
 
     text = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
             f'{PROGRAM_DESC}.\n\n'

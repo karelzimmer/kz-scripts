@@ -254,7 +254,7 @@ function process_option_help {
 
     if $DESKTOP_ENVIRONMENT; then
         yelp_man_url="$(gettext ', or see the ')"
-        yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME "
+        yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
     fi
     text="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
