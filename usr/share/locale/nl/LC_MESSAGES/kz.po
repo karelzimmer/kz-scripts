@@ -473,8 +473,8 @@ msgstr "Alleen voor GNOME-systemen."
 msgid "Favorite apps:"
 msgstr "Favorieten:"
 
-msgid "Now make the change in the graphical workspace."
-msgstr "Voer nu de wijziging uit in de grafische werkomgeving."
+msgid "Now make the change in the desktop environment."
+msgstr "Voer nu de wijziging uit in de desktopomgeving."
 
 #, sh-format
 msgid "Config database content captured ($fase)."

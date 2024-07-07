@@ -419,7 +419,7 @@ msgstr ""
 msgid "Favorite apps:"
 msgstr ""
 
-msgid "Now make the change in the graphical workspace."
+msgid "Now make the change in the desktop environment."
 msgstr ""
 
 #, sh-format
