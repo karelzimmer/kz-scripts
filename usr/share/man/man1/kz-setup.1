@@ -20,15 +20,15 @@ kz-setup \- Set up apps
 .SH DESCRIPTION
 \fBkz setup\fR sets up apps and changes user settings.
 .sp
-In a graphical work environment command \fBkz setup\fR can be executed by
-searching for \fBapps\fR, click on \fBSet up apps\fR.
+In a desktop environment command \fBkz setup\fR can be executed by searching
+for \fBapps\fR, click on \fBSet up apps\fR.
 .sp
 Use (first) \fBkz install\fR to install apps and changes system settings.
 .sp
 \fBkz setup\fR processes an input file ("set up file") that contains
 commands for setting up apps and changing user settings.
 .sp
-For the input file format, see the \fBFILE FORMAT\fR section below.
+For the format of the input file see the section \fBFILE FORMAT\fR below.
 .sp
 By default, \fBkz setup\fR processes the input file /usr/bin/kz-setup.sh.
 .br
@@ -51,8 +51,8 @@ Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
 specified.
 .sp
-With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR runs in graphical mode,
-requires desktop environment.
+With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode. A
+desktop environment is required.
 .sp
 With option \fB-r\fR, \fB--reset\fR the setting can be undone, the mode then
 changes from Setup to Reset.
@@ -239,8 +239,8 @@ Display the contents of the command file.
 Specify input file \fIFILE\fR.
 .TP
 \fB-g\fR, \fB--gui\fR
-Run in graphical mode (gui=graphical user interface), requires desktop
-environment.
+Run in graphical mode (gui=graphical user interface). A desktop environment is
+required.
 .TP
 \fB-r\fR, \fB--reset\fR
 Reset apps.

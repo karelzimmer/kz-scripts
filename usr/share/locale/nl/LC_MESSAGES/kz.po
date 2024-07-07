@@ -203,7 +203,7 @@ msgid "Options:"
 msgstr "Opties:"
 
 msgid "  -g, --gui      run in graphical mode, requires desktop environment"
-msgstr "  -g, --gui      draai in grafische modus, vereist bureaubladomgeving"
+msgstr "  -g, --gui      draai in grafische modus, vereist desktopomgeving"
 
 msgid ""
 "  -t, --target DIRECTORY\n"
@@ -216,7 +216,7 @@ msgid "too many options"
 msgstr "te veel opties"
 
 msgid "no desktop environment available"
-msgstr "geen bureaubladomgeving beschikbaar"
+msgstr "geen desktopomgeving beschikbaar"
 
 msgid "arguments are not allowed"
 msgstr "argumenten zijn niet toegestaan"

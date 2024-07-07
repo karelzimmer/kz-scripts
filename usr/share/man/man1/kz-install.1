@@ -20,8 +20,8 @@ kz-install \- Install apps
 .SH DESCRIPTION
 \fBkz install\fR installs apps and changes system settings.
 .sp
-In a graphical work environment command \fBkz install\fR can be executed by
-searching for \fBapps\fR, click on \fBApps install\fR.
+In a desktop environment command \fBkz install\fR can be executed by searching
+for \fBapps\fR, click on \fBApps install\fR.
 .sp
 Use \fBkz setup\fR (after \fBkz install\fR) to set up apps and change user
 settings.
@@ -29,7 +29,7 @@ settings.
 \fBkz install\fR processes an input file ("install file") that contains
 commands for installing apps and modifying system settings.
 .sp
-For the format of the input files see the section \fBFILE FORMAT\fR below.
+For the format of the input file see the section \fBFILE FORMAT\fR below.
 .sp
 By default, \fBkz install\fR processes the input file /usr/bin/kz-install.sh
 .br
@@ -51,8 +51,8 @@ Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
 specified.
 .sp
-With option \fB-g\fR, \fB--gui\fR, \fBkz install\fR runs in graphical mode,
-requires desktop environment.
+With option \fB-g\fR, \fB--gui\fR, \fBkz install\fR is run in graphical mode. A
+desktop environment is required.
 .sp
 With option \fB-r\fR, \fB--remove\fR the installation can be undone, the mode
 then changes from Install to Remove.
@@ -240,8 +240,8 @@ Display the contents of the command file.
 Specify input file \fIFILE\fR.
 .TP
 \fB-g\fR, \fB--gui\fR
-Run in graphical mode (gui=graphical user interface), requires desktop
-environment.
+Run in graphical mode (gui=graphical user interface). A desktop environment is
+required.
 .TP
 \fB-r\fR, \fB--remove\fR
 Remove apps.

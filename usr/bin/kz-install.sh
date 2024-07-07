@@ -5,6 +5,7 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
+# For the format of this file see the kz install man page.
 
 # Install disabled-apport on *
 #
