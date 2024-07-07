@@ -20,7 +20,7 @@ kz-nas\ - Mount network drive
 .SH DESCRIPTION
 \fBkz nas\fR mounts a NAS during startup.
 .sp
-In a graphical work environment command \fBkz nas\fR can be executed by
+In a desktop environment command \fBkz nas\fR can be executed by
 searching for \fBnas\fR, click on \fBMount network drive\fR.
 .sp
 A systemd mount file is created and activated.
@@ -43,8 +43,8 @@ Make sure the NAS has a fixed IP address. This requires:
 Use command \fBsudo systemctl disable mnt-kz-nas.mount\fR to deactivate the
 systemd mount file.
 .sp
-With option \fB-g\fR, \fB--gui\fR, \fBkz nas\fR runs in graphical mode,
-requires desktop environment.
+With option \fB-g\fR, \fB--gui\fR, \fBkz nas\fR runs in graphical mode. A
+desktop environment is required.
 .sp
 NAS is an acronym, and abbreviation, of network-attached storage.
 .\"
@@ -52,8 +52,8 @@ NAS is an acronym, and abbreviation, of network-attached storage.
 .SH OPTIONS
 .TP
 \fB-g\fR, \fB--gui\fR
-Run in graphical mode (gui=graphical user interface), requires desktop
-environment.
+Run in graphical mode (gui=graphical user interface). A desktop environment is
+required.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.
