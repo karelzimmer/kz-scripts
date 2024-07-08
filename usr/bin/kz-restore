@@ -196,51 +196,6 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 }
 
 
-# This function restores the user settings.
-function restore_settings {
-    if $DESKTOP_ENVIRONMENT; then
-        $option_gui || infomsg "$(gettext 'Restore settings...')"
-        restore_setting_desktop
-        restore_setting_avatar
-    fi
-}
-
-
-# This function restores the desktop background.
-function restore_setting_desktop {
-    local input_file=$(xdg-user-dir PICTURES)/desktop
-
-    if [[ -f $input_file ]]; then
-        logmsg 'Restore the desktop background...'
-        gsettings   set                                         \
-                    org.gnome.desktop.background picture-uri    \
-                    "file://$input_file"
-    fi
-}
-
-
-# This function copies the user avatar.
-function restore_setting_avatar {
-    local input_file=$(xdg-user-dir PICTURES)/avatar
-
-    if [[ -f $input_file ]]; then
-        logmsg 'Restore the user avatar...'
-        title=$(gettext 'Set user photo')
-        text="
-$(gettext "To restore the users avatar:
-1. Press the Super key[1], type 'user' and click behind Settings on Users.
-2. Click on Change avatar (pencil icon).
-3. Click Select a file.
-4. Select avatar in Personal folder / Pictures.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-        infomsg "$text"
-        $option_gui || wait_for_enter
-    fi
-}
-
-
 # This function restores the backup.
 function restore_backup {
     local       error_file=''
@@ -299,14 +254,80 @@ use app 'Terminal', type 'kz restore'.")
 }
 
 
+# This function restores the user settings.
+function restore_settings {
+    if $DESKTOP_ENVIRONMENT; then
+        $option_gui || infomsg "$(gettext 'Restore settings...')"
+        restore_setting_desktop
+        restore_setting_avatar
+    fi
+}
+
+
+# This function restores the desktop background.
+function restore_setting_desktop {
+    local input_file=$(xdg-user-dir PICTURES)/desktop
+
+    if [[ -f $input_file ]]; then
+        logmsg 'Restore the desktop background...'
+        gsettings   set                                         \
+                    org.gnome.desktop.background picture-uri    \
+                    "file://$input_file"
+    fi
+}
+
+
+# This function saves instructions for restoring the user avatar.
+function restore_setting_avatar {
+    local input_file=$(xdg-user-dir PICTURES)/avatar
+    local output_file=$(xdg-user-dir DOCUMENTS)/avatar
+
+    if [[ -f $input_file ]]; then
+        logmsg 'Restore the user avatar instructions...'
+        text="$(gettext "To restore the users avatar:
+1. Press the Super key[1], type 'user' and click behind Settings on Users.
+2. Click on Change avatar (pencil icon).
+3. Click Select a file.
+4. Select avatar in Personal folder / Pictures.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
+hromebook).")"
+        printf '%s\n' "$text" > "$output_file"
+    fi
+}
+
+
 # This function controls the termination of the script.
 function term_script {
+    local       num_users=$(find /home/* -prune -print | wc --lines)
+    local   -i  unmount_rc=0
+    # shellcheck disable=SC2034
+    local       users=$(cd /home; find ./* -prune -printf '%f\n')
+    local       x_text=''
+
     if [[ $source_medium == /media/* ]]; then
-        term_script_unmount
-    else
-        text=$(gettext 'The backup has been restored.')
-        infomsg "$text"
+        term_script_unmount || unmount_rc=$?
+        if [[ $unmount_rc -eq $OK ]]; then
+            x_text="
+
+$(gettext 'The USB medium can be removed.')"
+        else
+            x_text="
+
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
+        fi
     fi
+    if [[ $num_users -eq 1 ]]; then
+        text=$(gettext 'The backup has been restored.')
+    else
+        text=$(eval_gettext "The backup has restored for \$USER (there are \$n\
+um_users users).
+
+Users:
+\$users")
+    fi
+    infomsg "$text$x_text"
+
     exit $OK
 }
 
@@ -348,18 +369,8 @@ function term_script_unmount {
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
     fi
-    if [[ $rc -eq $OK ]]; then
-        text="$(gettext 'The backup has been restored.')
 
-$(gettext 'The USB medium can be removed.')"
-        infomsg "$text"
-    else
-        text="$(gettext 'The backup has been restored.')
-
-$(gettext 'Disconnect the USB medium yourself (safely!).')"
-        infomsg "$text"
-
-    fi
+    return $rc
 }
 
 

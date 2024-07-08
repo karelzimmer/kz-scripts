@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-03 08:04+0200\n"
+"POT-Creation-Date: 2024-07-08 19:04+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -322,6 +322,18 @@ msgstr "Koppel zelf (veilig!) het usb-medium af."
 
 msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
+
+#, sh-format
+msgid ""
+"The backup has been made for $USER (there are $num_users users).\n"
+"\n"
+"Users:\n"
+"$users"
+msgstr ""
+"De back-up is gemaakt voor $USER (er zijn $num_users gebruikers).\n"
+"\n"
+"Gebruikers:\n"
+"$users"
 
 msgid "Build package kz"
 msgstr "Pakket kz bouwen"
@@ -713,10 +725,6 @@ msgstr ""
 "# Gebruiker kan wachtwoord instellen bij de eerste keer aanmelden:\n"
 "sudo passwd --delete --expire _gebruikersnaam_"
 
-msgid "See file /root/add-users.txt how to add dditional _user_s."
-msgstr "Zie bestand /root/add-users.txt voor informatie over het toevoegen "
-"van extra _gebruiker_s."
-
 msgid "Prepare installation"
 msgstr "Installatie voorbereiden"
 
@@ -925,6 +933,19 @@ msgstr ""
 
 msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
+
+
+#, sh-format
+msgid ""
+"The backup has restored for $USER (there are $num_users users).\n"
+"\n"
+"Users:\n"
+"$users"
+msgstr ""
+"De back-up is teruggezet voor $USER (er zijn $num_users gebruikers).\n"
+"\n"
+"Gebruikers:\n"
+"$users"
 
 #, sh-format
 msgid ""

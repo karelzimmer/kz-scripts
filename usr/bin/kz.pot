@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-05 11:02+0200\n"
+"POT-Creation-Date: 2024-07-08 19:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -281,6 +281,14 @@ msgid "Disconnect the USB medium yourself (safely!)."
 msgstr ""
 
 msgid "The backup has been made."
+msgstr ""
+
+#, sh-format
+msgid ""
+"The backup has been made for $USER (there are $num_users users).\n"
+"\n"
+"Users:\n"
+"$users"
 msgstr ""
 
 msgid "Build package kz"
@@ -610,9 +618,6 @@ msgid ""
 "sudo passwd --delete --expire _username_"
 msgstr ""
 
-msgid "See file /root/add-users.txt how to add dditional _user_s."
-msgstr ""
-
 msgid "Prepare installation"
 msgstr ""
 
@@ -782,6 +787,14 @@ msgid ""
 msgstr ""
 
 msgid "The backup has been restored."
+msgstr ""
+
+#, sh-format
+msgid ""
+"The backup has restored for $USER (there are $num_users users).\n"
+"\n"
+"Users:\n"
+"$users"
 msgstr ""
 
 #, sh-format

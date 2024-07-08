@@ -485,11 +485,6 @@ use app 'Terminal', type 'kz install \$failed_apps_text'.")
             operation=$(gettext 'remove')
         fi
         text=$(eval_gettext "Apps \$operation completed.")
-        if ! ($argument_app || $option_remove); then
-            text+="
-
-$(gettext "See file /root/add-users.txt how to add dditional _user_s.")"
-        fi
         if $reboot; then
             text+="
 
@@ -503,30 +498,6 @@ ging system settings.")"
         fi
     fi
     exit $OK
-}
-
-
-# This function saves instructions for adding additional users.
-function add_additional_users {
-    if $DESKTOP_ENVIRONMENT; then
-        text="$(gettext 'Additional _user_s can be added manually:')
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
- Users.
-2. Click on Unlock and then Add User.
-3. Enter Name _user_ and Username _username_.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-    else
-        text="$(gettext 'Additional _user_s can be added manually:')
-$(gettext "# Standard:
-sudo useradd --create-home --comment '_user_' _username_
-# Administrator:
-sudo usermod --append --groups adm,sudo _username_
-# User sets password on first login:
-sudo passwd --delete --expire _username_")"
-    fi
-    printf '%s\n' "$text" > /root/add-users.txt
 }
 
 

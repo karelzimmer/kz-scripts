@@ -198,6 +198,7 @@ lease rename to 'USER@HOST'.")"
 # This function backups the user settings.
 function backup_settings {
     backup_setting_apps
+    backup_setting_users
     if $DESKTOP_ENVIRONMENT; then
         $option_gui || infomsg "$(gettext 'Secure settings...')"
         backup_setting_avatar
@@ -229,6 +230,33 @@ function backup_setting_apps {
 }
 
 
+# This function saves instructions for adding additional users.
+function backup_setting_users {
+    local output_file=$(xdg-user-dir DOCUMENTS)/users
+
+    logmsg 'Adding additional users instructions...'
+    if $DESKTOP_ENVIRONMENT; then
+        text="$(gettext 'Additional _user_s can be added manually:')
+$(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
+ Users.
+2. Click on Unlock and then Add User.
+3. Enter Name _user_ and Username _username_.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
+hromebook).")"
+    else
+        text="$(gettext 'Additional _user_s can be added manually:')
+$(gettext "# Standard:
+sudo useradd --create-home --comment '_user_' _username_
+# Administrator:
+sudo usermod --append --groups adm,sudo _username_
+# User sets password on first login:
+sudo passwd --delete --expire _username_")"
+    fi
+    printf '%s\n' "$text" > "$output_file"
+}
+
+
 # This function copies the user avatar.
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
@@ -236,6 +264,7 @@ function backup_setting_avatar {
 
     logmsg 'Copy the user avatar...'
     cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
+    touch "$output_file"
 }
 
 
@@ -258,6 +287,7 @@ function backup_setting_desktop {
     if [[ $input_file != *.xml ]]; then
         cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
     fi
+    touch "$output_file"
 }
 
 
@@ -346,6 +376,7 @@ EOF
                 "$target"/                     2> "$error_file" || backup_rc=$?
     fi
     rm --verbose "$exclude_file" |& $LOGCMD
+
     text=$(gettext "Writing data from memory (this may take a while)")
     if $option_gui; then
         logmsg "$text..."
@@ -388,12 +419,35 @@ use app 'Terminal', type 'kz backup'.")"
 
 # This function controls the termination of the script.
 function term_script {
+    local       num_users=$(find /home/* -prune -print | wc --lines)
+    local   -i  unmount_rc=0
+    # shellcheck disable=SC2034
+    local       users=$(cd /home; find ./* -prune -printf '%f\n')
+    local       x_text=''
+
     if [[ $target_medium == /media/* ]]; then
-        term_script_unmount
-    else
-        text=$(gettext 'The backup has been made.')
-        infomsg "$text"
+        term_script_unmount || unmount_rc=$?
+        if [[ $unmount_rc -eq $OK ]]; then
+            x_text="
+
+$(gettext 'The USB medium can be removed.')"
+        else
+            x_text="
+
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
+        fi
     fi
+    if [[ $num_users -eq 1 ]]; then
+        text=$(gettext "The backup has been made.")
+    else
+        text=$(eval_gettext "The backup has been made for \$USER (there are \$\
+num_users users).
+
+Users:
+\$users")
+    fi
+    infomsg "$text$x_text"
+
     exit $OK
 }
 
@@ -435,17 +489,8 @@ function term_script_unmount {
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
         udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
     fi
-    if [[ $rc -eq $OK ]]; then
-        text="$(gettext 'The backup has been made.')
 
-$(gettext 'The USB medium can be removed.')"
-        infomsg "$text"
-    else
-        text="$(gettext 'The backup has been made.')
-
-$(gettext 'Disconnect the USB medium yourself (safely!).')"
-        infomsg "$text"
-    fi
+    return $rc
 }
 
 
