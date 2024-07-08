@@ -198,9 +198,11 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the user settings.
 function restore_settings {
-    $option_gui || infomsg "$(gettext 'Restore settings...')"
-    restore_setting_desktop
-    restore_setting_avatar
+    if $DESKTOP_ENVIRONMENT; then
+        $option_gui || infomsg "$(gettext 'Restore settings...')"
+        restore_setting_desktop
+        restore_setting_avatar
+    fi
 }
 
 

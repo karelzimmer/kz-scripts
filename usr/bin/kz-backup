@@ -197,11 +197,13 @@ lease rename to 'USER@HOST'.")"
 
 # This function backups the user settings.
 function backup_settings {
-    $option_gui || infomsg "$(gettext 'Secure settings...')"
     backup_setting_apps
-    backup_setting_avatar
-    backup_setting_desktop
-    backup_setting_favs
+    if $DESKTOP_ENVIRONMENT; then
+        $option_gui || infomsg "$(gettext 'Secure settings...')"
+        backup_setting_avatar
+        backup_setting_desktop
+        backup_setting_favs
+    fi
 }
 
 
