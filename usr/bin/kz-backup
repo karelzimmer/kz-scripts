@@ -262,32 +262,32 @@ function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
     local output_file=$(xdg-user-dir PICTURES)/avatar
 
-    logmsg 'Copy the user avatar...'
-    cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
-    touch "$output_file"
+    if [[ -e $input_file ]]; then
+        logmsg 'Copy the user avatar...'
+        cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
+        touch "$output_file"
+    fi
 }
 
 
 # This function copies the desktop background.
 function backup_setting_desktop {
-    local input_file=''
-    local output_file=$(xdg-user-dir PICTURES)/desktop
-
-    logmsg 'Copy the desktop background...'
-    input_file=$(
+    local input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed --expression='s|%20| |g'                            |
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
+    local output_file=$(xdg-user-dir PICTURES)/desktop
 
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
-    if [[ $input_file != *.xml ]]; then
+    if [[ -e $input_file && $input_file != *.xml ]]; then
+        logmsg 'Copy the desktop background...'
         cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
+        touch "$output_file"
     fi
-    touch "$output_file"
 }
 
 
