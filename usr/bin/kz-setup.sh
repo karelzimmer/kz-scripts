@@ -200,6 +200,12 @@ rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
 # Reset restore-thumbnails for -nouser
 # There is no command available to reset restored thumbnails.
 
+# Setup private-home for *
+chmod 750 "$HOME"
+
+# Reset private-home for *
+chmod 755 "$HOME"
+
 # Setup sound-juicer for emily@pc-van-emily
 kz-gset --addaft=org.gnome.SoundJuicer
 
