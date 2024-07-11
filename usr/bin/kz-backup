@@ -244,24 +244,30 @@ function backup_setting_users {
     if [[ $NUM_USERS -gt 1 ]]; then
         logmsg 'Adding additional users instructions...'
         if $DESKTOP_ENVIRONMENT; then
-            text="$(gettext 'Additional _user_s can be added manually:')
+            text="$(eval_gettext 'Additional _user_s can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.
 2. Click on Unlock and then Add User.
 3. Enter Name _user_ and Username _username_.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
+hromebook).")
+
+$(eval_gettext "USER\tUID\tUSERNAME
+\$USERS")"
         else
-            text="$(gettext 'Additional _user_s can be added manually:')
+            text="$(eval_gettext 'Additional _user_s can be added manually:')
 $(gettext "# Standard:
 sudo useradd --create-home --comment '_user_' _username_
 # Administrator:
 sudo usermod --append --groups adm,sudo _username_
 # User sets password on first login:
-sudo passwd --delete --expire _username_")"
+sudo passwd --delete --expire _username_")
+
+$(eval_gettext "USER\tUID\tUSERNAME
+\$USERS")"
         fi
-        printf '%s\n' "$text" > "$output_file"
+        printf '%b\n' "$text" > "$output_file"
     fi
 }
 

@@ -350,7 +350,6 @@ function install_apps {
 
     app_tot_num=$(grep --regexp="#.* $mode " --count "$command_file" || true)
     [[ $app_tot_num -ne 0 ]] || return $OK
-    $argument_app || add_additional_users
 
     title=$(gettext 'Install apps')
     text=$(gettext 'Prepare installation')
@@ -488,8 +487,10 @@ use app 'Terminal', type 'kz install \$failed_apps_text'.")
         if $reboot; then
             text+="
 
-$(gettext "The computer will now reboot to finish installing the apps and chan\
-ging system settings.")"
+$(gettext "Use users in Personal folder / Documents to add users.
+
+The computer will now reboot to finish installing the apps and changing system\
+ settings.")"
         fi
         infomsg "$text"
         if $reboot; then
