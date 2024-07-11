@@ -264,8 +264,8 @@ sudo passwd --delete --expire _username_")
 
 $(eval_gettext "USER\tUID\tUSERNAME
 \$USERS")"
-        printf '%b\n' "$text" > "$output_file"
     fi
+    printf '%b\n' "$text" > "$output_file"
 }
 
 
