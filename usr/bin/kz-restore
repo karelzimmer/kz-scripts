@@ -327,7 +327,7 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
         text="$(eval_gettext "The backup has restored for \$USER (there are \$\
 NUM_USERS users).")
 
-$(eval_gettext "USER\tUID\tUSERNAME
+$(eval_gettext "User\tUser ID\tUser name
 \$USERS")"
     fi
     infomsg "$text$x_text"
