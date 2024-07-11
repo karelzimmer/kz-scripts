@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-09 08:43+0200\n"
+"POT-Creation-Date: 2024-07-11 12:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -284,11 +284,13 @@ msgid "The backup has been made."
 msgstr ""
 
 #, sh-format
+msgid "The backup has been made for $USER (there are $NUM_USERS users)."
+msgstr ""
+
+#, sh-format
 msgid ""
-"The backup has been made for $USER (there are $num_users users).\n"
-"\n"
 "USER\\tUID\\tUSERNAME\n"
-"$users"
+"$USERS"
 msgstr ""
 
 msgid "Build package kz"
@@ -790,11 +792,7 @@ msgid "The backup has been restored."
 msgstr ""
 
 #, sh-format
-msgid ""
-"The backup has restored for $USER (there are $num_users users).\n"
-"\n"
-"USER\\tUID\\tUSERNAME\n"
-"$users"
+msgid "The backup has restored for $USER (there are $NUM_USERS users)."
 msgstr ""
 
 #, sh-format
