@@ -252,7 +252,7 @@ $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
 hromebook).")
 
-$(eval_gettext "USER\tUID\tUSERNAME
+$(eval_gettext "User\tUser ID\tUser ID Info
 \$USERS")"
     else
         text="$(eval_gettext 'Additional _user_s can be added manually:')
@@ -263,7 +263,7 @@ sudo usermod --append --groups adm,sudo _username_
 # User sets password on first login:
 sudo passwd --delete --expire _username_")
 
-$(eval_gettext "USER\tUID\tUSERNAME
+$(eval_gettext "User\tUser ID\tUser ID Info
 \$USERS")"
     fi
     printf '%b\n' "$text" > "$output_file"
@@ -453,7 +453,7 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
         text="$(eval_gettext "The backup has been made for \$USER (there are \
 \$NUM_USERS users).")
 
-$(eval_gettext "USER\tUID\tUSERNAME
+$(eval_gettext "User\tUser ID\tUser ID Info
 \$USERS")"
     fi
     infomsg "$text$x_text"
