@@ -289,7 +289,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"User\\tUser ID\\tUser name\n"
+"User\\tUserID\\tName\n"
 "$USERS"
 msgstr ""
 

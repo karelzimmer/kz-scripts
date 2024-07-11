@@ -329,10 +329,10 @@ msgstr "De back-up is gemaakt voor $USER (er zijn $NUM_USERS gebruikers)."
 
 #, sh-format
 msgid ""
-"User\\tUser ID\\tUser name\n"
+"User\\tUserID\\tName\n"
 "$USERS"
 msgstr ""
-"Gebr.\\tGebr.ID\\tGebr.naam\n"
+"User\\tUserID\\tNaam\n"
 "$USERS"
 
 msgid "Build package kz"
