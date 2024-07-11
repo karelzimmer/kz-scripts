@@ -47,6 +47,7 @@ readonly X_OPTIONS_SHORT='gt:'
 readonly X_OPTIONS_LONG=',gui,target:'
 
 readonly SOURCE=$HOME
+readonly NUM_USERS=$(find /home/* -prune -print | wc --lines)
 # shellcheck disable=SC2034
 readonly USERS=$(
                 grep --regexp='/home' /etc/passwd   |
@@ -433,7 +434,6 @@ use app 'Terminal', type 'kz backup'.")"
 function term_script {
     local   -i  unmount_rc=0
     local       x_text=''
-    local       num_users=$(find /home/* -prune -print | wc --lines)
 
     if [[ $target_medium == /media/* ]]; then
         term_script_unmount || unmount_rc=$?
@@ -447,11 +447,11 @@ $(gettext 'The USB medium can be removed.')"
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
         fi
     fi
-    if [[ $num_users -eq 1 ]]; then
+    if [[ $NUM_USERS -eq 1 ]]; then
         text=$(gettext "The backup has been made.")
     else
         text="$(eval_gettext "The backup has been made for \$USER (there are \
-\$num_users users).")
+\$NUM_USERS users).")
 
 $(eval_gettext "USER\tUID\tUSERNAME
 \$USERS")"
