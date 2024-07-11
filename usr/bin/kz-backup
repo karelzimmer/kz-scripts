@@ -241,10 +241,9 @@ function backup_setting_apps {
 function backup_setting_users {
     local output_file=$(xdg-user-dir DOCUMENTS)/users
 
-    if [[ $NUM_USERS -gt 1 ]]; then
-        logmsg 'Adding additional users instructions...'
-        if $DESKTOP_ENVIRONMENT; then
-            text="$(eval_gettext 'Additional _user_s can be added manually:')
+    logmsg 'Adding additional users instructions...'
+    if $DESKTOP_ENVIRONMENT; then
+        text="$(eval_gettext 'Additional _user_s can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.
 2. Click on Unlock and then Add User.
@@ -255,8 +254,8 @@ hromebook).")
 
 $(eval_gettext "USER\tUID\tUSERNAME
 \$USERS")"
-        else
-            text="$(eval_gettext 'Additional _user_s can be added manually:')
+    else
+        text="$(eval_gettext 'Additional _user_s can be added manually:')
 $(gettext "# Standard:
 sudo useradd --create-home --comment '_user_' _username_
 # Administrator:
@@ -266,7 +265,6 @@ sudo passwd --delete --expire _username_")
 
 $(eval_gettext "USER\tUID\tUSERNAME
 \$USERS")"
-        fi
         printf '%b\n' "$text" > "$output_file"
     fi
 }
