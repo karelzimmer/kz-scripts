@@ -332,7 +332,7 @@ msgid ""
 "User\\tUserID\\tName\n"
 "$USERS"
 msgstr ""
-"User\\tUserID\\tNaam\n"
+"Gebr\\tGebrID\\tNaam\n"
 "$USERS"
 
 msgid "Build package kz"
