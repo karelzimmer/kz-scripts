@@ -266,12 +266,11 @@ function restore_settings {
     if $DESKTOP_ENVIRONMENT; then
         $option_gui || infomsg "$(gettext 'Restore settings...')"
         restore_setting_desktop
-        restore_setting_avatar
     fi
 }
 
 
-# This function restores the desktop background.
+# This function restores the desktop background, if possible.
 function restore_setting_desktop {
     local input_file=$(xdg-user-dir PICTURES)/desktop
 
@@ -280,26 +279,6 @@ function restore_setting_desktop {
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
                     "file://$input_file"
-    fi
-}
-
-
-# This function saves instructions for restoring the user avatar.
-function restore_setting_avatar {
-    local input_file=$(xdg-user-dir PICTURES)/avatar
-    local output_file=$(xdg-user-dir DOCUMENTS)/avatar
-
-    if [[ -f $input_file ]]; then
-        logmsg 'Restore the user avatar instructions...'
-        text="$(gettext "To restore the users avatar:
-1. Press the Super key[1], type 'user' and click behind Settings on Users.
-2. Click on Change avatar (pencil icon).
-3. Click Select a file.
-4. Select avatar in Personal folder / Pictures.
-
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-        printf '%s\n' "$text" > "$output_file"
     fi
 }
 

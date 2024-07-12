@@ -485,12 +485,19 @@ use app 'Terminal', type 'kz install \$failed_apps_text'.")
         fi
         text=$(eval_gettext "Apps \$operation completed.")
         if $reboot; then
+            if $DESKTOP_ENVIRONMENT; then
+                text+="
+
+$(gettext "Use users in Personal folder / Documents to add users.")"
+            else
+                text+="
+
+$(gettext "Use users in Personal folder to add users.")"
+            fi
             text+="
 
-$(gettext "Use users in Personal folder / Documents to add users.
-
-The computer will now reboot to finish installing the apps and changing system\
- settings.")"
+$(gettext "The computer will now reboot to finish installing the apps and chan\
+ging system settings.")"
         fi
         infomsg "$text"
         if $reboot; then

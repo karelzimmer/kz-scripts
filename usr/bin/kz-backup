@@ -270,20 +270,32 @@ $(eval_gettext "User\tUserID\tName
 }
 
 
-# This function copies the user avatar.
+# This function copies the user avatar and saves instructions for restoring, if
+# possible.
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file=$(xdg-user-dir PICTURES)/avatar
+    local output_file_1=$(xdg-user-dir PICTURES)/avatar
+    local output_file_2=$(xdg-user-dir DOCUMENTS)/avatar
 
     if [[ -e $input_file ]]; then
         logmsg 'Copy the user avatar...'
-        cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
-        touch "$output_file"
+        cp --preserve --verbose "$input_file" "$output_file_1" |& $LOGCMD
+        logmsg 'Save restore the avatar instructions...'
+        text="$(gettext "To restore the users avatar:
+1. Press the Super key[1], type 'user' and click behind Settings on Users.
+2. Click on Change avatar (pencil icon).
+3. Click Select a file.
+4. Select avatar in Personal folder / Pictures.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
+hromebook).")"
+        printf '%s\n' "$text" > "$output_file_2"
+        touch "$output_file_1" "$output_file_2"
     fi
 }
 
 
-# This function copies the desktop background.
+# This function copies the desktop background, if available.
 function backup_setting_desktop {
     local input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
