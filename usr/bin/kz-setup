@@ -287,8 +287,8 @@ function process_input_file_by_app {
                 continue
                 ;;
             *)
-                # Command record.
                 if $app_match; then
+                    # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
@@ -321,8 +321,8 @@ function process_input_file_by_user {
                 continue
                 ;;
             *)
-                # Command record.
                 if $user_match; then
+                    # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
@@ -383,10 +383,6 @@ function process_command_file {
 
     while read -r command_record; do
         case $command_record in
-            '')
-                # Blank line.
-                continue
-                ;;
             '#'*"$mode"*)
                 # App record.
                 app_name=$(
@@ -402,8 +398,8 @@ function process_command_file {
                         "$app_tot_num"      \
                         "$app_name"
                 ;;
-            '#'*)
-                # Comment line. Use the cat option to view it.
+            ''|'#'*)
+                # Empty record or comment line. Use cat option to view.
                 continue
                 ;;
             *)
