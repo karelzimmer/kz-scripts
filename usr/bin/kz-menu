@@ -65,7 +65,7 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
             MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-readonly MENU2_HEAD="--------------- $MENU2_TITLE ---------------"
+readonly MENU2_HEAD="-------------- $MENU2_TITLE --------------"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
@@ -198,10 +198,10 @@ function process_menu1_tui {
     local menu1_action=''
 
     while true; do
-        printf  '\n\n%s\n\n%3s  %-24s  %s\n'    \
-                "$MENU1_HEAD"                   \
-                "$(gettext 'NUM')"              \
-                "$(gettext 'ACTION')"           \
+        printf  '\n%s\n\n%3s  %-24s  %s\n'  \
+                "$MENU1_HEAD"               \
+                "$(gettext 'NUM')"          \
+                "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
         for menu1_action in "${!MENU1_ACTIONS[@]}"; do
             printf  '%3s  %-24s  %s\n'                  \
@@ -331,23 +331,23 @@ function process_menu2_gui {
     while true; do
         title=$MENU2_TITLE
         REPLY=$(
-            zenity  --list                                              \
-                    --radiolist                                         \
-                    --width         520                                 \
-                    --height        420                                 \
-                    --title         "$title"                            \
-                    --text          "$(gettext 'Select a choice:')"     \
-                    --ok-label      "$(gettext 'Continue')"             \
-                    --cancel-label  "$(gettext 'Back')"                 \
-                    --column        "$(gettext 'CHOICE')"               \
-                    --column        "$(gettext 'NUM')"                  \
-                    --column        "$(gettext 'COMMAND')"              \
-                    --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"  \
-                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"  \
-                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"  \
-                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_COMMANDS[4]}"  \
-                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"  \
+            zenity  --list                                                  \
+                    --radiolist                                             \
+                    --width         520                                     \
+                    --height        420                                     \
+                    --title         "$title"                                \
+                    --text          "$(gettext 'Select a choice:')"         \
+                    --ok-label      "$(gettext 'Continue')"                 \
+                    --cancel-label  "$(gettext 'Back')"                     \
+                    --column        "$(gettext 'CHOICE')"                   \
+                    --column        "$(gettext 'NUM')"                      \
+                    --column        "$(gettext 'ACTION')"                   \
+                    --column        "$(gettext 'COMMAND')"                  \
+                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"    \
+                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"    \
+                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"    \
+                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_COMMANDS[4]}"    \
+                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"    \
                     2> >($LOGCMD)
             ) || break
         process_menu2_choice
@@ -360,10 +360,10 @@ function process_menu2_tui {
     local menu2_command=''
 
     while true; do
-        printf  '\n\n%s\n\n%3s  %-25s  %s\n'    \
-                "$MENU2_HEAD"                   \
-                "$(gettext 'NUM')"              \
-                "$(gettext 'DESCRIPTION')"      \
+        printf  '\n%s\n\n%3s  %-25s  %s\n'  \
+                "$MENU2_HEAD"               \
+                "$(gettext 'NUM')"          \
+                "$(gettext 'ACTION')"  \
                 "$(gettext 'COMMAND')"
         for menu2_command in "${!MENU2_COMMANDS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
