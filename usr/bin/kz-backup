@@ -335,7 +335,6 @@ function create_backup {
 
     error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
     exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
-
     # Déjà Dup: Some locations are ignored by default.
     cat << EOF > "$exclude_file"
 .cache
@@ -343,11 +342,10 @@ function create_backup {
 .gvfs
 .Private
 .steam/root
-.thumbnails
 .var/app/*/cache
 .xsession-errors
-*CACHEDIR.TAG*
 snap/*/*/.cache
+*CACHEDIR.TAG*
 EOF
 
     # Skip git-controlled directories.
