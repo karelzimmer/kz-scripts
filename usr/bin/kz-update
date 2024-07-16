@@ -67,7 +67,7 @@ def perform_repair():
 
 def perform_update():
     """
-    This function updates installed Debian packages.
+    This function updates installed Debian packages and snaps if installed.
     """
     text = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, text)
