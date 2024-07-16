@@ -338,7 +338,6 @@ function create_backup {
 
     # Déjà Dup: Some locations are ignored by default.
     cat << EOF > "$exclude_file"
-.adobe/Flash_Player/AssetCache
 .cache
 .ccache
 .gvfs
@@ -347,10 +346,10 @@ function create_backup {
 .recently-used.xbel
 .steam/root
 .thumbnails
-.var/src/*/cache
+.var/app/*/cache
 .xsession-errors
-snap/*/*/.cache
 *CACHEDIR.TAG*
+snap/*/*/.cache
 EOF
 
     # Skip git-controlled directories.
