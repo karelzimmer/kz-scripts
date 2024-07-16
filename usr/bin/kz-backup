@@ -342,8 +342,6 @@ function create_backup {
 .ccache
 .gvfs
 .Private
-.recent-applications.xbel
-.recently-used.xbel
 .steam/root
 .thumbnails
 .var/app/*/cache
