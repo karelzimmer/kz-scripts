@@ -7,7 +7,6 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-
 ###############################################################################
 # Import
 ###############################################################################
@@ -65,7 +64,7 @@ readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
             MENU2_TITLE=$(gettext 'Command menu')
 readonly MENU2_TITLE
-readonly MENU2_HEAD="-------------- $MENU2_TITLE --------------"
+readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
