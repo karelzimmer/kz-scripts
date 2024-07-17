@@ -208,18 +208,18 @@ function process_option_apps {
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --no-messages           \
-                --regexp=".*#.*$mode.*" \
-                "$input_file"           |
-        tr      --squeeze-repeats       \
-                '[:space:]'             |
-        cut     --delimiter=' '         \
-                --fields=3              |
-        sort    --unique                |
-        nl      --number-width=3        \
-                --number-format=rn      \
-                --number-separator='  ' \
-                --body-numbering=a      || true
+        grep    --no-messages               \
+                --regexp="#.*$mode.* for "  \
+                "$input_file"               |
+        tr      --squeeze-repeats           \
+                '[:space:]'                 |
+        cut     --delimiter=' '             \
+                --fields=3                  |
+        sort    --unique                    |
+        nl      --number-width=3            \
+                --number-format=rn          \
+                --number-separator='  '     \
+                --body-numbering=a          || true
         )
     if [[ -n $apps ]]; then
         text+=$apps
@@ -266,7 +266,7 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*"$app_argument"*)
+            '#'*"$mode"*"$app_argument"*' for '*)
                 # Possible matching app record (app_argument is user input).
                 app_match=false
                 app_name=$(
@@ -310,7 +310,7 @@ function process_input_file_by_user {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*'*'|'#'*"$mode"*"$USER"'@'"$HOSTNAME"*)
+            '#'*"$mode"*' for '*'*'|'#'*"$mode"*' for '*"$USER"'@'"$HOSTNAME"*)
                 # Matching app record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
