@@ -29,14 +29,19 @@ van gebruikersinstellingen.
 \fBkz setup\fR verwerkt een invoerbestand ("instelbestand") die opdrachten
 bevat voor het instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
-Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
-hieronder.
-.sp
 Standaard verwerkt \fBkz setup\fR het invoerbestand /usr/bin/kz-setup.sh. Dit
 invoerbestand bevat instel-opdrachten voor alle hierin opgenomen gebruikers.
 .br
+De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
+herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
+.br
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige gebruiker geselecteerd en gekopieerd naar het opdrachtbestand.
+.br
+De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+.sp
+Voor de indeling van het invoerbestand zie het deel \fBBESTANDSINDELING\fR
+hieronder.
 .sp
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst alle van apps die beschikbaar zijn
 in het invoerbestand.
@@ -64,15 +69,8 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-De naamgeving van het meegeleverde invoerbestand is kz-setup.sh.
-.br
 In het invoerbestand staan zogenaamde \fBApp-regels\fR en
 \fBOpdracht-regels\fR.
-.br
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
-.sp
-De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
-herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels
 verwerkt worden.
