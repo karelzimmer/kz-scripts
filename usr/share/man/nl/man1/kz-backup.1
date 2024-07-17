@@ -40,23 +40,20 @@ worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
 .sp
 Deze locaties worden standaard genegeerd:
 .RS
- .adobe/Flash_Player/AssetCache
  .cache
  .ccache
  .gvfs
  .Private
- .recent-applications.xbel
- .recently-used.xbel
  .steam/root
- .thumbnails
- .var/src/*/cache
+ .var/app/*/cache
  .xsession-errors
  snap/*/*/.cache
- *CACHEDIR.TAG*
+ *CACHEDIR.TAG* (d.w.z. elke map met een CACHEDIR.TAG)
 .RE
 Tevens worden door Git beheerde mappen ("git-controlled") niet in de back-up
 opgenomen.
-Voorbeeld: ~/bin wordt overgeslagen vanwege de aanwezigheid van ~/bin/.git.
+Voorbeeld: ~/kz-scripts wordt overgeslagen vanwege de aanwezigheid van
+~/kz-scripts/.git.
 .sp
 Voor het maken van de back-up wordt rsync gebruikt.
 .sp

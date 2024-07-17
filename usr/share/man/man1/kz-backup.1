@@ -38,22 +38,18 @@ specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
 These locations are ignored by default:
 .RS
- .adobe/Flash_Player/AssetCache
  .cache
  .ccache
  .gvfs
  .Private
- .recent-applications.xbel
- .recently-used.xbel
  .steam/root
- .thumbnails
- .var/src/*/cache
+ .var/app/*/cache
  .xsession-errors
  snap/*/*/.cache
- *CACHEDIR.TAG*
+ *CACHEDIR.TAG* (i.e. any folder with a CACHEDIR.TAG)
 .RE
 Also, directories managed by Git are not backed up.
-Example: ~/bin is skipped due to the presence of ~/bin/.git.
+Example: ~/kz-scripts is skipped due to the presence of ~/kz-scripts/.git.
 .sp
 rsync is used to create the backup.
 .sp
