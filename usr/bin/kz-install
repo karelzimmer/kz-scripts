@@ -66,7 +66,7 @@ declare -A  app_arguments=()
 declare -A  failed_apps=()
 declare     argument_app=false
 declare     file_argument=''
-declare     on_from=' on '
+declare     on_from='on'
 declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME.sh
 declare     mode='Install'
 declare     mode_reverse='Remove'
@@ -143,7 +143,7 @@ $USAGE_LINE"
                 option_remove=true
                 mode='Remove'
                 mode_reverse='Install'
-                on_from=' from '
+                on_from='from'
                 shift
                 ;;
             --)
@@ -217,7 +217,7 @@ function process_option_apps {
 $(gettext 'NUM  APP')\n"
     apps=$(
         grep    --no-messages                   \
-                --regexp="#.*$mode.*$on_from"   \
+                --regexp="#.*$mode.* $on_from " \
                 "$input_file"                   |
         tr      --squeeze-repeats               \
                 '[:space:]'                     |
@@ -274,7 +274,7 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*"$app_argument"*"$on_from"*)
+            '#'*"$mode"*"$app_argument"*" $on_from "*)
                 # Possible matching app record (app_argument is user input).
                 app_match=false
                 app_name=$(
@@ -318,7 +318,7 @@ function process_input_file_by_host {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*"$on_from"*'*'|'#'*"$mode"*"$on_from"*"$HOSTNAME"*)
+            '#'*"$mode"*"$on_from"*'*'|'#'*"$mode"*" $on_from "*"$HOSTNAME"*)
                 # Matching app record.
                 host_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
