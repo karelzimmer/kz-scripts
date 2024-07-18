@@ -217,7 +217,7 @@ function process_option_apps {
 $(gettext 'NUM  APP')\n"
     apps=$(
         grep    --no-messages                   \
-                --regexp="# $mode .* $on_from " \
+                --regexp="#.*$mode.*$on_from"   \
                 "$input_file"                   |
         tr      --squeeze-repeats               \
                 '[:space:]'                     |
@@ -268,26 +268,16 @@ function process_argument_app {
 # APP.
 function process_input_file_by_app {
     local app_match=false
-    local app_name=''
     local input_record=''
     local no_app_match=true
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*"$app_argument"*" $on_from "*)
-                # Possible matching app record (app_argument is user input).
-                app_match=false
-                app_name=$(
-                    printf '%s\n' "$input_record"       |
-                    tr --squeeze-repeats '[:space:]'    |
-                    cut --delimiter=' ' --fields=3
-                    )
-                if [[ $app_name = "$app_argument" ]]; then
-                    # Matching app record.
-                    app_match=true
-                    no_app_match=false
-                    printf '%s\n' "$input_record" >> "$command_file"
-                fi
+            '#'*"$mode"*" $app_argument "*"$on_from"*)
+                # Matching app record.
+                app_match=true
+                no_app_match=false
+                printf '%s\n' "$input_record" >> "$command_file"
                 ;;
             '#'*"$mode"*|'#'*"$mode_reverse"*)
                 # Mismatched app record.
