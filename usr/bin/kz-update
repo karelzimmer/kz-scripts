@@ -2,7 +2,7 @@
 """
 Update system.
 
-This module performs a repair, update, and cleanup.
+This script performs a repair, update, and cleanup.
 """
 ###############################################################################
 # SPDX-FileComment: Update system
