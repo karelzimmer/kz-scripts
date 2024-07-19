@@ -208,8 +208,7 @@ function process_option_apps {
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --no-messages               \
-                --regexp="#.*$mode.*for"    \
+        grep    --regexp="#.*$mode.*for"    \
                 "$input_file"               |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |

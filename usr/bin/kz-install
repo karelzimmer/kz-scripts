@@ -216,8 +216,7 @@ function process_option_apps {
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --no-messages                   \
-                --regexp="#.*$mode.*$on_from"   \
+        grep    --regexp="#.*$mode.*$on_from"   \
                 "$input_file"                   |
         tr      --squeeze-repeats               \
                 '[:space:]'                     |
