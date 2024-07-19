@@ -142,8 +142,8 @@ $USAGE_LINE"
             -r | --remove)
                 option_remove=true
                 install='Remove'
-                remove='Install'
                 on='from'
+                remove='Install'
                 from='on'
                 shift
                 ;;
