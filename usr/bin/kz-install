@@ -65,16 +65,17 @@ declare -A  app_arguments=()
 declare -A  failed_apps=()
 declare     argument_app=false
 declare     file_argument=''
-declare     on_from='on'
+declare     from='from'
 declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME.sh
-declare     mode='Install'
-declare     mode_reverse='Remove'
+declare     install='Install'
 declare     no_commands_found=true
+declare     on='on'
 declare     option_apps=false
 declare     option_cat=false
 declare     option_file=false
 declare     option_remove=false
 declare     reboot=true
+declare     remove='Remove'
 
 
 ###############################################################################
@@ -140,9 +141,10 @@ $USAGE_LINE"
                 ;;
             -r | --remove)
                 option_remove=true
-                mode='Remove'
-                mode_reverse='Install'
-                on_from='from'
+                install='Remove'
+                remove='Install'
+                on='from'
+                from='on'
                 shift
                 ;;
             --)
@@ -215,17 +217,17 @@ function process_option_apps {
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --regexp="#.*$mode.*$on_from"   \
-                "$input_file"                   |
-        tr      --squeeze-repeats               \
-                '[:space:]'                     |
-        cut     --delimiter=' '                 \
-                --fields=3                      |
-        sort    --unique                        |
-        nl      --number-width=3                \
-                --number-format=rn              \
-                --number-separator='  '         \
-                --body-numbering=a              || true
+        grep    --regexp="#.*$install.*$on" \
+                "$input_file"               |
+        tr      --squeeze-repeats           \
+                '[:space:]'                 |
+        cut     --delimiter=' '             \
+                --fields=3                  |
+        sort    --unique                    |
+        nl      --number-width=3            \
+                --number-format=rn          \
+                --number-separator='  '     \
+                --body-numbering=a          || true
         )
     if [[ -n $apps ]]; then
         text+=$apps
@@ -271,13 +273,13 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*[[:space:]]"$app_argument"[[:space:]]*"$on_from"*)
+            '#'*$install*[[:space:]]"$app_argument"[[:space:]]*$on*)
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*"$mode"* | '#'*"$mode_reverse"*)
+            '#'*$install*$on* | '#'*$remove*$from*)
                 # Mismatched app record.
                 app_match=false
                 continue
@@ -306,12 +308,12 @@ function process_input_file_by_host {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*"$on_from"*'*' | '#'*"$mode"*"$on_from"*"$HOSTNAME"*)
+            '#'*$install*$on*'*' | '#'*$install*$on*$HOSTNAME*)
                 # Matching app record.
                 host_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*"$mode"* | '#'*"$mode_reverse"*)
+            '#'*$install*$on* | '#'*$remove*$from*)
                 # Mismatched app record.
                 host_match=false
                 continue
@@ -338,7 +340,11 @@ function process_option_cat {
 function install_apps {
     local   -i  app_tot_num=0
 
-    app_tot_num=$(grep --regexp="#.* $mode " --count "$command_file" || true)
+    app_tot_num=$(
+        grep    --regexp="#.*$install.*$on" \
+                --count                     \
+                "$command_file"             || true
+        )
     [[ $app_tot_num -ne 0 ]] || return $OK
 
     title=$(gettext 'Install apps')
@@ -379,7 +385,7 @@ function process_command_file {
 
     while read -r command_record; do
         case $command_record in
-            '#'*"$mode"*)
+            '#'*$install*$on*)
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |

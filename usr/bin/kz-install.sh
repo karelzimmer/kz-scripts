@@ -5,11 +5,11 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# For the format of this file see the kz install man page.
+# For the format of the records in this file, see the kz install man page.
 
 # Install disabled-apport on *
 #
-# Do this first [1/3].
+# Install this first [1/3].
 # Disable the program crash report.
 # For Ubuntu.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
@@ -19,7 +19,7 @@ if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expr
 
 # Remove disabled-apport from *
 #
-# Do this first [1/3].
+# Remove this first [1/3].
 # Enable the program crash report.
 # For Ubuntu.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
@@ -27,7 +27,7 @@ if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --no
 
 # Install extra-repos on *
 #
-# Do this first [2/3].
+# Install this first [2/3].
 # For Debian with desktop environment.
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository non-free; fi
@@ -40,7 +40,7 @@ if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,
 
 # Remove extra-repos from *
 #
-# Do this first [2/3].
+# Remove this first [2/3].
 # For Debian with desktop environment.
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove non-free; fi
@@ -51,14 +51,14 @@ if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,
 
 # Install update-system on *
 #
-# Do this first [3/3].
+# Install this first [3/3].
 sudo apt-get update
 sudo apt-get dist-upgrade --yes
 if type snap &> /dev/null; then sudo snap refresh; fi
 
 # Remove update-system from *
 #
-# Do this first [3/3].
+# Remove this first [3/3].
 # There is no command available to remove update system.
 
 # Install ansible on pc06 pc07

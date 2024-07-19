@@ -67,13 +67,13 @@ declare     argument_app=false
 declare     file_argument=''
 declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME.sh
 declare     logout=true
-declare     mode='Setup'
-declare     mode_reverse='Reset'
 declare     no_commands_found=true
 declare     option_apps=false
 declare     option_cat=false
 declare     option_file=false
 declare     option_reset=false
+declare     reset='Reset'
+declare     setup='Setup'
 
 
 ###############################################################################
@@ -139,8 +139,8 @@ $USAGE_LINE"
                 ;;
             -r | --reset)
                 option_reset=true
-                mode='Reset'
-                mode_reverse='Setup'
+                setup='Reset'
+                reset='Setup'
                 shift
                 ;;
             --)
@@ -207,7 +207,7 @@ function process_option_apps {
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --regexp="#.*$mode.*for"    \
+        grep    --regexp="#.*$setup.*for"   \
                 "$input_file"               |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
@@ -263,13 +263,13 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*[[:space:]]"$app_argument"[[:space:]]*'for'*)
+            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*for*)
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*"$mode"* | '#'*"$mode_reverse"*)
+            '#'*$setup*for* | '#'*$reset*for*)
                 # Mismatched app record.
                 app_match=false
                 continue
@@ -298,12 +298,12 @@ function process_input_file_by_user {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*'for'*'*' | '#'*"$mode"*'for'*"$USER@$HOSTNAME"*)
+            '#'*$setup*for*'*' | '#'*$setup*for*$USER@$HOSTNAME*)
                 # Matching app record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*"$mode"* | '#'*"$mode_reverse"*)
+            '#'*$setup*for* | '#'*$reset*for*)
                 # Mismatched app record.
                 user_match=false
                 continue
@@ -330,7 +330,11 @@ function process_option_cat {
 function setup_apps {
     local   -i  app_tot_num=0
 
-    app_tot_num=$(grep --regexp="#.* $mode " --count "$command_file" || true)
+    app_tot_num=$(
+        grep    --regexp="#.*$setup.*for"   \
+                --count                     \
+                "$command_file"             || true
+        )
     [[ $app_tot_num -ne 0 ]] || return $OK
 
     title=$(gettext 'Set up apps')
@@ -371,7 +375,7 @@ function process_command_file {
 
     while read -r command_record; do
         case $command_record in
-            '#'*"$mode"*)
+            '#'*$setup*)
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
