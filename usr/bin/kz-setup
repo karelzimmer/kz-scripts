@@ -300,7 +300,7 @@ function process_input_file_by_user {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*'for'*'*'|'#'*"$mode"*'for'*"$USER"'@'"$HOSTNAME"*)
+            '#'*"$mode"*'for'*'*'|'#'*"$mode"*'for'*"$USER@$HOSTNAME"*)
                 # Matching app record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
