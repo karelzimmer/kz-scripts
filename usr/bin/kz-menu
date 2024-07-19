@@ -123,7 +123,7 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -g|--gui)
+            -g | --gui)
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -472,7 +472,7 @@ $prompt"
         while true; do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
-                [YyJj]*|'')
+                [YyJj]* | '')
                     execute_command=true
                     break
                     ;;

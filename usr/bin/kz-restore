@@ -98,7 +98,7 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -g|--gui)
+            -g | --gui)
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -109,7 +109,7 @@ $USAGE_LINE"
                 option_gui=true
                 shift
                 ;;
-            -s|--source)
+            -s | --source)
                 if $option_source; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
@@ -219,7 +219,7 @@ function restore_backup {
                 --verbose               \
                 "$source"/              \
                 "$TARGET"/              \
-                2> "$error_file"    |
+                2> "$error_file"        |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \

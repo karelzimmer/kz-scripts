@@ -25,8 +25,7 @@ readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-\
 f|--file FILE] [-g|--gui] [-r|--reset]
-                \$OPTIONS_USAGE
-                [--] [APP...]")
+                \$OPTIONS_USAGE [--] [APP...]")
 
 readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
@@ -108,15 +107,15 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -a|--apps)
+            -a | --apps)
                 option_apps=true
                 shift
                 ;;
-            -c|--cat)
+            -c | --cat)
                 option_cat=true
                 shift
                 ;;
-            -f|--file)
+            -f | --file)
                 if $option_file; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE_LINE"
@@ -127,7 +126,7 @@ $USAGE_LINE"
                 file_argument=$2
                 shift 2
                 ;;
-            -g|--gui)
+            -g | --gui)
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -138,7 +137,7 @@ $USAGE_LINE"
                 option_gui=true
                 shift
                 ;;
-            -r|--reset)
+            -r | --reset)
                 option_reset=true
                 mode='Reset'
                 mode_reverse='Setup'
@@ -264,13 +263,13 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*" $app_argument "*'for'*)
+            '#'*"$mode"*[[:space:]]"$app_argument"[[:space:]]*'for'*)
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*"$mode"*|'#'*"$mode_reverse"*)
+            '#'*"$mode"* | '#'*"$mode_reverse"*)
                 # Mismatched app record.
                 app_match=false
                 continue
@@ -299,12 +298,12 @@ function process_input_file_by_user {
 
     while read -r input_record; do
         case $input_record in
-            '#'*"$mode"*'for'*'*'|'#'*"$mode"*'for'*"$USER@$HOSTNAME"*)
+            '#'*"$mode"*'for'*'*' | '#'*"$mode"*'for'*"$USER@$HOSTNAME"*)
                 # Matching app record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*"$mode"*|'#'*"$mode_reverse"*)
+            '#'*"$mode"* | '#'*"$mode_reverse"*)
                 # Mismatched app record.
                 user_match=false
                 continue
@@ -387,7 +386,7 @@ function process_command_file {
                         "$app_tot_num"      \
                         "$app_name"
                 ;;
-            ''|'#'*)
+            '' | '#'*)
                 # Empty record or comment line. Use cat option to view.
                 continue
                 ;;

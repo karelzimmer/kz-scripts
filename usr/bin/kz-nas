@@ -102,7 +102,7 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -g|--gui)
+            -g | --gui)
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -171,7 +171,7 @@ request_input() {
                 [YyJj]*)
                     break
                     ;;
-                [Nn]*|'')
+                [Nn]* | '')
                     printf '%s\n' "$NAS_FIXED_IP_ADDRESS"
                     exit $OK
                     ;;

@@ -115,7 +115,7 @@ function process_input {
             *.png)
                 continue
                 ;;
-            *.json|*.policy)
+            *.json | *.policy)
                 check_trailing_spaces
                 continue
                 ;;
