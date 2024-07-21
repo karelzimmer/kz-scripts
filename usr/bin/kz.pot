@@ -83,7 +83,7 @@ msgstr ""
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr ""
 
-msgid "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>."
+msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
 #, sh-format
