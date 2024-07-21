@@ -104,7 +104,7 @@ function process_input {
     local scriptname=''
     local scripts_repo=$HOME/kz-scripts
 
-    text=$(gettext 'Check scripts'):
+    text=$(gettext 'Check script:')
     infomsg "$text"
     cd "$scripts_repo"
     while read -r script; do
