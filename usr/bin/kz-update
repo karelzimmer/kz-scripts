@@ -8,7 +8,7 @@ This script performs a repair, update, and cleanup.
 # SPDX-FileComment: Update system
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: CC0
 ###############################################################################
 
 

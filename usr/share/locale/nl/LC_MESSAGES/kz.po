@@ -90,10 +90,8 @@ msgstr "Typ '$DISPLAY_NAME --help' voor meer informatie."
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
 
-msgid "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.0>."
-msgstr ""
-"CC0 1.0 Universeel <https://creativecommons.org/publicdomain/zero/1.0/deed."
-"nl>."
+msgid "License CC0 <https://creativecommons.org/publicdomain/>."
+msgstr "Licentie CC0 <https://creativecommons.org/publicdomain/>."
 
 #, sh-format
 msgid "$PROGRAM_DESC information ($DISPLAY_NAME)"

@@ -5,7 +5,7 @@
 # SPDX-FileComment: Common module for kz Bourne-Again shell scripts
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: CC0
 ###############################################################################
 
 
@@ -291,8 +291,7 @@ function process_option_version {
     text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
-$(gettext "CC0 1.0 Universal <https://creativecommons.org/publicdomain/zero/1.\
-0>.")"
+$(gettext "License CC0 <https://creativecommons.org/publicdomain/>.")"
     infomsg "$text"
 }
 

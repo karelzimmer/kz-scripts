@@ -3,7 +3,7 @@
 # SPDX-FileComment: Set up file
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: CC0
 ###############################################################################
 # For the format of the records in this file, see the kz setup man page.
 

@@ -3,7 +3,7 @@
 # SPDX-FileComment: Tab-completion-script for kz-install
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: CC0
 ###############################################################################
 
 dashoptions='-a --apps -c --cat -f --file -g --gui -r --remove -h --help -m

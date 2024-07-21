@@ -5,7 +5,7 @@ This module provides global variables and functions.
 # SPDX-FileComment: Common module for kz Python scripts
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
+# SPDX-License-Identifier: CC0
 ###############################################################################
 
 
@@ -298,8 +298,7 @@ def process_option_version(PROGRAM_NAME):
     finally:
         text = f"{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n"
         text += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
-        text += _('CC0 1.0 Universal <https://creativecommons.org/publicdomain\
-/zero/1.0>.')
+        text += _('License CC0 <https://creativecommons.org/publicdomain/>.')
         infomsg(PROGRAM_NAME, text)
 
 
