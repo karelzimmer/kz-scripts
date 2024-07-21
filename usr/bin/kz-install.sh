@@ -3,7 +3,7 @@
 # SPDX-FileComment: Install file
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0
+# SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 # For the format of the records in this file, see the kz install man page.
 
