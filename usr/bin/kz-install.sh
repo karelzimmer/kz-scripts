@@ -46,7 +46,7 @@ if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,
 # Install update-system on *
 #
 sudo apt-get update
-sudo apt-get dist-upgrade --yes
+sudo apt-get upgrade --yes
 if type snap &> /dev/null; then sudo snap refresh; fi
 
 # Remove update-system from *
