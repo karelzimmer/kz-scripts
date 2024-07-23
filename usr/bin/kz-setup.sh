@@ -10,22 +10,22 @@
 # Setup anydesk for -nouser
 #
 # Remote Wayland display server is not supported.
-kz-gset --addaft=anydesk
+kz-gnome --addaft=anydesk
 
 # Reset anydesk for -nouser
-kz-gset --delete=anydesk
+kz-gnome --delete=anydesk
 
 # Setup calibre for hugo@pc-van-hugo
-kz-gset --addaft=calibre-gui
+kz-gnome --addaft=calibre-gui
 
 # Reset calibre for hugo@pc-van-hugo
-kz-gset --delete=calibre-gui
+kz-gnome --delete=calibre-gui
 
 # Setup cockpit for karel@pc06
-kz-gset --addaft=kz-cockpit
+kz-gnome --addaft=kz-cockpit
 
 # Reset cockpit for karel@pc06
-kz-gset --delete=kz-cockpit
+kz-gnome --delete=kz-cockpit
 rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
 
 # Setup dashtodock for *
@@ -56,31 +56,31 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 
 # Setup desktop-installer for *
 # For all with desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --delete=install-debian; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --delete=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --delete=install-debian; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --delete=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
 # Reset desktop-installer for *
 # For all with desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --addbef=install-debian; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gset --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --addbef=install-debian; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
 # Setup evolution for karel@pc07
-kz-gset --delete=org.gnome.Evolution
+kz-gnome --delete=org.gnome.Evolution
 
 # Reset evolution for karel@pc07
-kz-gset --addbef=org.gnome.Evolution
+kz-gnome --addbef=org.gnome.Evolution
 
 # Setup firefox for karel@pc07
-kz-gset --delete=firefox-esr
+kz-gnome --delete=firefox-esr
 
 # Setup firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gset --delete=firefox
+kz-gnome --delete=firefox
 
 # Reset firefox for karel@pc07
-kz-gset --addbef=firefox-esr
+kz-gnome --addbef=firefox-esr
 
 # Reset firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gset --addbef=firefox
+kz-gnome --addbef=firefox
 
 # Setup gdebi for *
 # For all with desktop environment.
@@ -158,19 +158,19 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Lega
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-kz-gset --addbef=google-chrome
+kz-gnome --addbef=google-chrome
 
 # Reset google-chrome for *
 # There is no command needed to reset google chrome.
 
 # Reset google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-kz-gset --delete=google-chrome
+kz-gnome --delete=google-chrome
 
 # Setup handbrake for emily@pc-van-emily
-kz-gset --addaft=fr.handbrake.ghb
+kz-gnome --addaft=fr.handbrake.ghb
 
 # Reset handbrake for emily@pc-van-emily
-kz-gset --delete=fr.handbrake.ghb
+kz-gnome --delete=fr.handbrake.ghb
 
 # Setup hide-files for *
 echo 'snap' > "$HOME"/.hidden
@@ -179,10 +179,10 @@ echo 'snap' > "$HOME"/.hidden
 rm --force --verbose "$HOME"/.hidden
 
 # Setup kvm for karel@pc06 karel@pc07
-kz-gset --addaft=virt-manager
+kz-gnome --addaft=virt-manager
 
 # Reset kvm for karel@pc06 karel@pc07
-kz-gset --delete=virt-manager
+kz-gnome --delete=virt-manager
 
 # Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
@@ -207,31 +207,31 @@ chmod 750 "$HOME"
 chmod 755 "$HOME"
 
 # Setup sound-juicer for emily@pc-van-emily
-kz-gset --addaft=org.gnome.SoundJuicer
+kz-gnome --addaft=org.gnome.SoundJuicer
 
 # Reset sound-juicer for emily@pc-van-emily
-kz-gset --delete=org.gnome.SoundJuicer
+kz-gnome --delete=org.gnome.SoundJuicer
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-kz-gset --addaft=kz-spotify
+kz-gnome --addaft=kz-spotify
 
 # Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-kz-gset --delete=kz-spotify
+kz-gnome --delete=kz-spotify
 
 # Setup teamviewer for karel@pc06
-kz-gset --addaft=com.teamviewer.TeamViewer
+kz-gnome --addaft=com.teamviewer.TeamViewer
 
 # Reset teamviewer for karel@pc06
-kz-gset --delete=com.teamviewer.TeamViewer
+kz-gnome --delete=com.teamviewer.TeamViewer
 
 # Setup telegram for hugo@pc-van-hugo maria@maria-desktop
-kz-gset --addaft=kz-telegram
+kz-gnome --addaft=kz-telegram
 
 # Reset telegram for hugo@pc-van-hugo maria@maria-desktop
-kz-gset --delete=kz-telegram
+kz-gnome --delete=kz-telegram
 
 # Setup terminal for karel@pc01 karel@pc06 karel@pc07
-kz-gset --addbef=org.gnome.Terminal
+kz-gnome --addbef=org.gnome.Terminal
 #
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
@@ -241,23 +241,23 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
 
 # Reset terminal for karel@pc01 karel@pc06 karel@pc07
-kz-gset --delete=org.gnome.Terminal
+kz-gnome --delete=org.gnome.Terminal
 sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 
 # Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gset --delete=thunderbird
+kz-gnome --delete=thunderbird
 
 # Reset thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gset --addbef=thunderbird
+kz-gnome --addbef=thunderbird
 
 # Setup virtualbox for hugo@pc-van-hugo
-kz-gset --addaft=virtualbox
-kz-gset --addaft=kz-vm-hugowin732
+kz-gnome --addaft=virtualbox
+kz-gnome --addaft=kz-vm-hugowin732
 
 # Reset virtualbox for hugo@pc-van-hugo
-kz-gset --delete=virtualbox
-kz-gset --delete=kz-vm-hugowin732
+kz-gnome --delete=virtualbox
+kz-gnome --delete=kz-vm-hugowin732
 
 # Setup vlc for *
 # For all with desktop environment.
@@ -269,7 +269,7 @@ if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/nul
 # There is no command needed to reset vlc.
 
 # Setup vscode for karel@pc01 karel@pc06 karel@pc07
-kz-gset --addbef=code
+kz-gnome --addbef=code
 xdg-mime default code.desktop application/json
 xdg-mime default code.desktop application/x-desktop
 xdg-mime default code.desktop application/x-shellscript
@@ -281,30 +281,30 @@ xdg-mime default code.desktop text/troff
 xdg-mime default code.desktop text/x-python
 
 # Reset vscode for karel@pc01 karel@pc06 karel@pc07
-kz-gset --delete=code
+kz-gnome --delete=code
 
 # Setup webmin for karel@pc07
-kz-gset --addaft=kz-webmin
+kz-gnome --addaft=kz-webmin
 
 # Reset webmin for karel@pc07
-kz-gset --delete=kz-webmin
+kz-gnome --delete=kz-webmin
 rm --force --verbose "$HOME"/.local/share/applications/kz-webmin.desktop
 
 # Setup whatsapp for hugo@pc-van-hugo maria@maria-desktop
-kz-gset --addaft=kz-whatsapp
+kz-gnome --addaft=kz-whatsapp
 
 # Reset whatsapp for hugo@pc-van-hugo maria@maria-desktop
-kz-gset --delete=kz-whatsapp
+kz-gnome --delete=kz-whatsapp
 
 # Setup youtube-dl for emily@pc-van-emily
-kz-gset --addaft=youtubedl-gui
+kz-gnome --addaft=youtubedl-gui
 
 # Reset youtube-dl for emily@pc-van-emily
-kz-gset --delete=youtubedl-gui
+kz-gnome --delete=youtubedl-gui
 
 # Setup zoom for monique@pc01 karel@pc01
-kz-gset --addaft=kz-zoom
+kz-gnome --addaft=kz-zoom
 
 # Reset zoom for monique@pc01 karel@pc01
-kz-gset --delete=kz-zoom
+kz-gnome --delete=kz-zoom
 

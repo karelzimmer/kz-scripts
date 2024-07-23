@@ -1,5 +1,5 @@
 .\"############################################################################
-.\"# SPDX-FileComment: Man page for kz-gset
+.\"# SPDX-FileComment: Man page for kz-gnome
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
@@ -9,7 +9,7 @@
 .\"
 .\"
 .SH NAME
-kz-gset \- Change GUI
+kz-gnome \- Change GNOME
 .\"
 .\"
 .SH SYNOPSIS
@@ -18,7 +18,7 @@ kz-gset \- Change GUI
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz gset\fR helps to change the GNOME graphical user environment (GUI).
+\fBkz gset\fR helps to change the GNOME desktop environment.
 .sp
 \fBkz gset\fR:
 .RS
@@ -54,14 +54,15 @@ With option \fB-r\fR, \fB--reset\fR the favorites bar (dash, dock) is reset
 with default favourites.
 .sp
 If no options are specified, \fBkz gset\fR shows changes in the configuration
-database after a change in the graphical user environment (GUI).
+database after a change in the GNOME desktop environment.
 .br
 The following is performed:
 .sp
 .RS
-1. Capture configuration database content before changing the GUI.
+1. Capture configuration database content before changing the GNOME desktop
+environment.
 .br
-2. User makes changes with the GUI.
+2. User makes changes with the GNOME desktop environment.
 .br
 3. Capture configuration database contents afterwards.
 .br
@@ -114,8 +115,8 @@ equal to 0.
 .sp
 \fBkz gset\fR
 .RS
-Shows changes to the configuration database after changes to the graphical
-user environment (GUI).
+Shows changes to the configuration database after changes to the GNOME desktop
+environment.
 .RE
 .sp
 \fBkz gset --addbef idle\fR

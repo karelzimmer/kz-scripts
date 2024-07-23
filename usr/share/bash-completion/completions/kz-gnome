@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# SPDX-FileComment: Tab-completion-script for kz-gset
+# SPDX-FileComment: Tab-completion-script for kz-gnome
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -8,4 +8,4 @@
 
 dashoptions='-a --addaft -b --addbef -d --delete -l --list -r --reset
     -h --help -m --manual -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-gset
+complete -o default -W "$dashoptions" kz-gnome

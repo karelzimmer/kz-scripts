@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 # shellcheck source=kz_common.sh disable=SC2155
 ###############################################################################
-# SPDX-FileComment: Change GUI
+# SPDX-FileComment: Change GNOME
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -19,14 +19,14 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-gset'
-readonly PROGRAM_DESC=$(gettext 'Change GUI')
+readonly PROGRAM_NAME='kz-gnome'
+readonly PROGRAM_DESC=$(gettext 'Change GNOME')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] [\
 -b|--addbef FAVORITE]
-               [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
-               \$OPTIONS_USAGE")"
+                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
+                \$OPTIONS_USAGE")"
 
 readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
@@ -184,7 +184,7 @@ function process_input {
     elif $option_reset; then
         process_option_reset
     else
-        capture_gui_changes
+        capture_gnome_changes
     fi
 }
 
@@ -255,8 +255,8 @@ function process_option_reset  {
 }
 
 
-# This function records a change made through the GUI.
-function capture_gui_changes {
+# This function records a change made through the GNOME desktop environment.
+function capture_gnome_changes {
     local config_a_file=''
     local config_b_file=''
 
@@ -272,7 +272,7 @@ function capture_gui_changes {
 }
 
 
-# This function stores the GUI configuration database.
+# This function stores the GNOME configuration database.
 function save_configuration_database {
     # shellcheck disable=SC2034
     local fase=${1:-unknown}
@@ -289,7 +289,7 @@ function save_configuration_database {
 }
 
 
-# This function reports the changes to the GUI configuration database.
+# This function reports the changes to the GNOME configuration database.
 function report_database_changes {
     local output_file1=${1:-unknown}
     local output_file2=${2:-unknown}
