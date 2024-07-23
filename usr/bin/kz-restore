@@ -294,7 +294,8 @@ function term_script {
                 printf '\n'
                 id "$uid"
             done < <(
-                grep --regexp='/home' /etc/passwd | cut --delimiter=: --fields=1
+                grep --regexp='/home' /etc/passwd |
+                cut --delimiter=: --fields=1
                 )
         )
 
