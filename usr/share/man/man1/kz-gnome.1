@@ -5,7 +5,7 @@
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 .\"
-.TH "KZ-GSET" "1" "4.2.1" "KZ" "Kz Manual"
+.TH "KZ-GNOME" "1" "4.2.1" "KZ" "Kz Manual"
 .\"
 .\"
 .SH NAME
@@ -13,14 +13,14 @@ kz-gnome \- Change GNOME
 .\"
 .\"
 .SH SYNOPSIS
-.B kz gset
+.B kz gnome
 [OPTION...]
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz gset\fR helps to change the GNOME desktop environment.
+\fBkz gnome\fR helps to change the GNOME desktop environment.
 .sp
-\fBkz gset\fR:
+\fBkz gnome\fR:
 .RS
 - only works on systems using GNOME,
 .br
@@ -53,7 +53,7 @@ With option \fB-l\fR, \fB--list\fR the current favorites are displayed.
 With option \fB-r\fR, \fB--reset\fR the favorites bar (dash, dock) is reset
 with default favourites.
 .sp
-If no options are specified, \fBkz gset\fR shows changes in the configuration
+If no options are specified, \fBkz gnome\fR shows changes in the configuration
 database after a change in the GNOME desktop environment.
 .br
 The following is performed:
@@ -69,7 +69,7 @@ environment.
 4. Report changes to the configuration database.
 .RE
 .sp
-Command \fBkz gset\fR can only be run in a desktop environment.
+Command \fBkz gnome\fR can only be run in a desktop environment.
 .\"
 .\"
 .SH OPTIONS
@@ -113,13 +113,13 @@ equal to 0.
 .\"
 .SH EXAMPLES
 .sp
-\fBkz gset\fR
+\fBkz gnome\fR
 .RS
 Shows changes to the configuration database after changes to the GNOME desktop
 environment.
 .RE
 .sp
-\fBkz gset --addbef idle\fR
+\fBkz gnome --addbef idle\fR
 .RS
 Add the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) to the front of the favorites bar. The idle.desktop
@@ -127,7 +127,7 @@ file must exist in one of the application directories such as
 /usr/share/applications or /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gset --delete idle\fR
+\fBkz gnome --delete idle\fR
 .RS
 Remove the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) from the favorites bar.
@@ -153,5 +153,5 @@ Part of the \fBkz\fR(1) package, named after its creator, Karel Zimmer.
 .\"
 .\"
 .SH AVAILABILITY
-Command \fBkz gset\fR is part of the \fBkz\fR package and is available on
+Command \fBkz gnome\fR is part of the \fBkz\fR package and is available on
 Karel Zimmer's website <https://karelzimmer.nl/en>, under Linux.

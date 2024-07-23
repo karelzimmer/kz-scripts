@@ -5,7 +5,7 @@
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 .\"
-.TH "KZ-GSET" "1" "4.2.1" "KZ" "Handleiding kz"
+.TH "KZ-GNOME" "1" "4.2.1" "KZ" "Handleiding kz"
 .\"
 .\"
 .SH NAAM
@@ -13,14 +13,14 @@ kz-gnome \- GNOME wijzigen
 .\"
 .\"
 .SH SAMENVATTING
-.B kz gset
+.B kz gnome
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz gset\fR helpt bij het wijzigen van de GNOME desktopomgeving.
+\fBkz gnome\fR helpt bij het wijzigen van de GNOME desktopomgeving.
 .sp
-\fBkz gset\fR:
+\fBkz gnome\fR:
 .RS
 - werkt alleen op systemen die GNOME gebruiken,
 .br
@@ -55,7 +55,7 @@ Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten getoond.
 Met optie \fB-r\fR, \fB--reset\fR wordt de favorietenbalk (dash, dock)
 teruggezet met standaard favorieten.
 .sp
-Als er geen opties zijn opgegeven toont \fBkz gset\fR wijzigingen in de
+Als er geen opties zijn opgegeven toont \fBkz gnome\fR wijzigingen in de
 configuratiedatabase na een wijziging in de desktopomgeving.
 .br
 Het volgende wordt uitgevoerd:
@@ -70,7 +70,7 @@ Het volgende wordt uitgevoerd:
 4. Wijzigingen in de configuratiedatabase rapporteren.
 .RE
 .sp
-Opdracht \fBkz gset\fR kan alleen worden uitgevoerd op een desktop.
+Opdracht \fBkz gnome\fR kan alleen worden uitgevoerd op een desktop.
 .\"
 .\"
 .SH OPTIES
@@ -114,13 +114,13 @@ afsluitwaarde ongelijk 0.
 .\"
 .SH VOORBEELDEN
 .sp
-\fBkz gset\fR
+\fBkz gnome\fR
 .RS
 Toont wijzigingen in de configuratiedatabase na aanpassingen in de GNOME
 desktopomgeving.
 .RE
 .sp
-\fBkz gset --addbef idle\fR
+\fBkz gnome --addbef idle\fR
 .RS
 Voeg de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
@@ -128,7 +128,7 @@ idle.desktop moet bestaan in een van de applicatiemappen
 zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gset --delete idle\fR
+\fBkz gnome --delete idle\fR
 .RS
 Verwijder de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) uit de favorietenbalk.
@@ -154,5 +154,5 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker, Karel Zimmer.
 .\"
 .\"
 .SH BESCHIKBAARHEID
-Opdracht \fBkz gset\fR is onderdeel van het pakket \fBkz\fR en is beschikbaar
+Opdracht \fBkz gnome\fR is onderdeel van het pakket \fBkz\fR en is beschikbaar
 op de website van Karel Zimmer <https://karelzimmer.nl>, onder Linux.
