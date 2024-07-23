@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
-dashoptions='backup build check deploy get getdev gnome install ivp menu
+dashoptions='backup build check deploy dev get gnome install ivp menu
     restore setup update wifi -l --list -h --help -m --manual -u --usage -v
     --version'
 complete -o default -W "$dashoptions" kz
