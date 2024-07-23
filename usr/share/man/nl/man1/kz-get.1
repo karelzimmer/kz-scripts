@@ -1,51 +1,51 @@
 .\"############################################################################
-.\"# SPDX-FileComment: Man page for kz-getdeb
+.\"# SPDX-FileComment: Man page for kz-get
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 .\"
-.TH "KZ-GETDEB" "1" "4.2.1" "KZ" "Handleiding kz"
+.TH "KZ-GET" "1" "4.2.1" "KZ" "Handleiding kz"
 .\"
 .\"
 .SH NAAM
-kz-getdeb \- Download en installeer pakket kz
+kz-get \- Download en installeer pakket kz
 .\"
 .\"
 .SH SAMENVATTING
-.B kz getdeb
+.B kz get
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz getdeb\fR downloadt en installeert pakket kz.
+\fBkz get\fR downloadt en installeert pakket kz.
 .sp
 Pakket kz bevat scripts om Debian en op Debian gebaseerde systemen zoals Ubuntu
 soepel en bruikbaar te installeren.
 .sp
-Voor de nieuwste versie van \fBkz getdeb\fR én pakket kz, start een
+Voor de nieuwste versie van \fBkz get\fR én pakket kz, start een
 Terminalvenster en voer uit (kopie van kz wordt opgeslagen en later
 verwijderd):
 .br
-    \fBwget karelzimmer.nl/getdeb\fR
+    \fBwget karelzimmer.nl/get\fR
 .br
-    \fBbash getdeb\fR
+    \fBbash get\fR
 .br
  of (idem hiervoor, nu op 1 regel):
 .br
-    \fBwget karelzimmer.nl/getdeb; bash getdeb\fR
+    \fBwget karelzimmer.nl/get; bash get\fR
 .br
- of (er wordt geen kopie van getdeb opgeslagen):
+ of (er wordt geen kopie van get opgeslagen):
 .br
-    \fBwget -O- karelzimmer.nl/getdeb | bash\fR
+    \fBwget -O- karelzimmer.nl/get | bash\fR
 .br
  of (als curl is geïnstalleerd, geen kopie):
 .br
-    \fBcurl -L karelzimmer.nl/getdeb | bash\fR
+    \fBcurl -L karelzimmer.nl/get | bash\fR
 .br
  of (als pakket kz al is geïnstalleerd):
 .br
-    \fBkz getdeb\fR
+    \fBkz get\fR
 .sp
 Indien nodig, bijvoorbeeld Debian < 12, zal het gedownloade pakket opnieuw
 worden verpakt als een pakket dat xz gebruikt, en vervolgens zal het opnieuw
@@ -85,7 +85,7 @@ afsluitwaarde ongelijk 0.
 .IP " 1." 4
 IaC en Day 1 Operations
 .RS 4
-\fBkz getdeb\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
+\fBkz get\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
 \fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
 .RE
 .\"
@@ -136,5 +136,5 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker, Karel Zimmer.
 .\"
 .\"
 .SH BESCHIKBAARHEID
-Opdracht \fBkz getdeb\fR is onderdeel van het pakket \fBkz\fR en is beschikbaar
+Opdracht \fBkz get\fR is onderdeel van het pakket \fBkz\fR en is beschikbaar
 op de website van Karel Zimmer <https://karelzimmer.nl>, onder Linux.

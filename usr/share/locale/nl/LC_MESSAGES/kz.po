@@ -389,8 +389,8 @@ msgstr "Uploaden website is mislukt."
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
-msgid "Install package kz"
-msgstr "Pakket kz installeren"
+msgid "Download and install package kz"
+msgstr "Download en installeer pakket kz"
 
 msgid "finished"
 msgstr "gereed"

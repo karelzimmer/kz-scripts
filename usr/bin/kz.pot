@@ -350,7 +350,7 @@ msgstr ""
 msgid "Install package kz failed."
 msgstr ""
 
-msgid "Install package kz"
+msgid "Download and install package kz"
 msgstr ""
 
 msgid "finished"
