@@ -439,7 +439,6 @@ function execute_command {
 function term_script {
     local failed_apps_text=''
     local operation=$(gettext 'set up')
-    local input_file=$(xdg-user-dir PICTURES)/avatar
 
     if $no_commands_found; then
         text=$(gettext 'No commands to execute.' )
@@ -467,11 +466,6 @@ use app 'Terminal', type 'kz setup \$failed_apps_text'.")
         text=$(eval_gettext "Apps \$operation completed.")
         if $logout; then
             if $DESKTOP_ENVIRONMENT; then
-                if [[ -e $input_file ]]; then
-                    text+="
-
-$(gettext 'Use avatar in Personal folder / Pictures to restore the avatar.')"
-                fi
                 text+="
 
 $(gettext "You will now be logged out of the computer to finish installing the\

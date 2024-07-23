@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-21 19:16+0200\n"
+"POT-Creation-Date: 2024-07-23 08:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,12 +287,6 @@ msgstr ""
 msgid "The backup has been made for $USER (there are $NUM_USERS users)."
 msgstr ""
 
-#, sh-format
-msgid ""
-"User\\tUserID\\tName\n"
-"$USERS"
-msgstr ""
-
 msgid "Build package kz"
 msgstr ""
 
@@ -556,9 +550,6 @@ msgstr ""
 msgid "Apps $operation completed."
 msgstr ""
 
-msgid "Use avatar in Personal folder / Pictures to restore the avatar."
-msgstr ""
-
 msgid ""
 "You will now be logged out of the computer to finish installing the apps and "
 "changing user settings."
@@ -571,12 +562,6 @@ msgid ""
 msgstr ""
 
 msgid "Log out of the computer yourself."
-msgstr ""
-
-msgid "Use users in Personal folder / Documents to add users."
-msgstr ""
-
-msgid "Use users in Personal folder to add users."
 msgstr ""
 
 msgid ""
@@ -610,7 +595,6 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr ""
 
-#, sh-format
 msgid "Additional _user_s can be added manually:"
 msgstr ""
 

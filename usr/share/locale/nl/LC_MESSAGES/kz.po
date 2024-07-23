@@ -326,14 +326,6 @@ msgstr "De back-up is gemaakt."
 msgid "The backup has been made for $USER (there are $NUM_USERS users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $NUM_USERS gebruikers)."
 
-#, sh-format
-msgid ""
-"User\\tUserID\\tName\n"
-"$USERS"
-msgstr ""
-"Gebr\\tGebrID\\tNaam\n"
-"$USERS"
-
 msgid "Build package kz"
 msgstr "Pakket kz bouwen"
 
@@ -638,10 +630,6 @@ msgstr ""
 msgid "Apps $operation completed."
 msgstr "Apps $operation is voltooid."
 
-msgid "Use avatar in Personal folder / Pictures to restore the avatar."
-msgstr ""
-"Gebruik avatar in Persoonlijke map / Afbeeldingen om de avatar te herstellen."
-
 msgid ""
 "You will now be logged out of the computer to finish installing the apps and "
 "changing user settings."
@@ -660,13 +648,6 @@ msgstr ""
 
 msgid "Log out of the computer yourself."
 msgstr "Meld u zelf af van de computer."
-
-msgid "Use users in Personal folder / Documents to add users."
-msgstr ""
-"Gebruik users in Persoonlijke map / Documenten om gebruikers toe te voegen."
-
-msgid "Use users in Personal folder to add users."
-msgstr "Gebruik users in Persoonlijke map om gebruikers toe te voegen."
 
 msgid ""
 "The computer will now reboot to finish installing the apps and changing "
@@ -702,7 +683,6 @@ msgstr "Ga naar installatiemenu"
 msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 
-#, sh-format
 msgid "Additional _user_s can be added manually:"
 msgstr "Extra _gebruiker_s kunnen handmatig worden toegevoegd:"
 
