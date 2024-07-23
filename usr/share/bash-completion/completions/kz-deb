@@ -1,10 +1,10 @@
 # shellcheck shell=bash
 ###############################################################################
-# SPDX-FileComment: Tab-completion-script for kz-get
+# SPDX-FileComment: Tab-completion-script for kz-deb
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 
 dashoptions='-h --help -m --manual -u --usage -v --version'
-complete -o default -W "$dashoptions" kz-get
+complete -o default -W "$dashoptions" kz-deb

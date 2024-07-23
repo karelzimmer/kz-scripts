@@ -192,17 +192,17 @@ function upload_website {
 
 # This function installs package kz.
 function install_package {
-    # Call kz-get (via wget and bash as a regular user would do).
+    # Call kz-deb (via wget and bash as a regular user would do).
     text=$(gettext 'Install package')...
     infomsg "$text"
-    logmsg 'Calling kz-get (via wget and bash)...'
-    if ! wget --output-document=- karelzimmer.nl/get 2> >($LOGCMD) | bash
+    logmsg 'Calling kz-deb (via wget and bash)...'
+    if ! wget --output-document=- karelzimmer.nl/deb 2> >($LOGCMD) | bash
     then
         text=$(gettext 'Install package kz failed.')
         errormsg "$text"
         exit $ERROR
     fi
-    logmsg 'Called kz-get (via wget and bash).'
+    logmsg 'Called kz-deb (via wget and bash).'
 }
 
 
