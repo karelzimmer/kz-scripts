@@ -49,6 +49,7 @@ readonly X_OPTIONS_LONG=',gui,target:'
 readonly SOURCE=$HOME
 readonly NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
+
 ###############################################################################
 # Variables
 ###############################################################################
@@ -59,6 +60,7 @@ declare target_argument=''
 declare target_medium=''
 declare target=''
 declare users=''
+
 
 ###############################################################################
 # Functions
@@ -198,9 +200,7 @@ lease rename to 'USER@HOST'.")"
 # This function backups the user settings.
 function backup_settings {
     backup_setting_apps
-    if [[ $NUM_USERS -gt 1 ]]; then
-        backup_setting_users
-    fi
+    backup_setting_users
     if $DESKTOP_ENVIRONMENT; then
         $option_gui || infomsg "$(gettext 'Secure settings...')"
         backup_setting_avatar
@@ -235,6 +235,8 @@ function backup_setting_apps {
 # This function saves instructions for adding additional users.
 function backup_setting_users {
     local output_file=$(xdg-user-dir DOCUMENTS)/users
+
+    [[ $NUM_USERS -gt 1 ]] || return $OK
 
     users=$(
             grep --regexp='/home' /etc/passwd   |
@@ -449,20 +451,7 @@ use app 'Terminal', type 'kz backup'.")"
 # This function controls the termination of the script.
 function term_script {
     local   -i  unmount_rc=0
-    local       x_text=''
 
-    if [[ $target_medium == /media/* ]]; then
-        term_script_unmount || unmount_rc=$?
-        if [[ $unmount_rc -eq $OK ]]; then
-            x_text="
-
-$(gettext 'The USB medium can be removed.')"
-        else
-            x_text="
-
-$(gettext 'Disconnect the USB medium yourself (safely!).')"
-        fi
-    fi
     if [[ $NUM_USERS -eq 1 ]]; then
         text=$(gettext "The backup has been made.")
     else
@@ -471,7 +460,20 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 
 $users"
     fi
-    infomsg "$text$x_text"
+
+    if [[ $target_medium == /media/* ]]; then
+        term_script_unmount || unmount_rc=$?
+        if [[ $unmount_rc -eq $OK ]]; then
+            text+="
+
+$(gettext 'The USB medium can be removed.')"
+        else
+            text+="
+
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
+        fi
+    fi
+    infomsg "$text"
 
     exit $OK
 }
@@ -481,6 +483,7 @@ $users"
 function term_script_unmount {
     local       dev=''
     local   -i  rc=0
+    local       text
 
     text=$(gettext 'Disconnect the USB media')
     dev='/dev/'$(

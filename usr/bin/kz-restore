@@ -280,46 +280,45 @@ function restore_setting_desktop {
 # This function controls the termination of the script.
 function term_script {
     local   -i  unmount_rc=0
-    local       x_text=''
     local       users=''
 
-    users=$(
-            grep --regexp='/home' /etc/passwd   |
-            cut --delimiter=: --fields=1,3,5    |
-            tr ':' '\t'
-            )
-    users+=$(
-            printf '\n'
-            while read -r uid; do
-                printf '\n'
-                id "$uid"
-            done < <(
-                grep --regexp='/home' /etc/passwd |
-                cut --delimiter=: --fields=1
-                )
-        )
-
-    if [[ $source_medium == /media/* ]]; then
-        term_script_unmount || unmount_rc=$?
-        if [[ $unmount_rc -eq $OK ]]; then
-            x_text="
-
-$(gettext 'The USB medium can be removed.')"
-        else
-            x_text="
-
-$(gettext 'Disconnect the USB medium yourself (safely!).')"
-        fi
-    fi
     if [[ $NUM_USERS -eq 1 ]]; then
         text=$(gettext 'The backup has been restored.')
     else
+        users=$(
+                grep --regexp='/home' /etc/passwd   |
+                cut --delimiter=: --fields=1,3,5    |
+                tr ':' '\t'
+                )
+        users+=$(
+                printf '\n'
+                while read -r uid; do
+                    printf '\n'
+                    id "$uid"
+                done < <(
+                    grep --regexp='/home' /etc/passwd |
+                    cut --delimiter=: --fields=1
+                    )
+            )
         text="$(eval_gettext "The backup has restored for \$USER (there are \$\
 NUM_USERS users).")
 
 $users"
     fi
-    infomsg "$text$x_text"
+
+    if [[ $source_medium == /media/* ]]; then
+        term_script_unmount || unmount_rc=$?
+        if [[ $unmount_rc -eq $OK ]]; then
+            text+="
+
+$(gettext 'The USB medium can be removed.')"
+        else
+            text+="
+
+$(gettext 'Disconnect the USB medium yourself (safely!).')"
+        fi
+    fi
+    infomsg "$text"
 
     exit $OK
 }
@@ -329,6 +328,7 @@ $users"
 function term_script_unmount {
     local       dev=''
     local   -i  rc=0
+    local       text
 
     text=$(gettext 'Disconnect the USB media')
     dev='/dev/'$(
