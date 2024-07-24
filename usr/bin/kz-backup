@@ -293,18 +293,19 @@ function backup_setting_avatar {
     if [[ -e $input_file ]]; then
         logmsg 'Copy the user avatar...'
         cp --preserve --verbose "$input_file" "$output_file_1" |& $LOGCMD
-        logmsg 'Save restore the avatar instructions...'
-        text="$(gettext "To restore the users avatar:
+        touch "$output_file_1"
+    fi
+    logmsg 'Save restore the avatar instructions...'
+    text="$(gettext "To restore the users avatar:
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
-4. Select avatar in Personal folder / Pictures.
+4. Select avatar in Personal folder / Pictures, or another picture file.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
 hromebook).")"
-        printf '%s\n' "$text" > "$output_file_2"
-        touch "$output_file_1" "$output_file_2"
-    fi
+    printf '%s\n' "$text" > "$output_file_2"
+    touch "$output_file_2"
 }
 
 
