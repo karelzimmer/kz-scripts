@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-23 09:13+0200\n"
+"POT-Creation-Date: 2024-07-24 10:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -593,6 +593,9 @@ msgstr ""
 
 #, sh-format
 msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
+msgstr ""
+
+msgid "_username_|UID|_user_"
 msgstr ""
 
 msgid "Additional _user_s can be added manually:"

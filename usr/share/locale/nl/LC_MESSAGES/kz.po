@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-21 19:16+0200\n"
+"POT-Creation-Date: 2024-07-24 10:36+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -682,6 +682,9 @@ msgstr "Ga naar installatiemenu"
 #, sh-format
 msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
+
+msgid "_username_|UID|_user_"
+msgstr "_gebruikersnaam_|UID|_gebruiker_"
 
 msgid "Additional _user_s can be added manually:"
 msgstr "Extra _gebruiker_s kunnen handmatig worden toegevoegd:"

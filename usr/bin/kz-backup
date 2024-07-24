@@ -239,9 +239,11 @@ function backup_setting_users {
     [[ $NUM_USERS -gt 1 ]] || return $OK
 
     users=$(
+            gettext '_username_|UID|_user_'
+            printf '\n'
             grep --regexp='/home' /etc/passwd   |
             cut --delimiter=: --fields=1,3,5    |
-            tr ':' '\t'
+            tr ':' '|'
             )
     users+=$(
             printf '\n'
@@ -252,7 +254,7 @@ function backup_setting_users {
                 grep --regexp='/home' /etc/passwd |
                 cut --delimiter=: --fields=1
                 )
-        )
+            )
 
     logmsg 'Adding additional users instructions...'
     if $DESKTOP_ENVIRONMENT; then
