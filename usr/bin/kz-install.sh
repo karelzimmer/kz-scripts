@@ -28,11 +28,10 @@ if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --no
 # For Debian with desktop environment.
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository non-free; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
+if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
 
 # Remove extra-repos from *
 #
@@ -41,7 +40,6 @@ if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove non-free; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes deb-multimedia-keyring; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
 
 # Install update-system on *
 #
