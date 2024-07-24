@@ -308,7 +308,8 @@ hromebook).")"
 }
 
 
-# This function copies the desktop background, if available.
+# This function copies the desktop background, if available, and saves
+# instructions for setting desktop background.
 function backup_setting_desktop {
     local input_file=$(
         gsettings get org.gnome.desktop.background picture-uri  |
@@ -316,16 +317,28 @@ function backup_setting_desktop {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    local output_file=$(xdg-user-dir PICTURES)/desktop
+    local output_file_1=$(xdg-user-dir PICTURES)/desktop
+    local output_file_2=$(xdg-user-dir DOCUMENTS)/desktop.txt
 
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
     if [[ -e $input_file && $input_file != *.xml ]]; then
         logmsg 'Copy the desktop background...'
-        cp --preserve --verbose "$input_file" "$output_file" |& $LOGCMD || true
-        touch "$output_file"
+        cp --preserve --verbose "$input_file" "$output_file_1" |& $LOGCMD ||
+            true
+        touch "$output_file_1"
     fi
+    logmsg 'Save set the desktop background instructions...'
+    text="$(gettext "To set the desktop background:
+1. Press the Super key[1], type 'file' and click on Files.
+2. Open the folder containing the desired image.
+3. Right-click on the desired image and choose Set as Background.
+
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
+hromebook).")"
+    printf '%s\n' "$text" > "$output_file_2"
+    touch "$output_file_2"
 }
 
 
