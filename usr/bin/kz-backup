@@ -212,7 +212,7 @@ function backup_settings {
 
 # This function creates a list of installed apps.
 function backup_setting_apps {
-    local output_file=$(xdg-user-dir DOCUMENTS)/apps
+    local output_file=$(xdg-user-dir DOCUMENTS)/apps.txt
     local header1=$(gettext "==== START list of manual installed packages ====\
 ")
     local footer1=$(gettext '==== END list of manual installed packages ====')
@@ -234,7 +234,7 @@ function backup_setting_apps {
 
 # This function saves instructions for adding additional users.
 function backup_setting_users {
-    local output_file=$(xdg-user-dir DOCUMENTS)/users
+    local output_file=$(xdg-user-dir DOCUMENTS)/users.txt
 
     [[ $NUM_USERS -gt 1 ]] || return $OK
 
@@ -288,7 +288,7 @@ $users"
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
     local output_file_1=$(xdg-user-dir PICTURES)/avatar
-    local output_file_2=$(xdg-user-dir DOCUMENTS)/avatar
+    local output_file_2=$(xdg-user-dir DOCUMENTS)/avatar.txt
 
     if [[ -e $input_file ]]; then
         logmsg 'Copy the user avatar...'
@@ -331,7 +331,7 @@ function backup_setting_desktop {
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favs {
-    local output_file=$(xdg-user-dir DOCUMENTS)/favs
+    local output_file=$(xdg-user-dir DOCUMENTS)/favs.txt
 
     logmsg 'Save the favorite apps...'
     gsettings get                           \
