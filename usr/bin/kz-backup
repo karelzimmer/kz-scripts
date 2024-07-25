@@ -202,7 +202,6 @@ function backup_settings {
     backup_setting_apps
     backup_setting_users
     if $DESKTOP_ENVIRONMENT; then
-        $option_gui || infomsg "$(gettext 'Secure settings...')"
         backup_setting_avatar
         backup_setting_desktop
         backup_setting_favs

@@ -230,9 +230,6 @@ msgid ""
 "'USER@HOST'."
 msgstr ""
 
-msgid "Secure settings..."
-msgstr ""
-
 msgid "==== START list of manual installed packages ===="
 msgstr ""
 
