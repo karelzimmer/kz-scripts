@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-24 15:08+0200\n"
+"POT-Creation-Date: 2024-07-25 19:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -284,7 +284,7 @@ msgid "The backup has been made."
 msgstr ""
 
 #, sh-format
-msgid "The backup has been made for $USER (there are $NUM_USERS users)."
+msgid "The backup has been made for $USER (there are $num_users users)."
 msgstr ""
 
 msgid "Build package kz"
@@ -764,7 +764,7 @@ msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Change avatar (pencil icon).\n"
 "3. Click Select a file.\n"
-"4. Select avatar in Personal folder / Pictures, or another picture file.\n"
+"4. Select avatar in Personal folder / kz, or another picture file.\n"
 "\n"
 "[1] The Super key is the Windows key, Command key (Apple), or Magnifier key "
 "(Chromebook)."
@@ -801,7 +801,7 @@ msgid "The backup has been restored."
 msgstr ""
 
 #, sh-format
-msgid "The backup has restored for $USER (there are $NUM_USERS users)."
+msgid "The backup has restored for $USER (there are $num_users users)."
 msgstr ""
 
 #, sh-format

@@ -47,7 +47,6 @@ readonly X_OPTIONS_SHORT='gs:'
 readonly X_OPTIONS_LONG=',gui,source:'
 
 readonly TARGET=$HOME
-readonly NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
 
 ###############################################################################
@@ -280,9 +279,10 @@ function restore_setting_desktop {
 # This function controls the termination of the script.
 function term_script {
     local   -i  unmount_rc=0
+    local       num_users=$(find /home/* -prune -print | wc --lines)
     local       users=''
 
-    if [[ $NUM_USERS -eq 1 ]]; then
+    if [[ $num_users -eq 1 ]]; then
         text=$(gettext 'The backup has been restored.')
     else
         users=$(
@@ -303,7 +303,7 @@ function term_script {
                     )
                 )
         text="$(eval_gettext "The backup has restored for \$USER (there are \$\
-NUM_USERS users).")
+num_users users).")
 
 $users"
     fi

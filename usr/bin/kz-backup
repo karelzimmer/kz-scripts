@@ -47,7 +47,6 @@ readonly X_OPTIONS_SHORT='gt:'
 readonly X_OPTIONS_LONG=',gui,target:'
 
 readonly SOURCE=$HOME
-readonly NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
 
 ###############################################################################
@@ -199,6 +198,7 @@ lease rename to 'USER@HOST'.")"
 
 # This function backups the user settings.
 function backup_settings {
+    mkdir --parents --verbose "$HOME"/kz |& $LOGCMD
     backup_setting_apps
     backup_setting_users
     if $DESKTOP_ENVIRONMENT; then
@@ -212,7 +212,7 @@ function backup_settings {
 
 # This function creates a list of installed apps.
 function backup_setting_apps {
-    local output_file=$(xdg-user-dir DOCUMENTS)/apps.txt
+    local output_file="$HOME"/kz/apps.txt
     local header1=$(gettext "==== START list of manual installed packages ====\
 ")
     local footer1=$(gettext '==== END list of manual installed packages ====')
@@ -234,9 +234,7 @@ function backup_setting_apps {
 
 # This function saves instructions for adding additional users.
 function backup_setting_users {
-    local output_file=$(xdg-user-dir DOCUMENTS)/users.txt
-
-    [[ $NUM_USERS -gt 1 ]] || return $OK
+    local output_file="$HOME"/kz/users.txt
 
     users=$(
             gettext '_username_|UID|_user_'
@@ -287,8 +285,8 @@ $users"
 # possible.
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file_1=$(xdg-user-dir PICTURES)/avatar
-    local output_file_2=$(xdg-user-dir DOCUMENTS)/avatar.txt
+    local output_file_1="$HOME"/kz/avatar
+    local output_file_2="$HOME"/kz/avatar.txt
 
     if [[ -e $input_file ]]; then
         logmsg 'Copy the user avatar...'
@@ -300,7 +298,7 @@ function backup_setting_avatar {
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
 3. Click Select a file.
-4. Select avatar in Personal folder / Pictures, or another picture file.
+4. Select avatar in Personal folder / kz, or another picture file.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
 hromebook).")"
@@ -318,8 +316,8 @@ function backup_setting_desktop {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    local output_file_1=$(xdg-user-dir PICTURES)/desktop
-    local output_file_2=$(xdg-user-dir DOCUMENTS)/desktop.txt
+    local output_file_1="$HOME"/kz/desktop
+    local output_file_2="$HOME"/kz/desktop.txt
 
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
@@ -345,7 +343,7 @@ hromebook).")"
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favs {
-    local output_file=$(xdg-user-dir DOCUMENTS)/favs.txt
+    local output_file="$HOME"/kz/favs.txt
 
     logmsg 'Save the favorite apps...'
     gsettings get                           \
@@ -467,12 +465,13 @@ use app 'Terminal', type 'kz backup'.")"
 # This function controls the termination of the script.
 function term_script {
     local   -i  unmount_rc=0
+    local       num_users=$(find /home/* -prune -print | wc --lines)
 
-    if [[ $NUM_USERS -eq 1 ]]; then
+    if [[ $num_users -eq 1 ]]; then
         text=$(gettext "The backup has been made.")
     else
         text="$(eval_gettext "The backup has been made for \$USER (there are \
-\$NUM_USERS users).")
+\$num_users users).")
 
 $users"
     fi
