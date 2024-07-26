@@ -183,7 +183,7 @@ Disconnect media via Files.")"
                 exit $ERROR
             fi
         fi
-        source=$medium/$USER@$HOSTNAME
+        source=$medium/kz-backup/$USER@$HOSTNAME
         source_medium=$medium
         if [[ ! -d $source ]]; then
             text=$(eval_gettext "No backup found on connected USB medium.
@@ -265,7 +265,7 @@ function restore_settings {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop {
-    local input_file=$(xdg-user-dir PICTURES)/desktop
+    local input_file="$HOME"/kz-backup/desktop
 
     if [[ -f $input_file ]]; then
         logmsg 'Restore the desktop background...'

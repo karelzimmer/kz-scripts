@@ -255,6 +255,9 @@ msgstr ""
 "Back-up gevonden met oude naam: 'backup-HOSTNAME-USER'. Hernoem de naam naar "
 "'USER@HOST'."
 
+msgid "Secure settings..."
+msgstr "Instellingen veiligstellen..."
+
 msgid "==== START list of manual installed packages ===="
 msgstr "==== BEGIN overzicht van handmatig geïnstalleerde pakketten ===="
 
