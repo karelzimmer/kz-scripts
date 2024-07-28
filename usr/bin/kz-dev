@@ -116,7 +116,7 @@ function check_dependencies {
 
 # This function retrieves the public repos.
 function pull_repos {
-    local bin_repo=/home/"$USER"/bin
+    local bin_repo="$HOME"/bin
 
     git config --global user.name 'Karel Zimmer'
     git config --global user.email 'karel.zimmer@gmail.com'

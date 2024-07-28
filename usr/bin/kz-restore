@@ -256,6 +256,8 @@ use app 'Terminal', type 'kz restore'.")
 
 # This function restores the user settings.
 function restore_settings {
+    local settings_dir="$HOME"/kz-backup.d
+
     if $DESKTOP_ENVIRONMENT; then
         $option_gui || infomsg "$(gettext 'Restore settings...')"
         restore_setting_desktop
@@ -265,7 +267,7 @@ function restore_settings {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop {
-    local input_file="$HOME"/kz-backup/desktop
+    local input_file="$settings_dir"/desktop
 
     if [[ -f $input_file ]]; then
         logmsg 'Restore the desktop background...'

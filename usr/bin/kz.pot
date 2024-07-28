@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-26 08:54+0200\n"
+"POT-Creation-Date: 2024-07-28 12:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,6 +233,13 @@ msgstr ""
 msgid "Secure settings..."
 msgstr ""
 
+msgid ""
+"This folder contains files created by kz-backup.\n"
+"These files are used by kz-restore and others.\n"
+"\n"
+"Further reading:"
+msgstr ""
+
 msgid "==== START list of manual installed packages ===="
 msgstr ""
 
@@ -246,6 +253,15 @@ msgid "==== END list of installed snaps ===="
 msgstr ""
 
 msgid "snap is not installed"
+msgstr ""
+
+msgid "Exclude file for kz-backup"
+msgstr ""
+
+msgid "Some locations are ignored by Deja Dup by default."
+msgstr ""
+
+msgid "Skip git-controlled directories."
 msgstr ""
 
 msgid "Preparing backup (this may take a while)"

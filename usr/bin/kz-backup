@@ -185,11 +185,8 @@ Disconnect media via Files.")"
             fi
         fi
         target=$medium/$PROGRAM_NAME/$USER@$HOSTNAME
-        # shellcheck disable=SC2174
-        mkdir   --parents               \
-                --mode=a=rwx            \
-                --verbose               \
-                "$medium"/$PROGRAM_NAME |& $LOGCMD
+        [[ -d $medium/$PROGRAM_NAME ]] ||
+            mkdir --mode=a=rwx --verbose "$medium"/$PROGRAM_NAME |& $LOGCMD
         target_medium=$medium
     fi
     if [[ -e $target_medium/backup-$HOSTNAME-$USER ]]; then
@@ -203,8 +200,11 @@ lease rename to 'USER@HOST'.")"
 
 # This function backups the user settings.
 function backup_settings {
+    local settings_dir="$HOME/$PROGRAM_NAME".d
+
     $option_gui || infomsg "$(gettext 'Secure settings...')"
-    mkdir --parents --verbose "$HOME/$PROGRAM_NAME" |& $LOGCMD
+    [[ -d $settings_dir ]] || mkdir --verbose "$settings_dir" |& $LOGCMD
+    backup_setting_readme
     backup_setting_apps
     backup_setting_users
     if $DESKTOP_ENVIRONMENT; then
@@ -215,9 +215,25 @@ function backup_settings {
 }
 
 
+# This function creates a README.
+function backup_setting_readme {
+    local output_file="$settings_dir"/README
+
+    logmsg 'Create settings README...'
+    text="$(gettext "This folder contains files created by kz-backup.
+These files are used by kz-restore and others.
+
+Further reading:")
+    man:kz-backup(1)
+    man:kz-restore(1)"
+    printf '%s\n' "$text" > "$output_file"
+    touch "$output_file"
+}
+
+
 # This function creates a list of installed apps.
 function backup_setting_apps {
-    local output_file="$HOME/$PROGRAM_NAME"/apps.txt
+    local output_file="$settings_dir"/apps.txt
     local header1=$(gettext "==== START list of manual installed packages ====\
 ")
     local footer1=$(gettext '==== END list of manual installed packages ====')
@@ -239,7 +255,7 @@ function backup_setting_apps {
 
 # This function saves instructions for adding additional users.
 function backup_setting_users {
-    local output_file="$HOME/$PROGRAM_NAME"/users.txt
+    local output_file="$settings_dir"/users.txt
 
     users=$(
             gettext '_username_|UID|_user_'
@@ -290,8 +306,8 @@ $users"
 # possible.
 function backup_setting_avatar {
     local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file_1="$HOME/$PROGRAM_NAME"/avatar
-    local output_file_2="$HOME/$PROGRAM_NAME"/avatar.txt
+    local output_file_1="$settings_dir"/avatar
+    local output_file_2="$settings_dir"/avatar.txt
 
     if [[ -e $input_file ]]; then
         logmsg 'Copy the user avatar...'
@@ -321,8 +337,8 @@ function backup_setting_desktop {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    local output_file_1="$HOME/$PROGRAM_NAME"/desktop
-    local output_file_2="$HOME/$PROGRAM_NAME"/desktop.txt
+    local output_file_1="$settings_dir"/desktop
+    local output_file_2="$settings_dir"/desktop.txt
 
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
@@ -348,7 +364,7 @@ hromebook).")"
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favs {
-    local output_file="$HOME/$PROGRAM_NAME"/favs.txt
+    local output_file="$settings_dir"/favs.txt
 
     logmsg 'Save the favorite apps...'
     gsettings get                           \
@@ -359,14 +375,21 @@ function backup_setting_favs {
 # This function creates the backup.
 function create_backup {
     local       error_file=''
-    local       exclude_file=''
+    local       exclude_file=$HOME/$PROGRAM_NAME
     local       rsync_messages=''
     local   -i  backup_rc=0
 
     error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
-    exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
-    # Déjà Dup: Some locations are ignored by default.
+    # Previous version of kz-backup used $exclude_file as directory name.
+    rm --force --recursive --verbose "$exclude_file" |& $LOGCMD
     cat << EOF > "$exclude_file"
+###############################################################################
+# SPDX-FileComment: $(gettext 'Exclude file for kz-backup')
+#
+# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
+# SPDX-License-Identifier: CC0-1.0
+###############################################################################
+# $(gettext 'Some locations are ignored by Deja Dup by default.')
 .cache
 .ccache
 .gvfs
@@ -378,8 +401,8 @@ snap/*/*/.cache
 *CACHEDIR.TAG*
 EOF
 
-    # Skip git-controlled directories.
     cat << EOF >> "$exclude_file"
+# $(gettext 'Skip git-controlled directories.')
 $(
     find    "$HOME"         \
             -maxdepth 2     \
@@ -425,7 +448,6 @@ EOF
                 "$SOURCE"/                      \
                 "$target"/                     2> "$error_file" || backup_rc=$?
     fi
-    rm --verbose "$exclude_file" |& $LOGCMD
 
     text=$(gettext "Writing data from memory (this may take a while)")
     if $option_gui; then

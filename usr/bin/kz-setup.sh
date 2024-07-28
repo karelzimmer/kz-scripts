@@ -185,17 +185,17 @@ kz-gnome --addaft=virt-manager
 kz-gnome --delete=virt-manager
 
 # Setup lynis for -nouser
-git clone https://github.com/CISOfy/lynis /home/"$USER"/lynis || true
+git clone https://github.com/CISOfy/lynis "$HOME"/lynis || true
 #
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
 # Reset lynis for -nouser
-rm --force --verbose --recursive --verbose /home/"$USER"/lynis
+rm --force --recursive --verbose "$HOME"/lynis
 
 # Setup restore-thumbnails for -nouser
-rm --force --verbose --recursive --verbose "$HOME"/.cache/thumbnails/
+rm --force --recursive --verbose "$HOME"/.cache/thumbnails/
 
 # Reset restore-thumbnails for -nouser
 # There is no command available to reset restored thumbnails.

@@ -223,7 +223,7 @@ function build_uploads {
 function generate_mo {
     local lc_messages=''
 
-    lc_messages=/home/"$USER"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    lc_messages="$HOME"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
     text=$(gettext 'Generate .mo file')...
     infomsg "$text"
     msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
