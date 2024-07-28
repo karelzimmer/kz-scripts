@@ -349,7 +349,8 @@ function term_script_unmount {
         logmsg "$text"...
         umount "$source_medium"                     |& $LOGCMD || rc+=$?;   \
         udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
-        udisksctl power-off --block-device "$dev"   |& $LOGCMD              |
+        udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?;   \
+        sleep 3                                                             |
         zenity  --progress                                                  \
                 --pulsate                                                   \
                 --auto-close                                                \
@@ -358,7 +359,7 @@ function term_script_unmount {
                 --height    50                                              \
                 --title     "$title"                                        \
                 --text      "$text"                                         \
-                2> >($LOGCMD) || rc=$?
+                2> >($LOGCMD)
     else
         text+='...'
         infomsg "$text"
