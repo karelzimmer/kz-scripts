@@ -287,11 +287,11 @@ msgstr "snap is niet geïnstalleerd"
 msgid "Exclude file for kz-backup"
 msgstr "Uitsluitingsbestand voor kz-back-up"
 
-msgid "Some locations are ignored by Deja Dup by default."
-msgstr "Sommige locaties worden standaard door Deja Dup genegeerd."
+msgid "Some locations are ignored by GNOME Backups by default."
+msgstr "Sommige locaties worden standaard door GNOME Backups genegeerd."
 
-msgid "Skip git-controlled directories."
-msgstr "Sla git-bestuurde mappen over."
+msgid "Skip Git-managed directories."
+msgstr "Sla Git-beheerde mappen over."
 
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"

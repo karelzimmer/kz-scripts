@@ -389,7 +389,7 @@ function create_backup {
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# $(gettext 'Some locations are ignored by Deja Dup by default.')
+# $(gettext 'Some locations are ignored by GNOME Backups by default.')
 .cache
 .ccache
 .gvfs
@@ -402,7 +402,7 @@ snap/*/*/.cache
 EOF
 
     cat << EOF >> "$exclude_file"
-# $(gettext 'Skip git-controlled directories.')
+# $(gettext 'Skip Git-managed directories.')
 $(
     find    "$HOME"         \
             -maxdepth 2     \
