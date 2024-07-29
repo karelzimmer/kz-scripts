@@ -255,15 +255,6 @@ msgstr ""
 msgid "snap is not installed"
 msgstr ""
 
-msgid "Exclude file for kz-backup"
-msgstr ""
-
-msgid "Some locations are ignored by GNOME Backups by default."
-msgstr ""
-
-msgid "Skip Git-managed directories."
-msgstr ""
-
 msgid "Preparing backup (this may take a while)"
 msgstr ""
 

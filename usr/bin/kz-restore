@@ -256,7 +256,7 @@ use app 'Terminal', type 'kz restore'.")
 
 # This function restores the user settings.
 function restore_settings {
-    local settings_dir="$HOME"/kz-backup.d
+    local settings_dir="$HOME"/kz-backup
 
     if $DESKTOP_ENVIRONMENT; then
         $option_gui || infomsg "$(gettext 'Restore settings...')"

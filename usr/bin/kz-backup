@@ -200,7 +200,7 @@ lease rename to 'USER@HOST'.")"
 
 # This function backups the user settings.
 function backup_settings {
-    local settings_dir="$HOME/$PROGRAM_NAME".d
+    local settings_dir="$HOME/$PROGRAM_NAME"
 
     $option_gui || infomsg "$(gettext 'Secure settings...')"
     [[ -d $settings_dir ]] || mkdir --verbose "$settings_dir" |& $LOGCMD
@@ -380,16 +380,9 @@ function create_backup {
     local   -i  backup_rc=0
 
     error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
-    # Previous version of kz-backup used $exclude_file as directory name.
-    rm --force --recursive --verbose "$exclude_file" |& $LOGCMD
+    exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
     cat << EOF > "$exclude_file"
-###############################################################################
-# SPDX-FileComment: $(gettext 'Exclude file for kz-backup')
-#
-# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
-# SPDX-License-Identifier: CC0-1.0
-###############################################################################
-# $(gettext 'Some locations are ignored by GNOME Backups by default.')
+# Some locations are ignored by GNOME Backups by default.
 .cache
 .ccache
 .gvfs
@@ -402,7 +395,7 @@ snap/*/*/.cache
 EOF
 
     cat << EOF >> "$exclude_file"
-# $(gettext 'Skip Git-managed directories.')
+# Skip Git-managed directories.
 $(
     find    "$HOME"         \
             -maxdepth 2     \
@@ -448,6 +441,7 @@ EOF
                 "$SOURCE"/                      \
                 "$target"/                     2> "$error_file" || backup_rc=$?
     fi
+    rm --verbose "$exclude_file" |& $LOGCMD
 
     text=$(gettext "Writing data from memory (this may take a while)")
     if $option_gui; then

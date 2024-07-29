@@ -284,15 +284,6 @@ msgstr "==== EINDE overzicht van geïnstalleerde snaps ===="
 msgid "snap is not installed"
 msgstr "snap is niet geïnstalleerd"
 
-msgid "Exclude file for kz-backup"
-msgstr "Uitsluitingsbestand voor kz-back-up"
-
-msgid "Some locations are ignored by GNOME Backups by default."
-msgstr "Sommige locaties worden standaard door GNOME Backups genegeerd."
-
-msgid "Skip Git-managed directories."
-msgstr "Sla Git-beheerde mappen over."
-
 msgid "Preparing backup (this may take a while)"
 msgstr "Back-up voorbereiden (dit kan even duren)"
 
