@@ -562,7 +562,7 @@ function term_script_unmount {
     umount "$target_medium"                     |& $LOGCMD || rc+=$?
     udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
     udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
-    sleep 3                                                         
+    sleep 3
 }
 
 
