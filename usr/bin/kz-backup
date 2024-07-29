@@ -499,7 +499,7 @@ $users"
     fi
 
     if [[ $target_medium == /media/* ]]; then
-        term_script_unmount || unmount_rc=$?
+        term_script_usb || unmount_rc=$?
         if [[ $unmount_rc -eq $OK ]]; then
             text+="
 
@@ -517,7 +517,7 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 
 
 # This function tries to unmount the USB device.
-function term_script_unmount {
+function term_script_usb {
     local       dev=''
     local   -i  rc=0
     local       text
@@ -534,29 +534,35 @@ function term_script_unmount {
                 --fields=1
     )
     if $option_gui; then
+        # With '|& zenity --progress' global variables from called functions
+        # are not passed, hence the process substitution with '> >(zenity...)'.
         logmsg "$text..."
-        umount "$target_medium"                     |& $LOGCMD || rc+=$?;   \
-        udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?;   \
-        udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?;   \
-        sleep 3                                                             |
-        zenity  --progress                                                  \
-                --pulsate                                                   \
-                --auto-close                                                \
-                --no-cancel                                                 \
-                --width     600                                             \
-                --height    50                                              \
-                --title     "$title"                                        \
-                --text      "$text"                                         \
-                2> >($LOGCMD)
+        term_script_unmount > >(
+            zenity  --progress              \
+                    --pulsate               \
+                    --auto-close            \
+                    --no-cancel             \
+                    --width     600         \
+                    --height    50          \
+                    --title     "$title"    \
+                    --text      "$text"     \
+                    2> >($LOGCMD)
+            )
     else
-        text+='...'
-        infomsg "$text"
-        umount "$target_medium"                     |& $LOGCMD || rc+=$?
-        udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
-        udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
+        infomsg "$text..."
+        term_script_unmount
     fi
 
     return $rc
+}
+
+
+# This function unmounts the USB device.
+function term_script_unmount {
+    umount "$target_medium"                     |& $LOGCMD || rc+=$?
+    udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
+    udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
+    sleep 3                                                         
 }
 
 
