@@ -128,7 +128,7 @@ $(gettext 'NUM  COMMAND')\n"
                 --body-numbering=a
         )
     text+="\n
-$(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
+$(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ ARGUMENT... ]")"
     infomsg "$text"
 }
 

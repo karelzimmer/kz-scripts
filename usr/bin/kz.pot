@@ -170,7 +170,7 @@ msgid "NUM  COMMAND"
 msgstr ""
 
 #, sh-format
-msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ARGUMENT...]"
+msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ ARGUMENT... ]"
 msgstr ""
 
 msgid "Make backup"

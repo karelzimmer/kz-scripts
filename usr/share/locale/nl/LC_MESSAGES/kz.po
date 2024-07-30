@@ -180,8 +180,8 @@ msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
 #, sh-format
-msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ARGUMENT...]"
-msgstr "Om een OPDRACHT uit te voeren: $DISPLAY_NAME OPDRACHT [ARGUMENT...]"
+msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ ARGUMENT... ]"
+msgstr "Om een OPDRACHT uit te voeren: $DISPLAY_NAME OPDRACHT [ ARGUMENT... ]"
 
 msgid "Make backup"
 msgstr "Back-up maken"
