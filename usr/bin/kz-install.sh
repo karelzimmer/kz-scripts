@@ -575,7 +575,7 @@ if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/nul
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
-sudo apt-get install --yes apt-transport-https 
+sudo apt-get install --yes apt-transport-https
 wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 sudo apt-get update
