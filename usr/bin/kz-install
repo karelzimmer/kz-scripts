@@ -428,7 +428,10 @@ function execute_command {
         [[ $cmd_seq_num -ne 1 ]] || logmsg "$app_name_line"
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        [[ $cmd_seq_num -ne 1 ]] || infomsg "$app_name_line"
+        if [[ $cmd_seq_num -eq 1 ]]; then
+            logmsg  "$app_name_line"
+            infomsg "$app_name_line"
+        fi
         if [[ ${#cmd} -gt $COLUMNS ]]; then
             # Width 12 characters less, 9 for spaces and 3 for ellipsis.
             cmd_dis_len=($COLUMNS-12)
