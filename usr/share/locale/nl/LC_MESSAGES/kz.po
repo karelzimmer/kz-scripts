@@ -145,10 +145,10 @@ msgstr "Opdracht uitvoeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Usage: $DISPLAY_NAME [-l | --list] $OPTIONS_USAGE\n"
 "          COMMAND [ARGUMENT...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Gebruik: $DISPLAY_NAME [-l | --list] $OPTIONS_USAGE\n"
 "            OPDRACHT [ARGUMENT...]"
 
 #, sh-format
@@ -188,10 +188,10 @@ msgstr "Back-up maken"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g | --gui] [-t | --target DIRECTORY]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-g|--gui] [-t|--target MAP]\n"
+"Gebruik: $DISPLAY_NAME [-g | --gui] [-t | --target MAP]\n"
 "                   $OPTIONS_USAGE"
 
 #, sh-format
@@ -449,12 +449,12 @@ msgstr "GNOME wijzigen"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]\n"
-"                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]\n"
+"Usage: $DISPLAY_NAME [-a | --addaft FAVORITE] [-b | --addbef FAVORITE]\n"
+"                [-d | --delete FAVORITE] [-l | --list] [-r | --reset]\n"
 "                $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--addaft FAVORIET] [-b|--addbef FAVORIET]\n"
-"                  [-d|--delete FAVORIET] [-l|--list] [-r|--reset]\n"
+"Gebruik: $DISPLAY_NAME [-a | --addaft FAVORIET] [-b | --addbef FAVORIET]\n"
+"                  [-d | --delete FAVORIET] [-l | --list] [-r | --reset]\n"
 "                  $OPTIONS_USAGE"
 
 msgid ""
@@ -514,12 +514,12 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
-"r|--remove]\n"
+"Usage: $DISPLAY_NAME [-a | --apps] [-c | --cat] [-f | --file FILE] "
+"[-g | --gui] [-r | --remove]\n"
 "                  $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
-"r|--remove]\n"
+"Gebruik: $DISPLAY_NAME [-a | --apps] [-c | --cat] [-f | --file BESTAND] "
+"[-g | --gui] [-r | --remove]\n"
 "                    $OPTIONS_USAGE [--] [APP...]"
 
 #, sh-format
@@ -691,8 +691,8 @@ msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
-msgstr "Gebruik: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
+msgid "Usage: $DISPLAY_NAME [-g | --gui] $OPTIONS_USAGE"
+msgstr "Gebruik: $DISPLAY_NAME [-g | --gui] $OPTIONS_USAGE"
 
 msgid "_username_|UID|_user_"
 msgstr "_gebruikersnaam_|UID|_gebruiker_"
@@ -854,10 +854,10 @@ msgstr "Het volgende is uitgevoerd:"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g | --gui] [-s | --source DIRECTORY]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-g|--gui] [-s|--source MAP]\n"
+"Gebruik: $DISPLAY_NAME [-g | --gui] [-s | --source MAP]\n"
 "                    $OPTIONS_USAGE"
 
 msgid ""
@@ -965,12 +965,12 @@ msgstr "De back-up is teruggezet voor $USER (er zijn $num_users gebruikers)."
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
-"r|--reset]\n"
+"Usage: $DISPLAY_NAME [-a | --apps] [-c | --cat] [-f | --file FILE] "
+"[-g | --gui] [-r | --reset]\n"
 "                $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
-"r|--reset]\n"
+"Gebruik: $DISPLAY_NAME [-a | --apps] [-c | --cat] [-f | --file BESTAND]"
+" [-g | --gui] [-r | --reset]\n"
 "                  $OPTIONS_USAGE [--] [APP...]"
 
 msgid "  -r, --reset    set apps on default values"

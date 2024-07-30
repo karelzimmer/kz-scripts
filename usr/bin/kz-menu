@@ -22,8 +22,8 @@ readonly PROGRAM_NAME='kz-menu'
 readonly PROGRAM_DESC=$(gettext 'Installation menu')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAG\
-E")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g | --gui] \$OPTIONS_US\
+AGE")
 
 readonly X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, req\
 uires desktop environment")

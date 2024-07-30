@@ -43,7 +43,7 @@ BOLD = '\033[1m'
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
 
-OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
+OPTIONS_USAGE = '[-h | --help] [-m | --manual] [-u | --usage] [-v | --version]'
 
 OPTIONS_HELP = (f"{_('  -h, --help     give this help list')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"

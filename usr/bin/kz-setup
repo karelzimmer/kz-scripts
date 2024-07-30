@@ -23,8 +23,8 @@ readonly PROGRAM_NAME='kz-setup'
 readonly PROGRAM_DESC=$(gettext 'Set up apps')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-\
-f|--file FILE] [-g|--gui] [-r|--reset]
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a | --apps] [-c | --cat\
+] [-f | --file FILE] [-g | --gui] [-r | --reset]
                 \$OPTIONS_USAGE [--] [APP...]")
 
 readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \

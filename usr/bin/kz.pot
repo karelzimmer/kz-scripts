@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-28 18:48+0200\n"
+"POT-Creation-Date: 2024-07-30 19:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,7 +137,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Usage: $DISPLAY_NAME [-l | --list] $OPTIONS_USAGE\n"
 "          COMMAND [ARGUMENT...]"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g | --gui] [-t | --target DIRECTORY]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
 
@@ -401,8 +401,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]\n"
-"                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]\n"
+"Usage: $DISPLAY_NAME [-a | --addaft FAVORITE] [-b | --addbef FAVORITE]\n"
+"                [-d | --delete FAVORITE] [-l | --list] [-r | --reset]\n"
 "                $OPTIONS_USAGE"
 msgstr ""
 
@@ -454,8 +454,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
-"r|--remove]\n"
+"Usage: $DISPLAY_NAME [-a | --apps] [-c | --cat] [-f | --file FILE] [-g | --"
+"gui] [-r | --remove]\n"
 "                  $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgid "Go to installation menu"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
+msgid "Usage: $DISPLAY_NAME [-g | --gui] $OPTIONS_USAGE"
 msgstr ""
 
 msgid "_username_|UID|_user_"
@@ -741,7 +741,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g | --gui] [-s | --source DIRECTORY]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
 
@@ -813,8 +813,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
-"r|--reset]\n"
+"Usage: $DISPLAY_NAME [-a | --apps] [-c | --cat] [-f | --file FILE] [-g | --"
+"gui] [-r | --reset]\n"
 "                $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
 
