@@ -23,8 +23,8 @@ readonly PROGRAM_NAME='kz-backup'
 readonly PROGRAM_DESC=$(gettext 'Make backup')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g | --gui] [-t | --tar\
-get DIRECTORY]
+readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [ -g | --gui ] [ -t | --\
+target DIRECTORY ]
                  \$OPTIONS_USAGE")"
 
 readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
@@ -35,7 +35,7 @@ t")
 $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')"
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [ OPTION... ]")
 
 $PROGRAM_DESC.
 

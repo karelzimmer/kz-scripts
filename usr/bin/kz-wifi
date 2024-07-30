@@ -23,13 +23,13 @@ readonly PROGRAM_NAME='kz-wifi'
 readonly PROGRAM_DESC=$(gettext 'Show WiFi information')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g | --gui] \$OPTIONS_US\
-AGE")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [ -g | --gui ] \$OPTIONS_\
+USAGE")
 
 readonly X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, req\
 uires desktop environment")
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [ OPTION... ]")
 
 $PROGRAM_DESC.
 

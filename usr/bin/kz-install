@@ -23,9 +23,9 @@ readonly PROGRAM_NAME=kz-install
 readonly PROGRAM_DESC=$(gettext 'Install apps')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a | --apps] [-c | --cat\
-] [-f | --file FILE] [-g | --gui] [-r | --remove]
-                  \$OPTIONS_USAGE [--] [APP...]")
+readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [ -a | --apps ] [ -c | --\
+cat ] [ -f | --file FILE ] [ -g | --gui ] [ -r | --remove ]
+                  \$OPTIONS_USAGE [ -- ] [ APP... ]")
 
 readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
@@ -38,7 +38,7 @@ $(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
 t")
 $(gettext '  -r, --remove   delete apps')"
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [ OPTION... ] [ APP... ]")
 
 $PROGRAM_DESC.
 

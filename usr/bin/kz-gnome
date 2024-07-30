@@ -23,9 +23,9 @@ readonly PROGRAM_NAME='kz-gnome'
 readonly PROGRAM_DESC=$(gettext 'Change GNOME')
 readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a | --addaft FAVORITE]\
- [-b | --addbef FAVORITE]
-                [-d | --delete FAVORITE] [-l | --list] [-r | --reset]
+readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [ -a | --addaft FAVORITE\
+ ] [ -b | --addbef FAVORITE ]
+                [ -d | --delete FAVORITE ] [ -l | --list ] [ -r | --reset ]
                 \$OPTIONS_USAGE")"
 
 readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
@@ -40,7 +40,7 @@ $(gettext '  -d, --delete FAVORITE
 $(gettext '  -l, --list     show favorites')
 $(gettext '  -r, --reset    set favorites on default values')"
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [ OPTION... ]")
 
 $PROGRAM_DESC.
 
