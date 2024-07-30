@@ -538,12 +538,14 @@ sudo passwd --delete --expire karel
 # Remove user-karel from pc01
 sudo userdel --remove karel
 
-# Install user-log-access on *
-sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
+# Install user-log-access on pc07
+# # For a different _username_, replace karel with _username_.
+sudo usermod --append --groups adm,systemd-journal karel
 
-# Remove user-log-access from *
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
+# Remove user-log-access from pc07
+# # For a different _username_, replace karel with _username_.
+sudo deluser karel adm
+sudo deluser karel systemd-journal
 
 # Install user-toos on Laptop
 sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
@@ -573,6 +575,7 @@ if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/nul
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
+sudo apt-get install --yes apt-transport-https 
 wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
 sudo apt-get update
