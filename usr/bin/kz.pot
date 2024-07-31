@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-30 19:34+0200\n"
+"POT-Creation-Date: 2024-07-31 13:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,9 +101,6 @@ msgid "Program {} has been interrupted."
 msgstr ""
 
 msgid "Program {} encountered an error."
-msgstr ""
-
-msgid "type '{} --usage' for more information"
 msgstr ""
 
 msgid "Usage: {} [ OPTION... ]"

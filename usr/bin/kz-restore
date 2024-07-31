@@ -77,7 +77,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        infomsg "$USAGE_LINE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -95,7 +95,7 @@ function process_x_options {
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
-$USAGE_LINE"
+$USAGE"
                     infomsg "$text"
                     exit $ERROR
                 fi
@@ -105,7 +105,7 @@ $USAGE_LINE"
             -s | --source)
                 if $option_source; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE_LINE"
+$USAGE"
                     infomsg "$text"
                     exit $ERROR
                 fi
@@ -125,7 +125,7 @@ $USAGE_LINE"
 
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE_LINE"
+$USAGE"
         infomsg "$text"
         exit $ERROR
     fi
@@ -147,7 +147,7 @@ function check_source {
         if [[ ! -d $source_argument ]]; then
             text="$DISPLAY_NAME: $source_argument: \
 $(gettext 'directory does not exist')
-$USAGE_LINE"
+$USAGE"
             infomsg "$text"
             exit $ERROR
         fi

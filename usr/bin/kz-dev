@@ -55,7 +55,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        infomsg "$USAGE_LINE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -81,14 +81,14 @@ function process_x_options {
 
     if [[ -n $* ]]; then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE_LINE"
+$USAGE"
         infomsg "$text"
         exit $ERROR
     fi
 
     if ! $DESKTOP_ENVIRONMENT; then
         text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
-$USAGE_LINE"
+$USAGE"
         infomsg "$text"
         exit $ERROR
     fi

@@ -34,11 +34,13 @@ PROGRAM_NAME = 'kz-update'
 PROGRAM_DESC = _('Update system')
 DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
+
 ###############################################################################
 # Variables
 ###############################################################################
 
 command = ''
+kz_common.usage = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
 
 ###############################################################################

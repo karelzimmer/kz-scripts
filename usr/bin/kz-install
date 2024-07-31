@@ -95,7 +95,7 @@ function check_input {
                 --              "$@"
         ) || parsed_rc=$?
     if [[ $parsed_rc -ne $OK ]]; then
-        infomsg "$USAGE_LINE"
+        infomsg "$USAGE"
         exit $ERROR
     fi
     eval set -- "$parsed"
@@ -120,7 +120,7 @@ function process_x_options {
             -f | --file)
                 if $option_file; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE_LINE"
+$USAGE"
                     infomsg "$text"
                     exit $ERROR
                 fi
@@ -132,7 +132,7 @@ $USAGE_LINE"
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
-$USAGE_LINE"
+$USAGE"
                     infomsg "$text"
                     exit $ERROR
                 fi
@@ -240,7 +240,7 @@ SPLAY_NAME --cat")"
     else
         text+="$(gettext '  0  No apps found.')
 
-$USAGE_LINE"
+$USAGE"
     fi
     infomsg "$text"
 }

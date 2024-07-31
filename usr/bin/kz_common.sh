@@ -207,8 +207,6 @@ Started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)."
     logmsg "$text"
 
     commandline_args=("$@")
-    readonly USAGE_LINE=$(eval_gettext "Type '\$DISPLAY_NAME --usage' for more\
- information.")
 }
 
 

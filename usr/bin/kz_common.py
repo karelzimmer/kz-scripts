@@ -71,6 +71,7 @@ else:
 
 text = ''
 rc = OK
+usage = ''
 
 
 ###############################################################################
@@ -185,12 +186,8 @@ def init_script(PROGRAM_NAME, DISPLAY_NAME):
     """
     This function performs initial actions.
     """
-    global USAGE_LINE
-
     text = f'==== START logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, text)
-    USAGE_LINE = _("type '{} --usage' for more information").\
-        format(DISPLAY_NAME)
 
 
 def logmsg(PROGRAM_NAME, text):
@@ -204,8 +201,10 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the common options.
     """
-    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE_LINE,
+    # parser = argparse.ArgumentParser(prog=DISPLAY_NAME, add_help=False)
+    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=usage,
                                      add_help=False)
+
     parser.add_argument('-h', '--help', action='store_true')
     parser.add_argument('-m', '--manual', action='store_true')
     parser.add_argument('-u', '--usage', action='store_true')

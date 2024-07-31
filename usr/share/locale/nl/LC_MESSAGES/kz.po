@@ -111,9 +111,6 @@ msgstr "Programma {} is onderbroken."
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
 
-msgid "type '{} --usage' for more information"
-msgstr "typ '{} --usage' voor meer informatie"
-
 msgid "Usage: {} [ OPTION... ]"
 msgstr "Gebruik: {} [ OPTIE... ]"
 
