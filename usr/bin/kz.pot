@@ -48,10 +48,6 @@ msgid "Already performed by the administrator."
 msgstr ""
 
 #, sh-format
-msgid "Type '$DISPLAY_NAME --usage' for more information."
-msgstr ""
-
-#, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 

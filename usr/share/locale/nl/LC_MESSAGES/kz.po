@@ -51,10 +51,6 @@ msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
 #, sh-format
-msgid "Type '$DISPLAY_NAME --usage' for more information."
-msgstr "Typ '$DISPLAY_NAME --usage' voor meer informatie."
-
-#, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
