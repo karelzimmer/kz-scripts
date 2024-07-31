@@ -513,8 +513,8 @@ msgid ""
 "g | --gui ] [ -r | --remove ]\n"
 "                  $OPTIONS_USAGE [ -- ] [ APP... ]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a | --apps] [-c | --cat] [-f | --file BESTAND] [-g "
-"| --gui] [-r | --remove]\n"
+"Gebruik: $DISPLAY_NAME [ -a | --apps ] [ -c | --cat ] [ -f | --file BESTAND ]"
+" [ -g | --gui ] [ -r | --remove ]\n"
 "                    $OPTIONS_USAGE [ -- ] [ APP... ]"
 
 #, sh-format
