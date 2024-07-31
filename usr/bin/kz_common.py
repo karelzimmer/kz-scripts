@@ -43,8 +43,7 @@ BOLD = '\033[1m'
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
 
-OPTIONS_USAGE = '[ -h | --help ] [ -m | --manual ] [ -u | --usage ] [ -v | --v\
-ersion ]'
+OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
 OPTIONS_HELP = (f"{_('  -h, --help     give this help list')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"
@@ -240,7 +239,7 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
         yelp_man_url += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
         yelp_man_url += f" {_('man page')}\x1b]8;;\x1b\\"
 
-    text = (f"{_('Usage: {} [ OPTION... ]').format(DISPLAY_NAME)}\n\n"
+    text = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
             f'{PROGRAM_DESC}.\n\n'
             f"{_('Options:')}\n"
             f'{OPTIONS_HELP}\n\n'

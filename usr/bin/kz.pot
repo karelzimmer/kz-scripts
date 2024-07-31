@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-31 14:59+0200\n"
+"POT-Creation-Date: 2024-07-31 19:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-msgid "Usage: {} [ OPTION... ]"
+msgid "Usage: {} [OPTION...]"
 msgstr ""
 
 msgid "Type '{} --manual' or 'man {}'{} for more information."
@@ -130,12 +130,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [ -l | --list ] $OPTIONS_USAGE\n"
-"          COMMAND [ ARGUMENT... ]"
+"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"          COMMAND [ARGUMENT...]"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [ OPTION... ] COMMAND [ ARGUMENT... ]"
+msgid "Usage: $DISPLAY_NAME [OPTION...] COMMAND [ARGUMENT...]"
 msgstr ""
 
 msgid "  -l, --list     show available COMMANDs"
@@ -163,7 +163,7 @@ msgid "NUM  COMMAND"
 msgstr ""
 
 #, sh-format
-msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ ARGUMENT... ]"
+msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ARGUMENT...]"
 msgstr ""
 
 msgid "Make backup"
@@ -171,12 +171,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [ -g | --gui ] [ -t | --target DIRECTORY ]\n"
+"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [ OPTION... ]"
+msgid "Usage: $DISPLAY_NAME [OPTION...]"
 msgstr ""
 
 msgid "Options:"
@@ -394,8 +394,8 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [ -a | --addaft FAVORITE ] [ -b | --addbef FAVORITE ]\n"
-"                [ -d | --delete FAVORITE ] [ -l | --list ] [ -r | --reset ]\n"
+"Usage: $DISPLAY_NAME [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]\n"
+"                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]\n"
 "                $OPTIONS_USAGE"
 msgstr ""
 
@@ -447,13 +447,13 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [ -a | --apps ] [ -c | --cat ] [ -f | --file FILE ] [ -"
-"g | --gui ] [ -r | --remove ]\n"
-"                  $OPTIONS_USAGE [ -- ] [ APP... ]"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"r|--remove]\n"
+"                  $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [ OPTION... ] [ APP... ]"
+msgid "Usage: $DISPLAY_NAME [OPTION...] [APP...]"
 msgstr ""
 
 msgid "  -a, --apps     show list of apps"
@@ -592,7 +592,7 @@ msgid "Go to installation menu"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [ -g | --gui ] $OPTIONS_USAGE"
+msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr ""
 
 msgid "_username_|UID|_user_"
@@ -734,7 +734,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [ -g | --gui ] [ -s | --source DIRECTORY ]\n"
+"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
 
@@ -806,9 +806,9 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [ -a | --apps ] [ -c | --cat ] [ -f | --file FILE ] [ -"
-"g | --gui ] [ -r | --reset ]\n"
-"                $OPTIONS_USAGE [ -- ] [ APP... ]"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"r|--reset]\n"
+"                $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
 
 msgid "  -r, --reset    set apps on default values"
