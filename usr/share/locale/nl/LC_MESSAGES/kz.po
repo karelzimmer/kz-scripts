@@ -113,8 +113,8 @@ msgstr "Gebruik: {} [OPTIE...]"
 msgid "Type '{} --manual' or 'man {}'{} for more information."
 msgstr "Typ '{} --manual' of 'man {}'{} voor meer informatie."
 
-msgid "Usage: {}"
-msgstr "Gebruik: {}"
+msgid "Usage:"
+msgstr "Gebruik:"
 
 msgid "Type '{} --help' for more information."
 msgstr "Typ '{} --help' voor meer informatie."

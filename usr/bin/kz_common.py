@@ -268,7 +268,7 @@ def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    text = (f"{_('Usage: {}').format(DISPLAY_NAME)} {OPTIONS_USAGE}\n\n"
+    text = (f"{_('Usage:')} {usage}\n\n"
             f'''{_("Type '{} --help' for more information.").
                  format(DISPLAY_NAME)}''')
     infomsg(PROGRAM_NAME, text)
