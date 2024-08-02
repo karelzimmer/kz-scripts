@@ -184,7 +184,7 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /de
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install dual-monitor on pc06
-if [[ -f /home/${SUDO_USER:-$USER}/.config/monitors.xml ]]; then sudo cp --preserve --verbose /home/"${SUDO_USER:-$USER}"/.config/monitors.xml ~gdm/.config/monitors.xml; fi
+if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
 # Remove dual-monitor from pc06
@@ -341,7 +341,7 @@ sudo apt-get remove --yes krita
 #
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
-sudo usermod --append --groups libvirt,libvirt-qemu "${SUDO_USER:-$USER}"
+sudo usermod --append --groups libvirt,libvirt-qemu karel
 #
 # Prevent "Error starting domain: Requested operation is not valid: network 'default' is not active".
 sudo virsh --connect=qemu:///system net-autostart default
@@ -353,8 +353,8 @@ sudo virsh --connect=qemu:///system net-autostart default
 sudo virsh --connect=qemu:///system net-autostart default --disable
 sudo apt-get remove --yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo delgroup libvirtd-dnsmasq
-sudo deluser "${SUDO_USER:-$USER}" libvirtd
-sudo deluser "${SUDO_USER:-$USER}" libvirtd-qemu
+sudo deluser karel libvirtd
+sudo deluser karel libvirtd-qemu
 sudo delgroup libvirtd
 
 # Install lftp on pc06 pc07
@@ -539,15 +539,9 @@ sudo passwd --delete --expire karel
 sudo userdel --remove karel
 
 # Install user-log-access on pc07
-sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
-
-# Remove user-log-access from pc07
-sudo deluser "${SUDO_USER:-$USER}" adm
-sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 sudo usermod --append --groups adm,systemd-journal karel
 
 # Remove user-log-access from pc07
-# # For a different _username_, replace karel with _username_.
 sudo deluser karel adm
 sudo deluser karel systemd-journal
 
