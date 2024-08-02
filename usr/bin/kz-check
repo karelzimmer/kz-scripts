@@ -71,11 +71,11 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            --)
+            -- )
                 shift
                 break
                 ;;
-            *)
+            * )
                 shift
                 ;;
         esac
@@ -112,39 +112,39 @@ function process_input {
         scriptname=$(basename "$script")
         infomsg "  $(realpath "$script")"
         case $scriptname in
-            *.png)
+            *.png )
                 continue
                 ;;
-            *.json | *.policy)
+            *.json | *.policy )
                 check_trailing_spaces
                 continue
                 ;;
-            *.1)
+            *.1 )
                 check_trailing_spaces
                 check_record_length
                 ;;
-            *.desktop)
+            *.desktop )
                 check_trailing_spaces
                 check_record_length
                 check_desktop_file_validation
                 ;;
-            kz_common.py)
+            kz_common.py )
                 check_trailing_spaces
                 check_tags
                 check_pycodestyle
                 ;;
-            kz_common.sh)
+            kz_common.sh )
                 check_trailing_spaces
                 check_tags
                 check_record_length
                 check_shellcheck
                 ;;
-            *.sh)
+            *.sh )
                 check_trailing_spaces
                 check_tags
                 check_shellcheck
                 ;;
-            *)
+            * )
                 check_trailing_spaces
                 check_tags
                 check_record_length

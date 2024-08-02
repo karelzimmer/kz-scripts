@@ -109,15 +109,15 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -a | --apps)
+            -a | --apps )
                 option_apps=true
                 shift
                 ;;
-            -c | --cat)
+            -c | --cat )
                 option_cat=true
                 shift
                 ;;
-            -f | --file)
+            -f | --file )
                 if $option_file; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
@@ -128,7 +128,7 @@ $USAGE"
                 file_argument=$2
                 shift 2
                 ;;
-            -g | --gui)
+            -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -139,7 +139,7 @@ $USAGE"
                 option_gui=true
                 shift
                 ;;
-            -r | --remove)
+            -r | --remove )
                 option_remove=true
                 install='Remove'
                 on='from'
@@ -147,11 +147,11 @@ $USAGE"
                 from='on'
                 shift
                 ;;
-            --)
+            -- )
                 shift
                 break
                 ;;
-            *)
+            * )
                 shift
                 ;;
         esac
@@ -273,18 +273,18 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '#'*$install*[[:space:]]"$app_argument"[[:space:]]*$on*)
+            '#'*$install*[[:space:]]"$app_argument"[[:space:]]*$on* )
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$install*$on* | '#'*$remove*$from*)
+            '#'*$install*$on* | '#'*$remove*$from* )
                 # Mismatched app record.
                 app_match=false
                 continue
                 ;;
-            *)
+            * )
                 if $app_match; then
                     # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
@@ -308,17 +308,17 @@ function process_input_file_by_host {
 
     while read -r input_record; do
         case $input_record in
-            '#'*$install*$on*'*' | '#'*$install*$on*$HOSTNAME*)
+            '#'*$install*$on*'*' | '#'*$install*$on*$HOSTNAME* )
                 # Matching app record.
                 host_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$install*$on* | '#'*$remove*$from*)
+            '#'*$install*$on* | '#'*$remove*$from* )
                 # Mismatched app record.
                 host_match=false
                 continue
                 ;;
-            *)
+            * )
                 if $host_match; then
                     # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
@@ -385,7 +385,7 @@ function process_command_file {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$install*$on*)
+            '#'*$install*$on* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
@@ -400,11 +400,11 @@ function process_command_file {
                         "$app_tot_num"      \
                         "$app_name"
                 ;;
-            '' | '#'*)
+            '' | '#'* )
                 # Empty record or comment line. Use cat option to view.
                 continue
                 ;;
-            *)
+            * )
                 # Command record.
                 no_commands_found=false
                 execute_command "$command_record"

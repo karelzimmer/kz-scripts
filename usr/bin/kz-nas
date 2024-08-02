@@ -102,7 +102,7 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -g | --gui)
+            -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -113,11 +113,11 @@ $USAGE"
                 option_gui=true
                 shift
                 ;;
-            --)
+            -- )
                 shift
                 break
                 ;;
-            *)
+            * )
                 shift
                 ;;
         esac
@@ -168,14 +168,14 @@ request_input() {
             prompt=$(eval_gettext "\$quest1 [y/N]: ")
             read -rp "$prompt"
             case $REPLY in
-                [YyJj]*)
+                [YyJj]* )
                     break
                     ;;
-                [Nn]* | '')
+                [Nn]* | '' )
                     printf '%s\n' "$NAS_FIXED_IP_ADDRESS"
                     exit $OK
                     ;;
-                *)
+                * )
                     continue
                     ;;
             esac

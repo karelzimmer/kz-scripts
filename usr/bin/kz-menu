@@ -123,7 +123,7 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -g | --gui)
+            -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -134,11 +134,11 @@ $USAGE"
                 option_gui=true
                 shift
                 ;;
-            --)
+            -- )
                 shift
                 break
                 ;;
-            *)
+            * )
                 shift
                 ;;
         esac
@@ -212,10 +212,10 @@ function process_menu1_tui {
         prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
         read -rp "$prompt"
         case $REPLY in
-            *[^[:digit:]]*)
+            *[^[:digit:]]* )
                 continue
                 ;;
-            *)
+            * )
                 if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
                     process_menu1_choice
                 else
@@ -230,25 +230,25 @@ function process_menu1_tui {
 # This function processes menu 1 choice.
 function process_menu1_choice {
     case $REPLY in
-        1)
+        1 )
             process_menu1_choice1
             ;;
-        2)
+        2 )
             process_menu1_choice2
             ;;
-        3)
+        3 )
             process_menu1_choice3
             ;;
-        4)
+        4 )
             process_menu1_choice4
             ;;
-        5)
+        5 )
             process_menu2
             ;;
-        6)
+        6 )
             exit $OK
             ;;
-        *)
+        * )
             text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
             errormsg "$text"
             exit $ERROR
@@ -374,10 +374,10 @@ function process_menu2_tui {
         prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
         read -rp "$prompt"
         case $REPLY in
-            *[^[:digit:]]*)
+            *[^[:digit:]]* )
                 continue
                 ;;
-            *)
+            * )
                 if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
                     process_menu2_choice
                 else
@@ -472,15 +472,15 @@ $prompt"
         while true; do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
-                [YyJj]* | '')
+                [YyJj]* | '' )
                     execute_command=true
                     break
                     ;;
-                [Nn]*)
+                [Nn]* )
                     execute_command=false
                     break
                     ;;
-                *)
+                * )
                     continue
                     ;;
             esac

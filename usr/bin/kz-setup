@@ -107,15 +107,15 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -a | --apps)
+            -a | --apps )
                 option_apps=true
                 shift
                 ;;
-            -c | --cat)
+            -c | --cat )
                 option_cat=true
                 shift
                 ;;
-            -f | --file)
+            -f | --file )
                 if $option_file; then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
@@ -126,7 +126,7 @@ $USAGE"
                 file_argument=$2
                 shift 2
                 ;;
-            -g | --gui)
+            -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
@@ -137,17 +137,17 @@ $USAGE"
                 option_gui=true
                 shift
                 ;;
-            -r | --reset)
+            -r | --reset )
                 option_reset=true
                 setup='Reset'
                 reset='Setup'
                 shift
                 ;;
-            --)
+            -- )
                 shift
                 break
                 ;;
-            *)
+            * )
                 shift
                 ;;
         esac
@@ -263,18 +263,18 @@ function process_input_file_by_app {
 
     while read -r input_record; do
         case $input_record in
-            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*for*)
+            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*for* )
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup*for* | '#'*$reset*for*)
+            '#'*$setup*for* | '#'*$reset*for* )
                 # Mismatched app record.
                 app_match=false
                 continue
                 ;;
-            *)
+            * )
                 if $app_match; then
                     # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
@@ -298,17 +298,17 @@ function process_input_file_by_user {
 
     while read -r input_record; do
         case $input_record in
-            '#'*$setup*for*'*' | '#'*$setup*for*$USER@$HOSTNAME*)
+            '#'*$setup*for*'*' | '#'*$setup*for*$USER@$HOSTNAME* )
                 # Matching app record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup*for* | '#'*$reset*for*)
+            '#'*$setup*for* | '#'*$reset*for* )
                 # Mismatched app record.
                 user_match=false
                 continue
                 ;;
-            *)
+            * )
                 if $user_match; then
                     # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
@@ -375,7 +375,7 @@ function process_command_file {
 
     while read -r command_record; do
         case $command_record in
-            '#'*$setup*)
+            '#'*$setup* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
@@ -390,11 +390,11 @@ function process_command_file {
                         "$app_tot_num"      \
                         "$app_name"
                 ;;
-            '' | '#'*)
+            '' | '#'* )
                 # Empty record or comment line. Use cat option to view.
                 continue
                 ;;
-            *)
+            * )
                 # Command record.
                 no_commands_found=false
                 execute_command "$command_record"

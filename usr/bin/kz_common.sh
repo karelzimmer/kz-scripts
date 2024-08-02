@@ -219,26 +219,26 @@ function logmsg {
 function process_options {
     while true; do
         case $1 in
-            -h | --help)
+            -h | --help )
                 process_option_help
                 exit $OK
                 ;;
-            -m | --manual)
+            -m | --manual )
                 process_option_manual
                 exit $OK
                 ;;
-            -u | --usage)
+            -u | --usage )
                 process_option_usage
                 exit $OK
                 ;;
-            -v | --version)
+            -v | --version )
                 process_option_version
                 exit $OK
                 ;;
-            --)
+            -- )
                 break
                 ;;
-            *)
+            * )
                 shift
                 ;;
         esac
@@ -307,55 +307,55 @@ function term {
     local       status=$rc/error
 
     case $rc in
-        0)
+        0 )
             rc_desc='successful termination'
             status=$rc/OK
             ;;
-        1)
+        1 )
             rc_desc='terminated with error'
             ;;
-        6[4-9] | 7[0-8])                    # 64--78
+        6[4-9] | 7[0-8] )                   # 64--78
             rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
             ;;
-        100)
+        100 )
             rc_desc='apt/dpkg exited with error'
             ;;
-        126)
+        126 )
             rc_desc='command cannot execute'
             ;;
-        127)
+        127 )
             rc_desc='command not found'
             ;;
-        128)
+        128 )
             rc_desc='invalid argument to exit'
             ;;
-        129)                                # SIGHUP (128 + 1)
+        129 )                               # SIGHUP (128 + 1)
             rc_desc='hangup'
             ;;
-        130)                                # SIGINT (128 + 2)
+        130 )                               # SIGINT (128 + 2)
             rc_desc='terminated by control-c'
             ;;
-        13[1-9] | 140)                      # 131 (128 + 3)--140 (128 + 12)
+        13[1-9] | 140 )                     # 131 (128 + 3)--140 (128 + 12)
             rc_desc_signalno=$((rc - 128))
             rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
             ;;
-        141)                                # SIGPIPE (128 + 13)
+        141 )                               # SIGPIPE (128 + 13)
             rc_desc='broken pipe: write to pipe with no readers'
             ;;
-        142)                                # SIGALRM (128 + 14)
+        142 )                               # SIGALRM (128 + 14)
             rc_desc='timer signal from alarm'
             ;;
-        143)                                # SIGTERM (128 + 15)
+        143 )                               # SIGTERM (128 + 15)
             rc_desc='termination signal'
             ;;
         14[4-9] | 1[5-8][0-9] | 19[0-2])    # 144 (128 + 16)--192 (128 + 64)
             rc_desc_signalno=$((rc - 128))
             rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
             ;;
-        255)
+        255 )
             rc_desc='exit status out of range'
             ;;
-        *)
+        * )
             rc_desc='unknown error'
             ;;
     esac
@@ -364,7 +364,7 @@ function term {
     logmsg "$text"
 
     case $signal in
-        err)
+        err )
             if $errexit; then
                 text=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
 or.")
@@ -372,7 +372,7 @@ or.")
                 exit "$rc"
             fi
             ;;
-        exit)
+        exit )
             logmsg "Cleanup kz-deb files ($MODULE_NAME)..."
             rm  --force                 \
                 --verbose               \
@@ -385,7 +385,7 @@ or.")
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
-        *)
+        * )
             text=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
             errormsg "$text"
             exit "$rc"

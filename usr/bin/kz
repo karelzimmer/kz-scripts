@@ -90,15 +90,15 @@ function check_input {
 function process_x_options {
     while true; do
         case $1 in
-            -l | --list)
+            -l | --list )
                 process_option_list
                 exit $OK
                 ;;
-            --)
+            -- )
                 shift
                 break
                 ;;
-            *)
+            * )
                 shift
                 ;;
         esac
