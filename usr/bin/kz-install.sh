@@ -539,7 +539,11 @@ sudo passwd --delete --expire karel
 sudo userdel --remove karel
 
 # Install user-log-access on pc07
-# # For a different _username_, replace karel with _username_.
+sudo usermod --append --groups adm,systemd-journal "${SUDO_USER:-$USER}"
+
+# Remove user-log-access from pc07
+sudo deluser "${SUDO_USER:-$USER}" adm
+sudo deluser "${SUDO_USER:-$USER}" systemd-journal
 sudo usermod --append --groups adm,systemd-journal karel
 
 # Remove user-log-access from pc07
