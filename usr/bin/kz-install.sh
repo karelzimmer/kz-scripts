@@ -206,7 +206,7 @@ sudo apt-get remove --yes fakeroot
 sudo apt-get install --yes fdupes
 #
 # Usage:
-# $ fdupes -r /home               # Report recursively from /home
+# $ fdupes -r /path/to/folder     # Report recursively from /path/to/folder
 # $ fdupes -d /path/to/folder     # Delete, interactively, from /path/to/folder
 # $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
