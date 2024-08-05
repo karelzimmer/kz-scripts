@@ -20,16 +20,16 @@ msgstr ""
 msgid "Common module for shell scripts"
 msgstr "Algemene module voor shell scripts"
 
-msgid "  -h, --help     give this help list"
+msgid "  -h, --help     show this help text"
 msgstr "  -h, --help     toon deze hulptekst"
-
-msgid "  -u, --usage    give a short usage message"
-msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
 
 msgid "  -m, --manual   show manual page"
 msgstr "  -m, --manual   toon handleidingpagina"
 
-msgid "  -v, --version  print program version"
+msgid "  -u, --usage    show a short usage summary"
+msgstr "  -u, --usage    toon een korte gebruikssamenvatting"
+
+msgid "  -v, --version  show program version"
 msgstr "  -v, --version  toon de programmaversie"
 
 msgid ""

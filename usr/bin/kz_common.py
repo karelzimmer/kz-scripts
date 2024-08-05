@@ -47,10 +47,10 @@ USAGE = None
 OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
 HELP = None
-OPTIONS_HELP = (f"{_('  -h, --help     give this help list')}\n"
+OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"
-                f"{_('  -u, --usage    give a short usage message')}\n"
-                f"{_('  -v, --version  print program version')}")
+                f"{_('  -u, --usage    show a short usage summary')}\n"
+                f"{_('  -v, --version  show program version')}")
 
 OPTIONS_SHORT = 'hmuv'
 OPTIONS_LONG = 'help,manual,usage,version'

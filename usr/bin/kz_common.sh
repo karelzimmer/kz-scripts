@@ -37,10 +37,10 @@ readonly GREEN='\033[1;32m'
 
 readonly OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
-readonly OPTIONS_HELP="$(gettext '  -h, --help     give this help list')
+readonly OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
-$(gettext '  -u, --usage    give a short usage message')
-$(gettext '  -v, --version  print program version')"
+$(gettext '  -u, --usage    show a short usage summary')
+$(gettext '  -v, --version  show program version')"
 
 readonly OPTIONS_SHORT='hmuv'
 readonly OPTIONS_LONG='help,manual,usage,version'
