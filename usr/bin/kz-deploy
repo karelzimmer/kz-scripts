@@ -60,7 +60,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -73,7 +74,8 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -- )
                 shift
@@ -85,14 +87,16 @@ function process_x_options {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
         exit $ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
+    if ! $DESKTOP_ENVIRONMENT
+    then
         text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$text"
@@ -118,9 +122,11 @@ function check_repos {
 
     text=$(gettext 'Check that all repos are on branch main')...
     infomsg "$text"
-    for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
+    for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
+    do
         cd "$repo"
-        if [[ $(git branch --show-current) != 'main' ]]; then
+        if [[ $(git branch --show-current) != 'main' ]]
+        then
             text=$(gettext "Repo \$repo not on branch main.")
             errormsg "$text"
             git status
@@ -129,18 +135,21 @@ function check_repos {
     done
     text=$(gettext 'Check that all repos are clean')...
     infomsg "$text"
-    for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
+    for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
+    do
         cd "$repo"
         # Prevent false positives.
         git status |& $LOGCMD
-        if ! git diff-index --quiet HEAD; then
+        if ! git diff-index --quiet HEAD
+        then
             text=$(eval_gettext "Repo \$repo is not clean.")
             errormsg "$text"
             git status
             error_flag=true
         fi
     done
-    if $error_flag; then
+    if $error_flag
+    then
         exit $ERROR
     fi
 }
@@ -171,7 +180,8 @@ function upload_website {
 
     text=$(gettext 'Upload website')...
     infomsg "$text"
-    if [[ ! -f $ftp_login ]]; then
+    if [[ ! -f $ftp_login ]]
+    then
         read -rp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
@@ -180,7 +190,8 @@ function upload_website {
     if ! lftp   --user      "$ftp_user"             \
                 --password  "$(cat "$ftp_login")"   \
                 -e          "$ftp_set; $ftp_cmd"    \
-                "$ftp_host"; then
+                "$ftp_host"
+    then
         # Force entering the password next time.
         rm --verbose "$ftp_login"*
         text=$(gettext 'Website upload failed.')

@@ -56,7 +56,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -69,7 +70,8 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -- )
                 shift
@@ -81,14 +83,16 @@ function process_x_options {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
         exit $ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
+    if ! $DESKTOP_ENVIRONMENT
+    then
         text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$text"
@@ -107,7 +111,8 @@ function process_input {
     text=$(gettext 'Check script:')
     infomsg "$text"
     cd "$scripts_repo"
-    while read -r script; do
+    while read -r script
+    do
         scriptdir=$(dirname "$(realpath "$script")")
         scriptname=$(basename "$script")
         infomsg "  $(realpath "$script")"
@@ -174,12 +179,14 @@ function check_code {
     local python_script='#!''/usr/bin/python3'
     local tab_completion_script='# ''shellcheck shell=bash'
 
-    if grep --quiet --line-regexp --regexp="$bash_script" "$script"; then
+    if grep --quiet --line-regexp --regexp="$bash_script" "$script"
+    then
         check_shellcheck
     elif grep --quiet --line-regexp --regexp="$tab_completion_script" "$script"
         then
         check_shellcheck
-    elif grep --quiet --line-regexp --regexp="$python_script" "$script"; then
+    elif grep --quiet --line-regexp --regexp="$python_script" "$script"
+    then
         check_pycodestyle
     else
         text="
@@ -206,12 +213,14 @@ function check_record_length {
     local       python_script='#!''/usr/bin/python3'
 
     # Python is checked by pycodestyle.
-    if grep --quiet --line-regexp --regexp="$python_script" "$script"; then
+    if grep --quiet --line-regexp --regexp="$python_script" "$script"
+    then
         return $OK
     fi
 
     max_line_length_found=$(wc --max-line-length < "$script")
-    if [[ $max_line_length_found -gt $max_line_length ]]; then
+    if [[ $max_line_length_found -gt $max_line_length ]]
+    then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 ${RED}$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_\
@@ -252,7 +261,8 @@ function check_tags {
             --regexp="$bug"     \
             --regexp="$fixme"   \
             --regexp="$todo"    \
-            "$script"; then
+            "$script"
+    then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 $(gettext '    Flagged annotation found.')
@@ -272,7 +282,8 @@ $(gettext '    Flagged annotation found.')
 
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces {
-    if grep --quiet --regexp=' ''$' "$script"; then
+    if grep --quiet --regexp=' ''$' "$script"
+    then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
 ${RED}$(gettext '    End spaces found.')$NORMAL
@@ -287,7 +298,8 @@ ${RED}$(gettext '    End spaces found.')$NORMAL
 
 # This function controls the termination of the script.
 function term_script {
-    if $error_flag; then
+    if $error_flag
+    then
         text=$(gettext 'Fix all the messages above.')
         errormsg "$text"
         exit $ERROR

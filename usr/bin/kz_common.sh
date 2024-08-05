@@ -48,7 +48,8 @@ readonly OPTIONS_LONG='help,manual,usage,version'
 # Determine whether a desktop environment is available.
 if [[ -n $(
     type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null
-    ) ]]; then
+    ) ]]
+then
     readonly DESKTOP_ENVIRONMENT=true
 else
     readonly DESKTOP_ENVIRONMENT=false
@@ -79,8 +80,10 @@ function become_root {
 
     become_root_check || exit $OK
 
-    if [[ $UID -ne 0 ]]; then
-        if $option_gui; then
+    if [[ $UID -ne 0 ]]
+    then
+        if $option_gui
+        then
             export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
             text="Restart (pkexec $program_exec ${commandline_args[*]})..."
@@ -101,9 +104,11 @@ function become_root {
 # This function checks if the user is allowed to become root and returns 0 if
 # so, otherwise returns 1 with descriptive message.
 function become_root_check {
-    if [[ $UID -eq 0 ]]; then
+    if [[ $UID -eq 0 ]]
+    then
         return $OK
-    elif groups "$USER" | grep --quiet --regexp='sudo'; then
+    elif groups "$USER" | grep --quiet --regexp='sudo'
+    then
         return $OK
     else
         text=$(gettext 'Already performed by the administrator.')
@@ -124,7 +129,8 @@ function check_on_ac_power {
     #   1 (false) System is not on mains power
     # 255 (false) Power status could not be determined (e.g. on VM)
 
-    if [[ on_battery -eq 1 ]]; then
+    if [[ on_battery -eq 1 ]]
+    then
         text=$(gettext "The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.")
@@ -141,9 +147,11 @@ function check_package_manager {
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
-                /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
+                /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*
+    do
         text=$(gettext 'Wait for another package manager to finish')
-        if $option_gui; then
+        if $option_gui
+        then
             logmsg "$text..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$text"
@@ -151,13 +159,14 @@ function check_package_manager {
             infomsg "$text..."
         fi
         sleep $check_wait
-     done
+    done
 }
 
 
 # This function returns an error message.
 function errormsg {
-    if $option_gui; then
+    if $option_gui
+    then
         title=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
         zenity  --error                 \
                 --width     600         \
@@ -172,7 +181,8 @@ function errormsg {
 
 # This function returns an informational message.
 function infomsg {
-    if $option_gui; then
+    if $option_gui
+    then
         title=$(eval_gettext "\$PROGRAM_DESC information (\$DISPLAY_NAME)")
         zenity  --info                  \
                 --width     600         \
@@ -218,7 +228,8 @@ function logmsg {
 
 # This function handles the common options.
 function process_options {
-    while true; do
+    while true
+    do
         case $1 in
             -h | --help )
                 process_option_help
@@ -251,7 +262,8 @@ function process_options {
 function process_option_help {
     local yelp_man_url=''
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT
+    then
         yelp_man_url="$(gettext ', or see the ')"
         yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
@@ -279,7 +291,8 @@ function process_option_usage {
 function process_option_version {
     local   build_id=''
 
-    if [[ -e /etc/kz-build.id ]]; then
+    if [[ -e /etc/kz-build.id ]]
+    then
         build_id=$(cat /etc/kz-build.id)
     else
         text=$(gettext 'Build ID cannot be determined.')
@@ -366,7 +379,8 @@ function term {
 
     case $signal in
         err )
-            if $errexit; then
+            if $errexit
+            then
                 text=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
 or.")
                 errormsg "$text"

@@ -92,7 +92,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -105,7 +106,8 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -a | --apps )
                 option_apps=true
@@ -116,7 +118,8 @@ function process_x_options {
                 shift
                 ;;
             -f | --file )
-                if $option_file; then
+                if $option_file
+                then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$text"
@@ -127,7 +130,8 @@ $USAGE"
                 shift 2
                 ;;
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
+                if ! $DESKTOP_ENVIRONMENT
+    then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -153,10 +157,12 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         argument_app=true
         logout=false
-        while [[ -n $* ]]; do
+        while [[ -n $* ]]
+        do
             app_arguments[$1]=$1
             shift
         done
@@ -168,29 +174,34 @@ $USAGE"
 function process_input {
     local command_file=''
 
-    if $option_file; then
+    if $option_file
+    then
         input_file=$file_argument
     fi
-    if [[ ! -f $input_file ]]; then
+    if [[ ! -f $input_file ]]
+    then
         text=$(eval_gettext "No set up file found, looked for '\$input_file'.")
         errormsg "$text"
         exit $ERROR
     fi
 
-    if $option_apps; then
+    if $option_apps
+    then
         process_option_apps
         exit $OK
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
 
-    if $argument_app; then
+    if $argument_app
+    then
         process_argument_app
     else
         process_input_file_by_user
     fi
 
-    if $option_cat; then
+    if $option_cat
+    then
         process_option_cat
         exit $OK
     fi
@@ -219,7 +230,8 @@ $(gettext 'NUM  APP')\n"
                 --number-separator='  '     \
                 --body-numbering=a          || true
         )
-    if [[ -n $apps ]]; then
+    if [[ -n $apps ]]
+    then
         text+=$apps
         text+="\n
 $(eval_gettext "To view the contents of the apps set up file execute: \$DISPLA\
@@ -241,10 +253,12 @@ function process_argument_app {
     local app_not_found=false
     local app_argument=''
 
-    for app_argument in "${app_arguments[@]}"; do
+    for app_argument in "${app_arguments[@]}"
+    do
         process_input_file_by_app
     done
-    if $app_not_found; then
+    if $app_not_found
+    then
         text="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
 ")"
         infomsg "$text"
@@ -261,7 +275,8 @@ function process_input_file_by_app {
     local input_record=''
     local no_app_match=true
 
-    while read -r input_record; do
+    while read -r input_record
+    do
         case $input_record in
             '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*for* )
                 # Matching app record.
@@ -275,14 +290,16 @@ function process_input_file_by_app {
                 continue
                 ;;
             * )
-                if $app_match; then
+                if $app_match
+                then
                     # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
                 ;;
         esac
     done < "$input_file"
-    if $no_app_match; then
+    if $no_app_match
+    then
         app_not_found=true
         text="$DISPLAY_NAME: $app_argument: $(gettext 'app not found')"
         infomsg "$text"
@@ -296,7 +313,8 @@ function process_input_file_by_user {
     local input_record=''
     local user_match=false
 
-    while read -r input_record; do
+    while read -r input_record
+    do
         case $input_record in
             '#'*$setup*for*'*' | '#'*$setup*for*$USER@$HOSTNAME* )
                 # Matching app record.
@@ -309,7 +327,8 @@ function process_input_file_by_user {
                 continue
                 ;;
             * )
-                if $user_match; then
+                if $user_match
+                then
                     # Record for command file.
                     printf '%s\n' "$input_record" >> "$command_file"
                 fi
@@ -340,7 +359,8 @@ function setup_apps {
     title=$(gettext 'Set up apps')
     text=$(gettext 'Preparing set up')
     logmsg "$title"...
-    if $option_gui; then
+    if $option_gui
+    then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_command_file > >(
@@ -367,13 +387,15 @@ function process_command_file {
     local   -i  app_seq_num=0
     local   -i  cmd_seq_num=0
 
-    if ! $option_gui; then
+    if ! $option_gui
+    then
         text="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
         infomsg "$text"
     fi
 
-    while read -r command_record; do
+    while read -r command_record
+    do
         case $command_record in
             '#'*$setup* )
                 # App record.
@@ -413,15 +435,18 @@ function execute_command {
 
     ((++cmd_seq_num))
 
-    if $option_gui; then
+    if $option_gui
+    then
         [[ $cmd_seq_num -ne 1 ]] || logmsg "$app_name_line"
         printf '%s\n' "#$app_name_line\n\n$cmd"
     else
-        if [[ $cmd_seq_num -eq 1 ]]; then
+        if [[ $cmd_seq_num -eq 1 ]]
+        then
             logmsg  "$app_name_line"
             infomsg "$app_name_line"
         fi
-        if [[ ${#cmd} -gt $COLUMNS ]]; then
+        if [[ ${#cmd} -gt $COLUMNS ]]
+        then
             # Width 12 characters less, 9 for spaces and 3 for ellipsis.
             cmd_dis_len=($COLUMNS-12)
             cmd_dis=${cmd:0:cmd_dis_len}...
@@ -443,13 +468,15 @@ function term_script {
     local failed_apps_text=''
     local operation=$(gettext 'set up')
 
-    if $no_commands_found; then
+    if $no_commands_found
+    then
         text=$(gettext 'No commands to execute.' )
         infomsg "$text"
         exit $OK
     fi
 
-    if [[ -n ${failed_apps[*]} ]]; then
+    if [[ -n ${failed_apps[*]} ]]
+    then
         # shellcheck disable=SC2034
         failed_apps_text=${failed_apps[*]}
         text=$(eval_gettext "The set up of the following apps contains errors:
@@ -462,13 +489,16 @@ use app 'Terminal', type 'kz setup \$failed_apps_text'.")
         errormsg "$text"
         exit $ERROR
     else
-        if $option_reset; then
+        if $option_reset
+        then
             # shellcheck disable=SC2034
             operation=$(gettext 'reset')
         fi
         text=$(eval_gettext "Apps \$operation completed.")
-        if $logout; then
-            if $DESKTOP_ENVIRONMENT; then
+        if $logout
+        then
+            if $DESKTOP_ENVIRONMENT
+    then
                 text+="
 
 $(gettext "You will now be logged out of the computer to finish installing the\
@@ -482,17 +512,23 @@ Type 'logout' to log out.")"
             fi
         fi
         infomsg "$text"
-        if $logout && $DESKTOP_ENVIRONMENT; then
+        if $logout && $DESKTOP_ENVIRONMENT
+        then
             $option_gui || wait_for_enter
-            if type gnome-session &> /dev/null; then
+            if type gnome-session &> /dev/null
+            then
                 gnome-session-quit --logout --no-prompt
-            elif type ksmserver &> /dev/null; then
+            elif type ksmserver &> /dev/null
+            then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            elif type lxqt-session &> /dev/null; then
+            elif type lxqt-session &> /dev/null
+            then
                 lxqt-leave --logout
-            elif type mate-session &> /dev/null; then
+            elif type mate-session &> /dev/null
+            then
                 mate-session-save --logout
-            elif type xfce4-session &> /dev/null; then
+            elif type xfce4-session &> /dev/null
+            then
                 xfce4-session-logout --logout
             else
                 text='No logout command available.'

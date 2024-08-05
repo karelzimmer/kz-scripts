@@ -54,7 +54,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -67,7 +68,8 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -- )
                 shift
@@ -79,14 +81,16 @@ function process_x_options {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
         exit $ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
+    if ! $DESKTOP_ENVIRONMENT
+    then
         text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$text"
@@ -122,7 +126,8 @@ function pull_repos {
     git config --global pull.ff only
     git config --global credential.helper store
 
-    if [[ -d $bin_repo ]]; then
+    if [[ -d $bin_repo ]]
+    then
         cd "$bin_repo"
         git pull
     else
@@ -154,7 +159,8 @@ function download_website {
     local ftp_login=$HOME/.$ftp_host'.login'
     local prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
-    if [[ ! -f $ftp_login ]]; then
+    if [[ ! -f $ftp_login ]]
+    then
         read -rsp "$prompt" < /dev/tty
         printf '%s' "$REPLY" > "$ftp_login"
         printf '\n'
@@ -163,7 +169,8 @@ function download_website {
     if ! lftp   --user "$ftp_user"                  \
                 --password "$(cat "$ftp_login")"    \
                 -e "$ftp_set; $ftp_cmd"             \
-                "$ftp_host"; then
+                "$ftp_host"
+    then
         # Force entering the password next time.
         rm --verbose "$ftp_login"*
         text=$(gettext 'Website download failed.')

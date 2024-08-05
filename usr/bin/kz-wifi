@@ -62,7 +62,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -75,10 +76,12 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
+                if ! $DESKTOP_ENVIRONMENT
+    then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -98,7 +101,8 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
@@ -113,8 +117,10 @@ function process_input {
 
     text=$(gettext "Record this data to connect to the wireless network later.\
 ")
-    if $option_gui; then
-        if nmcli_output=$(nmcli device wifi show-password 2> >($LOGCMD)); then
+    if $option_gui
+    then
+        if nmcli_output=$(nmcli device wifi show-password 2> >($LOGCMD))
+        then
             text="$nmcli_output
 
 $text"

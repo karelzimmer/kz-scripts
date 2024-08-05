@@ -108,7 +108,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -121,10 +122,12 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
+                if ! $DESKTOP_ENVIRONMENT
+    then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -144,7 +147,8 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
@@ -155,7 +159,8 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input {
-    if $option_gui; then
+    if $option_gui
+    then
         process_menu1_gui
     else
         process_menu1_tui
@@ -165,7 +170,8 @@ function process_input {
 
 # This function shows and processes menu 1 in GUI mode.
 function process_menu1_gui {
-    while true; do
+    while true
+    do
         title=$MENU1_TITLE
         REPLY=$(
             zenity  --list                                              \
@@ -196,13 +202,15 @@ function process_menu1_gui {
 function process_menu1_tui {
     local menu1_action=''
 
-    while true; do
+    while true
+    do
         printf  '\n%s\n\n%3s  %-24s  %s\n'  \
                 "$MENU1_HEAD"               \
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for menu1_action in "${!MENU1_ACTIONS[@]}"; do
+        for menu1_action in "${!MENU1_ACTIONS[@]}"
+        do
             printf  '%3s  %-24s  %s\n'                  \
                     "$menu1_action"                     \
                     "${MENU1_ACTIONS[$menu1_action]}"   \
@@ -216,7 +224,8 @@ function process_menu1_tui {
                 continue
                 ;;
             * )
-                if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
+                if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]
+                then
                     process_menu1_choice
                 else
                     continue
@@ -280,7 +289,8 @@ Roughly boils down to:
 2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
-    if $option_gui; then
+    if $option_gui
+    then
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
@@ -317,7 +327,8 @@ function process_menu1_choice4 {
 
 # This function processes menu 2.
 function process_menu2 {
-    if $option_gui; then
+    if $option_gui
+    then
         process_menu2_gui
     else
         process_menu2_tui
@@ -327,7 +338,8 @@ function process_menu2 {
 
 # This function shows and processes menu 2 in GUI mode.
 function process_menu2_gui {
-    while true; do
+    while true
+    do
         title=$MENU2_TITLE
         REPLY=$(
             zenity  --list                                                  \
@@ -358,13 +370,15 @@ function process_menu2_gui {
 function process_menu2_tui {
     local menu2_command=''
 
-    while true; do
+    while true
+    do
         printf  '\n%s\n\n%3s  %-25s  %s\n'  \
                 "$MENU2_HEAD"               \
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for menu2_command in "${!MENU2_COMMANDS[@]}"; do
+        for menu2_command in "${!MENU2_COMMANDS[@]}"
+        do
             printf  '%3s  %-25s  %s\n'                  \
                     "$menu2_command"                    \
                     "${MENU2_ACTIONS[$menu2_command]}"  \
@@ -378,7 +392,8 @@ function process_menu2_tui {
                 continue
                 ;;
             * )
-                if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
+                if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]
+                then
                     process_menu2_choice
                 else
                     continue
@@ -391,13 +406,15 @@ function process_menu2_tui {
 
 # This function processes menu 2 choice.
 function process_menu2_choice {
-    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
+    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]
+    then
         title="${MENU2_ACTIONS[$REPLY]} (${MENU2_COMMANDS[$REPLY]})"
         rows=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
         process_commands
-    elif [[ $REPLY -eq $MENU2_LINES ]]; then
+    elif [[ $REPLY -eq $MENU2_LINES ]]
+    then
         process_menu1_tui
     else
         text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
@@ -414,8 +431,10 @@ function process_commands {
     local   -i  row=0
 
     show_commands_before_execution
-    if $execute_command; then
-        for row in "${!rows[@]}"; do
+    if $execute_command
+    then
+        for row in "${!rows[@]}"
+        do
             description=$(
                 printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
                 )
@@ -439,7 +458,8 @@ function show_commands_before_execution {
 
     text="$(gettext 'The following will be executed:')
 "
-    for row in "${!rows[@]}"; do
+    for row in "${!rows[@]}"
+    do
         description=$(
             printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
             )
@@ -452,7 +472,8 @@ function show_commands_before_execution {
     text+='
 '
     prompt="$(gettext 'Proceed?')"
-    if $option_gui; then
+    if $option_gui
+    then
         text+="
 $prompt"
         if zenity   --question                          \
@@ -462,14 +483,16 @@ $prompt"
                     --title         "$title"            \
                     --text          "$text"             \
                     --ok-label      "$(gettext 'Yes')"  \
-                    --cancel-label  "$(gettext 'No')"   2> >($LOGCMD); then
+                    --cancel-label  "$(gettext 'No')"   2> >($LOGCMD)
+        then
             execute_command=true
         else
             execute_command=false
         fi
     else
         printf '\n%s\n' "$text"
-        while true; do
+        while true
+    do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
                 [YyJj]* | '' )
@@ -503,7 +526,8 @@ function execute_command {
     arg=$(
         printf '%s' "$row" | cut --delimiter=' ' --fields=2- --only-delimited
         )
-    if $option_gui; then
+    if $option_gui
+    then
         gui_option='--gui'
     fi
     "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?

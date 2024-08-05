@@ -14,7 +14,8 @@
 
 # The server reports $0 as '-bash' (login shell) for bash, so remove the '-'.
 if ! source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
-            systemd-cat --identifier=kz-deb --priority=debug); then
+            systemd-cat --identifier=kz-deb --priority=debug)
+then
     echo    'Download kz_common.sh...' |&
             systemd-cat --identifier=kz-deb --priority=debug
     declare kz_common_file
@@ -73,7 +74,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -86,7 +88,8 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -- )
                 shift
@@ -98,7 +101,8 @@ function process_x_options {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
@@ -124,7 +128,8 @@ function prepare_processing {
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress. If all
     # fails, kz_common.sh will delete the local Debian package file on exit.
-    while test -e "$kz_deb_local_file"; do
+    while test -e "$kz_deb_local_file"
+    do
         printf '#'
         sleep 1
     done &
@@ -147,7 +152,8 @@ function install_package {
     local install_suggests=''
 
     logmsg 'Install. kz deb...'
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT
+    then
         install_suggests='--install-suggests'
     fi
     check_package_manager |& $LOGCMD
@@ -207,7 +213,8 @@ Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under Linux.\
 ")
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT
+    then
         text+="
 
 $(gettext "Type 'exit' to close this window.")"

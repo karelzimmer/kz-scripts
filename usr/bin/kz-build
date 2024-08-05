@@ -87,7 +87,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -100,7 +101,8 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -- )
                 shift
@@ -112,14 +114,16 @@ function process_x_options {
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
         exit $ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
+    if ! $DESKTOP_ENVIRONMENT
+    then
         text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$text"
@@ -146,20 +150,24 @@ function process_input {
 function report_repos {
     text=$(gettext 'Show repos not on branch main')...
     infomsg "$text"
-    for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
+    for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
+    do
         cd "$repo"
-        if [[ $(git branch --show-current) != 'main' ]]; then
+        if [[ $(git branch --show-current) != 'main' ]]
+        then
             text=$(eval_gettext "Repo \$repo not on branch main.")
             infomsg "$text"
         fi
     done
     text=$(gettext 'Show repos which are not clean')...
     infomsg "$text"
-    for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
+    for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
+    do
         cd "$repo"
         # Prevent false positives.
         git status |& $LOGCMD
-        if ! git diff-index --quiet HEAD; then
+        if ! git diff-index --quiet HEAD
+        then
             text=$(eval_gettext "Repo \$repo is not clean.")
             infomsg "$text"
             git status
@@ -199,15 +207,18 @@ function build_uploads {
             "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
 
     # Make sure all necessary directories are available.
-    for dir in "${UPLOADS_TARGETS[@]}"; do
+    for dir in "${UPLOADS_TARGETS[@]}"
+    do
         mkdir --parents "$dir" |& $LOGCMD
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
     cd "${UPLOADS_SOURCES[kz-docs]}"
-    for file in *.odt *.txt; do
+    for file in *.odt *.txt
+    do
         filename=${file%.*}
-        if [[ $file -nt ${UPLOADS_TARGETS[kz-docs]}/$filename.pdf ]]; then
+        if [[ $file -nt ${UPLOADS_TARGETS[kz-docs]}/$filename.pdf ]]
+        then
             lowriter    --headless                              \
                         --convert-to pdf                        \
                         --outdir "${UPLOADS_TARGETS[kz-docs]}"  \
@@ -317,7 +328,8 @@ function check_website {
 
 # This function controls the termination of the script.
 function term_script {
-    if $error_flag; then
+    if $error_flag
+    then
         text=$(gettext 'Fix all the messages above.')
         errormsg "$text"
         exit $ERROR

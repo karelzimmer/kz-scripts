@@ -77,7 +77,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -90,10 +91,12 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -g | --gui )
-                if  $DESKTOP_ENVIRONMENT; then
+                if  $DESKTOP_ENVIRONMENT
+                then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available').
 $USAGE"
@@ -104,7 +107,8 @@ $USAGE"
                 shift
                 ;;
             -t | --target )
-                if $option_target; then
+                if $option_target
+                then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$text"
@@ -124,7 +128,8 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
@@ -144,8 +149,10 @@ function process_input {
 
 # This function checks if the target is available.
 function check_target {
-    if $option_target; then
-        if [[ ! -d $target_argument ]]; then
+    if $option_target
+    then
+        if [[ ! -d $target_argument ]]
+        then
             text="$DISPLAY_NAME: $target_argument: \
 $(gettext 'directory does not exist')
 $USAGE"
@@ -156,20 +163,23 @@ $USAGE"
         target_medium=$target_argument
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ -z $medium ]]; then
+        if [[ -z $medium ]]
+        then
             text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
             infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ -z $medium ]]; then
+            if [[ -z $medium ]]
+            then
                 errormsg "$text"
                 exit $ERROR
             fi
         fi
         medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]
+        then
             text="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
@@ -179,7 +189,8 @@ Disconnect media via Files.")"
             infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]
+            then
                 errormsg "$text"
                 exit $ERROR
             fi
@@ -189,7 +200,8 @@ Disconnect media via Files.")"
             mkdir --mode=a=rwx --verbose "$medium"/$PROGRAM_NAME |& $LOGCMD
         target_medium=$medium
     fi
-    if [[ -e $target_medium/backup-$HOSTNAME-$USER ]]; then
+    if [[ -e $target_medium/backup-$HOSTNAME-$USER ]]
+    then
         text="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. P\
 lease rename to 'USER@HOST'.")"
         errormsg "$text"
@@ -207,7 +219,8 @@ function backup_settings {
     backup_setting_readme
     backup_setting_apps
     backup_setting_users
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT
+    then
         backup_setting_avatar
         backup_setting_desktop
         backup_setting_favs
@@ -266,7 +279,8 @@ function backup_setting_users {
             )
     users+=$(
             printf '\n'
-            while read -r uid; do
+            while read -r uid
+            do
                 printf '\n'
                 id "$uid"
             done < <(
@@ -276,7 +290,8 @@ function backup_setting_users {
             )
 
     logmsg 'Adding additional users instructions...'
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT
+    then
         text="$(gettext 'Additional _user_s can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
  Users.
@@ -309,7 +324,8 @@ function backup_setting_avatar {
     local output_file_1="$settings_dir"/avatar
     local output_file_2="$settings_dir"/avatar.txt
 
-    if [[ -e $input_file ]]; then
+    if [[ -e $input_file ]]
+    then
         logmsg 'Copy the user avatar...'
         cp --preserve --verbose "$input_file" "$output_file_1" |& $LOGCMD
         touch "$output_file_1"
@@ -343,7 +359,8 @@ function backup_setting_desktop {
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
-    if [[ -e $input_file && $input_file != *.xml ]]; then
+    if [[ -e $input_file && $input_file != *.xml ]]
+    then
         logmsg 'Copy the desktop background...'
         cp --preserve --verbose "$input_file" "$output_file_1" |& $LOGCMD ||
             true
@@ -410,7 +427,8 @@ EOF
 
     title=$(gettext 'Make backup')
     text=$(gettext 'Preparing backup (this may take a while)')
-    if $option_gui; then
+    if $option_gui
+    then
         logmsg "$title..."
         rsync   --archive                       \
                 --verbose                       \
@@ -444,7 +462,8 @@ EOF
     rm --verbose "$exclude_file" |& $LOGCMD
 
     text=$(gettext "Writing data from memory (this may take a while)")
-    if $option_gui; then
+    if $option_gui
+    then
         logmsg "$text..."
         sync;                           \
         sleep 3                         |
@@ -461,7 +480,8 @@ EOF
         infomsg "$text"
         sync |& $LOGCMD
     fi
-    if [[ $backup_rc -ne $OK ]]; then
+    if [[ $backup_rc -ne $OK ]]
+    then
         # shellcheck disable=SC2034
         rsync_messages=$(cat "$error_file")
         text="$(eval_gettext "Backup ended with warnings or errors.
@@ -489,7 +509,8 @@ function term_script {
     local   -i  unmount_rc=0
     local       num_users=$(find /home/* -prune -print | wc --lines)
 
-    if [[ $num_users -eq 1 ]]; then
+    if [[ $num_users -eq 1 ]]
+    then
         text=$(gettext "The backup has been made.")
     else
         text="$(eval_gettext "The backup has been made for \$USER (there are \
@@ -498,9 +519,11 @@ function term_script {
 $users"
     fi
 
-    if [[ $target_medium == /media/* ]]; then
+    if [[ $target_medium == /media/* ]]
+    then
         term_script_usb || unmount_rc=$?
-        if [[ $unmount_rc -eq $OK ]]; then
+        if [[ $unmount_rc -eq $OK ]]
+        then
             text+="
 
 $(gettext 'The USB medium can be removed.')"
@@ -533,7 +556,8 @@ function term_script_usb {
         cut     --delimiter=' '     \
                 --fields=1
     )
-    if $option_gui; then
+    if $option_gui
+    then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         logmsg "$text..."

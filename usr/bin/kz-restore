@@ -76,7 +76,8 @@ function check_input {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]; then
+    if [[ $parsed_rc -ne $OK ]]
+    then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -89,10 +90,12 @@ function check_input {
 
 # This function handles the extra options and arguments.
 function process_x_options {
-    while true; do
+    while true
+    do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
+                if ! $DESKTOP_ENVIRONMENT
+    then
                     text=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -103,7 +106,8 @@ $USAGE"
                 shift
                 ;;
             -s | --source )
-                if $option_source; then
+                if $option_source
+                then
                     text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$text"
@@ -123,7 +127,8 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]; then
+    if [[ -n $* ]]
+    then
         text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$text"
@@ -143,8 +148,10 @@ function process_input {
 
 # This function checks if the source is available.
 function check_source {
-    if $option_source; then
-        if [[ ! -d $source_argument ]]; then
+    if $option_source
+    then
+        if [[ ! -d $source_argument ]]
+        then
             text="$DISPLAY_NAME: $source_argument: \
 $(gettext 'directory does not exist')
 $USAGE"
@@ -155,20 +162,23 @@ $USAGE"
         source_medium=$source_argument
     else
         medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ -z $medium ]]; then
+        if [[ -z $medium ]]
+        then
             text=$(gettext "No USB medium found.
 
 Connect a USB medium.")
             infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ -z $medium ]]; then
+            if [[ -z $medium ]]
+            then
                 errormsg "$text"
                 exit $ERROR
             fi
         fi
         medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]
+        then
             text="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
@@ -178,14 +188,16 @@ Disconnect media via Files.")"
             infomsg "$text"
             $option_gui || wait_for_enter
             medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]; then
+            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]
+            then
                 errormsg "$text"
                 exit $ERROR
             fi
         fi
         source=$medium/kz-backup/$USER@$HOSTNAME
         source_medium=$medium
-        if [[ ! -d $source ]]; then
+        if [[ ! -d $source ]]
+        then
             text=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
@@ -206,7 +218,8 @@ function restore_backup {
 
     title=$(gettext 'Restore backup')
     text=$(gettext 'Preparing restore (this can take a while)')
-    if $option_gui; then
+    if $option_gui
+    then
         logmsg "$title"...
         rsync   --archive               \
                 --verbose               \
@@ -231,7 +244,8 @@ function restore_backup {
                 "$source"/              \
                 "$TARGET"/              2> "$error_file" || restore_rc=$?
     fi
-    if [[ $restore_rc -ne $OK ]]; then
+    if [[ $restore_rc -ne $OK ]]
+    then
         # shellcheck disable=SC2034
         rsync_messages=$(cat "$error_file")
         text=$(eval_gettext "Restore ended with warnings or errors.
@@ -258,7 +272,8 @@ use app 'Terminal', type 'kz restore'.")
 function restore_settings {
     local settings_dir="$HOME"/kz-backup
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT
+    then
         $option_gui || infomsg "$(gettext 'Restore settings...')"
         restore_setting_desktop
     fi
@@ -269,7 +284,8 @@ function restore_settings {
 function restore_setting_desktop {
     local input_file="$settings_dir"/desktop
 
-    if [[ -f $input_file ]]; then
+    if [[ -f $input_file ]]
+    then
         logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
@@ -284,7 +300,8 @@ function term_script {
     local       num_users=$(find /home/* -prune -print | wc --lines)
     local       users=''
 
-    if [[ $num_users -eq 1 ]]; then
+    if [[ $num_users -eq 1 ]]
+    then
         text=$(gettext 'The backup has been restored.')
     else
         users=$(
@@ -296,7 +313,8 @@ function term_script {
                 )
         users+=$(
                 printf '\n'
-                while read -r uid; do
+                while read -r uid
+                do
                     printf '\n'
                     id "$uid"
                 done < <(
@@ -310,9 +328,11 @@ num_users users).")
 $users"
     fi
 
-    if [[ $source_medium == /media/* ]]; then
+    if [[ $source_medium == /media/* ]]
+    then
         term_script_usb || unmount_rc=$?
-        if [[ $unmount_rc -eq $OK ]]; then
+        if [[ $unmount_rc -eq $OK ]]
+        then
             text+="
 
 $(gettext 'The USB medium can be removed.')"
@@ -345,7 +365,8 @@ function term_script_usb {
         cut     --delimiter=' '     \
                 --fields=1
     )
-    if $option_gui; then
+    if $option_gui
+    then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         logmsg "$text..."
