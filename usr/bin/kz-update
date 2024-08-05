@@ -19,7 +19,6 @@ This script performs a repair, update, and cleanup.
 import gettext
 import kz_common
 import subprocess
-import sys
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -34,13 +33,19 @@ PROGRAM_NAME = 'kz-update'
 PROGRAM_DESC = _('Update system')
 DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
+kz_common.USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
+
+kz_common.HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+                  f'{PROGRAM_DESC}.\n\n'
+                  f"{_('Options:')}\n"
+                  f'{kz_common.OPTIONS_HELP}')
+
 
 ###############################################################################
 # Variables
 ###############################################################################
 
 command = ''
-kz_common.usage = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
 
 ###############################################################################

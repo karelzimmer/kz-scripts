@@ -43,8 +43,10 @@ BOLD = '\033[1m'
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
 
+USAGE = None
 OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
+HELP = None
 OPTIONS_HELP = (f"{_('  -h, --help     give this help list')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"
                 f"{_('  -u, --usage    give a short usage message')}\n"
@@ -70,7 +72,6 @@ else:
 
 text = ''
 rc = OK
-usage = ''
 
 
 ###############################################################################
@@ -201,7 +202,7 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     This function handles the common options.
     """
     # parser = argparse.ArgumentParser(prog=DISPLAY_NAME, add_help=False)
-    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=usage,
+    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
 
     parser.add_argument('-h', '--help', action='store_true')
@@ -238,11 +239,7 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
         yelp_man_url = f"{_(', or see the ')}"
         yelp_man_url += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
         yelp_man_url += f" {_('man page')}\x1b]8;;\x1b\\"
-
-    text = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
-            f'{PROGRAM_DESC}.\n\n'
-            f"{_('Options:')}\n"
-            f'{OPTIONS_HELP}\n\n'
+    text = (f'{HELP}\n\n'
             f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
                  format(DISPLAY_NAME, DISPLAY_NAME, yelp_man_url)}''')
     infomsg(PROGRAM_NAME, text)
@@ -268,7 +265,7 @@ def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    text = (f"{_('Usage:')} {usage}\n\n"
+    text = (f"{_('Usage:')} {USAGE}\n\n"
             f'''{_("Type '{} --help' for more information.").
                  format(DISPLAY_NAME)}''')
     infomsg(PROGRAM_NAME, text)
