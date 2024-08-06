@@ -112,8 +112,8 @@ function process_input {
 function check_dependencies {
     text=$(gettext 'Check dependencies')...
     infomsg "$text"
-    kz install fakeroot gettext git jq lftp nmap python shellcheck vscode
-    kz setup vscode
+    kz-install fakeroot gettext git jq lftp nmap python shellcheck vscode
+    kz-setup vscode
 }
 
 
