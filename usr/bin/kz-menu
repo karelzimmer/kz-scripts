@@ -18,17 +18,17 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-menu'
-readonly PROGRAM_DESC=$(gettext 'Installation menu')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly    PROGRAM_NAME='kz-menu'
+readonly    PROGRAM_DESC=$(gettext 'Installation menu')
+readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAG\
-E")
+readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
+SAGE")
 
-readonly X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, req\
-uires desktop environment")
+readonly    X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+requires desktop environment")
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -36,14 +36,13 @@ $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
 
-readonly X_OPTIONS_SHORT='g'
-readonly X_OPTIONS_LONG=',gui'
+readonly    X_OPTIONS_SHORT='g'
+readonly    X_OPTIONS_LONG=',gui'
 
-readonly PROGRAM_PATH=$MODULE_PATH
+readonly    PROGRAM_PATH=$MODULE_PATH
 
-            MENU1_TITLE=$(gettext 'Installation menu')
-readonly MENU1_TITLE
-readonly MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
+readonly    MENU1_TITLE=$(gettext 'Installation menu')
+readonly    MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
 readonly -a MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
@@ -60,11 +59,10 @@ readonly -a MENU1_DESCS=(
                 "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
-readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
+readonly    MENU1_LINES=${#MENU1_ACTIONS[@]}
 
-            MENU2_TITLE=$(gettext 'Command menu')
-readonly MENU2_TITLE
-readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
+readonly    MENU2_TITLE=$(gettext 'Command menu')
+readonly    MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
 readonly -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
@@ -81,7 +79,7 @@ readonly -a MENU2_COMMANDS=(
                 'kz setup'
                 "$(gettext 'Back')"
             )
-readonly MENU2_LINES=${#MENU2_COMMANDS[@]}
+readonly    MENU2_LINES=${#MENU2_COMMANDS[@]}
 
 
 ###############################################################################

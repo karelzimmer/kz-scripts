@@ -95,10 +95,10 @@ function process_x_options {
     do
         case $1 in
             -g | --gui )
-                if  $DESKTOP_ENVIRONMENT
+                if ! $DESKTOP_ENVIRONMENT
                 then
                     text=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available').
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$text"
                     exit $ERROR
