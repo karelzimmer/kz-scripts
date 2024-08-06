@@ -50,7 +50,7 @@ readonly -A UPLOADS_SOURCES=(
             )
 readonly -A UPLOADS_TARGETS=(
             [kz-docs]=$UPLOADS_REPO_DISTDIR/assets/kz-docs
-                [deb]=$UPLOADS_REPO_DISTDIR/assets/kz
+                [deb]=$UPLOADS_REPO_DISTDIR/assets/kz-deb
             )
 
 readonly -A DEB_SOURCES=(

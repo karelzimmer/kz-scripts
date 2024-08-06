@@ -139,7 +139,7 @@ function prepare_processing {
 # This function downloads package kz.
 function download_package {
     local kz_deb_site_file=kz_4.2.1_all.deb
-    local kz_deb_site_uri='https://karelzimmer.nl/assets/kz/'
+    local kz_deb_site_uri='https://karelzimmer.nl/assets/kz-deb/'
 
     logmsg 'Download kz deb...'
     wget    --output-document="$kz_deb_local_file"  \
