@@ -33,6 +33,7 @@ $(gettext 'Options:')
 $OPTIONS_HELP"
 
 readonly DOCS_REPO=$HOME/kz-docs
+readonly BIN_REPO=$HOME/bin
 readonly SCRIPTS_REPO=$HOME/kz-scripts
 
 readonly DEB_REPO=$HOME/kz-deb
@@ -310,7 +311,7 @@ function run_ivp {
     infomsg "$text"
     # Call kz-ivp.
     logmsg 'Calling kz-ivp...'
-    kz-ivp || error_flag=true
+    "$SCRIPTS_REPO"/usr/bin/kz-ivp || error_flag=true
     logmsg 'Called kz-ivp.'
 }
 
@@ -321,7 +322,7 @@ function check_website {
     infomsg "$text"
     # Call rchecklink.
     logmsg 'Calling rchecklink...'
-    rchecklink || error_flag=true
+    "$BIN_REPO"/rchecklink || error_flag=true
     logmsg 'Called rchecklink.'
 }
 
