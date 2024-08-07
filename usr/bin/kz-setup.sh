@@ -259,15 +259,6 @@ kz-gnome --addaft=kz-vm-hugowin732
 kz-gnome --delete=virtualbox
 kz-gnome --delete=kz-vm-hugowin732
 
-# Setup vlc for *
-# For all with desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default vlc.desktop video/mp4; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default vlc.desktop video/x-matroska; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default vlc.desktop video/webm; fi
-
-# Reset vlc for *
-# There is no command needed to reset vlc.
-
 # Setup vscode for karel@pc01 karel@pc06 karel@pc07
 kz-gnome --addbef=code
 xdg-mime default code.desktop application/json
