@@ -87,7 +87,7 @@ kz-gnome --addbef=firefox
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
-# There is no command needed to reset gdebi.
+# There is no command available to reset gdebi.
 
 # Setup gnome for *
 # For all with GNOME desktop environment.
