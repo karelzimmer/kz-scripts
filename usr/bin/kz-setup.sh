@@ -153,15 +153,9 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi # Not every GNOME desktop environment has this key.
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
-# Setup google-chrome for *
-# For all with desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default google-chrome.desktop application/pdf; fi
-
 # Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gnome --addbef=google-chrome
-
-# Reset google-chrome for *
-# There is no command needed to reset google chrome.
+xdg-mime default google-chrome.desktop application/pdf
 
 # Reset google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 kz-gnome --delete=google-chrome
