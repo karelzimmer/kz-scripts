@@ -8,7 +8,6 @@
 # For the format of the records in this file, see the kz install man page.
 
 # Install disabled-apport on *
-#
 # Disable the program crash report.
 # For Ubuntu.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
@@ -17,14 +16,12 @@ if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose 
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
 
 # Remove disabled-apport from *
-#
 # Enable the program crash report.
 # For Ubuntu.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
 
 # Install extra-repos on *
-#
 # For Debian with desktop environment.
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository non-free; fi
@@ -34,7 +31,6 @@ if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
 
 # Remove extra-repos from *
-#
 # For Debian with desktop environment.
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove contrib; fi
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove non-free; fi
@@ -42,11 +38,9 @@ if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,
 if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes deb-multimedia-keyring; fi
 
 # Install update-system on *
-#
 kz-update
 
 # Remove update-system from *
-#
 # There is no command available to remove update system.
 
 # Install ansible on pc06 pc07
@@ -56,13 +50,11 @@ sudo apt-get install --yes ansible
 sudo apt-get remove --yes ansible
 
 # Install anydesk on -nohost
-#
 # Remote Wayland display server is not supported.
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes anydesk
-#
 # Web app: https://my.anydesk.com/v2
 
 # Remove anydesk from -nohost
@@ -105,7 +97,6 @@ sudo apt-get remove --yes clamtk-gnome
 
 # Install cockpit on pc06
 sudo apt-get install --yes cockpit cockpit-pcp
-#
 # Web app: https://localhost:9090
 
 # Remove cockpit from pc06
@@ -138,46 +129,38 @@ sudo apt-get install --yes deja-dup
 sudo apt-get remove --yes deja-dup
 
 # Install disabled-aer on pc06
-#
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).
 # To prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
-#
 # Check for kernel config parameter pci=noaer.
 grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Remove disabled-aer from pc06
-#
 # Enable kernel config parameter PCIEAER.
 sudo sed --in-place --expression='s/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash pci=noaer"/' /etc/default/grub
 sudo update-grub
-#
 # Check for kernel config parameter pci=noaer.
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Install disabled-fwupd on -nohost
-#
 # Disable the Firmware update daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
 # Remove disabled-fwupd from -nohost
-#
 # Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
 # Install disabled-lidswitch on pc-van-hugo
-#
 # Do nothing when the lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
 
 # Remove disabled-lidswitch from pc-van-hugo
-#
 # Restore the default action when the lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
@@ -202,7 +185,6 @@ sudo apt-get remove --yes fakeroot
 
 # Install fdupes on -nohost
 sudo apt-get install --yes fdupes
-#
 # Usage:
 # $ fdupes -r /path/to/folder     # Report recursively from /path/to/folder
 # $ fdupes -d /path/to/folder     # Delete, interactively, from /path/to/folder
@@ -212,18 +194,14 @@ sudo apt-get install --yes fdupes
 sudo apt-get remove --yes fdupes
 
 # Install force-x11 on -nohost
-#
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 # Force means no choice @ user login for X11 or Wayland!
 sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf
-#
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove force-x11 from -nohost
-#
 # Enable choice @ user login for X11 or Wayland.
 sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf
-#
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
@@ -276,15 +254,12 @@ if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/nul
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes google-chrome-stable; fi
-#
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
 # For all with GNOME desktop environment.
 if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
-#
 # Add the source list again because the installation overwrote the newly added source list.
 # For all with desktop environment.
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
-#
 # The apt-key added during installation is no longer needed.
 # For all with desktop environment.
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
@@ -302,7 +277,6 @@ wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | s
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
-#
 # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
 
@@ -336,14 +310,11 @@ sudo apt-get install --yes krita
 sudo apt-get remove --yes krita
 
 # Install kvm on pc06 pc07
-#
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
 sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo usermod --append --groups libvirt,libvirt-qemu karel
-#
 # Prevent "Error starting domain: Requested operation is not valid: network 'default' is not active".
 sudo virsh --connect=qemu:///system net-autostart default
-#
 # Check network 'default' with: sudo virsh --connect=qemu:///system net-info default (should output 'Autostart: yes')
 # Images are in: /var/lib/libvirt/images/
 
@@ -405,7 +376,6 @@ sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip
 
 # Install repair-ntfs on -nohost
 sudo apt-get install --yes ntfs-3g
-#
 # Usage:
 # $ findmnt
 # TARGET          SOURCE    FSTYPE OPTIONS
@@ -451,7 +421,6 @@ sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
 sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
 sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts
 sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts
-#
 # Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
@@ -463,7 +432,6 @@ sudo apt-get remove --yes ssh
 
 # Install sushi on pc06
 sudo apt-get install --yes gnome-sushi
-#
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
 
@@ -476,11 +444,9 @@ if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/nul
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer; fi
-#
 # The apt-key added during installation is no longer needed.
 # For all with desktop environment.
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-key del 0C1289C0 DEB49217; fi
-#
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
@@ -552,11 +518,9 @@ sudo passwd --delete --expire toos
 sudo userdel --remove toos
 
 # Install virtualbox on pc-van-hugo
-#
 # If the installation hangs or VBox does not work, check the virtualization settings in the BIOS/UEFI.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
 sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
-#
 # VirtualBox Guest user Additions ISO are in: /usr/share/virtualbox/
 
 # Remove virtualbox from pc-van-hugo
@@ -589,7 +553,6 @@ wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list > /dev/null
 sudo apt-get update
 sudo apt-get install --yes webmin
-#
 # Web app: https://localhost:10000
 
 # Remove webmin from pc07

@@ -8,7 +8,6 @@
 # For the format of the records in this file, see the kz setup man page.
 
 # Setup anydesk for -nouser
-#
 # Remote Wayland display server is not supported.
 kz-gnome --addaft=anydesk
 
@@ -180,7 +179,6 @@ kz-gnome --delete=virt-manager
 
 # Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis "$HOME"/lynis || true
-#
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
@@ -226,10 +224,8 @@ kz-gnome --delete=kz-telegram
 
 # Setup terminal for karel@pc01 karel@pc06 karel@pc07
 kz-gnome --addbef=org.gnome.Terminal
-#
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
-#
 # Enable search forward in history (with Ctrl-S).
 sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
