@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-05 15:15+0200\n"
+"POT-Creation-Date: 2024-08-07 14:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -573,16 +573,16 @@ msgid "    Unknown script. Function check_code cannot check script code."
 msgstr ""
 
 #, sh-format
-msgid "    A line is longer than $max_line_length ($max_line_length_found)."
+msgid "A line is longer than $max_line_length ($max_line_length_found)."
 msgstr ""
 
 msgid "Faulty line(s) found."
 msgstr ""
 
-msgid "    Flagged annotation found."
+msgid "Flagged annotation found."
 msgstr ""
 
-msgid "    End spaces found."
+msgid "End spaces found."
 msgstr ""
 
 msgid "Installation menu"
@@ -865,11 +865,16 @@ msgstr ""
 msgid "No WiFi device found."
 msgstr ""
 
-msgid "Execute IVP"
+#, sh-format
+msgid "Script $scriptname returned an error."
 msgstr ""
 
 #, sh-format
-msgid "Script $scriptname returned an error."
+msgid "Gettext message catalog template $dir/kz.pot not found."
+msgstr ""
+
+#, sh-format
+msgid "Gettext message catalog $dir/kz.po not found."
 msgstr ""
 
 #, sh-format
@@ -885,16 +890,13 @@ msgid "Tab completion script $dir/$scriptname not found."
 msgstr ""
 
 #, sh-format
-msgid "Manual $dir/$scriptname.1.gz not found."
+msgid "Manual $dir/$scriptname.1 not found."
 msgstr ""
 
 #, sh-format
 msgid ""
 "PolicyKit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
 "found."
-msgstr ""
-
-msgid "Run IVP"
 msgstr ""
 
 msgid "Check website"

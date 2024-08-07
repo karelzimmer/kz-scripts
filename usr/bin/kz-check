@@ -108,9 +108,12 @@ function process_input {
     local scriptname=''
     local scripts_repo=$HOME/kz-scripts
 
+    check_gettext
+
+    cd "$scripts_repo"
     text=$(gettext 'Check script:')
     infomsg "$text"
-    cd "$scripts_repo"
+
     while read -r script
     do
         scriptdir=$(dirname "$(realpath "$script")")
@@ -173,6 +176,39 @@ function process_input {
 }
 
 
+# This function checks for gettext required files.
+function check_gettext {
+
+    # GNU gettext message catalogue (.pot).
+    dir=$scripts_repo/usr/bin
+    if [[ ! -e $dir/kz.pot ]]
+    then
+        text=$(eval_gettext "Gettext message catalog template \$dir/kz.pot not\
+ found.")
+        errormsg "$text"
+        error_flag=true
+    fi
+
+    # GNU gettext message catalogue (.po).
+    dir=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
+    if [[ ! -e $dir/kz.po ]]
+    then
+        text=$(eval_gettext "Gettext message catalog \$dir/kz.po not found.")
+        errormsg "$text"
+        error_flag=true
+    fi
+
+    # GNU message catalog (.mo).
+    dir=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
+    if [[ ! -e $dir/kz.mo ]]
+    then
+        text=$(eval_gettext "Message catalog \$dir/kz.mo not found.")
+        errormsg "$text"
+        error_flag=true
+    fi
+}
+
+
 # This function checks Shell and Python script code.
 function check_code {
     local bash_script='#!''/usr/bin/bash'
@@ -182,12 +218,14 @@ function check_code {
     if grep --quiet --line-regexp --regexp="$bash_script" "$script"
     then
         check_shellcheck
+        check_script
     elif grep --quiet --line-regexp --regexp="$tab_completion_script" "$script"
         then
         check_shellcheck
     elif grep --quiet --line-regexp --regexp="$python_script" "$script"
     then
         check_pycodestyle
+        check_script
     else
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
@@ -196,6 +234,74 @@ ode.")$NORMAL
 "
         infomsg "$text"
         error_flag=true
+    fi
+}
+
+
+# This function checks the operation of the script and associated files.
+function check_script {
+    local dir=''
+    local gui_option='-''-''g''u''i'
+    local root_script=' ''b''e''c''o''m''e''_''r''o''o''t''$'
+
+    # Script.
+    if ! "$scriptdir/$scriptname" --version |& $LOGCMD
+    then
+        text='    '$(eval_gettext "Script \$scriptname returned an error.")
+        errormsg "$text"
+        error_flag=true
+    fi
+
+    # Desktop file (Only with so-called GUI scripts).
+    if grep --quiet --regexp="$gui_option" "$scriptdir/$scriptname"
+    then
+        dir=$scripts_repo/usr/share/applications
+        if [[ ! -e $dir/$scriptname.desktop ]]
+        then
+            text='    '$(eval_gettext "Desktop configuration file \$dir/\$scri\
+ptname.desktop not found.")
+            errormsg "$text"
+            error_flag=true
+        fi
+    fi
+
+    # Tab-completion script (Only with so-called root scripts).
+    dir=$scripts_repo/usr/share/bash-completion/completions
+    if [[ ! -e $dir/$scriptname ]]
+    then
+        text='    '$(eval_gettext "Tab completion script \$dir/\$scriptname no\
+t found.")
+        errormsg "$text"
+        error_flag=true
+    fi
+
+    # Manual page (EN + NL).
+    dir=$scripts_repo/usr/share/man/man1
+    if [[ ! -e $dir/$scriptname.1 ]]
+    then
+        text='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
+        errormsg "$text"
+        error_flag=true
+    fi
+    dir=$scripts_repo/usr/share/man/nl/man1
+    if [[ ! -e $dir/$scriptname.1 ]]
+    then
+        text='    '$(eval_gettext "Manual \$dir/\$scriptname.1 not found.")
+        errormsg "$text"
+        error_flag=true
+    fi
+
+    # PolicyKit action definition file (Only with so-called root scripts).
+    if grep --quiet --regexp="$root_script" "$scriptdir/$scriptname"
+    then
+        dir=$scripts_repo/usr/share/polkit-1/actions
+        if [[ ! -e $dir/nl.karelzimmer.$scriptname.policy ]]
+        then
+            text='    '$(eval_gettext "PolicyKit action definition file \$dir/\
+nl.karelzimmer.\$scriptname.policy not found.")
+            errormsg "$text"
+            error_flag=true
+        fi
     fi
 }
 
@@ -223,7 +329,7 @@ function check_record_length {
     then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-${RED}$(eval_gettext "    A line is longer than \$max_line_length (\$max_line_\
+${RED}    $(eval_gettext "A line is longer than \$max_line_length (\$max_line_\
 length_found).")$NORMAL
 "
         infomsg "$text"
@@ -265,7 +371,7 @@ function check_tags {
     then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-$(gettext '    Flagged annotation found.')
+    $(gettext 'Flagged annotation found.')
 "
         infomsg "$text"
         grep    --line-number           \
@@ -286,7 +392,7 @@ function check_trailing_spaces {
     then
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-${RED}$(gettext '    End spaces found.')$NORMAL
+${RED}    $(gettext 'End spaces found.')$NORMAL
 "
         infomsg "$text"
         grep    --line-number --regexp=' ''$' "$script" |

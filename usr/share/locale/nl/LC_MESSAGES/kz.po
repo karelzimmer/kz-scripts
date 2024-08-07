@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-31 19:18+0200\n"
+"POT-Creation-Date: 2024-08-07 14:36+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -665,17 +665,17 @@ msgstr ""
 "    Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
 #, sh-format
-msgid "    A line is longer than $max_line_length ($max_line_length_found)."
-msgstr "    Een regel is langer dan $max_line_length ($max_line_length_found)."
+msgid "A line is longer than $max_line_length ($max_line_length_found)."
+msgstr "Een regel is langer dan $max_line_length ($max_line_length_found)."
 
 msgid "Faulty line(s) found."
 msgstr "Foutieve regel(s) gevonden."
 
-msgid "    Flagged annotation found."
-msgstr "    Gemarkeerde annotatie gevonden."
+msgid "Flagged annotation found."
+msgstr "Gemarkeerde annotatie gevonden."
 
-msgid "    End spaces found."
-msgstr "    Eindspaties gevonden."
+msgid "End spaces found."
+msgstr "Eindspaties gevonden."
 
 msgid "Installation menu"
 msgstr "Installatiemenu"
@@ -1028,12 +1028,17 @@ msgstr ""
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
-msgid "Execute IVP"
-msgstr "IVP uitvoeren"
-
 #, sh-format
 msgid "Script $scriptname returned an error."
 msgstr "Script $scriptname gaf een fout."
+
+#, sh-format
+msgid "Gettext message catalog template $dir/kz.pot not found."
+msgstr "Gettext berichtencatalogus-sjabloon $dir/kz.pot niet gevonden."
+
+#, sh-format
+msgid "Gettext message catalog $dir/kz.po not found."
+msgstr "Gettext berichtencatalogus $dir/kz.po niet gevonden."
 
 #, sh-format
 msgid "Message catalog $dir/kz.mo not found."
@@ -1048,8 +1053,8 @@ msgid "Tab completion script $dir/$scriptname not found."
 msgstr "Tabvoltooiingsscript $dir/$scriptname niet gevonden"
 
 #, sh-format
-msgid "Manual $dir/$scriptname.1.gz not found."
-msgstr "Man-pagina $dir/$scriptname.1.gz niet gevonden."
+msgid "Manual $dir/$scriptname.1 not found."
+msgstr "Man-pagina $dir/$scriptname.1 niet gevonden."
 
 #, sh-format
 msgid ""
@@ -1058,9 +1063,6 @@ msgid ""
 msgstr ""
 "PolicyKit actiedefinitiebestand $dir/nl.karelzimmer.$scriptname.policy niet "
 "gevonden."
-
-msgid "Run IVP"
-msgstr "Voer IVP uit"
 
 msgid "Check website"
 msgstr "Controleer website"

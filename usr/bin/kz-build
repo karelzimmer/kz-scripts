@@ -142,7 +142,6 @@ function process_input {
     generate_mo
     build_deb
     install_package
-    run_ivp
     check_website
 }
 
@@ -302,17 +301,6 @@ function install_package {
             reinstall                       \
             --yes                           \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME"
-}
-
-
-# This function performs an installation verification procedure (IVP).
-function run_ivp {
-    text=$(gettext 'Run IVP')...
-    infomsg "$text"
-    # Call kz-ivp.
-    logmsg 'Calling kz-ivp...'
-    "$SCRIPTS_REPO"/usr/bin/kz-ivp || error_flag=true
-    logmsg 'Called kz-ivp.'
 }
 
 
