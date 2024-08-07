@@ -54,12 +54,12 @@ if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensi
 if type gnome-session &> /dev/null; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
 # Setup desktop-installer for *
-# For all with desktop environment.
+# For all with any desktop environment.
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --delete=install-debian; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --delete=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
 # Reset desktop-installer for *
-# For all with desktop environment.
+# For all with any desktop environment.
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --addbef=install-debian; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then kz-gnome --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
@@ -82,7 +82,7 @@ kz-gnome --addbef=firefox-esr
 kz-gnome --addbef=firefox
 
 # Setup gdebi for *
-# For all with desktop environment.
+# For all with any desktop environment.
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
