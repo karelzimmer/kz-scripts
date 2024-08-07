@@ -233,7 +233,7 @@ function check_code {
     else
         text="
 ${BOLD}In $scriptdir / $scriptname:$NORMAL
-${RED}$(gettext "    Unknown script. Function check_code cannot check script c\
+${RED}    $(gettext "Unknown script. Function check_code cannot check script c\
 ode.")$NORMAL
 "
         infomsg "$text"
