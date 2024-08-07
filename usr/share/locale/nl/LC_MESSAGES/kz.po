@@ -1033,16 +1033,16 @@ msgid "Script $scriptname returned an error."
 msgstr "Script $scriptname gaf een fout."
 
 #, sh-format
-msgid "Gettext message catalog template $dir/kz.pot not found."
-msgstr "Gettext berichtencatalogus-sjabloon $dir/kz.pot niet gevonden."
+msgid "Gettext message catalog template $file not found."
+msgstr "Gettext berichtencatalogus-sjabloon $file niet gevonden."
 
 #, sh-format
-msgid "Gettext message catalog $dir/kz.po not found."
-msgstr "Gettext berichtencatalogus $dir/kz.po niet gevonden."
+msgid "Gettext message catalog $file not found."
+msgstr "Gettext berichtencatalogus $file niet gevonden."
 
 #, sh-format
-msgid "Message catalog $dir/kz.mo not found."
-msgstr "Berichtencatalogus $dir/kz.mo niet gevonden."
+msgid "Message catalog $file not found."
+msgstr "Berichtencatalogus $file niet gevonden."
 
 #, sh-format
 msgid "Desktop configuration file $dir/$scriptname.desktop not found."

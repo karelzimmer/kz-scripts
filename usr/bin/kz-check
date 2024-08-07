@@ -108,11 +108,11 @@ function process_input {
     local scriptname=''
     local scripts_repo=$HOME/kz-scripts
 
-    check_gettext
-
     cd "$scripts_repo"
     text=$(gettext 'Check script:')
     infomsg "$text"
+
+    check_gettext
 
     while read -r script
     do
@@ -178,32 +178,36 @@ function process_input {
 
 # This function checks for gettext required files.
 function check_gettext {
+    local file=''
 
-    # GNU gettext message catalogue (.pot).
-    dir=$scripts_repo/usr/bin
-    if [[ ! -e $dir/kz.pot ]]
+    # GNU gettext message catalogue template (.pot).
+    file=$scripts_repo/usr/bin/kz.pot
+    infomsg "  $file"
+    if [[ ! -e $file ]]
     then
-        text=$(eval_gettext "Gettext message catalog template \$dir/kz.pot not\
- found.")
-        errormsg "$text"
+        text=$(eval_gettext "Gettext message catalog template \$file not found\
+.")
+        errormsg "    $text"
         error_flag=true
     fi
 
     # GNU gettext message catalogue (.po).
-    dir=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
-    if [[ ! -e $dir/kz.po ]]
+    file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.po
+    infomsg "  $file"
+    if [[ ! -e $file ]]
     then
-        text=$(eval_gettext "Gettext message catalog \$dir/kz.po not found.")
-        errormsg "$text"
+        text=$(eval_gettext "Gettext message catalog \$file not found.")
+        errormsg "    $text"
         error_flag=true
     fi
 
     # GNU message catalog (.mo).
-    dir=$scripts_repo/usr/share/locale/nl/LC_MESSAGES
-    if [[ ! -e $dir/kz.mo ]]
+    file=$scripts_repo/usr/share/locale/nl/LC_MESSAGES/kz.mo
+    infomsg "  $file"
+    if [[ ! -e $file ]]
     then
-        text=$(eval_gettext "Message catalog \$dir/kz.mo not found.")
-        errormsg "$text"
+        text=$(eval_gettext "Message catalog \$file not found.")
+        errormsg "    $text"
         error_flag=true
     fi
 }
