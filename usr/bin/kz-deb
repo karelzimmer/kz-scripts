@@ -151,7 +151,7 @@ function download_package {
 function install_package {
     local install_suggests=''
 
-    logmsg 'Install. kz deb...'
+    logmsg 'Install kz deb...'
     if $DESKTOP_ENVIRONMENT
     then
         install_suggests='--install-suggests'

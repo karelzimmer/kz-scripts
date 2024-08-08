@@ -180,10 +180,10 @@ function report_repos {
 function check_scripts {
     text=$(gettext 'Check scripts')...
     infomsg "$text"
-    # Call kz-check.
-    logmsg 'Calling kz-check...'
-    "$SCRIPTS_REPO"/usr/bin/kz-check || error_flag=true
-    logmsg 'Called kz-check.'
+    # Call kz check.
+    logmsg 'Calling kz check...'
+    "$SCRIPTS_REPO"/usr/bin/kz check || error_flag=true
+    logmsg 'Called kz check.'
 }
 
 

@@ -109,7 +109,7 @@ function process_input {
     local scripts_repo=$HOME/kz-scripts
 
     cd "$scripts_repo"
-    text=$(gettext 'Check script:')
+    text=$(gettext 'Check:')
     infomsg "$text"
 
     check_gettext

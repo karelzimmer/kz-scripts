@@ -159,10 +159,10 @@ function check_repos {
 function build_package {
     text=$(gettext 'Build package and website')...
     infomsg "$text"
-    # Call kz-build.
-    logmsg 'Calling kz-build...'
-    "$SCRIPTS_REPO"/usr/bin/kz-build || exit $ERROR
-    logmsg 'Called kz-build.'
+    # Call kz build.
+    logmsg 'Calling kz build...'
+    "$SCRIPTS_REPO"/usr/bin/kz build || exit $ERROR
+    logmsg 'Called kz build.'
 }
 
 
@@ -206,14 +206,14 @@ function install_package {
     # Call kz-deb (via wget and bash as a regular user would do).
     text=$(gettext 'Install package')...
     infomsg "$text"
-    logmsg 'Calling kz-deb (via wget and bash)...'
+    logmsg 'Calling kz deb (via wget and bash)...'
     if ! wget --output-document=- karelzimmer.nl/deb 2> >($LOGCMD) | bash
     then
         text=$(gettext 'Install package kz failed.')
         errormsg "$text"
         exit $ERROR
     fi
-    logmsg 'Called kz-deb (via wget and bash).'
+    logmsg 'Called kz deb (via wget and bash).'
 }
 
 

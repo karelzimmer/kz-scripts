@@ -388,7 +388,7 @@ or.")
             fi
             ;;
         exit )
-            logmsg "Cleanup kz-deb files ($MODULE_NAME)..."
+            logmsg "Cleanup kz deb files ($MODULE_NAME)..."
             rm  --force                 \
                 --verbose               \
                 deb                     \

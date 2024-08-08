@@ -514,16 +514,15 @@ $prompt"
 function execute_command {
     local   -i  rc=0
     local       cmd=''
-    local       row=''
     local       gui_option=''
 
-    row=${command/kz /kz-}
     cmd=$(
-        printf '%s' "$row" | cut --delimiter=' ' --fields=1
+        printf '%s' "$command" | cut --delimiter=' ' --fields=1
         )
     arg=$(
-        printf '%s' "$row" | cut --delimiter=' ' --fields=2- --only-delimited
+        printf '%s' "$command" | cut --delimiter=' ' --fields=2-
         )
+
     if $option_gui
     then
         gui_option='--gui'
