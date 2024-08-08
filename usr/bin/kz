@@ -150,6 +150,8 @@ $USAGE"
         exit $ERROR
     fi
     shift
+    text="Restart (exec sudo $PROGRAM_PATH/$PROGRAM_NAME-$command $*..."
+    logmsg "$text"
     exec "$PROGRAM_PATH/$PROGRAM_NAME-$command" "$@"
 }
 
