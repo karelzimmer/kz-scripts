@@ -8,16 +8,14 @@
 # For the format of the records in this file, see the kz install man page.
 
 # Install disabled-apport on *
-# Disable the program crash report.
-# For Ubuntu.
+# For Ubuntu. Disable the program crash report.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl disable apport.service; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
 
 # Remove disabled-apport from *
-# Enable the program crash report.
-# For Ubuntu.
+# For Ubuntu. Enable the program crash report.
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
 
