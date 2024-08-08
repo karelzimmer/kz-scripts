@@ -323,7 +323,7 @@ function term_script {
         errormsg "$text"
         exit $ERROR
     else
-        text="${GREEN}$PROGRAM_NAME $(gettext 'finished')$NORMAL"
+        text="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
         infomsg "$text"
         exit $OK
     fi

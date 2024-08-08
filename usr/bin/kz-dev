@@ -182,7 +182,7 @@ function download_website {
 
 # This function controls the termination of the script.
 function term_script {
-    text="${GREEN}$PROGRAM_NAME $(gettext 'finished')$NORMAL"
+    text="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
     infomsg "$text"
     exit $OK
 }
