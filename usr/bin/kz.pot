@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-07 15:08+0200\n"
+"POT-Creation-Date: 2024-08-11 18:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,7 +213,7 @@ msgid ""
 "Connect only one USB medium.\n"
 "\n"
 "Now connected:\n"
-"$medium\n"
+"$MEDIUM\n"
 "\n"
 "Disconnect media via Files."
 msgstr ""
@@ -260,7 +260,7 @@ msgid ""
 "\n"
 "Some files may not be readable, or\n"
 "were any files added or removed while creating the backup, or\n"
-"is there not enough space on $target.\n"
+"is there not enough space on $TARGET.\n"
 "\n"
 "Check the rsync messages (also in $error_file):\n"
 "$rsync_messages\n"
@@ -482,7 +482,7 @@ msgid "Type '$DISPLAY_NAME --apps' for available apps."
 msgstr ""
 
 #, sh-format
-msgid "No install file found, looked for '$input_file'."
+msgid "No install file found, looked for '$INPUT_FILE'."
 msgstr ""
 
 msgid "The following apps are available:"
@@ -818,7 +818,7 @@ msgid "  APP            set up APPs"
 msgstr ""
 
 #, sh-format
-msgid "No set up file found, looked for '$input_file'."
+msgid "No set up file found, looked for '$INPUT_FILE'."
 msgstr ""
 
 #, sh-format
@@ -992,7 +992,7 @@ msgid ""
 msgstr ""
 
 #, sh-format
-msgid "Does the NAS have a fixed IP address such as $nas_ip_address?"
+msgid "Does the NAS have a fixed IP address such as $NAS_IP_ADDRESS?"
 msgstr ""
 
 msgid "IP address of the NAS"

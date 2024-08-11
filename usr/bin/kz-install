@@ -16,19 +16,19 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME=kz-install
-readonly PROGRAM_DESC=$(gettext 'Install apps')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME=kz-install
+declare PROGRAM_DESC=$(gettext 'Install apps')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-\
-f|--file FILE] [-g|--gui] [-r|--remove]
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-f\
+|--file FILE] [-g|--gui] [-r|--remove]
                   \$OPTIONS_USAGE [--] [APP...]")
 
-readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are m\
+andatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
@@ -38,7 +38,7 @@ $(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
 t")
 $(gettext '  -r, --remove   delete apps')"
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -51,31 +51,24 @@ tion processing")
 $(gettext 'Arguments:')
 $(gettext '  APP            install APPs')"
 
-readonly X_OPTIONS_SHORT='acf:gr'
-readonly X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
+declare X_OPTIONS_SHORT='acf:gr'
+declare X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
 
-readonly PROGRAM_PATH=$MODULE_PATH
-
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare -A  app_arguments=()
-declare -A  failed_apps=()
-declare     argument_app=false
-declare     file_argument=''
-declare     from='from'
-declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME.sh
-declare     install='Install'
-declare     no_commands_found=true
-declare     on='on'
-declare     option_apps=false
-declare     option_cat=false
-declare     option_file=false
-declare     option_remove=false
-declare     reboot=true
-declare     remove='Remove'
+declare -A APP_ARGUMENTS=()
+declare -A FAILED_APPS=()
+declare ARGUMENT_APPS=false
+declare FILE_ARGUMENT=''
+declare FROM='from'
+declare INPUT_FILE=$PROGRAM_PATH/$PROGRAM_NAME.sh
+declare INSTALL='Install'
+declare NO_COMMANDS_FOUND=true
+declare ON='on'
+declare OPTION_APPS=false
+declare OPTION_CAT=false
+declare OPTION_FILE=false
+declare OPTION_REMOVE=false
+declare REBOOT=true
+declare REMOVE='Remove'
 
 
 ###############################################################################
@@ -84,8 +77,8 @@ declare     remove='Remove'
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                                       \
@@ -112,43 +105,43 @@ function process_x_options {
     do
         case $1 in
             -a | --apps )
-                option_apps=true
+                OPTION_APPS=true
                 shift
                 ;;
             -c | --cat )
-                option_cat=true
+                OPTION_CAT=true
                 shift
                 ;;
             -f | --file )
-                if $option_file
+                if $OPTION_FILE
                 then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_file=true
-                file_argument=$2
+                OPTION_FILE=true
+                FILE_ARGUMENT=$2
                 shift 2
                 ;;
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
     then
-                    text=\
+                    TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_gui=true
+                OPTION_GUI=true
                 shift
                 ;;
             -r | --remove )
-                option_remove=true
-                install='Remove'
-                on='from'
-                remove='Install'
-                from='on'
+                OPTION_REMOVE=true
+                INSTALL='Remove'
+                ON='from'
+                REMOVE='Install'
+                FROM='on'
                 shift
                 ;;
             -- )
@@ -163,11 +156,11 @@ $USAGE"
 
     if [[ -n $* ]]
     then
-        argument_app=true
-        reboot=false
+        ARGUMENT_APPS=true
+        REBOOT=false
         while [[ -n $* ]]
         do
-            app_arguments[$1]=$1
+            APP_ARGUMENTS[$1]=$1
             shift
         done
     fi
@@ -178,33 +171,33 @@ $USAGE"
 function process_input {
     local command_file=''
 
-    if $option_file
+    if $OPTION_FILE
     then
-        input_file=$file_argument
+        INPUT_FILE=$FILE_ARGUMENT
     fi
-    if [[ ! -f $input_file ]]
+    if [[ ! -f $INPUT_FILE ]]
     then
-        text=$(eval_gettext "No install file found, looked for '\$input_file'.\
+        TEXT=$(eval_gettext "No install file found, looked for '\$INPUT_FILE'.\
 ")
-        errormsg "$text"
+        errormsg "$TEXT"
         exit $ERROR
     fi
 
-    if $option_apps
+    if $OPTION_APPS
     then
         process_option_apps
         exit $OK
     fi
 
     command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
-    if $argument_app
+    if $ARGUMENT_APPS
     then
         process_argument_app
     else
         process_input_file_by_host
     fi
 
-    if $option_cat
+    if $OPTION_CAT
     then
         process_option_cat
         exit $OK
@@ -225,12 +218,12 @@ function process_input {
 function process_option_apps {
     local apps=''
 
-    text="$(gettext 'The following apps are available:')
+    TEXT="$(gettext 'The following apps are available:')
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --regexp="#.*$install.*$on" \
-                "$input_file"               |
+        grep    --regexp="#.*$INSTALL.*$ON" \
+                "$INPUT_FILE"               |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
         cut     --delimiter=' '             \
@@ -243,19 +236,19 @@ $(gettext 'NUM  APP')\n"
         )
     if [[ -n $apps ]]
     then
-        text+=$apps
-        text+="\n
+        TEXT+=$apps
+        TEXT+="\n
 $(eval_gettext "To view the contents of the apps install file execute: \$DISPL\
 AY_NAME --cat APP...")
 $(eval_gettext "To install the apps execute: \$DISPLAY_NAME APP...")
 $(eval_gettext "To view the contents of the default install file execute: \$DI\
 SPLAY_NAME --cat")"
     else
-        text+="$(gettext '  0  No apps found.')
+        TEXT+="$(gettext '  0  No apps found.')
 
 $USAGE"
     fi
-    infomsg "$text"
+    infomsg "$TEXT"
 }
 
 
@@ -264,15 +257,15 @@ function process_argument_app {
     local app_not_found=false
     local app_argument=''
 
-    for app_argument in "${app_arguments[@]}"
+    for app_argument in "${APP_ARGUMENTS[@]}"
     do
         process_input_file_by_app
     done
     if $app_not_found
     then
-        text="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
+        TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
 ")"
-        infomsg "$text"
+        infomsg "$TEXT"
         rm --verbose "$command_file" |& $LOGCMD
         exit $ERROR
     fi
@@ -289,13 +282,13 @@ function process_input_file_by_app {
     while read -r input_record
     do
         case $input_record in
-            '#'*$install*[[:space:]]"$app_argument"[[:space:]]*$on* )
+            '#'*$INSTALL*[[:space:]]"$app_argument"[[:space:]]*$ON* )
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$install*$on* | '#'*$remove*$from* )
+            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
                 app_match=false
                 continue
@@ -308,12 +301,12 @@ function process_input_file_by_app {
                 fi
                 ;;
         esac
-    done < "$input_file"
+    done < "$INPUT_FILE"
     if $no_app_match
     then
         app_not_found=true
-        text="$DISPLAY_NAME: $app_argument: $(gettext 'app not found')"
-        infomsg "$text"
+        TEXT="$DISPLAY_NAME: $app_argument: $(gettext 'app not found')"
+        infomsg "$TEXT"
     fi
 }
 
@@ -327,12 +320,12 @@ function process_input_file_by_host {
     while read -r input_record
     do
         case $input_record in
-            '#'*$install*$on*'*' | '#'*$install*$on*$HOSTNAME* )
+            '#'*$INSTALL*$ON*'*' | '#'*$INSTALL*$ON*$HOSTNAME* )
                 # Matching app record.
                 host_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$install*$on* | '#'*$remove*$from* )
+            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
                 host_match=false
                 continue
@@ -345,7 +338,7 @@ function process_input_file_by_host {
                 fi
                 ;;
         esac
-    done < "$input_file"
+    done < "$INPUT_FILE"
 }
 
 
@@ -358,19 +351,19 @@ function process_option_cat {
 
 # This function starts installing the apps.
 function install_apps {
-    local   -i  app_tot_num=0
+    local -i app_tot_num=0
 
     app_tot_num=$(
-        grep    --regexp="#.*$install.*$on" \
+        grep    --regexp="#.*$INSTALL.*$ON" \
                 --count                     \
                 "$command_file"             || true
         )
     [[ $app_tot_num -ne 0 ]] || return $OK
 
-    title=$(gettext 'Install apps')
-    text=$(gettext 'Prepare installation')
-    logmsg "$title"...
-    if $option_gui
+    TITLE=$(gettext 'Install apps')
+    TEXT=$(gettext 'Prepare installation')
+    logmsg "$TITLE"...
+    if $OPTION_GUI
     then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
@@ -381,8 +374,8 @@ function install_apps {
                     --no-cancel             \
                     --width     700         \
                     --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD)
+                    --title     "$TITLE"    \
+                    --text      "$TEXT"     2> >($LOGCMD)
             )
     else
         process_command_file
@@ -392,23 +385,24 @@ function install_apps {
 
 # This function reads commands from the command file for further processing.
 function process_command_file {
-    local       app_name=''
-    local       app_name_line=''
-    local       command_record=''
-    local   -i  app_seq_num=0
-    local   -i  cmd_seq_num=0
+    local    app_name=''
+    local    app_name_line=''
+    local    command_record=''
+    local -i app_seq_num=0
+    local -i cmd_seq_num=0
 
-    if ! $option_gui
+    if ! $OPTION_GUI
+
     then
-        text="$(gettext 'NUM/TOT  APP')
+        TEXT="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        infomsg "$text"
+        infomsg "$TEXT"
     fi
 
     while read -r command_record
     do
         case $command_record in
-            '#'*$install*$on* )
+            '#'*$INSTALL*$ON* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
@@ -429,7 +423,7 @@ function process_command_file {
                 ;;
             * )
                 # Command record.
-                no_commands_found=false
+                NO_COMMANDS_FOUND=false
                 execute_command "$command_record"
                 ;;
         esac
@@ -447,7 +441,7 @@ function execute_command {
     ((++cmd_seq_num))
 
     check_package_manager
-    if $option_gui
+    if $OPTION_GUI
     then
         [[ $cmd_seq_num -ne 1 ]] || logmsg "$app_name_line"
         printf '%s\n' "#$app_name_line\n\n$cmd"
@@ -469,9 +463,9 @@ function execute_command {
     fi
 
     logmsg "$cmd"
-    errexit=false
-    eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
-    errexit=true
+    ERREXIT=false
+    eval "$cmd" |& $LOGCMD || FAILED_APPS[$app_name]=$app_name
+    ERREXIT=true
 }
 
 
@@ -480,18 +474,18 @@ function term_script {
     local failed_apps_text=''
     local operation=$(gettext 'install')
 
-    if $no_commands_found
+    if $NO_COMMANDS_FOUND
     then
-        text=$(gettext 'No commands to execute.' )
-        infomsg "$text"
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
         exit $OK
     fi
 
-    if [[ -n ${failed_apps[*]} ]]
+    if [[ -n ${FAILED_APPS[*]} ]]
     then
         # shellcheck disable=SC2034
-        failed_apps_text=${failed_apps[*]}
-        text=$(eval_gettext "The installation of the following apps contains e\
+        failed_apps_text=${FAILED_APPS[*]}
+        TEXT=$(eval_gettext "The installation of the following apps contains e\
 rrors:
 \$failed_apps_text
 
@@ -499,26 +493,26 @@ Try installing the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Install apps', or
 use app 'Terminal', type 'kz install \$failed_apps_text'.")
-        errormsg "$text"
+        errormsg "$TEXT"
         exit $ERROR
     else
-        if $option_remove
+        if $OPTION_REMOVE
         then
             # shellcheck disable=SC2034
             operation=$(gettext 'remove')
         fi
-        text=$(eval_gettext "Apps \$operation completed.")
-        if $reboot
+        TEXT=$(eval_gettext "Apps \$operation completed.")
+        if $REBOOT
         then
-            text+="
+            TEXT+="
 
 $(gettext "The computer will now reboot to finish installing the apps and chan\
 ging system settings.")"
         fi
-        infomsg "$text"
-        if $reboot
+        infomsg "$TEXT"
+        if $REBOOT
         then
-            $option_gui || wait_for_enter
+            $OPTION_GUI || wait_for_enter
             sudo systemctl reboot
         fi
     fi

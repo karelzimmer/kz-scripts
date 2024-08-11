@@ -16,19 +16,19 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-setup'
-readonly PROGRAM_DESC=$(gettext 'Set up apps')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-setup'
+declare PROGRAM_DESC=$(gettext 'Set up apps')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-\
-f|--file FILE] [-g|--gui] [-r|--reset]
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] [-f\
+|--file FILE] [-g|--gui] [-r|--reset]
                 \$OPTIONS_USAGE [--] [APP...]")
 
-readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are m\
+andatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
@@ -38,7 +38,7 @@ $(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
 t")
 $(gettext '  -r, --reset    set apps on default values')"
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -51,29 +51,22 @@ tion processing")
 $(gettext 'Arguments:')
 $(gettext '  APP            set up APPs')"
 
-readonly X_OPTIONS_SHORT='acf:gr'
-readonly X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
+declare X_OPTIONS_SHORT='acf:gr'
+declare X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
 
-readonly PROGRAM_PATH=$MODULE_PATH
-
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare -A  app_arguments=()
-declare -A  failed_apps=()
-declare     argument_app=false
-declare     file_argument=''
-declare     input_file=$PROGRAM_PATH/$PROGRAM_NAME.sh
-declare     logout=true
-declare     no_commands_found=true
-declare     option_apps=false
-declare     option_cat=false
-declare     option_file=false
-declare     option_reset=false
-declare     reset='Reset'
-declare     setup='Setup'
+declare -A APP_ARGUMENTS=()
+declare -A FAILED_APPS=()
+declare    ARGUMENT_APP=false
+declare    FILE_ARGUMENT=''
+declare    INPUT_FILE=$PROGRAM_PATH/$PROGRAM_NAME.sh
+declare    LOGOUT=true
+declare    NO_COMMANDS_FOUND=true
+declare    OPTION_APPS=false
+declare    OPTION_CAT=false
+declare    OPTION_FILE=false
+declare    OPTION_RESET=false
+declare    RESET='Reset'
+declare    SETUP='Setup'
 
 
 ###############################################################################
@@ -82,8 +75,8 @@ declare     setup='Setup'
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                                       \
@@ -110,41 +103,41 @@ function process_x_options {
     do
         case $1 in
             -a | --apps )
-                option_apps=true
+                OPTION_APPS=true
                 shift
                 ;;
             -c | --cat )
-                option_cat=true
+                OPTION_CAT=true
                 shift
                 ;;
             -f | --file )
-                if $option_file
+                if $OPTION_FILE
                 then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_file=true
-                file_argument=$2
+                OPTION_FILE=true
+                FILE_ARGUMENT=$2
                 shift 2
                 ;;
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
     then
-                    text=\
+                    TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_gui=true
+                OPTION_GUI=true
                 shift
                 ;;
             -r | --reset )
-                option_reset=true
-                setup='Reset'
-                reset='Setup'
+                OPTION_RESET=true
+                SETUP='Reset'
+                RESET='Setup'
                 shift
                 ;;
             -- )
@@ -159,11 +152,11 @@ $USAGE"
 
     if [[ -n $* ]]
     then
-        argument_app=true
-        logout=false
+        ARGUMENT_APP=true
+        LOGOUT=false
         while [[ -n $* ]]
         do
-            app_arguments[$1]=$1
+            APP_ARGUMENTS[$1]=$1
             shift
         done
     fi
@@ -174,18 +167,18 @@ $USAGE"
 function process_input {
     local command_file=''
 
-    if $option_file
+    if $OPTION_FILE
     then
-        input_file=$file_argument
+        INPUT_FILE=$FILE_ARGUMENT
     fi
-    if [[ ! -f $input_file ]]
+    if [[ ! -f $INPUT_FILE ]]
     then
-        text=$(eval_gettext "No set up file found, looked for '\$input_file'.")
-        errormsg "$text"
+        TEXT=$(eval_gettext "No set up file found, looked for '\$INPUT_FILE'.")
+        errormsg "$TEXT"
         exit $ERROR
     fi
 
-    if $option_apps
+    if $OPTION_APPS
     then
         process_option_apps
         exit $OK
@@ -193,14 +186,14 @@ function process_input {
 
     command_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
 
-    if $argument_app
+    if $ARGUMENT_APP
     then
         process_argument_app
     else
         process_input_file_by_user
     fi
 
-    if $option_cat
+    if $OPTION_CAT
     then
         process_option_cat
         exit $OK
@@ -214,12 +207,12 @@ function process_input {
 function process_option_apps {
     local apps=''
 
-    text="$(gettext 'The following apps are available:')
+    TEXT="$(gettext 'The following apps are available:')
 
 $(gettext 'NUM  APP')\n"
     apps=$(
-        grep    --regexp="#.*$setup.*for"   \
-                "$input_file"               |
+        grep    --regexp="#.*$SETUP.*for"   \
+                "$INPUT_FILE"               |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
         cut     --delimiter=' '             \
@@ -232,19 +225,19 @@ $(gettext 'NUM  APP')\n"
         )
     if [[ -n $apps ]]
     then
-        text+=$apps
-        text+="\n
+        TEXT+=$apps
+        TEXT+="\n
 $(eval_gettext "To view the contents of the apps set up file execute: \$DISPLA\
 Y_NAME --cat APP...")
 $(eval_gettext "To set up the apps execute: \$DISPLAY_NAME APP...")
 $(eval_gettext "To view the contents of the default set up file execute: \$DIS\
 PLAY_NAME --cat")"
     else
-        text+="$(gettext '  0  No apps found.')
+        TEXT+="$(gettext '  0  No apps found.')
 
 $USAGE"
     fi
-    infomsg "$text"
+    infomsg "$TEXT"
 }
 
 
@@ -253,15 +246,15 @@ function process_argument_app {
     local app_not_found=false
     local app_argument=''
 
-    for app_argument in "${app_arguments[@]}"
+    for app_argument in "${APP_ARGUMENTS[@]}"
     do
         process_input_file_by_app
     done
     if $app_not_found
     then
-        text="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
+        TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available apps.\
 ")"
-        infomsg "$text"
+        infomsg "$TEXT"
         rm --verbose "$command_file" |& $LOGCMD
         exit $ERROR
     fi
@@ -278,13 +271,13 @@ function process_input_file_by_app {
     while read -r input_record
     do
         case $input_record in
-            '#'*$setup*[[:space:]]"$app_argument"[[:space:]]*for* )
+            '#'*$SETUP*[[:space:]]"$app_argument"[[:space:]]*for* )
                 # Matching app record.
                 app_match=true
                 no_app_match=false
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup*for* | '#'*$reset*for* )
+            '#'*$SETUP*for* | '#'*$RESET*for* )
                 # Mismatched app record.
                 app_match=false
                 continue
@@ -297,12 +290,12 @@ function process_input_file_by_app {
                 fi
                 ;;
         esac
-    done < "$input_file"
+    done < "$INPUT_FILE"
     if $no_app_match
     then
         app_not_found=true
-        text="$DISPLAY_NAME: $app_argument: $(gettext 'app not found')"
-        infomsg "$text"
+        TEXT="$DISPLAY_NAME: $app_argument: $(gettext 'app not found')"
+        infomsg "$TEXT"
     fi
 }
 
@@ -316,12 +309,12 @@ function process_input_file_by_user {
     while read -r input_record
     do
         case $input_record in
-            '#'*$setup*for*'*' | '#'*$setup*for*$USER@$HOSTNAME* )
+            '#'*$SETUP*for*'*' | '#'*$SETUP*for*$USER@$HOSTNAME* )
                 # Matching app record.
                 user_match=true
                 printf '%s\n' "$input_record" >> "$command_file"
                 ;;
-            '#'*$setup*for* | '#'*$reset*for* )
+            '#'*$SETUP*for* | '#'*$RESET*for* )
                 # Mismatched app record.
                 user_match=false
                 continue
@@ -334,7 +327,7 @@ function process_input_file_by_user {
                 fi
                 ;;
         esac
-    done < "$input_file"
+    done < "$INPUT_FILE"
 }
 
 
@@ -347,19 +340,19 @@ function process_option_cat {
 
 # This function starts setting up the apps.
 function setup_apps {
-    local   -i  app_tot_num=0
+    local -i app_tot_num=0
 
     app_tot_num=$(
-        grep    --regexp="#.*$setup.*for"   \
+        grep    --regexp="#.*$SETUP.*for"   \
                 --count                     \
                 "$command_file"             || true
         )
     [[ $app_tot_num -ne 0 ]] || return $OK
 
-    title=$(gettext 'Set up apps')
-    text=$(gettext 'Preparing set up')
-    logmsg "$title"...
-    if $option_gui
+    TITLE=$(gettext 'Set up apps')
+    TEXT=$(gettext 'Preparing set up')
+    logmsg "$TITLE"...
+    if $OPTION_GUI
     then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
@@ -370,8 +363,8 @@ function setup_apps {
                     --no-cancel             \
                     --width     700         \
                     --height    50          \
-                    --title     "$title"    \
-                    --text      "$text"     2> >($LOGCMD)
+                    --title     "$TITLE"    \
+                    --text      "$TEXT"     2> >($LOGCMD)
             )
     else
         process_command_file
@@ -381,23 +374,24 @@ function setup_apps {
 
 # This function reads commands from the command file for further processing.
 function process_command_file {
-    local       app_name=''
-    local       app_name_line=''
-    local       command_record=''
-    local   -i  app_seq_num=0
-    local   -i  cmd_seq_num=0
+    local    app_name=''
+    local    app_name_line=''
+    local    command_record=''
+    local -i app_seq_num=0
+    local -i cmd_seq_num=0
 
-    if ! $option_gui
+    if ! $OPTION_GUI
+
     then
-        text="$(gettext 'NUM/TOT  APP')
+        TEXT="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        infomsg "$text"
+        infomsg "$TEXT"
     fi
 
     while read -r command_record
     do
         case $command_record in
-            '#'*$setup* )
+            '#'*$SETUP* )
                 # App record.
                 app_name=$(
                     printf '%s\n' "$command_record"     |
@@ -418,7 +412,7 @@ function process_command_file {
                 ;;
             * )
                 # Command record.
-                no_commands_found=false
+                NO_COMMANDS_FOUND=false
                 execute_command "$command_record"
                 ;;
         esac
@@ -435,7 +429,7 @@ function execute_command {
 
     ((++cmd_seq_num))
 
-    if $option_gui
+    if $OPTION_GUI
     then
         [[ $cmd_seq_num -ne 1 ]] || logmsg "$app_name_line"
         printf '%s\n' "#$app_name_line\n\n$cmd"
@@ -457,9 +451,9 @@ function execute_command {
     fi
 
     logmsg "$cmd"
-    errexit=false
-    eval "$cmd" |& $LOGCMD || failed_apps[$app_name]=$app_name
-    errexit=true
+    ERREXIT=false
+    eval "$cmd" |& $LOGCMD || FAILED_APPS[$app_name]=$app_name
+    ERREXIT=true
 }
 
 
@@ -468,53 +462,53 @@ function term_script {
     local failed_apps_text=''
     local operation=$(gettext 'set up')
 
-    if $no_commands_found
+    if $NO_COMMANDS_FOUND
     then
-        text=$(gettext 'No commands to execute.' )
-        infomsg "$text"
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
         exit $OK
     fi
 
-    if [[ -n ${failed_apps[*]} ]]
+    if [[ -n ${FAILED_APPS[*]} ]]
     then
         # shellcheck disable=SC2034
-        failed_apps_text=${failed_apps[*]}
-        text=$(eval_gettext "The set up of the following apps contains errors:
+        failed_apps_text=${FAILED_APPS[*]}
+        TEXT=$(eval_gettext "The set up of the following apps contains errors:
 \$failed_apps_text
 
 Try to set up the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Set up apps', or
 use app 'Terminal', type 'kz setup \$failed_apps_text'.")
-        errormsg "$text"
+        errormsg "$TEXT"
         exit $ERROR
     else
-        if $option_reset
+        if $OPTION_RESET
         then
             # shellcheck disable=SC2034
             operation=$(gettext 'reset')
         fi
-        text=$(eval_gettext "Apps \$operation completed.")
-        if $logout
+        TEXT=$(eval_gettext "Apps \$operation completed.")
+        if $LOGOUT
         then
             if $DESKTOP_ENVIRONMENT
     then
-                text+="
+                TEXT+="
 
 $(gettext "You will now be logged out of the computer to finish installing the\
  apps and changing user settings.")"
             else
-                text+="
+                TEXT+="
 
 $(gettext "You must log out of the computer to finish installing the apps and \
 changing user settings.
 Type 'logout' to log out.")"
             fi
         fi
-        infomsg "$text"
-        if $logout && $DESKTOP_ENVIRONMENT
+        infomsg "$TEXT"
+        if $LOGOUT && $DESKTOP_ENVIRONMENT
         then
-            $option_gui || wait_for_enter
+            $OPTION_GUI || wait_for_enter
             if type gnome-session &> /dev/null
             then
                 gnome-session-quit --logout --no-prompt
@@ -531,10 +525,10 @@ Type 'logout' to log out.")"
             then
                 xfce4-session-logout --logout
             else
-                text='No logout command available.'
-                logmsg "$text"
-                text=$(gettext 'Log out of the computer yourself.')
-                infomsg "$text"
+                TEXT='No logout command available.'
+                logmsg "$TEXT"
+                TEXT=$(gettext 'Log out of the computer yourself.')
+                infomsg "$TEXT"
             fi
         else
             exit $OK

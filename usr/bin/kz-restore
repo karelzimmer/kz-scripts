@@ -16,26 +16,26 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-restore'
-readonly PROGRAM_DESC=$(gettext 'Restore backup')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-restore'
+declare PROGRAM_DESC=$(gettext 'Restore backup')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-s|--source \
-DIRECTORY]
+declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-s|--source D\
+IRECTORY]
                   \$OPTIONS_USAGE")"
 
-readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are m\
+andatory for short options too.")
 
 $(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
 t")
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')"
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -43,21 +43,15 @@ $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
 
-readonly X_OPTIONS_SHORT='gs:'
-readonly X_OPTIONS_LONG=',gui,source:'
+declare X_OPTIONS_SHORT='gs:'
+declare X_OPTIONS_LONG=',gui,source:'
 
-readonly TARGET=$HOME
-
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare medium=''
-declare option_source=false
-declare source_argument=''
-declare source_medium=''
-declare source=''
+declare MEDIUM=''
+declare OPTION_SOURCE=false
+declare SOURCE_ARGUMENT=''
+declare SOURCE_MEDIUM=''
+declare SOURCE=''
+declare TARGET=$HOME
 
 
 ###############################################################################
@@ -66,8 +60,8 @@ declare source=''
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                                       \
@@ -96,25 +90,25 @@ function process_x_options {
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
     then
-                    text=\
+                    TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_gui=true
+                OPTION_GUI=true
                 shift
                 ;;
-            -s | --source )
-                if $option_source
+            -s | --SOURCE )
+                if $OPTION_SOURCE
                 then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_source=true
-                source_argument=$2
+                OPTION_SOURCE=true
+                SOURCE_ARGUMENT=$2
                 shift 2
                 ;;
             -- )
@@ -129,9 +123,9 @@ $USAGE"
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -148,60 +142,60 @@ function process_input {
 
 # This function checks if the source is available.
 function check_source {
-    if $option_source
+    if $OPTION_SOURCE
     then
-        if [[ ! -d $source_argument ]]
+        if [[ ! -d $SOURCE_ARGUMENT ]]
         then
-            text="$DISPLAY_NAME: $source_argument: \
+            TEXT="$DISPLAY_NAME: $SOURCE_ARGUMENT: \
 $(gettext 'directory does not exist')
 $USAGE"
-            infomsg "$text"
+            infomsg "$TEXT"
             exit $ERROR
         fi
-        source=$source_argument/$USER@$HOSTNAME
-        source_medium=$source_argument
+        SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
+        SOURCE_MEDIUM=$SOURCE_ARGUMENT
     else
-        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ -z $medium ]]
+        MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+        if [[ -z $MEDIUM ]]
         then
-            text=$(gettext "No USB medium found.
+            TEXT=$(gettext "No USB medium found.
 
 Connect a USB medium.")
-            infomsg "$text"
-            $option_gui || wait_for_enter
-            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ -z $medium ]]
+            infomsg "$TEXT"
+            $OPTION_GUI || wait_for_enter
+            MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+            if [[ -z $MEDIUM ]]
             then
-                errormsg "$text"
+                errormsg "$TEXT"
                 exit $ERROR
             fi
         fi
-        medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-        if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]
+        MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
         then
-            text="$(eval_gettext "Connect only one USB medium.
+            TEXT="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
-\$medium
+\$MEDIUM
 
 Disconnect media via Files.")"
-            infomsg "$text"
-            $option_gui || wait_for_enter
-            medium=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
-            if [[ $(printf '%s\n' "$medium" | wc --lines) -gt 1 ]]
+            infomsg "$TEXT"
+            $OPTION_GUI || wait_for_enter
+            MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+            if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
             then
-                errormsg "$text"
+                errormsg "$TEXT"
                 exit $ERROR
             fi
         fi
-        source=$medium/kz-backup/$USER@$HOSTNAME
-        source_medium=$medium
-        if [[ ! -d $source ]]
+        SOURCE=$MEDIUM/kz-backup/$USER@$HOSTNAME
+        SOURCE_MEDIUM=$MEDIUM
+        if [[ ! -d $SOURCE ]]
         then
-            text=$(eval_gettext "No backup found on connected USB medium.
+            TEXT=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
-            errormsg "$text"
+            errormsg "$TEXT"
             exit $ERROR
         fi
     fi
@@ -210,20 +204,20 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup {
-    local       error_file=''
-    local       rsync_messages=''
-    local   -i  restore_rc=0
+    local    error_file=''
+    local    rsync_messages=''
+    local -i restore_rc=0
 
     error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
-    title=$(gettext 'Restore backup')
-    text=$(gettext 'Preparing restore (this can take a while)')
-    if $option_gui
+    TITLE=$(gettext 'Restore backup')
+    TEXT=$(gettext 'Preparing restore (this can take a while)')
+    if $OPTION_GUI
     then
-        logmsg "$title"...
+        logmsg "$TITLE"...
         rsync   --archive               \
                 --verbose               \
-                "$source"/              \
+                "$SOURCE"/              \
                 "$TARGET"/              \
                 2> "$error_file"        |
         sed     --expression='s/^/#/'   |
@@ -233,22 +227,22 @@ function restore_backup {
                 --pulsate               \
                 --width     600         \
                 --height    50          \
-                --title     "$title"    \
-                --text      "$text"     2> >($LOGCMD) || restore_rc=$?
+                --title     "$TITLE"    \
+                --text      "$TEXT"     2> >($LOGCMD) || restore_rc=$?
     else
-        text+='...'
-        infomsg "$text"
+        TEXT+='...'
+        infomsg "$TEXT"
         rsync   --archive               \
                 --verbose               \
                 --human-readable        \
-                "$source"/              \
+                "$SOURCE"/              \
                 "$TARGET"/              2> "$error_file" || restore_rc=$?
     fi
     if [[ $restore_rc -ne $OK ]]
     then
         # shellcheck disable=SC2034
         rsync_messages=$(cat "$error_file")
-        text=$(eval_gettext "Restore ended with warnings or errors.
+        TEXT=$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while restoring the backup, or
@@ -261,7 +255,7 @@ Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Restore backup', or
 use app 'Terminal', type 'kz restore'.")
-        errormsg "$text"
+        errormsg "$TEXT"
         exit $ERROR
     fi
     rm --verbose "$error_file" |& $LOGCMD
@@ -274,7 +268,7 @@ function restore_settings {
 
     if $DESKTOP_ENVIRONMENT
     then
-        $option_gui || infomsg "$(gettext 'Restore settings...')"
+        $OPTION_GUI || infomsg "$(gettext 'Restore settings...')"
         restore_setting_desktop
     fi
 }
@@ -296,13 +290,13 @@ function restore_setting_desktop {
 
 # This function controls the termination of the script.
 function term_script {
-    local   -i  unmount_rc=0
-    local       num_users=$(find /home/* -prune -print | wc --lines)
-    local       users=''
+    local -i unmount_rc=0
+    local    num_users=$(find /home/* -prune -print | wc --lines)
+    local    users=''
 
     if [[ $num_users -eq 1 ]]
     then
-        text=$(gettext 'The backup has been restored.')
+        TEXT=$(gettext 'The backup has been restored.')
     else
         users=$(
                 gettext '_username_|UID|_user_'
@@ -322,27 +316,27 @@ function term_script {
                     cut --delimiter=: --fields=1
                     )
                 )
-        text="$(eval_gettext "The backup has restored for \$USER (there are \$\
+        TEXT="$(eval_gettext "The backup has restored for \$USER (there are \$\
 num_users users).")
 
 $users"
     fi
 
-    if [[ $source_medium == /media/* ]]
+    if [[ $SOURCE_MEDIUM == /media/* ]]
     then
         term_script_usb || unmount_rc=$?
         if [[ $unmount_rc -eq $OK ]]
         then
-            text+="
+            TEXT+="
 
 $(gettext 'The USB medium can be removed.')"
         else
-            text+="
+            TEXT+="
 
 $(gettext 'Disconnect the USB medium yourself (safely!).')"
         fi
     fi
-    infomsg "$text"
+    infomsg "$TEXT"
 
     exit $OK
 }
@@ -350,22 +344,22 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 
 # This function tries to unmount the USB device.
 function term_script_usb {
-    local       dev=''
-    local   -i  rc=0
-    local       text
+    local    dev=''
+    local -i rc=0
+    local    text
 
     text=$(gettext 'Disconnect the USB media')
     dev='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
-                "$source_medium"    |
+                "$SOURCE_MEDIUM"    |
         head    -1                  |
         cut     --delimiter='-'     \
                 --fields=2          |
         cut     --delimiter=' '     \
                 --fields=1
     )
-    if $option_gui
+    if $OPTION_GUI
     then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
@@ -377,7 +371,7 @@ function term_script_usb {
                     --no-cancel             \
                     --width     600         \
                     --height    50          \
-                    --title     "$title"    \
+                    --title     "$TITLE"    \
                     --text      "$text"     \
                     2> >($LOGCMD)
             )
@@ -392,7 +386,7 @@ function term_script_usb {
 
 # This function unmounts the USB device.
 function term_script_unmount {
-    umount "$source_medium"                     |& $LOGCMD || rc+=$?
+    umount "$SOURCE_MEDIUM"                     |& $LOGCMD || rc+=$?
     udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
     udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
     sleep 3

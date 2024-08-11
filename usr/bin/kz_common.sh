@@ -19,53 +19,50 @@ source /usr/bin/gettext.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly MODULE_NAME='kz_common.sh'
-readonly MODULE_DESC=$(gettext 'Common module for shell scripts')
-readonly MODULE_PATH=$(dirname "$(realpath "${0/^-/}")") # On server $0='-bash'
+declare MODULE_NAME='kz_common.sh'
+declare MODULE_DESC=$(gettext 'Common module for shell scripts')
 
-readonly OK=0
-readonly ERROR=1
+declare PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")") # On server $0='-bash'
 
-readonly NORMAL='\033[0m'
-readonly BOLD='\033[1m'
+declare OK=0
+declare ERROR=1
 
-readonly RED='\033[1;31m'
-readonly GREEN='\033[1;32m'
+declare NORMAL='\033[0m'
+declare BOLD='\033[1m'
 
-readonly OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+declare RED='\033[1;31m'
+declare GREEN='\033[1;32m'
 
-readonly OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
+declare USAGE
+declare OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
+
+declare HELP
+declare OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 
-readonly OPTIONS_SHORT='hmuv'
-readonly OPTIONS_LONG='help,manual,usage,version'
+declare OPTIONS_SHORT='hmuv'
+declare OPTIONS_LONG='help,manual,usage,version'
 
 # Determine whether a desktop environment is available.
 if [[ -n $(
     type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null
     ) ]]
 then
-    readonly DESKTOP_ENVIRONMENT=true
+    declare DESKTOP_ENVIRONMENT=true
 else
-    readonly DESKTOP_ENVIRONMENT=false
+    declare DESKTOP_ENVIRONMENT=false
 fi
 
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare     errexit=true
-declare     kz_deb_local_file=''
-declare     option_gui=false
-declare     text=''
-declare     title=''
-declare -a  commandline_args=()
+declare ERREXIT=true
+declare KZ_DEB_LOCAL_FILE=''
+declare OPTION_GUI=false
+declare TEXT=''
+declare TITLE=''
 
 
 ###############################################################################
@@ -75,27 +72,27 @@ declare -a  commandline_args=()
 # This function checks whether the script is started as user root and restarts
 # the script as user root if not.
 function become_root {
-    local   -i  pkexec_rc=0
-    local       program_exec=$MODULE_PATH/$PROGRAM_NAME
+    local -i pkexec_rc=0
+    local    program_exec=$PROGRAM_PATH/$PROGRAM_NAME
 
     become_root_check || exit $OK
 
     if [[ $UID -ne 0 ]]
     then
-        if $option_gui
+        if $OPTION_GUI
         then
             export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
-            text="Restart (pkexec $program_exec ${commandline_args[*]})..."
-            logmsg "$text"
+            TEXT="Restart (pkexec $program_exec ${COMMANDLINE_ARGS[*]})..."
+            logmsg "$TEXT"
             # Because $program_exec will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$program_exec" "${commandline_args[@]}" || pkexec_rc=$?
+            pkexec "$program_exec" "${COMMANDLINE_ARGS[@]}" || pkexec_rc=$?
             exit $pkexec_rc
         else
-            text="Restart (exec sudo $program_exec ${commandline_args[*]})..."
-            logmsg "$text"
-            exec sudo "$program_exec" "${commandline_args[@]}"
+            TEXT="Restart (exec sudo $program_exec ${COMMANDLINE_ARGS[*]})..."
+            logmsg "$TEXT"
+            exec sudo "$program_exec" "${COMMANDLINE_ARGS[@]}"
         fi
     fi
 }
@@ -111,8 +108,8 @@ function become_root_check {
     then
         return $OK
     else
-        text=$(gettext 'Already performed by the administrator.')
-        infomsg "$text"
+        TEXT=$(gettext 'Already performed by the administrator.')
+        infomsg "$TEXT"
         return $ERROR
     fi
 }
@@ -121,7 +118,7 @@ function become_root_check {
 # This function checks to see if the computer is running on battery power and
 # prompts the user to continue if so.
 function check_on_ac_power {
-    local   -i  on_battery=0
+    local -i on_battery=0
 
     on_ac_power &> /dev/null || on_battery=$?
     # Value on_battery:
@@ -131,11 +128,11 @@ function check_on_ac_power {
 
     if [[ on_battery -eq 1 ]]
     then
-        text=$(gettext "The computer now uses only the battery for power.
+        TEXT=$(gettext "The computer now uses only the battery for power.
 
 It is recommended to connect the computer to the wall socket.")
-        infomsg "$text"
-        $option_gui || wait_for_enter
+        infomsg "$TEXT"
+        $OPTION_GUI || wait_for_enter
     fi
 }
 
@@ -143,20 +140,20 @@ It is recommended to connect the computer to the wall socket.")
 # This function checks for another running package manager and waits for the
 # next check if so.
 function check_package_manager {
-    local   -i  check_wait=10
+    local -i check_wait=10
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*
     do
-        text=$(gettext 'Wait for another package manager to finish')
-        if $option_gui
+        TEXT=$(gettext 'Wait for another package manager to finish')
+        if $OPTION_GUI
         then
-            logmsg "$text..."
+            logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$text"
+            printf '%s\n' "#$TEXT"
         else
-            infomsg "$text..."
+            infomsg "$TEXT..."
         fi
         sleep $check_wait
     done
@@ -165,13 +162,13 @@ function check_package_manager {
 
 # This function returns an error message.
 function errormsg {
-    if $option_gui
+    if $OPTION_GUI
     then
-        title=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
+        TITLE=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
-                --title     "$title"    \
+                --title     "$TITLE"    \
                 --text      "$*"        2> >($LOGCMD) || true
     else
         printf "${RED}%b${NORMAL}\n" "$*" >&2
@@ -181,13 +178,13 @@ function errormsg {
 
 # This function returns an informational message.
 function infomsg {
-    if $option_gui
+    if $OPTION_GUI
     then
-        title=$(eval_gettext "\$PROGRAM_DESC information (\$DISPLAY_NAME)")
+        TITLE=$(eval_gettext "\$PROGRAM_DESC information (\$DISPLAY_NAME)")
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
-                --title     "$title"    \
+                --title     "$TITLE"    \
                 --text      "$*"        2> >($LOGCMD) || true
     else
         printf '%b\n' "$*"
@@ -203,7 +200,8 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    readonly LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    declare -g LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    declare -ag COMMANDLINE_ARGS=("$@")
 
     trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'term exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
@@ -212,11 +210,9 @@ function init_script {
     trap 'term sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    text="==== START logs for script $PROGRAM_NAME ====
-Started ($MODULE_PATH/$PROGRAM_NAME $* as $USER)."
-    logmsg "$text"
-
-    commandline_args=("$@")
+    TEXT="==== START logs for script $PROGRAM_NAME ====
+Started ($PROGRAM_PATH/$PROGRAM_NAME $* as $USER)."
+    logmsg "$TEXT"
 }
 
 
@@ -268,9 +264,9 @@ function process_option_help {
         yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
         yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
     fi
-    text="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
+    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
 E'\$yelp_man_url for more information.")"
-    printf '%b\n\n%b\n' "$HELP" "$text"
+    printf '%b\n\n%b\n' "$HELP" "$TEXT"
 }
 
 
@@ -282,43 +278,43 @@ function process_option_manual {
 
 # This function shows the available options.
 function process_option_usage {
-    text="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
-    printf '%b\n\n%b\n' "$USAGE" "$text"
+    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
+    printf '%b\n\n%b\n' "$USAGE" "$TEXT"
 }
 
 
 # This function displays version, author, and license information.
 function process_option_version {
-    local   build_id=''
+    local build_id=''
 
     if [[ -e /etc/kz-build.id ]]
     then
         build_id=$(cat /etc/kz-build.id)
     else
-        text=$(gettext 'Build ID cannot be determined.')
-        logmsg "$text"
-        build_id=$text
+        TEXT=$(gettext 'Build ID cannot be determined.')
+        logmsg "$TEXT"
+        build_id=$TEXT
     fi
 
-    text="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
+    TEXT="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 .")"
-    infomsg "$text"
+    infomsg "$TEXT"
 }
 
 
 # This function controls the termination.
 function term {
-    local       signal=${1:-unknown}
-    local   -i  lineno=${2:-unknown}
-    local       function=${3:-unknown}
-    local       command=${4:-unknown}
-    local   -i  rc=${5:-$ERROR}
-    local       rc_desc=''
-    local   -i  rc_desc_signalno=0
-    local       status=$rc/error
+    local    signal=${1:-unknown}
+    local -i lineno=${2:-unknown}
+    local    function=${3:-unknown}
+    local    command=${4:-unknown}
+    local -i rc=${5:-$ERROR}
+    local    rc_desc=''
+    local -i rc_desc_signalno=0
+    local    status=$rc/error
 
     case $rc in
         0 )
@@ -373,17 +369,17 @@ function term {
             rc_desc='unknown error'
             ;;
     esac
-    text="Signal: $signal, line: $lineno, function: $function, command: "
-    text+="$command, code: $rc ($rc_desc)."
-    logmsg "$text"
+    TEXT="Signal: $signal, line: $lineno, function: $function, command: "
+    TEXT+="$command, code: $rc ($rc_desc)."
+    logmsg "$TEXT"
 
     case $signal in
         err )
-            if $errexit
+            if $ERREXIT
             then
-                text=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
+                TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
 or.")
-                errormsg "$text"
+                errormsg "$TEXT"
                 exit "$rc"
             fi
             ;;
@@ -393,16 +389,16 @@ or.")
                 --verbose               \
                 deb                     \
                 deb.{1..99}             \
-                "$kz_deb_local_file"    |& $LOGCMD
-            text="Ended (code=exited, status=$status).
+                "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
+            TEXT="Ended (code=exited, status=$status).
 ==== END logs for script $PROGRAM_NAME ===="
-            logmsg "$text"
+            logmsg "$TEXT"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
             exit "$rc"
             ;;
         * )
-            text=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
-            errormsg "$text"
+            TEXT=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
+            errormsg "$TEXT"
             exit "$rc"
             ;;
     esac

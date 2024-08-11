@@ -56,8 +56,8 @@ def perform_repair():
     """
     This function runs a repair of Debian packages.
     """
-    text = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, text)
+    TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
     command = 'sudo dpkg --configure --pending'
     perform_command(command)
@@ -76,8 +76,8 @@ def perform_update():
     """
     This function updates installed Debian packages and snaps if installed.
     """
-    text = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, text)
+    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
     command = 'sudo apt-get update'
     perform_command(command)
@@ -89,8 +89,8 @@ def perform_update():
         subprocess.run('type snap &> /dev/null', shell=True, check=True,
                        executable='/usr/bin/bash')
     except Exception as exc:
-        text = str(exc)
-        kz_common.logmsg(PROGRAM_NAME, text)
+        TEXT = str(exc)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
     else:
         command = 'sudo snap refresh'
         perform_command(command)
@@ -100,8 +100,8 @@ def perform_cleanup():
     """
     This function performs a Debian packages cleanup.
     """
-    text = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, text)
+    TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
     command = 'sudo apt-get autoclean --yes'
     perform_command(command)
@@ -114,17 +114,17 @@ def perform_command(command):
     """
     This function executes a Bourne-Again SHell command.
     """
-    text = f'{command}'
-    kz_common.infomsg(PROGRAM_NAME, text)
+    TEXT = f'{command}'
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
     kz_common.check_package_manager(PROGRAM_NAME)
     try:
         subprocess.run({command}, shell=True, check=True,
                        executable='/usr/bin/bash')
     except Exception as exc:
-        text = str(exc)
-        kz_common.logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.term(PROGRAM_NAME, text, kz_common.ERROR)
+        TEXT = str(exc)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
     else:
         kz_common.infomsg(PROGRAM_NAME, '')
 
@@ -135,26 +135,26 @@ def check_reboot():
     """
     try:
         with open('/var/run/reboot-required') as fh:
-            text = _('*** The computer needs to be restarted to complete the i\
+            TEXT = _('*** The computer needs to be restarted to complete the i\
 nstallation of updates ***')
-            text = f"{kz_common.RED}{text}{kz_common.NORMAL}"
-            kz_common.infomsg(PROGRAM_NAME, text)
+            TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
+            kz_common.infomsg(PROGRAM_NAME, TEXT)
     except FileNotFoundError as fnf:
-        text = str(fnf)
-        kz_common.logmsg(PROGRAM_NAME, text)
+        TEXT = str(fnf)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
     except Exception as exc:
-        text = str(exc)
-        kz_common.logmsg(PROGRAM_NAME, text)
-        text = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.term(PROGRAM_NAME, text, kz_common.ERROR)
+        TEXT = str(exc)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
 
 
 def term_script():
     """
     This function controls the termination of the script.
     """
-    text = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}{kz_common.NORMAL}"
-    kz_common.term(PROGRAM_NAME, text, kz_common.OK)
+    TEXT = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}{kz_common.NORMAL}"
+    kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
 
 
 ###############################################################################

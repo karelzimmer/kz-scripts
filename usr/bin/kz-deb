@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-# The server reports $0 as '-bash' (login shell) for bash, so remove the '-'.
+# On a server, $0 is reported as '-bash' (login shell), so remove '-'.
 if ! source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
             systemd-cat --identifier=kz-deb --priority=debug)
 then
@@ -34,28 +34,23 @@ fi
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-deb'
-readonly PROGRAM_DESC=$(gettext 'Download and install package kz')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-deb'
+declare PROGRAM_DESC=$(gettext 'Download and install package kz')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare kz_deb_local_file=''
+declare KZ_DEB_LOCAL_FILE=''
 
 
 ###############################################################################
@@ -64,8 +59,8 @@ declare kz_deb_local_file=''
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                       \
@@ -103,9 +98,9 @@ function process_x_options {
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -123,12 +118,12 @@ function process_input {
 
 # This function prepares further processing.
 function prepare_processing {
-    kz_deb_local_file=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     sudo true
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress. If all
     # fails, kz_common.sh will delete the local Debian package file on exit.
-    while test -e "$kz_deb_local_file"
+    while test -e "$KZ_DEB_LOCAL_FILE"
     do
         printf '#'
         sleep 1
@@ -142,7 +137,7 @@ function download_package {
     local kz_deb_site_uri='https://karelzimmer.nl/assets/kz-deb/'
 
     logmsg 'Download kz deb...'
-    wget    --output-document="$kz_deb_local_file"  \
+    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$kz_deb_site_uri/$kz_deb_site_file"    |& $LOGCMD
 }
 
@@ -162,9 +157,9 @@ function install_package {
             reinstall                       \
             $install_suggests               \
             --yes                           \
-            "$kz_deb_local_file"            |& $LOGCMD || install_package_xz
+            "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
     logmsg 'Cleanup...'
-    rm --verbose "$kz_deb_local_file" |& $LOGCMD
+    rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
 }
 
 
@@ -175,7 +170,7 @@ function install_package_xz {
     logmsg 'Install required packages...'
     sudo    apt-get install --yes binutils zstd     |& $LOGCMD
     logmsg 'Extract files from the archive...'
-    ar      -xv --output=/tmp "$kz_deb_local_file"  |& $LOGCMD
+    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"  |& $LOGCMD
     logmsg 'Uncompress zstd files an re-compress them using xz...'
     zstd    --uncompress < /tmp/control.tar.zst     |
     xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
@@ -207,7 +202,7 @@ function install_package_xz {
 
 # This function controls the termination of the script.
 function term_script {
-    text=$(gettext "Package kz has been successfully installed.
+    TEXT=$(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described in the Checklist installation.
 
@@ -215,11 +210,11 @@ Checklist installation can be found on https://karelzimmer.nl/en, under Linux.\
 ")
     if $DESKTOP_ENVIRONMENT
     then
-        text+="
+        TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"
     fi
-    infomsg "\n$text"
+    infomsg "\n$TEXT"
     logmsg 'Cleanup kz deb files...'
     rm --force --verbose deb deb.{1..99} |& $LOGCMD
     exit $OK

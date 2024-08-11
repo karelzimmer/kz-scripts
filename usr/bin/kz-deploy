@@ -16,32 +16,27 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-deploy'
-readonly PROGRAM_DESC=$(gettext 'Distribute kz package')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-deploy'
+declare PROGRAM_DESC=$(gettext 'Distribute kz package')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-readonly DEB_REPO=$HOME/kz-deb
-readonly DOCS_REPO=$HOME/kz-docs
-readonly SCRIPTS_REPO=$HOME/kz-scripts
-readonly UPLOADS_REPO=$HOME/kz-uploads
-readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
-
-
-###############################################################################
-# Variables
-###############################################################################
+declare DEB_REPO=$HOME/kz-deb
+declare DOCS_REPO=$HOME/kz-docs
+declare SCRIPTS_REPO=$HOME/kz-scripts
+declare UPLOADS_REPO=$HOME/kz-uploads
+declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 
 ###############################################################################
@@ -50,8 +45,8 @@ readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                       \
@@ -89,17 +84,17 @@ function process_x_options {
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 
     if ! $DESKTOP_ENVIRONMENT
     then
-        text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -120,21 +115,21 @@ function check_repos {
     local error_flag=false
 
 
-    text=$(gettext 'Check that all repos are on branch main')...
-    infomsg "$text"
+    TEXT=$(gettext 'Check that all repos are on branch main')...
+    infomsg "$TEXT"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
     do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]
         then
-            text=$(gettext "Repo \$repo not on branch main.")
-            errormsg "$text"
+            TEXT=$(gettext "Repo \$repo not on branch main.")
+            errormsg "$TEXT"
             git status
             error_flag=true
         fi
     done
-    text=$(gettext 'Check that all repos are clean')...
-    infomsg "$text"
+    TEXT=$(gettext 'Check that all repos are clean')...
+    infomsg "$TEXT"
     for repo in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
     do
         cd "$repo"
@@ -142,8 +137,8 @@ function check_repos {
         git status |& $LOGCMD
         if ! git diff-index --quiet HEAD
         then
-            text=$(eval_gettext "Repo \$repo is not clean.")
-            errormsg "$text"
+            TEXT=$(eval_gettext "Repo \$repo is not clean.")
+            errormsg "$TEXT"
             git status
             error_flag=true
         fi
@@ -157,8 +152,8 @@ function check_repos {
 
 # This function builds package kz.
 function build_package {
-    text=$(gettext 'Build package and website')...
-    infomsg "$text"
+    TEXT=$(gettext 'Build package and website')...
+    infomsg "$TEXT"
     # Call kz build.
     logmsg 'Calling kz build...'
     "$SCRIPTS_REPO"/usr/bin/kz build || exit $ERROR
@@ -178,8 +173,8 @@ function upload_website {
     local ftp_login=$HOME/.$ftp_host'.login'
     local prompt="$(gettext 'Password for') ftp://$ftp_host': "
 
-    text=$(gettext 'Upload website')...
-    infomsg "$text"
+    TEXT=$(gettext 'Upload website')...
+    infomsg "$TEXT"
     if [[ ! -f $ftp_login ]]
     then
         read -rp "$prompt" < /dev/tty
@@ -194,8 +189,8 @@ function upload_website {
     then
         # Force entering the password next time.
         rm --verbose "$ftp_login"*
-        text=$(gettext 'Website upload failed.')
-        errormsg "$text"
+        TEXT=$(gettext 'Website upload failed.')
+        errormsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -204,13 +199,13 @@ function upload_website {
 # This function installs package kz.
 function install_package {
     # Call kz-deb (via wget and bash as a regular user would do).
-    text=$(gettext 'Install package')...
-    infomsg "$text"
+    TEXT=$(gettext 'Install package')...
+    infomsg "$TEXT"
     logmsg 'Calling kz deb (via wget and bash)...'
     if ! wget --output-document=- karelzimmer.nl/deb 2> >($LOGCMD) | bash
     then
-        text=$(gettext 'Install package kz failed.')
-        errormsg "$text"
+        TEXT=$(gettext 'Install package kz failed.')
+        errormsg "$TEXT"
         exit $ERROR
     fi
     logmsg 'Called kz deb (via wget and bash).'
@@ -219,8 +214,8 @@ function install_package {
 
 # This function controls the termination of the script.
 function term_script {
-    text="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
-    infomsg "$text"
+    TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
+    infomsg "$TEXT"
     exit $OK
 }
 

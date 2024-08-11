@@ -16,16 +16,16 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-dev'
-readonly PROGRAM_DESC=$(gettext 'Build development environment')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-dev'
+declare PROGRAM_DESC=$(gettext 'Build development environment')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -34,18 +34,13 @@ $OPTIONS_HELP"
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                       \
@@ -83,17 +78,17 @@ function process_x_options {
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 
     if ! $DESKTOP_ENVIRONMENT
     then
-        text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -110,9 +105,11 @@ function process_input {
 
 # This function checks and installs dependencies.
 function check_dependencies {
-    text=$(gettext 'Check dependencies')...
-    infomsg "$text"
-    kz-install fakeroot gettext git jq lftp nmap python shellcheck vscode
+    local esc_xgettext='gettext'
+
+    TEXT=$(gettext 'Check dependencies')...
+    infomsg "$TEXT"
+    kz-install fakeroot $esc_xgettext git jq lftp nmap python shellcheck vscode
     kz-setup vscode
 }
 
@@ -133,8 +130,8 @@ function pull_repos {
     else
         git clone https://github.com/karelzimmer/bin.git "$bin_repo"
     fi
-    text=$(gettext 'Pull repos')...
-    infomsg "$text"
+    TEXT=$(gettext 'Pull repos')...
+    infomsg "$TEXT"
     # Call gitpull.
     logmsg 'Calling gitpull...'
     "$bin_repo"/gitpull
@@ -173,8 +170,8 @@ function download_website {
     then
         # Force entering the password next time.
         rm --verbose "$ftp_login"*
-        text=$(gettext 'Website download failed.')
-        errormsg "$text"
+        TEXT=$(gettext 'Website download failed.')
+        errormsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -182,8 +179,8 @@ function download_website {
 
 # This function controls the termination of the script.
 function term_script {
-    text="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
-    infomsg "$text"
+    TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
+    infomsg "$TEXT"
     exit $OK
 }
 

@@ -16,20 +16,20 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-gnome'
-readonly PROGRAM_DESC=$(gettext 'Change GNOME')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-gnome'
+declare PROGRAM_DESC=$(gettext 'Change GNOME')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] [\
--b|--addbef FAVORITE]
+declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] [-\
+b|--addbef FAVORITE]
                 [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
                 \$OPTIONS_USAGE")"
 
-readonly X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are m\
+andatory for short options too.")
 
 $(gettext '  -a, --addaft FAVORITE
                  add FAVORITE at the end')
@@ -40,7 +40,7 @@ $(gettext '  -d, --delete FAVORITE
 $(gettext '  -l, --list     show favorites')
 $(gettext '  -r, --reset    set favorites on default values')"
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -48,21 +48,16 @@ $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
 
-readonly X_OPTIONS_SHORT='a:b:d:lr'
-readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
+declare X_OPTIONS_SHORT='a:b:d:lr'
+declare X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare desktopfile=''
-declare favorite_argument=''
-declare option_addaft=false
-declare option_addbef=false
-declare option_delete=false
-declare option_list=false
-declare option_reset=false
+declare DESKTOPFILE=''
+declare FAVORITE_ARGUMENT=''
+declare OPTION_ADDAFT=false
+declare OPTION_ADDBEF=false
+declare OPTION_DELETE=false
+declare OPTION_LIST=false
+declare OPTION_RESET=false
 
 
 ###############################################################################
@@ -71,8 +66,8 @@ declare option_reset=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                                       \
@@ -99,47 +94,47 @@ function process_x_options {
     do
         case $1 in
             -a | --addaft )
-                if $option_addaft
+                if $OPTION_ADDAFT
                 then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_addaft=true
-                favorite_argument=$2
+                OPTION_ADDAFT=true
+                FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -b | --addbef )
-                if $option_addbef
+                if $OPTION_ADDBEF
                 then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_addbef=true
-                favorite_argument=$2
+                OPTION_ADDBEF=true
+                FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -d | --delete )
-                if $option_delete
+                if $OPTION_DELETE
                 then
-                    text="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_delete=true
-                favorite_argument=$2
+                OPTION_DELETE=true
+                FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -l | --list )
-                option_list=true
+                OPTION_LIST=true
                 shift
                 ;;
             -r | --reset )
-                option_reset=true
+                OPTION_RESET=true
                 shift
                 ;;
             -- )
@@ -154,17 +149,17 @@ $USAGE"
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 
     if ! $DESKTOP_ENVIRONMENT
     then
-        text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -174,28 +169,28 @@ $USAGE"
 function process_input {
     if ! type gnome-session &> /dev/null
     then
-        text=$(gettext 'For GNOME desktop environments only.')
-        infomsg "$text"
+        TEXT=$(gettext 'For GNOME desktop environments only.')
+        infomsg "$TEXT"
         exit $OK
     fi
 
-    desktopfile=$favorite_argument.desktop
+    DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
 
-    if $option_addaft
+    if $OPTION_ADDAFT
     then
-        process_option_addaft
-    elif $option_addbef
+        process_OPTION_ADDAFT
+    elif $OPTION_ADDBEF
     then
-        process_option_addbef
-    elif $option_delete
+        process_OPTION_ADDBEF
+    elif $OPTION_DELETE
     then
-        process_option_delete
-    elif $option_list
+        process_OPTION_DELETE
+    elif $OPTION_LIST
     then
-        process_option_list
-    elif $option_reset
+        process_OPTION_LIST
+    elif $OPTION_RESET
     then
-        process_option_reset
+        process_OPTION_RESET
     else
         capture_gnome_changes
     fi
@@ -203,34 +198,34 @@ function process_input {
 
 
 # This function adds a favorite to the end of the dash/dock.
-function process_option_addaft  {
+function process_OPTION_ADDAFT  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]
     then
-        gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
+        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$DESKTOPFILE"
     then
         gsettings set org.gnome.shell favorite-apps "$(
             printf '%s' "$favorite_apps" |
             cut --delimiter=']' --fields=1
-            ), '$desktopfile']"
+            ), '$DESKTOPFILE']"
     fi
 }
 
 
 # This function adds a favorite to the beginning of the dash/dock.
-function process_option_addbef  {
+function process_OPTION_ADDBEF  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]
     then
-        gsettings set org.gnome.shell favorite-apps "['$desktopfile']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$desktopfile"
+        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
+    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$DESKTOPFILE"
     then
-        gsettings set org.gnome.shell favorite-apps "['$desktopfile', $(
+        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE', $(
                 printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
                 )"
     fi
@@ -238,36 +233,36 @@ function process_option_addbef  {
 
 
 # This function removes a favorite from the dash/dock.
-function process_option_delete  {
+function process_OPTION_DELETE  {
     local favorite_apps=''
 
     favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
     if [[ $favorite_apps = '@as []' ]]
     then
         :
-    elif [[ $favorite_apps = [$desktopfile] ]]
+    elif [[ $favorite_apps = [$DESKTOPFILE] ]]
     then
         gsettings set org.gnome.shell favorite-apps "[]"
     else
         gsettings set org.gnome.shell favorite-apps "$(
             printf  '%s' "$favorite_apps"                   |
-            sed     --expression="s/'$desktopfile', //g"    |
-            sed     --expression="s/, '$desktopfile'//"
+            sed     --expression="s/'$DESKTOPFILE', //g"    |
+            sed     --expression="s/, '$DESKTOPFILE'//"
         )"
     fi
 }
 
 
 # This feature lists the favorite apps in the dash/dock.
-function process_option_list  {
-    text=$(gettext 'Favorite apps:')
-    text+="\n$(gsettings get org.gnome.shell favorite-apps)"
-    infomsg "$text"
+function process_OPTION_LIST  {
+    TEXT=$(gettext 'Favorite apps:')
+    TEXT+="\n$(gsettings get org.gnome.shell favorite-apps)"
+    infomsg "$TEXT"
 }
 
 
 # This function resets the favorites to the factory settings.
-function process_option_reset  {
+function process_OPTION_RESET  {
     gsettings reset org.gnome.shell favorite-apps
 }
 
@@ -279,8 +274,8 @@ function capture_gnome_changes {
 
     config_a_file=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
     save_configuration_database A "$config_a_file"
-    text=$(gettext 'Now make the change in the desktop environment.')
-    infomsg "$text"
+    TEXT=$(gettext 'Now make the change in the desktop environment.')
+    infomsg "$TEXT"
     wait_for_enter
     config_b_file=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
     save_configuration_database B "$config_b_file"
@@ -301,25 +296,25 @@ function save_configuration_database {
             --output="$output_file" \
             "$output_file"
 
-    text=$(eval_gettext "Config database content captured (\$fase).")
-    infomsg "$text"
+    TEXT=$(eval_gettext "Config database content captured (\$fase).")
+    infomsg "$TEXT"
 }
 
 
 # This function reports the changes to the GNOME configuration database.
 function report_database_changes {
-    local output_file1=${1:-unknown}
-    local output_file2=${2:-unknown}
+    local output_file_1=${1:-unknown}
+    local output_file_2=${2:-unknown}
 
-    text="\n$(gettext "CHANGEs in the configuration database,
+    TEXT="\n$(gettext "CHANGEs in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
 "
-    text+=$(
-        diff "$output_file1" "$output_file2" | grep --regexp='[>|<]' || true
+    TEXT+=$(
+        diff "$output_file_1" "$output_file_2" | grep --regexp='[>|<]' || true
         )
-    text+="\n\n$(gettext 'When CHANGEs execute: gsettings set CHANGE')"
-    infomsg "$text"
+    TEXT+="\n\n$(gettext 'When CHANGEs execute: gsettings set CHANGE')"
+    infomsg "$TEXT"
 }
 
 

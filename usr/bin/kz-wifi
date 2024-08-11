@@ -16,20 +16,20 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-wifi'
-readonly PROGRAM_DESC=$(gettext 'Show WiFi information')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-wifi'
+declare PROGRAM_DESC=$(gettext 'Show WiFi information')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAG\
-E")
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE\
+")
 
-readonly X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, req\
-uires desktop environment")
+declare X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, requ\
+ires desktop environment")
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -37,13 +37,8 @@ $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
 
-readonly X_OPTIONS_SHORT='g'
-readonly X_OPTIONS_LONG=',gui'
-
-
-###############################################################################
-# Variables
-###############################################################################
+declare X_OPTIONS_SHORT='g'
+declare X_OPTIONS_LONG=',gui'
 
 
 ###############################################################################
@@ -52,8 +47,8 @@ readonly X_OPTIONS_LONG=',gui'
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                                       \
@@ -82,13 +77,13 @@ function process_x_options {
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
     then
-                    text=\
+                    TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_gui=true
+                OPTION_GUI=true
                 shift
                 ;;
             -- )
@@ -103,9 +98,9 @@ $USAGE"
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -115,24 +110,24 @@ $USAGE"
 function process_input {
     local nmcli_output=''
 
-    text=$(gettext "Record this data to connect to the wireless network later.\
+    TEXT=$(gettext "Record this data to connect to the wireless network later.\
 ")
-    if $option_gui
+    if $OPTION_GUI
     then
         if nmcli_output=$(nmcli device wifi show-password 2> >($LOGCMD))
         then
-            text="$nmcli_output
+            TEXT="$nmcli_output
 
-$text"
+$TEXT"
         else
-            text=$(gettext 'No WiFi device found.')
+            TEXT=$(gettext 'No WiFi device found.')
         fi
     else
         # Shows QR code for quick connection to Wi-Fi network.
-        nmcli device wifi show-password 2> >($LOGCMD) || text=$(gettext "No Wi\
+        nmcli device wifi show-password 2> >($LOGCMD) || TEXT=$(gettext "No Wi\
 Fi device found.")
     fi
-    infomsg "$text"
+    infomsg "$TEXT"
 }
 
 

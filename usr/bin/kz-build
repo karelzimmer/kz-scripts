@@ -16,60 +16,55 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-build'
-readonly PROGRAM_DESC=$(gettext 'Build package kz')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-build'
+declare PROGRAM_DESC=$(gettext 'Build package kz')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-readonly DOCS_REPO=$HOME/kz-docs
-readonly BIN_REPO=$HOME/bin
-readonly SCRIPTS_REPO=$HOME/kz-scripts
+declare DOCS_REPO=$HOME/kz-docs
+declare BIN_REPO=$HOME/bin
+declare SCRIPTS_REPO=$HOME/kz-scripts
 
-readonly DEB_REPO=$HOME/kz-deb
-readonly DEB_REPO_APPDIR=$DEB_REPO/src
-readonly DEB_REPO_DISTDIR=$DEB_REPO/dist
-readonly DEB_NAME=kz_4.2.1_all.deb
+declare DEB_REPO=$HOME/kz-deb
+declare DEB_REPO_APPDIR=$DEB_REPO/src
+declare DEB_REPO_DISTDIR=$DEB_REPO/dist
+declare DEB_NAME=kz_4.2.1_all.deb
 
-readonly UPLOADS_REPO=$HOME/kz-uploads
-readonly UPLOADS_REPO_APPDIR=$UPLOADS_REPO/src
-readonly UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
+declare UPLOADS_REPO=$HOME/kz-uploads
+declare UPLOADS_REPO_APPDIR=$UPLOADS_REPO/src
+declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
-readonly -A UPLOADS_SOURCES=(
+declare -A UPLOADS_SOURCES=(
             [kz-docs]=$DOCS_REPO
             )
-readonly -A UPLOADS_TARGETS=(
+declare -A UPLOADS_TARGETS=(
             [kz-docs]=$UPLOADS_REPO_DISTDIR/assets/kz-docs
                 [deb]=$UPLOADS_REPO_DISTDIR/assets/kz-deb
             )
 
-readonly -A DEB_SOURCES=(
-         [kz-scripts]=$SCRIPTS_REPO
-                [src]=$DEB_REPO_APPDIR
+declare -A DEB_SOURCES=(
+            [kz-scripts]=$SCRIPTS_REPO
+                   [src]=$DEB_REPO_APPDIR
             )
-readonly -A DEB_TARGETS=(
-               [dist]=$DEB_REPO_DISTDIR
-              [build]=$DEB_REPO_DISTDIR/etc
-             [man_en]=$DEB_REPO_DISTDIR/usr/share/man/man1
-             [man_nl]=$DEB_REPO_DISTDIR/usr/share/man/nl/man1
+declare -A DEB_TARGETS=(
+              [dist]=$DEB_REPO_DISTDIR
+             [build]=$DEB_REPO_DISTDIR/etc
+            [man_en]=$DEB_REPO_DISTDIR/usr/share/man/man1
+            [man_nl]=$DEB_REPO_DISTDIR/usr/share/man/nl/man1
             )
 
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare error_flag=false
+declare ERROR_FLAG=false
 
 
 ###############################################################################
@@ -78,8 +73,8 @@ declare error_flag=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                       \
@@ -117,17 +112,17 @@ function process_x_options {
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 
     if ! $DESKTOP_ENVIRONMENT
     then
-        text="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -148,19 +143,19 @@ function process_input {
 
 # This function reports repos which are not in the desired state.
 function report_repos {
-    text=$(gettext 'Show repos not on branch main')...
-    infomsg "$text"
+    TEXT=$(gettext 'Show repos not on branch main')...
+    infomsg "$TEXT"
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
     do
         cd "$repo"
         if [[ $(git branch --show-current) != 'main' ]]
         then
-            text=$(eval_gettext "Repo \$repo not on branch main.")
-            infomsg "$text"
+            TEXT=$(eval_gettext "Repo \$repo not on branch main.")
+            infomsg "$TEXT"
         fi
     done
-    text=$(gettext 'Show repos which are not clean')...
-    infomsg "$text"
+    TEXT=$(gettext 'Show repos which are not clean')...
+    infomsg "$TEXT"
     for repo in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
     do
         cd "$repo"
@@ -168,8 +163,8 @@ function report_repos {
         git status |& $LOGCMD
         if ! git diff-index --quiet HEAD
         then
-            text=$(eval_gettext "Repo \$repo is not clean.")
-            infomsg "$text"
+            TEXT=$(eval_gettext "Repo \$repo is not clean.")
+            infomsg "$TEXT"
             git status
         fi
     done
@@ -178,11 +173,11 @@ function report_repos {
 
 # This function check the scripts.
 function check_scripts {
-    text=$(gettext 'Check scripts')...
-    infomsg "$text"
+    TEXT=$(gettext 'Check scripts')...
+    infomsg "$TEXT"
     # Call kz check.
     logmsg 'Calling kz check...'
-    "$SCRIPTS_REPO"/usr/bin/kz check || error_flag=true
+    "$SCRIPTS_REPO"/usr/bin/kz check || ERROR_FLAG=true
     logmsg 'Called kz check.'
 }
 
@@ -192,8 +187,8 @@ function build_uploads {
     local file=''
     local filename=''
 
-    text=$(gettext 'Build website')...
-    infomsg "$text"
+    TEXT=$(gettext 'Build website')...
+    infomsg "$TEXT"
 
     # Make sure the permissions are correct for the sync.
     chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*  |& $LOGCMD
@@ -235,8 +230,8 @@ function generate_mo {
     local lc_messages=''
 
     lc_messages="$HOME"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
-    text=$(gettext 'Generate .mo file')...
-    infomsg "$text"
+    TEXT=$(gettext 'Generate .mo file')...
+    infomsg "$TEXT"
     msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
 }
 
@@ -246,8 +241,8 @@ function build_deb {
     local build_id=''
     local file=''
 
-    text=$(gettext 'Build package')...
-    infomsg "$text"
+    TEXT=$(gettext 'Build package')...
+    infomsg "$TEXT"
 
     # Fill kz-deb/dist/ with kz-deb/src/.
     rsync   --archive               \
@@ -292,8 +287,8 @@ function build_deb {
 
 # This function installs package kz.
 function install_package {
-    text=$(gettext 'Install package')...
-    infomsg "$text"
+    TEXT=$(gettext 'Install package')...
+    infomsg "$TEXT"
     check_on_ac_power
     check_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive  \
@@ -306,25 +301,25 @@ function install_package {
 
 # This function checks the website for missing or not used files.
 function check_website {
-    text=$(gettext 'Check website')...
-    infomsg "$text"
+    TEXT=$(gettext 'Check website')...
+    infomsg "$TEXT"
     # Call rchecklink.
     logmsg 'Calling rchecklink...'
-    "$BIN_REPO"/rchecklink || error_flag=true
+    "$BIN_REPO"/rchecklink || ERROR_FLAG=true
     logmsg 'Called rchecklink.'
 }
 
 
 # This function controls the termination of the script.
 function term_script {
-    if $error_flag
+    if $ERROR_FLAG
     then
-        text=$(gettext 'Fix all the messages above.')
-        errormsg "$text"
+        TEXT=$(gettext 'Fix all the messages above.')
+        errormsg "$TEXT"
         exit $ERROR
     else
-        text="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
-        infomsg "$text"
+        TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
+        infomsg "$TEXT"
         exit $OK
     fi
 }

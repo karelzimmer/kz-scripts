@@ -16,21 +16,21 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly PROGRAM_NAME='kz'
-readonly PROGRAM_DESC=$(gettext 'Run command')
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz'
+declare PROGRAM_DESC=$(gettext 'Run command')
 
-readonly USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USA\
-GE
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE
           COMMAND [ARGUMENT...]")
 
-readonly X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
+declare X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
 
-readonly HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND [ARGU\
-MENT...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND [ARGUM\
+ENT...]")
 
 $PROGRAM_DESC.
 
@@ -42,15 +42,8 @@ $(gettext 'Arguments:')
 $(gettext '  COMMAND        execute COMMAND')
 $(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
 
-readonly X_OPTIONS_SHORT='l'
-readonly X_OPTIONS_LONG=',list'
-
-readonly PROGRAM_PATH=$MODULE_PATH
-
-
-###############################################################################
-# Variables
-###############################################################################
+declare X_OPTIONS_SHORT='l'
+declare X_OPTIONS_LONG=',list'
 
 
 ###############################################################################
@@ -59,8 +52,8 @@ readonly PROGRAM_PATH=$MODULE_PATH
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     if [[ -z $* ]]
     then
@@ -113,10 +106,10 @@ function process_x_options {
 
 # This function displays all available commands.
 function process_option_list {
-    text="$(gettext 'The following COMMANDs are available:')
+    TEXT="$(gettext 'The following COMMANDs are available:')
 
 $(gettext 'NUM  COMMAND')\n"
-    text+=$(
+    TEXT+=$(
         find    "$PROGRAM_PATH"/$PROGRAM_NAME-*     \
                 -maxdepth 1                         \
                 -type f                             \
@@ -132,9 +125,9 @@ $(gettext 'NUM  COMMAND')\n"
                 --number-separator='  '             \
                 --body-numbering=a
         )
-    text+="\n
+    TEXT+="\n
 $(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
-    infomsg "$text"
+    infomsg "$TEXT"
 }
 
 
@@ -144,14 +137,14 @@ function process_input {
 
     if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$command ]]
     then
-        text="$DISPLAY_NAME: $command: $(gettext "command does not exist")
+        TEXT="$DISPLAY_NAME: $command: $(gettext "command does not exist")
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
     shift
-    text="Restart (exec sudo $PROGRAM_PATH/$PROGRAM_NAME-$command $*..."
-    logmsg "$text"
+    TEXT="Restart (exec $PROGRAM_PATH/$PROGRAM_NAME-$command $*..."
+    logmsg "$TEXT"
     exec "$PROGRAM_PATH/$PROGRAM_NAME-$command" "$@"
 }
 

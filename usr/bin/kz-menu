@@ -15,20 +15,20 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Constants
+# Variables
 ###############################################################################
 
-readonly    PROGRAM_NAME='kz-menu'
-readonly    PROGRAM_DESC=$(gettext 'Installation menu')
-readonly    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare    PROGRAM_NAME='kz-menu'
+declare    PROGRAM_DESC=$(gettext 'Installation menu')
+declare    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-readonly    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
+declare    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
 SAGE")
 
-readonly    X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+declare    X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
 requires desktop environment")
 
-readonly    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -36,14 +36,12 @@ $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
 
-readonly    X_OPTIONS_SHORT='g'
-readonly    X_OPTIONS_LONG=',gui'
+declare    X_OPTIONS_SHORT='g'
+declare    X_OPTIONS_LONG=',gui'
 
-readonly    PROGRAM_PATH=$MODULE_PATH
-
-readonly    MENU1_TITLE=$(gettext 'Installation menu')
-readonly    MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
-readonly -a MENU1_ACTIONS=(
+declare    MENU1_TITLE=$(gettext 'Installation menu')
+declare    MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
+declare -a MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
@@ -51,7 +49,7 @@ readonly -a MENU1_ACTIONS=(
                 "$(gettext 'Command menu')"
                 "$(gettext 'Exit')"
             )
-readonly -a MENU1_DESCS=(
+declare -a MENU1_DESCS=(
             [1]="$(gettext 'Checklist chapter 1')"
                 "$(gettext 'Checklist chapter 2')"
                 "$(gettext 'Checklist chapter 3')"
@@ -59,11 +57,11 @@ readonly -a MENU1_DESCS=(
                 "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
-readonly    MENU1_LINES=${#MENU1_ACTIONS[@]}
+declare    MENU1_LINES=${#MENU1_ACTIONS[@]}
 
-readonly    MENU2_TITLE=$(gettext 'Command menu')
-readonly    MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
-readonly -a MENU2_ACTIONS=(
+declare    MENU2_TITLE=$(gettext 'Command menu')
+declare    MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
+declare -a MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
                 "$(gettext 'Install apps')"
@@ -71,7 +69,7 @@ readonly -a MENU2_ACTIONS=(
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Go to installation menu')"
             )
-readonly -a MENU2_COMMANDS=(
+declare -a MENU2_COMMANDS=(
             [1]='kz wifi'
                 'kz backup'
                 'kz install'
@@ -79,15 +77,10 @@ readonly -a MENU2_COMMANDS=(
                 'kz setup'
                 "$(gettext 'Back')"
             )
-readonly    MENU2_LINES=${#MENU2_COMMANDS[@]}
+declare    MENU2_LINES=${#MENU2_COMMANDS[@]}
 
-
-###############################################################################
-# Variables
-###############################################################################
-
-declare     execute_command=false
-declare -a  rows=()
+declare     EXECUTE_COMMAND=false
+declare -a  ROWS=()
 
 
 ###############################################################################
@@ -96,8 +89,8 @@ declare -a  rows=()
 
 # This function handles the script options and arguments.
 function check_input {
-    local       parsed=''
-    local   -i  parsed_rc=0
+    local    parsed=''
+    local -i parsed_rc=0
 
     parsed=$(
         getopt  --alternative                                       \
@@ -126,13 +119,13 @@ function process_x_options {
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
     then
-                    text=\
+                    TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
-                    infomsg "$text"
+                    infomsg "$TEXT"
                     exit $ERROR
                 fi
-                option_gui=true
+                OPTION_GUI=true
                 shift
                 ;;
             -- )
@@ -147,9 +140,9 @@ $USAGE"
 
     if [[ -n $* ]]
     then
-        text="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
-        infomsg "$text"
+        infomsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -157,7 +150,7 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input {
-    if $option_gui
+    if $OPTION_GUI
     then
         process_menu1_gui
     else
@@ -170,13 +163,13 @@ function process_input {
 function process_menu1_gui {
     while true
     do
-        title=$MENU1_TITLE
+        TITLE=$MENU1_TITLE
         REPLY=$(
             zenity  --list                                              \
                     --radiolist                                         \
                     --width         520                                 \
                     --height        420                                 \
-                    --title         "$title"                            \
+                    --title         "$TITLE"                            \
                     --text          "$(gettext 'Select a choice:')"     \
                     --ok-label      "$(gettext 'Continue')"             \
                     --cancel-label  "$(gettext 'Exit')"                 \
@@ -256,8 +249,8 @@ function process_menu1_choice {
             exit $OK
             ;;
         * )
-            text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-            errormsg "$text"
+            TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+            errormsg "$TEXT"
             exit $ERROR
             ;;
     esac
@@ -266,8 +259,8 @@ function process_menu1_choice {
 
 # This function processes menu 1 choice 1.
 function process_menu1_choice1 {
-    title="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
-    rows=(
+    TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
+    ROWS=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
             "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
         )
@@ -277,8 +270,8 @@ function process_menu1_choice1 {
 
 # This function processes menu 1 choice 2.
 function process_menu1_choice2 {
-    title="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
-    text="
+    TITLE="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
+    TEXT="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on https://karelzimmer.nl/en, under Linux.
 
@@ -287,23 +280,23 @@ Roughly boils down to:
 2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
-    if $option_gui
+    if $OPTION_GUI
     then
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
-                --title     "$title"    \
-                --text      "$text"     2> >($LOGCMD)
+                --title     "$TITLE"    \
+                --text      "$TEXT"     2> >($LOGCMD)
     else
-        printf '%s\n' "$text"
+        printf '%s\n' "$TEXT"
     fi
 }
 
 
 # This function processes menu 1 choice 3.
 function process_menu1_choice3 {
-    title="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
-    rows=(
+    TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
+    ROWS=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
         )
     process_commands
@@ -312,8 +305,8 @@ function process_menu1_choice3 {
 
 # This function processes menu 1 choice 4.
 function process_menu1_choice4 {
-    title="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
-    rows=(
+    TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
+    ROWS=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
             "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
         )
@@ -325,7 +318,7 @@ function process_menu1_choice4 {
 
 # This function processes menu 2.
 function process_menu2 {
-    if $option_gui
+    if $OPTION_GUI
     then
         process_menu2_gui
     else
@@ -338,13 +331,13 @@ function process_menu2 {
 function process_menu2_gui {
     while true
     do
-        title=$MENU2_TITLE
+        TITLE=$MENU2_TITLE
         REPLY=$(
             zenity  --list                                                  \
                     --radiolist                                             \
                     --width         520                                     \
                     --height        420                                     \
-                    --title         "$title"                                \
+                    --title         "$TITLE"                                \
                     --text          "$(gettext 'Select a choice:')"         \
                     --ok-label      "$(gettext 'Continue')"                 \
                     --cancel-label  "$(gettext 'Back')"                     \
@@ -406,8 +399,8 @@ function process_menu2_tui {
 function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]
     then
-        title="${MENU2_ACTIONS[$REPLY]} (${MENU2_COMMANDS[$REPLY]})"
-        rows=(
+        TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_COMMANDS[$REPLY]})"
+        ROWS=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
             )
         process_commands
@@ -415,8 +408,8 @@ function process_menu2_choice {
     then
         process_menu1_tui
     else
-        text=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-        errormsg "$text"
+        TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+        errormsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -424,23 +417,23 @@ function process_menu2_choice {
 
 # This function processes the command corresponding to the choice made.
 function process_commands {
-    local       command=''
-    local       description=''
-    local   -i  row=0
+    local    command=''
+    local    description=''
+    local -i row=0
 
     show_commands_before_execution
-    if $execute_command
+    if $EXECUTE_COMMAND
     then
-        for row in "${!rows[@]}"
+        for row in "${!ROWS[@]}"
         do
             description=$(
-                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
+                printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=1
                 )
             command=$(
-                printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
+                printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=2
                 )
-            title="$description ($command)"
-            $option_gui || infomsg "\n${BOLD}==== $title ====${NORMAL}"
+            TITLE="$description ($command)"
+            $OPTION_GUI || infomsg "\n${BOLD}==== $TITLE ====${NORMAL}"
             execute_command
         done
     fi
@@ -449,56 +442,56 @@ function process_commands {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution {
-    local       command=''
-    local       description=''
-    local   -i  row=0
-    local       prompt=''
+    local    command=''
+    local    description=''
+    local -i row=0
+    local    prompt=''
 
-    text="$(gettext 'The following will be executed:')
+    TEXT="$(gettext 'The following will be executed:')
 "
-    for row in "${!rows[@]}"
+    for row in "${!ROWS[@]}"
     do
         description=$(
-            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=1
+            printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=1
             )
         command=$(
-            printf '%s' "${rows[$row]}" | cut --delimiter='#' --fields=2
+            printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=2
             )
-        text+="
+        TEXT+="
 [$row] $description ($command)"
     done
-    text+='
+    TEXT+='
 '
     prompt="$(gettext 'Proceed?')"
-    if $option_gui
+    if $OPTION_GUI
     then
-        text+="
+        TEXT+="
 $prompt"
         if zenity   --question                          \
                     --no-markup                         \
                     --width         600                 \
                     --height        100                 \
-                    --title         "$title"            \
-                    --text          "$text"             \
+                    --title         "$TITLE"            \
+                    --text          "$TEXT"             \
                     --ok-label      "$(gettext 'Yes')"  \
                     --cancel-label  "$(gettext 'No')"   2> >($LOGCMD)
         then
-            execute_command=true
+            EXECUTE_COMMAND=true
         else
-            execute_command=false
+            EXECUTE_COMMAND=false
         fi
     else
-        printf '\n%s\n' "$text"
+        printf '\n%s\n' "$TEXT"
         while true
     do
             read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
             case $REPLY in
                 [YyJj]* | '' )
-                    execute_command=true
+                    EXECUTE_COMMAND=true
                     break
                     ;;
                 [Nn]* )
-                    execute_command=false
+                    EXECUTE_COMMAND=false
                     break
                     ;;
                 * )
@@ -512,9 +505,9 @@ $prompt"
 
 # This function executes the commands.
 function execute_command {
-    local   -i  rc=0
-    local       cmd=''
-    local       gui_option=''
+    local -i rc=0
+    local    cmd=''
+    local    gui_option=''
 
     cmd=$(
         printf '%s' "$command" | cut --delimiter=' ' --fields=1
@@ -523,7 +516,7 @@ function execute_command {
         printf '%s' "$command" | cut --delimiter=' ' --fields=2-
         )
 
-    if $option_gui
+    if $OPTION_GUI
     then
         gui_option='--gui'
     fi
