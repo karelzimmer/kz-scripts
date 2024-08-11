@@ -70,6 +70,28 @@ declare OPTION_REMOVE=false
 declare REBOOT=true
 declare REMOVE='Remove'
 
+if type gnome-session &> /dev/null
+then
+    declare GNOME=true
+else
+    # shellcheck disable=SC2034
+    declare GNOME=false
+fi
+if [[ $(lsb_release --id --short) = 'Debian' ]]
+then
+    declare DEBIAN=true
+else
+    # shellcheck disable=SC2034
+    declare DEBIAN=false
+fi
+if [[ $(lsb_release --id --short) = 'Ubuntu' ]]
+then
+    declare UBUNTU=true
+else
+    # shellcheck disable=SC2034
+    declare UBUNTU=false
+fi
+
 
 ###############################################################################
 # Functions

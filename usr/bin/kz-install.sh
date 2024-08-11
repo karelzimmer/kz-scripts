@@ -7,33 +7,37 @@
 ###############################################################################
 # For the format of the records in this file, see the kz install man page.
 
+# Before executing a command, the variables must be set manually:
+if type gnome-session &> /dev/null; then GNOME=true; else GNOME=false; fi
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then DEBIAN=true; else DEBIAN=false; fi
+if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then UBUNTU=true; else UBUNTU=false; fi
+if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then DESKTOP_ENVIRONMENT=true; else DESKTOP_ENVIRONMENT=false; fi
+
 # Install disabled-apport on *
-# For Ubuntu. Disable the program crash report.
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl disable apport.service; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+# Disable the program crash report.
+if $UBUNTU; then sudo systemctl stop apport.service; fi
+if $UBUNTU; then sudo systemctl disable apport.service; fi
+if $UBUNTU; then sudo rm --force --verbose /var/crash/*; fi
+if $UBUNTU; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
 
 # Remove disabled-apport from *
-# For Ubuntu. Enable the program crash report.
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
+# Enable the program crash report.
+if $UBUNTU; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
+if $UBUNTU; then sudo systemctl enable --now apport.service; fi
 
 # Install extra-repos on *
-# For Debian with any desktop environment.
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository contrib; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository non-free; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository contrib; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository non-free; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
 
 # Remove extra-repos from *
-# For Debian with any desktop environment.
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove contrib; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove non-free; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
-if [[ $(lsb_release --id --short) = 'Debian' && -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes deb-multimedia-keyring; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository --remove contrib; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository --remove non-free; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
+if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes deb-multimedia-keyring; fi
 
 # Install update-system on *
 kz-update
@@ -113,12 +117,10 @@ sudo apt-get install --yes cups-backend-bjnp
 sudo apt-get remove --yes cups-backend-bjnp
 
 # Install dashtodock on *
-# For all with GNOME desktop environment.
-if type gnome-session &> /dev/null; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+if $GNOME; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
 
 # Remove dashtodock from *
-# For all with GNOME desktop environment.
-if type gnome-session &> /dev/null; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+if $GNOME; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
 
 # Install deja-dup on pc07
 sudo apt-get install --yes deja-dup
@@ -203,12 +205,10 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes gdebi; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes gdebi; fi
 
 # Remove gdebi from *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes gdebi; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes gdebi; fi
 
 # Install gettext on pc06 pc07
 sudo apt-get install --yes gettext
@@ -247,25 +247,22 @@ sudo apt-get install --yes epiphany-browser
 sudo apt-get remove --yes epiphany-browser
 
 # Install google-chrome on *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes google-chrome-stable; fi
+if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes google-chrome-stable; fi
 # Add the source list again because the installation overwrote the newly added source list.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
+if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
 # The apt-key added during installation is no longer needed.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
-# For all with GNOME desktop environment. Also install chrome-gnome-shell to make extensions.gnome.org work.
-if type gnome-session &> /dev/null; then sudo apt-get install --yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+# Also install chrome-gnome-shell to make extensions.gnome.org work.
+if $GNOME; then sudo apt-get install --yes chrome-gnome-shell; fi
 
 # Remove google-chrome from *
-# For all with GNOME desktop environment.
-if type gnome-session &> /dev/null; then apt-get remove --yes chrome-gnome-shell; fi
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
+if $GNOME; then apt-get remove --yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
 
 # Install google-earth on -nohost
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
@@ -328,12 +325,10 @@ sudo apt-get install --yes lftp
 sudo apt-get remove --yes lftp
 
 # Install libreoffice on *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Remove libreoffice from *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Install locate on pc06 pc07
 sudo apt-get install --yes locate
@@ -434,31 +429,27 @@ sudo apt-get install --yes gnome-sushi
 sudo apt-get remove --yes gnome-sushi
 
 # Install teamviewer on *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
+if $DESKTOP_ENVIRONMENT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer; fi
 # The apt-key added during installation is no longer needed.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-key del 0C1289C0 DEB49217; fi
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes teamviewer; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-key del 0C1289C0 DEB49217; fi
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
 
 # Install thunderbird on *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes thunderbird-l10n-nl || true; fi # Debian
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes thunderbird-l10n-nl || true; fi # Debian
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Remove thunderbird from *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes thunderbird-l10n-nl || true; fi # Debian
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes thunderbird-l10n-nl || true; fi # Debian
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Install tree on pc06 pc07
 sudo apt-get install --yes tree
@@ -521,12 +512,10 @@ sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-addit
 sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 # Install vlc on *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get install --yes vlc; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes vlc; fi
 
 # Remove vlc from *
-# For all with any desktop environment.
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then sudo apt-get remove --yes vlc; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
 sudo apt-get install --yes apt-transport-https

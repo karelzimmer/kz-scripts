@@ -68,6 +68,14 @@ declare    OPTION_RESET=false
 declare    RESET='Reset'
 declare    SETUP='Setup'
 
+if type gnome-session &> /dev/null
+then
+    declare GNOME=true
+else
+    # shellcheck disable=SC2034
+    declare GNOME=false
+fi
+
 
 ###############################################################################
 # Functions
