@@ -245,7 +245,11 @@ PLAY_NAME --cat")"
 
 $USAGE"
     fi
-    infomsg "$TEXT"
+    if $OPTION_GUI; then
+        infomsg "$TEXT"
+    else
+        less --quit-if-one-screen <  <(printf '%s\n' "$TEXT")
+    fi
 }
 
 
