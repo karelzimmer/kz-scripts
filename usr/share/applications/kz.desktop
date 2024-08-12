@@ -13,5 +13,6 @@ Categories=Utility;X-GNOME-Utilities;
 TryExec=kz
 Exec=kz-menu --gui
 Icon=kz-menu
+NoDisplay=true
 X-GNOME-Gettext-Domain=kz
 X-Ubuntu-Gettext-Domain=kz
