@@ -248,7 +248,7 @@ $USAGE"
     if $OPTION_GUI; then
         infomsg "$TEXT"
     else
-        less --quit-if-one-screen <  <(printf '%a\n' "$TEXT")
+        less --quit-if-one-screen <  <(printf '%b\n' "$TEXT")
     fi
 }
 
