@@ -473,11 +473,13 @@ sudo apt-get install --yes usbutils
 sudo apt-get remove --yes usbutils
 
 # Install user-guest on -nohost
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext --domain=kz 'Guest user')" "$(gettext --domain=kz 'guest')" || true
-sudo passwd --delete "$(gettext --domain=kz 'guest')"
+export TEXTDOMAIN=kz
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
+sudo passwd --delete "$(gettext 'guest')"
 
 # Remove user-guest from -nohost
-sudo userdel --remove "$(gettext --domain=kz 'guest')"
+export TEXTDOMAIN=kz
+sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
 sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
