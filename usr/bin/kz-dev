@@ -105,11 +105,11 @@ function process_input {
 
 # This function checks and installs dependencies.
 function check_dependencies {
-    local ESC_XGETTEXT='gettext'
+    local ESC_GETTEXT='gettext'
 
     TEXT=$(gettext 'Check dependencies')...
     infomsg "$TEXT"
-    kz-install fakeroot $ESC_XGETTEXT git jq lftp nmap python shellcheck vscode
+    kz-install fakeroot $ESC_GETTEXT git jq lftp nmap python shellcheck vscode
     kz-setup vscode
 }
 

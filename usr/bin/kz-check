@@ -358,14 +358,14 @@ function check_shellcheck {
 
 # This function checks the existence of tags.
 function check_tags {
-    local BUG='#''B''U''G'
-    local FIXME='#''F''I''X''M''E'
-    local TODO='#''T''O''D''O'
+    local ESC_BUG='#''B''U''G'
+    local ESC_FIXME='#''F''I''X''M''E'
+    local ESC_TODO='#''T''O''D''O'
 
-    if grep --quiet             \
-            --regexp="$BUG"     \
-            --regexp="$FIXME"   \
-            --regexp="$TODO"    \
+    if grep --quiet                 \
+            --regexp="$ESC_BUG"     \
+            --regexp="$ESC_FIXME"   \
+            --regexp="$ESC_TODO"    \
             "$SCRIPT"
     then
         TEXT="
@@ -374,9 +374,9 @@ ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 "
         infomsg "$TEXT"
         grep    --line-number           \
-                --regexp="$BUG"         \
-                --regexp="$FIXME"       \
-                --regexp="$TODO"        \
+                --regexp="$ESC_BUG"     \
+                --regexp="$ESC_FIXME"   \
+                --regexp="$ESC_TODO"    \
                 "$SCRIPT"               |
         nl      --number-width=4        \
                 --number-separator=''   \
