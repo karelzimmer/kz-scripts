@@ -474,11 +474,15 @@ sudo apt-get remove --yes usbutils
 
 # Install user-guest on -nohost
 export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+source /usr/bin/gettext.sh
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
 sudo passwd --delete "$(gettext 'guest')"
 
 # Remove user-guest from -nohost
 export TEXTDOMAIN=kz
+export TEXTDOMAINDIR=/usr/share/locale
+source /usr/bin/gettext.sh
 sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
