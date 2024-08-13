@@ -23,11 +23,11 @@ declare PROGRAM_NAME='kz-wifi'
 declare PROGRAM_DESC=$(gettext 'Show WiFi information')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE\
-")
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+\$OPTIONS_USAGE")
 
-declare X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, requ\
-ires desktop environment")
+declare X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+requires desktop environment")
 
 declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
@@ -47,22 +47,22 @@ declare X_OPTIONS_LONG=',gui'
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]
+        ) || PARSED_RC=$?
+    if [[ $PARSED_RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -108,15 +108,15 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input {
-    local nmcli_output=''
+    local NMCLI_OUTPUT=''
 
-    TEXT=$(gettext "Record this data to connect to the wireless network later.\
-")
+    TEXT=$(gettext "Record this data to connect to the wireless network \
+later.")
     if $OPTION_GUI
     then
-        if nmcli_output=$(nmcli device wifi show-password 2> >($LOGCMD))
+        if NMCLI_OUTPUT=$(nmcli device wifi show-password 2> >($LOGCMD))
         then
-            TEXT="$nmcli_output
+            TEXT="$NMCLI_OUTPUT
 
 $TEXT"
         else
@@ -124,8 +124,8 @@ $TEXT"
         fi
     else
         # Shows QR code for quick connection to Wi-Fi network.
-        nmcli device wifi show-password 2> >($LOGCMD) || TEXT=$(gettext "No Wi\
-Fi device found.")
+        nmcli device wifi show-password 2> >($LOGCMD) || TEXT=$(gettext "No \
+WiFi device found.")
     fi
     infomsg "$TEXT"
 }

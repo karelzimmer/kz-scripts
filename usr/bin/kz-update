@@ -45,7 +45,7 @@ kz_common.HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
 # Variables
 ###############################################################################
 
-command = ''
+COMMAND = ''
 
 
 ###############################################################################
@@ -59,17 +59,17 @@ def perform_repair():
     TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    command = 'sudo dpkg --configure --pending'
-    perform_command(command)
+    COMMAND = 'sudo dpkg --configure --pending'
+    perform_command(COMMAND)
 
-    command = 'sudo apt-get update --fix-missing'
-    perform_command(command)
+    COMMAND = 'sudo apt-get update --fix-missing'
+    perform_command(COMMAND)
 
-    command = 'sudo apt-get install --fix-broken'
-    perform_command(command)
+    COMMAND = 'sudo apt-get install --fix-broken'
+    perform_command(COMMAND)
 
-    command = '# sudo update-initramfs -u'
-    perform_command(command)
+    COMMAND = '# sudo update-initramfs -u'
+    perform_command(COMMAND)
 
 
 def perform_update():
@@ -79,11 +79,11 @@ def perform_update():
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    command = 'sudo apt-get update'
-    perform_command(command)
+    COMMAND = 'sudo apt-get update'
+    perform_command(COMMAND)
 
-    command = 'sudo apt-get dist-upgrade --yes'
-    perform_command(command)
+    COMMAND = 'sudo apt-get dist-upgrade --yes'
+    perform_command(COMMAND)
 
     try:
         subprocess.run('type snap &> /dev/null', shell=True, check=True,
@@ -92,8 +92,8 @@ def perform_update():
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)
     else:
-        command = 'sudo snap refresh'
-        perform_command(command)
+        COMMAND = 'sudo snap refresh'
+        perform_command(COMMAND)
 
 
 def perform_cleanup():
@@ -103,22 +103,22 @@ def perform_cleanup():
     TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    command = 'sudo apt-get autoclean --yes'
-    perform_command(command)
+    COMMAND = 'sudo apt-get autoclean --yes'
+    perform_command(COMMAND)
 
-    command = 'sudo apt-get autoremove --yes'
-    perform_command(command)
+    COMMAND = 'sudo apt-get autoremove --yes'
+    perform_command(COMMAND)
 
 
-def perform_command(command):
+def perform_command(COMMAND):
     """
     This function executes a Bourne-Again SHell command.
     """
-    TEXT = f'{command}'
+    TEXT = f'{COMMAND}'
     kz_common.infomsg(PROGRAM_NAME, TEXT)
     kz_common.check_package_manager(PROGRAM_NAME)
     try:
-        subprocess.run({command}, shell=True, check=True,
+        subprocess.run({COMMAND}, shell=True, check=True,
                        executable='/usr/bin/bash')
     except Exception as exc:
         TEXT = str(exc)
@@ -135,8 +135,8 @@ def check_reboot():
     """
     try:
         with open('/var/run/reboot-required') as fh:
-            TEXT = _('*** The computer needs to be restarted to complete the i\
-nstallation of updates ***')
+            TEXT = _('*** The computer needs to be restarted to complete the \
+installation of updates ***')
             TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
             kz_common.infomsg(PROGRAM_NAME, TEXT)
     except FileNotFoundError as fnf:

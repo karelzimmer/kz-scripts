@@ -39,22 +39,22 @@ $OPTIONS_HELP"
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]
+        ) || PARSED_RC=$?
+    if [[ $PARSED_RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -105,71 +105,71 @@ function process_input {
 
 # This function checks and installs dependencies.
 function check_dependencies {
-    local esc_xgettext='gettext'
+    local ESC_XGETTEXT='gettext'
 
     TEXT=$(gettext 'Check dependencies')...
     infomsg "$TEXT"
-    kz-install fakeroot $esc_xgettext git jq lftp nmap python shellcheck vscode
+    kz-install fakeroot $ESC_XGETTEXT git jq lftp nmap python shellcheck vscode
     kz-setup vscode
 }
 
 
 # This function retrieves the public repos.
 function pull_repos {
-    local bin_repo="$HOME"/bin
+    local BIN_REPO="$HOME"/bin
 
     git config --global user.name 'Karel Zimmer'
     git config --global user.email 'karel.zimmer@gmail.com'
     git config --global pull.ff only
     git config --global credential.helper store
 
-    if [[ -d $bin_repo ]]
+    if [[ -d $BIN_REPO ]]
     then
-        cd "$bin_repo"
+        cd "$BIN_REPO"
         git pull
     else
-        git clone https://github.com/karelzimmer/bin.git "$bin_repo"
+        git clone https://github.com/karelzimmer/bin.git "$BIN_REPO"
     fi
     TEXT=$(gettext 'Pull repos')...
     infomsg "$TEXT"
     # Call gitpull.
     logmsg 'Calling gitpull...'
-    "$bin_repo"/gitpull
+    "$BIN_REPO"/gitpull
     logmsg 'Called gitpull.'
     printf '%b\n' "$(gettext 'Status repos')..."
     # Call gitstat.
     logmsg 'Calling gitstat...'
-    "$bin_repo"/gitstat
+    "$BIN_REPO"/gitstat
     logmsg 'Called gitstat.'
 }
 
 
 # This function downloads the website.
 function download_website {
-    local ftp_set='set ssl:verify-certificate no'
-    local ftp_from=/httpdocs
-    local ftp_to=$HOME/kz-uploads/dist
-    local ftp_opts='--delete --verbose'
-    local ftp_cmd="mirror  $ftp_opts $ftp_from $ftp_to; exit"
-    local ftp_host=server106.hosting2go.nl
-    local ftp_user=kzimmer
-    local ftp_login=$HOME/.$ftp_host'.login'
-    local prompt="$(gettext 'Password for') ftp://$ftp_host': "
+    local FTP_SET='set ssl:verify-certificate no'
+    local FTP_FROM=/httpdocs
+    local FTP_TO=$HOME/kz-uploads/dist
+    local FTP_OPTS='--delete --verbose'
+    local FTP_CMD="mirror  $FTP_OPTS $FTP_FROM $FTP_TO; exit"
+    local FTP_HOST=server106.hosting2go.nl
+    local FTP_USER=kzimmer
+    local FTP_LOGIN=$HOME/.$FTP_HOST'.login'
+    local PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
 
-    if [[ ! -f $ftp_login ]]
+    if [[ ! -f $FTP_LOGIN ]]
     then
-        read -rsp "$prompt" < /dev/tty
-        printf '%s' "$REPLY" > "$ftp_login"
+        read -rsp "$PROMPT" < /dev/tty
+        printf '%s' "$REPLY" > "$FTP_LOGIN"
         printf '\n'
-        chmod --verbose 'u=rw,g=,o=' "$ftp_login" |& $LOGCMD
+        chmod --verbose 'u=rw,g=,o=' "$FTP_LOGIN" |& $LOGCMD
     fi
-    if ! lftp   --user "$ftp_user"                  \
-                --password "$(cat "$ftp_login")"    \
-                -e "$ftp_set; $ftp_cmd"             \
-                "$ftp_host"
+    if ! lftp   --user "$FTP_USER"                  \
+                --password "$(cat "$FTP_LOGIN")"    \
+                -e "$FTP_SET; $FTP_CMD"             \
+                "$FTP_HOST"
     then
         # Force entering the password next time.
-        rm --verbose "$ftp_login"*
+        rm --verbose "$FTP_LOGIN"*
         TEXT=$(gettext 'Website download failed.')
         errormsg "$TEXT"
         exit $ERROR

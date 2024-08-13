@@ -23,11 +23,11 @@ declare PROGRAM_NAME='kz-nas'
 declare PROGRAM_DESC=$(gettext 'Mount network drive')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE\
-")
+declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+\$OPTIONS_USAGE")
 
-declare X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, requ\
-ires desktop environment")
+declare X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+requires desktop environment")
 
 declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
@@ -43,8 +43,8 @@ declare X_OPTIONS_LONG=',gui'
 declare NAS_LOGIN_DIR=/etc
 declare NAS_LOGIN=$NAS_LOGIN_DIR/$PROGRAM_NAME.login
 declare NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
-declare NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP addr\
-ess.
+declare NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP \
+address.
 This requires:
 
   - the MAC address of the NAS (looks like aa:bb:cc:dd:ee:ff)
@@ -76,22 +76,22 @@ declare NAS_PASSWORD='secret'
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]
+        ) || PARSED_RC=$?
+    if [[ $PARSED_RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -141,13 +141,13 @@ $USAGE"
 
 # This function asks the user for input.
 request_input() {
-    local prompt=''
-    local quest1=$(eval_gettext "Does the NAS have a fixed IP address such as \
+    local PROMPT=''
+    local QUEST1=$(eval_gettext "Does the NAS have a fixed IP address such as \
 \$NAS_IP_ADDRESS?")
-    local quest2=$(gettext 'IP address of the NAS')
-    local quest3=$(gettext 'User name on the NAS')
-    local quest4=$(gettext 'Password of this user on the NAS')
-    local quest5=$(gettext 'Share name of this user on the NAS')
+    local QUEST2=$(gettext 'IP address of the NAS')
+    local QUEST3=$(gettext 'User name on the NAS')
+    local QUEST4=$(gettext 'Password of this user on the NAS')
+    local QUEST5=$(gettext 'Share name of this user on the NAS')
 
     TITLE=$(gettext 'Question')
     if $OPTION_GUI
@@ -157,7 +157,7 @@ request_input() {
                     --width     400         \
                     --height    100         \
                     --title     "$TITLE"    \
-                    --text      "$quest1"   2> >($LOGCMD)
+                    --text      "$QUEST1"   2> >($LOGCMD)
         then
             TITLE=$(gettext 'Notification')
             zenity  --info                              \
@@ -171,8 +171,8 @@ request_input() {
     else
         while true
     do
-            prompt=$(eval_gettext "\$quest1 [y/N]: ")
-            read -rp "$prompt"
+            PROMPT=$(eval_gettext "\$QUEST1 [y/N]: ")
+            read -rp "$PROMPT"
             case $REPLY in
                 [YyJj]* )
                     break
@@ -197,10 +197,10 @@ request_input() {
                     --title         "$TITLE"    \
                     --text          "$TEXT"     \
                     --separator     ","         \
-                    --add-entry     "$quest2"   \
-                    --add-entry     "$quest3"   \
-                    --add-password  "$quest4"   \
-                    --add-entry     "$quest5"   2> >($LOGCMD)
+                    --add-entry     "$QUEST2"   \
+                    --add-entry     "$QUEST3"   \
+                    --add-password  "$QUEST4"   \
+                    --add-entry     "$QUEST5"   2> >($LOGCMD)
 	        ) || exit $OK
         NAS_IP_ADDRESS=$(   printf '%s' "$REPLY" | awk -F, '{print $1}')
         NAS_USER_NAME=$(    printf '%s' "$REPLY" | awk -F, '{print $2}')
@@ -212,17 +212,17 @@ $TEXT.
 $(gettext "If you do not specify, the value in [] is used as the response.")"
         infomsg "$TEXT"
         read -rp "
-$quest2? [$NAS_IP_ADDRESS]: "
+$QUEST2? [$NAS_IP_ADDRESS]: "
         [[ -z $REPLY ]] || NAS_IP_ADDRESS=$REPLY
         read -rp "
-$quest3? [$NAS_USER_NAME]: "
+$QUEST3? [$NAS_USER_NAME]: "
         [[ -z $REPLY ]] || NAS_USER_NAME=$REPLY
         read -rsp "
-$quest4? [$NAS_PASSWORD]: "
+$QUEST4? [$NAS_PASSWORD]: "
         [[ -z $REPLY ]] || NAS_PASSWORD=$REPLY
         printf '\n'
         read -rp "
-$quest5? [$NAS_SHARE_NAME]: "
+$QUEST5? [$NAS_SHARE_NAME]: "
         [[ -z $REPLY ]] || NAS_SHARE_NAME=$REPLY
     fi
 }
@@ -230,23 +230,23 @@ $quest5? [$NAS_SHARE_NAME]: "
 
 # This function processes the script options and arguments.
 process_input() {
-    local   text0=$(gettext 'Commands are being prepared')
-    local   text1=$(gettext 'Check dependencies')
-    local   text2=$(gettext 'Create NAS login')
-    local   text3=$(gettext 'Create systemd mount file')
-    local   text4=$(gettext 'Mount NAS')
+    local   TEXT0=$(gettext 'Commands are being prepared')
+    local   TEXT1=$(gettext 'Check dependencies')
+    local   TEXT2=$(gettext 'Create NAS login')
+    local   TEXT3=$(gettext 'Create systemd mount file')
+    local   TEXT4=$(gettext 'Mount NAS')
 
     TITLE=$(gettext 'Mount network drive')
     if $OPTION_GUI
     then
         (
-        printf '%s\n' "#$text1"
+        printf '%s\n' "#$TEXT1"
         check_dependencies
-        printf '%s\n' "#$text2"
+        printf '%s\n' "#$TEXT2"
         create_nas_login
-        printf '%s\n' "#$text3"
+        printf '%s\n' "#$TEXT3"
         create_systemd_unit_file
-        printf '%s\n' "#$text4"
+        printf '%s\n' "#$TEXT4"
         mount_nas
         ) |&
         zenity  --progress              \
@@ -256,15 +256,15 @@ process_input() {
                 --width     600         \
                 --height    50          \
                 --title     "$TITLE"    \
-                --text      "$text0"    2> >($LOGCMD)
+                --text      "$TEXT0"    2> >($LOGCMD)
     else
-        printf '\n%s\n' "$text1..."
+        printf '\n%s\n' "$TEXT1..."
         check_dependencies
-        printf '\n%s\n' "$text2..."
+        printf '\n%s\n' "$TEXT2..."
         create_nas_login
-        printf '\n%s\n' "$text3..."
+        printf '\n%s\n' "$TEXT3..."
         create_systemd_unit_file
-        printf '\n%s\n' "$text4..."
+        printf '\n%s\n' "$TEXT4..."
         mount_nas
     fi
 }
@@ -297,8 +297,8 @@ Description=Mount NAS Directory
 What=//$NAS_IP_ADDRESS/$NAS_SHARE_NAME
 Where=$NAS_MOUNT_POINT
 Type=cifs
-Options=credentials=$NAS_LOGIN,vers=1.0,rw,noperm,iocharset=utf8,dir_mode=0777\
-,file_mode=0777
+Options=credentials=$NAS_LOGIN,vers=1.0,rw,noperm,iocharset=utf8,\
+dir_mode=0777,file_mode=0777
 
 [Install]
 WantedBy=multi-user.target" > "$SYSTEMD_MOUNT"

@@ -22,8 +22,8 @@ declare    PROGRAM_NAME='kz-menu'
 declare    PROGRAM_DESC=$(gettext 'Installation menu')
 declare    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_U\
-SAGE")
+declare    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+\$OPTIONS_USAGE")
 
 declare    X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
 requires desktop environment")
@@ -69,7 +69,7 @@ declare -a MENU2_ACTIONS=(
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Go to installation menu')"
             )
-declare -a MENU2_COMMANDS=(
+declare -a MENU2_DESCS=(
             [1]='kz wifi'
                 'kz backup'
                 'kz install'
@@ -77,7 +77,7 @@ declare -a MENU2_COMMANDS=(
                 'kz setup'
                 "$(gettext 'Back')"
             )
-declare    MENU2_LINES=${#MENU2_COMMANDS[@]}
+declare    MENU2_LINES=${#MENU2_DESCS[@]}
 
 declare     EXECUTE_COMMAND=false
 declare -a  ROWS=()
@@ -89,22 +89,22 @@ declare -a  ROWS=()
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]
+        ) || PARSED_RC=$?
+    if [[ $PARSED_RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -191,7 +191,8 @@ function process_menu1_gui {
 
 # This function shows and processes menu 1 in TUI mode.
 function process_menu1_tui {
-    local menu1_action=''
+    local MENU1_ACTION=''
+    local PROMPT=''
 
     while true
     do
@@ -200,16 +201,16 @@ function process_menu1_tui {
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for menu1_action in "${!MENU1_ACTIONS[@]}"
+        for MENU1_ACTION in "${!MENU1_ACTIONS[@]}"
         do
             printf  '%3s  %-24s  %s\n'                  \
-                    "$menu1_action"                     \
-                    "${MENU1_ACTIONS[$menu1_action]}"   \
-                    "${MENU1_DESCS[$menu1_action]}"
+                    "$MENU1_ACTION"                     \
+                    "${MENU1_ACTIONS[$MENU1_ACTION]}"   \
+                    "${MENU1_DESCS[$MENU1_ACTION]}"
         done
         printf '\n'
-        prompt=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
-        read -rp "$prompt"
+        PROMPT=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
+        read -rp "$PROMPT"
         case $REPLY in
             *[^[:digit:]]* )
                 continue
@@ -261,8 +262,8 @@ function process_menu1_choice {
 function process_menu1_choice1 {
     TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
     ROWS=(
-        [1]="${MENU2_ACTIONS[1]}#${MENU2_COMMANDS[1]}"
-            "${MENU2_ACTIONS[2]}#${MENU2_COMMANDS[2]}"
+        [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
+            "${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
         )
     process_commands
 }
@@ -297,7 +298,7 @@ Roughly boils down to:
 function process_menu1_choice3 {
     TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
     ROWS=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_COMMANDS[3]}"
+        [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
     process_commands
 }
@@ -307,8 +308,8 @@ function process_menu1_choice3 {
 function process_menu1_choice4 {
     TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
     ROWS=(
-        [1]="${MENU2_ACTIONS[4]}#${MENU2_COMMANDS[4]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_COMMANDS[5]}"
+        [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
+            "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
     process_commands
     # User must type 'logout' to log out.
@@ -333,23 +334,23 @@ function process_menu2_gui {
     do
         TITLE=$MENU2_TITLE
         REPLY=$(
-            zenity  --list                                                  \
-                    --radiolist                                             \
-                    --width         520                                     \
-                    --height        420                                     \
-                    --title         "$TITLE"                                \
-                    --text          "$(gettext 'Select a choice:')"         \
-                    --ok-label      "$(gettext 'Continue')"                 \
-                    --cancel-label  "$(gettext 'Back')"                     \
-                    --column        "$(gettext 'CHOICE')"                   \
-                    --column        "$(gettext 'NUM')"                      \
-                    --column        "$(gettext 'ACTION')"                   \
-                    --column        "$(gettext 'DESCRIPTION')"              \
-                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_COMMANDS[1]}"    \
-                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_COMMANDS[2]}"    \
-                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_COMMANDS[3]}"    \
-                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_COMMANDS[4]}"    \
-                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_COMMANDS[5]}"    \
+            zenity  --list                                              \
+                    --radiolist                                         \
+                    --width         520                                 \
+                    --height        420                                 \
+                    --title         "$TITLE"                            \
+                    --text          "$(gettext 'Select a choice:')"     \
+                    --ok-label      "$(gettext 'Continue')"             \
+                    --cancel-label  "$(gettext 'Back')"                 \
+                    --column        "$(gettext 'CHOICE')"               \
+                    --column        "$(gettext 'NUM')"                  \
+                    --column        "$(gettext 'ACTION')"               \
+                    --column        "$(gettext 'DESCRIPTION')"          \
+                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_DESCS[1]}"   \
+                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_DESCS[2]}"   \
+                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
+                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
+                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
                     2> >($LOGCMD)
             ) || break
         process_menu2_choice
@@ -359,7 +360,8 @@ function process_menu2_gui {
 
 # This function shows and processes menu 2 in TUI mode.
 function process_menu2_tui {
-    local menu2_command=''
+    local MENU2_ACTION=''
+    local PROMPT=''
 
     while true
     do
@@ -368,16 +370,16 @@ function process_menu2_tui {
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for menu2_command in "${!MENU2_COMMANDS[@]}"
+        for MENU2_ACTION in "${!MENU2_ACTIONS[@]}"
         do
             printf  '%3s  %-25s  %s\n'                  \
-                    "$menu2_command"                    \
-                    "${MENU2_ACTIONS[$menu2_command]}"  \
-                    "${MENU2_COMMANDS[$menu2_command]}"
+                    "$MENU2_ACTION"                    \
+                    "${MENU2_ACTIONS[$MENU2_ACTION]}"  \
+                    "${MENU2_DESCS[$MENU2_ACTION]}"
         done
         printf '\n'
-        prompt=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
-        read -rp "$prompt"
+        PROMPT=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
+        read -rp "$PROMPT"
         case $REPLY in
             *[^[:digit:]]* )
                 continue
@@ -399,9 +401,9 @@ function process_menu2_tui {
 function process_menu2_choice {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]
     then
-        TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_COMMANDS[$REPLY]})"
+        TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         ROWS=(
-            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_COMMANDS[$REPLY]}"
+            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
             )
         process_commands
     elif [[ $REPLY -eq $MENU2_LINES ]]
@@ -417,24 +419,25 @@ function process_menu2_choice {
 
 # This function processes the command corresponding to the choice made.
 function process_commands {
-    local    command=''
-    local    description=''
-    local -i row=0
+    local    COMMAND=''
+    local    DESCRIPTION=''
+    local -i ROW=0
 
     show_commands_before_execution
     if $EXECUTE_COMMAND
     then
-        for row in "${!ROWS[@]}"
+        for ROW in "${!ROWS[@]}"
         do
-            description=$(
-                printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=1
+            DESCRIPTION=$(
+                printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=1
                 )
-            command=$(
-                printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=2
+            COMMAND=$(
+                printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=2
                 )
-            TITLE="$description ($command)"
+            TITLE="$DESCRIPTION ($COMMAND)"
             $OPTION_GUI || infomsg "\n${BOLD}==== $TITLE ====${NORMAL}"
             execute_command
+            $OPTION_GUI || wait_for_enter
         done
     fi
 }
@@ -442,31 +445,31 @@ function process_commands {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution {
-    local    command=''
-    local    description=''
-    local -i row=0
-    local    prompt=''
+    local    COMMAND=''
+    local    DESCRIPTION=''
+    local -i ROW=0
+    local    PROMPT=''
 
     TEXT="$(gettext 'The following will be executed:')
 "
-    for row in "${!ROWS[@]}"
+    for ROW in "${!ROWS[@]}"
     do
-        description=$(
-            printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=1
+        DESCRIPTION=$(
+            printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=1
             )
-        command=$(
-            printf '%s' "${ROWS[$row]}" | cut --delimiter='#' --fields=2
+        COMMAND=$(
+            printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=2
             )
         TEXT+="
-[$row] $description ($command)"
+[$ROW] $DESCRIPTION ($COMMAND)"
     done
     TEXT+='
 '
-    prompt="$(gettext 'Proceed?')"
+    PROMPT="$(gettext 'Proceed?')"
     if $OPTION_GUI
     then
         TEXT+="
-$prompt"
+$PROMPT"
         if zenity   --question                          \
                     --no-markup                         \
                     --width         600                 \
@@ -484,7 +487,7 @@ $prompt"
         printf '\n%s\n' "$TEXT"
         while true
     do
-            read -rp "$(eval_gettext "\$prompt [Y/n]: ")"
+            read -rp "$(eval_gettext "\$PROMPT [Y/n]: ")"
             case $REPLY in
                 [YyJj]* | '' )
                     EXECUTE_COMMAND=true
@@ -505,23 +508,23 @@ $prompt"
 
 # This function executes the commands.
 function execute_command {
-    local -i rc=0
-    local    cmd=''
-    local    gui_option=''
+    local -i RC=0
+    local    CMD=''
+    local    GUI_OPTION=''
 
-    cmd=$(
-        printf '%s' "$command" | cut --delimiter=' ' --fields=1
+    CMD=$(
+        printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=1
         )
     arg=$(
-        printf '%s' "$command" | cut --delimiter=' ' --fields=2-
+        printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=2-
         )
 
     if $OPTION_GUI
     then
-        gui_option='--gui'
+        GUI_OPTION='--gui'
     fi
-    "$PROGRAM_PATH/$cmd" "$arg" $gui_option -- || rc=$?
-    logmsg "$command: rc=$rc"
+    "$PROGRAM_PATH/$CMD" "$arg" $GUI_OPTION -- || RC=$?
+    logmsg "$COMMAND: rc=$RC"
 }
 
 

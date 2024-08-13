@@ -79,7 +79,7 @@ def become_root(PROGRAM_NAME):
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
-    exec_sudo = 'sudo '
+    EXEC_SUDO = 'sudo '
 
     if not become_root_check(PROGRAM_NAME):
         TEXT = ''
@@ -89,14 +89,14 @@ def become_root(PROGRAM_NAME):
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
         for arg_num in range(len(sys.argv)):
             if arg_num == 0:
-                exec_sudo += str(sys.argv[arg_num])
+                EXEC_SUDO += str(sys.argv[arg_num])
             else:
-                exec_sudo += ' ' + str(sys.argv[arg_num])
-        TEXT = f'restart ({exec_sudo})'
+                EXEC_SUDO += ' ' + str(sys.argv[arg_num])
+        TEXT = f'restart ({EXEC_SUDO})'
         logmsg(PROGRAM_NAME, TEXT)
 
         try:
-            subprocess.run(exec_sudo, shell=True, check=True)
+            subprocess.run(EXEC_SUDO, shell=True, check=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
             term(PROGRAM_NAME, TEXT, ERROR)
@@ -135,8 +135,8 @@ def check_on_ac_power(PROGRAM_NAME):
     """
     if subprocess.run('on_ac_power', shell=True).returncode == 1:
         TEXT = _('The computer now uses only the battery for power.\n\n'
-                 'It is recommended to connect the computer to the wall socket\
-.')
+                 'It is recommended to connect the computer to the wall \
+socket.')
         infomsg(PROGRAM_NAME, TEXT)
         wait_for_enter(PROGRAM_NAME)
 
@@ -146,7 +146,7 @@ def check_package_manager(PROGRAM_NAME):
     This function checks for another running package manager and waits for the
     next check if so.
     """
-    check_wait = 10
+    CHECK_WAIT = 10
 
     while True:
         try:
@@ -161,7 +161,7 @@ def check_package_manager(PROGRAM_NAME):
         else:
             TEXT = _('Wait for another package manager to finish') + '...'
             infomsg(PROGRAM_NAME, TEXT)
-            time.sleep(check_wait)
+            time.sleep(CHECK_WAIT)
 
 
 def errormsg(PROGRAM_NAME, TEXT):
@@ -197,15 +197,14 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the common options.
     """
-    # parser = argparse.ArgumentParser(prog=DISPLAY_NAME, add_help=False)
-    parser = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
+    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
 
-    parser.add_argument('-h', '--help', action='store_true')
-    parser.add_argument('-m', '--manual', action='store_true')
-    parser.add_argument('-u', '--usage', action='store_true')
-    parser.add_argument('-v', '--version', action='store_true')
-    args = parser.parse_args()
+    PARSER.add_argument('-h', '--help', action='store_true')
+    PARSER.add_argument('-m', '--manual', action='store_true')
+    PARSER.add_argument('-u', '--usage', action='store_true')
+    PARSER.add_argument('-v', '--version', action='store_true')
+    args = PARSER.parse_args()
 
     if args.help:
         process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
@@ -229,15 +228,15 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function shows the available help.
     """
-    yelp_man_url = ''
+    YELP_MAN_URL = ''
 
     if DESKTOP_ENVIRONMENT:
-        yelp_man_url = f"{_(', or see the ')}"
-        yelp_man_url += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
-        yelp_man_url += f" {_('man page')}\x1b]8;;\x1b\\"
+        YELP_MAN_URL = f"{_(', or see the ')}"
+        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
+        YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"
     TEXT = (f'{HELP}\n\n'
             f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
-                 format(DISPLAY_NAME, DISPLAY_NAME, yelp_man_url)}''')
+                 format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}''')
     infomsg(PROGRAM_NAME, TEXT)
 
 
@@ -271,11 +270,11 @@ def process_option_version(PROGRAM_NAME):
     """
     This function displays version, author, and license information.
     """
-    build_id = ''
+    BUILD_ID = ''
 
     try:
         with open('/etc/kz-build.id') as fh:
-            build_id = f'{fh.read()}'
+            BUILD_ID = f'{fh.read()}'
     except FileNotFoundError as fnf:
         TEXT = str(fnf)
         logmsg(PROGRAM_NAME, TEXT)
@@ -288,10 +287,10 @@ def process_option_version(PROGRAM_NAME):
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         term(PROGRAM_NAME, TEXT, ERROR)
     finally:
-        TEXT = f"{_('kz version 4.2.1 (built {}).').format(build_id)}\n\n"
+        TEXT = f"{_('kz version 4.2.1 (built {}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
-        TEXT += _('License CC0 1.0 <https://creativecommons.org/publicdomain/z\
-ero/1.0>.')
+        TEXT += _('License CC0 1.0 \
+<https://creativecommons.org/publicdomain/zero/1.0>.')
         infomsg(PROGRAM_NAME, TEXT)
 
 

@@ -23,15 +23,15 @@ declare PROGRAM_NAME='kz-restore'
 declare PROGRAM_DESC=$(gettext 'Restore backup')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-s|--source D\
-IRECTORY]
+declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+[-s|--source DIRECTORY]
                   \$OPTIONS_USAGE")"
 
-declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are m\
-andatory for short options too.")
+declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+mandatory for short options too.")
 
-$(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
-t")
+$(gettext "  -g, --gui      run in graphical mode, requires desktop \
+environment")
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')"
 
@@ -60,22 +60,22 @@ declare TARGET=$HOME
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]
+        ) || PARSED_RC=$?
+    if [[ $PARSED_RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -204,11 +204,11 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup {
-    local    error_file=''
-    local    rsync_messages=''
-    local -i restore_rc=0
+    local    ERROR_FILE=''
+    local    RSYNC_MESSAGES=''
+    local -i RESTORE_RC=0
 
-    error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
     TITLE=$(gettext 'Restore backup')
     TEXT=$(gettext 'Preparing restore (this can take a while)')
@@ -219,7 +219,7 @@ function restore_backup {
                 --verbose               \
                 "$SOURCE"/              \
                 "$TARGET"/              \
-                2> "$error_file"        |
+                2> "$ERROR_FILE"        |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -228,7 +228,7 @@ function restore_backup {
                 --width     600         \
                 --height    50          \
                 --title     "$TITLE"    \
-                --text      "$TEXT"     2> >($LOGCMD) || restore_rc=$?
+                --text      "$TEXT"     2> >($LOGCMD) || RESTORE_RC=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -236,20 +236,20 @@ function restore_backup {
                 --verbose               \
                 --human-readable        \
                 "$SOURCE"/              \
-                "$TARGET"/              2> "$error_file" || restore_rc=$?
+                "$TARGET"/              2> "$ERROR_FILE" || RESTORE_RC=$?
     fi
-    if [[ $restore_rc -ne $OK ]]
+    if [[ $RESTORE_RC -ne $OK ]]
     then
         # shellcheck disable=SC2034
-        rsync_messages=$(cat "$error_file")
+        RSYNC_MESSAGES=$(cat "$ERROR_FILE")
         TEXT=$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while restoring the backup, or
 is there not enough space on \$TARGET.
 
-Check the rsync messages (also in \$error_file):
-\$rsync_messages
+Check the rsync messages (also in \$ERROR_FILE):
+\$RSYNC_MESSAGES
 
 Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
@@ -258,13 +258,13 @@ use app 'Terminal', type 'kz restore'.")
         errormsg "$TEXT"
         exit $ERROR
     fi
-    rm --verbose "$error_file" |& $LOGCMD
+    rm --verbose "$ERROR_FILE" |& $LOGCMD
 }
 
 
 # This function restores the user settings.
 function restore_settings {
-    local settings_dir="$HOME"/kz-backup
+    local SETTINGS_DIR="$HOME"/kz-backup
 
     if $DESKTOP_ENVIRONMENT
     then
@@ -276,36 +276,36 @@ function restore_settings {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop {
-    local input_file="$settings_dir"/desktop
+    local INPUT_FILE="$SETTINGS_DIR"/desktop
 
-    if [[ -f $input_file ]]
+    if [[ -f $INPUT_FILE ]]
     then
         logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
-                    "file://$input_file"
+                    "file://$INPUT_FILE"
     fi
 }
 
 
 # This function controls the termination of the script.
 function term_script {
-    local -i unmount_rc=0
-    local    num_users=$(find /home/* -prune -print | wc --lines)
-    local    users=''
+    local -i UNMOUNT_RC=0
+    local    NUM_USERS=$(find /home/* -prune -print | wc --lines)
+    local    USERS=''
 
-    if [[ $num_users -eq 1 ]]
+    if [[ $NUM_USERS -eq 1 ]]
     then
         TEXT=$(gettext 'The backup has been restored.')
     else
-        users=$(
+        USERS=$(
                 gettext '_username_|UID|_user_'
                 printf '\n'
                 grep --regexp='/home' /etc/passwd   |
                 cut --delimiter=: --fields=1,3,5    |
                 tr ':' '|'
                 )
-        users+=$(
+        USERS+=$(
                 printf '\n'
                 while read -r uid
                 do
@@ -316,16 +316,16 @@ function term_script {
                     cut --delimiter=: --fields=1
                     )
                 )
-        TEXT="$(eval_gettext "The backup has restored for \$USER (there are \$\
-num_users users).")
+        TEXT="$(eval_gettext "The backup has restored for \$USER (there are \
+\$NUM_USERS users).")
 
-$users"
+$USERS"
     fi
 
     if [[ $SOURCE_MEDIUM == /media/* ]]
     then
-        term_script_usb || unmount_rc=$?
-        if [[ $unmount_rc -eq $OK ]]
+        term_script_usb || UNMOUNT_RC=$?
+        if [[ $UNMOUNT_RC -eq $OK ]]
         then
             TEXT+="
 
@@ -344,12 +344,12 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 
 # This function tries to unmount the USB device.
 function term_script_usb {
-    local    dev=''
-    local -i rc=0
-    local    text
+    local    DEV=''
+    local -i RC=0
+    local    TEXT
 
-    text=$(gettext 'Disconnect the USB media')
-    dev='/dev/'$(
+    TEXT=$(gettext 'Disconnect the USB media')
+    DEV='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
                 "$SOURCE_MEDIUM"    |
@@ -363,7 +363,7 @@ function term_script_usb {
     then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        logmsg "$text..."
+        logmsg "$TEXT..."
         term_script_unmount > >(
             zenity  --progress              \
                     --pulsate               \
@@ -372,23 +372,23 @@ function term_script_usb {
                     --width     600         \
                     --height    50          \
                     --title     "$TITLE"    \
-                    --text      "$text"     \
+                    --text      "$TEXT"     \
                     2> >($LOGCMD)
             )
     else
-        infomsg "$text..."
+        infomsg "$TEXT..."
         term_script_unmount
     fi
 
-    return $rc
+    return $RC
 }
 
 
 # This function unmounts the USB device.
 function term_script_unmount {
-    umount "$SOURCE_MEDIUM"                     |& $LOGCMD || rc+=$?
-    udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
-    udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
+    umount "$SOURCE_MEDIUM"                     |& $LOGCMD || RC+=$?
+    udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
+    udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
     sleep 3
 }
 

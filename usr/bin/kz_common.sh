@@ -72,8 +72,8 @@ declare TITLE=''
 # This function checks whether the script is started as user root and restarts
 # the script as user root if not.
 function become_root {
-    local -i pkexec_rc=0
-    local    program_exec=$PROGRAM_PATH/$PROGRAM_NAME
+    local -i PKEXEC_RC=0
+    local    PROGRAM_EXEC=$PROGRAM_PATH/$PROGRAM_NAME
 
     become_root_check || exit $OK
 
@@ -83,16 +83,16 @@ function become_root {
         then
             export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
-            TEXT="Restart (pkexec $program_exec ${COMMANDLINE_ARGS[*]})..."
+            TEXT="Restart (pkexec $PROGRAM_EXEC ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
-            # Because $program_exec will be started again, do not trap twice.
+            # Because $PROGRAM_EXEC will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$program_exec" "${COMMANDLINE_ARGS[@]}" || pkexec_rc=$?
-            exit $pkexec_rc
+            pkexec "$PROGRAM_EXEC" "${COMMANDLINE_ARGS[@]}" || PKEXEC_RC=$?
+            exit $PKEXEC_RC
         else
-            TEXT="Restart (exec sudo $program_exec ${COMMANDLINE_ARGS[*]})..."
+            TEXT="Restart (exec sudo $PROGRAM_EXEC ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
-            exec sudo "$program_exec" "${COMMANDLINE_ARGS[@]}"
+            exec sudo "$PROGRAM_EXEC" "${COMMANDLINE_ARGS[@]}"
         fi
     fi
 }
@@ -118,15 +118,15 @@ function become_root_check {
 # This function checks to see if the computer is running on battery power and
 # prompts the user to continue if so.
 function check_on_ac_power {
-    local -i on_battery=0
+    local -i ON_BATTERY=0
 
-    on_ac_power &> /dev/null || on_battery=$?
+    on_ac_power &> /dev/null || ON_BATTERY=$?
     # Value on_battery:
     #   0 (true)  System is on mains power
     #   1 (false) System is not on mains power
     # 255 (false) Power status could not be determined (e.g. on VM)
 
-    if [[ on_battery -eq 1 ]]
+    if [[ ON_BATTERY -eq 1 ]]
     then
         TEXT=$(gettext "The computer now uses only the battery for power.
 
@@ -140,7 +140,8 @@ It is recommended to connect the computer to the wall socket.")
 # This function checks for another running package manager and waits for the
 # next check if so.
 function check_package_manager {
-    local -i check_wait=10
+    local -i CHECK_WAIT=10
+
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
@@ -155,7 +156,7 @@ function check_package_manager {
         else
             infomsg "$TEXT..."
         fi
-        sleep $check_wait
+        sleep $CHECK_WAIT
     done
 }
 
@@ -200,7 +201,7 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    declare -g LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    declare  -g LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     declare -ag COMMANDLINE_ARGS=("$@")
 
     trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
@@ -256,16 +257,16 @@ function process_options {
 
 # This function shows the available help.
 function process_option_help {
-    local yelp_man_url=''
+    local YELP_MAN_URL=''
 
     if $DESKTOP_ENVIRONMENT
     then
-        yelp_man_url="$(gettext ', or see the ')"
-        yelp_man_url+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
-        yelp_man_url+="$(gettext 'man page')\033]8;;\033\\"
+        YELP_MAN_URL="$(gettext ', or see the ')"
+        YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
+        YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
     fi
     TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
-E'\$yelp_man_url for more information.")"
+E'\$YELP_MAN_URL for more information.")"
     printf '%b\n\n%b\n' "$HELP" "$TEXT"
 }
 
@@ -285,18 +286,18 @@ function process_option_usage {
 
 # This function displays version, author, and license information.
 function process_option_version {
-    local build_id=''
+    local BUILD_ID=''
 
     if [[ -e /etc/kz-build.id ]]
     then
-        build_id=$(cat /etc/kz-build.id)
+        BUILD_ID=$(cat /etc/kz-build.id)
     else
         TEXT=$(gettext 'Build ID cannot be determined.')
         logmsg "$TEXT"
-        build_id=$TEXT
+        BUILD_ID=$TEXT
     fi
 
-    TEXT="$(eval_gettext "kz version 4.2.1 (built \$build_id).")
+    TEXT="$(eval_gettext "kz version 4.2.1 (built \$BUILD_ID).")
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
@@ -307,80 +308,80 @@ $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 
 # This function controls the termination.
 function term {
-    local    signal=${1:-unknown}
-    local -i lineno=${2:-unknown}
-    local    function=${3:-unknown}
-    local    command=${4:-unknown}
-    local -i rc=${5:-$ERROR}
-    local    rc_desc=''
-    local -i rc_desc_signalno=0
-    local    status=$rc/error
+    local    SIGNAL=${1:-unknown}
+    local -i LINENO=${2:-unknown}
+    local    FUNCTION=${3:-unknown}
+    local    COMMAND=${4:-unknown}
+    local -i RC=${5:-$ERROR}
+    local    RC_DESC=''
+    local -i RC_DESC_SIGNALNO=0
+    local    STATUS=$RC/error
 
-    case $rc in
+    case $RC in
         0 )
-            rc_desc='successful termination'
-            status=$rc/OK
+            RC_DESC='successful termination'
+            STATUS=$RC/OK
             ;;
         1 )
-            rc_desc='terminated with error'
+            RC_DESC='terminated with error'
             ;;
         6[4-9] | 7[0-8] )                   # 64--78
-            rc_desc="open file '/usr/include/sysexits.h' and look for '$rc'"
+            RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            rc_desc='apt/dpkg exited with error'
+            RC_DESC='apt/dpkg exited with error'
             ;;
         126 )
-            rc_desc='command cannot execute'
+            RC_DESC='command cannot execute'
             ;;
         127 )
-            rc_desc='command not found'
+            RC_DESC='command not found'
             ;;
         128 )
-            rc_desc='invalid argument to exit'
+            RC_DESC='invalid argument to exit'
             ;;
         129 )                               # SIGHUP (128 + 1)
-            rc_desc='hangup'
+            RC_DESC='hangup'
             ;;
         130 )                               # SIGINT (128 + 2)
-            rc_desc='terminated by control-c'
+            RC_DESC='terminated by control-c'
             ;;
         13[1-9] | 140 )                     # 131 (128 + 3)--140 (128 + 12)
-            rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
+            RC_DESC_SIGNALNO=$((RC - 128))
+            RC_DESC="typ 'trap -l' and look for $RC_DESC_SIGNALNO"
             ;;
         141 )                               # SIGPIPE (128 + 13)
-            rc_desc='broken pipe: write to pipe with no readers'
+            RC_DESC='broken pipe: write to pipe with no readers'
             ;;
         142 )                               # SIGALRM (128 + 14)
-            rc_desc='timer signal from alarm'
+            RC_DESC='timer signal from alarm'
             ;;
         143 )                               # SIGTERM (128 + 15)
-            rc_desc='termination signal'
+            RC_DESC='termination signal'
             ;;
         14[4-9] | 1[5-8][0-9] | 19[0-2])    # 144 (128 + 16)--192 (128 + 64)
-            rc_desc_signalno=$((rc - 128))
-            rc_desc="typ 'trap -l' and look for $rc_desc_signalno"
+            RC_DESC_SIGNALNO=$((RC - 128))
+            RC_DESC="typ 'trap -l' and look for $RC_DESC_SIGNALNO"
             ;;
         255 )
-            rc_desc='exit status out of range'
+            RC_DESC='exit status out of range'
             ;;
         * )
-            rc_desc='unknown error'
+            RC_DESC='unknown error'
             ;;
     esac
-    TEXT="Signal: $signal, line: $lineno, function: $function, command: "
-    TEXT+="$command, code: $rc ($rc_desc)."
+    TEXT="Signal: $SIGNAL, line: $LINENO, function: $FUNCTION, command: "
+    TEXT+="$COMMAND, code: $RC ($RC_DESC)."
     logmsg "$TEXT"
 
-    case $signal in
+    case $SIGNAL in
         err )
             if $ERREXIT
             then
                 TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
 or.")
                 errormsg "$TEXT"
-                exit "$rc"
+                exit "$RC"
             fi
             ;;
         exit )
@@ -390,16 +391,16 @@ or.")
                 deb                     \
                 deb.{1..99}             \
                 "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
-            TEXT="Ended (code=exited, status=$status).
+            TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            exit "$rc"
+            exit "$RC"
             ;;
         * )
             TEXT=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
             errormsg "$TEXT"
-            exit "$rc"
+            exit "$RC"
             ;;
     esac
 }
@@ -407,10 +408,10 @@ or.")
 
 # This function waits for the user to press Enter.
 function wait_for_enter {
-    local prompt="$(gettext 'Press the Enter key to continue [Enter]: ')"
+    local PROMPT="$(gettext 'Press the Enter key to continue [Enter]: ')"
 
-    logmsg "$prompt"
+    logmsg "$PROMPT"
     printf '\n'
-    read -rp "$prompt" < /dev/tty
+    read -rp "$PROMPT" < /dev/tty
     printf '\n'
 }

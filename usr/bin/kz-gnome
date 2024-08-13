@@ -23,13 +23,13 @@ declare PROGRAM_NAME='kz-gnome'
 declare PROGRAM_DESC=$(gettext 'Change GNOME')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] [-\
-b|--addbef FAVORITE]
+declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] \
+[-b|--addbef FAVORITE]
                 [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
                 \$OPTIONS_USAGE")"
 
-declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are m\
-andatory for short options too.")
+declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+mandatory for short options too.")
 
 $(gettext '  -a, --addaft FAVORITE
                  add FAVORITE at the end')
@@ -66,22 +66,22 @@ declare OPTION_RESET=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]
+        ) || PARSED_RC=$?
+    if [[ $PARSED_RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -199,16 +199,16 @@ function process_input {
 
 # This function adds a favorite to the end of the dash/dock.
 function process_OPTION_ADDAFT  {
-    local favorite_apps=''
+    local FAVORITE_APPS=''
 
-    favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
-    if [[ $favorite_apps = '@as []' ]]
+    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+    if [[ $FAVORITE_APPS = '@as []' ]]
     then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$DESKTOPFILE"
+    elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet --regexp="$DESKTOPFILE"
     then
         gsettings set org.gnome.shell favorite-apps "$(
-            printf '%s' "$favorite_apps" |
+            printf '%s' "$FAVORITE_APPS" |
             cut --delimiter=']' --fields=1
             ), '$DESKTOPFILE']"
     fi
@@ -217,16 +217,16 @@ function process_OPTION_ADDAFT  {
 
 # This function adds a favorite to the beginning of the dash/dock.
 function process_OPTION_ADDBEF  {
-    local favorite_apps=''
+    local FAVORITE_APPS=''
 
-    favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
-    if [[ $favorite_apps = '@as []' ]]
+    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+    if [[ $FAVORITE_APPS = '@as []' ]]
     then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$favorite_apps" | grep --quiet --regexp="$DESKTOPFILE"
+    elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet --regexp="$DESKTOPFILE"
     then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE', $(
-                printf '%s' "$favorite_apps" | cut --delimiter='[' --fields=2
+                printf '%s' "$FAVORITE_APPS" | cut --delimiter='[' --fields=2
                 )"
     fi
 }
@@ -234,18 +234,18 @@ function process_OPTION_ADDBEF  {
 
 # This function removes a favorite from the dash/dock.
 function process_OPTION_DELETE  {
-    local favorite_apps=''
+    local FAVORITE_APPS=''
 
-    favorite_apps=$(gsettings get org.gnome.shell favorite-apps)
-    if [[ $favorite_apps = '@as []' ]]
+    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+    if [[ $FAVORITE_APPS = '@as []' ]]
     then
         :
-    elif [[ $favorite_apps = [$DESKTOPFILE] ]]
+    elif [[ $FAVORITE_APPS = [$DESKTOPFILE] ]]
     then
         gsettings set org.gnome.shell favorite-apps "[]"
     else
         gsettings set org.gnome.shell favorite-apps "$(
-            printf  '%s' "$favorite_apps"                   |
+            printf  '%s' "$FAVORITE_APPS"                   |
             sed     --expression="s/'$DESKTOPFILE', //g"    |
             sed     --expression="s/, '$DESKTOPFILE'//"
         )"
@@ -269,49 +269,49 @@ function process_OPTION_RESET  {
 
 # This function records a change made through the GNOME desktop environment.
 function capture_gnome_changes {
-    local config_a_file=''
-    local config_b_file=''
+    local CONFIG_A_FILE=''
+    local CONFIG_B_FILE=''
 
-    config_a_file=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
-    save_configuration_database A "$config_a_file"
+    CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
+    save_configuration_database A "$CONFIG_A_FILE"
     TEXT=$(gettext 'Now make the change in the desktop environment.')
     infomsg "$TEXT"
     wait_for_enter
-    config_b_file=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
-    save_configuration_database B "$config_b_file"
-    report_database_changes "$config_a_file" "$config_b_file"
-    rm --verbose "$config_a_file" "$config_b_file" |& $LOGCMD
+    CONFIG_B_FILE=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
+    save_configuration_database B "$CONFIG_B_FILE"
+    report_database_changes "$CONFIG_A_FILE" "$CONFIG_B_FILE"
+    rm --verbose "$CONFIG_A_FILE" "$CONFIG_B_FILE" |& $LOGCMD
 }
 
 
 # This function stores the GNOME configuration database.
 function save_configuration_database {
     # shellcheck disable=SC2034
-    local fase=${1:-unknown}
-    local output_file=${2:-unknown}
+    local FASE=${1:-unknown}
+    local OUTPUT_FILE=${2:-unknown}
 
-    gsettings list-recursively > "$output_file" 2> >($LOGCMD)
+    gsettings list-recursively > "$OUTPUT_FILE" 2> >($LOGCMD)
 
     sort    --unique                \
-            --output="$output_file" \
-            "$output_file"
+            --output="$OUTPUT_FILE" \
+            "$OUTPUT_FILE"
 
-    TEXT=$(eval_gettext "Config database content captured (\$fase).")
+    TEXT=$(eval_gettext "Config database content captured (\$FASE).")
     infomsg "$TEXT"
 }
 
 
 # This function reports the changes to the GNOME configuration database.
 function report_database_changes {
-    local output_file_1=${1:-unknown}
-    local output_file_2=${2:-unknown}
+    local OUTPUT_FILE_1=${1:-unknown}
+    local OUTPUT_FILE_2=${2:-unknown}
 
     TEXT="\n$(gettext "CHANGEs in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
 "
     TEXT+=$(
-        diff "$output_file_1" "$output_file_2" | grep --regexp='[>|<]' || true
+        diff "$OUTPUT_FILE_1" "$OUTPUT_FILE_2" | grep --regexp='[>|<]' || true
         )
     TEXT+="\n\n$(gettext 'When CHANGEs execute: gsettings set CHANGE')"
     infomsg "$TEXT"

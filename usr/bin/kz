@@ -29,8 +29,8 @@ declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE
 
 declare X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND [ARGUM\
-ENT...]")
+declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND \
+[ARGUMENT...]")
 
 $PROGRAM_DESC.
 
@@ -52,8 +52,8 @@ declare X_OPTIONS_LONG=',list'
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
     if [[ -z $* ]]
     then
@@ -63,19 +63,19 @@ function check_input {
 
     if [[ $1 == -* ]]
     then
-        parsed=$(
+        PARSED=$(
             getopt  --alternative                                       \
                     --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                     --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                     --name          "$DISPLAY_NAME"                     \
                     --              "$@"
-            ) || parsed_rc=$?
-        if [[ $parsed_rc -ne $OK ]]
+            ) || PARSED_RC=$?
+        if [[ $PARSED_RC -ne $OK ]]
         then
             infomsg "$USAGE"
             exit $ERROR
         fi
-        eval set -- "$parsed"
+        eval set -- "$PARSED"
 
         process_options   "$@"
         process_x_options "$@"
@@ -133,19 +133,19 @@ $(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
 
 # This function processes the script options and arguments.
 function process_input {
-    local command=$1
+    local COMMAND=$1
 
-    if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$command ]]
+    if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$COMMAND ]]
     then
-        TEXT="$DISPLAY_NAME: $command: $(gettext "command does not exist")
+        TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")
 $USAGE"
         infomsg "$TEXT"
         exit $ERROR
     fi
     shift
-    TEXT="Restart (exec $PROGRAM_PATH/$PROGRAM_NAME-$command $*..."
+    TEXT="Restart (exec $PROGRAM_PATH/$PROGRAM_NAME-$COMMAND $*..."
     logmsg "$TEXT"
-    exec "$PROGRAM_PATH/$PROGRAM_NAME-$command" "$@"
+    exec "$PROGRAM_PATH/$PROGRAM_NAME-$COMMAND" "$@"
 }
 
 

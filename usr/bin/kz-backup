@@ -23,15 +23,15 @@ declare PROGRAM_NAME='kz-backup'
 declare PROGRAM_DESC=$(gettext 'Make backup')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] [-t|--target D\
-IRECTORY]
+declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+[-t|--target DIRECTORY]
                  \$OPTIONS_USAGE")"
 
-declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are m\
-andatory for short options too.")
+declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+mandatory for short options too.")
 
-$(gettext "  -g, --gui      run in graphical mode, requires desktop environmen\
-t")
+$(gettext "  -g, --gui      run in graphical mode, requires desktop \
+environment")
 $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')"
 
@@ -61,22 +61,22 @@ declare USERS=''
 
 # This function handles the script options and arguments.
 function check_input {
-    local    parsed=''
-    local -i parsed_rc=0
+    local    PARSED=''
+    local -i PARSED_RC=0
 
-    parsed=$(
+    PARSED=$(
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || parsed_rc=$?
-    if [[ $parsed_rc -ne $OK ]]
+        ) || PARSED_RC=$?
+    if [[ $PARSED_RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-    eval set -- "$parsed"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -196,8 +196,8 @@ Disconnect media via Files.")"
     fi
     if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]
     then
-        TEXT="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. P\
-lease rename to 'USER@HOST'.")"
+        TEXT="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. \
+Please rename to 'USER@HOST'.")"
         errormsg "$TEXT"
         exit $ERROR
     fi
@@ -206,10 +206,10 @@ lease rename to 'USER@HOST'.")"
 
 # This function backups the user settings.
 function backup_settings {
-    local settings_dir="$HOME/$PROGRAM_NAME"
+    local SETTINGS_DIR="$HOME/$PROGRAM_NAME"
 
     $OPTION_GUI || infomsg "$(gettext 'Secure settings...')"
-    [[ -d $settings_dir ]] || mkdir --verbose "$settings_dir" |& $LOGCMD
+    [[ -d $SETTINGS_DIR ]] || mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
     backup_setting_readme
     backup_setting_apps
     backup_setting_users
@@ -224,7 +224,7 @@ function backup_settings {
 
 # This function creates a README.
 function backup_setting_readme {
-    local output_file="$settings_dir"/README
+    local OUTPUT_FILE="$SETTINGS_DIR"/README
 
     logmsg 'Create settings README...'
     TEXT="$(gettext "This folder contains files created by kz-backup.
@@ -233,36 +233,36 @@ These files are used by kz-restore and others.
 Further reading:")
     man:kz-backup(1)
     man:kz-restore(1)"
-    printf '%s\n' "$TEXT" > "$output_file"
-    touch "$output_file"
+    printf '%s\n' "$TEXT" > "$OUTPUT_FILE"
+    touch "$OUTPUT_FILE"
 }
 
 
 # This function creates a list of installed apps.
 function backup_setting_apps {
-    local output_file="$settings_dir"/apps.txt
-    local header1=$(gettext "==== START list of manual installed packages ====\
-")
-    local footer1=$(gettext '==== END list of manual installed packages ====')
-    local header2=$(gettext '==== START list of installed snaps ====')
-    local footer2=$(gettext '==== END list of installed snaps ====')
+    local OUTPUT_FILE="$SETTINGS_DIR"/apps.txt
+    local HEADER1=$(gettext "==== START list of manual installed packages \
+====")
+    local FOOTER1=$(gettext '==== END list of manual installed packages ====')
+    local HEADER2=$(gettext '==== START list of installed snaps ====')
+    local FOOTER2=$(gettext '==== END list of installed snaps ====')
 
     logmsg 'Create a list of installed apps...(ignore WARNING).'
 
-    printf '%s\n' "$header1" > "$output_file"
-    apt list --manual-installed 2> >($LOGCMD) >> "$output_file" || true
-    printf '%s\n' "$footer1" >> "$output_file"
+    printf '%s\n' "$HEADER1" > "$OUTPUT_FILE"
+    apt list --manual-installed 2> >($LOGCMD) >> "$OUTPUT_FILE" || true
+    printf '%s\n' "$FOOTER1" >> "$OUTPUT_FILE"
 
-    printf '\n%s\n' "$header2" >> "$output_file"
-    snap list 2> >($LOGCMD) >> "$output_file" ||
-        printf '%s\n' "$(gettext 'snap is not installed')" >> "$output_file"
-    printf '%s\n' "$footer2" >> "$output_file"
+    printf '\n%s\n' "$HEADER2" >> "$OUTPUT_FILE"
+    snap list 2> >($LOGCMD) >> "$OUTPUT_FILE" ||
+        printf '%s\n' "$(gettext 'snap is not installed')" >> "$OUTPUT_FILE"
+    printf '%s\n' "$FOOTER2" >> "$OUTPUT_FILE"
 }
 
 
 # This function saves instructions for adding additional users.
 function backup_setting_users {
-    local output_file="$settings_dir"/users.txt
+    local OUTPUT_FILE="$SETTINGS_DIR"/users.txt
 
     USERS=$(
             gettext '_username_|UID|_user_'
@@ -287,13 +287,13 @@ function backup_setting_users {
     if $DESKTOP_ENVIRONMENT
     then
         TEXT="$(gettext 'Additional _user_s can be added manually:')
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings on\
- Users.
+$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
+on Users.
 2. Click on Unlock and then Add User.
 3. Enter Name _user_ and Username _username_.
 
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
+(Chromebook).")
 
 $USERS"
     else
@@ -307,22 +307,22 @@ sudo passwd --delete --expire _username_")
 
 $USERS"
     fi
-    printf '%b\n' "$TEXT" > "$output_file"
+    printf '%b\n' "$TEXT" > "$OUTPUT_FILE"
 }
 
 
 # This function copies the user avatar and saves instructions for restoring, if
 # possible.
 function backup_setting_avatar {
-    local input_file=/var/lib/AccountsService/icons/"$USER"
-    local output_file_1="$settings_dir"/avatar
-    local output_file_2="$settings_dir"/avatar.txt
+    local INPUT_FILE=/var/lib/AccountsService/icons/"$USER"
+    local OUTPUT_FILE_1="$SETTINGS_DIR"/avatar
+    local OUTPUT_FILE_2="$SETTINGS_DIR"/avatar.txt
 
-    if [[ -e $input_file ]]
+    if [[ -e $INPUT_FILE ]]
     then
         logmsg 'Copy the user avatar...'
-        cp --preserve --verbose "$input_file" "$output_file_1" |& $LOGCMD
-        touch "$output_file_1"
+        cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD
+        touch "$OUTPUT_FILE_1"
     fi
     logmsg 'Save restore the avatar instructions...'
     TEXT="$(gettext "To restore the users avatar:
@@ -331,34 +331,34 @@ function backup_setting_avatar {
 3. Click Select a file.
 4. Select avatar in Personal folder / kz, or another picture file.
 
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-    printf '%s\n' "$TEXT" > "$output_file_2"
-    touch "$output_file_2"
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
+(Chromebook).")"
+    printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
+    touch "$OUTPUT_FILE_2"
 }
 
 
 # This function copies the desktop background, if available, and saves
 # instructions for setting desktop background.
 function backup_setting_desktop {
-    local input_file=$(
+    local INPUT_FILE=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed --expression='s|%20| |g'                            |
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    local output_file_1="$settings_dir"/desktop
-    local output_file_2="$settings_dir"/desktop.txt
+    local OUTPUT_FILE_1="$SETTINGS_DIR"/desktop
+    local OUTPUT_FILE_2="$SETTINGS_DIR"/desktop.txt
 
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
-    if [[ -e $input_file && $input_file != *.xml ]]
+    if [[ -e $INPUT_FILE && $INPUT_FILE != *.xml ]]
     then
         logmsg 'Copy the desktop background...'
-        cp --preserve --verbose "$input_file" "$output_file_1" |& $LOGCMD ||
+        cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD ||
             true
-        touch "$output_file_1"
+        touch "$OUTPUT_FILE_1"
     fi
     logmsg 'Save set the desktop background instructions...'
     TEXT="$(gettext "To set the desktop background:
@@ -366,33 +366,33 @@ function backup_setting_desktop {
 2. Open the folder containing the desired image.
 3. Right-click on the desired image and choose Set as Background.
 
-[1] The Super key is the Windows key, Command key (Apple), or Magnifier key (C\
-hromebook).")"
-    printf '%s\n' "$TEXT" > "$output_file_2"
-    touch "$output_file_2"
+[1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
+(Chromebook).")"
+    printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
+    touch "$OUTPUT_FILE_2"
 }
 
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favs {
-    local output_file="$settings_dir"/favs.txt
+    local OUTPUT_FILE="$SETTINGS_DIR"/favs.txt
 
     logmsg 'Save the favorite apps...'
     gsettings get                           \
-              org.gnome.shell favorite-apps > "$output_file" |& $LOGCMD || true
+              org.gnome.shell favorite-apps > "$OUTPUT_FILE" |& $LOGCMD || true
 }
 
 
 # This function creates the backup.
 function create_backup {
-    local    error_file=''
-    local    exclude_file=$HOME/$PROGRAM_NAME
-    local    rsync_messages=''
-    local -i backup_rc=0
+    local    ERROR_FILE=''
+    local    EXCLUDE_FILE=$HOME/$PROGRAM_NAME
+    local    RSYNC_MESSAGES=''
+    local -i BACKUP_RC=0
 
-    error_file=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
-    exclude_file=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
-    cat << EOF > "$exclude_file"
+    ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
+    cat << EOF > "$EXCLUDE_FILE"
 # Some locations are ignored by GNOME Backups by default.
 .cache
 .ccache
@@ -405,7 +405,7 @@ snap/*/*/.cache
 *CACHEDIR.TAG*
 EOF
 
-    cat << EOF >> "$exclude_file"
+    cat << EOF >> "$EXCLUDE_FILE"
 # Skip Git-managed directories.
 $(
     find    "$HOME"         \
@@ -427,11 +427,11 @@ EOF
         rsync   --archive                       \
                 --verbose                       \
                 --delete                        \
-                --exclude-from="$exclude_file"  \
+                --exclude-from="$EXCLUDE_FILE"  \
                 --delete-excluded               \
                 "$SOURCE"/                      \
                 "$TARGET"/                      \
-                2> "$error_file"                |
+                2> "$ERROR_FILE"                |
         sed     --expression='s/^/#/'           |
         zenity  --progress                      \
                 --auto-close                    \
@@ -440,7 +440,7 @@ EOF
                 --width     600                 \
                 --height    50                  \
                 --title     "$TITLE"            \
-                --text      "$TEXT"             2> >($LOGCMD) || backup_rc=$?
+                --text      "$TEXT"             2> >($LOGCMD) || BACKUP_RC=$?
     else
         TEXT+='...'
         infomsg "$TEXT"
@@ -448,12 +448,13 @@ EOF
                 --verbose                       \
                 --human-readable                \
                 --delete                        \
-                --exclude-from="$exclude_file"  \
+                --exclude-from="$EXCLUDE_FILE"  \
                 --delete-excluded               \
                 "$SOURCE"/                      \
-                "$TARGET"/                     2> "$error_file" || backup_rc=$?
+                "$TARGET"/                      2> "$ERROR_FILE" ||
+                                                    BACKUP_RC=$?
     fi
-    rm --verbose "$exclude_file" |& $LOGCMD
+    rm --verbose "$EXCLUDE_FILE" |& $LOGCMD
 
     TEXT=$(gettext "Writing data from memory (this may take a while)")
     if $OPTION_GUI
@@ -474,18 +475,18 @@ EOF
         infomsg "$TEXT"
         sync |& $LOGCMD
     fi
-    if [[ $backup_rc -ne $OK ]]
+    if [[ $BACKUP_RC -ne $OK ]]
     then
         # shellcheck disable=SC2034
-        rsync_messages=$(cat "$error_file")
+        RSYNC_MESSAGES=$(cat "$ERROR_FILE")
         TEXT="$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while creating the backup, or
 is there not enough space on \$TARGET.
 
-Check the rsync messages (also in \$error_file):
-\$rsync_messages
+Check the rsync messages (also in \$ERROR_FILE):
+\$RSYNC_MESSAGES
 
 Try creating the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
@@ -494,29 +495,29 @@ use app 'Terminal', type 'kz backup'.")"
         errormsg "$TEXT"
         exit $ERROR
     fi
-    rm --verbose "$error_file" |& $LOGCMD
+    rm --verbose "$ERROR_FILE" |& $LOGCMD
 }
 
 
 # This function controls the termination of the script.
 function term_script {
-    local -i unmount_rc=0
-    local    num_users=$(find /home/* -prune -print | wc --lines)
+    local -i UNMOUNT_RC=0
+    local    NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
-    if [[ $num_users -eq 1 ]]
+    if [[ $NUM_USERS -eq 1 ]]
     then
         TEXT=$(gettext "The backup has been made.")
     else
         TEXT="$(eval_gettext "The backup has been made for \$USER (there are \
-\$num_users users).")
+\$NUM_USERS users).")
 
 $USERS"
     fi
 
     if [[ $TARGET_MEDIUM == /media/* ]]
     then
-        term_script_usb || unmount_rc=$?
-        if [[ $unmount_rc -eq $OK ]]
+        term_script_usb || UNMOUNT_RC=$?
+        if [[ $UNMOUNT_RC -eq $OK ]]
         then
             TEXT+="
 
@@ -535,12 +536,12 @@ $(gettext 'Disconnect the USB medium yourself (safely!).')"
 
 # This function tries to unmount the USB device.
 function term_script_usb {
-    local    dev=''
-    local -i rc=0
-    local    text
+    local    DEV=''
+    local -i RC=0
+    local    TEXT
 
-    text=$(gettext 'Disconnect the USB media')
-    dev='/dev/'$(
+    TEXT=$(gettext 'Disconnect the USB media')
+    DEV='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
                 "$TARGET_MEDIUM"    |
@@ -554,7 +555,7 @@ function term_script_usb {
     then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        logmsg "$text..."
+        logmsg "$TEXT..."
         term_script_unmount > >(
             zenity  --progress              \
                     --pulsate               \
@@ -563,23 +564,23 @@ function term_script_usb {
                     --width     600         \
                     --height    50          \
                     --title     "$TITLE"    \
-                    --text      "$text"     \
+                    --text      "$TEXT"     \
                     2> >($LOGCMD)
             )
     else
-        infomsg "$text..."
+        infomsg "$TEXT..."
         term_script_unmount
     fi
 
-    return $rc
+    return $RC
 }
 
 
 # This function unmounts the USB device.
 function term_script_unmount {
-    umount "$TARGET_MEDIUM"                     |& $LOGCMD || rc+=$?
-    udisksctl lock --block-device "$dev"        |& $LOGCMD || rc+=$?
-    udisksctl power-off --block-device "$dev"   |& $LOGCMD || rc+=$?
+    umount "$TARGET_MEDIUM"                     |& $LOGCMD || RC+=$?
+    udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
+    udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
     sleep 3
 }
 

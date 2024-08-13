@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-11 18:30+0200\n"
+"POT-Creation-Date: 2024-08-13 11:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$yelp_man_url for more "
+"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$YELP_MAN_URL for more "
 "information."
 msgstr ""
 
@@ -115,7 +115,7 @@ msgid "Build ID cannot be determined."
 msgstr ""
 
 #, sh-format
-msgid "kz version 4.2.1 (built $build_id)."
+msgid "kz version 4.2.1 (built $BUILD_ID)."
 msgstr ""
 
 #, sh-format
@@ -262,8 +262,8 @@ msgid ""
 "were any files added or removed while creating the backup, or\n"
 "is there not enough space on $TARGET.\n"
 "\n"
-"Check the rsync messages (also in $error_file):\n"
-"$rsync_messages\n"
+"Check the rsync messages (also in $ERROR_FILE):\n"
+"$RSYNC_MESSAGES\n"
 "\n"
 "Try creating the back up again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
@@ -284,7 +284,7 @@ msgid "The backup has been made."
 msgstr ""
 
 #, sh-format
-msgid "The backup has been made for $USER (there are $num_users users)."
+msgid "The backup has been made for $USER (there are $NUM_USERS users)."
 msgstr ""
 
 msgid "Build package kz"
@@ -328,14 +328,14 @@ msgid "Check that all repos are on branch main"
 msgstr ""
 
 #, sh-format
-msgid "Repo $repo not on branch main."
+msgid "Repo $REPO not on branch main."
 msgstr ""
 
 msgid "Check that all repos are clean"
 msgstr ""
 
 #, sh-format
-msgid "Repo $repo is not clean."
+msgid "Repo $REPO is not clean."
 msgstr ""
 
 msgid "Build package and website"
@@ -430,7 +430,7 @@ msgid "Now make the change in the desktop environment."
 msgstr ""
 
 #, sh-format
-msgid "Config database content captured ($fase)."
+msgid "Config database content captured ($FASE)."
 msgstr ""
 
 msgid ""
@@ -527,27 +527,27 @@ msgstr ""
 #, sh-format
 msgid ""
 "The installation of the following apps contains errors:\n"
-"$failed_apps_text\n"
+"$FAILED_APPS_TEXT\n"
 "\n"
 "Try installing the apps again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
 "use app 'Install apps', or\n"
-"use app 'Terminal', type 'kz install $failed_apps_text'."
+"use app 'Terminal', type 'kz install $FAILED_APPS_TEXT'."
 msgstr ""
 
 #, sh-format
 msgid ""
 "The set up of the following apps contains errors:\n"
-"$failed_apps_text\n"
+"$FAILED_APPS_TEXT\n"
 "\n"
 "Try to set up the apps again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
 "use app 'Set up apps', or\n"
-"use app 'Terminal', type 'kz setup $failed_apps_text'."
+"use app 'Terminal', type 'kz setup $FAILED_APPS_TEXT'."
 msgstr ""
 
 #, sh-format
-msgid "Apps $operation completed."
+msgid "Apps $OPERATION completed."
 msgstr ""
 
 msgid ""
@@ -573,7 +573,7 @@ msgid "Unknown script. Function check_code cannot check script code."
 msgstr ""
 
 #, sh-format
-msgid "A line is longer than $max_line_length ($max_line_length_found)."
+msgid "A line is longer than $MAX_LINE_LENGTH ($MAX_LINE_LENGTH_FOUND)."
 msgstr ""
 
 msgid "Faulty line(s) found."
@@ -726,7 +726,7 @@ msgid "No"
 msgstr ""
 
 #, sh-format
-msgid "$prompt [Y/n]: "
+msgid "$PROMPT [Y/n]: "
 msgstr ""
 
 msgid "The following has been executed:"
@@ -788,8 +788,8 @@ msgid ""
 "were any files added or removed while restoring the backup, or\n"
 "is there not enough space on $TARGET.\n"
 "\n"
-"Check the rsync messages (also in $error_file):\n"
-"$rsync_messages\n"
+"Check the rsync messages (also in $ERROR_FILE):\n"
+"$RSYNC_MESSAGES\n"
 "\n"
 "Try restoring the back up again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
@@ -801,7 +801,7 @@ msgid "The backup has been restored."
 msgstr ""
 
 #, sh-format
-msgid "The backup has restored for $USER (there are $num_users users)."
+msgid "The backup has restored for $USER (there are $NUM_USERS users)."
 msgstr ""
 
 #, sh-format
@@ -866,36 +866,36 @@ msgid "No WiFi device found."
 msgstr ""
 
 #, sh-format
-msgid "Script $scriptname returned an error."
+msgid "Script $SCRIPTNAME returned an error."
 msgstr ""
 
 #, sh-format
-msgid "Gettext message catalog template $file not found."
+msgid "Gettext message catalog template $FILE not found."
 msgstr ""
 
 #, sh-format
-msgid "Gettext message catalog $file not found."
+msgid "Gettext message catalog $FILE not found."
 msgstr ""
 
 #, sh-format
-msgid "Message catalog $file not found."
+msgid "Message catalog $FILE not found."
 msgstr ""
 
 #, sh-format
-msgid "Desktop configuration file $dir/$scriptname.desktop not found."
+msgid "Desktop configuration file $DIR/$SCRIPTNAME.desktop not found."
 msgstr ""
 
 #, sh-format
-msgid "Tab completion script $dir/$scriptname not found."
+msgid "Tab completion script $DIR/$SCRIPTNAME not found."
 msgstr ""
 
 #, sh-format
-msgid "Manual $dir/$scriptname.1 not found."
+msgid "Manual $DIR/$SCRIPTNAME.1 not found."
 msgstr ""
 
 #, sh-format
 msgid ""
-"PolicyKit action definition file $dir/nl.karelzimmer.$scriptname.policy not "
+"PolicyKit action definition file $DIR/nl.karelzimmer.$SCRIPTNAME.policy not "
 "found."
 msgstr ""
 
@@ -1014,7 +1014,7 @@ msgid "Notification"
 msgstr ""
 
 #, sh-format
-msgid "$quest1 [y/N]: "
+msgid "$QUEST1 [y/N]: "
 msgstr ""
 
 msgid "Questions"
