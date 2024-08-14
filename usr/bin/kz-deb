@@ -18,12 +18,12 @@ echo    "Source kz_common.sh..." |&
 if ! source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
             systemd-cat --identifier=kz-deb --priority=debug)
 then
-    echo    'Download kz_common.sh...' |&
-            systemd-cat --identifier=kz-deb --priority=debug
     declare KZ_COMMON_FILE
             KZ_COMMON_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     declare KZ_COMMON_GITHUB_URI='https://raw.githubusercontent.com/karel'
             KZ_COMMON_GITHUB_URI+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
+    echo    'Download kz_common.sh...' |&
+            systemd-cat --identifier=kz-deb --priority=debug
     wget    --output-document="$KZ_COMMON_FILE" $KZ_COMMON_GITHUB_URI |&
             systemd-cat --identifier=kz-deb --priority=debug
     echo    'Source kz_common.sh...' |&
