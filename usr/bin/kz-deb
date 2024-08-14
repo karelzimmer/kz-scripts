@@ -12,17 +12,16 @@
 # Imports
 ###############################################################################
 
-# On a server, $0 is reported as '-bash' (login shell), so remove '-'.
-declare PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")")
-echo    "Try sourcing $PROGRAM_PATH/kz_common.sh" |&
+echo    "Source kz_common.sh..." |&
         systemd-cat --identifier=kz-deb --priority=debug
-if ! source "$PROGRAM_PATH"/kz_common.sh 2> >(
+# On a server, $0 is reported as '-bash' (login shell), so remove '-'.
+if ! source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
             systemd-cat --identifier=kz-deb --priority=debug)
 then
     echo    'Download kz_common.sh...' |&
             systemd-cat --identifier=kz-deb --priority=debug
     declare KZ_COMMON_FILE
-            KZ_COMMON_FILE=$(mktemp -t "kz-deb-kz_common-XXXXXXXXXX.sh")
+            KZ_COMMON_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     declare KZ_COMMON_GITHUB_URI='https://raw.githubusercontent.com/karel'
             KZ_COMMON_GITHUB_URI+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
     wget    --output-document="$KZ_COMMON_FILE" $KZ_COMMON_GITHUB_URI |&
@@ -31,6 +30,8 @@ then
             systemd-cat --identifier=kz-deb --priority=debug
     source  "$KZ_COMMON_FILE" 2> >(
             systemd-cat --identifier=kz-deb --priority=debug)
+    echo    'Remove kz_common.sh...' |&
+            systemd-cat --identifier=kz-deb --priority=debug
     rm      --verbose "$KZ_COMMON_FILE" |&
             systemd-cat --identifier=kz-deb --priority=debug
 fi
@@ -139,7 +140,7 @@ function download_package {
     local KZ_DEB_SITE_FILE=kz_4.2.1_all.deb
     local KZ_DEB_SITE_URI='https://karelzimmer.nl/assets/kz-deb/'
 
-    logmsg 'Download kz deb...'
+    logmsg 'Download package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$KZ_DEB_SITE_URI/$KZ_DEB_SITE_FILE"    |& $LOGCMD
 }
@@ -149,7 +150,7 @@ function download_package {
 function install_package {
     local INSTALL_SUGGESTS=''
 
-    logmsg 'Install kz deb...'
+    logmsg 'Install package kz...'
     if $DESKTOP_ENVIRONMENT
     then
         INSTALL_SUGGESTS='--install-suggests'
