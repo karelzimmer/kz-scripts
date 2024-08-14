@@ -25,7 +25,8 @@ source /usr/bin/gettext.sh
 declare MODULE_NAME='kz_common.sh'
 declare MODULE_DESC=$(gettext 'Common module for shell scripts')
 
-declare PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")") # On server $0='-bash'
+# On a server, $0 is reported as '-bash' (login shell), so remove '-'.
+declare PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")")
 
 declare OK=0
 declare ERROR=1

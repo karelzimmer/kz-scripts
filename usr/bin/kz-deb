@@ -13,22 +13,25 @@
 ###############################################################################
 
 # On a server, $0 is reported as '-bash' (login shell), so remove '-'.
-if ! source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
+declare PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")")
+echo    "Try sourcing $PROGRAM_PATH/kz_common.sh" |&
+        systemd-cat --identifier=kz-deb --priority=debug
+if ! source "$PROGRAM_PATH"/kz_common.sh 2> >(
             systemd-cat --identifier=kz-deb --priority=debug)
 then
     echo    'Download kz_common.sh...' |&
             systemd-cat --identifier=kz-deb --priority=debug
-    declare kz_common_file
-            kz_common_file=$(mktemp -t "kz-deb-kz_common-XXXXXXXXXX.sh")
-    declare kz_common_github_uri='https://raw.githubusercontent.com/karel'
-            kz_common_github_uri+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
-    wget    --output-document="$kz_common_file" $kz_common_github_uri |&
+    declare KZ_COMMON_FILE
+            KZ_COMMON_FILE=$(mktemp -t "kz-deb-kz_common-XXXXXXXXXX.sh")
+    declare KZ_COMMON_GITHUB_URI='https://raw.githubusercontent.com/karel'
+            KZ_COMMON_GITHUB_URI+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
+    wget    --output-document="$KZ_COMMON_FILE" $KZ_COMMON_GITHUB_URI |&
             systemd-cat --identifier=kz-deb --priority=debug
     echo    'Source kz_common.sh...' |&
             systemd-cat --identifier=kz-deb --priority=debug
-    source  "$kz_common_file" 2> >(
+    source  "$KZ_COMMON_FILE" 2> >(
             systemd-cat --identifier=kz-deb --priority=debug)
-    rm      --verbose "$kz_common_file" |&
+    rm      --verbose "$KZ_COMMON_FILE" |&
             systemd-cat --identifier=kz-deb --priority=debug
 fi
 
