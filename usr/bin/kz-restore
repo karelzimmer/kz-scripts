@@ -216,6 +216,8 @@ function restore_backup {
     then
         logmsg "$TITLE"...
         rsync   --archive               \
+                --acls                  \
+                --xattrs                \
                 --verbose               \
                 "$SOURCE"/              \
                 "$TARGET"/              \
@@ -233,6 +235,8 @@ function restore_backup {
         TEXT+='...'
         infomsg "$TEXT"
         rsync   --archive               \
+                --acls                  \
+                --xattrs                \
                 --verbose               \
                 --human-readable        \
                 "$SOURCE"/              \
@@ -333,7 +337,7 @@ $(gettext 'The USB medium can be removed.')"
         else
             TEXT+="
 
-$(gettext 'Disconnect the USB medium yourself (safely!).')"
+$(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
     fi
     infomsg "$TEXT"

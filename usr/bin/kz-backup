@@ -425,6 +425,8 @@ EOF
     then
         logmsg "$TITLE..."
         rsync   --archive                       \
+                --acls                          \
+                --xattrs                        \
                 --verbose                       \
                 --delete                        \
                 --exclude-from="$EXCLUDE_FILE"  \
@@ -445,6 +447,8 @@ EOF
         TEXT+='...'
         infomsg "$TEXT"
         rsync   --archive                       \
+                --acls                          \
+                --xattrs                        \
                 --verbose                       \
                 --human-readable                \
                 --delete                        \
@@ -525,7 +529,7 @@ $(gettext 'The USB medium can be removed.')"
         else
             TEXT+="
 
-$(gettext 'Disconnect the USB medium yourself (safely!).')"
+$(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
     fi
     infomsg "$TEXT"
