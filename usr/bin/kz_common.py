@@ -10,7 +10,7 @@ This module provides global variables and functions.
 
 
 ###############################################################################
-# Imports
+# Imports/exports
 ###############################################################################
 
 import argparse
