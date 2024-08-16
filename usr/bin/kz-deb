@@ -162,7 +162,7 @@ function install_package {
             $INSTALL_SUGGESTS               \
             --yes                           \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
-    logmsg 'Cleanup...'
+    logmsg 'Delete kz deb file...'
     rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
 }
 
@@ -193,7 +193,7 @@ function install_package_xz {
             $INSTALL_SUGGESTS                       \
             --yes                                   \
             "$kz_deb_local_file_xz"                 |& $LOGCMD
-    logmsg 'Cleanup...'
+    logmsg 'Delete kz deb xz file...'
     rm       --verbose                              \
             /tmp/debian-binary                      \
             /tmp/control.tar.xz                     \
@@ -219,7 +219,7 @@ Linux.")
 $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "\n$TEXT"
-    logmsg "Cleanup kz deb files ($PROGRAM_NAME)..."
+    logmsg "Delete kz deb files ($PROGRAM_NAME)..."
     rm --force --verbose deb deb.{1..99} |& $LOGCMD
     exit $OK
 }
