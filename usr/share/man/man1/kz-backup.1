@@ -24,7 +24,8 @@ In a desktop environment command \fBkz backup\fR can be executed by
 searching for \fBback\fR, click on \fBMake backup\fR.
 .sp
 Before a backup is made, if possible, the set desktop background, user picture,
-and favorites are saved. See \fBFILES\fR section below for the exact location.
+favorites, and WiFi information are saved. See \fBFILES\fR section below for
+the exact location.
 .sp
 The backup is placed on a mounted USB medium such as a USB external hard disk
 in folder \fB<user_name>@<computer name>\fR, this folder is created as needed,
@@ -93,39 +94,44 @@ equal to 0.
 List of excluded files and directories.
 .RE
 .sp
-~/kz-backup.d/apps.txt
+~/kz-backup/apps.txt
 .RS
 List of installed apps. For checking installation.
 .RE
 .sp
-~/kz-backup.d/avatar
+~/kz-backup/avatar
 .RS
 Backup of user avatar, if available.
 .RE
 .sp
-~/kz-backup.d/avatar.txt
+~/kz-backup/avatar.txt
 .RS
 Instructions for restoring the user avatar, if available.
 .RE
 .sp
-~/kz-backup.d/desktop
+~/kz-backup/desktop
 .RS
 Backup of desktop background, if available.
 .RE
 .sp
-~/kz-backup.d/desktop.txt
+~/kz-backup/desktop.txt
 .RS
 Instructions for restoring the desktop background, if available.
 .RE
 .sp
-~/kz-backup.d/favs.txt
+~/kz-backup/favs.txt
 .RS
 Set favorites in the favorites bar (dash/dock). For checking set up.
 .RE
 .sp
-~/kz-backup.d/users.txt
+~/kz-backup/users.txt
 .RS
 Instructions for adding additional users.
+.RE
+.sp
+~/kz-backup/wifi.txt
+.RS
+Saved WiFi information.
 .RE
 .\"
 .\"

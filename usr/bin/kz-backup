@@ -218,6 +218,7 @@ function backup_settings {
         backup_setting_avatar
         backup_setting_desktop
         backup_setting_favs
+        backup_setting_wifi
     fi
 }
 
@@ -380,6 +381,15 @@ function backup_setting_favs {
     logmsg 'Save the favorite apps...'
     gsettings get                           \
               org.gnome.shell favorite-apps > "$OUTPUT_FILE" |& $LOGCMD || true
+}
+
+
+# This function saves the WiFi information.
+function backup_setting_wifi {
+    local OUTPUT_FILE="$SETTINGS_DIR"/wifi.txt
+
+    logmsg 'Save the WiFi information...'
+    kz-wifi > "$OUTPUT_FILE"
 }
 
 
