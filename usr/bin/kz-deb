@@ -28,7 +28,8 @@ then
     if  !   wget --output-document="$KZ_COMMON_FILE" $KZ_COMMON_GITHUB_URI |&
             systemd-cat --identifier=kz-deb --priority=debug
     then
-        echo    'Internet?'
+        echo    'Internet?' | tee >(
+                systemd-cat --identifier=kz-deb --priority=debug)
         echo    'Remove deb & kz_common.sh...' |&
                 systemd-cat --identifier=kz-deb --priority=debug
         rm      --verbose deb "$KZ_COMMON_FILE" |&
