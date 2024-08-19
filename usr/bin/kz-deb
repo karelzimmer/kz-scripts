@@ -12,15 +12,38 @@
 # Imports
 ###############################################################################
 
+echo    "Source kz_common.sh..." |&
+        systemd-cat --identifier=kz-deb --priority=debug
 # On a server, $0 is reported as '-bash' (login shell), so remove '-'.
-if ! source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> /dev/null
+if  !   source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
+        systemd-cat --identifier=kz-deb --priority=debug)
 then
-    declare KZ_COMMON_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
+    declare KZ_COMMON_FILE
+            KZ_COMMON_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     declare KZ_COMMON_GITHUB_URI='https://raw.githubusercontent.com/karel'
             KZ_COMMON_GITHUB_URI+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
-    wget    --output-document="$KZ_COMMON_FILE" $KZ_COMMON_GITHUB_URI
-    source  "$KZ_COMMON_FILE"
-    rm      "$KZ_COMMON_FILE"
+    echo    'Download kz_common.sh...' |&
+            systemd-cat --identifier=kz-deb --priority=debug
+    set     -o pipefail
+    if  !   wget --output-document="$KZ_COMMON_FILE" $KZ_COMMON_GITHUB_URI |&
+            systemd-cat --identifier=kz-deb --priority=debug
+    then
+        echo    'Internet?' | tee >(
+                systemd-cat --identifier=kz-deb --priority=debug)
+        echo    'Remove deb & kz_common.sh...' |&
+                systemd-cat --identifier=kz-deb --priority=debug
+        rm      --verbose deb "$KZ_COMMON_FILE" |&
+                systemd-cat --identifier=kz-deb --priority=debug
+        exit    1
+    fi
+    echo    'Source kz_common.sh...' |&
+            systemd-cat --identifier=kz-deb --priority=debug
+    source  "$KZ_COMMON_FILE" 2> >(
+            systemd-cat --identifier=kz-deb --priority=debug)
+    echo    'Remove kz_common.sh...' |&
+            systemd-cat --identifier=kz-deb --priority=debug
+    rm      --verbose "$KZ_COMMON_FILE" |&
+            systemd-cat --identifier=kz-deb --priority=debug
 fi
 
 
@@ -101,10 +124,25 @@ $USAGE"
 function process_input {
     become_root_check || exit $OK
     check_on_ac_power
+    prepare_processing
     download_package
     install_package
 }
 
+
+# This function prepares further processing.
+function prepare_processing {
+    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    sudo true
+    # Progress indicator with growing number of '#'s as long as the local
+    # Debian package file exists, i.e. installation is in progress. If all
+    # fails, kz_common.sh will delete the local Debian package file on exit.
+    while test -e "$KZ_DEB_LOCAL_FILE"
+    do
+        printf '#'
+        sleep 1
+    done &
+}
 
 
 # This function downloads package kz.
@@ -112,10 +150,9 @@ function download_package {
     local KZ_DEB_SITE_FILE=kz_4.2.1_all.deb
     local KZ_DEB_SITE_URI='https://karelzimmer.nl/assets/kz-deb/'
 
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
-    chmod o+r "$KZ_DEB_LOCAL_FILE"
-    wget    --output-document="$KZ_DEB_LOCAL_FILE" \
-            "$KZ_DEB_SITE_URI/$KZ_DEB_SITE_FILE"
+    logmsg 'Download package kz...'
+    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
+            "$KZ_DEB_SITE_URI/$KZ_DEB_SITE_FILE"    |& $LOGCMD
 }
 
 
@@ -123,48 +160,57 @@ function download_package {
 function install_package {
     local INSTALL_SUGGESTS=''
 
+    logmsg 'Install package kz...'
     if $DESKTOP_ENVIRONMENT
     then
         INSTALL_SUGGESTS='--install-suggests'
     fi
-    check_package_manager
+    check_package_manager |& $LOGCMD
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
             $INSTALL_SUGGESTS               \
             --yes                           \
-            "$KZ_DEB_LOCAL_FILE"            || install_package_xz
-    rm      "$KZ_DEB_LOCAL_FILE"
+            "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
+    logmsg 'Delete kz deb file...'
+    rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
 }
 
 
-# This function installs repackaged kz (for Debian 11).
+# This function installs repackaged kz.
 function install_package_xz {
+    logmsg 'Try installing package kz that uses xz by repackaging it.'
     local kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
-
-    sudo    apt-get install --yes binutils zstd
-    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"
-    zstd    --uncompress < /tmp/control.tar.zst |
-    xz      --compress   > /tmp/control.tar.xz
-    zstd    --uncompress < /tmp/data.tar.zst    |
-    xz      --compress   > /tmp/data.tar.xz
-    ar      -mcav sdsd                          \
-            "$kz_deb_local_file_xz"             \
-            /tmp/debian-binary                  \
-            /tmp/control.tar.xz                 \
-            /tmp/data.tar.xz
-    sudo    DEBIAN_FRONTEND=noninteractive      \
-            apt-get                             \
-            reinstall                           \
-            $INSTALL_SUGGESTS                   \
-            --yes                               \
-            "$kz_deb_local_file_xz"
-    rm      /tmp/debian-binary                  \
-            /tmp/control.tar.xz                 \
-            /tmp/data.tar.xz                    \
-            /tmp/control.tar.zst                \
-            /tmp/data.tar.zst                   \
-            "$kz_deb_local_file_xz"
+    logmsg 'Install required packages...'
+    sudo    apt-get install --yes binutils zstd     |& $LOGCMD
+    logmsg 'Extract files from the archive...'
+    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"  |& $LOGCMD
+    logmsg 'Uncompress zstd files an re-compress them using xz...'
+    zstd    --uncompress < /tmp/control.tar.zst     |
+    xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
+    zstd    --uncompress < /tmp/data.tar.zst        |
+    xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
+    logmsg 'Re-create the package...'
+    ar      -mcav sdsd                              \
+            "$kz_deb_local_file_xz"                 \
+            /tmp/debian-binary                      \
+            /tmp/control.tar.xz                     \
+            /tmp/data.tar.xz                        |& $LOGCMD
+    logmsg "Install the package..."
+    sudo    DEBIAN_FRONTEND=noninteractive          \
+            apt-get                                 \
+            reinstall                               \
+            $INSTALL_SUGGESTS                       \
+            --yes                                   \
+            "$kz_deb_local_file_xz"                 |& $LOGCMD
+    logmsg 'Delete kz deb xz file...'
+    rm       --verbose                              \
+            /tmp/debian-binary                      \
+            /tmp/control.tar.xz                     \
+            /tmp/data.tar.xz                        \
+            /tmp/control.tar.zst                    \
+            /tmp/data.tar.zst                       \
+            "$kz_deb_local_file_xz"                 |& $LOGCMD
 }
 
 
@@ -183,7 +229,7 @@ Linux.")
 $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "\n$TEXT"
-    logmsg "Delete deb files ($PROGRAM_NAME)..."
+    logmsg "Delete kz deb files ($PROGRAM_NAME)..."
     rm --force --verbose deb deb.{1..99} |& $LOGCMD
     exit $OK
 }

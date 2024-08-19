@@ -60,6 +60,7 @@ else
 fi
 
 declare ERREXIT=true
+declare KZ_DEB_LOCAL_FILE=''
 declare OPTION_GUI=false
 declare TEXT=''
 declare TITLE=''
@@ -385,11 +386,12 @@ or.")
             fi
             ;;
         exit )
-            logmsg "Delete deb files ($MODULE_NAME)..."
+            logmsg "Delete kz deb files ($MODULE_NAME)..."
             rm  --force                 \
                 --verbose               \
                 deb                     \
-                deb.{1..99}             |& $LOGCMD
+                deb.{1..99}             \
+                "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
             TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
