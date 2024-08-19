@@ -22,6 +22,12 @@ kz-update \- Systeem bijwerken
 .sp
 Voert achtereenvolgens repareren, bijwerken, en opruimen uit.
 Melding "reboot" geven als bestand /var/run/reboot-required bestaat.
+.sp
+Als om een of andere reden een nieuwe kernel moet worden gebouwd, voer dan 'su\
+do update-initramfs -u' uit.
+De noodzaak om deze opdracht handmatig uit te voeren is alleen onder zeer
+ongebruikelijke omstandigheden - een post-installatiescript zal het automatisch
+afhandelen wanneer een nieuw kernelpakket wordt geïnstalleerd.
 .RE
 .\"
 .\"
