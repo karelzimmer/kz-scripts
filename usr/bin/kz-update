@@ -68,7 +68,7 @@ def perform_repair():
     COMMAND = 'sudo apt-get install --fix-broken'
     perform_command(COMMAND)
 
-    COMMAND = '# sudo update-initramfs -u'
+    COMMAND = 'sudo update-initramfs -u'
     perform_command(COMMAND)
 
 
