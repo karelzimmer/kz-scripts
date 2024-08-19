@@ -140,7 +140,7 @@ function prepare_processing {
     printf '['
     while test -e "$KZ_DEB_LOCAL_FILE"
     do
-        printf '='
+        printf '%s' '='
         sleep 1
     done &
 }
@@ -174,7 +174,7 @@ function install_package {
             --yes                           \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
     logmsg 'Delete kz deb file...'
-    printf '>]'
+    printf '%s\n' '>]100%'
     rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
 }
 
@@ -218,19 +218,20 @@ function install_package_xz {
 
 # This function controls the termination of the script.
 function term_script {
-    TEXT=$(gettext "Package kz has been successfully installed.
+    TEXT="
+$(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under \
-Linux.")
+Linux.")"
     if $DESKTOP_ENVIRONMENT
     then
         TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"
     fi
-    infomsg "\n$TEXT"
+    infomsg "$TEXT"
     logmsg "Delete kz deb files ($PROGRAM_NAME)..."
     rm --force --verbose deb deb.{1..99} |& $LOGCMD
     exit $OK
