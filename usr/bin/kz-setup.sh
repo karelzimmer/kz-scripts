@@ -7,7 +7,7 @@
 ###############################################################################
 # For the format of the records in this file, see the kz setup man page.
 
-# Before executing a command, the variables must be set manually:
+# Before manually executing a command, some variables need to be set first:
 if type gnome-session &> /dev/null; then GNOME=true; else GNOME=false; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then DESKTOP_ENVIRONMENT=true; else DESKTOP_ENVIRONMENT=false; fi
 

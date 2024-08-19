@@ -7,7 +7,7 @@
 ###############################################################################
 # For the format of the records in this file, see the kz install man page.
 
-# Before executing a command, the variables must be set manually:
+# Before manually executing a command, some variables need to be set first:
 if type gnome-session &> /dev/null; then GNOME=true; else GNOME=false; fi
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then DEBIAN=true; else DEBIAN=false; fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then UBUNTU=true; else UBUNTU=false; fi
