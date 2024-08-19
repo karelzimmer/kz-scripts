@@ -203,7 +203,7 @@ function install_package_xz {
             $INSTALL_SUGGESTS                       \
             --yes                                   \
             "$kz_deb_local_file_xz"                 |& $LOGCMD
-    logmsg 'Delete kz deb xz file...'
+    logmsg 'Delete kz deb xz files...'
     rm       --verbose                              \
             /tmp/debian-binary                      \
             /tmp/control.tar.xz                     \
