@@ -92,7 +92,7 @@ def become_root(PROGRAM_NAME):
                 EXEC_SUDO += str(sys.argv[arg_num])
             else:
                 EXEC_SUDO += ' ' + str(sys.argv[arg_num])
-        TEXT = f'restart ({EXEC_SUDO})'
+        TEXT = f'Restart ({EXEC_SUDO})'
         logmsg(PROGRAM_NAME, TEXT)
 
         try:
