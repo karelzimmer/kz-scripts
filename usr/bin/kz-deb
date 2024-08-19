@@ -137,6 +137,7 @@ function prepare_processing {
     # Progress indicator with growing number of '#'s as long as the local
     # Debian package file exists, i.e. installation is in progress. If all
     # fails, kz_common.sh will delete the local Debian package file on exit.
+    printf '['
     while test -e "$KZ_DEB_LOCAL_FILE"
     do
         printf '='
@@ -173,6 +174,7 @@ function install_package {
             --yes                           \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
     logmsg 'Delete kz deb file...'
+    printf '>]'
     rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
 }
 
