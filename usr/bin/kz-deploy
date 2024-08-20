@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Distribute kz package
 #
@@ -20,12 +20,15 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 ###############################################################################
 
 declare PROGRAM_NAME='kz-deploy'
-declare PROGRAM_DESC=$(gettext 'Distribute kz package')
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Distribute kz package')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare USAGE
+        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -45,8 +48,8 @@ declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                       \
@@ -171,10 +174,11 @@ function upload_website {
     local FTP_HOST=server106.hosting2go.nl
     local FTP_USER=kzimmer
     local FTP_LOGIN=$HOME/.$FTP_HOST'.login'
-    local PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
+    local PROMPT
 
     TEXT=$(gettext 'Upload website')...
     infomsg "$TEXT"
+    PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
     if [[ ! -f $FTP_LOGIN ]]
     then
         read -rp "$PROMPT" < /dev/tty

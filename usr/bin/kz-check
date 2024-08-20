@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Check scripts
 #
@@ -20,12 +20,15 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 ###############################################################################
 
 declare PROGRAM_NAME='kz-check'
-declare PROGRAM_DESC=$(gettext 'Check scripts')
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Check scripts')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare USAGE
+        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -41,8 +44,8 @@ declare ERROR_FLAG=false
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                       \
@@ -313,9 +316,9 @@ function check_pycodestyle {
 
 # This function checks on record length.
 function check_record_length {
-    local -i MAX_LINE_LENGTH=79
-    local -i MAX_LINE_LENGTH_FOUND=0
-    local    PYTHON_SCRIPT='#!''/usr/bin/python3'
+    local   -i  MAX_LINE_LENGTH=79
+    local   -i  MAX_LINE_LENGTH_FOUND=0
+    local       PYTHON_SCRIPT='#!''/usr/bin/python3'
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"

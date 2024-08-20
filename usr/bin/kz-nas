@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Mount network drive
 #
@@ -20,16 +20,20 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 ###############################################################################
 
 declare PROGRAM_NAME='kz-nas'
-declare PROGRAM_DESC=$(gettext 'Mount network drive')
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Mount network drive')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+declare USAGE
+        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 \$OPTIONS_USAGE")
 
-declare X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+declare X_OPTIONS_HELP
+        X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
 requires desktop environment")
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -43,7 +47,8 @@ declare X_OPTIONS_LONG=',gui'
 declare NAS_LOGIN_DIR=/etc
 declare NAS_LOGIN=$NAS_LOGIN_DIR/$PROGRAM_NAME.login
 declare NAS_MOUNT_POINT=/mnt/${PROGRAM_NAME/kz-/kz/}
-declare NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP \
+declare NAS_FIXED_IP_ADDRESS
+        NAS_FIXED_IP_ADDRESS="$(gettext "Make sure the NAS has a fixed IP \
 address.
 This requires:
 
@@ -60,11 +65,13 @@ declare SYSTEMD_MOUNT_DIR=/etc/systemd/system
 declare SYSTEMD_MOUNT_FILE=mnt-$PROGRAM_NAME.mount
 declare SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 
-declare NAS_USER_NAME=$(
+declare NAS_USER_NAME
+        NAS_USER_NAME=$(
     grep --regexp='1000' /etc/passwd | cut --delimiter=: --fields=1
     )
 declare NAS_IP_ADDRESS=192.168.0.200
-declare NAS_SHARE_NAME=$(
+declare NAS_SHARE_NAME
+        NAS_SHARE_NAME=$(
     grep --regexp='1000' /etc/passwd | cut --delimiter=: --fields=1
     )
 declare NAS_PASSWORD='secret'
@@ -76,8 +83,8 @@ declare NAS_PASSWORD='secret'
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -142,12 +149,18 @@ $USAGE"
 # This function asks the user for input.
 request_input() {
     local PROMPT=''
-    local QUEST1=$(eval_gettext "Does the NAS have a fixed IP address such as \
+    local QUEST1
+    local QUEST2
+    local QUEST3
+    local QUEST4
+    local QUEST5
+
+    QUEST1=$(eval_gettext "Does the NAS have a fixed IP address such as \
 \$NAS_IP_ADDRESS?")
-    local QUEST2=$(gettext 'IP address of the NAS')
-    local QUEST3=$(gettext 'User name on the NAS')
-    local QUEST4=$(gettext 'Password of this user on the NAS')
-    local QUEST5=$(gettext 'Share name of this user on the NAS')
+    QUEST2=$(gettext 'IP address of the NAS')
+    QUEST3=$(gettext 'User name on the NAS')
+    QUEST4=$(gettext 'Password of this user on the NAS')
+    QUEST5=$(gettext 'Share name of this user on the NAS')
 
     TITLE=$(gettext 'Question')
     if $OPTION_GUI
@@ -230,11 +243,17 @@ $QUEST5? [$NAS_SHARE_NAME]: "
 
 # This function processes the script options and arguments.
 process_input() {
-    local   TEXT0=$(gettext 'Commands are being prepared')
-    local   TEXT1=$(gettext 'Check dependencies')
-    local   TEXT2=$(gettext 'Create NAS login')
-    local   TEXT3=$(gettext 'Create systemd mount file')
-    local   TEXT4=$(gettext 'Mount NAS')
+    local TEXT0
+    local TEXT1
+    local TEXT2
+    local TEXT3
+    local TEXT4
+
+    TEXT0=$(gettext 'Commands are being prepared')
+    TEXT1=$(gettext 'Check dependencies')
+    TEXT2=$(gettext 'Create NAS login')
+    TEXT3=$(gettext 'Create systemd mount file')
+    TEXT4=$(gettext 'Mount NAS')
 
     TITLE=$(gettext 'Mount network drive')
     if $OPTION_GUI

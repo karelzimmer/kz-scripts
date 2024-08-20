@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Show WiFi information
 #
@@ -20,16 +20,20 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 ###############################################################################
 
 declare PROGRAM_NAME='kz-wifi'
-declare PROGRAM_DESC=$(gettext 'Show WiFi information')
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Show WiFi information')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+declare USAGE
+        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 \$OPTIONS_USAGE")
 
-declare X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+declare X_OPTIONS_HELP
+        X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
 requires desktop environment")
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -47,8 +51,8 @@ declare X_OPTIONS_LONG=',gui'
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                                       \

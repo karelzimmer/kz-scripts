@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Install apps
 #
@@ -19,16 +19,19 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME=kz-install
-declare PROGRAM_DESC=$(gettext 'Install apps')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare     PROGRAM_NAME=kz-install
+declare     PROGRAM_DESC
+            PROGRAM_DESC=$(gettext 'Install apps')
+declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] \
-[-f|--file FILE] [-g|--gui] [-r|--remove]
+declare     USAGE
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
+[-c|--cat] [-f|--file FILE] [-g|--gui] [-r|--remove]
                   \$OPTIONS_USAGE [--] [APP...]")
 
-declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+declare     X_OPTIONS_HELP
+            X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options \
+are mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
@@ -38,7 +41,8 @@ $(gettext "  -g, --gui      run in graphical mode, requires desktop \
 environment")
 $(gettext '  -r, --remove   delete apps')"
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+declare     HELP
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
 $PROGRAM_DESC.
 
@@ -51,24 +55,24 @@ option processing")
 $(gettext 'Arguments:')
 $(gettext '  APP            install APPs')"
 
-declare X_OPTIONS_SHORT='acf:gr'
-declare X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
+declare     X_OPTIONS_SHORT='acf:gr'
+declare     X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
 
-declare -A APP_ARGUMENTS=()
-declare -A FAILED_APPS=()
-declare ARGUMENT_APPS=false
-declare FILE_ARGUMENT=''
-declare FROM='from'
-declare INPUT_FILE=$PROGRAM_PATH/$PROGRAM_NAME.sh
-declare INSTALL='Install'
-declare NO_COMMANDS_FOUND=true
-declare ON='on'
-declare OPTION_APPS=false
-declare OPTION_CAT=false
-declare OPTION_FILE=false
-declare OPTION_REMOVE=false
-declare REBOOT=true
-declare REMOVE='Remove'
+declare -A  APP_ARGUMENTS=()
+declare -A  FAILED_APPS=()
+declare     ARGUMENT_APPS=false
+declare     FILE_ARGUMENT=''
+declare     FROM='from'
+declare     INPUT_FILE=$PROGRAM_PATH/$PROGRAM_NAME.sh
+declare     INSTALL='Install'
+declare     NO_COMMANDS_FOUND=true
+declare     ON='on'
+declare     OPTION_APPS=false
+declare     OPTION_CAT=false
+declare     OPTION_FILE=false
+declare     OPTION_REMOVE=false
+declare     REBOOT=true
+declare     REMOVE='Remove'
 
 if type gnome-session &> /dev/null
 then
@@ -99,8 +103,8 @@ fi
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -377,7 +381,7 @@ function process_option_cat {
 
 # This function starts installing the apps.
 function install_apps {
-    local -i APP_TOT_NUM=0
+    local   -i  APP_TOT_NUM=0
 
     APP_TOT_NUM=$(
         grep    --regexp="#.*$INSTALL.*$ON" \
@@ -411,11 +415,11 @@ function install_apps {
 
 # This function reads commands from the command file for further processing.
 function process_COMMAND_FILE {
-    local    APP_NAME=''
-    local    APP_NAME_LINE=''
-    local    COMMAND_RECORD=''
-    local -i APP_SEQ_NUM=0
-    local -i CMD_SEQ_NUM=0
+    local       APP_NAME=''
+    local       APP_NAME_LINE=''
+    local       COMMAND_RECORD=''
+    local   -i  APP_SEQ_NUM=0
+    local   -i  CMD_SEQ_NUM=0
 
     if ! $OPTION_GUI
 
@@ -498,7 +502,9 @@ function execute_command {
 # This function controls the termination of the script.
 function term_script {
     local FAILED_APPS_TEXT=''
-    local OPERATION=$(gettext 'install')
+    local OPERATION
+
+    OPERATION=$(gettext 'install')
 
     if $NO_COMMANDS_FOUND
     then

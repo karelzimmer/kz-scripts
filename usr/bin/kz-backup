@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Make backup
 #
@@ -20,14 +20,17 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 ###############################################################################
 
 declare PROGRAM_NAME='kz-backup'
-declare PROGRAM_DESC=$(gettext 'Make backup')
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Make backup')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+declare USAGE
+        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 [-t|--target DIRECTORY]
                  \$OPTIONS_USAGE")"
 
-declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+declare X_OPTIONS_HELP
+        X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext "  -g, --gui      run in graphical mode, requires desktop \
@@ -35,7 +38,8 @@ environment")
 $(gettext '  -t, --target DIRECTORY
                  put backup in DIRECTORY')"
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -61,8 +65,8 @@ declare USERS=''
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -242,11 +246,16 @@ Further reading:")
 # This function creates a list of installed apps.
 function backup_setting_apps {
     local OUTPUT_FILE="$SETTINGS_DIR"/apps.txt
-    local HEADER1=$(gettext "==== START list of manual installed packages \
+    local HEADER1
+    local FOOTER1
+    local HEADER2
+    local FOOTER2
+
+    HEADER1=$(gettext "==== START list of manual installed packages \
 ====")
-    local FOOTER1=$(gettext '==== END list of manual installed packages ====')
-    local HEADER2=$(gettext '==== START list of installed snaps ====')
-    local FOOTER2=$(gettext '==== END list of installed snaps ====')
+    FOOTER1=$(gettext '==== END list of manual installed packages ====')
+    HEADER2=$(gettext '==== START list of installed snaps ====')
+    FOOTER2=$(gettext '==== END list of installed snaps ====')
 
     logmsg 'Create a list of installed apps...(ignore WARNING).'
 
@@ -342,15 +351,16 @@ function backup_setting_avatar {
 # This function copies the desktop background, if available, and saves
 # instructions for setting desktop background.
 function backup_setting_desktop {
-    local INPUT_FILE=$(
+    local INPUT_FILE
+    local OUTPUT_FILE_1="$SETTINGS_DIR"/desktop
+    local OUTPUT_FILE_2="$SETTINGS_DIR"/desktop.txt
+
+    INPUT_FILE=$(
         gsettings get org.gnome.desktop.background picture-uri  |
         sed --expression='s|%20| |g'                            |
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
-    local OUTPUT_FILE_1="$SETTINGS_DIR"/desktop
-    local OUTPUT_FILE_2="$SETTINGS_DIR"/desktop.txt
-
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
@@ -399,10 +409,10 @@ function backup_setting_wifi {
 
 # This function creates the backup.
 function create_backup {
-    local    ERROR_FILE=''
-    local    EXCLUDE_FILE=$HOME/$PROGRAM_NAME
-    local    RSYNC_MESSAGES=''
-    local -i BACKUP_RC=0
+    local       ERROR_FILE=''
+    local       EXCLUDE_FILE=$HOME/$PROGRAM_NAME
+    local       RSYNC_MESSAGES=''
+    local   -i  BACKUP_RC=0
 
     ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
     EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
@@ -519,9 +529,10 @@ use app 'Terminal', type 'kz backup'.")"
 
 # This function controls the termination of the script.
 function term_script {
-    local -i UNMOUNT_RC=0
-    local    NUM_USERS=$(find /home/* -prune -print | wc --lines)
+    local   -i  UNMOUNT_RC=0
+    local       NUM_USERS
 
+    NUM_USERS=$(find /home/* -prune -print | wc --lines)
     if [[ $NUM_USERS -eq 1 ]]
     then
         TEXT=$(gettext "The backup has been made.")
@@ -554,9 +565,9 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 # This function tries to unmount the USB device.
 function term_script_usb {
-    local    DEV=''
-    local -i RC=0
-    local    TEXT
+    local       DEV=''
+    local   -i  RC=0
+    local       TEXT
 
     TEXT=$(gettext 'Disconnect the USB media')
     DEV='/dev/'$(

@@ -1,6 +1,6 @@
 # This module provides global variables and functions.
 #
-# shellcheck shell=bash source=/dev/null disable=SC2155,SC2034
+# shellcheck shell=bash source=/dev/null disable=SC2034
 ###############################################################################
 # SPDX-FileComment: Common module for kz Bourne-Again shell scripts
 #
@@ -23,10 +23,12 @@ source /usr/bin/gettext.sh
 ###############################################################################
 
 declare MODULE_NAME='kz_common.sh'
-declare MODULE_DESC=$(gettext 'Common module for shell scripts')
+declare MODULE_DESC
+        MODULE_DESC=$(gettext 'Common module for shell scripts')
 
 # On a server, $0 is reported as '-bash' (login shell), so remove '-'.
-declare PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")")
+declare PROGRAM_PATH
+        PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")")
 
 declare OK=0
 declare ERROR=1
@@ -41,7 +43,8 @@ declare USAGE
 declare OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
 declare HELP
-declare OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
+declare OPTIONS_HELP
+        OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
@@ -73,8 +76,8 @@ declare TITLE=''
 # This function checks whether the script is started as user root and restarts
 # the script as user root if not.
 function become_root {
-    local -i PKEXEC_RC=0
-    local    PROGRAM_EXEC=$PROGRAM_PATH/$PROGRAM_NAME
+    local   -i  PKEXEC_RC=0
+    local       PROGRAM_EXEC=$PROGRAM_PATH/$PROGRAM_NAME
 
     become_root_check || exit $OK
 
@@ -119,7 +122,7 @@ function become_root_check {
 # This function checks to see if the computer is running on battery power and
 # prompts the user to continue if so.
 function check_on_ac_power {
-    local -i ON_BATTERY=0
+    local   -i  ON_BATTERY=0
 
     on_ac_power &> /dev/null || ON_BATTERY=$?
     # Value on_battery:
@@ -141,7 +144,7 @@ It is recommended to connect the computer to the wall socket.")
 # This function checks for another running package manager and waits for the
 # next check if so.
 function check_package_manager {
-    local -i CHECK_WAIT=10
+    local   -i  CHECK_WAIT=10
 
     while sudo  fuser                           \
                 --silent                        \
@@ -202,7 +205,7 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    declare  -g LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    declare -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     declare -ag COMMANDLINE_ARGS=("$@")
 
     trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
@@ -309,14 +312,14 @@ $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 
 # This function controls the termination.
 function term {
-    local    SIGNAL=${1:-unknown}
-    local -i LINENO=${2:-unknown}
-    local    FUNCTION=${3:-unknown}
-    local    COMMAND=${4:-unknown}
-    local -i RC=${5:-$ERROR}
-    local    RC_DESC=''
-    local -i RC_DESC_SIGNALNO=0
-    local    STATUS=$RC/error
+    local       SIGNAL=${1:-unknown}
+    local   -i  LINENO=${2:-unknown}
+    local       FUNCTION=${3:-unknown}
+    local       COMMAND=${4:-unknown}
+    local   -i  RC=${5:-$ERROR}
+    local       RC_DESC=''
+    local   -i  RC_DESC_SIGNALNO=0
+    local       STATUS=$RC/error
 
     case $RC in
         0 )
@@ -409,8 +412,9 @@ or.")
 
 # This function waits for the user to press Enter.
 function wait_for_enter {
-    local PROMPT="$(gettext 'Press the Enter key to continue [Enter]: ')"
+    local PROMPT
 
+    PROMPT="$(gettext 'Press the Enter key to continue [Enter]: ')"
     logmsg "$PROMPT"
     printf '\n'
     read -rp "$PROMPT" < /dev/tty

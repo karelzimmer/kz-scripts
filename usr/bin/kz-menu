@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Installation menu
 #
@@ -18,17 +18,21 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare    PROGRAM_NAME='kz-menu'
-declare    PROGRAM_DESC=$(gettext 'Installation menu')
-declare    DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare     PROGRAM_NAME='kz-menu'
+declare     PROGRAM_DESC
+            PROGRAM_DESC=$(gettext 'Installation menu')
+declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare    USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+declare     USAGE
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 \$OPTIONS_USAGE")
 
-declare    X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+declare     X_OPTIONS_HELP
+            X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
 requires desktop environment")
 
-declare    HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare     HELP
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -36,12 +40,13 @@ $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
 
-declare    X_OPTIONS_SHORT='g'
-declare    X_OPTIONS_LONG=',gui'
+declare     X_OPTIONS_SHORT='g'
+declare     X_OPTIONS_LONG=',gui'
 
-declare    MENU1_TITLE=$(gettext 'Installation menu')
-declare    MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
-declare -a MENU1_ACTIONS=(
+declare     MENU1_TITLE
+            MENU1_TITLE=$(gettext 'Installation menu')
+declare     MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
+declare -a  MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
@@ -49,7 +54,7 @@ declare -a MENU1_ACTIONS=(
                 "$(gettext 'Command menu')"
                 "$(gettext 'Exit')"
             )
-declare -a MENU1_DESCS=(
+declare -a  MENU1_DESCS=(
             [1]="$(gettext 'Checklist chapter 1')"
                 "$(gettext 'Checklist chapter 2')"
                 "$(gettext 'Checklist chapter 3')"
@@ -57,11 +62,12 @@ declare -a MENU1_DESCS=(
                 "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
-declare    MENU1_LINES=${#MENU1_ACTIONS[@]}
+declare     MENU1_LINES=${#MENU1_ACTIONS[@]}
 
-declare    MENU2_TITLE=$(gettext 'Command menu')
-declare    MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
-declare -a MENU2_ACTIONS=(
+declare     MENU2_TITLE
+            MENU2_TITLE=$(gettext 'Command menu')
+declare     MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
+declare -a  MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
                 "$(gettext 'Install apps')"
@@ -69,7 +75,7 @@ declare -a MENU2_ACTIONS=(
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Go to installation menu')"
             )
-declare -a MENU2_DESCS=(
+declare -a  MENU2_DESCS=(
             [1]='kz wifi'
                 'kz backup'
                 'kz install'
@@ -77,7 +83,7 @@ declare -a MENU2_DESCS=(
                 'kz setup'
                 "$(gettext 'Back')"
             )
-declare    MENU2_LINES=${#MENU2_DESCS[@]}
+declare     MENU2_LINES=${#MENU2_DESCS[@]}
 
 declare     EXECUTE_COMMAND=false
 declare -a  ROWS=()
@@ -89,8 +95,8 @@ declare -a  ROWS=()
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -419,9 +425,9 @@ function process_menu2_choice {
 
 # This function processes the command corresponding to the choice made.
 function process_commands {
-    local    COMMAND=''
-    local    DESCRIPTION=''
-    local -i ROW=0
+    local       COMMAND=''
+    local       DESCRIPTION=''
+    local   -i  ROW=0
 
     show_commands_before_execution
     if $EXECUTE_COMMAND
@@ -445,10 +451,10 @@ function process_commands {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution {
-    local    COMMAND=''
-    local    DESCRIPTION=''
-    local -i ROW=0
-    local    PROMPT=''
+    local       COMMAND=''
+    local       DESCRIPTION=''
+    local   -i  ROW=0
+    local       PROMPT=''
 
     TEXT="$(gettext 'The following will be executed:')
 "
@@ -508,9 +514,9 @@ $PROMPT"
 
 # This function executes the commands.
 function execute_command {
-    local -i RC=0
-    local    CMD=''
-    local    GUI_OPTION=''
+    local   -i  RC=0
+    local       CMD=''
+    local       GUI_OPTION=''
 
     CMD=$(
         printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=1

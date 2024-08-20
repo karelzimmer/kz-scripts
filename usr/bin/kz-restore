@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-# shellcheck source=kz_common.sh disable=SC2155
+# shellcheck source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Restore backup
 #
@@ -20,14 +20,17 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 ###############################################################################
 
 declare PROGRAM_NAME='kz-restore'
-declare PROGRAM_DESC=$(gettext 'Restore backup')
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Restore backup')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+declare USAGE
+        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 [-s|--source DIRECTORY]
                   \$OPTIONS_USAGE")"
 
-declare X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+declare X_OPTIONS_HELP
+        X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext "  -g, --gui      run in graphical mode, requires desktop \
@@ -35,7 +38,8 @@ environment")
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')"
 
-declare HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
@@ -60,8 +64,8 @@ declare TARGET=$HOME
 
 # This function handles the script options and arguments.
 function check_input {
-    local    PARSED=''
-    local -i PARSED_RC=0
+    local       PARSED=''
+    local   -i  PARSED_RC=0
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -204,9 +208,9 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup {
-    local    ERROR_FILE=''
-    local    RSYNC_MESSAGES=''
-    local -i RESTORE_RC=0
+    local       ERROR_FILE=''
+    local       RSYNC_MESSAGES=''
+    local   -i  RESTORE_RC=0
 
     ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
@@ -294,10 +298,11 @@ function restore_setting_desktop {
 
 # This function controls the termination of the script.
 function term_script {
-    local -i UNMOUNT_RC=0
-    local    NUM_USERS=$(find /home/* -prune -print | wc --lines)
-    local    USERS=''
+    local   -i  UNMOUNT_RC=0
+    local       NUM_USERS
+    local       USERS=''
 
+    NUM_USERS=$(find /home/* -prune -print | wc --lines)
     if [[ $NUM_USERS -eq 1 ]]
     then
         TEXT=$(gettext 'The backup has been restored.')
@@ -348,9 +353,9 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 # This function tries to unmount the USB device.
 function term_script_usb {
-    local    DEV=''
-    local -i RC=0
-    local    TEXT
+    local       DEV=''
+    local   -i  RC=0
+    local       TEXT
 
     TEXT=$(gettext 'Disconnect the USB media')
     DEV='/dev/'$(
