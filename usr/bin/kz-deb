@@ -140,7 +140,7 @@ function prepare_processing {
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"
     do
-        printf '\b%b' '=>'
+        printf '\b%s' '=>'
         sleep 1
     done &
 }
