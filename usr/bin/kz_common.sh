@@ -1,6 +1,6 @@
 # This module provides global variables and functions.
 #
-# shellcheck shell=bash source=/dev/null disable=SC2034
+# shellcheck shell=bash source=/dev/null
 ###############################################################################
 # SPDX-FileComment: Common module for kz Bourne-Again shell scripts
 #
@@ -24,6 +24,7 @@ source /usr/bin/gettext.sh
 
 declare MODULE_NAME='kz_common.sh'
 declare MODULE_DESC
+        # shellcheck disable=SC2034
         MODULE_DESC=$(gettext 'Common module for shell scripts')
 
 # On a server, $0 is reported as '-bash' (login shell), so remove '-'.
@@ -34,22 +35,28 @@ declare OK=0
 declare ERROR=1
 
 declare NORMAL='\033[0m'
+# shellcheck disable=SC2034
 declare BOLD='\033[1m'
 
 declare RED='\033[1;31m'
+# shellcheck disable=SC2034
 declare GREEN='\033[1;32m'
 
 declare USAGE
+# shellcheck disable=SC2034
 declare OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
 
 declare HELP
 declare OPTIONS_HELP
+        # shellcheck disable=SC2034
         OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 
+# shellcheck disable=SC2034
 declare OPTIONS_SHORT='hmuv'
+# shellcheck disable=SC2034
 declare OPTIONS_LONG='help,manual,usage,version'
 
 # Determine whether a desktop environment is available.
@@ -298,6 +305,7 @@ function process_option_version {
     else
         TEXT=$(gettext 'Build ID cannot be determined.')
         logmsg "$TEXT"
+        # shellcheck disable=SC2034
         BUILD_ID=$TEXT
     fi
 
