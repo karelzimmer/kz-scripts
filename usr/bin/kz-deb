@@ -175,15 +175,16 @@ function install_package {
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
     logmsg 'Delete kz deb file...'
     rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
-    # Progress indicator with growing '[=>', '[==>', etc. ends as '[===>]100%'.
+    # Progress indicator with '[=>', '[==>', etc. ends like '[===>]100%'.
     printf '%s\n' ']100%'
 }
 
 
 # This function installs repackaged kz.
 function install_package_xz {
+    local KZ_DEB_LOCAL_FILE_XZ=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
+
     logmsg 'Try installing package kz that uses xz by repackaging it.'
-    local kz_deb_local_file_xz=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
     logmsg 'Install required packages...'
     sudo    apt-get install --yes binutils zstd     |& $LOGCMD
     logmsg 'Extract files from the archive...'
@@ -195,7 +196,7 @@ function install_package_xz {
     xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
     logmsg 'Re-create the package...'
     ar      -mcav sdsd                              \
-            "$kz_deb_local_file_xz"                 \
+            "$KZ_DEB_LOCAL_FILE_XZ"                 \
             /tmp/debian-binary                      \
             /tmp/control.tar.xz                     \
             /tmp/data.tar.xz                        |& $LOGCMD
@@ -205,7 +206,7 @@ function install_package_xz {
             reinstall                               \
             $INSTALL_SUGGESTS                       \
             --yes                                   \
-            "$kz_deb_local_file_xz"                 |& $LOGCMD
+            "$KZ_DEB_LOCAL_FILE_XZ"                 |& $LOGCMD
     logmsg 'Delete kz deb xz files...'
     rm       --verbose                              \
             /tmp/debian-binary                      \
@@ -213,7 +214,7 @@ function install_package_xz {
             /tmp/data.tar.xz                        \
             /tmp/control.tar.zst                    \
             /tmp/data.tar.zst                       \
-            "$kz_deb_local_file_xz"                 |& $LOGCMD
+            "$KZ_DEB_LOCAL_FILE_XZ"                 |& $LOGCMD
 }
 
 
