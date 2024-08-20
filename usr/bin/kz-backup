@@ -479,7 +479,7 @@ EOF
     then
         logmsg "$TEXT..."
         sync;                           \
-        sleep 3                         |
+        sleep 1                         |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -599,7 +599,7 @@ function term_script_unmount {
     umount "$TARGET_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
-    sleep 3
+    sleep 1
 }
 
 

@@ -393,7 +393,7 @@ function term_script_unmount {
     umount "$SOURCE_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
-    sleep 3
+    sleep 1
 }
 
 
