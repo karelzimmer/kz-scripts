@@ -134,7 +134,7 @@ function process_input {
 function prepare_processing {
     KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     sudo true
-    # Progress indicator with growing '=>', '==>', '===>' as long as the local
+    # Progress indicator with growing '[=>', '[==>', etc. as long as the local
     # Debian package file exists, i.e. installation is in progress. If all
     # fails, kz_common.sh will delete the local Debian package file on exit.
     printf '[ '
@@ -175,6 +175,7 @@ function install_package {
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
     logmsg 'Delete kz deb file...'
     rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
+    # Progress indicator with growing '[=>', '[==>', etc. ends as '[===>]100%'.
     printf '%s\n' ']100%'
 }
 
