@@ -213,7 +213,7 @@ found.")
 
 # This function checks Shell and Python script code.
 function check_code {
-    local BASH_SCRIPT='#!''/usr/bin/bash'
+    local BASH_SCRIPT='#!''/usr/bin/env bash'
     local PYTHON_SCRIPT='#!''/usr/bin/python3'
     local TAB_COMPLETION_SCRIPT='# ''shellcheck shell=bash'
 
