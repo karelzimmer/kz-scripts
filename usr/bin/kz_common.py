@@ -61,7 +61,7 @@ if subprocess.run('[[ -n $('
                   'type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} '
                   '2> /dev/null'
                   ') ]]',
-                  shell=True, executable='/usr/bin/bash').returncode == OK:
+                  shell=True, executable='/bin/bash').returncode == OK:
     DESKTOP_ENVIRONMENT = True
 else:
     DESKTOP_ENVIRONMENT = False
@@ -155,7 +155,7 @@ def check_package_manager(PROGRAM_NAME):
                            '/var/cache/debconf/config.dat '
                            '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/'
                            'lock*',
-                           shell=True, executable='/usr/bin/bash', check=True)
+                           shell=True, executable='/bin/bash', check=True)
         except Exception:
             break
         else:
