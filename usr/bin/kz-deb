@@ -170,7 +170,8 @@ function install_package {
         INSTALL_SUGGESTS='--install-suggests'
     fi
     check_package_manager |& $LOGCMD
-    # Ubuntu 18.04: E: Invalid operation reinstall ===> install --reinstall
+    # Ubuntu 18.04: E: Invalid operation reinstall ===> 'install --reinstall'
+    # Debian 11: ...deb' uses unknown compression ===> ' || install_package_xz'
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
@@ -194,7 +195,7 @@ function install_package_xz {
     logmsg 'Install required packages...'
     sudo    apt-get install --yes binutils zstd     |& $LOGCMD
     logmsg 'Extract files from the archive...'
-    # Ubuntu 18.04: ar: unrecognized option '--output=/tmp' ===> cd /tmp
+    # Ubuntu 18.04: ar: unrecognized option '--output=/tmp' ===> 'cd /tmp'
     cd      /tmp
     ar      -xv "$KZ_DEB_LOCAL_FILE"        |& $LOGCMD
     logmsg 'Uncompress zstd files an re-compress them using xz...'
@@ -209,7 +210,7 @@ function install_package_xz {
             control.tar.xz                  \
             data.tar.xz                     |& $LOGCMD
     logmsg "Install the package..."
-    # Ubuntu 18.04: E: Invalid operation reinstall ===> install --reinstall
+    # Ubuntu 18.04: E: Invalid operation reinstall ===> 'install --reinstall'
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
