@@ -229,7 +229,7 @@ function backup_settings {
 
 # This function creates a README.
 function backup_setting_readme {
-    local OUTPUT_FILE="$SETTINGS_DIR/README"
+    local OUTPUT_FILE=$SETTINGS_DIR/README
 
     logmsg 'Create settings README...'
     TEXT="$(gettext "This folder contains files created by kz-backup.
@@ -245,7 +245,7 @@ Further reading:")
 
 # This function creates a list of installed apps.
 function backup_setting_apps {
-    local OUTPUT_FILE="$SETTINGS_DIR/apps.txt"
+    local OUTPUT_FILE=$SETTINGS_DIR/apps.txt
     local HEADER1
     local FOOTER1
     local HEADER2
@@ -272,7 +272,7 @@ function backup_setting_apps {
 
 # This function saves instructions for adding additional users.
 function backup_setting_users {
-    local OUTPUT_FILE="$SETTINGS_DIR/users.txt"
+    local OUTPUT_FILE=$SETTINGS_DIR/users.txt
 
     USERS=$(
             gettext '_username_|UID|_user_'
@@ -325,8 +325,8 @@ $USERS"
 # possible.
 function backup_setting_avatar {
     local INPUT_FILE=/var/lib/AccountsService/icons/$USER
-    local OUTPUT_FILE_1="$SETTINGS_DIR/avatar"
-    local OUTPUT_FILE_2="$SETTINGS_DIR/avatar.txt"
+    local OUTPUT_FILE_1=$SETTINGS_DIR/avatar
+    local OUTPUT_FILE_2=$SETTINGS_DIR/avatar.txt
 
     if [[ -e $INPUT_FILE ]]
     then
@@ -352,8 +352,8 @@ function backup_setting_avatar {
 # instructions for setting desktop background.
 function backup_setting_desktop {
     local INPUT_FILE
-    local OUTPUT_FILE_1="$SETTINGS_DIR/desktop"
-    local OUTPUT_FILE_2="$SETTINGS_DIR/desktop.txt"
+    local OUTPUT_FILE_1=$SETTINGS_DIR/desktop
+    local OUTPUT_FILE_2=$SETTINGS_DIR/desktop.txt
 
     INPUT_FILE=$(
         gsettings get org.gnome.desktop.background picture-uri  |
@@ -386,7 +386,7 @@ function backup_setting_desktop {
 
 # This function saves the favorite apps in the dash.
 function backup_setting_favs {
-    local OUTPUT_FILE="$SETTINGS_DIR/favs.txt"
+    local OUTPUT_FILE=$SETTINGS_DIR/favs.txt
 
     logmsg 'Save the favorite apps...'
     gsettings get                           \
@@ -396,7 +396,7 @@ function backup_setting_favs {
 
 # This function saves the WiFi information.
 function backup_setting_wifi {
-    local OUTPUT_FILE="$SETTINGS_DIR/wifi.txt"
+    local OUTPUT_FILE=$SETTINGS_DIR/wifi.txt
 
     logmsg 'Save the WiFi information...'
     # Call kz wifi.
