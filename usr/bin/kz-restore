@@ -159,7 +159,7 @@ $USAGE"
         SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
     else
-        MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
         if [[ -z $MEDIUM ]]
         then
             TEXT=$(gettext "No USB medium found.
@@ -167,14 +167,14 @@ $USAGE"
 Connect a USB medium.")
             infomsg "$TEXT"
             $OPTION_GUI || wait_for_enter
-            MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
             if [[ -z $MEDIUM ]]
             then
                 errormsg "$TEXT"
                 exit $ERROR
             fi
         fi
-        MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
         then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -185,7 +185,7 @@ Now connected:
 Disconnect media via Files.")"
             infomsg "$TEXT"
             $OPTION_GUI || wait_for_enter
-            MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
             then
                 errormsg "$TEXT"

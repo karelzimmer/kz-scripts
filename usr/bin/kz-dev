@@ -137,12 +137,12 @@ function pull_repos {
     infomsg "$TEXT"
     # Call gitpull.
     logmsg 'Calling gitpull...'
-    "$BIN_REPO/"gitpull
+    "$BIN_REPO"/gitpull
     logmsg 'Called gitpull.'
     printf '%b\n' "$(gettext 'Status repos')..."
     # Call gitstat.
     logmsg 'Calling gitstat...'
-    "$BIN_REPO/"gitstat
+    "$BIN_REPO"/gitstat
     logmsg 'Called gitstat.'
 }
 

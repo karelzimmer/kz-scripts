@@ -159,7 +159,7 @@ function build_package {
     infomsg "$TEXT"
     # Call kz build.
     logmsg 'Calling kz build...'
-    "$SCRIPTS_REPO/usr/bin/"kz build || exit $ERROR
+    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
     logmsg 'Called kz build.'
 }
 

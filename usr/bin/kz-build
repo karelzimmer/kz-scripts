@@ -182,7 +182,7 @@ function check_scripts {
     infomsg "$TEXT"
     # Call kz check.
     logmsg 'Calling kz check...'
-    "$SCRIPTS_REPO/usr/bin/"kz check || ERROR_FLAG=true
+    "$SCRIPTS_REPO/usr/bin"/kz check || ERROR_FLAG=true
     logmsg 'Called kz check.'
 }
 
@@ -196,8 +196,8 @@ function build_uploads {
     infomsg "$TEXT"
 
     # Make sure the permissions are correct for the sync.
-    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin/"*  |& $LOGCMD
-    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin/"*.*            |& $LOGCMD
+    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
+    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/src/.
     rsync   --archive               \
@@ -273,8 +273,8 @@ function build_deb {
     # Compress man pages.
     gzip    --best                      \
             --force                     \
-            "${DEB_TARGETS[man_en]}/"*  \
-            "${DEB_TARGETS[man_nl]}/"*  |& $LOGCMD
+            "${DEB_TARGETS[man_en]}"/*  \
+            "${DEB_TARGETS[man_nl]}"/*  |& $LOGCMD
 
     # Capture build id Debian package.
     BUILD_ID=$(date '+%Y-%m-%dT%H:%M')

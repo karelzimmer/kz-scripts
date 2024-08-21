@@ -324,7 +324,7 @@ $USERS"
 # This function copies the user avatar and saves instructions for restoring, if
 # possible.
 function backup_setting_avatar {
-    local INPUT_FILE=/var/lib/AccountsService/icons/"$USER"
+    local INPUT_FILE=/var/lib/AccountsService/icons/$USER
     local OUTPUT_FILE_1="$SETTINGS_DIR/avatar"
     local OUTPUT_FILE_2="$SETTINGS_DIR/avatar.txt"
 
