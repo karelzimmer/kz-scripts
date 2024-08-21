@@ -35,7 +35,7 @@ rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
 if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME desktop environment has this extension installed.
 if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi # Not every GNOME desktop environment has this key.
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi # Not every GNOME desktop environment has this key.
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
@@ -91,7 +91,7 @@ if $DESKTOP_ENVIRONMENT; then xdg-mime default gdebi.desktop application/vnd.deb
 if $GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if $GNOME; then gsettings set org.gnome.desktop.interface locate-pointer true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface locate-pointer true || true; fi # Not every GNOME desktop environment has this key.
 if $GNOME; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
 if $GNOME; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
 if $GNOME; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
@@ -112,7 +112,7 @@ if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inac
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
 if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi # Not every GNOME desktop environment has this key.
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi # Not every GNOME desktop environment has this key.
 if $GNOME; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi # Not every GNOME desktop environment has this key.
@@ -122,7 +122,7 @@ if $GNOME; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant '
 if $GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if $GNOME; then gsettings reset org.gnome.desktop.interface locate-pointer; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface locate-pointer || true ; fi # Not every GNOME desktop environment has this key.
 if $GNOME; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
 if $GNOME; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
 if $GNOME; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
