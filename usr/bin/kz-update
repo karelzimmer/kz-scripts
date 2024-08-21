@@ -82,6 +82,7 @@ def perform_update():
     COMMAND = 'sudo apt-get dist-upgrade --yes'
     perform_command(COMMAND)
 
+    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ===> '/bin/bash'
     try:
         subprocess.run('type snap &> /dev/null', shell=True, check=True,
                        executable='/bin/bash')
@@ -114,6 +115,7 @@ def perform_command(COMMAND):
     TEXT = f'{COMMAND}'
     kz_common.infomsg(PROGRAM_NAME, TEXT)
     kz_common.check_package_manager(PROGRAM_NAME)
+    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ===> '/bin/bash'
     try:
         subprocess.run({COMMAND}, shell=True, check=True,
                        executable='/bin/bash')
