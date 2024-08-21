@@ -40,7 +40,8 @@ if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository --remove "deb h
 if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes deb-multimedia-keyring; fi
 
 # Install update-system on *
-kz-update
+# Call kz update.
+kz update
 
 # Remove update-system from *
 # There is no command available to remove update system.
