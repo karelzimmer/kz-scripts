@@ -32,24 +32,26 @@ kz-gnome --delete=kz-cockpit
 rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
 
 # Setup dashtodock for *
-if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME desktop environment has this extension installed.
+# Not every GNOME desktop environment has this extension available ===> ' || true'.
+if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi
 if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
 # Reset dashtodock for *
-if $GNOME; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME desktop environment has this installed.
+# Not every GNOME desktop environment has this extension available ===> ' || true'.
+if $GNOME; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi
 if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup || true; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup || true; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
@@ -88,10 +90,11 @@ if $DESKTOP_ENVIRONMENT; then xdg-mime default gdebi.desktop application/vnd.deb
 # There is no command available to reset gdebi.
 
 # Setup gnome for *
+# Not every GNOME desktop environment has this key.===> ' || true'.
 if $GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if $GNOME; then gsettings set org.gnome.desktop.interface locate-pointer true || true; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings set org.gnome.desktop.interface locate-pointer true || true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
 if $GNOME; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
 if $GNOME; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
@@ -112,17 +115,18 @@ if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inac
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
 if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi # Not every GNOME desktop environment has this key.
-if $GNOME; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi
 if $GNOME; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome for *
+# Not every GNOME desktop environment has this key.===> ' || true'.
 if $GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if $GNOME; then gsettings reset org.gnome.desktop.interface locate-pointer || true ; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings reset org.gnome.desktop.interface locate-pointer || true ; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
 if $GNOME; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
 if $GNOME; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
@@ -145,8 +149,8 @@ if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network || true; fi # Not every GNOME desktop environment has this key.
-if $GNOME; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi # Not every GNOME desktop environment has this key.
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network || true; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi
 if $GNOME; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
