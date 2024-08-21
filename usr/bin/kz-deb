@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # shellcheck shell=bash source=kz_common.sh
 ###############################################################################
 # SPDX-FileComment: Download and install package kz
