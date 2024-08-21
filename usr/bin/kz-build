@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")"/kz_common.sh
+source "$(dirname "$(realpath "$0")")/kz_common.sh"
 
 
 ###############################################################################
@@ -182,7 +182,7 @@ function check_scripts {
     infomsg "$TEXT"
     # Call kz check.
     logmsg 'Calling kz check...'
-    "$SCRIPTS_REPO"/usr/bin/kz check || ERROR_FLAG=true
+    "$SCRIPTS_REPO/usr/bin/"kz check || ERROR_FLAG=true
     logmsg 'Called kz check.'
 }
 
@@ -196,8 +196,8 @@ function build_uploads {
     infomsg "$TEXT"
 
     # Make sure the permissions are correct for the sync.
-    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO"/usr/bin/*  |& $LOGCMD
-    chmod --verbose 'a-x' -- "$SCRIPTS_REPO"/usr/bin/*.*            |& $LOGCMD
+    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin/"*  |& $LOGCMD
+    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin/"*.*            |& $LOGCMD
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/src/.
     rsync   --archive               \
@@ -234,10 +234,10 @@ function build_uploads {
 function generate_mo {
     local lc_messages=''
 
-    lc_messages="$HOME"/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    lc_messages=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
     TEXT=$(gettext 'Generate .mo file')...
     infomsg "$TEXT"
-    msgfmt --output-file="$lc_messages"/kz.mo  "$lc_messages"/kz.po
+    msgfmt --output-file="$lc_messages/kz.mo"  "$lc_messages/kz.po"
 }
 
 
@@ -273,13 +273,13 @@ function build_deb {
     # Compress man pages.
     gzip    --best                      \
             --force                     \
-            "${DEB_TARGETS[man_en]}"/*  \
-            "${DEB_TARGETS[man_nl]}"/*  |& $LOGCMD
+            "${DEB_TARGETS[man_en]}/"*  \
+            "${DEB_TARGETS[man_nl]}/"*  |& $LOGCMD
 
     # Capture build id Debian package.
     BUILD_ID=$(date '+%Y-%m-%dT%H:%M')
     mkdir --parents "${DEB_TARGETS[build]}" |& $LOGCMD
-    printf '%s' "$BUILD_ID" > "${DEB_TARGETS[build]}"/$PROGRAM_NAME.id
+    printf '%s' "$BUILD_ID" > "${DEB_TARGETS[build]}/$PROGRAM_NAME.id"
 
     # Create Debian package in kz-uploads.
     fakeroot    dpkg-deb                            \

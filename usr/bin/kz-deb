@@ -15,7 +15,7 @@
 echo    "Source kz_common.sh..." |&
         systemd-cat --identifier=kz-deb --priority=debug
 # On a server, $0 is reported as '-bash' (login shell), so remove '-'.
-if  !   source "$(dirname "$(realpath "${0/^-/}")")"/kz_common.sh 2> >(
+if  !   source "$(dirname "$(realpath "${0/^-/}")")/kz_common.sh" 2> >(
         systemd-cat --identifier=kz-deb --priority=debug)
 then
     declare KZ_COMMON_FILE
@@ -151,7 +151,7 @@ function prepare_processing {
 
 # This function downloads package kz.
 function download_package {
-    local KZ_DEB_SITE_FILE=kz_4.2.1_all.deb
+    local KZ_DEB_SITE_FILE='kz_4.2.1_all.deb'
     local KZ_DEB_SITE_URI='https://karelzimmer.nl/assets/kz-deb/'
 
     logmsg 'Download package kz...'

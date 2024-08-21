@@ -212,7 +212,7 @@ function init_script {
     set -o nounset
     set -o pipefail
 
-    declare -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    declare  -g LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
     declare -ag COMMANDLINE_ARGS=("$@")
 
     trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR

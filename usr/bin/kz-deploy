@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")"/kz_common.sh
+source "$(dirname "$(realpath "$0")")/kz_common.sh"
 
 
 ###############################################################################
@@ -159,7 +159,7 @@ function build_package {
     infomsg "$TEXT"
     # Call kz build.
     logmsg 'Calling kz build...'
-    "$SCRIPTS_REPO"/usr/bin/kz build || exit $ERROR
+    "$SCRIPTS_REPO/usr/bin/"kz build || exit $ERROR
     logmsg 'Called kz build.'
 }
 
@@ -176,9 +176,9 @@ function upload_website {
     local FTP_LOGIN=$HOME/.$FTP_HOST'.login'
     local PROMPT
 
+    PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
     TEXT=$(gettext 'Upload website')...
     infomsg "$TEXT"
-    PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
     if [[ ! -f $FTP_LOGIN ]]
     then
         read -rp "$PROMPT" < /dev/tty

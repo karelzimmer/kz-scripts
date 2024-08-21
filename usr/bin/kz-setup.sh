@@ -29,7 +29,7 @@ kz-gnome --addaft=kz-cockpit
 
 # Reset cockpit for karel@pc06
 kz-gnome --delete=kz-cockpit
-rm --force --verbose "$HOME"/.local/share/applications/kz-cockpit.desktop
+rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
 
 # Setup dashtodock for *
 if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi # Not every GNOME desktop environment has this extension installed.
@@ -163,10 +163,10 @@ kz-gnome --addaft=fr.handbrake.ghb
 kz-gnome --delete=fr.handbrake.ghb
 
 # Setup hide-files for *
-echo 'snap' > "$HOME"/.hidden
+echo 'snap' > "$HOME/.hidden"
 
 # Reset hide-files for *
-rm --force --verbose "$HOME"/.hidden
+rm --force --verbose "$HOME/.hidden"
 
 # Setup kvm for karel@pc06 karel@pc07
 kz-gnome --addaft=virt-manager
@@ -175,16 +175,16 @@ kz-gnome --addaft=virt-manager
 kz-gnome --delete=virt-manager
 
 # Setup lynis for -nouser
-git clone https://github.com/CISOfy/lynis "$HOME"/lynis || true
+git clone https://github.com/CISOfy/lynis "$HOME/lynis" || true
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
 # Reset lynis for -nouser
-rm --force --recursive --verbose "$HOME"/lynis
+rm --force --recursive --verbose "$HOME/lynis"
 
 # Setup restore-thumbnails for -nouser
-rm --force --recursive --verbose "$HOME"/.cache/thumbnails/
+rm --force --recursive --verbose "$HOME/.cache/thumbnails/"
 
 # Reset restore-thumbnails for -nouser
 # There is no command available to reset restored thumbnails.
@@ -222,15 +222,15 @@ kz-gnome --delete=kz-telegram
 # Setup terminal for karel@pc01 karel@pc06 karel@pc07
 kz-gnome --addbef=org.gnome.Terminal
 # Turn on aliases.
-sed --in-place --expression='s/#alias/alias/g' "$HOME"/.bashrc
+sed --in-place --expression='s/#alias/alias/g' "$HOME/.bashrc"
 # Enable search forward in history (with Ctrl-S).
-sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
-echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME"/.bashrc
+sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
+echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME/.bashrc"
 
 # Reset terminal for karel@pc01 karel@pc06 karel@pc07
 kz-gnome --delete=org.gnome.Terminal
-sed --in-place --expression='s/alias/#alias/g' "$HOME"/.bashrc
-sed --in-place --expression='/^stty -ixon/d' "$HOME"/.bashrc
+sed --in-place --expression='s/alias/#alias/g' "$HOME/.bashrc"
+sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 
 # Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
 kz-gnome --delete=thunderbird
@@ -266,7 +266,7 @@ kz-gnome --addaft=kz-webmin
 
 # Reset webmin for karel@pc07
 kz-gnome --delete=kz-webmin
-rm --force --verbose "$HOME"/.local/share/applications/kz-webmin.desktop
+rm --force --verbose "$HOME/.local/share/applications/kz-webmin.desktop"
 
 # Setup whatsapp for hugo@pc-van-hugo maria@maria-desktop
 kz-gnome --addaft=kz-whatsapp

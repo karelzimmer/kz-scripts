@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")"/kz_common.sh
+source "$(dirname "$(realpath "$0")")/kz_common.sh"
 
 
 ###############################################################################
@@ -119,7 +119,7 @@ function check_dependencies {
 
 # This function retrieves the public repos.
 function pull_repos {
-    local BIN_REPO="$HOME"/bin
+    local BIN_REPO=$HOME/bin
 
     git config --global user.name 'Karel Zimmer'
     git config --global user.email 'karel.zimmer@gmail.com'
@@ -137,12 +137,12 @@ function pull_repos {
     infomsg "$TEXT"
     # Call gitpull.
     logmsg 'Calling gitpull...'
-    "$BIN_REPO"/gitpull
+    "$BIN_REPO/"gitpull
     logmsg 'Called gitpull.'
     printf '%b\n' "$(gettext 'Status repos')..."
     # Call gitstat.
     logmsg 'Calling gitstat...'
-    "$BIN_REPO"/gitstat
+    "$BIN_REPO/"gitstat
     logmsg 'Called gitstat.'
 }
 

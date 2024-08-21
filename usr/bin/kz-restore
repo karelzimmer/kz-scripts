@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")"/kz_common.sh
+source "$(dirname "$(realpath "$0")")/kz_common.sh"
 
 
 ###############################################################################
@@ -159,7 +159,7 @@ $USAGE"
         SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
     else
-        MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
         if [[ -z $MEDIUM ]]
         then
             TEXT=$(gettext "No USB medium found.
@@ -167,14 +167,14 @@ $USAGE"
 Connect a USB medium.")
             infomsg "$TEXT"
             $OPTION_GUI || wait_for_enter
-            MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
             if [[ -z $MEDIUM ]]
             then
                 errormsg "$TEXT"
                 exit $ERROR
             fi
         fi
-        MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
         then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -185,7 +185,7 @@ Now connected:
 Disconnect media via Files.")"
             infomsg "$TEXT"
             $OPTION_GUI || wait_for_enter
-            MEDIUM=$(ls --directory /media/"$USER"/* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "/media/$USER/"* 2> >($LOGCMD) || true)
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
             then
                 errormsg "$TEXT"
@@ -272,7 +272,7 @@ use app 'Terminal', type 'kz restore'.")
 
 # This function restores the user settings.
 function restore_settings {
-    local SETTINGS_DIR="$HOME"/kz-backup
+    local SETTINGS_DIR=$HOME/kz-backup
 
     if $DESKTOP_ENVIRONMENT
     then
@@ -284,7 +284,7 @@ function restore_settings {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop {
-    local INPUT_FILE="$SETTINGS_DIR"/desktop
+    local INPUT_FILE="$SETTINGS_DIR/desktop"
 
     if [[ -f $INPUT_FILE ]]
     then
@@ -368,6 +368,7 @@ function term_script_usb {
         cut     --delimiter=' '     \
                 --fields=1
     )
+
     if $OPTION_GUI
     then
         # With '|& zenity --progress' global variables from called functions
