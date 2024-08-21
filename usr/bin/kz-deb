@@ -226,6 +226,7 @@ function install_package_xz {
             control.tar.zst                 \
             data.tar.zst                    \
             "$KZ_DEB_LOCAL_FILE_XZ"         |& $LOGCMD
+    cd      "$OLDPWD"
 }
 
 
