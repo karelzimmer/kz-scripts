@@ -477,7 +477,8 @@ sudo apt-get remove --yes usbutils
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
-sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
+# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ===> '/bin/bash'
+sudo useradd --create-home --shell /bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
 sudo passwd --delete "$(gettext 'guest')"
 
 # Remove user-guest from -nohost
@@ -487,7 +488,8 @@ source /usr/bin/gettext.sh
 sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
-sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
+# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ===> '/bin/bash'
+sudo useradd --create-home --shell /bin/bash --comment 'Karel Zimmer' karel || true
 sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel
 sudo passwd --delete --expire karel
 
@@ -502,7 +504,8 @@ sudo deluser karel adm
 sudo deluser karel systemd-journal
 
 # Install user-toos on Laptop
-sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
+# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ===> '/bin/bash'
+sudo useradd --create-home --shell /bin/bash --comment 'Toos Barendse' toos || true
 sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos
 sudo passwd --delete --expire toos
 
