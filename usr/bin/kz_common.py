@@ -57,7 +57,7 @@ OPTIONS_SHORT = 'hmuv'
 OPTIONS_LONG = 'help,manual,usage,version'
 
 # Determine whether a desktop environment is available.
-# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ===> '/bin/bash'
+# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
 if subprocess.run('[[ -n $('
                   'type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} '
                   '2> /dev/null'
@@ -149,7 +149,7 @@ def check_package_manager(PROGRAM_NAME):
     """
     CHECK_WAIT = 10
 
-    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ===> '/bin/bash'
+    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
     while True:
         try:
             subprocess.run('sudo fuser '

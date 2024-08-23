@@ -32,7 +32,7 @@ kz-gnome --delete=kz-cockpit
 rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
 
 # Setup dashtodock for *
-# Not every GNOME desktop environment has this extension available ===> ' || true'.
+# Not every GNOME desktop environment has this extension available ==> ' || true'.
 if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi
 if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
@@ -45,7 +45,7 @@ if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-hei
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
 # Reset dashtodock for *
-# Not every GNOME desktop environment has this extension available ===> ' || true'.
+# Not every GNOME desktop environment has this extension available ==> ' || true'.
 if $GNOME; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi
 if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
