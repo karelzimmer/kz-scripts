@@ -554,10 +554,12 @@ sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrin
 sudo apt-get update
 
 # Install wine on -nohost
+sudo dpkg --add-architecture i386
 sudo apt-get install --yes wine winetricks playonlinux
 
 # Remove wine from -nohost
 sudo apt-get remove --yes wine winetricks playonlinux
+sudo dpkg --remove-architecture i386
 
 # Install youtube-dl on pc-van-emily pc-van-hugo
 sudo apt-get install --yes youtubedl-gui
