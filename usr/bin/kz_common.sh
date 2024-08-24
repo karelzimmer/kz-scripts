@@ -27,7 +27,7 @@ declare MODULE_DESC
         # shellcheck disable=SC2034
         MODULE_DESC=$(gettext 'Common module for shell scripts')
 
-# On a server, $0 is reported as '-bash' (login shell), so remove '-'.
+# On a server 'bash PROGRAM_NAME' $0 is reported as '-bash', so remove '-'.
 declare PROGRAM_PATH
         PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")")
 

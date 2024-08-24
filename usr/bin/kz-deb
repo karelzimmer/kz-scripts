@@ -12,7 +12,8 @@
 # Imports
 ###############################################################################
 
-if  !   source "$(dirname "$(realpath "$0")")/kz_common.sh" 2> >(
+# On a server 'bash PROGRAM_NAME' $0 is reported as '-bash', so remove '-'.
+if  !   source "$(dirname "$(realpath "${0/^-/}")")/kz_common.sh" 2> >(
         systemd-cat --identifier=kz-deb --priority=debug)
 then
     declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimm'
