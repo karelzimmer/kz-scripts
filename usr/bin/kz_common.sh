@@ -27,9 +27,7 @@ declare MODULE_DESC
         # shellcheck disable=SC2034
         MODULE_DESC=$(gettext 'Common module for shell scripts')
 
-# On a server 'bash PROGRAM_NAME' $0 is reported as '-bash', so remove '-'.
-declare PROGRAM_PATH
-        PROGRAM_PATH=$(dirname "$(realpath "${0/^-/}")")
+declare PROGRAM_PATH='/usr/bin'
 
 declare OK=0
 declare ERROR=1
@@ -84,7 +82,8 @@ declare TITLE=''
 # the script as user root if not.
 function become_root {
     local   -i  PKEXEC_RC=0
-    local       PROGRAM_EXEC=$PROGRAM_PATH/$PROGRAM_NAME
+    # pkexec needs fully qualified path to the program to be executed.
+    local       PKEXEC_PROGRAM=$PROGRAM_PATH/$PROGRAM_NAME
 
     become_root_check || exit $OK
 
@@ -94,16 +93,16 @@ function become_root {
         then
             export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
-            TEXT="Restart (pkexec $PROGRAM_EXEC ${COMMANDLINE_ARGS[*]})..."
+            TEXT="Restart (pkexec $PKEXEC_PROGRAM ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
-            # Because $PROGRAM_EXEC will be started again, do not trap twice.
+            # Because $PKEXEC_PROGRAM will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$PROGRAM_EXEC" "${COMMANDLINE_ARGS[@]}" || PKEXEC_RC=$?
+            pkexec "$PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || PKEXEC_RC=$?
             exit $PKEXEC_RC
         else
-            TEXT="Restart (exec sudo $PROGRAM_EXEC ${COMMANDLINE_ARGS[*]})..."
+            TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
-            exec sudo "$PROGRAM_EXEC" "${COMMANDLINE_ARGS[@]}"
+            exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
         fi
     fi
 }
@@ -223,7 +222,7 @@ function init_script {
     trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
     TEXT="==== START logs for script $PROGRAM_NAME ====
-Started ($PROGRAM_PATH/$PROGRAM_NAME $* as $USER)."
+Started ($PROGRAM_NAME $* as $USER)."
     logmsg "$TEXT"
 }
 
@@ -393,16 +392,27 @@ function term {
                 TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
 or.")
                 errormsg "$TEXT"
-                exit "$RC"
             fi
+            if [[ $PROGRAM_NAME = 'kz-deb' ]]
+            then
+                infomsg "
+$(gettext 'To try to resolve, run:')
+sudo apt remove kz
+wget karelzimmer.nl/deb
+bash deb"
+            fi
+            exit "$RC"
             ;;
         exit )
-            logmsg "Delete kz deb files ($MODULE_NAME)..."
-            rm  --force                 \
-                --verbose               \
-                deb                     \
-                deb.{1..99}             \
-                "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
+            if [[ $PROGRAM_NAME = 'kz-deb' ]]
+            then
+                logmsg "Delete kz deb files ($MODULE_NAME)..."
+                rm  --force                 \
+                    --verbose               \
+                    deb                     \
+                    deb.{1..99}             \
+                    "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
+            fi
             TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"

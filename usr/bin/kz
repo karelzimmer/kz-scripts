@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")/kz_common.sh"
+source kz_common.sh
 
 
 ###############################################################################
@@ -147,9 +147,9 @@ $USAGE"
         exit $ERROR
     fi
     shift
-    TEXT="Restart (exec $PROGRAM_PATH/$PROGRAM_NAME-$COMMAND $*..."
+    TEXT="Restart (exec $PROGRAM_NAME-$COMMAND $*..."
     logmsg "$TEXT"
-    exec "$PROGRAM_PATH/$PROGRAM_NAME-$COMMAND" "$@"
+    exec "$PROGRAM_NAME-$COMMAND" "$@"
 }
 
 

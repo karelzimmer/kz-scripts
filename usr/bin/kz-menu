@@ -11,7 +11,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")/kz_common.sh"
+source kz_common.sh
 
 
 ###############################################################################
@@ -529,7 +529,7 @@ function execute_command {
     then
         GUI_OPTION='--gui'
     fi
-    "$PROGRAM_PATH/$CMD" "$arg" $GUI_OPTION -- || RC=$?
+    "$CMD" "$arg" $GUI_OPTION -- || RC=$?
     logmsg "$COMMAND: rc=$RC"
 }
 

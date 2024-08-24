@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-16 10:38+0200\n"
+"POT-Creation-Date: 2024-08-24 19:20+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -53,6 +53,9 @@ msgstr "Reeds uitgevoerd door de beheerder."
 #, sh-format
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
+
+msgid "To try to resolve, run:"
+msgstr "Om proberen op te lossen, voer uit:"
 
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."

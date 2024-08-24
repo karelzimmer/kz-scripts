@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")/kz_common.sh"
+source kz_common.sh
 
 
 ###############################################################################
@@ -106,12 +106,12 @@ function process_input {
     local SCRIPTNAME=''
     local SCRIPTS_REPO=$HOME/kz-scripts
 
-    cd "$SCRIPTS_REPO"
     TEXT=$(gettext 'Check:')
     infomsg "$TEXT"
 
     check_gettext
 
+    cd "$SCRIPTS_REPO"
     while read -r SCRIPT
     do
         SCRIPTDIR=$(dirname "$(realpath "$SCRIPT")")

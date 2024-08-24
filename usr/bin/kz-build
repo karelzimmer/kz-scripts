@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-source "$(dirname "$(realpath "$0")")/kz_common.sh"
+source kz_common.sh
 
 
 ###############################################################################
@@ -36,7 +36,6 @@ $(gettext 'Options:')
 $OPTIONS_HELP"
 
 declare     DOCS_REPO=$HOME/kz-docs
-declare     BIN_REPO=$HOME/bin
 declare     SCRIPTS_REPO=$HOME/kz-scripts
 
 declare     DEB_REPO=$HOME/kz-deb
@@ -135,12 +134,10 @@ $USAGE"
 function process_input {
     become_root_check || exit $OK
     report_repos
-    check_scripts
     build_uploads
     generate_mo
     build_deb
     install_package
-    check_website
 }
 
 
@@ -173,17 +170,6 @@ function report_repos {
             git status
         fi
     done
-}
-
-
-# This function check the scripts.
-function check_scripts {
-    TEXT=$(gettext 'Check scripts')...
-    infomsg "$TEXT"
-    # Call kz check.
-    logmsg 'Calling kz check...'
-    "$SCRIPTS_REPO/usr/bin"/kz check || ERROR_FLAG=true
-    logmsg 'Called kz check.'
 }
 
 
@@ -300,17 +286,6 @@ function install_package {
             reinstall                       \
             --yes                           \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME"
-}
-
-
-# This function checks the website for missing or not used files.
-function check_website {
-    TEXT=$(gettext 'Check website')...
-    infomsg "$TEXT"
-    # Call rchecklink.
-    logmsg 'Calling rchecklink...'
-    "$BIN_REPO"/rchecklink || ERROR_FLAG=true
-    logmsg 'Called rchecklink.'
 }
 
 

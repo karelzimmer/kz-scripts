@@ -16,19 +16,7 @@
     <vendor>Karel Zimmer</vendor>
     <vendor_url>https://karelzimmer.nl</vendor_url>
 
-    <action id="nl.karelzimmer.kz-install.dev">
-        <description gettext-domain="kz">Install apps</description>
-        <message gettext-domain="kz">Authentication is required to install apps</message>
-        <annotate key="org.freedesktop.policykit.exec.path">/home/karel/kz-scripts/usr/bin/kz-install</annotate>
-        <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
-        <defaults>
-            <allow_any>auth_admin</allow_any>
-            <allow_inactive>auth_admin</allow_inactive>
-            <allow_active>auth_admin</allow_active>
-        </defaults>
-    </action>
-
-    <action id="nl.karelzimmer.kz-install.prod">
+    <action id="nl.karelzimmer.kz-install">
         <description gettext-domain="kz">Install apps</description>
         <message gettext-domain="kz">Authentication is required to install apps</message>
         <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/kz-install</annotate>

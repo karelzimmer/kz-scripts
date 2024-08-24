@@ -33,7 +33,7 @@ _ = gettext.gettext
 MODULE_NAME = 'kz_common.py'
 MODULE_DESC = _('Common module for Python scripts')
 
-PROGRAM_PATH = f"{os.path.dirname(os.path.realpath(__file__))}"
+PROGRAM_PATH = '/usr/bin'
 
 OK = 0
 ERROR = 1
