@@ -35,7 +35,6 @@ $PROGRAM_DESC.
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-declare BIN_REPO=$HOME/bin
 declare DEB_REPO=$HOME/kz-deb
 declare DOCS_REPO=$HOME/kz-docs
 declare SCRIPTS_REPO=$HOME/kz-scripts
@@ -109,7 +108,6 @@ function process_input {
     become_root_check || exit $OK
     check_repos
     check_scripts
-    check_website
     build_package
     upload_website
     install_package
@@ -162,19 +160,8 @@ function check_scripts {
     infomsg "$TEXT"
     # Call kz check.
     logmsg 'Calling kz check...'
-    "$SCRIPTS_REPO/usr/bin"/kz check || ERROR_FLAG=true
+    "$SCRIPTS_REPO/usr/bin"/kz check || exit $ERROR
     logmsg 'Called kz check.'
-}
-
-
-# This function checks the website for missing or not used files.
-function check_website {
-    TEXT=$(gettext 'Check website')...
-    infomsg "$TEXT"
-    # Call rchecklink.
-    logmsg 'Calling rchecklink...'
-    "$BIN_REPO"/rchecklink || ERROR_FLAG=true
-    logmsg 'Called rchecklink.'
 }
 
 

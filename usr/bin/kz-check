@@ -35,6 +35,7 @@ $PROGRAM_DESC.
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
+declare BIN_REPO=$HOME/bin
 declare ERROR_FLAG=false
 
 
@@ -171,6 +172,19 @@ function process_input {
             sort
             )
     cd "$HOME"
+
+    check_website
+}
+
+
+# This function checks the website for missing or not used files.
+function check_website {
+    TEXT=$(gettext 'Check website')...
+    infomsg "$TEXT"
+    # Call rchecklink.
+    logmsg 'Calling rchecklink...'
+    "$BIN_REPO"/rchecklink || ERROR_FLAG=true
+    logmsg 'Called rchecklink.'
 }
 
 

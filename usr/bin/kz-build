@@ -66,8 +66,6 @@ declare -A  DEB_TARGETS=(
             [man_nl]=$DEB_REPO_DISTDIR/usr/share/man/nl/man1
             )
 
-declare     ERROR_FLAG=false
-
 
 ###############################################################################
 # Functions
@@ -291,16 +289,9 @@ function install_package {
 
 # This function controls the termination of the script.
 function term_script {
-    if $ERROR_FLAG
-    then
-        TEXT=$(gettext 'Fix all the messages above.')
-        errormsg "$TEXT"
-        exit $ERROR
-    else
-        TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
-        infomsg "$TEXT"
-        exit $OK
-    fi
+    TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
+    infomsg "$TEXT"
+    exit $OK
 }
 
 
