@@ -15,31 +15,21 @@
 if  !   source kz_common.sh 2> >(
         systemd-cat --identifier=kz-deb --priority=debug)
 then
-    declare KZ_COMMON_FILE
-            KZ_COMMON_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
-    declare KZ_COMMON_GITHUB_URI='https://raw.githubusercontent.com/karel'
-            KZ_COMMON_GITHUB_URI+='zimmer/kz-scripts/main/usr/bin/kz_common.sh'
+    declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimm'
+            KZ_COMMON_GITHUB_FILE+='er/kz-scripts/main/usr/bin/kz_common.sh'
+    declare KZ_COMMON_LOCAL_FILE
+            KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
     echo    'Download kz_common.sh...' |&
             systemd-cat --identifier=kz-deb --priority=debug
-    set     -o pipefail
-    if  !   wget --output-document="$KZ_COMMON_FILE" $KZ_COMMON_GITHUB_URI |&
+    wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_GITHUB_FILE |&
             systemd-cat --identifier=kz-deb --priority=debug
-    then
-        echo    'Internet?' | tee >(
-                systemd-cat --identifier=kz-deb --priority=debug)
-        echo    'Remove deb & kz_common.sh...' |&
-                systemd-cat --identifier=kz-deb --priority=debug
-        rm      --verbose deb "$KZ_COMMON_FILE" |&
-                systemd-cat --identifier=kz-deb --priority=debug
-        exit    1
-    fi
     echo    'Source kz_common.sh...' |&
             systemd-cat --identifier=kz-deb --priority=debug
-    source  "$KZ_COMMON_FILE" 2> >(
+    source  "$KZ_COMMON_LOCAL_FILE" 2> >(
             systemd-cat --identifier=kz-deb --priority=debug)
     echo    'Remove kz_common.sh...' |&
             systemd-cat --identifier=kz-deb --priority=debug
-    rm      --verbose "$KZ_COMMON_FILE" |&
+    rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
             systemd-cat --identifier=kz-deb --priority=debug
 fi
 
@@ -148,12 +138,12 @@ function prepare_processing {
 
 # This function downloads package kz.
 function download_package {
-    local KZ_DEB_SITE_FILE='kz_4.2.1_all.deb'
-    local KZ_DEB_SITE_URI='https://karelzimmer.nl/assets/kz-deb/'
+    local   KZ_DEB_SITE_FILE='https://karelzimmer.nl/assets/kz-deb/'
+            KZ_DEB_SITE_FILE+='kz_4.2.1_all.deb'
 
-    logmsg 'Download package kz...'
+    logmsg  'Download package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
-            "$KZ_DEB_SITE_URI/$KZ_DEB_SITE_FILE"    |& $LOGCMD
+            "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
 }
 
 
