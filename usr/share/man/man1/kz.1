@@ -171,13 +171,13 @@ Examples are \fBkz build\fR and \fBkz deploy\fR.
 .sp
 \fBCI/CD Pipeline flow\fR
 .br
-Application code ----> Source scm ----> Build ----> Test       ----> Deployment
-.br
-vscode                 GitHub           kz-build    CLI/TUI/GUI      kz-deploy
-.br
-+------------- DEV -------------+       +------- TEST --------+      +- PROD -+
-
-
+Application code ----> Source scm ----> Build ----> Test       ----> Check ----> Deploy
+.sp
+.sp
+vscode                 GitHub           kz-build    CLI/TUI/GUI      kz-check    kz-deploy
+.sp
+.sp
++------------- DEV -------------+       +------- TEST --------+      +------- PROD ------+
 .sp
 \fB3. Day 0/Day 1/Day 2 Operations\fR
 .br

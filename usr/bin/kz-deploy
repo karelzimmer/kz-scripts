@@ -114,7 +114,7 @@ function process_input {
 }
 
 
-# This function builds package kz.
+# This function builds package kz and website.
 function build_package {
     TEXT=$(gettext 'Build package and website')...
     infomsg "$TEXT"
