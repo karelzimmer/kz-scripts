@@ -107,8 +107,8 @@ $USAGE"
 function process_input {
     become_root_check || exit $OK
     build_package
-    check_repos
     check_scripts
+    check_repos
     upload_website
     install_package
 }
@@ -122,6 +122,17 @@ function build_package {
     logmsg 'Calling kz build...'
     "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
     logmsg 'Called kz build.'
+}
+
+
+# This function check the scripts.
+function check_scripts {
+    TEXT=$(gettext 'Check scripts')...
+    infomsg "$TEXT"
+    # Call kz check.
+    logmsg 'Calling kz check...'
+    kz check || exit $ERROR
+    logmsg 'Called kz check.'
 }
 
 
@@ -162,17 +173,6 @@ function check_repos {
     then
         exit $ERROR
     fi
-}
-
-
-# This function check the scripts.
-function check_scripts {
-    TEXT=$(gettext 'Check scripts')...
-    infomsg "$TEXT"
-    # Call kz check.
-    logmsg 'Calling kz check...'
-    kz check || exit $ERROR
-    logmsg 'Called kz check.'
 }
 
 
