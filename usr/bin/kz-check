@@ -228,7 +228,7 @@ found.")
 # This function checks Shell and Python script code.
 function check_code {
     local BASH_SCRIPT='#!''/usr/bin/env bash'
-    local PYTHON_SCRIPT='#!''/usr/bin/python3'
+    local PYTHON_SCRIPT='#!''/usr/bin/env python3'
     local TAB_COMPLETION_SCRIPT='# ''shellcheck shell=bash'
 
     if grep --quiet --line-regexp --regexp="$BASH_SCRIPT" "$SCRIPT"
