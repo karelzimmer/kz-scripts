@@ -177,13 +177,16 @@ Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
 .sp
 \fBCI/CD Pipeline flow\fR
 .br
-Applicatiecode ----> Source scm ----> Build ----> Test       ----> Check ----> Deploy
+Applicatiecode ----> Source scm ----> Build ----> Test       ----> Check ---->\
+ Deploy
 .sp
 .sp
-vscode               GitHub           kz-build    CLI/TUI/GUI      kz-check    kz-deploy
+vscode               GitHub           kz-build    CLI/TUI/GUI      kz-check   \
+ kz-deploy
 .sp
 .sp
-+------------ DEV ------------+       +------- TEST --------+      +------- PROD ------+
++------------ DEV ------------+       +------- TEST --------+      +------- PR\
+OD ------+
 .sp
 \fB3. Day 0/Day 1/Day 2 Operations\fR
 .br
