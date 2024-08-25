@@ -340,12 +340,6 @@ msgstr "Pakket kz bouwen"
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
 
-msgid "Show repos not on branch main"
-msgstr "Toon repo's die zich niet op branch main bevinden"
-
-msgid "Show repos which are not clean"
-msgstr "Toon repo's die niet schoon zijn"
-
 msgid "Generate .mo file"
 msgstr "Genereer .mo bestand"
 

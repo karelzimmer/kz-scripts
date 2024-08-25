@@ -131,57 +131,32 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input {
     become_root_check || exit $OK
-    report_repos
-    build_uploads
     generate_mo
     build_deb
+    build_website
     install_package
 }
 
 
-# This function reports repos which are not in the desired state.
-function report_repos {
-    local REPO=''
+# This function generates the gettext binary Machine Object (.mo) file from the
+# readable Portable Object (.po) file.
+function generate_mo {
+    local lc_messages=''
 
-    TEXT=$(gettext 'Show repos not on branch main')...
+    lc_messages=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    TEXT=$(gettext 'Generate .mo file')...
     infomsg "$TEXT"
-    for REPO in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
-    do
-        cd "$REPO"
-        if [[ $(git branch --show-current) != 'main' ]]
-        then
-            TEXT=$(eval_gettext "Repo \$REPO not on branch main.")
-            infomsg "$TEXT"
-        fi
-    done
-    TEXT=$(gettext 'Show repos which are not clean')...
-    infomsg "$TEXT"
-    for REPO in $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
-    do
-        cd "$REPO"
-        # Prevent false positives.
-        git status |& $LOGCMD
-        if ! git diff-index --quiet HEAD
-        then
-            TEXT=$(eval_gettext "Repo \$REPO is not clean.")
-            infomsg "$TEXT"
-            git status
-        fi
-    done
+    msgfmt --output-file="$lc_messages/kz.mo"  "$lc_messages/kz.po"
 }
 
 
 # This function builds the website.
-function build_uploads {
+function build_website {
     local FILE=''
     local FILENAME=''
 
     TEXT=$(gettext 'Build website')...
     infomsg "$TEXT"
-
-    # Make sure the permissions are correct for the sync.
-    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
-    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/src/.
     rsync   --archive               \
@@ -213,18 +188,6 @@ function build_uploads {
 }
 
 
-# This function generates the gettext binary Machine Object (.mo) file from the
-# readable Portable Object (.po) file.
-function generate_mo {
-    local lc_messages=''
-
-    lc_messages=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
-    TEXT=$(gettext 'Generate .mo file')...
-    infomsg "$TEXT"
-    msgfmt --output-file="$lc_messages/kz.mo"  "$lc_messages/kz.po"
-}
-
-
 # This function builds package kz.
 function build_deb {
     local BUILD_ID=''
@@ -241,6 +204,10 @@ function build_deb {
             --delete-excluded       \
             "${DEB_SOURCES[src]}"/  \
             "${DEB_TARGETS[dist]}"  |& $LOGCMD
+
+    # Make sure the permissions are correct for the sync with repo kz-scripts.
+    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
+    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
 
     # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive                       \
