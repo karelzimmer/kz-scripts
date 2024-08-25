@@ -106,23 +106,13 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input {
     become_root_check || exit $OK
-    build_package
     check_scripts
     check_repos
+    build_package_and_website
     upload_website
     install_package
 }
 
-
-# This function builds package kz and website.
-function build_package {
-    TEXT=$(gettext 'Build package and website')...
-    infomsg "$TEXT"
-    # Call kz build.
-    logmsg 'Calling kz build...'
-    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
-    logmsg 'Called kz build.'
-}
 
 
 # This function check the scripts.
@@ -131,7 +121,7 @@ function check_scripts {
     infomsg "$TEXT"
     # Call kz check.
     logmsg 'Calling kz check...'
-    kz check || exit $ERROR
+    "$SCRIPTS_REPO/usr/bin"/kz check || exit $ERROR
     logmsg 'Called kz check.'
 }
 
@@ -175,6 +165,16 @@ function check_repos {
     fi
 }
 
+
+# This function builds package kz and website.
+function build_package_and_website {
+    TEXT=$(gettext 'Build package and website')...
+    infomsg "$TEXT"
+    # Call kz build.
+    logmsg 'Calling kz build...'
+    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
+    logmsg 'Called kz build.'
+}
 
 # This function uploads the website.
 function upload_website {

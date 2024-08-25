@@ -132,7 +132,7 @@ $USAGE"
 function process_input {
     become_root_check || exit $OK
     generate_mo
-    build_deb
+    build_package
     build_website
     install_package
 }
@@ -189,7 +189,7 @@ function build_website {
 
 
 # This function builds package kz.
-function build_deb {
+function build_package {
     local BUILD_ID=''
 
     TEXT=$(gettext 'Build package')...
