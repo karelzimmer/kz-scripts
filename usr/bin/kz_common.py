@@ -56,8 +56,32 @@ OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
 OPTIONS_SHORT = 'hmuv'
 OPTIONS_LONG = 'help,manual,usage,version'
 
-# Determine whether a desktop environment is available.
 # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
+if subprocess.run("[[ $(lsb_release --id --short) = 'Debian' ]]",
+                  shell=True, executable='/bin/bash').returncode == OK:
+    DEBIAN = True
+else:
+    DEBIAN = False
+
+if subprocess.run('[[ -n $(type gnome-session 2> /dev/null) ]]',
+                  shell=True, executable='/bin/bash').returncode == OK:
+    GNOME = True
+else:
+    GNOME = False
+
+if subprocess.run('[[ -n $(type snap 2> /dev/null) ]]',
+                  shell=True, executable='/bin/bash').returncode == OK:
+    SNAP = True
+else:
+    SNAP = False
+
+if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
+                  shell=True, executable='/bin/bash').returncode == OK:
+    UBUNTU = True
+else:
+    UBUNTU = False
+
+# Determine whether a desktop environment is available.
 if subprocess.run('[[ -n $('
                   'type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} '
                   '2> /dev/null'

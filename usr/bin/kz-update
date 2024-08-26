@@ -82,14 +82,7 @@ def perform_update():
     COMMAND = 'sudo apt-get dist-upgrade --yes'
     perform_command(COMMAND)
 
-    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
-    try:
-        subprocess.run('type snap &> /dev/null', shell=True, check=True,
-                       executable='/bin/bash')
-    except Exception as exc:
-        TEXT = str(exc)
-        kz_common.logmsg(PROGRAM_NAME, TEXT)
-    else:
+    if kz_common.SNAP:
         COMMAND = 'sudo snap refresh'
         perform_command(COMMAND)
 

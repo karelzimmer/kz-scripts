@@ -29,7 +29,6 @@ rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
 
 # Setup dashtodock for *
 # Not every GNOME desktop environment has this extension available ==> ' || true'.
-if type gnome-session &> /dev/null; then GNOME=true; else GNOME=false; fi
 if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi
 if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
@@ -43,7 +42,6 @@ if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-
 
 # Reset dashtodock for *
 # Not every GNOME desktop environment has this extension available ==> ' || true'.
-if type gnome-session &> /dev/null; then GNOME=true; else GNOME=false; fi
 if $GNOME; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi
 if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
@@ -56,12 +54,10 @@ if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-h
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
 # Setup desktop-installer for *
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then DESKTOP_ENVIRONMENT=true; else DESKTOP_ENVIRONMENT=false; fi
 if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=install-debian; fi
 if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
 # Reset desktop-installer for *
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then DESKTOP_ENVIRONMENT=true; else DESKTOP_ENVIRONMENT=false; fi
 if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=install-debian; fi
 if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
@@ -84,7 +80,6 @@ kz-gnome --addbef=firefox-esr
 kz-gnome --addbef=firefox
 
 # Setup gdebi for *
-if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then DESKTOP_ENVIRONMENT=true; else DESKTOP_ENVIRONMENT=false; fi
 if $DESKTOP_ENVIRONMENT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
@@ -92,7 +87,6 @@ if $DESKTOP_ENVIRONMENT; then xdg-mime default gdebi.desktop application/vnd.deb
 
 # Setup gnome for *
 # Not every GNOME desktop environment has this key.===> ' || true'.
-if type gnome-session &> /dev/null; then GNOME=true; else GNOME=false; fi
 if $GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
@@ -125,7 +119,6 @@ if $GNOME; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant '
 
 # Reset gnome for *
 # Not every GNOME desktop environment has this key.===> ' || true'.
-if type gnome-session &> /dev/null; then GNOME=true; else GNOME=false; fi
 if $GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
