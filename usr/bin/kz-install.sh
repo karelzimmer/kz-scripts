@@ -22,26 +22,28 @@ if $UBUNTU; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/
 if $UBUNTU; then sudo systemctl enable --now apport.service; fi
 
 # Install extra-repos on *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then DEBIAN=true; else DEBIAN=false; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then DESKTOP_ENVIRONMENT=true; else DESKTOP_ENVIRONMENT=false; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository contrib; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository non-free; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then DEBIAN=true; else DEBIAN=false; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository contrib; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository non-free; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
 
 # Remove extra-repos from *
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then DEBIAN=true; else DEBIAN=false; fi
 if [[ -n $(type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null) ]]; then DESKTOP_ENVIRONMENT=true; else DESKTOP_ENVIRONMENT=false; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository --remove contrib; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository --remove non-free; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
-if $DEBIAN && $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes deb-multimedia-keyring; fi
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then DEBIAN=true; else DEBIAN=false; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove contrib; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove non-free; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --yes deb-multimedia-keyring; fi
 
 # Install update-system on *
-# Call kz update.
-kz update
+if type snap &> /dev/null; then SNAP=true; else SNAP=false; fi
+sudo apt-get update
+sudo apt-get upgrade --yes
+if $SNAP; then sudo snap refresh; fi
 
 # Remove update-system from *
 # There is no command available to remove update system.
