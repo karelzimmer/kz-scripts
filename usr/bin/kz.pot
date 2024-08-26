@@ -335,9 +335,6 @@ msgstr ""
 msgid "Repo $REPO is not clean."
 msgstr ""
 
-msgid "Build package and website"
-msgstr ""
-
 msgid "Upload website"
 msgstr ""
 

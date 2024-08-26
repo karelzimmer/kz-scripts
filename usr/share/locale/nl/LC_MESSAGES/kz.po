@@ -378,9 +378,6 @@ msgstr "Controleer of alle repo's schoon zijn"
 msgid "Repo $REPO is not clean."
 msgstr "Repo $REPO is niet schoon."
 
-msgid "Build package and website"
-msgstr "Bouw pakket en website"
-
 msgid "Upload website"
 msgstr "Uploaden website"
 
