@@ -362,7 +362,7 @@ msgid "Install package"
 msgstr "Installeer pakket"
 
 msgid "Distribute website including kz package"
-msgstr "Website distribueren inclusief kz-pakket"
+msgstr "Website distribueren inclusief pakket kz"
 
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
