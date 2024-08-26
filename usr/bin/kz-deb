@@ -227,7 +227,7 @@ Linux.")"
 $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
-    logmsg "Delete kz deb files ($PROGRAM_NAME)..."
+    logmsg "Delete deb files ($PROGRAM_NAME)..."
     rm --force --verbose deb deb.{1..99} |& $LOGCMD
     exit $OK
 }

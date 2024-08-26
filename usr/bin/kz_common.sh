@@ -406,7 +406,7 @@ bash deb"
         exit )
             if [[ $PROGRAM_NAME = 'kz-deb' ]]
             then
-                logmsg "Delete kz deb files ($MODULE_NAME)..."
+                logmsg "Delete deb files ($MODULE_NAME)..."
                 rm  --force                 \
                     --verbose               \
                     deb                     \
