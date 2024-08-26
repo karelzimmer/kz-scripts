@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Distribute kz package
+# SPDX-FileComment: Distribute website including kz package
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -21,7 +21,7 @@ source kz_common.sh
 
 declare PROGRAM_NAME='kz-deploy'
 declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Distribute kz package')
+        PROGRAM_DESC=$(gettext 'Distribute website including kz package')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
@@ -117,7 +117,7 @@ function process_input {
 
 # This function check the scripts.
 function check_scripts {
-    TEXT=$(gettext 'Check scripts')...
+    TEXT=$(gettext 'Check scripts and website')...
     infomsg "$TEXT"
     # Call kz check.
     logmsg 'Calling kz check...'

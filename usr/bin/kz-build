@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Build package kz
+# SPDX-FileComment: Build website including package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -21,7 +21,7 @@ source kz_common.sh
 
 declare     PROGRAM_NAME='kz-build'
 declare     PROGRAM_DESC
-            PROGRAM_DESC=$(gettext 'Build package kz')
+            PROGRAM_DESC=$(gettext 'Build website including package kz')
 declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare     USAGE
@@ -132,8 +132,8 @@ $USAGE"
 function process_input {
     become_root_check || exit $OK
     generate_mo
-    build_package
     build_website
+    build_package
     install_package
 }
 

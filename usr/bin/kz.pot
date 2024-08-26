@@ -290,7 +290,7 @@ msgstr ""
 msgid "The backup has been made for $USER (there are $NUM_USERS users)."
 msgstr ""
 
-msgid "Build package kz"
+msgid "Build website including package kz"
 msgstr ""
 
 #, sh-format
@@ -303,7 +303,7 @@ msgstr ""
 msgid "Fix all the messages above."
 msgstr ""
 
-msgid "Check scripts"
+msgid "Check scripts and website"
 msgstr ""
 
 msgid "Check:"
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Install package"
 msgstr ""
 
-msgid "Distribute kz package"
+msgid "Distribute website including kz package"
 msgstr ""
 
 msgid "Check that all repos are on branch main"

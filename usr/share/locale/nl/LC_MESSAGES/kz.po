@@ -333,8 +333,8 @@ msgstr "De back-up is gemaakt."
 msgid "The backup has been made for $USER (there are $NUM_USERS users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $NUM_USERS gebruikers)."
 
-msgid "Build package kz"
-msgstr "Pakket kz bouwen"
+msgid "Build website including package kz"
+msgstr "Website bouwen inclusief pakket kz"
 
 #, sh-format
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
@@ -346,8 +346,8 @@ msgstr "Genereer .mo bestand"
 msgid "Fix all the messages above."
 msgstr "Herstel alle meldingen hierboven."
 
-msgid "Check scripts"
-msgstr "Controleer scripts"
+msgid "Check scripts and website"
+msgstr "Controleer scripts en website"
 
 msgid "Check:"
 msgstr "Controleer:"
@@ -361,8 +361,8 @@ msgstr "Bouw pakket"
 msgid "Install package"
 msgstr "Installeer pakket"
 
-msgid "Distribute kz package"
-msgstr "Pakket kz distribueren"
+msgid "Distribute website including kz package"
+msgstr "Website distribueren inclusief kz-pakket"
 
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"

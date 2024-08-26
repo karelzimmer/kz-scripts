@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Check scripts
+# SPDX-FileComment: Check scripts and website
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -21,7 +21,7 @@ source kz_common.sh
 
 declare PROGRAM_NAME='kz-check'
 declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Check scripts')
+        PROGRAM_DESC=$(gettext 'Check scripts and website')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
