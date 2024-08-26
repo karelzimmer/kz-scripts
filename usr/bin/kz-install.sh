@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 ###############################################################################
-# SPDX-FileComment: Install file
+# SPDX-FileComment: Install file for use with kz-install script
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
