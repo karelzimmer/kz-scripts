@@ -147,7 +147,7 @@ $USAGE"
         exit $ERROR
     fi
     shift
-    TEXT="Restart (exec $PROGRAM_NAME-$COMMAND $*..."
+    TEXT="Restart (exec $PROGRAM_NAME-$COMMAND $*...)"
     logmsg "$TEXT"
     exec "$PROGRAM_NAME-$COMMAND" "$@"
 }

@@ -71,13 +71,6 @@ else
     # shellcheck disable=SC2034
     declare GNOME=false
 fi
-if type snap &> /dev/null
-then
-    declare SNAP=true
-else
-    # shellcheck disable=SC2034
-    declare SNAP=false
-fi
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]
 then
     declare UBUNTU=true
@@ -85,8 +78,6 @@ else
     # shellcheck disable=SC2034
     declare UBUNTU=false
 fi
-
-# Determine whether a desktop environment is available.
 if [[ -n $(
     type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null
     ) ]]

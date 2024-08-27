@@ -62,26 +62,16 @@ if subprocess.run("[[ $(lsb_release --id --short) = 'Debian' ]]",
     DEBIAN = True
 else:
     DEBIAN = False
-
 if subprocess.run('[[ -n $(type gnome-session 2> /dev/null) ]]',
                   shell=True, executable='/bin/bash').returncode == OK:
     GNOME = True
 else:
     GNOME = False
-
-if subprocess.run('[[ -n $(type snap 2> /dev/null) ]]',
-                  shell=True, executable='/bin/bash').returncode == OK:
-    SNAP = True
-else:
-    SNAP = False
-
 if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
                   shell=True, executable='/bin/bash').returncode == OK:
     UBUNTU = True
 else:
     UBUNTU = False
-
-# Determine whether a desktop environment is available.
 if subprocess.run('[[ -n $('
                   'type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} '
                   '2> /dev/null'
