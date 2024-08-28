@@ -67,12 +67,12 @@ declare SYSTEMD_MOUNT=$SYSTEMD_MOUNT_DIR/$SYSTEMD_MOUNT_FILE
 
 declare NAS_USER_NAME
         NAS_USER_NAME=$(
-    grep --regexp='1000' /etc/passwd | cut --delimiter=: --fields=1
+    grep --regexp='1000' /etc/passwd | cut  --delimiter=':' --fields=1
     )
 declare NAS_IP_ADDRESS=192.168.0.200
 declare NAS_SHARE_NAME
         NAS_SHARE_NAME=$(
-    grep --regexp='1000' /etc/passwd | cut --delimiter=: --fields=1
+    grep --regexp='1000' /etc/passwd | cut  --delimiter=':' --fields=1
     )
 declare NAS_PASSWORD='secret'
 

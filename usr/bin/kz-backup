@@ -278,7 +278,7 @@ function backup_setting_users {
             gettext '_username_|UID|_user_'
             printf '\n'
             grep --regexp='/home' /etc/passwd   |
-            cut --delimiter=: --fields=1,3,5    |
+            cut --delimiter=':' --fields=1,3,5  |
             tr ':' '|'
             )
     USERS+=$(
@@ -289,7 +289,7 @@ function backup_setting_users {
                 id "$uid"
             done < <(
                 grep --regexp='/home' /etc/passwd |
-                cut --delimiter=: --fields=1
+                cut --delimiter=':' --fields=1
                 )
             )
 
