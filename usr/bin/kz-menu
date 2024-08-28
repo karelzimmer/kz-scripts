@@ -514,14 +514,15 @@ $PROMPT"
 
 # This function executes the commands.
 function execute_command {
-    local   -i  RC=0
+    local       ARG=''
     local       CMD=''
     local       GUI_OPTION=''
+    local   -i  RC=0
 
     CMD=$(
         printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=1
         )
-    arg=$(
+    ARG=$(
         printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=2-
         )
 
@@ -529,7 +530,8 @@ function execute_command {
     then
         GUI_OPTION='--gui'
     fi
-    "$CMD" "$arg" $GUI_OPTION -- || RC=$?
+
+    "$CMD" "$ARG" $GUI_OPTION -- || RC=$?
     logmsg "$COMMAND: rc=$RC"
 }
 
