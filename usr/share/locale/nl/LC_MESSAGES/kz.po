@@ -680,8 +680,8 @@ msgstr "Ga naar installatiemenu"
 msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 
-msgid "_username_|UID|_user_"
-msgstr "_gebruikersnaam_|UID|_gebruiker_"
+msgid "_username_|userid|_user_"
+msgstr "_gebruikersnaam_|userid|_gebruiker_"
 
 msgid "Additional _user_s can be added manually:"
 msgstr "Extra _gebruiker_s kunnen handmatig worden toegevoegd:"

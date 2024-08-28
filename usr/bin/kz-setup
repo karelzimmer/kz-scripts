@@ -320,23 +320,23 @@ function process_input_file_by_app {
 # USER.
 function process_input_file_by_user {
     local INPUT_RECORD=''
-    local user_match=false
+    local USER_MATCH=false
 
     while read -r INPUT_RECORD
     do
         case $INPUT_RECORD in
             '#'*$SETUP*for*'*' | '#'*$SETUP*for*$USER@$HOSTNAME* )
                 # Matching app record.
-                user_match=true
+                USER_MATCH=true
                 printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
             '#'*$SETUP*for* | '#'*$RESET*for* )
                 # Mismatched app record.
-                user_match=false
+                USER_MATCH=false
                 continue
                 ;;
             * )
-                if $user_match
+                if $USER_MATCH
                 then
                     # Record for command file.
                     printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"

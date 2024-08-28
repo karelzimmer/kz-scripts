@@ -35,7 +35,7 @@ if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --yes deb-multimedi
 
 # Install update-system on *
 # Call kz update.
-kz update
+sudo kz update
 
 # Remove update-system from *
 # There is no command available to remove update system.

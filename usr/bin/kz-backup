@@ -273,9 +273,10 @@ function backup_setting_apps {
 # This function saves instructions for adding additional users.
 function backup_setting_users {
     local OUTPUT_FILE=$SETTINGS_DIR/users.txt
+    local USER_ID=0
 
     USERS=$(
-            gettext '_username_|UID|_user_'
+            gettext '_username_|userid|_user_'
             printf '\n'
             grep --regexp='/home' /etc/passwd   |
             cut --delimiter=':' --fields=1,3,5  |
@@ -283,10 +284,10 @@ function backup_setting_users {
             )
     USERS+=$(
             printf '\n'
-            while read -r uid
+            while read -r USER_ID
             do
                 printf '\n'
-                id "$uid"
+                id "$USER_ID"
             done < <(
                 grep --regexp='/home' /etc/passwd |
                 cut --delimiter=':' --fields=1

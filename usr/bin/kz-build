@@ -141,17 +141,18 @@ function process_input {
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
 function generate_mo {
-    local lc_messages=''
+    local LC_MESSAGES=''
 
-    lc_messages=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    LC_MESSAGES=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
     TEXT=$(gettext 'Generate .mo file')...
     infomsg "$TEXT"
-    msgfmt --output-file="$lc_messages/kz.mo"  "$lc_messages/kz.po"
+    msgfmt --output-file="$LC_MESSAGES/kz.mo"  "$LC_MESSAGES/kz.po"
 }
 
 
 # This function builds the website.
 function build_website {
+    local DIR=''
     local FILE=''
     local FILENAME=''
 
@@ -166,9 +167,9 @@ function build_website {
             "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
 
     # Make sure all necessary directories are available.
-    for dir in "${UPLOADS_TARGETS[@]}"
+    for DIR in "${UPLOADS_TARGETS[@]}"
     do
-        mkdir --parents "$dir" |& $LOGCMD
+        mkdir --parents "$DIR" |& $LOGCMD
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.

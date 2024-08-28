@@ -589,7 +589,7 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr ""
 
-msgid "_username_|UID|_user_"
+msgid "_username_|userid|_user_"
 msgstr ""
 
 msgid "Additional _user_s can be added manually:"
