@@ -228,7 +228,7 @@ function build_package {
             "${DEB_TARGETS[man_nl]}"/*  |& $LOGCMD
 
     # Capture build id Debian package.
-    BUILD_ID=$(date '+%Y-%m-%dT%H:%M')
+    BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
     mkdir --parents "${DEB_TARGETS[build]}" |& $LOGCMD
     printf '%s' "$BUILD_ID" > "${DEB_TARGETS[build]}/$PROGRAM_NAME.id"
 
