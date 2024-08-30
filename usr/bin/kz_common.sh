@@ -64,12 +64,12 @@ declare     DESKTOP_ENVIRONMENT=true
 [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]] ||
             DESKTOP_ENVIRONMENT=false
 declare     DEBIAN=true
-declare     UBUNTU=true
-declare     GNOME=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Debian' ]] || DEBIAN=false
+declare     UBUNTU=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Ubuntu' ]] || UBUNTU=false
+declare     GNOME=true
 # shellcheck disable=SC2034
 [[ -n $(type -t gnome-session) ]] || GNOME=false
 

@@ -297,9 +297,9 @@ function restore_setting_desktop() {
 
 # This function controls the termination of the script.
 function term_script() {
-    local   -i  NUM_USERS
-    local   -i  USER_ID=0
+    local       USER_NAME=''
     local       USERS=''
+    local   -i  NUM_USERS
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)
     if [[ $NUM_USERS -eq 1 ]]
@@ -315,10 +315,10 @@ function term_script() {
                 )
         USERS+=$(
                 printf '\n'
-                while read -r USER_ID
+                while read -r USER_NAME
                 do
                     printf '\n'
-                    id "$USER_ID"
+                    id "$USER_NAME"
                 done < <(
                     grep --regexp='/home' /etc/passwd |
                     cut  --delimiter=':' --fields=1
@@ -353,6 +353,7 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 # This function tries to unmount the USB device.
 function term_script_usb() {
     local DEV=''
+    local TEXT=''
 
     TEXT=$(gettext 'Disconnect the USB media')
     DEV='/dev/'$(

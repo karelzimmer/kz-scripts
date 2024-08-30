@@ -272,7 +272,7 @@ function backup_setting_apps() {
 # This function saves instructions for adding additional users.
 function backup_setting_users() {
     local OUTPUT_FILE=$SETTINGS_DIR/users.txt
-    local USER_ID=0
+    local USER_NAME=''
 
     USERS=$(
             gettext '_username_|userid|_user_'
@@ -283,10 +283,10 @@ function backup_setting_users() {
             )
     USERS+=$(
             printf '\n'
-            while read -r USER_ID
+            while read -r USER_NAME
             do
                 printf '\n'
-                id "$USER_ID"
+                id "$USER_NAME"
             done < <(
                 grep --regexp='/home' /etc/passwd |
                 cut --delimiter=':' --fields=1
@@ -564,6 +564,7 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 # This function tries to unmount the USB device.
 function term_script_usb() {
     local DEV=''
+    local TEXT=''
 
     TEXT=$(gettext 'Disconnect the USB media')
     DEV='/dev/'$(
