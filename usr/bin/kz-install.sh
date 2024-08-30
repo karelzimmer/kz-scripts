@@ -49,7 +49,7 @@ sudo apt-get remove --yes ansible
 # Install anydesk on -nohost
 # Remote Wayland display server is not supported.
 wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
 sudo apt-get update
 sudo apt-get install --yes anydesk
 # Web app: https://my.anydesk.com/v2
@@ -153,7 +153,7 @@ sudo systemctl start fwupd.service
 # Install disabled-lidswitch on pc-van-hugo
 # Do nothing when the lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
-echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf > /dev/null
+echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 # Remove disabled-lidswitch from pc-van-hugo
 # Restore the default action when the lid is closed.
@@ -243,11 +243,11 @@ sudo apt-get remove --yes epiphany-browser
 
 # Install google-chrome on *
 if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
-if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
+if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes google-chrome-stable; fi
 # Add the source list again because the installation overwrote the newly added source list.
-if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list > /dev/null; fi
+if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 # The apt-key added during installation is no longer needed.
 if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
@@ -261,11 +261,11 @@ if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
 
 # Install google-earth on -nohost
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 sudo apt-get update
 sudo apt-get install --yes google-earth-pro-stable
 # Add the source list again because the installation overwrote the newly added source list.
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 
 # Remove google-earth from -nohost
 sudo apt-get remove --yes google-earth-pro-stable
@@ -378,7 +378,7 @@ sudo apt-get remove --yes shellcheck
 
 # Install signal on pc06 pc07
 wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list > /dev/null
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
 sudo apt-get update
 sudo apt-get install --yes signal-desktop
 
@@ -425,7 +425,7 @@ sudo apt-get remove --yes gnome-sushi
 
 # Install teamviewer on *
 if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
-if $DESKTOP_ENVIRONMENT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list > /dev/null; fi
+if $DESKTOP_ENVIRONMENT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer; fi
 # The apt-key added during installation is no longer needed.
@@ -524,7 +524,7 @@ if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes vlc; fi
 # Install vscode on pc01 pc06 pc07
 sudo apt-get install --yes apt-transport-https
 wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list
 sudo apt-get update
 sudo apt-get install --yes code
 sudo update-alternatives --set editor /usr/bin/code
@@ -537,7 +537,7 @@ sudo apt-get update
 
 # Install webmin on pc07
 wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
-echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list > /dev/null
+echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 sudo apt-get update
 sudo apt-get install --yes webmin
 # Web app: https://localhost:10000

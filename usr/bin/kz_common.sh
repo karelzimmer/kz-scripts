@@ -66,7 +66,7 @@ declare DESKTOP_ENVIRONMENT=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Ubuntu' ]] || UBUNTU=false
 # shellcheck disable=SC2034
-type gnome-session &> /dev/null || GNOME=false
+[[ -n $(type -t gnome-session) ]] || GNOME=false
 [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]] ||
     DESKTOP_ENVIRONMENT=false
 
@@ -133,7 +133,7 @@ function become_root_check() {
 function check_on_ac_power() {
     local   -i  ON_BATTERY=0
 
-    on_ac_power &> /dev/null || ON_BATTERY=$?
+    on_ac_power || ON_BATTERY=$?
     # Value on_battery:
     #   0 (true)  System is on mains power
     #   1 (false) System is not on mains power
@@ -286,7 +286,12 @@ E'\$YELP_MAN_URL for more information.")"
 
 # This function displays the manual page.
 function process_option_manual() {
-    yelp man:"$PROGRAM_NAME" &> /dev/null || man --pager=cat "$PROGRAM_NAME"
+    if [[ -n $(type -t yelp) ]]
+    then
+        yelp man:"$PROGRAM_NAME"
+    else
+        man --pager=cat "$PROGRAM_NAME"
+    fi
 }
 
 

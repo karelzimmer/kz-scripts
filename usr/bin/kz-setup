@@ -513,16 +513,16 @@ Type 'logout' to log out.")"
             if $GNOME
             then
                 gnome-session-quit --logout --no-prompt
-            elif type ksmserver &> /dev/null
+            elif [[ -n $(type -t ksmserver) ]]
             then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            elif type lxqt-session &> /dev/null
+            elif [[ -n $(type -t lxqt-session) ]]
             then
                 lxqt-leave --logout
-            elif type mate-session &> /dev/null
+            elif [[ -n $(type -t mate-session) ]]
             then
                 mate-session-save --logout
-            elif type xfce4-session &> /dev/null
+            elif [[ -n $(type -t xfce4-session) ]]
             then
                 xfce4-session-logout --logout
             else

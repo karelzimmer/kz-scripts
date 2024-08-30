@@ -83,7 +83,7 @@ def perform_update():
     perform_command(COMMAND)
 
     # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
-    if subprocess.run('[[ -n $(type snap 2> /dev/null) ]]', shell=True,
+    if subprocess.run('[[ -n $(type -t snap) ]]', shell=True,
                       executable='/bin/bash').returncode == kz_common.OK:
         COMMAND = 'sudo snap refresh'
         perform_command(COMMAND)
