@@ -72,7 +72,7 @@ declare -A  DEB_TARGETS=(
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -96,7 +96,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -129,7 +129,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     become_root_check || exit $OK
     generate_mo
     build_website
@@ -140,7 +140,7 @@ function process_input {
 
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
-function generate_mo {
+function generate_mo() {
     local LC_MESSAGES_DIR=''
 
     LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
@@ -151,7 +151,7 @@ function generate_mo {
 
 
 # This function builds the website.
-function build_website {
+function build_website() {
     local DIR=''
     local FILE=''
     local FILENAME=''
@@ -190,7 +190,7 @@ function build_website {
 
 
 # This function builds package kz.
-function build_package {
+function build_package() {
     local BUILD_ID=''
 
     TEXT=$(gettext 'Build package')...
@@ -242,7 +242,7 @@ function build_package {
 
 
 # This function installs package kz.
-function install_package {
+function install_package() {
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
     check_on_ac_power
@@ -256,7 +256,7 @@ function install_package {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
     infomsg "$TEXT"
     exit $OK
@@ -267,7 +267,7 @@ function term_script {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

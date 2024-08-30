@@ -86,7 +86,7 @@ fi
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -110,7 +110,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -176,7 +176,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     local COMMAND_FILE=''
 
     if $OPTION_FILE
@@ -216,7 +216,7 @@ function process_input {
 
 
 # This function shows the available apps from the input file.
-function process_option_apps {
+function process_option_apps() {
     local APPS=''
 
     TEXT="$(gettext 'The following apps are available:')
@@ -258,7 +258,7 @@ $USAGE"
 
 
 # This function processes argument APP.
-function process_argument_app {
+function process_argument_app() {
     local APP_NOT_FOUND=false
     local APP_ARGUMENT=''
 
@@ -279,7 +279,7 @@ apps.")"
 
 # This function generates the command file from the input file and filters by
 # APP.
-function process_input_file_by_app {
+function process_input_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
@@ -318,7 +318,7 @@ function process_input_file_by_app {
 
 # This function generates the command file from the input file and filters by
 # USER.
-function process_input_file_by_user {
+function process_input_file_by_user() {
     local INPUT_RECORD=''
     local USER_MATCH=false
 
@@ -348,14 +348,14 @@ function process_input_file_by_user {
 
 
 # This function displays the contents of the command file.
-function process_option_cat {
+function process_option_cat() {
     less --quit-if-one-screen "$COMMAND_FILE"
     rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
 # This function starts setting up the apps.
-function setup_apps {
+function setup_apps() {
     local   -i  APP_TOT_NUM=0
 
     APP_TOT_NUM=$(
@@ -389,7 +389,7 @@ function setup_apps {
 
 
 # This function reads commands from the command file for further processing.
-function process_COMMAND_FILE {
+function process_COMMAND_FILE() {
     local       APP_NAME=''
     local       APP_NAME_LINE=''
     local       COMMAND_RECORD=''
@@ -438,7 +438,7 @@ function process_COMMAND_FILE {
 
 
 # This function reports and executes a command from the command file.
-function execute_command {
+function execute_command() {
     local CMD=${1:-unknown}
 
     ((++CMD_SEQ_NUM))
@@ -464,7 +464,7 @@ function execute_command {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     local FAILED_APPS_TEXT=''
     local OPERATION
 
@@ -550,7 +550,7 @@ Type 'logout' to log out.")"
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

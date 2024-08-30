@@ -44,7 +44,7 @@ declare ERROR_FLAG=false
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -68,7 +68,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -101,7 +101,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     local SCRIPT=''
     local SCRIPTDIR=''
     local SCRIPTNAME=''
@@ -178,7 +178,7 @@ function process_input {
 
 
 # This function checks the website for missing or not used files.
-function check_website {
+function check_website() {
     TEXT=$(gettext 'Check website')...
     infomsg "$TEXT"
     # Call rchecklink.
@@ -189,7 +189,7 @@ function check_website {
 
 
 # This function checks for gettext required files.
-function check_gettext {
+function check_gettext() {
     local FILE=''
 
     # GNU gettext message catalogue template (.pot).
@@ -226,7 +226,7 @@ found.")
 
 
 # This function checks Shell and Python script code.
-function check_code {
+function check_code() {
     local BASH_SCRIPT='#!''/usr/bin/env bash'
     local PYTHON_SCRIPT='#!''/usr/bin/env python3'
     local TAB_COMPLETION_SCRIPT='# ''shellcheck shell=bash'
@@ -255,7 +255,7 @@ code.")$NORMAL
 
 
 # This function checks the operation of the script and associated files.
-function check_script {
+function check_script() {
     local DIR=''
     local GUI_OPTION='-''-''g''u''i'
     local ROOT_SCRIPT=' ''b''e''c''o''m''e''_''r''o''o''t''$'
@@ -323,13 +323,13 @@ not found.")
 
 
 # This function checks Python script code.
-function check_pycodestyle {
+function check_pycodestyle() {
     pycodestyle "$SCRIPT" || ERROR_FLAG=true
 }
 
 
 # This function checks on record length.
-function check_record_length {
+function check_record_length() {
     local   -i  MAX_LINE_LENGTH=79
     local   -i  MAX_LINE_LENGTH_FOUND=0
     local       PYTHON_SCRIPT='#!''/usr/bin/python3'
@@ -355,13 +355,13 @@ ${RED}    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
 
 
 # This function validates the desktop file.
-function check_desktop_file_validation {
+function check_desktop_file_validation() {
     desktop-file-validate "$SCRIPT"
 }
 
 
 # This function checks Shell script code.
-function check_shellcheck {
+function check_shellcheck() {
     # Shellcheck doesn't work well with absolute filenames.
     cd "$SCRIPTDIR"
     shellcheck  --external-sources                  \
@@ -374,7 +374,7 @@ function check_shellcheck {
 
 
 # This function checks the existence of tags.
-function check_tags {
+function check_tags() {
     local ESC_BUG='#''B''U''G'
     local ESC_FIXME='#''F''I''X''M''E'
     local ESC_TODO='#''T''O''D''O'
@@ -403,7 +403,7 @@ ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 
 
 # This function checks the existence of trailing spaces.
-function check_trailing_spaces {
+function check_trailing_spaces() {
     if grep --quiet --regexp=' ''$' "$SCRIPT"
     then
         TEXT="
@@ -419,7 +419,7 @@ ${RED}    $(gettext 'End spaces found.')$NORMAL
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     if $ERROR_FLAG
     then
         TEXT=$(gettext 'Fix all the messages above.')
@@ -437,7 +437,7 @@ function term_script {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

@@ -41,7 +41,7 @@ $OPTIONS_HELP"
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -65,7 +65,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -98,7 +98,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     become_root_check || exit $OK
     check_dependencies
     pull_repos
@@ -107,7 +107,7 @@ function process_input {
 
 
 # This function checks and installs dependencies.
-function check_dependencies {
+function check_dependencies() {
     local ESC_GETTEXT='gettext'
 
     TEXT=$(gettext 'Check dependencies')...
@@ -118,7 +118,7 @@ function check_dependencies {
 
 
 # This function retrieves the public repos.
-function pull_repos {
+function pull_repos() {
     local BIN_REPO=$HOME/bin
 
     git config --global user.name 'Karel Zimmer'
@@ -148,7 +148,7 @@ function pull_repos {
 
 
 # This function downloads the website.
-function download_website {
+function download_website() {
     local FTP_SET='set ssl:verify-certificate no'
     local FTP_FROM=/httpdocs
     local FTP_TO=$HOME/kz-uploads/dist
@@ -182,7 +182,7 @@ function download_website {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
     infomsg "$TEXT"
     exit $OK
@@ -193,7 +193,7 @@ function term_script {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

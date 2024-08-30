@@ -64,7 +64,7 @@ declare USERS=''
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -88,7 +88,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -137,7 +137,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     check_target
     check_on_ac_power
     backup_settings
@@ -146,7 +146,7 @@ function process_input {
 
 
 # This function checks if the target is available.
-function check_target {
+function check_target() {
     if $OPTION_TARGET
     then
         if [[ ! -d $TARGET_ARGUMENT ]]
@@ -209,7 +209,7 @@ Please rename to 'USER@HOST'.")"
 
 
 # This function backups the user settings.
-function backup_settings {
+function backup_settings() {
     local SETTINGS_DIR=$HOME/$PROGRAM_NAME
 
     $OPTION_GUI || infomsg "$(gettext 'Secure settings...')"
@@ -228,7 +228,7 @@ function backup_settings {
 
 
 # This function creates a README.
-function backup_setting_readme {
+function backup_setting_readme() {
     local OUTPUT_FILE=$SETTINGS_DIR/README
 
     logmsg 'Create settings README...'
@@ -244,7 +244,7 @@ Further reading:")
 
 
 # This function creates a list of installed apps.
-function backup_setting_apps {
+function backup_setting_apps() {
     local OUTPUT_FILE=$SETTINGS_DIR/apps.txt
     local HEADER1
     local FOOTER1
@@ -271,7 +271,7 @@ function backup_setting_apps {
 
 
 # This function saves instructions for adding additional users.
-function backup_setting_users {
+function backup_setting_users() {
     local OUTPUT_FILE=$SETTINGS_DIR/users.txt
     local USER_ID=0
 
@@ -324,7 +324,7 @@ $USERS"
 
 # This function copies the user avatar and saves instructions for restoring, if
 # possible.
-function backup_setting_avatar {
+function backup_setting_avatar() {
     local INPUT_FILE=/var/lib/AccountsService/icons/$USER
     local OUTPUT_FILE_1=$SETTINGS_DIR/avatar
     local OUTPUT_FILE_2=$SETTINGS_DIR/avatar.txt
@@ -351,7 +351,7 @@ function backup_setting_avatar {
 
 # This function copies the desktop background, if available, and saves
 # instructions for setting desktop background.
-function backup_setting_desktop {
+function backup_setting_desktop() {
     local INPUT_FILE
     local OUTPUT_FILE_1=$SETTINGS_DIR/desktop
     local OUTPUT_FILE_2=$SETTINGS_DIR/desktop.txt
@@ -386,7 +386,7 @@ function backup_setting_desktop {
 
 
 # This function saves the favorite apps in the dash.
-function backup_setting_favs {
+function backup_setting_favs() {
     local OUTPUT_FILE=$SETTINGS_DIR/favs.txt
 
     logmsg 'Save the favorite apps...'
@@ -396,7 +396,7 @@ function backup_setting_favs {
 
 
 # This function saves the WiFi information.
-function backup_setting_wifi {
+function backup_setting_wifi() {
     local OUTPUT_FILE=$SETTINGS_DIR/wifi.txt
 
     logmsg 'Save the WiFi information...'
@@ -408,7 +408,7 @@ function backup_setting_wifi {
 
 
 # This function creates the backup.
-function create_backup {
+function create_backup() {
     local       ERROR_FILE=''
     local       EXCLUDE_FILE=$HOME/$PROGRAM_NAME
     local       RSYNC_MESSAGES=''
@@ -528,7 +528,7 @@ use app 'Terminal', type 'kz backup'.")"
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     local   -i  UNMOUNT_RC=0
     local       NUM_USERS
 
@@ -564,7 +564,7 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 
 # This function tries to unmount the USB device.
-function term_script_usb {
+function term_script_usb() {
     local       DEV=''
     local   -i  RC=0
     local       TEXT
@@ -606,7 +606,7 @@ function term_script_usb {
 
 
 # This function unmounts the USB device.
-function term_script_unmount {
+function term_script_unmount() {
     umount "$TARGET_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
@@ -618,7 +618,7 @@ function term_script_unmount {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

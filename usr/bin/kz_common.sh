@@ -100,7 +100,7 @@ declare TITLE=''
 
 # This function checks whether the script is started as user root and restarts
 # the script as user root if not.
-function become_root {
+function become_root() {
     local   -i  PKEXEC_RC=0
     # pkexec needs fully qualified path to the program to be executed.
     local       PKEXEC_PROGRAM=$PROGRAM_PATH/$PROGRAM_NAME
@@ -130,7 +130,7 @@ function become_root {
 
 # This function checks if the user is allowed to become root and returns 0 if
 # so, otherwise returns 1 with descriptive message.
-function become_root_check {
+function become_root_check() {
     if [[ $UID -eq 0 ]]
     then
         return $OK
@@ -147,7 +147,7 @@ function become_root_check {
 
 # This function checks to see if the computer is running on battery power and
 # prompts the user to continue if so.
-function check_on_ac_power {
+function check_on_ac_power() {
     local   -i  ON_BATTERY=0
 
     on_ac_power &> /dev/null || ON_BATTERY=$?
@@ -169,7 +169,7 @@ It is recommended to connect the computer to the wall socket.")
 
 # This function checks for another running package manager and waits for the
 # next check if so.
-function check_package_manager {
+function check_package_manager() {
     local   -i  CHECK_WAIT=10
 
     while sudo  fuser                           \
@@ -192,7 +192,7 @@ function check_package_manager {
 
 
 # This function returns an error message.
-function errormsg {
+function errormsg() {
     if $OPTION_GUI
     then
         TITLE=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
@@ -208,7 +208,7 @@ function errormsg {
 
 
 # This function returns an informational message.
-function infomsg {
+function infomsg() {
     if $OPTION_GUI
     then
         TITLE=$(eval_gettext "\$PROGRAM_DESC information (\$DISPLAY_NAME)")
@@ -224,7 +224,7 @@ function infomsg {
 
 
 # This function performs initial actions such as set traps (script-hardening).
-function init_script {
+function init_script() {
     # Script-hardening.
     set -o errexit
     set -o errtrace
@@ -248,13 +248,13 @@ Started ($PROGRAM_NAME $* as $USER)."
 
 
 # This function records a message to the log.
-function logmsg {
+function logmsg() {
     printf '%b\n' "$*" |& $LOGCMD
 }
 
 
 # This function handles the common options.
-function process_options {
+function process_options() {
     while true
     do
         case $1 in
@@ -286,7 +286,7 @@ function process_options {
 
 
 # This function shows the available help.
-function process_option_help {
+function process_option_help() {
     local YELP_MAN_URL=''
 
     if $DESKTOP_ENVIRONMENT
@@ -302,20 +302,20 @@ E'\$YELP_MAN_URL for more information.")"
 
 
 # This function displays the manual page.
-function process_option_manual {
+function process_option_manual() {
     yelp man:"$PROGRAM_NAME" &> /dev/null || man --pager=cat "$PROGRAM_NAME"
 }
 
 
 # This function shows the available options.
-function process_option_usage {
+function process_option_usage() {
     TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
     printf '%b\n\n%b\n' "$USAGE" "$TEXT"
 }
 
 
 # This function displays version, author, and license information.
-function process_option_version {
+function process_option_version() {
     local BUILD_ID=''
 
     if [[ -e /etc/kz-build.id ]]
@@ -338,7 +338,7 @@ $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 
 
 # This function controls the termination.
-function term {
+function term() {
     local       SIGNAL=${1:-unknown}
     local   -i  LINENO=${2:-unknown}
     local       FUNCTION=${3:-unknown}
@@ -449,7 +449,7 @@ bash deb"
 
 
 # This function waits for the user to press Enter.
-function wait_for_enter {
+function wait_for_enter() {
     local PROMPT
 
     PROMPT="$(gettext 'Press the Enter key to continue [Enter]: ')"

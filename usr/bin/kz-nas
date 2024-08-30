@@ -82,7 +82,7 @@ declare NAS_PASSWORD='secret'
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -106,7 +106,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -290,7 +290,7 @@ process_input() {
 
 
 # This function checks and installs dependencies.
-function check_dependencies {
+function check_dependencies() {
     logmsg 'Check_dependencies...'
     check_package_manager
     sudo apt-get install --yes cifs-utils samba |& $LOGCMD
@@ -352,7 +352,7 @@ commands:")
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

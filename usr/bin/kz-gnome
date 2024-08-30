@@ -69,7 +69,7 @@ declare OPTION_RESET=false
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -93,7 +93,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -170,7 +170,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     if ! type gnome-session &> /dev/null
     then
         TEXT=$(gettext 'For GNOME desktop environments only.')
@@ -202,7 +202,7 @@ function process_input {
 
 
 # This function adds a favorite to the end of the dash/dock.
-function process_OPTION_ADDAFT  {
+function process_OPTION_ADDAFT () {
     local FAVORITE_APPS=''
 
     FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
@@ -220,7 +220,7 @@ function process_OPTION_ADDAFT  {
 
 
 # This function adds a favorite to the beginning of the dash/dock.
-function process_OPTION_ADDBEF  {
+function process_OPTION_ADDBEF () {
     local FAVORITE_APPS=''
 
     FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
@@ -237,7 +237,7 @@ function process_OPTION_ADDBEF  {
 
 
 # This function removes a favorite from the dash/dock.
-function process_OPTION_DELETE  {
+function process_OPTION_DELETE () {
     local FAVORITE_APPS=''
 
     FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
@@ -258,7 +258,7 @@ function process_OPTION_DELETE  {
 
 
 # This feature lists the favorite apps in the dash/dock.
-function process_OPTION_LIST  {
+function process_OPTION_LIST () {
     TEXT=$(gettext 'Favorite apps:')
     TEXT+="\n$(gsettings get org.gnome.shell favorite-apps)"
     infomsg "$TEXT"
@@ -266,13 +266,13 @@ function process_OPTION_LIST  {
 
 
 # This function resets the favorites to the factory settings.
-function process_OPTION_RESET  {
+function process_OPTION_RESET () {
     gsettings reset org.gnome.shell favorite-apps
 }
 
 
 # This function records a change made through the GNOME desktop environment.
-function capture_gnome_changes {
+function capture_gnome_changes() {
     local CONFIG_A_FILE=''
     local CONFIG_B_FILE=''
 
@@ -289,7 +289,7 @@ function capture_gnome_changes {
 
 
 # This function stores the GNOME configuration database.
-function save_configuration_database {
+function save_configuration_database() {
     # shellcheck disable=SC2034
     local FASE=${1:-unknown}
     local OUTPUT_FILE=${2:-unknown}
@@ -306,7 +306,7 @@ function save_configuration_database {
 
 
 # This function reports the changes to the GNOME configuration database.
-function report_database_changes {
+function report_database_changes() {
     local OUTPUT_FILE_1=${1:-unknown}
     local OUTPUT_FILE_2=${2:-unknown}
 
@@ -323,7 +323,7 @@ function report_database_changes {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     exit $OK
 }
 
@@ -332,7 +332,7 @@ function term_script {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

@@ -55,7 +55,7 @@ declare X_OPTIONS_LONG=',list'
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -88,7 +88,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -109,7 +109,7 @@ function process_x_options {
 
 
 # This function displays all available commands.
-function process_option_list {
+function process_option_list() {
     TEXT="$(gettext 'The following COMMANDs are available:')
 
 $(gettext 'NUM  COMMAND')\n"
@@ -136,7 +136,7 @@ $(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     local COMMAND=$1
 
     if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$COMMAND ]]
@@ -154,7 +154,7 @@ $USAGE"
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     exit $OK
 }
 
@@ -163,7 +163,7 @@ function term_script {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input "$@"

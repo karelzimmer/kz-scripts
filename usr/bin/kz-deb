@@ -61,7 +61,7 @@ declare KZ_DEB_LOCAL_FILE=''
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -85,7 +85,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -110,7 +110,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     become_root_check || exit $OK
     check_on_ac_power
     prepare_processing
@@ -120,7 +120,7 @@ function process_input {
 
 
 # This function prepares further processing.
-function prepare_processing {
+function prepare_processing() {
     KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     sudo true
     # Progress indicator with growing '[=>', '[==>', etc. as long as the local
@@ -136,7 +136,7 @@ function prepare_processing {
 
 
 # This function downloads package kz.
-function download_package {
+function download_package() {
     local   KZ_DEB_SITE_FILE='https://karelzimmer.nl/assets/kz-deb/'
             KZ_DEB_SITE_FILE+='kz_4.2.1_all.deb'
 
@@ -147,7 +147,7 @@ function download_package {
 
 
 # This function installs package kz.
-function install_package {
+function install_package() {
     local INSTALL_SUGGESTS=''
 
     logmsg 'Install package kz...'
@@ -173,7 +173,7 @@ function install_package {
 
 
 # This function installs repackaged kz.
-function install_package_xz {
+function install_package_xz() {
     local KZ_DEB_LOCAL_FILE_XZ
 
     KZ_DEB_LOCAL_FILE_XZ=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
@@ -212,7 +212,7 @@ function install_package_xz {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     TEXT="
 $(gettext "Package kz has been successfully installed.
 
@@ -237,7 +237,7 @@ $(gettext "Type 'exit' to close this window.")"
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

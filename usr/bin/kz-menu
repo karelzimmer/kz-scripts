@@ -94,7 +94,7 @@ declare -a  ROWS=()
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -118,7 +118,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -155,7 +155,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     if $OPTION_GUI
     then
         process_menu1_gui
@@ -166,7 +166,7 @@ function process_input {
 
 
 # This function shows and processes menu 1 in GUI mode.
-function process_menu1_gui {
+function process_menu1_gui() {
     while true
     do
         TITLE=$MENU1_TITLE
@@ -196,7 +196,7 @@ function process_menu1_gui {
 
 
 # This function shows and processes menu 1 in TUI mode.
-function process_menu1_tui {
+function process_menu1_tui() {
     local MENU1_ACTION=''
     local PROMPT=''
 
@@ -235,7 +235,7 @@ function process_menu1_tui {
 
 
 # This function processes menu 1 choice.
-function process_menu1_choice {
+function process_menu1_choice() {
     case $REPLY in
         1 )
             process_menu1_choice1
@@ -265,7 +265,7 @@ function process_menu1_choice {
 
 
 # This function processes menu 1 choice 1.
-function process_menu1_choice1 {
+function process_menu1_choice1() {
     TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
     ROWS=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
@@ -276,7 +276,7 @@ function process_menu1_choice1 {
 
 
 # This function processes menu 1 choice 2.
-function process_menu1_choice2 {
+function process_menu1_choice2() {
     TITLE="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
     TEXT="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
@@ -301,7 +301,7 @@ Roughly boils down to:
 
 
 # This function processes menu 1 choice 3.
-function process_menu1_choice3 {
+function process_menu1_choice3() {
     TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
     ROWS=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
@@ -311,7 +311,7 @@ function process_menu1_choice3 {
 
 
 # This function processes menu 1 choice 4.
-function process_menu1_choice4 {
+function process_menu1_choice4() {
     TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
     ROWS=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
@@ -324,7 +324,7 @@ function process_menu1_choice4 {
 
 
 # This function processes menu 2.
-function process_menu2 {
+function process_menu2() {
     if $OPTION_GUI
     then
         process_menu2_gui
@@ -335,7 +335,7 @@ function process_menu2 {
 
 
 # This function shows and processes menu 2 in GUI mode.
-function process_menu2_gui {
+function process_menu2_gui() {
     while true
     do
         TITLE=$MENU2_TITLE
@@ -365,7 +365,7 @@ function process_menu2_gui {
 
 
 # This function shows and processes menu 2 in TUI mode.
-function process_menu2_tui {
+function process_menu2_tui() {
     local MENU2_ACTION=''
     local PROMPT=''
 
@@ -404,7 +404,7 @@ function process_menu2_tui {
 
 
 # This function processes menu 2 choice.
-function process_menu2_choice {
+function process_menu2_choice() {
     if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]
     then
         TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
@@ -424,7 +424,7 @@ function process_menu2_choice {
 
 
 # This function processes the command corresponding to the choice made.
-function process_commands {
+function process_commands() {
     local       COMMAND=''
     local       DESCRIPTION=''
     local   -i  ROW=0
@@ -450,7 +450,7 @@ function process_commands {
 
 
 # This function shows the commands before they are executed.
-function show_commands_before_execution {
+function show_commands_before_execution() {
     local       COMMAND=''
     local       DESCRIPTION=''
     local   -i  ROW=0
@@ -513,7 +513,7 @@ $PROMPT"
 
 
 # This function executes the commands.
-function execute_command {
+function execute_command() {
     local       ARG=''
     local       CMD=''
     local       GUI_OPTION=''
@@ -537,7 +537,7 @@ function execute_command {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     exit $OK
 }
 
@@ -546,7 +546,7 @@ function term_script {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

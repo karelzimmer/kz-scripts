@@ -63,7 +63,7 @@ declare TARGET=$HOME
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -87,7 +87,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -136,7 +136,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     check_source
     check_on_ac_power
     restore_backup
@@ -145,7 +145,7 @@ function process_input {
 
 
 # This function checks if the source is available.
-function check_source {
+function check_source() {
     if $OPTION_SOURCE
     then
         if [[ ! -d $SOURCE_ARGUMENT ]]
@@ -207,7 +207,7 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 
 # This function restores the backup.
-function restore_backup {
+function restore_backup() {
     local       ERROR_FILE=''
     local       RSYNC_MESSAGES=''
     local   -i  RESTORE_RC=0
@@ -271,7 +271,7 @@ use app 'Terminal', type 'kz restore'.")
 
 
 # This function restores the user settings.
-function restore_settings {
+function restore_settings() {
     local SETTINGS_DIR=$HOME/kz-backup
 
     if $DESKTOP_ENVIRONMENT
@@ -283,7 +283,7 @@ function restore_settings {
 
 
 # This function restores the desktop background, if possible.
-function restore_setting_desktop {
+function restore_setting_desktop() {
     local INPUT_FILE="$SETTINGS_DIR/desktop"
 
     if [[ -f $INPUT_FILE ]]
@@ -297,7 +297,7 @@ function restore_setting_desktop {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     local       NUM_USERS
     local       USER_ID=0
     local       USERS=''
@@ -353,7 +353,7 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 
 # This function tries to unmount the USB device.
-function term_script_usb {
+function term_script_usb() {
     local       DEV=''
     local   -i  RC=0
     local       TEXT
@@ -396,7 +396,7 @@ function term_script_usb {
 
 
 # This function unmounts the USB device.
-function term_script_unmount {
+function term_script_unmount() {
     umount "$SOURCE_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
@@ -408,7 +408,7 @@ function term_script_unmount {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input

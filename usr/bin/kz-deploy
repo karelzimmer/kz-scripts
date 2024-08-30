@@ -47,7 +47,7 @@ declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 ###############################################################################
 
 # This function handles the script options and arguments.
-function check_input {
+function check_input() {
     local       PARSED=''
     local   -i  PARSED_RC=0
 
@@ -71,7 +71,7 @@ function check_input {
 
 
 # This function handles the extra options and arguments.
-function process_x_options {
+function process_x_options() {
     while true
     do
         case $1 in
@@ -104,7 +104,7 @@ $USAGE"
 
 
 # This function processes the script options and arguments.
-function process_input {
+function process_input() {
     become_root_check || exit $OK
     check_repos
     check_scripts_and_website
@@ -116,7 +116,7 @@ function process_input {
 
 
 # This function check the scripts and website.
-function check_scripts_and_website {
+function check_scripts_and_website() {
     TEXT=$(gettext 'Check scripts and website')...
     infomsg "$TEXT"
     # Call kz check.
@@ -127,7 +127,7 @@ function check_scripts_and_website {
 
 
 # This function check that the repos are in the desired state.
-function check_repos {
+function check_repos() {
     local ERROR_FLAG=false
 
 
@@ -167,7 +167,7 @@ function check_repos {
 
 
 # This function builds package kz and website.
-function build_package_and_website {
+function build_package_and_website() {
     TEXT=$(gettext 'Build website including package kz')...
     infomsg "$TEXT"
     # Call kz build.
@@ -177,7 +177,7 @@ function build_package_and_website {
 }
 
 # This function uploads the website.
-function upload_website {
+function upload_website() {
     local FTP_SET='set ssl:verify-certificate no'
     local FTP_FROM=$UPLOADS_REPO_DISTDIR
     local FTP_TO=/httpdocs
@@ -213,7 +213,7 @@ function upload_website {
 
 
 # This function installs package kz.
-function install_package {
+function install_package() {
     # Call kz-deb (via wget and bash as a regular user would do).
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
@@ -229,7 +229,7 @@ function install_package {
 
 
 # This function controls the termination of the script.
-function term_script {
+function term_script() {
     TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
     infomsg "$TEXT"
     exit $OK
@@ -240,7 +240,7 @@ function term_script {
 # Main
 ###############################################################################
 
-function main {
+function main() {
     init_script "$@"
     check_input "$@"
     process_input
