@@ -72,14 +72,6 @@ declare     OPTION_RESET=false
 declare     RESET='Reset'
 declare     SETUP='Setup'
 
-if type gnome-session &> /dev/null
-then
-    declare GNOME=true
-else
-    # shellcheck disable=SC2034
-    declare GNOME=false
-fi
-
 
 ###############################################################################
 # Functions
@@ -490,34 +482,35 @@ use app 'Set up apps', or
 use app 'Terminal', type 'kz setup \$FAILED_APPS_TEXT'.")
         errormsg "$TEXT"
         exit $ERROR
-    else
-        if $OPTION_RESET
-        then
-            # shellcheck disable=SC2034
-            OPERATION=$(gettext 'reset')
-        fi
-        TEXT=$(eval_gettext "Apps \$OPERATION completed.")
-        if $LOGOUT
-        then
-            if $DESKTOP_ENVIRONMENT
+    fi
+
+    if $OPTION_RESET
     then
-                TEXT+="
+        # shellcheck disable=SC2034
+        OPERATION=$(gettext 'reset')
+    fi
+    TEXT=$(eval_gettext "Apps \$OPERATION completed.")
+
+    if $LOGOUT
+    then
+        if $DESKTOP_ENVIRONMENT
+        then
+            TEXT+="
 
 $(gettext "You will now be logged out of the computer to finish installing \
 the apps and changing user settings.")"
-            else
-                TEXT+="
+        else
+            TEXT+="
 
 $(gettext "You must log out of the computer to finish installing the apps and \
 changing user settings.
 Type 'logout' to log out.")"
-            fi
         fi
         infomsg "$TEXT"
-        if $LOGOUT && $DESKTOP_ENVIRONMENT
+        if $DESKTOP_ENVIRONMENT
         then
             $OPTION_GUI || wait_for_enter
-            if type gnome-session &> /dev/null
+            if $GNOME
             then
                 gnome-session-quit --logout --no-prompt
             elif type ksmserver &> /dev/null
@@ -538,10 +531,9 @@ Type 'logout' to log out.")"
                 TEXT=$(gettext 'Log out of the computer yourself.')
                 infomsg "$TEXT"
             fi
-        else
-            exit $OK
         fi
     fi
+
     exit $OK
 }
 

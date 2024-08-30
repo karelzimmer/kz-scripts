@@ -57,32 +57,15 @@ OPTIONS_SHORT = 'hmuv'
 OPTIONS_LONG = 'help,manual,usage,version'
 
 # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
-if subprocess.run("[[ $(lsb_release --id --short) = 'Debian' ]]",
-                  shell=True, executable='/bin/bash').returncode == OK:
-    DEBIAN = True
-else:
-    DEBIAN = False
-if subprocess.run('[[ -n $(type gnome-session 2> /dev/null) ]]',
-                  shell=True, executable='/bin/bash').returncode == OK:
-    GNOME = True
-else:
-    GNOME = False
-if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
-                  shell=True, executable='/bin/bash').returncode == OK:
-    UBUNTU = True
-else:
-    UBUNTU = False
-if subprocess.run('[[ -n $('
-                  'type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} '
-                  '2> /dev/null'
-                  ') ]]',
+if subprocess.run('[[ -n $(type -t '
+                  '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='/bin/bash').returncode == OK:
     DESKTOP_ENVIRONMENT = True
 else:
     DESKTOP_ENVIRONMENT = False
 
-TEXT = ''
 RC = OK
+TEXT = ''
 
 
 ###############################################################################

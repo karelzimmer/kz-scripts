@@ -74,28 +74,6 @@ declare     OPTION_REMOVE=false
 declare     REBOOT=true
 declare     REMOVE='Remove'
 
-if type gnome-session &> /dev/null
-then
-    declare GNOME=true
-else
-    # shellcheck disable=SC2034
-    declare GNOME=false
-fi
-if [[ $(lsb_release --id --short) = 'Debian' ]]
-then
-    declare DEBIAN=true
-else
-    # shellcheck disable=SC2034
-    declare DEBIAN=false
-fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]
-then
-    declare UBUNTU=true
-else
-    # shellcheck disable=SC2034
-    declare UBUNTU=false
-fi
-
 
 ###############################################################################
 # Functions
@@ -517,27 +495,29 @@ use app 'Install apps', or
 use app 'Terminal', type 'kz install \$FAILED_APPS_TEXT'.")
         errormsg "$TEXT"
         exit $ERROR
-    else
-        if $OPTION_REMOVE
-        then
-            # shellcheck disable=SC2034
-            OPERATION=$(gettext 'remove')
-        fi
-        TEXT=$(eval_gettext "Apps \$OPERATION completed.")
-        if $REBOOT
-        then
-            TEXT+="
+    fi
+
+    if $OPTION_REMOVE
+    then
+        # shellcheck disable=SC2034
+        OPERATION=$(gettext 'remove')
+    fi
+    TEXT=$(eval_gettext "Apps \$OPERATION completed.")
+
+    if $REBOOT
+    then
+        TEXT+="
 
 $(gettext "The computer will now reboot to finish installing the apps and \
 changing system settings.")"
-        fi
-        infomsg "$TEXT"
-        if $REBOOT
-        then
-            $OPTION_GUI || wait_for_enter
-            sudo systemctl reboot
-        fi
     fi
+    infomsg "$TEXT"
+    if $REBOOT
+    then
+        $OPTION_GUI || wait_for_enter
+        sudo systemctl reboot
+    fi
+
     exit $OK
 }
 

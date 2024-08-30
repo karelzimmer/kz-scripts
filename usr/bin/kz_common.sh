@@ -57,35 +57,18 @@ declare OPTIONS_SHORT='hmuv'
 # shellcheck disable=SC2034
 declare OPTIONS_LONG='help,manual,usage,version'
 
-if [[ $(lsb_release --id --short) = 'Debian' ]]
-then
-    declare DEBIAN=true
-else
-    # shellcheck disable=SC2034
-    declare DEBIAN=false
-fi
-if type gnome-session &> /dev/null
-then
-    declare GNOME=true
-else
-    # shellcheck disable=SC2034
-    declare GNOME=false
-fi
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]
-then
-    declare UBUNTU=true
-else
-    # shellcheck disable=SC2034
-    declare UBUNTU=false
-fi
-if [[ -n $(
-    type {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver} 2> /dev/null
-    ) ]]
-then
-    declare DESKTOP_ENVIRONMENT=true
-else
-    declare DESKTOP_ENVIRONMENT=false
-fi
+declare DEBIAN=true
+declare UBUNTU=true
+declare GNOME=true
+declare DESKTOP_ENVIRONMENT=true
+# shellcheck disable=SC2034
+[[ $(lsb_release --id --short) = 'Debian' ]] || DEBIAN=false
+# shellcheck disable=SC2034
+[[ $(lsb_release --id --short) = 'Ubuntu' ]] || UBUNTU=false
+# shellcheck disable=SC2034
+type gnome-session &> /dev/null || GNOME=false
+[[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]] ||
+    DESKTOP_ENVIRONMENT=false
 
 declare ERREXIT=true
 declare KZ_DEB_LOCAL_FILE=''
