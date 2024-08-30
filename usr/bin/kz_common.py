@@ -35,15 +35,6 @@ MODULE_DESC = _('Common module for Python scripts')
 
 PROGRAM_PATH = '/usr/bin'
 
-OK = 0
-ERROR = 1
-
-NORMAL = '\033[0m'
-BOLD = '\033[1m'
-
-RED = '\033[1;31m'
-GREEN = '\033[1;32m'
-
 USAGE = None
 OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
@@ -53,8 +44,16 @@ OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
                 f"{_('  -u, --usage    show a short usage summary')}\n"
                 f"{_('  -v, --version  show program version')}")
 
-OPTIONS_SHORT = 'hmuv'
-OPTIONS_LONG = 'help,manual,usage,version'
+OK = 0
+ERROR = 1
+
+RC = OK
+TEXT = ''
+
+BOLD = '\033[1m'
+RED = '\033[1;31m'
+GREEN = '\033[1;32m'
+NORMAL = '\033[0m'
 
 # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
 if subprocess.run('[[ -n $(type -t '
@@ -63,9 +62,6 @@ if subprocess.run('[[ -n $(type -t '
     DESKTOP_ENVIRONMENT = True
 else:
     DESKTOP_ENVIRONMENT = False
-
-RC = OK
-TEXT = ''
 
 
 ###############################################################################

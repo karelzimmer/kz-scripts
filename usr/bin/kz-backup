@@ -65,8 +65,7 @@ declare USERS=''
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  PARSED_RC=0
+    local PARSED=''
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -74,8 +73,8 @@ function check_input() {
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        ) || PARSED_RC=$?
-    if [[ $PARSED_RC -ne $OK ]]
+        ) || RC=$?
+    if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
@@ -529,8 +528,7 @@ use app 'Terminal', type 'kz backup'.")"
 
 # This function controls the termination of the script.
 function term_script() {
-    local   -i  UNMOUNT_RC=0
-    local       NUM_USERS
+    local   -i  NUM_USERS
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)
     if [[ $NUM_USERS -eq 1 ]]
@@ -545,8 +543,8 @@ $USERS"
 
     if [[ $TARGET_MEDIUM == /media/* ]]
     then
-        term_script_usb || UNMOUNT_RC=$?
-        if [[ $UNMOUNT_RC -eq $OK ]]
+        term_script_usb || RC=$?
+        if [[ $RC -eq $OK ]]
         then
             TEXT+="
 
@@ -565,9 +563,7 @@ $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
 
 # This function tries to unmount the USB device.
 function term_script_usb() {
-    local       DEV=''
-    local   -i  RC=0
-    local       TEXT
+    local DEV=''
 
     TEXT=$(gettext 'Disconnect the USB media')
     DEV='/dev/'$(

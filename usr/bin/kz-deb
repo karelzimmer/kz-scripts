@@ -62,8 +62,7 @@ declare KZ_DEB_LOCAL_FILE=''
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  PARSED_RC=0
+    local PARSED=''
 
     PARSED=$(
         getopt  --alternative                       \
@@ -71,8 +70,8 @@ function check_input() {
                 --longoptions   "$OPTIONS_LONG"     \
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        ) || PARSED_RC=$?
-    if [[ $PARSED_RC -ne $OK ]]
+        ) || RC=$?
+    if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR

@@ -22,59 +22,61 @@ source /usr/bin/gettext.sh
 # Variables
 ###############################################################################
 
-declare MODULE_NAME='kz_common.sh'
-declare MODULE_DESC
+declare     MODULE_NAME='kz_common.sh'
+declare     MODULE_DESC
+            # shellcheck disable=SC2034
+            MODULE_DESC=$(gettext 'Common module for shell scripts')
+
+declare     PROGRAM_PATH='/usr/bin'
+
+declare     USAGE
+# shellcheck disable=SC2034
+declare     OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] \
+[-v|--version]"
+
+declare     HELP
+declare     OPTIONS_HELP
         # shellcheck disable=SC2034
-        MODULE_DESC=$(gettext 'Common module for shell scripts')
-
-declare PROGRAM_PATH='/usr/bin'
-
-declare OK=0
-declare ERROR=1
-
-declare NORMAL='\033[0m'
-# shellcheck disable=SC2034
-declare BOLD='\033[1m'
-
-declare RED='\033[1;31m'
-# shellcheck disable=SC2034
-declare GREEN='\033[1;32m'
-
-declare USAGE
-# shellcheck disable=SC2034
-declare OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]"
-
-declare HELP
-declare OPTIONS_HELP
-        # shellcheck disable=SC2034
-        OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
+            OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 
 # shellcheck disable=SC2034
-declare OPTIONS_SHORT='hmuv'
+declare     OPTIONS_SHORT='hmuv'
 # shellcheck disable=SC2034
-declare OPTIONS_LONG='help,manual,usage,version'
+declare     OPTIONS_LONG='help,manual,usage,version'
 
-declare DEBIAN=true
-declare UBUNTU=true
-declare GNOME=true
-declare DESKTOP_ENVIRONMENT=true
+declare     OK=0
+declare     ERROR=1
+
+declare -i  RC=$OK
+declare     TEXT=''
+
+# shellcheck disable=SC2034
+declare     BOLD='\033[1m'
+declare     RED='\033[1;31m'
+# shellcheck disable=SC2034
+declare     GREEN='\033[1;32m'
+declare     NORMAL='\033[0m'
+
+declare     DESKTOP_ENVIRONMENT=true
+[[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]] ||
+            DESKTOP_ENVIRONMENT=false
+declare     DEBIAN=true
+declare     UBUNTU=true
+declare     GNOME=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Debian' ]] || DEBIAN=false
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Ubuntu' ]] || UBUNTU=false
 # shellcheck disable=SC2034
 [[ -n $(type -t gnome-session) ]] || GNOME=false
-[[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]] ||
-    DESKTOP_ENVIRONMENT=false
 
-declare ERREXIT=true
-declare KZ_DEB_LOCAL_FILE=''
-declare OPTION_GUI=false
-declare TEXT=''
-declare TITLE=''
+declare     ERREXIT=true
+declare     KZ_DEB_LOCAL_FILE=''
+declare     OPTION_GUI=false
+declare     TITLE=''
 
 
 ###############################################################################
@@ -84,7 +86,6 @@ declare TITLE=''
 # This function checks whether the script is started as user root and restarts
 # the script as user root if not.
 function become_root() {
-    local   -i  PKEXEC_RC=0
     # pkexec needs fully qualified path to the program to be executed.
     local       PKEXEC_PROGRAM=$PROGRAM_PATH/$PROGRAM_NAME
 
@@ -100,8 +101,8 @@ function become_root() {
             logmsg "$TEXT"
             # Because $PKEXEC_PROGRAM will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || PKEXEC_RC=$?
-            exit $PKEXEC_RC
+            pkexec "$PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || RC=$?
+            exit $RC
         else
             TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
@@ -331,7 +332,7 @@ function term() {
     local   -i  LINENO=${2:-unknown}
     local       FUNCTION=${3:-unknown}
     local       COMMAND=${4:-unknown}
-    local   -i  RC=${5:-$ERROR}
+                RC=${5:-$ERROR}
     local       RC_DESC=''
     local   -i  RC_DESC_SIGNALNO=0
     local       STATUS=$RC/error
