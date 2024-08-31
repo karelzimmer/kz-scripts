@@ -36,7 +36,7 @@ declare     OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] \
 
 declare     HELP
 declare     OPTIONS_HELP
-        # shellcheck disable=SC2034
+            # shellcheck disable=SC2034
             OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
