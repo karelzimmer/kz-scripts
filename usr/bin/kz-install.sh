@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 # For the format of the records in this file, see the kz install man page.
+# Before manually executing a command with variables, run: source kz_common.sh
 
 # Install disabled-apport on *
 # Disable the program crash report.
@@ -471,8 +472,7 @@ sudo apt-get remove --yes usbutils
 export TEXTDOMAIN=kz
 export TEXTDOMAINDIR=/usr/share/locale
 source /usr/bin/gettext.sh
-# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
-sudo useradd --create-home --shell /bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
+sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
 sudo passwd --delete "$(gettext 'guest')"
 
 # Remove user-guest from -nohost
@@ -482,8 +482,7 @@ source /usr/bin/gettext.sh
 sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
-# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
-sudo useradd --create-home --shell /bin/bash --comment 'Karel Zimmer' karel || true
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
 sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel
 sudo passwd --delete --expire karel
 
@@ -498,8 +497,7 @@ sudo deluser karel adm
 sudo deluser karel systemd-journal
 
 # Install user-toos on Laptop
-# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
-sudo useradd --create-home --shell /bin/bash --comment 'Toos Barendse' toos || true
+sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
 sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos
 sudo passwd --delete --expire toos
 

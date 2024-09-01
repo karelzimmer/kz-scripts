@@ -6,6 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 # For the format of the records in this file, see the kz setup man page.
+# Before manually executing a command with variables, run: source kz_common.sh
 
 # Setup anydesk for -nouser
 # Remote Wayland display server is not supported.

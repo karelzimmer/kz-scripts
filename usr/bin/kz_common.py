@@ -55,10 +55,9 @@ RED = '\033[1;31m'
 GREEN = '\033[1;32m'
 NORMAL = '\033[0m'
 
-# Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
-                  shell=True, executable='/bin/bash').returncode == OK:
+                  shell=True, executable='bash').returncode == OK:
     DESKTOP_ENVIRONMENT = True
 else:
     DESKTOP_ENVIRONMENT = False
@@ -142,7 +141,6 @@ def check_package_manager(PROGRAM_NAME):
     """
     CHECK_WAIT = 10
 
-    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> '/bin/bash'.
     while True:
         try:
             subprocess.run('sudo fuser '
@@ -150,7 +148,7 @@ def check_package_manager(PROGRAM_NAME):
                            '/var/cache/debconf/config.dat '
                            '/var/{lib/{dpkg,apt/lists},cache/apt/archives}/'
                            'lock*',
-                           shell=True, executable='/bin/bash', check=True)
+                           shell=True, executable='bash', check=True)
         except Exception:
             break
         else:

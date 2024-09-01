@@ -122,6 +122,8 @@ function process_input() {
 function prepare_processing() {
     KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     sudo true
+    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> symlink.
+    [[ -e /usr/bin/bash ]] || sudo ln --symbolic /bin/bash /usr/bin/bash
     # Progress indicator with growing '[=>', '[==>', etc. as long as the local
     # Debian package file exists, i.e. installation is in progress. If all
     # fails, kz_common.sh will delete the local Debian package file on exit.
