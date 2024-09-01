@@ -12,25 +12,22 @@
 # Imports
 ###############################################################################
 
-if ! source kz_common.sh 2> >(systemd-cat --identifier=kz-deb --priority=debug)
-then
-    declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimm'
-            KZ_COMMON_GITHUB_FILE+='er/kz-scripts/main/usr/bin/kz_common.sh'
-    declare KZ_COMMON_LOCAL_FILE
-            KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
-    echo    'Download kz_common.sh...' |&
-            systemd-cat --identifier=kz-deb --priority=debug
-    wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_GITHUB_FILE |&
-            systemd-cat --identifier=kz-deb --priority=debug
-    echo    'Source kz_common.sh...' |&
-            systemd-cat --identifier=kz-deb --priority=debug
-    source  "$KZ_COMMON_LOCAL_FILE" 2> >(
-            systemd-cat --identifier=kz-deb --priority=debug)
-    echo    'Remove kz_common.sh...' |&
-            systemd-cat --identifier=kz-deb --priority=debug
-    rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
-            systemd-cat --identifier=kz-deb --priority=debug
-fi
+declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimmer/'
+        KZ_COMMON_GITHUB_FILE+='kz-scripts/main/usr/bin/kz_common.sh'
+declare KZ_COMMON_LOCAL_FILE
+        KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
+echo    'Download kz_common.sh...' |&
+        systemd-cat --identifier=kz-deb --priority=debug
+wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_GITHUB_FILE |&
+        systemd-cat --identifier=kz-deb --priority=debug
+echo    'Source kz_common.sh...' |&
+        systemd-cat --identifier=kz-deb --priority=debug
+source  "$KZ_COMMON_LOCAL_FILE" 2> >(
+        systemd-cat --identifier=kz-deb --priority=debug)
+echo    'Remove kz_common.sh...' |&
+        systemd-cat --identifier=kz-deb --priority=debug
+rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
+        systemd-cat --identifier=kz-deb --priority=debug
 
 
 ###############################################################################
