@@ -205,6 +205,7 @@ function process_OPTION_ADDAFT () {
     local FAVORITE_APPS=''
 
     FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+
     if [[ $FAVORITE_APPS = '@as []' ]]
     then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
@@ -223,6 +224,7 @@ function process_OPTION_ADDBEF () {
     local FAVORITE_APPS=''
 
     FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+
     if [[ $FAVORITE_APPS = '@as []' ]]
     then
         gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
@@ -240,6 +242,7 @@ function process_OPTION_DELETE () {
     local FAVORITE_APPS=''
 
     FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+
     if [[ $FAVORITE_APPS = '@as []' ]]
     then
         :
@@ -277,12 +280,17 @@ function capture_gnome_changes() {
 
     CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
     save_configuration_database A "$CONFIG_A_FILE"
+
     TEXT=$(gettext 'Now make the change in the desktop environment.')
     infomsg "$TEXT"
+
     wait_for_enter
+
     CONFIG_B_FILE=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
     save_configuration_database B "$CONFIG_B_FILE"
+
     report_database_changes "$CONFIG_A_FILE" "$CONFIG_B_FILE"
+
     rm --verbose "$CONFIG_A_FILE" "$CONFIG_B_FILE" |& $LOGCMD
 }
 

@@ -156,10 +156,13 @@ $USAGE"
             infomsg "$TEXT"
             exit $ERROR
         fi
+
         TARGET=$TARGET_ARGUMENT/$USER@$HOSTNAME
         TARGET_MEDIUM=$TARGET_ARGUMENT
     else
+
         MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
         if [[ -z $MEDIUM ]]
         then
             TEXT=$(gettext "No USB medium found.
@@ -174,7 +177,9 @@ Connect a USB medium.")
                 exit $ERROR
             fi
         fi
+
         MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
         then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -184,19 +189,25 @@ Now connected:
 
 Disconnect media via Files.")"
             infomsg "$TEXT"
+
             $OPTION_GUI || wait_for_enter
+
             MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
             then
                 errormsg "$TEXT"
                 exit $ERROR
             fi
         fi
+
         TARGET=$MEDIUM/$PROGRAM_NAME/$USER@$HOSTNAME
+
         [[ -d $MEDIUM/$PROGRAM_NAME ]] ||
             mkdir --mode=a=rwx --verbose "$MEDIUM/$PROGRAM_NAME" |& $LOGCMD
         TARGET_MEDIUM=$MEDIUM
     fi
+
     if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]
     then
         TEXT="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. \
@@ -212,16 +223,19 @@ function backup_settings() {
     local SETTINGS_DIR=$HOME/$PROGRAM_NAME
 
     $OPTION_GUI || infomsg "$(gettext 'Secure settings...')"
+
     [[ -d $SETTINGS_DIR ]] || mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
+
     backup_setting_readme
     backup_setting_apps
     backup_setting_users
+    backup_setting_wifi
+
     if $DESKTOP_ENVIRONMENT
     then
         backup_setting_avatar
         backup_setting_desktop
         backup_setting_favs
-        backup_setting_wifi
     fi
 }
 
@@ -231,6 +245,7 @@ function backup_setting_readme() {
     local OUTPUT_FILE=$SETTINGS_DIR/README
 
     logmsg 'Create settings README...'
+
     TEXT="$(gettext "This folder contains files created by kz-backup.
 These files are used by kz-restore and others.
 
@@ -238,6 +253,7 @@ Further reading:")
     man:kz-backup(1)
     man:kz-restore(1)"
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE"
+
     touch "$OUTPUT_FILE"
 }
 
@@ -294,6 +310,7 @@ function backup_setting_users() {
             )
 
     logmsg 'Adding additional users instructions...'
+
     if $DESKTOP_ENVIRONMENT
     then
         TEXT="$(gettext 'Additional _user_s can be added manually:')
@@ -317,7 +334,21 @@ sudo passwd --delete --expire _username_")
 
 $USERS"
     fi
+
     printf '%b\n' "$TEXT" > "$OUTPUT_FILE"
+}
+
+
+# This function saves the WiFi information.
+function backup_setting_wifi() {
+    local OUTPUT_FILE=$SETTINGS_DIR/wifi.txt
+
+    logmsg 'Save the WiFi information...'
+
+    # Call kz wifi.
+    logmsg 'Calling kz wifi...'
+    kz wifi > "$OUTPUT_FILE"
+    logmsg 'Called kz wifi.'
 }
 
 
@@ -343,7 +374,9 @@ function backup_setting_avatar() {
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
+
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
+
     touch "$OUTPUT_FILE_2"
 }
 
@@ -361,6 +394,7 @@ function backup_setting_desktop() {
         sed --expression="s/'//g"                               |
         sed --expression='s|file://||'                          || true
         )
+
     # By default, the Debian input_file retrieved with gsettings results in
     # /usr/share/images/desktop-base/desktop-background.xml, which is not an
     # image file, and restoring it from xdg-user-dir to gsettings doesn't work.
@@ -371,7 +405,9 @@ function backup_setting_desktop() {
             true
         touch "$OUTPUT_FILE_1"
     fi
+
     logmsg 'Save set the desktop background instructions...'
+
     TEXT="$(gettext "To set the desktop background:
 1. Press the Super key[1], type 'file' and click on Files.
 2. Open the folder containing the desired image.
@@ -379,7 +415,9 @@ function backup_setting_desktop() {
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
+
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
+
     touch "$OUTPUT_FILE_2"
 }
 
@@ -391,18 +429,6 @@ function backup_setting_favs() {
     logmsg 'Save the favorite apps...'
     gsettings get                           \
               org.gnome.shell favorite-apps > "$OUTPUT_FILE" |& $LOGCMD || true
-}
-
-
-# This function saves the WiFi information.
-function backup_setting_wifi() {
-    local OUTPUT_FILE=$SETTINGS_DIR/wifi.txt
-
-    logmsg 'Save the WiFi information...'
-    # Call kz wifi.
-    logmsg 'Calling kz wifi...'
-    kz wifi > "$OUTPUT_FILE"
-    logmsg 'Called kz wifi.'
 }
 
 
@@ -444,6 +470,7 @@ EOF
 
     TITLE=$(gettext 'Make backup')
     TEXT=$(gettext 'Preparing backup (this may take a while)')
+
     if $OPTION_GUI
     then
         logmsg "$TITLE..."
@@ -484,6 +511,7 @@ EOF
     rm --verbose "$EXCLUDE_FILE" |& $LOGCMD
 
     TEXT=$(gettext "Writing data from memory (this may take a while)")
+
     if $OPTION_GUI
     then
         logmsg "$TEXT..."
@@ -502,6 +530,7 @@ EOF
         infomsg "$TEXT"
         sync |& $LOGCMD
     fi
+
     if [[ $BACKUP_RC -ne $OK ]]
     then
         # shellcheck disable=SC2034
@@ -522,6 +551,7 @@ use app 'Terminal', type 'kz backup'.")"
         errormsg "$TEXT"
         exit $ERROR
     fi
+
     rm --verbose "$ERROR_FILE" |& $LOGCMD
 }
 
@@ -531,6 +561,7 @@ function term_script() {
     local   -i  NUM_USERS
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)
+
     if [[ $NUM_USERS -eq 1 ]]
     then
         TEXT=$(gettext "The backup has been made.")
@@ -577,6 +608,7 @@ function term_script_usb() {
         cut     --delimiter=' '     \
                 --fields=1
     )
+
     if $OPTION_GUI
     then
         # With '|& zenity --progress' global variables from called functions

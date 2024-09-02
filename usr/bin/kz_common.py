@@ -299,6 +299,7 @@ def term(PROGRAM_NAME, TEXT, RC):
             errormsg(PROGRAM_NAME, TEXT)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
+
     if RC == OK:
         sys.exit(OK)
     else:

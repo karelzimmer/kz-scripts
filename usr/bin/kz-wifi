@@ -115,6 +115,7 @@ function process_input() {
 
     TEXT=$(gettext "Record this data to connect to the wireless network \
 later.")
+
     if $OPTION_GUI
     then
         if NMCLI_OUTPUT=$(nmcli device wifi show-password 2> >($LOGCMD))
@@ -130,6 +131,7 @@ $TEXT"
         nmcli device wifi show-password 2> >($LOGCMD) || TEXT=$(gettext "No \
 WiFi device found.")
     fi
+
     infomsg "$TEXT"
 }
 

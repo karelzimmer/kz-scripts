@@ -118,6 +118,7 @@ function process_input() {
 function check_scripts_and_website() {
     TEXT=$(gettext 'Check scripts and website')...
     infomsg "$TEXT"
+
     # Call kz check.
     logmsg 'Calling kz check...'
     "$SCRIPTS_REPO/usr/bin"/kz check || exit $ERROR
@@ -129,9 +130,9 @@ function check_scripts_and_website() {
 function check_repos() {
     local ERROR_FLAG=false
 
-
     TEXT=$(gettext 'Check that all repos are on branch main')...
     infomsg "$TEXT"
+
     for REPO in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
     do
         cd "$REPO"
@@ -143,8 +144,10 @@ function check_repos() {
             ERROR_FLAG=true
         fi
     done
+
     TEXT=$(gettext 'Check that all repos are clean')...
     infomsg "$TEXT"
+
     for REPO in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO
     do
         cd "$REPO"
@@ -158,6 +161,7 @@ function check_repos() {
             ERROR_FLAG=true
         fi
     done
+
     if $ERROR_FLAG
     then
         exit $ERROR
@@ -169,6 +173,7 @@ function check_repos() {
 function build_package_and_website() {
     TEXT=$(gettext 'Build website including package kz')...
     infomsg "$TEXT"
+
     # Call kz build.
     logmsg 'Calling kz build...'
     "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
@@ -190,6 +195,7 @@ function upload_website() {
     PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
     TEXT=$(gettext 'Upload website')...
     infomsg "$TEXT"
+
     if [[ ! -f $FTP_LOGIN ]]
     then
         read -rp "$PROMPT" < /dev/tty
@@ -197,6 +203,7 @@ function upload_website() {
         printf '\n'
         chmod --verbose 'u=rw,g=,o=' "$FTP_LOGIN" |& $LOGCMD
     fi
+
     if ! lftp   --user      "$FTP_USER"             \
                 --password  "$(cat "$FTP_LOGIN")"   \
                 -e          "$FTP_SET; $FTP_CMD"    \
@@ -216,6 +223,7 @@ function install_package() {
     # Call kz-deb (via wget and bash as a regular user would do).
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
+
     logmsg 'Calling kz deb (via wget and bash)...'
     if ! wget --output-document=- karelzimmer.nl/deb 2> >($LOGCMD) | bash
     then

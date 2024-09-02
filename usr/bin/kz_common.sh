@@ -279,6 +279,7 @@ function process_option_help() {
         YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
     fi
+
     TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
 E'\$YELP_MAN_URL for more information.")"
     printf '%b\n\n%b\n' "$HELP" "$TEXT"
@@ -390,6 +391,7 @@ function term() {
             RC_DESC='unknown error'
             ;;
     esac
+
     TEXT="Signal: $SIGNAL, line: $LINENO, function: $FUNCTION, command: "
     TEXT+="$COMMAND, code: $RC ($RC_DESC)."
     logmsg "$TEXT"
@@ -410,6 +412,7 @@ sudo apt remove kz
 wget karelzimmer.nl/deb
 bash deb"
             fi
+
             exit "$RC"
             ;;
         exit )
@@ -423,15 +426,19 @@ bash deb"
                     "$KZ_DEB_LOCAL_FILE"    \
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi
+
             TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
+
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+
             exit "$RC"
             ;;
         * )
             TEXT=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
             errormsg "$TEXT"
+
             exit "$RC"
             ;;
     esac

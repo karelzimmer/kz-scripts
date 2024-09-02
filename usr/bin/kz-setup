@@ -226,6 +226,7 @@ $(gettext 'NUM  APP')\n"
                 --number-separator='  '     \
                 --body-numbering=a          || true
         )
+
     if [[ -n $APPS ]]
     then
         TEXT+=$APPS
@@ -240,6 +241,7 @@ $(eval_gettext "To view the contents of the default set up file execute: \
 
 $USAGE"
     fi
+
     if $OPTION_GUI; then
         infomsg "$TEXT"
     else
@@ -257,6 +259,7 @@ function process_argument_app() {
     do
         process_input_file_by_app
     done
+
     if $APP_NOT_FOUND
     then
         TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available \
@@ -298,6 +301,7 @@ function process_input_file_by_app() {
                 ;;
         esac
     done < "$INPUT_FILE"
+
     if $NO_APP_MATCH
     then
         APP_NOT_FOUND=true
@@ -341,6 +345,7 @@ function process_input_file_by_user() {
 # This function displays the contents of the command file.
 function process_option_cat() {
     less --quit-if-one-screen "$COMMAND_FILE"
+
     rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
@@ -359,6 +364,7 @@ function setup_apps() {
     TITLE=$(gettext 'Set up apps')
     TEXT=$(gettext 'Preparing set up')
     logmsg "$TITLE"...
+
     if $OPTION_GUI
     then
         # With '|& zenity --progress' global variables from called functions
@@ -388,7 +394,6 @@ function process_COMMAND_FILE() {
     local   -i  CMD_SEQ_NUM=0
 
     if ! $OPTION_GUI
-
     then
         TEXT="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
@@ -424,6 +429,7 @@ function process_COMMAND_FILE() {
                 ;;
         esac
     done < "$COMMAND_FILE"
+
     rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
@@ -506,9 +512,11 @@ changing user settings.
 Type 'logout' to log out.")"
         fi
         infomsg "$TEXT"
+
         if $DESKTOP_ENVIRONMENT
         then
             $OPTION_GUI || wait_for_enter
+
             if $GNOME
             then
                 gnome-session-quit --logout --no-prompt

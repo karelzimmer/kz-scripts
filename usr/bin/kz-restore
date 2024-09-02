@@ -155,25 +155,32 @@ $USAGE"
             infomsg "$TEXT"
             exit $ERROR
         fi
+
         SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
     else
         MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
         if [[ -z $MEDIUM ]]
         then
             TEXT=$(gettext "No USB medium found.
 
 Connect a USB medium.")
             infomsg "$TEXT"
+
             $OPTION_GUI || wait_for_enter
+
             MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
             if [[ -z $MEDIUM ]]
             then
                 errormsg "$TEXT"
                 exit $ERROR
             fi
         fi
+
         MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
         then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -183,16 +190,21 @@ Now connected:
 
 Disconnect media via Files.")"
             infomsg "$TEXT"
+
             $OPTION_GUI || wait_for_enter
+
             MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
             then
                 errormsg "$TEXT"
                 exit $ERROR
             fi
         fi
+
         SOURCE=$MEDIUM/kz-backup/$USER@$HOSTNAME
         SOURCE_MEDIUM=$MEDIUM
+
         if [[ ! -d $SOURCE ]]
         then
             TEXT=$(eval_gettext "No backup found on connected USB medium.
@@ -215,6 +227,7 @@ function restore_backup() {
 
     TITLE=$(gettext 'Restore backup')
     TEXT=$(gettext 'Preparing restore (this can take a while)')
+
     if $OPTION_GUI
     then
         logmsg "$TITLE"...
@@ -245,6 +258,7 @@ function restore_backup() {
                 "$SOURCE"/              \
                 "$TARGET"/              2> "$ERROR_FILE" || RESTORE_RC=$?
     fi
+
     if [[ $RESTORE_RC -ne $OK ]]
     then
         # shellcheck disable=SC2034
@@ -265,6 +279,7 @@ use app 'Terminal', type 'kz restore'.")
         errormsg "$TEXT"
         exit $ERROR
     fi
+
     rm --verbose "$ERROR_FILE" |& $LOGCMD
 }
 
@@ -302,6 +317,7 @@ function term_script() {
     local   -i  NUM_USERS
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)
+
     if [[ $NUM_USERS -eq 1 ]]
     then
         TEXT=$(gettext 'The backup has been restored.')

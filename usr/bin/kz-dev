@@ -111,6 +111,7 @@ function check_dependencies() {
 
     TEXT=$(gettext 'Check dependencies')...
     infomsg "$TEXT"
+
     kz-install fakeroot $ESC_GETTEXT git jq lftp nmap python shellcheck vscode
     kz-setup vscode
 }
@@ -132,13 +133,17 @@ function pull_repos() {
     else
         git clone https://github.com/karelzimmer/bin.git "$BIN_REPO"
     fi
+
     TEXT=$(gettext 'Pull repos')...
     infomsg "$TEXT"
+
     # Call gitpull.
     logmsg 'Calling gitpull...'
     "$BIN_REPO"/gitpull
     logmsg 'Called gitpull.'
+
     printf '%b\n' "$(gettext 'Status repos')..."
+
     # Call gitstat.
     logmsg 'Calling gitstat...'
     "$BIN_REPO"/gitstat
@@ -159,6 +164,7 @@ function download_website() {
     local PROMPT
 
     PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
+
     if [[ ! -f $FTP_LOGIN ]]
     then
         read -rsp "$PROMPT" < /dev/tty
@@ -166,6 +172,7 @@ function download_website() {
         printf '\n'
         chmod --verbose 'u=rw,g=,o=' "$FTP_LOGIN" |& $LOGCMD
     fi
+
     if ! lftp   --user "$FTP_USER"                  \
                 --password "$(cat "$FTP_LOGIN")"    \
                 -e "$FTP_SET; $FTP_CMD"             \

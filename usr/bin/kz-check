@@ -180,6 +180,7 @@ function process_input() {
 function check_website() {
     TEXT=$(gettext 'Check website')...
     infomsg "$TEXT"
+
     # Call rchecklink.
     logmsg 'Calling rchecklink...'
     "$BIN_REPO"/rchecklink || ERROR_FLAG=true
@@ -194,6 +195,7 @@ function check_gettext() {
     # GNU gettext message catalogue template (.pot).
     FILE=$SCRIPTS_REPO/usr/bin/kz.pot
     infomsg "  $FILE"
+
     if [[ ! -e $FILE ]]
     then
         TEXT=$(eval_gettext "Gettext message catalog template \$FILE not \
@@ -205,6 +207,7 @@ found.")
     # GNU gettext message catalogue (.po).
     FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.po
     infomsg "  $FILE"
+
     if [[ ! -e $FILE ]]
     then
         TEXT=$(eval_gettext "Gettext message catalog \$FILE not found.")
@@ -215,6 +218,7 @@ found.")
     # GNU message catalog (.mo).
     FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.mo
     infomsg "  $FILE"
+
     if [[ ! -e $FILE ]]
     then
         TEXT=$(eval_gettext "Message catalog \$FILE not found.")
@@ -282,6 +286,7 @@ function check_script() {
 
     # Tab-completion script (Only with so-called root scripts).
     DIR=$SCRIPTS_REPO/usr/share/bash-completion/completions
+
     if [[ ! -e $DIR/$SCRIPTNAME ]]
     then
         TEXT='    '$(eval_gettext "Tab completion script \$DIR/\$SCRIPTNAME \
@@ -292,13 +297,16 @@ not found.")
 
     # Manual page (EN + NL).
     DIR=$SCRIPTS_REPO/usr/share/man/man1
+
     if [[ ! -e $DIR/$SCRIPTNAME.1 ]]
     then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errormsg "$TEXT"
         ERROR_FLAG=true
     fi
+
     DIR=$SCRIPTS_REPO/usr/share/man/nl/man1
+
     if [[ ! -e $DIR/$SCRIPTNAME.1 ]]
     then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
@@ -340,6 +348,7 @@ function check_record_length() {
     fi
 
     MAX_LINE_LENGTH_FOUND=$(wc --max-line-length < "$SCRIPT")
+
     if [[ $MAX_LINE_LENGTH_FOUND -gt $MAX_LINE_LENGTH ]]
     then
         TEXT="

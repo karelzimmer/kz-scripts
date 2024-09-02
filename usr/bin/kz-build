@@ -143,8 +143,10 @@ function generate_mo() {
     local LC_MESSAGES_DIR=''
 
     LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+
     TEXT=$(gettext 'Generate .mo file')...
     infomsg "$TEXT"
+
     msgfmt --output-file="$LC_MESSAGES_DIR/kz.mo"  "$LC_MESSAGES_DIR/kz.po"
 }
 
@@ -176,6 +178,7 @@ function build_website() {
     for FILE in *.odt *.txt
     do
         FILENAME=${FILE%.*}
+
         if [[ $FILE -nt ${UPLOADS_TARGETS[kz-docs]}/$FILENAME.pdf ]]
         then
             lowriter    --headless                              \

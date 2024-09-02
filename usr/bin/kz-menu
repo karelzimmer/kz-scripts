@@ -213,9 +213,12 @@ function process_menu1_tui() {
                     "${MENU1_ACTIONS[$MENU1_ACTION]}"   \
                     "${MENU1_DESCS[$MENU1_ACTION]}"
         done
+
         printf '\n'
+
         PROMPT=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
         read -rp "$PROMPT"
+
         case $REPLY in
             *[^[:digit:]]* )
                 continue
@@ -270,6 +273,7 @@ function process_menu1_choice1() {
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
             "${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
         )
+
     process_commands
 }
 
@@ -286,6 +290,7 @@ Roughly boils down to:
 2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
+
     if $OPTION_GUI
     then
         zenity  --info                  \
@@ -305,6 +310,7 @@ function process_menu1_choice3() {
     ROWS=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
+
     process_commands
 }
 
@@ -316,7 +322,9 @@ function process_menu1_choice4() {
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
             "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
+
     process_commands
+
     # User must type 'logout' to log out.
     $DESKTOP_ENVIRONMENT || exit $OK
 }
@@ -382,9 +390,12 @@ function process_menu2_tui() {
                     "${MENU2_ACTIONS[$MENU2_ACTION]}"  \
                     "${MENU2_DESCS[$MENU2_ACTION]}"
         done
+
         printf '\n'
+
         PROMPT=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
         read -rp "$PROMPT"
+
         case $REPLY in
             *[^[:digit:]]* )
                 continue
@@ -429,6 +440,7 @@ function process_commands() {
     local   -i  ROW=0
 
     show_commands_before_execution
+
     if $EXECUTE_COMMAND
     then
         for ROW in "${!ROWS[@]}"
@@ -468,9 +480,11 @@ function show_commands_before_execution() {
         TEXT+="
 [$ROW] $DESCRIPTION ($COMMAND)"
     done
+
     TEXT+='
 '
     PROMPT="$(gettext 'Proceed?')"
+
     if $OPTION_GUI
     then
         TEXT+="
@@ -491,7 +505,7 @@ $PROMPT"
     else
         printf '\n%s\n' "$TEXT"
         while true
-    do
+        do
             read -rp "$(eval_gettext "\$PROMPT [Y/n]: ")"
             case $REPLY in
                 [YyJj]* | '' )
