@@ -135,11 +135,11 @@ function check_on_ac_power() {
     local   -i  ON_BATTERY=0
 
     on_ac_power || ON_BATTERY=$?
+
     # Value on_battery:
     #   0 (true)  System is on mains power
     #   1 (false) System is not on mains power
     # 255 (false) Power status could not be determined (e.g. on VM)
-
     if [[ ON_BATTERY -eq 1 ]]
     then
         TEXT=$(gettext "The computer now uses only the battery for power.
@@ -398,8 +398,8 @@ function term() {
         err )
             if $ERREXIT
             then
-                TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an err\
-or.")
+                TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an \
+error.")
                 errormsg "$TEXT"
             fi
             if [[ $PROGRAM_NAME = 'kz-deb' ]]
@@ -415,12 +415,13 @@ bash deb"
         exit )
             if [[ $PROGRAM_NAME = 'kz-deb' ]]
             then
-                logmsg "Delete deb files ($MODULE_NAME)..."
+                logmsg "Delete kz deb files ($MODULE_NAME)..."
                 rm  --force                 \
                     --verbose               \
                     deb                     \
                     deb.{1..99}             \
-                    "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
+                    "$KZ_DEB_LOCAL_FILE"    \
+                    "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi
             TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="

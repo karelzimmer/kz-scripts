@@ -16,18 +16,10 @@ declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimmer/'
         KZ_COMMON_GITHUB_FILE+='kz-scripts/main/usr/bin/kz_common.sh'
 declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
-echo    'Download kz_common.sh...' |&
-        systemd-cat --identifier=kz-deb --priority=debug
 wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_GITHUB_FILE |&
-        systemd-cat --identifier=kz-deb --priority=debug
-echo    'Source kz_common.sh...' |&
         systemd-cat --identifier=kz-deb --priority=debug
 source  "$KZ_COMMON_LOCAL_FILE" 2> >(
         systemd-cat --identifier=kz-deb --priority=debug)
-echo    'Remove kz_common.sh...' |&
-        systemd-cat --identifier=kz-deb --priority=debug
-rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
-        systemd-cat --identifier=kz-deb --priority=debug
 
 
 ###############################################################################
@@ -118,12 +110,16 @@ function process_input() {
 # This function prepares further processing.
 function prepare_processing() {
     KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+
     sudo true
+
     # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> symlink.
     [[ -e /usr/bin/bash ]] || sudo ln --symbolic /bin/bash /usr/bin/bash
+
     # Progress indicator with growing '[=>', '[==>', etc. as long as the local
-    # Debian package file exists, i.e. installation is in progress. If all
-    # fails, kz_common.sh will delete the local Debian package file on exit.
+    # Debian package file exists, i.e. installation is in progress.
+    # If something fails, kz_common.sh will remove the local Debian package
+    # file and other files upon exit.
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"
     do
@@ -153,7 +149,9 @@ function install_package() {
     then
         INSTALL_SUGGESTS='--install-suggests'
     fi
+
     check_package_manager |& $LOGCMD
+
     # Ubuntu 18.04: E: Invalid operation reinstall ==> 'install --reinstall'.
     # Debian 11: .deb' uses unknown compression ==> ' || install_package_xz'.
     sudo    DEBIAN_FRONTEND=noninteractive  \
@@ -163,8 +161,7 @@ function install_package() {
             $INSTALL_SUGGESTS               \
             --yes                           \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
-    logmsg 'Delete kz deb file...'
-    rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
+
     # Progress indicator with '[=>', '[==>', etc. ends like '[===>]100%'.
     printf '%s\n' ']100%'
 }
@@ -175,7 +172,9 @@ function install_package_xz() {
     local KZ_DEB_LOCAL_FILE_XZ
 
     KZ_DEB_LOCAL_FILE_XZ=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
+
     logmsg 'Try installing package kz that uses xz by repackaging it.'
+
     logmsg 'Install required packages...'
     sudo    apt-get install --yes binutils zstd     |& $LOGCMD
     logmsg 'Extract files from the archive...'
@@ -225,8 +224,16 @@ Linux.")"
 $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
-    logmsg "Delete deb files ($PROGRAM_NAME)..."
-    rm --force --verbose deb deb.{1..99} |& $LOGCMD
+
+    logmsg "Delete kz deb files ($PROGRAM_NAME)..."
+
+    rm  --force                 \
+        --verbose               \
+        deb                     \
+        deb.{1..99}             \
+        "$KZ_DEB_LOCAL_FILE"    \
+        "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
+
     exit $OK
 }
 
