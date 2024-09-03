@@ -74,11 +74,13 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
+
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
+
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -98,6 +100,7 @@ function process_x_options() {
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
+
                     exit $ERROR
                 fi
                 OPTION_GUI=true
@@ -109,6 +112,7 @@ $USAGE"
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
+
                     exit $ERROR
                 fi
                 OPTION_TARGET=true
@@ -130,6 +134,7 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
+
         exit $ERROR
     fi
 }
@@ -154,6 +159,7 @@ function check_target() {
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
+
             exit $ERROR
         fi
 
@@ -169,11 +175,15 @@ $USAGE"
 
 Connect a USB medium.")
             infomsg "$TEXT"
+
             $OPTION_GUI || wait_for_enter
+
             MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+
             if [[ -z $MEDIUM ]]
             then
                 errormsg "$TEXT"
+
                 exit $ERROR
             fi
         fi
@@ -197,6 +207,7 @@ Disconnect media via Files.")"
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
             then
                 errormsg "$TEXT"
+
                 exit $ERROR
             fi
         fi
@@ -213,6 +224,7 @@ Disconnect media via Files.")"
         TEXT="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. \
 Please rename to 'USER@HOST'.")"
         errormsg "$TEXT"
+
         exit $ERROR
     fi
 }
@@ -496,6 +508,7 @@ EOF
     else
         TEXT+='...'
         infomsg "$TEXT"
+
         rsync   --archive                       \
                 --acls                          \
                 --xattrs                        \
@@ -528,6 +541,7 @@ EOF
     else
         TEXT+='...'
         infomsg "$TEXT"
+
         sync |& $LOGCMD
     fi
 
@@ -549,6 +563,7 @@ Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Make backup', or
 use app 'Terminal', type 'kz backup'.")"
         errormsg "$TEXT"
+
         exit $ERROR
     fi
 
@@ -586,6 +601,7 @@ $(gettext 'The USB medium can be removed.')"
 $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
     fi
+
     infomsg "$TEXT"
 
     exit $OK
@@ -611,9 +627,10 @@ function term_script_usb() {
 
     if $OPTION_GUI
     then
+        logmsg "$TEXT..."
+
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        logmsg "$TEXT..."
         term_script_unmount > >(
             zenity  --progress              \
                     --pulsate               \
@@ -627,6 +644,7 @@ function term_script_usb() {
             )
     else
         infomsg "$TEXT..."
+
         term_script_unmount
     fi
 

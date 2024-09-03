@@ -73,11 +73,13 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
+
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
+
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -92,7 +94,7 @@ function process_x_options() {
         case $1 in
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
-    then
+                then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -175,6 +177,7 @@ Connect a USB medium.")
             if [[ -z $MEDIUM ]]
             then
                 errormsg "$TEXT"
+
                 exit $ERROR
             fi
         fi
@@ -198,6 +201,7 @@ Disconnect media via Files.")"
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]
             then
                 errormsg "$TEXT"
+
                 exit $ERROR
             fi
         fi
@@ -211,6 +215,7 @@ Disconnect media via Files.")"
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
             errormsg "$TEXT"
+
             exit $ERROR
         fi
     fi
@@ -277,6 +282,7 @@ Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Restore backup', or
 use app 'Terminal', type 'kz restore'.")
         errormsg "$TEXT"
+
         exit $ERROR
     fi
 
@@ -360,6 +366,7 @@ $(gettext 'The USB medium can be removed.')"
 $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
     fi
+
     infomsg "$TEXT"
 
     exit $OK
@@ -385,9 +392,10 @@ function term_script_usb() {
 
     if $OPTION_GUI
     then
+        logmsg "$TEXT..."
+
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        logmsg "$TEXT..."
         term_script_unmount > >(
             zenity  --progress              \
                     --pulsate               \
@@ -401,6 +409,7 @@ function term_script_usb() {
             )
     else
         infomsg "$TEXT..."
+
         term_script_unmount
     fi
 

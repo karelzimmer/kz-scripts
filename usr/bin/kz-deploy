@@ -57,11 +57,13 @@ function check_input() {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
+
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
+
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -89,6 +91,7 @@ function process_x_options() {
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
+
         exit $ERROR
     fi
 
@@ -97,6 +100,7 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
+
         exit $ERROR
     fi
 }
@@ -140,7 +144,9 @@ function check_repos() {
         then
             TEXT=$(gettext "Repo \$REPO not on branch main.")
             errormsg "$TEXT"
+
             git status
+
             ERROR_FLAG=true
         fi
     done
@@ -157,7 +163,9 @@ function check_repos() {
         then
             TEXT=$(eval_gettext "Repo \$REPO is not clean.")
             errormsg "$TEXT"
+
             git status
+
             ERROR_FLAG=true
         fi
     done
@@ -213,6 +221,7 @@ function upload_website() {
         rm --verbose "$FTP_LOGIN"*
         TEXT=$(gettext 'Website upload failed.')
         errormsg "$TEXT"
+
         exit $ERROR
     fi
 }
@@ -229,6 +238,7 @@ function install_package() {
     then
         TEXT=$(gettext 'Install package kz failed.')
         errormsg "$TEXT"
+
         exit $ERROR
     fi
     logmsg 'Called kz deb (via wget and bash).'

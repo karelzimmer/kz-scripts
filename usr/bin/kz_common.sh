@@ -63,12 +63,15 @@ declare     NORMAL='\033[0m'
 declare     DESKTOP_ENVIRONMENT=true
 [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]] ||
             DESKTOP_ENVIRONMENT=false
+
 declare     DEBIAN=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Debian' ]] || DEBIAN=false
+
 declare     UBUNTU=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Ubuntu' ]] || UBUNTU=false
+
 declare     GNOME=true
 # shellcheck disable=SC2034
 [[ -n $(type -t gnome-session) ]] || GNOME=false
@@ -96,16 +99,22 @@ function become_root() {
         if $OPTION_GUI
         then
             export DISPLAY
+
             xhost +si:localuser:root |& $LOGCMD
+
             TEXT="Restart (pkexec $PKEXEC_PROGRAM ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
+
             # Because $PKEXEC_PROGRAM will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
+
             pkexec "$PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || RC=$?
+
             exit $RC
         else
             TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
+
             exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
         fi
     fi
@@ -124,6 +133,7 @@ function become_root_check() {
     else
         TEXT=$(gettext 'Already performed by the administrator.')
         infomsg "$TEXT"
+
         return $ERROR
     fi
 }
@@ -146,6 +156,7 @@ function check_on_ac_power() {
 
 It is recommended to connect the computer to the wall socket.")
         infomsg "$TEXT"
+
         $OPTION_GUI || wait_for_enter
     fi
 }
@@ -314,6 +325,7 @@ function process_option_version() {
     else
         TEXT=$(gettext 'Build ID cannot be determined.')
         logmsg "$TEXT"
+
         # shellcheck disable=SC2034
         BUILD_ID=$TEXT
     fi

@@ -92,11 +92,13 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
+
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
+
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -111,7 +113,7 @@ function process_x_options() {
         case $1 in
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
-    then
+                then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"

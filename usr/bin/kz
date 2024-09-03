@@ -73,11 +73,13 @@ function check_input() {
                     --name          "$DISPLAY_NAME"                     \
                     --              "$@"
             ) || RC=$?
+
         if [[ $RC -ne $OK ]]
         then
             infomsg "$USAGE"
             exit $ERROR
         fi
+
         eval set -- "$PARSED"
 
         process_options   "$@"
@@ -143,6 +145,7 @@ function process_input() {
         TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")
 $USAGE"
         infomsg "$TEXT"
+
         exit $ERROR
     fi
 
