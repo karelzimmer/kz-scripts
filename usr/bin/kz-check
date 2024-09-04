@@ -54,13 +54,11 @@ function check_input() {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
-
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -88,7 +86,6 @@ function process_x_options() {
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-
         exit $ERROR
     fi
 
@@ -97,7 +94,6 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
-
         exit $ERROR
     fi
 }
@@ -205,7 +201,6 @@ function check_gettext() {
         TEXT=$(eval_gettext "Gettext message catalog template \$FILE not \
 found.")
         errormsg "    $TEXT"
-
         ERROR_FLAG=true
     fi
 
@@ -217,7 +212,6 @@ found.")
     then
         TEXT=$(eval_gettext "Gettext message catalog \$FILE not found.")
         errormsg "    $TEXT"
-
         ERROR_FLAG=true
     fi
 
@@ -229,7 +223,6 @@ found.")
     then
         TEXT=$(eval_gettext "Message catalog \$FILE not found.")
         errormsg "    $TEXT"
-
         ERROR_FLAG=true
     fi
 }
@@ -246,7 +239,7 @@ function check_code() {
         check_shellcheck
         check_script
     elif grep --quiet --line-regexp --regexp="$TAB_COMPLETION_SCRIPT" "$SCRIPT"
-    then
+        then
         check_shellcheck
     elif grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"
     then
@@ -259,7 +252,6 @@ ${RED}    $(gettext "Unknown script. Function check_code cannot check script \
 code.")$NORMAL
 "
         infomsg "$TEXT"
-
         ERROR_FLAG=true
     fi
 }
@@ -276,7 +268,6 @@ function check_script() {
     then
         TEXT='    '$(eval_gettext "Script \$SCRIPTNAME returned an error.")
         errormsg "$TEXT"
-
         ERROR_FLAG=true
     fi
 
@@ -289,7 +280,6 @@ function check_script() {
             TEXT='    '$(eval_gettext "Desktop configuration file \
 \$DIR/\$SCRIPTNAME.desktop not found.")
             errormsg "$TEXT"
-
             ERROR_FLAG=true
         fi
     fi
@@ -302,7 +292,6 @@ function check_script() {
         TEXT='    '$(eval_gettext "Tab completion script \$DIR/\$SCRIPTNAME \
 not found.")
         errormsg "$TEXT"
-
         ERROR_FLAG=true
     fi
 
@@ -313,7 +302,6 @@ not found.")
     then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errormsg "$TEXT"
-
         ERROR_FLAG=true
     fi
 
@@ -323,7 +311,6 @@ not found.")
     then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errormsg "$TEXT"
-
         ERROR_FLAG=true
     fi
 
@@ -336,7 +323,6 @@ not found.")
             TEXT='    '$(eval_gettext "PolicyKit action definition file \
 \$DIR/nl.karelzimmer.\$SCRIPTNAME.policy not found.")
             errormsg "$TEXT"
-
             ERROR_FLAG=true
         fi
     fi
@@ -371,7 +357,6 @@ ${RED}    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
 (\$MAX_LINE_LENGTH_FOUND).")$NORMAL
 "
         infomsg "$TEXT"
-
         ERROR_FLAG=true
     fi
 }
@@ -434,10 +419,8 @@ ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 ${RED}    $(gettext 'End spaces found.')$NORMAL
 "
         infomsg "$TEXT"
-
         grep    --line-number --regexp=' ''$' "$SCRIPT" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
-
         ERROR_FLAG=true
     fi
 }
@@ -449,12 +432,10 @@ function term_script() {
     then
         TEXT=$(gettext 'Fix all the messages above.')
         errormsg "$TEXT"
-
         exit $ERROR
     else
         TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
         infomsg "$TEXT"
-
         exit $OK
     fi
 }

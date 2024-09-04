@@ -90,13 +90,11 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
-
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -131,7 +129,7 @@ $USAGE"
                 ;;
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
-                then
+    then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -163,7 +161,6 @@ $USAGE"
     then
         ARGUMENT_APPS=true
         REBOOT=false
-
         while [[ -n $* ]]
         do
             APP_ARGUMENTS[$1]=$1
@@ -187,7 +184,6 @@ function process_input() {
         TEXT=$(eval_gettext "No install file found, looked for \
 '\$INPUT_FILE'.")
         errormsg "$TEXT"
-
         exit $ERROR
     fi
 
@@ -377,7 +373,6 @@ function install_apps() {
                 --count                     \
                 "$COMMAND_FILE"             || true
         )
-
     [[ $APP_TOT_NUM -ne 0 ]] || return $OK
 
     TITLE=$(gettext 'Install apps')
@@ -475,7 +470,6 @@ function execute_command() {
     fi
 
     logmsg "$CMD"
-
     ERREXIT=false
     eval "$CMD" |& $LOGCMD || FAILED_APPS[$APP_NAME]=$APP_NAME
     ERREXIT=true
@@ -509,7 +503,6 @@ Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Install apps', or
 use app 'Terminal', type 'kz install \$FAILED_APPS_TEXT'.")
         errormsg "$TEXT"
-
         exit $ERROR
     fi
 
@@ -518,7 +511,6 @@ use app 'Terminal', type 'kz install \$FAILED_APPS_TEXT'.")
         # shellcheck disable=SC2034
         OPERATION=$(gettext 'remove')
     fi
-
     TEXT=$(eval_gettext "Apps \$OPERATION completed.")
 
     if $REBOOT

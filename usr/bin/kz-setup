@@ -88,13 +88,11 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
-
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -129,7 +127,7 @@ $USAGE"
                 ;;
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
-                then
+    then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -159,7 +157,6 @@ $USAGE"
     then
         ARGUMENT_APP=true
         LOGOUT=false
-
         while [[ -n $* ]]
         do
             APP_ARGUMENTS[$1]=$1
@@ -177,12 +174,10 @@ function process_input() {
     then
         INPUT_FILE=$FILE_ARGUMENT
     fi
-
     if [[ ! -f $INPUT_FILE ]]
     then
         TEXT=$(eval_gettext "No set up file found, looked for '\$INPUT_FILE'.")
         errormsg "$TEXT"
-
         exit $ERROR
     fi
 
@@ -206,7 +201,6 @@ function process_input() {
         process_option_cat
         exit $OK
     fi
-
     setup_apps
 }
 
@@ -365,7 +359,6 @@ function setup_apps() {
                 --count                     \
                 "$COMMAND_FILE"             || true
         )
-
     [[ $APP_TOT_NUM -ne 0 ]] || return $OK
 
     TITLE=$(gettext 'Set up apps')
@@ -461,7 +454,6 @@ function execute_command() {
     fi
 
     logmsg "$CMD"
-
     ERREXIT=false
     eval "$CMD" |& $LOGCMD || FAILED_APPS[$APP_NAME]=$APP_NAME
     ERREXIT=true
@@ -494,7 +486,6 @@ Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Set up apps', or
 use app 'Terminal', type 'kz setup \$FAILED_APPS_TEXT'.")
         errormsg "$TEXT"
-
         exit $ERROR
     fi
 
@@ -503,7 +494,6 @@ use app 'Terminal', type 'kz setup \$FAILED_APPS_TEXT'.")
         # shellcheck disable=SC2034
         OPERATION=$(gettext 'reset')
     fi
-
     TEXT=$(eval_gettext "Apps \$OPERATION completed.")
 
     if $LOGOUT
@@ -545,7 +535,6 @@ Type 'logout' to log out.")"
             else
                 TEXT='No logout command available.'
                 logmsg "$TEXT"
-
                 TEXT=$(gettext 'Log out of the computer yourself.')
                 infomsg "$TEXT"
             fi

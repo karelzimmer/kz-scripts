@@ -51,13 +51,11 @@ function check_input() {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
-
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -85,7 +83,6 @@ function process_x_options() {
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-
         exit $ERROR
     fi
 
@@ -94,7 +91,6 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
-
         exit $ERROR
     fi
 }
@@ -186,7 +182,6 @@ function download_website() {
         rm --verbose "$FTP_LOGIN"*
         TEXT=$(gettext 'Website download failed.')
         errormsg "$TEXT"
-
         exit $ERROR
     fi
 }
@@ -196,7 +191,6 @@ function download_website() {
 function term_script() {
     TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
     infomsg "$TEXT"
-
     exit $OK
 }
 

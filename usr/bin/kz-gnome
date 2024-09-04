@@ -79,13 +79,11 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
-
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -104,7 +102,6 @@ function process_x_options() {
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-
                     exit $ERROR
                 fi
                 OPTION_ADDAFT=true
@@ -117,7 +114,6 @@ $USAGE"
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-
                     exit $ERROR
                 fi
                 OPTION_ADDBEF=true
@@ -130,7 +126,6 @@ $USAGE"
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-
                     exit $ERROR
                 fi
                 OPTION_DELETE=true
@@ -160,7 +155,6 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-
         exit $ERROR
     fi
 
@@ -169,7 +163,6 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
-
         exit $ERROR
     fi
 }
@@ -181,7 +174,6 @@ function process_input() {
     then
         TEXT=$(gettext 'For GNOME desktop environments only.')
         infomsg "$TEXT"
-
         exit $OK
     fi
 

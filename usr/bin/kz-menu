@@ -104,13 +104,11 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
-
     if [[ $RC -ne $OK ]]
     then
         infomsg "$USAGE"
         exit $ERROR
     fi
-
     eval set -- "$PARSED"
 
     process_options   "$@"
@@ -125,7 +123,7 @@ function process_x_options() {
         case $1 in
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT
-                then
+    then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -262,7 +260,6 @@ function process_menu1_choice() {
         * )
             TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
             errormsg "$TEXT"
-
             exit $ERROR
             ;;
     esac
@@ -431,7 +428,6 @@ function process_menu2_choice() {
     else
         TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
         errormsg "$TEXT"
-
         exit $ERROR
     fi
 }
@@ -549,7 +545,6 @@ function execute_command() {
     fi
 
     "$CMD" "$ARG" $GUI_OPTION -- || RC=$?
-
     logmsg "$COMMAND: rc=$RC"
 }
 
