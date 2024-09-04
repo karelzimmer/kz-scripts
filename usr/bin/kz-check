@@ -54,8 +54,7 @@ function check_input() {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
-    if [[ $RC -ne $OK ]]
-    then
+    if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -68,8 +67,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    while true
-    do
+    while true; do
         case $1 in
             -- )
                 shift
@@ -81,16 +79,14 @@ function process_x_options() {
         esac
     done
 
-    if [[ -n $* ]]
-    then
+    if [[ -n $* ]]; then
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT
-    then
+    if ! $DESKTOP_ENVIRONMENT; then
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
@@ -112,8 +108,7 @@ function process_input() {
     check_gettext
 
     cd "$SCRIPTS_REPO"
-    while read -r SCRIPT
-    do
+    while read -r SCRIPT; do
         SCRIPTDIR=$(dirname "$(realpath "$SCRIPT")")
         SCRIPTNAME=$(basename "$SCRIPT")
         infomsg "  $(realpath "$SCRIPT")"
@@ -196,8 +191,7 @@ function check_gettext() {
     FILE=$SCRIPTS_REPO/usr/bin/kz.pot
     infomsg "  $FILE"
 
-    if [[ ! -e $FILE ]]
-    then
+    if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Gettext message catalog template \$FILE not \
 found.")
         errormsg "    $TEXT"
@@ -208,8 +202,7 @@ found.")
     FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.po
     infomsg "  $FILE"
 
-    if [[ ! -e $FILE ]]
-    then
+    if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Gettext message catalog \$FILE not found.")
         errormsg "    $TEXT"
         ERROR_FLAG=true
@@ -219,8 +212,7 @@ found.")
     FILE=$SCRIPTS_REPO/usr/share/locale/nl/LC_MESSAGES/kz.mo
     infomsg "  $FILE"
 
-    if [[ ! -e $FILE ]]
-    then
+    if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Message catalog \$FILE not found.")
         errormsg "    $TEXT"
         ERROR_FLAG=true
@@ -234,15 +226,13 @@ function check_code() {
     local PYTHON_SCRIPT='#!''/usr/bin/env python3'
     local TAB_COMPLETION_SCRIPT='# ''shellcheck shell=bash'
 
-    if grep --quiet --line-regexp --regexp="$BASH_SCRIPT" "$SCRIPT"
-    then
+    if grep --quiet --line-regexp --regexp="$BASH_SCRIPT" "$SCRIPT"; then
         check_shellcheck
         check_script
     elif grep --quiet --line-regexp --regexp="$TAB_COMPLETION_SCRIPT" "$SCRIPT"
         then
         check_shellcheck
-    elif grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"
-    then
+    elif grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"; then
         check_pycodestyle
         check_script
     else
@@ -264,31 +254,29 @@ function check_script() {
     local ROOT_SCRIPT=' ''b''e''c''o''m''e''_''r''o''o''t''$'
 
     # Script.
-    if ! "$SCRIPTDIR/$SCRIPTNAME" --version |& $LOGCMD
-    then
+    if ! "$SCRIPTDIR/$SCRIPTNAME" --version |& $LOGCMD; then
         TEXT='    '$(eval_gettext "Script \$SCRIPTNAME returned an error.")
         errormsg "$TEXT"
         ERROR_FLAG=true
     fi
 
     # Desktop file (Only with so-called GUI scripts).
-    if grep --quiet --regexp="$GUI_OPTION" "$SCRIPTDIR/$SCRIPTNAME"
-    then
+    if grep --quiet --regexp="$GUI_OPTION" "$SCRIPTDIR/$SCRIPTNAME"; then
         DIR=$SCRIPTS_REPO/usr/share/applications
-        if [[ ! -e $DIR/$SCRIPTNAME.desktop ]]
-        then
+
+        if [[ ! -e $DIR/$SCRIPTNAME.desktop ]]; then
             TEXT='    '$(eval_gettext "Desktop configuration file \
 \$DIR/\$SCRIPTNAME.desktop not found.")
             errormsg "$TEXT"
             ERROR_FLAG=true
         fi
+
     fi
 
     # Tab-completion script (Only with so-called root scripts).
     DIR=$SCRIPTS_REPO/usr/share/bash-completion/completions
 
-    if [[ ! -e $DIR/$SCRIPTNAME ]]
-    then
+    if [[ ! -e $DIR/$SCRIPTNAME ]]; then
         TEXT='    '$(eval_gettext "Tab completion script \$DIR/\$SCRIPTNAME \
 not found.")
         errormsg "$TEXT"
@@ -298,8 +286,7 @@ not found.")
     # Manual page (EN + NL).
     DIR=$SCRIPTS_REPO/usr/share/man/man1
 
-    if [[ ! -e $DIR/$SCRIPTNAME.1 ]]
-    then
+    if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errormsg "$TEXT"
         ERROR_FLAG=true
@@ -307,24 +294,23 @@ not found.")
 
     DIR=$SCRIPTS_REPO/usr/share/man/nl/man1
 
-    if [[ ! -e $DIR/$SCRIPTNAME.1 ]]
-    then
+    if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errormsg "$TEXT"
         ERROR_FLAG=true
     fi
 
     # PolicyKit action definition file (Only with so-called root scripts).
-    if grep --quiet --regexp="$ROOT_SCRIPT" "$SCRIPTDIR/$SCRIPTNAME"
-    then
+    if grep --quiet --regexp="$ROOT_SCRIPT" "$SCRIPTDIR/$SCRIPTNAME"; then
         DIR=$SCRIPTS_REPO/usr/share/polkit-1/actions
-        if [[ ! -e $DIR/nl.karelzimmer.$SCRIPTNAME.policy ]]
-        then
+
+        if [[ ! -e $DIR/nl.karelzimmer.$SCRIPTNAME.policy ]]; then
             TEXT='    '$(eval_gettext "PolicyKit action definition file \
 \$DIR/nl.karelzimmer.\$SCRIPTNAME.policy not found.")
             errormsg "$TEXT"
             ERROR_FLAG=true
         fi
+
     fi
 }
 
@@ -342,15 +328,13 @@ function check_record_length() {
     local       PYTHON_SCRIPT='#!''/usr/bin/python3'
 
     # Python is checked by pycodestyle.
-    if grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"
-    then
+    if grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"; then
         return $OK
     fi
 
     MAX_LINE_LENGTH_FOUND=$(wc --max-line-length < "$SCRIPT")
 
-    if [[ $MAX_LINE_LENGTH_FOUND -gt $MAX_LINE_LENGTH ]]
-    then
+    if [[ $MAX_LINE_LENGTH_FOUND -gt $MAX_LINE_LENGTH ]]; then
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 ${RED}    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
@@ -391,8 +375,7 @@ function check_tags() {
             --regexp="$ESC_BUG"     \
             --regexp="$ESC_FIXME"   \
             --regexp="$ESC_TODO"    \
-            "$SCRIPT"
-    then
+            "$SCRIPT"; then
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
     $(gettext 'Flagged annotation found.')
@@ -412,8 +395,7 @@ ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces() {
-    if grep --quiet --regexp=' ''$' "$SCRIPT"
-    then
+    if grep --quiet --regexp=' ''$' "$SCRIPT"; then
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 ${RED}    $(gettext 'End spaces found.')$NORMAL
@@ -428,8 +410,7 @@ ${RED}    $(gettext 'End spaces found.')$NORMAL
 
 # This function controls the termination of the script.
 function term_script() {
-    if $ERROR_FLAG
-    then
+    if $ERROR_FLAG; then
         TEXT=$(gettext 'Fix all the messages above.')
         errormsg "$TEXT"
         exit $ERROR

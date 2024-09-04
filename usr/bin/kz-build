@@ -82,8 +82,7 @@ function check_input() {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
-    if [[ $RC -ne $OK ]]
-    then
+    if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -96,8 +95,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    while true
-    do
+    while true; do
         case $1 in
             -- )
                 shift
@@ -109,16 +107,14 @@ function process_x_options() {
         esac
     done
 
-    if [[ -n $* ]]
-    then
+    if [[ -n $* ]]; then
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT
-    then
+    if ! $DESKTOP_ENVIRONMENT; then
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
@@ -168,19 +164,16 @@ function build_website() {
             "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
 
     # Make sure all necessary directories are available.
-    for DIR in "${UPLOADS_TARGETS[@]}"
-    do
+    for DIR in "${UPLOADS_TARGETS[@]}"; do
         mkdir --parents "$DIR" |& $LOGCMD
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
     cd "${UPLOADS_SOURCES[kz-docs]}"
-    for FILE in *.odt *.txt
-    do
+    for FILE in *.odt *.txt; do
         FILENAME=${FILE%.*}
 
-        if [[ $FILE -nt ${UPLOADS_TARGETS[kz-docs]}/$FILENAME.pdf ]]
-        then
+        if [[ $FILE -nt ${UPLOADS_TARGETS[kz-docs]}/$FILENAME.pdf ]]; then
             lowriter    --headless                              \
                         --convert-to pdf                        \
                         --outdir "${UPLOADS_TARGETS[kz-docs]}"  \

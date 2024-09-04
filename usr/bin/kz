@@ -58,14 +58,12 @@ declare X_OPTIONS_LONG=',list'
 function check_input() {
     local PARSED=''
 
-    if [[ -z $* ]]
-    then
+    if [[ -z $* ]]; then
         infomsg "$USAGE"
         exit $ERROR
     fi
 
-    if [[ $1 == -* ]]
-    then
+    if [[ $1 == -* ]]; then
         PARSED=$(
             getopt  --alternative                                       \
                     --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
@@ -73,8 +71,7 @@ function check_input() {
                     --name          "$DISPLAY_NAME"                     \
                     --              "$@"
             ) || RC=$?
-        if [[ $RC -ne $OK ]]
-        then
+        if [[ $RC -ne $OK ]]; then
             infomsg "$USAGE"
             exit $ERROR
         fi
@@ -88,8 +85,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    while true
-    do
+    while true; do
         case $1 in
             -l | --list )
                 process_option_list
@@ -138,8 +134,7 @@ $(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
 function process_input() {
     local COMMAND=$1
 
-    if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$COMMAND ]]
-    then
+    if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$COMMAND ]]; then
         TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")
 $USAGE"
         infomsg "$TEXT"

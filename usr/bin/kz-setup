@@ -88,8 +88,7 @@ function check_input() {
                 --name          "$DISPLAY_NAME"                     \
                 --              "$@"
         ) || RC=$?
-    if [[ $RC -ne $OK ]]
-    then
+    if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -102,8 +101,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    while true
-    do
+    while true; do
         case $1 in
             -a | --apps )
                 OPTION_APPS=true
@@ -114,8 +112,7 @@ function process_x_options() {
                 shift
                 ;;
             -f | --file )
-                if $OPTION_FILE
-                then
+                if $OPTION_FILE; then
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
@@ -126,8 +123,7 @@ $USAGE"
                 shift 2
                 ;;
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT
-    then
+                if ! $DESKTOP_ENVIRONMENT; then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -153,12 +149,10 @@ $USAGE"
         esac
     done
 
-    if [[ -n $* ]]
-    then
+    if [[ -n $* ]]; then
         ARGUMENT_APP=true
         LOGOUT=false
-        while [[ -n $* ]]
-        do
+        while [[ -n $* ]]; do
             APP_ARGUMENTS[$1]=$1
             shift
         done
@@ -170,37 +164,34 @@ $USAGE"
 function process_input() {
     local COMMAND_FILE=''
 
-    if $OPTION_FILE
-    then
+    if $OPTION_FILE; then
         INPUT_FILE=$FILE_ARGUMENT
     fi
-    if [[ ! -f $INPUT_FILE ]]
-    then
+
+    if [[ ! -f $INPUT_FILE ]]; then
         TEXT=$(eval_gettext "No set up file found, looked for '\$INPUT_FILE'.")
         errormsg "$TEXT"
         exit $ERROR
     fi
 
-    if $OPTION_APPS
-    then
+    if $OPTION_APPS; then
         process_option_apps
         exit $OK
     fi
 
     COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
 
-    if $ARGUMENT_APP
-    then
+    if $ARGUMENT_APP; then
         process_argument_app
     else
         process_input_file_by_user
     fi
 
-    if $OPTION_CAT
-    then
+    if $OPTION_CAT; then
         process_option_cat
         exit $OK
     fi
+
     setup_apps
 }
 
@@ -227,8 +218,7 @@ $(gettext 'NUM  APP')\n"
                 --body-numbering=a          || true
         )
 
-    if [[ -n $APPS ]]
-    then
+    if [[ -n $APPS ]]; then
         TEXT+=$APPS
         TEXT+="\n
 $(eval_gettext "To view the contents of the apps set up file execute: \
@@ -255,13 +245,11 @@ function process_argument_app() {
     local APP_NOT_FOUND=false
     local APP_ARGUMENT=''
 
-    for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"
-    do
+    for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
         process_input_file_by_app
     done
 
-    if $APP_NOT_FOUND
-    then
+    if $APP_NOT_FOUND; then
         TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available \
 apps.")"
         infomsg "$TEXT"
@@ -278,8 +266,7 @@ function process_input_file_by_app() {
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
 
-    while read -r INPUT_RECORD
-    do
+    while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
             '#'*$SETUP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*for* )
                 # Matching app record.
@@ -293,8 +280,7 @@ function process_input_file_by_app() {
                 continue
                 ;;
             * )
-                if $APP_MATCH
-                then
+                if $APP_MATCH; then
                     # Record for command file.
                     printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
@@ -302,8 +288,7 @@ function process_input_file_by_app() {
         esac
     done < "$INPUT_FILE"
 
-    if $NO_APP_MATCH
-    then
+    if $NO_APP_MATCH; then
         APP_NOT_FOUND=true
         TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
         infomsg "$TEXT"
@@ -317,8 +302,7 @@ function process_input_file_by_user() {
     local INPUT_RECORD=''
     local USER_MATCH=false
 
-    while read -r INPUT_RECORD
-    do
+    while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
             '#'*$SETUP*for*'*' | '#'*$SETUP*for*$USER@$HOSTNAME* )
                 # Matching app record.
@@ -331,8 +315,7 @@ function process_input_file_by_user() {
                 continue
                 ;;
             * )
-                if $USER_MATCH
-                then
+                if $USER_MATCH; then
                     # Record for command file.
                     printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
@@ -365,8 +348,7 @@ function setup_apps() {
     TEXT=$(gettext 'Preparing set up')
     logmsg "$TITLE"...
 
-    if $OPTION_GUI
-    then
+    if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_COMMAND_FILE > >(
@@ -393,15 +375,13 @@ function process_COMMAND_FILE() {
     local   -i  APP_SEQ_NUM=0
     local   -i  CMD_SEQ_NUM=0
 
-    if ! $OPTION_GUI
-    then
+    if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
         infomsg "$TEXT"
     fi
 
-    while read -r COMMAND_RECORD
-    do
+    while read -r COMMAND_RECORD; do
         case $COMMAND_RECORD in
             '#'*$SETUP* )
                 # App record.
@@ -440,16 +420,16 @@ function execute_command() {
 
     ((++CMD_SEQ_NUM))
 
-    if $OPTION_GUI
-    then
+    if $OPTION_GUI; then
         [[ $CMD_SEQ_NUM -ne 1 ]] || logmsg "$APP_NAME_LINE"
         printf '%s\n' "#$APP_NAME_LINE\n\n$CMD"
     else
-        if [[ $CMD_SEQ_NUM -eq 1 ]]
-        then
+
+        if [[ $CMD_SEQ_NUM -eq 1 ]]; then
             logmsg  "$APP_NAME_LINE"
             infomsg "$APP_NAME_LINE"
         fi
+
         infomsg "         $CMD"
     fi
 
@@ -467,15 +447,13 @@ function term_script() {
 
     OPERATION=$(gettext 'set up')
 
-    if $NO_COMMANDS_FOUND
-    then
+    if $NO_COMMANDS_FOUND; then
         TEXT=$(gettext 'No commands to execute.' )
         infomsg "$TEXT"
         exit $OK
     fi
 
-    if [[ -n ${FAILED_APPS[*]} ]]
-    then
+    if [[ -n ${FAILED_APPS[*]} ]]; then
         # shellcheck disable=SC2034
         FAILED_APPS_TEXT=${FAILED_APPS[*]}
         TEXT=$(eval_gettext "The set up of the following apps contains errors:
@@ -489,17 +467,15 @@ use app 'Terminal', type 'kz setup \$FAILED_APPS_TEXT'.")
         exit $ERROR
     fi
 
-    if $OPTION_RESET
-    then
+    if $OPTION_RESET; then
         # shellcheck disable=SC2034
         OPERATION=$(gettext 'reset')
     fi
     TEXT=$(eval_gettext "Apps \$OPERATION completed.")
 
-    if $LOGOUT
-    then
-        if $DESKTOP_ENVIRONMENT
-        then
+    if $LOGOUT; then
+
+        if $DESKTOP_ENVIRONMENT; then
             TEXT+="
 
 $(gettext "You will now be logged out of the computer to finish installing \
@@ -511,26 +487,21 @@ $(gettext "You must log out of the computer to finish installing the apps and \
 changing user settings.
 Type 'logout' to log out.")"
         fi
+
         infomsg "$TEXT"
 
-        if $DESKTOP_ENVIRONMENT
-        then
+        if $DESKTOP_ENVIRONMENT; then
             $OPTION_GUI || wait_for_enter
 
-            if $GNOME
-            then
+            if $GNOME; then
                 gnome-session-quit --logout --no-prompt
-            elif [[ -n $(type -t ksmserver) ]]
-            then
+            elif [[ -n $(type -t ksmserver) ]]; then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0
-            elif [[ -n $(type -t lxqt-session) ]]
-            then
+            elif [[ -n $(type -t lxqt-session) ]]; then
                 lxqt-leave --logout
-            elif [[ -n $(type -t mate-session) ]]
-            then
+            elif [[ -n $(type -t mate-session) ]]; then
                 mate-session-save --logout
-            elif [[ -n $(type -t xfce4-session) ]]
-            then
+            elif [[ -n $(type -t xfce4-session) ]]; then
                 xfce4-session-logout --logout
             else
                 TEXT='No logout command available.'

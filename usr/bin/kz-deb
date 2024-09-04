@@ -60,8 +60,7 @@ function check_input() {
                 --name          "$DISPLAY_NAME"     \
                 --              "$@"
         ) || RC=$?
-    if [[ $RC -ne $OK ]]
-    then
+    if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
         exit $ERROR
     fi
@@ -74,8 +73,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    while true
-    do
+    while true; do
         case $1 in
             -- )
                 shift
@@ -87,8 +85,7 @@ function process_x_options() {
         esac
     done
 
-    if [[ -n $* ]]
-    then
+    if [[ -n $* ]]; then
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
@@ -121,8 +118,7 @@ function prepare_processing() {
     # If something fails, kz_common.sh will remove the local Debian package
     # file and other files upon exit.
     printf '[ '
-    while test -e "$KZ_DEB_LOCAL_FILE"
-    do
+    while test -e "$KZ_DEB_LOCAL_FILE"; do
         printf '\b%s' '=>'
         sleep 1
     done &
@@ -145,8 +141,7 @@ function install_package() {
     local INSTALL_SUGGESTS=''
 
     logmsg 'Install package kz...'
-    if $DESKTOP_ENVIRONMENT
-    then
+    if $DESKTOP_ENVIRONMENT; then
         INSTALL_SUGGESTS='--install-suggests'
     fi
 
@@ -217,8 +212,7 @@ Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under \
 Linux.")"
-    if $DESKTOP_ENVIRONMENT
-    then
+    if $DESKTOP_ENVIRONMENT; then
         TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"
