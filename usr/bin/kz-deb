@@ -141,6 +141,7 @@ function install_package() {
     local INSTALL_SUGGESTS=''
 
     logmsg 'Install package kz...'
+
     if $DESKTOP_ENVIRONMENT; then
         INSTALL_SUGGESTS='--install-suggests'
     fi
@@ -172,19 +173,23 @@ function install_package_xz() {
 
     logmsg 'Install required packages...'
     sudo    apt-get install --yes binutils zstd     |& $LOGCMD
+
     logmsg 'Extract files from the archive...'
     ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"  |& $LOGCMD
+
     logmsg 'Uncompress zstd files an re-compress them using xz...'
     zstd    --uncompress < /tmp/control.tar.zst     |
     xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
     zstd    --uncompress < /tmp/data.tar.zst        |
     xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
+
     logmsg 'Re-create the package...'
     ar      -mcav sdsd                              \
             "$KZ_DEB_LOCAL_FILE_XZ"                 \
             /tmp/debian-binary                      \
             /tmp/control.tar.xz                     \
             /tmp/data.tar.xz                        |& $LOGCMD
+
     logmsg "Install the package..."
     sudo    DEBIAN_FRONTEND=noninteractive          \
             apt-get                                 \
@@ -192,6 +197,7 @@ function install_package_xz() {
             $INSTALL_SUGGESTS                       \
             --yes                                   \
             "$KZ_DEB_LOCAL_FILE_XZ"                 |& $LOGCMD
+
     logmsg 'Delete kz deb xz files...'
     rm       --verbose                              \
             /tmp/debian-binary                      \
