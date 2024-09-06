@@ -1090,12 +1090,6 @@ msgstr "Teams"
 msgid "Collaborate with others from a web browser"
 msgstr "Werk samen met anderen vanuit een webbrowser"
 
-msgid "Telegram"
-msgstr "Telegram"
-
-msgid "Send and receive messages, photos and videos via a web browser"
-msgstr "Verzend en ontvang berichten, foto's en video's via een webbrowser"
-
 msgid "Webmin"
 msgstr "Webmin"
 

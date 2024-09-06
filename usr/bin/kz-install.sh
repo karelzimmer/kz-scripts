@@ -377,17 +377,6 @@ sudo apt-get install --yes shellcheck
 # Remove shellcheck from pc06 pc07
 sudo apt-get remove --yes shellcheck
 
-# Install signal on pc06 pc07
-wget --output-document=- 'https://updates.signal.org/desktop/apt/keys.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/signal-desktop-keyring.gpg
-echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main'| sudo tee /etc/apt/sources.list.d/signal-xenial.list
-sudo apt-get update
-sudo apt-get install --yes signal-desktop
-
-# Remove signal from pc06 pc07
-sudo apt-get remove --yes signal-desktop
-sudo rm --force --verbose /etc/apt/sources.list.d/signal-xenial.list* /usr/share/keyrings/signal-desktop-keyring.gpg*
-sudo apt-get update
-
 # Install sound-juicer on pc-van-emily
 sudo apt-get install --yes sound-juicer
 

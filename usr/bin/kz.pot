@@ -926,9 +926,6 @@ msgstr ""
 msgid "Collaborate with others from a web browser"
 msgstr ""
 
-msgid "Telegram"
-msgstr ""
-
 msgid "Send and receive messages, photos and videos via a web browser"
 msgstr ""
 

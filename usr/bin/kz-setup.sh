@@ -214,12 +214,6 @@ kz-gnome --addaft=com.teamviewer.TeamViewer
 # Reset teamviewer for karel@pc06
 kz-gnome --delete=com.teamviewer.TeamViewer
 
-# Setup telegram for hugo@pc-van-hugo maria@maria-desktop
-kz-gnome --addaft=kz-telegram
-
-# Reset telegram for hugo@pc-van-hugo maria@maria-desktop
-kz-gnome --delete=kz-telegram
-
 # Setup terminal for karel@pc01 karel@pc06 karel@pc07
 kz-gnome --addbef=org.gnome.Terminal
 # Turn on aliases.
