@@ -357,7 +357,7 @@ function term() {
             RC_DESC='terminated by control-c'
             ;;
         13[1-9] | 140 )                     # 131 (128 + 3)--140 (128 + 12)
-            RC_DESC_SIGNALNO=$((RC - 128))
+            RC_DESC_SIGNALNO=$(( RC - 128 ))
             RC_DESC="typ 'trap -l' and look for $RC_DESC_SIGNALNO"
             ;;
         141 )                               # SIGPIPE (128 + 13)
@@ -370,7 +370,7 @@ function term() {
             RC_DESC='termination signal'
             ;;
         14[4-9] | 1[5-8][0-9] | 19[0-2])    # 144 (128 + 16)--192 (128 + 64)
-            RC_DESC_SIGNALNO=$((RC - 128))
+            RC_DESC_SIGNALNO=$(( RC - 128 ))
             RC_DESC="typ 'trap -l' and look for $RC_DESC_SIGNALNO"
             ;;
         255 )

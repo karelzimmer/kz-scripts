@@ -390,7 +390,7 @@ function process_COMMAND_FILE() {
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3
                     )
-                ((++APP_SEQ_NUM))
+                (( ++APP_SEQ_NUM ))
                 CMD_SEQ_NUM=0
                 printf  -v APP_NAME_LINE    \
                         "%3d/%-3d  %s"      \
@@ -416,9 +416,12 @@ function process_COMMAND_FILE() {
 
 # This function reports and executes a command from the command file.
 function execute_command() {
-    local CMD=${1:-unknown}
+    local       CMD=${1:-unknown}
+    local       CMD_DIS=''
+    local   -i  CMD_DIS_LEN=0
+    local   -i  CMD_DIS_MAX=0
 
-    ((++CMD_SEQ_NUM))
+    (( ++CMD_SEQ_NUM ))
 
     if $OPTION_GUI; then
         [[ $CMD_SEQ_NUM -ne 1 ]] || logmsg "$APP_NAME_LINE"
@@ -430,7 +433,17 @@ function execute_command() {
             infomsg "$APP_NAME_LINE"
         fi
 
-        infomsg "         $CMD"
+        # Width 9 characters less, 9 for spaces.
+        CMD_DIS_MAX=$(( COLUMNS - 9 ))
+
+        if [[ ${#CMD} -gt $CMD_DIS_MAX ]]; then
+            # Width 12 characters less, 9 for spaces and 3 for ellipsis.
+            CMD_DIS_LEN=$(( COLUMNS - 12 ))
+            CMD_DIS=${CMD:0:CMD_DIS_LEN}...
+        else
+            CMD_DIS=$CMD
+        fi
+        infomsg "         $CMD_DIS"
     fi
 
     logmsg "$CMD"
