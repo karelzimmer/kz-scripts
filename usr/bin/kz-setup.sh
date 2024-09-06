@@ -150,11 +150,11 @@ if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mou
 if $GNOME; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi
 if $GNOME; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
-# Setup google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
+# Setup google-chrome for *
 kz-gnome --addbef=google-chrome
 xdg-mime default google-chrome.desktop application/pdf
 
-# Reset google-chrome for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
+# Reset google-chrome for *
 kz-gnome --delete=google-chrome
 
 # Setup handbrake for emily@pc-van-emily
