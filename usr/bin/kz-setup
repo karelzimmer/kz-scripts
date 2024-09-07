@@ -433,11 +433,12 @@ function execute_command() {
             infomsg "$APP_NAME_LINE"
         fi
 
-        # Width 9 characters less, 9 for spaces.
+        # Width 9 characters less, 9 for leading spaces.
         CMD_DIS_MAX=$(( COLUMNS - 9 ))
 
         if [[ ${#CMD} -gt $CMD_DIS_MAX ]]; then
-            # Width 12 characters less, 9 for spaces and 3 for ellipsis.
+            # Width 12 characters less, 9 for leading spaces and 3 for trailing
+            # ellipsis.
             CMD_DIS_LEN=$(( COLUMNS - 12 ))
             CMD_DIS=${CMD:0:CMD_DIS_LEN}...
         else
