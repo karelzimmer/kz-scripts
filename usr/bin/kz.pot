@@ -853,7 +853,7 @@ msgid ""
 "updates ***"
 msgstr ""
 
-msgid "Record this data to connect to the wireless network later."
+msgid "Record this data to connect to the wireless network."
 msgstr ""
 
 msgid "No WiFi device found."

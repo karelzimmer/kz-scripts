@@ -109,8 +109,7 @@ $USAGE"
 function process_input() {
     local NMCLI_OUTPUT=''
 
-    TEXT=$(gettext "Record this data to connect to the wireless network \
-later.")
+    TEXT=$(gettext "Record this data to connect to the wireless network.")
 
     if $OPTION_GUI; then
 

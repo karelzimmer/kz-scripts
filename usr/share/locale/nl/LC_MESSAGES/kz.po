@@ -1013,9 +1013,9 @@ msgstr ""
 "*** De computer moet opnieuw worden opgestart om de installatie van updates "
 "te voltooien ***"
 
-msgid "Record this data to connect to the wireless network later."
+msgid "Record this data to connect to the wireless network."
 msgstr ""
-"Leg deze gegevens vast om later verbinding te maken met het draadloze "
+"Leg deze gegevens vast om verbinding te maken met het draadloze "
 "netwerk."
 
 msgid "No WiFi device found."
