@@ -266,7 +266,7 @@ def process_option_version(PROGRAM_NAME):
     BUILD_ID = ''
 
     try:
-        with open('/etc/kz-build.id') as fh:
+        with open('/usr/share/doc/kz/kz-build.id') as fh:
             BUILD_ID = f'{fh.read()}'
     except FileNotFoundError as fnf:
         TEXT = str(fnf)
