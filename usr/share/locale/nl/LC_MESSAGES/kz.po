@@ -126,12 +126,12 @@ msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
 #, sh-format
-msgid "kz version 4.2.1 (built $BUILD_ID)."
-msgstr "kz versie 4.2.1 (gebouwd $BUILD_ID)."
+msgid "kz version 4.2.1 ($BUILD_ID)."
+msgstr "kz versie 4.2.1 ($BUILD_ID)."
 
 #, sh-format
-msgid "kz version 4.2.1 (built {})."
-msgstr "kz versie 4.2.1 (gebouwd {})."
+msgid "kz version 4.2.1 ({})."
+msgstr "kz versie 4.2.1 ({})."
 
 msgid "{}: i am a module"
 msgstr "{}: ik ben een module"
