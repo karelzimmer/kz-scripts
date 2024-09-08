@@ -164,10 +164,11 @@ kz-gnome --addaft=fr.handbrake.ghb
 kz-gnome --delete=fr.handbrake.ghb
 
 # Setup hide-files for *
-echo 'snap' > "$HOME/.hidden"
+if $DESKTOP_ENVIRONMENT; then echo 'snap' > "$HOME/.hidden"; fi
+if $DESKTOP_ENVIRONMENT; then echo 'kz-backup' >> "$HOME/.hidden"; fi
 
 # Reset hide-files for *
-rm --force --verbose "$HOME/.hidden"
+if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.hidden"; fi
 
 # Setup kvm for karel@pc06 karel@pc07
 kz-gnome --addaft=virt-manager
