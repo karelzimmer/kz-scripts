@@ -302,7 +302,7 @@ function process_option_version() {
     local BUILD_ID=''
 
     if [[ -e /usr/share/doc/kz/kz-build.id ]]; then
-        BUILD_ID=$(cat /etc/kz-build.id)
+        BUILD_ID=$(cat /usr/share/doc/kz/kz-build.id)
     else
         TEXT=$(gettext 'Build ID cannot be determined.')
         logmsg "$TEXT"
