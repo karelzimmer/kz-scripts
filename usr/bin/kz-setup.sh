@@ -55,12 +55,12 @@ if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-h
 if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
 # Setup desktop-installer for *
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=install-debian; fi
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then kz-gnome --delete=install-debian; fi
+if $DESKTOP_ENVIRONMENT && $UBUNTU; then kz-gnome --delete=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
 # Reset desktop-installer for *
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=install-debian; fi
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then kz-gnome --addbef=install-debian; fi
+if $DESKTOP_ENVIRONMENT && $UBUNTU; then kz-gnome --addbef=ubuntu-desktop-installer_ubuntu-desktop-installer; fi
 
 # Setup evolution for karel@pc07
 kz-gnome --delete=org.gnome.Evolution

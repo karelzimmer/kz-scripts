@@ -35,9 +35,7 @@ if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove "deb h
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --yes deb-multimedia-keyring; fi
 
 # Install update-system on *
-sudo apt-get update
-sudo apt-get dist-upgrade --yes
-if [[ -n $(type -t snap) ]]; then sudo snap refresh; fi
+sudo kz update
 
 # Remove update-system from *
 # There is no command available to remove update system.

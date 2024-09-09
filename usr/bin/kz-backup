@@ -332,7 +332,11 @@ function backup_setting_wifi() {
     local OUTPUT_FILE=$SETTINGS_DIR/wifi.txt
 
     logmsg 'Save the WiFi information...'
-    nmcli device wifi show-password > "$OUTPUT_FILE" 2> >($LOGCMD) || true
+
+    # Call kz wifi.
+    logmsg 'Calling kz wifi...'
+    kz wifi > "$OUTPUT_FILE"
+    logmsg 'Called kz wifi.'
 }
 
 
