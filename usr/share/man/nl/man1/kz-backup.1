@@ -38,19 +38,11 @@ uitgevoerd. Een desktopomgeving is vereist.
 Met optie \fB-t\fR, \fB--target\fR \fIMAP\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
 .sp
-Deze locaties worden standaard genegeerd:
-.RS
- .cache
- .ccache
- .gvfs
- .Private
- .steam/root
- .var/app/*/cache
- .xsession-errors
- snap/*/*/.cache
- *CACHEDIR.TAG* (d.w.z. elke map met een CACHEDIR.TAG)
-.RE
-Tevens worden door Git beheerde mappen ("git-controlled") niet in de back-up
+Locaties die genegeerd worden door \fBkz backup\fR zijn locaties die standaard
+genegeerd worden door GNOME Backups (Déjà Dup), en een selectie van locaties
+in https://github.com/rubo77/rsync-homedir-excludes.
+.br
+Tevens worden door Git beheerde mappen ("git-managed") niet in de back-up
 opgenomen.
 Voorbeeld: ~/kz-scripts wordt overgeslagen vanwege de aanwezigheid van
 ~/kz-scripts/.git.

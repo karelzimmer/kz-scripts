@@ -37,18 +37,10 @@ desktop environment is required.
 With option \fB-t\fR, \fB--target\fR \fIDIRECTORY\fR another location can be
 specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
-These locations are ignored by default:
-.RS
- .cache
- .ccache
- .gvfs
- .Private
- .steam/root
- .var/app/*/cache
- .xsession-errors
- snap/*/*/.cache
- *CACHEDIR.TAG* (i.e. any folder with a CACHEDIR.TAG)
-.RE
+Locations ignored by \fBkz backup\fR include locations ignored by default by
+GNOME Backups (Déjà Dup), and a selection of locations in
+https://github.com/rubo77/rsync-homedir-excludes.
+.br
 Also, directories managed by Git are not backed up.
 Example: ~/kz-scripts is skipped due to the presence of ~/kz-scripts/.git.
 .sp
