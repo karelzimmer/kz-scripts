@@ -158,8 +158,8 @@ function install_package() {
             --yes                           \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
 
-    # Progress indicator with '[=>', '[==>', etc. ends like '[===>]100%'.
-    printf '%s\n' ']100%'
+    # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
+    printf '\b%s\n' '=]100%'
 }
 
 
