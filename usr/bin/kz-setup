@@ -526,6 +526,8 @@ Type 'logout' to log out.")"
         fi
     fi
 
+    infomsg "$TEXT"
+
     exit $OK
 }
 
