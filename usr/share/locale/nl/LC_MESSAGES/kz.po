@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-24 19:20+0200\n"
+"POT-Creation-Date: 2024-09-10 07:47+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1015,8 +1015,7 @@ msgstr ""
 
 msgid "Record this data to connect to the wireless network."
 msgstr ""
-"Leg deze gegevens vast om verbinding te maken met het draadloze "
-"netwerk."
+"Leg deze gegevens vast om verbinding te maken met het draadloze netwerk."
 
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
@@ -1089,6 +1088,9 @@ msgstr "Teams"
 
 msgid "Collaborate with others from a web browser"
 msgstr "Werk samen met anderen vanuit een webbrowser"
+
+msgid "Send and receive messages, photos and videos via a web browser"
+msgstr ""
 
 msgid "Webmin"
 msgstr "Webmin"

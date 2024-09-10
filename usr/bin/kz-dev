@@ -108,8 +108,15 @@ function check_dependencies() {
     TEXT=$(gettext 'Check dependencies')...
     infomsg "$TEXT"
 
-    kz-install fakeroot $ESC_GETTEXT git jq lftp nmap python shellcheck vscode
-    kz-setup vscode
+    # Call kz install.
+    logmsg 'Calling kz install...'
+    kz install fakeroot $ESC_GETTEXT git jq lftp nmap python shellcheck vscode
+    logmsg 'Called kz install.'
+
+    # Call kz setup.
+    logmsg 'Calling kz setup...'
+    kz setup vscode
+    logmsg 'Called kz setup.'
 }
 
 
