@@ -124,8 +124,14 @@ function check_dependencies() {
 function pull_repos() {
     local BIN_REPO=$HOME/bin
 
-    git config --global user.name 'Karel Zimmer'
-    git config --global user.email 'karel.zimmer@gmail.com'
+    PROMPT='Git user.name: '
+    read -rp "$PROMPT"
+    git config --global user.name "$REPLY"
+
+    PROMPT='Git user.email: '
+    read -rp "$PROMPT"
+    git config --global user.email "$REPLY"
+
     git config --global pull.ff only
     git config --global credential.helper store
 
