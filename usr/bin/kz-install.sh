@@ -235,12 +235,6 @@ sudo apt-get install --yes gnome-tweaks
 # Remove gnome-tweaks from pc01 pc06 pc07
 sudo apt-get remove --yes gnome-tweaks
 
-# Install gnome-web on pc06
-sudo apt-get install --yes epiphany-browser
-
-# Remove gnome-web from pc06
-sudo apt-get remove --yes epiphany-browser
-
 # Install google-chrome on *
 if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
