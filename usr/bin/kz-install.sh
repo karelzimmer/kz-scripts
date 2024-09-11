@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 # For the format of the records in this file, see the kz install man page.
-# Before manually executing a command with variables, run: source kz_common.sh
+# Before manually running a command, run the following: source kz_common.sh
 
 # Install disabled-apport on *
 # Disable the program crash report.
