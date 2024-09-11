@@ -612,7 +612,7 @@ Thumbs.db
 .cargo
 .rustup
 
-# ccache, remove cache but keep config
+# Remove ccache cache, but keep config
 .ccache/?
 .ccache/tmp
 
