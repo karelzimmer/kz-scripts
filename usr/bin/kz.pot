@@ -226,9 +226,6 @@ msgid ""
 "'USER@HOST'."
 msgstr ""
 
-msgid "Secure settings..."
-msgstr ""
-
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -742,9 +739,6 @@ msgid ""
 "No backup found on connected USB medium.\n"
 "\n"
 "Connect a USB medium with the directory $USER@$HOSTNAME."
-msgstr ""
-
-msgid "Restore settings..."
 msgstr ""
 
 msgid "Preparing restore (this can take a while)"

@@ -251,9 +251,6 @@ msgstr ""
 "Back-up gevonden met oude naam: 'backup-HOSTNAME-USER'. Hernoem de naam naar "
 "'USER@HOST'."
 
-msgid "Secure settings..."
-msgstr "Instellingen veiligstellen..."
-
 msgid ""
 "This folder contains files created by kz-backup.\n"
 "These files are used by kz-restore and others.\n"
@@ -862,9 +859,6 @@ msgstr ""
 "Geen back-up gevonden op aangekoppeld usb-medium.\n"
 "\n"
 "Koppel een usb-medium aan met hierop de map $USER@$HOSTNAME."
-
-msgid "Restore settings..."
-msgstr "Instellingen terugzetten..."
 
 msgid "Preparing restore (this can take a while)"
 msgstr "Terugzetten voorbereiden (dit kan even duren)"

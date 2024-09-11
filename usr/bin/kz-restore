@@ -276,7 +276,7 @@ function restore_settings() {
     local SETTINGS_DIR=$HOME/kz-backup
 
     if $DESKTOP_ENVIRONMENT; then
-        $OPTION_GUI || infomsg "$(gettext 'Restore settings...')"
+        logmsg 'Restore settings...'
         restore_setting_desktop
     fi
 }

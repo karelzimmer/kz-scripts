@@ -213,7 +213,7 @@ Please rename to 'USER@HOST'.")"
 function backup_settings() {
     local SETTINGS_DIR=$HOME/$PROGRAM_NAME
 
-    $OPTION_GUI || infomsg "$(gettext 'Secure settings...')"
+    logmsg 'Backup settings...'
 
     [[ -d $SETTINGS_DIR ]] || mkdir --verbose "$SETTINGS_DIR" |& $LOGCMD
 
