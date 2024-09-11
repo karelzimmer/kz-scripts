@@ -429,30 +429,18 @@ function create_backup() {
     EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
 
     cat << EOF > "$EXCLUDE_FILE"
-# Ignored by default by GNOME Backups (Déjà Dup).
+# == Ignored by default by GNOME Backups (Déjà Dup) ==
 .cache
 .ccache
 .gvfs
-.Private
+/.Private
 .steam/root
 .var/app/*/cache
 .xsession-errors
 snap/*/*/.cache
-*CACHEDIR.TAG*
+CACHEDIR.TAG
 
-# Ignore Git-managed directories.
-$(
-    find    "$HOME"         \
-            -maxdepth 2     \
-            -name .git      \
-            -type d         \
-            -print          |
-    cut     --delimiter='/' \
-            --fields=4      |
-    sort
-    )
-
-# Ignore selection from https://github.com/rubo77/rsync-homedir-excludes.
+# == Ignore selection from https://github.com/rubo77/rsync-homedir-excludes ==
 
 # Contains mounted file systems
 .local/share/gvfs-metadata
@@ -460,6 +448,10 @@ $(
 # Session-specific
 /.dbus
 .var/app/*/.cache
+/.Trash
+.Trash-1*
+.local/share/Trash
+/Trash
 
 # Cached info about audio CDs
 .cddb
@@ -538,6 +530,9 @@ Thumbs.db
 .opera/application_cache
 .opera/widgets/*/cache
 .opera/lock
+
+# Keychain dir (manage SSH and GPG keys, front-end to ssh-agent and ssh-add)
+/.keychain
 
 # GnuPG
 .gnupg/rnd
@@ -647,6 +642,19 @@ Thumbs.db
 .var/app/**/Code Cache
 .var/app/**/GPUCache
 .var/app/**/Service Worker/CacheStorage
+
+# == Ignore Git-managed directories ==
+$(
+    find    "$HOME"         \
+            -maxdepth 2     \
+            -name .git      \
+            -type d         \
+            -print          |
+    cut     --delimiter='/' \
+            --fields=4      |
+    sed     's|^|/|'        |
+    sort
+    )
 EOF
 
     TITLE=$(gettext 'Make backup')
