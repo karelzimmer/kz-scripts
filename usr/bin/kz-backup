@@ -429,23 +429,18 @@ function create_backup() {
     EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
 
     cat << EOF > "$EXCLUDE_FILE"
-# == Ignored by default by GNOME Backups (Déjà Dup) ==
-.cache
-.ccache
-.gvfs
-/.Private
-.steam/root
-.var/app/*/cache
-.xsession-errors
-snap/*/*/.cache
-
 # == Ignore selection from https://github.com/rubo77/rsync-homedir-excludes ==
 
 # Contains mounted file systems
+.gvfs
 .local/share/gvfs-metadata
+# contains the actual encrypted home directory
+/.Private
 
 # Session-specific
 /.dbus
+.cache
+.var/app/*/cache
 .var/app/*/.cache
 /.Trash
 .Trash-1*
@@ -465,6 +460,7 @@ snap/*/*/.cache
 .nvm
 
 # Contains errors from the current graphical session
+.xsession-errors
 .xsession-errors.old
 .wayland-errors
 
@@ -617,6 +613,9 @@ Thumbs.db
 .cargo
 .rustup
 
+# ccache, remove cache but keep config
+.ccache/?
+.ccache/tmp
 
 # Nvidia OpenGL Shader Cache
 .nv/GLCache
