@@ -429,8 +429,7 @@ function create_backup() {
     EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
 
     cat << EOF > "$EXCLUDE_FILE"
-# == Ignore selection from https://github.com/rubo77/rsync-homedir-excludes ==
-
+# ==== START exclude https://github.com/rubo77/rsync-homedir-excludes ====
 # Contains mounted file systems
 .gvfs
 .local/share/gvfs-metadata
@@ -640,8 +639,9 @@ Thumbs.db
 .var/app/**/Code Cache
 .var/app/**/GPUCache
 .var/app/**/Service Worker/CacheStorage
+# ==== END exclude https://github.com/rubo77/rsync-homedir-excludes ====
 
-# == Ignore Git-managed directories ==
+# ==== START exclude Git-managed directories ====
 $(
     find    "$HOME"         \
             -maxdepth 2     \
@@ -653,6 +653,7 @@ $(
     sed     's|^|/|'        |
     sort
     )
+# ==== END exclude Git-managed directories ====
 EOF
 
     TITLE=$(gettext 'Make backup')
