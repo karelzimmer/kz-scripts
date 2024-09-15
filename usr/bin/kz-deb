@@ -128,7 +128,7 @@ function prepare_processing() {
 # This function downloads package kz.
 function download_package() {
     local   KZ_DEB_SITE_FILE='https://karelzimmer.nl/assets/kz-deb/'
-            KZ_DEB_SITE_FILE+='kz_4.2.1_all.deb'
+            KZ_DEB_SITE_FILE+='kz_4.2.1-1_all.deb'
 
     logmsg  'Download package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
