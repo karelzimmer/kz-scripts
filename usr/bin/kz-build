@@ -56,8 +56,8 @@ declare -A  UPLOADS_SOURCES=(
             [kz-docs]=$DOCS_REPO
             )
 declare -A  UPLOADS_TARGETS=(
-            [kz-docs]=$UPLOADS_REPO_DISTDIR/assets/kz-docs
-                [deb]=$UPLOADS_REPO_DISTDIR/assets/kz-deb
+            [kz-docs]=$UPLOADS_REPO_DISTDIR/assets/documents
+                [deb]=$UPLOADS_REPO_DISTDIR/assets/packages
             )
 
 declare -A  DEB_SOURCES=(

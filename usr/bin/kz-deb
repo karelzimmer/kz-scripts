@@ -127,7 +127,7 @@ function prepare_processing() {
 
 # This function downloads package kz.
 function download_package() {
-    local   KZ_DEB_SITE_FILE='https://karelzimmer.nl/assets/kz-deb/'
+    local   KZ_DEB_SITE_FILE='https://karelzimmer.nl/assets/packages/'
             KZ_DEB_SITE_FILE+='kz_4.2.1-1_all.deb'
 
     logmsg  'Download Debian package kz...'

@@ -124,7 +124,7 @@ function prepare_processing() {
 
 # This function downloads package kz.
 function download_package() {
-    local   KZ_RPM_SITE_FILE='https://karelzimmer.nl/assets/kz-deb/'
+    local   KZ_RPM_SITE_FILE='https://karelzimmer.nl/assets/packages/'
             KZ_RPM_SITE_FILE+='kz-4.2.1-1.noarch.rpm'
 
     logmsg  'Download RPM package kz...'
