@@ -138,13 +138,7 @@ function download_package() {
 
 # This function installs package kz.
 function install_package() {
-    local INSTALL_SUGGESTS=''
-
     logmsg 'Install package kz...'
-
-    if $DESKTOP_ENVIRONMENT; then
-        INSTALL_SUGGESTS='--install-suggests'
-    fi
 
     check_package_manager |& $LOGCMD
 
@@ -154,7 +148,6 @@ function install_package() {
             apt-get                         \
             install                         \
             --reinstall                     \
-            $INSTALL_SUGGESTS               \
             --yes                           \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
 
@@ -194,7 +187,6 @@ function install_package_xz() {
     sudo    DEBIAN_FRONTEND=noninteractive          \
             apt-get                                 \
             reinstall                               \
-            $INSTALL_SUGGESTS                       \
             --yes                                   \
             "$KZ_DEB_LOCAL_FILE_XZ"                 |& $LOGCMD
 
