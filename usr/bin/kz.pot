@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-10 07:48+0200\n"
+"POT-Creation-Date: 2024-09-16 15:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,7 +287,7 @@ msgstr ""
 msgid "The backup has been made for $USER (there are $NUM_USERS users)."
 msgstr ""
 
-msgid "Build website including package kz"
+msgid "Build website including kz packages"
 msgstr ""
 
 #, sh-format
@@ -309,13 +309,16 @@ msgstr ""
 msgid "Build website"
 msgstr ""
 
-msgid "Build package"
+msgid "Build Debian package"
 msgstr ""
 
-msgid "Install package"
+msgid "Build RPM package"
 msgstr ""
 
-msgid "Distribute website including kz package"
+msgid "Install Debian package"
+msgstr ""
+
+msgid "Distribute website including kz packages"
 msgstr ""
 
 msgid "Check that all repos are on branch main"

@@ -330,8 +330,8 @@ msgstr "De back-up is gemaakt."
 msgid "The backup has been made for $USER (there are $NUM_USERS users)."
 msgstr "De back-up is gemaakt voor $USER (er zijn $NUM_USERS gebruikers)."
 
-msgid "Build website including package kz"
-msgstr "Website bouwen inclusief pakket kz"
+msgid "Build website including kz packages"
+msgstr "Website bouwen inclusief kz pakketten"
 
 #, sh-format
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
@@ -352,14 +352,17 @@ msgstr "Controleer:"
 msgid "Build website"
 msgstr "Bouw website"
 
-msgid "Build package"
-msgstr "Bouw pakket"
+msgid "Build Debian package"
+msgstr "Bouw Debian-pakket"
 
-msgid "Install package"
-msgstr "Installeer pakket"
+msgid "Build RPM package"
+msgstr "Bouw RPM-pakket"
 
-msgid "Distribute website including kz package"
-msgstr "Website distribueren inclusief pakket kz"
+msgid "Install Debian package"
+msgstr "Installeer Debian-pakket"
+
+msgid "Distribute website including kz packages"
+msgstr "Website distribueren inclusief kz pakketten"
 
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Build website including package kz
+# SPDX-FileComment: Build website including kz packages
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -21,7 +21,7 @@ source kz_common.sh
 
 declare     PROGRAM_NAME='kz-build'
 declare     PROGRAM_DESC
-            PROGRAM_DESC=$(gettext 'Build website including package kz')
+            PROGRAM_DESC=$(gettext 'Build website including kz packages')
 declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare     USAGE
@@ -39,12 +39,17 @@ declare     DOCS_REPO=$HOME/kz-docs
 declare     SCRIPTS_REPO=$HOME/kz-scripts
 
 declare     DEB_REPO=$HOME/kz-deb
-declare     DEB_REPO_APPDIR=$DEB_REPO/src
+declare     DEB_REPO_SRCDIR=$DEB_REPO/src
 declare     DEB_REPO_DISTDIR=$DEB_REPO/dist
 declare     DEB_NAME=kz_4.2.1-1_all.deb
 
+declare     RPM_REPO=$HOME/kz-rpm
+declare     RPM_REPO_SRCDIR=$RPM_REPO/src
+declare     RPM_REPO_DISTDIR=$RPM_REPO/dist
+declare     RPM_NAME=kz-4.2.1-1.noarch.rpm
+
 declare     UPLOADS_REPO=$HOME/kz-uploads
-declare     UPLOADS_REPO_APPDIR=$UPLOADS_REPO/src
+declare     UPLOADS_REPO_SRCDIR=$UPLOADS_REPO/src
 declare     UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
 declare -A  UPLOADS_SOURCES=(
@@ -57,13 +62,23 @@ declare -A  UPLOADS_TARGETS=(
 
 declare -A  DEB_SOURCES=(
             [kz-scripts]=$SCRIPTS_REPO
-                   [src]=$DEB_REPO_APPDIR
+                   [src]=$DEB_REPO_SRCDIR
             )
 declare -A  DEB_TARGETS=(
               [dist]=$DEB_REPO_DISTDIR
              [build]=$DEB_REPO_DISTDIR/usr/share/doc/kz
             [man_en]=$DEB_REPO_DISTDIR/usr/share/man/man1
             [man_nl]=$DEB_REPO_DISTDIR/usr/share/man/nl/man1
+            )
+
+declare -A  RPM_SOURCES=(
+            [kz-scripts]=$SCRIPTS_REPO
+                   [src]=$RPM_REPO_SRCDIR
+            )
+declare -A  RPM_TARGETS=(
+              [dist]=$RPM_REPO_DISTDIR
+               [deb]=$RPM_REPO_DISTDIR/kz-deb-files
+               [rpm]=$RPM_REPO_DISTDIR/rpm/RPMS/noarch
             )
 
 
@@ -128,8 +143,9 @@ function process_input() {
     become_root_check || exit $OK
     generate_mo
     build_website
-    build_package
-    install_package
+    build_deb_package
+    build_rpm_package
+    install_deb_package
 }
 
 
@@ -160,7 +176,7 @@ function build_website() {
     rsync   --archive               \
             --verbose               \
             --checksum              \
-            "$UPLOADS_REPO_APPDIR"/ \
+            "$UPLOADS_REPO_SRCDIR"/ \
             "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
 
     # Make sure all necessary directories are available.
@@ -184,20 +200,17 @@ function build_website() {
 }
 
 
-# This function builds package kz.
-function build_package() {
+# This function builds Debian package kz.
+function build_deb_package() {
     local BUILD_ID=''
 
-    TEXT=$(gettext 'Build package')...
+    TEXT=$(gettext 'Build Debian package')...
     infomsg "$TEXT"
 
     # Fill kz-deb/dist/ with kz-deb/src/.
     rsync   --archive               \
             --delete                \
             --verbose               \
-            --exclude='README.md'   \
-            --exclude='.git*'       \
-            --delete-excluded       \
             "${DEB_SOURCES[src]}"/  \
             "${DEB_TARGETS[dist]}"  |& $LOGCMD
 
@@ -236,9 +249,46 @@ function build_package() {
 }
 
 
-# This function installs package kz.
-function install_package() {
-    TEXT=$(gettext 'Install package')...
+# This function builds RPM package kz.
+function build_rpm_package() {
+    local BUILD_ID=''
+
+    TEXT=$(gettext 'Build RPM package')...
+    infomsg "$TEXT"
+
+    # Fill kz-rpm/dist/ with kz-rpm/src/.
+    rsync   --archive               \
+            --delete                \
+            --verbose               \
+            "${RPM_SOURCES[src]}"/  \
+            "${RPM_TARGETS[dist]}"  |& $LOGCMD
+
+    # Fill kz-rpm/dist/ with kz-deb-files.
+    rsync   --archive               \
+            --verbose               \
+            --exclude='DEBIAN'      \
+            "$DEB_REPO_DISTDIR"/    \
+            "${RPM_TARGETS[deb]}"   |& $LOGCMD
+
+    # Create RPM package in kz-rpm/dist/.
+    cd "${RPM_TARGETS[dist]}"
+    rpmbuild    -ba                             \
+                --build-in-place                \
+                --define "_topdir $(pwd)/rpm"   \
+                kz.spec                         |& $LOGCMD
+    cd "$OLDPWD"
+
+    # Copy RPM package to kz-uploads.
+    cp  --preserve                      \
+        --verbose                       \
+        "${RPM_TARGETS[rpm]}/$RPM_NAME" \
+        "${UPLOADS_TARGETS[deb]}"       |& $LOGCMD
+}
+
+
+# This function installs Debian-package kz.
+function install_deb_package() {
+    TEXT=$(gettext 'Install Debian package')...
     infomsg "$TEXT"
     check_on_ac_power
     check_package_manager

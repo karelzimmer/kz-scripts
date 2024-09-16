@@ -364,6 +364,12 @@ sudo apt-get install --assume-yes ntfs-3g
 # Remove repair-ntfs from -nohost
 sudo apt-get remove --assume-yes ntfs-3g
 
+# Install rpm on pc06 pc07
+sudo apt-get install --assume-yes rpm
+
+# Remove jq from pc06 pc07
+sudo apt-get remove --assume-yes rpm
+
 # Install shellcheck on pc06 pc07
 sudo apt-get install --assume-yes shellcheck
 

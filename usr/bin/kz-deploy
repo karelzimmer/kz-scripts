@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Distribute website including kz package
+# SPDX-FileComment: Distribute website including kz packages
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -21,7 +21,7 @@ source kz_common.sh
 
 declare PROGRAM_NAME='kz-deploy'
 declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Distribute website including kz package')
+        PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
@@ -152,7 +152,7 @@ function check_repos() {
 
 # This function builds package kz and website.
 function build_package_and_website() {
-    TEXT=$(gettext 'Build website including package kz')...
+    TEXT=$(gettext 'Build website including kz packages')...
     infomsg "$TEXT"
 
     # Call kz build.

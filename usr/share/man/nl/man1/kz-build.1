@@ -9,7 +9,7 @@
 .\"
 .\"
 .SH NAAM
-kz-build \- Website bouwen inclusief pakket kz
+kz-build \- Website bouwen inclusief kz-pakketten
 .\"
 .\"
 .SH SAMENVATTING
@@ -18,9 +18,10 @@ kz-build \- Website bouwen inclusief pakket kz
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz build\fR bouwt het pakket kz én de website https://karelzimmer.nl.
+\fBkz build\fR bouwt het Debian- en RPM-pakket kz én de website
+https://karelzimmer.nl.
 .sp
-Het gebouwde pakket kz wordt vervolgens lokaal geïnstalleerd.
+Het gebouwde Debian-pakket kz wordt vervolgens lokaal geïnstalleerd.
 .sp
 Dit om het pakket, de website, en de installatie te kunnen ontwikkelen, testen,
 en later te distribueren met \fBkz deploy\fR.
@@ -102,12 +103,22 @@ afsluitwaarde ongelijk 0.
 .SH MAPPEN
 ~/kz-deb/src/
 .RS
-Bronbestanden pakket kz (Git).
+Bronbestanden Debian-pakket kz (Git).
 .RE
 .sp
 ~/kz-deb/dist/
 .RS
-Distributie-bestanden pakket kz.
+Distributie-bestanden Debian-pakket kz.
+.RE
+.sp
+~/kz-rpm/src/
+.RS
+Bronbestanden RPM-pakket kz (Git).
+.RE
+.sp
+~/kz-rpm/dist/
+.RS
+Distributie-bestanden RPM-pakket kz.
 .RE
 .sp
 ~/kz-docs/

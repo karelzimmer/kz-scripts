@@ -9,7 +9,7 @@
 .\"
 .\"
 .SH NAME
-kz-build \- Build website including package kz
+kz-build \- Build website including kz packages
 .\"
 .\"
 .SH SYNOPSIS
@@ -18,9 +18,10 @@ kz-build \- Build website including package kz
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz build\fR builds the package kz and the website https://karelzimmer.nl.
+\fBkz build\fR builds the Debain and RPM package kz and the website
+https://karelzimmer.nl.
 .sp
-The built  package, kz, will then be installed locally.
+The built Debian package, kz, will then be installed locally.
 .sp
 This is to develop and test the package, the website, and the installation, and
 to distribute it later with \fBkz deploy\fR.
@@ -102,12 +103,22 @@ equal to 0.
 .SH DIRECTORIES
 ~/kz-deb/src/
 .RS
-Source files package kz (Git).
+Source files Debian package kz (Git).
 .RE
 .sp
 ~/kz-deb/dist/
 .RS
-Distribution files package kz.
+Distribution files Debian package kz.
+.RE
+.sp
+~/kz-rpm/src/
+.RS
+Source files RPM package kz (Git).
+.RE
+.sp
+~/kz-rpm/dist/
+.RS
+Distribution files RPM package kz.
 .RE
 .sp
 ~/kz-docs/

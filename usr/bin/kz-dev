@@ -110,7 +110,17 @@ function check_dependencies() {
 
     # Call kz install.
     logmsg 'Calling kz install...'
-    kz install fakeroot $ESC_GETTEXT git jq lftp nmap python shellcheck vscode
+    kz  install         \
+        fakeroot        \
+        $ESC_GETTEXT    \
+        git             \
+        jq              \
+        lftp            \
+        nmap            \
+        python          \
+        rpm             \
+        shellcheck      \
+        vscode
     logmsg 'Called kz install.'
 
     # Call kz setup.
