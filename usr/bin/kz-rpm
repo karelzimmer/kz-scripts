@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Download and install Debian package kz
+# SPDX-FileComment: Download and install RPM package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -17,18 +17,18 @@ declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimmer/'
 declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
 wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_GITHUB_FILE |&
-        systemd-cat --identifier=kz-deb --priority=debug
+        systemd-cat --identifier=kz-rpm --priority=debug
 source  "$KZ_COMMON_LOCAL_FILE" 2> >(
-        systemd-cat --identifier=kz-deb --priority=debug)
+        systemd-cat --identifier=kz-rpm --priority=debug)
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-deb'
+declare PROGRAM_NAME='kz-rpm'
 declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Download and install Debian package kz')
+        PROGRAM_DESC=$(gettext 'Download and install RPM package kz')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
@@ -42,7 +42,7 @@ $PROGRAM_DESC.
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-declare KZ_DEB_LOCAL_FILE=''
+declare KZ_RPM_LOCAL_FILE=''
 
 
 ###############################################################################
@@ -106,19 +106,16 @@ function process_input() {
 
 # This function prepares further processing.
 function prepare_processing() {
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    KZ_RPM_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.rpm")
 
     sudo true
-
-    # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> symlink.
-    [[ -e /usr/bin/bash ]] || sudo ln --symbolic /bin/bash /usr/bin/bash
 
     # Progress indicator with growing '[=>', '[==>', etc. as long as the local
     # Debian package file exists, i.e. installation is in progress.
     # If something fails, kz_common.sh will remove the local Debian package
     # file and other files upon exit.
     printf '[ '
-    while test -e "$KZ_DEB_LOCAL_FILE"; do
+    while test -e "$KZ_RPM_LOCAL_FILE"; do
         printf '\b%s' '=>'
         sleep 1
     done &
@@ -127,12 +124,12 @@ function prepare_processing() {
 
 # This function downloads package kz.
 function download_package() {
-    local   KZ_DEB_SITE_FILE='https://karelzimmer.nl/assets/kz-deb/'
-            KZ_DEB_SITE_FILE+='kz_4.2.1-1_all.deb'
+    local   KZ_RPM_SITE_FILE='https://karelzimmer.nl/assets/kz-deb/'
+            KZ_RPM_SITE_FILE+='kz-4.2.1-1.noarch.rpm'
 
-    logmsg  'Download Debian package kz...'
-    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
-            "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
+    logmsg  'Download RPM package kz...'
+    wget    --output-document="$KZ_RPM_LOCAL_FILE"  \
+            "$KZ_RPM_SITE_FILE"                     |& $LOGCMD
 }
 
 
@@ -142,62 +139,11 @@ function install_package() {
 
     check_package_manager |& $LOGCMD
 
-    # Ubuntu 18.04: E: Invalid operation reinstall ==> 'install --reinstall'.
-    # Debian 11: .deb' uses unknown compression ==> ' || install_package_xz'.
-    sudo    DEBIAN_FRONTEND=noninteractive  \
-            apt-get                         \
-            install                         \
-            --reinstall                     \
-            --assume-yes                    \
-            "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
+    sudo yum reinstall --assume-yes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD ||
+    sudo yum   install --assume-yes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD
 
     # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
     printf '\b%s\n' '=]100%'
-}
-
-
-# This function installs repackaged kz.
-function install_package_xz() {
-    local KZ_DEB_LOCAL_FILE_XZ
-
-    KZ_DEB_LOCAL_FILE_XZ=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
-
-    logmsg 'Try installing package kz that uses xz by repackaging it.'
-
-    logmsg 'Install required packages...'
-    sudo    apt-get install --assume-yes binutils zstd  |& $LOGCMD
-
-    logmsg 'Extract files from the archive...'
-    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"      |& $LOGCMD
-
-    logmsg 'Uncompress zstd files an re-compress them using xz...'
-    zstd    --uncompress < /tmp/control.tar.zst         |
-    xz      --compress   > /tmp/control.tar.xz          |& $LOGCMD
-    zstd    --uncompress < /tmp/data.tar.zst            |
-    xz      --compress   > /tmp/data.tar.xz             |& $LOGCMD
-
-    logmsg 'Re-create the package...'
-    ar      -mcav sdsd                                  \
-            "$KZ_DEB_LOCAL_FILE_XZ"                     \
-            /tmp/debian-binary                          \
-            /tmp/control.tar.xz                         \
-            /tmp/data.tar.xz                            |& $LOGCMD
-
-    logmsg "Install the package..."
-    sudo    DEBIAN_FRONTEND=noninteractive              \
-            apt-get                                     \
-            reinstall                                   \
-            --assume-yes                                \
-            "$KZ_DEB_LOCAL_FILE_XZ"                     |& $LOGCMD
-
-    logmsg 'Delete kz deb xz files...'
-    rm       --verbose                                  \
-            /tmp/debian-binary                          \
-            /tmp/control.tar.xz                         \
-            /tmp/data.tar.xz                            \
-            /tmp/control.tar.zst                        \
-            /tmp/data.tar.zst                           \
-            "$KZ_DEB_LOCAL_FILE_XZ"                     |& $LOGCMD
 }
 
 
@@ -217,13 +163,13 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
 
-    logmsg "Delete kz deb files ($PROGRAM_NAME)..."
+    logmsg "Delete kz rpm files ($PROGRAM_NAME)..."
 
     rm  --force                 \
         --verbose               \
-        deb                     \
-        deb.{1..99}             \
-        "$KZ_DEB_LOCAL_FILE"    \
+        rpm                     \
+        rpm.{1..99}             \
+        "$KZ_RPM_LOCAL_FILE"    \
         "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
 
     exit $OK

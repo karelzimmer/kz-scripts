@@ -1,55 +1,51 @@
 .\"############################################################################
-.\"# SPDX-FileComment: Man page for kz-deb
+.\"# SPDX-FileComment: Man page for kz-rpm
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 .\"
-.TH "KZ-DEB" "1" "4.2.1" "KZ" "Handleiding kz"
+.TH "KZ-RPM" "1" "4.2.1" "KZ" "Handleiding kz"
 .\"
 .\"
 .SH NAAM
-kz-deb \- Download en installeer Debian-pakket kz
+kz-rpm \- Download en installeer RPM-pakket kz
 .\"
 .\"
 .SH SAMENVATTING
-.B kz deb
+.B kz rpm
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz deb\fR downloadt en installeert Debian-pakket kz.
+\fBkz rpm\fR downloadt en installeert RPM-pakket kz.
 .sp
-Pakket kz bevat scripts om Debian en op Debian gebaseerde systemen zoals Ubuntu
-soepel en bruikbaar te installeren.
+Pakket kz bevat scripts om Red Hat en op Red Hat gebaseerde systemen zoals
+Rocky Linux soepel en bruikbaar te installeren.
 .sp
-Voor de nieuwste versie van \fBkz deb\fR én pakket kz, start een
+Voor de nieuwste versie van \fBkz rpm\fR én pakket kz, start een
 Terminalvenster en voer uit (kopie van kz wordt opgeslagen en later
 verwijderd):
 .br
-    \fBwdeb karelzimmer.nl/deb\fR
+    \fBwdeb karelzimmer.nl/rpm\fR
 .br
-    \fBbash deb\fR
+    \fBbash rpm\fR
 .br
  of (idem hiervoor, nu op 1 regel):
 .br
-    \fBwdeb karelzimmer.nl/deb; bash deb\fR
+    \fBwdeb karelzimmer.nl/rpm; bash rpm\fR
 .br
- of (er wordt geen kopie van deb opgeslagen):
+ of (er wordt geen kopie van rpm opgeslagen):
 .br
-    \fBwdeb -O- karelzimmer.nl/deb | bash\fR
+    \fBwdeb -O- karelzimmer.nl/rpm | bash\fR
 .br
  of (als curl is geïnstalleerd, geen kopie):
 .br
-    \fBcurl -L karelzimmer.nl/deb | bash\fR
+    \fBcurl -L karelzimmer.nl/rpm | bash\fR
 .br
  of (als pakket kz al is geïnstalleerd):
 .br
-    \fBkz deb\fR
-.sp
-Indien nodig, bijvoorbeeld Debian < 12, zal het gedownloade pakket opnieuw
-worden verpakt als een pakket dat xz gebruikt, en vervolgens zal het opnieuw
-verpakte pakket worden geïnstalleerd.
+    \fBkz rpm\fR
 .sp
 Met opdracht \fBkz dev\fR kan de ontwikkelomgeving geplaatst worden op de
 locale computer zodat het pakket en de website ontwikkeld en getest kan worden.
@@ -79,7 +75,7 @@ afsluitwaarde ongelijk 0.
 .IP " 1." 4
 IaC en Day 1 Operations
 .RS 4
-\fBkz deb\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
+\fBkz rpm\fR wordt voornamelijk gebruikt voor \fBIaC\fR en
 \fBDay 1 Operations\fR. Zie \fBkz\fR(1) voor een uitleg.
 .RE
 .\"
@@ -102,5 +98,5 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker, Karel Zimmer.
 .\"
 .\"
 .SH BESCHIKBAARHEID
-Opdracht \fBkz deb\fR is onderdeel van het pakket \fBkz\fR en is beschikbaar
+Opdracht \fBkz rpm\fR is onderdeel van het pakket \fBkz\fR en is beschikbaar
 op de website van Karel Zimmer <https://karelzimmer.nl>, onder Linux.

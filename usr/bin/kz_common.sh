@@ -417,6 +417,16 @@ bash deb"
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi
 
+            if [[ $PROGRAM_NAME = 'kz-rpm' ]]; then
+                logmsg "Delete kz rpm files ($MODULE_NAME)..."
+                rm  --force                 \
+                    --verbose               \
+                    rpm                     \
+                    rpm.{1..99}             \
+                    "$KZ_RPM_LOCAL_FILE"    \
+                    "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
+            fi
+
             TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
