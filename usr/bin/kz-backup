@@ -243,8 +243,6 @@ Further reading:")
     man:kz-backup(1)
     man:kz-restore(1)"
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE"
-
-    touch "$OUTPUT_FILE"
 }
 
 
@@ -350,7 +348,6 @@ function backup_setting_avatar() {
     if [[ -e $INPUT_FILE ]]; then
         logmsg 'Copy the user avatar...'
         cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD
-        touch "$OUTPUT_FILE_1"
     fi
     logmsg 'Save restore the avatar instructions...'
     TEXT="$(gettext "To restore the users avatar:
@@ -363,8 +360,6 @@ function backup_setting_avatar() {
 (Chromebook).")"
 
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
-
-    touch "$OUTPUT_FILE_2"
 }
 
 
@@ -389,7 +384,6 @@ function backup_setting_desktop() {
         logmsg 'Copy the desktop background...'
         cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD ||
             true
-        touch "$OUTPUT_FILE_1"
     fi
 
     logmsg 'Save set the desktop background instructions...'
@@ -403,8 +397,6 @@ function backup_setting_desktop() {
 (Chromebook).")"
 
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE_2"
-
-    touch "$OUTPUT_FILE_2"
 }
 
 
