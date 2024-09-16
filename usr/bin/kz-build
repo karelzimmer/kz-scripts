@@ -270,12 +270,10 @@ function build_rpm_package() {
             "${RPM_TARGETS[deb]}"   |& $LOGCMD
 
     # Create RPM package in kz-rpm/dist/.
-    cd "${RPM_TARGETS[dist]}"
-    rpmbuild    -bb                                 \
-                --build-in-place                    \
-                --define "_topdir $(pwd)/rpmbuild"  \
-                rpmbuild/SPECS/kz.spec              |& $LOGCMD
-    cd "$OLDPWD"
+    rpmbuild    -bb                                                 \
+                --build-in-place                                    \
+                --define "_topdir ${RPM_TARGETS[dist]}/rpmbuild"    \
+                "${RPM_TARGETS[dist]}/rpmbuild/SPECS/kz.spec"       |& $LOGCMD
 
     # Copy RPM package to kz-uploads.
     cp  --preserve                      \
