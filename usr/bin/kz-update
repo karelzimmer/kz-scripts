@@ -79,7 +79,7 @@ def perform_update():
     COMMAND = 'sudo apt-get update'
     perform_command(COMMAND)
 
-    COMMAND = 'sudo apt-get dist-upgrade --yes'
+    COMMAND = 'sudo apt-get dist-upgrade --assume-yes'
     perform_command(COMMAND)
 
     if subprocess.run('[[ -n $(type -t snap) ]]', shell=True,
@@ -95,10 +95,10 @@ def perform_cleanup():
     TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo apt-get autoclean --yes'
+    COMMAND = 'sudo apt-get autoclean --assume-yes'
     perform_command(COMMAND)
 
-    COMMAND = 'sudo apt-get autoremove --yes'
+    COMMAND = 'sudo apt-get autoremove --assume-yes'
     perform_command(COMMAND)
 
 

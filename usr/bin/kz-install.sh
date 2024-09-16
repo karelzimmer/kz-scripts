@@ -24,7 +24,7 @@ if $UBUNTU; then sudo systemctl enable --now apport.service; fi
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository contrib; fi
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository non-free; fi
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
 
@@ -32,7 +32,7 @@ if $DESKTOP_ENVIRONMENT && $DEBIAN; then rm /tmp/deb-multimedia-keyring_2016.8.1
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove contrib; fi
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove non-free; fi
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --yes deb-multimedia-keyring; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes deb-multimedia-keyring; fi
 
 # Install update-system on *
 sudo kz update
@@ -41,41 +41,41 @@ sudo kz update
 # There is no command available to remove update system.
 
 # Install ansible on pc06 pc07
-sudo apt-get install --yes ansible
+sudo apt-get install --assume-yes ansible
 
 # Remove ansible from pc06 pc07
-sudo apt-get remove --yes ansible
+sudo apt-get remove --assume-yes ansible
 
 # Install anydesk on -nohost
 # Remote Wayland display server is not supported.
-wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg
+wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/anydesk.gpg
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list
 sudo apt-get update
-sudo apt-get install --yes anydesk
+sudo apt-get install --assume-yes anydesk
 # Web app: https://my.anydesk.com/v2
 
 # Remove anydesk from -nohost
-sudo apt-get remove --yes anydesk
+sudo apt-get remove --assume-yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
 # Install bash-completion on *
-sudo apt-get install --yes bash-completion
+sudo apt-get install --assume-yes bash-completion
 
 # Remove bash-completion from *
-sudo apt-get remove --yes bash-completion
+sudo apt-get remove --assume-yes bash-completion
 
 # Install bleachbit on pc-van-hugo
-sudo apt-get install --yes bleachbit
+sudo apt-get install --assume-yes bleachbit
 
 # Remove bleachbit from pc-van-hugo
-sudo apt-get remove --yes bleachbit
+sudo apt-get remove --assume-yes bleachbit
 
 # Install calibre on pc06 pc-van-hugo
-sudo apt-get install --yes calibre
+sudo apt-get install --assume-yes calibre
 
 # Remove calibre from pc06 pc-van-hugo
-sudo apt-get remove --yes calibre
+sudo apt-get remove --assume-yes calibre
 
 # Install change-grub-timeout on *
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
@@ -87,41 +87,41 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default
 sudo update-grub
 
 # Install clamav on pc-van-hugo
-sudo apt-get install --yes clamtk-gnome
+sudo apt-get install --assume-yes clamtk-gnome
 
 # Remove clamav from pc-van-hugo
-sudo apt-get remove --yes clamtk-gnome
+sudo apt-get remove --assume-yes clamtk-gnome
 
 # Install cockpit on pc06
-sudo apt-get install --yes cockpit cockpit-pcp
+sudo apt-get install --assume-yes cockpit cockpit-pcp
 # Web app: https://localhost:9090
 
 # Remove cockpit from pc06
-sudo apt-get remove --yes cockpit
+sudo apt-get remove --assume-yes cockpit
 
 # Install cups on *
-sudo apt-get install --yes cups
+sudo apt-get install --assume-yes cups
 
 # Remove cups from *
-sudo apt-get remove --yes cups
+sudo apt-get remove --assume-yes cups
 
 # Install cups-backend-canon on pc-van-emily
-sudo apt-get install --yes cups-backend-bjnp
+sudo apt-get install --assume-yes cups-backend-bjnp
 
 # Remove cups-backend-canon from pc-van-emily
-sudo apt-get remove --yes cups-backend-bjnp
+sudo apt-get remove --assume-yes cups-backend-bjnp
 
 # Install dashtodock on *
-if $GNOME; then sudo apt-get install --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+if $GNOME; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
 
 # Remove dashtodock from *
-if $GNOME; then sudo apt-get remove --yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+if $GNOME; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
 
 # Install deja-dup on pc07
-sudo apt-get install --yes deja-dup
+sudo apt-get install --assume-yes deja-dup
 
 # Remove deja-dup from pc07
-sudo apt-get remove --yes deja-dup
+sudo apt-get remove --assume-yes deja-dup
 
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).
@@ -167,26 +167,26 @@ if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.c
 sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 # Install exiftool on pc06 pc07
-sudo apt-get install --yes libimage-exiftool-perl
+sudo apt-get install --assume-yes libimage-exiftool-perl
 
 # Remove exiftool from pc06 pc07
-sudo apt-get remove --yes libimage-exiftool-perl
+sudo apt-get remove --assume-yes libimage-exiftool-perl
 
 # Install fakeroot on pc06 pc07
-sudo apt-get install --yes fakeroot
+sudo apt-get install --assume-yes fakeroot
 
 # Remove fakeroot from pc06 pc07
-sudo apt-get remove --yes fakeroot
+sudo apt-get remove --assume-yes fakeroot
 
 # Install fdupes on -nohost
-sudo apt-get install --yes fdupes
+sudo apt-get install --assume-yes fdupes
 # Usage:
 # $ fdupes -r /path/to/folder     # Report recursively from /path/to/folder
 # $ fdupes -d /path/to/folder     # Delete, interactively, from /path/to/folder
 # $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
 # Remove fdupes from -nohost
-sudo apt-get remove --yes fdupes
+sudo apt-get remove --assume-yes fdupes
 
 # Install force-x11 on -nohost
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
@@ -200,99 +200,99 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes gdebi; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes gdebi; fi
 
 # Remove gdebi from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes gdebi; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes gdebi; fi
 
 # Install gettext on pc06 pc07
-sudo apt-get install --yes gettext
+sudo apt-get install --assume-yes gettext
 
 # Remove gettext from pc06 pc07
-sudo apt-get remove --yes gettext
+sudo apt-get remove --assume-yes gettext
 
 # Install gimp on pc-van-hugo pc06
-sudo apt-get install --yes gimp gimp-help-en gimp-help-nl
+sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl
 
 # Remove gimp from pc-van-hugo pc06
-sudo apt-get remove --yes gimp gimp-help-en gimp-help-nl
+sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-nl
 
 # Install git on pc06 pc07
-sudo apt-get install --yes git
+sudo apt-get install --assume-yes git
 
 # Remove git from pc06 pc07
-sudo apt-get remove --yes git
+sudo apt-get remove --assume-yes git
 
 # Install gnome-gmail on pc01 pc06 pc07
-sudo apt-get install --yes gnome-gmail
+sudo apt-get install --assume-yes gnome-gmail
 
 # Remove gnome-gmail from pc01 pc06 pc07
-sudo apt-get remove --yes gnome-gmail
+sudo apt-get remove --assume-yes gnome-gmail
 
 # Install gnome-tweaks on pc01 pc06 pc07
-sudo apt-get install --yes gnome-tweaks
+sudo apt-get install --assume-yes gnome-tweaks
 
 # Remove gnome-tweaks from pc01 pc06 pc07
-sudo apt-get remove --yes gnome-tweaks
+sudo apt-get remove --assume-yes gnome-tweaks
 
 # Install google-chrome on *
-if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes google-chrome-stable; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes google-chrome-stable; fi
 # Add the source list again because the installation overwrote the newly added source list.
 if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 # The apt-key added during installation is no longer needed.
 if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-if $GNOME; then sudo apt-get install --yes chrome-gnome-shell; fi
+if $GNOME; then sudo apt-get install --assume-yes chrome-gnome-shell; fi
 
 # Remove google-chrome from *
-if $GNOME; then apt-get remove --yes chrome-gnome-shell; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes google-chrome-stable chrome-gnome-shell; fi
+if $GNOME; then apt-get remove --assume-yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes google-chrome-stable chrome-gnome-shell; fi
 if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
 
 # Install google-earth on -nohost
-wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
+wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/google-earth.gpg
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 sudo apt-get update
-sudo apt-get install --yes google-earth-pro-stable
+sudo apt-get install --assume-yes google-earth-pro-stable
 # Add the source list again because the installation overwrote the newly added source list.
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list
 
 # Remove google-earth from -nohost
-sudo apt-get remove --yes google-earth-pro-stable
+sudo apt-get remove --assume-yes google-earth-pro-stable
 sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*
 sudo apt-get update
 
 # Install handbrake on pc-van-emily
-sudo apt-get install --yes handbrake
+sudo apt-get install --assume-yes handbrake
 
 # Remove handbrake from pc-van-emily
-sudo apt-get remove --yes handbrake
+sudo apt-get remove --assume-yes handbrake
 
 # Install htop on pc06 pc07
-sudo apt-get install --yes htop
+sudo apt-get install --assume-yes htop
 
 # Remove htop from pc06 pc07
-sudo apt-get remove --yes htop
+sudo apt-get remove --assume-yes htop
 
 # Install jq on pc06 pc07
-sudo apt-get install --yes jq
+sudo apt-get install --assume-yes jq
 
 # Remove jq from pc06 pc07
-sudo apt-get remove --yes jq
+sudo apt-get remove --assume-yes jq
 
 # Install krita on pc06
-sudo apt-get install --yes krita
+sudo apt-get install --assume-yes krita
 
 # Remove krita from pc06
-sudo apt-get remove --yes krita
+sudo apt-get remove --assume-yes krita
 
 # Install kvm on pc06 pc07
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
-sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
+sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo usermod --append --groups libvirt,libvirt-qemu karel
 # Prevent "Error starting domain: Requested operation is not valid: network 'default' is not active".
 sudo virsh --connect=qemu:///system net-autostart default
@@ -301,60 +301,60 @@ sudo virsh --connect=qemu:///system net-autostart default
 
 # Remove kvm from pc06 pc07
 sudo virsh --connect=qemu:///system net-autostart default --disable
-sudo apt-get remove --yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
+sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager
 sudo delgroup libvirtd-dnsmasq
 sudo deluser karel libvirtd
 sudo deluser karel libvirtd-qemu
 sudo delgroup libvirtd
 
 # Install lftp on pc06 pc07
-sudo apt-get install --yes lftp
+sudo apt-get install --assume-yes lftp
 
 # Remove lftp from pc06 pc07
-sudo apt-get remove --yes lftp
+sudo apt-get remove --assume-yes lftp
 
 # Install libreoffice on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Remove libreoffice from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Install locate on pc06 pc07
-sudo apt-get install --yes locate
+sudo apt-get install --assume-yes locate
 sudo updatedb
 
 # Remove locate from pc06 pc07
-sudo apt-get remove --yes locate
+sudo apt-get remove --assume-yes locate
 
 # Install lshw on pc07
-sudo apt-get install --yes lshw
+sudo apt-get install --assume-yes lshw
 
 # Remove lshw from pc07
-sudo apt-get remove --yes lshw
+sudo apt-get remove --assume-yes lshw
 
 # Install nautilus-admin on pc06 pc07
-sudo apt-get install --yes nautilus-admin
+sudo apt-get install --assume-yes nautilus-admin
 
 # Remove nautilus-admin from pc06 pc07
-sudo apt-get remove --yes nautilus-admin
+sudo apt-get remove --assume-yes nautilus-admin
 
 # Install nmap on pc06 pc07
-sudo apt-get install --yes nmap
+sudo apt-get install --assume-yes nmap
 
 # Remove nmap from pc06 pc07
-sudo apt-get remove --yes nmap
+sudo apt-get remove --assume-yes nmap
 
 # Install python on pc06 pc07
-sudo apt-get install --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8
 sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip
 
 # Remove python from pc06 pc07
-sudo apt-get remove --yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
+sudo apt-get remove --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3
 sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip
 
 # Install repair-ntfs on -nohost
-sudo apt-get install --yes ntfs-3g
+sudo apt-get install --assume-yes ntfs-3g
 # Usage:
 # $ findmnt
 # TARGET          SOURCE    FSTYPE OPTIONS
@@ -362,28 +362,28 @@ sudo apt-get install --yes ntfs-3g
 # $ sudo ntfsfix /dev/sdb2
 
 # Remove repair-ntfs from -nohost
-sudo apt-get remove --yes ntfs-3g
+sudo apt-get remove --assume-yes ntfs-3g
 
 # Install shellcheck on pc06 pc07
-sudo apt-get install --yes shellcheck
+sudo apt-get install --assume-yes shellcheck
 
 # Remove shellcheck from pc06 pc07
-sudo apt-get remove --yes shellcheck
+sudo apt-get remove --assume-yes shellcheck
 
 # Install sound-juicer on pc-van-emily
-sudo apt-get install --yes sound-juicer
+sudo apt-get install --assume-yes sound-juicer
 
 # Remove sound-juicer from pc-van-emily
-sudo apt-get remove --yes sound-juicer
+sudo apt-get remove --assume-yes sound-juicer
 
 # Install spice-vdagent on *
-sudo apt-get install --yes spice-vdagent
+sudo apt-get install --assume-yes spice-vdagent
 
 # Remove spice-vdagent from *
-sudo apt-get remove --yes spice-vdagent
+sudo apt-get remove --assume-yes spice-vdagent
 
 # Install ssh on pc01 pc06 pc07
-sudo apt-get install --yes ssh
+sudo apt-get install --assume-yes ssh
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
 sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
 sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
@@ -396,59 +396,59 @@ sudo systemctl restart ssh.service
 # Remove ssh from pc01 pc06 pc07
 sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
-sudo apt-get remove --yes ssh
+sudo apt-get remove --assume-yes ssh
 
 # Install sushi on pc06
-sudo apt-get install --yes gnome-sushi
+sudo apt-get install --assume-yes gnome-sushi
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
 
 # Remove sushi from pc06
-sudo apt-get remove --yes gnome-sushi
+sudo apt-get remove --assume-yes gnome-sushi
 
 # Install teamviewer on *
-if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
+if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/teamviewer.gpg; fi
 if $DESKTOP_ENVIRONMENT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
 # The apt-key added during installation is no longer needed.
 if $DESKTOP_ENVIRONMENT; then sudo apt-key del 0C1289C0 DEB49217; fi
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes teamviewer; fi
 if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-key del 0C1289C0 DEB49217; fi
 if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
 
 # Install thunderbird on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes thunderbird-l10n-nl || true; fi # Debian
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes thunderbird-l10n-nl || true; fi # Debian
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Remove thunderbird from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes thunderbird-l10n-nl || true; fi # Debian
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes thunderbird-l10n-nl || true; fi # Debian
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Install tree on pc06 pc07
-sudo apt-get install --yes tree
+sudo apt-get install --assume-yes tree
 
 # Remove tree from pc06 pc07
-sudo apt-get remove --yes tree
+sudo apt-get remove --assume-yes tree
 
 # Install ufw on pc01 pc06 pc07
-sudo apt-get install --yes gufw
+sudo apt-get install --assume-yes gufw
 sudo ufw allow ssh
 sudo ufw enable
 
 # Remove ufw from pc01 pc06 pc07
 sudo ufw disable
-sudo apt-get remove --yes gufw
+sudo apt-get remove --assume-yes gufw
 
 # Install usbutils on pc07
-sudo apt-get install --yes usbutils
+sudo apt-get install --assume-yes usbutils
 
 # Remove usbutils from pc07
-sudo apt-get remove --yes usbutils
+sudo apt-get remove --assume-yes usbutils
 
 # Install user-guest on -nohost
 export TEXTDOMAIN=kz
@@ -489,55 +489,55 @@ sudo userdel --remove toos
 # Install virtualbox on pc-van-hugo
 # If the installation hangs or VBox does not work, check the virtualization settings in the BIOS/UEFI.
 echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections
-sudo apt-get install --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
+sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 # VirtualBox Guest user Additions ISO are in: /usr/share/virtualbox/
 
 # Remove virtualbox from pc-van-hugo
-sudo apt-get remove --yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
+sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 # Install vlc on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --yes vlc; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes vlc; fi
 
 # Remove vlc from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --yes vlc; fi
+if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
-sudo apt-get install --yes apt-transport-https
-wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg
+sudo apt-get install --assume-yes apt-transport-https
+wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/packages.microsoft.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list
 sudo apt-get update
-sudo apt-get install --yes code
+sudo apt-get install --assume-yes code
 sudo update-alternatives --set editor /usr/bin/code
 
 # Remove vscode from pc01 pc06 pc07
 sudo update-alternatives --remove editor /usr/bin/code
-sudo apt-get remove --yes code
+sudo apt-get remove --assume-yes code
 sudo rm --force --verbose /etc/apt/sources.list.d/vscode.list* /usr/share/keyrings/packages.microsoft*
 sudo apt-get update
 
 # Install webmin on pc07
-wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg
+wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/webmin.gpg
 echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list
 sudo apt-get update
-sudo apt-get install --yes webmin
+sudo apt-get install --assume-yes webmin
 # Web app: https://localhost:10000
 
 # Remove webmin from pc07
-sudo apt-get remove --yes webmin
+sudo apt-get remove --assume-yes webmin
 sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*
 sudo apt-get update
 
 # Install wine on -nohost
 sudo dpkg --add-architecture i386
-sudo apt-get install --yes wine winetricks playonlinux
+sudo apt-get install --assume-yes wine winetricks playonlinux
 
 # Remove wine from -nohost
-sudo apt-get remove --yes wine winetricks playonlinux
+sudo apt-get remove --assume-yes wine winetricks playonlinux
 sudo dpkg --remove-architecture i386
 
 # Install youtube-dl on pc-van-emily pc-van-hugo
-sudo apt-get install --yes youtubedl-gui
+sudo apt-get install --assume-yes youtubedl-gui
 
 # Remove youtube-dl from pc-van-emily pc-van-hugo
-sudo apt-get remove --yes youtubedl-gui
+sudo apt-get remove --assume-yes youtubedl-gui
 

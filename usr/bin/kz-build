@@ -245,7 +245,7 @@ function install_package() {
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             reinstall                       \
-            --yes                           \
+            --assume-yes                    \
             "${UPLOADS_TARGETS[deb]}/$DEB_NAME"
 }
 

@@ -148,7 +148,7 @@ function install_package() {
             apt-get                         \
             install                         \
             --reinstall                     \
-            --yes                           \
+            --assume-yes                    \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
 
     # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
@@ -165,39 +165,39 @@ function install_package_xz() {
     logmsg 'Try installing package kz that uses xz by repackaging it.'
 
     logmsg 'Install required packages...'
-    sudo    apt-get install --yes binutils zstd     |& $LOGCMD
+    sudo    apt-get install --assume-yes binutils zstd  |& $LOGCMD
 
     logmsg 'Extract files from the archive...'
-    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"  |& $LOGCMD
+    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"      |& $LOGCMD
 
     logmsg 'Uncompress zstd files an re-compress them using xz...'
-    zstd    --uncompress < /tmp/control.tar.zst     |
-    xz      --compress   > /tmp/control.tar.xz      |& $LOGCMD
-    zstd    --uncompress < /tmp/data.tar.zst        |
-    xz      --compress   > /tmp/data.tar.xz         |& $LOGCMD
+    zstd    --uncompress < /tmp/control.tar.zst         |
+    xz      --compress   > /tmp/control.tar.xz          |& $LOGCMD
+    zstd    --uncompress < /tmp/data.tar.zst            |
+    xz      --compress   > /tmp/data.tar.xz             |& $LOGCMD
 
     logmsg 'Re-create the package...'
-    ar      -mcav sdsd                              \
-            "$KZ_DEB_LOCAL_FILE_XZ"                 \
-            /tmp/debian-binary                      \
-            /tmp/control.tar.xz                     \
-            /tmp/data.tar.xz                        |& $LOGCMD
+    ar      -mcav sdsd                                  \
+            "$KZ_DEB_LOCAL_FILE_XZ"                     \
+            /tmp/debian-binary                          \
+            /tmp/control.tar.xz                         \
+            /tmp/data.tar.xz                            |& $LOGCMD
 
     logmsg "Install the package..."
-    sudo    DEBIAN_FRONTEND=noninteractive          \
-            apt-get                                 \
-            reinstall                               \
-            --yes                                   \
-            "$KZ_DEB_LOCAL_FILE_XZ"                 |& $LOGCMD
+    sudo    DEBIAN_FRONTEND=noninteractive              \
+            apt-get                                     \
+            reinstall                                   \
+            --assume-yes                                \
+            "$KZ_DEB_LOCAL_FILE_XZ"                     |& $LOGCMD
 
     logmsg 'Delete kz deb xz files...'
-    rm       --verbose                              \
-            /tmp/debian-binary                      \
-            /tmp/control.tar.xz                     \
-            /tmp/data.tar.xz                        \
-            /tmp/control.tar.zst                    \
-            /tmp/data.tar.zst                       \
-            "$KZ_DEB_LOCAL_FILE_XZ"                 |& $LOGCMD
+    rm       --verbose                                  \
+            /tmp/debian-binary                          \
+            /tmp/control.tar.xz                         \
+            /tmp/data.tar.xz                            \
+            /tmp/control.tar.zst                        \
+            /tmp/data.tar.zst                           \
+            "$KZ_DEB_LOCAL_FILE_XZ"                     |& $LOGCMD
 }
 
 
