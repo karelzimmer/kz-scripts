@@ -79,7 +79,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application
 # There is no command available to reset gdebi.
 
 # Setup gnome for *
-# Not every GNOME desktop environment has this key.===> ' || true'.
+# Not every GNOME desktop environment has this key ===> ' || true'.
 if $GNOME && $APT; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if $GNOME && $APT; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if $GNOME && $APT; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
@@ -111,7 +111,7 @@ if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.ding show-home 
 if $GNOME && $APT; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome for *
-# Not every GNOME desktop environment has this key.===> ' || true'.
+# Not every GNOME desktop environment has this key ===> ' || true'.
 if $GNOME && $APT; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if $GNOME && $APT; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
 if $GNOME && $APT; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
