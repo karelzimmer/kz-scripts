@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Download and install Debian package kz
+# SPDX-FileComment: Download and install Debian or RPM package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -17,18 +17,18 @@ declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimmer/'
 declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
 wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_GITHUB_FILE |&
-        systemd-cat --identifier=kz-deb --priority=debug
+        systemd-cat --identifier=kz-get --priority=debug
 source  "$KZ_COMMON_LOCAL_FILE" 2> >(
-        systemd-cat --identifier=kz-deb --priority=debug)
+        systemd-cat --identifier=kz-get --priority=debug)
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-deb'
+declare PROGRAM_NAME='kz-get'
 declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Download and install Debian package kz')
+        PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
@@ -42,7 +42,7 @@ $PROGRAM_DESC.
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-declare KZ_DEB_LOCAL_FILE=''
+declare KZ_GET_LOCAL_FILE=''
 
 
 ###############################################################################
@@ -96,20 +96,24 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
-    if ! $APT; then
-        infomsg 'App kz-rpm!'
-        exit $ERROR
-    fi
     become_root_check || exit $OK
     prepare_processing
-    download_package
-    install_package
+    if $APT; then
+        download_apt_package
+        install_apt_package
+    elif $RPM; then
+        download_rpm_package
+        install_rpm_package
+    else
+        errormsg 'Unknown package manager.'
+        exit $ERROR
+    fi
 }
 
 
 # This function prepares further processing.
 function prepare_processing() {
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX")
 
     sudo true
 
@@ -119,31 +123,31 @@ function prepare_processing() {
     fi
 
     # Progress indicator with growing '[=>', '[==>', etc. as long as the local
-    # Debian package file exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the local Debian package
-    # file and other files upon exit.
+    # package file exists, i.e. installation is in progress.
+    # If something fails, kz_common.sh will remove the local package file and
+    # other files upon exit.
     printf '[ '
-    while test -e "$KZ_DEB_LOCAL_FILE"; do
+    while test -e "$KZ_GET_LOCAL_FILE"; do
         printf '\b%s' '=>'
         sleep 1
     done &
 }
 
 
-# This function downloads package kz.
-function download_package() {
+# This function downloads Debian package kz.
+function download_apt_package() {
     local   KZ_DEB_SITE_FILE='https://karelzimmer.nl/assets/packages/'
             KZ_DEB_SITE_FILE+='kz_4.2.1-1_all.deb'
 
     logmsg  'Download Debian package kz...'
-    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
+    wget    --output-document="$KZ_GET_LOCAL_FILE"  \
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
 }
 
 
-# This function installs package kz.
-function install_package() {
-    logmsg 'Install package kz...'
+# This function installs Debian package kz.
+function install_apt_package() {
+    logmsg 'Install Debian package kz...'
 
     check_apt_package_manager |& $LOGCMD
 
@@ -154,7 +158,8 @@ function install_package() {
             install                         \
             --reinstall                     \
             --assume-yes                    \
-            "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD || install_package_xz
+            "$KZ_GET_LOCAL_FILE"            |& $LOGCMD ||
+        install_apt_package_xz
 
     # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
     printf '\b%s\n' '=]100%'
@@ -162,47 +167,75 @@ function install_package() {
 
 
 # This function installs repackaged kz.
-function install_package_xz() {
-    local KZ_DEB_LOCAL_FILE_XZ
+function install_apt_package_xz() {
+    local KZ_GET_LOCAL_FILE_XZ
 
-    KZ_DEB_LOCAL_FILE_XZ=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    KZ_GET_LOCAL_FILE_XZ=$(mktemp -ut "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
-    logmsg 'Try installing package kz that uses xz by repackaging it.'
+    logmsg  'Try installing Debian package kz that uses xz by repackaging it.'
 
-    logmsg 'Install required packages...'
+    logmsg  'Install required packages...'
     sudo    apt-get install --assume-yes binutils zstd  |& $LOGCMD
 
-    logmsg 'Extract files from the archive...'
-    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"      |& $LOGCMD
+    logmsg  'Extract files from the archive...'
+    ar      -xv --output=/tmp "$KZ_GET_LOCAL_FILE"      |& $LOGCMD
 
-    logmsg 'Uncompress zstd files an re-compress them using xz...'
+    logmsg  'Uncompress zstd files an re-compress them using xz...'
     zstd    --uncompress < /tmp/control.tar.zst         |
     xz      --compress   > /tmp/control.tar.xz          |& $LOGCMD
     zstd    --uncompress < /tmp/data.tar.zst            |
     xz      --compress   > /tmp/data.tar.xz             |& $LOGCMD
 
-    logmsg 'Re-create the package...'
+    logmsg  'Re-create the package...'
     ar      -mcav sdsd                                  \
-            "$KZ_DEB_LOCAL_FILE_XZ"                     \
+            "$KZ_GET_LOCAL_FILE_XZ"                     \
             /tmp/debian-binary                          \
             /tmp/control.tar.xz                         \
             /tmp/data.tar.xz                            |& $LOGCMD
 
-    logmsg "Install the package..."
+    logmsg  'Install the package...'
     sudo    DEBIAN_FRONTEND=noninteractive              \
             apt-get                                     \
             reinstall                                   \
             --assume-yes                                \
-            "$KZ_DEB_LOCAL_FILE_XZ"                     |& $LOGCMD
+            "$KZ_GET_LOCAL_FILE_XZ"                     |& $LOGCMD
 
-    logmsg 'Delete kz deb xz files...'
-    rm       --verbose                                  \
+    logmsg  'Delete kz deb xz files...'
+    rm      --verbose                                   \
             /tmp/debian-binary                          \
             /tmp/control.tar.xz                         \
             /tmp/data.tar.xz                            \
             /tmp/control.tar.zst                        \
             /tmp/data.tar.zst                           \
-            "$KZ_DEB_LOCAL_FILE_XZ"                     |& $LOGCMD
+            "$KZ_GET_LOCAL_FILE_XZ"                     |& $LOGCMD
+}
+
+
+# This function downloads RPM package kz.
+function download_rpm_package() {
+    local   KZ_RPM_SITE_FILE='https://karelzimmer.nl/assets/packages/'
+            KZ_RPM_SITE_FILE+='kz-4.2.1-1.noarch.rpm'
+
+    logmsg  'Download RPM package kz...'
+    wget    --output-document="$KZ_RPM_LOCAL_FILE"  \
+            "$KZ_RPM_SITE_FILE"                     |& $LOGCMD
+}
+
+
+# This function installs RPM package kz.
+function install_rpm_package() {
+    local MODE='install'
+
+    logmsg 'Install RPM package kz...'
+
+    if [[ -n $(type -t kz) ]]; then
+        MODE='reinstall'
+    fi
+
+    sudo yum $MODE --assumeyes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD
+
+    # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
+    printf '\b%s\n' '=]100%'
 }
 
 
@@ -228,7 +261,7 @@ $(gettext "Type 'exit' to close this window.")"
         --verbose               \
         deb                     \
         deb.{1..99}             \
-        "$KZ_DEB_LOCAL_FILE"    \
+        "$KZ_GET_LOCAL_FILE"    \
         "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
 
     exit $OK
