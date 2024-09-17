@@ -97,7 +97,7 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input() {
     if ! $DEBIAN_BASED; then
-        errmsg 'Debian(-based)-only'
+        errormsg 'Debian-based-only.'
         exit $ERROR
     fi
     become_root_check || exit $OK
@@ -172,7 +172,7 @@ function install_package_xz() {
     sudo    apt-get install --assume-yes binutils zstd  |& $LOGCMD
 
     logmsg 'Extract files from the archive...'
-    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"      |& $LOGCMD
+    ar      -xv --output=/tmp "$KZ_DEB_LOCAL_FILE"      & $LOGCMD
 
     logmsg 'Uncompress zstd files an re-compress them using xz...'
     zstd    --uncompress < /tmp/control.tar.zst         |
