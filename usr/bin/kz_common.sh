@@ -432,8 +432,8 @@ bash deb"
                 logmsg "Delete kz deb files ($MODULE_NAME)..."
                 rm  --force                 \
                     --verbose               \
-                    deb                     \
-                    deb.{1..99}             \
+                    kz.deb                  \
+                    kz.deb.{1..99}          \
                     "$KZ_DEB_LOCAL_FILE"    \
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi

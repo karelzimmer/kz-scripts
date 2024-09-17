@@ -173,8 +173,8 @@ $(gettext "Type 'exit' to close this window.")"
 
     rm  --force                 \
         --verbose               \
-        rpm                     \
-        rpm.{1..99}             \
+        kz.rpm                  \
+        kz.rpm.{1..99}          \
         "$KZ_RPM_LOCAL_FILE"    \
         "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
 
