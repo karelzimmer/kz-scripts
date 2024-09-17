@@ -97,7 +97,7 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input() {
     if ! $APT; then
-        errormsg 'Use kz-rpm.'
+        infomsg 'App kz-rpm!'
         exit $ERROR
     fi
     become_root_check || exit $OK
