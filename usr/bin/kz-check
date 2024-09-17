@@ -102,6 +102,12 @@ function process_input() {
     local SCRIPTNAME=''
     local SCRIPTS_REPO=$HOME/kz-scripts
 
+    if ! $APT; then
+        TEXT=$(gettext 'Must run on a Debian or Debian-based machine.')
+        infomsg "$TEXT"
+        exit $ERROR
+    fi
+
     TEXT=$(gettext 'Check:')
     infomsg "$TEXT"
 

@@ -173,7 +173,7 @@ function become_root_check() {
 function check_apt_package_manager() {
     local   -i  CHECK_WAIT=10
 
-    if $RPM; then
+    if ! $APT; then
         return $OK
     fi
 

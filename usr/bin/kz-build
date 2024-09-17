@@ -140,6 +140,11 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    if ! $APT; then
+        TEXT=$(gettext 'Must run on a Debian or Debian-based machine.')
+        infomsg "$TEXT"
+        exit $ERROR
+    fi
     become_root_check || exit $OK
     generate_mo
     build_website
