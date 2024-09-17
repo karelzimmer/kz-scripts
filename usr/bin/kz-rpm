@@ -139,12 +139,15 @@ function download_package() {
 
 # This function installs package kz.
 function install_package() {
+    local MODE='install'
+
     logmsg 'Install package kz...'
 
     check_package_manager |& $LOGCMD
 
-    sudo yum reinstall --assume-yes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD ||
-    sudo yum   install --assume-yes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD
+    [[ -z $(type -t kz) ]] || MODE='reinstall'
+
+    sudo yum $MODE --assume-yes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD
 
     # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
     printf '\b%s\n' '=]100%'
