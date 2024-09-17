@@ -433,7 +433,7 @@ function execute_command() {
 
     (( ++CMD_SEQ_NUM ))
 
-    check_package_manager
+    check_apt_package_manager
 
     if $OPTION_GUI; then
         [[ $CMD_SEQ_NUM -ne 1 ]] || logmsg "$APP_NAME_LINE"

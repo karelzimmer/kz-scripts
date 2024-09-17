@@ -96,8 +96,8 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
-    if ! $DEBIAN_BASED; then
-        errormsg 'Debian-based-only.'
+    if ! $APT; then
+        errormsg 'Use kz-rpm.'
         exit $ERROR
     fi
     become_root_check || exit $OK
@@ -144,7 +144,7 @@ function download_package() {
 function install_package() {
     logmsg 'Install package kz...'
 
-    check_package_manager |& $LOGCMD
+    check_apt_package_manager |& $LOGCMD
 
     # Ubuntu 18.04: E: Invalid operation reinstall ==> 'install --reinstall'.
     # Debian 11: .deb' uses unknown compression ==> ' || install_package_xz'.

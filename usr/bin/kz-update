@@ -52,7 +52,7 @@ COMMAND = ''
 # Functions
 ###############################################################################
 
-def perform_repair():
+def perform_apt_repair():
     """
     This function runs a repair of Debian packages.
     """
@@ -69,7 +69,7 @@ def perform_repair():
     perform_command(COMMAND)
 
 
-def perform_update():
+def perform_apt_update():
     """
     This function updates installed Debian packages and snaps if installed.
     """
@@ -88,7 +88,18 @@ def perform_update():
         perform_command(COMMAND)
 
 
-def perform_cleanup():
+def perform_yum_update():
+    """
+    This function updates installed RPM packages and snaps if installed.
+    """
+    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
+
+    COMMAND = 'sudo yum update'
+    perform_command(COMMAND)
+
+
+def perform_apt_cleanup():
     """
     This function performs a Debian packages cleanup.
     """
@@ -108,7 +119,7 @@ def perform_command(COMMAND):
     """
     TEXT = f'{COMMAND}'
     kz_common.infomsg(PROGRAM_NAME, TEXT)
-    kz_common.check_package_manager(PROGRAM_NAME)
+    kz_common.check_apt_package_manager(PROGRAM_NAME)
     try:
         subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
     except Exception as exc:
@@ -124,20 +135,27 @@ def check_reboot():
     """
     This function checks if reboot is needed.
     """
-    try:
-        with open('/var/run/reboot-required') as fh:
-            TEXT = _('*** The computer needs to be restarted to complete the \
-installation of updates ***')
+    TEXT = _('*** The computer needs to be restarted to complete the \
+    installation of updates ***')
+
+    if kz_common.APT:
+        try:
+            with open('/var/run/reboot-required') as fh:
+                TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
+                kz_common.infomsg(PROGRAM_NAME, TEXT)
+        except FileNotFoundError as fnf:
+            TEXT = str(fnf)
+            kz_common.logmsg(PROGRAM_NAME, TEXT)
+        except Exception as exc:
+            TEXT = str(exc)
+            kz_common.logmsg(PROGRAM_NAME, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
+    else:
+        if subprocess.run('needs-restarting --reboothint',
+                          shell=True).returncode == 1:
             TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
             kz_common.infomsg(PROGRAM_NAME, TEXT)
-    except FileNotFoundError as fnf:
-        TEXT = str(fnf)
-        kz_common.logmsg(PROGRAM_NAME, TEXT)
-    except Exception as exc:
-        TEXT = str(exc)
-        kz_common.logmsg(PROGRAM_NAME, TEXT)
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
 
 
 def term_script():
@@ -160,11 +178,14 @@ kz_common.become_root(PROGRAM_NAME)
 
 kz_common.check_on_ac_power(PROGRAM_NAME)
 
-perform_repair()
+if kz_common.APT:
+    perform_apt_repair()
 
-perform_update()
+    perform_apt_update()
 
-perform_cleanup()
+    perform_apt_cleanup()
+else:
+    perform_yum_update()
 
 check_reboot()
 

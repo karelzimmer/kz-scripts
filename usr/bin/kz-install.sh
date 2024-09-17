@@ -547,3 +547,8 @@ sudo apt-get install --assume-yes youtubedl-gui
 # Remove youtube-dl from pc-van-emily pc-van-hugo
 sudo apt-get remove --assume-yes youtubedl-gui
 
+# Install yum-utils on *
+if $RPM; then sudo yum install --assumeyes yum-utils; fi
+
+# Install yum-utils on *
+if $RPM; then sudo yum remove --assumeyes yum-utils; fi

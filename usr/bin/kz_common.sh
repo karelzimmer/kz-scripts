@@ -68,13 +68,13 @@ declare     DEBIAN=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Debian' ]] || DEBIAN=false
 
-declare     DEBIAN_BASED=true
+declare     APT=true
 # shellcheck disable=SC2034
-[[ -n $(type -t apt) ]] || DEBIAN_BASED=false
+[[ -n $(type -t {apt,apt-get}) ]] || APT=false
 
-declare     REDHAT_BASED=true
+declare     RPM=true
 # shellcheck disable=SC2034
-[[ -n $(type -t yum) ]] || REDHAT_BASED=false
+[[ -n $(type -t {yum,dnf}) ]] || RPM=false
 
 declare     UBUNTU=true
 # shellcheck disable=SC2034
@@ -159,10 +159,12 @@ It is recommended to connect the computer to the wall socket.")
 }
 
 
-# This function checks for another running package manager and waits for the
-# next check if so.
-function check_package_manager() {
+# This function checks for another running APT package manager and waits for
+# the next check if so.
+function check_apt_package_manager() {
     local   -i  CHECK_WAIT=10
+
+    $APT || return $OK
 
     while sudo  fuser                           \
                 --silent                        \

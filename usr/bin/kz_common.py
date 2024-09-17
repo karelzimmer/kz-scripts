@@ -62,6 +62,18 @@ if subprocess.run('[[ -n $(type -t '
 else:
     DESKTOP_ENVIRONMENT = False
 
+if subprocess.run('[[ -n $(type -t apt) ]]',
+                  shell=True, executable='bash').returncode == OK:
+    APT = True
+else:
+    APT = False
+
+if subprocess.run('[[ -n $(type -t yum) ]]',
+                  shell=True, executable='bash').returncode == OK:
+    RPM = True
+else:
+    RPM = False
+
 
 ###############################################################################
 # Functions
@@ -134,12 +146,15 @@ socket.')
         wait_for_enter(PROGRAM_NAME)
 
 
-def check_package_manager(PROGRAM_NAME):
+def check_apt_package_manager(PROGRAM_NAME):
     """
-    This function checks for another running package manager and waits for the
-    next check if so.
+    This function checks for another running APT package manager and waits for
+    the next check if so.
     """
     CHECK_WAIT = 10
+
+    if RPM:
+        return OK
 
     while True:
         try:
