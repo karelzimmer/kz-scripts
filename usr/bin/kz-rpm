@@ -96,6 +96,10 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    if ! $REDHAT_BASED; then
+        errmsg 'Red Hat(-based)-only'
+        exit $ERROR
+    fi
     become_root_check || exit $OK
     check_on_ac_power
     prepare_processing

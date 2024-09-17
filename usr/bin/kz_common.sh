@@ -68,6 +68,14 @@ declare     DEBIAN=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Debian' ]] || DEBIAN=false
 
+declare     DEBIAN_BASED=true
+# shellcheck disable=SC2034
+[[ -n $(type -t apt) ]] || DEBIAN_BASED=false
+
+declare     REDHAT_BASED=true
+# shellcheck disable=SC2034
+[[ -n $(type -t yum) ]] || REDHAT_BASED=false
+
 declare     UBUNTU=true
 # shellcheck disable=SC2034
 [[ $(lsb_release --id --short) = 'Ubuntu' ]] || UBUNTU=false
