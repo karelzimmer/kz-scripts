@@ -30,29 +30,29 @@ rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
 
 # Setup dashtodock for *
 # Not every GNOME desktop environment has this extension available ==> ' || true'.
-if $GNOME && $APT; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
+if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi
+if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
 # Reset dashtodock for *
 # Not every GNOME desktop environment has this extension available ==> ' || true'.
-if $GNOME && $APT; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell disable-user-extensions; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup || true; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
+if $GNOME; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi
+if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup || true; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
 # Setup evolution for karel@pc07
 kz-gnome --delete=org.gnome.Evolution
@@ -79,68 +79,68 @@ if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application
 # There is no command available to reset gdebi.
 
 # Setup gnome for *
-# Not every GNOME desktop environment has this key ===> ' || true'.
-if $GNOME && $APT; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.interface locate-pointer true || true; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if $GNOME && $APT; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
-if $GNOME && $APT; then gsettings set org.gnome.mutter center-new-windows true; fi
-if $GNOME && $APT; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
-if $GNOME && $APT; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if $GNOME && $APT; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if $GNOME && $APT; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if $GNOME && $APT; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if $GNOME && $APT; then gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true; fi
-if $GNOME && $APT; then gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; fi
-if $GNOME && $APT; then gsettings set org.gnome.settings-daemon.plugins.power idle-dim false; fi
-if $GNOME && $APT; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
-if $GNOME && $APT; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
-if $GNOME && $APT; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi
-if $GNOME && $APT; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi
-if $GNOME && $APT; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
+# Not every GNOME desktop environment has this key ==> ' || true'.
+if $GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface locate-pointer true || true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
+if $GNOME; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
+if $GNOME; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
+if $GNOME; then gsettings set org.gnome.desktop.session idle-delay 900; fi
+if $GNOME; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
+if $GNOME; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
+if $GNOME; then gsettings set org.gnome.mutter center-new-windows true; fi
+if $GNOME; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power idle-dim false; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
+if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi
+if $GNOME; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi
+if $GNOME; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome for *
-# Not every GNOME desktop environment has this key ===> ' || true'.
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.interface locate-pointer || true ; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.session idle-delay; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
-if $GNOME && $APT; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
-if $GNOME && $APT; then gsettings reset org.gnome.mutter center-new-windows; fi
-if $GNOME && $APT; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if $GNOME && $APT; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if $GNOME && $APT; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if $GNOME && $APT; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
-if $GNOME && $APT; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if $GNOME && $APT; then gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock; fi
-if $GNOME && $APT; then gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled; fi
-if $GNOME && $APT; then gsettings reset org.gnome.settings-daemon.plugins.power idle-dim; fi
-if $GNOME && $APT; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
-if $GNOME && $APT; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
-if $GNOME && $APT; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell disable-user-extensions; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network || true; fi
-if $GNOME && $APT; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi
-if $GNOME && $APT; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
+# Not every GNOME desktop environment has this key ==> ' || true'.
+if $GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface locate-pointer || true ; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
+if $GNOME; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
+if $GNOME; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
+if $GNOME; then gsettings reset org.gnome.desktop.session idle-delay; fi
+if $GNOME; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
+if $GNOME; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
+if $GNOME; then gsettings reset org.gnome.mutter center-new-windows; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power idle-dim; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
+if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network || true; fi
+if $GNOME; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi
+if $GNOME; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
 if $APT; then kz-gnome --addbef=google-chrome; fi

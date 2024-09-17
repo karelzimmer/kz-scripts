@@ -113,10 +113,14 @@ sudo apt-get install --assume-yes cups-backend-bjnp
 sudo apt-get remove --assume-yes cups-backend-bjnp
 
 # Install dashtodock on *
-if $GNOME && $APT; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+# Not every GNOME desktop environment has this extension available ==> ' || true'.
+if $GNOME && $APT; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock || true; fi
+if $GNOME && $RPM; then sudo yum install --assumeyes gnome-shell-extension-dash-to-dock.noarch || true; fi
 
 # Remove dashtodock from *
-if $GNOME && $APT; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+# Not every GNOME desktop environment has this extension available ==> ' || true'.
+if $GNOME && $APT; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock || true; fi
+if $GNOME && $RPM; then sudo yum remove --assumeyes gnome-shell-extension-dash-to-dock.noarch || true; fi
 
 # Install deja-dup on pc07
 sudo apt-get install --assume-yes deja-dup
