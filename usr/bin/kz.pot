@@ -309,7 +309,7 @@ msgstr ""
 msgid "Build RPM package"
 msgstr ""
 
-msgid "Install Debian package"
+msgid "Install package"
 msgstr ""
 
 msgid "Distribute website including kz packages"

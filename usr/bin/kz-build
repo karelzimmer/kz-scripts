@@ -285,7 +285,7 @@ function build_rpm_package() {
 
 # This function installs Debian-package kz.
 function install_deb_package() {
-    TEXT=$(gettext 'Install Debian package')...
+    TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
     check_apt_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive      \

@@ -349,8 +349,8 @@ msgstr "Bouw Debian-pakket"
 msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
-msgid "Install Debian package"
-msgstr "Installeer Debian-pakket"
+msgid "Install package"
+msgstr "Installeerpakket"
 
 msgid "Distribute website including kz packages"
 msgstr "Website distribueren inclusief kz pakketten"
