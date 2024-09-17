@@ -80,7 +80,8 @@ sudo apt-get remove --assume-yes calibre
 # Install change-grub-timeout on *
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=1/' /etc/default/grub
-sudo update-grub
+if $APT; then sudo update-grub; fi
+if $RPM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # Remove change-grub-timeout from *
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
@@ -550,5 +551,5 @@ sudo apt-get remove --assume-yes youtubedl-gui
 # Install yum-utils on *
 if $RPM; then sudo yum install --assumeyes yum-utils; fi
 
-# Install yum-utils on *
+# Remove yum-utils on *
 if $RPM; then sudo yum remove --assumeyes yum-utils; fi
