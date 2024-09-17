@@ -202,7 +202,6 @@ function process_input() {
     fi
 
     become_root
-    check_on_ac_power
     install_apps
 }
 

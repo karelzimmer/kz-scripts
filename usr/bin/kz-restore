@@ -132,7 +132,6 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input() {
     check_source
-    check_on_ac_power
     restore_backup
     restore_settings
 }

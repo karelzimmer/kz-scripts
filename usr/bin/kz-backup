@@ -133,7 +133,6 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input() {
     check_target
-    check_on_ac_power
     backup_settings
     create_backup
 }

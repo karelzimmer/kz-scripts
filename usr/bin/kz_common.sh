@@ -138,27 +138,6 @@ function become_root_check() {
 }
 
 
-# This function checks to see if the computer is running on battery power and
-# prompts the user to continue if so.
-function check_on_ac_power() {
-    local   -i  ON_BATTERY=0
-
-    on_ac_power || ON_BATTERY=$?
-
-    # Value on_battery:
-    #   0 (true)  System is on mains power
-    #   1 (false) System is not on mains power
-    # 255 (false) Power status could not be determined (e.g. on VM)
-    if [[ ON_BATTERY -eq 1 ]]; then
-        TEXT=$(gettext "The computer now uses only the battery for power.
-
-It is recommended to connect the computer to the wall socket.")
-        infomsg "$TEXT"
-        $OPTION_GUI || wait_for_enter
-    fi
-}
-
-
 # This function checks for another running APT package manager and waits for
 # the next check if so.
 function check_apt_package_manager() {

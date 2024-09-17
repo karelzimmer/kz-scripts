@@ -133,19 +133,6 @@ def become_root_check(PROGRAM_NAME):
         return True
 
 
-def check_on_ac_power(PROGRAM_NAME):
-    """
-    This function checks to see if the computer is running on battery power and
-    prompts the user to continue if so.
-    """
-    if subprocess.run('on_ac_power', shell=True).returncode == 1:
-        TEXT = _('The computer now uses only the battery for power.\n\n'
-                 'It is recommended to connect the computer to the wall \
-socket.')
-        infomsg(PROGRAM_NAME, TEXT)
-        wait_for_enter(PROGRAM_NAME)
-
-
 def check_apt_package_manager(PROGRAM_NAME):
     """
     This function checks for another running APT package manager and waits for

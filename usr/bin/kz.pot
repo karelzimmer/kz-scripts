@@ -32,12 +32,6 @@ msgstr ""
 msgid "  -v, --version  show program version"
 msgstr ""
 
-msgid ""
-"The computer now uses only the battery for power.\n"
-"\n"
-"It is recommended to connect the computer to the wall socket."
-msgstr ""
-
 msgid "Press the Enter key to continue [Enter]: "
 msgstr ""
 

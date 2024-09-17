@@ -101,7 +101,6 @@ function process_input() {
         exit $ERROR
     fi
     become_root_check || exit $OK
-    check_on_ac_power
     prepare_processing
     download_package
     install_package

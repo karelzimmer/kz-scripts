@@ -287,7 +287,6 @@ function build_rpm_package() {
 function install_deb_package() {
     TEXT=$(gettext 'Install Debian package')...
     infomsg "$TEXT"
-    check_on_ac_power
     check_apt_package_manager
     sudo    DEBIAN_FRONTEND=noninteractive      \
             apt-get                             \
