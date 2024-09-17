@@ -350,7 +350,7 @@ msgid "Build RPM package"
 msgstr "Bouw RPM-pakket"
 
 msgid "Install package"
-msgstr "Installeerpakket"
+msgstr "Installeer pakket"
 
 msgid "Distribute website including kz packages"
 msgstr "Website distribueren inclusief kz pakketten"
