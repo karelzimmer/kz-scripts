@@ -128,7 +128,7 @@ function become_root() {
 function become_root_check() {
     if [[ $UID -eq 0 ]]; then
         return $OK
-    elif groups "$USER" | grep --quiet --regexp='sudo'; then
+    elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
         return $OK
     else
         TEXT=$(gettext 'Already performed by the administrator.')
