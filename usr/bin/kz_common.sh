@@ -421,7 +421,7 @@ error.")
                 infomsg "
 $(gettext 'To try to resolve, run:')
 sudo apt remove kz
-wget karelzimmer.nl/kz.deb
+wget karelzimmer.nl/deb
 bash deb"
             fi
 
@@ -432,8 +432,8 @@ bash deb"
                 logmsg "Delete kz deb files ($MODULE_NAME)..."
                 rm  --force                 \
                     --verbose               \
-                    kz.deb                  \
-                    kz.deb.{1..99}          \
+                    deb                     \
+                    deb.{1..99}             \
                     "$KZ_DEB_LOCAL_FILE"    \
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi
