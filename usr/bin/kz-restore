@@ -139,6 +139,12 @@ function process_input() {
 
 # This function checks if the source is available.
 function check_source() {
+    local USB_MOUNT_POINT="/media/$USER"
+
+    if $RPM; then
+        USB_MOUNT_POINT="/run/media/$USER"
+    fi
+
     if $OPTION_SOURCE; then
 
         if [[ ! -d $SOURCE_ARGUMENT ]]; then
@@ -152,7 +158,7 @@ $USAGE"
         SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
         SOURCE_MEDIUM=$SOURCE_ARGUMENT
     else
-        MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
 
         if [[ -z $MEDIUM ]]; then
             TEXT=$(gettext "No USB medium found.
@@ -162,7 +168,7 @@ Connect a USB medium.")
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
 
             if [[ -z $MEDIUM ]]; then
                 errormsg "$TEXT"
@@ -170,7 +176,7 @@ Connect a USB medium.")
             fi
         fi
 
-        MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
 
         if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
             TEXT="$(eval_gettext "Connect only one USB medium.
@@ -183,7 +189,7 @@ Disconnect media via Files.")"
 
             $OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "/media/$USER"/* 2> >($LOGCMD) || true)
+            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
 
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
                 errormsg "$TEXT"
@@ -328,7 +334,7 @@ function term_script() {
 $USERS"
     fi
 
-    if [[ $SOURCE_MEDIUM == /media/* ]]; then
+    if [[ $SOURCE_MEDIUM == */media/* ]]; then
         term_script_usb || RC=$?
 
         if [[ $RC -eq $OK ]]; then
