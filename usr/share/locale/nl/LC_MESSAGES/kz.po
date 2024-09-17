@@ -383,7 +383,6 @@ msgstr "Installeren pakket kz is niet uitgevoerd."
 
 msgid "Download and install Debian or RPM package kz"
 msgstr "Download en installeer Debian- of RPM-pakket kz"
-et kz"
 
 msgid "finished"
 msgstr "gereed"
