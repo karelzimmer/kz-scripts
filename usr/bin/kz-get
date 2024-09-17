@@ -255,12 +255,12 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
 
-    logmsg "Delete kz deb files ($PROGRAM_NAME)..."
+    logmsg "Delete kz get files ($PROGRAM_NAME)..."
 
     rm  --force                 \
         --verbose               \
-        deb                     \
-        deb.{1..99}             \
+        get                     \
+        get.{1..99}             \
         "$KZ_GET_LOCAL_FILE"    \
         "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
 

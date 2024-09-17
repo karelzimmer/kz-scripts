@@ -381,11 +381,9 @@ msgstr "Uploaden website is mislukt."
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
-msgid "Download and install Debian package kz"
-msgstr "Download en installeer Debian-pakket kz"
-
-msgid "Download and install RPM package kz"
-msgstr "Download en installeer RPM-pakket kz"
+msgid "Download and install Debian or RPM package kz"
+msgstr "Download en installeer Debian- of RPM-pakket kz"
+et kz"
 
 msgid "finished"
 msgstr "gereed"

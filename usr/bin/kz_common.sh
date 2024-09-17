@@ -115,7 +115,6 @@ else
 fi
 
 declare     ERREXIT=true
-declare     KZ_DEB_LOCAL_FILE=''
 declare     OPTION_GUI=false
 declare     TITLE=''
 
@@ -428,23 +427,13 @@ bash deb"
             exit "$RC"
             ;;
         exit )
-            if [[ $PROGRAM_NAME = 'kz-deb' ]]; then
-                logmsg "Delete kz deb files ($MODULE_NAME)..."
+            if [[ $PROGRAM_NAME = 'kz-get' ]]; then
+                logmsg "Delete kz get files ($MODULE_NAME)..."
                 rm  --force                 \
                     --verbose               \
-                    deb                     \
-                    deb.{1..99}             \
-                    "$KZ_DEB_LOCAL_FILE"    \
-                    "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
-            fi
-
-            if [[ $PROGRAM_NAME = 'kz-rpm' ]]; then
-                logmsg "Delete kz rpm files ($MODULE_NAME)..."
-                rm  --force                 \
-                    --verbose               \
-                    rpm                     \
-                    rpm.{1..99}             \
-                    "$KZ_RPM_LOCAL_FILE"    \
+                    get                     \
+                    get.{1..99}             \
+                    "$KZ_GET_LOCAL_FILE"    \
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi
 

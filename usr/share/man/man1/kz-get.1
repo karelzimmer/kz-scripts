@@ -1,50 +1,56 @@
 .\"############################################################################
-.\"# SPDX-FileComment: Man page for kz-rpm
+.\"# SPDX-FileComment: Man page for kz-get
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 .\"
-.TH "KZ-RPM" "1" "4.2.1" "KZ" "Kz Manual"
+.TH "KZ-GET" "1" "4.2.1" "KZ" "Kz Manual"
 .\"
 .\"
 .SH NAME
-kz-rpm \- Download and install RPM package kz
+kz-get \- Download and install Debian or RPM package kz
 .\"
 .\"
 .SH SYNOPSIS
-.B kz rpm
+.B kz get
 [OPTION...]
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz rpm\fR downloads and installs package kz.
+\fBkz get\fR downloads and installs Debian or RPM package kz.
 .sp
-Package kz contains scripts to install Red Hat and Red Hat-based systems such
-as Rocky Linux smoothly and usably.
+Debian package kz contains scripts to install Debian and Debian-based systems
+such as Ubuntu smoothly and usably.
+.br
+RPM package kz contains scripts to install Red Hat and Red Hat-based systems
+such as Rocky Linux smoothly and usably.
 .sp
-For the latest version of \fBkz rpm\fR and kz package, launch a Terminal and
+For the latest version of \fBkz get\fR and package kz, launch a Terminal and
 run (copy of kz will be saved and later deleted):
 .br
-    \fBwdeb karelzimmer.nl/rpm\fR
+    \fBwdeb karelzimmer.nl/get\fR
 .br
-    \fBbash rpm\fR
+    \fBbash get\fR
 .br
  or (same as before, now on 1 line):
 .br
-    \fBwdeb karelzimmer.nl/rpm; bash rpm\fR
+    \fBwdeb karelzimmer.nl/get; bash get\fR
 .br
- or (no copy of rpm is saved):
+ or (no copy of get is saved):
 .br
-    \fBwdeb -O- karelzimmer.nl/rpm | bash\fR
+    \fBwdeb -O- karelzimmer.nl/get | bash\fR
 .br
  or (if curl is installed, no copy):
 .br
-    \fBcurl -L karelzimmer.nl/rpm | bash\fR
+    \fBcurl -L karelzimmer.nl/get | bash\fR
 .br
  or (if package kz is already installed):
 .br
-    \fBkz rpm\fR
+    \fBkz get\fR
+.sp
+For Debian < 12, the downloaded package will be repackaged as a package using
+xz, and then the repackaged package will be installed.
 .sp
 With command \fBkz dev\fR the development environment can be placed on the
 local computer so that the package and the website can be developed and tested.
@@ -74,7 +80,7 @@ equal to 0.
 .IP " 1." 4
 IaC en Day 1 Operations
 .RS 4
-\fBkz rpm\fR is mainly used for \fBIaC\fR and \fBDay 1 Operations\fR. See
+\fBkz get\fR is mainly used for \fBIaC\fR and \fBDay 1 Operations\fR. See
 \fBkz\fR(1) for an explanation.
 .RE
 .\"
@@ -97,5 +103,5 @@ Part of the \fBkz\fR(1) package, named after its creator, Karel Zimmer.
 .\"
 .\"
 .SH AVAILABILITY
-Command \fBkz rpm\fR is part of the \fBkz\fR package and is available on
+Command \fBkz get\fR is part of the \fBkz\fR package and is available on
 Karel Zimmer's website <https://karelzimmer.nl/en>, under Linux.

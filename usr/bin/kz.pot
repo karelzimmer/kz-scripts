@@ -341,10 +341,7 @@ msgstr ""
 msgid "Install package kz failed."
 msgstr ""
 
-msgid "Download and install Debian package kz"
-msgstr ""
-
-msgid "Download and install RPM package kz"
+msgid "Download and install Debian or RPM package kz"
 msgstr ""
 
 msgid "finished"
