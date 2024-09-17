@@ -212,7 +212,7 @@ function upload_website() {
 # This function installs package kz.
 function install_package() {
     # Call kz-deb (via wget and bash as a regular user would do).
-    TEXT=$(gettext 'Install package')...
+    TEXT=$(gettext 'Install Debian package')...
     infomsg "$TEXT"
 
     logmsg 'Calling kz deb (via wget and bash)...'
