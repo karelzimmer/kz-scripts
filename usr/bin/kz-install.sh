@@ -551,5 +551,5 @@ sudo apt-get remove --assume-yes youtubedl-gui
 # Install yum-utils on *
 if $RPM; then sudo yum install --assumeyes yum-utils; fi
 
-# Remove yum-utils on *
+# Remove yum-utils from *
 if $RPM; then sudo yum remove --assumeyes yum-utils; fi
