@@ -438,12 +438,14 @@ function execute_command() {
         fi
 
         # Width 9 characters less, 9 for leading spaces.
-        CMD_DIS_MAX=$(( COLUMNS - 9 ))
+        # Rocky Linux 8: COLUMNS: unbound variable ==> $(tput cols).
+        CMD_DIS_MAX=$(( $(tput cols) - 9 ))
 
         if [[ ${#CMD} -gt $CMD_DIS_MAX ]]; then
             # Width 12 characters less, 9 for leading spaces and 3 for trailing
             # ellipsis.
-            CMD_DIS_LEN=$(( COLUMNS - 12 ))
+            # Rocky Linux 8: COLUMNS: unbound variable ==> $(tput cols).
+            CMD_DIS_LEN=$(( $(tput cols) - 12 ))
             CMD_DIS=${CMD:0:CMD_DIS_LEN}...
         else
             CMD_DIS=$CMD
