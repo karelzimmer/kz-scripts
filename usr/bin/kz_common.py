@@ -62,15 +62,32 @@ if subprocess.run('[[ -n $(type -t '
 else:
     DESKTOP_ENVIRONMENT = False
 
-if subprocess.run('[[ -n $(type -t apt) ]]',
+if subprocess.run("[[ $(lsb_release --id --short) = 'Debian' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    DEBIAN = True
+else:
+    DEBIAN = False
+
+if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    UBUNTU = True
+else:
+    UBUNTU = False
+
+if subprocess.run('[[ -n $(type -t {apt,apt-get,aptitude}) ]]',
                   shell=True, executable='bash').returncode == OK:
     APT = True
 else:
     APT = False
 
-if subprocess.run('[[ -n $(type -t yum) ]]',
+if subprocess.run('[[ -n $(type -t {yum,dnf,rpm}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    RPM = True
+    # Additional testing is needed because rpm may have been installed on an
+    # Ubuntu or Ubuntu-based system.
+    if not UBUNTU and not DEBIAN:
+        RPM = True
+    else:
+        RPM = False
 else:
     RPM = False
 

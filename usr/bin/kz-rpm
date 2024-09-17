@@ -142,9 +142,9 @@ function install_package() {
 
     logmsg 'Install package kz...'
 
-    check_apt_package_manager |& $LOGCMD
-
-    [[ -z $(type -t kz) ]] || MODE='reinstall'
+    if [[ -n $(type -t kz) ]]; then
+        MODE='reinstall'
+    fi
 
     sudo yum $MODE --assumeyes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD
 

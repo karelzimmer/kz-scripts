@@ -342,7 +342,9 @@ function setup_apps() {
                 --count                     \
                 "$COMMAND_FILE"             || true
         )
-    [[ $APP_TOT_NUM -ne 0 ]] || return $OK
+    if [[ $APP_TOT_NUM -eq 0 ]]; then
+        return $OK
+    fi
 
     TITLE=$(gettext 'Set up apps')
     TEXT=$(gettext 'Preparing set up')
@@ -424,7 +426,9 @@ function execute_command() {
     (( ++CMD_SEQ_NUM ))
 
     if $OPTION_GUI; then
-        [[ $CMD_SEQ_NUM -ne 1 ]] || logmsg "$APP_NAME_LINE"
+        if [[ $CMD_SEQ_NUM -eq 1 ]]; then
+            logmsg "$APP_NAME_LINE"
+        fi
         printf '%s\n' "#$APP_NAME_LINE\n\n$CMD"
     else
 

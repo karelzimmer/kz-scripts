@@ -35,7 +35,7 @@ if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove "deb h
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes deb-multimedia-keyring; fi
 
 # Install update-system on *
-sudo kz update
+if $APT; then sudo kz update; fi
 
 # Remove update-system from *
 # There is no command available to remove update system.
@@ -60,10 +60,10 @@ sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyri
 sudo apt-get update
 
 # Install bash-completion on *
-sudo apt-get install --assume-yes bash-completion
+if $APT; then sudo apt-get install --assume-yes bash-completion; fi
 
 # Remove bash-completion from *
-sudo apt-get remove --assume-yes bash-completion
+if $APT; then sudo apt-get remove --assume-yes bash-completion; fi
 
 # Install bleachbit on pc-van-hugo
 sudo apt-get install --assume-yes bleachbit
@@ -100,10 +100,10 @@ sudo apt-get install --assume-yes cockpit cockpit-pcp
 sudo apt-get remove --assume-yes cockpit
 
 # Install cups on *
-sudo apt-get install --assume-yes cups
+if $APT; then sudo apt-get install --assume-yes cups; fi
 
 # Remove cups from *
-sudo apt-get remove --assume-yes cups
+if $APT; then sudo apt-get remove --assume-yes cups; fi
 
 # Install cups-backend-canon on pc-van-emily
 sudo apt-get install --assume-yes cups-backend-bjnp
@@ -112,10 +112,10 @@ sudo apt-get install --assume-yes cups-backend-bjnp
 sudo apt-get remove --assume-yes cups-backend-bjnp
 
 # Install dashtodock on *
-if $GNOME; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+if $GNOME && $APT; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
 
 # Remove dashtodock from *
-if $GNOME; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
+if $GNOME && $APT; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock || true; fi # Not every GNOME desktop environment has this extension available.
 
 # Install deja-dup on pc07
 sudo apt-get install --assume-yes deja-dup
@@ -200,10 +200,10 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes gdebi; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gdebi; fi
 
 # Remove gdebi from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes gdebi; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gdebi; fi
 
 # Install gettext on pc06 pc07
 sudo apt-get install --assume-yes gettext
@@ -236,22 +236,22 @@ sudo apt-get install --assume-yes gnome-tweaks
 sudo apt-get remove --assume-yes gnome-tweaks
 
 # Install google-chrome on *
-if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/google-chrome.gpg; fi
-if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes google-chrome-stable; fi
+if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes google-chrome-stable; fi
 # Add the source list again because the installation overwrote the newly added source list.
-if $DESKTOP_ENVIRONMENT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
+if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 # The apt-key added during installation is no longer needed.
-if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-if $GNOME; then sudo apt-get install --assume-yes chrome-gnome-shell; fi
+if $GNOME && $APT; then sudo apt-get install --assume-yes chrome-gnome-shell; fi
 
 # Remove google-chrome from *
-if $GNOME; then apt-get remove --assume-yes chrome-gnome-shell; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes google-chrome-stable chrome-gnome-shell; fi
-if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
+if $GNOME && $APT; then apt-get remove --assume-yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes google-chrome-stable chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 
 # Install google-earth on -nohost
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/google-earth.gpg
@@ -314,10 +314,10 @@ sudo apt-get install --assume-yes lftp
 sudo apt-get remove --assume-yes lftp
 
 # Install libreoffice on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Remove libreoffice from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
 
 # Install locate on pc06 pc07
 sudo apt-get install --assume-yes locate
@@ -383,10 +383,10 @@ sudo apt-get install --assume-yes sound-juicer
 sudo apt-get remove --assume-yes sound-juicer
 
 # Install spice-vdagent on *
-sudo apt-get install --assume-yes spice-vdagent
+if $APT; then sudo apt-get install --assume-yes spice-vdagent; fi
 
 # Remove spice-vdagent from *
-sudo apt-get remove --assume-yes spice-vdagent
+if $APT; then sudo apt-get remove --assume-yes spice-vdagent; fi
 
 # Install ssh on pc01 pc06 pc07
 sudo apt-get install --assume-yes ssh
@@ -413,27 +413,27 @@ sudo apt-get install --assume-yes gnome-sushi
 sudo apt-get remove --assume-yes gnome-sushi
 
 # Install teamviewer on *
-if $DESKTOP_ENVIRONMENT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/teamviewer.gpg; fi
-if $DESKTOP_ENVIRONMENT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/teamviewer.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
 # The apt-key added during installation is no longer needed.
-if $DESKTOP_ENVIRONMENT; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes teamviewer; fi
-if $DESKTOP_ENVIRONMENT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-key del 0C1289C0 DEB49217; fi
-if $DESKTOP_ENVIRONMENT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 
 # Install thunderbird on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes thunderbird-l10n-nl || true; fi # Debian
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes thunderbird-l10n-nl || true; fi # Debian
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Remove thunderbird from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes thunderbird-l10n-nl || true; fi # Debian
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes thunderbird-l10n-nl || true; fi # Debian
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
 
 # Install tree on pc06 pc07
 sudo apt-get install --assume-yes tree
@@ -502,10 +502,10 @@ sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-gues
 sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 # Install vlc on *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get install --assume-yes vlc; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes vlc; fi
 
 # Remove vlc from *
-if $DESKTOP_ENVIRONMENT; then sudo apt-get remove --assume-yes vlc; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
 sudo apt-get install --assume-yes apt-transport-https

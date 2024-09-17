@@ -60,29 +60,59 @@ declare     RED='\033[1;31m'
 declare     GREEN='\033[1;32m'
 declare     NORMAL='\033[0m'
 
-declare     DESKTOP_ENVIRONMENT=true
-[[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]] ||
-            DESKTOP_ENVIRONMENT=false
-
-declare     DEBIAN=true
-# shellcheck disable=SC2034
-[[ $(lsb_release --id --short) = 'Debian' ]] || DEBIAN=false
-
-declare     APT=true
-# shellcheck disable=SC2034
-[[ -n $(type -t {apt,apt-get}) ]] || APT=false
-
-declare     RPM=true
-# shellcheck disable=SC2034
-[[ -n $(type -t {yum,dnf}) ]] || RPM=false
-
-declare     UBUNTU=true
-# shellcheck disable=SC2034
-[[ $(lsb_release --id --short) = 'Ubuntu' ]] || UBUNTU=false
+declare     DESKTOP_ENVIRONMENT
+if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
+then
+    DESKTOP_ENVIRONMENT=true
+else
+    DESKTOP_ENVIRONMENT=false
+fi
 
 declare     GNOME=true
 # shellcheck disable=SC2034
-[[ -n $(type -t gnome-session) ]] || GNOME=false
+if [[ -n $(type -t gnome-session) ]]; then
+    GNOME=true
+else
+    GNOME=false
+fi
+
+declare     DEBIAN
+# shellcheck disable=SC2034
+if [[ $(lsb_release --id --short) = 'Debian' ]]; then
+    DEBIAN=true
+else
+    DEBIAN=false
+fi
+
+declare     UBUNTU
+# shellcheck disable=SC2034
+if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then
+    UBUNTU=true
+else
+    UBUNTU=false
+fi
+
+declare     APT
+# shellcheck disable=SC2034
+if [[ -n $(type -t {apt,apt-get,aptitude}) ]]; then
+    APT=true
+else
+    APT=false
+fi
+
+declare     RPM
+# shellcheck disable=SC2034
+if [[ -n $(type -t {yum,dnf,rpm}) ]]; then
+    # Additional testing is needed because rpm may have been installed on an
+    # Ubuntu or Ubuntu-based system.
+    if  ! $UBUNTU && ! $DEBIAN; then
+        RPM=true
+    else
+        RPM=false
+    fi
+else
+    RPM=false
+fi
 
 declare     ERREXIT=true
 declare     KZ_DEB_LOCAL_FILE=''
@@ -143,7 +173,9 @@ function become_root_check() {
 function check_apt_package_manager() {
     local   -i  CHECK_WAIT=10
 
-    $APT || return $OK
+    if $RPM; then
+        return $OK
+    fi
 
     while sudo  fuser                           \
                 --silent                        \

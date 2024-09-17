@@ -123,8 +123,9 @@ $TEXT"
 
     else
         # Shows QR code for quick connection to Wi-Fi network.
-        nmcli device wifi show-password 2> >($LOGCMD) || TEXT=$(gettext "No \
-WiFi device found.")
+        if ! nmcli device wifi show-password 2> >($LOGCMD); then
+            TEXT=$(gettext "No WiFi device found.")
+        fi
     fi
 
     infomsg "$TEXT"
