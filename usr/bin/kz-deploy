@@ -221,7 +221,7 @@ function install_package() {
     infomsg "$TEXT"
 
     logmsg 'Calling kz deb (via wget and bash)...'
-    if ! wget --output-document=- karelzimmer.nl/deb 2> >($LOGCMD) | bash
+    if ! wget --output-document=- karelzimmer.nl/get 2> >($LOGCMD) | bash
     then
         TEXT=$(gettext 'Install package kz failed.')
         errormsg "$TEXT"
