@@ -123,8 +123,8 @@ def become_root_check(PROGRAM_NAME):
     if os.getuid() == 0:
         return True
     try:
-        subprocess.run('groups $USER | grep --quiet --regexp=sudo', shell=True,
-                       check=True)
+        subprocess.run('groups $USER | grep --quiet --regexp=sudo \
+                       --regexp=wheel', shell=True, check=True)
     except Exception:
         TEXT = _('Already performed by the administrator.')
         infomsg(PROGRAM_NAME, TEXT)
