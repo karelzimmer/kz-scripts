@@ -267,7 +267,7 @@ function build_rpm_package() {
             --verbose               \
             "${RPM_SOURCES[src]}"/  \
             "${RPM_TARGETS[dist]}"  |& $LOGCMD
-    
+
     # Copy build id Debian package.
     cp  --preserve                                  \
         --verbose                                   \
