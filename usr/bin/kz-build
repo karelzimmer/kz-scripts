@@ -72,12 +72,12 @@ declare -A  DEB_TARGETS=(
             )
 
 declare -A  RPM_SOURCES=(
-            [kz-scripts]=$SCRIPTS_REPO
                    [src]=$RPM_REPO_SRCDIR
             )
 declare -A  RPM_TARGETS=(
               [dist]=$RPM_REPO_DISTDIR
          [deb-files]=$RPM_REPO_DISTDIR/kz-deb-files
+          [build-id]=$RPM_REPO_DISTDIR/kz-deb-files/usr/share/doc/kz
                [rpm]=$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch
             )
 
@@ -267,13 +267,19 @@ function build_rpm_package() {
             --verbose               \
             "${RPM_SOURCES[src]}"/  \
             "${RPM_TARGETS[dist]}"  |& $LOGCMD
+    
+    # Copy build id Debian package.
+    cp  --preserve                                  \
+        --verbose                                   \
+        "${DEB_TARGETS[build-id]}/$PROGRAM_NAME.id" \
+        "${RPM_TARGETS[build-id]}"                  |& $LOGCMD
 
     # Fill kz-rpm/dist/ with kz-deb/dist, excluding some Debian-specific
     # directories.
     rsync   --archive                   \
             --verbose                   \
             --exclude='DEBIAN'          \
-            --exclude='user/share/doc'  \
+            --exclude='usr/share/doc'   \
             "$DEB_REPO_DISTDIR"/        \
             "${RPM_TARGETS[deb-files]}" |& $LOGCMD
 
