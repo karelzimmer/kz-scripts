@@ -94,7 +94,7 @@ fi
 
 declare     APT
 # shellcheck disable=SC2034
-if [[ -n $(type -t {apt,apt-get,aptitude}) ]]; then
+if [[ -n $(type -t {apt-get,apt,aptitude}) ]]; then
     APT=true
 else
     APT=false
@@ -102,13 +102,13 @@ fi
 
 declare     RPM
 # shellcheck disable=SC2034
-if [[ -n $(type -t {yum,dnf,rpm}) ]]; then
-    # Additional testing is needed because rpm may have been installed on an
-    # Ubuntu or Ubuntu-based system.
-    if  ! $UBUNTU && ! $DEBIAN; then
-        RPM=true
-    else
+if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
+    # Additional testing is needed because rpm may be installed on a system
+    # that uses APT. APT is not available on a system that uses RPM.
+    if $APT; then
         RPM=false
+    else
+        RPM=true
     fi
 else
     RPM=false
