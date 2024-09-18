@@ -217,7 +217,7 @@ function download_rpm_package() {
             KZ_RPM_SITE_FILE+='kz-4.2.1-1.noarch.rpm'
 
     logmsg  'Download RPM package kz...'
-    wget    --output-document="$KZ_RPM_LOCAL_FILE"  \
+    wget    --output-document="$KZ_GET_LOCAL_FILE"  \
             "$KZ_RPM_SITE_FILE"                     |& $LOGCMD
 }
 
@@ -232,7 +232,7 @@ function install_rpm_package() {
         MODE='reinstall'
     fi
 
-    sudo yum $MODE --assumeyes "$KZ_RPM_LOCAL_FILE" |& $LOGCMD
+    sudo yum $MODE --assumeyes "$KZ_GET_LOCAL_FILE" |& $LOGCMD
 
     # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
     printf '\b%s\n' '=]100%'
