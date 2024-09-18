@@ -68,6 +68,9 @@ def perform_apt_repair():
     COMMAND = 'sudo apt-get install --fix-broken'
     perform_command(COMMAND)
 
+    COMMAND = '# sudo update-initramfs -u'
+    perform_command(COMMAND)
+
 
 def perform_apt_update():
     """
@@ -88,17 +91,6 @@ def perform_apt_update():
         perform_command(COMMAND)
 
 
-def perform_yum_update():
-    """
-    This function updates installed RPM packages and snaps if installed.
-    """
-    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
-
-    COMMAND = 'sudo yum update'
-    perform_command(COMMAND)
-
-
 def perform_apt_cleanup():
     """
     This function performs a Debian packages cleanup.
@@ -110,6 +102,42 @@ def perform_apt_cleanup():
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get autoremove --assume-yes'
+    perform_command(COMMAND)
+
+
+def perform_yum_repair():
+    """
+    This function runs a repair of RPM packages.
+    """
+    TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
+
+    COMMAND = '# sudo yum clean all'
+    perform_command(COMMAND)
+
+    COMMAND = '# sudo yum makecache'
+    perform_command(COMMAND)
+
+
+def perform_yum_update():
+    """
+    This function updates installed RPM packages.
+    """
+    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
+
+    COMMAND = 'sudo yum update'
+    perform_command(COMMAND)
+
+
+def perform_yum_cleanup():
+    """
+    This function performs a RPM packages cleanup.
+    """
+    TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
+
+    COMMAND = 'sudo yum clean all'
     perform_command(COMMAND)
 
 
@@ -182,8 +210,15 @@ if kz_common.APT:
     perform_apt_update()
 
     perform_apt_cleanup()
-else:
+elif kz_common.RPM:
+    perform_yum_repair()
+
     perform_yum_update()
+
+    perform_yum_cleanup()
+else:
+    TEXT = _('Unknown package manager.')
+    kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
 
 check_reboot()
 

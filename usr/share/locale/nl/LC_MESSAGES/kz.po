@@ -384,6 +384,9 @@ msgstr "Installeren pakket kz is niet uitgevoerd."
 msgid "Download and install Debian or RPM package kz"
 msgstr "Download en installeer Debian- of RPM-pakket kz"
 
+msgid "Unknown package manager."
+msgstr "Onbekende pakketbeheerder."
+
 msgid "finished"
 msgstr "gereed"
 

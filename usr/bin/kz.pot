@@ -344,6 +344,9 @@ msgstr ""
 msgid "Download and install Debian or RPM package kz"
 msgstr ""
 
+msgid "Unknown package manager."
+msgstr ""
+
 msgid "finished"
 msgstr ""
 

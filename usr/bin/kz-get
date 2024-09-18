@@ -105,7 +105,8 @@ function process_input() {
         download_rpm_package
         install_rpm_package
     else
-        errormsg 'Unknown package manager.'
+        TEXT=$(gettext 'Unknown package manager.')
+        errormsg "$TEXT"
         exit $ERROR
     fi
 }
@@ -118,7 +119,8 @@ function prepare_processing() {
     elif $RPM; then
         KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.rpm")
     else
-        errormsg 'Unknown package manager.'
+        TEXT=$(gettext 'Unknown package manager.')
+        errormsg "$TEXT"
         exit $ERROR
     fi
 
