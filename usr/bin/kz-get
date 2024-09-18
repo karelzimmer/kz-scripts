@@ -113,12 +113,10 @@ function process_input() {
 
 # This function prepares further processing.
 function prepare_processing() {
-    KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX")
-
     if $APT; then
-        KZ_GET_LOCAL_FILE+='.deb'
+        KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     elif $RPM; then
-        KZ_GET_LOCAL_FILE+='.rpm'
+        KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.rpm")
     else
         errormsg 'Unknown package manager.'
         exit $ERROR
