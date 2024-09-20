@@ -98,7 +98,7 @@ $USAGE"
 function process_input() {
     become_root_check || exit $OK
     prepare_processing
-    if $APT; then
+    if $DEB; then
         download_apt_package
         install_apt_package
     elif $RPM; then
@@ -114,7 +114,7 @@ function process_input() {
 
 # This function prepares further processing.
 function prepare_processing() {
-    if $APT; then
+    if $DEB; then
         KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     elif $RPM; then
         KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.rpm")

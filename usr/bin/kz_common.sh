@@ -92,20 +92,21 @@ else
     UBUNTU=false
 fi
 
-declare     APT
+declare     DEB
 # shellcheck disable=SC2034
-if [[ -n $(type -t {apt-get,apt,aptitude}) ]]; then
-    APT=true
+if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
+    DEB=true
 else
-    APT=false
+    DEB=false
 fi
 
 declare     RPM
 # shellcheck disable=SC2034
 if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
     # Additional testing is needed because rpm may be installed on a system
-    # that uses APT. APT is not available on a system that uses RPM.
-    if $APT; then
+    # that uses Debian package management system APT. APT is not available on a
+    # system that uses Red Hat package management system RPM.
+    if $DEB; then
         RPM=false
     else
         RPM=true
@@ -172,7 +173,7 @@ function become_root_check() {
 function check_apt_package_manager() {
     local   -i  CHECK_WAIT=10
 
-    if ! $APT; then
+    if ! $DEB; then
         return $OK
     fi
 

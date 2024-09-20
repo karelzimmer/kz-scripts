@@ -74,17 +74,18 @@ if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
 else:
     UBUNTU = False
 
-if subprocess.run('[[ -n $(type -t {apt-get,apt,aptitude}) ]]',
+if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    APT = True
+    DEB = True
 else:
-    APT = False
+    DEB = False
 
 if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
                   shell=True, executable='bash').returncode == OK:
     # Additional testing is needed because rpm may be installed on a system
-    # that uses APT. APT is not available on a system that uses RPM.
-    if APT:
+    # that uses Debian package management system APT. APT is not available on a
+    # system that uses Red Hat package management system RPM.
+    if DEB:
         RPM = False
     else:
         RPM = True

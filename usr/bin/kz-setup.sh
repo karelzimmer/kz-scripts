@@ -73,7 +73,7 @@ kz-gnome --addbef=firefox-esr
 kz-gnome --addbef=firefox
 
 # Setup gdebi for *
-if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if $DESKTOP_ENVIRONMENT && $DEB; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
 # There is no command available to reset gdebi.
@@ -143,11 +143,11 @@ if $GNOME; then gsettings reset org.gnome.shell.extensions.ding show-home || tru
 if $GNOME; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
-if $APT; then kz-gnome --addbef=google-chrome; fi
-if $APT; then xdg-mime default google-chrome.desktop application/pdf; fi
+if $DEB; then kz-gnome --addbef=google-chrome; fi
+if $DEB; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Reset google-chrome for *
-if $APT; then kz-gnome --delete=google-chrome; fi
+if $DEB; then kz-gnome --delete=google-chrome; fi
 
 # Setup handbrake for emily@pc-van-emily
 kz-gnome --addaft=fr.handbrake.ghb
