@@ -328,8 +328,8 @@ msgstr "Website bouwen inclusief kz pakketten"
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr "Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
 
-msgid "Must run on a Debian or Debian-based machine."
-msgstr "Moet op een Debian of Debian-gebaseerde machine draaien."
+msgid "Must run on a Debian or Debian-based system."
+msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
 msgid "Generate .mo file"
 msgstr "Genereer .mo bestand"

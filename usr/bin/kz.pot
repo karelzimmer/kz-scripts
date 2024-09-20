@@ -288,7 +288,7 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
 msgstr ""
 
-msgid "Must run on a Debian or Debian-based machine."
+msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
 msgid "Generate .mo file"
