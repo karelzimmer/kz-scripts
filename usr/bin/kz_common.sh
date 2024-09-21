@@ -421,7 +421,7 @@ error.")
                 infomsg "
 $(gettext 'To try to resolve, run:')
 sudo apt remove kz
-wget karelzimmer.nl/get
+wget karelzimmer.nl/getkz
 bash get"
             fi
 
