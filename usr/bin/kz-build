@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-# Use the version from the scripts repository, not the installed version.
+# Use the kz_common.sh version of the current path to itself.
 source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
