@@ -20,67 +20,38 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare     PROGRAM_NAME='kz-build'
-declare     PROGRAM_DESC
-            PROGRAM_DESC=$(gettext 'Build website including kz packages')
-declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-build'
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Build website including kz packages')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare     USAGE
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare USAGE
+        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-declare     HELP
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-declare     DOCS_REPO=$HOME/kz-docs
-declare     SCRIPTS_REPO=$HOME/kz-scripts
+declare DOCS_REPO=$HOME/kz-docs
+declare SCRIPTS_REPO=$HOME/kz-scripts
 
-declare     DEB_REPO=$HOME/kz-deb
-declare     DEB_REPO_SRCDIR=$DEB_REPO/src
-declare     DEB_REPO_DISTDIR=$DEB_REPO/dist
-declare     DEB_NAME=kz_4.2.1-1_all.deb
+declare UPLOADS_REPO=$HOME/kz-uploads
+declare UPLOADS_REPO_SRCDIR=$UPLOADS_REPO/src
+declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
 
-declare     RPM_REPO=$HOME/kz-rpm
-declare     RPM_REPO_SRCDIR=$RPM_REPO/src
-declare     RPM_REPO_DISTDIR=$RPM_REPO/dist
-declare     RPM_NAME=kz-4.2.1-1.noarch.rpm
+declare DEB_REPO=$HOME/kz-deb
+declare DEB_REPO_SRCDIR=$DEB_REPO/src
+declare DEB_REPO_DISTDIR=$DEB_REPO/dist
+declare DEB_NAME=kz_4.2.1-1_all.deb
 
-declare     UPLOADS_REPO=$HOME/kz-uploads
-declare     UPLOADS_REPO_SRCDIR=$UPLOADS_REPO/src
-declare     UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
-
-declare -A  UPLOADS_SOURCES=(
-            [kz-docs]=$DOCS_REPO
-            )
-declare -A  UPLOADS_TARGETS=(
-            [kz-docs]=$UPLOADS_REPO_DISTDIR/assets/documents
-                [deb]=$UPLOADS_REPO_DISTDIR/assets/packages
-            )
-
-declare -A  DEB_SOURCES=(
-            [kz-scripts]=$SCRIPTS_REPO
-                   [src]=$DEB_REPO_SRCDIR
-            )
-declare -A  DEB_TARGETS=(
-              [dist]=$DEB_REPO_DISTDIR
-          [build-id]=$DEB_REPO_DISTDIR/usr/share/doc/kz
-            [man_en]=$DEB_REPO_DISTDIR/usr/share/man/man1
-            [man_nl]=$DEB_REPO_DISTDIR/usr/share/man/nl/man1
-            )
-
-declare -A  RPM_SOURCES=(
-                   [src]=$RPM_REPO_SRCDIR
-            )
-declare -A  RPM_TARGETS=(
-              [dist]=$RPM_REPO_DISTDIR
-         [deb-files]=$RPM_REPO_DISTDIR/kz-deb-files
-          [build-id]=$RPM_REPO_DISTDIR/kz-deb-files/usr/share/doc/kz
-               [rpm]=$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch
-            )
+declare RPM_REPO=$HOME/kz-rpm
+declare RPM_REPO_SRCDIR=$RPM_REPO/src
+declare RPM_REPO_DISTDIR=$RPM_REPO/dist
+declare RPM_NAME=kz-4.2.1-1.noarch.rpm
 
 
 ###############################################################################
@@ -191,14 +162,15 @@ function build_website() {
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
-    cd "${UPLOADS_SOURCES[kz-docs]}"
+    cd "$DOCS_REPO"
     for FILE in *.odt *.txt; do
         FILENAME=${FILE%.*}
 
-        if [[ $FILE -nt ${UPLOADS_TARGETS[kz-docs]}/$FILENAME.pdf ]]; then
-            lowriter    --headless                              \
-                        --convert-to pdf                        \
-                        --outdir "${UPLOADS_TARGETS[kz-docs]}"  \
+        if [[ $FILE -nt $UPLOADS_REPO_DISTDIR/assets/documents/$FILENAME.pdf ]]
+        then
+            lowriter    --headless                                          \
+                        --convert-to pdf                                    \
+                        --outdir "$UPLOADS_REPO_DISTDIR/assets/documents"   \
                         "$FILE"
         fi
     done
@@ -214,44 +186,45 @@ function build_deb_package() {
     infomsg "$TEXT"
 
     # Fill kz-deb/dist/ with kz-deb/src/.
-    rsync   --archive               \
-            --delete                \
-            --verbose               \
-            "${DEB_SOURCES[src]}"/  \
-            "${DEB_TARGETS[dist]}"  |& $LOGCMD
+    rsync   --archive           \
+            --delete            \
+            --verbose           \
+            "$DEB_REPO_SRCDIR"/ \
+            "$DEB_REPO_DISTDIR" |& $LOGCMD
 
     # Make sure the permissions are correct for the sync with repo kz-scripts.
     chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
     chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
 
     # Fill kz-deb/dist/ with repo kz-scripts.
-    rsync   --archive                       \
-            --verbose                       \
-            --exclude='__pycache__'         \
-            --exclude='LICENSE'             \
-            --exclude='README.md'           \
-            --exclude='.git*'               \
-            --exclude='kz.po'               \
-            --exclude='kz.pot'              \
-            "${DEB_SOURCES[kz-scripts]}"/   \
-            "${DEB_TARGETS[dist]}"          |& $LOGCMD
+    rsync   --archive               \
+            --verbose               \
+            --exclude='__pycache__' \
+            --exclude='LICENSE'     \
+            --exclude='README.md'   \
+            --exclude='.git*'       \
+            --exclude='kz.po'       \
+            --exclude='kz.pot'      \
+            "$SCRIPTS_REPO"/        \
+            "$DEB_REPO_DISTDIR"     |& $LOGCMD
 
     # Compress man pages.
-    gzip    --best                      \
-            --force                     \
-            "${DEB_TARGETS[man_en]}"/*  \
-            "${DEB_TARGETS[man_nl]}"/*  |& $LOGCMD
+    gzip    --best                                      \
+            --force                                     \
+            "$DEB_REPO_DISTDIR/usr/share/man/man1"/*    \
+            "$DEB_REPO_DISTDIR/usr/share/man/nl/man1"/* |& $LOGCMD
 
     # Capture build id Debian package.
     BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
-    mkdir --parents "${DEB_TARGETS[build-id]}" |& $LOGCMD
-    printf '%s' "$BUILD_ID" > "${DEB_TARGETS[build-id]}/$PROGRAM_NAME.id"
+    mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
+    printf  '%s'        \
+            "$BUILD_ID" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"
 
     # Create Debian package in kz-uploads.
-    fakeroot    dpkg-deb                            \
-                --build                             \
-                "$DEB_REPO_DISTDIR"                 \
-                "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
+    fakeroot    dpkg-deb                                            \
+                --build                                             \
+                "$DEB_REPO_DISTDIR"                                 \
+                "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
 }
 
 
@@ -263,38 +236,38 @@ function build_rpm_package() {
     infomsg "$TEXT"
 
     # Fill kz-rpm/dist/ with kz-rpm/src/.
-    rsync   --archive               \
-            --delete                \
-            --verbose               \
-            "${RPM_SOURCES[src]}"/  \
-            "${RPM_TARGETS[dist]}"  |& $LOGCMD
+    rsync   --archive           \
+            --delete            \
+            --verbose           \
+            "$RPM_REPO_SRCDIR"/ \
+            "$RPM_REPO_DISTDIR" |& $LOGCMD
 
     # Copy build id Debian package.
-    cp  --preserve                                  \
-        --verbose                                   \
-        "${DEB_TARGETS[build-id]}/$PROGRAM_NAME.id" \
-        "${RPM_TARGETS[build-id]}"                  |& $LOGCMD
+    cp  --preserve                                              \
+        --verbose                                               \
+        "$DEB_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"   \
+        "$RPM_REPO_DISTDIR/kz-deb-files/usr/share/doc/kz"       |& $LOGCMD
 
     # Fill kz-rpm/dist/ with kz-deb/dist, excluding some Debian-specific
     # directories.
-    rsync   --archive                   \
-            --verbose                   \
-            --exclude='DEBIAN'          \
-            --exclude='usr/share/doc'   \
-            "$DEB_REPO_DISTDIR"/        \
-            "${RPM_TARGETS[deb-files]}" |& $LOGCMD
+    rsync   --archive                           \
+            --verbose                           \
+            --exclude='DEBIAN'                  \
+            --exclude='usr/share/doc'           \
+            "$DEB_REPO_DISTDIR"/                \
+            "$RPM_REPO_DISTDIR/kz-deb-files"    |& $LOGCMD
 
     # Create RPM package in kz-rpm/dist/.
-    rpmbuild    -ba                                                 \
-                --build-in-place                                    \
-                --define "_topdir ${RPM_TARGETS[dist]}/rpmbuild"    \
-                "${RPM_TARGETS[dist]}/rpmbuild/SPECS/kz.spec"       |& $LOGCMD
+    rpmbuild    -ba                                             \
+                --build-in-place                                \
+                --define "_topdir $RPM_REPO_DISTDIR/rpmbuild"   \
+                "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"      |& $LOGCMD
 
     # Copy RPM package to kz-uploads.
-    cp  --preserve                      \
-        --verbose                       \
-        "${RPM_TARGETS[rpm]}/$RPM_NAME" \
-        "${UPLOADS_TARGETS[deb]}"       |& $LOGCMD
+    cp  --preserve                                          \
+        --verbose                                           \
+        "$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch/$RPM_NAME"  \
+        "$UPLOADS_REPO_DISTDIR/assets/packages"             |& $LOGCMD
 }
 
 
@@ -303,11 +276,11 @@ function install_deb_package() {
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
     check_apt_package_manager
-    sudo    DEBIAN_FRONTEND=noninteractive      \
-            apt-get                             \
-            reinstall                           \
-            --assume-yes                        \
-            "${UPLOADS_TARGETS[deb]}/$DEB_NAME" |& $LOGCMD
+    sudo    DEBIAN_FRONTEND=noninteractive                      \
+            apt-get                                             \
+            reinstall                                           \
+            --assume-yes                                        \
+            "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
 }
 
 
