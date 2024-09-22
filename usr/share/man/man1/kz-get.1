@@ -27,19 +27,19 @@ RPM package kz contains scripts to install Red Hat and Red Hat-based systems
 such as Rocky Linux smoothly and usably.
 .sp
 For the latest version of \fBkz get\fR and package kz, launch a Terminal and
-run (copy of kz will be saved and later deleted):
+run (copy of getkz will be saved and later deleted):
 .br
-    \fBwdeb karelzimmer.nl/getkz\fR
+    \fBwget karelzimmer.nl/getkz\fR
 .br
-    \fBbash get\fR
+    \fBbash getkz\fR
 .br
  or (same as before, now on 1 line):
 .br
-    \fBwdeb karelzimmer.nl/getkz; bash get\fR
+    \fBwget karelzimmer.nl/getkz; bash getkz\fR
 .br
- or (no copy of get is saved):
+ or (no copy of getkz is saved):
 .br
-    \fBwdeb -O- karelzimmer.nl/getkz | bash\fR
+    \fBwget -O- karelzimmer.nl/getkz | bash\fR
 .br
  or (if curl is installed, no copy):
 .br
@@ -49,8 +49,9 @@ run (copy of kz will be saved and later deleted):
 .br
     \fBkz get\fR
 .sp
-For Debian < 12, the downloaded package will be repackaged as a package using
-xz, and then the repackaged package will be installed.
+For systems that do not support data compression with zstd (e.g. Debian 11),
+the downloaded package is repackaged as a package with xz, and then the
+repackaged package is installed.
 .sp
 With command \fBkz dev\fR the development environment can be placed on the
 local computer so that the package and the website can be developed and tested.
