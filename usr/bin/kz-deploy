@@ -106,13 +106,36 @@ function process_input() {
         exit $ERROR
     fi
     become_root_check || exit $OK
+    build
+    check
+    deploy
+}
+
+
+# This function builds package kz and website.
+function build() {
+    TEXT=$(gettext 'Build website including kz packages')...
+    infomsg "$TEXT"
+
+    # Call kz build.
+    logmsg 'Calling kz build...'
+    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
+    logmsg 'Called kz build.'
+}
+
+
+# This function performs checks.
+function check() {
     check_repos
-    build_package_and_website
     check_scripts_and_website
+}
+
+
+# This function performs the deploy.
+function deploy() {
     upload_website
     install_package
 }
-
 
 
 # This function check that the repos are in the desired state.
@@ -152,18 +175,6 @@ function check_repos() {
     if $ERROR_FLAG; then
         exit $ERROR
     fi
-}
-
-
-# This function builds package kz and website.
-function build_package_and_website() {
-    TEXT=$(gettext 'Build website including kz packages')...
-    infomsg "$TEXT"
-
-    # Call kz build.
-    logmsg 'Calling kz build...'
-    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
-    logmsg 'Called kz build.'
 }
 
 # This function check the scripts and website.
