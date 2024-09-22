@@ -35,7 +35,7 @@ if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove "deb h
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes deb-multimedia-keyring; fi
 
 # Install update-system on *
-if $DEB; then sudo kz update; fi
+sudo kz update
 
 # Remove update-system from *
 # There is no command available to remove update system.
@@ -433,12 +433,12 @@ if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-key del 0C1289C0 DEB49217; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get update; fi
 
 # Install thunderbird on *
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get install --assume-yes thunderbird-l10n-nl || true; fi # Debian
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get install --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes thunderbird-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get install --assume-yes thunderbird-locale-nl; fi
 
 # Remove thunderbird from *
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes thunderbird-l10n-nl || true; fi # Debian
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes thunderbird-locale-nl || true; fi # Ubuntu
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes thunderbird-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get remove --assume-yes thunderbird-locale-nl; fi
 
 # Install tree on pc06 pc07
 sudo apt-get install --assume-yes tree
