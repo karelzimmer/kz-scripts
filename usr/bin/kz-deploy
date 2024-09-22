@@ -107,8 +107,8 @@ function process_input() {
     fi
     become_root_check || exit $OK
     check_repos
-    build_package_and_website
     check_scripts_and_website
+    build_package_and_website
     upload_website
     install_package
 }
