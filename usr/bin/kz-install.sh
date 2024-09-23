@@ -85,7 +85,8 @@ if $RPM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # Remove change-grub-timeout from *
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
-sudo update-grub
+if $DEB; then sudo update-grub; fi
+if $RPM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # Install clamav on pc-van-hugo
 sudo apt-get install --assume-yes clamtk-gnome
