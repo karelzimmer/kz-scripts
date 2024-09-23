@@ -59,12 +59,6 @@ sudo apt-get remove --assume-yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
-# Install bash-completion on *
-if $DEB; then sudo apt-get install --assume-yes bash-completion; fi
-
-# Remove bash-completion from *
-if $DEB; then sudo apt-get remove --assume-yes bash-completion; fi
-
 # Install bleachbit on pc-van-hugo
 sudo apt-get install --assume-yes bleachbit
 
@@ -411,6 +405,12 @@ sudo apt-get install --assume-yes gnome-sushi
 
 # Remove sushi from pc06
 sudo apt-get remove --assume-yes gnome-sushi
+
+# Install tab-completion on *
+if $DEBIAN; then sudo apt-get install --assume-yes bash-completion; fi
+
+# Remove tab-completion from *
+if $DEBIAN; then sudo apt-get remove --assume-yes bash-completion; fi
 
 # Install teamviewer on *
 if $DESKTOP_ENVIRONMENT && $DEB; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --assume-yes --output=/usr/share/keyrings/teamviewer.gpg; fi
