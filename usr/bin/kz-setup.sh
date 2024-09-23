@@ -143,11 +143,11 @@ if $GNOME; then gsettings reset org.gnome.shell.extensions.ding show-home || tru
 if $GNOME; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
-if $DEB; then kz-gnome --addbef=google-chrome; fi
-if $DEB; then xdg-mime default google-chrome.desktop application/pdf; fi
+kz-gnome --addbef=google-chrome
+xdg-mime default google-chrome.desktop application/pdf
 
 # Reset google-chrome for *
-if $DEB; then kz-gnome --delete=google-chrome; fi
+kz-gnome --delete=google-chrome
 
 # Setup handbrake for emily@pc-van-emily
 kz-gnome --addaft=fr.handbrake.ghb
