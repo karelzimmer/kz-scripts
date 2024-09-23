@@ -432,8 +432,8 @@ bash get"
                 logmsg "Delete kz get files ($MODULE_NAME)..."
                 rm  --force                 \
                     --verbose               \
-                    get                     \
-                    get.{1..99}             \
+                    getkz                   \
+                    getkz.{1..99}           \
                     "$KZ_GET_LOCAL_FILE"    \
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi

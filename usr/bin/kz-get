@@ -268,8 +268,8 @@ $(gettext "Type 'exit' to close this window.")"
 
     rm  --force                 \
         --verbose               \
-        get                     \
-        get.{1..99}             \
+        getkz                   \
+        getkz.{1..99}           \
         "$KZ_GET_LOCAL_FILE"    \
         "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
 
