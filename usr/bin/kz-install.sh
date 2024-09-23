@@ -122,12 +122,6 @@ if $GNOME && $RPM; then sudo yum install --assumeyes gnome-shell-extension-dash-
 if $GNOME && $DEB; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock || true; fi
 if $GNOME && $RPM; then sudo yum remove --assumeyes gnome-shell-extension-dash-to-dock.noarch || true; fi
 
-# Install deja-dup on pc07
-sudo apt-get install --assume-yes deja-dup
-
-# Remove deja-dup from pc07
-sudo apt-get remove --assume-yes deja-dup
-
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).
 # To prevent the log gets flooded with 'AER: Corrected errors received'. Usually needed for HP hardware.
