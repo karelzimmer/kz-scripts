@@ -105,39 +105,42 @@ def perform_apt_cleanup():
     perform_command(COMMAND)
 
 
-def perform_yum_repair():
+def perform_rpm_repair():
     """
     This function runs a repair of RPM packages.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = '# sudo yum clean all'
+    COMMAND = '# sudo dnf clean all'
     perform_command(COMMAND)
 
-    COMMAND = '# sudo yum makecache'
+    COMMAND = '# sudo dnf makecache'
     perform_command(COMMAND)
 
 
-def perform_yum_update():
+def perform_rpm_update():
     """
     This function updates installed RPM packages.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo yum update'
+    COMMAND = 'sudo dnf upgrade --refresh'
     perform_command(COMMAND)
 
 
-def perform_yum_cleanup():
+def perform_rpm_cleanup():
     """
     This function performs a RPM packages cleanup.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo yum clean all'
+    COMMAND = 'sudo dnf clean all'
+    perform_command(COMMAND)
+
+    COMMAND = 'sudo dnf autoremove'
     perform_command(COMMAND)
 
 
@@ -211,11 +214,11 @@ if kz_common.DEB:
 
     perform_apt_cleanup()
 elif kz_common.RPM:
-    perform_yum_repair()
+    perform_rpm_repair()
 
-    perform_yum_update()
+    perform_rpm_update()
 
-    perform_yum_cleanup()
+    perform_rpm_cleanup()
 else:
     TEXT = _('Unknown package manager.')
     kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)

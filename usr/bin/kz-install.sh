@@ -116,12 +116,12 @@ sudo apt-get remove --assume-yes cups-backend-bjnp
 # Install dashtodock on *
 # Not every GNOME desktop environment has this extension available ==> ' || true'.
 if $GNOME && $DEB; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock || true; fi
-if $GNOME && $RPM; then sudo yum install --assumeyes gnome-shell-extension-dash-to-dock.noarch || true; fi
+if $GNOME && $RPM; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock.noarch || true; fi
 
 # Remove dashtodock from *
 # Not every GNOME desktop environment has this extension available ==> ' || true'.
 if $GNOME && $DEB; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock || true; fi
-if $GNOME && $RPM; then sudo yum remove --assumeyes gnome-shell-extension-dash-to-dock.noarch || true; fi
+if $GNOME && $RPM; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock.noarch || true; fi
 
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).

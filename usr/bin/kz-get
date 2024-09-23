@@ -241,7 +241,7 @@ function install_rpm_package() {
         MODE='reinstall'
     fi
 
-    sudo yum $MODE --assumeyes "$KZ_GET_LOCAL_FILE" |& $LOGCMD
+    sudo dnf $MODE --assumeyes "$KZ_GET_LOCAL_FILE" |& $LOGCMD
 
     # Progress indicator with '[=>', '[==>', etc. ends like '[====]100%'.
     printf '\b%s\n' '=]100%'
