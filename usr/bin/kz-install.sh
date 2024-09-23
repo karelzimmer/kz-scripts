@@ -445,9 +445,11 @@ sudo ufw disable
 sudo apt-get remove --assume-yes gufw
 
 # Install usbutils on pc07
+# This package contains the lsusb utility.
 sudo apt-get install --assume-yes usbutils
 
 # Remove usbutils from pc07
+# This package contains the lsusb utility.
 sudo apt-get remove --assume-yes usbutils
 
 # Install user-guest on -nohost
