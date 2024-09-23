@@ -325,12 +325,6 @@ sudo updatedb
 # Remove locate from pc06 pc07
 sudo apt-get remove --assume-yes locate
 
-# Install lshw on pc07
-sudo apt-get install --assume-yes lshw
-
-# Remove lshw from pc07
-sudo apt-get remove --assume-yes lshw
-
 # Install nautilus-admin on pc06 pc07
 sudo apt-get install --assume-yes nautilus-admin
 
