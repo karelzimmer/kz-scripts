@@ -98,7 +98,7 @@ def perform_apt_cleanup():
     TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo apt-get autoclean --assume-yes'
+    COMMAND = 'sudo apt-get autocleansudo dnf check-update'
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get autoremove --assume-yes'
@@ -126,7 +126,10 @@ def perform_rpm_update():
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo dnf upgrade --refresh'
+    COMMAND = 'sudo dnf check-update'
+    perform_command(COMMAND)
+
+    COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
     perform_command(COMMAND)
 
 
