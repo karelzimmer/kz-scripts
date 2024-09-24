@@ -215,14 +215,14 @@ if $DESKTOP_ENVIRONMENT && $DEB; then echo 'deb [arch=amd64 signed-by=/usr/share
 # The apt-key added during installation is no longer needed.
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-if $GNOME && $DEB; then sudo apt-get install --assume-yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $DEB && $GNOME; then sudo apt-get install --assume-yes chrome-gnome-shell; fi
 # Import GPG Key.
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 # Install Google Chrome.
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 # Remove google-chrome from *
-if $GNOME && $DEB; then apt-get remove --assume-yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $DEB && $GNOME; then apt-get remove --assume-yes chrome-gnome-shell; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes google-chrome-stable chrome-gnome-shell; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get update; fi
