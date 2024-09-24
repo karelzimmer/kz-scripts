@@ -93,11 +93,11 @@ if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-in
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
 
 # Setup google-chrome for *
-kz-gnome --addbef=google-chrome
-xdg-mime default google-chrome.desktop application/pdf
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=google-chrome; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Reset google-chrome for *
-kz-gnome --delete=google-chrome
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=google-chrome; fi
 
 # Setup handbrake for emily@pc-van-emily
 kz-gnome --addaft=fr.handbrake.ghb
