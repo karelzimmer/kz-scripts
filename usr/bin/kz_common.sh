@@ -422,7 +422,7 @@ error.")
 $(gettext 'To try to resolve, run:')
 sudo apt remove kz
 wget karelzimmer.nl/getkz
-bash get"
+bash getkz"
             fi
 
             exit "$RC"
