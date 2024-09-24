@@ -68,9 +68,6 @@ if $GNOME; then gsettings set org.gnome.nautilus.preferences click-policy 'singl
 if $GNOME; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
 if $GNOME; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
 if $GNOME; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if $GNOME; then gsettings set org.gnome.settings-daemon.peripherals.touchscreen orientation-lock true; fi
-if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true; fi
-if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power idle-dim false; fi
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
@@ -91,9 +88,6 @@ if $GNOME; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
 if $GNOME; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
 if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
 if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if $GNOME; then gsettings reset org.gnome.settings-daemon.peripherals.touchscreen orientation-lock; fi
-if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.color night-light-enabled; fi
-if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power idle-dim; fi
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
