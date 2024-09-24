@@ -98,7 +98,7 @@ def perform_apt_cleanup():
     TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo apt-get autocleansudo dnf check-update'
+    COMMAND = 'sudo apt-get autoclean'
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get autoremove --assume-yes'
