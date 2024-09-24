@@ -20,20 +20,6 @@ if $UBUNTU; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/
 if $UBUNTU; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if $UBUNTU; then sudo systemctl enable --now apport.service; fi
 
-# Install extra-repos on *
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository contrib; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository non-free; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then wget --output-document=/tmp/deb-multimedia-keyring_2016.8.1_all.deb 'https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2016.8.1_all.deb'; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then rm /tmp/deb-multimedia-keyring_2016.8.1_all.deb; fi
-
-# Remove extra-repos from *
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove contrib; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove non-free; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-add-repository --remove "deb https://www.deb-multimedia.org $(lsb_release --codename --short) main non-free"; fi
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes deb-multimedia-keyring; fi
-
 # Install update-system on *
 sudo kz update
 
