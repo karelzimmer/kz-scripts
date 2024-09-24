@@ -28,32 +28,6 @@ kz-gnome --addaft=kz-cockpit
 kz-gnome --delete=kz-cockpit
 rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
 
-# Setup dashtodock for *
-# Not every GNOME desktop environment has this extension available ==> ' || true'.
-if $GNOME; then gnome-extensions enable dash-to-dock@micxgx.gmail.com || true; fi
-if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true || true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
-
-# Reset dashtodock for *
-# Not every GNOME desktop environment has this extension available ==> ' || true'.
-if $GNOME; then gnome-extensions disable dash-to-dock@micxgx.gmail.com || true; fi
-if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup || true; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
-
 # Setup evolution for karel@pc07
 kz-gnome --delete=org.gnome.Evolution
 
