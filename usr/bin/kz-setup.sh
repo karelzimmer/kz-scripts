@@ -53,11 +53,9 @@ if $DESKTOP_ENVIRONMENT && $DEB; then xdg-mime default gdebi.desktop application
 # There is no command available to reset gdebi.
 
 # Setup gnome for *
-# Not every GNOME desktop environment has this key ==> ' || true'.
 if $GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if $GNOME; then gsettings set org.gnome.desktop.interface locate-pointer true || true; fi
 if $GNOME; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
 if $GNOME; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
 if $GNOME; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
@@ -76,20 +74,11 @@ if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power idle-dim f
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
 if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
-if $GNOME; then gsettings set org.gnome.shell disable-user-extensions false; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews' || true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-network false || true; fi
-if $GNOME; then gsettings set org.gnome.shell.extensions.ding show-home false || true; fi
-if $GNOME; then gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'; fi
 
 # Reset gnome for *
-# Not every GNOME desktop environment has this key ==> ' || true'.
 if $GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if $GNOME; then gsettings reset org.gnome.desktop.interface locate-pointer || true ; fi
 if $GNOME; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
 if $GNOME; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
 if $GNOME; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
@@ -108,13 +97,6 @@ if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power idle-dim
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
-if $GNOME; then gsettings reset org.gnome.shell disable-user-extensions; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.dash-to-dock show-mounts-network || true; fi
-if $GNOME; then gsettings reset org.gnome.shell.extensions.ding show-home || true; fi
-if $GNOME; then gsettings reset org.gnome.Terminal.Legacy.Settings theme-variant; fi
 
 # Setup google-chrome for *
 kz-gnome --addbef=google-chrome
