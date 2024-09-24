@@ -117,6 +117,12 @@ function prepare_processing() {
 
     sudo true
 
+    # Some Debian distributions do not have pkexec installed by default and the
+    # package may have a different name. Try installing it anyway.
+    if [[ -z $(type -t pkexec) ]]; then
+        sudo apt-get install --assume-yes pkexec || true
+    fi
+
     # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> symlink.
     if [[ ! -e /usr/bin/bash ]]; then
         sudo ln --symbolic /bin/bash /usr/bin/bash
