@@ -356,9 +356,11 @@ sudo apt-get remove --assume-yes sound-juicer
 
 # Install spice-vdagent on *
 if $DEB; then sudo apt-get install --assume-yes spice-vdagent; fi
+if $RPM; then sudo dnf install --assumeyes spice-vdagent; fi
 
 # Remove spice-vdagent from *
 if $DEB; then sudo apt-get remove --assume-yes spice-vdagent; fi
+if $RPM; then sudo dnf remove --assumeyes spice-vdagent; fi
 
 # Install ssh on pc01 pc06 pc07
 sudo apt-get install --assume-yes ssh
