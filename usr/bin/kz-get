@@ -117,16 +117,6 @@ function prepare_processing() {
 
     sudo true
 
-    if $DEB; then
-        sudo apt-get update
-    elif $RPM; then
-        sudo dnf check-update
-    else
-        TEXT=$(gettext 'Unknown package manager.')
-        errormsg "$TEXT"
-        exit $ERROR
-    fi
-
     # Ubuntu 18.04: No such file or directory: '/usr/bin/bash' ==> symlink.
     if [[ ! -e /usr/bin/bash ]]; then
         sudo ln --symbolic /bin/bash /usr/bin/bash
@@ -141,6 +131,16 @@ function prepare_processing() {
         printf '\b%s' '=>'
         sleep 1
     done &
+
+    if $DEB; then
+        sudo apt-get update |& $LOGCMD
+    elif $RPM; then
+        sudo dnf check-update |& $LOGCMD
+    else
+        TEXT=$(gettext 'Unknown package manager.')
+        errormsg "$TEXT"
+        exit $ERROR
+    fi
 }
 
 
