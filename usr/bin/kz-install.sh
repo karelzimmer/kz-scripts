@@ -314,12 +314,12 @@ sudo apt-get install --assume-yes lftp
 sudo apt-get remove --assume-yes lftp
 
 # Install libreoffice on *
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes libreoffice; fi
+if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes aspell-en libreoffice; fi
 
 # Remove libreoffice from *
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-help-nl libreoffice-l10n-nl; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes libreoffice; fi
+if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes aspell-en libreoffice; fi
 
 # Install locate on pc06 pc07
 sudo apt-get install --assume-yes locate
@@ -422,16 +422,15 @@ if $DESKTOP_ENVIRONMENT && $DEB; then sudo DEBIAN_FRONTEND=noninteractive apt-ge
 # The apt-key added during installation is no longer needed.
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-key del 0C1289C0 DEB49217; fi
 # Web app: https://web.teamviewer.com
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf install --assumeyes epel-release; fi
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # Remove teamviewer from *
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes teamviewer; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-key del 0C1289C0 DEB49217; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf remove --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf remove --assumeyes epel-release; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # Install thunderbird on *
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes thunderbird-l10n-nl; fi
@@ -511,13 +510,12 @@ sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest
 
 # Install vlc on *
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get install --assume-yes vlc; fi
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf install --assumeyes vlc; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes vlc; fi
 
 # Remove vlc from *
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes vlc; fi
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf remove --assumeyes vlc; fi
-if $DESKTOP_ENVIRONMENT && $DEB; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
 sudo apt-get install --assume-yes apt-transport-https
