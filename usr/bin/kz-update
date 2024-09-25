@@ -79,7 +79,7 @@ def perform_apt_update():
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo apt-get update'
+    COMMAND = 'sudo apt-get update --allow-releaseinfo-change'
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get dist-upgrade --assume-yes'

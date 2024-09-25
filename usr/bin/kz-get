@@ -129,7 +129,10 @@ function prepare_processing() {
 
     # Refresh package metadata.
     if $DEB; then
-        sudo apt-get update |& $LOGCMD || true
+        # To "resolve" the message e.g. "N: Repository 
+        # 'http://deb.debian.org/debian bookworm InRelease'
+        # changed its ‘Version’ value from '12.5' to '12.7'".
+        sudo apt-get update --allow-releaseinfo-change |& $LOGCMD || true
     elif $RPM; then
         # Exit code 100 means there are updates available ==> ' || true'.
         sudo dnf check-update --refresh |& $LOGCMD || true
