@@ -127,11 +127,11 @@ function prepare_processing() {
         sleep 1
     done &
 
-    # Check the latest package metadata.
+    # Refresh package metadata.
     if $DEB; then
-        sudo apt-get update
+        sudo apt-get update |& $LOGCMD
     elif $RPM; then
-        sudo dnf check-update --refresh
+        sudo dnf check-update --refresh |& $LOGCMD
     fi
 }
 
