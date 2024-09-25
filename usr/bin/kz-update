@@ -126,7 +126,8 @@ def perform_rpm_update():
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo dnf check-update --refresh'
+    # Exit code 100 means there are updates available ==> ' || true'.
+    COMMAND = 'sudo dnf check-update --refresh || true'
     perform_command(COMMAND)
 
     COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
