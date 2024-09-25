@@ -126,7 +126,7 @@ def perform_rpm_update():
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = 'sudo dnf update --assumeyes'
+    COMMAND = 'sudo dnf check-update --assumeyes --refresh'
     perform_command(COMMAND)
 
     COMMAND = 'sudo dnf upgrade --assumeyes --refresh'

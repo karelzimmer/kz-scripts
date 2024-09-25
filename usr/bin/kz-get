@@ -126,6 +126,13 @@ function prepare_processing() {
         printf '\b%s' '=>'
         sleep 1
     done &
+
+    # Check the latest package metadata.
+    if $DEB; then
+        sudo apt-get update
+    elif $RPM; then
+        sudo dnf check-update --refresh
+    fi
 }
 
 
