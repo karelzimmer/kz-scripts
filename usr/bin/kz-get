@@ -113,7 +113,7 @@ function process_input() {
 
 # This function prepares further processing.
 function prepare_processing() {
-    KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX")
+    KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
     sudo true
 
