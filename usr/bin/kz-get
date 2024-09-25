@@ -131,7 +131,10 @@ function prepare_processing() {
     if $DEB; then
         sudo apt-get update |& $LOGCMD
     elif $RPM; then
+        # Exit code 100 means there are updates available.
+        ERREXIT=false
         sudo dnf check-update --refresh |& $LOGCMD
+        ERREXIT=true
     fi
 }
 
