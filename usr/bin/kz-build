@@ -221,8 +221,10 @@ function build_deb_package() {
             "$BUILD_ID" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"
 
     # Create Debian package in kz-uploads.
+    # Debian 11: .deb uses unknown compression ==> -Z=xz.
     fakeroot    dpkg-deb                                            \
                 --build                                             \
+                -Z=xz                                               \
                 "$DEB_REPO_DISTDIR"                                 \
                 "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
 }
