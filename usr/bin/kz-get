@@ -129,9 +129,9 @@ function prepare_processing() {
 
     # Refresh package metadata.
     if $DEB; then
-        # To "resolve" the message e.g. "N: Repository
-        # 'http://deb.debian.org/debian bookworm InRelease'
-        # changed its ‘Version’ value from '12.5' to '12.7'".
+        # To "resolve" the message e.g. N: Repository
+        # 'http://deb.debian.org/debian bookworm InRelease' changed its
+        # ‘Version’ value from '12.5' to '12.7' ==> --allow-releaseinfo-change.
         sudo apt-get update --allow-releaseinfo-change |& $LOGCMD || true
     elif $RPM; then
         # Exit code 100 means there are updates available ==> ' || true'.
