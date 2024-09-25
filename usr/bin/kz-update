@@ -170,8 +170,8 @@ def check_reboot():
     """
     This function checks if reboot is needed.
     """
-    TEXT = _('*** The computer needs to be restarted to complete the \
-    installation of updates ***')
+    TEXT = _("*** The computer needs to be restarted to complete the \
+installation of updates ***")
 
     if kz_common.DEB:
         try:
