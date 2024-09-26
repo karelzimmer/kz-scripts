@@ -42,7 +42,7 @@ $PROGRAM_DESC.
 $(gettext 'Options:')
 $OPTIONS_HELP"
 
-declare KZ_GET_LOCAL_FILE=''
+declare KZ_DEB_LOCAL_FILE=''
 
 
 ###############################################################################
@@ -113,30 +113,19 @@ function process_input() {
 
 # This function prepares further processing.
 function prepare_processing() {
-    KZ_GET_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
 
     sudo true
 
-    # Progress indicator with growing [=>, [==>, etc. as long as the kz get
+    # Progress indicator with growing [=>, [==>, etc. as long as the kz deb
     # local file exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the kz get local file and
+    # If something fails, kz_common.sh will remove the kz deb local file and
     # other files upon exit.
     printf '[ '
-    while test -e "$KZ_GET_LOCAL_FILE"; do
+    while test -e "$KZ_DEB_LOCAL_FILE"; do
         printf '\b%s' '=>'
         sleep 1
     done &
-
-    # Refresh package metadata.
-    if $DEB; then
-        # To "resolve" the message e.g. N: Repository
-        # 'http://deb.debian.org/debian bookworm InRelease' changed its
-        # ‘Version’ value from '12.5' to '12.7' ==> --allow-releaseinfo-change.
-        sudo apt-get update --allow-releaseinfo-change |& $LOGCMD
-    elif $RPM; then
-        # Exit code 100 means there are updates available ==> ' || true'.
-        sudo dnf check-update --refresh |& $LOGCMD || true
-    fi
 }
 
 
@@ -146,7 +135,7 @@ function download_apt_package() {
             KZ_DEB_SITE_FILE+='kz_4.2.1-1_all.deb'
 
     logmsg  'Download Debian package kz...'
-    wget    --output-document="$KZ_GET_LOCAL_FILE"  \
+    wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
 }
 
@@ -163,7 +152,7 @@ function install_apt_package() {
             install                         \
             --reinstall                     \
             --assume-yes                    \
-            "$KZ_GET_LOCAL_FILE"            |& $LOGCMD
+            "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
 }
 
 
@@ -208,7 +197,7 @@ $(gettext "Type 'exit' to close this window.")"
         --verbose               \
         getkz                   \
         getkz.{1..99}           \
-        "$KZ_GET_LOCAL_FILE"    \
+        "$KZ_DEB_LOCAL_FILE"    \
         "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
 
     exit $OK

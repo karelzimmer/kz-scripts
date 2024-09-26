@@ -434,7 +434,7 @@ bash getkz"
                     --verbose               \
                     getkz                   \
                     getkz.{1..99}           \
-                    "$KZ_GET_LOCAL_FILE"    \
+                    "$KZ_DEB_LOCAL_FILE"    \
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi
 
