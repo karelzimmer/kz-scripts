@@ -363,7 +363,13 @@ function term() {
             RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            RC_DESC='apt/dpkg exited with error'
+            if $DEB; then
+                RC_DESC='apt/dpkg exited with error'
+            elif $RPM; then
+                RC_DESC='there are updates available'
+            else
+                RC_DESC="previous errors/it didn't work"
+            fi
             ;;
         126 )
             RC_DESC='command cannot execute'
@@ -396,6 +402,10 @@ function term() {
         14[4-9] | 1[5-8][0-9] | 19[0-2])    # 144 (128 + 16)--192 (128 + 64)
             RC_DESC_SIGNALNO=$(( RC - 128 ))
             RC_DESC="typ 'trap -l' and look for $RC_DESC_SIGNALNO"
+            ;;
+        200 )
+            # Red Hat or Red Hat-based system.
+            RC_DESC='There was a problem with acquiring or releasing of locks.'
             ;;
         255 )
             RC_DESC='exit status out of range'
