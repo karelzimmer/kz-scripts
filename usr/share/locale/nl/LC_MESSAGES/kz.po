@@ -490,7 +490,7 @@ msgstr ""
 "< is de oude   instelling (A),\n"
 "> is de nieuwe instelling (B):"
 
-msgid "When CHANGEs execute: gsettings set CHANGE"
+msgid "When CHANGEs, execute: gsettings set CHANGE"
 msgstr "Bij WIJZIGINGen voer uit: gsettings set WIJZIGING"
 
 msgid "Install apps"
