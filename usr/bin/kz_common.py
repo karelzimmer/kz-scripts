@@ -33,8 +33,6 @@ _ = gettext.gettext
 MODULE_NAME = 'kz_common.py'
 MODULE_DESC = _('Common module for Python scripts')
 
-PROGRAM_PATH = '/usr/bin'
-
 USAGE = None
 OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 

@@ -109,7 +109,7 @@ function process_option_list() {
 
 $(gettext 'NUM  COMMAND')\n"
     TEXT+=$(
-        find    "$PROGRAM_PATH/$PROGRAM_NAME"-*     \
+        find    "/usr/bin/$PROGRAM_NAME"-*     \
                 -maxdepth 1                         \
                 -type f                             \
                 -executable                         \
@@ -134,7 +134,7 @@ $(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
 function process_input() {
     local COMMAND=$1
 
-    if [[ ! -f $PROGRAM_PATH/$PROGRAM_NAME-$COMMAND ]]; then
+    if [[ ! -f /usr/bin/$PROGRAM_NAME-$COMMAND ]]; then
         TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")
 $USAGE"
         infomsg "$TEXT"

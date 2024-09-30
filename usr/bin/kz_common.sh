@@ -27,8 +27,6 @@ declare     MODULE_DESC
             # shellcheck disable=SC2034
             MODULE_DESC=$(gettext 'Common module for shell scripts')
 
-declare     PROGRAM_PATH='/usr/bin'
-
 declare     USAGE
 # shellcheck disable=SC2034
 declare     OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] \
@@ -128,7 +126,7 @@ declare     TITLE=''
 # the script as user root if not.
 function become_root() {
     # pkexec needs fully qualified path to the program to be executed.
-    local       PKEXEC_PROGRAM=$PROGRAM_PATH/$PROGRAM_NAME
+    local       PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
 
     become_root_check || exit $OK
 
