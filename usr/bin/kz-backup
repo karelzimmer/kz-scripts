@@ -437,7 +437,6 @@ $(
             -print          |
     cut     --delimiter='/' \
             --fields=4      |
-    sed     's|^|/|'        |
     sort
     )
 EOF
