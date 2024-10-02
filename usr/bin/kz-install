@@ -65,6 +65,12 @@ declare     FILE_ARGUMENT=''
 declare     FROM='from'
 declare     INPUT_FILE=/usr/bin/$PROGRAM_NAME.sh
 declare     INSTALL='Install'
+declare     INSTALL_FILE_HEADER
+            INSTALL_FILE_HEADER="$(gettext "# For the format of the records \
+in this file, see the kz install man page.")
+$(gettext "# To manually running a command, first run the following: source \
+kz_common.sh")
+"
 declare     NO_COMMANDS_FOUND=true
 declare     ON='on'
 declare     OPTION_APPS=false
@@ -275,6 +281,8 @@ function process_input_file_by_app() {
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
 
+    printf '%s\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
+
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
             '#'*$INSTALL*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON* )
@@ -310,6 +318,8 @@ function process_input_file_by_app() {
 function process_input_file_by_host() {
     local HOST_MATCH=false
     local INPUT_RECORD=''
+
+    printf '%s\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in

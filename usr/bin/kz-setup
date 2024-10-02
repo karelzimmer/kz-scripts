@@ -71,6 +71,12 @@ declare     OPTION_FILE=false
 declare     OPTION_RESET=false
 declare     RESET='Reset'
 declare     SETUP='Setup'
+declare     SETUP_FILE_HEADER
+            SETUP_FILE_HEADER="$(gettext "# For the format of the records \
+in this file, see the kz setup man page.")
+$(gettext "# To manually running a command, first run the following: source \
+kz_common.sh")
+"
 
 
 ###############################################################################
@@ -266,6 +272,8 @@ function process_input_file_by_app() {
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
 
+    printf '%s\n' "$SETUP_FILE_HEADER" >> "$COMMAND_FILE"
+
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
             '#'*$SETUP*[[:space:]]"$APP_ARGUMENT"[[:space:]]*for* )
@@ -301,6 +309,8 @@ function process_input_file_by_app() {
 function process_input_file_by_user() {
     local INPUT_RECORD=''
     local USER_MATCH=false
+
+    printf '%s\n' "$SETUP_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
