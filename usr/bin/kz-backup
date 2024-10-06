@@ -314,7 +314,7 @@ function backup_setting_users() {
                 )
             )
 
-    logmsg 'Adding additional users instructions...'
+    logmsg 'Save instructions for adding additional users...'
 
     if $KZ_DESKTOP_ENVIRONMENT; then
         KZ_TEXT="$(gettext 'Additional _user_s can be added manually:')
@@ -367,7 +367,7 @@ function backup_setting_avatar() {
         logmsg 'Copy the user avatar...'
         cp --preserve --verbose "$L_INPUT_FILE" "$L_OUTPUT_FILE_1" |& $LOGCMD
     fi
-    logmsg 'Save restore the avatar instructions...'
+    logmsg 'Save instructions for restoring the avatar...'
     KZ_TEXT="$(gettext "To restore the users avatar:
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
@@ -406,7 +406,7 @@ function backup_setting_desktop() {
             "$L_OUTPUT_FILE_1"  |& $LOGCMD || true
     fi
 
-    logmsg 'Save set the desktop background instructions...'
+    logmsg 'Save instructions for setting the desktop background...'
 
     KZ_TEXT="$(gettext "To set the desktop background:
 1. Press the Super key[1], type 'file' and click on Files.
