@@ -276,7 +276,7 @@ def process_option_usage(KZ_PROGRAM_NAME, KZ_DISPLAY_NAME):
     """
     KZ_TEXT = (f"{_('KZ_USAGE:')} {KZ_USAGE}\n\n"
                f'''{_("Type '{} --help' for more information.").
-                 format(KZ_DISPLAY_NAME)}''')
+                    format(KZ_DISPLAY_NAME)}''')
     infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
 
 
