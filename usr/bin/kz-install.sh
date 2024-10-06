@@ -399,9 +399,10 @@ if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
 # The apt-key added during installation is no longer needed.
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-key del 0C1289C0 DEB49217; fi
-# Web app: https://web.teamviewer.com
+# EPEL: Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+# Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get remove --assume-yes teamviewer; fi
@@ -488,6 +489,7 @@ sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest
 
 # Install vlc on *
 if $DESKTOP_ENVIRONMENT && $DEB; then sudo apt-get install --assume-yes vlc; fi
+# EPEL: Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes vlc; fi
 
