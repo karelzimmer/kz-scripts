@@ -1103,7 +1103,7 @@ msgid "Collaborate with others from a web browser"
 msgstr "Werk samen met anderen vanuit een webbrowser"
 
 msgid "Send and receive messages, photos and videos via a web browser"
-msgstr ""
+msgstr "Berichten, foto's en video's verzenden en ontvangen via een webbrowser"
 
 msgid "Webmin"
 msgstr "Webmin"
