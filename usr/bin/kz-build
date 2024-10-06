@@ -20,38 +20,38 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-build'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Build website including kz packages')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare KZ_PROGRAM_NAME='kz-build'
+declare KZ_PROGRAM_DESC
+        KZ_PROGRAM_DESC=$(gettext 'Build website including kz packages')
+declare KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare KZ_USAGE
+        KZ_USAGE=$(eval_gettext "Usage: \$KZ_DISPLAY_NAME \$KZ_OPTIONS_USAGE")
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare KZ_HELP
+        KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...]")
 
-$PROGRAM_DESC.
+$KZ_PROGRAM_DESC.
 
 $(gettext 'Options:')
-$OPTIONS_HELP"
+$KZ_OPTIONS_HELP"
 
-declare DOCS_REPO=$HOME/kz-docs
-declare SCRIPTS_REPO=$HOME/kz-scripts
+declare KZ_DOCS_REPO=$HOME/kz-docs
+declare KZ_SCRIPTS_REPO=$HOME/kz-scripts
 
-declare UPLOADS_REPO=$HOME/kz-uploads
-declare UPLOADS_REPO_SRCDIR=$UPLOADS_REPO/src
-declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
+declare KZ_UPLOADS_REPO=$HOME/kz-uploads
+declare KZ_UPLOADS_REPO_SRCDIR=$KZ_UPLOADS_REPO/src
+declare KZ_UPLOADS_REPO_DISTDIR=$KZ_UPLOADS_REPO/dist
 
-declare DEB_REPO=$HOME/kz-deb
-declare DEB_REPO_SRCDIR=$DEB_REPO/src
-declare DEB_REPO_DISTDIR=$DEB_REPO/dist
-declare DEB_NAME=kz_4.2.1-1_all.deb
+declare KZ_DEB_REPO=$HOME/kz-deb
+declare KZ_DEB_REPO_SRCDIR=$KZ_DEB_REPO/src
+declare KZ_DEB_REPO_DISTDIR=$KZ_DEB_REPO/dist
+declare KZ_DEB_NAME=kz_4.2.1-1_all.deb
 
-declare RPM_REPO=$HOME/kz-rpm
-declare RPM_REPO_SRCDIR=$RPM_REPO/src
-declare RPM_REPO_DISTDIR=$RPM_REPO/dist
-declare RPM_NAME=kz-4.2.1-1.noarch.rpm
+declare KZ_RPM_REPO=$HOME/kz-rpm
+declare KZ_RPM_REPO_SRCDIR=$KZ_RPM_REPO/src
+declare KZ_RPM_REPO_DISTDIR=$KZ_RPM_REPO/dist
+declare KZ_RPM_NAME=kz-4.2.1-1.noarch.rpm
 
 
 ###############################################################################
@@ -60,20 +60,20 @@ declare RPM_NAME=kz-4.2.1-1.noarch.rpm
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local L_PARSED=''
 
-    PARSED=$(
+    L_PARSED=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$KZ_OPTIONS_SHORT" \
+                --longoptions   "$KZ_OPTIONS_LONG"  \
+                --name          "$KZ_DISPLAY_NAME"  \
                 --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERROR
+        )       || KZ_RC=$?
+    if [[ $KZ_RC -ne $KZ_OK ]]; then
+        infomsg "$KZ_USAGE"
+        exit    $KZ_ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$L_PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -95,29 +95,30 @@ function process_x_options() {
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT="$KZ_DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
-        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+    if ! $KZ_DESKTOP_ENVIRONMENT; then
+        KZ_TEXT="$KZ_DISPLAY_NAME: $(gettext "no desktop environment \
+available")
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
 
 # This function processes the script options and arguments.
 function process_input() {
-    if ! $DEB; then
-        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
-        infomsg "$TEXT"
-        exit $ERROR
+    if ! $KZ_DEB; then
+        KZ_TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
-    become_root_check || exit $OK
+    become_root_check || exit $KZ_OK
     generate_mo
     build_website
     build_deb_package
@@ -129,49 +130,51 @@ function process_input() {
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
 function generate_mo() {
-    local LC_MESSAGES_DIR=''
+    local L_LC_MESSAGES_DIR=''
 
-    LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    L_LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
 
-    TEXT=$(gettext 'Generate .mo file')...
-    infomsg "$TEXT"
+    KZ_TEXT=$(gettext 'Generate .mo file')...
+    infomsg "$KZ_TEXT"
 
-    msgfmt --output-file="$LC_MESSAGES_DIR/kz.mo" "$LC_MESSAGES_DIR/kz.po"
+    msgfmt --output-file="$L_LC_MESSAGES_DIR/kz.mo" "$L_LC_MESSAGES_DIR/kz.po"
 }
 
 
 # This function builds the website.
 function build_website() {
-    local DIR=''
-    local FILE=''
-    local FILENAME=''
+    local L_DIR=''
+    local L_FILE=''
+    local L_FILENAME=''
+    local L_UPLOADS_DOCS=''
 
-    TEXT=$(gettext 'Build website')...
-    infomsg "$TEXT"
+    KZ_TEXT=$(gettext 'Build website')...
+    infomsg "$KZ_TEXT"
 
     # Populate kz-uploads/dist/ with modified files in kz-uploads/src/.
-    rsync   --archive               \
-            --verbose               \
-            --checksum              \
-            "$UPLOADS_REPO_SRCDIR"/ \
-            "$UPLOADS_REPO_DISTDIR" |& $LOGCMD
+    rsync   --archive                   \
+            --verbose                   \
+            --checksum                  \
+            "$KZ_UPLOADS_REPO_SRCDIR"/  \
+            "$KZ_UPLOADS_REPO_DISTDIR"  |& $LOGCMD
 
     # Make sure all necessary directories are available.
-    for DIR in "${UPLOADS_TARGETS[@]}"; do
-        mkdir --parents "$DIR" |& $LOGCMD
+    for L_DIR in "${UPLOADS_TARGETS[@]}"; do
+        mkdir --parents "$L_DIR" |& $LOGCMD
     done
 
     # Populate kz-uploads/dist/ with a PDF of modified files in repo kz-docs.
-    cd "$DOCS_REPO"
-    for FILE in *.odt *.txt; do
-        FILENAME=${FILE%.*}
+    cd "$KZ_DOCS_REPO"
+    for L_FILE in *.odt *.txt; do
+        L_FILENAME=${L_FILE%.*}
 
-        if [[ $FILE -nt $UPLOADS_REPO_DISTDIR/assets/documents/$FILENAME.pdf ]]
+        L_UPLOADS_DOCS=$KZ_UPLOADS_REPO_DISTDIR/assets/documents
+        if [[ $L_FILE -nt $L_UPLOADS_DOCS/$L_FILENAME.pdf ]]
         then
-            lowriter    --headless                                          \
-                        --convert-to pdf                                    \
-                        --outdir "$UPLOADS_REPO_DISTDIR/assets/documents"   \
-                        "$FILE"
+            lowriter    --headless                  \
+                        --convert-to pdf            \
+                        --outdir "$L_UPLOADS_DOCS"  \
+                        "$L_FILE"
         fi
     done
     cd "$HOME"
@@ -180,21 +183,27 @@ function build_website() {
 
 # This function builds Debian package kz.
 function build_deb_package() {
-    local BUILD_ID=''
+    local L_BUILD_ID=''
 
-    TEXT=$(gettext 'Build Debian package')...
-    infomsg "$TEXT"
+    KZ_TEXT=$(gettext 'Build Debian package')...
+    infomsg "$KZ_TEXT"
 
     # Fill kz-deb/dist/ with kz-deb/src/.
-    rsync   --archive           \
-            --delete            \
-            --verbose           \
-            "$DEB_REPO_SRCDIR"/ \
-            "$DEB_REPO_DISTDIR" |& $LOGCMD
+    rsync   --archive               \
+            --delete                \
+            --verbose               \
+            "$KZ_DEB_REPO_SRCDIR"/  \
+            "$KZ_DEB_REPO_DISTDIR"  |& $LOGCMD
 
     # Make sure the permissions are correct for the sync with repo kz-scripts.
-    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
-    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
+    chmod   --verbose                       \
+            'u=rwx,g=rx,o=rx'               \
+            --                              \
+            "$KZ_SCRIPTS_REPO/usr/bin"/*    |& $LOGCMD
+    chmod   --verbose                       \
+            'a-x'                           \
+            --                              \
+            "$KZ_SCRIPTS_REPO/usr/bin"/*.*  |& $LOGCMD
 
     # Fill kz-deb/dist/ with repo kz-scripts.
     rsync   --archive               \
@@ -205,92 +214,94 @@ function build_deb_package() {
             --exclude='.git*'       \
             --exclude='kz.po'       \
             --exclude='kz.pot'      \
-            "$SCRIPTS_REPO"/        \
-            "$DEB_REPO_DISTDIR"     |& $LOGCMD
+            "$KZ_SCRIPTS_REPO"/     \
+            "$KZ_DEB_REPO_DISTDIR"  |& $LOGCMD
 
     # Compress man pages.
-    gzip    --best                                      \
-            --force                                     \
-            "$DEB_REPO_DISTDIR/usr/share/man/man1"/*    \
-            "$DEB_REPO_DISTDIR/usr/share/man/nl/man1"/* |& $LOGCMD
+    gzip    --best                                          \
+            --force                                         \
+            "$KZ_DEB_REPO_DISTDIR/usr/share/man/man1"/*     \
+            "$KZ_DEB_REPO_DISTDIR/usr/share/man/nl/man1"/*  |& $LOGCMD
 
     # Capture build id Debian package.
-    BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
-    mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
-    printf  '%s'        \
-            "$BUILD_ID" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"
+    L_BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
+    mkdir --parents "$KZ_DEB_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
+    printf  '%s'            \
+            "$L_BUILD_ID"   \
+            > "$KZ_DEB_REPO_DISTDIR/usr/share/doc/kz/$KZ_PROGRAM_NAME.id"
 
     # Create Debian package in kz-uploads.
     # Debian 11: .deb uses unknown compression ==> -Z=xz.
-    fakeroot    dpkg-deb                                            \
-                --build                                             \
-                -Z=xz                                               \
-                "$DEB_REPO_DISTDIR"                                 \
-                "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
+    fakeroot    dpkg-deb                                                \
+                --build                                                 \
+                -Z=xz                                                   \
+                "$KZ_DEB_REPO_DISTDIR"                                  \
+                "$KZ_UPLOADS_REPO_DISTDIR/assets/packages/$KZ_DEB_NAME" \
+                |& $LOGCMD
 }
 
 
-# This function builds RPM package kz.
+# This function builds KZ_RPM package kz.
 function build_rpm_package() {
-    local BUILD_ID=''
+    local L_BUILD_ID=''
 
-    TEXT=$(gettext 'Build RPM package')...
-    infomsg "$TEXT"
+    KZ_TEXT=$(gettext 'Build RPM package')...
+    infomsg "$KZ_TEXT"
 
     # Fill kz-rpm/dist/ with kz-rpm/src/.
     rsync   --archive           \
             --delete            \
             --verbose           \
-            "$RPM_REPO_SRCDIR"/ \
-            "$RPM_REPO_DISTDIR" |& $LOGCMD
+            "$KZ_RPM_REPO_SRCDIR"/ \
+            "$KZ_RPM_REPO_DISTDIR" |& $LOGCMD
 
     # Copy build id Debian package.
-    cp  --preserve                                              \
-        --verbose                                               \
-        "$DEB_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"   \
-        "$RPM_REPO_DISTDIR/kz-deb-files/usr/share/doc/kz"       |& $LOGCMD
+    cp  --preserve                                                  \
+        --verbose                                                   \
+        "$KZ_DEB_REPO_DISTDIR/usr/share/doc/kz/$KZ_PROGRAM_NAME.id" \
+        "$KZ_RPM_REPO_DISTDIR/kz-deb-files/usr/share/doc/kz"        |& $LOGCMD
 
     # Fill kz-rpm/dist/ with kz-deb/dist, excluding some Debian-specific
     # directories.
     rsync   --archive                           \
             --verbose                           \
-            --exclude='DEBIAN'                  \
+            --exclude='KZ_DEBIAN'               \
             --exclude='usr/share/doc'           \
-            "$DEB_REPO_DISTDIR"/                \
-            "$RPM_REPO_DISTDIR/kz-deb-files"    |& $LOGCMD
+            "$KZ_DEB_REPO_DISTDIR"/             \
+            "$KZ_RPM_REPO_DISTDIR/kz-deb-files" |& $LOGCMD
 
-    # Create RPM package in kz-rpm/dist/.
-    rpmbuild    -ba                                             \
-                --build-in-place                                \
-                --define "_topdir $RPM_REPO_DISTDIR/rpmbuild"   \
-                "$RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"      |& $LOGCMD
+    # Create KZ_RPM package in kz-rpm/dist/.
+    rpmbuild    -ba                                                 \
+                --build-in-place                                    \
+                --define "_topdir $KZ_RPM_REPO_DISTDIR/rpmbuild"    \
+                "$KZ_RPM_REPO_DISTDIR/rpmbuild/SPECS/kz.spec"       |& $LOGCMD
 
-    # Copy RPM package to kz-uploads.
-    cp  --preserve                                          \
-        --verbose                                           \
-        "$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch/$RPM_NAME"  \
-        "$UPLOADS_REPO_DISTDIR/assets/packages"             |& $LOGCMD
+    # Copy KZ_RPM package to kz-uploads.
+    cp  --preserve                                                  \
+        --verbose                                                   \
+        "$KZ_RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch/$KZ_RPM_NAME"    \
+        "$KZ_UPLOADS_REPO_DISTDIR/assets/packages"                  |& $LOGCMD
 }
 
 
 # This function installs Debian-package kz.
 function install_deb_package() {
-    TEXT=$(gettext 'Install package')...
-    infomsg "$TEXT"
+    KZ_TEXT=$(gettext 'Install package')...
+    infomsg "$KZ_TEXT"
     check_apt_package_manager
-    sudo    DEBIAN_FRONTEND=noninteractive                      \
-            apt-get                                             \
-            reinstall                                           \
-            --assume-yes                                        \
-            "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
+    sudo    DEBIAN_FRONTEND=noninteractive                          \
+            apt-get                                                 \
+            reinstall                                               \
+            --assume-yes                                            \
+            "$KZ_UPLOADS_REPO_DISTDIR/assets/packages/$KZ_DEB_NAME" |& $LOGCMD
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
-    infomsg "$TEXT"
-    exit $OK
+    KZ_TEXT="${KZ_GREEN}$KZ_DISPLAY_NAME $(gettext 'finished')$KZ_NORMAL"
+    infomsg "$KZ_TEXT"
+    exit $KZ_OK
 }
 
 

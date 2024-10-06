@@ -19,35 +19,36 @@ source kz_common.sh
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Run command')
+declare KZ_PROGRAM_NAME='kz'
+declare KZ_PROGRAM_DESC
+        KZ_PROGRAM_DESC=$(gettext 'Run command')
 
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE
+declare KZ_USAGE
+        KZ_USAGE=$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [-l|--list] \
+\$KZ_OPTIONS_USAGE
           COMMAND [ARGUMENT...]")
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
+declare KZ_X_OPTIONS_HELP
+        KZ_X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND \
+declare KZ_HELP
+        KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...] COMMAND \
 [ARGUMENT...]")
 
-$PROGRAM_DESC.
+$KZ_PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP
+$KZ_X_OPTIONS_HELP
+$KZ_OPTIONS_HELP
 
 $(gettext 'Arguments:')
 $(gettext '  COMMAND        execute COMMAND')
 $(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
 
-declare X_OPTIONS_SHORT='l'
-declare X_OPTIONS_LONG=',list'
+declare KZ_X_OPTIONS_SHORT='l'
+declare KZ_X_OPTIONS_LONG=',list'
 
 
 ###############################################################################
@@ -56,26 +57,26 @@ declare X_OPTIONS_LONG=',list'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local L_PARSED=''
 
     if [[ -z $* ]]; then
-        infomsg "$USAGE"
-        exit $ERROR
+        infomsg "$KZ_USAGE"
+        exit    $KZ_ERROR
     fi
 
     if [[ $1 == -* ]]; then
-        PARSED=$(
-            getopt  --alternative                                       \
-                    --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                    --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                    --name          "$DISPLAY_NAME"                     \
-                    --              "$@"
-            ) || RC=$?
-        if [[ $RC -ne $OK ]]; then
-            infomsg "$USAGE"
-            exit $ERROR
+        L_PARSED=$(
+            getopt  --alternative                                           \
+                    --options="${KZ_OPTIONS_SHORT}$KZ_X_OPTIONS_SHORT"      \
+                    --longoptions="${KZ_OPTIONS_LONG}$KZ_X_OPTIONS_LONG"    \
+                    --name="$KZ_DISPLAY_NAME"                               \
+                    -- "$@"
+            )       || KZ_RC=$?
+        if [[ $KZ_RC -ne $KZ_OK ]]; then
+            infomsg "$KZ_USAGE"
+            exit    $KZ_ERROR
         fi
-        eval set -- "$PARSED"
+        eval set -- "$L_PARSED"
 
         process_options   "$@"
         process_x_options "$@"
@@ -89,7 +90,7 @@ function process_x_options() {
         case $1 in
             -l | --list )
                 process_option_list
-                exit $OK
+                exit $KZ_OK
                 ;;
             -- )
                 shift
@@ -105,54 +106,56 @@ function process_x_options() {
 
 # This function displays all available commands.
 function process_option_list() {
-    TEXT="$(gettext 'The following COMMANDs are available:')
+    KZ_TEXT="$(gettext 'The following COMMANDs are available:')
 
 $(gettext 'NUM  COMMAND')\n"
-    TEXT+=$(
-        find    "/usr/bin/$PROGRAM_NAME"-*     \
-                -maxdepth 1                         \
-                -type f                             \
-                -executable                         \
-                -readable                           \
-                -not -name '*~'                     \
-                -not -name $PROGRAM_NAME            \
-                -printf '%f\n'                      |
-        sort                                        |
-        sed     --expression="s/$PROGRAM_NAME-//"   |
-        nl      --number-width=3                    \
-                --number-format=rn                  \
-                --number-separator='  '             \
+    KZ_TEXT+=$(
+        find    "/usr/bin/$KZ_PROGRAM_NAME"-*           \
+                -maxdepth 1                             \
+                -type f                                 \
+                -executable                             \
+                -readable                               \
+                -not -name '*~'                         \
+                -not -name $KZ_PROGRAM_NAME             \
+                -printf '%f\n'                          |
+        sort                                            |
+        sed     --expression="s/$KZ_PROGRAM_NAME-//"    |
+        nl      --number-width=3                        \
+                --number-format=rn                      \
+                --number-separator='  '                 \
                 --body-numbering=a
         )
-    TEXT+="\n
-$(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
-    infomsg "$TEXT"
+    KZ_TEXT+="\n
+$(eval_gettext "To execute a COMMAND: \$KZ_DISPLAY_NAME COMMAND \
+[ARGUMENT...]")"
+    infomsg "$KZ_TEXT"
 }
 
 
 # This function processes the script options and arguments.
 function process_input() {
-    local COMMAND=$1
+    local L_COMMAND=$1
 
-    if [[ ! -f /usr/bin/$PROGRAM_NAME-$COMMAND ]]; then
-        TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+    if [[ ! -f /usr/bin/$KZ_PROGRAM_NAME-$L_COMMAND ]]; then
+        KZ_TEXT="$KZ_DISPLAY_NAME: $L_COMMAND: $(gettext "command does not \
+exist")
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 
     shift
 
-    TEXT="Restart (exec $PROGRAM_NAME-$COMMAND $*...)"
-    logmsg "$TEXT"
+    KZ_TEXT="Restart (exec $KZ_PROGRAM_NAME-$L_COMMAND $*...)"
+    logmsg "$KZ_TEXT"
 
-    exec "$PROGRAM_NAME-$COMMAND" "$@"
+    exec "$KZ_PROGRAM_NAME-$L_COMMAND" "$@"
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    exit $OK
+    exit $KZ_OK
 }
 
 
@@ -161,9 +164,9 @@ function term_script() {
 ###############################################################################
 
 function main() {
-    init_script "$@"
-    check_input "$@"
-    process_input "$@"
+    init_script     "$@"
+    check_input     "$@"
+    process_input   "$@"
     term_script
 }
 

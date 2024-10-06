@@ -18,35 +18,36 @@ source kz_common.sh
 # Variables
 ###############################################################################
 
-declare     PROGRAM_NAME='kz-menu'
-declare     PROGRAM_DESC
-            PROGRAM_DESC=$(gettext 'Installation menu')
-declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare     KZ_PROGRAM_NAME='kz-menu'
+declare     KZ_PROGRAM_DESC
+            KZ_PROGRAM_DESC=$(gettext 'Installation menu')
+declare     KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
 
-declare     USAGE
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
-\$OPTIONS_USAGE")
+declare     KZ_USAGE
+            KZ_USAGE=$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [-g|--gui] \
+\$KZ_OPTIONS_USAGE")
 
-declare     X_OPTIONS_HELP
-            X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
-requires desktop environment")
+declare     KZ_X_OPTIONS_HELP
+            KZ_X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical \
+mode, requires desktop environment")
 
-declare     HELP
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare     KZ_HELP
+            KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...]")
 
-$PROGRAM_DESC.
+$KZ_PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
+$KZ_X_OPTIONS_HELP
+$KZ_OPTIONS_HELP"
 
-declare     X_OPTIONS_SHORT='g'
-declare     X_OPTIONS_LONG=',gui'
+declare     KZ_X_OPTIONS_SHORT='g'
+declare     KZ_X_OPTIONS_LONG=',gui'
 
-declare     MENU1_TITLE
-            MENU1_TITLE=$(gettext 'Installation menu')
-declare     MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
-declare -a  MENU1_ACTIONS=(
+declare     KZ_MENU1_TITLE
+            KZ_MENU1_TITLE=$(gettext 'Installation menu')
+declare     KZ_MENU1_HEAD="------------------ $KZ_MENU1_TITLE \
+------------------"
+declare -a  KZ_MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
@@ -54,7 +55,7 @@ declare -a  MENU1_ACTIONS=(
                 "$(gettext 'Command menu')"
                 "$(gettext 'Exit')"
             )
-declare -a  MENU1_DESCS=(
+declare -a  KZ_MENU1_DESCS=(
             [1]="$(gettext 'Checklist chapter 1')"
                 "$(gettext 'Checklist chapter 2')"
                 "$(gettext 'Checklist chapter 3')"
@@ -62,12 +63,13 @@ declare -a  MENU1_DESCS=(
                 "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
-declare     MENU1_LINES=${#MENU1_ACTIONS[@]}
+declare     KZ_MENU1_LINES=${#KZ_MENU1_ACTIONS[@]}
 
-declare     MENU2_TITLE
-            MENU2_TITLE=$(gettext 'Command menu')
-declare     MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
-declare -a  MENU2_ACTIONS=(
+declare     KZ_MENU2_TITLE
+            KZ_MENU2_TITLE=$(gettext 'Command menu')
+declare     KZ_MENU2_HEAD="-------------------- $KZ_MENU2_TITLE \
+-------------------"
+declare -a  KZ_MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
                 "$(gettext 'Install apps')"
@@ -75,7 +77,7 @@ declare -a  MENU2_ACTIONS=(
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Go to installation menu')"
             )
-declare -a  MENU2_DESCS=(
+declare -a  KZ_MENU2_DESCS=(
             [1]='kz wifi'
                 'kz backup'
                 'kz install'
@@ -83,10 +85,10 @@ declare -a  MENU2_DESCS=(
                 'kz setup'
                 "$(gettext 'Back')"
             )
-declare     MENU2_LINES=${#MENU2_DESCS[@]}
+declare     KZ_MENU2_LINES=${#KZ_MENU2_DESCS[@]}
 
-declare     EXECUTE_COMMAND=false
-declare -a  ROWS=()
+declare     KZ_EXECUTE_COMMAND=false
+declare -a  KZ_ROWS=()
 
 
 ###############################################################################
@@ -95,20 +97,20 @@ declare -a  ROWS=()
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local L_PARSED=''
 
-    PARSED=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+    L_PARSED=$(
+        getopt  --alternative                                               \
+                --options       "${KZ_OPTIONS_SHORT}$KZ_X_OPTIONS_SHORT"    \
+                --longoptions   "${KZ_OPTIONS_LONG}$KZ_X_OPTIONS_LONG"      \
+                --name          "$KZ_DISPLAY_NAME"                          \
                 --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERROR
+        )       || KZ_RC=$?
+    if [[ $KZ_RC -ne $KZ_OK ]]; then
+        infomsg "$KZ_USAGE"
+        exit    $KZ_ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$L_PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -120,14 +122,14 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
-                    TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERROR
+                if ! $KZ_DESKTOP_ENVIRONMENT; then
+                    KZ_TEXT=\
+"$KZ_DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+$KZ_USAGE"
+                    infomsg "$KZ_TEXT"
+                    exit $KZ_ERROR
                 fi
-                OPTION_GUI=true
+                KZ_OPTION_GUI=true
                 shift
                 ;;
             -- )
@@ -141,17 +143,17 @@ $USAGE"
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT="$KZ_DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
 
 # This function processes the script options and arguments.
 function process_input() {
-    if $OPTION_GUI; then
+    if $KZ_OPTION_GUI; then
         process_menu1_gui
     else
         process_menu1_tui
@@ -162,27 +164,27 @@ function process_input() {
 # This function shows and processes menu 1 in GUI mode.
 function process_menu1_gui() {
     while true; do
-        TITLE=$MENU1_TITLE
+        KZ_TITLE=$KZ_MENU1_TITLE
         REPLY=$(
-            zenity  --list                                              \
-                    --radiolist                                         \
-                    --width         520                                 \
-                    --height        420                                 \
-                    --title         "$TITLE"                            \
-                    --text          "$(gettext 'Select a choice:')"     \
-                    --ok-label      "$(gettext 'Continue')"             \
-                    --cancel-label  "$(gettext 'Exit')"                 \
-                    --column        "$(gettext 'CHOICE')"               \
-                    --column        "$(gettext 'NUM')"                  \
-                    --column        "$(gettext 'ACTION')"               \
-                    --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU1_ACTIONS[1]}" "${MENU1_DESCS[1]}"   \
-                    FALSE 2 "${MENU1_ACTIONS[2]}" "${MENU1_DESCS[2]}"   \
-                    FALSE 3 "${MENU1_ACTIONS[3]}" "${MENU1_DESCS[3]}"   \
-                    FALSE 4 "${MENU1_ACTIONS[4]}" "${MENU1_DESCS[4]}"   \
-                    FALSE 5 "${MENU1_ACTIONS[5]}" "${MENU1_DESCS[5]}"   \
+            zenity  --list                                                  \
+                    --radiolist                                             \
+                    --width         520                                     \
+                    --height        420                                     \
+                    --title         "$KZ_TITLE"                             \
+                    --text          "$(gettext 'Select a choice:')"         \
+                    --ok-label      "$(gettext 'Continue')"                 \
+                    --cancel-label  "$(gettext 'Exit')"                     \
+                    --column        "$(gettext 'CHOICE')"                   \
+                    --column        "$(gettext 'NUM')"                      \
+                    --column        "$(gettext 'ACTION')"                   \
+                    --column        "$(gettext 'DESCRIPTION')"              \
+                    TRUE  1 "${KZ_MENU1_ACTIONS[1]}" "${KZ_MENU1_DESCS[1]}" \
+                    FALSE 2 "${KZ_MENU1_ACTIONS[2]}" "${KZ_MENU1_DESCS[2]}" \
+                    FALSE 3 "${KZ_MENU1_ACTIONS[3]}" "${KZ_MENU1_DESCS[3]}" \
+                    FALSE 4 "${KZ_MENU1_ACTIONS[4]}" "${KZ_MENU1_DESCS[4]}" \
+                    FALSE 5 "${KZ_MENU1_ACTIONS[5]}" "${KZ_MENU1_DESCS[5]}" \
                     2> >($LOGCMD)
-            ) || exit $OK
+            ) || exit $KZ_OK
         process_menu1_choice
     done
 }
@@ -190,33 +192,33 @@ function process_menu1_gui() {
 
 # This function shows and processes menu 1 in TUI mode.
 function process_menu1_tui() {
-    local MENU1_ACTION=''
-    local PROMPT=''
+    local L_MENU1_ACTION=''
+    local L_PROMPT=''
 
     while true; do
         printf  '\n%s\n\n%3s  %-24s  %s\n'  \
-                "$MENU1_HEAD"               \
+                "$KZ_MENU1_HEAD"            \
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for MENU1_ACTION in "${!MENU1_ACTIONS[@]}"; do
-            printf  '%3s  %-24s  %s\n'                  \
-                    "$MENU1_ACTION"                     \
-                    "${MENU1_ACTIONS[$MENU1_ACTION]}"   \
-                    "${MENU1_DESCS[$MENU1_ACTION]}"
+        for L_MENU1_ACTION in "${!KZ_MENU1_ACTIONS[@]}"; do
+            printf  '%3s  %-24s  %s\n'                      \
+                    "$L_MENU1_ACTION"                       \
+                    "${KZ_MENU1_ACTIONS[$L_MENU1_ACTION]}"  \
+                    "${KZ_MENU1_DESCS[$L_MENU1_ACTION]}"
         done
 
         printf '\n'
 
-        PROMPT=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
-        read -rp "$PROMPT"
+        L_PROMPT=$(eval_gettext "Run number [1-\$KZ_MENU1_LINES]: ")
+        read -rp "$L_PROMPT"
 
         case $REPLY in
             *[^[:digit:]]* )
                 continue
                 ;;
             * )
-                if [[ $REPLY -ge 1 && $REPLY -le $MENU1_LINES ]]; then
+                if [[ $REPLY -ge 1 && $REPLY -le $KZ_MENU1_LINES ]]; then
                     process_menu1_choice
                 else
                     continue
@@ -246,12 +248,12 @@ function process_menu1_choice() {
             process_menu2
             ;;
         6 )
-            exit $OK
+            exit $KZ_OK
             ;;
         * )
-            TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-            errormsg "$TEXT"
-            exit $ERROR
+            KZ_TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+            errormsg "$KZ_TEXT"
+            exit $KZ_ERROR
             ;;
     esac
 }
@@ -259,46 +261,21 @@ function process_menu1_choice() {
 
 # This function processes menu 1 choice 1.
 function process_menu1_choice1() {
-    TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
-    ROWS=(
-        [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
-            "${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
+    KZ_TITLE="${KZ_MENU1_ACTIONS[1]} (${KZ_MENU1_DESCS[1]})"
+    KZ_ROWS=(
+        [1]="${KZ_MENU2_ACTIONS[1]}#${KZ_MENU2_DESCS[1]}"
+            "${KZ_MENU2_ACTIONS[2]}#${KZ_MENU2_DESCS[2]}"
         )
 
-    process_commands
-}
-
-
-# This function processes menu 1 choice 2.
-function process_menu1_choice2() {
-    TITLE="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
-    TEXT="
-$(gettext "Follow the steps as described in Checklist installation, Chapter 2.
-Checklist installation can be found on https://karelzimmer.nl/en, under Linux.
-
-Roughly boils down to:
-1. Download a CD image file (.iso).
-2. Create a bootable USB stick.
-3. Boot the computer from this USB stick.
-4. Install Linux.")"
-
-    if $OPTION_GUI; then
-        zenity  --info                  \
-                --width     600         \
-                --height    100         \
-                --title     "$TITLE"    \
-                --text      "$TEXT"     2> >($LOGCMD)
-    else
-        printf '%s\n' "$TEXT"
-    fi
+    process_commandsKZ_RC
 }
 
 
 # This function processes menu 1 choice 3.
 function process_menu1_choice3() {
-    TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
-    ROWS=(
-        [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
+    KZ_TITLE="${KZ_MENU1_ACTIONS[3]} (${KZ_MENU1_DESCS[3]})"
+    KZ_ROWS=(
+        [1]="${KZ_MENU2_ACTIONS[3]}#${KZ_MENU2_DESCS[3]}"
         )
 
     process_commands
@@ -307,22 +284,22 @@ function process_menu1_choice3() {
 
 # This function processes menu 1 choice 4.
 function process_menu1_choice4() {
-    TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
-    ROWS=(
-        [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
-            "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
+    KZ_TITLE="${KZ_MENU1_ACTIONS[4]} (${KZ_MENU1_DESCS[4]})"
+    KZ_ROWS=(
+        [1]="${KZ_MENU2_ACTIONS[4]}#${KZ_MENU2_DESCS[4]}"
+            "${KZ_MENU2_ACTIONS[5]}#${KZ_MENU2_DESCS[5]}"
         )
 
     process_commands
 
     # User must type 'logout' to log out.
-    $DESKTOP_ENVIRONMENT || exit $OK
+    $KZ_DESKTOP_ENVIRONMENT || exit $KZ_OK
 }
 
 
 # This function processes menu 2.
 function process_menu2() {
-    if $OPTION_GUI; then
+    if $KZ_OPTION_GUI; then
         process_menu2_gui
     else
         process_menu2_tui
@@ -333,25 +310,25 @@ function process_menu2() {
 # This function shows and processes menu 2 in GUI mode.
 function process_menu2_gui() {
     while true; do
-        TITLE=$MENU2_TITLE
+        KZ_TITLE=$KZ_MENU2_TITLE
         REPLY=$(
-            zenity  --list                                              \
-                    --radiolist                                         \
-                    --width         520                                 \
-                    --height        420                                 \
-                    --title         "$TITLE"                            \
-                    --text          "$(gettext 'Select a choice:')"     \
-                    --ok-label      "$(gettext 'Continue')"             \
-                    --cancel-label  "$(gettext 'Back')"                 \
-                    --column        "$(gettext 'CHOICE')"               \
-                    --column        "$(gettext 'NUM')"                  \
-                    --column        "$(gettext 'ACTION')"               \
-                    --column        "$(gettext 'DESCRIPTION')"          \
-                    TRUE  1 "${MENU2_ACTIONS[1]}" "${MENU2_DESCS[1]}"   \
-                    FALSE 2 "${MENU2_ACTIONS[2]}" "${MENU2_DESCS[2]}"   \
-                    FALSE 3 "${MENU2_ACTIONS[3]}" "${MENU2_DESCS[3]}"   \
-                    FALSE 4 "${MENU2_ACTIONS[4]}" "${MENU2_DESCS[4]}"   \
-                    FALSE 5 "${MENU2_ACTIONS[5]}" "${MENU2_DESCS[5]}"   \
+            zenity  --list                                                  \
+                    --radiolist                                             \
+                    --width         520                                     \
+                    --height        420                                     \
+                    --title         "$KZ_TITLE"                             \
+                    --text          "$(gettext 'Select a choice:')"         \
+                    --ok-label      "$(gettext 'Continue')"                 \
+                    --cancel-label  "$(gettext 'Back')"                     \
+                    --column        "$(gettext 'CHOICE')"                   \
+                    --column        "$(gettext 'NUM')"                      \
+                    --column        "$(gettext 'ACTION')"                   \
+                    --column        "$(gettext 'DESCRIPTION')"              \
+                    TRUE  1 "${KZ_MENU2_ACTIONS[1]}" "${KZ_MENU2_DESCS[1]}" \
+                    FALSE 2 "${KZ_MENU2_ACTIONS[2]}" "${KZ_MENU2_DESCS[2]}" \
+                    FALSE 3 "${KZ_MENU2_ACTIONS[3]}" "${KZ_MENU2_DESCS[3]}" \
+                    FALSE 4 "${KZ_MENU2_ACTIONS[4]}" "${KZ_MENU2_DESCS[4]}" \
+                    FALSE 5 "${KZ_MENU2_ACTIONS[5]}" "${KZ_MENU2_DESCS[5]}" \
                     2> >($LOGCMD)
             ) || break
         process_menu2_choice
@@ -361,33 +338,33 @@ function process_menu2_gui() {
 
 # This function shows and processes menu 2 in TUI mode.
 function process_menu2_tui() {
-    local MENU2_ACTION=''
-    local PROMPT=''
+    local L_MENU2_ACTION=''
+    local L_PROMPT=''
 
     while true; do
         printf  '\n%s\n\n%3s  %-25s  %s\n'  \
-                "$MENU2_HEAD"               \
+                "$KZ_MENU2_HEAD"            \
                 "$(gettext 'NUM')"          \
                 "$(gettext 'ACTION')"       \
                 "$(gettext 'DESCRIPTION')"
-        for MENU2_ACTION in "${!MENU2_ACTIONS[@]}"; do
-            printf  '%3s  %-25s  %s\n'                  \
-                    "$MENU2_ACTION"                    \
-                    "${MENU2_ACTIONS[$MENU2_ACTION]}"  \
-                    "${MENU2_DESCS[$MENU2_ACTION]}"
+        for L_MENU2_ACTION in "${!KZ_MENU2_ACTIONS[@]}"; do
+            printf  '%3s  %-25s  %s\n'                      \
+                    "$L_MENU2_ACTION"                       \
+                    "${KZ_MENU2_ACTIONS[$L_MENU2_ACTION]}"  \
+                    "${KZ_MENU2_DESCS[$L_MENU2_ACTION]}"
         done
 
         printf '\n'
 
-        PROMPT=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
-        read -rp "$PROMPT"
+        L_PROMPT=$(eval_gettext "Run number [1-\$KZ_MENU2_LINES]: ")
+        read -rp "$L_PROMPT"
 
         case $REPLY in
             *[^[:digit:]]* )
                 continue
                 ;;
             * )
-                if [[ $REPLY -ge 1 && $REPLY -le $MENU2_LINES ]]; then
+                if [[ $REPLY -ge 1 && $REPLY -le $KZ_MENU2_LINES ]]; then
                     process_menu2_choice
                 else
                     continue
@@ -400,42 +377,49 @@ function process_menu2_tui() {
 
 # This function processes menu 2 choice.
 function process_menu2_choice() {
-    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
-        ROWS=(
-            [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
+    if [[ $REPLY -ge 1 && $REPLY -le $((KZ_MENU2_LINES -1)) ]]; then
+        KZ_TITLE="${KZ_MENU2_ACTIONS[$REPLY]} (${KZ_MENU2_DESCS[$REPLY]})"
+        KZ_ROWS=(
+            [1]="${KZ_MENU2_ACTIONS[$REPLY]}#${KZ_MENU2_DESCS[$REPLY]}"
             )
         process_commands
-    elif [[ $REPLY -eq $MENU2_LINES ]]; then
+    elif [[ $REPLY -eq $KZ_MENU2_LINES ]]; then
         process_menu1_tui
     else
-        TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-        errormsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
+        errormsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
 
 # This function processes the command corresponding to the choice made.
 function process_commands() {
-    local       COMMAND=''
-    local       DESCRIPTION=''
-    local   -i  ROW=0
+    local       L_COMMAND=''
+    local       L_DESCRIPTION=''
+    local   -i  L_ROW=0
 
     show_commands_before_execution
 
-    if $EXECUTE_COMMAND; then
-        for ROW in "${!ROWS[@]}"; do
-            DESCRIPTION=$(
-                printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=1
+    if $KZ_EXECUTE_COMMAND; then
+        for L_ROW in "${!KZ_ROWS[@]}"; do
+            L_DESCRIPTION=$(
+                printf  '%s'                    \
+                        "${KZ_ROWS[$L_ROW]}"    |
+                cut     --delimiter='#'         \
+                        --fields=1
                 )
-            COMMAND=$(
-                printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=2
+            L_COMMAND=$(
+                printf  '%s'                    \
+                        "${KZ_ROWS[$L_ROW]}"    |
+                cut     --delimiter='#'         \
+                        --fields=2
                 )
-            TITLE="$DESCRIPTION ($COMMAND)"
-            $OPTION_GUI || infomsg "\n${BOLD}==== $TITLE ====${NORMAL}"
+            KZ_TITLE="$L_DESCRIPTION ($L_COMMAND)"
+            $KZ_OPTION_GUI || infomsg "\n${KZ_BOLD}==== $KZ_TITLE \
+====${KZ_NORMAL}"
             execute_command
-            $OPTION_GUI || wait_for_enter
+            $KZ_OPTION_GUI || wait_for_enter
         done
     fi
 }
@@ -443,54 +427,54 @@ function process_commands() {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution() {
-    local       COMMAND=''
-    local       DESCRIPTION=''
-    local   -i  ROW=0
-    local       PROMPT=''
+    local       L_COMMAND=''
+    local       L_DESCRIPTION=''
+    local   -i  L_ROW=0
+    local       L_PROMPT=''
 
-    TEXT="$(gettext 'The following will be executed:')
+    KZ_TEXT="$(gettext 'The following will be executed:')
 "
-    for ROW in "${!ROWS[@]}"; do
-        DESCRIPTION=$(
-            printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=1
+    for L_ROW in "${!KZ_ROWS[@]}"; do
+        L_DESCRIPTION=$(
+            printf '%s' "${KZ_ROWS[$L_ROW]}" | cut --delimiter='#' --fields=1
             )
-        COMMAND=$(
-            printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=2
+        L_COMMAND=$(
+            printf '%s' "${KZ_ROWS[$L_ROW]}" | cut --delimiter='#' --fields=2
             )
-        TEXT+="
-[$ROW] $DESCRIPTION ($COMMAND)"
+        KZ_TEXT+="
+[$L_ROW] $L_DESCRIPTION ($L_COMMAND)"
     done
 
-    TEXT+='
+    KZ_TEXT+='
 '
-    PROMPT="$(gettext 'Proceed?')"
+    L_PROMPT="$(gettext 'Proceed?')"
 
-    if $OPTION_GUI; then
-        TEXT+="
-$PROMPT"
+    if $KZ_OPTION_GUI; then
+        KZ_TEXT+="
+$L_PROMPT"
         if zenity   --question                          \
                     --no-markup                         \
                     --width         600                 \
                     --height        100                 \
-                    --title         "$TITLE"            \
-                    --text          "$TEXT"             \
+                    --title         "$KZ_TITLE"         \
+                    --text          "$KZ_TEXT"          \
                     --ok-label      "$(gettext 'Yes')"  \
                     --cancel-label  "$(gettext 'No')"   2> >($LOGCMD); then
-            EXECUTE_COMMAND=true
+            KZ_EXECUTE_COMMAND=true
         else
-            EXECUTE_COMMAND=false
+            KZ_EXECUTE_COMMAND=false
         fi
     else
-        printf '\n%s\n' "$TEXT"
+        printf '\n%s\n' "$KZ_TEXT"
         while true; do
-            read -rp "$(eval_gettext "\$PROMPT [Y/n]: ")"
+            read -rp "$(eval_gettext "\$L_PROMPT [Y/n]: ")"
             case $REPLY in
                 [YyJj]* | '' )
-                    EXECUTE_COMMAND=true
+                    KZ_EXECUTE_COMMAND=true
                     break
                     ;;
                 [Nn]* )
-                    EXECUTE_COMMAND=false
+                    KZ_EXECUTE_COMMAND=false
                     break
                     ;;
                 * )
@@ -504,30 +488,30 @@ $PROMPT"
 
 # This function executes the commands.
 function execute_command() {
-    local       ARG=''
-    local       CMD=''
-    local       GUI_OPTION=''
-    local   -i  RC=0
+    local       L_ARG=''
+    local       L_CMD=''
+    local       L_GUI_OPTION=''
+    local   -i  L_RC=0
 
-    CMD=$(
-        printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=1
+    L_CMD=$(
+        printf '%s' "$L_COMMAND" | cut --delimiter=' ' --fields=1
         )
-    ARG=$(
-        printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=2-
+    L_ARG=$(
+        printf '%s' "$L_COMMAND" | cut --delimiter=' ' --fields=2-
         )
 
-    if $OPTION_GUI; then
-        GUI_OPTION='--gui'
+    if $KZ_OPTION_GUI; then
+        L_GUI_OPTION='--gui'
     fi
 
-    "$CMD" "$ARG" $GUI_OPTION -- || RC=$?
-    logmsg "$COMMAND: rc=$RC"
+    "$L_CMD" "$L_ARG" $L_GUI_OPTION -- || L_RC=$?
+    logmsg "$L_COMMAND: rc=$L_RC"
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    exit $OK
+    exit $KZ_OK
 }
 
 

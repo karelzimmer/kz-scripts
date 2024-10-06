@@ -19,43 +19,43 @@ source kz_common.sh
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-restore'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Restore backup')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare KZ_PROGRAM_NAME='kz-restore'
+declare KZ_PROGRAM_DESC
+        KZ_PROGRAM_DESC=$(gettext 'Restore backup')
+declare KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+declare KZ_USAGE
+        KZ_USAGE="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [-g|--gui] \
 [-s|--source DIRECTORY]
-                  \$OPTIONS_USAGE")"
+                  \$KZ_OPTIONS_USAGE")"
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+declare KZ_X_OPTIONS_HELP
+        KZ_X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options \
+are mandatory for short options too.")
 
 $(gettext "  -g, --gui      run in graphical mode, requires desktop \
 environment")
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')"
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare KZ_HELP
+        KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...]")
 
-$PROGRAM_DESC.
+$KZ_PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
+$KZ_X_OPTIONS_HELP
+$KZ_OPTIONS_HELP"
 
-declare X_OPTIONS_SHORT='gs:'
-declare X_OPTIONS_LONG=',gui,source:'
+declare KZ_X_OPTIONS_SHORT='gs:'
+declare KZ_X_OPTIONS_LONG=',gui,source:'
 
-declare MEDIUM=''
-declare OPTION_SOURCE=false
-declare SOURCE_ARGUMENT=''
-declare SOURCE_MEDIUM=''
-declare SOURCE=''
-declare TARGET=$HOME
+declare KZ_MEDIUM=''
+declare KZ_OPTION_SOURCE=false
+declare KZ_SOURCE_ARGUMENT=''
+declare KZ_SOURCE_MEDIUM=''
+declare KZ_SOURCE=''
+declare KZ_TARGET=$HOME
 
 
 ###############################################################################
@@ -64,20 +64,20 @@ declare TARGET=$HOME
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local L_PARSED=''
 
-    PARSED=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+    L_PARSED=$(
+        getopt  --alternative                                               \
+                --options       "${KZ_OPTIONS_SHORT}$KZ_X_OPTIONS_SHORT"    \
+                --longoptions   "${KZ_OPTIONS_LONG}$KZ_X_OPTIONS_LONG"      \
+                --name          "$KZ_DISPLAY_NAME"                          \
                 --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERROR
+        )       || KZ_RC=$?
+    if [[ $KZ_RC -ne $KZ_OK ]]; then
+        infomsg "$KZ_USAGE"
+        exit    $KZ_ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$L_PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -89,25 +89,26 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
-                    TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERROR
+                if ! $KZ_DESKTOP_ENVIRONMENT; then
+                    KZ_TEXT=\
+"$KZ_DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+$KZ_USAGE"
+                    infomsg "$KZ_TEXT"
+                    exit $KZ_ERROR
                 fi
-                OPTION_GUI=true
+                KZ_OPTION_GUI=true
                 shift
                 ;;
-            -s | --SOURCE )
-                if $OPTION_SOURCE; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERROR
+            -s | --KZ_SOURCE )
+                if $KZ_OPTION_SOURCE; then
+                    KZ_TEXT="$KZ_DISPLAY_NAME: $1 $2: $(gettext "too many \
+options")
+$KZ_USAGE"
+                    infomsg "$KZ_TEXT"
+                    exit $KZ_ERROR
                 fi
-                OPTION_SOURCE=true
-                SOURCE_ARGUMENT=$2
+                KZ_OPTION_SOURCE=true
+                KZ_SOURCE_ARGUMENT=$2
                 shift 2
                 ;;
             -- )
@@ -121,10 +122,10 @@ $USAGE"
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT="$KZ_DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
@@ -139,73 +140,81 @@ function process_input() {
 
 # This function checks if the source is available.
 function check_source() {
-    local USB_MOUNT_POINT="/media/$USER"
+    local L_USB_MOUNT_POINT="/media/$USER"
 
-    if $RPM; then
-        USB_MOUNT_POINT="/run/media/$USER"
+    if $KZ_RPM; then
+        L_USB_MOUNT_POINT="/run/media/$USER"
     fi
 
-    if $OPTION_SOURCE; then
+    if $KZ_OPTION_SOURCE; then
 
-        if [[ ! -d $SOURCE_ARGUMENT ]]; then
-            TEXT="$DISPLAY_NAME: $SOURCE_ARGUMENT: \
+        if [[ ! -d $KZ_SOURCE_ARGUMENT ]]; then
+            KZ_TEXT="$KZ_DISPLAY_NAME: $KZ_SOURCE_ARGUMENT: \
 $(gettext 'directory does not exist')
-$USAGE"
-            infomsg "$TEXT"
-            exit $ERROR
+$KZ_USAGE"
+            infomsg "$KZ_TEXT"
+            exit $KZ_ERROR
         fi
 
-        SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
-        SOURCE_MEDIUM=$SOURCE_ARGUMENT
+        KZ_SOURCE=$KZ_SOURCE_ARGUMENT/$USER@$HOSTNAME
+        KZ_SOURCE_MEDIUM=$KZ_SOURCE_ARGUMENT
     else
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+        KZ_MEDIUM=$(
+            ls  --directory "$L_USB_MOUNT_POINT"/* 2> >($LOGCMD) || true
+            )
 
-        if [[ -z $MEDIUM ]]; then
-            TEXT=$(gettext "No USB medium found.
+        if [[ -z $KZ_MEDIUM ]]; then
+            KZ_TEXT=$(gettext "No USB medium found.
 
 Connect a USB medium.")
-            infomsg "$TEXT"
+            infomsg "$KZ_TEXT"
 
-            $OPTION_GUI || wait_for_enter
+            $KZ_OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+            KZ_MEDIUM=$(
+                ls --directory "$L_USB_MOUNT_POINT"/* 2> >($LOGCMD) || true
+                )
 
-            if [[ -z $MEDIUM ]]; then
-                errormsg "$TEXT"
-                exit $ERROR
+            if [[ -z $KZ_MEDIUM ]]; then
+                errormsg "$KZ_TEXT"
+                exit $KZ_ERROR
             fi
         fi
 
-        MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+        KZ_MEDIUM=$(
+            ls --directory "$L_USB_MOUNT_POINT"/* 2> >($LOGCMD) || true
+            )
 
-        if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-            TEXT="$(eval_gettext "Connect only one USB medium.
+        if [[ $(printf '%s\n' "$KZ_MEDIUM" | wc --lines) -gt 1 ]]; then
+            KZ_TEXT="$(eval_gettext "Connect only one USB medium.
 
 Now connected:
-\$MEDIUM
+\$KZ_MEDIUM
 
 Disconnect media via Files.")"
-            infomsg "$TEXT"
+            infomsg "$KZ_TEXT"
 
-            $OPTION_GUI || wait_for_enter
+            $KZ_OPTION_GUI || wait_for_enter
 
-            MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
+            KZ_MEDIUM=$(
+                ls --directory "$L_USB_MOUNT_POINT"/* 2> >($LOGCMD) || true
+                )
 
-            if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-                errormsg "$TEXT"
-                exit $ERROR
+            if [[ $(printf '%s\n' "$KZ_MEDIUM" | wc --lines) -gt 1 ]]; then
+                errormsg "$KZ_TEXT"
+                exit $KZ_ERROR
             fi
         fi
 
-        SOURCE=$MEDIUM/kz-backup/$USER@$HOSTNAME
-        SOURCE_MEDIUM=$MEDIUM
+        KZ_SOURCE=$KZ_MEDIUM/kz-backup/$USER@$HOSTNAME
+        KZ_SOURCE_MEDIUM=$KZ_MEDIUM
 
-        if [[ ! -d $SOURCE ]]; then
-            TEXT=$(eval_gettext "No backup found on connected USB medium.
+        if [[ ! -d $KZ_SOURCE ]]; then
+            KZ_TEXT=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
-            errormsg "$TEXT"
-            exit $ERROR
+            errormsg "$KZ_TEXT"
+            exit $KZ_ERROR
         fi
     fi
 }
@@ -213,24 +222,24 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup() {
-    local       ERROR_FILE=''
-    local       RSYNC_MESSAGES=''
-    local   -i  RESTORE_RC=0
+    local       L_ERROR_FILE=''
+    local       L_RSYNC_MESSAGES=''
+    local   -i  L_RESTORE_RC=0
 
-    ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    L_ERROR_FILE=$(mktemp -t "$KZ_PROGRAM_NAME-errors-XXXXXXXXXX")
 
-    TITLE=$(gettext 'Restore backup')
-    TEXT=$(gettext 'Preparing restore (this can take a while)')
+    KZ_TITLE=$(gettext 'Restore backup')
+    KZ_TEXT=$(gettext 'Preparing restore (this can take a while)')
 
-    if $OPTION_GUI; then
-        logmsg "$TITLE"...
+    if $KZ_OPTION_GUI; then
+        logmsg "$KZ_TITLE"...
         rsync   --archive               \
                 --acls                  \
                 --xattrs                \
                 --verbose               \
-                "$SOURCE"/              \
-                "$TARGET"/              \
-                2> "$ERROR_FILE"        |
+                "$KZ_SOURCE"/           \
+                "$KZ_TARGET"/           \
+                2> "$L_ERROR_FILE"      |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -238,49 +247,49 @@ function restore_backup() {
                 --pulsate               \
                 --width     600         \
                 --height    50          \
-                --title     "$TITLE"    \
-                --text      "$TEXT"     2> >($LOGCMD) || RESTORE_RC=$?
+                --title     "$KZ_TITLE" \
+                --text      "$KZ_TEXT"  2> >($LOGCMD) || L_RESTORE_RC=$?
     else
-        TEXT+='...'
-        infomsg "$TEXT"
+        KZ_TEXT+='...'
+        infomsg "$KZ_TEXT"
         rsync   --archive               \
                 --acls                  \
                 --xattrs                \
                 --verbose               \
                 --human-readable        \
-                "$SOURCE"/              \
-                "$TARGET"/              2> "$ERROR_FILE" || RESTORE_RC=$?
+                "$KZ_SOURCE"/           \
+                "$KZ_TARGET"/           2> "$L_ERROR_FILE" || L_RESTORE_RC=$?
     fi
 
-    if [[ $RESTORE_RC -ne $OK ]]; then
+    if [[ $L_RESTORE_RC -ne $KZ_OK ]]; then
         # shellcheck disable=SC2034
-        RSYNC_MESSAGES=$(cat "$ERROR_FILE")
-        TEXT=$(eval_gettext "Restore ended with warnings or errors.
+        L_RSYNC_MESSAGES=$(cat "$L_ERROR_FILE")
+        KZ_TEXT=$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while restoring the backup, or
-is there not enough space on \$TARGET.
+is there not enough space on \$KZ_TARGET.
 
-Check the rsync messages (also in \$ERROR_FILE):
-\$RSYNC_MESSAGES
+Check the rsync messages (also in \$L_ERROR_FILE):
+\$L_RSYNC_MESSAGES
 
 Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Restore backup', or
 use app 'Terminal', type 'kz restore'.")
-        errormsg "$TEXT"
-        exit $ERROR
+        errormsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 
-    rm --verbose "$ERROR_FILE" |& $LOGCMD
+    rm --verbose "$L_ERROR_FILE" |& $LOGCMD
 }
 
 
 # This function restores the user settings.
 function restore_settings() {
-    local SETTINGS_DIR=$HOME/kz-backup
+    local L_SETTINGS_DIR=$HOME/kz-backup
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $KZ_DESKTOP_ENVIRONMENT; then
         logmsg 'Restore settings...'
         restore_setting_desktop
     fi
@@ -289,81 +298,81 @@ function restore_settings() {
 
 # This function restores the desktop background, if possible.
 function restore_setting_desktop() {
-    local INPUT_FILE="$SETTINGS_DIR/desktop"
+    local L_INPUT_FILE="$L_SETTINGS_DIR/desktop"
 
-    if [[ -f $INPUT_FILE ]]; then
+    if [[ -f $L_INPUT_FILE ]]; then
         logmsg 'Restore the desktop background...'
         gsettings   set                                         \
                     org.gnome.desktop.background picture-uri    \
-                    "file://$INPUT_FILE"
+                    "file://$L_INPUT_FILE"
     fi
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    local       USER_NAME=''
-    local       USERS=''
-    local   -i  NUM_USERS
+    local       L_NUM_NAME=''
+    local       L_USERS=''
+    local   -i  L_NUM_USERS
 
-    NUM_USERS=$(find /home/* -prune -print | wc --lines)
+    L_NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
-    if [[ $NUM_USERS -eq 1 ]]; then
-        TEXT=$(gettext 'The backup has been restored.')
+    if [[ $L_NUM_USERS -eq 1 ]]; then
+        KZ_TEXT=$(gettext 'The backup has been restored.')
     else
-        USERS=$(
+        L_USERS=$(
                 gettext '_username_|userid|_user_'
                 printf '\n'
                 grep --regexp='/home' /etc/passwd   |
                 cut  --delimiter=':' --fields=1,3,5 |
                 tr ':' '|'
                 )
-        USERS+=$(
+        L_USERS+=$(
                 printf '\n'
-                while read -r USER_NAME; do
+                while read -r L_NUM_NAME; do
                     printf '\n'
-                    id "$USER_NAME"
+                    id "$L_NUM_NAME"
                 done < <(
                     grep --regexp='/home' /etc/passwd |
                     cut  --delimiter=':' --fields=1
                     )
                 )
-        TEXT="$(eval_gettext "The backup has restored for \$USER (there are \
-\$NUM_USERS users).")
+        KZ_TEXT="$(eval_gettext "The backup has restored for \$USER (there \
+are \$L_NUM_USERS users).")
 
-$USERS"
+$L_USERS"
     fi
 
-    if [[ $SOURCE_MEDIUM == */media/* ]]; then
-        term_script_usb || RC=$?
+    if [[ $KZ_SOURCE_MEDIUM == */media/* ]]; then
+        term_script_usb || KZ_RC=$?
 
-        if [[ $RC -eq $OK ]]; then
-            TEXT+="
+        if [[ $KZ_RC -eq $KZ_OK ]]; then
+            KZ_TEXT+="
 
 $(gettext 'The USB medium can be removed.')"
         else
-            TEXT+="
+            KZ_TEXT+="
 
 $(gettext 'Disconnect the USB medium SAFELY YOURSELF!')"
         fi
 
     fi
-    infomsg "$TEXT"
+    infomsg "$KZ_TEXT"
 
-    exit $OK
+    exit $KZ_OK
 }
 
 
 # This function tries to unmount the USB device.
 function term_script_usb() {
-    local DEV=''
-    local TEXT=''
+    local L_DEV=''
+    local L_TEXT=''
 
-    TEXT=$(gettext 'Disconnect the USB media')
-    DEV='/dev/'$(
+    L_TEXT=$(gettext 'Disconnect the USB media')
+    L_DEV='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
-                "$SOURCE_MEDIUM"    |
+                "$KZ_SOURCE_MEDIUM"    |
         head    -1                  |
         cut     --delimiter='-'     \
                 --fields=2          |
@@ -371,10 +380,10 @@ function term_script_usb() {
                 --fields=1
     )
 
-    if $OPTION_GUI; then
+    if $KZ_OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        logmsg "$TEXT..."
+        logmsg "$L_TEXT..."
         term_script_unmount > >(
             zenity  --progress              \
                     --pulsate               \
@@ -382,24 +391,24 @@ function term_script_usb() {
                     --no-cancel             \
                     --width     600         \
                     --height    50          \
-                    --title     "$TITLE"    \
-                    --text      "$TEXT"     \
+                    --title     "$KZ_TITLE" \
+                    --text      "$L_TEXT"   \
                     2> >($LOGCMD)
             )
     else
-        infomsg "$TEXT..."
+        infomsg "$L_TEXT..."
         term_script_unmount
     fi
 
-    return $RC
+    return $KZ_RC
 }
 
 
 # This function unmounts the USB device.
 function term_script_unmount() {
-    umount "$SOURCE_MEDIUM"                     |& $LOGCMD || RC+=$?
-    udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
-    udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
+    umount "$KZ_SOURCE_MEDIUM"                  |& $LOGCMD || KZ_RC+=$?
+    udisksctl lock --block-device "$L_DEV"      |& $LOGCMD || KZ_RC+=$?
+    udisksctl power-off --block-device "$L_DEV" |& $LOGCMD || KZ_RC+=$?
     sleep 1
 }
 

@@ -22,100 +22,100 @@ source /usr/bin/gettext.sh
 # Variables
 ###############################################################################
 
-declare     MODULE_NAME='kz_common.sh'
-declare     MODULE_DESC
+declare     KZ_MODULE_NAME='kz_common.sh'
+declare     KZ_MODULE_DESC
             # shellcheck disable=SC2034
-            MODULE_DESC=$(gettext 'Common module for shell scripts')
+            KZ_MODULE_DESC=$(gettext 'Common module for shell scripts')
 
-declare     USAGE
+declare     KZ_USAGE
 # shellcheck disable=SC2034
-declare     OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] \
+declare     KZ_OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] \
 [-v|--version]"
 
-declare     HELP
-declare     OPTIONS_HELP
+declare     KZ_HELP
+declare     KZ_OPTIONS_HELP
             # shellcheck disable=SC2034
-            OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
+            KZ_OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 
 # shellcheck disable=SC2034
-declare     OPTIONS_SHORT='hmuv'
+declare     KZ_OPTIONS_SHORT='hmuv'
 # shellcheck disable=SC2034
-declare     OPTIONS_LONG='help,manual,usage,version'
+declare     KZ_OPTIONS_LONG='help,manual,usage,version'
 
-declare     OK=0
-declare     ERROR=1
+declare     KZ_OK=0
+declare     KZ_ERROR=1
 
-declare -i  RC=$OK
-declare     TEXT=''
+declare -i  KZ_RC=$KZ_OK
+declare     KZ_TEXT=''
 
 # shellcheck disable=SC2034
-declare     BOLD='\033[1m'
-declare     RED='\033[1;31m'
+declare     KZ_BOLD='\033[1m'
+declare     KZ_RED='\033[1;31m'
 # shellcheck disable=SC2034
-declare     GREEN='\033[1;32m'
-declare     NORMAL='\033[0m'
+declare     KZ_GREEN='\033[1;32m'
+declare     KZ_NORMAL='\033[0m'
 
-declare     DESKTOP_ENVIRONMENT
+declare     KZ_DESKTOP_ENVIRONMENT
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
-    DESKTOP_ENVIRONMENT=true
+    KZ_DESKTOP_ENVIRONMENT=true
 else
-    DESKTOP_ENVIRONMENT=false
+    KZ_DESKTOP_ENVIRONMENT=false
 fi
 
-declare     GNOME=true
+declare     KZ_GNOME=true
 # shellcheck disable=SC2034
 if [[ -n $(type -t gnome-session) ]]; then
-    GNOME=true
+    KZ_GNOME=true
 else
-    GNOME=false
+    KZ_GNOME=false
 fi
 
-declare     DEBIAN
+declare     KZ_DEBIAN
 # shellcheck disable=SC2034
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then
-    DEBIAN=true
+    KZ_DEBIAN=true
 else
-    DEBIAN=false
+    KZ_DEBIAN=false
 fi
 
-declare     UBUNTU
+declare     KZ_UBUNTU
 # shellcheck disable=SC2034
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then
-    UBUNTU=true
+    KZ_UBUNTU=true
 else
-    UBUNTU=false
+    KZ_UBUNTU=false
 fi
 
-declare     DEB
+declare     KZ_DEB
 # shellcheck disable=SC2034
 if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
-    DEB=true
+    KZ_DEB=true
 else
-    DEB=false
+    KZ_DEB=false
 fi
 
-declare     RPM
+declare     KZ_RPM
 # shellcheck disable=SC2034
 if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
     # Additional testing is needed because rpm may be installed on a system
     # that uses Debian package management system APT. APT is not available on a
-    # system that uses Red Hat package management system RPM.
-    if $DEB; then
-        RPM=false
+    # system that uses Red Hat package management system KZ_RPM.
+    if $KZ_DEB; then
+        KZ_RPM=false
     else
-        RPM=true
+        KZ_RPM=true
     fi
 else
-    RPM=false
+    KZ_RPM=false
 fi
 
-declare     ERREXIT=true
-declare     OPTION_GUI=false
-declare     TITLE=''
+declare     KZ_ERREXIT=true
+declare     KZ_OPTION_GUI=false
+declare     KZ_TITLE=''
 
 
 ###############################################################################
@@ -126,25 +126,27 @@ declare     TITLE=''
 # the script as user root if not.
 function become_root() {
     # pkexec needs fully qualified path to the program to be executed.
-    local       PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
+    local L_PKEXEC_PROGRAM=/usr/bin/$KZ_PROGRAM_NAME
 
-    become_root_check || exit $OK
+    become_root_check || exit $KZ_OK
 
     if [[ $UID -ne 0 ]]; then
 
-        if $OPTION_GUI; then
+        if $KZ_OPTION_GUI; then
             export DISPLAY
             xhost +si:localuser:root |& $LOGCMD
-            TEXT="Restart (pkexec $PKEXEC_PROGRAM ${COMMANDLINE_ARGS[*]})..."
-            logmsg "$TEXT"
-            # Because $PKEXEC_PROGRAM will be started again, do not trap twice.
+            KZ_TEXT="Restart (pkexec $L_PKEXEC_PROGRAM \
+${COMMANDLINE_ARGS[*]})..."
+            logmsg "$KZ_TEXT"
+            # Because this script will be started again, do not trap twice.
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-            pkexec "$PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || RC=$?
-            exit $RC
+            pkexec "$L_PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || KZ_RC=$?
+            exit $KZ_RC
         else
-            TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
-            logmsg "$TEXT"
-            exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
+            KZ_TEXT="Restart (exec sudo $KZ_PROGRAM_NAME \
+${COMMANDLINE_ARGS[*]})..."
+            logmsg "$KZ_TEXT"
+            exec sudo "$KZ_PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
         fi
 
     fi
@@ -155,13 +157,13 @@ function become_root() {
 # so, otherwise returns 1 with descriptive message.
 function become_root_check() {
     if [[ $UID -eq 0 ]]; then
-        return $OK
+        return $KZ_OK
     elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
-        return $OK
+        return $KZ_OK
     else
-        TEXT=$(gettext 'Already performed by the administrator.')
-        infomsg "$TEXT"
-        return $ERROR
+        KZ_TEXT=$(gettext 'Already performed by the administrator.')
+        infomsg "$KZ_TEXT"
+        return $KZ_ERROR
     fi
 }
 
@@ -169,52 +171,54 @@ function become_root_check() {
 # This function checks for another running APT package manager and waits for
 # the next check if so.
 function check_apt_package_manager() {
-    local   -i  CHECK_WAIT=10
+    local   -i  L_CHECK_WAIT=10
 
-    if ! $DEB; then
-        return $OK
+    if ! $KZ_DEB; then
+        return $KZ_OK
     fi
 
     while sudo  fuser                           \
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        TEXT=$(gettext 'Wait for another package manager to finish')
-        if $OPTION_GUI; then
-            logmsg "$TEXT..."
+        KZ_TEXT=$(gettext 'Wait for another package manager to finish')
+        if $KZ_OPTION_GUI; then
+            logmsg "$KZ_TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
-            printf '%s\n' "#$TEXT"
+            printf '%s\n' "#$KZ_TEXT"
         else
-            infomsg "$TEXT..."
+            infomsg "$KZ_TEXT..."
         fi
-        sleep $CHECK_WAIT
+        sleep $L_CHECK_WAIT
     done
 }
 
 
 # This function returns an error message.
 function errormsg() {
-    if $OPTION_GUI; then
-        TITLE=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
+    if $KZ_OPTION_GUI; then
+        KZ_TITLE=$(eval_gettext "\$KZ_PROGRAM_DESC error message \
+(\$KZ_DISPLAY_NAME)")
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
-                --title     "$TITLE"    \
+                --title     "$KZ_TITLE"    \
                 --text      "$*"        2> >($LOGCMD) || true
     else
-        printf "${RED}%b${NORMAL}\n" "$*" >&2
+        printf "${KZ_RED}%b${KZ_NORMAL}\n" "$*" >&2
     fi
 }
 
 
 # This function returns an informational message.
 function infomsg() {
-    if $OPTION_GUI; then
-        TITLE=$(eval_gettext "\$PROGRAM_DESC information (\$DISPLAY_NAME)")
+    if $KZ_OPTION_GUI; then
+        KZ_TITLE=$(eval_gettext "\$KZ_PROGRAM_DESC information \
+(\$KZ_DISPLAY_NAME)")
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
-                --title     "$TITLE"    \
+                --title     "$KZ_TITLE"    \
                 --text      "$*"        2> >($LOGCMD) || true
     else
         printf '%b\n' "$*"
@@ -230,7 +234,7 @@ function init_script() {
     set -o nounset
     set -o pipefail
 
-    declare  -g LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    declare  -g LOGCMD="systemd-cat --identifier=$KZ_PROGRAM_NAME"
     declare -ag COMMANDLINE_ARGS=("$@")
 
     trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
@@ -240,9 +244,9 @@ function init_script() {
     trap 'term sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    TEXT="==== START logs for script $PROGRAM_NAME ====
-Started ($PROGRAM_NAME $* as $USER)."
-    logmsg "$TEXT"
+    KZ_TEXT="==== START logs for script $KZ_PROGRAM_NAME ====
+Started ($KZ_PROGRAM_NAME $* as $USER)."
+    logmsg "$KZ_TEXT"
 }
 
 
@@ -258,19 +262,19 @@ function process_options() {
         case $1 in
             -h | --help )
                 process_option_help
-                exit $OK
+                exit $KZ_OK
                 ;;
             -m | --manual )
                 process_option_manual
-                exit $OK
+                exit $KZ_OK
                 ;;
             -u | --usage )
                 process_option_usage
-                exit $OK
+                exit $KZ_OK
                 ;;
             -v | --version )
                 process_option_version
-                exit $OK
+                exit $KZ_OK
                 ;;
             -- )
                 break
@@ -285,147 +289,151 @@ function process_options() {
 
 # This function shows the available help.
 function process_option_help() {
-    local YELP_MAN_URL=''
+    local L_YELP_MAN_URL=''
 
-    if $DESKTOP_ENVIRONMENT; then
-        YELP_MAN_URL="$(gettext ', or see the ')"
-        YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
-        YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
+    if $KZ_DESKTOP_ENVIRONMENT; then
+        L_YELP_MAN_URL="$(gettext ', or see the ')"
+        L_YELP_MAN_URL+="\033]8;;man:$KZ_PROGRAM_NAME(1)\033\\"
+        L_YELP_MAN_URL+="$KZ_DISPLAY_NAME(1) "
+        L_YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
     fi
 
-    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
-E'\$YELP_MAN_URL for more information.")"
-    printf '%b\n\n%b\n' "$HELP" "$TEXT"
+    KZ_TEXT="$(eval_gettext "Type '\$KZ_DISPLAY_NAME --manual' or 'man \
+\$KZ_DISPLAY_NAME'\$L_YELP_MAN_URL for more information.")"
+    printf '%b\n\n%b\n' "$KZ_HELP" "$KZ_TEXT"
 }
 
 
 # This function displays the manual page.
 function process_option_manual() {
     if [[ -n $(type -t yelp) ]]; then
-        yelp man:"$PROGRAM_NAME"
+        yelp man:"$KZ_PROGRAM_NAME"
     else
-        man --pager=cat "$PROGRAM_NAME"
+        man --pager=cat "$KZ_PROGRAM_NAME"
     fi
 }
 
 
 # This function shows the available options.
 function process_option_usage() {
-    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
-    printf '%b\n\n%b\n' "$USAGE" "$TEXT"
+    KZ_TEXT="$(eval_gettext "Type '\$KZ_DISPLAY_NAME --help' for more \
+information.")"
+    printf '%b\n\n%b\n' "$KZ_USAGE" "$KZ_TEXT"
 }
 
 
 # This function displays version, author, and license information.
 function process_option_version() {
-    local BUILD_ID=''
+    local L_BUILD_ID=''
 
     if [[ -e /usr/share/doc/kz/kz-build.id ]]; then
-        BUILD_ID=$(cat /usr/share/doc/kz/kz-build.id)
+        L_BUILD_ID=$(cat /usr/share/doc/kz/kz-build.id)
     else
-        TEXT=$(gettext 'Build ID cannot be determined.')
-        logmsg "$TEXT"
+        KZ_TEXT=$(gettext 'Build ID cannot be determined.')
+        logmsg "$KZ_TEXT"
         # shellcheck disable=SC2034
-        BUILD_ID=$TEXT
+        L_BUILD_ID=$KZ_TEXT
     fi
 
-    TEXT="$(eval_gettext "kz version 4.2.1 (\$BUILD_ID).")
+    KZ_TEXT="$(eval_gettext "kz version 4.2.1 (\$L_BUILD_ID).")
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
 $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 .")"
-    infomsg "$TEXT"
+    infomsg "$KZ_TEXT"
 }
 
 
 # This function controls the termination.
 function term() {
-    local       SIGNAL=${1:-unknown}
-    local   -i  LINENO=${2:-unknown}
-    local       FUNCTION=${3:-unknown}
-    local       COMMAND=${4:-unknown}
-                RC=${5:-$ERROR}
-    local       RC_DESC=''
-    local   -i  RC_DESC_SIGNALNO=0
-    local       STATUS=$RC/error
+    local       L_SIGNAL=${1:-unknown}
+    local   -i  L_LINENO=${2:-unknown}
+    local       L_FUNCTION=${3:-unknown}
+    local       L_COMMAND=${4:-unknown}
+                KZ_RC=${5:-$KZ_ERROR}
+    local       L_RC_DESC=''
+    local   -i  L_RC_DESC_SIGNALNO=0
+    local       L_STATUS=$KZ_RC/error
 
-    case $RC in
+    case $KZ_RC in
         0 )
-            RC_DESC='successful termination'
-            STATUS=$RC/OK
+            L_RC_DESC='successful termination'
+            L_STATUS=$KZ_RC/KZ_OK
             ;;
         1 )
-            RC_DESC='terminated with error'
+            L_RC_DESC='terminated with error'
             ;;
         6[4-9] | 7[0-8] )                   # 64--78
-            RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
+            L_RC_DESC="open file '/usr/include/sysexits.h' and look for \
+'$KZ_RC'"
             ;;
         100 )
-            if $DEB; then
-                RC_DESC='apt/dpkg exited with error'
-            elif $RPM; then
-                RC_DESC='there are updates available'
+            if $KZ_DEB; then
+                L_RC_DESC='apt/dpkg exited with error'
+            elif $KZ_RPM; then
+                L_RC_DESC='there are updates available'
             else
-                RC_DESC="previous errors/it didn't work"
+                L_RC_DESC="previous errors/it didn't work"
             fi
             ;;
         126 )
-            RC_DESC='command cannot execute'
+            L_RC_DESC='command cannot execute'
             ;;
         127 )
-            RC_DESC='command not found'
+            L_RC_DESC='command not found'
             ;;
         128 )
-            RC_DESC='invalid argument to exit'
+            L_RC_DESC='invalid argument to exit'
             ;;
         129 )                               # SIGHUP (128 + 1)
-            RC_DESC='hangup'
+            L_RC_DESC='hangup'
             ;;
         130 )                               # SIGINT (128 + 2)
-            RC_DESC='terminated by control-c'
+            L_RC_DESC='terminated by control-c'
             ;;
         13[1-9] | 140 )                     # 131 (128 + 3)--140 (128 + 12)
-            RC_DESC_SIGNALNO=$(( RC - 128 ))
-            RC_DESC="typ 'trap -l' and look for $RC_DESC_SIGNALNO"
+            L_RC_DESC_SIGNALNO=$(( KZ_RC - 128 ))
+            L_RC_DESC="typ 'trap -l' and look for $L_RC_DESC_SIGNALNO"
             ;;
         141 )                               # SIGPIPE (128 + 13)
-            RC_DESC='broken pipe: write to pipe with no readers'
+            L_RC_DESC='broken pipe: write to pipe with no readers'
             ;;
         142 )                               # SIGALRM (128 + 14)
-            RC_DESC='timer signal from alarm'
+            L_RC_DESC='timer signal from alarm'
             ;;
         143 )                               # SIGTERM (128 + 15)
-            RC_DESC='termination signal'
+            L_RC_DESC='termination signal'
             ;;
         14[4-9] | 1[5-8][0-9] | 19[0-2])    # 144 (128 + 16)--192 (128 + 64)
-            RC_DESC_SIGNALNO=$(( RC - 128 ))
-            RC_DESC="typ 'trap -l' and look for $RC_DESC_SIGNALNO"
+            L_RC_DESC_SIGNALNO=$(( KZ_RC - 128 ))
+            L_RC_DESC="typ 'trap -l' and look for $L_RC_DESC_SIGNALNO"
             ;;
         200 )
             # Red Hat or Red Hat-based system.
-            RC_DESC='There was a problem with acquiring or releasing of locks.'
+            L_RC_DESC="There was a problem with acquiring or releasing of \
+locks."
             ;;
         255 )
-            RC_DESC='exit status out of range'
+            L_RC_DESC='exit status out of range'
             ;;
         * )
-            RC_DESC='unknown error'
+            L_RC_DESC='unknown error'
             ;;
     esac
 
-    TEXT="Signal: $SIGNAL, line: $LINENO, function: $FUNCTION, command: "
-    TEXT+="$COMMAND, code: $RC ($RC_DESC)."
-    logmsg "$TEXT"
+    KZ_TEXT="Signal: $L_SIGNAL, line: $L_LINENO, function: $L_FUNCTION, "
+    KZ_TEXT+="command: $L_COMMAND, code: $KZ_RC ($L_RC_DESC)."
+    logmsg "$KZ_TEXT"
 
-    case $SIGNAL in
+    case $L_SIGNAL in
         err )
-            if $ERREXIT; then
-                TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an \
-error.")
-                errormsg "$TEXT"
+            if $KZ_ERREXIT; then
+                KZ_TEXT=$(eval_gettext "Program \$KZ_PROGRAM_NAME encountered \
+an error.")
+                errormsg "$KZ_TEXT"
             fi
 
-            if [[ $PROGRAM_NAME = 'kz-get' ]]; then
+            if [[ $KZ_PROGRAM_NAME = 'kz-get' ]]; then
                 infomsg "
 $(gettext 'To try to resolve, run:')
 sudo apt remove kz
@@ -433,11 +441,11 @@ wget karelzimmer.nl/getkz
 bash getkz"
             fi
 
-            exit "$RC"
+            exit "$KZ_RC"
             ;;
         exit )
-            if [[ $PROGRAM_NAME = 'kz-get' ]]; then
-                logmsg "Delete kz get files ($MODULE_NAME)..."
+            if [[ $KZ_PROGRAM_NAME = 'kz-get' ]]; then
+                logmsg "Delete kz get files ($KZ_MODULE_NAME)..."
                 rm  --force                 \
                     --verbose               \
                     getkz                   \
@@ -446,19 +454,20 @@ bash getkz"
                     "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
             fi
 
-            TEXT="Ended (code=exited, status=$STATUS).
-==== END logs for script $PROGRAM_NAME ===="
-            logmsg "$TEXT"
+            KZ_TEXT="Ended (code=exited, status=$L_STATUS).
+==== END logs for script $KZ_PROGRAM_NAME ===="
+            logmsg "$KZ_TEXT"
 
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
 
-            exit "$RC"
+            exit "$KZ_RC"
             ;;
         * )
-            TEXT=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
-            errormsg "$TEXT"
+            KZ_TEXT=$(eval_gettext "Program \$KZ_PROGRAM_NAME has been \
+interrupted.")
+            errormsg "$KZ_TEXT"
 
-            exit "$RC"
+            exit "$KZ_RC"
             ;;
     esac
 }
@@ -466,11 +475,11 @@ bash getkz"
 
 # This function waits for the user to press Enter.
 function wait_for_enter() {
-    local PROMPT
+    local L_PROMPT
 
-    PROMPT="$(gettext 'Press the Enter key to continue [Enter]: ')"
-    logmsg "$PROMPT"
+    L_PROMPT="$(gettext 'Press the Enter key to continue [Enter]: ')"
+    logmsg "$L_PROMPT"
     printf '\n'
-    read -rp "$PROMPT" < /dev/tty
+    read -rp "$L_PROMPT" < /dev/tty
     printf '\n'
 }

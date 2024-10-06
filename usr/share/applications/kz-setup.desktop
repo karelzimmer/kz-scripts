@@ -9,7 +9,7 @@
 Type=Application
 Name=Set up apps
 Comment=Set up apps and change user settings
-Categories=Utility;X-GNOME-Utilities;
+Categories=Utility;X-KZ_GNOME-Utilities;
 TryExec=kz
 Exec=kz-setup --gui
 Icon=kz-setup

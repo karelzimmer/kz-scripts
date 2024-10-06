@@ -9,7 +9,7 @@
 Type=Application
 Name=Restore backup
 Comment=Restores a backup copy of the Home folder
-Categories=Utility;X-GNOME-Utilities;
+Categories=Utility;X-KZ_GNOME-Utilities;
 TryExec=kz
 Exec=kz-restore --gui
 Icon=kz-restore

@@ -19,30 +19,30 @@ source kz_common.sh
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-wifi'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Show WiFi information')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare KZ_PROGRAM_NAME='kz-wifi'
+declare KZ_PROGRAM_DESC
+        KZ_PROGRAM_DESC=$(gettext 'Show WiFi information')
+declare KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
-\$OPTIONS_USAGE")
+declare KZ_USAGE
+        KZ_USAGE=$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [-g|--gui] \
+\$KZ_OPTIONS_USAGE")
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
+declare KZ_X_OPTIONS_HELP
+        KZ_X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
 requires desktop environment")
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare KZ_HELP
+        KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...]")
 
-$PROGRAM_DESC.
+$KZ_PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
+$KZ_X_OPTIONS_HELP
+$KZ_OPTIONS_HELP"
 
-declare X_OPTIONS_SHORT='g'
-declare X_OPTIONS_LONG=',gui'
+declare KZ_X_OPTIONS_SHORT='g'
+declare KZ_X_OPTIONS_LONG=',gui'
 
 
 ###############################################################################
@@ -51,20 +51,20 @@ declare X_OPTIONS_LONG=',gui'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local L_PARSED=''
 
-    PARSED=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+    L_PARSED=$(
+        getopt  --alternative                                               \
+                --options       "${KZ_OPTIONS_SHORT}$KZ_X_OPTIONS_SHORT"    \
+                --longoptions   "${KZ_OPTIONS_LONG}$KZ_X_OPTIONS_LONG"      \
+                --name          "$KZ_DISPLAY_NAME"                          \
                 --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERROR
+        )       || KZ_RC=$?
+    if [[ $KZ_RC -ne $KZ_OK ]]; then
+        infomsg "$KZ_USAGE"
+        exit    $KZ_ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$L_PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -76,14 +76,14 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
-                    TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERROR
+                if ! $KZ_DESKTOP_ENVIRONMENT; then
+                    KZ_TEXT=\
+"$KZ_DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+$KZ_USAGE"
+                    infomsg "$KZ_TEXT"
+                    exit $KZ_ERROR
                 fi
-                OPTION_GUI=true
+                KZ_OPTION_GUI=true
                 shift
                 ;;
             -- )
@@ -97,44 +97,45 @@ $USAGE"
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT="$KZ_DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
 
 # This function processes the script options and arguments.
 function process_input() {
-    local NMCLI_OUTPUT=''
+    local L_NMCLI_OUTPUT=''
 
-    TEXT=$(gettext "Record this data to connect to the wireless network.")
+    KZ_TEXT=$(gettext "Record this data to connect to the wireless network.")
 
-    if $OPTION_GUI; then
+    if $KZ_OPTION_GUI; then
 
-        if NMCLI_OUTPUT=$(nmcli device wifi show-password 2> >($LOGCMD)); then
-            TEXT="$NMCLI_OUTPUT
+        if L_NMCLI_OUTPUT=$(nmcli device wifi show-password 2> >($LOGCMD))
+        then
+            KZ_TEXT="$L_NMCLI_OUTPUT
 
-$TEXT"
+$KZ_TEXT"
         else
-            TEXT=$(gettext 'No WiFi device found.')
+            KZ_TEXT=$(gettext 'No WiFi device found.')
         fi
 
     else
         # Shows QR code for quick connection to Wi-Fi network.
         if ! nmcli device wifi show-password 2> >($LOGCMD); then
-            TEXT=$(gettext "No WiFi device found.")
+            KZ_TEXT=$(gettext "No WiFi device found.")
         fi
     fi
 
-    infomsg "$TEXT"
+    infomsg "$KZ_TEXT"
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    exit $OK
+    exit $KZ_OK
 }
 
 

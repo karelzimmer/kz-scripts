@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Change GNOME
+# SPDX-FileComment: Change KZ_GNOME
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -19,20 +19,20 @@ source kz_common.sh
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-gnome'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Change GNOME')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare KZ_PROGRAM_NAME='kz-gnome'
+declare KZ_PROGRAM_DESC
+        KZ_PROGRAM_DESC=$(gettext 'Change KZ_GNOME')
+declare KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] \
-[-b|--addbef FAVORITE]
+declare KZ_USAGE
+        KZ_USAGE="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [-a|--addaft \
+FAVORITE] [-b|--addbef FAVORITE]
                 [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
-                \$OPTIONS_USAGE")"
+                \$KZ_OPTIONS_USAGE")"
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
-mandatory for short options too.")
+declare KZ_X_OPTIONS_HELP
+        KZ_X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options \
+are mandatory for short options too.")
 
 $(gettext '  -a, --addaft FAVORITE
                  add FAVORITE at the end')
@@ -43,25 +43,25 @@ $(gettext '  -d, --delete FAVORITE
 $(gettext '  -l, --list     show favorites')
 $(gettext '  -r, --reset    set favorites on default values')"
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare KZ_HELP
+        KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...]")
 
-$PROGRAM_DESC.
+$KZ_PROGRAM_DESC.
 
 $(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
+$KZ_X_OPTIONS_HELP
+$KZ_OPTIONS_HELP"
 
-declare X_OPTIONS_SHORT='a:b:d:lr'
-declare X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
+declare KZ_X_OPTIONS_SHORT='a:b:d:lr'
+declare KZ_X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
-declare DESKTOPFILE=''
-declare FAVORITE_ARGUMENT=''
-declare OPTION_ADDAFT=false
-declare OPTION_ADDBEF=false
-declare OPTION_DELETE=false
-declare OPTION_LIST=false
-declare OPTION_RESET=false
+declare KZ_DESKTOPFILE=''
+declare KZ_FAVORITE_ARGUMENT=''
+declare KZ_OPTION_ADDAFT=false
+declare KZ_OPTION_ADDBEF=false
+declare KZ_OPTION_DELETE=false
+declare KZ_OPTION_LIST=false
+declare KZ_OPTION_RESET=false
 
 
 ###############################################################################
@@ -70,20 +70,20 @@ declare OPTION_RESET=false
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local L_PARSED=''
 
-    PARSED=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+    L_PARSED=$(
+        getopt  --alternative                                               \
+                --options       "${KZ_OPTIONS_SHORT}$KZ_X_OPTIONS_SHORT"    \
+                --longoptions   "${KZ_OPTIONS_LONG}$KZ_X_OPTIONS_LONG"      \
+                --name          "$KZ_DISPLAY_NAME"                          \
                 --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERROR
+        )       || KZ_RC=$?
+    if [[ $KZ_RC -ne $KZ_OK ]]; then
+        infomsg "$KZ_USAGE"
+        exit    $KZ_ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$L_PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -95,44 +95,47 @@ function process_x_options() {
     while true; do
         case $1 in
             -a | --addaft )
-                if $OPTION_ADDAFT; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERROR
+                if $KZ_OPTION_ADDAFT; then
+                    KZ_TEXT="$KZ_DISPLAY_NAME: $1 $2: $(gettext "too many \
+options")
+$KZ_USAGE"
+                    infomsg "$KZ_TEXT"
+                    exit $KZ_ERROR
                 fi
-                OPTION_ADDAFT=true
-                FAVORITE_ARGUMENT=$2
+                KZ_OPTION_ADDAFT=true
+                KZ_FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -b | --addbef )
-                if $OPTION_ADDBEF; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERROR
+                if $KZ_OPTION_ADDBEF; then
+                    KZ_TEXT="$KZ_DISPLAY_NAME: $1 $2: $(gettext "too many \
+options")
+$KZ_USAGE"
+                    infomsg "$KZ_TEXT"
+                    exit $KZ_ERROR
                 fi
-                OPTION_ADDBEF=true
-                FAVORITE_ARGUMENT=$2
+                KZ_OPTION_ADDBEF=true
+                KZ_FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -d | --delete )
-                if $OPTION_DELETE; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERROR
+                if $KZ_OPTION_DELETE; then
+                    KZ_TEXT="$KZ_DISPLAY_NAME: $1 $2: $(gettext "too many \
+options")
+$KZ_USAGE"
+                    infomsg "$KZ_TEXT"
+                    exit $KZ_ERROR
                 fi
-                OPTION_DELETE=true
-                FAVORITE_ARGUMENT=$2
+                KZ_OPTION_DELETE=true
+                KZ_FAVORITE_ARGUMENT=$2
                 shift 2
                 ;;
             -l | --list )
-                OPTION_LIST=true
+                KZ_OPTION_LIST=true
                 shift
                 ;;
             -r | --reset )
-                OPTION_RESET=true
+                KZ_OPTION_RESET=true
                 shift
                 ;;
             -- )
@@ -146,41 +149,42 @@ $USAGE"
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT="$KZ_DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
-        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+    if ! $KZ_DESKTOP_ENVIRONMENT; then
+        KZ_TEXT="$KZ_DISPLAY_NAME: $(gettext "no desktop environment \
+available")
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
 
 # This function processes the script options and arguments.
 function process_input() {
-    if ! $GNOME; then
-        TEXT=$(gettext 'For GNOME desktop environments only.')
-        infomsg "$TEXT"
-        exit $OK
+    if ! $KZ_GNOME; then
+        KZ_TEXT=$(gettext 'For KZ_GNOME desktop environments only.')
+        infomsg "$KZ_TEXT"
+        exit $KZ_OK
     fi
 
-    DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
+    KZ_DESKTOPFILE=$KZ_FAVORITE_ARGUMENT.desktop
 
-    if $OPTION_ADDAFT; then
-        process_OPTION_ADDAFT
-    elif $OPTION_ADDBEF; then
-        process_OPTION_ADDBEF
-    elif $OPTION_DELETE; then
-        process_OPTION_DELETE
-    elif $OPTION_LIST; then
-        process_OPTION_LIST
-    elif $OPTION_RESET; then
-        process_OPTION_RESET
+    if $KZ_OPTION_ADDAFT; then
+        process_KZ_OPTION_ADDAFT
+    elif $KZ_OPTION_ADDBEF; then
+        process_KZ_OPTION_ADDBEF
+    elif $KZ_OPTION_DELETE; then
+        process_KZ_OPTION_DELETE
+    elif $KZ_OPTION_LIST; then
+        process_KZ_OPTION_LIST
+    elif $KZ_OPTION_RESET; then
+        process_KZ_OPTION_RESET
     else
         capture_gnome_changes
     fi
@@ -188,133 +192,136 @@ function process_input() {
 
 
 # This function adds a favorite to the end of the dash/dock.
-function process_OPTION_ADDAFT () {
-    local FAVORITE_APPS=''
+function process_KZ_OPTION_ADDAFT () {
+    local L_FAVORITE_APPS=''
 
-    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+    L_FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
 
-    if [[ $FAVORITE_APPS = '@as []' ]]; then
-        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet --regexp="$DESKTOPFILE"
+    if [[ $L_FAVORITE_APPS = '@as []' ]]; then
+        gsettings set org.gnome.shell favorite-apps "['$KZ_DESKTOPFILE']"
+    elif !  printf '%s' "$L_FAVORITE_APPS" |
+            grep --quiet --regexp="$KZ_DESKTOPFILE"
     then
         gsettings set org.gnome.shell favorite-apps "$(
-            printf '%s' "$FAVORITE_APPS" |
+            printf '%s' "$L_FAVORITE_APPS" |
             cut --delimiter=']' --fields=1
-            ), '$DESKTOPFILE']"
+            ), '$KZ_DESKTOPFILE']"
     fi
 }
 
 
 # This function adds a favorite to the beginning of the dash/dock.
-function process_OPTION_ADDBEF () {
-    local FAVORITE_APPS=''
+function process_KZ_OPTION_ADDBEF () {
+    local L_FAVORITE_APPS=''
 
-    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+    L_FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
 
-    if [[ $FAVORITE_APPS = '@as []' ]]; then
-        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE']"
-    elif ! printf '%s' "$FAVORITE_APPS" | grep --quiet --regexp="$DESKTOPFILE"
+    if [[ $L_FAVORITE_APPS = '@as []' ]]; then
+        gsettings set org.gnome.shell favorite-apps "['$KZ_DESKTOPFILE']"
+    elif !  printf '%s' "$L_FAVORITE_APPS" |
+            grep --quiet --regexp="$KZ_DESKTOPFILE"
     then
-        gsettings set org.gnome.shell favorite-apps "['$DESKTOPFILE', $(
-                printf '%s' "$FAVORITE_APPS" | cut --delimiter='[' --fields=2
+        gsettings set org.gnome.shell favorite-apps "['$KZ_DESKTOPFILE', $(
+                printf '%s' "$L_FAVORITE_APPS" | cut --delimiter='[' --fields=2
                 )"
     fi
 }
 
 
 # This function removes a favorite from the dash/dock.
-function process_OPTION_DELETE () {
-    local FAVORITE_APPS=''
+function process_KZ_OPTION_DELETE () {
+    local L_FAVORITE_APPS=''
 
-    FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
+    L_FAVORITE_APPS=$(gsettings get org.gnome.shell favorite-apps)
 
-    if [[ $FAVORITE_APPS = '@as []' ]]; then
+    if [[ $L_FAVORITE_APPS = '@as []' ]]; then
         :
-    elif [[ $FAVORITE_APPS = [$DESKTOPFILE] ]]; then
+    elif [[ $L_FAVORITE_APPS = [$KZ_DESKTOPFILE] ]]; then
         gsettings set org.gnome.shell favorite-apps "[]"
     else
         gsettings set org.gnome.shell favorite-apps "$(
-            printf  '%s' "$FAVORITE_APPS"                   |
-            sed     --expression="s/'$DESKTOPFILE', //g"    |
-            sed     --expression="s/, '$DESKTOPFILE'//"
-        )"
+            printf  '%s' "$L_FAVORITE_APPS"                 |
+            sed     --expression="s/'$KZ_DESKTOPFILE', //g" |
+            sed     --expression="s/, '$KZ_DESKTOPFILE'//"
+            )"
     fi
 }
 
 
 # This feature lists the favorite apps in the dash/dock.
-function process_OPTION_LIST () {
-    TEXT=$(gettext 'Favorite apps:')
-    TEXT+="\n$(gsettings get org.gnome.shell favorite-apps)"
-    infomsg "$TEXT"
+function process_KZ_OPTION_LIST () {
+    KZ_TEXT=$(gettext 'Favorite apps:')
+    KZ_TEXT+="\n$(gsettings get org.gnome.shell favorite-apps)"
+    infomsg "$KZ_TEXT"
 }
 
 
 # This function resets the favorites to the factory settings.
-function process_OPTION_RESET () {
+function process_KZ_OPTION_RESET () {
     gsettings reset org.gnome.shell favorite-apps
 }
 
 
-# This function records a change made through the GNOME desktop environment.
+# This function records a change made through the KZ_GNOME desktop environment.
 function capture_gnome_changes() {
-    local CONFIG_A_FILE=''
-    local CONFIG_B_FILE=''
+    local L_CONFIG_A_FILE=''
+    local L_CONFIG_B_FILE=''
 
-    CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
-    save_configuration_database A "$CONFIG_A_FILE"
+    L_CONFIG_A_FILE=$(mktemp -t "$KZ_PROGRAM_NAME-config-a-XXXXXXXXXX")
+    save_configuration_database A "$L_CONFIG_A_FILE"
 
-    TEXT=$(gettext 'Now make the change in the desktop environment.')
-    infomsg "$TEXT"
+    KZ_TEXT=$(gettext 'Now make the change in the desktop environment.')
+    infomsg "$KZ_TEXT"
 
     wait_for_enter
 
-    CONFIG_B_FILE=$(mktemp -t "$PROGRAM_NAME-config-b-XXXXXXXXXX")
-    save_configuration_database B "$CONFIG_B_FILE"
+    L_CONFIG_B_FILE=$(mktemp -t "$KZ_PROGRAM_NAME-config-b-XXXXXXXXXX")
+    save_configuration_database B "$L_CONFIG_B_FILE"
 
-    report_database_changes "$CONFIG_A_FILE" "$CONFIG_B_FILE"
+    report_database_changes "$L_CONFIG_A_FILE" "$L_CONFIG_B_FILE"
 
-    rm --verbose "$CONFIG_A_FILE" "$CONFIG_B_FILE" |& $LOGCMD
+    rm --verbose "$L_CONFIG_A_FILE" "$L_CONFIG_B_FILE" |& $LOGCMD
 }
 
 
-# This function stores the GNOME configuration database.
+# This function stores the KZ_GNOME configuration database.
 function save_configuration_database() {
     # shellcheck disable=SC2034
-    local FASE=${1:-unknown}
-    local OUTPUT_FILE=${2:-unknown}
+    local L_FASE=${1:-unknown}
+    local L_OUTPUT_FILE=${2:-unknown}
 
-    gsettings list-recursively > "$OUTPUT_FILE" 2> >($LOGCMD)
+    gsettings list-recursively > "$L_OUTPUT_FILE" 2> >($LOGCMD)
 
     sort    --unique                \
-            --output="$OUTPUT_FILE" \
-            "$OUTPUT_FILE"
+            --output="$L_OUTPUT_FILE" \
+            "$L_OUTPUT_FILE"
 
-    TEXT=$(eval_gettext "Config database content captured (\$FASE).")
-    infomsg "$TEXT"
+    KZ_TEXT=$(eval_gettext "Config database content captured (\$L_FASE).")
+    infomsg "$KZ_TEXT"
 }
 
 
-# This function reports the changes to the GNOME configuration database.
+# This function reports the changes to the KZ_GNOME configuration database.
 function report_database_changes() {
-    local OUTPUT_FILE_1=${1:-unknown}
-    local OUTPUT_FILE_2=${2:-unknown}
+    local L_OUTPUT_FILE_1=${1:-unknown}
+    local L_OUTPUT_FILE_2=${2:-unknown}
 
-    TEXT="\n$(gettext "CHANGEs in the configuration database,
+    KZ_TEXT="\n$(gettext "CHANGEs in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
 "
-    TEXT+=$(
-        diff "$OUTPUT_FILE_1" "$OUTPUT_FILE_2" | grep --regexp='[>|<]' || true
+    KZ_TEXT+=$(
+        diff "$L_OUTPUT_FILE_1" "$L_OUTPUT_FILE_2" | grep --regexp='[>|<]' ||
+        true
         )
-    TEXT+="\n\n$(gettext 'When CHANGEs, execute: gsettings set CHANGE')"
-    infomsg "$TEXT"
+    KZ_TEXT+="\n\n$(gettext 'When CHANGEs, execute: gsettings set CHANGE')"
+    infomsg "$KZ_TEXT"
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    exit $OK
+    exit $KZ_OK
 }
 
 

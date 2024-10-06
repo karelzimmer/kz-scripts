@@ -26,21 +26,22 @@ source  "$KZ_COMMON_LOCAL_FILE" 2> >(
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-get'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+declare KZ_PROGRAM_NAME='kz-get'
+declare KZ_PROGRAM_DESC
+        KZ_PROGRAM_DESC=$(gettext "Download and install Debian or RPM package \
+kz")
+declare KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+declare KZ_USAGE
+        KZ_USAGE=$(eval_gettext "Usage: \$KZ_DISPLAY_NAME \$KZ_OPTIONS_USAGE")
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+declare KZ_HELP
+        KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...]")
 
-$PROGRAM_DESC.
+$KZ_PROGRAM_DESC.
 
 $(gettext 'Options:')
-$OPTIONS_HELP"
+$KZ_OPTIONS_HELP"
 
 declare KZ_DEB_LOCAL_FILE=''
 
@@ -51,20 +52,20 @@ declare KZ_DEB_LOCAL_FILE=''
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local L_PARSED=''
 
-    PARSED=$(
+    L_PARSED=$(
         getopt  --alternative                       \
-                --options       "$OPTIONS_SHORT"    \
-                --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --options       "$KZ_OPTIONS_SHORT" \
+                --longoptions   "$KZ_OPTIONS_LONG"  \
+                --name          "$KZ_DISPLAY_NAME"  \
                 --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERROR
+        )       || KZ_RC=$?
+    if [[ $KZ_RC -ne $KZ_OK ]]; then
+        infomsg "$KZ_USAGE"
+        exit    $KZ_ERROR
     fi
-    eval set -- "$PARSED"
+    eval set -- "$L_PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -86,34 +87,34 @@ function process_x_options() {
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT="$KZ_DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$KZ_USAGE"
+        infomsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
 
 # This function processes the script options and arguments.
 function process_input() {
-    become_root_check || exit $OK
+    become_root_check || exit $KZ_OK
     prepare_processing
-    if $DEB; then
+    if $KZ_DEB; then
         download_apt_package
         install_apt_package
-    elif $RPM; then
+    elif $KZ_RPM; then
         install_rpm_package
     else
-        TEXT=$(gettext 'Unknown package manager.')
-        errormsg "$TEXT"
-        exit $ERROR
+        KZ_TEXT=$(gettext 'Unknown package manager.')
+        errormsg "$KZ_TEXT"
+        exit $KZ_ERROR
     fi
 }
 
 
 # This function prepares further processing.
 function prepare_processing() {
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    KZ_DEB_LOCAL_FILE=$(mktemp -t "$KZ_PROGRAM_NAME-XXXXXXXXXX.deb")
 
     sudo true
 
@@ -156,26 +157,25 @@ function install_apt_package() {
 }
 
 
-# This function installs RPM package kz.
+# This function installs KZ_RPM package kz.
 function install_rpm_package() {
     local   KZ_RPM_SITE_FILE='https://karelzimmer.nl/assets/packages/'
             KZ_RPM_SITE_FILE+='kz-4.2.1-1.noarch.rpm'
-    local   MODE='install'
+    local   L_MODE='install'
 
-    logmsg  'Install RPM package kz...'
+    logmsg  'Install KZ_RPM package kz...'
 
     if [[ -n $(type -t kz) ]]; then
-        MODE='reinstall'
+        L_MODE='reinstall'
     fi
 
-    sudo dnf $MODE --assumeyes "$KZ_RPM_SITE_FILE" |& $LOGCMD
+    sudo dnf $L_MODE --assumeyes "$KZ_RPM_SITE_FILE" |& $LOGCMD
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-
-    logmsg "Delete kz get files ($PROGRAM_NAME)..."
+    logmsg "Delete kz get files ($KZ_PROGRAM_NAME)..."
     rm  --force                 \
         --verbose               \
         getkz                   \
@@ -186,21 +186,21 @@ function term_script() {
     # Progress indicator with [=>, [==>, etc. ends like [====]100%.
     printf '\b%s\n' '=]100%'
 
-    TEXT="
+    KZ_TEXT="
 $(gettext "Package kz has been successfully installed.
 
 Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under \
 Linux.")"
-    if $DESKTOP_ENVIRONMENT; then
-        TEXT+="
+    if $KZ_DESKTOP_ENVIRONMENT; then
+        KZ_TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"
     fi
-    infomsg "$TEXT"
+    infomsg "$KZ_TEXT"
 
-    exit $OK
+    exit $KZ_OK
 }
 
 
