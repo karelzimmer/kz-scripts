@@ -302,7 +302,6 @@ function restore_setting_desktop() {
 
 # This function controls the termination of the script.
 function term_script() {
-    local       USER_NAME=''
     local       USERS_LIST=''
     local   -i  NUM_USERS
 
