@@ -14,6 +14,6 @@ Scripts for installing and managing:
 - Debian and Debian-based systems such as Ubuntu, and
 - Red Hat and Red Hat-based systems such as Rocky Linux.
 
-Part of Debian package *kz*, named after its creator, Karel Zimmer.
+Part of Debian and RPM package *kz*, named after its creator, Karel Zimmer.
 
 More information on [karelzimmer.nl/en](https://karelzimmer.nl/en).
