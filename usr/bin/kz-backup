@@ -56,7 +56,7 @@ declare SOURCE=$HOME
 declare TARGET_ARGUMENT=''
 declare TARGET_MEDIUM=''
 declare TARGET=''
-declare USERS=''
+declare USERS_LIST=''
 
 
 ###############################################################################
@@ -282,17 +282,18 @@ function backup_setting_apps() {
 
 # This function saves instructions for adding additional users.
 function backup_setting_users() {
+    local GROUPS_LIST=''
     local OUTPUT_FILE=$SETTINGS_DIR/users.txt
     local USER_NAME=''
 
-    USERS=$(
+    USERS_LIST=$(
             gettext '_username_|userid|_user_'
             printf '\n'
             grep --regexp='/home' /etc/passwd   |
             cut --delimiter=':' --fields=1,3,5  |
             tr ':' '|'
             )
-    USERS+=$(
+    GROUPS_LIST=$(
             printf '\n'
             while read -r USER_NAME; do
                 printf '\n'
@@ -315,7 +316,8 @@ on Users.
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")
 
-$USERS"
+$USERS_LIST
+$GROUPS_LIST"
     else
         TEXT="$(gettext 'Additional _user_s can be added manually:')
 $(gettext "# Standard:
@@ -325,7 +327,8 @@ sudo usermod --append --groups adm,sudo _username_
 # User sets password on first login:
 sudo passwd --delete --expire _username_")
 
-$USERS"
+$USERS_LIST
+$GROUPS_LIST"
     fi
 
     printf '%b\n' "$TEXT" > "$OUTPUT_FILE"
@@ -538,7 +541,7 @@ function term_script() {
         TEXT="$(eval_gettext "The backup has been made for \$USER (there are \
 \$NUM_USERS users).")
 
-$USERS"
+$USERS_LIST"
     fi
 
     if [[ $TARGET_MEDIUM == */media/$USER* ]]; then
