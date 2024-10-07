@@ -102,7 +102,7 @@ msgstr ""
 msgid "Type '{} --manual' or 'man {}'{} for more information."
 msgstr ""
 
-msgid "KZ_USAGE:"
+msgid "Usage:"
 msgstr ""
 
 msgid "Type '{} --help' for more information."
