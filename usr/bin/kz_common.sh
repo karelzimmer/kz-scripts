@@ -98,7 +98,7 @@ else
     KZ_DEB=false
 fi
 
-declare     RPM
+declare     KZ_RPM
 # shellcheck disable=SC2034
 if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
     # Additional testing is needed because rpm may be installed on a system
