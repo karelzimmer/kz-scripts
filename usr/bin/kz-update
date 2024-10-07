@@ -173,7 +173,7 @@ def check_reboot():
     TEXT = _("*** The computer needs to be restarted to complete the \
 installation of updates ***")
 
-    if kz_common.DEB:
+    if kz_common.KZ_DEB:
         try:
             with open('/var/run/reboot-required') as fh:
                 TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
@@ -211,7 +211,7 @@ kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
 kz_common.become_root(PROGRAM_NAME)
 
-if kz_common.DEB:
+if kz_common.KZ_DEB:
     perform_apt_repair()
 
     perform_apt_update()

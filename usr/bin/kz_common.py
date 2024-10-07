@@ -56,39 +56,39 @@ NORMAL = '\033[0m'
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    DESKTOP_ENVIRONMENT = True
+    KZ_DESKTOP_ENVIRONMENT = True
 else:
-    DESKTOP_ENVIRONMENT = False
+    KZ_DESKTOP_ENVIRONMENT = False
 
 if subprocess.run("[[ $(lsb_release --id --short) = 'Debian' ]]",
                   shell=True, executable='bash').returncode == OK:
-    DEBIAN = True
+    KZ_DEBIAN = True
 else:
-    DEBIAN = False
+    KZ_DEBIAN = False
 
 if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
-    UBUNTU = True
+    KZ_UBUNTU = True
 else:
-    UBUNTU = False
+    KZ_UBUNTU = False
 
 if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    DEB = True
+    KZ_DEB = True
 else:
-    DEB = False
+    KZ_DEB = False
 
 if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
                   shell=True, executable='bash').returncode == OK:
     # Additional testing is needed because rpm may be installed on a system
     # that uses Debian package management system APT. APT is not available on a
     # system that uses Red Hat package management system RPM.
-    if DEB:
-        RPM = False
+    if KZ_DEB:
+        KZ_RPM = False
     else:
-        RPM = True
+        KZ_RPM = True
 else:
-    RPM = False
+    KZ_RPM = False
 
 
 ###############################################################################
@@ -156,7 +156,7 @@ def check_apt_package_manager(PROGRAM_NAME):
     """
     CHECK_WAIT = 10
 
-    if RPM:
+    if KZ_RPM:
         return OK
 
     while True:
@@ -241,7 +241,7 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     YELP_MAN_URL = ''
 
-    if DESKTOP_ENVIRONMENT:
+    if KZ_DESKTOP_ENVIRONMENT:
         YELP_MAN_URL = f"{_(', or see the ')}"
         YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
         YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"

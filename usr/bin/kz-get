@@ -98,10 +98,10 @@ $USAGE"
 function process_input() {
     become_root_check || exit $OK
     prepare_processing
-    if $DEB; then
+    if $KZ_DEB; then
         download_apt_package
         install_apt_package
-    elif $RPM; then
+    elif $KZ_RPM; then
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')
@@ -193,7 +193,7 @@ Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under \
 Linux.")"
-    if $DESKTOP_ENVIRONMENT; then
+    if $KZ_DESKTOP_ENVIRONMENT; then
         TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"

@@ -90,7 +90,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
+                if ! $KZ_DESKTOP_ENVIRONMENT; then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -142,7 +142,7 @@ function process_input() {
 function check_target() {
     local USB_MOUNT_POINT="/media/$USER"
 
-    if $RPM; then
+    if $KZ_RPM; then
         USB_MOUNT_POINT="/run/media/$USER"
     fi
 
@@ -229,7 +229,7 @@ function backup_settings() {
     backup_setting_users
     backup_setting_wifi
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $KZ_DESKTOP_ENVIRONMENT; then
         backup_setting_avatar
         backup_setting_desktop
         backup_setting_favs
@@ -306,7 +306,7 @@ function backup_setting_users() {
 
     logmsg 'Save instructions for adding additional users...'
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $KZ_DESKTOP_ENVIRONMENT; then
         TEXT="$(gettext 'Additional _user_s can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.

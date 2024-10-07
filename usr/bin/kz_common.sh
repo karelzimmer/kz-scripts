@@ -58,44 +58,44 @@ declare     RED='\033[1;31m'
 declare     GREEN='\033[1;32m'
 declare     NORMAL='\033[0m'
 
-declare     DESKTOP_ENVIRONMENT
+declare     KZ_DESKTOP_ENVIRONMENT
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
-    DESKTOP_ENVIRONMENT=true
+    KZ_DESKTOP_ENVIRONMENT=true
 else
-    DESKTOP_ENVIRONMENT=false
+    KZ_DESKTOP_ENVIRONMENT=false
 fi
 
-declare     GNOME=true
+declare     KZ_GNOME=true
 # shellcheck disable=SC2034
 if [[ -n $(type -t gnome-session) ]]; then
-    GNOME=true
+    KZ_GNOME=true
 else
-    GNOME=false
+    KZ_GNOME=false
 fi
 
-declare     DEBIAN
+declare     KZ_DEBIAN
 # shellcheck disable=SC2034
 if [[ $(lsb_release --id --short) = 'Debian' ]]; then
-    DEBIAN=true
+    KZ_DEBIAN=true
 else
-    DEBIAN=false
+    KZ_DEBIAN=false
 fi
 
-declare     UBUNTU
+declare     KZ_UBUNTU
 # shellcheck disable=SC2034
 if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then
-    UBUNTU=true
+    KZ_UBUNTU=true
 else
-    UBUNTU=false
+    KZ_UBUNTU=false
 fi
 
-declare     DEB
+declare     KZ_DEB
 # shellcheck disable=SC2034
 if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
-    DEB=true
+    KZ_DEB=true
 else
-    DEB=false
+    KZ_DEB=false
 fi
 
 declare     RPM
@@ -104,13 +104,13 @@ if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
     # Additional testing is needed because rpm may be installed on a system
     # that uses Debian package management system APT. APT is not available on a
     # system that uses Red Hat package management system RPM.
-    if $DEB; then
-        RPM=false
+    if $KZ_DEB; then
+        KZ_RPM=false
     else
-        RPM=true
+        KZ_RPM=true
     fi
 else
-    RPM=false
+    KZ_RPM=false
 fi
 
 declare     ERREXIT=true
@@ -171,7 +171,7 @@ function become_root_check() {
 function check_apt_package_manager() {
     local   -i  CHECK_WAIT=10
 
-    if ! $DEB; then
+    if ! $KZ_DEB; then
         return $OK
     fi
 
@@ -287,7 +287,7 @@ function process_options() {
 function process_option_help() {
     local YELP_MAN_URL=''
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $KZ_DESKTOP_ENVIRONMENT; then
         YELP_MAN_URL="$(gettext ', or see the ')"
         YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
@@ -361,9 +361,9 @@ function term() {
             RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            if $DEB; then
+            if $KZ_DEB; then
                 RC_DESC='apt/dpkg exited with error'
-            elif $RPM; then
+            elif $KZ_RPM; then
                 RC_DESC='there are updates available'
             else
                 RC_DESC="previous errors/it didn't work"

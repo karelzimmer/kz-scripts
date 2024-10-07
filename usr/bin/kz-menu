@@ -120,7 +120,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
+                if ! $KZ_DESKTOP_ENVIRONMENT; then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -316,7 +316,7 @@ function process_menu1_choice4() {
     process_commands
 
     # User must type 'logout' to log out.
-    $DESKTOP_ENVIRONMENT || exit $OK
+    $KZ_DESKTOP_ENVIRONMENT || exit $OK
 }
 
 
