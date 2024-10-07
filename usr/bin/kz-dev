@@ -19,21 +19,21 @@ source kz_common.sh
 # Variables
 ###############################################################################
 
-declare KZ_PROGRAM_NAME='kz-dev'
-declare KZ_PROGRAM_DESC
-        KZ_PROGRAM_DESC=$(gettext 'Build development environment')
-declare KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
+declare PROGRAM_NAME='kz-dev'
+declare PROGRAM_DESC
+        PROGRAM_DESC=$(gettext 'Build development environment')
+declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare KZ_USAGE
-        KZ_USAGE=$(eval_gettext "Usage: \$KZ_DISPLAY_NAME \$KZ_OPTIONS_USAGE")
+declare USAGE
+        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
-declare KZ_HELP
-        KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...]")
+declare HELP
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
 
-$KZ_PROGRAM_DESC.
+$PROGRAM_DESC.
 
 $(gettext 'Options:')
-$KZ_OPTIONS_HELP"
+$OPTIONS_HELP"
 
 
 ###############################################################################
@@ -42,20 +42,20 @@ $KZ_OPTIONS_HELP"
 
 # This function handles the script options and arguments.
 function check_input() {
-    local L_PARSED=''
+    local PARSED=''
 
-    L_PARSED=$(
+    PARSED=$(
         getopt  --alternative                       \
-                --options       "$KZ_OPTIONS_SHORT" \
-                --longoptions   "$KZ_OPTIONS_LONG"  \
-                --name          "$KZ_DISPLAY_NAME"  \
+                --options       "$OPTIONS_SHORT"    \
+                --longoptions   "$OPTIONS_LONG"     \
+                --name          "$DISPLAY_NAME"     \
                 --              "$@"
-        )       || KZ_RC=$?
-    if [[ $KZ_RC -ne $KZ_OK ]]; then
-        infomsg "$KZ_USAGE"
-        exit    $KZ_ERROR
+        ) || RC=$?
+    if [[ $RC -ne $OK ]]; then
+        infomsg "$USAGE"
+        exit $ERROR
     fi
-    eval set -- "$L_PARSED"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -77,30 +77,29 @@ function process_x_options() {
     done
 
     if [[ -n $* ]]; then
-        KZ_TEXT="$KZ_DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$KZ_USAGE"
-        infomsg "$KZ_TEXT"
-        exit $KZ_ERROR
+        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+$USAGE"
+        infomsg "$TEXT"
+        exit $ERROR
     fi
 
-    if ! $KZ_DESKTOP_ENVIRONMENT; then
-        KZ_TEXT="$KZ_DISPLAY_NAME: $(gettext "no desktop environment \
-available")
-$KZ_USAGE"
-        infomsg "$KZ_TEXT"
-        exit $KZ_ERROR
+    if ! $DESKTOP_ENVIRONMENT; then
+        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+$USAGE"
+        infomsg "$TEXT"
+        exit $ERROR
     fi
 }
 
 
 # This function processes the script options and arguments.
 function process_input() {
-    if ! $KZ_DEB; then
-        KZ_TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
-        infomsg "$KZ_TEXT"
-        exit $KZ_ERROR
+    if ! $DEB; then
+        TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
+        infomsg "$TEXT"
+        exit $ERROR
     fi
-    become_root_check || exit $KZ_OK
+    become_root_check || exit $OK
     check_dependencies
     pull_repos
     download_website
@@ -109,16 +108,16 @@ function process_input() {
 
 # This function checks and installs dependencies.
 function check_dependencies() {
-    local L_ESC_GETTEXT='gettext'
+    local ESC_GETTEXT='gettext'
 
-    KZ_TEXT=$(gettext 'Check dependencies')...
-    infomsg "$KZ_TEXT"
+    TEXT=$(gettext 'Check dependencies')...
+    infomsg "$TEXT"
 
     # Call kz install.
     logmsg 'Calling kz install...'
     kz  install         \
         fakeroot        \
-        $L_ESC_GETTEXT  \
+        $ESC_GETTEXT    \
         git             \
         jq              \
         lftp            \
@@ -138,82 +137,82 @@ function check_dependencies() {
 
 # This function retrieves the public repos.
 function pull_repos() {
-    local L_BIN_REPO=$HOME/bin
+    local BIN_REPO=$HOME/bin
 
-    L_PROMPT='Git user.name: '
-    read -rp "$L_PROMPT"
+    PROMPT='Git user.name: '
+    read -rp "$PROMPT"
     git config --global user.name "$REPLY"
 
-    L_PROMPT='Git user.email: '
-    read -rp "$L_PROMPT"
+    PROMPT='Git user.email: '
+    read -rp "$PROMPT"
     git config --global user.email "$REPLY"
 
     git config --global pull.ff only
     git config --global credential.helper store
 
-    if [[ -d $L_BIN_REPO ]]; then
-        cd "$L_BIN_REPO"
+    if [[ -d $BIN_REPO ]]; then
+        cd "$BIN_REPO"
         git pull
     else
-        git clone https://github.com/karelzimmer/bin.git "$L_BIN_REPO"
+        git clone https://github.com/karelzimmer/bin.git "$BIN_REPO"
     fi
 
-    KZ_TEXT=$(gettext 'Pull repos')...
-    infomsg "$KZ_TEXT"
+    TEXT=$(gettext 'Pull repos')...
+    infomsg "$TEXT"
 
     # Call gitpull.
     logmsg 'Calling gitpull...'
-    "$L_BIN_REPO"/gitpull
+    "$BIN_REPO"/gitpull
     logmsg 'Called gitpull.'
 
     printf '%b\n' "$(gettext 'Status repos')..."
 
     # Call gitstat.
     logmsg 'Calling gitstat...'
-    "$L_BIN_REPO"/gitstat
+    "$BIN_REPO"/gitstat
     logmsg 'Called gitstat.'
 }
 
 
 # This function downloads the website.
 function download_website() {
-    local L_FTP_SET='set ssl:verify-certificate no'
-    local L_FTP_FROM=/httpdocs
-    local L_FTP_TO=$HOME/kz-uploads/dist
-    local L_FTP_OPTS='--delete --verbose'
-    local L_FTP_CMD="mirror  $L_FTP_OPTS $L_FTP_FROM $L_FTP_TO; exit"
-    local L_FTP_HOST=server106.hosting2go.nl
-    local L_FTP_USER=kzimmer
-    local L_FTP_LOGIN=$HOME/.$L_FTP_HOST'.login'
-    local L_PROMPT
+    local FTP_SET='set ssl:verify-certificate no'
+    local FTP_FROM=/httpdocs
+    local FTP_TO=$HOME/kz-uploads/dist
+    local FTP_OPTS='--delete --verbose'
+    local FTP_CMD="mirror  $FTP_OPTS $FTP_FROM $FTP_TO; exit"
+    local FTP_HOST=server106.hosting2go.nl
+    local FTP_USER=kzimmer
+    local FTP_LOGIN=$HOME/.$FTP_HOST'.login'
+    local PROMPT
 
-    L_PROMPT="$(gettext 'Password for') ftp://$L_FTP_HOST': "
+    PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
 
-    if [[ ! -f $L_FTP_LOGIN ]]; then
-        read -rsp "$L_PROMPT" < /dev/tty
-        printf '%s' "$REPLY" > "$L_FTP_LOGIN"
+    if [[ ! -f $FTP_LOGIN ]]; then
+        read -rsp "$PROMPT" < /dev/tty
+        printf '%s' "$REPLY" > "$FTP_LOGIN"
         printf '\n'
-        chmod --verbose 'u=rw,g=,o=' "$L_FTP_LOGIN" |& $LOGCMD
+        chmod --verbose 'u=rw,g=,o=' "$FTP_LOGIN" |& $LOGCMD
     fi
 
-    if ! lftp   --user "$L_FTP_USER"                \
-                --password "$(cat "$L_FTP_LOGIN")"  \
-                -e "$L_FTP_SET; $L_FTP_CMD"         \
-                "$L_FTP_HOST"; then
+    if ! lftp   --user "$FTP_USER"                  \
+                --password "$(cat "$FTP_LOGIN")"    \
+                -e "$FTP_SET; $FTP_CMD"             \
+                "$FTP_HOST"; then
         # Force entering the password next time.
-        rm --verbose "$L_FTP_LOGIN"*
-        KZ_TEXT=$(gettext 'Website download failed.')
-        errormsg "$KZ_TEXT"
-        exit $KZ_ERROR
+        rm --verbose "$FTP_LOGIN"*
+        TEXT=$(gettext 'Website download failed.')
+        errormsg "$TEXT"
+        exit $ERROR
     fi
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    KZ_TEXT="${KZ_GREEN}$KZ_DISPLAY_NAME $(gettext 'finished')$KZ_NORMAL"
-    infomsg "$KZ_TEXT"
-    exit $KZ_OK
+    TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
+    infomsg "$TEXT"
+    exit $OK
 }
 
 

@@ -9,7 +9,7 @@
 Type=Application
 Name=Skype
 Comment=Video call with others from a web browser
-Categories=Utility;X-KZ_GNOME-Utilities;
+Categories=Utility;X-GNOME-Utilities;
 TryExec=google-chrome
 Exec=google-chrome https://web.skype.com
 Icon=kz-skype

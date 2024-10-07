@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-06 19:19+0200\n"
+"POT-Creation-Date: 2024-10-02 12:54+0200\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -42,15 +42,15 @@ msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
 #, sh-format
-msgid "Program $KZ_PROGRAM_NAME encountered an error."
-msgstr "In programma $KZ_PROGRAM_NAME is een fout opgetreden."
+msgid "Program $PROGRAM_NAME encountered an error."
+msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
 msgid "To try to resolve, run:"
 msgstr "Om proberen op te lossen, voer uit:"
 
 #, sh-format
-msgid "Program $KZ_PROGRAM_NAME has been interrupted."
-msgstr "Programma $KZ_PROGRAM_NAME is onderbroken."
+msgid "Program $PROGRAM_NAME has been interrupted."
+msgstr "Programma $PROGRAM_NAME is onderbroken."
 
 msgid ""
 "If the package manager gives apt errors, launch a Terminal window and "
@@ -67,15 +67,15 @@ msgstr "man-pagina"
 
 #, sh-format
 msgid ""
-"Type '$KZ_DISPLAY_NAME --manual' or 'man $KZ_DISPLAY_NAME'$L_YELP_MAN_URL "
-"for more information."
+"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$YELP_MAN_URL for more "
+"information."
 msgstr ""
-"Typ '$KZ_DISPLAY_NAME --manual' of 'man $KZ_DISPLAY_NAME'$L_YELP_MAN_URL "
-"voor meer informatie."
+"Typ '$DISPLAY_NAME --manual' of 'man $DISPLAY_NAME'$YELP_MAN_URL voor meer "
+"informatie."
 
 #, sh-format
-msgid "Type '$KZ_DISPLAY_NAME --help' for more information."
-msgstr "Typ '$KZ_DISPLAY_NAME --help' voor meer informatie."
+msgid "Type '$DISPLAY_NAME --help' for more information."
+msgstr "Typ '$DISPLAY_NAME --help' voor meer informatie."
 
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
@@ -85,12 +85,12 @@ msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
 #, sh-format
-msgid "$KZ_PROGRAM_DESC information ($KZ_DISPLAY_NAME)"
-msgstr "$KZ_PROGRAM_DESC informatie ($KZ_DISPLAY_NAME)"
+msgid "$PROGRAM_DESC information ($DISPLAY_NAME)"
+msgstr "$PROGRAM_DESC informatie ($DISPLAY_NAME)"
 
 #, sh-format
-msgid "$KZ_PROGRAM_DESC error message ($KZ_DISPLAY_NAME)"
-msgstr "$KZ_PROGRAM_DESC foutmelding ($KZ_DISPLAY_NAME)"
+msgid "$PROGRAM_DESC error message ($DISPLAY_NAME)"
+msgstr "$PROGRAM_DESC foutmelding ($DISPLAY_NAME)"
 
 msgid "Common module for Python scripts"
 msgstr "Algemene module voor Python scripts"
@@ -117,8 +117,8 @@ msgid "Build ID cannot be determined."
 msgstr "Build-ID kan niet worden bepaald."
 
 #, sh-format
-msgid "kz version 4.2.1 ($L_BUILD_ID)."
-msgstr "kz versie 4.2.1 ($L_BUILD_ID)."
+msgid "kz version 4.2.1 ($BUILD_ID)."
+msgstr "kz versie 4.2.1 ($BUILD_ID)."
 
 #, sh-format
 msgid "kz version 4.2.1 ({})."
@@ -132,15 +132,15 @@ msgstr "Opdracht uitvoeren"
 
 #, sh-format
 msgid ""
-"Usage: $KZ_DISPLAY_NAME [-l|--list] $KZ_OPTIONS_USAGE\n"
+"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
 "          COMMAND [ARGUMENT...]"
 msgstr ""
-"Gebruik: $KZ_DISPLAY_NAME [-l|--list] $KZ_OPTIONS_USAGE\n"
+"Gebruik: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
 "            OPDRACHT [ARGUMENT...]"
 
 #, sh-format
-msgid "Usage: $KZ_DISPLAY_NAME [OPTION...] COMMAND [ARGUMENT...]"
-msgstr "Gebruik: $KZ_DISPLAY_NAME [OPTIE...] OPDRACHT [ARGUMENT...]"
+msgid "Usage: $DISPLAY_NAME [OPTION...] COMMAND [ARGUMENT...]"
+msgstr "Gebruik: $DISPLAY_NAME [OPTIE...] OPDRACHT [ARGUMENT...]"
 
 msgid "  -l, --list     show available COMMANDs"
 msgstr "  -l, --list     toon beschikbare OPDRACHTen"
@@ -167,23 +167,23 @@ msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
 #, sh-format
-msgid "To execute a COMMAND: $KZ_DISPLAY_NAME COMMAND [ARGUMENT...]"
-msgstr "Om een OPDRACHT uit te voeren: $KZ_DISPLAY_NAME OPDRACHT [ARGUMENT...]"
+msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ARGUMENT...]"
+msgstr "Om een OPDRACHT uit te voeren: $DISPLAY_NAME OPDRACHT [ARGUMENT...]"
 
 msgid "Make backup"
 msgstr "Back-up maken"
 
 #, sh-format
 msgid ""
-"Usage: $KZ_DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
-"                 $KZ_OPTIONS_USAGE"
+"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
+"                 $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $KZ_DISPLAY_NAME [-g|--gui] [-t|--target MAP]\n"
-"                   $KZ_OPTIONS_USAGE"
+"Gebruik: $DISPLAY_NAME [-g|--gui] [-t|--target MAP]\n"
+"                   $OPTIONS_USAGE"
 
 #, sh-format
-msgid "Usage: $KZ_DISPLAY_NAME [OPTION...]"
-msgstr "Gebruik: $KZ_DISPLAY_NAME [OPTIE...]"
+msgid "Usage: $DISPLAY_NAME [OPTION...]"
+msgstr "Gebruik: $DISPLAY_NAME [OPTIE...]"
 
 msgid "Options:"
 msgstr "Opties:"
@@ -224,14 +224,14 @@ msgid ""
 "Connect only one USB medium.\n"
 "\n"
 "Now connected:\n"
-"$KZ_MEDIUM\n"
+"$MEDIUM\n"
 "\n"
 "Disconnect media via Files."
 msgstr ""
 "Koppel slechts één usb-medium aan.\n"
 "\n"
 "Nu aangekoppeld zijn:\n"
-"$KZ_MEDIUM\n"
+"$MEDIUM\n"
 "\n"
 "Koppel media af via Bestanden."
 
@@ -280,10 +280,10 @@ msgid ""
 "\n"
 "Some files may not be readable, or\n"
 "were any files added or removed while creating the backup, or\n"
-"is there not enough space on $KZ_TARGET.\n"
+"is there not enough space on $TARGET.\n"
 "\n"
-"Check the rsync messages (also in $L_ERROR_FILE):\n"
-"$L_RSYNC_MESSAGES\n"
+"Check the rsync messages (also in $ERROR_FILE):\n"
+"$RSYNC_MESSAGES\n"
 "\n"
 "Try creating the back up again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
@@ -295,10 +295,10 @@ msgstr ""
 "Mogelijk zijn enkele bestanden niet leesbaar, of\n"
 "zijn er bestanden verwijderd of toegevoegd tijdens het maken van de back-up, "
 "of\n"
-"is er te weinig ruimte op $KZ_TARGET.\n"
+"is er te weinig ruimte op $TARGET.\n"
 "\n"
-"Controleer de rsync-berichten (ook in $L_ERROR_FILE):\n"
-"$L_RSYNC_MESSAGES\n"
+"Controleer de rsync-berichten (ook in $ERROR_FILE):\n"
+"$RSYNC_MESSAGES\n"
 "\n"
 "Probeer de back-up opnieuw te maken.\n"
 "Gebruik app 'Installatie menu' en selecteer '5 - Opdrachtmenu', of\n"
@@ -318,15 +318,15 @@ msgid "The backup has been made."
 msgstr "De back-up is gemaakt."
 
 #, sh-format
-msgid "The backup has been made for $USER (there are $L_NUM_USERS users)."
-msgstr "De back-up is gemaakt voor $USER (er zijn $L_NUM_USERS gebruikers)."
+msgid "The backup has been made for $USER (there are $NUM_USERS users)."
+msgstr "De back-up is gemaakt voor $USER (er zijn $NUM_USERS gebruikers)."
 
 msgid "Build website including kz packages"
 msgstr "Website bouwen inclusief kz pakketten"
 
 #, sh-format
-msgid "Usage: $KZ_DISPLAY_NAME $KZ_OPTIONS_USAGE"
-msgstr "Gebruik: $KZ_DISPLAY_NAME $KZ_OPTIONS_USAGE"
+msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
+msgstr "Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
 
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
@@ -428,18 +428,18 @@ msgstr "Wachtwoord voor"
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-msgid "Change KZ_GNOME"
-msgstr "KZ_GNOME wijzigen"
+msgid "Change GNOME"
+msgstr "GNOME wijzigen"
 
 #, sh-format
 msgid ""
-"Usage: $KZ_DISPLAY_NAME [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]\n"
+"Usage: $DISPLAY_NAME [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]\n"
 "                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]\n"
-"                $KZ_OPTIONS_USAGE"
+"                $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $KZ_DISPLAY_NAME [-a|--addaft FAVORIET] [-b|--addbef FAVORIET]\n"
+"Gebruik: $DISPLAY_NAME [-a|--addaft FAVORIET] [-b|--addbef FAVORIET]\n"
 "                  [-d|--delete FAVORIET] [-l|--list] [-r|--reset]\n"
-"                  $KZ_OPTIONS_USAGE"
+"                  $OPTIONS_USAGE"
 
 msgid ""
 "  -a, --addaft FAVORITE\n"
@@ -468,8 +468,8 @@ msgstr "  -l, --list     toon favorieten"
 msgid "  -r, --reset    set favorites on default values"
 msgstr "  -r, --reset    stel favorieten in op standaardwaarden"
 
-msgid "For KZ_GNOME desktop environments only."
-msgstr "Alleen voor KZ_GNOME-systemen."
+msgid "For GNOME desktop environments only."
+msgstr "Alleen voor GNOME-systemen."
 
 msgid "Favorite apps:"
 msgstr "Favorieten:"
@@ -478,8 +478,8 @@ msgid "Now make the change in the desktop environment."
 msgstr "Voer nu de wijziging uit in de desktopomgeving."
 
 #, sh-format
-msgid "Config database content captured ($L_FASE)."
-msgstr "Inhoud configuratiedatabase vastgelegd ($L_FASE)."
+msgid "Config database content captured ($FASE)."
+msgstr "Inhoud configuratiedatabase vastgelegd ($FASE)."
 
 msgid ""
 "CHANGEs in the configuration database,\n"
@@ -498,17 +498,17 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $KZ_DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
 "r|--remove]\n"
-"                  $KZ_OPTIONS_USAGE [--] [APP...]"
+"                  $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
-"Gebruik: $KZ_DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file BESTAND] [-g|--"
-"gui] [-r|--remove]\n"
-"                    $KZ_OPTIONS_USAGE [--] [APP...]"
+"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file BESTAND] [-g|--gui] "
+"[-r|--remove]\n"
+"                    $OPTIONS_USAGE [--] [APP...]"
 
 #, sh-format
-msgid "Usage: $KZ_DISPLAY_NAME [OPTION...] [APP...]"
-msgstr "Gebruik: $KZ_DISPLAY_NAME [OPTIE...] [APP...]"
+msgid "Usage: $DISPLAY_NAME [OPTION...] [APP...]"
+msgstr "Gebruik: $DISPLAY_NAME [OPTIE...] [APP...]"
 
 msgid "  -a, --apps     show list of apps"
 msgstr "  -a, --apps     toon lijst van apps"
@@ -519,11 +519,11 @@ msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 #, sh-format
 msgid ""
 "  -f, --file FILE\n"
-"                 process FILE (default FILE is /usr/bin/$KZ_PROGRAM_NAME.sh)"
+"                 process FILE (default FILE is /usr/bin/$PROGRAM_NAME.sh)"
 msgstr ""
 "  -f, --file BESTAND\n"
-"                 verwerk BESTAND (standaardBESTAND is "
-"/usr/bin/$KZ_PROGRAM_NAME.sh)"
+"                 verwerk BESTAND (standaardBESTAND is /usr/bin/$PROGRAM_NAME."
+"sh)"
 
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
@@ -551,12 +551,12 @@ msgid "app not found"
 msgstr "app niet gevonden"
 
 #, sh-format
-msgid "Type '$KZ_DISPLAY_NAME --apps' for available apps."
-msgstr "Typ '$KZ_DISPLAY_NAME --apps' voor beschikbare apps."
+msgid "Type '$DISPLAY_NAME --apps' for available apps."
+msgstr "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
 
 #, sh-format
-msgid "No install file found, looked for '$KZ_INPUT_FILE'."
-msgstr "Geen installatiebestand gevonden, zocht '$KZ_INPUT_FILE'."
+msgid "No install file found, looked for '$INPUT_FILE'."
+msgstr "Geen installatiebestand gevonden, zocht '$INPUT_FILE'."
 
 msgid "The following apps are available:"
 msgstr "De volgende apps zijn beschikbaar:"
@@ -569,23 +569,22 @@ msgstr "  0  Geen apps gevonden."
 
 #, sh-format
 msgid ""
-"To view the contents of the apps install file execute: $KZ_DISPLAY_NAME --"
-"cat APP..."
+"To view the contents of the apps install file execute: $DISPLAY_NAME --cat "
+"APP..."
 msgstr ""
 "Om de inhoud van het installatiebestand voor apps te bekijken voer uit: "
-"$KZ_DISPLAY_NAME --cat APP..."
+"$DISPLAY_NAME --cat APP..."
 
 #, sh-format
-msgid "To install the apps execute: $KZ_DISPLAY_NAME APP..."
-msgstr "Om de apps te installeren voer uit: $KZ_DISPLAY_NAME APP..."
+msgid "To install the apps execute: $DISPLAY_NAME APP..."
+msgstr "Om de apps te installeren voer uit: $DISPLAY_NAME APP..."
 
 #, sh-format
 msgid ""
-"To view the contents of the default install file execute: $KZ_DISPLAY_NAME --"
-"cat"
+"To view the contents of the default install file execute: $DISPLAY_NAME --cat"
 msgstr ""
 "Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
-"$KZ_DISPLAY_NAME --cat"
+"$DISPLAY_NAME --cat"
 
 msgid "install"
 msgstr "installeren"
@@ -605,42 +604,42 @@ msgstr "Geen opdrachten om uit te voeren."
 #, sh-format
 msgid ""
 "The installation of the following apps contains errors:\n"
-"$L_FAILED_APPS_TEXT\n"
+"$FAILED_APPS_TEXT\n"
 "\n"
 "Try installing the apps again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
 "use app 'Install apps', or\n"
-"use app 'Terminal', type 'kz install $L_FAILED_APPS_TEXT'."
+"use app 'Terminal', type 'kz install $FAILED_APPS_TEXT'."
 msgstr ""
 "De installatie van de volgende apps bevat fouten:\n"
-"$L_FAILED_APPS_TEXT\n"
+"$FAILED_APPS_TEXT\n"
 "\n"
 "Probeer de apps opnieuw te installeren.\n"
 "Gebruik app 'Installatie menu' en selecteer '5 - Opdrachtmenu', of\n"
 "gebruik app 'Apps installeren', of\n"
-"gebruik app 'Terminal' en typ 'kz install $L_FAILED_APPS_TEXT'."
+"gebruik app 'Terminal' en typ 'kz install $FAILED_APPS_TEXT'."
 
 #, sh-format
 msgid ""
 "The set up of the following apps contains errors:\n"
-"$L_FAILED_APPS_TEXT\n"
+"$FAILED_APPS_TEXT\n"
 "\n"
 "Try to set up the apps again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
 "use app 'Set up apps', or\n"
-"use app 'Terminal', type 'kz setup $L_FAILED_APPS_TEXT'."
+"use app 'Terminal', type 'kz setup $FAILED_APPS_TEXT'."
 msgstr ""
 "Het instellen van de volgende apps bevat fouten:\n"
-"$L_FAILED_APPS_TEXT\n"
+"$FAILED_APPS_TEXT\n"
 "\n"
 "Probeer de apps opnieuw in te stellen.\n"
 "Gebruik app 'Installatie menu' en selecteer '5 - Opdrachtmenu', of\n"
 "gebruik app 'Apps instellen', of\n"
-"gebruik app 'Terminal' en typ 'kz setup $L_FAILED_APPS_TEXT'."
+"gebruik app 'Terminal' en typ 'kz setup $FAILED_APPS_TEXT'."
 
 #, sh-format
-msgid "Apps $L_OPERATION completed."
-msgstr "Apps $L_OPERATION is voltooid."
+msgid "Apps $OPERATION completed."
+msgstr "Apps $OPERATION is voltooid."
 
 msgid ""
 "You will now be logged out of the computer to finish installing the apps and "
@@ -672,8 +671,8 @@ msgid "Unknown script. Function check_code cannot check script code."
 msgstr "Onbekend script.  Functie check_code kan scriptcode niet controleren."
 
 #, sh-format
-msgid "A line is longer than $L_MAX_LINE_LENGTH ($L_MAX_LINE_LENGTH_FOUND)."
-msgstr "Een regel is langer dan $L_MAX_LINE_LENGTH ($L_MAX_LINE_LENGTH_FOUND)."
+msgid "A line is longer than $MAX_LINE_LENGTH ($MAX_LINE_LENGTH_FOUND)."
+msgstr "Een regel is langer dan $MAX_LINE_LENGTH ($MAX_LINE_LENGTH_FOUND)."
 
 msgid "Faulty line(s) found."
 msgstr "Foutieve regel(s) gevonden."
@@ -691,8 +690,8 @@ msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
 #, sh-format
-msgid "Usage: $KZ_DISPLAY_NAME [-g|--gui] $KZ_OPTIONS_USAGE"
-msgstr "Gebruik: $KZ_DISPLAY_NAME [-g|--gui] $KZ_OPTIONS_USAGE"
+msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
+msgstr "Gebruik: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 
 msgid "_username_|userid|_user_"
 msgstr "_gebruikersnaam_|userid|_gebruiker_"
@@ -801,12 +800,12 @@ msgid "DESCRIPTION"
 msgstr "BESCHRIJVING"
 
 #, sh-format
-msgid "Run number [1-$KZ_MENU1_LINES]: "
-msgstr "Voer uit nummer [1-$KZ_MENU1_LINES]: "
+msgid "Run number [1-$MENU1_LINES]: "
+msgstr "Voer uit nummer [1-$MENU1_LINES]: "
 
 #, sh-format
-msgid "Run number [1-$KZ_MENU2_LINES]: "
-msgstr "Voer uit nummer [1-$KZ_MENU2_LINES]: "
+msgid "Run number [1-$MENU2_LINES]: "
+msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 
 #, sh-format
 msgid "Cannot handle this choice ($REPLY)."
@@ -846,19 +845,19 @@ msgid "No"
 msgstr "Nee"
 
 #, sh-format
-msgid "$L_PROMPT [Y/n]: "
-msgstr "$L_PROMPT [J/n]: "
+msgid "$PROMPT [Y/n]: "
+msgstr "$PROMPT [J/n]: "
 
 msgid "The following has been executed:"
 msgstr "Het volgende is uitgevoerd:"
 
 #, sh-format
 msgid ""
-"Usage: $KZ_DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
-"                  $KZ_OPTIONS_USAGE"
+"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
+"                  $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $KZ_DISPLAY_NAME [-g|--gui] [-s|--source MAP]\n"
-"                    $KZ_OPTIONS_USAGE"
+"Gebruik: $DISPLAY_NAME [-g|--gui] [-s|--source MAP]\n"
+"                    $OPTIONS_USAGE"
 
 msgid ""
 "  -s, --source DIRECTORY\n"
@@ -928,10 +927,10 @@ msgid ""
 "\n"
 "Some files may not be readable, or\n"
 "were any files added or removed while restoring the backup, or\n"
-"is there not enough space on $KZ_TARGET.\n"
+"is there not enough space on $TARGET.\n"
 "\n"
-"Check the rsync messages (also in $L_ERROR_FILE):\n"
-"$L_RSYNC_MESSAGES\n"
+"Check the rsync messages (also in $ERROR_FILE):\n"
+"$RSYNC_MESSAGES\n"
 "\n"
 "Try restoring the back up again.\n"
 "Use app 'Installation menu' and select '5 - Command menu', or\n"
@@ -943,10 +942,10 @@ msgstr ""
 "Mogelijk zijn enkele bestanden niet leesbaar, of\n"
 "zijn er bestanden verwijderd of toegevoegd tijdens het terugzetten van de "
 "back-up, of\n"
-"is er te weinig ruimte op $KZ_TARGET.\n"
+"is er te weinig ruimte op $TARGET.\n"
 "\n"
-"Controleer de rsync-berichten (ook in $L_ERROR_FILE):\n"
-"$L_RSYNC_MESSAGES\n"
+"Controleer de rsync-berichten (ook in $ERROR_FILE):\n"
+"$RSYNC_MESSAGES\n"
 "\n"
 "Probeer de back-up opnieuw terug te zetten.\n"
 "Gebruik app 'Installatie menu' en selecteer '5 - Opdrachtmenu', of\n"
@@ -957,18 +956,18 @@ msgid "The backup has been restored."
 msgstr "De back-up is teruggezet."
 
 #, sh-format
-msgid "The backup has restored for $USER (there are $L_NUM_USERS users)."
-msgstr "De back-up is teruggezet voor $USER (er zijn $L_NUM_USERS gebruikers)."
+msgid "The backup has restored for $USER (there are $NUM_USERS users)."
+msgstr "De back-up is teruggezet voor $USER (er zijn $NUM_USERS gebruikers)."
 
 #, sh-format
 msgid ""
-"Usage: $KZ_DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
 "r|--reset]\n"
-"                $KZ_OPTIONS_USAGE [--] [APP...]"
+"                $OPTIONS_USAGE [--] [APP...]"
 msgstr ""
-"Gebruik: $KZ_DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file BESTAND] [-g|--"
-"gui] [-r|--reset]\n"
-"                  $KZ_OPTIONS_USAGE [--] [APP...]"
+"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file BESTAND] [-g|--gui] "
+"[-r|--reset]\n"
+"                  $OPTIONS_USAGE [--] [APP...]"
 
 msgid "  -r, --reset    set apps on default values"
 msgstr "  -r, --reset    stel apps in op standaardwaarden"
@@ -977,28 +976,27 @@ msgid "  APP            set up APPs"
 msgstr "  APP            stel APPs in"
 
 #, sh-format
-msgid "No set up file found, looked for '$KZ_INPUT_FILE'."
-msgstr "Geen instelbestand gevonden, zocht '$KZ_INPUT_FILE'."
+msgid "No set up file found, looked for '$INPUT_FILE'."
+msgstr "Geen instelbestand gevonden, zocht '$INPUT_FILE'."
 
 #, sh-format
 msgid ""
-"To view the contents of the apps set up file execute: $KZ_DISPLAY_NAME --cat "
+"To view the contents of the apps set up file execute: $DISPLAY_NAME --cat "
 "APP..."
 msgstr ""
 "Om de inhoud van het instelbestand voor apps te bekijken voer uit: "
-"$KZ_DISPLAY_NAME --cat APP..."
+"$DISPLAY_NAME --cat APP..."
 
 #, sh-format
-msgid "To set up the apps execute: $KZ_DISPLAY_NAME APP..."
-msgstr "Om de apps in te stellen voer uit: $KZ_DISPLAY_NAME APP..."
+msgid "To set up the apps execute: $DISPLAY_NAME APP..."
+msgstr "Om de apps in te stellen voer uit: $DISPLAY_NAME APP..."
 
 #, sh-format
 msgid ""
-"To view the contents of the default set up file execute: $KZ_DISPLAY_NAME --"
-"cat"
+"To view the contents of the default set up file execute: $DISPLAY_NAME --cat"
 msgstr ""
 "Om de inhoud van het standaard instelbestand te bekijken voer uit: "
-"$KZ_DISPLAY_NAME --cat"
+"$DISPLAY_NAME --cat"
 
 msgid "set up"
 msgstr "instellen"
@@ -1033,41 +1031,40 @@ msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
 #, sh-format
-msgid "Script $L_SCRIPTNAME returned an error."
-msgstr "Script $L_SCRIPTNAME gaf een fout."
+msgid "Script $SCRIPTNAME returned an error."
+msgstr "Script $SCRIPTNAME gaf een fout."
 
 #, sh-format
-msgid "Gettext message catalog template $L_FILE not found."
-msgstr "Gettext berichtencatalogus-sjabloon $L_FILE niet gevonden."
+msgid "Gettext message catalog template $FILE not found."
+msgstr "Gettext berichtencatalogus-sjabloon $FILE niet gevonden."
 
 #, sh-format
-msgid "Gettext message catalog $L_FILE not found."
-msgstr "Gettext berichtencatalogus $L_FILE niet gevonden."
+msgid "Gettext message catalog $FILE not found."
+msgstr "Gettext berichtencatalogus $FILE niet gevonden."
 
 #, sh-format
-msgid "Message catalog $L_FILE not found."
-msgstr "Berichtencatalogus $L_FILE niet gevonden."
+msgid "Message catalog $FILE not found."
+msgstr "Berichtencatalogus $FILE niet gevonden."
 
 #, sh-format
-msgid "Desktop configuration file $L_DIR/$L_SCRIPTNAME.desktop not found."
-msgstr ""
-"Bureaubladconfiguratiebestand $L_DIR/$L_SCRIPTNAME.desktop niet gevonden"
+msgid "Desktop configuration file $DIR/$SCRIPTNAME.desktop not found."
+msgstr "Bureaubladconfiguratiebestand $DIR/$SCRIPTNAME.desktop niet gevonden"
 
 #, sh-format
-msgid "Tab completion script $L_DIR/$L_SCRIPTNAME not found."
-msgstr "Tabvoltooiingsscript $L_DIR/$L_SCRIPTNAME niet gevonden"
+msgid "Tab completion script $DIR/$SCRIPTNAME not found."
+msgstr "Tabvoltooiingsscript $DIR/$SCRIPTNAME niet gevonden"
 
 #, sh-format
-msgid "Manual $L_DIR/$L_SCRIPTNAME.1 not found."
-msgstr "Man-pagina $L_DIR/$L_SCRIPTNAME.1 niet gevonden."
+msgid "Manual $DIR/$SCRIPTNAME.1 not found."
+msgstr "Man-pagina $DIR/$SCRIPTNAME.1 niet gevonden."
 
 #, sh-format
 msgid ""
-"PolicyKit action definition file $L_DIR/nl.karelzimmer.$L_SCRIPTNAME.policy "
-"not found."
+"PolicyKit action definition file $DIR/nl.karelzimmer.$SCRIPTNAME.policy not "
+"found."
 msgstr ""
-"PolicyKit actiedefinitiebestand $L_DIR/nl.karelzimmer.$L_SCRIPTNAME.policy "
-"niet gevonden."
+"PolicyKit actiedefinitiebestand $DIR/nl.karelzimmer.$SCRIPTNAME.policy niet "
+"gevonden."
 
 msgid "Check website"
 msgstr "Controleer website"

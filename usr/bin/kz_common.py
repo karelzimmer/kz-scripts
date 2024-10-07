@@ -30,110 +30,108 @@ _ = gettext.gettext
 # Variables
 ###############################################################################
 
-KZ_MODULE_NAME = 'kz_common.py'
-KZ_MODULE_DESC = _('Common module for Python scripts')
+MODULE_NAME = 'kz_common.py'
+MODULE_DESC = _('Common module for Python scripts')
 
-KZ_USAGE = None
-KZ_OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
+USAGE = None
+OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-KZ_HELP = None
-KZ_OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
-                   f"{_('  -m, --manual   show manual page')}\n"
-                   f"{_('  -u, --usage    show a short usage summary')}\n"
-                   f"{_('  -v, --version  show program version')}")
+HELP = None
+OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
+                f"{_('  -m, --manual   show manual page')}\n"
+                f"{_('  -u, --usage    show a short usage summary')}\n"
+                f"{_('  -v, --version  show program version')}")
 
-KZ_OK = 0
-KZ_ERROR = 1
+OK = 0
+ERROR = 1
 
-KZ_RC = KZ_OK
-KZ_TEXT = ''
+RC = OK
+TEXT = ''
 
-KZ_BOLD = '\033[1m'
-KZ_RED = '\033[1;31m'
-KZ_GREEN = '\033[1;32m'
-KZ_NORMAL = '\033[0m'
+BOLD = '\033[1m'
+RED = '\033[1;31m'
+GREEN = '\033[1;32m'
+NORMAL = '\033[0m'
 
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
-                  shell=True, executable='bash').returncode == KZ_OK:
-    KZ_DESKTOP_ENVIRONMENT = True
+                  shell=True, executable='bash').returncode == OK:
+    DESKTOP_ENVIRONMENT = True
 else:
-    KZ_DESKTOP_ENVIRONMENT = False
+    DESKTOP_ENVIRONMENT = False
 
 if subprocess.run("[[ $(lsb_release --id --short) = 'Debian' ]]",
-                  shell=True, executable='bash').returncode == KZ_OK:
-    KZ_DEBIAN = True
+                  shell=True, executable='bash').returncode == OK:
+    DEBIAN = True
 else:
-    KZ_DEBIAN = False
+    DEBIAN = False
 
 if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
-                  shell=True, executable='bash').returncode == KZ_OK:
-    KZ_UBUNTU = True
+                  shell=True, executable='bash').returncode == OK:
+    UBUNTU = True
 else:
-    KZ_UBUNTU = False
+    UBUNTU = False
 
 if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
-                  shell=True, executable='bash').returncode == KZ_OK:
-    KZ_DEB = True
+                  shell=True, executable='bash').returncode == OK:
+    DEB = True
 else:
-    KZ_DEB = False
+    DEB = False
 
 if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
-                  shell=True, executable='bash').returncode == KZ_OK:
+                  shell=True, executable='bash').returncode == OK:
     # Additional testing is needed because rpm may be installed on a system
     # that uses Debian package management system APT. APT is not available on a
-    # system that uses Red Hat package management system KZ_RPM.
-    if KZ_DEB:
-        KZ_RPM = False
+    # system that uses Red Hat package management system RPM.
+    if DEB:
+        RPM = False
     else:
-        KZ_RPM = True
+        RPM = True
 else:
-    KZ_RPM = False
+    RPM = False
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-def become_root(KZ_PROGRAM_NAME):
+def become_root(PROGRAM_NAME):
     """
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
-    L_EXEC_SUDO = 'sudo '
+    EXEC_SUDO = 'sudo '
 
-    if not become_root_check(KZ_PROGRAM_NAME):
-        KZ_TEXT = ''
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_OK)
+    if not become_root_check(PROGRAM_NAME):
+        TEXT = ''
+        term(PROGRAM_NAME, TEXT, OK)
 
     if os.getuid() != 0:
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
         for arg_num in range(len(sys.argv)):
             if arg_num == 0:
-                L_EXEC_SUDO += str(sys.argv[arg_num])
+                EXEC_SUDO += str(sys.argv[arg_num])
             else:
-                L_EXEC_SUDO += ' ' + str(sys.argv[arg_num])
-        KZ_TEXT = f'Restart ({L_EXEC_SUDO})'
-        logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
+                EXEC_SUDO += ' ' + str(sys.argv[arg_num])
+        TEXT = f'Restart ({EXEC_SUDO})'
+        logmsg(PROGRAM_NAME, TEXT)
 
         try:
-            subprocess.run(L_EXEC_SUDO, shell=True, check=True)
+            subprocess.run(EXEC_SUDO, shell=True, check=True)
         except KeyboardInterrupt:
-            KZ_TEXT = _('Program {} has been interrupted.').\
-                format(KZ_PROGRAM_NAME)
-            term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_ERROR)
+            TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+            term(PROGRAM_NAME, TEXT, ERROR)
         except Exception as exc:
-            KZ_TEXT = str(exc)
-            logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-            KZ_TEXT = _('Program {} encountered an error.').\
-                format(KZ_PROGRAM_NAME)
-            term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_ERROR)
+            TEXT = str(exc)
+            logmsg(PROGRAM_NAME, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            term(PROGRAM_NAME, TEXT, ERROR)
         else:
-            KZ_TEXT = ''
-            term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_OK)
+            TEXT = ''
+            term(PROGRAM_NAME, TEXT, OK)
 
 
-def become_root_check(KZ_PROGRAM_NAME):
+def become_root_check(PROGRAM_NAME):
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
@@ -144,22 +142,22 @@ def become_root_check(KZ_PROGRAM_NAME):
         subprocess.run('groups $USER | grep --quiet --regexp=sudo \
                        --regexp=wheel', shell=True, check=True)
     except Exception:
-        KZ_TEXT = _('Already performed by the administrator.')
-        infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+        TEXT = _('Already performed by the administrator.')
+        infomsg(PROGRAM_NAME, TEXT)
         return False
     else:
         return True
 
 
-def check_apt_package_manager(KZ_PROGRAM_NAME):
+def check_apt_package_manager(PROGRAM_NAME):
     """
     This function checks for another running APT package manager and waits for
     the next check if so.
     """
-    L_CHECK_WAIT = 10
+    CHECK_WAIT = 10
 
-    if KZ_RPM:
-        return KZ_OK
+    if RPM:
+        return OK
 
     while True:
         try:
@@ -172,178 +170,177 @@ def check_apt_package_manager(KZ_PROGRAM_NAME):
         except Exception:
             break
         else:
-            KZ_TEXT = _('Wait for another package manager to finish') + '...'
-            infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
-            time.sleep(L_CHECK_WAIT)
+            TEXT = _('Wait for another package manager to finish') + '...'
+            infomsg(PROGRAM_NAME, TEXT)
+            time.sleep(CHECK_WAIT)
 
 
-def errormsg(KZ_PROGRAM_NAME, KZ_TEXT):
+def errormsg(PROGRAM_NAME, TEXT):
     """
     This function returns an error message.
     """
-    print(f'{KZ_RED}{KZ_TEXT}{KZ_NORMAL}')
+    print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(KZ_PROGRAM_NAME, KZ_TEXT):
+def infomsg(PROGRAM_NAME, TEXT):
     """
     This function returns an informational message.
     """
-    print(f'{KZ_TEXT}')
+    print(f'{TEXT}')
 
 
-def init_script(KZ_PROGRAM_NAME, KZ_DISPLAY_NAME):
+def init_script(PROGRAM_NAME, DISPLAY_NAME):
     """
     This function performs initial actions.
     """
-    KZ_TEXT = f'==== START logs for script {KZ_PROGRAM_NAME} ===='
-    logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = f'==== START logs for script {PROGRAM_NAME} ===='
+    logmsg(PROGRAM_NAME, TEXT)
 
 
-def logmsg(KZ_PROGRAM_NAME, KZ_TEXT):
+def logmsg(PROGRAM_NAME, TEXT):
     """
     This function records a message to the log.
     """
-    journal.sendv(f'SYSLOG_IDENTIFIER={KZ_PROGRAM_NAME}', f'MESSAGE={KZ_TEXT}')
+    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
-def process_options(KZ_PROGRAM_NAME, KZ_PROGRAM_DESC, KZ_DISPLAY_NAME):
+def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the common options.
     """
-    L_PARSER = argparse.ArgumentParser(prog=KZ_DISPLAY_NAME, usage=KZ_USAGE,
-                                       add_help=False)
+    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
+                                     add_help=False)
 
-    L_PARSER.add_argument('-h', '--help', action='store_true')
-    L_PARSER.add_argument('-m', '--manual', action='store_true')
-    L_PARSER.add_argument('-u', '--usage', action='store_true')
-    L_PARSER.add_argument('-v', '--version', action='store_true')
-    args = L_PARSER.parse_args()
+    PARSER.add_argument('-h', '--help', action='store_true')
+    PARSER.add_argument('-m', '--manual', action='store_true')
+    PARSER.add_argument('-u', '--usage', action='store_true')
+    PARSER.add_argument('-v', '--version', action='store_true')
+    args = PARSER.parse_args()
 
     if args.help:
-        process_option_help(KZ_PROGRAM_NAME, KZ_PROGRAM_DESC, KZ_DISPLAY_NAME)
-        KZ_TEXT = ''
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_OK)
+        process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        TEXT = ''
+        term(PROGRAM_NAME, TEXT, OK)
     elif args.manual:
-        process_option_manual(KZ_PROGRAM_NAME)
-        KZ_TEXT = ''
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_OK)
+        process_option_manual(PROGRAM_NAME)
+        TEXT = ''
+        term(PROGRAM_NAME, TEXT, OK)
     elif args.usage:
-        process_option_usage(KZ_PROGRAM_NAME, KZ_DISPLAY_NAME)
-        KZ_TEXT = ''
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_OK)
+        process_option_usage(PROGRAM_NAME, DISPLAY_NAME)
+        TEXT = ''
+        term(PROGRAM_NAME, TEXT, OK)
     elif args.version:
-        process_option_version(KZ_PROGRAM_NAME)
-        KZ_TEXT = ''
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_OK)
+        process_option_version(PROGRAM_NAME)
+        TEXT = ''
+        term(PROGRAM_NAME, TEXT, OK)
 
 
-def process_option_help(KZ_PROGRAM_NAME, KZ_PROGRAM_DESC, KZ_DISPLAY_NAME):
+def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function shows the available help.
     """
-    L_YELP_MAN_URL = ''
+    YELP_MAN_URL = ''
 
-    if KZ_DESKTOP_ENVIRONMENT:
-        L_YELP_MAN_URL = f"{_(', or see the ')}"
-        L_YELP_MAN_URL += f'\x1b]8;;man:{KZ_PROGRAM_NAME}(1)\x1b\\'
-        L_YELP_MAN_URL += f'{KZ_DISPLAY_NAME}(1)'
-        L_YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"
-    KZ_TEXT = f'{KZ_HELP}\n\n'
-    KZ_TEXT += _("Type '{} --manual' or 'man {}'{} for more information.").\
-        format(KZ_DISPLAY_NAME, KZ_DISPLAY_NAME, L_YELP_MAN_URL)
-    infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    if DESKTOP_ENVIRONMENT:
+        YELP_MAN_URL = f"{_(', or see the ')}"
+        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
+        YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"
+    TEXT = (f'{HELP}\n\n'
+            f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
+                 format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}''')
+    infomsg(PROGRAM_NAME, TEXT)
 
 
-def process_option_manual(KZ_PROGRAM_NAME):
+def process_option_manual(PROGRAM_NAME):
     """
     This function displays the manual page..
     """
     try:
-        subprocess.run(f'man --pager=cat {KZ_PROGRAM_NAME}', shell=True,
+        subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
                        check=True)
     except Exception as exc:
-        KZ_TEXT = str(exc)
-        logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-        KZ_TEXT = _('Program {} encountered an error.').format(KZ_PROGRAM_NAME)
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_ERROR)
+        TEXT = str(exc)
+        logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        term(PROGRAM_NAME, TEXT, ERROR)
     else:
-        return KZ_OK
+        return OK
 
 
-def process_option_usage(KZ_PROGRAM_NAME, KZ_DISPLAY_NAME):
+def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
     """
     This function shows the available options.
     """
-    KZ_TEXT = (f"{_('KZ_USAGE:')} {KZ_USAGE}\n\n"
-               f'''{_("Type '{} --help' for more information.").
-                    format(KZ_DISPLAY_NAME)}''')
-    infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = (f"{_('Usage:')} {USAGE}\n\n"
+            f'''{_("Type '{} --help' for more information.").
+                 format(DISPLAY_NAME)}''')
+    infomsg(PROGRAM_NAME, TEXT)
 
 
-def process_option_version(KZ_PROGRAM_NAME):
+def process_option_version(PROGRAM_NAME):
     """
     This function displays version, author, and license information.
     """
-    L_BUILD_ID = ''
+    BUILD_ID = ''
 
     try:
         with open('/usr/share/doc/kz/kz-build.id') as fh:
-            L_BUILD_ID = f'{fh.read()}'
+            BUILD_ID = f'{fh.read()}'
     except FileNotFoundError as fnf:
-        KZ_TEXT = str(fnf)
-        logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-        KZ_TEXT = _('Build ID cannot be determined.')
-        logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-        build_id = KZ_TEXT
+        TEXT = str(fnf)
+        logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Build ID cannot be determined.')
+        logmsg(PROGRAM_NAME, TEXT)
+        build_id = TEXT
     except Exception as exc:
-        KZ_TEXT = str(exc)
-        logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-        KZ_TEXT = _('Program {} encountered an error.').format(KZ_PROGRAM_NAME)
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_ERROR)
+        TEXT = str(exc)
+        logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        term(PROGRAM_NAME, TEXT, ERROR)
     finally:
-        KZ_TEXT = f"{_('kz version 4.2.1 ({}).').format(L_BUILD_ID)}\n\n"
-        KZ_TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
-        KZ_TEXT += _('License CC0 1.0 \
+        TEXT = f"{_('kz version 4.2.1 ({}).').format(BUILD_ID)}\n\n"
+        TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
+        TEXT += _('License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+        infomsg(PROGRAM_NAME, TEXT)
 
 
-def term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_RC):
+def term(PROGRAM_NAME, TEXT, RC):
     """
     This function controls the termination.
     """
-    if KZ_RC == KZ_OK:
-        if KZ_TEXT:
-            infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    if RC == OK:
+        if TEXT:
+            infomsg(PROGRAM_NAME, TEXT)
     else:
-        if KZ_TEXT:
-            errormsg(KZ_PROGRAM_NAME, KZ_TEXT)
-    KZ_TEXT = f'==== END logs for script {KZ_PROGRAM_NAME} ===='
-    logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
+        if TEXT:
+            errormsg(PROGRAM_NAME, TEXT)
+    TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
+    logmsg(PROGRAM_NAME, TEXT)
 
-    if KZ_RC == KZ_OK:
-        sys.exit(KZ_OK)
+    if RC == OK:
+        sys.exit(OK)
     else:
-        sys.exit(KZ_ERROR)
+        sys.exit(ERROR)
 
 
-def wait_for_enter(KZ_PROGRAM_NAME):
+def wait_for_enter(PROGRAM_NAME):
     """
     This function waits for the user to press Enter.
     """
     try:
-        KZ_TEXT = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
-        input(KZ_TEXT)
+        TEXT = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
+        input(TEXT)
     except KeyboardInterrupt:
-        KZ_TEXT = _('Program {} has been interrupted.').format(KZ_PROGRAM_NAME)
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_ERROR)
+        TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
+        term(PROGRAM_NAME, TEXT, ERROR)
     except Exception as exc:
-        KZ_TEXT = str(exc)
-        logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-        KZ_TEXT = _('Program {} encountered an error.').format(KZ_PROGRAM_NAME)
-        term(KZ_PROGRAM_NAME, KZ_TEXT, KZ_ERROR)
+        TEXT = str(exc)
+        logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        term(PROGRAM_NAME, TEXT, ERROR)
     else:
-        return KZ_OK
+        return OK
 
 
 ###############################################################################
@@ -351,5 +348,5 @@ def wait_for_enter(KZ_PROGRAM_NAME):
 ###############################################################################
 
 if __name__ == '__main__':
-    KZ_TEXT = _('{}: i am a module').format(KZ_MODULE_NAME)
-    infomsg(KZ_MODULE_NAME, KZ_TEXT)
+    TEXT = _('{}: i am a module').format(MODULE_NAME)
+    infomsg(MODULE_NAME, TEXT)

@@ -19,66 +19,65 @@ source kz_common.sh
 # Variables
 ###############################################################################
 
-declare     KZ_PROGRAM_NAME=kz-install
-declare     KZ_PROGRAM_DESC
-            KZ_PROGRAM_DESC=$(gettext 'Install apps')
-declare     KZ_DISPLAY_NAME=${KZ_PROGRAM_NAME/kz-/kz }
+declare     PROGRAM_NAME=kz-install
+declare     PROGRAM_DESC
+            PROGRAM_DESC=$(gettext 'Install apps')
+declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare     KZ_USAGE
-            KZ_USAGE=$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [-a|--apps] \
+declare     USAGE
+            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
 [-c|--cat] [-f|--file FILE] [-g|--gui] [-r|--remove]
-                  \$KZ_OPTIONS_USAGE [--] [APP...]")
+                  \$OPTIONS_USAGE [--] [APP...]")
 
-declare     KZ_X_OPTIONS_HELP
-            KZ_X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long \
-options are mandatory for short options too.")
+declare     X_OPTIONS_HELP
+            X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options \
+are mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(eval_gettext "  -f, --file FILE
-                 process FILE (default FILE is /usr/bin/\$KZ_PROGRAM_NAME.sh)")
+                 process FILE (default FILE is /usr/bin/\$PROGRAM_NAME.sh)")
 $(gettext "  -g, --gui      run in graphical mode, requires desktop \
 environment")
 $(gettext '  -r, --remove   delete apps')"
 
-declare     KZ_HELP
-            KZ_HELP="$(eval_gettext "Usage: \$KZ_DISPLAY_NAME [OPTION...] \
-[APP...]")
+declare     HELP
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
 
-$KZ_PROGRAM_DESC.
+$PROGRAM_DESC.
 
 $(gettext 'Options:')
-$KZ_X_OPTIONS_HELP
-$KZ_OPTIONS_HELP
+$X_OPTIONS_HELP
+$OPTIONS_HELP
 $(gettext "  --             signals the end of options and disables further \
 option processing")
 
 $(gettext 'Arguments:')
 $(gettext '  APP            install APPs')"
 
-declare     KZ_X_OPTIONS_SHORT='acf:gr'
-declare     KZ_X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
+declare     X_OPTIONS_SHORT='acf:gr'
+declare     X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
 
-declare -A  KZ_APP_ARGUMENTS=()
-declare -A  KZ_FAILED_APPS=()
-declare     KZ_ARGUMENT_APPS=false
-declare     KZ_FILE_ARGUMENT=''
-declare     KZ_FROM='from'
-declare     KZ_INPUT_FILE=/usr/bin/$KZ_PROGRAM_NAME.sh
-declare     KZ_INSTALL='Install'
-declare     KZ_INSTALL_FILE_HEADER
-            KZ_INSTALL_FILE_HEADER="$(gettext "# For the format of the \
-records in this file, see the kz install man page.")
+declare -A  APP_ARGUMENTS=()
+declare -A  FAILED_APPS=()
+declare     ARGUMENT_APPS=false
+declare     FILE_ARGUMENT=''
+declare     FROM='from'
+declare     INPUT_FILE=/usr/bin/$PROGRAM_NAME.sh
+declare     INSTALL='Install'
+declare     INSTALL_FILE_HEADER
+            INSTALL_FILE_HEADER="$(gettext "# For the format of the records \
+in this file, see the kz install man page.")
 $(gettext "# To manually running a command, first run the following: source \
 kz_common.sh")"
-declare     KZ_NO_COMMANDS_FOUND=true
-declare     KZ_ON='on'
-declare     KZ_OPTION_APPS=false
-declare     KZ_OPTION_CAT=false
-declare     KZ_OPTION_FILE=false
-declare     KZ_OPTION_REMOVE=false
-declare     KZ_REBOOT=true
-declare     KZ_REMOVE='Remove'
+declare     NO_COMMANDS_FOUND=true
+declare     ON='on'
+declare     OPTION_APPS=false
+declare     OPTION_CAT=false
+declare     OPTION_FILE=false
+declare     OPTION_REMOVE=false
+declare     REBOOT=true
+declare     REMOVE='Remove'
 
 
 ###############################################################################
@@ -87,20 +86,20 @@ declare     KZ_REMOVE='Remove'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local L_PARSED=''
+    local PARSED=''
 
-    L_PARSED=$(
-        getopt  --alternative                                               \
-                --options       "${KZ_OPTIONS_SHORT}$KZ_X_OPTIONS_SHORT"    \
-                --longoptions   "${KZ_OPTIONS_LONG}$KZ_X_OPTIONS_LONG"      \
-                --name          "$KZ_DISPLAY_NAME"                          \
+    PARSED=$(
+        getopt  --alternative                                       \
+                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
+                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
+                --name          "$DISPLAY_NAME"                     \
                 --              "$@"
-        )       || KZ_RC=$?
-    if [[ $KZ_RC -ne $KZ_OK ]]; then
-        infomsg "$KZ_USAGE"
-        exit    $KZ_ERROR
+        ) || RC=$?
+    if [[ $RC -ne $OK ]]; then
+        infomsg "$USAGE"
+        exit $ERROR
     fi
-    eval set -- "$L_PARSED"
+    eval set -- "$PARSED"
 
     process_options   "$@"
     process_x_options "$@"
@@ -112,42 +111,41 @@ function process_x_options() {
     while true; do
         case $1 in
             -a | --apps )
-                KZ_OPTION_APPS=true
+                OPTION_APPS=true
                 shift
                 ;;
             -c | --cat )
-                KZ_OPTION_CAT=true
+                OPTION_CAT=true
                 shift
                 ;;
             -f | --file )
-                if $KZ_OPTION_FILE; then
-                    KZ_TEXT="$KZ_DISPLAY_NAME: $1 $2: $(gettext "too many \
-options")
-$KZ_USAGE"
-                    infomsg "$KZ_TEXT"
-                    exit $KZ_ERROR
+                if $OPTION_FILE; then
+                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+$USAGE"
+                    infomsg "$TEXT"
+                    exit $ERROR
                 fi
-                KZ_OPTION_FILE=true
-                KZ_FILE_ARGUMENT=$2
+                OPTION_FILE=true
+                FILE_ARGUMENT=$2
                 shift 2
                 ;;
             -g | --gui )
-                if ! $KZ_DESKTOP_ENVIRONMENT; then
-                    KZ_TEXT=\
-"$KZ_DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
-$KZ_USAGE"
-                    infomsg "$KZ_TEXT"
-                    exit $KZ_ERROR
+                if ! $DESKTOP_ENVIRONMENT; then
+                    TEXT=\
+"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+$USAGE"
+                    infomsg "$TEXT"
+                    exit $ERROR
                 fi
-                KZ_OPTION_GUI=true
+                OPTION_GUI=true
                 shift
                 ;;
             -r | --remove )
-                KZ_OPTION_REMOVE=true
-                KZ_INSTALL='Remove'
-                KZ_ON='from'
-                KZ_REMOVE='Install'
-                KZ_FROM='on'
+                OPTION_REMOVE=true
+                INSTALL='Remove'
+                ON='from'
+                REMOVE='Install'
+                FROM='on'
                 shift
                 ;;
             -- )
@@ -161,10 +159,10 @@ $KZ_USAGE"
     done
 
     if [[ -n $* ]]; then
-        KZ_ARGUMENT_APPS=true
-        KZ_REBOOT=false
+        ARGUMENT_APPS=true
+        REBOOT=false
         while [[ -n $* ]]; do
-            KZ_APP_ARGUMENTS[$1]=$1
+            APP_ARGUMENTS[$1]=$1
             shift
         done
     fi
@@ -173,39 +171,39 @@ $KZ_USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
-    local L_COMMAND_FILE=''
-    if $KZ_OPTION_FILE; then
-        KZ_INPUT_FILE=$KZ_FILE_ARGUMENT
+    local COMMAND_FILE=''
+    if $OPTION_FILE; then
+        INPUT_FILE=$FILE_ARGUMENT
     fi
 
-    if [[ ! -f $KZ_INPUT_FILE ]]; then
-        KZ_TEXT=$(eval_gettext "No install file found, looked for \
-'\$KZ_INPUT_FILE'.")
-        errormsg "$KZ_TEXT"
-        exit $KZ_ERROR
+    if [[ ! -f $INPUT_FILE ]]; then
+        TEXT=$(eval_gettext "No install file found, looked for \
+'\$INPUT_FILE'.")
+        errormsg "$TEXT"
+        exit $ERROR
     fi
 
-    if $KZ_OPTION_APPS; then
+    if $OPTION_APPS; then
         process_option_apps
-        exit $KZ_OK
+        exit $OK
     fi
 
-    L_COMMAND_FILE=$(mktemp -t "$KZ_PROGRAM_NAME-XXXXXXXXXX.sh")
+    COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
 
-    if $KZ_ARGUMENT_APPS; then
+    if $ARGUMENT_APPS; then
         process_argument_app
     else
         process_input_file_by_host
     fi
 
-    if $KZ_OPTION_CAT; then
+    if $OPTION_CAT; then
         process_option_cat
-        exit $KZ_OK
+        exit $OK
     fi
 
     if [[ $UID -ne 0 ]]; then
         logmsg 'Delete the kz-install command file created as non-root...'
-        rm --verbose "$L_COMMAND_FILE" |& $LOGCMD
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
     fi
 
     become_root
@@ -215,62 +213,62 @@ function process_input() {
 
 # This function shows the available apps from the input file.
 function process_option_apps() {
-    local L_APPS=''
+    local APPS=''
 
-    KZ_TEXT="$(gettext 'The following apps are available:')
+    TEXT="$(gettext 'The following apps are available:')
 
 $(gettext 'NUM  APP')\n"
-    L_APPS=$(
-        grep    --regexp="#.*$KZ_INSTALL.*$KZ_ON"   \
-                "$KZ_INPUT_FILE"                    |
-        tr      --squeeze-repeats                   \
-                '[:space:]'                         |
-        cut     --delimiter=' '                     \
-                --fields=3                          |
-        sort    --unique                            |
-        nl      --number-width=3                    \
-                --number-format=rn                  \
-                --number-separator='  '             \
-                --body-numbering=a                  || true
+    APPS=$(
+        grep    --regexp="#.*$INSTALL.*$ON" \
+                "$INPUT_FILE"               |
+        tr      --squeeze-repeats           \
+                '[:space:]'                 |
+        cut     --delimiter=' '             \
+                --fields=3                  |
+        sort    --unique                    |
+        nl      --number-width=3            \
+                --number-format=rn          \
+                --number-separator='  '     \
+                --body-numbering=a          || true
         )
 
-    if [[ -n $L_APPS ]]; then
-        KZ_TEXT+=$L_APPS
-        KZ_TEXT+="\n
+    if [[ -n $APPS ]]; then
+        TEXT+=$APPS
+        TEXT+="\n
 $(eval_gettext "To view the contents of the apps install file execute: \
-\$KZ_DISPLAY_NAME --cat APP...")
-$(eval_gettext "To install the apps execute: \$KZ_DISPLAY_NAME APP...")
+\$DISPLAY_NAME --cat APP...")
+$(eval_gettext "To install the apps execute: \$DISPLAY_NAME APP...")
 $(eval_gettext "To view the contents of the default install file execute: \
-\$KZ_DISPLAY_NAME --cat")"
+\$DISPLAY_NAME --cat")"
     else
-        KZ_TEXT+="$(gettext '  0  No apps found.')
+        TEXT+="$(gettext '  0  No apps found.')
 
-$KZ_USAGE"
+$USAGE"
     fi
 
-    if $KZ_OPTION_GUI; then
-        infomsg "$KZ_TEXT"
+    if $OPTION_GUI; then
+        infomsg "$TEXT"
     else
-        less --quit-if-one-screen <  <(printf '%b\n' "$KZ_TEXT")
+        less --quit-if-one-screen <  <(printf '%b\n' "$TEXT")
     fi
 }
 
 
 # This function processes argument APP.
 function process_argument_app() {
-    local L_APP_NOT_FOUND=false
-    local L_APP_ARGUMENT=''
+    local APP_NOT_FOUND=false
+    local APP_ARGUMENT=''
 
-    for L_APP_ARGUMENT in "${KZ_APP_ARGUMENTS[@]}"; do
+    for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
         process_input_file_by_app
     done
 
-    if $L_APP_NOT_FOUND; then
-        KZ_TEXT="$(eval_gettext "Type '\$KZ_DISPLAY_NAME --apps' for \
-available apps.")"
-        infomsg "$KZ_TEXT"
-        rm --verbose "$L_COMMAND_FILE" |& $LOGCMD
-        exit $KZ_ERROR
+    if $APP_NOT_FOUND; then
+        TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available \
+apps.")"
+        infomsg "$TEXT"
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
+        exit $ERROR
     fi
 }
 
@@ -278,38 +276,38 @@ available apps.")"
 # This function generates the command file from the input file and filters by
 # APP.
 function process_input_file_by_app() {
-    local L_APP_MATCH=false
-    local L_INPUT_RECORD=''
-    local L_NO_APP_MATCH=true
+    local APP_MATCH=false
+    local INPUT_RECORD=''
+    local NO_APP_MATCH=true
 
-    printf '%s\n\n' "$KZ_INSTALL_FILE_HEADER" >> "$L_COMMAND_FILE"
+    printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
-    while read -r L_INPUT_RECORD; do
-        case $L_INPUT_RECORD in
-            '#'*$KZ_INSTALL*[[:space:]]"$L_APP_ARGUMENT"[[:space:]]*$KZ_ON* )
+    while read -r INPUT_RECORD; do
+        case $INPUT_RECORD in
+            '#'*$INSTALL*[[:space:]]"$APP_ARGUMENT"[[:space:]]*$ON* )
                 # Matching app record.
-                L_APP_MATCH=true
-                L_NO_APP_MATCH=false
-                printf '%s\n' "$L_INPUT_RECORD" >> "$L_COMMAND_FILE"
+                APP_MATCH=true
+                NO_APP_MATCH=false
+                printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$KZ_INSTALL*$KZ_ON* | '#'*$KZ_REMOVE*$KZ_FROM* )
+            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
-                L_APP_MATCH=false
+                APP_MATCH=false
                 continue
                 ;;
             * )
-                if $L_APP_MATCH; then
+                if $APP_MATCH; then
                     # Record for command file.
-                    printf '%s\n' "$L_INPUT_RECORD" >> "$L_COMMAND_FILE"
+                    printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
                 ;;
         esac
-    done < "$KZ_INPUT_FILE"
+    done < "$INPUT_FILE"
 
-    if $L_NO_APP_MATCH; then
-        L_APP_NOT_FOUND=true
-        KZ_TEXT="$KZ_DISPLAY_NAME: $L_APP_ARGUMENT: $(gettext 'app not found')"
-        infomsg "$KZ_TEXT"
+    if $NO_APP_MATCH; then
+        APP_NOT_FOUND=true
+        TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
+        infomsg "$TEXT"
     fi
 }
 
@@ -317,60 +315,60 @@ function process_input_file_by_app() {
 # This function generates the command file from the input file and filters by
 # HOST.
 function process_input_file_by_host() {
-    local L_HOST_MATCH=false
-    local L_INPUT_RECORD=''
+    local HOST_MATCH=false
+    local INPUT_RECORD=''
 
-    printf '%s\n\n' "$KZ_INSTALL_FILE_HEADER" >> "$L_COMMAND_FILE"
+    printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
-    while read -r L_INPUT_RECORD; do
-        case $L_INPUT_RECORD in
-            '#'*$KZ_INSTALL*$KZ_ON*'*' | '#'*$KZ_INSTALL*$KZ_ON*$HOSTNAME* )
+    while read -r INPUT_RECORD; do
+        case $INPUT_RECORD in
+            '#'*$INSTALL*$ON*'*' | '#'*$INSTALL*$ON*$HOSTNAME* )
                 # Matching app record.
-                L_HOST_MATCH=true
-                printf '%s\n' "$L_INPUT_RECORD" >> "$L_COMMAND_FILE"
+                HOST_MATCH=true
+                printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 ;;
-            '#'*$KZ_INSTALL*$KZ_ON* | '#'*$KZ_REMOVE*$KZ_FROM* )
+            '#'*$INSTALL*$ON* | '#'*$REMOVE*$FROM* )
                 # Mismatched app record.
-                L_HOST_MATCH=false
+                HOST_MATCH=false
                 continue
                 ;;
             * )
-                if $L_HOST_MATCH; then
+                if $HOST_MATCH; then
                     # Record for command file.
-                    printf '%s\n' "$L_INPUT_RECORD" >> "$L_COMMAND_FILE"
+                    printf '%s\n' "$INPUT_RECORD" >> "$COMMAND_FILE"
                 fi
                 ;;
         esac
-    done < "$KZ_INPUT_FILE"
+    done < "$INPUT_FILE"
 }
 
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    less --quit-if-one-screen "$L_COMMAND_FILE"
+    less --quit-if-one-screen "$COMMAND_FILE"
 
-    rm --verbose "$L_COMMAND_FILE" |& $LOGCMD
+    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
 # This function starts installing the apps.
 function install_apps() {
-    local   -i  L_APP_TOT_NUM=0
+    local   -i  APP_TOT_NUM=0
 
-    L_APP_TOT_NUM=$(
-        grep    --regexp="#.*$KZ_INSTALL.*$KZ_ON"   \
-                --count                             \
-                "$L_COMMAND_FILE"                   || true
+    APP_TOT_NUM=$(
+        grep    --regexp="#.*$INSTALL.*$ON" \
+                --count                     \
+                "$COMMAND_FILE"             || true
         )
-    if [[ $L_APP_TOT_NUM -eq 0 ]]; then
-        return $KZ_OK
+    if [[ $APP_TOT_NUM -eq 0 ]]; then
+        return $OK
     fi
 
-    KZ_TITLE=$(gettext 'Install apps')
-    KZ_TEXT=$(gettext 'Prepare installation')
-    logmsg "$KZ_TITLE"...
+    TITLE=$(gettext 'Install apps')
+    TEXT=$(gettext 'Prepare installation')
+    logmsg "$TITLE"...
 
-    if $KZ_OPTION_GUI; then
+    if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
         process_COMMAND_FILE > >(
@@ -380,8 +378,8 @@ function install_apps() {
                     --no-cancel             \
                     --width     700         \
                     --height    50          \
-                    --title     "$KZ_TITLE" \
-                    --text      "$KZ_TEXT"  2> >($LOGCMD)
+                    --title     "$TITLE"    \
+                    --text      "$TEXT"     2> >($LOGCMD)
             )
     else
         process_COMMAND_FILE
@@ -391,145 +389,145 @@ function install_apps() {
 
 # This function reads commands from the command file for further processing.
 function process_COMMAND_FILE() {
-    local       L_APP_NAME=''
-    local       L_APP_NAME_LINE=''
-    local       L_COMMAND_RECORD=''
-    local   -i  L_APP_SEQ_NUM=0
-    local   -i  L_CMD_SEQ_NUM=0
+    local       APP_NAME=''
+    local       APP_NAME_LINE=''
+    local       COMMAND_RECORD=''
+    local   -i  APP_SEQ_NUM=0
+    local   -i  CMD_SEQ_NUM=0
 
-    if ! $KZ_OPTION_GUI; then
-        KZ_TEXT="$(gettext 'NUM/TOT  APP')
+    if ! $OPTION_GUI; then
+        TEXT="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
-        infomsg "$KZ_TEXT"
+        infomsg "$TEXT"
     fi
 
-    while read -r L_COMMAND_RECORD; do
-        case $L_COMMAND_RECORD in
-            '#'*$KZ_INSTALL*$KZ_ON* )
+    while read -r COMMAND_RECORD; do
+        case $COMMAND_RECORD in
+            '#'*$INSTALL*$ON* )
                 # App record.
-                L_APP_NAME=$(
-                    printf '%s\n' "$L_COMMAND_RECORD"   |
+                APP_NAME=$(
+                    printf '%s\n' "$COMMAND_RECORD"     |
                     tr --squeeze-repeats '[:space:]'    |
                     cut --delimiter=' ' --fields=3
                     )
-                (( ++L_APP_SEQ_NUM ))
-                L_CMD_SEQ_NUM=0
-                printf  -v L_APP_NAME_LINE  \
+                (( ++APP_SEQ_NUM ))
+                CMD_SEQ_NUM=0
+                printf  -v APP_NAME_LINE    \
                         "%3d/%-3d  %s"      \
-                        "$L_APP_SEQ_NUM"    \
-                        "$L_APP_TOT_NUM"    \
-                        "$L_APP_NAME"
+                        "$APP_SEQ_NUM"      \
+                        "$APP_TOT_NUM"      \
+                        "$APP_NAME"
                 ;;
             '' | '#'* )
                 # Empty record or comment line.
-                logmsg "$L_COMMAND_RECORD"
+                logmsg "$COMMAND_RECORD"
                 continue
                 ;;
             * )
                 # Command record.
-                KZ_NO_COMMANDS_FOUND=false
-                execute_command "$L_COMMAND_RECORD"
+                NO_COMMANDS_FOUND=false
+                execute_command "$COMMAND_RECORD"
                 ;;
         esac
-    done < "$L_COMMAND_FILE"
+    done < "$COMMAND_FILE"
 
-    rm --verbose "$L_COMMAND_FILE" |& $LOGCMD
+    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
 # This function reports and executes a command from the command file.
 function execute_command() {
-    local       L_CMD=${1:-unknown}
-    local       L_CMD_DIS=''
-    local   -i  L_CMD_DIS_LEN=0
-    local   -i  L_CMD_DIS_MAX=0
+    local       CMD=${1:-unknown}
+    local       CMD_DIS=''
+    local   -i  CMD_DIS_LEN=0
+    local   -i  CMD_DIS_MAX=0
 
-    (( ++L_CMD_SEQ_NUM ))
+    (( ++CMD_SEQ_NUM ))
 
     check_apt_package_manager
 
-    if $KZ_OPTION_GUI; then
-        if [[ $L_CMD_SEQ_NUM -eq 1 ]]; then
-            logmsg "$L_APP_NAME_LINE"
+    if $OPTION_GUI; then
+        if [[ $CMD_SEQ_NUM -eq 1 ]]; then
+            logmsg "$APP_NAME_LINE"
         fi
-        printf '%s\n' "#$L_APP_NAME_LINE\n\n$L_CMD"
+        printf '%s\n' "#$APP_NAME_LINE\n\n$CMD"
     else
-        if [[ $L_CMD_SEQ_NUM -eq 1 ]]; then
-            logmsg  "$L_APP_NAME_LINE"
-            infomsg "$L_APP_NAME_LINE"
+        if [[ $CMD_SEQ_NUM -eq 1 ]]; then
+            logmsg  "$APP_NAME_LINE"
+            infomsg "$APP_NAME_LINE"
         fi
 
         # Width 9 characters less, 9 for leading spaces.
         # Rocky Linux 8: COLUMNS: unbound variable ==> $(tput cols).
-        L_CMD_DIS_MAX=$(( $(tput cols) - 9 ))
+        CMD_DIS_MAX=$(( $(tput cols) - 9 ))
 
-        if [[ ${#L_CMD} -gt $L_CMD_DIS_MAX ]]; then
+        if [[ ${#CMD} -gt $CMD_DIS_MAX ]]; then
             # Width 12 characters less, 9 for leading spaces and 3 for trailing
             # ellipsis.
             # Rocky Linux 8: COLUMNS: unbound variable ==> $(tput cols).
-            L_CMD_DIS_LEN=$(( $(tput cols) - 12 ))
-            L_CMD_DIS=${L_CMD:0:L_CMD_DIS_LEN}...
+            CMD_DIS_LEN=$(( $(tput cols) - 12 ))
+            CMD_DIS=${CMD:0:CMD_DIS_LEN}...
         else
-            L_CMD_DIS=$L_CMD
+            CMD_DIS=$CMD
         fi
-        infomsg "         $L_CMD_DIS"
+        infomsg "         $CMD_DIS"
     fi
 
-    logmsg "$L_CMD"
-    KZ_ERREXIT=false
-    eval "$L_CMD" |& $LOGCMD || KZ_FAILED_APPS[$L_APP_NAME]=$L_APP_NAME
-    KZ_ERREXIT=true
+    logmsg "$CMD"
+    ERREXIT=false
+    eval "$CMD" |& $LOGCMD || FAILED_APPS[$APP_NAME]=$APP_NAME
+    ERREXIT=true
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    local L_FAILED_APPS_TEXT=''
-    local L_OPERATION
+    local FAILED_APPS_TEXT=''
+    local OPERATION
 
-    L_OPERATION=$(gettext 'install')
+    OPERATION=$(gettext 'install')
 
-    if $KZ_NO_COMMANDS_FOUND; then
-        KZ_TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$KZ_TEXT"
-        exit $KZ_OK
+    if $NO_COMMANDS_FOUND; then
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
+        exit $OK
     fi
 
-    if [[ -n ${KZ_FAILED_APPS[*]} ]]; then
+    if [[ -n ${FAILED_APPS[*]} ]]; then
         # shellcheck disable=SC2034
-        L_FAILED_APPS_TEXT=${KZ_FAILED_APPS[*]}
-        KZ_TEXT=$(eval_gettext "The installation of the following apps \
-contains errors:
-\$L_FAILED_APPS_TEXT
+        FAILED_APPS_TEXT=${FAILED_APPS[*]}
+        TEXT=$(eval_gettext "The installation of the following apps contains \
+errors:
+\$FAILED_APPS_TEXT
 
 Try installing the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Install apps', or
-use app 'Terminal', type 'kz install \$L_FAILED_APPS_TEXT'.")
-        errormsg "$KZ_TEXT"
-        exit $KZ_ERROR
+use app 'Terminal', type 'kz install \$FAILED_APPS_TEXT'.")
+        errormsg "$TEXT"
+        exit $ERROR
     fi
 
-    if $KZ_OPTION_REMOVE; then
+    if $OPTION_REMOVE; then
         # shellcheck disable=SC2034
-        L_OPERATION=$(gettext 'remove')
+        OPERATION=$(gettext 'remove')
     fi
-    KZ_TEXT=$(eval_gettext "Apps \$L_OPERATION completed.")
+    TEXT=$(eval_gettext "Apps \$OPERATION completed.")
 
-    if $KZ_REBOOT; then
-        KZ_TEXT+="
+    if $REBOOT; then
+        TEXT+="
 
 $(gettext "The computer will now reboot to finish installing the apps and \
 changing system settings.")"
     fi
-    infomsg "$KZ_TEXT"
+    infomsg "$TEXT"
 
-    if $KZ_REBOOT; then
-        $KZ_OPTION_GUI || wait_for_enter
+    if $REBOOT; then
+        $OPTION_GUI || wait_for_enter
         sudo systemctl reboot
     fi
 
-    exit $KZ_OK
+    exit $OK
 }
 
 

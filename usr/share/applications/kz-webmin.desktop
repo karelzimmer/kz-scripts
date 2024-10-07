@@ -9,7 +9,7 @@
 Type=Application
 Name=Webmin
 Comment=Manage Linux servers from a web browser
-Categories=Utility;X-KZ_GNOME-Utilities;
+Categories=Utility;X-GNOME-Utilities;
 TryExec=webmin
 Exec=google-chrome https://localhost:10000
 Icon=kz-webmin

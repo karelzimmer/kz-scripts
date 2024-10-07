@@ -29,23 +29,23 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-KZ_PROGRAM_NAME = 'kz-update'
-KZ_PROGRAM_DESC = _('Update system')
-KZ_DISPLAY_NAME = KZ_PROGRAM_NAME.replace('kz-', 'kz ')
+PROGRAM_NAME = 'kz-update'
+PROGRAM_DESC = _('Update system')
+DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
-kz_common.KZ_USAGE = f'{KZ_DISPLAY_NAME} {kz_common.KZ_OPTIONS_USAGE}'
+kz_common.USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
-kz_common.KZ_HELP = (f"{_('Usage: {} [OPTION...]').format(KZ_DISPLAY_NAME)}\n"
-                     f'\n{KZ_PROGRAM_DESC}.\n'
-                     f"\n{_('Options:')}\n"
-                     f'{kz_common.KZ_OPTIONS_HELP}')
+kz_common.HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+                  f'{PROGRAM_DESC}.\n\n'
+                  f"{_('Options:')}\n"
+                  f'{kz_common.OPTIONS_HELP}')
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-KZ_COMMAND = ''
+COMMAND = ''
 
 
 ###############################################################################
@@ -56,184 +56,176 @@ def perform_apt_repair():
     """
     This function runs a repair of Debian packages.
     """
-    KZ_TEXT = f"{kz_common.KZ_BOLD}==== {_('Repair')} \
-===={kz_common.KZ_NORMAL}\n"
-    kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    KZ_COMMAND = 'sudo dpkg --configure --pending'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo dpkg --configure --pending'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = 'sudo apt-get update --fix-missing'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo apt-get update --fix-missing'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = 'sudo apt-get install --fix-broken'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo apt-get install --fix-broken'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = '# sudo update-initramfs -u'
-    perform_command(KZ_COMMAND)
+    COMMAND = '# sudo update-initramfs -u'
+    perform_command(COMMAND)
 
 
 def perform_apt_update():
     """
     This function updates installed Debian packages and snaps if installed.
     """
-    KZ_TEXT = f"{kz_common.KZ_BOLD}==== {_('Update')} \
-===={kz_common.KZ_NORMAL}\n"
-    kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    KZ_COMMAND = 'sudo apt-get update'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo apt-get update'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = 'sudo apt-get dist-upgrade --assume-yes'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo apt-get dist-upgrade --assume-yes'
+    perform_command(COMMAND)
 
     if subprocess.run('[[ -n $(type -t snap) ]]', shell=True,
-                      executable='bash').returncode == kz_common.KZ_OK:
-        KZ_COMMAND = 'sudo snap refresh'
-        perform_command(KZ_COMMAND)
+                      executable='bash').returncode == kz_common.OK:
+        COMMAND = 'sudo snap refresh'
+        perform_command(COMMAND)
 
 
 def perform_apt_cleanup():
     """
     This function performs a Debian packages cleanup.
     """
-    KZ_TEXT = f"{kz_common.KZ_BOLD}==== {_('Cleanup')} \
-===={kz_common.KZ_NORMAL}\n"
-    kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    KZ_COMMAND = 'sudo apt-get autoclean'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo apt-get autoclean'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = 'sudo apt-get autoremove --assume-yes'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo apt-get autoremove --assume-yes'
+    perform_command(COMMAND)
 
 
 def perform_rpm_repair():
     """
-    This function runs a repair of KZ_RPM packages.
+    This function runs a repair of RPM packages.
     """
-    KZ_TEXT = f"{kz_common.KZ_BOLD}==== {_('Repair')} \
-===={kz_common.KZ_NORMAL}\n"
-    kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    KZ_COMMAND = '# sudo dnf clean all'
-    perform_command(KZ_COMMAND)
+    COMMAND = '# sudo dnf clean all'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = '# sudo dnf makecache'
-    perform_command(KZ_COMMAND)
+    COMMAND = '# sudo dnf makecache'
+    perform_command(COMMAND)
 
 
 def perform_rpm_update():
     """
-    This function updates installed KZ_RPM packages.
+    This function updates installed RPM packages.
     """
-    KZ_TEXT = f"{kz_common.KZ_BOLD}==== {_('Update')} \
-===={kz_common.KZ_NORMAL}\n"
-    kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
     # Exit code 100 means there are updates available ==> ' || true'.
-    KZ_COMMAND = 'sudo dnf check-update --refresh || true'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo dnf check-update --refresh || true'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
+    perform_command(COMMAND)
 
 
 def perform_rpm_cleanup():
     """
-    This function performs a KZ_RPM packages cleanup.
+    This function performs a RPM packages cleanup.
     """
-    KZ_TEXT = f"{kz_common.KZ_BOLD}==== {_('Cleanup')} \
-===={kz_common.KZ_NORMAL}\n"
-    kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+    TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    KZ_COMMAND = 'sudo dnf clean all'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo dnf clean all'
+    perform_command(COMMAND)
 
-    KZ_COMMAND = 'sudo dnf autoremove'
-    perform_command(KZ_COMMAND)
+    COMMAND = 'sudo dnf autoremove'
+    perform_command(COMMAND)
 
 
-def perform_command(KZ_COMMAND):
+def perform_command(COMMAND):
     """
     This function executes a Bourne-Again SHell command.
     """
-    KZ_TEXT = f'{KZ_COMMAND}'
-    kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
-    kz_common.check_apt_package_manager(KZ_PROGRAM_NAME)
+    TEXT = f'{COMMAND}'
+    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.check_apt_package_manager(PROGRAM_NAME)
     try:
-        subprocess.run({KZ_COMMAND}, shell=True, check=True, executable='bash')
+        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
     except Exception as exc:
-        KZ_TEXT = str(exc)
-        kz_common.logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-        KZ_TEXT = _('Program {} encountered an error.').format(KZ_PROGRAM_NAME)
-        kz_common.term(KZ_PROGRAM_NAME, KZ_TEXT, kz_common.KZ_ERROR)
+        TEXT = str(exc)
+        kz_common.logmsg(PROGRAM_NAME, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
     else:
-        kz_common.infomsg(KZ_PROGRAM_NAME, '')
+        kz_common.infomsg(PROGRAM_NAME, '')
 
 
 def check_reboot():
     """
     This function checks if reboot is needed.
     """
-    KZ_TEXT = _("*** The computer needs to be restarted to complete the \
+    TEXT = _("*** The computer needs to be restarted to complete the \
 installation of updates ***")
 
-    if kz_common.KZ_DEB:
+    if kz_common.DEB:
         try:
             with open('/var/run/reboot-required') as fh:
-                KZ_TEXT = f"{kz_common.KZ_RED}{KZ_TEXT}{kz_common.KZ_NORMAL}"
-                kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+                TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
+                kz_common.infomsg(PROGRAM_NAME, TEXT)
         except FileNotFoundError as fnf:
-            KZ_TEXT = str(fnf)
-            kz_common.logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
+            TEXT = str(fnf)
+            kz_common.logmsg(PROGRAM_NAME, TEXT)
         except Exception as exc:
-            KZ_TEXT = str(exc)
-            kz_common.logmsg(KZ_PROGRAM_NAME, KZ_TEXT)
-            KZ_TEXT = _('Program {} encountered an error.').\
-                format(KZ_PROGRAM_NAME)
-            kz_common.term(KZ_PROGRAM_NAME, KZ_TEXT, kz_common.KZ_ERROR)
+            TEXT = str(exc)
+            kz_common.logmsg(PROGRAM_NAME, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
+            kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
     else:
         if subprocess.run('needs-restarting --reboothint',
                           shell=True).returncode == 1:
-            KZ_TEXT = f"{kz_common.KZ_RED}{KZ_TEXT}{kz_common.KZ_NORMAL}"
-            kz_common.infomsg(KZ_PROGRAM_NAME, KZ_TEXT)
+            TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
+            kz_common.infomsg(PROGRAM_NAME, TEXT)
 
 
 def term_script():
     """
     This function controls the termination of the script.
     """
-    KZ_TEXT = f"{kz_common.KZ_GREEN}{KZ_PROGRAM_NAME} \
-{_('finished')}{kz_common.KZ_NORMAL}"
-    kz_common.term(KZ_PROGRAM_NAME, KZ_TEXT, kz_common.KZ_OK)
+    TEXT = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}{kz_common.NORMAL}"
+    kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-kz_common.init_script(KZ_PROGRAM_NAME, KZ_DISPLAY_NAME)
+kz_common.init_script(PROGRAM_NAME, DISPLAY_NAME)
 
-kz_common.process_options(KZ_PROGRAM_NAME, KZ_PROGRAM_DESC, KZ_DISPLAY_NAME)
+kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
-kz_common.become_root(KZ_PROGRAM_NAME)
+kz_common.become_root(PROGRAM_NAME)
 
-if kz_common.KZ_DEB:
+if kz_common.DEB:
     perform_apt_repair()
 
     perform_apt_update()
 
     perform_apt_cleanup()
-elif kz_common.KZ_RPM:
+elif kz_common.RPM:
     perform_rpm_repair()
 
     perform_rpm_update()
 
     perform_rpm_cleanup()
 else:
-    KZ_TEXT = _('Unknown package manager.')
-    kz_common.term(KZ_PROGRAM_NAME, KZ_TEXT, kz_common.KZ_ERROR)
+    TEXT = _('Unknown package manager.')
+    kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
 
 check_reboot()
 
