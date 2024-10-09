@@ -61,13 +61,14 @@ if subprocess.run('[[ -n $(type -t '
 else:
     KZ_DESKTOP_ENVIRONMENT = False
 
-if subprocess.run("[[ $(lsb_release --id --short) = 'Debian' ]]",
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
     KZ_DEBIAN = True
 else:
     KZ_DEBIAN = False
 
-if subprocess.run("[[ $(lsb_release --id --short) = 'Ubuntu' ]]",
+if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
     KZ_UBUNTU = True
 else:

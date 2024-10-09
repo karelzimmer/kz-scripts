@@ -75,9 +75,11 @@ else
     KZ_GNOME=false
 fi
 
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+source /etc/os-release
 declare     KZ_DEBIAN
 # shellcheck disable=SC2034
-if [[ $(lsb_release --id --short) = 'Debian' ]]; then
+if [[ $ID = 'debian' ]]; then
     KZ_DEBIAN=true
 else
     KZ_DEBIAN=false
@@ -85,7 +87,7 @@ fi
 
 declare     KZ_UBUNTU
 # shellcheck disable=SC2034
-if [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then
+if [[ $ID = 'ubuntu' ]]; then
     KZ_UBUNTU=true
 else
     KZ_UBUNTU=false
