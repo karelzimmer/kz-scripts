@@ -51,6 +51,7 @@ declare     ERR=1
 declare -i  RC=$OK
 declare     TEXT=''
 
+# List NORMAL last here so that -x doesn't bork the display.
 # shellcheck disable=SC2034
 declare     BOLD='\033[1m'
 declare     RED='\033[1;31m'

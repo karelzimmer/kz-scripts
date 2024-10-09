@@ -47,7 +47,8 @@ ERR = 1
 
 RC = OK
 TEXT = ''
-
+ 
+# List NORMAL last here so that Python debugger (pdb) doesn't bork the display.
 BOLD = '\033[1m'
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
