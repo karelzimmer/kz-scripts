@@ -76,7 +76,7 @@ function check_input() {
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
-        exit $ERROR
+        exit $ERR
     fi
     eval set -- "$PARSED"
 
@@ -95,7 +95,7 @@ function process_x_options() {
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
-                    exit $ERROR
+                    exit $ERR
                 fi
                 OPTION_GUI=true
                 shift
@@ -105,7 +105,7 @@ $USAGE"
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-                    exit $ERROR
+                    exit $ERR
                 fi
                 OPTION_TARGET=true
                 TARGET_ARGUMENT=$2
@@ -125,7 +125,7 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 }
 
@@ -153,7 +153,7 @@ function check_target() {
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
-            exit $ERROR
+            exit $ERR
         fi
 
         TARGET=$TARGET_ARGUMENT/$USER@$HOSTNAME
@@ -173,7 +173,7 @@ Connect a USB medium.")
 
             if [[ -z $MEDIUM ]]; then
                 errormsg "$TEXT"
-                exit $ERROR
+                exit $ERR
             fi
         fi
 
@@ -194,7 +194,7 @@ Disconnect media via Files.")"
 
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
                 errormsg "$TEXT"
-                exit $ERROR
+                exit $ERR
             fi
         fi
 
@@ -209,7 +209,7 @@ Disconnect media via Files.")"
         TEXT="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. \
 Please rename to 'USER@HOST'.")"
         errormsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 }
 
@@ -522,7 +522,7 @@ Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Make backup', or
 use app 'Terminal', type 'kz backup'.")"
         errormsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 
     rm --verbose "$ERROR_FILE" |& $LOGCMD

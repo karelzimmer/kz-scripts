@@ -56,7 +56,7 @@ function check_input() {
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
-        exit $ERROR
+        exit $ERR
     fi
     eval set -- "$PARSED"
 
@@ -83,14 +83,14 @@ function process_x_options() {
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 
     if ! $KZ_DESKTOP_ENVIRONMENT; then
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 }
 
@@ -105,7 +105,7 @@ function process_input() {
     if ! $KZ_DEB; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 
     TEXT=$(gettext 'Check:')
@@ -419,7 +419,7 @@ function term_script() {
     if $ERROR_FLAG; then
         TEXT=$(gettext 'Fix all the messages above.')
         errormsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     else
         TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
         infomsg "$TEXT"

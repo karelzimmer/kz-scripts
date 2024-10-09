@@ -81,7 +81,7 @@ function check_input() {
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
-        exit $ERROR
+        exit $ERR
     fi
     eval set -- "$PARSED"
 
@@ -99,7 +99,7 @@ function process_x_options() {
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-                    exit $ERROR
+                    exit $ERR
                 fi
                 OPTION_ADDAFT=true
                 FAVORITE_ARGUMENT=$2
@@ -110,7 +110,7 @@ $USAGE"
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-                    exit $ERROR
+                    exit $ERR
                 fi
                 OPTION_ADDBEF=true
                 FAVORITE_ARGUMENT=$2
@@ -121,7 +121,7 @@ $USAGE"
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-                    exit $ERROR
+                    exit $ERR
                 fi
                 OPTION_DELETE=true
                 FAVORITE_ARGUMENT=$2
@@ -149,14 +149,14 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 
     if ! $KZ_DESKTOP_ENVIRONMENT; then
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 }
 

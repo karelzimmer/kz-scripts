@@ -161,7 +161,7 @@ def perform_command(COMMAND):
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERR)
     else:
         kz_common.infomsg(PROGRAM_NAME, '')
 
@@ -185,7 +185,7 @@ installation of updates ***")
             TEXT = str(exc)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
+            kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERR)
     else:
         if subprocess.run('needs-restarting --reboothint',
                           shell=True).returncode == 1:
@@ -225,7 +225,7 @@ elif kz_common.RPM:
     perform_rpm_cleanup()
 else:
     TEXT = _('Unknown package manager.')
-    kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERROR)
+    kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERR)
 
 check_reboot()
 

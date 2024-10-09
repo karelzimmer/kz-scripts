@@ -60,7 +60,7 @@ function check_input() {
 
     if [[ -z $* ]]; then
         infomsg "$USAGE"
-        exit $ERROR
+        exit $ERR
     fi
 
     if [[ $1 == -* ]]; then
@@ -73,7 +73,7 @@ function check_input() {
             ) || RC=$?
         if [[ $RC -ne $OK ]]; then
             infomsg "$USAGE"
-            exit $ERROR
+            exit $ERR
         fi
         eval set -- "$PARSED"
 
@@ -138,7 +138,7 @@ function process_input() {
         TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 
     shift

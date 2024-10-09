@@ -59,7 +59,7 @@ function check_input() {
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
-        exit $ERROR
+        exit $ERR
     fi
     eval set -- "$PARSED"
 
@@ -86,14 +86,14 @@ function process_x_options() {
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 
     if ! $KZ_DESKTOP_ENVIRONMENT; then
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 }
 
@@ -103,7 +103,7 @@ function process_input() {
     if ! $KZ_DEB; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
     become_root_check || exit $OK
     build
@@ -119,7 +119,7 @@ function build() {
 
     # Call kz build.
     logmsg 'Calling kz build...'
-    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERROR
+    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERR
     logmsg 'Called kz build.'
 }
 
@@ -173,7 +173,7 @@ function check_repos() {
     done
 
     if $ERROR_FLAG; then
-        exit $ERROR
+        exit $ERR
     fi
 }
 
@@ -184,7 +184,7 @@ function check_scripts_and_website() {
 
     # Call kz check.
     logmsg 'Calling kz check...'
-    "$SCRIPTS_REPO/usr/bin"/kz check || exit $ERROR
+    "$SCRIPTS_REPO/usr/bin"/kz check || exit $ERR
     logmsg 'Called kz check.'
 }
 
@@ -220,7 +220,7 @@ function upload_website() {
         rm --verbose "$FTP_LOGIN"*
         TEXT=$(gettext 'Website upload failed.')
         errormsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 }
 
@@ -236,7 +236,7 @@ function install_package() {
     then
         TEXT=$(gettext 'Install package kz failed.')
         errormsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
     logmsg 'Called kz deb (via wget and bash).'
 }

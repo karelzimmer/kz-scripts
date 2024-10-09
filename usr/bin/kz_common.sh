@@ -46,7 +46,7 @@ declare     OPTIONS_SHORT='hmuv'
 declare     OPTIONS_LONG='help,manual,usage,version'
 
 declare     OK=0
-declare     ERROR=1
+declare     ERR=1
 
 declare -i  RC=$OK
 declare     TEXT=''
@@ -161,7 +161,7 @@ function become_root_check() {
     else
         TEXT=$(gettext 'Already performed by the administrator.')
         infomsg "$TEXT"
-        return $ERROR
+        return $ERR
     fi
 }
 
@@ -344,7 +344,7 @@ function term() {
     local   -i  LINENO=${2:-unknown}
     local       FUNCTION=${3:-unknown}
     local       COMMAND=${4:-unknown}
-                RC=${5:-$ERROR}
+                RC=${5:-$ERR}
     local       RC_DESC=''
     local   -i  RC_DESC_SIGNALNO=0
     local       STATUS=$RC/error

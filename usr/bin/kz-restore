@@ -75,7 +75,7 @@ function check_input() {
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
         infomsg "$USAGE"
-        exit $ERROR
+        exit $ERR
     fi
     eval set -- "$PARSED"
 
@@ -94,7 +94,7 @@ function process_x_options() {
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
-                    exit $ERROR
+                    exit $ERR
                 fi
                 OPTION_GUI=true
                 shift
@@ -104,7 +104,7 @@ $USAGE"
                     TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
-                    exit $ERROR
+                    exit $ERR
                 fi
                 OPTION_SOURCE=true
                 SOURCE_ARGUMENT=$2
@@ -124,7 +124,7 @@ $USAGE"
         TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 }
 
@@ -152,7 +152,7 @@ function check_source() {
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
-            exit $ERROR
+            exit $ERR
         fi
 
         SOURCE=$SOURCE_ARGUMENT/$USER@$HOSTNAME
@@ -172,7 +172,7 @@ Connect a USB medium.")
 
             if [[ -z $MEDIUM ]]; then
                 errormsg "$TEXT"
-                exit $ERROR
+                exit $ERR
             fi
         fi
 
@@ -193,7 +193,7 @@ Disconnect media via Files.")"
 
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
                 errormsg "$TEXT"
-                exit $ERROR
+                exit $ERR
             fi
         fi
 
@@ -205,7 +205,7 @@ Disconnect media via Files.")"
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
             errormsg "$TEXT"
-            exit $ERROR
+            exit $ERR
         fi
     fi
 }
@@ -269,7 +269,7 @@ Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Restore backup', or
 use app 'Terminal', type 'kz restore'.")
         errormsg "$TEXT"
-        exit $ERROR
+        exit $ERR
     fi
 
     rm --verbose "$ERROR_FILE" |& $LOGCMD

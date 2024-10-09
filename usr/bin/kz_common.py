@@ -43,7 +43,7 @@ OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
                 f"{_('  -v, --version  show program version')}")
 
 OK = 0
-ERROR = 1
+ERR = 1
 
 RC = OK
 TEXT = ''
@@ -120,12 +120,12 @@ def become_root(PROGRAM_NAME):
             subprocess.run(EXEC_SUDO, shell=True, check=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, TEXT, ERROR)
+            term(PROGRAM_NAME, TEXT, ERR)
         except Exception as exc:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, TEXT, ERROR)
+            term(PROGRAM_NAME, TEXT, ERR)
         else:
             TEXT = ''
             term(PROGRAM_NAME, TEXT, OK)
@@ -262,7 +262,7 @@ def process_option_manual(PROGRAM_NAME):
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERROR)
+        term(PROGRAM_NAME, TEXT, ERR)
     else:
         return OK
 
@@ -296,7 +296,7 @@ def process_option_version(PROGRAM_NAME):
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERROR)
+        term(PROGRAM_NAME, TEXT, ERR)
     finally:
         TEXT = f"{_('kz version 4.2.1 ({}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
@@ -321,7 +321,7 @@ def term(PROGRAM_NAME, TEXT, RC):
     if RC == OK:
         sys.exit(OK)
     else:
-        sys.exit(ERROR)
+        sys.exit(ERR)
 
 
 def wait_for_enter(PROGRAM_NAME):
@@ -333,12 +333,12 @@ def wait_for_enter(PROGRAM_NAME):
         input(TEXT)
     except KeyboardInterrupt:
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERROR)
+        term(PROGRAM_NAME, TEXT, ERR)
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERROR)
+        term(PROGRAM_NAME, TEXT, ERR)
     else:
         return OK
 
