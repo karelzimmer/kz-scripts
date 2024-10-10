@@ -54,6 +54,8 @@ RED = '\033[1;31m'
 GREEN = '\033[1;32m'
 NORMAL = '\033[0m'
 
+# Add the prefix KZ_ to variables because they are used in installation and
+# setup files.
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:

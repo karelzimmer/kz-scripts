@@ -59,6 +59,8 @@ declare     RED='\033[1;31m'
 declare     GREEN='\033[1;32m'
 declare     NORMAL='\033[0m'
 
+# Add the prefix KZ_ to variables because they are used in installation and
+# setup files.
 declare     KZ_DESKTOP_ENVIRONMENT
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
