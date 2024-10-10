@@ -45,9 +45,6 @@ msgstr "Reeds uitgevoerd door de beheerder."
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
 
-msgid "To try to resolve, run:"
-msgstr "Om proberen op te lossen, voer uit:"
-
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr "Programma $PROGRAM_NAME is onderbroken."

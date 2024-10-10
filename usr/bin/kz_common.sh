@@ -428,15 +428,6 @@ function term() {
 error.")
                 errormsg "$TEXT"
             fi
-
-            if [[ $PROGRAM_NAME = 'kz-get' ]]; then
-                infomsg "
-$(gettext 'To try to resolve, run:')
-sudo apt remove kz
-wget karelzimmer.nl/getkz
-bash getkz"
-            fi
-
             exit "$RC"
             ;;
         exit )

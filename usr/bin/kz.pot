@@ -45,9 +45,6 @@ msgstr ""
 msgid "Program $PROGRAM_NAME encountered an error."
 msgstr ""
 
-msgid "To try to resolve, run:"
-msgstr ""
-
 #, sh-format
 msgid "Program $PROGRAM_NAME has been interrupted."
 msgstr ""
