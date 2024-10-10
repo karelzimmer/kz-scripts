@@ -205,6 +205,8 @@ function download_website() {
         errormsg "$TEXT"
         exit $ERR
     fi
+    # Empty REPLY with passowrd.
+    REPLY=''
 }
 
 
