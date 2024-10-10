@@ -217,7 +217,7 @@ if kz_common.KZ_DEB:
     perform_apt_update()
 
     perform_apt_cleanup()
-elif kz_common.RPM:
+elif kz_common.KZ_RPM:
     perform_rpm_repair()
 
     perform_rpm_update()
