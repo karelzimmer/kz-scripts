@@ -291,11 +291,11 @@ sudo apt-get remove --assume-yes lftp
 
 # Install libreoffice on *
 if $KZ_DESKTOP_ENVIRONMENT && $KZ_DEB; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
-if $KZ_DESKTOP_ENVIRONMENT && $KZ_RPM; then sudo dnf install --assumeyes aspell-en libreoffice; fi
+if $KZ_DESKTOP_ENVIRONMENT && $KZ_RPM; then sudo dnf install --assumeyes libreoffice; fi
 
 # Remove libreoffice from *
 if $KZ_DESKTOP_ENVIRONMENT && $KZ_DEB; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
-if $KZ_DESKTOP_ENVIRONMENT && $KZ_RPM; then sudo dnf remove --assumeyes aspell-en libreoffice; fi
+if $KZ_DESKTOP_ENVIRONMENT && $KZ_RPM; then sudo dnf remove --assumeyes libreoffice; fi
 
 # Install locate on pc06 pc07
 sudo apt-get install --assume-yes locate
