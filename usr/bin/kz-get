@@ -98,10 +98,10 @@ $USAGE"
 function process_input() {
     become_root_check || exit $OK
     prepare_processing
-    if $KZ_DEB; then
+    if $APT; then
         download_apt_package
         install_apt_package
-    elif $KZ_RPM; then
+    elif $RPM; then
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')

@@ -142,7 +142,7 @@ function process_input() {
 function check_target() {
     local USB_MOUNT_POINT="/media/$USER"
 
-    if $KZ_RPM; then
+    if $RPM; then
         USB_MOUNT_POINT="/run/media/$USER"
     fi
 

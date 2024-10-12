@@ -69,52 +69,52 @@ else
     KZ_DESKTOP_ENVIRONMENT=false
 fi
 
-declare     KZ_GNOME=true
+declare     GNOME=true
 # shellcheck disable=SC2034
 if [[ -n $(type -t gnome-session) ]]; then
-    KZ_GNOME=true
+    GNOME=true
 else
-    KZ_GNOME=false
+    GNOME=false
 fi
 
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-declare     KZ_DEBIAN
+declare     DEBIAN
 # shellcheck disable=SC2034
 if source /etc/os-release; [[ $ID = 'debian' ]]; then
-    KZ_DEBIAN=true
+    DEBIAN=true
 else
-    KZ_DEBIAN=false
+    DEBIAN=false
 fi
 
-declare     KZ_UBUNTU
+declare     UBUNTU
 # shellcheck disable=SC2034
 if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then
-    KZ_UBUNTU=true
+    UBUNTU=true
 else
-    KZ_UBUNTU=false
+    UBUNTU=false
 fi
 
-declare     KZ_DEB
+declare     APT
 # shellcheck disable=SC2034
 if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
-    KZ_DEB=true
+    APT=true
 else
-    KZ_DEB=false
+    APT=false
 fi
 
-declare     KZ_RPM
+declare     RPM
 # shellcheck disable=SC2034
 if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
     # Additional testing is needed because rpm may be installed on a system
     # that uses Debian package management system APT. APT is not available on a
     # system that uses Red Hat package management system RPM.
-    if $KZ_DEB; then
-        KZ_RPM=false
+    if $APT; then
+        RPM=false
     else
-        KZ_RPM=true
+        RPM=true
     fi
 else
-    KZ_RPM=false
+    RPM=false
 fi
 
 declare     ERREXIT=true
@@ -175,7 +175,7 @@ function become_root_check() {
 function check_apt_package_manager() {
     local   -i  CHECK_WAIT=10
 
-    if ! $KZ_DEB; then
+    if ! $APT; then
         return $OK
     fi
 
@@ -365,9 +365,9 @@ function term() {
             RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            if $KZ_DEB; then
+            if $APT; then
                 RC_DESC='apt/dpkg exited with error'
-            elif $KZ_RPM; then
+            elif $RPM; then
                 RC_DESC='there are updates available'
             else
                 RC_DESC="previous errors/it didn't work"

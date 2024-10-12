@@ -112,7 +112,7 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
-    if ! $KZ_DEB; then
+    if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
         exit $ERR
@@ -254,7 +254,7 @@ function build_rpm_package() {
     # directories.
     rsync   --archive                           \
             --verbose                           \
-            --exclude='KZ_DEBIAN'                  \
+            --exclude='DEBIAN'                  \
             --exclude='usr/share/doc'           \
             "$DEB_REPO_DISTDIR"/                \
             "$RPM_REPO_DISTDIR/kz-deb-files"    |& $LOGCMD

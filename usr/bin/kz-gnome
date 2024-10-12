@@ -163,7 +163,7 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
-    if ! $KZ_GNOME; then
+    if ! $GNOME; then
         TEXT=$(gettext 'For GNOME desktop environments only.')
         infomsg "$TEXT"
         exit $OK

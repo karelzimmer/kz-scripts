@@ -47,50 +47,50 @@ kz-gnome --addbef=firefox-esr
 kz-gnome --addbef=firefox
 
 # Setup gdebi for *
-if $KZ_DESKTOP_ENVIRONMENT && $KZ_DEB; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if $KZ_DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
 # There is no command available to reset gdebi.
 
 # Setup gnome for *
-if $KZ_GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if $KZ_GNOME; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
-if $KZ_GNOME; then gsettings set org.gnome.mutter center-new-windows true; fi
-if $KZ_GNOME; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
-if $KZ_GNOME; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if $KZ_GNOME; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if $KZ_GNOME; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if $KZ_GNOME; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if $KZ_GNOME; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
-if $KZ_GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
-if $KZ_GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
+if $GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
+if $GNOME; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
+if $GNOME; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
+if $GNOME; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
+if $GNOME; then gsettings set org.gnome.desktop.session idle-delay 900; fi
+if $GNOME; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
+if $GNOME; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
+if $GNOME; then gsettings set org.gnome.mutter center-new-windows true; fi
+if $GNOME; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
+if $GNOME; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
+if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
 
 # Reset gnome for *
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.session idle-delay; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
-if $KZ_GNOME; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
-if $KZ_GNOME; then gsettings reset org.gnome.mutter center-new-windows; fi
-if $KZ_GNOME; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if $KZ_GNOME; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if $KZ_GNOME; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if $KZ_GNOME; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
-if $KZ_GNOME; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if $KZ_GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
-if $KZ_GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
-if $KZ_GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
+if $GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
+if $GNOME; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
+if $GNOME; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
+if $GNOME; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
+if $GNOME; then gsettings reset org.gnome.desktop.session idle-delay; fi
+if $GNOME; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
+if $GNOME; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
+if $GNOME; then gsettings reset org.gnome.mutter center-new-windows; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
+if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
+if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
 
 # Setup google-chrome for *
 if $KZ_DESKTOP_ENVIRONMENT; then kz-gnome --addbef=google-chrome; fi

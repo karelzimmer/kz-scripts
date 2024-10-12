@@ -523,7 +523,7 @@ Type 'logout' to log out.")"
         if $KZ_DESKTOP_ENVIRONMENT; then
             $OPTION_GUI || wait_for_enter
 
-            if $KZ_GNOME; then
+            if $GNOME; then
                 gnome-session-quit --logout --no-prompt
             elif [[ -n $(type -t ksmserver) ]]; then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0

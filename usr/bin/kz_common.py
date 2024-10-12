@@ -66,33 +66,33 @@ else:
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
-    KZ_DEBIAN = True
+    DEBIAN = True
 else:
-    KZ_DEBIAN = False
+    DEBIAN = False
 
 if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
-    KZ_UBUNTU = True
+    UBUNTU = True
 else:
-    KZ_UBUNTU = False
+    UBUNTU = False
 
 if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    KZ_DEB = True
+    APT = True
 else:
-    KZ_DEB = False
+    APT = False
 
 if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
                   shell=True, executable='bash').returncode == OK:
     # Additional testing is needed because rpm may be installed on a system
     # that uses Debian package management system APT. APT is not available on a
     # system that uses Red Hat package management system RPM.
-    if KZ_DEB:
-        KZ_RPM = False
+    if APT:
+        RPM = False
     else:
-        KZ_RPM = True
+        RPM = True
 else:
-    KZ_RPM = False
+    RPM = False
 
 
 ###############################################################################
@@ -160,7 +160,7 @@ def check_apt_package_manager(PROGRAM_NAME):
     """
     CHECK_WAIT = 10
 
-    if KZ_RPM:
+    if RPM:
         return OK
 
     while True:
