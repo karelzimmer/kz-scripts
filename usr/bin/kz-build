@@ -227,6 +227,12 @@ function build_deb_package() {
                 -Z=xz                                               \
                 "$DEB_REPO_DISTDIR"                                 \
                 "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
+
+    # Copy kz_common.sh to kz-uploads, needed for kz-get.
+    cp  --preserve                              \
+        --verbose                               \
+        "$SCRIPTS_REPO/usr/bin/kz_common.sh"    \
+        "$UPLOADS_REPO_DISTDIR/assets/packages" |& $LOGCMD
 }
 
 

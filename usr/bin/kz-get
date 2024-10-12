@@ -12,11 +12,11 @@
 # Imports
 ###############################################################################
 
-declare KZ_COMMON_GITHUB_FILE='https://raw.githubusercontent.com/karelzimmer/'
-        KZ_COMMON_GITHUB_FILE+='kz-scripts/main/usr/bin/kz_common.sh'
+declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/packages/'
+        KZ_COMMON_SITE_FILE+='kz_common.sh'
 declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
-wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_GITHUB_FILE |&
+wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
         systemd-cat --identifier=kz-get --priority=debug
 source  "$KZ_COMMON_LOCAL_FILE" 2> >(
         systemd-cat --identifier=kz-get --priority=debug)
