@@ -89,7 +89,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $KZ_DESKTOP_ENVIRONMENT; then
+                if ! $DESKTOP_ENVIRONMENT; then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -280,7 +280,7 @@ use app 'Terminal', type 'kz restore'.")
 function restore_settings() {
     local SETTINGS_DIR=$HOME/kz-backup
 
-    if $KZ_DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT; then
         logmsg 'Restore settings...'
         restore_setting_desktop
     fi

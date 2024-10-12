@@ -128,7 +128,7 @@ $USAGE"
                 shift 2
                 ;;
             -g | --gui )
-                if ! $KZ_DESKTOP_ENVIRONMENT; then
+                if ! $DESKTOP_ENVIRONMENT; then
                     TEXT=\
 "$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -505,7 +505,7 @@ use app 'Terminal', type 'kz setup \$FAILED_APPS_TEXT'.")
 
     if $LOGOUT; then
 
-        if $KZ_DESKTOP_ENVIRONMENT; then
+        if $DESKTOP_ENVIRONMENT; then
             TEXT+="
 
 $(gettext "You will now be logged out of the computer to finish installing \
@@ -520,7 +520,7 @@ Type 'logout' to log out.")"
 
         infomsg "$TEXT"
 
-        if $KZ_DESKTOP_ENVIRONMENT; then
+        if $DESKTOP_ENVIRONMENT; then
             $OPTION_GUI || wait_for_enter
 
             if $GNOME; then

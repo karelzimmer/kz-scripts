@@ -59,14 +59,12 @@ declare     RED='\033[1;31m'
 declare     GREEN='\033[1;32m'
 declare     NORMAL='\033[0m'
 
-# Add the prefix KZ_ to variables because they are used in installation and
-# setup files.
-declare     KZ_DESKTOP_ENVIRONMENT
+declare     DESKTOP_ENVIRONMENT
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
-    KZ_DESKTOP_ENVIRONMENT=true
+    DESKTOP_ENVIRONMENT=true
 else
-    KZ_DESKTOP_ENVIRONMENT=false
+    DESKTOP_ENVIRONMENT=false
 fi
 
 declare     GNOME=true
@@ -291,7 +289,7 @@ function process_options() {
 function process_option_help() {
     local YELP_MAN_URL=''
 
-    if $KZ_DESKTOP_ENVIRONMENT; then
+    if $DESKTOP_ENVIRONMENT; then
         YELP_MAN_URL="$(gettext ', or see the ')"
         YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"

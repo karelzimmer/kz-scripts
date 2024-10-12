@@ -54,14 +54,12 @@ RED = '\033[1;31m'
 GREEN = '\033[1;32m'
 NORMAL = '\033[0m'
 
-# Add the prefix KZ_ to variables because they are used in installation and
-# setup files.
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    KZ_DESKTOP_ENVIRONMENT = True
+    DESKTOP_ENVIRONMENT = True
 else:
-    KZ_DESKTOP_ENVIRONMENT = False
+    DESKTOP_ENVIRONMENT = False
 
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
@@ -245,7 +243,7 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     YELP_MAN_URL = ''
 
-    if KZ_DESKTOP_ENVIRONMENT:
+    if DESKTOP_ENVIRONMENT:
         YELP_MAN_URL = f"{_(', or see the ')}"
         YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
         YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"

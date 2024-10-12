@@ -47,7 +47,7 @@ kz-gnome --addbef=firefox-esr
 kz-gnome --addbef=firefox
 
 # Setup gdebi for *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
 
 # Reset gdebi for *
 # There is no command available to reset gdebi.
@@ -93,11 +93,11 @@ if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-in
 if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
 
 # Setup google-chrome for *
-if $KZ_DESKTOP_ENVIRONMENT; then kz-gnome --addbef=google-chrome; fi
-if $KZ_DESKTOP_ENVIRONMENT; then xdg-mime default google-chrome.desktop application/pdf; fi
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=google-chrome; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Reset google-chrome for *
-if $KZ_DESKTOP_ENVIRONMENT; then kz-gnome --delete=google-chrome; fi
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=google-chrome; fi
 
 # Setup handbrake for emily@pc-van-emily
 kz-gnome --addaft=fr.handbrake.ghb
@@ -106,11 +106,11 @@ kz-gnome --addaft=fr.handbrake.ghb
 kz-gnome --delete=fr.handbrake.ghb
 
 # Setup hide-files for *
-if $KZ_DESKTOP_ENVIRONMENT; then echo 'snap' > "$HOME/.hidden"; fi
-if $KZ_DESKTOP_ENVIRONMENT; then echo 'kz-backup' >> "$HOME/.hidden"; fi
+if $DESKTOP_ENVIRONMENT; then echo 'snap' > "$HOME/.hidden"; fi
+if $DESKTOP_ENVIRONMENT; then echo 'kz-backup' >> "$HOME/.hidden"; fi
 
 # Reset hide-files for *
-if $KZ_DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.hidden"; fi
+if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.hidden"; fi
 
 # Setup kvm for karel@pc06 karel@pc07
 kz-gnome --addaft=virt-manager

@@ -170,10 +170,10 @@ sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' 
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gdebi; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gdebi; fi
 
 # Remove gdebi from *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gdebi; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gdebi; fi
 
 # Install gettext on pc06 pc07
 sudo apt-get install --assume-yes gettext
@@ -206,28 +206,28 @@ sudo apt-get install --assume-yes gnome-tweaks
 sudo apt-get remove --assume-yes gnome-tweaks
 
 # Install google-chrome on *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes google-chrome-stable; fi
+if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes google-chrome-stable; fi
 # Add the source list again because the installation overwrote the newly added source list.
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
+if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 # The apt-key added during installation is no longer needed.
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 # Also install chrome-gnome-shell to make extensions.gnome.org work.
-if $KZ_DESKTOP_ENVIRONMENT && $APT && $GNOME; then sudo apt-get install --assume-yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $APT && $GNOME; then sudo apt-get install --assume-yes chrome-gnome-shell; fi
 # Import GPG Key.
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 # Install Google Chrome.
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 # Remove google-chrome from *
-if $KZ_DESKTOP_ENVIRONMENT && $APT && $GNOME; then apt-get remove --assume-yes chrome-gnome-shell; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes google-chrome-stable chrome-gnome-shell; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
+if $DESKTOP_ENVIRONMENT && $APT && $GNOME; then apt-get remove --assume-yes chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes google-chrome-stable chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
 # Install google-earth on -nohost
 wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg
@@ -290,12 +290,12 @@ sudo apt-get install --assume-yes lftp
 sudo apt-get remove --assume-yes lftp
 
 # Install libreoffice on *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes libreoffice; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes libreoffice; fi
 
 # Remove libreoffice from *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes libreoffice; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes libreoffice; fi
 
 # Install locate on pc06 pc07
 sudo apt-get install --assume-yes locate
@@ -393,31 +393,31 @@ if $DEBIAN; then sudo apt-get install --assume-yes bash-completion; fi
 if $DEBIAN; then sudo apt-get remove --assume-yes bash-completion; fi
 
 # Install teamviewer on *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
 # The apt-key added during installation is no longer needed.
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
 # EPEL: Extra Packages for Enterprise Linux
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes teamviewer; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes teamviewer; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 
 # Install thunderbird on *
-if $KZ_DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes thunderbird-l10n-nl; fi
-if $KZ_DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get install --assume-yes thunderbird-locale-nl; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes thunderbird-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get install --assume-yes thunderbird-locale-nl; fi
 
 # Remove thunderbird from *
-if $KZ_DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes thunderbird-l10n-nl; fi
-if $KZ_DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get remove --assume-yes thunderbird-locale-nl; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes thunderbird-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get remove --assume-yes thunderbird-locale-nl; fi
 
 # Install tree on pc06 pc07
 sudo apt-get install --assume-yes tree
@@ -488,14 +488,14 @@ sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-gues
 sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso
 
 # Install vlc on *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes vlc; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes vlc; fi
 # EPEL: Extra Packages for Enterprise Linux
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes vlc; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes vlc; fi
 
 # Remove vlc from *
-if $KZ_DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes vlc; fi
-if $KZ_DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes vlc; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes vlc; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
 sudo apt-get install --assume-yes apt-transport-https

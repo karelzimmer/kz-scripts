@@ -86,7 +86,7 @@ $USAGE"
         exit $ERR
     fi
 
-    if ! $KZ_DESKTOP_ENVIRONMENT; then
+    if ! $DESKTOP_ENVIRONMENT; then
         TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
