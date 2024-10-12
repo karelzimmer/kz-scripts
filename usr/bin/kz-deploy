@@ -140,7 +140,7 @@ function deploy() {
 
 # This function check that the repos are in the desired state.
 function check_repos() {
-    local ERROR_FLAG=false
+    local ERR_FLAG=false
 
     TEXT=$(gettext 'Check that all repos are on branch main')...
     infomsg "$TEXT"
@@ -151,7 +151,7 @@ function check_repos() {
             TEXT=$(gettext "Repo \$REPO not on branch main.")
             errormsg "$TEXT"
             git status
-            ERROR_FLAG=true
+            ERR_FLAG=true
         fi
     done
 
@@ -168,12 +168,13 @@ function check_repos() {
             TEXT=$(eval_gettext "Repo \$REPO is not clean.")
             errormsg "$TEXT"
             git status
-            ERROR_FLAG=true
+            ERR_FLAG=true
         fi
     done
 
-    if $ERROR_FLAG; then
-        exit $ERR
+    if $ERR_FLAG; then
+        TEXT=$(gettext 'Fix all the messages above.')
+        errormsg "$TEXT"
     fi
 }
 

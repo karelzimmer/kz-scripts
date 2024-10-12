@@ -36,7 +36,7 @@ $(gettext 'Options:')
 $OPTIONS_HELP"
 
 declare BIN_REPO=$HOME/bin
-declare ERROR_FLAG=false
+declare ERR_FLAG=false
 
 
 ###############################################################################
@@ -184,7 +184,7 @@ function check_website() {
 
     # Call rchecklink.
     logmsg 'Calling rchecklink...'
-    "$BIN_REPO"/rchecklink || ERROR_FLAG=true
+    "$BIN_REPO"/rchecklink || ERR_FLAG=true
     logmsg 'Called rchecklink.'
 }
 
@@ -201,7 +201,7 @@ function check_gettext() {
         TEXT=$(eval_gettext "Gettext message catalog template \$FILE not \
 found.")
         errormsg "    $TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 
     # GNU gettext message catalogue (.po).
@@ -211,7 +211,7 @@ found.")
     if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Gettext message catalog \$FILE not found.")
         errormsg "    $TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 
     # GNU message catalog (.mo).
@@ -221,7 +221,7 @@ found.")
     if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Message catalog \$FILE not found.")
         errormsg "    $TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 }
 
@@ -248,7 +248,7 @@ ${RED}    $(gettext "Unknown script. Function check_code cannot check script \
 code.")$NORMAL
 "
         infomsg "$TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 }
 
@@ -263,7 +263,7 @@ function check_script() {
     if ! "$SCRIPTDIR/$SCRIPTNAME" --version |& $LOGCMD; then
         TEXT='    '$(eval_gettext "Script \$SCRIPTNAME returned an error.")
         errormsg "$TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 
     # Desktop file (Only with so-called GUI scripts).
@@ -274,7 +274,7 @@ function check_script() {
             TEXT='    '$(eval_gettext "Desktop configuration file \
 \$DIR/\$SCRIPTNAME.desktop not found.")
             errormsg "$TEXT"
-            ERROR_FLAG=true
+            ERR_FLAG=true
         fi
 
     fi
@@ -286,7 +286,7 @@ function check_script() {
         TEXT='    '$(eval_gettext "Tab completion script \$DIR/\$SCRIPTNAME \
 not found.")
         errormsg "$TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 
     # Manual page (EN + NL).
@@ -295,7 +295,7 @@ not found.")
     if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errormsg "$TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 
     DIR=$SCRIPTS_REPO/usr/share/man/nl/man1
@@ -303,7 +303,7 @@ not found.")
     if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
         errormsg "$TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 
     # PolicyKit action definition file (Only with so-called root scripts).
@@ -314,7 +314,7 @@ not found.")
             TEXT='    '$(eval_gettext "PolicyKit action definition file \
 \$DIR/nl.karelzimmer.\$SCRIPTNAME.policy not found.")
             errormsg "$TEXT"
-            ERROR_FLAG=true
+            ERR_FLAG=true
         fi
 
     fi
@@ -323,7 +323,7 @@ not found.")
 
 # This function checks Python script code.
 function check_pycodestyle() {
-    pycodestyle "$SCRIPT" || ERROR_FLAG=true
+    pycodestyle "$SCRIPT" || ERR_FLAG=true
 }
 
 
@@ -347,7 +347,7 @@ ${RED}    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
 (\$MAX_LINE_LENGTH_FOUND).")$NORMAL
 "
         infomsg "$TEXT"
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 }
 
@@ -366,7 +366,7 @@ function check_shellcheck() {
                 --enable add-default-case           \
                 --enable avoid-nullary-conditions   \
                 --enable require-double-brackets    \
-                "$SCRIPTNAME"                       || ERROR_FLAG=true
+                "$SCRIPTNAME"                       || ERR_FLAG=true
     cd "$SCRIPTS_REPO"
 }
 
@@ -409,22 +409,21 @@ ${RED}    $(gettext 'End spaces found.')$NORMAL
         infomsg "$TEXT"
         grep    --line-number --regexp=' ''$' "$SCRIPT" |
         nl      --number-width=4 --number-separator='' --body-numbering=n
-        ERROR_FLAG=true
+        ERR_FLAG=true
     fi
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    if $ERROR_FLAG; then
+    if $ERR_FLAG; then
         TEXT=$(gettext 'Fix all the messages above.')
         errormsg "$TEXT"
-        exit $ERR
     else
         TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
         infomsg "$TEXT"
-        exit $OK
     fi
+    exit $OK
 }
 
 
