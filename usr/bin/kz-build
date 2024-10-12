@@ -122,6 +122,7 @@ function process_input() {
     build_website
     build_deb_package
     build_rpm_package
+    copy_kz_common
     install_deb_package
 }
 
@@ -227,12 +228,6 @@ function build_deb_package() {
                 -Z=xz                                               \
                 "$DEB_REPO_DISTDIR"                                 \
                 "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
-
-    # Copy kz_common.sh to kz-uploads, needed for kz-get.
-    cp  --preserve                              \
-        --verbose                               \
-        "$SCRIPTS_REPO/usr/bin/kz_common.sh"    \
-        "$UPLOADS_REPO_DISTDIR/assets/packages" |& $LOGCMD
 }
 
 
@@ -250,20 +245,33 @@ function build_rpm_package() {
             "$RPM_REPO_SRCDIR"/ \
             "$RPM_REPO_DISTDIR" |& $LOGCMD
 
-    # Copy build id Debian package.
-    cp  --preserve                                              \
-        --verbose                                               \
-        "$DEB_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"   \
-        "$RPM_REPO_DISTDIR/kz-deb-files/usr/share/doc/kz"       |& $LOGCMD
+    # Make sure the permissions are correct for the sync with repo kz-scripts.
+    chmod --verbose 'u=rwx,g=rx,o=rx' -- "$SCRIPTS_REPO/usr/bin"/*  |& $LOGCMD
+    chmod --verbose 'a-x' -- "$SCRIPTS_REPO/usr/bin"/*.*            |& $LOGCMD
 
-    # Fill kz-rpm/dist/ with kz-deb/dist, excluding some Debian-specific
-    # directories.
-    rsync   --archive                           \
-            --verbose                           \
-            --exclude='DEBIAN'                  \
-            --exclude='usr/share/doc'           \
-            "$DEB_REPO_DISTDIR"/                \
-            "$RPM_REPO_DISTDIR/kz-deb-files"    |& $LOGCMD
+    # Fill kz-rpm/dist/ with repo kz-scripts.
+    rsync   --archive               \
+            --verbose               \
+            --exclude='__pycache__' \
+            --exclude='LICENSE'     \
+            --exclude='README.md'   \
+            --exclude='.git*'       \
+            --exclude='kz.po'       \
+            --exclude='kz.pot'      \
+            "$SCRIPTS_REPO"/        \
+            "$RPM_REPO_DISTDIR"     |& $LOGCMD
+
+    # Compress man pages.
+    gzip    --best                                      \
+            --force                                     \
+            "$RPM_REPO_DISTDIR/usr/share/man/man1"/*    \
+            "$RPM_REPO_DISTDIR/usr/share/man/nl/man1"/* |& $LOGCMD
+
+    # Capture build id Debian package.
+    BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
+    mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
+    printf  '%s'        \
+            "$BUILD_ID" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"
 
     # Create RPM package in kz-rpm/dist/.
     rpmbuild    -ba                                             \
@@ -276,6 +284,15 @@ function build_rpm_package() {
         --verbose                                           \
         "$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch/$RPM_NAME"  \
         "$UPLOADS_REPO_DISTDIR/assets/packages"             |& $LOGCMD
+}
+
+
+# This function copies kz_common.sh to kz-uploads, needed for kz-get.
+function copy_kz_common() {
+    cp  --preserve                              \
+        --verbose                               \
+        "$SCRIPTS_REPO/usr/bin/kz_common.sh"    \
+        "$UPLOADS_REPO_DISTDIR/assets/packages" |& $LOGCMD
 }
 
 
