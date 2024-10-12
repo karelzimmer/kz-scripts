@@ -112,7 +112,7 @@ def perform_rpm_repair():
     TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, TEXT)
 
-    COMMAND = '# sudo dnf clean all'
+    COMMAND = 'sudo dnf clean all'
     perform_command(COMMAND)
 
     COMMAND = '# sudo dnf makecache'
