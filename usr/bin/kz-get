@@ -12,7 +12,7 @@
 # Imports
 ###############################################################################
 
-declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/packages/'
+declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
         KZ_COMMON_SITE_FILE+='kz_common.sh'
 declare KZ_COMMON_LOCAL_FILE
         KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
