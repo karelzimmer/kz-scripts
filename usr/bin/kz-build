@@ -122,7 +122,7 @@ function process_input() {
     build_website
     build_deb_package
     build_rpm_package
-    copy_kz_common
+    copy_scripts
     install_deb_package
 }
 
@@ -286,12 +286,14 @@ function build_rpm_package() {
 }
 
 
-# This function copies kz_common.sh to kz-uploads, needed for kz-get.
-function copy_kz_common() {
+# This function copies kz-get and kz_common.sh to kz-uploads.
+function copy_scripts() {
+    mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $LOGCMD
     cp  --preserve                              \
         --verbose                               \
+        "$SCRIPTS_REPO/usr/bin/kz-get"          \
         "$SCRIPTS_REPO/usr/bin/kz_common.sh"    \
-        "$UPLOADS_REPO_DISTDIR/assets/packages" |& $LOGCMD
+        "$UPLOADS_REPO_DISTDIR/assets/scripts"  |& $LOGCMD
 }
 
 
