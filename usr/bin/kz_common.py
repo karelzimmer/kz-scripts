@@ -150,7 +150,7 @@ def become_root_check(PROGRAM_NAME):
                        --regexp=wheel', shell=True, check=True)
     except Exception:
         TEXT = _('Already performed by the administrator.')
-        infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         return False
     else:
         return True
@@ -178,7 +178,7 @@ def check_apt_package_manager(PROGRAM_NAME):
             break
         else:
             TEXT = _('Wait for another package manager to finish') + '...'
-            infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             time.sleep(CHECK_WAIT)
 
 
@@ -189,7 +189,7 @@ def errmsg(TEXT):
     print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT):
+def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
     """
     This function returns an informational message.
     """
@@ -276,7 +276,7 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     TEXT = (f'{HELP}\n\n'
             f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
                  format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}''')
-    infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
 def process_option_manual(PROGRAM_NAME):
@@ -302,7 +302,7 @@ def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
     TEXT = (f"{_('Usage:')} {USAGE}\n\n"
             f'''{_("Type '{} --help' for more information.").
                  format(DISPLAY_NAME)}''')
-    infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
 def process_option_version(PROGRAM_NAME):
@@ -330,7 +330,7 @@ def process_option_version(PROGRAM_NAME):
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         TEXT += _('License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
 def term(PROGRAM_NAME, TEXT, RC):
@@ -339,7 +339,7 @@ def term(PROGRAM_NAME, TEXT, RC):
     """
     if RC == OK:
         if TEXT:
-            infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
     else:
         if TEXT:
             errmsg(TEXT)
