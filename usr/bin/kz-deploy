@@ -149,7 +149,7 @@ function check_repos() {
         cd "$REPO"
         if [[ $(git branch --show-current) != 'main' ]]; then
             TEXT=$(gettext "Repo \$REPO not on branch main.")
-            errormsg "$TEXT"
+            errmsg "$TEXT"
             git status
             ERR_FLAG=true
         fi
@@ -166,7 +166,7 @@ function check_repos() {
 
         if ! git diff-index --quiet HEAD; then
             TEXT=$(eval_gettext "Repo \$REPO is not clean.")
-            errormsg "$TEXT"
+            errmsg "$TEXT"
             git status
             ERR_FLAG=true
         fi
@@ -174,7 +174,7 @@ function check_repos() {
 
     if $ERR_FLAG; then
         TEXT=$(gettext 'Fix all the messages above.')
-        errormsg "$TEXT"
+        errmsg "$TEXT"
     fi
 }
 
@@ -220,7 +220,7 @@ function upload_website() {
         # Force entering the password next time.
         rm --verbose "$FTP_LOGIN"*
         TEXT=$(gettext 'Website upload failed.')
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
     # Empty REPLY with passowrd.
@@ -238,7 +238,7 @@ function install_package() {
     if ! wget --output-document=- karelzimmer.nl/getkz 2> >($LOGCMD) | bash
     then
         TEXT=$(gettext 'Install package kz failed.')
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
     logmsg 'Called kz deb (via wget and bash).'

@@ -249,7 +249,7 @@ function process_menu1_choice() {
             ;;
         * )
             TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-            errormsg "$TEXT"
+            errmsg "$TEXT"
             exit $ERR
             ;;
     esac
@@ -409,7 +409,7 @@ function process_menu2_choice() {
         process_menu1_tui
     else
         TEXT=$(eval_gettext "Cannot handle this choice (\$REPLY).")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
 }

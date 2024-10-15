@@ -170,7 +170,7 @@ Connect a USB medium.")
             MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
 
             if [[ -z $MEDIUM ]]; then
-                errormsg "$TEXT"
+                errmsg "$TEXT"
                 exit $ERR
             fi
         fi
@@ -191,7 +191,7 @@ Disconnect media via Files.")"
             MEDIUM=$(ls --directory "$USB_MOUNT_POINT"/* 2> >($LOGCMD) || true)
 
             if [[ $(printf '%s\n' "$MEDIUM" | wc --lines) -gt 1 ]]; then
-                errormsg "$TEXT"
+                errmsg "$TEXT"
                 exit $ERR
             fi
         fi
@@ -203,7 +203,7 @@ Disconnect media via Files.")"
             TEXT=$(eval_gettext "No backup found on connected USB medium.
 
 Connect a USB medium with the directory \$USER@\$HOSTNAME.")
-            errormsg "$TEXT"
+            errmsg "$TEXT"
             exit $ERR
         fi
     fi
@@ -267,7 +267,7 @@ Try restoring the back up again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Restore backup', or
 use app 'Terminal', type 'kz restore'.")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
 

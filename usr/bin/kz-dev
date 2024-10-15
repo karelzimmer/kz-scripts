@@ -202,7 +202,7 @@ function download_website() {
         # Force entering the password next time.
         rm --verbose "$FTP_LOGIN"*
         TEXT=$(gettext 'Website download failed.')
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
     # Empty REPLY with passowrd.

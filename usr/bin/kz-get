@@ -105,7 +105,7 @@ function process_input() {
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
 }

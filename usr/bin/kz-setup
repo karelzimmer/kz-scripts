@@ -174,7 +174,7 @@ function process_input() {
 
     if [[ ! -f $INPUT_FILE ]]; then
         TEXT=$(eval_gettext "No set up file found, looked for '\$INPUT_FILE'.")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
 
@@ -492,7 +492,7 @@ Try to set up the apps again.
 Use app 'Installation menu' and select '5 - Command menu', or
 use app 'Set up apps', or
 use app 'Terminal', type 'kz setup \$FAILED_APPS_TEXT'.")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         exit $ERR
     fi
 

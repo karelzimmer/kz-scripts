@@ -200,7 +200,7 @@ function check_gettext() {
     if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Gettext message catalog template \$FILE not \
 found.")
-        errormsg "    $TEXT"
+        errmsg "    $TEXT"
         ERR_FLAG=true
     fi
 
@@ -210,7 +210,7 @@ found.")
 
     if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Gettext message catalog \$FILE not found.")
-        errormsg "    $TEXT"
+        errmsg "    $TEXT"
         ERR_FLAG=true
     fi
 
@@ -220,7 +220,7 @@ found.")
 
     if [[ ! -e $FILE ]]; then
         TEXT=$(eval_gettext "Message catalog \$FILE not found.")
-        errormsg "    $TEXT"
+        errmsg "    $TEXT"
         ERR_FLAG=true
     fi
 }
@@ -262,7 +262,7 @@ function check_script() {
     # Script.
     if ! "$SCRIPTDIR/$SCRIPTNAME" --version |& $LOGCMD; then
         TEXT='    '$(eval_gettext "Script \$SCRIPTNAME returned an error.")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
@@ -273,7 +273,7 @@ function check_script() {
         if [[ ! -e $DIR/$SCRIPTNAME.desktop ]]; then
             TEXT='    '$(eval_gettext "Desktop configuration file \
 \$DIR/\$SCRIPTNAME.desktop not found.")
-            errormsg "$TEXT"
+            errmsg "$TEXT"
             ERR_FLAG=true
         fi
 
@@ -285,7 +285,7 @@ function check_script() {
     if [[ ! -e $DIR/$SCRIPTNAME ]]; then
         TEXT='    '$(eval_gettext "Tab completion script \$DIR/\$SCRIPTNAME \
 not found.")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
@@ -294,7 +294,7 @@ not found.")
 
     if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
@@ -302,7 +302,7 @@ not found.")
 
     if [[ ! -e $DIR/$SCRIPTNAME.1 ]]; then
         TEXT='    '$(eval_gettext "Manual \$DIR/\$SCRIPTNAME.1 not found.")
-        errormsg "$TEXT"
+        errmsg "$TEXT"
         ERR_FLAG=true
     fi
 
@@ -313,7 +313,7 @@ not found.")
         if [[ ! -e $DIR/nl.karelzimmer.$SCRIPTNAME.policy ]]; then
             TEXT='    '$(eval_gettext "PolicyKit action definition file \
 \$DIR/nl.karelzimmer.\$SCRIPTNAME.policy not found.")
-            errormsg "$TEXT"
+            errmsg "$TEXT"
             ERR_FLAG=true
         fi
 
@@ -418,7 +418,7 @@ ${RED}    $(gettext 'End spaces found.')$NORMAL
 function term_script() {
     if $ERR_FLAG; then
         TEXT=$(gettext 'Fix all the messages above.')
-        errormsg "$TEXT"
+        errmsg "$TEXT"
     else
         TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
         infomsg "$TEXT"

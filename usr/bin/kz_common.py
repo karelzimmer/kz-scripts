@@ -182,7 +182,7 @@ def check_apt_package_manager(PROGRAM_NAME):
             time.sleep(CHECK_WAIT)
 
 
-def errormsg(PROGRAM_NAME, TEXT):
+def errmsg(TEXT):
     """
     This function returns an error message.
     """
@@ -342,7 +342,7 @@ def term(PROGRAM_NAME, TEXT, RC):
             infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
     else:
         if TEXT:
-            errormsg(PROGRAM_NAME, TEXT)
+            errmsg(TEXT)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 

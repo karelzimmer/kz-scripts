@@ -195,7 +195,7 @@ function check_apt_package_manager() {
 
 
 # This function returns an error message.
-function errormsg() {
+function errmsg() {
     if $OPTION_GUI; then
         TITLE=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
         zenity  --error                 \
@@ -424,7 +424,7 @@ function term() {
             if $ERREXIT; then
                 TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an \
 error.")
-                errormsg "$TEXT"
+                errmsg "$TEXT"
             fi
             exit "$RC"
             ;;
@@ -449,7 +449,7 @@ error.")
             ;;
         * )
             TEXT=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
-            errormsg "$TEXT"
+            errmsg "$TEXT"
 
             exit "$RC"
             ;;
