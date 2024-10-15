@@ -519,7 +519,7 @@ function execute_command() {
         GUI_OPTION='--gui'
     fi
 
-    "$CMD" "$ARG" $GUI_OPTION -- || RC=$?
+    "$CMD" "$ARG" $GUI_OPTION || RC=$?
     logmsg "$COMMAND: rc=$RC"
 }
 
