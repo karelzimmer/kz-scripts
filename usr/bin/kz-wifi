@@ -53,7 +53,7 @@ def process_input():
     COMMAND = ''
     NMCLI_OUTPUT = ''
 
-    TEXT = f"{_('Record this data to connect to the wireless network.')}\n\n"
+    TEXT = f"{_('Record this data to connect to the wireless network.')}\n"
     COMMAND = 'nmcli device wifi show-password'
 
     if kz_common.OPTION_GUI:
@@ -68,12 +68,12 @@ def process_input():
         else:
             NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
-            TEXT = TEXT + NMCLI_OUTPUT
+            TEXT = TEXT + '\n' + NMCLI_OUTPUT
             kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
     else:
         kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
-        # Shows QR code for quick connection to Wi-Fi network.
         try:
+            # Shows in Terminal QR code for quick connection to Wi-Fi network.
             subprocess.run({COMMAND}, shell=True, check=True,
                            stderr=subprocess.DEVNULL, executable='bash')
         except Exception:
