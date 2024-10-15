@@ -56,16 +56,28 @@ def process_input():
     COMMAND = 'nmcli device wifi show-password'
 
     if kz_common.OPTION_GUI:
-        NMCLI_OUTPUT = subprocess.run({COMMAND}, stdout=subprocess.PIPE,
-                                      shell=True, executable='bash')
-        NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
-        NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
-        TEXT = TEXT + NMCLI_OUTPUT
-        kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+        try:
+            NMCLI_OUTPUT = subprocess.run({COMMAND}, shell=True, check=True,
+                                          stdout=subprocess.PIPE,
+                                          stderr=subprocess.DEVNULL,
+                                          executable='bash')
+        except Exception:
+            TEXT = _('No WiFi device found.')
+            kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+        else:        
+            NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
+            NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
+            TEXT = TEXT + NMCLI_OUTPUT
+            kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
     else:
         kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
         # Shows QR code for quick connection to Wi-Fi network.
-        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
+        try:
+            subprocess.run({COMMAND}, shell=True, check=True,
+                           stderr=subprocess.DEVNULL, executable='bash')
+        except Exception:
+            TEXT = _('No WiFi device found.')
+            kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
 
 def term_script():
