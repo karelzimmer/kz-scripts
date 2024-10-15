@@ -64,7 +64,7 @@ def process_input():
         except Exception:
             TEXT = _('No WiFi device found.')
             kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
-        else:        
+        else:
             NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
             TEXT = TEXT + NMCLI_OUTPUT
