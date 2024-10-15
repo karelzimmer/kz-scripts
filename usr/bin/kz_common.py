@@ -34,13 +34,16 @@ MODULE_NAME = 'kz_common.py'
 MODULE_DESC = _('Common module for Python scripts')
 
 USAGE = None
-OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
+OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version] \
+[-g|--gui]'
 
 HELP = None
 OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"
                 f"{_('  -u, --usage    show a short usage summary')}\n"
-                f"{_('  -v, --version  show program version')}")
+                f"{_('  -v, --version  show program version')}\n"
+                f"{_('  -g, --gui      run in graphical mode, requires \
+desktop environment')}\n")
 
 OK = 0
 ERR = 1
@@ -91,6 +94,10 @@ if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
         RPM = True
 else:
     RPM = False
+
+PROGRAM_DESC = None
+DISPLAY_NAME = None
+OPTION_GUI = False
 
 
 ###############################################################################
@@ -145,7 +152,7 @@ def become_root_check(PROGRAM_NAME):
                        --regexp=wheel', shell=True, check=True)
     except Exception:
         TEXT = _('Already performed by the administrator.')
-        infomsg(PROGRAM_NAME, TEXT)
+        infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
         return False
     else:
         return True
@@ -173,7 +180,7 @@ def check_apt_package_manager(PROGRAM_NAME):
             break
         else:
             TEXT = _('Wait for another package manager to finish') + '...'
-            infomsg(PROGRAM_NAME, TEXT)
+            infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
             time.sleep(CHECK_WAIT)
 
 
@@ -184,11 +191,20 @@ def errormsg(PROGRAM_NAME, TEXT):
     print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(PROGRAM_NAME, TEXT):
+def infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT):
     """
     This function returns an informational message.
     """
-    print(f'{TEXT}')
+    if OPTION_GUI:
+        TITLE = _('{} information ({})').format(PROGRAM_DESC, DISPLAY_NAME)
+        COMMAND = f'zenity  --info                  \
+                            --width     600         \
+                            --height    100         \
+                            --title     "{TITLE}"   \
+                            --text      "{TEXT}"'
+        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
+    else:
+        print(f'{TEXT}')
 
 
 def init_script(PROGRAM_NAME, DISPLAY_NAME):
@@ -217,6 +233,7 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     PARSER.add_argument('-m', '--manual', action='store_true')
     PARSER.add_argument('-u', '--usage', action='store_true')
     PARSER.add_argument('-v', '--version', action='store_true')
+    PARSER.add_argument('-g', '--gui', action='store_true')
     args = PARSER.parse_args()
 
     if args.help:
@@ -235,6 +252,8 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
         process_option_version(PROGRAM_NAME)
         TEXT = ''
         term(PROGRAM_NAME, TEXT, OK)
+    elif args.gui:
+        OPTION_GUI = True
 
 
 def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
@@ -250,7 +269,7 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     TEXT = (f'{HELP}\n\n'
             f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
                  format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}''')
-    infomsg(PROGRAM_NAME, TEXT)
+    infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
 
 def process_option_manual(PROGRAM_NAME):
@@ -276,7 +295,7 @@ def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
     TEXT = (f"{_('Usage:')} {USAGE}\n\n"
             f'''{_("Type '{} --help' for more information.").
                  format(DISPLAY_NAME)}''')
-    infomsg(PROGRAM_NAME, TEXT)
+    infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
 
 def process_option_version(PROGRAM_NAME):
@@ -304,7 +323,7 @@ def process_option_version(PROGRAM_NAME):
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         TEXT += _('License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(PROGRAM_NAME, TEXT)
+        infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
 
 def term(PROGRAM_NAME, TEXT, RC):
@@ -313,7 +332,7 @@ def term(PROGRAM_NAME, TEXT, RC):
     """
     if RC == OK:
         if TEXT:
-            infomsg(PROGRAM_NAME, TEXT)
+            infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
     else:
         if TEXT:
             errormsg(PROGRAM_NAME, TEXT)

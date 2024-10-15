@@ -52,7 +52,7 @@ def perform_apt_repair():
     This function runs a repair of Debian packages.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
     COMMAND = 'sudo dpkg --configure --pending'
     perform_command(COMMAND)
@@ -72,7 +72,7 @@ def perform_apt_update():
     This function updates installed Debian packages and snaps if installed.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
     COMMAND = 'sudo apt-get update'
     perform_command(COMMAND)
@@ -91,7 +91,7 @@ def perform_apt_cleanup():
     This function performs a Debian packages cleanup.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
     COMMAND = 'sudo apt-get autoclean'
     perform_command(COMMAND)
@@ -105,7 +105,7 @@ def perform_rpm_repair():
     This function runs a repair of RPM packages.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
     COMMAND = 'sudo dnf clean all'
     perform_command(COMMAND)
@@ -119,7 +119,7 @@ def perform_rpm_update():
     This function updates installed RPM packages.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
     # Exit code 100 means there are updates available ==> ' || true'.
     COMMAND = 'sudo dnf check-update --refresh || true'
@@ -134,7 +134,7 @@ def perform_rpm_cleanup():
     This function performs a RPM packages cleanup.
     """
     TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
     COMMAND = 'sudo dnf clean all'
     perform_command(COMMAND)
@@ -148,7 +148,7 @@ def perform_command(COMMAND):
     This function executes a Bourne-Again SHell command.
     """
     TEXT = f'{COMMAND}'
-    kz_common.infomsg(PROGRAM_NAME, TEXT)
+    kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
     kz_common.check_apt_package_manager(PROGRAM_NAME)
     try:
         subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
@@ -158,7 +158,7 @@ def perform_command(COMMAND):
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERR)
     else:
-        kz_common.infomsg(PROGRAM_NAME, '')
+        kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, '')
 
 
 def check_reboot():
@@ -172,7 +172,7 @@ installation of updates ***")
         try:
             with open('/var/run/reboot-required') as fh:
                 TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
-                kz_common.infomsg(PROGRAM_NAME, TEXT)
+                kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
         except FileNotFoundError as fnf:
             TEXT = str(fnf)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
@@ -185,7 +185,7 @@ installation of updates ***")
         if subprocess.run('needs-restarting --reboothint',
                           shell=True).returncode == 1:
             TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
-            kz_common.infomsg(PROGRAM_NAME, TEXT)
+            kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
 
 def term_script():

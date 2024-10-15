@@ -1,5 +1,9 @@
-#!/usr/bin/env bash
-# shellcheck source=kz_common.sh
+#!/usr/bin/env python3
+"""
+Show WiFi information.
+
+This script shows WiFi information.
+"""
 ###############################################################################
 # SPDX-FileComment: Show WiFi information
 #
@@ -12,141 +16,76 @@
 # Imports
 ###############################################################################
 
-source kz_common.sh
+import gettext
+import kz_common
+import subprocess
+
+gettext.bindtextdomain('kz', '/usr/share/locale')
+gettext.textdomain('kz')
+_ = gettext.gettext
 
 
 ###############################################################################
 # Variables
 ###############################################################################
 
-declare PROGRAM_NAME='kz-wifi'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Show WiFi information')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+PROGRAM_NAME = 'kz-wifi'
+PROGRAM_DESC = _('Show WiFi information')
+DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
-\$OPTIONS_USAGE")
+kz_common.USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP=$(gettext "  -g, --gui      run in graphical mode, \
-requires desktop environment")
-
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
-
-$PROGRAM_DESC.
-
-$(gettext 'Options:')
-$X_OPTIONS_HELP
-$OPTIONS_HELP"
-
-declare X_OPTIONS_SHORT='g'
-declare X_OPTIONS_LONG=',gui'
+kz_common.HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+                  f'{PROGRAM_DESC}.\n\n'
+                  f"{_('Options:')}\n"
+                  f'{kz_common.OPTIONS_HELP}')
 
 
 ###############################################################################
 # Functions
 ###############################################################################
 
-# This function handles the script options and arguments.
-function check_input() {
-    local PARSED=''
+def process_input():
+    """
+    This function processes the script options and arguments.
+    """
+    COMMAND = ''
+    NMCLI_OUTPUT = ''
 
-    PARSED=$(
-        getopt  --alternative                                       \
-                --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
-                --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
-                --              "$@"
-        ) || RC=$?
-    if [[ $RC -ne $OK ]]; then
-        infomsg "$USAGE"
-        exit $ERR
-    fi
-    eval set -- "$PARSED"
+    TEXT = f"{_('Record this data to connect to the wireless network.')}\n\n"
+    COMMAND = 'nmcli device wifi show-password'
 
-    process_options   "$@"
-    process_x_options "$@"
-}
-
-
-# This function handles the extra options and arguments.
-function process_x_options() {
-    while true; do
-        case $1 in
-            -g | --gui )
-                if ! $DESKTOP_ENVIRONMENT; then
-                    TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
-$USAGE"
-                    infomsg "$TEXT"
-                    exit $ERR
-                fi
-                OPTION_GUI=true
-                shift
-                ;;
-            -- )
-                shift
-                break
-                ;;
-            * )
-                shift
-                ;;
-        esac
-    done
-
-    if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
-$USAGE"
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-}
-
-
-# This function processes the script options and arguments.
-function process_input() {
-    local NMCLI_OUTPUT=''
-
-    TEXT=$(gettext "Record this data to connect to the wireless network.")
-
-    if $OPTION_GUI; then
-
-        if NMCLI_OUTPUT=$(nmcli device wifi show-password 2> >($LOGCMD)); then
-            TEXT="$NMCLI_OUTPUT
-
-$TEXT"
-        else
-            TEXT=$(gettext 'No WiFi device found.')
-        fi
-
-    else
+    if kz_common.OPTION_GUI:
+        NMCLI_OUTPUT = subprocess.run({COMMAND}, stdout=subprocess.PIPE,
+                                      shell=True, executable='bash')
+        NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
+        NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
+        TEXT = TEXT + NMCLI_OUTPUT
+        kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
+    else:
+        kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
         # Shows QR code for quick connection to Wi-Fi network.
-        if ! nmcli device wifi show-password 2> >($LOGCMD); then
-            TEXT=$(gettext "No WiFi device found.")
-        fi
-    fi
-
-    infomsg "$TEXT"
-}
+        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
 
 
-# This function controls the termination of the script.
-function term_script() {
-    exit $OK
-}
+def term_script():
+    """
+    This function controls the termination of the script.
+    """
+    if not kz_common.OPTION_GUI:
+        TEXT = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}\
+{kz_common.NORMAL}"
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-function main() {
-    init_script "$@"
-    check_input "$@"
-    process_input
-    term_script
-}
+kz_common.init_script(PROGRAM_NAME, DISPLAY_NAME)
 
-main "$@"
+kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+
+process_input()
+
+term_script()
