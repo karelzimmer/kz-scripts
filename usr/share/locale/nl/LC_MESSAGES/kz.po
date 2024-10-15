@@ -1023,8 +1023,8 @@ msgstr ""
 "*** De computer moet opnieuw worden opgestart om de installatie van updates "
 "te voltooien ***"
 
-msgid "ignore option gui"
-msgstr "negeer optie gui"
+msgid "option ignored"
+msgstr "optie genegeerd"
 
 msgid "Record this data to connect to the wireless network."
 msgstr ""

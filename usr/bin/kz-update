@@ -19,6 +19,7 @@ This script performs a repair, update, and cleanup.
 import gettext
 import kz_common
 import subprocess
+import sys
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -208,7 +209,7 @@ kz_common.become_root(PROGRAM_NAME)
 
 if kz_common.OPTION_GUI:
     kz_common.OPTION_GUI = False
-    TEXT = f"{DISPLAY_NAME}: {_('ignore option gui')}"
+    TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: {_('option ignored')}"
     kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
 if kz_common.APT:

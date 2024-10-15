@@ -19,6 +19,7 @@ This script shows WiFi information.
 import gettext
 import kz_common
 import subprocess
+import sys
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -51,6 +52,12 @@ def process_input():
     """
     COMMAND = ''
     NMCLI_OUTPUT = ''
+
+    if not kz_common.DESKTOP_ENVIRONMENT:
+        kz_common.OPTION_GUI = False
+        TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
+        TEXT += f"{_('no desktop environment available')}"
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
 
     TEXT = f"{_('Record this data to connect to the wireless network.')}\n\n"
     COMMAND = 'nmcli device wifi show-password'
