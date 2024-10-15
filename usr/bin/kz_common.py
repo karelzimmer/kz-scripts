@@ -42,8 +42,7 @@ OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"
                 f"{_('  -u, --usage    show a short usage summary')}\n"
                 f"{_('  -v, --version  show program version')}\n"
-                f"{_('  -g, --gui      run in graphical mode, requires \
-desktop environment')}\n")
+                f"{_('  -g, --gui      run in graphical mode')}\n")
 
 OK = 0
 ERR = 1
@@ -97,7 +96,6 @@ else:
 
 PROGRAM_DESC = None
 DISPLAY_NAME = None
-OPTION_GUI = False
 
 
 ###############################################################################
@@ -226,6 +224,9 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     """
     This function handles the common options.
     """
+    global OPTION_GUI
+    OPTION_GUI = False
+
     PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
 

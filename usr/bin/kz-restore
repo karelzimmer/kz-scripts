@@ -33,8 +33,7 @@ declare X_OPTIONS_HELP
         X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
-$(gettext "  -g, --gui      run in graphical mode, requires desktop \
-environment")
+$(gettext '  -g, --gui      run in graphical mode')
 $(gettext '  -s, --source DIRECTORY
                  use backup in DIRECTORY')"
 

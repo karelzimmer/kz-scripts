@@ -188,8 +188,8 @@ msgstr "Gebruik: $DISPLAY_NAME [OPTIE...]"
 msgid "Options:"
 msgstr "Opties:"
 
-msgid "  -g, --gui      run in graphical mode, requires desktop environment"
-msgstr "  -g, --gui      draai in grafische modus, vereist desktopomgeving"
+msgid "  -g, --gui      run in graphical mode"
+msgstr "  -g, --gui      draai in grafische modus"
 
 msgid ""
 "  -t, --target DIRECTORY\n"
@@ -1022,6 +1022,9 @@ msgid ""
 msgstr ""
 "*** De computer moet opnieuw worden opgestart om de installatie van updates "
 "te voltooien ***"
+
+msgid "ignore option '--gui'"
+msgstr "negeer optie '--gui'"
 
 msgid "Record this data to connect to the wireless network."
 msgstr ""

@@ -179,7 +179,7 @@ msgstr ""
 msgid "Options:"
 msgstr ""
 
-msgid "  -g, --gui      run in graphical mode, requires desktop environment"
+msgid "  -g, --gui      run in graphical mode"
 msgstr ""
 
 msgid ""
@@ -860,6 +860,9 @@ msgstr ""
 msgid ""
 "*** The computer needs to be restarted to complete the installation of "
 "updates ***"
+msgstr ""
+
+msgid "ignore option '--gui'"
 msgstr ""
 
 msgid "Record this data to connect to the wireless network."
