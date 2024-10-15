@@ -254,7 +254,13 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
         TEXT = ''
         term(PROGRAM_NAME, TEXT, OK)
     elif args.gui:
-        OPTION_GUI = True
+        if not DESKTOP_ENVIRONMENT:
+            OPTION_GUI = False
+            TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
+            TEXT += f"{_('no desktop environment available')}"
+            term(PROGRAM_NAME, TEXT, OK)
+        else:
+            OPTION_GUI = True
 
 
 def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
