@@ -208,7 +208,7 @@ kz_common.become_root(PROGRAM_NAME)
 
 if kz_common.OPTION_GUI:
     kz_common.OPTION_GUI = False
-    TEXT = f"{DISPLAY_NAME}: {_("ignore option '--gui'")}"
+    TEXT = f"{DISPLAY_NAME}: {_('ignore option gui')}"
     kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, TEXT)
 
 if kz_common.APT:

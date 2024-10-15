@@ -862,7 +862,7 @@ msgid ""
 "updates ***"
 msgstr ""
 
-msgid "ignore option '--gui'"
+msgid "'ignore option gui"
 msgstr ""
 
 msgid "Record this data to connect to the wireless network."
