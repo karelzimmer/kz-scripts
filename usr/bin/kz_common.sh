@@ -197,7 +197,7 @@ function check_apt_package_manager() {
 # This function returns an error message.
 function errmsg() {
     if $OPTION_GUI; then
-        TITLE=$(eval_gettext "\$PROGRAM_DESC error message (\$DISPLAY_NAME)")
+        TITLE="$PROGRAM_DESC $(eval_gettext 'error message') ($DISPLAY_NAME)"
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -212,7 +212,7 @@ function errmsg() {
 # This function returns an informational message.
 function infomsg() {
     if $OPTION_GUI; then
-        TITLE=$(eval_gettext "\$PROGRAM_DESC information (\$DISPLAY_NAME)")
+        TITLE="$PROGRAM_DESC $(eval_gettext 'information') ($DISPLAY_NAME)"
         zenity  --info                  \
                 --width     600         \
                 --height    100         \

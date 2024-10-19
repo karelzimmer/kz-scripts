@@ -81,13 +81,11 @@ msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 "Licentie CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0/deed.nl>."
 
-#, sh-format
-msgid "$PROGRAM_DESC information ($DISPLAY_NAME)"
-msgstr "$PROGRAM_DESC informatie ($DISPLAY_NAME)"
+msgid "information"
+msgstr "informatie"
 
-#, sh-format
-msgid "$PROGRAM_DESC error message ($DISPLAY_NAME)"
-msgstr "$PROGRAM_DESC foutmelding ($DISPLAY_NAME)"
+msgid "error message"
+msgstr "foutmelding"
 
 msgid "Common module for Python scripts"
 msgstr "Algemene module voor Python scripts"
@@ -97,9 +95,6 @@ msgstr "Programma {} is onderbroken."
 
 msgid "Program {} encountered an error."
 msgstr "In programma {} is een fout opgetreden."
-
-msgid "{} information ({})"
-msgstr "{} informatie ({})"
 
 msgid "Usage: {} [OPTION...]"
 msgstr "Gebruik: {} [OPTIE...]"

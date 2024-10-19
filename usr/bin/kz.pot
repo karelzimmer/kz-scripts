@@ -76,8 +76,7 @@ msgstr ""
 msgid "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>."
 msgstr ""
 
-#, sh-format
-msgid "$PROGRAM_DESC information ($DISPLAY_NAME)"
+msgid "information"
 msgstr ""
 
 #, sh-format
@@ -91,9 +90,6 @@ msgid "Program {} has been interrupted."
 msgstr ""
 
 msgid "Program {} encountered an error."
-msgstr ""
-
-msgid "{} information ({})"
 msgstr ""
 
 msgid "Usage: {} [OPTION...]"

@@ -186,7 +186,16 @@ def errmsg(TEXT):
     """
     This function returns an error message.
     """
-    print(f'{RED}{TEXT}{NORMAL}')
+    if OPTION_GUI:
+        TITLE = f"{PROGRAM_DESC} {_('error message')} ({DISPLAY_NAME})"
+        COMMAND = f'zenity  --error                 \
+                            --width     600         \
+                            --height    100         \
+                            --title     "{TITLE}"   \
+                            --text      "{TEXT}"'
+        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
+    else:
+        print(f'{RED}{TEXT}{NORMAL}')
 
 
 def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
@@ -194,7 +203,7 @@ def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
     This function returns an informational message.
     """
     if OPTION_GUI:
-        TITLE = _('{} information ({})').format(PROGRAM_DESC, DISPLAY_NAME)
+        TITLE = f"{PROGRAM_DESC} {_('information')} ({DISPLAY_NAME})"
         COMMAND = f'zenity  --info                  \
                             --width     600         \
                             --height    100         \
