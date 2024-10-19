@@ -50,7 +50,7 @@ kz_common.HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
 # Functions
 ###############################################################################
 
-def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
+def process_options():
     """
     This function handles the script options and arguments.
     """
@@ -65,27 +65,27 @@ def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     args = PARSER.parse_args()
 
     if args.help:
-        kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        kz_common.process_option_help()
         TEXT = ''
-        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+        kz_common.term(TEXT, kz_common.OK)
     elif args.manual:
-        kz_common.process_option_manual(PROGRAM_NAME)
+        kz_common.process_option_manual()
         TEXT = ''
-        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+        kz_common.term(TEXT, kz_common.OK)
     elif args.usage:
-        kz_common.process_option_usage(PROGRAM_NAME, DISPLAY_NAME)
+        kz_common.process_option_usage()
         TEXT = ''
-        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+        kz_common.term(TEXT, kz_common.OK)
     elif args.version:
-        kz_common.process_option_version(PROGRAM_NAME)
+        kz_common.process_option_version()
         TEXT = ''
-        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+        kz_common.term(TEXT, kz_common.OK)
     elif args.gui:
         if not kz_common.DESKTOP_ENVIRONMENT:
             kz_common.OPTION_GUI = False
             TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
-            kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+            kz_common.term(TEXT, kz_common.OK)
         else:
             kz_common.OPTION_GUI = True
 
@@ -108,21 +108,21 @@ def process_input():
                                           executable='bash')
         except Exception:
             TEXT = _('No WiFi device found.')
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(TEXT)
         else:
             NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
             TEXT = TEXT + '\n' + NMCLI_OUTPUT
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(TEXT)
     else:
-        kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        kz_common.infomsg(TEXT)
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
             subprocess.run({COMMAND}, shell=True, check=True,
                            stderr=subprocess.DEVNULL, executable='bash')
         except Exception:
             TEXT = _('No WiFi device found.')
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(TEXT)
 
 
 def term_script():
@@ -132,16 +132,16 @@ def term_script():
     if not kz_common.OPTION_GUI:
         TEXT = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}\
 {kz_common.NORMAL}"
-        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+        kz_common.term(TEXT, kz_common.OK)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-kz_common.init_script(PROGRAM_NAME, DISPLAY_NAME)
+kz_common.init_script()
 
-process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+process_options()
 
 process_input()
 

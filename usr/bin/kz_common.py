@@ -92,6 +92,7 @@ else:
     RPM = False
 
 OPTION_GUI = False
+PROGRAM_NAME = None
 PROGRAM_DESC = None
 DISPLAY_NAME = None
 
@@ -100,7 +101,7 @@ DISPLAY_NAME = None
 # Functions
 ###############################################################################
 
-def become_root(PROGRAM_NAME):
+def become_root():
     """
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
@@ -154,7 +155,7 @@ def become_root_check():
         return True
 
 
-def check_apt_package_manager(PROGRAM_NAME):
+def check_apt_package_manager():
     """
     This function checks for another running APT package manager and waits for
     the next check if so.
@@ -196,7 +197,7 @@ def errmsg(TEXT):
         print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
+def infomsg(TEXT):
     """
     This function returns an informational message.
     """
@@ -212,7 +213,7 @@ def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
         print(f'{TEXT}')
 
 
-def init_script(PROGRAM_NAME, DISPLAY_NAME):
+def init_script():
     """
     This function performs initial actions.
     """
@@ -220,14 +221,14 @@ def init_script(PROGRAM_NAME, DISPLAY_NAME):
     logmsg(PROGRAM_NAME, TEXT)
 
 
-def logmsg(PROGRAM_NAME, TEXT):
+def logmsg():
     """
     This function records a message to the log.
     """
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
-def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
+def process_option_help():
     """
     This function shows the available help.
     """
@@ -243,7 +244,7 @@ def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_manual(PROGRAM_NAME):
+def process_option_manual():
     """
     This function displays the manual page..
     """
@@ -259,7 +260,7 @@ def process_option_manual(PROGRAM_NAME):
         return OK
 
 
-def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
+def process_option_usage():
     """
     This function shows the available options.
     """
@@ -269,7 +270,7 @@ def process_option_usage(PROGRAM_NAME, DISPLAY_NAME):
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_version(PROGRAM_NAME):
+def process_option_version():
     """
     This function displays version, author, and license information.
     """
@@ -297,7 +298,7 @@ def process_option_version(PROGRAM_NAME):
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME, TEXT, RC):
+def term(TEXT, RC):
     """
     This function controls the termination.
     """
@@ -316,7 +317,7 @@ def term(PROGRAM_NAME, TEXT, RC):
         sys.exit(ERR)
 
 
-def wait_for_enter(PROGRAM_NAME):
+def wait_for_enter():
     """
     This function waits for the user to press Enter.
     """
