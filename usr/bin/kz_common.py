@@ -110,7 +110,7 @@ def become_root():
 
     if not become_root_check():
         TEXT = ''
-        term(PROGRAM_NAME, TEXT, OK)
+        term(TEXT, OK)
 
     if os.getuid() != 0:
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
@@ -120,21 +120,21 @@ def become_root():
             else:
                 EXEC_SUDO += ' ' + str(sys.argv[arg_num])
         TEXT = f'Restart ({EXEC_SUDO})'
-        logmsg(PROGRAM_NAME, TEXT)
+        logmsg(TEXT)
 
         try:
             subprocess.run(EXEC_SUDO, shell=True, check=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, TEXT, ERR)
+            term(TEXT, ERR)
         except Exception as exc:
             TEXT = str(exc)
-            logmsg(PROGRAM_NAME, TEXT)
+            logmsg(TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, TEXT, ERR)
+            term(TEXT, ERR)
         else:
             TEXT = ''
-            term(PROGRAM_NAME, TEXT, OK)
+            term(TEXT, OK)
 
 
 def become_root_check():
@@ -149,7 +149,7 @@ def become_root_check():
                        --regexp=wheel', shell=True, check=True)
     except Exception:
         TEXT = _('Already performed by the administrator.')
-        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        infomsg(TEXT)
         return False
     else:
         return True
@@ -177,7 +177,7 @@ def check_apt_package_manager():
             break
         else:
             TEXT = _('Wait for another package manager to finish') + '...'
-            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            infomsg(TEXT)
             time.sleep(CHECK_WAIT)
 
 
@@ -218,10 +218,10 @@ def init_script():
     This function performs initial actions.
     """
     TEXT = f'==== START logs for script {PROGRAM_NAME} ===='
-    logmsg(PROGRAM_NAME, TEXT)
+    logmsg(TEXT)
 
 
-def logmsg():
+def logmsg(TEXT):
     """
     This function records a message to the log.
     """
@@ -241,7 +241,7 @@ def process_option_help():
     TEXT = (f'{HELP}\n\n'
             f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
                  format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}''')
-    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    infomsg(TEXT)
 
 
 def process_option_manual():
@@ -253,9 +253,9 @@ def process_option_manual():
                        check=True)
     except Exception as exc:
         TEXT = str(exc)
-        logmsg(PROGRAM_NAME, TEXT)
+        logmsg(TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERR)
+        term(TEXT, ERR)
     else:
         return OK
 
@@ -267,7 +267,7 @@ def process_option_usage():
     TEXT = (f"{_('Usage:')} {USAGE}\n\n"
             f'''{_("Type '{} --help' for more information.").
                  format(DISPLAY_NAME)}''')
-    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    infomsg(TEXT)
 
 
 def process_option_version():
@@ -281,21 +281,21 @@ def process_option_version():
             BUILD_ID = f'{fh.read()}'
     except FileNotFoundError as fnf:
         TEXT = str(fnf)
-        logmsg(PROGRAM_NAME, TEXT)
+        logmsg(TEXT)
         TEXT = _('Build ID cannot be determined.')
-        logmsg(PROGRAM_NAME, TEXT)
+        logmsg(TEXT)
         build_id = TEXT
     except Exception as exc:
         TEXT = str(exc)
-        logmsg(PROGRAM_NAME, TEXT)
+        logmsg(TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERR)
+        term(TEXT, ERR)
     finally:
         TEXT = f"{_('kz version 4.2.1 ({}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         TEXT += _('License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        infomsg(TEXT)
 
 
 def term(TEXT, RC):
@@ -304,12 +304,12 @@ def term(TEXT, RC):
     """
     if RC == OK:
         if TEXT:
-            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            infomsg(TEXT)
     else:
         if TEXT:
             errmsg(TEXT)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
-    logmsg(PROGRAM_NAME, TEXT)
+    logmsg(TEXT)
 
     if RC == OK:
         sys.exit(OK)
@@ -326,12 +326,12 @@ def wait_for_enter():
         input(TEXT)
     except KeyboardInterrupt:
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERR)
+        term(TEXT, ERR)
     except Exception as exc:
         TEXT = str(exc)
-        logmsg(PROGRAM_NAME, TEXT)
+        logmsg(TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, TEXT, ERR)
+        term(TEXT, ERR)
     else:
         return OK
 
@@ -342,4 +342,4 @@ def wait_for_enter():
 
 if __name__ == '__main__':
     TEXT = _('{}: i am a module').format(MODULE_NAME)
-    infomsg(MODULE_NAME, TEXT)
+    print(TEXT)

@@ -208,11 +208,11 @@ def perform_command(COMMAND):
         subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
     except Exception as exc:
         TEXT = str(exc)
-        kz_common.logmsg(PROGRAM_NAME, TEXT)
+        kz_common.logmsg(TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
         kz_common.term(TEXT, kz_common.ERR)
     else:
-        kz_common.infomsg(PROGRAM_DESC, DISPLAY_NAME, '')
+        kz_common.infomsg('')
 
 
 def check_reboot():
@@ -229,10 +229,10 @@ installation of updates ***")
                 kz_common.infomsg(TEXT)
         except FileNotFoundError as fnf:
             TEXT = str(fnf)
-            kz_common.logmsg(PROGRAM_NAME, TEXT)
+            kz_common.logmsg(TEXT)
         except Exception as exc:
             TEXT = str(exc)
-            kz_common.logmsg(PROGRAM_NAME, TEXT)
+            kz_common.logmsg(TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
             kz_common.term(TEXT, kz_common.ERR)
     else:
