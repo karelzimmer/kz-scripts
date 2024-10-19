@@ -16,6 +16,7 @@ This script shows WiFi information.
 # Imports
 ###############################################################################
 
+import argparse
 import gettext
 import kz_common
 import subprocess
@@ -34,17 +35,60 @@ PROGRAM_NAME = 'kz-wifi'
 PROGRAM_DESC = _('Show WiFi information')
 DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
-kz_common.USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
+kz_common.USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
+
+X_OPTIONS_HELP = f"{_('  -g, --gui      run in graphical mode')}"
 
 kz_common.HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
                   f'{PROGRAM_DESC}.\n\n'
                   f"{_('Options:')}\n"
-                  f'{kz_common.OPTIONS_HELP}')
+                  f'{kz_common.OPTIONS_HELP}\n'
+                  f'{X_OPTIONS_HELP}')
 
 
 ###############################################################################
 # Functions
 ###############################################################################
+
+def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
+    """
+    This function handles the script options and arguments.
+    """
+    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=kz_common.USAGE,
+                                     add_help=False)
+
+    PARSER.add_argument('-h', '--help', action='store_true')
+    PARSER.add_argument('-m', '--manual', action='store_true')
+    PARSER.add_argument('-u', '--usage', action='store_true')
+    PARSER.add_argument('-v', '--version', action='store_true')
+    PARSER.add_argument('-g', '--gui', action='store_true')
+    args = PARSER.parse_args()
+
+    if args.help:
+        kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+    elif args.manual:
+        kz_common.process_option_manual(PROGRAM_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+    elif args.usage:
+        kz_common.process_option_usage(PROGRAM_NAME, DISPLAY_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+    elif args.version:
+        kz_common.process_option_version(PROGRAM_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+    elif args.gui:
+        if not kz_common.DESKTOP_ENVIRONMENT:
+            kz_common.OPTION_GUI = False
+            TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
+            TEXT += f"{_('no desktop environment available')}"
+            kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+        else:
+            kz_common.OPTION_GUI = True
+
 
 def process_input():
     """
@@ -97,7 +141,7 @@ def term_script():
 
 kz_common.init_script(PROGRAM_NAME, DISPLAY_NAME)
 
-kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
 process_input()
 

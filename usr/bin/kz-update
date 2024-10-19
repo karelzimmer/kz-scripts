@@ -16,6 +16,7 @@ This script performs a repair, update, and cleanup.
 # Imports
 ###############################################################################
 
+import argparse
 import gettext
 import kz_common
 import subprocess
@@ -47,6 +48,58 @@ COMMAND = ''
 ###############################################################################
 # Functions
 ###############################################################################
+
+def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
+    """
+    This function handles the script options and arguments.
+    """
+    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=kz_common.USAGE,
+                                     add_help=False)
+
+    PARSER.add_argument('-h', '--help', action='store_true')
+    PARSER.add_argument('-m', '--manual', action='store_true')
+    PARSER.add_argument('-u', '--usage', action='store_true')
+    PARSER.add_argument('-v', '--version', action='store_true')
+    args = PARSER.parse_args()
+
+    if args.help:
+        kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+    elif args.manual:
+        kz_common.process_option_manual(PROGRAM_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+    elif args.usage:
+        kz_common.process_option_usage(PROGRAM_NAME, DISPLAY_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+    elif args.version:
+        kz_common.process_option_version(PROGRAM_NAME)
+        TEXT = ''
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.OK)
+
+
+def process_input():
+    """
+    This function processes the script options and arguments.
+    """
+    if kz_common.APT:
+        perform_apt_repair()
+
+        perform_apt_update()
+
+        perform_apt_cleanup()
+    elif kz_common.RPM:
+        perform_rpm_repair()
+
+        perform_rpm_update()
+
+        perform_rpm_cleanup()
+    else:
+        TEXT = _('Unknown package manager.')
+        kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERR)
+
 
 def perform_apt_repair():
     """
@@ -203,30 +256,11 @@ def term_script():
 
 kz_common.init_script(PROGRAM_NAME, DISPLAY_NAME)
 
-kz_common.process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
+process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
 
 kz_common.become_root(PROGRAM_NAME)
 
-if kz_common.OPTION_GUI:
-    kz_common.OPTION_GUI = False
-    TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: {_('option ignored')}"
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-
-if kz_common.APT:
-    perform_apt_repair()
-
-    perform_apt_update()
-
-    perform_apt_cleanup()
-elif kz_common.RPM:
-    perform_rpm_repair()
-
-    perform_rpm_update()
-
-    perform_rpm_cleanup()
-else:
-    TEXT = _('Unknown package manager.')
-    kz_common.term(PROGRAM_NAME, TEXT, kz_common.ERR)
+process_input()
 
 check_reboot()
 

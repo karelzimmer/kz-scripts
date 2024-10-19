@@ -13,7 +13,6 @@ This module provides global variables and functions.
 # Imports
 ###############################################################################
 
-import argparse
 import gettext
 import os
 import subprocess
@@ -34,15 +33,13 @@ MODULE_NAME = 'kz_common.py'
 MODULE_DESC = _('Common module for Python scripts')
 
 USAGE = None
-OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version] \
-[-g|--gui]'
+OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
 HELP = None
 OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"
                 f"{_('  -u, --usage    show a short usage summary')}\n"
-                f"{_('  -v, --version  show program version')}\n"
-                f"{_('  -g, --gui      run in graphical mode')}\n")
+                f"{_('  -v, --version  show program version')}")
 
 OK = 0
 ERR = 1
@@ -94,6 +91,7 @@ if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
 else:
     RPM = False
 
+OPTION_GUI = False
 PROGRAM_DESC = None
 DISPLAY_NAME = None
 
@@ -109,7 +107,7 @@ def become_root(PROGRAM_NAME):
     """
     EXEC_SUDO = 'sudo '
 
-    if not become_root_check(PROGRAM_NAME):
+    if not become_root_check():
         TEXT = ''
         term(PROGRAM_NAME, TEXT, OK)
 
@@ -138,7 +136,7 @@ def become_root(PROGRAM_NAME):
             term(PROGRAM_NAME, TEXT, OK)
 
 
-def become_root_check(PROGRAM_NAME):
+def become_root_check():
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
@@ -227,49 +225,6 @@ def logmsg(PROGRAM_NAME, TEXT):
     This function records a message to the log.
     """
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
-
-
-def process_options(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
-    """
-    This function handles the common options.
-    """
-    global OPTION_GUI
-    OPTION_GUI = False
-
-    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
-                                     add_help=False)
-
-    PARSER.add_argument('-h', '--help', action='store_true')
-    PARSER.add_argument('-m', '--manual', action='store_true')
-    PARSER.add_argument('-u', '--usage', action='store_true')
-    PARSER.add_argument('-v', '--version', action='store_true')
-    PARSER.add_argument('-g', '--gui', action='store_true')
-    args = PARSER.parse_args()
-
-    if args.help:
-        process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME)
-        TEXT = ''
-        term(PROGRAM_NAME, TEXT, OK)
-    elif args.manual:
-        process_option_manual(PROGRAM_NAME)
-        TEXT = ''
-        term(PROGRAM_NAME, TEXT, OK)
-    elif args.usage:
-        process_option_usage(PROGRAM_NAME, DISPLAY_NAME)
-        TEXT = ''
-        term(PROGRAM_NAME, TEXT, OK)
-    elif args.version:
-        process_option_version(PROGRAM_NAME)
-        TEXT = ''
-        term(PROGRAM_NAME, TEXT, OK)
-    elif args.gui:
-        if not DESKTOP_ENVIRONMENT:
-            OPTION_GUI = False
-            TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
-            TEXT += f"{_('no desktop environment available')}"
-            term(PROGRAM_NAME, TEXT, OK)
-        else:
-            OPTION_GUI = True
 
 
 def process_option_help(PROGRAM_NAME, PROGRAM_DESC, DISPLAY_NAME):
