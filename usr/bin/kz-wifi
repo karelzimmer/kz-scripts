@@ -37,13 +37,14 @@ DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
 USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
 
-X_OPTIONS_HELP = f"{_('  -g, --gui      run in graphical mode')}"
+X_OPTIONS_HELP = f"{_('  -g, --gui      run in graphical mode,')}\n"
+X_OPTIONS_HELP += f"{_('                 requires a desktop environment')}"
 
 HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
         f'{PROGRAM_DESC}.\n\n'
         f"{_('Options:')}\n"
-        f'{kz_common.OPTIONS_HELP}\n'
-        f'{X_OPTIONS_HELP}')
+        f'{X_OPTIONS_HELP}\n'
+        f'{kz_common.OPTIONS_HELP}')
 
 
 ###############################################################################
@@ -59,7 +60,7 @@ def process_options():
     """
     This function handles the script options and arguments.
     """
-    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=kz_common.USAGE,
+    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
 
     PARSER.add_argument('-h', '--help', action='store_true')
@@ -70,27 +71,35 @@ def process_options():
     args = PARSER.parse_args()
 
     if args.help:
-        kz_common.process_option_help(HELP)
+        kz_common.process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
+                                      HELP)
         TEXT = ''
-        kz_common.term(TEXT, kz_common.OK)
+        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+                       kz_common.OK)
     elif args.manual:
-        kz_common.process_option_manual()
+        kz_common.process_option_manual(PROGRAM_NAME, DISPLAY_NAME,
+                                        PROGRAM_DESC)
         TEXT = ''
-        kz_common.term(TEXT, kz_common.OK)
+        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+                       kz_common.OK)
     elif args.usage:
-        kz_common.process_option_usage(USAGE)
+        kz_common.process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
         TEXT = ''
-        kz_common.term(TEXT, kz_common.OK)
+        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+                       kz_common.OK)
     elif args.version:
-        kz_common.process_option_version()
+        kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC,
+                                         DISPLAY_NAME)
         TEXT = ''
-        kz_common.term(TEXT, kz_common.OK)
+        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+                       kz_common.OK)
     elif args.gui:
         if not kz_common.DESKTOP_ENVIRONMENT:
             kz_common.OPTION_GUI = False
             TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
-            kz_common.term(TEXT, kz_common.OK)
+            kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+                           kz_common.OK)
         else:
             kz_common.OPTION_GUI = True
 
@@ -113,21 +122,21 @@ def process_input():
                                           executable='bash')
         except Exception:
             TEXT = _('No WiFi device found.')
-            kz_common.infomsg(TEXT)
+            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         else:
             NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
             TEXT = TEXT + '\n' + NMCLI_OUTPUT
-            kz_common.infomsg(TEXT)
+            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
     else:
-        kz_common.infomsg(TEXT)
+        kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
             subprocess.run({COMMAND}, shell=True, check=True,
                            stderr=subprocess.DEVNULL, executable='bash')
         except Exception:
             TEXT = _('No WiFi device found.')
-            kz_common.infomsg(TEXT)
+            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
 def term_script():
@@ -135,14 +144,15 @@ def term_script():
     This function controls the termination of the script.
     """
     TEXT = ''
-    kz_common.term(TEXT, kz_common.OK)
+    kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+                   kz_common.OK)
 
 
 ###############################################################################
 # Main
 ###############################################################################
 
-kz_common.init_script()
+kz_common.init_script(PROGRAM_NAME)
 
 process_options()
 

@@ -115,15 +115,9 @@ fi
 # Variables
 ###############################################################################
 
-declare     DISPLAY_NAME=''
 declare     ERREXIT=true
-declare     HELP=''
 declare     OPTION_GUI=false
-declare     PROGRAM_DESC=''
-declare     PROGRAM_NAME=''
 declare -i  RC=$OK
-declare     TEXT=''
-declare     USAGE=''
 
 
 ###############################################################################
@@ -203,7 +197,7 @@ function check_apt_package_manager() {
 # This function returns an error message.
 function errmsg() {
     if $OPTION_GUI; then
-        TITLE="$PROGRAM_DESC $(eval_gettext 'error message') ($DISPLAY_NAME)"
+        TITLE="$PROGRAM_DESC $(gettext 'error message') ($DISPLAY_NAME)"
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -218,7 +212,7 @@ function errmsg() {
 # This function returns an informational message.
 function infomsg() {
     if $OPTION_GUI; then
-        TITLE="$PROGRAM_DESC $(eval_gettext 'information') ($DISPLAY_NAME)"
+        TITLE="$PROGRAM_DESC $(gettext 'information') ($DISPLAY_NAME)"
         zenity  --info                  \
                 --width     600         \
                 --height    100         \

@@ -28,7 +28,9 @@ declare     USAGE
 \$OPTIONS_USAGE")
 
 declare     X_OPTIONS_HELP
-            X_OPTIONS_HELP=$(gettext '  -g, --gui      run in graphical mode')
+            X_OPTIONS_HELP=\
+"$(gettext '  -g, --gui      run in graphical mode,')
+$(gettext '                 requires a desktop environment')"
 
 declare     HELP
             HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
