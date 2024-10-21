@@ -251,7 +251,7 @@ def term_script():
     """
     This function controls the termination of the script.
     """
-    TEXT = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}{kz_common.NORMAL}"
+    TEXT = ''
     kz_common.term(TEXT, kz_common.OK)
 
 

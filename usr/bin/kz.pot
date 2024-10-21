@@ -343,9 +343,6 @@ msgstr ""
 msgid "Unknown package manager."
 msgstr ""
 
-msgid "finished"
-msgstr ""
-
 msgid ""
 "Package kz has been successfully installed.\n"
 "\n"

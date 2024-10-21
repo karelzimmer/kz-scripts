@@ -252,8 +252,6 @@ function install_package() {
 
 # This function controls the termination of the script.
 function term_script() {
-    TEXT="${GREEN}$DISPLAY_NAME $(gettext 'finished')$NORMAL"
-    infomsg "$TEXT"
     exit $OK
 }
 

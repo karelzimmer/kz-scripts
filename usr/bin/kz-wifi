@@ -134,10 +134,8 @@ def term_script():
     """
     This function controls the termination of the script.
     """
-    if not kz_common.OPTION_GUI:
-        TEXT = f"{kz_common.GREEN}{PROGRAM_NAME} {_('finished')}\
-{kz_common.NORMAL}"
-        kz_common.term(TEXT, kz_common.OK)
+    TEXT = ''
+    kz_common.term(TEXT, kz_common.OK)
 
 
 ###############################################################################
