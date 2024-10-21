@@ -16,7 +16,7 @@ source kz_common.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 declare PROGRAM_NAME='kz-backup'
@@ -49,6 +49,11 @@ $OPTIONS_HELP"
 declare X_OPTIONS_SHORT='gt:'
 declare X_OPTIONS_LONG=',gui,target:'
 
+
+###############################################################################
+# Variables
+###############################################################################
+
 declare MEDIUM=''
 declare OPTION_TARGET=false
 declare SOURCE=$HOME
@@ -56,6 +61,7 @@ declare TARGET_ARGUMENT=''
 declare TARGET_MEDIUM=''
 declare TARGET=''
 declare USERS_LIST=''
+declare TITLE=''
 
 
 ###############################################################################

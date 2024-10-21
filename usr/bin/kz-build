@@ -17,7 +17,7 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 declare PROGRAM_NAME='kz-build'
@@ -39,19 +39,21 @@ $OPTIONS_HELP"
 declare DOCS_REPO=$HOME/kz-docs
 declare SCRIPTS_REPO=$HOME/kz-scripts
 
-declare UPLOADS_REPO=$HOME/kz-uploads
-declare UPLOADS_REPO_SRCDIR=$UPLOADS_REPO/src
-declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
+declare UPLOADS_REPO_SRCDIR=$HOME/kz-uploads/src
+declare UPLOADS_REPO_DISTDIR=$HOME/kz-uploads/dist
 
-declare DEB_REPO=$HOME/kz-deb
-declare DEB_REPO_SRCDIR=$DEB_REPO/src
-declare DEB_REPO_DISTDIR=$DEB_REPO/dist
+declare DEB_REPO_SRCDIR=$HOME/kz-deb/src
+declare DEB_REPO_DISTDIR=$HOME/kz-deb/dist
 declare DEB_NAME=kz_4.2.1-1_all.deb
 
-declare RPM_REPO=$HOME/kz-rpm
-declare RPM_REPO_SRCDIR=$RPM_REPO/src
-declare RPM_REPO_DISTDIR=$RPM_REPO/dist
+declare RPM_REPO_SRCDIR=$HOME/kz-rpm/src
+declare RPM_REPO_DISTDIR=$HOME/kz-rpm/dist
 declare RPM_NAME=kz-4.2.1-1.noarch.rpm
+
+
+###############################################################################
+# Variables
+###############################################################################
 
 
 ###############################################################################

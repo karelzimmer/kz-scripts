@@ -16,7 +16,7 @@ source kz_common.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 declare     PROGRAM_NAME='kz-setup'
@@ -57,6 +57,11 @@ $(gettext '  APP            set up APPs')"
 declare     X_OPTIONS_SHORT='acf:gr'
 declare     X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
 
+
+###############################################################################
+# Variables
+###############################################################################
+
 declare -A  APP_ARGUMENTS=()
 declare -A  FAILED_APPS=()
 declare     ARGUMENT_APP=false
@@ -75,6 +80,7 @@ declare     SETUP_FILE_HEADER
 in this file, see the kz setup man page.")
 $(gettext "# To manually running a command, first run the following: source \
 kz_common.sh")"
+declare     TITLE=''
 
 
 ###############################################################################

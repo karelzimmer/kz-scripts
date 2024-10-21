@@ -28,19 +28,24 @@ _ = gettext.gettext
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 PROGRAM_NAME = 'kz-update'
 PROGRAM_DESC = _('Update system')
 DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
 
-kz_common.USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
+USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
-kz_common.HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
-                  f'{PROGRAM_DESC}.\n\n'
-                  f"{_('Options:')}\n"
-                  f'{kz_common.OPTIONS_HELP}')
+HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+        f'{PROGRAM_DESC}.\n\n'
+        f"{_('Options:')}\n"
+        f'{kz_common.OPTIONS_HELP}')
+
+
+###############################################################################
+# Variables
+###############################################################################
 
 COMMAND = ''
 
@@ -63,7 +68,7 @@ def process_options():
     args = PARSER.parse_args()
 
     if args.help:
-        kz_common.process_option_help()
+        kz_common.process_option_help(HELP)
         TEXT = ''
         kz_common.term(TEXT, kz_common.OK)
     elif args.manual:
@@ -71,7 +76,7 @@ def process_options():
         TEXT = ''
         kz_common.term(TEXT, kz_common.OK)
     elif args.usage:
-        kz_common.process_option_usage()
+        kz_common.process_option_usage(USAGE)
         TEXT = ''
         kz_common.term(TEXT, kz_common.OK)
     elif args.version:

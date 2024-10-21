@@ -16,7 +16,7 @@ source kz_common.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 declare PROGRAM_NAME='kz-gnome'
@@ -54,6 +54,11 @@ $OPTIONS_HELP"
 
 declare X_OPTIONS_SHORT='a:b:d:lr'
 declare X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
+
+
+###############################################################################
+# Variables
+###############################################################################
 
 declare DESKTOPFILE=''
 declare FAVORITE_ARGUMENT=''

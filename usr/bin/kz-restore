@@ -16,7 +16,7 @@ source kz_common.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 declare PROGRAM_NAME='kz-restore'
@@ -49,12 +49,18 @@ $OPTIONS_HELP"
 declare X_OPTIONS_SHORT='gs:'
 declare X_OPTIONS_LONG=',gui,source:'
 
+
+###############################################################################
+# Variables
+###############################################################################
+
 declare MEDIUM=''
 declare OPTION_SOURCE=false
 declare SOURCE_ARGUMENT=''
 declare SOURCE_MEDIUM=''
 declare SOURCE=''
 declare TARGET=$HOME
+declare TITLE=''
 
 
 ###############################################################################

@@ -16,7 +16,7 @@ source kz_common.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 declare     PROGRAM_NAME=kz-install
@@ -57,6 +57,11 @@ $(gettext '  APP            install APPs')"
 declare     X_OPTIONS_SHORT='acf:gr'
 declare     X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
 
+
+###############################################################################
+# Variables
+###############################################################################
+
 declare -A  APP_ARGUMENTS=()
 declare -A  FAILED_APPS=()
 declare     ARGUMENT_APPS=false
@@ -77,6 +82,7 @@ declare     OPTION_FILE=false
 declare     OPTION_REMOVE=false
 declare     REBOOT=true
 declare     REMOVE='Remove'
+declare     TITLE=''
 
 
 ###############################################################################

@@ -26,16 +26,14 @@ _ = gettext.gettext
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 MODULE_NAME = 'kz_common.py'
 MODULE_DESC = _('Common module for Python scripts')
 
-USAGE = None
 OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-HELP = None
 OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
                 f"{_('  -m, --manual   show manual page')}\n"
                 f"{_('  -u, --usage    show a short usage summary')}\n"
@@ -43,9 +41,6 @@ OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
 
 OK = 0
 ERR = 1
-
-RC = OK
-TEXT = ''
 
 # List NORMAL last here so that Python debugger (pdb) doesn't bork the display.
 BOLD = '\033[1m'
@@ -91,10 +86,20 @@ if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
 else:
     RPM = False
 
-OPTION_GUI = False
-PROGRAM_NAME = None
-PROGRAM_DESC = None
+
+###############################################################################
+# Variables
+###############################################################################
+
+
 DISPLAY_NAME = None
+HELP = None
+OPTION_GUI = False
+PROGRAM_DESC = None
+PROGRAM_NAME = None
+RC = OK
+TEXT = ''
+USAGE = None
 
 
 ###############################################################################
@@ -228,7 +233,7 @@ def logmsg(TEXT):
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
-def process_option_help():
+def process_option_help(HELP):
     """
     This function shows the available help.
     """
@@ -260,7 +265,7 @@ def process_option_manual():
         return OK
 
 
-def process_option_usage():
+def process_option_usage(USAGE):
     """
     This function shows the available options.
     """

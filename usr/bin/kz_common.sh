@@ -19,7 +19,7 @@ source /usr/bin/gettext.sh
 
 
 ###############################################################################
-# Variables
+# Constants
 ###############################################################################
 
 declare     MODULE_NAME='kz_common.sh'
@@ -27,12 +27,10 @@ declare     MODULE_DESC
             # shellcheck disable=SC2034
             MODULE_DESC=$(gettext 'Common module for shell scripts')
 
-declare     USAGE
 # shellcheck disable=SC2034
 declare     OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] \
 [-v|--version]"
 
-declare     HELP
 declare     OPTIONS_HELP
             # shellcheck disable=SC2034
             OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
@@ -47,9 +45,6 @@ declare     OPTIONS_LONG='help,manual,usage,version'
 
 declare     OK=0
 declare     ERR=1
-
-declare -i  RC=$OK
-declare     TEXT=''
 
 # List NORMAL last here so that -x doesn't bork the display.
 # shellcheck disable=SC2034
@@ -115,9 +110,20 @@ else
     RPM=false
 fi
 
+
+###############################################################################
+# Variables
+###############################################################################
+
+declare     DISPLAY_NAME=''
 declare     ERREXIT=true
+declare     HELP=''
 declare     OPTION_GUI=false
-declare     TITLE=''
+declare     PROGRAM_DESC=''
+declare     PROGRAM_NAME=''
+declare -i  RC=$OK
+declare     TEXT=''
+declare     USAGE=''
 
 
 ###############################################################################
