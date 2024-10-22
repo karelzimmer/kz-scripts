@@ -45,6 +45,14 @@ sudo apt-get remove --assume-yes anydesk
 sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*
 sudo apt-get update
 
+# Install backintime on -nohost
+# Back In Time is a simple backup tool for Linux.
+# The backup is done by taking snapshots of a specified set of folders.
+sudo apt-get install --assume-yes backintime-qt
+
+# Remove backintime on -nohost
+sudo apt-get remove --assume-yes backintime-qt
+
 # Install bleachbit on pc-van-hugo
 sudo apt-get install --assume-yes bleachbit
 
