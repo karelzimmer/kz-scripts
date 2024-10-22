@@ -288,7 +288,7 @@ def process_option_version(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         logmsg(PROGRAM_NAME, TEXT)
         RC = ERR
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, ERR, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
     finally:
         TEXT = f"{_('kz version 4.2.1 ({}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
@@ -327,13 +327,13 @@ def wait_for_enter(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
     except KeyboardInterrupt:
         RC = ERR
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, ERR, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         RC = ERR
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, ERR, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
     else:
         return OK
 
