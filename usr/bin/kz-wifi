@@ -56,7 +56,7 @@ HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
 # Functions
 ###############################################################################
 
-def process_options():
+def process_options() -> None:
     """
     This function handles the script options and arguments.
     """
@@ -103,7 +103,7 @@ def process_options():
             OPTION_GUI = True
 
 
-def process_input(OPTION_GUI):
+def process_input(OPTION_GUI) -> None:
     """
     This function processes the script options and arguments.
     """
@@ -138,7 +138,7 @@ def process_input(OPTION_GUI):
             kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term_script():
+def term_script() -> None:
     """
     This function controls the termination of the script.
     """

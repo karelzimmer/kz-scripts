@@ -96,7 +96,8 @@ else:
 # Functions
 ###############################################################################
 
-def become_root(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
+def become_root(PROGRAM_NAME: str, DISPLAY_NAME: str,
+                PROGRAM_DESC: str) -> None:
     """
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
@@ -134,7 +135,7 @@ def become_root(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
             term(PROGRAM_NAME, RC)
 
 
-def become_root_check(DISPLAY_NAME, PROGRAM_DESC):
+def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str) -> bool:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
@@ -152,7 +153,7 @@ def become_root_check(DISPLAY_NAME, PROGRAM_DESC):
         return True
 
 
-def check_apt_package_manager(DISPLAY_NAME, PROGRAM_DESC):
+def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function checks for another running APT package manager and waits for
     the next check if so.
@@ -178,7 +179,8 @@ def check_apt_package_manager(DISPLAY_NAME, PROGRAM_DESC):
             time.sleep(CHECK_WAIT)
 
 
-def errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI=False):
+def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
+           OPTION_GUI: bool = False) -> None:
     """
     This function returns an error message.
     """
@@ -194,7 +196,8 @@ def errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI=False):
         print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI=False):
+def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
+            OPTION_GUI: bool = False) -> None:
     """
     This function returns an informational message.
     """
@@ -210,7 +213,7 @@ def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI=False):
         print(f'{TEXT}')
 
 
-def init_script(PROGRAM_NAME):
+def init_script(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
@@ -218,14 +221,15 @@ def init_script(PROGRAM_NAME):
     logmsg(PROGRAM_NAME, TEXT)
 
 
-def logmsg(PROGRAM_NAME, TEXT):
+def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     This function records a message to the log.
     """
     journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
 
 
-def process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, HELP):
+def process_option_help(PROGRAM_NAME: str, DISPLAY_NAME: str,
+                        PROGRAM_DESC: str, HELP: str) -> None:
     """
     This function shows the available help.
     """
@@ -241,7 +245,8 @@ def process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, HELP):
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_manual(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
+def process_option_manual(PROGRAM_NAME: str, DISPLAY_NAME: str,
+                          PROGRAM_DESC: str) -> None:
     """
     This function displays the manual page..
     """
@@ -258,7 +263,8 @@ def process_option_manual(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         return OK
 
 
-def process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE):
+def process_option_usage(DISPLAY_NAME: str, PROGRAM_DESC: str,
+                         USAGE: str) -> None:
     """
     This function shows the available options.
     """
@@ -268,7 +274,8 @@ def process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE):
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_version(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
+def process_option_version(PROGRAM_NAME: str, DISPLAY_NAME: str,
+                           PROGRAM_DESC: str) -> None:
     """
     This function displays version, author, and license information.
     """
@@ -297,8 +304,9 @@ def process_option_version(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME, RC, DISPLAY_NAME=None, PROGRAM_DESC=None, TEXT=None,
-         OPTION_GUI=False):
+def term(PROGRAM_NAME: str, RC: int, DISPLAY_NAME: str = None,
+         PROGRAM_DESC: str = None, TEXT: str = None,
+         OPTION_GUI: bool = False) -> None:
     """
     This function controls the termination.
     """
@@ -317,7 +325,8 @@ def term(PROGRAM_NAME, RC, DISPLAY_NAME=None, PROGRAM_DESC=None, TEXT=None,
         sys.exit(ERR)
 
 
-def wait_for_enter(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
+def wait_for_enter(PROGRAM_NAME: str, DISPLAY_NAME: str,
+                   PROGRAM_DESC: str) -> bool:
     """
     This function waits for the user to press Enter.
     """

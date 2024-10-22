@@ -52,7 +52,7 @@ HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
 # Functions
 ###############################################################################
 
-def process_options():
+def process_options() -> None:
     """
     This function handles the script options and arguments.
     """
@@ -86,7 +86,7 @@ def process_options():
         kz_common.term(PROGRAM_NAME, RC)
 
 
-def process_input():
+def process_input() -> None:
     """
     This function processes the script options and arguments.
     """
@@ -108,7 +108,7 @@ def process_input():
         kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def perform_apt_repair():
+def perform_apt_repair() -> None:
     """
     This function runs a repair of Debian packages.
     """
@@ -128,7 +128,7 @@ def perform_apt_repair():
     perform_command(COMMAND)
 
 
-def perform_apt_update():
+def perform_apt_update() -> None:
     """
     This function updates installed Debian packages and snaps if installed.
     """
@@ -147,7 +147,7 @@ def perform_apt_update():
         perform_command(COMMAND)
 
 
-def perform_apt_cleanup():
+def perform_apt_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """
@@ -161,7 +161,7 @@ def perform_apt_cleanup():
     perform_command(COMMAND)
 
 
-def perform_rpm_repair():
+def perform_rpm_repair() -> None:
     """
     This function runs a repair of RPM packages.
     """
@@ -175,7 +175,7 @@ def perform_rpm_repair():
     perform_command(COMMAND)
 
 
-def perform_rpm_update():
+def perform_rpm_update() -> None:
     """
     This function updates installed RPM packages.
     """
@@ -190,7 +190,7 @@ def perform_rpm_update():
     perform_command(COMMAND)
 
 
-def perform_rpm_cleanup():
+def perform_rpm_cleanup() -> None:
     """
     This function performs a RPM packages cleanup.
     """
@@ -204,7 +204,7 @@ def perform_rpm_cleanup():
     perform_command(COMMAND)
 
 
-def perform_command(COMMAND):
+def perform_command(COMMAND) -> None:
     """
     This function executes a Bourne-Again SHell command.
     """
@@ -223,7 +223,7 @@ def perform_command(COMMAND):
         kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, '')
 
 
-def check_reboot():
+def check_reboot() -> None:
     """
     This function checks if reboot is needed.
     """
@@ -251,7 +251,7 @@ installation of updates ***")
             kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term_script():
+def term_script() -> None:
     """
     This function controls the termination of the script.
     """
