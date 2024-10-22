@@ -90,9 +90,8 @@ def process_options():
             kz_common.OPTION_GUI = False
             TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-            kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
-                           kz_common.OK)
+            kz_common.term(PROGRAM_NAME, kz_common.OK, DISPLAY_NAME,
+                           PROGRAM_DESC, TEXT)
         else:
             kz_common.OPTION_GUI = True
 
@@ -136,7 +135,7 @@ def term_script():
     """
     This function controls the termination of the script.
     """
-    kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,kz_common.OK)
+    kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 ###############################################################################

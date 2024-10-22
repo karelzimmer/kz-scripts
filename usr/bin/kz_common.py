@@ -298,10 +298,16 @@ def process_option_version(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME, RC):
+def term(PROGRAM_NAME, RC, DISPLAY_NAME=None, PROGRAM_DESC=None, TEXT=None):
     """
     This function controls the termination.
     """
+    if RC == OK:
+        if TEXT:
+            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    else:
+        if TEXT:
+            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 

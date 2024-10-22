@@ -114,19 +114,19 @@ function process_option_list() {
 
 $(gettext 'NUM  COMMAND')\n"
     TEXT+=$(
-        find    "/usr/bin/$PROGRAM_NAME"-*     \
-                -maxdepth 1                         \
-                -type f                             \
-                -executable                         \
-                -readable                           \
-                -not -name '*~'                     \
-                -not -name $PROGRAM_NAME            \
-                -printf '%f\n'                      |
-        sort                                        |
-        sed     --expression="s/$PROGRAM_NAME-//"   |
-        nl      --number-width=3                    \
-                --number-format=rn                  \
-                --number-separator='  '             \
+        find    /usr/bin/kz-*               \
+                -maxdepth 1                 \
+                -type f                     \
+                -executable                 \
+                -readable                   \
+                -not -name '*~'             \
+                -not -name $PROGRAM_NAME    \
+                -printf '%f\n'              |
+        sort                                |
+        sed     --expression='s/kz-//'      |
+        nl      --number-width=3            \
+                --number-format=rn          \
+                --number-separator='  '     \
                 --body-numbering=a
         )
     TEXT+="\n
