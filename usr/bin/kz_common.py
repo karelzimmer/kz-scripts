@@ -326,7 +326,7 @@ def term(PROGRAM_NAME: str, RC: int, DISPLAY_NAME: str = None,
 
 
 def wait_for_enter(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                   PROGRAM_DESC: str) -> bool:
+                   PROGRAM_DESC: str) -> None:
     """
     This function waits for the user to press Enter.
     """
