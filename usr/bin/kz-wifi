@@ -51,6 +51,8 @@ HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
 # Variables
 ###############################################################################
 
+OPTION_GUI = False
+
 
 ###############################################################################
 # Functions
@@ -60,6 +62,8 @@ def process_options():
     """
     This function handles the script options and arguments.
     """
+    global OPTION_GUI
+
     PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
 
@@ -87,16 +91,16 @@ def process_options():
         kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.gui:
         if not kz_common.DESKTOP_ENVIRONMENT:
-            kz_common.OPTION_GUI = False
+            OPTION_GUI = False
             TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
             kz_common.term(PROGRAM_NAME, kz_common.OK, DISPLAY_NAME,
-                           PROGRAM_DESC, TEXT)
+                           PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
-            kz_common.OPTION_GUI = True
+            OPTION_GUI = True
 
 
-def process_input():
+def process_input(OPTION_GUI):
     """
     This function processes the script options and arguments.
     """
@@ -106,7 +110,7 @@ def process_input():
     TEXT = f"{_('Record this data to connect to the wireless network.')}\n"
     COMMAND = 'nmcli device wifi show-password'
 
-    if kz_common.OPTION_GUI:
+    if OPTION_GUI:
         try:
             NMCLI_OUTPUT = subprocess.run({COMMAND}, shell=True, check=True,
                                           stdout=subprocess.PIPE,
@@ -114,12 +118,12 @@ def process_input():
                                           executable='bash')
         except Exception:
             TEXT = _('No WiFi device found.')
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
             NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
             TEXT = TEXT + '\n' + NMCLI_OUTPUT
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
         kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         try:
@@ -146,6 +150,6 @@ kz_common.init_script(PROGRAM_NAME)
 
 process_options()
 
-process_input()
+process_input(OPTION_GUI)
 
 term_script()

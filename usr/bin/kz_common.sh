@@ -115,9 +115,8 @@ fi
 # Variables
 ###############################################################################
 
-declare     ERREXIT=true
-declare     OPTION_GUI=false
-declare -i  RC=$OK
+declare ERREXIT=true
+declare OPTION_GUI=false
 
 
 ###############################################################################
@@ -128,7 +127,7 @@ declare -i  RC=$OK
 # the script as user root if not.
 function become_root() {
     # pkexec needs fully qualified path to the program to be executed.
-    local       PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
+    local PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
 
     become_root_check || exit $OK
 

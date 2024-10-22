@@ -91,9 +91,6 @@ else:
 # Variables
 ###############################################################################
 
-OPTION_GUI = False
-RC = OK
-
 
 ###############################################################################
 # Functions
@@ -179,7 +176,7 @@ def check_apt_package_manager(DISPLAY_NAME, PROGRAM_DESC):
             time.sleep(CHECK_WAIT)
 
 
-def errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
+def errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI=False):
     """
     This function returns an error message.
     """
@@ -195,7 +192,7 @@ def errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
         print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT):
+def infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI=False):
     """
     This function returns an informational message.
     """
@@ -298,16 +295,17 @@ def process_option_version(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME, RC, DISPLAY_NAME=None, PROGRAM_DESC=None, TEXT=None):
+def term(PROGRAM_NAME, RC, DISPLAY_NAME=None, PROGRAM_DESC=None, TEXT=None,
+         OPTION_GUI=False):
     """
     This function controls the termination.
     """
     if RC == OK:
         if TEXT:
-            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
         if TEXT:
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 
