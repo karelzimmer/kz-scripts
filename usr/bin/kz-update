@@ -70,26 +70,18 @@ def process_options():
     if args.help:
         kz_common.process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
                                       HELP)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.manual:
         kz_common.process_option_manual(PROGRAM_NAME, DISPLAY_NAME,
                                         PROGRAM_DESC)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.usage:
         kz_common.process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.version:
         kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC,
                                          DISPLAY_NAME)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 def process_input():
@@ -110,8 +102,8 @@ def process_input():
         perform_rpm_cleanup()
     else:
         TEXT = _('Unknown package manager.')
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.ERR)
+        kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
 
 
 def perform_apt_repair():
@@ -223,8 +215,8 @@ def perform_command(COMMAND):
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.ERR)
+        kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        kz_common.term(PROGRAM_NAME, kz_common.ERR)
     else:
         kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, '')
 
@@ -248,7 +240,8 @@ installation of updates ***")
             TEXT = str(exc)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+            kz_common.errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
                            kz_common.ERR)
     else:
         if subprocess.run('needs-restarting --reboothint',
@@ -261,9 +254,7 @@ def term_script():
     """
     This function controls the termination of the script.
     """
-    TEXT = ''
-    kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                   kz_common.OK)
+    kz_common.term(PROGRAM_NAME, kz_common.OK)
 
 
 ###############################################################################

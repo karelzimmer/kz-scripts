@@ -73,32 +73,25 @@ def process_options():
     if args.help:
         kz_common.process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
                                       HELP)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.manual:
         kz_common.process_option_manual(PROGRAM_NAME, DISPLAY_NAME,
                                         PROGRAM_DESC)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.usage:
         kz_common.process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.version:
         kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC,
                                          DISPLAY_NAME)
-        TEXT = ''
-        kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                       kz_common.OK)
+        kz_common.term(PROGRAM_NAME, kz_common.OK)
     elif args.gui:
         if not kz_common.DESKTOP_ENVIRONMENT:
             kz_common.OPTION_GUI = False
             TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
-            kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
                            kz_common.OK)
         else:
             kz_common.OPTION_GUI = True
@@ -143,9 +136,7 @@ def term_script():
     """
     This function controls the termination of the script.
     """
-    TEXT = ''
-    kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                   kz_common.OK)
+    kz_common.term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,kz_common.OK)
 
 
 ###############################################################################

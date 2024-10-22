@@ -107,8 +107,7 @@ def become_root(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
     EXEC_SUDO = 'sudo '
 
     if not become_root_check(DISPLAY_NAME, PROGRAM_DESC):
-        TEXT = ''
-        term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, OK)
+        term(PROGRAM_NAME, OK)
 
     if os.getuid() != 0:
         # From "['path/script', 'arg1', ...]" to "'path/script' 'arg1' ...".
@@ -124,15 +123,16 @@ def become_root(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
             subprocess.run(EXEC_SUDO, shell=True, check=True)
         except KeyboardInterrupt:
             TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, ERR)
+            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            term(PROGRAM_NAME, ERR)
         except Exception as exc:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, ERR)
+            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            term(PROGRAM_NAME, ERR)
         else:
-            TEXT = ''
-            term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, OK)
+            term(PROGRAM_NAME, OK)
 
 
 def become_root_check(DISPLAY_NAME, PROGRAM_DESC):
@@ -253,7 +253,8 @@ def process_option_manual(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, ERR)
+        errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        term(PROGRAM_NAME, ERR)
     else:
         return OK
 
@@ -287,7 +288,8 @@ def process_option_version(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, ERR)
+        errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        term(PROGRAM_NAME, ERR)
     finally:
         TEXT = f"{_('kz version 4.2.1 ({}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
@@ -296,16 +298,10 @@ def process_option_version(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, RC):
+def term(PROGRAM_NAME, RC):
     """
     This function controls the termination.
     """
-    if RC == OK:
-        if TEXT:
-            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-    else:
-        if TEXT:
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 
@@ -324,12 +320,14 @@ def wait_for_enter(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC):
         input(TEXT)
     except KeyboardInterrupt:
         TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, ERR)
+        errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        term(PROGRAM_NAME, ERR)
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC, TEXT, ERR)
+        errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        term(PROGRAM_NAME, ERR)
     else:
         return OK
 
