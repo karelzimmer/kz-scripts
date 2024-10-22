@@ -115,8 +115,9 @@ fi
 # Variables
 ###############################################################################
 
-declare ERREXIT=true
-declare OPTION_GUI=false
+declare -i  RC=$OK
+declare     ERREXIT=true
+declare     OPTION_GUI=false
 
 
 ###############################################################################
