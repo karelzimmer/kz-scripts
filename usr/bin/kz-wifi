@@ -76,24 +76,29 @@ def process_options():
     if args.help:
         kz_common.process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
                                       HELP)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
     elif args.manual:
         kz_common.process_option_manual(PROGRAM_NAME, DISPLAY_NAME,
                                         PROGRAM_DESC)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
     elif args.usage:
         kz_common.process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
     elif args.version:
         kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC,
                                          DISPLAY_NAME)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
     elif args.gui:
         if not kz_common.DESKTOP_ENVIRONMENT:
+            RC = kz_common.OK
             TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
-            kz_common.term(PROGRAM_NAME, kz_common.OK, DISPLAY_NAME,
-                           PROGRAM_DESC, TEXT, OPTION_GUI)
+            kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT,
+                           OPTION_GUI)
         else:
             OPTION_GUI = True
 
@@ -137,7 +142,8 @@ def term_script():
     """
     This function controls the termination of the script.
     """
-    kz_common.term(PROGRAM_NAME, kz_common.OK)
+    RC = kz_common.OK
+    kz_common.term(PROGRAM_NAME, RC)
 
 
 ###############################################################################

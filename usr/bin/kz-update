@@ -68,18 +68,22 @@ def process_options():
     if args.help:
         kz_common.process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
                                       HELP)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
     elif args.manual:
         kz_common.process_option_manual(PROGRAM_NAME, DISPLAY_NAME,
                                         PROGRAM_DESC)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
     elif args.usage:
         kz_common.process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
     elif args.version:
         kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC,
                                          DISPLAY_NAME)
-        kz_common.term(PROGRAM_NAME, kz_common.OK)
+        RC = kz_common.OK
+        kz_common.term(PROGRAM_NAME, RC)
 
 
 def process_input():
@@ -99,9 +103,9 @@ def process_input():
 
         perform_rpm_cleanup()
     else:
+        RC = kz_common.ERR
         TEXT = _('Unknown package manager.')
-        kz_common.term(PROGRAM_NAME, kz_common.ERR, DISPLAY_NAME, PROGRAM_DESC,
-                       TEXT)
+        kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
 def perform_apt_repair():
@@ -212,9 +216,9 @@ def perform_command(COMMAND):
     except Exception as exc:
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)
+        RC = kz_common.OK
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.term(PROGRAM_NAME, kz_common.OK, DISPLAY_NAME, PROGRAM_DESC,
-                       TEXT)
+        kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
     else:
         kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, '')
 
@@ -237,9 +241,9 @@ installation of updates ***")
         except Exception as exc:
             TEXT = str(exc)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
+            RC = kz_common.ERR
             TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz_common.term(PROGRAM_NAME, kz_common.ERR, DISPLAY_NAME,
-                           PROGRAM_DESC, TEXT)
+            kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
     else:
         if subprocess.run('needs-restarting --reboothint',
                           shell=True).returncode == 1:
@@ -251,7 +255,8 @@ def term_script():
     """
     This function controls the termination of the script.
     """
-    kz_common.term(PROGRAM_NAME, kz_common.OK)
+    RC = kz_common.OK
+    kz_common.term(PROGRAM_NAME, RC)
 
 
 ###############################################################################
