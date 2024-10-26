@@ -48,20 +48,13 @@ HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
-def process_options() -> None:
+def process_options() -> bool:
     """
     This function handles the script options and arguments.
     """
-    global OPTION_GUI
-    OPTION_GUI = False
 
     PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
@@ -97,10 +90,14 @@ def process_options() -> None:
             RC = kz_common.OK
             TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
+            OPTION_GUI = False
             kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT,
                            OPTION_GUI)
+            return False
         else:
-            OPTION_GUI = True
+            return True
+
+    return False
 
 
 def process_input(OPTION_GUI) -> None:
@@ -152,7 +149,7 @@ def term_script() -> None:
 
 kz_common.init_script(PROGRAM_NAME)
 
-process_options()
+OPTION_GUI = process_options()
 
 process_input(OPTION_GUI)
 
