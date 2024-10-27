@@ -55,6 +55,7 @@ def process_options() -> bool:
     """
     This function handles the script options and arguments.
     """
+    OPTION_GUI = False
 
     PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
@@ -93,11 +94,10 @@ def process_options() -> bool:
             OPTION_GUI = False
             kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT,
                            OPTION_GUI)
-            return False
         else:
-            return True
+            OPTION_GUI = True
 
-    return False
+    return OPTION_GUI
 
 
 def process_input(OPTION_GUI) -> None:
