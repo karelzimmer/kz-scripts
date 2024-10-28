@@ -199,7 +199,7 @@ def perform_rpm_cleanup() -> None:
     perform_command(COMMAND)
 
 
-def perform_command(COMMAND: str = None) -> None:
+def perform_command(COMMAND: str = '') -> None:
     """
     This function executes a Bourne-Again SHell command.
     """
@@ -207,7 +207,7 @@ def perform_command(COMMAND: str = None) -> None:
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
     kz_common.check_apt_package_manager(DISPLAY_NAME, PROGRAM_DESC)
     try:
-        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
+        subprocess.run(f'{COMMAND}', shell=True, check=True, executable='bash')
     except Exception as exc:
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)

@@ -112,23 +112,23 @@ def process_input(OPTION_GUI: bool = False) -> None:
 
     if OPTION_GUI:
         try:
-            NMCLI_OUTPUT = subprocess.run({COMMAND}, shell=True, check=True,
+            NMCLI_OUTPUT = subprocess.run(f'{COMMAND}', shell=True, check=True,
                                           stdout=subprocess.PIPE,
                                           stderr=subprocess.DEVNULL,
-                                          executable='bash')
+                                          executable='bash')  # type: ignore
         except Exception:
             TEXT = _('No WiFi device found.')
             kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
-            NMCLI_OUTPUT = NMCLI_OUTPUT.stdout
-            NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")
+            NMCLI_OUTPUT = NMCLI_OUTPUT.stdout  # type: ignore
+            NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")  # type: ignore
             TEXT = TEXT + '\n' + NMCLI_OUTPUT
             kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
         kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
-            subprocess.run({COMMAND}, shell=True, check=True,
+            subprocess.run(f'{COMMAND}', shell=True, check=True,
                            stderr=subprocess.DEVNULL, executable='bash')
         except Exception:
             TEXT = _('No WiFi device found.')

@@ -18,7 +18,7 @@ import os
 import subprocess
 import sys
 import time
-from systemd import journal
+from systemd import journal  # type: ignore
 
 gettext.bindtextdomain('kz', '/usr/share/locale')
 gettext.textdomain('kz')
@@ -53,26 +53,26 @@ if subprocess.run('[[ -n $(type -t '
                   shell=True, executable='bash').returncode == OK:
     DESKTOP_ENVIRONMENT: bool = True
 else:
-    DESKTOP_ENVIRONMENT: bool = False
+    DESKTOP_ENVIRONMENT = False
 
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
     DEBIAN: bool = True
 else:
-    DEBIAN: bool = False
+    DEBIAN = False
 
 if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
     UBUNTU: bool = True
 else:
-    UBUNTU: bool = False
+    UBUNTU = False
 
 if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
                   shell=True, executable='bash').returncode == OK:
     APT: bool = True
 else:
-    APT: bool = False
+    APT = False
 
 if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
                   shell=True, executable='bash').returncode == OK:
@@ -82,9 +82,9 @@ if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
     if APT:
         RPM: bool = False
     else:
-        RPM: bool = True
+        RPM = True
 else:
-    RPM: bool = False
+    RPM = False
 
 
 ###############################################################################
@@ -148,7 +148,7 @@ def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str) -> bool:
         return True
 
 
-def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> None:
+def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function checks for another running APT package manager and waits for
     the next check if so.
@@ -173,6 +173,8 @@ def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> None:
             infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             time.sleep(CHECK_WAIT)
 
+    return OK
+
 
 def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
            OPTION_GUI: bool = False) -> None:
@@ -186,7 +188,7 @@ def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
                             --height    100         \
                             --title     "{TITLE}"   \
                             --text      "{TEXT}"'
-        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
+        subprocess.run(f'{COMMAND}', shell=True, check=True, executable='bash')
     else:
         print(f'{RED}{TEXT}{NORMAL}')
 
@@ -203,7 +205,7 @@ def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
                             --height    100         \
                             --title     "{TITLE}"   \
                             --text      "{TEXT}"'
-        subprocess.run({COMMAND}, shell=True, check=True, executable='bash')
+        subprocess.run(f'{COMMAND}', shell=True, check=True, executable='bash')
     else:
         print(f'{TEXT}')
 
@@ -241,7 +243,7 @@ def process_option_help(PROGRAM_NAME: str, DISPLAY_NAME: str,
 
 
 def process_option_manual(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                          PROGRAM_DESC: str) -> None:
+                          PROGRAM_DESC: str) -> int:
     """
     This function displays the manual page..
     """
@@ -256,6 +258,8 @@ def process_option_manual(PROGRAM_NAME: str, DISPLAY_NAME: str,
         term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
     else:
         return OK
+
+    return OK
 
 
 def process_option_usage(DISPLAY_NAME: str, PROGRAM_DESC: str,
@@ -299,8 +303,8 @@ def process_option_version(PROGRAM_NAME: str, DISPLAY_NAME: str,
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME: str, RC: int, DISPLAY_NAME: str = None,
-         PROGRAM_DESC: str = None, TEXT: str = None,
+def term(PROGRAM_NAME: str, RC: int, DISPLAY_NAME: str = '',
+         PROGRAM_DESC: str = '', TEXT: str = '',
          OPTION_GUI: bool = False) -> None:
     """
     This function controls the termination.
@@ -321,7 +325,7 @@ def term(PROGRAM_NAME: str, RC: int, DISPLAY_NAME: str = None,
 
 
 def wait_for_enter(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                   PROGRAM_DESC: str) -> None:
+                   PROGRAM_DESC: str) -> int:
     """
     This function waits for the user to press Enter.
     """
@@ -340,6 +344,8 @@ def wait_for_enter(PROGRAM_NAME: str, DISPLAY_NAME: str,
         term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
     else:
         return OK
+
+    return OK
 
 
 ###############################################################################

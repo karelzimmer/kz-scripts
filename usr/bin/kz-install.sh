@@ -312,6 +312,12 @@ sudo updatedb
 # Remove locate from pc06 pc07
 sudo apt-get remove --assume-yes locate
 
+# Install mypy on pc06 pc07
+sudo apt-get install --assume-yes mypy
+
+# Remove mypy from pc06 pc07
+sudo apt-get remove --assume-yes mypy
+
 # Install nautilus-admin on pc06 pc07
 sudo apt-get install --assume-yes nautilus-admin
 
