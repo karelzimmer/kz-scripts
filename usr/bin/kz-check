@@ -164,6 +164,7 @@ function process_input() {
             find    .                           \
                     -type f                     \
                     -not -path './.git*'        \
+                    -not -path '*/.mypy_cache*' \
                     -not -path '*/__pycache__*' \
                     -not -name kz.mo            \
                     -not -name kz.po            \
