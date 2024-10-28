@@ -247,6 +247,7 @@ function check_code() {
         check_shellcheck
     elif grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"; then
         check_pycodestyle
+        check_mypy
         check_script
     else
         TEXT="
@@ -329,9 +330,18 @@ not found.")
 }
 
 
-# This function checks Python script code.
+# This function checks Python script code with pycodestyle.
 function check_pycodestyle() {
     pycodestyle "$SCRIPT" || ERR_FLAG=true
+}
+
+
+# This function checks Python script code with mypy.
+function check_mypy() {
+    # Mypy doesn't work well with absolute filenames.
+    cd "$SCRIPTDIR"
+    mypy "$SCRIPTNAME" || ERR_FLAG=true
+    cd "$SCRIPTS_REPO"
 }
 
 
