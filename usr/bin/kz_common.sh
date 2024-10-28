@@ -1,4 +1,4 @@
-# This module provides global variables and functions.
+# This module provides global constants, variables, and functions.
 #
 # shellcheck shell=bash source=/dev/null
 ###############################################################################
@@ -22,16 +22,15 @@ source /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
-declare     MODULE_NAME='kz_common.sh'
-declare     MODULE_DESC
+declare MODULE_NAME='kz_common.sh'
+declare MODULE_DESC
             # shellcheck disable=SC2034
             MODULE_DESC=$(gettext 'Common module for shell scripts')
 
 # shellcheck disable=SC2034
-declare     OPTIONS_USAGE="[-h|--help] [-m|--manual] [-u|--usage] \
-[-v|--version]"
+declare OPTIONS_USAGE='[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-declare     OPTIONS_HELP
+declare OPTIONS_HELP
             # shellcheck disable=SC2034
             OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
@@ -39,22 +38,22 @@ $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
 
 # shellcheck disable=SC2034
-declare     OPTIONS_SHORT='hmuv'
+declare OPTIONS_SHORT='hmuv'
 # shellcheck disable=SC2034
-declare     OPTIONS_LONG='help,manual,usage,version'
+declare OPTIONS_LONG='help,manual,usage,version'
 
-declare     OK=0
-declare     ERR=1
+declare OK=0
+declare ERR=1
 
 # List NORMAL last here so that -x doesn't bork the display.
 # shellcheck disable=SC2034
-declare     BOLD='\033[1m'
-declare     RED='\033[1;31m'
+declare BOLD='\033[1m'
+declare RED='\033[1;31m'
 # shellcheck disable=SC2034
-declare     GREEN='\033[1;32m'
-declare     NORMAL='\033[0m'
+declare GREEN='\033[1;32m'
+declare NORMAL='\033[0m'
 
-declare     DESKTOP_ENVIRONMENT
+declare DESKTOP_ENVIRONMENT
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
     DESKTOP_ENVIRONMENT=true
@@ -62,7 +61,7 @@ else
     DESKTOP_ENVIRONMENT=false
 fi
 
-declare     GNOME=true
+declare GNOME=true
 # shellcheck disable=SC2034
 if [[ -n $(type -t gnome-session) ]]; then
     GNOME=true
@@ -71,7 +70,7 @@ else
 fi
 
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-declare     DEBIAN
+declare DEBIAN
 # shellcheck disable=SC2034
 if source /etc/os-release; [[ $ID = 'debian' ]]; then
     DEBIAN=true
@@ -79,7 +78,7 @@ else
     DEBIAN=false
 fi
 
-declare     UBUNTU
+declare UBUNTU
 # shellcheck disable=SC2034
 if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then
     UBUNTU=true
@@ -87,7 +86,7 @@ else
     UBUNTU=false
 fi
 
-declare     APT
+declare APT
 # shellcheck disable=SC2034
 if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
     APT=true
@@ -95,7 +94,7 @@ else
     APT=false
 fi
 
-declare     RPM
+declare RPM
 # shellcheck disable=SC2034
 if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
     # Additional testing is needed because rpm may be installed on a system
@@ -112,15 +111,6 @@ fi
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare -i  RC=$OK
-declare     ERREXIT=true
-declare     OPTION_GUI=false
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
@@ -128,7 +118,9 @@ declare     OPTION_GUI=false
 # the script as user root if not.
 function become_root() {
     # pkexec needs fully qualified path to the program to be executed.
-    local PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
+    local       PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
+    local       TEXT=''
+    local   -i  RC=$OK
 
     become_root_check || exit $OK
 
@@ -156,6 +148,8 @@ function become_root() {
 # This function checks if the user is allowed to become root and returns 0 if
 # so, otherwise returns 1 with descriptive message.
 function become_root_check() {
+    local TEXT=''
+
     if [[ $UID -eq 0 ]]; then
         return $OK
     elif groups "$USER" | grep --quiet --regexp='sudo' --regexp='wheel'; then
@@ -171,6 +165,7 @@ function become_root_check() {
 # This function checks for another running APT package manager and waits for
 # the next check if so.
 function check_apt_package_manager() {
+    local       TEXT=''
     local   -i  CHECK_WAIT=10
 
     if ! $APT; then
@@ -181,8 +176,8 @@ function check_apt_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
-        TEXT=$(gettext 'Wait for another package manager to finish')
         if $OPTION_GUI; then
+            TEXT=$(gettext 'Wait for another package manager to finish')
             logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$TEXT"
@@ -196,6 +191,8 @@ function check_apt_package_manager() {
 
 # This function returns an error message.
 function errmsg() {
+    local TITLE=''
+
     if $OPTION_GUI; then
         TITLE="$PROGRAM_DESC $(gettext 'error message') ($DISPLAY_NAME)"
         zenity  --error                 \
@@ -211,6 +208,8 @@ function errmsg() {
 
 # This function returns an informational message.
 function infomsg() {
+    local TITLE=''
+
     if $OPTION_GUI; then
         TITLE="$PROGRAM_DESC $(gettext 'information') ($DISPLAY_NAME)"
         zenity  --info                  \
@@ -226,14 +225,19 @@ function infomsg() {
 
 # This function performs initial actions such as set traps (script-hardening).
 function init_script() {
+    local       TEXT="==== START logs for script $PROGRAM_NAME ====
+Started ($PROGRAM_NAME $* as $USER)."
+    declare -g  ERREXIT=true
+    declare -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    declare -g  OPTION_GUI=false
+    declare -g  RC=$OK
+    declare -ga COMMANDLINE_ARGS=("$@")
+
     # Script-hardening.
     set -o errexit
     set -o errtrace
     set -o nounset
     set -o pipefail
-
-    declare  -g LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-    declare -ag COMMANDLINE_ARGS=("$@")
 
     trap 'term err     $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' ERR
     trap 'term exit    $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' EXIT
@@ -242,8 +246,6 @@ function init_script() {
     trap 'term sigpipe $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGPIPE
     trap 'term sigterm $LINENO ${FUNCNAME:--} "$BASH_COMMAND" $?' SIGTERM
 
-    TEXT="==== START logs for script $PROGRAM_NAME ====
-Started ($PROGRAM_NAME $* as $USER)."
     logmsg "$TEXT"
 }
 
@@ -287,6 +289,7 @@ function process_options() {
 
 # This function shows the available help.
 function process_option_help() {
+    local TEXT=''
     local YELP_MAN_URL=''
 
     if $DESKTOP_ENVIRONMENT; then
@@ -313,6 +316,8 @@ function process_option_manual() {
 
 # This function shows the available options.
 function process_option_usage() {
+    local TEXT=''
+
     TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
     printf '%b\n\n%b\n' "$USAGE" "$TEXT"
 }
@@ -321,6 +326,7 @@ function process_option_usage() {
 # This function displays version, author, and license information.
 function process_option_version() {
     local BUILD_ID=''
+    local TEXT=''
 
     if [[ -e /usr/share/doc/kz/kz-build.id ]]; then
         BUILD_ID=$(cat /usr/share/doc/kz/kz-build.id)
@@ -342,14 +348,15 @@ $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 
 # This function controls the termination.
 function term() {
-    local       SIGNAL=${1:-unknown}
-    local   -i  LINENO=${2:-unknown}
-    local       FUNCTION=${3:-unknown}
-    local       COMMAND=${4:-unknown}
-                RC=${5:-$ERR}
+    local       SIGNAL=$1
+    local   -i  LINENO=$2
+    local       FUNCTION=$3
+    local       COMMAND=$4
+    local   -i  RC=$5
     local       RC_DESC=''
-    local   -i  RC_DESC_SIGNALNO=0
     local       STATUS=$RC/error
+    local       TEXT=''
+    local   -i  RC_DESC_SIGNALNO=0
 
     case $RC in
         0 )

@@ -52,26 +52,13 @@ declare X_OPTIONS_LONG=',gui,target:'
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare MEDIUM=''
-declare OPTION_TARGET=false
-declare SOURCE=$HOME
-declare TARGET_ARGUMENT=''
-declare TARGET_MEDIUM=''
-declare TARGET=''
-declare USERS_LIST=''
-declare TITLE=''
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -93,6 +80,10 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local       TEXT=''
+    declare -g  OPTION_TARGET=false
+    declare -g  TARGET_ARGUMENT=''
+
     while true; do
         case $1 in
             -g | --gui )
@@ -146,7 +137,11 @@ function process_input() {
 
 # This function checks if the target is available.
 function check_target() {
-    local USB_MOUNT_POINT="/media/$USER"
+    local       TEXT=''
+    local       USB_MOUNT_POINT="/media/$USER"
+    declare -g  MEDIUM=''
+    declare -g  TARGET=''
+    declare -g  TARGET_MEDIUM=''
 
     if $RPM; then
         USB_MOUNT_POINT="/run/media/$USER"
@@ -223,6 +218,7 @@ Please rename to 'USER@HOST'.")"
 # This function backups the user settings.
 function backup_settings() {
     local SETTINGS_DIR=$HOME/$PROGRAM_NAME
+    local TEXT=''
 
     logmsg 'Backup settings...'
 
@@ -261,11 +257,11 @@ Further reading:")
 
 # This function creates a list of installed apps.
 function backup_setting_apps() {
-    local OUTPUT_FILE=$SETTINGS_DIR/apps.txt
-    local HEADER1
     local FOOTER1
-    local HEADER2
     local FOOTER2
+    local HEADER1
+    local HEADER2
+    local OUTPUT_FILE=$SETTINGS_DIR/apps.txt
 
     HEADER1=$(gettext "==== START list of manual installed packages \
 ====")
@@ -431,6 +427,8 @@ function create_backup() {
     local       ERROR_FILE=''
     local       EXCLUDE_FILE=$HOME/$PROGRAM_NAME
     local       RSYNC_MESSAGES=''
+    local       TEXT=''
+    local       TITLE=''
     local   -i  BACKUP_RC=0
 
     ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
@@ -462,7 +460,7 @@ EOF
                 --delete                        \
                 --exclude-from="$EXCLUDE_FILE"  \
                 --delete-excluded               \
-                "$SOURCE"/                      \
+                "$HOME"/                        \
                 "$TARGET"/                      \
                 2> "$ERROR_FILE"                |
         sed     --expression='s/^/#/'           |
@@ -485,7 +483,7 @@ EOF
                 --delete                        \
                 --exclude-from="$EXCLUDE_FILE"  \
                 --delete-excluded               \
-                "$SOURCE"/                      \
+                "$HOME"/                        \
                 "$TARGET"/                      2> "$ERROR_FILE" ||
                                                     BACKUP_RC=$?
     fi
@@ -537,7 +535,9 @@ use app 'Terminal', type 'kz backup'.")"
 
 # This function controls the termination of the script.
 function term_script() {
-    local   -i  NUM_USERS
+    local       TEXT=''
+    local   -i  NUM_USERS=0
+    local   -i  RC=$OK
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
@@ -575,7 +575,6 @@ function term_script_usb() {
     local DEV=''
     local TEXT=''
 
-    TEXT=$(gettext 'Disconnect the USB media')
     DEV='/dev/'$(
         lsblk   --ascii             |
         grep    --before-context=1  \
@@ -587,6 +586,7 @@ function term_script_usb() {
                 --fields=1
     )
 
+    TEXT=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.

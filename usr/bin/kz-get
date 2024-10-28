@@ -44,19 +44,13 @@ $OPTIONS_HELP"
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare KZ_DEB_LOCAL_FILE=''
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    declare -g  KZ_DEB_LOCAL_FILE=''
 
     PARSED=$(
         getopt  --alternative                       \
@@ -78,6 +72,8 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local TEXT=''
+
     while true; do
         case $1 in
             -- )
@@ -101,6 +97,8 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    local TEXT=''
+
     become_root_check || exit $OK
     prepare_processing
     if $APT; then
@@ -179,6 +177,7 @@ function install_rpm_package() {
 
 # This function controls the termination of the script.
 function term_script() {
+    local TEXT=''
 
     logmsg "Delete kz get files ($PROGRAM_NAME)..."
     rm  --force                 \

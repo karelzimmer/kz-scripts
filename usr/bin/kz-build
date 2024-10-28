@@ -52,17 +52,13 @@ declare RPM_NAME=kz-4.2.1-1.noarch.rpm
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                       \
@@ -84,6 +80,8 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local TEXT=''
+
     while true; do
         case $1 in
             -- )
@@ -114,6 +112,8 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    local TEXT=''
+
     if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
@@ -132,13 +132,11 @@ function process_input() {
 # This function generates the gettext binary Machine Object (.mo) file from the
 # readable Portable Object (.po) file.
 function generate_mo() {
-    local LC_MESSAGES_DIR=''
-
-    LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    local LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    local TEXT=''
 
     TEXT=$(gettext 'Generate .mo file')...
     infomsg "$TEXT"
-
     msgfmt --output-file="$LC_MESSAGES_DIR/kz.mo" "$LC_MESSAGES_DIR/kz.po"
 }
 
@@ -148,6 +146,7 @@ function build_website() {
     local DIR=''
     local FILE=''
     local FILENAME=''
+    local TEXT=''
 
     TEXT=$(gettext 'Build website')...
     infomsg "$TEXT"
@@ -184,6 +183,7 @@ function build_website() {
 # This function builds Debian package kz.
 function build_deb_package() {
     local BUILD_ID=''
+    local TEXT=''
 
     TEXT=$(gettext 'Build Debian package')...
     infomsg "$TEXT"
@@ -236,6 +236,7 @@ function build_deb_package() {
 # This function builds RPM package kz.
 function build_rpm_package() {
     local BUILD_ID=''
+    local TEXT=''
 
     TEXT=$(gettext 'Build RPM package')...
     infomsg "$TEXT"
@@ -302,6 +303,8 @@ function copy_scripts() {
 
 # This function installs Debian-package kz.
 function install_deb_package() {
+    local TEXT
+
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
     check_apt_package_manager

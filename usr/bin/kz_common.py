@@ -1,5 +1,5 @@
 """
-This module provides global variables and functions.
+This module provides global constants and functions.
 """
 ###############################################################################
 # SPDX-FileComment: Common module for kz Python scripts
@@ -191,7 +191,7 @@ def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
         print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
+def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
             OPTION_GUI: bool = False) -> None:
     """
     This function returns an informational message.

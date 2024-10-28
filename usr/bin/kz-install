@@ -60,39 +60,13 @@ declare     X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare -A  APP_ARGUMENTS=()
-declare -A  FAILED_APPS=()
-declare     ARGUMENT_APPS=false
-declare     FILE_ARGUMENT=''
-declare     FROM='from'
-declare     INPUT_FILE=/usr/bin/$PROGRAM_NAME.sh
-declare     INSTALL='Install'
-declare     INSTALL_FILE_HEADER
-            INSTALL_FILE_HEADER="$(gettext "# For the format of the records \
-in this file, see the kz install man page.")
-$(gettext "# To manually running a command, first run the following: source \
-kz_common.sh")"
-declare     NO_COMMANDS_FOUND=true
-declare     ON='on'
-declare     OPTION_APPS=false
-declare     OPTION_CAT=false
-declare     OPTION_FILE=false
-declare     OPTION_REMOVE=false
-declare     REBOOT=true
-declare     REMOVE='Remove'
-declare     TITLE=''
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -114,6 +88,20 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local       TEXT=''
+    declare -g  ARGUMENT_APPS=false
+    declare -g  FILE_ARGUMENT=''
+    declare -g  FROM='from'
+    declare -g  INSTALL='Install'
+    declare -g  ON='on'
+    declare -g  OPTION_APPS=false
+    declare -g  OPTION_CAT=false
+    declare -g  OPTION_FILE=false
+    declare -g  OPTION_REMOVE=false
+    declare -g  REBOOT=true
+    declare -g  REMOVE='Remove'
+    declare -gA APP_ARGUMENTS=()
+
     while true; do
         case $1 in
             -a | --apps )
@@ -178,6 +166,9 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input() {
     local COMMAND_FILE=''
+    local INPUT_FILE=/usr/bin/kz-install.sh
+    local TEXT=''
+
     if $OPTION_FILE; then
         INPUT_FILE=$FILE_ARGUMENT
     fi
@@ -220,6 +211,7 @@ function process_input() {
 # This function shows the available apps from the input file.
 function process_option_apps() {
     local APPS=''
+    local TEXT=''
 
     TEXT="$(gettext 'The following apps are available:')
 
@@ -262,8 +254,9 @@ $USAGE"
 
 # This function processes argument APP.
 function process_argument_app() {
-    local APP_NOT_FOUND=false
     local APP_ARGUMENT=''
+    local APP_NOT_FOUND=false
+    local TEXT=''
 
     for APP_ARGUMENT in "${APP_ARGUMENTS[@]}"; do
         process_input_file_by_app
@@ -284,8 +277,14 @@ apps.")"
 function process_input_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
+    local INSTALL_FILE_HEADER=''
     local NO_APP_MATCH=true
+    local TEXT=''
 
+    INSTALL_FILE_HEADER="$(gettext "# For the format of the records in \
+this file, see the kz install man page.")
+$(gettext "# To manually running a command, first run the following: source \
+kz_common.sh")"
     printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
@@ -323,7 +322,12 @@ function process_input_file_by_app() {
 function process_input_file_by_host() {
     local HOST_MATCH=false
     local INPUT_RECORD=''
+    local INSTALL_FILE_HEADER=''
 
+    INSTALL_FILE_HEADER="$(gettext "# For the format of the records in \
+this file, see the kz install man page.")
+$(gettext "# To manually running a command, first run the following: source \
+kz_common.sh")"
     printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
@@ -359,6 +363,8 @@ function process_option_cat() {
 
 # This function starts installing the apps.
 function install_apps() {
+    local       TEXT=''
+    local       TITLE=''
     local   -i  APP_TOT_NUM=0
 
     APP_TOT_NUM=$(
@@ -377,7 +383,7 @@ function install_apps() {
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
         # are not passed, hence the process substitution with '> >(zenity...)'.
-        process_COMMAND_FILE > >(
+        process_command_file > >(
             zenity  --progress              \
                     --pulsate               \
                     --auto-close            \
@@ -388,18 +394,20 @@ function install_apps() {
                     --text      "$TEXT"     2> >($LOGCMD)
             )
     else
-        process_COMMAND_FILE
+        process_command_file
     fi
 }
 
 
 # This function reads commands from the command file for further processing.
-function process_COMMAND_FILE() {
-    local       APP_NAME=''
+function process_command_file() {
     local       APP_NAME_LINE=''
+    local       APP_NAME=''
     local       COMMAND_RECORD=''
+    local       TEXT=''
     local   -i  APP_SEQ_NUM=0
     local   -i  CMD_SEQ_NUM=0
+    declare -g  NO_COMMANDS_FOUND=true
 
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')
@@ -447,6 +455,7 @@ function execute_command() {
     local       CMD_DIS=''
     local   -i  CMD_DIS_LEN=0
     local   -i  CMD_DIS_MAX=0
+    declare -gA FAILED_APPS=()
 
     (( ++CMD_SEQ_NUM ))
 
@@ -490,6 +499,7 @@ function execute_command() {
 function term_script() {
     local FAILED_APPS_TEXT=''
     local OPERATION
+    local TEXT=''
 
     OPERATION=$(gettext 'install')
 

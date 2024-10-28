@@ -57,25 +57,13 @@ declare X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare DESKTOPFILE=''
-declare FAVORITE_ARGUMENT=''
-declare OPTION_ADDAFT=false
-declare OPTION_ADDBEF=false
-declare OPTION_DELETE=false
-declare OPTION_LIST=false
-declare OPTION_RESET=false
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -97,6 +85,14 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local       TEXT=''
+    declare -g  FAVORITE_ARGUMENT=''
+    declare -g  OPTION_ADDAFT=false
+    declare -g  OPTION_ADDBEF=false
+    declare -g  OPTION_DELETE=false
+    declare -g  OPTION_LIST=false
+    declare -g  OPTION_RESET=false
+
     while true; do
         case $1 in
             -a | --addaft )
@@ -168,6 +164,8 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    local TEXT=''
+
     if ! $GNOME; then
         TEXT=$(gettext 'For GNOME desktop environments only.')
         infomsg "$TEXT"
@@ -249,8 +247,10 @@ function process_OPTION_DELETE () {
 
 # This feature lists the favorite apps in the dash/dock.
 function process_OPTION_LIST () {
-    TEXT=$(gettext 'Favorite apps:')
-    TEXT+="\n$(gsettings get org.gnome.shell favorite-apps)"
+    local TEXT=''
+
+    TEXT="$(gettext 'Favorite apps:')
+$(gsettings get org.gnome.shell favorite-apps)"
     infomsg "$TEXT"
 }
 
@@ -265,6 +265,7 @@ function process_OPTION_RESET () {
 function capture_gnome_changes() {
     local CONFIG_A_FILE=''
     local CONFIG_B_FILE=''
+    local TEXT=''
 
     CONFIG_A_FILE=$(mktemp -t "$PROGRAM_NAME-config-a-XXXXXXXXXX")
     save_configuration_database A "$CONFIG_A_FILE"
@@ -288,6 +289,7 @@ function save_configuration_database() {
     # shellcheck disable=SC2034
     local FASE=${1:-unknown}
     local OUTPUT_FILE=${2:-unknown}
+    local TEXT=''
 
     gsettings list-recursively > "$OUTPUT_FILE" 2> >($LOGCMD)
 
@@ -304,6 +306,7 @@ function save_configuration_database() {
 function report_database_changes() {
     local OUTPUT_FILE_1=${1:-unknown}
     local OUTPUT_FILE_2=${2:-unknown}
+    local TEXT=''
 
     TEXT="\n$(gettext "CHANGEs in the configuration database,
 < is the old setting (A),

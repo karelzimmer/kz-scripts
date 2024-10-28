@@ -37,23 +37,13 @@ $OPTIONS_HELP"
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare DEB_REPO=$HOME/kz-deb
-declare DOCS_REPO=$HOME/kz-docs
-declare SCRIPTS_REPO=$HOME/kz-scripts
-declare UPLOADS_REPO=$HOME/kz-uploads
-declare UPLOADS_REPO_DISTDIR=$UPLOADS_REPO/dist
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                       \
@@ -75,6 +65,8 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local TEXT=''
+
     while true; do
         case $1 in
             -- )
@@ -105,6 +97,8 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    local TEXT=''
+
     if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
@@ -119,12 +113,14 @@ function process_input() {
 
 # This function builds package kz and website.
 function build() {
+    local TEXT=''
+
     TEXT=$(gettext 'Build website including kz packages')...
     infomsg "$TEXT"
 
     # Call kz build.
     logmsg 'Calling kz build...'
-    "$SCRIPTS_REPO/usr/bin"/kz build || exit $ERR
+    kz build || exit $ERR
     logmsg 'Called kz build.'
 }
 
@@ -145,7 +141,12 @@ function deploy() {
 
 # This function check that the repos are in the desired state.
 function check_repos() {
+    local DEB_REPO=$HOME/kz-deb
+    local DOCS_REPO=$HOME/kz-docs
     local ERR_FLAG=false
+    local SCRIPTS_REPO=$HOME/kz-scripts
+    local TEXT=''
+    local UPLOADS_REPO=$HOME/kz-uploads
 
     TEXT=$(gettext 'Check that all repos are on branch main')...
     infomsg "$TEXT"
@@ -185,33 +186,36 @@ function check_repos() {
 
 # This function check the scripts and website.
 function check_scripts_and_website() {
+    local TEXT=''
+
     TEXT=$(gettext 'Check scripts and website')...
     infomsg "$TEXT"
 
     # Call kz check.
     logmsg 'Calling kz check...'
-    "$SCRIPTS_REPO/usr/bin"/kz check || exit $ERR
+    kz check || exit $ERR
     logmsg 'Called kz check.'
 }
 
 
 # This function uploads the website.
 function upload_website() {
-    local FTP_SET='set ssl:verify-certificate no'
-    local FTP_FROM=$UPLOADS_REPO_DISTDIR
-    local FTP_TO=/httpdocs
-    local FTP_OPTS='--reverse --delete --verbose'
-    local FTP_CMD="mirror $FTP_OPTS $FTP_FROM $FTP_TO; exit"
+    local FTP_FROM=$HOME/kz-uploads/dist
     local FTP_HOST=server106.hosting2go.nl
-    local FTP_USER=kzimmer
     local FTP_LOGIN=$HOME/.$FTP_HOST'.login'
-    local PROMPT
+    local FTP_OPTS='--reverse --delete --verbose'
+    local FTP_SET='set ssl:verify-certificate no'
+    local FTP_TO=/httpdocs
+    local FTP_USER=kzimmer
+    local FTP_X_CMD="mirror $FTP_OPTS $FTP_FROM $FTP_TO; exit"
+    local PROMPT=''
+    local TEXT=''
 
-    PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
     TEXT=$(gettext 'Upload website')...
     infomsg "$TEXT"
 
     if [[ ! -f $FTP_LOGIN ]]; then
+        PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
         read -rp "$PROMPT" < /dev/tty
         printf '%s' "$REPLY" > "$FTP_LOGIN"
         printf '\n'
@@ -220,7 +224,7 @@ function upload_website() {
 
     if ! lftp   --user      "$FTP_USER"             \
                 --password  "$(cat "$FTP_LOGIN")"   \
-                -e          "$FTP_SET; $FTP_CMD"    \
+                -e          "$FTP_SET; $FTP_X_CMD"  \
                 "$FTP_HOST"; then
         # Force entering the password next time.
         rm --verbose "$FTP_LOGIN"*
@@ -235,11 +239,13 @@ function upload_website() {
 
 # This function installs package kz.
 function install_package() {
-    # Call kz-deb (via wget and bash as a regular user would do).
+    local TEXT=''
+
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
 
     logmsg 'Calling kz deb (via wget and bash)...'
+    # Call kz-deb (via wget and bash as a regular user would do).
     if ! wget --output-document=- karelzimmer.nl/getkz 2> >($LOGCMD) | bash
     then
         TEXT=$(gettext 'Install package kz failed.')

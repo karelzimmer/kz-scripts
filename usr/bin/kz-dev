@@ -37,17 +37,13 @@ $OPTIONS_HELP"
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                       \
@@ -69,6 +65,8 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local TEXT=''
+
     while true; do
         case $1 in
             -- )
@@ -99,6 +97,8 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
+    local TEXT=''
+
     if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
@@ -114,6 +114,7 @@ function process_input() {
 # This function checks and installs dependencies.
 function check_dependencies() {
     local ESC_GETTEXT='gettext'
+    local TEXT=''
 
     TEXT=$(gettext 'Check dependencies')...
     infomsg "$TEXT"
@@ -181,19 +182,19 @@ function pull_repos() {
 
 # This function downloads the website.
 function download_website() {
-    local FTP_SET='set ssl:verify-certificate no'
     local FTP_FROM=/httpdocs
-    local FTP_TO=$HOME/kz-uploads/dist
-    local FTP_OPTS='--delete --verbose'
-    local FTP_CMD="mirror  $FTP_OPTS $FTP_FROM $FTP_TO; exit"
     local FTP_HOST=server106.hosting2go.nl
-    local FTP_USER=kzimmer
     local FTP_LOGIN=$HOME/.$FTP_HOST'.login'
-    local PROMPT
-
-    PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
+    local FTP_OPTS='--delete --verbose'
+    local FTP_SET='set ssl:verify-certificate no'
+    local FTP_TO=$HOME/kz-uploads/dist
+    local FTP_USER=kzimmer
+    local FTP_X_CMD="mirror  $FTP_OPTS $FTP_FROM $FTP_TO; exit"
+    local PROMPT=''
+    local TEXT=''
 
     if [[ ! -f $FTP_LOGIN ]]; then
+        PROMPT="$(gettext 'Password for') ftp://$FTP_HOST': "
         read -rsp "$PROMPT" < /dev/tty
         printf '%s' "$REPLY" > "$FTP_LOGIN"
         printf '\n'
@@ -202,7 +203,7 @@ function download_website() {
 
     if ! lftp   --user "$FTP_USER"                  \
                 --password "$(cat "$FTP_LOGIN")"    \
-                -e "$FTP_SET; $FTP_CMD"             \
+                -e "$FTP_SET; $FTP_X_CMD"             \
                 "$FTP_HOST"; then
         # Force entering the password next time.
         rm --verbose "$FTP_LOGIN"*

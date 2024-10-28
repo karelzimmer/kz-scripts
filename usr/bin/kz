@@ -51,17 +51,13 @@ declare X_OPTIONS_LONG=',list'
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     if [[ -z $* ]]; then
         infomsg "$USAGE"
@@ -110,6 +106,8 @@ function process_x_options() {
 
 # This function displays all available commands.
 function process_option_list() {
+    local TEXT=''
+
     TEXT="$(gettext 'The following COMMANDs are available:')
 
 $(gettext 'NUM  COMMAND')\n"
@@ -138,6 +136,7 @@ $(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
 # This function processes the script options and arguments.
 function process_input() {
     local COMMAND=$1
+    local TEXT=''
 
     if [[ ! -f /usr/bin/$PROGRAM_NAME-$COMMAND ]]; then
         TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")

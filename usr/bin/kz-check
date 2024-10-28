@@ -37,20 +37,13 @@ $OPTIONS_HELP"
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare BIN_REPO=$HOME/bin
-declare ERR_FLAG=false
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                       \
@@ -72,6 +65,8 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local TEXT=''
+
     while true; do
         case $1 in
             -- )
@@ -102,10 +97,12 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
-    local SCRIPT=''
-    local SCRIPTDIR=''
-    local SCRIPTNAME=''
-    local SCRIPTS_REPO=$HOME/kz-scripts
+    local       SCRIPT=''
+    local       SCRIPTDIR=''
+    local       SCRIPTNAME=''
+    local       SCRIPTS_REPO=$HOME/kz-scripts
+    local       TEXT=''
+    declare -g  ERR_FLAG=false
 
     if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
@@ -184,12 +181,14 @@ function process_input() {
 
 # This function checks the website for missing or not used files.
 function check_website() {
+    local TEXT=''
+
     TEXT=$(gettext 'Check website')...
     infomsg "$TEXT"
 
     # Call rchecklink.
     logmsg 'Calling rchecklink...'
-    "$BIN_REPO"/rchecklink || ERR_FLAG=true
+    "$HOME/bin/rchecklink" || ERR_FLAG=true
     logmsg 'Called rchecklink.'
 }
 
@@ -197,6 +196,7 @@ function check_website() {
 # This function checks for gettext required files.
 function check_gettext() {
     local FILE=''
+    local TEXT=''
 
     # GNU gettext message catalogue template (.pot).
     FILE=$SCRIPTS_REPO/usr/bin/kz.pot
@@ -236,6 +236,7 @@ function check_code() {
     local BASH_SCRIPT='#!''/usr/bin/env bash'
     local PYTHON_SCRIPT='#!''/usr/bin/env python3'
     local TAB_COMPLETION_SCRIPT='# ''shellcheck shell=bash'
+    local TEXT=''
 
     if grep --quiet --line-regexp --regexp="$BASH_SCRIPT" "$SCRIPT"; then
         check_shellcheck
@@ -263,6 +264,7 @@ function check_script() {
     local DIR=''
     local GUI_OPTION='-''-''g''u''i'
     local ROOT_SCRIPT=' ''b''e''c''o''m''e''_''r''o''o''t''$'
+    local TEXT=''
 
     # Script.
     if ! "$SCRIPTDIR/$SCRIPTNAME" --version |& $LOGCMD; then
@@ -334,9 +336,10 @@ function check_pycodestyle() {
 
 # This function checks on record length.
 function check_record_length() {
-    local   -i  MAX_LINE_LENGTH=79
-    local   -i  MAX_LINE_LENGTH_FOUND=0
     local       PYTHON_SCRIPT='#!''/usr/bin/python3'
+    local       TEXT=''
+    local   -i  MAX_LINE_LENGTH_FOUND=0
+    local   -i  MAX_LINE_LENGTH=79
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"; then
@@ -381,6 +384,7 @@ function check_tags() {
     local ESC_BUG='#''B''U''G'
     local ESC_FIXME='#''F''I''X''M''E'
     local ESC_TODO='#''T''O''D''O'
+    local TEXT=''
 
     if grep --quiet                 \
             --regexp="$ESC_BUG"     \
@@ -406,6 +410,8 @@ ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
 
 # This function checks the existence of trailing spaces.
 function check_trailing_spaces() {
+    local TEXT=''
+
     if grep --quiet --regexp=' ''$' "$SCRIPT"; then
         TEXT="
 ${BOLD}In $SCRIPTDIR / $SCRIPTNAME:$NORMAL
@@ -421,6 +427,8 @@ ${RED}    $(gettext 'End spaces found.')$NORMAL
 
 # This function controls the termination of the script.
 function term_script() {
+    local TEXT=''
+
     if $ERR_FLAG; then
         TEXT=$(gettext 'Fix all the messages above.')
         errmsg "$TEXT"

@@ -88,21 +88,13 @@ declare     MENU2_LINES=${#MENU2_DESCS[@]}
 
 
 ###############################################################################
-# Variables
-###############################################################################
-
-declare     EXECUTE_COMMAND=false
-declare -a  ROWS=()
-declare     TITLE=''
-
-
-###############################################################################
 # Functions
 ###############################################################################
 
 # This function handles the script options and arguments.
 function check_input() {
-    local PARSED=''
+    local       PARSED=''
+    local   -i  RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -124,6 +116,8 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
+    local TEXT=''
+
     while true; do
         case $1 in
             -g | --gui )
@@ -168,8 +162,9 @@ function process_input() {
 
 # This function shows and processes menu 1 in GUI mode.
 function process_menu1_gui() {
+    local TITLE=$MENU1_TITLE
+
     while true; do
-        TITLE=$MENU1_TITLE
         REPLY=$(
             zenity  --list                                              \
                     --radiolist                                         \
@@ -214,7 +209,6 @@ function process_menu1_tui() {
         done
 
         printf '\n'
-
         PROMPT=$(eval_gettext "Run number [1-\$MENU1_LINES]: ")
         read -rp "$PROMPT"
 
@@ -236,6 +230,8 @@ function process_menu1_tui() {
 
 # This function processes menu 1 choice.
 function process_menu1_choice() {
+    local TEXT=''
+
     case $REPLY in
         1 )
             process_menu1_choice1
@@ -266,8 +262,8 @@ function process_menu1_choice() {
 
 # This function processes menu 1 choice 1.
 function process_menu1_choice1() {
-    TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
-    ROWS=(
+    local       TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
+    local   -a  ROWS=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
             "${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
         )
@@ -278,7 +274,9 @@ function process_menu1_choice1() {
 
 # This function processes menu 1 choice 2.
 function process_menu1_choice2() {
-    TITLE="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
+    local TEXT=''
+    local TITLE="${MENU1_ACTIONS[2]} (${MENU1_DESCS[2]})"
+
     TEXT="
 $(gettext "Follow the steps as described in Checklist installation, Chapter 2.
 Checklist installation can be found on https://karelzimmer.nl/en, under Linux.
@@ -288,7 +286,6 @@ Roughly boils down to:
 2. Create a bootable USB stick.
 3. Boot the computer from this USB stick.
 4. Install Linux.")"
-
     if $OPTION_GUI; then
         zenity  --info                  \
                 --width     600         \
@@ -303,8 +300,8 @@ Roughly boils down to:
 
 # This function processes menu 1 choice 3.
 function process_menu1_choice3() {
-    TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
-    ROWS=(
+    local       TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
+    local   -a  ROWS=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
 
@@ -314,8 +311,8 @@ function process_menu1_choice3() {
 
 # This function processes menu 1 choice 4.
 function process_menu1_choice4() {
-    TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
-    ROWS=(
+    local       TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
+    local   -a  ROWS=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
             "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
         )
@@ -339,8 +336,9 @@ function process_menu2() {
 
 # This function shows and processes menu 2 in GUI mode.
 function process_menu2_gui() {
+    local TITLE=$MENU2_TITLE
+
     while true; do
-        TITLE=$MENU2_TITLE
         REPLY=$(
             zenity  --list                                              \
                     --radiolist                                         \
@@ -385,7 +383,6 @@ function process_menu2_tui() {
         done
 
         printf '\n'
-
         PROMPT=$(eval_gettext "Run number [1-\$MENU2_LINES]: ")
         read -rp "$PROMPT"
 
@@ -407,11 +404,13 @@ function process_menu2_tui() {
 
 # This function processes menu 2 choice.
 function process_menu2_choice() {
-    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
-        TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
-        ROWS=(
+        local       TEXT=''
+        local       TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
+        local   -a  ROWS=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
             )
+
+    if [[ $REPLY -ge 1 && $REPLY -le $((MENU2_LINES -1)) ]]; then
         process_commands
     elif [[ $REPLY -eq $MENU2_LINES ]]; then
         process_menu1_tui
@@ -427,6 +426,8 @@ function process_menu2_choice() {
 function process_commands() {
     local       COMMAND=''
     local       DESCRIPTION=''
+    local       EXECUTE_COMMAND=false
+    local       TITLE=''
     local   -i  ROW=0
 
     show_commands_before_execution
@@ -452,8 +453,9 @@ function process_commands() {
 function show_commands_before_execution() {
     local       COMMAND=''
     local       DESCRIPTION=''
-    local   -i  ROW=0
     local       PROMPT=''
+    local       TEXT=''
+    local   -i  ROW=0
 
     TEXT="$(gettext 'The following will be executed:')
 "
@@ -514,7 +516,7 @@ function execute_command() {
     local       ARG=''
     local       CMD=''
     local       GUI_OPTION=''
-    local   -i  RC=0
+    local   -i  RC=$OK
 
     CMD=$(
         printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=1
