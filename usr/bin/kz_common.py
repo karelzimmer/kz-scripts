@@ -29,50 +29,50 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-MODULE_NAME = 'kz_common.py'
-MODULE_DESC = _('Common module for Python scripts')
+MODULE_NAME: str = 'kz_common.py'
+MODULE_DESC: str = _('Common module for Python scripts')
 
-OPTIONS_USAGE = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
+OPTIONS_USAGE: str = '[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-OPTIONS_HELP = (f"{_('  -h, --help     show this help text')}\n"
-                f"{_('  -m, --manual   show manual page')}\n"
-                f"{_('  -u, --usage    show a short usage summary')}\n"
-                f"{_('  -v, --version  show program version')}")
+OPTIONS_HELP: str = (f"{_('  -h, --help     show this help text')}\n"
+                     f"{_('  -m, --manual   show manual page')}\n"
+                     f"{_('  -u, --usage    show a short usage summary')}\n"
+                     f"{_('  -v, --version  show program version')}")
 
-OK = 0
-ERR = 1
+OK: int = 0
+ERR: int = 1
 
 # List NORMAL last here so that Python debugger (pdb) doesn't bork the display.
-BOLD = '\033[1m'
-RED = '\033[1;31m'
-GREEN = '\033[1;32m'
-NORMAL = '\033[0m'
+BOLD: str = '\033[1m'
+RED: str = '\033[1;31m'
+GREEN: str = '\033[1;32m'
+NORMAL: str = '\033[0m'
 
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    DESKTOP_ENVIRONMENT = True
+    DESKTOP_ENVIRONMENT: bool = True
 else:
-    DESKTOP_ENVIRONMENT = False
+    DESKTOP_ENVIRONMENT: bool = False
 
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
-    DEBIAN = True
+    DEBIAN: bool = True
 else:
-    DEBIAN = False
+    DEBIAN: bool = False
 
 if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
-    UBUNTU = True
+    UBUNTU: bool = True
 else:
-    UBUNTU = False
+    UBUNTU: bool = False
 
 if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    APT = True
+    APT: bool = True
 else:
-    APT = False
+    APT: bool = False
 
 if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
                   shell=True, executable='bash').returncode == OK:
@@ -80,11 +80,11 @@ if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
     # that uses Debian package management system APT. APT is not available on a
     # system that uses Red Hat package management system RPM.
     if APT:
-        RPM = False
+        RPM: bool = False
     else:
-        RPM = True
+        RPM: bool = True
 else:
-    RPM = False
+    RPM: bool = False
 
 
 ###############################################################################

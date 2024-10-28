@@ -31,16 +31,16 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-PROGRAM_NAME = 'kz-update'
-PROGRAM_DESC = _('Update system')
-DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
+PROGRAM_NAME: str = 'kz-update'
+PROGRAM_DESC: str = _('Update system')
+DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
-USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
+USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
-HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
-        f'{PROGRAM_DESC}.\n\n'
-        f"{_('Options:')}\n"
-        f'{kz_common.OPTIONS_HELP}')
+HELP: str = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+             f'{PROGRAM_DESC}.\n\n'
+             f"{_('Options:')}\n"
+             f'{kz_common.OPTIONS_HELP}')
 
 
 ###############################################################################
@@ -199,7 +199,7 @@ def perform_rpm_cleanup() -> None:
     perform_command(COMMAND)
 
 
-def perform_command(COMMAND) -> None:
+def perform_command(COMMAND: str = None) -> None:
     """
     This function executes a Bourne-Again SHell command.
     """

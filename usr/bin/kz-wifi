@@ -31,20 +31,20 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-PROGRAM_NAME = 'kz-wifi'
-PROGRAM_DESC = _('Show WiFi information')
-DISPLAY_NAME = PROGRAM_NAME.replace('kz-', 'kz ')
+PROGRAM_NAME: str = 'kz-wifi'
+PROGRAM_DESC: str = _('Show WiFi information')
+DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
-USAGE = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
+USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
 
-X_OPTIONS_HELP = f"{_('  -g, --gui      run in graphical mode,')}\n"
+X_OPTIONS_HELP: str = f"{_('  -g, --gui      run in graphical mode,')}\n"
 X_OPTIONS_HELP += f"{_('                 requires a desktop environment')}"
 
-HELP = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
-        f'{PROGRAM_DESC}.\n\n'
-        f"{_('Options:')}\n"
-        f'{X_OPTIONS_HELP}\n'
-        f'{kz_common.OPTIONS_HELP}')
+HELP: str = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+             f'{PROGRAM_DESC}.\n\n'
+             f"{_('Options:')}\n"
+             f'{X_OPTIONS_HELP}\n'
+             f'{kz_common.OPTIONS_HELP}')
 
 
 ###############################################################################
@@ -100,7 +100,7 @@ def process_options() -> bool:
     return OPTION_GUI
 
 
-def process_input(OPTION_GUI) -> None:
+def process_input(OPTION_GUI: bool = False) -> None:
     """
     This function processes the script options and arguments.
     """
