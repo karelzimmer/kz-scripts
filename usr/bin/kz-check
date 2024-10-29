@@ -141,6 +141,7 @@ function process_input() {
                 check_trailing_spaces
                 check_tags
                 check_pycodestyle
+                check_mypy
                 ;;
             kz_common.sh )
                 check_trailing_spaces
