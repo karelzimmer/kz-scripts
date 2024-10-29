@@ -311,7 +311,7 @@ function install_deb_package() {
     infomsg "$TEXT"
     check_apt_package_manager
 
-    # Copied from kz-get:
+    # ==== START Copied from kz-get ====
     KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
     # Progress indicator with growing [=>, [==>, etc. as long as the kz deb
     # local file exists, i.e. installation is in progress.
@@ -322,6 +322,7 @@ function install_deb_package() {
         printf '\b%s' '=>'
         sleep 1
     done &
+    # ==== END Copied from kz-get ====
 
     sudo    DEBIAN_FRONTEND=noninteractive                      \
             apt-get                                             \
@@ -329,9 +330,11 @@ function install_deb_package() {
             --assume-yes                                        \
             "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
 
+    # ==== START Copied from kz-get ====
     rm --force --verbose "$KZ_DEB_LOCAL_FILE"|& $LOGCMD
     # Progress indicator with [=>, [==>, etc. ends like [====]100%.
     printf '\b%s\n' '=]100%'
+    # ==== END Copied from kz-get ====
 }
 
 
