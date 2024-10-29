@@ -398,6 +398,7 @@ function process_command_file() {
     local   -i  APP_SEQ_NUM=0
     local   -i  CMD_SEQ_NUM=0
     declare -g  NO_COMMANDS_FOUND=true
+    declare -gA FAILED_APPS=()
 
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')
@@ -445,7 +446,6 @@ function execute_command() {
     local       CMD_DIS=''
     local   -i  CMD_DIS_LEN=0
     local   -i  CMD_DIS_MAX=0
-    declare -gA FAILED_APPS=()
 
     (( ++CMD_SEQ_NUM ))
 
