@@ -61,14 +61,6 @@ else
     DESKTOP_ENVIRONMENT=false
 fi
 
-declare GNOME=true
-# shellcheck disable=SC2034
-if [[ -n $(type -t gnome-session) ]]; then
-    GNOME=true
-else
-    GNOME=false
-fi
-
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 declare DEBIAN
 # shellcheck disable=SC2034

@@ -538,7 +538,7 @@ Type 'logout' to log out.")"
         if $DESKTOP_ENVIRONMENT; then
             $OPTION_GUI || wait_for_enter
 
-            if $GNOME; then
+            if [[ -n $(type -t gnome-session) ]]; then
                 gnome-session-quit --logout --no-prompt
             elif [[ -n $(type -t ksmserver) ]]; then
                 qdbus org.kde.ksmserver /KSMServer logout 0 0 0

@@ -1,28 +1,28 @@
 .\"############################################################################
-.\"# SPDX-FileComment: Man page for kz-gnome
+.\"# SPDX-FileComment: Man page for kz-desktop
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 .\"
-.TH "KZ-GNOME" "1" "4.2.1" "KZ" "Kz Manual"
+.TH "KZ-DESKTOP" "1" "4.2.1" "KZ" "Kz Manual"
 .\"
 .\"
 .SH NAME
-kz-gnome \- Change GNOME
+kz-desktop \- Change desktop environment
 .\"
 .\"
 .SH SYNOPSIS
-.B kz gnome
+.B kz desktop
 [OPTION...]
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz gnome\fR helps to change the GNOME desktop environment.
+\fBkz desktop\fR helps to change the desktop environment.
 .sp
-\fBkz gnome\fR:
+\fBkz desktop\fR:
 .RS
-- only works on systems using GNOME,
+- only works on systems using a desktop environment,
 .br
 - shows changes in the configuration database,
 .br
@@ -53,23 +53,23 @@ With option \fB-l\fR, \fB--list\fR the current favorites are displayed.
 With option \fB-r\fR, \fB--reset\fR the favorites bar (dash, dock) is reset
 with default favourites.
 .sp
-If no options are specified, \fBkz gnome\fR shows changes in the configuration
-database after a change in the GNOME desktop environment.
+If no options are specified, \fBkz desktop\fR shows changes in the
+configuration database after a change in the desktop environment.
 .br
 The following is performed:
 .sp
 .RS
-1. Capture configuration database content before changing the GNOME desktop
+1. Capture configuration database content before changing the desktop
 environment.
 .br
-2. User makes changes with the GNOME desktop environment.
+2. User makes changes with the desktop environment.
 .br
 3. Capture configuration database contents afterwards.
 .br
 4. Report changes to the configuration database.
 .RE
 .sp
-Command \fBkz gnome\fR can only be run in a desktop environment.
+Command \fBkz desktop\fR can only be run in a desktop environment.
 .\"
 .\"
 .SH OPTIONS
@@ -113,13 +113,13 @@ equal to 0.
 .\"
 .SH EXAMPLES
 .sp
-\fBkz gnome\fR
+\fBkz desktop\fR
 .RS
-Shows changes to the configuration database after changes to the GNOME desktop
+Shows changes to the configuration database after changes to the desktop
 environment.
 .RE
 .sp
-\fBkz gnome --addbef idle\fR
+\fBkz desktop --addbef idle\fR
 .RS
 Add the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) to the front of the favorites bar. The idle.desktop
@@ -127,7 +127,7 @@ file must exist in one of the application directories such as
 /usr/share/applications or /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gnome --delete idle\fR
+\fBkz desktop --delete idle\fR
 .RS
 Remove the IDLE (Python's Integrated Development and Learning Environment)
 application icon (favorite) from the favorites bar.
@@ -153,5 +153,5 @@ Part of the \fBkz\fR(1) package, named after its creator, Karel Zimmer.
 .\"
 .\"
 .SH AVAILABILITY
-Command \fBkz gnome\fR is part of the \fBkz\fR package and is available on
+Command \fBkz desktop\fR is part of the \fBkz\fR package and is available on
 Karel Zimmer's website <https://karelzimmer.nl/en>, under Linux.

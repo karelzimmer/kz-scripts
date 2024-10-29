@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Change GNOME
+# SPDX-FileComment: Change desktop environment
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -19,9 +19,9 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz-gnome'
+declare PROGRAM_NAME='kz-desktop'
 declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Change GNOME')
+        PROGRAM_DESC=$(gettext 'Change desktop environment')
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
@@ -166,12 +166,6 @@ $USAGE"
 function process_input() {
     local TEXT=''
 
-    if ! $GNOME; then
-        TEXT=$(gettext 'For GNOME desktop environments only.')
-        infomsg "$TEXT"
-        exit $OK
-    fi
-
     DESKTOPFILE=$FAVORITE_ARGUMENT.desktop
 
     if $OPTION_ADDAFT; then
@@ -261,7 +255,7 @@ function process_OPTION_RESET () {
 }
 
 
-# This function records a change made through the GNOME desktop environment.
+# This function records a change made through the desktop environment.
 function capture_gnome_changes() {
     local CONFIG_A_FILE=''
     local CONFIG_B_FILE=''
@@ -284,7 +278,7 @@ function capture_gnome_changes() {
 }
 
 
-# This function stores the GNOME configuration database.
+# This function stores the desktop configuration database.
 function save_configuration_database() {
     # shellcheck disable=SC2034
     local FASE=${1:-unknown}
@@ -302,7 +296,7 @@ function save_configuration_database() {
 }
 
 
-# This function reports the changes to the GNOME configuration database.
+# This function reports the changes to the desktop configuration database.
 function report_database_changes() {
     local OUTPUT_FILE_1=${1:-unknown}
     local OUTPUT_FILE_2=${2:-unknown}

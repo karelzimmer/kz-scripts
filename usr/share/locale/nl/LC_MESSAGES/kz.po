@@ -426,8 +426,8 @@ msgstr "Wachtwoord voor"
 msgid "Website download failed."
 msgstr "Downloaden website is mislukt."
 
-msgid "Change GNOME"
-msgstr "GNOME wijzigen"
+msgid "Change desktop environment"
+msgstr "Desktopomgeving wijzigen"
 
 #, sh-format
 msgid ""
@@ -465,9 +465,6 @@ msgstr "  -l, --list     toon favorieten"
 
 msgid "  -r, --reset    set favorites on default values"
 msgstr "  -r, --reset    stel favorieten in op standaardwaarden"
-
-msgid "For GNOME desktop environments only."
-msgstr "Alleen voor GNOME-systemen."
 
 msgid "Favorite apps:"
 msgstr "Favorieten:"

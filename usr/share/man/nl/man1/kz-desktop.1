@@ -1,28 +1,28 @@
 .\"############################################################################
-.\"# SPDX-FileComment: Man page for kz-gnome
+.\"# SPDX-FileComment: Man page for kz-desktop
 .\"#
 .\"# SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 .\"# SPDX-License-Identifier: CC0-1.0
 .\"############################################################################
 .\"
-.TH "KZ-GNOME" "1" "4.2.1" "KZ" "Handleiding kz"
+.TH "KZ-DESKTOP" "1" "4.2.1" "KZ" "Handleiding kz"
 .\"
 .\"
 .SH NAAM
-kz-gnome \- GNOME wijzigen
+kz-desktop \- Desktopomgeving wijzigen
 .\"
 .\"
 .SH SAMENVATTING
-.B kz gnome
+.B kz desktop
 [OPTIE...]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz gnome\fR helpt bij het wijzigen van de GNOME desktopomgeving.
+\fBkz desktop\fR helpt bij het wijzigen van de desktopomgeving.
 .sp
-\fBkz gnome\fR:
+\fBkz desktop\fR:
 .RS
-- werkt alleen op systemen die GNOME gebruiken,
+- werkt alleen op systemen die een desktopomgeving gebruiken,
 .br
 - toont wijzigingen in de configuratiedatabase,
 .br
@@ -55,7 +55,7 @@ Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten getoond.
 Met optie \fB-r\fR, \fB--reset\fR wordt de favorietenbalk (dash, dock)
 teruggezet met standaard favorieten.
 .sp
-Als er geen opties zijn opgegeven toont \fBkz gnome\fR wijzigingen in de
+Als er geen opties zijn opgegeven toont \fBkz desktop\fR wijzigingen in de
 configuratiedatabase na een wijziging in de desktopomgeving.
 .br
 Het volgende wordt uitgevoerd:
@@ -63,14 +63,14 @@ Het volgende wordt uitgevoerd:
 .RS
 1. Inhoud configuratiedatabase ervoor vastleggen.
 .br
-2. Gebruiker voert wijzigingen in de GNOME desktopomgeving.
+2. Gebruiker voert wijzigingen in de desktopomgeving.
 .br
 3. Inhoud configuratiedatabase erna vastleggen.
 .br
 4. Wijzigingen in de configuratiedatabase rapporteren.
 .RE
 .sp
-Opdracht \fBkz gnome\fR kan alleen worden uitgevoerd op een desktop.
+Opdracht \fBkz desktop\fR kan alleen worden uitgevoerd op een desktop.
 .\"
 .\"
 .SH OPTIES
@@ -114,13 +114,13 @@ afsluitwaarde ongelijk 0.
 .\"
 .SH VOORBEELDEN
 .sp
-\fBkz gnome\fR
+\fBkz desktop\fR
 .RS
-Toont wijzigingen in de configuratiedatabase na aanpassingen in de GNOME
+Toont wijzigingen in de configuratiedatabase na aanpassingen in de
 desktopomgeving.
 .RE
 .sp
-\fBkz gnome --addbef idle\fR
+\fBkz desktop --addbef idle\fR
 .RS
 Voeg de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) toe vooraan de favorietenbalk. Bestand
@@ -128,7 +128,7 @@ idle.desktop moet bestaan in een van de applicatiemappen
 zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .RE
 .sp
-\fBkz gnome --delete idle\fR
+\fBkz desktop --delete idle\fR
 .RS
 Verwijder de IDLE (Python's Integrated Development and Learning Environment)
 toepassingspictogram (favoriet) uit de favorietenbalk.
@@ -154,5 +154,6 @@ Onderdeel van het \fBkz\fR(1) pakket, genoemd naar de maker, Karel Zimmer.
 .\"
 .\"
 .SH BESCHIKBAARHEID
-Opdracht \fBkz gnome\fR is onderdeel van het pakket \fBkz\fR en is beschikbaar
-op de website van Karel Zimmer <https://karelzimmer.nl>, onder Linux.
+Opdracht \fBkz desktop\fR is onderdeel van het pakket \fBkz\fR en is
+beschikbaar op de website van Karel Zimmer <https://karelzimmer.nl>, onder
+Linux.

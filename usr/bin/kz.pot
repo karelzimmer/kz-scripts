@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 15:02+0200\n"
+"POT-Creation-Date: 2024-10-29 12:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -381,7 +381,7 @@ msgstr ""
 msgid "Website download failed."
 msgstr ""
 
-msgid "Change GNOME"
+msgid "Change desktop environment"
 msgstr ""
 
 #, sh-format
@@ -410,9 +410,6 @@ msgid "  -l, --list     show favorites"
 msgstr ""
 
 msgid "  -r, --reset    set favorites on default values"
-msgstr ""
-
-msgid "For GNOME desktop environments only."
 msgstr ""
 
 msgid "Favorite apps:"

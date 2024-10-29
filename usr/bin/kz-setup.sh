@@ -10,41 +10,41 @@
 
 # Setup anydesk for -nouser
 # Remote Wayland display server is not supported.
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=anydesk; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=anydesk; fi
 
 # Reset anydesk for -nouser
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=anydesk; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=anydesk; fi
 
 # Setup calibre for hugo@pc-van-hugo
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=calibre-gui; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=calibre-gui; fi
 
 # Reset calibre for hugo@pc-van-hugo
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=calibre-gui; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=calibre-gui; fi
 
 # Setup cockpit for karel@pc06
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-cockpit; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-cockpit; fi
 
 # Reset cockpit for karel@pc06
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-cockpit; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-cockpit; fi
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"; fi
 
 # Setup evolution for karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=org.gnome.Evolution; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.Evolution; fi
 
 # Reset evolution for karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=org.gnome.Evolution; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=org.gnome.Evolution; fi
 
 # Setup firefox for karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=firefox-esr; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=firefox-esr; fi
 
 # Setup firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=firefox; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=firefox; fi
 
 # Reset firefox for karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=firefox-esr; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox-esr; fi
 
 # Reset firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=firefox; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox; fi
 
 # Setup gdebi for *
 if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
@@ -93,17 +93,17 @@ if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.settings-daemon.plugins.
 if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
 
 # Setup google-chrome for *
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=google-chrome; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=google-chrome; fi
 if $DESKTOP_ENVIRONMENT; then xdg-mime default google-chrome.desktop application/pdf; fi
 
 # Reset google-chrome for *
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=google-chrome; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=google-chrome; fi
 
 # Setup handbrake for emily@pc-van-emily
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=fr.handbrake.ghb; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=fr.handbrake.ghb; fi
 
 # Reset handbrake for emily@pc-van-emily
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=fr.handbrake.ghb; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=fr.handbrake.ghb; fi
 
 # Setup hide-files for *
 if $DESKTOP_ENVIRONMENT; then echo 'snap' > "$HOME/.hidden"; fi
@@ -113,10 +113,10 @@ if $DESKTOP_ENVIRONMENT; then echo 'kz-backup' >> "$HOME/.hidden"; fi
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.hidden"; fi
 
 # Setup kvm for karel@pc06 karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=virt-manager; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=virt-manager; fi
 
 # Reset kvm for karel@pc06 karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=virt-manager; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=virt-manager; fi
 
 # Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis "$HOME/lynis" || true
@@ -140,25 +140,25 @@ chmod 750 "$HOME"
 chmod 755 "$HOME"
 
 # Setup sound-juicer for emily@pc-van-emily
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=org.gnome.SoundJuicer; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=org.gnome.SoundJuicer; fi
 
 # Reset sound-juicer for emily@pc-van-emily
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=org.gnome.SoundJuicer; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.SoundJuicer; fi
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-spotify; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-spotify; fi
 
 # Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-spotify; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-spotify; fi
 
 # Setup teamviewer for karel@pc06
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=com.teamviewer.TeamViewer; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=com.teamviewer.TeamViewer; fi
 
 # Reset teamviewer for karel@pc06
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=com.teamviewer.TeamViewer; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=com.teamviewer.TeamViewer; fi
 
 # Setup terminal for karel@pc01 karel@pc06 karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=org.gnome.Terminal; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=org.gnome.Terminal; fi
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME/.bashrc"
 # Enable search forward in history (with Ctrl-S).
@@ -166,26 +166,26 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME/.bashrc"
 
 # Reset terminal for karel@pc01 karel@pc06 karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=org.gnome.Terminal; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.Terminal; fi
 sed --in-place --expression='s/alias/#alias/g' "$HOME/.bashrc"
 sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 
 # Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=thunderbird; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=thunderbird; fi
 
 # Reset thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=thunderbird; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=thunderbird; fi
 
 # Setup virtualbox for hugo@pc-van-hugo
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=virtualbox; fi
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-vm-hugowin732; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=virtualbox; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-vm-hugowin732; fi
 
 # Reset virtualbox for hugo@pc-van-hugo
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=virtualbox; fi
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-vm-hugowin732; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=virtualbox; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-vm-hugowin732; fi
 
 # Setup vscode for karel@pc01 karel@pc06 karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=code; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=code; fi
 if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop application/json; fi
 if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop application/x-desktop; fi
 if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop application/x-shellscript; fi
@@ -197,30 +197,30 @@ if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/troff; fi
 if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/x-python; fi
 
 # Reset vscode for karel@pc01 karel@pc06 karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=code; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=code; fi
 
 # Setup webmin for karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-webmin; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-webmin; fi
 
 # Reset webmin for karel@pc07
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-webmin; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-webmin; fi
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applications/kz-webmin.desktop"; fi
 
 # Setup whatsapp for hugo@pc-van-hugo maria@maria-desktop
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-whatsapp; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-whatsapp; fi
 
 # Reset whatsapp for hugo@pc-van-hugo maria@maria-desktop
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-whatsapp; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-whatsapp; fi
 
 # Setup youtube-dl for emily@pc-van-emily
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=youtubedl-gui; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=youtubedl-gui; fi
 
 # Reset youtube-dl for emily@pc-van-emily
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=youtubedl-gui; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=youtubedl-gui; fi
 
 # Setup zoom for monique@pc01 karel@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-zoom; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-zoom; fi
 
 # Reset zoom for monique@pc01 karel@pc01
-if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-zoom; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-zoom; fi
 
