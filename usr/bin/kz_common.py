@@ -188,7 +188,7 @@ def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
                             --height    100         \
                             --title     "{TITLE}"   \
                             --text      "{TEXT}"'
-        subprocess.run(f'{COMMAND}', shell=True, check=True, executable='bash')
+        subprocess.run(COMMAND, shell=True, check=True, executable='bash')
     else:
         print(f'{RED}{TEXT}{NORMAL}')
 
@@ -205,7 +205,7 @@ def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
                             --height    100         \
                             --title     "{TITLE}"   \
                             --text      "{TEXT}"'
-        subprocess.run(f'{COMMAND}', shell=True, check=True, executable='bash')
+        subprocess.run(COMMAND, shell=True, check=True, executable='bash')
     else:
         print(f'{TEXT}')
 
