@@ -146,7 +146,7 @@ def perform_apt_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """
-    TEXT: str= f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo apt-get autoclean'
