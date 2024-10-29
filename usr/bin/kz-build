@@ -310,11 +310,28 @@ function install_deb_package() {
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
     check_apt_package_manager
+
+    # Copied from kz-get:
+    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    # Progress indicator with growing [=>, [==>, etc. as long as the kz deb
+    # local file exists, i.e. installation is in progress.
+    # If something fails, kz_common.sh will remove the kz deb local file and
+    # other files upon exit.
+    printf '[ '
+    while test -e "$KZ_DEB_LOCAL_FILE"; do
+        printf '\b%s' '=>'
+        sleep 1
+    done &
+
     sudo    DEBIAN_FRONTEND=noninteractive                      \
             apt-get                                             \
             reinstall                                           \
             --assume-yes                                        \
             "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
+
+    rm --force --verbose "$KZ_DEB_LOCAL_FILE"|& $LOGCMD
+    # Progress indicator with [=>, [==>, etc. ends like [====]100%.
+    printf '\b%s\n' '=]100%'
 }
 
 
