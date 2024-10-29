@@ -94,7 +94,10 @@ msgstr ""
 msgid "Usage: {} [OPTION...]"
 msgstr ""
 
-msgid "Type '{} --manual' or 'man {}'{} for more information."
+msgid "Type '{} --manual' or 'man {}'{} "
+msgstr ""
+
+msgid "for more information."
 msgstr ""
 
 msgid "Usage:"

@@ -55,7 +55,7 @@ def process_options() -> bool:
     """
     This function handles the script options and arguments.
     """
-    OPTION_GUI = False
+    OPTION_GUI: bool = False
 
     PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
                                      add_help=False)
@@ -89,7 +89,7 @@ def process_options() -> bool:
     elif args.gui:
         if not kz_common.DESKTOP_ENVIRONMENT:
             RC = kz_common.OK
-            TEXT = f"{DISPLAY_NAME}: {sys.argv[1]}: "
+            TEXT: str = f"{DISPLAY_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
             OPTION_GUI = False
             kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT,
@@ -104,10 +104,11 @@ def process_input(OPTION_GUI: bool = False) -> None:
     """
     This function processes the script options and arguments.
     """
-    COMMAND = ''
-    NMCLI_OUTPUT = ''
+    COMMAND: str = ''
+    NMCLI_OUTPUT: str = ''
 
-    TEXT = f"{_('Record this data to connect to the wireless network.')}\n"
+    TEXT: str = f"{_('Record this data to connect to the wireless network.')}"
+    TEXT += '\n'
     COMMAND = 'nmcli device wifi show-password'
 
     if OPTION_GUI:

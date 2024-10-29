@@ -99,7 +99,7 @@ def process_input() -> None:
         perform_rpm_cleanup()
     else:
         RC = kz_common.ERR
-        TEXT = _('Unknown package manager.')
+        TEXT: str = _('Unknown package manager.')
         kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
@@ -107,10 +107,10 @@ def perform_apt_repair() -> None:
     """
     This function runs a repair of Debian packages.
     """
-    TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
-    COMMAND = 'sudo dpkg --configure --pending'
+    COMMAND: str = 'sudo dpkg --configure --pending'
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get update --fix-missing'
@@ -127,10 +127,10 @@ def perform_apt_update() -> None:
     """
     This function updates installed Debian packages and snaps if installed.
     """
-    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
-    COMMAND = 'sudo apt-get update'
+    COMMAND: str = 'sudo apt-get update'
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get dist-upgrade --assume-yes'
@@ -146,10 +146,10 @@ def perform_apt_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """
-    TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    TEXT: str= f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
-    COMMAND = 'sudo apt-get autoclean'
+    COMMAND: str = 'sudo apt-get autoclean'
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get autoremove --assume-yes'
@@ -160,10 +160,10 @@ def perform_rpm_repair() -> None:
     """
     This function runs a repair of RPM packages.
     """
-    TEXT = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
-    COMMAND = 'sudo dnf clean all'
+    COMMAND: str = 'sudo dnf clean all'
     perform_command(COMMAND)
 
     COMMAND = '# sudo dnf makecache'
@@ -174,11 +174,11 @@ def perform_rpm_update() -> None:
     """
     This function updates installed RPM packages.
     """
-    TEXT = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
     # Exit code 100 means there are updates available ==> ' || true'.
-    COMMAND = 'sudo dnf check-update --refresh || true'
+    COMMAND: str = 'sudo dnf check-update --refresh || true'
     perform_command(COMMAND)
 
     COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
@@ -189,10 +189,10 @@ def perform_rpm_cleanup() -> None:
     """
     This function performs a RPM packages cleanup.
     """
-    TEXT = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
-    COMMAND = 'sudo dnf clean all'
+    COMMAND: str = 'sudo dnf clean all'
     perform_command(COMMAND)
 
     COMMAND = 'sudo dnf autoremove'
@@ -203,7 +203,7 @@ def perform_command(COMMAND: str = '') -> None:
     """
     This function executes a Bourne-Again SHell command.
     """
-    TEXT = f'{COMMAND}'
+    TEXT: str = f'{COMMAND}'
     kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
     kz_common.check_apt_package_manager(DISPLAY_NAME, PROGRAM_DESC)
     try:
@@ -222,7 +222,7 @@ def check_reboot() -> None:
     """
     This function checks if reboot is needed.
     """
-    TEXT = _("*** The computer needs to be restarted to complete the \
+    TEXT: str = _("*** The computer needs to be restarted to complete the \
 installation of updates ***")
 
     if kz_common.APT:

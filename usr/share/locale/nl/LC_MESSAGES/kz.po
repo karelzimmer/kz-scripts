@@ -99,8 +99,11 @@ msgstr "In programma {} is een fout opgetreden."
 msgid "Usage: {} [OPTION...]"
 msgstr "Gebruik: {} [OPTIE...]"
 
-msgid "Type '{} --manual' or 'man {}'{} for more information."
-msgstr "Typ '{} --manual' of 'man {}'{} voor meer informatie."
+msgid "Type '{} --manual' or 'man {}'{} "
+msgstr "Typ '{} --manual' of 'man {}'{} "
+
+msgid "for more information."
+msgstr "voor meer informatie."
 
 msgid "Usage:"
 msgstr "Gebruik:"

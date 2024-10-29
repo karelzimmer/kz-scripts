@@ -97,10 +97,10 @@ def become_root(PROGRAM_NAME: str, DISPLAY_NAME: str,
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
-    EXEC_SUDO = 'sudo '
+    EXEC_SUDO: str = 'sudo '
 
     if not become_root_check(DISPLAY_NAME, PROGRAM_DESC):
-        RC = OK
+        RC: int = OK
         term(PROGRAM_NAME, RC)
 
     if os.getuid() != 0:
@@ -110,7 +110,7 @@ def become_root(PROGRAM_NAME: str, DISPLAY_NAME: str,
                 EXEC_SUDO += str(sys.argv[arg_num])
             else:
                 EXEC_SUDO += ' ' + str(sys.argv[arg_num])
-        TEXT = f'Restart ({EXEC_SUDO})'
+        TEXT: str = f'Restart ({EXEC_SUDO})'
         logmsg(PROGRAM_NAME, TEXT)
 
         try:
@@ -141,7 +141,7 @@ def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str) -> bool:
         subprocess.run('groups $USER | grep --quiet --regexp=sudo \
                        --regexp=wheel', shell=True, check=True)
     except Exception:
-        TEXT = _('Already performed by the administrator.')
+        TEXT: str = _('Already performed by the administrator.')
         infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
         return False
     else:
@@ -153,7 +153,7 @@ def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
     This function checks for another running APT package manager and waits for
     the next check if so.
     """
-    CHECK_WAIT = 10
+    CHECK_WAIT: int = 10
 
     if RPM:
         return OK
@@ -169,7 +169,7 @@ def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
         except Exception:
             break
         else:
-            TEXT = _('Wait for another package manager to finish') + '...'
+            TEXT: str = _('Wait for another package manager to finish') + '...'
             infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
             time.sleep(CHECK_WAIT)
 
@@ -182,12 +182,12 @@ def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
     This function returns an error message.
     """
     if OPTION_GUI:
-        TITLE = f"{PROGRAM_DESC} {_('error message')} ({DISPLAY_NAME})"
-        COMMAND = f'zenity  --error                 \
-                            --width     600         \
-                            --height    100         \
-                            --title     "{TITLE}"   \
-                            --text      "{TEXT}"'
+        TITLE: str = f"{PROGRAM_DESC} {_('error message')} ({DISPLAY_NAME})"
+        COMMAND: str = f'zenity --error                 \
+                                --width     600         \
+                                --height    100         \
+                                --title     "{TITLE}"   \
+                                --text      "{TEXT}"'
         subprocess.run(COMMAND, shell=True, check=True, executable='bash')
     else:
         print(f'{RED}{TEXT}{NORMAL}')
@@ -199,12 +199,12 @@ def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
     This function returns an informational message.
     """
     if OPTION_GUI:
-        TITLE = f"{PROGRAM_DESC} {_('information')} ({DISPLAY_NAME})"
-        COMMAND = f'zenity  --info                  \
-                            --width     600         \
-                            --height    100         \
-                            --title     "{TITLE}"   \
-                            --text      "{TEXT}"'
+        TITLE: str = f"{PROGRAM_DESC} {_('information')} ({DISPLAY_NAME})"
+        COMMAND: str = f'zenity --info                  \
+                                --width     600         \
+                                --height    100         \
+                                --title     "{TITLE}"   \
+                                --text      "{TEXT}"'
         subprocess.run(COMMAND, shell=True, check=True, executable='bash')
     else:
         print(f'{TEXT}')
@@ -214,7 +214,7 @@ def init_script(PROGRAM_NAME: str) -> None:
     """
     This function performs initial actions.
     """
-    TEXT = f'==== START logs for script {PROGRAM_NAME} ===='
+    TEXT: str = f'==== START logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 
 
@@ -230,15 +230,16 @@ def process_option_help(PROGRAM_NAME: str, DISPLAY_NAME: str,
     """
     This function shows the available help.
     """
-    YELP_MAN_URL = ''
+    YELP_MAN_URL: str = ''
 
     if DESKTOP_ENVIRONMENT:
         YELP_MAN_URL = f"{_(', or see the ')}"
         YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
         YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"
-    TEXT = (f'{HELP}\n\n'
-            f'''{_("Type '{} --manual' or 'man {}'{} for more information.").
-                 format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}''')
+    TEXT: str = (f'{HELP}\n\n'
+                 f'''{_("Type '{} --manual' or 'man {}'{} ").
+                      format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}'''
+                 f"{_('for more information.')}")
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
@@ -251,7 +252,7 @@ def process_option_manual(PROGRAM_NAME: str, DISPLAY_NAME: str,
         subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
                        check=True)
     except Exception as exc:
-        TEXT = str(exc)
+        TEXT: str = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         RC = ERR
         TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
@@ -267,9 +268,9 @@ def process_option_usage(DISPLAY_NAME: str, PROGRAM_DESC: str,
     """
     This function shows the available options.
     """
-    TEXT = (f"{_('Usage:')} {USAGE}\n\n"
-            f'''{_("Type '{} --help' for more information.").
-                 format(DISPLAY_NAME)}''')
+    TEXT: str = (f"{_('Usage:')} {USAGE}\n\n"
+                 f'''{_("Type '{} --help' for more information.").
+                      format(DISPLAY_NAME)}''')
     infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
 
 
@@ -278,17 +279,17 @@ def process_option_version(PROGRAM_NAME: str, DISPLAY_NAME: str,
     """
     This function displays version, author, and license information.
     """
-    BUILD_ID = ''
+    BUILD_ID: str = ''
 
     try:
         with open('/usr/share/doc/kz/kz-build.id') as fh:
             BUILD_ID = f'{fh.read()}'
     except FileNotFoundError as fnf:
-        TEXT = str(fnf)
+        TEXT: str = str(fnf)
         logmsg(PROGRAM_NAME, TEXT)
         TEXT = _('Build ID cannot be determined.')
         logmsg(PROGRAM_NAME, TEXT)
-        build_id = TEXT
+        BUILD_ID = TEXT
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
@@ -330,7 +331,7 @@ def wait_for_enter(PROGRAM_NAME: str, DISPLAY_NAME: str,
     This function waits for the user to press Enter.
     """
     try:
-        TEXT = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
+        TEXT: str = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
         input(TEXT)
     except KeyboardInterrupt:
         RC = ERR
@@ -353,5 +354,5 @@ def wait_for_enter(PROGRAM_NAME: str, DISPLAY_NAME: str,
 ###############################################################################
 
 if __name__ == '__main__':
-    TEXT = _('{}: i am a module').format(MODULE_NAME)
+    TEXT: str = _('{}: i am a module').format(MODULE_NAME)
     print(TEXT)
