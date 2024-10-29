@@ -7,3 +7,4 @@
 
 # Byte-compiled
 __pycache__/
+.mypy_cache

@@ -37,9 +37,7 @@ desktop environment is required.
 With option \fB-t\fR, \fB--target\fR \fIDIRECTORY\fR another location can be
 specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
-Locations ignored by \fBkz backup\fR include a selection of locations in
-https://github.com/rubo77/rsync-homedir-excludes and directories managed by
-Git.
+Locations ignored by \fBkz backup\fR are directories managed by Git.
 Example: ~/kz-scripts is skipped due to the presence of ~/kz-scripts/.git.
 .sp
 rsync is used to create the backup.
