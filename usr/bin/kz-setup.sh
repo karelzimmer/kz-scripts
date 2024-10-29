@@ -10,41 +10,41 @@
 
 # Setup anydesk for -nouser
 # Remote Wayland display server is not supported.
-kz-gnome --addaft=anydesk
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=anydesk; fi
 
 # Reset anydesk for -nouser
-kz-gnome --delete=anydesk
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=anydesk; fi
 
 # Setup calibre for hugo@pc-van-hugo
-kz-gnome --addaft=calibre-gui
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=calibre-gui; fi
 
 # Reset calibre for hugo@pc-van-hugo
-kz-gnome --delete=calibre-gui
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=calibre-gui; fi
 
 # Setup cockpit for karel@pc06
-kz-gnome --addaft=kz-cockpit
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-cockpit; fi
 
 # Reset cockpit for karel@pc06
-kz-gnome --delete=kz-cockpit
-rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-cockpit; fi
+if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"; fi
 
 # Setup evolution for karel@pc07
-kz-gnome --delete=org.gnome.Evolution
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=org.gnome.Evolution; fi
 
 # Reset evolution for karel@pc07
-kz-gnome --addbef=org.gnome.Evolution
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=org.gnome.Evolution; fi
 
 # Setup firefox for karel@pc07
-kz-gnome --delete=firefox-esr
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=firefox-esr; fi
 
 # Setup firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gnome --delete=firefox
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=firefox; fi
 
 # Reset firefox for karel@pc07
-kz-gnome --addbef=firefox-esr
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=firefox-esr; fi
 
 # Reset firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gnome --addbef=firefox
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=firefox; fi
 
 # Setup gdebi for *
 if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
@@ -53,44 +53,44 @@ if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application
 # There is no command available to reset gdebi.
 
 # Setup gnome for *
-if $GNOME; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
-if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
-if $GNOME; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
-if $GNOME; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
-if $GNOME; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
-if $GNOME; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
-if $GNOME; then gsettings set org.gnome.desktop.session idle-delay 900; fi
-if $GNOME; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
-if $GNOME; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
-if $GNOME; then gsettings set org.gnome.mutter center-new-windows true; fi
-if $GNOME; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
-if $GNOME; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
-if $GNOME; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
-if $GNOME; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
-if $GNOME; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
-if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
-if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
-if $GNOME; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.interface clock-show-weekday true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.interface show-battery-percentage true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.screensaver lock-enabled false; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.session idle-delay 900; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.mutter center-new-windows true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.nautilus.icon-view default-zoom-level 'large'; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.nautilus.preferences click-policy 'single'; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.nautilus.preferences open-folder-on-dnd-hover true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.nautilus.preferences show-create-link true; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.nautilus.preferences show-image-thumbnails 'always'; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'interactive'; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'; fi
+if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'; fi
 
 # Reset gnome for *
-if $GNOME; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
-if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
-if $GNOME; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
-if $GNOME; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
-if $GNOME; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
-if $GNOME; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
-if $GNOME; then gsettings reset org.gnome.desktop.session idle-delay; fi
-if $GNOME; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
-if $GNOME; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
-if $GNOME; then gsettings reset org.gnome.mutter center-new-windows; fi
-if $GNOME; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
-if $GNOME; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
-if $GNOME; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
-if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
-if $GNOME; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
-if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
-if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
-if $GNOME; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.calendar show-weekdate; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.interface clock-show-date; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.interface clock-show-weekday; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.interface show-battery-percentage; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.peripherals.touchpad tap-to-click; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.screensaver lock-enabled; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.session idle-delay; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.sound allow-volume-above-100-percent; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.desktop.wm.preferences button-layout; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.mutter center-new-windows; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.nautilus.icon-view default-zoom-level; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.nautilus.preferences click-policy; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.nautilus.preferences open-folder-on-dnd-hover; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.nautilus.preferences show-create-link; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.nautilus.preferences show-image-thumbnails; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.settings-daemon.plugins.power power-button-action; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type; fi
+if $DESKTOP_ENVIRONMENT; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type; fi
 
 # Setup google-chrome for *
 if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=google-chrome; fi
@@ -100,10 +100,10 @@ if $DESKTOP_ENVIRONMENT; then xdg-mime default google-chrome.desktop application
 if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=google-chrome; fi
 
 # Setup handbrake for emily@pc-van-emily
-kz-gnome --addaft=fr.handbrake.ghb
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=fr.handbrake.ghb; fi
 
 # Reset handbrake for emily@pc-van-emily
-kz-gnome --delete=fr.handbrake.ghb
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=fr.handbrake.ghb; fi
 
 # Setup hide-files for *
 if $DESKTOP_ENVIRONMENT; then echo 'snap' > "$HOME/.hidden"; fi
@@ -113,10 +113,10 @@ if $DESKTOP_ENVIRONMENT; then echo 'kz-backup' >> "$HOME/.hidden"; fi
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.hidden"; fi
 
 # Setup kvm for karel@pc06 karel@pc07
-kz-gnome --addaft=virt-manager
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=virt-manager; fi
 
 # Reset kvm for karel@pc06 karel@pc07
-kz-gnome --delete=virt-manager
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=virt-manager; fi
 
 # Setup lynis for -nouser
 git clone https://github.com/CISOfy/lynis "$HOME/lynis" || true
@@ -140,25 +140,25 @@ chmod 750 "$HOME"
 chmod 755 "$HOME"
 
 # Setup sound-juicer for emily@pc-van-emily
-kz-gnome --addaft=org.gnome.SoundJuicer
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=org.gnome.SoundJuicer; fi
 
 # Reset sound-juicer for emily@pc-van-emily
-kz-gnome --delete=org.gnome.SoundJuicer
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=org.gnome.SoundJuicer; fi
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-kz-gnome --addaft=kz-spotify
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-spotify; fi
 
 # Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-kz-gnome --delete=kz-spotify
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-spotify; fi
 
 # Setup teamviewer for karel@pc06
-kz-gnome --addaft=com.teamviewer.TeamViewer
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=com.teamviewer.TeamViewer; fi
 
 # Reset teamviewer for karel@pc06
-kz-gnome --delete=com.teamviewer.TeamViewer
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=com.teamviewer.TeamViewer; fi
 
 # Setup terminal for karel@pc01 karel@pc06 karel@pc07
-kz-gnome --addbef=org.gnome.Terminal
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=org.gnome.Terminal; fi
 # Turn on aliases.
 sed --in-place --expression='s/#alias/alias/g' "$HOME/.bashrc"
 # Enable search forward in history (with Ctrl-S).
@@ -166,61 +166,61 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 echo 'stty -ixon  # Enable fwd search history (i-search)' >> "$HOME/.bashrc"
 
 # Reset terminal for karel@pc01 karel@pc06 karel@pc07
-kz-gnome --delete=org.gnome.Terminal
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=org.gnome.Terminal; fi
 sed --in-place --expression='s/alias/#alias/g' "$HOME/.bashrc"
 sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 
 # Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gnome --delete=thunderbird
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=thunderbird; fi
 
 # Reset thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-kz-gnome --addbef=thunderbird
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=thunderbird; fi
 
 # Setup virtualbox for hugo@pc-van-hugo
-kz-gnome --addaft=virtualbox
-kz-gnome --addaft=kz-vm-hugowin732
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=virtualbox; fi
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-vm-hugowin732; fi
 
 # Reset virtualbox for hugo@pc-van-hugo
-kz-gnome --delete=virtualbox
-kz-gnome --delete=kz-vm-hugowin732
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=virtualbox; fi
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-vm-hugowin732; fi
 
 # Setup vscode for karel@pc01 karel@pc06 karel@pc07
-kz-gnome --addbef=code
-xdg-mime default code.desktop application/json
-xdg-mime default code.desktop application/x-desktop
-xdg-mime default code.desktop application/x-shellscript
-xdg-mime default code.desktop application/xml
-xdg-mime default code.desktop text/html
-xdg-mime default code.desktop text/markdown
-xdg-mime default code.desktop text/plain
-xdg-mime default code.desktop text/troff
-xdg-mime default code.desktop text/x-python
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addbef=code; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop application/json; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop application/x-desktop; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop application/x-shellscript; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop application/xml; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/html; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/markdown; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/plain; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/troff; fi
+if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/x-python; fi
 
 # Reset vscode for karel@pc01 karel@pc06 karel@pc07
-kz-gnome --delete=code
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=code; fi
 
 # Setup webmin for karel@pc07
-kz-gnome --addaft=kz-webmin
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-webmin; fi
 
 # Reset webmin for karel@pc07
-kz-gnome --delete=kz-webmin
-rm --force --verbose "$HOME/.local/share/applications/kz-webmin.desktop"
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-webmin; fi
+if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applications/kz-webmin.desktop"; fi
 
 # Setup whatsapp for hugo@pc-van-hugo maria@maria-desktop
-kz-gnome --addaft=kz-whatsapp
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-whatsapp; fi
 
 # Reset whatsapp for hugo@pc-van-hugo maria@maria-desktop
-kz-gnome --delete=kz-whatsapp
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-whatsapp; fi
 
 # Setup youtube-dl for emily@pc-van-emily
-kz-gnome --addaft=youtubedl-gui
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=youtubedl-gui; fi
 
 # Reset youtube-dl for emily@pc-van-emily
-kz-gnome --delete=youtubedl-gui
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=youtubedl-gui; fi
 
 # Setup zoom for monique@pc01 karel@pc01
-kz-gnome --addaft=kz-zoom
+if $DESKTOP_ENVIRONMENT; then kz-gnome --addaft=kz-zoom; fi
 
 # Reset zoom for monique@pc01 karel@pc01
-kz-gnome --delete=kz-zoom
+if $DESKTOP_ENVIRONMENT; then kz-gnome --delete=kz-zoom; fi
 
