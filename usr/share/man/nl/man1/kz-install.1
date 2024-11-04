@@ -14,7 +14,7 @@ kz-install \- Apps installeren
 .\"
 .SH SAMENVATTING
 .B kz install
-[OPTIE...] [--] [\fIAPP\fR...]
+[<opties>] [--] [\fI<app>\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
@@ -52,16 +52,17 @@ Voor instructies over het toevoegen van extra gebruikers, zie de sectie
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst van alle apps die beschikbaar zijn
 in het invoerbestand.
 .sp
-Het is mogelijk om \fIAPP\fRs op te geven. Per opgegeven \fIAPP\fR worden de
-opdrachten geselecteerd uit het invoerbestand en gekopieerd naar het
-opdrachtbestand.
+Naar keuze kunnen te installeren apps opgegeven worden met argument
+\fI<app>\fR.
+Per opgegeven app worden de opdrachten geselecteerd uit het invoerbestand en
+gekopieerd naar het opdrachtbestand.
 .sp
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-f\fR, \fB--file\fR \fIBESTAND\fR kan een ander invoerbestand
+Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander invoerbestand
 opgegeven worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
@@ -236,21 +237,24 @@ h'.
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
+\fI<app>\fR...
+Installeer de opgegeven apps.
+.TP
 \fB-a\fR, \fB--apps\fR
 Toon een lijst van te installeren apps.
 .TP
 \fB-c\fR, \fB--cat\fR
 Toon de inhoud van het opdrachtbestand.
 .TP
-\fB-f\fR, \fB--file\fR \fIFILE\fR
-Geef invoerbestand \fIFILE\fR op.
+\fB-f\fR, \fB--file\fR \fI<bestand>\fR
+Verwerk het opgegeven bestand.
 .TP
 \fB-g\fR, \fB--gui\fR
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
 .TP
 \fB-r\fR, \fB--remove\fR
-Verwijder apps.
+Verwijder de apps.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

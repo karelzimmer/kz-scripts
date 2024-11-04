@@ -25,26 +25,26 @@ declare PROGRAM_DESC
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
-        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft FAVORITE] \
-[-b|--addbef FAVORITE]
-                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]
-                \$OPTIONS_USAGE")"
+        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft <favorite>] \
+[-b|--addbef <favorite>]
+                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]
+                  \$OPTIONS_USAGE")"
 
 declare X_OPTIONS_HELP
         X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
-$(gettext '  -a, --addaft FAVORITE
-                 add FAVORITE at the end')
-$(gettext '  -b, --addbef FAVORITE
-                 add FAVORITE at the beginning')
-$(gettext '  -d, --delete FAVORITE
-                 delete FAVORITE')
+$(gettext '  -a, --addaft <favorite>
+                 add favorite at the end')
+$(gettext '  -b, --addbef <favorite>
+                 add favorite at the beginning')
+$(gettext '  -d, --delete <favorite>
+                 delete favorite')
 $(gettext '  -l, --list     show favorites')
 $(gettext '  -r, --reset    set favorites on default values')"
 
 declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 

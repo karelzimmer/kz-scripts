@@ -1,4 +1,4 @@
-# This module provides global constants, variables, and functions.
+# This module provides access to global constants and functions.
 #
 # shellcheck shell=bash source=/dev/null
 ###############################################################################
@@ -168,8 +168,8 @@ function check_apt_package_manager() {
                 --silent                        \
                 /var/cache/debconf/config.dat   \
                 /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock*; do
+        TEXT=$(gettext 'Wait for another package manager to finish')
         if $OPTION_GUI; then
-            TEXT=$(gettext 'Wait for another package manager to finish')
             logmsg "$TEXT..."
             # Inform the user in 'zenity --progress' why there is a wait.
             printf '%s\n' "#$TEXT"

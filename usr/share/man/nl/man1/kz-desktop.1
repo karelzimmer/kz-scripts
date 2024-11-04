@@ -14,7 +14,7 @@ kz-desktop \- Desktopomgeving wijzigen
 .\"
 .SH SAMENVATTING
 .B kz desktop
-[OPTIE...]
+[<opties>]
 .\"
 .\"
 .SH BESCHRIJVING
@@ -29,25 +29,25 @@ kz-desktop \- Desktopomgeving wijzigen
 - kan een toepassingspictogram (favoriet) toevoegen en verwijderen.
 .RE
 .sp
-Met optie \fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR wordt toepassingspictogram
-(favoriet) \fIFAVORITE\fR toegevoegd aan het einde van de favorietenbalk
+Met optie \fB-a\fR, \fB--addaft\fR \fI<favoriet>\fR wordt de opgegeven
+toepassingspictogram (favoriet) toegevoegd aan het einde van de favorietenbalk
 (dash, dock).
 .sp
-Met optie \fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR wordt toepassingspictogram
-(favoriet) \fIFAVORITE\fR toegevoegd aan het begin van de favorietenbalk
+Met optie \fB-b\fR, \fB--addbef\fR \fI<favoriet>\fR wordt de opgegeven
+toepassingspictogram (favoriet) toegevoegd aan het begin van de favorietenbalk
 (dash, dock).
 .sp
-Met optie \fB-d\fR, \fB--delete\fR \fIFAVORITE\fR wordt toepassingspictogram
-(favoriet) \fIFAVORITE\fR verwijderd uit de favorietenbalk (dash, dock).
+Met optie \fB-d\fR, \fB--delete\fR \fI<favoriet>\fR wordt de opgegeven
+toepassingspictogram (favoriet) verwijderd uit de favorietenbalk (dash, dock).
 .sp
-Als er al een toepassingspictogram (favoriet) van \fIFAVORITE\fR bestaat
+Als er al een toepassingspictogram (favoriet) met de opgegeven naam bestaat
 wordt deze niet opnieuw toegevoegd.
 .br
 Als een toepassingspictogram (favoriet) bovenaan is toegevoegd die onderaan
 geplaatst moet worden, moet de bestaande eerst verwijderd te worden met optie
 \fB-d\fR, \fB--delete\fR.
 .br
-Bestand \fIFAVORITE\fR.desktop moet bestaan in een van de applicatiemappen
+Bestand \fI<favoriet>\fR.desktop moet bestaan in een van de applicatiemappen
 zoals /usr/share/applications of /var/lib/snapd/desktop/applications.
 .sp
 Met optie \fB-l\fR, \fB--list\fR worden de huidige favorieten getoond.
@@ -76,16 +76,16 @@ Opdracht \fBkz desktop\fR kan alleen worden uitgevoerd op een desktop.
 .SH OPTIES
 Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 .TP
-\fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR
-Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe achteraan de
+\fB-a\fR, \fB--addaft\fR \fI<favoriet>\fR
+Voeg toepassingspictogram (favoriet) \fI<favoriet>\fR toe achteraan de
 favorietenbalk (dash, dock).
 .TP
-\fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR
-Voeg toepassingspictogram (favoriet) \fIFAVORITE\fR toe vooraan de
+\fB-b\fR, \fB--addbef\fR \fI<favoriet>\fR
+Voeg toepassingspictogram (favoriet) \fI<favoriet>\fR toe vooraan de
 favorietenbalk (dash, dock).
 .TP
-\fB-d\fR, \fB--delete\fR \fIFAVORITE\fR
-Verwijder toepassingspictogram (favoriet) \fIFAVORITE\fR uit de
+\fB-d\fR, \fB--delete\fR \fI<favoriet>\fR
+Verwijder toepassingspictogram (favoriet) \fI<favoriet>\fR uit de
 favorietenbalk (dash, dock).
 .TP
 \fB-l\fR, \fB--list\fR

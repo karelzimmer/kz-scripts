@@ -27,14 +27,14 @@ declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
         USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE
-          COMMAND [ARGUMENT...]")
+          <command> [<arguments>]")
 
 declare X_OPTIONS_HELP
-        X_OPTIONS_HELP=$(gettext '  -l, --list     show available COMMANDs')
+        X_OPTIONS_HELP=$(gettext '  -l, --list     show available commands')
 
 declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] COMMAND \
-[ARGUMENT...]")
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] <command> \
+[<arguments>]")
 
 $PROGRAM_DESC.
 
@@ -43,8 +43,8 @@ $X_OPTIONS_HELP
 $OPTIONS_HELP
 
 $(gettext 'Arguments:')
-$(gettext '  COMMAND        execute COMMAND')
-$(gettext '  ARGUMENT       ARGUMENTs for COMMAND')"
+$(gettext '  <command>      execute command')
+$(gettext '  <arguments>    arguments for command')"
 
 declare X_OPTIONS_SHORT='l'
 declare X_OPTIONS_LONG=',list'
@@ -108,7 +108,7 @@ function process_x_options() {
 function process_option_list() {
     local TEXT=''
 
-    TEXT="$(gettext 'The following COMMANDs are available:')
+    TEXT="$(gettext 'The following commands are available:')
 
 $(gettext 'NUM  COMMAND')\n"
     TEXT+=$(
@@ -128,7 +128,7 @@ $(gettext 'NUM  COMMAND')\n"
                 --body-numbering=a
         )
     TEXT+="\n
-$(eval_gettext "To execute a COMMAND: \$DISPLAY_NAME COMMAND [ARGUMENT...]")"
+$(eval_gettext "To execute a command: \$DISPLAY_NAME <command> [<arguments>]")"
     infomsg "$TEXT"
 }
 

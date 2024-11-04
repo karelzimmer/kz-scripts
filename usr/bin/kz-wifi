@@ -40,7 +40,7 @@ USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
 X_OPTIONS_HELP: str = f"{_('  -g, --gui      run in graphical mode,')}\n"
 X_OPTIONS_HELP += f"{_('                 requires a desktop environment')}"
 
-HELP: str = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+HELP: str = (f"{_('Usage: {} [<options>]').format(DISPLAY_NAME)}\n\n"
              f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{X_OPTIONS_HELP}\n'

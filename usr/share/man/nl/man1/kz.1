@@ -14,21 +14,26 @@ kz \- Opdracht uitvoeren
 .\"
 .SH SAMENVATTING
 .B kz
-[OPTIE...] \fIOPDRACHT\fR [\fIARGUMENT\fR...]
+[<opties>] \fI<opdracht>\fR [\fI<argumenten>\fR]
 .\"
 .\"
 .SH BESCHRIJVING
-\fBkz\fR voert \fIOPDRACHT\fR uit, geïnstalleerd door pakket kz, eventueel met
-de opgegeven \fIARGUMENT\fRen.
+\fBkz\fR voert \fI<opdracht>\fR uit, geïnstalleerd door pakket kz, eventueel
+met de opgegeven \fI<argumenten>\fR.
 .sp
 Pakket kz bevat scripts voor het installeren en beheren van Debian en op Debian
 gebaseerde systemen zoals Ubuntu.
 .sp
-Gebruik optie \fB-l\fR, \fB--list\fR voor een lijst van
-beschikbare \fIOPDRACHT\fRen.
+Gebruik optie \fB-l\fR, \fB--list\fR voor een lijst van beschikbare opdrachten.
 .\"
 .\"
 .SH OPTIES
+.TP
+\fI<opdracht>\fR
+Voer de opgegeven opdracht uit.
+.TP
+\fI<argumenten>\fR
+Eventuele argumenten die horen bij de opdracht.
 .TP
 \fB-l\fR, \fB--list\fR
 Toon de beschikbare opdrachten.
@@ -103,8 +108,8 @@ Systeem bijwerken.
 \fBgitpull\fR
 Git pull (of git clone) van alle publieke remote repo's.
 .TP
-\fBgitstat\fR
-Git-status van alle lokale branches.
+\fBgitstatus\fR
+Git status van alle lokale branches.
 .TP
 \fBmogen\fR
 Genereer .mo bestand.
@@ -174,7 +179,7 @@ Voorbeelden zijn \fBkz build\fR en \fBkz deploy\fR.
 .sp
 \fBCI/CD Pipeline flow\fR
 .br
-Code -----> SCM ----->  Build -----> Test ----->   Check -----> Deploy
+Code -----> SCM ----->  Build -----> Test ----->   Check -----> Deploy--+
 .sp
 .sp
 vscode      GitHub      kz-build     CLI/TUI/GUI   kz-check     kz-deploy
@@ -194,8 +199,8 @@ van software-ontwikkeling, -distributie, en beheer.
 Dit is de ontwerpfase (design), waarin projectvereisten worden gespecificeerd
 en de architectuur van de oplossing wordt bepaald.
 .br
-Hierbij gebruik ik Visual Studio Code en GitHub, en programmeer ik in Bash en
-Python.
+Pakket kz wordt ontwikkeld met Visual Studio Code en GitHub, en geprogrammeerd
+in Bash en Python.
 .sp
 \fB3.2 Day 1 Operations\fR (Dag 1 Activiteiten)
 .br
@@ -205,7 +210,7 @@ die is ontworpen in de dag 0-fase.
 Hierbij wordt onder andere gebruik gemaakt van \fBIaC\fR en
 \fBCI/CD Pipelines\fR, en het uitvoeren van Ansible Playbooks.
 .br
-Voorbeelden zijn Checklist installatie, en \fBkz deb\fR en \fBkz menu\fR.
+Voorbeelden zijn Checklist installatie, en \fBkz getkz\fR en \fBkz menu\fR.
 .sp
 \fB3.3 Day 2 Operations\fR (Dag 2 Activiteiten)
 .br

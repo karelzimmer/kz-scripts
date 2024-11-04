@@ -37,7 +37,7 @@ DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
 USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
 
-HELP: str = (f"{_('Usage: {} [OPTION...]').format(DISPLAY_NAME)}\n\n"
+HELP: str = (f"{_('Usage: {} [<options>]').format(DISPLAY_NAME)}\n\n"
              f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{kz_common.OPTIONS_HELP}')

@@ -14,14 +14,14 @@ kz-check \- Check scripts and website
 .\"
 .SH SYNOPSISmsg
 .B kz check
-[OPTION...]
+[<options>]
 .\"
 .\"
 .SH DESCRIPTION
 \fBkz check\fR performs a check.
 .sp
-Performs checks that check scripts with shellcheck and pycodestyle, and then
-website for content and dead links.
+Performs checks that check scripts for content and with shellcheck, mypy, and
+pycodestyle, and the website for content and dead links.
 .sp
 Among other things, the following are checked:
 .br
@@ -37,7 +37,9 @@ spaces      - trailing spaces
 .br
 shellcheck  - shell script analyse tool
 .br
-pycodestyle - Python script analyse tool
+mypy        - Python script analyse tool
+.br
+pycodestyle - Python script style checker
 .sp
 Command \fBkz check\fR is also called from \fBkz deploy\fR.
 .sp

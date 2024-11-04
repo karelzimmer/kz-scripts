@@ -14,7 +14,7 @@ kz-setup \- Apps instellen
 .\"
 .SH SAMENVATTING
 .B kz setup
-[OPTIE...] [--] [\fIAPP\fR...]
+[<opties>] [--] [\fI<app>\fR...]
 .\"
 .\"
 .SH BESCHRIJVING
@@ -47,16 +47,16 @@ hieronder.
 Optie \fB-a\fR, \fB--apps\fR geeft een lijst alle van apps die beschikbaar zijn
 in het invoerbestand.
 .sp
-Het is mogelijk om \fIAPP\fRs op te geven. Per opgegeven \fIAPP\fR worden de
-opdrachten geselecteerd uit het invoerbestand en gekopieerd naar het
-opdrachtbestand.
+Naar keuze kunnen in te stellen apps opgegeven worden met argument \fI<app>\fR.
+Per opgegeven app worden de opdrachten geselecteerd uit het invoerbestand en
+gekopieerd naar het opdrachtbestand.
 .sp
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de gebruiker uitgelogd.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-f\fR, \fB--file\fR \fIBESTAND\fR kan een ander invoerbestand
+Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander invoerbestand
 opgegeven worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz setup\fR in grafische modus
@@ -228,6 +228,10 @@ De app kan alsnog worden ingesteld met de opdracht 'kz setup google-earth'.
 .\"
 .sp
 .SH OPTIES
+Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
+.TP
+\fI<app>\fR...
+Stel de opgegeven apps in.
 .TP
 \fB-a\fR, \fB--apps\fR
 Toon een lijst van in te stellen apps.
@@ -235,15 +239,15 @@ Toon een lijst van in te stellen apps.
 \fB-c\fR, \fB--cat\fR
 Toon de inhoud van het opdrachtbestand.
 .TP
-\fB-f\fR, \fB--file\fR \fIFILE\fR
-Geef invoerbestand \fIFILE\fR op.
+\fB-f\fR, \fB--file\fR \fI<bestand>\fR
+Verwerk het opgegeven bestand.
 .TP
 \fB-g\fR, \fB--gui\fR
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
 .TP
 \fB-r\fR, \fB--reset\fR
-Reset apps.
+Reset de apps.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

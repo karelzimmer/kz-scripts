@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-29 12:13+0100\n"
+"POT-Creation-Date: 2024-11-04 10:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Program {} encountered an error."
 msgstr ""
 
-msgid "Usage: {} [OPTION...]"
+msgid "Usage: {} [<options>]"
 msgstr ""
 
 msgid "Type '{} --manual' or 'man {}'{} "
@@ -126,23 +126,23 @@ msgstr ""
 #, sh-format
 msgid ""
 "Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
-"          COMMAND [ARGUMENT...]"
+"          <command> [<arguments>]"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [OPTION...] COMMAND [ARGUMENT...]"
+msgid "Usage: $DISPLAY_NAME [<options>] <command> [<arguments>]"
 msgstr ""
 
-msgid "  -l, --list     show available COMMANDs"
+msgid "  -l, --list     show available commands"
 msgstr ""
 
 msgid "Arguments:"
 msgstr ""
 
-msgid "  COMMAND        execute COMMAND"
+msgid "  <command>      execute command"
 msgstr ""
 
-msgid "  ARGUMENT       ARGUMENTs for COMMAND"
+msgid "  <arguments>    arguments for command"
 msgstr ""
 
 msgid "invalid option"
@@ -151,14 +151,14 @@ msgstr ""
 msgid "command does not exist"
 msgstr ""
 
-msgid "The following COMMANDs are available:"
+msgid "The following commands are available:"
 msgstr ""
 
 msgid "NUM  COMMAND"
 msgstr ""
 
 #, sh-format
-msgid "To execute a COMMAND: $DISPLAY_NAME COMMAND [ARGUMENT...]"
+msgid "To execute a command: $DISPLAY_NAME <command> [<arguments>]"
 msgstr ""
 
 msgid "Make backup"
@@ -166,12 +166,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target <directory>]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [OPTION...]"
+msgid "Usage: $DISPLAY_NAME [<options>]"
 msgstr ""
 
 msgid "Options:"
@@ -184,8 +184,8 @@ msgid "                 requires a desktop environment"
 msgstr ""
 
 msgid ""
-"  -t, --target DIRECTORY\n"
-"                 put backup in DIRECTORY"
+"  -t, --target <directory>\n"
+"                 place backup in specified directory"
 msgstr ""
 
 msgid "too many options"
@@ -217,8 +217,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Backup found with old name: 'backup-HOSTNAME-USER'. Please rename to "
-"'USER@HOST'."
+"Backup found with old name: 'backup-<hostname>-<username>'. Please rename to "
+"'<username>@<hostname>'."
 msgstr ""
 
 msgid ""
@@ -296,6 +296,9 @@ msgid "Generate .mo file"
 msgstr ""
 
 msgid "Fix all the messages above."
+msgstr ""
+
+msgid "Success: no issues found."
 msgstr ""
 
 msgid "Check scripts and website"
@@ -386,24 +389,24 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--addaft FAVORITE] [-b|--addbef FAVORITE]\n"
-"                [-d|--delete FAVORITE] [-l|--list] [-r|--reset]\n"
-"                $OPTIONS_USAGE"
+"Usage: $DISPLAY_NAME [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
+"                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]\n"
+"                  $OPTIONS_USAGE"
 msgstr ""
 
 msgid ""
-"  -a, --addaft FAVORITE\n"
-"                 add FAVORITE at the end"
+"  -a, --addaft <favorite>\n"
+"                 add favorite at the end"
 msgstr ""
 
 msgid ""
-"  -b, --addbef FAVORITE\n"
-"                 add FAVORITE at the beginning"
+"  -b, --addbef <favorite>\n"
+"                 add favorite at the beginning"
 msgstr ""
 
 msgid ""
-"  -d, --delete FAVORITE\n"
-"                 delete FAVORITE"
+"  -d, --delete <favorite>\n"
+"                 delete favorite"
 msgstr ""
 
 msgid "  -l, --list     show favorites"
@@ -436,13 +439,13 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
 "r|--remove]\n"
-"                  $OPTIONS_USAGE [--] [APP...]"
+"                  $OPTIONS_USAGE [--] [<app>...]"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [OPTION...] [APP...]"
+msgid "Usage: $DISPLAY_NAME [<options>] [<app>...]"
 msgstr ""
 
 msgid "  -a, --apps     show list of apps"
@@ -453,14 +456,14 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"  -f, --file FILE\n"
-"                 process FILE (default FILE is /usr/bin/$PROGRAM_NAME.sh)"
+"  -f, --file <file>\n"
+"                 process specified file (default /usr/bin/$PROGRAM_NAME.sh)"
 msgstr ""
 
 msgid "  -r, --remove   delete apps"
 msgstr ""
 
-msgid "  APP            install APPs"
+msgid "  <app>...       install specified apps"
 msgstr ""
 
 msgid ""
@@ -498,11 +501,11 @@ msgstr ""
 #, sh-format
 msgid ""
 "To view the contents of the apps install file execute: $DISPLAY_NAME --cat "
-"APP..."
+"<app>..."
 msgstr ""
 
 #, sh-format
-msgid "To install the apps execute: $DISPLAY_NAME APP..."
+msgid "To install the apps execute: $DISPLAY_NAME <app>..."
 msgstr ""
 
 #, sh-format
@@ -596,28 +599,31 @@ msgstr ""
 msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
 msgstr ""
 
-msgid "_username_|userid|_user_"
+msgid "USERNAME|USERID|USER"
 msgstr ""
 
-msgid "Additional _user_s can be added manually:"
+msgid "Additional users can be added manually:"
 msgstr ""
 
 msgid ""
 "1. Press the Super key[1], type 'user' and click behind Settings on Users.\n"
 "2. Click on Unlock and then Add User.\n"
-"3. Enter Name _user_ and Username _username_.\n"
+"3. Enter Name <user> and Username <username>.\n"
 "\n"
 "[1] The Super key is the Windows key, Command key (Apple), or Magnifier key "
 "(Chromebook)."
 msgstr ""
 
 msgid ""
-"# Standard:\n"
-"sudo useradd --create-home --comment '_user_' _username_\n"
+"# Standard user:\n"
+"sudo useradd --create-home --comment '<user>' <username>\n"
 "# Administrator:\n"
-"sudo usermod --append --groups adm,sudo _username_\n"
+"# Debian-based:\n"
+"sudo usermod --append --groups adm,sudo <username>\n"
+"# Red Hat-based:\n"
+"sudo usermod --append --groups wheel <username>\n"
 "# User sets password on first login:\n"
-"sudo passwd --delete --expire _username_"
+"sudo passwd --delete --expire <username>"
 msgstr ""
 
 msgid "Prepare installation"
@@ -735,13 +741,13 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source DIRECTORY]\n"
+"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source <directory>]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
 
 msgid ""
-"  -s, --source DIRECTORY\n"
-"                 use backup in DIRECTORY"
+"  -s, --source <directory>\n"
+"                 use backup in specified directory"
 msgstr ""
 
 #, sh-format
@@ -784,7 +790,7 @@ msgid ""
 "\n"
 "Some files may not be readable, or\n"
 "were any files added or removed while restoring the backup, or\n"
-"is there not enough space on $TARGET.\n"
+"is there not enough space on $HOME.\n"
 "\n"
 "Check the rsync messages (also in $ERROR_FILE):\n"
 "$RSYNC_MESSAGES\n"
@@ -804,15 +810,15 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file FILE] [-g|--gui] [-"
+"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
 "r|--reset]\n"
-"                $OPTIONS_USAGE [--] [APP...]"
+"                $OPTIONS_USAGE [--] [<app>...]"
 msgstr ""
 
 msgid "  -r, --reset    set apps on default values"
 msgstr ""
 
-msgid "  APP            set up APPs"
+msgid "  <app>...       set up specified apps"
 msgstr ""
 
 #, sh-format
@@ -822,11 +828,11 @@ msgstr ""
 #, sh-format
 msgid ""
 "To view the contents of the apps set up file execute: $DISPLAY_NAME --cat "
-"APP..."
+"<app>..."
 msgstr ""
 
 #, sh-format
-msgid "To set up the apps execute: $DISPLAY_NAME APP..."
+msgid "To set up the apps execute: $DISPLAY_NAME <app>..."
 msgstr ""
 
 #, sh-format

@@ -14,7 +14,7 @@ kz-backup \- Back-up maken
 .\"
 .SH SAMENVATTING
 .B kz backup
-[OPTIE...]
+[<opties>]
 .\"
 .\"
 .SH BESCHRIJVING
@@ -35,7 +35,7 @@ pc02.
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz backup\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
 .sp
-Met optie \fB-t\fR, \fB--target\fR \fIMAP\fR kan een andere locatie opgegeven
+Met optie \fB-t\fR, \fB--target\fR \fI<map>\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
 .sp
 Locaties die genegeerd worden door \fBkz backup\fR zijn de door Git beheerde
@@ -58,8 +58,8 @@ Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
 .TP
-\fB-t\fR, \fB--target \fIMAP\fR
-Plaats de back-up in \fIMAP\fR.
+\fB-t\fR, \fB--target \fI<map>\fR
+Plaats de back-up in de opgegeven map.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

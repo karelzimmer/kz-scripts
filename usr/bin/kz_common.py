@@ -1,5 +1,5 @@
 """
-This module provides global constants and functions.
+This module provides access to global constants and functions.
 """
 ###############################################################################
 # SPDX-FileComment: Common module for kz Python scripts

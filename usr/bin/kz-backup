@@ -26,7 +26,7 @@ declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
         USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
-[-t|--target DIRECTORY]
+[-t|--target <directory>]
                  \$OPTIONS_USAGE")"
 
 declare X_OPTIONS_HELP
@@ -35,11 +35,11 @@ mandatory for short options too.")
 
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
-$(gettext '  -t, --target DIRECTORY
-                 put backup in DIRECTORY')"
+$(gettext '  -t, --target <directory>
+                 place backup in specified directory')"
 
 declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -207,8 +207,9 @@ Disconnect media via Files.")"
     fi
 
     if [[ -e $TARGET_MEDIUM/backup-$HOSTNAME-$USER ]]; then
-        TEXT="$(gettext "Backup found with old name: 'backup-HOSTNAME-USER'. \
-Please rename to 'USER@HOST'.")"
+        TEXT="$(gettext "Backup found with old name: \
+'backup-<hostname>-<username>'. \
+Please rename to '<username>@<hostname>'.")"
         errmsg "$TEXT"
         exit $ERR
     fi
@@ -249,8 +250,8 @@ function backup_setting_readme() {
 These files are used by kz-restore and others.
 
 Further reading:")
-    man:kz-backup(1)
-    man:kz-restore(1)"
+    man kz-backup
+    man kz-restore"
     printf '%s\n' "$TEXT" > "$OUTPUT_FILE"
 }
 
@@ -289,7 +290,7 @@ function backup_setting_users() {
     local USER_NAME=''
 
     USERS_LIST=$(
-            gettext '_username_|userid|_user_'
+            gettext 'USERNAME|USERID|USER'
             printf '\n'
             grep --regexp='/home' /etc/passwd   |
             cut --delimiter=':' --fields=1,3,5  |
@@ -309,11 +310,11 @@ function backup_setting_users() {
     logmsg 'Save instructions for adding additional users...'
 
     if $DESKTOP_ENVIRONMENT; then
-        TEXT="$(gettext 'Additional _user_s can be added manually:')
+        TEXT="$(gettext 'Additional users can be added manually:')
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.
 2. Click on Unlock and then Add User.
-3. Enter Name _user_ and Username _username_.
+3. Enter Name <user> and Username <username>.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")
@@ -321,13 +322,16 @@ on Users.
 $USERS_LIST
 $GROUPS_LIST"
     else
-        TEXT="$(gettext 'Additional _user_s can be added manually:')
-$(gettext "# Standard:
-sudo useradd --create-home --comment '_user_' _username_
+        TEXT="$(gettext 'Additional users can be added manually:')
+$(gettext "# Standard user:
+sudo useradd --create-home --comment '<user>' <username>
 # Administrator:
-sudo usermod --append --groups adm,sudo _username_
+# Debian-based:
+sudo usermod --append --groups adm,sudo <username>
+# Red Hat-based:
+sudo usermod --append --groups wheel <username>
 # User sets password on first login:
-sudo passwd --delete --expire _username_")
+sudo passwd --delete --expire <username>")
 
 $USERS_LIST
 $GROUPS_LIST"

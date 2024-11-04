@@ -26,7 +26,7 @@ declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
         USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
-[-s|--source DIRECTORY]
+[-s|--source <directory>]
                   \$OPTIONS_USAGE")"
 
 declare X_OPTIONS_HELP
@@ -35,11 +35,11 @@ mandatory for short options too.")
 
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
-$(gettext '  -s, --source DIRECTORY
-                 use backup in DIRECTORY')"
+$(gettext '  -s, --source <directory>
+                 use backup in specified directory')"
 
 declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -316,7 +316,7 @@ function term_script() {
         TEXT=$(gettext 'The backup has been restored.')
     else
         USERS_LIST=$(
-                gettext '_username_|userid|_user_'
+                gettext 'USERNAME|USERID|USER'
                 printf '\n'
                 grep --regexp='/home' /etc/passwd   |
                 cut  --delimiter=':' --fields=1,3,5 |

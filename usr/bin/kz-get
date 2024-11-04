@@ -35,7 +35,7 @@ declare USAGE
         USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
 declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -120,9 +120,9 @@ function prepare_processing() {
 
     sudo true
 
-    # Progress indicator with growing [=>, [==>, etc. as long as the kz deb
+    # Progress indicator with growing [=>, [==>, etc. as long as the kz getkz
     # local file exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the kz deb local file and
+    # If something fails, kz_common.sh will remove the kz getkz local file and
     # other files upon exit.
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"; do

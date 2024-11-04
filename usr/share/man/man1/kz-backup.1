@@ -14,7 +14,7 @@ kz-backup \- Make backup
 .\"
 .SH SYNOPSIS
 .B kz backup
-[OPTION...]
+[<options>]
 .\"
 .\"
 .SH DESCRIPTION
@@ -34,7 +34,7 @@ for example /media/john/backupdisk/john@pc02 for John at pc02.
 With option \fB-g\fR, \fB--gui\fR, \fBkz backup\fR runs in graphical mode. A
 desktop environment is required.
 .sp
-With option \fB-t\fR, \fB--target\fR \fIDIRECTORY\fR another location can be
+With option \fB-t\fR, \fB--target\fR \fI<directory>\fR another location can be
 specified. For example /media/john/usbstick instead of /media/john/backupdisk.
 .sp
 Locations ignored by \fBkz backup\fR are directories managed by Git.
@@ -55,8 +55,8 @@ Mandatory arguments to long options are mandatory for short options too.
 Run in graphical mode (gui=graphical user interface). A desktop environment is
 required.
 .TP
-\fB-t\fR, \fB--target \fIDIRECTORY\fR
-Place the backup in the \fIDIRECTORY\fR.
+\fB-t\fR, \fB--target \fI<directory>\fR
+Place the backup in the specified directory.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.

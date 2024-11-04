@@ -26,8 +26,8 @@ declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare     USAGE
             USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
-[-c|--cat] [-f|--file FILE] [-g|--gui] [-r|--reset]
-                \$OPTIONS_USAGE [--] [APP...]")
+[-c|--cat] [-f|--file <file>] [-g|--gui] [-r|--reset]
+                \$OPTIONS_USAGE [--] [<app>...]")
 
 declare     X_OPTIONS_HELP
             X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options \
@@ -35,14 +35,15 @@ are mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
-$(eval_gettext "  -f, --file FILE
-                 process FILE (default FILE is /usr/bin/\$PROGRAM_NAME.sh)")
+$(eval_gettext "  -f, --file <file>
+                 process specified file (default /usr/bin/\$PROGRAM_NAME.sh)")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')"
 
 declare     HELP
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...] [APP...]")
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] \
+[<app>...]")
 
 $PROGRAM_DESC.
 
@@ -53,7 +54,7 @@ $(gettext "  --             signals the end of options and disables further \
 option processing")
 
 $(gettext 'Arguments:')
-$(gettext '  APP            set up APPs')"
+$(gettext '  <app>...       set up specified apps')"
 
 declare     X_OPTIONS_SHORT='acf:gr'
 declare     X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
@@ -224,8 +225,8 @@ $(gettext 'NUM  APP')\n"
         TEXT+=$APPS
         TEXT+="\n
 $(eval_gettext "To view the contents of the apps set up file execute: \
-\$DISPLAY_NAME --cat APP...")
-$(eval_gettext "To set up the apps execute: \$DISPLAY_NAME APP...")
+\$DISPLAY_NAME --cat <app>...")
+$(eval_gettext "To set up the apps execute: \$DISPLAY_NAME <app>...")
 $(eval_gettext "To view the contents of the default set up file execute: \
 \$DISPLAY_NAME --cat")"
     else
@@ -233,12 +234,7 @@ $(eval_gettext "To view the contents of the default set up file execute: \
 
 $USAGE"
     fi
-
-    if $OPTION_GUI; then
-        infomsg "$TEXT"
-    else
-        less --quit-if-one-screen <  <(printf '%b\n' "$TEXT")
-    fi
+    infomsg "$TEXT"
 }
 
 

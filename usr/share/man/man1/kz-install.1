@@ -14,7 +14,7 @@ kz-install \- Install apps
 .\"
 .SH SYNOPSIS
 .B kz install
-[OPTION...] [--] [\fIAPP\fR...]
+[<options>] [--] [\fI<app>\fR...]
 .\"
 .\"
 .SH DESCRIPTION
@@ -48,15 +48,16 @@ For instructions to add extra users see the \fBFILES\fR section below.
 .sp
 Option \fB-a\fR, \fB--apps\fR lists all apps available in the input file.
 .sp
-It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands are
-selected from the input file and are copied to the command file.
+Optionally, apps to be installed can be specified with argument \fI<app>\fR.
+Per specified app, the commands are selected from the input file and are copied
+to the command file.
 .sp
 The commands in the command file are executed.
 Upon successful completion the computer will restart.
 .sp
 Option \fB-c\fR, \fB--cat\fR lists the contents of the command file.
 .sp
-With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
+With option \fB-f\fR, \fB--file\fR \fI<file>\fR another input file can be
 specified.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz install\fR is run in graphical mode. A
@@ -227,21 +228,24 @@ The app can still be installed with the command 'kz install google-earth'.
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
 .TP
+\fI<app>\fR...
+Install the specified apps.
+.TP
 \fB-a\fR, \fB--apps\fR
 Show a list of apps to install.
 .TP
 \fB-c\fR, \fB--cat\fR
 Display the contents of the command file.
 .TP
-\fB-f\fR, \fB--file\fR \fIFILE\fR
-Specify input file \fIFILE\fR.
+\fB-f\fR, \fB--file\fR \fI<file>\fR
+Process the specified file.
 .TP
 \fB-g\fR, \fB--gui\fR
 Run in graphical mode (gui=graphical user interface). A desktop environment is
 required.
 .TP
 \fB-r\fR, \fB--remove\fR
-Remove apps.
+Remove the apps.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.

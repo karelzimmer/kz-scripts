@@ -28,7 +28,7 @@ declare USAGE
         USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
 declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -173,10 +173,10 @@ function pull_repos() {
 
     printf '%b\n' "$(gettext 'Status repos')..."
 
-    # Call gitstat.
-    logmsg 'Calling gitstat...'
-    "$BIN_REPO"/gitstat
-    logmsg 'Called gitstat.'
+    # Call gitstatus.
+    logmsg 'Calling gitstatus...'
+    "$BIN_REPO"/gitstatus
+    logmsg 'Called gitstatus.'
 }
 
 

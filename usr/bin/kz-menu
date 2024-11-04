@@ -33,7 +33,7 @@ declare     X_OPTIONS_HELP
 $(gettext '                 requires a desktop environment')"
 
 declare     HELP
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -441,7 +441,6 @@ function process_commands() {
                 printf '%s' "${ROWS[$ROW]}" | cut --delimiter='#' --fields=2
                 )
             TITLE="$DESCRIPTION ($COMMAND)"
-            $OPTION_GUI || infomsg "\n${BOLD}==== $TITLE ====${NORMAL}"
             execute_command
             $OPTION_GUI || wait_for_enter
         done

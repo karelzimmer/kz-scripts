@@ -14,21 +14,26 @@ kz \- Run command
 .\"
 .SH SYNOPSIS
 .B kz
-[OPTION...] \fICOMMAND\fR [\fIARGUMENT\fR...]
+[\fI<options>\fR] \fI<command>\fR [\fI<arguments>\fR]
 .\"
 .\"
 .SH DESCRIPTION
-\fBkz\fR runs \fICOMMAND\fR, installed by package kz, possibly with the
-specified \fIARGUMENT\fRs.
+\fBkz\fR runs \fI<command>\fR, installed by package kz, possibly with the
+specified \fI<arguments>\fR.
 .sp
 Package kz contains scripts for installing and managing Debian and Debian-based
 systems such as Ubuntu.
 .sp
-Use option \fB-l\fR, \fB--list\fR for a list of
-available \fICOMMAND\fRs.
+Use option \fB-l\fR, \fB--list\fR for a list of available commands.
 .\"
 .\"
 .SH OPTIONS
+.TP
+\fI<command>\fR
+Execute the specified command.
+.TP
+\fI<arguments>\fR
+Any arguments relating to the command.
 .TP
 \fB-l\fR, \fB--list\fR
 Show the available commands.
@@ -103,7 +108,7 @@ Update system.
 \fBgitpull\fR
 Git pull (or git clone) of all public remote repos.
 .TP
-\fBgitstat\fR
+\fBgitstatus\fR
 Git status of all local branches.
 .TP
 \fBmogen\fR
@@ -168,7 +173,7 @@ Examples are \fBkz build\fR and \fBkz deploy\fR.
 .sp
 \fBCI/CD Pipeline flow\fR
 .br
-Code -----> SCM ----->  Build -----> Test ----->  Check -----> Deploy
+Code -----> SCM ----->  Build -----> Test ----->  Check -----> Deploy--+
 .sp
 .sp
 vscode      GitHub      kz-build     CLI/TUI/GUI  kz-check     kz-deploy
@@ -188,7 +193,8 @@ software development, distribution, and management.
 This is the design phase, where project requirements are specified and the
 architecture of the solution is determined.
 .br
-I use Visual Studio Code and GitHub, and I program in Bash and Python.
+Package kz is developed with Visual Studio Code and GitHub, and programmed in
+Bash and Python.
 .sp
 \fB3.2 Day 1 Operations\fR
 .br
@@ -197,7 +203,7 @@ Includes development and deploy of software designed in the day 0 phase.
 This includes using \fBIaC\fR and \fBCI/CD Pipelines\fR, and executing Ansible
 Playbooks.
 .br
-Examples are Checklist installation, and \fBkz deb\fR and \fBkz menu\fR.
+Examples are Checklist installation, and \fBkz getkz\fR and \fBkz menu\fR.
 .sp
 \fB3.3 Day 2 Operations\fR
 .br

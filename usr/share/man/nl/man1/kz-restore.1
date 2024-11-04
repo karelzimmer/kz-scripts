@@ -14,7 +14,7 @@ kz-restore \- Back-up terugzetten
 .\"
 .SH SAMENVATTING
 .B kz restore
-[OPTIE...]
+[<opties>]
 .\"
 .\"
 .SH BESCHRIJVING
@@ -34,7 +34,7 @@ hieronder.
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz restore\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
 .sp
-Met optie \fB-s\fR, \fB--source\fR \fIMAP\fR kan een andere locatie opgegeven
+Met optie \fB-s\fR, \fB--source\fR \fI<map>\fR kan een andere locatie opgegeven
 worden. Bijvoorbeeld /media/jan/usbstick in plaats van /media/jan/backupdisk.
 .sp
 Voor het terugzetten van de back-up wordt rsync gebruikt.
@@ -55,8 +55,8 @@ Verplichte argumenten voor lange opties zijn ook verplicht voor korte opties.
 Draai in grafische modus (gui=graphical user interface; grafische
 gebruikersinterface). Een desktopomgeving is vereist.
 .TP
-\fB-s\fR, \fB--source \fIMAP\fR
-Gebruik back-upën in \fIMAP\fR.
+\fB-s\fR, \fB--source \fI<map>\fR
+Gebruik de back-up in de opgegeven map.
 .TP
 \fB-h\fR, \fB--help\fR
 Toon een korte omschrijving van de beschikbare opties.

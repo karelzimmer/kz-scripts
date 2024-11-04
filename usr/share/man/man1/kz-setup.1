@@ -14,7 +14,7 @@ kz-setup \- Set up apps
 .\"
 .SH SYNOPSIS
 .B kz setup
-[OPTION...] [--] [\fIAPP\fR...]
+[<options>] [--] [\fI<app>\fR...]
 .\"
 .\"
 .SH DESCRIPTION
@@ -24,7 +24,7 @@ In a desktop environment command \fBkz setup\fR can be executed by searching
 for \fBapps\fR, click on \fBSet up apps\fR.
 .sp
 Use (first) \fBkz install\fR to install apps and changes system settings,
-\fBkz setup\fR is a post installatie setup script.
+\fBkz setup\fR is a post install setup script.
 .sp
 \fBkz setup\fR processes an input file ("set up file") that contains
 commands for setting up apps and changing user settings.
@@ -44,16 +44,16 @@ For the format of the input file see the section \fBFILE FORMAT\fR below.
 .sp
 Option \fB-a\fR, \fB--apps\fR lists all apps available in the input file.
 .sp
-It is possible to specify \fIAPP\fRs. Per specified \fIAPP\fR, the commands are
-selected from the input file and are copied to the command
-file.
+Optionally, apps to be setup can be specified with argument \fI<app>\fR.
+Per specified app, the commands are selected from the input file and are copied
+to the command file.
 .sp
 The commands in the command file are executed.
 Upon successful completion the user will be logged out.
 .sp
 Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 .sp
-With option \fB-f\fR, \fB--file\fR \fIFILE\fR another input file can be
+With option \fB-f\fR, \fB--file\fR \fI<file>\fR another input file can be
 specified.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode. A
@@ -234,6 +234,10 @@ The app can still be set up with the command 'kz setup google-earth'.
 .\"
 .sp
 .SH OPTIONS
+Mandatory arguments to long options are mandatory for short options too.
+.TP
+\fI<app>\fR...
+Set up the specified apps.
 .TP
 \fB-a\fR, \fB--apps\fR
 Show a list of apps to set up.
@@ -241,15 +245,15 @@ Show a list of apps to set up.
 \fB-c\fR, \fB--cat\fR
 Display the contents of the command file.
 .TP
-\fB-f\fR, \fB--file\fR \fIFILE\fR
-Specify input file \fIFILE\fR.
+\fB-f\fR, \fB--file\fR \fI<file>\fR
+Process the specified file.
 .TP
 \fB-g\fR, \fB--gui\fR
 Run in graphical mode (gui=graphical user interface). A desktop environment is
 required.
 .TP
 \fB-r\fR, \fB--reset\fR
-Reset apps.
+Reset the apps.
 .TP
 \fB-h\fR, \fB--help\fR
 Show a short description of the available options.

@@ -14,7 +14,7 @@ kz-desktop \- Change desktop environment
 .\"
 .SH SYNOPSIS
 .B kz desktop
-[OPTION...]
+[<options>]
 .\"
 .\"
 .SH DESCRIPTION
@@ -29,23 +29,23 @@ kz-desktop \- Change desktop environment
 - can add or delete an application icon (favorite).
 .RE
 .sp
-Option \fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR adds application icon
-(favorite) \fIFAVORITE\fR to the end of favorites bar (dash, dock).
+Option \fB-a\fR, \fB--addaft\fR \fI<favorite>\fR adds the specified application
+icon (favorite) to the end of the favorites bar (dash, dock).
 .sp
-Option \fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR adds application icon
-(favorite) \fIFAVORITE\fR to the beginning of favorites bar (dash, dock).
+Option \fB-b\fR, \fB--addbef\fR \fI<favorite>\fR adds the specified application
+icon (favorite) to the the beginning of the favorites bar (dash, dock).
 .sp
-Option \fB-d\fR, \fB--delete\fR \fIFAVORITE\fR removes application icon
-(favorite) \fIFAVORITE\fR from favorites bar (dash, dock).
+Option \fB-d\fR, \fB--delete\fR \fI<favorite>\fR removes the specified
+application icon (favorite) from favorites bar (dash, dock).
 .sp
-If an application icon (favorite) of \fIFAVORITE\fR already exists, it will not
-be added again.
+If an application icon (favorite) with the specified name already exists, it
+will not be added again.
 .br
 If an application icon (favorite) has been added at the top to be placed at the
 bottom, the existing one must first be removed with option \fB-d\fR,
 \fB--delete\fR.
 .br
-File \fIFAVORITE\fR.desktop must exist in one of the application directories
+File \fI<favorite>\fR.desktop must exist in one of the application directories
 such as /usr/share/applications or /var/lib/snapd/desktop/applications.
 .sp
 With option \fB-l\fR, \fB--list\fR the current favorites are displayed.
@@ -75,17 +75,17 @@ Command \fBkz desktop\fR can only be run in a desktop environment.
 .SH OPTIONS
 Mandatory arguments to long options are mandatory for short options too.
 .TP
-\fB-a\fR, \fB--addaft\fR \fIFAVORITE\fR
-Add application icon (favorite) \fIFAVORITE\fR to the back of the favorites bar
+\fB-a\fR, \fB--addaft\fR \fI<favorite>\fR
+Add application icon (favorite) \fI<favorite>\fR to the back of the favorites
+bar (dash, dock).
+.TP
+\fB-b\fR, \fB--addbef\fR \fI<favorite>\fR
+Add application icon (favorite) \fI<favorite>\fR in front of the favorites bar
 (dash, dock).
 .TP
-\fB-b\fR, \fB--addbef\fR \fIFAVORITE\fR
-Add application icon (favorite) \fIFAVORITE\fR in front of the favorites bar
+\fB-d\fR, \fB--delete\fR \fI<favorite>\fR
+Remove application icon (favorite) \fI<favorite>\fR from the favorites bar
 (dash, dock).
-.TP
-\fB-d\fR, \fB--delete\fR \fIFAVORITE\fR
-Remove application icon (favorite) \fIFAVORITE\fR from the favorites bar (dash,
-dock).
 .TP
 \fB-l\fR, \fB--list\fR
 Display the current favorites and app folders.

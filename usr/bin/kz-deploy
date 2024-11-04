@@ -28,7 +28,7 @@ declare USAGE
         USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
 
 declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [OPTION...]")
+        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -244,15 +244,15 @@ function install_package() {
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
 
-    logmsg 'Calling kz deb (via wget and bash)...'
-    # Call kz-deb (via wget and bash as a regular user would do).
+    logmsg 'Calling kz getkz (via wget and bash)...'
+    # Call kz-getkz via wget and bash as a regular user would do.
     if ! wget --output-document=- karelzimmer.nl/getkz 2> >($LOGCMD) | bash
     then
         TEXT=$(gettext 'Install package kz failed.')
         errmsg "$TEXT"
         exit $ERR
     fi
-    logmsg 'Called kz deb (via wget and bash).'
+    logmsg 'Called kz getkz (via wget and bash).'
 }
 
 
