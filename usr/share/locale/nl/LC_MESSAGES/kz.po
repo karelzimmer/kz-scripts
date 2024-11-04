@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-31 15:20+0100\n"
+"POT-Creation-Date: 2024-11-04 18:22+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -566,6 +566,16 @@ msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
 #, sh-format
+msgid "To install the apps execute: $DISPLAY_NAME <app>..."
+msgstr "Om de apps te installeren voer uit: $DISPLAY_NAME <app>..."
+
+#, sh-format
+msgid "To view the contents of the install file execute: $DISPLAY_NAME --cat"
+msgstr ""
+"Om de inhoud van het installatiebestand te bekijken voer uit: $DISPLAY_NAME "
+"--cat"
+
+#, sh-format
 msgid ""
 "To view the contents of the apps install file execute: $DISPLAY_NAME --cat "
 "<app>..."
@@ -573,16 +583,12 @@ msgstr ""
 "Om de inhoud van het installatiebestand voor apps te bekijken voer uit: "
 "$DISPLAY_NAME --cat <app>..."
 
-#, sh-format
-msgid "To install the apps execute: $DISPLAY_NAME <app>..."
-msgstr "Om de apps te installeren voer uit: $DISPLAY_NAME <app>..."
-
-#, sh-format
 msgid ""
-"To view the contents of the default install file execute: $DISPLAY_NAME --cat"
+"To view the contents of the default install file execute: cat /usr/bin/kz-"
+"install.sh"
 msgstr ""
-"Om de inhoud van het standaard installatiebestand te bekijken voer uit: "
-"$DISPLAY_NAME --cat"
+"Om de inhoud van het standaard installatiebestand te bekijken voer uit: cat /"
+"usr/bin/kz-install.sh"
 
 msgid "install"
 msgstr "installeren"
@@ -969,8 +975,8 @@ msgid ""
 "r|--reset]\n"
 "                $OPTIONS_USAGE [--] [<app>...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] "
-"[-g|--gui] [-r|--reset]\n"
+"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] [-g|--"
+"gui] [-r|--reset]\n"
 "                  $OPTIONS_USAGE [--] [<app>...]"
 
 msgid "  -r, --reset    set apps on default values"
@@ -984,6 +990,15 @@ msgid "No set up file found, looked for '$INPUT_FILE'."
 msgstr "Geen instelbestand gevonden, zocht '$INPUT_FILE'."
 
 #, sh-format
+msgid "To set up the apps execute: $DISPLAY_NAME <app>..."
+msgstr "Om de apps in te stellen voer uit: $DISPLAY_NAME <app>..."
+
+#, sh-format
+msgid "To view the contents of the set up file execute: $DISPLAY_NAME --cat"
+msgstr ""
+"Om de inhoud van het instelbestand te bekijken voer uit: $DISPLAY_NAME --cat"
+
+#, sh-format
 msgid ""
 "To view the contents of the apps set up file execute: $DISPLAY_NAME --cat "
 "<app>..."
@@ -992,15 +1007,12 @@ msgstr ""
 "$DISPLAY_NAME --cat <app>..."
 
 #, sh-format
-msgid "To set up the apps execute: $DISPLAY_NAME <app>..."
-msgstr "Om de apps in te stellen voer uit: $DISPLAY_NAME <app>..."
-
-#, sh-format
 msgid ""
-"To view the contents of the default set up file execute: $DISPLAY_NAME --cat"
+"To view the contents of the default set up file execute: cat /usr/bin/kz-"
+"setup.sh"
 msgstr ""
-"Om de inhoud van het standaard instelbestand te bekijken voer uit: "
-"$DISPLAY_NAME --cat"
+"Om de inhoud van het standaard instelbestand te bekijken voer uit: cat /usr/"
+"bin/kz-setup.sh"
 
 msgid "set up"
 msgstr "instellen"

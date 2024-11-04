@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-04 10:03+0100\n"
+"POT-Creation-Date: 2024-11-04 18:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -499,18 +499,22 @@ msgid "  0  No apps found."
 msgstr ""
 
 #, sh-format
+msgid "To install the apps execute: $DISPLAY_NAME <app>..."
+msgstr ""
+
+#, sh-format
+msgid "To view the contents of the install file execute: $DISPLAY_NAME --cat"
+msgstr ""
+
+#, sh-format
 msgid ""
 "To view the contents of the apps install file execute: $DISPLAY_NAME --cat "
 "<app>..."
 msgstr ""
 
-#, sh-format
-msgid "To install the apps execute: $DISPLAY_NAME <app>..."
-msgstr ""
-
-#, sh-format
 msgid ""
-"To view the contents of the default install file execute: $DISPLAY_NAME --cat"
+"To view the contents of the default install file execute: cat /usr/bin/kz-"
+"install.sh"
 msgstr ""
 
 msgid "install"
@@ -826,18 +830,23 @@ msgid "No set up file found, looked for '$INPUT_FILE'."
 msgstr ""
 
 #, sh-format
+msgid "To set up the apps execute: $DISPLAY_NAME <app>..."
+msgstr ""
+
+#, sh-format
+msgid "To view the contents of the set up file execute: $DISPLAY_NAME --cat"
+msgstr ""
+
+#, sh-format
 msgid ""
 "To view the contents of the apps set up file execute: $DISPLAY_NAME --cat "
 "<app>..."
 msgstr ""
 
 #, sh-format
-msgid "To set up the apps execute: $DISPLAY_NAME <app>..."
-msgstr ""
-
-#, sh-format
 msgid ""
-"To view the contents of the default set up file execute: $DISPLAY_NAME --cat"
+"To view the contents of the default set up file execute: cat /usr/bin/kz-"
+"setup.sh"
 msgstr ""
 
 msgid "set up"
