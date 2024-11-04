@@ -52,6 +52,12 @@ if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application
 # Reset gdebi for *
 # There is no command available to reset gdebi.
 
+# Setup git for *
+git config --global alias.logg 'log --decorate --graph --oneline --all'
+
+# Reset git for *
+git config --global --unset alias.logg
+
 # Setup gnome for *
 if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.calendar show-weekdate true; fi
 if $DESKTOP_ENVIRONMENT; then gsettings set org.gnome.desktop.interface clock-show-date true; fi
