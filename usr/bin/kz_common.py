@@ -55,19 +55,6 @@ if subprocess.run('[[ -n $(type -t '
 else:
     DESKTOP_ENVIRONMENT = False
 
-# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
-                  shell=True, executable='bash').returncode == OK:
-    DEBIAN: bool = True
-else:
-    DEBIAN = False
-
-if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
-                  shell=True, executable='bash').returncode == OK:
-    UBUNTU: bool = True
-else:
-    UBUNTU = False
-
 if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
                   shell=True, executable='bash').returncode == OK:
     APT: bool = True

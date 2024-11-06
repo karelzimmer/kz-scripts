@@ -9,16 +9,16 @@
 # To manually running a command, first run the following: source kz_common.sh
 
 # Install disabled-apport on *
-# Disable the program crash report.
-if $UBUNTU; then sudo systemctl stop apport.service; fi
-if $UBUNTU; then sudo systemctl disable apport.service; fi
-if $UBUNTU; then sudo rm --force --verbose /var/crash/*; fi
-if $UBUNTU; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+# Only Ubuntu disables the program's crash report ==> ' || true'.
+sudo systemctl stop apport.service || true
+sudo systemctl disable apport.service || true
+sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport || true
+sudo rm --force --verbose /var/crash/*
 
 # Remove disabled-apport from *
-# Enable the program crash report.
-if $UBUNTU; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
-if $UBUNTU; then sudo systemctl enable --now apport.service; fi
+# Only Ubuntu enables the program's crash report ==> ' || true'.
+sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport || true
+sudo systemctl enable --now apport.service || true
 
 # Install update-system on *
 sudo kz-update
@@ -90,10 +90,10 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes cockpit 
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes cockpit; fi
 
 # Install cups on *
-if $DEBIAN; then sudo apt-get install --assume-yes cups; fi
+if $APT; then sudo apt-get install --assume-yes cups; fi
 
 # Remove cups from *
-if $DEBIAN; then sudo apt-get remove --assume-yes cups; fi
+if $APT; then sudo apt-get remove --assume-yes cups; fi
 
 # Install cups-backend-canon on pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
@@ -402,10 +402,10 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gnome-su
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gnome-sushi; fi
 
 # Install tab-completion on *
-if $DEBIAN; then sudo apt-get install --assume-yes bash-completion; fi
+if $APT; then sudo apt-get install --assume-yes bash-completion; fi
 
 # Remove tab-completion from *
-if $DEBIAN; then sudo apt-get remove --assume-yes bash-completion; fi
+if $APT; then sudo apt-get remove --assume-yes bash-completion; fi
 
 # Install teamviewer on *
 if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
@@ -425,14 +425,6 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
-
-# Install thunderbird on *
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes thunderbird-l10n-nl; fi
-if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get install --assume-yes thunderbird-locale-nl; fi
-
-# Remove thunderbird from *
-if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes thunderbird-l10n-nl; fi
-if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get remove --assume-yes thunderbird-locale-nl; fi
 
 # Install tree on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes tree; fi

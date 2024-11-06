@@ -61,23 +61,6 @@ else
     DESKTOP_ENVIRONMENT=false
 fi
 
-# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-declare DEBIAN
-# shellcheck disable=SC2034
-if source /etc/os-release; [[ $ID = 'debian' ]]; then
-    DEBIAN=true
-else
-    DEBIAN=false
-fi
-
-declare UBUNTU
-# shellcheck disable=SC2034
-if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then
-    UBUNTU=true
-else
-    UBUNTU=false
-fi
-
 declare APT
 # shellcheck disable=SC2034
 if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
