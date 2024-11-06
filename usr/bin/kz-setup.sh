@@ -52,10 +52,10 @@ if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application
 # Reset gdebi for *
 # There is no command available to reset gdebi.
 
-# Setup git for *
+# Setup git for karel@pc06 karel@pc07
 git config --global alias.logg 'log --decorate --graph --oneline --all'
 
-# Reset git for *
+# Reset git for karel@pc06 karel@pc07
 git config --global --unset alias.logg
 
 # Setup gnome for *
