@@ -10,15 +10,15 @@
 
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
-if [[ -d /etc/apport ]]; then sudo systemctl stop apport.service; fi
-if [[ -d /etc/apport ]]; then sudo systemctl disable apport.service; fi
-if [[ -d /etc/apport ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
-if [[ -d /etc/apport ]]; then sudo rm --force --verbose /var/crash/*; fi
+if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo systemctl stop apport.service; fi
+if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo systemctl disable apport.service; fi
+if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
 
 # Remove disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
-if [[ -d /etc/apport ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
-if [[ -d /etc/apport ]]; then sudo systemctl enable --now apport.service; fi
+if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
+if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
 
 # Install update-system on *
 sudo kz-update
