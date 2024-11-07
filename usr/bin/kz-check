@@ -445,11 +445,8 @@ function term_script() {
         TEXT=$(gettext 'Fix all the messages above.')
         errmsg "$TEXT"
         exit $ERR
-    else
-        TEXT=$GREEN$(gettext 'Success: no issues found.')$NORMAL
-        infomsg "$TEXT"
-        exit $OK
     fi
+    exit $OK
 }
 
 

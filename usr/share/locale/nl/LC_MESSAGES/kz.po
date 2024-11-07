@@ -338,9 +338,6 @@ msgstr "Genereer .mo bestand"
 msgid "Fix all the messages above."
 msgstr "Herstel alle meldingen hierboven."
 
-msgid "Success: no issues found."
-msgstr "Succesvol: geen problemen gevonden."
-
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 

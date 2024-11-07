@@ -298,9 +298,6 @@ msgstr ""
 msgid "Fix all the messages above."
 msgstr ""
 
-msgid "Success: no issues found."
-msgstr ""
-
 msgid "Check scripts and website"
 msgstr ""
 
