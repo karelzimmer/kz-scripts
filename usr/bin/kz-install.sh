@@ -9,12 +9,14 @@
 # To manually running a command, first run the following: source kz_common.sh
 
 # Install disabled-apport on *
+# Disable Ubuntu's program crash report.
 if [[ -d /etc/apport ]]; then sudo systemctl stop apport.service; fi
 if [[ -d /etc/apport ]]; then sudo systemctl disable apport.service; fi
 if [[ -d /etc/apport ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
 if [[ -d /etc/apport ]]; then sudo rm --force --verbose /var/crash/*; fi
 
 # Remove disabled-apport from *
+# Enable Ubuntu's program crash report.
 if [[ -d /etc/apport ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
 if [[ -d /etc/apport ]]; then sudo systemctl enable --now apport.service; fi
 
