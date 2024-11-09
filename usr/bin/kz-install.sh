@@ -10,15 +10,15 @@
 
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
-if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo systemctl stop apport.service; fi
-if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo systemctl disable apport.service; fi
-if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
-if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
+if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
+if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl disable apport.service; fi
+if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
 
 # Remove disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
-if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
-if source /etc/os-release; [[ $ID = 'ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
+if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
+if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
 
 # Install update-system on *
 sudo kz-update
@@ -425,6 +425,14 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+
+# Install thunderbird on *
+if $DESKTOP_ENVIRONMENT && [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get install --assume-yes thunderbird-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo apt-get install --assume-yes thunderbird-locale-nl; fi
+
+# Remove thunderbird from *
+if $DESKTOP_ENVIRONMENT && [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get remove --assume-yes thunderbird-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo apt-get remove --assume-yes thunderbird-locale-nl; fi
 
 # Install tree on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes tree; fi

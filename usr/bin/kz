@@ -22,7 +22,6 @@ source kz_common.sh
 declare PROGRAM_NAME='kz'
 declare PROGRAM_DESC
         PROGRAM_DESC=$(gettext 'Run command')
-
 declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
 declare USAGE
