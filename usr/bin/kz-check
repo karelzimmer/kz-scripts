@@ -442,7 +442,6 @@ function term_script() {
     if $ERR_FLAG; then
         TEXT=$(gettext 'Fix all the messages above.')
         errmsg "$TEXT"
-        exit $ERR
     fi
     exit $OK
 }
