@@ -130,7 +130,7 @@ function become_root_check() {
 # the next check if so.
 function check_apt_package_manager() {
     local TEXT=''
-    local   -i  CHECK_WAIT=10
+    local -i CHECK_WAIT=10
 
     if ! $APT; then
         return $OK
@@ -312,15 +312,15 @@ $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 # This function controls the termination.
 function term() {
     local SIGNAL=$1
-    local   -i  LINENO=$2
+    local -i LINENO=$2
     local FUNCTION=$3
     local COMMAND=$4
-    local   -i  RC=$5
+    local -i RC=$5
 
     local RC_DESC=''
     local STATUS=$RC/error
     local TEXT=''
-    local   -i  RC_DESC_SIGNALNO=0
+    local -i RC_DESC_SIGNALNO=0
 
     case $RC in
         0 )

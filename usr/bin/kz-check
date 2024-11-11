@@ -349,8 +349,8 @@ function check_mypy() {
 function check_record_length() {
     local PYTHON_SCRIPT='#!''/usr/bin/python3'
     local TEXT=''
-    local   -i  MAX_LINE_LENGTH_FOUND=0
-    local   -i  MAX_LINE_LENGTH=79
+    local -i MAX_LINE_LENGTH_FOUND=0
+    local -i MAX_LINE_LENGTH=79
 
     # Python is checked by pycodestyle.
     if grep --quiet --line-regexp --regexp="$PYTHON_SCRIPT" "$SCRIPT"; then

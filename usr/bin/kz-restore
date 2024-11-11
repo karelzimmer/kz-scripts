@@ -214,7 +214,7 @@ function restore_backup() {
     local RSYNC_MESSAGES=''
     local TEXT=''
     local TITLE=''
-    local   -i  RESTORE_RC=0
+    local -i RESTORE_RC=0
 
     ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
 
@@ -302,7 +302,7 @@ function restore_setting_desktop() {
 # This function controls the termination of the script.
 function term_script() {
     local USERS_LIST=''
-    local   -i  NUM_USERS=0
+    local -i NUM_USERS=0
     local -i RC=$OK
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)

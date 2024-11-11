@@ -428,7 +428,7 @@ function create_backup() {
     local RSYNC_MESSAGES=''
     local TEXT=''
     local TITLE=''
-    local   -i  BACKUP_RC=0
+    local -i BACKUP_RC=0
 
     ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
     EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
@@ -535,7 +535,7 @@ use app 'Terminal', type 'kz backup'.")"
 # This function controls the termination of the script.
 function term_script() {
     local TEXT=''
-    local   -i  NUM_USERS=0
+    local -i NUM_USERS=0
     local -i RC=$OK
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)

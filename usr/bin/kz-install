@@ -41,8 +41,7 @@ $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --remove   delete apps')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] \
-[<app>...]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] [<app>...]")
 
 $PROGRAM_DESC.
 
@@ -351,7 +350,7 @@ function process_option_cat() {
 function install_apps() {
     local TEXT=''
     local TITLE=''
-    local   -i  APP_TOT_NUM=0
+    local -i APP_TOT_NUM=0
 
     APP_TOT_NUM=$(
         grep    --regexp="#.*$INSTALL.*$ON" \
@@ -391,8 +390,8 @@ function process_command_file() {
     local APP_NAME=''
     local COMMAND_RECORD=''
     local TEXT=''
-    local   -i  APP_SEQ_NUM=0
-    local   -i  CMD_SEQ_NUM=0
+    local -i APP_SEQ_NUM=0
+    local -i CMD_SEQ_NUM=0
 
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')
@@ -438,8 +437,8 @@ function process_command_file() {
 function execute_command() {
     local CMD=${1:-unknown}
     local CMD_DIS=''
-    local   -i  CMD_DIS_LEN=0
-    local   -i  CMD_DIS_MAX=0
+    local -i CMD_DIS_LEN=0
+    local -i CMD_DIS_MAX=0
 
     (( ++CMD_SEQ_NUM ))
 
