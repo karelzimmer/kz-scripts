@@ -81,8 +81,9 @@ fi
 # This function checks whether the script is started as user root and restarts
 # the script as user root if not.
 function become_root() {
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     # pkexec needs fully qualified path to the program to be executed.
-    local PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
+    local PKEXEC_PROGRAM=/usr/bin/$PROGRAM_ID
     local TEXT=''
     local -i RC=$OK
 
@@ -100,9 +101,9 @@ function become_root() {
             pkexec "$PKEXEC_PROGRAM" "${COMMANDLINE_ARGS[@]}" || RC=$?
             exit $RC
         else
-            TEXT="Restart (exec sudo $PROGRAM_NAME ${COMMANDLINE_ARGS[*]})..."
+            TEXT="Restart (exec sudo $PROGRAM_ID ${COMMANDLINE_ARGS[*]})..."
             logmsg "$TEXT"
-            exec sudo "$PROGRAM_NAME" "${COMMANDLINE_ARGS[@]}"
+            exec sudo "$PROGRAM_ID" "${COMMANDLINE_ARGS[@]}"
         fi
 
     fi
@@ -158,7 +159,7 @@ function errmsg() {
     local TITLE=''
 
     if $OPTION_GUI; then
-        TITLE="$PROGRAM_DESC $(gettext 'error message') ($DISPLAY_NAME)"
+        TITLE="$PROGRAM_DESC $(gettext 'error message') ($PROGRAM_NAME)"
         zenity  --error                 \
                 --width     600         \
                 --height    100         \
@@ -175,7 +176,7 @@ function infomsg() {
     local TITLE=''
 
     if $OPTION_GUI; then
-        TITLE="$PROGRAM_DESC $(gettext 'information') ($DISPLAY_NAME)"
+        TITLE="$PROGRAM_DESC $(gettext 'information') ($PROGRAM_NAME)"
         zenity  --info                  \
                 --width     600         \
                 --height    100         \
@@ -189,10 +190,11 @@ function infomsg() {
 
 # This function performs initial actions such as set traps (script-hardening).
 function init_script() {
-    local TEXT="==== START logs for script $PROGRAM_NAME ====
-Started ($PROGRAM_NAME $* as $USER)."
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
+    local TEXT="==== START logs for script $PROGRAM_ID ====
+Started (${PROGRAM_NAME/kz /kz-} $* as $USER)."
     local -g  ERREXIT=true
-    local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_ID"
     local -g  OPTION_GUI=false
     local -g  RC=$OK
     local -ga COMMANDLINE_ARGS=("$@")
@@ -253,18 +255,19 @@ function process_options() {
 
 # This function shows the available help.
 function process_option_help() {
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT=''
     local YELP_MAN_URL=''
 
     if $DESKTOP_ENVIRONMENT; then
         YELP_MAN_URL="$(gettext ', or see the ')"
-        YELP_MAN_URL+="\033]8;;man:$PROGRAM_NAME(1)\033\\$DISPLAY_NAME(1) "
+        YELP_MAN_URL+="\033]8;;man:$PROGRAM_ID(1)\033\\$PROGRAM_ID(1) "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
     fi
 
-    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --manual' or 'man \$DISPLAY_NAM\
-E'\$YELP_MAN_URL for more information.")"
-    printf '%b\n\n%b\n' "$HELP" "$TEXT"
+    TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --manual' or 'man \
+\$PROGRAM_NAME'\$YELP_MAN_URL for more information.")"
+    infomsg "$HELP\n\n$TEXT"
 }
 
 
@@ -282,8 +285,8 @@ function process_option_manual() {
 function process_option_usage() {
     local TEXT=''
 
-    TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --help' for more information.")"
-    printf '%b\n\n%b\n' "$USAGE" "$TEXT"
+    TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --help' for more information.")"
+    infomsg "$USAGE\n\n$TEXT"
 }
 
 
@@ -317,10 +320,11 @@ function term() {
     local COMMAND=$4
     local -i RC=$5
 
+    local -i RC_DESC_SIGNALNO=0
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local RC_DESC=''
     local STATUS=$RC/error
     local TEXT=''
-    local -i RC_DESC_SIGNALNO=0
 
     case $RC in
         0 )
@@ -393,7 +397,7 @@ function term() {
     case $SIGNAL in
         err )
             if $ERREXIT; then
-                TEXT=$(eval_gettext "Program \$PROGRAM_NAME encountered an \
+                TEXT=$(eval_gettext "Program \$PROGRAM_ID encountered an \
 error.")
                 errmsg "$TEXT"
             fi
@@ -419,7 +423,7 @@ error.")
             exit "$RC"
             ;;
         * )
-            TEXT=$(eval_gettext "Program \$PROGRAM_NAME has been interrupted.")
+            TEXT=$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")
             errmsg "$TEXT"
 
             exit "$RC"

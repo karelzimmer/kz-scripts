@@ -19,15 +19,14 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-deploy'
+readonly PROGRAM_NAME='kz deploy'
 PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME \$OPTIONS_USAGE")
 readonly USAGE
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -49,7 +48,7 @@ function check_input() {
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --name          "$PROGRAM_NAME"     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -80,14 +79,14 @@ function process_x_options() {
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
 
     if ! $DESKTOP_ENVIRONMENT; then
-        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+        TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR

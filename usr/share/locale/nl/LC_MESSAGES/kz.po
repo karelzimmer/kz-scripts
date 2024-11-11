@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-04 18:22+0100\n"
+"POT-Creation-Date: 2024-11-11 16:10+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -42,12 +42,12 @@ msgid "Already performed by the administrator."
 msgstr "Reeds uitgevoerd door de beheerder."
 
 #, sh-format
-msgid "Program $PROGRAM_NAME encountered an error."
-msgstr "In programma $PROGRAM_NAME is een fout opgetreden."
+msgid "Program $PROGRAM_ID encountered an error."
+msgstr "In programma $PROGRAM_ID is een fout opgetreden."
 
 #, sh-format
-msgid "Program $PROGRAM_NAME has been interrupted."
-msgstr "Programma $PROGRAM_NAME is onderbroken."
+msgid "Program $PROGRAM_ID has been interrupted."
+msgstr "Programma $PROGRAM_ID is onderbroken."
 
 msgid ""
 "If the package manager gives apt errors, launch a Terminal window and "
@@ -64,15 +64,15 @@ msgstr "man-pagina"
 
 #, sh-format
 msgid ""
-"Type '$DISPLAY_NAME --manual' or 'man $DISPLAY_NAME'$YELP_MAN_URL for more "
+"Type '$PROGRAM_NAME --manual' or 'man $PROGRAM_NAME'$YELP_MAN_URL for more "
 "information."
 msgstr ""
-"Typ '$DISPLAY_NAME --manual' of 'man $DISPLAY_NAME'$YELP_MAN_URL voor meer "
+"Typ '$PROGRAM_NAME --manual' of 'man $PROGRAM_NAME'$YELP_MAN_URL voor meer "
 "informatie."
 
 #, sh-format
-msgid "Type '$DISPLAY_NAME --help' for more information."
-msgstr "Typ '$DISPLAY_NAME --help' voor meer informatie."
+msgid "Type '$PROGRAM_NAME --help' for more information."
+msgstr "Typ '$PROGRAM_NAME --help' voor meer informatie."
 
 msgid "Written by Karel Zimmer <info@karelzimmer.nl>."
 msgstr "Geschreven door Karel Zimmer <info@karelzimmer.nl>."
@@ -130,15 +130,15 @@ msgstr "Opdracht uitvoeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Usage: $PROGRAM_NAME [-l|--list] $OPTIONS_USAGE\n"
 "          <command> [<arguments>]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Gebruik: $PROGRAM_NAME [-l|--list] $OPTIONS_USAGE\n"
 "            <opdracht> [<argumenten>]"
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [<options>] <command> [<arguments>]"
-msgstr "Gebruik: $DISPLAY_NAME [<opties>] <opdracht> [<argumenten>]"
+msgid "Usage: $PROGRAM_NAME [<options>] <command> [<arguments>]"
+msgstr "Gebruik: $PROGRAM_NAME [<opties>] <opdracht> [<argumenten>]"
 
 msgid "  -l, --list     show available commands"
 msgstr "  -l, --list     toon beschikbare opdrachten"
@@ -165,23 +165,23 @@ msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
 #, sh-format
-msgid "To execute a command: $DISPLAY_NAME <command> [<arguments>]"
-msgstr "Om een opdracht uit te voeren: $DISPLAY_NAME <opdracht> [<argumenten>]"
+msgid "To execute a command: $PROGRAM_NAME <command> [<arguments>]"
+msgstr "Om een opdracht uit te voeren: $PROGRAM_NAME <opdracht> [<argumenten>]"
 
 msgid "Make backup"
 msgstr "Back-up maken"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-t|--target <directory>]\n"
+"Usage: $PROGRAM_NAME [-g|--gui] [-t|--target <directory>]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-g|--gui] [-t|--target <map>]\n"
+"Gebruik: $PROGRAM_NAME [-g|--gui] [-t|--target <map>]\n"
 "                   $OPTIONS_USAGE"
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [<options>]"
-msgstr "Gebruik: $DISPLAY_NAME [<opties>]"
+msgid "Usage: $PROGRAM_NAME [<options>]"
+msgstr "Gebruik: $PROGRAM_NAME [<opties>]"
 
 msgid "Options:"
 msgstr "Opties:"
@@ -326,8 +326,8 @@ msgid "Build website including kz packages"
 msgstr "Website bouwen inclusief kz pakketten"
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME $OPTIONS_USAGE"
-msgstr "Gebruik: $DISPLAY_NAME $OPTIONS_USAGE"
+msgid "Usage: $PROGRAM_NAME $OPTIONS_USAGE"
+msgstr "Gebruik: $PROGRAM_NAME $OPTIONS_USAGE"
 
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
@@ -431,11 +431,11 @@ msgstr "Desktopomgeving wijzigen"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
+"Usage: $PROGRAM_NAME [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
 "                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--addaft <favoriet>] [-b|--addbef <favoriet>]\n"
+"Gebruik: $PROGRAM_NAME [-a|--addaft <favoriet>] [-b|--addbef <favoriet>]\n"
 "                    [-d|--delete <favoriet>] [-l|--list] [-r|--reset]\n"
 "                    $OPTIONS_USAGE"
 
@@ -493,17 +493,17 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
+"Usage: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
 "r|--remove]\n"
 "                  $OPTIONS_USAGE [--] [<app>...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] [-g|--"
+"Gebruik: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] [-g|--"
 "gui] [-r|--remove]\n"
 "                    $OPTIONS_USAGE [--] [<app>...]"
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [<options>] [<app>...]"
-msgstr "Gebruik: $DISPLAY_NAME [<opties>] [<app>...]"
+msgid "Usage: $PROGRAM_NAME [<options>] [<app>...]"
+msgstr "Gebruik: $PROGRAM_NAME [<opties>] [<app>...]"
 
 msgid "  -a, --apps     show list of apps"
 msgstr "  -a, --apps     toon lijst van apps"
@@ -514,11 +514,11 @@ msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 #, sh-format
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified file (default /usr/bin/$PROGRAM_NAME.sh)"
+"                 process specified file (default /usr/bin/kz-install.sh)"
 msgstr ""
 "  -f, --file <bestand>\n"
-"                 verwerk opgegeven bestand (standaard is /usr/bin/"
-"$PROGRAM_NAME.sh)"
+"                 verwerk opgegeven bestand (standaard is /usr/bin/kz-install."
+"sh)"
 
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
@@ -546,8 +546,8 @@ msgid "app not found"
 msgstr "app niet gevonden"
 
 #, sh-format
-msgid "Type '$DISPLAY_NAME --apps' for available apps."
-msgstr "Typ '$DISPLAY_NAME --apps' voor beschikbare apps."
+msgid "Type '$PROGRAM_NAME --apps' for available apps."
+msgstr "Typ '$PROGRAM_NAME --apps' voor beschikbare apps."
 
 #, sh-format
 msgid "No install file found, looked for '$INPUT_FILE'."
@@ -563,22 +563,22 @@ msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
 #, sh-format
-msgid "To install the apps execute: $DISPLAY_NAME <app>..."
-msgstr "Om de apps te installeren voer uit: $DISPLAY_NAME <app>..."
+msgid "To install the apps execute: $PROGRAM_NAME <app>..."
+msgstr "Om de apps te installeren voer uit: $PROGRAM_NAME <app>..."
 
 #, sh-format
-msgid "To view the contents of the install file execute: $DISPLAY_NAME --cat"
+msgid "To view the contents of the install file execute: $PROGRAM_NAME --cat"
 msgstr ""
-"Om de inhoud van het installatiebestand te bekijken voer uit: $DISPLAY_NAME "
+"Om de inhoud van het installatiebestand te bekijken voer uit: $PROGRAM_NAME "
 "--cat"
 
 #, sh-format
 msgid ""
-"To view the contents of the apps install file execute: $DISPLAY_NAME --cat "
+"To view the contents of the apps install file execute: $PROGRAM_NAME --cat "
 "<app>..."
 msgstr ""
 "Om de inhoud van het installatiebestand voor apps te bekijken voer uit: "
-"$DISPLAY_NAME --cat <app>..."
+"$PROGRAM_NAME --cat <app>..."
 
 msgid ""
 "To view the contents of the default install file execute: cat /usr/bin/kz-"
@@ -691,8 +691,8 @@ msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
 #, sh-format
-msgid "Usage: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
-msgstr "Gebruik: $DISPLAY_NAME [-g|--gui] $OPTIONS_USAGE"
+msgid "Usage: $PROGRAM_NAME [-g|--gui] $OPTIONS_USAGE"
+msgstr "Gebruik: $PROGRAM_NAME [-g|--gui] $OPTIONS_USAGE"
 
 msgid "USERNAME|USERID|USER"
 msgstr "GEBRUIKERSNAAM|USERID|GEBRUIKER"
@@ -860,10 +860,10 @@ msgstr "Het volgende is uitgevoerd:"
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-g|--gui] [-s|--source <directory>]\n"
+"Usage: $PROGRAM_NAME [-g|--gui] [-s|--source <directory>]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-g|--gui] [-s|--source <map>]\n"
+"Gebruik: $PROGRAM_NAME [-g|--gui] [-s|--source <map>]\n"
 "                    $OPTIONS_USAGE"
 
 msgid ""
@@ -968,13 +968,21 @@ msgstr "De back-up is teruggezet voor $USER (er zijn $NUM_USERS gebruikers)."
 
 #, sh-format
 msgid ""
-"Usage: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
+"Usage: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
 "r|--reset]\n"
 "                $OPTIONS_USAGE [--] [<app>...]"
 msgstr ""
-"Gebruik: $DISPLAY_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] [-g|--"
+"Gebruik: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] [-g|--"
 "gui] [-r|--reset]\n"
 "                  $OPTIONS_USAGE [--] [<app>...]"
+
+msgid ""
+"  -f, --file <file>\n"
+"                 process specified file (default /usr/bin/kz-setup.sh)"
+msgstr ""
+"  -f, --file <bestand>\n"
+"                 verwerk opgegeven bestand (standaard is /usr/bin/kz-setup."
+"sh)"
 
 msgid "  -r, --reset    set apps on default values"
 msgstr "  -r, --reset    stel apps in op standaardwaarden"
@@ -987,21 +995,21 @@ msgid "No set up file found, looked for '$INPUT_FILE'."
 msgstr "Geen instelbestand gevonden, zocht '$INPUT_FILE'."
 
 #, sh-format
-msgid "To set up the apps execute: $DISPLAY_NAME <app>..."
-msgstr "Om de apps in te stellen voer uit: $DISPLAY_NAME <app>..."
+msgid "To set up the apps execute: $PROGRAM_NAME <app>..."
+msgstr "Om de apps in te stellen voer uit: $PROGRAM_NAME <app>..."
 
 #, sh-format
-msgid "To view the contents of the set up file execute: $DISPLAY_NAME --cat"
+msgid "To view the contents of the set up file execute: $PROGRAM_NAME --cat"
 msgstr ""
-"Om de inhoud van het instelbestand te bekijken voer uit: $DISPLAY_NAME --cat"
+"Om de inhoud van het instelbestand te bekijken voer uit: $PROGRAM_NAME --cat"
 
 #, sh-format
 msgid ""
-"To view the contents of the apps set up file execute: $DISPLAY_NAME --cat "
+"To view the contents of the apps set up file execute: $PROGRAM_NAME --cat "
 "<app>..."
 msgstr ""
 "Om de inhoud van het instelbestand voor apps te bekijken voer uit: "
-"$DISPLAY_NAME --cat <app>..."
+"$PROGRAM_NAME --cat <app>..."
 
 #, sh-format
 msgid ""

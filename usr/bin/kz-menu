@@ -18,19 +18,18 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-menu'
+readonly PROGRAM_NAME='kz menu'
 PROGRAM_DESC=$(gettext 'Installation menu')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME [-g|--gui] \$OPTIONS_USAGE")
 readonly USAGE
 
 X_OPTIONS_HELP="$(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -98,7 +97,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+                --name          "$PROGRAM_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -121,7 +120,7 @@ function process_x_options() {
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+"$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -140,7 +139,7 @@ $USAGE"
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR

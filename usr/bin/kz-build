@@ -20,15 +20,14 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-build'
+readonly PROGRAM_NAME='kz build'
 PROGRAM_DESC=$(gettext 'Build website including kz packages')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME \$OPTIONS_USAGE")
 readonly USAGE
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -64,7 +63,7 @@ function check_input() {
         getopt  --alternative                       \
                 --options       "$OPTIONS_SHORT"    \
                 --longoptions   "$OPTIONS_LONG"     \
-                --name          "$DISPLAY_NAME"     \
+                --name          "$PROGRAM_NAME"     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -95,14 +94,14 @@ function process_x_options() {
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
     fi
 
     if ! $DESKTOP_ENVIRONMENT; then
-        TEXT="$DISPLAY_NAME: $(gettext 'no desktop environment available')
+        TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -221,8 +220,7 @@ function build_deb_package() {
     # Capture build id Debian package.
     BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
     mkdir --parents "$DEB_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
-    printf  '%s'        \
-            "$BUILD_ID" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"
+    printf '%s' "$BUILD_ID" > "$DEB_REPO_DISTDIR/usr/share/doc/kz/kz-build.id"
 
     # Create Debian package in kz-uploads.
     # Debian 11: .deb uses unknown compression ==> -Z=xz.
@@ -275,8 +273,7 @@ function build_rpm_package() {
     # Capture build id RPM package.
     BUILD_ID=$(date '+%Y-%m-%dT%H:%M:%S')
     mkdir --parents "$RPM_REPO_DISTDIR/usr/share/doc/kz" |& $LOGCMD
-    printf  '%s'        \
-            "$BUILD_ID" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/$PROGRAM_NAME.id"
+    printf '%s' "$BUILD_ID" > "$RPM_REPO_DISTDIR/usr/share/doc/kz/kz-build.id"
 
     # Create RPM package in kz-rpm/dist/.
     rpmbuild    -ba                                             \
@@ -312,7 +309,7 @@ function install_deb_package() {
     check_apt_package_manager
 
     # ==== START Copied from kz-get ====
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.deb")
+    KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-build-XXXXXXXXXX.deb")
     # Progress indicator with growing [=>, [==>, etc. as long as the kz getkz
     # local file exists, i.e. installation is in progress.
     # If something fails, kz_common.sh will remove the kz getkz local file and

@@ -78,15 +78,15 @@ else:
 # Functions
 ###############################################################################
 
-def become_root(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                PROGRAM_DESC: str) -> None:
+def become_root(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function checks whether the script is started as user root and
     restarts the script as user root if not.
     """
     EXEC_SUDO: str = 'sudo '
+    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    if not become_root_check(DISPLAY_NAME, PROGRAM_DESC):
+    if not become_root_check(PROGRAM_NAME, PROGRAM_DESC):
         RC: int = OK
         term(PROGRAM_NAME, RC)
 
@@ -104,20 +104,20 @@ def become_root(PROGRAM_NAME: str, DISPLAY_NAME: str,
             subprocess.run(EXEC_SUDO, shell=True, check=True)
         except KeyboardInterrupt:
             RC = ERR
-            TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            TEXT = _('Program {} has been interrupted.').format(PROGRAM_ID)
+            term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
         except Exception as exc:
             TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             RC = ERR
-            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+            term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
         else:
             RC = OK
             term(PROGRAM_NAME, RC)
 
 
-def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str) -> bool:
+def become_root_check(PROGRAM_NAME: str, PROGRAM_DESC: str) -> bool:
     """
     This function checks if the user is allowed to become root and returns 0 if
     so, otherwise returns 1 with descriptive message.
@@ -129,13 +129,13 @@ def become_root_check(DISPLAY_NAME: str, PROGRAM_DESC: str) -> bool:
                        --regexp=wheel', shell=True, check=True)
     except Exception:
         TEXT: str = _('Already performed by the administrator.')
-        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         return False
     else:
         return True
 
 
-def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
+def check_apt_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function checks for another running APT package manager and waits for
     the next check if so.
@@ -157,19 +157,19 @@ def check_apt_package_manager(DISPLAY_NAME: str, PROGRAM_DESC: str) -> int:
             break
         else:
             TEXT: str = _('Wait for another package manager to finish') + '...'
-            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
             time.sleep(CHECK_WAIT)
 
     return OK
 
 
-def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
+def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
            OPTION_GUI: bool = False) -> None:
     """
     This function returns an error message.
     """
     if OPTION_GUI:
-        TITLE: str = f"{PROGRAM_DESC} {_('error message')} ({DISPLAY_NAME})"
+        TITLE: str = f"{PROGRAM_DESC} {_('error message')} ({PROGRAM_NAME})"
         COMMAND: str = f'zenity --error                 \
                                 --width     600         \
                                 --height    100         \
@@ -180,13 +180,13 @@ def errmsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str,
         print(f'{RED}{TEXT}{NORMAL}')
 
 
-def infomsg(DISPLAY_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
+def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
             OPTION_GUI: bool = False) -> None:
     """
     This function returns an informational message.
     """
     if OPTION_GUI:
-        TITLE: str = f"{PROGRAM_DESC} {_('information')} ({DISPLAY_NAME})"
+        TITLE: str = f"{PROGRAM_DESC} {_('information')} ({PROGRAM_NAME})"
         COMMAND: str = f'zenity --info                  \
                                 --width     600         \
                                 --height    100         \
@@ -209,32 +209,36 @@ def logmsg(PROGRAM_NAME: str, TEXT: str) -> None:
     """
     This function records a message to the log.
     """
-    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_NAME}', f'MESSAGE={TEXT}')
+    PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
+
+    journal.sendv(f'SYSLOG_IDENTIFIER={PROGRAM_ID}', f'MESSAGE={TEXT}')
 
 
-def process_option_help(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                        PROGRAM_DESC: str, HELP: str) -> None:
+def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
+                        HELP: str) -> None:
     """
     This function shows the available help.
     """
+    PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
     YELP_MAN_URL: str = ''
 
     if DESKTOP_ENVIRONMENT:
         YELP_MAN_URL = f"{_(', or see the ')}"
-        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_NAME}(1)\x1b\\{DISPLAY_NAME}(1)'
+        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_ID}(1)\x1b\\{PROGRAM_ID}(1)'
         YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"
     TEXT: str = (f'{HELP}\n\n'
                  f'''{_("Type '{} --manual' or 'man {}'{} ").
-                      format(DISPLAY_NAME, DISPLAY_NAME, YELP_MAN_URL)}'''
+                      format(PROGRAM_NAME, PROGRAM_NAME, YELP_MAN_URL)}'''
                  f"{_('for more information.')}")
-    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_manual(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                          PROGRAM_DESC: str) -> int:
+def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function displays the manual page..
     """
+    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
+
     try:
         subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
                        check=True)
@@ -242,31 +246,31 @@ def process_option_manual(PROGRAM_NAME: str, DISPLAY_NAME: str,
         TEXT: str = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         RC = ERR
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+        term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
     else:
         return OK
 
     return OK
 
 
-def process_option_usage(DISPLAY_NAME: str, PROGRAM_DESC: str,
+def process_option_usage(PROGRAM_NAME: str, PROGRAM_DESC: str,
                          USAGE: str) -> None:
     """
     This function shows the available options.
     """
     TEXT: str = (f"{_('Usage:')} {USAGE}\n\n"
                  f'''{_("Type '{} --help' for more information.").
-                      format(DISPLAY_NAME)}''')
-    infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+                      format(PROGRAM_NAME)}''')
+    infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def process_option_version(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                           PROGRAM_DESC: str) -> None:
+def process_option_version(PROGRAM_NAME: str, PROGRAM_DESC: str) -> None:
     """
     This function displays version, author, and license information.
     """
     BUILD_ID: str = ''
+    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
     try:
         with open('/usr/share/doc/kz/kz-build.id') as fh:
@@ -281,28 +285,28 @@ def process_option_version(PROGRAM_NAME: str, DISPLAY_NAME: str,
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         RC = ERR
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+        term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
     finally:
         TEXT = f"{_('kz version 4.2.1 ({}).').format(BUILD_ID)}\n\n"
         TEXT += f"{_('Written by Karel Zimmer <info@karelzimmer.nl>.')}\n"
         TEXT += _('License CC0 1.0 \
 <https://creativecommons.org/publicdomain/zero/1.0>.')
-        infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
-def term(PROGRAM_NAME: str, RC: int, DISPLAY_NAME: str = '',
-         PROGRAM_DESC: str = '', TEXT: str = '',
+def term(PROGRAM_NAME: str, RC: int, PROGRAM_DESC: str = '', TEXT: str = '',
          OPTION_GUI: bool = False) -> None:
     """
     This function controls the termination.
     """
     if RC == OK:
         if TEXT:
-            infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+            infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
         if TEXT:
-            errmsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+
     TEXT = f'==== END logs for script {PROGRAM_NAME} ===='
     logmsg(PROGRAM_NAME, TEXT)
 
@@ -312,24 +316,25 @@ def term(PROGRAM_NAME: str, RC: int, DISPLAY_NAME: str = '',
         sys.exit(ERR)
 
 
-def wait_for_enter(PROGRAM_NAME: str, DISPLAY_NAME: str,
-                   PROGRAM_DESC: str) -> int:
+def wait_for_enter(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     This function waits for the user to press Enter.
     """
+    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
+
     try:
         TEXT: str = f"\n{_('Press the Enter key to continue [Enter]: ')}\n"
         input(TEXT)
     except KeyboardInterrupt:
         RC = ERR
-        TEXT = _('Program {} has been interrupted.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        TEXT = _('Program {} has been interrupted.').format(PROGRAM_ID)
+        term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
     except Exception as exc:
         TEXT = str(exc)
         logmsg(PROGRAM_NAME, TEXT)
         RC = ERR
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+        term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
     else:
         return OK
 

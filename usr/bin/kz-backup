@@ -19,12 +19,11 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME='kz-backup'
+readonly PROGRAM_NAME='kz backup'
 PROGRAM_DESC=$(gettext 'Make backup')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+USAGE="$(eval_gettext "Usage: \$PROGRAM_NAME [-g|--gui] \
 [-t|--target <directory>]
                  \$OPTIONS_USAGE")"
 readonly USAGE
@@ -38,7 +37,7 @@ $(gettext '  -t, --target <directory>
                  place backup in specified directory')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -64,7 +63,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+                --name          "$PROGRAM_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -87,7 +86,7 @@ function process_x_options() {
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+"$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -97,7 +96,7 @@ $USAGE"
                 ;;
             -t | --target )
                 if $OPTION_TARGET; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -117,7 +116,7 @@ $USAGE"
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -145,7 +144,7 @@ function check_target() {
     if $OPTION_TARGET; then
 
         if [[ ! -d $TARGET_ARGUMENT ]]; then
-            TEXT="$DISPLAY_NAME: $TARGET_ARGUMENT: \
+            TEXT="$PROGRAM_NAME: $TARGET_ARGUMENT: \
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
@@ -194,10 +193,10 @@ Disconnect media via Files.")"
             fi
         fi
 
-        TARGET=$MEDIUM/$PROGRAM_NAME/$USER@$HOSTNAME
+        TARGET=$MEDIUM/kz-backup/$USER@$HOSTNAME
 
-        [[ -d $MEDIUM/$PROGRAM_NAME ]] ||
-            mkdir --mode=a=rwx --verbose "$MEDIUM/$PROGRAM_NAME" |& $LOGCMD
+        [[ -d $MEDIUM/kz-backup ]] ||
+            mkdir --mode=a=rwx --verbose "$MEDIUM/kz-backup" |& $LOGCMD
         TARGET_MEDIUM=$MEDIUM
     fi
 
@@ -213,7 +212,7 @@ Please rename to '<username>@<hostname>'.")"
 
 # This function backups the user settings.
 function backup_settings() {
-    local SETTINGS_DIR=$HOME/$PROGRAM_NAME
+    local SETTINGS_DIR=$HOME/kz-backup
     local TEXT=''
 
     logmsg 'Backup settings...'
@@ -424,14 +423,14 @@ function backup_setting_favs() {
 # This function creates the backup.
 function create_backup() {
     local ERROR_FILE=''
-    local EXCLUDE_FILE=$HOME/$PROGRAM_NAME
+    local EXCLUDE_FILE=''
     local RSYNC_MESSAGES=''
     local TEXT=''
     local TITLE=''
     local -i BACKUP_RC=0
 
-    ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
-    EXCLUDE_FILE=$(mktemp -t "$PROGRAM_NAME-exclude-XXXXXXXXXX")
+    ERROR_FILE=$(mktemp -t "kz-backup-errors-XXXXXXXXXX")
+    EXCLUDE_FILE=$(mktemp -t "kz-backup-exclude-XXXXXXXXXX")
 
     cat << EOF > "$EXCLUDE_FILE"
 # Exclude Git-managed directories.

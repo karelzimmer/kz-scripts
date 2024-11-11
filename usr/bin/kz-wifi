@@ -31,16 +31,15 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-PROGRAM_NAME: str = 'kz-wifi'
+PROGRAM_NAME: str = 'kz wifi'
 PROGRAM_DESC: str = _('Show WiFi information')
-DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
-USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
+USAGE: str = f'{PROGRAM_NAME} {kz_common.OPTIONS_USAGE} [-g|--gui]'
 
 X_OPTIONS_HELP: str = f"{_('  -g, --gui      run in graphical mode,')}\n"
 X_OPTIONS_HELP += f"{_('                 requires a desktop environment')}"
 
-HELP: str = (f"{_('Usage: {} [<options>]').format(DISPLAY_NAME)}\n\n"
+HELP: str = (f"{_('Usage: {} [<options>]').format(PROGRAM_NAME)}\n\n"
              f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{X_OPTIONS_HELP}\n'
@@ -57,7 +56,7 @@ def process_options() -> bool:
     """
     OPTION_GUI: bool = False
 
-    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
+    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
                                      add_help=False)
 
     PARSER.add_argument('-h', '--help', action='store_true')
@@ -68,32 +67,28 @@ def process_options() -> bool:
     args = PARSER.parse_args()
 
     if args.help:
-        kz_common.process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
-                                      HELP)
+        kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.manual:
-        kz_common.process_option_manual(PROGRAM_NAME, DISPLAY_NAME,
-                                        PROGRAM_DESC)
+        kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.usage:
-        kz_common.process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
+        kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.version:
-        kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC,
-                                         DISPLAY_NAME)
+        kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.gui:
         if not kz_common.DESKTOP_ENVIRONMENT:
             RC = kz_common.OK
-            TEXT: str = f"{DISPLAY_NAME}: {sys.argv[1]}: "
+            TEXT: str = f"{PROGRAM_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
             OPTION_GUI = False
-            kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT,
-                           OPTION_GUI)
+            kz_common.term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
             OPTION_GUI = True
 
@@ -119,21 +114,21 @@ def process_input(OPTION_GUI: bool = False) -> None:
                                           executable='bash')  # type: ignore
         except Exception:
             TEXT = _('No WiFi device found.')
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
         else:
             NMCLI_OUTPUT = NMCLI_OUTPUT.stdout  # type: ignore
             NMCLI_OUTPUT = NMCLI_OUTPUT.decode("utf-8")  # type: ignore
             TEXT = TEXT + '\n' + NMCLI_OUTPUT
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
+            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT, OPTION_GUI)
     else:
-        kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         try:
             # Shows in Terminal QR code for quick connection to Wi-Fi network.
             subprocess.run(COMMAND, shell=True, check=True,
                            stderr=subprocess.DEVNULL, executable='bash')
         except Exception:
             TEXT = _('No WiFi device found.')
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
 def term_script() -> None:

@@ -22,9 +22,8 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz-restore'
 PROGRAM_DESC=$(gettext 'Restore backup')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+USAGE="$(eval_gettext "Usage: \$PROGRAM_NAME [-g|--gui] \
 [-s|--source <directory>]
                   \$OPTIONS_USAGE")"
 readonly USAGE
@@ -38,7 +37,7 @@ $(gettext '  -s, --source <directory>
                  use backup in specified directory')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
 
 $PROGRAM_DESC.
 
@@ -64,7 +63,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+                --name          "$PROGRAM_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -87,7 +86,7 @@ function process_x_options() {
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+"$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -97,7 +96,7 @@ $USAGE"
                 ;;
             -s | --source )
                 if $OPTION_SOURCE; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -117,7 +116,7 @@ $USAGE"
     done
 
     if [[ -n $* ]]; then
-        TEXT="$DISPLAY_NAME: $*: $(gettext 'arguments are not allowed')
+        TEXT="$PROGRAM_NAME: $*: $(gettext 'arguments are not allowed')
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -145,7 +144,7 @@ function check_source() {
     if $OPTION_SOURCE; then
 
         if [[ ! -d $SOURCE_ARGUMENT ]]; then
-            TEXT="$DISPLAY_NAME: $SOURCE_ARGUMENT: \
+            TEXT="$PROGRAM_NAME: $SOURCE_ARGUMENT: \
 $(gettext 'directory does not exist')
 $USAGE"
             infomsg "$TEXT"
@@ -216,7 +215,7 @@ function restore_backup() {
     local TITLE=''
     local -i RESTORE_RC=0
 
-    ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
+    ERROR_FILE=$(mktemp -t "kz-restore-errors-XXXXXXXXXX")
 
     TITLE=$(gettext 'Restore backup')
     TEXT=$(gettext 'Preparing restore (this can take a while)')

@@ -22,17 +22,15 @@ source kz_common.sh
 readonly PROGRAM_NAME='kz'
 PROGRAM_DESC=$(gettext 'Run command')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE
+USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME [-l|--list] \$OPTIONS_USAGE
           <command> [<arguments>]")
 readonly USAGE
 
 X_OPTIONS_HELP=$(gettext '  -l, --list     show available commands')
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] <command> \
+HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>] <command> \
 [<arguments>]")
 
 $PROGRAM_DESC.
@@ -69,7 +67,7 @@ function check_input() {
             getopt  --alternative                                       \
                     --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                     --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                    --name          "$DISPLAY_NAME"                     \
+                    --name          "$PROGRAM_NAME"                     \
                     --              "$@"
             ) || RC=$?
         if [[ $RC -ne $OK ]]; then
@@ -112,23 +110,23 @@ function process_option_list() {
 
 $(gettext 'NUM  COMMAND')\n"
     TEXT+=$(
-        find    /usr/bin/kz-*               \
-                -maxdepth 1                 \
-                -type f                     \
-                -executable                 \
-                -readable                   \
-                -not -name '*~'             \
-                -not -name $PROGRAM_NAME    \
-                -printf '%f\n'              |
-        sort                                |
-        sed     --expression='s/kz-//'      |
-        nl      --number-width=3            \
-                --number-format=rn          \
-                --number-separator='  '     \
+        find    /usr/bin/kz-*           \
+                -maxdepth 1             \
+                -type f                 \
+                -executable             \
+                -readable               \
+                -not -name '*~'         \
+                -not -name kz           \
+                -printf '%f\n'          |
+        sort                            |
+        sed     --expression='s/kz-//'  |
+        nl      --number-width=3        \
+                --number-format=rn      \
+                --number-separator='  ' \
                 --body-numbering=a
         )
     TEXT+="\n
-$(eval_gettext "To execute a command: \$DISPLAY_NAME <command> [<arguments>]")"
+$(eval_gettext "To execute a command: \$PROGRAM_NAME <command> [<arguments>]")"
     infomsg "$TEXT"
 }
 
@@ -139,8 +137,8 @@ function process_input() {
 
     local TEXT=''
 
-    if [[ ! -f /usr/bin/$PROGRAM_NAME-$COMMAND ]]; then
-        TEXT="$DISPLAY_NAME: $COMMAND: $(gettext "command does not exist")
+    if [[ ! -f /usr/bin/kz-$COMMAND ]]; then
+        TEXT="$PROGRAM_NAME: $COMMAND: $(gettext "command does not exist")
 $USAGE"
         infomsg "$TEXT"
         exit $ERR
@@ -148,10 +146,10 @@ $USAGE"
 
     shift
 
-    TEXT="Restart (exec $PROGRAM_NAME-$COMMAND $*...)"
+    TEXT="Restart (exec kz-$COMMAND $*...)"
     logmsg "$TEXT"
 
-    exec "$PROGRAM_NAME-$COMMAND" "$@"
+    exec "kz-$COMMAND" "$@"
 }
 
 

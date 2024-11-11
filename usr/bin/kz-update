@@ -31,13 +31,12 @@ _ = gettext.gettext
 # Constants
 ###############################################################################
 
-PROGRAM_NAME: str = 'kz-update'
+PROGRAM_NAME: str = 'kz update'
 PROGRAM_DESC: str = _('Update system')
-DISPLAY_NAME: str = PROGRAM_NAME.replace('kz-', 'kz ')
 
-USAGE: str = f'{DISPLAY_NAME} {kz_common.OPTIONS_USAGE}'
+USAGE: str = f'{PROGRAM_NAME} {kz_common.OPTIONS_USAGE}'
 
-HELP: str = (f"{_('Usage: {} [<options>]').format(DISPLAY_NAME)}\n\n"
+HELP: str = (f"{_('Usage: {} [<options>]').format(PROGRAM_NAME)}\n\n"
              f'{PROGRAM_DESC}.\n\n'
              f"{_('Options:')}\n"
              f'{kz_common.OPTIONS_HELP}')
@@ -51,7 +50,7 @@ def process_options() -> None:
     """
     This function handles the script options and arguments.
     """
-    PARSER = argparse.ArgumentParser(prog=DISPLAY_NAME, usage=USAGE,
+    PARSER = argparse.ArgumentParser(prog=PROGRAM_NAME, usage=USAGE,
                                      add_help=False)
 
     PARSER.add_argument('-h', '--help', action='store_true')
@@ -61,22 +60,19 @@ def process_options() -> None:
     args = PARSER.parse_args()
 
     if args.help:
-        kz_common.process_option_help(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC,
-                                      HELP)
+        kz_common.process_option_help(PROGRAM_NAME, PROGRAM_DESC, HELP)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.manual:
-        kz_common.process_option_manual(PROGRAM_NAME, DISPLAY_NAME,
-                                        PROGRAM_DESC)
+        kz_common.process_option_manual(PROGRAM_NAME, PROGRAM_DESC)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.usage:
-        kz_common.process_option_usage(DISPLAY_NAME, PROGRAM_DESC, USAGE)
+        kz_common.process_option_usage(PROGRAM_NAME, PROGRAM_DESC, USAGE)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.version:
-        kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC,
-                                         DISPLAY_NAME)
+        kz_common.process_option_version(PROGRAM_NAME, PROGRAM_DESC)
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
 
@@ -100,7 +96,7 @@ def process_input() -> None:
     else:
         RC = kz_common.ERR
         TEXT: str = _('Unknown package manager.')
-        kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        kz_common.term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
 
 
 def perform_apt_repair() -> None:
@@ -108,7 +104,7 @@ def perform_apt_repair() -> None:
     This function runs a repair of Debian packages.
     """
     TEXT: str = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo dpkg --configure --pending'
     perform_command(COMMAND)
@@ -128,7 +124,7 @@ def perform_apt_update() -> None:
     This function updates installed Debian packages and snaps if installed.
     """
     TEXT: str = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo apt-get update'
     perform_command(COMMAND)
@@ -147,7 +143,7 @@ def perform_apt_cleanup() -> None:
     This function performs a Debian packages cleanup.
     """
     TEXT: str = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo apt-get autoclean'
     perform_command(COMMAND)
@@ -161,7 +157,7 @@ def perform_rpm_repair() -> None:
     This function runs a repair of RPM packages.
     """
     TEXT: str = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo dnf clean all'
     perform_command(COMMAND)
@@ -175,7 +171,7 @@ def perform_rpm_update() -> None:
     This function updates installed RPM packages.
     """
     TEXT: str = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     # Exit code 100 means there are updates available ==> ' || true'.
     COMMAND: str = 'sudo dnf check-update --refresh || true'
@@ -190,7 +186,7 @@ def perform_rpm_cleanup() -> None:
     This function performs a RPM packages cleanup.
     """
     TEXT: str = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo dnf clean all'
     perform_command(COMMAND)
@@ -203,25 +199,29 @@ def perform_command(COMMAND: str = '') -> None:
     """
     This function executes a Bourne-Again SHell command.
     """
+    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
+
     TEXT: str = f'{COMMAND}'
-    kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
-    kz_common.check_apt_package_manager(DISPLAY_NAME, PROGRAM_DESC)
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+    kz_common.check_apt_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
         subprocess.run(COMMAND, shell=True, check=True, executable='bash')
     except Exception as exc:
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)
-        RC = kz_common.OK
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-        kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+        RC = kz_common.ERR
+        TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+        kz_common.term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
     else:
-        kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, '')
+        kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, '')
 
 
 def check_reboot() -> None:
     """
     This function checks if reboot is needed.
     """
+    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
+
     TEXT: str = _("*** The computer needs to be restarted to complete the \
 installation of updates ***")
 
@@ -229,7 +229,7 @@ installation of updates ***")
         try:
             with open('/var/run/reboot-required') as fh:
                 TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
-                kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+                kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         except FileNotFoundError as fnf:
             TEXT = str(fnf)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
@@ -237,13 +237,13 @@ installation of updates ***")
             TEXT = str(exc)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
             RC = kz_common.ERR
-            TEXT = _('Program {} encountered an error.').format(PROGRAM_NAME)
-            kz_common.term(PROGRAM_NAME, RC, DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+            kz_common.term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
     else:
         if subprocess.run('needs-restarting --reboothint',
                           shell=True).returncode == 1:
             TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
-            kz_common.infomsg(DISPLAY_NAME, PROGRAM_DESC, TEXT)
+            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
 
 def term_script() -> None:
@@ -262,7 +262,7 @@ kz_common.init_script(PROGRAM_NAME)
 
 process_options()
 
-kz_common.become_root(PROGRAM_NAME, DISPLAY_NAME, PROGRAM_DESC)
+kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
 
 process_input()
 

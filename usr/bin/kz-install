@@ -19,12 +19,11 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-readonly PROGRAM_NAME=kz-install
+readonly PROGRAM_NAME='kz install'
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
-readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] \
+USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME [-a|--apps] [-c|--cat] \
 [-f|--file <file>] [-g|--gui] [-r|--remove]
                   \$OPTIONS_USAGE [--] [<app>...]")
 readonly USAGE
@@ -35,13 +34,13 @@ mandatory for short options too.")
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(eval_gettext "  -f, --file <file>
-                 process specified file (default /usr/bin/\$PROGRAM_NAME.sh)")
+                 process specified file (default /usr/bin/kz-install.sh)")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --remove   delete apps')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] [<app>...]")
+HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>] [<app>...]")
 
 $PROGRAM_DESC.
 
@@ -72,7 +71,7 @@ function check_input() {
         getopt  --alternative                                       \
                 --options       "${OPTIONS_SHORT}$X_OPTIONS_SHORT"  \
                 --longoptions   "${OPTIONS_LONG}$X_OPTIONS_LONG"    \
-                --name          "$DISPLAY_NAME"                     \
+                --name          "$PROGRAM_NAME"                     \
                 --              "$@"
         ) || RC=$?
     if [[ $RC -ne $OK ]]; then
@@ -102,7 +101,7 @@ function process_x_options() {
                 ;;
             -f | --file )
                 if $OPTION_FILE; then
-                    TEXT="$DISPLAY_NAME: $1 $2: $(gettext 'too many options')
+                    TEXT="$PROGRAM_NAME: $1 $2: $(gettext 'too many options')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -114,7 +113,7 @@ $USAGE"
             -g | --gui )
                 if ! $DESKTOP_ENVIRONMENT; then
                     TEXT=\
-"$DISPLAY_NAME: $1: $(gettext 'no desktop environment available')
+"$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
                     infomsg "$TEXT"
                     exit $ERR
@@ -173,7 +172,7 @@ function process_input() {
         exit $OK
     fi
 
-    COMMAND_FILE=$(mktemp -t "$PROGRAM_NAME-XXXXXXXXXX.sh")
+    COMMAND_FILE=$(mktemp -t "kz-install-XXXXXXXXXX.sh")
 
     if $ARGUMENT_APPS; then
         process_argument_app
@@ -221,11 +220,11 @@ $(gettext 'NUM  APP')\n"
     if [[ -n $APPS ]]; then
         TEXT+=$APPS
         TEXT+="\n
-$(eval_gettext "To install the apps execute: \$DISPLAY_NAME <app>...")
+$(eval_gettext "To install the apps execute: \$PROGRAM_NAME <app>...")
 $(eval_gettext "To view the contents of the install file execute: \
-\$DISPLAY_NAME --cat")
+\$PROGRAM_NAME --cat")
 $(eval_gettext "To view the contents of the apps install file execute: \
-\$DISPLAY_NAME --cat <app>...")
+\$PROGRAM_NAME --cat <app>...")
 $(gettext "To view the contents of the default install file execute: cat \
 /usr/bin/kz-install.sh")"
     else
@@ -248,7 +247,7 @@ function process_argument_app() {
     done
 
     if $APP_NOT_FOUND; then
-        TEXT="$(eval_gettext "Type '\$DISPLAY_NAME --apps' for available \
+        TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --apps' for available \
 apps.")"
         infomsg "$TEXT"
         rm --verbose "$COMMAND_FILE" |& $LOGCMD
@@ -296,7 +295,7 @@ kz_common.sh")"
 
     if $NO_APP_MATCH; then
         APP_NOT_FOUND=true
-        TEXT="$DISPLAY_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
+        TEXT="$PROGRAM_NAME: $APP_ARGUMENT: $(gettext 'app not found')"
         infomsg "$TEXT"
     fi
 }
