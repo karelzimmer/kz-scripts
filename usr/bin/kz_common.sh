@@ -192,7 +192,7 @@ function infomsg() {
 function init_script() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local TEXT="==== START logs for script $PROGRAM_ID ====
-Started (${PROGRAM_NAME/kz /kz-} $* as $USER)."
+Started ($PROGRAM_ID $* as $USER)."
     local -g  ERREXIT=true
     local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_ID"
     local -g  OPTION_GUI=false
