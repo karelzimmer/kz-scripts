@@ -19,36 +19,36 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz-restore'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Restore backup')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-restore'
+PROGRAM_DESC=$(gettext 'Restore backup')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 [-s|--source <directory>]
                   \$OPTIONS_USAGE")"
+readonly USAGE
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -s, --source <directory>
                  use backup in specified directory')"
+readonly X_OPTIONS_HELP
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
+readonly HELP
 
-declare X_OPTIONS_SHORT='gs:'
-declare X_OPTIONS_LONG=',gui,source:'
+readonly X_OPTIONS_SHORT='gs:'
+readonly X_OPTIONS_LONG=',gui,source:'
 
 
 ###############################################################################
@@ -57,8 +57,8 @@ declare X_OPTIONS_LONG=',gui,source:'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -80,9 +80,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    local       TEXT=''
-    declare -g  OPTION_SOURCE=false
-    declare -g  SOURCE_ARGUMENT=''
+    local TEXT=''
 
     while true; do
         case $1 in
@@ -137,11 +135,8 @@ function process_input() {
 
 # This function checks if the source is available.
 function check_source() {
-    local       TEXT=''
-    local       USB_MOUNT_POINT="/media/$USER"
-    declare -g  MEDIUM=''
-    declare -g  SOURCE_MEDIUM=''
-    declare -g  SOURCE=''
+    local TEXT=''
+    local USB_MOUNT_POINT="/media/$USER"
 
     if $RPM; then
         USB_MOUNT_POINT="/run/media/$USER"
@@ -215,10 +210,10 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 
 # This function restores the backup.
 function restore_backup() {
-    local       ERROR_FILE=''
-    local       RSYNC_MESSAGES=''
-    local       TEXT=''
-    local       TITLE=''
+    local ERROR_FILE=''
+    local RSYNC_MESSAGES=''
+    local TEXT=''
+    local TITLE=''
     local   -i  RESTORE_RC=0
 
     ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
@@ -306,9 +301,9 @@ function restore_setting_desktop() {
 
 # This function controls the termination of the script.
 function term_script() {
-    local       USERS_LIST=''
+    local USERS_LIST=''
     local   -i  NUM_USERS=0
-    local   -i  RC=$OK
+    local -i RC=$OK
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
@@ -403,6 +398,12 @@ function term_script_unmount() {
 ###############################################################################
 
 function main() {
+    local MEDIUM=''
+    local OPTION_SOURCE=false
+    local SOURCE_ARGUMENT=''
+    local SOURCE_MEDIUM=''
+    local SOURCE=''
+
     init_script "$@"
     check_input "$@"
     process_input

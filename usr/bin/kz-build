@@ -20,35 +20,35 @@ source "$(dirname "$(realpath "$0")")"/kz_common.sh
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz-build'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Build website including kz packages')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-build'
+PROGRAM_DESC=$(gettext 'Build website including kz packages')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly USAGE
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
+readonly HELP
 
-declare DOCS_REPO=$HOME/kz-docs
-declare SCRIPTS_REPO=$HOME/kz-scripts
+readonly DOCS_REPO=$HOME/kz-docs
+readonly SCRIPTS_REPO=$HOME/kz-scripts
 
-declare UPLOADS_REPO_SRCDIR=$HOME/kz-uploads/src
-declare UPLOADS_REPO_DISTDIR=$HOME/kz-uploads/dist
+readonly UPLOADS_REPO_SRCDIR=$HOME/kz-uploads/src
+readonly UPLOADS_REPO_DISTDIR=$HOME/kz-uploads/dist
 
-declare DEB_REPO_SRCDIR=$HOME/kz-deb/src
-declare DEB_REPO_DISTDIR=$HOME/kz-deb/dist
-declare DEB_NAME=kz_4.2.1-1_all.deb
+readonly DEB_REPO_SRCDIR=$HOME/kz-deb/src
+readonly DEB_REPO_DISTDIR=$HOME/kz-deb/dist
+readonly DEB_NAME=kz_4.2.1-1_all.deb
 
-declare RPM_REPO_SRCDIR=$HOME/kz-rpm/src
-declare RPM_REPO_DISTDIR=$HOME/kz-rpm/dist
-declare RPM_NAME=kz-4.2.1-1.noarch.rpm
+readonly RPM_REPO_SRCDIR=$HOME/kz-rpm/src
+readonly RPM_REPO_DISTDIR=$HOME/kz-rpm/dist
+readonly RPM_NAME=kz-4.2.1-1.noarch.rpm
 
 
 ###############################################################################
@@ -57,8 +57,8 @@ declare RPM_NAME=kz-4.2.1-1.noarch.rpm
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                       \

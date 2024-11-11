@@ -18,36 +18,34 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare     PROGRAM_NAME='kz-menu'
-declare     PROGRAM_DESC
-            PROGRAM_DESC=$(gettext 'Installation menu')
-declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-menu'
+PROGRAM_DESC=$(gettext 'Installation menu')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare     USAGE
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
-\$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \$OPTIONS_USAGE")
+readonly USAGE
 
-declare     X_OPTIONS_HELP
-            X_OPTIONS_HELP=\
-"$(gettext '  -g, --gui      run in graphical mode,')
+X_OPTIONS_HELP="$(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')"
+readonly X_OPTIONS_HELP
 
-declare     HELP
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
+readonly HELP
 
-declare     X_OPTIONS_SHORT='g'
-declare     X_OPTIONS_LONG=',gui'
+readonly X_OPTIONS_SHORT='g'
+readonly X_OPTIONS_LONG=',gui'
 
-declare     MENU1_TITLE
-            MENU1_TITLE=$(gettext 'Installation menu')
-declare     MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
-declare -a  MENU1_ACTIONS=(
+MENU1_TITLE=$(gettext 'Installation menu')
+readonly MENU1_TITLE
+readonly MENU1_HEAD="------------------ $MENU1_TITLE ------------------"
+readonly -a  MENU1_ACTIONS=(
             [1]="$(gettext 'Prepare installation')"
                 "$(gettext 'Perform installation')"
                 "$(gettext 'Finish installation')"
@@ -55,7 +53,7 @@ declare -a  MENU1_ACTIONS=(
                 "$(gettext 'Command menu')"
                 "$(gettext 'Exit')"
             )
-declare -a  MENU1_DESCS=(
+readonly -a  MENU1_DESCS=(
             [1]="$(gettext 'Checklist chapter 1')"
                 "$(gettext 'Checklist chapter 2')"
                 "$(gettext 'Checklist chapter 3')"
@@ -63,12 +61,12 @@ declare -a  MENU1_DESCS=(
                 "$(gettext 'Show command menu')"
                 "$(gettext 'Exit menu')"
             )
-declare     MENU1_LINES=${#MENU1_ACTIONS[@]}
+readonly MENU1_LINES=${#MENU1_ACTIONS[@]}
 
-declare     MENU2_TITLE
-            MENU2_TITLE=$(gettext 'Command menu')
-declare     MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
-declare -a  MENU2_ACTIONS=(
+MENU2_TITLE=$(gettext 'Command menu')
+readonly MENU2_TITLE
+readonly MENU2_HEAD="-------------------- $MENU2_TITLE -------------------"
+readonly -a  MENU2_ACTIONS=(
             [1]="$(gettext 'Show WiFi information')"
                 "$(gettext 'Make backup')"
                 "$(gettext 'Install apps')"
@@ -76,7 +74,7 @@ declare -a  MENU2_ACTIONS=(
                 "$(gettext 'Set up apps')"
                 "$(gettext 'Go to installation menu')"
             )
-declare -a  MENU2_DESCS=(
+readonly -a  MENU2_DESCS=(
             [1]='kz wifi'
                 'kz backup'
                 'kz install'
@@ -84,7 +82,7 @@ declare -a  MENU2_DESCS=(
                 'kz setup'
                 "$(gettext 'Back')"
             )
-declare     MENU2_LINES=${#MENU2_DESCS[@]}
+readonly MENU2_LINES=${#MENU2_DESCS[@]}
 
 
 ###############################################################################
@@ -93,8 +91,8 @@ declare     MENU2_LINES=${#MENU2_DESCS[@]}
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -262,7 +260,7 @@ function process_menu1_choice() {
 
 # This function processes menu 1 choice 1.
 function process_menu1_choice1() {
-    local       TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
+    local TITLE="${MENU1_ACTIONS[1]} (${MENU1_DESCS[1]})"
     local   -a  ROWS=(
         [1]="${MENU2_ACTIONS[1]}#${MENU2_DESCS[1]}"
             "${MENU2_ACTIONS[2]}#${MENU2_DESCS[2]}"
@@ -300,7 +298,7 @@ Roughly boils down to:
 
 # This function processes menu 1 choice 3.
 function process_menu1_choice3() {
-    local       TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
+    local TITLE="${MENU1_ACTIONS[3]} (${MENU1_DESCS[3]})"
     local   -a  ROWS=(
         [1]="${MENU2_ACTIONS[3]}#${MENU2_DESCS[3]}"
         )
@@ -311,7 +309,7 @@ function process_menu1_choice3() {
 
 # This function processes menu 1 choice 4.
 function process_menu1_choice4() {
-    local       TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
+    local TITLE="${MENU1_ACTIONS[4]} (${MENU1_DESCS[4]})"
     local   -a  ROWS=(
         [1]="${MENU2_ACTIONS[4]}#${MENU2_DESCS[4]}"
             "${MENU2_ACTIONS[5]}#${MENU2_DESCS[5]}"
@@ -404,8 +402,8 @@ function process_menu2_tui() {
 
 # This function processes menu 2 choice.
 function process_menu2_choice() {
-        local       TEXT=''
-        local       TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
+        local TEXT=''
+        local TITLE="${MENU2_ACTIONS[$REPLY]} (${MENU2_DESCS[$REPLY]})"
         local   -a  ROWS=(
             [1]="${MENU2_ACTIONS[$REPLY]}#${MENU2_DESCS[$REPLY]}"
             )
@@ -424,10 +422,10 @@ function process_menu2_choice() {
 
 # This function processes the command corresponding to the choice made.
 function process_commands() {
-    local       COMMAND=''
-    local       DESCRIPTION=''
-    local       EXECUTE_COMMAND=false
-    local       TITLE=''
+    local COMMAND=''
+    local DESCRIPTION=''
+    local EXECUTE_COMMAND=false
+    local TITLE=''
     local   -i  ROW=0
 
     show_commands_before_execution
@@ -450,10 +448,10 @@ function process_commands() {
 
 # This function shows the commands before they are executed.
 function show_commands_before_execution() {
-    local       COMMAND=''
-    local       DESCRIPTION=''
-    local       PROMPT=''
-    local       TEXT=''
+    local COMMAND=''
+    local DESCRIPTION=''
+    local PROMPT=''
+    local TEXT=''
     local   -i  ROW=0
 
     TEXT="$(gettext 'The following will be executed:')
@@ -512,10 +510,10 @@ $PROMPT"
 
 # This function executes the commands.
 function execute_command() {
-    local       ARG=''
-    local       CMD=''
-    local       GUI_OPTION=''
-    local   -i  RC=$OK
+    local ARG=''
+    local CMD=''
+    local GUI_OPTION=''
+    local -i RC=$OK
 
     CMD=$(
         printf '%s' "$COMMAND" | cut --delimiter=' ' --fields=1

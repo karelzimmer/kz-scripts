@@ -19,19 +19,18 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz-desktop'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Change desktop environment')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-desktop'
+PROGRAM_DESC=$(gettext 'Change desktop environment')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft <favorite>] \
+USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--addaft <favorite>] \
 [-b|--addbef <favorite>]
                   [-d|--delete <favorite>] [-l|--list] [-r|--reset]
                   \$OPTIONS_USAGE")"
+readonly USAGE
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -a, --addaft <favorite>
@@ -42,18 +41,19 @@ $(gettext '  -d, --delete <favorite>
                  delete favorite')
 $(gettext '  -l, --list     show favorites')
 $(gettext '  -r, --reset    set favorites on default values')"
+readonly X_OPTIONS_HELP
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
+readonly HELP
 
-declare X_OPTIONS_SHORT='a:b:d:lr'
-declare X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
+readonly X_OPTIONS_SHORT='a:b:d:lr'
+readonly X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
 
 ###############################################################################
@@ -62,8 +62,8 @@ declare X_OPTIONS_LONG=',addaft:,addbef:,delete:,list,reset'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -85,13 +85,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    local       TEXT=''
-    declare -g  FAVORITE_ARGUMENT=''
-    declare -g  OPTION_ADDAFT=false
-    declare -g  OPTION_ADDBEF=false
-    declare -g  OPTION_DELETE=false
-    declare -g  OPTION_LIST=false
-    declare -g  OPTION_RESET=false
+    local TEXT=''
 
     while true; do
         case $1 in
@@ -325,6 +319,13 @@ function term_script() {
 ###############################################################################
 
 function main() {
+    local FAVORITE_ARGUMENT=''
+    local OPTION_ADDAFT=false
+    local OPTION_ADDBEF=false
+    local OPTION_DELETE=false
+    local OPTION_LIST=false
+    local OPTION_RESET=false
+
     init_script "$@"
     check_input "$@"
     process_input

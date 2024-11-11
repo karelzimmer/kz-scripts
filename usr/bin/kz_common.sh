@@ -1,6 +1,6 @@
 # This module provides access to global constants and functions.
 #
-# shellcheck shell=bash source=/dev/null
+# shellcheck shell=bash source=/dev/null disable=SC2034
 ###############################################################################
 # SPDX-FileComment: Common module for kz Bourne-Again shell scripts
 #
@@ -22,66 +22,55 @@ source /usr/bin/gettext.sh
 # Constants
 ###############################################################################
 
-declare MODULE_NAME='kz_common.sh'
-declare MODULE_DESC
-            # shellcheck disable=SC2034
-            MODULE_DESC=$(gettext 'Common module for shell scripts')
+readonly MODULE_NAME='kz_common.sh'
+MODULE_DESC=$(gettext 'Common module for shell scripts')
+readonly MODULE_DESC
 
-# shellcheck disable=SC2034
-declare OPTIONS_USAGE='[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
+readonly OPTIONS_USAGE='[-h|--help] [-m|--manual] [-u|--usage] [-v|--version]'
 
-declare OPTIONS_HELP
-            # shellcheck disable=SC2034
-            OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
+
+OPTIONS_HELP="$(gettext '  -h, --help     show this help text')
 $(gettext '  -m, --manual   show manual page')
 $(gettext '  -u, --usage    show a short usage summary')
 $(gettext '  -v, --version  show program version')"
+readonly OPTIONS_HELP
 
-# shellcheck disable=SC2034
-declare OPTIONS_SHORT='hmuv'
-# shellcheck disable=SC2034
-declare OPTIONS_LONG='help,manual,usage,version'
+readonly OPTIONS_SHORT='hmuv'
+readonly OPTIONS_LONG='help,manual,usage,version'
 
-declare OK=0
-declare ERR=1
+readonly OK=0
+readonly ERR=1
 
 # List NORMAL last here so that -x doesn't bork the display.
-# shellcheck disable=SC2034
-declare BOLD='\033[1m'
-declare RED='\033[1;31m'
-# shellcheck disable=SC2034
-declare GREEN='\033[1;32m'
-declare NORMAL='\033[0m'
+readonly BOLD='\033[1m'
+readonly RED='\033[1;31m'
+readonly GREEN='\033[1;32m'
+readonly NORMAL='\033[0m'
 
-declare DESKTOP_ENVIRONMENT
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
-    DESKTOP_ENVIRONMENT=true
+    readonly DESKTOP_ENVIRONMENT=true
 else
-    DESKTOP_ENVIRONMENT=false
+    readonly DESKTOP_ENVIRONMENT=false
 fi
 
-declare APT
-# shellcheck disable=SC2034
 if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
-    APT=true
+    readonly APT=true
 else
-    APT=false
+    readonly APT=false
 fi
 
-declare RPM
-# shellcheck disable=SC2034
 if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
     # Additional testing is needed because rpm may be installed on a system
     # that uses Debian package management system APT. APT is not available on a
     # system that uses Red Hat package management system RPM.
     if $APT; then
-        RPM=false
+        readonly RPM=false
     else
-        RPM=true
+        readonly RPM=true
     fi
 else
-    RPM=false
+    readonly RPM=false
 fi
 
 
@@ -93,9 +82,9 @@ fi
 # the script as user root if not.
 function become_root() {
     # pkexec needs fully qualified path to the program to be executed.
-    local       PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
-    local       TEXT=''
-    local   -i  RC=$OK
+    local PKEXEC_PROGRAM=/usr/bin/$PROGRAM_NAME
+    local TEXT=''
+    local -i RC=$OK
 
     become_root_check || exit $OK
 
@@ -140,7 +129,7 @@ function become_root_check() {
 # This function checks for another running APT package manager and waits for
 # the next check if so.
 function check_apt_package_manager() {
-    local       TEXT=''
+    local TEXT=''
     local   -i  CHECK_WAIT=10
 
     if ! $APT; then
@@ -200,13 +189,13 @@ function infomsg() {
 
 # This function performs initial actions such as set traps (script-hardening).
 function init_script() {
-    local       TEXT="==== START logs for script $PROGRAM_NAME ====
+    local TEXT="==== START logs for script $PROGRAM_NAME ====
 Started ($PROGRAM_NAME $* as $USER)."
-    declare -g  ERREXIT=true
-    declare -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
-    declare -g  OPTION_GUI=false
-    declare -g  RC=$OK
-    declare -ga COMMANDLINE_ARGS=("$@")
+    local -g  ERREXIT=true
+    local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_NAME"
+    local -g  OPTION_GUI=false
+    local -g  RC=$OK
+    local -ga COMMANDLINE_ARGS=("$@")
 
     # Script-hardening.
     set -o errexit
@@ -308,7 +297,6 @@ function process_option_version() {
     else
         TEXT=$(gettext 'Build ID cannot be determined.')
         logmsg "$TEXT"
-        # shellcheck disable=SC2034
         BUILD_ID=$TEXT
     fi
 
@@ -323,14 +311,15 @@ $(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
 
 # This function controls the termination.
 function term() {
-    local       SIGNAL=$1
+    local SIGNAL=$1
     local   -i  LINENO=$2
-    local       FUNCTION=$3
-    local       COMMAND=$4
+    local FUNCTION=$3
+    local COMMAND=$4
     local   -i  RC=$5
-    local       RC_DESC=''
-    local       STATUS=$RC/error
-    local       TEXT=''
+
+    local RC_DESC=''
+    local STATUS=$RC/error
+    local TEXT=''
     local   -i  RC_DESC_SIGNALNO=0
 
     case $RC in

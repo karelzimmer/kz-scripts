@@ -19,36 +19,36 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz-backup'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Make backup')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-backup'
+PROGRAM_DESC=$(gettext 'Make backup')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
+USAGE="$(eval_gettext "Usage: \$DISPLAY_NAME [-g|--gui] \
 [-t|--target <directory>]
                  \$OPTIONS_USAGE")"
+readonly USAGE
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -t, --target <directory>
                  place backup in specified directory')"
+readonly X_OPTIONS_HELP
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $X_OPTIONS_HELP
 $OPTIONS_HELP"
+readonly HELP
 
-declare X_OPTIONS_SHORT='gt:'
-declare X_OPTIONS_LONG=',gui,target:'
+readonly X_OPTIONS_SHORT='gt:'
+readonly X_OPTIONS_LONG=',gui,target:'
 
 
 ###############################################################################
@@ -57,8 +57,8 @@ declare X_OPTIONS_LONG=',gui,target:'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -80,9 +80,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    local       TEXT=''
-    declare -g  OPTION_TARGET=false
-    declare -g  TARGET_ARGUMENT=''
+    local TEXT=''
 
     while true; do
         case $1 in
@@ -137,11 +135,8 @@ function process_input() {
 
 # This function checks if the target is available.
 function check_target() {
-    local       TEXT=''
-    local       USB_MOUNT_POINT="/media/$USER"
-    declare -g  MEDIUM=''
-    declare -g  TARGET=''
-    declare -g  TARGET_MEDIUM=''
+    local TEXT=''
+    local USB_MOUNT_POINT="/media/$USER"
 
     if $RPM; then
         USB_MOUNT_POINT="/run/media/$USER"
@@ -428,11 +423,11 @@ function backup_setting_favs() {
 
 # This function creates the backup.
 function create_backup() {
-    local       ERROR_FILE=''
-    local       EXCLUDE_FILE=$HOME/$PROGRAM_NAME
-    local       RSYNC_MESSAGES=''
-    local       TEXT=''
-    local       TITLE=''
+    local ERROR_FILE=''
+    local EXCLUDE_FILE=$HOME/$PROGRAM_NAME
+    local RSYNC_MESSAGES=''
+    local TEXT=''
+    local TITLE=''
     local   -i  BACKUP_RC=0
 
     ERROR_FILE=$(mktemp -t "$PROGRAM_NAME-errors-XXXXXXXXXX")
@@ -539,9 +534,9 @@ use app 'Terminal', type 'kz backup'.")"
 
 # This function controls the termination of the script.
 function term_script() {
-    local       TEXT=''
+    local TEXT=''
     local   -i  NUM_USERS=0
-    local   -i  RC=$OK
+    local -i RC=$OK
 
     NUM_USERS=$(find /home/* -prune -print | wc --lines)
 
@@ -629,6 +624,12 @@ function term_script_unmount() {
 ###############################################################################
 
 function main() {
+    local MEDIUM=''
+    local TARGET=''
+    local TARGET_MEDIUM=''
+    local OPTION_TARGET=false
+    local TARGET_ARGUMENT=''
+
     init_script "$@"
     check_input "$@"
     process_input

@@ -19,21 +19,21 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz-check'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Check scripts and website')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-check'
+PROGRAM_DESC=$(gettext 'Check scripts and website')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly USAGE
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
+readonly HELP
 
 
 ###############################################################################
@@ -42,8 +42,8 @@ $OPTIONS_HELP"
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                       \
@@ -97,12 +97,11 @@ $USAGE"
 
 # This function processes the script options and arguments.
 function process_input() {
-    local       SCRIPT=''
-    local       SCRIPTDIR=''
-    local       SCRIPTNAME=''
-    local       SCRIPTS_REPO=$HOME/kz-scripts
-    local       TEXT=''
-    declare -g  ERR_FLAG=false
+    local SCRIPT=''
+    local SCRIPTDIR=''
+    local SCRIPTNAME=''
+    local SCRIPTS_REPO=$HOME/kz-scripts
+    local TEXT=''
 
     if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
@@ -348,8 +347,8 @@ function check_mypy() {
 
 # This function checks on record length.
 function check_record_length() {
-    local       PYTHON_SCRIPT='#!''/usr/bin/python3'
-    local       TEXT=''
+    local PYTHON_SCRIPT='#!''/usr/bin/python3'
+    local TEXT=''
     local   -i  MAX_LINE_LENGTH_FOUND=0
     local   -i  MAX_LINE_LENGTH=79
 
@@ -455,6 +454,8 @@ function term_script() {
 ###############################################################################
 
 function main() {
+    local ERR_FLAG=false
+
     init_script "$@"
     check_input "$@"
     process_input

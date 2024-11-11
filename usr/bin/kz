@@ -19,20 +19,20 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Run command')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz'
+PROGRAM_DESC=$(gettext 'Run command')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE
+
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-l|--list] \$OPTIONS_USAGE
           <command> [<arguments>]")
+readonly USAGE
 
-declare X_OPTIONS_HELP
-        X_OPTIONS_HELP=$(gettext '  -l, --list     show available commands')
+X_OPTIONS_HELP=$(gettext '  -l, --list     show available commands')
+readonly X_OPTIONS_HELP
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] <command> \
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] <command> \
 [<arguments>]")
 
 $PROGRAM_DESC.
@@ -44,9 +44,10 @@ $OPTIONS_HELP
 $(gettext 'Arguments:')
 $(gettext '  <command>      execute command')
 $(gettext '  <arguments>    arguments for command')"
+readonly HELP
 
-declare X_OPTIONS_SHORT='l'
-declare X_OPTIONS_LONG=',list'
+readonly X_OPTIONS_SHORT='l'
+readonly X_OPTIONS_LONG=',list'
 
 
 ###############################################################################
@@ -55,8 +56,8 @@ declare X_OPTIONS_LONG=',list'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     if [[ -z $* ]]; then
         infomsg "$USAGE"
@@ -135,6 +136,7 @@ $(eval_gettext "To execute a command: \$DISPLAY_NAME <command> [<arguments>]")"
 # This function processes the script options and arguments.
 function process_input() {
     local COMMAND=$1
+
     local TEXT=''
 
     if [[ ! -f /usr/bin/$PROGRAM_NAME-$COMMAND ]]; then

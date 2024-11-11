@@ -26,21 +26,21 @@ source  "$KZ_COMMON_LOCAL_FILE" 2> >(
 # Constants
 ###############################################################################
 
-declare PROGRAM_NAME='kz-get'
-declare PROGRAM_DESC
-        PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
-declare DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-get'
+PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare USAGE
-        USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME \$OPTIONS_USAGE")
+readonly USAGE
 
-declare HELP
-        HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>]")
 
 $PROGRAM_DESC.
 
 $(gettext 'Options:')
 $OPTIONS_HELP"
+readonly HELP
 
 
 ###############################################################################
@@ -49,8 +49,8 @@ $OPTIONS_HELP"
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    declare -g  KZ_DEB_LOCAL_FILE=''
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                       \
@@ -213,6 +213,8 @@ $(gettext "Type 'exit' to close this window.")"
 ###############################################################################
 
 function main() {
+    local KZ_DEB_LOCAL_FILE=''
+
     init_script "$@"
     check_input "$@"
     process_input

@@ -19,19 +19,18 @@ source kz_common.sh
 # Constants
 ###############################################################################
 
-declare     PROGRAM_NAME='kz-setup'
-declare     PROGRAM_DESC
-            PROGRAM_DESC=$(gettext 'Set up apps')
-declare     DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
+readonly PROGRAM_NAME='kz-setup'
+PROGRAM_DESC=$(gettext 'Set up apps')
+readonly PROGRAM_DESC
+readonly DISPLAY_NAME=${PROGRAM_NAME/kz-/kz }
 
-declare     USAGE
-            USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] \
-[-c|--cat] [-f|--file <file>] [-g|--gui] [-r|--reset]
+USAGE=$(eval_gettext "Usage: \$DISPLAY_NAME [-a|--apps] [-c|--cat] \
+[-f|--file <file>] [-g|--gui] [-r|--reset]
                 \$OPTIONS_USAGE [--] [<app>...]")
+readonly USAGE
 
-declare     X_OPTIONS_HELP
-            X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options \
-are mandatory for short options too.")
+X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
+mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
@@ -40,10 +39,9 @@ $(eval_gettext "  -f, --file <file>
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')"
+readonly X_OPTIONS_HELP
 
-declare     HELP
-            HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] \
-[<app>...]")
+HELP="$(eval_gettext "Usage: \$DISPLAY_NAME [<options>] [<app>...]")
 
 $PROGRAM_DESC.
 
@@ -55,9 +53,10 @@ option processing")
 
 $(gettext 'Arguments:')
 $(gettext '  <app>...       set up specified apps')"
+readonly HELP
 
-declare     X_OPTIONS_SHORT='acf:gr'
-declare     X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
+readonly X_OPTIONS_SHORT='acf:gr'
+readonly X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
 
 
 ###############################################################################
@@ -66,8 +65,8 @@ declare     X_OPTIONS_LONG=',apps,cat,file:,gui,reset'
 
 # This function handles the script options and arguments.
 function check_input() {
-    local       PARSED=''
-    local   -i  RC=$OK
+    local PARSED=''
+    local -i RC=$OK
 
     PARSED=$(
         getopt  --alternative                                       \
@@ -89,17 +88,7 @@ function check_input() {
 
 # This function handles the extra options and arguments.
 function process_x_options() {
-    local       TEXT=''
-    declare -g  ARGUMENT_APP=false
-    declare -g  FILE_ARGUMENT=''
-    declare -g  LOGOUT=true
-    declare -g  OPTION_APPS=false
-    declare -g  OPTION_CAT=false
-    declare -g  OPTION_FILE=false
-    declare -g  OPTION_RESET=false
-    declare -g  RESET='Reset'
-    declare -g  SETUP='Setup'
-    declare -gA APP_ARGUMENTS=()
+    local TEXT=''
 
     while true; do
         case $1 in
@@ -351,8 +340,8 @@ function process_option_cat() {
 
 # This function starts setting up the apps.
 function setup_apps() {
-    local       TEXT=''
-    local       TITLE=''
+    local TEXT=''
+    local TITLE=''
     local   -i  APP_TOT_NUM=0
 
     APP_TOT_NUM=$(
@@ -389,14 +378,12 @@ function setup_apps() {
 
 # This function reads commands from the command file for further processing.
 function process_command_file() {
-    local       APP_NAME_LINE=''
-    local       APP_NAME=''
-    local       COMMAND_RECORD=''
-    local       TEXT=''
+    local APP_NAME_LINE=''
+    local APP_NAME=''
+    local COMMAND_RECORD=''
+    local TEXT=''
     local   -i  APP_SEQ_NUM=0
     local   -i  CMD_SEQ_NUM=0
-    declare -g  NO_COMMANDS_FOUND=true
-    declare -gA FAILED_APPS=()
 
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')
@@ -440,8 +427,8 @@ function process_command_file() {
 
 # This function reports and executes a command from the command file.
 function execute_command() {
-    local       CMD=${1:-unknown}
-    local       CMD_DIS=''
+    local CMD=${1:-unknown}
+    local CMD_DIS=''
     local   -i  CMD_DIS_LEN=0
     local   -i  CMD_DIS_MAX=0
 
@@ -566,6 +553,19 @@ Type 'logout' to log out.")"
 ###############################################################################
 
 function main() {
+    local ARGUMENT_APP=false
+    local FILE_ARGUMENT=''
+    local LOGOUT=true
+    local NO_COMMANDS_FOUND=true
+    local OPTION_APPS=false
+    local OPTION_CAT=false
+    local OPTION_FILE=false
+    local OPTION_RESET=false
+    local RESET='Reset'
+    local SETUP='Setup'
+    local -A APP_ARGUMENTS=()
+    local -A FAILED_APPS=()
+
     init_script "$@"
     check_input "$@"
     process_input
