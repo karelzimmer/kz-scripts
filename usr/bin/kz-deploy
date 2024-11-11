@@ -119,7 +119,7 @@ function build() {
 
     # Call kz build.
     logmsg 'Calling kz build...'
-    kz build || exit $ERR
+    kz build || ERR_FLAG=true
     logmsg 'Called kz build.'
 }
 
@@ -142,7 +142,6 @@ function deploy() {
 function check_repos() {
     local DEB_REPO=$HOME/kz-deb
     local DOCS_REPO=$HOME/kz-docs
-    local ERR_FLAG=false
     local SCRIPTS_REPO=$HOME/kz-scripts
     local TEXT=''
     local UPLOADS_REPO=$HOME/kz-uploads
@@ -176,11 +175,6 @@ function check_repos() {
             ERR_FLAG=true
         fi
     done
-
-    if $ERR_FLAG; then
-        TEXT=$(gettext 'Fix all the messages above.')
-        errmsg "$TEXT"
-    fi
 }
 
 # This function check the scripts and website.
@@ -192,7 +186,7 @@ function check_scripts_and_website() {
 
     # Call kz check.
     logmsg 'Calling kz check...'
-    kz check || exit $ERR
+    kz check || ERR_FLAG=true
     logmsg 'Called kz check.'
 }
 
@@ -229,7 +223,7 @@ function upload_website() {
         rm --verbose "$FTP_LOGIN"*
         TEXT=$(gettext 'Website upload failed.')
         errmsg "$TEXT"
-        exit $ERR
+        ERR_FLAG=true
     fi
     # Empty REPLY with passowrd.
     REPLY=''
@@ -245,11 +239,11 @@ function install_package() {
 
     logmsg 'Calling kz getkz (via wget and bash)...'
     # Call kz-getkz via wget and bash as a regular user would do.
+    wget --output-document=- karelzimmer.nl/getkz 2> >($LOGCMD) | bash ||
     if ! wget --output-document=- karelzimmer.nl/getkz 2> >($LOGCMD) | bash
     then
         TEXT=$(gettext 'Install package kz failed.')
         errmsg "$TEXT"
-        exit $ERR
     fi
     logmsg 'Called kz getkz (via wget and bash).'
 }
@@ -257,7 +251,13 @@ function install_package() {
 
 # This function controls the termination of the script.
 function term_script() {
-    exit $OK
+    if $ERR_FLAG; then
+        TEXT=$(gettext 'Fix all the messages above.')
+        errmsg "$TEXT"
+        exit $ERR
+    else
+        exit $OK
+    fi
 }
 
 
@@ -266,6 +266,8 @@ function term_script() {
 ###############################################################################
 
 function main() {
+    local ERR_FLAG=false
+
     init_script "$@"
     check_input "$@"
     process_input
