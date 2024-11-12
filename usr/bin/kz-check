@@ -188,7 +188,7 @@ function check_website() {
 
     # Call rchecklink.
     logmsg 'Calling rchecklink...'
-    "$HOME/bin/rchecklink" || ERR_FLAG=true
+    rchecklink || ERR_FLAG=true
     logmsg 'Called rchecklink.'
 }
 
