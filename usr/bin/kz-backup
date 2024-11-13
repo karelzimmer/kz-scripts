@@ -284,22 +284,24 @@ function backup_setting_users() {
     local USER_NAME=''
 
     USERS_LIST=$(
-            gettext 'USERNAME|USERID|USER'
-            printf '\n'
-            grep --regexp='/home' /etc/passwd   |
-            cut --delimiter=':' --fields=1,3,5  |
-            tr ':' '|'
-            )
+        gettext 'USERNAME|USERID|USER'
+        printf  '\n'
+        grep    --regexp='/bin/bash' /etc/passwd    |
+        grep    --regexp='root' --invert-match      |
+        cut     --delimiter=':' --fields=1,3,5      |
+        tr      ',' ' '                             |
+        tr      ':' '|'
+        )
     GROUPS_LIST=$(
+        printf '\n'
+        while read -r USER_NAME; do
             printf '\n'
-            while read -r USER_NAME; do
-                printf '\n'
-                id "$USER_NAME"
-            done < <(
-                grep --regexp='/home' /etc/passwd |
-                cut --delimiter=':' --fields=1
-                )
+            id "$USER_NAME"
+        done < <(
+            grep --regexp='/home' /etc/passwd |
+            cut --delimiter=':' --fields=1
             )
+        )
 
     logmsg 'Save instructions for adding additional users...'
 
