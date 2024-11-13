@@ -94,9 +94,10 @@ def process_input() -> None:
 
         perform_rpm_cleanup()
     else:
-        RC = kz_common.ERR
         TEXT: str = _('Unknown package manager.')
-        kz_common.term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
+        kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        RC = kz_common.ERR
+        kz_common.term(PROGRAM_NAME, RC)
 
 
 def perform_apt_repair() -> None:
@@ -209,9 +210,10 @@ def perform_command(COMMAND: str = '') -> None:
     except Exception as exc:
         TEXT = str(exc)
         kz_common.logmsg(PROGRAM_NAME, TEXT)
-        RC = kz_common.ERR
         TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
-        kz_common.term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
+        kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+        RC = kz_common.ERR
+        kz_common.term(PROGRAM_NAME, RC)
     else:
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, '')
 
@@ -236,9 +238,10 @@ installation of updates ***")
         except Exception as exc:
             TEXT = str(exc)
             kz_common.logmsg(PROGRAM_NAME, TEXT)
-            RC = kz_common.ERR
             TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
-            kz_common.term(PROGRAM_NAME, RC, PROGRAM_DESC, TEXT)
+            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            RC = kz_common.ERR
+            kz_common.term(PROGRAM_NAME, RC)
     else:
         if subprocess.run('needs-restarting --reboothint',
                           shell=True).returncode == 1:
