@@ -310,9 +310,9 @@ function install_deb_package() {
 
     # ==== START Copied from kz-get ====
     KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-build-XXXXXXXXXX.deb")
-    # Progress indicator with growing [=>, [==>, etc. as long as the kz getkz
+    # Progress indicator with growing [=>, [==>, etc. as long as the kz get
     # local file exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the kz getkz local file and
+    # If something fails, kz_common.sh will remove the kz-get local file and
     # other files upon exit.
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"; do

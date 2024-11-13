@@ -326,6 +326,16 @@ function term() {
     local STATUS=$RC/error
     local TEXT=''
 
+    if [[ $PROGRAM_ID = 'kz-get' ]]; then
+        logmsg "Delete kz-get files ($MODULE_NAME)..."
+        rm  --force                 \
+            --verbose               \
+            getkz                   \
+            getkz.{1..99}           \
+            "$KZ_DEB_LOCAL_FILE"    \
+            "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
+    fi
+
     case $RC in
         0 )
             RC_DESC='successful termination'
@@ -404,16 +414,6 @@ error.")
             exit "$RC"
             ;;
         exit )
-            if [[ $PROGRAM_NAME = 'kz-get' ]]; then
-                logmsg "Delete kz get files ($MODULE_NAME)..."
-                rm  --force                 \
-                    --verbose               \
-                    getkz                   \
-                    getkz.{1..99}           \
-                    "$KZ_DEB_LOCAL_FILE"    \
-                    "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
-            fi
-
             TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"

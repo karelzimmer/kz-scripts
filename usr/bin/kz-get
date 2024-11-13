@@ -119,9 +119,9 @@ function prepare_processing() {
 
     sudo true
 
-    # Progress indicator with growing [=>, [==>, etc. as long as the kz getkz
+    # Progress indicator with growing [=>, [==>, etc. as long as the kz get
     # local file exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the kz getkz local file and
+    # If something fails, kz_common.sh will remove the kz-get local file and
     # other files upon exit.
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"; do
@@ -178,7 +178,7 @@ kz-4.2.1-1.noarch.rpm"
 function term_script() {
     local TEXT=''
 
-    logmsg "Delete kz get files ($PROGRAM_NAME)..."
+    logmsg "Delete kz-get files ($PROGRAM_NAME)..."
     rm  --force                 \
         --verbose               \
         getkz                   \
