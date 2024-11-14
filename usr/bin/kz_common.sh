@@ -320,11 +320,11 @@ function term() {
     local COMMAND=$4
     local -i RC=$5
 
-    local -i RC_DESC_SIGNALNO=0
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
     local RC_DESC=''
     local STATUS=$RC/error
     local TEXT=''
+    local -i RC_DESC_SIGNALNO=0
 
     if [[ $PROGRAM_ID = 'kz-get' ]]; then
         logmsg "Delete kz-get files ($MODULE_NAME)..."
@@ -408,9 +408,13 @@ function term() {
     case $SIGNAL in
         err )
             if $ERREXIT; then
-                TEXT=$(eval_gettext "Program \$PROGRAM_ID encountered an \
-error.")
+                TEXT="
+$(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
+            fi
+            if [[ $PROGRAM_ID = 'kz-get' ]]; then
+                infomsg "Logging: journalctl --all --boot --no-pager \
+--identifier=kz-get"
             fi
             exit "$RC"
             ;;
@@ -422,7 +426,8 @@ error.")
             exit "$RC"
             ;;
         * )
-            TEXT=$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")
+            TEXT="
+$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")"
             errmsg "$TEXT"
             exit "$RC"
             ;;
