@@ -166,6 +166,7 @@ function install_apt_package() {
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
             install                         \
+            --allow-downgrades              \
             --reinstall                     \
             --assume-yes                    \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
