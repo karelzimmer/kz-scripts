@@ -334,6 +334,7 @@ function term() {
             getkz.{1..99}           \
             "$KZ_DEB_LOCAL_FILE"    \
             "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
+        logmsg "Deleted kz-get files ($MODULE_NAME)."
     fi
 
     case $RC in

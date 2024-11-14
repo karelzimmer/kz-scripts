@@ -141,18 +141,20 @@ kz_4.2.1-1_all.deb"
     logmsg  'Download Debian package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
+    logmsg  'Downloaded Debian package kz.'
 }
 
 
 # This function prepares the installation to make this script more robust.
 function prepare_install_apt_package() {
-    logmsg  'Repair before install Debian package kz...'
+    logmsg 'Prepare install Debian package kz...'
     check_apt_package_manager           |& $LOGCMD
     sudo dpkg --configure --pending     |& $LOGCMD
     check_apt_package_manager           |& $LOGCMD
     sudo apt-get update --fix-missing   |& $LOGCMD
     check_apt_package_manager           |& $LOGCMD
     sudo apt-get install --fix-broken   |& $LOGCMD
+    logmsg 'Prepared install Debian package kz.'
 }
 
 
@@ -170,13 +172,15 @@ function install_apt_package() {
             --reinstall                     \
             --assume-yes                    \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
+    logmsg 'Installed Debian package kz.'
 }
 
 
 # This function prepares the installation to make this script more robust.
 function prepare_install_rpm_package() {
-    logmsg  'Repair before install RPM package kz...'
+    logmsg 'Prepare install RPM package kz...'
     sudo dnf clean all |& $LOGCMD
+    logmsg 'Prepared install RPM package kz.'
 }
 
 
@@ -186,13 +190,14 @@ function install_rpm_package() {
 kz-4.2.1-1.noarch.rpm"
     local MODE='install'
 
-    logmsg  'Install RPM package kz...'
+    logmsg 'Install RPM package kz...'
 
     if [[ -n $(type -t kz) ]]; then
         MODE='reinstall'
     fi
 
     sudo dnf $MODE --assumeyes "$KZ_RPM_SITE_FILE" |& $LOGCMD
+    logmsg 'Installed RPM package kz.'
 }
 
 
@@ -207,6 +212,7 @@ function term_script() {
         getkz.{1..99}           \
         "$KZ_DEB_LOCAL_FILE"    \
         "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
+    logmsg "Deleted kz-get files ($PROGRAM_NAME)."
 
     # Progress indicator with [=>, [==>, etc. ends like [====]100%.
     printf '\b%s\n' '=]100%'
