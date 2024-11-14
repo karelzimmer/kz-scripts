@@ -102,8 +102,10 @@ function process_input() {
     prepare_processing
     if $APT; then
         download_apt_package
+        prepare_install_apt_package
         install_apt_package
     elif $RPM; then
+        prepare_install_rpm_package
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')
@@ -142,6 +144,18 @@ kz_4.2.1-1_all.deb"
 }
 
 
+# This function prepares the installation to make this script more robust.
+function prepare_install_apt_package() {
+    logmsg  'Repair before install Debian package kz...'
+    check_apt_package_manager           |& $LOGCMD
+    sudo dpkg --configure --pending     |& $LOGCMD
+    check_apt_package_manager           |& $LOGCMD
+    sudo apt-get update --fix-missing   |& $LOGCMD
+    check_apt_package_manager           |& $LOGCMD
+    sudo apt-get install --fix-broken   |& $LOGCMD 
+}
+
+
 # This function installs Debian package kz.
 function install_apt_package() {
     logmsg 'Install Debian package kz...'
@@ -155,6 +169,13 @@ function install_apt_package() {
             --reinstall                     \
             --assume-yes                    \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
+}
+
+
+# This function prepares the installation to make this script more robust.
+function prepare_install_rpm_package() {
+    logmsg  'Repair before install RPM package kz...'
+    sudo dnf clean all
 }
 
 
