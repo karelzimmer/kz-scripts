@@ -416,7 +416,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo DEBIAN_FRONTEND=noninteractive apt-ge
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
 # EPEL: Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
