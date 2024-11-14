@@ -417,15 +417,12 @@ error.")
             TEXT="Ended (code=exited, status=$STATUS).
 ==== END logs for script $PROGRAM_NAME ===="
             logmsg "$TEXT"
-
             trap - ERR EXIT SIGHUP SIGINT SIGPIPE SIGTERM
-
             exit "$RC"
             ;;
         * )
             TEXT=$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")
             errmsg "$TEXT"
-
             exit "$RC"
             ;;
     esac
@@ -434,7 +431,7 @@ error.")
 
 # This function waits for the user to press Enter.
 function wait_for_enter() {
-    local PROMPT
+    local PROMPT=''
 
     PROMPT="$(gettext 'Press the Enter key to continue [Enter]: ')"
     logmsg "$PROMPT"
