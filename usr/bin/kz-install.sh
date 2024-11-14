@@ -416,7 +416,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo DEBIAN_FRONTEND=noninteractive apt-ge
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
 # EPEL: Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes epel-release; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
@@ -424,7 +424,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes teamviewe
 if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes teamviewer; fi
 
 # Install thunderbird on *
 if $DESKTOP_ENVIRONMENT && [[ $(lsb_release --id --short) = 'Debian' ]]; then sudo apt-get install --assume-yes thunderbird-l10n-nl; fi
