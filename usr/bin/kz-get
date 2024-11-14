@@ -175,7 +175,7 @@ function install_apt_package() {
 # This function prepares the installation to make this script more robust.
 function prepare_install_rpm_package() {
     logmsg  'Repair before install RPM package kz...'
-    sudo dnf clean all
+    sudo dnf clean all |& $LOGCMD
 }
 
 
