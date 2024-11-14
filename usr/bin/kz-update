@@ -202,7 +202,7 @@ def perform_command(COMMAND: str = '') -> None:
     """
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    TEXT: str = f'{COMMAND}'
+    TEXT: str = f'{kz_common.BOLD}{COMMAND}{kz_common.NORMAL}'
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     kz_common.check_apt_package_manager(PROGRAM_NAME, PROGRAM_DESC)
     try:
@@ -230,7 +230,7 @@ installation of updates ***")
     if kz_common.APT:
         try:
             with open('/var/run/reboot-required') as fh:
-                TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
+                TEXT = f'{kz_common.RED}{TEXT}{kz_common.NORMAL}'
                 kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         except FileNotFoundError as fnf:
             TEXT = str(fnf)
