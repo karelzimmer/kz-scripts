@@ -152,7 +152,7 @@ function prepare_install_apt_package() {
     check_apt_package_manager           |& $LOGCMD
     sudo apt-get update --fix-missing   |& $LOGCMD
     check_apt_package_manager           |& $LOGCMD
-    sudo apt-get install --fix-broken   |& $LOGCMD 
+    sudo apt-get install --fix-broken   |& $LOGCMD
 }
 
 
