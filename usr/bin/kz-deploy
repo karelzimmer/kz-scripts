@@ -256,6 +256,8 @@ function term_script() {
         errmsg "$TEXT"
         exit $ERR
     else
+        TEXT=$(gettext 'Complete!')
+        infomsg "$TEXT"
         exit $OK
     fi
 }

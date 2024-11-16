@@ -253,6 +253,8 @@ def term_script() -> None:
     """
     This function controls the termination of the script.
     """
+    TEXT = _('Complete!')
+    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
     RC = kz_common.OK
     kz_common.term(PROGRAM_NAME, RC)
 
