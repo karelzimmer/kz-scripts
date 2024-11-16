@@ -409,12 +409,10 @@ function term() {
         err )
             if $ERREXIT; then
                 TEXT="
-$(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
+$(eval_gettext "Program \$PROGRAM_ID encountered an error.")
+
+Log: journalctl --all --boot --no-pager --identifier=$PROGRAM_ID"
                 errmsg "$TEXT"
-            fi
-            if [[ $PROGRAM_ID = 'kz-get' ]]; then
-                infomsg "Logging: journalctl --all --boot --no-pager \
---identifier=kz-get"
             fi
             exit "$RC"
             ;;
