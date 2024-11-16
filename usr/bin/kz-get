@@ -121,6 +121,9 @@ function prepare_processing() {
 
     sudo true
 
+    TEXT="[info: journalctl -fat kz-get]"
+    infomsg "$TEXT"
+
     # Progress indicator with growing [=>, [==>, etc. as long as the kz get
     # local file exists, i.e. installation is in progress.
     # If something fails, kz_common.sh will remove the kz-get local file and
