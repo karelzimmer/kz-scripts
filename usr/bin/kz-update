@@ -163,7 +163,7 @@ def perform_rpm_repair() -> None:
     COMMAND: str = 'sudo dnf clean all'
     perform_command(COMMAND)
 
-    COMMAND = '# sudo dnf makecache'
+    COMMAND = 'sudo dnf makecache'
     perform_command(COMMAND)
 
 
