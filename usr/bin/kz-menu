@@ -291,6 +291,7 @@ Roughly boils down to:
                 --text      "$TEXT"     2> >($LOGCMD)
     else
         printf '%s\n' "$TEXT"
+        wait_for_enter
     fi
 }
 
