@@ -152,7 +152,7 @@ function check_repos() {
     for REPO in  $DEB_REPO $DOCS_REPO $SCRIPTS_REPO $UPLOADS_REPO; do
         cd "$REPO"
         if [[ $(git branch --show-current) != 'main' ]]; then
-            TEXT=$(gettext "Repo \$REPO not on branch main.")
+            TEXT=$(eval_gettext "Repo \$REPO not on branch main.")
             errmsg "$TEXT"
             git status
             ERR_FLAG=true
