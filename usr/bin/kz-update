@@ -116,9 +116,6 @@ def perform_apt_repair() -> None:
     COMMAND = 'sudo apt-get install --fix-broken'
     perform_command(COMMAND)
 
-    COMMAND = '# sudo update-initramfs -u'
-    perform_command(COMMAND)
-
 
 def perform_apt_update() -> None:
     """
