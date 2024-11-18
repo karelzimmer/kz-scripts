@@ -189,7 +189,7 @@ def perform_rpm_cleanup() -> None:
     COMMAND: str = 'sudo dnf clean all'
     perform_command(COMMAND)
 
-    COMMAND = 'sudo dnf autoremove'
+    COMMAND = 'sudo dnf autoremove --assumeyes'
     perform_command(COMMAND)
 
 
