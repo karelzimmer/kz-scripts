@@ -307,10 +307,10 @@ function backup_setting_users() {
 
     if $DESKTOP_ENVIRONMENT; then
         TEXT="$(gettext 'Additional users can be added manually:')
-$(gettext "1. Press the Super key[1], type 'user' and click behind Settings \
+$(gettext "  1. Press the Super key[1], type 'user' and click behind Settings \
 on Users.
-2. Click on Unlock and then Add User.
-3. Enter Name <user> and Username <username>.
+  2. Click on Unlock and then Add User.
+  3. Enter Name <user> and Username <username>.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")
@@ -363,10 +363,10 @@ function backup_setting_avatar() {
     fi
     logmsg 'Save instructions for restoring the avatar...'
     TEXT="$(gettext "To restore the users avatar:
-1. Press the Super key[1], type 'user' and click behind Settings on Users.
-2. Click on Change avatar (pencil icon).
-3. Click Select a file.
-4. Select avatar in Personal folder / kz, or another picture file.
+  1. Press the Super key[1], type 'user' and click behind Settings on Users.
+  2. Click on Change avatar (pencil icon).
+  3. Click Select a file.
+  4. Select avatar in Personal folder / kz, or another picture file.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
@@ -401,9 +401,9 @@ function backup_setting_desktop() {
     logmsg 'Save instructions for setting the desktop background...'
 
     TEXT="$(gettext "To set the desktop background:
-1. Press the Super key[1], type 'file' and click on Files.
-2. Open the folder containing the desired image.
-3. Right-click on the desired image and choose Set as Background.
+  1. Press the Super key[1], type 'file' and click on Files.
+  2. Open the folder containing the desired image.
+  3. Right-click on the desired image and choose Set as Background.
 
 [1] The Super key is the Windows key, Command key (Apple), or Magnifier key \
 (Chromebook).")"
