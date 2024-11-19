@@ -289,7 +289,7 @@ function backup_setting_users() {
         grep    --regexp='/bin/bash' /etc/passwd    |
         grep    --regexp='root' --invert-match      |
         cut     --delimiter=':' --fields=1,3,5      |
-        tr      ',' ' '                             |
+        tr      ',,,' '   '                         |
         tr      ':' '|'
         )
     GROUPS_LIST=$(
