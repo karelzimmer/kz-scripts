@@ -335,8 +335,8 @@ msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 msgid "Generate .mo file"
 msgstr "Genereer .mo bestand"
 
-msgid "Fix all the messages above."
-msgstr "Herstel alle meldingen hierboven."
+msgid "Please check all the messages above and fix them if necessary."
+msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
 
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
