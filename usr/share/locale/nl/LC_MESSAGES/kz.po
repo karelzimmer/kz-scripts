@@ -1055,8 +1055,8 @@ msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
 
 #, sh-format
-msgid "Script $SCRIPTNAME returned an error."
-msgstr "Script $SCRIPTNAME gaf een fout."
+msgid "Script $SCRIPTNAME --version returned an error."
+msgstr "Script $SCRIPTNAME --version gaf een fout."
 
 #, sh-format
 msgid "Gettext message catalog template $FILE not found."

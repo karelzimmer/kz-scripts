@@ -269,7 +269,10 @@ function check_script() {
 
     # Script.
     if ! "$FILE" --version |& $LOGCMD; then
-        TEXT='    '$(eval_gettext "Script \$SCRIPTNAME returned an error.")
+        infomsg "
+  ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
+        TEXT='    '$(eval_gettext "Script \$SCRIPTNAME --version returned an \
+error.")
         errmsg "$TEXT"
         ERR_FLAG=true
     fi
@@ -279,6 +282,8 @@ function check_script() {
         DIR=$SCRIPTS_REPO/usr/share/applications
 
         if [[ ! -e $DIR/$SCRIPTNAME.desktop ]]; then
+        infomsg "
+  ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
             TEXT='    '$(eval_gettext "Desktop configuration file \
 \$DIR/\$SCRIPTNAME.desktop not found.")
             errmsg "$TEXT"
@@ -466,7 +471,6 @@ necessary.")
 function main() {
     local ERR_FLAG=false
 
-#TODO Test alle opties + meldingen: $SCRIPTS_REPO/<path> / <filename>
     init_script "$@"
     check_input "$@"
     process_input
