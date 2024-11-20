@@ -301,9 +301,6 @@ msgstr ""
 msgid "Check scripts and website"
 msgstr ""
 
-msgid "Check:"
-msgstr ""
-
 msgid "Build website"
 msgstr ""
 

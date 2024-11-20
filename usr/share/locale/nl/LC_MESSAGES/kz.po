@@ -341,9 +341,6 @@ msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
-msgid "Check:"
-msgstr "Controleer:"
-
 msgid "Build website"
 msgstr "Bouw website"
 
