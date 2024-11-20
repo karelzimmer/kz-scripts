@@ -170,6 +170,8 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     """
     This function returns an error message.
     """
+    PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
+
     if OPTION_GUI:
         TITLE: str = f"{PROGRAM_DESC} {_('error message')} ({PROGRAM_NAME})"
         COMMAND: str = f'zenity --error                 \
@@ -179,7 +181,9 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
                                 --text      "{TEXT}"'
         subprocess.run(COMMAND, shell=True, check=True, executable='bash')
     else:
-        print(f'{RED}{TEXT}{NORMAL}')
+        print(f'\n{RED}{TEXT}{NORMAL}')
+        print(f'\n{RED}Info: $ journalctl --boot --no-pager \
+--identifier={PROGRAM_ID}.{NORMAL}')
 
 
 def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',

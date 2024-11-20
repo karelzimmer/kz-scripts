@@ -121,7 +121,7 @@ function prepare_processing() {
 
     sudo true
 
-    TEXT="[info: $ journalctl -fat kz-get]"
+    TEXT="[info: $ journalctl --follow --identifier=kz-get]"
     infomsg "$TEXT"
 
     # Progress indicator with growing [=>, [==>, etc. as long as the kz get
