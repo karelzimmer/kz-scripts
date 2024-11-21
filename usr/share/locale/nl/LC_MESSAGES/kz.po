@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-16 10:52+0100\n"
+"POT-Creation-Date: 2024-11-21 09:00+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -1053,6 +1053,9 @@ msgstr ""
 
 msgid "No WiFi device found."
 msgstr "Geen wifi-apparaat gevonden."
+
+msgid "Check scripts"
+msgstr "Controleer scripts"
 
 #, sh-format
 msgid "Script $SCRIPTNAME --version returned an error."
