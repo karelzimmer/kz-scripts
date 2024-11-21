@@ -332,9 +332,6 @@ msgstr "Gebruik: $PROGRAM_NAME $OPTIONS_USAGE"
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
 
-msgid "Generate .mo file"
-msgstr "Genereer .mo bestand"
-
 msgid "Please check all the messages above and fix them if necessary."
 msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
 
