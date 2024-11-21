@@ -109,6 +109,9 @@ function process_input() {
         exit $ERR
     fi
 
+    TEXT=$(gettext 'Check scripts')...
+    infomsg "$TEXT"
+
     check_gettext
 
     cd "$SCRIPTS_REPO"
