@@ -292,9 +292,6 @@ msgstr ""
 msgid "Must run on a Debian or Debian-based system."
 msgstr ""
 
-msgid "Generate .mo file"
-msgstr ""
-
 msgid "Please check all the messages above and fix them if necessary."
 msgstr ""
 
