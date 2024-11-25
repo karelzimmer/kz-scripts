@@ -183,7 +183,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
     else:
         print(f'\n{RED}{TEXT}{NORMAL}')
         print(f'\n{RED}Info: journalctl --boot --no-pager \
---identifier={PROGRAM_ID}.{NORMAL}')
+--identifier={PROGRAM_ID}{NORMAL}')
 
 
 def infomsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str = '',
