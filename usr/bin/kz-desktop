@@ -266,8 +266,6 @@ function capture_gnome_changes() {
     save_configuration_database B "$CONFIG_B_FILE"
 
     report_database_changes "$CONFIG_A_FILE" "$CONFIG_B_FILE"
-
-    rm --verbose "$CONFIG_A_FILE" "$CONFIG_B_FILE" |& $LOGCMD
 }
 
 

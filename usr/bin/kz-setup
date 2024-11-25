@@ -242,7 +242,6 @@ function process_argument_app() {
         TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --apps' for available \
 apps.")"
         infomsg "$TEXT"
-        rm --verbose "$COMMAND_FILE" |& $LOGCMD
         exit $ERR
     fi
 }
@@ -332,8 +331,6 @@ kz_common.sh")"
 # This function displays the contents of the command file.
 function process_option_cat() {
     less --quit-if-one-screen "$COMMAND_FILE"
-
-    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 
@@ -419,8 +416,6 @@ function process_command_file() {
                 ;;
         esac
     done < "$COMMAND_FILE"
-
-    rm --verbose "$COMMAND_FILE" |& $LOGCMD
 }
 
 

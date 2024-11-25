@@ -491,7 +491,6 @@ EOF
                 "$TARGET"/                      2> "$ERROR_FILE" ||
                                                     BACKUP_RC=$?
     fi
-    rm --verbose "$EXCLUDE_FILE" |& $LOGCMD
 
     TEXT=$(gettext "Writing data from memory (this may take a while)")
 
@@ -532,8 +531,6 @@ use app 'Terminal', type 'kz backup'.")"
         errmsg "$TEXT"
         exit $ERR
     fi
-
-    rm --verbose "$ERROR_FILE" |& $LOGCMD
 }
 
 

@@ -200,9 +200,9 @@ function download_website() {
         chmod --verbose 'u=rw,g=,o=' "$FTP_LOGIN" |& $LOGCMD
     fi
 
-    if ! lftp   --user "$FTP_USER"                  \
-                --password "$(cat "$FTP_LOGIN")"    \
-                -e "$FTP_SET; $FTP_X_CMD"             \
+    if ! lftp   --user      "$FTP_USER"             \
+                --password  "$(cat "$FTP_LOGIN")"   \
+                -e          "$FTP_SET; $FTP_X_CMD"  \
                 "$FTP_HOST"; then
         # Force entering the password next time.
         rm --verbose "$FTP_LOGIN"*

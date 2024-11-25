@@ -269,8 +269,6 @@ use app 'Terminal', type 'kz restore'.")
         errmsg "$TEXT"
         exit $ERR
     fi
-
-    rm --verbose "$ERROR_FILE" |& $LOGCMD
 }
 
 
