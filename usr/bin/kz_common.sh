@@ -332,8 +332,7 @@ function term() {
             --verbose               \
             getkz                   \
             getkz.{1..99}           \
-            "$KZ_DEB_LOCAL_FILE"    \
-            "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
+            "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
         logmsg "Deleted kz-get files ($MODULE_NAME)."
     fi
 
@@ -411,7 +410,7 @@ function term() {
                 TEXT="
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")
 
-Info: $ journalctl --boot --no-pager --identifier=$PROGRAM_ID"
+Info: journalctl --boot --no-pager --identifier=$PROGRAM_ID"
                 errmsg "$TEXT"
             fi
             exit "$RC"

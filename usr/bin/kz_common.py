@@ -182,7 +182,7 @@ def errmsg(PROGRAM_NAME: str, PROGRAM_DESC: str, TEXT: str,
         subprocess.run(COMMAND, shell=True, check=True, executable='bash')
     else:
         print(f'\n{RED}{TEXT}{NORMAL}')
-        print(f'\n{RED}Info: $ journalctl --boot --no-pager \
+        print(f'\n{RED}Info: journalctl --boot --no-pager \
 --identifier={PROGRAM_ID}.{NORMAL}')
 
 

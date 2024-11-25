@@ -12,14 +12,20 @@
 # Imports
 ###############################################################################
 
-declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
-        KZ_COMMON_SITE_FILE+='kz_common.sh'
-declare KZ_COMMON_LOCAL_FILE
-        KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
-wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
-        systemd-cat --identifier=kz-get --priority=debug
-source  "$KZ_COMMON_LOCAL_FILE" 2> >(
-        systemd-cat --identifier=kz-get --priority=debug)
+if [[ -f ~/kz-scripts/usr/bin/kz_common.sh && $PWD = ~/kz-scripts/usr/bin ]]
+then
+    source kz_common.sh
+else
+    declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
+            KZ_COMMON_SITE_FILE+='kz_common.sh'
+    declare KZ_COMMON_LOCAL_FILE
+            KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz_common-XXXXXXXXXX.sh")
+    wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
+            systemd-cat --identifier=kz-get --priority=debug
+    source  "$KZ_COMMON_LOCAL_FILE" 2> >(
+            systemd-cat --identifier=kz-get --priority=debug)
+fi
+
 
 
 ###############################################################################
@@ -121,7 +127,7 @@ function prepare_processing() {
 
     sudo true
 
-    TEXT="[info] $ journalctl --follow --identifier=kz-get"
+    TEXT="[info] journalctl --follow --identifier=kz-get"
     infomsg "$TEXT"
 
     # Progress indicator with growing [=>, [==>, etc. as long as the kz get
@@ -213,8 +219,7 @@ function term_script() {
         --verbose               \
         getkz                   \
         getkz.{1..99}           \
-        "$KZ_DEB_LOCAL_FILE"    \
-        "$KZ_COMMON_LOCAL_FILE" |& $LOGCMD
+        "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
     logmsg "Deleted kz-get files ($PROGRAM_NAME)."
 
     # Progress indicator with [=>, [==>, etc. ends like [====]100%.
