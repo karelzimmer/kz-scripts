@@ -238,13 +238,13 @@ function install_package() {
     infomsg "$TEXT"
 
     logmsg 'Calling kz-get (via wget and bash)...'
-    # Call kz-getkz via wget and bash as a regular user would do.
-    wget --output-document=- karelzimmer.nl/getkz 2> >($LOGCMD) | bash ||
-    if ! wget --output-document=- karelzimmer.nl/getkz 2> >($LOGCMD) | bash
-    then
+    # Call kz-get via wget and bash as a regular user would do.
+    cd "$HOME"
+    if ! (wget karelzimmer.nl/getkz 2> >($LOGCMD); bash getkz); then
         TEXT=$(gettext 'Install package kz failed.')
         errmsg "$TEXT"
     fi
+    cd "$OLDPWD"
     logmsg 'Called kz-get (via wget and bash).'
 }
 
