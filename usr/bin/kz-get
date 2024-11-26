@@ -14,8 +14,10 @@
 
 if [[ -f ~/kz-scripts/usr/bin/kz_common.sh && $PWD = ~/kz-scripts/usr/bin ]]
 then
+    # Use the version in dev which has been installed with kz-build.
     source kz_common.sh
 else
+    # Use the version in prd which has been installed with kz-deploy.
     declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
             KZ_COMMON_SITE_FILE+='kz_common.sh'
     declare KZ_COMMON_LOCAL_FILE
