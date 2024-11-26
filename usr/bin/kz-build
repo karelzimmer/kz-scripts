@@ -122,7 +122,6 @@ function process_input() {
     build_website
     build_deb_package
     build_rpm_package
-    copy_scripts
     install_deb_package
 }
 
@@ -163,6 +162,15 @@ function build_website() {
         fi
     done
     cd "$HOME"
+
+    # Copy kz-get and kz_common.sh to kz-uploads.
+    mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $LOGCMD
+    cp  --preserve                              \
+        --verbose                               \
+        "$SCRIPTS_REPO/usr/bin/kz-get"          \
+        "$SCRIPTS_REPO/usr/bin/kz_common.sh"    \
+        "$UPLOADS_REPO_DISTDIR/assets/scripts"  |& $LOGCMD
+
 }
 
 
@@ -273,17 +281,6 @@ function build_rpm_package() {
         --verbose                                           \
         "$RPM_REPO_DISTDIR/rpmbuild/RPMS/noarch/$RPM_NAME"  \
         "$UPLOADS_REPO_DISTDIR/assets/packages"             |& $LOGCMD
-}
-
-
-# This function copies kz-get and kz_common.sh to kz-uploads.
-function copy_scripts() {
-    mkdir --parents "$UPLOADS_REPO_DISTDIR/assets/scripts" |& $LOGCMD
-    cp  --preserve                              \
-        --verbose                               \
-        "$SCRIPTS_REPO/usr/bin/kz-get"          \
-        "$SCRIPTS_REPO/usr/bin/kz_common.sh"    \
-        "$UPLOADS_REPO_DISTDIR/assets/scripts"  |& $LOGCMD
 }
 
 
