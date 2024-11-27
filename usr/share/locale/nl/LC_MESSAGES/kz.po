@@ -405,6 +405,9 @@ msgstr "Ontwikkelomgeving bouwen"
 msgid "Check dependencies"
 msgstr "Controleer afhankelijkheden"
 
+msgid "Clone repos"
+msgstr "Clone repo's"
+
 msgid "Pull repos"
 msgstr "Pull repo's"
 

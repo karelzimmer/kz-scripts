@@ -151,6 +151,14 @@ function pull_repos() {
         git clone https://github.com/karelzimmer/bin.git "$BIN_REPO"
     fi
 
+    TEXT=$(gettext 'Clone repos')...
+    infomsg "$TEXT"
+
+    # Call gitclone.
+    logmsg 'Calling gitclone...'
+    "$BIN_REPO"/gitclone
+    logmsg 'Called gitclone.'
+
     TEXT=$(gettext 'Pull repos')...
     infomsg "$TEXT"
 

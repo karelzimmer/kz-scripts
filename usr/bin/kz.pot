@@ -360,6 +360,9 @@ msgstr ""
 msgid "Check dependencies"
 msgstr ""
 
+msgid "Clone repos"
+msgstr ""
+
 msgid "Pull repos"
 msgstr ""
 
