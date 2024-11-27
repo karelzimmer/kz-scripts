@@ -410,7 +410,7 @@ function term() {
                 TEXT="
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")
 
-Info: journalctl --boot --no-pager --identifier=$PROGRAM_ID"
+[info] journalctl --boot --no-pager --identifier=$PROGRAM_ID"
                 errmsg "$TEXT"
             fi
             exit "$RC"
