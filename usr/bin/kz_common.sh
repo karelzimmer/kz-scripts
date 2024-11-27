@@ -424,7 +424,9 @@ $(eval_gettext "Program \$PROGRAM_ID encountered an error.")
             ;;
         * )
             TEXT="
-$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")"
+$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")
+
+[info] journalctl --boot --no-pager --identifier=$PROGRAM_ID"
             errmsg "$TEXT"
             exit "$RC"
             ;;
