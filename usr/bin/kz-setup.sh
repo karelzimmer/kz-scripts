@@ -39,12 +39,14 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=firefox-esr; fi
 
 # Setup firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=firefox; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=firefox_firefox; fi
 
 # Reset firefox for karel@pc07
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox-esr; fi
 
 # Reset firefox for emily@pc-van-emily karel@pc01 karel@pc06 marin@pc02 monique@pc01
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox_firefox; fi
 
 # Setup gdebi for *
 if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
@@ -178,9 +180,11 @@ sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 
 # Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=thunderbird; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=thunderbird_thunderbird; fi
 
 # Reset thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=thunderbird; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=thunderbird_thunderbird; fi
 
 # Setup virtualbox for hugo@pc-van-hugo
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=virtualbox; fi
