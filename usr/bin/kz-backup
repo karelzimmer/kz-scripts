@@ -207,6 +207,14 @@ Please rename to '<username>@<hostname>'.")"
         errmsg "$TEXT"
         exit $ERR
     fi
+
+    if [[ -e $MEDIUM/$USER@$HOSTNAME ]]; then
+        TEXT="$(gettext "Backup found in wrong place: \
+'<medium>/<username>@<hostname>'. \
+Please move to '<medium>/kz-backup/'.")"
+        errmsg "$TEXT"
+        exit $ERR
+    fi
 }
 
 
