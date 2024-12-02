@@ -32,7 +32,7 @@ if $APT; then sudo apt-get install --assume-yes ansible; fi
 # Remove ansible from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes ansible; fi
 
-# Install anydesk on -nohost
+# Install anydesk on pc06 pc07
 # Remote Wayland display server is not supported.
 if $APT; then wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
 if $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
@@ -40,7 +40,7 @@ if $APT; then sudo apt-get update; fi
 if $APT; then sudo apt-get install --assume-yes anydesk; fi
 # Web app: https://my.anydesk.com/v2
 
-# Remove anydesk from -nohost
+# Remove anydesk from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes anydesk; fi
 if $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
 if $APT; then sudo apt-get update; fi

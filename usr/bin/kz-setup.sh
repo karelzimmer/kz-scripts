@@ -8,11 +8,11 @@
 # For the format of the records in this file, see the kz setup man page.
 # To manually running a command, first run the following: source kz_common.sh
 
-# Setup anydesk for -nouser
+# Setup anydesk for karel@pc06 karel@pc07
 # Remote Wayland display server is not supported.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=anydesk; fi
 
-# Reset anydesk for -nouser
+# Reset anydesk for karel@pc06 karel@pc07
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=anydesk; fi
 
 # Setup calibre for hugo@pc-van-hugo
