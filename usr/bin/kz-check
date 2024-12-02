@@ -109,6 +109,8 @@ function process_input() {
         exit $ERR
     fi
 
+    check_website
+
     TEXT=$(gettext 'Check scripts')...
     infomsg "$TEXT"
 
@@ -175,8 +177,6 @@ function process_input() {
             sort
             )
     cd "$HOME"
-
-    check_website
 }
 
 
