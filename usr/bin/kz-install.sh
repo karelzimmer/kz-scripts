@@ -460,16 +460,10 @@ if $APT; then sudo apt-get install --assume-yes usbutils; fi
 if $APT; then sudo apt-get remove --assume-yes usbutils; fi
 
 # Install user-guest on -nohost
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
 sudo passwd --delete "$(gettext 'guest')"
 
 # Remove user-guest from -nohost
-export TEXTDOMAIN=kz
-export TEXTDOMAINDIR=/usr/share/locale
-source /usr/bin/gettext.sh
 sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
