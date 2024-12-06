@@ -37,11 +37,12 @@ dat opdrachten bavat voor alle hierin opgenomen computers.
 .br
 De opdrachten meegeleverd bij \fBkz install\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
-.br
+.sp
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+De opdrachten in het opdrachtbestand worden uitgevoerd.
+Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 .sp
 Voor de indeling van het invoerbestand zie de sectie \fBBESTANDSINDELING\fR
 hieronder.
@@ -56,9 +57,6 @@ Naar keuze kunnen te installeren apps opgegeven worden met argument
 \fI<app>\fR.
 Per opgegeven app worden de opdrachten geselecteerd uit het invoerbestand en
 gekopieerd naar het opdrachtbestand.
-.sp
-De opdrachten in het opdrachtbestand worden uitgevoerd.
-Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp

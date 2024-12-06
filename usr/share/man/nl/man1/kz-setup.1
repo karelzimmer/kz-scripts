@@ -30,16 +30,17 @@ post-installatie-instelscript.
 \fBkz setup\fR verwerkt een invoerbestand ("instelbestand") die opdrachten
 bevat voor het instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
-Standaard verwerkt \fBkz setup\fR het invoerbestand /usr/bin/kz-setup.sh. Dit
-invoerbestand bevat instel-opdrachten voor alle hierin opgenomen gebruikers.
+Standaard verwerkt \fBkz setup\fR het invoerbestand /usr/bin/kz-setup.sh dat
+opdrachten bavat voor alle hierin opgenomen gebruikers.
 .br
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
-.br
+.sp
 Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
 huidige gebruiker geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
+De opdrachten in het opdrachtbestand worden uitgevoerd.
+Na succesvolle voltooiing wordt de gebruiker uitgelogd.
 .sp
 Voor de indeling van het invoerbestand zie de sectie \fBBESTANDSINDELING\fR
 hieronder.
@@ -50,9 +51,6 @@ in het invoerbestand.
 Naar keuze kunnen in te stellen apps opgegeven worden met argument \fI<app>\fR.
 Per opgegeven app worden de opdrachten geselecteerd uit het invoerbestand en
 gekopieerd naar het opdrachtbestand.
-.sp
-De opdrachten in het opdrachtbestand worden uitgevoerd.
-Na succesvolle voltooiing wordt de gebruiker uitgelogd.
 .sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
