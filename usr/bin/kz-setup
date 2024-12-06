@@ -34,7 +34,7 @@ mandatory for short options too.")
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
-                 process specified file (default /usr/bin/kz-setup.sh)")
+                 process specified setup file (default /usr/bin/kz-setup.sh)")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')"
