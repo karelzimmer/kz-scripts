@@ -187,7 +187,7 @@ function process_input() {
 
 
 
-# This function shows the available apps from the input file.
+# This function shows the available apps from the setup file.
 function process_option_apps() {
     local APPS=''
     local TEXT=''
@@ -247,7 +247,7 @@ apps.")"
 }
 
 
-# This function generates the command file from the input file and filters by
+# This function generates the command file from the setup file and filters by
 # APP.
 function process_input_file_by_app() {
     local APP_MATCH=false
@@ -292,7 +292,7 @@ kz_common.sh")"
 }
 
 
-# This function generates the command file from the input file and filters by
+# This function generates the command file from the setup file and filters by
 # USER.
 function process_input_file_by_user() {
     local INPUT_RECORD=''
