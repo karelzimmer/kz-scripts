@@ -330,7 +330,7 @@ kz_common.sh")"
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    less --quit-if-one-screen "$COMMAND_FILE"
+    cat "$COMMAND_FILE"
 }
 
 
