@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-09 09:00+0100\n"
+"POT-Creation-Date: 2024-12-09 12:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -438,9 +438,10 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
-"r|--remove]\n"
-"                  $OPTIONS_USAGE [--] [<app>...]"
+"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
+"                  $OPTIONS_USAGE\n"
+"                  [--] [<app>...]"
 msgstr ""
 
 #, sh-format
@@ -448,6 +449,9 @@ msgid "Usage: $PROGRAM_NAME [<options>] [<app>...]"
 msgstr ""
 
 msgid "  -a, --apps     show list of apps"
+msgstr ""
+
+msgid "  -b, --browse   browse install file"
 msgstr ""
 
 msgid "  -c, --cat      show contents of command file"
@@ -485,7 +489,7 @@ msgid "Type '$PROGRAM_NAME --apps' for available apps."
 msgstr ""
 
 #, sh-format
-msgid "No install file found, looked for '$INPUT_FILE'."
+msgid "No install file found, looked for '$INSTALL_FILE'."
 msgstr ""
 
 msgid "The following apps are available:"
@@ -816,9 +820,13 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
-"r|--reset]\n"
-"                $OPTIONS_USAGE [--] [<app>...]"
+"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
+"                $OPTIONS_USAGE\n"
+"                [--] [<app>...]"
+msgstr ""
+
+msgid "  -b, --browse   browse setup file"
 msgstr ""
 
 msgid ""
@@ -833,7 +841,7 @@ msgid "  <app>...       set up specified apps"
 msgstr ""
 
 #, sh-format
-msgid "No setup file found, looked for '$INPUT_FILE'."
+msgid "No setup file found, looked for '$SETUP_FILE'."
 msgstr ""
 
 #, sh-format

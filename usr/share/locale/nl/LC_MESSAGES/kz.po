@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 10:09+0100\n"
+"POT-Creation-Date: 2024-12-09 12:16+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -497,13 +497,15 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
-"r|--remove]\n"
-"                  $OPTIONS_USAGE [--] [<app>...]"
+"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
+"                  $OPTIONS_USAGE\n"
+"                  [--] [<app>...]"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] [-g|--"
-"gui] [-r|--remove]\n"
-"                    $OPTIONS_USAGE [--] [<app>...]"
+"Gebruik: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"                    [-f|--file <bestand>] [-g|--gui] [-r|--remove]\n"
+"                    $OPTIONS_USAGE\n"
+"                    [--] [<app>...]"
 
 #, sh-format
 msgid "Usage: $PROGRAM_NAME [<options>] [<app>...]"
@@ -511,6 +513,9 @@ msgstr "Gebruik: $PROGRAM_NAME [<opties>] [<app>...]"
 
 msgid "  -a, --apps     show list of apps"
 msgstr "  -a, --apps     toon lijst van apps"
+
+msgid "  -b, --browse   browse install file"
+msgstr "  -b, --browse   blader door installatiebestand"
 
 msgid "  -c, --cat      show contents of command file"
 msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
@@ -553,8 +558,8 @@ msgid "Type '$PROGRAM_NAME --apps' for available apps."
 msgstr "Typ '$PROGRAM_NAME --apps' voor beschikbare apps."
 
 #, sh-format
-msgid "No install file found, looked for '$INPUT_FILE'."
-msgstr "Geen installatiebestand gevonden, zocht '$INPUT_FILE'."
+msgid "No install file found, looked for '$INSTALL_FILE'."
+msgstr "Geen installatiebestand gevonden, zocht '$INSTALL_FILE'."
 
 msgid "The following apps are available:"
 msgstr "De volgende apps zijn beschikbaar:"
@@ -977,13 +982,18 @@ msgstr "De back-up is teruggezet voor $USER (er zijn $NUM_USERS gebruikers)."
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <file>] [-g|--gui] [-"
-"r|--reset]\n"
-"                $OPTIONS_USAGE [--] [<app>...]"
+"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
+"                $OPTIONS_USAGE\n"
+"                [--] [<app>...]"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-a|--apps] [-c|--cat] [-f|--file <bestand>] [-g|--"
-"gui] [-r|--reset]\n"
-"                  $OPTIONS_USAGE [--] [<app>...]"
+"Gebruik: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"                  [-f|--file <bestand>] [-g|--gui] [-r|--reset]\n"
+"                  $OPTIONS_USAGE\n"
+"                  [--] [<app>...]"
+
+msgid "  -b, --browse   browse setup file"
+msgstr "  -b, --browse   blader door instelbestand"
 
 msgid ""
 "  -f, --file <file>\n"
@@ -999,8 +1009,8 @@ msgid "  <app>...       set up specified apps"
 msgstr "  <app>...       stel opgegeven apps in"
 
 #, sh-format
-msgid "No setup file found, looked for '$INPUT_FILE'."
-msgstr "Geen instelbestand gevonden, zocht '$INPUT_FILE'."
+msgid "No setup file found, looked for '$SETUP_FILE'."
+msgstr "Geen instelbestand gevonden, zocht '$SETUP_FILE'."
 
 #, sh-format
 msgid "To set up the apps execute: $PROGRAM_NAME <app>..."
