@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 10:11+0100\n"
+"POT-Creation-Date: 2024-12-09 09:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -456,7 +456,7 @@ msgstr ""
 #, sh-format
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified file (default /usr/bin/kz-install.sh)"
+"                 process specified install file"
 msgstr ""
 
 msgid "  -r, --remove   delete apps"
@@ -823,7 +823,7 @@ msgstr ""
 
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified file (default /usr/bin/kz-setup.sh)"
+"                 process specified setup file"
 msgstr ""
 
 msgid "  -r, --reset    set apps on default values"
@@ -833,7 +833,7 @@ msgid "  <app>...       set up specified apps"
 msgstr ""
 
 #, sh-format
-msgid "No set up file found, looked for '$INPUT_FILE'."
+msgid "No setup file found, looked for '$INPUT_FILE'."
 msgstr ""
 
 #, sh-format
@@ -841,18 +841,18 @@ msgid "To set up the apps execute: $PROGRAM_NAME <app>..."
 msgstr ""
 
 #, sh-format
-msgid "To view the contents of the set up file execute: $PROGRAM_NAME --cat"
+msgid "To view the contents of the setup file execute: $PROGRAM_NAME --cat"
 msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the apps set up file execute: $PROGRAM_NAME --cat "
+"To view the contents of the apps setup file execute: $PROGRAM_NAME --cat "
 "<app>..."
 msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the default set up file execute: cat /usr/bin/kz-"
+"To view the contents of the default setup file execute: cat /usr/bin/kz-"
 "setup.sh"
 msgstr ""
 
