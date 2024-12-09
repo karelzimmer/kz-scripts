@@ -23,15 +23,18 @@ readonly PROGRAM_NAME='kz install'
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME [-a|--apps] [-c|--cat] \
-[-f|--file <file>] [-g|--gui] [-r|--remove]
-                  \$OPTIONS_USAGE [--] [<app>...]")
+USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME [-a|--apps] [-b|--browse] \
+[-c|--cat]
+                  [-f|--file <file>] [-g|--gui] [-r|--remove]
+                  \$OPTIONS_USAGE
+                  [--] [<app>...]")
 readonly USAGE
 
 X_OPTIONS_HELP="$(gettext "  Mandatory arguments to long options are \
 mandatory for short options too.")
 
 $(gettext '  -a, --apps     show list of apps')
+$(gettext '  -b, --browse   browse install file')
 $(gettext '  -c, --cat      show contents of command file')
 $(eval_gettext "  -f, --file <file>
                  process specified install file")
@@ -54,8 +57,8 @@ $(gettext 'Arguments:')
 $(gettext '  <app>...       install specified apps')"
 readonly HELP
 
-readonly X_OPTIONS_SHORT='acf:gr'
-readonly X_OPTIONS_LONG=',apps,cat,file:,gui,remove'
+readonly X_OPTIONS_SHORT='abcf:gr'
+readonly X_OPTIONS_LONG=',apps,browse,cat,file:,gui,remove'
 
 
 ###############################################################################
@@ -93,6 +96,10 @@ function process_x_options() {
         case $1 in
             -a | --apps )
                 OPTION_APPS=true
+                shift
+                ;;
+            -b | --browse )
+                OPTION_BROWSE=true
                 shift
                 ;;
             -c | --cat )
@@ -153,18 +160,23 @@ $USAGE"
 # This function processes the script options and arguments.
 function process_input() {
     local COMMAND_FILE=''
-    local INPUT_FILE=/usr/bin/kz-install.sh
+    local INSTALL_FILE=/usr/bin/kz-install.sh
     local TEXT=''
 
     if $OPTION_FILE; then
-        INPUT_FILE=$FILE_ARGUMENT
+        INSTALL_FILE=$FILE_ARGUMENT
     fi
 
-    if [[ ! -f $INPUT_FILE ]]; then
+    if [[ ! -f $INSTALL_FILE ]]; then
         TEXT=$(eval_gettext "No install file found, looked for \
-'\$INPUT_FILE'.")
+'\$INSTALL_FILE'.")
         errmsg "$TEXT"
         exit $ERR
+    fi
+
+    if $OPTION_BROWSE; then
+        process_option_browse
+        exit $OK
     fi
 
     if $OPTION_APPS; then
@@ -190,6 +202,12 @@ function process_input() {
 }
 
 
+# This function browses through the installation file.
+function process_option_browse() {
+    less "$INSTALL_FILE"
+}
+
+
 # This function shows the available apps from the install file.
 function process_option_apps() {
     local APPS=''
@@ -200,7 +218,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')\n"
     APPS=$(
         grep    --regexp="#.*$INSTALL.*$ON" \
-                "$INPUT_FILE"               |
+                "$INSTALL_FILE"               |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
         cut     --delimiter=' '             \
@@ -285,7 +303,7 @@ kz_common.sh")"
                 fi
                 ;;
         esac
-    done < "$INPUT_FILE"
+    done < "$INSTALL_FILE"
 
     if $NO_APP_MATCH; then
         APP_NOT_FOUND=true
@@ -327,7 +345,7 @@ kz_common.sh")"
                 fi
                 ;;
         esac
-    done < "$INPUT_FILE"
+    done < "$INSTALL_FILE"
 }
 
 
@@ -531,6 +549,7 @@ function main() {
     local NO_COMMANDS_FOUND=true
     local ON='on'
     local OPTION_APPS=false
+    local OPTION_BROWSE=false
     local OPTION_CAT=false
     local OPTION_FILE=false
     local OPTION_REMOVE=false
