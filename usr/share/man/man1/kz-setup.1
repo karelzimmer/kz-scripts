@@ -26,34 +26,32 @@ for \fBapps\fR, click on \fBSet up apps\fR.
 Use (first) \fBkz install\fR to install apps and changes system settings,
 \fBkz setup\fR is a post install setup script.
 .sp
-\fBkz setup\fR processes an input file ("set up file") that contains
-commands for setting up apps and changing user settings.
+\fBkz setup\fR processes a setup file that contains commands for setting up
+apps and changing user settings.
 .sp
-By default, \fBkz setup\fR processes the input file /usr/bin/kz-setup.sh, which
+By default, \fBkz setup\fR processes the setup file /usr/bin/kz-setup.sh, which
 contains commands for all users included in it.
 .br
 The commands supplied by with \fBkz setup\fR are arranged in such a way that
-the result remains the same when executed repeatedly idempotent).
-.br
-When processing the input file, the commands for any and the current user are
+the result remains the same when executed repeatedly (idempotent).
+.sp
+When processing the setup file, the commands for any and the current user are
 selected and copied to a command file.
 .br
-The records are processed in the order they appear in the files.
-.sp
-For the format of the input file see the section \fBFILE FORMAT\fR below.
-.sp
-Option \fB-a\fR, \fB--apps\fR lists all apps available in the input file.
-.sp
-Optionally, apps to be setup can be specified with argument \fI<app>\fR.
-Per specified app, the commands are selected from the input file and are copied
-to the command file.
-.sp
 The commands in the command file are executed.
 Upon successful completion the user will be logged out.
 .sp
+For the format of the setup file see the section \fBFILE FORMAT\fR below.
+.sp
+Option \fB-a\fR, \fB--apps\fR lists all apps available in the setup file.
+.sp
+Optionally, apps to be setup can be specified with argument \fI<app>\fR.
+Per specified app, the commands are selected from the setup file and are copied
+to the command file.
+.sp
 Option \fB-c\fR, \fB--cat\fR gives the contents of the command file.
 .sp
-With option \fB-f\fR, \fB--file\fR \fI<file>\fR another input file can be
+With option \fB-f\fR, \fB--file\fR \fI<file>\fR another setup file can be
 specified.
 .sp
 With option \fB-g\fR, \fB--gui\fR, \fBkz setup\fR is run in graphical mode. A
@@ -65,7 +63,7 @@ A -- signals the end of options and disables further option processing.
 .\"
 .\"
 .SH FILE FORMAT
-The input file contains so-called \fBApp records\fR and \fBCommand records\fR.
+The setup file contains so-called \fBApp records\fR and \fBCommand records\fR.
 .sp
 See \fBTable 1\fR for which \fBtypes\fR records there are and how these records
 are processed.
@@ -279,7 +277,7 @@ equal to 0.
 .SH FILES
 /usr/bin/kz-setup.sh
 .RS
-Set up file.
+Setup file.
 .RE
 .sp
 /tmp/kz-setup-XXXXXXXXXX.sh
@@ -322,7 +320,7 @@ IaC and Day 1 Operations
 .sp
 \fBkz setup\fR
 .RS
-Set everything in the default set up file.
+Set everything in the default setup file.
 Starter \fBSetup apps\fR is also available for this in a desktop environment.
 .RE
 .sp

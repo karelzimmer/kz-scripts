@@ -518,11 +518,10 @@ msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 #, sh-format
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified file (default /usr/bin/kz-install.sh)"
+"                 process specified install file"
 msgstr ""
 "  -f, --file <bestand>\n"
-"                 verwerk opgegeven bestand (standaard is /usr/bin/kz-install."
-"sh)"
+"                 verwerk opgegeven installatiebestand"
 
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
@@ -988,11 +987,10 @@ msgstr ""
 
 msgid ""
 "  -f, --file <file>\n"
-"                 process specified file (default /usr/bin/kz-setup.sh)"
+"                 process specified setup file"
 msgstr ""
 "  -f, --file <bestand>\n"
-"                 verwerk opgegeven bestand (standaard is /usr/bin/kz-setup."
-"sh)"
+"                 verwerk opgegeven instelbestand"
 
 msgid "  -r, --reset    set apps on default values"
 msgstr "  -r, --reset    stel apps in op standaardwaarden"
@@ -1001,7 +999,7 @@ msgid "  <app>...       set up specified apps"
 msgstr "  <app>...       stel opgegeven apps in"
 
 #, sh-format
-msgid "No set up file found, looked for '$INPUT_FILE'."
+msgid "No setup file found, looked for '$INPUT_FILE'."
 msgstr "Geen instelbestand gevonden, zocht '$INPUT_FILE'."
 
 #, sh-format
@@ -1009,13 +1007,13 @@ msgid "To set up the apps execute: $PROGRAM_NAME <app>..."
 msgstr "Om de apps in te stellen voer uit: $PROGRAM_NAME <app>..."
 
 #, sh-format
-msgid "To view the contents of the set up file execute: $PROGRAM_NAME --cat"
+msgid "To view the contents of the setup file execute: $PROGRAM_NAME --cat"
 msgstr ""
 "Om de inhoud van het instelbestand te bekijken voer uit: $PROGRAM_NAME --cat"
 
 #, sh-format
 msgid ""
-"To view the contents of the apps set up file execute: $PROGRAM_NAME --cat "
+"To view the contents of the apps setup file execute: $PROGRAM_NAME --cat "
 "<app>..."
 msgstr ""
 "Om de inhoud van het instelbestand voor apps te bekijken voer uit: "
@@ -1023,7 +1021,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"To view the contents of the default set up file execute: cat /usr/bin/kz-"
+"To view the contents of the default setup file execute: cat /usr/bin/kz-"
 "setup.sh"
 msgstr ""
 "Om de inhoud van het standaard instelbestand te bekijken voer uit: cat /usr/"

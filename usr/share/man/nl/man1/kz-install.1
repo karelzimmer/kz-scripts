@@ -28,42 +28,40 @@ Installeer eerst Linux, \fBkz install\fR is een post-installatie-script.
 Gebruik \fBkz setup\fR (na \fBkz install\fR) voor het instellen van apps en het
 wijzigen van gebruikersinstellingen.
 .sp
-\fBkz install\fR verwerkt een invoerbestand ("installatiebestand") die
-opdrachten bevat voor het installeren van apps en het wijzigen van
-systeeminstellingen.
+\fBkz install\fR verwerkt een installatiebestand die opdrachten bevat voor het
+installeren van apps en het wijzigen van systeeminstellingen.
 .sp
-Standaard verwerkt \fBkz install\fR het invoerbestand /usr/bin/kz-install.sh,
-dat opdrachten bavat voor alle hierin opgenomen computers.
+Standaard verwerkt \fBkz install\fR het installatiebestand
+/usr/bin/kz-install.sh, dat opdrachten bavat voor alle hierin opgenomen
+computers.
 .br
 De opdrachten meegeleverd bij \fBkz install\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
+.sp
+Bij het verwerken van het installatiebestand worden de opdrachten voor iedere
+en de huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
-Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
-huidige computer geselecteerd en gekopieerd naar het opdrachtbestand.
-.br
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
-.sp
-Voor de indeling van het invoerbestand zie de sectie \fBBESTANDSINDELING\fR
-hieronder.
-.sp
-Voor instructies over het toevoegen van extra gebruikers, zie de sectie
-\fBFILES\fR hieronder.
-.sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst van alle apps die beschikbaar zijn
-in het invoerbestand.
-.sp
-Naar keuze kunnen te installeren apps opgegeven worden met argument
-\fI<app>\fR.
-Per opgegeven app worden de opdrachten geselecteerd uit het invoerbestand en
-gekopieerd naar het opdrachtbestand.
-.sp
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de computer opnieuw opgestart.
 .sp
+Voor de indeling van het installatiebestand zie de sectie
+\fBBESTANDSINDELING\fR hieronder.
+.sp
+Voor instructies over het toevoegen van extra gebruikers, zie de sectie
+\fBBESTANDEN\fR hieronder.
+.sp
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst van alle apps die beschikbaar zijn
+in het installatiebestand.
+.sp
+Naar keuze kunnen te installeren apps opgegeven worden met argument
+\fI<app>\fR.
+Per opgegeven app worden de opdrachten geselecteerd uit het installatiebestand
+en gekopieerd naar het opdrachtbestand.
+.sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander invoerbestand
-opgegeven worden.
+Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander
+installatiebestand opgegeven worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz install\fR in grafische modus
 uitgevoerd. Een desktopomgeving is vereist.
@@ -75,7 +73,7 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-In het invoerbestand staan zogenaamde \fBApp-regels\fR en
+In het installatiebestand staan zogenaamde \fBApp-regels\fR en
 \fBOpdracht-regels\fR.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels

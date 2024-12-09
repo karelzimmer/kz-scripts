@@ -27,36 +27,34 @@ Gebruik (eerst) \fBkz install\fR voor het installeren van apps en het wijzigen
 van gebruikersinstellingen, \fBkz setup\fR is een
 post-installatie-instelscript.
 .sp
-\fBkz setup\fR verwerkt een invoerbestand ("instelbestand") die opdrachten
-bevat voor het instellen van apps en het wijzigen van gebruikersinstellingen.
+\fBkz setup\fR verwerkt een instelbestand die opdrachten bevat voor het
+instellen van apps en het wijzigen van gebruikersinstellingen.
 .sp
-Standaard verwerkt \fBkz setup\fR het invoerbestand /usr/bin/kz-setup.sh. Dit
-invoerbestand bevat instel-opdrachten voor alle hierin opgenomen gebruikers.
+Standaard verwerkt \fBkz setup\fR het instelbestand /usr/bin/kz-setup.sh dat
+opdrachten bavat voor alle hierin opgenomen gebruikers.
 .br
 De opdrachten meegeleverd bij \fBkz setup\fR zijn zodanig opgesteld dat bij
 herhaaldelijk uitvoeren het resultaat hetzelfde blijft (idempotent).
-.br
-Bij het verwerken van het invoerbestand worden de opdrachten voor iedere en de
+.sp
+Bij het verwerken van het instelbestand worden de opdrachten voor iedere en de
 huidige gebruiker geselecteerd en gekopieerd naar het opdrachtbestand.
 .br
-De regels worden verwerkt op de volgorde zoals deze in de bestanden voorkomen.
-.sp
-Voor de indeling van het invoerbestand zie de sectie \fBBESTANDSINDELING\fR
-hieronder.
-.sp
-Optie \fB-a\fR, \fB--apps\fR geeft een lijst alle van apps die beschikbaar zijn
-in het invoerbestand.
-.sp
-Naar keuze kunnen in te stellen apps opgegeven worden met argument \fI<app>\fR.
-Per opgegeven app worden de opdrachten geselecteerd uit het invoerbestand en
-gekopieerd naar het opdrachtbestand.
-.sp
 De opdrachten in het opdrachtbestand worden uitgevoerd.
 Na succesvolle voltooiing wordt de gebruiker uitgelogd.
 .sp
+Voor de indeling van het instelbestand zie de sectie \fBBESTANDSINDELING\fR
+hieronder.
+.sp
+Optie \fB-a\fR, \fB--apps\fR geeft een lijst alle van apps die beschikbaar zijn
+in het instelbestand.
+.sp
+Naar keuze kunnen in te stellen apps opgegeven worden met argument \fI<app>\fR.
+Per opgegeven app worden de opdrachten geselecteerd uit het instelbestand en
+gekopieerd naar het opdrachtbestand.
+.sp
 Optie \fB-c\fR, \fB--cat\fR geeft de inhoud van het opdrachtbestand.
 .sp
-Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander invoerbestand
+Met optie \fB-f\fR, \fB--file\fR \fI<bestand>\fR kan een ander instelbestand
 opgegeven worden.
 .sp
 Met optie \fB-g\fR, \fB--gui\fR wordt \fBkz setup\fR in grafische modus
@@ -69,7 +67,7 @@ opties uit.
 .\"
 .\"
 .SH BESTANDSINDELING
-In het invoerbestand staan zogenaamde \fBApp-regels\fR en
+In het instelbestand staan zogenaamde \fBApp-regels\fR en
 \fBOpdracht-regels\fR.
 .sp
 Zie \fBTabel 1\fR voor welke \fBsoorten\fR regels er zijn en hoe deze regels

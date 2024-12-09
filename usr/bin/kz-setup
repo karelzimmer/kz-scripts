@@ -34,7 +34,7 @@ mandatory for short options too.")
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -c, --cat      show contents of command file')
 $(gettext "  -f, --file <file>
-                 process specified file (default /usr/bin/kz-setup.sh)")
+                 process specified setup file")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')"
@@ -159,7 +159,7 @@ function process_input() {
     fi
 
     if [[ ! -f $INPUT_FILE ]]; then
-        TEXT=$(eval_gettext "No set up file found, looked for '\$INPUT_FILE'.")
+        TEXT=$(eval_gettext "No setup file found, looked for '\$INPUT_FILE'.")
         errmsg "$TEXT"
         exit $ERR
     fi
@@ -187,7 +187,7 @@ function process_input() {
 
 
 
-# This function shows the available apps from the input file.
+# This function shows the available apps from the setup file.
 function process_option_apps() {
     local APPS=''
     local TEXT=''
@@ -213,11 +213,11 @@ $(gettext 'NUM  APP')\n"
         TEXT+=$APPS
         TEXT+="\n
 $(eval_gettext "To set up the apps execute: \$PROGRAM_NAME <app>...")
-$(eval_gettext "To view the contents of the set up file execute: \
+$(eval_gettext "To view the contents of the setup file execute: \
 \$PROGRAM_NAME --cat")
-$(eval_gettext "To view the contents of the apps set up file execute: \
+$(eval_gettext "To view the contents of the apps setup file execute: \
 \$PROGRAM_NAME --cat <app>...")
-$(gettext "To view the contents of the default set up file execute: cat \
+$(gettext "To view the contents of the default setup file execute: cat \
 /usr/bin/kz-setup.sh")"
     else
         TEXT+="$(gettext '  0  No apps found.')
@@ -247,7 +247,7 @@ apps.")"
 }
 
 
-# This function generates the command file from the input file and filters by
+# This function generates the command file from the setup file and filters by
 # APP.
 function process_input_file_by_app() {
     local APP_MATCH=false
@@ -292,7 +292,7 @@ kz_common.sh")"
 }
 
 
-# This function generates the command file from the input file and filters by
+# This function generates the command file from the setup file and filters by
 # USER.
 function process_input_file_by_user() {
     local INPUT_RECORD=''
@@ -330,7 +330,7 @@ kz_common.sh")"
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    less --quit-if-one-screen "$COMMAND_FILE"
+    cat "$COMMAND_FILE"
 }
 
 
