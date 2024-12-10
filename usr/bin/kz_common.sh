@@ -261,7 +261,7 @@ function process_option_help() {
 
     if $DESKTOP_ENVIRONMENT; then
         YELP_MAN_URL="$(gettext ', or see the ')"
-        YELP_MAN_URL+="\033]8;;man:$PROGRAM_ID(1)\033\\$PROGRAM_ID(1) "
+        YELP_MAN_URL+="\033]8;;man:$PROGRAM_ID\033\\$PROGRAM_ID "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
     fi
 

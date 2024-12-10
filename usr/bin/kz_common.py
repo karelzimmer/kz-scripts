@@ -230,8 +230,8 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
 
     if DESKTOP_ENVIRONMENT:
         YELP_MAN_URL = f"{_(', or see the ')}"
-        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_ID}(1)\x1b\\{PROGRAM_ID}(1)'
-        YELP_MAN_URL += f" {_('man page')}\x1b]8;;\x1b\\"
+        YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_ID}\x1b\\{PROGRAM_ID} '
+        YELP_MAN_URL += f"{_('man page')}\x1b]8;;\x1b\\"
     TEXT: str = (f'{HELP}\n\n'
                  f'''{_("Type '{} --manual' or 'man {}'{} ").
                       format(PROGRAM_NAME, PROGRAM_NAME, YELP_MAN_URL)}'''
