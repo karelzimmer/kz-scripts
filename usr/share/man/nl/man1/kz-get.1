@@ -50,9 +50,15 @@ verwijderd):
 .br
     \fBkz get\fR
 .sp
-Voor systemen die geen datacompressie met zstd ondersteunen (bijvoorbeeld
-Debian 11), wordt het gedownloade pakket opnieuw verpakt als een pakket met
-xz, waarna het opnieuw verpakte pakket wordt geïnstalleerd.
+Als om een of andere reden het installeren mislukt, voer dan op een
+Debian-gebaseerd systeem achtereenvolgens uit:
+    sudo dpkg --configure --pending
+    sudo apt-get update --fix-missing
+    sudo apt-get install --fix-broken
+.br
+Op een Red Hat-gebaseerd systeem, voer uit:
+    sudo dnf clean all
+    sudo dnf makecache
 .sp
 Met opdracht \fBkz dev\fR kan de ontwikkelomgeving geplaatst worden op de
 locale computer zodat het pakket en de website ontwikkeld en getest kan worden.

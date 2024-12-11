@@ -82,39 +82,16 @@ def process_input() -> None:
     This function processes the script options and arguments.
     """
     if kz_common.APT:
-        perform_apt_repair()
-
         perform_apt_update()
-
         perform_apt_cleanup()
     elif kz_common.RPM:
-        perform_rpm_repair()
-
         perform_rpm_update()
-
         perform_rpm_cleanup()
     else:
         TEXT: str = _('Unknown package manager.')
         kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
         RC = kz_common.ERR
         kz_common.term(PROGRAM_NAME, RC)
-
-
-def perform_apt_repair() -> None:
-    """
-    This function runs a repair of Debian packages.
-    """
-    TEXT: str = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-
-    COMMAND: str = 'sudo dpkg --configure --pending'
-    perform_command(COMMAND)
-
-    COMMAND = 'sudo apt-get update --fix-missing'
-    perform_command(COMMAND)
-
-    COMMAND = 'sudo apt-get install --fix-broken'
-    perform_command(COMMAND)
 
 
 def perform_apt_update() -> None:
@@ -147,20 +124,6 @@ def perform_apt_cleanup() -> None:
     perform_command(COMMAND)
 
     COMMAND = 'sudo apt-get autoremove --assume-yes'
-    perform_command(COMMAND)
-
-
-def perform_rpm_repair() -> None:
-    """
-    This function runs a repair of RPM packages.
-    """
-    TEXT: str = f"{kz_common.BOLD}==== {_('Repair')} ===={kz_common.NORMAL}\n"
-    kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-
-    COMMAND: str = 'sudo dnf clean all'
-    perform_command(COMMAND)
-
-    COMMAND = 'sudo dnf makecache'
     perform_command(COMMAND)
 
 

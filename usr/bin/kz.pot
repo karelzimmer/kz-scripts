@@ -873,9 +873,6 @@ msgstr ""
 msgid "Update system"
 msgstr ""
 
-msgid "Repair"
-msgstr ""
-
 msgid "Update"
 msgstr ""
 

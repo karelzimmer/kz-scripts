@@ -20,11 +20,23 @@ kz-update \- Update system
 .SH DESCRIPTION
 \fBkz update\fR updates the system.
 .sp
-Performs repair, update, and cleanup in sequence.
-Report "reboot" if file /var/run/reboot-required exists.
+Performs update and cleanup.
+.br
+Indicates whether a restart is required.
+.sp
+If the update fails for some reason, on a Debian-based system, run the
+following in sequence:
+    sudo dpkg --configure --pending
+    sudo apt-get update --fix-missing
+    sudo apt-get install --fix-broken
+.br
+On a Red Hat-based system, run:
+    sudo dnf clean all
+    sudo dnf makecache
 .sp
 If for some reason a new kernel needs to be built, run 'sudo update-initramfs
 -u'.
+.br
 The need to run this command manually is only under very unusual circumstances
 - a post-install script will handle it automatically when a new kernel package
 is installed.

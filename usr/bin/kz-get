@@ -29,7 +29,6 @@ else
 fi
 
 
-
 ###############################################################################
 # Constants
 ###############################################################################
@@ -110,10 +109,8 @@ function process_input() {
     prepare_processing
     if $APT; then
         download_apt_package
-        prepare_install_apt_package
         install_apt_package
     elif $RPM; then
-        prepare_install_rpm_package
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')
@@ -128,9 +125,6 @@ function prepare_processing() {
     KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.deb")
 
     sudo true
-
-    TEXT="[info] journalctl --follow --identifier=kz-get"
-    infomsg "$TEXT"
 
     # Progress indicator with growing [=>, [==>, etc. as long as the kz get
     # local file exists, i.e. installation is in progress.
@@ -156,20 +150,6 @@ kz_4.2.1-1_all.deb"
 }
 
 
-# This function prepares the installation of the Debian package kz to make this
-# script more robust.
-function prepare_install_apt_package() {
-    logmsg 'Prepare install Debian package kz...'
-    check_apt_package_manager           |& $LOGCMD
-    sudo dpkg --configure --pending     |& $LOGCMD
-    check_apt_package_manager           |& $LOGCMD
-    sudo apt-get update --fix-missing   |& $LOGCMD
-    check_apt_package_manager           |& $LOGCMD
-    sudo apt-get install --fix-broken   |& $LOGCMD
-    logmsg 'Prepared install Debian package kz.'
-}
-
-
 # This function installs Debian package kz.
 function install_apt_package() {
     logmsg 'Install Debian package kz...'
@@ -185,16 +165,6 @@ function install_apt_package() {
             --assume-yes                    \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
     logmsg 'Installed Debian package kz.'
-}
-
-
-# This function prepares the installation of the RPM package kz to make this
-# script more robust.
-function prepare_install_rpm_package() {
-    logmsg 'Prepare install RPM package kz...'
-    sudo dnf clean all |& $LOGCMD
-    sudo dnf makecache |& $LOGCMD
-    logmsg 'Prepared install RPM package kz.'
 }
 
 

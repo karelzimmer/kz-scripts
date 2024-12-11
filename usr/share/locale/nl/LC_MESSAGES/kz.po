@@ -1046,9 +1046,6 @@ msgstr "resetten"
 msgid "Update system"
 msgstr "Systeem bijwerken"
 
-msgid "Repair"
-msgstr "Repareren"
-
 msgid "Update"
 msgstr "Bijwerken"
 

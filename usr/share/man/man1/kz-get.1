@@ -49,9 +49,15 @@ run (copy of getkz will be saved and later deleted):
 .br
     \fBkz get\fR
 .sp
-For systems that do not support data compression with zstd (e.g. Debian 11),
-the downloaded package is repackaged as a package with xz, and then the
-repackaged package is installed.
+If the install fails for some reason, on a Debian-based system, run the
+following in sequence:
+    sudo dpkg --configure --pending
+    sudo apt-get update --fix-missing
+    sudo apt-get install --fix-broken
+.br
+On a Red Hat-based system, run:
+    sudo dnf clean all
+    sudo dnf makecache
 .sp
 With command \fBkz dev\fR the development environment can be placed on the
 local computer so that the package and the website can be developed and tested.

@@ -408,10 +408,25 @@ function term() {
         err )
             if $ERREXIT; then
                 TEXT="
-$(eval_gettext "Program \$PROGRAM_ID encountered an error.")
-
-[info] journalctl --boot --no-pager --identifier=$PROGRAM_ID"
+$(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
+                if [[ $PROGRAM_ID = 'kz-get' ]]; then
+                    if $APT; then
+                        TEXT="Hint:
+$ sudo dpkg --configure --pending
+$ sudo apt-get update --fix-missing
+$ sudo apt-get install --fix-broken"
+                        infomsg "$TEXT"
+                    elif $RPM; then
+                        TEXT="Hint:
+$ sudo dnf clean all
+$ sudo dnf makecache"
+                        infomsg "$TEXT"
+                    else
+                        TEXT=$(gettext 'Unknown package manager.')
+                        errmsg "$TEXT"
+                    fi
+                fi
             fi
             exit "$RC"
             ;;
@@ -424,9 +439,7 @@ $(eval_gettext "Program \$PROGRAM_ID encountered an error.")
             ;;
         * )
             TEXT="
-$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")
-
-[info] journalctl --boot --no-pager --identifier=$PROGRAM_ID"
+$(eval_gettext "Program \$PROGRAM_ID has been interrupted.")"
             errmsg "$TEXT"
             exit "$RC"
             ;;
