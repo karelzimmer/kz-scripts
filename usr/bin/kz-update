@@ -138,7 +138,7 @@ def perform_rpm_update() -> None:
     COMMAND: str = 'sudo dnf check-update --refresh || true'
     perform_command(COMMAND)
 
-    COMMAND = 'sudo dnf upgrade --assumeyes --refresh'
+    COMMAND = 'sudo dnf upgrade --assumeyes --refresh --nogpgcheck'
     perform_command(COMMAND)
 
 
