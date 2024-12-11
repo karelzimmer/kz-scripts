@@ -113,13 +113,6 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=fr.handbrake.ghb; fi
 # Reset handbrake for emily@pc-van-emily
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=fr.handbrake.ghb; fi
 
-# Setup hide-files for *
-if $DESKTOP_ENVIRONMENT; then echo 'snap' > "$HOME/.hidden"; fi
-if $DESKTOP_ENVIRONMENT; then echo 'kz-backup' >> "$HOME/.hidden"; fi
-
-# Reset hide-files for *
-if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.hidden"; fi
-
 # Setup kvm for karel@pc06 karel@pc07
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=virt-manager; fi
 
