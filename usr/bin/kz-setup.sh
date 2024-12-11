@@ -126,19 +126,19 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=virt-manager; fi
 # Reset kvm for karel@pc06 karel@pc07
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=virt-manager; fi
 
-# Setup lynis for -nouser
+# Setup lynis for -nobody
 git clone https://github.com/CISOfy/lynis "$HOME/lynis" || true
 # Usage:
 # $ cd ~/lynis
 # $ [sudo] ./lynis audit system
 
-# Reset lynis for -nouser
+# Reset lynis for -nobody
 rm --force --recursive --verbose "$HOME/lynis"
 
-# Setup restore-thumbnails for -nouser
+# Setup restore-thumbnails for -nobody
 rm --force --recursive --verbose "$HOME/.cache/thumbnails/"
 
-# Reset restore-thumbnails for -nouser
+# Reset restore-thumbnails for -nobody
 # There is no command available to reset restored thumbnails.
 
 # Setup private-home for *
