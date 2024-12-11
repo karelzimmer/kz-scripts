@@ -178,36 +178,6 @@ def perform_command(COMMAND: str = '') -> None:
         kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, '')
 
 
-def check_reboot() -> None:
-    """
-    This function checks if reboot is needed.
-    """
-    PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
-
-    TEXT: str = _('Reboot is required to fully utilize these updates.')
-
-    if kz_common.APT:
-        try:
-            with open('/var/run/reboot-required') as fh:
-                TEXT = f'{kz_common.RED}{TEXT}{kz_common.NORMAL}'
-                kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        except FileNotFoundError as fnf:
-            TEXT = str(fnf)
-            kz_common.logmsg(PROGRAM_NAME, TEXT)
-        except Exception as exc:
-            TEXT = str(exc)
-            kz_common.logmsg(PROGRAM_NAME, TEXT)
-            TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
-            kz_common.errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-            RC = kz_common.ERR
-            kz_common.term(PROGRAM_NAME, RC)
-    else:
-        if subprocess.run('needs-restarting --reboothint',
-                          shell=True).returncode == 1:
-            TEXT = f"{kz_common.RED}{TEXT}{kz_common.NORMAL}"
-            kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-
-
 def term_script() -> None:
     """
     This function controls the termination of the script.
@@ -229,7 +199,5 @@ process_options()
 kz_common.become_root(PROGRAM_NAME, PROGRAM_DESC)
 
 process_input()
-
-check_reboot()
 
 term_script()

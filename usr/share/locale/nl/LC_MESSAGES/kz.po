@@ -1052,9 +1052,6 @@ msgstr "Bijwerken"
 msgid "Cleanup"
 msgstr "Opruimen"
 
-msgid "Reboot is required to fully utilize these updates."
-msgstr "Om deze updates volledig te benutten, is opnieuw opstarten vereist."
-
 msgid "Record this data to connect to the wireless network."
 msgstr ""
 "Leg deze gegevens vast om verbinding te maken met het draadloze netwerk."
