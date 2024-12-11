@@ -879,9 +879,7 @@ msgstr ""
 msgid "Cleanup"
 msgstr ""
 
-msgid ""
-"*** The computer needs to be restarted to complete the installation of "
-"updates ***"
+msgid "Reboot is required to fully utilize these updates."
 msgstr ""
 
 msgid "Record this data to connect to the wireless network."

@@ -184,8 +184,7 @@ def check_reboot() -> None:
     """
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    TEXT: str = _("*** The computer needs to be restarted to complete the \
-installation of updates ***")
+    TEXT: str = _('Reboot is required to fully utilize these updates.')
 
     if kz_common.APT:
         try:
