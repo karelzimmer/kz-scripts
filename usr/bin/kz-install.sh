@@ -45,12 +45,12 @@ if $APT; then sudo apt-get remove --assume-yes anydesk; fi
 if $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
 if $APT; then sudo apt-get update; fi
 
-# Install backintime on -nowhere
+# Install backintime on -nocomputer
 # Back In Time is a simple backup tool for Linux.
 # The backup is done by taking snapshots of a specified set of folders.
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes backintime-qt; fi
 
-# Remove backintime on -nowhere
+# Remove backintime on -nocomputer
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes backintime-qt; fi
 
 # Install bleachbit on pc-van-hugo
@@ -118,13 +118,13 @@ if $RPM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 # Check for kernel config parameter pci=noaer.
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
-# Install disabled-fwupd on -nowhere
+# Install disabled-fwupd on -nocomputer
 # Disable the Firmware update daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
-# Remove disabled-fwupd from -nowhere
+# Remove disabled-fwupd from -nocomputer
 # Enable the Firmware update daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
@@ -158,23 +158,23 @@ if $APT; then sudo apt-get install --assume-yes fakeroot; fi
 # Remove fakeroot from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes fakeroot; fi
 
-# Install fdupes on -nowhere
+# Install fdupes on -nocomputer
 if $APT; then sudo apt-get install --assume-yes fdupes; fi
 # Usage:
 # $ fdupes -r /path/to/folder     # Report recursively from /path/to/folder
 # $ fdupes -d /path/to/folder     # Delete, interactively, from /path/to/folder
 # $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
 
-# Remove fdupes from -nowhere
+# Remove fdupes from -nocomputer
 if $APT; then sudo apt-get remove --assume-yes fdupes; fi
 
-# Install force-x11 on -nowhere
+# Install force-x11 on -nocomputer
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 # Force means no choice @ user login for X11 or Wayland!
 if $DESKTOP_ENVIRONMENT; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
-# Remove force-x11 from -nowhere
+# Remove force-x11 from -nocomputer
 # Enable choice @ user login for X11 or Wayland.
 if  $DESKTOP_ENVIRONMENT; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
@@ -236,7 +236,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
-# Install google-earth on -nowhere
+# Install google-earth on -nocomputer
 if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
@@ -244,7 +244,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes google-e
 # Add the source list again because the installation overwrote the newly added source list.
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
 
-# Remove google-earth from -nowhere
+# Remove google-earth from -nocomputer
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
@@ -338,7 +338,7 @@ if $APT; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; 
 if $APT; then sudo apt-get remove --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if $APT; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
 
-# Install repair-ntfs on -nowhere
+# Install repair-ntfs on -nocomputer
 if $APT; then sudo apt-get install --assume-yes ntfs-3g; fi
 # Usage:
 # $ findmnt
@@ -346,7 +346,7 @@ if $APT; then sudo apt-get install --assume-yes ntfs-3g; fi
 # /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
 # $ sudo ntfsfix /dev/sdb2
 
-# Remove repair-ntfs from -nowhere
+# Remove repair-ntfs from -nocomputer
 if $APT; then sudo apt-get remove --assume-yes ntfs-3g; fi
 
 # Install rpm on pc06 pc07
@@ -459,11 +459,11 @@ if $APT; then sudo apt-get install --assume-yes usbutils; fi
 # This package contains the lsusb utility.
 if $APT; then sudo apt-get remove --assume-yes usbutils; fi
 
-# Install user-guest on -nowhere
+# Install user-guest on -nocomputer
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
 sudo passwd --delete "$(gettext 'guest')"
 
-# Remove user-guest from -nowhere
+# Remove user-guest from -nocomputer
 sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
@@ -534,11 +534,11 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes webmin; f
 if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 
-# Install wine on -nowhere
+# Install wine on -nocomputer
 if $DESKTOP_ENVIRONMENT && $APT; then sudo dpkg --add-architecture i386; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
 
-# Remove wine from -nowhere
+# Remove wine from -nocomputer
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo dpkg --remove-architecture i386; fi
 
