@@ -262,10 +262,7 @@ is there not enough space on \$HOME.
 Check the rsync messages (also in \$ERROR_FILE):
 \$RSYNC_MESSAGES
 
-Try restoring the back up again.
-Use app 'Installation menu' and select '5 - Command menu', or
-use app 'Restore backup', or
-use app 'Terminal', type 'kz restore'.")
+Try restoring the back up again.")
         errmsg "$TEXT"
         exit $ERR
     fi

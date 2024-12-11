@@ -506,10 +506,7 @@ function term_script() {
 errors:
 \$FAILED_APPS_TEXT
 
-Try installing the apps again.
-Use app 'Installation menu' and select '5 - Command menu', or
-use app 'Install apps', or
-use app 'Terminal', type 'kz install \$FAILED_APPS_TEXT'.")
+Try installing the apps again.")
         errmsg "$TEXT"
         exit $ERR
     fi

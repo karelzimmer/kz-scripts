@@ -523,7 +523,7 @@ EOF
     if [[ $BACKUP_RC -ne $OK ]]; then
         # shellcheck disable=SC2034
         RSYNC_MESSAGES=$(cat "$ERROR_FILE")
-        TEXT="$(eval_gettext "Backup ended with warnings or errors.
+        TEXT=$(eval_gettext "Backup ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while creating the backup, or
@@ -532,10 +532,7 @@ is there not enough space on \$TARGET.
 Check the rsync messages (also in \$ERROR_FILE):
 \$RSYNC_MESSAGES
 
-Try creating the back up again.
-Use app 'Installation menu' and select '5 - Command menu', or
-use app 'Make backup', or
-use app 'Terminal', type 'kz backup'.")"
+Try creating the back up again.")
         errmsg "$TEXT"
         exit $ERR
     fi

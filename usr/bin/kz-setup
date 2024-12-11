@@ -500,10 +500,7 @@ function term_script() {
         TEXT=$(eval_gettext "The set up of the following apps contains errors:
 \$FAILED_APPS_TEXT
 
-Try to set up the apps again.
-Use app 'Installation menu' and select '5 - Command menu', or
-use app 'Set up apps', or
-use app 'Terminal', type 'kz setup \$FAILED_APPS_TEXT'.")
+Try to set up the apps again.")
         errmsg "$TEXT"
         exit $ERR
     fi
