@@ -161,9 +161,9 @@ if $APT; then sudo apt-get remove --assume-yes fakeroot; fi
 # Install fdupes on -nocomputer
 if $APT; then sudo apt-get install --assume-yes fdupes; fi
 # Usage:
-# $ fdupes -r /path/to/folder     # Report recursively from /path/to/folder
-# $ fdupes -d /path/to/folder     # Delete, interactively, from /path/to/folder
-# $ fdupes -d -N /path/to/folder  # Delete, from /path/to/folder
+# $ fdupes -r /path/to/folder   # Report recursively from /path/to/folder
+# $ fdupes -rd /path/to/folder  # Delete, interactively, from /path/to/folder
+# $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
 
 # Remove fdupes from -nocomputer
 if $APT; then sudo apt-get remove --assume-yes fdupes; fi
