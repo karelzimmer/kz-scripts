@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-09 12:16+0100\n"
+"POT-Creation-Date: 2024-12-13 08:41+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -338,6 +338,9 @@ msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
 
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
+
+msgid "Generate Machine Object (.mo) file"
+msgstr "Genereer Machine Object (.mo)-bestand"
 
 msgid "Build website"
 msgstr "Bouw website"

@@ -119,12 +119,24 @@ function process_input() {
         exit $ERR
     fi
     become_root_check || exit $OK
+    generate_mo
     build_website
     build_deb_package
     build_rpm_package
     install_deb_package
 }
 
+
+# This function generates the gettext binary Machine Object (.mo) file from the
+# readable Portable Object (.po) file.
+function generate_mo() {
+    local LC_MESSAGES_DIR=$HOME/kz-scripts/usr/share/locale/nl/LC_MESSAGES
+    local TEXT=''
+
+    TEXT=$(gettext 'Generate Machine Object (.mo) file')...
+    infomsg "$TEXT"
+    msgfmt --output-file="$LC_MESSAGES_DIR/kz.mo" "$LC_MESSAGES_DIR/kz.po"
+}
 
 # This function builds the website.
 function build_website() {
