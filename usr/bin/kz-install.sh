@@ -346,7 +346,7 @@ if $APT; then sudo apt-get install --assume-yes ntfs-3g; fi
 # /media/...      /dev/sdba ntfs3  rw,nosuid,nodev,relatime,uid=...
 # $ lsblk
 # NAME                        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
-# sda                           8:0    0 931,5G  0 disk  
+# sda                           8:0    0 931,5G  0 disk
 # └─sda1                        8:1    0 931,5G  0 part  /media/...
 # $ sudo ntfsfix /dev/sdba1     # Fix an NTFS partition
 # $ sudo -b ntfsfix /dev/sdba1  # Clear the bad sector list
