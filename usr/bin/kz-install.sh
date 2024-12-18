@@ -341,10 +341,16 @@ if $APT; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
 # Install repair-ntfs on -none
 if $APT; then sudo apt-get install --assume-yes ntfs-3g; fi
 # Usage:
-# $ findmnt
+# $ findmnt (or lsblk)
 # TARGET          SOURCE    FSTYPE OPTIONS
-# /media/...      /dev/sdb2 ntfs3  rw,nosuid,nodev,relatime,uid=...
-# $ sudo ntfsfix /dev/sdb2
+# /media/...      /dev/sdba ntfs3  rw,nosuid,nodev,relatime,uid=...
+# $ lsblk
+# NAME                        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
+# sda                           8:0    0 931,5G  0 disk  
+# └─sda1                        8:1    0 931,5G  0 part  /media/...
+# $ sudo ntfsfix /dev/sdba1     # Fix an NTFS partition
+# $ sudo -b ntfsfix /dev/sdba1  # Clear the bad sector list
+# $ sudo -d ntfsfix /dev/sdba1  # Clear the volume dirty flag
 
 # Remove repair-ntfs from -none
 if $APT; then sudo apt-get remove --assume-yes ntfs-3g; fi
