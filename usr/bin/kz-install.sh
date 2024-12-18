@@ -40,9 +40,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- https://keys.anyd
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes anydesk; fi
-# We want this to output $basearch without expansion.
-# shellcheck disable=SC2016
-if $DESKTOP_ENVIRONMENT && $RPM; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/$basearch/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes anydesk; fi
 # Web app: https://my.anydesk.com/v2
 
