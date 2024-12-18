@@ -28,22 +28,37 @@ sudo kz-update
 
 # Install ansible on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes ansible; fi
+if $RPM; then sudo dnf install --assumeyes ansible; fi
 
 # Remove ansible from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes ansible; fi
+if $RPM; then sudo dnf remove --assumeyes ansible; fi
 
 # Install anydesk on pc06 pc07
 # Remote Wayland display server is not supported.
-if $APT; then wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
-if $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
-if $APT; then sudo apt-get update; fi
-if $APT; then sudo apt-get install --assume-yes anydesk; fi
+if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes anydesk; fi
+
+# Import GPG Key.
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
+# Install Google Chrome.
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+
+# [anydesk]
+# name=AnyDesk RHEL - stable
+# baseurl=http://rpm.anydesk.com/rhel/$releasever/$basearch/
+# gpgcheck=1
+# repo_gpgcheck=1
+# gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY; fi
+
 # Web app: https://my.anydesk.com/v2
 
 # Remove anydesk from pc06 pc07
-if $APT; then sudo apt-get remove --assume-yes anydesk; fi
-if $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
-if $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes anydesk; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 
 # Install backintime on -none
 # Back In Time is a simple backup tool for Linux.
@@ -340,6 +355,7 @@ if $APT; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
 
 # Install repair-ntfs on -none
 if $APT; then sudo apt-get install --assume-yes ntfs-3g; fi
+if $RPM; then sudo dnf install --assumeyes ntfs-3g; fi
 # Usage:
 # $ findmnt (or lsblk)
 # TARGET          SOURCE    FSTYPE OPTIONS
@@ -354,6 +370,7 @@ if $APT; then sudo apt-get install --assume-yes ntfs-3g; fi
 
 # Remove repair-ntfs from -none
 if $APT; then sudo apt-get remove --assume-yes ntfs-3g; fi
+if $RPM; then sudo dnf remove --assumeyes ntfs-3g; fi
 
 # Install rpm on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes rpm; fi
