@@ -36,29 +36,22 @@ if $RPM; then sudo dnf remove --assumeyes ansible; fi
 
 # Install anydesk on pc06 pc07
 # Remote Wayland display server is not supported.
-if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://keys.anydesk.com/repos/DEB-GPG-KEY' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes anydesk; fi
-
-# Import GPG Key.
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-# Install Google Chrome.
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
-
-# [anydesk]
-# name=AnyDesk RHEL - stable
-# baseurl=http://rpm.anydesk.com/rhel/$releasever/$basearch/
-# gpgcheck=1
-# repo_gpgcheck=1
-# gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY; fi
-
+# We want this to output $basearch without expansion.
+# shellcheck disable=SC2016
+if $DESKTOP_ENVIRONMENT && $RPM; then echo -e '[anydesk]\nname=AnyDesk RHEL - stable\nbaseurl=http://rpm.anydesk.com/rhel/$basearch/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY' | sudo tee /etc/yum.repos.d/AnyDesk-RHEL.repo; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes anydesk; fi
 # Web app: https://my.anydesk.com/v2
 
 # Remove anydesk from pc06 pc07
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes anydesk; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes anydesk; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo*; fi
 
 # Install backintime on -none
 # Back In Time is a simple backup tool for Linux.
