@@ -63,15 +63,20 @@ if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes backintime-qt;
 
 # Install bleachbit on pc-van-hugo
 if $APT; then sudo apt-get install --assume-yes bleachbit; fi
+if $RPM; then sudo dnf install --assumeyes bleachbit; fi
 
 # Remove bleachbit from pc-van-hugo
 if $APT; then sudo apt-get remove --assume-yes bleachbit; fi
+if $RPM; then sudo dnf remove --assumeyes bleachbit; fi
 
+#TODO
 # Install calibre on pc06 pc-van-hugo
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes calibre; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin; fi
 
 # Remove calibre from pc06 pc-van-hugo
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes calibre; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo calibre-uninstall; fi
 
 # Install change-grub-timeout on *
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
