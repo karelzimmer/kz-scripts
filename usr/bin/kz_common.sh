@@ -47,6 +47,20 @@ readonly RED='\033[1;31m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+source /etc/os-release
+if [[ $ID = 'debian' ]]; then
+    readonly DEBIAN=true
+else
+    readonly DEBIAN=false
+fi
+
+if [[ $ID = 'ubuntu' ]]; then
+    readonly UBUNTU=true
+else
+    readonly UBUNTU=false
+fi
+
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
     readonly DESKTOP_ENVIRONMENT=true

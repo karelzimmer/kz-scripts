@@ -28,6 +28,28 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-cockpit; fi
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-cockpit; fi
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"; fi
 
+# Setup dashtodock for *
+if $DEBIAN; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if $DEBIAN; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
+
+# Reset dashtodock for *
+if $DEBIAN; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if $DEBIAN; then gsettings reset org.gnome.shell disable-user-extensions; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
+
 # Setup evolution for karel@pc07
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.Evolution; fi
 

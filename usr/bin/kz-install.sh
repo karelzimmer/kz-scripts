@@ -10,15 +10,15 @@
 
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
-if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl stop apport.service; fi
-if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl disable apport.service; fi
-if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
-if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo rm --force --verbose /var/crash/*; fi
+if $UBUNTU; then sudo systemctl stop apport.service; fi
+if $UBUNTU; then sudo systemctl disable apport.service; fi
+if $UBUNTU; then sudo sed --in-place --expression='s/enabled=1/enabled=0/' /etc/default/apport; fi
+if $UBUNTU; then sudo rm --force --verbose /var/crash/*; fi
 
 # Remove disabled-apport from *
 # Enable Ubuntu's automatic crash report generation.
-if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
-if $APT && [[ $(lsb_release --id --short) = 'Ubuntu' ]]; then sudo systemctl enable --now apport.service; fi
+if $UBUNTU; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport; fi
+if $UBUNTU; then sudo systemctl enable --now apport.service; fi
 
 # Install update-system on *
 sudo kz-update
@@ -55,9 +55,11 @@ if $DESKTOP_ENVIRONMENT && $RPM; then sudo rm --force --verbose /etc/yum.repos.d
 # Back In Time is a simple backup tool for Linux.
 # The backup is done by taking snapshots of a specified set of folders.
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes backintime-qt; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes backintime-qt; fi
 
 # Remove backintime on -none
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes backintime-qt; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes backintime-qt; fi
 
 # Install bleachbit on pc-van-hugo
 if $APT; then sudo apt-get install --assume-yes bleachbit; fi
@@ -106,6 +108,14 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes cups-bac
 
 # Remove cups-backend-canon from pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
+
+# Install dashtodock on *
+# Reboot is needed!
+if $DEBIAN; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+
+# Remove dashtodock from *
+# Reboot is needed!
+if $DEBIAN; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).

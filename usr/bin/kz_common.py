@@ -48,6 +48,19 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    DEBIAN = True
+else:
+    DEBIAN = False
+
+if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    UBUNTU = True
+else:
+    UBUNTU = False
+
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
