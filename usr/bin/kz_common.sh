@@ -55,6 +55,12 @@ else
     readonly DEBIAN=false
 fi
 
+if [[ $ID = 'rocky' ]]; then
+    readonly ROCKYL=true
+else
+    readonly ROCKYL=false
+fi
+
 if [[ $ID = 'ubuntu' ]]; then
     readonly UBUNTU=true
 else

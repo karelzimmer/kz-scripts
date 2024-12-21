@@ -69,10 +69,9 @@ if $RPM; then sudo dnf install --assumeyes bleachbit; fi
 if $APT; then sudo apt-get remove --assume-yes bleachbit; fi
 if $RPM; then sudo dnf remove --assumeyes bleachbit; fi
 
-#TODO
 # Install calibre on pc06 pc-van-hugo
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes calibre; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo --validate && wget --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
 
 # Remove calibre from pc06 pc-van-hugo
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes calibre; fi
@@ -89,38 +88,40 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default
 if $APT; then sudo update-grub; fi
 if $RPM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
-# Install clamav on pc-van-hugo
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes clamtk-gnome; fi
-
-# Remove clamav from pc-van-hugo
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes clamtk-gnome; fi
-
 # Install cockpit on pc06
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes cockpit cockpit-pcp; fi
 # Web app: https://localhost:9090
 
 # Remove cockpit from pc06
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes cockpit; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes cockpit; fi
 
 # Install cups on *
 if $APT; then sudo apt-get install --assume-yes cups; fi
+if $RPM; then sudo dnf install --assumeyes cups; fi
 
 # Remove cups from *
 if $APT; then sudo apt-get remove --assume-yes cups; fi
+if $RPM; then sudo dnf remove --assumeyes cups; fi
 
 # Install cups-backend-canon on pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'N/A'; fi
 
 # Remove cups-backend-canon from pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'N/A'; fi
 
 # Install dashtodock on *
 # Reboot is needed!
-if $DEBIAN; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
+if $DESKTOP_ENVIRONMENT && $ROCKYL; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 
 # Remove dashtodock from *
 # Reboot is needed!
-if $DEBIAN; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
+if $DESKTOP_ENVIRONMENT && $ROCKYL; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).
@@ -169,18 +170,23 @@ sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 # Install exiftool on pc06 pc07
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes perl-Image-ExifTool; fi
 
 # Remove exiftool from pc06 pc07
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
 
 # Install fakeroot on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes fakeroot; fi
+if $RPM; then sudo dnf install --assumeyes fakeroot; fi
 
 # Remove fakeroot from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes fakeroot; fi
+if $RPM; then sudo dnf remove --assumeyes fakeroot; fi
 
 # Install fdupes on -none
 if $APT; then sudo apt-get install --assume-yes fdupes; fi
+if $RPM; then sudo dnf install --assumeyes fdupes; fi
 # Usage:
 # $ fdupes -r /path/to/folder   # Report recursively from /path/to/folder
 # $ fdupes -rd /path/to/folder  # Delete, interactively, from /path/to/folder
@@ -188,7 +194,9 @@ if $APT; then sudo apt-get install --assume-yes fdupes; fi
 
 # Remove fdupes from -none
 if $APT; then sudo apt-get remove --assume-yes fdupes; fi
+if $RPM; then sudo dnf remove --assumeyes fdupes; fi
 
+#TODO
 # Install force-x11 on -none
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 # Force means no choice @ user login for X11 or Wayland!

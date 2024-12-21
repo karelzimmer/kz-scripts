@@ -55,6 +55,12 @@ if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
 else:
     DEBIAN = False
 
+if subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    ROCKYL = True
+else:
+    ROCKYL = False
+
 if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
     UBUNTU = True
