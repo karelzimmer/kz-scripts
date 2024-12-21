@@ -107,11 +107,11 @@ if $RPM; then sudo dnf remove --assumeyes cups; fi
 
 # Install cups-backend-canon on pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then echo 'N/A'; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App cups-backend-canon is n/a on an RPM system'; fi
 
 # Remove cups-backend-canon from pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
-if $DESKTOP_ENVIRONMENT && $RPM; then echo 'N/A'; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App cups-backend-canon is n/a on an RPM system'; fi
 
 # Install dashtodock on *
 # Reboot is needed!
@@ -196,53 +196,66 @@ if $RPM; then sudo dnf install --assumeyes fdupes; fi
 if $APT; then sudo apt-get remove --assume-yes fdupes; fi
 if $RPM; then sudo dnf remove --assumeyes fdupes; fi
 
-#TODO
 # Install force-x11 on -none
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 # Force means no choice @ user login for X11 or Wayland!
-if $DESKTOP_ENVIRONMENT; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove force-x11 from -none
 # Enable choice @ user login for X11 or Wayland.
-if  $DESKTOP_ENVIRONMENT; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gdebi; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App gdebi is n/a on an RPM system'; fi
 
 # Remove gdebi from *
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gdebi; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App gdebi is n/a on an RPM system'; fi
 
 # Install gettext on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes gettext; fi
+if $RPM; then sudo dnf install --assumeyes gettext; fi
 
 # Remove gettext from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes gettext; fi
+if $RPM; then sudo dnf remove --assumeyes gettext; fi
 
 # Install gimp on pc-van-hugo pc06
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gimp; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes gimp; fi
 
 # Remove gimp from pc-van-hugo pc06
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-nl; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gimp; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes gimp; fi
 
 # Install git on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes git; fi
+if $RPM; then sudo sudo dnf install --assumeyes git; fi
 
 # Remove git from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes git; fi
+if $RPM; then sudo sudo dnf remove --assumeyes git; fi
 
 # Install gnome-gmail on pc01 pc06 pc07
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gnome-gmail; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App gnome-gmail is n/a on an RPM system'; fi
 
 # Remove gnome-gmail from pc01 pc06 pc07
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gnome-gmail; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App gnome-gmail is n/a on an RPM system'; fi
 
 # Install gnome-tweaks on pc01 pc06 pc07
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gnome-tweaks; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes gnome-tweaks; fi
 
 # Remove gnome-tweaks from pc01 pc06 pc07
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gnome-tweaks; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
 # Install google-chrome on *
 if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
@@ -265,6 +278,7 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
+#TODO
 # Install google-earth on -none
 if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
@@ -272,6 +286,15 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes google-earth-pro-stable; fi
 # Add the source list again because the installation overwrote the newly added source list.
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
+
+RPM:
+# Import GPG Key.
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
+# Install Google Earth.
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+
+# https://dl.google.com/linux/earth/rpm/stable/x86_64/
+# https://dl-ssl.google.com/linux/linux_signing_key.pub
 
 # Remove google-earth from -none
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
@@ -326,11 +349,11 @@ if $APT; then sudo apt-get install --assume-yes lftp; fi
 if $APT; then sudo apt-get remove --assume-yes lftp; fi
 
 # Install libreoffice on *
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes libreoffice; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes libreoffice; fi
 
 # Remove libreoffice from *
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes libreoffice; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes libreoffice; fi
 
 # Install locate on pc06 pc07
