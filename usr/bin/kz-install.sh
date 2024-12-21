@@ -226,11 +226,11 @@ if $APT; then sudo apt-get remove --assume-yes gettext; fi
 if $RPM; then sudo dnf remove --assumeyes gettext; fi
 
 # Install gimp on pc-van-hugo pc06
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gimp; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes gimp; fi
 
 # Remove gimp from pc-van-hugo pc06
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gimp; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes gimp gimp-help-en gimp-help-nl; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes gimp; fi
 
 # Install git on pc06 pc07
@@ -278,7 +278,6 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
-#TODO
 # Install google-earth on -none
 if $DESKTOP_ENVIRONMENT && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
@@ -286,45 +285,49 @@ if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes google-earth-pro-stable; fi
 # Add the source list again because the installation overwrote the newly added source list.
 if $DESKTOP_ENVIRONMENT && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
-
-RPM:
-# Import GPG Key.
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
-# Install Google Earth.
-if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
-
-# https://dl.google.com/linux/earth/rpm/stable/x86_64/
-# https://dl-ssl.google.com/linux/linux_signing_key.pub
+if $DESKTOP_ENVIRONMENT && $RPM; then echo -e '[google-earth]\nname=Google Earth - stable\nbaseurl=https://dl.google.com/linux/earth/rpm/stable/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://dl.google.com/linux/linux_signing_key.pub' | sudo tee /etc/yum.repos.d/google-earh.repo; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes google-earth-pro-stable; fi
 
 # Remove google-earth from -none
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then sudo rm --force --verbose /etc/yum.repos.d/google-earth.repo*; fi
 
 # Install handbrake on pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes handbrake; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App handbrake is n/a on an RPM system'; fi
 
 # Remove handbrake from pc-van-emily
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes handbrake; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App handbrake is n/a on an RPM system'; fi
 
 # Install htop on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes htop; fi
+if $RPM; then sudo dnf install --assumeyes htop; fi
 
 # Remove htop from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes htop; fi
+if $RPM; then sudo dnf remove --assumeyes htop; fi
 
 # Install jq on pc06 pc07
 if $APT; then sudo apt-get install --assume-yes jq; fi
+if $RPM; then sudo dnf install --assumeyes jq; fi
 
 # Remove jq from pc06 pc07
 if $APT; then sudo apt-get remove --assume-yes jq; fi
+if $RPM; then sudo dnf remove --assumeyes jq; fi
 
 # Install krita on pc06
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes krita; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App krita is n/a on an RPM system'; fi
 
 # Remove krita from pc06
 if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes krita; fi
+if $DESKTOP_ENVIRONMENT && $RPM; then echo 'App krita is n/a on an RPM system'; fi
 
+#TODO
 # Install kvm on pc06 pc07
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
 if $DESKTOP_ENVIRONMENT && $APT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
@@ -349,11 +352,11 @@ if $APT; then sudo apt-get install --assume-yes lftp; fi
 if $APT; then sudo apt-get remove --assume-yes lftp; fi
 
 # Install libreoffice on *
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes libreoffice; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf install --assumeyes libreoffice; fi
 
 # Remove libreoffice from *
-if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes libreoffice; fi
+if $DESKTOP_ENVIRONMENT && $APT; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $RPM; then sudo dnf remove --assumeyes libreoffice; fi
 
 # Install locate on pc06 pc07
