@@ -47,31 +47,36 @@ readonly RED='\033[1;31m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
+declare APT_SYSTEM=false
+declare RPM_SYSTEM=false
+declare DEBIAN=false
+declare ROCKY=false
+declare UBUNTU=false
+declare DESKTOP_ENVIRONMENT=false
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+source /etc/os-release
+if [[ $ID = 'debian' ]]; then
+    APT_SYSTEM=true
+    DEBIAN=true
+fi
+if [[ $ID = 'rocky' ]]; then
+    RPM_SYSTEM=true
+    ROCKY=true
+fi
+if [[ $ID = 'ubuntu' ]]; then
+    APT_SYSTEM=true
+    UBUNTU=true
+fi
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
-    readonly DESKTOP_ENVIRONMENT=true
-else
-    readonly DESKTOP_ENVIRONMENT=false
+    DESKTOP_ENVIRONMENT=true
 fi
-
-if [[ -n $(type -t {dpkg,apt-get,apt}) ]]; then
-    readonly APT=true
-else
-    readonly APT=false
-fi
-
-if [[ -n $(type -t {rpm,yum,dnf}) ]]; then
-    # Additional testing is needed because rpm may be installed on a system
-    # that uses Debian package management system APT. APT is not available on a
-    # system that uses Red Hat package management system RPM.
-    if $APT; then
-        readonly RPM=false
-    else
-        readonly RPM=true
-    fi
-else
-    readonly RPM=false
-fi
+readonly APT_SYSTEM
+readonly RPM_SYSTEM
+readonly DEBIAN
+readonly ROCKY
+readonly UBUNTU
+readonly DESKTOP_ENVIRONMENT
 
 
 ###############################################################################
@@ -133,7 +138,7 @@ function check_apt_package_manager() {
     local TEXT=''
     local -i CHECK_WAIT=10
 
-    if ! $APT; then
+    if ! $APT_SYSTEM; then
         return $OK
     fi
 
@@ -348,9 +353,9 @@ function term() {
             RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            if $APT; then
+            if $APT_SYSTEM; then
                 RC_DESC='apt/dpkg exited with error'
-            elif $RPM; then
+            elif $RPM_SYSTEM; then
                 RC_DESC='there are updates available'
             else
                 RC_DESC="previous errors/it didn't work"
@@ -411,13 +416,13 @@ function term() {
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
                 if [[ $PROGRAM_ID = 'kz-get' ]]; then
-                    if $APT; then
+                    if $APT_SYSTEM; then
                         TEXT="Hint:
 $ sudo dpkg --configure --pending
 $ sudo apt-get update --fix-missing
 $ sudo apt-get install --fix-broken"
                         infomsg "$TEXT"
-                    elif $RPM; then
+                    elif $RPM_SYSTEM; then
                         TEXT="Hint:
 $ sudo dnf clean all
 $ sudo dnf makecache"

@@ -28,6 +28,32 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-cockpit; fi
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-cockpit; fi
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"; fi
 
+# Setup dashtodock for *
+if $DEBIAN; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
+if $ROCKY; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell disable-user-extensions false; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
+if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
+
+# Reset dashtodock for *
+if $DEBIAN; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
+if $ROCKY; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
+if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell disable-user-extensions; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock dash-max-icon-size; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-fixed; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock dock-position; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height; fi
+if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
+
 # Setup evolution for karel@pc07
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.Evolution; fi
 
@@ -49,10 +75,11 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox; fi
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox_firefox; fi
 
 # Setup gdebi for *
-if $DESKTOP_ENVIRONMENT && $APT; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gdebi is not available on an RPM system.'; fi
 
 # Reset gdebi for *
-# There is no command available to reset gdebi.
+echo 'App gdebi cannot be reset.'
 
 # Setup git for karel@pc06 karel@pc07
 git config --global alias.logg 'log --decorate --graph --oneline --all'
@@ -139,7 +166,7 @@ rm --force --recursive --verbose "$HOME/lynis"
 rm --force --recursive --verbose "$HOME/.cache/thumbnails/"
 
 # Reset restore-thumbnails for -none
-# There is no command available to reset restored thumbnails.
+echo 'App restore-thumbnails cannot be reset.'
 
 # Setup private-home for *
 chmod 750 "$HOME"

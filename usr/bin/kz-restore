@@ -137,7 +137,7 @@ function check_source() {
     local TEXT=''
     local USB_MOUNT_POINT="/media/$USER"
 
-    if $RPM; then
+    if $RPM_SYSTEM; then
         USB_MOUNT_POINT="/run/media/$USER"
     fi
 

@@ -48,30 +48,29 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
+APT_SYSTEM: bool = False
+RPM_SYSTEM: bool = False
+DEBIAN: bool = False
+ROCKY: bool = False
+UBUNTU: bool = False
+DESKTOP_ENVIRONMENT: bool = False
+# Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    APT_SYSTEM = True
+    DEBIAN = True
+if subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    RPM_SYSTEM = True
+    ROCKY = True
+if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
+                  shell=True, executable='bash').returncode == OK:
+    APT_SYSTEM = True
+    UBUNTU = True
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    DESKTOP_ENVIRONMENT: bool = True
-else:
-    DESKTOP_ENVIRONMENT = False
-
-if subprocess.run('[[ -n $(type -t {dpkg,apt-get,apt}) ]]',
-                  shell=True, executable='bash').returncode == OK:
-    APT: bool = True
-else:
-    APT = False
-
-if subprocess.run('[[ -n $(type -t {rpm,yum,dnf}) ]]',
-                  shell=True, executable='bash').returncode == OK:
-    # Additional testing is needed because rpm may be installed on a system
-    # that uses Debian package management system APT. APT is not available on a
-    # system that uses Red Hat package management system RPM.
-    if APT:
-        RPM: bool = False
-    else:
-        RPM = True
-else:
-    RPM = False
+    DESKTOP_ENVIRONMENT = True
 
 
 ###############################################################################
@@ -144,7 +143,7 @@ def check_apt_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     CHECK_WAIT: int = 10
 
-    if RPM:
+    if RPM_SYSTEM:
         return OK
 
     while True:

@@ -500,7 +500,7 @@ function term_script() {
         TEXT=$(eval_gettext "The set up of the following apps contains errors:
 \$FAILED_APPS_TEXT
 
-Try to set up the apps again.")
+Try to set up the apps again and/or reboot the system.")
         errmsg "$TEXT"
         exit $ERR
     fi
@@ -516,12 +516,12 @@ Try to set up the apps again.")
         if $DESKTOP_ENVIRONMENT; then
             TEXT+="
 
-$(gettext "You will now be logged out of the computer to finish installing \
+$(gettext "You will now be logged out of the computer to finish setting up \
 the apps and changing user settings.")"
         else
             TEXT+="
 
-$(gettext "You must log out of the computer to finish installing the apps and \
+$(gettext "You must log out of the computer to finish setting up the apps and \
 changing user settings.
 Type 'logout' to log out.")"
         fi

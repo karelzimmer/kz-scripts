@@ -506,7 +506,7 @@ function term_script() {
 errors:
 \$FAILED_APPS_TEXT
 
-Try installing the apps again.")
+Try installing the apps again and/or reboot the system.")
         errmsg "$TEXT"
         exit $ERR
     fi

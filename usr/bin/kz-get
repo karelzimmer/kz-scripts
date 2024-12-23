@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Download and install Debian or RPM package kz
+# SPDX-FileComment: Download and install Debian or RPM_SYSTEM package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -34,7 +34,7 @@ fi
 ###############################################################################
 
 readonly PROGRAM_NAME='kz get'
-PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
+PROGRAM_DESC=$(gettext 'Download and install Debian or RPM_SYSTEM package kz')
 readonly PROGRAM_DESC
 
 USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME \$OPTIONS_USAGE")
@@ -107,10 +107,10 @@ function process_input() {
 
     become_root_check || exit $OK
     prepare_processing
-    if $APT; then
+    if $APT_SYSTEM; then
         download_apt_package
         install_apt_package
-    elif $RPM; then
+    elif $RPM_SYSTEM; then
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')
@@ -168,20 +168,20 @@ function install_apt_package() {
 }
 
 
-# This function installs RPM package kz.
+# This function installs RPM_SYSTEM package kz.
 function install_rpm_package() {
-    local KZ_RPM_SITE_FILE="https://karelzimmer.nl/assets/packages/\
+    local KZ_RPM_SYSTEM_SITE_FILE="https://karelzimmer.nl/assets/packages/\
 kz-4.2.1-1.noarch.rpm"
     local MODE='install'
 
-    logmsg 'Install RPM package kz...'
+    logmsg 'Install RPM_SYSTEM package kz...'
 
     if [[ -n $(type -t kz) ]]; then
         MODE='reinstall'
     fi
 
-    sudo dnf $MODE --assumeyes "$KZ_RPM_SITE_FILE" |& $LOGCMD
-    logmsg 'Installed RPM package kz.'
+    sudo dnf $MODE --assumeyes "$KZ_RPM_SYSTEM_SITE_FILE" |& $LOGCMD
+    logmsg 'Installed RPM_SYSTEM package kz.'
 }
 
 
