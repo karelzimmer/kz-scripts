@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
 # For the format of the records in this file, see the kz install man page.
-# To manually running a command, first run the following: source kz_common.sh
+# To manually run a command, first run: source kz_common.sh
 
 # First install app disabled-apport, then app update-system.
 # The rest of the apps are in alphabetical order of app name.

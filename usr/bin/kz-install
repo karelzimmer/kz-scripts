@@ -279,8 +279,7 @@ function process_input_file_by_app() {
 
     INSTALL_FILE_HEADER="$(gettext "# For the format of the records in \
 this file, see the kz install man page.")
-$(gettext "# To manually running a command, first run the following: source \
-kz_common.sh")"
+$(gettext "# To manually run a command, first run: source kz_common.sh")"
     printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
@@ -322,8 +321,7 @@ function process_input_file_by_host() {
 
     INSTALL_FILE_HEADER="$(gettext "# For the format of the records in \
 this file, see the kz install man page.")
-$(gettext "# To manually running a command, first run the following: source \
-kz_common.sh")"
+$(gettext "# To manually run a command, first run: source kz_common.sh")"
     printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do

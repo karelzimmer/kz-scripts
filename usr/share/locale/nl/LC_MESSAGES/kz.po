@@ -539,9 +539,9 @@ msgstr ""
 "# Voor de opmaak van de records in dit bestand, zie de kz setup man-pagina."
 
 msgid ""
-"# To manually running a command, first run the following: source kz_common.sh"
+"# To manually run a command, first run: source kz_common.sh"
 msgstr ""
-"# Om handmatig een opdracht uit te voeren, voer eerst het volgende uit: "
+"# Om handmatig een opdracht uit te voeren, voert u eerst het volgende uit: "
 "source kz_common.sh"
 
 msgid "app not found"
