@@ -500,7 +500,8 @@ function term_script() {
         TEXT=$(eval_gettext "The set up of the following apps contains errors:
 \$FAILED_APPS_TEXT
 
-Try to set up the apps again and/or reboot the system.")
+Try to set up the apps again, or log out of the computer to finish setting up \
+the apps and changing user settings.")
         errmsg "$TEXT"
         exit $ERR
     fi
