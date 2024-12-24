@@ -43,7 +43,6 @@ if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock
 # Reset dashtodock for *
 if $DEBIAN; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if $ROCKY; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
 if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell disable-user-extensions; fi
 if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme; fi
 if $DEBIAN || $ROCKY; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action; fi
