@@ -8,6 +8,8 @@
 # For the format of the records in this file, see the kz setup man page.
 # To manually running a command, first run the following: source kz_common.sh
 
+# The apps are in alphabetical order of app name.
+
 # Setup anydesk for karel@pc06 karel@pc07
 # Remote Wayland display server is not supported.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=anydesk; fi

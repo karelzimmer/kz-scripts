@@ -8,6 +8,9 @@
 # For the format of the records in this file, see the kz install man page.
 # To manually running a command, first run the following: source kz_common.sh
 
+# First install app disabled-apport, then app update-system.
+# The rest of the apps are in alphabetical order of app name.
+
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
 if $UBUNTU; then sudo systemctl stop apport.service; fi
