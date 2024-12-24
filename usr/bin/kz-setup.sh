@@ -31,7 +31,6 @@ if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applicati
 # Setup dashtodock for *
 if $DEBIAN; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if $ROCKY; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
-if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
 if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell disable-user-extensions false; fi
 if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true; fi
 if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize-or-previews'; fi
