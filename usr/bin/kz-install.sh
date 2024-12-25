@@ -5,8 +5,8 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# For the format of the records in this file, see the kz install man page.
-# To manually run a command, first run: source kz_common.sh
+# [info] For the format of the records in this file run: man kz install
+# [info] To manually run a command, first run: source kz_common.sh
 
 # First install app disabled-apport, then app update-system.
 # The rest of the apps are in alphabetical order of app name.
@@ -133,12 +133,12 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes cu
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App cups-backend-canon is not available on an RPM system.'; fi
 
 # Install dashtodock on *
-# Reboot is needed!
+# Reboot required!
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 
 # Remove dashtodock from *
-# Reboot is needed!
+# Reboot required!
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
 
@@ -218,12 +218,14 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes fdupes; fi
 # Install force-x11 on -none
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
 # Force means no choice @ user login for X11 or Wayland!
+# Reboot required!
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove force-x11 from -none
 # Enable choice @ user login for X11 or Wayland.
+# Reboot required!
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
@@ -347,6 +349,7 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes kr
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App krita is not available on an RPM system.'; fi
 
 # Install kvm on pc06 pc07
+# Reboot required!
 # Dpkg::Options to prevent interaction while restoring /etc/libvirt configuration files.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes --option Dpkg::Options::="--force-confdef" --option Dpkg::Options::="--force-confold" bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo usermod --append --groups libvirt,libvirt-qemu karel; fi
@@ -362,6 +365,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo virsh --connect=qemu:///system
 # Images are in: /var/lib/libvirt/images/
 
 # Remove kvm from pc06 pc07
+# Reboot required!
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo virsh --connect=qemu:///system net-autostart default --disable; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes bridge-utils cpu-checker libvirt-clients libvirt-daemon-system qemu-kvm qemu-system virtinst virt-manager; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo delgroup libvirtd-dnsmasq; fi

@@ -181,7 +181,10 @@ function process_input() {
         exit $OK
     fi
 
+    # Add info records from the setup file to the commands file.
     COMMAND_FILE=$(mktemp -t "kz-setup-XXXXXXXXXX.sh")
+    grep --fixed-strings --regexp='# [info] ' $SETUP_FILE > "$COMMAND_FILE"
+    printf '\n' >> "$COMMAND_FILE"
 
     if $ARGUMENT_APP; then
         process_argument_app
@@ -270,13 +273,7 @@ function process_input_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
     local NO_APP_MATCH=true
-    local SETUP_FILE_HEADER=''
     local TEXT=''
-
-    SETUP_FILE_HEADER="$(gettext "# For the format of the records in \
-this file, see the kz setup man page.")
-$(gettext "# To manually run a command, first run: source kz_common.sh")"
-    printf '%s\n\n' "$SETUP_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
@@ -312,13 +309,7 @@ $(gettext "# To manually run a command, first run: source kz_common.sh")"
 # USER.
 function process_input_file_by_user() {
     local INPUT_RECORD=''
-    local SETUP_FILE_HEADER=''
     local USER_MATCH=false
-
-    SETUP_FILE_HEADER="$(gettext "# For the format of the records in \
-this file, see the kz setup man page.")
-$(gettext "# To manually run a command, first run: source kz_common.sh")"
-    printf '%s\n\n' "$SETUP_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in

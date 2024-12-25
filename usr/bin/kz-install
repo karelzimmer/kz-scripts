@@ -184,7 +184,10 @@ function process_input() {
         exit $OK
     fi
 
+    # Add info records from the install file to the commands file.
     COMMAND_FILE=$(mktemp -t "kz-install-XXXXXXXXXX.sh")
+    grep --fixed-strings --regexp='# [info] ' $INSTALL_FILE > "$COMMAND_FILE"
+    printf '\n' >> "$COMMAND_FILE"
 
     if $ARGUMENT_APPS; then
         process_argument_app
@@ -273,14 +276,8 @@ apps.")"
 function process_input_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
-    local INSTALL_FILE_HEADER=''
     local NO_APP_MATCH=true
     local TEXT=''
-
-    INSTALL_FILE_HEADER="$(gettext "# For the format of the records in \
-this file, see the kz install man page.")
-$(gettext "# To manually run a command, first run: source kz_common.sh")"
-    printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in
@@ -317,12 +314,6 @@ $(gettext "# To manually run a command, first run: source kz_common.sh")"
 function process_input_file_by_host() {
     local HOST_MATCH=false
     local INPUT_RECORD=''
-    local INSTALL_FILE_HEADER=''
-
-    INSTALL_FILE_HEADER="$(gettext "# For the format of the records in \
-this file, see the kz install man page.")
-$(gettext "# To manually run a command, first run: source kz_common.sh")"
-    printf '%s\n\n' "$INSTALL_FILE_HEADER" >> "$COMMAND_FILE"
 
     while read -r INPUT_RECORD; do
         case $INPUT_RECORD in

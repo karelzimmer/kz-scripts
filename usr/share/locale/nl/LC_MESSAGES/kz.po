@@ -528,22 +528,6 @@ msgstr "  -r, --remove   verwijder apps"
 msgid "  <app>...       install specified apps"
 msgstr "  <app>...       installeer opgegeven apps"
 
-msgid ""
-"# For the format of the records in this file, see the kz install man page."
-msgstr ""
-"# Voor de opmaak van de records in dit bestand, zie de kz install man-pagina."
-
-msgid ""
-"# For the format of the records in this file, see the kz setup man page."
-msgstr ""
-"# Voor de opmaak van de records in dit bestand, zie de kz setup man-pagina."
-
-msgid ""
-"# To manually run a command, first run: source kz_common.sh"
-msgstr ""
-"# Om handmatig een opdracht uit te voeren, voert u eerst het volgende uit: "
-"source kz_common.sh"
-
 msgid "app not found"
 msgstr "app niet gevonden"
 
