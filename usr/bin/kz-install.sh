@@ -30,11 +30,11 @@ sudo kz-update
 echo 'App update-system cannot be removed.'
 
 # Install 7zip on *
-if $APT_SYSTEM; then sudo apt-get install --assume-yes p7zip-full p7zip-rar; fi
+if $APT_SYSTEM; then sudo apt-get install --assume-yes p7zip-full; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes p7zip; fi
 
 # Remove 7zip from *
-if $APT_SYSTEM; then sudo apt-get remove --assume-yes p7zip-full p7zip-rar; fi
+if $APT_SYSTEM; then sudo apt-get remove --assume-yes p7zip-full; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes p7zip; fi
 
 # Install ansible on pc06 pc07
