@@ -207,7 +207,7 @@ function process_input() {
 
 # This function browses through the installation file.
 function process_option_browse() {
-    less "$INSTALL_FILE"
+    less --no-init --quit-if-one-screen "$INSTALL_FILE"
 }
 
 
@@ -340,7 +340,7 @@ function process_input_file_by_host() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    cat "$COMMAND_FILE"
+    less --no-init --quit-if-one-screen "$COMMAND_FILE"
 }
 
 

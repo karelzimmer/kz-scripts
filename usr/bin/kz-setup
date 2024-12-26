@@ -203,7 +203,7 @@ function process_input() {
 
 # This function browses through the setup file.
 function process_option_browse() {
-    less "$SETUP_FILE"
+    less --no-init --quit-if-one-screen "$SETUP_FILE"
 }
 
 
@@ -336,7 +336,7 @@ function process_input_file_by_user() {
 
 # This function displays the contents of the command file.
 function process_option_cat() {
-    cat "$COMMAND_FILE"
+    less --no-init --quit-if-one-screen "$COMMAND_FILE"
 }
 
 
