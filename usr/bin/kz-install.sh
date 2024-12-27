@@ -132,12 +132,12 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App cups-backend-canon is not
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App cups-backend-canon is not available on an RPM system.'; fi
 
-# Install dashtodock on *
+# Install dashtodock on -none
 # Reboot required!
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 
-# Remove dashtodock from *
+# Remove dashtodock from -none
 # Reboot required!
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
