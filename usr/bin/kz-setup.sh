@@ -30,7 +30,7 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-cockpit; fi
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-cockpit; fi
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop"; fi
 
-# Setup dash-to-dock for -none
+# Setup dash-to-dock for pc07
 if $DEBIAN; then gnome-extensions enable dash-to-dock@micxgx.gmail.com; fi
 if $ROCKY; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if $DEBIAN; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true; fi
@@ -43,7 +43,7 @@ if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock
 if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock extend-height true; fi
 if $DEBIAN || $ROCKY; then gsettings set org.gnome.shell.extensions.dash-to-dock icon-size-fixed true; fi
 
-# Reset dash-to-dock for -none
+# Reset dash-to-dock for pc07
 if $DEBIAN; then gnome-extensions disable dash-to-dock@micxgx.gmail.com; fi
 if $ROCKY; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com; fi
 if $DEBIAN; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup; fi
