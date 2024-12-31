@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-25 11:34+0100\n"
+"POT-Creation-Date: 2024-12-31 08:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -525,8 +525,13 @@ msgid ""
 "The installation of the following apps contains errors:\n"
 "$FAILED_APPS_TEXT\n"
 "\n"
-"Try installing the apps again, or reboot the computer to finish installing "
-"the apps and changing system settings."
+"Try installing the apps again."
+msgstr ""
+
+#, sh-format
+msgid ""
+"Reboot the computer to finish installing the apps and changing system "
+"settings."
 msgstr ""
 
 #, sh-format
@@ -534,8 +539,13 @@ msgid ""
 "The set up of the following apps contains errors:\n"
 "$FAILED_APPS_TEXT\n"
 "\n"
-"Try to set up the apps again, or log out of the computer to finish setting "
-"up the apps and changing user settings."
+"Try to set up the apps again."
+msgstr ""
+
+#, sh-format
+msgid ""
+"Log out of the computer to finish setting up the apps and changing user "
+"settings."
 msgstr ""
 
 #, sh-format
