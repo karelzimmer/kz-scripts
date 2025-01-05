@@ -146,7 +146,6 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=fr.handbrake.ghb; fi
 
 # Setup hide-files for *
 if $DESKTOP_ENVIRONMENT; then echo 'snap' > "$HOME/.hidden"; fi
-if $DESKTOP_ENVIRONMENT; then echo 'kz-backup' >> "$HOME/.hidden"; fi
 
 # Reset hide-files for *
 if $DESKTOP_ENVIRONMENT; then rm --force --verbose "$HOME/.hidden"; fi
