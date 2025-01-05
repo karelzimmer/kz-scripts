@@ -400,6 +400,13 @@ sudo updatedb
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes locate; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes mlocate; fi
 
+# Install log-access-for-user on pc07
+if [[ $HOSTNAME = 'pc07' ]]; then sudo usermod --append --groups adm,systemd-journal karel; fi
+
+# Remove log-access-for-user from pc07
+if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel adm; fi
+if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel systemd-journal; fi
+
 # Install mypy on pc06 pc07
 if $APT_SYSTEM; then sudo apt-get install --assume-yes mypy; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes python3-mypy; fi
@@ -490,16 +497,16 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes spice-vdagent; fi
 if $APT_SYSTEM; then sudo apt-get install --assume-yes ssh; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes openssh; fi
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
-sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
-sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts
-sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts
-sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts; fi
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='2a192.168.1.100 pc01' /etc/hosts; fi
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='3a192.168.1.2   pc06' /etc/hosts; fi
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='4a192.168.1.219 pc07' /etc/hosts; fi
 # Check for remote root access.
 grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
 # Remove ssh from pc01 pc06 pc07
-sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts
+if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts; fi
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes ssh; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes openssh; fi
@@ -588,27 +595,20 @@ sudo passwd --delete "$(gettext 'guest')"
 sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
-sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true
-sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel
-sudo passwd --delete --expire karel
+if [[ $HOSTNAME = 'pc01' ]]; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true; fi
+if [[ $HOSTNAME = 'pc01' ]]; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel; fi
+if [[ $HOSTNAME = 'pc01' ]]; then sudo passwd --delete --expire karel; fi
 
 # Remove user-karel from pc01
-sudo userdel --remove karel
-
-# Install user-log-access on pc07
-sudo usermod --append --groups adm,systemd-journal karel
-
-# Remove user-log-access from pc07
-sudo deluser karel adm
-sudo deluser karel systemd-journal
+if [[ $HOSTNAME = 'pc01' ]]; then sudo userdel --remove karel; fi
 
 # Install user-toos on Laptop
-sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true
-sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos
-sudo passwd --delete --expire toos
+if [[ $HOSTNAME = 'Laptop' ]]; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true; fi
+if [[ $HOSTNAME = 'Laptop' ]]; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos; fi
+if [[ $HOSTNAME = 'Laptop' ]]; then sudo passwd --delete --expire toos; fi
 
 # Remove user-toos from Laptop
-sudo userdel --remove toos
+if [[ $HOSTNAME = 'Laptop' ]]; then sudo userdel --remove toos; fi
 
 # Install virtualbox on pc-van-hugo
 # If the installation hangs or VBox does not work, check the virtualization settings in the BIOS/UEFI.
