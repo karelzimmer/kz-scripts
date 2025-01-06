@@ -391,6 +391,9 @@ function process_command_file() {
     local -i APP_SEQ_NUM=0
     local -i CMD_SEQ_NUM=0
 
+    ERROR_FILE=$(mktemp -t "kz-install-errors-XXXXXXXXXX")
+    chmod a+r "$ERROR_FILE"
+
     if ! $OPTION_GUI; then
         TEXT="$(gettext 'NUM/TOT  APP')
          $(gettext 'COMMAND')..."
@@ -469,14 +472,14 @@ function execute_command() {
 
     logmsg "$CMD"
     ERREXIT=false
-    eval "$CMD" |& $LOGCMD || FAILED_APPS[$APP_NAME]=$APP_NAME
+    eval "$CMD" 1> >($LOGCMD) 2>> "$ERROR_FILE" ||
+        FAILED_APPS[$APP_NAME]=$APP_NAME
     ERREXIT=true
 }
 
 
 # This function controls the termination of the script.
 function term_script() {
-    local FAILED_APPS_TEXT=''
     local OPERATION
     local TEXT=''
 
@@ -489,13 +492,16 @@ function term_script() {
     fi
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
-        # shellcheck disable=SC2034
-        FAILED_APPS_TEXT=${FAILED_APPS[*]}
-        TEXT=$(eval_gettext "The installation of the following apps contains \
-errors:
-\$FAILED_APPS_TEXT
-
-Try installing the apps again.")
+        TEXT=$(gettext "The installation of the following apps contains \
+errors:")
+        TEXT+='\n'
+        TEXT+=${FAILED_APPS[*]}
+        TEXT+='\n\n'
+        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
+        TEXT+='\n'
+        TEXT+=$(cat "$ERROR_FILE")
+        TEXT+='\n\n'
+        TEXT+=$(gettext "Try installing the apps again.")
         errmsg "$TEXT"
         TEXT=$(eval_gettext "Reboot the computer to finish installing the \
 apps and changing system settings.")
@@ -532,6 +538,7 @@ changing system settings.")"
 
 function main() {
     local ARGUMENT_APPS=false
+    local ERROR_FILE=''
     local FILE_ARGUMENT=''
     local FROM='from'
     local INSTALL='Install'

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-31 08:13+0100\n"
+"POT-Creation-Date: 2025-01-06 19:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -260,12 +260,14 @@ msgid ""
 "\n"
 "Some files may not be readable, or\n"
 "were any files added or removed while creating the backup, or\n"
-"is there not enough space on $TARGET.\n"
-"\n"
-"Check the rsync messages (also in $ERROR_FILE):\n"
-"$RSYNC_MESSAGES\n"
-"\n"
-"Try creating the back up again."
+"is there not enough space on $TARGET."
+msgstr ""
+
+#, sh-format
+msgid "Check the messages (also in $ERROR_FILE):"
+msgstr ""
+
+msgid "Try creating the back up again."
 msgstr ""
 
 msgid "Disconnect the USB media"
@@ -520,12 +522,10 @@ msgstr ""
 msgid "No commands to execute."
 msgstr ""
 
-#, sh-format
-msgid ""
-"The installation of the following apps contains errors:\n"
-"$FAILED_APPS_TEXT\n"
-"\n"
-"Try installing the apps again."
+msgid "The installation of the following apps contains errors:"
+msgstr ""
+
+msgid "Try installing the apps again."
 msgstr ""
 
 #, sh-format
@@ -534,12 +534,10 @@ msgid ""
 "settings."
 msgstr ""
 
-#, sh-format
-msgid ""
-"The set up of the following apps contains errors:\n"
-"$FAILED_APPS_TEXT\n"
-"\n"
-"Try to set up the apps again."
+msgid "The set up of the following apps contains errors:"
+msgstr ""
+
+msgid "Try to set up the apps again."
 msgstr ""
 
 #, sh-format
@@ -791,12 +789,11 @@ msgid ""
 "\n"
 "Some files may not be readable, or\n"
 "were any files added or removed while restoring the backup, or\n"
-"is there not enough space on $HOME.\n"
-"\n"
-"Check the rsync messages (also in $ERROR_FILE):\n"
-"$RSYNC_MESSAGES\n"
-"\n"
-"Try restoring the back up again."
+"is there not enough space on $HOME."
+msgstr ""
+
+#, sh-format
+msgid "Try restoring the back up again."
 msgstr ""
 
 msgid "The backup has been restored."

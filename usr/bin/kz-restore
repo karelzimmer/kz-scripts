@@ -210,7 +210,6 @@ Connect a USB medium with the directory \$USER@\$HOSTNAME.")
 # This function restores the backup.
 function restore_backup() {
     local ERROR_FILE=''
-    local RSYNC_MESSAGES=''
     local TEXT=''
     local TITLE=''
     local -i RESTORE_RC=0
@@ -228,7 +227,7 @@ function restore_backup() {
                 --verbose               \
                 "$SOURCE"/              \
                 "$HOME"/                \
-                2> "$ERROR_FILE"        |
+                2>> "$ERROR_FILE"       |
         sed     --expression='s/^/#/'   |
         zenity  --progress              \
                 --auto-close            \
@@ -247,22 +246,21 @@ function restore_backup() {
                 --verbose               \
                 --human-readable        \
                 "$SOURCE"/              \
-                "$HOME"/                2> "$ERROR_FILE" || RESTORE_RC=$?
+                "$HOME"/                2>> "$ERROR_FILE" || RESTORE_RC=$?
     fi
 
     if [[ $RESTORE_RC -ne $OK ]]; then
-        # shellcheck disable=SC2034
-        RSYNC_MESSAGES=$(cat "$ERROR_FILE")
         TEXT=$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while restoring the backup, or
-is there not enough space on \$HOME.
-
-Check the rsync messages (also in \$ERROR_FILE):
-\$RSYNC_MESSAGES
-
-Try restoring the back up again.")
+is there not enough space on \$HOME.")
+        TEXT+='\n\n'
+        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
+        TEXT+='\n'
+        TEXT+=$(cat "$ERROR_FILE")
+        TEXT+='\n\n'
+        TEXT+=$(eval_gettext "Try restoring the back up again.")
         errmsg "$TEXT"
         exit $ERR
     fi
