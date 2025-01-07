@@ -383,9 +383,12 @@ function process_command_file() {
     local APP_NAME_LINE=''
     local APP_NAME=''
     local COMMAND_RECORD=''
+    local ERROR_FILE=''
+    local NO_COMMANDS_FOUND=true
     local TEXT=''
     local -i APP_SEQ_NUM=0
     local -i CMD_SEQ_NUM=0
+    local -A FAILED_APPS=()
 
     ERROR_FILE=$(mktemp -t "kz-setup-errors-XXXXXXXXXX")
 
@@ -424,6 +427,29 @@ function process_command_file() {
                 ;;
         esac
     done < "$COMMAND_FILE"
+
+    if $NO_COMMANDS_FOUND; then
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
+        exit $OK
+    fi
+
+    if [[ -n ${FAILED_APPS[*]} ]]; then
+        TEXT=$(gettext "The set up of the following apps contains errors:")
+        TEXT+='\n'
+        TEXT+=${FAILED_APPS[*]}
+        TEXT+='\n\n'
+        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
+        TEXT+='\n'
+        TEXT+=$(cat "$ERROR_FILE")
+        TEXT+='\n\n'
+        TEXT+=$(gettext "Try to set up the apps again.")
+        errmsg "$TEXT"
+        TEXT=$(eval_gettext "Log out of the computer to finish setting up the \
+apps and changing user settings.")
+        infomsg "$TEXT"
+        exit $ERR
+    fi
 }
 
 
@@ -478,29 +504,6 @@ function term_script() {
     local TEXT=''
 
     OPERATION=$(gettext 'set up')
-
-    if $NO_COMMANDS_FOUND; then
-        TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$TEXT"
-        exit $OK
-    fi
-
-    if [[ -n ${FAILED_APPS[*]} ]]; then
-        TEXT=$(gettext "The set up of the following apps contains errors:")
-        TEXT+='\n'
-        TEXT+=${FAILED_APPS[*]}
-        TEXT+='\n\n'
-        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-        TEXT+='\n'
-        TEXT+=$(cat "$ERROR_FILE")
-        TEXT+='\n\n'
-        TEXT+=$(gettext "Try to set up the apps again.")
-        errmsg "$TEXT"
-        TEXT=$(eval_gettext "Log out of the computer to finish setting up the \
-apps and changing user settings.")
-        infomsg "$TEXT"
-        exit $ERR
-    fi
 
     if $OPTION_RESET; then
         # shellcheck disable=SC2034
@@ -559,10 +562,8 @@ Type 'logout' to log out.")"
 
 function main() {
     local ARGUMENT_APP=false
-    local ERROR_FILE=''
     local FILE_ARGUMENT=''
     local LOGOUT=true
-    local NO_COMMANDS_FOUND=true
     local OPTION_APPS=false
     local OPTION_BROWSE=false
     local OPTION_CAT=false
@@ -571,7 +572,6 @@ function main() {
     local RESET='Reset'
     local SETUP='Setup'
     local -A APP_ARGUMENTS=()
-    local -A FAILED_APPS=()
 
     init_script "$@"
     check_input "$@"

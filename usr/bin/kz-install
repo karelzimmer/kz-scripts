@@ -387,9 +387,12 @@ function process_command_file() {
     local APP_NAME_LINE=''
     local APP_NAME=''
     local COMMAND_RECORD=''
+    local ERROR_FILE=''
+    local NO_COMMANDS_FOUND=true
     local TEXT=''
     local -i APP_SEQ_NUM=0
     local -i CMD_SEQ_NUM=0
+    local -A FAILED_APPS=()
 
     ERROR_FILE=$(mktemp -t "kz-install-errors-XXXXXXXXXX")
     chmod a+r "$ERROR_FILE"
@@ -429,6 +432,30 @@ function process_command_file() {
                 ;;
         esac
     done < "$COMMAND_FILE"
+
+    if $NO_COMMANDS_FOUND; then
+        TEXT=$(gettext 'No commands to execute.' )
+        infomsg "$TEXT"
+        exit $OK
+    fi
+
+    if [[ -n ${FAILED_APPS[*]} ]]; then
+        TEXT=$(gettext "The installation of the following apps contains \
+errors:")
+        TEXT+='\n'
+        TEXT+=${FAILED_APPS[*]}
+        TEXT+='\n\n'
+        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
+        TEXT+='\n'
+        TEXT+=$(cat "$ERROR_FILE")
+        TEXT+='\n\n'
+        TEXT+=$(gettext "Try installing the apps again.")
+        errmsg "$TEXT"
+        TEXT=$(eval_gettext "Reboot the computer to finish installing the \
+apps and changing system settings.")
+        infomsg "$TEXT"
+        exit $ERR
+    fi
 }
 
 
@@ -485,30 +512,6 @@ function term_script() {
 
     OPERATION=$(gettext 'install')
 
-    if $NO_COMMANDS_FOUND; then
-        TEXT=$(gettext 'No commands to execute.' )
-        infomsg "$TEXT"
-        exit $OK
-    fi
-
-    if [[ -n ${FAILED_APPS[*]} ]]; then
-        TEXT=$(gettext "The installation of the following apps contains \
-errors:")
-        TEXT+='\n'
-        TEXT+=${FAILED_APPS[*]}
-        TEXT+='\n\n'
-        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-        TEXT+='\n'
-        TEXT+=$(cat "$ERROR_FILE")
-        TEXT+='\n\n'
-        TEXT+=$(gettext "Try installing the apps again.")
-        errmsg "$TEXT"
-        TEXT=$(eval_gettext "Reboot the computer to finish installing the \
-apps and changing system settings.")
-        infomsg "$TEXT"
-        exit $ERR
-    fi
-
     if $OPTION_REMOVE; then
         # shellcheck disable=SC2034
         OPERATION=$(gettext 'remove')
@@ -538,11 +541,9 @@ changing system settings.")"
 
 function main() {
     local ARGUMENT_APPS=false
-    local ERROR_FILE=''
     local FILE_ARGUMENT=''
     local FROM='from'
     local INSTALL='Install'
-    local NO_COMMANDS_FOUND=true
     local ON='on'
     local OPTION_APPS=false
     local OPTION_BROWSE=false
@@ -552,7 +553,6 @@ function main() {
     local REBOOT=true
     local REMOVE='Remove'
     local -A APP_ARGUMENTS=()
-    local -A FAILED_APPS=()
 
     init_script "$@"
     check_input "$@"
