@@ -417,15 +417,13 @@ $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
                 if [[ $PROGRAM_ID = 'kz-get' ]]; then
                     if $APT_SYSTEM; then
-                        TEXT="Hint:
-  sudo dpkg --configure --pending
-  sudo apt-get update --fix-missing
-  sudo apt-get install --fix-broken"
+                        TEXT="[hint] sudo dpkg --configure --pending
+[hint] sudo apt-get update --fix-missing
+[hint] sudo apt-get install --fix-broken"
                         infomsg "$TEXT"
                     elif $RPM_SYSTEM; then
-                        TEXT="Hint:
-  sudo dnf clean all
-  sudo dnf makecache"
+                        TEXT="[hint] sudo dnf clean all
+[hint] sudo dnf makecache"
                         infomsg "$TEXT"
                     else
                         TEXT=$(gettext 'Unknown package manager.')
