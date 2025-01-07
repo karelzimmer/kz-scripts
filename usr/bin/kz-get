@@ -125,7 +125,7 @@ function prepare_processing() {
     KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.deb")
 
     sudo true
-    printf '%s\n' "[logs] journalctl --follow --pager-end --identifier=kz-get"
+    printf '%s\n' "[log:] journalctl --follow --pager-end --identifier=kz-get"
 
     # Progress indicator with growing [=>, [==>, etc. as long as the kz get
     # local file exists, i.e. installation is in progress.
