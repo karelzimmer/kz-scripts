@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
 ###############################################################################
-# [info] For the format of the records in this file run: man kz setup
+# [info] To learn more about the format of this file, run: man kz setup
 # [info] To manually run a command, first run: source kz_common.sh
 
 # The apps are in alphabetical order of app name.
