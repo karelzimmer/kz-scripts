@@ -56,16 +56,16 @@ declare DESKTOP_ENVIRONMENT=false
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 source /etc/os-release
 if [[ $ID = 'debian' ]]; then
-    APT_SYSTEM=true
     DEBIAN=true
+    APT_SYSTEM=true
 fi
 if [[ $ID = 'rocky' ]]; then
-    RPM_SYSTEM=true
     ROCKY=true
+    RPM_SYSTEM=true
 fi
 if [[ $ID = 'ubuntu' ]]; then
-    APT_SYSTEM=true
     UBUNTU=true
+    APT_SYSTEM=true
 fi
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then

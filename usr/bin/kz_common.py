@@ -57,16 +57,16 @@ DESKTOP_ENVIRONMENT: bool = False
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
-    APT_SYSTEM = True
     DEBIAN = True
+    APT_SYSTEM = True
 if subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
                   shell=True, executable='bash').returncode == OK:
-    RPM_SYSTEM = True
     ROCKY = True
+    RPM_SYSTEM = True
 if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
-    APT_SYSTEM = True
     UBUNTU = True
+    APT_SYSTEM = True
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
