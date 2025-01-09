@@ -278,8 +278,10 @@ function process_option_help() {
 
 # This function displays the manual page.
 function process_option_manual() {
-    if [[ -n $(type -t yelp) ]]; then
-        yelp man:"$PROGRAM_NAME"
+    local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
+
+    if $DESKTOP_ENVIRONMENT; then
+        yelp man:"$PROGRAM_ID" 2> >($LOGCMD)
     else
         man --pager=cat "$PROGRAM_NAME"
     fi

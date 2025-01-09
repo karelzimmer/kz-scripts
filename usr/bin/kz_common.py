@@ -242,18 +242,32 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    try:
-        subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
-                       check=True)
-    except Exception as exc:
-        TEXT: str = str(exc)
-        logmsg(PROGRAM_NAME, TEXT)
-        TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
-        errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
-        RC = ERR
-        term(PROGRAM_NAME, RC)
+    if DESKTOP_ENVIRONMENT:
+        try:
+            subprocess.run(f'yelp man:{PROGRAM_ID}', shell=True,
+                        check=True, stderr=subprocess.DEVNULL)
+        except Exception as exc:
+            TEXT: str = str(exc)
+            logmsg(PROGRAM_NAME, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            RC = ERR
+            term(PROGRAM_NAME, RC)
+        else:
+            return OK
     else:
-        return OK
+        try:
+            subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
+                        check=True)
+        except Exception as exc:
+            TEXT: str = str(exc)
+            logmsg(PROGRAM_NAME, TEXT)
+            TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
+            errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
+            RC = ERR
+            term(PROGRAM_NAME, RC)
+        else:
+            return OK
 
     return OK
 
