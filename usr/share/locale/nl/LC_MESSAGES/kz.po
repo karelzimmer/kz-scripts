@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-06 19:27+0100\n"
+"POT-Creation-Date: 2025-01-09 07:54+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -545,30 +545,26 @@ msgstr "NUM  APP"
 msgid "  0  No apps found."
 msgstr "  0  Geen apps gevonden."
 
-#, sh-format
-msgid "To install the apps execute: $PROGRAM_NAME <app>..."
-msgstr "Om de apps te installeren voer uit: $PROGRAM_NAME <app>..."
+msgid "To install the apps execute: kz-install <app>..."
+msgstr "Om de apps te installeren voer uit: kz-install <app>..."
 
-#, sh-format
-msgid "To view the contents of the install file execute: $PROGRAM_NAME --cat"
+msgid "To view the contents of the install file execute: kz-install --cat"
 msgstr ""
-"Om de inhoud van het installatiebestand te bekijken voer uit: $PROGRAM_NAME "
-"--cat"
+"Om de inhoud van het installatiebestand te bekijken voer uit: kz-install --"
+"cat"
 
-#, sh-format
 msgid ""
-"To view the contents of the apps install file execute: $PROGRAM_NAME --cat "
+"To view the contents of the apps install file execute: kz-install --cat "
 "<app>..."
 msgstr ""
-"Om de inhoud van het installatiebestand voor apps te bekijken voer uit: "
-"$PROGRAM_NAME --cat <app>..."
+"Om de inhoud van het installatiebestand voor apps te bekijken voer uit: kz-"
+"install --cat <app>..."
 
 msgid ""
-"To view the contents of the default install file execute: cat /usr/bin/kz-"
-"install.sh"
+"To view the contents of the default install file execute: kz-install --browse"
 msgstr ""
-"Om de inhoud van het standaard installatiebestand te bekijken voer uit: cat /"
-"usr/bin/kz-install.sh"
+"Om de inhoud van het standaard installatiebestand te bekijken voer uit: kz-"
+"install --browse"
 
 msgid "install"
 msgstr "installeren"
@@ -924,6 +920,7 @@ msgstr ""
 "back-up, of\n"
 "is er te weinig ruimte op $HOME."
 
+#, sh-format
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
@@ -966,30 +963,24 @@ msgstr "  <app>...       stel opgegeven apps in"
 msgid "No setup file found, looked for '$SETUP_FILE'."
 msgstr "Geen instelbestand gevonden, zocht '$SETUP_FILE'."
 
-#, sh-format
-msgid "To set up the apps execute: $PROGRAM_NAME <app>..."
-msgstr "Om de apps in te stellen voer uit: $PROGRAM_NAME <app>..."
+msgid "To set up the apps execute: kz-setup <app>..."
+msgstr "Om de apps in te stellen voer uit: kz-setup <app>..."
 
-#, sh-format
-msgid "To view the contents of the setup file execute: $PROGRAM_NAME --cat"
+msgid "To view the contents of the setup file execute: kz-setup --cat"
 msgstr ""
-"Om de inhoud van het instelbestand te bekijken voer uit: $PROGRAM_NAME --cat"
+"Om de inhoud van het instelbestand te bekijken voer uit: kz-setup --cat"
 
-#, sh-format
 msgid ""
-"To view the contents of the apps setup file execute: $PROGRAM_NAME --cat "
-"<app>..."
+"To view the contents of the apps setup file execute: kz-setup --cat <app>..."
 msgstr ""
-"Om de inhoud van het instelbestand voor apps te bekijken voer uit: "
-"$PROGRAM_NAME --cat <app>..."
+"Om de inhoud van het instelbestand voor apps te bekijken voer uit: kz-setup "
+"--cat <app>..."
 
-#, sh-format
 msgid ""
-"To view the contents of the default setup file execute: cat /usr/bin/kz-"
-"setup.sh"
+"To view the contents of the default setup file execute: kz-setup --browse"
 msgstr ""
-"Om de inhoud van het standaard instelbestand te bekijken voer uit: cat /usr/"
-"bin/kz-setup.sh"
+"Om de inhoud van het standaard instelbestand te bekijken voer uit: kz-setup "
+"--browse"
 
 msgid "set up"
 msgstr "instellen"

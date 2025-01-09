@@ -232,13 +232,12 @@ $(gettext 'NUM  APP')\n"
     if [[ -n $APPS ]]; then
         TEXT+=$APPS
         TEXT+="\n
-$(eval_gettext "To set up the apps execute: \$PROGRAM_NAME <app>...")
-$(eval_gettext "To view the contents of the setup file execute: \
-\$PROGRAM_NAME --cat")
-$(eval_gettext "To view the contents of the apps setup file execute: \
-\$PROGRAM_NAME --cat <app>...")
-$(gettext "To view the contents of the default setup file execute: cat \
-/usr/bin/kz-setup.sh")"
+$(gettext "To set up the apps execute: kz-setup <app>...")
+$(gettext "To view the contents of the setup file execute: kz-setup --cat")
+$(gettext "To view the contents of the apps setup file execute: kz-setup \
+--cat <app>...")
+$(gettext "To view the contents of the default setup file execute: kz-setup \
+--browse")"
     else
         TEXT+="$(gettext '  0  No apps found.')
 
