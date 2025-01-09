@@ -23,8 +23,7 @@ readonly PROGRAM_NAME='kz setup'
 PROGRAM_DESC=$(gettext 'Set up apps')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME [-a|--apps] [-b|--browse] \
-[-c|--cat]
+USAGE=$(eval_gettext "Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]
                 [-f|--file <file>] [-g|--gui] [-r|--reset]
                 \$OPTIONS_USAGE
                 [--] [<app>...]")
@@ -43,7 +42,7 @@ $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --reset    set apps on default values')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>] [<app>...]")
+HELP="$(gettext "Usage: kz setup [<options>] [<app>...]")
 
 $PROGRAM_DESC.
 
@@ -258,8 +257,7 @@ function process_argument_app() {
     done
 
     if $APP_NOT_FOUND; then
-        TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --apps' for available \
-apps.")"
+        TEXT="$(gettext "Type 'kz setup --apps' for available apps.")"
         infomsg "$TEXT"
         exit $ERR
     fi
@@ -444,8 +442,8 @@ function process_command_file() {
         TEXT+='\n\n'
         TEXT+=$(gettext "Try to set up the apps again.")
         errmsg "$TEXT"
-        TEXT=$(eval_gettext "Log out of the computer to finish setting up the \
-apps and changing user settings.")
+        TEXT=$(gettext "Log out of the computer to finish setting up the apps \
+and changing user settings.")
         infomsg "$TEXT"
         exit $ERR
     fi

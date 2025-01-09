@@ -244,8 +244,8 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
 
     if DESKTOP_ENVIRONMENT:
         try:
-            subprocess.run(f'yelp man:{PROGRAM_ID}', shell=True,
-                        check=True, stderr=subprocess.DEVNULL)
+            subprocess.run(f'yelp man:{PROGRAM_ID}', shell=True, check=True,
+                           stderr=subprocess.DEVNULL)
         except Exception as exc:
             TEXT: str = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
@@ -258,9 +258,9 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     else:
         try:
             subprocess.run(f'man --pager=cat {PROGRAM_NAME}', shell=True,
-                        check=True)
+                           check=True)
         except Exception as exc:
-            TEXT: str = str(exc)
+            TEXT = str(exc)
             logmsg(PROGRAM_NAME, TEXT)
             TEXT = _('Program {} encountered an error.').format(PROGRAM_ID)
             errmsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)

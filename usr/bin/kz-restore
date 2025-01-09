@@ -23,8 +23,7 @@ readonly PROGRAM_NAME='kz-restore'
 PROGRAM_DESC=$(gettext 'Restore backup')
 readonly PROGRAM_DESC
 
-USAGE="$(eval_gettext "Usage: \$PROGRAM_NAME [-g|--gui] \
-[-s|--source <directory>]
+USAGE="$(eval_gettext "Usage: kz restore [-g|--gui] [-s|--source <directory>]
                   \$OPTIONS_USAGE")"
 readonly USAGE
 
@@ -37,7 +36,7 @@ $(gettext '  -s, --source <directory>
                  use backup in specified directory')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
+HELP="$(gettext "Usage: kz restore [<options>]")
 
 $PROGRAM_DESC.
 
@@ -260,7 +259,7 @@ is there not enough space on \$HOME.")
         TEXT+='\n'
         TEXT+=$(cat "$ERROR_FILE")
         TEXT+='\n\n'
-        TEXT+=$(eval_gettext "Try restoring the back up again.")
+        TEXT+=$(gettext "Try restoring the back up again.")
         errmsg "$TEXT"
         exit $ERR
     fi

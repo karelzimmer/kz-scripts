@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck shell=bash source=kz_common.sh
 ###############################################################################
-# SPDX-FileComment: Download and install Debian or RPM_SYSTEM package kz
+# SPDX-FileComment: Download and install Debian or RPM package kz
 #
 # SPDX-FileCopyrightText: Karel Zimmer <info@karelzimmer.nl>
 # SPDX-License-Identifier: CC0-1.0
@@ -34,13 +34,13 @@ fi
 ###############################################################################
 
 readonly PROGRAM_NAME='kz get'
-PROGRAM_DESC=$(gettext 'Download and install Debian or RPM_SYSTEM package kz')
+PROGRAM_DESC=$(gettext 'Download and install Debian or RPM package kz')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: kz get \$OPTIONS_USAGE")
 readonly USAGE
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
+HELP="$(gettext "Usage: kz get [<options>]")
 
 $PROGRAM_DESC.
 

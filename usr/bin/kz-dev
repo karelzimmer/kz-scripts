@@ -23,10 +23,10 @@ readonly PROGRAM_NAME='kz dev'
 PROGRAM_DESC=$(gettext 'Build development environment')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: kz dev \$OPTIONS_USAGE")
 readonly USAGE
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
+HELP="$(gettext "Usage: kz dev [<options>]")
 
 $PROGRAM_DESC.
 

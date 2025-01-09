@@ -23,8 +23,7 @@ readonly PROGRAM_NAME='kz backup'
 PROGRAM_DESC=$(gettext 'Make backup')
 readonly PROGRAM_DESC
 
-USAGE="$(eval_gettext "Usage: \$PROGRAM_NAME [-g|--gui] \
-[-t|--target <directory>]
+USAGE="$(eval_gettext "Usage: kz backup [-g|--gui] [-t|--target <directory>]
                  \$OPTIONS_USAGE")"
 readonly USAGE
 
@@ -37,7 +36,7 @@ $(gettext '  -t, --target <directory>
                  place backup in specified directory')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
+HELP="$(gettext "Usage: kz backup [<options>]")
 
 $PROGRAM_DESC.
 

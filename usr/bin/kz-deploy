@@ -23,10 +23,10 @@ readonly PROGRAM_NAME='kz deploy'
 PROGRAM_DESC=$(gettext 'Distribute website including kz packages')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: kz deploy \$OPTIONS_USAGE")
 readonly USAGE
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
+HELP="$(gettext "Usage: kz deploy [<options>]")
 
 $PROGRAM_DESC.
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 07:55+0100\n"
+"POT-Creation-Date: 2025-01-09 14:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,12 +125,11 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Usage: kz [-l|--list] $OPTIONS_USAGE\n"
 "          <command> [<arguments>]"
 msgstr ""
 
-#, sh-format
-msgid "Usage: $PROGRAM_NAME [<options>] <command> [<arguments>]"
+msgid "Usage: kz [<options>] <command> [<arguments>]"
 msgstr ""
 
 msgid "  -l, --list     show available commands"
@@ -157,8 +156,7 @@ msgstr ""
 msgid "NUM  COMMAND"
 msgstr ""
 
-#, sh-format
-msgid "To execute a command: $PROGRAM_NAME <command> [<arguments>]"
+msgid "To execute a command: kz <command> [<arguments>]"
 msgstr ""
 
 msgid "Make backup"
@@ -166,12 +164,11 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-g|--gui] [-t|--target <directory>]\n"
+"Usage: kz backup [-g|--gui] [-t|--target <directory>]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
 
-#, sh-format
-msgid "Usage: $PROGRAM_NAME [<options>]"
+msgid "Usage: kz backup [<options>]"
 msgstr ""
 
 msgid "Options:"
@@ -290,7 +287,10 @@ msgid "Build website including kz packages"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $PROGRAM_NAME $OPTIONS_USAGE"
+msgid "Usage: kz build $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz build [<options>]"
 msgstr ""
 
 msgid "Must run on a Debian or Debian-based system."
@@ -302,19 +302,33 @@ msgstr ""
 msgid "Check scripts and website"
 msgstr ""
 
+#, sh-format
+msgid "Usage: kz check $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz check [<options>]"
+msgstr ""
+
 msgid "Build website"
 msgstr ""
 
 msgid "Build Debian package"
 msgstr ""
 
-msgid "Build RPM_SYSTEM package"
+msgid "Build RPM package"
 msgstr ""
 
 msgid "Install package"
 msgstr ""
 
 msgid "Distribute website including kz packages"
+msgstr ""
+
+#, sh-format
+msgid "Usage: kz deploy $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz deploy [<options>]"
 msgstr ""
 
 msgid "Check that all repos are on branch main"
@@ -340,7 +354,14 @@ msgstr ""
 msgid "Install package kz failed."
 msgstr ""
 
-msgid "Download and install Debian or RPM_SYSTEM package kz"
+msgid "Download and install Debian or RPM package kz"
+msgstr ""
+
+#, sh-format
+msgid "Usage: kz get $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz get [<options>]"
 msgstr ""
 
 msgid "Unknown package manager."
@@ -359,6 +380,13 @@ msgid "Type 'exit' to close this window."
 msgstr ""
 
 msgid "Build development environment"
+msgstr ""
+
+#, sh-format
+msgid "Usage: kz dev $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz dev [<options>]"
 msgstr ""
 
 msgid "Check dependencies"
@@ -387,9 +415,12 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
+"Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
 "                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]\n"
 "                  $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz desktop [<options>]"
 msgstr ""
 
 msgid ""
@@ -437,14 +468,13 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
 msgstr ""
 
-#, sh-format
-msgid "Usage: $PROGRAM_NAME [<options>] [<app>...]"
+msgid "Usage: kz install [<options>] [<app>...]"
 msgstr ""
 
 msgid "  -a, --apps     show list of apps"
@@ -456,7 +486,6 @@ msgstr ""
 msgid "  -c, --cat      show contents of command file"
 msgstr ""
 
-#, sh-format
 msgid ""
 "  -f, --file <file>\n"
 "                 process specified install file"
@@ -465,14 +494,13 @@ msgstr ""
 msgid "  -r, --remove   delete apps"
 msgstr ""
 
+msgid "Type 'kz install --apps' for available apps."
+msgstr ""
+
 msgid "  <app>...       install specified apps"
 msgstr ""
 
 msgid "app not found"
-msgstr ""
-
-#, sh-format
-msgid "Type '$PROGRAM_NAME --apps' for available apps."
 msgstr ""
 
 #, sh-format
@@ -524,7 +552,6 @@ msgstr ""
 msgid "Try installing the apps again."
 msgstr ""
 
-#, sh-format
 msgid ""
 "Reboot the computer to finish installing the apps and changing system "
 "settings."
@@ -536,7 +563,6 @@ msgstr ""
 msgid "Try to set up the apps again."
 msgstr ""
 
-#, sh-format
 msgid ""
 "Log out of the computer to finish setting up the apps and changing user "
 "settings."
@@ -588,7 +614,10 @@ msgid "Go to installation menu"
 msgstr ""
 
 #, sh-format
-msgid "Usage: $PROGRAM_NAME [-g|--gui] $OPTIONS_USAGE"
+msgid "Usage: kz menu [-g|--gui] $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz menu [<options>]"
 msgstr ""
 
 msgid "USERNAME|USERID|USER"
@@ -699,7 +728,6 @@ msgstr ""
 msgid "Cannot handle this choice ($REPLY)."
 msgstr ""
 
-#, sh-format
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en, under "
@@ -734,8 +762,11 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-g|--gui] [-s|--source <directory>]\n"
+"Usage: kz restore [-g|--gui] [-s|--source <directory>]\n"
 "                  $OPTIONS_USAGE"
+msgstr ""
+
+msgid "Usage: kz restore [<options>]"
 msgstr ""
 
 msgid ""
@@ -788,7 +819,6 @@ msgid ""
 "is there not enough space on $HOME."
 msgstr ""
 
-#, sh-format
 msgid "Try restoring the back up again."
 msgstr ""
 
@@ -801,7 +831,7 @@ msgstr ""
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [<app>...]"
@@ -816,6 +846,9 @@ msgid ""
 msgstr ""
 
 msgid "  -r, --reset    set apps on default values"
+msgstr ""
+
+msgid "Usage: kz setup [<options>] [<app>...]"
 msgstr ""
 
 msgid "  <app>...       set up specified apps"
@@ -837,6 +870,9 @@ msgstr ""
 
 msgid ""
 "To view the contents of the default setup file execute: kz-setup --browse"
+msgstr ""
+
+msgid "Type 'kz setup --apps' for available apps."
 msgstr ""
 
 msgid "set up"

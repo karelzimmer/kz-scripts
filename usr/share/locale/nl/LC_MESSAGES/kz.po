@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kz 4.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 07:54+0100\n"
+"POT-Creation-Date: 2025-01-09 14:49+0100\n"
 "PO-Revision-Date: 2023-02-20 15:30+0100\n"
 "Last-Translator: Karel Zimmer <info@karel.zimmer.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -130,15 +130,14 @@ msgstr "Opdracht uitvoeren"
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Usage: kz [-l|--list] $OPTIONS_USAGE\n"
 "          <command> [<arguments>]"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-l|--list] $OPTIONS_USAGE\n"
+"Gebruik: kz [-l|--list] $OPTIONS_USAGE\n"
 "            <opdracht> [<argumenten>]"
 
-#, sh-format
-msgid "Usage: $PROGRAM_NAME [<options>] <command> [<arguments>]"
-msgstr "Gebruik: $PROGRAM_NAME [<opties>] <opdracht> [<argumenten>]"
+msgid "Usage: kz [<options>] <command> [<arguments>]"
+msgstr "Gebruik: kz [<opties>] <opdracht> [<argumenten>]"
 
 msgid "  -l, --list     show available commands"
 msgstr "  -l, --list     toon beschikbare opdrachten"
@@ -164,24 +163,22 @@ msgstr "De volgende opdrachten zijn beschikbaar:"
 msgid "NUM  COMMAND"
 msgstr "NUM  OPDRACHT"
 
-#, sh-format
-msgid "To execute a command: $PROGRAM_NAME <command> [<arguments>]"
-msgstr "Om een opdracht uit te voeren: $PROGRAM_NAME <opdracht> [<argumenten>]"
+msgid "To execute a command: kz <command> [<arguments>]"
+msgstr "Om een opdracht uit te voeren: kz <opdracht> [<argumenten>]"
 
 msgid "Make backup"
 msgstr "Back-up maken"
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-g|--gui] [-t|--target <directory>]\n"
+"Usage: kz backup [-g|--gui] [-t|--target <directory>]\n"
 "                 $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-g|--gui] [-t|--target <map>]\n"
+"Gebruik: kz backup [-g|--gui] [-t|--target <map>]\n"
 "                   $OPTIONS_USAGE"
 
-#, sh-format
-msgid "Usage: $PROGRAM_NAME [<options>]"
-msgstr "Gebruik: $PROGRAM_NAME [<opties>]"
+msgid "Usage: kz backup [<options>]"
+msgstr "Gebruik: kz backup [<opties>]"
 
 msgid "Options:"
 msgstr "Opties:"
@@ -324,8 +321,11 @@ msgid "Build website including kz packages"
 msgstr "Website bouwen inclusief kz pakketten"
 
 #, sh-format
-msgid "Usage: $PROGRAM_NAME $OPTIONS_USAGE"
-msgstr "Gebruik: $PROGRAM_NAME $OPTIONS_USAGE"
+msgid "Usage: kz build $OPTIONS_USAGE"
+msgstr "Gebruik: kz build $OPTIONS_USAGE"
+
+msgid "Usage: kz build [<options>]"
+msgstr "Gebruik: kz build [<opties>]"
 
 msgid "Must run on a Debian or Debian-based system."
 msgstr "Moet draaien op een Debian of Debian-gebaseerd systeem."
@@ -336,20 +336,34 @@ msgstr "Controleer alle meldingen hierboven en los ze op indien nodig."
 msgid "Check scripts and website"
 msgstr "Controleer scripts en website"
 
+#, sh-format
+msgid "Usage: kz check $OPTIONS_USAGE"
+msgstr "Gebruik: kz check $OPTIONS_USAGE"
+
+msgid "Usage: kz check [<options>]"
+msgstr "Gebruik: kz check [<opties>]"
+
 msgid "Build website"
 msgstr "Bouw website"
 
 msgid "Build Debian package"
 msgstr "Bouw Debian-pakket"
 
-msgid "Build RPM_SYSTEM package"
-msgstr "Bouw RPM_SYSTEM-pakket"
+msgid "Build RPM package"
+msgstr "Bouw RPM-pakket"
 
 msgid "Install package"
 msgstr "Installeer pakket"
 
 msgid "Distribute website including kz packages"
 msgstr "Website distribueren inclusief kz pakketten"
+
+#, sh-format
+msgid "Usage: kz deploy $OPTIONS_USAGE"
+msgstr "Gebruik: kz deploy $OPTIONS_USAGE"
+
+msgid "Usage: kz deploy [<options>]"
+msgstr "Gebruik: kz deploy [<opties>]"
 
 msgid "Check that all repos are on branch main"
 msgstr "Controleer of alle repo's zich op branch main bevinden"
@@ -374,8 +388,15 @@ msgstr "Uploaden website is mislukt."
 msgid "Install package kz failed."
 msgstr "Installeren pakket kz is niet uitgevoerd."
 
-msgid "Download and install Debian or RPM_SYSTEM package kz"
-msgstr "Download en installeer Debian- of RPM_SYSTEM-pakket kz"
+msgid "Download and install Debian or RPM package kz"
+msgstr "Download en installeer Debian- of RPM-pakket kz"
+
+#, sh-format
+msgid "Usage: kz get $OPTIONS_USAGE"
+msgstr "Gebruik: kz get $OPTIONS_USAGE"
+
+msgid "Usage: kz get [<options>]"
+msgstr "Gebruik: kz get [<opties>]"
 
 msgid "Unknown package manager."
 msgstr "Onbekende pakketbeheerder."
@@ -399,6 +420,13 @@ msgstr "Typ 'exit' om dit venster te sluiten."
 
 msgid "Build development environment"
 msgstr "Ontwikkelomgeving bouwen"
+
+#, sh-format
+msgid "Usage: kz dev $OPTIONS_USAGE"
+msgstr "Gebruik: kz dev $OPTIONS_USAGE"
+
+msgid "Usage: kz dev [<options>]"
+msgstr "Gebruik: kz dev [<opties>]"
 
 msgid "Check dependencies"
 msgstr "Controleer afhankelijkheden"
@@ -426,13 +454,16 @@ msgstr "Desktopomgeving wijzigen"
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
+"Usage: kz desktop [-a|--addaft <favorite>] [-b|--addbef <favorite>]\n"
 "                  [-d|--delete <favorite>] [-l|--list] [-r|--reset]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-a|--addaft <favoriet>] [-b|--addbef <favoriet>]\n"
+"Gebruik: kz desktop [-a|--addaft <favoriet>] [-b|--addbef <favoriet>]\n"
 "                    [-d|--delete <favoriet>] [-l|--list] [-r|--reset]\n"
 "                    $OPTIONS_USAGE"
+
+msgid "Usage: kz desktop [<options>]"
+msgstr "Gebruik: kz desktop [<opties>]"
 
 msgid ""
 "  -a, --addaft <favorite>\n"
@@ -488,19 +519,18 @@ msgstr "Apps installeren"
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                  [-f|--file <file>] [-g|--gui] [-r|--remove]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"Gebruik: kz install [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                    [-f|--file <bestand>] [-g|--gui] [-r|--remove]\n"
 "                    $OPTIONS_USAGE\n"
 "                    [--] [<app>...]"
 
-#, sh-format
-msgid "Usage: $PROGRAM_NAME [<options>] [<app>...]"
-msgstr "Gebruik: $PROGRAM_NAME [<opties>] [<app>...]"
+msgid "Usage: kz install [<options>] [<app>...]"
+msgstr "Gebruik: kz install [<opties>] [<app>...]"
 
 msgid "  -a, --apps     show list of apps"
 msgstr "  -a, --apps     toon lijst van apps"
@@ -511,7 +541,6 @@ msgstr "  -b, --browse   blader door installatiebestand"
 msgid "  -c, --cat      show contents of command file"
 msgstr "  -c, --cat      toon inhoud van opdrachtbestand"
 
-#, sh-format
 msgid ""
 "  -f, --file <file>\n"
 "                 process specified install file"
@@ -522,15 +551,14 @@ msgstr ""
 msgid "  -r, --remove   delete apps"
 msgstr "  -r, --remove   verwijder apps"
 
+msgid "Type 'kz install --apps' for available apps."
+msgstr "Typ 'kz install --apps' voor beschikbare apps."
+
 msgid "  <app>...       install specified apps"
 msgstr "  <app>...       installeer opgegeven apps"
 
 msgid "app not found"
 msgstr "app niet gevonden"
-
-#, sh-format
-msgid "Type '$PROGRAM_NAME --apps' for available apps."
-msgstr "Typ '$PROGRAM_NAME --apps' voor beschikbare apps."
 
 #, sh-format
 msgid "No install file found, looked for '$INSTALL_FILE'."
@@ -587,7 +615,6 @@ msgstr "De installatie van de volgende apps bevat fouten:"
 msgid "Try installing the apps again."
 msgstr "Probeer de apps opnieuw te installeren."
 
-#, sh-format
 msgid ""
 "Reboot the computer to finish installing the apps and changing system "
 "settings."
@@ -601,7 +628,6 @@ msgstr "Het instellen van de volgende apps bevat fouten:"
 msgid "Try to set up the apps again."
 msgstr "Probeer de apps opnieuw in te stellen."
 
-#, sh-format
 msgid ""
 "Log out of the computer to finish setting up the apps and changing user "
 "settings."
@@ -662,8 +688,11 @@ msgid "Go to installation menu"
 msgstr "Ga naar installatiemenu"
 
 #, sh-format
-msgid "Usage: $PROGRAM_NAME [-g|--gui] $OPTIONS_USAGE"
-msgstr "Gebruik: $PROGRAM_NAME [-g|--gui] $OPTIONS_USAGE"
+msgid "Usage: kz menu [-g|--gui] $OPTIONS_USAGE"
+msgstr "Gebruik: kz menu [-g|--gui] $OPTIONS_USAGE"
+
+msgid "Usage: kz menu [<options>]"
+msgstr "Gebruik: kz menu [<opties>]"
 
 msgid "USERNAME|USERID|USER"
 msgstr "GEBRUIKERSNAAM|USERID|GEBRUIKER"
@@ -789,7 +818,6 @@ msgstr "Voer uit nummer [1-$MENU2_LINES]: "
 msgid "Cannot handle this choice ($REPLY)."
 msgstr "Kan deze keuze niet afhandelen ($REPLY)."
 
-#, sh-format
 msgid ""
 "Follow the steps as described in Checklist installation, Chapter 2.\n"
 "Checklist installation can be found on https://karelzimmer.nl/en, under "
@@ -833,11 +861,14 @@ msgstr "Het volgende is uitgevoerd:"
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-g|--gui] [-s|--source <directory>]\n"
+"Usage: kz restore [-g|--gui] [-s|--source <directory>]\n"
 "                  $OPTIONS_USAGE"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-g|--gui] [-s|--source <map>]\n"
+"Gebruik: kz restore [-g|--gui] [-s|--source <map>]\n"
 "                    $OPTIONS_USAGE"
+
+msgid "Usage: kz restore [<options>]"
+msgstr "Gebruik: kz restore [<opties>]"
 
 msgid ""
 "  -s, --source <directory>\n"
@@ -920,7 +951,6 @@ msgstr ""
 "back-up, of\n"
 "is er te weinig ruimte op $HOME."
 
-#, sh-format
 msgid "Try restoring the back up again."
 msgstr "Probeer de back-up opnieuw terug te zetten."
 
@@ -933,12 +963,12 @@ msgstr "De back-up is teruggezet voor $USER (er zijn $NUM_USERS gebruikers)."
 
 #, sh-format
 msgid ""
-"Usage: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"Usage: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                [-f|--file <file>] [-g|--gui] [-r|--reset]\n"
 "                $OPTIONS_USAGE\n"
 "                [--] [<app>...]"
 msgstr ""
-"Gebruik: $PROGRAM_NAME [-a|--apps] [-b|--browse] [-c|--cat]\n"
+"Gebruik: kz setup [-a|--apps] [-b|--browse] [-c|--cat]\n"
 "                  [-f|--file <bestand>] [-g|--gui] [-r|--reset]\n"
 "                  $OPTIONS_USAGE\n"
 "                  [--] [<app>...]"
@@ -955,6 +985,9 @@ msgstr ""
 
 msgid "  -r, --reset    set apps on default values"
 msgstr "  -r, --reset    stel apps in op standaardwaarden"
+
+msgid "Usage: kz setup [<options>] [<app>...]"
+msgstr "Gebruik: kz setup [<opties>] [<app>...]"
 
 msgid "  <app>...       set up specified apps"
 msgstr "  <app>...       stel opgegeven apps in"
@@ -981,6 +1014,9 @@ msgid ""
 msgstr ""
 "Om de inhoud van het standaard instelbestand te bekijken voer uit: kz-setup "
 "--browse"
+
+msgid "Type 'kz setup --apps' for available apps."
+msgstr "Typ 'kz setup --apps' voor beschikbare apps."
 
 msgid "set up"
 msgstr "instellen"

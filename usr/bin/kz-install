@@ -23,8 +23,7 @@ readonly PROGRAM_NAME='kz install'
 PROGRAM_DESC=$(gettext 'Install apps')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME [-a|--apps] [-b|--browse] \
-[-c|--cat]
+USAGE=$(eval_gettext "Usage: kz install [-a|--apps] [-b|--browse] [-c|--cat]
                   [-f|--file <file>] [-g|--gui] [-r|--remove]
                   \$OPTIONS_USAGE
                   [--] [<app>...]")
@@ -36,14 +35,14 @@ mandatory for short options too.")
 $(gettext '  -a, --apps     show list of apps')
 $(gettext '  -b, --browse   browse install file')
 $(gettext '  -c, --cat      show contents of command file')
-$(eval_gettext "  -f, --file <file>
+$(gettext "  -f, --file <file>
                  process specified install file")
 $(gettext '  -g, --gui      run in graphical mode,')
 $(gettext '                 requires a desktop environment')
 $(gettext '  -r, --remove   delete apps')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>] [<app>...]")
+HELP="$(gettext "Usage: kz install [<options>] [<app>...]")
 
 $PROGRAM_DESC.
 
@@ -262,8 +261,7 @@ function process_argument_app() {
     done
 
     if $APP_NOT_FOUND; then
-        TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --apps' for available \
-apps.")"
+        TEXT="$(gettext "Type 'kz install --apps' for available apps.")"
         infomsg "$TEXT"
         exit $ERR
     fi
@@ -450,8 +448,8 @@ errors:")
         TEXT+='\n\n'
         TEXT+=$(gettext "Try installing the apps again.")
         errmsg "$TEXT"
-        TEXT=$(eval_gettext "Reboot the computer to finish installing the \
-apps and changing system settings.")
+        TEXT=$(gettext "Reboot the computer to finish installing the apps and \
+changing system settings.")
         infomsg "$TEXT"
         exit $ERR
     fi

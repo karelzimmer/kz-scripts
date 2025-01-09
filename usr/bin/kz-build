@@ -24,10 +24,10 @@ readonly PROGRAM_NAME='kz build'
 PROGRAM_DESC=$(gettext 'Build website including kz packages')
 readonly PROGRAM_DESC
 
-USAGE=$(eval_gettext "Usage: \$PROGRAM_NAME \$OPTIONS_USAGE")
+USAGE=$(eval_gettext "Usage: kz build \$OPTIONS_USAGE")
 readonly USAGE
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
+HELP="$(gettext "Usage: kz build [<options>]")
 
 $PROGRAM_DESC.
 

@@ -23,7 +23,7 @@ readonly PROGRAM_NAME='kz desktop'
 PROGRAM_DESC=$(gettext 'Change desktop environment')
 readonly PROGRAM_DESC
 
-USAGE="$(eval_gettext "Usage: \$PROGRAM_NAME [-a|--addaft <favorite>] \
+USAGE="$(eval_gettext "Usage: kz desktop [-a|--addaft <favorite>] \
 [-b|--addbef <favorite>]
                   [-d|--delete <favorite>] [-l|--list] [-r|--reset]
                   \$OPTIONS_USAGE")"
@@ -42,7 +42,7 @@ $(gettext '  -l, --list     show favorites')
 $(gettext '  -r, --reset    set favorites on default values')"
 readonly X_OPTIONS_HELP
 
-HELP="$(eval_gettext "Usage: \$PROGRAM_NAME [<options>]")
+HELP="$(gettext "Usage: kz desktop [<options>]")
 
 $PROGRAM_DESC.
 
