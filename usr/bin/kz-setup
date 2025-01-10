@@ -213,7 +213,8 @@ function process_option_apps() {
 
     TEXT="$(gettext 'The following apps are available:')
 
-$(gettext 'NUM  APP')\n"
+$(gettext 'NUM  APP')
+"
     APPS=$(
         grep    --regexp="#.*$SETUP.*for"   \
                 "$SETUP_FILE"               |
@@ -230,7 +231,8 @@ $(gettext 'NUM  APP')\n"
 
     if [[ -n $APPS ]]; then
         TEXT+=$APPS
-        TEXT+="\n
+        TEXT+="
+
 $(gettext "To set up the apps execute: kz-setup <app>...")
 $(gettext "To view the contents of the setup file execute: kz-setup --cat")
 $(gettext "To view the contents of the apps setup file execute: kz-setup \

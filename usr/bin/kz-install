@@ -217,7 +217,8 @@ function process_option_apps() {
 
     TEXT="$(gettext 'The following apps are available:')
 
-$(gettext 'NUM  APP')\n"
+$(gettext 'NUM  APP')
+"
     APPS=$(
         grep    --regexp="#.*$INSTALL.*$ON" \
                 "$INSTALL_FILE"             |
@@ -234,7 +235,8 @@ $(gettext 'NUM  APP')\n"
 
     if [[ -n $APPS ]]; then
         TEXT+=$APPS
-        TEXT+="\n
+        TEXT+="
+
 $(gettext "To install the apps execute: kz-install <app>...")
 $(gettext "To view the contents of the install file execute: kz-install --cat")
 $(gettext "To view the contents of the apps install file execute: kz-install \

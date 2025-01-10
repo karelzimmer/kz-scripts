@@ -166,7 +166,6 @@ function errmsg() {
     if $OPTION_GUI; then
         TITLE="$PROGRAM_DESC $(gettext 'error message') ($PROGRAM_NAME)"
         zenity  --error                 \
-                --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$TITLE"    \
@@ -184,7 +183,6 @@ function infomsg() {
     if $OPTION_GUI; then
         TITLE="$PROGRAM_DESC $(gettext 'information') ($PROGRAM_NAME)"
         zenity  --info                  \
-                --no-markup             \
                 --width     600         \
                 --height    100         \
                 --title     "$TITLE"    \

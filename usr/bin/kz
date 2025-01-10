@@ -107,7 +107,8 @@ function process_option_list() {
 
     TEXT="$(gettext 'The following commands are available:')
 
-$(gettext 'NUM  COMMAND')\n"
+$(gettext 'NUM  COMMAND')
+"
     TEXT+=$(
         find    /usr/bin/kz-*           \
                 -maxdepth 1             \
@@ -124,7 +125,8 @@ $(gettext 'NUM  COMMAND')\n"
                 --number-separator='  ' \
                 --body-numbering=a
         )
-    TEXT+="\n
+    TEXT+="
+
 $(gettext "To execute a command: kz <command> [<arguments>]")"
     infomsg "$TEXT"
 }
