@@ -220,7 +220,7 @@ function process_option_apps() {
 $(gettext 'NUM  APP')\n"
     APPS=$(
         grep    --regexp="#.*$INSTALL.*$ON" \
-                "$INSTALL_FILE"               |
+                "$INSTALL_FILE"             |
         tr      --squeeze-repeats           \
                 '[:space:]'                 |
         cut     --delimiter=' '             \
