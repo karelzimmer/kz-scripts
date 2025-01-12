@@ -234,8 +234,7 @@ $(gettext 'NUM  APP')
         )
 
     if [[ -n $APPS ]]; then
-        TEXT+=$APPS
-        TEXT+="
+        TEXT+="$APPS
 
 $(gettext "To install the apps execute: kz-install <app>...")
 $(gettext "To view the contents of the install file execute: kz-install --cat")
@@ -439,16 +438,14 @@ function process_command_file() {
     fi
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
-        TEXT=$(gettext "The installation of the following apps contains \
+        TEXT="$(gettext "The installation of the following apps contains \
 errors:")
-        TEXT+='\n'
-        TEXT+=${FAILED_APPS[*]}
-        TEXT+='\n\n'
-        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-        TEXT+='\n'
-        TEXT+=$(cat "$ERROR_FILE")
-        TEXT+='\n\n'
-        TEXT+=$(gettext "Try installing the apps again.")
+${FAILED_APPS[*]}
+
+$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
+$(cat "$ERROR_FILE")
+
+$(gettext "Try installing the apps again.")"
         errmsg "$TEXT"
         TEXT=$(gettext "Reboot the computer to finish installing the apps and \
 changing system settings.")
@@ -473,7 +470,9 @@ function execute_command() {
         if [[ $CMD_SEQ_NUM -eq 1 ]]; then
             logmsg "$APP_NAME_LINE"
         fi
-        printf '%s\n' "#$APP_NAME_LINE\n\n$CMD"
+        printf '%s\n' "#$APP_NAME_LINE
+
+$CMD"
     else
         if [[ $CMD_SEQ_NUM -eq 1 ]]; then
             logmsg  "$APP_NAME_LINE"

@@ -230,8 +230,7 @@ $(gettext 'NUM  APP')
         )
 
     if [[ -n $APPS ]]; then
-        TEXT+=$APPS
-        TEXT+="
+        TEXT+="$APPS
 
 $(gettext "To set up the apps execute: kz-setup <app>...")
 $(gettext "To view the contents of the setup file execute: kz-setup --cat")
@@ -434,15 +433,13 @@ function process_command_file() {
     fi
 
     if [[ -n ${FAILED_APPS[*]} ]]; then
-        TEXT=$(gettext "The set up of the following apps contains errors:")
-        TEXT+='\n'
-        TEXT+=${FAILED_APPS[*]}
-        TEXT+='\n\n'
-        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-        TEXT+='\n'
-        TEXT+=$(cat "$ERROR_FILE")
-        TEXT+='\n\n'
-        TEXT+=$(gettext "Try to set up the apps again.")
+        TEXT="$(gettext "The set up of the following apps contains errors:")
+${FAILED_APPS[*]}
+
+$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
+$(cat "$ERROR_FILE")
+
+$(gettext "Try to set up the apps again.")"
         errmsg "$TEXT"
         TEXT=$(gettext "Log out of the computer to finish setting up the apps \
 and changing user settings.")
@@ -465,9 +462,10 @@ function execute_command() {
         if [[ $CMD_SEQ_NUM -eq 1 ]]; then
             logmsg "$APP_NAME_LINE"
         fi
-        printf '%s\n' "#$APP_NAME_LINE\n\n$CMD"
-    else
+        printf '%s\n' "#$APP_NAME_LINE
 
+$CMD"
+    else
         if [[ $CMD_SEQ_NUM -eq 1 ]]; then
             logmsg  "$APP_NAME_LINE"
             infomsg "$APP_NAME_LINE"

@@ -249,17 +249,16 @@ function restore_backup() {
     fi
 
     if [[ $RESTORE_RC -ne $OK ]]; then
-        TEXT=$(eval_gettext "Restore ended with warnings or errors.
+        TEXT="$(eval_gettext "Restore ended with warnings or errors.
 
 Some files may not be readable, or
 were any files added or removed while restoring the backup, or
 is there not enough space on \$HOME.")
-        TEXT+='\n\n'
-        TEXT+=$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
-        TEXT+='\n'
-        TEXT+=$(cat "$ERROR_FILE")
-        TEXT+='\n\n'
-        TEXT+=$(gettext "Try restoring the back up again.")
+
+$(eval_gettext "Check the messages (also in \$ERROR_FILE):")
+$(cat "$ERROR_FILE")
+
+$(gettext "Try restoring the back up again.")"
         errmsg "$TEXT"
         exit $ERR
     fi

@@ -297,11 +297,7 @@ function report_database_changes() {
 $(gettext "CHANGEs in the configuration database,
 < is the old setting (A),
 > is the new setting (B):")
-"
-    TEXT+=$(
-        diff "$OUTPUT_FILE_1" "$OUTPUT_FILE_2" | grep --regexp='[>|<]' || true
-        )
-    TEXT+="
+$(diff "$OUTPUT_FILE_1" "$OUTPUT_FILE_2" | grep --regexp='[>|<]' || true)
 
 $(gettext 'When CHANGEs, execute: gsettings set CHANGE')"
     infomsg "$TEXT"

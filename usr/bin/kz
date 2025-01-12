@@ -108,24 +108,22 @@ function process_option_list() {
     TEXT="$(gettext 'The following commands are available:')
 
 $(gettext 'NUM  COMMAND')
-"
-    TEXT+=$(
-        find    /usr/bin/kz-*           \
-                -maxdepth 1             \
-                -type f                 \
-                -executable             \
-                -readable               \
-                -not -name '*~'         \
-                -not -name kz           \
-                -printf '%f\n'          |
-        sort                            |
-        sed     --expression='s/kz-//'  |
-        nl      --number-width=3        \
-                --number-format=rn      \
-                --number-separator='  ' \
-                --body-numbering=a
-        )
-    TEXT+="
+$(
+    find    /usr/bin/kz-*           \
+            -maxdepth 1             \
+            -type f                 \
+            -executable             \
+            -readable               \
+            -not -name '*~'         \
+            -not -name kz           \
+            -printf '%f\n'          |
+    sort                            |
+    sed     --expression='s/kz-//'  |
+    nl      --number-width=3        \
+            --number-format=rn      \
+            --number-separator='  ' \
+            --body-numbering=a
+    )
 
 $(gettext "To execute a command: kz <command> [<arguments>]")"
     infomsg "$TEXT"

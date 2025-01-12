@@ -272,7 +272,9 @@ function process_option_help() {
 
     TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --manual' or 'man \
 \$PROGRAM_NAME'\$YELP_MAN_URL for more information.")"
-    infomsg "$HELP\n\n$TEXT"
+    infomsg "$HELP
+
+$TEXT"
 }
 
 
@@ -293,7 +295,9 @@ function process_option_usage() {
     local TEXT=''
 
     TEXT="$(eval_gettext "Type '\$PROGRAM_NAME --help' for more information.")"
-    infomsg "$USAGE\n\n$TEXT"
+    infomsg "$USAGE
+
+$TEXT"
 }
 
 
@@ -407,8 +411,8 @@ function term() {
             ;;
     esac
 
-    TEXT="Signal: $SIGNAL, line: $LINENO, function: $FUNCTION, command: "
-    TEXT+="$COMMAND, code: $RC ($RC_DESC)."
+    TEXT="Signal: $SIGNAL, line: $LINENO, function: $FUNCTION, command: \
+$COMMAND, code: $RC ($RC_DESC)."
     logmsg "$TEXT"
 
     case $SIGNAL in

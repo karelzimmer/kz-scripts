@@ -468,8 +468,8 @@ function show_commands_before_execution() {
 [$ROW] $DESCRIPTION ($COMMAND)"
     done
 
-    TEXT+='
-'
+    TEXT+="
+"
     PROMPT="$(gettext 'Proceed?')"
 
     if $OPTION_GUI; then
