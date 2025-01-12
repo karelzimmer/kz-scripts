@@ -376,8 +376,8 @@ function process_menu2_tui() {
                 "$(gettext 'DESCRIPTION')"
         for MENU2_ACTION in "${!MENU2_ACTIONS[@]}"; do
             printf  '%3s  %-25s  %s\n'                  \
-                    "$MENU2_ACTION"                    \
-                    "${MENU2_ACTIONS[$MENU2_ACTION]}"  \
+                    "$MENU2_ACTION"                     \
+                    "${MENU2_ACTIONS[$MENU2_ACTION]}"   \
                     "${MENU2_DESCS[$MENU2_ACTION]}"
         done
 

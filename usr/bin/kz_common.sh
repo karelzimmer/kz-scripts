@@ -313,8 +313,8 @@ function process_option_version() {
     TEXT="$(eval_gettext "kz version 4.2.1 (\$BUILD_ID).")
 
 $(gettext 'Written by Karel Zimmer <info@karelzimmer.nl>.')
-$(gettext "License CC0 1.0 <https://creativecommons.org/publicdomain/zero/1.0>\
-.")"
+$(gettext "License CC0 1.0 \
+<https://creativecommons.org/publicdomain/zero/1.0>.")"
     infomsg "$TEXT"
 }
 

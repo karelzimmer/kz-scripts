@@ -141,8 +141,8 @@ function prepare_processing() {
 
 # This function downloads Debian package kz.
 function download_apt_package() {
-    local KZ_DEB_SITE_FILE="https://karelzimmer.nl/assets/packages/\
-kz_4.2.1-1_all.deb"
+    local KZ_DEB_SITE_FILE="\
+https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
 
     logmsg  'Download Debian package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
@@ -171,8 +171,8 @@ function install_apt_package() {
 
 # This function installs RPM_SYSTEM package kz.
 function install_rpm_package() {
-    local KZ_RPM_SYSTEM_SITE_FILE="https://karelzimmer.nl/assets/packages/\
-kz-4.2.1-1.noarch.rpm"
+    local KZ_RPM_SYSTEM_SITE_FILE="\
+https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
     local MODE='install'
 
     logmsg 'Install RPM_SYSTEM package kz...'
