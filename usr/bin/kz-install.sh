@@ -332,6 +332,14 @@ if $RPM_SYSTEM; then sudo dnf install --assumeyes htop; fi
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes htop; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes htop; fi
 
+# Install imagination on pc06 pc07
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes imagination; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
+
+# Remove imagination from pc06 pc07
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes imagination; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
+
 # Install jq on pc06 pc07
 if $APT_SYSTEM; then sudo apt-get install --assume-yes jq; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes jq; fi
