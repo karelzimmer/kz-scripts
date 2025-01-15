@@ -134,7 +134,7 @@ function prepare_processing() {
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"; do
         printf '\b%s' '=>'
-        sleep 1
+        sleep $SLEEP
     done &
 }
 
@@ -225,6 +225,7 @@ $(gettext "Type 'exit' to close this window.")"
 
 function main() {
     local KZ_DEB_LOCAL_FILE=''
+    local -i SLEEP=1
 
     init_script "$@"
     check_input "$@"

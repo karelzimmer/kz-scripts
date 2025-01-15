@@ -503,7 +503,7 @@ EOF
     if $OPTION_GUI; then
         logmsg "$TEXT..."
         sync;                           \
-        sleep 1                         |
+        sleep $SLEEP                         |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -618,7 +618,7 @@ function term_script_unmount() {
     umount "$TARGET_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
-    sleep 1
+    sleep $SLEEP
 }
 
 
@@ -632,6 +632,7 @@ function main() {
     local TARGET_MEDIUM=''
     local OPTION_TARGET=false
     local TARGET_ARGUMENT=''
+    local -i SLEEP=1
 
     init_script "$@"
     check_input "$@"

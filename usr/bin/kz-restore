@@ -381,7 +381,7 @@ function term_script_unmount() {
     umount "$SOURCE_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
-    sleep 1
+    sleep $SLEEP
 }
 
 
@@ -395,6 +395,7 @@ function main() {
     local SOURCE_ARGUMENT=''
     local SOURCE_MEDIUM=''
     local SOURCE=''
+    local -i SLEEP=1
 
     init_script "$@"
     check_input "$@"

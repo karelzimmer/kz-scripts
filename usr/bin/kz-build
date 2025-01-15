@@ -311,7 +311,7 @@ function install_deb_package() {
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"; do
         printf '\b%s' '=>'
-        sleep 1
+        sleep $SLEEP
     done &
     # ==== END Copied from kz-get ====
 
@@ -342,6 +342,8 @@ function term_script() {
 ###############################################################################
 
 function main() {
+    local -i SLEEP=1
+
     init_script "$@"
     check_input "$@"
     process_input
