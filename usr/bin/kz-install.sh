@@ -28,15 +28,16 @@ if $UBUNTU; then sudo systemctl enable --now apport.service; fi
 sudo kz-update
 
 # Remove update-system from *
+# Update system.
 echo 'App update-system cannot be removed.'
 
 # Install 7zip on *
-# 7-Zip file archiver with a high compression ratio.
+# File archiver.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes p7zip-full; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes p7zip; fi
 
 # Remove 7zip from *
-# 7-Zip file archiver with a high compression ratio.
+# File archiver.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes p7zip-full; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes p7zip; fi
 
@@ -51,7 +52,7 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes ansible; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes ansible; fi
 
 # Install anydesk on pc06 pc07
-# The fastest remote desktop software on the market.
+# Remote desktop.
 # Remote Wayland display server is not supported.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
@@ -62,7 +63,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes anydes
 # Web app: https://my.anydesk.com/v2
 
 # Remove anydesk from pc06 pc07
-# The fastest remote desktop software on the market.
+# Remote desktop.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes anydesk; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -70,76 +71,76 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes anydesk
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo*; fi
 
 # Install apt on -none
-# Commandline package manager.
+# Package manager.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes apt; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes apt; fi
 
 # Remove apt from -none
-# Commandline package manager.
+# Package manager.
 if $APT_SYSTEM; then echo 'App apt cannot be removed from an APT system.'; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes apt; fi
 
 # Install backintime on -none
-# Simple backup/snapshot system.
+# Backups/snapshots.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes backintime-qt; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes backintime-qt; fi
 
 # Remove backintime on -none
-# Simple backup/snapshot system.
+# Backups/snapshots.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes backintime-qt; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes backintime-qt; fi
 
 # Install bleachbit on pc-van-hugo
-# Delete traces of your computer activity and other junk files to free disk space and maintain privacy.
+# Delete files.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes bleachbit; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes bleachbit; fi
 
 # Remove bleachbit from pc-van-hugo
-# Delete traces of your computer activity and other junk files to free disk space and maintain privacy.
+# Delete files.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes bleachbit; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes bleachbit; fi
 
 # Install calibre on pc06 pc-van-hugo
-# Powerful and easy to use e-book manager.
+# E-book manager.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes calibre; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo --validate && wget --output-document=- https://download.calibre-ebook.com/linux-installer.sh | sudo sh; fi
 
 # Remove calibre from pc06 pc-van-hugo
-# Powerful and easy to use e-book manager.
+# E-book manager.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes calibre; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo calibre-uninstall; fi
 
 # Install change-grub-timeout on *
-# The GRand Unified Bootloader.
+# GRand Unified Bootloader.
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=10/GRUB_TIMEOUT=1/' /etc/default/grub
 if $APT_SYSTEM; then sudo update-grub; fi
 if $RPM_SYSTEM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # Remove change-grub-timeout from *
-# The GRand Unified Bootloader.
+# GRand Unified Bootloader.
 sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default/grub
 if $APT_SYSTEM; then sudo update-grub; fi
 if $RPM_SYSTEM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 
 # Install cockpit on pc06
-# Web Console for Linux servers.
+# Web console.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes cockpit cockpit-pcp; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes cockpit cockpit-pcp; fi
 # Web app: https://localhost:9090
 
 # Remove cockpit from pc06
-# Web Console for Linux servers.
+# Web console.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes cockpit; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes cockpit; fi
 
 # Install cups on *
-# Common UNIX Printing System(tm) - PPD/driver support, web interface.
+# Common UNIX Printing System.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes cups; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes cups; fi
 
 # Remove cups from *
-# Common UNIX Printing System(tm) - PPD/driver support, web interface.
+# Common UNIX Printing System.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes cups; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes cups; fi
 
@@ -154,13 +155,13 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes cu
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App cups-backend-bjnp is not available on an RPM system.'; fi
 
 # Install dash-to-dock on *
-# A dock for the Gnome Shell.
+# Desktop dock.
 # Reboot required!
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock gnome-shell-extension-no-overview; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock; fi
 
 # Remove dash-to-dock from *
-# A dock for the Gnome Shell.
+# Desktop dock.
 # Reboot required!
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes gnome-shell-extension-dashtodock; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock; fi
@@ -204,34 +205,36 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install dual-monitor on pc06
+# Add support for dual monitor.
 if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
 # Remove dual-monitor from pc06
+# Remove support for dual monitor.
 sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 # Install exiftool on pc06 pc07
-# library and program to read and write meta information in multimedia files.
+# Read and write meta information.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes libimage-exiftool-perl; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes perl-Image-ExifTool; fi
 
 # Remove exiftool from pc06 pc07
-# library and program to read and write meta information in multimedia files.
+# Read and write meta information.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes libimage-exiftool-perl; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes perl-Image-ExifTool; fi
 
 # Install fakeroot on pc06 pc07
-# Tool for simulating superuser privileges.
+# Simulate superuser privileges.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes fakeroot; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes fakeroot; fi
 
 # Remove fakeroot from pc06 pc07
-# Tool for simulating superuser privileges.
+# Simulate superuser privileges.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes fakeroot; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes fakeroot; fi
 
 # Install fdupes on -none
-# Identifies duplicate files within given directories.
+# Find duplicate files.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes fdupes; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes fdupes; fi
 # Usage:
@@ -240,7 +243,7 @@ if $RPM_SYSTEM; then sudo dnf install --assumeyes fdupes; fi
 # $ fdupes -rdN /path/to/folder # Delete, from /path/to/folder, keep first dup
 
 # Remove fdupes from -none
-# Identifies duplicate files within given directories.
+# Find duplicate files.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes fdupes; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes fdupes; fi
 
@@ -260,22 +263,22 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo sed --in-place --expression='s
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
 # Install gdebi on *
-# Simple tool to view and install deb files - GNOME GUI.
+# View and install deb files.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gdebi; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gdebi is not available on an RPM system.'; fi
 
 # Remove gdebi from *
-# Simple tool to view and install deb files - GNOME GUI.
+# View and install deb files.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gdebi; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gdebi is not available on an RPM system.'; fi
 
 # Install gettext on pc06 pc07
-# GNU Internationalization utilities.
+# GNU Internationalization.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes gettext; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes gettext; fi
 
 # Remove gettext from pc06 pc07
-# GNU Internationalization utilities.
+# GNU Internationalization.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes gettext; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes gettext; fi
 
@@ -290,37 +293,37 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes gimp; fi
 
 # Install git on pc06 pc07
-# Fast, scalable, distributed revision control system.
+# Distributed revision control system.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes git; fi
 if $RPM_SYSTEM; then sudo sudo dnf install --assumeyes git; fi
 
 # Remove git from pc06 pc07
-# Fast, scalable, distributed revision control system.
+# Distributed revision control system.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes git; fi
 if $RPM_SYSTEM; then sudo sudo dnf remove --assumeyes git; fi
 
 # Install gnome-gmail on pc01 pc06 pc07
-# Support for Gmail as the preferred email application in GNOME.
+# Gmail as the preferred email application.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-gmail; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gnome-gmail is not available on an RPM system.'; fi
 
 # Remove gnome-gmail from pc01 pc06 pc07
-# Support for Gmail as the preferred email application in GNOME.
+# Gmail as the preferred email application.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gnome-gmail; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gnome-gmail is not available on an RPM system.'; fi
 
 # Install gnome-tweaks on pc01 pc06 pc07
-# Tool to adjust advanced configuration settings for GNOME.
+# Adjust advanced configuration settings.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes gnome-tweaks; fi
 
 # Remove gnome-tweaks from pc01 pc06 pc07
-# Tool to adjust advanced configuration settings for GNOME.
+# Adjust advanced configuration settings.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gnome-tweaks; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
 # Install google-chrome on *
-# The web browser from Google.
+# Web browser.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -335,7 +338,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rpm --import https://dl.google
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 # Remove google-chrome from *
-# The web browser from Google.
+# Web browser.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes google-chrome-stable chrome-gnome-shell; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -362,52 +365,52 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes google-
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.repos.d/google-earth.repo*; fi
 
 # Install handbrake on pc-van-emily
-# Versatile DVD ripper and video transcoder (GTK+ GUI).
+# DVD ripper and video transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes handbrake; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App handbrake is not available on an RPM system.'; fi
 
 # Remove handbrake from pc-van-emily
-# Versatile DVD ripper and video transcoder (GTK+ GUI).
+# DVD ripper and video transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes handbrake; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App handbrake is not available on an RPM system.'; fi
 
 # Install htop on pc06 pc07
-# Interactive process viewer.
+# Process viewer.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes htop; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes htop; fi
 
 # Remove htop from pc06 pc07
-# Interactive process viewer.
+# Process viewer.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes htop; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes htop; fi
 
 # Install imagination on pc06 pc07
-# DVD slide show maker
+# DVD slide show maker.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes imagination; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
 
 # Remove imagination from pc06 pc07
-# DVD slide show maker
+# DVD slide show maker.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes imagination; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
 
 # Install jq on pc06 pc07
-# Lightweight and flexible command-line JSON processor.
+# JSON processor.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes jq; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes jq; fi
 
 # Remove jq from pc06 pc07
-# Lightweight and flexible command-line JSON processor.
+# JSON processor.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes jq; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes jq; fi
 
 # Install krita on pc06
-# Pixel-based image manipulation program.
+# Image manipulation program.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes krita; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App krita is not available on an RPM system.'; fi
 
 # Remove krita from pc06
-# Pixel-based image manipulation program.
+# Image manipulation program.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes krita; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App krita is not available on an RPM system.'; fi
 
@@ -441,75 +444,77 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo systemctl disable --now libvir
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf groupremove "Virtualization Host"; fi
 
 # Install lftp on pc06 pc07
-# Sophisticated command-line FTP/HTTP/BitTorrent client programs.
+# FTP/HTTP/BitTorrent client.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes lftp; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes lftp; fi
 
 # Remove lftp from pc06 pc07
-# Sophisticated command-line FTP/HTTP/BitTorrent client programs.
+# FTP/HTTP/BitTorrent client.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes lftp; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes lftp; fi
 
 # Install libreoffice on *
-# Office productivity suite.
+# Office suite.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes libreoffice; fi
 
 # Remove libreoffice from *
-# Office productivity suite.
+# Office suite.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes libreoffice; fi
 
 # Install locate on pc06 pc07
-# Maintain and query an index of a directory tree.
+# Find files fast.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes locate; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes mlocate; fi
 sudo updatedb
 
 # Remove locate from pc06 pc07
-# Maintain and query an index of a directory tree.
+# Find files fast.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes locate; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes mlocate; fi
 
 # Install log-access-for-user on pc07
+# Add log access.
 if [[ $HOSTNAME = 'pc07' ]]; then sudo usermod --append --groups adm,systemd-journal karel; fi
 
 # Remove log-access-for-user from pc07
+# Remove log access.
 if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel adm; fi
 if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel systemd-journal; fi
 
 # Install mypy on pc06 pc07
-# Optional static typing for Python.
+# Static typing for Python.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes mypy; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes python3-mypy; fi
 
 # Remove mypy from pc06 pc07
-# Optional static typing for Python.
+# Static typing for Python.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes mypy; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes python3-mypy; fi
 
 # Install nautilus-admin on pc06 pc07
-# Extension for Nautilus to do administrative operations.
+# Administrative operations.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes nautilus-admin; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App nautilus-admin is not available on an RPM system.'; fi
 
 # Remove nautilus-admin from pc06 pc07
-# Extension for Nautilus to do administrative operations.
+# Administrative operations.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes nautilus-admin; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App nautilus-admin is not available on an RPM system.'; fi
 
 # Install nmap on pc06 pc07
-# The Network Mapper.
+# Network Mapper.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes nmap; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes nmap; fi
 
 # Remove nmap from pc06 pc07
-# The Network Mapper.
+# Network Mapper.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes nmap; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes nmap; fi
 
 # Install ntfs on -none
-# Read/write NTFS driver for FUSE.
+# NTFS support.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes ntfs-3g; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
 # Usage:
@@ -525,25 +530,25 @@ if $RPM_SYSTEM; then sudo dnf install --assumeyes ntfs-3g ntfsprogs; fi
 # $ sudo -d ntfsfix /dev/sdba1  # Clear the volume dirty flag
 
 # Remove ntfs from -none
-# Read/write NTFS driver for FUSE.
+# NTFS support.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes ntfs-3g; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs; fi
 
 # Install python on pc06 pc07
-# Interactive high-level object-oriented language.
+# Programming language.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if $APT_SYSTEM; then sudo ln --force --relative --symbolic /usr/bin/pycodestyle /usr/bin/pep8; fi
 if $APT_SYSTEM; then sudo ln --force --relative --symbolic /usr/bin/pip3 /usr/bin/pip; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes python3 python3-pycodestyle python3-pip; fi
 
 # Remove python from pc06 pc07
-# Interactive high-level object-oriented language.
+# Programming language.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3; fi
 if $APT_SYSTEM; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip; fi
 
 # Install rpm on pc06 pc07
-# Package manager for RPM.
+# Package manager.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes rpm; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes rpm; fi
 
@@ -553,37 +558,37 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes rpm; fi
 if $RPM_SYSTEM; then echo 'App rpm cannot be removed from an RPM system.'; fi
 
 # Install shellcheck on pc06 pc07
-# Lint tool for shell scripts.
+# Linter.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes shellcheck; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes shellcheck; fi
 
 # Remove shellcheck from pc06 pc07
-# Lint tool for shell scripts.
+# Linter.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes shellcheck; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes shellcheck; fi
 
 # Install sound-juicer on pc-van-emily
-# GNOME-desktop CD ripper and player using GStreamer.
+# CD ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes sound-juicer; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App sound-juicer is not available on an RPM system.'; fi
 
 # Remove sound-juicer from pc-van-emily
-# GNOME-desktop CD ripper and player using GStreamer.
+# CD ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes sound-juicer; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App sound-juicer is not available on an RPM system.'; fi
 
 # Install spice-vdagent on *
-# Spice agent for Linux.
+# Spice agent.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes spice-vdagent; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes spice-vdagent; fi
 
 # Remove spice-vdagent from *
-# Spice agent for Linux.
+# Spice agent.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes spice-vdagent; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes spice-vdagent; fi
 
 # Install ssh on pc01 pc06 pc07
-# Secure shell client and server.
+# Secure SHell.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes ssh; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes openssh; fi
 sudo sed --in-place --expression='s/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
@@ -596,36 +601,36 @@ grep --quiet --regexp='PermitRootLogin no' /etc/ssh/sshd_config
 sudo systemctl restart ssh.service
 
 # Remove ssh from pc01 pc06 pc07
-# Secure shell client and server.
+# Secure SHell.
 if [[ 'pc01 pc06 pc07' =~ $HOSTNAME ]]; then sudo sed --in-place --expression='/^192.168.1./d' /etc/hosts; fi
 sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes ssh; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes openssh; fi
 
 # Install sushi on pc06
-# Sushi is a quick previewer for nautilus.
+# Quick previewer.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-sushi; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes sushi; fi
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
 
 # Remove sushi from pc06
-# Sushi is a quick previewer for nautilus.
+# Quick previewer.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gnome-sushi; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes sushi; fi
 
 # Install tab-completion on *
-# Programmable completion for the bash shell.
+# Programmable completion.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes bash-completion; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes bash-completion; fi
 
 # Remove tab-completion from *
-# Programmable completion for the bash shell.
+# Programmable completion.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes bash-completion; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes bash-completion; fi
 
 # Install teamviewer on *
-# Remote control and meeting solution.
+# Remote desktop.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -638,7 +643,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https:
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
-# Remote control and meeting solution.
+# Remote desktop.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes teamviewer; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-key del 0C1289C0 DEB49217; fi
@@ -646,77 +651,83 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes teamviewer; fi
 
 # Install thunderbird on *
-# Mail/news client with RSS, chat and integrated spam filter support.
+# Mail/news.
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get install --assume-yes thunderbird thunderbird-locale-nl; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf install --assumeyes thunderbird; fi
 
 # Remove thunderbird from *
-# Mail/news client with RSS, chat and integrated spam filter support.
+# Mail/news.
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes thunderbird-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get remove --assume-yes thunderbird-locale-nl; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf remove --assumeyes thunderbird; fi
 
 # Install tree on pc06 pc07
-# Displays an indented directory tree, in color.
+# Display directory tree.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes tree; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes tree; fi
 
 # Remove tree from pc06 pc07
-# Displays an indented directory tree, in color.
+# Display directory tree.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes tree; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes tree; fi
 
 # Install ufw on pc01 pc06 pc07
-# The Uncomplicated FireWall.
+# Uncomplicated FireWall.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gufw; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes gufw; fi
 if $DESKTOP_ENVIRONMENT; then sudo ufw allow ssh; fi
 if $DESKTOP_ENVIRONMENT; then sudo ufw enable; fi
 
 # Remove ufw from pc01 pc06 pc07
-# The Uncomplicated FireWall.
+# Uncomplicated FireWall.
 sudo ufw disable
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes gufw; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes gufw; fi
 
 # Install usbutils on pc07
-# Linux USB utilities.
+# USB utilities.
 # This package contains the lsusb utility.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes usbutils; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes usbutils; fi
 
 # Remove usbutils from pc07
-# Linux USB utilities.
+# USB utilities.
 # This package contains the lsusb utility.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes usbutils; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes usbutils; fi
 
 # Install user-guest on -none
+# Add guest user.
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
 sudo passwd --delete "$(gettext 'guest')"
 
 # Remove user-guest from -none
+# Remove guest user.
 sudo userdel --remove "$(gettext 'guest')"
 
 # Install user-karel on pc01
+# Add user Karel.
 if [[ $HOSTNAME = 'pc01' ]]; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Karel Zimmer' karel || true; fi
 if [[ $HOSTNAME = 'pc01' ]]; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin karel; fi
 if [[ $HOSTNAME = 'pc01' ]]; then sudo passwd --delete --expire karel; fi
 
 # Remove user-karel from pc01
+# Add user Karel.
 if [[ $HOSTNAME = 'pc01' ]]; then sudo userdel --remove karel; fi
 
 # Install user-toos on Laptop
+# Add user Toos.
 if [[ $HOSTNAME = 'Laptop' ]]; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true; fi
 if [[ $HOSTNAME = 'Laptop' ]]; then sudo usermod --append --groups adm,cdrom,sudo,dip,plugdev,lpadmin toos; fi
 if [[ $HOSTNAME = 'Laptop' ]]; then sudo passwd --delete --expire toos; fi
 
 # Remove user-toos from Laptop
+# Remove user Toos.
 if [[ $HOSTNAME = 'Laptop' ]]; then sudo userdel --remove toos; fi
 
 # Install virtualbox on pc-van-hugo
-# x86 virtualization solution.
+# Virtualization.
 # If the installation hangs or VBox does not work, check the virtualization settings in the BIOS/UEFI.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'virtualbox-ext-pack virtualbox-ext-pack/license select true' | sudo debconf-set-selections; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
@@ -724,24 +735,24 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes v
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes VirtualBox; fi
 
 # Remove virtualbox from pc-van-hugo
-# x86 virtualization solution.
+# Virtualization.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes VirtualBox; fi
 
 # Install vlc on *
-# Multimediaspeler en -streamer.
+# Multimedia player.
 if $DESKTOP_ENVIRONMENT && $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes vlc; fi
 # EPEL: Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
 if $DESKTOP_ENVIRONMENT && $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes vlc; fi
 
 # Remove vlc from *
-# Multimediaspeler en -streamer.
+# Multimedia player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes vlc; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes vlc; fi
 
 # Install vscode on pc01 pc06 pc07
-# Code editing. Redefined.
+# Editor.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes apt-transport-https; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://packages.microsoft.com/keys/microsoft.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/packages.microsoft.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |sudo tee /etc/apt/sources.list.d/vscode.list; fi
@@ -753,7 +764,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo -e '[code]\nname=Visual Studio
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes code; fi
 
 # Remove vscode from pc01 pc06 pc07
-# Code editing. Redefined.
+# Editor.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo update-alternatives --remove editor /usr/bin/code; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes code; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/vscode.list* /usr/share/keyrings/packages.microsoft*; fi
@@ -762,7 +773,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes code; f
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo*; fi
 
 # Install webmin on pc07
-# Web-based administration interface for Unix systems.
+# Web console.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://www.webmin.com/jcameron-key.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/webmin.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [signed-by=/usr/share/keyrings/webmin.gpg] https://download.webmin.com/download/repository sarge contrib' | sudo tee /etc/apt/sources.list.d/webmin.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -774,7 +785,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes webmin
 # Web app: https://localhost:10000
 
 # Remove webmin from pc07
-# Web-based administration interface for Unix systems.
+# Web console.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes webmin; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -782,23 +793,23 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then dnf remove --assumeyes webmin; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo*; fi
 
 # Install wine on -none
-# Wine is a free MS-Windows API implementation.
+# Run Windows applications.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo dpkg --add-architecture i386; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes wine winetricks playonlinux; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes wine playonlinux; fi
 
 # Remove wine from -none
-# Wine is a free MS-Windows API implementation.
+# Run Windows applications.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes wine winetricks playonlinux; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo dpkg --remove-architecture i386; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes wine playonlinux; fi
 
 # Install youtube-dl on pc-van-emily pc-van-hugo
-# GUI on yt-dlp (ie, youtube-dl) to download videos from a variety of sites.
+# Download videos.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes youtubedl-gui; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes youtube-dl; fi
 
 # Remove youtube-dl from pc-van-emily pc-van-hugo
-# GUI on yt-dlp (ie, youtube-dl) to download videos from a variety of sites.
+# Download videos.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes youtubedl-gui; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes youtube-dl; fi
