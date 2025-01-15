@@ -67,11 +67,11 @@ if $DESKTOP_ENVIRONMENT && ($DEBIAN || $ROCKY); then gsettings reset org.gnome.s
 if $DESKTOP_ENVIRONMENT && ($DEBIAN || $ROCKY); then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed; fi
 
 # Setup evolution for karel@pc07
-# Mail/organizer.
+# E-mail and organizer.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.Evolution; fi
 
 # Reset evolution for karel@pc07
-# Mail/organizer.
+# E-mail and organizer.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=org.gnome.Evolution; fi
 
 
@@ -246,12 +246,12 @@ sed --in-place --expression='s/alias/#alias/g' "$HOME/.bashrc"
 sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 
 # Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-# Mail/news.
+# E-mail and news.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=thunderbird; fi
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=thunderbird_thunderbird; fi
 
 # Reset thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
-# Mail/news.
+# E-mail and news.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=thunderbird; fi
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=thunderbird_thunderbird; fi
 

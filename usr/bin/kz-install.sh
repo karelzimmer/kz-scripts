@@ -303,12 +303,12 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes git; fi
 if $RPM_SYSTEM; then sudo sudo dnf remove --assumeyes git; fi
 
 # Install gnome-gmail on pc01 pc06 pc07
-# Gmail as the preferred email application.
+# Gmail for e-mail.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-gmail; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gnome-gmail is not available on an RPM system.'; fi
 
 # Remove gnome-gmail from pc01 pc06 pc07
-# Gmail as the preferred email application.
+# Gmail for e-mail.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gnome-gmail; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gnome-gmail is not available on an RPM system.'; fi
 
@@ -651,13 +651,13 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes teamviewer; fi
 
 # Install thunderbird on *
-# Mail/news.
+# E-mail and news.
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get install --assume-yes thunderbird thunderbird-locale-nl; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf install --assumeyes thunderbird; fi
 
 # Remove thunderbird from *
-# Mail/news.
+# E-mail and news.
 if $DESKTOP_ENVIRONMENT && $DEBIAN; then sudo apt-get remove --assume-yes thunderbird-l10n-nl; fi
 if $DESKTOP_ENVIRONMENT && $UBUNTU; then sudo apt-get remove --assume-yes thunderbird-locale-nl; fi
 if $DESKTOP_ENVIRONMENT && $ROCKY; then sudo dnf remove --assumeyes thunderbird; fi
