@@ -122,6 +122,8 @@ function process_input() {
 
 # This function prepares further processing.
 function prepare_processing() {
+    local -i SLEEP=1
+
     KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.deb")
 
     sudo true
@@ -225,7 +227,6 @@ $(gettext "Type 'exit' to close this window.")"
 
 function main() {
     local KZ_DEB_LOCAL_FILE=''
-    local -i SLEEP=1
 
     init_script "$@"
     check_input "$@"

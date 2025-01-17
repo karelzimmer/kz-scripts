@@ -296,7 +296,8 @@ function build_rpm_package() {
 
 # This function installs Debian-package kz.
 function install_deb_package() {
-    local TEXT
+    local TEXT=''
+    local -i SLEEP=1
 
     TEXT=$(gettext 'Install package')...
     infomsg "$TEXT"
@@ -342,8 +343,6 @@ function term_script() {
 ###############################################################################
 
 function main() {
-    local -i SLEEP=1
-
     init_script "$@"
     check_input "$@"
     process_input
