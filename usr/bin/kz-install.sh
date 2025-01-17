@@ -29,7 +29,7 @@ sudo kz-update
 
 # Remove update-system from *
 # Update system.
-echo 'App update-system cannot be removed.'
+echo 'The update-system app cannot be removed.'
 
 # Install 7zip on *
 # File archiver.
@@ -77,7 +77,7 @@ if $RPM_SYSTEM; then sudo dnf install --assumeyes apt; fi
 
 # Remove apt from -none
 # Package manager.
-if $APT_SYSTEM; then echo 'App apt cannot be removed from an APT system.'; fi
+if $APT_SYSTEM; then echo 'The apt app cannot be removed from an APT system.'; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes apt; fi
 
 # Install backintime on -none
@@ -147,12 +147,12 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes cups; fi
 # Install cups-backend-bjnp on pc-van-emily
 # Printer backend for Canon BJNP protocol.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App cups-backend-bjnp is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The cups-backend-bjnp app is not available on an RPM system.'; fi
 
 # Remove cups-backend-bjnp from pc-van-emily
 # Printer backend for Canon BJNP protocol.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App cups-backend-bjnp is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The cups-backend-bjnp app is not available on an RPM system.'; fi
 
 # Install dash-to-dock on *
 # Desktop dock.
@@ -265,12 +265,12 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo sed --in-place --expression='s
 # Install gdebi on *
 # View and install deb files.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gdebi; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gdebi is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The gdebi app is not available on an RPM system.'; fi
 
 # Remove gdebi from *
 # View and install deb files.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gdebi; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gdebi is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The gdebi app is not available on an RPM system.'; fi
 
 # Install gettext on pc06 pc07
 # GNU Internationalization.
@@ -305,12 +305,12 @@ if $RPM_SYSTEM; then sudo sudo dnf remove --assumeyes git; fi
 # Install gnome-gmail on pc01 pc06 pc07
 # Gmail for e-mail.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-gmail; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gnome-gmail is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The gnome-gmail app is not available on an RPM system.'; fi
 
 # Remove gnome-gmail from pc01 pc06 pc07
 # Gmail for e-mail.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gnome-gmail; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gnome-gmail is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The gnome-gmail app is not available on an RPM system.'; fi
 
 # Install gnome-tweaks on pc01 pc06 pc07
 # Adjust advanced configuration settings.
@@ -367,12 +367,12 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.
 # Install handbrake on pc-van-emily
 # Video ripper and transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes handbrake; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App handbrake is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The handbrake app is not available on an RPM system.'; fi
 
 # Remove handbrake from pc-van-emily
 # Video ripper and transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes handbrake; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App handbrake is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The handbrake app is not available on an RPM system.'; fi
 
 # Install htop on pc06 pc07
 # Process viewer.
@@ -387,12 +387,12 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes htop; fi
 # Install imagination on pc06 pc07
 # Slide show maker.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes imagination; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The imagination app is not available on an RPM system.'; fi
 
 # Remove imagination from pc06 pc07
 # Slide show maker.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes imagination; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The imagination app is not available on an RPM system.'; fi
 
 # Install jq on pc06 pc07
 # JSON processor.
@@ -407,12 +407,12 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes jq; fi
 # Install krita on pc06
 # Image manipulation program.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes krita; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App krita is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The krita app is not available on an RPM system.'; fi
 
 # Remove krita from pc06
 # Image manipulation program.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes krita; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App krita is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The krita app is not available on an RPM system.'; fi
 
 # Install kvm on pc06 pc07
 # Kernel-based Virtual Machine.
@@ -496,12 +496,12 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes python3-mypy; fi
 # Install nautilus-admin on pc06 pc07
 # Administrative operations.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes nautilus-admin; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App nautilus-admin is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The nautilus-admin app is not available on an RPM system.'; fi
 
 # Remove nautilus-admin from pc06 pc07
 # Administrative operations.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes nautilus-admin; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App nautilus-admin is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The nautilus-admin app is not available on an RPM system.'; fi
 
 # Install nmap on pc06 pc07
 # Network Mapper.
@@ -555,7 +555,7 @@ if $RPM_SYSTEM; then sudo dnf install --assumeyes rpm; fi
 # Remove rpm from pc06 pc07
 # Package manager for RPM.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes rpm; fi
-if $RPM_SYSTEM; then echo 'App rpm cannot be removed from an RPM system.'; fi
+if $RPM_SYSTEM; then echo 'The rpm app cannot be removed from an RPM system.'; fi
 
 # Install shellcheck on pc06 pc07
 # Linter.
@@ -570,12 +570,12 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes shellcheck; fi
 # Install sound-juicer on pc-van-emily
 # Audio ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes sound-juicer; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App sound-juicer is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The sound-juicer app is not available on an RPM system.'; fi
 
 # Remove sound-juicer from pc-van-emily
 # Audio ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes sound-juicer; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App sound-juicer is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The sound-juicer app is not available on an RPM system.'; fi
 
 # Install spice-vdagent on *
 # Spice agent.
@@ -593,6 +593,7 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- https://do
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes spotify-client; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The spotify app is available as a web app on an RPM system.'; fi
 # Web app: https://open.spotify.com
 
 # Remove spotify on pc01 pc02 pc06 pc07
@@ -600,6 +601,7 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes s
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes spotify-client; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify.list* /usr/share/keyrings/spotify.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The spotify web app cannot be removed from an RPM system.'; fi
 
 # Install ssh on pc01 pc06 pc07
 # Secure SHell.
