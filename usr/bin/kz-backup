@@ -371,7 +371,7 @@ function backup_setting_avatar() {
         cp --preserve --verbose "$INPUT_FILE" "$OUTPUT_FILE_1" |& $LOGCMD
     fi
     logmsg 'Save instructions for restoring the avatar...'
-    TEXT="$(gettext "To restore the users avatar:
+    TEXT="$(gettext "To set the users avatar:
 
 1. Press the Super key[1], type 'user' and click behind Settings on Users.
 2. Click on Change avatar (pencil icon).
