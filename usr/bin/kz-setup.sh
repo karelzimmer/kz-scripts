@@ -14,6 +14,7 @@
 # Remote desktop.
 # Remote Wayland display server is not supported.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=anydesk; fi
+# Web app: https://my.anydesk.com/v2
 
 # Reset anydesk for karel@pc06 karel@pc07
 # Remote desktop.
@@ -30,6 +31,7 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=calibre-gui; fi
 # Setup cockpit for karel@pc06
 # Web console.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-cockpit; fi
+# Web app: https://localhost:9090
 
 # Reset cockpit for karel@pc06
 # Web console.
@@ -218,6 +220,7 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.SoundJuicer; fi
 # Music service.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then kz-desktop --addaft=spotify; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then kz-desktop --addaft=kz-spotify; fi
+# Web app: https://open.spotify.com
 
 # Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Music service.
@@ -227,6 +230,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then kz-desktop --delete=kz-spotify; fi
 # Setup teamviewer for karel@pc06
 # Remote desktop.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=com.teamviewer.TeamViewer; fi
+# Web app: https://web.teamviewer.com
 
 # Reset teamviewer for karel@pc06
 # Remote desktop.
@@ -287,6 +291,7 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=code; fi
 # Setup webmin for karel@pc07
 # Web console.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-webmin; fi
+# Web app: https://localhost:10000
 
 # Reset webmin for karel@pc07
 # Web console.
