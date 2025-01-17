@@ -365,12 +365,12 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes google-
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.repos.d/google-earth.repo*; fi
 
 # Install handbrake on pc-van-emily
-# DVD ripper and video transcoder.
+# Video ripper and transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes handbrake; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App handbrake is not available on an RPM system.'; fi
 
 # Remove handbrake from pc-van-emily
-# DVD ripper and video transcoder.
+# Video ripper and transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes handbrake; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App handbrake is not available on an RPM system.'; fi
 
@@ -385,12 +385,12 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes htop; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes htop; fi
 
 # Install imagination on pc06 pc07
-# DVD slide show maker.
+# Slide show maker.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes imagination; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
 
 # Remove imagination from pc06 pc07
-# DVD slide show maker.
+# Slide show maker.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes imagination; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App imagination is not available on an RPM system.'; fi
 
@@ -568,12 +568,12 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes shellcheck; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes shellcheck; fi
 
 # Install sound-juicer on pc-van-emily
-# CD ripper and player.
+# Audio ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes sound-juicer; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App sound-juicer is not available on an RPM system.'; fi
 
 # Remove sound-juicer from pc-van-emily
-# CD ripper and player.
+# Audio ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes sound-juicer; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App sound-juicer is not available on an RPM system.'; fi
 
@@ -713,7 +713,7 @@ if [[ $HOSTNAME = 'pc01' ]]; then sudo usermod --append --groups adm,cdrom,sudo,
 if [[ $HOSTNAME = 'pc01' ]]; then sudo passwd --delete --expire karel; fi
 
 # Remove user-karel from pc01
-# Add user Karel.
+# Remove user Karel.
 if [[ $HOSTNAME = 'pc01' ]]; then sudo userdel --remove karel; fi
 
 # Install user-toos on Laptop
