@@ -90,7 +90,7 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=firefox_firefox; fi
 # Setup gdebi for *
 # View and install deb files.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gdebi is not available on an RPM system.'; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'App gdebi is not available.'; fi
 
 # Reset gdebi for *
 # View and install deb files.
