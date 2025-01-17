@@ -587,6 +587,20 @@ if $RPM_SYSTEM; then sudo dnf install --assumeyes spice-vdagent; fi
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes spice-vdagent; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes spice-vdagent; fi
 
+# Install spotify on pc01 pc02 pc06 pc07
+# Music service.
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes --output=/usr/share/keyrings/spotify.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/spotify.gpg] http://repository.spotify.com stable non-free' | sudo tee /etc/apt/sources.list.d/spotify.list; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes spotify-client; fi
+# Web app: https://open.spotify.com
+
+# Remove spotify on pc01 pc02 pc06 pc07
+# Music service.
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes spotify-client; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify.list* /usr/share/keyrings/spotify.gpg*; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
+
 # Install ssh on pc01 pc06 pc07
 # Secure SHell.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes ssh; fi

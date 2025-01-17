@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=Zoom
+Name=Zoom web app
 Comment=Video call with others from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=google-chrome

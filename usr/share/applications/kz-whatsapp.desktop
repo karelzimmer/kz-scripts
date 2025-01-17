@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=WhatsApp
+Name=WhatsApp web app
 Comment=Send and receive messages, photos and videos via a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=google-chrome

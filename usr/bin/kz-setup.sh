@@ -216,11 +216,11 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.SoundJuicer; fi
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Music service.
-if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=kz-spotify; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=spotify; fi
 
 # Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Music service.
-if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=kz-spotify; fi
+if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=spotify; fi
 
 # Setup teamviewer for karel@pc06
 # Remote desktop.

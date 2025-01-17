@@ -7,7 +7,7 @@
 
 [Desktop Entry]
 Type=Application
-Name=Teams
+Name=Teams web app
 Comment=Collaborate with others from a web browser
 Categories=Utility;X-GNOME-Utilities;
 TryExec=google-chrome
