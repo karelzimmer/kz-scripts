@@ -488,12 +488,12 @@ if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel adm; fi
 if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel systemd-journal; fi
 
 # Install mypy on pc06 pc07
-# Static typing for Python.
+# Python static typing.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes mypy; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes python3-mypy; fi
 
 # Remove mypy from pc06 pc07
-# Static typing for Python.
+# Python static typing.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes mypy; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes python3-mypy; fi
 
@@ -562,13 +562,13 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes rpm; fi
 if $RPM_SYSTEM; then echo 'The rpm app cannot be removed.'; fi
 
 # Install shellcheck on pc06 pc07
-# Linter.
+# Shell script linter.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes shellcheck; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes shellcheck; fi
 # Web app: https://www.shellcheck.net
 
 # Remove shellcheck from pc06 pc07
-# Linter.
+# Shell script linter.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes shellcheck; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes shellcheck; fi
 
