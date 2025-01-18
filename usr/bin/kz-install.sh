@@ -138,6 +138,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes cockpit
 # Common UNIX Printing System.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes cups; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes cups; fi
+# Web app: http://localhost:631
 
 # Remove cups from *
 # Common UNIX Printing System.
@@ -249,7 +250,7 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes fdupes; fi
 
 # Install force-x11 on -none
 # Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
-# Force means no choice @ user login for X11 or Wayland!
+# Force means no choice on user login screen for X11 or Wayland!
 # Reboot required!
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm/custom.conf; fi
@@ -296,6 +297,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes gimp; f
 # Distributed revision control system.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes git; fi
 if $RPM_SYSTEM; then sudo sudo dnf install --assumeyes git; fi
+# Web app: https://github.com
 
 # Remove git from pc06 pc07
 # Distributed revision control system.
@@ -306,6 +308,7 @@ if $RPM_SYSTEM; then sudo sudo dnf remove --assumeyes git; fi
 # Gmail for e-mail.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-gmail; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The gnome-gmail app is not available.'; fi
+# Web app: https://mail.google.com
 
 # Remove gnome-gmail from pc01 pc06 pc07
 # Gmail for e-mail.
@@ -355,6 +358,7 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes g
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo -e '[google-earth]\nname=Google Earth - stable\nbaseurl=https://dl.google.com/linux/earth/rpm/stable/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://dl.google.com/linux/linux_signing_key.pub' | sudo tee /etc/yum.repos.d/google-earh.repo; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes google-earth-pro-stable; fi
+# Web app: https://earth.google.com
 
 # Remove google-earth from -none
 # Explore, search and discover the planet.
@@ -561,6 +565,7 @@ if $RPM_SYSTEM; then echo 'The rpm app cannot be removed.'; fi
 # Linter.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes shellcheck; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes shellcheck; fi
+# Web app: https://www.shellcheck.net
 
 # Remove shellcheck from pc06 pc07
 # Linter.
@@ -787,6 +792,7 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes code; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo*; fi
+# Web app: https://vscode.dev
 
 # Install webmin on pc07
 # Web console.

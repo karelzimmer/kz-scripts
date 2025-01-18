@@ -101,6 +101,7 @@ echo 'App gdebi cannot be reset.'
 # Setup git for karel@pc06 karel@pc07
 # Distributed revision control system.
 git config --global alias.logg 'log --decorate --graph --oneline --all'
+# Web app: https://github.com
 
 # Reset git for karel@pc06 karel@pc07
 # Distributed revision control system.
@@ -287,6 +288,7 @@ if $DESKTOP_ENVIRONMENT; then xdg-mime default code.desktop text/x-python; fi
 # Reset vscode for karel@pc01 karel@pc06 karel@pc07
 # Editor.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=code; fi
+# Web app: https://vscode.dev
 
 # Setup webmin for karel@pc07
 # Web console.
