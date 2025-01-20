@@ -98,7 +98,7 @@ def perform_apt_update() -> None:
     """
     This function updates installed Debian packages and snaps if installed.
     """
-    TEXT: str = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}{_('Update')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo apt-get update'
@@ -117,7 +117,7 @@ def perform_apt_cleanup() -> None:
     """
     This function performs a Debian packages cleanup.
     """
-    TEXT: str = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo apt-get autoclean'
@@ -131,7 +131,7 @@ def perform_rpm_update() -> None:
     """
     This function updates installed RPM_SYSTEM packages.
     """
-    TEXT: str = f"{kz_common.BOLD}==== {_('Update')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}{_('Update')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     # Exit code 100 means there are updates available ==> ' || true'.
@@ -146,7 +146,7 @@ def perform_rpm_cleanup() -> None:
     """
     This function performs a RPM_SYSTEM packages cleanup.
     """
-    TEXT: str = f"{kz_common.BOLD}==== {_('Cleanup')} ===={kz_common.NORMAL}\n"
+    TEXT: str = f"{kz_common.BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
 
     COMMAND: str = 'sudo dnf clean all'
