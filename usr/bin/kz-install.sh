@@ -42,18 +42,18 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes p7zip-full; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes p7zip; fi
 
 # Install ansible on pc06 pc07
-# Configuration management, deployment, and task execution system.
+# Configuration management, deployment, and task execution.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes ansible; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes ansible; fi
 
 # Remove ansible from pc06 pc07
-# Configuration management, deployment, and task execution system.
+# Configuration management, deployment, and task execution.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes ansible; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes ansible; fi
 
 # Install anydesk on pc06 pc07
 # Remote desktop.
-# Remote Wayland display server is not supported.
+# Remote Wayland display server is not supported. Consider installing the force-x11 app.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -63,7 +63,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes anydes
 # Web app: https://my.anydesk.com/v2
 
 # Remove anydesk from pc06 pc07
-# Remote desktop.
+# Remote desktop. Consider removing the force-x11 app.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes anydesk; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -146,12 +146,12 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes cups; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes cups; fi
 
 # Install cups-backend-bjnp on pc-van-emily
-# Printer backend for Canon BJNP protocol.
+# Printer backend.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes cups-backend-bjnp; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The cups-backend-bjnp app is not available.'; fi
 
 # Remove cups-backend-bjnp from pc-van-emily
-# Printer backend for Canon BJNP protocol.
+# Printer backend.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes cups-backend-bjnp; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The cups-backend-bjnp app is not available.'; fi
 
@@ -185,33 +185,33 @@ if $RPM_SYSTEM; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg; fi
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
 # Install disabled-fwupd on -none
-# Disable the Firmware update daemon.
+# Disable FirmWare UPdate Daemon.
 sudo systemctl stop fwupd.service
 sudo systemctl disable fwupd.service
 sudo systemctl mask fwupd.service
 
 # Remove disabled-fwupd from -none
-# Enable the Firmware update daemon.
+# Disable FirmWare UPdate Daemon.
 sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
 # Install disabled-lidswitch on pc-van-hugo
-# Do nothing when the lid is closed.
+# Do nothing when the laptop lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 
 # Remove disabled-lidswitch from pc-van-hugo
-# Restore the default action when the lid is closed.
+# Restore the default action when the laptop lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
 # Install dual-monitor on pc06
-# Add support for dual monitor.
+# Preserve dual monitor settings.
 if [[ -f ~karel/.config/monitors.xml ]]; then sudo cp --preserve --verbose ~karel/.config/monitors.xml ~gdm/.config/monitors.xml; fi
 if [[ -f ~gdm/.config/monitors.xml ]]; then sudo chown --verbose gdm:gdm ~gdm/.config/monitors.xml; fi
 
 # Remove dual-monitor from pc06
-# Remove support for dual monitor.
+# Remove dual monitor settings.
 sudo rm --force --verbose ~gdm/.config/monitors.xml
 
 # Install exiftool on pc06 pc07
@@ -249,7 +249,7 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes fdupes; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes fdupes; fi
 
 # Install force-x11 on -none
-# Force the use of X11 because Wayland is not (yet) supported by remote desktop app AnyDesk.
+# Disable choice on user login screen for X11 or Wayland and force X11.
 # Force means no choice on user login screen for X11 or Wayland!
 # Reboot required!
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo sed --in-place --expression='s/^#WaylandEnable=false/WaylandEnable=false/' /etc/gdm3/custom.conf; fi
@@ -257,7 +257,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo sed --in-place --expression='s
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'x11')
 
 # Remove force-x11 from -none
-# Enable choice @ user login for X11 or Wayland.
+# Enable choice on user login screen for X11 or Wayland.
 # Reboot required!
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm3/custom.conf; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf; fi
@@ -316,12 +316,12 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gn
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The gnome-gmail app is not available.'; fi
 
 # Install gnome-tweaks on pc01 pc06 pc07
-# Adjust advanced configuration settings.
+# Adjust advanced settings.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-tweaks; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes gnome-tweaks; fi
 
 # Remove gnome-tweaks from pc01 pc06 pc07
-# Adjust advanced configuration settings.
+# Adjust advanced settings.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gnome-tweaks; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
@@ -349,7 +349,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes https:/
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
 # Install google-earth on -none
-# Explore, search and discover the planet.
+# Explore the planet.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -361,7 +361,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes google
 # Web app: https://earth.google.com
 
 # Remove google-earth from -none
-# Explore, search and discover the planet.
+# Explore the planet.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes google-earth-pro-stable; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -369,12 +369,12 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes google-
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rm --force --verbose /etc/yum.repos.d/google-earth.repo*; fi
 
 # Install handbrake on pc-van-emily
-# Video ripper and transcoder.
+# Video-dvd ripper and transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes handbrake; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The handbrake app is not available.'; fi
 
 # Remove handbrake from pc-van-emily
-# Video ripper and transcoder.
+# Video-dvd ripper and transcoder.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes handbrake; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The handbrake app is not available.'; fi
 
@@ -409,12 +409,12 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes jq; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes jq; fi
 
 # Install krita on pc06
-# Image manipulation program.
+# Image manipulation.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes krita; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The krita app is not available.'; fi
 
 # Remove krita from pc06
-# Image manipulation program.
+# Image manipulation.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes krita; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The krita app is not available.'; fi
 
@@ -468,22 +468,22 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes as
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes libreoffice; fi
 
 # Install locate on pc06 pc07
-# Find files fast.
+# Find files.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes locate; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes mlocate; fi
 sudo updatedb
 
 # Remove locate from pc06 pc07
-# Find files fast.
+# Find files.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes locate; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes mlocate; fi
 
 # Install log-access-for-user on pc07
-# Add log access.
+# Log access.
 if [[ $HOSTNAME = 'pc07' ]]; then sudo usermod --append --groups adm,systemd-journal karel; fi
 
 # Remove log-access-for-user from pc07
-# Remove log access.
+# Log access.
 if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel adm; fi
 if [[ $HOSTNAME = 'pc07' ]]; then sudo deluser karel systemd-journal; fi
 
@@ -508,12 +508,12 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes na
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The nautilus-admin app is not available.'; fi
 
 # Install nmap on pc06 pc07
-# Network Mapper.
+# Network MAPper.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes nmap; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes nmap; fi
 
 # Remove nmap from pc06 pc07
-# Network Mapper.
+# Network MAPper.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes nmap; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes nmap; fi
 
@@ -573,12 +573,12 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes shellcheck; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes shellcheck; fi
 
 # Install sound-juicer on pc-van-emily
-# Audio ripper and player.
+# Audio-cd ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes sound-juicer; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The sound-juicer app is not available.'; fi
 
 # Remove sound-juicer from pc-van-emily
-# Audio ripper and player.
+# Audio-cd ripper and player.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes sound-juicer; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The sound-juicer app is not available.'; fi
 
@@ -629,24 +629,24 @@ if $APT_SYSTEM; then sudo apt-get remove --assume-yes ssh; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes openssh; fi
 
 # Install sushi on pc06
-# Quick previewer.
+# Quick preview.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes gnome-sushi; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes sushi; fi
 # Usage:
 # Select a file, press the space bar, and a preview will appear.
 
 # Remove sushi from pc06
-# Quick previewer.
+# Quick preview.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes gnome-sushi; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes sushi; fi
 
 # Install tab-completion on *
-# Programmable completion.
+# Bash completion.
 if $APT_SYSTEM; then sudo apt-get install --assume-yes bash-completion; fi
 if $RPM_SYSTEM; then sudo dnf install --assumeyes bash-completion; fi
 
 # Remove tab-completion from *
-# Programmable completion.
+# Bash completion.
 if $APT_SYSTEM; then sudo apt-get remove --assume-yes bash-completion; fi
 if $RPM_SYSTEM; then sudo dnf remove --assumeyes bash-completion; fi
 
@@ -658,7 +658,7 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
 # The apt-key added during installation is no longer needed.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-key del 0C1289C0 DEB49217; fi
-# EPEL: Extra Packages for Enterprise Linux
+# Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes epel-release; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https://teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 # Web app: https://web.teamviewer.com
@@ -763,7 +763,7 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes Virtual
 # Install vlc on *
 # Multimedia player.
 if $DESKTOP_ENVIRONMENT && $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes vlc; fi
-# EPEL: Extra Packages for Enterprise Linux
+# Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes epel-release rpmfusion-free-release; fi
 if $DESKTOP_ENVIRONMENT && $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes vlc; fi
 

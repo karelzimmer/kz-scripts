@@ -76,7 +76,6 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.Evolution; fi
 # E-mail and organizer.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addbef=org.gnome.Evolution; fi
 
-
 # Setup firefox for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Web browser.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=firefox; fi
@@ -159,11 +158,11 @@ if $DESKTOP_ENVIRONMENT; then xdg-mime default google-chrome.desktop application
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=google-chrome; fi
 
 # Setup handbrake for emily@pc-van-emily
-# Video ripper and transcoder.
+# Video-dvd ripper and transcoder.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=fr.handbrake.ghb; fi
 
 # Reset handbrake for emily@pc-van-emily
-# Video ripper and transcoder.
+# Video-dvd ripper and transcoder.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=fr.handbrake.ghb; fi
 
 # Setup hide-files for *
@@ -210,11 +209,11 @@ chmod 750 "$HOME"
 chmod 755 "$HOME"
 
 # Setup sound-juicer for emily@pc-van-emily
-# Audio ripper and player.
+# Audio-cd ripper and player.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=org.gnome.SoundJuicer; fi
 
 # Reset sound-juicer for emily@pc-van-emily
-# Audio ripper and player.
+# Audio-cd ripper and player.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.SoundJuicer; fi
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
