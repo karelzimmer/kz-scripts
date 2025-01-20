@@ -53,7 +53,7 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes ansible; fi
 
 # Install anydesk on pc06 pc07
 # Remote desktop.
-# Remote Wayland display server is not supported. Consider installing the force-x11 app.
+# Remote display server Wayland is not supported. Consider installing the force-x11 app.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor --yes --output=/usr/share/keyrings/anydesk.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/anydesk.gpg] http://deb.anydesk.com/ all main' | sudo tee /etc/apt/sources.list.d/anydesk.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi

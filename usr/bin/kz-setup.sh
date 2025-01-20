@@ -12,7 +12,7 @@
 
 # Setup anydesk for karel@pc06 karel@pc07
 # Remote desktop.
-# Remote Wayland display server is not supported.
+# Remote display server Wayland is not supported.
 if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=anydesk; fi
 # Web app: https://my.anydesk.com/v2
 
