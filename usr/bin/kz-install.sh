@@ -601,7 +601,7 @@ if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install --assume-yes s
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then echo 'The spotify app is available as a web app.'; fi
 # Web app: https://open.spotify.com
 
-# Remove spotify on pc01 pc02 pc06 pc07
+# Remove spotify from pc01 pc02 pc06 pc07
 # Music service.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes spotify-client; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify.list* /usr/share/keyrings/spotify.gpg*; fi
