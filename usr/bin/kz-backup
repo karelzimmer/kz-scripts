@@ -442,7 +442,7 @@ function create_backup() {
     local -i BACKUP_RC=0
 
     ERROR_FILE=$(mktemp -t "kz-backup-errors-XXXXXXXXXX")
-    EXCLUDE_FILE=$(mktemp -t "kz-backup-exclude-XXXXXXXXXX")
+    EXCLUDE_FILE=$(mktemp -t "kz-backup-excludes-XXXXXXXXXX")
 
     cat << EOF > "$EXCLUDE_FILE"
 # Exclude Git-managed directories.

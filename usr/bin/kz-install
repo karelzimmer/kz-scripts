@@ -184,7 +184,7 @@ function process_input() {
     fi
 
     # Add info records from the install file to the command file.
-    COMMAND_FILE=$(mktemp -t "kz-install-XXXXXXXXXX.sh")
+    COMMAND_FILE=$(mktemp -t "kz-install-commands-XXXXXXXXXX")
     grep --fixed-strings --regexp='# [info] ' $INSTALL_FILE > "$COMMAND_FILE"
     printf '\n' >> "$COMMAND_FILE"
 
