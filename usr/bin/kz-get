@@ -26,6 +26,8 @@ else
             systemd-cat --identifier=kz-get --priority=debug
     source  "$KZ_COMMON_LOCAL_FILE" 2> >(
             systemd-cat --identifier=kz-get --priority=debug)
+    rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
+            systemd-cat --identifier=kz-get --priority=debug
 fi
 
 
