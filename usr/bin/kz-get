@@ -129,9 +129,9 @@ function prepare_processing() {
     sudo true
     printf '%s\n' "[info] journalctl --follow --pager-end --identifier=kz-get"
 
-    # Progress indicator with growing [=>, [==>, etc. as long as the kz get
-    # local file exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the kz-get local file and
+    # Progress indicator with growing [=>, [==>, etc. as long as the
+    # KZ_DEB_LOCAL_FILE exists, i.e. installation is in progress.
+    # If something fails, kz_common.sh will remove the KZ_DEB_LOCAL_FILE and
     # other files upon exit.
     printf '[ '
     while test -e "$KZ_DEB_LOCAL_FILE"; do
