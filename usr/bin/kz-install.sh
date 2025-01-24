@@ -652,7 +652,7 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes bash-completion; fi
 
 # Install teamviewer on *
 # Remote desktop.
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://linux.teamviewer.com/pubkey/currentkey.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
