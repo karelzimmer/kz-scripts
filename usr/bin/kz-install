@@ -183,9 +183,12 @@ function process_input() {
         exit $OK
     fi
 
-    # Add info records from the install file to the command file.
+    # Add information records from the install file to the command file.
     COMMAND_FILE=$(mktemp -t "kz-install-commands-XXXXXXXXXX")
-    grep --fixed-strings --regexp='# [info] ' $INSTALL_FILE > "$COMMAND_FILE"
+    grep    --fixed-strings         \
+            --regexp='# [note] '    \
+            --regexp='# [info] '    \
+            $INSTALL_FILE           > "$COMMAND_FILE"
     printf '\n' >> "$COMMAND_FILE"
 
     if $ARGUMENT_APPS; then
@@ -251,7 +254,7 @@ $USAGE"
 }
 
 
-# This function processes argument APP.
+# This function processes argument <app>.
 function process_argument_app() {
     local APP_ARGUMENT=''
     local APP_NOT_FOUND=false
@@ -270,7 +273,7 @@ function process_argument_app() {
 
 
 # This function generates the command file from the install file and filters by
-# APP.
+# <app>.
 function process_input_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
@@ -308,7 +311,7 @@ function process_input_file_by_app() {
 
 
 # This function generates the command file from the install file and filters by
-# HOST.
+# HOSTNAME.
 function process_input_file_by_host() {
     local HOST_MATCH=false
     local INPUT_RECORD=''

@@ -180,9 +180,12 @@ function process_input() {
         exit $OK
     fi
 
-    # Add info records from the setup file to the command file.
+    # Add information records from the setup file to the command file.
     COMMAND_FILE=$(mktemp -t "kz-setup-commands-XXXXXXXXXX")
-    grep --fixed-strings --regexp='# [info] ' $SETUP_FILE > "$COMMAND_FILE"
+    grep    --fixed-strings         \
+            --regexp='# [note] '    \
+            --regexp='# [info] '    \
+            $SETUP_FILE             > "$COMMAND_FILE"
     printf '\n' >> "$COMMAND_FILE"
 
     if $ARGUMENT_APP; then
@@ -247,7 +250,7 @@ $USAGE"
 }
 
 
-# This function processes argument APP.
+# This function processes argument <app>.
 function process_argument_app() {
     local APP_ARGUMENT=''
     local APP_NOT_FOUND=false
@@ -266,7 +269,7 @@ function process_argument_app() {
 
 
 # This function generates the command file from the setup file and filters by
-# APP.
+# <app>.
 function process_input_file_by_app() {
     local APP_MATCH=false
     local INPUT_RECORD=''
@@ -304,7 +307,7 @@ function process_input_file_by_app() {
 
 
 # This function generates the command file from the setup file and filters by
-# USER.
+# USER@$HOSTNAME.
 function process_input_file_by_user() {
     local INPUT_RECORD=''
     local USER_MATCH=false
