@@ -666,7 +666,9 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https:
 # Remove teamviewer from *
 # Remote desktop.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes teamviewer; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes teamviewer; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fiif $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes teamviewer; fi
 
 # Install thunderbird on *
 # E-mail and news.
