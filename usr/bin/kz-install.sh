@@ -652,12 +652,9 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes bash-completion; fi
 
 # Install teamviewer on *
 # Remote desktop.
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://linux.teamviewer.com/pubkey/currentkey.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
-# The apt-key added during installation is no longer needed.
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-key del 0C1289C0 DEB49217; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=/tmp/teamviewer_amd64.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get install /tmp/teamviewer_amd64.deb; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /tmp/teamviewer_amd64.deb; fi
 # Extra Packages for Enterprise Linux
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes epel-release; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https://teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
@@ -666,9 +663,6 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https:
 # Remove teamviewer from *
 # Remote desktop.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --assume-yes teamviewer; fi
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-key del 0C1289C0 DEB49217; fi
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes teamviewer; fi
 
 # Install thunderbird on *
