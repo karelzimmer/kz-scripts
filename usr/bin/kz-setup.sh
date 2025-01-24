@@ -217,13 +217,13 @@ if $DESKTOP_ENVIRONMENT; then kz-desktop --addaft=org.gnome.SoundJuicer; fi
 if $DESKTOP_ENVIRONMENT; then kz-desktop --delete=org.gnome.SoundJuicer; fi
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-# Music service.
+# Music and podcasts.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then kz-desktop --addaft=spotify; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then kz-desktop --addaft=kz-spotify; fi
 # Web app: https://open.spotify.com
 
 # Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
-# Music service.
+# Music and podcasts.
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then kz-desktop --delete=spotify; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then kz-desktop --delete=kz-spotify; fi
 
