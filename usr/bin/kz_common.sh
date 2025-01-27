@@ -201,6 +201,7 @@ Started ($PROGRAM_ID $* as $USER)."
     local -g  ERREXIT=true
     local -g  LOGCMD="systemd-cat --identifier=$PROGRAM_ID"
     local -g  OPTION_GUI=false
+    local -g  KZ_PID_FILE=''
     local -g  RC=$OK
     local -ga COMMANDLINE_ARGS=("$@")
 
@@ -337,14 +338,14 @@ function term() {
     local TEXT=''
     local -i RC_DESC_SIGNALNO=0
 
+    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
     if [[ $PROGRAM_ID = 'kz-get' ]]; then
-        logmsg "Delete kz-get files ($MODULE_NAME)..."
-        rm  --force                 \
-            --verbose               \
-            getkz                   \
-            getkz.{1..99}           \
-            "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
-        logmsg "Deleted kz-get files ($MODULE_NAME)."
+        logmsg "Delete getkz files ($MODULE_NAME)..."
+        rm  --force         \
+            --verbose       \
+            getkz           \
+            getkz.{1..99}   |& $LOGCMD
+        logmsg "Deleted getkz files ($MODULE_NAME)."
     fi
 
     case $RC in

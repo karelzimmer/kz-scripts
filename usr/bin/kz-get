@@ -26,8 +26,6 @@ else
             systemd-cat --identifier=kz-get --priority=debug
     source  "$KZ_COMMON_LOCAL_FILE" 2> >(
             systemd-cat --identifier=kz-get --priority=debug)
-    rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
-            systemd-cat --identifier=kz-get --priority=debug
 fi
 
 
@@ -110,7 +108,6 @@ function process_input() {
     become_root_check || exit $OK
     prepare_processing
     if $APT_SYSTEM; then
-        download_apt_package
         install_apt_package
     elif $RPM_SYSTEM; then
         install_rpm_package
@@ -126,41 +123,38 @@ function process_input() {
 function prepare_processing() {
     local -i SLEEP=1
 
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.deb")
-
     sudo true
     printf '%s\n' "[logs] journalctl --follow --pager-end --identifier=kz-get"
 
-    # Progress indicator with growing [=>, [==>, etc. as long as the
-    # KZ_DEB_LOCAL_FILE exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the KZ_DEB_LOCAL_FILE and
-    # other files upon exit.
+    # Progress indicator with growing [=>, [==>, etc. as long as the pid file
+    # exists, i.e. installation is in progress.
+    # If something fails, kz_common.sh will also remove the pid file upon exit.
+    KZ_PID_FILE=$(mktemp -t "kz-XXXXXXXXXX.pid")
+    printf '%i\n' $$ > "$KZ_PID_FILE"
     printf '[ '
-    while test -e "$KZ_DEB_LOCAL_FILE"; do
+    while test -e "$KZ_PID_FILE"; do
         printf '\b%s' '=>'
         sleep $SLEEP
     done &
 }
 
 
-# This function downloads Debian package kz.
-function download_apt_package() {
+# This function downloads and installs Debian package kz.
+function install_apt_package() {
     local KZ_DEB_SITE_FILE="\
 https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
+    local KZ_DEB_LOCAL_FILE=''
+
+    KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.deb")
 
     logmsg  'Download Debian package kz...'
     wget    --output-document="$KZ_DEB_LOCAL_FILE"  \
             "$KZ_DEB_SITE_FILE"                     |& $LOGCMD
     logmsg  'Downloaded Debian package kz.'
-}
-
-
-# This function installs Debian package kz.
-function install_apt_package() {
-    logmsg 'Install Debian package kz...'
 
     check_apt_package_manager |& $LOGCMD
 
+    logmsg 'Install Debian package kz...'
     # Ubuntu 18.04: E: Invalid operation reinstall ==> install --reinstall.
     sudo    DEBIAN_FRONTEND=noninteractive  \
             apt-get                         \
@@ -179,12 +173,11 @@ function install_rpm_package() {
 https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
     local MODE='install'
 
-    logmsg 'Install RPM_SYSTEM package kz...'
-
     if [[ -n $(type -t kz) ]]; then
         MODE='reinstall'
     fi
 
+    logmsg 'Install RPM_SYSTEM package kz...'
     sudo dnf $MODE --assumeyes "$KZ_RPM_SYSTEM_SITE_FILE" |& $LOGCMD
     logmsg 'Installed RPM_SYSTEM package kz.'
 }
@@ -194,15 +187,8 @@ https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
 function term_script() {
     local TEXT=''
 
-    logmsg "Delete kz-get files ($PROGRAM_NAME)..."
-    rm  --force                 \
-        --verbose               \
-        getkz                   \
-        getkz.{1..99}           \
-        "$KZ_DEB_LOCAL_FILE"    |& $LOGCMD
-    logmsg "Deleted kz-get files ($PROGRAM_NAME)."
-
-    # Progress indicator with [=>, [==>, etc. ends like [====]100%.
+    # Progress indicator ends like [====]100%.
+    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 
     TEXT="
@@ -219,6 +205,13 @@ $(gettext "Type 'exit' to close this window.")"
     fi
     infomsg "$TEXT"
 
+    logmsg "Delete getkz files ($PROGRAM_NAME)..."
+    rm  --force         \
+        --verbose       \
+        getkz           \
+        getkz.{1..99}   |& $LOGCMD
+    logmsg "Deleted getkz files ($PROGRAM_NAME)."
+
     exit $OK
 }
 
@@ -228,8 +221,6 @@ $(gettext "Type 'exit' to close this window.")"
 ###############################################################################
 
 function main() {
-    local KZ_DEB_LOCAL_FILE=''
-
     init_script "$@"
     check_input "$@"
     process_input

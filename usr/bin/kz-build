@@ -303,18 +303,17 @@ function install_deb_package() {
     infomsg "$TEXT"
     check_apt_package_manager
 
-    # ==== START Copied from kz-get ====
-    KZ_DEB_LOCAL_FILE=$(mktemp -t "kz-build-XXXXXXXXXX.deb")
-    # Progress indicator with growing [=>, [==>, etc. as long as the kz get
-    # local file exists, i.e. installation is in progress.
-    # If something fails, kz_common.sh will remove the kz-get local file and
-    # other files upon exit.
+    # Copied from kz-get.
+    # Progress indicator with growing [=>, [==>, etc. as long as the pid file
+    # exists, i.e. installation is in progress.
+    # If something fails, kz_common.sh will also remove the pid file upon exit.
+    KZ_PID_FILE=$(mktemp -t "kz-XXXXXXXXXX.pid")
+    printf '%i\n' $$ > "$KZ_PID_FILE"
     printf '[ '
-    while test -e "$KZ_DEB_LOCAL_FILE"; do
+    while test -e "$KZ_PID_FILE"; do
         printf '\b%s' '=>'
         sleep $SLEEP
     done &
-    # ==== END Copied from kz-get ====
 
     sudo    DEBIAN_FRONTEND=noninteractive                      \
             apt-get                                             \
@@ -322,11 +321,9 @@ function install_deb_package() {
             --assume-yes                                        \
             "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
 
-    # ==== START Copied from kz-get ====
-    rm --force --verbose "$KZ_DEB_LOCAL_FILE"|& $LOGCMD
-    # Progress indicator with [=>, [==>, etc. ends like [====]100%.
+    # Progress indicator ends like [====]100%.
+    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
-    # ==== END Copied from kz-get ====
 }
 
 
