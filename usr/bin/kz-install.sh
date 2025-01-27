@@ -327,7 +327,6 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes gnome-t
 
 # Install google-chrome on *
 # Web browser.
-# Direct deb download: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -343,16 +342,14 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https:
 
 # Remove google-chrome from *
 # Web browser.
-# Direct deb download: sudo apt remove google-chrome-stable
-if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --purge --assume-yes google-chrome-stable chrome-gnome-shell; fi
+if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --purge --assume-yes google-chrome-stable; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
-if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf remove --assumeyes google-chrome-stable; fi
 if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
 # Install google-earth on -none
 # Explore the planet.
-# Direct deb download: wget https://dl.google.com/linux/direct/google-earth-pro-stable_current_amd64.deb
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -365,7 +362,6 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes google
 
 # Remove google-earth from -none
 # Explore the planet.
-# Direct deb download: sudo apt remove google-earth-pro-stable
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --purge --assume-yes google-earth-pro-stable; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -656,7 +652,6 @@ if $RPM_SYSTEM; then sudo dnf remove --assumeyes bash-completion; fi
 
 # Install teamviewer on *
 # Remote desktop.
-# Direct deb download: wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then wget --output-document=- 'https://linux.teamviewer.com/pubkey/currentkey.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get update; fi
@@ -670,7 +665,6 @@ if $DESKTOP_ENVIRONMENT && $RPM_SYSTEM; then sudo dnf install --assumeyes https:
 
 # Remove teamviewer from *
 # Remote desktop.
-# Direct deb download: sudo apt remove teamviewer
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-get remove --purge --assume-yes teamviewer; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
 if $DESKTOP_ENVIRONMENT && $APT_SYSTEM; then sudo apt-key del 0C1289C0 DEB49217; fi
