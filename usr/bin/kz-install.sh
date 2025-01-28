@@ -80,13 +80,13 @@ if $RPM; then sudo dnf remove --assumeyes apt; fi
 
 # Install backintime on -none
 # Backups/snapshots.
-if $DESKTOP && $APT; then sudo apt-get install --assume-yes backintime-qt; fi
-if $DESKTOP && $RPM; then sudo dnf install --assumeyes backintime-qt; fi
+if $DESKTOP && $APT ; then sudo apt-get install --assume-yes backintime-qt ; fi
+if $DESKTOP && $RPM ; then sudo dnf install --assumeyes backintime-qt      ; fi
 
-# Remove backintime on -none
+# Remove backintime from -none
 # Backups/snapshots.
-if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes backintime-qt; fi
-if $DESKTOP && $RPM; then sudo dnf remove --assumeyes backintime-qt; fi
+if $DESKTOP && $APT ; then sudo apt-get remove --purge --assume-yes backintime-qt ; fi
+if $DESKTOP && $RPM ; then sudo dnf remove --assumeyes backintime-qt              ; fi
 
 # Install bleachbit on pc-van-hugo
 # Delete files.
