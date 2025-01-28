@@ -21,11 +21,13 @@ else
     declare KZ_COMMON_SITE_FILE='https://karelzimmer.nl/assets/scripts/'
             KZ_COMMON_SITE_FILE+='kz_common.sh'
     declare KZ_COMMON_LOCAL_FILE
-            KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz-get-common-XXXXXXXXXX.sh")
+            KZ_COMMON_LOCAL_FILE=$(mktemp -t "kz-get-XXXXXXXXXX.sh")
     wget    --output-document="$KZ_COMMON_LOCAL_FILE" $KZ_COMMON_SITE_FILE |&
             systemd-cat --identifier=kz-get --priority=debug
     source  "$KZ_COMMON_LOCAL_FILE" 2> >(
             systemd-cat --identifier=kz-get --priority=debug)
+    rm      --verbose "$KZ_COMMON_LOCAL_FILE" |&
+            systemd-cat --identifier=kz-get --priority=debug
 fi
 
 
@@ -164,6 +166,8 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
             --assume-yes                    \
             "$KZ_DEB_LOCAL_FILE"            |& $LOGCMD
     logmsg 'Installed Debian package kz.'
+
+    rm --verbose "$KZ_DEB_LOCAL_FILE" |& $LOGCMD
 }
 
 
@@ -188,7 +192,7 @@ function term_script() {
     local TEXT=''
 
     # Progress indicator ends like [====]100%.
-    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
+    rm --verbose "$KZ_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 
     TEXT="

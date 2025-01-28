@@ -322,7 +322,7 @@ function install_deb_package() {
             "$UPLOADS_REPO_DISTDIR/assets/packages/$DEB_NAME"   |& $LOGCMD
 
     # Progress indicator ends like [====]100%.
-    rm --force --verbose "$KZ_PID_FILE" |& $LOGCMD
+    rm --verbose "$KZ_PID_FILE" |& $LOGCMD
     printf '\b%s\n' '=]100%'
 }
 

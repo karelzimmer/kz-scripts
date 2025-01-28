@@ -532,6 +532,8 @@ $(gettext "Try creating the back up again.")"
         errmsg "$TEXT"
         exit $ERR
     fi
+
+    rm --verbose "$ERROR_FILE" "$EXCLUDE_FILE" |& $LOGCMD
 }
 
 

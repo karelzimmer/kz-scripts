@@ -196,6 +196,7 @@ function process_input() {
 
     if $OPTION_CAT; then
         process_option_cat
+        rm --verbose "$COMMAND_FILE" |& $LOGCMD
         exit $OK
     fi
 
@@ -449,6 +450,8 @@ and changing user settings.")
         infomsg "$TEXT"
         exit $ERR
     fi
+
+    rm --verbose "$COMMAND_FILE" "$ERROR_FILE" |& $LOGCMD
 }
 
 
