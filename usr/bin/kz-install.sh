@@ -65,8 +65,6 @@ if $DESKTOP && $RPM; then sudo dnf install --assumeyes anydesk; fi
 # Remove anydesk from pc06 pc07
 # Remote desktop. Consider removing the force-x11 app.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes anydesk; fi
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/anydesk.list* /usr/share/keyrings/anydesk.gpg*; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
 if $DESKTOP && $RPM; then sudo dnf remove --assumeyes anydesk; fi
 if $DESKTOP && $RPM; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo*; fi
 
@@ -343,8 +341,6 @@ if $DESKTOP && $RPM; then sudo dnf install --assumeyes https://dl.google.com/lin
 # Remove google-chrome from *
 # Web browser.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes google-chrome-stable; fi
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-chrome.list* /usr/share/keyrings/google-chrome.gpg* /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
 if $DESKTOP && $RPM; then sudo dnf remove --assumeyes google-chrome-stable; fi
 if $DESKTOP && $RPM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
@@ -363,8 +359,6 @@ if $DESKTOP && $RPM; then sudo dnf install --assumeyes google-earth-pro-stable; 
 # Remove google-earth from -none
 # Explore the planet.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes google-earth-pro-stable; fi
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/google-earth-pro.list* /usr/share/keyrings/google-earth.gpg*; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
 if $DESKTOP && $RPM; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
 if $DESKTOP && $RPM; then sudo rm --force --verbose /etc/yum.repos.d/google-earth.repo*; fi
 
@@ -604,8 +598,6 @@ if $DESKTOP && $RPM; then echo 'The spotify app is available as a web app.'; fi
 # Remove spotify from pc01 pc02 pc06 pc07
 # Music and podcasts.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes spotify-client; fi
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/spotify.list* /usr/share/keyrings/spotify.gpg*; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
 if $DESKTOP && $RPM; then echo 'The spotify web app cannot be removed.'; fi
 
 # Install ssh on pc01 pc06 pc07
@@ -666,9 +658,6 @@ if $DESKTOP && $RPM; then sudo dnf install --assumeyes https://teamviewer.com/do
 # Remove teamviewer from *
 # Remote desktop.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes teamviewer; fi
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/teamviewer.list* /usr/share/keyrings/teamviewer*.gpg*; fi
-if $DESKTOP && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
 if $DESKTOP && $RPM; then sudo dnf remove --assumeyes teamviewer; fi
 
 # Install thunderbird on *
@@ -788,8 +777,6 @@ if $DESKTOP && $RPM; then sudo dnf install --assumeyes code; fi
 # Editor.
 if $DESKTOP && $APT; then sudo update-alternatives --remove editor /usr/bin/code; fi
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes code; fi
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/vscode.list* /usr/share/keyrings/packages.microsoft*; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
 if $DESKTOP && $RPM; then sudo dnf remove --assumeyes code; fi
 if $DESKTOP && $RPM; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo*; fi
 # Web app: https://vscode.dev
@@ -809,9 +796,7 @@ if $DESKTOP && $RPM; then sudo dnf install --assumeyes webmin; fi
 # Remove webmin from pc07
 # Web console.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes webmin; fi
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/sources.list.d/webmin.list* /usr/share/keyrings/webmin*; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
-if $DESKTOP && $RPM; then dnf remove --assumeyes webmin; fi
+if $DESKTOP && $RPM; then sudo dnf remove --assumeyes webmin; fi
 if $DESKTOP && $RPM; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo*; fi
 
 # Install wine on -none
