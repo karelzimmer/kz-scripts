@@ -83,7 +83,7 @@ def process_options() -> bool:
         RC = kz_common.OK
         kz_common.term(PROGRAM_NAME, RC)
     elif args.gui:
-        if not kz_common.DESKTOP_ENVIRONMENT:
+        if not kz_common.DESKTOP:
             TEXT: str = f"{PROGRAM_NAME}: {sys.argv[1]}: "
             TEXT += f"{_('no desktop environment available')}"
             OPTION_GUI = False

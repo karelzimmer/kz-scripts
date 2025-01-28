@@ -47,36 +47,36 @@ readonly RED='\033[1;31m'
 readonly GREEN='\033[1;32m'
 readonly NORMAL='\033[0m'
 
-declare APT_SYSTEM=false
-declare RPM_SYSTEM=false
+declare APT=false
+declare RPM=false
 declare DEBIAN=false
 declare ROCKY=false
 declare UBUNTU=false
-declare DESKTOP_ENVIRONMENT=false
+declare DESKTOP=false
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 source /etc/os-release
 if [[ $ID = 'debian' ]]; then
     DEBIAN=true
-    APT_SYSTEM=true
+    APT=true
 fi
 if [[ $ID = 'rocky' ]]; then
     ROCKY=true
-    RPM_SYSTEM=true
+    RPM=true
 fi
 if [[ $ID = 'ubuntu' ]]; then
     UBUNTU=true
-    APT_SYSTEM=true
+    APT=true
 fi
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
-    DESKTOP_ENVIRONMENT=true
+    DESKTOP=true
 fi
-readonly APT_SYSTEM
-readonly RPM_SYSTEM
+readonly APT
+readonly RPM
 readonly DEBIAN
 readonly ROCKY
 readonly UBUNTU
-readonly DESKTOP_ENVIRONMENT
+readonly DESKTOP
 
 
 ###############################################################################
@@ -138,7 +138,7 @@ function check_apt_package_manager() {
     local TEXT=''
     local -i CHECK_WAIT=10
 
-    if ! $APT_SYSTEM; then
+    if ! $APT; then
         return $OK
     fi
 
@@ -265,7 +265,7 @@ function process_option_help() {
     local TEXT=''
     local YELP_MAN_URL=''
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP; then
         YELP_MAN_URL="$(gettext ', or see the ')"
         YELP_MAN_URL+="\033]8;;man:$PROGRAM_ID\033\\$PROGRAM_ID "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
@@ -283,7 +283,7 @@ $TEXT"
 function process_option_manual() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
 
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP; then
         yelp man:"$PROGRAM_ID" 2> >($LOGCMD)
     else
         man --pager=cat "$PROGRAM_NAME"
@@ -360,9 +360,9 @@ function term() {
             RC_DESC="open file '/usr/include/sysexits.h' and look for '$RC'"
             ;;
         100 )
-            if $APT_SYSTEM; then
+            if $APT; then
                 RC_DESC='apt/dpkg exited with error'
-            elif $RPM_SYSTEM; then
+            elif $RPM; then
                 RC_DESC='there are updates available'
             else
                 RC_DESC="previous errors/it didn't work"
@@ -423,12 +423,12 @@ $COMMAND, code: $RC ($RC_DESC)."
 $(eval_gettext "Program \$PROGRAM_ID encountered an error.")"
                 errmsg "$TEXT"
                 if [[ $PROGRAM_ID = 'kz-get' ]]; then
-                    if $APT_SYSTEM; then
+                    if $APT; then
                         TEXT="[hint] sudo dpkg --configure --pending
 [hint] sudo apt-get update --fix-missing
 [hint] sudo apt-get install --fix-broken"
                         infomsg "$TEXT"
-                    elif $RPM_SYSTEM; then
+                    elif $RPM; then
                         TEXT="[hint] sudo dnf clean all
 [hint] sudo dnf makecache"
                         infomsg "$TEXT"

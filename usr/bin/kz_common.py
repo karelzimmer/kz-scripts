@@ -48,29 +48,29 @@ RED: str = '\033[1;31m'
 GREEN: str = '\033[1;32m'
 NORMAL: str = '\033[0m'
 
-APT_SYSTEM: bool = False
-RPM_SYSTEM: bool = False
+APT: bool = False
+RPM: bool = False
 DEBIAN: bool = False
 ROCKY: bool = False
 UBUNTU: bool = False
-DESKTOP_ENVIRONMENT: bool = False
+DESKTOP: bool = False
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
     DEBIAN = True
-    APT_SYSTEM = True
+    APT = True
 if subprocess.run("source /etc/os-release; [[ $ID = 'rocky' ]]",
                   shell=True, executable='bash').returncode == OK:
     ROCKY = True
-    RPM_SYSTEM = True
+    RPM = True
 if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
                   shell=True, executable='bash').returncode == OK:
     UBUNTU = True
-    APT_SYSTEM = True
+    APT = True
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    DESKTOP_ENVIRONMENT = True
+    DESKTOP = True
 
 
 ###############################################################################
@@ -143,7 +143,7 @@ def check_apt_package_manager(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     CHECK_WAIT: int = 10
 
-    if RPM_SYSTEM:
+    if RPM:
         return OK
 
     while True:
@@ -225,7 +225,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
     YELP_MAN_URL: str = ''
 
-    if DESKTOP_ENVIRONMENT:
+    if DESKTOP:
         YELP_MAN_URL = f"{_(', or see the ')}"
         YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_ID}\x1b\\{PROGRAM_ID} '
         YELP_MAN_URL += f"{_('man page')}\x1b]8;;\x1b\\"
@@ -242,7 +242,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    if DESKTOP_ENVIRONMENT:
+    if DESKTOP:
         try:
             subprocess.run(f'yelp man:{PROGRAM_ID}', shell=True, check=True,
                            stderr=subprocess.DEVNULL)

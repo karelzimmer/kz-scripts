@@ -85,7 +85,7 @@ $USAGE"
         exit $ERR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
+    if ! $DESKTOP; then
         TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
@@ -98,7 +98,7 @@ $USAGE"
 function process_input() {
     local TEXT=''
 
-    if ! $APT_SYSTEM; then
+    if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
         exit $ERR

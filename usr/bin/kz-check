@@ -85,7 +85,7 @@ $USAGE"
         exit $ERR
     fi
 
-    if ! $DESKTOP_ENVIRONMENT; then
+    if ! $DESKTOP; then
         TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"
@@ -103,7 +103,7 @@ function process_input() {
     local SCRIPTS_REPO=$HOME/kz-scripts
     local TEXT=''
 
-    if ! $APT_SYSTEM; then
+    if ! $APT; then
         TEXT=$(gettext 'Must run on a Debian or Debian-based system.')
         infomsg "$TEXT"
         exit $ERR

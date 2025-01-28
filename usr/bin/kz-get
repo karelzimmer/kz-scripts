@@ -109,9 +109,9 @@ function process_input() {
 
     become_root_check || exit $OK
     prepare_processing
-    if $APT_SYSTEM; then
+    if $APT; then
         install_apt_package
-    elif $RPM_SYSTEM; then
+    elif $RPM; then
         install_rpm_package
     else
         TEXT=$(gettext 'Unknown package manager.')
@@ -171,9 +171,9 @@ https://karelzimmer.nl/assets/packages/kz_4.2.1-1_all.deb"
 }
 
 
-# This function installs RPM_SYSTEM package kz.
+# This function installs RPM package kz.
 function install_rpm_package() {
-    local KZ_RPM_SYSTEM_SITE_FILE="\
+    local KZ_RPM_SITE_FILE="\
 https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
     local MODE='install'
 
@@ -181,9 +181,9 @@ https://karelzimmer.nl/assets/packages/kz-4.2.1-1.noarch.rpm"
         MODE='reinstall'
     fi
 
-    logmsg 'Install RPM_SYSTEM package kz...'
-    sudo dnf $MODE --assumeyes "$KZ_RPM_SYSTEM_SITE_FILE" |& $LOGCMD
-    logmsg 'Installed RPM_SYSTEM package kz.'
+    logmsg 'Install RPM package kz...'
+    sudo dnf $MODE --assumeyes "$KZ_RPM_SITE_FILE" |& $LOGCMD
+    logmsg 'Installed RPM package kz.'
 }
 
 
@@ -202,7 +202,7 @@ Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under \
 Linux.")"
-    if $DESKTOP_ENVIRONMENT; then
+    if $DESKTOP; then
         TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"

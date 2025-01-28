@@ -81,10 +81,10 @@ def process_input() -> None:
     """
     This function processes the script options and arguments.
     """
-    if kz_common.APT_SYSTEM:
+    if kz_common.APT:
         perform_apt_update()
         perform_apt_cleanup()
-    elif kz_common.RPM_SYSTEM:
+    elif kz_common.RPM:
         perform_rpm_update()
         perform_rpm_cleanup()
     else:
@@ -129,7 +129,7 @@ def perform_apt_cleanup() -> None:
 
 def perform_rpm_update() -> None:
     """
-    This function updates installed RPM_SYSTEM packages.
+    This function updates installed RPM packages.
     """
     TEXT: str = f"{kz_common.BOLD}{_('Update')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
@@ -144,7 +144,7 @@ def perform_rpm_update() -> None:
 
 def perform_rpm_cleanup() -> None:
     """
-    This function performs a RPM_SYSTEM packages cleanup.
+    This function performs a RPM packages cleanup.
     """
     TEXT: str = f"{kz_common.BOLD}{_('Cleanup')}...{kz_common.NORMAL}\n"
     kz_common.infomsg(PROGRAM_NAME, PROGRAM_DESC, TEXT)
