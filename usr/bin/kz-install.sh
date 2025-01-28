@@ -325,42 +325,32 @@ if $DESKTOP && $RPM; then sudo dnf remove --assumeyes gnome-tweaks; fi
 
 # Install google-chrome on *
 # Web browser.
-if $DESKTOP && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-chrome.gpg; fi
-if $DESKTOP && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
-if $DESKTOP && $APT; then sudo apt-get install --assume-yes google-chrome-stable; fi
-# Add the source list again because the installation overwrote the newly added source list.
-if $DESKTOP && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list; fi
-# The apt-key added during installation is no longer needed.
-if $DESKTOP && $APT; then sudo rm --force --verbose /etc/apt/trusted.gpg.d/google-chrome.gpg; fi
+if $DESKTOP && $APT; then wget --output-document=/tmp/google-chrome.deb https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb; fi
+if $DESKTOP && $APT; then sudo apt-get install --assume-yes /tmp/google-chrome.deb; fi
+if $DESKTOP && $APT; then rm --verbose /tmp/google-chrome.deb; fi
 # Import GPG Key.
 if $DESKTOP && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
 # Install Google Chrome.
-if $DESKTOP && $RPM; then sudo dnf install --assumeyes https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
+if $DESKTOP && $RPM; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-chrome-stable_current_x86_64.rpm; fi
 
 # Remove google-chrome from *
 # Web browser.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes google-chrome-stable; fi
 if $DESKTOP && $RPM; then sudo dnf remove --assumeyes google-chrome-stable; fi
-if $DESKTOP && $RPM; then sudo rpm --erase gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*; fi
 
 # Install google-earth on -none
 # Explore the planet.
-if $DESKTOP && $APT; then wget --output-document=- 'https://dl.google.com/linux/linux_signing_key.pub' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/google-earth.gpg; fi
-if $DESKTOP && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
-if $DESKTOP && $APT; then sudo apt-get install --assume-yes google-earth-pro-stable; fi
-# Add the source list again because the installation overwrote the newly added source list.
-if $DESKTOP && $APT; then echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/google-earth.gpg] https://dl.google.com/linux/earth/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-earth-pro.list; fi
-if $DESKTOP && $RPM; then echo -e '[google-earth]\nname=Google Earth - stable\nbaseurl=https://dl.google.com/linux/earth/rpm/stable/x86_64/\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://dl.google.com/linux/linux_signing_key.pub' | sudo tee /etc/yum.repos.d/google-earh.repo; fi
-if $DESKTOP && $RPM; then sudo dnf install --assumeyes google-earth-pro-stable; fi
+if $DESKTOP && $APT; then wget --output-document=/tmp/google-earth.deb https://dl.google.com/dl/linux/direct/google-earth-pro-stable_current_amd64.deb; fi
+if $DESKTOP && $APT; then sudo apt-get install --assume-yes /tmp/google-earth.deb; fi
+if $DESKTOP && $APT; then rm --verbose /tmp/google-earth.deb; fi
+if $DESKTOP && $RPM; then sudo rpm --import https://dl.google.com/linux/linux_signing_key.pub; fi
+if $DESKTOP && $RPM; then sudo dnf install --assumeyes https://dl.google.com/dl/linux/direct/google-earth-pro-stable-current.x86_64.rpm; fi
 # Web app: https://earth.google.com
 
 # Remove google-earth from -none
 # Explore the planet.
 if $DESKTOP && $APT; then sudo apt-get remove --purge --assume-yes google-earth-pro-stable; fi
 if $DESKTOP && $RPM; then sudo dnf remove --assumeyes google-earth-pro-stable; fi
-if $DESKTOP && $RPM; then sudo rm --force --verbose /etc/yum.repos.d/google-earth.repo*; fi
 
 # Install handbrake on pc-van-emily
 # Video-dvd ripper and transcoder.
@@ -644,15 +634,11 @@ if $RPM; then sudo dnf remove --assumeyes bash-completion; fi
 
 # Install teamviewer on *
 # Remote desktop.
-if $DESKTOP && $APT; then wget --output-document=- 'https://linux.teamviewer.com/pubkey/currentkey.asc' | sudo gpg --dearmor --yes --output=/usr/share/keyrings/teamviewer.gpg; fi
-if $DESKTOP && $APT; then echo 'deb [signed-by=/usr/share/keyrings/teamviewer.gpg] https://linux.teamviewer.com/deb stable main' | sudo tee /etc/apt/sources.list.d/teamviewer.list; fi
-if $DESKTOP && $APT; then sudo apt-get update; fi
-if $DESKTOP && $APT; then sudo DEBIAN_FRONTEND=noninteractive apt-get install --assume-yes teamviewer; fi
-# The apt-key added during installation is no longer needed.
-if $DESKTOP && $APT; then sudo apt-key del 0C1289C0 DEB49217; fi
-# Extra Packages for Enterprise Linux
+if $DESKTOP && $APT; then wget --output-document=/tmp/teamviewer.deb https://download.teamviewer.com/download/linux/teamviewer_amd64.deb; fi
+if $DESKTOP && $APT; then sudo apt-get install --assume-yes /tmp/teamviewer.deb; fi
+if $DESKTOP && $APT; then rm --verbose /tmp/teamviewer.deb; fi
 if $DESKTOP && $RPM; then sudo dnf install --assumeyes epel-release; fi
-if $DESKTOP && $RPM; then sudo dnf install --assumeyes https://teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
+if $DESKTOP && $RPM; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm; fi
 # Web app: https://web.teamviewer.com
 
 # Remove teamviewer from *
