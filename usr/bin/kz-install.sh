@@ -10,6 +10,7 @@
 
 # First install app disabled-apport, then app update-system.
 # The rest of the apps are in alphabetical order of app name.
+
 # Install disabled-apport on *
 # Disable Ubuntu's automatic crash report generation.
 if $UBUNTU ; then sudo systemctl stop apport.service ; fi
@@ -22,6 +23,7 @@ if $UBUNTU ; then sudo rm --force --verbose /var/crash/* ; fi
 if $UBUNTU ; then sudo sed --in-place --expression='s/enabled=0/enabled=1/' /etc/default/apport ; fi
 if $UBUNTU ; then sudo systemctl enable --now apport.service ; fi
 
+
 # Install update-system on *
 # Update system.
 sudo kz-update
@@ -29,6 +31,7 @@ sudo kz-update
 # Remove update-system from *
 # Update system.
 echo 'The update-system app cannot be removed.'
+
 
 # Install 7zip on *
 # File archiver.
@@ -40,6 +43,7 @@ if $RPM ; then sudo dnf install --assumeyes p7zip ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes p7zip-full ; fi
 if $RPM ; then sudo dnf remove --assumeyes p7zip ; fi
 
+
 # Install ansible on pc06 pc07
 # Configuration management, deployment, and task execution.
 if $APT ; then sudo apt-get install --assume-yes ansible ; fi
@@ -49,6 +53,7 @@ if $RPM ; then sudo dnf install --assumeyes ansible ; fi
 # Configuration management, deployment, and task execution.
 if $APT ; then sudo apt-get remove --purge --assume-yes ansible ; fi
 if $RPM ; then sudo dnf remove --assumeyes ansible ; fi
+
 
 # Install anydesk on pc06 pc07
 # Remote desktop.
@@ -69,6 +74,7 @@ if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes anydesk ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes anydesk ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/AnyDesk-RHEL.repo* ; fi
 
+
 # Install apt on -none
 # Package manager.
 if $APT ; then sudo apt-get install --assume-yes apt ; fi
@@ -78,6 +84,7 @@ if $RPM ; then sudo dnf install --assumeyes apt ; fi
 # Package manager.
 if $APT ; then echo 'The apt app cannot be removed from an APT system.' ; fi
 if $RPM ; then sudo dnf remove --assumeyes apt ; fi
+
 
 # Install backintime on -none
 # Backups/snapshots.
@@ -89,6 +96,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes backintime-qt ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes backintime-qt ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes backintime-qt ; fi
 
+
 # Install bleachbit on pc-van-hugo
 # Delete files.
 if $GUI && $APT ; then sudo apt-get install --assume-yes bleachbit ; fi
@@ -99,6 +107,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes bleachbit ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes bleachbit ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes bleachbit ; fi
 
+
 # Install calibre on pc06 pc-van-hugo
 # E-book manager.
 if $GUI && $APT ; then sudo apt-get install --assume-yes calibre ; fi
@@ -108,6 +117,7 @@ if $GUI && $RPM ; then sudo --validate && wget --output-document=- https://downl
 # E-book manager.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes calibre ; fi
 if $GUI && $RPM ; then sudo calibre-uninstall ; fi
+
 
 # Install change-grub-timeout on *
 # GRand Unified Bootloader.
@@ -122,6 +132,7 @@ sudo sed --in-place --expression='s/GRUB_TIMEOUT=1/GRUB_TIMEOUT=5/' /etc/default
 if $APT ; then sudo update-grub ; fi
 if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
 
+
 # Install cockpit on pc06
 # Web console.
 # Web app: https://localhost:9090
@@ -132,6 +143,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes cockpit cockpit-pcp ; fi
 # Web console.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes cockpit ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes cockpit ; fi
+
 
 # Install cups on *
 # Common UNIX Printing System.
@@ -144,6 +156,7 @@ if $RPM ; then sudo dnf install --assumeyes cups ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes cups ; fi
 if $RPM ; then sudo dnf remove --assumeyes cups ; fi
 
+
 # Install cups-backend-bjnp on pc-van-emily
 # Printer backend.
 if $GUI && $APT ; then sudo apt-get install --assume-yes cups-backend-bjnp ; fi
@@ -153,6 +166,7 @@ if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 # Printer backend.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes cups-backend-bjnp ; fi
 if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
+
 
 # Install dash-to-dock on *
 # Desktop dock.
@@ -165,6 +179,7 @@ if $GUI && $ROCKY ; then sudo dnf install --assumeyes gnome-shell-extension-dash
 # Reboot required!
 if $GUI && $DEBIAN ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
 if $GUI && $ROCKY ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock ; fi
+
 
 # Install disabled-aer on pc06
 # Disable kernel config parameter PCIEAER (Peripheral Component Interconnect Express Advanced Error Reporting).
@@ -183,6 +198,7 @@ if $RPM ; then sudo grub2-mkconfig -o /boot/grub2/grub.cfg ; fi
 # Check for kernel config parameter pci=noaer.
 ! grep --quiet --regexp='pci=noaer' /etc/default/grub
 
+
 # Install disabled-fwupd on -none
 # Disable FirmWare UPdate Daemon.
 sudo systemctl stop fwupd.service
@@ -195,6 +211,7 @@ sudo systemctl unmask fwupd.service
 sudo systemctl enable fwupd.service
 sudo systemctl start fwupd.service
 
+
 # Install disabled-lidswitch on pc-van-hugo
 # Do nothing when the laptop lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
@@ -204,6 +221,7 @@ echo 'HandleLidSwitch=ignore' | sudo tee --append /etc/systemd/logind.conf
 # Restore the default action when the laptop lid is closed.
 sudo sed --in-place --expression='/^HandleLidSwitch=/d' /etc/systemd/logind.conf
 
+
 # Install dual-monitor on pc06
 # Preserve dual monitor settings.
 if [[ -f ~karel/.config/monitors.xml ]] ; then sudo cp --preserve --verbose ~karel/.config/monitors.xml ~gdm/.config/monitors.xml ; fi
@@ -212,6 +230,7 @@ if [[ -f ~gdm/.config/monitors.xml ]] ; then sudo chown --verbose gdm:gdm ~gdm/.
 # Remove dual-monitor from pc06
 # Remove dual monitor settings.
 sudo rm --force --verbose ~gdm/.config/monitors.xml
+
 
 # Install exiftool on pc06 pc07
 # Read and write meta information.
@@ -223,6 +242,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes perl-Image-ExifTool ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes libimage-exiftool-perl ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes perl-Image-ExifTool ; fi
 
+
 # Install fakeroot on pc06 pc07
 # Simulate superuser privileges.
 if $APT ; then sudo apt-get install --assume-yes fakeroot ; fi
@@ -232,6 +252,7 @@ if $RPM ; then sudo dnf install --assumeyes fakeroot ; fi
 # Simulate superuser privileges.
 if $APT ; then sudo apt-get remove --purge --assume-yes fakeroot ; fi
 if $RPM ; then sudo dnf remove --assumeyes fakeroot ; fi
+
 
 # Install fdupes on -none
 # Find duplicate files.
@@ -246,6 +267,7 @@ if $RPM ; then sudo dnf install --assumeyes fdupes ; fi
 # Find duplicate files.
 if $APT ; then sudo apt-get remove --purge --assume-yes fdupes ; fi
 if $RPM ; then sudo dnf remove --assumeyes fdupes ; fi
+
 
 # Install force-x11 on -none
 # Disable choice on user login screen for X11 or Wayland and force X11.
@@ -262,6 +284,7 @@ if $GUI && $APT ; then sudo sed --in-place --expression='s/^WaylandEnable=false/
 if $GUI && $RPM ; then sudo sed --in-place --expression='s/^WaylandEnable=false/#WaylandEnable=false/' /etc/gdm/custom.conf ; fi
 # To check, after reboot (!), execute: echo $XDG_SESSION_TYPE (should output 'wayland')
 
+
 # Install gdebi on *
 # View and install deb files.
 if $GUI && $APT ; then sudo apt-get install --assume-yes gdebi ; fi
@@ -271,6 +294,7 @@ if $GUI && $RPM ; then echo 'The gdebi app is not available.' ; fi
 # View and install deb files.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gdebi ; fi
 if $GUI && $RPM ; then echo 'The gdebi app is not available.' ; fi
+
 
 # Install gettext on pc06 pc07
 # GNU Internationalization.
@@ -282,6 +306,7 @@ if $RPM ; then sudo dnf install --assumeyes gettext ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes gettext ; fi
 if $RPM ; then sudo dnf remove --assumeyes gettext ; fi
 
+
 # Install gimp on pc-van-hugo pc06
 # GNU Image Manipulation Program.
 if $GUI && $APT ; then sudo apt-get install --assume-yes gimp gimp-help-en gimp-help-nl ; fi
@@ -291,6 +316,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes gimp ; fi
 # GNU Image Manipulation Program.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gimp gimp-help-en gimp-help-nl ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes gimp ; fi
+
 
 # Install git on pc06 pc07
 # Distributed revision control system.
@@ -303,6 +329,7 @@ if $RPM ; then sudo sudo dnf install --assumeyes git ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes git ; fi
 if $RPM ; then sudo sudo dnf remove --assumeyes git ; fi
 
+
 # Install gnome-gmail on pc01 pc06 pc07
 # Gmail for e-mail.
 # Web app: https://mail.google.com
@@ -314,6 +341,7 @@ if $GUI && $RPM ; then echo 'The gnome-gmail app is not available.' ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gnome-gmail ; fi
 if $GUI && $RPM ; then echo 'The gnome-gmail app is not available.' ; fi
 
+
 # Install gnome-tweaks on pc01 pc06 pc07
 # Adjust advanced settings.
 if $GUI && $APT ; then sudo apt-get install --assume-yes gnome-tweaks ; fi
@@ -323,6 +351,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes gnome-tweaks ; fi
 # Adjust advanced settings.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gnome-tweaks ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes gnome-tweaks ; fi
+
 
 # Install google-chrome on *
 # Web browser.
@@ -337,6 +366,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/lin
 # Web browser.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes google-chrome-stable ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes google-chrome-stable ; fi
+
 
 # Install google-earth on -none
 # Explore the planet.
@@ -353,6 +383,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes https://dl.google.com/dl/lin
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes google-earth-pro-stable ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes google-earth-pro-stable ; fi
 
+
 # Install handbrake on pc-van-emily
 # Video-dvd ripper and transcoder.
 if $GUI && $APT ; then sudo apt-get install --assume-yes handbrake ; fi
@@ -363,6 +394,7 @@ if $GUI && $RPM ; then echo 'The handbrake app is not available.' ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes handbrake ; fi
 if $GUI && $RPM ; then echo 'The handbrake app is not available.' ; fi
 
+
 # Install htop on pc06 pc07
 # Process viewer.
 if $APT ; then sudo apt-get install --assume-yes htop ; fi
@@ -372,6 +404,7 @@ if $RPM ; then sudo dnf install --assumeyes htop ; fi
 # Process viewer.
 if $APT ; then sudo apt-get remove --purge --assume-yes htop ; fi
 if $RPM ; then sudo dnf remove --assumeyes htop ; fi
+
 # Install imagination on pc06 pc07
 # Slideshow maker.
 if $GUI && $APT ; then sudo apt-get install --assume-yes imagination ; fi
@@ -381,6 +414,7 @@ if $GUI && $RPM ; then echo 'The imagination app is not available.' ; fi
 # Slideshow maker.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes imagination ; fi
 if $GUI && $RPM ; then echo 'The imagination app is not available.' ; fi
+
 
 # Install jq on pc06 pc07
 # JSON processor.
@@ -392,6 +426,7 @@ if $RPM ; then sudo dnf install --assumeyes jq ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes jq ; fi
 if $RPM ; then sudo dnf remove --assumeyes jq ; fi
 
+
 # Install krita on pc06
 # Image manipulation.
 if $GUI && $APT ; then sudo apt-get install --assume-yes krita ; fi
@@ -401,6 +436,7 @@ if $GUI && $RPM ; then echo 'The krita app is not available.' ; fi
 # Image manipulation.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes krita ; fi
 if $GUI && $RPM ; then echo 'The krita app is not available.' ; fi
+
 
 # Install kvm on pc06 pc07
 # Kernel-based Virtual Machine.
@@ -432,6 +468,7 @@ if $GUI && $APT ; then sudo delgroup libvirtd ; fi
 if $GUI && $RPM ; then sudo systemctl disable --now libvirtd ; fi
 if $GUI && $RPM ; then sudo dnf groupremove "Virtualization Host" ; fi
 
+
 # Install lftp on pc06 pc07
 # FTP/HTTP/BitTorrent client.
 if $APT ; then sudo apt-get install --assume-yes lftp ; fi
@@ -442,6 +479,7 @@ if $RPM ; then sudo dnf install --assumeyes lftp ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes lftp ; fi
 if $RPM ; then sudo dnf remove --assumeyes lftp ; fi
 
+
 # Install libreoffice on *
 # Office suite.
 if $GUI && $APT ; then sudo apt-get install --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl ; fi
@@ -451,6 +489,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes libreoffice ; fi
 # Office suite.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes aspell-en aspell-nl libreoffice libreoffice-l10n-nl ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes libreoffice ; fi
+
 
 # Install locate on pc06 pc07
 # Find files.
@@ -464,6 +503,7 @@ sudo updatedb
 if $APT ; then sudo apt-get remove --purge --assume-yes locate ; fi
 if $RPM ; then sudo dnf remove --assumeyes mlocate ; fi
 
+
 # Install log-access-for-user on pc07
 # Log access.
 if [[ $HOSTNAME = 'pc07' ]] ; then sudo usermod --append --groups adm,systemd-journal karel ; fi
@@ -472,6 +512,7 @@ if [[ $HOSTNAME = 'pc07' ]] ; then sudo usermod --append --groups adm,systemd-jo
 # Log access.
 if [[ $HOSTNAME = 'pc07' ]] ; then sudo deluser karel adm ; fi
 if [[ $HOSTNAME = 'pc07' ]] ; then sudo deluser karel systemd-journal ; fi
+
 
 # Install mypy on pc06 pc07
 # Python static typing.
@@ -483,6 +524,7 @@ if $RPM ; then sudo dnf install --assumeyes python3-mypy ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes mypy ; fi
 if $RPM ; then sudo dnf remove --assumeyes python3-mypy ; fi
 
+
 # Install nautilus-admin on pc06 pc07
 # Administrative operations.
 if $GUI && $APT ; then sudo apt-get install --assume-yes nautilus-admin ; fi
@@ -493,6 +535,7 @@ if $GUI && $RPM ; then echo 'The nautilus-admin app is not available.' ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes nautilus-admin ; fi
 if $GUI && $RPM ; then echo 'The nautilus-admin app is not available.' ; fi
 
+
 # Install nmap on pc06 pc07
 # Network MAPper.
 if $APT ; then sudo apt-get install --assume-yes nmap ; fi
@@ -502,6 +545,7 @@ if $RPM ; then sudo dnf install --assumeyes nmap ; fi
 # Network MAPper.
 if $APT ; then sudo apt-get remove --purge --assume-yes nmap ; fi
 if $RPM ; then sudo dnf remove --assumeyes nmap ; fi
+
 
 # Install ntfs on -none
 # NTFS support.
@@ -524,6 +568,7 @@ if $RPM ; then sudo dnf install --assumeyes ntfs-3g ntfsprogs ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes ntfs-3g ; fi
 if $RPM ; then sudo dnf remove --assumeyes ntfs-3g ntfsprogs ; fi
 
+
 # Install python on pc06 pc07
 # Programming language.
 if $APT ; then sudo apt-get install --assume-yes pycodestyle python3-pycodestyle python3-autopep8 python3-pip python-is-python3 ; fi
@@ -539,6 +584,7 @@ if $APT ; then sudo rm --force --verbose /usr/bin/pep8 /usr/bin/pip ; fi
 
 if $RPM ; then sudo dnf remove --assumeyes python3 python3-pycodestyle python3-pip ; fi
 
+
 # Install rpm on pc06 pc07
 # Package manager.
 if $APT ; then sudo apt-get install --assume-yes rpm ; fi
@@ -548,6 +594,7 @@ if $RPM ; then sudo dnf install --assumeyes rpm ; fi
 # Package manager for RPM.
 if $APT ; then sudo apt-get remove --purge --assume-yes rpm ; fi
 if $RPM ; then echo 'The rpm app cannot be removed.' ; fi
+
 
 # Install shellcheck on pc06 pc07
 # Shell script linter.
@@ -560,6 +607,7 @@ if $RPM ; then sudo dnf install --assumeyes shellcheck ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes shellcheck ; fi
 if $RPM ; then sudo dnf remove --assumeyes shellcheck ; fi
 
+
 # Install sound-juicer on pc-van-emily
 # Audio-cd ripper and player.
 if $GUI && $APT ; then sudo apt-get install --assume-yes sound-juicer ; fi
@@ -570,6 +618,7 @@ if $GUI && $RPM ; then echo 'The sound-juicer app is not available.' ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes sound-juicer ; fi
 if $GUI && $RPM ; then echo 'The sound-juicer app is not available.' ; fi
 
+
 # Install spice-vdagent on *
 # Spice agent.
 if $APT ; then sudo apt-get install --assume-yes spice-vdagent ; fi
@@ -579,6 +628,7 @@ if $RPM ; then sudo dnf install --assumeyes spice-vdagent ; fi
 # Spice agent.
 if $APT ; then sudo apt-get remove --purge --assume-yes spice-vdagent ; fi
 if $RPM ; then sudo dnf remove --assumeyes spice-vdagent ; fi
+
 
 # Install spotify on pc01 pc02 pc06 pc07
 # Music and podcasts.
@@ -594,6 +644,7 @@ if $GUI && $RPM ; then echo 'The spotify app is available as a web app.' ; fi
 # Music and podcasts.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes spotify-client ; fi
 if $GUI && $RPM ; then echo 'The spotify web app cannot be removed.' ; fi
+
 
 # Install ssh on pc01 pc06 pc07
 # Secure SHell.
@@ -615,6 +666,7 @@ sudo sed --in-place --expression='s/PermitRootLogin no/PermitRootLogin prohibit-
 if $APT ; then sudo apt-get remove --purge --assume-yes ssh ; fi
 if $RPM ; then sudo dnf remove --assumeyes openssh ; fi
 
+
 # Install sushi on pc06
 # Quick preview.
 if $GUI && $APT ; then sudo apt-get install --assume-yes gnome-sushi ; fi
@@ -627,6 +679,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes sushi ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes gnome-sushi ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes sushi ; fi
 
+
 # Install tab-completion on *
 # Bash completion.
 if $APT ; then sudo apt-get install --assume-yes bash-completion ; fi
@@ -636,6 +689,7 @@ if $RPM ; then sudo dnf install --assumeyes bash-completion ; fi
 # Bash completion.
 if $APT ; then sudo apt-get remove --purge --assume-yes bash-completion ; fi
 if $RPM ; then sudo dnf remove --assumeyes bash-completion ; fi
+
 
 # Install teamviewer on *
 # Remote desktop.
@@ -653,6 +707,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes https://download.teamviewer.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes teamviewer ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes teamviewer ; fi
 
+
 # Install thunderbird on *
 # E-mail and news.
 if $GUI && $DEBIAN ; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl ; fi
@@ -665,6 +720,7 @@ if $GUI && $DEBIAN ; then sudo apt-get remove --purge --assume-yes thunderbird-l
 if $GUI && $UBUNTU ; then sudo apt-get remove --purge --assume-yes thunderbird-locale-nl ; fi
 if $GUI && $ROCKY ; then sudo dnf remove --assumeyes thunderbird ; fi
 
+
 # Install tree on pc06 pc07
 # Display directory tree.
 if $APT ; then sudo apt-get install --assume-yes tree ; fi
@@ -674,6 +730,7 @@ if $RPM ; then sudo dnf install --assumeyes tree ; fi
 # Display directory tree.
 if $APT ; then sudo apt-get remove --purge --assume-yes tree ; fi
 if $RPM ; then sudo dnf remove --assumeyes tree ; fi
+
 # Install ufw on pc01 pc06 pc07
 # Uncomplicated FireWall.
 if $GUI && $APT ; then sudo apt-get install --assume-yes gufw ; fi
@@ -687,6 +744,7 @@ sudo ufw disable
 if $APT ; then sudo apt-get remove --purge --assume-yes gufw ; fi
 if $RPM ; then sudo dnf remove --assumeyes gufw ; fi
 
+
 # Install usbutils on pc07
 # USB utilities.
 # This package contains the lsusb utility.
@@ -699,6 +757,7 @@ if $RPM ; then sudo dnf install --assumeyes usbutils ; fi
 if $APT ; then sudo apt-get remove --purge --assume-yes usbutils ; fi
 if $RPM ; then sudo dnf remove --assumeyes usbutils ; fi
 
+
 # Install user-guest on -none
 # Add guest user.
 sudo useradd --create-home --shell /usr/bin/bash --comment "$(gettext 'Guest user')" "$(gettext 'guest')" || true
@@ -707,6 +766,7 @@ sudo passwd --delete "$(gettext 'guest')"
 # Remove user-guest from -none
 # Remove guest user.
 sudo userdel --remove "$(gettext 'guest')"
+
 
 # Install user-karel on pc01
 # Add user Karel.
@@ -718,6 +778,7 @@ if [[ $HOSTNAME = 'pc01' ]] ; then sudo passwd --delete --expire karel ; fi
 # Remove user Karel.
 if [[ $HOSTNAME = 'pc01' ]] ; then sudo userdel --remove karel ; fi
 
+
 # Install user-toos on Laptop
 # Add user Toos.
 if [[ $HOSTNAME = 'Laptop' ]] ; then sudo useradd --create-home --shell /usr/bin/bash --comment 'Toos Barendse' toos || true ; fi
@@ -727,6 +788,7 @@ if [[ $HOSTNAME = 'Laptop' ]] ; then sudo passwd --delete --expire toos ; fi
 # Remove user-toos from Laptop
 # Remove user Toos.
 if [[ $HOSTNAME = 'Laptop' ]] ; then sudo userdel --remove toos ; fi
+
 
 # Install virtualbox on pc-van-hugo
 # Virtualization.
@@ -742,6 +804,7 @@ if $GUI && $RPM ; then sudo dnf install --assumeyes VirtualBox ; fi
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes VirtualBox ; fi
 
+
 # Install vlc on *
 # Multimedia player.
 if $GUI && $GUI && $APT ; then sudo apt-get install --assume-yes vlc ; fi
@@ -754,6 +817,7 @@ if $GUI && $GUI && $RPM ; then sudo dnf install --assumeyes vlc ; fi
 # Multimedia player.
 if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes vlc ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes vlc ; fi
+
 
 # Install vscode on pc01 pc06 pc07
 # Editor.
@@ -777,6 +841,7 @@ if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes code ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes code ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/vscode.repo* ; fi
 
+
 # Install webmin on pc07
 # Web console.
 # Web app: https://localhost:10000
@@ -797,6 +862,7 @@ if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes webmin ; fi
 if $GUI && $RPM ; then sudo dnf remove --assumeyes webmin ; fi
 if $GUI && $RPM ; then sudo rm --force --verbose /etc/yum.repos.d/webmin.repo* ; fi
 
+
 # Install wine on -none
 # Run Windows applications.
 if $GUI && $APT ; then sudo dpkg --add-architecture i386 ; fi
@@ -810,6 +876,7 @@ if $GUI && $APT ; then sudo apt-get remove --purge --assume-yes wine winetricks 
 if $GUI && $APT ; then sudo dpkg --remove-architecture i386 ; fi
 
 if $GUI && $RPM ; then sudo dnf remove --assumeyes wine playonlinux ; fi
+
 
 # Install youtube-dl on pc-van-emily pc-van-hugo
 # Download videos.
