@@ -83,7 +83,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP; then
+                if ! $GUI; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -271,7 +271,7 @@ $(gettext "Try restoring the back up again.")"
 function restore_settings() {
     local SETTINGS_DIR=$HOME/kz-backup
 
-    if $DESKTOP; then
+    if $GUI; then
         logmsg 'Restore settings...'
         restore_setting_desktop
     fi

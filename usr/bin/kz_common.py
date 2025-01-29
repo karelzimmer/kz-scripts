@@ -53,7 +53,7 @@ RPM: bool = False
 DEBIAN: bool = False
 ROCKY: bool = False
 UBUNTU: bool = False
-DESKTOP: bool = False
+GUI: bool = False
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
@@ -70,7 +70,7 @@ if subprocess.run("source /etc/os-release; [[ $ID = 'ubuntu' ]]",
 if subprocess.run('[[ -n $(type -t '
                   '{{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]',
                   shell=True, executable='bash').returncode == OK:
-    DESKTOP = True
+    GUI = True
 
 
 ###############################################################################
@@ -225,7 +225,7 @@ def process_option_help(PROGRAM_NAME: str, PROGRAM_DESC: str,
     PROGRAM_ID: str = PROGRAM_NAME.replace('kz ', 'kz-')
     YELP_MAN_URL: str = ''
 
-    if DESKTOP:
+    if GUI:
         YELP_MAN_URL = f"{_(', or see the ')}"
         YELP_MAN_URL += f'\x1b]8;;man:{PROGRAM_ID}\x1b\\{PROGRAM_ID} '
         YELP_MAN_URL += f"{_('man page')}\x1b]8;;\x1b\\"
@@ -242,7 +242,7 @@ def process_option_manual(PROGRAM_NAME: str, PROGRAM_DESC: str) -> int:
     """
     PROGRAM_ID = PROGRAM_NAME.replace('kz ', 'kz-')
 
-    if DESKTOP:
+    if GUI:
         try:
             subprocess.run(f'yelp man:{PROGRAM_ID}', shell=True, check=True,
                            stderr=subprocess.DEVNULL)

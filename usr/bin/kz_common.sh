@@ -52,7 +52,7 @@ declare RPM=false
 declare DEBIAN=false
 declare ROCKY=false
 declare UBUNTU=false
-declare DESKTOP=false
+declare GUI=false
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
 source /etc/os-release
 if [[ $ID = 'debian' ]]; then
@@ -69,14 +69,14 @@ if [[ $ID = 'ubuntu' ]]; then
 fi
 if [[ -n $(type -t {{cinnamon,gnome,lxqt,mate,xfce4}-session,ksmserver}) ]]
 then
-    DESKTOP=true
+    GUI=true
 fi
 readonly APT
 readonly RPM
 readonly DEBIAN
 readonly ROCKY
 readonly UBUNTU
-readonly DESKTOP
+readonly GUI
 
 
 ###############################################################################
@@ -265,7 +265,7 @@ function process_option_help() {
     local TEXT=''
     local YELP_MAN_URL=''
 
-    if $DESKTOP; then
+    if $GUI; then
         YELP_MAN_URL="$(gettext ', or see the ')"
         YELP_MAN_URL+="\033]8;;man:$PROGRAM_ID\033\\$PROGRAM_ID "
         YELP_MAN_URL+="$(gettext 'man page')\033]8;;\033\\"
@@ -283,7 +283,7 @@ $TEXT"
 function process_option_manual() {
     local PROGRAM_ID=${PROGRAM_NAME/kz /kz-}
 
-    if $DESKTOP; then
+    if $GUI; then
         yelp man:"$PROGRAM_ID" 2> >($LOGCMD)
     else
         man --pager=cat "$PROGRAM_NAME"

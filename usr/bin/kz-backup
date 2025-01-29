@@ -83,7 +83,7 @@ function process_x_options() {
     while true; do
         case $1 in
             -g | --gui )
-                if ! $DESKTOP; then
+                if ! $GUI; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -233,7 +233,7 @@ function backup_settings() {
     backup_setting_users
     backup_setting_wifi
 
-    if $DESKTOP; then
+    if $GUI; then
         backup_setting_avatar
         backup_setting_desktop
         backup_setting_favs
@@ -312,7 +312,7 @@ function backup_setting_users() {
 
     logmsg 'Save instructions for adding additional users...'
 
-    if $DESKTOP; then
+    if $GUI; then
         TEXT="$(gettext 'Additional users can be added manually:')
 
 $(gettext "1. Press the Super key[1], type 'user' and click behind Settings \

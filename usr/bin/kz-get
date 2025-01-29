@@ -202,7 +202,7 @@ Now follow the steps as described in the Checklist installation.
 
 Checklist installation can be found on https://karelzimmer.nl/en, under \
 Linux.")"
-    if $DESKTOP; then
+    if $GUI; then
         TEXT+="
 
 $(gettext "Type 'exit' to close this window.")"

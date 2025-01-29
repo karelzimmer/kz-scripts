@@ -146,7 +146,7 @@ $USAGE"
         exit $ERR
     fi
 
-    if ! $DESKTOP; then
+    if ! $GUI; then
         TEXT="$PROGRAM_NAME: $(gettext 'no desktop environment available')
 $USAGE"
         infomsg "$TEXT"

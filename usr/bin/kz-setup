@@ -117,7 +117,7 @@ $USAGE"
                 shift 2
                 ;;
             -g | --gui )
-                if ! $DESKTOP; then
+                if ! $GUI; then
                     TEXT=\
 "$PROGRAM_NAME: $1: $(gettext 'no desktop environment available')
 $USAGE"
@@ -516,7 +516,7 @@ function term_script() {
 
     if $LOGOUT; then
 
-        if $DESKTOP; then
+        if $GUI; then
             TEXT+="
 
 $(gettext "You will now be logged out of the computer to finish setting up \
@@ -531,7 +531,7 @@ Type 'logout' to log out.")"
 
         infomsg "$TEXT"
 
-        if $DESKTOP; then
+        if $GUI; then
             $OPTION_GUI || wait_for_enter
 
             if [[ -n $(type -t gnome-session) ]]; then
