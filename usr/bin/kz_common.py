@@ -55,6 +55,9 @@ ROCKY: bool = False
 UBUNTU: bool = False
 GUI: bool = False
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+if not os.path.exists('/usr/bin/systemd'):
+    print('[fail] no systemd')
+    sys.exit(ERR)
 if not os.path.exists('/etc/os-release'):
     print('[fail] no /etc/os-release')
     sys.exit(ERR)
