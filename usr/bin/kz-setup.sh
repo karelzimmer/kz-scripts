@@ -12,9 +12,9 @@
 
 # Setup anydesk for karel@pc06 karel@pc07
 # Remote desktop.
+# Web app: https://my.anydesk.com/v2
 # Remote display server Wayland is not supported.
 if $DESKTOP ; then kz-desktop --addaft=anydesk ; fi
-# Web app: https://my.anydesk.com/v2
 
 # Reset anydesk for karel@pc06 karel@pc07
 # Remote desktop.
@@ -32,8 +32,8 @@ if $DESKTOP ; then kz-desktop --delete=calibre-gui ; fi
 
 # Setup cockpit for karel@pc06
 # Web console.
-if $DESKTOP ; then kz-desktop --addaft=kz-cockpit ; fi
 # Web app: https://localhost:9090
+if $DESKTOP ; then kz-desktop --addaft=kz-cockpit ; fi
 
 # Reset cockpit for karel@pc06
 # Web console.
@@ -106,8 +106,8 @@ echo 'App gdebi cannot be reset.'
 
 # Setup git for karel@pc06 karel@pc07
 # Distributed revision control system.
-git config --global alias.logg 'log --decorate --graph --oneline --all'
 # Web app: https://github.com
+git config --global alias.logg 'log --decorate --graph --oneline --all'
 
 # Reset git for karel@pc06 karel@pc07
 # Distributed revision control system.
@@ -235,9 +235,9 @@ if $DESKTOP ; then kz-desktop --delete=org.gnome.SoundJuicer ; fi
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Music and podcasts.
+# Web app: https://open.spotify.com
 if $DESKTOP && $APT ; then kz-desktop --addaft=spotify ; fi
 if $DESKTOP && $RPM ; then kz-desktop --addaft=kz-spotify ; fi
-# Web app: https://open.spotify.com
 
 # Reset spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Music and podcasts.
@@ -247,8 +247,8 @@ if $DESKTOP && $RPM ; then kz-desktop --delete=kz-spotify ; fi
 
 # Setup teamviewer for karel@pc06
 # Remote desktop.
-if $DESKTOP ; then kz-desktop --addaft=com.teamviewer.TeamViewer ; fi
 # Web app: https://web.teamviewer.com
+if $DESKTOP ; then kz-desktop --addaft=com.teamviewer.TeamViewer ; fi
 
 # Reset teamviewer for karel@pc06
 # Remote desktop.
@@ -308,14 +308,14 @@ if $DESKTOP ; then xdg-mime default code.desktop text/x-python ; fi
 
 # Reset vscode for karel@pc01 karel@pc06 karel@pc07
 # Editor.
-if $DESKTOP ; then kz-desktop --delete=code ; fi
 # Web app: https://vscode.dev
+if $DESKTOP ; then kz-desktop --delete=code ; fi
 
 
 # Setup webmin for karel@pc07
 # Web console.
-if $DESKTOP ; then kz-desktop --addaft=kz-webmin ; fi
 # Web app: https://localhost:10000
+if $DESKTOP ; then kz-desktop --addaft=kz-webmin ; fi
 
 # Reset webmin for karel@pc07
 # Web console.

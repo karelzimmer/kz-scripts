@@ -698,6 +698,7 @@ if $DESKTOP && $APT ; then wget --output-document=/tmp/teamviewer.deb https://do
 if $DESKTOP && $APT ; then sudo apt-get install --assume-yes /tmp/teamviewer.deb ; fi
 if $DESKTOP && $APT ; then rm --verbose /tmp/teamviewer.deb ; fi
 
+# Extra Packages for Enterprise Linux
 if $DESKTOP && $RPM ; then sudo dnf install --assumeyes epel-release ; fi
 if $DESKTOP && $RPM ; then sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm ; fi
 
