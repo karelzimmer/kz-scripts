@@ -43,9 +43,9 @@ if $GUI ; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.
 
 # Setup dash-to-dock for *
 # Desktop dock.
-if $GUI && $DEBIAN ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
 if $GUI && $ROCKY ; then gnome-extensions enable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
 if $GUI && $ROCKY ; then gnome-extensions enable no-overview@fthx ; fi
+if $GUI && $DEBIAN ; then gnome-extensions enable dash-to-dock@micxgx.gmail.com ; fi
 if $GUI && $DEBIAN ; then gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell disable-user-extensions false ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme true ; fi
@@ -58,10 +58,10 @@ if $GUI && ($DEBIAN || $ROCKY) ; then gsettings set org.gnome.shell.extensions.d
 
 # Reset dash-to-dock for *
 # Desktop dock.
-if $GUI && $DEBIAN ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
 if $GUI && $ROCKY ; then gnome-extensions disable dash-to-dock@gnome-shell-extensions.gcampax.github.com ; fi
-if $GUI && $DEBIAN ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
 if $GUI && $ROCKY ; then echo 'Goto https://extensions.gnome.org/extension/4099/no-overview/, install, and switch OFF' ; fi
+if $GUI && $DEBIAN ; then gnome-extensions disable dash-to-dock@micxgx.gmail.com ; fi
+if $GUI && $DEBIAN ; then gsettings reset org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell disable-user-extensions ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock apply-custom-theme ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock click-action ; fi

@@ -171,14 +171,14 @@ if $GUI && $RPM ; then echo 'The cups-backend-bjnp app is not available.' ; fi
 # Install dash-to-dock on *
 # Desktop dock.
 # Reboot required!
-if $GUI && $DEBIAN ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock gnome-shell-extension-no-overview ; fi
 if $GUI && $ROCKY ; then sudo dnf install --assumeyes gnome-shell-extension-dash-to-dock ; fi
+if $GUI && $DEBIAN ; then sudo apt-get install --assume-yes gnome-shell-extension-dashtodock gnome-shell-extension-no-overview ; fi
 
 # Remove dash-to-dock from *
 # Desktop dock.
 # Reboot required!
-if $GUI && $DEBIAN ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
 if $GUI && $ROCKY ; then sudo dnf remove --assumeyes gnome-shell-extension-dash-to-dock ; fi
+if $GUI && $DEBIAN ; then sudo apt-get remove --purge --assume-yes gnome-shell-extension-dashtodock ; fi
 
 
 # Install disabled-aer on pc06
@@ -710,15 +710,15 @@ if $GUI && $RPM ; then sudo dnf remove --assumeyes teamviewer ; fi
 
 # Install thunderbird on *
 # E-mail and news.
+if $GUI && $ROCKY ; then sudo dnf install --assumeyes thunderbird ; fi
 if $GUI && $DEBIAN ; then sudo apt-get install --assume-yes thunderbird thunderbird-l10n-nl ; fi
 if $GUI && $UBUNTU ; then sudo apt-get install --assume-yes thunderbird thunderbird-locale-nl ; fi
-if $GUI && $ROCKY ; then sudo dnf install --assumeyes thunderbird ; fi
 
 # Remove thunderbird from *
 # E-mail and news.
+if $GUI && $ROCKY ; then sudo dnf remove --assumeyes thunderbird ; fi
 if $GUI && $DEBIAN ; then sudo apt-get remove --purge --assume-yes thunderbird-l10n-nl ; fi
 if $GUI && $UBUNTU ; then sudo apt-get remove --purge --assume-yes thunderbird-locale-nl ; fi
-if $GUI && $ROCKY ; then sudo dnf remove --assumeyes thunderbird ; fi
 
 
 # Install tree on pc06 pc07
