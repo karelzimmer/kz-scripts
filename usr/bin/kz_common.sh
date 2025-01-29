@@ -54,8 +54,7 @@ declare ROCKY=false
 declare UBUNTU=false
 declare GUI=false
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-if ! type systemd &> >(systemd-cat --identifier=kz_common.sh --priority=debug)
-then
+if ! [[ -e /usr/bin/systemd ]]; then
     echo '[fail] no systemd' >&2
     exit $ERR
 fi
