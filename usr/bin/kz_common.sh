@@ -59,7 +59,7 @@ if ! [[ -e /usr/bin/systemd ]]; then
     exit $ERR
 fi
 if ! source /etc/os-release 2> >(
-            systemd-cat --identifier=kz_common.sh --priority=debug); then
+            systemd-cat --identifier=$MODULE_NAME --priority=debug); then
     echo '[fail] no /etc/os-release' >&2
     exit $ERR
 fi
