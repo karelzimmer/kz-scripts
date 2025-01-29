@@ -54,7 +54,10 @@ declare ROCKY=false
 declare UBUNTU=false
 declare GUI=false
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
-source /etc/os-release
+if ! source /etc/os-release 2> >(systemd-cat --identifier=kz_common.sh); then
+    echo '[fail] no /etc/os-release' >&2
+    exit $ERR
+fi
 if [[ $ID = 'debian' ]]; then
     DEBIAN=true
     APT=true

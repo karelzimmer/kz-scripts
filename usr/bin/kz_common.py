@@ -55,6 +55,9 @@ ROCKY: bool = False
 UBUNTU: bool = False
 GUI: bool = False
 # Rocky Linux 9: redhat-lsb package not available ==> source /etc/os-release.
+if not os.path.exists('/etc/os-release'):
+    print('[fail] no /etc/os-release')
+    sys.exit(ERR)
 if subprocess.run("source /etc/os-release; [[ $ID = 'debian' ]]",
                   shell=True, executable='bash').returncode == OK:
     DEBIAN = True
