@@ -382,7 +382,8 @@ ${RED}    $(eval_gettext "A line is longer than \$MAX_LINE_LENGTH \
 
 # This function validates the desktop file.
 function check_desktop_file_validation() {
-    if ! desktop-file-validate "$SCRIPT" 1> /dev/null; then
+    if ! desktop-file-validate "$SCRIPT" | systemd-cat --identifier=kz-check
+    then
         infomsg "
   ${BOLD}$SCRIPTDIR / $SCRIPTNAME${NORMAL}"
         desktop-file-validate "$SCRIPT" || ERR_FLAG=true
