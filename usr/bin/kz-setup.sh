@@ -9,7 +9,6 @@
 # [info] To learn more about the format of this file, run: man kz setup
 
 # The apps are in alphabetical order of app name.
-
 # Setup anydesk for karel@pc06 karel@pc07
 # Remote desktop.
 # Web app: https://my.anydesk.com/v2
@@ -20,7 +19,6 @@ if $GUI ; then kz-desktop --addaft=anydesk ; fi
 # Remote desktop.
 if $GUI ; then kz-desktop --delete=anydesk ; fi
 
-
 # Setup calibre for hugo@pc-van-hugo
 # E-book manager.
 if $GUI ; then kz-desktop --addaft=calibre-gui ; fi
@@ -28,7 +26,6 @@ if $GUI ; then kz-desktop --addaft=calibre-gui ; fi
 # Reset calibre for hugo@pc-van-hugo
 # E-book manager.
 if $GUI ; then kz-desktop --delete=calibre-gui ; fi
-
 
 # Setup cockpit for karel@pc06
 # Web console.
@@ -39,7 +36,6 @@ if $GUI ; then kz-desktop --addaft=kz-cockpit ; fi
 # Web console.
 if $GUI ; then kz-desktop --delete=kz-cockpit ; fi
 if $GUI ; then rm --force --verbose "$HOME/.local/share/applications/kz-cockpit.desktop" ; fi
-
 
 # Setup dash-to-dock for *
 # Desktop dock.
@@ -71,7 +67,6 @@ if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock extend-height ; fi
 if $GUI && ($DEBIAN || $ROCKY) ; then gsettings reset org.gnome.shell.extensions.dash-to-dock icon-size-fixed ; fi
 
-
 # Setup evolution for karel@pc07
 # E-mail and organizer.
 if $GUI ; then kz-desktop --delete=org.gnome.Evolution ; fi
@@ -79,7 +74,6 @@ if $GUI ; then kz-desktop --delete=org.gnome.Evolution ; fi
 # Reset evolution for karel@pc07
 # E-mail and organizer.
 if $GUI ; then kz-desktop --addbef=org.gnome.Evolution ; fi
-
 
 # Setup firefox for emily@pc-van-emily karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Web browser.
@@ -93,7 +87,6 @@ if $GUI ; then kz-desktop --addbef=firefox ; fi
 if $GUI ; then kz-desktop --addbef=firefox-esr ; fi
 if $GUI ; then kz-desktop --addbef=firefox_firefox ; fi
 
-
 # Setup gdebi for *
 # View and install deb files.
 if $GUI && $APT ; then xdg-mime default gdebi.desktop application/vnd.debian.binary-package ; fi
@@ -103,7 +96,6 @@ if $GUI && $RPM ; then echo 'App gdebi is not available.' ; fi
 # View and install deb files.
 echo 'App gdebi cannot be reset.'
 
-
 # Setup git for karel@pc06 karel@pc07
 # Distributed revision control system.
 # Web app: https://github.com
@@ -112,7 +104,6 @@ git config --global alias.logg 'log --decorate --graph --oneline --all'
 # Reset git for karel@pc06 karel@pc07
 # Distributed revision control system.
 git config --global --unset alias.logg
-
 
 # Setup gnome for *
 # Desktop environment.
@@ -156,7 +147,6 @@ if $GUI ; then gsettings reset org.gnome.settings-daemon.plugins.power power-but
 if $GUI ; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type ; fi
 if $GUI ; then gsettings reset org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type ; fi
 
-
 # Setup google-chrome for *
 # Web browser.
 if $GUI ; then kz-desktop --addbef=google-chrome ; fi
@@ -166,7 +156,6 @@ if $GUI ; then xdg-mime default google-chrome.desktop application/pdf ; fi
 # Web browser.
 if $GUI ; then kz-desktop --delete=google-chrome ; fi
 
-
 # Setup handbrake for emily@pc-van-emily
 # Video-dvd ripper and transcoder.
 if $GUI ; then kz-desktop --addaft=fr.handbrake.ghb ; fi
@@ -174,7 +163,6 @@ if $GUI ; then kz-desktop --addaft=fr.handbrake.ghb ; fi
 # Reset handbrake for emily@pc-van-emily
 # Video-dvd ripper and transcoder.
 if $GUI ; then kz-desktop --delete=fr.handbrake.ghb ; fi
-
 
 # Setup hide-files for *
 # Hide files.
@@ -184,7 +172,6 @@ if $GUI ; then echo 'snap' > "$HOME/.hidden" ; fi
 # Hide files.
 if $GUI ; then rm --force --verbose "$HOME/.hidden" ; fi
 
-
 # Setup kvm for karel@pc06 karel@pc07
 # Kernel-based Virtual Machine.
 if $GUI ; then kz-desktop --addaft=virt-manager ; fi
@@ -192,7 +179,6 @@ if $GUI ; then kz-desktop --addaft=virt-manager ; fi
 # Reset kvm for karel@pc06 karel@pc07
 # Kernel-based Virtual Machine.
 if $GUI ; then kz-desktop --delete=virt-manager ; fi
-
 
 # Setup lynis for -none
 # Security auditing.
@@ -205,7 +191,6 @@ git clone https://github.com/CISOfy/lynis "$HOME/lynis" || true
 # Security auditing.
 rm --force --recursive --verbose "$HOME/lynis"
 
-
 # Setup restore-thumbnails for -none
 # Restore thumbnails.
 rm --force --recursive --verbose "$HOME/.cache/thumbnails/"
@@ -213,7 +198,6 @@ rm --force --recursive --verbose "$HOME/.cache/thumbnails/"
 # Reset restore-thumbnails for -none
 # Restore thumbnails.
 echo 'App restore-thumbnails cannot be reset.'
-
 
 # Setup private-home for *
 # Private home.
@@ -223,7 +207,6 @@ chmod 750 "$HOME"
 # Private home.
 chmod 755 "$HOME"
 
-
 # Setup sound-juicer for emily@pc-van-emily
 # Audio-cd ripper and player.
 if $GUI ; then kz-desktop --addaft=org.gnome.SoundJuicer ; fi
@@ -231,7 +214,6 @@ if $GUI ; then kz-desktop --addaft=org.gnome.SoundJuicer ; fi
 # Reset sound-juicer for emily@pc-van-emily
 # Audio-cd ripper and player.
 if $GUI ; then kz-desktop --delete=org.gnome.SoundJuicer ; fi
-
 
 # Setup spotify for karel@pc01 karel@pc06 karel@pc07 marin@pc02 monique@pc01
 # Music and podcasts.
@@ -244,7 +226,6 @@ if $GUI && $RPM ; then kz-desktop --addaft=kz-spotify ; fi
 if $GUI && $APT ; then kz-desktop --delete=spotify ; fi
 if $GUI && $RPM ; then kz-desktop --delete=kz-spotify ; fi
 
-
 # Setup teamviewer for karel@pc06
 # Remote desktop.
 # Web app: https://web.teamviewer.com
@@ -253,7 +234,6 @@ if $GUI ; then kz-desktop --addaft=com.teamviewer.TeamViewer ; fi
 # Reset teamviewer for karel@pc06
 # Remote desktop.
 if $GUI ; then kz-desktop --delete=com.teamviewer.TeamViewer ; fi
-
 
 # Setup terminal for karel@pc01 karel@pc06 karel@pc07
 # Terminal emulator.
@@ -270,7 +250,6 @@ if $GUI ; then kz-desktop --delete=org.gnome.Terminal ; fi
 sed --in-place --expression='s/alias/#alias/g' "$HOME/.bashrc"
 sed --in-place --expression='/^stty -ixon/d' "$HOME/.bashrc"
 
-
 # Setup thunderbird for karel@pc01 karel@pc06 marin@pc02 monique@pc01
 # E-mail and news.
 if $GUI ; then kz-desktop --delete=thunderbird ; fi
@@ -281,7 +260,6 @@ if $GUI ; then kz-desktop --delete=thunderbird_thunderbird ; fi
 if $GUI ; then kz-desktop --addbef=thunderbird ; fi
 if $GUI ; then kz-desktop --addbef=thunderbird_thunderbird ; fi
 
-
 # Setup virtualbox for hugo@pc-van-hugo
 # Virtualization.
 if $GUI ; then kz-desktop --addaft=virtualbox ; fi
@@ -291,7 +269,6 @@ if $GUI ; then kz-desktop --addaft=kz-vm-hugowin732 ; fi
 # Virtualization.
 if $GUI ; then kz-desktop --delete=virtualbox ; fi
 if $GUI ; then kz-desktop --delete=kz-vm-hugowin732 ; fi
-
 
 # Setup vscode for karel@pc01 karel@pc06 karel@pc07
 # Editor.
@@ -311,7 +288,6 @@ if $GUI ; then xdg-mime default code.desktop text/x-python ; fi
 # Web app: https://vscode.dev
 if $GUI ; then kz-desktop --delete=code ; fi
 
-
 # Setup webmin for karel@pc07
 # Web console.
 # Web app: https://localhost:10000
@@ -322,7 +298,6 @@ if $GUI ; then kz-desktop --addaft=kz-webmin ; fi
 if $GUI ; then kz-desktop --delete=kz-webmin ; fi
 if $GUI ; then rm --force --verbose "$HOME/.local/share/applications/kz-webmin.desktop" ; fi
 
-
 # Setup whatsapp for hugo@pc-van-hugo maria@maria-desktop
 # Instant messaging (IM) and voice-over-IP (VoIP).
 if $GUI ; then kz-desktop --addaft=kz-whatsapp ; fi
@@ -331,7 +306,6 @@ if $GUI ; then kz-desktop --addaft=kz-whatsapp ; fi
 # Instant messaging (IM) and voice-over-IP (VoIP).
 if $GUI ; then kz-desktop --delete=kz-whatsapp ; fi
 
-
 # Setup youtube-dl for emily@pc-van-emily
 # Download videos.
 if $GUI ; then kz-desktop --addaft=youtubedl-gui ; fi
@@ -339,7 +313,6 @@ if $GUI ; then kz-desktop --addaft=youtubedl-gui ; fi
 # Reset youtube-dl for emily@pc-van-emily
 # Download videos.
 if $GUI ; then kz-desktop --delete=youtubedl-gui ; fi
-
 
 # Setup zoom for monique@pc01 karel@pc01
 # Videoconferencing.
