@@ -297,10 +297,6 @@ function process_input_file_by_app() {
                 fi
                 APP_MATCH=false
                 ;;
-            '#'* )
-                # Comment line.
-                continue
-                ;;
             * )
                 if $APP_MATCH; then
                     # Record for command file.
@@ -342,10 +338,6 @@ function process_input_file_by_user() {
                     printf '\n' >> "$COMMAND_FILE"
                 fi
                 USER_MATCH=false
-                ;;
-            '#'* )
-                # Comment line.
-                continue
                 ;;
             * )
                 if $USER_MATCH; then
