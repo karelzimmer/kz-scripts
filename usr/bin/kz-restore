@@ -353,6 +353,7 @@ function term_script_usb() {
                 --fields=1
     )
 
+    TITLE=$(gettext 'Restore backup')
     TEXT=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -380,12 +381,9 @@ function term_script_usb() {
 
 # This function unmounts the USB device.
 function term_script_unmount() {
-    local -i SLEEP=1
-
     umount "$SOURCE_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
-    sleep $SLEEP
 }
 
 

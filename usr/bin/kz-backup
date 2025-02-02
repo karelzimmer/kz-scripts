@@ -502,8 +502,7 @@ EOF
 
     if $OPTION_GUI; then
         logmsg "$TEXT..."
-        sync;                           \
-        sleep $SLEEP                         |
+        sync                            |
         zenity  --progress              \
                 --pulsate               \
                 --auto-close            \
@@ -590,6 +589,7 @@ function term_script_usb() {
                 --fields=1
     )
 
+    TITLE=$(gettext 'Make backup')
     TEXT=$(gettext 'Disconnect the USB media')
     if $OPTION_GUI; then
         # With '|& zenity --progress' global variables from called functions
@@ -620,7 +620,6 @@ function term_script_unmount() {
     umount "$TARGET_MEDIUM"                     |& $LOGCMD || RC+=$?
     udisksctl lock --block-device "$DEV"        |& $LOGCMD || RC+=$?
     udisksctl power-off --block-device "$DEV"   |& $LOGCMD || RC+=$?
-    sleep $SLEEP
 }
 
 
@@ -634,7 +633,6 @@ function main() {
     local TARGET_MEDIUM=''
     local OPTION_TARGET=false
     local TARGET_ARGUMENT=''
-    local -i SLEEP=1
 
     init_script "$@"
     check_input "$@"
